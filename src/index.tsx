@@ -1,4 +1,4 @@
-import '@babel/polyfill'
+import '@babel/polyfill';
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -12,4 +12,3 @@ ReactDOM.render(<App />, document.getElementById('app-fragments'));
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-

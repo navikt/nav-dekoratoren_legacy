@@ -6,7 +6,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "tslint ./src/**/*.ts*",
+    "lint:fix": "tslint ./src/**/*.ts* --fix"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
@@ -26,6 +28,7 @@
     "@types/react": "^16.8.17",
     "@types/react-dom": "^16.8.4",
     "less": "^3.9.0",
+    "tslint": "^5.14.0",
     "typescript": "^3.4.5"
   },
   "browserslist": {
