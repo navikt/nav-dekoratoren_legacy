@@ -6,7 +6,7 @@ import App from './app';
 import * as serviceWorker from './serviceWorker';
 import './index.less';
 
-ReactDOM.render(<App />, document.getElementById('app-fragments'));
+ReactDOM.render(<App />, document.getElementById('decorator-content'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

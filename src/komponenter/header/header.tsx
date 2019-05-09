@@ -5,13 +5,15 @@ import './header.less';
 class Header extends React.Component {
     render() {
         return (
-            <header className="app-header">
-                <div className="banner">
-                    <Sidetittel className="header__tittel">
-                        NAV HEADER
-                    </Sidetittel>
-                </div>
-            </header>
+            <div className="hodefot">
+                <header className="siteheader">
+                    <div className="banner">
+                        <Sidetittel className="header__tittel">
+                            NAV HEADER
+                        </Sidetittel>
+                    </div>
+                </header>
+            </div>
         );
     }
 }
