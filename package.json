@@ -3,16 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "lint": "tslint ./src/**/*.ts*",
     "lint:fix": "tslint ./src/**/*.ts* --fix"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
+    "@craco/craco": "3.5.0",
+    "craco-less": "^1.7.0",
     "classnames": "^2.2.6",
+    "less-plugin-npm-import": "^2.1.0",
     "nav-frontend-core": "^4.0.9",
     "nav-frontend-typografi": "^2.0.11",
     "nav-frontend-typografi-style": "^1.0.13",
@@ -20,7 +22,7 @@
     "react": "^16.8.6",
     "react-app-polyfill": "^1.0.1",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0"
+    "react-scripts": "2.1.5"
   },
   "devDependencies": {
     "@types/jest": "^24.0.12",
@@ -28,7 +30,7 @@
     "@types/react": "^16.8.17",
     "@types/react-dom": "^16.8.4",
     "less": "^3.9.0",
-    "tslint": "^5.14.0",
+    "tslint": "^5.16.0",
     "typescript": "^3.4.5"
   },
   "browserslist": {

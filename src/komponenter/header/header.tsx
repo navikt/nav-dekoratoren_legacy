@@ -6,7 +6,7 @@ class Header extends React.Component {
     render() {
         return (
             <div className="hodefot">
-                <header className="siteheader">
+                <header className="siteheader blokk-m">
                     <div className="banner">
                         <Sidetittel className="header__tittel">
                             NAV HEADER

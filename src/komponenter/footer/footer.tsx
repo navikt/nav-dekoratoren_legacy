@@ -6,7 +6,7 @@ class Footer extends React.Component {
     render() {
         return (
             <div className="hodefot">
-                <footer className="sitefooter" role="contentinfo">
+                <footer className="sitefooter blokk-m" role="contentinfo">
                     <Sidetittel className="footer__tittel">
                         NAV FOOTER
                     </Sidetittel>
