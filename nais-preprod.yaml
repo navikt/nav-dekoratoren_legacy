@@ -6,7 +6,7 @@ metadata:
   labels:
     team: personbruker
 spec:
-  image: navikt/nav-dekoratoren
+  image: navikt/nav-dekoratoren:6
   port: 8080
   liveness:
     path: /isalive
