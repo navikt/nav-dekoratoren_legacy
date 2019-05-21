@@ -1,0 +1,31 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: nav-dekoratoren
+  namespace: default
+  labels:
+    team: personbruker
+spec:
+  image: navikt/nav-dekoratoren:6
+  port: 8080
+  liveness:
+    path: /isalive
+  readiness:
+    path: /isready
+  prometheus:
+    path: /metrics
+  replicas:
+    min: 2
+    max: 4
+  ingresses:
+    - "https://nav-dekoratoren.nais.oera-q.local"
+  env:
+    - name: MY_CUSTOM_VAR
+      value: some_value
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi

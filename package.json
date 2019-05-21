@@ -1,56 +1,35 @@
 {
   "name": "nav-dekoratoren",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "lint": "tslint ./src/**/*.ts*",
-    "lint:fix": "tslint ./src/**/*.ts* --fix"
+    "test": "jest",
+    "start": "npm run lint && node server.js",
+    "startDev": "npm run lint && nodemon server.js",
+    "lint": "eslint server.js",
+    "docker-build": "docker build . -t navikt/nav-dekoratoren",
+    "docker-push": "docker push navikt/nav-dekoratoren",
+    "docker-run": "docker run --rm -p 8080:8080 navikt/nav-dekoratoren",
+    "deploy-preprod": "kubectl apply -f nais-preprod.yaml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-dekoratoren.git"
+  },
+  "bugs": {
+    "url": "https://github.com/navikt/nav-dekoratoren/issues"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.4.4",
-    "@craco/craco": "3.5.0",
-    "classnames": "^2.2.6",
-    "craco-less": "^1.7.0",
-    "less-plugin-npm-import": "^2.1.0",
-    "lodash.throttle": "^4.1.1",
-    "nav-frontend-core": "^4.0.9",
-    "nav-frontend-js-utils": "^1.0.7",
-    "nav-frontend-lenker": "^1.0.25",
-    "nav-frontend-lenker-style": "0.2.19",
-    "nav-frontend-paneler-style": "^0.3.15",
-    "nav-frontend-skjema": "^1.0.64",
-    "nav-frontend-skjema-style": "^1.0.40",
-    "nav-frontend-typografi": "^2.0.11",
-    "nav-frontend-typografi-style": "^1.0.13",
-    "prettier": "^1.17.1",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-app-polyfill": "^1.0.1",
-    "react-dom": "^16.8.6",
-    "react-scripts": "2.1.5"
+    "express": "^4.17.0",
+    "jest": "^24.7.1"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.12",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.8.17",
-    "@types/react-dom": "^16.8.4",
-    "less": "^3.9.0",
-    "tslint": "^5.16.0",
-    "typescript": "^3.4.5"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "lint": "^1.1.2",
+    "nodemon": "^1.19.0",
+    "prettier": "^1.17.1"
   }
 }
