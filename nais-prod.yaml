@@ -18,7 +18,7 @@ spec:
     min: 2
     max: 4
   ingresses:
-    - "https://nav-dekoratoren.nais.oera-q.local"
+    - "https://nav-dekoratoren.nais.oera.no"
   env:
     - name: MY_CUSTOM_VAR
       value: some_value
@@ -29,5 +29,3 @@ spec:
     requests:
       cpu: 200m
       memory: 512Mi
-
-

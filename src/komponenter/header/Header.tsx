@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './header.less';
-import Toppmeny from "./Toppmeny";
+import Toppmeny from './Toppmeny';
 
 class Header extends React.Component {
     render() {
