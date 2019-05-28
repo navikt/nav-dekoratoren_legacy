@@ -21,5 +21,3 @@ class Skiplinks extends React.Component {
     }
 }
 export default Skiplinks;
-
-

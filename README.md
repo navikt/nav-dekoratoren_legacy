@@ -3,25 +3,24 @@
 Node.js Express applikasjon med frontend-komponenter i React. 
 Appen kjører på NAIS i en dockercontainer.
 
-# Kom i gang
+# Installasjon
 
 ```
 npm install
 ```
 
-Bygg applikasjonen/frontend-komponentene
+# Bygg applikasjonen
 
 ```
-cd frontend
-npm install
 npm run build
 ```
 
-Kjør applikasjonen
+# Kjør applikasjonen
+
+Kjør Express-server lokalt (localhost:8080):
 
 ```
-cd ..
-npm start
+npm run server
 ```
 
 ### Nais-cluster

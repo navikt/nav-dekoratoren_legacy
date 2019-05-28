@@ -19,12 +19,6 @@
     "jsx": "preserve",
     "forceConsistentCasingInFileNames": false
   },
-  "exclude": [
-    "node_modules",
-    ".npm",
-    "build"
-  ],
-  "include": [
-    "src"
-  ]
+  "include": ["src"],
+  "exclude": ["src/server"]
 }
