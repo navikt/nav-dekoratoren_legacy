@@ -35,12 +35,11 @@ jobs:
       - sett-miljovariabler
       - run:
           name: Bygger Docker image
-          command: |
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker build -t "$DOCKER_IMAGE_VERSIONED" -t "$DOCKER_IMAGE_UNVERSIONED" .
+          command: docker build -t "$DOCKER_IMAGE_VERSIONED" -t "$DOCKER_IMAGE_UNVERSIONED" .
       - run:
           name: Pusher Docker image
           command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push "$DOCKER_IMAGE_VERSIONED"
             docker push "$DOCKER_IMAGE_UNVERSIONED"
 
