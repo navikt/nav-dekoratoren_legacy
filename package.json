@@ -12,7 +12,7 @@
     "docker-build": "docker build . -t navikt/nav-dekoratoren",
     "docker-push": "docker push navikt/nav-dekoratoren",
     "docker-start": "docker run --rm -p 8080:8080 navikt/nav-dekoratoren",
-    "deploy-preprod": "kubectl apply -f nais-preprod.yaml",
+    "deploy-preprod": "kubectl apply -f nais-dev.yaml",
     "deploy-prod": "kubectl apply -f nais-prod.yaml"
   },
   "repository": {
@@ -23,19 +23,22 @@
     "url": "https://github.com/navikt/nav-dekoratoren/issues"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "@craco/craco": "3.6.0",
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.2",
     "@types/react": "^16.8.17",
     "@types/react-dom": "^16.8.4",
-    "@babel/polyfill": "^7.4.4",
-    "@craco/craco": "3.6.0",
     "classnames": "^2.2.6",
     "craco-less": "^1.7.0",
+    "express": "^4.17.0",
     "less": "^3.9.0",
     "less-plugin-npm-import": "^2.1.0",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-core": "^4.0.9",
     "nav-frontend-js-utils": "^1.0.7",
+    "nav-frontend-knapper": "^1.0.29",
+    "nav-frontend-knapper-style": "^0.3.25",
     "nav-frontend-lenker": "^1.0.27",
     "nav-frontend-lenker-style": "0.2.20",
     "nav-frontend-paneler-style": "^0.3.15",
@@ -43,15 +46,14 @@
     "nav-frontend-skjema-style": "^1.0.40",
     "nav-frontend-typografi": "^2.0.12",
     "nav-frontend-typografi-style": "^1.0.13",
+    "nodemon": "^1.19.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-app-polyfill": "^1.0.1",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8",
-    "typescript": "^3.4.5",
-    "express": "^4.17.0",
-    "nodemon": "^1.19.0",
-    "tslint": "^5.16.0"
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
   },
   "browserslist": {
     "production": [

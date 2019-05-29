@@ -1,8 +1,9 @@
 import * as React from 'react';
 import './toppmeny.less';
-import logo from './logo.png';
+import logo from './hvit.svg';
 // import { Undertittel, Sidetittel } from "nav-frontend-typografi";
-// import Lenke from 'nav-frontend-lenker';
+import KnappBase from 'nav-frontend-knapper';
+import Lenke from 'nav-frontend-lenker';
 
 class Toppmeny extends React.Component {
     render() {
@@ -10,25 +11,28 @@ class Toppmeny extends React.Component {
             <nav className="toppmeny">
                 <ul>
                     <li id="logo">
-                        <a href="#"><img src={logo}/></a>
+                        <Lenke href="#"><img src={logo}/></Lenke>
                     </li>
                     <li>
-                        <a href="#">PRIVAT</a>
+                        <Lenke href="#">PRIVAT</Lenke>
                     </li>
                     <li>
-                        <a href="#">BEDRIFT</a>
+                        <Lenke href="#">BEDRIFT</Lenke>
                     </li>
                     <li>
-                        <a href="#">ANDRE</a>
+                        <Lenke href="#">ANDRE</Lenke>
                     </li>
                     <li id="dropdown">
-                        <a href="javascript:void(0)" className="dropbtn">Språk</a>
+                        <Lenke href="javascript:void(0)" className="dropbtn">Språk</Lenke>
                         <ul className="dropdown-content">
                             <li><a href="#">Norsk Bokmål</a></li>
                             <li><a href="#">Norsk Sidemål</a></li>
                             <li><a href="#">English</a></li>
                             <li><a href="#">Samisk</a></li>
                         </ul>
+                    </li>
+                    <li>
+                        <KnappBase type="standard">Logg inn</KnappBase>
                     </li>
                 </ul>
             </nav>
