@@ -27,7 +27,7 @@
       "max": 4
     },
     "ingresses": [
-      "https://nav-dekoratoren.nais.oera-q.local/nav-dekoratoren",
+      "https://nav-dekoratoren.nais.oera-q.local/",
       "https://tjenester-q0.nav.no/nav-dekoratoren"
     ],
     "env": [

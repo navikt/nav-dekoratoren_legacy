@@ -12,8 +12,8 @@
     "docker-build": "docker build . -t navikt/nav-dekoratoren",
     "docker-push": "docker push navikt/nav-dekoratoren",
     "docker-start": "docker run --rm -p 8080:8080 navikt/nav-dekoratoren",
-    "deploy-preprod": "kubectl apply -f nais-dev.yaml",
-    "deploy-prod": "kubectl apply -f nais-prod.yaml"
+    "deploy-dev": "kubectl apply -f nais-dev.json",
+    "deploy-prod": "kubectl apply -f nais-prod.json"
   },
   "repository": {
     "type": "git",
