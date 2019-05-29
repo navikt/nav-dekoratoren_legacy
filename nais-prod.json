@@ -12,12 +12,10 @@
     "image": "navikt/nav-dekoratoren:latest",
     "port": 8080,
     "liveness": {
-      "path": "/nav-dekoratoren/isalive",
-      "initialDelay": 10
+      "path": "/isalive"
     },
     "readiness": {
-      "path": "/nav-dekoratoren/isready",
-      "initialDelay": 10
+      "path": "/isready"
     },
     "prometheus": {
       "path": "/metrics"
@@ -27,8 +25,7 @@
       "max": 4
     },
     "ingresses": [
-      "https://nav-dekoratoren.nais.oera-q.local/nav-dekoratoren",
-      "https://tjenester-q0.nav.no/nav-dekoratoren"
+      "https://nav-dekoratoren.nais.oera.no"
     ],
     "env": [
       {

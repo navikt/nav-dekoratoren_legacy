@@ -24,13 +24,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/fragmenter", (req, res) =>
+app.get("/nav-dekoratoren/fragmenter", (req, res) =>
     res.sendFile("/index.html", { root: "./build" })
 );
 
-app.get("/isAlive", (req, res) => res.sendStatus(200));
-app.get("/isReady", (req, res) => res.sendStatus(200));
-app.get("/", (req, res) => res.sendStatus(200));
+app.get("/nav-dekoratoren/isAlive", (req, res) => res.sendStatus(200));
+app.get("/nav-dekoratoren/isReady", (req, res) => res.sendStatus(200));
+app.get("/nav-dekoratoren/", (req, res) => res.sendStatus(200));
 
 app.listen(PORT, () => console.log(`App listening on port: 8080`));
 
