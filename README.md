@@ -1,6 +1,6 @@
 # Nav-dekoratoren
 
-Node.js Express applikasjon med frontend-komponenter i React. 
+Node.js Express applikasjon med frontend-komponenter i React.
 Appen kjører på NAIS i en dockercontainer.
 
 # Installasjon
@@ -24,6 +24,7 @@ npm run server
 ```
 
 ### Nais-cluster
+
 Applikasjonen ligger i default namespace i dev-sbs og prod-sbs.
 
 # Henvendelser

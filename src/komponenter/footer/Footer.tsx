@@ -11,31 +11,101 @@ class Footer extends React.Component {
                     <footer className="sitefooter blokk-m" role="contentinfo">
                         <div className="footernavsection innhold-container">
                             <ul>
-                                <li><Lenke href="#"><Normaltekst>Telefon</Normaltekst></Lenke></li>
-                                <li><Lenke href="#"><Normaltekst>Chat med oss</Normaltekst></Lenke></li>
-                                <li className="x"><Lenke href="#"><Normaltekst>Finn ditt NAV-kontor</Normaltekst></Lenke></li>
+                                <li>
+                                    <Lenke href="#">
+                                        <Normaltekst>Telefon</Normaltekst>
+                                    </Lenke>
+                                </li>
+                                <li>
+                                    <Lenke href="#">
+                                        <Normaltekst>Chat med oss</Normaltekst>
+                                    </Lenke>
+                                </li>
+                                <li className="x">
+                                    <Lenke href="#">
+                                        <Normaltekst>
+                                            Finn ditt NAV-kontor
+                                        </Normaltekst>
+                                    </Lenke>
+                                </li>
 
-                                <li><Lenke href="#"><Normaltekst>Chat med oss</Normaltekst></Lenke></li>
-                                <li className="x"><Lenke href="#"><Normaltekst>Finn ditt NAV-kontor</Normaltekst></Lenke></li>
+                                <li>
+                                    <Lenke href="#">
+                                        <Normaltekst>Chat med oss</Normaltekst>
+                                    </Lenke>
+                                </li>
+                                <li className="x">
+                                    <Lenke href="#">
+                                        <Normaltekst>
+                                            Finn ditt NAV-kontor
+                                        </Normaltekst>
+                                    </Lenke>
+                                </li>
 
-                                <li><Lenke href="#"><Normaltekst>NAV og samfunn</Normaltekst></Lenke></li>
-                                <li className="x"><Lenke href="#"><Normaltekst>NAV på sosiale medier</Normaltekst></Lenke></li>
+                                <li>
+                                    <Lenke href="#">
+                                        <Normaltekst>
+                                            NAV og samfunn
+                                        </Normaltekst>
+                                    </Lenke>
+                                </li>
+                                <li className="x">
+                                    <Lenke href="#">
+                                        <Normaltekst>
+                                            NAV på sosiale medier
+                                        </Normaltekst>
+                                    </Lenke>
+                                </li>
 
-                                <li className="x"><Lenke href="#"><Normaltekst>Nav på sosiale medier</Normaltekst></Lenke></li>
+                                <li className="x">
+                                    <Lenke href="#">
+                                        <Normaltekst>
+                                            Nav på sosiale medier
+                                        </Normaltekst>
+                                    </Lenke>
+                                </li>
 
-                                <li><Lenke href="#"><Normaltekst>Lovdata</Normaltekst></Lenke></li>
-                                <li><Lenke href="#"><Normaltekst>Folketrygden</Normaltekst></Lenke></li>
-                                <li><Lenke href="#"><Normaltekst>Rundskriv</Normaltekst></Lenke></li>
-                                <li className="x"><Lenke href="#"><Normaltekst>Forskrifter</Normaltekst></Lenke></li>
+                                <li>
+                                    <Lenke href="#">
+                                        <Normaltekst>Lovdata</Normaltekst>
+                                    </Lenke>
+                                </li>
+                                <li>
+                                    <Lenke href="#">
+                                        <Normaltekst>Folketrygden</Normaltekst>
+                                    </Lenke>
+                                </li>
+                                <li>
+                                    <Lenke href="#">
+                                        <Normaltekst>Rundskriv</Normaltekst>
+                                    </Lenke>
+                                </li>
+                                <li className="x">
+                                    <Lenke href="#">
+                                        <Normaltekst>Forskrifter</Normaltekst>
+                                    </Lenke>
+                                </li>
 
-                                <li><Lenke href="#"><Normaltekst>Folketrygden</Normaltekst></Lenke></li>
-                                <li><Lenke href="#"><Normaltekst>Rundskriv</Normaltekst></Lenke></li>
-                                <li><Lenke href="#"><Normaltekst>Forskrifter</Normaltekst></Lenke></li>
+                                <li>
+                                    <Lenke href="#">
+                                        <Normaltekst>Folketrygden</Normaltekst>
+                                    </Lenke>
+                                </li>
+                                <li>
+                                    <Lenke href="#">
+                                        <Normaltekst>Rundskriv</Normaltekst>
+                                    </Lenke>
+                                </li>
+                                <li>
+                                    <Lenke href="#">
+                                        <Normaltekst>Forskrifter</Normaltekst>
+                                    </Lenke>
+                                </li>
                             </ul>
                             <div className="copyright">
-                                <p>
-                                    <Normaltekst>Arbeids- og velferdsetaten 2019</Normaltekst>
-                                </p>
+                                <Normaltekst>
+                                    Arbeids- og velferdsetaten 2019
+                                </Normaltekst>
                             </div>
                         </div>
                     </footer>

@@ -6,7 +6,7 @@ interface ApiProps {
 }
 
 export const API: ApiProps = {
-    innloggingsstatusURL: 'https://www-q0.nav.no/innloggingslinje-api/auth'
+    innloggingsstatusURL: 'https://www-q0.nav.no/innloggingslinje-api/auth',
 };
 
 export function hentInnloggingsstatusFetch(): Promise<Data> {

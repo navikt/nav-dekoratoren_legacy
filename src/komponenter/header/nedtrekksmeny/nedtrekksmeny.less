@@ -1,0 +1,50 @@
+.nedtrekksmeny {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.5rem;
+    min-height: 3.5rem;
+    padding-left: 1rem;
+
+    &__dropdownMenu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0.4rem 0.7rem;
+        width: fit-content;
+        margin: 0;
+
+        &:hover {
+            border: 1px black solid;
+            background-color: #e6e6e6;
+            cursor: pointer;
+        }
+
+        .hamburgerIkon {
+            margin-right: 0.5rem;
+        }
+
+        &__hoyreMeny {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
+    .login-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .login-details-name {
+            padding-right: 1rem;
+            padding-left: 0.5rem;
+            color: black;
+        }
+    }
+
+    @media (min-width: 765px) {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

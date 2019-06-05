@@ -18,16 +18,16 @@ if (process.env.REACT_APP_MOCK) {
 }
 
 function App() {
-  return (
-      <ReduxProvider store={store}>
-        <InnloggingsstatusProvider>
-            <>
-               <Header/>
-               <Skiplinks/>
-               <Footer/>
-            </>
-        </InnloggingsstatusProvider>
-      </ReduxProvider>
-  );
+    return (
+        <ReduxProvider store={store}>
+            <InnloggingsstatusProvider>
+                <>
+                    <Header />
+                    <Skiplinks />
+                    <Footer />
+                </>
+            </InnloggingsstatusProvider>
+        </ReduxProvider>
+    );
 }
 export default App;

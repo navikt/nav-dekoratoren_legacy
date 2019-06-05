@@ -10,7 +10,6 @@ interface StateProps {
 }
 
 class LoggInnKnapp extends React.Component<StateProps> {
-
     constructor(props: StateProps) {
         super(props);
     }
@@ -23,7 +22,7 @@ class LoggInnKnapp extends React.Component<StateProps> {
             // logg inn
             window.location.href = 'https://www-q0.nav.no/person/dittnav';
         }
-    }
+    };
 
     render() {
         const { erInnlogget, navn } = this.props;
@@ -31,12 +30,15 @@ class LoggInnKnapp extends React.Component<StateProps> {
         const navnLC = erInnlogget && navn ? navn.toLowerCase() : '';
         return (
             <div className="login-container">
-                {erInnlogget && navn
-                    ? <span className="login-details-name"><Normaltekst>{navnLC}</Normaltekst></span>
-                    : null
-                }
+                {erInnlogget && navn ? (
+                    <span className="login-details-name">
+                        <Normaltekst>Login id: {navnLC}</Normaltekst>
+                    </span>
+                ) : null}
                 <div className="login-knapp">
-                    <KnappBase type="standard" onClick={this.handleButtonClick}>{knappetekst}</KnappBase>
+                    <KnappBase type="hoved" onClick={this.handleButtonClick}>
+                        {knappetekst}
+                    </KnappBase>
                 </div>
             </div>
         );
@@ -44,7 +46,7 @@ class LoggInnKnapp extends React.Component<StateProps> {
 }
 const mapStateToProps = (state: AppState): StateProps => ({
     erInnlogget: state.innloggingsstatus.data.authenticated,
-    navn: state.innloggingsstatus.data.name
+    navn: state.innloggingsstatus.data.name,
 });
 
 export default connect(mapStateToProps)(LoggInnKnapp);
