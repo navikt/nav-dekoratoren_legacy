@@ -25,9 +25,7 @@ class InnloggingsstatusProvider extends React.Component<InnloggingsstatusProvide
     }
 
     componentDidMount() {
-        if (this.props.innloggingsstatus.status === Status.IKKE_STARTET) {
-            this.props.doHentInnloggingsstatus();
-        }
+        this.props.doHentInnloggingsstatus();
     }
 
     render() {
