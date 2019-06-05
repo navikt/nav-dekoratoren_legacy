@@ -1,4 +1,4 @@
-import { Data } from '../ducks/innloggingsstatus';
+import { Data } from './innloggingsstatus-duck';
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',

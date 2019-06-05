@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import innloggingsstatusReducer, { InnloggingsstatusState } from '../ducks/innloggingsstatus';
+import innloggingsstatusReducer, { InnloggingsstatusState } from './innloggingsstatus-duck';
 
 export interface AppState {
     innloggingsstatus: InnloggingsstatusState;

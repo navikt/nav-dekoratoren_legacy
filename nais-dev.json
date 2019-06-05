@@ -9,7 +9,7 @@
     }
   },
   "spec": {
-    "image": "navikt/nav-dekoratoren:latest",
+    "image": "navikt/nav-dekoratoren:29",
     "port": 8080,
     "liveness": {
       "path": "/nav-dekoratoren/isalive",
@@ -28,7 +28,7 @@
     },
     "ingresses": [
       "https://nav-dekoratoren.nais.oera-q.local/",
-      "https://tjenester-q0.nav.no/nav-dekoratoren"
+      "https://www-q0.nav.no/person/nav-dekoratoren"
     ],
     "env": [
       {

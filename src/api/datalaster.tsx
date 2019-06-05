@@ -2,8 +2,6 @@ import * as React from 'react';
 import Spinner from 'nav-frontend-spinner';
 import AlertStripe from 'nav-frontend-alertstriper';
 
-import './datalaster.less';
-
 export enum Status {
     OK = 'OK',
     FEILET = 'FEILET',
@@ -42,7 +40,6 @@ const Datalaster = ({avhengigheter, ventPa, children, feilmeldingId}: Datalaster
             </div>
         );
     }
-
     return <Spinner type="XXL"/>;
 };
 

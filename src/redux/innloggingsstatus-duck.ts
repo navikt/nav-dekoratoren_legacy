@@ -1,8 +1,8 @@
 import {
     ActionType, Handling, HentInnloggingsstatusFEILETAction, HentInnloggingsstatusOKAction, HentInnloggingsstatusPENDINGAction
-} from '../redux/actions';
+} from './actions';
 import { JSONObject } from 'yet-another-fetch-mock';
-import { Dispatch } from '../redux/dispatch-type';
+import { Dispatch } from './dispatch-type';
 import { fetchThenDispatch } from '../api/fetch-utils';
 import { hentInnloggingsstatusFetch } from '../api/api';
 import { DataElement, Status } from '../api/datalaster';

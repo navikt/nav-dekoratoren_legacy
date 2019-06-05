@@ -5,6 +5,7 @@ import Header from './komponenter/header/Header';
 import Footer from './komponenter/footer/Footer';
 import Skiplinks from './komponenter/header/Skiplinks';
 import setupMock from './mocks/setup-mock';
+import InnloggingsstatusProvider from './provider/innloggingsstatus-provider';
 
 const store = getStore();
 
@@ -19,9 +20,13 @@ if (process.env.REACT_APP_MOCK) {
 function App() {
   return (
       <ReduxProvider store={store}>
-        <Header/>
-        <Skiplinks/>
-        <Footer/>
+        <InnloggingsstatusProvider>
+            <>
+               <Header/>
+               <Skiplinks/>
+               <Footer/>
+            </>
+        </InnloggingsstatusProvider>
       </ReduxProvider>
   );
 }

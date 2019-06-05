@@ -41,8 +41,8 @@ function handterFeil(dispatch: Dispatch, feiletAction: () => Handling): (error: 
     };
 }
 
-export async function fetchToJson<T>(url: string, config: RequestInit): Promise<T> {
-    const respons = await fetch(url, config);
+export async function fetchToJson<T>(url: string): Promise<T> {
+    const respons = await fetch(url);
     const gyldigRespons = sjekkStatuskode(respons);
     return await toJson<T>(gyldigRespons);
 }

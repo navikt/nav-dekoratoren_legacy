@@ -17,19 +17,21 @@ class LoggInnKnapp extends React.Component<StateProps> {
 
     handleButtonClick = () => {
         if (this.props.erInnlogget) {
+            // logg ut
             window.location.href = 'https://loginservice-q.nav.no/slo';
         } else {
-            window.location.href = 'https://tjenester-q0.nav.no/dittnav/oversikt';
+            // logg inn
+            window.location.href = 'https://www-q0.nav.no/person/dittnav';
         }
     }
 
     render() {
         const { erInnlogget, navn } = this.props;
-        const knappetekst = erInnlogget ? 'Logg ut' : 'Logg inn';
-        const navnLC = navn.toLowerCase();
+        const knappetekst = erInnlogget ? 'Loggg ut' : 'Loggg inn';
+        const navnLC = erInnlogget && navn ? navn.toLowerCase() : '';
         return (
             <div className="login-container">
-                {erInnlogget
+                {erInnlogget && navn
                     ? <span className="login-details-name"><Normaltekst>{navnLC}</Normaltekst></span>
                     : null
                 }
