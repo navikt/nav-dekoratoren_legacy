@@ -9,7 +9,7 @@
     }
   },
   "spec": {
-    "image": "navikt/nav-dekoratoren:29",
+    "image": "navikt/nav-dekoratoren:latest",
     "port": 8080,
     "liveness": {
       "path": "/nav-dekoratoren/isalive",
