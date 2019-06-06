@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
-import './footer.less';
+import './Footer.less';
 
 class Footer extends React.Component {
     render() {

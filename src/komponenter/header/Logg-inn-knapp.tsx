@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { AppState } from '../../redux/reducer';
 import { Normaltekst } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
+import Environments from '../../utils/Environments';
+
+const { baseUrl, logoutUrl } = Environments();
+const loginUrl = `${baseUrl}/person/dittnav`;
 
 interface StateProps {
     erInnlogget: boolean;
@@ -16,11 +20,9 @@ class LoggInnKnapp extends React.Component<StateProps> {
 
     handleButtonClick = () => {
         if (this.props.erInnlogget) {
-            // logg ut
-            window.location.href = 'https://loginservice-q.nav.no/slo';
+            window.location.href = logoutUrl;
         } else {
-            // logg inn
-            window.location.href = 'https://www-q0.nav.no/person/dittnav';
+            window.location.href = loginUrl;
         }
     };
 

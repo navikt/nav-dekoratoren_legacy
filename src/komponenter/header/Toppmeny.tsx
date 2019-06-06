@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Lenke from 'nav-frontend-lenker';
-import './toppmeny.less';
+import './Toppmeny.less';
 import logo from './nav-logo.svg';
 import LoggInnKnapp from './logg-inn-knapp';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';

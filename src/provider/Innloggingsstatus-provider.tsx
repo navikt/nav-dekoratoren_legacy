@@ -6,7 +6,7 @@ import {
     InnloggingsstatusState,
 } from '../redux/innloggingsstatus-duck';
 import { AppState } from '../redux/reducer';
-import Datalaster, { Status } from '../api/datalaster';
+import Datalaster from '../api/Datalaster';
 
 interface OwnProps {
     children: React.ReactElement<any>; // tslint:disable-line:no-any

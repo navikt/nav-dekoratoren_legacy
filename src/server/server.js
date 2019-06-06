@@ -8,8 +8,6 @@ const allowedOrigin = isProduction
     ? `(http|https)://(.*).nav.no`
     : `http://localhost:8080`;
 
-// Express settings
-
 app.use((req, res, next) => {
     const origin = req.get('origin');
     if (origin && origin.match(allowedOrigin)) {

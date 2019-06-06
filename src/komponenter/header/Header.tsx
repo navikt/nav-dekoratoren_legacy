@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './header.less';
+import './Header.less';
 import Toppmeny from './Toppmeny';
 
 class Header extends React.Component {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './skiplinks.less';
+import './Skiplinks.less';
 
 class Skiplinks extends React.Component {
     render() {
