@@ -1,82 +1,86 @@
 {
-  "name": "nav-dekoratoren",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "start": "cross-env REACT_APP_MOCK=true craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "server": "nodemon src/server/server.js",
-    "lint": "tslint ./src/**/*.ts*",
-    "lint:fix": "tslint ./src/**/*.ts* --fix",
-    "docker-build": "docker build . -t navikt/nav-dekoratoren",
-    "docker-push": "docker push navikt/nav-dekoratoren",
-    "docker-start": "docker run --rm -p 8080:8080 navikt/nav-dekoratoren",
-    "deploy-dev": "kubectl apply -f nais-dev.json",
-    "deploy-prod": "kubectl apply -f nais-prod.json"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/navikt/nav-dekoratoren.git"
-  },
-  "bugs": {
-    "url": "https://github.com/navikt/nav-dekoratoren/issues"
-  },
-  "dependencies": {
-    "@babel/polyfill": "^7.4.4",
-    "@craco/craco": "3.6.0",
-    "@types/jest": "^24.0.13",
-    "@types/node": "^12.0.4",
-    "@types/query-string": "5.1.0",
-    "@types/react": "^16.8.19",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-redux": "7.0.9",
-    "classnames": "^2.2.6",
-    "craco-less": "1.7.0",
-    "cross-env": "^5.2.0",
-    "express": "^4.17.1",
-    "less": "^3.9.0",
-    "less-plugin-npm-import": "^2.1.0",
-    "lodash.throttle": "^4.1.1",
-    "nav-frontend-alertstriper": "3.0.3",
-    "nav-frontend-alertstriper-style": "2.0.2",
-    "nav-frontend-core": "^4.0.9",
-    "nav-frontend-ikoner-assets": "^1.0.1",
-    "nav-frontend-js-utils": "^1.0.7",
-    "nav-frontend-knapper": "^1.0.29",
-    "nav-frontend-knapper-style": "^0.3.25",
-    "nav-frontend-lenker": "^1.0.27",
-    "nav-frontend-lenker-style": "0.2.20",
-    "nav-frontend-paneler-style": "^0.3.15",
-    "nav-frontend-skjema": "^1.0.67",
-    "nav-frontend-skjema-style": "^1.0.40",
-    "nav-frontend-spinner": "1.0.18",
-    "nav-frontend-spinner-style": "0.2.5",
-    "nav-frontend-typografi": "^2.0.12",
-    "nav-frontend-typografi-style": "^1.0.13",
-    "nodemon": "^1.19.1",
-    "query-string": "5.1.1",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-app-polyfill": "^1.0.1",
-    "react-dom": "^16.8.6",
-    "react-redux": "7.0.3",
-    "react-scripts": "2.1.8",
-    "redux": "4.0.1",
-    "tslint": "^5.16.0",
-    "typescript": "^3.4.5",
-    "yet-another-fetch-mock": "3.1.1"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "nav-dekoratoren",
+    "version": "0.1.0",
+    "homepage": "/person/nav-dekoratoren",
+    "private": true,
+    "scripts": {
+        "start": "cross-env REACT_APP_MOCK=true craco start",
+        "build": "craco build",
+        "test": "craco test",
+        "server": "nodemon src/server/server.js",
+        "lint": "tslint ./src/**/*.ts*",
+        "lint:fix": "tslint ./src/**/*.ts* --fix",
+        "docker-build": "docker build . -t navikt/nav-dekoratoren",
+        "docker-push": "docker push navikt/nav-dekoratoren",
+        "docker-start": "docker run --rm -p 8080:8080 navikt/nav-dekoratoren",
+        "deploy-dev": "kubectl apply -f nais-dev.json",
+        "deploy-prod": "kubectl apply -f nais-prod.json"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/navikt/nav-dekoratoren.git"
+    },
+    "bugs": {
+        "url": "https://github.com/navikt/nav-dekoratoren/issues"
+    },
+    "dependencies": {
+        "@babel/polyfill": "^7.4.4",
+        "@craco/craco": "3.6.0",
+        "@types/jest": "^24.0.13",
+        "@types/node": "^12.0.4",
+        "@types/query-string": "5.1.0",
+        "@types/react": "^16.8.19",
+        "@types/react-dom": "^16.8.4",
+        "@types/react-redux": "7.0.9",
+        "classnames": "^2.2.6",
+        "craco-less": "1.7.0",
+        "cross-env": "^5.2.0",
+        "express": "^4.17.1",
+        "less": "^3.9.0",
+        "less-plugin-npm-import": "^2.1.0",
+        "lodash.throttle": "^4.1.1",
+        "nav-frontend-alertstriper": "3.0.3",
+        "nav-frontend-alertstriper-style": "2.0.2",
+        "nav-frontend-core": "^4.0.9",
+        "nav-frontend-ikoner-assets": "^1.0.1",
+        "nav-frontend-js-utils": "^1.0.7",
+        "nav-frontend-knapper": "^1.0.29",
+        "nav-frontend-knapper-style": "^0.3.25",
+        "nav-frontend-lenker": "^1.0.27",
+        "nav-frontend-lenker-style": "0.2.20",
+        "nav-frontend-paneler-style": "^0.3.15",
+        "nav-frontend-skjema": "^1.0.67",
+        "nav-frontend-skjema-style": "^1.0.40",
+        "nav-frontend-spinner": "1.0.18",
+        "nav-frontend-spinner-style": "0.2.5",
+        "nav-frontend-typografi": "^2.0.12",
+        "nav-frontend-typografi-style": "^1.0.13",
+        "nodemon": "^1.19.1",
+        "query-string": "5.1.1",
+        "prop-types": "^15.7.2",
+        "react": "^16.8.6",
+        "react-app-polyfill": "^1.0.1",
+        "react-dom": "^16.8.6",
+        "react-redux": "7.0.3",
+        "react-scripts": "2.1.8",
+        "redux": "4.0.1",
+        "tslint": "^5.16.0",
+        "typescript": "^3.4.5",
+        "yet-another-fetch-mock": "3.1.1"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "prettier": "^1.17.1"
+    }
 }
