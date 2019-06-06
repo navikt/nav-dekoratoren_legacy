@@ -103,11 +103,9 @@ class Footer extends React.Component {
                                 </li>
                             </ul>
                             <div className="copyright">
-                                <p>
-                                    <Normaltekst>
-                                        Arbeids- og velferdsetaten 2019
-                                    </Normaltekst>
-                                </p>
+                                <Normaltekst>
+                                    Arbeids- og velferdsetaten 2019
+                                </Normaltekst>
                             </div>
                         </div>
                     </footer>
