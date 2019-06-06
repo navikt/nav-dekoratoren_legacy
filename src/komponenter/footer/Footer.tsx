@@ -1,113 +1,37 @@
 import * as React from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Element } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import './footer.less';
+import BEMHelper from '../../utils/bem';
+import FooterLenkeMeny from './FooterLenkeMeny';
+
+const cls = BEMHelper('footer');
 
 class Footer extends React.Component {
     render() {
         return (
-            <div id="footer-withmenu">
+            <div id="footer-withmenu" className={cls.className}>
                 <div className="hodefot">
-                    <footer className="sitefooter blokk-m" role="contentinfo">
-                        <div className="footernavsection innhold-container">
-                            <ul>
-                                <li>
-                                    <Lenke href="#">
-                                        <Normaltekst>Telefon</Normaltekst>
-                                    </Lenke>
-                                </li>
-                                <li>
-                                    <Lenke href="#">
-                                        <Normaltekst>Chat med oss</Normaltekst>
-                                    </Lenke>
-                                </li>
-                                <li className="x">
-                                    <Lenke href="#">
-                                        <Normaltekst>
-                                            Finn ditt NAV-kontor
-                                        </Normaltekst>
-                                    </Lenke>
-                                </li>
-
-                                <li>
-                                    <Lenke href="#">
-                                        <Normaltekst>Chat med oss</Normaltekst>
-                                    </Lenke>
-                                </li>
-                                <li className="x">
-                                    <Lenke href="#">
-                                        <Normaltekst>
-                                            Finn ditt NAV-kontor
-                                        </Normaltekst>
-                                    </Lenke>
-                                </li>
-
-                                <li>
-                                    <Lenke href="#">
-                                        <Normaltekst>
-                                            NAV og samfunn
-                                        </Normaltekst>
-                                    </Lenke>
-                                </li>
-                                <li className="x">
-                                    <Lenke href="#">
-                                        <Normaltekst>
-                                            NAV på sosiale medier
-                                        </Normaltekst>
-                                    </Lenke>
-                                </li>
-
-                                <li className="x">
-                                    <Lenke href="#">
-                                        <Normaltekst>
-                                            Nav på sosiale medier
-                                        </Normaltekst>
-                                    </Lenke>
-                                </li>
-
-                                <li>
-                                    <Lenke href="#">
-                                        <Normaltekst>Lovdata</Normaltekst>
-                                    </Lenke>
-                                </li>
-                                <li>
-                                    <Lenke href="#">
-                                        <Normaltekst>Folketrygden</Normaltekst>
-                                    </Lenke>
-                                </li>
-                                <li>
-                                    <Lenke href="#">
-                                        <Normaltekst>Rundskriv</Normaltekst>
-                                    </Lenke>
-                                </li>
-                                <li className="x">
-                                    <Lenke href="#">
-                                        <Normaltekst>Forskrifter</Normaltekst>
-                                    </Lenke>
-                                </li>
-
-                                <li>
-                                    <Lenke href="#">
-                                        <Normaltekst>Folketrygden</Normaltekst>
-                                    </Lenke>
-                                </li>
-                                <li>
-                                    <Lenke href="#">
-                                        <Normaltekst>Rundskriv</Normaltekst>
-                                    </Lenke>
-                                </li>
-                                <li>
-                                    <Lenke href="#">
-                                        <Normaltekst>Forskrifter</Normaltekst>
-                                    </Lenke>
-                                </li>
-                            </ul>
-                            <div className="copyright">
-                                <Normaltekst>
-                                    Arbeids- og velferdsetaten 2019
-                                </Normaltekst>
-                            </div>
+                    <div className={cls.element('topp')}>
+                        <div className={cls.element('topp', 'left')}>
+                            <Element>Var denne informasjonen nyttig?</Element>
+                            <Lenke href="javascript:void(0)">
+                                <Normaltekst>Ja</Normaltekst>
+                            </Lenke>
+                            <Lenke href="javascript:void(0)">
+                                <Normaltekst>Nei</Normaltekst>
+                            </Lenke>
                         </div>
+                        <div className={cls.element('topp', 'right')}>
+                            <Lenke href="javascript:void(0)">
+                                <Normaltekst>
+                                    Er det noe galt med denne siden?
+                                </Normaltekst>
+                            </Lenke>
+                        </div>
+                    </div>
+                    <footer className="sitefooter blokk-m" role="contentinfo">
+                        <FooterLenkeMeny className={cls.className} />
                     </footer>
                 </div>
             </div>
