@@ -6,34 +6,59 @@ import LoggInnKnapp from './logg-inn-knapp';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 
 class Toppmeny extends React.Component {
-
     render() {
         return (
             <nav className="toppmeny">
                 <ul>
                     <li id="logo">
-                        <Lenke href="#"><img src={logo}/></Lenke>
+                        <Lenke href="#">
+                            <img src={logo} />
+                        </Lenke>
                     </li>
                     <li>
-                        <Lenke href="#"><Undertittel tag="h3">PRIVAT</Undertittel></Lenke>
+                        <Lenke href="#">
+                            <Undertittel tag="h3">PRIVAT</Undertittel>
+                        </Lenke>
                     </li>
                     <li>
-                        <Lenke href="#"><Undertittel tag="h3">BEDRIFT</Undertittel></Lenke>
+                        <Lenke href="#">
+                            <Undertittel tag="h3">BEDRIFT</Undertittel>
+                        </Lenke>
                     </li>
                     <li>
-                        <Lenke href="#"><Undertittel tag="h3">ANDRE</Undertittel></Lenke>
+                        <Lenke href="#">
+                            <Undertittel tag="h3">ANDRE</Undertittel>
+                        </Lenke>
                     </li>
                     <li id="dropdown">
-                        <Lenke href="javascript:void(0)" className="dropbtn"><Undertittel tag="h3">Språk</Undertittel></Lenke>
+                        <Lenke href="javascript:void(0)" className="dropbtn">
+                            <Undertittel tag="h3">Språk</Undertittel>
+                        </Lenke>
                         <ul className="dropdown-content">
-                            <li><a href="#"><Normaltekst>Norsk Bokmål</Normaltekst></a></li>
-                            <li><a href="#"><Normaltekst>Norsk Sidemål</Normaltekst></a></li>
-                            <li><a href="#"><Normaltekst>English</Normaltekst></a></li>
-                            <li><a href="#"><Normaltekst>Samisk</Normaltekst></a></li>
+                            <li>
+                                <a href="#">
+                                    <Normaltekst>Norsk Bokmål</Normaltekst>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <Normaltekst>Norsk Sidemål</Normaltekst>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <Normaltekst>English</Normaltekst>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <Normaltekst>Samisk</Normaltekst>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li>
-                        <LoggInnKnapp/>
+                        <LoggInnKnapp />
                     </li>
                 </ul>
             </nav>

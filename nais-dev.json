@@ -9,7 +9,7 @@
         }
     },
     "spec": {
-        "image": "navikt/nav-dekoratoren:t5",
+        "image": "navikt/nav-dekoratoren:latest",
         "port": 8080,
         "liveness": {
             "path": "/person/nav-dekoratoren/",

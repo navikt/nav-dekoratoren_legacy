@@ -1,5 +1,9 @@
 import {
-    ActionType, Handling, HentInnloggingsstatusFEILETAction, HentInnloggingsstatusOKAction, HentInnloggingsstatusPENDINGAction
+    ActionType,
+    Handling,
+    HentInnloggingsstatusFEILETAction,
+    HentInnloggingsstatusOKAction,
+    HentInnloggingsstatusPENDINGAction,
 } from './actions';
 import { JSONObject } from 'yet-another-fetch-mock';
 import { Dispatch } from './dispatch-type';
@@ -21,24 +25,27 @@ const initialState: InnloggingsstatusState = {
     data: {
         authenticated: false,
         name: '',
-        securityLevel: ''
+        securityLevel: '',
     },
-    status: Status.IKKE_STARTET
+    status: Status.IKKE_STARTET,
 };
 
 //  Reducer
-export default function reducer(state: InnloggingsstatusState = initialState, action: Handling): InnloggingsstatusState {
+export default function reducer(
+    state: InnloggingsstatusState = initialState,
+    action: Handling
+): InnloggingsstatusState {
     switch (action.type) {
         case ActionType.HENT_INNLOGGINGSSTATUS_OK: {
-            return {...state, status: Status.OK, data: action.data};
+            return { ...state, status: Status.OK, data: action.data };
         }
         case ActionType.HENT_INNLOGGINGSSTATUS_PENDING:
             if (state.status === Status.OK) {
-                return {...state, status: Status.RELOADING};
+                return { ...state, status: Status.RELOADING };
             }
-            return {...state, status: Status.PENDING};
+            return { ...state, status: Status.PENDING };
         case ActionType.HENT_INNLOGGINGSSTATUS_FEILET:
-             return {...state, status: Status.FEILET};
+            return { ...state, status: Status.FEILET };
         default:
             return state;
     }
@@ -55,7 +62,7 @@ export function hentInnloggingsstatus(): (dispatch: Dispatch) => Promise<void> {
 function hentInnloggingsstatusOk(data: Data): HentInnloggingsstatusOKAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
-        data: data
+        data: data,
     };
 }
 

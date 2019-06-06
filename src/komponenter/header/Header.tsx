@@ -3,14 +3,13 @@ import './header.less';
 import Toppmeny from './Toppmeny';
 
 class Header extends React.Component {
-
-   render() {
+    render() {
         return (
             <div id="header-withmenu">
                 <div className="hodefot">
                     <header className="siteheader blokk-m">
                         <div className="innhold-container">
-                            <Toppmeny/>
+                            <Toppmeny />
                         </div>
                     </header>
                 </div>
