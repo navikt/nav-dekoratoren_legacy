@@ -12,7 +12,7 @@
         "image": "navikt/nav-dekoratoren:latest",
         "port": 8080,
         "liveness": {
-            "path": "/person/nav-dekoratoren/",
+            "path": "/person/nav-dekoratoren/isalive",
             "initialDelay": 10
         },
         "readiness": {

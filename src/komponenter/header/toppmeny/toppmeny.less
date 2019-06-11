@@ -1,0 +1,91 @@
+.toppmeny {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__venstreMeny {
+        display: flex;
+        flex-direction: row;
+        padding-left: 1rem;
+    }
+
+    &__hoyreMeny {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    ul {
+        overflow: hidden;
+    }
+
+    li {
+        float: left;
+        color: black;
+
+        * {
+            color: black;
+        }
+    }
+
+    .dropbtn,
+    .dropvalg {
+        display: inline-block;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    &__hoved {
+        display: inline-block;
+        text-align: center;
+        margin: 14px 16px;
+        text-decoration: none;
+
+        &:hover {
+            border-bottom: black 1px solid;
+        }
+
+        &--active {
+            border-bottom: black 2px solid;
+        }
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        display: block;
+        text-align: left;
+        text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .login-details-name {
+        color: white;
+        text-transform: capitalize;
+    }
+
+    .knapp--hoved {
+        box-shadow: none;
+    }
+
+    @media (min-width: 765px) {
+        flex-direction: row;
+    }
+}

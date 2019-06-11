@@ -14,6 +14,7 @@ interface StateProps {
 }
 
 class LoggInnKnapp extends React.Component<StateProps> {
+
     constructor(props: StateProps) {
         super(props);
     }
@@ -34,11 +35,11 @@ class LoggInnKnapp extends React.Component<StateProps> {
             <div className="login-container">
                 {erInnlogget && navn ? (
                     <span className="login-details-name">
-                        <Normaltekst>{navnLC}</Normaltekst>
+                        <Normaltekst>Login id: {navnLC}</Normaltekst>
                     </span>
                 ) : null}
                 <div className="login-knapp">
-                    <KnappBase type="standard" onClick={this.handleButtonClick}>
+                    <KnappBase type="hoved" onClick={this.handleButtonClick}>
                         {knappetekst}
                     </KnappBase>
                 </div>

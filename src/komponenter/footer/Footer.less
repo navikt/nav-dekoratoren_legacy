@@ -2,28 +2,60 @@
 
 .sitefooter {
     padding: 2rem;
-    text-align: center;
-    background-color: @navMorkGra;
+    background-color: rgba(51, 51, 51, 1);
     color: white;
-
-    ul {
-        padding-left: 6rem;
-        text-align: left;
-        column-count: 3;
-        color: white;
-        li {
-            margin-bottom: 0.5rem;
-        }
-        li.x {
-            margin-bottom: 2.5rem;
-        }
-        .lenke {
-            color: white;
-        }
-    }
+    min-height: 200px;
 
     .copyright {
         font-size: 0.7rem;
         margin-top: 2rem;
+    }
+}
+
+.footer {
+    margin-top: 500px; //TODO fjerne denne linjen når designet er klart.
+
+    &__topp {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #f2f2f2;
+        min-height: 30px;
+        padding: 0.35rem 1rem 0.35rem 1rem;
+        margin: 0 0.75rem;
+
+        p {
+            padding-right: 0.5rem;
+        }
+
+        &--left {
+            display: flex;
+            flex-direction: row;
+        }
+    }
+
+    .footernavsection {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+    }
+
+    &__seksjon {
+        p {
+            color: white;
+            padding-bottom: 0.3rem;
+        }
+
+        li {
+            list-style-type: initial;
+        }
+
+        li a {
+            color: white;
+
+            &:hover {
+                text-decoration: underline;
+                color: white;
+            }
+        }
     }
 }
