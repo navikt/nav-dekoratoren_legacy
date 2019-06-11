@@ -4,8 +4,7 @@ import Toppmeny from './toppmeny/Toppmeny';
 import NedtrekksMeny from './nedtrekksmeny/NedtrekksMeny';
 
 class Header extends React.Component {
-
-   render() {
+    render() {
         return (
             <div id="header-withmenu">
                 <div className="hodefot">

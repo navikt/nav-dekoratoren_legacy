@@ -1,8 +1,8 @@
 import React from 'react';
 import BEMHelper from '../../../utils/bem';
-import './nedtrekksmeny.less';
+import './Nedtrekksmeny.less';
 import HamburgerIkon from '../ikoner/HamburgerIkon';
-import LoggInnKnapp from './../logg-inn-knapp';
+import LoggInnKnapp from './../Logg-inn-knapp';
 import Lenke from 'nav-frontend-lenker';
 import { Undertittel } from 'nav-frontend-typografi';
 import HovedSeksjon from './HovedSeksjon';
