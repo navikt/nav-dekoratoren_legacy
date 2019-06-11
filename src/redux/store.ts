@@ -3,9 +3,12 @@ import { reducer, AppState } from './reducer';
 
 function create() {
     /* tslint:disable-next-line */
-    const useExtension = (window as any).__REDUX_DEVTOOLS_EXTENSION__ !== undefined;
+    const useExtension =
+        (window as any).__REDUX_DEVTOOLS_EXTENSION__ !== undefined;
     /* tslint:disable-next-line */
-    const composer = useExtension ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
+    const composer = useExtension
+        ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        : compose;
 
     const composed = composer();
 

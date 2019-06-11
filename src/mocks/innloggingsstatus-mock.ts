@@ -1,8 +1,8 @@
 /* Mock innlogget: */
 export default {
     authenticated: true,
-    name: 'DONALD DUCK',
-    securityLevel: '4'
+    name: 'Ole Norman',
+    securityLevel: '4',
 };
 
 /* Mock ikke innlogget:

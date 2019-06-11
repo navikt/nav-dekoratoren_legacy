@@ -16,20 +16,25 @@ export function fetchThenDispatch<T>(
         try {
             const data = await fetchFunction();
             sendResultatTilDispatch<T>(dispatch, ok)(data);
-
         } catch (e) {
             handterFeil(dispatch, feilet)(e);
         }
     };
 }
 
-function sendResultatTilDispatch<T>(dispatch: Dispatch, okAction: (temaer: T) => Handling): (jsonData: T) => void {
+function sendResultatTilDispatch<T>(
+    dispatch: Dispatch,
+    okAction: (temaer: T) => Handling
+): (jsonData: T) => void {
     return (jsonData: T) => {
         dispatch(okAction(jsonData));
     };
 }
 
-function handterFeil(dispatch: Dispatch, feiletAction: () => Handling): (error: FetchError) => void {
+function handterFeil(
+    dispatch: Dispatch,
+    feiletAction: () => Handling
+): (error: FetchError) => void {
     return (error: FetchError) => {
         if (error.response) {
             error.response.text().then(() => {

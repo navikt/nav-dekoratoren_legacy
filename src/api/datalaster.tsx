@@ -24,11 +24,22 @@ const harStatus = (dataElement: DataElement, status: Status): boolean => {
     return dataElement.status === status;
 };
 
-const Datalaster = ({avhengigheter, ventPa, children, feilmeldingId}: DatalasterProps) => {
-    const feilmelding = feilmeldingId ? feilmeldingId : 'feilmelding-tekniskfeil';
-    if (avhengigheter.every(a => harStatus(a, Status.OK)) &&
+const Datalaster = ({
+    avhengigheter,
+    ventPa,
+    children,
+    feilmeldingId,
+}: DatalasterProps) => {
+    const feilmelding = feilmeldingId
+        ? feilmeldingId
+        : 'feilmelding-tekniskfeil';
+    if (
+        avhengigheter.every(a => harStatus(a, Status.OK)) &&
         (!ventPa ||
-            ventPa.every(a => harStatus(a, Status.OK) || harStatus(a, Status.FEILET)))) {
+            ventPa.every(
+                a => harStatus(a, Status.OK) || harStatus(a, Status.FEILET)
+            ))
+    ) {
         // Alle avhengigheter lastet inn uten problemer og ventPa er ferdig (enten OK eller FEILET)
         return children;
     } else if (avhengigheter.some(a => harStatus(a, Status.FEILET))) {
@@ -40,7 +51,7 @@ const Datalaster = ({avhengigheter, ventPa, children, feilmeldingId}: Datalaster
             </div>
         );
     }
-    return <Spinner type="XXL"/>;
+    return <Spinner type="XXL" />;
 };
 
 export default Datalaster;

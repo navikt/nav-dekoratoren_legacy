@@ -4,140 +4,139 @@
 #
 version: 2.1
 jobs:
-  build:
-    docker:
-      - image: circleci/node:10
+    build:
+        docker:
+            - image: circleci/node:10
 
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            # when lock file changes, use increasingly general patterns to restore cache
-            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - node-v1-{{ .Branch }}-
-            - node-v1-
-      - run:
-          name: Bygg React app
-          command: |
-            npm ci
-      - save_cache:
-          paths:
-            - ~/usr/local/lib/node_modules  # location depends on npm version
-          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-      - run:
-          name: Tester
-          command: |
-            npm run test
-      - run:
-          name: Bygg produksjonsversjon av React app
-          command: npm run build
-      - setup_remote_docker
-      - sett-miljovariabler
-      - run:
-          name: Bygger Docker image
-          command: docker build -t "$DOCKER_IMAGE_VERSIONED" -t "$DOCKER_IMAGE_UNVERSIONED" .
-      - run:
-          name: Pusher Docker image
-          command: |
-            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-            docker push "$DOCKER_IMAGE_VERSIONED"
-            docker push "$DOCKER_IMAGE_UNVERSIONED"
+        steps:
+            - checkout
+            - restore_cache:
+                  keys:
+                      # when lock file changes, use increasingly general patterns to restore cache
+                      - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+                      - node-v1-{{ .Branch }}-
+                      - node-v1-
+            - run:
+                  name: Bygg React app
+                  command: |
+                      npm ci
+            - save_cache:
+                  paths:
+                      - ~/usr/local/lib/node_modules # location depends on npm version
+                  key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - run:
+                  name: Tester
+                  command: |
+                      npm run test
+            - run:
+                  name: Bygg produksjonsversjon av React app
+                  command: npm run build
+            - setup_remote_docker
+            - sett-miljovariabler
+            - run:
+                  name: Bygger Docker image
+                  command: docker build -t "$DOCKER_IMAGE_VERSIONED" -t "$DOCKER_IMAGE_UNVERSIONED" .
+            - run:
+                  name: Pusher Docker image
+                  command: |
+                      echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                      docker push "$DOCKER_IMAGE_VERSIONED"
+                      docker push "$DOCKER_IMAGE_UNVERSIONED"
 
-  deploy-til-dev:
-    docker:
-      - image: circleci/node:10
+    deploy-til-dev:
+        docker:
+            - image: circleci/node:10
 
-    steps:
-      - checkout
-      - sett-miljovariabler
-      - run:
-          name: Deployer til dev
-          command: |
-            curl -i \
-                -X POST \
-                -d '{
-                     "ref": "'"$COMMIT_SHORT"'",
-                     "description": "Automated deployment request for nav-dekoratoren from team personbruker",
-                     "environment": "dev-sbs",
-                     "required_contexts": [],
-                     "payload": {
-                       "version": [1, 0, 0],
-                       "team": "personbruker",
-                       "kubernetes": {
-                         "resources": ['"$(cat nais-dev.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')"']
-                       }
-                     }
-                   }' \
-                -H "Accept: application/vnd.github.ant-man-preview+json" \
-                -u "$GH_USER":"$GH_TK" \
-                https://api.github.com/repos/navikt/nav-dekoratoren/deployments
+        steps:
+            - checkout
+            - sett-miljovariabler
+            - run:
+                  name: Deployer til dev
+                  command: |
+                      curl -i \
+                          -X POST \
+                          -d '{
+                               "ref": "'"$COMMIT_SHORT"'",
+                               "description": "Automated deployment request for nav-dekoratoren from team personbruker",
+                               "environment": "dev-sbs",
+                               "required_contexts": [],
+                               "payload": {
+                                 "version": [1, 0, 0],
+                                 "team": "personbruker",
+                                 "kubernetes": {
+                                   "resources": ['"$(cat nais-dev.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')"']
+                                 }
+                               }
+                             }' \
+                          -H "Accept: application/vnd.github.ant-man-preview+json" \
+                          -u "$GH_USER":"$GH_TK" \
+                          https://api.github.com/repos/navikt/nav-dekoratoren/deployments
 
-  deploy-til-prod:
-    docker:
-      - image: circleci/node:10
+    deploy-til-prod:
+        docker:
+            - image: circleci/node:10
 
-    steps:
-      - checkout
-      - sett-miljovariabler
-      - run:
-          name: Deployer til prod
-          command: |
-            curl -i \
-                -X POST \
-                -d '{
-                     "ref": "'"$COMMIT_SHORT"'",
-                     "description": "Automated deployment request for nav-dekoratoren from team personbruker",
-                     "environment": "prod-sbs",
-                     "required_contexts": [],
-                     "payload": {
-                       "version": [1, 0, 0],
-                       "team": "personbruker",
-                       "kubernetes": {
-                         "resources": ['"$(cat nais-prod.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')"']
-                       }
-                     }
-                   }' \
-                -H "Accept: application/vnd.github.ant-man-preview+json" \
-                -u "$GH_USER":"$GH_TK" \
-                https://api.github.com/repos/navikt/nav-dekoratoren/deployments
+        steps:
+            - checkout
+            - sett-miljovariabler
+            - run:
+                  name: Deployer til prod
+                  command: |
+                      curl -i \
+                          -X POST \
+                          -d '{
+                               "ref": "'"$COMMIT_SHORT"'",
+                               "description": "Automated deployment request for nav-dekoratoren from team personbruker",
+                               "environment": "prod-sbs",
+                               "required_contexts": [],
+                               "payload": {
+                                 "version": [1, 0, 0],
+                                 "team": "personbruker",
+                                 "kubernetes": {
+                                   "resources": ['"$(cat nais-prod.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')"']
+                                 }
+                               }
+                             }' \
+                          -H "Accept: application/vnd.github.ant-man-preview+json" \
+                          -u "$GH_USER":"$GH_TK" \
+                          https://api.github.com/repos/navikt/nav-dekoratoren/deployments
 
 commands:
-  sett-miljovariabler:
-    steps:
-      - run:
-          name: Setter miljøvariable
-          command: |
-            echo 'export COMMIT_SHORT="$(git rev-parse --short HEAD)"' >> $BASH_ENV
-            echo 'export RELEASE_VERSION="$(git rev-list --count $CIRCLE_SHA1)"' >> $BASH_ENV
-            echo 'export BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"' >> $BASH_ENV
-            echo 'export BRANCH_PREFIX=`[ $BRANCH_NAME == "master" ] && echo "" || echo $BRANCH_NAME\_`' >> $BASH_ENV
-            echo 'export DOCKER_IMAGE_VERSIONED="$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$BRANCH_PREFIX$RELEASE_VERSION"' >> $BASH_ENV
-            echo 'export DOCKER_IMAGE_UNVERSIONED="$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"' >> $BASH_ENV
-
+    sett-miljovariabler:
+        steps:
+            - run:
+                  name: Setter miljøvariable
+                  command: |
+                      echo 'export COMMIT_SHORT="$(git rev-parse --short HEAD)"' >> $BASH_ENV
+                      echo 'export RELEASE_VERSION="$(git rev-list --count $CIRCLE_SHA1)"' >> $BASH_ENV
+                      echo 'export BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"' >> $BASH_ENV
+                      echo 'export BRANCH_PREFIX=`[ $BRANCH_NAME == "master" ] && echo "" || echo $BRANCH_NAME\_`' >> $BASH_ENV
+                      echo 'export DOCKER_IMAGE_VERSIONED="$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$BRANCH_PREFIX$RELEASE_VERSION"' >> $BASH_ENV
+                      echo 'export DOCKER_IMAGE_UNVERSIONED="$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"' >> $BASH_ENV
 
 workflows:
-  bygg_og_deploy:
-    jobs:
-      - build
-      - deploy-til-dev:
-          requires:
+    bygg_og_deploy:
+        jobs:
             - build
-          filters:
-            branches:
-              only:
-                - master
-      - godkjenn-til-prod:
-          type: approval
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
-      - deploy-til-prod:
-          requires:
-            - godkjenn-til-prod
-          filters:
-            branches:
-              only:
-                - master
+            - deploy-til-dev:
+                  requires:
+                      - build
+                  filters:
+                      branches:
+                          only:
+                              - master
+            - godkjenn-til-prod:
+                  type: approval
+                  requires:
+                      - build
+                  filters:
+                      branches:
+                          only:
+                              - master
+            - deploy-til-prod:
+                  requires:
+                      - godkjenn-til-prod
+                  filters:
+                      branches:
+                          only:
+                              - master

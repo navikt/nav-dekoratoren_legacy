@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from '../redux/dispatch-type';
-import { hentInnloggingsstatus, InnloggingsstatusState } from '../redux/innloggingsstatus-duck';
+import {
+    hentInnloggingsstatus,
+    InnloggingsstatusState,
+} from '../redux/innloggingsstatus-duck';
 import { AppState } from '../redux/reducer';
 import Datalaster, { Status } from '../api/datalaster';
 
@@ -19,7 +22,9 @@ interface DispatchProps {
 
 type InnloggingsstatusProviderProps = OwnProps & StateProps & DispatchProps;
 
-class InnloggingsstatusProvider extends React.Component<InnloggingsstatusProviderProps> {
+class InnloggingsstatusProvider extends React.Component<
+    InnloggingsstatusProviderProps
+> {
     constructor(props: InnloggingsstatusProviderProps) {
         super(props);
     }
@@ -45,4 +50,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     doHentInnloggingsstatus: () => hentInnloggingsstatus()(dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(InnloggingsstatusProvider);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(InnloggingsstatusProvider);
