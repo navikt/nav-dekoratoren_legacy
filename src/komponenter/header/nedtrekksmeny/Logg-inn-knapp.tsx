@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { AppState } from '../../redux/reducer';
+import { AppState } from '../../../redux/reducer';
 import { Normaltekst } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
-import Environments from '../../utils/Environments';
+import Environments from '../../../utils/Environments';
 
 const { baseUrl, logoutUrl } = Environments();
 const loginUrl = `${baseUrl}/person/dittnav`;
@@ -14,7 +14,6 @@ interface StateProps {
 }
 
 class LoggInnKnapp extends React.Component<StateProps> {
-
     constructor(props: StateProps) {
         super(props);
     }
