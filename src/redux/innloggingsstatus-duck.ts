@@ -9,7 +9,7 @@ import { JSONObject } from 'yet-another-fetch-mock';
 import { Dispatch } from './dispatch-type';
 import { fetchThenDispatch } from '../api/fetch-utils';
 import { hentInnloggingsstatusFetch } from '../api/api';
-import { DataElement, Status } from '../api/datalaster';
+import { DataElement, Status } from '../api/Datalaster';
 
 export interface InnloggingsstatusState extends DataElement {
     data: Data;

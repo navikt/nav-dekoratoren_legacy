@@ -26,7 +26,6 @@
         "no-console": {
             "options": [
                 true,
-                "log",
                 "error",
                 "debug",
                 "info",

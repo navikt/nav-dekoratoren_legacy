@@ -12,11 +12,11 @@
         "image": "navikt/nav-dekoratoren:latest",
         "port": 8080,
         "liveness": {
-            "path": "/nav-dekoratoren/isalive",
+            "path": "/person/nav-dekoratoren/isalive",
             "initialDelay": 10
         },
         "readiness": {
-            "path": "/nav-dekoratoren/isready",
+            "path": "/person/nav-dekoratoren/isready",
             "initialDelay": 10
         },
         "prometheus": {

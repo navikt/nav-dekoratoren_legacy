@@ -1,11 +1,10 @@
 import * as React from 'react';
 import Lenke from 'nav-frontend-lenker';
-import './toppmeny.less';
-
 import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
-import Navlogo from './../Navlogo';
 import BEMHelper from '../../../utils/bem';
 import Cheveron from 'nav-frontend-chevron';
+import Navlogo from './Navlogo';
+import './Toppmeny.less';
 
 const cls = BEMHelper('toppmeny');
 
@@ -52,7 +51,7 @@ class Toppmeny extends React.Component {
                                     className="dropbtn"
                                 >
                                     <Normaltekst>
-                                        språk/Languages
+                                        Språk/Languages
                                         <Cheveron type="ned" />
                                     </Normaltekst>
                                 </a>
