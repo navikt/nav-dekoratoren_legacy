@@ -6,6 +6,7 @@ import HovedSeksjon from './HovedSeksjon';
 import MinsideSeksjon from './MinsideSeksjon';
 import BEMHelper from '../../../utils/bem';
 import HamburgerIkon from '../ikoner/HamburgerIkon';
+import Sok from './Sok';
 import './Nedtrekksmeny.less';
 
 const cls = BEMHelper('nedtrekksmeny');
@@ -42,6 +43,7 @@ class NedtrekkMeny extends React.Component {
                             </div>
                         </Lenke>
                     </div>
+                    <Sok />
                     <div className={cls.element('hoyreMeny')}>
                         <LoggInnKnapp />
                     </div>
