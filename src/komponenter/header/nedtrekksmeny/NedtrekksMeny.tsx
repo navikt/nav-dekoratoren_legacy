@@ -5,6 +5,8 @@ import { Undertittel } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
 import HamburgerIkon from '../ikoner/HamburgerIkon';
 import './Nedtrekksmeny.less';
+import Sok from './Sok';
+import MediaQuery from 'react-responsive';
 
 const cls = BEMHelper('nedtrekksmeny');
 
@@ -29,6 +31,9 @@ const NedtrekkMeny: React.FunctionComponent<Props> = props => {
                         </div>
                     </Lenke>
                 </div>
+                <MediaQuery minWidth={768}>
+                    <Sok />
+                </MediaQuery>
                 <div className={cls.element('hoyreMeny')}>
                     <LoggInnKnapp />
                 </div>

@@ -26,7 +26,7 @@ const Toppmeny = (props: Props) => {
                 <Lenke className="navbar-brand" href="javascript:void(0)">
                     <Navlogo />
                 </Lenke>
-                <ul>
+                <ul className={cls.element('topp-liste-rad')}>
                     {console.log(props.menyValg)}
                     {props.lenker.map((lenke: any) => {
                         return (

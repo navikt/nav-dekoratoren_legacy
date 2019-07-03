@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../redux/reducer';
-import { Normaltekst } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
 import Environments from '../../../utils/Environments';
 
@@ -32,12 +31,7 @@ class LoggInnKnapp extends React.Component<StateProps> {
         const navnLC = erInnlogget && navn ? navn.toLowerCase() : '';
         return (
             <div className="login-container">
-                {erInnlogget && navn ? (
-                    <span className="login-details-name">
-                        <Normaltekst>Login id: {navnLC}</Normaltekst>
-                    </span>
-                ) : null}
-                <div className="login-knapp">
+                <div className="login-knapp btn">
                     <KnappBase type="hoved" onClick={this.handleButtonClick}>
                         {knappetekst}
                     </KnappBase>

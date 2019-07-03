@@ -6,7 +6,7 @@
     &__venstreMeny {
         display: flex;
         flex-direction: row;
-        padding-left: 1rem;
+        padding-left: 0.25rem;
     }
 
     &__hoyreMeny {
@@ -15,17 +15,15 @@
         align-items: center;
     }
 
-    ul {
-        overflow: hidden;
+    &__topp-liste-rad {
+        min-width: 325px;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
     }
 
     li {
         float: left;
-        color: black;
-
-        * {
-            color: black;
-        }
     }
 
     .dropbtn,
@@ -41,6 +39,7 @@
         text-align: center;
         margin: 14px 16px;
         text-decoration: none;
+        color: black;
 
         &:hover {
             border-bottom: black 1px solid;
@@ -52,6 +51,10 @@
                 border-bottom: black 2px solid;
             }
         }
+    }
+
+    .dropdown p {
+        color: black;
     }
 
     .dropdown-content {
@@ -83,7 +86,11 @@
         box-shadow: none;
     }
 
-    @media (min-width: 765px) {
+    @media (min-width: 576px) {
         flex-direction: row;
+
+        &__venstreMeny {
+            padding-left: 1rem;
+        }
     }
 }

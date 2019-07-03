@@ -1,9 +1,15 @@
 .nedtrekksmeny {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     padding-top: 0.5rem;
     min-height: 3.5rem;
     padding-left: 1rem;
+
+    & .btn {
+        padding-top: 2px;
+        padding-right: 0.125rem;
+    }
 
     &__dropdownMenu {
         display: flex;
