@@ -1,4 +1,5 @@
 import innloggingsstatusResponse from './innloggingsstatus-mock';
+import sokeresultatResponse from './sokeresultat-mock';
 import { API } from '../api/api';
 import FetchMock, { Middleware, MiddlewareUtils } from 'yet-another-fetch-mock';
 
@@ -20,4 +21,6 @@ export default () => {
     console.log('### FULL MOCK AKTIVERT! ###');
 
     fetchMock.get(API.innloggingsstatusURL, innloggingsstatusResponse);
+
+    fetchMock.get(API.sokeresultat, sokeresultatResponse);
 };
