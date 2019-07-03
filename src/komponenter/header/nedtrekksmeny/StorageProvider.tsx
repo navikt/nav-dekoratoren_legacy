@@ -5,69 +5,65 @@ import { Andre } from '../menyLenker/Andre';
 
 export const NAVHEADER = 'NAVHEADER';
 
+export type MenyValg = {
+    valgtmeny: MenyVal;
+    menyLenker: Object;
+};
+
 export enum MenyVal {
     PRIVATPERSON = 'PRIVATPERSON',
     BEDRIFT = 'BEDRIFT',
     SAMHANDLING = 'SAMHANDLING',
 }
 
-export const getMenuStorage = (): any => {
+export const getMeny = (): MenyValg => {
     const windowPathname = sjekkUriAndDispatch(
         window.location.pathname.split('/')[1]
     );
     if (windowPathname[0]) {
-        return windowPathname[1];
+        return { valgtmeny: windowPathname[1], menyLenker: windowPathname[2] };
     }
     const storage = sessionStorage.getItem(NAVHEADER);
-    return storage ? storage : MenyVal.PRIVATPERSON;
+    return storage
+        ? mapMenuLinks(storage)
+        : { valgtmeny: MenyVal.PRIVATPERSON, menyLenker: Person };
 };
 
-export const chooseMenubase = (): any => {
-    const windowPathname = sjekkUriAndDispatch(
-        window.location.pathname.split('/')[1]
-    );
-    if (windowPathname[1]) {
-        return mapMenuLinks(windowPathname[1]);
-    }
-    const storage = sessionStorage.getItem(NAVHEADER);
-    return storage ? mapMenuLinks(storage) : Person;
-};
-
-const mapMenuLinks = (type: any) => {
+export const mapMenuLinks = (type: string): MenyValg => {
     switch (type) {
         case 'PRIVATPERSON':
-            return Person;
+            return { valgtmeny: MenyVal.PRIVATPERSON, menyLenker: Person };
         case 'BEDRIFT':
-            return Bedrift;
+            return { valgtmeny: MenyVal.BEDRIFT, menyLenker: Bedrift };
         case 'SAMHANDLING':
-            return Andre;
+            return { valgtmeny: MenyVal.SAMHANDLING, menyLenker: Andre };
         default:
-            return Person;
+            return { valgtmeny: MenyVal.PRIVATPERSON, menyLenker: Person };
     }
 };
 
-const sjekkUriAndDispatch = (type: string): any => {
+const sjekkUriAndDispatch = (type: string): [boolean, MenyVal, object] => {
     if (
         type
             .toString()
             .toUpperCase()
             .includes('PERSON')
     ) {
-        return [true, 'PRIVATPERSON', Person];
+        return [true, MenyVal.PRIVATPERSON, Person];
     } else if (
         type
             .toString()
             .toUpperCase()
             .includes('BEDRIFT')
     ) {
-        return [true, 'BEDRIFT', Bedrift];
+        return [true, MenyVal.BEDRIFT, Bedrift];
     } else if (
         type
             .toString()
             .toUpperCase()
             .includes('SAMHANDLING')
     ) {
-        return [true, 'SAMHANDLING', Andre];
+        return [true, MenyVal.SAMHANDLING, Andre];
     }
-    return false;
+    return [true, MenyVal.PRIVATPERSON, Person];
 };

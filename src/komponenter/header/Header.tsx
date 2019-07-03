@@ -3,9 +3,10 @@ import './Header.less';
 import Toppmeny from './toppmeny/Toppmeny';
 import NedtrekksMeny from './nedtrekksmeny/NedtrekksMeny';
 import {
-    chooseMenubase,
-    getMenuStorage,
+    getMeny,
+    mapMenuLinks,
     MenyVal,
+    MenyValg,
     NAVHEADER,
 } from './nedtrekksmeny/StorageProvider';
 import HovedSeksjon from './nedtrekksmeny/HovedSeksjon';
@@ -13,19 +14,16 @@ import MinsideSeksjon from './nedtrekksmeny/MinsideSeksjon';
 import { toppMenyLenker } from './menyLenker/ToppMenyLenker';
 
 interface State {
-    valgtmeny: MenyVal;
     clicked: boolean;
-    menyLenker: Object;
+    valgtmeny: MenyValg;
 }
 
 class Header extends React.Component<{}, State> {
     constructor(props: any) {
         super(props);
-
         this.state = {
-            valgtmeny: getMenuStorage(),
             clicked: false,
-            menyLenker: chooseMenubase(),
+            valgtmeny: getMeny(),
         };
     }
 
@@ -39,16 +37,15 @@ class Header extends React.Component<{}, State> {
         e: React.MouseEvent<HTMLAnchorElement>,
         valgVerdi: MenyVal,
         url: string
-    ): any => {
+    ): void => {
         e.preventDefault();
         const headervalg = sessionStorage.getItem(NAVHEADER);
         if (headervalg && headervalg == valgVerdi) {
-            return null;
+            return;
         }
         sessionStorage.setItem(NAVHEADER, valgVerdi);
         this.setState({
-            valgtmeny: valgVerdi,
-            menyLenker: chooseMenubase(),
+            valgtmeny: mapMenuLinks(valgVerdi),
         });
         window.location.href = url;
     };
@@ -61,7 +58,7 @@ class Header extends React.Component<{}, State> {
                         <div className="innhold-container">
                             <Toppmeny
                                 lenker={toppMenyLenker}
-                                menyValg={this.state.valgtmeny}
+                                menyValg={this.state.valgtmeny.valgtmeny}
                                 callMenuStorage={this.setMenuStorage}
                             />
                             <NedtrekksMeny
@@ -70,7 +67,7 @@ class Header extends React.Component<{}, State> {
                             >
                                 <HovedSeksjon
                                     classname="nedtrekksmeny"
-                                    menyLenker={this.state.menyLenker}
+                                    menyLenker={this.state.valgtmeny.menyLenker}
                                 />
                                 <MinsideSeksjon className="nedtrekksmeny" />
                             </NedtrekksMeny>
