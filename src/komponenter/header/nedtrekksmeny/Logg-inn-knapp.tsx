@@ -5,7 +5,9 @@ import KnappBase from 'nav-frontend-knapper';
 import Environments from '../../../utils/Environments';
 
 const { baseUrl, logoutUrl } = Environments();
-const loginUrl = `${baseUrl}/person/dittnav`;
+const loginUrl = `https://loginservice.nav.no/login?redirect=${baseUrl}`;
+
+// "https://loginservice.nav.no/login?redirect=",
 
 interface StateProps {
     erInnlogget: boolean;
