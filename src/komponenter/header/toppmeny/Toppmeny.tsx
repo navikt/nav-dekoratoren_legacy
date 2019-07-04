@@ -27,7 +27,6 @@ const Toppmeny = (props: Props) => {
                     <Navlogo />
                 </Lenke>
                 <ul className={cls.element('topp-liste-rad')}>
-                    {console.log(props.menyValg)}
                     {props.lenker.map(
                         (lenke: {
                             tittel: string;
