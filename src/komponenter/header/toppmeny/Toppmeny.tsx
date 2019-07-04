@@ -5,18 +5,18 @@ import BEMHelper from '../../../utils/bem';
 import Cheveron from 'nav-frontend-chevron';
 import Navlogo from './Navlogo';
 import './Toppmeny.less';
-import { MenyVal } from '../nedtrekksmeny/StorageProvider';
+import { MenuValue } from '../nedtrekksmeny/StorageProvider';
 
 const cls = BEMHelper('toppmeny');
 
 interface Props {
-    menyValg: any;
+    menyValg: MenuValue;
     callMenuStorage: (
         e: React.MouseEvent<HTMLAnchorElement>,
-        valgVerdi: MenyVal,
+        valgVerdi: MenuValue,
         url: string
     ) => void;
-    lenker: any;
+    lenker: { tittel: string; url: string; key: MenuValue }[];
 }
 
 const Toppmeny = (props: Props) => {
@@ -28,32 +28,38 @@ const Toppmeny = (props: Props) => {
                 </Lenke>
                 <ul className={cls.element('topp-liste-rad')}>
                     {console.log(props.menyValg)}
-                    {props.lenker.map((lenke: any) => {
-                        return (
-                            <li key={lenke.tittel}>
-                                <a
-                                    className={cls.element(
-                                        'hoved',
-                                        props.menyValg == lenke.tittel
-                                            ? 'active'
-                                            : ''
-                                    )}
-                                    href={lenke.url}
-                                    onClick={event =>
-                                        props.callMenuStorage(
-                                            event,
-                                            lenke.key,
-                                            lenke.url
-                                        )
-                                    }
-                                >
-                                    <EtikettLiten tag="h3">
-                                        {lenke.tittel}
-                                    </EtikettLiten>
-                                </a>
-                            </li>
-                        );
-                    })}
+                    {props.lenker.map(
+                        (lenke: {
+                            tittel: string;
+                            url: string;
+                            key: MenuValue;
+                        }) => {
+                            return (
+                                <li key={lenke.tittel}>
+                                    <a
+                                        className={cls.element(
+                                            'hoved',
+                                            props.menyValg == lenke.tittel
+                                                ? 'active'
+                                                : ''
+                                        )}
+                                        href={lenke.url}
+                                        onClick={event =>
+                                            props.callMenuStorage(
+                                                event,
+                                                lenke.key,
+                                                lenke.url
+                                            )
+                                        }
+                                    >
+                                        <EtikettLiten tag="h3">
+                                            {lenke.tittel}
+                                        </EtikettLiten>
+                                    </a>
+                                </li>
+                            );
+                        }
+                    )}
                 </ul>
             </div>
             <div className={cls.element('hoyreMeny')}>
@@ -67,7 +73,7 @@ const Toppmeny = (props: Props) => {
                                 </Normaltekst>
                             </a>
                             <div className="dropdown-content">
-                                <a className="his," href="#">
+                                <a className="dropvalg," href="#">
                                     Bokmål
                                 </a>
                                 <a className="dropvalg" href="#">

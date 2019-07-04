@@ -5,65 +5,84 @@ import { Andre } from '../menyLenker/Andre';
 
 export const NAVHEADER = 'NAVHEADER';
 
-export type MenyValg = {
-    valgtmeny: MenyVal;
-    menyLenker: Object;
-};
+export interface MenyValg {
+    seksjon: MenuValue;
+    menyLenker: {
+        tittel: string;
+        lenker: { tittel: string; url: string }[];
+    }[];
+}
 
-export enum MenyVal {
+export enum MenuValue {
     PRIVATPERSON = 'PRIVATPERSON',
     BEDRIFT = 'BEDRIFT',
     SAMHANDLING = 'SAMHANDLING',
 }
 
-export const getMeny = (): MenyValg => {
+export const getMeny = (): {
+    seksjon: MenuValue;
+    menyLenker: {
+        tittel: string;
+        lenker: { tittel: string; url: string }[];
+    }[];
+} => {
     const windowPathname = sjekkUriAndDispatch(
         window.location.pathname.split('/')[1]
     );
-    if (windowPathname[0]) {
-        return { valgtmeny: windowPathname[1], menyLenker: windowPathname[2] };
+    if (windowPathname[0] && windowPathname[2]) {
+        sessionStorage.setItem(NAVHEADER, windowPathname[1]);
+        return { seksjon: windowPathname[1], menyLenker: windowPathname[2] };
     }
     const storage = sessionStorage.getItem(NAVHEADER);
     return storage
         ? mapMenuLinks(storage)
-        : { valgtmeny: MenyVal.PRIVATPERSON, menyLenker: Person };
+        : { seksjon: MenuValue.PRIVATPERSON, menyLenker: Person };
 };
 
 export const mapMenuLinks = (type: string): MenyValg => {
     switch (type) {
         case 'PRIVATPERSON':
-            return { valgtmeny: MenyVal.PRIVATPERSON, menyLenker: Person };
+            return { seksjon: MenuValue.PRIVATPERSON, menyLenker: Person };
         case 'BEDRIFT':
-            return { valgtmeny: MenyVal.BEDRIFT, menyLenker: Bedrift };
+            return { seksjon: MenuValue.BEDRIFT, menyLenker: Bedrift };
         case 'SAMHANDLING':
-            return { valgtmeny: MenyVal.SAMHANDLING, menyLenker: Andre };
+            return { seksjon: MenuValue.SAMHANDLING, menyLenker: Andre };
         default:
-            return { valgtmeny: MenyVal.PRIVATPERSON, menyLenker: Person };
+            return { seksjon: MenuValue.PRIVATPERSON, menyLenker: Person };
     }
 };
 
-const sjekkUriAndDispatch = (type: string): [boolean, MenyVal, object] => {
+const sjekkUriAndDispatch = (
+    type: string
+): [
+    boolean,
+    MenuValue,
+    {
+        tittel: string;
+        lenker: { tittel: string; url: string }[];
+    }[]
+] => {
     if (
         type
             .toString()
             .toUpperCase()
             .includes('PERSON')
     ) {
-        return [true, MenyVal.PRIVATPERSON, Person];
+        return [true, MenuValue.PRIVATPERSON, Person];
     } else if (
         type
             .toString()
             .toUpperCase()
             .includes('BEDRIFT')
     ) {
-        return [true, MenyVal.BEDRIFT, Bedrift];
+        return [true, MenuValue.BEDRIFT, Bedrift];
     } else if (
         type
             .toString()
             .toUpperCase()
             .includes('SAMHANDLING')
     ) {
-        return [true, MenyVal.SAMHANDLING, Andre];
+        return [true, MenuValue.SAMHANDLING, Andre];
     }
-    return [true, MenyVal.PRIVATPERSON, Person];
+    return [false, MenuValue.PRIVATPERSON, Person];
 };

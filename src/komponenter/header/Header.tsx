@@ -5,7 +5,7 @@ import NedtrekksMeny from './nedtrekksmeny/NedtrekksMeny';
 import {
     getMeny,
     mapMenuLinks,
-    MenyVal,
+    MenuValue,
     MenyValg,
     NAVHEADER,
 } from './nedtrekksmeny/StorageProvider';
@@ -19,7 +19,7 @@ interface State {
 }
 
 class Header extends React.Component<{}, State> {
-    constructor(props: any) {
+    constructor(props: {}) {
         super(props);
         this.state = {
             clicked: false,
@@ -35,7 +35,7 @@ class Header extends React.Component<{}, State> {
 
     private setMenuStorage = (
         e: React.MouseEvent<HTMLAnchorElement>,
-        valgVerdi: MenyVal,
+        valgVerdi: MenuValue,
         url: string
     ): void => {
         e.preventDefault();
@@ -58,7 +58,7 @@ class Header extends React.Component<{}, State> {
                         <div className="innhold-container">
                             <Toppmeny
                                 lenker={toppMenyLenker}
-                                menyValg={this.state.valgtmeny.valgtmeny}
+                                menyValg={this.state.valgtmeny.seksjon}
                                 callMenuStorage={this.setMenuStorage}
                             />
                             <NedtrekksMeny

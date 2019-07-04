@@ -4,7 +4,10 @@ import BEMHelper from '../../../utils/bem';
 
 interface Props {
     classname: string;
-    menyLenker: any;
+    menyLenker: {
+        tittel: string;
+        lenker: { tittel: string; url: string }[];
+    }[];
 }
 
 const HovedSeksjon = (props: Props) => {
@@ -18,38 +21,52 @@ const HovedSeksjon = (props: Props) => {
 
     return (
         <div className={cls.element('hovedSeksjon')}>
-            {menyLenker.map((meny: any) => {
-                return (
-                    <section
-                        className={cls.element('seksjon')}
-                        key={meny.tittel}
-                    >
-                        <div className={cls.element('seksjonOverskrift')}>
-                            <Element>{meny.tittel}</Element>
-                            <ul>
-                                {meny.lenker.map(
-                                    (lenke: any, index: number) => {
-                                        return (
-                                            <li key={index}>
-                                                <a
-                                                    href={lenke.url}
-                                                    onClick={event =>
-                                                        goto(event, lenke.url)
-                                                    }
-                                                >
-                                                    <Normaltekst>
-                                                        {lenke.tittel}
-                                                    </Normaltekst>
-                                                </a>
-                                            </li>
-                                        );
-                                    }
-                                )}
-                            </ul>
-                        </div>
-                    </section>
-                );
-            })}
+            {menyLenker.map(
+                (meny: {
+                    tittel: string;
+                    lenker: { tittel: string; url: string }[];
+                }) => {
+                    return (
+                        <section
+                            className={cls.element('seksjon')}
+                            key={meny.tittel}
+                        >
+                            <div className={cls.element('seksjonOverskrift')}>
+                                <Element>{meny.tittel}</Element>
+                                <ul>
+                                    {meny.lenker.map(
+                                        (
+                                            lenke: {
+                                                tittel: string;
+                                                url: string;
+                                            },
+                                            index: number
+                                        ) => {
+                                            return (
+                                                <li key={index}>
+                                                    <a
+                                                        href={lenke.url}
+                                                        onClick={event =>
+                                                            goto(
+                                                                event,
+                                                                lenke.url
+                                                            )
+                                                        }
+                                                    >
+                                                        <Normaltekst>
+                                                            {lenke.tittel}
+                                                        </Normaltekst>
+                                                    </a>
+                                                </li>
+                                            );
+                                        }
+                                    )}
+                                </ul>
+                            </div>
+                        </section>
+                    );
+                }
+            )}
         </div>
     );
 };

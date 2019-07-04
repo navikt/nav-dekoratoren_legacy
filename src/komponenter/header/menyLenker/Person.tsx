@@ -2,7 +2,10 @@ import React from 'react';
 const personUrl = 'http://localhost:3000/person/';
 
 // TODO opprette restservice fra endepunktet til enonic og bytt ut data
-export const Person = [
+export const Person: {
+    tittel: string;
+    lenker: { tittel: string; url: string }[];
+}[] = [
     {
         tittel: 'Arbeidssøker',
         lenker: [

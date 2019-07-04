@@ -1,20 +1,24 @@
 import React from 'react';
-import { MenyVal } from '../nedtrekksmeny/StorageProvider';
+import { MenuValue } from '../nedtrekksmeny/StorageProvider';
 
-export const toppMenyLenker = [
+export const toppMenyLenker: {
+    tittel: string;
+    url: string;
+    key: MenuValue;
+}[] = [
     {
         tittel: 'PRIVATPERSON',
         url: '/person/',
-        key: MenyVal.PRIVATPERSON,
+        key: MenuValue.PRIVATPERSON,
     },
     {
         tittel: 'BEDRIFT',
         url: '/bedrift/',
-        key: MenyVal.BEDRIFT,
+        key: MenuValue.BEDRIFT,
     },
     {
         tittel: 'SAMHANDLING',
         url: '/samhandling/',
-        key: MenyVal.SAMHANDLING,
+        key: MenuValue.SAMHANDLING,
     },
 ];

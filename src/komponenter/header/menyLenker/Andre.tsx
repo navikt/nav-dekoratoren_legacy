@@ -3,7 +3,10 @@ import React from 'react';
 const andreUrl = 'http://localhost:3000/andre/';
 
 // TODO opprette restservice fra endepunktet til enonic og bytt ut data
-export const Andre = [
+export const Andre: {
+    tittel: string;
+    lenker: { tittel: string; url: string }[];
+}[] = [
     {
         tittel: 'Statistikk',
         lenker: [
