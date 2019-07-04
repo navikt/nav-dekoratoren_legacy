@@ -5,17 +5,21 @@
 .innhold-container {
     //width: @desktopLimitWidth;
     margin: 0 auto;
-    padding: 0.7rem 1rem 0.3rem 1rem;
+    padding: 0.7rem 0 0.3rem 0;
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    @media (min-width: 576px) {
+        padding: 0.7rem 1rem 0.3rem 1rem;
+    }
 }
 
 .divider {
     color: red;
     border-bottom: 2px solid;
     margin: 1em 0;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
 }

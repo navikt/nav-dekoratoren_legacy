@@ -48,7 +48,7 @@ class Sok extends React.Component<SokProps, InputState> {
                         placeholder="Hva leter du etter?"
                         onChange={event => this.handleChange(event)}
                     />
-                    <div className="sok-knapp">
+                    <div className="sok-knapp btn">
                         <button className="knapp knapp--hoved" type="submit">
                             SØK
                         </button>
