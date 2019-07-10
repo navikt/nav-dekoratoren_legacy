@@ -13,7 +13,7 @@ interface ApiProps {
 export const API: ApiProps = {
     innloggingsstatusURL: `${baseUrl}/innloggingslinje-api/auth`,
     sokeresultat:
-        'https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search?ord=pensjon',
+        'https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search',
 };
 
 export function hentInnloggingsstatusFetch(): Promise<Data> {
