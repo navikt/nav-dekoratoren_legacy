@@ -8,17 +8,17 @@ export const toppMenyLenker: {
 }[] = [
     {
         tittel: 'PRIVATPERSON',
-        url: '/person/',
+        url: '/person/nav-dekoratoren/person/',
         key: MenuValue.PRIVATPERSON,
     },
     {
         tittel: 'BEDRIFT',
-        url: '/bedrift/',
+        url: '/person/nav-dekoratoren/bedrift/',
         key: MenuValue.BEDRIFT,
     },
     {
         tittel: 'SAMHANDLING',
-        url: '/samhandling/',
+        url: '/person/nav-dekoratoren/samhandling/',
         key: MenuValue.SAMHANDLING,
     },
 ];
