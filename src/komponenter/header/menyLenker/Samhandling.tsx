@@ -1,9 +1,12 @@
 import React from 'react';
+import Environments from '../../../utils/Environments';
 
-const andreUrl = 'http://localhost:3000/andre/';
+const { baseUrl } = Environments();
+
+const samhandlingUrl = `${baseUrl}/person/nav-dekoratoren/samhandling`;
 
 // TODO opprette restservice fra endepunktet til enonic og bytt ut data
-export const Andre: {
+export const Samhandling: {
     tittel: string;
     lenker: { tittel: string; url: string }[];
 }[] = [
@@ -12,15 +15,15 @@ export const Andre: {
         lenker: [
             {
                 tittel: 'Arbeidssøkere og stillinger',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
             {
                 tittel: 'Sykefravær og statistikk',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
             {
                 tittel: 'Se flere',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
         ],
     },
@@ -29,15 +32,15 @@ export const Andre: {
         lenker: [
             {
                 tittel: 'Analyser fra NAV',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
             {
                 tittel: 'Forskningsrapporter',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
             {
                 tittel: 'Se flere',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
         ],
     },
@@ -46,15 +49,15 @@ export const Andre: {
         lenker: [
             {
                 tittel: 'Leger og andre behandlere',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
             {
                 tittel: 'Tilskudd gjennom NAV',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
             {
                 tittel: 'Se flere',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
         ],
     },
@@ -63,15 +66,15 @@ export const Andre: {
         lenker: [
             {
                 tittel: 'Lover og regler',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
             {
                 tittel: 'Personvern i arbeids- og velferdsetaten',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
             {
                 tittel: 'Se flere',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
         ],
     },
@@ -80,15 +83,15 @@ export const Andre: {
         lenker: [
             {
                 tittel: 'Kontakt oss',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
             {
                 tittel: 'Utbetalinger',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
             {
                 tittel: 'Se flere',
-                url: andreUrl,
+                url: samhandlingUrl,
             },
         ],
     },

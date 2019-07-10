@@ -2,7 +2,7 @@ const Environments = () => {
     if (process.env.NODE_ENV === 'development') {
         return {
             miljo: 'LOCAL',
-            baseUrl: 'http://localhost:8080',
+            baseUrl: 'http://localhost:3000',
             loginUrl: '#',
             logoutUrl: '#',
         };

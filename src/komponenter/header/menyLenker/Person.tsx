@@ -1,5 +1,8 @@
 import React from 'react';
-const personUrl = 'http://localhost:3000/person/';
+import Environments from '../../../utils/Environments';
+const { baseUrl } = Environments();
+
+const personUrl = `${baseUrl}/person/nav-dekoratoren/person/`;
 
 // TODO opprette restservice fra endepunktet til enonic og bytt ut data
 export const Person: {
