@@ -26,12 +26,19 @@ export const getMeny = (): {
         lenker: { tittel: string; url: string }[];
     }[];
 } => {
-    const windowPathname = sjekkUriAndDispatch(
-        window.location.pathname.split('/')[3]
-    );
-    if (windowPathname[0] && windowPathname[2]) {
-        sessionStorage.setItem(NAVHEADER, windowPathname[1]);
-        return { seksjon: windowPathname[1], menyLenker: windowPathname[2] };
+    const locationPath = window.location.pathname.split('/')[3];
+
+    if (locationPath !== undefined) {
+        const windowPathname = sjekkUriAndDispatch(
+            window.location.pathname.split('/')[3]
+        );
+        if (windowPathname[0] && windowPathname[2]) {
+            sessionStorage.setItem(NAVHEADER, windowPathname[1]);
+            return {
+                seksjon: windowPathname[1],
+                menyLenker: windowPathname[2],
+            };
+        }
     }
     const storage = sessionStorage.getItem(NAVHEADER);
     return storage

@@ -7,7 +7,7 @@
         "start": "craco start",
         "build": "craco build",
         "test": "craco test",
-        "server": "nodemon src/server/server.js",
+        "server": "nodemon server/server.js",
         "lint": "tslint ./src/**/*.ts*",
         "lint:fix": "tslint ./src/**/*.ts* --fix",
         "docker-build": "docker build . -t navikt/nav-dekoratoren",

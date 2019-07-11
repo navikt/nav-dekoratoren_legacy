@@ -9,7 +9,7 @@ import InnloggingsstatusProvider from './provider/Innloggingsstatus-provider';
 
 const store = getStore();
 
-if (process.env.NODE_ENV === 'development') {
+if (true) {
     console.log('==========================');
     console.log('======= DEVELOPMENT ======');
     console.log('==========================');
