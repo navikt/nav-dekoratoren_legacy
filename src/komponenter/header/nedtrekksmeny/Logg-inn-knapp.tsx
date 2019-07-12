@@ -5,7 +5,12 @@ import KnappBase from 'nav-frontend-knapper';
 import Environments from '../../../utils/Environments';
 
 const { baseUrl, logoutUrl, loginUrl } = Environments();
-const login = `${loginUrl}/login?redirect=${baseUrl}`;
+const path =
+    window.location.pathname.split('/')[3] !== undefined
+        ? '/person/nav-dekoratoren/' + window.location.pathname.split('/')[3]
+        : '/person';
+
+const login = `${loginUrl}/login?redirect=${baseUrl}${path}`;
 
 interface StateProps {
     erInnlogget: boolean;
