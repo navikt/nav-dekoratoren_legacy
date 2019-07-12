@@ -1,0 +1,163 @@
+@baseImagePath: "https://appres-t4.nav.no/_public/appressurser/built-appres-v3/";
+
+.ustilet {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.toggle-varsler-container {
+    position: relative;
+    display: none;
+    height: 31px;
+    width: 31px;
+    border: 1px solid transparent;
+    vertical-align: middle;
+
+    @media (min-width: 48.0625rem) {
+        display: inline-block;
+    }
+
+    #toggle-varsler {
+        background: url("@{baseImagePath}img/varsel/alarm.svg") no-repeat center;
+        background-size: 24px 24px;
+        width: 100%;
+        height: 100%;
+        border: 2px solid transparent;
+
+        &:hover {
+            background-image: url("@{baseImagePath}img/varsel/alarm_hover.svg");
+        }
+        &:active {
+            background-image: url("@{baseImagePath}img/varsel/alarm_active.svg");
+        }
+
+        &:focus {
+            outline: none;
+            border: 2px solid #ffbd66;
+        }
+    }
+
+    &.har-nye-varsler #toggle-varsler {
+        background-image: url("@{baseImagePath}img/varsel/alarm-nytt-varsel.svg");
+
+        &:hover {
+            background-image: url("@{baseImagePath}img/varsel/alarm-nytt-varsel_hover.svg");
+        }
+
+        &:active {
+            background-image: url("@{baseImagePath}img/varsel/alarm-nytt-varsel_active.svg");
+        }
+    }
+}
+
+.siteheader .varsler-display {
+    position: absolute;
+    width: 320px;
+    padding: 20px 16px 20px 16px;
+    z-index: 1;
+    background-color: white;
+    box-shadow: 0 1px 4px 2px rgba(0, 0, 0, 0.1);
+    font-size: 0.875rem;
+    display: none;
+
+    &.open {
+        display: block;
+    }
+    &.m-open {
+        display: block;
+    }
+    &.open:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 26px;
+        border: 8px solid #fff;
+        z-index: 1000;
+        transform-origin: 0 0;
+        transform: rotate(135deg);
+        box-shadow: -2px 2px 3px 0 rgba(100, 100, 100, 0.1);
+    }
+
+    .nav-varsler {
+        margin-bottom: 0;
+        padding: 0;
+
+        .varsel-liste {
+            .varsel-container:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+        }
+
+        .varsel-innhold {
+            width: ~'calc(100% - 40px)';
+        }
+    }
+    .vis-alle-lenke {
+        border-top: 1px solid #7f756c;
+        text-align: center;
+        padding-top: 12px;
+        margin-top: 12px;
+    }
+}
+
+.toggle-varsler-mobile {
+    background: url('@{baseImagePath}img/varsel/alarm_negativ.svg') no-repeat center;
+    vertical-align: middle;
+
+    &:hover {
+        background: url('@{baseImagePath}img/varsel/alarm_hover_negativ.svg') no-repeat center;
+    }
+    &:active {
+        background: url('@{baseImagePath}img/varsel/alarm_active_negativ.svg') no-repeat center;
+    }
+
+    &.har-nye-varsler {
+        background: url('@{baseImagePath}img/varsel/alarm-nytt-varsel_negativ.svg') no-repeat center;
+
+        &:hover {
+            background: url('@{baseImagePath}img/varsel/alarm-nytt-varsel_hover_negativ.svg') no-repeat center;
+        }
+        &:active {
+            background: url('@{baseImagePath}img/varsel/alarm-nytt-varsel_active_negativ.svg') no-repeat center;
+        }
+    }
+
+    &.skjul {
+        visibility: hidden;
+    }
+}
+
+.contrast {
+    .toggle-varsler-container {
+        #toggle-varsler {
+            background: url("@{baseImagePath}img/varsel/alarm_negativ.svg") no-repeat center;
+
+            &:hover {
+                background-image: url("@{baseImagePath}img/varsel/alarm_hover_negativ.svg");
+            }
+            &:active {
+                background-image: url("@{baseImagePath}img/varsel/alarm_active_negativ.svg");
+            }
+
+            &:focus {
+                outline: none;
+                border: 2px solid #ffbd66;
+            }
+        }
+
+        &.har-nye-varsler #toggle-varsler {
+            background-image: url("@{baseImagePath}img/varsel/alarm-nytt-varsel_negativ.svg");
+
+            &:hover {
+                background-image: url("@{baseImagePath}img/varsel/alarm-nytt-varsel_hover_negativ.svg");
+            }
+
+            &:active {
+                background-image: url("@{baseImagePath}img/varsel/alarm-nytt-varsel_active_negativ.svg");
+            }
+        }
+    }
+}

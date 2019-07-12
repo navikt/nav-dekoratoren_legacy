@@ -1,6 +1,6 @@
 /* Mock innlogget: */
 export default {
-    authenticated: false,
+    authenticated: true,
     name: 'OLE NORMANN',
     securityLevel: '4',
 };

@@ -33,6 +33,7 @@ class LoggInnKnapp extends React.Component<StateProps> {
         const navnLC = erInnlogget && navn ? navn.toLowerCase() : '';
         return (
             <div className="login-container">
+                {navnLC}
                 <div className="login-knapp btn">
                     <KnappBase type="hoved" onClick={this.handleButtonClick}>
                         {knappetekst}
