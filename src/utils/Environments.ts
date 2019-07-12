@@ -3,8 +3,8 @@ const Environments = () => {
         return {
             miljo: 'LOCAL',
             baseUrl: 'http://localhost:3000',
-            loginUrl: 'https://loginservice.nav.no',
-            logoutUrl: 'https://loginservice.nav.no/slo',
+            loginUrl: '#',
+            logoutUrl: '#',
         };
     }
     if (window.location.hostname.indexOf('www-q0') > -1) {
