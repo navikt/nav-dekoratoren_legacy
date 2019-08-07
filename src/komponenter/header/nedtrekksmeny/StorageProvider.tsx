@@ -1,7 +1,7 @@
 import React from 'react';
 import { Person } from '../menyLenker/Person';
 import { Bedrift } from '../menyLenker/Bedrift';
-import { Andre } from '../menyLenker/Andre';
+import { Samhandling } from '../menyLenker/Samhandling';
 
 export const NAVHEADER = 'NAVHEADER';
 
@@ -26,12 +26,19 @@ export const getMeny = (): {
         lenker: { tittel: string; url: string }[];
     }[];
 } => {
-    const windowPathname = sjekkUriAndDispatch(
-        window.location.pathname.split('/')[1]
-    );
-    if (windowPathname[0] && windowPathname[2]) {
-        sessionStorage.setItem(NAVHEADER, windowPathname[1]);
-        return { seksjon: windowPathname[1], menyLenker: windowPathname[2] };
+    const locationPath = window.location.pathname.split('/')[3];
+
+    if (locationPath !== undefined) {
+        const windowPathname = sjekkUriAndDispatch(
+            window.location.pathname.split('/')[3]
+        );
+        if (windowPathname[0] && windowPathname[2]) {
+            sessionStorage.setItem(NAVHEADER, windowPathname[1]);
+            return {
+                seksjon: windowPathname[1],
+                menyLenker: windowPathname[2],
+            };
+        }
     }
     const storage = sessionStorage.getItem(NAVHEADER);
     return storage
@@ -46,7 +53,7 @@ export const mapMenuLinks = (type: string): MenyValg => {
         case 'BEDRIFT':
             return { seksjon: MenuValue.BEDRIFT, menyLenker: Bedrift };
         case 'SAMHANDLING':
-            return { seksjon: MenuValue.SAMHANDLING, menyLenker: Andre };
+            return { seksjon: MenuValue.SAMHANDLING, menyLenker: Samhandling };
         default:
             return { seksjon: MenuValue.PRIVATPERSON, menyLenker: Person };
     }
@@ -82,7 +89,7 @@ const sjekkUriAndDispatch = (
             .toUpperCase()
             .includes('SAMHANDLING')
     ) {
-        return [true, MenuValue.SAMHANDLING, Andre];
+        return [true, MenuValue.SAMHANDLING, Samhandling];
     }
     return [false, MenuValue.PRIVATPERSON, Person];
 };

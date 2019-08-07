@@ -2,7 +2,7 @@ const Environments = () => {
     if (process.env.NODE_ENV === 'development') {
         return {
             miljo: 'LOCAL',
-            baseUrl: 'http://localhost:8080',
+            baseUrl: 'http://localhost:3000',
             loginUrl: '#',
             logoutUrl: '#',
         };
@@ -11,6 +11,7 @@ const Environments = () => {
         return {
             miljo: 'DEV',
             baseUrl: 'https://www-q0.nav.no',
+            loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
         };
     }
@@ -18,12 +19,14 @@ const Environments = () => {
         return {
             miljo: 'DEV',
             baseUrl: 'https://www-q1.nav.no',
+            loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
         };
     }
     return {
         miljo: 'PROD',
         baseUrl: 'https://www.nav.no',
+        loginUrl: 'https://loginservice.nav.no',
         logoutUrl: 'https://loginservice.nav.no/slo',
     };
 };

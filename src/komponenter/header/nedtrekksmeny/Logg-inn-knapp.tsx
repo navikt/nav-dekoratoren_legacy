@@ -4,10 +4,13 @@ import { AppState } from '../../../redux/reducer';
 import KnappBase from 'nav-frontend-knapper';
 import Environments from '../../../utils/Environments';
 
-const { baseUrl, logoutUrl } = Environments();
-const loginUrl = `https://loginservice.nav.no/login?redirect=${baseUrl}`;
+const { baseUrl, logoutUrl, loginUrl } = Environments();
+const path =
+    window.location.pathname.split('/')[3] !== undefined
+        ? '/person/nav-dekoratoren/' + window.location.pathname.split('/')[3]
+        : '/person';
 
-// "https://loginservice.nav.no/login?redirect=",
+const login = `${loginUrl}/login?redirect=${baseUrl}${path}`;
 
 interface StateProps {
     erInnlogget: boolean;
@@ -23,7 +26,7 @@ class LoggInnKnapp extends React.Component<StateProps> {
         if (this.props.erInnlogget) {
             window.location.href = logoutUrl;
         } else {
-            window.location.href = loginUrl;
+            window.location.href = login;
         }
     }
 

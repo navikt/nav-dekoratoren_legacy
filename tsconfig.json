@@ -16,5 +16,5 @@
         "forceConsistentCasingInFileNames": false
     },
     "include": ["src"],
-    "exclude": ["src/server"]
+    "exclude": ["server"]
 }
