@@ -46,8 +46,8 @@ function handterFeil(
     };
 }
 
-export async function fetchToJson<T>(url: string): Promise<T> {
-    const respons = await fetch(url);
+export async function fetchToJson<T>(url: string, config?: RequestInit): Promise<T> {
+    const respons = await fetch(url, config);
     const gyldigRespons = sjekkStatuskode(respons);
     return await toJson<T>(gyldigRespons);
 }

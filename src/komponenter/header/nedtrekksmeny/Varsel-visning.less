@@ -1,0 +1,111 @@
+.varsler-display {
+    display: block;
+    position: absolute;
+    top: 149.363px;
+    right: 218.1px;
+    left: auto;
+
+    width: 320px;
+    padding: 1.25rem 1rem 1.25rem 1rem;
+    z-index: 1;
+    background-color: white;
+    box-shadow: 0 1px 4px 2px rgba(0, 0, 0, 0.1);
+    font-size: 0.875rem;
+
+    .typo-infotekst {
+        font-size: 1rem;
+        font-family: Arial,sans-serif;
+        font-weight: 400;
+    }
+
+    .panel {
+        background-color: white;
+        display: block;
+        border-radius: 0.25rem;
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 1.625rem;
+        border: 0.5rem solid white;
+        z-index: 1000;
+        transform-origin: 0 0;
+        transform: rotate(135deg);
+        box-shadow: -2px 2px 3px 0 rgba(100, 100, 100, 0.1);
+    }
+
+    .nav-varsler {
+        margin-bottom: 0;
+        padding: 0;
+
+        .varsel-liste .varsel-container {
+
+            &:not(:last-child) {
+                border-bottom: 1px solid #7f756c;
+                padding-bottom: 0.75rem;
+                margin-bottom: 0.75rem;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+
+            .varsel {
+                display: flex;
+                padding: 0.25rem;
+
+                .varsel-ikon {
+                    background: #ffe4c2 url("../ikoner/varsler/alarm.svg") no-repeat center;
+                    flex: 0 0 2.5rem;
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    margin-right: 0.5rem;
+                }
+
+                .varsel-ikon.kalender {
+                    background: #ecefcc url("../ikoner/varsler/calendar-3.svg") no-repeat center;
+                }
+
+                .varsel-ikon.boble {
+                    background: #f1d8d4 url("../ikoner/varsler/bubble-chat-2.svg") no-repeat center;
+                }
+
+                .varsel-ikon.dokument {
+                    background: #e0dae7 url("../ikoner/varsler/file-new-1.svg") no-repeat center;
+                }
+
+                .varsel-ikon.digisyfo {
+                    background: #e0f5fb url("../ikoner/varsler/first-aid-plaster.svg") no-repeat center;
+                }
+
+                .varsel-innhold {
+                    width: ~'calc(100% - 2.5rem)';
+                    overflow-wrap: break-word;
+                    color: #3e3832;
+
+                    .varsel-dato {
+                        color: #7f756c;
+                    }
+                    p {
+                        margin-bottom: 0.25rem;
+                    }
+                }
+                .hide-text {
+                    text-indent: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+    .vis-alle-lenke {
+        border-top: 1px solid #7f756c;
+        text-align: center;
+        padding-top: 0.75rem;
+        margin-top: 0.75rem;
+    }
+}

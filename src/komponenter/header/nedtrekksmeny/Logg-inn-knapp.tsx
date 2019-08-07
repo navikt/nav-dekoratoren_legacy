@@ -25,7 +25,7 @@ class LoggInnKnapp extends React.Component<StateProps> {
         } else {
             window.location.href = loginUrl;
         }
-    };
+    }
 
     render() {
         const { erInnlogget, navn } = this.props;

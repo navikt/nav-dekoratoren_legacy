@@ -64,6 +64,7 @@
         "typescript": "^3.4.5"
     },
     "devDependencies": {
+        "@types/classnames": "^2.2.9",
         "@types/jest": "^24.0.13",
         "@types/node": "^12.0.4",
         "@types/query-string": "5.1.0",

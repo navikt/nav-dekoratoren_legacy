@@ -31,7 +31,7 @@ class Header extends React.Component<{}, State> {
         this.setState({
             clicked: !this.state.clicked,
         });
-    };
+    }
 
     private setMenuStorage = (
         e: React.MouseEvent<HTMLAnchorElement>,
@@ -40,7 +40,7 @@ class Header extends React.Component<{}, State> {
     ): void => {
         e.preventDefault();
         const headervalg = sessionStorage.getItem(NAVHEADER);
-        if (headervalg && headervalg == valgVerdi) {
+        if (headervalg && headervalg === valgVerdi) {
             return;
         }
         sessionStorage.setItem(NAVHEADER, valgVerdi);
@@ -48,7 +48,7 @@ class Header extends React.Component<{}, State> {
             valgtmeny: mapMenuLinks(valgVerdi),
         });
         window.location.href = url;
-    };
+    }
 
     render() {
         return (

@@ -5,6 +5,7 @@ import FetchMock, { Middleware, MiddlewareUtils } from 'yet-another-fetch-mock';
 
 export default () => {
     const loggingMiddleware: Middleware = (request, response) => {
+        console.log(request.url, request.method, response);
         return response;
     };
 
@@ -21,5 +22,7 @@ export default () => {
 
     fetchMock.get(API.innloggingsstatusURL, innloggingsstatusResponse);
 
-    fetchMock.get(API.varselinnboksURL, varselinnboksResponse);
+    fetchMock.get(API.getVarselinnboksURL, varselinnboksResponse);
+
+    fetchMock.post(`${API.postVarselinnboksURL}/33475442`, ({body}) => body);
 };

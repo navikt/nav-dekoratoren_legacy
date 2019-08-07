@@ -1,7 +1,7 @@
 import React from 'react';
 import LoggInnKnapp from './Logg-inn-knapp';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
-import Varselinnboks from './Varselinnboks';
+import Varselbjelle from './Varselbjelle';
 import Lenke from 'nav-frontend-lenker';
 import { Undertittel } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
@@ -37,7 +37,7 @@ const NedtrekkMeny: React.FunctionComponent<Props> = props => {
                     <Sok />
                 </MediaQuery>
                 <VarselinnboksProvider>
-                    <Varselinnboks />
+                    <Varselbjelle />
                 </VarselinnboksProvider>
                 <div className={cls.element('hoyreMeny')}>
                     <LoggInnKnapp />

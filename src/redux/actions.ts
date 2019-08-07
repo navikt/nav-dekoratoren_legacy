@@ -9,6 +9,9 @@ export enum ActionType {
     HENT_VARSLER_FEILET = 'HENT_VARSLER_FEILET',
     HENT_VARSLER_PENDING = 'HENT_VARSLER_PENDING',
     SETT_VARSLER_OK = 'SETT_VARSLER_OK',
+    SETT_VARSLER_LEST_OK = 'SETT_VARSLER_LEST_OK',
+    SETT_VARSLER_LEST_FEILET = 'SETT_VARSLER_LEST_FEILET',
+    SETT_VARSLER_LEST_PENDING = 'SETT_VARSLER_LEST_PENDING',
 }
 
 export interface HentInnloggingsstatusOKAction {
@@ -41,6 +44,19 @@ export interface SettVarslerOKAction {
     type: ActionType.SETT_VARSLER_OK;
 }
 
+export interface SettVarslerLestOKAction {
+    type: ActionType.SETT_VARSLER_LEST_OK;
+    nyesteId: number;
+}
+
+export interface SettVarslerLestPENDINGAction {
+    type: ActionType.SETT_VARSLER_LEST_PENDING;
+}
+
+export interface SettVarslerLestFEILETAction {
+    type: ActionType.SETT_VARSLER_LEST_FEILET;
+}
+
 export type Handling =
     | HentInnloggingsstatusOKAction
     | HentInnloggingsstatusFEILETAction
@@ -48,4 +64,7 @@ export type Handling =
     | HentVarslerOKAction
     | HentVarslerFEILETAction
     | HentVarslerPENDINGAction
-    | SettVarslerOKAction;
+    | SettVarslerOKAction
+    | SettVarslerLestOKAction
+    | SettVarslerLestFEILETAction
+    | SettVarslerLestPENDINGAction;
