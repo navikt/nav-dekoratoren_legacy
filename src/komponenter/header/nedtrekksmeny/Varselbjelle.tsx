@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { createRef } from 'react';
 import parse from 'html-react-parser';
 import { AppState } from '../../../redux/reducer';
 import { Dispatch } from '../../../redux/dispatch-type';
@@ -24,25 +24,47 @@ interface State {
     classname: string;
 }
 
-type VarselinnboksProps = StateProps & DispatchProps;
+type VarselbjelleProps = StateProps & DispatchProps;
 
-class Varselbjelle extends React.Component<VarselinnboksProps, State> {
-    constructor(props: VarselinnboksProps) {
+class Varselbjelle extends React.Component<VarselbjelleProps, State> {
+
+    private varselbjelleRef = createRef<HTMLDivElement>();
+
+    constructor(props: VarselbjelleProps) {
         super(props);
         this.state = {
             clicked: false,
-            classname: this.props.antallUlesteVarsler > 0 ? 'toggle-varsler-container har-nye-varsler' : 'toggle-varsler-container'
+            classname: this.props.antallUlesteVarsler > 0
+                ? 'toggle-varsler-container har-nye-varsler'
+                : 'toggle-varsler-container'
         };
+        this.handleClick = this.handleClick.bind(this);
+        this.handleOutsideClick = this.handleOutsideClick.bind(this);
     }
 
-    setStateAndDispatch = () => {
+    handleClick = () => {
+        if (!this.state.clicked) {
+            document.addEventListener('click', this.handleOutsideClick, false);
+        } else {
+            document.removeEventListener('click', this.handleOutsideClick, false);
+        }
+
         this.setState({
             clicked: !this.state.clicked
         });
+
         if (this.props.antallUlesteVarsler > 0) {
             this.setState({classname: 'toggle-varsler-container'});
             this.props.doSettVarslerSomLest(this.props.nyesteId);
         }
+    }
+
+    handleOutsideClick: ({(event: MouseEvent): void}) = (e: MouseEvent) => {
+        const node = this.varselbjelleRef.current;
+        if (node && node.contains(e.target as HTMLElement)) {
+            return;
+        }
+        this.handleClick();
     }
 
     render() {
@@ -50,18 +72,16 @@ class Varselbjelle extends React.Component<VarselinnboksProps, State> {
         const html = parse(varsler);
 
         return (
-            <>
+            <div ref={this.varselbjelleRef}>
                 {erInnlogget
                     ? (<div id="toggle-varsler-container" className={this.state.classname}>
                             <button
-                                type="button"
-                                onClick={this.setStateAndDispatch}
-                                id="toggle-varsler"
+                                onClick={this.handleClick}
                                 className="toggle-varsler"
+                                title="Varsler"
+                                aria-label="Varsler"
                                 aria-haspopup="true"
                                 aria-controls="varsler-display"
-                                aria-label="Varsler"
-                                title="Varsler"
                                 aria-expanded={this.state.clicked}
                             />
                        </div>)
@@ -74,7 +94,7 @@ class Varselbjelle extends React.Component<VarselinnboksProps, State> {
                         antallUlesteVarsler={antallUlesteVarsler}
                     />
                 }
-            </>
+            </div>
         );
     }
 }
