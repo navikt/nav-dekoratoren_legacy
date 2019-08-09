@@ -1,3 +1,5 @@
+@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+
 .varsler-display {
     display: block;
     position: absolute;
@@ -11,6 +13,32 @@
     background-color: white;
     box-shadow: 0 1px 4px 2px rgba(0, 0, 0, 0.1);
     font-size: 0.875rem;
+
+    a {
+        color: @navBla;
+        background: none;
+        text-decoration: underline;
+        cursor: pointer;
+
+        &:hover,
+        &--hover {
+            text-decoration: none;
+        }
+
+        &:focus,
+        &--focus {
+            outline: none;
+            color: white;
+            text-decoration: none;
+            background-color: @fokusFarge;
+            box-shadow: 0 0 0 2px @fokusFarge;
+        }
+
+        &:active,
+        &--active {
+            color: white;
+        }
+    }
 
     .typo-infotekst {
         font-size: 1rem;

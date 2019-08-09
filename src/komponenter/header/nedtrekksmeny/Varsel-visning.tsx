@@ -1,6 +1,4 @@
 import React from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
 import { varselinnboksUrl } from '../../../api/api';
 import './Varsel-visning.less';
 
@@ -16,12 +14,10 @@ const VarselVisning: React.FunctionComponent<OwnProps> = props => {
             {props.html}
             {props.antallVarsler > 5 && (
             <div className="vis-alle-lenke skillelinje-topp">
-                <Lenke href={varselinnboksUrl}>
-                    <Normaltekst>
+                <a href={varselinnboksUrl}>
                         Vis alle dine varsler
                         { props.antallUlesteVarsler > 0 ? ` (${props.antallUlesteVarsler} nye)` : ''}
-                    </Normaltekst>
-                </Lenke>
+                </a>
             </div>
             )}
         </div>
