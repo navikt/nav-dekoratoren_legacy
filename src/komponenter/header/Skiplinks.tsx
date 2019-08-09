@@ -4,23 +4,18 @@ import './Skiplinks.less';
 class Skiplinks extends React.Component {
     render() {
         return (
-            <>
+            <div id="skiplinks">
                 <div className="hodefot">
-                    <h2 className="divider">Skip links</h2>
+                    <nav>
+                        <a href="#" className="visuallyhidden focusable">
+                            Til hovedmeny
+                        </a>
+                        <a href="#" className="visuallyhidden focusable">
+                            Til hovedinnhold
+                        </a>
+                    </nav>
                 </div>
-                <div id="skiplinks">
-                    <div className="hodefot">
-                        <nav>
-                            <a href="#" className="visuallyhidden focusable">
-                                Til hovedmeny
-                            </a>
-                            <a href="#" className="visuallyhidden focusable">
-                                Til hovedinnhold
-                            </a>
-                        </nav>
-                    </div>
-                </div>
-            </>
+            </div>
         );
     }
 }

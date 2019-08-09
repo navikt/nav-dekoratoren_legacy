@@ -1,6 +1,4 @@
-.divider {
-    opacity: 0;
-}
+@import '../../../node_modules/nav-frontend-core/less/_variabler';
 
 .visuallyhidden {
     border: 0;
@@ -11,4 +9,20 @@
     padding: 0;
     position: absolute;
     width: 1px;
+
+    &.focusable:focus,
+    &.focusable:active {
+        clip: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        width: auto;
+    }
+    &.focusable:focus {
+        outline: none;
+        color: white;
+        text-decoration: none;
+        background-color: @fokusFarge;
+        box-shadow: 0 0 0 2px @fokusFarge;
+    }
 }
