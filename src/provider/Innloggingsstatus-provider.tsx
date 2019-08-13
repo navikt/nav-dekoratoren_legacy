@@ -36,7 +36,7 @@ const InnloggingsstatusProvider: React.FunctionComponent<InnloggingsstatusProvid
             {props.children}
         </Datalaster>
     );
-}
+};
 
 const mapStateToProps = (state: AppState): StateProps => ({
     innloggingsstatus: state.innloggingsstatus,
