@@ -22,7 +22,7 @@ export default () => {
 
     fetchMock.get(API.innloggingsstatusURL, innloggingsstatusResponse);
 
-    fetchMock.get(API.getVarselinnboksURL, varselinnboksResponse);
+    fetchMock.get(`${API.getVarselinnboksURL}(.*)`, varselinnboksResponse);
 
     fetchMock.post(`${API.postVarselinnboksURL}/33475442`, ({body}) => body);
 };

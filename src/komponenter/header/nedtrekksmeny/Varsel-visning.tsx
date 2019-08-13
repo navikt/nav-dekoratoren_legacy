@@ -23,4 +23,5 @@ const VarselVisning: React.FunctionComponent<OwnProps> = props => {
         </div>
     );
 };
+
 export default VarselVisning;

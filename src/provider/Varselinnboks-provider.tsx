@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from '../redux/dispatch-type';
 import {
@@ -25,27 +25,25 @@ interface DispatchProps {
 
 type VarselinnboksProviderProps = OwnProps & StateProps & DispatchProps;
 
-class VarselinnboksProvider extends React.Component<VarselinnboksProviderProps> {
-    constructor(props: VarselinnboksProviderProps) {
-        super(props);
-    }
+const VarselinnboksProvider: React.FunctionComponent<VarselinnboksProviderProps> = props => {
 
-    componentDidMount() {
-        if (this.props.erInnlogget) {
-            this.props.doHentVarselinnboks();
-        } else {
-            this.props.doSettVarselinnboksOK();
-        }
-    }
+    useEffect(
+        () => {
+            if (props.erInnlogget) {
+                props.doHentVarselinnboks();
+            } else {
+                props.doSettVarselinnboksOK();
+            }
+        },
+        []
+    );
 
-    render() {
-        return (
-            <Datalaster avhengigheter={[this.props.varsler]}>
-                {this.props.children}
-            </Datalaster>
-        );
-    }
-}
+    return (
+        <Datalaster avhengigheter={[props.varsler]}>
+            {props.children}
+        </Datalaster>
+    );
+};
 
 const mapStateToProps = (state: AppState): StateProps => ({
     varsler: state.varsler,

@@ -23,7 +23,9 @@ export function hentInnloggingsstatusFetch(): Promise<innloggingsstatusData> {
 }
 
 export function hentVarslerFetch(): Promise<varselinnboksData> {
-    return fetchToJson(API.getVarselinnboksURL);
+    const tidspunkt = new Date().getTime();
+    const queryParams = `?noCache=${tidspunkt}&limit=5`;
+    return fetchToJson(API.getVarselinnboksURL + queryParams);
 }
 
 export function lagreVarslerLestFetch(nyesteId: number): Promise<number> {
