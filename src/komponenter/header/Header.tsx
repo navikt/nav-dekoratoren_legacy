@@ -12,6 +12,7 @@ import {
 import HovedSeksjon from './nedtrekksmeny/HovedSeksjon';
 import MinsideSeksjon from './nedtrekksmeny/MinsideSeksjon';
 import { toppMenyLenker } from './menyLenker/ToppMenyLenker';
+import Skiplinks from './Skiplinks';
 
 interface State {
     clicked: boolean;
@@ -31,7 +32,7 @@ class Header extends React.Component<{}, State> {
         this.setState({
             clicked: !this.state.clicked,
         });
-    };
+    }
 
     private setMenuStorage = (
         e: React.MouseEvent<HTMLAnchorElement>,
@@ -40,7 +41,7 @@ class Header extends React.Component<{}, State> {
     ): void => {
         e.preventDefault();
         const headervalg = sessionStorage.getItem(NAVHEADER);
-        if (headervalg && headervalg == valgVerdi) {
+        if (headervalg && headervalg === valgVerdi) {
             return;
         }
         sessionStorage.setItem(NAVHEADER, valgVerdi);
@@ -48,33 +49,36 @@ class Header extends React.Component<{}, State> {
             valgtmeny: mapMenuLinks(valgVerdi),
         });
         window.location.href = url;
-    };
+    }
 
     render() {
         return (
-            <div id="header-withmenu">
-                <div className="hodefot">
-                    <header className="siteheader blokk-m">
-                        <div className="innhold-container">
-                            <Toppmeny
-                                lenker={toppMenyLenker}
-                                menyValg={this.state.valgtmeny.seksjon}
-                                callMenuStorage={this.setMenuStorage}
-                            />
-                            <NedtrekksMeny
-                                dropDownExpand={this.dropDownExpand}
-                                clicked={this.state.clicked}
-                            >
-                                <HovedSeksjon
-                                    classname="nedtrekksmeny"
-                                    menyLenker={this.state.valgtmeny.menyLenker}
+            <>
+                <Skiplinks/>
+                <div id="header-withmenu">
+                    <div className="hodefot">
+                        <header className="siteheader blokk-m">
+                            <div className="innhold-container">
+                                <Toppmeny
+                                    lenker={toppMenyLenker}
+                                    menyValg={this.state.valgtmeny.seksjon}
+                                    callMenuStorage={this.setMenuStorage}
                                 />
-                                <MinsideSeksjon className="nedtrekksmeny" />
-                            </NedtrekksMeny>
-                        </div>
-                    </header>
+                                <NedtrekksMeny
+                                    dropDownExpand={this.dropDownExpand}
+                                    clicked={this.state.clicked}
+                                >
+                                    <HovedSeksjon
+                                        classname="nedtrekksmeny"
+                                        menyLenker={this.state.valgtmeny.menyLenker}
+                                    />
+                                    <MinsideSeksjon className="nedtrekksmeny" />
+                                </NedtrekksMeny>
+                            </div>
+                        </header>
+                    </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

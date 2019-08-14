@@ -9,5 +9,4 @@ export default {
 
 export default {
     authenticated: false
-};
-*/
+}; */

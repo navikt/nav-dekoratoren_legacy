@@ -38,7 +38,7 @@ const Toppmeny = (props: Props) => {
                                     <a
                                         className={cls.element(
                                             'hoved',
-                                            props.menyValg == lenke.tittel
+                                            props.menyValg === lenke.tittel
                                                 ? 'active'
                                                 : ''
                                         )}

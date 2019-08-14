@@ -30,6 +30,7 @@
         "classnames": "^2.2.6",
         "craco-less": "1.7.0",
         "express": "^4.17.1",
+        "html-react-parser": "^0.9.1",
         "less-plugin-npm-import": "^2.1.0",
         "lodash.throttle": "^4.1.1",
         "nav-frontend-alertstriper": "3.0.3",
@@ -63,6 +64,7 @@
         "typescript": "^3.4.5"
     },
     "devDependencies": {
+        "@types/classnames": "^2.2.9",
         "@types/jest": "^24.0.13",
         "@types/node": "^12.0.4",
         "@types/query-string": "5.1.0",

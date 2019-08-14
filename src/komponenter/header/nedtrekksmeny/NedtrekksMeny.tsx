@@ -1,12 +1,15 @@
 import React from 'react';
-import LoggInnKnapp from './Logg-inn-knapp';
 import Lenke from 'nav-frontend-lenker';
 import { Undertittel } from 'nav-frontend-typografi';
-import BEMHelper from '../../../utils/bem';
-import HamburgerIkon from '../ikoner/HamburgerIkon';
-import './Nedtrekksmeny.less';
+import LoggInnKnapp from './Logg-inn-knapp';
+import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
+import Varselbjelle from './Varselbjelle';
 import Sok from './Sok';
+import MinsideLenke from './MinsideLenke';
+import HamburgerIkon from '../ikoner/HamburgerIkon';
+import BEMHelper from '../../../utils/bem';
 import MediaQuery from 'react-responsive';
+import './Nedtrekksmeny.less';
 
 const cls = BEMHelper('nedtrekksmeny');
 
@@ -34,6 +37,10 @@ const NedtrekkMeny: React.FunctionComponent<Props> = props => {
                 <MediaQuery minWidth={768}>
                     <Sok />
                 </MediaQuery>
+                <VarselinnboksProvider>
+                    <Varselbjelle />
+                </VarselinnboksProvider>
+                <MinsideLenke/>
                 <div className={cls.element('hoyreMeny')}>
                     <LoggInnKnapp />
                 </div>
