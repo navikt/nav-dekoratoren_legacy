@@ -1,4 +1,186 @@
 import * as React from 'react';
+// import { Input } from 'nav-frontend-skjema';
+import { API } from '../../../api/api';
+import throttle from 'lodash.throttle';
+import Downshift from 'downshift';
+import './Sok.less';
+// import SokInput from './Sok-input';
+
+interface Data {
+    priority: boolean;
+    displayName: string;
+    href: string;
+    highlight: string;
+    publish: {
+        from: string;
+        first: string;
+    };
+    modifiedTime: string;
+    className: string;
+}
+
+export const defaultData: Data = {
+    priority: false,
+    displayName: '',
+    href: '',
+    highlight: '',
+    publish: {
+        from: '',
+        first: '',
+    },
+    modifiedTime: '',
+    className: '',
+};
+
+interface Sokeresultat {
+    overskrift: string;
+    highlight: string;
+}
+
+export function Sokeresultat({ overskrift, highlight }: Sokeresultat ) {
+    return <div><div className="overskrift">{overskrift}</div><div className="highlight">{highlight}</div></div>;
+}
+
+interface InputState {
+    inputString: string;
+    items: Data[];
+}
+
+class Sok extends React.Component<{}, InputState> {
+
+    handleInputThrottled: ReturnType<typeof throttle>
+
+    constructor(props: {}) {
+        super(props);
+        this.state = {
+            inputString: '',
+            items: [defaultData],
+        };
+        this.handleInputThrottled = throttle(this.handleChange.bind(this), 2000);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(e: string) {
+        const url = API.sokeresultat;
+
+        this.setState({
+            inputString: e,
+        });
+
+        fetch(`${url}?ord=${e}`)
+            .then(response => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    throw new Error(response.statusText);
+                }
+            })
+            .then(response => response.json())
+            .then(json => {
+                this.setState({
+                    items: json.hits,
+                });
+                console.log('json:', json);
+            });
+        console.log('state:', this.state.items);
+    }
+
+    handleSubmit(e: React.FormEvent<HTMLFormElement>, url: string) {
+        e.preventDefault();
+        location.href = url;
+    }
+
+    render() {
+        const { inputString, items } = this.state;
+        const URL = `${'https://www-x1.nav.no/sok'}?ord=${inputString}`;
+
+        return (
+            <form
+                className="input-container"
+                role="search"
+                onSubmit={event => this.handleSubmit(event, URL)}
+            >
+                <Downshift
+                    onInputValueChange={ (changes: string) => {
+                        console.log('Changes', changes);
+                        this.handleChange(changes);
+                    }}
+                    itemToString={item => (item ? item.highlight : '')}
+                >
+                    {({
+                          getInputProps,
+                          getItemProps,
+                          getLabelProps,
+                          getMenuProps,
+                          isOpen,
+                          inputValue,
+                          highlightedIndex,
+                          selectedItem,
+                      }) => (
+                        <div className="sok">
+
+                                <input
+                                    {...getInputProps(
+                                        {className: 'sok-input', label: 'Søk:', placeholder: 'Hva leter du etter?'}
+                                    )}
+                                    // className="sok-input"
+                                    // type="search"
+                                    // label="Søk:"
+                                    aria-label="Søk"
+                                    // placeholder="Hva leter du etter?"
+                                    /* onChange={event => {
+                                        this.handleInputThrottled(event);
+                                    }} */
+                                />
+                                <div className="sok-knapp btn">
+                                    <button className="knapp knapp--hoved" type="submit">
+                                        SØK
+                                    </button>
+                                </div>
+                                <ul {...getMenuProps()}>
+                                    {isOpen
+                                        ? items
+                                            .filter(item => !inputValue || item.highlight.includes(inputValue))
+                                            .map((item, index) => (
+                                                <li
+                                                    {...getItemProps({
+                                                        key: item.href,
+                                                        index,
+                                                        item,
+                                                        style: {
+                                                            backgroundColor:
+                                                                highlightedIndex === index ? 'lightgray' : 'white',
+                                                            fontWeight: selectedItem === item ? 'bold' : 'normal',
+                                                        },
+                                                    })}
+                                                >
+                                                    {item.highlight}
+                                                </li>
+                                            ))
+                                        : null}
+                                </ul>
+
+                        </div>
+                    )}
+                </Downshift>
+            </form>
+        );
+    }
+}
+
+export default Sok;
+
+/*
+
+                            <div>
+                                {fetchdata
+                                    ? fetchdata.map(result => (
+                                        <Sokeresultat overskrift={result.displayName} highlight={result.highlight} />
+                                    ))
+                                    : null}
+                            </div>
+
+import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
 import { API } from '../../../api/api';
 import throttle from 'lodash.throttle';
@@ -37,10 +219,7 @@ interface Sokeresultat {
 }
 
 export function Sokeresultat({ overskrift, highlight }: Sokeresultat ) {
-    return <div>
-             <div className="overskrift">{overskrift}</div>
-        <div className="highlight">{highlight}</div>
-    </div>;
+    return <div><div className="overskrift">{overskrift}</div><div className="highlight">{highlight}</div></div>;
 }
 
 interface InputState {
@@ -58,7 +237,7 @@ class Sok extends React.Component<{}, InputState> {
             inputValue: '',
             fetchdata: [defaultData],
         };
-        this.handleInputThrottled = throttle(this.handleChange.bind(this), 1000);
+        this.handleInputThrottled = throttle(this.handleChange.bind(this), 2000);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -132,6 +311,7 @@ class Sok extends React.Component<{}, InputState> {
 }
 
 export default Sok;
+ */
 
 /*
 

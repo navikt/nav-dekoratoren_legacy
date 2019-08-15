@@ -80,9 +80,11 @@ export default {
             displayName:
                 'Leveattester til mottakere av pensjon og uføretrygd i utlandet',
             href:
-                '/no/person/flere-tema/arbeid-og-opphold-i-utlandet/relatert-informasjon/leveattester-til-mottakere-av-pensjon-og-uforetrygd-i-utlandet',
+                '/no/person/flere-tema/arbeid-og-opphold-i-utlandet/relatert-informasjon/leveattester-til-' +
+                'mottakere-av-pensjon-og-uforetrygd-i-utlandet',
             highlight:
-                'Leveattester innhentes for å sikre at <b>pensjon</b> og uføretrygd blir utbetalt til rett mottaker. Dette kontrolltiltaket reduserer risikoen for feilutbetalinger i forbindelse med dødsfall.De som skal (...)',
+                'Leveattester innhentes for å sikre at <b>pensjon</b> og uføretrygd blir utbetalt til rett mottaker. ' +
+                'Dette kontrolltiltaket reduserer risikoen for feilutbetalinger i forbindelse med dødsfall.De som skal (...)',
             publish: {
                 from: '2016-04-06T10:28:00Z',
                 first: '2016-04-06T10:28:00Z',
@@ -96,7 +98,9 @@ export default {
             href:
                 '/no/nav-og-samfunn/om-nav/relatert-informasjon/du-har-plikt-til-a-gi-nav-riktige-opplysninger',
             highlight:
-                ' utbetalingen din:du begynner å tjene mer eller mindre enn du tidligere har oppgitt til NAV. Mottar du <b>pensjon</b> eller uføretrygd, kan også inntekten til ektefelle/samboer/partner ha betydning for din (...)',
+                ' utbetalingen din:du begynner å tjene mer eller mindre enn du tidligere har oppgitt til NAV. Mottar ' +
+                'du <b>pensjon</b> eller uføretrygd, kan også inntekten til ektefelle/samboer/partner ha betydning for ' +
+                'din (...)',
             publish: {
                 from: '2013-07-02T13:52:00Z',
                 first: '2013-07-02T13:52:00Z',
@@ -123,7 +127,9 @@ export default {
             href:
                 '/no/nav-og-samfunn/kontakt-nav/utbetalinger/utbetalinger/utbetalingsmeldingene-finner-du-pa-nett',
             highlight:
-                'Kun utbetalingsmeldinger for sykepenger sendes i posten eller til digital postkasse. I tillegg kan <b>pensjonister</b> og uføretrygdede få utbetalingsmeldingen tilsendt i posten hver måned dersom de er (...)',
+                'Kun utbetalingsmeldinger for sykepenger sendes i posten eller til digital postkasse. I tillegg ' +
+                'kan <b>pensjonister</b> og uføretrygdede få utbetalingsmeldingen tilsendt i posten hver måned dersom ' +
+                'de er (...)',
             publish: {
                 from: '2016-10-28T06:43:00Z',
                 first: '2016-10-28T06:43:00Z',
@@ -137,7 +143,9 @@ export default {
             href:
                 '/no/person/flere-tema/arbeid-og-opphold-i-norge/informasjon-om-tjenester-og-ytelser-fra-nav',
             highlight:
-                ' inntekt i forbindelse med fødsel. Du har krav på foreldrepenger hvis du har vært i jobb og har hatt <b>pensjonsgivende</b> inntekt i minst seks av de ti siste månedene før stønadssperioden starter.Medlemmer&nbsp;i (...)',
+                ' inntekt i forbindelse med fødsel. Du har krav på foreldrepenger hvis du har vært i jobb ' +
+                'og har hatt <b>pensjonsgivende</b> inntekt i minst seks av de ti siste månedene før stønadssperioden ' +
+                'starter.Medlemmer&nbsp;i (...)',
             publish: {
                 from: '2019-05-03T12:52:59.539943300Z',
                 first: '2019-05-03T12:52:59.539943300Z',
@@ -151,7 +159,8 @@ export default {
             href:
                 '/no/person/pensjon/andre-pensjonsordninger/ytelser-til-gjenlevende-ektefelle',
             highlight:
-                '<b>Gjenlevendepensjon</b> og overgangsstønad til gjenlevende er ytelser som skal bidra til å sikre ektefelle/samboer inntekt til livsopphold etter dødsfall.',
+                '<b>Gjenlevendepensjon</b> og overgangsstønad til gjenlevende er ytelser som skal bidra til å sikre ' +
+                'ektefelle/samboer inntekt til livsopphold etter dødsfall.',
             publish: {
                 from: '2006-10-23T14:48:00Z',
                 first: '2006-10-23T14:48:00Z',
@@ -164,7 +173,9 @@ export default {
             displayName: 'Uføretrygd',
             href: '/no/person/pensjon/uforetrygd',
             highlight:
-                ' fosterhjemsgodtgjørelse.Du kan i tillegg til uføretrygd fra folketrygden ha rett til uføreytelse fra en <b>tjenestepensjonsordning</b>, som for eksempel Statens <b>Pensjonskasse</b> (SPK) eller Kommunal <b>Landspensjonskasse</b> (...)',
+                ' fosterhjemsgodtgjørelse.Du kan i tillegg til uføretrygd fra folketrygden ha rett til uføreytelse fra ' +
+                'en <b>tjenestepensjonsordning</b>, som for eksempel Statens <b>Pensjonskasse</b> (SPK) eller ' +
+                'Kommunal <b>Landspensjonskasse</b> (...)',
             publish: {
                 from: '2019-05-03T12:52:59.539943300Z',
                 first: '2019-05-03T12:52:59.539943300Z',
@@ -178,7 +189,9 @@ export default {
             href:
                 '/no/person/flere-tema/arbeid-og-opphold-i-norge/relatert-informasjon/medlemskap-i-folketrygden',
             highlight:
-                ' India.TrygdeavgiftMedlemskap i folketrygden betyr at du må betale trygdeavgift dersom du har inntekt fra <b>pensjon</b> eller arbeid.Hvor mye du skal betale i trygdeavgift, avhenger avom du er skattepliktig (...)',
+                ' India.TrygdeavgiftMedlemskap i folketrygden betyr at du må betale trygdeavgift dersom du har inntekt ' +
+                'fra <b>pensjon</b> eller arbeid.Hvor mye du skal betale i trygdeavgift, avhenger avom du er ' +
+                'skattepliktig (...)',
             publish: {
                 from: '2007-03-16T11:28:00Z',
                 first: '2007-03-16T11:28:00Z',
@@ -192,7 +205,9 @@ export default {
             href:
                 '/no/person/familie/barnetrygd-og-kontantstotte/kontantstotte',
             highlight:
-                ' foreldrene er utsendt arbeidstaker fra Norge i inntil 24 måneder, eller at en av foreldrene mottar <b>pensjon</b> fra Norge.Du beholder kontantstøtten hvis du og familien din skal oppholde dere i utlandet (...)',
+                ' foreldrene er utsendt arbeidstaker fra Norge i inntil 24 måneder, eller at en av foreldrene ' +
+                'mottar <b>pensjon</b> fra Norge.Du beholder kontantstøtten hvis du og familien din skal oppholde dere ' +
+                'i utlandet (...)',
             publish: {
                 from: '2006-08-15T11:26:00Z',
                 first: '2006-08-15T11:26:00Z',
@@ -230,7 +245,8 @@ export default {
             displayName: 'Din pensjon',
             href: '/www.nav.no/sok/_/error/400?message=URI+out+of+scope',
             highlight:
-                'Nettenesten Din <b>pensjon</b> gjev deg god oversikt over eigen <b>pensjon</b>. Her kan du blant anna sjå oppteninga di, berekne den framtidige <b>alderspensjonen</b> din (tidlegare kalla serviceberekning), (...)',
+                'Nettenesten Din <b>pensjon</b> gjev deg god oversikt over eigen <b>pensjon</b>. Her kan du blant anna sjå ' +
+                'oppteninga di, berekne den framtidige <b>alderspensjonen</b> din (tidlegare kalla serviceberekning), (...)',
             publish: {
                 from: '2012-04-10T06:23:00Z',
                 first: '2012-04-10T06:23:00Z',
@@ -257,7 +273,9 @@ export default {
             displayName: 'Din pensjon',
             href: '/no/person/pensjon/hva-kan-jeg-fa-i-pensjon',
             highlight:
-                'Nettjenesten Din <b>pensjon</b> gir deg god oversikt over egen <b>pensjon</b>. Her kan du blant annet se din opptjening, beregne din fremtidige <b>alderspensjon</b> (tidligere kalt serviceberegning), søke (...)',
+                'Nettjenesten Din <b>pensjon</b> gir deg god oversikt over egen <b>pensjon</b>. Her kan du blant annet ' +
+                'se din opptjening, beregne din fremtidige <b>alderspensjon</b> (tidligere kalt serviceberegning), ' +
+                'søke (...)',
             publish: {
                 from: '2019-05-03T12:52:59.539943300Z',
                 first: '2019-05-03T12:52:59.539943300Z',
@@ -272,7 +290,9 @@ export default {
             href:
                 '/no/nav-og-samfunn/statistikk/pensjon-statistikk/relatert-informasjon/arkiv-ytelser-til-gjenlevende-pr.31.desember-2001-2010',
             highlight:
-                ' ny saksbehandlingsløsning. Se Om statistikken - Ytelser til gjenlevende.        Antall personer med <b>pensjon</b> som gjenlevende ektefelle/samboer/partner, gikk ned fra 26&nbsp;511 pr. 31. desember 2001 (...)',
+                ' ny saksbehandlingsløsning. Se Om statistikken - Ytelser til gjenlevende. ' +
+                'Antall personer med <b>pensjon</b> som gjenlevende ektefelle/samboer/partner, gikk ' +
+                'ned fra 26&nbsp;511 pr. 31. desember 2001 (...)',
             publish: {
                 from: '2011-05-04T22:00:00Z',
                 first: '2011-05-04T22:00:00Z',
@@ -287,7 +307,9 @@ export default {
             href:
                 '/no/nav-og-samfunn/statistikk/pensjon-statistikk/relatert-informasjon/arkiv-ytelser-til-gjenlevende-pr.30.juni-2001-2010',
             highlight:
-                ' ny saksbehandlingsløsning. Se Om statistikken - Ytelser til gjenlevende.        Antall personer med <b>pensjon</b> som gjenlevende ektefelle/samboer/partner, gikk ned fra 26&nbsp;883 pr. 30. juni 2001 (...)',
+                ' ny saksbehandlingsløsning. Se Om statistikken - Ytelser til gjenlevende. ' +
+                'Antall personer med <b>pensjon</b> som gjenlevende ektefelle/samboer/partner, gikk ned ' +
+                'fra 26&nbsp;883 pr. 30. juni 2001 (...)',
             publish: {
                 from: '2010-09-13T22:00:00Z',
                 first: '2010-09-13T22:00:00Z',
@@ -301,7 +323,8 @@ export default {
             href:
                 '/no/person/flere-tema/arbeid-og-opphold-i-utlandet/relatert-informasjon/slik-soker-du-om-pensjon-fra-canada',
             highlight:
-                'Dersom du har rett til <b>pensjon</b> fra Canada og ønsker å søke <b>pensjon</b>, må du fylle ut søknadsblankettene som du finner på nettsidene til de canadiske myndighetene.',
+                'Dersom du har rett til <b>pensjon</b> fra Canada og ønsker å søke <b>pensjon</b>, må du fylle ut ' +
+                'søknadsblankettene som du finner på nettsidene til de canadiske myndighetene.',
             publish: {
                 from: '2015-06-22T07:56:00Z',
                 first: '2015-06-22T07:56:00Z',
@@ -329,7 +352,8 @@ export default {
             href:
                 '/no/person/pensjon/alderspensjon/snarveier/bosatt-i-norge-soke-pensjon-fra-utlandet',
             highlight:
-                'Norge har inngått trygdeavtaler med flere land. Her kan du lese mer om trygdeavtaler og hvordan du går fram for å søke om <b>pensjon</b> fra avtalelandet.',
+                'Norge har inngått trygdeavtaler med flere land. Her kan du lese mer om trygdeavtaler og hvordan du ' +
+                'går fram for å søke om <b>pensjon</b> fra avtalelandet.',
             publish: {
                 from: '2015-02-22T15:37:00Z',
                 first: '2015-02-22T15:37:00Z',
@@ -343,7 +367,8 @@ export default {
             href:
                 '/no/person/flere-tema/arbeid-og-opphold-i-norge/relatert-informasjon/slik-soker-du-om-pensjon-fra-india',
             highlight:
-                'Dersom du har rett til <b>pensjon</b> fra India fra Employees’ Provident Fund Scheme (EPFO),må du fylle ut de indiske  søknadsblankettene som du finner på nettsidene til EPFO.',
+                'Dersom du har rett til <b>pensjon</b> fra India fra Employees’ Provident Fund Scheme (EPFO),må du fylle ' +
+                'ut de indiske  søknadsblankettene som du finner på nettsidene til EPFO.',
             publish: {
                 from: '2015-02-22T16:21:00Z',
                 first: '2015-02-22T16:21:00Z',
@@ -356,7 +381,8 @@ export default {
             displayName: 'Spør oss om pensjon',
             href: '/no/person/pensjon/alderspensjon/spor-oss-om-pensjon',
             highlight:
-                'Hos NAV Kontaktsenter <b>Pensjon</b> får du spesialisert veiledning om <b>pensjon</b> fra folketrygden. Telefonnummeret er 55 55 33 34.NAV Kontaktsenter <b>Pensjon</b> har åpent alle hverdager fra klokken (...)',
+                'Hos NAV Kontaktsenter <b>Pensjon</b> får du spesialisert veiledning om <b>pensjon</b> fra folketrygden. ' +
+                'Telefonnummeret er 55 55 33 34.NAV Kontaktsenter <b>Pensjon</b> har åpent alle hverdager fra klokken (...)',
             publish: {
                 from: '2013-06-06T14:07:00Z',
                 first: '2013-06-06T14:07:00Z',
@@ -370,7 +396,8 @@ export default {
             href:
                 '/no/person/pensjon/alderspensjon/alderspensjon-for-deg-fodt-i-1963-eller-senere',
             highlight:
-                'Valg du gjør gjennom livet, er med på å påvirke din fremtidige <b>pensjon</b>. Her kan du lese mer om hvordan du tjener opp <b>pensjon</b>.',
+                'Valg du gjør gjennom livet, er med på å påvirke din fremtidige <b>pensjon</b>. Her kan du lese mer om ' +
+                'hvordan du tjener opp <b>pensjon</b>.',
             publish: {
                 from: '2015-05-27T12:46:00Z',
                 first: '2015-05-27T12:46:00Z',
@@ -384,7 +411,8 @@ export default {
             href:
                 '/no/nav-og-samfunn/kontakt-nav/relatert-informasjon/skatt-og-pensjon',
             highlight:
-                'Nytt skattekort ved uttak av <b>pensjon</b>        Skattereglene for <b>pensjon</b> er ikke de samme som for lønnsinntekt. For å få riktig skattetrekk bør du som er ny <b>pensjonist</b> vurdere å søke (...)',
+                'Nytt skattekort ved uttak av <b>pensjon</b>        Skattereglene for <b>pensjon</b> er ikke de samme som ' +
+                'for lønnsinntekt. For å få riktig skattetrekk bør du som er ny <b>pensjonist</b> vurdere å søke (...)',
             publish: {
                 from: '2015-11-13T08:38:00Z',
                 first: '2015-11-13T08:38:00Z',
@@ -437,7 +465,9 @@ export default {
             href:
                 '/no/nav-og-samfunn/kunnskap/analyser-fra-nav/nav-rapportserie/nav-rapporter/arbeid-eller-pensjon',
             highlight:
-                ' tiltak rettet mot arbeidstakere i dette alderssegmentet.                                    Arbeid eller <b>pensjon</b>? En studie av hvilke faktorer som påvirker seniorers beslutning om å fortsette i jobb (...)',
+                ' tiltak rettet mot arbeidstakere i dette alderssegmentet. ' +
+                'Arbeid eller <b>pensjon</b>? En studie av hvilke faktorer som påvirker seniorers beslutning om ' +
+                'å fortsette i jobb (...)',
             publish: {
                 from: '2013-03-06T15:10:00Z',
                 first: '2013-03-06T15:10:00Z',
@@ -451,7 +481,8 @@ export default {
             href:
                 '/no/person/pensjon/alderspensjon/hvordan-er-det-norske-pensjonssystemet-bygd-opp',
             highlight:
-                '<b>Pensjonssystemet</b> er bygd opp av tre nivåer: <b>Alderspensjon</b> fra folketrygden, <b>pensjon</b> fra arbeidsgiver og egen <b>pensjonssparing</b>.',
+                '<b>Pensjonssystemet</b> er bygd opp av tre nivåer: <b>Alderspensjon</b> fra folketrygden, <b>pensjon</b> ' +
+                'fra arbeidsgiver og egen <b>pensjonssparing</b>.',
             publish: {
                 from: '2015-06-12T07:20:00Z',
                 first: '2015-06-12T07:20:00Z',
