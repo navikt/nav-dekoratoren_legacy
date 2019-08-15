@@ -3,9 +3,7 @@
     "version": "0.1.0",
     "homepage": "/person/nav-dekoratoren",
     "private": true,
-    "proxy": "http://localhost:8088",
     "scripts": {
-        "ssr-start": "cross-env RENDER=true npm run start-craco",
         "start-craco": "craco start",
         "start": "cross-env DEVELOPMENT=true npm-run-all -p -r start-craco server",
         "build": "craco build",
