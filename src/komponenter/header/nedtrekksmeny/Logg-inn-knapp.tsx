@@ -16,7 +16,6 @@ const login = `${loginUrl}/login?redirect=${baseUrl}${path}`;
 
 interface StateProps {
     erInnlogget: boolean;
-    navn: string;
 }
 
 interface State {
@@ -57,12 +56,12 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
                 informasjonboks: this.informasjon,
             });
         }
-    };
+    }
 
     render() {
-        const { erInnlogget, navn } = this.props;
+        const { erInnlogget } = this.props;
         const knappetekst = erInnlogget ? 'Logg ut' : 'Logg inn';
-        const navnLC = erInnlogget && navn ? navn.toLowerCase() : '';
+
         return (
             <div className="login-container">
                 <div className="login-knapp btn">
@@ -76,7 +75,6 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
 }
 const mapStateToProps = (state: AppState): StateProps => ({
     erInnlogget: state.innloggingsstatus.data.authenticated,
-    navn: state.innloggingsstatus.data.name,
 });
 
 export default connect(mapStateToProps)(LoggInnKnapp);

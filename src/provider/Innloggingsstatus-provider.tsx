@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from '../redux/dispatch-type';
 import {
@@ -22,25 +22,21 @@ interface DispatchProps {
 
 type InnloggingsstatusProviderProps = OwnProps & StateProps & DispatchProps;
 
-class InnloggingsstatusProvider extends React.Component<
-    InnloggingsstatusProviderProps
-> {
-    constructor(props: InnloggingsstatusProviderProps) {
-        super(props);
-    }
+const InnloggingsstatusProvider: React.FunctionComponent<InnloggingsstatusProviderProps> = props => {
 
-    componentDidMount() {
-        this.props.doHentInnloggingsstatus();
-    }
+    useEffect(
+        () => {
+            props.doHentInnloggingsstatus();
+        },
+        []
+    );
 
-    render() {
-        return (
-            <Datalaster avhengigheter={[this.props.innloggingsstatus]}>
-                {this.props.children}
-            </Datalaster>
-        );
-    }
-}
+    return (
+        <Datalaster avhengigheter={[props.innloggingsstatus]}>
+            {props.children}
+        </Datalaster>
+    );
+};
 
 const mapStateToProps = (state: AppState): StateProps => ({
     innloggingsstatus: state.innloggingsstatus,

@@ -8,6 +8,9 @@ import './hovedMeny.less';
 import Sok from './Sok';
 import MediaQuery from 'react-responsive';
 import NavLogoRod from '../ikoner/NavLogoRod';
+import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
+import Varselbjelle from './Varselbjelle';
+import MinsideLenke from './MinsideLenke';
 
 const cls = BEMHelper('nedtrekksmeny');
 
@@ -43,6 +46,10 @@ const HovedMeny: React.FunctionComponent<Props> = props => {
                         <MediaQuery minWidth={768}>
                             <Sok />
                         </MediaQuery>
+                        <VarselinnboksProvider>
+                            <Varselbjelle />
+                        </VarselinnboksProvider>
+                        <MinsideLenke />
                         <div className={cls.element('hoyreMeny')}>
                             <LoggInnKnapp />
                         </div>

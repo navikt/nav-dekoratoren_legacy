@@ -12,6 +12,7 @@ import { toppMenyLenker } from './menyLenker/ToppMenyLenker';
 import { Data, MenyPunkter } from '../../redux/menuReducer';
 import DropDownSeksjon from './nedtrekksmeny/DropDownSeksjon';
 import HovedMeny from './nedtrekksmeny/HovedMeny';
+import Skiplinks from './Skiplinks';
 
 interface State {
     clicked: boolean;
@@ -80,6 +81,7 @@ class HeaderContent extends React.Component<MenuProps, State> {
     render() {
         return (
             <>
+                <Skiplinks />
                 <div id="header-withmenu">
                     <div className="hodefot">
                         <header className="siteheader blokk-m">
