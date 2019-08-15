@@ -1,16 +1,10 @@
 import React from 'react';
-import { Person } from '../menyLenker/Person';
-import { Bedrift } from '../menyLenker/Bedrift';
-import { Samhandling } from '../menyLenker/Samhandling';
-
 export const NAVHEADER = 'NAVHEADER';
 
-export interface MenyValg {
-    seksjon: MenuValue;
-    menyLenker: {
-        tittel: string;
-        lenker: { tittel: string; url: string }[];
-    }[];
+interface Seksjon<T> {
+    person: () => T;
+    bedrift: () => T;
+    samhandling: () => T;
 }
 
 export enum MenuValue {
@@ -19,77 +13,85 @@ export enum MenuValue {
     SAMHANDLING = 'SAMHANDLING',
 }
 
-export const getMeny = (): {
-    seksjon: MenuValue;
-    menyLenker: {
-        tittel: string;
-        lenker: { tittel: string; url: string }[];
-    }[];
-} => {
+export const checkUriPath = () => {
     const locationPath = window.location.pathname.split('/')[3];
-
     if (locationPath !== undefined) {
-        const windowPathname = sjekkUriAndDispatch(
-            window.location.pathname.split('/')[3]
-        );
-        if (windowPathname[0] && windowPathname[2]) {
-            sessionStorage.setItem(NAVHEADER, windowPathname[1]);
-            return {
-                seksjon: windowPathname[1],
-                menyLenker: windowPathname[2],
-            };
-        }
+        sessionStorage.setItem(NAVHEADER, locationPath);
+        return locationPath;
+    }
+    return null;
+};
+
+const checkString = (input: string, type: string): boolean => {
+    return input
+        .toString()
+        .toUpperCase()
+        .includes(type);
+};
+
+export function getContent<T>(
+    type: string,
+    { person, bedrift, samhandling }: Seksjon<T>
+) {
+    if (checkString(type, 'PERSON')) {
+        return person();
+    } else if (checkString(type, 'BEDRIFT')) {
+        return bedrift();
+    } else if (checkString(type, 'SAMHANDLING')) {
+        return samhandling();
+    }
+    return person();
+}
+
+export function hentStatus() {
+    const path = checkUriPath();
+    if (path) {
+        return getMenuValue(path);
     }
     const storage = sessionStorage.getItem(NAVHEADER);
-    return storage
-        ? mapMenuLinks(storage)
-        : { seksjon: MenuValue.PRIVATPERSON, menyLenker: Person };
-};
+    return storage ? getMenuValue(storage) : MenuValue.PRIVATPERSON;
+}
 
-export const mapMenuLinks = (type: string): MenyValg => {
-    switch (type) {
-        case 'PRIVATPERSON':
-            return { seksjon: MenuValue.PRIVATPERSON, menyLenker: Person };
-        case 'BEDRIFT':
-            return { seksjon: MenuValue.BEDRIFT, menyLenker: Bedrift };
-        case 'SAMHANDLING':
-            return { seksjon: MenuValue.SAMHANDLING, menyLenker: Samhandling };
-        default:
-            return { seksjon: MenuValue.PRIVATPERSON, menyLenker: Person };
+export function setMenuView(
+    meny: Array<object>
+): {
+    children: {}[];
+    displayName: string;
+    hasChildren: boolean;
+    path: string;
+} {
+    const path = checkUriPath();
+    if (path) {
+        return getMenuView(path, meny);
     }
-};
+    const storage = sessionStorage.getItem(NAVHEADER);
+    return storage ? getMenuView(storage, meny) : meny[0];
+}
 
-const sjekkUriAndDispatch = (
-    type: string
-): [
-    boolean,
-    MenuValue,
-    {
-        tittel: string;
-        lenker: { tittel: string; url: string }[];
-    }[]
-] => {
-    if (
-        type
-            .toString()
-            .toUpperCase()
-            .includes('PERSON')
-    ) {
-        return [true, MenuValue.PRIVATPERSON, Person];
-    } else if (
-        type
-            .toString()
-            .toUpperCase()
-            .includes('BEDRIFT')
-    ) {
-        return [true, MenuValue.BEDRIFT, Bedrift];
-    } else if (
-        type
-            .toString()
-            .toUpperCase()
-            .includes('SAMHANDLING')
-    ) {
-        return [true, MenuValue.SAMHANDLING, Samhandling];
-    }
-    return [false, MenuValue.PRIVATPERSON, Person];
-};
+function getMenuView(arg: string, content: Array<object>): any {
+    return getContent(arg, {
+        person: () => {
+            return content[0];
+        },
+        bedrift: () => {
+            return content[1];
+        },
+        samhandling: () => {
+            return content[2];
+        },
+    });
+}
+
+function getMenuValue(arg: string): MenuValue {
+    return getContent(arg, {
+        person: () => {
+            return MenuValue.PRIVATPERSON;
+        },
+        bedrift: () => {
+            return MenuValue.BEDRIFT;
+        },
+        samhandling: () => {
+            return MenuValue.SAMHANDLING;
+        },
+    });
+}

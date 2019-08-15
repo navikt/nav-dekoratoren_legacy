@@ -52,6 +52,15 @@ export async function fetchToJson<T>(url: string): Promise<T> {
     return await toJson<T>(gyldigRespons);
 }
 
+export async function fetchWithHeaders<T>(url: string) {
+    const respons = await fetch(url, {
+        method: 'GET',
+    });
+
+    const gyldigRespons = sjekkStatuskode(respons);
+    return await toJson<T>(gyldigRespons);
+}
+
 class FetchError extends Error {
     public response: Response;
 

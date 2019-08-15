@@ -4,7 +4,7 @@ import { Dispatch } from '../redux/dispatch-type';
 import {
     hentInnloggingsstatus,
     InnloggingsstatusState,
-} from '../redux/innloggingsstatus-duck';
+} from '../redux/innloggingsstatus';
 import { AppState } from '../redux/reducer';
 import Datalaster from '../api/Datalaster';
 

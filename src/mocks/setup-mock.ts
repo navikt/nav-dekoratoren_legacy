@@ -10,13 +10,13 @@ export default () => {
     const fetchMock = FetchMock.configure({
         enableFallback: true, // default: true
         middleware: MiddlewareUtils.combine(
-            MiddlewareUtils.delayMiddleware(200),
+            MiddlewareUtils.delayMiddleware(1000),
             MiddlewareUtils.failurerateMiddleware(0.0),
             loggingMiddleware
         ),
     });
 
-    console.log('### FULL MOCK AKTIVERT! ###');
+    console.log('mock data enabled');
 
     fetchMock.get(API.innloggingsstatusURL, innloggingsstatusResponse);
 };

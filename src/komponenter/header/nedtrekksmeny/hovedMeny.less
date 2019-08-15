@@ -1,13 +1,46 @@
 .nedtrekksmeny {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
     padding-top: 0.5rem;
     min-height: 3.5rem;
-    padding-left: 1rem;
+    background-color: white;
+    border-bottom: 2px solid #0067c5;
+
+    &__content {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 156px;
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    &__meny {
+        display: flex;
+        flex-direction: row;
+        width: 1024px;
+    }
+
+    &__function-components {
+        display: flex;
+        align-items: center;
+        width: 924px;
+        justify-content: space-between;
+    }
+
+    &__logo {
+        margin-right: 0.5rem;
+    }
 
     & .btn {
-        padding-top: 2px;
         padding-right: 0.125rem;
     }
 
@@ -16,9 +49,8 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        padding: 0.4rem 0.7rem;
+        margin: 0.4rem 0.7rem;
         width: fit-content;
-        margin: 0;
 
         &:hover {
             border: 1px black solid;
@@ -69,6 +101,7 @@
         overflow: hidden;
         transition: max-height 0.7s;
         max-height: 0;
+        max-width: 1024px;
     }
 
     &__hovedSeksjon {
@@ -102,31 +135,38 @@
         background-color: white;
         padding-top: 0.75rem;
         padding-bottom: 0.5rem;
-        min-width: 15rem;
+        min-width: 8rem;
         padding-left: 1.5rem;
 
         a {
-            text-decoration: underline;
             color: black;
+            &:active {
+                color: black;
+                font-weight: bold;
+            }
         }
 
         a:hover {
-            text-decoration: none;
+            text-decoration: underline;
         }
 
         p {
             max-width: 12rem;
         }
+    }
 
-        li {
-            list-style-type: initial;
-            padding-top: 8px;
-            padding-bottom: 6px;
-        }
+    &__minside-lenke {
+        text-decoration: none;
+    }
 
-        ul {
-            padding-left: 0.75rem;
-        }
+    &__minside-list-item {
+        padding: 0.125rem 0 0.125rem 0;
+    }
+
+    &__til-minside-lenke {
+        list-style-type: none;
+        margin-left: -6px;
+        padding-top: 1.25rem;
     }
 
     &__seksjon {
@@ -137,12 +177,19 @@
 
     &__menyvalg {
         &--active {
-            max-height: 25rem;
+            margin-bottom: 2.5rem;
+            max-height: 40rem;
         }
     }
 
+    .lenke:active,
+    .lenke--active {
+        color: black;
+        font-weight: bold;
+    }
+
     @media (min-width: 765px) {
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
     }
 }

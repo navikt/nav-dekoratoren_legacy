@@ -17,7 +17,7 @@ npm run build
 
 # Kjør applikasjonen
 
-Kjør Express-server lokalt (localhost:8080):
+Kjør Express-server lokalt (localhost:8088):
 
 ```
 npm run server

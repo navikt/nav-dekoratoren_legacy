@@ -1,81 +1,41 @@
-import * as React from 'react';
-import './Header.less';
-import Toppmeny from './toppmeny/Toppmeny';
-import NedtrekksMeny from './nedtrekksmeny/NedtrekksMeny';
-import {
-    getMeny,
-    mapMenuLinks,
-    MenuValue,
-    MenyValg,
-    NAVHEADER,
-} from './nedtrekksmeny/StorageProvider';
-import HovedSeksjon from './nedtrekksmeny/HovedSeksjon';
-import MinsideSeksjon from './nedtrekksmeny/MinsideSeksjon';
-import { toppMenyLenker } from './menyLenker/ToppMenyLenker';
+import React, { useState } from 'react';
+import { AppState } from '../../redux/reducer';
+import { Dispatch } from '../../redux/dispatch-type';
+import { fetchMenypunkter, MenyPunkter } from '../../redux/menuReducer';
+import { connect } from 'react-redux';
+import HeaderContent from './HeaderContent';
 
-interface State {
-    clicked: boolean;
-    valgtmeny: MenyValg;
+interface StateProps {
+    meny: MenyPunkter;
 }
 
-class Header extends React.Component<{}, State> {
-    constructor(props: {}) {
-        super(props);
-        this.state = {
-            clicked: false,
-            valgtmeny: getMeny(),
-        };
-    }
-
-    dropDownExpand = () => {
-        this.setState({
-            clicked: !this.state.clicked,
-        });
-    };
-
-    private setMenuStorage = (
-        e: React.MouseEvent<HTMLAnchorElement>,
-        valgVerdi: MenuValue,
-        url: string
-    ): void => {
-        e.preventDefault();
-        const headervalg = sessionStorage.getItem(NAVHEADER);
-        if (headervalg && headervalg == valgVerdi) {
-            return;
-        }
-        sessionStorage.setItem(NAVHEADER, valgVerdi);
-        this.setState({
-            valgtmeny: mapMenuLinks(valgVerdi),
-        });
-        window.location.href = url;
-    };
-
-    render() {
-        return (
-            <div id="header-withmenu">
-                <div className="hodefot">
-                    <header className="siteheader blokk-m">
-                        <div className="innhold-container">
-                            <Toppmeny
-                                lenker={toppMenyLenker}
-                                menyValg={this.state.valgtmeny.seksjon}
-                                callMenuStorage={this.setMenuStorage}
-                            />
-                            <NedtrekksMeny
-                                dropDownExpand={this.dropDownExpand}
-                                clicked={this.state.clicked}
-                            >
-                                <HovedSeksjon
-                                    classname="nedtrekksmeny"
-                                    menyLenker={this.state.valgtmeny.menyLenker}
-                                />
-                                <MinsideSeksjon className="nedtrekksmeny" />
-                            </NedtrekksMeny>
-                        </div>
-                    </header>
-                </div>
-            </div>
-        );
-    }
+interface DispatchProps {
+    hentMenypunkter: () => Promise<void>;
 }
-export default Header;
+
+type MenuProps = StateProps & DispatchProps;
+
+const Header = ({ meny, hentMenypunkter }: MenuProps) => {
+    React.useEffect(() => {
+        hentMenypunkter();
+    }, []);
+
+    return (
+        <div>
+            <HeaderContent meny={meny} />
+        </div>
+    );
+};
+
+const mapStateToProps = (state: AppState): StateProps => ({
+    meny: state.menypunkt,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+    hentMenypunkter: () => fetchMenypunkter()(dispatch),
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Header);

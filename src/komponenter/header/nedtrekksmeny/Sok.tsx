@@ -49,7 +49,7 @@ class Sok extends React.Component<SokProps, InputState> {
                         onChange={event => this.handleChange(event)}
                     />
                     <div className="sok-knapp btn">
-                        <button className="knapp knapp--hoved" type="submit">
+                        <button className="knapp knapp--normal" type="submit">
                             SØK
                         </button>
                     </div>

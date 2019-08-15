@@ -1,19 +1,12 @@
 .toppmeny {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    &__venstreMeny {
-        display: flex;
-        flex-direction: row;
-        padding-left: 0.25rem;
-    }
-
-    &__hoyreMeny {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0.75rem;
+    background-color: rgba(242, 242, 242, 1);
+    height: 44px;
 
     &__topp-liste-rad {
         min-width: 325px;
@@ -22,7 +15,7 @@
         overflow-y: hidden;
     }
 
-    li {
+    &__list-element {
         float: left;
     }
 
@@ -46,9 +39,10 @@
         }
 
         &--active {
-            border-bottom: black 2px solid;
+            padding-bottom: 0.6rem;
+            border-bottom: #005b82 2px solid;
             &:hover {
-                border-bottom: black 2px solid;
+                border-bottom: #005b82 2px solid;
             }
         }
     }

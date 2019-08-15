@@ -4,7 +4,7 @@ export interface BEMWrapper {
     modifier: (m?: string) => string;
 }
 
-const BEMHelper = (cls: string) => ({
+const BEMHelper = (cls: BEMWrapper['className']) => ({
     className: cls,
     element: (e?: string, m?: string) =>
         `${cls}__${e}${m ? ` ${cls}__${e}--${m}` : ''}`,

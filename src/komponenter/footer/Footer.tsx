@@ -30,7 +30,7 @@ class Footer extends React.Component {
                             </Lenke>
                         </div>
                     </div>
-                    <footer className="sitefooter blokk-m" role="contentinfo">
+                    <footer className="sitefooter" role="contentinfo">
                         <FooterLenkeMeny className={cls.className} />
                     </footer>
                 </div>
