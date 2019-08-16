@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Spinner from 'nav-frontend-spinner';
-import AlertStripe from 'nav-frontend-alertstriper';
 
 export enum Status {
     OK = 'OK',
