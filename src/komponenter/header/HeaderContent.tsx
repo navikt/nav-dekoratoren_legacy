@@ -8,7 +8,7 @@ import {
     setMenuView,
 } from '../../provider/Storage-provider';
 import DropdownHoyreSeksjon from './hovedmeny/dropdown-meny/DropdownHoyreSeksjon';
-import { toppmenyLenker } from './menylenker/Toppmeny-lenker';
+import { toppmenyLenker } from './toppmeny/Toppmeny-lenker';
 import { MenyPunkter } from '../../reducer/menu-duck';
 import DropdownVenstreSeksjon from './hovedmeny/dropdown-meny/DropdownVenstreSeksjon';
 import Hovedmeny from './hovedmeny/Hovedmeny';
@@ -61,23 +61,6 @@ class HeaderContent extends React.Component<MenuProps, State> {
         }
     }
 
-    private setMenuStorage = (
-        e: React.MouseEvent<HTMLAnchorElement>,
-        valgVerdi: MenuValue,
-        url: string
-    ): void => {
-        e.preventDefault();
-        const headervalg = sessionStorage.getItem(NAVHEADER);
-        if (headervalg && headervalg == valgVerdi) {
-            return;
-        }
-        sessionStorage.setItem(NAVHEADER, valgVerdi);
-        this.setState({
-            toppmeny: valgVerdi,
-        });
-        window.location.href = url;
-    };
-
     render() {
         return (
             <>
@@ -109,5 +92,22 @@ class HeaderContent extends React.Component<MenuProps, State> {
             </>
         );
     }
+
+    private setMenuStorage = (
+        e: React.MouseEvent<HTMLAnchorElement>,
+        valgVerdi: MenuValue,
+        url: string
+    ): void => {
+        e.preventDefault();
+        const headervalg = sessionStorage.getItem(NAVHEADER);
+        if (headervalg && headervalg === valgVerdi) {
+            return;
+        }
+        sessionStorage.setItem(NAVHEADER, valgVerdi);
+        this.setState({
+            toppmeny: valgVerdi,
+        });
+        window.location.href = url;
+    };
 }
 export default HeaderContent;

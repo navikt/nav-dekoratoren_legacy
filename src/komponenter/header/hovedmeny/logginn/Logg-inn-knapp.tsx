@@ -36,15 +36,17 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
         });
     };
 
-    informasjon = (
-        <div>
-            <AlertStripe type={'advarsel'}>
-                I locahost fungerer ikke innloggingslinjen. Og har blitt
-                erstattet med mock-api{' '}
-                <Lukknapp onClick={this.lukkdialogBoks} />
-            </AlertStripe>
-        </div>
-    );
+    informasjon = () => {
+        return (
+            <div>
+                <AlertStripe type={'advarsel'}>
+                    I locahost fungerer ikke innloggingslinjen. Og har blitt
+                    erstattet med mock-api{' '}
+                    <Lukknapp onClick={this.lukkdialogBoks} />
+                </AlertStripe>
+            </div>
+        );
+    };
 
     handleButtonClick = () => {
         if (process.env.NODE_ENV === 'production') {
@@ -56,7 +58,7 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
                 informasjonboks: this.informasjon,
             });
         }
-    }
+    };
 
     render() {
         const { erInnlogget } = this.props;
