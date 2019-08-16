@@ -33,10 +33,7 @@ const Toppmeny = (props: Props) => {
                             >
                                 <a
                                     className={cls.element(
-                                        'hoved',
-                                        props.menyValg == lenke.tittel
-                                            ? 'active'
-                                            : ''
+                                        'hoved'
                                     )}
                                     href={lenke.url}
                                     onClick={event =>
@@ -47,9 +44,13 @@ const Toppmeny = (props: Props) => {
                                         )
                                     }
                                 >
+                                    <div className={cls.element('inner', props.menyValg == lenke.tittel
+                                        ? 'active'
+                                        : '')}>
                                     <EtikettLiten tag="h3">
                                         {lenke.tittel}
                                     </EtikettLiten>
+                                    </div>
                                 </a>
                             </li>
                         );

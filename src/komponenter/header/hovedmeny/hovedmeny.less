@@ -1,3 +1,6 @@
+@import '~nav-frontend-core/less/_variabler';
+
+
 .nedtrekksmeny {
     display: flex;
     flex-direction: column;
@@ -27,6 +30,14 @@
         display: flex;
         flex-direction: row;
         width: 1024px;
+
+        .navbar-brand {
+            padding-right: 0.25rem;
+            &:focus, &:active {
+                background-color: white;
+                border: @navDypBla 3px solid;
+            }
+        }
     }
 
     &__function-components {
@@ -49,12 +60,12 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        margin: 0.4rem 0.7rem;
+        padding: 0.4rem 0.7rem;
         width: fit-content;
 
         &:hover {
             border: 1px black solid;
-            background-color: #e6e6e6;
+            background-color: white;
             cursor: pointer;
         }
 
@@ -85,12 +96,25 @@
     &__menyButton {
         text-decoration: none;
         color: black;
+        background-color: white;
+        border: none;
+        padding: 0;
 
         &:focus {
             text-decoration: none;
             background-color: initial;
             box-shadow: none;
             color: black;
+        }
+
+        &:hover {
+            background-color: white;
+        }
+
+        &:focus {
+            outline: none;
+            border: @navDypBla 3px solid;
+            border-radius: 4px;
         }
     }
 

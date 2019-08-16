@@ -32,8 +32,7 @@ const Hovedmeny: React.FunctionComponent<Props> = props => {
                         />
                     </Lenke>
                     <div className={cls.element('function-components')}>
-                        <Lenke
-                            href="javascript:void(0)"
+                        <button
                             onClick={props.dropDownExpand}
                             className={cls.element('menyButton')}
                         >
@@ -41,7 +40,7 @@ const Hovedmeny: React.FunctionComponent<Props> = props => {
                                 <HamburgerIkon ikonClass="hamburgerIkon" />
                                 <Undertittel>MENY</Undertittel>
                             </div>
-                        </Lenke>
+                        </button>
 
                         <MediaQuery minWidth={768}>
                             <Sok />

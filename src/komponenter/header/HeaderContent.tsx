@@ -94,7 +94,7 @@ class HeaderContent extends React.Component<MenuProps, State> {
     }
 
     private setMenuStorage = (
-        e: React.MouseEvent<HTMLAnchorElement>,
+        e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
         valgVerdi: MenuValue,
         url: string
     ): void => {
