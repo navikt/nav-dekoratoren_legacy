@@ -1,10 +1,10 @@
 import React, { createRef } from 'react';
 import parse from 'html-react-parser';
-import { AppState } from '../../../redux/reducer';
-import { Dispatch } from '../../../redux/dispatch-type';
+import { AppState } from '../../../../reducer/reducer';
+import { Dispatch } from '../../../../redux/dispatch-type';
 import { connect } from 'react-redux';
-import { settVarslerSomLest } from '../../../redux/varsel-lest-duck';
-import VarselVisning from '../../../komponenter/header/nedtrekksmeny/Varsel-visning';
+import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
+import VarselVisning from './/Varsel-visning';
 import './Varselbjelle.less';
 
 interface StateProps {

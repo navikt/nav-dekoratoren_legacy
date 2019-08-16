@@ -2,7 +2,7 @@ import * as React from 'react';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
 import './Toppmeny.less';
-import { MenuValue } from '../nedtrekksmeny/StorageProvider';
+import { MenuValue } from '../../../provider/Storage-provider';
 
 const cls = BEMHelper('toppmeny');
 

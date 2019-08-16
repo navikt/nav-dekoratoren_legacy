@@ -4,9 +4,9 @@ import {
     SettVarslerLestFEILETAction,
     SettVarslerLestOKAction,
     SettVarslerLestPENDINGAction,
-} from './actions';
-import { Dispatch } from './dispatch-type';
-import { fetchThenDispatch } from '../api/fetch-utils';
+} from '../redux/actions';
+import { Dispatch } from '../redux/dispatch-type';
+import { fetchThenDispatch } from '../api/api-utils';
 import { lagreVarslerLestFetch } from '../api/api';
 import { DataElement, Status } from '../api/Datalaster';
 

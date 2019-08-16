@@ -1,16 +1,16 @@
 import React from 'react';
-import LoggInnKnapp from './Logg-inn-knapp';
+import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import Lenke from 'nav-frontend-lenker';
 import { Undertittel } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
-import HamburgerIkon from '../ikoner/HamburgerIkon';
-import './hovedMeny.less';
-import Sok from './Sok';
+import HamburgerIkon from '../../ikoner/meny/HamburgerIkon';
+import './hovedmeny.less';
+import Sok from './sok/Sok';
 import MediaQuery from 'react-responsive';
-import NavLogoRod from '../ikoner/NavLogoRod';
+import NavLogoRod from '../../ikoner/meny/NavLogoRod';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
-import Varselbjelle from './Varselbjelle';
-import MinsideLenke from './MinsideLenke';
+import Varselbjelle from './varsel/Varselbjelle';
+import MinsideLenke from './minside-lenke/MinsideLenke';
 
 const cls = BEMHelper('nedtrekksmeny');
 
@@ -19,12 +19,12 @@ interface Props {
     clicked: boolean;
 }
 
-const HovedMeny: React.FunctionComponent<Props> = props => {
+const Hovedmeny: React.FunctionComponent<Props> = props => {
     return (
         <nav className={cls.className}>
             <div className={cls.element('content')}>
                 <div className={cls.element('meny')}>
-                    <Lenke className="navbar-brand" href="javascript:void(0)">
+                    <Lenke className="navbar-brand" href="https://nav.no">
                         <NavLogoRod
                             width="88"
                             height="88"
@@ -71,4 +71,4 @@ const HovedMeny: React.FunctionComponent<Props> = props => {
     );
 };
 
-export default HovedMeny;
+export default Hovedmeny;

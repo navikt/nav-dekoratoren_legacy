@@ -1,7 +1,7 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import './MinsideLenke.less';
-import Environments from '../../../utils/Environments';
+import Environments from '../../../../utils/Environments';
 
 const { baseUrl } = Environments();
 const dittNavURL = `${baseUrl}/person/dittnav/`;

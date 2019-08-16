@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import innloggingsstatusReducer, {
     InnloggingsstatusState,
-} from './innloggingsstatus';
-import menypunktReducer, { MenyPunkter } from './menuReducer';
+} from './innloggingsstatus-duck';
+import menypunktReducer, { MenyPunkter } from './menu-duck';
 import varselinnboksReducer, { VarselinnboksState } from './varselinnboks-duck';
-import varselLestReducer from './varsel-lest-duck';
 import { DataElement } from '../api/Datalaster';
+import varselLestReducer  from './varsel-lest-duck'
+
 
 export interface AppState {
     innloggingsstatus: InnloggingsstatusState;

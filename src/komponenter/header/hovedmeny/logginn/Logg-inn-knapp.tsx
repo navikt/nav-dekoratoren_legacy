@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { AppState } from '../../../redux/reducer';
+import { AppState } from '../../../../reducer/reducer';
 import KnappBase from 'nav-frontend-knapper';
-import Environments from '../../../utils/Environments';
+import Environments from '../../../../utils/Environments';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
 

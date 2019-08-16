@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { AppState } from '../../redux/reducer';
+import React from 'react';
+import { AppState } from '../../reducer/reducer';
 import { Dispatch } from '../../redux/dispatch-type';
-import { fetchMenypunkter, MenyPunkter } from '../../redux/menuReducer';
+import { fetchMenypunkter, MenyPunkter } from '../../reducer/menu-duck';
 import { connect } from 'react-redux';
 import HeaderContent from './HeaderContent';
 

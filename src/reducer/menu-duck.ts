@@ -4,9 +4,9 @@ import {
     HentMenyLenkerFAILED,
     HentMenyLenkerPENDING,
     HentMenyLenkerSUCCESS,
-} from './actions';
-import { Dispatch } from './dispatch-type';
-import { fetchThenDispatch } from '../api/fetch-utils';
+} from '../redux/actions';
+import { Dispatch } from '../redux/dispatch-type';
+import { fetchThenDispatch } from '../api/api-utils';
 import { hentMenyPunkter } from '../api/api';
 
 export interface Interface {}

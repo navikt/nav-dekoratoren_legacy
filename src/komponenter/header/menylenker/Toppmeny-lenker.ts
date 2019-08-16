@@ -1,7 +1,6 @@
-import React from 'react';
-import { MenuValue } from '../nedtrekksmeny/StorageProvider';
+import { MenuValue } from '../../../provider/Storage-provider';
 
-export const toppMenyLenker: {
+export const toppmenyLenker: {
     tittel: string;
     url: string;
     key: MenuValue;

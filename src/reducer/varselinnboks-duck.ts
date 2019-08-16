@@ -5,10 +5,10 @@ import {
     HentVarslerOKAction,
     HentVarslerPENDINGAction,
     SettVarslerOKAction,
-} from './actions';
+} from '../redux/actions';
 import { JSONObject } from 'yet-another-fetch-mock';
-import { Dispatch } from './dispatch-type';
-import { fetchThenDispatch } from '../api/fetch-utils';
+import { Dispatch } from '../redux/dispatch-type';
+import { fetchThenDispatch } from '../api/api-utils';
 import { hentVarslerFetch } from '../api/api';
 import { DataElement, Status } from '../api/Datalaster';
 

@@ -39,13 +39,22 @@ const Datalaster = ({
                 a => harStatus(a, Status.OK) || harStatus(a, Status.FEILET)
             ))
     ) {
-        // Alle avhengigheter lastet inn uten problemer og ventPa er ferdig (enten OK eller FEILET)
+
         return children;
+
+
+
     } else if (avhengigheter.some(a => harStatus(a, Status.FEILET))) {
+
+
         console.log(
             'det har dessverre oppstått en feil med innloggingslinjen. Vi jobber med å få løst problemet.'
         );
+
+
         return children;
+
+
     }
     return <Spinner type="XXL" />;
 };

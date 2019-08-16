@@ -1,10 +1,10 @@
 import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
-import BEMHelper from '../../../utils/bem';
+import BEMHelper from '../../../../utils/bem';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 
-const MinsideSeksjon = ({ className }: { className: string }) => {
+const DropdownHoyreSeksjon = ({ className }: { className: string }) => {
     const cls = BEMHelper(className);
     return (
         <div className={cls.element('minSideSeksjon')}>
@@ -73,4 +73,4 @@ const MinsideSeksjon = ({ className }: { className: string }) => {
     );
 };
 
-export default MinsideSeksjon;
+export default DropdownHoyreSeksjon;

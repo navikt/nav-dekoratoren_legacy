@@ -4,8 +4,8 @@ import { Dispatch } from '../redux/dispatch-type';
 import {
     hentInnloggingsstatus,
     InnloggingsstatusState,
-} from '../redux/innloggingsstatus';
-import { AppState } from '../redux/reducer';
+} from '../reducer/innloggingsstatus-duck';
+import { AppState } from '../reducer/reducer';
 import Datalaster from '../api/Datalaster';
 
 interface OwnProps {

@@ -1,7 +1,7 @@
 import Environments from '../utils/Environments';
-import { fetchToJson } from './fetch-utils';
-import { Data as innloggingsstatusData } from '../redux/innloggingsstatus';
-import { Data as varselinnboksData } from '../redux/varselinnboks-duck';
+import { fetchToJson } from './api-utils';
+import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
+import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 
 const { baseUrl, menypunkter } = Environments();
 

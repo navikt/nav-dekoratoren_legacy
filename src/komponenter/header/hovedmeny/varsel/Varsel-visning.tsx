@@ -1,5 +1,5 @@
 import React from 'react';
-import { varselinnboksUrl } from '../../../api/api';
+import { varselinnboksUrl } from '../../../../api/api';
 import './Varsel-visning.less';
 
 interface OwnProps {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
-import BEMHelper from '../../../utils/bem';
+import BEMHelper from '../../../../utils/bem';
 
 interface Props {
     classname: string;
@@ -13,7 +13,7 @@ interface Props {
     status: string;
 }
 
-const DropDownSeksjon = (props: Props) => {
+const DropdownVenstreSeksjon = (props: Props) => {
     const { classname, menyLenker, status } = props;
     const cls = BEMHelper(classname);
 
@@ -75,4 +75,4 @@ const DropDownSeksjon = (props: Props) => {
     );
 };
 
-export default DropDownSeksjon;
+export default DropdownVenstreSeksjon;

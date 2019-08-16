@@ -6,13 +6,13 @@ import {
     MenuValue,
     NAVHEADER,
     setMenuView,
-} from './nedtrekksmeny/StorageProvider';
-import MinsideSeksjon from './nedtrekksmeny/MinsideSeksjon';
-import { toppMenyLenker } from './menyLenker/ToppMenyLenker';
-import { Data, MenyPunkter } from '../../redux/menuReducer';
-import DropDownSeksjon from './nedtrekksmeny/DropDownSeksjon';
-import HovedMeny from './nedtrekksmeny/HovedMeny';
-import Skiplinks from './Skiplinks';
+} from '../../provider/Storage-provider';
+import DropdownHoyreSeksjon from './hovedmeny/dropdown-meny/DropdownHoyreSeksjon';
+import { toppmenyLenker } from './menylenker/Toppmeny-lenker';
+import { MenyPunkter } from '../../reducer/menu-duck';
+import DropdownVenstreSeksjon from './hovedmeny/dropdown-meny/DropdownVenstreSeksjon';
+import Hovedmeny from './hovedmeny/Hovedmeny';
+import Skiplinks from './skiplinks/Skiplinks';
 
 interface State {
     clicked: boolean;
@@ -87,21 +87,21 @@ class HeaderContent extends React.Component<MenuProps, State> {
                         <header className="siteheader blokk-m">
                             <div className="innhold-container">
                                 <Toppmeny
-                                    lenker={toppMenyLenker}
+                                    lenker={toppmenyLenker}
                                     menyValg={this.state.toppmeny}
                                     callMenuStorage={this.setMenuStorage}
                                 />
-                                <HovedMeny
+                                <Hovedmeny
                                     dropDownExpand={this.dropDownExpand}
                                     clicked={this.state.clicked}
                                 >
-                                    <DropDownSeksjon
+                                    <DropdownVenstreSeksjon
                                         classname="nedtrekksmeny"
                                         menyLenker={this.state.meny}
                                         status={this.props.meny.status}
                                     />
-                                    <MinsideSeksjon className="nedtrekksmeny" />
-                                </HovedMeny>
+                                    <DropdownHoyreSeksjon className="nedtrekksmeny" />
+                                </Hovedmeny>
                             </div>
                         </header>
                     </div>

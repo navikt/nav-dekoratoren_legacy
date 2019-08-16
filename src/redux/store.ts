@@ -1,5 +1,5 @@
 import { createStore, compose, Store } from 'redux';
-import { reducer, AppState } from './reducer';
+import { reducer, AppState } from '../reducer/reducer';
 
 function create() {
     /* tslint:disable:no-any */

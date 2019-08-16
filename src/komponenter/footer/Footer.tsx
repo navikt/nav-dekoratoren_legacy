@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../utils/bem';
-import FooterLenkeMeny from './FooterLenkeMeny';
+import FooterLenkeMeny from './komponenter/FooterLenkeMeny';
 import './Footer.less';
 
 const cls = BEMHelper('footer');

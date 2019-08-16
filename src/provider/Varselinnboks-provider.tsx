@@ -5,8 +5,8 @@ import {
     hentVarsler,
     settVarslerOK,
     VarselinnboksState,
-} from '../redux/varselinnboks-duck';
-import { AppState } from '../redux/reducer';
+} from '../reducer/varselinnboks-duck';
+import { AppState } from '../reducer/reducer';
 import Datalaster from '../api/Datalaster';
 
 interface OwnProps {
