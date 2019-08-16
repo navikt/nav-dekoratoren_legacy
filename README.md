@@ -17,10 +17,16 @@ npm run build
 
 # Kjør applikasjonen
 
-Kjør Express-server lokalt (localhost:8088):
+Kjør Express-server lokalt => localhost:8088 (kun statiske filer fra build-folder:
 
 ```
 npm run server
+```
+
+Kjør utviklinsmiljø med webpack-devServer og express-server (backend):
+
+```
+npm start
 ```
 
 ### Nais-cluster
