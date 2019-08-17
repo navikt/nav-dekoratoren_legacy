@@ -38,5 +38,3 @@ const Environments = () => {
 };
 
 export default Environments;
-
-// https://www-x1.nav.no/navno/_/service/no.nav.navno/menu

@@ -12,7 +12,7 @@ export default () => {
     const fetchMock = FetchMock.configure({
         enableFallback: true, // default: true
         middleware: MiddlewareUtils.combine(
-            MiddlewareUtils.delayMiddleware(1000),
+            MiddlewareUtils.delayMiddleware(0),
             MiddlewareUtils.failurerateMiddleware(0.0),
             loggingMiddleware
         ),
@@ -24,5 +24,5 @@ export default () => {
 
     fetchMock.get(`${API.getVarselinnboksURL}(.*)`, varselinnboksResponse);
 
-    fetchMock.post(`${API.postVarselinnboksURL}/33475442`, ({body}) => body);
+    fetchMock.post(`${API.postVarselinnboksURL}/33475442`, ({ body }) => body);
 };
