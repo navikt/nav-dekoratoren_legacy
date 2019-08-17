@@ -9,7 +9,7 @@ import {
 } from '../../provider/Storage-provider';
 import DropdownHoyreSeksjon from './hovedmeny/dropdown-meny/DropdownHoyreSeksjon';
 import { toppmenyLenker } from './toppmeny/Toppmeny-lenker';
-import { MenyPunkter } from '../../reducer/menu-duck';
+import { Data, DataInitState, MenyPunkter } from '../../reducer/menu-duck';
 import DropdownVenstreSeksjon from './hovedmeny/dropdown-meny/DropdownVenstreSeksjon';
 import Hovedmeny from './hovedmeny/Hovedmeny';
 import Skiplinks from './skiplinks/Skiplinks';
@@ -17,12 +17,8 @@ import Skiplinks from './skiplinks/Skiplinks';
 interface State {
     clicked: boolean;
     toppmeny: MenuValue;
-    meny: {
-        children: {}[];
-        displayName: string;
-        hasChildren: boolean;
-        path: string;
-    };
+    meny: Data;
+    minside: Data;
 }
 
 interface MenuProps {
@@ -34,14 +30,15 @@ class HeaderContent extends React.Component<MenuProps, State> {
         super(props);
         this.state = {
             clicked: false,
-            meny: {
-                children: [{}],
-                displayName: '',
-                hasChildren: false,
-                path: '',
-            },
+            meny: DataInitState,
+            minside: DataInitState,
+
             toppmeny: hentStatus(),
         };
+    }
+
+    static minside<T, K extends keyof T>(meny: T, key: K): T[K] {
+        return meny[key];
     }
 
     dropDownExpand = () => {
@@ -57,6 +54,7 @@ class HeaderContent extends React.Component<MenuProps, State> {
         if (this.props.meny !== nextProps.meny) {
             this.setState({
                 meny: setMenuView(nextProps.meny.data),
+                minside: HeaderContent.minside(nextProps.meny.data, 3),
             });
         }
     }
@@ -83,7 +81,10 @@ class HeaderContent extends React.Component<MenuProps, State> {
                                         menyLenker={this.state.meny}
                                         status={this.props.meny.status}
                                     />
-                                    <DropdownHoyreSeksjon className="nedtrekksmeny" />
+                                    <DropdownHoyreSeksjon
+                                        minsideMenyView={this.state.minside}
+                                        className="nedtrekksmeny"
+                                    />
                                 </Hovedmeny>
                             </div>
                         </header>

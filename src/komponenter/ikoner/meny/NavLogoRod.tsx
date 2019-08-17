@@ -1,4 +1,6 @@
 import React from 'react';
+import Lenke from "nav-frontend-lenker";
+
 
 const NavLogoRod = ({
     width,
@@ -10,6 +12,7 @@ const NavLogoRod = ({
     classname?: string;
 }) => {
     return (
+        <Lenke className="navbar-brand" href="https://nav.no">
         <svg
             className={classname}
             width={width ? width : '269px'}
@@ -75,6 +78,7 @@ const NavLogoRod = ({
                 </g>
             </g>
         </svg>
+        </Lenke>
     );
 };
 

@@ -15,15 +15,15 @@ class Footer extends React.Component {
                     <div className={cls.element('topp')}>
                         <div className={cls.element('topp', 'left')}>
                             <Element>Var denne informasjonen nyttig?</Element>
-                            <Lenke href="javascript:void(0)">
+                            <Lenke href="#">
                                 <Normaltekst>Ja</Normaltekst>
                             </Lenke>
-                            <Lenke href="javascript:void(0)">
+                            <Lenke href="#">
                                 <Normaltekst>Nei</Normaltekst>
                             </Lenke>
                         </div>
                         <div className={cls.element('topp', 'right')}>
-                            <Lenke href="javascript:void(0)">
+                            <Lenke href="#">
                                 <Normaltekst>
                                     Er det noe galt med denne siden?
                                 </Normaltekst>

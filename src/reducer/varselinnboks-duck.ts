@@ -10,7 +10,7 @@ import { JSONObject } from 'yet-another-fetch-mock';
 import { Dispatch } from '../redux/dispatch-type';
 import { fetchThenDispatch } from '../api/api-utils';
 import { hentVarslerFetch } from '../api/api';
-import { DataElement, Status } from '../api/Datalaster';
+import { DataElement, Status } from '../api/api';
 
 export interface VarselinnboksState extends DataElement {
     data: Data;

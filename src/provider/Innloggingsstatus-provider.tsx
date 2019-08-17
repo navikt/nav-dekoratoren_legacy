@@ -32,9 +32,9 @@ const InnloggingsstatusProvider: React.FunctionComponent<InnloggingsstatusProvid
     );
 
     return (
-        <Datalaster avhengigheter={[props.innloggingsstatus]}>
+        <>
             {props.children}
-        </Datalaster>
+        </>
     );
 };
 

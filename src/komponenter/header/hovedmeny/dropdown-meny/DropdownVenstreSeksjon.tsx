@@ -1,16 +1,13 @@
 import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from '../../../../utils/bem';
+import {Data} from "../../../../reducer/menu-duck";
+import {Status} from "../../../../api/api";
 
 interface Props {
     classname: string;
-    menyLenker: {
-        children: {}[];
-        displayName: string;
-        hasChildren: boolean;
-        path: string;
-    };
-    status: string;
+    menyLenker: Data;
+    status: Status;
 }
 
 const DropdownVenstreSeksjon = (props: Props) => {
@@ -23,15 +20,10 @@ const DropdownVenstreSeksjon = (props: Props) => {
     };
 
     const presentOptions = (
-        meny: {
-            children: {}[];
-            displayName: string;
-            hasChildren: boolean;
-            path: string;
-        },
-        status: string
+        meny: Data,
+        currentStatus: Status
     ) => {
-        if (status.toUpperCase() == 'OK') {
+        if (currentStatus.toUpperCase() === 'OK') {
             return meny.children.map((meny: any) => {
                 return (
                     <section

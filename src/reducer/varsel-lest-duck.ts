@@ -8,7 +8,7 @@ import {
 import { Dispatch } from '../redux/dispatch-type';
 import { fetchThenDispatch } from '../api/api-utils';
 import { lagreVarslerLestFetch } from '../api/api';
-import { DataElement, Status } from '../api/Datalaster';
+import { DataElement, Status } from '../api/api';
 
 export const initialLestMeldingState: DataElement = {
     status: Status.IKKE_STARTET,

@@ -7,37 +7,39 @@ import {
 } from '../redux/actions';
 import { Dispatch } from '../redux/dispatch-type';
 import { fetchThenDispatch } from '../api/api-utils';
-import { hentMenyPunkter } from '../api/api';
-
-export interface Interface {}
-
-export enum Status {
-    OK = 'OK',
-    FEILET = 'FEILET',
-    PENDING = 'PENDING',
-    IKKE_STARTET = 'IKKE_STARTET',
-    RELOADING = 'RELOADING',
-}
+import {hentMenyPunkter, Status} from '../api/api';
 
 export interface DataStatus {
     status: Status;
 }
 
 export interface MenyPunkter extends DataStatus {
-    data: Array<object>;
+    data: Data[];
 }
 
 export interface Data {
-    menu: Array<object>;
+    children: {}[];
+    displayName: string;
+    hasChildren: boolean;
+    path: string;
+    id?: string;
 }
 
-const inittalState: MenyPunkter = {
-    data: [{}],
+export const DataInitState = {
+    children: [{}],
+    displayName: '',
+    hasChildren: false,
+    path: '',
+    id: '',
+};
+
+const initalState: MenyPunkter = {
+    data: [DataInitState],
     status: Status.IKKE_STARTET,
 };
 
 export default function reducer(
-    state: MenyPunkter = inittalState,
+    state: MenyPunkter = initalState,
     action: Handling
 ): MenyPunkter {
     switch (action.type) {
@@ -58,14 +60,14 @@ export default function reducer(
 }
 
 export function fetchMenypunkter(): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Array<object>>(() => hentMenyPunkter(), {
+    return fetchThenDispatch<Data[]>(() => hentMenyPunkter(), {
         ok: menypunkterSuksess,
         feilet: menypunkterFeilet,
         pending: menypunkterPending,
     });
 }
 
-function menypunkterSuksess(data: Array<object>): HentMenyLenkerSUCCESS {
+function menypunkterSuksess(data: Data[]): HentMenyLenkerSUCCESS {
     return {
         type: ActionType.HENT_MENY_OK,
         data: data,

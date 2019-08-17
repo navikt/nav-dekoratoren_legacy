@@ -1,6 +1,5 @@
 import React from 'react';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
-import Lenke from 'nav-frontend-lenker';
 import { Undertittel } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
 import HamburgerIkon from '../../ikoner/meny/HamburgerIkon';
@@ -24,13 +23,11 @@ const Hovedmeny: React.FunctionComponent<Props> = props => {
         <nav className={cls.className}>
             <div className={cls.element('content')}>
                 <div className={cls.element('meny')}>
-                    <Lenke className="navbar-brand" href="https://nav.no">
                         <NavLogoRod
                             width="88"
                             height="88"
                             classname={cls.element('logo')}
                         />
-                    </Lenke>
                     <div className={cls.element('function-components')}>
                         <button
                             onClick={props.dropDownExpand}

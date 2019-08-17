@@ -1,23 +1,9 @@
 import * as React from 'react';
 import Spinner from 'nav-frontend-spinner';
+import {Status, DataElement, DatalasterProps} from "./api";
 
-export enum Status {
-    OK = 'OK',
-    FEILET = 'FEILET',
-    PENDING = 'PENDING',
-    IKKE_STARTET = 'IKKE_STARTET',
-    RELOADING = 'RELOADING',
-}
-export interface DataElement {
-    status: Status;
-}
 
-interface DatalasterProps {
-    avhengigheter: DataElement[];
-    ventPa?: DataElement[];
-    children: React.ReactElement<any>; // tslint:disable-line:no-any
-    feilmeldingId?: string;
-}
+
 
 const harStatus = (dataElement: DataElement, status: Status): boolean => {
     return dataElement.status === status;

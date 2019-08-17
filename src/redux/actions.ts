@@ -1,5 +1,6 @@
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
+import {Data} from "../reducer/menu-duck";
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',
@@ -32,7 +33,7 @@ export interface HentInnloggingsstatusFEILETAction {
 
 export interface HentMenyLenkerSUCCESS {
     type: ActionType.HENT_MENY_OK;
-    data: Array<object>;
+    data: Data[];
 }
 
 export interface HentMenyLenkerPENDING {

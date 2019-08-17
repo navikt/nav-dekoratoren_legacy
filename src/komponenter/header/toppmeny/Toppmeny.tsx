@@ -44,7 +44,7 @@ const Toppmeny = (props: Props) => {
                                         )
                                     }
                                 >
-                                    <div className={cls.element('inner', props.menyValg == lenke.tittel
+                                    <div className={cls.element('inner', props.menyValg === lenke.tittel
                                         ? 'active'
                                         : '')}>
                                     <EtikettLiten tag="h3">
