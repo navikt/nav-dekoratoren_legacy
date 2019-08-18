@@ -30,28 +30,24 @@ const DropdownVenstreSeksjon = (props: Props) => {
                         <div className={cls.element('seksjonOverskrift')}>
                             <Element>{meny.displayName}</Element>
                             <ul>
-                                {meny.children &&
-                                    meny.children.map(
-                                        (lenke: any, index: number) => {
-                                            return (
-                                                <li key={index}>
-                                                    <a
-                                                        href={lenke.path}
-                                                        onClick={event =>
-                                                            goto(
-                                                                event,
-                                                                lenke.path
-                                                            )
-                                                        }
-                                                    >
-                                                        <Normaltekst>
-                                                            {lenke.displayName}
-                                                        </Normaltekst>
-                                                    </a>
-                                                </li>
-                                            );
-                                        }
-                                    )}
+                                {meny.children.map(
+                                    (lenke: any, index: number) => {
+                                        return (
+                                            <li key={index}>
+                                                <a
+                                                    href={lenke.path}
+                                                    onClick={event =>
+                                                        goto(event, lenke.path)
+                                                    }
+                                                >
+                                                    <Normaltekst>
+                                                        {lenke.displayName}
+                                                    </Normaltekst>
+                                                </a>
+                                            </li>
+                                        );
+                                    }
+                                )}
                             </ul>
                         </div>
                     </section>
