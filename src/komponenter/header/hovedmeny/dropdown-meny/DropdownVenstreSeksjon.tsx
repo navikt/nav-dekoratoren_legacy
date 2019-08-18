@@ -20,7 +20,7 @@ const DropdownVenstreSeksjon = (props: Props) => {
     };
 
     const presentOptions = (meny: Data, currentStatus: Status) => {
-        if (currentStatus.toUpperCase() === Status.OK) {
+        if (currentStatus === Status.OK) {
             return meny.children.map((meny: any) => {
                 return (
                     <section

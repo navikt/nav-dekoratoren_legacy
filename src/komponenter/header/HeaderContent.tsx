@@ -44,7 +44,7 @@ class HeaderContent extends React.Component<MenuProps, State> {
         return meny[key];
     }
 
-    componentDidUpdate(prevProps: any, prevState: any) {
+    componentDidUpdate(prevProps: MenuProps, prevState: State) {
         if (
             prevProps.meny.status !== this.props.meny.status &&
             this.props.meny.status === Status.OK
