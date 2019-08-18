@@ -6,7 +6,6 @@ import {
     InnloggingsstatusState,
 } from '../reducer/innloggingsstatus-duck';
 import { AppState } from '../reducer/reducer';
-import Datalaster from '../api/Datalaster';
 
 interface OwnProps {
     children: React.ReactElement<any>; // tslint:disable-line:no-any
@@ -22,20 +21,14 @@ interface DispatchProps {
 
 type InnloggingsstatusProviderProps = OwnProps & StateProps & DispatchProps;
 
-const InnloggingsstatusProvider: React.FunctionComponent<InnloggingsstatusProviderProps> = props => {
+const InnloggingsstatusProvider: React.FunctionComponent<
+    InnloggingsstatusProviderProps
+> = props => {
+    useEffect(() => {
+        props.doHentInnloggingsstatus();
+    }, []);
 
-    useEffect(
-        () => {
-            props.doHentInnloggingsstatus();
-        },
-        []
-    );
-
-    return (
-        <>
-            {props.children}
-        </>
-    );
+    return <>{props.children}</>;
 };
 
 const mapStateToProps = (state: AppState): StateProps => ({

@@ -13,12 +13,14 @@ import { Data, DataInitState, MenyPunkter } from '../../reducer/menu-duck';
 import DropdownVenstreSeksjon from './hovedmeny/dropdown-meny/DropdownVenstreSeksjon';
 import Hovedmeny from './hovedmeny/Hovedmeny';
 import Skiplinks from './skiplinks/Skiplinks';
+import { Status } from '../../api/api';
 
 interface State {
     clicked: boolean;
     toppmeny: MenuValue;
     meny: Data;
     minside: Data;
+    menyStatus: Status;
 }
 
 interface MenuProps {
@@ -32,6 +34,7 @@ class HeaderContent extends React.Component<MenuProps, State> {
             clicked: false,
             meny: DataInitState,
             minside: DataInitState,
+            menyStatus: Status.IKKE_STARTET,
 
             toppmeny: hentStatus(),
         };
@@ -41,23 +44,24 @@ class HeaderContent extends React.Component<MenuProps, State> {
         return meny[key];
     }
 
+    componentDidUpdate(prevProps: any, prevState: any) {
+        if (
+            prevProps.meny.status !== this.props.meny.status &&
+            this.props.meny.status === Status.OK
+        ) {
+            this.setState({
+                meny: setMenuView(this.props.meny.data),
+                minside: HeaderContent.minside(this.props.meny.data, 3),
+                menyStatus: Status.OK,
+            });
+        }
+    }
+
     dropDownExpand = () => {
         this.setState({
             clicked: !this.state.clicked,
         });
     };
-
-    componentWillReceiveProps(
-        nextProps: Readonly<MenuProps>,
-        nextContext: any
-    ): void {
-        if (this.props.meny !== nextProps.meny) {
-            this.setState({
-                meny: setMenuView(nextProps.meny.data),
-                minside: HeaderContent.minside(nextProps.meny.data, 3),
-            });
-        }
-    }
 
     render() {
         return (
@@ -79,7 +83,7 @@ class HeaderContent extends React.Component<MenuProps, State> {
                                     <DropdownVenstreSeksjon
                                         classname="nedtrekksmeny"
                                         menyLenker={this.state.meny}
-                                        status={this.props.meny.status}
+                                        status={this.state.menyStatus}
                                     />
                                     <DropdownHoyreSeksjon
                                         minsideMenyView={this.state.minside}

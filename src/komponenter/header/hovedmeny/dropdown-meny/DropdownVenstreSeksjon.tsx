@@ -1,8 +1,8 @@
 import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from '../../../../utils/bem';
-import {Data} from "../../../../reducer/menu-duck";
-import {Status} from "../../../../api/api";
+import { Data } from '../../../../reducer/menu-duck';
+import { Status } from '../../../../api/api';
 
 interface Props {
     classname: string;
@@ -19,11 +19,8 @@ const DropdownVenstreSeksjon = (props: Props) => {
         window.location.href = url;
     };
 
-    const presentOptions = (
-        meny: Data,
-        currentStatus: Status
-    ) => {
-        if (currentStatus.toUpperCase() === 'OK') {
+    const presentOptions = (meny: Data, currentStatus: Status) => {
+        if (currentStatus.toUpperCase() === Status.OK) {
             return meny.children.map((meny: any) => {
                 return (
                     <section
@@ -33,24 +30,28 @@ const DropdownVenstreSeksjon = (props: Props) => {
                         <div className={cls.element('seksjonOverskrift')}>
                             <Element>{meny.displayName}</Element>
                             <ul>
-                                {meny.children.map(
-                                    (lenke: any, index: number) => {
-                                        return (
-                                            <li key={index}>
-                                                <a
-                                                    href={lenke.path}
-                                                    onClick={event =>
-                                                        goto(event, lenke.path)
-                                                    }
-                                                >
-                                                    <Normaltekst>
-                                                        {lenke.displayName}
-                                                    </Normaltekst>
-                                                </a>
-                                            </li>
-                                        );
-                                    }
-                                )}
+                                {meny.children &&
+                                    meny.children.map(
+                                        (lenke: any, index: number) => {
+                                            return (
+                                                <li key={index}>
+                                                    <a
+                                                        href={lenke.path}
+                                                        onClick={event =>
+                                                            goto(
+                                                                event,
+                                                                lenke.path
+                                                            )
+                                                        }
+                                                    >
+                                                        <Normaltekst>
+                                                            {lenke.displayName}
+                                                        </Normaltekst>
+                                                    </a>
+                                                </li>
+                                            );
+                                        }
+                                    )}
                             </ul>
                         </div>
                     </section>

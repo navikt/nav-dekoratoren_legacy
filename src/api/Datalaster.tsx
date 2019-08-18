@@ -1,9 +1,6 @@
 import * as React from 'react';
 import Spinner from 'nav-frontend-spinner';
-import {Status, DataElement, DatalasterProps} from "./api";
-
-
-
+import { Status, DataElement, DatalasterProps } from './api';
 
 const harStatus = (dataElement: DataElement, status: Status): boolean => {
     return dataElement.status === status;
@@ -25,24 +22,14 @@ const Datalaster = ({
                 a => harStatus(a, Status.OK) || harStatus(a, Status.FEILET)
             ))
     ) {
-
         return children;
-
-
-
     } else if (avhengigheter.some(a => harStatus(a, Status.FEILET))) {
-
-
         console.log(
             'det har dessverre oppstått en feil med innloggingslinjen. Vi jobber med å få løst problemet.'
         );
-
-
         return children;
-
-
     }
-    return <Spinner type="XXL" />;
+    return <Spinner type="S" />;
 };
 
 export default Datalaster;

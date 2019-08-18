@@ -57,7 +57,7 @@ const fetchmenuOptions = res => {
             uri: `${fetchmenyUri}/navno/_/service/no.nav.navno/menu`,
         },
         (error, response, body) => {
-            if (!error && response.statusCode == 200) {
+            if (!error && response.statusCode === 200) {
                 mainCache.set(mainCacheKey, body, 100);
                 backupCache.set(backupCacheKey, body, 0);
                 res.send(body);
