@@ -5,6 +5,7 @@ const path = require('path');
 const buildPath = path.resolve(__dirname, '../../build/');
 const request = require('request');
 const NodeCache = require('node-cache');
+const backupData = require('./menu/no.menu.json');
 
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
@@ -70,9 +71,18 @@ const fetchmenuOptions = res => {
                             fetchresponse: error,
                             cacheresponse: err,
                         };
-                        console.log(serverErr);
-                        res.sendFile(
-                            path.resolve(__dirname, './menu/no.menu.json')
+                        res.send(backupData);
+                        mainCache.set(
+                            mainCacheKey,
+                            backupData,
+                            (err, success) => {
+                                if (!err && success) {
+                                    console.log('mainCache set success');
+                                } else {
+                                    console.log('mainCache-set error :', err);
+                                    console.log('server error:', serverErr);
+                                }
+                            }
                         );
                     }
                 });
@@ -82,7 +92,7 @@ const fetchmenuOptions = res => {
 };
 
 app.get('/api/get/menyvalg', (req, res) => {
-    mainCache.get('navno-menu', (err, response) => {
+    mainCache.get(mainCacheKey, (err, response) => {
         if (!err && response !== undefined) {
             res.send(response);
         } else fetchmenuOptions(res);
