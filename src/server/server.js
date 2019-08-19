@@ -54,7 +54,7 @@ const fetchmenuOptions = res => {
     request(
         {
             method: 'GET',
-            uri: `${fetchmenyUri}/navno/_/service/no.nav.navno/menu`,
+            uri: `${fetchmenyUri}`,
         },
         (error, response, body) => {
             if (!error && response.statusCode === 200) {
