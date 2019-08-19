@@ -8,9 +8,9 @@ import React from 'react';
 
 // const SokInput = ({ options, onChange}: OwnProps) => {
 const SokInput = () => {
-        return (
-            <div />
-            /* <Downshift
+    return (
+        <div />
+        /* <Downshift
                 onChange={selectedItem => onChange(selectedItem ? selectedItem.value : '')}
                 itemToString={item => (item ? item.value : '')}
             >
@@ -57,7 +57,7 @@ const SokInput = () => {
                     </form>
                 )}
             </Downshift> */
-        );
+    );
     // };
-}
+};
 export default SokInput;

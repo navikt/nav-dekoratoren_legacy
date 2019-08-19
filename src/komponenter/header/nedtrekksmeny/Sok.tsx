@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { Input } from 'nav-frontend-skjema';
+import { Input } from 'nav-frontend-skjema';
 import { API } from '../../../api/api';
 import throttle from 'lodash.throttle';
 import Downshift from 'downshift';
@@ -37,8 +37,13 @@ interface Sokeresultat {
     highlight: string;
 }
 
-export function Sokeresultat({ overskrift, highlight }: Sokeresultat ) {
-    return <div><div className="overskrift">{overskrift}</div><div className="highlight">{highlight}</div></div>;
+export function Sokeresultat({ overskrift, highlight }: Sokeresultat) {
+    return (
+        <div>
+            <div className="overskrift">{overskrift}</div>
+            <div className="highlight">{highlight}</div>
+        </div>
+    );
 }
 
 interface InputState {
@@ -47,8 +52,7 @@ interface InputState {
 }
 
 class Sok extends React.Component<{}, InputState> {
-
-    handleInputThrottled: ReturnType<typeof throttle>
+    handleInputThrottled: ReturnType<typeof throttle>;
 
     constructor(props: {}) {
         super(props);
@@ -56,7 +60,10 @@ class Sok extends React.Component<{}, InputState> {
             inputString: '',
             items: [defaultData],
         };
-        this.handleInputThrottled = throttle(this.handleChange.bind(this), 2000);
+        this.handleInputThrottled = throttle(
+            this.handleChange.bind(this),
+            2000
+        );
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -101,65 +108,74 @@ class Sok extends React.Component<{}, InputState> {
                 onSubmit={event => this.handleSubmit(event, URL)}
             >
                 <Downshift
-                    onInputValueChange={ (changes: string) => {
+                    onInputValueChange={(changes: string) => {
                         console.log('Changes', changes);
                         this.handleChange(changes);
                     }}
                     itemToString={item => (item ? item.highlight : '')}
                 >
                     {({
-                          getInputProps,
-                          getItemProps,
-                          getLabelProps,
-                          getMenuProps,
-                          isOpen,
-                          inputValue,
-                          highlightedIndex,
-                          selectedItem,
-                      }) => (
+                        getInputProps,
+                        getItemProps,
+                        getLabelProps,
+                        getMenuProps,
+                        isOpen,
+                        inputValue,
+                        highlightedIndex,
+                        selectedItem,
+                    }) => (
                         <div className="sok">
-
-                                <input
-                                    {...getInputProps(
-                                        {className: 'sok-input', label: 'Søk:', placeholder: 'Hva leter du etter?'}
-                                    )}
-                                    // className="sok-input"
-                                    // type="search"
-                                    // label="Søk:"
-                                    aria-label="Søk"
-                                    // placeholder="Hva leter du etter?"
-                                    /* onChange={event => {
-                                        this.handleInputThrottled(event);
-                                    }} */
-                                />
-                                <div className="sok-knapp btn">
-                                    <button className="knapp knapp--hoved" type="submit">
-                                        SØK
-                                    </button>
-                                </div>
-                                <ul {...getMenuProps()}>
-                                    {isOpen
-                                        ? items
-                                            .filter(item => !inputValue || item.highlight.includes(inputValue))
-                                            .map((item, index) => (
-                                                <li
-                                                    {...getItemProps({
-                                                        key: item.href,
-                                                        index,
-                                                        item,
-                                                        style: {
-                                                            backgroundColor:
-                                                                highlightedIndex === index ? 'lightgray' : 'white',
-                                                            fontWeight: selectedItem === item ? 'bold' : 'normal',
-                                                        },
-                                                    })}
-                                                >
-                                                    {item.highlight}
-                                                </li>
-                                            ))
-                                        : null}
-                                </ul>
-
+                            <Input
+                                {...getInputProps()}
+                                className="sok-input"
+                                type="search"
+                                label="Søk:"
+                                placeholder="Hva leter du etter?"
+                                aria-label="Søk"
+                            />
+                            <div className="sok-knapp btn">
+                                <button
+                                    className="knapp knapp--hoved"
+                                    type="submit"
+                                >
+                                    SØK
+                                </button>
+                            </div>
+                            <ul {...getMenuProps()}>
+                                {isOpen
+                                    ? items
+                                          .filter(
+                                              item =>
+                                                  !inputValue ||
+                                                  item.highlight.includes(
+                                                      inputValue
+                                                  )
+                                          )
+                                          .map((item, index) => (
+                                              <li
+                                                  {...getItemProps({
+                                                      key: index,
+                                                      index,
+                                                      item,
+                                                      style: {
+                                                          backgroundColor:
+                                                              highlightedIndex ===
+                                                              index
+                                                                  ? 'lightgray'
+                                                                  : 'white',
+                                                          fontWeight:
+                                                              selectedItem ===
+                                                              item
+                                                                  ? 'bold'
+                                                                  : 'normal',
+                                                      },
+                                                  })}
+                                              >
+                                                  {item.highlight}
+                                              </li>
+                                          ))
+                                    : null}
+                            </ul>
                         </div>
                     )}
                 </Downshift>
