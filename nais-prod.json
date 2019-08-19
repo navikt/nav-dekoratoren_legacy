@@ -10,7 +10,7 @@
     },
     "spec": {
         "image": "navikt/nav-dekoratoren:latest",
-        "port": 8080,
+        "port": 8088,
         "liveness": {
             "path": "/person/nav-dekoratoren/isalive",
             "initialDelay": 10
@@ -32,8 +32,8 @@
         ],
         "env": [
             {
-                "name": "MY_CUSTOM_VAR",
-                "value": "some_value"
+                "name": "MENYLENKER",
+                "value": "https://www-x1.nav.no"
             }
         ],
         "resources": {

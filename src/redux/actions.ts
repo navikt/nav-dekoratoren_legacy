@@ -1,10 +1,14 @@
-import { Data as innloggingsstatusData } from './innloggingsstatus-duck';
-import { Data as varselinnboksData } from './varselinnboks-duck';
+import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
+import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
+import {Data} from "../reducer/menu-duck";
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',
     HENT_INNLOGGINGSSTATUS_FEILET = 'HENT_INNLOGGINGSSTATUS_FEILET',
     HENT_INNLOGGINGSSTATUS_PENDING = 'HENT_INNLOGGINGSSTATUS_PENDING',
+    HENT_MENY_OK = 'HENT_MENY_OK',
+    HENT_MENY_FEILET = 'HENT_MENY_FEILET',
+    HENT_MENY_PENDING = 'HENT_MENY_PENDING',
     HENT_VARSLER_OK = 'HENT_VARSLER_OK',
     HENT_VARSLER_FEILET = 'HENT_VARSLER_FEILET',
     HENT_VARSLER_PENDING = 'HENT_VARSLER_PENDING',
@@ -25,6 +29,19 @@ export interface HentInnloggingsstatusPENDINGAction {
 
 export interface HentInnloggingsstatusFEILETAction {
     type: ActionType.HENT_INNLOGGINGSSTATUS_FEILET;
+}
+
+export interface HentMenyLenkerSUCCESS {
+    type: ActionType.HENT_MENY_OK;
+    data: Data[];
+}
+
+export interface HentMenyLenkerPENDING {
+    type: ActionType.HENT_MENY_PENDING;
+}
+
+export interface HentMenyLenkerFAILED {
+    type: ActionType.HENT_MENY_FEILET;
 }
 
 export interface HentVarslerOKAction {
@@ -61,6 +78,9 @@ export type Handling =
     | HentInnloggingsstatusOKAction
     | HentInnloggingsstatusFEILETAction
     | HentInnloggingsstatusPENDINGAction
+    | HentMenyLenkerSUCCESS
+    | HentMenyLenkerFAILED
+    | HentMenyLenkerPENDING
     | HentVarslerOKAction
     | HentVarslerFEILETAction
     | HentVarslerPENDINGAction

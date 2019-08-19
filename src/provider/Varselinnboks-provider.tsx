@@ -5,8 +5,8 @@ import {
     hentVarsler,
     settVarslerOK,
     VarselinnboksState,
-} from '../redux/varselinnboks-duck';
-import { AppState } from '../redux/reducer';
+} from '../reducer/varselinnboks-duck';
+import { AppState } from '../reducer/reducer';
 import Datalaster from '../api/Datalaster';
 
 interface OwnProps {
@@ -25,18 +25,16 @@ interface DispatchProps {
 
 type VarselinnboksProviderProps = OwnProps & StateProps & DispatchProps;
 
-const VarselinnboksProvider: React.FunctionComponent<VarselinnboksProviderProps> = props => {
-
-    useEffect(
-        () => {
-            if (props.erInnlogget) {
-                props.doHentVarselinnboks();
-            } else {
-                props.doSettVarselinnboksOK();
-            }
-        },
-        []
-    );
+const VarselinnboksProvider: React.FunctionComponent<
+    VarselinnboksProviderProps
+> = props => {
+    useEffect(() => {
+        if (props.erInnlogget) {
+            props.doHentVarselinnboks();
+        } else {
+            props.doSettVarselinnboksOK();
+        }
+    }, [props.erInnlogget]);
 
     return (
         <Datalaster avhengigheter={[props.varsler]}>
@@ -47,7 +45,9 @@ const VarselinnboksProvider: React.FunctionComponent<VarselinnboksProviderProps>
 
 const mapStateToProps = (state: AppState): StateProps => ({
     varsler: state.varsler,
-    erInnlogget: state.innloggingsstatus.data.authenticated === true && state.innloggingsstatus.data.securityLevel === '4'
+    erInnlogget:
+        state.innloggingsstatus.data.authenticated === true &&
+        state.innloggingsstatus.data.securityLevel === '4',
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

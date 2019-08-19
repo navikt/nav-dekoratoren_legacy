@@ -1,19 +1,13 @@
+@import '~nav-frontend-core/less/_variabler';
+
 .toppmeny {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    &__venstreMeny {
-        display: flex;
-        flex-direction: row;
-        padding-left: 0.25rem;
-    }
-
-    &__hoyreMeny {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(242, 242, 242, 1);
+    height: 44px;
 
     &__topp-liste-rad {
         min-width: 325px;
@@ -22,7 +16,7 @@
         overflow-y: hidden;
     }
 
-    li {
+    &__list-element {
         float: left;
     }
 
@@ -37,20 +31,30 @@
     &__hoved {
         display: inline-block;
         text-align: center;
-        margin: 0.875rem 1rem;
+        padding:  0.75rem 1rem 0 1rem;
         text-decoration: none;
         color: black;
 
+
+        &:focus, &:active {
+            border: @navDypBla 3px solid;
+        }
+    }
+
+    &__inner {
+        padding-bottom: 0.7rem;
+
         &:hover {
-            border-bottom: black 1px solid;
+            border-bottom:  @navDypBla 2px solid;
         }
 
         &--active {
-            border-bottom: black 2px solid;
+            border-bottom: @navDypBla 2px solid;
             &:hover {
-                border-bottom: black 2px solid;
+                border-bottom: @navDypBla 3px solid;
             }
         }
+
     }
 
     .dropdown p {

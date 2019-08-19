@@ -1,0 +1,52 @@
+@import '../../../../../node_modules/nav-frontend-core/less/_variabler';
+
+.sok {
+    width: 100%;
+    text-align: center;
+
+    .input-container {
+        margin-bottom: 0;
+
+        .sok-input {
+            .skjemaelement__label {
+                margin-left: -3000px;
+                position: absolute;
+                line-height: 0;
+                height: 0;
+                width: 0;
+                color: transparent;
+            }
+
+            input[type='search'] {
+                box-sizing: border-box;
+            }
+        }
+        .sok-knapp {
+            display: block;
+        }
+    }
+}
+
+@media (min-width: @screen-sm-min) {
+    .sok {
+        width: 30rem;
+
+        .input-container {
+            display: flex;
+            justify-content: space-between;
+
+            .skjemaelement {
+                margin-bottom: 0;
+            }
+            .sok-input {
+                width: 75%;
+            }
+            .sok-knapp {
+                width: 23%;
+                .knapp {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
