@@ -28,6 +28,11 @@ interface MenuProps {
 }
 
 class HeaderContent extends React.Component<MenuProps, State> {
+
+    static minside<T, K extends keyof T>(meny: T, key: K): T[K] {
+        return meny[key];
+    }
+
     constructor(props: MenuProps) {
         super(props);
         this.state = {
@@ -37,10 +42,6 @@ class HeaderContent extends React.Component<MenuProps, State> {
             menyStatus: Status.IKKE_STARTET,
             toppmeny: hentStatus(),
         };
-    }
-
-    static minside<T, K extends keyof T>(meny: T, key: K): T[K] {
-        return meny[key];
     }
 
     componentDidUpdate(prevProps: MenuProps, prevState: State) {
@@ -60,7 +61,7 @@ class HeaderContent extends React.Component<MenuProps, State> {
         this.setState({
             clicked: !this.state.clicked,
         });
-    };
+    }
 
     render() {
         return (
@@ -112,6 +113,6 @@ class HeaderContent extends React.Component<MenuProps, State> {
             toppmeny: valgVerdi,
         });
         window.location.href = url;
-    };
+    }
 }
 export default HeaderContent;

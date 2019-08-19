@@ -18,7 +18,9 @@ type MenuProps = StateProps & DispatchProps;
 const Header = ({ meny, hentMenypunkter }: MenuProps) => {
     React.useEffect(() => {
         hentMenypunkter();
-    }, []);
+        },
+                    []
+    );
 
     return (
         <div>

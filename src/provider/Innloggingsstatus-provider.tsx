@@ -26,7 +26,9 @@ const InnloggingsstatusProvider: React.FunctionComponent<
 > = props => {
     useEffect(() => {
         props.doHentInnloggingsstatus();
-    }, []);
+    },
+              []
+    );
 
     return <>{props.children}</>;
 };

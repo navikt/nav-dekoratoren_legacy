@@ -1,5 +1,5 @@
 import React from 'react';
-import {Data} from "../reducer/menu-duck";
+import { Data } from '../reducer/menu-duck';
 export const NAVHEADER = 'NAVHEADER';
 
 interface Seksjon<T> {
@@ -64,7 +64,7 @@ export function setMenuView(
     return storage ? getMenuView(storage, meny) : meny[0];
 }
 
-function getMenuView(arg: string, content: Data[]): Data{
+function getMenuView(arg: string, content: Data[]): Data {
     return getContent(arg, {
         person: () => {
             return content[0];
