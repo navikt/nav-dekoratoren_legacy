@@ -5,6 +5,7 @@ import KnappBase from 'nav-frontend-knapper';
 import Environments from '../../../../utils/Environments';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
+import './Logg-inn-knapp.less';
 
 const { baseUrl, logoutUrl, loginUrl } = Environments();
 const path =

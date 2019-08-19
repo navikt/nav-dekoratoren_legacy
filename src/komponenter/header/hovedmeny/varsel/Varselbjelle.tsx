@@ -81,7 +81,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
         const html = parse(varsler);
 
         return (
-            <div ref={this.varselbjelleRef}>
+            <div ref={this.varselbjelleRef} className="varselbjelle">
                 {erInnlogget ? (
                     <div
                         id="toggle-varsler-container"

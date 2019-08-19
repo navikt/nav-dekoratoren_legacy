@@ -35,7 +35,6 @@ class HeaderContent extends React.Component<MenuProps, State> {
             meny: DataInitState,
             minside: DataInitState,
             menyStatus: Status.IKKE_STARTET,
-
             toppmeny: hentStatus(),
         };
     }
@@ -81,13 +80,13 @@ class HeaderContent extends React.Component<MenuProps, State> {
                                     clicked={this.state.clicked}
                                 >
                                     <DropdownVenstreSeksjon
-                                        classname="nedtrekksmeny"
+                                        classname="hovedmeny"
                                         menyLenker={this.state.meny}
                                         status={this.state.menyStatus}
                                     />
                                     <DropdownHoyreSeksjon
                                         minsideMenyView={this.state.minside}
-                                        className="nedtrekksmeny"
+                                        className="hovedmeny"
                                     />
                                 </Hovedmeny>
                             </div>

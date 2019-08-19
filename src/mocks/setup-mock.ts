@@ -17,7 +17,7 @@ export default () => {
         ),
     });
 
-    console.log('mock data enabled');
+    console.log('Mock data enabled');
 
     fetchMock.get(API.innloggingsstatusURL, innloggingsstatusResponse);
 
