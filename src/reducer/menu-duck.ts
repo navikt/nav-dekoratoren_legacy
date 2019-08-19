@@ -7,13 +7,9 @@ import {
 } from '../redux/actions';
 import { Dispatch } from '../redux/dispatch-type';
 import { fetchThenDispatch } from '../api/api-utils';
-import {hentMenyPunkter, Status} from '../api/api';
+import { hentMenyPunkter, DataElement, Status } from '../api/api';
 
-export interface DataStatus {
-    status: Status;
-}
-
-export interface MenyPunkter extends DataStatus {
+export interface MenyPunkter extends DataElement {
     data: Data[];
 }
 

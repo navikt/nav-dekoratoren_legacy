@@ -11,8 +11,6 @@ import { fetchThenDispatch } from '../api/api-utils';
 import { hentInnloggingsstatusFetch } from '../api/api';
 import { DataElement, Status } from '../api/api';
 
-
-
 export interface InnloggingsstatusState extends DataElement {
     data: Data;
 }

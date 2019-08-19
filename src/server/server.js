@@ -16,11 +16,11 @@ const backupCacheKey = 'navno-menu-backup';
 const isProduction = process.env.NODE_ENV === 'production';
 const fetchmenyUri = isProduction
     ? process.env.MENYLENKER
-    : 'http://localhost:8080';
+    : 'http://localhost:8088';
 
 const allowedOrigin = isProduction
     ? `(http|https)://(.*).nav.no`
-    : `http://localhost:8080`;
+    : `http://localhost:8088`;
 
 app.disable('x-powered-by');
 
@@ -91,7 +91,7 @@ const fetchmenuOptions = res => {
     );
 };
 
-app.get('/api/get/menyvalg', (req, res) => {
+app.get('/person/nav-dekoratoren/api/get/menyvalg', (req, res) => {
     mainCache.get(mainCacheKey, (err, response) => {
         if (!err && response !== undefined) {
             res.send(response);

@@ -4,4 +4,3 @@ export default {
     name: 'OLE NORMANN',
     securityLevel: '4',
 };
-
