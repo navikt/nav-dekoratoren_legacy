@@ -14,7 +14,7 @@ const Environments = () => {
             baseUrl: 'https://www-q0.nav.no',
             loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
-            menypunkter: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
+            menypunkter: '/person/nav-dekoratoren/api/get/menyvalg',
         };
     }
     if (window.location.hostname.indexOf('www-q1') > -1) {

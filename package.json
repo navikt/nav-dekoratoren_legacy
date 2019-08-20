@@ -12,8 +12,8 @@
         "server": "nodemon src/server/server.js",
         "lint": "tslint ./src/**/*.ts*",
         "lint:fix": "tslint ./src/**/*.ts* --fix",
-        "docker-build": "docker build . -t navikt/nav-dekoratoren",
-        "docker-push": "docker push navikt/nav-dekoratoren",
+        "docker-build": "docker build . -t navikt/nav-dekoratoren:t16",
+        "docker-push": "docker push navikt/nav-dekoratoren:t11",
         "docker-start": "docker run --rm -p 8088:8088 navikt/nav-dekoratoren",
         "deploy-dev": "kubectl apply -f nais-dev.json",
         "deploy-prod": "kubectl apply -f nais-prod.json"
@@ -67,6 +67,7 @@
         "react-scripts": "2.1.8",
         "react-snapshot": "^1.3.0",
         "redux": "4.0.1",
+        "request": "2.83.0",
         "tslint": "^5.16.0",
         "typescript": "^3.4.5"
     },
@@ -79,7 +80,8 @@
         "@types/react-dom": "^16.8.4",
         "@types/react-redux": "7.0.9",
         "cross-env": "^5.2.0",
-        "less": "^3.9.0",
+        "less-loader": "4.1.0",
+        "less": "3.8.1",
         "npm-run-all": "^4.1.5",
         "prettier": "^1.17.1",
         "yet-another-fetch-mock": "3.1.1"
