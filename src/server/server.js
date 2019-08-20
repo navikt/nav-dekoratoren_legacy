@@ -14,9 +14,11 @@ const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
 
 const isProduction = process.env.NODE_ENV === 'production';
+
 const fetchmenyUri = isProduction
     ? process.env.MENYLENKER
     : 'http://localhost:8088';
+
 const allowedOrigin = isProduction
     ? `(http|https)://(.*).nav.no`
     : `http://localhost:8088`;

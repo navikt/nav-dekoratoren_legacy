@@ -12,8 +12,8 @@
         "server": "nodemon src/server/server.js",
         "lint": "tslint ./src/**/*.ts*",
         "lint:fix": "tslint ./src/**/*.ts* --fix",
-        "docker-build": "docker build . -t navikt/nav-dekoratoren:t16",
-        "docker-push": "docker push navikt/nav-dekoratoren:t11",
+        "docker-build": "docker build . -t navikt/nav-dekoratoren",
+        "docker-push": "docker push navikt/nav-dekoratoren",
         "docker-start": "docker run --rm -p 8088:8088 navikt/nav-dekoratoren",
         "deploy-dev": "kubectl apply -f nais-dev.json",
         "deploy-prod": "kubectl apply -f nais-prod.json"
