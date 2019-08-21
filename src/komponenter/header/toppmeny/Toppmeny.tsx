@@ -32,9 +32,7 @@ const Toppmeny = (props: Props) => {
                                 key={lenke.tittel}
                             >
                                 <a
-                                    className={cls.element(
-                                        'hoved'
-                                    )}
+                                    className={cls.element('hoved')}
                                     href={lenke.url}
                                     onClick={event =>
                                         props.callMenuStorage(
@@ -44,12 +42,17 @@ const Toppmeny = (props: Props) => {
                                         )
                                     }
                                 >
-                                    <div className={cls.element('inner', props.menyValg === lenke.tittel
-                                        ? 'active'
-                                        : '')}>
-                                    <EtikettLiten tag="h3">
-                                        {lenke.tittel}
-                                    </EtikettLiten>
+                                    <div
+                                        className={cls.element(
+                                            'inner',
+                                            props.menyValg === lenke.tittel
+                                                ? 'active'
+                                                : ''
+                                        )}
+                                    >
+                                        <EtikettLiten tag="h3">
+                                            {lenke.tittel}
+                                        </EtikettLiten>
                                     </div>
                                 </a>
                             </li>

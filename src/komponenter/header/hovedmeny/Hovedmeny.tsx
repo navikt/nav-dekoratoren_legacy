@@ -28,8 +28,9 @@ const Hovedmeny: React.FunctionComponent<Props> = props => {
                         classname={cls.element('logo')}
                     />
                     <div className={cls.element('function-components')}>
-
-                        <MenyToggleKnapp dropdownExpand={props.dropDownExpand}/>
+                        <MenyToggleKnapp
+                            dropdownExpand={props.dropDownExpand}
+                        />
 
                         <MediaQuery minWidth={768}>
                             <Sok />
@@ -41,7 +42,6 @@ const Hovedmeny: React.FunctionComponent<Props> = props => {
 
                         <MinsideLenke />
                         <LoggInnKnapp />
-
                     </div>
                 </div>
             </div>
