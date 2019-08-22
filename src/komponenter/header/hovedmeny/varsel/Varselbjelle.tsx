@@ -61,7 +61,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             this.setState({ classname: 'toggle-varsler-container' });
             this.props.doSettVarslerSomLest(this.props.nyesteId);
         }
-    }
+    };
 
     handleOutsideClick: { (event: MouseEvent): void } = (e: MouseEvent) => {
         const node = this.varselbjelleRef.current;
@@ -69,7 +69,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             return;
         }
         this.handleClick();
-    }
+    };
 
     render() {
         const {

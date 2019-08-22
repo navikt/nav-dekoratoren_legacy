@@ -3,7 +3,7 @@ const app = express();
 const PORT = 8088;
 const path = require('path');
 const buildPath = path.resolve(__dirname, '../../build/');
-const request = require('request');
+const requestNode = require('request');
 const NodeCache = require('node-cache');
 const backupData = require('./menu/no.menu.json');
 
@@ -15,24 +15,13 @@ const backupCacheKey = 'navno-menu-backup';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const fetchmenyUri = isProduction
+const env = process.env.MENYLENKER
     ? process.env.MENYLENKER
-    : 'http://localhost:8088';
+    : 'https://www-x1.nav.no/navno/_/service/no.nav.navno/menu';
 
-const allowedOrigin = isProduction
-    ? `(http|https)://(.*).nav.no`
-    : `http://localhost:8088`;
+const fetchmenyUri = isProduction ? env : 'http://localhost:8088';
 
 app.disable('x-powered-by');
-
-app.use((req, res, next) => {
-    const origin = req.get('origin');
-    if (origin && origin.match(allowedOrigin)) {
-        res.header('Access-Control-Allow-Origin', origin);
-    }
-    next();
-});
-
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
@@ -43,16 +32,22 @@ app.use(function(req, res, next) {
     next();
 });
 
-if (!process.env.DEVELOPMENT) {
-    app.use(['/person/nav-dekoratoren/'], express.static(buildPath));
+app.use('/person/nav-dekoratoren/', express.static(buildPath));
 
-    app.get(['/person/nav-dekoratoren/*'], (req, res) => {
-        res.sendFile(path.resolve(__dirname, '../../build/index.html'));
-    });
-}
+app.get(
+    [
+        '/person/nav-dekoratoren/',
+        '/person/nav-dekoratoren/person/',
+        '/person/nav-dekoratoren/bedrift/',
+        '/person/nav-dekoratoren/samhandling/',
+    ],
+    (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../../build', 'index.html'));
+    }
+);
 
 const fetchmenuOptions = res => {
-    request(
+    requestNode(
         {
             method: 'GET',
             uri: `${fetchmenyUri}`,
@@ -78,7 +73,9 @@ const fetchmenuOptions = res => {
                             backupData,
                             (err, success) => {
                                 if (!err && success) {
-                                    console.log('mainCache set success');
+                                    console.log(
+                                        'maincache updated successfully'
+                                    );
                                 } else {
                                     console.log('mainCache-set error :', err);
                                     console.log('server error:', serverErr);

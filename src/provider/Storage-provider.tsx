@@ -53,9 +53,7 @@ export function hentStatus() {
     return storage ? getMenuValue(storage) : MenuValue.PRIVATPERSON;
 }
 
-export function setMenuView(
-    meny: Data[]
-): Data {
+export function setMenuView(meny: Data[]): Data {
     const path = checkUriPath();
     if (path) {
         return getMenuView(path, meny);

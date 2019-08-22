@@ -58,6 +58,6 @@ class HeaderContent extends React.Component<{}, State> {
             toppmeny: valgVerdi,
         });
         window.location.href = url;
-    }
+    };
 }
 export default HeaderContent;

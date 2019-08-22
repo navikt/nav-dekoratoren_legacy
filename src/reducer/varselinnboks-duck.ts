@@ -28,7 +28,8 @@ const initialState: VarselinnboksState = {
         uleste: 0,
         antall: 0,
         nyesteId: 0,
-        varsler: '<div class=\"panel nav-varsler\">\n    <p class=\"text-center\">Du har ingen varsler å vise.</p>\n</div>'
+        varsler:
+            '<div class="panel nav-varsler">\n    <p class="text-center">Du har ingen varsler å vise.</p>\n</div>',
     },
     status: Status.IKKE_STARTET,
 };
@@ -50,7 +51,7 @@ export default function reducer(
         case ActionType.HENT_VARSLER_FEILET:
             return { ...state, status: Status.FEILET };
         case ActionType.SETT_VARSLER_OK:
-            return {...state, status: Status.OK};
+            return { ...state, status: Status.OK };
         default:
             return state;
     }

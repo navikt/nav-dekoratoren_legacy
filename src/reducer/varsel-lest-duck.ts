@@ -15,7 +15,10 @@ export const initialLestMeldingState: DataElement = {
 };
 
 //  Reducer
-export default function reducer(state: DataElement = initialLestMeldingState, action: Handling): DataElement {
+export default function reducer(
+    state: DataElement = initialLestMeldingState,
+    action: Handling
+): DataElement {
     switch (action.type) {
         case ActionType.SETT_VARSLER_LEST_OK:
             return { ...state, status: Status.OK };
@@ -28,7 +31,9 @@ export default function reducer(state: DataElement = initialLestMeldingState, ac
     }
 }
 
-export function settVarslerSomLest(nyesteId: number): (dispatch: Dispatch) => Promise<void> {
+export function settVarslerSomLest(
+    nyesteId: number
+): (dispatch: Dispatch) => Promise<void> {
     return fetchThenDispatch<number>(() => lagreVarslerLestFetch(nyesteId), {
         ok: settVarslerLestOk,
         feilet: settVarslerLestFeilet,
@@ -39,7 +44,7 @@ export function settVarslerSomLest(nyesteId: number): (dispatch: Dispatch) => Pr
 function settVarslerLestOk(nyesteId: number): SettVarslerLestOKAction {
     return {
         type: ActionType.SETT_VARSLER_LEST_OK,
-        nyesteId
+        nyesteId,
     };
 }
 
