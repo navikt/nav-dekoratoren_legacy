@@ -32,20 +32,19 @@ app.use(function(req, res, next) {
     next();
 });
 
-if (!process.env.DEVELOPMENT) {
-    app.use(['/person/nav-dekoratoren/'], express.static(buildPath));
+app.use('/person/nav-dekoratoren/', express.static(buildPath));
 
-    app.get(
-        [
-            '/person/nav-dekoratoren/person/',
-            '/person/nav-dekoratoren/bedrift/',
-            '/person/nav-dekoratoren/samhandling/',
-        ],
-        (req, res) => {
-            res.sendFile(path.resolve(__dirname, '../../build/index.html'));
-        }
-    );
-}
+app.get(
+    [
+        '/person/nav-dekoratoren/',
+        '/person/nav-dekoratoren/person/',
+        '/person/nav-dekoratoren/bedrift/',
+        '/person/nav-dekoratoren/samhandling/',
+    ],
+    (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../../build', 'index.html'));
+    }
+);
 
 const fetchmenuOptions = res => {
     requestNode(
