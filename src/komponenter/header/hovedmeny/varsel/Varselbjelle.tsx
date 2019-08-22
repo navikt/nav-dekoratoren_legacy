@@ -92,6 +92,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                             className="toggle-varsler"
                             title="Varsler"
                             aria-label="Varsler"
+                            aria-pressed={this.state.clicked}
                             aria-haspopup="true"
                             aria-controls="varsler-display"
                             aria-expanded={this.state.clicked}
