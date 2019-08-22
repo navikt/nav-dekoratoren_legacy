@@ -36,11 +36,12 @@ const Hovedmeny: React.FunctionComponent<Props> = props => {
                             <Sok />
                         </MediaQuery>
 
+                        <MinsideLenke />
+
                         <VarselinnboksProvider>
                             <Varselbjelle />
                         </VarselinnboksProvider>
 
-                        <MinsideLenke />
                         <LoggInnKnapp />
                     </div>
                 </div>
