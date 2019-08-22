@@ -24,7 +24,7 @@ const Header = ({ meny, hentMenypunkter }: MenuProps) => {
 
     return (
         <div>
-            <HeaderContent meny={meny} />
+            <HeaderContent />
         </div>
     );
 };

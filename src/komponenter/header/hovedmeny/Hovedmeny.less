@@ -3,135 +3,33 @@
 @desktopLimitWidth: 1024px;
 
 .hovedmeny {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    padding-top: 0.5rem;
+    padding: 0.5rem 0 1rem;
     min-height: 3.5rem;
     background-color: white;
     border-bottom: 2px solid @navBla;
 
     .hovedmeny__content {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        height: 156px;
+        width: @desktopLimitWidth;
+        margin: 0 auto;
 
-        .hovedmeny__meny {
+        .hovedmeny__meny-elementer {
             display: flex;
-            flex-direction: row;
-            width: @desktopLimitWidth;
-
-            .hovedmeny__function-components {
-                display: flex;
-                align-items: center;
-                width: 924px;
-                justify-content: space-between;
-            }
+            align-items: center;
+            justify-content: space-between;
         }
     }
 
-    .hovedmeny__wrapper {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-
-        .hovedmeny__menyvalg {
-            display: flex;
-            flex-direction: row;
-            margin-top: 0.5rem;
-            overflow: hidden;
-            transition: max-height 0.7s;
-            max-height: 0;
-            max-width: @desktopLimitWidth;
-
-            &--active {
-                margin-bottom: 2.5rem;
-                max-height: 40rem;
-            }
-
-            .hovedmeny__hovedSeksjon {
-                flex-grow: 6;
-                display: grid;
-                grid-template-columns: auto auto auto;
-                background-color: white;
-                margin-bottom: 0.2rem;
-
-                a {
-                    text-decoration: none;
-                    color: black;
-                    cursor: pointer;
-                }
-
-                a:hover {
-                    text-decoration: underline;
-                }
-
-                li {
-                    list-style-type: initial;
-                }
-
-                .hovedmeny__seksjon {
-                    padding-left: 2rem;
-                    padding-top: 0.75rem;
-                    padding-bottom: 0.5rem;
-                }
-            }
-
-            .hovedmeny__minSideSeksjon {
-                flex-grow: 1;
-                display: grid;
-                grid-template-columns: auto;
-                margin-left: 0.5rem;
-                margin-bottom: 0.2rem;
-                background-color: white;
-                padding-top: 0.75rem;
-                padding-bottom: 0.5rem;
-                min-width: 8rem;
-                padding-left: 1.5rem;
-
-                a {
-                    color: black;
-
-                    &:active {
-                        color: black;
-                        font-weight: bold;
-                    }
-                }
-
-                a:hover {
-                    text-decoration: underline;
-                }
-
-                p {
-                    max-width: 12rem;
-                }
-
-
-                .hovedmeny__minside-list-item {
-                    padding: 0.125rem 0 0.125rem 0;
-                }
-
-                .hovedmeny__til-minside-lenke {
-                    list-style-type: none;
-                    margin-left: -0.375rem;
-                    padding-top: 1.25rem;
-
-                    .hovedmeny__minside-lenke {
-                        text-decoration: none;
-                    }
-                }
-            }
-        }
-    }
-    /* & .btn {
+    /*
+    & .btn {
         padding-right: 0.125rem;
-    } */
+    }
 
-    /* .lenke:active,
+    .lenke:active,
     .lenke--active {
         color: black;
         font-weight: bold;
