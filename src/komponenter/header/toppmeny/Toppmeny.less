@@ -9,92 +9,43 @@
     background-color: rgba(242, 242, 242, 1);
     height: 44px;
 
-    &__topp-liste-rad {
+    .toppmeny__topp-liste-rad {
         min-width: 325px;
         white-space: nowrap;
         overflow-x: auto;
         overflow-y: hidden;
-    }
 
-    &__list-element {
-        float: left;
-    }
+        .toppmeny__list-element {
+            float: left;
 
-    .dropbtn,
-    .dropvalg {
-        display: inline-block;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-
-    &__hoved {
-        display: inline-block;
-        text-align: center;
-        padding:  0.75rem 1rem 0 1rem;
-        text-decoration: none;
-        color: black;
+            .toppmeny__lenke {
+                display: inline-block;
+                text-align: center;
+                padding:  0.75rem 1rem 0 1rem;
+                text-decoration: none;
+                color: black;
 
 
-        &:focus, &:active {
-            border: @navDypBla 3px solid;
-        }
-    }
+                &:focus, &:active {
+                    border: @navDypBla 3px solid;
+                }
 
-    &__inner {
-        padding-bottom: 0.7rem;
+                .toppmeny__inner {
+                    padding-bottom: 0.7rem;
 
-        &:hover {
-            border-bottom:  @navDypBla 2px solid;
-        }
+                    &:hover {
+                        border-bottom:  @navDypBla 2px solid;
+                    }
 
-        &--active {
-            border-bottom: @navDypBla 2px solid;
-            &:hover {
-                border-bottom: @navDypBla 3px solid;
+                    &--active {
+                        border-bottom: @navDypBla 2px solid;
+                        &:hover {
+                            border-bottom: @navDypBla 3px solid;
+                        }
+                    }
+                }
             }
-        }
 
-    }
-
-    .dropdown p {
-        color: black;
-    }
-
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-    }
-
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        display: block;
-        text-align: left;
-        text-decoration: none;
-    }
-
-    .dropdown-content a:hover {
-        background-color: #f1f1f1;
-    }
-
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-
-    .knapp--hoved {
-        box-shadow: none;
-    }
-
-    @media (min-width: 768px) {
-        flex-direction: row;
-
-        &__venstreMeny {
-            padding-left: 1rem;
         }
     }
 }

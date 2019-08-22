@@ -16,8 +16,8 @@ export const toppmenyLenker: {
         key: MenuValue.BEDRIFT,
     },
     {
-        tittel: 'SAMHANDLING',
-        url: '/person/nav-dekoratoren/samhandling/',
-        key: MenuValue.SAMHANDLING,
+        tittel: 'SAMHANDLER',
+        url: '/person/nav-dekoratoren/samhandler/',
+        key: MenuValue.SAMHANDLER,
     },
 ];

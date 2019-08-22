@@ -2,6 +2,7 @@ import * as React from 'react';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
 import './Toppmeny.less';
+import { toppmenyLenker } from './Toppmeny-lenker';
 import { MenuValue } from '../../../provider/Storage-provider';
 
 const cls = BEMHelper('toppmeny');
@@ -13,14 +14,13 @@ interface Props {
         valgVerdi: MenuValue,
         url: string
     ) => void;
-    lenker: { tittel: string; url: string; key: MenuValue }[];
 }
 
 const Toppmeny = (props: Props) => {
     return (
         <nav className="toppmeny">
-            <ul className={cls.element('topp-liste-rad')}>
-                {props.lenker.map(
+            <ul className={cls.element('topp-liste-rad')} role="tablist">
+                {toppmenyLenker.map(
                     (lenke: {
                         tittel: string;
                         url: string;
@@ -28,13 +28,13 @@ const Toppmeny = (props: Props) => {
                     }) => {
                         return (
                             <li
+                                role="tab"
+                                aria-selected={props.menyValg === lenke.tittel ? 'true' : 'false'}
                                 className={cls.element('list-element')}
                                 key={lenke.tittel}
                             >
                                 <a
-                                    className={cls.element(
-                                        'hoved'
-                                    )}
+                                    className={cls.element('lenke')}
                                     href={lenke.url}
                                     onClick={event =>
                                         props.callMenuStorage(
@@ -44,12 +44,12 @@ const Toppmeny = (props: Props) => {
                                         )
                                     }
                                 >
-                                    <div className={cls.element('inner', props.menyValg === lenke.tittel
-                                        ? 'active'
-                                        : '')}>
-                                    <EtikettLiten tag="h3">
-                                        {lenke.tittel}
-                                    </EtikettLiten>
+                                    <div
+                                        className={cls.element('inner', props.menyValg === lenke.tittel ? 'active' : '')}
+                                    >
+                                        <EtikettLiten>
+                                            {lenke.tittel}
+                                        </EtikettLiten>
                                     </div>
                                 </a>
                             </li>
