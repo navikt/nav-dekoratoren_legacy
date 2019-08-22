@@ -9,7 +9,6 @@
         "build": "craco build",
         "test": "craco test",
         "build-snap": "craco build && react-snapshot",
-        "serv-dev": "NOBE_ENV='development' nodemon src/server/server.js",
         "server": "nodemon src/server/server.js",
         "lint": "tslint ./src/**/*.ts*",
         "lint:fix": "tslint ./src/**/*.ts* --fix",
