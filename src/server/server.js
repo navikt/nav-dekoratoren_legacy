@@ -3,7 +3,7 @@ const app = express();
 const PORT = 8088;
 const path = require('path');
 const buildPath = path.resolve(__dirname, '../../build/');
-const request = require('request');
+const requestNode = require('request');
 const NodeCache = require('node-cache');
 const backupData = require('./menu/no.menu.json');
 
@@ -48,7 +48,7 @@ if (!process.env.DEVELOPMENT) {
 }
 
 const fetchmenuOptions = res => {
-    request(
+    requestNode(
         {
             method: 'GET',
             uri: `${fetchmenyUri}`,
