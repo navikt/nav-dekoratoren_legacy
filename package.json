@@ -28,6 +28,7 @@
     "dependencies": {
         "@babel/polyfill": "^7.4.4",
         "@craco/craco": "3.6.0",
+        "@types/express": "^4.17.1",
         "@types/react-responsive": "^3.0.3",
         "classnames": "^2.2.6",
         "craco-less": "1.7.0",
