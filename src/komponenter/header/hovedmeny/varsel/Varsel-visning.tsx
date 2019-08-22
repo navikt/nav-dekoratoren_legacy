@@ -13,12 +13,14 @@ const VarselVisning: React.FunctionComponent<OwnProps> = props => {
         <div id="varsler-display" className="varsler-display">
             {props.html}
             {props.antallVarsler > 5 && (
-            <div className="vis-alle-lenke skillelinje-topp">
-                <a href={varselinnboksUrl}>
+                <div className="vis-alle-lenke skillelinje-topp">
+                    <a href={varselinnboksUrl}>
                         Vis alle dine varsler
-                        { props.antallUlesteVarsler > 0 ? ` (${props.antallUlesteVarsler} nye)` : ''}
-                </a>
-            </div>
+                        {props.antallUlesteVarsler > 0
+                            ? ` (${props.antallUlesteVarsler} nye)`
+                            : ''}
+                    </a>
+                </div>
             )}
         </div>
     );

@@ -33,7 +33,7 @@
         "env": [
             {
                 "name": "MENYLENKER",
-                "value": "https://www-x1.nav.no"
+                "value": "https://www-x1.nav.no/navno/_/service/no.nav.navno/menu"
             }
         ],
         "resources": {

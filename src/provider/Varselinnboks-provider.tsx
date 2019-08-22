@@ -34,9 +34,7 @@ const VarselinnboksProvider: React.FunctionComponent<
         } else {
             props.doSettVarselinnboksOK();
         }
-    },
-              [props.erInnlogget]
-    );
+    }, [props.erInnlogget]);
 
     return (
         <Datalaster avhengigheter={[props.varsler]}>

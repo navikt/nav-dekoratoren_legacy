@@ -8,17 +8,14 @@ interface Props {
 }
 
 const MenyToggleKnapp = (props: Props) => {
-        return (
-            <button
-                onClick={props.dropdownExpand}
-                className="meny-button"
-            >
-                <div className="button-content">
-                    <HamburgerIkon ikonClass="hamburger-ikon" />
-                    <Undertittel>MENY</Undertittel>
-                </div>
-            </button>
-        );
+    return (
+        <button onClick={props.dropdownExpand} className="meny-button">
+            <div className="button-content">
+                <HamburgerIkon ikonClass="hamburger-ikon" />
+                <Undertittel>MENY</Undertittel>
+            </div>
+        </button>
+    );
 };
 
 export default MenyToggleKnapp;

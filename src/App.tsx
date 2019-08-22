@@ -8,7 +8,10 @@ import InnloggingsstatusProvider from './provider/Innloggingsstatus-provider';
 
 const store = getStore();
 
-if (process.env.NODE_ENV === 'development') {
+if (
+    process.env.NODE_ENV === 'development' ||
+    window.location.origin.toLowerCase().includes('localhost')
+) {
     console.log('==========================');
     console.log('======= DEVELOPMENT ======');
     console.log('==========================');
