@@ -11,6 +11,10 @@ import DropdownHoyreSeksjon from './DropdownHoyreSeksjon';
 import DropdownVenstreSeksjon from './DropdownVenstreSeksjon';
 import './Meny-toggle-knapp.less';
 
+interface OwnProps {
+    classname: string;
+};
+
 interface StateProps {
     meny: MenyPunkter;
 }
@@ -20,15 +24,15 @@ interface State {
     minside: Data;
 }
 
-const cls = BEMHelper('hovedmeny');
+type MenyToggleKnappProps = OwnProps & StateProps;
 
-class MenyToggleKnapp extends React.Component<StateProps, State> {
+class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
 
     static minside<T, K extends keyof T>(meny: T, key: K): T[K] {
         return meny[key];
     }
 
-    constructor(props: StateProps) {
+    constructor(props: MenyToggleKnappProps) {
         super(props);
         this.state = {
             clicked: false,
@@ -39,16 +43,15 @@ class MenyToggleKnapp extends React.Component<StateProps, State> {
 
     dropDownExpand = () => {
         this.setState({
-                          clicked: !this.state.clicked,
-                      });
+            clicked: !this.state.clicked
+        });
     }
 
     render() {
-        const { meny } = this.props;
-
+        const { meny, classname } = this.props;
+        const cls = BEMHelper(classname);
         return (
-            <div className="toggle-meny">
-
+            <>
                 <button
                     onClick={this.dropDownExpand}
                     className="meny-button"
@@ -59,12 +62,12 @@ class MenyToggleKnapp extends React.Component<StateProps, State> {
                 >
                     <div className="button-content">
                         <HamburgerIkon ikonClass="hamburger-ikon" />
-                        <Undertittel>MENY</Undertittel>
+                        <Undertittel>Meny</Undertittel>
                     </div>
                 </button>
 
                 { this.state.clicked && meny.status === Status.OK && (
-                    <div id="dropdown-menu" className={cls.element('dropdown-menu')}>
+                    <div className={cls.element('dropdown-menu')} id="dropdown-menu" >
                         <div
                             className={cls.element(
                                 'menyvalg',
@@ -72,19 +75,18 @@ class MenyToggleKnapp extends React.Component<StateProps, State> {
                             )}
                         >
                             <DropdownVenstreSeksjon
-                                classname="hovedmeny"
+                                classname={this.props.classname}
                                 menyLenker={setMenuView(meny.data)}
                                 status={meny.status}
                             />
                             <DropdownHoyreSeksjon
                                 minsideMenyView={MenyToggleKnapp.minside(meny.data, 3)}
-                                className="hovedmeny"
+                                classname={classname}
                             />
                         </div>
                     </div>
                 )}
-
-            </div>
+            </>
         );
     }
 }

@@ -23,9 +23,7 @@ const Header = ({ meny, hentMenypunkter }: MenuProps) => {
     );
 
     return (
-        <div>
-            <HeaderContent />
-        </div>
+        <HeaderContent />
     );
 };
 

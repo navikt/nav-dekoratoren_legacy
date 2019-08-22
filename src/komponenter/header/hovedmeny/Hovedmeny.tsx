@@ -24,25 +24,22 @@ const Hovedmeny = (props: StateProps) => {
             <div className={cls.element('content')}>
                 <div className={cls.element('meny-elementer')}>
 
-                    <NavLogoRod
-                        width="88"
-                        height="88"
-                        classname={cls.element('logo')}
-                    />
+                    <NavLogoRod width="88" height="88" classname={cls.element('logo')}/>
 
-                    <MenyToggleKnapp />
+                    <MenyToggleKnapp classname="hovedmeny" />
 
                     <MediaQuery minWidth={768}>
                         <Sok />
                     </MediaQuery>
 
+                    {props.erInnlogget &&
+                        <MinsideLenke/>
+                    }
+
                     <VarselinnboksProvider>
                         <Varselbjelle />
                     </VarselinnboksProvider>
 
-                    {props.erInnlogget &&
-                        <MinsideLenke/>
-                    }
                     <LoggInnKnapp />
 
                 </div>
