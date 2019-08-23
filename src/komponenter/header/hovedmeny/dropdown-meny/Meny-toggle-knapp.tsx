@@ -13,7 +13,7 @@ import './Meny-toggle-knapp.less';
 
 interface OwnProps {
     classname: string;
-};
+}
 
 interface StateProps {
     meny: MenyPunkter;
@@ -50,6 +50,7 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
     render() {
         const { meny, classname } = this.props;
         const cls = BEMHelper(classname);
+
         return (
             <>
                 <button

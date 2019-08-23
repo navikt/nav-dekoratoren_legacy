@@ -1,26 +1,17 @@
 @import '~nav-frontend-core/less/_variabler';
+@import '../../../../styling-variabler.less';
 
-@desktopLimitWidth: 1024px;
-
-.meny-button {
+.hovedmeny .meny-button {
     text-decoration: none;
     color: black;
-    background-color: white;
+    background-color: initial;
     border: none;
     padding: 0;
+    margin-right: 1rem;
 
     &:focus {
         text-decoration: none;
-        background-color: initial;
         box-shadow: none;
-        color: black;
-    }
-
-    &:hover {
-        background-color: white;
-    }
-
-    &:focus {
         outline: none;
         border: @navDypBla 3px solid;
         border-radius: 4px;
@@ -36,7 +27,6 @@
 
         &:hover {
             border: 1px black solid;
-            background-color: white;
             cursor: pointer;
         }
 
@@ -45,14 +35,14 @@
         }
     }
 }
-.hovedmeny__dropdown-menu {
+
+.hovedmeny .hovedmeny__dropdown-menu {
     position: relative;
     bottom: 0;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
-
 
     .hovedmeny__menyvalg {
         display: flex;
@@ -70,11 +60,10 @@
 
         .hovedmeny__hovedSeksjon {
             flex-grow: 6;
-            display:-ms-grid;
+            display: -ms-grid;
             display: grid;
             -ms-grid-columns: auto auto auto;
             grid-template-columns: auto auto auto;
-            background-color: white;
             margin-bottom: 0.2rem;
 
             a {
@@ -100,13 +89,12 @@
 
         .hovedmeny__minSideSeksjon {
             flex-grow: 1;
-            display:-ms-grid;
+            display: -ms-grid;
             display: grid;
             -ms-grid-columns: auto;
             grid-template-columns: auto;
             margin-left: 0.5rem;
             margin-bottom: 0.2rem;
-            background-color: white;
             padding-top: 0.75rem;
             padding-bottom: 0.5rem;
             min-width: 8rem;
