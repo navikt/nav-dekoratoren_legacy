@@ -3,13 +3,15 @@ import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
 import Header from './komponenter/header/Header';
 import Footer from './komponenter/footer/Footer';
-import Skiplinks from './komponenter/header/Skiplinks';
 import setupMock from './mocks/setup-mock';
 import InnloggingsstatusProvider from './provider/Innloggingsstatus-provider';
 
 const store = getStore();
 
-if (process.env.NODE_ENV === 'development') {
+if (
+    process.env.NODE_ENV === 'development' ||
+    window.location.origin.toLowerCase().includes('localhost')
+) {
     console.log('==========================');
     console.log('======= DEVELOPMENT ======');
     console.log('==========================');
@@ -23,7 +25,6 @@ function App() {
             <InnloggingsstatusProvider>
                 <>
                     <Header />
-                    <Skiplinks />
                     <Footer />
                 </>
             </InnloggingsstatusProvider>

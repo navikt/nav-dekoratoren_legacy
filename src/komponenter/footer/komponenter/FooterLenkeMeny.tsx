@@ -1,7 +1,7 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import { Normaltekst } from 'nav-frontend-typografi';
-import BEMHelper from '../../utils/bem';
+import BEMHelper from '../../../utils/bem';
 
 const FooterLenkeMeny = ({ className }: { className: string }) => {
     const cls = BEMHelper(className);

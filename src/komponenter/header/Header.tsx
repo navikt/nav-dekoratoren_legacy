@@ -1,22 +1,41 @@
-import * as React from 'react';
-import './Header.less';
-import Toppmeny from './toppmeny/Toppmeny';
-import NedtrekksMeny from './nedtrekksmeny/NedtrekksMeny';
+import React from 'react';
+import { AppState } from '../../reducer/reducer';
+import { Dispatch } from '../../redux/dispatch-type';
+import { fetchMenypunkter, MenyPunkter } from '../../reducer/menu-duck';
+import { connect } from 'react-redux';
+import HeaderContent from './HeaderContent';
 
-class Header extends React.Component {
-    render() {
-        return (
-            <div id="header-withmenu">
-                <div className="hodefot">
-                    <header className="siteheader blokk-m">
-                        <div className="innhold-container">
-                            <Toppmeny />
-                            <NedtrekksMeny />
-                        </div>
-                    </header>
-                </div>
-            </div>
-        );
-    }
+interface StateProps {
+    meny: MenyPunkter;
 }
-export default Header;
+
+interface DispatchProps {
+    hentMenypunkter: () => Promise<void>;
+}
+
+type MenuProps = StateProps & DispatchProps;
+
+const Header = ({ meny, hentMenypunkter }: MenuProps) => {
+    React.useEffect(() => {
+        hentMenypunkter();
+    }, []);
+
+    return (
+        <div>
+            <HeaderContent meny={meny} />
+        </div>
+    );
+};
+
+const mapStateToProps = (state: AppState): StateProps => ({
+    meny: state.menypunkt,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+    hentMenypunkter: () => fetchMenypunkter()(dispatch),
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Header);

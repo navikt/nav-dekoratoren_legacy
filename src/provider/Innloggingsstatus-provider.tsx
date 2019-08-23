@@ -1,12 +1,11 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from '../redux/dispatch-type';
 import {
     hentInnloggingsstatus,
     InnloggingsstatusState,
-} from '../redux/innloggingsstatus-duck';
-import { AppState } from '../redux/reducer';
-import Datalaster from '../api/Datalaster';
+} from '../reducer/innloggingsstatus-duck';
+import { AppState } from '../reducer/reducer';
 
 interface OwnProps {
     children: React.ReactElement<any>; // tslint:disable-line:no-any
@@ -22,25 +21,15 @@ interface DispatchProps {
 
 type InnloggingsstatusProviderProps = OwnProps & StateProps & DispatchProps;
 
-class InnloggingsstatusProvider extends React.Component<
+const InnloggingsstatusProvider: React.FunctionComponent<
     InnloggingsstatusProviderProps
-> {
-    constructor(props: InnloggingsstatusProviderProps) {
-        super(props);
-    }
+> = props => {
+    useEffect(() => {
+        props.doHentInnloggingsstatus();
+    }, []);
 
-    componentDidMount() {
-        this.props.doHentInnloggingsstatus();
-    }
-
-    render() {
-        return (
-            <Datalaster avhengigheter={[this.props.innloggingsstatus]}>
-                {this.props.children}
-            </Datalaster>
-        );
-    }
-}
+    return <>{props.children}</>;
+};
 
 const mapStateToProps = (state: AppState): StateProps => ({
     innloggingsstatus: state.innloggingsstatus,

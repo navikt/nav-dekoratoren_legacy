@@ -1,77 +1,67 @@
 import * as React from 'react';
-import Lenke from 'nav-frontend-lenker';
-import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
+import { EtikettLiten } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
-import Cheveron from 'nav-frontend-chevron';
-import Navlogo from './Navlogo';
 import './Toppmeny.less';
+import { MenuValue } from '../../../provider/Storage-provider';
 
 const cls = BEMHelper('toppmeny');
 
-class Toppmeny extends React.Component {
-    render() {
-        return (
-            <nav className="toppmeny">
-                <div className={cls.element('venstreMeny')}>
-                    <Lenke className="navbar-brand" href="javascript:void(0)">
-                        <Navlogo />
-                    </Lenke>
-
-                    <ul>
-                        <li>
-                            <Lenke
-                                className={cls.element('hoved', 'active')}
-                                href="#"
-                            >
-                                <EtikettLiten tag="h3">
-                                    PRIVATPERSON
-                                </EtikettLiten>
-                            </Lenke>
-                        </li>
-
-                        <li>
-                            <Lenke className={cls.element('hoved')} href="#">
-                                <EtikettLiten tag="h3">BEDRIFT</EtikettLiten>
-                            </Lenke>
-                        </li>
-
-                        <li>
-                            <Lenke className={cls.element('hoved')} href="#">
-                                <EtikettLiten tag="h3">ANDRE</EtikettLiten>
-                            </Lenke>
-                        </li>
-                    </ul>
-                </div>
-                <div className={cls.element('hoyreMeny')}>
-                    <div>
-                        <ul>
-                            <li className="dropdown">
-                                <a
-                                    href="javascript:void(0)"
-                                    className="dropbtn"
-                                >
-                                    <Normaltekst>
-                                        Språk/Languages
-                                        <Cheveron type="ned" />
-                                    </Normaltekst>
-                                </a>
-                                <div className="dropdown-content">
-                                    <a className="dropvalg" href="#">
-                                        Bokmål
-                                    </a>
-                                    <a className="dropvalg" href="#">
-                                        Nynorsk
-                                    </a>
-                                    <a className="dropvalg" href="#">
-                                        English
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        );
-    }
+interface Props {
+    menyValg: MenuValue;
+    callMenuStorage: (
+        e: React.MouseEvent<HTMLAnchorElement>,
+        valgVerdi: MenuValue,
+        url: string
+    ) => void;
+    lenker: { tittel: string; url: string; key: MenuValue }[];
 }
+
+const Toppmeny = (props: Props) => {
+    return (
+        <nav className="toppmeny">
+            <ul className={cls.element('topp-liste-rad')}>
+                {props.lenker.map(
+                    (lenke: {
+                        tittel: string;
+                        url: string;
+                        key: MenuValue;
+                    }) => {
+                        return (
+                            <li
+                                className={cls.element('list-element')}
+                                key={lenke.tittel}
+                            >
+                                <a
+                                    className={cls.element('hoved')}
+                                    href={lenke.url}
+                                    onClick={event =>
+                                        props.callMenuStorage(
+                                            event,
+                                            lenke.key,
+                                            lenke.url
+                                        )
+                                    }
+                                >
+                                    <div
+                                        className={cls.element(
+                                            'inner',
+                                            props.menyValg === lenke.tittel
+                                                ? 'active'
+                                                : ''
+                                        )}
+                                    >
+                                        <EtikettLiten tag="h3">
+                                            {lenke.tittel}
+                                        </EtikettLiten>
+                                    </div>
+                                </a>
+                            </li>
+                        );
+                    }
+                )}
+            </ul>
+        </nav>
+    );
+};
+
 export default Toppmeny;

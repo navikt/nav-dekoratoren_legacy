@@ -1,23 +1,73 @@
+import React from 'react';
 import Environments from '../utils/Environments';
-import { fetchToJson } from './fetch-utils';
-import { Data } from '../redux/innloggingsstatus-duck';
+import { fetchToJson } from './api-utils';
+import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
+import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
+import { Data as menypunkterData } from '../reducer/menu-duck';
 import { Data as sokeData } from '../redux/soke-duck';
 
-const { baseUrl } = Environments();
+
+const { baseUrl, menypunkter } = Environments();
+
+export const varselinnboksUrl = `${baseUrl}/person/varselinnboks`;
+
+export enum Status {
+    OK = 'OK',
+    FEILET = 'FEILET',
+    PENDING = 'PENDING',
+    IKKE_STARTET = 'IKKE_STARTET',
+    RELOADING = 'RELOADING',
+}
+
+export interface DataElement {
+    status: Status;
+}
+
+export interface DatalasterProps {
+    avhengigheter: DataElement[];
+    ventPa?: DataElement[];
+    children: React.ReactElement<any>; // tslint:disable-line:no-any
+    feilmeldingId?: string;
+}
 
 interface ApiProps {
     innloggingsstatusURL: string;
+    menyPunkterURL: string;
+    getVarselinnboksURL: string;
+    postVarselinnboksURL: string;
     sokeresultat: string;
 }
 
 export const API: ApiProps = {
     innloggingsstatusURL: `${baseUrl}/innloggingslinje-api/auth`,
+    menyPunkterURL: menypunkter,
+    getVarselinnboksURL: `${varselinnboksUrl}/varsler`,
+    postVarselinnboksURL: `${varselinnboksUrl}/rest/varsel/erlest`,
     sokeresultat:
         'https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search',
 };
 
-export function hentInnloggingsstatusFetch(): Promise<Data> {
+export function hentInnloggingsstatusFetch(): Promise<innloggingsstatusData> {
     return fetchToJson(API.innloggingsstatusURL);
+}
+
+export function hentMenyPunkter(): Promise<menypunkterData[]> {
+    return fetchToJson(API.menyPunkterURL);
+}
+
+export function hentVarslerFetch(): Promise<varselinnboksData> {
+    const tidspunkt = new Date().getTime();
+    const queryParams = `?noCache=${tidspunkt}&limit=5`;
+    return fetchToJson(API.getVarselinnboksURL + queryParams);
+}
+
+export function lagreVarslerLestFetch(nyesteId: number): Promise<number> {
+    const config = {
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        body: JSON.stringify(nyesteId),
+    };
+    return fetchToJson(`${API.postVarselinnboksURL}/${nyesteId}`, config);
 }
 
 export function hentSokeResultatFetch(): Promise<sokeData> {
