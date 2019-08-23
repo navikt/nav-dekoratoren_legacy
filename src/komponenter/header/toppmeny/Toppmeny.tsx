@@ -1,7 +1,7 @@
 import React from 'react';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
-import { toppmenyLenker } from './Toppmeny-lenker';
+import { toppmenyLenker } from './toppmeny-lenker';
 import {
     hentStatus,
     MenuValue,
