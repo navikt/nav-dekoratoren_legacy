@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux';
-import innloggingsstatusReducer, {
-    InnloggingsstatusState,
-} from './innloggingsstatus-duck';
+import innloggingsstatusReducer, { InnloggingsstatusState } from './innloggingsstatus-duck';
 import menypunktReducer, { MenyPunkter } from './menu-duck';
 import varselinnboksReducer, { VarselinnboksState } from './varselinnboks-duck';
+import sokeResultatReducer, { SokeResultatState } from './soke-duck';
 import { DataElement } from '../api/api';
 import varselLestReducer from './varsel-lest-duck';
 
@@ -12,6 +11,7 @@ export interface AppState {
     menypunkt: MenyPunkter;
     varsler: VarselinnboksState;
     varslerLest: DataElement;
+    sokeresultat: SokeResultatState;
 }
 
 export const reducer = combineReducers<AppState>({
@@ -19,4 +19,5 @@ export const reducer = combineReducers<AppState>({
     menypunkt: menypunktReducer,
     varsler: varselinnboksReducer,
     varslerLest: varselLestReducer,
+    sokeresultat: sokeResultatReducer,
 });

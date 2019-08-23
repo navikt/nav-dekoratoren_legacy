@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
-import { API } from '../../../api/api';
+import { API } from '../../../../api/api';
 import throttle from 'lodash.throttle';
 import Downshift from 'downshift';
 import './Sok.less';

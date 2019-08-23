@@ -4,8 +4,7 @@ import { fetchToJson } from './api-utils';
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { Data as menypunkterData } from '../reducer/menu-duck';
-import { Data as sokeData } from '../redux/soke-duck';
-
+import { Data as sokeData } from '../reducer/soke-duck';
 
 const { baseUrl, menypunkter } = Environments();
 
