@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = 8088;
 const path = require('path');
-const buildPath = path.resolve(__dirname, '../../build/');
+const buildPath = path.join(__dirname, '../../build/');
 const requestNode = require('request');
 const NodeCache = require('node-cache');
 const backupData = require('./menu/no.menu.json');
@@ -42,7 +42,7 @@ app.get(
         '/person/nav-dekoratoren/samhandling/',
     ],
     (req, res) => {
-        res.sendFile(path.resolve(__dirname, '../../build', 'index.html'));
+        res.sendFile(path.resolve(buildPath, 'index.html'));
     }
 );
 
@@ -53,7 +53,8 @@ const fetchmenuOptions = res => {
             uri: `${fetchmenyUri}`,
         },
         (error, response, body) => {
-            if (!error && response.statusCode === 200) {
+            // satt false siden endepunktet i enonic peker fortsatt på gamle endepunktet
+            if (false && response.statusCode === 200) {
                 mainCache.set(mainCacheKey, body, 100);
                 backupCache.set(backupCacheKey, body, 0);
                 res.send(body);
