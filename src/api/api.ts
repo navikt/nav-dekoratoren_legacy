@@ -4,7 +4,6 @@ import { fetchToJson } from './api-utils';
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { Data as menypunkterData } from '../reducer/menu-duck';
-import { Data as sokeData } from '../reducer/soke-duck';
 
 const { baseUrl, menypunkter, sokUrl } = Environments();
 
@@ -66,8 +65,4 @@ export function lagreVarslerLestFetch(nyesteId: number): Promise<number> {
         body: JSON.stringify(nyesteId),
     };
     return fetchToJson(`${API.postVarselinnboksURL}/${nyesteId}`, config);
-}
-
-export function hentSokeResultatFetch(): Promise<sokeData> {
-    return fetchToJson(API.sokeresultat);
 }

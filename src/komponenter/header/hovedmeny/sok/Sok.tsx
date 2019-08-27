@@ -4,39 +4,8 @@ import Downshift from 'downshift';
 import { Input } from 'nav-frontend-skjema';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import { API } from '../../../../api/api';
-
+import { SokeresultatData, InputState, defaultData, visAlleTreff } from './sok-utils';
 import './Sok.less';
-
-interface Data {
-    priority: boolean;
-    displayName: string;
-    href: string;
-    highlight: string;
-    publish: {
-        from: string;
-        first: string;
-    };
-    modifiedTime: string;
-    className: string;
-}
-
-export const defaultData: Data = {
-    priority: false,
-    displayName: '',
-    href: '',
-    highlight: '',
-    publish: {
-        from: '',
-        first: '',
-    },
-    modifiedTime: '',
-    className: '',
-};
-
-interface InputState {
-    inputString: string;
-    items: Data[];
-}
 
 class Sok extends React.Component<{}, InputState> {
     handleChangeThrottled: ReturnType<typeof throttle>;
@@ -49,9 +18,8 @@ class Sok extends React.Component<{}, InputState> {
         };
         this.handleChangeThrottled = throttle (
             this.handleChange.bind(this),
-            2000
+            800
         );
-        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(input: string) {
@@ -75,10 +43,9 @@ class Sok extends React.Component<{}, InputState> {
                     items: json.hits,
                 });
             });
-        console.log('state.items:', this.state.items);
     }
 
-    handleSelect (selection: Data) {
+    handleSelect (selection: SokeresultatData) {
         location.href = `https://www-x1.nav.no${selection.href}`;
     }
 
@@ -90,19 +57,7 @@ class Sok extends React.Component<{}, InputState> {
     render() {
         const { inputString, items } = this.state;
         const URL = `${'https://www-x1.nav.no/sok'}?ord=${inputString}`;
-
-        const lenkeAlleTreff: Data[] = [{
-            priority: false,
-            displayName: `Se alle treff (${inputString})`,
-            href: `/sok?ord=${inputString}`,
-            highlight: '',
-            publish: {
-                from: '',
-                first: '',
-            },
-            modifiedTime: '',
-            className: '',
-        }];
+        const lenkeAlleTreff = visAlleTreff(inputString);
 
         return (
             <form

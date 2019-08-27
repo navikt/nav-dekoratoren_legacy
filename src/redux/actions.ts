@@ -1,7 +1,6 @@
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { Data } from '../reducer/menu-duck';
-import { Data as sokeData } from '../reducer/soke-duck';
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',
@@ -17,9 +16,6 @@ export enum ActionType {
     SETT_VARSLER_LEST_OK = 'SETT_VARSLER_LEST_OK',
     SETT_VARSLER_LEST_FEILET = 'SETT_VARSLER_LEST_FEILET',
     SETT_VARSLER_LEST_PENDING = 'SETT_VARSLER_LEST_PENDING',
-    HENT_SOKERESULTAT_OK = 'HENT_SOKERESULTAT_OK',
-    HENT_SOKERESULTAT_FEILET = 'HENT_SOKERESULTAT_FEILET',
-    HENT_SOKERESULTAT_PENDING = 'HENT_SOKERESULTAT_PENDING',
 }
 
 export interface HentInnloggingsstatusOKAction {
@@ -78,19 +74,6 @@ export interface SettVarslerLestFEILETAction {
     type: ActionType.SETT_VARSLER_LEST_FEILET;
 }
 
-export interface HentSokeResultatOKAction {
-    type: ActionType.HENT_SOKERESULTAT_OK;
-    data: sokeData;
-}
-
-export interface HentSokeResultatPENDINGAction {
-    type: ActionType.HENT_SOKERESULTAT_PENDING;
-}
-
-export interface HentSokeResultatFEILETAction {
-    type: ActionType.HENT_SOKERESULTAT_FEILET;
-}
-
 export type Handling =
     | HentInnloggingsstatusOKAction
     | HentInnloggingsstatusFEILETAction
@@ -106,6 +89,4 @@ export type Handling =
     | SettVarslerLestFEILETAction
     | SettVarslerLestPENDINGAction
     | HentInnloggingsstatusPENDINGAction
-    | HentSokeResultatOKAction
-    | HentSokeResultatFEILETAction
-    | HentSokeResultatPENDINGAction;
+;
