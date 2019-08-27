@@ -6,7 +6,7 @@ import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { Data as menypunkterData } from '../reducer/menu-duck';
 import { Data as sokeData } from '../reducer/soke-duck';
 
-const { baseUrl, menypunkter } = Environments();
+const { baseUrl, menypunkter, sokUrl } = Environments();
 
 export const varselinnboksUrl = `${baseUrl}/person/varselinnboks`;
 
@@ -42,8 +42,7 @@ export const API: ApiProps = {
     menyPunkterURL: menypunkter,
     getVarselinnboksURL: `${varselinnboksUrl}/varsler`,
     postVarselinnboksURL: `${varselinnboksUrl}/rest/varsel/erlest`,
-    sokeresultat:
-        'https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search',
+    sokeresultat: `${sokUrl}/www.nav.no/sok/_/service/navno.nav.no.search/search`
 };
 
 export function hentInnloggingsstatusFetch(): Promise<innloggingsstatusData> {
