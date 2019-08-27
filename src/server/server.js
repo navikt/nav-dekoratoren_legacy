@@ -32,17 +32,16 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/person/nav-dekoratoren/', express.static(buildPath));
+app.use('/person/nav-dekoratoren', express.static('build/'));
 
 app.get(
     [
-        '/person/nav-dekoratoren/person/',
-        '/person/nav-dekoratoren/bedrift/',
-        '/person/nav-dekoratoren/samhandling/',
+        '/person/nav-dekoratoren/person',
+        '/person/nav-dekoratoren/bedrift',
+        '/person/nav-dekoratoren/samhandling',
     ],
     (req, res) => {
-        const index = path.join(buildPath, 'index.html');
-        res.sendFile(index);
+        res.sendFile('/index.html', { root: './build' });
     }
 );
 
