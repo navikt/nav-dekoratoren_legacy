@@ -33,7 +33,7 @@ export const visAlleTreff = (inputString: string): SokeresultatData[] => {
     return (
         [{
             priority: false,
-            displayName: `Se alle treff (${inputString})`,
+            displayName: `Se alle treff ("${inputString}")`,
             href: `/sok?ord=${inputString}`,
             highlight: '',
             publish: {
