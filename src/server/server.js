@@ -36,13 +36,13 @@ app.use('/person/nav-dekoratoren/', express.static(buildPath));
 
 app.get(
     [
-        '/person/nav-dekoratoren/',
         '/person/nav-dekoratoren/person/',
         '/person/nav-dekoratoren/bedrift/',
         '/person/nav-dekoratoren/samhandling/',
     ],
     (req, res) => {
-        res.sendFile(path.resolve(buildPath, 'index.html'));
+        const index = path.join(buildPath, 'index.html');
+        res.sendFile(index);
     }
 );
 
