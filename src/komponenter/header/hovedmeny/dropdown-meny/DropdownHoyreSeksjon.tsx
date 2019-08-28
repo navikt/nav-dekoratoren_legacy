@@ -7,12 +7,12 @@ import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 
 interface Props {
     minsideMenyView: Data;
-    className: string;
+    classname: string;
 }
 
 const DropdownHoyreSeksjon = (props: Props) => {
-    const { className, minsideMenyView } = props;
-    const cls = BEMHelper(className);
+    const { classname, minsideMenyView } = props;
+    const cls = BEMHelper(classname);
     if (minsideMenyView) {
         return (
             <div className={cls.element('minSideSeksjon')}>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import throttle from 'lodash.throttle';
 import Downshift from 'downshift';
+import Knapp from 'nav-frontend-knapper';
 import { Input } from 'nav-frontend-skjema';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import { API } from '../../../../api/api';
@@ -146,12 +147,9 @@ class Sok extends React.Component<{}, InputState> {
                             </div>
 
                             <div className="sok-knapp btn">
-                                <button
-                                    className="knapp knapp--hoved"
-                                    type="submit"
-                                >
+                                <Knapp type="standard" htmlType="submit">
                                     SØK
-                                </button>
+                                </Knapp>
                             </div>
                         </div>
                     )}

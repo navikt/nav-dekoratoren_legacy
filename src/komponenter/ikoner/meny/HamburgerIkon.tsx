@@ -10,8 +10,8 @@ const HamburgerIkon = ({ ikonClass }: { ikonClass: string }) => {
             xmlnsXlink="http://www.w3.org/1999/xlink"
             x="0px"
             y="0px"
-            width="24px"
-            height="24px"
+            width="20px"
+            height="20px"
             viewBox="0 0 24 24"
             enableBackground="new 0 0 24 24"
             xmlSpace="preserve"
@@ -24,7 +24,7 @@ const HamburgerIkon = ({ ikonClass }: { ikonClass: string }) => {
                 />
                 <path
                     d="M23.5,17h-23C0.224,17,0,17.225,0,17.5v5C0,22.776,0.224,23,0.5,23h23c0.275,0,0.5-0.224,0.5-0.5v-5
-		C24,17.225,23.775,17,23.5,17z"
+		            C24,17.225,23.775,17,23.5,17z"
                 />
             </g>
         </svg>

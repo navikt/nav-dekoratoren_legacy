@@ -1,64 +1,55 @@
 import React from 'react';
-import LoggInnKnapp from './logginn/Logg-inn-knapp';
+import { AppState } from '../../../reducer/reducer';
+import { connect } from 'react-redux';
 import MediaQuery from 'react-responsive';
 import BEMHelper from '../../../utils/bem';
-import Sok from './sok/Sok';
 import NavLogoRod from '../../ikoner/meny/NavLogoRod';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
+import MenyToggleKnapp from './dropdown-meny/Meny-toggle-knapp';
+import Sok from './sok/Sok';
 import Varselbjelle from './varsel/Varselbjelle';
 import MinsideLenke from './minside-lenke/MinsideLenke';
-import MenyToggleKnapp from '../hovedmeny/dropdown-meny/Meny-toggle-knapp';
+import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import './Hovedmeny.less';
 
 const cls = BEMHelper('hovedmeny');
 
-interface Props {
-    dropDownExpand: () => void;
-    clicked: boolean;
+interface StateProps {
+    erInnlogget: boolean;
 }
 
-const Hovedmeny: React.FunctionComponent<Props> = props => {
+const Hovedmeny = (props: StateProps) => {
     return (
         <nav className={cls.className}>
             <div className={cls.element('content')}>
-                <div className={cls.element('meny')}>
+                <div className={cls.element('meny-elementer')}>
                     <NavLogoRod
                         width="88"
                         height="88"
                         classname={cls.element('logo')}
                     />
-                    <div className={cls.element('function-components')}>
-                        <MenyToggleKnapp
-                            dropdownExpand={props.dropDownExpand}
-                        />
 
-                        <MediaQuery minWidth={768}>
-                            <Sok />
-                        </MediaQuery>
+                    <MenyToggleKnapp classname="hovedmeny" />
 
-                        <MinsideLenke />
+                    <MediaQuery minWidth={768}>
+                        <Sok />
+                    </MediaQuery>
 
-                        <VarselinnboksProvider>
-                            <Varselbjelle />
-                        </VarselinnboksProvider>
+                    {props.erInnlogget && <MinsideLenke />}
 
-                        <LoggInnKnapp />
-                    </div>
-                </div>
-            </div>
-            <div className={cls.element('wrapper')}>
-                <div
-                    className={cls.element(
-                        'menyvalg',
-                        props.clicked ? 'active' : ''
-                    )}
-                    id="dropdownMenu"
-                >
-                    {props.children}
+                    <VarselinnboksProvider>
+                        <Varselbjelle />
+                    </VarselinnboksProvider>
+
+                    <LoggInnKnapp />
                 </div>
             </div>
         </nav>
     );
 };
 
-export default Hovedmeny;
+const mapStateToProps = (state: AppState): StateProps => ({
+    erInnlogget: state.innloggingsstatus.data.authenticated,
+});
+
+export default connect(mapStateToProps)(Hovedmeny);

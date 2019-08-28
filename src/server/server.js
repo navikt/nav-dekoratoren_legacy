@@ -53,7 +53,8 @@ const fetchmenuOptions = res => {
             uri: `${fetchmenyUri}`,
         },
         (error, response, body) => {
-            if (!error && response.statusCode === 200) {
+            // satt til false, slik at vi leser at backupData til vi har fått fikset riktig endepunkt i enonic-xp
+            if (false && !error && response.statusCode === 200) {
                 mainCache.set(mainCacheKey, body, 100);
                 backupCache.set(backupCacheKey, body, 0);
                 res.send(body);

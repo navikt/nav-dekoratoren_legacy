@@ -1,143 +1,41 @@
 @import '~nav-frontend-core/less/_variabler';
-
-@desktopLimitWidth: 1024px;
+@import '../../../styling-variabler.less';
 
 .hovedmeny {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    padding-top: 0.5rem;
-    min-height: 3.5rem;
-    background-color: white;
+    width: 100%;
+    padding: 0.5rem 0 1rem;
     border-bottom: 2px solid @navBla;
+    min-height: 6.5rem;
 
     .hovedmeny__content {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+        width: @desktopLimitWidth;
+        margin: 0 auto;
 
-        .hovedmeny__meny {
+        .hovedmeny__meny-elementer {
             display: flex;
-            flex-direction: row;
-            width: @desktopLimitWidth;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
 
-            .hovedmeny__function-components {
-                display: flex;
-                align-items: center;
-                width: 924px;
-                justify-content: space-between;
+            .navbar-brand,
+            .meny-button {
+                order: 1;
+            }
+
+            .sok,
+            .varselbjelle,
+            .minside-lenke,
+            .login-container {
+                order: 2;
+            }
+
+            .hovedmeny__dropdown-menu {
+                order: 3;
+                width: 100%;
+                margin-bottom: 0;
+                overflow: hidden;
+                min-height: 0;
             }
         }
-    }
-
-    .hovedmeny__wrapper {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-
-        .hovedmeny__menyvalg {
-            display: flex;
-            flex-direction: row;
-            margin-top: 0.5rem;
-            overflow: hidden;
-            transition: max-height 0.7s;
-            max-height: 0;
-            max-width: @desktopLimitWidth;
-
-            &--active {
-                margin-bottom: 2.5rem;
-                max-height: 40rem;
-            }
-
-            .hovedmeny__hovedSeksjon {
-                flex-grow: 6;
-                display: grid;
-                grid-template-columns: auto auto auto;
-                background-color: white;
-                margin-bottom: 0.2rem;
-
-                a {
-                    text-decoration: none;
-                    color: black;
-                    cursor: pointer;
-                }
-
-                a:hover {
-                    text-decoration: underline;
-                }
-
-                li {
-                    list-style-type: initial;
-                }
-
-                .hovedmeny__seksjon {
-                    padding-left: 2rem;
-                    padding-top: 0.75rem;
-                    padding-bottom: 0.5rem;
-                }
-            }
-
-            .hovedmeny__minSideSeksjon {
-                flex-grow: 1;
-                display: grid;
-                grid-template-columns: auto;
-                margin-left: 0.5rem;
-                margin-bottom: 0.2rem;
-                background-color: white;
-                padding-top: 0.75rem;
-                padding-bottom: 0.5rem;
-                min-width: 8rem;
-                padding-left: 1.5rem;
-
-                a {
-                    color: black;
-
-                    &:active {
-                        color: black;
-                        font-weight: bold;
-                    }
-                }
-
-                a:hover {
-                    text-decoration: underline;
-                }
-
-                p {
-                    max-width: 12rem;
-                }
-
-                .hovedmeny__minside-list-item {
-                    padding: 0.125rem 0 0.125rem 0;
-                }
-
-                .hovedmeny__til-minside-lenke {
-                    list-style-type: none;
-                    margin-left: -0.375rem;
-                    padding-top: 1.25rem;
-
-                    .hovedmeny__minside-lenke {
-                        text-decoration: none;
-                    }
-                }
-            }
-        }
-    }
-
-    /* & .btn {
-        padding-right: 0.125rem;
-    } */
-
-    /* .lenke:active,
-    .lenke--active {
-        color: black;
-        font-weight: bold;
-    } */
-
-    @media (min-width: 765px) {
-        flex-direction: column;
-        justify-content: space-between;
     }
 }

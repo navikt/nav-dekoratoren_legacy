@@ -1,7 +1,7 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
-import './MinsideLenke.less';
 import Environments from '../../../../utils/Environments';
+import './MinsideLenke.less';
 
 const { baseUrl } = Environments();
 const dittNavURL = `${baseUrl}/person/dittnav/`;
@@ -9,7 +9,7 @@ const dittNavURL = `${baseUrl}/person/dittnav/`;
 const MinsideLenke = () => {
     return (
         <div className="minside-lenke">
-            <Lenke href={dittNavURL}>Min side</Lenke>
+            <Lenke href={dittNavURL}>Gå til min side</Lenke>
         </div>
     );
 };
