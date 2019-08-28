@@ -71,14 +71,16 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                 </button>
 
                 <div
-                    className={cls.element(
-                        'dropdown-menu',
-                        this.state.clicked ? 'active' : ''
-                    )}
+                    className={cls.element('dropdown-menu')}
                     id="dropdown-menu"
                 >
-                    {this.state.clicked && meny.status === Status.OK && (
-                        <div className={cls.element('menyvalg')}>
+                    {meny.status === Status.OK && (
+                        <div
+                            className={cls.element(
+                                'menyvalg',
+                                this.state.clicked ? 'active' : ''
+                            )}
+                        >
                             <DropdownVenstreSeksjon
                                 classname={this.props.classname}
                                 menyLenker={setMenuView(meny.data)}

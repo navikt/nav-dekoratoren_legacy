@@ -42,7 +42,16 @@
         flex-direction: row;
         margin-top: 0.5rem;
         max-width: @desktopLimitWidth;
+        max-height: 0;
+        min-height: 0;
         overflow: hidden;
+        transition: all 0.7s ease-in-out;
+
+        &--active {
+            margin-bottom: 2rem;
+            min-height: 30rem;
+            max-height: 40rem;
+        }
 
         .hovedmeny__hovedSeksjon {
             flex-grow: 6;
