@@ -2,14 +2,13 @@ FROM navikt/node-express:1.0.0
 
 WORKDIR /app
 
-COPY build/ build/
-COPY src/server server/
+COPY src src/
+COPY public public/
+COPY *.json ./
+COPY *.js ./
+
+RUN npm install && npm run build
+ENV NODE_ENV production
 
 EXPOSE 8088
-ENTRYPOINT ["node", "server/server.js"]
-
-
-
-
-
-
+ENTRYPOINT ["node", "src/server/server.js"]
