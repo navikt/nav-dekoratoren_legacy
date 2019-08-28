@@ -32,13 +32,16 @@
             .hovedmeny__dropdown-menu {
                 order: 3;
                 width: 100%;
+                margin-bottom: 0;
                 overflow: hidden;
+                min-height: 0;
                 max-height: 0;
-                transition: max-height 0.8s ease-in;
+                transition: all 0.7s ease-in;
 
                 &--active {
                     margin-bottom: 2rem;
-                    max-height: 50rem;
+                    min-height: 30rem;
+                    max-height: 40rem;
                 }
             }
         }
