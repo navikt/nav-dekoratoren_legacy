@@ -67,7 +67,11 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
 
         return (
             <div className="login-container">
-                <KnappBase className="login-knapp" type="standard" onClick={this.handleButtonClick}>
+                <KnappBase
+                    className="login-knapp"
+                    type="standard"
+                    onClick={this.handleButtonClick}
+                >
                     {knappetekst}
                 </KnappBase>
             </div>

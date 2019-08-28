@@ -9,9 +9,7 @@ const dittNavURL = `${baseUrl}/person/dittnav/`;
 const MinsideLenke = () => {
     return (
         <div className="minside-lenke">
-            <Lenke href={dittNavURL}>
-                Gå til min side
-            </Lenke>
+            <Lenke href={dittNavURL}>Gå til min side</Lenke>
         </div>
     );
 };

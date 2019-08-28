@@ -20,9 +20,7 @@ const Header = ({ meny, hentMenypunkter }: MenuProps) => {
         hentMenypunkter();
     }, []);
 
-    return (
-        <HeaderContent />
-    );
+    return <HeaderContent />;
 };
 
 const mapStateToProps = (state: AppState): StateProps => ({

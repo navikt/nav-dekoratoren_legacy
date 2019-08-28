@@ -1,11 +1,15 @@
-import React  from 'react';
+import React from 'react';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import BEMHelper from '../../../../utils/bem';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Status } from '../../../../api/api';
 import { setMenuView } from '../../../../provider/Storage-provider';
-import { Data, DataInitState, MenyPunkter } from '../../../../reducer/menu-duck';
+import {
+    Data,
+    DataInitState,
+    MenyPunkter,
+} from '../../../../reducer/menu-duck';
 import HamburgerIkon from '../../../ikoner/meny/HamburgerIkon';
 import DropdownHoyreSeksjon from './DropdownHoyreSeksjon';
 import DropdownVenstreSeksjon from './DropdownVenstreSeksjon';
@@ -27,7 +31,6 @@ interface State {
 type MenyToggleKnappProps = OwnProps & StateProps;
 
 class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
-
     static minside<T, K extends keyof T>(meny: T, key: K): T[K] {
         return meny[key];
     }
@@ -43,9 +46,9 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
 
     dropDownExpand = () => {
         this.setState({
-            clicked: !this.state.clicked
+            clicked: !this.state.clicked,
         });
-    }
+    };
 
     render() {
         const { meny, classname } = this.props;
@@ -68,35 +71,36 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                 </button>
 
                 <div
-                    className={cls.element('dropdown-menu', this.state.clicked ? 'active' : '')}
+                    className={cls.element(
+                        'dropdown-menu',
+                        this.state.clicked ? 'active' : ''
+                    )}
                     id="dropdown-menu"
                 >
-                    { this.state.clicked && meny.status === Status.OK && (
-                        <div
-                            className={cls.element(
-                                'menyvalg'
-                            )}
-                        >
+                    {this.state.clicked && meny.status === Status.OK && (
+                        <div className={cls.element('menyvalg')}>
                             <DropdownVenstreSeksjon
                                 classname={this.props.classname}
                                 menyLenker={setMenuView(meny.data)}
                                 status={meny.status}
                             />
                             <DropdownHoyreSeksjon
-                                minsideMenyView={MenyToggleKnapp.minside(meny.data, 3)}
+                                minsideMenyView={MenyToggleKnapp.minside(
+                                    meny.data,
+                                    3
+                                )}
                                 classname={classname}
                             />
                         </div>
                     )}
                 </div>
-
             </>
         );
     }
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    meny: state.menypunkt
+    meny: state.menypunkt,
 });
 
 export default connect(mapStateToProps)(MenyToggleKnapp);

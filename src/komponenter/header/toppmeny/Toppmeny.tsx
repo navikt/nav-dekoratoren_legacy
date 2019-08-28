@@ -14,7 +14,6 @@ interface State {
 }
 
 class Toppmeny extends React.Component<{}, State> {
-
     constructor(props: {}) {
         super(props);
         this.state = {
@@ -37,7 +36,11 @@ class Toppmeny extends React.Component<{}, State> {
                             return (
                                 <li
                                     role="tab"
-                                    aria-selected={this.state.toppmeny === lenke.tittel ? 'true' : 'false'}
+                                    aria-selected={
+                                        this.state.toppmeny === lenke.tittel
+                                            ? 'true'
+                                            : 'false'
+                                    }
                                     className={cls.element('list-element')}
                                     key={lenke.tittel}
                                 >
@@ -52,7 +55,15 @@ class Toppmeny extends React.Component<{}, State> {
                                             )
                                         }
                                     >
-                                        <div className={cls.element('inner', this.state.toppmeny === lenke.tittel ? 'active' : '')}>
+                                        <div
+                                            className={cls.element(
+                                                'inner',
+                                                this.state.toppmeny ===
+                                                    lenke.tittel
+                                                    ? 'active'
+                                                    : ''
+                                            )}
+                                        >
                                             <EtikettLiten>
                                                 {lenke.tittel}
                                             </EtikettLiten>
@@ -79,8 +90,8 @@ class Toppmeny extends React.Component<{}, State> {
         }
         sessionStorage.setItem(NAVHEADER, valgVerdi);
         this.setState({
-                          toppmeny: valgVerdi,
-                      });
+            toppmeny: valgVerdi,
+        });
         window.location.href = url;
     };
 }
