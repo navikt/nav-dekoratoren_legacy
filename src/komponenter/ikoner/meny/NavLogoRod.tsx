@@ -22,8 +22,8 @@ const NavLogoRod = ({
                 xmlns="http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink"
             >
-                <title>NAV logo / rød</title>
-                <desc>Header ikon. trykk på for å gå til forsiden</desc>
+                <title>Hjem</title>
+                <desc>Gå til forsiden</desc>
                 <defs>
                     <polygon
                         id="path-1"

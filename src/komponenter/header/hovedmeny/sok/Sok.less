@@ -1,6 +1,7 @@
 @import '../../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../styling-variabler.less';
 
-.sok {
+.hovedmeny .sok {
     width: 100%;
     text-align: center;
 
@@ -21,14 +22,15 @@
                 box-sizing: border-box;
             }
         }
+
         .sok-knapp {
             display: block;
         }
     }
 }
 
-@media (min-width: @screen-sm-min) {
-    .sok {
+@media (min-width: @desktopLimitWidth) {
+    .hovedmeny .sok {
         width: 30rem;
 
         .input-container {
@@ -38,11 +40,14 @@
             .skjemaelement {
                 margin-bottom: 0;
             }
+
             .sok-input {
                 width: 75%;
             }
+
             .sok-knapp {
                 width: 23%;
+
                 .knapp {
                     width: 100%;
                 }

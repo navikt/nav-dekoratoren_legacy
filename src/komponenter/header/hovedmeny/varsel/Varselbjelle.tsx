@@ -91,7 +91,10 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                             onClick={this.handleClick}
                             className="toggle-varsler"
                             title="Varsler"
-                            aria-label="Varsler"
+                            aria-label={`Varsler. Du har ${
+                                antallVarsler > 0 ? antallVarsler : 'ingen'
+                            } varsler.`}
+                            aria-pressed={this.state.clicked}
                             aria-haspopup="true"
                             aria-controls="varsler-display"
                             aria-expanded={this.state.clicked}

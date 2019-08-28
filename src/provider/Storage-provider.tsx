@@ -5,13 +5,13 @@ export const NAVHEADER = 'NAVHEADER';
 interface Seksjon<T> {
     person: () => T;
     bedrift: () => T;
-    samhandling: () => T;
+    samhandler: () => T;
 }
 
 export enum MenuValue {
     PRIVATPERSON = 'PRIVATPERSON',
     BEDRIFT = 'BEDRIFT',
-    SAMHANDLING = 'SAMHANDLING',
+    SAMHANDLER = 'SAMHANDLER',
 }
 
 export const checkUriPath = () => {
@@ -32,14 +32,14 @@ const checkString = (input: string, type: string): boolean => {
 
 export function getContent<T>(
     type: string,
-    { person, bedrift, samhandling }: Seksjon<T>
+    { person, bedrift, samhandler }: Seksjon<T>
 ) {
     if (checkString(type, 'PERSON')) {
         return person();
     } else if (checkString(type, 'BEDRIFT')) {
         return bedrift();
-    } else if (checkString(type, 'SAMHANDLING')) {
-        return samhandling();
+    } else if (checkString(type, 'SAMHANDLER')) {
+        return samhandler();
     }
     return person();
 }
@@ -70,7 +70,7 @@ function getMenuView(arg: string, content: Data[]): Data {
         bedrift: () => {
             return content[1];
         },
-        samhandling: () => {
+        samhandler: () => {
             return content[2];
         },
     });
@@ -84,8 +84,8 @@ function getMenuValue(arg: string): MenuValue {
         bedrift: () => {
             return MenuValue.BEDRIFT;
         },
-        samhandling: () => {
-            return MenuValue.SAMHANDLING;
+        samhandler: () => {
+            return MenuValue.SAMHANDLER;
         },
     });
 }

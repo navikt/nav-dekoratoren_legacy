@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
+import Knapp from 'nav-frontend-knapper';
 import './Sok.less';
 
 interface InputState {
@@ -49,9 +50,9 @@ class Sok extends React.Component<SokProps, InputState> {
                         onChange={event => this.handleChange(event)}
                     />
                     <div className="sok-knapp btn">
-                        <button className="knapp knapp--normal" type="submit">
+                        <Knapp type="standard" htmlType="submit">
                             SØK
-                        </button>
+                        </Knapp>
                     </div>
                 </form>
             </div>
