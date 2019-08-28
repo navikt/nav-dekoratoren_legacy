@@ -37,22 +37,13 @@
 }
 
 .hovedmeny .hovedmeny__dropdown-menu {
-    width: 100%;
 
     .hovedmeny__menyvalg {
         display: flex;
         flex-direction: row;
         margin-top: 0.5rem;
         max-width: @desktopLimitWidth;
-
         overflow: hidden;
-        max-height: 0;
-        transition: max-height 0.7s;
-
-        &--active {
-            margin-bottom: 2.5rem;
-            max-height: 40rem;
-        }
 
         .hovedmeny__hovedSeksjon {
             flex-grow: 6;

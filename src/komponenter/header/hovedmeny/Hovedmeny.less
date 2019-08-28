@@ -17,13 +17,30 @@
             justify-content: space-between;
             flex-wrap: wrap;
 
-            .navbar-brand { order: 1; }
-            .meny-button { order: 2; }
-            .hovedmeny__dropdown-menu { order: 4; }
-            .sok { order: 3; }
-            .varselbjelle { order: 3; }
-            .minside-lenke { order: 3; }
-            .login-container { order: 3; }
+            .navbar-brand,
+            .meny-button{
+                order: 1;
+            }
+
+            .sok,
+            .varselbjelle,
+            .minside-lenke,
+            .login-container{
+                order: 2;
+            }
+
+            .hovedmeny__dropdown-menu {
+                order: 3;
+                width: 100%;
+                overflow: hidden;
+                max-height: 0;
+                transition: max-height 0.8s ease-in;
+
+                &--active {
+                    margin-bottom: 2rem;
+                    max-height: 50rem;
+                }
+            }
         }
     }
 }
