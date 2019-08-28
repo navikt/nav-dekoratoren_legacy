@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = 8088;
 const path = require('path');
-const buildPath = path.join(__dirname, '../../build/');
+const buildPath = path.resolve(__dirname, '../../build/');
 const requestNode = require('request');
 const NodeCache = require('node-cache');
 const backupData = require('./menu/no.menu.json');
@@ -24,7 +24,7 @@ const fetchmenyUri = isProduction ? env : 'http://localhost:8088';
 app.disable('x-powered-by');
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Contronl-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
     res.header(
         'Access-Control-Allow-Headers',
         'Origin, X-Requested-With, Content-Type, Accept, Authorization'
@@ -32,16 +32,17 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/person/nav-dekoratoren', express.static('build/'));
+app.use('/person/nav-dekoratoren/', express.static(buildPath));
 
 app.get(
     [
-        '/person/nav-dekoratoren/person',
-        '/person/nav-dekoratoren/bedrift',
-        '/person/nav-dekoratoren/samhandling',
+        '/person/nav-dekoratoren/',
+        '/person/nav-dekoratoren/person/',
+        '/person/nav-dekoratoren/bedrift/',
+        '/person/nav-dekoratoren/samhandling/',
     ],
     (req, res) => {
-        res.sendFile('/index.html', { root: './build' });
+        res.sendFile(path.resolve(__dirname, '../../build', 'index.html'));
     }
 );
 
@@ -52,8 +53,8 @@ const fetchmenuOptions = res => {
             uri: `${fetchmenyUri}`,
         },
         (error, response, body) => {
-            // satt false siden endepunktet i enonic peker fortsatt på gamle endepunktet
-            if (false && response.statusCode === 200) {
+            // satt til false, slik at vi leser at backupData til vi har fått fikset riktig endepunkt i enonic-xp
+            if (false && !error && response.statusCode === 200) {
                 mainCache.set(mainCacheKey, body, 100);
                 backupCache.set(backupCacheKey, body, 0);
                 res.send(body);
