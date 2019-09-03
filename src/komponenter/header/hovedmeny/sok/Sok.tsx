@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React, { createRef } from 'react';
 import throttle from 'lodash.throttle';
 import Downshift from 'downshift';
 import Knapp from 'nav-frontend-knapper';
-import { Input } from 'nav-frontend-skjema';
+// import { Input } from 'nav-frontend-skjema';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import { API } from '../../../../api/api';
 import { SokeresultatData, InputState, defaultData, visAlleTreff } from './sok-utils';
@@ -18,12 +18,12 @@ class Sok extends React.Component<{}, InputState> {
             items: [defaultData],
         };
         this.handleChangeThrottled = throttle (
-            this.handleChange.bind(this),
-            800
+            this.handleValueChange.bind(this),
+            200
         );
     }
 
-    handleChange(input: string) {
+    handleValueChange(input: string) {
         const url = API.sokeresultat;
 
         this.setState({
@@ -87,26 +87,18 @@ class Sok extends React.Component<{}, InputState> {
                     }) => (
                         <div className="sok-container">
                             <div className="sok-input-resultat">
-
-                                <Input
-                                    {...getInputProps() }
-                                    className="sok-input"
-                                    type="search"
-                                    label="Søk:"
-                                    placeholder="Hva leter du etter?"
-                                    aria-label="Søk"
+                                <label {...getLabelProps()}>Søk </label>
+                                <input
+                                    {...getInputProps({
+                                        className: 'sok-input skjemaelement__input',
+                                        placeholder: 'Hva leter du etter?',
+                                    })}
                                 />
 
                                 <ul className="sokeresultat-liste" {...getMenuProps()}>
 
-                                    {isOpen && inputValue
+                                    {isOpen && inputValue !== '' && items
                                         ? items
-                                            .filter(
-                                                item =>
-                                                    !inputValue ||
-                                                    (item.highlight.toLowerCase().includes(inputValue.toLowerCase()) ||
-                                                        item.displayName.toLowerCase().includes(inputValue.toLowerCase()))
-                                            )
                                             .slice(0, 5)
                                             .concat(lenkeAlleTreff)
                                             .map((item, index) => (

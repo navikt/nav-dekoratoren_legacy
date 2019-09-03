@@ -1,6 +1,5 @@
 import innloggingsstatusResponse from './innloggingsstatus-mock';
 import varselinnboksResponse from './varselinnboks-mock';
-import sokeresultatResponse from './sokeresultat-mock';
 import { API } from '../api/api';
 import FetchMock, { Middleware, MiddlewareUtils } from 'yet-another-fetch-mock';
 
@@ -26,6 +25,4 @@ export default () => {
     fetchMock.get(`${API.getVarselinnboksURL}(.*)`, varselinnboksResponse);
 
     fetchMock.post(`${API.postVarselinnboksURL}/33475442`, ({ body }) => body);
-
-    fetchMock.get(API.sokeresultat, sokeresultatResponse);
 };

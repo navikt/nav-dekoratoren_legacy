@@ -4,30 +4,19 @@ export interface InputState {
 }
 
 export interface SokeresultatData {
-    priority: boolean;
-    displayName: string;
-    href: string;
-    highlight: string;
-    publish: {
+    priority?: boolean;
+    displayName?: string;
+    href?: string;
+    highlight?: string;
+    publish?: {
         from: string;
         first: string;
     };
-    modifiedTime: string;
-    className: string;
+    modifiedTime?: string;
+    className?: string;
 }
 
-export const defaultData: SokeresultatData = {
-    priority: false,
-    displayName: '',
-    href: '',
-    highlight: '',
-    publish: {
-        from: '',
-        first: '',
-    },
-    modifiedTime: '',
-    className: '',
-};
+export const defaultData: SokeresultatData = {};
 
 export const visAlleTreff = (inputString: string): SokeresultatData[] => {
     return (

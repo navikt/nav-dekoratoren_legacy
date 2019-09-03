@@ -9,7 +9,7 @@ const Environments = () => {
             logoutUrl: '#',
             menypunkter:
                 'http://localhost:8088/person/nav-dekoratoren/api/get/menyvalg',
-            sokUrl: 'http://localhost:3000'
+            sokeresultat: 'http://localhost:8088/person/nav-dekoratoren/api/get/sokeresultat',
         };
     }
     if (window.location.hostname.indexOf('www-q0') > -1) {
@@ -21,7 +21,7 @@ const Environments = () => {
             menypunkter: !isLocal
                 ? 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg'
                 : '/person/nav-dekoratoren/api/get/menyvalg',
-            sokUrl: 'https://www-x1.nav.no'
+            sokeresultat: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
         };
     }
     if (window.location.hostname.indexOf('www-q1') > -1) {
@@ -33,7 +33,7 @@ const Environments = () => {
             menypunkter: !isLocal
                 ? 'https://www-q1.nav.no/person/nav-dekoratoren/api/get/menyvalg'
                 : '/person/nav-dekoratoren/api/get/menyvalg',
-            sokUrl: 'https://www-x1.nav.no'
+            sokeresultat: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
         };
     }
 
@@ -45,7 +45,7 @@ const Environments = () => {
         menypunkter: !isLocal
             ? 'https://www.nav.no/person/nav-dekoratoren/api/get/menyvalg'
             : '/person/nav-dekoratoren/api/get/menyvalg',
-        sokUrl: 'https://www-x1.nav.no'
+        sokeresultat: 'https://www.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
     };
 };
 

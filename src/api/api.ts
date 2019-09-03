@@ -5,7 +5,7 @@ import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { Data as menypunkterData } from '../reducer/menu-duck';
 
-const { baseUrl, menypunkter, sokUrl } = Environments();
+const { baseUrl, menypunkter, sokeresultat } = Environments();
 
 export const varselinnboksUrl = `${baseUrl}/person/varselinnboks`;
 
@@ -41,7 +41,7 @@ export const API: ApiProps = {
     menyPunkterURL: menypunkter,
     getVarselinnboksURL: `${varselinnboksUrl}/varsler`,
     postVarselinnboksURL: `${varselinnboksUrl}/rest/varsel/erlest`,
-    sokeresultat: `${sokUrl}/www.nav.no/sok/_/service/navno.nav.no.search/search`
+    sokeresultat: sokeresultat,
 };
 
 export function hentInnloggingsstatusFetch(): Promise<innloggingsstatusData> {

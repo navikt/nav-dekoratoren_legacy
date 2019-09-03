@@ -34,6 +34,10 @@
             {
                 "name": "MENYLENKER",
                 "value": "https://www-x1.nav.no/navno/_/service/no.nav.navno/menu"
+            },
+            {
+                "name": "SOKERESULTAT",
+                "value": "https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search"
             }
         ],
         "resources": {
