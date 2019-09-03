@@ -2,7 +2,7 @@ import React, { createRef } from 'react';
 import throttle from 'lodash.throttle';
 import Downshift from 'downshift';
 import Knapp from 'nav-frontend-knapper';
-// import { Input } from 'nav-frontend-skjema';
+import { Input } from 'nav-frontend-skjema';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import { API } from '../../../../api/api';
 import { SokeresultatData, InputState, defaultData, visAlleTreff } from './sok-utils';
@@ -87,12 +87,11 @@ class Sok extends React.Component<{}, InputState> {
                     }) => (
                         <div className="sok-container">
                             <div className="sok-input-resultat">
-                                <label {...getLabelProps()}>Søk </label>
-                                <input
-                                    {...getInputProps({
-                                        className: 'sok-input skjemaelement__input',
-                                        placeholder: 'Hva leter du etter?',
-                                    })}
+
+                                <Input
+                                    {...getInputProps()}
+                                    className= "sok-input"
+                                    placeholder= "Hva leter du etter?"
                                 />
 
                                 <ul className="sokeresultat-liste" {...getMenuProps()}>
@@ -120,7 +119,6 @@ class Sok extends React.Component<{}, InputState> {
                                                                      : 'normal',
                                                          },
                                                      })}
-                                                    className="sokeresultat-item"
                                                 >
                                                     <div className="overskrift">
                                                         <Undertittel>
