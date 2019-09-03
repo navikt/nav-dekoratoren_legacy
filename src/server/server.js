@@ -101,8 +101,7 @@ const fetchmenuOptions = res => {
 
 const fetchSearchResults = (req, res) => {
     const uri =  `${fetchSearchResultUri}?ord=${req.query.ord}`;
-    console.log(uri);
-    console.log('req.query', req.query);
+
     requestNode(
         {
             method: 'GET',
