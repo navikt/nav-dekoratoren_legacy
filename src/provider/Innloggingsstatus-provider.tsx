@@ -28,7 +28,7 @@ const InnloggingsstatusProvider: React.FunctionComponent<
         props.doHentInnloggingsstatus();
     }, []);
 
-    return <>{props.children}</>;
+    return props.children;
 };
 
 const mapStateToProps = (state: AppState): StateProps => ({

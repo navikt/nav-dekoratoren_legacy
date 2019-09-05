@@ -12,9 +12,11 @@ const Datalaster = ({
     children,
     feilmeldingId,
 }: DatalasterProps) => {
+
     const feilmelding = feilmeldingId
         ? feilmeldingId
         : 'feilmelding-tekniskfefil';
+
     if (
         avhengigheter.every(a => harStatus(a, Status.OK)) &&
         (!ventPa ||
@@ -25,7 +27,7 @@ const Datalaster = ({
         return children;
     } else if (avhengigheter.some(a => harStatus(a, Status.FEILET))) {
         console.log(
-            'det har dessverre oppstått en feil med innloggingslinjen. Vi jobber med å få løst problemet.'
+            'Det har dessverre oppstått en feil med innloggingslinjen. Vi jobber med å få løst problemet.'
         );
         return children;
     }
