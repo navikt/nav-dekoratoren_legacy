@@ -2,7 +2,7 @@ import React, { createRef } from 'react';
 import throttle from 'lodash.throttle';
 import Downshift from 'downshift';
 import Knapp from 'nav-frontend-knapper';
-// import { Input } from 'nav-frontend-skjema';
+import { Input } from 'nav-frontend-skjema';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import { API } from '../../../../api/api';
 import { SokeresultatData, InputState, defaultData, visAlleTreff } from './sok-utils';
@@ -10,7 +10,6 @@ import './Sok.less';
 
 class Sok extends React.Component<{}, InputState> {
     handleChangeThrottled: ReturnType<typeof throttle>;
-    private textInputRef = createRef<any>();
 
     constructor(props: {}) {
         super(props);
@@ -47,19 +46,6 @@ class Sok extends React.Component<{}, InputState> {
             });
     }
 
-    componentDidMount(): void {
-        console.log('Mount!');
-        /* const node = this.textInputRef.current;
-        if (node) {
-            node.focus();
-        } */
-    }
-
-    componentDidUpdate(): void {
-        console.log('Update!');
-
-    }
-
     handleSelect (selection: SokeresultatData) {
         location.href = `https://www-x1.nav.no${selection.href}`;
     }
@@ -75,95 +61,92 @@ class Sok extends React.Component<{}, InputState> {
         const lenkeAlleTreff = visAlleTreff(inputString);
 
         return (
+            <Downshift
+                onChange={selection => {
+                    this.handleSelect(selection);
+                }}
+                onInputValueChange={(changes: string) => {
+                    this.handleChangeThrottled(changes);
+                }}
+                itemToString={item => (item ? item.highlight : '')}
+            >
+                {({
+                    getInputProps,
+                    getItemProps,
+                    getLabelProps,
+                    getMenuProps,
+                    isOpen,
+                    inputValue,
+                    highlightedIndex,
+                    selectedItem,
+                }) => (
+                    <form
+                        className="sok"
+                        role="search"
+                        onSubmit={event => this.handleSubmit(event, URL)}
+                    >
+                        <div className="sok-container">
+                            <div className="sok-input-resultat">
 
-                <Downshift
-                    onChange={selection => {
-                        this.handleSelect(selection);
-                    }}
-                    onInputValueChange={(changes: string) => {
-                        this.handleChangeThrottled(changes);
-                    }}
-                    itemToString={item => (item ? item.highlight : '')}
-                >
-                    {({
-                        getInputProps,
-                        getItemProps,
-                        getLabelProps,
-                        getMenuProps,
-                        isOpen,
-                        inputValue,
-                        highlightedIndex,
-                        selectedItem,
-                    }) => (
-                        <form
-                            className="sok"
-                            role="search"
-                            tabIndex={0}
-                            onSubmit={event => this.handleSubmit(event, URL)}
-                        >
-                            <div className="sok-container">
-                                <div className="sok-input-resultat">
+                                <Input
+                                    {...getInputProps()}
+                                    className= "sok-input"
+                                    placeholder= "Hva leter du etter?"
+                                    label="Søk"
+                                    aria-label="Søk"
+                                />
 
-                                    <input
-                                        {...getInputProps()}
-                                        className= "sok-input"
-                                        placeholder= "Hva leter du etter?"
-                                        // label="Søk"
-                                        // aria-label="Søk"
-                                        ref={ this.textInputRef }
-                                    />
+                                <ul className="sokeresultat-liste" {...getMenuProps()}>
 
-                                    <ul className="sokeresultat-liste" {...getMenuProps()}>
+                                    {isOpen && inputValue !== '' && items
+                                        ? items
+                                            .slice(0, 5)
+                                            .concat(lenkeAlleTreff)
+                                            .map((item, index) => (
+                                                <li
+                                                    {...getItemProps({
+                                                         key: index,
+                                                         index,
+                                                         item,
+                                                         style: {
+                                                             backgroundColor:
+                                                                 highlightedIndex ===
+                                                                 index
+                                                                     ? 'lightgray'
+                                                                     : 'white',
+                                                             fontWeight:
+                                                                 selectedItem ===
+                                                                 item
+                                                                     ? 'bold'
+                                                                     : 'normal',
+                                                         },
+                                                     })}
+                                                >
+                                                    <div className="overskrift">
+                                                        <Undertittel>
+                                                            {item.displayName}
+                                                        </Undertittel>
+                                                    </div>
+                                                    <div className="highlight">
+                                                        <Normaltekst>
+                                                            {item.highlight ? item.highlight.replace(/<\/?[^>]+(>|$)/g, '') : ''}
+                                                        </Normaltekst>
+                                                    </div>
+                                                </li>
+                                            ))
+                                        : null}
+                                </ul>
+                            </div>
 
-                                        {isOpen && inputValue !== '' && items
-                                            ? items
-                                                .slice(0, 5)
-                                                .concat(lenkeAlleTreff)
-                                                .map((item, index) => (
-                                                    <li
-                                                        {...getItemProps({
-                                                             key: index,
-                                                             index,
-                                                             item,
-                                                             style: {
-                                                                 backgroundColor:
-                                                                     highlightedIndex ===
-                                                                     index
-                                                                         ? 'lightgray'
-                                                                         : 'white',
-                                                                 fontWeight:
-                                                                     selectedItem ===
-                                                                     item
-                                                                         ? 'bold'
-                                                                         : 'normal',
-                                                             },
-                                                         })}
-                                                    >
-                                                        <div className="overskrift">
-                                                            <Undertittel>
-                                                                {item.displayName}
-                                                            </Undertittel>
-                                                        </div>
-                                                        <div className="highlight">
-                                                            <Normaltekst>
-                                                                {item.highlight ? item.highlight.replace(/<\/?[^>]+(>|$)/g, '') : ''}
-                                                            </Normaltekst>
-                                                        </div>
-                                                    </li>
-                                                ))
-                                            : null}
-                                    </ul>
-                                </div>
-
-                                <div className="sok-knapp btn">
-                                    <Knapp type="standard" htmlType="submit">
-                                        SØK
-                                    </Knapp>
-                                </div>
-                        </div>
-                        </form>
-                    )}
-                </Downshift>
+                            <div className="sok-knapp btn">
+                                <Knapp type="standard" htmlType="submit">
+                                    SØK
+                                </Knapp>
+                            </div>
+                    </div>
+                    </form>
+                )}
+            </Downshift>
         );
     }
 }
