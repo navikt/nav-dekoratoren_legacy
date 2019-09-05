@@ -8,7 +8,7 @@ import { getSessionStorage, MenuValue, NAVHEADER } from '../../../../utils/meny-
 
 const { baseUrl, minsideArbeidsgiverUrl } = Environments();
 const dittNavURL = `${baseUrl}/person/dittnav/`;
-const MinSideArbeidsgiverURL = `${minsideArbeidsgiverUrl}/min-side-arbeidsgiver/`;
+const minSideArbeidsgiverURL = `${minsideArbeidsgiverUrl}/min-side-arbeidsgiver/`;
 
 interface StateProps {
     erInnlogget: boolean;
@@ -27,7 +27,7 @@ const MinsideLenke = ({erInnlogget}: StateProps) => {
     const lenkeurl = toppmenyvalg === null || toppmenyvalg === MenuValue.PRIVATPERSON
         ? dittNavURL
         : toppmenyvalg === MenuValue.BEDRIFT
-        ? MinSideArbeidsgiverURL
+        ? minSideArbeidsgiverURL
         : '';
 
     return (
