@@ -1,22 +1,22 @@
-import { MenuValue } from '../../../provider/Storage-provider';
+import { MenuValue } from '../../../utils/meny-storage-utils';
 
 export const toppmenyLenker: {
-    tittel: string;
+    tittel: MenuValue;
     url: string;
     key: MenuValue;
 }[] = [
     {
-        tittel: 'PRIVATPERSON',
+        tittel: MenuValue.PRIVATPERSON,
         url: '/person/nav-dekoratoren/person/',
         key: MenuValue.PRIVATPERSON,
     },
     {
-        tittel: 'BEDRIFT',
+        tittel: MenuValue.BEDRIFT,
         url: '/person/nav-dekoratoren/bedrift/',
         key: MenuValue.BEDRIFT,
     },
     {
-        tittel: 'SAMHANDLER',
+        tittel: MenuValue.SAMHANDLER,
         url: '/person/nav-dekoratoren/samhandler/',
         key: MenuValue.SAMHANDLER,
     },

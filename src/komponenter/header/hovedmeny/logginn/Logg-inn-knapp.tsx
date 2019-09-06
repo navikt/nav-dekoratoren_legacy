@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../reducer/reducer';
 import KnappBase from 'nav-frontend-knapper';
-import Environments from '../../../../utils/Environments';
+import Environments from '../../../../utils/environments';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
 import './Logg-inn-knapp.less';
@@ -41,7 +41,7 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
         return (
             <div>
                 <AlertStripe type={'advarsel'}>
-                    I locahost fungerer ikke innloggingslinjen. Og har blitt
+                    I localhost fungerer ikke innloggingslinjen. Og har blitt
                     erstattet med mock-api{' '}
                     <Lukknapp onClick={this.lukkdialogBoks} />
                 </AlertStripe>
