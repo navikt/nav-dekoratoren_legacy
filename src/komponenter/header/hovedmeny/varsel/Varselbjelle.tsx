@@ -6,7 +6,11 @@ import { connect } from 'react-redux';
 import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
 import VarselVisning from './Varsel-visning';
 import './Varselbjelle.less';
-import { getSessionStorage, MenuValue, NAVHEADER } from '../../../../utils/meny-storage-utils';
+import {
+    getSessionStorage,
+    MenuValue,
+    NAVHEADER,
+} from '../../../../utils/meny-storage-utils';
 
 interface StateProps {
     varsler: string;
@@ -28,7 +32,6 @@ interface State {
 type VarselbjelleProps = StateProps & DispatchProps;
 
 class Varselbjelle extends React.Component<VarselbjelleProps, State> {
-
     private varselbjelleRef = createRef<HTMLDivElement>();
 
     constructor(props: VarselbjelleProps) {
@@ -95,7 +98,9 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                             onClick={this.handleClick}
                             className="toggle-varsler"
                             title="Varsler"
-                            aria-label={`Varsler. Du har ${antallVarsler > 0 ? antallVarsler : 'ingen'} varsler.`}
+                            aria-label={`Varsler. Du har ${
+                                antallVarsler > 0 ? antallVarsler : 'ingen'
+                            } varsler.`}
                             aria-pressed={this.state.clicked}
                             aria-haspopup="true"
                             aria-controls="varsler-display"
@@ -126,7 +131,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    doSettVarslerSomLest: (nyesteId: number) => settVarslerSomLest(nyesteId)(dispatch)
+    doSettVarslerSomLest: (nyesteId: number) =>
+        settVarslerSomLest(nyesteId)(dispatch),
 });
 
 export default connect(

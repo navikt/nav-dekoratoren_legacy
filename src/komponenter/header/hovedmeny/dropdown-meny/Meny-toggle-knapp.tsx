@@ -4,8 +4,17 @@ import { connect } from 'react-redux';
 import BEMHelper from '../../../../utils/bem';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Status } from '../../../../api/api';
-import { getSessionStorage, MenuValue, NAVHEADER, setDropdownMenuView } from '../../../../utils/meny-storage-utils';
-import { Data, DataInitState, MenyPunkter } from '../../../../reducer/menu-duck';
+import {
+    getSessionStorage,
+    MenuValue,
+    NAVHEADER,
+    setDropdownMenuView,
+} from '../../../../utils/meny-storage-utils';
+import {
+    Data,
+    DataInitState,
+    MenyPunkter,
+} from '../../../../reducer/menu-duck';
 import HamburgerIkon from '../../../ikoner/meny/HamburgerIkon';
 import DropdownHoyreSeksjon from './DropdownHoyreSeksjon';
 import DropdownVenstreSeksjon from './DropdownVenstreSeksjon';
@@ -71,8 +80,8 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                     id="dropdown-menu"
                     className={cls.element('dropdown-menu')}
                 >
-                    { meny.status === Status.OK
-                        ? (<div
+                    {meny.status === Status.OK ? (
+                        <div
                             className={cls.element(
                                 'menyvalg',
                                 this.state.clicked ? 'active' : ''
@@ -84,7 +93,7 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                                 status={meny.status}
                                 tabindex={this.state.clicked}
                             />
-                            { toppmenyvalg === MenuValue.PRIVATPERSON ? (
+                            {toppmenyvalg === MenuValue.PRIVATPERSON ? (
                                 <DropdownHoyreSeksjon
                                     minsideMenyView={MenyToggleKnapp.minside(
                                         meny.data,
@@ -93,16 +102,17 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                                     classname={classname}
                                     tabindex={this.state.clicked}
                                 />
-                            ) : null }
-                        </div>)
-                        : null
-                    }
+                            ) : null}
+                        </div>
+                    ) : null}
                 </div>
             </>
         );
     }
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({ meny: state.menypunkt });
+const mapStateToProps = (state: AppState): StateProps => ({
+    meny: state.menypunkt,
+});
 
 export default connect(mapStateToProps)(MenyToggleKnapp);

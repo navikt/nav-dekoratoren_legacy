@@ -4,7 +4,11 @@ import Environments from '../../../../utils/environments';
 import './MinsideLenke.less';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
-import { getSessionStorage, MenuValue, NAVHEADER } from '../../../../utils/meny-storage-utils';
+import {
+    getSessionStorage,
+    MenuValue,
+    NAVHEADER,
+} from '../../../../utils/meny-storage-utils';
 
 const { baseUrl, minsideArbeidsgiverUrl } = Environments();
 const dittNavURL = `${baseUrl}/person/dittnav/`;
@@ -14,28 +18,28 @@ interface StateProps {
     erInnlogget: boolean;
 }
 
-const MinsideLenke = ({erInnlogget}: StateProps) => {
-
+const MinsideLenke = ({ erInnlogget }: StateProps) => {
     const toppmenyvalg = getSessionStorage(NAVHEADER);
 
-    const lenketekst = toppmenyvalg === null || toppmenyvalg === MenuValue.PRIVATPERSON
-        ? 'Gå til min side'
-        : toppmenyvalg === MenuValue.BEDRIFT
-        ? 'Gå til min side arbeidsgiver'
-        : '';
+    const lenketekst =
+        toppmenyvalg === null || toppmenyvalg === MenuValue.PRIVATPERSON
+            ? 'Gå til min side'
+            : toppmenyvalg === MenuValue.ARBEIDSGIVER
+            ? 'Gå til min side arbeidsgiver'
+            : '';
 
-    const lenkeurl = toppmenyvalg === null || toppmenyvalg === MenuValue.PRIVATPERSON
-        ? dittNavURL
-        : toppmenyvalg === MenuValue.BEDRIFT
-        ? minSideArbeidsgiverURL
-        : '';
+    const lenkeurl =
+        toppmenyvalg === null || toppmenyvalg === MenuValue.PRIVATPERSON
+            ? dittNavURL
+            : toppmenyvalg === MenuValue.ARBEIDSGIVER
+            ? minSideArbeidsgiverURL
+            : '';
 
     return (
         <div className="minside-lenke">
-            {erInnlogget && !(toppmenyvalg === MenuValue.SAMHANDLER)
-                ? <Lenke href={lenkeurl}>{lenketekst}</Lenke>
-                : null
-            }
+            {erInnlogget && !(toppmenyvalg === MenuValue.SAMARBEIDSPARTNER) ? (
+                <Lenke href={lenkeurl}>{lenketekst}</Lenke>
+            ) : null}
         </div>
     );
 };

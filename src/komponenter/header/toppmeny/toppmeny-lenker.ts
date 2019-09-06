@@ -11,13 +11,13 @@ export const toppmenyLenker: {
         key: MenuValue.PRIVATPERSON,
     },
     {
-        tittel: MenuValue.BEDRIFT,
+        tittel: MenuValue.ARBEIDSGIVER,
         url: '/person/nav-dekoratoren/bedrift/',
-        key: MenuValue.BEDRIFT,
+        key: MenuValue.ARBEIDSGIVER,
     },
     {
-        tittel: MenuValue.SAMHANDLER,
-        url: '/person/nav-dekoratoren/samhandler/',
-        key: MenuValue.SAMHANDLER,
+        tittel: MenuValue.SAMARBEIDSPARTNER,
+        url: '/person/nav-dekoratoren/samarbeidspartner/',
+        key: MenuValue.SAMARBEIDSPARTNER,
     },
 ];

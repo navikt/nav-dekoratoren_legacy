@@ -26,9 +26,7 @@ const envSok = process.env.SOKERESULTAT
     ? process.env.SOKERESULTAT
     : 'https://www-x1.nav.no/navno/_/service/no.nav.navno/menu';
 
-const fetchSearchResultUri = isProduction
-    ? envSok
-    : 'http://localhost:8088';
+const fetchSearchResultUri = isProduction ? envSok : 'http://localhost:8088';
 
 app.disable('x-powered-by');
 app.use(function(req, res, next) {
@@ -48,7 +46,7 @@ app.get(
         '/person/nav-dekoratoren/',
         '/person/nav-dekoratoren/person/',
         '/person/nav-dekoratoren/bedrift/',
-        '/person/nav-dekoratoren/samhandling/',
+        '/person/nav-dekoratoren/samarbeidspartner/',
     ],
     (req, res) => {
         res.sendFile(path.resolve(__dirname, '../../build', 'index.html'));
@@ -100,15 +98,14 @@ const fetchmenuOptions = res => {
 };
 
 const fetchSearchResults = (req, res) => {
-    const uri =  `${fetchSearchResultUri}?ord=${req.query.ord}`;
+    const uri = `${fetchSearchResultUri}?ord=${req.query.ord}`;
 
     requestNode(
         {
             method: 'GET',
-            uri
+            uri,
         },
         (error, response, body) => {
-
             if (!error && response.statusCode === 200) {
                 res.send(body);
             } else {

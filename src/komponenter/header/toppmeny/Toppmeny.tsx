@@ -3,7 +3,11 @@ import { EtikettLiten } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
 import { toppmenyLenker } from './toppmeny-lenker';
 import {
-    checkUriPath, MenuValue, getSessionStorage, setSessionStorage, NAVHEADER
+    checkUriPath,
+    MenuValue,
+    getSessionStorage,
+    setSessionStorage,
+    NAVHEADER,
 } from '../../../utils/meny-storage-utils';
 import './Toppmeny.less';
 
@@ -34,7 +38,11 @@ class Toppmeny extends React.Component<{}, State> {
                             return (
                                 <li
                                     role="tab"
-                                    aria-selected={this.state.toppmeny === lenke.tittel ? 'true' : 'false'}
+                                    aria-selected={
+                                        this.state.toppmeny === lenke.tittel
+                                            ? 'true'
+                                            : 'false'
+                                    }
                                     className={cls.element('list-element')}
                                     key={lenke.tittel}
                                 >

@@ -4,8 +4,8 @@ export const NAVHEADER = 'NAVHEADER';
 
 export enum MenuValue {
     PRIVATPERSON = 'PRIVATPERSON',
-    BEDRIFT = 'BEDRIFT',
-    SAMHANDLER = 'SAMHANDLER',
+    ARBEIDSGIVER = 'ARBEIDSGIVER',
+    SAMARBEIDSPARTNER = 'SAMARBEIDSPARTNER',
 }
 
 export const getSessionStorage = (key: string): string | null => {
@@ -20,11 +20,12 @@ export const checkUriPath = (): MenuValue => {
     const locationPath = window.location.pathname.split('/')[3];
 
     if (locationPath) {
-        const menyvalg = locationPath === 'bedrift'
-        ? MenuValue.BEDRIFT
-        : locationPath === 'samhandler'
-        ? MenuValue.SAMHANDLER
-        : MenuValue.PRIVATPERSON;
+        const menyvalg =
+            locationPath === 'bedrift'
+                ? MenuValue.ARBEIDSGIVER
+                : locationPath === 'samarbeidspartner'
+                ? MenuValue.SAMARBEIDSPARTNER
+                : MenuValue.PRIVATPERSON;
 
         setSessionStorage(NAVHEADER, menyvalg);
         return menyvalg;
@@ -35,14 +36,20 @@ export const checkUriPath = (): MenuValue => {
 
 export function setDropdownMenuView(menypunkter: Data[]): Data {
     const storage = getSessionStorage(NAVHEADER);
-    return storage ? getDropdownMenuContent(storage, menypunkter) : menypunkter[0];
+    return storage
+        ? getDropdownMenuContent(storage, menypunkter)
+        : menypunkter[0];
 }
 
 function getDropdownMenuContent(storage: string, content: Data[]): Data {
     switch (storage) {
-        case MenuValue.PRIVATPERSON: return content[0];
-        case MenuValue.BEDRIFT: return content[1];
-        case MenuValue.SAMHANDLER: return content[2];
-        default: return content[0];
+        case MenuValue.PRIVATPERSON:
+            return content[0];
+        case MenuValue.ARBEIDSGIVER:
+            return content[1];
+        case MenuValue.SAMARBEIDSPARTNER:
+            return content[2];
+        default:
+            return content[0];
     }
 }

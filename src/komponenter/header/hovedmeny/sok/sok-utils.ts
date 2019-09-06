@@ -19,8 +19,8 @@ export interface SokeresultatData {
 export const defaultData: SokeresultatData = {};
 
 export const visAlleTreff = (inputString: string): SokeresultatData[] => {
-    return (
-        [{
+    return [
+        {
             priority: false,
             displayName: `Se alle treff ("${inputString}")`,
             href: `/sok?ord=${inputString}`,
@@ -31,6 +31,6 @@ export const visAlleTreff = (inputString: string): SokeresultatData[] => {
             },
             modifiedTime: '',
             className: '',
-        }]
-    );
+        },
+    ];
 };
