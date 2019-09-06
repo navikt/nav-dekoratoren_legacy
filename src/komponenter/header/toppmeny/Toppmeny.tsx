@@ -3,10 +3,8 @@ import { EtikettLiten } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
 import { toppmenyLenker } from './toppmeny-lenker';
 import {
-    hentStatus,
-    MenuValue,
-    NAVHEADER,
-} from '../../../provider/Storage-provider';
+    checkUriPath, MenuValue, getSessionStorage, setSessionStorage, NAVHEADER
+} from '../../../utils/meny-storage-utils';
 import './Toppmeny.less';
 
 interface State {
@@ -17,7 +15,7 @@ class Toppmeny extends React.Component<{}, State> {
     constructor(props: {}) {
         super(props);
         this.state = {
-            toppmeny: hentStatus(),
+            toppmeny: checkUriPath(),
         };
     }
 
@@ -36,11 +34,7 @@ class Toppmeny extends React.Component<{}, State> {
                             return (
                                 <li
                                     role="tab"
-                                    aria-selected={
-                                        this.state.toppmeny === lenke.tittel
-                                            ? 'true'
-                                            : 'false'
-                                    }
+                                    aria-selected={this.state.toppmeny === lenke.tittel ? 'true' : 'false'}
                                     className={cls.element('list-element')}
                                     key={lenke.tittel}
                                 >
@@ -84,11 +78,11 @@ class Toppmeny extends React.Component<{}, State> {
         url: string
     ): void => {
         e.preventDefault();
-        const headervalg = sessionStorage.getItem(NAVHEADER);
+        const headervalg = getSessionStorage(NAVHEADER);
         if (headervalg && headervalg === valgVerdi) {
             return;
         }
-        sessionStorage.setItem(NAVHEADER, valgVerdi);
+        setSessionStorage(NAVHEADER, valgVerdi);
         this.setState({
             toppmeny: valgVerdi,
         });

@@ -4,7 +4,6 @@ import getStore from './redux/store';
 import Header from './komponenter/header/Header';
 import Footer from './komponenter/footer/Footer';
 import setupMock from './mocks/setup-mock';
-import InnloggingsstatusProvider from './provider/Innloggingsstatus-provider';
 
 const store = getStore();
 
@@ -22,12 +21,8 @@ if (
 function App() {
     return (
         <ReduxProvider store={store}>
-            <InnloggingsstatusProvider>
-                <>
-                    <Header />
-                    <Footer />
-                </>
-            </InnloggingsstatusProvider>
+            <Header />
+            <Footer />
         </ReduxProvider>
     );
 }
