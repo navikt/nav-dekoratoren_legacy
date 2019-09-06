@@ -12,7 +12,6 @@ const Datalaster = ({
     children,
     feilmeldingId,
 }: DatalasterProps) => {
-
     const feilmelding = feilmeldingId
         ? feilmeldingId
         : 'feilmelding-tekniskfefil';

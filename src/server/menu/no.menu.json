@@ -267,7 +267,7 @@
         ]
     },
     {
-        "displayName": "Bedrift",
+        "displayName": "Arbeidsgiver",
         "path": "/",
         "id": "ea90da4c-5bd3-4dbf-8338-ae70b9b148b3",
         "hasChildren": true,
@@ -483,7 +483,7 @@
         ]
     },
     {
-        "displayName": "Samhandler",
+        "displayName": "Samarbeidspartner",
         "path": "/",
         "id": "4bf437d5-75ae-4358-8005-1a3933f77abb",
         "hasChildren": true,
@@ -502,7 +502,7 @@
                         "children": []
                     },
                     {
-                        "displayName": "Hjelpemidler - for samhandlere",
+                        "displayName": "Hjelpemidler - for samarbeidspartnere",
                         "path": "/",
                         "id": "4b10b5cc-4a61-460a-8505-5b810efae2dc",
                         "hasChildren": false,
@@ -516,7 +516,7 @@
                         "children": []
                     },
                     {
-                        "displayName": "Arbeid, psykisk helse og samhandlere",
+                        "displayName": "Arbeid, psykisk helse og samarbeidspartnere",
                         "path": "/",
                         "id": "760f4c91-d93f-42c8-a6de-1509579a337e",
                         "hasChildren": false,
