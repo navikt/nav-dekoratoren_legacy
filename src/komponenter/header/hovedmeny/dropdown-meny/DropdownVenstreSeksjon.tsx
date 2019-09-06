@@ -8,10 +8,11 @@ interface Props {
     classname: string;
     menyLenker: Data;
     status: Status;
+    tabindex: boolean;
 }
 
 const DropdownVenstreSeksjon = (props: Props) => {
-    const { classname, menyLenker, status } = props;
+    const { classname, menyLenker, status, tabindex } = props;
     const cls = BEMHelper(classname);
 
     const goto = (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
@@ -35,6 +36,7 @@ const DropdownVenstreSeksjon = (props: Props) => {
                                         return (
                                             <li key={index}>
                                                 <a
+                                                    tabIndex={tabindex ? 0 : -1}
                                                     href={lenke.path}
                                                     onClick={event =>
                                                         goto(event, lenke.path)

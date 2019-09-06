@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
-import innloggingsstatusReducer, {
-    InnloggingsstatusState,
-} from './innloggingsstatus-duck';
+import innloggingsstatusReducer, { InnloggingsstatusState } from './innloggingsstatus-duck';
 import menypunktReducer, { MenyPunkter } from './menu-duck';
 import varselinnboksReducer, { VarselinnboksState } from './varselinnboks-duck';
 import { DataElement } from '../api/api';

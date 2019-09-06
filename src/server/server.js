@@ -6,6 +6,7 @@ const buildPath = path.resolve(__dirname, '../../build/');
 const requestNode = require('request');
 const NodeCache = require('node-cache');
 const backupData = require('./menu/no.menu.json');
+const sokeresultatMockData = require('./sokeresultat-mockdata.json');
 
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
@@ -20,6 +21,14 @@ const env = process.env.MENYLENKER
     : 'https://www-x1.nav.no/navno/_/service/no.nav.navno/menu';
 
 const fetchmenyUri = isProduction ? env : 'http://localhost:8088';
+
+const envSok = process.env.SOKERESULTAT
+    ? process.env.SOKERESULTAT
+    : 'https://www-x1.nav.no/navno/_/service/no.nav.navno/menu';
+
+const fetchSearchResultUri = isProduction
+    ? envSok
+    : 'http://localhost:8088';
 
 app.disable('x-powered-by');
 app.use(function(req, res, next) {
@@ -90,12 +99,37 @@ const fetchmenuOptions = res => {
     );
 };
 
+const fetchSearchResults = (req, res) => {
+    const uri =  `${fetchSearchResultUri}?ord=${req.query.ord}`;
+
+    requestNode(
+        {
+            method: 'GET',
+            uri
+        },
+        (error, response, body) => {
+
+            if (!error && response.statusCode === 200) {
+                res.send(body);
+            } else {
+                console.log('server error:', error);
+                res.send(sokeresultatMockData);
+            }
+        }
+    );
+};
+
 app.get('/person/nav-dekoratoren/api/get/menyvalg', (req, res) => {
     mainCache.get(mainCacheKey, (err, response) => {
         if (!err && response !== undefined) {
             res.send(response);
         } else fetchmenuOptions(res);
     });
+});
+
+app.get('/person/nav-dekoratoren/api/get/sokeresultat', (req, res) => {
+    console.log('req:', req);
+    fetchSearchResults(req, res);
 });
 
 app.get('/person/nav-dekoratoren/isAlive', (req, res) => res.sendStatus(200));

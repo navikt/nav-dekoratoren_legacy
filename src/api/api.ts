@@ -5,7 +5,7 @@ import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { Data as menypunkterData } from '../reducer/menu-duck';
 
-const { baseUrl, menypunkter } = Environments();
+const { baseUrl, menypunkter, sokeresultat } = Environments();
 
 export const varselinnboksUrl = `${baseUrl}/person/varselinnboks`;
 
@@ -33,6 +33,7 @@ interface ApiProps {
     menyPunkterURL: string;
     getVarselinnboksURL: string;
     postVarselinnboksURL: string;
+    sokeresultat: string;
 }
 
 export const API: ApiProps = {
@@ -40,6 +41,7 @@ export const API: ApiProps = {
     menyPunkterURL: menypunkter,
     getVarselinnboksURL: `${varselinnboksUrl}/varsler`,
     postVarselinnboksURL: `${varselinnboksUrl}/rest/varsel/erlest`,
+    sokeresultat: sokeresultat,
 };
 
 export function hentInnloggingsstatusFetch(): Promise<innloggingsstatusData> {

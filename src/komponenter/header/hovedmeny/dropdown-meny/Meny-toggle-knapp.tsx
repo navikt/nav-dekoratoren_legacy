@@ -68,8 +68,8 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                 </button>
 
                 <div
-                    className={cls.element('dropdown-menu')}
                     id="dropdown-menu"
+                    className={cls.element('dropdown-menu')}
                 >
                     { meny.status === Status.OK
                         ? (<div
@@ -82,6 +82,7 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                                 classname={this.props.classname}
                                 menyLenker={setDropdownMenuView(meny.data)}
                                 status={meny.status}
+                                tabindex={this.state.clicked}
                             />
                             { toppmenyvalg === MenuValue.PRIVATPERSON ? (
                                 <DropdownHoyreSeksjon
@@ -90,6 +91,7 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                                         3
                                     )}
                                     classname={classname}
+                                    tabindex={this.state.clicked}
                                 />
                             ) : null }
                         </div>)

@@ -87,4 +87,5 @@ export type Handling =
     | SettVarslerOKAction
     | SettVarslerLestOKAction
     | SettVarslerLestFEILETAction
-    | SettVarslerLestPENDINGAction;
+    | SettVarslerLestPENDINGAction
+    | HentInnloggingsstatusPENDINGAction;
