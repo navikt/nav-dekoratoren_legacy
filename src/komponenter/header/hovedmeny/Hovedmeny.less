@@ -8,30 +8,93 @@
     min-height: 6.5rem;
 
     .hovedmeny__content {
-        width: @desktopLimitWidth;
+        width: 100%;
         margin: 0 auto;
 
         .hovedmeny__meny-elementer {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             flex-wrap: wrap;
 
-            .navbar-brand,
-            .meny-button {
+            .navbar-brand {
+                // text-align: center;
                 order: 1;
+                width: 100%;
             }
 
-            .sok,
-            .varselbjelle,
-            .minside-lenke,
-            .login-container {
+            .minside-lenke {
                 order: 2;
+                width: 30%;
+            }
+
+            .varselbjelle {
+                order: 3;
+                width: 20%;
+            }
+
+            .login-container {
+                order: 3;
+                width: 50%;
+            }
+
+            .meny-button {
+                order: 5;
+                width: 100%;
             }
 
             .hovedmeny__dropdown-menu {
-                order: 3;
+                order: 5;
                 width: 100%;
+            }
+
+            .sok {
+                order: 4;
+                width: 100%;
+            }
+
+            /*.hovedmeny__dropdown-menu {
+                order: 3;
+            }*/
+        }
+    }
+}
+
+@media (min-width: @desktopLimitWidth) {
+    .hovedmeny {
+        width: 100%;
+        padding: 0.5rem 0 1rem;
+        border-bottom: 2px solid @navBla;
+        min-height: 6.5rem;
+
+        .hovedmeny__content {
+            width: @desktopLimitWidth;
+            margin: 0 auto;
+
+            .hovedmeny__meny-elementer {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+
+                .navbar-brand,
+                .meny-button {
+                    order: 1;
+                    width: auto;
+                }
+
+                .sok,
+                .varselbjelle,
+                .minside-lenke,
+                .login-container {
+                    order: 2;
+                    width: auto;
+                }
+
+                .hovedmeny__dropdown-menu {
+                    order: 3;
+                    width: 100%;
+                }
             }
         }
     }

@@ -26,9 +26,7 @@ const Hovedmeny = () => {
 
                     <MenyToggleKnapp classname="hovedmeny" />
 
-                    <MediaQuery minWidth={768}>
-                        <Sok />
-                    </MediaQuery>
+                    <Sok />
 
                     <InnloggingsstatusProvider>
                         <>
