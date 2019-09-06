@@ -7,7 +7,6 @@
     background-color: white;
     border: none;
     padding: 0;
-    margin-right: 1rem;
 
     &:focus {
         text-decoration: none;
@@ -39,17 +38,14 @@
 .hovedmeny .hovedmeny__dropdown-menu {
     .hovedmeny__menyvalg {
         display: flex;
-        flex-direction: row;
-        margin-top: 0.5rem;
-        max-width: @desktopLimitWidth;
-        max-height: 0;
-        min-height: 0;
         overflow: hidden;
+        max-width: @desktopLimitWidth;
+        margin-bottom: 0;
+        max-height: 0;
         transition: all 0.7s ease-in-out;
 
         &--active {
             margin-bottom: 2rem;
-            min-height: 30rem;
             max-height: 40rem;
         }
 

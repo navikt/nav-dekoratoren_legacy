@@ -5,7 +5,12 @@ import Knapp from 'nav-frontend-knapper';
 import { Input } from 'nav-frontend-skjema';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import { API } from '../../../../api/api';
-import { SokeresultatData, InputState, defaultData, visAlleTreff } from './sok-utils';
+import {
+    SokeresultatData,
+    InputState,
+    defaultData,
+    visAlleTreff,
+} from './sok-utils';
 import './Sok.less';
 
 class Sok extends React.Component<{}, InputState> {
@@ -17,7 +22,7 @@ class Sok extends React.Component<{}, InputState> {
             inputString: '',
             items: [defaultData],
         };
-        this.handleChangeThrottled = throttle (
+        this.handleChangeThrottled = throttle(
             this.handleValueChange.bind(this),
             200
         );
@@ -46,7 +51,7 @@ class Sok extends React.Component<{}, InputState> {
             });
     }
 
-    handleSelect (selection: SokeresultatData) {
+    handleSelect(selection: SokeresultatData) {
         location.href = `https://www-x1.nav.no${selection.href}`;
     }
 
@@ -87,53 +92,59 @@ class Sok extends React.Component<{}, InputState> {
                     >
                         <div className="sok-container">
                             <div className="sok-input-resultat">
-
                                 <Input
                                     {...getInputProps()}
-                                    className= "sok-input"
-                                    placeholder= "Hva leter du etter?"
+                                    className="sok-input"
+                                    placeholder="Hva leter du etter?"
                                     label="Søk"
                                     aria-label="Søk"
                                 />
 
-                                <ul className="sokeresultat-liste" {...getMenuProps()}>
-
+                                <ul
+                                    className="sokeresultat-liste"
+                                    {...getMenuProps()}
+                                >
                                     {isOpen && inputValue !== '' && items
                                         ? items
-                                            .slice(0, 5)
-                                            .concat(lenkeAlleTreff)
-                                            .map((item, index) => (
-                                                <li
-                                                    {...getItemProps({
-                                                         key: index,
-                                                         index,
-                                                         item,
-                                                         style: {
-                                                             backgroundColor:
-                                                                 highlightedIndex ===
-                                                                 index
-                                                                     ? 'lightgray'
-                                                                     : 'white',
-                                                             fontWeight:
-                                                                 selectedItem ===
-                                                                 item
-                                                                     ? 'bold'
-                                                                     : 'normal',
-                                                         },
-                                                     })}
-                                                >
-                                                    <div className="overskrift">
-                                                        <Undertittel>
-                                                            {item.displayName}
-                                                        </Undertittel>
-                                                    </div>
-                                                    <div className="highlight">
-                                                        <Normaltekst>
-                                                            {item.highlight ? item.highlight.replace(/<\/?[^>]+(>|$)/g, '') : ''}
-                                                        </Normaltekst>
-                                                    </div>
-                                                </li>
-                                            ))
+                                              .slice(0, 5)
+                                              .concat(lenkeAlleTreff)
+                                              .map((item, index) => (
+                                                  <li
+                                                      {...getItemProps({
+                                                          key: index,
+                                                          index,
+                                                          item,
+                                                          style: {
+                                                              backgroundColor:
+                                                                  highlightedIndex ===
+                                                                  index
+                                                                      ? 'lightgray'
+                                                                      : 'white',
+                                                              fontWeight:
+                                                                  selectedItem ===
+                                                                  item
+                                                                      ? 'bold'
+                                                                      : 'normal',
+                                                          },
+                                                      })}
+                                                  >
+                                                      <div className="overskrift">
+                                                          <Undertittel>
+                                                              {item.displayName}
+                                                          </Undertittel>
+                                                      </div>
+                                                      <div className="highlight">
+                                                          <Normaltekst>
+                                                              {item.highlight
+                                                                  ? item.highlight.replace(
+                                                                        /<\/?[^>]+(>|$)/g,
+                                                                        ''
+                                                                    )
+                                                                  : ''}
+                                                          </Normaltekst>
+                                                      </div>
+                                                  </li>
+                                              ))
                                         : null}
                                 </ul>
                             </div>
@@ -143,7 +154,7 @@ class Sok extends React.Component<{}, InputState> {
                                     SØK
                                 </Knapp>
                             </div>
-                    </div>
+                        </div>
                     </form>
                 )}
             </Downshift>

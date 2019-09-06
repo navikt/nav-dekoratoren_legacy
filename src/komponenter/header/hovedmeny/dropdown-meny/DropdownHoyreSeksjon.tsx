@@ -8,10 +8,11 @@ import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 interface Props {
     minsideMenyView: Data;
     classname: string;
+    tabindex: boolean;
 }
 
 const DropdownHoyreSeksjon = (props: Props) => {
-    const { classname, minsideMenyView } = props;
+    const { classname, minsideMenyView, tabindex } = props;
     const cls = BEMHelper(classname);
     if (minsideMenyView) {
         return (
@@ -29,7 +30,8 @@ const DropdownHoyreSeksjon = (props: Props) => {
                                             const item = listItem(
                                                 lenke.displayName,
                                                 cls,
-                                                lenke.path
+                                                lenke.path,
+                                                tabindex
                                             );
                                             return (
                                                 <div key={index}>{item}</div>
@@ -46,7 +48,7 @@ const DropdownHoyreSeksjon = (props: Props) => {
     return <div />;
 };
 
-const listItem = (name: string, cls: any, href: string) => {
+const listItem = (name: string, cls: any, href: string, tabindex: boolean) => {
     switch (name) {
         case 'å min side finner du:':
             return (
@@ -57,7 +59,11 @@ const listItem = (name: string, cls: any, href: string) => {
         case 'Gå til Min Side':
             return (
                 <li className={cls.element('til-minside-lenke')}>
-                    <Lenke className={cls.element('minside-lenke')} href={href}>
+                    <Lenke
+                        tabIndex={tabindex ? 0 : -1}
+                        className={cls.element('minside-lenke')}
+                        href={href}
+                    >
                         <Normaltekst>
                             <HoyreChevron />
                             {name}
@@ -69,7 +75,11 @@ const listItem = (name: string, cls: any, href: string) => {
         default:
             return (
                 <li className={cls.element('minside-list-item')}>
-                    <Lenke className={cls.element('minside-lenke')} href={href}>
+                    <Lenke
+                        tabIndex={tabindex ? 0 : -1}
+                        className={cls.element('minside-lenke')}
+                        href={href}
+                    >
                         <Normaltekst>{name}</Normaltekst>
                     </Lenke>
                 </li>

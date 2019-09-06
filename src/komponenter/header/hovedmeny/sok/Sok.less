@@ -1,14 +1,12 @@
 @import '../../../../../node_modules/nav-frontend-core/less/_variabler';
 
-.hovedmeny .sok {
-    width: 30rem;
-    display: block;
-    position: relative;
+.hovedmeny .sok .sok-container {
+    width: 27.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
     .sok-input-resultat {
-        display: inline-block;
-        width: 20rem;
-        margin-right: 1rem;
         position: relative;
 
         .skjemaelement__label {
@@ -21,7 +19,8 @@
         }
 
         .sok-input {
-            margin-bottom: 3px;
+            margin-bottom: 1px;
+            width: 20rem;
         }
 
         .sokeresultat-liste {
@@ -32,20 +31,12 @@
 
             li {
                 border: @navGra40 1px solid;
-                padding: .5rem 1rem;
+                padding: 0.5rem 1rem;
             }
         }
 
         input[type='search'] {
             box-sizing: border-box;
         }
-
-    }
-    .sok-knapp {
-        display: inline-block;
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 9rem;
     }
 }
