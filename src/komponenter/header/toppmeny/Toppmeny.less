@@ -1,28 +1,24 @@
 @import '~nav-frontend-core/less/_variabler';
 @import '../../../styling-variabler.less';
 
-.toppmeny {
-    display: flex;
-    // flex-direction: column;
+.hodefot .siteheader .toppmeny {
+    display: block;
     width: 100%;
-    justify-content: center;
-    align-items: center;
     background-color: rgba(242, 242, 242, 1);
-    height: 200px;
+    height: 150px;
 
     .toppmeny__topp-liste-rad {
-        min-width: 100%;
+        width: 10.25rem;
         white-space: nowrap;
         overflow-x: auto;
         overflow-y: hidden;
+        margin: 0 auto;
 
         .toppmeny__list-element {
             float: left;
-            // width: 100%;
 
             .toppmeny__lenke {
                 display: inline-block;
-                text-align: center;
                 padding: 0.75rem 1rem 0 1rem;
                 text-decoration: none;
                 color: black;
@@ -32,8 +28,8 @@
                     border: @navDypBla 3px solid;
                 }
 
-                .toppmeny__inner {
-                    padding-bottom: 0.7rem;
+                .toppmeny__lenke-inner {
+                    padding-bottom: 0.6rem;
 
                     &:hover {
                         border-bottom: @navDypBla 2px solid;
@@ -52,52 +48,11 @@
 }
 
 @media (min-width: @desktopLimitWidth) {
-    .toppmeny {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        background-color: rgba(242, 242, 242, 1);
+    .hodefot .siteheader .toppmeny {
         height: 44px;
 
         .toppmeny__topp-liste-rad {
-            min-width: 325px;
-            white-space: nowrap;
-            overflow-x: auto;
-            overflow-y: hidden;
-
-            .toppmeny__list-element {
-                float: left;
-
-                .toppmeny__lenke {
-                    display: inline-block;
-                    text-align: center;
-                    padding: 0.75rem 1rem 0 1rem;
-                    text-decoration: none;
-                    color: black;
-
-                    &:focus,
-                    &:active {
-                        border: @navDypBla 3px solid;
-                    }
-
-                    .toppmeny__inner {
-                        padding-bottom: 0.7rem;
-
-                        &:hover {
-                            border-bottom: @navDypBla 2px solid;
-                        }
-
-                        &--active {
-                            border-bottom: @navDypBla 2px solid;
-                            &:hover {
-                                border-bottom: @navDypBla 3px solid;
-                            }
-                        }
-                    }
-                }
-            }
+            width: 26rem;
         }
     }
 }

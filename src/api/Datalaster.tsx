@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Spinner from 'nav-frontend-spinner';
+// import Spinner from 'nav-frontend-spinner';
 import { Status, DataElement, DatalasterProps } from './api';
 
 const harStatus = (dataElement: DataElement, status: Status): boolean => {
@@ -30,7 +30,7 @@ const Datalaster = ({
         );
         return children;
     }
-    return <Spinner type="S" />;
+    return null;
 };
 
 export default Datalaster;

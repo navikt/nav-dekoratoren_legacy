@@ -16,8 +16,8 @@ import {
     MenyPunkter,
 } from '../../../../reducer/menu-duck';
 import HamburgerIkon from '../../../ikoner/meny/HamburgerIkon';
-import DropdownHoyreSeksjon from './DropdownHoyreSeksjon';
-import DropdownVenstreSeksjon from './DropdownVenstreSeksjon';
+import DropdownHoyreSeksjon from './Dropdown-hoyre-seksjon';
+import DropdownVenstreSeksjon from './Dropdown-venstre-seksjon';
 import './Meny-toggle-knapp.less';
 
 interface OwnProps {
@@ -90,7 +90,6 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                             <DropdownVenstreSeksjon
                                 classname={this.props.classname}
                                 menyLenker={setDropdownMenuView(meny.data)}
-                                status={meny.status}
                                 tabindex={this.state.clicked}
                             />
                             {toppmenyvalg === MenuValue.PRIVATPERSON ? (
