@@ -91,12 +91,6 @@ const DropdownHoyreSeksjon = (props: Props) => {
     return <div />;
 };
 
-/*
-                    <li className={cls.element('minside-list-item')}>
-                        <Element>{minsideMenyView.displayName}</Element>
-                    </li>
- */
-
 const listItem = (name: string, cls: any, href: string, tabindex: boolean) => {
     switch (name) {
         case 'å min side finner du:':
