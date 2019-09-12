@@ -34,7 +34,10 @@ const Hovedmeny = ({ language }: Props) => {
                     language === Language.ENGELSK ? (
                         <MenyToggleKnapp classname="hovedmeny" />
                     ) : (
-                        <div className="samisk-tekst-alternativ">
+                        <div
+                            className="menybutton-alternativ-samisk"
+                            tabIndex={0}
+                        >
                             <Undertittel>
                                 <Tekst id="samisk" />
                             </Undertittel>
