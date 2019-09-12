@@ -1,10 +1,11 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import throttle from 'lodash.throttle';
 import Downshift from 'downshift';
 import Knapp from 'nav-frontend-knapper';
 import { Input } from 'nav-frontend-skjema';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import { API } from '../../../../api/api';
+import { Language } from '../../../../reducer/language-duck';
 import {
     SokeresultatData,
     InputState,
@@ -12,11 +13,18 @@ import {
     visAlleTreff,
 } from './sok-utils';
 import './Sok.less';
+import Tekst, { utledTekst } from '../../../../tekster/finn-tekst';
+import { AppState } from '../../../../reducer/reducer';
+import { connect } from 'react-redux';
 
-class Sok extends React.Component<{}, InputState> {
+interface StateProps {
+    language: Language;
+}
+
+class Sok extends React.Component<StateProps, InputState> {
     handleChangeThrottled: ReturnType<typeof throttle>;
 
-    constructor(props: {}) {
+    constructor(props: StateProps) {
         super(props);
         this.state = {
             inputString: '',
@@ -62,6 +70,7 @@ class Sok extends React.Component<{}, InputState> {
 
     render() {
         const { inputString, items } = this.state;
+        const { language } = this.props;
         const URL = `${'https://www-x1.nav.no/sok'}?ord=${inputString}`;
         const lenkeAlleTreff = visAlleTreff(inputString);
 
@@ -95,9 +104,18 @@ class Sok extends React.Component<{}, InputState> {
                                 <Input
                                     {...getInputProps()}
                                     className="sok-input"
-                                    placeholder="Hva leter du etter?"
-                                    label="Søk"
-                                    aria-label="Søk"
+                                    placeholder={utledTekst(
+                                        'sok-input-placeholder',
+                                        language
+                                    )}
+                                    label={utledTekst(
+                                        'sok-input-label',
+                                        language
+                                    )}
+                                    aria-label={utledTekst(
+                                        'sok-input-label',
+                                        language
+                                    )}
                                 />
 
                                 <ul
@@ -151,7 +169,7 @@ class Sok extends React.Component<{}, InputState> {
 
                             <div className="sok-knapp btn">
                                 <Knapp type="standard" htmlType="submit">
-                                    SØK
+                                    <Tekst id="sok-knapp" />
                                 </Knapp>
                             </div>
                         </div>
@@ -162,4 +180,8 @@ class Sok extends React.Component<{}, InputState> {
     }
 }
 
-export default Sok;
+const mapStateToProps = (state: AppState): StateProps => ({
+    language: state.language.language,
+});
+
+export default connect(mapStateToProps)(Sok);

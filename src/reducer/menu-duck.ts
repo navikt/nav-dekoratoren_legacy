@@ -14,19 +14,35 @@ export interface MenyPunkter extends DataElement {
 }
 
 export interface Data {
-    children: {}[];
     displayName: string;
-    hasChildren: boolean;
     path: string;
     id?: string;
+    hasChildren: boolean;
+    children: MenyData[];
 }
 
-export const DataInitState = {
-    children: [{}],
+export interface MenyData {
+    displayName: string;
+    path: string;
+    id?: string;
+    hasChildren: boolean;
+    children: {}[];
+}
+
+export const DataInitState: Data = {
     displayName: '',
-    hasChildren: false,
     path: '',
     id: '',
+    hasChildren: false,
+    children: [
+        {
+            children: [{}],
+            displayName: '',
+            hasChildren: false,
+            path: '',
+            id: '',
+        },
+    ],
 };
 
 const initalState: MenyPunkter = {

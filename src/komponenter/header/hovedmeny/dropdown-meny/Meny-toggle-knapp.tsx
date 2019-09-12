@@ -15,6 +15,8 @@ import {
     DataInitState,
     MenyPunkter,
 } from '../../../../reducer/menu-duck';
+import Tekst from '../../../../tekster/finn-tekst';
+import { Language } from '../../../../reducer/language-duck';
 import HamburgerIkon from '../../../ikoner/meny/HamburgerIkon';
 import DropdownHoyreSeksjon from './DropdownHoyreSeksjon';
 import DropdownVenstreSeksjon from './DropdownVenstreSeksjon';
@@ -26,6 +28,7 @@ interface OwnProps {
 
 interface StateProps {
     meny: MenyPunkter;
+    language: Language;
 }
 
 interface State {
@@ -56,7 +59,7 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
     };
 
     render() {
-        const { meny, classname } = this.props;
+        const { meny, classname, language } = this.props;
         const cls = BEMHelper(classname);
         const toppmenyvalg = getSessionStorage(NAVHEADER);
 
@@ -72,7 +75,9 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                 >
                     <div className="button-content">
                         <HamburgerIkon ikonClass="hamburger-ikon" />
-                        <Undertittel>Meny</Undertittel>
+                        <Undertittel>
+                            <Tekst id="meny-knapp" />
+                        </Undertittel>
                     </div>
                 </button>
 
@@ -89,7 +94,10 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                         >
                             <DropdownVenstreSeksjon
                                 classname={this.props.classname}
-                                menyLenker={setDropdownMenuView(meny.data)}
+                                menyLenker={setDropdownMenuView(
+                                    meny.data,
+                                    language
+                                )}
                                 status={meny.status}
                                 tabindex={this.state.clicked}
                             />
@@ -113,6 +121,7 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     meny: state.menypunkt,
+    language: state.language.language,
 });
 
 export default connect(mapStateToProps)(MenyToggleKnapp);

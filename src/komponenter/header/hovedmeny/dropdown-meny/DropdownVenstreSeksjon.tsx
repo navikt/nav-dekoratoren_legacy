@@ -1,12 +1,12 @@
 import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from '../../../../utils/bem';
-import { Data } from '../../../../reducer/menu-duck';
+import { MenyData } from '../../../../reducer/menu-duck';
 import { Status } from '../../../../api/api';
 
 interface Props {
     classname: string;
-    menyLenker: Data;
+    menyLenker: MenyData;
     status: Status;
     tabindex: boolean;
 }
@@ -20,7 +20,7 @@ const DropdownVenstreSeksjon = (props: Props) => {
         window.location.href = url;
     };
 
-    const presentOptions = (meny: Data, currentStatus: Status) => {
+    const presentOptions = (meny: MenyData, currentStatus: Status) => {
         if (currentStatus === Status.OK) {
             return meny.children.map((meny: any) => {
                 return (
