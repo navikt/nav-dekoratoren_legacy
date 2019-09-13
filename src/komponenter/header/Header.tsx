@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dispatch } from '../../redux/dispatch-type';
-import { connect, MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
 import Toppmeny from './toppmeny/Toppmeny';
