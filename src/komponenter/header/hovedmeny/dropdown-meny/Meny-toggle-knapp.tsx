@@ -40,7 +40,7 @@ type MenyToggleKnappProps = OwnProps & StateProps;
 
 class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
     static minside<T, K extends keyof T>(meny: T, key: K): T[K] {
-        return meny[key];
+        return meny[0].children[key];
     }
 
     constructor(props: MenyToggleKnappProps) {
@@ -101,7 +101,8 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                                 status={meny.status}
                                 tabindex={this.state.clicked}
                             />
-                            {toppmenyvalg === MenuValue.PRIVATPERSON ? (
+                            {toppmenyvalg === MenuValue.PRIVATPERSON &&
+                            language === Language.NORSK ? (
                                 <DropdownHoyreSeksjon
                                     minsideMenyView={MenyToggleKnapp.minside(
                                         meny.data,
