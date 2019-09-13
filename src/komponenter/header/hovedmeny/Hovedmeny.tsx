@@ -39,7 +39,7 @@ const Hovedmeny = ({ language }: Props) => {
                             tabIndex={0}
                         >
                             <Undertittel>
-                                <Tekst id="samisk" />
+                                <Tekst id="samisk-samegiella" />
                             </Undertittel>
                         </div>
                     )}

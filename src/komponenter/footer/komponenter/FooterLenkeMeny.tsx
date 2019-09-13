@@ -18,7 +18,7 @@ const FooterLenkeMeny = ({ className, language }: Props) => {
                     <ul>
                         {!(language === Language.NORSK) && (
                             <li>
-                                <Lenke href="/person/nav-dekoratoren/no">
+                                <Lenke href="/person/nav-dekoratoren/no/">
                                     <Normaltekst>Norske sider</Normaltekst>
                                 </Lenke>
                             </li>
