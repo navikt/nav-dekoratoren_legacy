@@ -1,5 +1,4 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
 import BEMHelper from '../../../utils/bem';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
@@ -26,9 +25,7 @@ const Hovedmeny = () => {
 
                     <MenyToggleKnapp classname="hovedmeny" />
 
-                    <MediaQuery minWidth={768}>
-                        <Sok />
-                    </MediaQuery>
+                    <Sok />
 
                     <InnloggingsstatusProvider>
                         <>

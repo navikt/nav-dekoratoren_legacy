@@ -1,4 +1,5 @@
 @import '~nav-frontend-core/less/_variabler';
+@import '../../../styling-variabler.less';
 
 .hovedmeny .navbar-brand {
     padding-right: 0.25rem;
@@ -9,5 +10,19 @@
         border: @navDypBla 3px solid;
     }
     .hovedmeny__logo {
+    }
+
+    svg {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (min-width: @desktopLimitWidth) {
+    .hovedmeny .navbar-brand {
+        svg {
+            width: 88px;
+            height: 88px;
+        }
     }
 }

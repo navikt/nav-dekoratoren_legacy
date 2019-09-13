@@ -59,7 +59,7 @@ class Toppmeny extends React.Component<{}, State> {
                                     >
                                         <div
                                             className={cls.element(
-                                                'inner',
+                                                'lenke-inner',
                                                 this.state.toppmeny ===
                                                     lenke.tittel
                                                     ? 'active'

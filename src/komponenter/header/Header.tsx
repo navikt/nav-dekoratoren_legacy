@@ -21,7 +21,7 @@ const Header = ({ hentMenypunkter }: DispatchProps) => {
             <Skiplinks />
             <div id="header-withmenu">
                 <div className="hodefot">
-                    <header className="siteheader blokk-m">
+                    <header className="siteheader">
                         <div className="innhold-container">
                             <Toppmeny />
                             <Hovedmeny />

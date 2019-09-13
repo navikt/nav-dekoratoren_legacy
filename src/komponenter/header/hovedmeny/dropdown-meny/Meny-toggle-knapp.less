@@ -38,24 +38,19 @@
 .hovedmeny .hovedmeny__dropdown-menu {
     .hovedmeny__menyvalg {
         display: flex;
+        flex-direction: column;
         overflow: hidden;
-        max-width: @desktopLimitWidth;
+        max-width: 100%;
         margin-bottom: 0;
         max-height: 0;
         transition: all 0.7s ease-in-out;
 
         &--active {
             margin-bottom: 2rem;
-            max-height: 40rem;
+            max-height: 70rem;
         }
 
         .hovedmeny__hovedSeksjon {
-            flex-grow: 6;
-            justify-content: center;
-            display: -ms-grid;
-            display: grid;
-            -ms-grid-columns: auto auto auto;
-            grid-template-columns: auto auto auto;
             margin-bottom: 0.2rem;
 
             a {
@@ -73,25 +68,11 @@
             }
 
             .hovedmeny__seksjon {
-                padding-left: 2rem;
-                padding-top: 0.75rem;
                 padding-bottom: 0.5rem;
             }
         }
 
         .hovedmeny__minSideSeksjon {
-            flex-grow: 1;
-            display: -ms-grid;
-            display: grid;
-            -ms-grid-columns: auto;
-            grid-template-columns: auto;
-            margin-left: 0.5rem;
-            margin-bottom: 0.2rem;
-            padding-top: 0.75rem;
-            padding-bottom: 0.5rem;
-            min-width: 8rem;
-            padding-left: 1.5rem;
-
             a {
                 color: black;
 
@@ -121,6 +102,49 @@
                 .hovedmeny__minside-lenke {
                     text-decoration: none;
                 }
+            }
+        }
+    }
+}
+
+@media (min-width: @desktopLimitWidth) {
+    .hovedmeny .hovedmeny__dropdown-menu {
+        .hovedmeny__menyvalg {
+            flex-direction: row;
+            max-width: @desktopLimitWidth;
+
+            &--active {
+                max-height: 40rem;
+            }
+
+            .hovedmeny__hovedSeksjon {
+                flex-grow: 6;
+                justify-content: center;
+                display: -ms-grid;
+                display: grid;
+                -ms-grid-columns: auto auto auto;
+                grid-template-columns: auto auto auto;
+                margin-bottom: 0.2rem;
+
+                .hovedmeny__seksjon {
+                    padding-left: 2rem;
+                    padding-top: 0.75rem;
+                    padding-bottom: 0.5rem;
+                }
+            }
+
+            .hovedmeny__minSideSeksjon {
+                flex-grow: 1;
+                display: -ms-grid;
+                display: grid;
+                -ms-grid-columns: auto;
+                grid-template-columns: auto;
+                margin-left: 0.5rem;
+                margin-bottom: 0.2rem;
+                padding-top: 0.75rem;
+                padding-bottom: 0.5rem;
+                min-width: 8rem;
+                padding-left: 1.5rem;
             }
         }
     }
