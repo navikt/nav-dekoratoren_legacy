@@ -2,11 +2,11 @@ import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../../../utils/bem';
-import { Data } from '../../../../reducer/menu-duck';
+import { MenyLevel1 } from '../../../../reducer/menu-duck';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 
 interface Props {
-    minsideMenyView: Data;
+    minsideMenyView: MenyLevel1;
     classname: string;
     tabindex: boolean;
 }

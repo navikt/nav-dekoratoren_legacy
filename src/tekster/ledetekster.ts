@@ -1,4 +1,4 @@
-export default {
+export const ledetekster: { [key: string]: string } = {
     'logg-inn-knapp': 'Logg inn',
     'logg-inn-knapp-en': 'Log in',
     'logg-inn-knapp-se': 'Logg inn',

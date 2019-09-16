@@ -13,8 +13,7 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "preserve",
-        "forceConsistentCasingInFileNames": false,
-        "suppressImplicitAnyIndexErrors": true
+        "forceConsistentCasingInFileNames": false
     },
     "include": ["src"],
     "exclude": ["src/server"]

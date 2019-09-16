@@ -13,7 +13,7 @@ import {
     visAlleTreff,
 } from './sok-utils';
 import './Sok.less';
-import Tekst, { utledTekst } from '../../../../tekster/finn-tekst';
+import Tekst, { finnTekst } from '../../../../tekster/finn-tekst';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 
@@ -104,15 +104,15 @@ class Sok extends React.Component<StateProps, InputState> {
                                 <Input
                                     {...getInputProps()}
                                     className="sok-input"
-                                    placeholder={utledTekst(
+                                    placeholder={finnTekst(
                                         'sok-input-placeholder',
                                         language
                                     )}
-                                    label={utledTekst(
+                                    label={finnTekst(
                                         'sok-input-label',
                                         language
                                     )}
-                                    aria-label={utledTekst(
+                                    aria-label={finnTekst(
                                         'sok-input-label',
                                         language
                                     )}

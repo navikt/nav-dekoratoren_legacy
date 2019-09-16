@@ -18,10 +18,18 @@ export interface Data {
     path: string;
     id?: string;
     hasChildren: boolean;
-    children: MenyData[];
+    children: MenyLevel1[];
 }
 
-export interface MenyData {
+export interface MenyLevel1 {
+    displayName: string;
+    path: string;
+    id?: string;
+    hasChildren: boolean;
+    children: MenyLevel2[];
+}
+
+export interface MenyLevel2 {
     displayName: string;
     path: string;
     id?: string;
@@ -36,11 +44,19 @@ export const DataInitState: Data = {
     hasChildren: false,
     children: [
         {
-            children: [{}],
             displayName: '',
-            hasChildren: false,
             path: '',
             id: '',
+            hasChildren: false,
+            children: [
+                {
+                    displayName: '',
+                    path: '',
+                    id: '',
+                    hasChildren: false,
+                    children: [{}],
+                },
+            ],
         },
     ],
 };

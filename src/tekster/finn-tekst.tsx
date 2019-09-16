@@ -1,10 +1,10 @@
 import React from 'react';
-import ledetekster from './ledetekster';
+import { ledetekster } from './ledetekster';
 import { AppState } from '../reducer/reducer';
 import { connect } from 'react-redux';
 import { Language } from '../reducer/language-duck';
 
-export function utledTekst(id: string, language: Language): string {
+export function finnTekst(id: string, language: Language): string {
     let ledetekst: string = ledetekster[id];
 
     if (!ledetekst) {
@@ -34,7 +34,7 @@ interface StateProps {
 type TekstProps = OwnProps & StateProps;
 
 const Tekst = ({ id, language }: TekstProps) => {
-    return <>{utledTekst(id, language)}</>;
+    return <>{finnTekst(id, language)}</>;
 };
 
 const mapStateToProps = (state: AppState): StateProps => ({

@@ -40,7 +40,7 @@ type MenyToggleKnappProps = OwnProps & StateProps;
 
 class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
     static minside<T, K extends keyof T>(meny: T, key: K): T[K] {
-        return meny[0].children[key];
+        return meny[key];
     }
 
     constructor(props: MenyToggleKnappProps) {
@@ -105,7 +105,7 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                             language === Language.NORSK ? (
                                 <DropdownHoyreSeksjon
                                     minsideMenyView={MenyToggleKnapp.minside(
-                                        meny.data,
+                                        meny.data[0].children,
                                         3
                                     )}
                                     classname={classname}
