@@ -1,3 +1,17 @@
+@import '../../../../styling-variabler.less';
+
 .login-container {
     padding-top: 2px;
+
+    .knapp {
+        padding: calc(0.475rem - 1px) 1.2rem calc(0.525rem - 1px) 1.2rem;
+    }
+}
+
+@media (min-width: @desktopLimitWidth) {
+    .login-container {
+        .knapp {
+            padding: calc(0.475rem - 1px) 2.5rem calc(0.525rem - 1px) 2.5rem;
+        }
+    }
 }

@@ -8,38 +8,90 @@
     min-height: 6.5rem;
 
     .hovedmeny__content {
-        width: @desktopLimitWidth;
+        width: 100%;
         margin: 0 auto;
+        padding: 0 1rem;
 
         .hovedmeny__meny-elementer {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             flex-wrap: wrap;
 
-            .navbar-brand {
+            .minside-lenke {
                 order: 1;
+                width: 50%;
             }
-
+            .varselbjelle {
+                order: 2;
+                width: 50%;
+            }
+            .navbar-brand {
+                order: 3;
+                width: 30%;
+            }
+            .login-container {
+                order: 4;
+                width: 40%;
+            }
             .meny-button,
             .menybutton-alternativ-samisk {
-                order: 2;
+                order: 5;
+                width: 30%;
             }
-
-            .menybutton-alternativ-samisk {
-                color: @navBla;
-            }
-
-            .sok,
-            .varselbjelle,
-            .minside-lenke,
-            .login-container {
-                order: 3;
-            }
-
-            .hovedmeny__dropdown-menu {
-                order: 4;
+            .sok {
+                order: 6;
                 width: 100%;
+            }
+            .hovedmeny__dropdown-menu {
+                order: 7;
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media (min-width: @desktopLimitWidth) {
+    .hovedmeny {
+        .hovedmeny__content {
+            width: @desktopLimitWidth;
+            padding: 0;
+
+            .hovedmeny__meny-elementer {
+                justify-content: space-between;
+
+                .navbar-brand {
+                    order: 1;
+                    width: auto;
+                }
+
+                .meny-button,
+                .menybutton-alternativ-samisk {
+                    order: 2;
+                }
+
+                .menybutton-alternativ-samisk {
+                    color: @navBla;
+                }
+
+                .sok,
+                .login-container {
+                    order: 3;
+                    width: auto;
+                }
+                .varselbjelle {
+                    order: 3;
+                    width: 31px;
+                }
+                .minside-lenke {
+                    order: 3;
+                    width: 102px;
+                }
+
+                .hovedmeny__dropdown-menu {
+                    order: 4;
+                    width: 100%;
+                }
             }
         }
     }

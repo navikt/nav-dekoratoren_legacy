@@ -1,5 +1,4 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
 import BEMHelper from '../../../utils/bem';
 import { Undertittel } from 'nav-frontend-typografi';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
@@ -44,9 +43,7 @@ const Hovedmeny = ({ language }: Props) => {
                         </div>
                     )}
 
-                    <MediaQuery minWidth={768}>
-                        <Sok />
-                    </MediaQuery>
+                    <Sok />
 
                     <InnloggingsstatusProvider>
                         <>

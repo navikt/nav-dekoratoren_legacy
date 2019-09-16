@@ -18,8 +18,8 @@ import {
 import Tekst from '../../../../tekster/finn-tekst';
 import { Language } from '../../../../reducer/language-duck';
 import HamburgerIkon from '../../../ikoner/meny/HamburgerIkon';
-import DropdownHoyreSeksjon from './DropdownHoyreSeksjon';
-import DropdownVenstreSeksjon from './DropdownVenstreSeksjon';
+import DropdownHoyreSeksjon from './Dropdown-hoyre-seksjon';
+import DropdownVenstreSeksjon from './Dropdown-venstre-seksjon';
 import './Meny-toggle-knapp.less';
 
 interface OwnProps {
@@ -98,7 +98,6 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                                     meny.data,
                                     language
                                 )}
-                                status={meny.status}
                                 tabindex={this.state.clicked}
                             />
                             {toppmenyvalg === MenuValue.PRIVATPERSON &&

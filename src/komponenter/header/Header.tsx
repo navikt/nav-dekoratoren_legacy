@@ -29,7 +29,7 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
             <Skiplinks />
             <div id="header-withmenu">
                 <div className="hodefot">
-                    <header className="siteheader blokk-m">
+                    <header className="siteheader">
                         <div className="innhold-container">
                             {language === Language.NORSK && <Toppmeny />}
                             <Hovedmeny language={language} />
