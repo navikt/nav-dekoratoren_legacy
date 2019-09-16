@@ -1,4 +1,4 @@
-import { Data, MenyLevel2 } from '../reducer/menu-duck';
+import { Data, MenyLevel1, MenyLevel2 } from '../reducer/menu-duck';
 import { Language } from '../reducer/language-duck';
 
 export const NAVHEADER = 'NAVHEADER';
@@ -38,7 +38,7 @@ export const checkUriPath = (): MenuValue => {
 export function setDropdownMenuView(
     menypunkter: Data[],
     language: Language
-): MenyLevel2 {
+): MenyLevel1 {
     if (language === Language.ENGELSK) {
         return menypunkter[1];
     }
@@ -48,7 +48,7 @@ export function setDropdownMenuView(
         : menypunkter[0].children[0];
 }
 
-function getDropdownMenuContent(storage: string, content: Data[]): MenyLevel2 {
+function getDropdownMenuContent(storage: string, content: Data[]): MenyLevel1 {
     switch (storage) {
         case MenuValue.PRIVATPERSON:
             return content[0].children[0];

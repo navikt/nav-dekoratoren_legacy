@@ -1,21 +1,22 @@
 import React from 'react';
+import { AppState } from '../../../../reducer/reducer';
+import { connect } from 'react-redux';
+import { Input } from 'nav-frontend-skjema';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import Knapp from 'nav-frontend-knapper';
 import throttle from 'lodash.throttle';
 import Downshift from 'downshift';
-import Knapp from 'nav-frontend-knapper';
-import { Input } from 'nav-frontend-skjema';
-import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import cls from 'classnames';
 import { API } from '../../../../api/api';
 import { Language } from '../../../../reducer/language-duck';
+import Tekst, { finnTekst } from '../../../../tekster/finn-tekst';
 import {
-    SokeresultatData,
-    InputState,
     defaultData,
+    InputState,
+    SokeresultatData,
     visAlleTreff,
 } from './sok-utils';
 import './Sok.less';
-import Tekst, { finnTekst } from '../../../../tekster/finn-tekst';
-import { AppState } from '../../../../reducer/reducer';
-import { connect } from 'react-redux';
 
 interface StateProps {
     language: Language;
@@ -73,6 +74,9 @@ class Sok extends React.Component<StateProps, InputState> {
         const { language } = this.props;
         const URL = `${'https://www-x1.nav.no/sok'}?ord=${inputString}`;
         const lenkeAlleTreff = visAlleTreff(inputString);
+        const klassenavn = cls('sok-input', {
+            engelsk: language === Language.ENGELSK,
+        });
 
         return (
             <Downshift
@@ -103,7 +107,7 @@ class Sok extends React.Component<StateProps, InputState> {
                             <div className="sok-input-resultat">
                                 <Input
                                     {...getInputProps()}
-                                    className="sok-input"
+                                    className={klassenavn}
                                     placeholder={finnTekst(
                                         'sok-input-placeholder',
                                         language
