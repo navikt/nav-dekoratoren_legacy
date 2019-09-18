@@ -1,6 +1,6 @@
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
-import { Data as menypunkterData } from '../reducer/menu-duck';
+import { MenySpraakSeksjon as menypunkterData } from '../reducer/menu-duck';
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',

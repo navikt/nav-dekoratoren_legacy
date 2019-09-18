@@ -10,26 +10,10 @@ import { fetchThenDispatch } from '../api/api-utils';
 import { hentMenyPunkter, DataElement, Status } from '../api/api';
 
 export interface MenyPunkter extends DataElement {
-    data: Data[];
+    data: MenySpraakSeksjon[];
 }
 
-export interface Data {
-    displayName: string;
-    path: string;
-    id?: string;
-    hasChildren: boolean;
-    children: MenyLevel1[];
-}
-
-export interface MenyLevel1 {
-    displayName: string;
-    path: string;
-    id?: string;
-    hasChildren: boolean;
-    children: MenyLevel2[];
-}
-
-export interface MenyLevel2 {
+export interface Meny {
     displayName: string;
     path: string;
     id?: string;
@@ -37,7 +21,15 @@ export interface MenyLevel2 {
     children: {}[];
 }
 
-export const DataInitState: Data = {
+export interface MenySpraakSeksjon {
+    displayName: string;
+    path: string;
+    id?: string;
+    hasChildren: boolean;
+    children: Meny[];
+}
+
+export const DataInitState = {
     displayName: '',
     path: '',
     id: '',
@@ -48,15 +40,7 @@ export const DataInitState: Data = {
             path: '',
             id: '',
             hasChildren: false,
-            children: [
-                {
-                    displayName: '',
-                    path: '',
-                    id: '',
-                    hasChildren: false,
-                    children: [{}],
-                },
-            ],
+            children: [{}],
         },
     ],
 };
@@ -88,14 +72,14 @@ export default function reducer(
 }
 
 export function fetchMenypunkter(): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Data[]>(() => hentMenyPunkter(), {
+    return fetchThenDispatch<MenySpraakSeksjon[]>(() => hentMenyPunkter(), {
         ok: menypunkterSuksess,
         feilet: menypunkterFeilet,
         pending: menypunkterPending,
     });
 }
 
-function menypunkterSuksess(data: Data[]): HentMenyLenkerSUCCESS {
+function menypunkterSuksess(data: MenySpraakSeksjon[]): HentMenyLenkerSUCCESS {
     return {
         type: ActionType.HENT_MENY_OK,
         data: data,

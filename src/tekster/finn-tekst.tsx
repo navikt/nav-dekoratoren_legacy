@@ -2,7 +2,12 @@ import React from 'react';
 import { ledetekster } from './ledetekster';
 import { AppState } from '../reducer/reducer';
 import { connect } from 'react-redux';
-import { Language } from '../reducer/language-duck';
+import {
+    Language,
+    spraakValgEngelsk,
+    spraakValgNorsk,
+    spraakValgSamisk,
+} from '../reducer/language-duck';
 
 export function finnTekst(id: string, language: Language): string {
     let ledetekst: string = ledetekster[id];
@@ -11,12 +16,12 @@ export function finnTekst(id: string, language: Language): string {
         console.error(`Kunne ikke finne teksten ${id}! Returnerer oppgitt id.`); // tslint:disable-line:no-console
         return id;
     }
-    if (language === Language.NORSK) {
+    if (spraakValgNorsk(language)) {
         return ledetekst;
-    } else if (language === Language.ENGELSK) {
+    } else if (spraakValgEngelsk(language)) {
         id += '-en';
         ledetekst = ledetekster[id];
-    } else if (language === Language.SAMISK) {
+    } else if (spraakValgSamisk(language)) {
         id += '-se';
         ledetekst = ledetekster[id];
     }

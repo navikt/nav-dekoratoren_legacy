@@ -3,7 +3,7 @@ import Environments from '../utils/environments';
 import { fetchToJson } from './api-utils';
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
-import { Data as menypunkterData } from '../reducer/menu-duck';
+import { MenySpraakSeksjon as menypunkterData } from '../reducer/menu-duck';
 
 const { baseUrl, menypunkter, sokeresultat } = Environments();
 

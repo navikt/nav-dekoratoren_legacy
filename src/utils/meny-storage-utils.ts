@@ -1,4 +1,4 @@
-import { Data, MenyLevel1, MenyLevel2 } from '../reducer/menu-duck';
+import { MenySpraakSeksjon, Meny } from '../reducer/menu-duck';
 import { Language } from '../reducer/language-duck';
 
 export const NAVHEADER = 'NAVHEADER';
@@ -36,27 +36,39 @@ export const checkUriPath = (): MenuValue => {
 };
 
 export function setDropdownMenuView(
-    menypunkter: Data[],
+    menypunkter: MenySpraakSeksjon[],
     language: Language
-): MenyLevel1 {
-    if (language === Language.ENGELSK) {
-        return menypunkter[1];
-    }
+): Meny {
+    const languageSection = setLanguage(language, menypunkter);
     const storage = getSessionStorage(NAVHEADER);
-    return storage
-        ? getDropdownMenuContent(storage, menypunkter)
-        : menypunkter[0].children[0];
+    return getDropdownMenuContent(storage, languageSection);
 }
 
-function getDropdownMenuContent(storage: string, content: Data[]): MenyLevel1 {
+export const setLanguage = (
+    lang: Language,
+    menu: MenySpraakSeksjon[]
+): Meny[] => {
+    switch (lang) {
+        case Language.NORSK:
+            return menu[0].children;
+        case Language.ENGELSK:
+            return menu[1].children;
+        case Language.SAMISK:
+            return menu[2].children; //bytt til '2' når samisk er lagt til i meny
+        default:
+            return menu[0].children;
+    }
+};
+
+function getDropdownMenuContent(storage: string | null, content: Meny[]): Meny {
     switch (storage) {
         case MenuValue.PRIVATPERSON:
-            return content[0].children[0];
+            return content[0];
         case MenuValue.ARBEIDSGIVER:
-            return content[0].children[1];
+            return content[1];
         case MenuValue.SAMARBEIDSPARTNER:
-            return content[0].children[2];
+            return content[2];
         default:
-            return content[0].children[0];
+            return content[0];
     }
 }

@@ -1,3 +1,4 @@
+// tslint:disable-line:no-any
 import { Action, Reducer } from 'redux';
 import { ActionType } from '../redux/actions';
 
@@ -21,12 +22,24 @@ export const languageDuck = genericDuck<
 >(initialLanguageState, ActionType.SETT_LANGUAGE);
 
 export interface Data {
-    [key: string]: any; // tslint:disable-line:no-any
+    [key: string]: any;
 }
 
 interface ActionCreator<A> extends Data {
     type: A;
 }
+
+export const spraakValgNorsk = (lang: Language): boolean => {
+    return lang === Language.NORSK;
+};
+
+export const spraakValgEngelsk = (lang: Language): boolean => {
+    return lang === Language.ENGELSK;
+};
+
+export const spraakValgSamisk = (lang: Language): boolean => {
+    return lang === Language.SAMISK;
+};
 
 interface GenericDuck<I, T> {
     reducer: Reducer<I, Action<T>>;

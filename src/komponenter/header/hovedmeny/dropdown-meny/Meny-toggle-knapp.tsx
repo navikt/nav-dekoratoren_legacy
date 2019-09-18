@@ -11,7 +11,7 @@ import {
     setDropdownMenuView,
 } from '../../../../utils/meny-storage-utils';
 import {
-    Data,
+    MenySpraakSeksjon,
     DataInitState,
     MenyPunkter,
 } from '../../../../reducer/menu-duck';
@@ -33,7 +33,7 @@ interface StateProps {
 
 interface State {
     clicked: boolean;
-    minside: Data;
+    minside: MenySpraakSeksjon;
 }
 
 type MenyToggleKnappProps = OwnProps & StateProps;
