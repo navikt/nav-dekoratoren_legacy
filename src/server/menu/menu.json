@@ -627,266 +627,818 @@
         "hasChildren": true,
         "children": [
             {
-                "displayName": "About NAV",
-                "path": "/en/home/about-nav",
-                "id": "9a0d2a8d-2465-4305-81fb-79328a597c49",
+                "displayName": "Person",
+                "path": "/",
+                "id": "6552f1e8-b2b8-4d5a-b6f9-80539197ccdf",
                 "hasChildren": true,
                 "children": [
                     {
-                        "displayName": "NAV telephone helplines",
-                        "path": "/en/home/about-nav/contact-us",
-                        "id": "df04bfdb-9b16-45a6-bf91-bdf947fd2a91",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "About NAV",
+                        "path": "/en/home/about-nav",
+                        "id": "9a0d2a8d-2465-4305-81fb-79328a597c49",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "NAV telephone helplines",
+                                "path": "/en/home/about-nav/contact-us",
+                                "id": "df04bfdb-9b16-45a6-bf91-bdf947fd2a91",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Search tips",
+                                "path": "/en/home/about-nav/search-tips",
+                                "id": "d5219da1-f986-4710-9dfd-7ae055c2a92b",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "You are required to provide correct information to NAV",
+                                "path": "/en/home/about-nav/you-are-required-to-provide-correct-information-to-nav",
+                                "id": "f67cea8f-79d3-4d71-a11d-b42d282e5535",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "What is NAV?",
+                                "path": "/en/home/about-nav/what-is-nav",
+                                "id": "02a6663b-c7ba-4d82-8826-e43e5e52d761",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Publications",
+                                "path": "/en/home/about-nav/publications",
+                                "id": "932543ff-5104-41d4-a2e2-b1ffb89734c5",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "NAV EURES Services",
+                                "path": "/en/home/about-nav/nav-eures-services",
+                                "id": "c77c6872-9e0c-4d95-8444-ddfe43cd175d",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Forms and applications",
+                                "path": "/en/home/about-nav/forms-and-applications",
+                                "id": "f054ddef-61ab-42be-b87f-c2e548b2c56f",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Payment dates",
+                                "path": "/en/home/about-nav/payment-dates",
+                                "id": "7b93fe62-98e2-4b34-8dac-18341462cc9a",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     },
                     {
-                        "displayName": "Search tips",
-                        "path": "/en/home/about-nav/search-tips",
-                        "id": "d5219da1-f986-4710-9dfd-7ae055c2a92b",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "Employers",
+                        "path": "/en/home/employers",
+                        "id": "24666521-2456-41a8-b278-6db25759dbac",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "The wage guarantee scheme",
+                                "path": "/en/home/employers/the-wage-guarantee-scheme",
+                                "id": "1bebee4c-71dd-4b47-b29b-ee1f344553b5",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Recruit in Norway?",
+                                "path": "/en/home/employers/recruit-in-norway",
+                                "id": "1a960ea4-c5ea-4085-bd5f-5cdefc1efbd6",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Recruiting from the EU/EEA",
+                                "path": "/en/home/employers/recruiting-from-the-eu-and-eea",
+                                "id": "19c51d83-2b62-4219-9aac-40eca4a212d2",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "What is the NAV State Register of Employers and Employees (Aa-registeret)",
+                                "path": "/en/home/employers/nav-state-register-of-employers-and-employees",
+                                "id": "9e60cd57-2268-4c17-b3f7-9aeb5ea06b68",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     },
                     {
-                        "displayName": "You are required to provide correct information to NAV",
-                        "path": "/en/home/about-nav/you-are-required-to-provide-correct-information-to-nav",
-                        "id": "f67cea8f-79d3-4d71-a11d-b42d282e5535",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "Rules and regulations",
+                        "path": "/en/home/rules-and-regulations",
+                        "id": "eb91661a-e86f-444c-add4-88c0c03fbae4",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "Staying abroad",
+                                "path": "/en/home/rules-and-regulations/staying-abroad",
+                                "id": "289a21b5-44c6-445f-9424-1c82b3d81958",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Working abroad",
+                                "path": "/en/home/rules-and-regulations/working-abroad",
+                                "id": "490045e3-7f01-4d89-82e4-d93823e10b08",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "National insurance coverage",
+                                "path": "/en/home/rules-and-regulations/national-insurance-coverage",
+                                "id": "a5e715a2-9887-4725-8ad4-dceabb85c2ea",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Social security agreements",
+                                "path": "/en/home/rules-and-regulations/social-security-agreements",
+                                "id": "1bda4149-0d14-4134-9e5b-615b0dd99051",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Appeals",
+                                "path": "/en/home/rules-and-regulations/appeals",
+                                "id": "99ca9fe7-6b25-4bb6-b614-e866fd90836c",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Membership of the National Insurance Scheme",
+                                "path": "/en/home/rules-and-regulations/membership-of-the-national-insurance-scheme",
+                                "id": "54e70f21-16d4-4e37-9cc4-a1441fdfc25e",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "National insurance contributions",
+                                "path": "/en/home/rules-and-regulations/national-insurance-contributions",
+                                "id": "e110283c-54d5-4ed5-bf7f-d407ecdf4859",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     },
                     {
-                        "displayName": "What is NAV?",
-                        "path": "/en/home/about-nav/what-is-nav",
-                        "id": "02a6663b-c7ba-4d82-8826-e43e5e52d761",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "Benefits and services",
+                        "path": "/en/home/benefits-and-services",
+                        "id": "90ee8025-6ba7-44ca-9745-8a5fc139f1eb",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "Sickness benefits",
+                                "path": "/en/home/benefits-and-services/sickness-benefits",
+                                "id": "9aa7b3a9-cc1e-4e02-b565-cca66a5e73c6",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Unemployment benefits",
+                                "path": "/en/home/benefits-and-services/unemployment-benefits",
+                                "id": "0189bc32-f46a-4e21-a4c5-dfbbc29d2230",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Employment status form - how do you use it?",
+                                "path": "/en/home/benefits-and-services/employment-status-form-how-do-you-use-it",
+                                "id": "af24f1a1-0b52-42ff-b8bc-1c920c94a9b8",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Family related benefits",
+                                "path": "/en/home/benefits-and-services/family-related-benefits",
+                                "id": "7e21f66b-2491-4ee5-ad74-4205e2ec9d13",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Information about NAV's services and benefits",
+                                "path": "/en/home/benefits-and-services/information-about-nav-s-services-and-benefits",
+                                "id": "e372d497-322f-4e86-902f-7b64258d997d",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Pensions and pension applications from outside Norway",
+                                "path": "/en/home/benefits-and-services/pensions-and-pension-application-from-outside-norway",
+                                "id": "7f6aafeb-cb9e-41b1-b017-5226beb0bbe7",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     },
                     {
-                        "displayName": "Publications",
-                        "path": "/en/home/about-nav/publications",
-                        "id": "932543ff-5104-41d4-a2e2-b1ffb89734c5",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "NAV EURES Services",
-                        "path": "/en/home/about-nav/nav-eures-services",
-                        "id": "c77c6872-9e0c-4d95-8444-ddfe43cd175d",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "Forms and applications",
-                        "path": "/en/home/about-nav/forms-and-applications",
-                        "id": "f054ddef-61ab-42be-b87f-c2e548b2c56f",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "Payment dates",
-                        "path": "/en/home/about-nav/payment-dates",
-                        "id": "7b93fe62-98e2-4b34-8dac-18341462cc9a",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "Work and stay in Norway",
+                        "path": "/en/home/work-and-stay-in-norway",
+                        "id": "ed6fa1e1-3fb3-4f33-97f9-3c370d22c819",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "Tourists in Norway",
+                                "path": "/en/home/work-and-stay-in-norway/tourists-in-norway",
+                                "id": "a03cd31d-c894-4113-a8e6-6b7d3fea9976",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Foreign students in Norway",
+                                "path": "/en/home/work-and-stay-in-norway/foreign-students-in-norway",
+                                "id": "d992b9ad-f430-4abe-98ab-506266abe031",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Where to find job vacancies in Norway?",
+                                "path": "/en/home/work-and-stay-in-norway/where-to-find-job-vacancies-in-norway",
+                                "id": "0a836963-c4c2-4b68-b951-364f5cdb7c27",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "The non-custodial or custodial parent lives abroad",
+                                "path": "/en/home/work-and-stay-in-norway/the-non-custodial-or-custodial-parent-lives-abroad",
+                                "id": "b36a28d5-e27f-46a2-97c0-b2580550a012",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Employee on the Norwegian continental shelf",
+                                "path": "/en/home/work-and-stay-in-norway/employee-on-the-norwegian-continental-shelf",
+                                "id": "c24b164a-5959-47b1-9e87-cdec46b99eac",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Work in Norway",
+                                "path": "/en/home/work-and-stay-in-norway/work-in-norway",
+                                "id": "7792f241-1bdc-42fd-8f66-0a38bc950265",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Tips for job seekers",
+                                "path": "/en/home/work-and-stay-in-norway/tips-for-job-seekers",
+                                "id": "34efb880-ce90-4400-b9d2-b646a111aea6",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     }
                 ]
             },
             {
-                "displayName": "Employers",
-                "path": "/en/home/employers",
-                "id": "24666521-2456-41a8-b278-6db25759dbac",
+                "displayName": "Arbeidsgiver",
+                "path": "/",
+                "id": "6552f1e8-b2b8-4d5a-b6f9-80539197ccdf",
                 "hasChildren": true,
                 "children": [
                     {
-                        "displayName": "The wage guarantee scheme",
-                        "path": "/en/home/employers/the-wage-guarantee-scheme",
-                        "id": "1bebee4c-71dd-4b47-b29b-ee1f344553b5",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "About NAV",
+                        "path": "/en/home/about-nav",
+                        "id": "9a0d2a8d-2465-4305-81fb-79328a597c49",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "NAV telephone helplines",
+                                "path": "/en/home/about-nav/contact-us",
+                                "id": "df04bfdb-9b16-45a6-bf91-bdf947fd2a91",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Search tips",
+                                "path": "/en/home/about-nav/search-tips",
+                                "id": "d5219da1-f986-4710-9dfd-7ae055c2a92b",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "You are required to provide correct information to NAV",
+                                "path": "/en/home/about-nav/you-are-required-to-provide-correct-information-to-nav",
+                                "id": "f67cea8f-79d3-4d71-a11d-b42d282e5535",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "What is NAV?",
+                                "path": "/en/home/about-nav/what-is-nav",
+                                "id": "02a6663b-c7ba-4d82-8826-e43e5e52d761",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Publications",
+                                "path": "/en/home/about-nav/publications",
+                                "id": "932543ff-5104-41d4-a2e2-b1ffb89734c5",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "NAV EURES Services",
+                                "path": "/en/home/about-nav/nav-eures-services",
+                                "id": "c77c6872-9e0c-4d95-8444-ddfe43cd175d",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Forms and applications",
+                                "path": "/en/home/about-nav/forms-and-applications",
+                                "id": "f054ddef-61ab-42be-b87f-c2e548b2c56f",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Payment dates",
+                                "path": "/en/home/about-nav/payment-dates",
+                                "id": "7b93fe62-98e2-4b34-8dac-18341462cc9a",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     },
                     {
-                        "displayName": "Recruit in Norway?",
-                        "path": "/en/home/employers/recruit-in-norway",
-                        "id": "1a960ea4-c5ea-4085-bd5f-5cdefc1efbd6",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "Employers",
+                        "path": "/en/home/employers",
+                        "id": "24666521-2456-41a8-b278-6db25759dbac",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "The wage guarantee scheme",
+                                "path": "/en/home/employers/the-wage-guarantee-scheme",
+                                "id": "1bebee4c-71dd-4b47-b29b-ee1f344553b5",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Recruit in Norway?",
+                                "path": "/en/home/employers/recruit-in-norway",
+                                "id": "1a960ea4-c5ea-4085-bd5f-5cdefc1efbd6",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Recruiting from the EU/EEA",
+                                "path": "/en/home/employers/recruiting-from-the-eu-and-eea",
+                                "id": "19c51d83-2b62-4219-9aac-40eca4a212d2",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "What is the NAV State Register of Employers and Employees (Aa-registeret)",
+                                "path": "/en/home/employers/nav-state-register-of-employers-and-employees",
+                                "id": "9e60cd57-2268-4c17-b3f7-9aeb5ea06b68",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     },
                     {
-                        "displayName": "Recruiting from the EU/EEA",
-                        "path": "/en/home/employers/recruiting-from-the-eu-and-eea",
-                        "id": "19c51d83-2b62-4219-9aac-40eca4a212d2",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "Rules and regulations",
+                        "path": "/en/home/rules-and-regulations",
+                        "id": "eb91661a-e86f-444c-add4-88c0c03fbae4",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "Staying abroad",
+                                "path": "/en/home/rules-and-regulations/staying-abroad",
+                                "id": "289a21b5-44c6-445f-9424-1c82b3d81958",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Working abroad",
+                                "path": "/en/home/rules-and-regulations/working-abroad",
+                                "id": "490045e3-7f01-4d89-82e4-d93823e10b08",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "National insurance coverage",
+                                "path": "/en/home/rules-and-regulations/national-insurance-coverage",
+                                "id": "a5e715a2-9887-4725-8ad4-dceabb85c2ea",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Social security agreements",
+                                "path": "/en/home/rules-and-regulations/social-security-agreements",
+                                "id": "1bda4149-0d14-4134-9e5b-615b0dd99051",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Appeals",
+                                "path": "/en/home/rules-and-regulations/appeals",
+                                "id": "99ca9fe7-6b25-4bb6-b614-e866fd90836c",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Membership of the National Insurance Scheme",
+                                "path": "/en/home/rules-and-regulations/membership-of-the-national-insurance-scheme",
+                                "id": "54e70f21-16d4-4e37-9cc4-a1441fdfc25e",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "National insurance contributions",
+                                "path": "/en/home/rules-and-regulations/national-insurance-contributions",
+                                "id": "e110283c-54d5-4ed5-bf7f-d407ecdf4859",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     },
                     {
-                        "displayName": "What is the NAV State Register of Employers and Employees (Aa-registeret)",
-                        "path": "/en/home/employers/nav-state-register-of-employers-and-employees",
-                        "id": "9e60cd57-2268-4c17-b3f7-9aeb5ea06b68",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "Benefits and services",
+                        "path": "/en/home/benefits-and-services",
+                        "id": "90ee8025-6ba7-44ca-9745-8a5fc139f1eb",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "Sickness benefits",
+                                "path": "/en/home/benefits-and-services/sickness-benefits",
+                                "id": "9aa7b3a9-cc1e-4e02-b565-cca66a5e73c6",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Unemployment benefits",
+                                "path": "/en/home/benefits-and-services/unemployment-benefits",
+                                "id": "0189bc32-f46a-4e21-a4c5-dfbbc29d2230",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Employment status form - how do you use it?",
+                                "path": "/en/home/benefits-and-services/employment-status-form-how-do-you-use-it",
+                                "id": "af24f1a1-0b52-42ff-b8bc-1c920c94a9b8",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Family related benefits",
+                                "path": "/en/home/benefits-and-services/family-related-benefits",
+                                "id": "7e21f66b-2491-4ee5-ad74-4205e2ec9d13",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Information about NAV's services and benefits",
+                                "path": "/en/home/benefits-and-services/information-about-nav-s-services-and-benefits",
+                                "id": "e372d497-322f-4e86-902f-7b64258d997d",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Pensions and pension applications from outside Norway",
+                                "path": "/en/home/benefits-and-services/pensions-and-pension-application-from-outside-norway",
+                                "id": "7f6aafeb-cb9e-41b1-b017-5226beb0bbe7",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "displayName": "Work and stay in Norway",
+                        "path": "/en/home/work-and-stay-in-norway",
+                        "id": "ed6fa1e1-3fb3-4f33-97f9-3c370d22c819",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "Tourists in Norway",
+                                "path": "/en/home/work-and-stay-in-norway/tourists-in-norway",
+                                "id": "a03cd31d-c894-4113-a8e6-6b7d3fea9976",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Foreign students in Norway",
+                                "path": "/en/home/work-and-stay-in-norway/foreign-students-in-norway",
+                                "id": "d992b9ad-f430-4abe-98ab-506266abe031",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Where to find job vacancies in Norway?",
+                                "path": "/en/home/work-and-stay-in-norway/where-to-find-job-vacancies-in-norway",
+                                "id": "0a836963-c4c2-4b68-b951-364f5cdb7c27",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "The non-custodial or custodial parent lives abroad",
+                                "path": "/en/home/work-and-stay-in-norway/the-non-custodial-or-custodial-parent-lives-abroad",
+                                "id": "b36a28d5-e27f-46a2-97c0-b2580550a012",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Employee on the Norwegian continental shelf",
+                                "path": "/en/home/work-and-stay-in-norway/employee-on-the-norwegian-continental-shelf",
+                                "id": "c24b164a-5959-47b1-9e87-cdec46b99eac",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Work in Norway",
+                                "path": "/en/home/work-and-stay-in-norway/work-in-norway",
+                                "id": "7792f241-1bdc-42fd-8f66-0a38bc950265",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Tips for job seekers",
+                                "path": "/en/home/work-and-stay-in-norway/tips-for-job-seekers",
+                                "id": "34efb880-ce90-4400-b9d2-b646a111aea6",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     }
                 ]
             },
             {
-                "displayName": "Rules and regulations",
-                "path": "/en/home/rules-and-regulations",
-                "id": "eb91661a-e86f-444c-add4-88c0c03fbae4",
+                "displayName": "Samarbeidspartner",
+                "path": "/",
+                "id": "6552f1e8-b2b8-4d5a-b6f9-80539197ccdf",
                 "hasChildren": true,
                 "children": [
                     {
-                        "displayName": "Staying abroad",
-                        "path": "/en/home/rules-and-regulations/staying-abroad",
-                        "id": "289a21b5-44c6-445f-9424-1c82b3d81958",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "About NAV",
+                        "path": "/en/home/about-nav",
+                        "id": "9a0d2a8d-2465-4305-81fb-79328a597c49",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "NAV telephone helplines",
+                                "path": "/en/home/about-nav/contact-us",
+                                "id": "df04bfdb-9b16-45a6-bf91-bdf947fd2a91",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Search tips",
+                                "path": "/en/home/about-nav/search-tips",
+                                "id": "d5219da1-f986-4710-9dfd-7ae055c2a92b",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "You are required to provide correct information to NAV",
+                                "path": "/en/home/about-nav/you-are-required-to-provide-correct-information-to-nav",
+                                "id": "f67cea8f-79d3-4d71-a11d-b42d282e5535",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "What is NAV?",
+                                "path": "/en/home/about-nav/what-is-nav",
+                                "id": "02a6663b-c7ba-4d82-8826-e43e5e52d761",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Publications",
+                                "path": "/en/home/about-nav/publications",
+                                "id": "932543ff-5104-41d4-a2e2-b1ffb89734c5",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "NAV EURES Services",
+                                "path": "/en/home/about-nav/nav-eures-services",
+                                "id": "c77c6872-9e0c-4d95-8444-ddfe43cd175d",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Forms and applications",
+                                "path": "/en/home/about-nav/forms-and-applications",
+                                "id": "f054ddef-61ab-42be-b87f-c2e548b2c56f",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Payment dates",
+                                "path": "/en/home/about-nav/payment-dates",
+                                "id": "7b93fe62-98e2-4b34-8dac-18341462cc9a",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     },
                     {
-                        "displayName": "Working abroad",
-                        "path": "/en/home/rules-and-regulations/working-abroad",
-                        "id": "490045e3-7f01-4d89-82e4-d93823e10b08",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "Employers",
+                        "path": "/en/home/employers",
+                        "id": "24666521-2456-41a8-b278-6db25759dbac",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "The wage guarantee scheme",
+                                "path": "/en/home/employers/the-wage-guarantee-scheme",
+                                "id": "1bebee4c-71dd-4b47-b29b-ee1f344553b5",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Recruit in Norway?",
+                                "path": "/en/home/employers/recruit-in-norway",
+                                "id": "1a960ea4-c5ea-4085-bd5f-5cdefc1efbd6",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Recruiting from the EU/EEA",
+                                "path": "/en/home/employers/recruiting-from-the-eu-and-eea",
+                                "id": "19c51d83-2b62-4219-9aac-40eca4a212d2",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "What is the NAV State Register of Employers and Employees (Aa-registeret)",
+                                "path": "/en/home/employers/nav-state-register-of-employers-and-employees",
+                                "id": "9e60cd57-2268-4c17-b3f7-9aeb5ea06b68",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     },
                     {
-                        "displayName": "National insurance coverage",
-                        "path": "/en/home/rules-and-regulations/national-insurance-coverage",
-                        "id": "a5e715a2-9887-4725-8ad4-dceabb85c2ea",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "Rules and regulations",
+                        "path": "/en/home/rules-and-regulations",
+                        "id": "eb91661a-e86f-444c-add4-88c0c03fbae4",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "Staying abroad",
+                                "path": "/en/home/rules-and-regulations/staying-abroad",
+                                "id": "289a21b5-44c6-445f-9424-1c82b3d81958",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Working abroad",
+                                "path": "/en/home/rules-and-regulations/working-abroad",
+                                "id": "490045e3-7f01-4d89-82e4-d93823e10b08",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "National insurance coverage",
+                                "path": "/en/home/rules-and-regulations/national-insurance-coverage",
+                                "id": "a5e715a2-9887-4725-8ad4-dceabb85c2ea",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Social security agreements",
+                                "path": "/en/home/rules-and-regulations/social-security-agreements",
+                                "id": "1bda4149-0d14-4134-9e5b-615b0dd99051",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Appeals",
+                                "path": "/en/home/rules-and-regulations/appeals",
+                                "id": "99ca9fe7-6b25-4bb6-b614-e866fd90836c",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Membership of the National Insurance Scheme",
+                                "path": "/en/home/rules-and-regulations/membership-of-the-national-insurance-scheme",
+                                "id": "54e70f21-16d4-4e37-9cc4-a1441fdfc25e",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "National insurance contributions",
+                                "path": "/en/home/rules-and-regulations/national-insurance-contributions",
+                                "id": "e110283c-54d5-4ed5-bf7f-d407ecdf4859",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     },
                     {
-                        "displayName": "Social security agreements",
-                        "path": "/en/home/rules-and-regulations/social-security-agreements",
-                        "id": "1bda4149-0d14-4134-9e5b-615b0dd99051",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "Benefits and services",
+                        "path": "/en/home/benefits-and-services",
+                        "id": "90ee8025-6ba7-44ca-9745-8a5fc139f1eb",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "Sickness benefits",
+                                "path": "/en/home/benefits-and-services/sickness-benefits",
+                                "id": "9aa7b3a9-cc1e-4e02-b565-cca66a5e73c6",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Unemployment benefits",
+                                "path": "/en/home/benefits-and-services/unemployment-benefits",
+                                "id": "0189bc32-f46a-4e21-a4c5-dfbbc29d2230",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Employment status form - how do you use it?",
+                                "path": "/en/home/benefits-and-services/employment-status-form-how-do-you-use-it",
+                                "id": "af24f1a1-0b52-42ff-b8bc-1c920c94a9b8",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Family related benefits",
+                                "path": "/en/home/benefits-and-services/family-related-benefits",
+                                "id": "7e21f66b-2491-4ee5-ad74-4205e2ec9d13",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Information about NAV's services and benefits",
+                                "path": "/en/home/benefits-and-services/information-about-nav-s-services-and-benefits",
+                                "id": "e372d497-322f-4e86-902f-7b64258d997d",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Pensions and pension applications from outside Norway",
+                                "path": "/en/home/benefits-and-services/pensions-and-pension-application-from-outside-norway",
+                                "id": "7f6aafeb-cb9e-41b1-b017-5226beb0bbe7",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     },
                     {
-                        "displayName": "Appeals",
-                        "path": "/en/home/rules-and-regulations/appeals",
-                        "id": "99ca9fe7-6b25-4bb6-b614-e866fd90836c",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "Membership of the National Insurance Scheme",
-                        "path": "/en/home/rules-and-regulations/membership-of-the-national-insurance-scheme",
-                        "id": "54e70f21-16d4-4e37-9cc4-a1441fdfc25e",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "National insurance contributions",
-                        "path": "/en/home/rules-and-regulations/national-insurance-contributions",
-                        "id": "e110283c-54d5-4ed5-bf7f-d407ecdf4859",
-                        "hasChildren": false,
-                        "children": []
-                    }
-                ]
-            },
-            {
-                "displayName": "Benefits and services",
-                "path": "/en/home/benefits-and-services",
-                "id": "90ee8025-6ba7-44ca-9745-8a5fc139f1eb",
-                "hasChildren": true,
-                "children": [
-                    {
-                        "displayName": "Sickness benefits",
-                        "path": "/en/home/benefits-and-services/sickness-benefits",
-                        "id": "9aa7b3a9-cc1e-4e02-b565-cca66a5e73c6",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "Unemployment benefits",
-                        "path": "/en/home/benefits-and-services/unemployment-benefits",
-                        "id": "0189bc32-f46a-4e21-a4c5-dfbbc29d2230",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "Employment status form - how do you use it?",
-                        "path": "/en/home/benefits-and-services/employment-status-form-how-do-you-use-it",
-                        "id": "af24f1a1-0b52-42ff-b8bc-1c920c94a9b8",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "Family related benefits",
-                        "path": "/en/home/benefits-and-services/family-related-benefits",
-                        "id": "7e21f66b-2491-4ee5-ad74-4205e2ec9d13",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "Information about NAV's services and benefits",
-                        "path": "/en/home/benefits-and-services/information-about-nav-s-services-and-benefits",
-                        "id": "e372d497-322f-4e86-902f-7b64258d997d",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "Pensions and pension applications from outside Norway",
-                        "path": "/en/home/benefits-and-services/pensions-and-pension-application-from-outside-norway",
-                        "id": "7f6aafeb-cb9e-41b1-b017-5226beb0bbe7",
-                        "hasChildren": false,
-                        "children": []
-                    }
-                ]
-            },
-            {
-                "displayName": "Work and stay in Norway",
-                "path": "/en/home/work-and-stay-in-norway",
-                "id": "ed6fa1e1-3fb3-4f33-97f9-3c370d22c819",
-                "hasChildren": true,
-                "children": [
-                    {
-                        "displayName": "Tourists in Norway",
-                        "path": "/en/home/work-and-stay-in-norway/tourists-in-norway",
-                        "id": "a03cd31d-c894-4113-a8e6-6b7d3fea9976",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "Foreign students in Norway",
-                        "path": "/en/home/work-and-stay-in-norway/foreign-students-in-norway",
-                        "id": "d992b9ad-f430-4abe-98ab-506266abe031",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "Where to find job vacancies in Norway?",
-                        "path": "/en/home/work-and-stay-in-norway/where-to-find-job-vacancies-in-norway",
-                        "id": "0a836963-c4c2-4b68-b951-364f5cdb7c27",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "The non-custodial or custodial parent lives abroad",
-                        "path": "/en/home/work-and-stay-in-norway/the-non-custodial-or-custodial-parent-lives-abroad",
-                        "id": "b36a28d5-e27f-46a2-97c0-b2580550a012",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "Employee on the Norwegian continental shelf",
-                        "path": "/en/home/work-and-stay-in-norway/employee-on-the-norwegian-continental-shelf",
-                        "id": "c24b164a-5959-47b1-9e87-cdec46b99eac",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "Work in Norway",
-                        "path": "/en/home/work-and-stay-in-norway/work-in-norway",
-                        "id": "7792f241-1bdc-42fd-8f66-0a38bc950265",
-                        "hasChildren": false,
-                        "children": []
-                    },
-                    {
-                        "displayName": "Tips for job seekers",
-                        "path": "/en/home/work-and-stay-in-norway/tips-for-job-seekers",
-                        "id": "34efb880-ce90-4400-b9d2-b646a111aea6",
-                        "hasChildren": false,
-                        "children": []
+                        "displayName": "Work and stay in Norway",
+                        "path": "/en/home/work-and-stay-in-norway",
+                        "id": "ed6fa1e1-3fb3-4f33-97f9-3c370d22c819",
+                        "hasChildren": true,
+                        "children": [
+                            {
+                                "displayName": "Tourists in Norway",
+                                "path": "/en/home/work-and-stay-in-norway/tourists-in-norway",
+                                "id": "a03cd31d-c894-4113-a8e6-6b7d3fea9976",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Foreign students in Norway",
+                                "path": "/en/home/work-and-stay-in-norway/foreign-students-in-norway",
+                                "id": "d992b9ad-f430-4abe-98ab-506266abe031",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Where to find job vacancies in Norway?",
+                                "path": "/en/home/work-and-stay-in-norway/where-to-find-job-vacancies-in-norway",
+                                "id": "0a836963-c4c2-4b68-b951-364f5cdb7c27",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "The non-custodial or custodial parent lives abroad",
+                                "path": "/en/home/work-and-stay-in-norway/the-non-custodial-or-custodial-parent-lives-abroad",
+                                "id": "b36a28d5-e27f-46a2-97c0-b2580550a012",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Employee on the Norwegian continental shelf",
+                                "path": "/en/home/work-and-stay-in-norway/employee-on-the-norwegian-continental-shelf",
+                                "id": "c24b164a-5959-47b1-9e87-cdec46b99eac",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Work in Norway",
+                                "path": "/en/home/work-and-stay-in-norway/work-in-norway",
+                                "id": "7792f241-1bdc-42fd-8f66-0a38bc950265",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Tips for job seekers",
+                                "path": "/en/home/work-and-stay-in-norway/tips-for-job-seekers",
+                                "id": "34efb880-ce90-4400-b9d2-b646a111aea6",
+                                "hasChildren": false,
+                                "children": []
+                            }
+                        ]
                     }
                 ]
             }
