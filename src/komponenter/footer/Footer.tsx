@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { AppState } from '../../reducer/reducer';
 import { connect } from 'react-redux';
-import { Normaltekst, Element } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
-import FooterLenkeMeny from './komponenter/FooterLenkeMeny';
+import FooterLenkeMeny from './FooterLenkeMeny';
 import './Footer.less';
 
 const cls = BEMHelper('footer');
@@ -18,26 +16,11 @@ const Footer = ({ language }: StateProps) => {
     return (
         <div id="footer-withmenu" className={cls.className}>
             <div className="hodefot">
-                <NyttigInfo />
                 <FooterLenkeMeny
                     className={cls.className}
                     language={language}
                 />
             </div>
-        </div>
-    );
-};
-
-const NyttigInfo = () => {
-    return (
-        <div className={cls.element('topp', 'left')}>
-            <Element>Var denne informasjonen nyttig?</Element>
-            <Lenke href="#">
-                <Normaltekst>Ja</Normaltekst>
-            </Lenke>
-            <Lenke href="#">
-                <Normaltekst>Nei</Normaltekst>
-            </Lenke>
         </div>
     );
 };

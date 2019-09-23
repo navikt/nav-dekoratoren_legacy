@@ -12,7 +12,7 @@
                 "hasChildren": true,
                 "children": [
                     {
-                        "displayName": "Arbeid",
+                        "displayName": "Arbeidssøker",
                         "path": "/",
                         "id": "ce18a576-9cf2-4bad-bbf3-3221999a6b42",
                         "hasChildren": true,
@@ -55,7 +55,7 @@
                         ]
                     },
                     {
-                        "displayName": "Helse",
+                        "displayName": "Syk",
                         "path": "/",
                         "id": "0e7f5f68-5ef6-4cac-a090-4c4aa54fc9de",
                         "hasChildren": true,
@@ -105,7 +105,7 @@
                         ]
                     },
                     {
-                        "displayName": "Familie",
+                        "displayName": "Foreldre, barn og familie",
                         "path": "/",
                         "id": "21e6a398-c774-4898-84ef-7dcc14b4bdac",
                         "hasChildren": true,
@@ -155,7 +155,7 @@
                         ]
                     },
                     {
-                        "displayName": "Pensjon",
+                        "displayName": "Pensjonist",
                         "path": "/",
                         "id": "891cbaf7-6d42-48de-a23f-47226c140820",
                         "hasChildren": true,
@@ -249,7 +249,7 @@
                         ]
                     },
                     {
-                        "displayName": "Internasjonalt",
+                        "displayName": "Til og fra Norge",
                         "path": "/",
                         "id": "2fe2f474-a015-4943-a372-e7764220f43d",
                         "hasChildren": true,

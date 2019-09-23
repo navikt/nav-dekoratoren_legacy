@@ -1,5 +1,5 @@
-import { MenySpraakSeksjon, Meny } from '../reducer/menu-duck';
-import { Language } from '../reducer/language-duck';
+import { MenySeksjon, Meny } from '../reducer/menu-duck';
+import { Language, spraakValgNorsk } from '../reducer/language-duck';
 
 export const NAVHEADER = 'NAVHEADER';
 
@@ -36,18 +36,17 @@ export const checkUriPath = (): MenuValue => {
 };
 
 export function setDropdownMenuView(
-    menypunkter: MenySpraakSeksjon[],
+    menypunkter: Meny[],
     language: Language
-): Meny {
+): MenySeksjon {
     const languageSection = setLanguage(language, menypunkter);
     const storage = getSessionStorage(NAVHEADER);
-    return getDropdownMenuContent(storage, languageSection);
+    return spraakValgNorsk(language)
+        ? getDropdownMenuContent(storage, languageSection)
+        : languageSection[0];
 }
 
-export const setLanguage = (
-    lang: Language,
-    menu: MenySpraakSeksjon[]
-): Meny[] => {
+export const setLanguage = (lang: Language, menu: Meny[]): MenySeksjon[] => {
     switch (lang) {
         case Language.NORSK:
             return menu[0].children;
@@ -60,7 +59,10 @@ export const setLanguage = (
     }
 };
 
-function getDropdownMenuContent(storage: string | null, content: Meny[]): Meny {
+function getDropdownMenuContent(
+    storage: string | null,
+    content: MenySeksjon[]
+): MenySeksjon {
     switch (storage) {
         case MenuValue.PRIVATPERSON:
             return content[0];

@@ -3,12 +3,12 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import BEMHelper from '../../../../utils/bem';
-import { Meny } from '../../../../reducer/menu-duck';
+import { MenySeksjon } from '../../../../reducer/menu-duck';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import MediaQuery from 'react-responsive';
 
 interface Props {
-    minsideMenyView: Meny;
+    minsideMenyView: MenySeksjon;
     classname: string;
     tabindex: boolean;
 }

@@ -5,9 +5,9 @@ import { Language, languageDuck } from '../reducer/language-duck';
 
 function sjekkUrl(): Language {
     const locationPath = window.location.pathname;
-    if (locationPath.includes('/en')) {
+    if (locationPath.includes('/en/')) {
         return Language.ENGELSK;
-    } else if (locationPath.includes('/se')) {
+    } else if (locationPath.includes('/se/')) {
         return Language.SAMISK;
     }
     return Language.NORSK;

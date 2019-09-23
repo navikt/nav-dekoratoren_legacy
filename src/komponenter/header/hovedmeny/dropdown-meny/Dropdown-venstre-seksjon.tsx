@@ -2,13 +2,13 @@ import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import MediaQuery from 'react-responsive';
 import BEMHelper from '../../../../utils/bem';
-import { Meny } from '../../../../reducer/menu-duck';
+import { MenySeksjon } from '../../../../reducer/menu-duck';
 import { DropdownVenstreLenke } from './Dropdown-venstre-lenke';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
 interface Props {
     classname: string;
-    menyLenker: Meny;
+    menyLenker: MenySeksjon;
     tabindex: boolean;
 }
 
