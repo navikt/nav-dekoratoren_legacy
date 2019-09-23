@@ -6,12 +6,20 @@ import Skiplinks from './skiplinks/Skiplinks';
 import Toppmeny from './toppmeny/Toppmeny';
 import Hovedmeny from './hovedmeny/Hovedmeny';
 import './Header.less';
+import { Language } from '../../reducer/language-duck';
+import { AppState } from '../../reducer/reducer';
+
+interface StateProps {
+    language: Language;
+}
 
 interface DispatchProps {
     hentMenypunkter: () => Promise<void>;
 }
 
-const Header = ({ hentMenypunkter }: DispatchProps) => {
+type HeaderProps = StateProps & DispatchProps;
+
+const Header = ({ hentMenypunkter, language }: HeaderProps) => {
     React.useEffect(() => {
         hentMenypunkter();
     }, []);
@@ -23,8 +31,8 @@ const Header = ({ hentMenypunkter }: DispatchProps) => {
                 <div className="hodefot">
                     <header className="siteheader">
                         <div className="innhold-container">
-                            <Toppmeny />
-                            <Hovedmeny />
+                            {language === Language.NORSK && <Toppmeny />}
+                            <Hovedmeny language={language} />
                         </div>
                     </header>
                 </div>
@@ -33,11 +41,15 @@ const Header = ({ hentMenypunkter }: DispatchProps) => {
     );
 };
 
+const mapStateToProps = (state: AppState): StateProps => ({
+    language: state.language.language,
+});
+
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     hentMenypunkter: () => fetchMenypunkter()(dispatch),
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(Header);

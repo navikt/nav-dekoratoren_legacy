@@ -5,7 +5,7 @@ const path = require('path');
 const buildPath = path.resolve(__dirname, '../../build/');
 const requestNode = require('request');
 const NodeCache = require('node-cache');
-const backupData = require('./menu/no.menu.json');
+const backupData = require('./menu/menu.json');
 const sokeresultatMockData = require('./sokeresultat-mockdata.json');
 
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
@@ -24,7 +24,7 @@ const fetchmenyUri = isProduction ? env : 'http://localhost:8088';
 
 const envSok = process.env.SOKERESULTAT
     ? process.env.SOKERESULTAT
-    : 'https://www-x1.nav.no/navno/_/service/no.nav.navno/menu';
+    : 'https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2';
 
 const fetchSearchResultUri = isProduction ? envSok : 'http://localhost:8088';
 

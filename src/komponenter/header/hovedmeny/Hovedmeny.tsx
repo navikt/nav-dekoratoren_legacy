@@ -1,5 +1,6 @@
 import React from 'react';
 import BEMHelper from '../../../utils/bem';
+import { Undertittel } from 'nav-frontend-typografi';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../ikoner/meny/NavLogoRod';
@@ -8,11 +9,17 @@ import Sok from './sok/Sok';
 import MinsideLenke from './minside-lenke/MinsideLenke';
 import Varselbjelle from './varsel/Varselbjelle';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
+import { Language } from '../../../reducer/language-duck';
+import Tekst from '../../../tekster/finn-tekst';
 import './Hovedmeny.less';
 
 const cls = BEMHelper('hovedmeny');
 
-const Hovedmeny = () => {
+interface Props {
+    language: Language;
+}
+
+const Hovedmeny = ({ language }: Props) => {
     return (
         <nav className={cls.className}>
             <div className={cls.element('content')}>
@@ -22,8 +29,19 @@ const Hovedmeny = () => {
                         height="88"
                         classname={cls.element('logo')}
                     />
-
-                    <MenyToggleKnapp classname="hovedmeny" />
+                    {language === Language.NORSK ||
+                    language === Language.ENGELSK ? (
+                        <MenyToggleKnapp classname="hovedmeny" />
+                    ) : (
+                        <div
+                            className="menybutton-alternativ-samisk"
+                            tabIndex={0}
+                        >
+                            <Undertittel>
+                                <Tekst id="samisk-samegiella" />
+                            </Undertittel>
+                        </div>
+                    )}
 
                     <Sok />
 

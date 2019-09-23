@@ -2,13 +2,13 @@ import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import MediaQuery from 'react-responsive';
 import BEMHelper from '../../../../utils/bem';
-import { Data } from '../../../../reducer/menu-duck';
+import { MenySeksjon } from '../../../../reducer/menu-duck';
 import { DropdownVenstreLenke } from './Dropdown-venstre-lenke';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
 interface Props {
     classname: string;
-    menyLenker: Data;
+    menyLenker: MenySeksjon;
     tabindex: boolean;
 }
 
@@ -32,6 +32,7 @@ const DropdownVenstreSeksjon = (props: Props) => {
                                         (lenke: any, index: number) => {
                                             return (
                                                 <DropdownVenstreLenke
+                                                    key={index}
                                                     lenke={lenke}
                                                     index={index}
                                                     tabindex={tabindex}
@@ -52,6 +53,7 @@ const DropdownVenstreSeksjon = (props: Props) => {
                                             (lenke: any, index: number) => {
                                                 return (
                                                     <DropdownVenstreLenke
+                                                        key={index}
                                                         lenke={lenke}
                                                         index={index}
                                                         tabindex={tabindex}

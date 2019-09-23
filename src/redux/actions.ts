@@ -1,6 +1,6 @@
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
-import { Data } from '../reducer/menu-duck';
+import { Meny as menypunkterData } from '../reducer/menu-duck';
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',
@@ -16,6 +16,7 @@ export enum ActionType {
     SETT_VARSLER_LEST_OK = 'SETT_VARSLER_LEST_OK',
     SETT_VARSLER_LEST_FEILET = 'SETT_VARSLER_LEST_FEILET',
     SETT_VARSLER_LEST_PENDING = 'SETT_VARSLER_LEST_PENDING',
+    SETT_LANGUAGE = 'SETT_LANGUAGE',
 }
 
 export interface HentInnloggingsstatusOKAction {
@@ -33,7 +34,7 @@ export interface HentInnloggingsstatusFEILETAction {
 
 export interface HentMenyLenkerSUCCESS {
     type: ActionType.HENT_MENY_OK;
-    data: Data[];
+    data: menypunkterData[];
 }
 
 export interface HentMenyLenkerPENDING {

@@ -1,5 +1,6 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
+import Tekst from '../../../tekster/finn-tekst';
 import './NavLogoRod.less';
 
 const NavLogoRod = ({
@@ -22,7 +23,9 @@ const NavLogoRod = ({
                 xmlns="http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink"
             >
-                <title>Hjem</title>
+                <title>
+                    <Tekst id="logo-title" />
+                </title>
                 <desc>Gå til forsiden</desc>
                 <defs>
                     <polygon
