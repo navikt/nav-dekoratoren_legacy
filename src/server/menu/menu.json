@@ -554,7 +554,7 @@
                 ]
             },
             {
-                "displayName": "MinSide",
+                "displayName": "Min side",
                 "path": "/",
                 "id": "9ec80529-ff29-41df-894d-e915d8ed4e51",
                 "hasChildren": true,
@@ -580,7 +580,7 @@
                                 "children": []
                             },
                             {
-                                "displayName": "Status i saken din",
+                                "displayName": "status i saken din",
                                 "path": "/",
                                 "id": "2bfaf207-dcae-4c47-9a04-4cee00801b56",
                                 "hasChildren": false,

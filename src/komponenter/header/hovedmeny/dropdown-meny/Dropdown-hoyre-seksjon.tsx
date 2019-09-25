@@ -1,5 +1,5 @@
 import React from 'react';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import BEMHelper from '../../../../utils/bem';
@@ -21,7 +21,7 @@ const DropdownHoyreSeksjon = (props: Props) => {
             <div className={cls.element('minSideSeksjon')}>
                 <MediaQuery minWidth={1024}>
                     <ul>
-                        <li className={cls.element('minside-list-item')}>
+                        <li>
                             <Element>{minsideMenyView.displayName}</Element>
                         </li>
                         {minsideMenyView.children.map((input: any, index) => {
@@ -94,11 +94,7 @@ const DropdownHoyreSeksjon = (props: Props) => {
 const listItem = (name: string, cls: any, href: string, tabindex: boolean) => {
     switch (name) {
         case 'å min side finner du:':
-            return (
-                <li className={cls.element('minside-list-item')}>
-                    <Normaltekst>{name}</Normaltekst>
-                </li>
-            );
+            return <li className={cls.element('minside-list-item')}>{name}</li>;
         case 'Gå til Min Side':
             return (
                 <li className={cls.element('til-minside-lenke')}>
@@ -107,10 +103,10 @@ const listItem = (name: string, cls: any, href: string, tabindex: boolean) => {
                         className={cls.element('minside-lenke')}
                         href={href}
                     >
-                        <Normaltekst>
+                        <>
                             <HoyreChevron />
                             {name}
-                        </Normaltekst>
+                        </>
                     </Lenke>
                 </li>
             );
@@ -123,7 +119,7 @@ const listItem = (name: string, cls: any, href: string, tabindex: boolean) => {
                         className={cls.element('minside-lenke')}
                         href={href}
                     >
-                        <Normaltekst>{name}</Normaltekst>
+                        {name}
                     </Lenke>
                 </li>
             );

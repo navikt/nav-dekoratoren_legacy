@@ -1,5 +1,5 @@
 import React from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
+import Lenke from 'nav-frontend-lenker';
 
 interface Props {
     lenke: any;
@@ -10,20 +10,11 @@ interface Props {
 export const DropdownVenstreLenke = (props: Props) => {
     const { lenke, index, tabindex } = props;
 
-    const goto = (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
-        e.preventDefault();
-        window.location.href = url;
-    };
-
     return (
         <li key={index}>
-            <a
-                tabIndex={tabindex ? 0 : -1}
-                href={lenke.path}
-                onClick={event => goto(event, lenke.path)}
-            >
-                <Normaltekst>{lenke.displayName}</Normaltekst>
-            </a>
+            <Lenke tabIndex={tabindex ? 0 : -1} href={lenke.path}>
+                {lenke.displayName}
+            </Lenke>
         </li>
     );
 };
