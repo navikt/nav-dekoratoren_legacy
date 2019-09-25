@@ -53,37 +53,42 @@
         .hovedmeny__hovedSeksjon {
             margin-bottom: 0.2rem;
 
-            a {
-                text-decoration: none;
-                color: black;
-                cursor: pointer;
-            }
-
-            a:hover {
-                text-decoration: underline;
-            }
-
-            li {
-                list-style-type: initial;
-            }
-
             .hovedmeny__seksjon {
                 padding-bottom: 0.5rem;
+
+                li {
+                    list-style-type: initial;
+                    margin-bottom: 0.3rem;
+
+                    .lenke {
+                        text-decoration: none;
+                        color: black;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                        &:focus {
+                            color: white;
+                        }
+                    }
+                }
             }
         }
 
         .hovedmeny__minSideSeksjon {
-            a {
+            .lenke {
                 color: black;
+                text-decoration: none;
 
+                &:focus {
+                    color: white;
+                }
                 &:active {
-                    color: black;
                     font-weight: bold;
                 }
-            }
-
-            a:hover {
-                text-decoration: underline;
+                &:hover {
+                    text-decoration: underline;
+                }
             }
 
             p {
@@ -92,6 +97,7 @@
 
             .hovedmeny__minside-list-item {
                 padding: 0.125rem 0 0.125rem 0;
+                list-style: initial;
             }
 
             .hovedmeny__til-minside-lenke {

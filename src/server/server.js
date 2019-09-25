@@ -44,9 +44,9 @@ app.use('/person/nav-dekoratoren/', express.static(buildPath));
 app.get(
     [
         '/person/nav-dekoratoren/',
-        '/person/nav-dekoratoren/person/',
-        '/person/nav-dekoratoren/bedrift/',
-        '/person/nav-dekoratoren/samarbeidspartner/',
+        '/person/nav-dekoratoren/person/*',
+        '/person/nav-dekoratoren/bedrift/*',
+        '/person/nav-dekoratoren/samarbeidspartner/*',
     ],
     (req, res) => {
         res.sendFile(path.resolve(__dirname, '../../build', 'index.html'));

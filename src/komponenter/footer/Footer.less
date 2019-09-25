@@ -7,27 +7,20 @@
     .sitefooter {
         padding: 2rem;
         background-color: @navBlaDarken40;
-        color: white;
         min-height: 200px;
 
         .footernavsection {
             .footer__seksjon {
-                p {
-                    color: white;
-                    padding-bottom: 0.3rem;
-                }
-
                 li {
-                    list-style-type: none;
-                }
+                    margin-bottom: 0.5rem;
 
-                li a {
-                    color: white;
-                    text-decoration: none;
-
-                    &:hover {
-                        text-decoration: underline;
+                    .lenke {
                         color: white;
+                        text-decoration: none;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
                     }
                 }
             }
@@ -38,6 +31,7 @@
 @media (min-width: @desktopLimitWidth) {
     .footer {
         margin-top: 55vh; //TODO fjerne denne linjen når designet er klart.
+
         .sitefooter {
             .footernavsection {
                 display: grid;

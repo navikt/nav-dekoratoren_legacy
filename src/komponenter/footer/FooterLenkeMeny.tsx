@@ -1,6 +1,5 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
-import { Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
 
@@ -17,36 +16,32 @@ const FooterLenkeMeny = ({ className, language }: Props) => {
                 <section className={cls.element('seksjon venstre')}>
                     <ul>
                         <li>
-                            <Lenke href="#">
-                                <Normaltekst>Kontakt oss</Normaltekst>
-                            </Lenke>
+                            <Lenke href="#">Kontakt oss</Lenke>
                         </li>
                         {!(language === Language.NORSK) && (
                             <li>
-                                <Lenke href="/person/nav-dekoratoren/no/">
-                                    <Normaltekst>Norske sider</Normaltekst>
+                                <Lenke href="/person/nav-dekoratoren/person/no/">
+                                    Norske sider
                                 </Lenke>
                             </li>
                         )}
                         {!(language === Language.ENGELSK) && (
                             <li>
-                                <Lenke href="/person/nav-dekoratoren/en/">
-                                    <Normaltekst>English pages</Normaltekst>
+                                <Lenke href="/person/nav-dekoratoren/person/en/">
+                                    English pages
                                 </Lenke>
                             </li>
                         )}
                         {!(language === Language.SAMISK) && (
                             <li>
-                                <Lenke href="/person/nav-dekoratoren/se/">
-                                    <Normaltekst>Sámegiel skovit</Normaltekst>
+                                <Lenke href="/person/nav-dekoratoren/person/se/">
+                                    Sámegiel skovit
                                 </Lenke>
                             </li>
                         )}
                         <li>
                             <Lenke href="#">
-                                <Normaltekst>
-                                    Del skjerm med kontaktsenteret
-                                </Normaltekst>
+                                Del skjerm med kontaktsenteret
                             </Lenke>
                         </li>
                     </ul>
@@ -55,27 +50,17 @@ const FooterLenkeMeny = ({ className, language }: Props) => {
                 <section className={cls.element('seksjon midt')}>
                     <ul>
                         <li className="x">
-                            <Lenke href="#">
-                                <Normaltekst>
-                                    Klage og tilbakemelding
-                                </Normaltekst>
-                            </Lenke>
+                            <Lenke href="#">Klage og tilbakemelding</Lenke>
                         </li>
 
                         <li className="x">
-                            <Lenke href="#">
-                                <Normaltekst>Tilgjengelighet</Normaltekst>
-                            </Lenke>
+                            <Lenke href="#">Tilgjengelighet</Lenke>
                         </li>
                         <li className="x">
-                            <Lenke href="#">
-                                <Normaltekst>Lover og regler</Normaltekst>
-                            </Lenke>
+                            <Lenke href="#">Lover og regler</Lenke>
                         </li>
                         <li>
-                            <Lenke href="#">
-                                <Normaltekst>Personvern</Normaltekst>
-                            </Lenke>
+                            <Lenke href="#">Personvern</Lenke>
                         </li>
                     </ul>
                 </section>
@@ -83,27 +68,19 @@ const FooterLenkeMeny = ({ className, language }: Props) => {
                 <section className={cls.element('seksjon hoyre')}>
                     <ul>
                         <li>
-                            <Lenke href="#">
-                                <Normaltekst>Om NAV</Normaltekst>
-                            </Lenke>
+                            <Lenke href="#">Om NAV</Lenke>
                         </li>
                         <li className="x">
-                            <Lenke href="#">
-                                <Normaltekst>Nyheter fra NAV</Normaltekst>
-                            </Lenke>
+                            <Lenke href="#">Nyheter fra NAV</Lenke>
                         </li>
 
                         <li className="x">
-                            <Lenke href="#">
-                                <Normaltekst>For pressen</Normaltekst>
-                            </Lenke>
+                            <Lenke href="#">For pressen</Lenke>
                         </li>
 
                         <li>
                             <Lenke href="#">
-                                <Normaltekst>
-                                    Forskning, statistikk og analyse
-                                </Normaltekst>
+                                Forskning, statistikk og analyse
                             </Lenke>
                         </li>
                     </ul>
