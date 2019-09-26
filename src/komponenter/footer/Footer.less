@@ -6,7 +6,7 @@
 
     .sitefooter {
         padding: 2rem;
-        background-color: @navBlaDarken40;
+        background-color: @navLysGra;
         min-height: 200px;
 
         .footernavsection {
@@ -15,10 +15,14 @@
                     margin-bottom: 0.5rem;
 
                     .lenke {
-                        color: white;
+                        color: black;
                         text-decoration: none;
 
+                        &:focus {
+                            color: white;
+                        }
                         &:hover {
+                            // color: white;
                             text-decoration: underline;
                         }
                     }

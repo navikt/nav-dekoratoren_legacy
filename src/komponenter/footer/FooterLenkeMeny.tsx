@@ -79,9 +79,7 @@ const FooterLenkeMeny = ({ className, language }: Props) => {
                         </li>
 
                         <li>
-                            <Lenke href="#">
-                                Forskning, statistikk og analyse
-                            </Lenke>
+                            <Lenke href="#">Forskning og statistikk</Lenke>
                         </li>
                     </ul>
                 </section>
