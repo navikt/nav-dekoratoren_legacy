@@ -2,6 +2,7 @@ import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
+import NavLogoFooter from '../ikoner/meny/NavLogoFooter';
 
 interface Props {
     className: string;
@@ -12,8 +13,8 @@ const FooterLenkeMeny = ({ className, language }: Props) => {
     const cls = BEMHelper(className);
     return (
         <footer className="sitefooter" role="contentinfo">
-            <div className="footernavsection">
-                <section className={cls.element('seksjon venstre')}>
+            <div className={cls.element('innhold')}>
+                <section className={cls.element('menylenker-seksjon')}>
                     <ul>
                         <li>
                             <Lenke href="#">Kontakt oss</Lenke>
@@ -47,7 +48,7 @@ const FooterLenkeMeny = ({ className, language }: Props) => {
                     </ul>
                 </section>
 
-                <section className={cls.element('seksjon midt')}>
+                <section className={cls.element('menylenker-seksjon')}>
                     <ul>
                         <li className="x">
                             <Lenke href="#">Klage og tilbakemelding</Lenke>
@@ -65,7 +66,7 @@ const FooterLenkeMeny = ({ className, language }: Props) => {
                     </ul>
                 </section>
 
-                <section className={cls.element('seksjon hoyre')}>
+                <section className={cls.element('menylenker-seksjon')}>
                     <ul>
                         <li>
                             <Lenke href="#">Om NAV</Lenke>
@@ -83,6 +84,11 @@ const FooterLenkeMeny = ({ className, language }: Props) => {
                         </li>
                     </ul>
                 </section>
+                <NavLogoFooter
+                    width="65"
+                    height="65"
+                    classname={cls.element('svg')}
+                />
             </div>
         </footer>
     );
