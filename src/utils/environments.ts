@@ -5,7 +5,7 @@ const Environments = () => {
         return {
             miljo: 'LOCAL',
             baseUrl: 'http://localhost:3000',
-            baseUrlEnonic: 'https://www.nav.no',
+            baseUrlEnonic: 'https://www-x1.nav.no',
             loginUrl: '#',
             logoutUrl: '#',
             menypunkter:
