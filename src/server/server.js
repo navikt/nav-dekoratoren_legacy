@@ -5,7 +5,7 @@ const path = require('path');
 const buildPath = path.resolve(__dirname, '../../build/');
 const requestNode = require('request');
 const NodeCache = require('node-cache');
-const backupData = require('./menu/menu.json');
+const backupData = require('./menu/menu-enonic.json');
 const sokeresultatMockData = require('./sokeresultat-mockdata.json');
 
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
@@ -60,8 +60,7 @@ const fetchmenuOptions = res => {
             uri: `${fetchmenyUri}`,
         },
         (error, response, body) => {
-            // satt til false, slik at vi leser at backupData til vi har fått fikset riktig endepunkt i enonic-xp
-            if (false && !error && response.statusCode === 200) {
+            if (!error && response.statusCode === 200) {
                 mainCache.set(mainCacheKey, body, 100);
                 backupCache.set(backupCacheKey, body, 0);
                 res.send(body);
