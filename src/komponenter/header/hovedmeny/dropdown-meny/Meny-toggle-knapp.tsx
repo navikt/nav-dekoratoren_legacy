@@ -19,6 +19,7 @@ import HamburgerIkon from '../../../ikoner/meny/HamburgerIkon';
 import DropdownHoyreSeksjon from './Dropdown-hoyre-seksjon';
 import DropdownVenstreSeksjon from './Dropdown-venstre-seksjon';
 import './Meny-toggle-knapp.less';
+import { verifyWindowObj } from '../../../../utils/environments';
 
 interface OwnProps {
     classname: string;
@@ -58,7 +59,9 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
     render() {
         const { meny, classname } = this.props;
         const cls = BEMHelper(classname);
-        const toppmenyvalg = getSessionStorage(NAVHEADER);
+        const toppmenyvalg = verifyWindowObj()
+            ? getSessionStorage(NAVHEADER)
+            : MenuValue.PRIVATPERSON;
 
         return (
             <>

@@ -4,6 +4,7 @@ import getStore from './redux/store';
 import Header from './komponenter/header/Header';
 import Footer from './komponenter/footer/Footer';
 import setupMock from './mocks/setup-mock';
+import { verifyWindowObj } from './utils/environments';
 
 const store = getStore();
 
@@ -15,7 +16,9 @@ if (
     console.log('======= DEVELOPMENT ======');
     console.log('==========================');
 
-    setupMock();
+    if (verifyWindowObj()) {
+        setupMock();
+    }
 }
 
 function App() {

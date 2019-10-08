@@ -84,7 +84,6 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             antallUlesteVarsler,
         } = this.props;
         const html = parse(varsler);
-
         const toppmenyvalg = getSessionStorage(NAVHEADER);
 
         return (

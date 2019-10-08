@@ -1,4 +1,16 @@
-const isLocal = window.location.origin.toLowerCase().includes('localhost');
+/* tslint:disable:no-shadowed-variable */
+export const verifyWindowObj = () => {
+    return typeof window !== 'undefined';
+};
+
+const checkWindowObjIncludes = (searchString: string) => {
+    if (verifyWindowObj()) {
+        return window.location.origin.toLowerCase().includes(searchString);
+    }
+    return false;
+};
+
+const isLocal = checkWindowObjIncludes('localhost');
 
 const Environments = () => {
     if (process.env.NODE_ENV === 'development') {

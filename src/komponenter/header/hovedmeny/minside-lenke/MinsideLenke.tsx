@@ -1,6 +1,6 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
-import Environments from '../../../../utils/environments';
+import Environments, { verifyWindowObj } from '../../../../utils/environments';
 import './MinsideLenke.less';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
@@ -19,7 +19,9 @@ interface StateProps {
 }
 
 const MinsideLenke = ({ erInnlogget }: StateProps) => {
-    const toppmenyvalg = getSessionStorage(NAVHEADER);
+    const toppmenyvalg = verifyWindowObj()
+        ? getSessionStorage(NAVHEADER)
+        : MenuValue.PRIVATPERSON;
 
     const lenketekst =
         toppmenyvalg === null || toppmenyvalg === MenuValue.PRIVATPERSON

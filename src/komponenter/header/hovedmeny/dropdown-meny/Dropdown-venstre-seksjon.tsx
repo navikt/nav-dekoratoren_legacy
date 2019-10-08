@@ -32,6 +32,7 @@ const DropdownVenstreSeksjon = (props: Props) => {
                                         (lenke: any, index: number) => {
                                             return (
                                                 <DropdownVenstreLenke
+                                                    key={index}
                                                     lenke={lenke}
                                                     index={index}
                                                     tabindex={tabindex}
@@ -52,6 +53,7 @@ const DropdownVenstreSeksjon = (props: Props) => {
                                             (lenke: any, index: number) => {
                                                 return (
                                                     <DropdownVenstreLenke
+                                                        key={index}
                                                         lenke={lenke}
                                                         index={index}
                                                         tabindex={tabindex}

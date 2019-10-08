@@ -1,4 +1,4 @@
-const path = require('path');
+gitconst path = require('path');
 const CracoLessPlugin = require('craco-less');
 const NpmImportPlugin = require('less-plugin-npm-import');
 const BUILD_PATH = path.resolve(__dirname, './build');
@@ -47,9 +47,16 @@ module.exports = {
     webpack: {
         configure: {
             entry: {
-                bundle: './src/index.tsx',
+                client: './src/indexhydrat.tsx',
+                server: './src/server/ssr-server.js',
             },
             devtool: 'source-map',
+
+            output: {
+                path: BUILD_PATH,
+                filename: '[name].js',
+                chunkFilename: 'static/js/[name].chunk.js',
+            },
         },
     },
 };
