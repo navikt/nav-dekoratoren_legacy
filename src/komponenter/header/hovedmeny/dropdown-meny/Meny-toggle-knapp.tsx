@@ -103,7 +103,7 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                             {toppmenyvalg === MenuValue.PRIVATPERSON &&
                             language === Language.NORSK ? (
                                 <DropdownHoyreSeksjon
-                                    minsideMenyView={MenyToggleKnapp.minside(
+                                    minsideMeny={MenyToggleKnapp.minside(
                                         meny.data[0].children,
                                         3
                                     )}

@@ -5,7 +5,7 @@ const path = require('path');
 const buildPath = path.resolve(__dirname, '../../build/');
 const requestNode = require('request');
 const NodeCache = require('node-cache');
-const backupData = require('./menu/menu-enonic.json');
+const backupData = require('./menu/menu.json');
 const sokeresultatMockData = require('./sokeresultat-mockdata.json');
 
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
