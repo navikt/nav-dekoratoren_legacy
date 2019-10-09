@@ -1,12 +1,12 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import Environments from '../../../../utils/environments';
+import { MenySeksjon } from '../../../../reducer/menu-duck';
 
 const { baseUrlEnonic } = Environments();
 
 interface Props {
-    lenke: any;
-    index: number;
+    lenke: MenySeksjon;
     tabindex: boolean;
 }
 
@@ -18,11 +18,11 @@ const genererUrl = (lenke: string): string => {
 };
 
 export const DropdownVenstreLenke = (props: Props) => {
-    const { lenke, index, tabindex } = props;
+    const { lenke, tabindex } = props;
 
     const href = genererUrl(lenke.path);
     return (
-        <li key={index}>
+        <li>
             <Lenke tabIndex={tabindex ? 0 : -1} href={href}>
                 {lenke.displayName}
             </Lenke>

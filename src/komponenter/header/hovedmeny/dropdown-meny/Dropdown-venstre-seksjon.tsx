@@ -18,58 +18,57 @@ const DropdownVenstreSeksjon = (props: Props) => {
 
     return (
         <div className={cls.element('hovedSeksjon')}>
-            {menyLenker.children.map((menygruppe: any) => {
-                return (
-                    <section
-                        className={cls.element('seksjon')}
-                        key={menygruppe.displayName}
-                    >
-                        <div className={cls.element('seksjonOverskrift')}>
-                            <MediaQuery minWidth={1024}>
-                                <Element>{menygruppe.displayName}</Element>
-                                <ul>
-                                    {menygruppe.children.map(
-                                        (lenke: any, index: number) => {
-                                            return (
-                                                <DropdownVenstreLenke
-                                                    key={index}
-                                                    lenke={lenke}
-                                                    index={index}
-                                                    tabindex={tabindex}
-                                                />
-                                            );
-                                        }
-                                    )}
-                                </ul>
-                            </MediaQuery>
-                            <MediaQuery maxWidth={1023}>
-                                <Ekspanderbartpanel
-                                    tittel={menygruppe.displayName}
-                                    tittelProps="normaltekst"
-                                    border
-                                >
-                                    <ul>
-                                        {menygruppe.children.map(
-                                            (lenke: any, index: number) => {
-                                                return (
-                                                    <DropdownVenstreLenke
-                                                        key={index}
-                                                        lenke={lenke}
-                                                        index={index}
-                                                        tabindex={tabindex}
-                                                    />
-                                                );
-                                            }
-                                        )}
-                                    </ul>
-                                </Ekspanderbartpanel>
-                            </MediaQuery>
-                        </div>
-                    </section>
-                );
-            })}
+            {menyLenker.children.map(
+                (menygruppe: MenySeksjon, index: number) => {
+                    return (
+                        <section className={cls.element('seksjon')} key={index}>
+                            <div className={cls.element('seksjonOverskrift')}>
+                                <MediaQuery maxWidth={1023}>
+                                    <Ekspanderbartpanel
+                                        tittel={menygruppe.displayName}
+                                        tittelProps="normaltekst"
+                                        border
+                                    >
+                                        <Menylenker
+                                            menygruppe={menygruppe}
+                                            tabindex={tabindex}
+                                        />
+                                    </Ekspanderbartpanel>
+                                </MediaQuery>
+
+                                <MediaQuery minWidth={1024}>
+                                    <Element>{menygruppe.displayName}</Element>
+                                    <Menylenker
+                                        menygruppe={menygruppe}
+                                        tabindex={tabindex}
+                                    />
+                                </MediaQuery>
+                            </div>
+                        </section>
+                    );
+                }
+            )}
         </div>
     );
 };
+
+interface MenylenkerProps {
+    menygruppe: MenySeksjon;
+    tabindex: boolean;
+}
+
+const Menylenker = ({ menygruppe, tabindex }: MenylenkerProps) => (
+    <ul>
+        {menygruppe.children.map((lenke: MenySeksjon, index: number) => {
+            return (
+                <DropdownVenstreLenke
+                    key={index}
+                    lenke={lenke}
+                    tabindex={tabindex}
+                />
+            );
+        })}
+    </ul>
+);
 
 export default DropdownVenstreSeksjon;

@@ -1,129 +1,112 @@
 import React from 'react';
-import { Element } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import BEMHelper from '../../../../utils/bem';
 import { MenySeksjon } from '../../../../reducer/menu-duck';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import MediaQuery from 'react-responsive';
+import { dittNavURL } from '../minside-lenke/MinsideLenke';
+import Tekst from '../../../../tekster/finn-tekst';
 
 interface Props {
-    minsideMenyView: MenySeksjon;
+    minsideMeny: MenySeksjon;
     classname: string;
     tabindex: boolean;
 }
 
 const DropdownHoyreSeksjon = (props: Props) => {
-    const { classname, minsideMenyView, tabindex } = props;
+    const { classname, minsideMeny, tabindex } = props;
     const cls = BEMHelper(classname);
-    if (minsideMenyView) {
-        return (
-            <div className={cls.element('minSideSeksjon')}>
-                <MediaQuery minWidth={1024}>
-                    <ul>
-                        <li>
-                            <Element>{minsideMenyView.displayName}</Element>
-                        </li>
-                        {minsideMenyView.children.map((input: any, index) => {
-                            return (
-                                <div key={index}>
-                                    {input.children &&
-                                        input.children.map(
-                                            (lenke: any, index: number) => {
-                                                const item = listItem(
-                                                    lenke.displayName,
-                                                    cls,
-                                                    lenke.path,
-                                                    tabindex
-                                                );
-                                                return (
-                                                    <div key={index}>
-                                                        {item}
-                                                    </div>
-                                                );
-                                            }
-                                        )}
-                                </div>
-                            );
-                        })}
-                    </ul>
-                </MediaQuery>
-                <MediaQuery maxWidth={1023}>
-                    <ul>
-                        <Ekspanderbartpanel
-                            tittel={minsideMenyView.displayName}
-                            tittelProps="normaltekst"
-                            border
-                        >
-                            {minsideMenyView.children.map(
-                                (input: any, index) => {
-                                    return (
-                                        <div key={index}>
-                                            {input.children &&
-                                                input.children.map(
-                                                    (
-                                                        lenke: any,
-                                                        index: number
-                                                    ) => {
-                                                        const item = listItem(
-                                                            lenke.displayName,
-                                                            cls,
-                                                            lenke.path,
-                                                            tabindex
-                                                        );
-                                                        return (
-                                                            <div key={index}>
-                                                                {item}
-                                                            </div>
-                                                        );
-                                                    }
-                                                )}
-                                        </div>
-                                    );
-                                }
-                            )}
-                        </Ekspanderbartpanel>
-                    </ul>
-                </MediaQuery>
-            </div>
-        );
-    }
-    return <div />;
+
+    return (
+        <div className={cls.element('minSideSeksjon')}>
+            <MediaQuery maxWidth={1023}>
+                <Ekspanderbartpanel
+                    tittel={minsideMeny.displayName}
+                    tittelProps="normaltekst"
+                    border
+                >
+                    <MinsideLenker
+                        minsideMeny={minsideMeny}
+                        tabindex={tabindex}
+                    />
+                </Ekspanderbartpanel>
+            </MediaQuery>
+
+            <MediaQuery minWidth={1024}>
+                <>
+                    <Element>
+                        <Tekst id="min-side" />
+                    </Element>
+                    <MinsideLenker
+                        minsideMeny={minsideMeny}
+                        tabindex={tabindex}
+                    />
+                </>
+            </MediaQuery>
+        </div>
+    );
 };
 
-const listItem = (name: string, cls: any, href: string, tabindex: boolean) => {
-    switch (name) {
-        case 'å min side finner du:':
-            return <li className={cls.element('minside-list-item')}>{name}</li>;
-        case 'Gå til Min Side':
-            return (
-                <li className={cls.element('til-minside-lenke')}>
-                    <Lenke
-                        tabIndex={tabindex ? 0 : -1}
-                        className={cls.element('minside-lenke')}
-                        href={href}
-                    >
-                        <>
-                            <HoyreChevron />
-                            {name}
-                        </>
-                    </Lenke>
-                </li>
-            );
+interface MinsideLenkerProps {
+    minsideMeny: MenySeksjon;
+    tabindex: boolean;
+}
 
-        default:
-            return (
-                <li className={cls.element('minside-list-item')}>
-                    <Lenke
-                        tabIndex={tabindex ? 0 : -1}
-                        className={cls.element('minside-lenke')}
-                        href={href}
-                    >
-                        {name}
-                    </Lenke>
-                </li>
-            );
-    }
-};
+const MinsideLenker = ({ minsideMeny, tabindex }: MinsideLenkerProps) => (
+    <>
+        <Normaltekst>
+            <Tekst id="pa-min-side-finner-du" />
+        </Normaltekst>
+        <ul>
+            {minsideMeny.children[0].children &&
+                minsideMeny.children[0].children.map(
+                    (lenke: MenySeksjon, index: number) => (
+                        <MinsideListItem
+                            lenketekst={lenke.displayName}
+                            href={lenke.path}
+                            tabindex={tabindex}
+                            key={index}
+                        />
+                    )
+                )}
+        </ul>
+        <MinSideLenke tabindex={tabindex} />
+    </>
+);
+
+interface MinsideListItemProps {
+    lenketekst: string;
+    href: string;
+    tabindex: boolean;
+}
+
+const MinsideListItem = ({
+    lenketekst,
+    href,
+    tabindex,
+}: MinsideListItemProps) => (
+    <li className="minside-list-item">
+        <Lenke tabIndex={tabindex ? 0 : -1} href={href}>
+            {lenketekst}
+        </Lenke>
+    </li>
+);
+
+interface MinSideLenkeProps {
+    tabindex: boolean;
+}
+
+const MinSideLenke = ({ tabindex }: MinSideLenkeProps) => (
+    <div className="minside-dittnav-lenke">
+        <Lenke tabIndex={tabindex ? 0 : -1} href={dittNavURL}>
+            <>
+                <HoyreChevron />
+                <Tekst id="ga-til-min-side" />
+            </>
+        </Lenke>
+    </div>
+);
 
 export default DropdownHoyreSeksjon;

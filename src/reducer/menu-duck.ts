@@ -18,7 +18,7 @@ export interface MenySeksjon {
     path: string;
     id?: string;
     hasChildren: boolean;
-    children: {}[];
+    children: Meny[];
 }
 
 export interface Meny {
@@ -40,7 +40,7 @@ export const DataInitState: Meny = {
             path: '',
             id: '',
             hasChildren: false,
-            children: [{}],
+            children: [],
         },
     ],
 };

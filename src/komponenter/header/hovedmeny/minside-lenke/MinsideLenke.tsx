@@ -11,7 +11,7 @@ import {
 } from '../../../../utils/meny-storage-utils';
 
 const { baseUrl, minsideArbeidsgiverUrl } = Environments();
-const dittNavURL = `${baseUrl}/person/dittnav/`;
+export const dittNavURL = `${baseUrl}/person/dittnav/`;
 const minSideArbeidsgiverURL = `${minsideArbeidsgiverUrl}/min-side-arbeidsgiver/`;
 
 interface StateProps {
