@@ -18,7 +18,7 @@ export interface MenyLenke {
     path: string;
     id?: string;
     hasChildren: boolean;
-    children?: MenyLenke[];
+    children: {}[];
 }
 
 export interface MenySeksjon {
@@ -26,7 +26,7 @@ export interface MenySeksjon {
     path: string;
     id?: string;
     hasChildren: boolean;
-    children: MenyLenke[];
+    children: Meny[];
 }
 
 export interface Meny {
