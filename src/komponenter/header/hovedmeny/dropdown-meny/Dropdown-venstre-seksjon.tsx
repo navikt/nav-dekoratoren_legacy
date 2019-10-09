@@ -2,7 +2,7 @@ import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import MediaQuery from 'react-responsive';
 import BEMHelper from '../../../../utils/bem';
-import { MenyLenke, MenySeksjon } from '../../../../reducer/menu-duck';
+import { MenySeksjon } from '../../../../reducer/menu-duck';
 import { DropdownVenstreLenke } from './Dropdown-venstre-lenke';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
@@ -59,7 +59,7 @@ interface MenylenkerProps {
 
 const Menylenker = ({ menygruppe, tabindex }: MenylenkerProps) => (
     <ul>
-        {menygruppe.children.map((lenke: MenyLenke, index: number) => {
+        {menygruppe.children.map((lenke: MenySeksjon, index: number) => {
             return (
                 <DropdownVenstreLenke
                     key={index}

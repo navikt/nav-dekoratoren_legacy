@@ -13,14 +13,6 @@ export interface MenyPunkter extends DataElement {
     data: Meny[];
 }
 
-export interface MenyLenke {
-    displayName: string;
-    path: string;
-    id?: string;
-    hasChildren: boolean;
-    children: {}[];
-}
-
 export interface MenySeksjon {
     displayName: string;
     path: string;
@@ -48,15 +40,7 @@ export const DataInitState: Meny = {
             path: '',
             id: '',
             hasChildren: false,
-            children: [
-                {
-                    displayName: '',
-                    path: '',
-                    id: '',
-                    hasChildren: false,
-                    children: [],
-                },
-            ],
+            children: [],
         },
     ],
 };

@@ -1,12 +1,12 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import Environments from '../../../../utils/environments';
-import { MenyLenke } from '../../../../reducer/menu-duck';
+import { MenySeksjon } from '../../../../reducer/menu-duck';
 
 const { baseUrlEnonic } = Environments();
 
 interface Props {
-    lenke: MenyLenke;
+    lenke: MenySeksjon;
     tabindex: boolean;
 }
 
