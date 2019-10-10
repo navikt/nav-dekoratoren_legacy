@@ -46,7 +46,10 @@ const browserConfig = {
             {
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
-                options: { reportFiles: ['src/**/*.{ts,tsx}', '!src/skip.ts'] },
+                options: {
+                    reportFiles: ['src/**/*.{ts,tsx}', '!src/skip.ts'],
+                    configFile: path.join(__dirname, './config/tsconfig.json'),
+                },
             },
         ],
     },
