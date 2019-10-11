@@ -5,7 +5,7 @@ const path = require('path');
 const buildPath = path.resolve(__dirname, '../../build/');
 const requestNode = require('request');
 const NodeCache = require('node-cache');
-const backupData = require('./menu/no.menu.json');
+const backupData = require('./menu/menu.json');
 const sokeresultatMockData = require('./sokeresultat-mockdata.json');
 
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
@@ -24,7 +24,7 @@ const fetchmenyUri = isProduction ? env : 'http://localhost:8088';
 
 const envSok = process.env.SOKERESULTAT
     ? process.env.SOKERESULTAT
-    : 'https://www-x1.nav.no/navno/_/service/no.nav.navno/menu';
+    : 'https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2';
 
 const fetchSearchResultUri = isProduction ? envSok : 'http://localhost:8088';
 
@@ -44,9 +44,9 @@ app.use('/person/nav-dekoratoren/', express.static(buildPath));
 app.get(
     [
         '/person/nav-dekoratoren/',
-        '/person/nav-dekoratoren/person/',
-        '/person/nav-dekoratoren/bedrift/',
-        '/person/nav-dekoratoren/samarbeidspartner/',
+        '/person/nav-dekoratoren/person/*',
+        '/person/nav-dekoratoren/bedrift/*',
+        '/person/nav-dekoratoren/samarbeidspartner/*',
     ],
     (req, res) => {
         res.sendFile(path.resolve(__dirname, '../../build', 'index.html'));
@@ -60,8 +60,7 @@ const fetchmenuOptions = res => {
             uri: `${fetchmenyUri}`,
         },
         (error, response, body) => {
-            // satt til false, slik at vi leser at backupData til vi har fått fikset riktig endepunkt i enonic-xp
-            if (false && !error && response.statusCode === 200) {
+            if (!error && response.statusCode === 200) {
                 mainCache.set(mainCacheKey, body, 100);
                 backupCache.set(backupCacheKey, body, 0);
                 res.send(body);

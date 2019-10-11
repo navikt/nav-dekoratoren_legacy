@@ -1,9 +1,11 @@
 @import '~nav-frontend-core/less/_variabler';
 @import '../../../styling-variabler.less';
 
-.hovedmeny .navbar-brand {
+.footer__logo .navbar-brand {
     padding-right: 0.25rem;
     min-width: 97.2px;
+    min-height: 97.2px;
+    margin: 0 auto;
 
     &:focus,
     &:active {
@@ -11,8 +13,6 @@
         background-color: initial;
         border: @navDypBla 3px solid;
         border-radius: 4px;
-    }
-    .hovedmeny__logo {
     }
 
     svg {
@@ -22,10 +22,10 @@
 }
 
 @media (min-width: @desktopLimitWidth) {
-    .hovedmeny .navbar-brand {
+    .footer__logo .navbar-brand {
         svg {
-            width: 88px;
-            height: 88px;
+            width: 65px;
+            height: 65px;
         }
     }
 }

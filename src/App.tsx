@@ -1,6 +1,7 @@
-import * as React from 'react';
-import { Provider as ReduxProvider } from 'react-redux';
+import React from 'react';
+import LanguageProvider from './provider/Language-provider';
 import getStore from './redux/store';
+import { Provider as ReduxProvider } from 'react-redux';
 import Header from './komponenter/header/Header';
 import Footer from './komponenter/footer/Footer';
 import setupMock from './mocks/setup-mock';
@@ -24,8 +25,12 @@ if (
 function App() {
     return (
         <ReduxProvider store={store}>
-            <Header />
-            <Footer />
+            <LanguageProvider>
+                <>
+                    <Header />
+                    <Footer />
+                </>
+            </LanguageProvider>
         </ReduxProvider>
     );
 }

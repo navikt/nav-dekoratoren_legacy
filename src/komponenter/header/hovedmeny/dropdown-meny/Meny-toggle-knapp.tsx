@@ -11,10 +11,12 @@ import {
     setDropdownMenuView,
 } from '../../../../utils/meny-storage-utils';
 import {
-    Data,
+    Meny,
     DataInitState,
     MenyPunkter,
 } from '../../../../reducer/menu-duck';
+import Tekst from '../../../../tekster/finn-tekst';
+import { Language } from '../../../../reducer/language-duck';
 import HamburgerIkon from '../../../ikoner/meny/HamburgerIkon';
 import DropdownHoyreSeksjon from './Dropdown-hoyre-seksjon';
 import DropdownVenstreSeksjon from './Dropdown-venstre-seksjon';
@@ -27,11 +29,12 @@ interface OwnProps {
 
 interface StateProps {
     meny: MenyPunkter;
+    language: Language;
 }
 
 interface State {
     clicked: boolean;
-    minside: Data;
+    minside: Meny;
 }
 
 type MenyToggleKnappProps = OwnProps & StateProps;
@@ -57,7 +60,7 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
     };
 
     render() {
-        const { meny, classname } = this.props;
+        const { meny, classname, language } = this.props;
         const cls = BEMHelper(classname);
         const toppmenyvalg = verifyWindowObj()
             ? getSessionStorage(NAVHEADER)
@@ -75,7 +78,9 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                 >
                     <div className="button-content">
                         <HamburgerIkon ikonClass="hamburger-ikon" />
-                        <Undertittel>Meny</Undertittel>
+                        <Undertittel>
+                            <Tekst id="meny-knapp" />
+                        </Undertittel>
                     </div>
                 </button>
 
@@ -92,13 +97,17 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
                         >
                             <DropdownVenstreSeksjon
                                 classname={this.props.classname}
-                                menyLenker={setDropdownMenuView(meny.data)}
+                                menyLenker={setDropdownMenuView(
+                                    meny.data,
+                                    language
+                                )}
                                 tabindex={this.state.clicked}
                             />
-                            {toppmenyvalg === MenuValue.PRIVATPERSON ? (
+                            {toppmenyvalg === MenuValue.PRIVATPERSON &&
+                            language === Language.NORSK ? (
                                 <DropdownHoyreSeksjon
-                                    minsideMenyView={MenyToggleKnapp.minside(
-                                        meny.data,
+                                    minsideMeny={MenyToggleKnapp.minside(
+                                        meny.data[0].children,
                                         3
                                     )}
                                     classname={classname}
@@ -115,6 +124,7 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     meny: state.menypunkt,
+    language: state.language.language,
 });
 
 export default connect(mapStateToProps)(MenyToggleKnapp);

@@ -5,6 +5,8 @@ import KnappBase from 'nav-frontend-knapper';
 import Environments, { verifyWindowObj } from '../../../../utils/environments';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
+import Tekst from '../../../../tekster/finn-tekst';
+
 import './Logg-inn-knapp.less';
 
 const { baseUrl, logoutUrl, loginUrl } = Environments();
@@ -70,7 +72,7 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
 
     render() {
         const { erInnlogget } = this.props;
-        const knappetekst = erInnlogget ? 'Logg ut' : 'Logg inn';
+        const knappetekst = erInnlogget ? 'logg-ut-knapp' : 'logg-inn-knapp';
 
         return (
             <div className="login-container">
@@ -79,7 +81,7 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
                     type="standard"
                     onClick={this.handleButtonClick}
                 >
-                    {knappetekst}
+                    <Tekst id={knappetekst} />
                 </KnappBase>
             </div>
         );

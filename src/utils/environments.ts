@@ -17,6 +17,7 @@ const Environments = () => {
         return {
             miljo: 'LOCAL',
             baseUrl: 'http://localhost:3000',
+            baseUrlEnonic: 'https://www-x1.nav.no',
             loginUrl: '#',
             logoutUrl: '#',
             menypunkter:
@@ -30,6 +31,7 @@ const Environments = () => {
         return {
             miljo: 'DEV',
             baseUrl: 'https://www-q0.nav.no',
+            baseUrlEnonic: 'https://www-x1.nav.no',
             loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
             menypunkter: !isLocal
@@ -44,6 +46,7 @@ const Environments = () => {
         return {
             miljo: 'DEV',
             baseUrl: 'https://www-q1.nav.no',
+            baseUrlEnonic: 'https://www-x1.nav.no',
             loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
             menypunkter: !isLocal
@@ -58,6 +61,7 @@ const Environments = () => {
     return {
         miljo: 'PROD',
         baseUrl: 'https://www.nav.no',
+        baseUrlEnonic: 'https://www.nav.no',
         loginUrl: 'https://loginservice.nav.no',
         logoutUrl: 'https://loginservice.nav.no/slo',
         menypunkter: !isLocal

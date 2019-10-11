@@ -53,54 +53,55 @@
         .hovedmeny__hovedSeksjon {
             margin-bottom: 0.2rem;
 
-            a {
-                text-decoration: none;
-                color: black;
-                cursor: pointer;
-            }
-
-            a:hover {
-                text-decoration: underline;
-            }
-
-            li {
-                list-style-type: initial;
-            }
-
             .hovedmeny__seksjon {
                 padding-bottom: 0.5rem;
+
+                li {
+                    list-style-type: initial;
+                    margin-bottom: 0.3rem;
+
+                    .lenke {
+                        text-decoration: none;
+                        color: black;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                        &:focus {
+                            color: white;
+                        }
+                    }
+                }
             }
         }
 
         .hovedmeny__minSideSeksjon {
-            a {
+            .lenke {
                 color: black;
+                text-decoration: none;
 
+                &:focus {
+                    color: white;
+                }
                 &:active {
-                    color: black;
                     font-weight: bold;
+                }
+                &:hover {
+                    text-decoration: underline;
                 }
             }
 
-            a:hover {
-                text-decoration: underline;
-            }
-
-            p {
-                max-width: 12rem;
-            }
-
-            .hovedmeny__minside-list-item {
+            .minside-list-item {
                 padding: 0.125rem 0 0.125rem 0;
+                list-style: initial;
             }
 
-            .hovedmeny__til-minside-lenke {
-                list-style-type: none;
-                margin-left: -0.375rem;
-                padding-top: 1.25rem;
+            .minside-dittnav-lenke {
+                margin-top: 1rem;
 
-                .hovedmeny__minside-lenke {
-                    text-decoration: none;
+                .lenke {
+                    list-style-type: none;
+                    margin-left: -1.175rem;
                 }
             }
         }
@@ -109,6 +110,10 @@
 
 @media (min-width: @desktopLimitWidth) {
     .hovedmeny .hovedmeny__dropdown-menu {
+        ul {
+            margin: 0;
+        }
+
         .hovedmeny__menyvalg {
             flex-direction: row;
             max-width: @desktopLimitWidth;
@@ -127,24 +132,15 @@
                 margin-bottom: 0.2rem;
 
                 .hovedmeny__seksjon {
-                    padding-left: 2rem;
-                    padding-top: 0.75rem;
-                    padding-bottom: 0.5rem;
+                    padding: 0.75rem 0 0.5rem 2rem;
                 }
             }
 
             .hovedmeny__minSideSeksjon {
                 flex-grow: 1;
-                display: -ms-grid;
-                display: grid;
-                -ms-grid-columns: auto;
-                grid-template-columns: auto;
-                margin-left: 0.5rem;
-                margin-bottom: 0.2rem;
-                padding-top: 0.75rem;
-                padding-bottom: 0.5rem;
+                margin: 0 0 0.2rem 0.5rem;
+                padding: 0.75rem 0 0.5rem 1.5rem;
                 min-width: 8rem;
-                padding-left: 1.5rem;
             }
         }
     }

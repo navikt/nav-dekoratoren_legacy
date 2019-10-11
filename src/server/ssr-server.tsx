@@ -1,30 +1,35 @@
 /* tslint:disable:typedef no-shadowed-variable */
 import NodeCache from 'node-cache';
-import path from 'path';
 import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import App from './../App';
-
-import backupData from './menu/no.menu.json';
+import backupData from './menu/menu.json';
 import requestNode from 'request';
-const buildPath = path.resolve(__dirname, '../../build');
+const sokeresultatMockData = require('./sokeresultat-mockdata.json');
+
 const app = express();
 const PORT = 8088;
 
+const envSok = process.env.SOKERESULTAT
+    ? process.env.SOKERESULTAT
+    : 'https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2';
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+const fetchSearchResultUri = isProduction ? envSok : 'http://localhost:8088';
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
-
-const isProduction = process.env.NODE_ENV === 'production';
-
 const env = process.env.MENYLENKER
     ? process.env.MENYLENKER
     : 'https://www-x1.nav.no/navno/_/service/no.nav.navno/menu';
 
-const fetchmenyUri = isProduction ? env : 'http://localhost:8088';
+const fetchmenyUri = isProduction
+    ? env
+    : 'http://localhost:8080/navno/_/service/no.nav.navno/menu';
 
 app.disable('x-powered-by');
 app.use(function(req, res, next) {
@@ -38,8 +43,6 @@ app.use(function(req, res, next) {
 });
 
 const application = ReactDOMServer.renderToString(<App />);
-
-console.log('STATIC ROUTE -> ', `${process.cwd()}/buildfolder`);
 
 app.use(express.static(`${process.cwd()}/buildfolder`));
 
@@ -59,7 +62,7 @@ app.get(
                 <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"/>
                 <meta name="theme-color" content="#000000"/>
                 <title>NAV Dekoratør</title>               
-                <link href="/./css/client.css" rel="stylesheet" />
+                <link href="/css/client.css" rel="stylesheet" />
               </head>
               <body>
                  <main id="decorator-content" role="main" tabindex="-1">${application}</main>
@@ -77,8 +80,7 @@ const fetchmenuOptions = (res: any) => {
             uri: `${fetchmenyUri}`,
         },
         (error, response, body) => {
-            // satt til false, slik at vi leser at backupData til vi har fått fikset riktig endepunkt i enonic-xp
-            if (false && !error && response.statusCode === 200) {
+            if (!error && response.statusCode === 200) {
                 mainCache.set(mainCacheKey, body, 100);
                 backupCache.set(backupCacheKey, body, 0);
                 res.send(body);
@@ -124,9 +126,36 @@ app.get('/person/nav-dekoratoren/api/get/menyvalg', (req, res) => {
     });
 });
 
+const fetchSearchResults = (req: any, res: any) => {
+    const uri = `${fetchSearchResultUri}?ord=${req.query.ord}`;
+    if (isProduction) {
+        requestNode(
+            {
+                method: 'GET',
+                uri,
+            },
+            (error, response, body) => {
+                if (!error && response.statusCode === 200) {
+                    res.send(body);
+                } else {
+                    res.send(sokeresultatMockData);
+                }
+            }
+        );
+    } else {
+        res.send(sokeresultatMockData);
+    }
+};
+
+app.get('/person/nav-dekoratoren/api/get/sokeresultat', (req, res) => {
+    console.log('req:', req);
+    fetchSearchResults(req, res);
+});
+
 app.get('/person/nav-dekoratoren/isAlive', (req, res) => res.sendStatus(200));
 app.get('/person/nav-dekoratoren/isReady', (req, res) => res.sendStatus(200));
 app.get('/person/nav-dekoratoren/', (req, res) => res.sendStatus(200));
+app.get('*', (req, res) => res.sendStatus(404));
 
 const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)

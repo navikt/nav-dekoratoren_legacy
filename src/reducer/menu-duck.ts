@@ -10,23 +10,39 @@ import { fetchThenDispatch } from '../api/api-utils';
 import { hentMenyPunkter, DataElement, Status } from '../api/api';
 
 export interface MenyPunkter extends DataElement {
-    data: Data[];
+    data: Meny[];
 }
 
-export interface Data {
-    children: {}[];
+export interface MenySeksjon {
     displayName: string;
-    hasChildren: boolean;
     path: string;
     id?: string;
+    hasChildren: boolean;
+    children: Meny[];
 }
 
-export const DataInitState = {
-    children: [{}],
+export interface Meny {
+    displayName: string;
+    path: string;
+    id?: string;
+    hasChildren: boolean;
+    children: MenySeksjon[];
+}
+
+export const DataInitState: Meny = {
     displayName: '',
-    hasChildren: false,
     path: '',
     id: '',
+    hasChildren: false,
+    children: [
+        {
+            displayName: '',
+            path: '',
+            id: '',
+            hasChildren: false,
+            children: [],
+        },
+    ],
 };
 
 const initalState: MenyPunkter = {
@@ -56,14 +72,14 @@ export default function reducer(
 }
 
 export function fetchMenypunkter(): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Data[]>(() => hentMenyPunkter(), {
+    return fetchThenDispatch<Meny[]>(() => hentMenyPunkter(), {
         ok: menypunkterSuksess,
         feilet: menypunkterFeilet,
         pending: menypunkterPending,
     });
 }
 
-function menypunkterSuksess(data: Data[]): HentMenyLenkerSUCCESS {
+function menypunkterSuksess(data: Meny[]): HentMenyLenkerSUCCESS {
     return {
         type: ActionType.HENT_MENY_OK,
         data: data,

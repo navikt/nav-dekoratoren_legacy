@@ -13,6 +13,7 @@
         padding: 0 1rem;
 
         .hovedmeny__meny-elementer {
+            min-height: 98px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -34,9 +35,13 @@
                 order: 4;
                 width: 40%;
             }
-            .meny-button {
+            .meny-button,
+            .menybutton-alternativ-samisk {
                 order: 5;
                 width: 30%;
+            }
+            .menybutton-alternativ-samisk {
+                color: @navBla;
             }
             .sok {
                 order: 6;
@@ -59,28 +64,33 @@
             .hovedmeny__meny-elementer {
                 justify-content: space-between;
 
-                .navbar-brand,
-                .meny-button {
+                .navbar-brand {
                     order: 1;
+                    width: auto;
+                }
+
+                .meny-button,
+                .menybutton-alternativ-samisk {
+                    order: 2;
                     width: auto;
                 }
 
                 .sok,
                 .login-container {
-                    order: 2;
+                    order: 3;
                     width: auto;
                 }
                 .varselbjelle {
-                    order: 2;
+                    order: 3;
                     width: 31px;
                 }
                 .minside-lenke {
-                    order: 2;
+                    order: 3;
                     width: 102px;
                 }
 
                 .hovedmeny__dropdown-menu {
-                    order: 3;
+                    order: 4;
                     width: 100%;
                 }
             }

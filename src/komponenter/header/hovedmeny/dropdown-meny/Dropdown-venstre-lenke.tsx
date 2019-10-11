@@ -1,29 +1,31 @@
 import React from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
+import Lenke from 'nav-frontend-lenker';
+import Environments from '../../../../utils/environments';
+import { MenySeksjon } from '../../../../reducer/menu-duck';
+
+const { baseUrlEnonic } = Environments();
 
 interface Props {
-    lenke: any;
-    index: number;
+    lenke: MenySeksjon;
     tabindex: boolean;
 }
 
+const genererUrl = (lenke: string): string => {
+    if (lenke.startsWith('/')) {
+        return baseUrlEnonic + lenke;
+    }
+    return lenke;
+};
+
 export const DropdownVenstreLenke = (props: Props) => {
-    const { lenke, index, tabindex } = props;
+    const { lenke, tabindex } = props;
 
-    const goto = (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
-        e.preventDefault();
-        window.location.href = url;
-    };
-
+    const href = genererUrl(lenke.path);
     return (
-        <li key={index}>
-            <a
-                tabIndex={tabindex ? 0 : -1}
-                href={lenke.path}
-                onClick={event => goto(event, lenke.path)}
-            >
-                <Normaltekst>{lenke.displayName}</Normaltekst>
-            </a>
+        <li>
+            <Lenke tabIndex={tabindex ? 0 : -1} href={href}>
+                {lenke.displayName}
+            </Lenke>
         </li>
     );
 };

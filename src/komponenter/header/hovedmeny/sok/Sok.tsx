@@ -1,22 +1,31 @@
-import React, { createRef } from 'react';
+import React from 'react';
+import { AppState } from '../../../../reducer/reducer';
+import { connect } from 'react-redux';
+import { Input } from 'nav-frontend-skjema';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import Knapp from 'nav-frontend-knapper';
 import throttle from 'lodash.throttle';
 import Downshift from 'downshift';
-import Knapp from 'nav-frontend-knapper';
-import { Input } from 'nav-frontend-skjema';
-import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import cls from 'classnames';
 import { API } from '../../../../api/api';
+import { Language } from '../../../../reducer/language-duck';
+import Tekst, { finnTekst } from '../../../../tekster/finn-tekst';
 import {
-    SokeresultatData,
-    InputState,
     defaultData,
+    InputState,
+    SokeresultatData,
     visAlleTreff,
 } from './sok-utils';
 import './Sok.less';
 
-class Sok extends React.Component<{}, InputState> {
+interface StateProps {
+    language: Language;
+}
+
+class Sok extends React.Component<StateProps, InputState> {
     handleChangeThrottled: ReturnType<typeof throttle>;
 
-    constructor(props: {}) {
+    constructor(props: StateProps) {
         super(props);
         this.state = {
             inputString: '',
@@ -62,8 +71,12 @@ class Sok extends React.Component<{}, InputState> {
 
     render() {
         const { inputString, items } = this.state;
+        const { language } = this.props;
         const URL = `${'https://www-x1.nav.no/sok'}?ord=${inputString}`;
         const lenkeAlleTreff = visAlleTreff(inputString);
+        const klassenavn = cls('sok-input', {
+            engelsk: language === Language.ENGELSK,
+        });
 
         return (
             <Downshift
@@ -94,10 +107,19 @@ class Sok extends React.Component<{}, InputState> {
                             <div className="sok-input-resultat">
                                 <Input
                                     {...getInputProps()}
-                                    className="sok-input"
-                                    placeholder="Hva leter du etter?"
-                                    label="Søk"
-                                    aria-label="Søk"
+                                    className={klassenavn}
+                                    placeholder={finnTekst(
+                                        'sok-input-placeholder',
+                                        language
+                                    )}
+                                    label={finnTekst(
+                                        'sok-input-label',
+                                        language
+                                    )}
+                                    aria-label={finnTekst(
+                                        'sok-input-label',
+                                        language
+                                    )}
                                 />
 
                                 <ul
@@ -130,7 +152,9 @@ class Sok extends React.Component<{}, InputState> {
                                                   >
                                                       <div className="overskrift">
                                                           <Undertittel>
-                                                              {item.displayName}
+                                                              {item.displayName
+                                                                  ? item.displayName
+                                                                  : 'ingen treff å vise.'}
                                                           </Undertittel>
                                                       </div>
                                                       <div className="highlight">
@@ -151,7 +175,7 @@ class Sok extends React.Component<{}, InputState> {
 
                             <div className="sok-knapp btn">
                                 <Knapp type="standard" htmlType="submit">
-                                    SØK
+                                    <Tekst id="sok-knapp" />
                                 </Knapp>
                             </div>
                         </div>
@@ -162,4 +186,8 @@ class Sok extends React.Component<{}, InputState> {
     }
 }
 
-export default Sok;
+const mapStateToProps = (state: AppState): StateProps => ({
+    language: state.language.language,
+});
+
+export default connect(mapStateToProps)(Sok);
