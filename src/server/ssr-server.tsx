@@ -49,9 +49,9 @@ app.use(express.static(`${process.cwd()}/buildfolder`));
 app.get(
     [
         '/person/nav-dekoratoren/',
-        '/person/nav-dekoratoren/person/',
-        '/person/nav-dekoratoren/bedrift/',
-        '/person/nav-dekoratoren/samarbeidspartner/',
+        '/person/nav-dekoratoren/person/*',
+        '/person/nav-dekoratoren/bedrift/*',
+        '/person/nav-dekoratoren/samarbeidspartner/*',
     ],
     (req, res) => {
         res.send(`
