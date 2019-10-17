@@ -7,6 +7,9 @@ import App from './../App';
 import backupData from './menu/menu.json';
 import requestNode from 'request';
 const sokeresultatMockData = require('./sokeresultat-mockdata.json');
+import { Provider as ReduxProvider } from 'react-redux';
+import Footer from '../komponenter/footer/Footer';
+import getStore from './../redux/store';
 
 const app = express();
 const PORT = 8088;
@@ -42,7 +45,18 @@ app.use(function(req, res, next) {
     next();
 });
 
-const application = ReactDOMServer.renderToString(<App />);
+const store = getStore();
+
+const header = ReactDOMServer.renderToString(
+    <ReduxProvider store={store}>
+        <App />
+    </ReduxProvider>
+);
+const footer = ReactDOMServer.renderToString(
+    <ReduxProvider store={store}>
+        <Footer />
+    </ReduxProvider>
+);
 
 app.use(express.static(`${process.cwd()}/buildfolder`));
 
@@ -61,12 +75,19 @@ app.get(
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"/>
                 <meta name="theme-color" content="#000000"/>
-                <title>NAV Dekoratør</title>               
-                <link href="/css/client.css" rel="stylesheet" />
+                <link rel="icon" href="/assets/favicon.ico" />
+                <title>NAV Dekoratør</title>           
+                <div id="styles">    
+                    <link href="http://localhost:8088/css/client.css" rel="stylesheet" />
+                </div>
               </head>
               <body>
-                 <main id="decorator-content" role="main" tabindex="-1">${application}</main>
-                 <script type="text/javascript" src="/client.js"></script>
+                 <main id="decorator-header" role="main" tabindex="-1">${header}</main>
+                 <main id="decorator-footer" role="main" tabindex="-1">${footer}</main>
+                 <div id="scripts">
+                    <script type="text/javascript" src="http://localhost:8088/client.js"></script>
+                 </div>
+                 <div id="megamenu-resources"/>
             </body>
             </html>
         `);
@@ -155,7 +176,6 @@ app.get('/person/nav-dekoratoren/api/get/sokeresultat', (req, res) => {
 app.get('/person/nav-dekoratoren/isAlive', (req, res) => res.sendStatus(200));
 app.get('/person/nav-dekoratoren/isReady', (req, res) => res.sendStatus(200));
 app.get('/person/nav-dekoratoren/', (req, res) => res.sendStatus(200));
-app.get('*', (req, res) => res.sendStatus(404));
 
 const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)

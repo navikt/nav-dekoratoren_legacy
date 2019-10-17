@@ -25,9 +25,9 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
     }, []);
 
     return (
-        <>
+        <div id="header-withmenu">
             <Skiplinks />
-            <div id="header-withmenu">
+            <div>
                 <div className="hodefot">
                     <header className="siteheader">
                         <div className="innhold-container">
@@ -37,7 +37,7 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
                     </header>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

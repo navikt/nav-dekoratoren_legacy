@@ -5,6 +5,7 @@ import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
 import FooterLenkeMeny from './FooterLenkeMeny';
 import './Footer.less';
+import LanguageProvider from '../../provider/Language-provider';
 
 const cls = BEMHelper('footer');
 
@@ -14,14 +15,18 @@ interface StateProps {
 
 const Footer = ({ language }: StateProps) => {
     return (
-        <div id="footer-withmenu" className={cls.className}>
-            <div className="hodefot">
-                <FooterLenkeMeny
-                    className={cls.className}
-                    language={language}
-                />
+        <LanguageProvider>
+            <div id="footer-withmenu">
+                <div className={cls.className}>
+                    <div className="hodefot">
+                        <FooterLenkeMeny
+                            className={cls.className}
+                            language={language}
+                        />
+                    </div>
+                </div>
             </div>
-        </div>
+        </LanguageProvider>
     );
 };
 

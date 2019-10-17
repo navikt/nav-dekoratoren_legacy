@@ -1,6 +1,8 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpack = require('webpack');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const browserConfig = {
     mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'development',
@@ -64,6 +66,14 @@ const browserConfig = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             'process.env.BROWSER': JSON.stringify(false),
+        }),
+
+        new FaviconsWebpackPlugin(
+            path.join(__dirname, './src/komponenter/ikoner/favicon/favicon.ico')
+        ),
+
+        new SpriteLoaderPlugin({
+            plainSprite: true,
         }),
     ],
 };

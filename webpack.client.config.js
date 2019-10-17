@@ -2,6 +2,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const browserConfig = {
     mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'development',
@@ -62,6 +63,10 @@ const browserConfig = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             'process.env.BROWSER': JSON.stringify(true),
+        }),
+
+        new SpriteLoaderPlugin({
+            plainSprite: true,
         }),
     ],
 };
