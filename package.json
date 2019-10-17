@@ -8,6 +8,8 @@
         "start": "cross-env DEVELOPMENT=true npm-run-all -p -r start-craco server",
         "build": "craco build",
         "test": "craco test",
+        "start-ssr": "node buildfolder/server.j",
+        "build-ssr": "npm run build-client && npm run build-server",
         "build-snap": "craco build && react-snapshot",
         "build-client": "cross-env NODE_ENV=development webpack --display-error-details --config webpack.client.config.js",
         "build-server": "cross-env NODE_ENV=development webpack --display-error-details --config webpack.server.config.js",
