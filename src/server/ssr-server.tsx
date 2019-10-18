@@ -3,13 +3,13 @@ import NodeCache from 'node-cache';
 import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import App from './../App';
 import backupData from './menu/menu.json';
 import requestNode from 'request';
 const sokeresultatMockData = require('./sokeresultat-mockdata.json');
 import { Provider as ReduxProvider } from 'react-redux';
 import Footer from '../komponenter/footer/Footer';
 import getStore from './../redux/store';
+import Head from '../Head';
 
 const app = express();
 const PORT = 8088;
@@ -49,7 +49,7 @@ const store = getStore();
 
 const header = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
-        <App />
+        <Head />
     </ReduxProvider>
 );
 const footer = ReactDOMServer.renderToString(
@@ -59,6 +59,14 @@ const footer = ReactDOMServer.renderToString(
 );
 
 app.use(express.static(`${process.cwd()}/buildfolder`));
+
+const script = isProduction
+    ? process.env.SCRIPTURL
+    : 'http://localhost:8088/client.js';
+
+const css = isProduction
+    ? process.env.CSSURL
+    : 'http://localhost:8088/css/client.css';
 
 app.get(
     [
@@ -78,16 +86,20 @@ app.get(
                 <link rel="icon" href="/assets/favicon.ico" />
                 <title>NAV Dekoratør</title>           
                 <div id="styles">    
-                    <link href="http://localhost:8088/css/client.css" rel="stylesheet" />
+                    <link href=${css} rel="stylesheet" />
                 </div>
               </head>
               <body>
-                 <main id="decorator-header" role="main" tabindex="-1">${header}</main>
-                 <main id="decorator-footer" role="main" tabindex="-1">${footer}</main>
+                <div id="header-withmenu">
+                    <section id="decorator-header" role="main">${header}</main>
+                </div>
+                <div id="footer-withmenu">
+                    <section id="decorator-footer" role="main">${footer}</main>
+                </div>
                  <div id="scripts">
-                    <script type="text/javascript" src="http://localhost:8088/client.js"></script>
+                    <script type="text/javascript" src=${script}></script>
                  </div>
-                 <div id="megamenu-resources"/>
+                 <div id="megamenu-resources"></div>
             </body>
             </html>
         `);
@@ -169,7 +181,6 @@ const fetchSearchResults = (req: any, res: any) => {
 };
 
 app.get('/person/nav-dekoratoren/api/get/sokeresultat', (req, res) => {
-    console.log('req:', req);
     fetchSearchResults(req, res);
 });
 

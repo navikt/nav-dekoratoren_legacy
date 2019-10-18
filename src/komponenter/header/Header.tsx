@@ -25,7 +25,7 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
     }, []);
 
     return (
-        <div id="header-withmenu">
+        <div>
             <Skiplinks />
             <div>
                 <div className="hodefot">

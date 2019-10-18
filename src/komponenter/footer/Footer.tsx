@@ -16,7 +16,7 @@ interface StateProps {
 const Footer = ({ language }: StateProps) => {
     return (
         <LanguageProvider>
-            <div id="footer-withmenu">
+            <div>
                 <div className={cls.className}>
                     <div className="hodefot">
                         <FooterLenkeMeny

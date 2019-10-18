@@ -7,6 +7,6 @@ import App from './App';
 // import * as serviceWorker from './serviceWorker';
 import './index.less';
 
-ReactDOM.render(<App />, document.getElementById('decorator-content'));
+ReactDOM.render(<App />, document.getElementById('decorator-header'));
 
 // serviceWorker.unregister();
