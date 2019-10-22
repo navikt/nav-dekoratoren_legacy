@@ -3,10 +3,16 @@ const path = require('path');
 const webpack = require('webpack');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const nodeExternals = require('webpack-node-externals');
 
 const browserConfig = {
     mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'development',
     target: 'node',
+    externals: [
+        nodeExternals({
+            whitelist: [/^nav-frontend-.*$/, /\.(?!(?:jsx?|json)$).{1,5}$/i],
+        }),
+    ],
     entry: {
         server: path.resolve(__dirname, './src/server/ssr-server.tsx'),
     },

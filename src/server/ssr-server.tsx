@@ -77,32 +77,35 @@ app.get(
     ],
     (req, res) => {
         res.send(`
-            <!DOCTYPE html>
-             <head>
-                <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-                <meta charset="utf-8"/>
-                <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"/>
-                <meta name="theme-color" content="#000000"/>
-                <link rel="icon" href="/assets/favicon.ico" />
-                <title>NAV Dekoratør</title>           
-                <div id="styles">    
-                    <link href=${css} rel="stylesheet" />
-                </div>
-              </head>
-              <body>
-                <div id="header-withmenu">
-                    <section id="decorator-header" role="main">${header}</main>
-                </div>
-                <div id="footer-withmenu">
-                    <section id="decorator-footer" role="main">${footer}</main>
-                </div>
-                 <div id="scripts">
-                    <script type="text/javascript" src=${script}></script>
-                 </div>
-                 <div id="megamenu-resources"></div>
-            </body>
-            </html>
-        `);
+<!DOCTYPE html>
+<html lang="no">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,shrink-to-fit=no"
+        />
+        <meta name="theme-color" content="#000000" />
+        <link rel="icon" href="/assets/favicon.ico" />
+        <title>NAV Dekoratør</title>
+        <div id="styles">
+            <link href=${css} rel="stylesheet" />
+        </div>
+    </head>
+    <body>
+        <div id="header-withmenu">
+            <section id="decorator-header" role="main">${header}</section>
+        </div>
+        <div id="footer-withmenu">
+            <section id="decorator-footer" role="main">${footer}</section>
+        </div>
+        <div id="scripts">
+            <script type="text/javascript" src=${script}></script>
+        </div>
+        <div id="megamenu-resources"></div>
+    </body>
+</html>`);
     }
 );
 

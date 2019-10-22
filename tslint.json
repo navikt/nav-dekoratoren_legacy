@@ -35,7 +35,7 @@
             ],
             "severity": "warning"
         },
-        "no-consecutive-blank-lines": true,
+        "no-consecutive-blank-lines": false,
         "no-construct": true,
         "no-debugger": {
             "severity": "warning"

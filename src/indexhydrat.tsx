@@ -1,3 +1,10 @@
+if (!(window as any)._babelPolyfill) {
+    require('@babel/polyfill');
+    require('react-app-polyfill/ie11');
+    require('react-app-polyfill/stable');
+
+    console.log('babel.polyfill enabled');
+}
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import * as serviceWorker from './serviceWorker';
@@ -6,9 +13,7 @@ import { verifyWindowObj } from './utils/environments';
 import Footer from './komponenter/footer/Footer';
 import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
-// import '@babel/polyfill';
-// import 'react-app-polyfill/ie11';
-// import 'react-app-polyfill/stable';
+
 import Head from './Head';
 
 const store = getStore();

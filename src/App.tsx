@@ -1,5 +1,3 @@
-console.log('babel-polyfill');
-
 import React from 'react';
 import LanguageProvider from './provider/Language-provider';
 import Header from './komponenter/header/Header';
@@ -10,10 +8,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
 
 import 'whatwg-fetch';
-
-if (!(window as any)._babelPolyfill) {
-    require('babel-polyfill');
-}
+import ReactDOM from 'react-dom';
 
 const store = getStore();
 
