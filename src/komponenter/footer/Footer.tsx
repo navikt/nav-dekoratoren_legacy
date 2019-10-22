@@ -14,14 +14,12 @@ interface StateProps {
 
 const Footer = ({ language }: StateProps) => {
     return (
-        <div>
-            <div className={cls.className}>
-                <div className="hodefot">
-                    <FooterLenkeMeny
-                        className={cls.className}
-                        language={language}
-                    />
-                </div>
+        <div className={cls.className}>
+            <div className="hodefot">
+                <FooterLenkeMeny
+                    className={cls.className}
+                    language={language}
+                />
             </div>
         </div>
     );

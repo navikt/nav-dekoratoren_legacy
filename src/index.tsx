@@ -9,8 +9,6 @@ if (verifyWindowObj()) {
         require('@babel/polyfill');
         require('react-app-polyfill/ie11');
         require('react-app-polyfill/stable');
-
-        console.log('babel.polyfill enabled');
     }
 }
 import React from 'react';
