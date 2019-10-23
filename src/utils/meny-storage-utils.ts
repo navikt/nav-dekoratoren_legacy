@@ -68,7 +68,7 @@ export const setLanguage = (lang: Language, menu: Meny[]): MenySeksjon[] => {
         case Language.ENGELSK:
             return menu[1].children;
         case Language.SAMISK:
-            return menu[2].children; //bytt til '2' når samisk er lagt til i meny
+            return menu[2].children;
         default:
             return menu[0].children;
     }
