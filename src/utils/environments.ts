@@ -34,9 +34,8 @@ const Environments = () => {
             baseUrlEnonic: 'https://www-x1.nav.no',
             loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
-            menypunkter: !isLocal
-                ? 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg'
-                : '/person/nav-dekoratoren/api/get/menyvalg',
+            menypunkter:
+                'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
             minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no',
             sokeresultat:
                 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
@@ -49,9 +48,8 @@ const Environments = () => {
             baseUrlEnonic: 'https://www-x1.nav.no',
             loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
-            menypunkter: !isLocal
-                ? 'https://www-q1.nav.no/person/nav-dekoratoren/api/get/menyvalg'
-                : '/person/nav-dekoratoren/api/get/menyvalg',
+            menypunkter:
+                'https://www-q1.nav.no/person/nav-dekoratoren/api/get/menyvalg',
             minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no',
             sokeresultat:
                 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
