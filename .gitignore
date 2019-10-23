@@ -10,6 +10,7 @@
 
 # production
 /build
+/buildfolder
 
 # testing
 /coverage

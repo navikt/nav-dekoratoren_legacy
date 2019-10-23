@@ -21,6 +21,7 @@ import HamburgerIkon from '../../../ikoner/meny/HamburgerIkon';
 import DropdownHoyreSeksjon from './Dropdown-hoyre-seksjon';
 import DropdownVenstreSeksjon from './Dropdown-venstre-seksjon';
 import './Meny-toggle-knapp.less';
+import { verifyWindowObj } from '../../../../utils/environments';
 
 interface OwnProps {
     classname: string;
@@ -52,6 +53,19 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
         this.dropDownExpand = this.dropDownExpand.bind(this);
     }
 
+    componentDidUpdate(
+        prevProps: Readonly<MenyToggleKnappProps>,
+        prevState: Readonly<State>,
+        snapshot?: any
+    ): void {
+        console.log(
+            'prev',
+            prevProps.meny.status,
+            'this.props',
+            this.props.meny.status
+        );
+    }
+
     dropDownExpand = () => {
         this.setState({
             clicked: !this.state.clicked,
@@ -61,7 +75,9 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
     render() {
         const { meny, classname, language } = this.props;
         const cls = BEMHelper(classname);
-        const toppmenyvalg = getSessionStorage(NAVHEADER);
+        const toppmenyvalg = verifyWindowObj()
+            ? getSessionStorage(NAVHEADER)
+            : MenuValue.PRIVATPERSON;
 
         return (
             <>

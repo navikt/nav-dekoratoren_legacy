@@ -14,7 +14,7 @@ interface StateProps {
 
 const Footer = ({ language }: StateProps) => {
     return (
-        <div id="footer-withmenu" className={cls.className}>
+        <div className={cls.className}>
             <div className="hodefot">
                 <FooterLenkeMeny
                     className={cls.className}

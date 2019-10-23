@@ -152,7 +152,9 @@ class Sok extends React.Component<StateProps, InputState> {
                                                   >
                                                       <div className="overskrift">
                                                           <Undertittel>
-                                                              {item.displayName}
+                                                              {item.displayName
+                                                                  ? item.displayName
+                                                                  : 'ingen treff å vise.'}
                                                           </Undertittel>
                                                       </div>
                                                       <div className="highlight">

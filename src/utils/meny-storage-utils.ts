@@ -1,5 +1,6 @@
 import { MenySeksjon, Meny } from '../reducer/menu-duck';
 import { Language, spraakValgNorsk } from '../reducer/language-duck';
+import { verifyWindowObj } from './environments';
 
 export const NAVHEADER = 'NAVHEADER';
 
@@ -7,6 +8,7 @@ export enum MenuValue {
     PRIVATPERSON = 'PRIVATPERSON',
     ARBEIDSGIVER = 'ARBEIDSGIVER',
     SAMARBEIDSPARTNER = 'SAMARBEIDSPARTNER',
+    IKKEVALGT = 'IKKEVALGT',
 }
 
 export const getSessionStorage = (key: string): string | null => {
@@ -17,8 +19,14 @@ export const setSessionStorage = (key: string, value: MenuValue) => {
     return sessionStorage.setItem(key, value);
 };
 
+const envokeWindowObj = () => {
+    return window.location.pathname.split('/')[3];
+};
+
 export const checkUriPath = (): MenuValue => {
-    const locationPath = window.location.pathname.split('/')[3];
+    const locationPath = verifyWindowObj()
+        ? envokeWindowObj()
+        : MenuValue.PRIVATPERSON;
 
     if (locationPath) {
         const menyvalg =
@@ -28,10 +36,14 @@ export const checkUriPath = (): MenuValue => {
                 ? MenuValue.SAMARBEIDSPARTNER
                 : MenuValue.PRIVATPERSON;
 
-        setSessionStorage(NAVHEADER, menyvalg);
+        if (verifyWindowObj()) {
+            setSessionStorage(NAVHEADER, menyvalg);
+        }
         return menyvalg;
     }
-    setSessionStorage(NAVHEADER, MenuValue.PRIVATPERSON);
+    if (verifyWindowObj()) {
+        setSessionStorage(NAVHEADER, MenuValue.PRIVATPERSON);
+    }
     return MenuValue.PRIVATPERSON;
 };
 
@@ -40,10 +52,13 @@ export function setDropdownMenuView(
     language: Language
 ): MenySeksjon {
     const languageSection = setLanguage(language, menypunkter);
-    const storage = getSessionStorage(NAVHEADER);
-    return spraakValgNorsk(language)
-        ? getDropdownMenuContent(storage, languageSection)
-        : languageSection[0];
+    if (verifyWindowObj()) {
+        const storage = getSessionStorage(NAVHEADER);
+        return spraakValgNorsk(language)
+            ? getDropdownMenuContent(storage, languageSection)
+            : languageSection[0];
+    }
+    return languageSection[0];
 }
 
 export const setLanguage = (lang: Language, menu: Meny[]): MenySeksjon[] => {

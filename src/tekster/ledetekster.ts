@@ -9,7 +9,7 @@ export const ledetekster: { [key: string]: string } = {
     'logg-ut-knapp-en': 'Log out',
     'logg-ut-knapp-se': 'Logg ut',
     'logo-title': 'Hjem',
-    'logo-title-en': 'Home',
+    'logo-title-en': 'Hjem',
     'logo-title-se': 'Hjem',
     'meny-knapp': 'Meny',
     'meny-knapp-en': 'Menu',

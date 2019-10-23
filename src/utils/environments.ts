@@ -1,4 +1,16 @@
-const isLocal = window.location.origin.toLowerCase().includes('localhost');
+/* tslint:disable:no-shadowed-variable */
+export const verifyWindowObj = () => {
+    return typeof window !== 'undefined';
+};
+
+const checkWindowObjIncludes = (searchString: string) => {
+    if (verifyWindowObj()) {
+        return window.location.origin.toLowerCase().includes(searchString);
+    }
+    return false;
+};
+
+const isLocal = checkWindowObjIncludes('localhost');
 
 const Environments = () => {
     if (process.env.NODE_ENV === 'development') {
@@ -22,9 +34,8 @@ const Environments = () => {
             baseUrlEnonic: 'https://www-x1.nav.no',
             loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
-            menypunkter: !isLocal
-                ? 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg'
-                : '/person/nav-dekoratoren/api/get/menyvalg',
+            menypunkter:
+                'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
             minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no',
             sokeresultat:
                 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
@@ -37,9 +48,8 @@ const Environments = () => {
             baseUrlEnonic: 'https://www-x1.nav.no',
             loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
-            menypunkter: !isLocal
-                ? 'https://www-q1.nav.no/person/nav-dekoratoren/api/get/menyvalg'
-                : '/person/nav-dekoratoren/api/get/menyvalg',
+            menypunkter:
+                'https://www-q1.nav.no/person/nav-dekoratoren/api/get/menyvalg',
             minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no',
             sokeresultat:
                 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat',

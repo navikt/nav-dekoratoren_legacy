@@ -22,6 +22,11 @@ const removeCssHashPlugin = {
                 options.filename = 'static/css/[name].css';
                 options.chunkFilename = 'static/css/[name].chunk.css';
             }
+
+            if (options.filename && options.filename.endsWith('.js')) {
+                options.filename = 'static/js/[name].js';
+                options.chunkFilename = 'static/js/[name].js';
+            }
         });
         return webpackConfig;
     },
@@ -41,11 +46,10 @@ module.exports = {
     ],
     webpack: {
         configure: {
-            output: {
-                path: BUILD_PATH,
-                filename: 'static/js/[name].js',
-                chunkFilename: 'static/js/[name].chunk.js',
+            entry: {
+                bundle: './src/index.tsx',
             },
+            devtool: 'source-map',
         },
     },
 };

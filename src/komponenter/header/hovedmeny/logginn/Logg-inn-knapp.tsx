@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../reducer/reducer';
 import KnappBase from 'nav-frontend-knapper';
-import Environments from '../../../../utils/environments';
+import Environments, { verifyWindowObj } from '../../../../utils/environments';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
 import Tekst from '../../../../tekster/finn-tekst';
@@ -10,11 +10,18 @@ import Tekst from '../../../../tekster/finn-tekst';
 import './Logg-inn-knapp.less';
 
 const { baseUrl, logoutUrl, loginUrl } = Environments();
-const path =
-    window.location.pathname.split('/')[3] !== undefined
-        ? '/person/nav-dekoratoren/' + window.location.pathname.split('/')[3]
-        : '/person';
 
+const getPath = () => {
+    if (verifyWindowObj()) {
+        return window.location.pathname.split('/')[3] !== undefined
+            ? '/person/nav-dekoratoren/' +
+                  window.location.pathname.split('/')[3]
+            : '/person';
+    }
+    return '/person';
+};
+
+const path = getPath();
 const login = `${loginUrl}/login?redirect=${baseUrl}${path}`;
 
 interface StateProps {

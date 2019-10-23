@@ -4,10 +4,10 @@ import BEMHelper from '../../../utils/bem';
 import { toppmenyLenker } from './toppmeny-lenker';
 import {
     checkUriPath,
-    MenuValue,
     getSessionStorage,
-    setSessionStorage,
+    MenuValue,
     NAVHEADER,
+    setSessionStorage,
 } from '../../../utils/meny-storage-utils';
 import './Toppmeny.less';
 
@@ -19,8 +19,14 @@ class Toppmeny extends React.Component<{}, State> {
     constructor(props: {}) {
         super(props);
         this.state = {
-            toppmeny: checkUriPath(),
+            toppmeny: MenuValue.IKKEVALGT,
         };
+    }
+
+    componentDidMount(): void {
+        this.setState({
+            toppmeny: checkUriPath(),
+        });
     }
 
     render() {

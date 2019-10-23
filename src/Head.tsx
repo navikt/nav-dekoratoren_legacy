@@ -3,12 +3,6 @@ import LanguageProvider from './provider/Language-provider';
 import Header from './komponenter/header/Header';
 import setupMock from './mocks/setup-mock';
 import { verifyWindowObj } from './utils/environments';
-import Footer from './komponenter/footer/Footer';
-import { Provider as ReduxProvider } from 'react-redux';
-import getStore from './redux/store';
-import 'whatwg-fetch';
-
-const store = getStore();
 
 if (
     process.env.NODE_ENV === 'development' ||
@@ -23,16 +17,13 @@ if (
     }
 }
 
-function App() {
+function Head() {
     return (
-        <ReduxProvider store={store}>
-            <LanguageProvider>
-                <>
-                    <Header />
-                    <Footer />
-                </>
-            </LanguageProvider>
-        </ReduxProvider>
+        <LanguageProvider>
+            <>
+                <Header />
+            </>
+        </LanguageProvider>
     );
 }
-export default App;
+export default Head;
