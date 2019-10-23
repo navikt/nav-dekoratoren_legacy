@@ -27,7 +27,7 @@ const Environments = () => {
                 'http://localhost:8088/person/nav-dekoratoren/api/get/sokeresultat',
         };
     }
-    if (window.location.hostname.indexOf('www-q0') > -1) {
+    if (checkWindowObjIncludes('www-q0')) {
         return {
             miljo: 'DEV',
             baseUrl: 'https://www-q0.nav.no',
@@ -41,7 +41,7 @@ const Environments = () => {
                 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
         };
     }
-    if (window.location.hostname.indexOf('www-q1') > -1) {
+    if (checkWindowObjIncludes('www-q1')) {
         return {
             miljo: 'DEV',
             baseUrl: 'https://www-q1.nav.no',
