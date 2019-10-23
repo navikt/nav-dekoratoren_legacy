@@ -6,9 +6,7 @@ import { verifyWindowObj } from './utils/environments';
 import Footer from './komponenter/footer/Footer';
 import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
-
 import 'whatwg-fetch';
-import ReactDOM from 'react-dom';
 
 const store = getStore();
 
