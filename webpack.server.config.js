@@ -8,11 +8,11 @@ const nodeExternals = require('webpack-node-externals');
 const browserConfig = {
     mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'development',
     target: 'node',
-    externals: [
-        nodeExternals({
-            whitelist: [/^nav-frontend-.*$/, /\.(?!(?:jsx?|json)$).{1,5}$/i],
-        }),
-    ],
+    // externals: [
+    //   nodeExternals({
+    //     whitelist: [/^nav-frontend-.*$/, /\.(?!(?:jsx?|json)$).{1,5}$/i],
+    // }),
+    // ],
     entry: {
         server: path.resolve(__dirname, './src/server/ssr-server.tsx'),
     },
@@ -56,7 +56,7 @@ const browserConfig = {
             {
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
-                exclude: /(node_modules)/,
+                // exclude: /(node_modules)/,
                 options: {
                     reportFiles: ['src/**/*.{ts,tsx}', '!src/skip.ts'],
                     configFile: path.join(__dirname, '/config/tsconfig.json'),

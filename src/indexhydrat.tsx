@@ -17,8 +17,6 @@ import Head from './Head';
 const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
-// test om bygget fungerer naa
-
 const run = () => {
     ReactDOM.hydrate(
         <ReduxProvider store={store}>
