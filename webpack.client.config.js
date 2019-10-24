@@ -1,6 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
@@ -11,12 +10,9 @@ const browserConfig = {
         client: './src/indexhydrat.tsx',
     },
     output: {
-        path: path.resolve(__dirname, 'buildfolder'),
+        path: path.resolve(__dirname, 'buildfolder/'),
         filename: '[name].js',
-        publicPath:
-            process.env.NODE_ENV === 'development'
-                ? '/'
-                : '/person/nav-dekoratoren/',
+        publicPath: '/person/nav-dekoratoren/',
     },
     devtool: 'cheap-module-source-map',
     resolve: {
@@ -61,7 +57,6 @@ const browserConfig = {
         new MiniCssExtractPlugin({
             filename: './css/[name].css',
         }),
-        new HtmlWebpackPlugin(),
 
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
