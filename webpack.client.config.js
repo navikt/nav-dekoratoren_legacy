@@ -13,7 +13,10 @@ const browserConfig = {
     output: {
         path: path.resolve(__dirname, 'buildfolder'),
         filename: '[name].js',
-        publicPath: '/',
+        publicPath:
+            process.env.NODE_ENV === 'development'
+                ? '/'
+                : '/person/nav-dekoratoren/',
     },
     devtool: 'cheap-module-source-map',
     resolve: {
