@@ -74,8 +74,11 @@ const css = isProduction
 app.get(
     [
         '/person/nav-dekoratoren/',
+        '/person/nav-dekoratoren/person',
         '/person/nav-dekoratoren/person/*',
+        '/person/nav-dekoratoren/bedrift',
         '/person/nav-dekoratoren/bedrift/*',
+        '/person/nav-dekoratoren/samarbeidspartner',
         '/person/nav-dekoratoren/samarbeidspartner/*',
     ],
     (req, res) => {
