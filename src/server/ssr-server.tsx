@@ -58,7 +58,10 @@ const footer = ReactDOMServer.renderToString(
     </ReduxProvider>
 );
 
-app.use(express.static(`${process.cwd()}/buildfolder`));
+app.use(
+    isProduction ? '/person/nav-dekoratoren/' : '',
+    express.static(`${process.cwd()}/buildfolder`)
+);
 
 const script = isProduction
     ? process.env.SCRIPTURL

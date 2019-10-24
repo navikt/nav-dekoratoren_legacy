@@ -19,7 +19,10 @@ const browserConfig = {
         path: path.resolve(__dirname, 'buildfolder'),
         filename: 'server.js',
         libraryTarget: 'commonjs2',
-        publicPath: '/',
+        publicPath:
+            process.env.NODE_ENV === 'development'
+                ? '/'
+                : '/person/nav-dekoratoren/',
     },
 
     devtool: 'source-map',
