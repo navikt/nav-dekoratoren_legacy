@@ -59,17 +59,17 @@ const footer = ReactDOMServer.renderToString(
 );
 
 app.use(
-    isProduction ? '/person/nav-dekoratoren/' : '',
+    '/person/nav-dekoratoren/',
     express.static(`${process.cwd()}/buildfolder`)
 );
 
 const script = isProduction
     ? process.env.SCRIPTURL
-    : 'http://localhost:8088/client.js';
+    : 'http://localhost:8088/person/nav-dekoratoren/client.js';
 
 const css = isProduction
     ? process.env.CSSURL
-    : 'http://localhost:8088/css/client.css';
+    : 'http://localhost:8088/person/nav-dekoratoren/css/client.css';
 
 app.get(
     [

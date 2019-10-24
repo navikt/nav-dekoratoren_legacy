@@ -16,13 +16,10 @@ const browserConfig = {
         server: path.resolve(__dirname, './src/server/ssr-server.tsx'),
     },
     output: {
-        path: path.resolve(__dirname, 'buildfolder'),
+        path: path.resolve(__dirname, 'buildfolder/'),
         filename: 'server.js',
         libraryTarget: 'commonjs2',
-        publicPath:
-            process.env.NODE_ENV === 'development'
-                ? '/'
-                : '/person/nav-dekoratoren/',
+        publicPath: '/person/nav-dekoratoren/',
     },
 
     devtool: 'source-map',
