@@ -41,11 +41,11 @@
             },
             {
                 "name": "SCRIPTURL",
-                "value": "https://wwww.nav.no/person/nav-dekoratoren/client.js"
+                "value": "https://wwww.nav.no:8088/person/nav-dekoratoren/client.js"
             },
             {
                 "name": "CSSURL",
-                "value": "https://wwww.nav.no/person/nav-dekoratoren/css/client.css"
+                "value": "https://wwww.nav.no:8088/person/nav-dekoratoren/css/client.css"
             }
         ],
         "resources": {
