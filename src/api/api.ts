@@ -4,6 +4,7 @@ import { fetchToJson } from './api-utils';
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { Meny as menypunkterData } from '../reducer/menu-duck';
+import { MenuValue } from '../utils/meny-storage-utils';
 
 const { baseUrl, menypunkter, sokeresultat } = Environments();
 
@@ -19,6 +20,10 @@ export enum Status {
 
 export interface DataElement {
     status: Status;
+}
+
+export interface Toppmeny extends DataElement {
+    arbeidsflate: MenuValue;
 }
 
 export interface DatalasterProps {

@@ -53,19 +53,6 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
         this.dropDownExpand = this.dropDownExpand.bind(this);
     }
 
-    componentDidUpdate(
-        prevProps: Readonly<MenyToggleKnappProps>,
-        prevState: Readonly<State>,
-        snapshot?: any
-    ): void {
-        console.log(
-            'prev',
-            prevProps.meny.status,
-            'this.props',
-            this.props.meny.status
-        );
-    }
-
     dropDownExpand = () => {
         this.setState({
             clicked: !this.state.clicked,
