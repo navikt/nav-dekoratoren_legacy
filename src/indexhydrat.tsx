@@ -1,8 +1,3 @@
-if (!(window as any)._babelPolyfill) {
-    require('@babel/polyfill');
-    require('react-app-polyfill/ie11');
-    require('react-app-polyfill/stable');
-}
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import * as serviceWorker from './serviceWorker';
