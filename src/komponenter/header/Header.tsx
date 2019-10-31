@@ -8,9 +8,11 @@ import Hovedmeny from './hovedmeny/Hovedmeny';
 import './Header.less';
 import { Language } from '../../reducer/language-duck';
 import { AppState } from '../../reducer/reducer';
+import { MenuValue } from '../../utils/meny-storage-utils';
 
 interface StateProps {
     language: Language;
+    test: MenuValue;
 }
 
 interface DispatchProps {
@@ -19,7 +21,7 @@ interface DispatchProps {
 
 type HeaderProps = StateProps & DispatchProps;
 
-const Header = ({ hentMenypunkter, language }: HeaderProps) => {
+const Header = ({ hentMenypunkter, language, test }: HeaderProps) => {
     React.useEffect(() => {
         hentMenypunkter();
     }, []);
@@ -27,6 +29,7 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
     return (
         <div>
             <Skiplinks />
+            {console.log('TEST, vaar arbeidsflate er: ', test)}
             <div>
                 <div className="hodefot">
                     <header className="siteheader">
@@ -43,6 +46,7 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     language: state.language.language,
+    test: state.arbeidsflate.status,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

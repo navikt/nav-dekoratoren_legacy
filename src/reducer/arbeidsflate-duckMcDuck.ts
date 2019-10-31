@@ -98,7 +98,7 @@ const settArbeidsflateUtfraSessionKeyEllerUrl = (
         });
     }
     const arbeidsflate = [person(), arbeid(), samhandling()];
-    arbeidsflate.map(typeArbeidsflate => {
+    return arbeidsflate.map(typeArbeidsflate => {
         if (verifyWindowObj() && domeneInneholder(typeArbeidsflate)) {
             return dispatch(typeArbeidsflate);
         }
