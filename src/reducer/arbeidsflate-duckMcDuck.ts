@@ -2,11 +2,10 @@ import { MenuValue, NAVHEADER } from '../utils/meny-storage-utils';
 import {
     ActionType,
     Handling,
-    SettArbeidsflateArbeidsgiver,
-    SettArbeidsflatePrivatPerson,
-    SettArbeidsflateSamarbeidspartner,
+    SettPrivatpersonAction,
+    SettArbeidsgiverAction,
+    SettSamarbeidspartnerAction,
 } from '../redux/actions';
-import { Dispatch } from '../redux/dispatch-type';
 import { verifyWindowObj } from '../utils/environments';
 
 export interface Arbeidsflate {
@@ -17,10 +16,10 @@ export const dataInitState: Arbeidsflate = {
     status: MenuValue.IKKEVALGT,
 };
 
-interface MylitlePonyAction {
-    person: () => Handling;
-    arbeid: () => Handling;
-    samhandling: () => Handling;
+enum UrlValue {
+    PRIVATPERSON = 'person',
+    ARBEIDSGIVER = 'bedrift',
+    SAMARBEIDSPARTNER = 'samarbeidspartner',
 }
 
 export default function reducer(
@@ -40,6 +39,91 @@ export default function reducer(
         default:
             return { ...state, status: MenuValue.IKKEVALGT };
     }
+}
+
+export const finnArbeidsflate = () => {
+    const sessionkey = verifyWindowObj()
+        ? sessionStorage.getItem(NAVHEADER)
+        : null;
+
+    if (sessionkey) {
+        return settArbeidsflate(sessionkey, 'sessionKey');
+    }
+    const arbeidsflate = [
+        UrlValue.PRIVATPERSON,
+        UrlValue.ARBEIDSGIVER,
+        UrlValue.SAMARBEIDSPARTNER,
+    ];
+    arbeidsflate.map(typeArbeidsflate => {
+        if (verifyWindowObj() && domeneInneholder(typeArbeidsflate)) {
+            return settArbeidsflate(typeArbeidsflate, 'url');
+        } else if (verifyWindowObj()) {
+            return settPersonflate();
+        }
+    });
+    return settPersonflate();
+};
+
+const domeneInneholder = (key: any): boolean => {
+    return (
+        window.location.pathname.indexOf(key) !== -1 ||
+        window.location.origin.indexOf(key) !== -1
+    );
+};
+
+const settArbeidsflate = (key: string, sessionKeyOrUrl: string) => {
+    if (erArbeidsgiverflate(key, sessionKeyOrUrl)) {
+        return settArbeidsgiverflate();
+    } else if (erSamarbeidspartnerflate(key, sessionKeyOrUrl)) {
+        return settSamarbeidspartnerflate();
+    }
+    return settPersonflate();
+};
+
+const erArbeidsgiverflate = (key: string, sessionKeyOrUrl: string): boolean => {
+    if (sessionKeyOrUrl === 'sessionKey') {
+        return key === MenuValue.ARBEIDSGIVER;
+    } else if (sessionKeyOrUrl === 'url') {
+        return key === UrlValue.ARBEIDSGIVER;
+    }
+    return false;
+};
+
+const erSamarbeidspartnerflate = (
+    key: string,
+    sessionKeyOrUrl: string
+): boolean => {
+    if (sessionKeyOrUrl === 'sessionKey') {
+        return key === MenuValue.SAMARBEIDSPARTNER;
+    } else if (sessionKeyOrUrl === 'url') {
+        return key === UrlValue.SAMARBEIDSPARTNER;
+    }
+    return false;
+};
+
+function settPersonflate(): SettPrivatpersonAction {
+    return {
+        type: ActionType.PRIVATPERSON,
+    };
+}
+
+function settArbeidsgiverflate(): SettArbeidsgiverAction {
+    return {
+        type: ActionType.ARBEIDSGIVER,
+    };
+}
+
+function settSamarbeidspartnerflate(): SettSamarbeidspartnerAction {
+    return {
+        type: ActionType.SAMARBEIDSPARTNER,
+    };
+}
+
+/*
+interface MylitlePonyAction {
+    person: () => Handling;
+    arbeid: () => Handling;
+    samhandling: () => Handling;
 }
 
 export function unnersokArbeidsflate(): (dispath: Dispatch) => void {
@@ -134,4 +218,4 @@ function settSamhandlingsflate(): SettArbeidsflateSamarbeidspartner {
     return {
         type: ActionType.SAMARBEIDSPARTNER,
     };
-}
+} */

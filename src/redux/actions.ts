@@ -79,15 +79,15 @@ export interface SettVarslerLestFEILETAction {
     type: ActionType.SETT_VARSLER_LEST_FEILET;
 }
 
-export interface SettArbeidsflatePrivatPerson {
+export interface SettPrivatpersonAction {
     type: ActionType.PRIVATPERSON;
 }
 
-export interface SettArbeidsflateArbeidsgiver {
+export interface SettArbeidsgiverAction {
     type: ActionType.ARBEIDSGIVER;
 }
 
-export interface SettArbeidsflateSamarbeidspartner {
+export interface SettSamarbeidspartnerAction {
     type: ActionType.SAMARBEIDSPARTNER;
 }
 
@@ -110,7 +110,7 @@ export type Handling =
     | SettVarslerLestFEILETAction
     | SettVarslerLestPENDINGAction
     | HentInnloggingsstatusPENDINGAction
-    | SettArbeidsflatePrivatPerson
-    | SettArbeidsflateArbeidsgiver
-    | SettArbeidsflateSamarbeidspartner
+    | SettPrivatpersonAction
+    | SettArbeidsgiverAction
+    | SettSamarbeidspartnerAction
     | SettArbeidsflateIkkeValgt;

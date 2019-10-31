@@ -2,10 +2,7 @@ import React, { useEffect } from 'react';
 import { Dispatch } from '../redux/dispatch-type';
 import { connect } from 'react-redux';
 import { Language, languageDuck } from '../reducer/language-duck';
-import {
-    Arbeidsflate,
-    unnersokArbeidsflate,
-} from '../reducer/arbeidsflate-duckMcDuck';
+import { finnArbeidsflate } from '../reducer/arbeidsflate-duckMcDuck';
 
 function sjekkUrl(): Language {
     const locationPath = window.location.pathname;
@@ -23,7 +20,7 @@ interface OwnProps {
 
 interface DispatchProps {
     doSettLanguage: (language: Language) => void;
-    test: () => void;
+    doSettArbeidsflate: () => void;
 }
 
 type LanguageProviderProps = OwnProps & DispatchProps;
@@ -33,7 +30,7 @@ const LanguageProvider: React.FunctionComponent<
 > = props => {
     useEffect(() => {
         props.doSettLanguage(sjekkUrl());
-        props.test();
+        props.doSettArbeidsflate();
     }, []);
 
     return <>{props.children}</>;
@@ -42,7 +39,7 @@ const LanguageProvider: React.FunctionComponent<
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     doSettLanguage: language =>
         dispatch(languageDuck.actionCreator({ language: language })),
-    test: () => unnersokArbeidsflate()(dispatch),
+    doSettArbeidsflate: () => dispatch(finnArbeidsflate()),
 });
 
 export default connect(
