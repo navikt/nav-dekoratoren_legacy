@@ -12,7 +12,7 @@ import {
 } from '../../../../utils/meny-storage-utils';
 import {
     Meny,
-    DataInitState,
+    dataInitState,
     MenyPunkter,
 } from '../../../../reducer/menu-duck';
 import Tekst from '../../../../tekster/finn-tekst';
@@ -48,7 +48,7 @@ class MenyToggleKnapp extends React.Component<MenyToggleKnappProps, State> {
         super(props);
         this.state = {
             clicked: false,
-            minside: DataInitState,
+            minside: dataInitState,
         };
         this.dropDownExpand = this.dropDownExpand.bind(this);
     }

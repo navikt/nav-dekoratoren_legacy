@@ -40,7 +40,7 @@ function genericDuck<I extends object, T>(
     const reducer = (state: I = initialState, action: ActionCreator<T>): I => {
         switch (action.type) {
             case actionType:
-                const { type, ...data } = action; // type blir tatt ut her fordi vi ikke ønsker å ha dette feltet med videre inn i staten
+                const { type, ...data } = action;
                 return Object.assign({}, state, data);
             default:
                 return state;
