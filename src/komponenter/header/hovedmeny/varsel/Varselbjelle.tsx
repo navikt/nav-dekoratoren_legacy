@@ -6,11 +6,7 @@ import { connect } from 'react-redux';
 import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
 import VarselVisning from './Varsel-visning';
 import './Varselbjelle.less';
-import {
-    getSessionStorage,
-    MenuValue,
-    NAVHEADER,
-} from '../../../../utils/meny-storage-utils';
+import { MenuValue } from '../../../../utils/meny-storage-utils';
 
 interface StateProps {
     varsler: string;
@@ -18,6 +14,7 @@ interface StateProps {
     antallUlesteVarsler: number;
     erInnlogget: boolean;
     nyesteId: number;
+    arbeidsflate: MenuValue;
 }
 
 interface DispatchProps {
@@ -82,13 +79,13 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             varsler,
             antallVarsler,
             antallUlesteVarsler,
+            arbeidsflate,
         } = this.props;
         const html = parse(varsler);
-        const toppmenyvalg = getSessionStorage(NAVHEADER);
 
         return (
             <div ref={this.varselbjelleRef} className="varselbjelle">
-                {erInnlogget && toppmenyvalg === MenuValue.PRIVATPERSON ? (
+                {erInnlogget && arbeidsflate === MenuValue.PRIVATPERSON ? (
                     <div
                         id="toggle-varsler-container"
                         className={this.state.classname}
@@ -127,6 +124,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
         state.innloggingsstatus.data.authenticated === true &&
         state.innloggingsstatus.data.securityLevel === '4',
     nyesteId: state.varsler.data.nyesteId,
+    arbeidsflate: state.arbeidsflate.status,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

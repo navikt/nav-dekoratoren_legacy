@@ -17,6 +17,10 @@ export enum ActionType {
     SETT_VARSLER_LEST_FEILET = 'SETT_VARSLER_LEST_FEILET',
     SETT_VARSLER_LEST_PENDING = 'SETT_VARSLER_LEST_PENDING',
     SETT_LANGUAGE = 'SETT_LANGUAGE',
+    PRIVATPERSON = 'PRIVATPERSON',
+    ARBEIDSGIVER = 'ARBEIDSGIVER',
+    SAMARBEIDSPARTNER = 'SAMARBEIDSPARTNER',
+    IKKEVALGT = 'IKKEVALGT',
 }
 
 export interface HentInnloggingsstatusOKAction {
@@ -75,6 +79,22 @@ export interface SettVarslerLestFEILETAction {
     type: ActionType.SETT_VARSLER_LEST_FEILET;
 }
 
+export interface SettPrivatpersonAction {
+    type: ActionType.PRIVATPERSON;
+}
+
+export interface SettArbeidsgiverAction {
+    type: ActionType.ARBEIDSGIVER;
+}
+
+export interface SettSamarbeidspartnerAction {
+    type: ActionType.SAMARBEIDSPARTNER;
+}
+
+export interface SettArbeidsflateIkkeValgt {
+    type: ActionType.IKKEVALGT;
+}
+
 export type Handling =
     | HentInnloggingsstatusOKAction
     | HentInnloggingsstatusFEILETAction
@@ -89,4 +109,8 @@ export type Handling =
     | SettVarslerLestOKAction
     | SettVarslerLestFEILETAction
     | SettVarslerLestPENDINGAction
-    | HentInnloggingsstatusPENDINGAction;
+    | HentInnloggingsstatusPENDINGAction
+    | SettPrivatpersonAction
+    | SettArbeidsgiverAction
+    | SettSamarbeidspartnerAction
+    | SettArbeidsflateIkkeValgt;

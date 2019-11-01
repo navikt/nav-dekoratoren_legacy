@@ -29,7 +29,7 @@ export interface Meny {
     children: MenySeksjon[];
 }
 
-export const DataInitState: Meny = {
+export const dataInitState: Meny = {
     displayName: '',
     path: '',
     id: '',
@@ -46,7 +46,7 @@ export const DataInitState: Meny = {
 };
 
 const initalState: MenyPunkter = {
-    data: [DataInitState],
+    data: [dataInitState],
     status: Status.IKKE_STARTET,
 };
 

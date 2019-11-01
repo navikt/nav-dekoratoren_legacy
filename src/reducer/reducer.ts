@@ -7,6 +7,7 @@ import varselinnboksReducer, { VarselinnboksState } from './varselinnboks-duck';
 import { DataElement } from '../api/api';
 import varselLestReducer from './varsel-lest-duck';
 import { languageDuck, LanguageState } from './language-duck';
+import arbeidsflateReducer, { Arbeidsflate } from './arbeidsflate-duck';
 
 export interface AppState {
     innloggingsstatus: InnloggingsstatusState;
@@ -14,6 +15,7 @@ export interface AppState {
     varsler: VarselinnboksState;
     varslerLest: DataElement;
     language: LanguageState;
+    arbeidsflate: Arbeidsflate;
 }
 
 export const reducer = combineReducers<AppState>({
@@ -22,4 +24,5 @@ export const reducer = combineReducers<AppState>({
     varsler: varselinnboksReducer,
     varslerLest: varselLestReducer,
     language: languageDuck.reducer,
+    arbeidsflate: arbeidsflateReducer,
 });

@@ -40,7 +40,7 @@ function genericDuck<I extends object, T>(
     const reducer = (state: I = initialState, action: ActionCreator<T>): I => {
         switch (action.type) {
             case actionType:
-                const { type, ...data } = action; // type blir tatt ut her fordi vi ikke ønsker å ha dette feltet med videre inn i staten
+                const { ...data } = action;
                 return Object.assign({}, state, data);
             default:
                 return state;
@@ -58,14 +58,14 @@ function genericDuck<I extends object, T>(
     };
 }
 
-export const spraakValgNorsk = (lang: Language): boolean => {
+export const spraakValgetErNorsk = (lang: Language): boolean => {
     return lang === Language.NORSK;
 };
 
-export const spraakValgEngelsk = (lang: Language): boolean => {
+export const spraakValgetErEngelsk = (lang: Language): boolean => {
     return lang === Language.ENGELSK;
 };
 
-export const spraakValgSamisk = (lang: Language): boolean => {
+export const spraakValgetErSamisk = (lang: Language): boolean => {
     return lang === Language.SAMISK;
 };
