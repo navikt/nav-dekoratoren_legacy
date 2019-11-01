@@ -7,7 +7,7 @@ import varselinnboksReducer, { VarselinnboksState } from './varselinnboks-duck';
 import { DataElement } from '../api/api';
 import varselLestReducer from './varsel-lest-duck';
 import { languageDuck, LanguageState } from './language-duck';
-import arbeidsflateReducer, { Arbeidsflate } from './arbeidsflate-duckMcDuck';
+import arbeidsflateReducer, { Arbeidsflate } from './arbeidsflate-duck';
 
 export interface AppState {
     innloggingsstatus: InnloggingsstatusState;

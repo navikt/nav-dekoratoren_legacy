@@ -76,14 +76,14 @@ const settArbeidsflate = (key: string, isSessionKey: boolean = false) => {
         key,
         isSessionKey,
         MenuValue.ARBEIDSGIVER,
-        'ARBEIDSGIVER'
+        UrlValue.ARBEIDSGIVER
     )
         ? settArbeidsgiverflate()
         : erArbeidsflate(
               key,
               isSessionKey,
               MenuValue.SAMARBEIDSPARTNER,
-              'SAMARBEIDSPARTNER'
+              UrlValue.SAMARBEIDSPARTNER
           )
         ? settSamarbeidspartnerflate()
         : settPersonflate();
@@ -91,14 +91,11 @@ const settArbeidsflate = (key: string, isSessionKey: boolean = false) => {
 
 const erArbeidsflate = (
     key: string,
-    sessionKeyOrUrl: boolean = false,
+    isSessionKey: boolean = false,
     menuKeyValue: MenuValue,
-    urlKeyvaluie: keyof typeof UrlValue
+    urlKeyvalue: UrlValue
 ): boolean => {
-    return (
-        (sessionKeyOrUrl && key === MenuValue[menuKeyValue]) ||
-        key === UrlValue[urlKeyvaluie]
-    );
+    return (isSessionKey && key === menuKeyValue) || key === urlKeyvalue;
 };
 
 function settPersonflate(): SettPrivatpersonAction {

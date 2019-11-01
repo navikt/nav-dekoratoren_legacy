@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import { Dispatch } from '../../../redux/dispatch-type';
-import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duckMcDuck';
+import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
 import {
@@ -62,7 +62,6 @@ const Toppmeny = ({ settArbeidsflate, arbeidsflate }: ToppmenyProps) => {
                                     className={cls.element('lenke')}
                                     href={lenke.url}
                                     onClick={event => {
-
                                         oppdaterSessionStorage(
                                             event,
                                             lenke.key,
@@ -74,8 +73,7 @@ const Toppmeny = ({ settArbeidsflate, arbeidsflate }: ToppmenyProps) => {
                                     <div
                                         className={cls.element(
                                             'lenke-inner',
-                                            arbeidsflate ===
-                                                lenke.tittel
+                                            arbeidsflate === lenke.tittel
                                                 ? 'active'
                                                 : ''
                                         )}

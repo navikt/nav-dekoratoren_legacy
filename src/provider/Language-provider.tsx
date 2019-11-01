@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Dispatch } from '../redux/dispatch-type';
 import { connect } from 'react-redux';
 import { Language, languageDuck } from '../reducer/language-duck';
-import { finnArbeidsflate } from '../reducer/arbeidsflate-duckMcDuck';
+import { finnArbeidsflate } from '../reducer/arbeidsflate-duck';
 
 function sjekkUrl(): Language {
     const locationPath = window.location.pathname;
