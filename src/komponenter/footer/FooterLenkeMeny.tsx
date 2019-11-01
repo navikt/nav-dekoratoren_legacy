@@ -125,7 +125,6 @@ class FooterLenkeMeny extends React.Component<Props, State> {
                             <li className="x">
                                 <Lenke href="#">Klage og tilbakemelding</Lenke>
                             </li>
-                            7
                             <li className="x">
                                 <Lenke href="#">Tilgjengelighet</Lenke>
                             </li>
