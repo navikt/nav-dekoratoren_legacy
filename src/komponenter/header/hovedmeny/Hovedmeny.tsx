@@ -4,7 +4,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../ikoner/meny/NavLogoRod';
-import MenyToggleKnapp from './dropdown-meny/Meny-toggle-knapp';
+import MenyToggleKnapp from './dropdown-meny/DropdownMeny';
 import Sok from './sok/Sok';
 import MinsideLenke from './minside-lenke/MinsideLenke';
 import Varselbjelle from './varsel/Varselbjelle';

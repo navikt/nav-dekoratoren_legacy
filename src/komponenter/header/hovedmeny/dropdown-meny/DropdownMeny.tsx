@@ -20,7 +20,7 @@ import { Language } from '../../../../reducer/language-duck';
 import HamburgerIkon from '../../../ikoner/meny/HamburgerIkon';
 import DropdownHoyreSeksjon from './Dropdown-hoyre-seksjon';
 import DropdownVenstreSeksjon from './Dropdown-venstre-seksjon';
-import './Meny-toggle-knapp.less';
+import './DropdownMeny.less';
 import { verifyWindowObj } from '../../../../utils/environments';
 
 interface OwnProps {

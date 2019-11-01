@@ -2,8 +2,8 @@ import { MenuValue, NAVHEADER } from '../utils/meny-storage-utils';
 import {
     ActionType,
     Handling,
-    SettPrivatpersonAction,
     SettArbeidsgiverAction,
+    SettPrivatpersonAction,
     SettSamarbeidspartnerAction,
 } from '../redux/actions';
 import { verifyWindowObj } from '../utils/environments';
@@ -16,7 +16,7 @@ export const dataInitState: Arbeidsflate = {
     status: MenuValue.IKKEVALGT,
 };
 
-enum UrlValue {
+export enum UrlValue {
     PRIVATPERSON = 'person',
     ARBEIDSGIVER = 'bedrift',
     SAMARBEIDSPARTNER = 'samarbeidspartner',
@@ -47,7 +47,7 @@ export const finnArbeidsflate = () => {
         : null;
 
     if (sessionkey) {
-        return settArbeidsflate(sessionkey, 'sessionKey');
+        return settArbeidsflate(sessionkey, true);
     }
     const arbeidsflate = [
         UrlValue.PRIVATPERSON,
@@ -55,13 +55,11 @@ export const finnArbeidsflate = () => {
         UrlValue.SAMARBEIDSPARTNER,
     ];
     arbeidsflate.map(typeArbeidsflate => {
-        return (
-            verifyWindowObj() && domeneInneholder(typeArbeidsflate)
-            ? settArbeidsflate(typeArbeidsflate, 'url')
+        return verifyWindowObj() && domeneInneholder(typeArbeidsflate)
+            ? settArbeidsflate(typeArbeidsflate)
             : verifyWindowObj()
             ? settPersonflate()
-            : null   
-        )
+            : null;
     });
     return settPersonflate();
 };
@@ -73,28 +71,34 @@ const domeneInneholder = (key: any): boolean => {
     );
 };
 
-const settArbeidsflate = (key: string, sessionKeyOrUrl: string) => {
-    return (
-        erArbeidsgiverflate(key, sessionKeyOrUrl)
+const settArbeidsflate = (key: string, isSessionKey: boolean = false) => {
+    return erArbeidsflate(
+        key,
+        isSessionKey,
+        MenuValue.ARBEIDSGIVER,
+        'ARBEIDSGIVER'
+    )
         ? settArbeidsgiverflate()
-        : erSamarbeidspartnerflate(key, sessionKeyOrUrl) 
+        : erArbeidsflate(
+              key,
+              isSessionKey,
+              MenuValue.SAMARBEIDSPARTNER,
+              'SAMARBEIDSPARTNER'
+          )
         ? settSamarbeidspartnerflate()
-        : settPersonflate()
-    )
+        : settPersonflate();
 };
 
-const erArbeidsgiverflate = (key: string, sessionKeyOrUrl: string): boolean => {
+const erArbeidsflate = (
+    key: string,
+    sessionKeyOrUrl: boolean = false,
+    menuKeyValue: MenuValue,
+    urlKeyvaluie: keyof typeof UrlValue
+): boolean => {
     return (
-        sessionKeyOrUrl === 'sessionKey' && key === MenuValue.ARBEIDSGIVER ||
-        sessionKeyOrUrl === 'url' && key === UrlValue.ARBEIDSGIVER
-    )
-};
-
-const erSamarbeidspartnerflate = (key: string, sessionKeyOrUrl: string): boolean => {
-    return (
-    sessionKeyOrUrl === 'sessionKey' && key === MenuValue.SAMARBEIDSPARTNER || 
-    sessionKeyOrUrl === 'url' && key === UrlValue.SAMARBEIDSPARTNER
-    )
+        (sessionKeyOrUrl && key === MenuValue[menuKeyValue]) ||
+        key === UrlValue[urlKeyvaluie]
+    );
 };
 
 function settPersonflate(): SettPrivatpersonAction {
@@ -114,104 +118,3 @@ function settSamarbeidspartnerflate(): SettSamarbeidspartnerAction {
         type: ActionType.SAMARBEIDSPARTNER,
     };
 }
-
-/*
-interface MylitlePonyAction {
-    person: () => Handling;
-    arbeid: () => Handling;
-    samhandling: () => Handling;
-}
-
-export function unnersokArbeidsflate(): (dispath: Dispatch) => void {
-    return finnArbeidsflate({
-        person: settPersonflate,
-        arbeid: settArbeidsgiverflate,
-        samhandling: settSamhandlingsflate,
-    });
-}
-
-function finnArbeidsflate({
-    person,
-    arbeid,
-    samhandling,
-}: MylitlePonyAction): (dispath: Dispatch) => void {
-    return (dispath: Dispatch): void => {
-        settArbeidsflateUtfraSessionKeyEllerUrl(dispath, {
-            person,
-            arbeid,
-            samhandling,
-        });
-    };
-}
-
-const settArbeidsflate = (
-    key: string,
-    dispatch: Dispatch,
-    { person, arbeid, samhandling }: MylitlePonyAction
-) => {
-    return erArbeidsflate(key)
-        ? dispatch(arbeid())
-        : erSamhandlingflate(key)
-        ? dispatch(samhandling())
-        : dispatch(person());
-};
-
-const domeneInneholder = (key: any): boolean => {
-    return (
-        window.location.pathname.indexOf(key) !== -1 ||
-        window.location.origin.indexOf(key) !== -1
-    );
-};
-
-const settArbeidsflateUtfraSessionKeyEllerUrl = (
-    dispatch: Dispatch,
-    { person, arbeid, samhandling }: MylitlePonyAction
-) => {
-    const sessionkey = verifyWindowObj()
-        ? sessionStorage.getItem(NAVHEADER)
-        : null;
-    if (sessionkey) {
-        return settArbeidsflate(sessionkey, dispatch, {
-            person,
-            arbeid,
-            samhandling,
-        });
-    }
-    const arbeidsflate = [person(), arbeid(), samhandling()];
-    return arbeidsflate.map(typeArbeidsflate => {
-        if (verifyWindowObj() && domeneInneholder(typeArbeidsflate)) {
-            return dispatch(typeArbeidsflate);
-        }
-    });
-    return verifyWindowObj() ? dispatch(person()) : null;
-};
-
-const personflate = (key: string): boolean => {
-    return key === MenuValue.PRIVATPERSON;
-};
-
-const erArbeidsflate = (key: string): boolean => {
-    return key === MenuValue.ARBEIDSGIVER;
-};
-
-const erSamhandlingflate = (key: string): boolean => {
-    return key === MenuValue.SAMARBEIDSPARTNER;
-};
-
-function settPersonflate(): SettArbeidsflatePrivatPerson {
-    return {
-        type: ActionType.PRIVATPERSON,
-    };
-}
-
-function settArbeidsgiverflate(): SettArbeidsflateArbeidsgiver {
-    return {
-        type: ActionType.ARBEIDSGIVER,
-    };
-}
-
-function settSamhandlingsflate(): SettArbeidsflateSamarbeidspartner {
-    return {
-        type: ActionType.SAMARBEIDSPARTNER,
-    };
-} */
