@@ -62,10 +62,10 @@ export const spraakValgetErNorsk = (lang: Language): boolean => {
     return lang === Language.NORSK;
 };
 
-export const spraakValgEngelsk = (lang: Language): boolean => {
+export const spraakValgetErEngelsk = (lang: Language): boolean => {
     return lang === Language.ENGELSK;
 };
 
-export const spraakValgSamisk = (lang: Language): boolean => {
+export const spraakValgetErSamisk = (lang: Language): boolean => {
     return lang === Language.SAMISK;
 };

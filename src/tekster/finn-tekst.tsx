@@ -4,9 +4,9 @@ import { AppState } from '../reducer/reducer';
 import { connect } from 'react-redux';
 import {
     Language,
-    spraakValgEngelsk,
+    spraakValgetErEngelsk,
     spraakValgetErNorsk,
-    spraakValgSamisk,
+    spraakValgetErSamisk,
 } from '../reducer/language-duck';
 
 export function finnTekst(id: string, language: Language): string {
@@ -18,10 +18,10 @@ export function finnTekst(id: string, language: Language): string {
     }
     if (spraakValgetErNorsk(language)) {
         return ledetekst;
-    } else if (spraakValgEngelsk(language)) {
+    } else if (spraakValgetErEngelsk(language)) {
         id += '-en';
         ledetekst = ledetekster[id];
-    } else if (spraakValgSamisk(language)) {
+    } else if (spraakValgetErSamisk(language)) {
         id += '-se';
         ledetekst = ledetekster[id];
     }
