@@ -37,7 +37,7 @@ export default function reducer(
             return { ...state, status: MenuValue.SAMARBEIDSPARTNER };
         }
         default:
-            return { ...state, status: MenuValue.IKKEVALGT };
+            return state;
     }
 }
 
@@ -55,11 +55,13 @@ export const finnArbeidsflate = () => {
         UrlValue.SAMARBEIDSPARTNER,
     ];
     arbeidsflate.map(typeArbeidsflate => {
-        if (verifyWindowObj() && domeneInneholder(typeArbeidsflate)) {
-            return settArbeidsflate(typeArbeidsflate, 'url');
-        } else if (verifyWindowObj()) {
-            return settPersonflate();
-        }
+        return (
+            verifyWindowObj() && domeneInneholder(typeArbeidsflate)
+            ? settArbeidsflate(typeArbeidsflate, 'url')
+            : verifyWindowObj()
+            ? settPersonflate()
+            : null   
+        )
     });
     return settPersonflate();
 };
@@ -72,33 +74,27 @@ const domeneInneholder = (key: any): boolean => {
 };
 
 const settArbeidsflate = (key: string, sessionKeyOrUrl: string) => {
-    if (erArbeidsgiverflate(key, sessionKeyOrUrl)) {
-        return settArbeidsgiverflate();
-    } else if (erSamarbeidspartnerflate(key, sessionKeyOrUrl)) {
-        return settSamarbeidspartnerflate();
-    }
-    return settPersonflate();
+    return (
+        erArbeidsgiverflate(key, sessionKeyOrUrl)
+        ? settArbeidsgiverflate()
+        : erSamarbeidspartnerflate(key, sessionKeyOrUrl) 
+        ? settSamarbeidspartnerflate()
+        : settPersonflate()
+    )
 };
 
 const erArbeidsgiverflate = (key: string, sessionKeyOrUrl: string): boolean => {
-    if (sessionKeyOrUrl === 'sessionKey') {
-        return key === MenuValue.ARBEIDSGIVER;
-    } else if (sessionKeyOrUrl === 'url') {
-        return key === UrlValue.ARBEIDSGIVER;
-    }
-    return false;
+    return (
+        sessionKeyOrUrl === 'sessionKey' && key === MenuValue.ARBEIDSGIVER ||
+        sessionKeyOrUrl === 'url' && key === UrlValue.ARBEIDSGIVER
+    )
 };
 
-const erSamarbeidspartnerflate = (
-    key: string,
-    sessionKeyOrUrl: string
-): boolean => {
-    if (sessionKeyOrUrl === 'sessionKey') {
-        return key === MenuValue.SAMARBEIDSPARTNER;
-    } else if (sessionKeyOrUrl === 'url') {
-        return key === UrlValue.SAMARBEIDSPARTNER;
-    }
-    return false;
+const erSamarbeidspartnerflate = (key: string, sessionKeyOrUrl: string): boolean => {
+    return (
+    sessionKeyOrUrl === 'sessionKey' && key === MenuValue.SAMARBEIDSPARTNER || 
+    sessionKeyOrUrl === 'url' && key === UrlValue.SAMARBEIDSPARTNER
+    )
 };
 
 function settPersonflate(): SettPrivatpersonAction {
