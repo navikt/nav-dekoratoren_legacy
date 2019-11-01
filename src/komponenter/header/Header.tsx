@@ -8,7 +8,6 @@ import Hovedmeny from './hovedmeny/Hovedmeny';
 import './Header.less';
 import { Language } from '../../reducer/language-duck';
 import { AppState } from '../../reducer/reducer';
-import { MenuValue } from '../../utils/meny-storage-utils';
 
 interface StateProps {
     language: Language;
@@ -28,7 +27,6 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
     return (
         <div>
             <Skiplinks />
-            {console.log('TEST, vaar arbeidsflate er: ', test)}
             <div>
                 <div className="hodefot">
                     <header className="siteheader">

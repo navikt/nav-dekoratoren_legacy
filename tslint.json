@@ -14,7 +14,6 @@
         "jsx-no-multiline-js": false,
         "label-position": true,
         "max-line-length": [true, 150],
-        "no-unused-variable": true,
         "member-ordering": [
             true,
             "public-before-private",
@@ -49,6 +48,7 @@
         "no-switch-case-fall-through": true,
         "no-trailing-whitespace": false,
         "no-unused-expression": true,
+        "no-unused-variable": true,
         "one-line": [
             true,
             "check-catch",
