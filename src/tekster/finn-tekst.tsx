@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {
     Language,
     spraakValgEngelsk,
-    spraakValgNorsk,
+    spraakValgetErNorsk,
     spraakValgSamisk,
 } from '../reducer/language-duck';
 
@@ -16,7 +16,7 @@ export function finnTekst(id: string, language: Language): string {
         console.error(`Kunne ikke finne teksten ${id}! Returnerer oppgitt id.`); // tslint:disable-line:no-console
         return id;
     }
-    if (spraakValgNorsk(language)) {
+    if (spraakValgetErNorsk(language)) {
         return ledetekst;
     } else if (spraakValgEngelsk(language)) {
         id += '-en';

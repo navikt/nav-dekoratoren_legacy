@@ -1,4 +1,8 @@
-import { MenuValue, NAVHEADER } from '../utils/meny-storage-utils';
+import {
+    getSessionStorage,
+    MenuValue,
+    NAVHEADER,
+} from '../utils/meny-storage-utils';
 import {
     ActionType,
     Handling,
@@ -42,9 +46,7 @@ export default function reducer(
 }
 
 export const finnArbeidsflate = () => {
-    const sessionkey = verifyWindowObj()
-        ? sessionStorage.getItem(NAVHEADER)
-        : null;
+    const sessionkey = verifyWindowObj() ? getSessionStorage(NAVHEADER) : null;
 
     if (sessionkey) {
         return settArbeidsflate(sessionkey, true);

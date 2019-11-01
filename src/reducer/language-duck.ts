@@ -40,7 +40,7 @@ function genericDuck<I extends object, T>(
     const reducer = (state: I = initialState, action: ActionCreator<T>): I => {
         switch (action.type) {
             case actionType:
-                const { type, ...data } = action;
+                const { ...data } = action;
                 return Object.assign({}, state, data);
             default:
                 return state;
@@ -58,7 +58,7 @@ function genericDuck<I extends object, T>(
     };
 }
 
-export const spraakValgNorsk = (lang: Language): boolean => {
+export const spraakValgetErNorsk = (lang: Language): boolean => {
     return lang === Language.NORSK;
 };
 

@@ -1,6 +1,7 @@
 import { MenySeksjon, Meny } from '../reducer/menu-duck';
-import { Language, spraakValgNorsk } from '../reducer/language-duck';
+import { Language, spraakValgetErNorsk } from '../reducer/language-duck';
 import { verifyWindowObj } from './environments';
+import React from 'react';
 
 export const NAVHEADER = 'NAVHEADER';
 
@@ -19,43 +20,29 @@ export const setSessionStorage = (key: string, value: MenuValue) => {
     return sessionStorage.setItem(key, value);
 };
 
-const envokeWindowObj = () => {
-    return window.location.pathname.split('/')[3];
+export const oppdaterSessionStorage = (
+    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
+    valgVerdi: MenuValue,
+    url: string
+): void => {
+    e.preventDefault();
+    const headervalg = getSessionStorage(NAVHEADER);
+    if (headervalg && headervalg === valgVerdi) {
+        return;
+    }
+    setSessionStorage(NAVHEADER, valgVerdi);
+    // window.location.href = url;
 };
 
-export const checkUriPath = (): MenuValue => {
-    const locationPath = verifyWindowObj()
-        ? envokeWindowObj()
-        : MenuValue.PRIVATPERSON;
-
-    if (locationPath) {
-        const menyvalg =
-            locationPath === 'bedrift'
-                ? MenuValue.ARBEIDSGIVER
-                : locationPath === 'samarbeidspartner'
-                ? MenuValue.SAMARBEIDSPARTNER
-                : MenuValue.PRIVATPERSON;
-
-        if (verifyWindowObj()) {
-            setSessionStorage(NAVHEADER, menyvalg);
-        }
-        return menyvalg;
-    }
-    if (verifyWindowObj()) {
-        setSessionStorage(NAVHEADER, MenuValue.PRIVATPERSON);
-    }
-    return MenuValue.PRIVATPERSON;
-};
-
-export function setDropdownMenuView(
+export function selectMenu(
     menypunkter: Meny[],
-    language: Language
+    language: Language,
+    arbeidsflate: MenuValue
 ): MenySeksjon {
     const languageSection = setLanguage(language, menypunkter);
     if (verifyWindowObj()) {
-        const storage = getSessionStorage(NAVHEADER);
-        return spraakValgNorsk(language)
-            ? getDropdownMenuContent(storage, languageSection)
+        return spraakValgetErNorsk(language)
+            ? getDropdownMenuContent(arbeidsflate, languageSection)
             : languageSection[0];
     }
     return languageSection[0];
@@ -75,7 +62,7 @@ export const setLanguage = (lang: Language, menu: Meny[]): MenySeksjon[] => {
 };
 
 function getDropdownMenuContent(
-    storage: string | null,
+    storage: MenuValue,
     content: MenySeksjon[]
 ): MenySeksjon {
     switch (storage) {

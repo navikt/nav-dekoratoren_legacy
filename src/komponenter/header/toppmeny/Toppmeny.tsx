@@ -6,11 +6,8 @@ import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
 import {
-    checkUriPath,
-    getSessionStorage,
     MenuValue,
-    NAVHEADER,
-    setSessionStorage,
+    oppdaterSessionStorage,
 } from '../../../utils/meny-storage-utils';
 import { toppmenyLenker } from './toppmeny-lenker';
 import './Toppmeny.less';
@@ -27,20 +24,6 @@ type ToppmenyProps = StateProps & DispatchProps;
 
 const Toppmeny = ({ settArbeidsflate, arbeidsflate }: ToppmenyProps) => {
     const cls = BEMHelper('toppmeny');
-
-    const oppdaterSessionStorage = (
-        e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-        valgVerdi: MenuValue,
-        url: string
-    ): void => {
-        e.preventDefault();
-        const headervalg = getSessionStorage(NAVHEADER);
-        if (headervalg && headervalg === valgVerdi) {
-            return;
-        }
-        setSessionStorage(NAVHEADER, valgVerdi);
-        // window.location.href = url;
-    };
 
     return (
         <nav className="toppmeny">
