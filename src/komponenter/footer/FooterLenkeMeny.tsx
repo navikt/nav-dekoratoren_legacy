@@ -3,7 +3,6 @@ import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
 import NavLogoFooter from '../ikoner/meny/NavLogoFooter';
-import { verifyWindowObj } from '../../utils/environments';
 
 interface Props {
     className: string;
@@ -12,51 +11,44 @@ interface Props {
 
 interface State {
     hasMounted: boolean;
+    erNavDekoratoren: boolean;
     languages: LanguageSelectors[];
 }
 
 interface LanguageSelectors {
     url: string;
+    testurl: string;
     text: string;
     lang: Language;
 }
 
-const erNavDekoratoren = (): boolean => {
-    return (
-        verifyWindowObj() && window.location.href.includes('/nav-dekoratoren')
-    );
-};
-
 class FooterLenkeMeny extends React.Component<Props, State> {
     lang = [
         {
-            url: erNavDekoratoren()
-                ? '/person/nav-dekoratoren/person/no/'
-                : 'https://www.nav.no/Forsiden',
+            url: 'https://www.nav.no/Forsiden',
+            testurl: '/person/nav-dekoratoren/person/no/',
             text: 'Norske sider',
             lang: Language.NORSK,
         },
         {
-            url: erNavDekoratoren()
-                ? '/person/nav-dekoratoren/person/en/'
-                : 'https://www.nav.no/en/Home',
+            url: 'https://www.nav.no/en/Home',
+            testurl: '/person/nav-dekoratoren/person/en/',
             text: 'English pages',
             lang: Language.ENGELSK,
         },
         {
-            url: erNavDekoratoren()
-                ? '/person/nav-dekoratoren/person/se/'
-                : 'https://www.nav.no/se/Samegiella',
+            url: 'https://www.nav.no/se/Samegiella',
+            testurl: '/person/nav-dekoratoren/person/se/',
             text: 'Sámegiel skovit',
             lang: Language.SAMISK,
         },
     ];
-
     constructor(props: Props) {
         super(props);
 
         this.state = {
             hasMounted: false,
+            erNavDekoratoren: false,
             languages: [this.lang[1], this.lang[2]],
         };
     }
@@ -68,21 +60,30 @@ class FooterLenkeMeny extends React.Component<Props, State> {
             },
             () => {
                 if (this.state.hasMounted) {
-                    this.setState({ languages: this.getLanguage() });
+                   this.setState({
+                       erNavDekoratoren: this.erNavDekoratoren(),
+                       languages: this.getLanguage()
+                   });
                 }
             }
         );
     }
 
+    erNavDekoratoren = (): boolean => {
+        return (
+            window.location.href.includes('/nav-dekoratoren')
+        );
+    };
+
     getLanguage = () => {
         const nonSelectedLang = this.lang;
         switch (this.props.language) {
-            case 'NORSK':
+            case Language.NORSK:
                 return nonSelectedLang.splice(1, 3);
-            case 'ENGELSK':
+            case Language.ENGELSK:
                 nonSelectedLang.splice(1, 1);
                 return nonSelectedLang;
-            case 'SAMISK':
+            case Language.SAMISK:
                 return nonSelectedLang.splice(0, 2);
             default:
                 return nonSelectedLang.splice(1, 3);
@@ -104,7 +105,7 @@ class FooterLenkeMeny extends React.Component<Props, State> {
                             {this.state.languages.map(lenke => {
                                 return (
                                     <li key={lenke.lang}>
-                                        <Lenke href={lenke.url}>
+                                        <Lenke href={this.state.erNavDekoratoren ? lenke.testurl : lenke.url}>
                                             {lenke.text}
                                         </Lenke>
                                     </li>
