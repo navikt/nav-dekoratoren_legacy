@@ -23,7 +23,7 @@ interface LanguageSelectors {
 
 const erNavDekoratoren = (): boolean => {
     return (
-        verifyWindowObj() && location.href.includes('/nav-dekoratoren')
+        verifyWindowObj() && window.location.href.includes('/nav-dekoratoren')
     );
 };
 
