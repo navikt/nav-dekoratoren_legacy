@@ -3,6 +3,7 @@ import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
 import NavLogoFooter from '../ikoner/meny/NavLogoFooter';
+import { verifyWindowObj } from '../../utils/environments';
 
 interface Props {
     className: string;
@@ -20,20 +21,32 @@ interface LanguageSelectors {
     lang: Language;
 }
 
+const erNavDekoratoren = (): boolean => {
+    return (
+        verifyWindowObj() && location.href.includes('/nav-dekoratoren')
+    );
+};
+
 class FooterLenkeMeny extends React.Component<Props, State> {
     lang = [
         {
-            url: '/person/nav-dekoratoren/person/no/',
+            url: erNavDekoratoren()
+                ? '/person/nav-dekoratoren/person/no/'
+                : 'https://www.nav.no/Forsiden',
             text: 'Norske sider',
             lang: Language.NORSK,
         },
         {
-            url: '/person/nav-dekoratoren/person/en/',
+            url: erNavDekoratoren()
+                ? '/person/nav-dekoratoren/person/en/'
+                : 'https://www.nav.no/en/Home',
             text: 'English pages',
             lang: Language.ENGELSK,
         },
         {
-            url: '/person/nav-dekoratoren/person/se/',
+            url: erNavDekoratoren()
+                ? '/person/nav-dekoratoren/person/se/'
+                : 'https://www.nav.no/se/Samegiella',
             text: 'Sámegiel skovit',
             lang: Language.SAMISK,
         },
@@ -110,7 +123,6 @@ class FooterLenkeMeny extends React.Component<Props, State> {
                             <li className="x">
                                 <Lenke href="#">Klage og tilbakemelding</Lenke>
                             </li>
-
                             <li className="x">
                                 <Lenke href="#">Tilgjengelighet</Lenke>
                             </li>
