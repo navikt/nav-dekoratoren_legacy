@@ -8,17 +8,22 @@ import './Footer.less';
 
 const cls = BEMHelper('footer');
 
+interface Props {
+    visSpraak: boolean;
+}
+
 interface StateProps {
     language: Language;
 }
 
-const Footer = ({ language }: StateProps) => {
+const Footer = ({ language, visSpraak }: StateProps & Props) => {
     return (
         <div className={cls.className}>
             <div className="hodefot">
                 <FooterLenkeMeny
                     className={cls.className}
                     language={language}
+                    visSpraak={visSpraak}
                 />
             </div>
         </div>

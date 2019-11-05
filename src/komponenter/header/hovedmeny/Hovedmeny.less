@@ -7,93 +7,100 @@
     border-bottom: 2px solid @navBla;
     min-height: 6.5rem;
 
-    .hovedmeny__content {
+    &__content {
         width: 100%;
         margin: 0 auto;
         padding: 0 1rem;
+    }
 
-        .hovedmeny__meny-elementer {
-            // min-height: 98px;  // fikser soke form height
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
+    &__meny-elementer {
+        // min-height: 98px;  // fikser soke form height
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 
-            .minside-lenke {
-                order: 1;
-                width: 50%;
-            }
-            .varselbjelle {
+    &__nav-brand {
+        order: 1;
+        width: 30%;
+    }
+
+    .minside-lenke {
+        order: 4;
+        width: 50%;
+    }
+    .varselbjelle {
+        order: 5;
+        width: 50%;
+    }
+
+    .login-container {
+        order: 3;
+        width: 40%;
+    }
+
+    .sok {
+        order: 6;
+        width: 100%;
+    }
+
+    .dropdown {
+        &__menubutton {
+            order: 2;
+            width: 30%;
+        }
+
+        &--alternativ-samisk {
+            color: @navBla;
+        }
+
+        &__menu {
+            order: 7;
+            width: 100%;
+        }
+    }
+
+    @media (min-width: @desktopLimitWidth) {
+        &__content {
+            width: @desktopLimitWidth;
+            padding: 0;
+        }
+
+        &__meny-elementer {
+            justify-content: space-between;
+        }
+
+        &__nav-brand {
+            order: 1;
+            width: auto;
+        }
+
+        .dropdown {
+            &__menubutton,
+            &--alternativ-samisk {
                 order: 2;
-                width: 50%;
+                width: auto;
             }
-            .navbar-brand {
-                order: 3;
-                width: 30%;
-            }
-            .login-container {
+
+            &__menu {
                 order: 4;
-                width: 40%;
-            }
-            .meny-button,
-            .menybutton-alternativ-samisk {
-                order: 5;
-                width: 30%;
-            }
-            .menybutton-alternativ-samisk {
-                color: @navBla;
-            }
-            .sok {
-                order: 6;
-                width: 100%;
-            }
-            .hovedmeny__dropdown-menu {
-                order: 7;
                 width: 100%;
             }
         }
-    }
-}
 
-@media (min-width: @desktopLimitWidth) {
-    .hovedmeny {
-        .hovedmeny__content {
-            width: @desktopLimitWidth;
-            padding: 0;
-
-            .hovedmeny__meny-elementer {
-                justify-content: space-between;
-
-                .navbar-brand {
-                    order: 1;
-                    width: auto;
-                }
-
-                .meny-button,
-                .menybutton-alternativ-samisk {
-                    order: 2;
-                    width: auto;
-                }
-
-                .sok,
-                .login-container {
-                    order: 3;
-                    width: auto;
-                }
-                .varselbjelle {
-                    order: 3;
-                    width: 31px;
-                }
-                .minside-lenke {
-                    order: 3;
-                    width: 102px;
-                }
-
-                .hovedmeny__dropdown-menu {
-                    order: 4;
-                    width: 100%;
-                }
-            }
+        .sok,
+        .login-container {
+            order: 3;
+            width: auto;
+        }
+        .varselbjelle {
+            order: 3;
+            width: 31px;
+        }
+        .minside-lenke {
+            order: 3;
+            width: 102px;
         }
     }
 }

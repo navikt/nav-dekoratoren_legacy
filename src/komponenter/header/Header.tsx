@@ -8,6 +8,8 @@ import Hovedmeny from './hovedmeny/Hovedmeny';
 import './Header.less';
 import { Language } from '../../reducer/language-duck';
 import { AppState } from '../../reducer/reducer';
+import MediaQuery from 'react-responsive';
+import Mobilmeny from './mobilmeny/Mobilmeny';
 
 interface StateProps {
     language: Language;
@@ -31,8 +33,13 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
                 <div className="hodefot">
                     <header className="siteheader">
                         <div className="innhold-container">
-                            {language === Language.NORSK && <Toppmeny />}
-                            <Hovedmeny language={language} />
+                            <MediaQuery minWidth={800}>
+                                {language === Language.NORSK && <Toppmeny />}
+                                <Hovedmeny language={language} />
+                            </MediaQuery>
+                            <MediaQuery maxWidth={799}>
+                                <Mobilmeny language={language} />
+                            </MediaQuery>
                         </div>
                     </header>
                 </div>

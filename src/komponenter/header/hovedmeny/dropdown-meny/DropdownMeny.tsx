@@ -71,13 +71,13 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
             <>
                 <button
                     onClick={this.dropDownExpand}
-                    className="meny-button"
+                    className={cls.element('menubutton')}
                     aria-label="Menyknapp"
                     aria-haspopup="true"
                     aria-controls="dropdown-menu"
                     aria-expanded={this.state.clicked}
                 >
-                    <div className="button-content">
+                    <div className={cls.element('button-content')}>
                         <HamburgerIkon ikonClass="hamburger-ikon" />
                         <Undertittel>
                             <Tekst id="meny-knapp" />
@@ -85,10 +85,7 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
                     </div>
                 </button>
 
-                <div
-                    id="dropdown-menu"
-                    className={cls.element('dropdown-menu')}
-                >
+                <div id="dropdown-menu" className={cls.element('menu')}>
                     {meny.status === Status.OK ? (
                         <div
                             className={cls.element(

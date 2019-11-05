@@ -4,7 +4,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../ikoner/meny/NavLogoRod';
-import MenyToggleKnapp from './dropdown-meny/DropdownMeny';
+import DropdownMeny from './dropdown-meny/DropdownMeny';
 import Sok from './sok/Sok';
 import MinsideLenke from './minside-lenke/MinsideLenke';
 import Varselbjelle from './varsel/Varselbjelle';
@@ -13,7 +13,8 @@ import { Language } from '../../../reducer/language-duck';
 import Tekst from '../../../tekster/finn-tekst';
 import './Hovedmeny.less';
 
-const cls = BEMHelper('hovedmeny');
+const hovedmenyClass = BEMHelper('hovedmeny');
+export const dropdownClass = BEMHelper('dropdown');
 
 interface Props {
     language: Language;
@@ -21,20 +22,23 @@ interface Props {
 
 const Hovedmeny = ({ language }: Props) => {
     return (
-        <nav className={cls.className}>
-            <div className={cls.element('content')}>
-                <div className={cls.element('meny-elementer')}>
+        <nav className={hovedmenyClass.className}>
+            <div className={hovedmenyClass.element('content')}>
+                <div className={hovedmenyClass.element('meny-elementer')}>
                     <NavLogoRod
                         width="88"
                         height="88"
-                        classname={cls.element('logo')}
+                        classname={hovedmenyClass.element('nav-brand')}
                     />
                     {language === Language.NORSK ||
                     language === Language.ENGELSK ? (
-                        <MenyToggleKnapp classname="hovedmeny" />
+                        <DropdownMeny classname={dropdownClass.className} />
                     ) : (
                         <div
-                            className="menybutton-alternativ-samisk"
+                            className={dropdownClass.element(
+                                'menubutton',
+                                'alternativ-samisk'
+                            )}
                             tabIndex={0}
                         >
                             <Undertittel>
@@ -42,9 +46,7 @@ const Hovedmeny = ({ language }: Props) => {
                             </Undertittel>
                         </div>
                     )}
-
                     <Sok />
-
                     <InnloggingsstatusProvider>
                         <>
                             <MinsideLenke />

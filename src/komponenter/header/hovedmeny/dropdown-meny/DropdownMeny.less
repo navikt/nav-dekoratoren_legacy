@@ -1,22 +1,24 @@
 @import '~nav-frontend-core/less/_variabler';
 @import '../../../../styling-variabler.less';
 
-.hovedmeny .meny-button {
-    text-decoration: none;
-    color: black;
-    background-color: white;
-    border: none;
-    padding: 0;
-
-    &:focus {
+.dropdown {
+    &__menubutton {
         text-decoration: none;
-        box-shadow: none;
-        outline: none;
-        border: @navDypBla 3px solid;
-        border-radius: 4px;
+        color: black;
+        background-color: white;
+        border: none;
+        padding: 0;
+
+        &:focus {
+            text-decoration: none;
+            box-shadow: none;
+            outline: none;
+            border: @navDypBla 3px solid;
+            border-radius: 4px;
+        }
     }
 
-    .button-content {
+    &__button-content {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -33,10 +35,8 @@
             margin-right: 0.5rem;
         }
     }
-}
 
-.hovedmeny .hovedmeny__dropdown-menu {
-    .hovedmeny__menyvalg {
+    &__menyvalg {
         display: flex;
         flex-direction: column;
         overflow: hidden;
@@ -49,99 +49,99 @@
             margin-bottom: 2rem;
             max-height: 70rem;
         }
+    }
+    &__hovedSeksjon {
+        margin-bottom: 0.2rem;
+    }
 
-        .hovedmeny__hovedSeksjon {
-            margin-bottom: 0.2rem;
+    &__seksjon {
+        padding-bottom: 0.5rem;
 
-            .hovedmeny__seksjon {
-                padding-bottom: 0.5rem;
+        li {
+            list-style-type: initial;
+            margin-bottom: 0.3rem;
 
-                li {
-                    list-style-type: initial;
-                    margin-bottom: 0.3rem;
-
-                    .lenke {
-                        text-decoration: none;
-                        color: black;
-
-                        &:hover {
-                            text-decoration: underline;
-                        }
-                        &:focus {
-                            color: white;
-                        }
-                    }
-                }
-            }
-        }
-
-        .hovedmeny__minSideSeksjon {
             .lenke {
-                color: black;
                 text-decoration: none;
+                color: black;
+
+                &:hover {
+                    text-decoration: underline;
+                }
 
                 &:focus {
                     color: white;
                 }
-                &:active {
-                    font-weight: bold;
-                }
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-
-            .minside-list-item {
-                padding: 0.125rem 0 0.125rem 0;
-                list-style: initial;
-            }
-
-            .minside-dittnav-lenke {
-                margin-top: 1rem;
-
-                .lenke {
-                    list-style-type: none;
-                    margin-left: -1.175rem;
-                }
             }
         }
     }
-}
 
-@media (min-width: @desktopLimitWidth) {
-    .hovedmeny .hovedmeny__dropdown-menu {
-        ul {
-            margin: 0;
+    &__minSideSeksjon {
+        .lenke {
+            color: black;
+            text-decoration: none;
+
+            &:focus {
+                color: white;
+            }
+
+            &:active {
+                font-weight: bold;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
 
-        .hovedmeny__menyvalg {
+        .minside-list-item {
+            padding: 0.125rem 0 0.125rem 0;
+            list-style: initial;
+        }
+
+        .minside-dittnav-lenke {
+            margin-top: 1rem;
+
+            .lenke {
+                list-style-type: none;
+                margin-left: -1.175rem;
+            }
+        }
+    }
+
+    @media (min-width: @desktopLimitWidth) {
+        &__menyvalg {
             flex-direction: row;
             max-width: @desktopLimitWidth;
 
             &--active {
                 max-height: 40rem;
             }
+        }
 
-            .hovedmeny__hovedSeksjon {
-                flex-grow: 6;
-                justify-content: center;
-                display: -ms-grid;
-                display: grid;
-                -ms-grid-columns: auto auto auto;
-                grid-template-columns: auto auto auto;
-                margin-bottom: 0.2rem;
+        &__hovedSeksjon {
+            flex-grow: 6;
+            justify-content: center;
+            display: -ms-grid;
+            display: grid;
+            -ms-grid-columns: auto auto auto;
+            grid-template-columns: auto auto auto;
+            margin-bottom: 0.2rem;
+        }
 
-                .hovedmeny__seksjon {
-                    padding: 0.75rem 0 0.5rem 2rem;
-                }
+        &__seksjon {
+            padding: 0.75rem 0 0.5rem 2rem;
+
+            ul {
+                margin: 0;
             }
+        }
 
-            .hovedmeny__minSideSeksjon {
-                flex-grow: 1;
-                margin: 0 0 0.2rem 0.5rem;
-                padding: 0.75rem 0 0.5rem 1.5rem;
-                min-width: 8rem;
-            }
+        &__minSideSeksjon {
+            flex-grow: 1;
+            margin: 0 0 0.2rem 0.5rem;
+            padding: 0.75rem 0 0.5rem 1.5rem;
+            min-width: 8rem;
         }
     }
 }

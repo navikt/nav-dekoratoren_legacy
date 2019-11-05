@@ -54,7 +54,7 @@ const header = ReactDOMServer.renderToString(
 );
 const footer = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
-        <Footer />
+        <Footer visSpraak={true} />
     </ReduxProvider>
 );
 

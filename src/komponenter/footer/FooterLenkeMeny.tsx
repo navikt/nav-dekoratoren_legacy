@@ -7,6 +7,7 @@ import NavLogoFooter from '../ikoner/meny/NavLogoFooter';
 interface Props {
     className: string;
     language: Language;
+    visSpraak: boolean;
 }
 
 interface State {
@@ -88,15 +89,17 @@ class FooterLenkeMeny extends React.Component<Props, State> {
                             <li>
                                 <Lenke href="#">Kontakt oss</Lenke>
                             </li>
-                            {this.state.languages.map(lenke => {
-                                return (
-                                    <li key={lenke.lang}>
-                                        <Lenke href={lenke.url}>
-                                            {lenke.text}
-                                        </Lenke>
-                                    </li>
-                                );
-                            })}
+
+                            {this.props.visSpraak &&
+                                this.state.languages.map(lenke => {
+                                    return (
+                                        <li key={lenke.lang}>
+                                            <Lenke href={lenke.url}>
+                                                {lenke.text}
+                                            </Lenke>
+                                        </li>
+                                    );
+                                })}
                             <li>
                                 <Lenke href="#">
                                     Del skjerm med kontaktsenteret
