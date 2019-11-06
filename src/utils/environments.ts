@@ -3,6 +3,12 @@ export const verifyWindowObj = () => {
     return typeof window !== 'undefined';
 };
 
+export const erNavDekoratoren = (): boolean => {
+    return (
+        verifyWindowObj() && window.location.href.includes('/nav-dekoratoren')
+    );
+};
+
 const checkWindowObjIncludes = (searchString: string) => {
     if (verifyWindowObj()) {
         return window.location.origin.toLowerCase().includes(searchString);

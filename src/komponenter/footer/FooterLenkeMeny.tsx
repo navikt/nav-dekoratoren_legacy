@@ -3,6 +3,7 @@ import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
 import NavLogoFooter from '../ikoner/meny/NavLogoFooter';
+import { erNavDekoratoren } from '../../utils/environments';
 
 interface Props {
     className: string;
@@ -61,19 +62,13 @@ class FooterLenkeMeny extends React.Component<Props, State> {
             () => {
                 if (this.state.hasMounted) {
                    this.setState({
-                       erNavDekoratoren: this.erNavDekoratoren(),
+                       erNavDekoratoren: erNavDekoratoren(),
                        languages: this.getLanguage()
                    });
                 }
             }
         );
     }
-
-    erNavDekoratoren = (): boolean => {
-        return (
-            window.location.href.includes('/nav-dekoratoren')
-        );
-    };
 
     getLanguage = () => {
         const nonSelectedLang = this.lang;
