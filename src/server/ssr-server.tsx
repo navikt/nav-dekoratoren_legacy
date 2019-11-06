@@ -110,6 +110,7 @@ app.get(
             <script type="text/javascript" src=${script}></script>
         </div>
         <div id="megamenu-resources"></div>
+        <div id="webstats-ga-notrack"></div>
     </body>
 </html>`);
     }
