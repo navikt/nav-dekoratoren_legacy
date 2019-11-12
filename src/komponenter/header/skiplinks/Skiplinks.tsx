@@ -6,11 +6,14 @@ const Skiplinks = () => {
         <div id="skiplinks">
             <div className="hodefot">
                 <nav>
-                    <a href="#" className="visuallyhidden focusable">
-                        Til hovedmeny
+                    <a href="#toppmeny" className="visuallyhidden focusable">
+                        Gå til hovedmeny
                     </a>
-                    <a href="#" className="visuallyhidden focusable">
-                        Til hovedinnhold
+                    <a href="#maincontent" className="visuallyhidden focusable">
+                        Gå til hovedinnhold
+                    </a>
+                    <a href="#sok" className="visuallyhidden focusable">
+                        Gå til søk
                     </a>
                 </nav>
             </div>
