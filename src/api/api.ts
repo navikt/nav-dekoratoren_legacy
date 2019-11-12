@@ -5,7 +5,7 @@ import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { Meny as menypunkterData } from '../reducer/menu-duck';
 
-const { baseUrl, menypunkter, sokeresultat } = Environments();
+const { baseUrl, innloggingslinjenUrl, menypunkter, sokeresultat } = Environments();
 
 export const varselinnboksUrl = `${baseUrl}/person/varselinnboks`;
 
@@ -37,7 +37,7 @@ interface ApiProps {
 }
 
 export const API: ApiProps = {
-    innloggingsstatusURL: `${baseUrl}/innloggingslinje-api/auth`,
+    innloggingsstatusURL: `${innloggingslinjenUrl}/innloggingslinje-api/auth`,
     menyPunkterURL: menypunkter,
     getVarselinnboksURL: `${varselinnboksUrl}/varsler`,
     postVarselinnboksURL: `${varselinnboksUrl}/rest/varsel/erlest`,
