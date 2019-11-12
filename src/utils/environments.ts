@@ -33,7 +33,7 @@ const Environments = () => {
                 'http://localhost:8088/person/nav-dekoratoren/api/get/sokeresultat',
         };
     }
-    if (checkWindowObjIncludes('www-q0')) {
+    if (checkWindowObjIncludes('-q') || checkWindowObjIncludes('-t')) {
         return {
             miljo: 'DEV',
             baseUrl: 'https://www-q0.nav.no',
@@ -43,37 +43,18 @@ const Environments = () => {
             menypunkter:
                 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
             minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no',
-            sokeresultat:
-                'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
+            sokeresultat: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
         };
     }
-    if (checkWindowObjIncludes('www-q1')) {
-        return {
-            miljo: 'DEV',
-            baseUrl: 'https://www-q1.nav.no',
-            baseUrlEnonic: 'https://www-x1.nav.no',
-            loginUrl: 'https://loginservice-q.nav.no',
-            logoutUrl: 'https://loginservice-q.nav.no/slo',
-            menypunkter:
-                'https://www-q1.nav.no/person/nav-dekoratoren/api/get/menyvalg',
-            minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no',
-            sokeresultat:
-                'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
-        };
-    }
-
     return {
         miljo: 'PROD',
         baseUrl: 'https://www.nav.no',
         baseUrlEnonic: 'https://www.nav.no',
         loginUrl: 'https://loginservice.nav.no',
         logoutUrl: 'https://loginservice.nav.no/slo',
-        menypunkter: !isLocal
-            ? 'https://www.nav.no/person/nav-dekoratoren/api/get/menyvalg'
-            : '/person/nav-dekoratoren/api/get/menyvalg',
+        menypunkter: 'https://www.nav.no/person/nav-dekoratoren/api/get/menyvalg',
         minsideArbeidsgiverUrl: 'https://arbeidsgiver.nav.no',
-        sokeresultat:
-            'https://www.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
+        sokeresultat: 'https://www.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
     };
 };
 
