@@ -26,7 +26,7 @@ const Toppmeny = ({ settArbeidsflate, arbeidsflate }: ToppmenyProps) => {
     const cls = BEMHelper('toppmeny');
 
     return (
-        <nav className="toppmeny">
+        <nav className="toppmeny" id="toppmeny">
             <ul className={cls.element('topp-liste-rad')} role="tablist">
                 {toppmenyLenker.map(
                     (lenke: {
