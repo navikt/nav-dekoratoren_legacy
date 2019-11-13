@@ -47,7 +47,7 @@ const Environments = () => {
             sokeresultat: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
         };
     }
-    if (checkWindowObjIncludes('-q6')) {
+    if (checkWindowObjIncludes('-q6.nav.no')) {
         return {
             miljo: 'DEV',
             baseUrl: 'https://www-q6.nav.no',
@@ -60,7 +60,7 @@ const Environments = () => {
             sokeresultat: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
         };
     }
-    if (checkWindowObjIncludes('-q0') || checkWindowObjIncludes('-q') || checkWindowObjIncludes('-t')) {
+    if (checkWindowObjIncludes('-q0.nav.no') || checkWindowObjIncludes('-q.nav.no') || checkWindowObjIncludes('-t')) {
         return {
             miljo: 'DEV',
             baseUrl: 'https://www-q0.nav.no',
