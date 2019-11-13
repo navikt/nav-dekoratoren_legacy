@@ -10,6 +10,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import Footer from '../komponenter/footer/Footer';
 import getStore from './../redux/store';
 import Head from '../Head';
+import '../tagmanager.js';
 
 const app = express();
 const PORT = 8088;
