@@ -1,9 +1,9 @@
 import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import MediaQuery from 'react-responsive';
-import BEMHelper from '../../../../utils/bem';
-import { MenySeksjon } from '../../../../reducer/menu-duck';
-import { DropdownVenstreLenke } from './Dropdown-venstre-lenke';
+import BEMHelper from '../../../../../utils/bem';
+import { MenySeksjon } from '../../../../../reducer/menu-duck';
+import { DropdownLenke } from './Dropdown-venstre-lenke';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
 interface Props {
@@ -61,11 +61,7 @@ const Menylenker = ({ menygruppe, tabindex }: MenylenkerProps) => (
     <ul>
         {menygruppe.children.map((lenke: MenySeksjon, index: number) => {
             return (
-                <DropdownVenstreLenke
-                    key={index}
-                    lenke={lenke}
-                    tabindex={tabindex}
-                />
+                <DropdownLenke key={index} lenke={lenke} tabindex={tabindex} />
             );
         })}
     </ul>

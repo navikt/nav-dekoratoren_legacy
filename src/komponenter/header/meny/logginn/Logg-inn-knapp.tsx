@@ -6,7 +6,10 @@ import Environments, { verifyWindowObj } from '../../../../utils/environments';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
 import Tekst from '../../../../tekster/finn-tekst';
-
+import MediaQuery from 'react-responsive';
+import { mobileview } from '../../../../api/api';
+import LogginnIkon from '../../../ikoner/mobilmeny/LogginnIkon';
+import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
 
 const { baseUrl, logoutUrl, loginUrl } = Environments();
@@ -76,13 +79,27 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
 
         return (
             <div className="login-container">
-                <KnappBase
-                    className="login-knapp"
-                    type="standard"
-                    onClick={this.handleButtonClick}
-                >
-                    <Tekst id={knappetekst} />
-                </KnappBase>
+                <MediaQuery minWidth={mobileview}>
+                    <KnappBase
+                        className="login-knapp"
+                        type="standard"
+                        onClick={this.handleButtonClick}
+                    >
+                        <Tekst id={knappetekst} />
+                    </KnappBase>
+                </MediaQuery>
+
+                <MediaQuery maxWidth={mobileview - 1}>
+                    <button
+                        className="mobil-login-knapp"
+                        onClick={this.handleButtonClick}
+                    >
+                        <LogginnIkon />
+                        <Undertittel>
+                            <Tekst id={knappetekst} />
+                        </Undertittel>
+                    </button>
+                </MediaQuery>
             </div>
         );
     }

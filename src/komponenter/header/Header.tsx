@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
 import Toppmeny from './toppmeny/Toppmeny';
-import Hovedmeny from './hovedmeny/Hovedmeny';
+import Hovedmeny from './meny/Hovedmeny';
 import './Header.less';
 import { Language } from '../../reducer/language-duck';
 import { AppState } from '../../reducer/reducer';
 import MediaQuery from 'react-responsive';
-import Mobilmeny from './mobilmeny/Mobilmeny';
+import Mobilmeny from './meny/Mobilmeny';
+import { mobileview } from '../../api/api';
 
 interface StateProps {
     language: Language;
@@ -33,12 +34,12 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
                 <div className="hodefot">
                     <header className="siteheader">
                         <div className="innhold-container">
-                            <MediaQuery minWidth={800}>
+                            <MediaQuery minWidth={mobileview}>
                                 {language === Language.NORSK && <Toppmeny />}
                                 <Hovedmeny language={language} />
                             </MediaQuery>
-                            <MediaQuery maxWidth={799}>
-                                <Mobilmeny language={language} />
+                            <MediaQuery maxWidth={mobileview - 1}>
+                                <Mobilmeny />
                             </MediaQuery>
                         </div>
                     </header>

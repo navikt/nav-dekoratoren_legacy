@@ -2,40 +2,6 @@
 @import '../../../../styling-variabler.less';
 
 .dropdown {
-    &__menubutton {
-        text-decoration: none;
-        color: black;
-        background-color: white;
-        border: none;
-        padding: 0;
-
-        &:focus {
-            text-decoration: none;
-            box-shadow: none;
-            outline: none;
-            border: @navDypBla 3px solid;
-            border-radius: 4px;
-        }
-    }
-
-    &__button-content {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        padding: 0.4rem 0.7rem;
-        width: fit-content;
-
-        &:hover {
-            border: 1px black solid;
-            cursor: pointer;
-        }
-
-        .hamburger-ikon {
-            margin-right: 0.5rem;
-        }
-    }
-
     &__menyvalg {
         display: flex;
         flex-direction: column;
@@ -110,6 +76,10 @@
     }
 
     @media (min-width: @desktopLimitWidth) {
+        &__button-content {
+            flex-direction: row;
+        }
+
         &__menyvalg {
             flex-direction: row;
             max-width: @desktopLimitWidth;

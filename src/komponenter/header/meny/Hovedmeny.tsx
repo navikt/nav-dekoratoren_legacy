@@ -24,7 +24,7 @@ const Hovedmeny = ({ language }: Props) => {
     return (
         <nav className={hovedmenyClass.className}>
             <div className={hovedmenyClass.element('content')}>
-                <div className={hovedmenyClass.element('meny-elementer')}>
+                <div className={hovedmenyClass.element('elementer')}>
                     <NavLogoRod
                         width="88"
                         height="88"
@@ -36,7 +36,7 @@ const Hovedmeny = ({ language }: Props) => {
                     ) : (
                         <div
                             className={dropdownClass.element(
-                                'menubutton',
+                                'menyknapp',
                                 'alternativ-samisk'
                             )}
                             tabIndex={0}

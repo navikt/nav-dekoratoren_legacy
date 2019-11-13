@@ -9,6 +9,9 @@ interface OwnProps {
 }
 
 const VarselVisning: React.FunctionComponent<OwnProps> = props => {
+    {
+        console.log(props.html);
+    }
     return (
         <div id="varsler-display" className="varsler-display">
             {props.html}

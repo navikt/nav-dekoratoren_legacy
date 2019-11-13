@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Navlogo = () => {
+const Navlogo = ({ width, height }: { width?: string; height?: string }) => {
     return (
         <svg
-            width="73px"
-            height="46px"
+            width={width ? width : '73px'}
+            height={height ? height : '46px'}
             viewBox="0 0 73 46"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
