@@ -65,7 +65,7 @@ const Environments = () => {
             miljo: 'DEV',
             baseUrl: 'https://www-q0.nav.no',
             baseUrlEnonic: 'https://www-x1.nav.no',
-            innloggingslinjenUrl: 'https://tjenester-q0.nav.no',
+            innloggingslinjenUrl: 'https://www-q0.nav.no',
             loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
             menypunkter:
