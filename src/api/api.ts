@@ -45,7 +45,7 @@ export const API: ApiProps = {
 };
 
 export function hentInnloggingsstatusFetch(): Promise<innloggingsstatusData> {
-    return fetchToJson(API.innloggingsstatusURL);
+    return fetchToJson(API.innloggingsstatusURL,  { credentials: 'include' });
 }
 
 export function hentMenyPunkter(): Promise<menypunkterData[]> {
