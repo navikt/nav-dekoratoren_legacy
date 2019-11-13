@@ -1,0 +1,78 @@
+.mobilmeny {
+    &__meny {
+        &--top {
+            width: 100%;
+            max-height: 6rem;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        &--lukkmeny-ramme {
+            height: 42px;
+            margin-top: 14px;
+        }
+    }
+
+    &__lukkmeny-knapp {
+        width: 42px;
+        height: 42px;
+        border: 2px solid #1271c9;
+        border-radius: 50%;
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0 1rem;
+        background-color: #cce1f3;
+
+        &:after {
+            width: 24px;
+            height: 2px;
+            background-color: #1271c9;
+            content: '';
+            left: 50%;
+            top: 50%;
+            margin-left: -12px;
+            margin-top: -2px;
+            position: absolute;
+            transform: rotate(-45deg);
+        }
+
+        &:before {
+            left: 50%;
+            top: 50%;
+            margin-left: -12px;
+            margin-top: -2px;
+            width: 24px;
+            height: 2px;
+            background-color: #1271c9;
+            content: '';
+            position: absolute;
+            transform: rotate(45deg);
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &__lukkmeny-knapp[data-animation='beat-rotation']:not(.heartbeat) {
+        transition: 200ms cubic-bezier(0.175, 0.885, 0.52, 1.775);
+    }
+
+    @keyframes beat {
+        0% {
+            transform: scale(1);
+        }
+
+        100% {
+            transform: scale(0.8);
+        }
+    }
+
+    .heartbeat {
+        animation: beat 0.1s 2 ease-in-out alternate;
+    }
+}

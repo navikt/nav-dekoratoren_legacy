@@ -1,23 +1,23 @@
 import React from 'react';
 import Navlogo from '../../../../../ikoner/meny/Navlogo';
 import BEMHelper from '../../../../../../utils/bem';
+import './Toppseksjon.less';
 
 interface Props {
-    classname: string;
     lukkmeny: () => void;
     viewIndex: boolean;
 }
 
-const TopSeksjon = ({ classname, lukkmeny, viewIndex }: Props) => {
-    const className = BEMHelper(classname);
+const TopSeksjon = ({ lukkmeny, viewIndex }: Props) => {
+    const className = BEMHelper('mobilmeny');
 
     return (
-        <div className={className.element('seksjon', 'top')}>
+        <div className={className.element('meny', 'top')}>
             <Navlogo />
-            <div className={className.element('seksjon', 'closeButtonframe')}>
+            <div className={className.element('meny', 'lukkmeny-ramme')}>
                 <button
                     className={className.element(
-                        'closeButton',
+                        'lukkmeny-knapp',
                         viewIndex ? '' : ' heartbeat'
                     )}
                     data-animation="beat-rotation"

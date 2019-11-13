@@ -9,9 +9,9 @@ interface Props {
 const Listelement: React.FunctionComponent<Props> = props => {
     const listelementClass = BEMHelper(props.className);
     return (
-        <li className={listelementClass.element('seksjon', 'listItem')}>
+        <li className={listelementClass.element('meny', 'listItem')}>
             <Undertittel>
-                <span className={listelementClass.element('seksjon', 'navn')}>
+                <span className={listelementClass.element('meny', 'text')}>
                     {props.children}
                 </span>
             </Undertittel>

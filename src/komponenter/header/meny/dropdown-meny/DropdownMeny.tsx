@@ -65,13 +65,13 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
                     ToggleMenu={this.dropDownExpand}
                     clicked={this.state.clicked}
                 />
-                <div id="dropdown-menu" className={cls.element('meny-ramme')}>
+                <div id="dropdown-menu" className={cls.element('meny-wrapper')}>
                     {meny.status === Status.OK ? (
                         <>
                             <div
                                 className={cls.element(
-                                    'menyvalg',
-                                    this.state.clicked ? 'active' : ''
+                                    'meny-innhold',
+                                    this.state.clicked ? 'aktive' : ''
                                 )}
                             >
                                 <MediaQuery minWidth={mobileview}>

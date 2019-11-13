@@ -1,0 +1,112 @@
+@import '../../../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../../styling-variabler.less';
+
+@mobileview: 80%;
+
+.mobilmeny {
+    &__meny-innhold {
+        position: absolute;
+        top: 0;
+        left: -(@mobileview);
+        z-index: 1001;
+    }
+
+    &__undermeny-innhold {
+        top: 0;
+        left: -(@mobileview);
+        width: @mobileview;
+        position: fixed;
+
+        &--active {
+            left: 0;
+        }
+    }
+
+    &__meny-innhold,
+    &__undermeny-innhold {
+        background-color: white;
+        width: @mobileview;
+        padding: 0rem;
+        height: 100%;
+        border-radius: 3px;
+        overflow: hidden;
+        transition: all 0.7s ease-in-out;
+
+        &--aktive {
+            left: 0;
+        }
+    }
+
+    &__meny {
+        &--list {
+            padding: 1rem 1.5rem 0.5rem 2rem;
+        }
+
+        &--listItem {
+            padding-bottom: 2rem;
+
+            .lenke {
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+
+                &:active,
+                &:focus {
+                    color: @navDypBla;
+                    box-shadow: none;
+                }
+            }
+        }
+
+        &--tilbakeknapp {
+            max-height: 1.5rem;
+            padding-bottom: 2rem;
+        }
+
+        &--text {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &--ingress {
+            max-height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+    }
+
+    &__lukk-undermeny .lenke {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    &__lukk-undermeny .lenke i {
+        margin-right: 0.5rem;
+    }
+
+    &__mobilbackgrunn {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+
+        &--active {
+            display: initial;
+        }
+    }
+}

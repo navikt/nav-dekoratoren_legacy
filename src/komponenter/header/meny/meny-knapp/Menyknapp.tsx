@@ -26,7 +26,6 @@ const Menyknapp = (props: Props) => {
         >
             <div className={cls.element('menyknapp', 'innhold')}>
                 <MediaQuery minWidth={mobileview}>
-                    <MediaQuery />
                     <HamburgerIkon ikonClass="hamburger-ikon" />
                 </MediaQuery>
                 <MediaQuery maxWidth={mobileview - 1}>

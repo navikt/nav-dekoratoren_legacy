@@ -2,7 +2,7 @@
 @import '../../../../styling-variabler.less';
 
 .dropdown {
-    &__menyvalg {
+    &__meny-innhold {
         display: flex;
         flex-direction: column;
         overflow: hidden;
@@ -11,11 +11,12 @@
         max-height: 0;
         transition: all 0.7s ease-in-out;
 
-        &--active {
+        &--aktive {
             margin-bottom: 2rem;
             max-height: 70rem;
         }
     }
+
     &__hovedSeksjon {
         margin-bottom: 0.2rem;
     }
@@ -76,15 +77,11 @@
     }
 
     @media (min-width: @desktopLimitWidth) {
-        &__button-content {
-            flex-direction: row;
-        }
-
-        &__menyvalg {
+        &__meny-innhold {
             flex-direction: row;
             max-width: @desktopLimitWidth;
 
-            &--active {
+            &--aktive {
                 max-height: 40rem;
             }
         }
@@ -112,6 +109,10 @@
             margin: 0 0 0.2rem 0.5rem;
             padding: 0.75rem 0 0.5rem 1.5rem;
             min-width: 8rem;
+        }
+
+        &__button-content {
+            flex-direction: row;
         }
     }
 }

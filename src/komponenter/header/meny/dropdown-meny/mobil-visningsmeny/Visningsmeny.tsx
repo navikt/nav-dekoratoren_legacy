@@ -1,13 +1,13 @@
 import React from 'react';
 import { MenySeksjon } from '../../../../../reducer/menu-duck';
 import BEMHelper from '../../../../../utils/bem';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
-import Tekst from '../../../../../tekster/finn-tekst';
-import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
-import VenstreChevron from 'nav-frontend-chevron/lib/venstre-chevron';
-import TopSeksjon from './top-seksjon/TopSeksjon';
+import Topseksjon from './top-seksjon/Topseksjon';
+import './Visningsmeny.less';
+import Listelement from './liste-element/Listelement';
+import Lukkundermeny from './lukk-undermeny/Lukkundermeny';
+import MenyIngress from './meny-ingress/MenyIngress';
 
 interface VisningsmenyProps {
     classname: string;
@@ -61,23 +61,20 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
     };
 
     render(): React.ReactNode {
-        const { classname, menyLenker, viewIndex } = this.props;
+        const { classname, menyLenker } = this.props;
         const slideoutMeny = BEMHelper(classname);
 
         return (
-            <div className={slideoutMeny.className}>
-                <section className={slideoutMeny.element('seksjon')}>
-                    <TopSeksjon
-                        classname={slideoutMeny.className}
+            <>
+                <section className={slideoutMeny.element('startmeny')}>
+                    <Topseksjon
                         lukkmeny={this.props.closeButton}
                         viewIndex={this.props.viewIndex}
                     />
-                    <div className={slideoutMeny.element('seksjon', 'ingress')}>
-                        <Innholdstittel>
-                            <Tekst id="meny-slideut-ingress" />
-                        </Innholdstittel>
-                    </div>
-                    <ul className={slideoutMeny.element('seksjon', 'list')}>
+                    <MenyIngress
+                        className={slideoutMeny.element('meny', 'ingress')}
+                    />
+                    <ul className={slideoutMeny.element('meny', 'list')}>
                         {menyLenker.children.map(
                             (menyElement: MenySeksjon, index: number) => {
                                 return (
@@ -91,24 +88,12 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
                                             )
                                         }
                                     >
-                                        <li
-                                            className={slideoutMeny.element(
-                                                'seksjon',
-                                                'listItem'
-                                            )}
+                                        <Listelement
+                                            className={slideoutMeny.className}
                                         >
-                                            <Undertittel>
-                                                <span
-                                                    className={slideoutMeny.element(
-                                                        'seksjon',
-                                                        'navn'
-                                                    )}
-                                                >
-                                                    {menyElement.displayName}
-                                                    <HoyreChevron />
-                                                </span>
-                                            </Undertittel>
-                                        </li>
+                                            {menyElement.displayName}
+                                            <HoyreChevron />
+                                        </Listelement>
                                     </Lenke>
                                 );
                             }
@@ -117,58 +102,37 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
                 </section>
                 <section
                     className={slideoutMeny.element(
-                        'undermeny',
+                        'undermeny-innhold',
                         this.state.clicked ? 'active' : ''
                     )}
                 >
-                    <TopSeksjon
-                        classname={slideoutMeny.className}
+                    <Topseksjon
                         lukkmeny={this.lukkMenyer}
                         viewIndex={this.state.clicked}
                     />
-                    <div className={slideoutMeny.element('tilbakeknapp')}>
-                        <Innholdstittel
-                            className={slideoutMeny.element(
-                                'meny',
-                                'tilbakeknapp'
-                            )}
-                        >
-                            <Lenke
-                                href="https://nav.no"
-                                onClick={event => {
-                                    event.preventDefault();
-                                    this.lukkMeny();
-                                }}
-                            >
-                                <VenstreChevron />
-                                Tilbake til oversikt
-                            </Lenke>
-                        </Innholdstittel>
-                    </div>
+
+                    <Lukkundermeny
+                        lukkundermeny={this.lukkMeny}
+                        className={slideoutMeny.className}
+                    />
                     <ul className={slideoutMeny.element('meny', 'list')}>
                         {this.state.lenker.children.map(
                             (lenke, index: number) => {
                                 return (
-                                    <li
-                                        key={index}
-                                        className={slideoutMeny.element(
-                                            'meny',
-                                            'listItem'
-                                        )}
-                                    >
-                                        <Lenke href={lenke.path}>
-                                            <Undertittel>
-                                                <HoyreChevron />
-                                                {lenke.displayName}
-                                            </Undertittel>
-                                        </Lenke>
-                                    </li>
+                                    <Lenke href={lenke.path} key={index}>
+                                        <Listelement
+                                            className={slideoutMeny.className}
+                                        >
+                                            <HoyreChevron />
+                                            {lenke.displayName}
+                                        </Listelement>
+                                    </Lenke>
                                 );
                             }
                         )}
                     </ul>
                 </section>
-            </div>
+            </>
         );
     }
 }
