@@ -16,8 +16,6 @@ const checkWindowObjIncludes = (searchString: string) => {
     return false;
 };
 
-const isLocal = checkWindowObjIncludes('localhost');
-
 const Environments = () => {
     if (process.env.NODE_ENV === 'development') {
         return {
@@ -43,7 +41,7 @@ const Environments = () => {
             loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
             menypunkter: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
-            minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/',
+            minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no',
             sokeresultat: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
         };
     }
@@ -70,7 +68,7 @@ const Environments = () => {
             logoutUrl: 'https://loginservice-q.nav.no/slo',
             menypunkter:
                 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
-            minsideArbeidsgiverUrl: 'https://arbeidsgiver.nav.no/min-side-arbeidsgiver/',
+            minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/',
             sokeresultat: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
         };
     }
@@ -84,7 +82,7 @@ const Environments = () => {
             logoutUrl: 'https://loginservice-q.nav.no/slo',
             menypunkter:
                 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
-            minsideArbeidsgiverUrl: 'https://arbeidsgiver.nav.no/min-side-arbeidsgiver/',
+            minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/',
             sokeresultat: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
         };
     }
@@ -96,7 +94,7 @@ const Environments = () => {
         loginUrl: 'https://loginservice.nav.no',
         logoutUrl: 'https://loginservice.nav.no/slo',
         menypunkter: 'https://www.nav.no/person/nav-dekoratoren/api/get/menyvalg',
-        minsideArbeidsgiverUrl: 'https://arbeidsgiver.nav.no',
+        minsideArbeidsgiverUrl: 'https://arbeidsgiver.nav.no/min-side-arbeidsgiver/',
         sokeresultat: 'https://www.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
     };
 };
