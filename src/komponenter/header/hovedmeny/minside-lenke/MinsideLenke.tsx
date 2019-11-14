@@ -8,7 +8,6 @@ import { MenuValue } from '../../../../utils/meny-storage-utils';
 
 const { baseUrl, minsideArbeidsgiverUrl } = Environments();
 export const dittNavURL = `${baseUrl}/person/dittnav/`;
-const minSideArbeidsgiverURL = minsideArbeidsgiverUrl;
 
 interface StateProps {
     erInnlogget: boolean;
@@ -29,7 +28,7 @@ const MinsideLenke = ({ erInnlogget, arbeidsflate }: StateProps) => {
         arbeidsflate === MenuValue.PRIVATPERSON
             ? dittNavURL
             : arbeidsflate === MenuValue.ARBEIDSGIVER
-            ? minSideArbeidsgiverURL
+            ? minsideArbeidsgiverUrl
             : '';
 
     return (
