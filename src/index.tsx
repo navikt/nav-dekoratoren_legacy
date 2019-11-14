@@ -16,6 +16,13 @@ import ReactDOM from 'react-dom';
 import App from './App';
 // import * as serviceWorker from './serviceWorker';
 import './index.less';
+import TagManager from 'react-gtm-module';
+
+const tagManagerArgs = {
+    gtmId: 'GTM-PM9RP3',
+    dataLayerName: 'datalayer'
+}
+TagManager.initialize(tagManagerArgs)
 
 ReactDOM.render(<App />, document.getElementById('decorator-header'));
 

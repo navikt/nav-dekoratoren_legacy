@@ -10,13 +10,6 @@ import { Provider as ReduxProvider } from 'react-redux';
 import Footer from '../komponenter/footer/Footer';
 import getStore from './../redux/store';
 import Head from '../Head';
-import TagManager from 'react-gtm-module';
-
-const tagManagerArgs = {
-    gtmId: 'GTM-PM9RP3',
-    dataLayerName: 'datalayer'
-}
-TagManager.initialize(tagManagerArgs)
 
 const app = express();
 const PORT = 8088;
