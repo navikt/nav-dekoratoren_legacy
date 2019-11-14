@@ -41,7 +41,7 @@ const Environments = () => {
             loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
             menypunkter: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
-            minsideArbeidsgiverUrl: 'https://arbeidsgiver-q1.nav.no',
+            minsideArbeidsgiverUrl: 'https://arbeidsgiver-q1.nav.no/min-side-arbeidsgiver/',
             sokeresultat: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
         };
     }
