@@ -10,7 +10,7 @@ import GoogleTagManager from 'react-google-tag-manager';
 
 import Head from './Head';
 
-<GoogleTagManager gtmId='GTM-12345' />
+<GoogleTagManager gtmId='GTM-PM9RP3' />
 
 const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];
