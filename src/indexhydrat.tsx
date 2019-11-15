@@ -6,8 +6,15 @@ import { verifyWindowObj } from './utils/environments';
 import Footer from './komponenter/footer/Footer';
 import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
+import TagManager from 'react-gtm-module';
 
 import Head from './Head';
+
+const tagManagerArgs = {
+    gtmId: 'GTM-PM9RP3',
+    dataLayerName: 'dataLayer'
+}
+TagManager.initialize(tagManagerArgs)
 
 const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];
