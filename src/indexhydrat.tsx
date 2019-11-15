@@ -3,20 +3,20 @@ import ReactDOM from 'react-dom';
 // import * as serviceWorker from './serviceWorker';
 import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
-import TagManager from 'react-gtm-module';
+// import TagManager from 'react-gtm-module';
 import { verifyWindowObj } from './utils/environments';
 import Head from './Head';
 import Footer from './komponenter/footer/Footer';
 import './index.less';
 
-const tagManagerArgs = {
+/* const tagManagerArgs = {
     gtmId: 'GTM-PM9RP3',
     dataLayerName: 'dataLayer'
-};
+}; */
 
-if (verifyWindowObj()) {
+/* if (verifyWindowObj()) {
     TagManager.initialize(tagManagerArgs);
-}
+} */
 const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
