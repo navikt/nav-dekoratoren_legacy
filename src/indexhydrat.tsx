@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 // import * as serviceWorker from './serviceWorker';
 import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
-import tagManager from 'react-gtm-module';
+import TagManager from 'react-gtm-module';
 import { verifyWindowObj } from './utils/environments';
 import Head from './Head';
 import Footer from './komponenter/footer/Footer';
@@ -14,9 +14,6 @@ const tagManagerArgs = {
     dataLayerName: 'dataLayer'
 };
 
-if (verifyWindowObj()) {
-    tagManager.initialize(tagManagerArgs);
-}
 const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
@@ -39,8 +36,8 @@ if (verifyWindowObj()) {
     loadedStates.includes(document.readyState) && document.body
         ? run()
         : window.addEventListener('DOMContentLoaded', run, false);
+    TagManager.initialize(tagManagerArgs);
 } else {
     run();
 }
-
 // serviceWorker.unregister();
