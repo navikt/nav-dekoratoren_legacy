@@ -18,6 +18,7 @@ const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
 const run = () => {
+    TagManager.initialize(tagManagerArgs);
     ReactDOM.hydrate(
         <ReduxProvider store={store}>
             <Head />
@@ -36,7 +37,6 @@ if (verifyWindowObj()) {
     loadedStates.includes(document.readyState) && document.body
         ? run()
         : window.addEventListener('DOMContentLoaded', run, false);
-    TagManager.initialize(tagManagerArgs);
 } else {
     run();
 }
