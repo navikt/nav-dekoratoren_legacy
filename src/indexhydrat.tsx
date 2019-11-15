@@ -6,15 +6,11 @@ import { verifyWindowObj } from './utils/environments';
 import Footer from './komponenter/footer/Footer';
 import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
-import TagManager from 'react-gtm-module';
+import GoogleTagManager from 'react-google-tag-manager';
 
 import Head from './Head';
 
-const tagManagerArgs = {
-    gtmId: 'GTM-PM9RP3',
-    dataLayerName: 'dataLayer'
-}
-TagManager.initialize(tagManagerArgs)
+<GoogleTagManager gtmId='GTM-12345' />
 
 const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];

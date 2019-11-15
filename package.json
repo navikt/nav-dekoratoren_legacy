@@ -80,6 +80,7 @@
         "react-app-polyfill": "^1.0.4",
         "react-collapse": "^4.0.3",
         "react-dom": "^16.8.6",
+        "react-google-tag-manager": "^2.2.1",
         "react-gtm-module": "^2.0.8",
         "react-motion": "^0.5.2",
         "react-redux": "7.0.3",
