@@ -2,8 +2,6 @@ import React from 'react';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import { Input } from 'nav-frontend-skjema';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import Knapp from 'nav-frontend-knapper';
 import throttle from 'lodash.throttle';
 import Downshift from 'downshift';
 import cls from 'classnames';
@@ -17,6 +15,10 @@ import {
     visAlleTreff,
 } from './sok-utils';
 import './Sok.less';
+import SokeforslagIngress from './sok-forslag-ingress/SokeforslagIngress';
+import Sokeforslagtext from './sok-forslag-text/Sokeforslagtext';
+import DesktopSokknapp from './desktop-sok-knapp/DesktopSokknapp';
+import Mobilsokknapp from './mobil-sok-knapp/Mobilsokknapp';
 
 interface StateProps {
     language: Language;
@@ -95,8 +97,6 @@ class Sok extends React.Component<StateProps, InputState> {
                     getMenuProps,
                     isOpen,
                     inputValue,
-                    highlightedIndex,
-                    selectedItem,
                 }) => (
                     <form
                         className="sok"
@@ -121,7 +121,7 @@ class Sok extends React.Component<StateProps, InputState> {
                                         language
                                     )}
                                 />
-
+                                <Mobilsokknapp />
                                 <ul
                                     className="sokeresultat-liste"
                                     {...getMenuProps()}
@@ -136,48 +136,25 @@ class Sok extends React.Component<StateProps, InputState> {
                                                           key: index,
                                                           index,
                                                           item,
-                                                          style: {
-                                                              backgroundColor:
-                                                                  highlightedIndex ===
-                                                                  index
-                                                                      ? 'lightgray'
-                                                                      : 'white',
-                                                              fontWeight:
-                                                                  selectedItem ===
-                                                                  item
-                                                                      ? 'bold'
-                                                                      : 'normal',
-                                                          },
                                                       })}
                                                   >
-                                                      <div className="overskrift">
-                                                          <Undertittel>
-                                                              {item.displayName
-                                                                  ? item.displayName
-                                                                  : 'ingen treff å vise.'}
-                                                          </Undertittel>
-                                                      </div>
-                                                      <div className="highlight">
-                                                          <Normaltekst>
-                                                              {item.highlight
-                                                                  ? item.highlight.replace(
-                                                                        /<\/?[^>]+(>|$)/g,
-                                                                        ''
-                                                                    )
-                                                                  : ''}
-                                                          </Normaltekst>
-                                                      </div>
+                                                      <SokeforslagIngress
+                                                          className="sok-resultat-listItem"
+                                                          displayName={
+                                                              item.displayName
+                                                          }
+                                                      />
+                                                      <Sokeforslagtext
+                                                          highlight={
+                                                              item.highlight
+                                                          }
+                                                      />
                                                   </li>
                                               ))
                                         : null}
                                 </ul>
                             </div>
-
-                            <div className="sok-knapp btn">
-                                <Knapp type="standard" htmlType="submit">
-                                    <Tekst id="sok-knapp" />
-                                </Knapp>
-                            </div>
+                            <DesktopSokknapp />
                         </div>
                     </form>
                 )}

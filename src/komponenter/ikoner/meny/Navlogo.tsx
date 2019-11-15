@@ -1,6 +1,14 @@
 import React from 'react';
 
-const Navlogo = ({ width, height }: { width?: string; height?: string }) => {
+const Navlogo = ({
+    width,
+    height,
+    color,
+}: {
+    width?: string;
+    height?: string;
+    color?: string;
+}) => {
     return (
         <svg
             width={width ? width : '73px'}
@@ -36,12 +44,12 @@ const Navlogo = ({ width, height }: { width?: string; height?: string }) => {
                         <g id="Page-1-Copy">
                             <polygon
                                 id="Fill-3"
-                                fill="black"
+                                fill={color ? color : 'black'}
                                 points="0 33.0325728 4.6852974 21.4021941 9.18714498 21.4021941 4.50781784 33.0325728"
                             />
                             <polygon
                                 id="Fill-5"
-                                fill="black"
+                                fill={color ? color : 'black'}
                                 points="57.8149145 33.0325728 62.4402379 21.4021941 64.8945576 21.4021941 60.2695056 33.0325728"
                             />
                             <g
@@ -54,7 +62,7 @@ const Navlogo = ({ width, height }: { width?: string; height?: string }) => {
                                 <g id="Clip-8" />
                                 <polygon
                                     id="Fill-7"
-                                    fill="black"
+                                    fill={color ? color : 'black'}
                                     mask="url(#mask-2)"
                                     points="0.152920074 11.8175905 4.77742937 0.187211834 6.08084572 0.187211834 1.45579368 11.8175905"
                                 />
@@ -89,7 +97,7 @@ const Navlogo = ({ width, height }: { width?: string; height?: string }) => {
                                 32.0012461,27.1219811 C32.0012461,26.1799337 32.7657108,25.4118154 33.705484,25.4118154 L34.3657405,25.4118154
                                 C35.3030714,25.4118154 36.0664506,26.1799337 36.0664506,27.1219811 L36.0664506,28.8288805 Z"
                                 id="Combined-Shape"
-                                fill="black"
+                                fill={color ? color : 'black'}
                             />
                         </g>
                     </g>

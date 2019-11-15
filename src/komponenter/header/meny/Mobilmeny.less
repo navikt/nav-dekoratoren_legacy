@@ -27,6 +27,16 @@
         flex-wrap: wrap;
     }
 
+    &__logo {
+        &:hover {
+            outline: 1px solid black;
+        }
+
+        &:focus {
+            outline: 3px solid @fokusFarge;
+        }
+    }
+
     &__sok {
         margin-left: 3px;
         text-decoration: none;
@@ -38,6 +48,10 @@
 
         &:hover {
             outline: 1px black solid;
+        }
+
+        &:focus {
+            outline: 3px solid @fokusFarge;
         }
     }
 

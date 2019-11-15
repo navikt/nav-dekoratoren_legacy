@@ -8,6 +8,7 @@ import VenstreChevron from 'nav-frontend-chevron/lib/venstre-chevron';
 interface Props {
     lukkundermeny: () => void;
     className: string;
+    viewindex: boolean;
 }
 
 const Lukkundermeny = (props: Props) => {
@@ -21,6 +22,7 @@ const Lukkundermeny = (props: Props) => {
                         event.preventDefault();
                         props.lukkundermeny();
                     }}
+                    tabIndex={props.viewindex ? 0 : -1}
                 >
                     <VenstreChevron />
                     Tilbake til oversikt

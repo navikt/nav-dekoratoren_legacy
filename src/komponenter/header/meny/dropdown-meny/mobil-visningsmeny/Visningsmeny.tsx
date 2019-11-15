@@ -12,8 +12,8 @@ import MenyIngress from './meny-ingress/MenyIngress';
 interface VisningsmenyProps {
     classname: string;
     menyLenker: MenySeksjon;
-    viewIndex: boolean;
     closeButton: () => void;
+    viewIndex: boolean;
 }
 
 interface State {
@@ -61,7 +61,7 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
     };
 
     render(): React.ReactNode {
-        const { classname, menyLenker } = this.props;
+        const { classname, menyLenker, viewIndex } = this.props;
         const slideoutMeny = BEMHelper(classname);
 
         return (
@@ -69,7 +69,7 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
                 <section className={slideoutMeny.element('startmeny')}>
                     <Topseksjon
                         lukkmeny={this.props.closeButton}
-                        viewIndex={this.props.viewIndex}
+                        viewIndex={viewIndex}
                     />
                     <MenyIngress
                         className={slideoutMeny.element('meny', 'ingress')}
@@ -87,6 +87,7 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
                                                 menyElement
                                             )
                                         }
+                                        tabIndex={viewIndex ? 0 : -1}
                                     >
                                         <Listelement
                                             className={slideoutMeny.className}
@@ -114,12 +115,17 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
                     <Lukkundermeny
                         lukkundermeny={this.lukkMeny}
                         className={slideoutMeny.className}
+                        viewindex={viewIndex}
                     />
                     <ul className={slideoutMeny.element('meny', 'list')}>
                         {this.state.lenker.children.map(
                             (lenke, index: number) => {
                                 return (
-                                    <Lenke href={lenke.path} key={index}>
+                                    <Lenke
+                                        href={lenke.path}
+                                        key={index}
+                                        tabIndex={viewIndex ? 0 : -1}
+                                    >
                                         <Listelement
                                             className={slideoutMeny.className}
                                         >

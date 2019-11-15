@@ -23,6 +23,7 @@ const TopSeksjon = ({ lukkmeny, viewIndex }: Props) => {
                     data-animation="beat-rotation"
                     data-remove="200"
                     onClick={() => lukkmeny()}
+                    tabIndex={viewIndex ? 0 : -1}
                 />
             </div>
         </div>

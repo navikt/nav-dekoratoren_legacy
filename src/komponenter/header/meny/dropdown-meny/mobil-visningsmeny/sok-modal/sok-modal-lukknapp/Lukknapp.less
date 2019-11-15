@@ -1,0 +1,54 @@
+.lukk-container {
+    position: relative;
+
+    width: 30px;
+    height: 30px;
+
+    cursor: pointer;
+
+    label {
+        color: white;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.3s ease-in;
+    }
+    &__venstreside,
+    &__hoyreside {
+        width: 30px;
+        height: 2px;
+        margin-top: 20px;
+        position: absolute;
+        background-color: white;
+        border-radius: 2px;
+        transition: all 0.3s ease-in;
+        margin-left: 0.3rem;
+    }
+
+    &__venstreside {
+        transform: rotate(45deg);
+    }
+
+    &__hoyreside {
+        transform: rotate(-45deg);
+    }
+
+    &__venstreside {
+        &--flip {
+            transform: rotate(-45deg);
+            background-color: white;
+        }
+    }
+    &__hoyreside {
+        &--flip {
+            transform: rotate(45deg);
+            background-color: white;
+        }
+    }
+
+    .close {
+        margin: 45px 0 0 0;
+        position: absolute;
+    }
+}

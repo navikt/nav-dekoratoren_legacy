@@ -1,11 +1,19 @@
 import React from 'react';
 
-const SokIkon = () => {
+const SokIkon = ({
+    width,
+    height,
+    color,
+}: {
+    width?: string;
+    height?: string;
+    color?: string;
+}) => {
     return (
         <svg
-            width="20px"
-            height="21px"
-            viewBox="0 -2 21 22"
+            width={width ? width : '20px'}
+            height={height ? height : '21px'}
+            viewBox="0 -1 21 22"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -39,7 +47,7 @@ const SokIkon = () => {
                             </mask>
                             <use
                                 id="Sok-ikon-path06"
-                                fill="#3E3832"
+                                fill={color ? color : '#3E3832'}
                                 xlinkHref="#Sok-ikon-path01"
                             />
                         </g>

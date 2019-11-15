@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BEMHelper from '../../../utils/bem';
 import NavLogoRod from '../../ikoner/meny/NavLogoRod';
 import DropdownMeny from './dropdown-meny/DropdownMeny';
-import SokIkon from '../../ikoner/mobilmeny/SokIkon';
-import { Undertittel } from 'nav-frontend-typografi';
-import Tekst from '../../../tekster/finn-tekst';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import './Mobilmeny.less';
+import SokModal from './dropdown-meny/mobil-visningsmeny/sok-modal/Sokmodal';
+import SokKnapp from './dropdown-meny/mobil-visningsmeny/sok-knapp/SokKnapp';
 
 const mobilClass = BEMHelper('mobilmeny');
 
 const Mobilmeny = () => {
+    const [clickedModal, setClickedModal] = useState<boolean>(false);
+
+    const toggleModal = () => {
+        setClickedModal(!clickedModal);
+    };
+
     return (
         <nav className={mobilClass.className}>
             <div className={mobilClass.element('content')}>
@@ -25,25 +30,20 @@ const Mobilmeny = () => {
                     </div>
                     <div className={mobilClass.element('hoyre-kolonne')}>
                         <DropdownMeny classname={mobilClass.className} />
-                        <SokKnapp className={mobilClass.element('sok')} />
+                        <SokKnapp
+                            className={mobilClass.element('sok')}
+                            modalIsOpen={toggleModal}
+                        />
                         <InnloggingsstatusProvider>
                             <LoggInnKnapp />
                         </InnloggingsstatusProvider>
                     </div>
                 </div>
             </div>
+            <SokModal modalerApen={clickedModal} sokekappToggle={toggleModal} />
+            <div id="modal-ancor-block" />
+            <div id="main" />
         </nav>
-    );
-};
-
-export const SokKnapp = ({ className }: { className: string }) => {
-    return (
-        <button className={className}>
-            <SokIkon />
-            <Undertittel>
-                <Tekst id="sok-mobil-knapp" />
-            </Undertittel>
-        </button>
     );
 };
 
