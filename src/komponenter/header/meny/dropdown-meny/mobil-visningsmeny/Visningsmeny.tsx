@@ -8,6 +8,7 @@ import './Visningsmeny.less';
 import Listelement from './liste-element/Listelement';
 import Lukkundermeny from './lukk-undermeny/Lukkundermeny';
 import MenyIngress from './meny-ingress/MenyIngress';
+import MobilarbeidsflateValg from './mobil-arbeidsflate-valg/MobilarbeidsflateValg';
 
 interface VisningsmenyProps {
     classname: string;
@@ -91,6 +92,7 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
                                     >
                                         <Listelement
                                             className={slideoutMeny.className}
+                                            classElement="text-element"
                                         >
                                             {menyElement.displayName}
                                             <HoyreChevron />
@@ -100,6 +102,7 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
                             }
                         )}
                     </ul>
+                    <MobilarbeidsflateValg />
                 </section>
                 <section
                     className={slideoutMeny.element(
@@ -128,8 +131,15 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
                                     >
                                         <Listelement
                                             className={slideoutMeny.className}
+                                            classElement="text-element-undermeny"
                                         >
-                                            <HoyreChevron />
+                                            <div
+                                                className={slideoutMeny.element(
+                                                    'undermeny-chevron'
+                                                )}
+                                            >
+                                                <HoyreChevron />
+                                            </div>
                                             {lenke.displayName}
                                         </Listelement>
                                     </Lenke>

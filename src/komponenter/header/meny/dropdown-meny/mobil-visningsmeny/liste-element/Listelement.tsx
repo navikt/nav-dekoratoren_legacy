@@ -4,6 +4,7 @@ import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 
 interface Props {
     className: string;
+    classElement: string;
 }
 
 const Listelement: React.FunctionComponent<Props> = props => {
@@ -11,7 +12,12 @@ const Listelement: React.FunctionComponent<Props> = props => {
     return (
         <li className={listelementClass.element('meny', 'listItem')}>
             <Undertittel>
-                <span className={listelementClass.element('meny', 'text')}>
+                <span
+                    className={listelementClass.element(
+                        'meny',
+                        props.classElement
+                    )}
+                >
                     {props.children}
                 </span>
             </Undertittel>

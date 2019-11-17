@@ -1,13 +1,13 @@
 import React from 'react';
-import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
 import Tekst from '../../../../../../tekster/finn-tekst';
+import Sidetittel from 'nav-frontend-typografi/lib/sidetittel';
 
 const MenyIngress = ({ className }: { className: string }) => {
     return (
         <div className={className}>
-            <Innholdstittel>
+            <Sidetittel>
                 <Tekst id="meny-slideout-ingress" />
-            </Innholdstittel>
+            </Sidetittel>
         </div>
     );
 };

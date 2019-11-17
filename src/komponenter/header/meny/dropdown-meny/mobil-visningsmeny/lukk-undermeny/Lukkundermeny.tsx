@@ -15,7 +15,7 @@ const Lukkundermeny = (props: Props) => {
     const cls = BEMHelper(props.className);
     return (
         <div className={cls.element('lukk-undermeny')}>
-            <Innholdstittel className={cls.element('meny', 'tilbakeknapp')}>
+            <Innholdstittel className={cls.element('meny', 'tilbakelenke')}>
                 <Lenke
                     href="https://nav.no"
                     onClick={event => {

@@ -24,12 +24,13 @@
 
     &__meny-innhold,
     &__undermeny-innhold {
+        padding: 1rem;
         background-color: white;
         width: @mobileview;
-        padding: 0rem;
+        max-width: 400px;
         height: 100%;
         border-radius: 3px;
-        overflow: hidden;
+        overflow: scroll;
         transition: all 0.7s ease-in-out;
 
         &--aktive {
@@ -38,12 +39,12 @@
     }
 
     &__meny {
-        &--list {
-            padding: 1rem 1.5rem 0.5rem 2rem;
+        &--list ul {
+            margin: 0;
         }
 
-        &--listItem {
-            padding-bottom: 2rem;
+        &--list {
+            padding: 1rem 1rem 0.5rem 1rem;
 
             .lenke {
                 text-decoration: none;
@@ -60,37 +61,56 @@
             }
         }
 
-        &--tilbakeknapp {
-            max-height: 1.5rem;
+        &--listItem {
             padding-bottom: 2rem;
         }
 
-        &--text {
+        &--tilbakelenke {
+            padding-bottom: 0;
+        }
+
+        &--text-element {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
         }
 
+        &--text-element-undermeny {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
         &--ingress {
-            max-height: 3rem;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 1rem;
+            padding: 1rem 1.5rem 0 1.5rem;
+            color: @navGra80;
+
+            .typo-sidetittel {
+                font-weight: 500;
+            }
         }
     }
 
-    &__lukk-undermeny .lenke {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 1rem;
+    &__undermeny-chevron {
+        padding-right: 0.5rem;
     }
 
-    &__lukk-undermeny .lenke i {
-        margin-right: 0.5rem;
+    &__lukk-undermeny {
+        .lenke {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .lenke i {
+            margin-right: 0.5rem;
+        }
     }
 
     &__mobilbackgrunn {

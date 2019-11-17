@@ -1,31 +1,32 @@
 @import '~nav-frontend-core/less/_variabler';
 @import '../../../styling-variabler.less';
 
-.footer__logo .navbar-brand {
-    padding-right: 0.25rem;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
+.footer {
+    &__logo .navbar-brand {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
 
-    &:focus,
-    &:active {
-        outline: 0;
-        background-color: initial;
-        border: @navDypBla 3px solid;
-        border-radius: 4px;
-    }
+        &:focus,
+        &:active {
+            outline: 0;
+            background-color: initial;
+            border: @navDypBla 3px solid;
+            border-radius: 4px;
+        }
 
-    svg {
-        width: 60px;
-        height: 60px;
-    }
-}
-
-@media (min-width: @desktopLimitWidth) {
-    .footer__logo .navbar-brand {
         svg {
-            width: 65px;
-            height: 65px;
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    @media (min-width: @desktopLimitWidth) {
+        &__logo .navbar-brand {
+            svg {
+                width: 65px;
+                height: 65px;
+            }
         }
     }
 }

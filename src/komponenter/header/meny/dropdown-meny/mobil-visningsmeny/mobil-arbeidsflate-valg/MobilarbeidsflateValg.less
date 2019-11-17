@@ -1,0 +1,36 @@
+ul.mobil-seksjon-valg {
+    padding: 0;
+    margin: 0;
+
+    .lenke {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.mobil-seksjon-valg {
+    &__list-element li {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding-bottom: 1rem;
+
+        h2 {
+            font-weight: 400;
+        }
+    }
+
+    &__list-element {
+        &--chevron {
+            padding-right: 0.5rem;
+        }
+    }
+
+    &__lenke-tittel {
+        text-transform: lowercase;
+    }
+}

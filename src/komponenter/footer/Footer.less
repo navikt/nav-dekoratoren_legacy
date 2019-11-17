@@ -2,6 +2,15 @@
 @import '../../styling-variabler.less';
 
 .footer {
+    &__menylenker-seksjon {
+        ul {
+            &:first-child,
+            &:last-child {
+                margin-top: 0;
+            }
+        }
+    }
+
     .sitefooter {
         padding: 1rem;
         background-color: @navLysGra;
@@ -29,7 +38,6 @@
                 }
             }
             .footer__logo {
-                display: flex;
                 text-align: center;
             }
         }
