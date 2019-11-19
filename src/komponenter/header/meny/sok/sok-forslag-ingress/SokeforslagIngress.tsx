@@ -21,7 +21,7 @@ const SokeforslagIngress = ({
                     </div>
                     <div className="overskrift">
                         <Undertittel>
-                            {displayName ? displayName : 'ingen treff å vise.'}
+                            {displayName ? displayName : 'Ingen treff å vise.'}
                         </Undertittel>
                     </div>
                 </div>
@@ -29,7 +29,7 @@ const SokeforslagIngress = ({
             <MediaQuery minWidth={mobileview}>
                 <div className="overskrift">
                     <Undertittel>
-                        {displayName ? displayName : 'ingen treff å vise.'}
+                        {displayName ? displayName : 'Ingen treff å vise.'}
                     </Undertittel>
                 </div>
             </MediaQuery>

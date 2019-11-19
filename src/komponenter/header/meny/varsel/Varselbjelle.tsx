@@ -94,7 +94,6 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             arbeidsflate,
         } = this.props;
         const html = parse(varsler);
-        console.log(typeof html);
 
         return (
             <div ref={this.varselbjelleRef} className="varselbjelle">
@@ -118,21 +117,15 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                     </div>
                 ) : null}
                 {erInnlogget && (
-                    <>
-                        {console.log(
-                            'this.state.clicked in Varselbjelle: ',
-                            this.state.clicked
+                    <div className="min-varsel-wrapper">
+                        {this.props.children(
+                            antallUlesteVarsler,
+                            antallVarsler,
+                            html,
+                            this.state.clicked,
+                            this.handleClick
                         )}
-                        <div className="min-varsel-wrapper">
-                            {this.props.children(
-                                antallUlesteVarsler,
-                                antallVarsler,
-                                html,
-                                this.state.clicked,
-                                this.handleClick
-                            )}
-                        </div>
-                    </>
+                    </div>
                 )}
             </div>
         );

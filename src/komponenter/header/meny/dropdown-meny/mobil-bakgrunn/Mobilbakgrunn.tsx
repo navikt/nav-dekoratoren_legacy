@@ -3,20 +3,20 @@ import { mobileview } from '../../../../../api/api';
 import MediaQuery from 'react-responsive';
 import BEMHelper from '../../../../../utils/bem';
 
-const Mobilbrakgrunn = ({
+const Mobilbakgrunn = ({
     toggleWindow,
-    windowative,
+    backgroundIsActive,
 }: {
     toggleWindow: () => void;
-    windowative: boolean;
+    backgroundIsActive: boolean;
 }) => {
     const cls = BEMHelper('mobilmeny');
     return (
         <MediaQuery maxWidth={mobileview - 1}>
             <div
                 className={cls.element(
-                    'mobilbackgrunn',
-                    windowative ? 'active' : ''
+                    'mobilbakgrunn',
+                    backgroundIsActive ? 'active' : ''
                 )}
                 onClick={() => toggleWindow()}
             />
@@ -24,4 +24,4 @@ const Mobilbrakgrunn = ({
     );
 };
 
-export default Mobilbrakgrunn;
+export default Mobilbakgrunn;

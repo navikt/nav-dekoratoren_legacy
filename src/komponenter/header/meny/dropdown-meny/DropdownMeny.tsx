@@ -16,7 +16,7 @@ import MediaQuery from 'react-responsive';
 import './DropdownMeny.less';
 import Visningsmeny from './mobil-visningsmeny/Visningsmeny';
 import Menyknapp from '../meny-knapp/Menyknapp';
-import Mobilbrakgrunn from './mobil-bakgrunn/Mobilbrakgrunn';
+import Mobilbakgrunn from './mobil-bakgrunn/Mobilbakgrunn';
 
 interface OwnProps {
     classname: string;
@@ -110,9 +110,9 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
                                     />
                                 </MediaQuery>
                             </div>
-                            <Mobilbrakgrunn
+                            <Mobilbakgrunn
                                 toggleWindow={this.dropDownExpand}
-                                windowative={this.state.clicked}
+                                backgroundIsActive={this.state.clicked}
                             />
                         </>
                     ) : null}

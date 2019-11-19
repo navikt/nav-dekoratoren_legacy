@@ -6,15 +6,15 @@
     &__varsel-innhold {
         position: absolute;
         top: 0;
-        left: -(@mobileview);
+        left: -(@mobilemenuwidth);
         z-index: 1001;
     }
 
     &__undermeny-innhold,
     &__varsel-innhold {
         top: 0;
-        left: -(@mobileview);
-        width: @mobileview;
+        left: -(@mobilemenuwidth);
+        width: @mobilemenuwidth;
         position: fixed;
 
         &--active {
@@ -27,7 +27,7 @@
     &__varsel-innhold {
         padding: 1rem;
         background-color: white;
-        width: @mobileview;
+        width: @mobilemenuwidth;
         max-width: 400px;
         height: 100%;
         border-radius: 3px;
@@ -125,7 +125,7 @@
         }
     }
 
-    &__mobilbackgrunn {
+    &__mobilbakgrunn {
         display: none;
         position: fixed;
         z-index: 999;

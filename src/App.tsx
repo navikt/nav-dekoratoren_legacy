@@ -29,7 +29,7 @@ function App() {
             <LanguageProvider>
                 <>
                     <Header />
-                    <Footer visSpraak={true} />
+                    <Footer />
                 </>
             </LanguageProvider>
         </ReduxProvider>

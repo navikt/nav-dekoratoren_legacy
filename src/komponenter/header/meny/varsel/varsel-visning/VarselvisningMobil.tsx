@@ -19,7 +19,6 @@ interface OwnProps {
 
 const VarselvisningMobil: React.FunctionComponent<OwnProps> = props => {
     const cls = BEMHelper(props.visningmenyClassname);
-    console.log('props.visvarsel', props.visvarsel);
     const lukkvarselOgMenyer = () => {
         props.lukkvarselmeny();
         props.lukkmenyene();

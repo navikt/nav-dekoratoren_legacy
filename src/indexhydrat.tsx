@@ -21,7 +21,7 @@ const run = () => {
     );
     ReactDOM.hydrate(
         <ReduxProvider store={store}>
-            <Footer visSpraak={true} />
+            <Footer />
         </ReduxProvider>,
         document.getElementById('decorator-footer')
     );
