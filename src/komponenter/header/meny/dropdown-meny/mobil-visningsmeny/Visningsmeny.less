@@ -1,17 +1,17 @@
 @import '../../../../../../node_modules/nav-frontend-core/less/_variabler';
 @import '../../../../../styling-variabler.less';
 
-@mobileview: 80%;
-
 .mobilmeny {
-    &__meny-innhold {
+    &__meny-innhold,
+    &__varsel-innhold {
         position: absolute;
         top: 0;
         left: -(@mobileview);
         z-index: 1001;
     }
 
-    &__undermeny-innhold {
+    &__undermeny-innhold,
+    &__varsel-innhold {
         top: 0;
         left: -(@mobileview);
         width: @mobileview;
@@ -23,7 +23,8 @@
     }
 
     &__meny-innhold,
-    &__undermeny-innhold {
+    &__undermeny-innhold,
+    &__varsel-innhold {
         padding: 1rem;
         background-color: white;
         width: @mobileview;
@@ -113,6 +114,17 @@
         }
     }
 
+    .min-varsel-wrapper {
+        .mobilmeny {
+            &__lukk-undermeny {
+                .lenke {
+                    padding-top: 0;
+                    padding-bottom: 2rem;
+                }
+            }
+        }
+    }
+
     &__mobilbackgrunn {
         display: none;
         position: fixed;
@@ -127,6 +139,18 @@
 
         &--active {
             display: initial;
+        }
+    }
+
+    &__minside-rad {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem 0 0.5rem;
+
+        &--sett-rad-midt {
+            justify-content: flex-start;
         }
     }
 }

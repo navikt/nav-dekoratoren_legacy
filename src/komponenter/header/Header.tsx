@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
 import Toppmeny from './toppmeny/Toppmeny';
-import Hovedmeny from './meny/Hovedmeny';
+import Desktopmeny from './meny/Desktopmeny';
 import './Header.less';
 import { Language } from '../../reducer/language-duck';
 import { AppState } from '../../reducer/reducer';
@@ -36,7 +36,7 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
                         <div className="innhold-container">
                             <MediaQuery minWidth={mobileview}>
                                 {language === Language.NORSK && <Toppmeny />}
-                                <Hovedmeny language={language} />
+                                <Desktopmeny language={language} />
                             </MediaQuery>
                             <MediaQuery maxWidth={mobileview - 1}>
                                 <Mobilmeny />

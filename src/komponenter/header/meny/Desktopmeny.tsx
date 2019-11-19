@@ -11,7 +11,8 @@ import Varselbjelle from './varsel/Varselbjelle';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import { Language } from '../../../reducer/language-duck';
 import Tekst from '../../../tekster/finn-tekst';
-import './Hovedmeny.less';
+import './Desktopmeny.less';
+import VarselVisning from './varsel/varsel-visning/Varsel-visning';
 
 const hovedmenyClass = BEMHelper('hovedmeny');
 export const dropdownClass = BEMHelper('dropdown');
@@ -51,7 +52,24 @@ const Hovedmeny = ({ language }: Props) => {
                         <>
                             <MinsideLenke />
                             <VarselinnboksProvider>
-                                <Varselbjelle />
+                                <Varselbjelle>
+                                    {(
+                                        antallUlesteVarsler,
+                                        antallVarsler,
+                                        html,
+                                        clicked
+                                    ) =>
+                                        clicked && (
+                                            <VarselVisning
+                                                html={html}
+                                                antallUlesteVarsler={
+                                                    antallUlesteVarsler
+                                                }
+                                                antallVarsler={antallVarsler}
+                                            />
+                                        )
+                                    }
+                                </Varselbjelle>
                             </VarselinnboksProvider>
                             <LoggInnKnapp />
                         </>

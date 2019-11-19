@@ -1,5 +1,5 @@
 import React from 'react';
-import { varselinnboksUrl } from '../../../../api/api';
+import { varselinnboksUrl } from '../../../../../api/api';
 import './Varsel-visning.less';
 
 interface OwnProps {
@@ -9,9 +9,7 @@ interface OwnProps {
 }
 
 const VarselVisning: React.FunctionComponent<OwnProps> = props => {
-    {
-        console.log(props.html);
-    }
+    console.log(props.html);
     return (
         <div id="varsler-display" className="varsler-display">
             {props.html}

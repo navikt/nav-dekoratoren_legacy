@@ -6,15 +6,21 @@ import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Topseksjon from './top-seksjon/Topseksjon';
 import './Visningsmeny.less';
 import Listelement from './liste-element/Listelement';
-import Lukkundermeny from './lukk-undermeny/Lukkundermeny';
 import MenyIngress from './meny-ingress/MenyIngress';
 import MobilarbeidsflateValg from './mobil-arbeidsflate-valg/MobilarbeidsflateValg';
+import Varselbjelle from '../../varsel/Varselbjelle';
+import VarselinnboksProvider from '../../../../../provider/Varselinnboks-provider';
+import MinsideLenke from '../../minside-lenke/MinsideLenke';
+import Undermeny from './under-meny/Undermeny';
+import VarselvisningMobil from '../../varsel/varsel-visning/VarselvisningMobil';
+import { MenuValue } from '../../../../../utils/meny-storage-utils';
 
 interface VisningsmenyProps {
     classname: string;
     menyLenker: MenySeksjon;
     closeButton: () => void;
     viewIndex: boolean;
+    arbeidsflate: MenuValue;
 }
 
 interface State {
@@ -63,19 +69,60 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
 
     render(): React.ReactNode {
         const { classname, menyLenker, viewIndex } = this.props;
-        const slideoutMeny = BEMHelper(classname);
+        const menyClass = BEMHelper(classname);
 
         return (
             <>
-                <section className={slideoutMeny.element('startmeny')}>
+                <section className={menyClass.element('startmeny')}>
                     <Topseksjon
                         lukkmeny={this.props.closeButton}
                         viewIndex={viewIndex}
                     />
+                    <div
+                        className={menyClass.element(
+                            'minside-rad',
+                            this.props.arbeidsflate === MenuValue.PRIVATPERSON
+                                ? ''
+                                : 'sett-rad-midt'
+                        )}
+                    >
+                        <VarselinnboksProvider>
+                            <Varselbjelle>
+                                {(
+                                    antallUlesteVarsler,
+                                    antallVarsler,
+                                    html,
+                                    clicked,
+                                    handleClick
+                                ) => (
+                                    <VarselvisningMobil
+                                        html={html}
+                                        antallUlesteVarsler={
+                                            antallUlesteVarsler
+                                        }
+                                        antallVarsler={antallVarsler}
+                                        visvarsel={clicked}
+                                        visningmenyClassname={
+                                            menyClass.className
+                                        }
+                                        lukkvarselmeny={
+                                            handleClick
+                                                ? handleClick
+                                                : () => void 0
+                                        }
+                                        viewIndex={viewIndex}
+                                        clicked={this.state.clicked}
+                                        lukkmenyene={this.lukkMenyer}
+                                    />
+                                )}
+                            </Varselbjelle>
+                        </VarselinnboksProvider>
+                        <MinsideLenke />
+                    </div>
                     <MenyIngress
-                        className={slideoutMeny.element('meny', 'ingress')}
+                        className={menyClass.element('meny', 'ingress')}
                     />
-                    <ul className={slideoutMeny.element('meny', 'list')}>
+                    <ul className={menyClass.element('meny', 'list')}>
                         {menyLenker.children.map(
                             (menyElement: MenySeksjon, index: number) => {
                                 return (
@@ -91,7 +138,7 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
                                         tabIndex={viewIndex ? 0 : -1}
                                     >
                                         <Listelement
-                                            className={slideoutMeny.className}
+                                            className={menyClass.className}
                                             classElement="text-element"
                                         >
                                             {menyElement.displayName}
@@ -104,50 +151,14 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
                     </ul>
                     <MobilarbeidsflateValg />
                 </section>
-                <section
-                    className={slideoutMeny.element(
-                        'undermeny-innhold',
-                        this.state.clicked ? 'active' : ''
-                    )}
-                >
-                    <Topseksjon
-                        lukkmeny={this.lukkMenyer}
-                        viewIndex={this.state.clicked}
-                    />
-
-                    <Lukkundermeny
-                        lukkundermeny={this.lukkMeny}
-                        className={slideoutMeny.className}
-                        viewindex={viewIndex}
-                    />
-                    <ul className={slideoutMeny.element('meny', 'list')}>
-                        {this.state.lenker.children.map(
-                            (lenke, index: number) => {
-                                return (
-                                    <Lenke
-                                        href={lenke.path}
-                                        key={index}
-                                        tabIndex={viewIndex ? 0 : -1}
-                                    >
-                                        <Listelement
-                                            className={slideoutMeny.className}
-                                            classElement="text-element-undermeny"
-                                        >
-                                            <div
-                                                className={slideoutMeny.element(
-                                                    'undermeny-chevron'
-                                                )}
-                                            >
-                                                <HoyreChevron />
-                                            </div>
-                                            {lenke.displayName}
-                                        </Listelement>
-                                    </Lenke>
-                                );
-                            }
-                        )}
-                    </ul>
-                </section>
+                <Undermeny
+                    className={menyClass.className}
+                    clicked={this.state.clicked}
+                    lukkMenyene={this.lukkMenyer}
+                    lukkMeny={this.lukkMeny}
+                    viewIndex={viewIndex}
+                    lenker={this.state.lenker}
+                />
             </>
         );
     }

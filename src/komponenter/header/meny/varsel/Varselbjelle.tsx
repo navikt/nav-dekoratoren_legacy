@@ -1,10 +1,9 @@
-import React, { createRef } from 'react';
+import React, { createRef, DetailedReactHTMLElement, ReactNode } from 'react';
 import parse from 'html-react-parser';
 import { AppState } from '../../../../reducer/reducer';
 import { Dispatch } from '../../../../redux/dispatch-type';
 import { connect } from 'react-redux';
 import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
-import VarselVisning from './Varsel-visning';
 import './Varselbjelle.less';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 
@@ -17,6 +16,19 @@ interface StateProps {
     arbeidsflate: MenuValue;
 }
 
+interface FunctionProps {
+    children: (
+        antallVarsler: number,
+        antallUlesteVarsler: number,
+        html:
+            | string
+            | DetailedReactHTMLElement<{}, HTMLElement>
+            | DetailedReactHTMLElement<{}, HTMLElement>[],
+        clicked: boolean,
+        handleClick?: () => void
+    ) => ReactNode;
+}
+
 interface DispatchProps {
     doSettVarslerSomLest: (nyesteId: number) => void;
 }
@@ -26,7 +38,7 @@ interface State {
     classname: string;
 }
 
-type VarselbjelleProps = StateProps & DispatchProps;
+type VarselbjelleProps = StateProps & DispatchProps & FunctionProps;
 
 class Varselbjelle extends React.Component<VarselbjelleProps, State> {
     private varselbjelleRef = createRef<HTMLDivElement>();
@@ -82,6 +94,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             arbeidsflate,
         } = this.props;
         const html = parse(varsler);
+        console.log(typeof html);
 
         return (
             <div ref={this.varselbjelleRef} className="varselbjelle">
@@ -104,12 +117,22 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                         />
                     </div>
                 ) : null}
-                {erInnlogget && this.state.clicked && (
-                    <VarselVisning
-                        html={html}
-                        antallVarsler={antallVarsler}
-                        antallUlesteVarsler={antallUlesteVarsler}
-                    />
+                {erInnlogget && (
+                    <>
+                        {console.log(
+                            'this.state.clicked in Varselbjelle: ',
+                            this.state.clicked
+                        )}
+                        <div className="min-varsel-wrapper">
+                            {this.props.children(
+                                antallUlesteVarsler,
+                                antallVarsler,
+                                html,
+                                this.state.clicked,
+                                this.handleClick
+                            )}
+                        </div>
+                    </>
                 )}
             </div>
         );

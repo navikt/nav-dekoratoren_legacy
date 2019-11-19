@@ -106,6 +106,7 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
                                         )}
                                         viewIndex={this.state.clicked}
                                         closeButton={this.dropDownExpand}
+                                        arbeidsflate={arbeidsflate}
                                     />
                                 </MediaQuery>
                             </div>
