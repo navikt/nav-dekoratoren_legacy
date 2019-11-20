@@ -43,6 +43,18 @@
         }
     }
 
+    @media (min-width: @tabletLimitWidth) {
+        &__menyknapp {
+            &--innhold {
+                padding: 0.4rem 0.7rem 0 0.7rem;
+
+                .hamburger-ikon {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+
     @media (min-width: @desktopLimitWidth) {
         &__menyknapp {
             text-decoration: none;

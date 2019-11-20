@@ -42,17 +42,24 @@
             }
         }
     }
-}
 
-@media (min-width: @desktopLimitWidth) {
-    .footer {
+    @media (min-width: @tabletLimitWidth) {
+        &__menylenker-seksjon {
+            ul {
+                &:first-child,
+                &:last-child {
+                    margin-top: 1rem;
+                }
+            }
+        }
+
         .sitefooter {
             padding: 0;
 
             .footer__innhold {
                 display: flex;
                 flex-wrap: wrap;
-                width: @desktopLimitWidth;
+                width: auto;
                 margin: 0 auto;
 
                 .footer__menylenker-seksjon {
@@ -62,6 +69,14 @@
                 .footer__logo {
                     width: 100%;
                 }
+            }
+        }
+    }
+
+    @media (min-width: @desktopLimitWidth) {
+        .sitefooter {
+            .footer__innhold {
+                width: @desktopLimitWidth;
             }
         }
     }

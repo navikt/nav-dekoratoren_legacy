@@ -5,7 +5,6 @@
     width: 100%;
     padding: 0.5rem 0 1rem;
     border-bottom: 2px solid @navBla;
-    min-height: 6.5rem;
 
     &__content {
         width: 100%;
@@ -22,21 +21,17 @@
 
     &__nav-brand {
         order: 1;
-        width: 30%;
     }
 
     .minside-lenke {
         order: 4;
-        width: 50%;
     }
     .varselbjelle {
         order: 5;
-        width: 50%;
     }
 
     .login-container {
         order: 3;
-        width: 40%;
     }
 
     .sok {
@@ -60,12 +55,7 @@
         }
     }
 
-    @media (min-width: @desktopLimitWidth) {
-        &__content {
-            width: @desktopLimitWidth;
-            padding: 0;
-        }
-
+    @media (min-width: @tabletLimitWidth) {
         &__elementer {
             justify-content: space-between;
         }
@@ -88,18 +78,41 @@
             }
         }
 
-        .sok,
-        .login-container {
+        .sok {
             order: 3;
             width: auto;
+            max-height: 40px;
         }
+
+        .login-container {
+            width: auto;
+            max-height: 40px;
+        }
+
         .varselbjelle {
             order: 3;
-            width: 31px;
+            width: auto;
+            max-height: 40px;
+            display: flex;
+            align-items: center;
         }
+        .minside-lenke {
+            display: none;
+        }
+    }
+
+    @media (min-width: @desktopLimitWidth) {
+        &__content {
+            width: @desktopLimitWidth;
+        }
+
         .minside-lenke {
             order: 3;
             width: 102px;
+            max-height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }

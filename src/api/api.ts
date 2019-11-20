@@ -8,7 +8,8 @@ import { Meny as menypunkterData } from '../reducer/menu-duck';
 const { baseUrl, menypunkter, sokeresultat } = Environments();
 
 export const varselinnboksUrl = `${baseUrl}/person/varselinnboks`;
-export const mobileview = 1024;
+export const mobileview = 768;
+export const tabletview = 1024;
 
 export enum Status {
     OK = 'OK',
