@@ -1,12 +1,10 @@
 import React from 'react';
-import { AppState } from '../../../../reducer/reducer';
-import { connect } from 'react-redux';
 import BEMHelper from '../../../../utils/bem';
 import { mobileview, Status } from '../../../../api/api';
 import { MenuValue, selectMenu } from '../../../../utils/meny-storage-utils';
 import {
-    Meny,
     dataInitState,
+    Meny,
     MenyPunkter,
 } from '../../../../reducer/menu-duck';
 import { Language } from '../../../../reducer/language-duck';
@@ -17,6 +15,8 @@ import './DropdownMeny.less';
 import Visningsmeny from './mobil-visningsmeny/Visningsmeny';
 import Menyknapp from '../meny-knapp/Menyknapp';
 import Mobilbakgrunn from './mobil-bakgrunn/Mobilbakgrunn';
+import { AppState } from '../../../../reducer/reducer';
+import { connect } from 'react-redux';
 
 interface OwnProps {
     classname: string;
@@ -64,6 +64,7 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
                 <Menyknapp
                     ToggleMenu={this.dropDownExpand}
                     clicked={this.state.clicked}
+                    lang={this.props.language}
                 />
                 <div id="dropdown-menu" className={cls.element('meny-wrapper')}>
                     {meny.status === Status.OK ? (
@@ -97,17 +98,22 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
                                     ) : null}
                                 </MediaQuery>
                                 <MediaQuery maxWidth={mobileview - 1}>
-                                    <Visningsmeny
-                                        classname={this.props.classname}
-                                        menyLenker={selectMenu(
-                                            meny.data,
-                                            language,
-                                            arbeidsflate
-                                        )}
-                                        viewIndex={this.state.clicked}
-                                        closeButton={this.dropDownExpand}
-                                        arbeidsflate={arbeidsflate}
-                                    />
+                                    {this.props.language !== Language.SAMISK ? (
+                                        <Visningsmeny
+                                            classname={this.props.classname}
+                                            menyLenker={selectMenu(
+                                                meny.data,
+                                                language,
+                                                arbeidsflate
+                                            )}
+                                            viewIndex={this.state.clicked}
+                                            closeButton={this.dropDownExpand}
+                                            arbeidsflate={arbeidsflate}
+                                            lang={this.props.language}
+                                        />
+                                    ) : (
+                                        <div />
+                                    )}
                                 </MediaQuery>
                             </div>
                             <Mobilbakgrunn

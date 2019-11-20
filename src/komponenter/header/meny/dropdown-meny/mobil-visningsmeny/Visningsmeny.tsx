@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenySeksjon } from '../../../../../reducer/menu-duck';
+import { dataInitState, MenySeksjon } from '../../../../../reducer/menu-duck';
 import BEMHelper from '../../../../../utils/bem';
 import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
@@ -14,6 +14,7 @@ import MinsideLenke from '../../minside-lenke/MinsideLenke';
 import Undermeny from './under-meny/Undermeny';
 import VarselvisningMobil from '../../varsel/varsel-visning/VarselvisningMobil';
 import { MenuValue } from '../../../../../utils/meny-storage-utils';
+import { Language } from '../../../../../reducer/language-duck';
 
 interface VisningsmenyProps {
     classname: string;
@@ -21,6 +22,7 @@ interface VisningsmenyProps {
     closeButton: () => void;
     viewIndex: boolean;
     arbeidsflate: MenuValue;
+    lang: Language;
 }
 
 interface State {
@@ -32,9 +34,12 @@ interface State {
 class Visningsmeny extends React.Component<VisningsmenyProps, State> {
     constructor(props: VisningsmenyProps) {
         super(props);
+        const initialmenu = this.props.menyLenker
+            ? this.props.menyLenker.children[0]
+            : dataInitState;
         this.state = {
             className: '',
-            lenker: this.props.menyLenker.children[0],
+            lenker: initialmenu,
             clicked: false,
         };
     }
@@ -149,7 +154,9 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
                             }
                         )}
                     </ul>
-                    <MobilarbeidsflateValg />
+                    {this.props.lang === Language.NORSK && (
+                        <MobilarbeidsflateValg />
+                    )}
                 </section>
                 <Undermeny
                     className={menyClass.className}
