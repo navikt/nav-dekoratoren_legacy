@@ -1,5 +1,5 @@
 import React from 'react';
-import { mobileview } from '../../../../../api/api';
+import { tabletview } from '../../../../../api/api';
 import MediaQuery from 'react-responsive';
 import BEMHelper from '../../../../../utils/bem';
 
@@ -12,7 +12,7 @@ const Mobilbakgrunn = ({
 }) => {
     const cls = BEMHelper('mobilmeny');
     return (
-        <MediaQuery maxWidth={mobileview - 1}>
+        <MediaQuery maxWidth={tabletview - 1}>
             <div
                 className={cls.element(
                     'mobilbakgrunn',

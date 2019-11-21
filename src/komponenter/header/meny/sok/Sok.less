@@ -13,7 +13,7 @@
     }
 
     .sok-input-resultat {
-        //width: 90%;
+        width: 90%;
     }
 
     .skjemaelement__label {
@@ -29,10 +29,9 @@
         position: absolute;
         top: 1.25rem;
         right: 2rem;
-        background-color: #254b6d;
+        background-color: @navBlaDarken60;
         border: none;
     }
-
     .sok-resultat-listItem {
         display: flex;
         flex-direction: row;
@@ -51,14 +50,14 @@
         margin-bottom: 0;
         input {
             border-radius: 0;
-            padding: 2rem 1rem 1.5rem 1rem;
-            background-color: #254b6d;
-            border: 2px solid #99c2e8;
+            padding: 2rem 1rem 1.5rem;
+            background-color: @navBlaDarken60;
+            border: 2px solid @navBlaLighten60;
             color: white;
 
             &:focus,
             &:active {
-                border: 2px solid #99c2e8;
+                border: 2px solid @navBlaLighten60;
             }
 
             &::-webkit-input-placeholder,
@@ -75,16 +74,16 @@
         padding: 0;
         z-index: 1020;
         position: absolute;
-        background-color: #254b6d;
+        background-color: @navBlaDarken60;
         top: 100%;
         width: 90%;
         overflow: hidden;
         margin: 0;
-        left: 0;
+        left: 5%;
 
         li {
             padding: 1rem;
-            background-color: #254b6d;
+            background-color: @navBlaDarken60;
             color: white;
 
             &:first-child {
@@ -109,6 +108,7 @@
             font-weight: bold;
         }
     }
+
     .sokeresultat-liste ul {
         padding: 0;
     }
@@ -120,7 +120,6 @@
     input[placeholder] {
         color: white;
         margin: 0;
-        font-family: 'Source Sans Pro', Arial, sans-serif;
         font-size: 1.375rem;
         line-height: 1.625rem;
         font-weight: 300;
@@ -147,6 +146,7 @@
             position: absolute;
             background-color: white;
             top: 100%;
+            left: 0;
             width: 320px;
             overflow: hidden;
             margin: 0;
@@ -203,6 +203,7 @@
         }
 
         .sok-input-resultat {
+            width: auto;
             position: relative;
 
             .sok-input {

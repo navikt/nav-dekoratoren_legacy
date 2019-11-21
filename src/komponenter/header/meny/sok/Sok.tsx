@@ -7,7 +7,7 @@ import Downshift from 'downshift';
 import cls from 'classnames';
 import { API } from '../../../../api/api';
 import { Language } from '../../../../reducer/language-duck';
-import Tekst, { finnTekst } from '../../../../tekster/finn-tekst';
+import { finnTekst } from '../../../../tekster/finn-tekst';
 import {
     defaultData,
     InputState,
@@ -74,7 +74,7 @@ class Sok extends React.Component<StateProps, InputState> {
     render() {
         const { inputString, items } = this.state;
         const { language } = this.props;
-        const URL = `${'https://www-x1.nav.no/sok'}?ord=${inputString}`;
+        const URL = `https://www-x1.nav.no/sok?ord=${inputString}`;
         const lenkeAlleTreff = visAlleTreff(inputString);
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,

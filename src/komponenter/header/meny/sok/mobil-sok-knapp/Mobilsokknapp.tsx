@@ -12,10 +12,7 @@ const Mobilsokknapp = () => {
                     <MediaQuery maxWidth={mobileview - 1}>
                         <SokIkon width="39px" height="39px" color="#99c2e8" />
                     </MediaQuery>
-                    <MediaQuery
-                        maxWidth={tabletview - 1}
-                        minWidth={mobileview - 1}
-                    >
+                    <MediaQuery maxWidth={tabletview - 1} minWidth={mobileview}>
                         <SokIkon width="26px" height="26px" color="#000000" />
                     </MediaQuery>
                 </button>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { dataInitState, MenySeksjon } from '../../../../../reducer/menu-duck';
+import { MenySeksjon } from '../../../../../reducer/menu-duck';
 import BEMHelper from '../../../../../utils/bem';
 import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
@@ -34,12 +34,9 @@ interface State {
 class Visningsmeny extends React.Component<VisningsmenyProps, State> {
     constructor(props: VisningsmenyProps) {
         super(props);
-        const initialmenu = this.props.menyLenker
-            ? this.props.menyLenker.children[0]
-            : dataInitState;
         this.state = {
             className: '',
-            lenker: initialmenu,
+            lenker: this.props.menyLenker.children[0],
             clicked: false,
         };
     }
@@ -93,19 +90,8 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
                     >
                         <VarselinnboksProvider>
                             <Varselbjelle>
-                                {(
-                                    antallUlesteVarsler,
-                                    antallVarsler,
-                                    html,
-                                    clicked,
-                                    handleClick
-                                ) => (
+                                {(clicked, handleClick) => (
                                     <VarselvisningMobil
-                                        html={html}
-                                        antallUlesteVarsler={
-                                            antallUlesteVarsler
-                                        }
-                                        antallVarsler={antallVarsler}
                                         visvarsel={clicked}
                                         visningmenyClassname={
                                             menyClass.className

@@ -1,6 +1,6 @@
 import React from 'react';
 import BEMHelper from '../../../../utils/bem';
-import { mobileview, Status } from '../../../../api/api';
+import { Status, tabletview } from '../../../../api/api';
 import { MenuValue, selectMenu } from '../../../../utils/meny-storage-utils';
 import {
     dataInitState,
@@ -17,6 +17,7 @@ import Menyknapp from '../meny-knapp/Menyknapp';
 import Mobilbakgrunn from './mobil-bakgrunn/Mobilbakgrunn';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
+import { verifyWindowObj } from '../../../../utils/environments';
 
 interface OwnProps {
     classname: string;
@@ -31,6 +32,7 @@ interface StateProps {
 interface State {
     clicked: boolean;
     minside: Meny;
+    vismenyClassname: string;
 }
 
 type MenyToggleKnappProps = OwnProps & StateProps;
@@ -45,6 +47,7 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
         this.state = {
             clicked: false,
             minside: dataInitState,
+            vismenyClassname: 'dropdown',
         };
         this.dropDownExpand = this.dropDownExpand.bind(this);
     }
@@ -55,9 +58,33 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
         });
     };
 
+    setVisningsmenyClassname = (): string => {
+        return verifyWindowObj() && window.innerWidth > tabletview - 1
+            ? 'dropdown'
+            : 'mobilmeny';
+    };
+
+    updateVisningsmenyClassname = () => {
+        if (verifyWindowObj()) {
+            this.setState({
+                vismenyClassname: this.setVisningsmenyClassname(),
+            });
+        }
+    };
+
+    componentDidMount() {
+        this.setState({ vismenyClassname: this.setVisningsmenyClassname() });
+        window.addEventListener('resize', this.updateVisningsmenyClassname);
+    }
+
+    componentWillUnmount(): void {
+        window.removeEventListener('resize', this.updateVisningsmenyClassname);
+    }
+
     render() {
         const { meny, classname, language, arbeidsflate } = this.props;
-        const cls = BEMHelper(classname);
+
+        const cls = BEMHelper(this.state.vismenyClassname);
 
         return (
             <>
@@ -75,9 +102,9 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
                                     this.state.clicked ? 'aktive' : ''
                                 )}
                             >
-                                <MediaQuery minWidth={mobileview}>
+                                <MediaQuery minWidth={tabletview}>
                                     <DropdownVenstreSeksjon
-                                        classname={this.props.classname}
+                                        classname={classname}
                                         menyLenker={selectMenu(
                                             meny.data,
                                             language,
@@ -97,10 +124,12 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
                                         />
                                     ) : null}
                                 </MediaQuery>
-                                <MediaQuery maxWidth={mobileview - 1}>
+                                <MediaQuery maxWidth={tabletview - 1}>
                                     {this.props.language !== Language.SAMISK ? (
                                         <Visningsmeny
-                                            classname={this.props.classname}
+                                            classname={
+                                                this.state.vismenyClassname
+                                            }
                                             menyLenker={selectMenu(
                                                 meny.data,
                                                 language,

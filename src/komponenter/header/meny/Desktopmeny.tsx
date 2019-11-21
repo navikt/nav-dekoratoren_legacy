@@ -12,7 +12,9 @@ import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import { Language } from '../../../reducer/language-duck';
 import Tekst from '../../../tekster/finn-tekst';
 import './Desktopmeny.less';
-import VarselVisning from './varsel/varsel-visning/Varsel-visning';
+import VarselVisning from './varsel/varsel-visning/Varselvisning';
+import MediaQuery from 'react-responsive';
+import { tabletview } from '../../../api/api';
 
 const hovedmenyClass = BEMHelper('hovedmeny');
 export const dropdownClass = BEMHelper('dropdown');
@@ -34,43 +36,21 @@ const Hovedmeny = ({ language }: Props) => {
                     {language === Language.NORSK ||
                     language === Language.ENGELSK ? (
                         <DropdownMeny classname={dropdownClass.className} />
-                    ) : (
-                        <div
-                            className={dropdownClass.element(
-                                'menyknapp',
-                                'alternativ-samisk'
-                            )}
-                            tabIndex={0}
-                        >
-                            <Undertittel>
-                                <Tekst id="samisk-samegiella" />
-                            </Undertittel>
-                        </div>
-                    )}
+                    ) : null}
                     <Sok />
                     <InnloggingsstatusProvider>
                         <>
-                            <MinsideLenke />
-                            <VarselinnboksProvider>
-                                <Varselbjelle>
-                                    {(
-                                        antallUlesteVarsler,
-                                        antallVarsler,
-                                        html,
-                                        clicked
-                                    ) =>
-                                        clicked && (
-                                            <VarselVisning
-                                                html={html}
-                                                antallUlesteVarsler={
-                                                    antallUlesteVarsler
-                                                }
-                                                antallVarsler={antallVarsler}
-                                            />
-                                        )
-                                    }
-                                </Varselbjelle>
-                            </VarselinnboksProvider>
+                            <MediaQuery minWidth={tabletview - 1}>
+                                <MinsideLenke />
+                                <VarselinnboksProvider>
+                                    <Varselbjelle>
+                                        {clicked =>
+                                            clicked && <VarselVisning />
+                                        }
+                                    </Varselbjelle>
+                                </VarselinnboksProvider>
+                            </MediaQuery>
+
                             <LoggInnKnapp />
                         </>
                     </InnloggingsstatusProvider>

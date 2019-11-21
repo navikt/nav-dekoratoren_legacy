@@ -1,11 +1,9 @@
 import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import BEMHelper from '../../../../../utils/bem';
 import { MenySeksjon } from '../../../../../reducer/menu-duck';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
-import MediaQuery from 'react-responsive';
 import { dittNavURL } from '../../minside-lenke/MinsideLenke';
 import Tekst from '../../../../../tekster/finn-tekst';
 
@@ -21,30 +19,12 @@ const DropdownHoyreSeksjon = (props: Props) => {
 
     return (
         <div className={cls.element('minSideSeksjon')}>
-            <MediaQuery maxWidth={1023}>
-                <Ekspanderbartpanel
-                    tittel={minsideMeny.displayName}
-                    tittelProps="normaltekst"
-                    border
-                >
-                    <MinsideLenker
-                        minsideMeny={minsideMeny}
-                        tabindex={tabindex}
-                    />
-                </Ekspanderbartpanel>
-            </MediaQuery>
-
-            <MediaQuery minWidth={1024}>
-                <>
-                    <Element>
-                        <Tekst id="min-side" />
-                    </Element>
-                    <MinsideLenker
-                        minsideMeny={minsideMeny}
-                        tabindex={tabindex}
-                    />
-                </>
-            </MediaQuery>
+            <>
+                <Element>
+                    <Tekst id="min-side" />
+                </Element>
+                <MinsideLenker minsideMeny={minsideMeny} tabindex={tabindex} />
+            </>
         </div>
     );
 };

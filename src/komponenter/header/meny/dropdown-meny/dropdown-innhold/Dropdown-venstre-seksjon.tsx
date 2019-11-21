@@ -4,7 +4,6 @@ import MediaQuery from 'react-responsive';
 import BEMHelper from '../../../../../utils/bem';
 import { MenySeksjon } from '../../../../../reducer/menu-duck';
 import { DropdownLenke } from './Dropdown-venstre-lenke';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
 interface Props {
     classname: string;
@@ -23,19 +22,6 @@ const DropdownVenstreSeksjon = (props: Props) => {
                     return (
                         <section className={cls.element('seksjon')} key={index}>
                             <div className={cls.element('seksjonOverskrift')}>
-                                <MediaQuery maxWidth={1023}>
-                                    <Ekspanderbartpanel
-                                        tittel={menygruppe.displayName}
-                                        tittelProps="normaltekst"
-                                        border
-                                    >
-                                        <Menylenker
-                                            menygruppe={menygruppe}
-                                            tabindex={tabindex}
-                                        />
-                                    </Ekspanderbartpanel>
-                                </MediaQuery>
-
                                 <MediaQuery minWidth={1024}>
                                     <Element>{menygruppe.displayName}</Element>
                                     <Menylenker

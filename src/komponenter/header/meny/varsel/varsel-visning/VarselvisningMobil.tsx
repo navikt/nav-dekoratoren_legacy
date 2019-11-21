@@ -1,14 +1,11 @@
 import React from 'react';
-import { varselinnboksUrl } from '../../../../../api/api';
-import './Varsel-visning.less';
+import './Varselvisning.less';
 import BEMHelper from '../../../../../utils/bem';
 import Lukkundermeny from '../../dropdown-meny/mobil-visningsmeny/lukk-undermeny/Lukkundermeny';
 import TopSeksjon from '../../dropdown-meny/mobil-visningsmeny/top-seksjon/Topseksjon';
+import VarselVisning from './Varselvisning';
 
 interface OwnProps {
-    html: Object;
-    antallUlesteVarsler: number;
-    antallVarsler: number;
     visvarsel: boolean;
     visningmenyClassname: string;
     lukkvarselmeny: () => void;
@@ -42,17 +39,7 @@ const VarselvisningMobil: React.FunctionComponent<OwnProps> = props => {
                     className={cls.className}
                     viewindex={props.viewIndex}
                 />
-                {props.html}
-                {props.antallVarsler > 5 && (
-                    <div className="vis-alle-lenke">
-                        <a href={varselinnboksUrl}>
-                            Vis alle dine varsler
-                            {props.antallUlesteVarsler > 0
-                                ? ` (${props.antallUlesteVarsler} nye)`
-                                : ''}
-                        </a>
-                    </div>
-                )}
+                <VarselVisning className="vis-alle-lenke" />
             </section>
         </>
     );

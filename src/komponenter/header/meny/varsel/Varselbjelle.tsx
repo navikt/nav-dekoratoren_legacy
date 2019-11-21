@@ -1,5 +1,4 @@
-import React, { createRef, DetailedReactHTMLElement, ReactNode } from 'react';
-import parse from 'html-react-parser';
+import React, { createRef, ReactNode } from 'react';
 import { AppState } from '../../../../reducer/reducer';
 import { Dispatch } from '../../../../redux/dispatch-type';
 import { connect } from 'react-redux';
@@ -8,7 +7,6 @@ import './Varselbjelle.less';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 
 interface StateProps {
-    varsler: string;
     antallVarsler: number;
     antallUlesteVarsler: number;
     erInnlogget: boolean;
@@ -17,16 +15,7 @@ interface StateProps {
 }
 
 interface FunctionProps {
-    children: (
-        antallVarsler: number,
-        antallUlesteVarsler: number,
-        html:
-            | string
-            | DetailedReactHTMLElement<{}, HTMLElement>
-            | DetailedReactHTMLElement<{}, HTMLElement>[],
-        clicked: boolean,
-        handleClick?: () => void
-    ) => ReactNode;
+    children: (clicked: boolean, handleClick?: () => void) => ReactNode;
 }
 
 interface DispatchProps {
@@ -86,54 +75,43 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
     };
 
     render() {
-        const {
-            erInnlogget,
-            varsler,
-            antallVarsler,
-            antallUlesteVarsler,
-            arbeidsflate,
-        } = this.props;
-        const html = parse(varsler);
+        const { erInnlogget, antallVarsler, arbeidsflate } = this.props;
 
         return (
             <div ref={this.varselbjelleRef} className="varselbjelle">
                 {erInnlogget && arbeidsflate === MenuValue.PRIVATPERSON ? (
-                    <div
-                        id="toggle-varsler-container"
-                        className={this.state.classname}
-                    >
-                        <button
-                            onClick={this.handleClick}
-                            className="toggle-varsler"
-                            title="Varsler"
-                            aria-label={`Varsler. Du har ${
-                                antallVarsler > 0 ? antallVarsler : 'ingen'
-                            } varsler.`}
-                            aria-pressed={this.state.clicked}
-                            aria-haspopup="true"
-                            aria-controls="varsler-display"
-                            aria-expanded={this.state.clicked}
-                        />
-                    </div>
+                    <>
+                        <div
+                            id="toggle-varsler-container"
+                            className={this.state.classname}
+                        >
+                            <button
+                                onClick={this.handleClick}
+                                className="toggle-varsler"
+                                title="Varsler"
+                                aria-label={`Varsler. Du har ${
+                                    antallVarsler > 0 ? antallVarsler : 'ingen'
+                                } varsler.`}
+                                aria-pressed={this.state.clicked}
+                                aria-haspopup="true"
+                                aria-controls="varsler-display"
+                                aria-expanded={this.state.clicked}
+                            />
+                        </div>
+                        <div className="min-varsel-wrapper">
+                            {this.props.children(
+                                this.state.clicked,
+                                this.handleClick
+                            )}
+                        </div>
+                    </>
                 ) : null}
-                {erInnlogget && (
-                    <div className="min-varsel-wrapper">
-                        {this.props.children(
-                            antallUlesteVarsler,
-                            antallVarsler,
-                            html,
-                            this.state.clicked,
-                            this.handleClick
-                        )}
-                    </div>
-                )}
             </div>
         );
     }
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    varsler: state.varsler.data.varsler,
     antallVarsler: state.varsler.data.antall,
     antallUlesteVarsler: state.varsler.data.uleste,
     erInnlogget:

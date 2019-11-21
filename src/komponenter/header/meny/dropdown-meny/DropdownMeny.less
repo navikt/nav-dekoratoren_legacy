@@ -4,25 +4,32 @@
 .dropdown {
     &__meny-innhold {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        max-width: @desktopLimitWidth;
         overflow: hidden;
-        max-width: 100%;
+
         margin-bottom: 0;
         max-height: 0;
         transition: all 0.7s ease-in-out;
 
         &--aktive {
             margin-bottom: 2rem;
-            max-height: 70rem;
+            max-height: 40rem;
         }
     }
 
     &__hovedSeksjon {
+        flex-grow: 6;
+        justify-content: center;
+        display: -ms-grid;
+        display: grid;
+        -ms-grid-columns: auto auto auto;
+        grid-template-columns: auto auto auto;
         margin-bottom: 0.2rem;
     }
 
     &__seksjon {
-        padding-bottom: 0.5rem;
+        padding: 0.75rem 0 0.5rem 2rem;
 
         li {
             list-style-type: initial;
@@ -41,9 +48,18 @@
                 }
             }
         }
+
+        ul {
+            margin: 0;
+        }
     }
 
     &__minSideSeksjon {
+        flex-grow: 1;
+        margin: 0 0 0.2rem 0.5rem;
+        padding: 0.75rem 0 0.5rem 1.5rem;
+        min-width: 8rem;
+
         .lenke {
             color: black;
             text-decoration: none;
@@ -73,46 +89,6 @@
                 list-style-type: none;
                 margin-left: -1.175rem;
             }
-        }
-    }
-
-    @media (min-width: @desktopLimitWidth) {
-        &__meny-innhold {
-            flex-direction: row;
-            max-width: @desktopLimitWidth;
-
-            &--aktive {
-                max-height: 40rem;
-            }
-        }
-
-        &__hovedSeksjon {
-            flex-grow: 6;
-            justify-content: center;
-            display: -ms-grid;
-            display: grid;
-            -ms-grid-columns: auto auto auto;
-            grid-template-columns: auto auto auto;
-            margin-bottom: 0.2rem;
-        }
-
-        &__seksjon {
-            padding: 0.75rem 0 0.5rem 2rem;
-
-            ul {
-                margin: 0;
-            }
-        }
-
-        &__minSideSeksjon {
-            flex-grow: 1;
-            margin: 0 0 0.2rem 0.5rem;
-            padding: 0.75rem 0 0.5rem 1.5rem;
-            min-width: 8rem;
-        }
-
-        &__button-content {
-            flex-direction: row;
         }
     }
 }
