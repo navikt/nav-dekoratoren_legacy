@@ -1,23 +1,20 @@
 import React from 'react';
 import BEMHelper from '../../../utils/bem';
-import { Undertittel } from 'nav-frontend-typografi';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../ikoner/meny/NavLogoRod';
-import DropdownMeny from './dropdown-meny/DropdownMeny';
+import Ekspanderbarmeny from './ekspanderbar-meny/Ekspanderbarmeny';
 import Sok from './sok/Sok';
 import MinsideLenke from './minside-lenke/MinsideLenke';
 import Varselbjelle from './varsel/Varselbjelle';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import { Language } from '../../../reducer/language-duck';
-import Tekst from '../../../tekster/finn-tekst';
 import './Desktopmeny.less';
 import VarselVisning from './varsel/varsel-visning/Varselvisning';
 import MediaQuery from 'react-responsive';
 import { tabletview } from '../../../api/api';
 
-const hovedmenyClass = BEMHelper('hovedmeny');
-export const dropdownClass = BEMHelper('dropdown');
+const desktopmeny = BEMHelper('desktopmeny');
 
 interface Props {
     language: Language;
@@ -25,17 +22,17 @@ interface Props {
 
 const Hovedmeny = ({ language }: Props) => {
     return (
-        <nav className={hovedmenyClass.className}>
-            <div className={hovedmenyClass.element('content')}>
-                <div className={hovedmenyClass.element('elementer')}>
+        <nav className={desktopmeny.className}>
+            <div className={desktopmeny.element('content')}>
+                <div className={desktopmeny.element('elementer')}>
                     <NavLogoRod
                         width="88"
                         height="88"
-                        classname={hovedmenyClass.element('nav-brand')}
+                        classname={desktopmeny.element('nav-brand')}
                     />
                     {language === Language.NORSK ||
                     language === Language.ENGELSK ? (
-                        <DropdownMeny classname={dropdownClass.className} />
+                        <Ekspanderbarmeny />
                     ) : null}
                     <Sok />
                     <InnloggingsstatusProvider>
@@ -50,7 +47,6 @@ const Hovedmeny = ({ language }: Props) => {
                                     </Varselbjelle>
                                 </VarselinnboksProvider>
                             </MediaQuery>
-
                             <LoggInnKnapp />
                         </>
                     </InnloggingsstatusProvider>

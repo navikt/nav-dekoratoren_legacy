@@ -3,7 +3,7 @@ import { Element } from 'nav-frontend-typografi';
 import MediaQuery from 'react-responsive';
 import BEMHelper from '../../../../../utils/bem';
 import { MenySeksjon } from '../../../../../reducer/menu-duck';
-import { DropdownLenke } from './Dropdown-venstre-lenke';
+import { DropdownLenke } from './Dropdown-venstrelenke';
 
 interface Props {
     classname: string;

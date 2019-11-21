@@ -1,8 +1,8 @@
 import React from 'react';
 import './Varselvisning.less';
 import BEMHelper from '../../../../../utils/bem';
-import Lukkundermeny from '../../dropdown-meny/mobil-visningsmeny/lukk-undermeny/Lukkundermeny';
-import TopSeksjon from '../../dropdown-meny/mobil-visningsmeny/top-seksjon/Topseksjon';
+import Lukkundermeny from '../../ekspanderbar-meny/mobil-visningsmeny/mobil-innhold/Lukkundermeny';
+import TopSeksjon from '../../ekspanderbar-meny/mobil-visningsmeny/mobil-innhold/top-seksjon/Topseksjon';
 import VarselVisning from './Varselvisning';
 
 interface OwnProps {

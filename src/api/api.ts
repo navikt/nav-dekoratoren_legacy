@@ -1,3 +1,4 @@
+// tslint:disable-line:no-any
 import React from 'react';
 import Environments from '../utils/environments';
 import { fetchToJson } from './api-utils';
@@ -26,7 +27,7 @@ export interface DataElement {
 export interface DatalasterProps {
     avhengigheter: DataElement[];
     ventPa?: DataElement[];
-    children: React.ReactElement<any>; // tslint:disable-line:no-any
+    children: React.ReactElement<any>;
     feilmeldingId?: string;
 }
 

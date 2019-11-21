@@ -1,14 +1,12 @@
 import React from 'react';
 import ModalWrapper from 'nav-frontend-modal';
-import BEMHelper from '../../../../../../utils/bem';
+import BEMHelper from '../../../../../utils/bem';
 import Modal from 'nav-frontend-modal';
 import './Sokmodal.less';
-import Sok from '../../../sok/Sok';
 import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
-import Navlogo from '../../../../../ikoner/meny/Navlogo';
 import Lukknapp from './sok-modal-lukknapp/Lukknapp';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import Systemtittel from 'nav-frontend-typografi/lib/systemtittel';
+import Navlogo from '../../../../ikoner/meny/Navlogo';
+import Sok from '../Sok';
 
 interface Props {
     modalerApen: boolean;

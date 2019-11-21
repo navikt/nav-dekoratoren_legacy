@@ -1,6 +1,6 @@
 import { MenuValue } from '../../../utils/meny-storage-utils';
 
-export const toppmenyLenker: {
+export const arbeidsflateLenker: {
     tittel: MenuValue;
     url: string;
     key: MenuValue;

@@ -2,15 +2,15 @@ import React from 'react';
 import {
     MenuValue,
     oppdaterSessionStorage,
-} from '../../../../../../utils/meny-storage-utils';
-import BEMHelper from '../../../../../../utils/bem';
-import { toppmenyLenker } from '../../../../toppmeny/toppmeny-lenker';
+} from '../../../utils/meny-storage-utils';
+import BEMHelper from '../../../utils/bem';
+import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import { AppState } from '../../../../../../reducer/reducer';
-import { Dispatch } from '../../../../../../redux/dispatch-type';
-import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
+import { AppState } from '../../../reducer/reducer';
+import { Dispatch } from '../../../redux/dispatch-type';
+import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import { connect } from 'react-redux';
 import './MobilarbeidsflateValg.less';
 
@@ -30,7 +30,7 @@ const MobilarbeidsflateValg = ({
 
     return (
         <ul className={cls.className}>
-            {toppmenyLenker.map(
+            {arbeidsflateLenker.map(
                 (lenke: { tittel: string; url: string; key: MenuValue }) => {
                     return arbeidsflate === lenke.key ? null : (
                         <Lenke

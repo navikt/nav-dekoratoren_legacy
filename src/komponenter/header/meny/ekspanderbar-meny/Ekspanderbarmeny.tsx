@@ -8,20 +8,16 @@ import {
     MenyPunkter,
 } from '../../../../reducer/menu-duck';
 import { Language } from '../../../../reducer/language-duck';
-import DropdownHoyreSeksjon from './dropdown-innhold/Dropdown-hoyre-seksjon';
-import DropdownVenstreSeksjon from './dropdown-innhold/Dropdown-venstre-seksjon';
+import DropdownHoyredel from './desktop-innhold/Dropdown-hoyredel';
+import DropdownVenstredel from './desktop-innhold/Dropdown-venstredel';
 import MediaQuery from 'react-responsive';
-import './DropdownMeny.less';
+import './Ekspanderbarmeny.less';
 import Visningsmeny from './mobil-visningsmeny/Visningsmeny';
 import Menyknapp from '../meny-knapp/Menyknapp';
-import Mobilbakgrunn from './mobil-bakgrunn/Mobilbakgrunn';
+import Mobilbakgrunn from './mobil-visningsmeny/mobil-innhold/Mobilbakgrunn';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import { verifyWindowObj } from '../../../../utils/environments';
-
-interface OwnProps {
-    classname: string;
-}
 
 interface StateProps {
     meny: MenyPunkter;
@@ -35,22 +31,22 @@ interface State {
     vismenyClassname: string;
 }
 
-type MenyToggleKnappProps = OwnProps & StateProps;
-
-class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
+class Ekspanderbarmeny extends React.Component<StateProps, State> {
     static minside<T, K extends keyof T>(meny: T, key: K): T[K] {
         return meny[key];
     }
 
-    constructor(props: MenyToggleKnappProps) {
+    constructor(props: StateProps) {
         super(props);
         this.state = {
             clicked: false,
             minside: dataInitState,
-            vismenyClassname: 'dropdown',
+            vismenyClassname: 'meny',
         };
         this.dropDownExpand = this.dropDownExpand.bind(this);
     }
+
+    // nav-meny
 
     dropDownExpand = () => {
         this.setState({
@@ -60,7 +56,7 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
 
     setVisningsmenyClassname = (): string => {
         return verifyWindowObj() && window.innerWidth > tabletview - 1
-            ? 'dropdown'
+            ? 'meny'
             : 'mobilmeny';
     };
 
@@ -82,7 +78,7 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
     }
 
     render() {
-        const { meny, classname, language, arbeidsflate } = this.props;
+        const { meny, language, arbeidsflate } = this.props;
 
         const cls = BEMHelper(this.state.vismenyClassname);
 
@@ -103,8 +99,8 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
                                 )}
                             >
                                 <MediaQuery minWidth={tabletview}>
-                                    <DropdownVenstreSeksjon
-                                        classname={classname}
+                                    <DropdownVenstredel
+                                        classname={this.state.vismenyClassname}
                                         menyLenker={selectMenu(
                                             meny.data,
                                             language,
@@ -114,12 +110,14 @@ class DropdownMeny extends React.Component<MenyToggleKnappProps, State> {
                                     />
                                     {arbeidsflate === MenuValue.PRIVATPERSON &&
                                     language === Language.NORSK ? (
-                                        <DropdownHoyreSeksjon
-                                            minsideMeny={DropdownMeny.minside(
+                                        <DropdownHoyredel
+                                            minsideMeny={Ekspanderbarmeny.minside(
                                                 meny.data[0].children,
                                                 3
                                             )}
-                                            classname={classname}
+                                            classname={
+                                                this.state.vismenyClassname
+                                            }
                                             tabindex={this.state.clicked}
                                         />
                                     ) : null}
@@ -163,4 +161,4 @@ const mapStateToProps = (state: AppState): StateProps => ({
     arbeidsflate: state.arbeidsflate.status,
 });
 
-export default connect(mapStateToProps)(DropdownMeny);
+export default connect(mapStateToProps)(Ekspanderbarmeny);

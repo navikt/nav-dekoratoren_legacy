@@ -3,7 +3,7 @@ import { Dispatch } from '../../redux/dispatch-type';
 import { connect } from 'react-redux';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
-import Toppmeny from './toppmeny/Toppmeny';
+import Toppmeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import Desktopmeny from './meny/Desktopmeny';
 import './Header.less';
 import { Language } from '../../reducer/language-duck';

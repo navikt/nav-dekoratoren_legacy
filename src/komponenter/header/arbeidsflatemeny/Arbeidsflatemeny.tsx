@@ -9,8 +9,8 @@ import {
     MenuValue,
     oppdaterSessionStorage,
 } from '../../../utils/meny-storage-utils';
-import { toppmenyLenker } from './toppmeny-lenker';
-import './Toppmeny.less';
+import { arbeidsflateLenker } from './arbeidsflate-lenker';
+import './Arbeidsflatemeny.less';
 
 interface StateProps {
     arbeidsflate: MenuValue;
@@ -22,13 +22,16 @@ interface DispatchProps {
 
 type ToppmenyProps = StateProps & DispatchProps;
 
-const Toppmeny = ({ settArbeidsflate, arbeidsflate }: ToppmenyProps) => {
-    const cls = BEMHelper('toppmeny');
+const Arbeidsflatemeny = ({
+    settArbeidsflate,
+    arbeidsflate,
+}: ToppmenyProps) => {
+    const cls = BEMHelper('arbeidsflate');
 
     return (
-        <nav className="toppmeny">
+        <nav className={cls.className}>
             <ul className={cls.element('topp-liste-rad')} role="tablist">
-                {toppmenyLenker.map(
+                {arbeidsflateLenker.map(
                     (lenke: {
                         tittel: string;
                         url: string;
@@ -86,4 +89,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Toppmeny);
+)(Arbeidsflatemeny);

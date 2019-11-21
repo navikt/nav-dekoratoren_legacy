@@ -1,7 +1,7 @@
 import React from 'react';
-import { tabletview } from '../../../../../api/api';
+import { tabletview } from '../../../../../../api/api';
 import MediaQuery from 'react-responsive';
-import BEMHelper from '../../../../../utils/bem';
+import BEMHelper from '../../../../../../utils/bem';
 
 const Mobilbakgrunn = ({
     toggleWindow,

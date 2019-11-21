@@ -108,7 +108,6 @@ const fetchSearchResults = (req, res) => {
             if (!error && response.statusCode === 200) {
                 res.send(body);
             } else {
-                console.log('server error:', error);
                 res.send(sokeresultatMockData);
             }
         }
@@ -124,7 +123,6 @@ app.get('/person/nav-dekoratoren/api/get/menyvalg', (req, res) => {
 });
 
 app.get('/person/nav-dekoratoren/api/get/sokeresultat', (req, res) => {
-    console.log('req:', req);
     fetchSearchResults(req, res);
 });
 
