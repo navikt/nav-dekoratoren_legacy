@@ -6,7 +6,7 @@ import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provi
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import './Mobilmeny.less';
 import SokModal from './sok/sok-innhold/sok-modal/Sokmodal';
-import SokKnapp from './sok/sok-innhold/SokKnapp';
+import TabletSokknapp from './sok/sok-innhold/TabletSokknapp';
 
 const mobilClass = BEMHelper('mobilmeny');
 
@@ -30,7 +30,7 @@ const Mobilmeny = () => {
                     </div>
                     <div className={mobilClass.element('hoyre-kolonne')}>
                         <DropdownMeny />
-                        <SokKnapp
+                        <TabletSokknapp
                             className={mobilClass.element('sok')}
                             modalIsOpen={toggleModal}
                         />

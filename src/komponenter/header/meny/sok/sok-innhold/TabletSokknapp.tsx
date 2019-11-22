@@ -8,7 +8,7 @@ interface Props {
     modalIsOpen: () => void;
 }
 
-const SokKnapp = ({ className, modalIsOpen }: Props) => {
+const TabletSokknapp = ({ className, modalIsOpen }: Props) => {
     return (
         <button className={className} onClick={() => modalIsOpen()}>
             <SokIkon />
@@ -19,4 +19,4 @@ const SokKnapp = ({ className, modalIsOpen }: Props) => {
     );
 };
 
-export default SokKnapp;
+export default TabletSokknapp;

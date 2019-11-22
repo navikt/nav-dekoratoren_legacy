@@ -7,7 +7,7 @@ import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
 
 import Sok from '../../Sok';
 import Navlogo from '../../../../../ikoner/meny/Navlogo';
-import Lukknapp from '../sok-modal-lukknapp/Lukknapp';
+import Lukknapp from './sok-modal-knapp/Lukknapp';
 
 interface Props {
     modalerApen: boolean;

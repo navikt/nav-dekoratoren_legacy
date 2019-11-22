@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Lukknapp.less';
-import BEMHelper from '../../../../../../utils/bem';
+import BEMHelper from '../../../../../../../utils/bem';
 
 interface Props {
     lukkvindu: () => void;
