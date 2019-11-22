@@ -4,7 +4,7 @@ import BEMHelper from '../../../../../utils/bem';
 import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Topseksjon from './mobil-innhold/top-seksjon/Topseksjon';
-import './Visningsmeny.less';
+import './MobilVisningsmeny.less';
 import Listelement from './mobil-innhold/Listelement';
 import MenyIngress from './mobil-innhold/MenyIngress';
 import MobilarbeidsflateValg from '../../../arbeidsflatemeny/MobilarbeidsflateValg';

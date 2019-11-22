@@ -12,7 +12,7 @@ import DropdownHoyredel from './desktop-innhold/Dropdown-hoyredel';
 import DropdownVenstredel from './desktop-innhold/Dropdown-venstredel';
 import MediaQuery from 'react-responsive';
 import './Ekspanderbarmeny.less';
-import Visningsmeny from './mobil-visningsmeny/Visningsmeny';
+import MobilVisningsmeny from './mobil-visningsmeny/MobilVisningsmeny';
 import Menyknapp from '../meny-knapp/Menyknapp';
 import Mobilbakgrunn from './mobil-visningsmeny/mobil-innhold/Mobilbakgrunn';
 import { AppState } from '../../../../reducer/reducer';
@@ -124,7 +124,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                                 </MediaQuery>
                                 <MediaQuery maxWidth={tabletview - 1}>
                                     {this.props.language !== Language.SAMISK ? (
-                                        <Visningsmeny
+                                        <MobilVisningsmeny
                                             classname={
                                                 this.state.vismenyClassname
                                             }
