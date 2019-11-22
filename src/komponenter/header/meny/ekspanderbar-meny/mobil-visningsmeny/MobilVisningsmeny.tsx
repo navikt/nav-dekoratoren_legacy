@@ -31,7 +31,7 @@ interface State {
     clicked: boolean;
 }
 
-class Visningsmeny extends React.Component<VisningsmenyProps, State> {
+class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
     constructor(props: VisningsmenyProps) {
         super(props);
         this.state = {
@@ -157,4 +157,4 @@ class Visningsmeny extends React.Component<VisningsmenyProps, State> {
     }
 }
 
-export default Visningsmeny;
+export default MobilVisningsmeny;

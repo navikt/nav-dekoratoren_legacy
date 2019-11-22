@@ -13,7 +13,7 @@ interface Props {
     tabindex: boolean;
 }
 
-const DropdownHoyreSeksjon = (props: Props) => {
+const DropdownHoyredel = (props: Props) => {
     const { classname, minsideMeny, tabindex } = props;
     const cls = BEMHelper(classname);
 
@@ -89,4 +89,4 @@ const MinSideLenke = ({ tabindex }: MinSideLenkeProps) => (
     </div>
 );
 
-export default DropdownHoyreSeksjon;
+export default DropdownHoyredel;

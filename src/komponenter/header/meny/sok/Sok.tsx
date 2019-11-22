@@ -13,12 +13,12 @@ import {
     InputState,
     SokeresultatData,
     visAlleTreff,
-} from './sok-utils';
+} from './sok-innhold/sok-utils';
 import './Sok.less';
-import SokeforslagIngress from './sok-forslag-ingress/SokeforslagIngress';
-import Sokeforslagtext from './sok-forslag-text/Sokeforslagtext';
-import DesktopSokknapp from './desktop-sok-knapp/DesktopSokknapp';
-import Mobilsokknapp from './mobil-sok-knapp/Mobilsokknapp';
+import SokeforslagIngress from './sok-innhold/SokeforslagIngress';
+import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
+import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
+import Mobilsokknapp from './sok-innhold/Mobilsokknapp';
 
 interface StateProps {
     language: Language;

@@ -5,8 +5,8 @@ import DropdownMeny from './ekspanderbar-meny/Ekspanderbarmeny';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import './Mobilmeny.less';
-import SokModal from './sok/sok-modal/Sokmodal';
-import SokKnapp from './sok/sok-knapp/SokKnapp';
+import SokModal from './sok/sok-innhold/sok-modal/Sokmodal';
+import SokKnapp from './sok/sok-innhold/SokKnapp';
 
 const mobilClass = BEMHelper('mobilmeny');
 

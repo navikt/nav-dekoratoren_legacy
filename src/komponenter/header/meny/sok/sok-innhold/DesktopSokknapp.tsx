@@ -1,5 +1,5 @@
 import React from 'react';
-import { mobileview, tabletview } from '../../../../../api/api';
+import { tabletview } from '../../../../../api/api';
 import MediaQuery from 'react-responsive';
 import Knapp from 'nav-frontend-knapper/lib/knapp';
 import Tekst from '../../../../../tekster/finn-tekst';

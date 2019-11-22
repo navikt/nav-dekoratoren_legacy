@@ -20,12 +20,12 @@ interface DispatchProps {
     settArbeidsflate: () => void;
 }
 
-type ToppmenyProps = StateProps & DispatchProps;
+type arbeidsflateProps = StateProps & DispatchProps;
 
 const Arbeidsflatemeny = ({
     settArbeidsflate,
     arbeidsflate,
-}: ToppmenyProps) => {
+}: arbeidsflateProps) => {
     const cls = BEMHelper('arbeidsflate');
 
     return (

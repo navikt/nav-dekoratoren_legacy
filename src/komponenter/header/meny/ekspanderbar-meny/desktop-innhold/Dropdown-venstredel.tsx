@@ -11,7 +11,7 @@ interface Props {
     tabindex: boolean;
 }
 
-const DropdownVenstreSeksjon = (props: Props) => {
+const DropdownVenstredel = (props: Props) => {
     const { classname, menyLenker, tabindex } = props;
     const cls = BEMHelper(classname);
 
@@ -53,4 +53,4 @@ const Menylenker = ({ menygruppe, tabindex }: MenylenkerProps) => (
     </ul>
 );
 
-export default DropdownVenstreSeksjon;
+export default DropdownVenstredel;

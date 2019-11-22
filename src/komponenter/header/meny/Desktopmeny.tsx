@@ -20,7 +20,7 @@ interface Props {
     language: Language;
 }
 
-const Hovedmeny = ({ language }: Props) => {
+const Desktopmeny = ({ language }: Props) => {
     return (
         <nav className={desktopmeny.className}>
             <div className={desktopmeny.element('content')}>
@@ -56,4 +56,4 @@ const Hovedmeny = ({ language }: Props) => {
     );
 };
 
-export default Hovedmeny;
+export default Desktopmeny;
