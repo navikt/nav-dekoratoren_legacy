@@ -12,6 +12,7 @@ interface StateProps {
     erInnlogget: boolean;
     nyesteId: number;
     arbeidsflate: MenuValue;
+    tabIndex?: boolean;
 }
 
 interface FunctionProps {
@@ -78,7 +79,11 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
         const { erInnlogget, antallVarsler, arbeidsflate } = this.props;
 
         return (
-            <div ref={this.varselbjelleRef} className="varselbjelle">
+            <div
+                ref={this.varselbjelleRef}
+                className="varselbjelle"
+                tabIndex={this.props.tabIndex ? 0 : -1}
+            >
                 {erInnlogget && arbeidsflate === MenuValue.PRIVATPERSON ? (
                     <>
                         <div

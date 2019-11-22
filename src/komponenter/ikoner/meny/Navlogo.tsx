@@ -1,74 +1,78 @@
 import React from 'react';
+import Lenke from 'nav-frontend-lenker';
 
 const Navlogo = ({
     width,
     height,
     color,
+    viewIndex,
 }: {
     width?: string;
     height?: string;
     color?: string;
+    viewIndex?: boolean;
 }) => {
     return (
-        <svg
-            width={width ? width : '73px'}
-            height={height ? height : '46px'}
-            viewBox="0 0 73 46"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-        >
-            <title>NAV Brand/NAV logo / hvit </title>
-            <desc>Created with Sketch.</desc>
-            <defs>
-                <polygon
-                    id="path-1"
-                    points="6.08071004 11.8175905 6.08071004 0.187211834 0.152920074 0.187211834 0.152920074 11.8175905 6.08071004 11.8175905"
-                />
-            </defs>
-            <g
-                id="Page-1"
-                stroke="none"
-                strokeWidth="1"
-                fill="none"
-                fillRule="evenodd"
+        <Lenke href="https://nav.no" tabIndex={viewIndex ? 0 : -1}>
+            <svg
+                width={width ? width : '73px'}
+                height={height ? height : '46px'}
+                viewBox="0 0 73 46"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
             >
+                <title>NAV Brand/NAV logo / hvit </title>
+                <desc>Created with Sketch.</desc>
+                <defs>
+                    <polygon
+                        id="path-1"
+                        points="6.08071004 11.8175905 6.08071004 0.187211834 0.152920074 0.187211834 0.152920074 11.8175905 6.08071004 11.8175905"
+                    />
+                </defs>
                 <g
-                    id="layout-v3-annen-header-1-tjenste-copy-2"
-                    transform="translate(-24.000000, -8.000000)"
+                    id="Page-1"
+                    stroke="none"
+                    strokeWidth="1"
+                    fill="none"
+                    fillRule="evenodd"
                 >
                     <g
-                        id="NAV-Brand/NAV-logo-/-hvit-"
-                        transform="translate(24.000000, 8.000000)"
+                        id="layout-v3-annen-header-1-tjenste-copy-2"
+                        transform="translate(-24.000000, -8.000000)"
                     >
-                        <g id="Page-1-Copy">
-                            <polygon
-                                id="Fill-3"
-                                fill={color ? color : 'black'}
-                                points="0 33.0325728 4.6852974 21.4021941 9.18714498 21.4021941 4.50781784 33.0325728"
-                            />
-                            <polygon
-                                id="Fill-5"
-                                fill={color ? color : 'black'}
-                                points="57.8149145 33.0325728 62.4402379 21.4021941 64.8945576 21.4021941 60.2695056 33.0325728"
-                            />
-                            <g
-                                id="Group-9"
-                                transform="translate(66.758364, 21.214982)"
-                            >
-                                <mask id="mask-2" fill="white">
-                                    <use xlinkHref="#path-1" />
-                                </mask>
-                                <g id="Clip-8" />
+                        <g
+                            id="NAV-Brand/NAV-logo-/-hvit-"
+                            transform="translate(24.000000, 8.000000)"
+                        >
+                            <g id="Page-1-Copy">
                                 <polygon
-                                    id="Fill-7"
+                                    id="Fill-3"
                                     fill={color ? color : 'black'}
-                                    mask="url(#mask-2)"
-                                    points="0.152920074 11.8175905 4.77742937 0.187211834 6.08084572 0.187211834 1.45579368 11.8175905"
+                                    points="0 33.0325728 4.6852974 21.4021941 9.18714498 21.4021941 4.50781784 33.0325728"
                                 />
-                            </g>
-                            <path
-                                d="M34.0058152,45.984213 C21.3485922,45.984213 11.0854435,35.6908284 11.0854435,22.9937396
+                                <polygon
+                                    id="Fill-5"
+                                    fill={color ? color : 'black'}
+                                    points="57.8149145 33.0325728 62.4402379 21.4021941 64.8945576 21.4021941 60.2695056 33.0325728"
+                                />
+                                <g
+                                    id="Group-9"
+                                    transform="translate(66.758364, 21.214982)"
+                                >
+                                    <mask id="mask-2" fill="white">
+                                        <use xlinkHref="#path-1" />
+                                    </mask>
+                                    <g id="Clip-8" />
+                                    <polygon
+                                        id="Fill-7"
+                                        fill={color ? color : 'black'}
+                                        mask="url(#mask-2)"
+                                        points="0.152920074 11.8175905 4.77742937 0.187211834 6.08084572 0.187211834 1.45579368 11.8175905"
+                                    />
+                                </g>
+                                <path
+                                    d="M34.0058152,45.984213 C21.3485922,45.984213 11.0854435,35.6908284 11.0854435,22.9937396
                                 C11.0854435,10.2952899 21.3485922,0 34.0058152,0 C46.6676517,0 56.9318859,10.2952899 56.9318859,22.9937396
                                 C56.9318859,35.6908284 46.6676517,45.984213 34.0058152,45.984213 Z M53.5587703,21.4021941 L49.4837963,21.4021941
                                 C49.4837963,21.4021941 49.2029227,21.4021941 49.1035993,21.6509751 L46.8484691,28.5752 L44.5952387,21.6509751
@@ -96,14 +100,15 @@ const Navlogo = ({
                                 53.5587703,21.4021941 Z M36.0664506,28.8288805 L33.705484,28.8288805 C32.7657108,28.8288805 32.0012461,28.0656615
                                 32.0012461,27.1219811 C32.0012461,26.1799337 32.7657108,25.4118154 33.705484,25.4118154 L34.3657405,25.4118154
                                 C35.3030714,25.4118154 36.0664506,26.1799337 36.0664506,27.1219811 L36.0664506,28.8288805 Z"
-                                id="Combined-Shape"
-                                fill={color ? color : 'black'}
-                            />
+                                    id="Combined-Shape"
+                                    fill={color ? color : 'black'}
+                                />
+                            </g>
                         </g>
                     </g>
                 </g>
-            </g>
-        </svg>
+            </svg>
+        </Lenke>
     );
 };
 

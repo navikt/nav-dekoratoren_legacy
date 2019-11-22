@@ -7,6 +7,7 @@ import parse from 'html-react-parser';
 
 interface OwnProps {
     className?: string;
+    tabIndex?: boolean;
 }
 
 interface StateProps {

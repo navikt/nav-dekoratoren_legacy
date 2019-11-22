@@ -13,7 +13,7 @@ const TopSeksjon = ({ lukkmeny, viewIndex }: Props) => {
 
     return (
         <div className={className.element('meny', 'top')}>
-            <Navlogo />
+            <Navlogo viewIndex={viewIndex} />
             <div className={className.element('meny', 'lukkmeny-ramme')}>
                 <button
                     className={className.element(
