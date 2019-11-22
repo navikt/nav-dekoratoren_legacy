@@ -1,7 +1,7 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
-import Environments from '../../../../../utils/environments';
-import { MenySeksjon } from '../../../../../reducer/menu-duck';
+import Environments from '../../../../../../utils/environments';
+import { MenySeksjon } from '../../../../../../reducer/menu-duck';
 
 const { baseUrlEnonic } = Environments();
 

@@ -8,8 +8,6 @@ import {
     MenyPunkter,
 } from '../../../../reducer/menu-duck';
 import { Language } from '../../../../reducer/language-duck';
-import DropdownHoyredel from './desktop-innhold/Dropdown-hoyredel';
-import DropdownVenstredel from './desktop-innhold/Dropdown-venstredel';
 import MediaQuery from 'react-responsive';
 import './Ekspanderbarmeny.less';
 import MobilVisningsmeny from './mobil-visningsmeny/MobilVisningsmeny';
@@ -18,6 +16,7 @@ import Mobilbakgrunn from './mobil-visningsmeny/mobil-innhold/Mobilbakgrunn';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import { verifyWindowObj } from '../../../../utils/environments';
+import DesktopVisningsmeny from './desktop-visningsmeny/DesktopVisningsmeny';
 
 interface StateProps {
     meny: MenyPunkter;
@@ -45,8 +44,6 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
         };
         this.dropDownExpand = this.dropDownExpand.bind(this);
     }
-
-    // nav-meny
 
     dropDownExpand = () => {
         this.setState({
@@ -99,28 +96,21 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                                 )}
                             >
                                 <MediaQuery minWidth={tabletview}>
-                                    <DropdownVenstredel
+                                    <DesktopVisningsmeny
                                         classname={this.state.vismenyClassname}
-                                        menyLenker={selectMenu(
+                                        tabindex={this.state.clicked}
+                                        fellesmeny={selectMenu(
                                             meny.data,
                                             language,
                                             arbeidsflate
                                         )}
-                                        tabindex={this.state.clicked}
+                                        minsideMeny={Ekspanderbarmeny.minside(
+                                            meny.data[0].children,
+                                            3
+                                        )}
+                                        lang={this.props.language}
+                                        arbeidsflate={arbeidsflate}
                                     />
-                                    {arbeidsflate === MenuValue.PRIVATPERSON &&
-                                    language === Language.NORSK ? (
-                                        <DropdownHoyredel
-                                            minsideMeny={Ekspanderbarmeny.minside(
-                                                meny.data[0].children,
-                                                3
-                                            )}
-                                            classname={
-                                                this.state.vismenyClassname
-                                            }
-                                            tabindex={this.state.clicked}
-                                        />
-                                    ) : null}
                                 </MediaQuery>
                                 <MediaQuery maxWidth={tabletview - 1}>
                                     {this.props.language !== Language.SAMISK ? (

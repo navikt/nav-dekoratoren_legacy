@@ -1,11 +1,11 @@
 import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
-import BEMHelper from '../../../../../utils/bem';
-import { MenySeksjon } from '../../../../../reducer/menu-duck';
+import BEMHelper from '../../../../../../utils/bem';
+import { MenySeksjon } from '../../../../../../reducer/menu-duck';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
-import { dittNavURL } from '../../minside-lenke/MinsideLenke';
-import Tekst from '../../../../../tekster/finn-tekst';
+import { dittNavURL } from '../../../minside-lenke/MinsideLenke';
+import Tekst from '../../../../../../tekster/finn-tekst';
 
 interface Props {
     minsideMeny: MenySeksjon;

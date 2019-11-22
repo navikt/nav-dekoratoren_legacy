@@ -1,8 +1,8 @@
 import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import MediaQuery from 'react-responsive';
-import BEMHelper from '../../../../../utils/bem';
-import { MenySeksjon } from '../../../../../reducer/menu-duck';
+import BEMHelper from '../../../../../../utils/bem';
+import { MenySeksjon } from '../../../../../../reducer/menu-duck';
 import { DropdownLenke } from './Dropdown-venstrelenke';
 
 interface Props {
