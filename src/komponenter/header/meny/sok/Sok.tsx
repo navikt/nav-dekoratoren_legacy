@@ -100,6 +100,7 @@ class Sok extends React.Component<StateProps, InputState> {
                 }) => (
                     <form
                         className="sok"
+                        id="sok"
                         role="search"
                         onSubmit={event => this.handleSubmit(event, URL)}
                     >

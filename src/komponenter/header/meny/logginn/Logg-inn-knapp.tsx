@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../reducer/reducer';
 import KnappBase from 'nav-frontend-knapper';
-import Environments, { verifyWindowObj } from '../../../../utils/environments';
+import Environments, { erNavDekoratoren, verifyWindowObj } from '../../../../utils/environments';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
 import Tekst from '../../../../tekster/finn-tekst';
@@ -19,12 +19,12 @@ const getPath = () => {
         return window.location.pathname.split('/')[3] !== undefined
             ? '/person/nav-dekoratoren/' +
                   window.location.pathname.split('/')[3]
-            : '/person';
+            : '/person/nav-dekoratoren/';
     }
-    return '/person';
+    return '/person/nav-dekoratoren/';
 };
 
-const path = getPath();
+const path = erNavDekoratoren() ? getPath() : '/person/dittnav';
 const login = `${loginUrl}/login?redirect=${baseUrl}${path}`;
 
 interface StateProps {

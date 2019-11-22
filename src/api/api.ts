@@ -6,7 +6,7 @@ import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { Meny as menypunkterData } from '../reducer/menu-duck';
 
-const { baseUrl, menypunkter, sokeresultat } = Environments();
+const { baseUrl, innloggingslinjenUrl, menypunkter, sokeresultat } = Environments();
 
 export const varselinnboksUrl = `${baseUrl}/person/varselinnboks`;
 export const mobileview = 768;
@@ -40,7 +40,7 @@ interface ApiProps {
 }
 
 export const API: ApiProps = {
-    innloggingsstatusURL: `${baseUrl}/innloggingslinje-api/auth`,
+    innloggingsstatusURL: `${innloggingslinjenUrl}/innloggingslinje-api/auth`,
     menyPunkterURL: menypunkter,
     getVarselinnboksURL: `${varselinnboksUrl}/varsler`,
     postVarselinnboksURL: `${varselinnboksUrl}/rest/varsel/erlest`,
@@ -48,7 +48,7 @@ export const API: ApiProps = {
 };
 
 export function hentInnloggingsstatusFetch(): Promise<innloggingsstatusData> {
-    return fetchToJson(API.innloggingsstatusURL);
+    return fetchToJson(API.innloggingsstatusURL,  { credentials: 'include' });
 }
 
 export function hentMenyPunkter(): Promise<menypunkterData[]> {
