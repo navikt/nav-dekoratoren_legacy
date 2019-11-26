@@ -97,7 +97,7 @@ app.get(
         <title>NAV Dekoratør</title>
         <div id="styles">
             <link href=${css} rel="stylesheet" />
-        </div>>
+        </div>
     </head>
     <body>
         <div id="header-withmenu">
