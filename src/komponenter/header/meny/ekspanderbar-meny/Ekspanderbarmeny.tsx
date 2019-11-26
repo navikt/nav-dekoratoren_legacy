@@ -42,10 +42,10 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
             minside: dataInitState,
             vismenyClassname: 'meny',
         };
-        this.dropDownExpand = this.dropDownExpand.bind(this);
+        this.menutoggle = this.menutoggle.bind(this);
     }
 
-    dropDownExpand = () => {
+    menutoggle = () => {
         this.setState({
             clicked: !this.state.clicked,
         });
@@ -82,7 +82,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
         return (
             <>
                 <Menyknapp
-                    ToggleMenu={this.dropDownExpand}
+                    ToggleMenu={this.menutoggle}
                     clicked={this.state.clicked}
                     lang={this.props.language}
                 />
@@ -123,8 +123,8 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                                                 language,
                                                 arbeidsflate
                                             )}
-                                            viewIndex={this.state.clicked}
-                                            closeButton={this.dropDownExpand}
+                                            menuIsOpen={this.state.clicked}
+                                            togglemenu={this.menutoggle}
                                             arbeidsflate={arbeidsflate}
                                             lang={this.props.language}
                                         />
@@ -134,7 +134,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                                 </MediaQuery>
                             </div>
                             <Mobilbakgrunn
-                                toggleWindow={this.dropDownExpand}
+                                toggleWindow={this.menutoggle}
                                 backgroundIsActive={this.state.clicked}
                             />
                         </>

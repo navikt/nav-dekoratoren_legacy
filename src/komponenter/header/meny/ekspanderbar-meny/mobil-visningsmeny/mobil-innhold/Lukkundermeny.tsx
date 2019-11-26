@@ -9,7 +9,7 @@ import Tekst from '../../../../../../tekster/finn-tekst';
 interface Props {
     lukkundermeny: () => void;
     className: string;
-    viewindex: boolean;
+    tabindex: boolean;
 }
 
 const Lukkundermeny = (props: Props) => {
@@ -23,7 +23,7 @@ const Lukkundermeny = (props: Props) => {
                         event.preventDefault();
                         props.lukkundermeny();
                     }}
-                    tabIndex={props.viewindex ? 0 : -1}
+                    tabIndex={props.tabindex ? 0 : -1}
                 >
                     <VenstreChevron />
                     <Tekst id="tilbake-til-overskrift" />

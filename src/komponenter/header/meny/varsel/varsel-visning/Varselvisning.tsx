@@ -8,6 +8,7 @@ import parse from 'html-react-parser';
 interface OwnProps {
     className?: string;
     tabIndex?: boolean;
+    togglevarselmeny?: () => void;
 }
 
 interface StateProps {
@@ -16,28 +17,89 @@ interface StateProps {
     antallUlesteVarsler: number;
 }
 
-const Varselvisning: React.FunctionComponent<OwnProps & StateProps> = props => {
-    const { className } = props;
-    const html = parse(props.varsler);
-    return (
-        <div
-            id="varsler-display"
-            className={className ? className : 'varsler-display'}
-        >
-            {html}
-            {props.antallVarsler > 5 && (
-                <div className="vis-alle-lenke skillelinje-topp">
-                    <a href={varselinnboksUrl}>
-                        Vis alle dine varsler
-                        {props.antallUlesteVarsler > 0
-                            ? ` (${props.antallUlesteVarsler} nye)`
-                            : ''}
-                    </a>
+interface State {
+    parsedVarsler: any;
+}
+
+type Props = OwnProps & StateProps;
+
+class Varselvisning extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+
+        this.state = {
+            parsedVarsler: parse(this.props.varsler),
+        };
+    }
+
+    setTabIndex = () => {
+        const datapointer = document.getElementById('enonic-message');
+        if (datapointer) {
+            for (
+                let i = 0;
+                i <= datapointer.getElementsByTagName('a').length;
+                i++
+            ) {
+                if (datapointer.getElementsByTagName('a')[i]) {
+                    datapointer.getElementsByTagName('a')[i].tabIndex = this
+                        .props.tabIndex
+                        ? 0
+                        : -1;
+                }
+            }
+        }
+    };
+
+    componentDidUpdate(prevProps: Readonly<Props>): void {
+        if (this.props.tabIndex && !prevProps.tabIndex) {
+            if (this.props.togglevarselmeny) {
+                this.setTabIndex();
+                this.props.togglevarselmeny();
+            }
+        }
+
+        if (
+            !this.props.tabIndex &&
+            prevProps.tabIndex &&
+            !this.props.tabIndex
+        ) {
+            if (this.props.togglevarselmeny) {
+                this.setTabIndex();
+            }
+        }
+    }
+
+    componentDidMount(): void {
+        this.setTabIndex();
+    }
+
+    render() {
+        const { className } = this.props;
+        return (
+            <div
+                id="varsler-display"
+                className={className ? className : 'varsler-display'}
+            >
+                <div className="enonic-message-wrapper" id="enonic-message">
+                    {this.state.parsedVarsler}
                 </div>
-            )}
-        </div>
-    );
-};
+                {this.props.antallVarsler > 5 && (
+                    <div className="vis-alle-lenke skillelinje-topp">
+                        <a
+                            href={varselinnboksUrl}
+                            tabIndex={this.props.tabIndex ? 0 : -1}
+                        >
+                            Vis alle dine varsler
+                            {this.props.antallUlesteVarsler > 0
+                                ? ` (${this.props.antallUlesteVarsler} nye)`
+                                : ''}
+                        </a>
+                    </div>
+                )}
+            </div>
+        );
+    }
+}
 
 const mapStateToProps = (state: AppState): StateProps => ({
     varsler: state.varsler.data.varsler,

@@ -1,3 +1,6 @@
+@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../styling-variabler.less';
+
 ul.mobil-seksjon-valg {
     padding: 0;
     margin: 0;
@@ -25,6 +28,16 @@ ul.mobil-seksjon-valg {
     }
 
     &__list-element {
+        &:focus {
+            color: @navDypBla;
+            box-shadow: none;
+
+            h2,
+            h1 {
+                font-weight: 400;
+                outline: 2px solid @navDypBla;
+            }
+        }
         &--chevron {
             padding-right: 0.5rem;
         }

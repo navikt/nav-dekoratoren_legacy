@@ -5,25 +5,25 @@ import './Toppseksjon.less';
 
 interface Props {
     lukkmeny: () => void;
-    viewIndex: boolean;
+    tabindex: boolean;
 }
 
-const TopSeksjon = ({ lukkmeny, viewIndex }: Props) => {
+const TopSeksjon = (props: Props) => {
     const className = BEMHelper('mobilmeny');
 
     return (
         <div className={className.element('meny', 'top')}>
-            <Navlogo viewIndex={viewIndex} />
+            <Navlogo viewIndex={props.tabindex} />
             <div className={className.element('meny', 'lukkmeny-ramme')}>
                 <button
                     className={className.element(
                         'lukkmeny-knapp',
-                        viewIndex ? '' : ' heartbeat'
+                        props.tabindex ? '' : ' heartbeat'
                     )}
                     data-animation="beat-rotation"
                     data-remove="200"
-                    onClick={() => lukkmeny()}
-                    tabIndex={viewIndex ? 0 : -1}
+                    onClick={() => props.lukkmeny()}
+                    tabIndex={props.tabindex ? 0 : -1}
                 />
             </div>
         </div>

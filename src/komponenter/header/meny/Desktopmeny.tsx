@@ -38,9 +38,9 @@ const Desktopmeny = ({ language }: Props) => {
                     <InnloggingsstatusProvider>
                         <>
                             <MediaQuery minWidth={tabletview - 1}>
-                                <MinsideLenke />
+                                <MinsideLenke tabindex={true} />
                                 <VarselinnboksProvider>
-                                    <Varselbjelle>
+                                    <Varselbjelle tabindex={true}>
                                         {clicked =>
                                             clicked && <VarselVisning />
                                         }

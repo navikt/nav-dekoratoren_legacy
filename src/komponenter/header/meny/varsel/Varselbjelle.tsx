@@ -6,13 +6,16 @@ import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
 import './Varselbjelle.less';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 
+interface Props {
+    tabindex: boolean;
+}
+
 interface StateProps {
     antallVarsler: number;
     antallUlesteVarsler: number;
     erInnlogget: boolean;
     nyesteId: number;
     arbeidsflate: MenuValue;
-    tabIndex?: boolean;
 }
 
 interface FunctionProps {
@@ -28,7 +31,7 @@ interface State {
     classname: string;
 }
 
-type VarselbjelleProps = StateProps & DispatchProps & FunctionProps;
+type VarselbjelleProps = StateProps & DispatchProps & FunctionProps & Props;
 
 class Varselbjelle extends React.Component<VarselbjelleProps, State> {
     private varselbjelleRef = createRef<HTMLDivElement>();
@@ -42,21 +45,12 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                     ? 'toggle-varsler-container har-nye-varsler'
                     : 'toggle-varsler-container',
         };
+
         this.handleClick = this.handleClick.bind(this);
         this.handleOutsideClick = this.handleOutsideClick.bind(this);
     }
 
     handleClick = () => {
-        if (!this.state.clicked) {
-            document.addEventListener('click', this.handleOutsideClick, false);
-        } else {
-            document.removeEventListener(
-                'click',
-                this.handleOutsideClick,
-                false
-            );
-        }
-
         this.setState({
             clicked: !this.state.clicked,
         });
@@ -79,11 +73,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
         const { erInnlogget, antallVarsler, arbeidsflate } = this.props;
 
         return (
-            <div
-                ref={this.varselbjelleRef}
-                className="varselbjelle"
-                tabIndex={this.props.tabIndex ? 0 : -1}
-            >
+            <div ref={this.varselbjelleRef} className="varselbjelle">
                 {erInnlogget && arbeidsflate === MenuValue.PRIVATPERSON ? (
                     <>
                         <div
@@ -93,6 +83,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                             <button
                                 onClick={this.handleClick}
                                 className="toggle-varsler"
+                                tabIndex={this.props.tabindex ? 0 : -1}
                                 title="Varsler"
                                 aria-label={`Varsler. Du har ${
                                     antallVarsler > 0 ? antallVarsler : 'ingen'

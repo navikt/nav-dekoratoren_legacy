@@ -55,9 +55,13 @@
                 }
 
                 &:active,
-                &:focus {
-                    color: @navDypBla;
+                &:focus,
+                &:focus-within {
                     box-shadow: none;
+                    span {
+                        color: @navDypBla;
+                        outline: 3px solid @navDypBla;
+                    }
                 }
             }
         }

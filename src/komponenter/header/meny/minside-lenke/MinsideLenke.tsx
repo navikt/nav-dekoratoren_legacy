@@ -14,7 +14,15 @@ interface StateProps {
     arbeidsflate: MenuValue;
 }
 
-const MinsideLenke = ({ erInnlogget, arbeidsflate }: StateProps) => {
+interface Props {
+    tabindex: boolean;
+}
+
+const MinsideLenke = ({
+    erInnlogget,
+    arbeidsflate,
+    tabindex,
+}: StateProps & Props) => {
     const lenketekst =
         arbeidsflate === MenuValue.IKKEVALGT ||
         arbeidsflate === MenuValue.PRIVATPERSON
@@ -34,7 +42,9 @@ const MinsideLenke = ({ erInnlogget, arbeidsflate }: StateProps) => {
     return (
         <div className="minside-lenke">
             {erInnlogget && arbeidsflate !== MenuValue.SAMARBEIDSPARTNER ? (
-                <Lenke href={lenkeurl}>{lenketekst}</Lenke>
+                <Lenke href={lenkeurl} tabIndex={tabindex ? 0 : -1}>
+                    {lenketekst}
+                </Lenke>
             ) : null}
         </div>
     );

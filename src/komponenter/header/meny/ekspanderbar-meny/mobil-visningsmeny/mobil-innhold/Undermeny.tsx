@@ -12,7 +12,7 @@ interface Props {
     clicked: boolean;
     lukkMenyene: () => void;
     lukkMeny: () => void;
-    viewIndex: boolean;
+    tabindex: boolean;
     lenker: MenySeksjon;
 }
 
@@ -22,7 +22,7 @@ const Undermeny = (props: Props) => {
         clicked,
         lukkMenyene,
         lukkMeny,
-        viewIndex,
+        tabindex,
         lenker,
     } = props;
     const menyClass = BEMHelper(className);
@@ -33,12 +33,12 @@ const Undermeny = (props: Props) => {
                 clicked ? 'active' : ''
             )}
         >
-            <TopSeksjon lukkmeny={lukkMenyene} viewIndex={clicked} />
+            <TopSeksjon lukkmeny={lukkMenyene} tabindex={props.tabindex} />
 
             <Lukkundermeny
                 lukkundermeny={lukkMeny}
                 className={menyClass.className}
-                viewindex={viewIndex}
+                tabindex={props.tabindex}
             />
             <ul className={menyClass.element('meny', 'list')}>
                 {lenker.children.map((lenke, index: number) => {
@@ -46,7 +46,7 @@ const Undermeny = (props: Props) => {
                         <Lenke
                             href={lenke.path}
                             key={index}
-                            tabIndex={viewIndex ? 0 : -1}
+                            tabIndex={tabindex ? 0 : -1}
                         >
                             <Listelement
                                 className={menyClass.className}

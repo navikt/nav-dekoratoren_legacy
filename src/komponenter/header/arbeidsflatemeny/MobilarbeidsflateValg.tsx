@@ -14,6 +14,10 @@ import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import { connect } from 'react-redux';
 import './MobilarbeidsflateValg.less';
 
+interface Props {
+    tabindex: boolean;
+}
+
 interface StateProps {
     arbeidsflate: MenuValue;
 }
@@ -25,7 +29,8 @@ interface DispatchProps {
 const MobilarbeidsflateValg = ({
     arbeidsflate,
     settArbeidsflate,
-}: StateProps & DispatchProps) => {
+    tabindex,
+}: StateProps & DispatchProps & Props) => {
     const cls = BEMHelper('mobil-seksjon-valg');
 
     return (
@@ -45,6 +50,7 @@ const MobilarbeidsflateValg = ({
                                 );
                                 settArbeidsflate();
                             }}
+                            tabIndex={tabindex ? 0 : -1}
                         >
                             <li>
                                 <div
