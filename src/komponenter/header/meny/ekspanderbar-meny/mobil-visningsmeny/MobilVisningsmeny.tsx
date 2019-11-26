@@ -1,7 +1,6 @@
-import React, { createRef, MutableRefObject, RefObject, useRef } from 'react';
+import React from 'react';
 import { MenySeksjon } from '../../../../../reducer/menu-duck';
 import BEMHelper from '../../../../../utils/bem';
-import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Topseksjon from './mobil-innhold/top-seksjon/Topseksjon';
 import './MobilVisningsmeny.less';
@@ -174,7 +173,7 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
                                         className="lenke"
                                         ref={this.visningslenker[index]}
                                         key={index}
-                                        href={`https://nav.no/${menyElement.displayName}`}
+                                        href="https://nav.no"
                                         onClick={event =>
                                             this.setMenyliste(
                                                 event,

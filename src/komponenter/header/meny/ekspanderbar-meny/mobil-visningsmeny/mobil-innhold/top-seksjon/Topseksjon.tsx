@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navlogo from '../../../../../../ikoner/meny/Navlogo';
 import BEMHelper from '../../../../../../../utils/bem';
 import './Toppseksjon.less';
@@ -10,6 +10,11 @@ interface Props {
 
 const TopSeksjon = (props: Props) => {
     const className = BEMHelper('mobilmeny');
+    const [heartbeat, setHeartbeat] = useState<boolean>(false);
+    const setheartbeatOgLukkmeny = () => {
+        setHeartbeat(true);
+        props.lukkmeny();
+    };
 
     return (
         <div className={className.element('meny', 'top')}>
@@ -18,11 +23,11 @@ const TopSeksjon = (props: Props) => {
                 <button
                     className={className.element(
                         'lukkmeny-knapp',
-                        props.tabindex ? '' : ' heartbeat'
+                        heartbeat ? '' : ' heartbeat'
                     )}
                     data-animation="beat-rotation"
                     data-remove="200"
-                    onClick={() => props.lukkmeny()}
+                    onClick={() => setheartbeatOgLukkmeny()}
                     tabIndex={props.tabindex ? 0 : -1}
                 />
             </div>

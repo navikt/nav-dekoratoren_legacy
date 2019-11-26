@@ -42,7 +42,11 @@ const Desktopmeny = ({ language }: Props) => {
                                 <VarselinnboksProvider>
                                     <Varselbjelle tabindex={true}>
                                         {clicked =>
-                                            clicked && <VarselVisning />
+                                            clicked && (
+                                                <VarselVisning
+                                                    tabIndex={true}
+                                                />
+                                            )
                                         }
                                     </Varselbjelle>
                                 </VarselinnboksProvider>

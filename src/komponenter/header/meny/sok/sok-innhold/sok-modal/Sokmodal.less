@@ -1,3 +1,6 @@
+@import '~nav-frontend-core/less/_variabler';
+@import '../../../../../../styling-variabler.less';
+
 .sok-modal-body {
     width: 100%;
     max-width: 450px;
@@ -5,6 +8,12 @@
     max-height: 800px;
     background-color: #254b6d;
     border-radius: 0;
+
+    .lenke:focus {
+        .modal-logo {
+            outline: 2px solid white;
+        }
+    }
 
     section {
         width: 100%;

@@ -1,3 +1,6 @@
+@import '../../../../../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../../../../styling-variabler.less';
+
 .mobilmeny {
     &__meny {
         &--top {
@@ -49,6 +52,10 @@
             content: '';
             position: absolute;
             transform: rotate(45deg);
+        }
+
+        &:focus {
+            outline: 2px solid @navDypBla;
         }
 
         &:hover {

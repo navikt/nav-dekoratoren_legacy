@@ -31,10 +31,13 @@ const SokModal = (props: Props) => {
             >
                 <div className={cls.className}>
                     <div className={cls.element('logo')}>
-                        <Navlogo color="white" />
+                        <Navlogo color="white" viewIndex={props.modalerApen} />
                     </div>
                     <div className={cls.element('lukknapp')}>
-                        <Lukknapp lukkvindu={props.sokekappToggle} />
+                        <Lukknapp
+                            lukkvindu={props.sokekappToggle}
+                            tabindex={props.modalerApen}
+                        />
                     </div>
                     <div className={cls.element('veiledende-tekst')}>
                         <Innholdstittel>Hva leter du etter?</Innholdstittel>

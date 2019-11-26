@@ -4,6 +4,7 @@ import BEMHelper from '../../../../../../../utils/bem';
 
 interface Props {
     lukkvindu: () => void;
+    tabindex: boolean;
 }
 
 const Lukknapp = (props: Props) => {
@@ -22,6 +23,7 @@ const Lukknapp = (props: Props) => {
             className={cls.className}
             role="button"
             onClick={() => lukkvindu()}
+            tabIndex={props.tabindex ? 0 : -1}
         >
             <div
                 className={cls.element(
