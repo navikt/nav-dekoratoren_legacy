@@ -7,7 +7,7 @@ import * as es6promise from 'es6-promise';
 import 'isomorphic-fetch';
 
 if (verifyWindowObj()) {
-es6promise.polyfill();
+    es6promise.polyfill();
 }
 
 function echoDevMode() {
