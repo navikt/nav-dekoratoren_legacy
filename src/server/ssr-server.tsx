@@ -95,9 +95,7 @@ app.get(
         <meta name="theme-color" content="#000000" />
         <link rel="icon" href="/assets/favicon.ico" />
         <title>NAV Dekoratør</title>
-        <div id="styles">
-            <link href=${css} rel="stylesheet" />
-        </div>
+        <link href=${css} rel="stylesheet" />
     </head>
     <body>
         <div id="header-withmenu">

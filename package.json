@@ -42,6 +42,7 @@
         "@types/request": "^2.48.3",
         "babel-polyfill": "^6.26.0",
         "classnames": "^2.2.6",
+        "core-js": "^3.4.2",
         "craco-less": "^1.14.4",
         "css-loader": "^3.2.0",
         "downshift": "^3.2.10",
@@ -129,16 +130,10 @@
         "window": "^4.2.6",
         "yet-another-fetch-mock": "^3.3.0"
     },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    }
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not ie < 11",
+        "not op_mini all"
+    ]
 }
