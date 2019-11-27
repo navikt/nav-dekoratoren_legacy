@@ -1,9 +1,9 @@
 import React from 'react';
-import { varselinnboksUrl } from '../../../../../api/api';
-import './Varselvisning.less';
 import { AppState } from '../../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import parse from 'html-react-parser';
+import { varselinnboksUrl } from '../../../../../api/api';
+import './Varselvisning.less';
 
 interface OwnProps {
     className?: string;

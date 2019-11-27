@@ -1,10 +1,9 @@
 import React from 'react';
-
+import MediaQuery from 'react-responsive';
 import {
     mobileview,
     tabletview,
 } from '../../../../../../../styling-mediaquery';
-import MediaQuery from 'react-responsive';
 import SokIkon from '../../../../../../ikoner/mobilmeny/SokIkon';
 
 const Mobilsokknapp = () => {

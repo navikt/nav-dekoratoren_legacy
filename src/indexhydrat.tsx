@@ -3,10 +3,9 @@ import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import * as serviceWorker from './serviceWorker';
+import TagManager from 'react-gtm-module';
 import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
-import TagManager from 'react-gtm-module';
 import { verifyWindowObj } from './utils/environments';
 import Head from './Head';
 import Footer from './komponenter/footer/Footer';
@@ -14,7 +13,7 @@ import './index.less';
 
 const tagManagerArgs = {
     gtmId: 'GTM-PM9RP3',
-    dataLayerName: 'dataLayer'
+    dataLayerName: 'dataLayer',
 };
 
 const store = getStore();
@@ -43,4 +42,5 @@ if (verifyWindowObj()) {
 } else {
     run();
 }
+// import * as serviceWorker from './serviceWorker';
 // serviceWorker.unregister();

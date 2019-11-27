@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import { Dispatch } from '../../../redux/dispatch-type';
-import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import { EtikettLiten } from 'nav-frontend-typografi';
+import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import BEMHelper from '../../../utils/bem';
 import {
     MenuValue,
