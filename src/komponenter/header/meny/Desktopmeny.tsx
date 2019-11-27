@@ -10,7 +10,7 @@ import Varselbjelle from './varsel/Varselbjelle';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import { Language } from '../../../reducer/language-duck';
 import './Desktopmeny.less';
-import VarselVisning from './varsel/varsel-visning/Varselvisning';
+import VarselVisning from './varsel/varselvisning/Varselvisning';
 import MediaQuery from 'react-responsive';
 import { tabletview } from '../../../api/api';
 

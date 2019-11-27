@@ -1,45 +1,25 @@
 @import '../../../../node_modules/nav-frontend-core/less/_variabler';
-@import '../../../styling-variabler.less';
 
-ul.mobil-seksjon-valg {
+.mobil-seksjon-valg {
     padding: 0;
     margin: 0;
 
     .lenke {
         text-decoration: none;
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        width: 90%;
 
         &:hover {
             text-decoration: underline;
         }
-    }
-}
 
-.mobil-seksjon-valg {
-    &__list-element li {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        padding-bottom: 1rem;
-
-        h2 {
-            font-weight: 400;
-        }
-    }
-
-    &__list-element {
         &:focus {
             color: @navDypBla;
             box-shadow: none;
-
-            h2,
-            h1 {
-                font-weight: 400;
-                outline: 2px solid @navDypBla;
-            }
-        }
-        &--chevron {
-            padding-right: 0.5rem;
+            background-color: white;
+            outline: 3px solid @navDypBla;
         }
     }
 

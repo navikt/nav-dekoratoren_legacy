@@ -1,9 +1,8 @@
 import React from 'react';
-
-import { mobileview } from '../../../../../api/api';
+import MediaQuery from 'react-responsive';
 import { Undertittel } from 'nav-frontend-typografi';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
-import MediaQuery from 'react-responsive';
+import { mobileview } from '../../../../../api/api';
 
 const SokeforslagIngress = ({
     className,

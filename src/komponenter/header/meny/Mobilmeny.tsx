@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import BEMHelper from '../../../utils/bem';
 import NavLogoRod from '../../ikoner/meny/NavLogoRod';
-import DropdownMeny from './ekspanderbar-meny/Ekspanderbarmeny';
+import BEMHelper from '../../../utils/bem';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
+import DropdownMeny from './ekspanderbar-meny/Ekspanderbarmeny';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
-import './Mobilmeny.less';
 import SokModal from './sok/sok-innhold/sok-modal/Sokmodal';
 import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
+import './Mobilmeny.less';
 
 const mobilClass = BEMHelper('mobilmeny');
 
@@ -40,7 +40,10 @@ const Mobilmeny = () => {
                     </div>
                 </div>
             </div>
-            <SokModal modalerApen={clickedModal} sokekappToggle={toggleModal} />
+            <SokModal
+                modalerApen={clickedModal}
+                sokeknappToggle={toggleModal}
+            />
             <div id="modal-ancor-block" />
             <div id="main" />
         </nav>

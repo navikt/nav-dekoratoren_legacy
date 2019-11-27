@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Lukknapp.less';
 import BEMHelper from '../../../../../../../utils/bem';
 
@@ -23,6 +23,7 @@ const Lukknapp = (props: Props) => {
             className={cls.className}
             role="button"
             onClick={() => lukkvindu()}
+            onKeyPress={() => lukkvindu()}
             tabIndex={props.tabindex ? 0 : -1}
         >
             <div

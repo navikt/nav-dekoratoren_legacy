@@ -11,7 +11,7 @@ import Varselbjelle from '../../varsel/Varselbjelle';
 import VarselinnboksProvider from '../../../../../provider/Varselinnboks-provider';
 import MinsideLenke from '../../minside-lenke/MinsideLenke';
 import Undermeny from './mobil-innhold/Undermeny';
-import VarselvisningMobil from '../../varsel/varsel-visning/VarselvisningMobil';
+import VarselvisningMobil from '../../varsel/varselvisning/VarselvisningMobil';
 import { MenuValue } from '../../../../../utils/meny-storage-utils';
 import { Language } from '../../../../../reducer/language-duck';
 

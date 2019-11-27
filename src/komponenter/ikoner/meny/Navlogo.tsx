@@ -13,9 +13,13 @@ const Navlogo = ({
     viewIndex?: boolean;
 }) => {
     return (
-        <Lenke href="https://nav.no" tabIndex={viewIndex ? 0 : -1}>
+        <Lenke
+            href="https://nav.no"
+            className="nav-brand-lenke"
+            tabIndex={viewIndex ? 0 : -1}
+        >
             <svg
-                className="modal-logo"
+                className="modal-logo-svg"
                 width={width ? width : '73px'}
                 height={height ? height : '46px'}
                 viewBox="0 0 73 46"

@@ -1,16 +1,16 @@
 import React from 'react';
+import MediaQuery from 'react-responsive';
 import { Dispatch } from '../../redux/dispatch-type';
 import { connect } from 'react-redux';
+import { AppState } from '../../reducer/reducer';
+import { Language } from '../../reducer/language-duck';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
+import { mobileview } from '../../api/api';
 import Skiplinks from './skiplinks/Skiplinks';
 import Toppmeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import Desktopmeny from './meny/Desktopmeny';
-import './Header.less';
-import { Language } from '../../reducer/language-duck';
-import { AppState } from '../../reducer/reducer';
-import MediaQuery from 'react-responsive';
 import Mobilmeny from './meny/Mobilmeny';
-import { mobileview } from '../../api/api';
+import './Header.less';
 
 interface StateProps {
     language: Language;
@@ -28,24 +28,22 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
     }, []);
 
     return (
-        <div>
+        <>
             <Skiplinks />
-            <div>
-                <div className="hodefot">
-                    <header className="siteheader">
-                        <div className="innhold-container">
-                            <MediaQuery minWidth={mobileview}>
-                                {language === Language.NORSK && <Toppmeny />}
-                                <Desktopmeny language={language} />
-                            </MediaQuery>
-                            <MediaQuery maxWidth={mobileview - 1}>
-                                <Mobilmeny />
-                            </MediaQuery>
-                        </div>
-                    </header>
-                </div>
+            <div className="hodefot">
+                <header className="siteheader">
+                    <div className="innhold-container">
+                        <MediaQuery minWidth={mobileview}>
+                            {language === Language.NORSK && <Toppmeny />}
+                            <Desktopmeny language={language} />
+                        </MediaQuery>
+                        <MediaQuery maxWidth={mobileview - 1}>
+                            <Mobilmeny />
+                        </MediaQuery>
+                    </div>
+                </header>
             </div>
-        </div>
+        </>
     );
 };
 

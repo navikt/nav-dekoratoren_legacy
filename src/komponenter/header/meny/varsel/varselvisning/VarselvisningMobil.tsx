@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import './Varselvisning.less';
 import BEMHelper from '../../../../../utils/bem';
 import Lukkundermeny from '../../ekspanderbar-meny/mobil-visningsmeny/mobil-innhold/Lukkundermeny';
 import VarselVisning from './Varselvisning';
 import TopSeksjon from '../../ekspanderbar-meny/mobil-visningsmeny/mobil-innhold/top-seksjon/Topseksjon';
+import './Varselvisning.less';
 
 interface OwnProps {
     visvarsel: boolean;
@@ -37,30 +37,28 @@ class VarselvisningMobil extends React.Component<OwnProps> {
         const cls = BEMHelper(this.props.visningmenyClassname);
 
         return (
-            <>
-                <section
-                    id="varsler-display"
-                    className={cls.element(
-                        'varsel-innhold',
-                        this.props.visvarsel ? 'active' : ''
-                    )}
-                >
-                    <TopSeksjon
-                        lukkmeny={this.lukkvarselOgMenyer}
-                        tabindex={this.props.tabindex}
-                    />
-                    <Lukkundermeny
-                        lukkundermeny={this.lukkvarselmenyOgfjernTabindex}
-                        className={cls.className}
-                        tabindex={this.props.tabindex}
-                    />
-                    <VarselVisning
-                        className="vis-alle-lenke"
-                        tabIndex={this.props.tabindex}
-                        togglevarselmeny={this.props.togglevarselmeny}
-                    />
-                </section>
-            </>
+            <section
+                id="varsler-display"
+                className={cls.element(
+                    'varsel-innhold',
+                    this.props.visvarsel ? 'active' : ''
+                )}
+            >
+                <TopSeksjon
+                    lukkmeny={this.lukkvarselOgMenyer}
+                    tabindex={this.props.tabindex}
+                />
+                <Lukkundermeny
+                    lukkundermeny={this.lukkvarselmenyOgfjernTabindex}
+                    className={cls.className}
+                    tabindex={this.props.tabindex}
+                />
+                <VarselVisning
+                    className="vis-alle-lenke"
+                    tabIndex={this.props.tabindex}
+                    togglevarselmeny={this.props.togglevarselmeny}
+                />
+            </section>
         );
     }
 }

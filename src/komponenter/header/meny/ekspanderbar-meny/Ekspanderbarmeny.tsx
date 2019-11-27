@@ -76,7 +76,6 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
 
     render() {
         const { meny, language, arbeidsflate } = this.props;
-
         const cls = BEMHelper(this.state.vismenyClassname);
 
         return (

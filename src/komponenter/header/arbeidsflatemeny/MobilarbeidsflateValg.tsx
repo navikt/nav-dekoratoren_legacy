@@ -38,29 +38,23 @@ const MobilarbeidsflateValg = ({
             {arbeidsflateLenker.map(
                 (lenke: { tittel: string; url: string; key: MenuValue }) => {
                     return arbeidsflate === lenke.key ? null : (
-                        <Lenke
+                        <li
                             key={lenke.tittel}
                             className={cls.element('list-element')}
-                            href={lenke.url}
-                            onClick={event => {
-                                oppdaterSessionStorage(
-                                    event,
-                                    lenke.key,
-                                    lenke.url
-                                );
-                                settArbeidsflate();
-                            }}
-                            tabIndex={tabindex ? 0 : -1}
                         >
-                            <li>
-                                <div
-                                    className={cls.element(
-                                        'list-element',
-                                        'chevron'
-                                    )}
-                                >
-                                    <HoyreChevron />
-                                </div>
+                            <Lenke
+                                href={lenke.url}
+                                onClick={event => {
+                                    oppdaterSessionStorage(
+                                        event,
+                                        lenke.key,
+                                        lenke.url
+                                    );
+                                    settArbeidsflate();
+                                }}
+                                tabIndex={tabindex ? 0 : -1}
+                            >
+                                <HoyreChevron />
                                 <Undertittel>
                                     <span>For </span>
                                     <span
@@ -69,8 +63,8 @@ const MobilarbeidsflateValg = ({
                                         {lenke.tittel}
                                     </span>{' '}
                                 </Undertittel>
-                            </li>
-                        </Lenke>
+                            </Lenke>
+                        </li>
                     );
                 }
             )}

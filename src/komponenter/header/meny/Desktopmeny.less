@@ -15,12 +15,13 @@
     &__elementer {
         display: flex;
         align-items: center;
-        justify-content: center;
         flex-wrap: wrap;
+        justify-content: space-around;
     }
 
     &__nav-brand {
         order: 1;
+        width: auto;
 
         &:focus {
             outline: 3px solid @navDypBla;
@@ -30,23 +31,32 @@
     .minside-lenke {
         order: 4;
     }
+
     .varselbjelle {
-        order: 5;
+        order: 3;
+        width: auto;
+        max-height: @maxheight-menuitem;
+        display: flex;
+        align-items: center;
     }
 
     .login-container {
         order: 3;
+        width: auto;
+        max-height: @maxheight-menuitem;
     }
 
     .sok {
-        order: 6;
-        width: 100%;
+        order: 3;
+        width: auto;
+        max-height: @maxheight-menuitem;
     }
 
     .meny {
-        &__menyknapp {
+        &__menyknapp,
+        &--alternativ-samisk {
             order: 2;
-            width: 30%;
+            width: auto;
         }
 
         &--alternativ-samisk {
@@ -54,51 +64,8 @@
         }
 
         &__meny-wrapper {
-            order: 7;
+            order: 4;
             width: 100%;
-        }
-    }
-
-    @media (min-width: @tabletLimitWidth) {
-        &__elementer {
-            justify-content: space-around;
-        }
-
-        &__nav-brand {
-            order: 1;
-            width: auto;
-        }
-
-        .meny {
-            &__menyknapp,
-            &--alternativ-samisk {
-                order: 2;
-                width: auto;
-            }
-
-            &__meny-wrapper {
-                order: 4;
-                width: 100%;
-            }
-        }
-
-        .sok {
-            order: 3;
-            width: auto;
-            max-height: 40px;
-        }
-
-        .login-container {
-            width: auto;
-            max-height: 40px;
-        }
-
-        .varselbjelle {
-            order: 3;
-            width: auto;
-            max-height: 40px;
-            display: flex;
-            align-items: center;
         }
     }
 
@@ -114,7 +81,7 @@
         .minside-lenke {
             order: 3;
             width: 102px;
-            max-height: 40px;
+            max-height: @maxheight-menuitem;
             display: flex;
             justify-content: center;
             align-items: center;
