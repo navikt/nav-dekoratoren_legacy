@@ -1,0 +1,58 @@
+@import '~nav-frontend-core/less/_variabler';
+@import '../../../styling-variabler.less';
+
+.hodefot .siteheader .arbeidsflate {
+    display: block;
+    width: 100%;
+    background-color: rgba(242, 242, 242, 1);
+    height: 44px;
+
+    &__topp-liste-rad {
+        width: 28rem;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        margin: 0 auto;
+    }
+
+    &__list-element {
+        float: left;
+    }
+
+    &__lenke {
+        display: inline-block;
+        padding: 0.75rem 1rem 0 1rem;
+        text-decoration: none;
+        color: black;
+
+        &:focus,
+        &:active {
+            outline: 0;
+            border: @navDypBla 3px solid;
+        }
+    }
+    &__lenke-inner {
+        padding-bottom: 0.6rem;
+
+        &:hover {
+            border-bottom: @navDypBla 2px solid;
+        }
+
+        &--active {
+            border-bottom: @navDypBla 2px solid;
+            &:hover {
+                border-bottom: @navDypBla 3px solid;
+            }
+        }
+    }
+}
+
+@media (min-width: @desktopLimitWidth) {
+    .hodefot .siteheader .arbeidsflate {
+        height: 44px;
+
+        &__topp-liste-rad {
+            width: 28rem;
+        }
+    }
+}

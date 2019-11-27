@@ -1,0 +1,75 @@
+.meny {
+    &__hovedSeksjon {
+        flex-grow: 6;
+        justify-content: center;
+        display: -ms-grid;
+        display: grid;
+        -ms-grid-columns: auto auto auto;
+        grid-template-columns: auto auto auto;
+        margin-bottom: 0.2rem;
+    }
+
+    &__seksjon {
+        padding: 0.75rem 0 0.5rem 2rem;
+
+        li {
+            list-style-type: initial;
+            margin-bottom: 0.3rem;
+
+            .lenke {
+                text-decoration: none;
+                color: black;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+
+                &:focus {
+                    color: white;
+                }
+            }
+        }
+
+        ul {
+            margin: 0;
+        }
+    }
+
+    &__minSideSeksjon {
+        flex-grow: 1;
+        margin: 0 0 0.2rem 0.5rem;
+        padding: 0.75rem 0 0.5rem 1.5rem;
+        min-width: 8rem;
+
+        .lenke {
+            color: black;
+            text-decoration: none;
+
+            &:focus {
+                color: white;
+            }
+
+            &:active {
+                font-weight: bold;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .minside-list-item {
+            padding: 0.125rem 0 0.125rem 0;
+            list-style: initial;
+        }
+
+        .minside-dittnav-lenke {
+            margin-top: 1rem;
+
+            .lenke {
+                list-style-type: none;
+                margin-left: -1.175rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,48 @@
+@import '../../../../styling-variabler.less';
+@import '~nav-frontend-core/less/_variabler';
+
+.login-container {
+    &:hover {
+        outline: 1px solid black;
+    }
+
+    .knapp {
+        // padding: calc(0.475rem - 1px) 1.2rem calc(0.525rem - 1px) 1.2rem;
+    }
+
+    .mobil-login-knapp {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.4rem 0.7rem 0.4rem 0.7rem;
+        text-decoration: none;
+        color: black;
+        background-color: white;
+        border: none;
+        margin-left: 3px;
+
+        &:focus {
+            outline: 3px solid @fokusFarge;
+        }
+    }
+
+    @media (max-width: @minimumMobilWidth) {
+        .mobil-login-knapp {
+            padding: 0.4rem 0.2rem;
+        }
+    }
+}
+
+@media (min-width: @desktopLimitWidth) {
+    .login-container {
+        margin-left: 3px;
+
+        &:hover {
+            outline: none;
+        }
+
+        .knapp {
+            //  padding: calc(0.475rem - 1px) 2.5rem calc(0.525rem - 1px) 2.5rem;
+        }
+    }
+}

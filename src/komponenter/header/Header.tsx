@@ -1,13 +1,16 @@
 import React from 'react';
+import MediaQuery from 'react-responsive';
 import { Dispatch } from '../../redux/dispatch-type';
 import { connect } from 'react-redux';
-import { fetchMenypunkter } from '../../reducer/menu-duck';
-import Skiplinks from './skiplinks/Skiplinks';
-import Toppmeny from './toppmeny/Toppmeny';
-import Hovedmeny from './hovedmeny/Hovedmeny';
-import './Header.less';
-import { Language } from '../../reducer/language-duck';
 import { AppState } from '../../reducer/reducer';
+import { Language } from '../../reducer/language-duck';
+import { fetchMenypunkter } from '../../reducer/menu-duck';
+import { mobileview } from '../../styling-mediaquery';
+import Skiplinks from './skiplinks/Skiplinks';
+import Toppmeny from './arbeidsflatemeny/Arbeidsflatemeny';
+import Desktopmeny from './meny/Desktopmeny';
+import Mobilmeny from './meny/Mobilmeny';
+import './Header.less';
 
 interface StateProps {
     language: Language;
@@ -25,19 +28,22 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
     }, []);
 
     return (
-        <div>
+        <>
             <Skiplinks />
-            <div>
-                <div className="hodefot">
-                    <header className="siteheader">
-                        <div className="innhold-container">
+            <div className="hodefot">
+                <header className="siteheader">
+                    <div className="innhold-container">
+                        <MediaQuery minWidth={mobileview}>
                             {language === Language.NORSK && <Toppmeny />}
-                            <Hovedmeny language={language} />
-                        </div>
-                    </header>
-                </div>
+                            <Desktopmeny language={language} />
+                        </MediaQuery>
+                        <MediaQuery maxWidth={mobileview - 1}>
+                            <Mobilmeny />
+                        </MediaQuery>
+                    </div>
+                </header>
             </div>
-        </div>
+        </>
     );
 };
 

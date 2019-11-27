@@ -5,7 +5,7 @@ import FetchMock, { Middleware, MiddlewareUtils } from 'yet-another-fetch-mock';
 
 export default () => {
     const loggingMiddleware: Middleware = (request, response) => {
-        console.log(request, response);
+        // console.log(request, response);
         return response;
     };
 

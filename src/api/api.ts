@@ -1,3 +1,4 @@
+// tslint:disable-line:no-any
 import React from 'react';
 import Environments from '../utils/environments';
 import { fetchToJson } from './api-utils';
@@ -5,7 +6,12 @@ import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { Meny as menypunkterData } from '../reducer/menu-duck';
 
-const { baseUrl, innloggingslinjenUrl, menypunkter, sokeresultat } = Environments();
+const {
+    baseUrl,
+    innloggingslinjenUrl,
+    menypunkter,
+    sokeresultat,
+} = Environments();
 
 export const varselinnboksUrl = `${baseUrl}/person/varselinnboks`;
 
@@ -24,7 +30,7 @@ export interface DataElement {
 export interface DatalasterProps {
     avhengigheter: DataElement[];
     ventPa?: DataElement[];
-    children: React.ReactElement<any>; // tslint:disable-line:no-any
+    children: React.ReactElement<any>;
     feilmeldingId?: string;
 }
 
@@ -45,7 +51,7 @@ export const API: ApiProps = {
 };
 
 export function hentInnloggingsstatusFetch(): Promise<innloggingsstatusData> {
-    return fetchToJson(API.innloggingsstatusURL,  { credentials: 'include' });
+    return fetchToJson(API.innloggingsstatusURL, { credentials: 'include' });
 }
 
 export function hentMenyPunkter(): Promise<menypunkterData[]> {

@@ -33,9 +33,7 @@ if (verifyWindowObj()) {
 function Head() {
     return (
         <LanguageProvider>
-            <>
-                <Header />
-            </>
+            <Header />
         </LanguageProvider>
     );
 }

@@ -1,0 +1,29 @@
+@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+
+.mobil-seksjon-valg {
+    padding: 0;
+    margin: 0;
+
+    .lenke {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        width: 90%;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:focus {
+            color: @navDypBla;
+            box-shadow: none;
+            background-color: white;
+            outline: 3px solid @navDypBla;
+        }
+    }
+
+    &__lenke-tittel {
+        text-transform: lowercase;
+    }
+}

@@ -12,9 +12,8 @@ const NavLogoRod = ({
     classname?: string;
 }) => {
     return (
-        <a className="navbar-brand" href="https://nav.no">
+        <a className={classname} href="https://nav.no">
             <svg
-                className={classname}
                 width={width ? width : '269px'}
                 height={height ? height : '169px'}
                 viewBox="0 0 269 169"

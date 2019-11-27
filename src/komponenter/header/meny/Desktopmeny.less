@@ -1,0 +1,90 @@
+@import '~nav-frontend-core/less/_variabler';
+@import '../../../styling-variabler.less';
+
+.desktopmeny {
+    width: 100%;
+    padding: 0.5rem 0 1rem;
+    border-bottom: 2px solid @navBla;
+
+    &__content {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    &__elementer {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    &__nav-brand {
+        order: 1;
+        width: auto;
+
+        &:focus {
+            outline: 3px solid @navDypBla;
+        }
+    }
+
+    .minside-lenke {
+        order: 4;
+    }
+
+    .varselbjelle {
+        order: 3;
+        width: auto;
+        max-height: @maxheight-menuitem;
+        display: flex;
+        align-items: center;
+    }
+
+    .login-container {
+        order: 3;
+        width: auto;
+        max-height: @maxheight-menuitem;
+    }
+
+    .sok {
+        order: 3;
+        width: auto;
+        max-height: @maxheight-menuitem;
+    }
+
+    .meny {
+        &__menyknapp,
+        &--alternativ-samisk {
+            order: 2;
+            width: auto;
+        }
+
+        &--alternativ-samisk {
+            color: @navBla;
+        }
+
+        &__meny-wrapper {
+            order: 4;
+            width: 100%;
+        }
+    }
+
+    @media (min-width: @desktopLimitWidth) {
+        &__elementer {
+            justify-content: space-between;
+        }
+
+        &__content {
+            width: @desktopLimitWidth;
+        }
+
+        .minside-lenke {
+            order: 3;
+            width: 102px;
+            max-height: @maxheight-menuitem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

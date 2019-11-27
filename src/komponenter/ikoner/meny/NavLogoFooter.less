@@ -1,33 +1,35 @@
 @import '~nav-frontend-core/less/_variabler';
 @import '../../../styling-variabler.less';
 
-.footer__logo .navbar-brand {
-    padding-right: 0.25rem;
-    min-width: 97.2px;
-    min-height: 97.2px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
+.footer {
+    &__logo .navbar-brand {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
 
-    &:focus,
-    &:active {
-        outline: 0;
-        background-color: initial;
-        border: @navDypBla 3px solid;
-        border-radius: 4px;
-    }
+        &:focus,
+        &:active {
+            outline: 0;
+            background-color: initial;
+            border: @navDypBla 3px solid;
+            border-radius: 4px;
+        }
 
-    svg {
-        width: 60px;
-        height: 60px;
-    }
-}
-
-@media (min-width: @desktopLimitWidth) {
-    .footer__logo .navbar-brand {
         svg {
-            width: 65px;
-            height: 65px;
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    @media (min-width: @tabletLimitWidth) {
+        &__logo {
+            padding-bottom: 1.5rem;
+        }
+        &__logo .navbar-brand {
+            svg {
+                width: 65px;
+                height: 65px;
+            }
         }
     }
 }

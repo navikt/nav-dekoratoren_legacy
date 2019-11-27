@@ -97,6 +97,7 @@ class FooterLenkeMeny extends React.Component<Props, State> {
                             <li>
                                 <Lenke href="#">Kontakt oss</Lenke>
                             </li>
+
                             {this.state.languages.map(lenke => {
                                 return (
                                     <li key={lenke.lang}>
