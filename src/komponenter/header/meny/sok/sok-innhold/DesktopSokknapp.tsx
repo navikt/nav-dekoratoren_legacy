@@ -1,8 +1,8 @@
 import React from 'react';
-import { tabletview } from '../../../../../api/api';
 import MediaQuery from 'react-responsive';
 import Knapp from 'nav-frontend-knapper/lib/knapp';
 import Tekst from '../../../../../tekster/finn-tekst';
+import { tabletview } from '../../../../../styling-mediaquery';
 
 const DesktopSokknapp = () => {
     return (

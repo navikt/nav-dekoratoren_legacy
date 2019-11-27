@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { AppState } from '../../reducer/reducer';
 import { Language } from '../../reducer/language-duck';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
-import { mobileview } from '../../api/api';
+import { mobileview } from '../../styling-mediaquery';
 import Skiplinks from './skiplinks/Skiplinks';
 import Toppmeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import Desktopmeny from './meny/Desktopmeny';

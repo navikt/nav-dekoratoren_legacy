@@ -1,5 +1,5 @@
 import React from 'react';
-import { tabletview } from '../../../../../../api/api';
+import { tabletview } from '../../../../../../styling-mediaquery';
 import MediaQuery from 'react-responsive';
 import BEMHelper from '../../../../../../utils/bem';
 

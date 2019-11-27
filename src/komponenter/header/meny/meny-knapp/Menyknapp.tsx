@@ -1,5 +1,5 @@
 import React from 'react';
-import { mobileview } from '../../../../api/api';
+import { mobileview } from '../../../../styling-mediaquery';
 import { Undertittel } from 'nav-frontend-typografi';
 import BEMHelper from '../../../../utils/bem';
 import MediaQuery from 'react-responsive';

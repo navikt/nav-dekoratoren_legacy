@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { mobileview, tabletview } from '../../../../../../../api/api';
+import {
+    mobileview,
+    tabletview,
+} from '../../../../../../../styling-mediaquery';
 import MediaQuery from 'react-responsive';
 import SokIkon from '../../../../../../ikoner/mobilmeny/SokIkon';
 

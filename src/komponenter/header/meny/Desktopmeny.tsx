@@ -12,7 +12,7 @@ import { Language } from '../../../reducer/language-duck';
 import './Desktopmeny.less';
 import VarselVisning from './varsel/varselvisning/Varselvisning';
 import MediaQuery from 'react-responsive';
-import { tabletview } from '../../../api/api';
+import { tabletview } from '../../../styling-mediaquery';
 
 const desktopmeny = BEMHelper('desktopmeny');
 

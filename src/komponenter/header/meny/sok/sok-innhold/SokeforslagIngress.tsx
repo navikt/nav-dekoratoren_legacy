@@ -2,7 +2,7 @@ import React from 'react';
 import MediaQuery from 'react-responsive';
 import { Undertittel } from 'nav-frontend-typografi';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
-import { mobileview } from '../../../../../api/api';
+import { mobileview } from '../../../../../styling-mediaquery';
 
 const SokeforslagIngress = ({
     className,

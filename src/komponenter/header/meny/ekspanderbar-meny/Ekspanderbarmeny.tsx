@@ -1,6 +1,7 @@
 import React from 'react';
 import BEMHelper from '../../../../utils/bem';
-import { Status, tabletview } from '../../../../api/api';
+import { Status } from '../../../../api/api';
+
 import { MenuValue, selectMenu } from '../../../../utils/meny-storage-utils';
 import {
     dataInitState,
@@ -17,6 +18,7 @@ import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import { verifyWindowObj } from '../../../../utils/environments';
 import DesktopVisningsmeny from './desktop-visningsmeny/DesktopVisningsmeny';
+import { tabletview } from '../../../../styling-mediaquery';
 
 interface StateProps {
     meny: MenyPunkter;
