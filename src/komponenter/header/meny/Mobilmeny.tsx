@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import NavLogoRod from '../../ikoner/meny/NavLogoRod';
 import BEMHelper from '../../../utils/bem';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
+import NavLogoRod from '../../ikoner/meny/NavLogoRod';
 import DropdownMeny from './ekspanderbar-meny/Ekspanderbarmeny';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import SokModal from './sok/sok-innhold/sok-modal/Sokmodal';

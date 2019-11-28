@@ -1,7 +1,11 @@
 import React from 'react';
+import MediaQuery from 'react-responsive';
+import { AppState } from '../../../../reducer/reducer';
+import { connect } from 'react-redux';
 import BEMHelper from '../../../../utils/bem';
+import { verifyWindowObj } from '../../../../utils/environments';
+import { tabletview } from '../../../../styling-mediaquery';
 import { Status } from '../../../../api/api';
-
 import { MenuValue, selectMenu } from '../../../../utils/meny-storage-utils';
 import {
     dataInitState,
@@ -9,16 +13,11 @@ import {
     MenyPunkter,
 } from '../../../../reducer/menu-duck';
 import { Language } from '../../../../reducer/language-duck';
-import MediaQuery from 'react-responsive';
-import './Ekspanderbarmeny.less';
-import MobilVisningsmeny from './mobil-visningsmeny/MobilVisningsmeny';
 import Menyknapp from '../meny-knapp/Menyknapp';
 import Mobilbakgrunn from './mobil-visningsmeny/mobil-innhold/Mobilbakgrunn';
-import { AppState } from '../../../../reducer/reducer';
-import { connect } from 'react-redux';
-import { verifyWindowObj } from '../../../../utils/environments';
+import MobilVisningsmeny from './mobil-visningsmeny/MobilVisningsmeny';
 import DesktopVisningsmeny from './desktop-visningsmeny/DesktopVisningsmeny';
-import { tabletview } from '../../../../styling-mediaquery';
+import './Ekspanderbarmeny.less';
 
 interface StateProps {
     meny: MenyPunkter;

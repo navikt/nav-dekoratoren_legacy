@@ -1,10 +1,10 @@
 import React from 'react';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
-import { Input } from 'nav-frontend-skjema';
 import throttle from 'lodash.throttle';
 import Downshift from 'downshift';
 import cls from 'classnames';
+import { Input } from 'nav-frontend-skjema';
 import { API } from '../../../../api/api';
 import { Language } from '../../../../reducer/language-duck';
 import { finnTekst } from '../../../../tekster/finn-tekst';
@@ -14,11 +14,11 @@ import {
     SokeresultatData,
     visAlleTreff,
 } from './sok-utils';
-import './Sok.less';
 import SokeforslagIngress from './sok-innhold/SokeforslagIngress';
 import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
 import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
 import Mobilsokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Mobilsokknapp';
+import './Sok.less';
 
 interface StateProps {
     language: Language;

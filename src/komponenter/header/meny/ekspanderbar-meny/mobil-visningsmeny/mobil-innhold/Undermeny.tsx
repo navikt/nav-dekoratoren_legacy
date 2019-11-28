@@ -1,10 +1,10 @@
 import React from 'react';
-import { MenySeksjon } from '../../../../../../reducer/menu-duck';
-import BEMHelper from '../../../../../../utils/bem';
-import Lukkundermeny from './Lukkundermeny';
-import TopSeksjon from './top-seksjon/Topseksjon';
 import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
+import { MenySeksjon } from '../../../../../../reducer/menu-duck';
+import BEMHelper from '../../../../../../utils/bem';
+import TopSeksjon from './top-seksjon/Topseksjon';
+import Lukkundermeny from './Lukkundermeny';
 import Listelement from './Listelement';
 
 interface Props {

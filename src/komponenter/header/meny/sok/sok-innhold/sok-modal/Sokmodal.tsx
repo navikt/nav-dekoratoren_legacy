@@ -3,9 +3,9 @@ import ModalWrapper from 'nav-frontend-modal';
 import Modal from 'nav-frontend-modal';
 import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
 import BEMHelper from '../../../../../../utils/bem';
-import Sok from '../../Sok';
 import Navlogo from '../../../../../ikoner/meny/Navlogo';
 import Lukknapp from './sok-modal-knapp/Lukknapp';
+import Sok from '../../Sok';
 import './Sokmodal.less';
 
 interface Props {

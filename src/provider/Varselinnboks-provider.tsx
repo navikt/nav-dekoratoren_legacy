@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { AppState } from '../reducer/reducer';
 import { Dispatch } from '../redux/dispatch-type';
 import {
     hentVarsler,
     settVarslerOK,
     VarselinnboksState,
 } from '../reducer/varselinnboks-duck';
-import { AppState } from '../reducer/reducer';
 import Datalaster from '../api/Datalaster';
 
 interface OwnProps {
