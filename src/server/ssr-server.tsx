@@ -102,7 +102,6 @@ app.get(
     <body>
         <div id="header-withmenu">
             <section id="decorator-header" role="main">${header}</section>
-            <div id="modal-anchor"></div>
         </div>
         <div id="footer-withmenu">
             <section id="decorator-footer" role="main">${footer}</section>
