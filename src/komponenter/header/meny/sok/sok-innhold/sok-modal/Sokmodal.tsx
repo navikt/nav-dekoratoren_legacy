@@ -15,7 +15,7 @@ interface Props {
 
 if (typeof window !== 'undefined') {
     Modal.setAppElement(
-        document.getElementById('#decorator-header')
+        document.getElementById('decorator-header')
             ? '#decorator-header'
             : 'body'
     );
