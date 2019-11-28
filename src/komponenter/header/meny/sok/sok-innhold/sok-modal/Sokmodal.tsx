@@ -7,14 +7,19 @@ import Navlogo from '../../../../../ikoner/meny/Navlogo';
 import Lukknapp from './sok-modal-knapp/Lukknapp';
 import Sok from '../../Sok';
 import './Sokmodal.less';
+import { verifyWindowObj } from '../../../../../../utils/environments';
 
 interface Props {
     modalerApen: boolean;
     sokeknappToggle: () => void;
 }
 
-if (typeof window !== 'undefined') {
-    Modal.setAppElement('body');
+if (verifyWindowObj()) {
+    Modal.setAppElement(
+        document.getElementById('decorator-header')
+            ? '#decorator-header'
+            : 'body'
+    );
 }
 
 const cls = BEMHelper('sok-modal');
