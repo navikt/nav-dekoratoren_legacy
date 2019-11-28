@@ -44,8 +44,6 @@ const Mobilmeny = () => {
                 modalerApen={clickedModal}
                 sokeknappToggle={toggleModal}
             />
-            <div id="modal-ancor-block" />
-            <div id="decorator-header" />
         </nav>
     );
 };
