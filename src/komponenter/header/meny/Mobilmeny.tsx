@@ -45,7 +45,7 @@ const Mobilmeny = () => {
                 sokeknappToggle={toggleModal}
             />
             <div id="modal-ancor-block" />
-            <div id="modal-anchor" />
+            <div id="decorator-header" />
         </nav>
     );
 };
