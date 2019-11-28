@@ -14,14 +14,6 @@ interface Props {
     sokeknappToggle: () => void;
 }
 
-if (verifyWindowObj()) {
-    Modal.setAppElement(
-        document.getElementById('decorator-header')
-            ? '#decorator-header'
-            : 'body'
-    );
-}
-
 const cls = BEMHelper('sok-modal');
 
 class SokModal extends React.Component<Props, {}> {
