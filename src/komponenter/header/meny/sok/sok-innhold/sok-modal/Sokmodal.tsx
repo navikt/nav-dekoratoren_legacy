@@ -14,7 +14,11 @@ interface Props {
 }
 
 if (typeof window !== 'undefined') {
-    Modal.setAppElement('#decorator-header');
+    Modal.setAppElement(
+        document.getElementById('#decorator-header')
+            ? '#decorator-header'
+            : 'body'
+    );
 }
 
 const cls = BEMHelper('sok-modal');
