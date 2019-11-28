@@ -14,7 +14,7 @@ interface Props {
 }
 
 if (typeof window !== 'undefined') {
-    Modal.setAppElement('body');
+    Modal.setAppElement('#modal-anchor');
 }
 
 const cls = BEMHelper('sok-modal');
