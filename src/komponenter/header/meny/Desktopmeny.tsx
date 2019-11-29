@@ -2,7 +2,7 @@ import React from 'react';
 import BEMHelper from '../../../utils/bem';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
-import NavLogoRod from '../../ikoner/meny/NavLogoRod';
+import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
 import Ekspanderbarmeny from './ekspanderbar-meny/Ekspanderbarmeny';
 import Sok from './sok/Sok';
 import MinsideLenke from './minside-lenke/MinsideLenke';

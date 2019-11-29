@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NavLogoRod from '../../ikoner/meny/NavLogoRod';
+import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
 import BEMHelper from '../../../utils/bem';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import DropdownMeny from './ekspanderbar-meny/Ekspanderbarmeny';

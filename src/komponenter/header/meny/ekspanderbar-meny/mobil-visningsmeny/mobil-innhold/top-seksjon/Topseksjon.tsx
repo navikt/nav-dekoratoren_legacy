@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navlogo from '../../../../../../ikoner/meny/Navlogo';
+import Navlogo from '../../../../../../../ikoner/meny/Navlogo';
 import BEMHelper from '../../../../../../../utils/bem';
 import './Toppseksjon.less';
 

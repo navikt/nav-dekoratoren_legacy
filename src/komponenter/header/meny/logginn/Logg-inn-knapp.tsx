@@ -11,7 +11,7 @@ import Lukknapp from 'nav-frontend-lukknapp';
 import Tekst from '../../../../tekster/finn-tekst';
 import MediaQuery from 'react-responsive';
 import { mobileview } from '../../../../styling-mediaquery';
-import LogginnIkon from '../../../ikoner/mobilmeny/LogginnIkon';
+import LogginnIkon from '../../../../ikoner/mobilmeny/LogginnIkon';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
 

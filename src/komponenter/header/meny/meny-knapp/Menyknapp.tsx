@@ -4,8 +4,8 @@ import { Undertittel } from 'nav-frontend-typografi';
 import BEMHelper from '../../../../utils/bem';
 import MediaQuery from 'react-responsive';
 import Tekst from '../../../../tekster/finn-tekst';
-import HamburgerIkon from '../../../ikoner/meny/HamburgerIkon';
-import MenyIkon from '../../../ikoner/mobilmeny/MenyIkon';
+import HamburgerIkon from '../../../../ikoner/meny/HamburgerIkon';
+import MenyIkon from '../../../../ikoner/mobilmeny/MenyIkon';
 import './Menyknapp.less';
 import { Language } from '../../../../reducer/language-duck';
 

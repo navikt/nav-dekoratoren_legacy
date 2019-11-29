@@ -14,7 +14,7 @@ import './index.less';
 
 const tagManagerArgs = {
     gtmId: 'GTM-PM9RP3',
-    dataLayerName: 'dataLayer'
+    dataLayerName: 'dataLayer',
 };
 
 const store = getStore();

@@ -1,5 +1,5 @@
 import React from 'react';
-import SokIkon from '../../../../ikoner/mobilmeny/SokIkon';
+import SokIkon from '../../../../../ikoner/mobilmeny/SokIkon';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import Tekst from '../../../../../tekster/finn-tekst';
 

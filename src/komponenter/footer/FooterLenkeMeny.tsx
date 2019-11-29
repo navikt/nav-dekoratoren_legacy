@@ -2,7 +2,7 @@ import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
-import NavLogoFooter from '../ikoner/meny/NavLogoFooter';
+import NavLogoFooter from '../../ikoner/meny/NavLogoFooter';
 import { erNavDekoratoren } from '../../utils/environments';
 
 interface Props {
@@ -61,10 +61,10 @@ class FooterLenkeMeny extends React.Component<Props, State> {
             },
             () => {
                 if (this.state.hasMounted) {
-                   this.setState({
-                       erNavDekoratoren: erNavDekoratoren(),
-                       languages: this.getLanguage()
-                   });
+                    this.setState({
+                        erNavDekoratoren: erNavDekoratoren(),
+                        languages: this.getLanguage(),
+                    });
                 }
             }
         );
@@ -101,7 +101,13 @@ class FooterLenkeMeny extends React.Component<Props, State> {
                             {this.state.languages.map(lenke => {
                                 return (
                                     <li key={lenke.lang}>
-                                        <Lenke href={this.state.erNavDekoratoren ? lenke.testurl : lenke.url}>
+                                        <Lenke
+                                            href={
+                                                this.state.erNavDekoratoren
+                                                    ? lenke.testurl
+                                                    : lenke.url
+                                            }
+                                        >
                                             {lenke.text}
                                         </Lenke>
                                     </li>
