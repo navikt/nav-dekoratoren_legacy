@@ -111,8 +111,9 @@ const mapStateToProps = (state: AppState): StateProps => ({
     antallVarsler: state.varsler.data.antall,
     antallUlesteVarsler: state.varsler.data.uleste,
     erInnlogget:
-        state.innloggingsstatus.data.authenticated === true &&
-        state.innloggingsstatus.data.securityLevel === '4',
+        state.innloggingsstatus.data.authenticated &&
+        (state.innloggingsstatus.data.securityLevel === '3' ||
+            state.innloggingsstatus.data.securityLevel === '4'),
     nyesteId: state.varsler.data.nyesteId,
     arbeidsflate: state.arbeidsflate.status,
 });

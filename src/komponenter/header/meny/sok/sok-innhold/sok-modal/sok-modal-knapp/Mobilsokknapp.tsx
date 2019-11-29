@@ -4,7 +4,7 @@ import {
     mobileview,
     tabletview,
 } from '../../../../../../../styling-mediaquery';
-import SokIkon from '../../../../../../ikoner/mobilmeny/SokIkon';
+import SokIkon from '../../../../../../../ikoner/mobilmeny/SokIkon';
 
 const Mobilsokknapp = () => {
     return (

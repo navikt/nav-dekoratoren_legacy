@@ -10,8 +10,8 @@ import Environments, {
     erNavDekoratoren,
     verifyWindowObj,
 } from '../../../../utils/environments';
+import LogginnIkon from '../../../../ikoner/mobilmeny/LogginnIkon';
 import Tekst from '../../../../tekster/finn-tekst';
-import LogginnIkon from '../../../ikoner/mobilmeny/LogginnIkon';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
 
