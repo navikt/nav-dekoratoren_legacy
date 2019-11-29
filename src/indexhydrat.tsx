@@ -1,12 +1,11 @@
-import '@babel/polyfill';
+/*import '@babel/polyfill';
 import 'react-app-polyfill/ie11';
-import 'react-app-polyfill/stable';
+import 'react-app-polyfill/stable';*/
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import * as serviceWorker from './serviceWorker';
+import TagManager from 'react-gtm-module';
 import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
-import TagManager from 'react-gtm-module';
 import { verifyWindowObj } from './utils/environments';
 import Head from './Head';
 import Footer from './komponenter/footer/Footer';
@@ -43,4 +42,5 @@ if (verifyWindowObj()) {
 } else {
     run();
 }
+// import * as serviceWorker from './serviceWorker';
 // serviceWorker.unregister();

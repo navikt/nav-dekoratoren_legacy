@@ -1,17 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { AppState } from '../../../reducer/reducer';
+import { Dispatch } from '../../../redux/dispatch-type';
+import Lenke from 'nav-frontend-lenker';
+import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
+import Undertittel from 'nav-frontend-typografi/lib/undertittel';
+import BEMHelper from '../../../utils/bem';
+import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import {
     MenuValue,
     oppdaterSessionStorage,
 } from '../../../utils/meny-storage-utils';
-import BEMHelper from '../../../utils/bem';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
-import Lenke from 'nav-frontend-lenker';
-import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import { AppState } from '../../../reducer/reducer';
-import { Dispatch } from '../../../redux/dispatch-type';
-import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
-import { connect } from 'react-redux';
 import './MobilarbeidsflateValg.less';
 
 interface Props {

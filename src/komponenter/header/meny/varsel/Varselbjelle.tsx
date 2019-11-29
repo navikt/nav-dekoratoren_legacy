@@ -3,8 +3,8 @@ import { AppState } from '../../../../reducer/reducer';
 import { Dispatch } from '../../../../redux/dispatch-type';
 import { connect } from 'react-redux';
 import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
-import './Varselbjelle.less';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
+import './Varselbjelle.less';
 
 interface Props {
     tabindex: boolean;

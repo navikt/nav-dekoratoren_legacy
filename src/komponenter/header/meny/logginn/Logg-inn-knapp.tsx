@@ -1,17 +1,17 @@
 import React from 'react';
+import MediaQuery from 'react-responsive';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../reducer/reducer';
 import KnappBase from 'nav-frontend-knapper';
+import AlertStripe from 'nav-frontend-alertstriper';
+import Lukknapp from 'nav-frontend-lukknapp';
+import { mobileview } from '../../../../styling-mediaquery';
 import Environments, {
     erNavDekoratoren,
     verifyWindowObj,
 } from '../../../../utils/environments';
-import AlertStripe from 'nav-frontend-alertstriper';
-import Lukknapp from 'nav-frontend-lukknapp';
 import Tekst from '../../../../tekster/finn-tekst';
-import MediaQuery from 'react-responsive';
-import { mobileview } from '../../../../styling-mediaquery';
-import LogginnIkon from '../../../../ikoner/mobilmeny/LogginnIkon';
+import LogginnIkon from '../ikoner/mobilmeny/LogginnIkon';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
 
