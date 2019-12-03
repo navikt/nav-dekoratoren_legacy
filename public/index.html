@@ -10,17 +10,27 @@
         <meta name="theme-color" content="#000000" />
         <link rel="icon" href="/assets/favicon.ico" />
         <title>NAV Dekoratør</title>
+        <div id="styles">
+            <link href="${css}" rel="stylesheet" />
+        </div>
     </head>
     <body>
         <div id="header-withmenu">
-            <div id="post-css-prefix-wrap-header" class="navno-dekorator">
-                <section id="decorator-header" role="main">${header}</section>
-            </div>
+            <section
+                id="decorator-header"
+                role="main"
+                class="navno-dekorator"
+            ></section>
         </div>
         <div id="footer-withmenu">
-            <div id="post-css-prefix-wrap-footer" class="navno-dekorator">
-                <section id="decorator-footer" role="main">${footer}</section>
-            </div>
+            <section
+                id="decorator-footer"
+                role="main"
+                class="navno-dekorator"
+            ></section>
+        </div>
+        <div id="scripts">
+            <script type="text/javascript" src="${script}"></script>
         </div>
         <div id="megamenu-resources"></div>
         <div id="webstats-ga-notrack"></div>

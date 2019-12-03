@@ -101,14 +101,10 @@ app.get(
     </head>
     <body>
         <div id="header-withmenu">
-            <div id="post-css-prefix-wrap-header" class="navno-dekorator">
-                <section id="decorator-header" role="main">${header}</section>
-            </div>
+            <section id="decorator-header" role="main">${header}</section>
         </div>
         <div id="footer-withmenu">
-            <div id="post-css-prefix-wrap-footer" class="navno-dekorator">
-                <section id="decorator-footer" role="main">${footer}</section>
-            </div>
+            <section id="decorator-footer" role="main" class="navno-dekorator">${footer}</section>
         </div>
         <div id="scripts">
             <script type="text/javascript" src=${script}></script>

@@ -28,7 +28,7 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
     }, []);
 
     return (
-        <>
+        <div className="navno-dekorator">
             <Skiplinks />
             <div className="hodefot">
                 <header className="siteheader">
@@ -43,7 +43,7 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
                     </div>
                 </header>
             </div>
-        </>
+        </div>
     );
 };
 
