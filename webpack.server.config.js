@@ -32,7 +32,7 @@ const browserConfig = {
     module: {
         rules: [
             {
-                test: [/\.svg$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+                test: [/\.svg$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.ico$/],
                 loader: 'file-loader',
                 options: {
                     name: './media/[name].[ext]',

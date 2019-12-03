@@ -10,9 +10,10 @@ import { Provider as ReduxProvider } from 'react-redux';
 import Footer from '../komponenter/footer/Footer';
 import getStore from './../redux/store';
 import Head from '../Head';
-
 const app = express();
 const PORT = 8088;
+
+const favicon = require('../../public/favicon.ico');
 
 const envSok = process.env.SOKERESULTAT
     ? process.env.SOKERESULTAT
@@ -93,7 +94,7 @@ app.get(
             content="width=device-width,initial-scale=1,shrink-to-fit=no"
         />
         <meta name="theme-color" content="#000000" />
-        <link rel="icon" href="/assets/favicon.ico" />
+        <link rel="icon" href=${favicon} type="image/x-icon" />
         <title>NAV Dekoratør</title>
         <div id="styles">
             <link href=${css} rel="stylesheet" />

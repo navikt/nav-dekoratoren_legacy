@@ -2,7 +2,7 @@ import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
-import NavLogoFooter from '../ikoner/meny/NavLogoFooter';
+import NavLogoFooter from '../../ikoner/meny/NavLogoFooter';
 import { erNavDekoratoren } from '../../utils/environments';
 
 interface Props {
