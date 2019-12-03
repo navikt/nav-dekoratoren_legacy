@@ -13,8 +13,10 @@ import Head from '../Head';
 const app = express();
 const PORT = 8088;
 
-const favicon = require('../ikoner/favicon/favicon.png');
-const faviconIE = require('../ikoner/favicon/favicon.ico');
+const favicon96 = require('../ikoner/favicon/favicon-96x96.png');
+const favicon32 = require('../ikoner/favicon/favicon-32x32.png');
+const favicon16 = require('../ikoner/favicon/favicon-16x16.png');
+const favicon = require('../ikoner/favicon/favicon.ico');
 
 const envSok = process.env.SOKERESULTAT
     ? process.env.SOKERESULTAT
@@ -95,9 +97,10 @@ app.get(
             content="width=device-width,initial-scale=1,shrink-to-fit=no"
         />
         <meta name="theme-color" content="#000000" />
-        <link rel="shortcut icon" href=${favicon} type="image/x-icon" />
+        <link rel="icon" href=${favicon96} type="image/png" />
+        <link rel="icon" href=${favicon32} type="image/png" />
+        <link rel="icon" href=${favicon16} type="image/png" />
         <link rel="icon" href=${favicon} type="image/x-icon" />
-        <link rel="icon" href=${faviconIE} type="image/x-icon" />
         <title>NAV Dekoratør</title>
         <div id="styles">
             <link href=${css} rel="stylesheet" />
