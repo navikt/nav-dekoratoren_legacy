@@ -105,7 +105,7 @@ app.get(
             <section id="decorator-header" role="main">${header}</section>
         </div>
         <div id="footer-withmenu">
-            <section id="decorator-footer" role="main" class="navno-dekorator">${footer}</section>
+            <section id="decorator-footer" role="main">${footer}</section>
         </div>
         <div id="scripts">
             <script type="text/javascript" src=${script}></script>
