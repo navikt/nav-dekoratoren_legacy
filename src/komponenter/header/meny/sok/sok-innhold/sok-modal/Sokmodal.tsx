@@ -37,7 +37,7 @@ class SokModal extends React.Component<Props, {}> {
                 isOpen={this.props.modalerApen}
                 contentLabel={'mobilt sokefelt for nav.no'}
                 onRequestClose={() => this.props.sokeknappToggle()}
-                className="sok-modal-body"
+                className="navno-dekorator sok-modal-body"
             >
                 <div className={cls.className}>
                     <div className={cls.element('logo')}>
