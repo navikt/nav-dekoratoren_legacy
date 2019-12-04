@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.less';
 
-ReactDOM.render(<App />, document.getElementById('decorator-header'));
+ReactDOM.render(<App />, document.getElementById('decorator'));
 
 /* export function windowSupportObjectAssignNeeded() {
     return window.Promise && window.fetch && window.Symbol;
