@@ -2,7 +2,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
-const resolve = require('resolve'); // https://www.npmjs.com/package/resolve
+const resolve = require('resolve');
 const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 
