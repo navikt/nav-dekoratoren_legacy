@@ -1,7 +1,12 @@
 import '@babel/polyfill';
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
-import { verifyWindowObj } from './utils/environments';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import './index.less';
+
+ReactDOM.render(<App />, document.getElementById('decorator'));
 
 /* export function windowSupportObjectAssignNeeded() {
     return window.Promise && window.fetch && window.Symbol;
@@ -15,12 +20,5 @@ if (verifyWindowObj()) {
     }
 } */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
 // import * as serviceWorker from './serviceWorker';
-import './index.less';
-
-ReactDOM.render(<App />, document.getElementById('decorator-header'));
-
 // serviceWorker.unregister();

@@ -1,5 +1,4 @@
 import React from 'react';
-import Lenke from 'nav-frontend-lenker';
 
 const Navlogo = ({
     width,
@@ -13,7 +12,7 @@ const Navlogo = ({
     viewIndex?: boolean;
 }) => {
     return (
-        <Lenke
+        <a
             href="https://nav.no"
             className="nav-brand-lenke"
             tabIndex={viewIndex ? 0 : -1}
@@ -113,7 +112,7 @@ const Navlogo = ({
                     </g>
                 </g>
             </svg>
-        </Lenke>
+        </a>
     );
 };
 

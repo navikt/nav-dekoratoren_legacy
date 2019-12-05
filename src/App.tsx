@@ -1,12 +1,12 @@
 import React from 'react';
+import 'whatwg-fetch';
+import getStore from './redux/store';
+import { Provider as ReduxProvider } from 'react-redux';
+import { verifyWindowObj } from './utils/environments';
+import setupMock from './mocks/setup-mock';
 import LanguageProvider from './provider/Language-provider';
 import Header from './komponenter/header/Header';
-import setupMock from './mocks/setup-mock';
-import { verifyWindowObj } from './utils/environments';
 import Footer from './komponenter/footer/Footer';
-import { Provider as ReduxProvider } from 'react-redux';
-import getStore from './redux/store';
-import 'whatwg-fetch';
 
 const store = getStore();
 

@@ -29,19 +29,25 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
 
     return (
         <>
-            <Skiplinks />
-            <div className="hodefot">
-                <header className="siteheader">
-                    <div className="innhold-container">
-                        <MediaQuery minWidth={mobileview}>
-                            {language === Language.NORSK && <Toppmeny />}
-                            <Desktopmeny language={language} />
-                        </MediaQuery>
-                        <MediaQuery maxWidth={mobileview - 1}>
-                            <Mobilmeny />
-                        </MediaQuery>
+            <div>
+                <div className="navno-dekorator" id={'wrapper'}>
+                    <Skiplinks />
+                    <div className="hodefot">
+                        <header className="siteheader">
+                            <div className="innhold-container">
+                                <MediaQuery minWidth={mobileview}>
+                                    {language === Language.NORSK && (
+                                        <Toppmeny />
+                                    )}
+                                    <Desktopmeny language={language} />
+                                </MediaQuery>
+                                <MediaQuery maxWidth={mobileview - 1}>
+                                    <Mobilmeny />
+                                </MediaQuery>
+                            </div>
+                        </header>
                     </div>
-                </header>
+                </div>
             </div>
         </>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
-import { tabletview } from '../../../../../../styling-mediaquery';
 import MediaQuery from 'react-responsive';
+import { tabletview } from '../../../../../../styling-mediaquery';
 import BEMHelper from '../../../../../../utils/bem';
 
 const Mobilbakgrunn = ({

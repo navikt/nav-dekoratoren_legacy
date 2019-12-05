@@ -1,10 +1,10 @@
 import React from 'react';
-import Lenke from 'nav-frontend-lenker';
-import Environments from '../../../../utils/environments';
-import './MinsideLenke.less';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
+import Lenke from 'nav-frontend-lenker';
+import Environments from '../../../../utils/environments';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
+import './MinsideLenke.less';
 
 const { baseUrl, minsideArbeidsgiverUrl } = Environments();
 export const dittNavURL = `${baseUrl}/person/dittnav/`;

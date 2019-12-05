@@ -1,18 +1,18 @@
 import React from 'react';
+import MediaQuery from 'react-responsive';
 import BEMHelper from '../../../utils/bem';
+import { tabletview } from '../../../styling-mediaquery';
+import { Language } from '../../../reducer/language-duck';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
-import NavLogoRod from '../../ikoner/meny/NavLogoRod';
+import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
 import Ekspanderbarmeny from './ekspanderbar-meny/Ekspanderbarmeny';
 import Sok from './sok/Sok';
 import MinsideLenke from './minside-lenke/MinsideLenke';
-import Varselbjelle from './varsel/Varselbjelle';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
-import { Language } from '../../../reducer/language-duck';
-import './Desktopmeny.less';
+import Varselbjelle from './varsel/Varselbjelle';
 import VarselVisning from './varsel/varselvisning/Varselvisning';
-import MediaQuery from 'react-responsive';
-import { tabletview } from '../../../styling-mediaquery';
+import './Desktopmeny.less';
 
 const desktopmeny = BEMHelper('desktopmeny');
 

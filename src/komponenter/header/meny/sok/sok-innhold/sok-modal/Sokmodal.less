@@ -1,5 +1,9 @@
 @import '~nav-frontend-core/less/_variabler';
 
+.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay {
+    padding: 0;
+}
+
 .sok-modal-body {
     width: 100%;
     max-width: 450px;
@@ -7,6 +11,10 @@
     max-height: 800px;
     background-color: @navBlaDarken60;
     border-radius: 0;
+
+    ul {
+        padding: 0;
+    }
 
     .nav-brand-lenke:focus {
         .modal-logo-svg {
@@ -38,13 +46,13 @@
 
         &__logo {
             position: absolute;
-            top: 0.9rem;
+            top: 1.85rem;
             left: 0.75rem;
         }
 
         &__lukknapp {
             position: absolute;
-            top: 0.75rem;
+            top: 1.85rem;
             right: 2rem;
         }
     }

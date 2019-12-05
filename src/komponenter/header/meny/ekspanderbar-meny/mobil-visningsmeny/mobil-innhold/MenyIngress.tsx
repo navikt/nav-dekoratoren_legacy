@@ -1,6 +1,6 @@
 import React from 'react';
-import Tekst from '../../../../../../tekster/finn-tekst';
 import Sidetittel from 'nav-frontend-typografi/lib/sidetittel';
+import Tekst from '../../../../../../tekster/finn-tekst';
 
 const MenyIngress = ({ className }: { className: string }) => {
     return (

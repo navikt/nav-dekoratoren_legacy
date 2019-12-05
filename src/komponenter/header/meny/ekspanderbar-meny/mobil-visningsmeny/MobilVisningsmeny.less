@@ -4,10 +4,14 @@
 .mobilmeny {
     &__meny-innhold,
     &__varsel-innhold {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: -(@mobilemenuwidth);
         z-index: 1001;
+    }
+
+    ul {
+        padding: 0;
     }
 
     &__undermeny-innhold,

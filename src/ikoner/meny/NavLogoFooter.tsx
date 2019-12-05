@@ -1,5 +1,5 @@
 import React from 'react';
-import Tekst from '../../../tekster/finn-tekst';
+import Tekst from '../../tekster/finn-tekst';
 import './NavLogoFooter.less';
 
 const NavLogoRod = ({

@@ -3,6 +3,8 @@ const path = require('path');
 const webpack = require('webpack');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const resolve = require('resolve'); // https://www.npmjs.com/package/resolve
+const prefixer = require('postcss-prefix-selector');
+const autoprefixer = require('autoprefixer');
 
 const browserConfig = {
     mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'development',
@@ -41,7 +43,13 @@ const browserConfig = {
             {
                 oneOf: [
                     {
-                        test: [/\.svg$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+                        test: [
+                            /\.svg$/,
+                            /\.gif$/,
+                            /\.jpe?g$/,
+                            /\.png$/,
+                            /\.ico$/,
+                        ],
                         loader: 'file-loader',
                         options: {
                             name: './media/[name].[ext]',
@@ -108,7 +116,22 @@ const browserConfig = {
                                 loader: 'postcss-loader',
                                 options: {
                                     ident: 'postcss',
-                                    plugins: [require('autoprefixer')()],
+                                    plugins: [
+                                        prefixer({
+                                            prefix: '.navno-dekorator',
+                                            exclude: [
+                                                /\b(\w*(M|m)odal\w*)\b/,
+                                                'body',
+                                                '.siteheader',
+                                                '.sitefooter',
+                                                '.hodefot',
+                                                /\b(\w*lukk-container\w*)\b/,
+                                                /\b(\w*close\w*)\b/,
+                                                '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
+                                            ],
+                                        }),
+                                        autoprefixer({}),
+                                    ],
                                 },
                             },
                             { loader: 'less-loader', options: {} },
