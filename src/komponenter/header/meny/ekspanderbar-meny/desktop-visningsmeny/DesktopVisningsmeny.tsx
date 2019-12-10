@@ -1,4 +1,5 @@
 import React from 'react';
+import BEMHelper from '../../../../../utils/bem';
 import { MenuValue } from '../../../../../utils/meny-storage-utils';
 import { Language } from '../../../../../reducer/language-duck';
 import { MenySeksjon } from '../../../../../reducer/menu-duck';
@@ -16,8 +17,9 @@ interface Props {
 }
 
 const DesktopVisningsmeny = (props: Props) => {
+    const cls = BEMHelper(props.classname);
     return (
-        <>
+        <div className={cls.element('seksjoner')}>
             <DropdownVenstredel
                 classname={props.classname}
                 menyLenker={props.fellesmeny}
@@ -31,7 +33,7 @@ const DesktopVisningsmeny = (props: Props) => {
                     tabindex={props.tabindex}
                 />
             ) : null}
-        </>
+        </div>
     );
 };
 

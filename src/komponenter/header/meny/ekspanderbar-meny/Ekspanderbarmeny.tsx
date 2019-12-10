@@ -16,7 +16,6 @@ import Menyknapp from '../meny-knapp/Menyknapp';
 import Mobilbakgrunn from './mobil-visningsmeny/mobil-innhold/Mobilbakgrunn';
 import MobilVisningsmeny from './mobil-visningsmeny/MobilVisningsmeny';
 import DesktopVisningsmeny from './desktop-visningsmeny/DesktopVisningsmeny';
-import './Ekspanderbarmeny.less';
 
 interface StateProps {
     meny: MenyPunkter;
