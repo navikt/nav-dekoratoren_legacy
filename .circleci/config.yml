@@ -117,7 +117,6 @@ commands:
                           --cluster=<< parameters.cluster >> \
                           --resource=.nais/<< parameters.cluster >>-<< parameters.namespace >>.yaml \
                           --repository=$CIRCLE_PROJECT_USERNAME/$REPO_NAME \
-                          --vars=nais.<< parameters.cluster >>.vars.json \
                           --var namespace=<< parameters.namespace >> \
                           --var reponame=$REPO_NAME \
                           --var version=$IMAGE_VERSION \
