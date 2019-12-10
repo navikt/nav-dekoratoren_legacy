@@ -169,7 +169,7 @@ workflows:
                   requires:
                       - build-app
                   filters:
-                      tags:
+                      branches:
                           only: master
 
             - build-docker:
@@ -177,12 +177,12 @@ workflows:
                   requires:
                       - bekreft-deploy-til-prod
                   filters:
-                      tags:
+                      branches:
                           only: master
 
             - deploy-til-prod:
                   requires:
                       - build-docker-prod
                   filters:
-                      tags:
+                      branches:
                           only: master
