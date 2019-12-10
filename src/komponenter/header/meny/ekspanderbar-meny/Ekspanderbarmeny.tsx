@@ -1,10 +1,9 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import BEMHelper from '../../../../utils/bem';
 import { verifyWindowObj } from '../../../../utils/environments';
-import { tabletview } from '../../../../styling-mediaquery';
+import { desktopview } from '../../../../styling-mediaquery';
 import { Status } from '../../../../api/api';
 import { MenuValue, selectMenu } from '../../../../utils/meny-storage-utils';
 import {
@@ -53,7 +52,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
     };
 
     setVisningsmenyClassname = (): string => {
-        return verifyWindowObj() && window.innerWidth > tabletview - 1
+        return verifyWindowObj() && window.innerWidth > desktopview - 1
             ? 'meny'
             : 'mobilmeny';
     };
@@ -95,24 +94,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                                     this.state.clicked ? 'aktive' : ''
                                 )}
                             >
-                                <MediaQuery minWidth={tabletview}>
-                                    <DesktopVisningsmeny
-                                        classname={this.state.vismenyClassname}
-                                        tabindex={this.state.clicked}
-                                        fellesmeny={selectMenu(
-                                            meny.data,
-                                            language,
-                                            arbeidsflate
-                                        )}
-                                        minsideMeny={Ekspanderbarmeny.minside(
-                                            meny.data[0].children,
-                                            3
-                                        )}
-                                        lang={this.props.language}
-                                        arbeidsflate={arbeidsflate}
-                                    />
-                                </MediaQuery>
-                                <MediaQuery maxWidth={tabletview - 1}>
+                                <div className="media-mobil-tablet menyvisning-mobil-tablet">
                                     {this.props.language !== Language.SAMISK ? (
                                         <MobilVisningsmeny
                                             classname={
@@ -131,7 +113,24 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                                     ) : (
                                         <div />
                                     )}
-                                </MediaQuery>
+                                </div>
+                                <div className="media-lg-desktop menyvisning-desktop">
+                                    <DesktopVisningsmeny
+                                        classname={this.state.vismenyClassname}
+                                        tabindex={this.state.clicked}
+                                        fellesmeny={selectMenu(
+                                            meny.data,
+                                            language,
+                                            arbeidsflate
+                                        )}
+                                        minsideMeny={Ekspanderbarmeny.minside(
+                                            meny.data[0].children,
+                                            3
+                                        )}
+                                        lang={this.props.language}
+                                        arbeidsflate={arbeidsflate}
+                                    />
+                                </div>
                             </div>
                             <Mobilbakgrunn
                                 toggleWindow={this.menutoggle}

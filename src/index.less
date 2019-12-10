@@ -5,10 +5,6 @@ body {
     overflow-y: scroll;
 }
 
-.hodefot .innhold-container {
-    width: 100%;
-}
-
 .siteheader,
 .sitefooter {
     font-family: 'Source Sans Pro', Arial, sans-serif;
@@ -24,8 +20,46 @@ body {
     padding: 0;
 }
 
-@media (min-width: @desktopLimitWidth) {
-    .hodefot .innhold-container {
+.hodefot .innhold-container {
+    width: 100%;
+
+    @media (min-width: @desktopLimitWidth) {
         width: auto;
+    }
+}
+
+.media-sm-mobil,
+.media-mobil-tablet {
+    display: initial !important;
+}
+
+.media-md-tablet,
+.media-lg-desktop {
+    display: none !important;
+}
+
+@media (max-width: @tabletLimitWidth - 1) {
+    .media-mobil-tablet {
+        display: initial !important;
+    }
+}
+
+@media (min-width: @tabletLimitWidth) {
+    .media-sm-mobil {
+        display: none !important;
+    }
+
+    .media-md-tablet {
+        display: initial !important;
+    }
+}
+
+@media (min-width: @desktopLimitWidth) {
+    .media-mobil-tablet {
+        display: none !important;
+    }
+
+    .media-lg-desktop {
+        display: initial !important;
     }
 }

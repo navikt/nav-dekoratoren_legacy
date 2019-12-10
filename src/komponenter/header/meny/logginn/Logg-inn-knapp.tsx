@@ -1,11 +1,9 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../reducer/reducer';
 import KnappBase from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
-import { mobileview } from '../../../../styling-mediaquery';
 import Environments, {
     erNavDekoratoren,
     verifyWindowObj,
@@ -82,17 +80,7 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
 
         return (
             <div className="login-container">
-                <MediaQuery minWidth={mobileview}>
-                    <KnappBase
-                        className="login-knapp"
-                        type="standard"
-                        onClick={this.handleButtonClick}
-                    >
-                        <Tekst id={knappetekst} />
-                    </KnappBase>
-                </MediaQuery>
-
-                <MediaQuery maxWidth={mobileview - 1}>
+                <div className="media-sm-mobil login-mobil">
                     <button
                         className="mobil-login-knapp"
                         onClick={this.handleButtonClick}
@@ -102,7 +90,16 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
                             <Tekst id={knappetekst} />
                         </Undertittel>
                     </button>
-                </MediaQuery>
+                </div>
+                <div className="media-md-tablet login-tablet-desktop">
+                    <KnappBase
+                        className="login-knapp"
+                        type="standard"
+                        onClick={this.handleButtonClick}
+                    >
+                        <Tekst id={knappetekst} />
+                    </KnappBase>
+                </div>
             </div>
         );
     }

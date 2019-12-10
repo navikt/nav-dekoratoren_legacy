@@ -1,25 +1,20 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
-import {
-    mobileview,
-    tabletview,
-} from '../../../../../../../styling-mediaquery';
 import SokIkon from '../../../../../../../ikoner/mobilmeny/SokIkon';
 
 const Mobilsokknapp = () => {
     return (
-        <MediaQuery maxWidth={tabletview - 1}>
+        <div className="media-mobil-tablet sok-ikon">
             <span>
                 <button className="sok-input-mobil-submit" type="submit">
-                    <MediaQuery maxWidth={mobileview - 1}>
+                    <div className="media-sm-mobil">
                         <SokIkon width="39px" height="39px" color="#99c2e8" />
-                    </MediaQuery>
-                    <MediaQuery maxWidth={tabletview - 1} minWidth={mobileview}>
+                    </div>
+                    <div className="media-md-tablet">
                         <SokIkon width="26px" height="26px" color="#000000" />
-                    </MediaQuery>
+                    </div>
                 </button>
             </span>
-        </MediaQuery>
+        </div>
     );
 };
 

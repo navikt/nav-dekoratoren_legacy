@@ -1,11 +1,9 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
 import { Dispatch } from '../../redux/dispatch-type';
 import { connect } from 'react-redux';
 import { AppState } from '../../reducer/reducer';
 import { Language } from '../../reducer/language-duck';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
-import { mobileview } from '../../styling-mediaquery';
 import Skiplinks from './skiplinks/Skiplinks';
 import Toppmeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import Desktopmeny from './meny/Desktopmeny';
@@ -33,13 +31,13 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
             <div className="hodefot">
                 <header className="siteheader">
                     <div className="innhold-container">
-                        <MediaQuery minWidth={mobileview}>
+                        <div className="media-sm-mobil mobil-meny">
+                            <Mobilmeny />
+                        </div>
+                        <div className="media-md-tablet tablet-desktop-meny">
                             {language === Language.NORSK && <Toppmeny />}
                             <Desktopmeny language={language} />
-                        </MediaQuery>
-                        <MediaQuery maxWidth={mobileview - 1}>
-                            <Mobilmeny />
-                        </MediaQuery>
+                        </div>
                     </div>
                 </header>
             </div>
