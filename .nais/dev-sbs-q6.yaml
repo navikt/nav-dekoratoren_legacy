@@ -1,0 +1,41 @@
+---
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+    name: nav-dekoratoren
+    namespace: {{namespace}}
+    labels:
+        team: {{team}}
+spec:
+    image: navikt/{{reponame}}:{{version}}
+    port: 8088
+    liveness:
+        path: /person/nav-dekoratoren/isalive
+        initialDelay: 10
+    readiness:
+        path: /person/nav-dekoratoren/isready
+        initialDelay: 10
+    prometheus:
+        path: /metrics
+    replicas:
+        min: 2
+        max: 4
+    ingresses:
+        - https://nav-dekoratoren-q6.nais.oera-q.local/
+        - https://www-q6.nav.no/person/nav-dekoratoren
+    env:
+        - name: MENYLENKER
+          value: https://www-x1.nav.no/navno/_/service/no.nav.navno/menu
+        - name: SOKERESULTAT
+          value: https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2
+        - name: SCRIPTURL
+          value: https://www-q6.nav.no/person/nav-dekoratoren/client.js
+        - name: CSSURL
+          value: https://www-q6.nav.no/person/nav-dekoratoren/css/client.css
+    resources:
+        limits:
+            cpu: '3'
+            memory: 768Mi
+        requests:
+            cpu: 200m
+            memory: 512Mi
