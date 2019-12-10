@@ -141,7 +141,7 @@ sett-miljovariabler:
 workflows:
     bygg-og-deploy:
         jobs:
-            - build-app:
+            - build-app
             - bekreft-deploy-til-dev:
                   type: approval
                   requires:
