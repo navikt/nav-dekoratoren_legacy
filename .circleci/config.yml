@@ -125,18 +125,18 @@ commands:
                           --ref=$COMMIT_SHORT \
                           --appid=34043
 
-sett-miljovariabler:
-    steps:
-        - run:
-              name: Definerer git-referanse, versjonsnummer og repo-navn
-              command: |
-                  echo "export COMMIT_SHORT='$(git rev-parse --short HEAD)'" >> $BASH_ENV
-                  echo "export IMAGE_VERSION='$CIRCLE_WORKFLOW_ID-${CIRCLE_BRANCH////-}$CIRCLE_TAG'" >> $BASH_ENV
-                  echo "export REPO_NAME='$CIRCLE_PROJECT_REPONAME'" >> $BASH_ENV
-        - run:
-              name: Definerer navn på docker-image
-              command: |
-                  echo "export IMAGE_NAME='$CIRCLE_PROJECT_USERNAME/$REPO_NAME:$IMAGE_VERSION'" >> $BASH_ENV
+    sett-miljovariabler:
+        steps:
+            - run:
+                  name: Definerer git-referanse, versjonsnummer og repo-navn
+                  command: |
+                      echo "export COMMIT_SHORT='$(git rev-parse --short HEAD)'" >> $BASH_ENV
+                      echo "export IMAGE_VERSION='$CIRCLE_WORKFLOW_ID-${CIRCLE_BRANCH////-}$CIRCLE_TAG'" >> $BASH_ENV
+                      echo "export REPO_NAME='$CIRCLE_PROJECT_REPONAME'" >> $BASH_ENV
+            - run:
+                  name: Definerer navn på docker-image
+                  command: |
+                      echo "export IMAGE_NAME='$CIRCLE_PROJECT_USERNAME/$REPO_NAME:$IMAGE_VERSION'" >> $BASH_ENV
 
 workflows:
     bygg-og-deploy:
