@@ -60,16 +60,6 @@ jobs:
                   cluster: dev-sbs
                   namespace: q6
 
-    deploy-til-q2:
-        docker:
-            - image: navikt/deployment-cli:latest
-        steps:
-            - checkout
-            - sett-miljovariabler
-            - deploy:
-                  cluster: dev-sbs
-                  namespace: q2
-
     deploy-til-q1:
         docker:
             - image: navikt/deployment-cli:latest
@@ -152,9 +142,6 @@ workflows:
                       - bekreft-deploy-til-dev
 
             - deploy-til-q6:
-                  requires:
-                      - build-docker-dev
-            - deploy-til-q2:
                   requires:
                       - build-docker-dev
             - deploy-til-q1:
