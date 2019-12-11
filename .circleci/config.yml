@@ -4,15 +4,13 @@
 #
 version: 2.1
 jobs:
-    build:
+    build-app:
         docker:
             - image: circleci/node:10
-
         steps:
             - checkout
             - restore_cache:
                   keys:
-                      # when lock file changes, use increasingly general patterns to restore cache
                       - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
                       - node-v1-{{ .Branch }}-
                       - node-v1-
@@ -22,7 +20,7 @@ jobs:
                       npm ci
             - save_cache:
                   paths:
-                      - ~/usr/local/lib/node_modules # location depends on npm version
+                      - ~/usr/local/lib/node_modules
                   key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
             - run:
                   name: Tester
@@ -31,112 +29,147 @@ jobs:
             - run:
                   name: Bygg produksjonsversjon av React app
                   command: npm run build
-            - setup_remote_docker
+
+    build-docker:
+        docker:
+            - image: navikt/deployment-cli:latest
+        steps:
+            - checkout
             - sett-miljovariabler
+            - setup_remote_docker
+            - attach_workspace:
+                  at: .
             - run:
                   name: Bygger Docker image
-                  command: docker build -t "$DOCKER_IMAGE_VERSIONED" -t "$DOCKER_IMAGE_UNVERSIONED" .
+                  command: |
+                      echo $IMAGE_NAME
+                      docker build -t $IMAGE_NAME .
             - run:
                   name: Pusher Docker image
                   command: |
-                      echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                      docker push "$DOCKER_IMAGE_VERSIONED"
-                      docker push "$DOCKER_IMAGE_UNVERSIONED"
+                      echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                      docker push $IMAGE_NAME
 
-    deploy-til-dev:
+    deploy-til-q6:
         docker:
-            - image: circleci/node:10
-
+            - image: navikt/deployment-cli:latest
         steps:
             - checkout
             - sett-miljovariabler
-            - run:
-                  name: Deployer til dev
-                  command: |
-                      curl -i \
-                          -X POST \
-                          -d '{
-                               "ref": "'"$COMMIT_SHORT"'",
-                               "description": "Automated deployment request for nav-dekoratoren from team personbruker",
-                               "environment": "dev-sbs",
-                               "required_contexts": [],
-                               "payload": {
-                                 "version": [1, 0, 0],
-                                 "team": "personbruker",
-                                 "kubernetes": {
-                                   "resources": ['"$(cat nais-dev.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')"']
-                                 }
-                               }
-                             }' \
-                          -H "Accept: application/vnd.github.ant-man-preview+json" \
-                          -u "$GH_USER":"$GH_TK" \
-                          https://api.github.com/repos/navikt/nav-dekoratoren/deployments
+            - deploy:
+                  cluster: dev-sbs
+                  namespace: q6
+
+    deploy-til-q1:
+        docker:
+            - image: navikt/deployment-cli:latest
+        steps:
+            - checkout
+            - sett-miljovariabler
+            - deploy:
+                  cluster: dev-sbs
+                  namespace: q1
+
+    deploy-til-q0:
+        docker:
+            - image: navikt/deployment-cli:latest
+        steps:
+            - checkout
+            - sett-miljovariabler
+            - deploy:
+                  cluster: dev-sbs
+                  namespace: q0
 
     deploy-til-prod:
         docker:
-            - image: circleci/node:10
-
+            - image: navikt/deployment-cli:latest
         steps:
             - checkout
             - sett-miljovariabler
-            - run:
-                  name: Deployer til prod
-                  command: |
-                      curl -i \
-                          -X POST \
-                          -d '{
-                               "ref": "'"$COMMIT_SHORT"'",
-                               "description": "Automated deployment request for nav-dekoratoren from team personbruker",
-                               "environment": "prod-sbs",
-                               "required_contexts": [],
-                               "payload": {
-                                 "version": [1, 0, 0],
-                                 "team": "personbruker",
-                                 "kubernetes": {
-                                   "resources": ['"$(cat nais-prod.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')"']
-                                 }
-                               }
-                             }' \
-                          -H "Accept: application/vnd.github.ant-man-preview+json" \
-                          -u "$GH_USER":"$GH_TK" \
-                          https://api.github.com/repos/navikt/nav-dekoratoren/deployments
+            - deploy:
+                  cluster: prod-sbs
+                  namespace: default
 
 commands:
+    deploy:
+        parameters:
+            cluster:
+                type: string
+            namespace:
+                type: string
+        steps:
+            - run:
+                  name: Deployer til << parameters.cluster >>, namespace << parameters.namespace >>
+                  command: |
+                      echo $GH_DEPLOY_KEY | base64 -d | dos2unix > gh_deploy_key.pem
+                      deployment-cli deploy create \
+                          --team=personbruker \
+                          --cluster=<< parameters.cluster >> \
+                          --resource=.nais/<< parameters.cluster >>-<< parameters.namespace >>.yaml \
+                          --repository=$CIRCLE_PROJECT_USERNAME/$REPO_NAME \
+                          --var namespace=<< parameters.namespace >> \
+                          --var reponame=$REPO_NAME \
+                          --var version=$IMAGE_VERSION \
+                          --key=gh_deploy_key.pem \
+                          --ref=$COMMIT_SHORT \
+                          --appid=34043
+
     sett-miljovariabler:
         steps:
             - run:
-                  name: Setter miljøvariable
+                  name: Definerer git-referanse, versjonsnummer og repo-navn
                   command: |
-                      echo 'export COMMIT_SHORT="$(git rev-parse --short HEAD)"' >> $BASH_ENV
-                      echo 'export RELEASE_VERSION="$(git rev-list --count $CIRCLE_SHA1)"' >> $BASH_ENV
-                      echo 'export BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"' >> $BASH_ENV
-                      echo 'export BRANCH_PREFIX=`[ $BRANCH_NAME == "master" ] && echo "" || echo $BRANCH_NAME\_`' >> $BASH_ENV
-                      echo 'export DOCKER_IMAGE_VERSIONED="$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$BRANCH_PREFIX$RELEASE_VERSION"' >> $BASH_ENV
-                      echo 'export DOCKER_IMAGE_UNVERSIONED="$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"' >> $BASH_ENV
+                      echo "export COMMIT_SHORT='$(git rev-parse --short HEAD)'" >> $BASH_ENV
+                      echo "export IMAGE_VERSION='$CIRCLE_WORKFLOW_ID-${CIRCLE_BRANCH////-}$CIRCLE_TAG'" >> $BASH_ENV
+                      echo "export REPO_NAME='$CIRCLE_PROJECT_REPONAME'" >> $BASH_ENV
+            - run:
+                  name: Definerer navn på docker-image
+                  command: |
+                      echo "export IMAGE_NAME='$CIRCLE_PROJECT_USERNAME/$REPO_NAME:$IMAGE_VERSION'" >> $BASH_ENV
 
 workflows:
-    bygg_og_deploy:
+    bygg-og-deploy:
         jobs:
-            - build
-            - deploy-til-dev:
-                  requires:
-                      - build
-                  filters:
-                      branches:
-                          only:
-                              - master
-            - godkjenn-til-prod:
+            - build-app
+            - bekreft-deploy-til-dev:
                   type: approval
                   requires:
-                      - build
+                      - build-app
+
+            - build-docker:
+                  name: build-docker-dev
+                  requires:
+                      - bekreft-deploy-til-dev
+
+            - deploy-til-q6:
+                  requires:
+                      - build-docker-dev
+            - deploy-til-q1:
+                  requires:
+                      - build-docker-dev
+            - deploy-til-q0:
+                  requires:
+                      - build-docker-dev
+
+            - bekreft-deploy-til-prod:
+                  type: approval
+                  requires:
+                      - build-app
                   filters:
                       branches:
-                          only:
-                              - master
+                          only: master
+
+            - build-docker:
+                  name: build-docker-prod
+                  requires:
+                      - bekreft-deploy-til-prod
+                  filters:
+                      branches:
+                          only: master
+
             - deploy-til-prod:
                   requires:
-                      - godkjenn-til-prod
+                      - build-docker-prod
                   filters:
                       branches:
-                          only:
-                              - master
+                          only: master
