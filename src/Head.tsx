@@ -3,7 +3,6 @@ import { verifyWindowObj } from './utils/environments';
 import LanguageProvider from './provider/Language-provider';
 import setupMock from './mocks/setup-mock';
 import * as es6promise from 'es6-promise';
-import 'isomorphic-fetch';
 import Header from './komponenter/header/Header';
 
 if (verifyWindowObj()) {

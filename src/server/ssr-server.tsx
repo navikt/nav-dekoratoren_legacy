@@ -1,4 +1,7 @@
 /* tslint:disable:typedef no-shadowed-variable */
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+import 'isomorphic-fetch';
 import NodeCache from 'node-cache';
 import express from 'express';
 import React from 'react';

@@ -54,6 +54,62 @@
         }
     }
 
+    // this media query can only be read by ie-explorer. ie grid fix
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        &__hovedSeksjon {
+            display: -ms-grid;
+            -ms-grid-columns: 1fr 1fr 1fr;
+        }
+
+        &__seksjon {
+            &:nth-child(2) {
+                -ms-grid-column: 2;
+            }
+
+            &:nth-child(3) {
+                -ms-grid-column: 3;
+            }
+            &:nth-child(4) {
+                -ms-grid-column: 1;
+                -ms-grid-row: 2;
+            }
+            &:nth-child(5) {
+                -ms-grid-column: 2;
+                -ms-grid-row: 2;
+            }
+
+            &:nth-child(6) {
+                -ms-grid-column: 3;
+                -ms-grid-row: 2;
+            }
+            &:nth-child(7) {
+                -ms-grid-column: 1;
+                -ms-grid-row: 3;
+            }
+            &:nth-child(8) {
+                -ms-grid-column: 2;
+                -ms-grid-row: 3;
+            }
+            &:nth-child(9) {
+                -ms-grid-column: 3;
+                -ms-grid-row: 3;
+            }
+            &:nth-child(10) {
+                -ms-grid-column: 1;
+                -ms-grid-row: 4;
+            }
+            &:nth-child(11) {
+                -ms-grid-column: 2;
+                -ms-grid-row: 4;
+            }
+
+            &:nth-child(12) {
+                -ms-grid-column: 3;
+                -ms-grid-row: 4;
+            }
+        }
+    }
+
     &__minSideSeksjon {
         flex-grow: 1;
         margin: 0 0 0.2rem 0.5rem;
