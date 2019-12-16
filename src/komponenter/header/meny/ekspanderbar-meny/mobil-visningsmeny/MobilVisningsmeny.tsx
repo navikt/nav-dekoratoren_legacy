@@ -29,7 +29,6 @@ interface State {
     lenker: MenySeksjon;
     toggleundermeny: boolean;
     togglevarsel: boolean;
-    test: number;
 }
 
 class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
@@ -47,7 +46,6 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
             lenker: this.props.menyLenker.children[0],
             toggleundermeny: false,
             togglevarsel: false,
-            test: 0,
         };
     }
 
@@ -132,34 +130,36 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
                                 : 'sett-rad-midt'
                         )}
                     >
-                        <VarselinnboksProvider>
-                            <Varselbjelle
-                                tabindex={this.hovedseksjonTabIndex()}
-                            >
-                                {(clicked, handleClick) => (
-                                    <VarselvisningMobil
-                                        visvarsel={clicked}
-                                        visningmenyClassname={
-                                            menyClass.className
-                                        }
-                                        togglevarselmeny={this.togglevarsel}
-                                        lukkvarselmeny={
-                                            handleClick
-                                                ? handleClick
-                                                : () => void 0
-                                        }
-                                        tabindex={
-                                            this.props.menuIsOpen &&
-                                            clicked &&
-                                            !this.state.toggleundermeny
-                                        }
-                                        clicked={this.state.toggleundermeny}
-                                        lukkmenyene={this.lukkMenyene}
-                                        menuIsOpen={this.props.menuIsOpen}
-                                    />
-                                )}
-                            </Varselbjelle>
-                        </VarselinnboksProvider>
+                        <>
+                            <VarselinnboksProvider>
+                                <Varselbjelle
+                                    tabindex={this.hovedseksjonTabIndex()}
+                                >
+                                    {(clicked, handleClick) => (
+                                        <VarselvisningMobil
+                                            visvarsel={clicked}
+                                            visningmenyClassname={
+                                                menyClass.className
+                                            }
+                                            togglevarselmeny={this.togglevarsel}
+                                            lukkvarselmeny={
+                                                handleClick
+                                                    ? handleClick
+                                                    : () => void 0
+                                            }
+                                            tabindex={
+                                                this.props.menuIsOpen &&
+                                                clicked &&
+                                                !this.state.toggleundermeny
+                                            }
+                                            clicked={this.state.toggleundermeny}
+                                            lukkmenyene={this.lukkMenyene}
+                                            menuIsOpen={this.props.menuIsOpen}
+                                        />
+                                    )}
+                                </Varselbjelle>
+                            </VarselinnboksProvider>
+                        </>
                         <MinsideLenke tabindex={this.hovedseksjonTabIndex()} />
                     </div>
                     <MenyIngress

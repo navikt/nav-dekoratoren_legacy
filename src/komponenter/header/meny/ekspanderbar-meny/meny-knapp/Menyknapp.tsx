@@ -1,10 +1,10 @@
 import React from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
-import BEMHelper from '../../../../utils/bem';
-import { Language } from '../../../../reducer/language-duck';
-import Tekst from '../../../../tekster/finn-tekst';
-import HamburgerIkon from '../../../../ikoner/meny/HamburgerIkon';
-import MenyIkon from '../../../../ikoner/mobilmeny/MenyIkon';
+import BEMHelper from '../../../../../utils/bem';
+import { Language } from '../../../../../reducer/language-duck';
+import Tekst from '../../../../../tekster/finn-tekst';
+import HamburgerIkon from '../../../../../ikoner/meny/HamburgerIkon';
+import MenyIkon from '../../../../../ikoner/mobilmeny/MenyIkon';
 import './Menyknapp.less';
 
 interface Props {
@@ -30,7 +30,7 @@ const Menyknapp = (props: Props) => {
                         <div className="media-sm-mobil menyknapp-mobil">
                             <MenyIkon />
                         </div>
-                        <div className="media-md-tablet menyknapp-tablet">
+                        <div className="media-md-tablet menyknapp-tablet-desktop">
                             <HamburgerIkon ikonClass="hamburger-ikon" />
                         </div>
                         <Undertittel>

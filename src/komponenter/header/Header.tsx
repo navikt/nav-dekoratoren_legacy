@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { AppState } from '../../reducer/reducer';
 import { Language } from '../../reducer/language-duck';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
-import Skiplinks from './skiplinks/Skiplinks';
 import Toppmeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import Desktopmeny from './meny/Desktopmeny';
 import Mobilmeny from './meny/Mobilmeny';
@@ -27,7 +26,6 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
 
     return (
         <div className="navno-dekorator">
-            <Skiplinks />
             <div className="hodefot">
                 <header className="siteheader">
                     <div className="innhold-container">

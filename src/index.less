@@ -28,8 +28,7 @@ body {
     }
 }
 
-.media-sm-mobil,
-.media-mobil-tablet {
+.media-sm-mobil {
     display: initial !important;
 }
 
@@ -38,18 +37,18 @@ body {
     display: none !important;
 }
 
-@media (max-width: @tabletLimitWidth - 1) {
-    .media-mobil-tablet {
-        display: initial !important;
-    }
-}
-
 @media (min-width: @tabletLimitWidth) {
     .media-sm-mobil {
         display: none !important;
     }
 
     .media-md-tablet {
+        display: initial !important;
+    }
+}
+
+@media (max-width: 1023px) {
+    .media-mobil-tablet {
         display: initial !important;
     }
 }

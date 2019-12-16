@@ -12,7 +12,7 @@ import {
     MenyPunkter,
 } from '../../../../reducer/menu-duck';
 import { Language } from '../../../../reducer/language-duck';
-import Menyknapp from '../meny-knapp/Menyknapp';
+import Menyknapp from './meny-knapp/Menyknapp';
 import Mobilbakgrunn from './mobil-visningsmeny/mobil-innhold/Mobilbakgrunn';
 import MobilVisningsmeny from './mobil-visningsmeny/MobilVisningsmeny';
 import DesktopVisningsmeny from './desktop-visningsmeny/DesktopVisningsmeny';

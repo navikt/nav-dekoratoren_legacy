@@ -1,13 +1,14 @@
 import React from 'react';
-import { AppState } from '../../../../../reducer/reducer';
 import { connect } from 'react-redux';
+import { AppState } from '../../../../../reducer/reducer';
 import parse from 'html-react-parser';
 import { varselinnboksUrl } from '../../../../../api/api';
+import { tabletview } from '../../../../../styling-mediaquery';
 import './Varselvisning.less';
 
 interface OwnProps {
     className?: string;
-    tabIndex?: boolean;
+    tabIndex: boolean;
     togglevarselmeny?: () => void;
 }
 
@@ -19,6 +20,7 @@ interface StateProps {
 
 interface State {
     parsedVarsler: any;
+    windowSize: number;
 }
 
 type Props = OwnProps & StateProps;
@@ -29,60 +31,66 @@ class Varselvisning extends React.Component<Props, State> {
 
         this.state = {
             parsedVarsler: parse(this.props.varsler),
+            windowSize: window.innerWidth,
         };
+        this.handleWindowSize = this.handleWindowSize.bind(this);
+    }
+
+    handleWindowSize() {
+        this.setState({
+            windowSize: window.innerWidth,
+        });
     }
 
     setTabIndex = () => {
-        const datapointer = document.getElementById('enonic-message');
-        if (datapointer) {
+        const erTabletEllerDesktop = this.state.windowSize > tabletview - 1;
+        const varslerWrapperElement = erTabletEllerDesktop
+            ? '.desktopmeny #varselinnboks-varsler'
+            : '.mobilmeny #varselinnboks-varsler';
+
+        const varselinnboksVarsler = document.querySelector(
+            varslerWrapperElement
+        );
+
+        if (varselinnboksVarsler) {
             for (
                 let i = 0;
-                i <= datapointer.getElementsByTagName('a').length;
+                i <= varselinnboksVarsler.getElementsByTagName('a').length;
                 i++
             ) {
-                if (datapointer.getElementsByTagName('a')[i]) {
-                    datapointer.getElementsByTagName('a')[i].tabIndex = this
-                        .props.tabIndex
-                        ? 0
-                        : -1;
+                if (varselinnboksVarsler.getElementsByTagName('a')[i]) {
+                    varselinnboksVarsler.getElementsByTagName('a')[
+                        i
+                    ].tabIndex = this.props.tabIndex ? 0 : -1;
                 }
             }
         }
     };
 
     componentDidUpdate(prevProps: Readonly<Props>): void {
-        if (this.props.tabIndex && !prevProps.tabIndex) {
-            if (this.props.togglevarselmeny) {
-                this.setTabIndex();
+        if (this.props.togglevarselmeny) {
+            this.setTabIndex();
+            if (this.props.tabIndex && !prevProps.tabIndex) {
                 this.props.togglevarselmeny();
-            }
-        }
-
-        if (
-            !this.props.tabIndex &&
-            prevProps.tabIndex &&
-            !this.props.tabIndex
-        ) {
-            if (this.props.togglevarselmeny) {
-                this.setTabIndex();
             }
         }
     }
 
     componentDidMount(): void {
+        window.addEventListener('resize', this.handleWindowSize);
         this.setTabIndex();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleWindowSize);
     }
 
     render() {
         const { className } = this.props;
         return (
-            <div
-                id="varsler-display"
-                className={className ? className : 'varsler-display'}
-            >
-                <div className="enonic-message-wrapper" id="enonic-message">
-                    {this.state.parsedVarsler}
-                </div>
+            <div className={className ? className : 'varsler-display-desktop'}>
+                {this.state.parsedVarsler}
+
                 {this.props.antallVarsler > 5 && (
                     <div className="vis-alle-lenke skillelinje-topp">
                         <a

@@ -2,7 +2,7 @@
 
 .desktopmeny .min-varsel-wrapper,
 .mobilmeny .min-varsel-wrapper {
-    .varsler-display {
+    .varsler-display-desktop {
         display: block;
         position: absolute;
         top: 47px;
@@ -147,19 +147,22 @@
             }
         }
     }
-
-    .mobilmeny {
-        &__varsel-innhold {
-            .vis-alle-lenke {
-                padding: 1.5rem 0 0.75rem 0;
-            }
-        }
-    }
-
     .vis-alle-lenke {
         border-top: 1px solid #7f756c;
         text-align: center;
-        padding-top: 0.75rem;
         margin-top: 0.75rem;
+    }
+}
+
+.mobilmeny .min-varsel-wrapper .varsler-display-mobil-tablet,
+.desktopmeny .min-varsel-wrapper .varsler-display-mobil-tablet {
+    .vis-alle-lenke {
+        padding: 1.5rem 0 0.75rem;
+    }
+}
+
+.desktopmeny .min-varsel-wrapper .varsler-display-desktop {
+    .vis-alle-lenke {
+        padding-top: 0.75rem;
     }
 }
