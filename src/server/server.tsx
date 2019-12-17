@@ -41,7 +41,7 @@ const env = {
     urlAppBase: process.env.URL_APP_BASE,
 };
 
-FS.writeFile(`${buildPath}/.env`, JSON.stringify(env), err =>
+FS.writeFile(`${buildPath}/env.json`, JSON.stringify(env), err =>
     console.error(err)
 );
 
