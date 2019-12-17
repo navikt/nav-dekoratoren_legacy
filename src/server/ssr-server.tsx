@@ -47,8 +47,6 @@ const env = {
     sokeresultat: `https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat`,
 };
 
-fs.writeFileSync(buildPath, JSON.stringify(env));
-
 // Cors
 app.disable('x-powered-by');
 app.use(function(req, res, next) {
@@ -102,6 +100,9 @@ const template = `
             </div>
             <div id="scripts">
                 <script type="text/javascript" src=${script}></script>
+                <script type="text/javascript" >
+                    var env = ${env};
+                </script>
             </div>
             <div id="megamenu-resources"></div>
             <div id="webstats-ga-notrack"></div>
