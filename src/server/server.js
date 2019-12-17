@@ -105,7 +105,6 @@ app.get(`${baseUrl}/api/get/sokeresultat`, (req, res) => {
 
 app.get(`${baseUrl}/isAlive`, (req, res) => res.sendStatus(200));
 app.get(`${baseUrl}/isReady`, (req, res) => res.sendStatus(200));
-app.get(`${baseUrl}/`, (req, res) => res.sendStatus(200));
 
 const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)
