@@ -5,39 +5,51 @@ import 'isomorphic-fetch';
 import NodeCache from 'node-cache';
 import express from 'express';
 import React from 'react';
+import fs from 'fs';
 import ReactDOMServer from 'react-dom/server';
 import backupData from './menu/menu.json';
-import requestNode from 'request';
-const sokeresultatMockData = require('./sokeresultat-mockdata.json');
+import request from 'request';
 import { Provider as ReduxProvider } from 'react-redux';
 import Footer from '../komponenter/footer/Footer';
 import getStore from './../redux/store';
 import Head from '../Head';
+
+const basePath = '/person/nav-dekoratoren';
+const sokeresultatMockData = require('./sokeresultat-mockdata.json');
+const favicon = require('../../public/favicon.ico');
+const isProduction = process.env.NODE_ENV === 'production';
+const buildPath = `${process.cwd()}/buildfolder`;
 const app = express();
 const PORT = 8088;
 
-const favicon = require('../../public/favicon.ico');
+// Default vars
+const defaultSearchUrl = `https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2`;
+const defaultMenuUrl = `http://localhost:8080/navno/_/service/no.nav.navno/menu`;
+const defaultScriptUrl = `http://localhost:8088/person/nav-dekoratoren/client.js`;
+const defaultCssUrl = `http://localhost:8088/person/nav-dekoratoren/css/client.css'`;
 
-const envSok = process.env.SOKERESULTAT
-    ? process.env.SOKERESULTAT
-    : 'https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2';
-
-const isProduction = process.env.NODE_ENV === 'production';
-
-const fetchSearchResultUri = isProduction ? envSok : 'http://localhost:8088';
+// Cache setup
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
-
 const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
-const env = process.env.MENYLENKER
-    ? process.env.MENYLENKER
-    : 'https://www-x1.nav.no/navno/_/service/no.nav.navno/menu';
 
-const fetchmenyUri = isProduction
-    ? env
-    : 'http://localhost:8080/navno/_/service/no.nav.navno/menu';
+// Environment
+const env = {
+    miljo: process.env.NAMESPACE,
+    baseUrl: `https://www-q6.nav.no`,
+    baseUrlEnonic: `https://www-x1.nav.no`,
+    innloggingslinjenUrl: `https://tjenester-q6.nav.no`,
+    loginUrl: `https://loginservice-q.nav.no`,
+    logoutUrl: `https://loginservice-q.nav.no/slo`,
+    menypunkter: `https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg`,
+    minsideArbeidsgiverUrl: `https://arbeidsgiver-q6.nav.no/min-side-arbeidsgiver/`,
+    sokeresultat: `https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat`,
+};
 
+fs.writeFileSync(buildPath, JSON.stringify(env));
+
+// Cors
 app.disable('x-powered-by');
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -49,8 +61,10 @@ app.use(function(req, res, next) {
     next();
 });
 
+// Server-side rendering
 const store = getStore();
-
+const script = process.env.SCRIPTURL || defaultScriptUrl;
+const css = process.env.CSSURL || defaultCssUrl;
 const header = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
         <Head />
@@ -62,70 +76,74 @@ const footer = ReactDOMServer.renderToString(
     </ReduxProvider>
 );
 
-app.use(
-    '/person/nav-dekoratoren/',
-    express.static(`${process.cwd()}/buildfolder`)
-);
+const template = `
+    <!DOCTYPE html>
+    <html lang="no">
+        <head>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta charset="utf-8" />
+            <meta
+                name="viewport"
+                content="width=device-width,initial-scale=1,shrink-to-fit=no"
+            />
+            <meta name="theme-color" content="#000000" />
+            <link rel="icon" href=${favicon} type="image/x-icon" />
+            <title>NAV Dekoratør</title>
+            <div id="styles">
+                <link href=${css} rel="stylesheet" />
+            </div>
+        </head>
+        <body>
+            <div id="header-withmenu">
+                <section id="decorator-header" role="main">${header}</section>
+            </div>
+            <div id="footer-withmenu">
+                <section id="decorator-footer" role="main">${footer}</section>
+            </div>
+            <div id="scripts">
+                <script type="text/javascript" src=${script}></script>
+            </div>
+            <div id="megamenu-resources"></div>
+            <div id="webstats-ga-notrack"></div>
+        </body>
+    </html>`;
 
-const script = isProduction
-    ? process.env.SCRIPTURL
-    : 'http://localhost:8088/person/nav-dekoratoren/client.js';
+// Express config
+const pathsForTemplate = [
+    `${basePath}/`,
+    `${basePath}/person`,
+    `${basePath}/person/*`,
+    `${basePath}/bedrift`,
+    `${basePath}/bedrift/*`,
+    `${basePath}/samarbeidspartner`,
+    `${basePath}/samarbeidspartner/*`,
+];
 
-const css = isProduction
-    ? process.env.CSSURL
-    : 'http://localhost:8088/person/nav-dekoratoren/css/client.css';
+app.get(pathsForTemplate, (req, res) => {
+    res.send(template);
+});
 
-app.get(
-    [
-        '/person/nav-dekoratoren/',
-        '/person/nav-dekoratoren/person',
-        '/person/nav-dekoratoren/person/*',
-        '/person/nav-dekoratoren/bedrift',
-        '/person/nav-dekoratoren/bedrift/*',
-        '/person/nav-dekoratoren/samarbeidspartner',
-        '/person/nav-dekoratoren/samarbeidspartner/*',
-    ],
-    (req, res) => {
-        res.send(`
-<!DOCTYPE html>
-<html lang="no">
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width,initial-scale=1,shrink-to-fit=no"
-        />
-        <meta name="theme-color" content="#000000" />
-        <link rel="icon" href=${favicon} type="image/x-icon" />
-        <title>NAV Dekoratør</title>
-        <div id="styles">
-            <link href=${css} rel="stylesheet" />
-        </div>
-    </head>
-    <body>
-        <div id="header-withmenu">
-            <section id="decorator-header" role="main">${header}</section>
-        </div>
-        <div id="footer-withmenu">
-            <section id="decorator-footer" role="main">${footer}</section>
-        </div>
-        <div id="scripts">
-            <script type="text/javascript" src=${script}></script>
-        </div>
-        <div id="megamenu-resources"></div>
-        <div id="webstats-ga-notrack"></div>
-    </body>
-</html>`);
-    }
-);
+app.get(`${basePath}/api/get/menyvalg`, (req, res) => {
+    mainCache.get(mainCacheKey, (err, response) => {
+        if (!err && response !== undefined) {
+            res.send(response);
+        } else {
+            fetchmenuOptions(res);
+        }
+    });
+});
+
+app.get(`${basePath}/api/get/sokeresultat`, (req, res) => {
+    fetchSearchResults(req, res);
+});
+
+app.use(`${basePath}/`, express.static(buildPath));
+app.get(`${basePath}/isAlive`, (req, res) => res.sendStatus(200));
+app.get(`${basePath}/isReady`, (req, res) => res.sendStatus(200));
 
 const fetchmenuOptions = (res: any) => {
-    requestNode(
-        {
-            method: 'GET',
-            uri: `${fetchmenyUri}`,
-        },
+    request(
+        { method: 'GET', uri: process.env.MENYLENKER || defaultMenuUrl },
         (error, response, body) => {
             if (!error && response.statusCode === 200) {
                 mainCache.set(mainCacheKey, body, 100);
@@ -163,44 +181,22 @@ const fetchmenuOptions = (res: any) => {
     );
 };
 
-app.get('/person/nav-dekoratoren/api/get/menyvalg', (req, res) => {
-    mainCache.get(mainCacheKey, (err, response) => {
-        if (!err && response !== undefined) {
-            res.send(response);
-        } else {
-            fetchmenuOptions(res);
-        }
-    });
-});
-
 const fetchSearchResults = (req: any, res: any) => {
-    const uri = `${fetchSearchResultUri}?ord=${req.query.ord}`;
+    const uri = `${process.env.SOKERESULTAT || defaultSearchUrl}?ord=${
+        req.query.ord
+    }`;
     if (isProduction) {
-        requestNode(
-            {
-                method: 'GET',
-                uri,
-            },
-            (error, response, body) => {
-                if (!error && response.statusCode === 200) {
-                    res.send(body);
-                } else {
-                    res.send(sokeresultatMockData);
-                }
+        request({ method: 'GET', uri }, (error, response, body) => {
+            if (!error && response.statusCode === 200) {
+                res.send(body);
+            } else {
+                res.send(sokeresultatMockData);
             }
-        );
+        });
     } else {
         res.send(sokeresultatMockData);
     }
 };
-
-app.get('/person/nav-dekoratoren/api/get/sokeresultat', (req, res) => {
-    fetchSearchResults(req, res);
-});
-
-app.get('/person/nav-dekoratoren/isAlive', (req, res) => res.sendStatus(200));
-app.get('/person/nav-dekoratoren/isReady', (req, res) => res.sendStatus(200));
-app.get('/person/nav-dekoratoren/', (req, res) => res.sendStatus(200));
 
 const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)

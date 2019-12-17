@@ -17,24 +17,6 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
 
-// Config env
-let env = {
-    miljo: process.env.NAMESPACE,
-    baseUrl: `https://www-q6.nav.no`,
-    baseUrlEnonic: `https://www-x1.nav.no`,
-    innloggingslinjenUrl: `https://tjenester-q6.nav.no`,
-    loginUrl: `https://loginservice-q.nav.no`,
-    logoutUrl: `https://loginservice-q.nav.no/slo`,
-    menypunkter: `https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg`,
-    minsideArbeidsgiverUrl: `https://arbeidsgiver-q6.nav.no/min-side-arbeidsgiver/`,
-    sokeresultat: `https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat`,
-};
-
-fs.writeFileSync(
-    path.resolve(__dirname, '../../build', '.env'),
-    JSON.stringify(env)
-);
-
 // Config express
 app.disable('x-powered-by');
 app.use((req, res, next) => {
