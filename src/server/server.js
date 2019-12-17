@@ -1,20 +1,41 @@
 const express = require('express');
 const app = express();
 const PORT = 8088;
+const fs = require('fs');
 const path = require('path');
 const buildPath = path.resolve(__dirname, '../../build/');
 const request = require('request');
 const NodeCache = require('node-cache');
 const backupData = require('./menu/menu.json');
 const sokeresultatMockData = require('./sokeresultat-mockdata.json');
-const baseUrl = '/person/nav-dekoratoren';
+const basePath = '/person/nav-dekoratoren';
 
+// Config cache
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
 
+// Config env
+let env = {
+    miljo: process.env.NAMESPACE,
+    baseUrl: `https://www-q6.nav.no`,
+    baseUrlEnonic: `https://www-x1.nav.no`,
+    innloggingslinjenUrl: `https://tjenester-q6.nav.no`,
+    loginUrl: `https://loginservice-q.nav.no`,
+    logoutUrl: `https://loginservice-q.nav.no/slo`,
+    menypunkter: `https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg`,
+    minsideArbeidsgiverUrl: `https://arbeidsgiver-q6.nav.no/min-side-arbeidsgiver/`,
+    sokeresultat: `https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat`,
+};
+
+fs.writeFileSync(
+    path.resolve(__dirname, '../../build', '.env'),
+    JSON.stringify(env)
+);
+
+// Config express
 app.disable('x-powered-by');
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -26,19 +47,36 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(`${baseUrl}/`, express.static(buildPath));
+app.use(`${basePath}/`, express.static(buildPath));
 
 app.get(
     [
-        `${baseUrl}/`,
-        `${baseUrl}/person/*`,
-        `${baseUrl}/bedrift/*`,
-        `${baseUrl}/samarbeidspartner/*`,
+        `${basePath}/`,
+        `${basePath}/person/*`,
+        `${basePath}/bedrift/*`,
+        `${basePath}/samarbeidspartner/*`,
     ],
     (req, res) => {
         res.sendFile(path.resolve(__dirname, '../../build', 'index.html'));
     }
 );
+
+app.get(`${basePath}/api/get/menyvalg`, (req, res) =>
+    mainCache.get(mainCacheKey, (err, response) => {
+        if (!err && response !== undefined) {
+            res.send(response);
+        } else {
+            fetchmenuOptions(res);
+        }
+    })
+);
+
+app.get(`${basePath}/api/get/sokeresultat`, (req, res) =>
+    fetchSearchResults(req, res)
+);
+
+app.get(`${basePath}/isAlive`, (req, res) => res.sendStatus(200));
+app.get(`${basePath}/isReady`, (req, res) => res.sendStatus(200));
 
 const fetchmenuOptions = res => {
     request(
@@ -90,21 +128,6 @@ const fetchSearchResults = (req, res) => {
         }
     });
 };
-
-app.get(`${baseUrl}/api/get/menyvalg`, (req, res) => {
-    mainCache.get(mainCacheKey, (err, response) => {
-        if (!err && response !== undefined) {
-            res.send(response);
-        } else fetchmenuOptions(res);
-    });
-});
-
-app.get(`${baseUrl}/api/get/sokeresultat`, (req, res) => {
-    fetchSearchResults(req, res);
-});
-
-app.get(`${baseUrl}/isAlive`, (req, res) => res.sendStatus(200));
-app.get(`${baseUrl}/isReady`, (req, res) => res.sendStatus(200));
 
 const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)
