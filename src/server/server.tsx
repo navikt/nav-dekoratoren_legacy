@@ -30,10 +30,10 @@ import mockMenu from './mock/menu.json';
 import mockSok from './mock/sokeresultat.json';
 
 // Cache setup
-const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
-const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
+const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
+const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 // Environment
 const env = {
