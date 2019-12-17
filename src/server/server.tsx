@@ -2,6 +2,7 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'isomorphic-fetch';
+import FS from 'fs';
 import NodeCache from 'node-cache';
 import express from 'express';
 import React from 'react';
@@ -22,8 +23,7 @@ const PORT = 8088;
 // Default vars
 const defaultSearchUrl = `https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2`;
 const defaultMenuUrl = `http://localhost:8080/navno/_/service/no.nav.navno/menu`;
-const defaultScriptUrl = `http://localhost:8088/person/nav-dekoratoren/client.js`;
-const defaultCssUrl = `http://localhost:8088/person/nav-dekoratoren/css/client.css'`;
+const defaultAppUrl = `http://localhost:8088`;
 
 // Mock
 import mockMenu from './mock/menu.json';
@@ -37,16 +37,13 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 // Environment
 const env = {
-    miljo: process.env.NAMESPACE,
-    baseUrl: `https://www-q6.nav.no`,
-    baseUrlEnonic: `https://www-x1.nav.no`,
-    innloggingslinjenUrl: `https://tjenester-q6.nav.no`,
-    loginUrl: `https://loginservice-q.nav.no`,
-    logoutUrl: `https://loginservice-q.nav.no/slo`,
-    menypunkter: `https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg`,
-    minsideArbeidsgiverUrl: `https://arbeidsgiver-q6.nav.no/min-side-arbeidsgiver/`,
-    sokeresultat: `https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat`,
+    urlXpBase: 'TEST',
+    urlAppBase: process.env.URL_APP_BASE,
 };
+
+FS.writeFile(`${buildPath}/.env`, JSON.stringify(env), err =>
+    console.error(err)
+);
 
 // Cors
 app.disable('x-powered-by');
@@ -62,14 +59,15 @@ app.use(function(req, res, next) {
 
 // Server-side rendering
 const store = getStore();
-const script = process.env.SCRIPTURL || defaultScriptUrl;
-const css = process.env.CSSURL || defaultCssUrl;
-const header = ReactDOMServer.renderToString(
+const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/.env`;
+const fileCss = `${process.env.URL_APP_BASE || defaultAppUrl}/css/client.css`;
+const fileScript = `${process.env.URL_APP_BASE || defaultAppUrl}/client.js`;
+const htmlHeader = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
         <Head />
     </ReduxProvider>
 );
-const footer = ReactDOMServer.renderToString(
+const htmlFooter = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
         <Footer />
     </ReduxProvider>
@@ -89,21 +87,19 @@ const template = `
             <link rel="icon" href=${favicon} type="image/x-icon" />
             <title>NAV Dekoratør</title>
             <div id="styles">
-                <link href=${css} rel="stylesheet" />
+                <link href=${fileCss} rel="stylesheet" />
             </div>
         </head>
         <body>
             <div id="header-withmenu">
-                <section id="decorator-header" role="main">${header}</section>
+                <div id="decorator-env" data-src="${fileEnv}"></div>
+                <section id="decorator-header" role="main">${htmlHeader}</section>
             </div>
             <div id="footer-withmenu">
-                <section id="decorator-footer" role="main">${footer}</section>
+                <section id="decorator-footer" role="main">${htmlFooter}</section>
             </div>
             <div id="scripts">
-                <script type="text/javascript" src=${script}></script>
-                <script type="text/javascript" >
-                    var env = ${env};
-                </script>
+                <script type="text/javascript" src=${fileScript}></script>
             </div>
             <div id="megamenu-resources"></div>
             <div id="webstats-ga-notrack"></div>
@@ -145,7 +141,7 @@ app.get(`${basePath}/isReady`, (req, res) => res.sendStatus(200));
 
 const fetchmenuOptions = (res: any) => {
     request(
-        { method: 'GET', uri: process.env.MENYLENKER || defaultMenuUrl },
+        { method: 'GET', uri: process.env.URL_APP_MENY || defaultMenuUrl },
         (error, response, body) => {
             if (!error && response.statusCode === 200) {
                 mainCache.set(mainCacheKey, body, 100);
@@ -184,7 +180,7 @@ const fetchmenuOptions = (res: any) => {
 };
 
 const fetchSearchResults = (req: any, res: any) => {
-    const uri = `${process.env.SOKERESULTAT || defaultSearchUrl}?ord=${
+    const uri = `${process.env.URL_APP_SOK || defaultSearchUrl}?ord=${
         req.query.ord
     }`;
     if (isProduction) {
