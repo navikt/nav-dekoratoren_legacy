@@ -5,7 +5,6 @@ import 'isomorphic-fetch';
 import NodeCache from 'node-cache';
 import express from 'express';
 import React from 'react';
-import fs from 'fs';
 import ReactDOMServer from 'react-dom/server';
 import backupData from './menu/menu.json';
 import request from 'request';
