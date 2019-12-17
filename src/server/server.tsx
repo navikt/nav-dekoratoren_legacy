@@ -6,7 +6,6 @@ import NodeCache from 'node-cache';
 import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import backupData from './menu/menu.json';
 import request from 'request';
 import { Provider as ReduxProvider } from 'react-redux';
 import Footer from '../komponenter/footer/Footer';
@@ -14,7 +13,6 @@ import getStore from './../redux/store';
 import Head from '../Head';
 
 const basePath = '/person/nav-dekoratoren';
-const sokeresultatMockData = require('./sokeresultat-mockdata.json');
 const favicon = require('../../public/favicon.ico');
 const isProduction = process.env.NODE_ENV === 'production';
 const buildPath = `${process.cwd()}/buildfolder`;
@@ -26,6 +24,10 @@ const defaultSearchUrl = `https://www-x1.nav.no/www.nav.no/sok/_/service/navno.n
 const defaultMenuUrl = `http://localhost:8080/navno/_/service/no.nav.navno/menu`;
 const defaultScriptUrl = `http://localhost:8088/person/nav-dekoratoren/client.js`;
 const defaultCssUrl = `http://localhost:8088/person/nav-dekoratoren/css/client.css'`;
+
+// Mock
+import mockMenu from './mock/menu.json';
+import mockSok from './mock/sokeresultat.json';
 
 // Cache setup
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
@@ -159,10 +161,10 @@ const fetchmenuOptions = (res: any) => {
                             fetchresponse: error,
                             cacheresponse: err,
                         };
-                        res.send(backupData);
+                        res.send(mockMenu);
                         mainCache.set(
                             mainCacheKey,
-                            backupData,
+                            mockMenu,
                             (err, success) => {
                                 if (!err && success) {
                                     console.log(
@@ -190,11 +192,11 @@ const fetchSearchResults = (req: any, res: any) => {
             if (!error && response.statusCode === 200) {
                 res.send(body);
             } else {
-                res.send(sokeresultatMockData);
+                res.send(mockSok);
             }
         });
     } else {
-        res.send(sokeresultatMockData);
+        res.send(mockSok);
     }
 };
 
