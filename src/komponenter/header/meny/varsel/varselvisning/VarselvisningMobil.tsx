@@ -53,7 +53,6 @@ class VarselvisningMobil extends React.Component<OwnProps> {
                     tabindex={this.props.tabindex}
                 />
                 <VarselVisning
-                    className="varsler-display-mobil-tablet"
                     tabIndex={this.props.tabindex}
                     togglevarselmeny={this.props.togglevarselmeny}
                 />

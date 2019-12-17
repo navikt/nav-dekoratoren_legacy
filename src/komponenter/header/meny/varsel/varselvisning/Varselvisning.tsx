@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppState } from '../../../../../reducer/reducer';
 import parse from 'html-react-parser';
+import { AppState } from '../../../../../reducer/reducer';
 import { varselinnboksUrl } from '../../../../../api/api';
-import { tabletview } from '../../../../../styling-mediaquery';
+import { desktopview, tabletview } from '../../../../../styling-mediaquery';
 import './Varselvisning.less';
 
 interface OwnProps {
-    className?: string;
     tabIndex: boolean;
     togglevarselmeny?: () => void;
 }
@@ -43,29 +42,32 @@ class Varselvisning extends React.Component<Props, State> {
     }
 
     setTabIndex = () => {
-        const erTabletEllerDesktop = this.state.windowSize > tabletview - 1;
-        const varslerWrapperElement = erTabletEllerDesktop
-            ? '.desktopmeny #varselinnboks-varsler'
-            : '.mobilmeny #varselinnboks-varsler';
+        const varslerWrapperElement: string = this.erTabletEllerDesktop()
+            ? '.desktopmeny .nav-varsler'
+            : '.mobilmeny .nav-varsler';
 
-        const varselinnboksVarsler = document.querySelector(
-            varslerWrapperElement
-        );
+        const varsler = document.querySelector(varslerWrapperElement);
 
-        if (varselinnboksVarsler) {
+        if (varsler) {
             for (
                 let i = 0;
-                i <= varselinnboksVarsler.getElementsByTagName('a').length;
+                i <= varsler.getElementsByTagName('a').length;
                 i++
             ) {
-                if (varselinnboksVarsler.getElementsByTagName('a')[i]) {
-                    varselinnboksVarsler.getElementsByTagName('a')[
-                        i
-                    ].tabIndex = this.props.tabIndex ? 0 : -1;
+                if (varsler.getElementsByTagName('a')[i]) {
+                    varsler.getElementsByTagName('a')[i].tabIndex = this.props
+                        .tabIndex
+                        ? 0
+                        : -1;
                 }
             }
         }
     };
+
+    componentDidMount(): void {
+        window.addEventListener('resize', this.handleWindowSize);
+        this.setTabIndex();
+    }
 
     componentDidUpdate(prevProps: Readonly<Props>): void {
         if (this.props.togglevarselmeny) {
@@ -76,30 +78,34 @@ class Varselvisning extends React.Component<Props, State> {
         }
     }
 
-    componentDidMount(): void {
-        window.addEventListener('resize', this.handleWindowSize);
-        this.setTabIndex();
-    }
-
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleWindowSize);
     }
 
+    erTabletEllerDesktop = () => {
+        return this.state.windowSize > tabletview - 1;
+    };
+
+    erDesktop = () => {
+        return this.state.windowSize > desktopview - 1;
+    };
+
     render() {
-        const { className } = this.props;
+        const { tabIndex, antallUlesteVarsler, antallVarsler } = this.props;
+        const klassenavn = this.erDesktop()
+            ? 'varsler-display-desktop'
+            : 'varsler-display-mobil-tablet';
+
         return (
-            <div className={className ? className : 'varsler-display-desktop'}>
+            <div className={klassenavn}>
                 {this.state.parsedVarsler}
 
-                {this.props.antallVarsler > 5 && (
+                {antallVarsler > 5 && (
                     <div className="vis-alle-lenke skillelinje-topp">
-                        <a
-                            href={varselinnboksUrl}
-                            tabIndex={this.props.tabIndex ? 0 : -1}
-                        >
+                        <a href={varselinnboksUrl} tabIndex={tabIndex ? 0 : -1}>
                             Vis alle dine varsler
-                            {this.props.antallUlesteVarsler > 0
-                                ? ` (${this.props.antallUlesteVarsler} nye)`
+                            {antallUlesteVarsler > 0
+                                ? ` (${antallUlesteVarsler} nye)`
                                 : ''}
                         </a>
                     </div>

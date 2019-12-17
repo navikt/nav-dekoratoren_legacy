@@ -70,35 +70,38 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
     };
 
     render() {
-        const { erInnlogget, antallVarsler, arbeidsflate } = this.props;
-
+        const {
+            erInnlogget,
+            antallVarsler,
+            arbeidsflate,
+            tabindex,
+            children,
+        } = this.props;
+        const { clicked, classname } = this.state;
         return (
             <div ref={this.varselbjelleRef} className="varselbjelle">
                 {erInnlogget && arbeidsflate === MenuValue.PRIVATPERSON ? (
                     <>
                         <div
                             id="toggle-varsler-container"
-                            className={this.state.classname}
+                            className={classname}
                         >
                             <button
                                 onClick={this.handleClick}
                                 className="toggle-varsler"
-                                tabIndex={this.props.tabindex ? 0 : -1}
+                                tabIndex={tabindex ? 0 : -1}
                                 title="Varsler"
                                 aria-label={`Varsler. Du har ${
                                     antallVarsler > 0 ? antallVarsler : 'ingen'
                                 } varsler.`}
-                                aria-pressed={this.state.clicked}
+                                aria-pressed={clicked}
                                 aria-haspopup="true"
                                 aria-controls="varsler-display"
-                                aria-expanded={this.state.clicked}
+                                aria-expanded={clicked}
                             />
                         </div>
                         <div className="min-varsel-wrapper">
-                            {this.props.children(
-                                this.state.clicked,
-                                this.handleClick
-                            )}
+                            {children(clicked, this.handleClick)}
                         </div>
                     </>
                 ) : null}
@@ -123,7 +126,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
         settVarslerSomLest(nyesteId)(dispatch),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Varselbjelle);
+export default connect(mapStateToProps, mapDispatchToProps)(Varselbjelle);

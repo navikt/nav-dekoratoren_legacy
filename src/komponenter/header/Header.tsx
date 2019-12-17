@@ -1,13 +1,12 @@
 import React from 'react';
-import { Dispatch } from '../../redux/dispatch-type';
 import { connect } from 'react-redux';
+import { Dispatch } from '../../redux/dispatch-type';
 import { AppState } from '../../reducer/reducer';
 import { Language } from '../../reducer/language-duck';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
 import Toppmeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import Desktopmeny from './meny/Desktopmeny';
 import Mobilmeny from './meny/Mobilmeny';
-import './Header.less';
 
 interface StateProps {
     language: Language;
@@ -51,7 +50,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     hentMenypunkter: () => fetchMenypunkter()(dispatch),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

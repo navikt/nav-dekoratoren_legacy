@@ -112,20 +112,27 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
     };
 
     render(): React.ReactNode {
-        const { classname, menyLenker } = this.props;
+        const {
+            classname,
+            menyLenker,
+            menuIsOpen,
+            togglemenu,
+            arbeidsflate,
+            lang,
+        } = this.props;
         const menyClass = BEMHelper(classname);
 
         return (
             <>
                 <section className={menyClass.element('startmeny')}>
                     <Topseksjon
-                        lukkmeny={this.props.togglemenu}
+                        lukkmeny={togglemenu}
                         tabindex={this.hovedseksjonTabIndex()}
                     />
                     <div
                         className={menyClass.element(
                             'minside-rad',
-                            this.props.arbeidsflate === MenuValue.PRIVATPERSON
+                            arbeidsflate === MenuValue.PRIVATPERSON
                                 ? ''
                                 : 'sett-rad-midt'
                         )}
@@ -148,13 +155,13 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
                                                     : () => void 0
                                             }
                                             tabindex={
-                                                this.props.menuIsOpen &&
+                                                menuIsOpen &&
                                                 clicked &&
                                                 !this.state.toggleundermeny
                                             }
                                             clicked={this.state.toggleundermeny}
                                             lukkmenyene={this.lukkMenyene}
-                                            menuIsOpen={this.props.menuIsOpen}
+                                            menuIsOpen={menuIsOpen}
                                         />
                                     )}
                                 </Varselbjelle>
@@ -198,7 +205,7 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
                             }
                         )}
                     </ul>
-                    {this.props.lang === Language.NORSK && (
+                    {lang === Language.NORSK && (
                         <MobilarbeidsflateValg
                             tabindex={this.hovedseksjonTabIndex()}
                         />

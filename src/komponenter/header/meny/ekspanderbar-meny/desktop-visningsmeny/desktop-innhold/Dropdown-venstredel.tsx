@@ -16,21 +16,27 @@ const DropdownVenstredel = (props: Props) => {
 
     return (
         <div className={cls.element('hovedSeksjon')}>
-            {menyLenker.children.map(
-                (menygruppe: MenySeksjon, index: number) => {
-                    return (
-                        <section className={cls.element('seksjon')} key={index}>
-                            <div className={cls.element('seksjonOverskrift')}>
-                                <Element>{menygruppe.displayName}</Element>
-                                <Menylenker
-                                    menygruppe={menygruppe}
-                                    tabindex={tabindex}
-                                />
-                            </div>
-                        </section>
-                    );
-                }
-            )}
+            {menyLenker &&
+                menyLenker.children.map(
+                    (menygruppe: MenySeksjon, index: number) => {
+                        return (
+                            <section
+                                className={cls.element('seksjon')}
+                                key={index}
+                            >
+                                <div
+                                    className={cls.element('seksjonOverskrift')}
+                                >
+                                    <Element>{menygruppe.displayName}</Element>
+                                    <Menylenker
+                                        menygruppe={menygruppe}
+                                        tabindex={tabindex}
+                                    />
+                                </div>
+                            </section>
+                        );
+                    }
+                )}
         </div>
     );
 };

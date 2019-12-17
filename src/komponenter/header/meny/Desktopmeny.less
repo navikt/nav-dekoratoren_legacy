@@ -24,7 +24,12 @@
         width: auto;
 
         &:focus {
-            outline: 3px solid @navDypBla;
+            outline: 3px solid @fokusFarge;
+        }
+        svg {
+            &:focus {
+                outline: 0;
+            }
         }
     }
 
@@ -66,7 +71,7 @@
         .minsidelenke-varselbjelle {
             order: 3;
             .minside-lenke {
-                width: 102px;
+                width: 6.375rem;
                 max-height: @maxheight-menuitem;
                 display: inline-block;
             }

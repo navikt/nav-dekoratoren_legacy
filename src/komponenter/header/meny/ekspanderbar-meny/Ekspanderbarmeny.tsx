@@ -82,7 +82,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                 <Menyknapp
                     ToggleMenu={this.menutoggle}
                     clicked={this.state.clicked}
-                    lang={this.props.language}
+                    lang={language}
                 />
                 <div id="dropdown-menu" className={cls.element('meny-wrapper')}>
                     {meny.status === Status.OK ? (
@@ -94,7 +94,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                                 )}
                             >
                                 <div className="media-mobil-tablet menyvisning-mobil-tablet">
-                                    {this.props.language !== Language.SAMISK ? (
+                                    {language !== Language.SAMISK ? (
                                         <MobilVisningsmeny
                                             classname={
                                                 this.state.vismenyClassname
@@ -107,11 +107,9 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                                             menuIsOpen={this.state.clicked}
                                             togglemenu={this.menutoggle}
                                             arbeidsflate={arbeidsflate}
-                                            lang={this.props.language}
+                                            lang={language}
                                         />
-                                    ) : (
-                                        <div />
-                                    )}
+                                    ) : null}
                                 </div>
                                 <div className="media-lg-desktop menyvisning-desktop">
                                     <DesktopVisningsmeny
@@ -126,7 +124,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                                             meny.data[0].children,
                                             3
                                         )}
-                                        lang={this.props.language}
+                                        lang={language}
                                         arbeidsflate={arbeidsflate}
                                     />
                                 </div>
