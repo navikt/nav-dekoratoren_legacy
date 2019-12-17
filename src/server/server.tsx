@@ -92,13 +92,15 @@ const template = `
         </head>
         <body>
             <div id="header-withmenu">
-                <div id="decorator-env" data-src="${fileEnv}"></div>
                 <section id="decorator-header" role="main">${htmlHeader}</section>
             </div>
             <div id="footer-withmenu">
                 <section id="decorator-footer" role="main">${htmlFooter}</section>
             </div>
             <div id="scripts">
+                <noscript>
+                  <div id="decorator-env" data-src="${fileEnv}"></div>
+                </noscript>
                 <script type="text/javascript" src=${fileScript}></script>
             </div>
             <div id="megamenu-resources"></div>
