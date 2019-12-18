@@ -31,7 +31,7 @@ const MobilarbeidsflateValg = ({
     settArbeidsflate,
     tabindex,
 }: StateProps & DispatchProps & Props) => {
-    const cls = BEMHelper('mobil-seksjon-valg');
+    const cls = BEMHelper('mobil-arbeidsflate-valg');
 
     return (
         <ul className={cls.className}>
@@ -40,7 +40,7 @@ const MobilarbeidsflateValg = ({
                     return arbeidsflate === lenke.key ? null : (
                         <li
                             key={lenke.tittel}
-                            className={cls.element('list-element')}
+                            className={cls.element('liste-element')}
                         >
                             <Lenke
                                 href={lenke.url}

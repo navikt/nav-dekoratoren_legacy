@@ -7,7 +7,10 @@ const Skiplinks = () => {
         <div className="navno-dekorator">
             <div className="hodefot">
                 <nav>
-                    <a href="#toppmeny" className="visuallyhidden focusable">
+                    <a
+                        href="#arbeidsflatemeny"
+                        className="visuallyhidden focusable"
+                    >
                         Gå til hovedmeny
                     </a>
                     <a href="#maincontent" className="visuallyhidden focusable">
