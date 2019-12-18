@@ -23,8 +23,7 @@ const loadedStates = ['complete', 'loaded', 'interactive'];
 const run = () => {
     TagManager.initialize(tagManagerArgs);
     fetchEnv()
-        .then(result => {
-            console.log(result);
+        .then(() => {
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
                     <Head />
