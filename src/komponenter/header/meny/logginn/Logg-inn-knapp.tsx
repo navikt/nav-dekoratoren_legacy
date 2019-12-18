@@ -23,9 +23,6 @@ const getPath = () => {
     return '/person/nav-dekoratoren/';
 };
 
-const path = erNavDekoratoren() ? getPath() : '/person/dittnav';
-const login = `${Environment.loginUrl}/login?redirect=${Environment.baseUrl}${path}`;
-
 interface StateProps {
     erInnlogget: boolean;
 }
@@ -61,6 +58,8 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
     };
 
     handleButtonClick = () => {
+        const path = erNavDekoratoren() ? getPath() : '/person/dittnav';
+        const login = `${Environment.loginUrl}/login?redirect=${Environment.baseUrl}${path}`;
         if (process.env.NODE_ENV === 'production') {
             return this.props.erInnlogget
                 ? (window.location.href = Environment.logoutUrl)
