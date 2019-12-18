@@ -35,8 +35,9 @@ const backupCacheKey = 'navno-menu-backup';
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
-// Environment
-const env = {
+// Client environment
+// Obs! Don't expose secrets
+const clientEnv = {
     baseUrl: process.env.baseUrl,
     baseUrlEnonic: process.env.baseUrlEnonic,
     innloggingslinjenUrl: process.env.innloggingslinjenUrl,
@@ -48,7 +49,7 @@ const env = {
     logoutUrl: process.env.logoutUrl,
 };
 
-FS.writeFile(`${buildPath}/env.json`, JSON.stringify(env), err =>
+FS.writeFile(`${buildPath}/env.json`, JSON.stringify(clientEnv), err =>
     console.error(err)
 );
 
