@@ -3,9 +3,9 @@ apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
     name: nav-dekoratoren
-    namespace: { { namespace } }
+    namespace: {{namespace}}
     labels:
-        team: { { team } }
+        team: {{team}}
 spec:
     image: navikt/{{reponame}}:{{version}}
     port: 8088
