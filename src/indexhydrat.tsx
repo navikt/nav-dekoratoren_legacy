@@ -35,23 +35,24 @@ Environment.settEnv({
 const run = () => {
     TagManager.initialize(tagManagerArgs);
     fetchEnv()
-        .then(result => console.log(result))
+        .then(result => {
+            console.log(result);
+            ReactDOM.hydrate(
+                <ReduxProvider store={store}>
+                    <Head />
+                </ReduxProvider>,
+                document.getElementById('decorator-header')
+            );
+            ReactDOM.hydrate(
+                <ReduxProvider store={store}>
+                    <Footer />
+                </ReduxProvider>,
+                document.getElementById('decorator-footer')
+            );
+        })
         .catch(e => {
             console.error(e);
         });
-
-    ReactDOM.hydrate(
-        <ReduxProvider store={store}>
-            <Head />
-        </ReduxProvider>,
-        document.getElementById('decorator-header')
-    );
-    ReactDOM.hydrate(
-        <ReduxProvider store={store}>
-            <Footer />
-        </ReduxProvider>,
-        document.getElementById('decorator-footer')
-    );
 };
 
 if (verifyWindowObj()) {
