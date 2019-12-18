@@ -23,10 +23,6 @@ const loadedStates = ['complete', 'loaded', 'interactive'];
 const run = () => {
     TagManager.initialize(tagManagerArgs);
     ReactDOM.hydrate(
-        <Skiplinks />,
-        document.getElementById('decorator-skiplinks')
-    );
-    ReactDOM.hydrate(
         <ReduxProvider store={store}>
             <Head />
         </ReduxProvider>,

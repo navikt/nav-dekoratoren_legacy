@@ -29,7 +29,6 @@ function App() {
         <ReduxProvider store={store}>
             <LanguageProvider>
                 <>
-                    <Skiplinks />
                     <Header />
                     <Footer />
                 </>

@@ -52,8 +52,6 @@ app.use(function(req, res, next) {
 
 const store = getStore();
 
-const skiplinks = ReactDOMServer.renderToString(<Skiplinks />);
-
 const header = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
         <Head />
@@ -107,9 +105,6 @@ app.get(
         </div>
     </head>
     <body>
-        <div id="skiplinks">
-            <section id="decorator-skiplinks" role="main">${skiplinks}</section>
-        </div>
         <div id="header-withmenu">
             <section id="decorator-header" role="main">${header}</section>
         </div>
@@ -119,6 +114,7 @@ app.get(
         <div id="scripts">
             <script type="text/javascript" src=${script}></script>
         </div>
+        <div id="skiplinks"></div>
         <div id="megamenu-resources"></div>
         <div id="webstats-ga-notrack"></div>
     </body>
