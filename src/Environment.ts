@@ -21,7 +21,7 @@ export default class Environment {
 }
 
 export const fetchEnv = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
         const envDom = document.getElementById('decorator-env');
         if (envDom) {
             const url = envDom.getAttribute('data-src');
@@ -37,7 +37,7 @@ export const fetchEnv = () => {
                     });
             }
         } else {
-            throw 'Fant ikke env-config-url in dom';
+            throw 'Fant ikke data-src fra decorator-env i dom';
         }
     });
 };

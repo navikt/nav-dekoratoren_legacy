@@ -10,7 +10,7 @@ import { verifyWindowObj } from './utils/environments';
 import Head from './Head';
 import Footer from './komponenter/footer/Footer';
 import './index.less';
-import { fetchEnv } from './Environment';
+import Environment, { fetchEnv } from './Environment';
 
 const tagManagerArgs = {
     gtmId: 'GTM-PM9RP3',
@@ -20,26 +20,38 @@ const tagManagerArgs = {
 const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
+// TODO: Fjern temp
+Environment.settEnv({
+    baseUrl: 'http://localhost:3000',
+    baseUrlEnonic: 'https://www-x1.nav.no',
+    innloggingslinjenUrl: 'http://localhost:3000',
+    menypunkter: `http://localhost:8088/person/nav-dekoratoren/api/get/menyvalg`,
+    minsideArbeidsgiverUrl: `https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/`,
+    sokeresultat: `http://localhost:8088/person/nav-dekoratoren/api/get/sokeresultat`,
+    loginUrl: '#',
+    logoutUrl: '#',
+});
+
 const run = () => {
     TagManager.initialize(tagManagerArgs);
     fetchEnv()
-        .then(() => {
-            ReactDOM.hydrate(
-                <ReduxProvider store={store}>
-                    <Head />
-                </ReduxProvider>,
-                document.getElementById('decorator-header')
-            );
-            ReactDOM.hydrate(
-                <ReduxProvider store={store}>
-                    <Footer />
-                </ReduxProvider>,
-                document.getElementById('decorator-footer')
-            );
-        })
+        .then(result => console.log(result))
         .catch(e => {
             console.error(e);
         });
+
+    ReactDOM.hydrate(
+        <ReduxProvider store={store}>
+            <Head />
+        </ReduxProvider>,
+        document.getElementById('decorator-header')
+    );
+    ReactDOM.hydrate(
+        <ReduxProvider store={store}>
+            <Footer />
+        </ReduxProvider>,
+        document.getElementById('decorator-footer')
+    );
 };
 
 if (verifyWindowObj()) {
