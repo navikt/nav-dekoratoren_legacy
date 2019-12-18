@@ -37,8 +37,14 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 // Environment
 const env = {
-    urlXpBase: 'TEST',
-    urlAppBase: process.env.URL_APP_BASE,
+    baseUrl: process.env.baseUrl,
+    baseUrlEnonic: process.env.baseUrlEnonic,
+    innloggingslinjenUrl: process.env.innloggingslinjenUrl,
+    menypunkter: process.env.menypunkter,
+    sokeresultat: process.env.sokeresultat,
+    minsideArbeidsgiverUrl: process.env.minsideArbeidsgiverUrl,
+    loginUrl: process.env.loginUrl,
+    logoutUrl: process.env.logoutUrl,
 };
 
 FS.writeFile(`${buildPath}/env.json`, JSON.stringify(env), err =>

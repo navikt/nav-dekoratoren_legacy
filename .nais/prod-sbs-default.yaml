@@ -3,9 +3,9 @@ apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
     name: nav-dekoratoren
-    namespace: {{namespace}}
+    namespace: { { namespace } }
     labels:
-        team: {{team}}
+        team: { { team } }
 spec:
     image: navikt/{{reponame}}:{{version}}
     port: 8088
@@ -30,6 +30,22 @@ spec:
           value: https://www.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2
         - name: URL_APP_BASE
           value: https://www.nav.no/person/nav-dekoratoren
+        - name: baseUrl
+          value: https://www.nav.no
+        - name: baseUrlEnonic
+          value: https://www.nav.no
+        - name: innloggingslinjenUrl
+          value: https://www.nav.no/innloggingslinje-api/auth
+        - name: menypunkter
+          value: https://www.nav.no/person/nav-dekoratoren/api/get/menyvalg
+        - name: sokeresultat
+          value: https://www.nav.no/person/nav-dekoratoren/api/get/sokeresultat
+        - name: minsideArbeidsgiverUrl
+          value: https://arbeidsgiver.nav.no/min-side-arbeidsgiver/
+        - name: loginUrl
+          value: https://loginservice.nav.no
+        - name: logoutUrl
+          value: https://loginservice.nav.no/slo
     resources:
         limits:
             cpu: '3'
