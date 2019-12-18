@@ -98,9 +98,7 @@ const template = `
                 <section id="decorator-footer" role="main">${htmlFooter}</section>
             </div>
             <div id="scripts">
-                <noscript>
-                  <div id="decorator-env" data-src="${fileEnv}"></div>
-                </noscript>
+                <div id="decorator-env" data-src="${fileEnv}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
             </div>
             <div id="megamenu-resources"></div>
