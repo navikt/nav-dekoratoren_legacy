@@ -59,7 +59,7 @@ app.use(function(req, res, next) {
 
 // Server-side rendering
 const store = getStore();
-const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/.env`;
+const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/env.json`;
 const fileCss = `${process.env.URL_APP_BASE || defaultAppUrl}/css/client.css`;
 const fileScript = `${process.env.URL_APP_BASE || defaultAppUrl}/client.js`;
 const htmlHeader = ReactDOMServer.renderToString(

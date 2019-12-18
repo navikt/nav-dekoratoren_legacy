@@ -19,22 +19,6 @@ const checkWindowObjIncludes = (searchString: string) => {
 };
 
 const Environments = () => {
-    const envDom = document.getElementById('decorator-env');
-    if (envDom) {
-        const url = envDom.getAttribute('data-src');
-        if (url) {
-            fetch(url)
-                .then(result => {
-                    console.log(result);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-    } else {
-        console.error('Fant ikke env-config-url in dom');
-    }
-
     if (process.env.NODE_ENV === 'development') {
         return {
             baseUrl: 'http://localhost:3000',

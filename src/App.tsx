@@ -27,10 +27,8 @@ function App() {
     return (
         <ReduxProvider store={store}>
             <LanguageProvider>
-                <>
-                    <Header />
-                    <Footer />
-                </>
+                <Header />
+                <Footer />
             </LanguageProvider>
         </ReduxProvider>
     );

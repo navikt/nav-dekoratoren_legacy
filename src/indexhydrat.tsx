@@ -10,6 +10,7 @@ import { verifyWindowObj } from './utils/environments';
 import Head from './Head';
 import Footer from './komponenter/footer/Footer';
 import './index.less';
+import { fetchEnv } from './Environment';
 
 const tagManagerArgs = {
     gtmId: 'GTM-PM9RP3',
@@ -21,18 +22,24 @@ const loadedStates = ['complete', 'loaded', 'interactive'];
 
 const run = () => {
     TagManager.initialize(tagManagerArgs);
-    ReactDOM.hydrate(
-        <ReduxProvider store={store}>
-            <Head />
-        </ReduxProvider>,
-        document.getElementById('decorator-header')
-    );
-    ReactDOM.hydrate(
-        <ReduxProvider store={store}>
-            <Footer />
-        </ReduxProvider>,
-        document.getElementById('decorator-footer')
-    );
+    fetchEnv()
+        .then(() => {
+            ReactDOM.hydrate(
+                <ReduxProvider store={store}>
+                    <Head />
+                </ReduxProvider>,
+                document.getElementById('decorator-header')
+            );
+            ReactDOM.hydrate(
+                <ReduxProvider store={store}>
+                    <Footer />
+                </ReduxProvider>,
+                document.getElementById('decorator-footer')
+            );
+        })
+        .catch(e => {
+            console.error(e);
+        });
 };
 
 if (verifyWindowObj()) {
