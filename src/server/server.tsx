@@ -43,6 +43,7 @@ const env = {
     menypunkter: process.env.menypunkter,
     sokeresultat: process.env.sokeresultat,
     minsideArbeidsgiverUrl: process.env.minsideArbeidsgiverUrl,
+    varselinnboksUrl: process.env.varselinnboksUrl,
     loginUrl: process.env.loginUrl,
     logoutUrl: process.env.logoutUrl,
 };
