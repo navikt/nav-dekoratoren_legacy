@@ -9,8 +9,8 @@ import getStore from './redux/store';
 import { verifyWindowObj } from './Environment';
 import Head from './Head';
 import Footer from './komponenter/footer/Footer';
+import { fetchEnv } from './Environment';
 import './index.less';
-import Environment, { fetchEnv } from './Environment';
 
 const tagManagerArgs = {
     gtmId: 'GTM-PM9RP3',
