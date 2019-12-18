@@ -1,19 +1,10 @@
 // tslint:disable-line:no-any
 import React from 'react';
-import Environments from '../utils/environments';
+import Environment from '../Environment';
 import { fetchToJson } from './api-utils';
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { Meny as menypunkterData } from '../reducer/menu-duck';
-
-const {
-    baseUrl,
-    innloggingslinjenUrl,
-    menypunkter,
-    sokeresultat,
-} = Environments();
-
-export const varselinnboksUrl = `${baseUrl}/person/varselinnboks`;
 
 export enum Status {
     OK = 'OK',
@@ -34,34 +25,20 @@ export interface DatalasterProps {
     feilmeldingId?: string;
 }
 
-interface ApiProps {
-    innloggingsstatusURL: string;
-    menyPunkterURL: string;
-    getVarselinnboksURL: string;
-    postVarselinnboksURL: string;
-    sokeresultat: string;
-}
-
-export const API: ApiProps = {
-    innloggingsstatusURL: `${innloggingslinjenUrl}/innloggingslinje-api/auth`,
-    menyPunkterURL: menypunkter,
-    getVarselinnboksURL: `${varselinnboksUrl}/varsler`,
-    postVarselinnboksURL: `${varselinnboksUrl}/rest/varsel/erlest`,
-    sokeresultat: sokeresultat,
-};
-
 export function hentInnloggingsstatusFetch(): Promise<innloggingsstatusData> {
-    return fetchToJson(API.innloggingsstatusURL, { credentials: 'include' });
+    return fetchToJson(Environment.innloggingslinjenUrl, {
+        credentials: 'include',
+    });
 }
 
 export function hentMenyPunkter(): Promise<menypunkterData[]> {
-    return fetchToJson(API.menyPunkterURL);
+    return fetchToJson(Environment.menypunkter);
 }
 
 export function hentVarslerFetch(): Promise<varselinnboksData> {
     const tidspunkt = new Date().getTime();
     const queryParams = `?noCache=${tidspunkt}&limit=5`;
-    return fetchToJson(API.getVarselinnboksURL + queryParams);
+    return fetchToJson(`${Environment.varselinnboksUrl}/varsler${queryParams}`);
 }
 
 export function lagreVarslerLestFetch(nyesteId: number): Promise<number> {
@@ -70,5 +47,8 @@ export function lagreVarslerLestFetch(nyesteId: number): Promise<number> {
         method: 'POST',
         body: JSON.stringify(nyesteId),
     };
-    return fetchToJson(`${API.postVarselinnboksURL}/${nyesteId}`, config);
+    return fetchToJson(
+        `${Environment.varselinnboksUrl}/rest/varsel/erles/${nyesteId}`,
+        config
+    );
 }

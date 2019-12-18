@@ -1,5 +1,5 @@
 import React from 'react';
-import { verifyWindowObj } from './utils/environments';
+import { verifyWindowObj } from './Environment';
 import LanguageProvider from './provider/Language-provider';
 import setupMock from './mocks/setup-mock';
 import * as es6promise from 'es6-promise';

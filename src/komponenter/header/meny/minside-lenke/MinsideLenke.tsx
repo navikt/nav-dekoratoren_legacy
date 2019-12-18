@@ -2,12 +2,11 @@ import React from 'react';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import Lenke from 'nav-frontend-lenker';
-import Environments from '../../../../utils/environments';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
+import Environment from '../../../../Environment';
 import './MinsideLenke.less';
 
-const { baseUrl, minsideArbeidsgiverUrl } = Environments();
-export const dittNavURL = `${baseUrl}/person/dittnav/`;
+export const dittNavURL = `${Environment.baseUrl}/person/dittnav/`;
 
 interface StateProps {
     erInnlogget: boolean;
@@ -36,7 +35,7 @@ const MinsideLenke = ({
         arbeidsflate === MenuValue.PRIVATPERSON
             ? dittNavURL
             : arbeidsflate === MenuValue.ARBEIDSGIVER
-            ? minsideArbeidsgiverUrl
+            ? Environment.minsideArbeidsgiverUrl
             : '';
 
     return (

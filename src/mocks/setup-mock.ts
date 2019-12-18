@@ -1,7 +1,7 @@
 import innloggingsstatusResponse from './innloggingsstatus-mock';
 import varselinnboksResponse from './varselinnboks-mock';
-import { API } from '../api/api';
 import FetchMock, { Middleware, MiddlewareUtils } from 'yet-another-fetch-mock';
+import Environment from '../Environment';
 
 export default () => {
     const loggingMiddleware: Middleware = (request, response) => {
@@ -20,10 +20,15 @@ export default () => {
     });
 
     console.log('Mock data enabled');
+    fetchMock.get(Environment.innloggingslinjenUrl, innloggingsstatusResponse);
 
-    fetchMock.get(API.innloggingsstatusURL, innloggingsstatusResponse);
+    fetchMock.get(
+        `${Environment.innloggingslinjenUrl}/varsler(.*)`,
+        varselinnboksResponse
+    );
 
-    fetchMock.get(`${API.getVarselinnboksURL}(.*)`, varselinnboksResponse);
-
-    fetchMock.post(`${API.postVarselinnboksURL}/33475442`, ({ body }) => body);
+    fetchMock.post(
+        `${Environment.innloggingslinjenUrl}/rest/varsel/erles/33475442`,
+        ({ body }) => body
+    );
 };

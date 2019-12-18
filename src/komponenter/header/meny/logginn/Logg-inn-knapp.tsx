@@ -6,16 +6,12 @@ import KnappBase from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
 import { mobileview } from '../../../../styling-mediaquery';
-import Environments, {
-    erNavDekoratoren,
-    verifyWindowObj,
-} from '../../../../utils/environments';
+import { erNavDekoratoren, verifyWindowObj } from '../../../../Environment';
 import LogginnIkon from '../../../../ikoner/mobilmeny/LogginnIkon';
 import Tekst from '../../../../tekster/finn-tekst';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
+import Environment from '../../../../Environment';
 import './Logg-inn-knapp.less';
-
-const { baseUrl, logoutUrl, loginUrl } = Environments();
 
 const getPath = () => {
     if (verifyWindowObj()) {
@@ -28,7 +24,7 @@ const getPath = () => {
 };
 
 const path = erNavDekoratoren() ? getPath() : '/person/dittnav';
-const login = `${loginUrl}/login?redirect=${baseUrl}${path}`;
+const login = `${Environment.loginUrl}/login?redirect=${Environment.baseUrl}${path}`;
 
 interface StateProps {
     erInnlogget: boolean;
@@ -67,7 +63,7 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
     handleButtonClick = () => {
         if (process.env.NODE_ENV === 'production') {
             return this.props.erInnlogget
-                ? (window.location.href = logoutUrl)
+                ? (window.location.href = Environment.logoutUrl)
                 : (window.location.href = login);
         } else {
             this.setState({

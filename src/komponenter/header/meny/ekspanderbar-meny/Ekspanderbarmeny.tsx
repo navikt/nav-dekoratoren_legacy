@@ -3,7 +3,6 @@ import MediaQuery from 'react-responsive';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import BEMHelper from '../../../../utils/bem';
-import { verifyWindowObj } from '../../../../utils/environments';
 import { tabletview } from '../../../../styling-mediaquery';
 import { Status } from '../../../../api/api';
 import { MenuValue, selectMenu } from '../../../../utils/meny-storage-utils';
@@ -17,6 +16,7 @@ import Menyknapp from '../meny-knapp/Menyknapp';
 import Mobilbakgrunn from './mobil-visningsmeny/mobil-innhold/Mobilbakgrunn';
 import MobilVisningsmeny from './mobil-visningsmeny/MobilVisningsmeny';
 import DesktopVisningsmeny from './desktop-visningsmeny/DesktopVisningsmeny';
+import { verifyWindowObj } from '../../../../Environment';
 import './Ekspanderbarmeny.less';
 
 interface StateProps {

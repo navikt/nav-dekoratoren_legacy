@@ -42,6 +42,8 @@ spec:
           value: https://www-q6.nav.no/person/nav-dekoratoren/api/get/sokeresultat
         - name: minsideArbeidsgiverUrl
           value: https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/
+        - name: varselinnboksUrl
+          value: https://www-q6.nav.no/person/varselinnboks
         - name: loginUrl
           value: https://loginservice-q.nav.no
         - name: logoutUrl

@@ -5,7 +5,6 @@ import throttle from 'lodash.throttle';
 import Downshift from 'downshift';
 import cls from 'classnames';
 import { Input } from 'nav-frontend-skjema';
-import { API } from '../../../../api/api';
 import { Language } from '../../../../reducer/language-duck';
 import { finnTekst } from '../../../../tekster/finn-tekst';
 import {
@@ -19,6 +18,7 @@ import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
 import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
 import Mobilsokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Mobilsokknapp';
 import './Sok.less';
+import Environment from '../../../../Environment';
 
 interface StateProps {
     language: Language;
@@ -40,7 +40,7 @@ class Sok extends React.Component<StateProps, InputState> {
     }
 
     handleValueChange(input: string) {
-        const url = API.sokeresultat;
+        const url = Environment.sokeresultat;
 
         this.setState({
             inputString: input,

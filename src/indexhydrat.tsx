@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import TagManager from 'react-gtm-module';
 import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
-import { verifyWindowObj } from './utils/environments';
+import { verifyWindowObj } from './Environment';
 import Head from './Head';
 import Footer from './komponenter/footer/Footer';
 import './index.less';
@@ -19,18 +19,6 @@ const tagManagerArgs = {
 
 const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];
-
-// TODO: Fjern temp
-Environment.settEnv({
-    baseUrl: 'http://localhost:3000',
-    baseUrlEnonic: 'https://www-x1.nav.no',
-    innloggingslinjenUrl: 'http://localhost:3000',
-    menypunkter: `http://localhost:8088/person/nav-dekoratoren/api/get/menyvalg`,
-    minsideArbeidsgiverUrl: `https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/`,
-    sokeresultat: `http://localhost:8088/person/nav-dekoratoren/api/get/sokeresultat`,
-    loginUrl: '#',
-    logoutUrl: '#',
-});
 
 const run = () => {
     TagManager.initialize(tagManagerArgs);

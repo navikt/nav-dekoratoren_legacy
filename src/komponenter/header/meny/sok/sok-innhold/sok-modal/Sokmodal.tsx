@@ -7,7 +7,7 @@ import Navlogo from '../../../../../../ikoner/meny/Navlogo';
 import Lukknapp from './sok-modal-knapp/Lukknapp';
 import Sok from '../../Sok';
 import './Sokmodal.less';
-import { verifyWindowObj } from '../../../../../../utils/environments';
+import { verifyWindowObj } from '../../../../../../Environment';
 
 interface Props {
     modalerApen: boolean;

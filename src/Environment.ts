@@ -7,6 +7,7 @@ export default class Environment {
     static menypunkter: string;
     static minsideArbeidsgiverUrl: string;
     static sokeresultat: string;
+    static varselinnboksUrl: string;
 
     static settEnv = (result: any) => {
         Environment.baseUrl = result.baseUrl;
@@ -17,6 +18,7 @@ export default class Environment {
         Environment.menypunkter = result.menypunkter;
         Environment.minsideArbeidsgiverUrl = result.minsideArbeidsgiverUrl;
         Environment.sokeresultat = result.sokeresultat;
+        Environment.varselinnboksUrl = result.varselinnboksUrl;
     };
 }
 
@@ -40,4 +42,14 @@ export const fetchEnv = () => {
             throw 'Fant ikke data-src fra decorator-env i dom';
         }
     });
+};
+
+export const verifyWindowObj = () => {
+    return typeof window !== 'undefined';
+};
+
+export const erNavDekoratoren = (): boolean => {
+    return (
+        verifyWindowObj() && window.location.href.includes('/nav-dekoratoren')
+    );
 };
