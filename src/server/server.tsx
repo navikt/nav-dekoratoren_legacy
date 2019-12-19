@@ -149,7 +149,7 @@ app.get(`${basePath}/isReady`, (req, res) => res.sendStatus(200));
 
 const fetchmenuOptions = (res: any) => {
     request(
-        { method: 'GET', uri: process.env.URL_APP_MENY || defaultMenuUrl },
+        { method: 'GET', uri: process.env.URL_API_MENY || defaultMenuUrl },
         (error, response, body) => {
             if (!error && response.statusCode === 200) {
                 mainCache.set(mainCacheKey, body, 100);
@@ -188,7 +188,7 @@ const fetchmenuOptions = (res: any) => {
 };
 
 const fetchSearchResults = (req: any, res: any) => {
-    const uri = `${process.env.URL_APP_SOK || defaultSearchUrl}?ord=${
+    const uri = `${process.env.URL_API_SOK || defaultSearchUrl}?ord=${
         req.query.ord
     }`;
     if (isProduction) {
