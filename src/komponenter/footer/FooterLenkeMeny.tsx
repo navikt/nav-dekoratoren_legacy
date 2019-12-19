@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
 import NavLogoFooter from '../../ikoner/meny/NavLogoFooter';
 import { erNavDekoratoren } from '../../utils/environments';
+import DelSkjermModal from './del-skjerm-modal/DelSkjermModal';
 
 interface Props {
     className: string;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 interface State {
+    visModal: boolean;
     hasMounted: boolean;
     erNavDekoratoren: boolean;
     languages: LanguageSelectors[];
@@ -48,11 +50,15 @@ class FooterLenkeMeny extends React.Component<Props, State> {
         super(props);
 
         this.state = {
+            visModal: false,
             hasMounted: false,
             erNavDekoratoren: false,
             languages: [this.lang[1], this.lang[2]],
         };
     }
+
+    openModal = () => this.setState({ visModal: true });
+    closeModal = () => this.setState({ visModal: false });
 
     componentDidMount(): void {
         this.setState(
@@ -114,9 +120,15 @@ class FooterLenkeMeny extends React.Component<Props, State> {
                                 );
                             })}
                             <li>
-                                <Lenke href="#">
+                                <Lenke href="#" onClick={this.openModal}>
                                     Del skjerm med kontaktsenteret
                                 </Lenke>
+                                {this.state.visModal && (
+                                    <DelSkjermModal
+                                        isOpen={this.state.visModal}
+                                        onClose={this.closeModal}
+                                    />
+                                )}
                             </li>
                         </ul>
                     </section>
