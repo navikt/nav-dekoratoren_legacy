@@ -27,7 +27,7 @@ spec:
         - name: URL_API_MENY
           value: https://www.nav.no/navno/_/service/no.nav.navno/menu
         - name: URL_API_SOK
-          value: https://www.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2
+          value: https://www.nav.no/navno/_/service/navno.nav.no.search/search2
         - name: URL_APP_BASE
           value: https://www.nav.no/person/nav-dekoratoren
         - name: baseUrl

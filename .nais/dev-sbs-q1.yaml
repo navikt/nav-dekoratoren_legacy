@@ -33,7 +33,7 @@ spec:
         - name: baseUrl
           value: https://www-q1.nav.no
         - name: baseUrlEnonic
-          value: https://www-x1.nav.no
+          value: https://www-q1.nav.no
         - name: innloggingslinjenUrl
           value: https://www-q1.nav.no/innloggingslinje-api/auth
         - name: menypunkter
