@@ -23,7 +23,7 @@ export default () => {
     fetchMock.get(Environment.innloggingslinjenUrl, innloggingsstatusResponse);
 
     fetchMock.get(
-        `${Environment.innloggingslinjenUrl}/varsler(.*)`,
+        `${Environment.varselinnboksUrl}/varsler(.*)`,
         varselinnboksResponse
     );
 
