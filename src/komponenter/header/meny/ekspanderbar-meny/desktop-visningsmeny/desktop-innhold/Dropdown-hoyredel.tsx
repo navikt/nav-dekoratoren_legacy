@@ -19,12 +19,10 @@ const DropdownHoyredel = (props: Props) => {
 
     return (
         <div className={cls.element('minSideSeksjon')}>
-            <>
-                <Element>
-                    <Tekst id="min-side" />
-                </Element>
-                <MinsideLenker minsideMeny={minsideMeny} tabindex={tabindex} />
-            </>
+            <Element>
+                <Tekst id="min-side" />
+            </Element>
+            <MinsideLenker minsideMeny={minsideMeny} tabindex={tabindex} />
         </div>
     );
 };

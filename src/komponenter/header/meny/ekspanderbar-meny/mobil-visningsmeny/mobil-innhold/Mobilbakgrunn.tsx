@@ -1,6 +1,4 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
-import { tabletview } from '../../../../../../styling-mediaquery';
 import BEMHelper from '../../../../../../utils/bem';
 
 const Mobilbakgrunn = ({
@@ -12,7 +10,7 @@ const Mobilbakgrunn = ({
 }) => {
     const cls = BEMHelper('mobilmeny');
     return (
-        <MediaQuery maxWidth={tabletview - 1}>
+        <div className="media-mobil-tablet">
             <div
                 className={cls.element(
                     'mobilbakgrunn',
@@ -20,7 +18,7 @@ const Mobilbakgrunn = ({
                 )}
                 onClick={() => toggleWindow()}
             />
-        </MediaQuery>
+        </div>
     );
 };
 

@@ -17,6 +17,12 @@
                 svg.modal-logo-svg {
                     width: 73px;
                     height: 46px;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+                &:focus {
+                    outline: 2px solid @fokusFarge;
                 }
             }
         }
@@ -35,7 +41,7 @@
         cursor: pointer;
         display: inline-block;
         margin: 0 1rem;
-        background-color: #cce1f3;
+        background-color: @navBlaLighten80;
 
         &:after {
             left: 50%;
@@ -43,7 +49,7 @@
             margin-left: -11px;
             width: 22px;
             height: 2px;
-            background-color: #1271c9;
+            background-color: @navBla;
             content: '';
             position: absolute;
             transform: rotate(-45deg);
@@ -55,14 +61,14 @@
             margin-left: -11px;
             width: 22px;
             height: 2px;
-            background-color: #1271c9;
+            background-color: @navBla;
             content: '';
             position: absolute;
             transform: rotate(45deg);
         }
 
         &:focus {
-            outline: 2px solid @navDypBla;
+            outline: 2px solid @fokusFarge;
         }
 
         &:hover {

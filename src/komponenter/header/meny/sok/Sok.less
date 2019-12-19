@@ -154,6 +154,11 @@
                     box-sizing: border-box;
                     line-height: 1.37rem;
 
+                    &:focus,
+                    &:active {
+                        border: initial;
+                    }
+
                     &::-webkit-input-placeholder,
                     &::-moz-placeholder,
                     &:-ms-input-placeholder,
@@ -176,6 +181,16 @@
                 background-color: white;
                 top: 0.325rem;
                 right: 0.25rem;
+
+                &:focus {
+                    outline: 3px solid @fokusFarge;
+                }
+
+                svg {
+                    &:focus {
+                        outline: 0;
+                    }
+                }
             }
 
             .sokeresultat-liste {
@@ -238,6 +253,11 @@
 
                 &.engelsk {
                     width: 18.2rem;
+                }
+
+                input[placeholder] {
+                    font-size: 1rem;
+                    line-height: 1.425rem;
                 }
             }
         }

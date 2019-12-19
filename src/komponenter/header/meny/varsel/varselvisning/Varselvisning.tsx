@@ -1,13 +1,13 @@
 import React from 'react';
-import { AppState } from '../../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import parse from 'html-react-parser';
+import { AppState } from '../../../../../reducer/reducer';
+import { varselinnboksUrl } from '../../../../../api/api';
+import { desktopview, tabletview } from '../../../../../styling-mediaquery';
 import './Varselvisning.less';
-import Environment from '../../../../../Environment';
 
 interface OwnProps {
-    className?: string;
-    tabIndex?: boolean;
+    tabIndex: boolean;
     togglevarselmeny?: () => void;
 }
 
@@ -19,6 +19,7 @@ interface StateProps {
 
 interface State {
     parsedVarsler: any;
+    windowSize: number;
 }
 
 type Props = OwnProps & StateProps;
@@ -29,20 +30,33 @@ class Varselvisning extends React.Component<Props, State> {
 
         this.state = {
             parsedVarsler: parse(this.props.varsler),
+            windowSize: window.innerWidth,
         };
+        this.handleWindowSize = this.handleWindowSize.bind(this);
+    }
+
+    handleWindowSize() {
+        this.setState({
+            windowSize: window.innerWidth,
+        });
     }
 
     setTabIndex = () => {
-        const datapointer = document.getElementById('enonic-message');
-        if (datapointer) {
+        const varslerWrapperElement: string = this.erTabletEllerDesktop()
+            ? '.desktopmeny .nav-varsler'
+            : '.mobilmeny .nav-varsler';
+
+        const varsler = document.querySelector(varslerWrapperElement);
+
+        if (varsler) {
             for (
                 let i = 0;
-                i <= datapointer.getElementsByTagName('a').length;
+                i <= varsler.getElementsByTagName('a').length;
                 i++
             ) {
-                if (datapointer.getElementsByTagName('a')[i]) {
-                    datapointer.getElementsByTagName('a')[i].tabIndex = this
-                        .props.tabIndex
+                if (varsler.getElementsByTagName('a')[i]) {
+                    varsler.getElementsByTagName('a')[i].tabIndex = this.props
+                        .tabIndex
                         ? 0
                         : -1;
                 }
@@ -50,48 +64,48 @@ class Varselvisning extends React.Component<Props, State> {
         }
     };
 
-    componentDidUpdate(prevProps: Readonly<Props>): void {
-        if (this.props.tabIndex && !prevProps.tabIndex) {
-            if (this.props.togglevarselmeny) {
-                this.setTabIndex();
-                this.props.togglevarselmeny();
-            }
-        }
-
-        if (
-            !this.props.tabIndex &&
-            prevProps.tabIndex &&
-            !this.props.tabIndex
-        ) {
-            if (this.props.togglevarselmeny) {
-                this.setTabIndex();
-            }
-        }
-    }
-
     componentDidMount(): void {
+        window.addEventListener('resize', this.handleWindowSize);
         this.setTabIndex();
     }
 
+    componentDidUpdate(prevProps: Readonly<Props>): void {
+        if (this.props.togglevarselmeny) {
+            this.setTabIndex();
+            if (this.props.tabIndex && !prevProps.tabIndex) {
+                this.props.togglevarselmeny();
+            }
+        }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleWindowSize);
+    }
+
+    erTabletEllerDesktop = () => {
+        return this.state.windowSize > tabletview - 1;
+    };
+
+    erDesktop = () => {
+        return this.state.windowSize > desktopview - 1;
+    };
+
     render() {
-        const { className } = this.props;
+        const { tabIndex, antallUlesteVarsler, antallVarsler } = this.props;
+        const klassenavn = this.erDesktop()
+            ? 'varsler-display-desktop'
+            : 'varsler-display-mobil-tablet';
+
         return (
-            <div
-                id="varsler-display"
-                className={className ? className : 'varsler-display'}
-            >
-                <div className="enonic-message-wrapper" id="enonic-message">
-                    {this.state.parsedVarsler}
-                </div>
-                {this.props.antallVarsler > 5 && (
+            <div className={klassenavn}>
+                {this.state.parsedVarsler}
+
+                {antallVarsler > 5 && (
                     <div className="vis-alle-lenke skillelinje-topp">
-                        <a
-                            href={Environment.varselinnboksUrl}
-                            tabIndex={this.props.tabIndex ? 0 : -1}
-                        >
+                        <a href={varselinnboksUrl} tabIndex={tabIndex ? 0 : -1}>
                             Vis alle dine varsler
-                            {this.props.antallUlesteVarsler > 0
-                                ? ` (${this.props.antallUlesteVarsler} nye)`
+                            {antallUlesteVarsler > 0
+                                ? ` (${antallUlesteVarsler} nye)`
                                 : ''}
                         </a>
                     </div>

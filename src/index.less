@@ -5,17 +5,18 @@ body {
     overflow-y: scroll;
 }
 
-.hodefot .innhold-container {
-    width: 100%;
-}
-
 .siteheader,
 .sitefooter {
+    width: 100%;
     font-family: 'Source Sans Pro', Arial, sans-serif;
 
     ul {
         list-style: none;
     }
+}
+
+.siteheader {
+    background-color: white;
 }
 
 .sitefooter ul,
@@ -24,8 +25,37 @@ body {
     padding: 0;
 }
 
+.media-sm-mobil {
+    display: initial !important;
+}
+
+.media-md-tablet,
+.media-lg-desktop {
+    display: none !important;
+}
+
+@media (min-width: @tabletLimitWidth) {
+    .media-sm-mobil {
+        display: none !important;
+    }
+
+    .media-md-tablet {
+        display: initial !important;
+    }
+}
+
+@media (max-width: 1023px) {
+    .media-mobil-tablet {
+        display: initial !important;
+    }
+}
+
 @media (min-width: @desktopLimitWidth) {
-    .hodefot .innhold-container {
-        width: auto;
+    .media-mobil-tablet {
+        display: none !important;
+    }
+
+    .media-lg-desktop {
+        display: initial !important;
     }
 }

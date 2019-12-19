@@ -1,7 +1,5 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
 import BEMHelper from '../../../utils/bem';
-import { tabletview } from '../../../styling-mediaquery';
 import { Language } from '../../../reducer/language-duck';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
@@ -37,7 +35,7 @@ const Desktopmeny = ({ language }: Props) => {
                     <Sok />
                     <InnloggingsstatusProvider>
                         <>
-                            <MediaQuery minWidth={tabletview - 1}>
+                            <div className="media-lg-desktop minsidelenke-varselbjelle">
                                 <MinsideLenke tabindex={true} />
                                 <VarselinnboksProvider>
                                     <Varselbjelle tabindex={true}>
@@ -50,7 +48,7 @@ const Desktopmeny = ({ language }: Props) => {
                                         }
                                     </Varselbjelle>
                                 </VarselinnboksProvider>
-                            </MediaQuery>
+                            </div>
                             <LoggInnKnapp />
                         </>
                     </InnloggingsstatusProvider>
