@@ -28,7 +28,7 @@ export default () => {
     );
 
     fetchMock.post(
-        `${Environment.innloggingslinjenUrl}/rest/varsel/erles/33475442`,
+        `${Environment.varselinnboksUrl}/rest/varsel/erles/33475442`,
         ({ body }) => body
     );
 };
