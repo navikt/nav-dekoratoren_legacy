@@ -136,7 +136,7 @@ workflows:
                   requires:
                       - build-app
 
-            - build-docker-q6:
+            - build-docker:
                   name: build-docker-q6
                   requires:
                       - bekreft-deploy-til-q6
@@ -145,7 +145,7 @@ workflows:
                 requires:
                   - build-docker-q6
 
-            - build-docker-q0-q1:
+            - build-docker:
                 name: build-docker-q0-q1
                 requires:
                   - build-app
