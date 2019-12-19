@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import BEMHelper from '../../../utils/bem';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import DropdownMeny from './ekspanderbar-meny/Ekspanderbarmeny';
+import Ekspanderbarmeny from './ekspanderbar-meny/Ekspanderbarmeny';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import SokModal from './sok/sok-innhold/sok-modal/Sokmodal';
 import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
@@ -29,7 +29,7 @@ const Mobilmeny = () => {
                         />
                     </div>
                     <div className={mobilClass.element('hoyre-kolonne')}>
-                        <DropdownMeny />
+                        <Ekspanderbarmeny />
                         <SokModalToggleknapp
                             className={mobilClass.element('sok')}
                             modalIsOpen={toggleModal}

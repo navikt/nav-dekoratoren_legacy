@@ -27,7 +27,8 @@ const Environments = () => {
             logoutUrl: '#',
             menypunkter:
                 'http://localhost:8088/person/nav-dekoratoren/api/get/menyvalg',
-            minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/',
+            minsideArbeidsgiverUrl:
+                'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/',
             sokeresultat:
                 'http://localhost:8088/person/nav-dekoratoren/api/get/sokeresultat',
         };
@@ -40,9 +41,12 @@ const Environments = () => {
             innloggingslinjenUrl: 'https://www-q1.nav.no',
             loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
-            menypunkter: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
-            minsideArbeidsgiverUrl: 'https://arbeidsgiver-q1.nav.no/min-side-arbeidsgiver/',
-            sokeresultat: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
+            menypunkter:
+                'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
+            minsideArbeidsgiverUrl:
+                'https://arbeidsgiver-q1.nav.no/min-side-arbeidsgiver/',
+            sokeresultat:
+                'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
         };
     }
     if (checkWindowObjIncludes('-q6.nav.no')) {
@@ -53,9 +57,12 @@ const Environments = () => {
             innloggingslinjenUrl: 'https://tjenester-q6.nav.no',
             loginUrl: 'https://loginservice-q.nav.no',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
-            menypunkter: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
-            minsideArbeidsgiverUrl: 'https://arbeidsgiver-q6.nav.no/min-side-arbeidsgiver/',
-            sokeresultat: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
+            menypunkter:
+                'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
+            minsideArbeidsgiverUrl:
+                'https://arbeidsgiver-q6.nav.no/min-side-arbeidsgiver/',
+            sokeresultat:
+                'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
         };
     }
     if (checkWindowObjIncludes('-q0.nav.no') || checkWindowObjIncludes('-t')) {
@@ -68,8 +75,10 @@ const Environments = () => {
             logoutUrl: 'https://loginservice-q.nav.no/slo',
             menypunkter:
                 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
-            minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/',
-            sokeresultat: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
+            minsideArbeidsgiverUrl:
+                'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/',
+            sokeresultat:
+                'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
         };
     }
     if (checkWindowObjIncludes('-q.nav.no')) {
@@ -82,8 +91,10 @@ const Environments = () => {
             logoutUrl: 'https://loginservice-q.nav.no/slo',
             menypunkter:
                 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/menyvalg',
-            minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/',
-            sokeresultat: 'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
+            minsideArbeidsgiverUrl:
+                'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/',
+            sokeresultat:
+                'https://www-q0.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
         };
     }
     return {
@@ -93,9 +104,12 @@ const Environments = () => {
         innloggingslinjenUrl: 'https://www.nav.no',
         loginUrl: 'https://loginservice.nav.no',
         logoutUrl: 'https://loginservice.nav.no/slo',
-        menypunkter: 'https://www.nav.no/person/nav-dekoratoren/api/get/menyvalg',
-        minsideArbeidsgiverUrl: 'https://arbeidsgiver.nav.no/min-side-arbeidsgiver/',
-        sokeresultat: 'https://www.nav.no/person/nav-dekoratoren/api/get/sokeresultat'
+        menypunkter:
+            'https://www.nav.no/person/nav-dekoratoren/api/get/menyvalg',
+        minsideArbeidsgiverUrl:
+            'https://arbeidsgiver.nav.no/min-side-arbeidsgiver/',
+        sokeresultat:
+            'https://www.nav.no/person/nav-dekoratoren/api/get/sokeresultat',
     };
 };
 

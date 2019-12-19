@@ -2,20 +2,21 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'isomorphic-fetch';
-import NodeCache from 'node-cache';
-import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import backupData from './menu/menu.json';
-import requestNode from 'request';
-const sokeresultatMockData = require('./sokeresultat-mockdata.json');
 import { Provider as ReduxProvider } from 'react-redux';
-import Footer from '../komponenter/footer/Footer';
+import requestNode from 'request';
+import NodeCache from 'node-cache';
+import express from 'express';
 import getStore from './../redux/store';
+import Skiplinks from '../komponenter/header/skiplinks/Skiplinks';
 import Head from '../Head';
+import Footer from '../komponenter/footer/Footer';
+import backupData from './menu/menu.json';
+const sokeresultatMockData = require('./sokeresultat-mockdata.json');
+
 const app = express();
 const PORT = 8088;
-
 const favicon = require('../../public/favicon.ico');
 
 const envSok = process.env.SOKERESULTAT
@@ -113,6 +114,7 @@ app.get(
         <div id="scripts">
             <script type="text/javascript" src=${script}></script>
         </div>
+        <div id="skiplinks"></div>
         <div id="megamenu-resources"></div>
         <div id="webstats-ga-notrack"></div>
     </body>

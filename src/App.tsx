@@ -5,6 +5,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { verifyWindowObj } from './utils/environments';
 import setupMock from './mocks/setup-mock';
 import LanguageProvider from './provider/Language-provider';
+import Skiplinks from './komponenter/header/skiplinks/Skiplinks';
 import Header from './komponenter/header/Header';
 import Footer from './komponenter/footer/Footer';
 

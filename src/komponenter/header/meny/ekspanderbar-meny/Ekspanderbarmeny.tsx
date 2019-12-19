@@ -1,10 +1,9 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import BEMHelper from '../../../../utils/bem';
 import { verifyWindowObj } from '../../../../utils/environments';
-import { tabletview } from '../../../../styling-mediaquery';
+import { desktopview } from '../../../../styling-mediaquery';
 import { Status } from '../../../../api/api';
 import { MenuValue, selectMenu } from '../../../../utils/meny-storage-utils';
 import {
@@ -13,11 +12,10 @@ import {
     MenyPunkter,
 } from '../../../../reducer/menu-duck';
 import { Language } from '../../../../reducer/language-duck';
-import Menyknapp from '../meny-knapp/Menyknapp';
+import Menyknapp from './meny-knapp/Menyknapp';
 import Mobilbakgrunn from './mobil-visningsmeny/mobil-innhold/Mobilbakgrunn';
 import MobilVisningsmeny from './mobil-visningsmeny/MobilVisningsmeny';
 import DesktopVisningsmeny from './desktop-visningsmeny/DesktopVisningsmeny';
-import './Ekspanderbarmeny.less';
 
 interface StateProps {
     meny: MenyPunkter;
@@ -53,7 +51,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
     };
 
     setVisningsmenyClassname = (): string => {
-        return verifyWindowObj() && window.innerWidth > tabletview - 1
+        return verifyWindowObj() && window.innerWidth > desktopview - 1
             ? 'meny'
             : 'mobilmeny';
     };
@@ -84,7 +82,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                 <Menyknapp
                     ToggleMenu={this.menutoggle}
                     clicked={this.state.clicked}
-                    lang={this.props.language}
+                    lang={language}
                 />
                 <div id="dropdown-menu" className={cls.element('meny-wrapper')}>
                     {meny.status === Status.OK ? (
@@ -95,25 +93,8 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                                     this.state.clicked ? 'aktive' : ''
                                 )}
                             >
-                                <MediaQuery minWidth={tabletview}>
-                                    <DesktopVisningsmeny
-                                        classname={this.state.vismenyClassname}
-                                        tabindex={this.state.clicked}
-                                        fellesmeny={selectMenu(
-                                            meny.data,
-                                            language,
-                                            arbeidsflate
-                                        )}
-                                        minsideMeny={Ekspanderbarmeny.minside(
-                                            meny.data[0].children,
-                                            3
-                                        )}
-                                        lang={this.props.language}
-                                        arbeidsflate={arbeidsflate}
-                                    />
-                                </MediaQuery>
-                                <MediaQuery maxWidth={tabletview - 1}>
-                                    {this.props.language !== Language.SAMISK ? (
+                                <div className="media-mobil-tablet menyvisning-mobil-tablet">
+                                    {language !== Language.SAMISK ? (
                                         <MobilVisningsmeny
                                             classname={
                                                 this.state.vismenyClassname
@@ -126,12 +107,27 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                                             menuIsOpen={this.state.clicked}
                                             togglemenu={this.menutoggle}
                                             arbeidsflate={arbeidsflate}
-                                            lang={this.props.language}
+                                            lang={language}
                                         />
-                                    ) : (
-                                        <div />
-                                    )}
-                                </MediaQuery>
+                                    ) : null}
+                                </div>
+                                <div className="media-lg-desktop menyvisning-desktop">
+                                    <DesktopVisningsmeny
+                                        classname={this.state.vismenyClassname}
+                                        tabindex={this.state.clicked}
+                                        fellesmeny={selectMenu(
+                                            meny.data,
+                                            language,
+                                            arbeidsflate
+                                        )}
+                                        minsideMeny={Ekspanderbarmeny.minside(
+                                            meny.data[0].children,
+                                            3
+                                        )}
+                                        lang={language}
+                                        arbeidsflate={arbeidsflate}
+                                    />
+                                </div>
                             </div>
                             <Mobilbakgrunn
                                 toggleWindow={this.menutoggle}

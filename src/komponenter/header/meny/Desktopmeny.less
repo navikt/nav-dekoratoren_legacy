@@ -24,26 +24,18 @@
         width: auto;
 
         &:focus {
-            outline: 3px solid @navDypBla;
+            outline: 3px solid @fokusFarge;
+        }
+        svg {
+            &:focus {
+                outline: 0;
+            }
         }
     }
 
-    .minside-lenke {
-        order: 4;
-    }
-
-    .varselbjelle {
-        order: 3;
+    .dropdown__menyknapp {
+        order: 2;
         width: auto;
-        max-height: @maxheight-menuitem;
-        display: flex;
-        align-items: center;
-    }
-
-    .login-container {
-        order: 3;
-        width: auto;
-        max-height: @maxheight-menuitem;
     }
 
     .sok {
@@ -52,21 +44,19 @@
         max-height: @maxheight-menuitem;
     }
 
-    .meny {
-        &__menyknapp,
-        &--alternativ-samisk {
-            order: 2;
-            width: auto;
-        }
+    .minsidelenke-varselbjelle {
+        display: none;
+    }
 
-        &--alternativ-samisk {
-            color: @navBla;
-        }
+    .login-container {
+        order: 3;
+        width: auto;
+        max-height: @maxheight-menuitem;
+    }
 
-        &__meny-wrapper {
-            order: 4;
-            width: 100%;
-        }
+    .meny__meny-wrapper {
+        order: 4;
+        width: 100%;
     }
 
     @media (min-width: @desktopLimitWidth) {
@@ -78,13 +68,20 @@
             width: @desktopLimitWidth;
         }
 
-        .minside-lenke {
+        .minsidelenke-varselbjelle {
             order: 3;
-            width: 102px;
-            max-height: @maxheight-menuitem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            .minside-lenke {
+                width: 6.375rem;
+                max-height: @maxheight-menuitem;
+                display: inline-block;
+            }
+
+            .varselbjelle {
+                margin-left: 1rem;
+                width: auto;
+                max-height: @maxheight-menuitem;
+                display: inline-block;
+            }
         }
     }
 }

@@ -1,4 +1,23 @@
+@import '../../../../../styling-variabler.less';
+
 .meny {
+    &__meny-innhold {
+        max-width: @desktopLimitWidth;
+        overflow: hidden;
+        margin-bottom: 0;
+        max-height: 0;
+        transition: all 0.7s ease-in-out;
+
+        &--aktive {
+            margin-bottom: 2rem;
+            max-height: 40rem;
+        }
+    }
+
+    &__seksjoner {
+        display: flex;
+    }
+
     &__hovedSeksjon {
         flex-grow: 6;
         justify-content: center;

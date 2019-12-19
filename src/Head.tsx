@@ -1,8 +1,8 @@
 import React from 'react';
+import * as es6promise from 'es6-promise';
 import { verifyWindowObj } from './utils/environments';
 import LanguageProvider from './provider/Language-provider';
 import setupMock from './mocks/setup-mock';
-import * as es6promise from 'es6-promise';
 import Header from './komponenter/header/Header';
 
 if (verifyWindowObj()) {

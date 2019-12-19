@@ -7,6 +7,7 @@ import TagManager from 'react-gtm-module';
 import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
 import { verifyWindowObj } from './utils/environments';
+import Skiplinks from './komponenter/header/skiplinks/Skiplinks';
 import Head from './Head';
 import Footer from './komponenter/footer/Footer';
 import './index.less';

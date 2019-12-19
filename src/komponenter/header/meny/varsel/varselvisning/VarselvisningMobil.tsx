@@ -38,7 +38,6 @@ class VarselvisningMobil extends React.Component<OwnProps> {
 
         return (
             <section
-                id="varsler-display"
                 className={cls.element(
                     'varsel-innhold',
                     this.props.visvarsel ? 'active' : ''
@@ -54,7 +53,6 @@ class VarselvisningMobil extends React.Component<OwnProps> {
                     tabindex={this.props.tabindex}
                 />
                 <VarselVisning
-                    className="vis-alle-lenke"
                     tabIndex={this.props.tabindex}
                     togglevarselmeny={this.props.togglevarselmeny}
                 />

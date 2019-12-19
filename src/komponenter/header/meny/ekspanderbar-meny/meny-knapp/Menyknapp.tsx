@@ -1,12 +1,10 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
-import { mobileview } from '../../../../styling-mediaquery';
 import { Undertittel } from 'nav-frontend-typografi';
-import BEMHelper from '../../../../utils/bem';
-import { Language } from '../../../../reducer/language-duck';
-import Tekst from '../../../../tekster/finn-tekst';
-import HamburgerIkon from '../../../../ikoner/meny/HamburgerIkon';
-import MenyIkon from '../../../../ikoner/mobilmeny/MenyIkon';
+import BEMHelper from '../../../../../utils/bem';
+import { Language } from '../../../../../reducer/language-duck';
+import Tekst from '../../../../../tekster/finn-tekst';
+import HamburgerIkon from '../../../../../ikoner/meny/HamburgerIkon';
+import MenyIkon from '../../../../../ikoner/mobilmeny/MenyIkon';
 import './Menyknapp.less';
 
 interface Props {
@@ -29,12 +27,12 @@ const Menyknapp = (props: Props) => {
                     aria-expanded={props.clicked}
                 >
                     <div className={cls.element('menyknapp', 'innhold')}>
-                        <MediaQuery minWidth={mobileview}>
-                            <HamburgerIkon ikonClass="hamburger-ikon" />
-                        </MediaQuery>
-                        <MediaQuery maxWidth={mobileview - 1}>
+                        <div className="media-sm-mobil menyknapp-mobil">
                             <MenyIkon />
-                        </MediaQuery>
+                        </div>
+                        <div className="media-md-tablet menyknapp-tablet-desktop">
+                            <HamburgerIkon ikonClass="hamburger-ikon" />
+                        </div>
                         <Undertittel>
                             <Tekst id="meny-knapp" />
                         </Undertittel>
