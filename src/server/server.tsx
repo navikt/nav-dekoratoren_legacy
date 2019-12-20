@@ -28,6 +28,7 @@ const defaultAppUrl = `http://localhost:8088` + basePath;
 // Mock
 import mockMenu from './mock/menu.json';
 import mockSok from './mock/sokeresultat.json';
+import { localEnv } from '../utils/Environment';
 
 // Cache setup
 const mainCacheKey = 'navno-menu';
@@ -35,19 +36,23 @@ const backupCacheKey = 'navno-menu-backup';
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
+console.log(isProduction);
+
 // Client environment
 // Obs! Don't expose secrets
-const clientEnv = {
-    baseUrl: process.env.baseUrl,
-    baseUrlEnonic: process.env.baseUrlEnonic,
-    innloggingslinjenUrl: process.env.innloggingslinjenUrl,
-    menypunkter: process.env.menypunkter,
-    sokeresultat: process.env.sokeresultat,
-    minsideArbeidsgiverUrl: process.env.minsideArbeidsgiverUrl,
-    varselinnboksUrl: process.env.varselinnboksUrl,
-    loginUrl: process.env.loginUrl,
-    logoutUrl: process.env.logoutUrl,
-};
+const clientEnv = isProduction
+    ? {
+          baseUrl: process.env.baseUrl,
+          baseUrlEnonic: process.env.baseUrlEnonic,
+          innloggingslinjenUrl: process.env.innloggingslinjenUrl,
+          menypunkter: process.env.menypunkter,
+          sokeresultat: process.env.sokeresultat,
+          minsideArbeidsgiverUrl: process.env.minsideArbeidsgiverUrl,
+          varselinnboksUrl: process.env.varselinnboksUrl,
+          loginUrl: process.env.loginUrl,
+          logoutUrl: process.env.logoutUrl,
+      }
+    : localEnv;
 
 FS.writeFile(`${buildPath}/env.json`, JSON.stringify(clientEnv), err =>
     console.error(err)
