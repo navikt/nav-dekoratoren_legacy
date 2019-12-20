@@ -27,8 +27,8 @@ services:
     depends_on:
       - oidc-provider
     environment:
-      REACT_APP_REDIRECT_URL: "http://localhost:8100/person/nav-dekoratoren/?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true&skiplinks=true&megamenu-resources=true"
-      REACT_APP_AUTO_REDIRECT_TO_FRONTEND: "true"
+      REDIRECT_URL: "http://localhost:8100/person/nav-dekoratoren/?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true&skiplinks=true&megamenu-resources=true"
+      AUTO_REDIRECT_TO_FRONTEND: "true"
 
   mocks:
     container_name: mocks
