@@ -1,32 +1,21 @@
 import React from 'react';
-import * as es6promise from 'es6-promise';
-import { verifyWindowObj } from './utils/environments';
+import Environment, { erDev, localEnv } from './utils/Environment';
+import { verifyWindowObj } from './utils/Environment';
 import LanguageProvider from './provider/Language-provider';
 import setupMock from './mocks/setup-mock';
+import * as es6promise from 'es6-promise';
 import Header from './komponenter/header/Header';
 
 if (verifyWindowObj()) {
     es6promise.polyfill();
 }
 
-function echoDevMode() {
+if (erDev) {
     console.log('==========================');
     console.log('======= DEVELOPMENT ======');
     console.log('==========================');
-}
-
-if (process.env.NODE_ENV === 'development') {
-    if (verifyWindowObj()) {
-        echoDevMode();
-        setupMock();
-    }
-}
-
-if (verifyWindowObj()) {
-    if (window.location.origin.toLowerCase().includes('localhost')) {
-        echoDevMode();
-        setupMock();
-    }
+    Environment.settEnv(localEnv);
+    setupMock();
 }
 
 function Head() {

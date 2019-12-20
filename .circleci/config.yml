@@ -105,7 +105,7 @@ commands:
                       deployment-cli deploy create \
                           --team=personbruker \
                           --cluster=<< parameters.cluster >> \
-                          --resource=.nais/<< parameters.cluster >>-<< parameters.namespace >>.yaml \
+                          --resource=.nais/<< parameters.cluster >>/<< parameters.namespace >>.yaml \
                           --repository=$CIRCLE_PROJECT_USERNAME/$REPO_NAME \
                           --var namespace=<< parameters.namespace >> \
                           --var reponame=$REPO_NAME \
