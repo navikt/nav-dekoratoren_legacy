@@ -135,14 +135,14 @@ workflows:
                   type: approval
                   requires:
                       - build-app
+                  filters:
+                      branches:
+                          ignore: master
 
             - build-docker:
                   name: build-docker-q6
                   requires:
-                      - bekreft-deploy-til-q6
-                  filters:
-                      branches:
-                          ignore: master
+                      - bekreft-deploy-til-q
 
             - deploy-til-q6:
                   requires:
