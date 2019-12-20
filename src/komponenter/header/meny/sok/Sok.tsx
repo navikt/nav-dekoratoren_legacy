@@ -18,7 +18,7 @@ import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
 import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
 import Mobilsokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Mobilsokknapp';
 import './Sok.less';
-import Environment from '../../../../Environment';
+import Environment from '../../../../utils/Environment';
 
 interface StateProps {
     language: Language;

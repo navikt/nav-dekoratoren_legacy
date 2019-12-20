@@ -1,6 +1,6 @@
 // tslint:disable-line:no-any
 import React from 'react';
-import Environment from '../Environment';
+import Environment from '../utils/Environment';
 import { fetchToJson } from './api-utils';
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';

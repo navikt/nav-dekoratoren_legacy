@@ -1,7 +1,7 @@
 import innloggingsstatusResponse from './innloggingsstatus-mock';
 import varselinnboksResponse from './varselinnboks-mock';
 import FetchMock, { Middleware, MiddlewareUtils } from 'yet-another-fetch-mock';
-import Environment from '../Environment';
+import Environment from '../utils/Environment';
 
 export default () => {
     const loggingMiddleware: Middleware = (request, response) => {

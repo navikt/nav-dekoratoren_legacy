@@ -2,12 +2,12 @@ import React from 'react';
 import 'whatwg-fetch';
 import getStore from './redux/store';
 import { Provider as ReduxProvider } from 'react-redux';
-import { verifyWindowObj } from './Environment';
+import { verifyWindowObj } from './utils/Environment';
 import setupMock from './mocks/setup-mock';
 import LanguageProvider from './provider/Language-provider';
 import Header from './komponenter/header/Header';
 import Footer from './komponenter/footer/Footer';
-import Environment from './Environment';
+import Environment from './utils/Environment';
 
 const store = getStore();
 

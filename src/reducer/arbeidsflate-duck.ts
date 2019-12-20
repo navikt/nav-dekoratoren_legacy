@@ -10,7 +10,7 @@ import {
     SettPrivatpersonAction,
     SettSamarbeidspartnerAction,
 } from '../redux/actions';
-import { verifyWindowObj } from '../Environment';
+import { verifyWindowObj } from '../utils/Environment';
 
 export interface Arbeidsflate {
     status: MenuValue;

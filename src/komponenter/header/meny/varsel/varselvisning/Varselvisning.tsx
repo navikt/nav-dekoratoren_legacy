@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import parse from 'html-react-parser';
 import { AppState } from '../../../../../reducer/reducer';
 import { desktopview, tabletview } from '../../../../../styling-mediaquery';
-import Environment from '../../../../../Environment';
+import Environment from '../../../../../utils/Environment';
 import './Varselvisning.less';
 
 interface OwnProps {

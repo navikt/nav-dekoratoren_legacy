@@ -3,7 +3,7 @@ import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import Lenke from 'nav-frontend-lenker';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
-import Environment from '../../../../Environment';
+import Environment from '../../../../utils/Environment';
 import './MinsideLenke.less';
 
 export const dittNavURL = `${Environment.baseUrl}/person/dittnav/`;

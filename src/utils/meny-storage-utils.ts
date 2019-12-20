@@ -1,7 +1,7 @@
 import React from 'react';
 import { MenySeksjon, Meny } from '../reducer/menu-duck';
 import { Language, spraakValgetErNorsk } from '../reducer/language-duck';
-import { verifyWindowObj } from '../Environment';
+import { verifyWindowObj } from './Environment';
 
 export const NAVHEADER = 'NAVHEADER';
 

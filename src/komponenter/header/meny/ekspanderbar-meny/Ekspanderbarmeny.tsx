@@ -2,7 +2,7 @@ import React from 'react';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import BEMHelper from '../../../../utils/bem';
-import { verifyWindowObj } from '../../../../Environment';
+import { verifyWindowObj } from '../../../../utils/Environment';
 import { desktopview } from '../../../../styling-mediaquery';
 import { Status } from '../../../../api/api';
 import { MenuValue, selectMenu } from '../../../../utils/meny-storage-utils';

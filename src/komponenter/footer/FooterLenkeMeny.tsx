@@ -3,7 +3,7 @@ import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
 import NavLogoFooter from '../../ikoner/meny/NavLogoFooter';
-import { erNavDekoratoren } from '../../Environment';
+import { erNavDekoratoren } from '../../utils/Environment';
 
 interface Props {
     className: string;

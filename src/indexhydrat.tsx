@@ -6,10 +6,10 @@ import ReactDOM from 'react-dom';
 import TagManager from 'react-gtm-module';
 import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
-import { verifyWindowObj } from './Environment';
+import { verifyWindowObj } from './utils/Environment';
 import Head from './Head';
 import Footer from './komponenter/footer/Footer';
-import { fetchEnv } from './Environment';
+import { fetchEnv } from './utils/Environment';
 import './index.less';
 
 const tagManagerArgs = {

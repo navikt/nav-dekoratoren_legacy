@@ -1,7 +1,7 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import { MenySeksjon } from '../../../../../../reducer/menu-duck';
-import Environment from '../../../../../../Environment';
+import Environment from '../../../../../../utils/Environment';
 
 interface Props {
     lenke: MenySeksjon;
