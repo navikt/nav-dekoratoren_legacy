@@ -55,9 +55,9 @@ export const erNavDekoratoren = (): boolean => {
 };
 
 export const erDev =
-    process.env.NODE_ENV === 'development' ||
-    (verifyWindowObj() &&
-        window.location.origin.toLowerCase().includes('localhost'));
+    verifyWindowObj() &&
+    process.env.NODE_ENV === 'development' &&
+    window.location.origin.toLowerCase().includes('localhost');
 
 export const localEnv = {
     baseUrl: 'http://localhost:3000',
