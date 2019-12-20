@@ -155,7 +155,7 @@ const fetchmenuOptions = (res: any) => {
     request(
         { method: 'GET', uri: process.env.URL_API_MENY || defaultMenuUrl },
         (error, response, body) => {
-            if (!error && response.statusCode === 200 && body.length > 1) {
+            if (!error && response.statusCode === 200 && body.length > 2) {
                 mainCache.set(mainCacheKey, body, 100);
                 backupCache.set(backupCacheKey, body, 0);
                 res.send(body);
