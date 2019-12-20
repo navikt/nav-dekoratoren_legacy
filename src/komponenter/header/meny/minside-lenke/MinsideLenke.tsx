@@ -6,8 +6,6 @@ import { MenuValue } from '../../../../utils/meny-storage-utils';
 import Environment from '../../../../utils/Environment';
 import './MinsideLenke.less';
 
-export const dittNavURL = `${Environment.baseUrl}/person/dittnav/`;
-
 interface StateProps {
     erInnlogget: boolean;
     arbeidsflate: MenuValue;
@@ -33,7 +31,7 @@ const MinsideLenke = ({
     const lenkeurl =
         arbeidsflate === MenuValue.IKKEVALGT ||
         arbeidsflate === MenuValue.PRIVATPERSON
-            ? dittNavURL
+            ? Environment.dittNavUrl
             : arbeidsflate === MenuValue.ARBEIDSGIVER
             ? Environment.minsideArbeidsgiverUrl
             : '';

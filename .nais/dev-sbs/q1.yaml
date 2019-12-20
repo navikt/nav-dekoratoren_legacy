@@ -44,6 +44,8 @@ spec:
           value: https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/
         - name: varselinnboksUrl
           value: https://www-q1.nav.no/person/varselinnboks
+        - name: dittNavUrl
+          value: https://www-q1.nav.no/person/dittnav/
         - name: loginUrl
           value: https://loginservice-q.nav.no
         - name: logoutUrl

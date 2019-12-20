@@ -47,6 +47,7 @@ const clientEnv = isProduction
           sokeresultat: process.env.sokeresultat,
           minsideArbeidsgiverUrl: process.env.minsideArbeidsgiverUrl,
           varselinnboksUrl: process.env.varselinnboksUrl,
+          dittNavUrl: process.env.dittNavUrl,
           loginUrl: process.env.loginUrl,
           logoutUrl: process.env.logoutUrl,
       }

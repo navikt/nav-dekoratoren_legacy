@@ -2,23 +2,25 @@ export default class Environment {
     static baseUrl: string;
     static baseUrlEnonic: string;
     static innloggingslinjenUrl: string;
-    static loginUrl: string;
-    static logoutUrl: string;
     static menypunkter: string;
     static minsideArbeidsgiverUrl: string;
     static sokeresultat: string;
     static varselinnboksUrl: string;
+    static dittNavUrl: string;
+    static loginUrl: string;
+    static logoutUrl: string;
 
     static settEnv = (result: any) => {
         Environment.baseUrl = result.baseUrl;
         Environment.baseUrlEnonic = result.baseUrlEnonic;
         Environment.innloggingslinjenUrl = result.innloggingslinjenUrl;
-        Environment.loginUrl = result.loginUrl;
-        Environment.logoutUrl = result.logoutUrl;
         Environment.menypunkter = result.menypunkter;
         Environment.minsideArbeidsgiverUrl = result.minsideArbeidsgiverUrl;
         Environment.sokeresultat = result.sokeresultat;
         Environment.varselinnboksUrl = result.varselinnboksUrl;
+        Environment.dittNavUrl = result.dittNavUrl;
+        Environment.loginUrl = result.loginUrl;
+        Environment.logoutUrl = result.logoutUrl;
     };
 }
 
@@ -67,6 +69,7 @@ export const localEnv = {
     minsideArbeidsgiverUrl: `https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/`,
     sokeresultat: `http://localhost:8088/person/nav-dekoratoren/api/get/sokeresultat`,
     varselinnboksUrl: `http://localhost:8088/person/varselinnboks`,
+    dittNavUrl: `http://localhost:8088/person/dittnav/`,
     loginUrl: '#',
     logoutUrl: '#',
 };
