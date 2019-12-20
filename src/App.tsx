@@ -15,12 +15,8 @@ if (erDev) {
     console.log('==========================');
     console.log('======= DEVELOPMENT ======');
     console.log('==========================');
-
     Environment.settEnv(localEnv);
-
-    if (verifyWindowObj()) {
-        setupMock();
-    }
+    setupMock();
 }
 
 function App() {

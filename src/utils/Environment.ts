@@ -44,9 +44,20 @@ export const fetchEnv = () => {
     });
 };
 
+export const verifyWindowObj = () => {
+    return typeof window !== 'undefined';
+};
+
+export const erNavDekoratoren = (): boolean => {
+    return (
+        verifyWindowObj() && window.location.href.includes('/nav-dekoratoren')
+    );
+};
+
 export const erDev =
     process.env.NODE_ENV === 'development' ||
-    window.location.origin.toLowerCase().includes('localhost');
+    (verifyWindowObj() &&
+        window.location.origin.toLowerCase().includes('localhost'));
 
 export const localEnv = {
     baseUrl: 'http://localhost:3000',
@@ -58,14 +69,4 @@ export const localEnv = {
     varselinnboksUrl: `http://localhost:8088/person/varselinnboks`,
     loginUrl: '#',
     logoutUrl: '#',
-};
-
-export const verifyWindowObj = () => {
-    return typeof window !== 'undefined';
-};
-
-export const erNavDekoratoren = (): boolean => {
-    return (
-        verifyWindowObj() && window.location.href.includes('/nav-dekoratoren')
-    );
 };
