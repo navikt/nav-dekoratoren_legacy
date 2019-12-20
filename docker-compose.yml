@@ -53,6 +53,7 @@ services:
       nav.docker-internal:
         aliases:
           - dekoratoren.nav.docker-internal
+#    image: "navikt/nav-dekoratoren:latest"
     build: .
     ports:
       - "8100:8088"
