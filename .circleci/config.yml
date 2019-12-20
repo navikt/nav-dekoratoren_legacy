@@ -142,7 +142,7 @@ workflows:
             - build-docker:
                   name: build-docker-q6
                   requires:
-                      - bekreft-deploy-til-q
+                      - bekreft-deploy-til-q6
 
             - deploy-til-q6:
                   requires:
