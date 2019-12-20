@@ -1,4 +1,5 @@
 import React from 'react';
+import Environment, { erDev, localEnv } from './utils/Environment';
 import { verifyWindowObj } from './utils/Environment';
 import LanguageProvider from './provider/Language-provider';
 import setupMock from './mocks/setup-mock';
@@ -9,22 +10,14 @@ if (verifyWindowObj()) {
     es6promise.polyfill();
 }
 
-function echoDevMode() {
+if (erDev) {
     console.log('==========================');
     console.log('======= DEVELOPMENT ======');
     console.log('==========================');
-}
 
-if (process.env.NODE_ENV === 'development') {
+    Environment.settEnv(localEnv);
+
     if (verifyWindowObj()) {
-        echoDevMode();
-        setupMock();
-    }
-}
-
-if (verifyWindowObj()) {
-    if (window.location.origin.toLowerCase().includes('localhost')) {
-        echoDevMode();
         setupMock();
     }
 }

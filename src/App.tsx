@@ -2,7 +2,7 @@ import React from 'react';
 import 'whatwg-fetch';
 import getStore from './redux/store';
 import { Provider as ReduxProvider } from 'react-redux';
-import { verifyWindowObj } from './utils/Environment';
+import { erDev, localEnv, verifyWindowObj } from './utils/Environment';
 import setupMock from './mocks/setup-mock';
 import LanguageProvider from './provider/Language-provider';
 import Header from './komponenter/header/Header';
@@ -11,25 +11,12 @@ import Environment from './utils/Environment';
 
 const store = getStore();
 
-if (
-    process.env.NODE_ENV === 'development' ||
-    window.location.origin.toLowerCase().includes('localhost')
-) {
+if (erDev) {
     console.log('==========================');
     console.log('======= DEVELOPMENT ======');
     console.log('==========================');
 
-    Environment.settEnv({
-        baseUrl: 'http://localhost:3000',
-        baseUrlEnonic: 'https://www-x1.nav.no',
-        innloggingslinjenUrl: 'http://localhost:3000/innloggingslinje-api/auth',
-        menypunkter: `http://localhost:8088/person/nav-dekoratoren/api/get/menyvalg`,
-        minsideArbeidsgiverUrl: `https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/`,
-        sokeresultat: `http://localhost:8088/person/nav-dekoratoren/api/get/sokeresultat`,
-        varselinnboksUrl: `http://localhost:8088/person/varselinnboks`,
-        loginUrl: '#',
-        logoutUrl: '#',
-    });
+    Environment.settEnv(localEnv);
 
     if (verifyWindowObj()) {
         setupMock();
