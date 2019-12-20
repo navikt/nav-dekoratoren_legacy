@@ -15,7 +15,7 @@ function sjekkUrl(): Language {
 }
 
 interface OwnProps {
-    children: React.ReactElement<any>; // tslint:disable-line:no-any
+    children: React.ReactElement<any> | React.ReactElement[]; // tslint:disable-line:no-any
 }
 
 interface DispatchProps {
