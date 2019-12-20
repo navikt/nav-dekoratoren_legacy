@@ -50,6 +50,14 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
         this.handleOutsideClick = this.handleOutsideClick.bind(this);
     }
 
+    componentDidMount() {
+        document.addEventListener('click', this.handleOutsideClick, false);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('click', this.handleOutsideClick, false);
+    }
+
     handleClick = () => {
         this.setState({
             clicked: !this.state.clicked,
@@ -66,7 +74,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
         if (node && node.contains(e.target as HTMLElement)) {
             return;
         }
-        this.handleClick();
+        this.setState({ clicked: false });
     };
 
     render() {
@@ -126,7 +134,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
         settVarslerSomLest(nyesteId)(dispatch),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Varselbjelle);
+export default connect(mapStateToProps, mapDispatchToProps)(Varselbjelle);
