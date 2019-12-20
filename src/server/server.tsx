@@ -36,8 +36,6 @@ const backupCacheKey = 'navno-menu-backup';
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
-console.log(isProduction);
-
 // Client environment
 // Obs! Don't expose secrets
 const clientEnv = isProduction
