@@ -2,7 +2,7 @@ import React from 'react';
 import 'whatwg-fetch';
 import getStore from './redux/store';
 import { Provider as ReduxProvider } from 'react-redux';
-import { erDev, localEnv, verifyWindowObj } from './utils/Environment';
+import { erDev, localEnv } from './utils/Environment';
 import setupMock from './mocks/setup-mock';
 import LanguageProvider from './provider/Language-provider';
 import Header from './komponenter/header/Header';
