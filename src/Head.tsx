@@ -15,7 +15,7 @@ if (erDev) {
     console.log('======= DEVELOPMENT ======');
     console.log('==========================');
     Environment.settEnv(localEnv);
-    setupMock();
+    // setupMock();
 }
 
 function Head() {
