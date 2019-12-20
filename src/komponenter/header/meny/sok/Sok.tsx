@@ -26,6 +26,7 @@ interface StateProps {
 
 class Sok extends React.Component<StateProps, InputState> {
     handleChangeThrottled: ReturnType<typeof throttle>;
+    ismounted: boolean = false;
 
     constructor(props: StateProps) {
         super(props);
@@ -39,12 +40,22 @@ class Sok extends React.Component<StateProps, InputState> {
         );
     }
 
+    componentDidMount(): void {
+        this.ismounted = true;
+    }
+
+    componentWillUnmount(): void {
+        this.ismounted = false;
+    }
+
     handleValueChange(input: string) {
         const url = Environment.sokeresultat;
 
-        this.setState({
-            inputString: input,
-        });
+        if (this.ismounted) {
+            this.setState({
+                inputString: input,
+            });
+        }
 
         fetch(`${url}?ord=${input}`)
             .then(response => {
@@ -56,9 +67,11 @@ class Sok extends React.Component<StateProps, InputState> {
             })
             .then(response => response.json())
             .then(json => {
-                this.setState({
-                    items: json.hits,
-                });
+                if (this.ismounted) {
+                    this.setState({
+                        items: json.hits,
+                    });
+                }
             });
     }
 

@@ -4,7 +4,7 @@
     "homepage": "/person/nav-dekoratoren",
     "private": true,
     "scripts": {
-        "start": "cross-env DEVELOPMENT=true npm-run-all -p -r start-craco start-server",
+        "start": "cross-env DEVELOPMENT=true npm-run-all -p -r start-server start-craco",
         "start-craco": "craco start",
         "start-server": "npm-run-all build-ssr-dev start-ssr",
         "start-ssr": "node buildfolder/server.js",
