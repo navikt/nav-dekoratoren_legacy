@@ -169,9 +169,6 @@ workflows:
                   name: build-docker-prod
                   requires:
                       - bekreft-deploy-til-prod
-                  filters:
-                      branches:
-                          only: master
 
             - deploy-til-q0:
                   requires:
