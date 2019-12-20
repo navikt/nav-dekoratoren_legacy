@@ -145,11 +145,12 @@ workflows:
                       - bekreft-deploy-til-q6
 
             - deploy-til-q6:
+                  name: manuell-deploy-til-q6
                   requires:
                       - build-docker-q6
 
             - build-docker:
-                  name: build-docker-q6-q1
+                  name: build-docker-preprod
                   requires:
                       - build-app
                   filters:
@@ -158,11 +159,11 @@ workflows:
 
             - deploy-til-q6:
                   requires:
-                      - build-docker-q6-q1
+                      - build-docker-preprod
 
             - deploy-til-q1:
                   requires:
-                      - build-docker-q6-q1
+                      - build-docker-preprod
 
             - bekreft-deploy-til-prod:
                   type: approval
