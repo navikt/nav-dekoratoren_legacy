@@ -11,6 +11,7 @@
 # production
 /build
 /buildfolder
+/packagebuild
 
 # testing
 /coverage
