@@ -113,6 +113,7 @@ const template = `
                 <div id="decorator-env" data-src="${fileEnv}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
             </div>
+            <div id="skiplinks"></div>
             <div id="megamenu-resources"></div>
             <div id="webstats-ga-notrack"></div>
         </body>
