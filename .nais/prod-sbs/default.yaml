@@ -1,0 +1,59 @@
+---
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+    name: nav-dekoratoren
+    namespace: {{namespace}}
+    labels:
+      team: {{team}}
+spec:
+    image: navikt/{{reponame}}:{{version}}
+    port: 8088
+    liveness:
+        path: /person/nav-dekoratoren/isalive
+        initialDelay: 10
+    readiness:
+        path: /person/nav-dekoratoren/isready
+        initialDelay: 10
+    prometheus:
+        path: /metrics
+    replicas:
+        min: 2
+        max: 4
+    ingresses:
+        - https://nav-dekoratoren.nais.oera.no
+        - https://www.nav.no/person/nav-dekoratoren
+    env:
+        - name: URL_API_MENY
+          value: https://www.nav.no/navno/_/service/no.nav.navno/menu
+        - name: URL_API_SOK
+          value: https://www.nav.no/navno/_/service/navno.nav.no.search/search2
+        - name: URL_APP_BASE
+          value: https://www.nav.no/person/nav-dekoratoren
+        - name: baseUrl
+          value: https://www.nav.no
+        - name: baseUrlEnonic
+          value: https://www.nav.no
+        - name: innloggingslinjenUrl
+          value: https://www.nav.no/innloggingslinje-api/auth
+        - name: menypunkter
+          value: https://www.nav.no/person/nav-dekoratoren/api/get/menyvalg
+        - name: sokeresultat
+          value: https://www.nav.no/person/nav-dekoratoren/api/get/sokeresultat
+        - name: minsideArbeidsgiverUrl
+          value: https://arbeidsgiver.nav.no/min-side-arbeidsgiver/
+        - name: varselinnboksUrl
+          value: https://www.nav.no/person/varselinnboks
+        - name: dittNavUrl
+          value: https://www.nav.no/person/dittnav/
+        - name: loginUrl
+          value: https://loginservice.nav.no
+        - name: logoutUrl
+          value: https://loginservice.nav.no/slo
+    resources:
+        limits:
+            cpu: '3'
+            memory: 768Mi
+        requests:
+            cpu: 200m
+            memory: 512Mi

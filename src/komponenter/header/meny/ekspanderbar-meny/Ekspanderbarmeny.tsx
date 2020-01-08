@@ -2,15 +2,12 @@ import React from 'react';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import BEMHelper from '../../../../utils/bem';
-import { verifyWindowObj } from '../../../../utils/environments';
+import { verifyWindowObj } from '../../../../utils/Environment';
 import { desktopview } from '../../../../styling-mediaquery';
 import { Status } from '../../../../api/api';
 import { MenuValue, selectMenu } from '../../../../utils/meny-storage-utils';
-import {
-    dataInitState,
-    Meny,
-    MenyPunkter,
-} from '../../../../reducer/menu-duck';
+import { dataInitState } from '../../../../reducer/menu-duck';
+import { Meny, MenyPunkter } from '../../../../reducer/menu-duck';
 import { Language } from '../../../../reducer/language-duck';
 import Menyknapp from './meny-knapp/Menyknapp';
 import Mobilbakgrunn from './mobil-visningsmeny/mobil-innhold/Mobilbakgrunn';

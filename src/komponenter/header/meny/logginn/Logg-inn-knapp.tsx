@@ -4,16 +4,12 @@ import { AppState } from '../../../../reducer/reducer';
 import KnappBase from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
-import Environments, {
-    erNavDekoratoren,
-    verifyWindowObj,
-} from '../../../../utils/environments';
+import Environment, { erNavDekoratoren } from '../../../../utils/Environment';
+import { verifyWindowObj } from '../../../../utils/Environment';
 import LogginnIkon from '../../../../ikoner/mobilmeny/LogginnIkon';
 import Tekst from '../../../../tekster/finn-tekst';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
-
-const { baseUrl, logoutUrl, loginUrl } = Environments();
 
 const getPath = () => {
     if (verifyWindowObj()) {
@@ -24,9 +20,6 @@ const getPath = () => {
     }
     return '/person/nav-dekoratoren/';
 };
-
-const path = erNavDekoratoren() ? getPath() : '/person/dittnav';
-const login = `${loginUrl}/login?redirect=${baseUrl}${path}`;
 
 interface StateProps {
     erInnlogget: boolean;
@@ -63,9 +56,11 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
     };
 
     handleButtonClick = () => {
+        const path = erNavDekoratoren() ? getPath() : '/person/dittnav';
+        const login = `${Environment.loginUrl}/login?redirect=${Environment.baseUrl}${path}`;
         if (process.env.NODE_ENV === 'production') {
             return this.props.erInnlogget
-                ? (window.location.href = logoutUrl)
+                ? (window.location.href = Environment.logoutUrl)
                 : (window.location.href = login);
         } else {
             this.setState({

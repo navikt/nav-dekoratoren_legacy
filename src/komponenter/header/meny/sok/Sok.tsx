@@ -5,7 +5,6 @@ import throttle from 'lodash.throttle';
 import Downshift from 'downshift';
 import cls from 'classnames';
 import { Input } from 'nav-frontend-skjema';
-import { API } from '../../../../api/api';
 import { Language } from '../../../../reducer/language-duck';
 import { finnTekst } from '../../../../tekster/finn-tekst';
 import {
@@ -19,6 +18,7 @@ import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
 import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
 import Mobilsokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Mobilsokknapp';
 import './Sok.less';
+import Environment from '../../../../utils/Environment';
 
 interface StateProps {
     language: Language;
@@ -26,6 +26,7 @@ interface StateProps {
 
 class Sok extends React.Component<StateProps, InputState> {
     handleChangeThrottled: ReturnType<typeof throttle>;
+    ismounted: boolean = false;
 
     constructor(props: StateProps) {
         super(props);
@@ -39,12 +40,22 @@ class Sok extends React.Component<StateProps, InputState> {
         );
     }
 
-    handleValueChange(input: string) {
-        const url = API.sokeresultat;
+    componentDidMount(): void {
+        this.ismounted = true;
+    }
 
-        this.setState({
-            inputString: input,
-        });
+    componentWillUnmount(): void {
+        this.ismounted = false;
+    }
+
+    handleValueChange(input: string) {
+        const url = Environment.sokeresultat;
+
+        if (this.ismounted) {
+            this.setState({
+                inputString: input,
+            });
+        }
 
         fetch(`${url}?ord=${input}`)
             .then(response => {
@@ -56,9 +67,11 @@ class Sok extends React.Component<StateProps, InputState> {
             })
             .then(response => response.json())
             .then(json => {
-                this.setState({
-                    items: json.hits,
-                });
+                if (this.ismounted) {
+                    this.setState({
+                        items: json.hits,
+                    });
+                }
             });
     }
 
