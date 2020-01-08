@@ -9,13 +9,22 @@ const Skiplinks = () => {
                 <a
                     href="#arbeidsflatemeny"
                     className="visuallyhidden focusable"
+                    id="hovedmenylenke"
                 >
                     Gå til hovedmeny
                 </a>
-                <a href="#maincontent" className="visuallyhidden focusable">
+                <a
+                    href="#maincontent"
+                    className="visuallyhidden focusable"
+                    id="hovedinnholdlenke"
+                >
                     Gå til hovedinnhold
                 </a>
-                <a href="#sok" className="visuallyhidden focusable">
+                <a
+                    href="#sok"
+                    className="visuallyhidden focusable"
+                    id="soklenke"
+                >
                     Gå til søk
                 </a>
             </nav>

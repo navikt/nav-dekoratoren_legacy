@@ -86,7 +86,7 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
                         onClick={this.handleButtonClick}
                     >
                         <LogginnIkon />
-                        <Undertittel>
+                        <Undertittel className="knappetekst">
                             <Tekst id={knappetekst} />
                         </Undertittel>
                     </button>

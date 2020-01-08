@@ -10,7 +10,7 @@ const { baseUrl, minsideArbeidsgiverUrl } = Environments();
 export const dittNavURL = `${baseUrl}/person/dittnav/`;
 
 interface StateProps {
-    erInnlogget: boolean;
+    erinnlogget: boolean;
     arbeidsflate: MenuValue;
 }
 
@@ -19,7 +19,7 @@ interface Props {
 }
 
 const MinsideLenke = ({
-    erInnlogget,
+    erinnlogget,
     arbeidsflate,
     tabindex,
 }: StateProps & Props) => {
@@ -41,7 +41,7 @@ const MinsideLenke = ({
 
     return (
         <div className="minside-lenke">
-            {erInnlogget && arbeidsflate !== MenuValue.SAMARBEIDSPARTNER ? (
+            {erinnlogget && arbeidsflate !== MenuValue.SAMARBEIDSPARTNER ? (
                 <Lenke href={lenkeurl} tabIndex={tabindex ? 0 : -1}>
                     {lenketekst}
                 </Lenke>
@@ -51,7 +51,7 @@ const MinsideLenke = ({
 };
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    erInnlogget: state.innloggingsstatus.data.authenticated,
+    erinnlogget: state.innloggingsstatus.data.authenticated,
     arbeidsflate: state.arbeidsflate.status,
 });
 
