@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import parse from 'html-react-parser';
 import { AppState } from '../../../../../reducer/reducer';
-import { varselinnboksUrl } from '../../../../../api/api';
 import { desktopview, tabletview } from '../../../../../styling-mediaquery';
+import Environment from '../../../../../utils/Environment';
 import './Varselvisning.less';
 
 interface OwnProps {
@@ -102,7 +102,10 @@ class Varselvisning extends React.Component<Props, State> {
 
                 {antallVarsler > 5 && (
                     <div className="vis-alle-lenke skillelinje-topp">
-                        <a href={varselinnboksUrl} tabIndex={tabIndex ? 0 : -1}>
+                        <a
+                            href={Environment.varselinnboksUrl}
+                            tabIndex={tabIndex ? 0 : -1}
+                        >
                             Vis alle dine varsler
                             {antallUlesteVarsler > 0
                                 ? ` (${antallUlesteVarsler} nye)`

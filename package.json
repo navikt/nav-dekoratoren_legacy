@@ -4,12 +4,11 @@
     "homepage": "/person/nav-dekoratoren",
     "private": true,
     "scripts": {
+        "start": "cross-env DEVELOPMENT=true npm-run-all -p -r start-server start-craco",
         "start-craco": "craco start",
-        "start": "cross-env DEVELOPMENT=true npm-run-all -p -r start-craco server",
-        "start-s": "npm-run-all -p -r build-ssr start-ssr",
-        "build": "craco build",
-        "test": "craco test",
+        "start-server": "npm-run-all build-ssr-dev start-ssr",
         "start-ssr": "node buildfolder/server.js",
+        "build": "craco build",
         "build-ssr": "npm run build-client && npm run build-server",
         "build-ssr-dev": "npm run build-client-dev && npm run build-server-dev",
         "build-snap": "craco build && react-snapshot",
@@ -17,14 +16,14 @@
         "build-server": "cross-env NODE_ENV=production webpack -p --display-error-details --config webpack.server.config.js",
         "build-client-dev": "cross-env NODE_ENV=development webpack --display-error-details --config webpack.client.config.js ",
         "build-server-dev": "cross-env NODE_ENV=development webpack --display-error-details --config webpack.server.config.js",
-        "server": "nodemon src/server/server.js",
         "lint": "tslint ./src/**/*.ts*",
         "lint:fix": "tslint ./src/**/*.ts* --fix",
         "docker-build": "docker build . -t navikt/nav-dekoratoren",
         "docker-push": "docker push navikt/nav-dekoratoren",
         "docker-start": "docker run --rm -p 8088:8088 navikt/nav-dekoratoren",
         "deploy-dev": "kubectl apply -f nais-dev.json",
-        "deploy-prod": "kubectl apply -f nais-prod.json"
+        "deploy-prod": "kubectl apply -f nais-prod.json",
+        "test": "craco test"
     },
     "repository": {
         "type": "git",

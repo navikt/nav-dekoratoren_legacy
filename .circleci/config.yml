@@ -105,7 +105,7 @@ commands:
                       deployment-cli deploy create \
                           --team=personbruker \
                           --cluster=<< parameters.cluster >> \
-                          --resource=.nais/<< parameters.cluster >>-<< parameters.namespace >>.yaml \
+                          --resource=.nais/<< parameters.cluster >>/<< parameters.namespace >>.yaml \
                           --repository=$CIRCLE_PROJECT_USERNAME/$REPO_NAME \
                           --var namespace=<< parameters.namespace >> \
                           --var reponame=$REPO_NAME \
@@ -131,25 +131,39 @@ workflows:
     bygg-og-deploy:
         jobs:
             - build-app
-            - bekreft-deploy-til-dev:
+            - bekreft-deploy-til-q6:
                   type: approval
                   requires:
                       - build-app
+                  filters:
+                      branches:
+                          ignore: master
 
             - build-docker:
-                  name: build-docker-dev
+                  name: build-docker-q6
                   requires:
-                      - bekreft-deploy-til-dev
+                      - bekreft-deploy-til-q6
+
+            - deploy-til-q6:
+                  name: manuell-deploy-til-q6
+                  requires:
+                      - build-docker-q6
+
+            - build-docker:
+                  name: build-docker-preprod
+                  requires:
+                      - build-app
+                  filters:
+                      branches:
+                          only: master
 
             - deploy-til-q6:
                   requires:
-                      - build-docker-dev
+                      - build-docker-preprod
+
             - deploy-til-q1:
                   requires:
-                      - build-docker-dev
-            - deploy-til-q0:
-                  requires:
-                      - build-docker-dev
+                      - build-docker-preprod
 
             - bekreft-deploy-til-prod:
                   type: approval
@@ -163,13 +177,11 @@ workflows:
                   name: build-docker-prod
                   requires:
                       - bekreft-deploy-til-prod
-                  filters:
-                      branches:
-                          only: master
+
+            - deploy-til-q0:
+                  requires:
+                      - build-docker-prod
 
             - deploy-til-prod:
                   requires:
                       - build-docker-prod
-                  filters:
-                      branches:
-                          only: master

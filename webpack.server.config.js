@@ -15,7 +15,7 @@ const browserConfig = {
         }),
     ],
     entry: {
-        server: path.resolve(__dirname, './src/server/ssr-server.tsx'),
+        server: path.resolve(__dirname, './src/server/server.tsx'),
     },
     output: {
         path: path.resolve(__dirname, 'buildfolder/'),

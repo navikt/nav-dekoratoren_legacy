@@ -1,9 +1,7 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
-import Environments from '../../../../../../utils/environments';
 import { MenySeksjon } from '../../../../../../reducer/menu-duck';
-
-const { baseUrlEnonic } = Environments();
+import Environment from '../../../../../../utils/Environment';
 
 interface Props {
     lenke: MenySeksjon;
@@ -13,7 +11,7 @@ interface Props {
 
 const genererUrl = (lenke: string): string => {
     if (lenke.startsWith('/')) {
-        return baseUrlEnonic + lenke;
+        return Environment.baseUrlEnonic + lenke;
     }
     return lenke;
 };

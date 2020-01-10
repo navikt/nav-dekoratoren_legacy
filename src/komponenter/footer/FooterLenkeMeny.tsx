@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
 import NavLogoFooter from '../../ikoner/meny/NavLogoFooter';
-import { erNavDekoratoren } from '../../utils/environments';
+import { erNavDekoratoren } from '../../utils/Environment';
 import DelSkjermModal from './del-skjerm-modal/DelSkjermModal';
 
 interface Props {

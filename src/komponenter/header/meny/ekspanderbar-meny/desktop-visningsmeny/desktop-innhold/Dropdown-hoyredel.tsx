@@ -5,7 +5,7 @@ import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import BEMHelper from '../../../../../../utils/bem';
 import Tekst from '../../../../../../tekster/finn-tekst';
 import { MenySeksjon } from '../../../../../../reducer/menu-duck';
-import { dittNavURL } from '../../../minside-lenke/MinsideLenke';
+import Environment from '../../../../../../utils/Environment';
 
 interface Props {
     minsideMeny: MenySeksjon;
@@ -78,7 +78,7 @@ interface MinSideLenkeProps {
 
 const MinSideLenke = ({ tabindex }: MinSideLenkeProps) => (
     <div className="minside-dittnav-lenke">
-        <Lenke tabIndex={tabindex ? 0 : -1} href={dittNavURL}>
+        <Lenke tabIndex={tabindex ? 0 : -1} href={Environment.dittNavUrl}>
             <>
                 <HoyreChevron />
                 <Tekst id="ga-til-min-side" />
