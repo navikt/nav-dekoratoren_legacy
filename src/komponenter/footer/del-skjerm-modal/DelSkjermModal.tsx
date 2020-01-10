@@ -45,7 +45,7 @@ const DelSkjermModal = (props: Props) => {
 
     return (
         <Modal
-            className="delskjerm__modal"
+            className="navno-dekorator delskjerm__modal"
             isOpen={props.isOpen}
             contentLabel={'Skjermdeling'}
             onRequestClose={props.onClose}
