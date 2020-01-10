@@ -4,7 +4,6 @@ import { Input } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import './DelSkjermModal.less';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { verifyWindowObj } from '../../../utils/Environment';
 
 interface Props {
     isOpen: boolean;
@@ -20,7 +19,13 @@ const DelSkjermModal = (props: Props) => {
 
     useEffect(() => {
         if (verdictExists) {
-            setIsOpen(w.vngage.get('queuestatus', 'guid') === 'open');
+            const queues: { [key: string]: string } = w.vngage.get(
+                'queuestatus'
+            );
+            const openQueues = Object.values(queues).filter(
+                status => status === 'open'
+            );
+            setIsOpen(!!openQueues.length);
         }
     }, []);
 
