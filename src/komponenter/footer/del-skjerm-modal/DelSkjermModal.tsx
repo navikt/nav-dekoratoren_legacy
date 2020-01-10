@@ -4,6 +4,7 @@ import { Input } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import './DelSkjermModal.less';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import { verifyWindowObj } from '../../../utils/Environment';
 
 interface Props {
     isOpen: boolean;
@@ -12,25 +13,18 @@ interface Props {
 
 const DelSkjermModal = (props: Props) => {
     const [code, setCode] = useState('');
-    useEffect(() => {
-        // Init Verdic
-        (function(server: string, psID: string) {
-            const s = document.createElement('script');
-            s.type = 'text/javascript';
-            s.src = server + '/' + psID + '/ps.js';
-            document.getElementsByTagName('head')[0].appendChild(s);
-        })(
-            'https://account.psplugin.com',
-            '83BD7664-B38B-4EEE-8D99-200669A32551'
-        );
-    }, []);
 
     const onClick = (e: any) => {
-        const submitButtons = document.getElementsByClassName(
-            'vngage-btn'
-        ) as HTMLCollectionOf<HTMLButtonElement>;
-        for (let i = 0; i < submitButtons.length; i++) {
-            submitButtons[i].click();
+        if (verifyWindowObj()) {
+            (window as any).vngage.join('queue', {
+                opportunityId: '615FF5E7-37B7-4697-A35F-72598B0DC53B',
+                solutionId: '5EB316A1-11E2-460A-B4E3-F82DBD13E21D',
+                groupId: 'A034081B-6B73-46B7-BE27-23B8E9CE3079',
+                caseTypeId: '66D660EF-6F14-44B4-8ADE-A70A127202D0',
+                category: 'Phone2Web',
+                startCode: code,
+                message: 'Phone2Web',
+            });
         }
     };
 
@@ -49,11 +43,6 @@ const DelSkjermModal = (props: Props) => {
                         nettvindu du har nav.no åpent i
                     </Normaltekst>
                 </div>
-                <ul
-                    id="insert-vergic-container"
-                    style={{ display: 'none' }}
-                    className={'delskjerm__form'}
-                />
                 <Input
                     name={'code'}
                     label={'Skriv inn koden du får fra veilederen på telefonen'}

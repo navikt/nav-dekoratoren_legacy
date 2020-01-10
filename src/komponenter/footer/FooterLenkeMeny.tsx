@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
@@ -14,6 +14,7 @@ interface Props {
 interface State {
     visModal: boolean;
     hasMounted: boolean;
+    erDelSkjermApen: boolean;
     erNavDekoratoren: boolean;
     languages: LanguageSelectors[];
 }
@@ -52,6 +53,7 @@ class FooterLenkeMeny extends React.Component<Props, State> {
         this.state = {
             visModal: false,
             hasMounted: false,
+            erDelSkjermApen: false,
             erNavDekoratoren: false,
             languages: [this.lang[1], this.lang[2]],
         };
@@ -61,15 +63,49 @@ class FooterLenkeMeny extends React.Component<Props, State> {
     closeModal = () => this.setState({ visModal: false });
 
     componentDidMount(): void {
+        const context = this;
+        // Init Verdic
+        /*
+        (function(server: string, psID: string) {
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.async = false;
+            script.src = server + '/' + psID + '/ps.js';
+            script.addEventListener('load', () => {
+                console.log('Verdict loaded');
+                if (typeof window !== 'undefined') {
+                    console.log((window as any).vngage);
+                    context.setState({
+                        erDelSkjermApen:
+                            (window as any).vngage.get(
+                                'queuestatus',
+                                'guid'
+                            ) === 'open',
+                    });
+                }
+            });
+            document.getElementsByTagName('head')[0].appendChild(script);
+        })(
+            'https://account.psplugin.com',
+            '83BD7664-B38B-4EEE-8D99-200669A32551'
+        );
+        */
+
         this.setState(
             {
                 hasMounted: true,
             },
             () => {
                 if (this.state.hasMounted) {
+                    const w = window as any;
+                    const verdictExists = typeof w !== 'undefined' && w.vngage;
                     this.setState({
                         erNavDekoratoren: erNavDekoratoren(),
                         languages: this.getLanguage(),
+                        ...(verdictExists && {
+                            erDelSkjermApen:
+                                w.vngage.get('queuestatus', 'guid') === 'open',
+                        }),
                     });
                 }
             }
@@ -103,7 +139,6 @@ class FooterLenkeMeny extends React.Component<Props, State> {
                             <li>
                                 <Lenke href="#">Kontakt oss</Lenke>
                             </li>
-
                             {this.state.languages.map(lenke => {
                                 return (
                                     <li key={lenke.lang}>
@@ -120,9 +155,6 @@ class FooterLenkeMeny extends React.Component<Props, State> {
                                 );
                             })}
                             <li>
-                                <Lenke href="#" onClick={this.openModal}>
-                                    Del skjerm med kontaktsenteret
-                                </Lenke>
                                 {this.state.visModal && (
                                     <DelSkjermModal
                                         isOpen={this.state.visModal}
