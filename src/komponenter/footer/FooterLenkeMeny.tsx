@@ -12,7 +12,7 @@ interface Props {
 }
 
 interface State {
-    visModal: boolean;
+    visDelSkjermModal: boolean;
     hasMounted: boolean;
     erDelSkjermApen: boolean;
     erNavDekoratoren: boolean;
@@ -51,16 +51,16 @@ class FooterLenkeMeny extends React.Component<Props, State> {
         super(props);
 
         this.state = {
-            visModal: false,
             hasMounted: false,
+            visDelSkjermModal: false,
             erDelSkjermApen: false,
             erNavDekoratoren: false,
             languages: [this.lang[1], this.lang[2]],
         };
     }
 
-    openModal = () => this.setState({ visModal: true });
-    closeModal = () => this.setState({ visModal: false });
+    openModal = () => this.setState({ visDelSkjermModal: true });
+    closeModal = () => this.setState({ visDelSkjermModal: false });
 
     componentDidMount(): void {
         const context = this;
@@ -155,9 +155,14 @@ class FooterLenkeMeny extends React.Component<Props, State> {
                                 );
                             })}
                             <li>
-                                {this.state.visModal && (
+                                {this.state.erDelSkjermApen && (
+                                    <Lenke href="#" onClick={this.openModal}>
+                                        Del skjerm med kontaktsenteret
+                                    </Lenke>
+                                )}
+                                {this.state.visDelSkjermModal && (
                                     <DelSkjermModal
-                                        isOpen={this.state.visModal}
+                                        isOpen={this.state.visDelSkjermModal}
                                         onClose={this.closeModal}
                                     />
                                 )}
