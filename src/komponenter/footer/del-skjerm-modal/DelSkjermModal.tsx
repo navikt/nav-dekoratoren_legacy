@@ -24,9 +24,9 @@ const DelSkjermModal = (props: Props) => {
         }
     }, []);
 
-    const onClick = (e: any) => {
-        if (verifyWindowObj()) {
-            (window as any).vngage.join('queue', {
+    const onClick = () => {
+        if (verdictExists) {
+            w.vngage.join('queue', {
                 opportunityId: '615FF5E7-37B7-4697-A35F-72598B0DC53B',
                 solutionId: '5EB316A1-11E2-460A-B4E3-F82DBD13E21D',
                 groupId: 'A034081B-6B73-46B7-BE27-23B8E9CE3079',
