@@ -16,16 +16,11 @@ const DelSkjermModal = (props: Props) => {
 
     const w = window as any;
     const verdictExists = typeof w !== 'undefined' && w.vngage;
+    const navGroupId = 'A034081B-6B73-46B7-BE27-23B8E9CE3079';
 
     useEffect(() => {
         if (verdictExists) {
-            const queues: { [key: string]: string } = w.vngage.get(
-                'queuestatus'
-            );
-            const openQueues = Object.values(queues).filter(
-                status => status === 'open'
-            );
-            setIsOpen(!!openQueues.length);
+            setIsOpen(w.vngage.get('queuestatus', navGroupId));
         }
     }, []);
 
@@ -34,11 +29,11 @@ const DelSkjermModal = (props: Props) => {
             w.vngage.join('queue', {
                 opportunityId: '615FF5E7-37B7-4697-A35F-72598B0DC53B',
                 solutionId: '5EB316A1-11E2-460A-B4E3-F82DBD13E21D',
-                groupId: 'A034081B-6B73-46B7-BE27-23B8E9CE3079',
                 caseTypeId: '66D660EF-6F14-44B4-8ADE-A70A127202D0',
                 category: 'Phone2Web',
-                startCode: code,
                 message: 'Phone2Web',
+                groupId: navGroupId,
+                startCode: code,
             });
         }
     };
