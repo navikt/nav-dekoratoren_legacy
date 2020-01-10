@@ -13,6 +13,16 @@ interface Props {
 
 const DelSkjermModal = (props: Props) => {
     const [code, setCode] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
+
+    const w = window as any;
+    const verdictExists = typeof w !== 'undefined' && w.vngage;
+
+    useEffect(() => {
+        if (verdictExists) {
+            setIsOpen(w.vngage.get('queuestatus', 'guid') === 'open');
+        }
+    }, []);
 
     const onClick = (e: any) => {
         if (verifyWindowObj()) {
@@ -37,31 +47,34 @@ const DelSkjermModal = (props: Props) => {
         >
             <div className={'delskjerm__content'}>
                 <Undertittel>Del skjermen din med veilederen</Undertittel>
-                <div className={'delskjerm__beskrivelse'}>
-                    <Normaltekst>
-                        Nå gir du veilederen tilgang til å se det du ser på i
-                        nettvindu du har nav.no åpent i
-                    </Normaltekst>
-                </div>
-                <Input
-                    name={'code'}
-                    label={'Skriv inn koden du får fra veilederen på telefonen'}
-                    value={code}
-                    onChange={e => {
-                        setCode(e.target.value);
-                        const input = document.getElementsByName(
-                            'code'
-                        ) as NodeListOf<HTMLInputElement>;
-                        for (let i = 0; i < input.length; i++) {
-                            input[i].value = e.target.value;
-                        }
-                    }}
-                    maxLength={5}
-                    bredde={'S'}
-                />
-                <Hovedknapp className="vngage-btn" onClick={onClick}>
-                    Start skjermdeling
-                </Hovedknapp>
+                <div className={'delskjerm__beskrivelse'}></div>
+                {isOpen ? (
+                    <>
+                        <Input
+                            name={'code'}
+                            label={
+                                'Skriv inn koden du får fra veilederen på telefonen'
+                            }
+                            value={code}
+                            onChange={e => {
+                                setCode(e.target.value);
+                                const input = document.getElementsByName(
+                                    'code'
+                                ) as NodeListOf<HTMLInputElement>;
+                                for (let i = 0; i < input.length; i++) {
+                                    input[i].value = e.target.value;
+                                }
+                            }}
+                            maxLength={5}
+                            bredde={'S'}
+                        />
+                        <Hovedknapp className="vngage-btn" onClick={onClick}>
+                            Start skjermdeling
+                        </Hovedknapp>
+                    </>
+                ) : (
+                    <Normaltekst>Chatten er stengt</Normaltekst>
+                )}
             </div>
         </Modal>
     );
