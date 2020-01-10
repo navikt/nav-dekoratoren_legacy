@@ -67,7 +67,6 @@ class FooterLenkeMeny extends React.Component<Props, State> {
             },
             () => {
                 if (this.state.hasMounted) {
-                    const w = window as any;
                     this.setState({
                         erNavDekoratoren: erNavDekoratoren(),
                         languages: this.getLanguage(),
