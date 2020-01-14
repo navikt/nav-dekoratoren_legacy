@@ -3,7 +3,7 @@ import Modal from 'nav-frontend-modal';
 import { Input } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import './DelSkjermModal.less';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
 
 interface Props {
     isOpen: boolean;
@@ -49,7 +49,10 @@ const DelSkjermModal = (props: Props) => {
         >
             <div className={'delskjerm__content'}>
                 <Undertittel>Del skjermen din med veilederen</Undertittel>
-                <div className={'delskjerm__beskrivelse'}></div>
+                <div className={'delskjerm__beskrivelse'}>
+                    Nå gir du veilederen tilgang til å se det du ser på i
+                    nettvindu du har nav.no åpent i.
+                </div>
                 {isOpen ? (
                     <>
                         <Input
@@ -60,11 +63,16 @@ const DelSkjermModal = (props: Props) => {
                             value={code}
                             onChange={e => setCode(e.target.value)}
                             maxLength={5}
-                            bredde={'S'}
+                            bredde={'M'}
                         />
-                        <Hovedknapp className="vngage-btn" onClick={onClick}>
-                            Start skjermdeling
-                        </Hovedknapp>
+                        <div className={'delskjerm__knapper'}>
+                            <Hovedknapp onClick={onClick}>
+                                Start skjermdeling
+                            </Hovedknapp>
+                            <Flatknapp onClick={props.onClose}>
+                                Avbryt
+                            </Flatknapp>
+                        </div>
                     </>
                 ) : (
                     <Normaltekst>Chatten er stengt</Normaltekst>
