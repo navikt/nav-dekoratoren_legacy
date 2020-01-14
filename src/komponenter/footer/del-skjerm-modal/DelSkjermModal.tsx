@@ -27,20 +27,20 @@ const DelSkjermModal = (props: Props) => {
     const [error, setError] = useState(feilmelding);
     const feil = submitted && error ? { feilmelding: error } : undefined;
 
-    // Verdic config
+    // Vergic config
     const w = window as any;
-    const verdictExists = typeof w !== 'undefined' && w.vngage;
+    const vergicExists = typeof w !== 'undefined' && w.vngage;
     const navGroupId = 'A034081B-6B73-46B7-BE27-23B8E9CE3079';
 
     useEffect(() => {
-        if (verdictExists) {
+        if (vergicExists) {
             setIsOpen(w.vngage.get('queuestatus', navGroupId));
         }
     }, []);
 
     const onClick = () => {
         setSubmitted(true);
-        if (verdictExists && !error) {
+        if (vergicExists && !error) {
             w.vngage.join('queue', {
                 opportunityId: '615FF5E7-37B7-4697-A35F-72598B0DC53B',
                 solutionId: '5EB316A1-11E2-460A-B4E3-F82DBD13E21D',
