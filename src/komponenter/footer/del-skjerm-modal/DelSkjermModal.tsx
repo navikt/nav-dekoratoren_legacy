@@ -35,6 +35,7 @@ const DelSkjermModal = (props: Props) => {
                 groupId: navGroupId,
                 startCode: code,
             });
+            setIsOpen(false);
         }
     };
 
