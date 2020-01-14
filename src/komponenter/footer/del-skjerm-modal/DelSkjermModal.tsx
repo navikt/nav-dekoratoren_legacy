@@ -60,8 +60,10 @@ const DelSkjermModal = (props: Props) => {
             <div className={'delskjerm__content'}>
                 <Undertittel>Del skjermen din med veilederen</Undertittel>
                 <div className={'delskjerm__beskrivelse'}>
-                    Nå gir du veilederen tilgang til å se det du ser på i
-                    nettvindu du har nav.no åpent i.
+                    <Normaltekst>
+                        Nå gir du veilederen tilgang til å se det du ser på i
+                        nettvindu du har nav.no åpent i.
+                    </Normaltekst>
                 </div>
                 {isOpen ? (
                     <>
