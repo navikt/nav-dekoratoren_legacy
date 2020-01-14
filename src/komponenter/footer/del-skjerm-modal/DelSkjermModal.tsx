@@ -93,10 +93,10 @@ const DelSkjermModal = (props: Props) => {
                         />
                         <div className={'delskjerm__knapper'}>
                             <Hovedknapp onClick={onClick}>
-                                Start skjermdeling
+                                <Tekst id={'delskjerm-modal-start'} />
                             </Hovedknapp>
                             <Flatknapp onClick={props.onClose}>
-                                Avbryt
+                                <Tekst id={'delskjerm-modal-avbryt'} />
                             </Flatknapp>
                         </div>
                     </>

@@ -44,8 +44,10 @@ export const ledetekster: { [key: string]: string } = {
     'tilbake-til-overskrift': 'Tilbake til oversikt',
     'tilbake-til-overskrift-en': 'Back to menu',
     'tilbake-til-overskrift-se': 'Meny vises ikke pa samisk',
-    'delskjerm-modal-overskrift': 'Del skjermen din med veilederen',
-    'delskjerm-modal-beskrivelse': `Nå gir du veilederen tilgang til å se det du ser på i nettvindu du har nav.no åpent i.`,
+    'delskjerm-modal-overskrift': 'Del skjermen din',
+    'delskjerm-modal-beskrivelse': `Gi veilederen tilgang til å se samme skjermbilde som deg`,
     'delskjerm-modal-feilmelding': `Må bestå av 5 siffer`,
-    'delskjerm-modal-label': `Skriv inn koden du får fra veilederen på telefonen`,
+    'delskjerm-modal-label': `Skriv inn koden du får fra veilederen`,
+    'delskjerm-modal-start': `Start skjermdeling`,
+    'delskjerm-modal-avbryt': `Avbryt`,
 };
