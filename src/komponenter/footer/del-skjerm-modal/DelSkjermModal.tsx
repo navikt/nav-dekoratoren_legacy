@@ -27,7 +27,7 @@ const DelSkjermModal = (props: Props) => {
     const [error, setError] = useState(feilmelding);
     const feil = submitted && error ? { feilmelding: error } : undefined;
 
-    // Verdic
+    // Verdic config
     const w = window as any;
     const verdictExists = typeof w !== 'undefined' && w.vngage;
     const navGroupId = 'A034081B-6B73-46B7-BE27-23B8E9CE3079';
@@ -101,7 +101,9 @@ const DelSkjermModal = (props: Props) => {
                         </div>
                     </>
                 ) : (
-                    <Normaltekst>Chatten er stengt</Normaltekst>
+                    <Normaltekst>
+                        <Tekst id={'delskjerm-modal-stengt'} />
+                    </Normaltekst>
                 )}
             </div>
         </Modal>

@@ -50,4 +50,5 @@ export const ledetekster: { [key: string]: string } = {
     'delskjerm-modal-label': `Skriv inn koden du får fra veilederen`,
     'delskjerm-modal-start': `Start skjermdeling`,
     'delskjerm-modal-avbryt': `Avbryt`,
+    'delskjerm-modal-stengt': 'Chatten er stengt',
 };
