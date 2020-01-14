@@ -26,7 +26,7 @@ const DelSkjermModal = (props: Props) => {
 
     const onClick = () => {
         if (verdictExists) {
-            w.vngage.join('queue', {
+            const response = w.vngage.join('queue', {
                 opportunityId: '615FF5E7-37B7-4697-A35F-72598B0DC53B',
                 solutionId: '5EB316A1-11E2-460A-B4E3-F82DBD13E21D',
                 caseTypeId: '66D660EF-6F14-44B4-8ADE-A70A127202D0',
@@ -35,6 +35,7 @@ const DelSkjermModal = (props: Props) => {
                 groupId: navGroupId,
                 startCode: code,
             });
+            console.log(response);
             setIsOpen(false);
         }
     };
