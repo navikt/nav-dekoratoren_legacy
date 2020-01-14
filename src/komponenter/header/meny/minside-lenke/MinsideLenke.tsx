@@ -6,20 +6,21 @@ import { MenuValue } from '../../../../utils/meny-storage-utils';
 import Environment from '../../../../utils/Environment';
 import './MinsideLenke.less';
 
+interface OwnProps {
+    tabindex: boolean;
+}
+
 interface StateProps {
     erinnlogget: boolean;
     arbeidsflate: MenuValue;
 }
 
-interface Props {
-    tabindex: boolean;
-}
-
-const MinsideLenke = ({
+type MinsideLenkeProps = StateProps & OwnProps;
+export const MinsideLenke = ({
     erinnlogget,
     arbeidsflate,
     tabindex,
-}: StateProps & Props) => {
+}: MinsideLenkeProps) => {
     const lenketekst =
         arbeidsflate === MenuValue.IKKEVALGT ||
         arbeidsflate === MenuValue.PRIVATPERSON

@@ -29,7 +29,7 @@ interface State {
     informasjonboks: Object;
 }
 
-class LoggInnKnapp extends React.Component<StateProps, State> {
+export class LoggInnKnapp extends React.Component<StateProps, State> {
     constructor(props: StateProps) {
         super(props);
         this.state = {
