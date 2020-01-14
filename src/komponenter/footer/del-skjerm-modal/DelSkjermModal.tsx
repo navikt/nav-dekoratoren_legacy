@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import Modal from 'nav-frontend-modal';
 import { Input } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
@@ -54,10 +54,19 @@ const DelSkjermModal = (props: Props) => {
         }
     };
 
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setCode(value);
+        setError('');
+        if (!value.match(/\b\d{5}\b/g)) {
+            setError(feilmelding);
+        }
+    };
+
     return (
         <Modal
-            className="navno-dekorator delskjerm__modal"
             isOpen={props.isOpen}
+            className="navno-dekorator delskjerm__modal"
             contentLabel={'Skjermdeling'}
             onRequestClose={props.onClose}
         >
@@ -80,14 +89,7 @@ const DelSkjermModal = (props: Props) => {
                             label={label}
                             feil={feil}
                             value={code}
-                            onChange={e => {
-                                const value = e.target.value;
-                                setCode(value);
-                                setError('');
-                                if (!value.match(/\b\d{5}\b/g)) {
-                                    setError(feilmelding);
-                                }
-                            }}
+                            onChange={onChange}
                             maxLength={5}
                             bredde={'M'}
                         />
