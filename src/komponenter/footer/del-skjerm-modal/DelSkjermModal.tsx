@@ -56,15 +56,7 @@ const DelSkjermModal = (props: Props) => {
                                 'Skriv inn koden du får fra veilederen på telefonen'
                             }
                             value={code}
-                            onChange={e => {
-                                setCode(e.target.value);
-                                const input = document.getElementsByName(
-                                    'code'
-                                ) as NodeListOf<HTMLInputElement>;
-                                for (let i = 0; i < input.length; i++) {
-                                    input[i].value = e.target.value;
-                                }
-                            }}
+                            onChange={e => setCode(e.target.value)}
                             maxLength={5}
                             bredde={'S'}
                         />
