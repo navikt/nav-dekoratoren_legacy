@@ -44,4 +44,6 @@ export const ledetekster: { [key: string]: string } = {
     'tilbake-til-overskrift': 'Tilbake til oversikt',
     'tilbake-til-overskrift-en': 'Back to menu',
     'tilbake-til-overskrift-se': 'Meny vises ikke pa samisk',
+    'delskjerm-modal-overskrift': 'Del skjermen din med veilederen',
+    'delskjerm-modal-beskrivelse': `Nå gir du veilederen tilgang til å se det du ser på i nettvindu du har nav.no åpent i.`,
 };

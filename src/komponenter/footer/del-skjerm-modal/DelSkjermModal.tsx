@@ -3,7 +3,9 @@ import Modal from 'nav-frontend-modal';
 import { Input } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
+// import { useSelector } from 'react-redux';
 import Veileder from '../../../ikoner/veiledere/Veileder.svg';
+import Tekst from '../../../tekster/finn-tekst';
 import './DelSkjermModal.less';
 
 interface Props {
@@ -18,6 +20,7 @@ const DelSkjermModal = (props: Props) => {
     const [code, setCode] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    // const counter = useSelector(state => state.counter);
     const [error, setError] = useState(feilmelding);
 
     const w = window as any;
@@ -58,11 +61,12 @@ const DelSkjermModal = (props: Props) => {
                 <img className={'delskjerm__veileder'} src={Veileder} />
             </div>
             <div className={'delskjerm__content'}>
-                <Undertittel>Del skjermen din med veilederen</Undertittel>
+                <Undertittel>
+                    <Tekst id={'delskjerm-modal-overskrift'} />
+                </Undertittel>
                 <div className={'delskjerm__beskrivelse'}>
                     <Normaltekst>
-                        Nå gir du veilederen tilgang til å se det du ser på i
-                        nettvindu du har nav.no åpent i.
+                        <Tekst id={'delskjerm-modal-beskrivelse'} />
                     </Normaltekst>
                 </div>
                 {isOpen ? (
