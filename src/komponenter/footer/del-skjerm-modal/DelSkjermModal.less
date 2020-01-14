@@ -1,7 +1,7 @@
 .delskjerm{
   &__modal{
     max-width: 35rem;
-    position: relative;
+    overflow: visible !important;
   }
   &__content{
     padding: 3rem 4rem 2rem 4rem;
@@ -13,14 +13,16 @@
     width:100%;
     top: -2rem;
     left: 0rem;
-    position: absolute;
     display: flex;
+    position: absolute;
     justify-content: center;
   }
   &__veileder{
-    height: 2rem;
-    width: 2rem;
-    background-color: blue;
+    padding-top: 0.25rem;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 2.25rem;
+    background-color: #254b6d;
   }
   &__knapper{
     margin-top: 2rem;

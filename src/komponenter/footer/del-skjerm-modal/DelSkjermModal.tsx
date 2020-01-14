@@ -3,8 +3,8 @@ import Modal from 'nav-frontend-modal';
 import { Input } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
+import Veileder from '../../../ikoner/veiledere/Veileder.svg';
 import './DelSkjermModal.less';
-import Veileder from '../../../ikoner/veiledere/Veileder';
 
 interface Props {
     isOpen: boolean;
@@ -55,9 +55,7 @@ const DelSkjermModal = (props: Props) => {
             onRequestClose={props.onClose}
         >
             <div className={'delskjerm__header'}>
-                <div className={'delskjerm__veileder'}>
-                    <Veileder />
-                </div>
+                <img className={'delskjerm__veileder'} src={Veileder} />
             </div>
             <div className={'delskjerm__content'}>
                 <Undertittel>Del skjermen din med veilederen</Undertittel>
