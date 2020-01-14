@@ -2,21 +2,28 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'nav-frontend-modal';
 import { Input } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import './DelSkjermModal.less';
 import { Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
+import './DelSkjermModal.less';
+import Veileder from '../../../ikoner/veiledere/Veileder';
 
 interface Props {
     isOpen: boolean;
     onClose: () => void;
 }
 
+const feilmelding = 'Må bestå av 5 siffer';
+const label = 'Skriv inn koden du får fra veilederen på telefonen';
+
 const DelSkjermModal = (props: Props) => {
     const [code, setCode] = useState('');
     const [isOpen, setIsOpen] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(feilmelding);
 
     const w = window as any;
     const verdictExists = typeof w !== 'undefined' && w.vngage;
     const navGroupId = 'A034081B-6B73-46B7-BE27-23B8E9CE3079';
+    const feil = submitted && error ? { feilmelding: error } : undefined;
 
     useEffect(() => {
         if (verdictExists) {
@@ -25,7 +32,8 @@ const DelSkjermModal = (props: Props) => {
     }, []);
 
     const onClick = () => {
-        if (verdictExists) {
+        setSubmitted(true);
+        if (verdictExists && !error) {
             const response = w.vngage.join('queue', {
                 opportunityId: '615FF5E7-37B7-4697-A35F-72598B0DC53B',
                 solutionId: '5EB316A1-11E2-460A-B4E3-F82DBD13E21D',
@@ -36,7 +44,7 @@ const DelSkjermModal = (props: Props) => {
                 startCode: code,
             });
             console.log(response);
-            setIsOpen(false);
+            props.onClose();
         }
     };
 
@@ -47,6 +55,11 @@ const DelSkjermModal = (props: Props) => {
             contentLabel={'Skjermdeling'}
             onRequestClose={props.onClose}
         >
+            <div className={'delskjerm__header'}>
+                <div className={'delskjerm__veileder'}>
+                    <Veileder />
+                </div>
+            </div>
             <div className={'delskjerm__content'}>
                 <Undertittel>Del skjermen din med veilederen</Undertittel>
                 <div className={'delskjerm__beskrivelse'}>
@@ -57,11 +70,17 @@ const DelSkjermModal = (props: Props) => {
                     <>
                         <Input
                             name={'code'}
-                            label={
-                                'Skriv inn koden du får fra veilederen på telefonen'
-                            }
+                            label={label}
+                            feil={feil}
                             value={code}
-                            onChange={e => setCode(e.target.value)}
+                            onChange={e => {
+                                const value = e.target.value;
+                                setCode(value);
+                                setError('');
+                                if (!value.match(/\b\d{5}\b/g)) {
+                                    setError(feilmelding);
+                                }
+                            }}
                             maxLength={5}
                             bredde={'M'}
                         />
