@@ -46,4 +46,6 @@ export const ledetekster: { [key: string]: string } = {
     'tilbake-til-overskrift-se': 'Meny vises ikke pa samisk',
     'delskjerm-modal-overskrift': 'Del skjermen din med veilederen',
     'delskjerm-modal-beskrivelse': `Nå gir du veilederen tilgang til å se det du ser på i nettvindu du har nav.no åpent i.`,
+    'delskjerm-modal-feilmelding': `Må bestå av 5 siffer`,
+    'delskjerm-modal-label': `Skriv inn koden du får fra veilederen på telefonen`,
 };

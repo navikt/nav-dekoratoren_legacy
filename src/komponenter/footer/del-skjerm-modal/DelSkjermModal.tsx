@@ -3,9 +3,10 @@ import Modal from 'nav-frontend-modal';
 import { Input } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Veileder from '../../../ikoner/veiledere/Veileder.svg';
-import Tekst from '../../../tekster/finn-tekst';
+import Tekst, { finnTekst } from '../../../tekster/finn-tekst';
+import { AppState } from '../../../reducer/reducer';
 import './DelSkjermModal.less';
 
 interface Props {
@@ -13,20 +14,23 @@ interface Props {
     onClose: () => void;
 }
 
-const feilmelding = 'Må bestå av 5 siffer';
-const label = 'Skriv inn koden du får fra veilederen på telefonen';
-
 const DelSkjermModal = (props: Props) => {
+    // Language
+    const language = useSelector((state: AppState) => state.language).language;
+    const feilmelding = finnTekst('delskjerm-modal-feilmelding', language);
+    const label = finnTekst('delskjerm-modal-label', language);
+
+    // State
     const [code, setCode] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-    // const counter = useSelector(state => state.counter);
     const [error, setError] = useState(feilmelding);
+    const feil = submitted && error ? { feilmelding: error } : undefined;
 
+    // Verdic
     const w = window as any;
     const verdictExists = typeof w !== 'undefined' && w.vngage;
     const navGroupId = 'A034081B-6B73-46B7-BE27-23B8E9CE3079';
-    const feil = submitted && error ? { feilmelding: error } : undefined;
 
     useEffect(() => {
         if (verdictExists) {
