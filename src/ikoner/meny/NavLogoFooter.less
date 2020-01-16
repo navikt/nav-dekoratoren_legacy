@@ -3,33 +3,25 @@
 
 .footer {
     &__logo .navbar-brand {
-        margin: 0 auto;
-        display: flex;
-        justify-content: center;
+        width: 60px;
+        height: 60px;
 
         &:focus,
         &:active {
-            outline: 0;
-            background-color: initial;
-            border: @navDypBla 3px solid;
-            border-radius: 4px;
+            outline: @fokusFarge 3px solid;
+            // background-color: initial;
         }
-
         svg {
-            width: 60px;
-            height: 60px;
+            &:focus {
+                outline: 0;
+            }
         }
     }
 
     @media (min-width: @tabletLimitWidth) {
-        &__logo {
-            padding-bottom: 1.5rem;
-        }
         &__logo .navbar-brand {
-            svg {
-                width: 65px;
-                height: 65px;
-            }
+            width: 65px;
+            height: 65px;
         }
     }
 }

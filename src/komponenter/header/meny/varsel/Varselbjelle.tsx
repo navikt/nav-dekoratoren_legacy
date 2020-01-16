@@ -134,7 +134,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
         settVarslerSomLest(nyesteId)(dispatch),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Varselbjelle);
+export default connect(mapStateToProps, mapDispatchToProps)(Varselbjelle);

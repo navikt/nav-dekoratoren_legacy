@@ -2,72 +2,88 @@
 @import '../../styling-variabler.less';
 
 .footer {
-    &__menylenker-seksjon {
-        ul {
-            &:first-child,
-            &:last-child {
-                margin-top: 0;
-            }
-        }
-    }
-
     .sitefooter {
         padding: 1rem;
-        background-color: @navLysGra;
+        background-color: white;
         width: 100%;
         min-height: 12.5rem;
+        border-bottom: @navMorkGra 2px solid;
 
         .footer__innhold {
-            .footer__menylenker-seksjon {
-                text-align: center;
+            text-align: center;
 
-                li {
-                    margin-bottom: 0.5rem;
-
-                    .lenke {
-                        color: black;
-                        text-decoration: none;
-
-                        &:focus {
-                            color: white;
+            .footer__menylinje-topp {
+                .menylenker-seksjon {
+                    .typo-undertittel {
+                        color: @navGra40;
+                    }
+                    ul {
+                        &:first-child,
+                        &:last-child {
+                            margin-top: 0;
                         }
-                        &:hover {
-                            text-decoration: underline;
-                        }
+                    }
+                    li {
+                        margin-bottom: 0.8rem;
                     }
                 }
             }
-            .footer__logo {
-                text-align: center;
+
+            .menylenker-seksjon.venstre .lenke,
+            .menylenker-seksjon.midt .lenke,
+            .footer__menylinje-bottom .lenke {
+                color: @navMorkGra;
+                font-weight: 600;
+
+                &:focus {
+                    color: white;
+                }
             }
         }
     }
 
     @media (min-width: @tabletLimitWidth) {
-        &__menylenker-seksjon {
-            ul {
-                &:first-child,
-                &:last-child {
-                    margin-top: 1rem;
-                }
-            }
-        }
-
         .sitefooter {
-            padding: 0;
+            padding: 0.5rem 1rem 1.5rem;
 
             .footer__innhold {
-                display: flex;
-                flex-wrap: wrap;
                 width: auto;
                 margin: 0 auto;
+                text-align: initial;
 
-                .footer__menylenker-seksjon {
-                    width: 33.33%;
+                .footer__menylinje-topp {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .menylenker-seksjon {
+                        width: 25%;
+
+                        ul {
+                            &:first-child,
+                            &:last-child {
+                                margin-top: 1rem;
+                            }
+                        }
+
+                        .logo {
+                            display: flex;
+                            justify-content: center;
+                        }
+                    }
                 }
+                .footer__menylinje-bottom {
+                    display: flex;
+                    .bottom-venstre {
+                        width: 75%;
+                        display: flex;
 
-                .footer__logo {
-                    width: 100%;
+                        li {
+                            margin-right: 2.5rem;
+                        }
+                    }
+                    .bottom-hoyre {
+                        width: 25%;
+                    }
                 }
             }
         }
@@ -77,6 +93,7 @@
         .sitefooter {
             .footer__innhold {
                 width: @desktopLimitWidth;
+                margin: 0 auto;
             }
         }
     }

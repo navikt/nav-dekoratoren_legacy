@@ -96,9 +96,9 @@ const template = `
                 content="width=device-width,initial-scale=1,shrink-to-fit=no"
             />
             <meta name="theme-color" content="#000000" />
-            <link rel="icon" href=${favicon} type="image/x-icon" />
             <title>NAV Dekoratør</title>
             <div id="styles">
+                <link rel="icon" href=${favicon} type="image/x-icon" />
                 <link href=${fileCss} rel="stylesheet" />
             </div>
         </head>

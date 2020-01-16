@@ -56,6 +56,13 @@ export const erNavDekoratoren = (): boolean => {
     );
 };
 
+export const genererUrl = (lenke: string): string => {
+    if (lenke.startsWith('/')) {
+        return Environment.baseUrlEnonic + lenke;
+    }
+    return lenke;
+};
+
 export const erDev =
     verifyWindowObj() &&
     process.env.NODE_ENV === 'development' &&
@@ -63,7 +70,7 @@ export const erDev =
 
 export const localEnv = {
     baseUrl: 'http://localhost:3000',
-    baseUrlEnonic: 'https://www-x1.nav.no',
+    baseUrlEnonic: 'https://www-q1.nav.no',
     innloggingslinjenUrl: 'http://localhost:3000/innloggingslinje-api/auth',
     menypunkter: `http://localhost:8088/person/nav-dekoratoren/api/get/menyvalg`,
     minsideArbeidsgiverUrl: `https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/`,
