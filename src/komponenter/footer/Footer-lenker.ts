@@ -1,5 +1,11 @@
 import { Language } from '../../reducer/language-duck';
-import { FooterLenke, LanguageSelectors } from './Footer-utils';
+
+export interface LanguageSelectors {
+    lenketekst: string;
+    url: string;
+    testurl: string;
+    lang: Language;
+}
 
 export const lang: LanguageSelectors[] = [
     {
@@ -26,6 +32,12 @@ export enum FooterSeksjon {
     VENSTRE,
     HOYRE,
     BUNN,
+}
+
+interface FooterLenke {
+    lenketekst: string;
+    url: string;
+    seksjon: FooterSeksjon;
 }
 
 const footerlenker: FooterLenke[] = [

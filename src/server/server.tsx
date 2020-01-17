@@ -106,10 +106,18 @@ const template = `
         </head>
         <body>
             <div id="header-withmenu">
-                <section id="decorator-header" role="main">${htmlHeader}</section>
+                <section id="decorator-header" role="main">${ReactDOMServer.renderToString(
+                    <ReduxProvider store={store}>
+                        <Head />
+                    </ReduxProvider>
+                )}</section>
             </div>
             <div id="footer-withmenu">
-                <section id="decorator-footer" role="main">${htmlFooter}</section>
+                <section id="decorator-footer" role="main">${ReactDOMServer.renderToString(
+                    <ReduxProvider store={store}>
+                        <Footer />
+                    </ReduxProvider>
+                )}</section>
             </div>
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}"></div>

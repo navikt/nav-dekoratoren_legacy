@@ -57,10 +57,7 @@ export const erNavDekoratoren = (): boolean => {
 };
 
 export const genererUrl = (lenke: string): string => {
-    if (lenke.startsWith('/')) {
-        return Environment.baseUrlEnonic + lenke;
-    }
-    return lenke;
+    return lenke.startsWith('/') ? Environment.baseUrlEnonic + lenke : lenke;
 };
 
 export const erDev =
