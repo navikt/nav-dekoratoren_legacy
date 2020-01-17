@@ -75,16 +75,6 @@ const fileCss = `${process.env.URL_APP_BASE || defaultAppUrl}/css/client.css`;
 const fileScript = `${process.env.URL_APP_BASE || defaultAppUrl}/client.js`;
 const fileFavicon = `${process.env.URL_APP_BASE ||
     defaultAppUrl}/media/favicon.ico`;
-const htmlHeader = ReactDOMServer.renderToString(
-    <ReduxProvider store={store}>
-        <Head />
-    </ReduxProvider>
-);
-const htmlFooter = ReactDOMServer.renderToString(
-    <ReduxProvider store={store}>
-        <Footer />
-    </ReduxProvider>
-);
 
 const template = `
     <!DOCTYPE html>
