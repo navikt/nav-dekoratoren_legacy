@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../utils/bem';
 import { Language } from '../../reducer/language-duck';
 import NavLogoFooter from '../../ikoner/meny/NavLogoFooter';
 import { erNavDekoratoren } from '../../utils/Environment';
+import DelSkjermModal from './del-skjerm-modal/DelSkjermModal';
 
 interface Props {
     className: string;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 interface State {
+    visDelSkjermModal: boolean;
     hasMounted: boolean;
     erNavDekoratoren: boolean;
     languages: LanguageSelectors[];
@@ -49,10 +51,14 @@ class FooterLenkeMeny extends React.Component<Props, State> {
 
         this.state = {
             hasMounted: false,
+            visDelSkjermModal: false,
             erNavDekoratoren: false,
             languages: [this.lang[1], this.lang[2]],
         };
     }
+
+    openModal = () => this.setState({ visDelSkjermModal: true });
+    closeModal = () => this.setState({ visDelSkjermModal: false });
 
     componentDidMount(): void {
         this.setState(
@@ -97,7 +103,6 @@ class FooterLenkeMeny extends React.Component<Props, State> {
                             <li>
                                 <Lenke href="#">Kontakt oss</Lenke>
                             </li>
-
                             {this.state.languages.map(lenke => {
                                 return (
                                     <li key={lenke.lang}>
@@ -114,9 +119,15 @@ class FooterLenkeMeny extends React.Component<Props, State> {
                                 );
                             })}
                             <li>
-                                <Lenke href="#">
+                                <Lenke href="#" onClick={this.openModal}>
                                     Del skjerm med kontaktsenteret
                                 </Lenke>
+                                {this.state.visDelSkjermModal && (
+                                    <DelSkjermModal
+                                        isOpen={this.state.visDelSkjermModal}
+                                        onClose={this.closeModal}
+                                    />
+                                )}
                             </li>
                         </ul>
                     </section>
