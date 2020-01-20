@@ -76,6 +76,17 @@ const fileScript = `${process.env.URL_APP_BASE || defaultAppUrl}/client.js`;
 const fileFavicon = `${process.env.URL_APP_BASE ||
     defaultAppUrl}/media/favicon.ico`;
 
+const htmlHeader = ReactDOMServer.renderToString(
+    <ReduxProvider store={store}>
+        <Head />
+    </ReduxProvider>
+);
+const htmlFooter = ReactDOMServer.renderToString(
+    <ReduxProvider store={store}>
+        <Footer />
+    </ReduxProvider>
+);
+
 const template = `
     <!DOCTYPE html>
     <html lang="no">
@@ -96,18 +107,10 @@ const template = `
         </head>
         <body>
             <div id="header-withmenu">
-                <section id="decorator-header" role="main">${ReactDOMServer.renderToString(
-                    <ReduxProvider store={store}>
-                        <Head />
-                    </ReduxProvider>
-                )}</section>
+                <section id="decorator-header" role="main">${htmlHeader}</section>
             </div>
             <div id="footer-withmenu">
-                <section id="decorator-footer" role="main">${ReactDOMServer.renderToString(
-                    <ReduxProvider store={store}>
-                        <Footer />
-                    </ReduxProvider>
-                )}</section>
+                <section id="decorator-footer" role="main">${htmlFooter}</section>
             </div>
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}"></div>
