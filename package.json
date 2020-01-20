@@ -1,7 +1,7 @@
 {
     "name": "nav-dekoratoren",
     "version": "0.1.0",
-    "homepage": "/person/nav-dekoratoren",
+    "homepage": "/dekoratoren",
     "private": true,
     "scripts": {
         "start": "cross-env DEVELOPMENT=true npm-run-all -p -r start-server start-craco",

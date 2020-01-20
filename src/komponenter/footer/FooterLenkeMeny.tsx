@@ -29,19 +29,19 @@ class FooterLenkeMeny extends React.Component<Props, State> {
     lang = [
         {
             url: 'https://www.nav.no/Forsiden',
-            testurl: '/person/nav-dekoratoren/person/no/',
+            testurl: '/dekoratoren/person/no/',
             text: 'Norske sider',
             lang: Language.NORSK,
         },
         {
             url: 'https://www.nav.no/en/Home',
-            testurl: '/person/nav-dekoratoren/person/en/',
+            testurl: 'dekoratoren/person/en/',
             text: 'English pages',
             lang: Language.ENGELSK,
         },
         {
             url: 'https://www.nav.no/se/Samegiella',
-            testurl: '/person/nav-dekoratoren/person/se/',
+            testurl: 'dekoratoren/person/se/',
             text: 'Sámegiel skovit',
             lang: Language.SAMISK,
         },

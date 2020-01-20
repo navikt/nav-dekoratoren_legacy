@@ -86,7 +86,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     settArbeidsflate: () => dispatch(finnArbeidsflate()),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Arbeidsflatemeny);
+export default connect(mapStateToProps, mapDispatchToProps)(Arbeidsflatemeny);

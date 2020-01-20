@@ -51,9 +51,7 @@ export const verifyWindowObj = () => {
 };
 
 export const erNavDekoratoren = (): boolean => {
-    return (
-        verifyWindowObj() && window.location.href.includes('/nav-dekoratoren')
-    );
+    return verifyWindowObj() && window.location.href.includes('/dekoratoren');
 };
 
 export const erDev =
@@ -65,9 +63,9 @@ export const localEnv = {
     baseUrl: 'http://localhost:3000',
     baseUrlEnonic: 'https://www-x1.nav.no',
     innloggingslinjenUrl: 'http://localhost:3000/innloggingslinje-api/auth',
-    menypunkter: `http://localhost:8088/person/nav-dekoratoren/api/get/menyvalg`,
+    menypunkter: `http://localhost:8088/dekoratoren/api/get/menyvalg`,
     minsideArbeidsgiverUrl: `https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/`,
-    sokeresultat: `http://localhost:8088/person/nav-dekoratoren/api/get/sokeresultat`,
+    sokeresultat: `http://localhost:8088/dekoratoren/api/get/sokeresultat`,
     varselinnboksUrl: `http://localhost:8088/person/varselinnboks`,
     dittNavUrl: `http://localhost:8088/person/dittnav/`,
     loginUrl: '#',

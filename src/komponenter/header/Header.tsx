@@ -52,7 +52,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     hentMenypunkter: () => fetchMenypunkter()(dispatch),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
