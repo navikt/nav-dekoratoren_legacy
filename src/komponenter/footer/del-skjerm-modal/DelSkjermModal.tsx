@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../reducer/reducer';
 import Modal from 'nav-frontend-modal';
 import { Input } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
-import { useSelector } from 'react-redux';
-import Veileder from '../../../ikoner/veiledere/Veileder.svg';
 import Tekst, { finnTekst } from '../../../tekster/finn-tekst';
-import { AppState } from '../../../reducer/reducer';
+import Veileder from '../../../ikoner/veiledere/Veileder.svg';
 import './DelSkjermModal.less';
 
 interface Props {
