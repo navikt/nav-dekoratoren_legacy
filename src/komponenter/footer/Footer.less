@@ -8,93 +8,89 @@
         width: 100%;
         min-height: 12.5rem;
         border-bottom: @navMorkGra 2px solid;
+    }
 
-        .footer__innhold {
-            text-align: center;
+    &__innhold {
+        text-align: center;
+    }
 
-            .footer__menylinje-topp {
-                .menylenker-seksjon {
-                    .typo-undertittel {
-                        color: @navGra40;
-                    }
-                    ul {
-                        &:first-child,
-                        &:last-child {
-                            margin-top: 0;
-                        }
-                    }
-                    li {
-                        margin-bottom: 0.8rem;
-                    }
+    &__menylinje-topp {
+        .menylenker-seksjon {
+            .typo-undertittel {
+                color: @navGra40;
+            }
+            ul {
+                &:first-child,
+                &:last-child {
+                    margin-top: 0;
                 }
             }
-
-            .menylenker-seksjon.venstre .lenke,
-            .menylenker-seksjon.midt .lenke,
-            .footer__menylinje-bottom .lenke {
-                color: @navMorkGra;
-                font-weight: 600;
-
-                &:focus {
-                    color: white;
-                }
+            li {
+                margin-bottom: 0.8rem;
             }
+        }
+    }
+
+    &__menylinje-topp .menylenker-seksjon .venstre .lenke,
+    &__menylinje-topp .menylenker-seksjon .midt .lenke,
+    &__menylinje-bottom .lenke {
+        color: @navMorkGra;
+        font-weight: 600;
+
+        &:focus {
+            color: white;
         }
     }
 
     @media (min-width: @tabletLimitWidth) {
         .sitefooter {
             padding: 0.5rem 1rem 1.5rem;
+        }
+        &__innhold {
+            width: auto;
+            margin: 0 auto;
+            text-align: initial;
+        }
+        &__menylinje-topp {
+            display: flex;
+            flex-wrap: wrap;
 
-            .footer__innhold {
-                width: auto;
-                margin: 0 auto;
-                text-align: initial;
+            .menylenker-seksjon {
+                width: 25%;
 
-                .footer__menylinje-topp {
-                    display: flex;
-                    flex-wrap: wrap;
-
-                    .menylenker-seksjon {
-                        width: 25%;
-
-                        ul {
-                            &:first-child,
-                            &:last-child {
-                                margin-top: 1rem;
-                            }
-                        }
-
-                        .logo {
-                            display: flex;
-                            justify-content: center;
-                        }
+                ul {
+                    &:first-child,
+                    &:last-child {
+                        margin-top: 1rem;
                     }
                 }
-                .footer__menylinje-bottom {
-                    display: flex;
-                    .bottom-venstre {
-                        width: 75%;
-                        display: flex;
 
-                        li {
-                            margin-right: 2.5rem;
-                        }
-                    }
-                    .bottom-hoyre {
-                        width: 25%;
-                    }
+                .logo {
+                    display: flex;
+                    justify-content: center;
                 }
+            }
+        }
+        &__menylinje-bottom {
+            display: flex;
+            .bottom-venstre {
+                width: 75%;
+                display: flex;
+
+                li {
+                    margin-right: 2.5rem;
+                }
+            }
+            .bottom-hoyre {
+                width: 25%;
             }
         }
     }
 
     @media (min-width: @desktopLimitWidth) {
-        .sitefooter {
-            .footer__innhold {
-                width: @desktopLimitWidth;
-                margin: 0 auto;
-            }
+        &__innhold {
+            width: @desktopLimitWidth;
+            margin: 0 auto;
         }
     }
 }
