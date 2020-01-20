@@ -112,15 +112,15 @@ const template = `
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
+                <script
+                    src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js"
+                    integrity="sha384-9YqOIesDhDEY++EsRGPyixeoD0vNAx2BZNvvygZQ+83K6mK9Z0uK5xh380SCBenA"
+                    crossorigin="anonymous"
+                ></script>
             </div>
             <div id="skiplinks"></div>
             <div id="megamenu-resources"></div>
             <div id="webstats-ga-notrack"></div>
-            <script
-                src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js"
-                integrity="sha384-9YqOIesDhDEY++EsRGPyixeoD0vNAx2BZNvvygZQ+83K6mK9Z0uK5xh380SCBenA"
-                crossorigin="anonymous"
-        ></script>
         </body>
     </html>`;
 
