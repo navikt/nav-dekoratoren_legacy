@@ -1,0 +1,38 @@
+@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../styling-variabler.less';
+
+.delskjerm{
+  &__modal{
+    max-width: 35rem;
+    overflow: visible !important;
+  }
+  &__content{
+    padding: 3rem 4rem 2rem 4rem;
+  }
+  &__beskrivelse{
+    margin:1rem 0 1.5rem 0;
+  }
+  &__header{
+    width:100%;
+    top: -2rem;
+    left: 0rem;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+  }
+  &__veileder{
+    padding-top: 0.25rem;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 2.25rem;
+    background-color: @navBlaDarken60;
+  }
+  &__knapper{
+    margin-top: 1.5rem;
+    display: flex;
+    > * {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
