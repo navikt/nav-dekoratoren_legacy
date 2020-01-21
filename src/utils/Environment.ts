@@ -1,3 +1,5 @@
+import { FooterLenke } from '../komponenter/footer/Footer-lenker';
+
 export default class Environment {
     static baseUrl: string;
     static baseUrlEnonic: string;
@@ -56,6 +58,18 @@ export const erNavDekoratoren = (): boolean => {
     );
 };
 
+export const genererLenkerTilUrl = (footerlenker: FooterLenke[]) => {
+    const lenker = footerlenker.map(lenke => {
+        lenke.url = genererUrl(lenke.url);
+        return lenke;
+    });
+    return lenker;
+};
+
+export const genererUrl = (lenke: string): string => {
+    return lenke.startsWith('/') ? Environment.baseUrlEnonic + lenke : lenke;
+};
+
 export const erDev =
     verifyWindowObj() &&
     process.env.NODE_ENV === 'development' &&
@@ -63,7 +77,7 @@ export const erDev =
 
 export const localEnv = {
     baseUrl: 'http://localhost:3000',
-    baseUrlEnonic: 'https://www-x1.nav.no',
+    baseUrlEnonic: 'https://www-q1.nav.no',
     innloggingslinjenUrl: 'http://localhost:3000/innloggingslinje-api/auth',
     menypunkter: `http://localhost:8088/person/nav-dekoratoren/api/get/menyvalg`,
     minsideArbeidsgiverUrl: `https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/`,

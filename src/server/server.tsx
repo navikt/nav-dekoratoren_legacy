@@ -14,7 +14,6 @@ import getStore from './../redux/store';
 import Head from '../Head';
 
 const basePath = '/person/nav-dekoratoren';
-const favicon = require('../../public/favicon.ico');
 const isProduction = process.env.NODE_ENV === 'production';
 const buildPath = `${process.cwd()}/buildfolder`;
 const app = express();
@@ -74,6 +73,9 @@ const store = getStore();
 const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/env.json`;
 const fileCss = `${process.env.URL_APP_BASE || defaultAppUrl}/css/client.css`;
 const fileScript = `${process.env.URL_APP_BASE || defaultAppUrl}/client.js`;
+const fileFavicon = `${process.env.URL_APP_BASE ||
+    defaultAppUrl}/media/favicon.ico`;
+
 const htmlHeader = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
         <Head />
@@ -96,9 +98,10 @@ const template = `
                 content="width=device-width,initial-scale=1,shrink-to-fit=no"
             />
             <meta name="theme-color" content="#000000" />
-            <link rel="icon" href=${favicon} type="image/x-icon" />
             <title>NAV Dekoratør</title>
+            <link rel="icon" href=${fileFavicon} type="image/x-icon" />
             <div id="styles">
+                <link rel="icon" href=${fileFavicon} type="image/x-icon" />
                 <link href=${fileCss} rel="stylesheet" />
             </div>
         </head>
