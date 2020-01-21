@@ -1,40 +1,10 @@
-import { Language } from '../../reducer/language-duck';
-
-export interface LanguageSelectors {
-    lenketekst: string;
-    url: string;
-    testurl: string;
-    lang: Language;
-}
-
-export const lang: LanguageSelectors[] = [
-    {
-        lenketekst: 'Norske sider',
-        url: '/no/person',
-        testurl: '/person/nav-dekoratoren/person/no/',
-        lang: Language.NORSK,
-    },
-    {
-        lenketekst: 'English pages',
-        url: '/en/Home',
-        testurl: '/person/nav-dekoratoren/person/en/',
-        lang: Language.ENGELSK,
-    },
-    {
-        lenketekst: 'Sámegiel skovit',
-        url: '/se/Samegiella',
-        testurl: '/person/nav-dekoratoren/person/se/',
-        lang: Language.SAMISK,
-    },
-];
-
 export enum FooterSeksjon {
     VENSTRE,
     HOYRE,
     BUNN,
 }
 
-interface FooterLenke {
+export interface FooterLenke {
     lenketekst: string;
     url: string;
     seksjon: FooterSeksjon;

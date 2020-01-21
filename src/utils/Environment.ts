@@ -1,3 +1,5 @@
+import { FooterLenke } from '../komponenter/footer/Footer-lenker';
+
 export default class Environment {
     static baseUrl: string;
     static baseUrlEnonic: string;
@@ -54,6 +56,15 @@ export const erNavDekoratoren = (): boolean => {
     return (
         verifyWindowObj() && window.location.href.includes('/nav-dekoratoren')
     );
+};
+
+export const genererLenkerTilUrl = (
+    footerlenker: FooterLenke[]
+): FooterLenke[] => {
+    return footerlenker.map(lenke => {
+        lenke.url = genererUrl(lenke.url);
+        return lenke;
+    });
 };
 
 export const genererUrl = (lenke: string): string => {

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Lenke from 'nav-frontend-lenker';
-import { genererUrl, verifyWindowObj } from '../../../utils/Environment';
+import { genererLenkerTilUrl } from '../../../utils/Environment';
 import BEMHelper from '../../../utils/bem';
 import Tekst from '../../../tekster/finn-tekst';
-import { lenkerBunn } from '../Footer-lenker';
+import { FooterLenke, lenkerBunn } from '../Footer-lenker';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
 
 interface Props {
@@ -13,23 +13,30 @@ interface Props {
 const FooterBottom = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
     const [visDelSkjermModal, setVisDelSkjermModal] = useState(false);
+    const [lenker, setLenker] = useState<FooterLenke[]>(lenkerBunn);
+
+    useEffect(() => {
+        setLenker(genererLenkerTilUrl(lenkerBunn));
+    }, []);
+
     const openModal = () => setVisDelSkjermModal(true);
     const closeModal = () => setVisDelSkjermModal(false);
 
     return (
         <section className={cls.element('menylinje-bottom')}>
-            <ul className="bottom-venstre">
-                {verifyWindowObj() &&
-                    lenkerBunn.map(lenke => {
+            <div className="bottom-venstre">
+                <ul>
+                    {lenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
-                                <Lenke href={genererUrl(lenke.url)}>
+                                <Lenke href={lenke.url}>
                                     {lenke.lenketekst}
                                 </Lenke>
                             </li>
                         );
                     })}
-            </ul>
+                </ul>
+            </div>
             <ul className="bottom-hoyre">
                 <li>
                     <Lenke href="#" onClick={openModal}>

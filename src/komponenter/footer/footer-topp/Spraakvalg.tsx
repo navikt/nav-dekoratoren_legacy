@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { AppState } from '../../../reducer/reducer';
 import { connect } from 'react-redux';
+import { Language } from '../../../reducer/language-duck';
 import { Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
-import { Language } from '../../../reducer/language-duck';
 import Tekst from '../../../tekster/finn-tekst';
-import { verifyWindowObj } from '../../../utils/Environment';
-import { erNavDekoratoren, genererUrl } from '../../../utils/Environment';
-import { lang, LanguageSelectors } from '../Footer-lenker';
+import { erNavDekoratoren } from '../../../utils/Environment';
+import {
+    getSpraaklenker,
+    spraaklenker,
+    Spraaklenke,
+} from './Spraakvalg-lenker';
 
 interface StateProps {
     language: Language;
@@ -16,32 +19,17 @@ interface StateProps {
 interface State {
     hasMounted: boolean;
     erNavDekoratoren: boolean;
-    languages: LanguageSelectors[];
+    spraaklenker: Spraaklenke[];
 }
 
 class Spraakvalg extends React.Component<StateProps, State> {
-    getLanguage = (language: Language) => {
-        const nonSelectedLang = lang;
-        switch (language) {
-            case Language.NORSK:
-                return nonSelectedLang.splice(1, 3);
-            case Language.ENGELSK:
-                nonSelectedLang.splice(1, 1);
-                return nonSelectedLang;
-            case Language.SAMISK:
-                return nonSelectedLang.splice(0, 2);
-            default:
-                return nonSelectedLang.splice(1, 3);
-        }
-    };
-
     constructor(props: StateProps) {
         super(props);
 
         this.state = {
             hasMounted: false,
             erNavDekoratoren: false,
-            languages: [lang[1], lang[2]],
+            spraaklenker: [spraaklenker[1], spraaklenker[2]],
         };
     }
 
@@ -54,7 +42,7 @@ class Spraakvalg extends React.Component<StateProps, State> {
                 if (this.state.hasMounted) {
                     this.setState({
                         erNavDekoratoren: erNavDekoratoren(),
-                        languages: this.getLanguage(this.props.language),
+                        spraaklenker: getSpraaklenker(this.props.language),
                     });
                 }
             }
@@ -63,21 +51,19 @@ class Spraakvalg extends React.Component<StateProps, State> {
 
     render() {
         return (
-            <ul>
-                <li>
-                    <Undertittel>
-                        <Tekst id="footer-languages-overskrift" />
-                    </Undertittel>
-                </li>
-                {verifyWindowObj() &&
-                    this.state.languages.map(lenke => {
+            <>
+                <Undertittel>
+                    <Tekst id="footer-languages-overskrift" />
+                </Undertittel>
+                <ul>
+                    {this.state.spraaklenker.map(lenke => {
                         return (
                             <li key={lenke.lang}>
                                 <Lenke
                                     href={
-                                        erNavDekoratoren
+                                        this.state.erNavDekoratoren
                                             ? lenke.testurl
-                                            : genererUrl(lenke.url)
+                                            : lenke.url
                                     }
                                 >
                                     {lenke.lenketekst}
@@ -85,7 +71,8 @@ class Spraakvalg extends React.Component<StateProps, State> {
                             </li>
                         );
                     })}
-            </ul>
+                </ul>
+            </>
         );
     }
 }

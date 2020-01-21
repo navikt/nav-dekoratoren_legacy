@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
-import { genererUrl, verifyWindowObj } from '../../../utils/Environment';
 import BEMHelper from '../../../utils/bem';
-import { lenkerHoyre, lenkerVenstre } from '../Footer-lenker';
-import NavLogoFooter from '../../../ikoner/meny/NavLogoFooter';
 import Tekst from '../../../tekster/finn-tekst';
+import { genererLenkerTilUrl } from '../../../utils/Environment';
+import { FooterLenke, lenkerHoyre, lenkerVenstre } from '../Footer-lenker';
+import NavLogoFooter from '../../../ikoner/meny/NavLogoFooter';
 import Spraakvalg from './Spraakvalg';
 
 interface Props {
@@ -13,6 +13,16 @@ interface Props {
 }
 
 const FooterTopp = ({ classname }: Props) => {
+    const [venstrelenker, setVenstrelenker] = useState<FooterLenke[]>(
+        lenkerVenstre
+    );
+    const [hoyrelenker, setHoyrelenker] = useState<FooterLenke[]>(lenkerHoyre);
+
+    useEffect(() => {
+        setVenstrelenker(genererLenkerTilUrl(lenkerVenstre));
+        setHoyrelenker(genererLenkerTilUrl(lenkerHoyre));
+    }, []);
+
     const cls = BEMHelper(classname);
     return (
         <section className={cls.element('menylinje-topp')}>
@@ -24,47 +34,41 @@ const FooterTopp = ({ classname }: Props) => {
                 />
             </div>
             <div className="menylenker-seksjon venstre">
+                <Undertittel>
+                    <Tekst id={'footer-hjelp-overskrift'} />
+                </Undertittel>
                 <ul>
-                    <li>
-                        <Undertittel>
-                            <Tekst id="footer-hjelp-overskrift" />
-                        </Undertittel>
-                    </li>
-                    {verifyWindowObj() &&
-                        lenkerVenstre.map(lenke => {
-                            return (
-                                <li key={lenke.lenketekst}>
-                                    <Lenke href={genererUrl(lenke.url)}>
-                                        {lenke.lenketekst}
-                                    </Lenke>
-                                </li>
-                            );
-                        })}
+                    {venstrelenker.map(lenke => {
+                        return (
+                            <li key={lenke.lenketekst}>
+                                <Lenke href={lenke.url}>
+                                    {lenke.lenketekst}
+                                </Lenke>
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
             <div className="menylenker-seksjon midt">
                 <Spraakvalg />
             </div>
             <div className="menylenker-seksjon hoyre">
+                <Undertittel className="tilgjengelighet-overskrift">
+                    <Tekst id="footer-tilgjengelighet-overskrift" />
+                </Undertittel>
+                <Normaltekst className="tilgjengelighet-ingress">
+                    <Tekst id="footer-tilgjengelighet-ingress" />
+                </Normaltekst>
                 <ul>
-                    <li>
-                        <Undertittel className="tilgjengelighet-overskrift">
-                            <Tekst id="footer-tilgjengelighet-overskrift" />
-                        </Undertittel>
-                        <Normaltekst className="tilgjengelighet-ingress">
-                            <Tekst id="footer-tilgjengelighet-ingress" />
-                        </Normaltekst>
-                    </li>
-                    {verifyWindowObj() &&
-                        lenkerHoyre.map(lenke => {
-                            return (
-                                <li key={lenke.lenketekst}>
-                                    <Lenke href={genererUrl(lenke.url)}>
-                                        {lenke.lenketekst}
-                                    </Lenke>
-                                </li>
-                            );
-                        })}
+                    {hoyrelenker.map(lenke => {
+                        return (
+                            <li key={lenke.lenketekst}>
+                                <Lenke href={lenke.url}>
+                                    {lenke.lenketekst}
+                                </Lenke>
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
         </section>

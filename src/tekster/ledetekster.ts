@@ -9,12 +9,12 @@ export const ledetekster: { [key: string]: string } = {
     'footer-tilgjengelighet-overskrift-en': 'About',
     'footer-tilgjengelighet-overskrift-se': 'Om nettstedet',
     'footer-del-skjerm': 'Del skjerm med veileder',
-    'footer-del-skjerm-en': 'Del skjerm med veileder',
+    'footer-del-skjerm-en': 'Share screen with your tutor',
     'footer-del-skjerm-se': 'Del skjerm med veileder',
     'footer-tilgjengelighet-ingress':
         'Nettstedet er designet for å være tilgjengelig og nyttig for så mange mennesker som mulig. Vi vil også beskytte ditt privatliv når du kontakter oss/når du besøker oss på nav.no.',
     'footer-tilgjengelighet-ingress-en':
-        'Nettstedet er designet for å være tilgjengelig og nyttig for så mange mennesker som mulig. Vi vil også beskytte ditt privatliv når du kontakter oss/når du besøker oss på nav.no.',
+        'This site is designet to be accessible and useful to as many people as possible. Your privacy is also protected when you contact us/visit nav.no',
     'footer-tilgjengelighet-ingress-se':
         'Nettstedet er designet for å være tilgjengelig og nyttig for så mange mennesker som mulig. Vi vil også beskytte ditt privatliv når du kontakter oss/når du besøker oss på nav.no.',
     'ga-til-min-side': 'Gå til Min side',
