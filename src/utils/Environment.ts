@@ -58,13 +58,12 @@ export const erNavDekoratoren = (): boolean => {
     );
 };
 
-export const genererLenkerTilUrl = (
-    footerlenker: FooterLenke[]
-): FooterLenke[] => {
-    return footerlenker.map(lenke => {
+export const genererLenkerTilUrl = (footerlenker: FooterLenke[]) => {
+    const lenker = footerlenker.map(lenke => {
         lenke.url = genererUrl(lenke.url);
         return lenke;
     });
+    return lenker;
 };
 
 export const genererUrl = (lenke: string): string => {

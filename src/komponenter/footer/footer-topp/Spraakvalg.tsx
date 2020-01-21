@@ -52,7 +52,7 @@ class Spraakvalg extends React.Component<StateProps, State> {
     render() {
         return (
             <>
-                <Undertittel>
+                <Undertittel className="blokk-xxs">
                     <Tekst id="footer-languages-overskrift" />
                 </Undertittel>
                 <ul>

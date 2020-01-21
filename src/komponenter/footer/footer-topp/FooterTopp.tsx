@@ -34,7 +34,7 @@ const FooterTopp = ({ classname }: Props) => {
                 />
             </div>
             <div className="menylenker-seksjon venstre">
-                <Undertittel>
+                <Undertittel className="blokk-xxs">
                     <Tekst id={'footer-hjelp-overskrift'} />
                 </Undertittel>
                 <ul>
@@ -53,7 +53,7 @@ const FooterTopp = ({ classname }: Props) => {
                 <Spraakvalg />
             </div>
             <div className="menylenker-seksjon hoyre">
-                <Undertittel className="tilgjengelighet-overskrift">
+                <Undertittel className="tilgjengelighet-overskrift blokk-xxs">
                     <Tekst id="footer-tilgjengelighet-overskrift" />
                 </Undertittel>
                 <Normaltekst className="tilgjengelighet-ingress">

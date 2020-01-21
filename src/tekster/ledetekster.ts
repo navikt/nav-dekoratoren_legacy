@@ -14,7 +14,7 @@ export const ledetekster: { [key: string]: string } = {
     'footer-tilgjengelighet-ingress':
         'Nettstedet er designet for å være tilgjengelig og nyttig for så mange mennesker som mulig. Vi vil også beskytte ditt privatliv når du kontakter oss/når du besøker oss på nav.no.',
     'footer-tilgjengelighet-ingress-en':
-        'This site is designet to be accessible and useful to as many people as possible. Your privacy is also protected when you contact us/visit nav.no',
+        'This site is designed to be accessible and useful to as many people as possible. Your privacy is also protected when you contact us/visit nav.no',
     'footer-tilgjengelighet-ingress-se':
         'Nettstedet er designet for å være tilgjengelig og nyttig for så mange mennesker som mulig. Vi vil også beskytte ditt privatliv når du kontakter oss/når du besøker oss på nav.no.',
     'ga-til-min-side': 'Gå til Min side',
