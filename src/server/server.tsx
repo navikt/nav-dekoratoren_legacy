@@ -24,6 +24,7 @@ const PORT = 8088;
 const defaultSearchUrl = `https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2`;
 const defaultMenuUrl = `http://localhost:8080/navno/_/service/no.nav.navno/menu`;
 const defaultAppUrl = `http://localhost:8088` + basePath;
+const localhost = 'http://localhost:8088';
 
 // Mock
 import mockMenu from './mock/menu.json';
@@ -74,6 +75,7 @@ const store = getStore();
 const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/env.json`;
 const fileCss = `${process.env.URL_APP_BASE || defaultAppUrl}/css/client.css`;
 const fileScript = `${process.env.URL_APP_BASE || defaultAppUrl}/client.js`;
+const fileFavicon = `${process.env.baseUrl || localhost}${favicon}`;
 
 const htmlHeader = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
@@ -98,9 +100,9 @@ const template = `
             />
             <meta name="theme-color" content="#000000" />
             <title>NAV Dekoratør</title>
-            <link rel="icon" href=${favicon} type="image/x-icon" />
+            <link rel="icon" href=${fileFavicon} type="image/x-icon" />
             <div id="styles">
-                <link rel="icon" href=${favicon} type="image/x-icon" />
+                <link rel="icon" href=${fileFavicon} type="image/x-icon" />
                 <link href=${fileCss} rel="stylesheet" />
             </div>
         </head>
