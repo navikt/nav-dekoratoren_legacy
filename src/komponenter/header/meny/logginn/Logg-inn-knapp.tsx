@@ -13,12 +13,11 @@ import './Logg-inn-knapp.less';
 
 const getPath = () => {
     if (verifyWindowObj()) {
-        return window.location.pathname.split('/')[3] !== undefined
-            ? '/person/nav-dekoratoren/' +
-                  window.location.pathname.split('/')[3]
-            : '/person/nav-dekoratoren/';
+        return window.location.pathname.split('/')[2] !== undefined
+            ? '/dekoratoren/' + window.location.pathname.split('/')[2]
+            : '/dekoratoren/';
     }
-    return '/person/nav-dekoratoren/';
+    return '/dekoratoren/';
 };
 
 interface StateProps {

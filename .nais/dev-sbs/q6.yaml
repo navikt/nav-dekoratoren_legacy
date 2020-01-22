@@ -10,10 +10,10 @@ spec:
     image: navikt/{{reponame}}:{{version}}
     port: 8088
     liveness:
-        path: /person/nav-dekoratoren/isalive
+        path: /dekoratoren/isalive
         initialDelay: 10
     readiness:
-        path: /person/nav-dekoratoren/isready
+        path: /dekoratoren/isready
         initialDelay: 10
     prometheus:
         path: /metrics
@@ -21,15 +21,15 @@ spec:
         min: 2
         max: 4
     ingresses:
-        - https://nav-dekoratoren-q6.nais.oera-q.local/
-        - https://www-q6.nav.no/person/nav-dekoratoren
+        - https://dekoratoren-q6.nais.oera-q.local/
+        - https://www-q6.nav.no/dekoratoren
     env:
         - name: URL_API_MENY
           value: https://www-q1.nav.no/navno/_/service/no.nav.navno/menu
         - name: URL_API_SOK
           value: https://www-q6.nav.no/navno/_/service/navno.nav.no.search/search2
         - name: URL_APP_BASE
-          value: https://www-q6.nav.no/person/nav-dekoratoren
+          value: https://www-q6.nav.no/dekoratoren
         - name: baseUrl
           value: https://www-q6.nav.no
         - name: baseUrlEnonic
@@ -37,9 +37,9 @@ spec:
         - name: innloggingslinjenUrl
           value: https://www-q6.nav.no/innloggingslinje-api/auth
         - name: menypunkter
-          value: https://www-q6.nav.no/person/nav-dekoratoren/api/get/menyvalg
+          value: https://www-q6.nav.no/dekoratoren/api/get/menyvalg
         - name: sokeresultat
-          value: https://www-q6.nav.no/person/nav-dekoratoren/api/get/sokeresultat
+          value: https://www-q6.nav.no/dekoratoren/api/get/sokeresultat
         - name: minsideArbeidsgiverUrl
           value: https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/
         - name: varselinnboksUrl

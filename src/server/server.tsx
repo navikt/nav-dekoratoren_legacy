@@ -13,7 +13,7 @@ import Footer from '../komponenter/footer/Footer';
 import getStore from './../redux/store';
 import Head from '../Head';
 
-const basePath = '/person/nav-dekoratoren';
+const basePath = '/dekoratoren';
 const isProduction = process.env.NODE_ENV === 'production';
 const buildPath = `${process.cwd()}/buildfolder`;
 const app = express();
