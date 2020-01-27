@@ -4,22 +4,16 @@ import FooterTopp from './footer-topp/FooterTopp';
 import FooterBottom from './footer-bottom/FooterBottom';
 import './Footer.less';
 
-const cls = BEMHelper('footer');
+const cls = BEMHelper('sitefooter');
 
 const Footer = () => {
     return (
-        <div className="navno-dekorator">
-            <div className={cls.className}>
-                <div className="hodefot">
-                    <footer className="sitefooter" role="contentinfo">
-                        <div className={cls.element('innhold')}>
-                            <FooterTopp classname={cls.className} />
-                            <FooterBottom classname={cls.className} />
-                        </div>
-                    </footer>
-                </div>
+        <footer className={cls.className} id="footer" role="contentinfo">
+            <div className={cls.element('innhold')}>
+                <FooterTopp classname={cls.className} />
+                <FooterBottom classname={cls.className} />
             </div>
-        </div>
+        </footer>
     );
 };
 export default Footer;

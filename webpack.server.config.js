@@ -132,7 +132,6 @@ const browserConfig = {
                                                 'body',
                                                 '.siteheader',
                                                 '.sitefooter',
-                                                '.hodefot',
                                                 /\b(\w*lukk-container\w*)\b/,
                                                 /\b(\w*close\w*)\b/,
                                                 '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',

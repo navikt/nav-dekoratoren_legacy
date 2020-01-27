@@ -108,10 +108,10 @@ const template = `
         </head>
         <body>
             <div id="header-withmenu">
-                <section id="decorator-header" role="main">${htmlHeader}</section>
+                <section class="navno-dekorator" id="decorator-header" role="main">${htmlHeader}</section>
             </div>
             <div id="footer-withmenu">
-                <section id="decorator-footer" role="main">${htmlFooter}</section>
+                <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
             </div>
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}"></div>
