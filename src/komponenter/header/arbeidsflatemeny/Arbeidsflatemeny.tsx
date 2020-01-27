@@ -29,7 +29,11 @@ const Arbeidsflatemeny = ({
     const cls = BEMHelper('arbeidsflate');
 
     return (
-        <nav className={cls.className} id="decorator-arbeidsflatemeny">
+        <nav
+            className={cls.className}
+            id="decorator-arbeidsflatemeny"
+            aria-label="Velg brukergruppe"
+        >
             <ul className={cls.element('topp-liste-rad')} role="tablist">
                 {arbeidsflateLenker.map(
                     (lenke: {

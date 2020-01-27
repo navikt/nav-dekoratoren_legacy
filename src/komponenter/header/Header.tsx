@@ -6,7 +6,7 @@ import { Language } from '../../reducer/language-duck';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
 import Mobilmeny from './meny/Mobilmeny';
-import Toppmeny from './arbeidsflatemeny/Arbeidsflatemeny';
+import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import Desktopmeny from './meny/Desktopmeny';
 
 interface StateProps {
@@ -25,18 +25,18 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
     }, []);
 
     return (
-        <div className="navno-dekorator">
+        <>
             <Skiplinks />
             <header className="siteheader">
                 <div className="media-sm-mobil mobil-meny">
                     <Mobilmeny />
                 </div>
                 <div className="media-md-tablet tablet-desktop-meny">
-                    {language === Language.NORSK && <Toppmeny />}
+                    {language === Language.NORSK && <Arbeidsflatemeny />}
                     <Desktopmeny language={language} />
                 </div>
             </header>
-        </div>
+        </>
     );
 };
 

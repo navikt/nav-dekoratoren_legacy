@@ -8,14 +8,12 @@ const cls = BEMHelper('sitefooter');
 
 const Footer = () => {
     return (
-        <div className="navno-dekorator">
-            <footer className={cls.className} role="contentinfo">
-                <div className={cls.element('innhold')}>
-                    <FooterTopp classname={cls.className} />
-                    <FooterBottom classname={cls.className} />
-                </div>
-            </footer>
-        </div>
+        <footer className={cls.className} id="footer" role="contentinfo">
+            <div className={cls.element('innhold')}>
+                <FooterTopp classname={cls.className} />
+                <FooterBottom classname={cls.className} />
+            </div>
+        </footer>
     );
 };
 export default Footer;
