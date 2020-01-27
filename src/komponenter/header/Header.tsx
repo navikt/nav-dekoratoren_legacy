@@ -26,20 +26,16 @@ const Header = ({ hentMenypunkter, language }: HeaderProps) => {
 
     return (
         <div className="navno-dekorator">
-            <div className="hodefot">
-                <Skiplinks />
-                <header className="siteheader">
-                    <div className="innhold-container">
-                        <div className="media-sm-mobil mobil-meny">
-                            <Mobilmeny />
-                        </div>
-                        <div className="media-md-tablet tablet-desktop-meny">
-                            {language === Language.NORSK && <Toppmeny />}
-                            <Desktopmeny language={language} />
-                        </div>
-                    </div>
-                </header>
-            </div>
+            <Skiplinks />
+            <header className="siteheader">
+                <div className="media-sm-mobil mobil-meny">
+                    <Mobilmeny />
+                </div>
+                <div className="media-md-tablet tablet-desktop-meny">
+                    {language === Language.NORSK && <Toppmeny />}
+                    <Desktopmeny language={language} />
+                </div>
+            </header>
         </div>
     );
 };

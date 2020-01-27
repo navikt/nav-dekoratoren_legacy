@@ -1,39 +1,54 @@
 @import '../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../styling-variabler.less';
 
-.hodefot .visuallyhidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
-    width: 1px;
-
-    &.focusable:focus,
-    &.focusable:active {
-        clip: auto;
-        height: auto;
+.site-skiplinks {
+    ul {
         margin: 0;
-        overflow: visible;
-        width: auto;
     }
 
-    &.focusable:focus {
-        outline: none;
-        color: white;
-        text-decoration: none;
-        background-color: @fokusFarge;
-        box-shadow: 0 0 0 2px @fokusFarge;
+    li > .visuallyhidden.focusable:focus,
+    li > .visuallyhidden.focusable:active {
+        height: 2.625rem;
+    }
+
+    .visuallyhidden {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        width: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+
+        &.focusable:focus,
+        &.focusable:active {
+            clip: auto;
+            height: auto;
+            width: auto;
+            padding: 0.8rem;
+            margin: 0;
+            overflow: visible;
+        }
+
+        &.focusable:focus {
+            outline: none;
+            color: white;
+            text-decoration: none;
+            background-color: @fokusFarge;
+            box-shadow: 0 0 0 2px @fokusFarge;
+        }
     }
 }
 
 .dekorator-under-arbeid {
     padding: 0.5rem 0;
     width: 100%;
+    height: auto;
     text-align: center;
     background-color: @navMorkGra;
     color: white;
+    @media (min-width: @tabletLimitWidth) {
+        height: 2.75rem;
+    }
 }

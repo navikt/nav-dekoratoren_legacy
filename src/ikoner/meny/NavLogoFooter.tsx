@@ -12,7 +12,7 @@ const NavLogoRod = ({
     classname?: string;
 }) => {
     return (
-        <div className="footer__logo">
+        <div className="sitefooter__logo">
             <a className="navbar-brand" href="https://nav.no">
                 <svg
                     className={classname}
