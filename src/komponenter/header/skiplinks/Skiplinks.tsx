@@ -1,31 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { Element } from 'nav-frontend-typografi';
-import { desktopview, tabletview } from '../../../styling-mediaquery';
 import Tekst from '../../../tekster/finn-tekst';
-import { verifyWindowObj } from '../../../utils/Environment';
+import { desktopview, tabletview } from '../../../styling-mediaquery';
 import './Skiplinks.less';
 
 const Skiplinks = () => {
-    const [width, setWidth] = useState<number>(
-        verifyWindowObj() ? window.innerWidth : 0
+    const [width, setWidth] = useState<number>(desktopview);
+    const [soklink, setSoklink] = useState<string>('#decorator-sok');
+    const [hovedmenylink, setHovedmenylink] = useState<string>(
+        '#decorator-arbeidsflatemeny'
     );
 
     useEffect(() => {
-        handleResize();
+        setSkiplinks();
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, [width]);
 
+    const setSkiplinks = () => {
+        setHovedmenylink(
+            window.innerWidth >= desktopview
+                ? '#decorator-arbeidsflatemeny'
+                : '#decorator-meny-toggleknapp'
+        );
+        setSoklink(
+            window.innerWidth < tabletview
+                ? '#decorator-sok-toggle'
+                : '#decorator-sok'
+        );
+    };
+
     const handleResize = () => {
         setWidth(window.innerWidth);
-    };
-
-    const erDesktop = (): boolean => {
-        return width >= desktopview;
-    };
-
-    const erMobil = (): boolean => {
-        return width < tabletview;
     };
 
     return (
@@ -38,11 +44,7 @@ const Skiplinks = () => {
                 <ul>
                     <li>
                         <a
-                            href={
-                                erDesktop()
-                                    ? '#decorator-arbeidsflatemeny'
-                                    : '#decorator-meny-toggleknapp'
-                            }
+                            href={hovedmenylink}
                             className="visuallyhidden focusable"
                         >
                             <Tekst id="skiplinks-ga-til-hovedmeny" />
@@ -57,14 +59,7 @@ const Skiplinks = () => {
                         </a>
                     </li>
                     <li>
-                        <a
-                            href={
-                                erMobil()
-                                    ? '#decorator-sok-toggle'
-                                    : '#decorator-sok'
-                            }
-                            className="visuallyhidden focusable"
-                        >
+                        <a href={soklink} className="visuallyhidden focusable">
                             <Tekst id="skiplinks-ga-til-sok" />
                         </a>
                     </li>
