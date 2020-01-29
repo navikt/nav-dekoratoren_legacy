@@ -14,7 +14,6 @@
         "build-server": "cross-env NODE_ENV=production webpack -p --display-error-details --config webpack.server.config.js",
         "build-client-dev": "cross-env NODE_ENV=development webpack --display-error-details --config webpack.client.config.js",
         "build-server-dev": "cross-env NODE_ENV=development webpack --display-error-details --config webpack.server.config.js",
-        "build-devserver-dev": "cross-env NODE_ENV=development webpack --display-error-details --config webpack.devserver.config.js",
         "build-and-watch-client-dev": "cross-env NODE_ENV=development webpack --display-error-details --config webpack.client.config.js --watch",
         "build-and-watch-server-dev": "cross-env NODE_ENV=development webpack --display-error-details --config webpack.server.config.js --watch",
         "lint": "tslint ./src/**/*.ts*",
