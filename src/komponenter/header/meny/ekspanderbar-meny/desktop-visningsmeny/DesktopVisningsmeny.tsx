@@ -16,7 +16,7 @@ interface Props {
     arbeidsflate: MenuValue;
 }
 
-const DesktopVisningsmeny = (props: Props) => {
+export const DesktopVisningsmeny = (props: Props) => {
     const cls = BEMHelper(props.classname);
     return (
         <div className={cls.element('seksjoner')}>

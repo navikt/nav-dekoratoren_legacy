@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
@@ -49,9 +49,8 @@ describe('<MinsideLenke>', () => {
         );
     });
 
-    /* it('Skal vise riktig tabindex', () => {
+    it('Skal vise riktig tabindex', () => {
         const wrapper = mountWithProps(true, MenuValue.ARBEIDSGIVER);
-        // expect(wrapper.exists('a[tabindex]'))..toBe(0);
-        expect(wrapper.find('.lenke').prop('tabindex')).toEqual('0');
-    }); */
+        expect(wrapper.find('a[tabindex="0"]')).toBeTruthy();
+    });
 });
