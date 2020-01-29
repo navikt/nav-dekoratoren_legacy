@@ -5,7 +5,7 @@ import 'isomorphic-fetch';
 import FS from 'fs';
 import NodeCache from 'node-cache';
 import express from 'express';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import request from 'request';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -52,10 +52,11 @@ const clientEnv = isProduction
       }
     : localEnv;
 
-FS.writeFile(`${buildPath}/env.json`, JSON.stringify(clientEnv), err =>
-    console.error(err)
-);
-
+if (isProduction) {
+    FS.writeFile(`${buildPath}/env.json`, JSON.stringify(clientEnv), err =>
+        console.error(err)
+    );
+}
 // Cors
 app.disable('x-powered-by');
 app.use(function(req, res, next) {
@@ -87,7 +88,15 @@ const htmlFooter = ReactDOMServer.renderToString(
     </ReduxProvider>
 );
 
-const template = `
+const template = (
+    fileFavicon: string,
+    fileCss: string,
+    htmlHeader: ReactNode,
+    htmlFooter: ReactNode,
+    fileEnv: string,
+    fileScript: string
+) => {
+    return `
     <!DOCTYPE html>
     <html lang="no">
         <head>
@@ -126,6 +135,7 @@ const template = `
             <div id="webstats-ga-notrack"></div>
         </body>
     </html>`;
+};
 
 // Express config
 const pathsForTemplate = [
@@ -139,7 +149,16 @@ const pathsForTemplate = [
 ];
 
 app.get(pathsForTemplate, (req, res) => {
-    res.send(template);
+    res.send(
+        template(
+            fileFavicon,
+            fileCss,
+            htmlHeader,
+            htmlFooter,
+            fileEnv,
+            fileScript
+        )
+    );
 });
 
 app.get(`${basePath}/api/get/menyvalg`, (req, res) => {
