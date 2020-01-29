@@ -1,12 +1,19 @@
 import * as React from 'react';
-import { configure, shallow } from 'enzyme';
+import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import getStore from '../../../redux/store';
 import Skiplinks from './Skiplinks';
+import { Provider as ReduxProvider } from 'react-redux';
 
 configure({ adapter: new Adapter() });
+const store = getStore();
 
 describe('<Skiplinks>', () => {
-    const wrapper = shallow(<Skiplinks />);
+    const wrapper = mount(
+        <ReduxProvider store={store}>
+            <Skiplinks />
+        </ReduxProvider>
+    );
 
     it('Skal rendre lenke til hovedmeny', () => {
         expect(wrapper.find('#hovedmenylenke').text()).toEqual(

@@ -13,7 +13,9 @@ export function finnTekst(id: string, language: Language): string {
     let ledetekst: string = ledetekster[id];
 
     if (!ledetekst) {
-        console.error(`Kunne ikke finne teksten ${id}! Returnerer oppgitt id.`); // tslint:disable-line:no-console
+        console.error(
+            `Kunne ikke finne tekst med id: ${id}! Returnerer oppgitt id.`
+        ); // tslint:disable-line:no-console
         return id;
     }
     if (spraakValgetErNorsk(language)) {
