@@ -1,83 +1,94 @@
 @import '../../../node_modules/nav-frontend-core/less/_variabler';
 @import '../../styling-variabler.less';
 
-.footer {
-    &__menylenker-seksjon {
-        ul {
-            &:first-child,
-            &:last-child {
-                margin-top: 0;
+.sitefooter {
+    padding: 1rem;
+    width: 100%;
+    min-height: 12.5rem;
+    border-bottom: @navMorkGra 2px solid;
+
+    &__innhold {
+        text-align: center;
+    }
+
+    &__menylinje-topp {
+        .menylenker-seksjon {
+            .typo-undertittel {
+                color: @navGra40;
+            }
+            ul {
+                &:first-child,
+                &:last-child {
+                    margin-top: 0;
+                }
+            }
+            li {
+                margin-bottom: 0.8rem;
             }
         }
     }
 
-    .sitefooter {
-        padding: 1rem;
-        background-color: @navLysGra;
-        width: 100%;
-        min-height: 12.5rem;
+    &__menylinje-topp .menylenker-seksjon .venstre .lenke,
+    &__menylinje-topp .menylenker-seksjon .midt .lenke,
+    &__menylinje-bottom .lenke {
+        color: @navMorkGra;
+        font-weight: 600;
 
-        .footer__innhold {
-            .footer__menylenker-seksjon {
-                text-align: center;
-
-                li {
-                    margin-bottom: 0.5rem;
-
-                    .lenke {
-                        color: black;
-                        text-decoration: none;
-
-                        &:focus {
-                            color: white;
-                        }
-                        &:hover {
-                            text-decoration: underline;
-                        }
-                    }
-                }
-            }
-            .footer__logo {
-                text-align: center;
-            }
+        &:focus {
+            color: white;
         }
     }
 
     @media (min-width: @tabletLimitWidth) {
-        &__menylenker-seksjon {
-            ul {
-                &:first-child,
-                &:last-child {
-                    margin-top: 1rem;
+        padding: 0.5rem 1rem 1.5rem;
+
+        &__innhold {
+            width: auto;
+            margin: 0 auto;
+            text-align: initial;
+        }
+        &__menylinje-topp {
+            display: flex;
+            flex-wrap: wrap;
+
+            .menylenker-seksjon {
+                width: 25%;
+
+                ul {
+                    &:first-child,
+                    &:last-child {
+                        margin-top: 0.5rem;
+                    }
+                }
+
+                .logo {
+                    display: flex;
+                    justify-content: center;
                 }
             }
         }
+        &__menylinje-bottom {
+            display: flex;
 
-        .sitefooter {
-            padding: 0;
-
-            .footer__innhold {
-                display: flex;
-                flex-wrap: wrap;
-                width: auto;
-                margin: 0 auto;
-
-                .footer__menylenker-seksjon {
-                    width: 33.33%;
+            .bottom-venstre {
+                width: 75%;
+                ul {
+                    display: flex;
                 }
-
-                .footer__logo {
-                    width: 100%;
+                li {
+                    margin-right: 2.5rem;
                 }
+            }
+            .bottom-hoyre {
+                width: 25%;
             }
         }
     }
 
     @media (min-width: @desktopLimitWidth) {
-        .sitefooter {
-            .footer__innhold {
-                width: @desktopLimitWidth;
-            }
+        &__innhold {
+            width: @desktopLimitWidth;
+            margin: 0 auto;
         }
     }
 }

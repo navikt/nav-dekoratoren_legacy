@@ -113,7 +113,6 @@ class Sok extends React.Component<StateProps, InputState> {
                 }) => (
                     <form
                         className="sok"
-                        id="sok"
                         role="search"
                         onSubmit={event => this.handleSubmit(event, URL)}
                     >
@@ -121,6 +120,7 @@ class Sok extends React.Component<StateProps, InputState> {
                             <div className="sok-input-resultat">
                                 <Input
                                     {...getInputProps()}
+                                    id="decorator-sok"
                                     className={klassenavn}
                                     placeholder={finnTekst(
                                         'sok-input-placeholder',

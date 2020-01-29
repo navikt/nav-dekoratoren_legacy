@@ -1,34 +1,19 @@
 import * as React from 'react';
-import { AppState } from '../../reducer/reducer';
-import { connect } from 'react-redux';
 import BEMHelper from '../../utils/bem';
-import { Language } from '../../reducer/language-duck';
-import FooterLenkeMeny from './FooterLenkeMeny';
+import FooterTopp from './footer-topp/FooterTopp';
+import FooterBottom from './footer-bottom/FooterBottom';
 import './Footer.less';
 
-const cls = BEMHelper('footer');
+const cls = BEMHelper('sitefooter');
 
-interface StateProps {
-    language: Language;
-}
-
-const Footer = ({ language }: StateProps) => {
+const Footer = () => {
     return (
-        <div className="navno-dekorator">
-            <div className={cls.className}>
-                <div className="hodefot">
-                    <FooterLenkeMeny
-                        className={cls.className}
-                        language={language}
-                    />
-                </div>
+        <footer className={cls.className} id="footer" role="contentinfo">
+            <div className={cls.element('innhold')}>
+                <FooterTopp classname={cls.className} />
+                <FooterBottom classname={cls.className} />
             </div>
-        </div>
+        </footer>
     );
 };
-
-const mapStateToProps = (state: AppState): StateProps => ({
-    language: state.language.language,
-});
-
-export default connect(mapStateToProps)(Footer);
+export default Footer;

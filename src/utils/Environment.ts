@@ -1,3 +1,5 @@
+import { FooterLenke } from '../komponenter/footer/Footer-lenker';
+
 export default class Environment {
     static baseUrl: string;
     static baseUrlEnonic: string;
@@ -51,9 +53,19 @@ export const verifyWindowObj = () => {
 };
 
 export const erNavDekoratoren = (): boolean => {
-    return (
-        verifyWindowObj() && window.location.href.includes('/nav-dekoratoren')
-    );
+    return verifyWindowObj() && window.location.href.includes('/dekoratoren');
+};
+
+export const genererLenkerTilUrl = (footerlenker: FooterLenke[]) => {
+    const lenker = footerlenker.map(lenke => {
+        lenke.url = genererUrl(lenke.url);
+        return lenke;
+    });
+    return lenker;
+};
+
+export const genererUrl = (lenke: string): string => {
+    return lenke.startsWith('/') ? Environment.baseUrlEnonic + lenke : lenke;
 };
 
 export const erDev =
@@ -63,11 +75,11 @@ export const erDev =
 
 export const localEnv = {
     baseUrl: 'http://localhost:3000',
-    baseUrlEnonic: 'https://www-x1.nav.no',
+    baseUrlEnonic: 'https://www-q1.nav.no',
     innloggingslinjenUrl: 'http://localhost:3000/innloggingslinje-api/auth',
-    menypunkter: `http://localhost:8088/person/nav-dekoratoren/api/get/menyvalg`,
+    menypunkter: `http://localhost:8088/dekoratoren/api/get/menyvalg`,
     minsideArbeidsgiverUrl: `https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/`,
-    sokeresultat: `http://localhost:8088/person/nav-dekoratoren/api/get/sokeresultat`,
+    sokeresultat: `http://localhost:8088/dekoratoren/api/get/sokeresultat`,
     varselinnboksUrl: `http://localhost:8088/person/varselinnboks`,
     dittNavUrl: `http://localhost:8088/person/dittnav/`,
     loginUrl: '#',

@@ -1,7 +1,7 @@
 {
     "name": "nav-dekoratoren",
     "version": "0.1.0",
-    "homepage": "/person/nav-dekoratoren",
+    "homepage": "/dekoratoren",
     "private": true,
     "scripts": {
         "start": "cross-env DEVELOPMENT=true npm-run-all -p -r start-server start-craco",
@@ -90,7 +90,7 @@
         "react-gtm-module": "^2.0.8",
         "react-modal": "^3.11.1",
         "react-motion": "^0.5.2",
-        "react-redux": "7.0.3",
+        "react-redux": "^7.1.3",
         "react-scripts": "2.1.8",
         "react-snapshot": "^1.3.0",
         "redux": "4.0.1",
@@ -120,7 +120,7 @@
         "@types/query-string": "5.1.0",
         "@types/react": "^16.8.19",
         "@types/react-dom": "^16.8.4",
-        "@types/react-redux": "7.0.9",
+        "@types/react-redux": "^7.1.5",
         "cross-env": "^5.2.0",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.2",

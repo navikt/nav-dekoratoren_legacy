@@ -10,7 +10,11 @@ interface Props {
 
 const SokModalToggleknapp = ({ className, modalIsOpen }: Props) => {
     return (
-        <button className={className} onClick={() => modalIsOpen()}>
+        <button
+            className={className}
+            id="decorator-sok-toggle"
+            onClick={() => modalIsOpen()}
+        >
             <SokIkon />
             <Undertittel>
                 <Tekst id="sok-mobil-knapp" />

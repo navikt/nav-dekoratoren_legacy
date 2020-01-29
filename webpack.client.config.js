@@ -15,7 +15,7 @@ const browserConfig = {
     output: {
         path: path.resolve(__dirname, 'buildfolder/'),
         filename: '[name].js',
-        publicPath: '/person/nav-dekoratoren/',
+        publicPath: '/dekoratoren/',
     },
     devtool: 'cheap-module-source-map',
     resolve: {
@@ -124,7 +124,6 @@ const browserConfig = {
                                                 'body',
                                                 '.siteheader',
                                                 '.sitefooter',
-                                                '.hodefot',
                                                 /\b(\w*lukk-container\w*)\b/,
                                                 /\b(\w*close\w*)\b/,
                                                 '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',

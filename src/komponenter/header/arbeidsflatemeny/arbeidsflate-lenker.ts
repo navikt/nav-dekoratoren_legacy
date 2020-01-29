@@ -7,17 +7,17 @@ export const arbeidsflateLenker: {
 }[] = [
     {
         tittel: MenuValue.PRIVATPERSON,
-        url: '/person/nav-dekoratoren/person/',
+        url: '/dekoratoren/person/',
         key: MenuValue.PRIVATPERSON,
     },
     {
         tittel: MenuValue.ARBEIDSGIVER,
-        url: '/person/nav-dekoratoren/bedrift/',
+        url: '/dekoratoren/bedrift/',
         key: MenuValue.ARBEIDSGIVER,
     },
     {
         tittel: MenuValue.SAMARBEIDSPARTNER,
-        url: '/person/nav-dekoratoren/samarbeidspartner/',
+        url: '/dekoratoren/samarbeidspartner/',
         key: MenuValue.SAMARBEIDSPARTNER,
     },
 ];

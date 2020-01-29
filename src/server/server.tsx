@@ -13,10 +13,10 @@ import Footer from '../komponenter/footer/Footer';
 import getStore from './../redux/store';
 import Head from '../Head';
 
-const basePath = '/person/nav-dekoratoren';
-const favicon = require('../../public/favicon.ico');
+const basePath = '/dekoratoren';
 const isProduction = process.env.NODE_ENV === 'production';
 const buildPath = `${process.cwd()}/buildfolder`;
+const favicon = require('../../public/favicon.ico');
 const app = express();
 const PORT = 8088;
 
@@ -24,6 +24,7 @@ const PORT = 8088;
 const defaultSearchUrl = `https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2`;
 const defaultMenuUrl = `http://localhost:8080/navno/_/service/no.nav.navno/menu`;
 const defaultAppUrl = `http://localhost:8088` + basePath;
+const localhost = 'http://localhost:8088';
 
 // Mock
 import mockMenu from './mock/menu.json';
@@ -74,6 +75,8 @@ const store = getStore();
 const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/env.json`;
 const fileCss = `${process.env.URL_APP_BASE || defaultAppUrl}/css/client.css`;
 const fileScript = `${process.env.URL_APP_BASE || defaultAppUrl}/client.js`;
+const fileFavicon = `${process.env.baseUrl || localhost}${favicon}`;
+
 const htmlHeader = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
         <Head />
@@ -96,22 +99,28 @@ const template = `
                 content="width=device-width,initial-scale=1,shrink-to-fit=no"
             />
             <meta name="theme-color" content="#000000" />
-            <link rel="icon" href=${favicon} type="image/x-icon" />
             <title>NAV Dekoratør</title>
+            <link rel="icon" href=${fileFavicon} type="image/x-icon" />
             <div id="styles">
+                <link rel="icon" href=${fileFavicon} type="image/x-icon" />
                 <link href=${fileCss} rel="stylesheet" />
             </div>
         </head>
         <body>
             <div id="header-withmenu">
-                <section id="decorator-header" role="main">${htmlHeader}</section>
+                <section class="navno-dekorator" id="decorator-header" role="main">${htmlHeader}</section>
             </div>
             <div id="footer-withmenu">
-                <section id="decorator-footer" role="main">${htmlFooter}</section>
+                <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
             </div>
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
+                <script
+                    src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js"
+                    integrity="sha384-9YqOIesDhDEY++EsRGPyixeoD0vNAx2BZNvvygZQ+83K6mK9Z0uK5xh380SCBenA"
+                    crossorigin="anonymous"
+                ></script>
             </div>
             <div id="skiplinks"></div>
             <div id="megamenu-resources"></div>

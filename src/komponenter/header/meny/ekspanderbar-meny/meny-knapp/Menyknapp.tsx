@@ -21,6 +21,7 @@ const Menyknapp = (props: Props) => {
                 <button
                     onClick={() => props.ToggleMenu()}
                     className={cls.element('menyknapp')}
+                    id="decorator-meny-toggleknapp"
                     aria-label="Menyknapp"
                     aria-haspopup="true"
                     aria-controls="dropdown-menu"
