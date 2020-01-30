@@ -283,7 +283,8 @@ class Sok extends React.Component<StateProps, InputState> {
                                                     ? items
                                                           .slice(
                                                               0,
-                                                              predefinedlistview
+                                                              predefinedlistview +
+                                                                  1
                                                           )
                                                           .map(
                                                               (item, index) => (
