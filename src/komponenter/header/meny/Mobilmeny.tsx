@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BEMHelper from '../../../utils/bem';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
@@ -7,14 +7,26 @@ import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import SokModal from './sok/sok-innhold/sok-modal/Sokmodal';
 import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
 import './Mobilmeny.less';
+import { verifyWindowObj } from '../../../utils/Environment';
 
 const mobilClass = BEMHelper('mobilmeny');
 
 const Mobilmeny = () => {
     const [clickedModal, setClickedModal] = useState<boolean>(false);
 
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const toggleModal = () => {
         setClickedModal(!clickedModal);
+    };
+
+    const handleResize = () => {
+        if (verifyWindowObj() && window.innerWidth > 767) {
+            setClickedModal(false);
+        }
     };
 
     return (
@@ -40,6 +52,7 @@ const Mobilmeny = () => {
                     </div>
                 </div>
             </div>
+
             <SokModal
                 modalerApen={clickedModal}
                 sokeknappToggle={toggleModal}

@@ -56,7 +56,7 @@ class SokModal extends React.Component<Props, {}> {
                         <Innholdstittel>Hva leter du etter?</Innholdstittel>
                     </div>
                     <div className={cls.element('sokefelt')}>
-                        <Sok />
+                        <Sok tabindex={this.props.modalerApen} />
                     </div>
                 </div>
             </ModalWrapper>

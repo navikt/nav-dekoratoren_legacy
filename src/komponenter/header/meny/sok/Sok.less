@@ -12,6 +12,18 @@
         margin-top: 1rem;
     }
 
+    .sok-input-mobil-submit {
+        position: absolute;
+        top: 1.25rem;
+        right: 2rem;
+        background-color: @navBlaDarken60;
+        border: none;
+
+        &:focus {
+            outline: 2px solid white;
+        }
+    }
+
     .sok-input-resultat {
         width: 90%;
 
@@ -57,14 +69,6 @@
                 width: 0;
                 color: transparent;
             }
-        }
-
-        .sok-input-mobil-submit {
-            position: absolute;
-            top: 1.25rem;
-            right: 2rem;
-            background-color: @navBlaDarken60;
-            border: none;
         }
 
         .sokeresultat-liste {
@@ -135,6 +139,22 @@
             align-items: center;
         }
 
+        .sok-input-mobil-submit {
+            background-color: white;
+            top: 0.325rem;
+            right: 0.25rem;
+
+            &:focus {
+                outline: 3px solid @fokusFarge;
+            }
+
+            svg {
+                &:focus {
+                    outline: 0;
+                }
+            }
+        }
+
         .sok-input-resultat {
             width: auto;
             position: relative;
@@ -174,22 +194,6 @@
                 input[placeholder] {
                     color: black;
                     font-size: 1.1rem;
-                }
-            }
-
-            .sok-input-mobil-submit {
-                background-color: white;
-                top: 0.325rem;
-                right: 0.25rem;
-
-                &:focus {
-                    outline: 3px solid @fokusFarge;
-                }
-
-                svg {
-                    &:focus {
-                        outline: 0;
-                    }
                 }
             }
 

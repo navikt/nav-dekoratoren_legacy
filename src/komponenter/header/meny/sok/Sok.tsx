@@ -24,11 +24,15 @@ interface StateProps {
     language: Language;
 }
 
-class Sok extends React.Component<StateProps, InputState> {
+interface Props {
+    tabindex?: boolean;
+}
+
+class Sok extends React.Component<StateProps & Props, InputState> {
     handleChangeThrottled: ReturnType<typeof throttle>;
     ismounted: boolean = false;
 
-    constructor(props: StateProps) {
+    constructor(props: StateProps & Props) {
         super(props);
         this.state = {
             inputString: '',
@@ -135,7 +139,7 @@ class Sok extends React.Component<StateProps, InputState> {
                                         language
                                     )}
                                 />
-                                <Mobilsokknapp />
+
                                 <ul
                                     className="sokeresultat-liste"
                                     {...getMenuProps()}
@@ -169,6 +173,9 @@ class Sok extends React.Component<StateProps, InputState> {
                                 </ul>
                             </div>
                             <DesktopSokknapp />
+                            <div className="media-sm-mobil">
+                                <Mobilsokknapp tabindex={this.props.tabindex} />
+                            </div>
                         </div>
                     </form>
                 )}
