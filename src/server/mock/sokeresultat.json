@@ -1,733 +1,340 @@
 {
     "c": 1,
+    "isMore": true,
     "isSortDate": true,
     "s": "0",
-    "daterange": "",
-    "isMore": true,
-    "word": "e o a i",
-    "total": "1703",
-    "fasett": "Sentralt Innhold",
-    "aggregations": {
-        "fasetter": {
-            "buckets": [
-                {
-                    "key": "Sentralt Innhold",
-                    "docCount": 1727,
-                    "underaggregeringer": {
-                        "buckets": [
-                            {
-                                "key": "Informasjon",
-                                "docCount": 1708,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "informasjon ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Tjenester",
-                                "docCount": 19,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "tjenester ",
-                                "checked": false
-                            }
-                        ]
-                    },
-                    "className": "erValgt",
-                    "checked": true,
-                    "default": true,
-                    "defaultClassName": "erValgt"
-                },
-                {
-                    "key": "Nyheter",
-                    "docCount": 84,
-                    "underaggregeringer": {
-                        "buckets": [
-                            {
-                                "key": "Bedrift",
-                                "docCount": 5,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "nyheter ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Arbeid",
-                                "docCount": 4,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "nyheter ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Nav og samfunn",
-                                "docCount": 40,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "nyheter ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Familie",
-                                "docCount": 2,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "nyheter ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Hjelpemidler",
-                                "docCount": 0,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "nyheter ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Pensjon",
-                                "docCount": 0,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "nyheter ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Statistikk",
-                                "docCount": 33,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "nyheter ",
-                                "checked": false
-                            }
-                        ]
-                    },
-                    "className": "",
-                    "checked": false,
-                    "default": false,
-                    "defaultClassName": ""
-                },
-                {
-                    "key": "Filer",
-                    "docCount": 4,
-                    "underaggregeringer": {
-                        "buckets": []
-                    },
-                    "className": "",
-                    "checked": false,
-                    "default": false,
-                    "defaultClassName": ""
-                },
-                {
-                    "key": "Lokalt innhold",
-                    "docCount": 547,
-                    "underaggregeringer": {
-                        "buckets": [
-                            {
-                                "key": "Akershus",
-                                "docCount": 0,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Trøndelag",
-                                "docCount": 67,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Oppland",
-                                "docCount": 5,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Hedmark",
-                                "docCount": 9,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Rogaland",
-                                "docCount": 30,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Hordaland",
-                                "docCount": 49,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Nordland",
-                                "docCount": 60,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Troms",
-                                "docCount": 73,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Finnmark",
-                                "docCount": 6,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Buskerud",
-                                "docCount": 5,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Møre og Romsdal",
-                                "docCount": 28,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Nordmøre",
-                                "docCount": 0,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Telemark",
-                                "docCount": 19,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Sogn og Fjordane",
-                                "docCount": 4,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Vest Agder",
-                                "docCount": 9,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Aust-Agder",
-                                "docCount": 22,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Østfold",
-                                "docCount": 9,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Vestfold",
-                                "docCount": 53,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            },
-                            {
-                                "key": "Oslo",
-                                "docCount": 99,
-                                "underaggregeringer": {
-                                    "buckets": []
-                                },
-                                "className": "lokalt ",
-                                "checked": false
-                            }
-                        ]
-                    },
-                    "className": "",
-                    "checked": false,
-                    "default": false,
-                    "defaultClassName": ""
-                }
-            ]
-        },
-        "Tidsperiode": {
-            "buckets": [
-                {
-                    "key": "Siste 7 dager",
-                    "docCount": 0,
-                    "from": "2019-08-23T13:28:13.558Z",
-                    "checked": false
-                },
-                {
-                    "key": "Siste 30 dager",
-                    "docCount": 0,
-                    "from": "2019-07-31T13:28:13.558Z",
-                    "to": "2019-08-23T13:28:13.558Z",
-                    "checked": false
-                },
-                {
-                    "key": "Siste 12 måneder",
-                    "docCount": 493,
-                    "from": "2018-08-30T13:28:13.558Z",
-                    "to": "2019-07-31T13:28:13.558Z",
-                    "checked": false
-                },
-                {
-                    "key": "Eldre enn 12 måneder",
-                    "docCount": 1234,
-                    "to": "2018-08-30T13:28:13.558Z",
-                    "checked": false
-                }
-            ],
-            "docCount": "1727",
-            "checked": true
-        }
-    },
+    "word": "pensjon meldekort dagpenger foreldrepenger inkludering",
+    "total": "516",
     "hits": [
         {
             "priority": true,
-            "displayName": "Kontakt oss",
-            "href": "/no/nav-og-samfunn/kontakt-nav/kontakt-oss",
-            "highlight": "Kontakt oss",
+            "displayName": "Søk om foreldrepenger",
+            "href": "https://familie.nav.no/hva-soker-du/foreldrepenger",
+            "highlight": "Her finner du alle skjemaer for mor og far når du venter barn eller skal ha <b>foreldrepermisjon</b>",
             "publish": {
-                "from": "2019-07-05T08:01:32.680964900Z",
-                "first": "2019-07-05T08:01:32.680964900Z"
+                "from": "2019-12-01T20:53:26.471380900Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2013-08-15T08:07:00Z",
-            "className": "informasjon"
+            "modifiedTime": "2019-12-01T18:30:21.517227100Z"
         },
         {
             "priority": true,
-            "displayName": "Sosiale tjenester og økonomisk sosialhjelp",
-            "href": "/no/person/flere-tema/sosiale-tjenester",
-            "highlight": "Sosiale tjenester og økonomisk sosialhjelp",
+            "displayName": "Alderspensjon",
+            "href": "/no/person/pensjon/alderspensjon",
+            "highlight": "",
             "publish": {
-                "from": "2019-07-05T08:01:32.680964900Z",
-                "first": "2019-07-05T08:01:32.680964900Z"
+                "from": "2019-12-01T20:53:26.471380900Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2017-06-23T07:21:18Z",
-            "className": "informasjon"
+            "modifiedTime": "2013-07-10T14:06:39Z"
         },
         {
             "priority": true,
-            "displayName": "Tiltak for å komme i jobb",
-            "href": "/no/person/arbeid/oppfolging-og-tiltak-for-a-komme-i-jobb/tiltak-for-a-komme-i-jobb",
-            "highlight": "Tiltak for å komme i jobb",
+            "displayName": "Dagpenger – har du rett på dagpenger?",
+            "href": "https://tjenester.nav.no/veiledearbeidssoker/mistet-jobben/dagpenger?sprak=nb",
+            "highlight": "Her er de viktigste kravene du må oppfylle for å ha rett på <b>dagpenger</b>:",
             "publish": {
-                "from": "2019-07-05T08:01:32.680964900Z",
-                "first": "2019-07-05T08:01:32.680964900Z"
+                "from": "2019-12-01T20:53:26.471Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2013-10-04T13:23:22Z",
-            "className": "informasjon"
+            "modifiedTime": "2019-12-10T14:33:37.104870Z"
         },
         {
             "priority": true,
-            "displayName": "Information in other languages",
-            "href": "/en/home/shortcuts/information-in-other-languages",
-            "highlight": "Information in other languages",
+            "displayName": "Veiviser for inkludering",
+            "href": "https://tjenester.nav.no/veiviserarbeidsgiver/samleside",
+            "highlight": "Ønsker du å <b>inkludere</b> mennesker som har havnet utenfor arbeidslivet? Da kan du få hjelp og støtte fra NAV.",
             "publish": {
-                "from": "2014-06-06T06:34:00Z",
-                "first": "2014-06-06T06:34:00Z"
+                "from": "2019-12-01T20:53:26.471Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2019-05-21T09:02:33Z",
-            "className": "informasjon"
+            "modifiedTime": "2019-12-10T13:57:36.341561Z"
         },
         {
             "priority": true,
-            "displayName": "Du har plikt til å gi NAV riktige opplysninger",
-            "href": "/no/nav-og-samfunn/om-nav/relatert-informasjon/du-har-plikt-til-a-gi-nav-riktige-opplysninger",
-            "highlight": "Du har plikt til å gi NAV riktige opplysninger",
+            "displayName": "Foreldrepenger, engangsstønad og svangerskapspenger",
+            "href": "https://familie.nav.no/",
+            "highlight": "Om <b>foreldrepenger</b> ved fødsel eller adopsjon, engangsstønad og svangerskapspenger.",
             "publish": {
-                "from": "2013-07-02T13:52:00Z",
-                "first": "2013-07-02T13:52:00Z"
+                "from": "2019-12-01T20:53:26.471Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2017-09-18T12:58:52Z",
-            "className": "informasjon"
+            "modifiedTime": "2019-12-10T14:28:22.139929Z"
         },
         {
             "priority": true,
-            "displayName": "Oppfølging og tiltak for å komme i jobb",
-            "href": "/no/person/arbeid/oppfolging-og-tiltak-for-a-komme-i-jobb",
-            "highlight": "Oppfølging og tiltak for å komme i jobb",
+            "displayName": "Søk om alderspensjon og avtalefestet pensjon i privat sektor",
+            "href": "https://www.nav.no/soknader/nb/person/pensjon/alderspensjon-og-avtalefestet-pensjon",
+            "highlight": "Send elektronisk",
             "publish": {
-                "from": "2019-07-05T08:01:32.680964900Z",
-                "first": "2019-07-05T08:01:32.680964900Z"
+                "from": "2019-12-01T20:53:26.471380900Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2015-09-26T13:43:39Z",
-            "className": "informasjon"
+            "modifiedTime": "2019-12-01T18:30:20.749261100Z"
         },
         {
             "priority": true,
-            "displayName": "Chat med oss om arbeidsavklaringspenger",
-            "href": "/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/relatert-informasjon/spor-oss-om-arbeidsavklaringspenger",
-            "highlight": "Chat med oss om arbeidsavklaringspenger",
+            "displayName": "Dine foreldrepenger",
+            "href": "https://foreldrepenger.nav.no/",
+            "highlight": "Her kan du logge deg inn på Dine <b>foreldrepenger</b>.",
             "publish": {
-                "from": "2019-04-04T06:00:00Z",
-                "first": "2019-04-04T06:00:00Z"
+                "from": "2019-12-01T20:53:26.471Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2019-05-27T13:33:10Z",
-            "className": "informasjon"
+            "modifiedTime": "2019-12-10T14:32:58.292248Z"
         },
         {
             "priority": true,
-            "displayName": "Sykmeldt",
-            "href": "/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/sykmeldt",
-            "highlight": "Sykmeldt",
-            "publish": {
-                "from": "2019-07-05T08:01:32.680964900Z",
-                "first": "2019-07-05T08:01:32.680964900Z"
-            },
-            "modifiedTime": "2017-11-03T08:59:11Z",
-            "className": "informasjon"
-        },
-        {
-            "priority": true,
-            "displayName": "Meldekort - hvordan gjør du det?",
+            "displayName": "Meldekort",
             "href": "/no/person/arbeid/dagpenger-ved-arbeidsloshet-og-permittering/meldekort-hvordan-gjor-du-det",
-            "highlight": "Meldekort - hvordan gjør du det?",
+            "highlight": "For å være registrert som arbeidssøker eller for å få <b>dagpenger</b>, AAP og tiltakspenger, må du sende <b>meldekort</b> hver 14. dag.",
             "publish": {
-                "from": "2019-07-05T08:01:32.680964900Z",
-                "first": "2019-07-05T08:01:32.680964900Z"
+                "from": "2019-12-01T20:53:26.471Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2016-10-26T13:24:44Z",
-            "className": "informasjon"
+            "modifiedTime": "2020-01-23T16:01:36.544393Z"
         },
         {
             "priority": true,
-            "displayName": "Utlevering av data som er underlagt taushetsplikt til bruk for forskning",
-            "href": "/no/nav-og-samfunn/statistikk/flere-statistikkomrader/relatert-informasjon/utlevering-av-data-som-er-underlagt-taushetsplikt-til-bruk-for-forskning",
-            "highlight": "Utlevering av data som er underlagt taushetsplikt til bruk for forskning",
+            "displayName": "Beholde ansatte – en inkluderingsveiviser for arbeidsgivere",
+            "href": "https://tjenester.nav.no/veiviserarbeidsgiver/tilrettelegge",
+            "highlight": "Hvordan tilrettelegge for ansatte som sliter psykisk eller fysisk.",
             "publish": {
-                "from": "2013-09-17T22:00:00Z",
-                "first": "2013-09-17T22:00:00Z"
+                "from": "2019-12-01T20:53:26.471Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2017-07-03T07:23:21Z",
-            "className": "informasjon"
+            "modifiedTime": "2019-12-10T14:02:49.838713Z"
         },
         {
             "priority": true,
-            "displayName": "Leveattester til mottakere av pensjon og uføretrygd i utlandet",
-            "href": "/no/person/flere-tema/arbeid-og-opphold-i-utlandet/relatert-informasjon/leveattester-til-mottakere-av-pensjon-og-uforetrygd-i-utlandet",
-            "highlight": "Leveattester til mottakere av pensjon og uføretrygd i utlandet",
+            "displayName": "Dagpenger når du er arbeidsledig",
+            "href": "/no/person/arbeid/dagpenger-ved-arbeidsloshet-og-permittering/dagpenger-nar-du-er-arbeidsledig",
+            "highlight": " <b>dagpenger</b>.\n\nDisse inntektene tas ikke med i beregningen av <b>dagpenger</b>: næringsinntekt, arbeidsavklaringspenger, <b>pensjon</b> og engangsstønad ved fødsel.\n\nInntekt over seks ganger gjennomsnittet (...)",
             "publish": {
-                "from": "2016-04-06T10:28:00Z",
-                "first": "2016-04-06T10:28:00Z"
+                "from": "2007-02-22T14:48:00Z",
+                "first": "2007-02-22T14:48:00Z"
             },
-            "modifiedTime": "2018-11-21T12:18:48Z",
-            "className": "informasjon"
-        },
-        {
-            "priority": true,
-            "displayName": "Hva er aktivitetsplikten?",
-            "href": "/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/relatert-informasjon/hva-er-aktivitetsplikten",
-            "highlight": "Hva er aktivitetsplikten?",
-            "publish": {
-                "from": "2016-06-29T08:50:00Z",
-                "first": "2016-06-29T08:50:00Z"
-            },
-            "modifiedTime": "2019-01-16T12:36:43Z",
-            "className": "informasjon"
+            "modifiedTime": "2020-01-16T11:59:53.801163Z"
         },
         {
             "priority": false,
-            "displayName": "Niezbedne zalaczniki do wniosku o zasilek dla bezrobotnych",
-            "href": "/en/home/benefits-and-services/relatert-informasjon/niezbedne-zalaczniki-do-wniosku-o-zasilek-dla-bezrobotnych_2",
-            "highlight": "Niezbedne zalaczniki do wniosku o zasilek dla bezrobotnych",
+            "displayName": "Meldekort",
+            "href": "/no/person/arbeid/dagpenger-ved-arbeidsloshet-og-permittering/meldekort-hvordan-gjor-du-det",
+            "highlight": "For å være registrert som arbeidssøker eller for å få <b>dagpenger</b>, AAP og tiltakspenger, må du sende <b>meldekort</b> hver 14. dag.",
             "publish": {
-                "from": "2015-02-11T08:32:00Z",
-                "first": "2015-02-11T08:32:00Z"
+                "from": "2019-12-01T20:53:26.471Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2019-02-12T12:09:56Z",
-            "className": "informasjon"
+            "modifiedTime": "2020-01-23T16:01:36.544393Z"
         },
         {
             "priority": false,
-            "displayName": "Nytt e-læringskurs for hørselskontakter",
-            "href": "/no/person/hjelpemidler/nyheter-hele-landet/nytt-e-laeringskurs-for-horselskontakter",
-            "highlight": "Nytt e-læringskurs for hørselskontakter",
+            "displayName": "Når kan du miste retten til dagpenger?",
+            "href": "/no/person/arbeid/dagpenger-ved-arbeidsloshet-og-permittering/relatert-informasjon/nar-kan-du-miste-retten-til-dagpenger_2",
+            "highlight": "Hvis du ikke lenger oppfyller vilkårene for rett til <b>dagpenger</b>, stanser NAV utbetalingen. Dette skjer også hvis du ikke gjør de aktivitetene du har avtalt med NAV for å komme i jobb.",
             "publish": {
-                "from": "2018-02-12T13:23:00Z",
-                "first": "2018-02-12T13:23:00Z"
+                "from": "2016-07-08T08:24:00Z",
+                "first": "2016-07-08T08:24:00Z"
             },
-            "modifiedTime": "2018-02-12T13:24:04Z",
-            "className": "informasjon"
+            "modifiedTime": "2020-01-16T12:07:00.628318Z"
         },
         {
             "priority": false,
-            "displayName": "Hvordan styre varsel på sms og e-post",
-            "href": "/no/bedrift/oppfolging/sykmeldt-arbeidstaker/digital-sykmelding-informasjon-til-arbeidsgivere/hvordan-styre-varsel-pa%CC%8A-sms-og-e-post",
-            "highlight": "Hvordan styre varsel på sms og e-post",
+            "displayName": "Dagpenger når du er arbeidsledig",
+            "href": "/no/person/arbeid/dagpenger-ved-arbeidsloshet-og-permittering/dagpenger-nar-du-er-arbeidsledig",
+            "highlight": " <b>dagpenger</b>.\n\nDisse inntektene tas ikke med i beregningen av <b>dagpenger</b>: næringsinntekt, arbeidsavklaringspenger, <b>pensjon</b> og engangsstønad ved fødsel.\n\nInntekt over seks ganger gjennomsnittet (...)",
             "publish": {
-                "from": "2019-07-05T08:01:32.680964900Z",
-                "first": "2019-07-05T08:01:32.680964900Z"
+                "from": "2007-02-22T14:48:00Z",
+                "first": "2007-02-22T14:48:00Z"
             },
-            "modifiedTime": "2018-06-28T08:11:56Z",
-            "className": "informasjon"
+            "modifiedTime": "2020-01-16T11:59:53.801163Z"
         },
         {
             "priority": false,
-            "displayName": "Inntektsmelding - video, e-læring og nye beregningsregler",
-            "href": "/no/bedrift/tjenester-og-skjemaer/nav-og-altinn-tjenester/inntektsmelding/inntektsmelding-video-e-laering-og-nye-beregningsregler",
-            "highlight": "Inntektsmelding - video, e-læring og nye beregningsregler",
+            "displayName": "Slik sender du elektroniske meldekort",
+            "href": "/no/person/arbeid/dagpenger-ved-arbeidsloshet-og-permittering/meldekort-hvordan-gjor-du-det/slik-sender-du-elektroniske-meldekort",
+            "highlight": "Du kan sende elektroniske <b>meldekort</b> i Ditt NAV. Her får du kvittering på sendt <b>meldekort</b> og du kan få se tidligere sendte <b>meldekort</b>.",
             "publish": {
-                "from": "2019-07-05T08:01:32.680964900Z",
-                "first": "2019-07-05T08:01:32.680964900Z"
+                "from": "2020-01-30T08:31:17.097428Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2019-05-08T08:44:18Z",
-            "className": "informasjon"
+            "modifiedTime": "2020-01-30T08:31:07.505821Z"
         },
         {
             "priority": false,
-            "displayName": "Grunn til å feire?",
-            "href": "/no/nav-og-samfunn/om-nav/relatert-informasjon/grunn-til-a-feire",
-            "highlight": "Grunn til å feire?",
+            "displayName": "Inntektsopplysninger - arbeidstaker som skal ha sykepenger, fødselspenger eller adopsjonspenger - NAV 08-30.01",
+            "href": "https://www.nav.no/soknader/en/bedrift/refusjoner/reiseutgifter",
+            "highlight": "",
             "publish": {
-                "from": "2016-06-29T07:51:00Z",
-                "first": "2016-06-29T07:51:00Z"
+                "from": "2019-12-01T20:53:26.471380900Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2016-06-29T07:51:04Z",
-            "className": "informasjon"
+            "modifiedTime": "2019-12-01T18:32:37.012462900Z"
         },
         {
             "priority": false,
-            "displayName": "Egenerklæring",
-            "href": "/no/nav-og-samfunn/samarbeid/leger-og-andre-behandlere/relatert-innhold/egenerklaering",
-            "highlight": "Egenerklæring",
+            "displayName": "Alderspensjon",
+            "href": "/no/person/pensjon/alderspensjon/relatert-informasjon/alderspensjon",
+            "highlight": "<b>Alderspensjon</b> fra folketrygden er en ordning som sikrer deg inntekt når du blir <b>pensjonist</b>.",
             "publish": {
-                "from": "2013-08-26T11:20:00Z",
-                "first": "2013-08-26T11:20:00Z"
+                "from": "2015-06-29T11:41:00Z",
+                "first": "2015-06-29T11:41:00Z"
             },
-            "modifiedTime": "2013-08-26T11:20:47Z",
-            "className": "informasjon"
+            "modifiedTime": "2017-01-03T13:18:29Z"
         },
         {
             "priority": false,
-            "displayName": "Kjenn planer og instrukser",
-            "href": "/no/nav-og-samfunn/samarbeid/noindex/sikkerhet-i-nav/relatert-informasjon/kjenn-planer-og-instrukser",
-            "highlight": "Kjenn planer og instrukser",
+            "displayName": "Arbeidsgivere får hjelp til inkludering",
+            "href": "/no/person/innhold-til-person-forside/nyheter/arbeidsgivere-far-hjelp-til-inkludering",
+            "highlight": "NAV har laget en veiviser for virksomheter som ønsker å <b>inkludere</b> personer som står utenfor arbeidslivet.",
             "publish": {
-                "from": "2015-06-25T11:56:00Z",
-                "first": "2015-06-25T11:56:00Z"
+                "from": "2018-09-10T08:07:00Z",
+                "first": "2018-09-10T08:07:00Z"
             },
-            "modifiedTime": "2019-04-03T14:24:41Z",
-            "className": "informasjon"
+            "modifiedTime": "2018-09-10T08:08:14Z"
         },
         {
             "priority": false,
-            "displayName": "Ikke lov å sykmelde på video eller nett",
-            "href": "/no/nav-og-samfunn/samarbeid/leger-og-andre-behandlere/om-sykmelding-for-leger/ikke-lov-a-sykmelde-pa-video-eller-nett",
-            "highlight": "Ikke lov å sykmelde på video eller nett",
+            "displayName": "Din pensjon",
+            "href": "/no/person/pensjon/hva-kan-jeg-fa-i-pensjon",
+            "highlight": " <b>pensjon</b> gir deg god oversikt over egen <b>pensjon</b>. Her kan du blant annet se din opptjening, beregne din fremtidige <b><b>alderspensjon</b></b> (tidligere kalt serviceberegning), søke (...) (...)",
             "publish": {
-                "from": "2018-12-19T11:28:00Z",
-                "first": "2018-12-19T11:28:00Z"
+                "from": "2019-12-01T20:53:26.471380900Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2018-12-19T11:30:58Z",
-            "className": "informasjon"
+            "modifiedTime": "2016-10-26T13:27:10Z"
         },
         {
             "priority": false,
-            "displayName": "Writing a good CV",
-            "href": "/en/home/work-and-stay-in-norway/tips-for-job-seekers/writing-a-good-cv",
-            "highlight": "Writing a good CV",
+            "displayName": "Alderspensjon for deg født i 1963 eller senere",
+            "href": "/no/person/pensjon/alderspensjon/alderspensjon-for-deg-fodt-i-1963-eller-senere",
+            "highlight": "Valg du gjør gjennom livet, er med på å påvirke din fremtidige <b>pensjon</b>. Her kan du lese mer om hvordan du tjener opp <b>pensjon</b>.",
             "publish": {
-                "from": "2019-07-05T08:01:32.680964900Z",
-                "first": "2019-07-05T08:01:32.680964900Z"
+                "from": "2015-05-27T12:46:00Z",
+                "first": "2015-05-27T12:46:00Z"
             },
-            "modifiedTime": "2014-06-13T07:12:57Z",
-            "className": "informasjon"
+            "modifiedTime": "2020-01-10T08:48:53.616822Z"
         },
         {
             "priority": false,
-            "displayName": "Minimum pension level (previously called a basic pension)",
-            "href": "/en/home/benefits-and-services/relatert-informasjon/minimum-pension-level-previously-called-a-basic-pension",
-            "highlight": "Minimum pension level (previously called a basic pension)",
+            "displayName": "Alderspensjon for deg født før 1954",
+            "href": "/no/person/pensjon/alderspensjon/alderspensjon-for-deg-fodt-for-1954",
+            "highlight": "Her finner du informasjon til deg som har begynt å ta ut <b>pensjon</b> eller planlegger å ta ut.",
             "publish": {
-                "from": "2015-07-07T08:14:00Z",
-                "first": "2015-07-07T08:14:00Z"
+                "from": "2009-12-23T09:23:00Z",
+                "first": "2009-12-23T09:23:00Z"
             },
-            "modifiedTime": "2017-08-16T12:11:30Z",
-            "className": "informasjon"
+            "modifiedTime": "2020-01-14T13:31:52.515627Z"
         },
         {
             "priority": false,
-            "displayName": "Om e-post og faks til NAV",
-            "href": "/no/nav-og-samfunn/om-nav/relatert-informasjon/om-e-post-og-faks-til-nav",
-            "highlight": "Om e-post og faks til NAV",
+            "displayName": "Slik fyller du ut meldekortet - dagpenger",
+            "href": "/no/person/arbeid/dagpenger-ved-arbeidsloshet-og-permittering/meldekort-hvordan-gjor-du-det/slik-fyller-du-ut-meldekortet-dagpenger",
+            "highlight": "For å få utbetalt <b>dagpenger</b> må du sende <b>meldekort</b> hver 14. dag.",
             "publish": {
-                "from": "2013-06-11T13:53:00Z",
-                "first": "2013-06-11T13:53:00Z"
+                "from": "2019-12-01T20:53:26.471Z",
+                "first": "2019-12-01T20:53:26.471380900Z"
             },
-            "modifiedTime": "2018-11-22T11:42:33Z",
-            "className": "informasjon"
+            "modifiedTime": "2020-01-30T08:33:19.419488Z"
         },
         {
             "priority": false,
-            "displayName": "Coming from a country outside EU/EEA to work in Norway",
-            "href": "/en/home/rules-and-regulations/relatert-informasjon/coming-from-a-country-outside-eu-eea-to-work-in-norway",
-            "highlight": "Coming from a country outside EU/EEA to work in Norway",
+            "displayName": "Spør NAV om pensjon",
+            "href": "/no/person/pensjon/nynorsk/spor-nav-om-pensjon",
+            "highlight": "Hos NAV Kontaktsenter <b>Pensjon</b> får du spesialisert rettleiing om <b>pensjon</b>. Telefonnummeret er 55 55 33 34.",
             "publish": {
-                "from": "2013-05-14T14:13:00Z",
-                "first": "2013-05-14T14:13:00Z"
+                "from": "2013-07-11T13:22:00Z",
+                "first": "2013-07-11T13:22:00Z"
             },
-            "modifiedTime": "2014-11-21T11:50:10Z",
-            "className": "informasjon"
+            "modifiedTime": "2020-01-22T14:45:29.643194Z"
         },
         {
             "priority": false,
-            "displayName": "3.13 Opphold og retur",
-            "href": "/no/nav-og-samfunn/samarbeid/relatert-informasjon/3.13-opphold-og-retur",
-            "highlight": "3.13 Opphold og retur",
+            "displayName": "Din pensjon",
+            "href": "/no/person/pensjon/nynorsk/din-pensjon",
+            "highlight": " <b>pensjon</b> gjev deg god oversikt over eigen <b>pensjon</b>. Her kan du blant anna sjå oppteninga di, berekne den framtidige <b><b>alderspensjonen</b></b> din (tidlegare kalla serviceberekning), (...) (...)",
             "publish": {
-                "from": "2016-03-07T09:04:00Z",
-                "first": "2016-03-07T09:04:00Z"
+                "from": "2012-04-10T06:23:00Z",
+                "first": "2012-04-10T06:23:00Z"
             },
-            "modifiedTime": "2016-03-07T11:17:17Z",
-            "className": "informasjon"
+            "modifiedTime": "2019-12-03T20:13:04.531390Z"
         },
         {
             "priority": false,
-            "displayName": "3.4 Økonomisk bistand og trygdeytelser",
-            "href": "/no/nav-og-samfunn/samarbeid/relatert-informasjon/3.4-okonomisk-bistand-og-trygdeytelser",
-            "highlight": "3.4 Økonomisk bistand og trygdeytelser",
+            "displayName": "Orientering til søknadsskjema om alderspensjon",
+            "href": "/no/person/pensjon/alderspensjon/relatert-informasjon/orientering-til-soknadsskjema-om-alderspensjon",
+            "highlight": "Alle som har rett til <b><b>alderspensjon</b></b> kan ta ut <b>pensjon</b> fra måneden etter at de fyller 67 år. På visse vilkår kan du ta ut <b><b>alderspensjon</b></b> fra og med måneden etter at du fylte 62.",
             "publish": {
-                "from": "2016-03-07T08:53:00Z",
-                "first": "2016-03-07T08:53:00Z"
+                "from": "2015-12-01T13:04:00Z",
+                "first": "2015-12-01T13:04:00Z"
             },
-            "modifiedTime": "2017-07-26T12:51:48Z",
-            "className": "informasjon"
+            "modifiedTime": "2019-11-07T13:53:37Z"
         },
         {
             "priority": false,
-            "displayName": "Supplemental benefits",
-            "href": "/en/home/benefits-and-services/relatert-informasjon/supplemental-benefits",
-            "highlight": "Supplemental benefits",
+            "displayName": "Alderspensjon og AFP",
+            "href": "/no/nav-og-samfunn/kontakt-nav/utbetalinger/utbetalinger/utbetalingsdatoer-feriepenger-og-skattetrekk/alderspensjon-og-afp",
+            "highlight": "Informasjonen under gjelder for <b><b>alderspensjon</b></b>, Avtalefestet <b>pensjon</b> (AFP) i offentlig og privat sektor og <b>krigspensjon</b>. Utbetaling fra Statens <b>pensjonskasse</b> kommer samtidig (...)",
             "publish": {
-                "from": "2016-01-22T10:45:00Z",
-                "first": "2016-01-22T10:45:00Z"
+                "from": "2017-06-20T10:45:00Z",
+                "first": "2017-06-20T10:45:00Z"
             },
-            "modifiedTime": "2018-10-16T12:29:25Z",
-            "className": "informasjon"
+            "modifiedTime": "2020-01-08T08:20:03.030258Z"
         },
         {
             "priority": false,
-            "displayName": "Supplemental benefits and support for tuition for education",
-            "href": "/en/home/benefits-and-services/relatert-informasjon/supplemental-benefits-and-support-for-tuition-for-education",
-            "highlight": "Supplemental benefits and support for tuition for education",
+            "displayName": "Uttak av alderspensjon",
+            "href": "/no/person/pensjon/nynorsk/uttak-av-alderspensjon",
+            "highlight": "Du kan starte å ta ut <b><b>alderspensjon</b></b> når du er mellom 62 og 75 år.  For å ta ut <b><b>alderspensjon</b></b> før du fyller 67 år, må du ha tilstrekkeleg høg opptening.",
             "publish": {
-                "from": "2007-12-14T09:09:00Z",
-                "first": "2007-12-14T09:09:00Z"
+                "from": "2013-06-06T15:37:00Z",
+                "first": "2013-06-06T15:37:00Z"
             },
-            "modifiedTime": "2018-04-23T06:41:03Z",
-            "className": "informasjon"
+            "modifiedTime": "2019-12-03T20:11:50.574467Z"
         },
         {
             "priority": false,
-            "displayName": "A`en i arbeidsevnevurderingen - praksis og dilemmaer",
-            "href": "/no/nav-og-samfunn/kunnskap/analyser-fra-nav/arbeid-og-velferd/arbeid-og-velferd/a-en-i-arbeidsevnevurderingen-praksis-og-dilemmaer",
-            "highlight": "A`en i arbeidsevnevurderingen - praksis og dilemmaer",
+            "displayName": "Dagpenger",
+            "href": "/no/nav-og-samfunn/kontakt-nav/utbetalinger/utbetalinger/utbetalingsdatoer-feriepenger-og-skattetrekk/dagpenger",
+            "highlight": "Pengene utbetales ca. 2-3 virkedager etter at <b>meldekort</b> er registrert i henhold til meldefristen. Når på dagen pengene er på konto, vil variere fordi det er banken din som overfører pengene til (...)",
             "publish": {
-                "from": "2015-10-29T06:50:00Z",
-                "first": "2015-10-29T06:50:00Z"
+                "from": "2017-06-20T10:41:00Z",
+                "first": "2017-06-20T10:41:00Z"
             },
-            "modifiedTime": "2015-10-28T15:35:58Z",
-            "className": "informasjon"
+            "modifiedTime": "2019-12-11T14:51:49.820244Z"
         },
         {
             "priority": false,
-            "displayName": "Å prate",
-            "href": "/no/person/hjelpemidler/hva-har-du-vansker-med/relatert-informasjon/a-prate",
-            "highlight": "Å prate",
+            "displayName": "Uttak av alderspensjon",
+            "href": "/no/person/pensjon/alderspensjon/uttak-regulering-og-levealdersjustering/uttak-av-alderspensjon",
+            "highlight": "Du kan starte å ta ut <b><b>alderspensjon</b></b> når du er mellom 62 og 75 år. For å ta ut <b><b>alderspensjon</b></b> før du er 67 år, må du ha tilstrekkelig høy opptjening.",
             "publish": {
-                "from": "2014-08-18T11:27:00Z",
-                "first": "2014-08-18T11:27:00Z"
+                "from": "2013-06-06T15:40:00Z",
+                "first": "2013-06-06T15:40:00Z"
             },
-            "modifiedTime": "2014-08-18T11:27:15Z",
-            "className": "informasjon"
+            "modifiedTime": "2020-01-06T14:29:14.770200Z"
         },
         {
             "priority": false,
-            "displayName": "Ønsker du hjelp fra NAV til å rekruttere?",
-            "href": "/no/bedrift/rekruttering/rekruttere-hjelp-og-selvhjelp",
-            "highlight": "Ønsker du hjelp fra NAV til å rekruttere?",
+            "displayName": "Kombinere jobb og alderspensjon",
+            "href": "/no/person/pensjon/alderspensjon/relatert-informasjon/kombinere-jobb-og-alderspensjon",
+            "highlight": "Du kan jobbe så mye du vil, samtidig som du tar ut <b><b>alderspensjon</b></b> fra folketrygden. Du kan ta ut hel <b><b>alderspensjon</b></b> eller en mindre del av <b>pensjonen</b> din og spare resten til senere.",
             "publish": {
-                "from": "2019-07-05T08:01:32.680964900Z",
-                "first": "2019-07-05T08:01:32.680964900Z"
+                "from": "2015-05-27T12:11:00Z",
+                "first": "2015-05-27T12:11:00Z"
             },
-            "modifiedTime": "2018-11-13T14:06:57Z",
-            "className": "informasjon"
+            "modifiedTime": "2018-01-12T11:12:17Z"
         },
         {
             "priority": false,
-            "displayName": "For frilanstolker",
-            "href": "/no/person/hjelpemidler/tjenester-og-produkter/tolketjenesten/for-frilanstolker",
-            "highlight": "For frilanstolker",
+            "displayName": "Kombinere arbeid og alderspensjon",
+            "href": "/no/person/pensjon/alderspensjon/nynorsk/kombinere-arbeid-og-alderspensjon",
+            "highlight": "Du kan arbeide så mykje du vil samtidig som du tek ut <b><b>alderspensjon</b></b> frå folketrygda. Du kan ta ut heil <b><b>alderspensjon</b></b> eller ein mindre del av <b>pensjonen</b> din og spare resten (...)",
             "publish": {
-                "from": "2019-07-05T08:01:32.680964900Z",
-                "first": "2019-07-05T08:01:32.680964900Z"
+                "from": "2015-06-25T11:50:00Z",
+                "first": "2015-06-25T11:50:00Z"
             },
-            "modifiedTime": "2014-09-10T13:00:02Z",
-            "className": "informasjon"
+            "modifiedTime": "2019-12-12T13:07:59.632061Z"
         }
     ]
 }
