@@ -1,6 +1,6 @@
 import React from 'react';
-import { finnTekst } from './finn-tekst';
 import { Language } from '../reducer/language-duck';
+import { finnTekst } from './finn-tekst';
 
 describe('finnTekst', () => {
     it('Skal finne riktig tekst (Søk/norsk)', () => {
