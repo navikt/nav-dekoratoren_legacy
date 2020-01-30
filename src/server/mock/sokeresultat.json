@@ -349,7 +349,7 @@
             "priority": true,
             "displayName": "Kontakt oss",
             "href": "/no/nav-og-samfunn/kontakt-nav/kontakt-oss",
-            "highlight": "Kontakt oss",
+            "highlight": "Kontakt oss skriftlig eller på <b>telefon</b>",
             "publish": {
                 "from": "2019-07-05T08:01:32.680964900Z",
                 "first": "2019-07-05T08:01:32.680964900Z"
