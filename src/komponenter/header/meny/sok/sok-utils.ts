@@ -43,19 +43,4 @@ export const visAlleTreff = (inputString: string): SokeresultatData => {
         modifiedTime: '',
         className: '',
     };
-
-    /*
-    return {
-            priority: false,
-            displayName: `Se alle treff ("${inputString}")`,
-            href: `/sok?ord=${inputString}`,
-            highlight: '',
-            publish: {
-                from: '',
-                first: '',
-            },
-            modifiedTime: '',
-            className: '',
-        },
-        */
 };

@@ -16,7 +16,7 @@ import Head from '../Head';
 const basePath = '/dekoratoren';
 const isProduction = process.env.NODE_ENV === 'production';
 const buildPath = `${process.cwd()}/buildfolder`;
-const favicon = require('../../public/favicon.ico');
+const favicon = require('../../src/ikoner/favicon/favicon.ico');
 const app = express();
 const PORT = 8088;
 
