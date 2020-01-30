@@ -8,7 +8,7 @@ COPY public public/
 COPY *.json ./
 COPY *.js ./
 
-RUN npm install && npm run build-ssr
+RUN npm install && npm run build
 ENV NODE_ENV production
 
 EXPOSE 8088
