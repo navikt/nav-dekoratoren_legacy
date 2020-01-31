@@ -8,6 +8,7 @@ import SokModal from './sok/sok-innhold/sok-modal/Sokmodal';
 import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
 import './Mobilmeny.less';
 import { verifyWindowObj } from '../../../utils/Environment';
+import { tabletview } from '../../../styling-mediaquery';
 
 const mobilClass = BEMHelper('mobilmeny');
 
@@ -24,7 +25,7 @@ const Mobilmeny = () => {
     };
 
     const handleResize = () => {
-        if (verifyWindowObj() && window.innerWidth > 767) {
+        if (verifyWindowObj() && window.innerWidth >= tabletview) {
             setClickedModal(false);
         }
     };

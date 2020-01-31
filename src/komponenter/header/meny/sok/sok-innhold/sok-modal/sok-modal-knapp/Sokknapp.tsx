@@ -3,7 +3,10 @@ import SokIkon from '../../../../../../../ikoner/mobilmeny/SokIkon';
 
 const Sokknapp = () => {
     return (
-        <button className="sok-input-mobil-submit sok-ikon" type="submit">
+        <button
+            className="sok-input-mobil-submit sok-ikon media-mobil-tablet"
+            type="submit"
+        >
             <div className="media-sm-mobil">
                 <SokIkon width="39px" height="39px" color="#99c2e8" />
             </div>

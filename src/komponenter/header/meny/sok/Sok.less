@@ -4,6 +4,7 @@
 .desktopmeny,
 .sok-modal-body {
     .sok .sok-container {
+        position: relative;
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -24,7 +25,6 @@
     }
 
     .sok-input-resultat {
-        position: relative;
         width: 90%;
 
         .sok-input {
@@ -144,7 +144,6 @@
 
     @media (min-width: @tabletLimitWidth) {
         .sok .sok-container {
-            position: relative;
             width: auto;
             justify-content: space-between;
             margin-bottom: 0;
@@ -154,7 +153,6 @@
 
         .sok-input-resultat {
             width: auto;
-            position: relative;
 
             .sok-input {
                 margin-right: 0;
@@ -288,9 +286,6 @@
                     line-height: 1.425rem;
                 }
             }
-        }
-        .sok-input-mobil-submit {
-            display: none;
         }
     }
 }
