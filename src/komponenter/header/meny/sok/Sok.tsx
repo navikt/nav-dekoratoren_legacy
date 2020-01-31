@@ -5,7 +5,6 @@ import throttle from 'lodash.throttle';
 import Downshift, { DownshiftState, StateChangeOptions } from 'downshift';
 import cls from 'classnames';
 import { Input } from 'nav-frontend-skjema';
-import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
 import { Language } from '../../../../reducer/language-duck';
 import Environment, { genererUrl } from '../../../../utils/Environment';
 import { finnTekst } from '../../../../tekster/finn-tekst';
@@ -18,20 +17,24 @@ import {
 import SokeforslagIngress from './sok-innhold/SokeforslagIngress';
 import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
 import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
-import Mobilsokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Mobilsokknapp';
+import Sokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Sokknapp';
 import './Sok.less';
 
 interface StateProps {
     language: Language;
 }
 
+interface Props {
+    tabindex?: boolean;
+}
+
 const predefinedlistview = 5;
 
-class Sok extends React.Component<StateProps, InputState> {
+class Sok extends React.Component<StateProps & Props, InputState> {
     handleChangeThrottled: ReturnType<typeof throttle>;
     ismounted: boolean = false;
 
-    constructor(props: StateProps) {
+    constructor(props: StateProps & Props) {
         super(props);
         this.state = {
             selectedInput: '',
@@ -237,11 +240,6 @@ class Sok extends React.Component<StateProps, InputState> {
                         >
                             <>
                                 <div className="sok-wrapper">
-                                    <div className="media-mobil-tablet">
-                                        <Innholdstittel>
-                                            Hva leter du etter?
-                                        </Innholdstittel>
-                                    </div>
                                     <div className="sok-container">
                                         <div className="sok-input-resultat">
                                             <Input
@@ -260,7 +258,6 @@ class Sok extends React.Component<StateProps, InputState> {
                                                     language
                                                 )}
                                             />
-                                            <Mobilsokknapp />
                                             <ul
                                                 className="sokeresultat-liste"
                                                 {...getMenuProps()}
@@ -306,6 +303,7 @@ class Sok extends React.Component<StateProps, InputState> {
                                             </ul>
                                         </div>
                                         <DesktopSokknapp />
+                                        <Sokknapp />
                                     </div>
                                 </div>
                             </>
