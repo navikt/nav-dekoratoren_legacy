@@ -17,7 +17,7 @@ import {
 import SokeforslagIngress from './sok-innhold/SokeforslagIngress';
 import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
 import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
-import Mobilsokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Mobilsokknapp';
+import Sokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Sokknapp';
 import './Sok.less';
 
 interface StateProps {
@@ -258,7 +258,6 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                                     language
                                                 )}
                                             />
-                                            <Mobilsokknapp />
                                             <ul
                                                 className="sokeresultat-liste"
                                                 {...getMenuProps()}
@@ -304,11 +303,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                             </ul>
                                         </div>
                                         <DesktopSokknapp />
-                                        <div className="media-sm-mobil">
-                                            <Mobilsokknapp
-                                                tabindex={this.props.tabindex}
-                                            />
-                                        </div>
+                                        <Sokknapp />
                                     </div>
                                 </div>
                             </>

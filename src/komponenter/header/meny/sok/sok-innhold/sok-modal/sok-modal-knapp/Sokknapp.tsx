@@ -1,17 +1,9 @@
 import React from 'react';
 import SokIkon from '../../../../../../../ikoner/mobilmeny/SokIkon';
 
-interface Props {
-    tabindex?: boolean;
-}
-
-const Mobilsokknapp = ({ tabindex }: Props) => {
+const Sokknapp = () => {
     return (
-        <button
-            className="media-mobil-tablet sok-ikon sok-input-mobil-submit"
-            tabIndex={tabindex ? 0 : -1}
-            type="submit"
-        >
+        <button className="sok-input-mobil-submit sok-ikon" type="submit">
             <div className="media-sm-mobil">
                 <SokIkon width="39px" height="39px" color="#99c2e8" />
             </div>
@@ -22,4 +14,4 @@ const Mobilsokknapp = ({ tabindex }: Props) => {
     );
 };
 
-export default Mobilsokknapp;
+export default Sokknapp;

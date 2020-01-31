@@ -12,18 +12,6 @@
         margin-top: 1rem;
     }
 
-    .sok-input-mobil-submit {
-        position: absolute;
-        top: 1.25rem;
-        right: 2rem;
-        background-color: @navBlaDarken60;
-        border: none;
-
-        &:focus {
-            outline: 2px solid white;
-        }
-    }
-
     @keyframes animateIn {
         0% {
             opacity: 0;
@@ -36,6 +24,7 @@
     }
 
     .sok-input-resultat {
+        position: relative;
         width: 90%;
 
         .sok-input {
@@ -89,10 +78,10 @@
             position: absolute;
             background-color: @navBlaDarken60;
             top: 100%;
-            width: 90%;
+            width: 100%;
             overflow: hidden;
             margin: 0;
-            left: 5%;
+            left: 0;
 
             li {
                 padding: 1rem;
@@ -141,29 +130,26 @@
         }
     }
 
+    .sok-input-mobil-submit {
+        position: absolute;
+        top: 1.25rem;
+        right: 2rem;
+        background-color: @navBlaDarken60;
+        border: none;
+
+        &:focus {
+            outline: 2px solid white;
+        }
+    }
+
     @media (min-width: @tabletLimitWidth) {
         .sok .sok-container {
+            position: relative;
             width: auto;
             justify-content: space-between;
             margin-bottom: 0;
             margin-top: 0;
             align-items: center;
-        }
-
-        .sok-input-mobil-submit {
-            background-color: white;
-            top: 0.325rem;
-            right: 0.25rem;
-
-            &:focus {
-                outline: 3px solid @fokusFarge;
-            }
-
-            svg {
-                &:focus {
-                    outline: 0;
-                }
-            }
         }
 
         .sok-input-resultat {
@@ -216,7 +202,7 @@
                 left: 0;
                 overflow: hidden;
                 margin: 0;
-                width: 27.5rem;
+                width: 20rem;
                 box-shadow: 0px 2.8px 2.2px rgba(0, 0, 0, 0.034),
                     0px 6.7px 5.3px rgba(0, 0, 0, 0.048),
                     0px 12.5px 10px rgba(0, 0, 0, 0.06),
@@ -265,6 +251,18 @@
                 }
             }
         }
+
+        .sok-input-mobil-submit {
+            position: absolute;
+            top: 0.35rem;
+            right: 0.2rem;
+            background-color: white;
+            border: none;
+
+            &:focus {
+                outline: 3px solid @fokusFarge;
+            }
+        }
     }
 
     @media (min-width: @desktopLimitWidth) {
@@ -273,6 +271,10 @@
         }
 
         .sok-input-resultat {
+            .sokeresultat-liste {
+                width: 27.5rem;
+            }
+
             .sok-input {
                 margin-right: 0;
                 width: 20rem;
@@ -286,6 +288,9 @@
                     line-height: 1.425rem;
                 }
             }
+        }
+        .sok-input-mobil-submit {
+            display: none;
         }
     }
 }
