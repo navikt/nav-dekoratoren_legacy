@@ -1,5 +1,5 @@
 export interface InputState {
-    inputString: string;
+    selectedInput: string;
     writtenInput: string;
     items: SokeresultatData[];
 }

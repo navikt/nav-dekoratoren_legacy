@@ -34,7 +34,7 @@ class Sok extends React.Component<StateProps, InputState> {
     constructor(props: StateProps) {
         super(props);
         this.state = {
-            inputString: '',
+            selectedInput: '',
             writtenInput: '',
             items: [defaultData],
         };
@@ -61,7 +61,7 @@ class Sok extends React.Component<StateProps, InputState> {
 
         if (this.ismounted) {
             this.setState({
-                inputString: input,
+                selectedInput: input,
                 writtenInput: input,
             });
         }
@@ -77,8 +77,10 @@ class Sok extends React.Component<StateProps, InputState> {
             .then(response => response.json())
             .then(json => {
                 if (this.ismounted) {
+                    const tmp = [...json.hits];
+                    tmp.unshift(visAlleTreff(this.state.writtenInput));
                     this.setState({
-                        items: json.hits,
+                        items: tmp,
                     });
                 }
             });
@@ -93,11 +95,11 @@ class Sok extends React.Component<StateProps, InputState> {
         window.location.href = genererUrl(url);
     }
 
-    input = (inputValue: string): string => {
+    input = (inputValue: SokeresultatData): string => {
         if (inputValue) {
-            return inputValue;
+            return inputValue.displayName;
         }
-        return this.state.inputString;
+        return this.state.selectedInput;
     };
 
     gethighlightedindex = (
@@ -144,7 +146,7 @@ class Sok extends React.Component<StateProps, InputState> {
 
                     if (typeof state.highlightedIndex === 'number') {
                         this.setState({
-                            inputString: this.state.items[
+                            selectedInput: this.state.items[
                                 state.highlightedIndex
                             ].displayName,
                         });
@@ -163,7 +165,7 @@ class Sok extends React.Component<StateProps, InputState> {
                 return this.setDownshiftchanges(
                     state.isOpen,
                     state.highlightedIndex,
-                    this.state.inputString,
+                    this.state.selectedInput,
                     changes
                 );
 
@@ -172,7 +174,7 @@ class Sok extends React.Component<StateProps, InputState> {
                     this.gethighlightedindex(state, false);
                     if (typeof state.highlightedIndex === 'number') {
                         this.setState({
-                            inputString: this.state.items[
+                            selectedInput: this.state.items[
                                 state.highlightedIndex
                             ].displayName,
                         });
@@ -199,22 +201,12 @@ class Sok extends React.Component<StateProps, InputState> {
     };
 
     render() {
-        const { inputString, items } = this.state;
+        const { selectedInput, items } = this.state;
         const { language } = this.props;
-        const URL = `${Environment.baseUrlEnonic}/sok?ord=${inputString}`;
+        const URL = `${Environment.baseUrlEnonic}/sok?ord=${selectedInput}`;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
         });
-
-        if (items && items.length > 0) {
-            if (
-                items[0].displayName &&
-                items[0].displayName === this.state.writtenInput
-            ) {
-                items.shift();
-            }
-            items.unshift(visAlleTreff(this.state.writtenInput));
-        }
 
         return (
             <Downshift
