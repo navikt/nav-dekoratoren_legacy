@@ -1,4 +1,7 @@
-# Nav-dekoratoren
+
+![nav.no logo](./src/ikoner/meny/navlogo.svg)
+# Nav-dekoratoren 
+                     
 
 Node.js Express applikasjon med frontend-komponenter i React.
 Appen kjører på NAIS i en dockercontainer.
@@ -19,7 +22,7 @@ npm run build-dev (for lokalt testing)
 
 # Kjør applikasjonen
 
-Kjør Express-server lokalt => http://localhost:8088/dekoratoren
+Kjør Express-server/dev-server lokalt: http://localhost:8088/dekoratoren
 
 ```
 npm start
