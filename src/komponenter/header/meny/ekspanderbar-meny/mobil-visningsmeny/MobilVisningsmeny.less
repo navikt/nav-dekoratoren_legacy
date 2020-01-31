@@ -72,6 +72,7 @@
 
         &--listItem {
             padding-bottom: 2rem;
+            padding-right: 0.5rem;
         }
 
         &--tilbakelenke {
@@ -95,7 +96,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 1rem 1.5rem 0 1.5rem;
+            padding: 1rem 1.5rem 0 0;
             color: @navGra80;
 
             .typo-sidetittel {
@@ -114,9 +115,13 @@
             flex-direction: row;
             justify-content: flex-start;
             align-items: center;
-            padding: 1rem 1rem 1rem 1.5rem;
+            padding: 1rem 1rem 1rem 0;
             i {
                 margin-right: 0.5rem;
+            }
+
+            &:active {
+                color: @navDypBla;
             }
         }
     }

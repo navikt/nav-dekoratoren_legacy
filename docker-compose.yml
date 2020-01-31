@@ -60,7 +60,7 @@ services:
     environment:
       URL_APP_BASE: "http://localhost:8100/dekoratoren"
       baseUrl: 'http://localhost:8100'
-      baseUrlEnonic: 'https://www-x1.nav.no'
+      baseUrlEnonic: 'https://www-q1.nav.no'
       innloggingslinjenUrl: 'http://localhost:8200/innloggingslinje-api/auth'
       loginUrl: 'http://localhost:5000'
       logoutUrl: 'http://localhost:5000/?logout'

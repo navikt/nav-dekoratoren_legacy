@@ -5,7 +5,7 @@ import 'isomorphic-fetch';
 import FS from 'fs';
 import NodeCache from 'node-cache';
 import express from 'express';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import request from 'request';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -16,12 +16,12 @@ import Head from '../Head';
 const basePath = '/dekoratoren';
 const isProduction = process.env.NODE_ENV === 'production';
 const buildPath = `${process.cwd()}/buildfolder`;
-const favicon = require('../../public/favicon.ico');
+const favicon = require('../../src/ikoner/favicon/favicon.ico');
 const app = express();
 const PORT = 8088;
 
 // Default vars
-const defaultSearchUrl = `https://www-x1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2`;
+const defaultSearchUrl = `https://www.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2`;
 const defaultMenuUrl = `http://localhost:8080/navno/_/service/no.nav.navno/menu`;
 const defaultAppUrl = `http://localhost:8088` + basePath;
 const localhost = 'http://localhost:8088';
@@ -54,10 +54,11 @@ const clientEnv = isProduction
       }
     : localEnv;
 
-FS.writeFile(`${buildPath}/env.json`, JSON.stringify(clientEnv), err =>
-    console.error(err)
-);
-
+if (isProduction) {
+    FS.writeFile(`${buildPath}/env.json`, JSON.stringify(clientEnv), err =>
+        console.error(err)
+    );
+}
 // Cors
 app.disable('x-powered-by');
 app.use(function(req, res, next) {
@@ -88,7 +89,15 @@ const htmlFooter = ReactDOMServer.renderToString(
     </ReduxProvider>
 );
 
-const template = `
+const template = (
+    fileFavicon: string,
+    fileCss: string,
+    htmlHeader: ReactNode,
+    htmlFooter: ReactNode,
+    fileEnv: string,
+    fileScript: string
+) => {
+    return `
     <!DOCTYPE html>
     <html lang="no">
         <head>
@@ -127,6 +136,7 @@ const template = `
             <div id="webstats-ga-notrack"></div>
         </body>
     </html>`;
+};
 
 // Express config
 const pathsForTemplate = [
@@ -140,7 +150,16 @@ const pathsForTemplate = [
 ];
 
 app.get(pathsForTemplate, (req, res) => {
-    res.send(template);
+    res.send(
+        template(
+            fileFavicon,
+            fileCss,
+            htmlHeader,
+            htmlFooter,
+            fileEnv,
+            fileScript
+        )
+    );
 });
 
 app.get(`${basePath}/api/get/menyvalg`, (req, res) => {
