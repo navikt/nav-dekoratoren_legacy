@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { configure, mount, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
 import { Provider as ReduxProvider } from 'react-redux';
 import getStore from '../../../../redux/store';
 import Tekst from '../../../../tekster/finn-tekst';
 import { LoggInnKnapp } from './Logg-inn-knapp';
 
-configure({ adapter: new Adapter() });
 const store = getStore();
 
 const mountWithProps = (erInnlogget: boolean) => {

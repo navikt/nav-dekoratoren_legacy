@@ -1,14 +1,10 @@
 import * as React from 'react';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import DesktopMeny from './Desktopmeny';
 import { Language } from '../../../reducer/language-duck';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
 import Ekspanderbarmeny from './ekspanderbar-meny/Ekspanderbarmeny';
 import Sok from './sok/Sok';
-import { MinsideLenke } from './minside-lenke/MinsideLenke';
-
-configure({ adapter: new Adapter() });
 
 const shallowWithProps = (language: Language) => {
     return shallow(<DesktopMeny language={language} />);
@@ -39,9 +35,4 @@ describe('<DesktopMeny>', () => {
         const wrapper = shallowWithProps(Language.NORSK);
         expect(wrapper.find(Sok)).toHaveLength(1);
     });
-
-    /* it('Skal rendre <MinsideLenke> komponent', () => {
-        const wrapper = shallowWithProps(Language.NORSK);
-        expect(wrapper.find(MinsideLenke)).toHaveLength(1);
-    }); */
 });

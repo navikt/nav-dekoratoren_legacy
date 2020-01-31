@@ -1,10 +1,7 @@
 import React from 'react';
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import { MinsideLenke } from './MinsideLenke';
-
-configure({ adapter: new Adapter() });
 
 const mountWithProps = (erInnlogget: boolean, arbeidsflate: MenuValue) => {
     return mount(

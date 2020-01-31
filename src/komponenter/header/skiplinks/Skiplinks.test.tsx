@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
 import getStore from '../../../redux/store';
 import { Provider as ReduxProvider } from 'react-redux';
 import Skiplinks from './Skiplinks';
 
-configure({ adapter: new Adapter() });
 const store = getStore();
 
 describe('<Skiplinks>', () => {

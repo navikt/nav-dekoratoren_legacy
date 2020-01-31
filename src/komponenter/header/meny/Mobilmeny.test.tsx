@@ -1,12 +1,9 @@
 import * as React from 'react';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
 import Ekspanderbarmeny from './ekspanderbar-meny/Ekspanderbarmeny';
 import Mobilmeny from './Mobilmeny';
 import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
-
-configure({ adapter: new Adapter() });
 
 const shallowWithProps = () => {
     return shallow(<Mobilmeny />);

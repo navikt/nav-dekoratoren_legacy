@@ -1,11 +1,8 @@
 import React from 'react';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import { Language } from '../../reducer/language-duck';
 import { Header } from './Header';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
-
-configure({ adapter: new Adapter() });
 
 const shallowWithProps = (language: Language) => {
     return shallow(<Header language={language} />);
