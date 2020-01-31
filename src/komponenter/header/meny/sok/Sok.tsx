@@ -5,7 +5,6 @@ import throttle from 'lodash.throttle';
 import Downshift, { DownshiftState, StateChangeOptions } from 'downshift';
 import cls from 'classnames';
 import { Input } from 'nav-frontend-skjema';
-import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
 import { Language } from '../../../../reducer/language-duck';
 import Environment, { genererUrl } from '../../../../utils/Environment';
 import { finnTekst } from '../../../../tekster/finn-tekst';
@@ -25,11 +24,11 @@ interface StateProps {
     language: Language;
 }
 
-const predefinedlistview = 5;
-
 interface Props {
     tabindex?: boolean;
 }
+
+const predefinedlistview = 5;
 
 class Sok extends React.Component<StateProps & Props, InputState> {
     handleChangeThrottled: ReturnType<typeof throttle>;
