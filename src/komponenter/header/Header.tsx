@@ -14,14 +14,16 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    hentMenypunkter: () => Promise<void>;
+    hentMenypunkter?: () => Promise<void>;
 }
 
 type HeaderProps = StateProps & DispatchProps;
 
-const Header = ({ hentMenypunkter, language }: HeaderProps) => {
+export const Header = ({ hentMenypunkter, language }: HeaderProps) => {
     React.useEffect(() => {
-        hentMenypunkter();
+        if (hentMenypunkter) {
+            hentMenypunkter();
+        }
     }, []);
 
     return (
