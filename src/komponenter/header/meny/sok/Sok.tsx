@@ -5,7 +5,9 @@ import throttle from 'lodash.throttle';
 import Downshift, { DownshiftState, StateChangeOptions } from 'downshift';
 import cls from 'classnames';
 import { Input } from 'nav-frontend-skjema';
+import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
 import { Language } from '../../../../reducer/language-duck';
+import Environment, { genererUrl } from '../../../../utils/Environment';
 import { finnTekst } from '../../../../tekster/finn-tekst';
 import {
     defaultData,
@@ -18,8 +20,6 @@ import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
 import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
 import Mobilsokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Mobilsokknapp';
 import './Sok.less';
-import Environment, { genererUrl } from '../../../../utils/Environment';
-import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
 
 interface StateProps {
     language: Language;
@@ -85,15 +85,12 @@ class Sok extends React.Component<StateProps, InputState> {
     }
 
     handleSelect(selection: SokeresultatData) {
-        window.location.href = selection.href.startsWith('http')
-            ? selection.href
-            : genererUrl(selection.href);
+        window.location.href = genererUrl(selection.href);
     }
 
     handleSubmit(e: React.FormEvent<HTMLFormElement>, url: string) {
         e.preventDefault();
-        const redirectTo = genererUrl(url);
-        location.href = redirectTo;
+        window.location.href = genererUrl(url);
     }
 
     input = (inputValue: string): string => {
@@ -122,7 +119,7 @@ class Sok extends React.Component<StateProps, InputState> {
         }
     };
 
-    setDownshitchanges = (
+    setDownshiftchanges = (
         isopen: boolean,
         highlightedindex: number | null,
         inputvalue: string,
@@ -151,7 +148,7 @@ class Sok extends React.Component<StateProps, InputState> {
                                 state.highlightedIndex
                             ].displayName,
                         });
-                        return this.setDownshitchanges(
+                        return this.setDownshiftchanges(
                             state.isOpen,
                             state.highlightedIndex,
                             this.state.items[
@@ -163,7 +160,7 @@ class Sok extends React.Component<StateProps, InputState> {
                         );
                     }
                 }
-                return this.setDownshitchanges(
+                return this.setDownshiftchanges(
                     state.isOpen,
                     state.highlightedIndex,
                     this.state.inputString,
@@ -179,7 +176,7 @@ class Sok extends React.Component<StateProps, InputState> {
                                 state.highlightedIndex
                             ].displayName,
                         });
-                        return this.setDownshitchanges(
+                        return this.setDownshiftchanges(
                             state.isOpen,
                             state.highlightedIndex,
                             this.state.items[
@@ -204,8 +201,7 @@ class Sok extends React.Component<StateProps, InputState> {
     render() {
         const { inputString, items } = this.state;
         const { language } = this.props;
-        const URL = `https://www-x1.nav.no/sok?ord=${inputString}`;
-        const lenkeAlleTreff = visAlleTreff(inputString);
+        const URL = `${Environment.baseUrlEnonic}/sok?ord=${inputString}`;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
         });
