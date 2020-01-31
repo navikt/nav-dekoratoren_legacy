@@ -4,7 +4,6 @@ WORKDIR /app
 
 COPY src src/
 COPY config config/
-COPY public public/
 COPY *.json ./
 COPY *.js ./
 
