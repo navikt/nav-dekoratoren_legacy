@@ -2,10 +2,12 @@ import React from 'react';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import throttle from 'lodash.throttle';
-import Downshift from 'downshift';
+import Downshift, { DownshiftState, StateChangeOptions } from 'downshift';
 import cls from 'classnames';
 import { Input } from 'nav-frontend-skjema';
+import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
 import { Language } from '../../../../reducer/language-duck';
+import Environment, { genererUrl } from '../../../../utils/Environment';
 import { finnTekst } from '../../../../tekster/finn-tekst';
 import {
     defaultData,
@@ -18,11 +20,12 @@ import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
 import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
 import Mobilsokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Mobilsokknapp';
 import './Sok.less';
-import Environment from '../../../../utils/Environment';
 
 interface StateProps {
     language: Language;
 }
+
+const predefinedlistview = 5;
 
 class Sok extends React.Component<StateProps, InputState> {
     handleChangeThrottled: ReturnType<typeof throttle>;
@@ -31,7 +34,8 @@ class Sok extends React.Component<StateProps, InputState> {
     constructor(props: StateProps) {
         super(props);
         this.state = {
-            inputString: '',
+            selectedInput: '',
+            writtenInput: '',
             items: [defaultData],
         };
         this.handleChangeThrottled = throttle(
@@ -48,12 +52,17 @@ class Sok extends React.Component<StateProps, InputState> {
         this.ismounted = false;
     }
 
+    cssIndex = (index: number) => {
+        return { '--listmap': index } as React.CSSProperties;
+    };
+
     handleValueChange(input: string) {
         const url = Environment.sokeresultat;
 
         if (this.ismounted) {
             this.setState({
-                inputString: input,
+                selectedInput: input,
+                writtenInput: input,
             });
         }
 
@@ -68,40 +77,148 @@ class Sok extends React.Component<StateProps, InputState> {
             .then(response => response.json())
             .then(json => {
                 if (this.ismounted) {
+                    const tmp = [...json.hits];
+                    tmp.unshift(visAlleTreff(this.state.writtenInput));
                     this.setState({
-                        items: json.hits,
+                        items: tmp,
                     });
                 }
             });
     }
 
     handleSelect(selection: SokeresultatData) {
-        location.href = `https://www-x1.nav.no${selection.href}`;
+        window.location.href = genererUrl(selection.href);
     }
 
     handleSubmit(e: React.FormEvent<HTMLFormElement>, url: string) {
         e.preventDefault();
-        location.href = url;
+        window.location.href = genererUrl(url);
     }
 
+    input = (inputValue: SokeresultatData): string => {
+        if (inputValue) {
+            return inputValue.displayName;
+        }
+        return this.state.selectedInput;
+    };
+
+    gethighlightedindex = (
+        state: DownshiftState<any>,
+        keypressdown: boolean
+    ) => {
+        if (state.isOpen) {
+            if (typeof state.highlightedIndex === 'number') {
+                return keypressdown &&
+                    state.highlightedIndex !== predefinedlistview
+                    ? (state.highlightedIndex += 1)
+                    : !keypressdown && state.highlightedIndex !== 0
+                    ? (state.highlightedIndex -= 1)
+                    : state.highlightedIndex;
+            }
+            if (typeof state.highlightedIndex === 'object') {
+                return (state.highlightedIndex = 0);
+            }
+        }
+    };
+
+    setDownshiftchanges = (
+        isopen: boolean,
+        highlightedindex: number | null,
+        inputvalue: string,
+        changes: StateChangeOptions<any>
+    ) => {
+        return {
+            ...changes,
+            isOpen: isopen,
+            highlightedIndex: highlightedindex,
+            inputValue: inputvalue,
+        };
+    };
+
+    stateReducer = (
+        state: DownshiftState<any>,
+        changes: StateChangeOptions<any>
+    ) => {
+        switch (changes.type) {
+            case Downshift.stateChangeTypes.keyDownArrowDown:
+                if (state.isOpen) {
+                    this.gethighlightedindex(state, true);
+
+                    if (typeof state.highlightedIndex === 'number') {
+                        this.setState({
+                            selectedInput: this.state.items[
+                                state.highlightedIndex
+                            ].displayName,
+                        });
+                        return this.setDownshiftchanges(
+                            state.isOpen,
+                            state.highlightedIndex,
+                            this.state.items[
+                                state.highlightedIndex
+                                    ? state.highlightedIndex
+                                    : 0
+                            ].displayName,
+                            changes
+                        );
+                    }
+                }
+                return this.setDownshiftchanges(
+                    state.isOpen,
+                    state.highlightedIndex,
+                    this.state.selectedInput,
+                    changes
+                );
+
+            case Downshift.stateChangeTypes.keyDownArrowUp:
+                if (state.isOpen) {
+                    this.gethighlightedindex(state, false);
+                    if (typeof state.highlightedIndex === 'number') {
+                        this.setState({
+                            selectedInput: this.state.items[
+                                state.highlightedIndex
+                            ].displayName,
+                        });
+                        return this.setDownshiftchanges(
+                            state.isOpen,
+                            state.highlightedIndex,
+                            this.state.items[
+                                state.highlightedIndex
+                                    ? state.highlightedIndex
+                                    : 0
+                            ].displayName,
+                            changes
+                        );
+                    }
+                }
+                return {
+                    ...changes,
+                    isOpen: state.isOpen,
+                    highlightedIndex: state.highlightedIndex,
+                };
+            default:
+                return changes;
+        }
+    };
+
     render() {
-        const { inputString, items } = this.state;
+        const { selectedInput, items } = this.state;
         const { language } = this.props;
-        const URL = `https://www-x1.nav.no/sok?ord=${inputString}`;
-        const lenkeAlleTreff = visAlleTreff(inputString);
+        const URL = `${Environment.baseUrlEnonic}/sok?ord=${selectedInput}`;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
         });
 
         return (
             <Downshift
+                stateReducer={this.stateReducer}
                 onChange={selection => {
                     this.handleSelect(selection);
                 }}
-                onInputValueChange={(changes: string) => {
+                onInputValueChange={(changes: string, stateAndHelpers: any) => {
+                    stateAndHelpers.getInputProps();
                     this.handleChangeThrottled(changes);
                 }}
-                itemToString={item => (item ? item.highlight : '')}
+                itemToString={item => this.input(item)}
             >
                 {({
                     getInputProps,
@@ -110,68 +227,91 @@ class Sok extends React.Component<StateProps, InputState> {
                     getMenuProps,
                     isOpen,
                     inputValue,
-                }) => (
-                    <form
-                        className="sok"
-                        role="search"
-                        onSubmit={event => this.handleSubmit(event, URL)}
-                    >
-                        <div className="sok-container">
-                            <div className="sok-input-resultat">
-                                <Input
-                                    {...getInputProps()}
-                                    id="decorator-sok"
-                                    className={klassenavn}
-                                    placeholder={finnTekst(
-                                        'sok-input-placeholder',
-                                        language
-                                    )}
-                                    label={finnTekst(
-                                        'sok-input-label',
-                                        language
-                                    )}
-                                    aria-label={finnTekst(
-                                        'sok-input-label',
-                                        language
-                                    )}
-                                />
-                                <Mobilsokknapp />
-                                <ul
-                                    className="sokeresultat-liste"
-                                    {...getMenuProps()}
-                                >
-                                    {isOpen && inputValue !== '' && items
-                                        ? items
-                                              .slice(0, 5)
-                                              .concat(lenkeAlleTreff)
-                                              .map((item, index) => (
-                                                  <li
-                                                      {...getItemProps({
-                                                          key: index,
-                                                          index,
-                                                          item,
-                                                      })}
-                                                  >
-                                                      <SokeforslagIngress
-                                                          className="sok-resultat-listItem"
-                                                          displayName={
-                                                              item.displayName
-                                                          }
-                                                      />
-                                                      <Sokeforslagtext
-                                                          highlight={
-                                                              item.highlight
-                                                          }
-                                                      />
-                                                  </li>
-                                              ))
-                                        : null}
-                                </ul>
-                            </div>
-                            <DesktopSokknapp />
-                        </div>
-                    </form>
-                )}
+                }) => {
+                    return (
+                        <form
+                            className="sok"
+                            id="sok"
+                            role="search"
+                            onSubmit={event => this.handleSubmit(event, URL)}
+                        >
+                            <>
+                                <div className="sok-wrapper">
+                                    <div className="media-mobil-tablet">
+                                        <Innholdstittel>
+                                            Hva leter du etter?
+                                        </Innholdstittel>
+                                    </div>
+                                    <div className="sok-container">
+                                        <div className="sok-input-resultat">
+                                            <Input
+                                                {...getInputProps()}
+                                                className={klassenavn}
+                                                placeholder={finnTekst(
+                                                    'sok-input-placeholder',
+                                                    language
+                                                )}
+                                                label={finnTekst(
+                                                    'sok-input-label',
+                                                    language
+                                                )}
+                                                aria-label={finnTekst(
+                                                    'sok-input-label',
+                                                    language
+                                                )}
+                                            />
+                                            <Mobilsokknapp />
+                                            <ul
+                                                className="sokeresultat-liste"
+                                                {...getMenuProps()}
+                                            >
+                                                {isOpen &&
+                                                inputValue !== '' &&
+                                                items
+                                                    ? items
+                                                          .slice(
+                                                              0,
+                                                              predefinedlistview +
+                                                                  1
+                                                          )
+                                                          .map(
+                                                              (item, index) => (
+                                                                  <li
+                                                                      {...getItemProps(
+                                                                          {
+                                                                              key: index,
+                                                                              index,
+                                                                              item,
+                                                                          }
+                                                                      )}
+                                                                      style={this.cssIndex(
+                                                                          index
+                                                                      )}
+                                                                  >
+                                                                      <SokeforslagIngress
+                                                                          className="sok-resultat-listItem"
+                                                                          displayName={
+                                                                              item.displayName
+                                                                          }
+                                                                      />
+                                                                      <Sokeforslagtext
+                                                                          highlight={
+                                                                              item.highlight
+                                                                          }
+                                                                      />
+                                                                  </li>
+                                                              )
+                                                          )
+                                                    : null}
+                                            </ul>
+                                        </div>
+                                        <DesktopSokknapp />
+                                    </div>
+                                </div>
+                            </>
+                        </form>
+                    );
+                }}
             </Downshift>
         );
     }
