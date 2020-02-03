@@ -46,6 +46,7 @@ const Skiplinks = () => {
                         <a
                             href={hovedmenylink}
                             className="visuallyhidden focusable"
+                            id="hovedmenylenke"
                         >
                             <Tekst id="skiplinks-ga-til-hovedmeny" />
                         </a>
@@ -54,12 +55,17 @@ const Skiplinks = () => {
                         <a
                             href="#maincontent"
                             className="visuallyhidden focusable"
+                            id="hovedinnholdlenke"
                         >
                             <Tekst id="skiplinks-ga-til-hovedinnhold" />
                         </a>
                     </li>
                     <li>
-                        <a href={soklink} className="visuallyhidden focusable">
+                        <a
+                            href={soklink}
+                            className="visuallyhidden focusable"
+                            id="soklenke"
+                        >
                             <Tekst id="skiplinks-ga-til-sok" />
                         </a>
                     </li>

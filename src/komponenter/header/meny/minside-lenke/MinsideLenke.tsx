@@ -6,20 +6,21 @@ import { MenuValue } from '../../../../utils/meny-storage-utils';
 import Environment from '../../../../utils/Environment';
 import './MinsideLenke.less';
 
-interface StateProps {
-    erInnlogget: boolean;
-    arbeidsflate: MenuValue;
-}
-
-interface Props {
+interface OwnProps {
     tabindex: boolean;
 }
 
-const MinsideLenke = ({
-    erInnlogget,
+interface StateProps {
+    erinnlogget: boolean;
+    arbeidsflate: MenuValue;
+}
+
+type MinsideLenkeProps = StateProps & OwnProps;
+export const MinsideLenke = ({
+    erinnlogget,
     arbeidsflate,
     tabindex,
-}: StateProps & Props) => {
+}: MinsideLenkeProps) => {
     const lenketekst =
         arbeidsflate === MenuValue.IKKEVALGT ||
         arbeidsflate === MenuValue.PRIVATPERSON
@@ -38,7 +39,7 @@ const MinsideLenke = ({
 
     return (
         <div className="minside-lenke">
-            {erInnlogget && arbeidsflate !== MenuValue.SAMARBEIDSPARTNER ? (
+            {erinnlogget && arbeidsflate !== MenuValue.SAMARBEIDSPARTNER ? (
                 <Lenke href={lenkeurl} tabIndex={tabindex ? 0 : -1}>
                     {lenketekst}
                 </Lenke>
@@ -48,7 +49,7 @@ const MinsideLenke = ({
 };
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    erInnlogget: state.innloggingsstatus.data.authenticated,
+    erinnlogget: state.innloggingsstatus.data.authenticated,
     arbeidsflate: state.arbeidsflate.status,
 });
 
