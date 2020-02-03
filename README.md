@@ -1,6 +1,5 @@
 
-![nav.no logo](./src/ikoner/meny/navlogo.svg)
-# Nav-dekoratoren 
+# Nav-dekoratoren ![nav.no logo](./src/ikoner/meny/navlogo.svg) 
                      
 
 Node.js Express applikasjon med frontend-komponenter i React.
@@ -36,7 +35,7 @@ Url til disse miljøene: https://www-{miljø}.nav.no/dekoratoren/
 
 ### Bruk av menyen
 
-Dekoratøren har tatt utgangspunkt at den skal være bakover kompatibel, slik at for de eksisterende applikasjoner i nav sitt portifølge som allerede har tatt i bruk dekoratør/v4 trengs det bare å bytte om Url adressen fra https://appres.nav.no/.... til https://nav.no/dekoratoren
+Dekoratøren har tatt utgangspunkt at den skal være bakover kompatibel, slik at for de eksisterende applikasjoner i nav sitt portifølge som allerede har tatt i bruk dekoratør/v4 trengs det bare å bytte om Url adressen fra https://appres.nav.no/.... til https://www.nav.no/dekoratoren
 En kan implementere menyen ved eks:
 
 ```
@@ -58,7 +57,7 @@ sett inn 5 linjer html i front-end:
 ```
 <html>
   <head>
-      <link href=http://localhost:8088/dekoratoren/css/client.css rel="stylesheet" /> 
+      <link href=http://<miljø adresse>/dekoratoren/css/client.css rel="stylesheet" /> 
   </head>
   <body>
     <section class="navno-dekorator" id="decorator-header" role="main"></section>
@@ -71,6 +70,25 @@ sett inn 5 linjer html i front-end:
   </body>
 </html>
 ```
+eks3:
+Bruk av pus-decoratør:
+
+I app-config.yaml bytt ut fasitResources til å peke på ny dekoratør
+```
+fra
+fasitResources:
+  used:
+  - alias: appres.cms
+    resourceType: baseUrl
+
+til
+fasitResources:
+  used:
+  - alias: nav.dekoratoren (denne peker på https://www.nav.no)
+    resourceType: baseUrl
+
+```
+For komplett oppsett se: https://github.com/navikt/pus-decorator
 
 Appen blir server rendert. Derfor anbefales det å bruke en .js fil til å fetche innholdet fra 'http://<test-mijø | prod-adr>/dekoratoren'. For så å selektere innholdet i id'ene. Selektors som i dag er tatt i bruk:
    
