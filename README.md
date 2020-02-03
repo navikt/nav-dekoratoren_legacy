@@ -6,20 +6,20 @@ Node.js Express applikasjon med frontend-komponenter i React.
 Appen kjører på NAIS i en dockercontainer.
 
 
-# Installasjon
+## Installasjon
 
 ```
 npm install
 ```
 
-# Bygg applikasjonen
+## Bygg applikasjonen
 
 ```
 npm run build (for produksjon)
 npm run build-dev (for testing lokalt)
 ```
 
-# Kjør applikasjonen
+## Kjør applikasjonen
 
 Kjør Express-server/dev-server lokalt: http://localhost:8088/dekoratoren
 
