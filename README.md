@@ -39,7 +39,7 @@ Dekoratøren har tatt utgangspunkt i at den skal være bakoverkompatibel, slik a
 
 En kan implementere menyen slik: 
 
-Eksempel 1:
+#### Eksempel 1:
 
 ```
 const url =
@@ -55,7 +55,7 @@ const getDecorator = () =>
         .....
 ```
 
-Eksempel 2: 
+#### Eksempel 2: 
 Sett inn 5 linjer html i front-end:
 ```
 <html>
@@ -74,23 +74,25 @@ Sett inn 5 linjer html i front-end:
 </html>
 ```
 
-Eksempel 3:
+#### Eksempel 3:
 Bruk av pus-decorator
 
-I app-config.yaml, bytt ut fasitResources til å peke på ny dekoratør:
+I app-config.yaml, bytt ut fasitResources til å peke på ny dekoratør
+
+Fra:
 ```
-fra
 fasitResources:
   used:
   - alias: appres.cms
     resourceType: baseUrl
+```
 
-til
+Til:
+```
 fasitResources:
   used:
   - alias: nav.dekoratoren (denne peker på https://www{-miljø adresse}.nav.no, pus-decorator legger på path /dekoratoren)
     resourceType: baseUrl
-
 ```
 For komplett oppsett se: https://github.com/navikt/pus-decorator
 
@@ -102,7 +104,7 @@ Appen blir serverside-rendret. Derfor anbefales det å bruke en .js fil til å f
       scripts           (scripts til applikasjonen)
 
 
-# Henvendelser
+## Henvendelser
 
 Spørsmål knyttet til koden eller prosjektet kan rettes mot https://github.com/orgs/navikt/teams/team-personbruker
 
