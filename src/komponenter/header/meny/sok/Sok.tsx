@@ -8,17 +8,13 @@ import { Input } from 'nav-frontend-skjema';
 import { Language } from '../../../../reducer/language-duck';
 import Environment, { genererUrl } from '../../../../utils/Environment';
 import { finnTekst } from '../../../../tekster/finn-tekst';
-import {
-    defaultData,
-    InputState,
-    SokeresultatData,
-    visAlleTreff,
-} from './sok-utils';
+import { defaultData, InputState, SokeresultatData, visAlleTreff } from './sok-utils';
 import SokeforslagIngress from './sok-innhold/SokeforslagIngress';
 import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
 import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
 import Sokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Sokknapp';
 import './Sok.less';
+import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 
 interface StateProps {
     language: Language;
@@ -236,7 +232,10 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                             className="sok"
                             id="sok"
                             role="search"
-                            onSubmit={event => this.handleSubmit(event, URL)}
+                            onSubmit={event => {
+                                triggerGaEvent({category: GACategory.Header, action: 'søk', label: selectedInput});
+                                this.handleSubmit(event, URL)
+                            }}
                         >
                             <>
                                 <div className="sok-wrapper">

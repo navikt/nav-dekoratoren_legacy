@@ -4,12 +4,12 @@ import { AppState } from '../../../../reducer/reducer';
 import KnappBase from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
-import Environment, { erNavDekoratoren } from '../../../../utils/Environment';
-import { verifyWindowObj } from '../../../../utils/Environment';
+import Environment, { erNavDekoratoren, verifyWindowObj } from '../../../../utils/Environment';
 import LogginnIkon from '../../../../ikoner/mobilmeny/LogginnIkon';
 import Tekst from '../../../../tekster/finn-tekst';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
+import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 
 const getPath = () => {
     if (verifyWindowObj()) {
@@ -77,7 +77,10 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
                 <div className="media-sm-mobil login-mobil">
                     <button
                         className="mobil-login-knapp"
-                        onClick={this.handleButtonClick}
+                        onClick={() => {
+                            triggerGaEvent({category: GACategory.Header, action: knappetekst});
+                            this.handleButtonClick();
+                        }}
                     >
                         <LogginnIkon />
                         <Undertittel className="knappetekst">
@@ -89,7 +92,10 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
                     <KnappBase
                         className="login-knapp"
                         type="standard"
-                        onClick={this.handleButtonClick}
+                        onClick={() => {
+                            triggerGaEvent({category: GACategory.Header, action: knappetekst});
+                            this.handleButtonClick();
+                        }}
                     >
                         <Tekst id={knappetekst} />
                     </KnappBase>

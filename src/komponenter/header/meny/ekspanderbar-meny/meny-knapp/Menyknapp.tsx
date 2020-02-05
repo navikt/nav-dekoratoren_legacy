@@ -6,6 +6,7 @@ import Tekst from '../../../../../tekster/finn-tekst';
 import HamburgerIkon from '../../../../../ikoner/meny/HamburgerIkon';
 import MenyIkon from '../../../../../ikoner/mobilmeny/MenyIkon';
 import './Menyknapp.less';
+import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
 
 interface Props {
     ToggleMenu: () => void;
@@ -19,7 +20,10 @@ const Menyknapp = (props: Props) => {
         <>
             {props.lang !== Language.SAMISK ? (
                 <button
-                    onClick={() => props.ToggleMenu()}
+                    onClick={() => {
+                        props.ToggleMenu();
+                        triggerGaEvent({category: GACategory.Header, action: `meny-${props.clicked ? 'close' : 'open'}`});
+                    }}
                     className={cls.element('menyknapp')}
                     id="decorator-meny-toggleknapp"
                     aria-label="Menyknapp"

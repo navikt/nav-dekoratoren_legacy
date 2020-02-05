@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import './Varselbjelle.less';
+import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 
 interface Props {
     tabindex: boolean;
@@ -74,6 +75,9 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
         if (node && node.contains(e.target as HTMLElement)) {
             return;
         }
+        if (this.state.clicked) {
+            triggerGaEvent({category: GACategory.Header, action: 'varsler-close-outsideclick'});
+        }
         this.setState({ clicked: false });
     };
 
@@ -95,7 +99,10 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                             className={classname}
                         >
                             <button
-                                onClick={this.handleClick}
+                                onClick={() => {
+                                    triggerGaEvent({category: GACategory.Header, action: clicked ? 'varsler-close' : 'varsler-open'});
+                                    this.handleClick();
+                                }}
                                 className="toggle-varsler"
                                 tabIndex={tabindex ? 0 : -1}
                                 title="Varsler"

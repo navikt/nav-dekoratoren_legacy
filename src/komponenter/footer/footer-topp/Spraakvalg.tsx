@@ -3,14 +3,11 @@ import { AppState } from '../../../reducer/reducer';
 import { connect } from 'react-redux';
 import { Language } from '../../../reducer/language-duck';
 import { Undertittel } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
 import Tekst from '../../../tekster/finn-tekst';
 import { erNavDekoratoren } from '../../../utils/Environment';
-import {
-    getSpraaklenker,
-    spraaklenker,
-    Spraaklenke,
-} from './Spraakvalg-lenker';
+import { getSpraaklenker, Spraaklenke, spraaklenker } from './Spraakvalg-lenker';
+import LenkeMedGAEvent from '../../../utils/LenkeMedGAEvent';
+import { GACategory } from '../../../utils/google-analytics';
 
 interface StateProps {
     language: Language;
@@ -59,15 +56,17 @@ class Spraakvalg extends React.Component<StateProps, State> {
                     {this.state.spraaklenker.map(lenke => {
                         return (
                             <li key={lenke.lang}>
-                                <Lenke
+                                <LenkeMedGAEvent
+                                    className={'lenke'}
                                     href={
                                         this.state.erNavDekoratoren
                                             ? lenke.testurl
                                             : lenke.url
                                     }
+                                    gaEventArgs={{category: GACategory.Footer, action: `språkvalg-${lenke.lang}`}}
                                 >
                                     {lenke.lenketekst}
-                                </Lenke>
+                                </LenkeMedGAEvent>
                             </li>
                         );
                     })}

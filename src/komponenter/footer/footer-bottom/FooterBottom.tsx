@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import Lenke from 'nav-frontend-lenker';
+import React, { useEffect, useState } from 'react';
 import { genererLenkerTilUrl } from '../../../utils/Environment';
 import BEMHelper from '../../../utils/bem';
 import Tekst from '../../../tekster/finn-tekst';
 import { FooterLenke, lenkerBunn } from '../Footer-lenker';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
+import LenkeMedGAEvent from '../../../utils/LenkeMedGAEvent';
+import { GACategory } from '../../../utils/google-analytics';
 
 interface Props {
     classname: string;
@@ -29,9 +30,13 @@ const FooterBottom = ({ classname }: Props) => {
                     {lenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
-                                <Lenke href={lenke.url}>
+                                <LenkeMedGAEvent
+                                    className={'lenke'}
+                                    href={lenke.url}
+                                    gaEventArgs={{category: GACategory.Footer, action: `bunnrad/${lenke.lenketekst}`, label: lenke.url}}
+                                >
                                     {lenke.lenketekst}
-                                </Lenke>
+                                </LenkeMedGAEvent>
                             </li>
                         );
                     })}
@@ -39,9 +44,14 @@ const FooterBottom = ({ classname }: Props) => {
             </div>
             <ul className="bottom-hoyre">
                 <li>
-                    <Lenke href="#" onClick={openModal}>
+                    <LenkeMedGAEvent
+                        className={'lenke'}
+                        href="#"
+                        onClick={openModal}
+                        gaEventArgs={{category: GACategory.Footer, action: `bunnrad/del-skjerm`}}
+                    >
                         <Tekst id="footer-del-skjerm" />
-                    </Lenke>
+                    </LenkeMedGAEvent>
                     {visDelSkjermModal && (
                         <DelSkjermModal
                             isOpen={visDelSkjermModal}

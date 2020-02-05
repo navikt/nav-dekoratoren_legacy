@@ -2,17 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import { Dispatch } from '../../../redux/dispatch-type';
-import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import BEMHelper from '../../../utils/bem';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
-import {
-    MenuValue,
-    oppdaterSessionStorage,
-} from '../../../utils/meny-storage-utils';
+import { MenuValue, oppdaterSessionStorage } from '../../../utils/meny-storage-utils';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import './MobilarbeidsflateValg.less';
+import LenkeMedGAEvent from '../../../utils/LenkeMedGAEvent';
+import { GACategory } from '../../../utils/google-analytics';
 
 interface Props {
     tabindex: boolean;
@@ -42,7 +40,7 @@ const MobilarbeidsflateValg = ({
                             key={lenke.tittel}
                             className={cls.element('liste-element')}
                         >
-                            <Lenke
+                            <LenkeMedGAEvent
                                 href={lenke.url}
                                 onClick={event => {
                                     oppdaterSessionStorage(
@@ -53,6 +51,7 @@ const MobilarbeidsflateValg = ({
                                     settArbeidsflate();
                                 }}
                                 tabIndex={tabindex ? 0 : -1}
+                                gaEventArgs={{category: GACategory.Header, action: 'valg-arbeidsflate'}}
                             >
                                 <HoyreChevron />
                                 <Undertittel>
@@ -63,7 +62,7 @@ const MobilarbeidsflateValg = ({
                                         {lenke.tittel}
                                     </span>{' '}
                                 </Undertittel>
-                            </Lenke>
+                            </LenkeMedGAEvent>
                         </li>
                     );
                 }

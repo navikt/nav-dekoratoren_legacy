@@ -5,12 +5,11 @@ import { Dispatch } from '../../../redux/dispatch-type';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import BEMHelper from '../../../utils/bem';
-import {
-    MenuValue,
-    oppdaterSessionStorage,
-} from '../../../utils/meny-storage-utils';
+import { MenuValue, oppdaterSessionStorage } from '../../../utils/meny-storage-utils';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import './Arbeidsflatemeny.less';
+import LenkeMedGAEvent from '../../../utils/LenkeMedGAEvent';
+import { GACategory } from '../../../utils/google-analytics';
 
 interface StateProps {
     arbeidsflate: MenuValue;
@@ -48,7 +47,7 @@ const Arbeidsflatemeny = ({
                                 className={cls.element('liste-element')}
                                 key={lenke.tittel}
                             >
-                                <a
+                                <LenkeMedGAEvent
                                     className={cls.element('lenke')}
                                     href={lenke.url}
                                     onClick={event => {
@@ -59,6 +58,7 @@ const Arbeidsflatemeny = ({
                                         );
                                         settArbeidsflate();
                                     }}
+                                    gaEventArgs={{category: GACategory.Header, action: 'valg-arbeidsflate'}}
                                 >
                                     <div
                                         className={cls.element(
@@ -72,7 +72,7 @@ const Arbeidsflatemeny = ({
                                             {lenke.tittel}
                                         </EtikettLiten>
                                     </div>
-                                </a>
+                                </LenkeMedGAEvent>
                             </li>
                         );
                     }
