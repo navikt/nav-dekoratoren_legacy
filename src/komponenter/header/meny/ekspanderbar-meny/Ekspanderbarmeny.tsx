@@ -6,13 +6,13 @@ import { verifyWindowObj } from '../../../../utils/Environment';
 import { desktopview } from '../../../../styling-mediaquery';
 import { Status } from '../../../../api/api';
 import { MenuValue, selectMenu } from '../../../../utils/meny-storage-utils';
-import { dataInitState } from '../../../../reducer/menu-duck';
-import { Meny, MenyPunkter } from '../../../../reducer/menu-duck';
+import { dataInitState, Meny, MenyPunkter } from '../../../../reducer/menu-duck';
 import { Language } from '../../../../reducer/language-duck';
 import Menyknapp from './meny-knapp/Menyknapp';
 import Mobilbakgrunn from './mobil-visningsmeny/mobil-innhold/Mobilbakgrunn';
 import MobilVisningsmeny from './mobil-visningsmeny/MobilVisningsmeny';
 import DesktopVisningsmeny from './desktop-visningsmeny/DesktopVisningsmeny';
+import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 
 interface StateProps {
     meny: MenyPunkter;
@@ -42,6 +42,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
     }
 
     menutoggle = () => {
+        triggerGaEvent({category: GACategory.Header, action: `meny-${this.state.clicked ? 'close' : 'open'}`});
         this.setState({
             clicked: !this.state.clicked,
         });

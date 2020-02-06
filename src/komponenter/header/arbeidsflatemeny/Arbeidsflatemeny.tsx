@@ -48,7 +48,7 @@ const Arbeidsflatemeny = ({
                                 key={lenke.tittel}
                             >
                                 <LenkeMedGAEvent
-                                    className={cls.element('lenke')}
+                                    classNameOverride={cls.element('lenke')}
                                     href={lenke.url}
                                     onClick={event => {
                                         oppdaterSessionStorage(

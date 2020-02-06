@@ -5,7 +5,8 @@ import Tekst from '../../../tekster/finn-tekst';
 import { FooterLenke, lenkerBunn } from '../Footer-lenker';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
 import LenkeMedGAEvent from '../../../utils/LenkeMedGAEvent';
-import { GACategory } from '../../../utils/google-analytics';
+import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
+import Lenke from 'nav-frontend-lenker';
 
 interface Props {
     classname: string;
@@ -20,8 +21,14 @@ const FooterBottom = ({ classname }: Props) => {
         setLenker(genererLenkerTilUrl(lenkerBunn));
     }, []);
 
-    const openModal = () => setVisDelSkjermModal(true);
-    const closeModal = () => setVisDelSkjermModal(false);
+    const openModal = () => {
+        triggerGaEvent({category: GACategory.Footer, action: `bunnrad/del-skjerm-open`});
+        setVisDelSkjermModal(true);
+    };
+    const closeModal = () => {
+        triggerGaEvent({category: GACategory.Footer, action: `bunnrad/del-skjerm-close`});
+        setVisDelSkjermModal(false);
+    };
 
     return (
         <section className={cls.element('menylinje-bottom')}>
@@ -31,7 +38,6 @@ const FooterBottom = ({ classname }: Props) => {
                         return (
                             <li key={lenke.lenketekst}>
                                 <LenkeMedGAEvent
-                                    className={'lenke'}
                                     href={lenke.url}
                                     gaEventArgs={{category: GACategory.Footer, action: `bunnrad/${lenke.lenketekst}`, label: lenke.url}}
                                 >
@@ -44,14 +50,12 @@ const FooterBottom = ({ classname }: Props) => {
             </div>
             <ul className="bottom-hoyre">
                 <li>
-                    <LenkeMedGAEvent
-                        className={'lenke'}
+                    <Lenke
                         href="#"
                         onClick={openModal}
-                        gaEventArgs={{category: GACategory.Footer, action: `bunnrad/del-skjerm`}}
                     >
                         <Tekst id="footer-del-skjerm" />
-                    </LenkeMedGAEvent>
+                    </Lenke>
                     {visDelSkjermModal && (
                         <DelSkjermModal
                             isOpen={visDelSkjermModal}

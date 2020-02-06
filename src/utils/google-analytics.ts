@@ -15,7 +15,7 @@ export type GAEventArgs = {
     label?: string
 }
 
-export const initAnalytics = () => {
+export const initGA = () => {
     ReactGA.initialize(trackingId, {
         debug: true,
         titleCase: false,

@@ -6,6 +6,7 @@ type Props = {
     children: React.ReactNode,
     gaEventArgs?: GAEventArgs,
     className?: string,
+    classNameOverride?: string,
     id?: string,
     onClick?: (...args: any) => void,
     tabIndex?: number,
@@ -16,32 +17,29 @@ const LenkeMedGAEvent = ({
                              children,
                              gaEventArgs,
                              className,
+                             classNameOverride,
                              id,
                              onClick,
-                             tabIndex}: Props) => {
-    const gaEventFunc = gaEventArgs && (() => {
-        triggerGaEvent(gaEventArgs);
-    });
-
-    return (
-        <a
-            href={href}
-            className={className}
-            id={id}
-            tabIndex={tabIndex}
-            onAuxClick={gaEventFunc}
-            onClick={(e) => {
-                if (onClick) {
-                    onClick(e);
-                }
-                if (gaEventFunc) {
-                    gaEventFunc();
-                }
-            }}
-        >
-            {children}
-        </a>
-    );
-};
+                             tabIndex,
+                         }: Props) => (
+    <a
+        href={href}
+        className={classNameOverride || `lenke ${className}`}
+        id={id}
+        tabIndex={tabIndex}
+        onAuxClick={(event) =>
+            gaEventArgs && event.button && event.button === 1 && triggerGaEvent(gaEventArgs)}
+        onClick={(e) => {
+            if (onClick) {
+                onClick(e);
+            }
+            if (gaEventArgs) {
+                triggerGaEvent(gaEventArgs);
+            }
+        }}
+    >
+        {children}
+    </a>
+);
 
 export default LenkeMedGAEvent;

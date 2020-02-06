@@ -57,8 +57,11 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
     handleButtonClick = () => {
         const path = erNavDekoratoren() ? getPath() : '/person/dittnav';
         const login = `${Environment.loginUrl}/login?redirect=${Environment.baseUrl}${path}`;
+        const erInnlogget = this.props.erInnlogget;
+        triggerGaEvent({category: GACategory.Header, action: erInnlogget ? 'logg-ut' : 'logg-inn'});
+
         if (process.env.NODE_ENV === 'production') {
-            return this.props.erInnlogget
+            return erInnlogget
                 ? (window.location.href = Environment.logoutUrl)
                 : (window.location.href = login);
         } else {
@@ -77,10 +80,7 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
                 <div className="media-sm-mobil login-mobil">
                     <button
                         className="mobil-login-knapp"
-                        onClick={() => {
-                            triggerGaEvent({category: GACategory.Header, action: knappetekst});
-                            this.handleButtonClick();
-                        }}
+                        onClick={() => this.handleButtonClick()}
                     >
                         <LogginnIkon />
                         <Undertittel className="knappetekst">

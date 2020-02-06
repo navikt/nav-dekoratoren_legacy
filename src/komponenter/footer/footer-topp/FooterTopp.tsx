@@ -43,7 +43,6 @@ const FooterTopp = ({ classname }: Props) => {
                         return (
                             <li key={lenke.lenketekst}>
                                 <LenkeMedGAEvent
-                                    className={'lenke'}
                                     href={lenke.url}
                                     gaEventArgs={{category: GACategory.Footer, action: `hjelp/${lenke.lenketekst}`, label: lenke.url}}
                                 >
@@ -69,7 +68,6 @@ const FooterTopp = ({ classname }: Props) => {
                         return (
                             <li key={lenke.lenketekst}>
                                 <LenkeMedGAEvent
-                                    className={'lenke'}
                                     href={lenke.url}
                                     gaEventArgs={{category: GACategory.Footer, action: `om-nettstedet/${lenke.lenketekst}`, label: lenke.url}}
                                 >

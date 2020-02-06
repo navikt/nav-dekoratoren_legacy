@@ -16,7 +16,7 @@ const NavLogoRod = ({
     return (
         <div className="sitefooter__logo">
             <LenkeMedGAEvent
-                className="navbar-brand"
+                classNameOverride="navbar-brand"
                 href="https://nav.no"
                 gaEventArgs={{category: GACategory.Footer, action: 'navlogo'}}
             >

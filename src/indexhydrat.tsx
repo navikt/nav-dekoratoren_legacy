@@ -10,13 +10,13 @@ import Head from './Head';
 import Footer from './komponenter/footer/Footer';
 import { fetchEnv } from './utils/Environment';
 import './index.less';
-import { initAnalytics } from './utils/google-analytics';
+import { initGA } from './utils/google-analytics';
 
 const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
 const run = () => {
-    initAnalytics();
+    initGA();
     fetchEnv()
         .then(() => {
             ReactDOM.hydrate(

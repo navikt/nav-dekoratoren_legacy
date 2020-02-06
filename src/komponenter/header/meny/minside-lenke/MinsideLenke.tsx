@@ -42,7 +42,6 @@ export const MinsideLenke = ({
         <div className="minside-lenke">
             {erinnlogget && arbeidsflate !== MenuValue.SAMARBEIDSPARTNER ? (
                 <LenkeMedGAEvent
-                    className={'lenke'}
                     href={lenkeurl}
                     tabIndex={tabindex ? 0 : -1}
                     gaEventArgs={{category: GACategory.Header, action: 'minside', label: lenkeurl}}

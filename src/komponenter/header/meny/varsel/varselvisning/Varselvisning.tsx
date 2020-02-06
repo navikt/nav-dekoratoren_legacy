@@ -5,6 +5,10 @@ import { AppState } from '../../../../../reducer/reducer';
 import { desktopview, tabletview } from '../../../../../styling-mediaquery';
 import Environment from '../../../../../utils/Environment';
 import './Varselvisning.less';
+import LenkeMedGAEvent from '../../../../../utils/LenkeMedGAEvent';
+import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
+import Tekst, { finnTekst } from '../../../../../tekster/finn-tekst';
+import { Language } from '../../../../../reducer/language-duck';
 
 interface OwnProps {
     tabIndex: boolean;
@@ -15,6 +19,7 @@ interface StateProps {
     varsler: string;
     antallVarsler: number;
     antallUlesteVarsler: number;
+    language: Language;
 }
 
 interface State {
@@ -64,8 +69,40 @@ class Varselvisning extends React.Component<Props, State> {
         }
     };
 
+    gaEventHandler = (event: Event) => {
+        if (event.type === 'auxclick' && (event as MouseEvent).button !== 1) {
+            return;
+        }
+        triggerGaEvent({
+            category: GACategory.Header,
+            action: 'varsel-lenke',
+            label: (event.target as HTMLAnchorElement).href,
+        });
+    };
+
+    getVarselLenker = () => document.getElementsByClassName('varsel-lenke');
+
+    addGaEventTriggers = () => {
+        for (const varselLenke of this.getVarselLenker()) {
+            if (varselLenke.tagName.toUpperCase() === 'A') {
+                varselLenke.addEventListener('click', this.gaEventHandler);
+                varselLenke.addEventListener('auxclick', this.gaEventHandler);
+            }
+        }
+    };
+
+    removeGaEventTriggers = () => {
+        for (const varselLenke of this.getVarselLenker()) {
+            if (varselLenke.tagName.toUpperCase() === 'A') {
+                varselLenke.removeEventListener('click', this.gaEventHandler);
+                varselLenke.removeEventListener('auxclick', this.gaEventHandler);
+            }
+        }
+    };
+
     componentDidMount(): void {
         window.addEventListener('resize', this.handleWindowSize);
+        this.addGaEventTriggers();
         this.setTabIndex();
     }
 
@@ -80,6 +117,7 @@ class Varselvisning extends React.Component<Props, State> {
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleWindowSize);
+        this.removeGaEventTriggers();
     }
 
     erTabletEllerDesktop = () => {
@@ -102,15 +140,20 @@ class Varselvisning extends React.Component<Props, State> {
 
                 {antallVarsler > 5 && (
                     <div className="vis-alle-lenke skillelinje-topp">
-                        <a
+                        <LenkeMedGAEvent
                             href={Environment.varselinnboksUrl}
                             tabIndex={tabIndex ? 0 : -1}
+                            gaEventArgs={{
+                                category: GACategory.Header,
+                                action: 'varsler/visalle',
+                                label: Environment.varselinnboksUrl,
+                            }}
                         >
-                            Vis alle dine varsler
+                            <Tekst id={'varsler-visalle'} />
                             {antallUlesteVarsler > 0
-                                ? ` (${antallUlesteVarsler} nye)`
+                                ? ` (${antallUlesteVarsler} ${finnTekst('varsler-nye', this.props.language)})`
                                 : ''}
-                        </a>
+                        </LenkeMedGAEvent>
                     </div>
                 )}
             </div>
@@ -122,6 +165,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
     varsler: state.varsler.data.varsler,
     antallVarsler: state.varsler.data.antall,
     antallUlesteVarsler: state.varsler.data.uleste,
+    language: state.language.language,
 });
 
 export default connect(mapStateToProps)(Varselvisning);

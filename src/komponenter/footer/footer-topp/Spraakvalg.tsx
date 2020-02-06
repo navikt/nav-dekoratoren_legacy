@@ -57,7 +57,6 @@ class Spraakvalg extends React.Component<StateProps, State> {
                         return (
                             <li key={lenke.lang}>
                                 <LenkeMedGAEvent
-                                    className={'lenke'}
                                     href={
                                         this.state.erNavDekoratoren
                                             ? lenke.testurl

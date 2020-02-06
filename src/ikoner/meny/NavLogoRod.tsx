@@ -15,7 +15,7 @@ const NavLogoRod = ({
 }) => {
     return (
         <LenkeMedGAEvent
-            className={classname}
+            classNameOverride={classname}
             href="https://nav.no"
             gaEventArgs={{category: GACategory.Header, action: 'navlogo'}}
         >

@@ -16,7 +16,7 @@ const Navlogo = ({
     return (
         <LenkeMedGAEvent
             href="https://nav.no"
-            className="nav-brand-lenke"
+            classNameOverride="nav-brand-lenke"
             tabIndex={viewIndex ? 0 : -1}
             gaEventArgs={{category: GACategory.Header, action: 'navlogo-alt'}}
         >
