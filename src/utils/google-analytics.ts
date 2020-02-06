@@ -1,12 +1,15 @@
 import ReactGA from 'react-ga';
 import { getSessionStorage, NAVHEADER } from './meny-storage-utils';
 
-const trackingId = 'UA-157705574-1';
+const trackingIdAnders = 'UA-157705574-1';
+const trackingIdNav = 'UA-9127381-16';
+
+const activeTrackers = ['testtracker', 'navtracker'];
 
 export enum GACategory {
     Header = 'dekorator-header',
     Footer = 'dekorator-footer',
-    Meny = 'meny'
+    Meny = 'dekorator-meny'
 }
 
 export type GAEventArgs = {
@@ -16,17 +19,26 @@ export type GAEventArgs = {
 }
 
 export const initGA = () => {
-    ReactGA.initialize(trackingId, {
-        debug: true,
+    ReactGA.initialize([{
+        trackingId: trackingIdAnders,
         titleCase: false,
         gaOptions: {
-            userId: '1337'
-        }
+            name: 'testtracker',
+            userId: '1337',
+        },
+    }, {
+        trackingId: trackingIdNav,
+        titleCase: false,
+        gaOptions: {
+            name: 'navtracker',
+        },
+    }], {
+        debug: true,
     });
-    ReactGA.pageview(window.location.pathname);
+    ReactGA.pageview(window.location.pathname + window.location.search, activeTrackers);
 };
 
-export const triggerGaEvent = ({category, action, label}: GAEventArgs) => {
+export const triggerGaEvent = ({ category, action, label }: GAEventArgs) => {
     const rolleValg = getSessionStorage(NAVHEADER);
     const actionFinal = `${rolleValg ? rolleValg + '/' : ''}${action}`;
 
@@ -34,5 +46,5 @@ export const triggerGaEvent = ({category, action, label}: GAEventArgs) => {
         category: category,
         action: actionFinal.toLowerCase(),
         label: label || undefined,
-    });
+    }, activeTrackers);
 };
