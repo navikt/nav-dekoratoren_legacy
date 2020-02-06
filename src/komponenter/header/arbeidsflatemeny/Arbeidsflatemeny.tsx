@@ -58,7 +58,7 @@ const Arbeidsflatemeny = ({
                                         );
                                         settArbeidsflate();
                                     }}
-                                    gaEventArgs={{category: GACategory.Header, action: 'valg-arbeidsflate'}}
+                                    gaEventArgs={{category: GACategory.Header, action: 'arbeidsflate-valg'}}
                                 >
                                     <div
                                         className={cls.element(

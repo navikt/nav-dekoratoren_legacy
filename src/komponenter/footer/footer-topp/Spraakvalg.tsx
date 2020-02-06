@@ -62,7 +62,7 @@ class Spraakvalg extends React.Component<StateProps, State> {
                                             ? lenke.testurl
                                             : lenke.url
                                     }
-                                    gaEventArgs={{category: GACategory.Footer, action: `språkvalg-${lenke.lang}`}}
+                                    gaEventArgs={{category: GACategory.Footer, action: `språkvalg/${lenke.lang}`}}
                                 >
                                     {lenke.lenketekst}
                                 </LenkeMedGAEvent>

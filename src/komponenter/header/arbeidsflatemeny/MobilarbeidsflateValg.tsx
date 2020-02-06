@@ -51,7 +51,7 @@ const MobilarbeidsflateValg = ({
                                     settArbeidsflate();
                                 }}
                                 tabIndex={tabindex ? 0 : -1}
-                                gaEventArgs={{category: GACategory.Header, action: 'valg-arbeidsflate'}}
+                                gaEventArgs={{category: GACategory.Header, action: 'arbeidsflate-valg'}}
                             >
                                 <HoyreChevron />
                                 <Undertittel>

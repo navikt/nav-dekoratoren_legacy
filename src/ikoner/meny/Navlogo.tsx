@@ -18,7 +18,7 @@ const Navlogo = ({
             href="https://nav.no"
             classNameOverride="nav-brand-lenke"
             tabIndex={viewIndex ? 0 : -1}
-            gaEventArgs={{category: GACategory.Header, action: 'navlogo-alt'}}
+            gaEventArgs={{category: GACategory.Meny, action: 'navlogo-mobilmeny'}}
         >
             <svg
                 className="modal-logo-svg"
