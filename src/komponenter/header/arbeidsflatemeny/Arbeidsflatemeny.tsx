@@ -8,8 +8,8 @@ import BEMHelper from '../../../utils/bem';
 import { MenuValue, oppdaterSessionStorage } from '../../../utils/meny-storage-utils';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import './Arbeidsflatemeny.less';
-import LenkeMedGAEvent from '../../../utils/LenkeMedGAEvent';
 import { GACategory } from '../../../utils/google-analytics';
+import { LenkeMedGA } from '../../../utils/LenkeMedGAEvent';
 
 interface StateProps {
     arbeidsflate: MenuValue;
@@ -47,7 +47,7 @@ const Arbeidsflatemeny = ({
                                 className={cls.element('liste-element')}
                                 key={lenke.tittel}
                             >
-                                <LenkeMedGAEvent
+                                <LenkeMedGA
                                     classNameOverride={cls.element('lenke')}
                                     href={lenke.url}
                                     onClick={event => {
@@ -72,7 +72,7 @@ const Arbeidsflatemeny = ({
                                             {lenke.tittel}
                                         </EtikettLiten>
                                     </div>
-                                </LenkeMedGAEvent>
+                                </LenkeMedGA>
                             </li>
                         );
                     }

@@ -6,8 +6,8 @@ import { genererLenkerTilUrl } from '../../../utils/Environment';
 import { FooterLenke, lenkerHoyre, lenkerVenstre } from '../Footer-lenker';
 import NavLogoFooter from '../../../ikoner/meny/NavLogoFooter';
 import Spraakvalg from './Spraakvalg';
-import LenkeMedGAEvent from '../../../utils/LenkeMedGAEvent';
 import { GACategory } from '../../../utils/google-analytics';
+import { LenkeMedGA } from '../../../utils/LenkeMedGAEvent';
 
 interface Props {
     classname: string;
@@ -42,12 +42,12 @@ const FooterTopp = ({ classname }: Props) => {
                     {venstrelenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
-                                <LenkeMedGAEvent
+                                <LenkeMedGA
                                     href={lenke.url}
                                     gaEventArgs={{category: GACategory.Footer, action: `hjelp/${lenke.lenketekst}`, label: lenke.url}}
                                 >
                                     {lenke.lenketekst}
-                                </LenkeMedGAEvent>
+                                </LenkeMedGA>
                             </li>
                         );
                     })}
@@ -67,12 +67,12 @@ const FooterTopp = ({ classname }: Props) => {
                     {hoyrelenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
-                                <LenkeMedGAEvent
+                                <LenkeMedGA
                                     href={lenke.url}
                                     gaEventArgs={{category: GACategory.Footer, action: `om-nettstedet/${lenke.lenketekst}`, label: lenke.url}}
                                 >
                                     {lenke.lenketekst}
-                                </LenkeMedGAEvent>
+                                </LenkeMedGA>
                             </li>
                         );
                     })}

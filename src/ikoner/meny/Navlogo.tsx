@@ -1,6 +1,6 @@
 import React from 'react';
-import LenkeMedGAEvent from '../../utils/LenkeMedGAEvent';
 import { GACategory } from '../../utils/google-analytics';
+import { LenkeMedGA } from '../../utils/LenkeMedGAEvent';
 
 const Navlogo = ({
     width,
@@ -14,7 +14,7 @@ const Navlogo = ({
     viewIndex?: boolean;
 }) => {
     return (
-        <LenkeMedGAEvent
+        <LenkeMedGA
             href="https://nav.no"
             classNameOverride="nav-brand-lenke"
             tabIndex={viewIndex ? 0 : -1}
@@ -115,7 +115,7 @@ const Navlogo = ({
                     </g>
                 </g>
             </svg>
-        </LenkeMedGAEvent>
+        </LenkeMedGA>
     );
 };
 

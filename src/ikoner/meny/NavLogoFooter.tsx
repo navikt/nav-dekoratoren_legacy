@@ -1,8 +1,8 @@
 import React from 'react';
 import Tekst from '../../tekster/finn-tekst';
 import './NavLogoFooter.less';
-import LenkeMedGAEvent from '../../utils/LenkeMedGAEvent';
 import { GACategory } from '../../utils/google-analytics';
+import { LenkeMedGA } from '../../utils/LenkeMedGAEvent';
 
 const NavLogoRod = ({
     width,
@@ -15,7 +15,7 @@ const NavLogoRod = ({
 }) => {
     return (
         <div className="sitefooter__logo">
-            <LenkeMedGAEvent
+            <LenkeMedGA
                 classNameOverride="navbar-brand"
                 href="https://nav.no"
                 gaEventArgs={{category: GACategory.Footer, action: 'navlogo'}}
@@ -109,7 +109,7 @@ const NavLogoRod = ({
                         </g>
                     </g>
                 </svg>
-            </LenkeMedGAEvent>
+            </LenkeMedGA>
         </div>
     );
 };

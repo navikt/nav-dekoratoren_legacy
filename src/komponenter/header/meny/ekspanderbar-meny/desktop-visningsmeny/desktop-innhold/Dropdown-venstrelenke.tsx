@@ -2,7 +2,7 @@ import React from 'react';
 import { MenySeksjon } from '../../../../../../reducer/menu-duck';
 import { genererUrl } from '../../../../../../utils/Environment';
 import { GACategory } from '../../../../../../utils/google-analytics';
-import LenkeMedGAEvent from '../../../../../../utils/LenkeMedGAEvent';
+import { LenkeMedGA } from '../../../../../../utils/LenkeMedGAEvent';
 
 interface Props {
     lenke: MenySeksjon;
@@ -17,7 +17,7 @@ export const DropdownLenke = (props: Props) => {
 
     return (
         <li className={listItemClassName}>
-            <LenkeMedGAEvent
+            <LenkeMedGA
                 tabIndex={tabindex ? 0 : -1}
                 href={href}
                 gaEventArgs={{
@@ -27,7 +27,7 @@ export const DropdownLenke = (props: Props) => {
                 }}
             >
                 {lenke.displayName}
-            </LenkeMedGAEvent>
+            </LenkeMedGA>
         </li>
     );
 };

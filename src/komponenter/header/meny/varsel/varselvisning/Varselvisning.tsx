@@ -5,10 +5,10 @@ import { AppState } from '../../../../../reducer/reducer';
 import { desktopview, tabletview } from '../../../../../styling-mediaquery';
 import Environment from '../../../../../utils/Environment';
 import './Varselvisning.less';
-import LenkeMedGAEvent from '../../../../../utils/LenkeMedGAEvent';
 import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
 import Tekst, { finnTekst } from '../../../../../tekster/finn-tekst';
 import { Language } from '../../../../../reducer/language-duck';
+import { LenkeMedGA } from '../../../../../utils/LenkeMedGAEvent';
 
 interface OwnProps {
     tabIndex: boolean;
@@ -140,7 +140,7 @@ class Varselvisning extends React.Component<Props, State> {
 
                 {antallVarsler > 5 && (
                     <div className="vis-alle-lenke skillelinje-topp">
-                        <LenkeMedGAEvent
+                        <LenkeMedGA
                             href={Environment.varselinnboksUrl}
                             tabIndex={tabIndex ? 0 : -1}
                             gaEventArgs={{
@@ -153,7 +153,7 @@ class Varselvisning extends React.Component<Props, State> {
                             {antallUlesteVarsler > 0
                                 ? ` (${antallUlesteVarsler} ${finnTekst('varsler-nye', this.props.language)})`
                                 : ''}
-                        </LenkeMedGAEvent>
+                        </LenkeMedGA>
                     </div>
                 )}
             </div>

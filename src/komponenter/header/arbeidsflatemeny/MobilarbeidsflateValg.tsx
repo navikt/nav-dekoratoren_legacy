@@ -9,8 +9,8 @@ import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import { MenuValue, oppdaterSessionStorage } from '../../../utils/meny-storage-utils';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import './MobilarbeidsflateValg.less';
-import LenkeMedGAEvent from '../../../utils/LenkeMedGAEvent';
 import { GACategory } from '../../../utils/google-analytics';
+import { LenkeMedGA } from '../../../utils/LenkeMedGAEvent';
 
 interface Props {
     tabindex: boolean;
@@ -40,7 +40,7 @@ const MobilarbeidsflateValg = ({
                             key={lenke.tittel}
                             className={cls.element('liste-element')}
                         >
-                            <LenkeMedGAEvent
+                            <LenkeMedGA
                                 href={lenke.url}
                                 onClick={event => {
                                     oppdaterSessionStorage(
@@ -62,7 +62,7 @@ const MobilarbeidsflateValg = ({
                                         {lenke.tittel}
                                     </span>{' '}
                                 </Undertittel>
-                            </LenkeMedGAEvent>
+                            </LenkeMedGA>
                         </li>
                     );
                 }

@@ -4,9 +4,9 @@ import BEMHelper from '../../../utils/bem';
 import Tekst from '../../../tekster/finn-tekst';
 import { FooterLenke, lenkerBunn } from '../Footer-lenker';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
-import LenkeMedGAEvent from '../../../utils/LenkeMedGAEvent';
 import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
 import Lenke from 'nav-frontend-lenker';
+import { LenkeMedGA } from '../../../utils/LenkeMedGAEvent';
 
 interface Props {
     classname: string;
@@ -37,12 +37,12 @@ const FooterBottom = ({ classname }: Props) => {
                     {lenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
-                                <LenkeMedGAEvent
+                                <LenkeMedGA
                                     href={lenke.url}
                                     gaEventArgs={{category: GACategory.Footer, action: `bunn/${lenke.lenketekst}`, label: lenke.url}}
                                 >
                                     {lenke.lenketekst}
-                                </LenkeMedGAEvent>
+                                </LenkeMedGA>
                             </li>
                         );
                     })}

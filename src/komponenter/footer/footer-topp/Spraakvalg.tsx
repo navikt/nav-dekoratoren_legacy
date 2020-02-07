@@ -6,8 +6,8 @@ import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../tekster/finn-tekst';
 import { erNavDekoratoren } from '../../../utils/Environment';
 import { getSpraaklenker, Spraaklenke, spraaklenker } from './Spraakvalg-lenker';
-import LenkeMedGAEvent from '../../../utils/LenkeMedGAEvent';
 import { GACategory } from '../../../utils/google-analytics';
+import { LenkeMedGA } from '../../../utils/LenkeMedGAEvent';
 
 interface StateProps {
     language: Language;
@@ -56,7 +56,7 @@ class Spraakvalg extends React.Component<StateProps, State> {
                     {this.state.spraaklenker.map(lenke => {
                         return (
                             <li key={lenke.lang}>
-                                <LenkeMedGAEvent
+                                <LenkeMedGA
                                     href={
                                         this.state.erNavDekoratoren
                                             ? lenke.testurl
@@ -65,7 +65,7 @@ class Spraakvalg extends React.Component<StateProps, State> {
                                     gaEventArgs={{category: GACategory.Footer, action: `språkvalg/${lenke.lang}`}}
                                 >
                                     {lenke.lenketekst}
-                                </LenkeMedGAEvent>
+                                </LenkeMedGA>
                             </li>
                         );
                     })}

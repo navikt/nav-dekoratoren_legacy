@@ -12,7 +12,7 @@ type Props = {
     tabIndex?: number,
 }
 
-const LenkeMedGAEvent = ({
+export const LenkeMedGA = ({
                              href,
                              children,
                              gaEventArgs,
@@ -41,5 +41,3 @@ const LenkeMedGAEvent = ({
         {children}
     </a>
 );
-
-export default LenkeMedGAEvent;
