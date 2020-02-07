@@ -100,7 +100,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                             className={classname}
                         >
                             <button
-                                onClick={() => this.handleClick()}
+                                onClick={this.handleClick}
                                 className="toggle-varsler"
                                 tabIndex={tabindex ? 0 : -1}
                                 title="Varsler"
