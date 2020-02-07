@@ -27,9 +27,7 @@ const TopSeksjon = (props: Props) => {
                     )}
                     data-animation="beat-rotation"
                     data-remove="200"
-                    onClick={() => {
-                        setheartbeatOgLukkmeny();
-                    }}
+                    onClick={() => setheartbeatOgLukkmeny()}
                     tabIndex={props.tabindex ? 0 : -1}
                 />
             </div>

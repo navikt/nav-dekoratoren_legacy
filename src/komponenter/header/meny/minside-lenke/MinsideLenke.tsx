@@ -5,7 +5,7 @@ import { MenuValue } from '../../../../utils/meny-storage-utils';
 import Environment from '../../../../utils/Environment';
 import './MinsideLenke.less';
 import { GACategory } from '../../../../utils/google-analytics';
-import { LenkeMedGA } from '../../../../utils/LenkeMedGAEvent';
+import { LenkeMedGA } from '../../../LenkeMedGA';
 
 interface OwnProps {
     tabindex: boolean;

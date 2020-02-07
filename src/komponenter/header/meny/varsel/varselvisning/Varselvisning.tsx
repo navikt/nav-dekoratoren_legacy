@@ -8,7 +8,7 @@ import './Varselvisning.less';
 import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
 import Tekst, { finnTekst } from '../../../../../tekster/finn-tekst';
 import { Language } from '../../../../../reducer/language-duck';
-import { LenkeMedGA } from '../../../../../utils/LenkeMedGAEvent';
+import { LenkeMedGA } from '../../../../LenkeMedGA';
 
 interface OwnProps {
     tabIndex: boolean;

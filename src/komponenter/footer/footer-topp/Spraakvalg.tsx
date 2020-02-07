@@ -7,7 +7,7 @@ import Tekst from '../../../tekster/finn-tekst';
 import { erNavDekoratoren } from '../../../utils/Environment';
 import { getSpraaklenker, Spraaklenke, spraaklenker } from './Spraakvalg-lenker';
 import { GACategory } from '../../../utils/google-analytics';
-import { LenkeMedGA } from '../../../utils/LenkeMedGAEvent';
+import { LenkeMedGA } from '../../LenkeMedGA';
 
 interface StateProps {
     language: Language;

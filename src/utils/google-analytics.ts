@@ -1,7 +1,7 @@
 import ReactGA from 'react-ga';
 import { getSessionStorage, NAVHEADER } from './meny-storage-utils';
 
-const trackingIdAnders = 'UA-157705574-1';
+const trackingIdAndersTest = 'UA-157705574-1';  // TODO: fjern denne :)
 const trackingIdNav = 'UA-9127381-16';
 
 const activeTrackers = ['testtracker', 'navtracker'];
@@ -20,7 +20,7 @@ export type GAEventArgs = {
 
 export const initGA = () => {
     ReactGA.initialize([{
-        trackingId: trackingIdAnders,
+        trackingId: trackingIdAndersTest,
         titleCase: false,
         gaOptions: {
             name: 'testtracker',

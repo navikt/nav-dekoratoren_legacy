@@ -2,7 +2,7 @@ import React from 'react';
 import { MenySeksjon } from '../../../../../../reducer/menu-duck';
 import { genererUrl } from '../../../../../../utils/Environment';
 import { GACategory } from '../../../../../../utils/google-analytics';
-import { LenkeMedGA } from '../../../../../../utils/LenkeMedGAEvent';
+import { LenkeMedGA } from '../../../../../LenkeMedGA';
 
 interface Props {
     lenke: MenySeksjon;

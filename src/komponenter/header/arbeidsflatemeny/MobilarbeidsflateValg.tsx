@@ -10,7 +10,7 @@ import { MenuValue, oppdaterSessionStorage } from '../../../utils/meny-storage-u
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import './MobilarbeidsflateValg.less';
 import { GACategory } from '../../../utils/google-analytics';
-import { LenkeMedGA } from '../../../utils/LenkeMedGAEvent';
+import { LenkeMedGA } from '../../LenkeMedGA';
 
 interface Props {
     tabindex: boolean;

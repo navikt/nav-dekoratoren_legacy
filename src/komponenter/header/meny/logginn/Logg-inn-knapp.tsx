@@ -80,7 +80,7 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
                 <div className="media-sm-mobil login-mobil">
                     <button
                         className="mobil-login-knapp"
-                        onClick={() => this.handleButtonClick()}
+                        onClick={this.handleButtonClick}
                     >
                         <LogginnIkon />
                         <Undertittel className="knappetekst">
@@ -92,10 +92,7 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
                     <KnappBase
                         className="login-knapp"
                         type="standard"
-                        onClick={() => {
-                            triggerGaEvent({category: GACategory.Header, action: knappetekst});
-                            this.handleButtonClick();
-                        }}
+                        onClick={this.handleButtonClick}
                     >
                         <Tekst id={knappetekst} />
                     </KnappBase>

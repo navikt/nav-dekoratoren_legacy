@@ -7,7 +7,7 @@ import { FooterLenke, lenkerHoyre, lenkerVenstre } from '../Footer-lenker';
 import NavLogoFooter from '../../../ikoner/meny/NavLogoFooter';
 import Spraakvalg from './Spraakvalg';
 import { GACategory } from '../../../utils/google-analytics';
-import { LenkeMedGA } from '../../../utils/LenkeMedGAEvent';
+import { LenkeMedGA } from '../../LenkeMedGA';
 
 interface Props {
     classname: string;

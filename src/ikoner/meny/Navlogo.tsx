@@ -1,6 +1,6 @@
 import React from 'react';
 import { GACategory } from '../../utils/google-analytics';
-import { LenkeMedGA } from '../../utils/LenkeMedGAEvent';
+import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
 
 const Navlogo = ({
     width,

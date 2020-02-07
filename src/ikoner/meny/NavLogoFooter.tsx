@@ -2,7 +2,7 @@ import React from 'react';
 import Tekst from '../../tekster/finn-tekst';
 import './NavLogoFooter.less';
 import { GACategory } from '../../utils/google-analytics';
-import { LenkeMedGA } from '../../utils/LenkeMedGAEvent';
+import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
 
 const NavLogoRod = ({
     width,

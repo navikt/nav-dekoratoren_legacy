@@ -6,7 +6,7 @@ import { FooterLenke, lenkerBunn } from '../Footer-lenker';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
 import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
 import Lenke from 'nav-frontend-lenker';
-import { LenkeMedGA } from '../../../utils/LenkeMedGAEvent';
+import { LenkeMedGA } from '../../LenkeMedGA';
 
 interface Props {
     classname: string;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { GAEventArgs, triggerGaEvent } from './google-analytics';
+import { GAEventArgs, triggerGaEvent } from '../utils/google-analytics';
 
 type Props = {
     href: string,
