@@ -20,7 +20,7 @@ interface Props {
 
 const Desktopmeny = ({ language }: Props) => {
     return (
-        <nav className={desktopmeny.className}>
+        <nav className={desktopmeny.className} aria-label="Hovedmeny">
             <div className={desktopmeny.element('content')}>
                 <div className={desktopmeny.element('elementer')}>
                     <NavLogoRod

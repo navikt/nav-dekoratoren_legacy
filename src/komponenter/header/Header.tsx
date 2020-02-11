@@ -6,7 +6,7 @@ import { Language } from '../../reducer/language-duck';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
 import Mobilmeny from './meny/Mobilmeny';
-import Toppmeny from './arbeidsflatemeny/Arbeidsflatemeny';
+import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import Desktopmeny from './meny/Desktopmeny';
 
 interface StateProps {
@@ -14,33 +14,31 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    hentMenypunkter: () => Promise<void>;
+    hentMenypunkter?: () => Promise<void>;
 }
 
 type HeaderProps = StateProps & DispatchProps;
 
-const Header = ({ hentMenypunkter, language }: HeaderProps) => {
+export const Header = ({ hentMenypunkter, language }: HeaderProps) => {
     React.useEffect(() => {
-        hentMenypunkter();
+        if (hentMenypunkter) {
+            hentMenypunkter();
+        }
     }, []);
 
     return (
-        <div className="navno-dekorator">
-            <div className="hodefot">
-                <Skiplinks />
-                <header className="siteheader">
-                    <div className="innhold-container">
-                        <div className="media-sm-mobil mobil-meny">
-                            <Mobilmeny />
-                        </div>
-                        <div className="media-md-tablet tablet-desktop-meny">
-                            {language === Language.NORSK && <Toppmeny />}
-                            <Desktopmeny language={language} />
-                        </div>
-                    </div>
-                </header>
-            </div>
-        </div>
+        <>
+            <Skiplinks />
+            <header className="siteheader">
+                <div className="media-sm-mobil mobil-meny">
+                    <Mobilmeny />
+                </div>
+                <div className="media-md-tablet tablet-desktop-meny">
+                    {language === Language.NORSK && <Arbeidsflatemeny />}
+                    <Desktopmeny language={language} />
+                </div>
+            </header>
+        </>
     );
 };
 

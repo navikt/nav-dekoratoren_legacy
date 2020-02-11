@@ -28,7 +28,7 @@ interface State {
     informasjonboks: Object;
 }
 
-class LoggInnKnapp extends React.Component<StateProps, State> {
+export class LoggInnKnapp extends React.Component<StateProps, State> {
     constructor(props: StateProps) {
         super(props);
         this.state = {
@@ -80,7 +80,7 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
                         onClick={this.handleButtonClick}
                     >
                         <LogginnIkon />
-                        <Undertittel>
+                        <Undertittel className="knappetekst">
                             <Tekst id={knappetekst} />
                         </Undertittel>
                     </button>

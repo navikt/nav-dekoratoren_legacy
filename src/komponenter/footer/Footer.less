@@ -1,14 +1,11 @@
 @import '../../../node_modules/nav-frontend-core/less/_variabler';
 @import '../../styling-variabler.less';
 
-.footer {
-    .sitefooter {
-        padding: 1rem;
-        background-color: white;
-        width: 100%;
-        min-height: 12.5rem;
-        border-bottom: @navMorkGra 2px solid;
-    }
+.sitefooter {
+    padding: 1rem;
+    width: 100%;
+    min-height: 12.5rem;
+    border-bottom: @navMorkGra 2px solid;
 
     &__innhold {
         text-align: center;
@@ -43,9 +40,8 @@
     }
 
     @media (min-width: @tabletLimitWidth) {
-        .sitefooter {
-            padding: 0.5rem 1rem 1.5rem;
-        }
+        padding: 0.5rem 1rem 1.5rem;
+
         &__innhold {
             width: auto;
             margin: 0 auto;

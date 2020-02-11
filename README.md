@@ -1,29 +1,27 @@
-# Nav-dekoratoren
+
+# Nav-dekoratoren ![nav.no logo](./src/ikoner/meny/navlogo.svg) 
+                     
 
 Node.js Express applikasjon med frontend-komponenter i React.
 Appen kjører på NAIS i en dockercontainer.
 
-# Installasjon
+
+## Installasjon
 
 ```
 npm install
 ```
 
-# Bygg applikasjonen
+## Bygg applikasjonen
 
 ```
-npm run build
+npm run build (for produksjon)
+npm run build-dev (for testing lokalt)
 ```
 
-# Kjør applikasjonen
+## Kjør applikasjonen
 
-Kjør Express-server lokalt => localhost:8088 (kun statiske filer fra build-folder:
-
-```
-npm run server
-```
-
-Kjør utviklinsmiljø med webpack-devServer og express-server (backend):
+Kjør Express-server/dev-server lokalt: http://localhost:8088/dekoratoren
 
 ```
 npm start
@@ -31,9 +29,82 @@ npm start
 
 ### Nais-cluster
 
-Applikasjonen ligger i default namespace i dev-sbs og prod-sbs.
+Testmiljøene til dekoratøren er for tiden Q0, Q1 og Q6 
+Url til disse miljøene: https://www-{miljø}.nav.no/dekoratoren/
 
-# Henvendelser
+
+### Bruk av menyen
+
+Dekoratøren har tatt utgangspunkt i at den skal være bakoverkompatibel, slik at for de eksisterende applikasjoner i nav sitt portefølje som allerede har tatt i bruk dekoratør/v4 trengs det bare å bytte om Url-adressen fra https://appres.nav.no/.... til https://www.nav.no/dekoratoren
+
+En kan implementere menyen slik: 
+
+#### Eksempel 1:
+
+```
+const url =
+    
+    'http://<test-mijø | prod-adr>/dekoratoren';
+const requestDecorator = callback => request(url, callback);
+const getDecorator = () =>
+    new Promise((resolve, reject) => {
+        const callback = (error, response, body) => {
+        {
+        håndtere inject av data med selektor, enten manuelt eller ved bruk av template engine
+        }
+        .....
+```
+
+#### Eksempel 2: 
+Sett inn 5 linjer html i front-end:
+```
+<html>
+  <head>
+      <link href=http://<miljø adresse>/dekoratoren/css/client.css rel="stylesheet" /> 
+  </head>
+  <body>
+    <section class="navno-dekorator" id="decorator-header" role="main"></section>
+    {
+      // deres app 
+    }
+    <section class="navno-dekorator" id="decorator-footer" role="main">
+    <div id="decorator-env" data-src="<miljø adresse>/dekoratoren/env.json"></div>
+    <script type="text/javascript" src=<miljø adresse>/dekoratoren/client.js></script>
+  </body>
+</html>
+```
+
+#### Eksempel 3:
+Bruk av pus-decorator
+
+I app-config.yaml, bytt ut fasitResources til å peke på ny dekoratør
+
+Fra:
+```
+fasitResources:
+  used:
+  - alias: appres.cms
+    resourceType: baseUrl
+```
+
+Til:
+```
+fasitResources:
+  used:
+  - alias: nav.dekoratoren (denne peker på https://www{-miljø adresse}.nav.no, pus-decorator legger på path /dekoratoren)
+    resourceType: baseUrl
+```
+For komplett oppsett se: https://github.com/navikt/pus-decorator
+
+Appen blir serverside-rendret. Derfor anbefales det å bruke en .js fil til å fetche innholdet fra 'http://<test-mijø | prod-adr>/dekoratoren'. For så å selektere innholdet i id'ene. Selektors som i dag er tatt i bruk:
+   
+      styles            (inneholder css til appen)
+      header-withmenu   (header mounting point)
+      footer-withmenu   (footer mounting point)
+      scripts           (scripts til applikasjonen)
+
+
+## Henvendelser
 
 Spørsmål knyttet til koden eller prosjektet kan rettes mot https://github.com/orgs/navikt/teams/team-personbruker
 
