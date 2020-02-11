@@ -21,8 +21,8 @@ spec:
         min: 2
         max: 4
     ingresses:
-        - https://dekoratoren-q0.nais.oera-q.local/
-        - https://www-q0.nav.no/dekoratoren
+        - https://dekoratoren-q2.nais.oera-q.local/
+        - https://www-q2.nav.no/dekoratoren
     env:
         - name: URL_API_MENY
           value: https://www-q1.nav.no/navno/_/service/no.nav.navno/menu
