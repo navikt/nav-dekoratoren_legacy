@@ -16,27 +16,25 @@ const DropdownVenstredel = (props: Props) => {
 
     return (
         <div className={cls.element('hovedSeksjon')}>
-            {menyLenker &&
-                menyLenker.children.map(
-                    (menygruppe: MenySeksjon, index: number) => {
-                        return (
-                            <section
-                                className={cls.element('seksjon')}
-                                key={index}
-                            >
-                                <div
-                                    className={cls.element('seksjonOverskrift')}
-                                >
-                                    <Element>{menygruppe.displayName}</Element>
-                                    <Menylenker
-                                        menygruppe={menygruppe}
-                                        tabindex={tabindex}
-                                    />
-                                </div>
-                            </section>
-                        );
-                    }
-                )}
+            {menyLenker && menyLenker.children.map(
+                (menygruppe: MenySeksjon, index: number) => (
+                    <section
+                        className={cls.element('seksjon')}
+                        key={index}
+                    >
+                        <div
+                            className={cls.element('seksjonOverskrift')}
+                        >
+                            <Element>{menygruppe.displayName}</Element>
+                        </div>
+                        <Menylenker
+                            menygruppe={menygruppe}
+                            tabindex={tabindex}
+                            className={cls.element('lenkeliste')}
+                        />
+                    </section>
+                )
+            )}
         </div>
     );
 };
@@ -44,10 +42,11 @@ const DropdownVenstredel = (props: Props) => {
 interface MenylenkerProps {
     menygruppe: MenySeksjon;
     tabindex: boolean;
+    className: string;
 }
 
-const Menylenker = ({ menygruppe, tabindex }: MenylenkerProps) => (
-    <ul>
+const Menylenker = ({ menygruppe, tabindex, className}: MenylenkerProps) => (
+    <ul className={className}>
         {menygruppe.children.map((lenke: MenySeksjon, index: number) => {
             return (
                 <DropdownLenke key={index} lenke={lenke} tabindex={tabindex} />
