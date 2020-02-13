@@ -23,7 +23,7 @@ const BunnseksjonLenke = ({ url, lenkeTekstId, stikkordIds, className }: Props) 
             </Undertittel>
             <ul className={cls.element('bunn-lenke-stikkord')}>
                 {stikkordIds.map((id, index) => (
-                    <li>{index !== 0 && <span className={'bullet'}>{'•'}</span>}<Tekst id={id}/></li>
+                    <li key={id}>{index !== 0 && <span className={'bullet'}>{'•'}</span>}{id}</li>   // TODO: bruke <Tekst..> etc
                 ))}
             </ul>
         </div>
