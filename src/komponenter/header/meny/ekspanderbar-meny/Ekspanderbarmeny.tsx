@@ -10,7 +10,7 @@ import { dataInitState } from '../../../../reducer/menu-duck';
 import { Meny, MenyPunkter } from '../../../../reducer/menu-duck';
 import { Language } from '../../../../reducer/language-duck';
 import Menyknapp from './meny-knapp/Menyknapp';
-import Mobilbakgrunn from './mobil-visningsmeny/mobil-innhold/Mobilbakgrunn';
+import MenyBakgrunn from './MenyBakgrunn';
 import MobilVisningsmeny from './mobil-visningsmeny/MobilVisningsmeny';
 import DesktopVisningsmeny from './desktop-visningsmeny/DesktopVisningsmeny';
 
@@ -86,49 +86,52 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                         <>
                             <div
                                 className={cls.element(
-                                    'meny-innhold',
-                                    this.state.clicked ? 'aktive' : ''
+                                    'meny-innhold-wrapper',
+                                    this.state.clicked ? 'aktive' : '',
                                 )}
                             >
-                                <div className="media-mobil-tablet menyvisning-mobil-tablet">
-                                    {language !== Language.SAMISK ? (
-                                        <MobilVisningsmeny
-                                            classname={
-                                                this.state.vismenyClassname
-                                            }
-                                            menyLenker={selectMenu(
+                                <div className={cls.element('meny-innhold')}>
+                                    <div className="media-mobil-tablet menyvisning-mobil-tablet">
+                                        {language !== Language.SAMISK ? (
+                                            <MobilVisningsmeny
+                                                classname={
+                                                    this.state.vismenyClassname
+                                                }
+                                                menyLenker={selectMenu(
+                                                    meny.data,
+                                                    language,
+                                                    arbeidsflate,
+                                                )}
+                                                menuIsOpen={this.state.clicked}
+                                                togglemenu={this.menutoggle}
+                                                arbeidsflate={arbeidsflate}
+                                                lang={language}
+                                            />
+                                        ) : null}
+                                    </div>
+                                    <div className="media-lg-desktop menyvisning-desktop">
+                                        <DesktopVisningsmeny
+                                            classname={this.state.vismenyClassname}
+                                            isOpen={this.state.clicked}
+                                            fellesmeny={selectMenu(
                                                 meny.data,
                                                 language,
-                                                arbeidsflate
+                                                arbeidsflate,
                                             )}
-                                            menuIsOpen={this.state.clicked}
-                                            togglemenu={this.menutoggle}
-                                            arbeidsflate={arbeidsflate}
+                                            minsideMeny={Ekspanderbarmeny.minside(
+                                                meny.data[0].children,
+                                                3,
+                                            )}
                                             lang={language}
+                                            arbeidsflate={arbeidsflate}
                                         />
-                                    ) : null}
-                                </div>
-                                <div className="media-lg-desktop menyvisning-desktop">
-                                    <DesktopVisningsmeny
-                                        classname={this.state.vismenyClassname}
-                                        tabindex={this.state.clicked}
-                                        fellesmeny={selectMenu(
-                                            meny.data,
-                                            language,
-                                            arbeidsflate
-                                        )}
-                                        minsideMeny={Ekspanderbarmeny.minside(
-                                            meny.data[0].children,
-                                            3
-                                        )}
-                                        lang={language}
-                                        arbeidsflate={arbeidsflate}
-                                    />
+                                    </div>
                                 </div>
                             </div>
-                            <Mobilbakgrunn
+                            <MenyBakgrunn
                                 toggleWindow={this.menutoggle}
                                 backgroundIsActive={this.state.clicked}
+                                className={this.state.vismenyClassname}
                             />
                         </>
                     ) : null}

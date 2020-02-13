@@ -6,7 +6,7 @@ import { DesktopVisningsmeny } from './DesktopVisningsmeny';
 import { dataInitState } from '../../../../../reducer/menu-duck';
 import { Language } from '../../../../../reducer/language-duck';
 import { MenuValue } from '../../../../../utils/meny-storage-utils';
-import DropdownVenstredel from './desktop-innhold/Dropdown-venstredel';
+import MenyUinnlogget from './meny-uinnlogget/MenyUinnlogget';
 
 const store = getStore();
 
@@ -15,7 +15,7 @@ const shallowWithProps = (lang: Language, arbeidsflate: MenuValue) => {
         <ReduxProvider store={store}>
             <DesktopVisningsmeny
                 classname="meny"
-                tabindex={true}
+                isOpen={true}
                 fellesmeny={dataInitState}
                 minsideMeny={dataInitState}
                 lang={lang}
@@ -31,6 +31,7 @@ describe('<DesktopVisningsmeny />', () => {
             Language.NORSK,
             MenuValue.PRIVATPERSON
         );
-        expect(wrapper.find(DropdownVenstredel)).toHaveLength(1);
+        expect(wrapper.find(MenyUinnlogget)).toHaveLength(1);
     });
 });
+

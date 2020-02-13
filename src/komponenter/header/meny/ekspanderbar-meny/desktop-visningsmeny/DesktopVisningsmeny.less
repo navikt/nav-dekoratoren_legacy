@@ -1,112 +1,49 @@
-@import '../../../../../styling-variabler.less';
+@import (reference) '../../../../../styling-variabler.less';
 
 .meny {
-    &__meny-innhold {
-        max-width: @desktopLimitWidth;
+    &__meny-innhold-wrapper {
+        position: absolute;
+        z-index: 1001;
         overflow: hidden;
         margin-bottom: 0;
         max-height: 0;
+        max-width: @desktopLimitWidth/3;
+        background-color: white;
+        visibility: hidden;
+        border-bottom-left-radius: @border-radius-base;
+        border-bottom-right-radius: @border-radius-base;
         transition: all 0.7s ease-in-out;
 
         &--aktive {
             margin-bottom: 2rem;
-            max-height: 40rem;
+            max-height: 55rem;
+            max-width: @desktopLimitWidth;
+            visibility: visible;
         }
+    }
+
+    &__meny-innhold {
+        padding: 1rem 3rem 2rem 3rem;
+        width: @desktopLimitWidth;
+        overflow: hidden;
     }
 
     &__seksjoner {
         display: flex;
     }
 
-    &__hovedSeksjon {
-        flex-grow: 6;
-        justify-content: center;
-        display: -ms-grid;
-        display: grid;
-        -ms-grid-columns: auto auto auto;
-        grid-template-columns: auto auto auto;
-        margin-bottom: 0.2rem;
-    }
+    &__bakgrunn {
+        visibility: hidden;
+        position: fixed;
+        z-index: 999;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        transition: all 0.5s ease-in;
 
-    &__seksjon {
-        padding: 0.75rem 0 0.5rem 2rem;
-    }
-
-    &__seksjonOverskrift {
-        margin-bottom: 0.3em;
-    }
-
-    &__lenkeliste {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-
-        li {
-            margin-bottom: 0.3rem;
-
-            .lenke {
-                text-decoration: none;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
-    }
-
-    // this media query can only be read by ie-explorer. ie grid fix
-    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-        &__hovedSeksjon {
-            display: -ms-grid;
-            -ms-grid-columns: 1fr 1fr 1fr;
-        }
-
-        &__seksjon {
-            &:nth-child(2) {
-                -ms-grid-column: 2;
-            }
-
-            &:nth-child(3) {
-                -ms-grid-column: 3;
-            }
-            &:nth-child(4) {
-                -ms-grid-column: 1;
-                -ms-grid-row: 2;
-            }
-            &:nth-child(5) {
-                -ms-grid-column: 2;
-                -ms-grid-row: 2;
-            }
-
-            &:nth-child(6) {
-                -ms-grid-column: 3;
-                -ms-grid-row: 2;
-            }
-            &:nth-child(7) {
-                -ms-grid-column: 1;
-                -ms-grid-row: 3;
-            }
-            &:nth-child(8) {
-                -ms-grid-column: 2;
-                -ms-grid-row: 3;
-            }
-            &:nth-child(9) {
-                -ms-grid-column: 3;
-                -ms-grid-row: 3;
-            }
-            &:nth-child(10) {
-                -ms-grid-column: 1;
-                -ms-grid-row: 4;
-            }
-            &:nth-child(11) {
-                -ms-grid-column: 2;
-                -ms-grid-row: 4;
-            }
-
-            &:nth-child(12) {
-                -ms-grid-column: 3;
-                -ms-grid-row: 4;
-            }
+        &--active {
+            visibility: visible;
+            background-color: rgba(0, 0, 0, 0.4);
         }
     }
 
