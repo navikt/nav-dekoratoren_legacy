@@ -2,7 +2,7 @@ import Lenke from 'nav-frontend-lenker';
 import Tekst from '../../../../../../../tekster/finn-tekst';
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 
 interface Props {
     url: string;
@@ -22,9 +22,11 @@ const BunnseksjonLenke = ({ url, lenkeTekstId, stikkordIds, className }: Props) 
                 </Lenke>
             </Undertittel>
             <ul className={cls.element('bunn-lenke-stikkord')}>
-                {stikkordIds.map((id, index) => (
-                    <li>{index !== 0 && <span className={'bullet'}>{'•'}</span>}<Tekst id={id}/></li>
-                ))}
+                <Undertekst>
+                    {stikkordIds.map((id, index) => (
+                        <li>{index !== 0 && <span className={'bullet'}>{'•'}</span>}<Tekst id={id}/></li>
+                    ))}
+                </Undertekst>
             </ul>
         </div>
     );
