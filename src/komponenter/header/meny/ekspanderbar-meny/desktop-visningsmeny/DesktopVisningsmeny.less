@@ -8,22 +8,24 @@
         margin-bottom: 0;
         max-height: 0;
         max-width: @desktopLimitWidth/3;
-        background-color: white;
         visibility: hidden;
+        background-color: white;
         border-bottom-left-radius: @border-radius-base;
         border-bottom-right-radius: @border-radius-base;
-        transition: all 0.7s ease-in-out;
+        transition-duration: 0.7s;
+        transition-timing-function: ease-in-out;
+        transition-property: max-height, max-width, visibility, box-shadow;
 
         &--aktive {
-            margin-bottom: 2rem;
             max-height: 55rem;
             max-width: @desktopLimitWidth;
             visibility: visible;
+            box-shadow: 12px 10px 10px 1px rgba(0, 0, 0, 0.3);
         }
     }
 
     &__meny-innhold {
-        padding: 1rem 3rem 2rem 3rem;
+        padding: 0 3rem 2rem 3rem;
         width: @desktopLimitWidth;
         overflow: hidden;
     }
@@ -34,7 +36,7 @@
 
     &__bakgrunn {
         visibility: hidden;
-        position: fixed;
+        position: absolute;
         z-index: 999;
         height: 100%;
         width: 100%;
@@ -43,7 +45,7 @@
 
         &--active {
             visibility: visible;
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.3);
         }
     }
 

@@ -9,7 +9,7 @@ interface Props {
     isOpen: boolean;
 }
 
-export const MenyUinnloggedHovedseksjon = ({menyLenker, classname, isOpen}: Props) => {
+export const MenyUinnloggetHovedseksjon = ({menyLenker, classname, isOpen}: Props) => {
     const cls = BEMHelper(classname);
 
     return (

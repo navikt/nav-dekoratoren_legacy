@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import BEMHelper from '../../../../../../utils/bem';
 import { MenySeksjon } from '../../../../../../reducer/menu-duck';
 import Toppseksjon from './topp-seksjon/Toppseksjon';
 import BunnSeksjon from './bunn-seksjon/BunnSeksjon';
 import './MenyUinnlogget.less';
-import { MenyUinnloggedHovedseksjon } from './hoved-seksjon/Hovedseksjon';
+import { MenyUinnloggetHovedseksjon } from './hoved-seksjon/Hovedseksjon';
+import KbNav, { NavGroup, NavIndex } from '../../../../../../utils/kb-nav';
 
 interface Props {
     classname: string;
@@ -12,42 +13,41 @@ interface Props {
     isOpen: boolean;
 }
 
-const numCols = 3;
-
-type LinkCoord = {
-    x: number,
-    y: number
-}
+const numCols = 5;  // TODO: synce dette med CSS somehow
+const kbNavGroup = NavGroup.DesktopHeaderDropdown;
 
 const MenyUinnlogget = (props: Props) => {
     const { classname, menyLenker, isOpen } = props;
     const cls = BEMHelper(classname);
 
     // TODO: finn nåværende focus-element
-    const [selectedLink, setSelectedLink] = useState<LinkCoord>({x: 1, y: 1});
+    const [navIndex, _setNavIndex] = useState<NavIndex>({x: 1, y: 1});
+    const navIndexRef = useRef(navIndex);
+    const setNavIndex = (ni: NavIndex) => {
+        navIndexRef.current = ni;
+        _setNavIndex(ni);
+    };
 
     useEffect(() => {
-        const keyHandler = (event: KeyboardEvent) => {
-            if (event.key === 'ArrowUp') {
-                setSelectedLink({x: Math.max(selectedLink.x, 1), y: selectedLink.y})
-            } else if (event.key === 'ArrowDown') {
-                setSelectedLink({x: Math.min(selectedLink.x, numCols), y: selectedLink.y})
-            } else if (event.key === 'ArrowLeft') {
-                setSelectedLink({x: selectedLink.x, y: Math.max(1, selectedLink.y)})
-            } else if (event.key === 'ArrowRight') {
-                setSelectedLink({x: selectedLink.x, y: Math.min(0, selectedLink.y)})
-            } else {
-                return;
-            }
-        };
-
-        if (isOpen) {
-            window.document.addEventListener('keydown', keyHandler);
-            return () => {
-                window.document.removeEventListener('keydown', keyHandler);
-            };
+        if (!isOpen) {
+            return;
         }
-    }, [isOpen]);
+
+        const element = window.document.getElementsByClassName('asdflenke') as HTMLCollectionOf<Element>;
+
+        if (element) {
+            console.log(element);
+            (element[1] as HTMLElement).focus();
+        }
+
+        const eventHandler = KbNav.kbEventHandler(
+            navIndexRef.current, kbNavGroup, (ni: NavIndex) => setNavIndex(ni));
+
+        window.document.addEventListener('keydown', eventHandler);
+        return () => {
+            window.document.removeEventListener('keydown', eventHandler);
+        };
+    }, [isOpen, navIndexRef.current]);
 
     return (
         <div className={cls.element('meny-uinnlogget')}>
@@ -55,7 +55,7 @@ const MenyUinnlogget = (props: Props) => {
                 classname={classname}
                 arbeidsflate={menyLenker.displayName}
             />
-            <MenyUinnloggedHovedseksjon
+            <MenyUinnloggetHovedseksjon
                 menyLenker={menyLenker}
                 classname={classname}
                 isOpen={isOpen}

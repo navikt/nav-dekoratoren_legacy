@@ -45,6 +45,7 @@ const BunnSeksjon = ({ classname }: Props) => {
                         lenkeTekstId={lenke.lenkeTekstId}
                         stikkordIds={lenke.stikkordIds}
                         className={classname}
+                        key={lenke.lenkeTekstId}
                     />)
                 )}
             </div>
