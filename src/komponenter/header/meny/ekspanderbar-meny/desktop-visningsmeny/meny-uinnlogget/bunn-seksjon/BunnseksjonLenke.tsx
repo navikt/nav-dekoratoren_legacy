@@ -9,15 +9,16 @@ interface Props {
     lenkeTekstId: string;
     stikkordIds: Array<string>;
     className: string;
+    id: string;
 }
 
-const BunnseksjonLenke = ({ url, lenkeTekstId, stikkordIds, className }: Props) => {
+const BunnseksjonLenke = ({ url, lenkeTekstId, stikkordIds, className , id}: Props) => {
     const cls = BEMHelper(className);
 
     return (
-        <div>
+        <div className={cls.element('bunn-seksjon-col')}>
             <Undertittel>
-                <Lenke href={url} className={cls.element('bunn-lenke')}>
+                <Lenke href={url} className={cls.element('bunn-lenke')} id={id}>
                     <Tekst id={lenkeTekstId}/>
                 </Lenke>
             </Undertittel>

@@ -1,9 +1,8 @@
 @import (reference) '../../../../../../styling-variabler.less';
 
-@hovedseksjon-cols: 5;
-
 .meny {
   @side-margin: 0.5em;
+  @hovedseksjon-cols: 5;
 
   .lenke-stil() {
     text-decoration: underline;
@@ -17,6 +16,7 @@
     flex-shrink: 0;
     flex-basis: calc(percentage(1 / (@cols + 1)) + 1px);
     max-width: calc(percentage(1 / @cols) - (@side-margin - @side-margin / @cols));
+    --num-cols: @cols;
 
     &:not(:nth-child(@{cols}n)) {
       margin-right: @side-margin;
@@ -43,15 +43,27 @@
   }
 
   &__hoved-seksjon {
-    flex-grow: 6;
     display: flex;
+    flex-grow: 6;
     flex-wrap: wrap;
     justify-content: flex-start;
   }
 
   &__hoved-seksjon-tema {
     margin-bottom: 2rem;
-    .col-setup(@hovedseksjon-cols);
+    .col-setup(3);
+    @media (min-width: 1100px) {
+      .col-setup(4);
+    }
+    @media (min-width: 1200px) {
+      .col-setup(5);
+    }
+    @media (min-width: 1300px) {
+      .col-setup(6);
+    }
+    @media (min-width: 1400px) {
+      .col-setup(7);
+    }
   }
 
   &__hoved-seksjon-tema-tittel {
@@ -84,10 +96,10 @@
     display: flex;
     justify-content: space-between;
     margin-top: 2rem;
+  }
 
-    & > * {
-      .col-setup(3);
-    }
+  &__bunn-seksjon-col {
+    .col-setup(3);
   }
 
   &__bunn-lenke {

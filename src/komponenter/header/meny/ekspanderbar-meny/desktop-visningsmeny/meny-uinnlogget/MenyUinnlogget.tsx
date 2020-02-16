@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
-import BEMHelper from '../../../../../../utils/bem';
+import React, { useEffect, useState } from 'react';
+import BEMHelper, { BEMWrapper } from '../../../../../../utils/bem';
 import { MenySeksjon } from '../../../../../../reducer/menu-duck';
 import Toppseksjon from './topp-seksjon/Toppseksjon';
 import BunnSeksjon from './bunn-seksjon/BunnSeksjon';
 import './MenyUinnlogget.less';
 import { MenyUinnloggetHovedseksjon } from './hoved-seksjon/Hovedseksjon';
-import KbNav, { NavGroup, NavIndex } from '../../../../../../utils/kb-nav';
+import { getNaviGraphData, NaviGraphData, NaviGroup, NaviNode, setFocus } from '../keyboard-navigation/kb-nav';
 
 interface Props {
     classname: string;
@@ -13,41 +13,116 @@ interface Props {
     isOpen: boolean;
 }
 
-const numCols = 5;  // TODO: synce dette med CSS somehow
-const kbNavGroup = NavGroup.DesktopHeaderDropdown;
+const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
+
+const getColSetup = (cls: BEMWrapper): Array<number> => {
+    const getNumCols = (element: HTMLElement) =>
+        parseInt(window.getComputedStyle(element).getPropertyValue('--num-cols'), 10);
+
+    const menyKnappCols = 1;
+    const toppSeksjonCols = 1;
+
+    const hovedSeksjonElement = document.getElementsByClassName(cls.element('hoved-seksjon-tema'))[0] as HTMLElement;
+    const hovedSeksjonCols = hovedSeksjonElement && getNumCols(hovedSeksjonElement) || 5;
+
+    const bunnSeksjonElement = document.getElementsByClassName(cls.element('bunn-seksjon-col'))[0] as HTMLElement;
+    const bunnSeksjonCols = bunnSeksjonElement && getNumCols(bunnSeksjonElement) || 3;
+
+    return [menyKnappCols, toppSeksjonCols, hovedSeksjonCols, bunnSeksjonCols];
+};
+
+const keycodeToArrowKey = (keycode: number) => {
+    switch (keycode) {
+        case 37:
+            return 'ArrowLeft';
+        case 38:
+            return 'ArrowUp';
+        case 39:
+            return 'ArrowRight';
+        case 40:
+            return 'ArrowDown';
+    }
+    return null;
+};
 
 const MenyUinnlogget = (props: Props) => {
-    const { classname, menyLenker, isOpen } = props;
+
+
+    const {classname, menyLenker, isOpen} = props;
     const cls = BEMHelper(classname);
 
-    // TODO: finn nåværende focus-element
-    const [navIndex, _setNavIndex] = useState<NavIndex>({x: 1, y: 1});
-    const navIndexRef = useRef(navIndex);
-    const setNavIndex = (ni: NavIndex) => {
-        navIndexRef.current = ni;
-        _setNavIndex(ni);
+    const [naviGraph, setNaviGraph] = useState<NaviGraphData>();
+    const [kbNaviNode, _setKbNaviNode] = useState<NaviNode>();
+    const setKbNaviNode = (node: NaviNode, focus = true) => {
+        if (!node) {
+            return;
+        }
+        _setKbNaviNode(node);
+        focus && setFocus(kbNaviGroup, node);
     };
 
     useEffect(() => {
-        if (!isOpen) {
-            return;
-        }
-
-        const element = window.document.getElementsByClassName('asdflenke') as HTMLCollectionOf<Element>;
-
-        if (element) {
-            console.log(element);
-            (element[1] as HTMLElement).focus();
-        }
-
-        const eventHandler = KbNav.kbEventHandler(
-            navIndexRef.current, kbNavGroup, (ni: NavIndex) => setNavIndex(ni));
-
-        window.document.addEventListener('keydown', eventHandler);
-        return () => {
-            window.document.removeEventListener('keydown', eventHandler);
+        const updateNaviGraph = () => {
+            const freshNaviGraph = getNaviGraphData(kbNaviGroup, {x: 0, y: 0, sub: 0}, getColSetup(cls));
+            const currentNodeId = kbNaviNode?.id;
+            const newNode = (currentNodeId && freshNaviGraph.nodeMap[currentNodeId]) || freshNaviGraph.rootNode;
+            setNaviGraph(freshNaviGraph);
+            setKbNaviNode(newNode);
         };
-    }, [isOpen, navIndexRef.current]);
+        const kbHandler = (event: KeyboardEvent) => {
+            const key = event.key || keycodeToArrowKey(event.keyCode);
+            if (!kbNaviNode) {
+                return;
+            }
+            switch (key) {
+                case 'ArrowLeft':
+                    setKbNaviNode(kbNaviNode.left);
+                    break;
+                case 'ArrowUp':
+                    setKbNaviNode(kbNaviNode.up);
+                    break;
+                case 'ArrowRight':
+                    setKbNaviNode(kbNaviNode.right);
+                    break;
+                case 'ArrowDown':
+                    setKbNaviNode(kbNaviNode.down);
+                    break;
+                default:
+                    return;
+            }
+            event.preventDefault();
+        };
+        const focusHandler = (event: FocusEvent) => {
+            const id = (event.target as HTMLElement).id;
+            if (!id || !naviGraph) {
+                return;
+            }
+
+            const focusedNode = naviGraph.nodeMap[id];
+            if (focusedNode) {
+                setKbNaviNode(focusedNode)
+            } else {
+                setKbNaviNode(naviGraph.rootNode, false);
+            }
+        };
+
+        document.addEventListener('focusin', focusHandler);
+        document.addEventListener('keydown', kbHandler);
+        window.addEventListener('resize', updateNaviGraph);
+        return () => {
+            document.removeEventListener('keydown', kbHandler);
+            document.removeEventListener('focusin', focusHandler);
+            window.removeEventListener('resize', updateNaviGraph);
+        };
+    }, [kbNaviNode]);
+
+    useEffect(() => {
+        if (isOpen) {
+            const freshNaviGraph = getNaviGraphData(kbNaviGroup, {x: 0, y: 0, sub: 0}, getColSetup(cls));
+            setNaviGraph(freshNaviGraph);
+            setKbNaviNode(freshNaviGraph.rootNode);
+        }
+    }, [isOpen]);
 
     return (
         <div className={cls.element('meny-uinnlogget')}>

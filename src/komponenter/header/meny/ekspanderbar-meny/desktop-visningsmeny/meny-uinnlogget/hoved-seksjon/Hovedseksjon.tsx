@@ -14,11 +14,12 @@ export const MenyUinnloggetHovedseksjon = ({menyLenker, classname, isOpen}: Prop
 
     return (
         <div className={cls.element('hoved-seksjon')}>
-            {menyLenker && menyLenker.children.map((menygruppe: MenySeksjon) => (
+            {menyLenker && menyLenker.children.map((menygruppe, index) => (
                     <HovedseksjonTema
                         menygruppe={menygruppe}
                         isOpen={isOpen}
                         className={classname}
+                        temaIndex={index}
                         key={menygruppe.displayName}
                     />
                 ),

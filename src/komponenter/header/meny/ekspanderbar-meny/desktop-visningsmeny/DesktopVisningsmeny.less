@@ -12,15 +12,25 @@
         background-color: white;
         border-bottom-left-radius: @border-radius-base;
         border-bottom-right-radius: @border-radius-base;
+
         transition-duration: 0.7s;
         transition-timing-function: ease-in-out;
-        transition-property: max-height, max-width, visibility, box-shadow;
+        transition-property: all;
+
+        //transform: scale(0); // rotate3d(0.5, 0.5, 1, 540deg); // ¯\_(ツ)_/¯
+        //transform-origin: 125px top;
 
         &--aktive {
             max-height: 55rem;
             max-width: @desktopLimitWidth;
             visibility: visible;
-            box-shadow: 12px 10px 10px 1px rgba(0, 0, 0, 0.3);
+            transform: none;
+
+            box-shadow: 12px 10px 8px rgba(0, 0, 0, 0.4);
+            @supports (filter: drop-shadow()) {
+                filter: drop-shadow(12px 10px 8px rgba(0, 0, 0, 0.4));
+                box-shadow: none;
+            }
         }
     }
 
@@ -35,17 +45,20 @@
     }
 
     &__bakgrunn {
+        z-index: 999;
         visibility: hidden;
         position: absolute;
-        z-index: 999;
         height: 100%;
         width: 100%;
         left: 0;
-        transition: all 0.5s ease-in;
+        transition-duration: 0.45s;
+        transition-timing-function: ease-in;
+        transition-property: visibility, background-color, backdrop-filter;
 
         &--active {
             visibility: visible;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(2px);
         }
     }
 

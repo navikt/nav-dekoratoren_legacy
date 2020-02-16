@@ -7,6 +7,7 @@ import '../MenyUinnlogget.less';
 interface Props {
     lenke: MenySeksjon;
     isOpen: boolean;
+    id: string;
 }
 
 export const HovedseksjonLenke = (props: Props) => {
@@ -15,7 +16,7 @@ export const HovedseksjonLenke = (props: Props) => {
 
     return (
         <li>
-            <Lenke tabIndex={isOpen ? 0 : -1} href={href}>
+            <Lenke tabIndex={isOpen ? 0 : -1} href={href} id={props.id}>
                 {lenke.displayName}
             </Lenke>
         </li>

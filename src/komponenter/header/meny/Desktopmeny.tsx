@@ -30,7 +30,7 @@ const Desktopmeny = ({ language }: Props) => {
                     />
                     {language === Language.NORSK ||
                     language === Language.ENGELSK ? (
-                        <Ekspanderbarmeny />
+                        <Ekspanderbarmeny isMobile={false} />
                     ) : null}
                     <Sok />
                     <InnloggingsstatusProvider>

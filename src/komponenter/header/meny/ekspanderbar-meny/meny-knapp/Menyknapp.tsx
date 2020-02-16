@@ -11,6 +11,7 @@ interface Props {
     ToggleMenu: () => void;
     clicked: boolean;
     lang: Language;
+    isMobile: boolean;
 }
 
 const Menyknapp = (props: Props) => {
@@ -21,7 +22,7 @@ const Menyknapp = (props: Props) => {
                 <button
                     onClick={() => props.ToggleMenu()}
                     className={cls.element('menyknapp')}
-                    id="decorator-meny-toggleknapp"
+                    id={`decorator-meny-toggleknapp-${props.isMobile ? 'mobil' : 'desktop'}`}
                     aria-label="Menyknapp"
                     aria-haspopup="true"
                     aria-controls="dropdown-menu"

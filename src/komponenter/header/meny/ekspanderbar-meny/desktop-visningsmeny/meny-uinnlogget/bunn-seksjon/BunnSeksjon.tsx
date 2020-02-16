@@ -1,7 +1,7 @@
-import Environment from '../../../../../../../utils/Environment';
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
 import BunnseksjonLenke from './BunnseksjonLenke';
+import KbNav, { NaviGroup } from '../../keyboard-navigation/kb-nav';
 
 interface Props {
     classname: string;
@@ -15,17 +15,17 @@ interface LenkeData {
 
 const lenker: Array<LenkeData> = [
     {
-        url: Environment.dittNavUrl,
+        url: '#',
         lenkeTekstId: 'person-minside-lenke',
         stikkordIds: ['Utbetalingsoversikt', 'Saksoversikt', 'Sykefravær'],
     },
     {
-        url: Environment.minsideArbeidsgiverUrl,
+        url: '#',
         lenkeTekstId: 'arbeidsgiver-minside-lenke',
         stikkordIds: ['Tjenester og skjemaer', 'Rekruttering', 'Oppfølging', 'Inkluderende arbeidsliv', 'Hjelpemidler'],
     },
     {
-        url: 'https://www.nav.no/INSERT-URL-HERE',
+        url: '#',
         lenkeTekstId: 'samarbeidspartner-side-lenke',
         stikkordIds: ['Kommuner', 'Utdanningsområdet', 'Psykisk helse', 'Hjelpemidler', 'Leger og behandlere'],
     },
@@ -39,12 +39,13 @@ const BunnSeksjon = ({ classname }: Props) => {
         <>
             <hr className={cls.element('bunn-separator')} />
             <div className={cls.element('bunn-seksjon')}>
-                {lenker.map(lenke => (
+                {lenker.map((lenke, index) => (
                     <BunnseksjonLenke
                         url={lenke.url}
                         lenkeTekstId={lenke.lenkeTekstId}
                         stikkordIds={lenke.stikkordIds}
                         className={classname}
+                        id={KbNav.getId(NaviGroup.DesktopHeaderDropdown, index, 3)}
                         key={lenke.lenkeTekstId}
                     />)
                 )}

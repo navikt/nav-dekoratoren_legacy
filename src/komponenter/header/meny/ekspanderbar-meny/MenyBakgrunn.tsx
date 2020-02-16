@@ -12,7 +12,6 @@ const MenyBakgrunn = ({
 }) => {
     const cls = BEMHelper(className);
     return (
-        <div>
             <div
                 className={cls.element(
                     'bakgrunn',
@@ -20,7 +19,6 @@ const MenyBakgrunn = ({
                 )}
                 onClick={() => toggleWindow()}
             />
-        </div>
     );
 };
 
