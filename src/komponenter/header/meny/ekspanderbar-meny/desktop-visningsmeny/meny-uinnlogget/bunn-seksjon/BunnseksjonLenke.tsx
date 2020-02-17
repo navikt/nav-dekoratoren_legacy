@@ -7,30 +7,37 @@ import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 interface Props {
     url: string;
     lenkeTekstId: string;
-    stikkordIds: Array<string>;
+    stikkord: string;
     className: string;
     id: string;
+    onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-const BunnseksjonLenke = ({ url, lenkeTekstId, stikkordIds, className , id}: Props) => {
+const BunnseksjonLenke = ({ url, lenkeTekstId, stikkord, className , id, onClick}: Props) => {
     const cls = BEMHelper(className);
 
     return (
         <div className={cls.element('bunn-seksjon-col')}>
             <Undertittel>
-                <Lenke href={url} className={cls.element('bunn-lenke')} id={id}>
+                <Lenke
+                    href={url}
+                    className={cls.element('bunn-lenke')}
+                    id={id}
+                    onClick={onClick}
+                >
                     <Tekst id={lenkeTekstId}/>
                 </Lenke>
             </Undertittel>
             <ul className={cls.element('bunn-lenke-stikkord')}>
                 <Undertekst>
-                    {stikkordIds.map(id => (
-                        <li key={id}><span className={'bullet'}/>{id}</li>   // TODO: bruke <Tekst id=..>
-                    ))}
+                    {stikkord.split('|').map(ord =>
+                        <li key={ord}><span className={'bullet'}/>{ord}</li>
+                    )}
                 </Undertekst>
             </ul>
         </div>
     );
 };
 
-export default BunnseksjonLenke
+export default BunnseksjonLenke;
+
