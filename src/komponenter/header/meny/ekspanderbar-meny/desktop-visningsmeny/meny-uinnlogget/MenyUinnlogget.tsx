@@ -18,8 +18,6 @@ const matchMediaFallback = (() => ({
     removeEventListener: () => null
 }));
 
-const matchMedia = window.matchMedia || matchMediaFallback;
-
 const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
 const kbRootIndex = {x: 0, y: 0, sub: 0};
 
@@ -43,6 +41,7 @@ const MenyUinnlogget = (props: Props) => {
     const {classname, menyLenker, isOpen} = props;
     const cls = BEMHelper(classname);
 
+    const matchMedia = window.matchMedia || matchMediaFallback;
     const mqlDesktop = matchMedia('(min-width: 1024px');
     const mqlTablet = matchMedia('(min-width: 896px)');
 
