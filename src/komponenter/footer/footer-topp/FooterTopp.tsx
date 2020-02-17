@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../../utils/bem';
 import Tekst from '../../../tekster/finn-tekst';
 import { genererLenkerTilUrl } from '../../../utils/Environment';
 import { FooterLenke, lenkerHoyre, lenkerVenstre } from '../Footer-lenker';
 import NavLogoFooter from '../../../ikoner/meny/NavLogoFooter';
 import Spraakvalg from './Spraakvalg';
+import { GACategory } from '../../../utils/google-analytics';
+import { LenkeMedGA } from '../../LenkeMedGA';
 
 interface Props {
     classname: string;
@@ -41,9 +42,12 @@ const FooterTopp = ({ classname }: Props) => {
                     {venstrelenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
-                                <Lenke href={lenke.url}>
+                                <LenkeMedGA
+                                    href={lenke.url}
+                                    gaEventArgs={{category: GACategory.Footer, action: `hjelp/${lenke.lenketekst}`, label: lenke.url}}
+                                >
                                     {lenke.lenketekst}
-                                </Lenke>
+                                </LenkeMedGA>
                             </li>
                         );
                     })}
@@ -63,9 +67,12 @@ const FooterTopp = ({ classname }: Props) => {
                     {hoyrelenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
-                                <Lenke href={lenke.url}>
+                                <LenkeMedGA
+                                    href={lenke.url}
+                                    gaEventArgs={{category: GACategory.Footer, action: `om-nettstedet/${lenke.lenketekst}`, label: lenke.url}}
+                                >
                                     {lenke.lenketekst}
-                                </Lenke>
+                                </LenkeMedGA>
                             </li>
                         );
                     })}

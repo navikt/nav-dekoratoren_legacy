@@ -31,6 +31,7 @@ export const HovedseksjonTema = ({ menygruppe, isOpen, className, temaIndex }: P
                             key={index}
                             lenke={lenke}
                             isOpen={isOpen}
+                            menyGruppeNavn={menygruppe.displayName}
                             id={KbNav.getId(NaviGroup.DesktopHeaderDropdown, temaIndex, 2, index)}
                         />
                     );
