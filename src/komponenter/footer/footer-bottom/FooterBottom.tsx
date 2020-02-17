@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import Lenke from 'nav-frontend-lenker';
+import React, { useEffect, useState } from 'react';
 import { genererLenkerTilUrl } from '../../../utils/Environment';
 import BEMHelper from '../../../utils/bem';
 import Tekst from '../../../tekster/finn-tekst';
 import { FooterLenke, lenkerBunn } from '../Footer-lenker';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
+import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
+import Lenke from 'nav-frontend-lenker';
+import { LenkeMedGA } from '../../LenkeMedGA';
 
 interface Props {
     classname: string;
@@ -19,8 +21,14 @@ const FooterBottom = ({ classname }: Props) => {
         setLenker(genererLenkerTilUrl(lenkerBunn));
     }, []);
 
-    const openModal = () => setVisDelSkjermModal(true);
-    const closeModal = () => setVisDelSkjermModal(false);
+    const openModal = () => {
+        triggerGaEvent({category: GACategory.Footer, action: `bunn/del-skjerm-open`});
+        setVisDelSkjermModal(true);
+    };
+    const closeModal = () => {
+        triggerGaEvent({category: GACategory.Footer, action: `bunn/del-skjerm-close`});
+        setVisDelSkjermModal(false);
+    };
 
     return (
         <section className={cls.element('menylinje-bottom')}>
@@ -29,9 +37,12 @@ const FooterBottom = ({ classname }: Props) => {
                     {lenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
-                                <Lenke href={lenke.url}>
+                                <LenkeMedGA
+                                    href={lenke.url}
+                                    gaEventArgs={{category: GACategory.Footer, action: `bunn/${lenke.lenketekst}`, label: lenke.url}}
+                                >
                                     {lenke.lenketekst}
-                                </Lenke>
+                                </LenkeMedGA>
                             </li>
                         );
                     })}
@@ -39,7 +50,10 @@ const FooterBottom = ({ classname }: Props) => {
             </div>
             <ul className="bottom-hoyre">
                 <li>
-                    <Lenke href="#" onClick={openModal}>
+                    <Lenke
+                        href="#"
+                        onClick={openModal}
+                    >
                         <Tekst id="footer-del-skjerm" />
                     </Lenke>
                     {visDelSkjermModal && (

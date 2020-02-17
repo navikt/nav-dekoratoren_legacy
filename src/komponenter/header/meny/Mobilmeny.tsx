@@ -9,6 +9,7 @@ import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
 import './Mobilmeny.less';
 import { verifyWindowObj } from '../../../utils/Environment';
 import { tabletview } from '../../../styling-mediaquery';
+import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
 
 const mobilClass = BEMHelper('mobilmeny');
 
@@ -21,6 +22,7 @@ const Mobilmeny = () => {
     }, []);
 
     const toggleModal = () => {
+        triggerGaEvent({category: GACategory.Header, action: `mobilsøk-${clickedModal ? 'close' : 'open'}`});
         setClickedModal(!clickedModal);
     };
 

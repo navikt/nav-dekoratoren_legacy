@@ -93,4 +93,10 @@ export const ledetekster: { [key: string]: string } = {
     'delskjerm-modal-stengt': 'Chatten er stengt',
     'delskjerm-modal-stengt-en': 'Screen sharing is closed',
     'delskjerm-modal-stengt-se': 'Chatten er stengt',
+    'varsler-visalle': 'Vis alle dine varsler',
+    'varsler-visalle-en': 'Show all your notifications',
+    'varsler-visalle-se': 'Vis alle dine varsler',
+    'varsler-nye': 'nye',
+    'varsler-nye-en': 'new',
+    'varsler-nye-se': 'nye',
 };

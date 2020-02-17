@@ -3,7 +3,6 @@ import 'react-app-polyfill/stable';
 import 'isomorphic-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TagManager from 'react-gtm-module';
 import { Provider as ReduxProvider } from 'react-redux';
 import getStore from './redux/store';
 import { verifyWindowObj } from './utils/Environment';
@@ -11,17 +10,13 @@ import Head from './Head';
 import Footer from './komponenter/footer/Footer';
 import { fetchEnv } from './utils/Environment';
 import './index.less';
-
-const tagManagerArgs = {
-    gtmId: 'GTM-PM9RP3',
-    dataLayerName: 'dataLayer',
-};
+import { initGA } from './utils/google-analytics';
 
 const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
 const run = () => {
-    TagManager.initialize(tagManagerArgs);
+    initGA();
     fetchEnv()
         .then(() => {
             ReactDOM.hydrate(

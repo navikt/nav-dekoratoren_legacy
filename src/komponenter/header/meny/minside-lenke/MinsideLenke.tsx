@@ -1,10 +1,11 @@
 import React from 'react';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
-import Lenke from 'nav-frontend-lenker';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import Environment from '../../../../utils/Environment';
 import './MinsideLenke.less';
+import { GACategory } from '../../../../utils/google-analytics';
+import { LenkeMedGA } from '../../../LenkeMedGA';
 
 interface OwnProps {
     tabindex: boolean;
@@ -40,9 +41,13 @@ export const MinsideLenke = ({
     return (
         <div className="minside-lenke">
             {erinnlogget && arbeidsflate !== MenuValue.SAMARBEIDSPARTNER ? (
-                <Lenke href={lenkeurl} tabIndex={tabindex ? 0 : -1}>
+                <LenkeMedGA
+                    href={lenkeurl}
+                    tabIndex={tabindex ? 0 : -1}
+                    gaEventArgs={{category: GACategory.Header, action: 'minside', label: lenkeurl}}
+                >
                     {lenketekst}
-                </Lenke>
+                </LenkeMedGA>
             ) : null}
         </div>
     );
