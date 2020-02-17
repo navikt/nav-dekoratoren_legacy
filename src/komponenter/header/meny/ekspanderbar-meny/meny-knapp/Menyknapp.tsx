@@ -32,7 +32,7 @@ const Menyknapp = (props: Props) => {
                         <div className="media-sm-mobil menyknapp-mobil">
                             <MenyIkon />
                         </div>
-                        <div className="media-md-tablet menyknapp-tablet-desktop">
+                        <div className="media-tablet-desktop menyknapp-tablet-desktop">
                             <HamburgerIkon ikonClass="hamburger-ikon" />
                         </div>
                         <Undertittel>

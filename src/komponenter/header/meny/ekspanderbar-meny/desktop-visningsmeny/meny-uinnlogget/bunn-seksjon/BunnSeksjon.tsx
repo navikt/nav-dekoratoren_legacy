@@ -1,7 +1,7 @@
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
 import BunnseksjonLenke from './BunnseksjonLenke';
-import KbNav, { NaviGroup } from '../../keyboard-navigation/kb-nav';
+import KbNav, { NaviGroup } from '../../keyboard-navigation/kb-navigation';
 
 interface Props {
     classname: string;

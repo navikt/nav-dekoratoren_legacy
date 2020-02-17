@@ -2,7 +2,6 @@
 
 .meny {
   @side-margin: 0.5em;
-  @hovedseksjon-cols: 5;
 
   .lenke-stil() {
     text-decoration: underline;
@@ -51,18 +50,16 @@
 
   &__hoved-seksjon-tema {
     margin-bottom: 2rem;
-    .col-setup(3);
-    @media (min-width: 1100px) {
+    @midLimitWidth: (@desktopLimitWidth + @tabletLimitWidth) / 2;
+
+    @media (max-width: @midLimitWidth) {
+      .col-setup(3);
+    }
+    @media (min-width: @midLimitWidth) {
       .col-setup(4);
     }
-    @media (min-width: 1200px) {
-      .col-setup(5);
-    }
-    @media (min-width: 1300px) {
-      .col-setup(6);
-    }
-    @media (min-width: 1400px) {
-      .col-setup(7);
+    @media (min-width: @desktopLimitWidth) {
+      .col-setup(4);
     }
   }
 
@@ -113,12 +110,15 @@
     margin: 0;
     padding: 0;
 
-    .bullet {
-      margin: 0 0.25em;
-    }
-
     li {
       display: inline-block;
+
+      &:not(:first-of-type) {
+        .bullet::before {
+          content: '•';
+          margin: 0 0.25em;
+        }
+      }
     }
   }
 

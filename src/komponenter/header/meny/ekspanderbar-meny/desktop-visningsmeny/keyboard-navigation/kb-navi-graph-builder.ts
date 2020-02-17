@@ -1,6 +1,7 @@
-import { getElement, getId, NaviGroup, NaviIndex, NaviNode, NaviNodeMap } from "./kb-nav";
+import { getElement, getId, NaviGroup, NaviIndex, NaviNode, NaviNodeMap } from './kb-navigation';
 
-const buildNaviGraphAndGetRootNode = (group: NaviGroup, index: NaviIndex | null, maxColsPerSection: Array<number>, nodeMap: NaviNodeMap): NaviNode => {
+const buildNaviGraphAndGetRootNode =
+    (group: NaviGroup, index: NaviIndex | null, maxColsPerSection: number[], nodeMap: NaviNodeMap): NaviNode => {
     if (!index || !getElement(group, index)) {
         return null;
     }
@@ -62,7 +63,7 @@ const getTopEdgeIndex = (group: NaviGroup, index: NaviIndex, maxColsPerSection: 
     const maxColsAbove = maxColsPerSection[newY];
     const lastSectionAbove = getLastSectionIndex(group, newY);
     const lastColAbove = lastSectionAbove % maxColsAbove;
-    const relativeX = Math.floor(x * maxColsAbove/maxColsCurrent + 0.5);
+    const relativeX = Math.floor(x * maxColsAbove / maxColsCurrent + 0.5);
 
     const newX = relativeX >= lastColAbove
         ? lastSectionAbove
@@ -106,7 +107,7 @@ const getBottomEdgeIndex = (group: NaviGroup, index: NaviIndex, maxColsPerSectio
     }
 
     const maxColsBelow = maxColsPerSection[newY];
-    const relativeX = Math.floor(x * maxColsBelow/maxColsCurrent + 0.5);
+    const relativeX = Math.floor(x * maxColsBelow / maxColsCurrent + 0.5);
 
     const newXMax = relativeX % maxColsBelow;
     const newX = newXMax < maxColsBelow ? newXMax : maxColsBelow - 1;

@@ -3,7 +3,7 @@ import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import BEMHelper from '../../../../../../../utils/bem';
 import { HovedseksjonLenke } from './HovedseksjonLenke';
-import KbNav, { NaviGroup } from '../../keyboard-navigation/kb-nav';
+import KbNav, { NaviGroup } from '../../keyboard-navigation/kb-navigation';
 
 interface Props {
     menygruppe: MenySeksjon;

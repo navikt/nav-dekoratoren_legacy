@@ -4,7 +4,7 @@ import Tekst from '../../../../../../../tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
-import KbNav, { NaviGroup } from '../../keyboard-navigation/kb-nav';
+import KbNav, { NaviGroup } from '../../keyboard-navigation/kb-navigation';
 
 interface Props {
     classname: string;

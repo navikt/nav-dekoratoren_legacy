@@ -3,7 +3,7 @@ import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
 import BEMHelper from '../../../../utils/bem';
 import { verifyWindowObj } from '../../../../utils/Environment';
-import { desktopview } from '../../../../styling-mediaquery';
+import { tabletview } from '../../../../styling-mediaquery';
 import { Status } from '../../../../api/api';
 import { MenuValue, selectMenu } from '../../../../utils/meny-storage-utils';
 import { dataInitState, Meny, MenyPunkter } from '../../../../reducer/menu-duck';
@@ -54,7 +54,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
     };
 
     setVisningsmenyClassname = (): string => {
-        return verifyWindowObj() && window.innerWidth > desktopview - 1
+        return verifyWindowObj() && window.innerWidth > tabletview - 1
             ? 'meny'
             : 'mobilmeny';
     };
@@ -99,7 +99,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                             >
                                 <div className={cls.element('meny-innhold')}>
                                     {isMobile ? (
-                                        <div className="media-mobil-tablet menyvisning-mobil-tablet">
+                                        <div className="media-sm-mobil menyvisning-mobil-tablet">
                                             {language !== Language.SAMISK ? (
                                                 <MobilVisningsmeny
                                                     classname={
@@ -118,7 +118,7 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                                             ) : null}
                                         </div>
                                     ) : (
-                                        <div className="media-lg-desktop menyvisning-desktop">
+                                        <div className="media-lg-desktop media-mobil-tablet menyvisning-desktop">
                                             <DesktopVisningsmeny
                                                 classname={this.state.vismenyClassname}
                                                 isOpen={this.state.clicked}

@@ -5,7 +5,6 @@
         position: absolute;
         z-index: 1001;
         overflow: hidden;
-        margin-bottom: 0;
         max-height: 0;
         max-width: @desktopLimitWidth/3;
         visibility: hidden;
@@ -21,23 +20,27 @@
         //transform-origin: 125px top;
 
         &--aktive {
-            max-height: 55rem;
-            max-width: @desktopLimitWidth;
+            max-height: 60rem;
+            max-width: 100%;
             visibility: visible;
-            transform: none;
-
-            box-shadow: 12px 10px 8px rgba(0, 0, 0, 0.4);
-            @supports (filter: drop-shadow()) {
-                filter: drop-shadow(12px 10px 8px rgba(0, 0, 0, 0.4));
+            box-shadow: 11px 8px 8px rgba(0, 0, 0, 0.4);
+            @supports (filter: drop-shadow(0 0)) {
+                filter: drop-shadow(11px 8px 8px rgba(0, 0, 0, 0.4));
                 box-shadow: none;
             }
+
+            transform: none;
         }
     }
 
     &__meny-innhold {
-        padding: 0 3rem 2rem 3rem;
-        width: @desktopLimitWidth;
+        box-sizing: border-box;
+        padding: 0 @padding-horizontal 2rem @padding-horizontal;
         overflow: hidden;
+        min-width: @tabletLimitWidth;
+        @media (min-width: @desktopLimitWidth) {
+            width: @desktopLimitWidth;
+        }
     }
 
     &__seksjoner {

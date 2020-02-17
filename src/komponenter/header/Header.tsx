@@ -33,7 +33,7 @@ export const Header = ({ hentMenypunkter, language }: HeaderProps) => {
                 <div className="media-sm-mobil mobil-meny">
                     <Mobilmeny />
                 </div>
-                <div className="media-md-tablet tablet-desktop-meny">
+                <div className="media-tablet-desktop tablet-desktop-meny">
                     {language === Language.NORSK && <Arbeidsflatemeny />}
                     <Desktopmeny language={language} />
                 </div>

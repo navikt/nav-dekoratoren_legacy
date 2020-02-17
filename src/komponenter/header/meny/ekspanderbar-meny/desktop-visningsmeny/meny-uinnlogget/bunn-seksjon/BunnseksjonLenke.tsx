@@ -24,8 +24,8 @@ const BunnseksjonLenke = ({ url, lenkeTekstId, stikkordIds, className , id}: Pro
             </Undertittel>
             <ul className={cls.element('bunn-lenke-stikkord')}>
                 <Undertekst>
-                    {stikkordIds.map((id, index) => (
-                        <li key={id}>{index !== 0 && <span className={'bullet'}>{'•'}</span>}{id}</li>   // TODO: bruke <Tekst..> etc
+                    {stikkordIds.map(id => (
+                        <li key={id}><span className={'bullet'}/>{id}</li>   // TODO: bruke <Tekst id=..>
                     ))}
                 </Undertekst>
             </ul>
