@@ -13,6 +13,13 @@ interface Props {
     isOpen: boolean;
 }
 
+const matchMediaFallback = (() => ({
+    addEventListener: () => null,
+    removeEventListener: () => null
+}));
+
+const matchMedia = window.matchMedia || matchMediaFallback;
+
 const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
 const kbRootIndex = {x: 0, y: 0, sub: 0};
 
@@ -36,8 +43,8 @@ const MenyUinnlogget = (props: Props) => {
     const {classname, menyLenker, isOpen} = props;
     const cls = BEMHelper(classname);
 
-    const mqlDesktop = window.matchMedia('(min-width: 1024px');
-    const mqlTablet = window.matchMedia('(min-width: 896px)');
+    const mqlDesktop = matchMedia('(min-width: 1024px');
+    const mqlTablet = matchMedia('(min-width: 896px)');
 
     const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
     const [kbNaviNode, setKbNaviNode] = useState<NaviNode>(null);
