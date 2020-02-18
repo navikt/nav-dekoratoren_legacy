@@ -33,11 +33,15 @@ type Props = OwnProps & StateProps & DispatchProps;
 
 const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
 const kbRootIndex = {x: 0, y: 0, sub: 0};
+const idMap = {
+    [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: 'decorator-meny-toggleknapp-desktop',
+};
+
+const getNumCols = (element: HTMLElement) => (
+    parseInt(window.getComputedStyle(element).getPropertyValue('--num-cols'), 10)
+);
 
 const getColSetup = (cls: BEMWrapper): Array<number> => {
-    const getNumCols = (element: HTMLElement) =>
-        parseInt(window.getComputedStyle(element).getPropertyValue('--num-cols'), 10);
-
     const menyKnappCols = 1;
     const toppSeksjonCols = 1;
 
@@ -61,9 +65,12 @@ const MenyUinnlogget = (props: Props) => {
     const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
     const [kbNaviNode, setKbNaviNode] = useState<NaviNode>(null);
 
+    // console.log(kbNaviGraph);
+
     useEffect(() => {
         const updateNaviGraph = () => {
-            const updatedNaviGraph = KbNav.getNaviGraphData(kbNaviGroup, kbRootIndex, getColSetup(cls));
+            const colSetup = getColSetup(cls);
+            const updatedNaviGraph = KbNav.getNaviGraphData(kbNaviGroup, kbRootIndex, colSetup, idMap);
             const currentNodeId = kbNaviNode?.id;
             const newNode = (currentNodeId && updatedNaviGraph.nodeMap[currentNodeId]) || updatedNaviGraph.rootNode;
             setKbNaviGraph(updatedNaviGraph);
@@ -88,10 +95,9 @@ const MenyUinnlogget = (props: Props) => {
     useEffect(() => {
         const makeNewNaviGraph = () => {
             const colSetup = getColSetup(cls);
-            const freshNaviGraph = KbNav.getNaviGraphData(kbNaviGroup, kbRootIndex, colSetup);
+            const freshNaviGraph = KbNav.getNaviGraphData(kbNaviGroup, kbRootIndex, colSetup, idMap);
             setKbNaviGraph(freshNaviGraph);
             setKbNaviNode(freshNaviGraph.rootNode);
-            console.log(freshNaviGraph);
         };
 
         if (isOpen) {
@@ -103,7 +109,7 @@ const MenyUinnlogget = (props: Props) => {
         <div className={cls.element('meny-uinnlogget')}>
             <Toppseksjon
                 classname={classname}
-                arbeidsflate={menyLenker.displayName}
+                arbeidsflateNavn={menyLenker.displayName}
             />
             <MenyUinnloggetHovedseksjon
                 menyLenker={menyLenker}

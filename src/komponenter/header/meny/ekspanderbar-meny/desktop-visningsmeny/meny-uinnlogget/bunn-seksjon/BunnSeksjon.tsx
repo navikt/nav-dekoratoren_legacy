@@ -22,17 +22,20 @@ const BunnSeksjon = ({ classname, language, arbeidsflate, settArbeidsflateFunc }
         <>
             <hr className={cls.element('bunn-separator')} />
             <div className={cls.element('bunn-seksjon')}>
-                {lenker.map((lenke, index) => (
-                    <BunnseksjonLenke
-                        url={lenke.url}
-                        lenkeTekstId={lenke.lenkeTekstId}
-                        stikkord={finnTekst(lenke.stikkordId, language)}
-                        className={classname}
-                        id={KbNav.getId(NaviGroup.DesktopHeaderDropdown, index, 3)}
-                        onClick={lenke.onClick && lenke.onClick(settArbeidsflateFunc)}
-                        key={lenke.lenkeTekstId}
-                    />)
-                )}
+                {lenker.map((lenke, index) => {
+                    const kbNaviIndex = {x: index, y: 3, sub: 0};
+                    return (
+                        <BunnseksjonLenke
+                            url={lenke.url}
+                            lenkeTekstId={lenke.lenkeTekstId}
+                            stikkord={finnTekst(lenke.stikkordId, language)}
+                            className={classname}
+                            id={KbNav.getKbId(NaviGroup.DesktopHeaderDropdown, kbNaviIndex)}
+                            onClick={lenke.onClick && lenke.onClick(settArbeidsflateFunc)}
+                            key={lenke.lenkeTekstId}
+                        />
+                    );
+                })}
             </div>
         </>
     );

@@ -1,7 +1,8 @@
 @import (reference) '../../../../../../styling-variabler.less';
 
 .meny {
-  @side-margin: 1.5em;
+  @hovedseksjon-margin: 1.5em;
+  @bunnseksjon-margin: 2.5em;
 
   .lenke-stil() {
     text-decoration: underline;
@@ -10,15 +11,15 @@
     }
   }
 
-  .col-setup(@cols) {
+  .col-setup(@cols, @margins) {
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: calc(percentage(1 / (@cols + 1)) + 1px);
-    max-width: calc(percentage(1 / @cols) - (@side-margin - @side-margin / @cols));
+    max-width: calc(percentage(1 / @cols) - (@margins - @margins / @cols));
     --num-cols: @cols;
 
     &:not(:nth-child(@{cols}n)) {
-      margin-right: @side-margin;
+      margin-right: @margins;
     }
   }
 
@@ -53,13 +54,13 @@
     @midLimitWidth: (@desktopLimitWidth + @tabletLimitWidth) / 2;
 
     @media (max-width: @midLimitWidth) {
-      .col-setup(3);
+      .col-setup(3, @hovedseksjon-margin);
     }
     @media (min-width: @midLimitWidth) {
-      .col-setup(4);
+      .col-setup(4, @hovedseksjon-margin);
     }
     @media (min-width: @desktopLimitWidth) {
-      .col-setup(4);
+      .col-setup(4, @hovedseksjon-margin);
     }
   }
 
@@ -96,7 +97,7 @@
   }
 
   &__bunn-seksjon-col {
-    .col-setup(3);
+    .col-setup(3, @bunnseksjon-margin);
   }
 
   &__bunn-lenke {

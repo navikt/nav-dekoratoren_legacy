@@ -8,10 +8,10 @@ import KbNav, { NaviGroup } from '../../keyboard-navigation/kb-navigation';
 
 interface Props {
     classname: string;
-    arbeidsflate: string;
+    arbeidsflateNavn: string;
 }
 
-const Toppseksjon = ({classname, arbeidsflate}: Props) => {
+const Toppseksjon = ({ classname, arbeidsflateNavn }: Props) => {
     const cls = BEMHelper(classname);
 
     return (
@@ -19,15 +19,15 @@ const Toppseksjon = ({classname, arbeidsflate}: Props) => {
             <Lenke
                 href={Environment.baseUrl}
                 className={cls.element('topp-seksjon-lenke')}
-                id={KbNav.getId(NaviGroup.DesktopHeaderDropdown, 0, 1)}
+                id={KbNav.getKbId(NaviGroup.DesktopHeaderDropdown, { x: 0, y: 1, sub: 0 })}
             >
                 <Tekst id={'til-forside'} />
             </Lenke>
             <Systemtittel className={cls.element('topp-seksjon-tittel')}>
-                <Tekst id={`rolle-${arbeidsflate.toLowerCase()}`} />
+                <Tekst id={`rolle-${arbeidsflateNavn.toLowerCase()}`} />
             </Systemtittel>
         </div>
     );
 };
 
-export default Toppseksjon
+export default Toppseksjon;

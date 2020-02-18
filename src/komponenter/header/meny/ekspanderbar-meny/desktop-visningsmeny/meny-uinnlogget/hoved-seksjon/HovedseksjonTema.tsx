@@ -26,13 +26,15 @@ export const HovedseksjonTema = ({ menygruppe, isOpen, className, temaIndex }: P
             </div>
             <ul className={cls.element('hoved-seksjon-tema-lenker')}>
                 {menygruppe.children.map((lenke: MenySeksjon, index: number) => {
+                    const kbNaviIndex = {x: temaIndex, y: 2, sub: index};
+
                     return (
                         <HovedseksjonLenke
                             key={index}
                             lenke={lenke}
                             isOpen={isOpen}
                             menyGruppeNavn={menygruppe.displayName}
-                            id={KbNav.getId(NaviGroup.DesktopHeaderDropdown, temaIndex, 2, index)}
+                            id={KbNav.getKbId(NaviGroup.DesktopHeaderDropdown, kbNaviIndex)}
                         />
                     );
                 })}
