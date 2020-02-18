@@ -6,17 +6,13 @@ import BunnSeksjon from './bunn-seksjon/BunnSeksjon';
 import './MenyUinnlogget.less';
 import { MenyUinnloggetHovedseksjon } from './hoved-seksjon/Hovedseksjon';
 import KbNav, { NaviGraphData, NaviGroup, NaviNode } from '../keyboard-navigation/kb-navigation';
+import { matchMediaPolyfill } from '../../../../../../utils/matchMediaPolyfill';
 
 interface Props {
     classname: string;
     menyLenker: MenySeksjon;
     isOpen: boolean;
 }
-
-const matchMediaFallback = (() => ({
-    addEventListener: () => null,
-    removeEventListener: () => null
-}));
 
 const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
 const kbRootIndex = {x: 0, y: 0, sub: 0};
@@ -41,7 +37,7 @@ const MenyUinnlogget = (props: Props) => {
     const {classname, menyLenker, isOpen} = props;
     const cls = BEMHelper(classname);
 
-    const matchMedia = window.matchMedia || matchMediaFallback;
+    const matchMedia = matchMediaPolyfill;
     const mqlDesktop = matchMedia('(min-width: 1024px');
     const mqlTablet = matchMedia('(min-width: 896px)');
 
