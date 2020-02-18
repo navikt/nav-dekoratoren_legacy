@@ -23,7 +23,7 @@ const BunnSeksjon = ({ classname, language, arbeidsflate, settArbeidsflateFunc }
             <hr className={cls.element('bunn-separator')} />
             <div className={cls.element('bunn-seksjon')}>
                 {lenker.map((lenke, index) => {
-                    const kbNaviIndex = {x: index, y: 3, sub: 0};
+                    const kbNaviIndex = {col: index, row: 3, sub: 0};
                     return (
                         <BunnseksjonLenke
                             url={lenke.url}

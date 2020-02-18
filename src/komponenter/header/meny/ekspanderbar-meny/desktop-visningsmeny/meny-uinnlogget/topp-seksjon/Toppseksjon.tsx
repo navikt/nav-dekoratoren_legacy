@@ -19,7 +19,7 @@ const Toppseksjon = ({ classname, arbeidsflateNavn }: Props) => {
             <Lenke
                 href={Environment.baseUrl}
                 className={cls.element('topp-seksjon-lenke')}
-                id={KbNav.getKbId(NaviGroup.DesktopHeaderDropdown, { x: 0, y: 1, sub: 0 })}
+                id={KbNav.getKbId(NaviGroup.DesktopHeaderDropdown, { col: 0, row: 1, sub: 0 })}
             >
                 <Tekst id={'til-forside'} />
             </Lenke>

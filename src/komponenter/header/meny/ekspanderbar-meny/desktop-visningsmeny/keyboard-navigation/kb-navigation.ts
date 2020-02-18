@@ -5,8 +5,8 @@ export enum NaviGroup {
 }
 
 export type NaviIndex = {
-    x: number,
-    y: number,
+    col: number,
+    row: number,
     sub: number
 }
 
@@ -36,7 +36,7 @@ export type IdMap = {
 type NodeSetterCallback = (node: NaviNode) => void;
 
 export const getKbId = (group: NaviGroup, index: NaviIndex, idMap: IdMap = {}) => {
-    const id = `${group}_${index.x}_${index.y}_${index.sub}`;
+    const id = `${group}_${index.col}_${index.row}_${index.sub}`;
     return idMap[id] || id;
 };
 

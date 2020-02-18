@@ -26,8 +26,7 @@ export const HovedseksjonTema = ({ menygruppe, isOpen, className, temaIndex }: P
             </div>
             <ul className={cls.element('hoved-seksjon-tema-lenker')}>
                 {menygruppe.children.map((lenke: MenySeksjon, index: number) => {
-                    const kbNaviIndex = {x: temaIndex, y: 2, sub: index};
-
+                    const kbNaviIndex = {col: temaIndex, row: 2, sub: index};
                     return (
                         <HovedseksjonLenke
                             key={index}

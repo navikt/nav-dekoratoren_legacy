@@ -3,160 +3,152 @@ import { getKbId, IdMap, NaviGroup, NaviIndex, NaviNode, NaviNodeMap } from './k
 export const buildNaviGraphAndGetRootNode = (
     group: NaviGroup,
     rootIndex: NaviIndex,
-    maxColsPerSection: number[],
+    maxColsPerWrappedRow: number[],
     nodeMap: NaviNodeMap,
     idMap: IdMap = {},
 ): NaviNode => {
     const getTopEdgeIndex = (index: NaviIndex) => {
-        const { x, y, sub } = index;
+        const { col, row, sub } = index;
 
-        const aboveIsSameSubSection = sub > 0 && !!getElement({ x: x, y: y, sub: sub - 1 });
-        if (aboveIsSameSubSection) {
+        const aboveIsSameCol = sub > 0 && !!getElement({ col: col, row: row, sub: sub - 1 });
+        if (aboveIsSameCol) {
             return {
-                x: x,
-                y: y,
+                col: col,
+                row: row,
                 sub: sub - 1,
             };
         }
 
-        const maxColsCurrent = maxColsPerSection[y];
-        const aboveIsSameSection = x >= maxColsCurrent;
-        if (aboveIsSameSection) {
-            const newX = x - maxColsCurrent;
-            const newSub = getLastSubIndex({ x: newX, y: y, sub: 0 });
+        const maxColsCurrent = maxColsPerWrappedRow[row];
+        const aboveIsSameRowWrapped = col >= maxColsCurrent;
+        if (aboveIsSameRowWrapped) {
+            const newCol = col - maxColsCurrent;
+            const newSub = getLastSub(newCol, row);
             return {
-                x: newX,
-                y: y,
+                col: newCol,
+                row: row,
                 sub: newSub,
             };
         }
 
-        const newY = y - 1;
-        if (newY < 0) {
+        const newRow = row - 1;
+        if (newRow < 0) {
             return index;
         }
 
-        const maxColsAbove = maxColsPerSection[newY];
-        const lastSectionAbove = getLastSectionIndex(newY);
-        const lastColAbove = lastSectionAbove % maxColsAbove;
-        const relativeX = Math.floor(x * maxColsAbove / maxColsCurrent + 0.5);
+        const maxColsAbove = maxColsPerWrappedRow[newRow];
+        const lastColAbove = getLastCol(newRow);
+        const lastWrappedPositionAbove = lastColAbove % maxColsAbove;
+        const bestAdjacentPositionAbove = Math.floor(col * maxColsAbove / maxColsCurrent + 0.5);
 
-        const newX = relativeX >= lastColAbove
-            ? lastSectionAbove
-            : lastSectionAbove - lastColAbove + relativeX;
-        const newSub = getLastSubIndex({ x: newX, y: newY, sub: 0 });
+        const newCol = bestAdjacentPositionAbove >= lastWrappedPositionAbove
+            ? lastColAbove
+            : lastColAbove - lastWrappedPositionAbove + bestAdjacentPositionAbove;
+        const newSub = getLastSub(newCol, newRow);
         return {
-            x: newX,
-            y: newY,
+            col: newCol,
+            row: newRow,
             sub: newSub,
         };
     };
 
     const getBottomEdgeIndex = (index: NaviIndex) => {
-        const { x, y, sub } = index;
+        const { col, row, sub } = index;
 
-        const belowIsSameSubSection = !!getElement({ x: x, y: y, sub: sub + 1 });
-        if (belowIsSameSubSection) {
+        const belowIsSameCol = !!getElement({ col: col, row: row, sub: sub + 1 });
+        if (belowIsSameCol) {
             return {
-                x: x,
-                y: y,
+                col: col,
+                row: row,
                 sub: sub + 1,
             };
         }
 
-        const maxColsCurrent = maxColsPerSection[y];
-        const firstColBelow = x + (maxColsCurrent - x % maxColsCurrent);
-        const belowIsSameSection = !!getElement({ x: firstColBelow, y: y, sub: 0 });
-        if (belowIsSameSection) {
-            const newX = getRightmostColIndex({ x: x + maxColsCurrent, y: y, sub: 0 });
+        const maxColsCurrent = maxColsPerWrappedRow[row];
+        const firstColBelow = col + (maxColsCurrent - col % maxColsCurrent);
+        const belowIsSameRowWrapped = !!getElement({ col: firstColBelow, row: row, sub: 0 });
+        if (belowIsSameRowWrapped) {
+            const newColAdjacent = col + maxColsCurrent;
+            const newCol = !!getElement({ col: newColAdjacent, row: row, sub: 0 })
+                ? newColAdjacent
+                : getLastCol(row);
             return {
-                x: newX,
-                y: y,
+                col: newCol,
+                row: row,
                 sub: 0,
             };
         }
 
-        const newY = y + 1;
-        const elementBelowExists = !!getElement({ x: 0, y: newY, sub: 0 });
-        if (!elementBelowExists) {
+        const newRow = row + 1;
+        const rowBelowExists = !!getElement({ col: 0, row: newRow, sub: 0 });
+        if (!rowBelowExists) {
             return index;
         }
 
-        const maxColsBelow = maxColsPerSection[newY];
-        const relativeX = Math.floor(x * maxColsBelow / maxColsCurrent + 0.5);
-
-        const newXMax = relativeX % maxColsBelow;
-        const newX = newXMax < maxColsBelow ? newXMax : maxColsBelow - 1;
+        const maxColsBelow = maxColsPerWrappedRow[newRow];
+        const bestAdjacentPositionBelow = Math.floor(col * maxColsBelow / maxColsCurrent + 0.5) % maxColsBelow;
+        const newCol = bestAdjacentPositionBelow < maxColsBelow
+            ? bestAdjacentPositionBelow
+            : maxColsBelow - 1;
         return {
-            x: newX,
-            y: newY,
+            col: newCol,
+            row: newRow,
             sub: 0,
         };
     };
 
     const getLeftEdgeIndex = (index: NaviIndex) => {
-        const { x, y, sub } = index;
-        const maxCols = maxColsPerSection[y];
+        const { col, row, sub } = index;
+        const maxCols = maxColsPerWrappedRow[row];
 
-        const newX = x - 1;
-        const isOutOfBounds = newX % maxCols === maxCols - 1 || newX < 0;
+        const newCol = col - 1;
+        const isOutOfBounds = newCol % maxCols === maxCols - 1 || newCol < 0;
         if (isOutOfBounds) {
             return index;
         }
 
-        const newSub = getNeighborSubIndex({ x: newX, y, sub });
+        const newSub = !!getElement({ col: newCol, row: row, sub })
+            ? sub
+            : getLastSub(newCol, row);
         return {
-            x: newX,
-            y: y,
+            col: newCol,
+            row: row,
             sub: newSub,
         };
     };
 
     const getRightEdgeIndex = (index: NaviIndex) => {
-        const { x, y, sub } = index;
-        const maxCols = maxColsPerSection[y];
+        const { col, row, sub } = index;
+        const maxCols = maxColsPerWrappedRow[row];
 
-        const newX = x + 1;
-        const isOutOfBounds = newX % maxCols === 0;
+        const newCol = col + 1;
+        const isOutOfBounds = newCol % maxCols === 0;
         if (isOutOfBounds) {
             return index;
         }
 
-        const newSub = getNeighborSubIndex({ x: newX, y, sub });
+        const newSub = !!getElement({ col: newCol, row: row, sub })
+            ? sub
+            : getLastSub(newCol, row);
         return {
-            x: newX,
-            y: y,
+            col: newCol,
+            row: row,
             sub: newSub,
         };
     };
 
-    const getLastSectionIndex = (y: number, x: number = 0): number => {
-        if (getElement({ x: x, y: y, sub: 0 })) {
-            return getLastSectionIndex(y, x + 1);
+    const getLastCol = (row: number, col: number = 0): number => {
+        if (getElement({ col: col, row: row, sub: 0 })) {
+            return getLastCol(row, col + 1);
         }
-        return x - 1;
+        return col - 1;
     };
 
-    const getRightmostColIndex = (index: NaviIndex): number => {
-        if (!getElement(index) && index.x > 0) {
-            return getRightmostColIndex({ x: index.x - 1, y: index.y, sub: index.sub });
+    const getLastSub = (col: number, row: number, sub: number = 0): number => {
+        if (getElement({ col: col, row: row, sub: sub + 1 })) {
+            return getLastSub(col, row, sub + 1);
         }
-        return index.x;
-    };
-
-    const getNeighborSubIndex = (index: NaviIndex): number => {
-        if (!getElement(index) && index.sub > 0) {
-            return getNeighborSubIndex({ x: index.x, y: index.y, sub: index.sub - 1 });
-        }
-        return index.sub;
-    };
-
-    const getLastSubIndex = (index: NaviIndex): number => {
-        const nextSubIndex = { x: index.x, y: index.y, sub: index.sub + 1 };
-        if (getElement(nextSubIndex)) {
-            return getLastSubIndex(nextSubIndex);
-        }
-        return index.sub;
+        return sub;
     };
 
     const getElement = (index: NaviIndex) => (
