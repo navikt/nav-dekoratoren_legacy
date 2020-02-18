@@ -7,12 +7,29 @@ import './MenyUinnlogget.less';
 import { MenyUinnloggetHovedseksjon } from './hoved-seksjon/Hovedseksjon';
 import KbNav, { NaviGraphData, NaviGroup, NaviNode } from '../keyboard-navigation/kb-navigation';
 import { matchMediaPolyfill } from '../../../../../../utils/matchMediaPolyfill';
+import { MenuValue } from '../../../../../../utils/meny-storage-utils';
+import { AppState } from '../../../../../../reducer/reducer';
+import { connect } from 'react-redux';
+import { Language } from '../../../../../../reducer/language-duck';
+import { Dispatch } from '../../../../../../redux/dispatch-type';
+import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
 
-interface Props {
+interface OwnProps {
     classname: string;
     menyLenker: MenySeksjon;
     isOpen: boolean;
 }
+
+interface StateProps {
+    arbeidsflate: MenuValue,
+    language: Language
+}
+
+interface DispatchProps {
+    settArbeidsflateFunc: () => void;
+}
+
+type Props = OwnProps & StateProps & DispatchProps;
 
 const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
 const kbRootIndex = {x: 0, y: 0, sub: 0};
@@ -74,6 +91,7 @@ const MenyUinnlogget = (props: Props) => {
             const freshNaviGraph = KbNav.getNaviGraphData(kbNaviGroup, kbRootIndex, colSetup);
             setKbNaviGraph(freshNaviGraph);
             setKbNaviNode(freshNaviGraph.rootNode);
+            console.log(freshNaviGraph);
         };
 
         if (isOpen) {
@@ -94,9 +112,21 @@ const MenyUinnlogget = (props: Props) => {
             />
             <BunnSeksjon
                 classname={classname}
+                language={props.language}
+                arbeidsflate={props.arbeidsflate}
+                settArbeidsflateFunc={props.settArbeidsflateFunc}
             />
         </div>
     );
 };
 
-export default MenyUinnlogget;
+const mapStateToProps = (state: AppState) => ({
+    arbeidsflate: state.arbeidsflate.status,
+    language: state.language.language
+});
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+    settArbeidsflateFunc: () => dispatch(finnArbeidsflate()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenyUinnlogget);
