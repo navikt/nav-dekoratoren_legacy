@@ -36,7 +36,6 @@ const Desktopmeny = ({ language }: Props) => {
                     <InnloggingsstatusProvider>
                         <>
                             <div className="media-lg-desktop minsidelenke-varselbjelle">
-                                <MinsideLenke tabindex={true} />
                                 <VarselinnboksProvider>
                                     <Varselbjelle tabindex={true}>
                                         {clicked =>
@@ -48,6 +47,7 @@ const Desktopmeny = ({ language }: Props) => {
                                         }
                                     </Varselbjelle>
                                 </VarselinnboksProvider>
+                                <MinsideLenke tabindex={true} />
                             </div>
                             <LoggInnKnapp />
                         </>

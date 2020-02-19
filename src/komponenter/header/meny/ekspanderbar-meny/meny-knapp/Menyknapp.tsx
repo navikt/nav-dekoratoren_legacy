@@ -3,7 +3,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import BEMHelper from '../../../../../utils/bem';
 import { Language } from '../../../../../reducer/language-duck';
 import Tekst from '../../../../../tekster/finn-tekst';
-import HamburgerIkon from '../../../../../ikoner/meny/HamburgerIkon';
+import HamburgerKnapp from './hamburger-knapp/HamburgerKnapp';
 import MenyIkon from '../../../../../ikoner/mobilmeny/MenyIkon';
 import './Menyknapp.less';
 
@@ -14,25 +14,26 @@ interface Props {
 }
 
 const Menyknapp = (props: Props) => {
+    const { ToggleMenu, clicked, lang } = props;
     const cls = BEMHelper('dropdown');
     return (
         <>
-            {props.lang !== Language.SAMISK ? (
+            {lang !== Language.SAMISK ? (
                 <button
-                    onClick={() => props.ToggleMenu()}
+                    onClick={() => ToggleMenu()}
                     className={cls.element('menyknapp')}
                     id="decorator-meny-toggleknapp"
                     aria-label="Menyknapp"
                     aria-haspopup="true"
                     aria-controls="dropdown-menu"
-                    aria-expanded={props.clicked}
+                    aria-expanded={clicked}
                 >
-                    <div className={cls.element('menyknapp', 'innhold')}>
+                    <div className={cls.element('menyknapp-visning')}>
                         <div className="media-sm-mobil menyknapp-mobil">
                             <MenyIkon />
                         </div>
-                        <div className="media-md-tablet menyknapp-tablet-desktop">
-                            <HamburgerIkon ikonClass="hamburger-ikon" />
+                        <div className={`media-md-tablet menyknapp-tablet-desktop ${cls.element('hamburger-knapp')}`}>
+                            <HamburgerKnapp isOpen={clicked}/>
                         </div>
                         <Undertittel>
                             <Tekst id="meny-knapp" />

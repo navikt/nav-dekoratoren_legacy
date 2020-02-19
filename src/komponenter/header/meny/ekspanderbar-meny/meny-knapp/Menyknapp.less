@@ -3,9 +3,7 @@
 
 .dropdown {
     &__menyknapp {
-        order: 1;
         text-decoration: none;
-        color: black;
         background-color: white;
         border: none;
         padding: 0;
@@ -16,43 +14,45 @@
             outline: @navDypBla 3px solid;
             border-radius: 4px;
         }
+    }
 
-        &--innhold {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 0.4rem 0.7rem;
-            width: fit-content;
+    &__menyknapp-visning {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0.4rem 0.7rem;
+        //width: fit-content;
+        color: @navBla;
 
-            &:hover {
-                outline: 1px black solid;
-                cursor: pointer;
-            }
-
-            .hamburger-ikon {
-                margin-right: 0.5rem;
-            }
+        &:hover {
+            outline: 1px black solid;
+            cursor: pointer;
         }
     }
+
+    &__hamburger-knapp {
+        width: 32px;
+        height: 24px;
+    }
+
     @media (max-width: @minimumMobilWidth) {
-        &__menyknapp {
-            &--innhold {
-                padding: 0.4rem 0.2rem;
-            }
+        &__menyknapp-visning {
+            padding: 0.4rem 0.2rem;
         }
     }
 
     @media (min-width: @tabletLimitWidth) {
         &__menyknapp {
             border-radius: 3px;
-            &--innhold {
-                padding: 0.4rem 0.7rem 0;
+        }
 
-                .hamburger-ikon {
-                    margin-right: 0;
-                }
-            }
+        &__menyknapp-visning {
+            padding: 0.4rem 0.7rem 0;
+        }
+
+        &__hamburger-knapp {
+            margin-right: 0.5em;
         }
     }
 }
