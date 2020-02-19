@@ -44,12 +44,14 @@ const getColSetup = (cls: BEMWrapper): Array<number> => {
 
     const menyKnappCols = 1;
     const toppSeksjonCols = 1;
+    const hovedSeksjonColsFallback = 4;
+    const bunnSeksjonColsFallback = 3;
 
-    const hovedSeksjonElement = document.getElementsByClassName(cls.element('hoved-seksjon-tema'))[0] as HTMLElement;
-    const hovedSeksjonCols = hovedSeksjonElement && getNumCols(hovedSeksjonElement) || 5;
+    const hovedSeksjonElement = document.getElementsByClassName(cls.element('hoved-seksjon'))[0] as HTMLElement;
+    const hovedSeksjonCols = hovedSeksjonElement && getNumCols(hovedSeksjonElement) || hovedSeksjonColsFallback;
 
-    const bunnSeksjonElement = document.getElementsByClassName(cls.element('bunn-seksjon-col'))[0] as HTMLElement;
-    const bunnSeksjonCols = bunnSeksjonElement && getNumCols(bunnSeksjonElement) || 3;
+    const bunnSeksjonElement = document.getElementsByClassName(cls.element('bunn-seksjon'))[0] as HTMLElement;
+    const bunnSeksjonCols = bunnSeksjonElement && getNumCols(bunnSeksjonElement) || bunnSeksjonColsFallback;
 
     return [menyKnappCols, toppSeksjonCols, hovedSeksjonCols, bunnSeksjonCols];
 };
@@ -64,8 +66,6 @@ const MenyUinnlogget = (props: Props) => {
 
     const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
     const [kbNaviNode, setKbNaviNode] = useState<NaviNode>(null);
-
-    document.addEventListener('keydown', (event: KeyboardEvent) => console.log(event.key));
 
     useEffect(() => {
         const updateNaviGraph = () => {
