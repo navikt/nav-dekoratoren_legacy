@@ -63,6 +63,13 @@ const MenyUinnlogget = (props: Props) => {
     const [kbNaviNode, setKbNaviNode] = useState<NaviNode>(null);
 
     useEffect(() => {
+        const removeListeners = () => {
+            document.removeEventListener('keydown', kbHandler);
+            document.removeEventListener('focusin', focusHandler);
+            mqlDesktop.removeEventListener('change', updateNaviGraph);
+            mqlTablet.removeEventListener('change', updateNaviGraph);
+        };
+
         const updateNaviGraph = () => {
             const colSetup = getColSetup(cls);
             const updatedNaviGraph = KbNav.getNaviGraphData(kbNaviGroup, kbRootIndex, colSetup, kbIdMap);
@@ -72,6 +79,11 @@ const MenyUinnlogget = (props: Props) => {
             setKbNaviNode(newNode);
         };
 
+        if (!isOpen) {
+            removeListeners();
+            return;
+        }
+
         const kbHandler = KbNav.kbHandler(kbNaviNode, kbNaviGroup, setKbNaviNode);
         const focusHandler = KbNav.focusHandler(kbNaviNode, kbNaviGraph, setKbNaviNode);
 
@@ -79,13 +91,8 @@ const MenyUinnlogget = (props: Props) => {
         document.addEventListener('keydown', kbHandler);
         mqlDesktop.addEventListener('change', updateNaviGraph);
         mqlTablet.addEventListener('change', updateNaviGraph);
-        return () => {
-            document.removeEventListener('keydown', kbHandler);
-            document.removeEventListener('focusin', focusHandler);
-            mqlDesktop.removeEventListener('change', updateNaviGraph);
-            mqlTablet.removeEventListener('change', updateNaviGraph);
-        };
-    }, [kbNaviNode]);
+        return removeListeners;
+    }, [isOpen, kbNaviNode]);
 
     useEffect(() => {
         const makeNewNaviGraph = () => {
