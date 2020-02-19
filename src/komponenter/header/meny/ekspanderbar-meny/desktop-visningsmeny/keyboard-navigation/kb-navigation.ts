@@ -65,23 +65,23 @@ const selectNode = (node: NaviNode, group: NaviGroup, callback: NodeSetterCallba
     }
 };
 
-const kbHandler = (kbNaviNode: NaviNode, group: NaviGroup, callback: NodeSetterCallback) => (event: KeyboardEvent) => {
-    const key = ieKeyMap(event.key) || event.key;
-    if (!kbNaviNode) {
+const kbHandler = (node: NaviNode, group: NaviGroup, callback: NodeSetterCallback) => (event: KeyboardEvent) => {
+    if (!node) {
         return;
     }
+    const key = ieKeyMap(event.key) || event.key;
     switch (key) {
         case 'ArrowLeft':
-            selectNode(kbNaviNode.left, group, callback);
+            selectNode(node.left, group, callback);
             break;
         case 'ArrowUp':
-            selectNode(kbNaviNode.up, group, callback);
+            selectNode(node.up, group, callback);
             break;
         case 'ArrowRight':
-            selectNode(kbNaviNode.right, group, callback);
+            selectNode(node.right, group, callback);
             break;
         case 'ArrowDown':
-            selectNode(kbNaviNode.down, group, callback);
+            selectNode(node.down, group, callback);
             break;
         default:
             return;
@@ -89,7 +89,7 @@ const kbHandler = (kbNaviNode: NaviNode, group: NaviGroup, callback: NodeSetterC
     event.preventDefault();
 };
 
-const focusHandler = (kbNaviNode: NaviNode, graph: NaviGraphData | undefined, callback: NodeSetterCallback) => (event: FocusEvent) => {
+const focusHandler = (graph: NaviGraphData | undefined, callback: NodeSetterCallback) => (event: FocusEvent) => {
     const id = (event.target as HTMLElement).id;
     if (!id || !graph) {
         return;
@@ -97,15 +97,15 @@ const focusHandler = (kbNaviNode: NaviNode, graph: NaviGraphData | undefined, ca
 
     const focusedNode = graph.nodeMap[id];
     if (focusedNode) {
-        selectNode(focusedNode, graph.groupName, callback)
+        selectNode(focusedNode, graph.groupName, callback, false);
     } else {
         selectNode(graph.rootNode, graph.groupName, callback, false);
     }
 };
 
-const getNaviGraphData = (group: NaviGroup, rootIndex: NaviIndex, maxColsPerSection: number[], idMap: IdMap = {}): NaviGraphData => {
+const getNaviGraphData = (group: NaviGroup, rootIndex: NaviIndex, maxColsPerRow: number[], idMap: IdMap = {}): NaviGraphData => {
     const nodeMap = {};
-    const rootNode = buildNaviGraphAndGetRootNode(group, rootIndex, maxColsPerSection, nodeMap, idMap);
+    const rootNode = buildNaviGraphAndGetRootNode(group, rootIndex, maxColsPerRow, nodeMap, idMap);
     return {
         groupName: group,
         rootNode: rootNode,

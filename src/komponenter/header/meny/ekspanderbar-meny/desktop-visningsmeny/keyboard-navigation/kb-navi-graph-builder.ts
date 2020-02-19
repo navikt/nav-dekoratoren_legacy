@@ -138,15 +138,17 @@ export const buildNaviGraphAndGetRootNode = (
     };
 
     const getLastCol = (row: number, col: number = 0): number => {
-        if (getElement({ col: col, row: row, sub: 0 })) {
-            return getLastCol(row, col + 1);
+        const nextCol = col + 1;
+        if (getElement({ col: nextCol, row: row, sub: 0 })) {
+            return getLastCol(row, nextCol);
         }
-        return col - 1;
+        return col;
     };
 
     const getLastSub = (col: number, row: number, sub: number = 0): number => {
-        if (getElement({ col: col, row: row, sub: sub + 1 })) {
-            return getLastSub(col, row, sub + 1);
+        const nextSub = sub + 1;
+        if (getElement({ col: col, row: row, sub: nextSub })) {
+            return getLastSub(col, row, nextSub);
         }
         return sub;
     };

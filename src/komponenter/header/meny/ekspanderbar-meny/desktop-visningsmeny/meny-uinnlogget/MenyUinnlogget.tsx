@@ -61,7 +61,7 @@ const MenyUinnlogget = (props: Props) => {
     const cls = BEMHelper(classname);
 
     const matchMedia = matchMediaPolyfill;
-    const mqlDesktop = matchMedia('(min-width: 1024px');
+    const mqlDesktop = matchMedia('(min-width: 1024px)');
     const mqlTablet = matchMedia('(min-width: 896px)');
 
     const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
@@ -78,7 +78,7 @@ const MenyUinnlogget = (props: Props) => {
         };
 
         const kbHandler = KbNav.kbHandler(kbNaviNode, kbNaviGroup, setKbNaviNode);
-        const focusHandler = KbNav.focusHandler(kbNaviNode, kbNaviGraph, setKbNaviNode);
+        const focusHandler = KbNav.focusHandler(kbNaviGraph, setKbNaviNode);
 
         document.addEventListener('focusin', focusHandler);
         document.addEventListener('keydown', kbHandler);
