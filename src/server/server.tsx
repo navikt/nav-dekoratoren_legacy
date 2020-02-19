@@ -68,7 +68,7 @@ const htmlFooter = ReactDOMServer.renderToString(
 );
 
 const template = (
-    parameters: object,
+    reqQuery: string,
     fileFavicon: string,
     fileCss: string,
     htmlHeader: ReactNode,
@@ -102,8 +102,7 @@ const template = (
                 <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
             </div>
             <div id="scripts">
-                <div id="decorator-env" data-src="${fileEnv +
-                    parameters}"></div>
+                <div id="decorator-env" data-src="${fileEnv}?${reqQuery}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
                 <script
                     src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js"
@@ -119,21 +118,42 @@ const template = (
 };
 
 // Express config
+const pathsForTemplate = [
+    `${basePath}/`,
+    `${basePath}/person`,
+    `${basePath}/person/*`,
+    `${basePath}/bedrift`,
+    `${basePath}/bedrift/*`,
+    `${basePath}/samarbeidspartner`,
+    `${basePath}/samarbeidspartner/*`,
+];
+
+app.get(pathsForTemplate, (req, res) => {
+    const i = req.url.indexOf('?');
+    const reqQuery = req.url.substr(i + 1);
+    res.send(
+        template(
+            reqQuery,
+            fileFavicon,
+            fileCss,
+            htmlHeader,
+            htmlFooter,
+            fileEnv,
+            fileScript
+        )
+    );
+});
+
 app.get(`${basePath}/env`, (req, res) => {
     // Client environment
     // Obs! Don't expose secrets
     res.send({
         ...{
             ...(req.query && {
-                ...(req.query.language && {
-                    langugage: req.query.language,
-                }),
-                ...(req.query.language && {
-                    langugage: req.query.language,
-                }),
-                ...(req.query.language && {
-                    langugage: req.query.language,
-                }),
+                language: req.query.language || 'nb',
+                redirectToApp: req.query.redirectToApp || false,
+                context: req.query.context || 'privatperson',
+                stripped: req.query.stripped || false,
             }),
             ...(isProduction
                 ? {
@@ -152,20 +172,6 @@ app.get(`${basePath}/env`, (req, res) => {
                 : localEnv),
         },
     });
-});
-
-app.get(`${basePath}/`, (req, res) => {
-    res.send(
-        template(
-            req.query,
-            fileFavicon,
-            fileCss,
-            htmlHeader,
-            htmlFooter,
-            fileEnv,
-            fileScript
-        )
-    );
 });
 
 app.get(`${basePath}/api/get/menyvalg`, (req, res) => {

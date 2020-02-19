@@ -12,6 +12,12 @@ export default class Environment {
     static loginUrl: string;
     static logoutUrl: string;
 
+    // Parameters
+    static language: string;
+    static redirectToApp: string;
+    static context: string;
+    static stripped: string;
+
     static settEnv = (result: any) => {
         Environment.baseUrl = result.baseUrl;
         Environment.baseUrlEnonic = result.baseUrlEnonic;
@@ -23,6 +29,12 @@ export default class Environment {
         Environment.dittNavUrl = result.dittNavUrl;
         Environment.loginUrl = result.loginUrl;
         Environment.logoutUrl = result.logoutUrl;
+
+        // Parameters
+        Environment.language = result.language;
+        Environment.redirectToApp = result.redirectToApp;
+        Environment.context = result.context;
+        Environment.stripped = result.stripped;
     };
 }
 
