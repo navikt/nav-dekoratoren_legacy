@@ -2,7 +2,6 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'isomorphic-fetch';
-import FS from 'fs';
 import NodeCache from 'node-cache';
 import express from 'express';
 import React, { ReactNode } from 'react';
@@ -10,8 +9,8 @@ import ReactDOMServer from 'react-dom/server';
 import request from 'request';
 import { Provider as ReduxProvider } from 'react-redux';
 import Footer from '../komponenter/footer/Footer';
+import Header from '../komponenter/header/Header';
 import getStore from './../redux/store';
-import Head from '../Head';
 
 const basePath = '/dekoratoren';
 const isProduction = process.env.NODE_ENV === 'production';
@@ -30,6 +29,7 @@ const localhost = 'http://localhost:8088';
 import mockMenu from './mock/menu.json';
 import mockSok from './mock/sokeresultat.json';
 import { localEnv } from '../utils/Environment';
+import LanguageProvider from '../provider/Language-provider';
 
 // Cache setup
 const mainCacheKey = 'navno-menu';
@@ -58,7 +58,9 @@ const fileFavicon = `${process.env.baseUrl || localhost}${favicon}`;
 
 const htmlHeader = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
-        <Head />
+        <LanguageProvider>
+            <Header />
+        </LanguageProvider>
     </ReduxProvider>
 );
 const htmlFooter = ReactDOMServer.renderToString(
