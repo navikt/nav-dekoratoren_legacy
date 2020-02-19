@@ -40,15 +40,15 @@ export const getKbId = (group: NaviGroup, index: NaviIndex, idMap: IdMap = {}) =
     return idMap[id] || id;
 };
 
-const keycodeToArrowKey = (keycode: number) => {
-    switch (keycode) {
-        case 37:
+const ieKeyMap = (key: string) => {
+    switch (key) {
+        case 'Left':
             return 'ArrowLeft';
-        case 38:
+        case 'Up':
             return 'ArrowUp';
-        case 39:
+        case 'Right':
             return 'ArrowRight';
-        case 40:
+        case 'Down':
             return 'ArrowDown';
         default:
             return null;
@@ -66,7 +66,7 @@ const selectNode = (node: NaviNode, group: NaviGroup, callback: NodeSetterCallba
 };
 
 const kbHandler = (kbNaviNode: NaviNode, group: NaviGroup, callback: NodeSetterCallback) => (event: KeyboardEvent) => {
-    const key = event.key || keycodeToArrowKey(event.keyCode);
+    const key = ieKeyMap(event.key) || event.key;
     if (!kbNaviNode) {
         return;
     }

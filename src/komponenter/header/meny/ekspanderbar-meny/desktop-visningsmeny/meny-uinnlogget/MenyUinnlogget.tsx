@@ -65,6 +65,8 @@ const MenyUinnlogget = (props: Props) => {
     const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
     const [kbNaviNode, setKbNaviNode] = useState<NaviNode>(null);
 
+    document.addEventListener('keydown', (event: KeyboardEvent) => console.log(event.key));
+
     useEffect(() => {
         const updateNaviGraph = () => {
             const colSetup = getColSetup(cls);
