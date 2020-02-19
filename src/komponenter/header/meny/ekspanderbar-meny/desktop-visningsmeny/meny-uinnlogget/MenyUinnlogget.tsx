@@ -7,32 +7,23 @@ import './MenyUinnlogget.less';
 import { MenyUinnloggetHovedseksjon } from './hoved-seksjon/Hovedseksjon';
 import KbNav, { NaviGraphData, NaviGroup, NaviNode } from '../keyboard-navigation/kb-navigation';
 import { matchMediaPolyfill } from '../../../../../../utils/matchMediaPolyfill';
-import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 import { AppState } from '../../../../../../reducer/reducer';
-import { connect } from 'react-redux';
-import { Language } from '../../../../../../reducer/language-duck';
-import { Dispatch } from '../../../../../../redux/dispatch-type';
+import { useDispatch, useSelector } from 'react-redux';
 import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
 
-interface OwnProps {
+interface Props {
     classname: string;
     menyLenker: MenySeksjon;
     isOpen: boolean;
 }
 
-interface StateProps {
-    arbeidsflate: MenuValue,
-    language: Language
-}
-
-interface DispatchProps {
-    settArbeidsflateFunc: () => void;
-}
-
-type Props = OwnProps & StateProps & DispatchProps;
+const stateSelector = (state: AppState) => ({
+    arbeidsflate: state.arbeidsflate.status,
+    language: state.language.language,
+});
 
 const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
-const kbRootIndex = {col: 0, row: 0, sub: 0};
+const kbRootIndex = { col: 0, row: 0, sub: 0 };
 const kbIdMap = {
     [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: 'decorator-meny-toggleknapp-desktop',
 };
@@ -57,8 +48,12 @@ const getColSetup = (cls: BEMWrapper): Array<number> => {
 };
 
 const MenyUinnlogget = (props: Props) => {
-    const {classname, menyLenker, isOpen, arbeidsflate} = props;
+    const { classname, menyLenker, isOpen } = props;
     const cls = BEMHelper(classname);
+    const dispatch = useDispatch();
+
+    const { arbeidsflate, language } = useSelector(stateSelector);
+    const settArbeidsflateFunc = () => dispatch(finnArbeidsflate());
 
     const matchMedia = matchMediaPolyfill;
     const mqlDesktop = matchMedia('(min-width: 1024px)');
@@ -103,7 +98,7 @@ const MenyUinnlogget = (props: Props) => {
         if (isOpen) {
             makeNewNaviGraph();
         }
-    }, [isOpen, menyLenker]);
+    }, [isOpen, menyLenker, arbeidsflate]);
 
     return (
         <div className={cls.element('meny-uinnlogget')}>
@@ -118,21 +113,12 @@ const MenyUinnlogget = (props: Props) => {
             />
             <BunnSeksjon
                 classname={classname}
-                language={props.language}
+                language={language}
                 arbeidsflate={arbeidsflate}
-                settArbeidsflateFunc={props.settArbeidsflateFunc}
+                settArbeidsflateFunc={settArbeidsflateFunc}
             />
         </div>
     );
 };
 
-const mapStateToProps = (state: AppState) => ({
-    arbeidsflate: state.arbeidsflate.status,
-    language: state.language.language
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    settArbeidsflateFunc: () => dispatch(finnArbeidsflate()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MenyUinnlogget);
+export default MenyUinnlogget;
