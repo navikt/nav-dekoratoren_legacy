@@ -57,7 +57,7 @@ const getColSetup = (cls: BEMWrapper): Array<number> => {
 };
 
 const MenyUinnlogget = (props: Props) => {
-    const {classname, menyLenker, isOpen} = props;
+    const {classname, menyLenker, isOpen, arbeidsflate} = props;
     const cls = BEMHelper(classname);
 
     const matchMedia = matchMediaPolyfill;
@@ -109,7 +109,7 @@ const MenyUinnlogget = (props: Props) => {
         <div className={cls.element('meny-uinnlogget')}>
             <Toppseksjon
                 classname={classname}
-                arbeidsflateNavn={menyLenker.displayName}
+                arbeidsflate={arbeidsflate}
             />
             <MenyUinnloggetHovedseksjon
                 menyLenker={menyLenker}
@@ -119,7 +119,7 @@ const MenyUinnlogget = (props: Props) => {
             <BunnSeksjon
                 classname={classname}
                 language={props.language}
-                arbeidsflate={props.arbeidsflate}
+                arbeidsflate={arbeidsflate}
                 settArbeidsflateFunc={props.settArbeidsflateFunc}
             />
         </div>

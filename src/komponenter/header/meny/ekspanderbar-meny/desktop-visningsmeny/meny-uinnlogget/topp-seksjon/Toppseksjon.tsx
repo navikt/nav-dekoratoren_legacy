@@ -5,13 +5,14 @@ import { Systemtittel } from 'nav-frontend-typografi';
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
 import KbNav, { NaviGroup } from '../../keyboard-navigation/kb-navigation';
+import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
 
 interface Props {
     classname: string;
-    arbeidsflateNavn: string;
+    arbeidsflate: MenuValue;
 }
 
-const Toppseksjon = ({ classname, arbeidsflateNavn }: Props) => {
+const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
     const cls = BEMHelper(classname);
 
     return (
@@ -24,7 +25,7 @@ const Toppseksjon = ({ classname, arbeidsflateNavn }: Props) => {
                 <Tekst id={'til-forside'} />
             </Lenke>
             <Systemtittel className={cls.element('topp-seksjon-tittel')}>
-                <Tekst id={`rolle-${arbeidsflateNavn.toLowerCase()}`} />
+                <Tekst id={`rolle-${arbeidsflate.toLowerCase()}`} />
             </Systemtittel>
         </div>
     );

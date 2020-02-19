@@ -32,7 +32,7 @@ const privatpersonLenker: LenkeData[] = [
     },
     {
         url: pathBedriftFlate,
-        lenkeTekstId: 'rolle-bedrift',
+        lenkeTekstId: 'rolle-arbeidsgiver',
         stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
         onClick: onArbeidsflateClick(pathBedriftFlate, MenuValue.ARBEIDSGIVER)
     },
@@ -47,7 +47,7 @@ const privatpersonLenker: LenkeData[] = [
 const arbeidsgiverLenker: LenkeData[] = [
     {
         url: pathPersonFlate,
-        lenkeTekstId: 'rolle-person',
+        lenkeTekstId: 'rolle-privatperson',
         stikkordId: 'meny-bunnlenke-minside-stikkord',
         onClick: onArbeidsflateClick(pathPersonFlate, MenuValue.PRIVATPERSON)
     },
@@ -67,13 +67,13 @@ const arbeidsgiverLenker: LenkeData[] = [
 const samarbeidspartnerLenker: LenkeData[] = [
     {
         url: pathPersonFlate,
-        lenkeTekstId: 'rolle-person',
+        lenkeTekstId: 'rolle-privatperson',
         stikkordId: 'meny-bunnlenke-minside-stikkord',
         onClick: onArbeidsflateClick(pathPersonFlate, MenuValue.PRIVATPERSON)
     },
     {
         url: pathBedriftFlate,
-        lenkeTekstId: 'rolle-bedrift',
+        lenkeTekstId: 'rolle-arbeidsgiver',
         stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
         onClick: onArbeidsflateClick(pathBedriftFlate, MenuValue.ARBEIDSGIVER)
     },
