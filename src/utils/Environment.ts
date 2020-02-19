@@ -14,9 +14,10 @@ export default class Environment {
 
     // Parameters
     static language: string;
-    static redirectToApp: string;
     static context: string;
     static stripped: string;
+    static redirectToApp: string;
+    static lvl: string;
 
     static settEnv = (result: any) => {
         Environment.baseUrl = result.baseUrl;
@@ -32,9 +33,10 @@ export default class Environment {
 
         // Parameters
         Environment.language = result.language;
-        Environment.redirectToApp = result.redirectToApp;
         Environment.context = result.context;
         Environment.stripped = result.stripped;
+        Environment.redirectToApp = result.redirectToApp;
+        Environment.lvl = result.lvl;
     };
 }
 

@@ -151,9 +151,10 @@ app.get(`${basePath}/env`, (req, res) => {
         ...{
             ...(req.query && {
                 language: req.query.language || 'nb',
-                redirectToApp: req.query.redirectToApp || false,
                 context: req.query.context || 'privatperson',
                 stripped: req.query.stripped || false,
+                redirectToApp: req.query.redirectToApp || false,
+                lvl: req.query.lvl || '3',
             }),
             ...(isProduction
                 ? {
