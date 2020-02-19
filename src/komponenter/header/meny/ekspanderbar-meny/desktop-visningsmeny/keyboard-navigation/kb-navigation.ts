@@ -55,13 +55,38 @@ const ieKeyMap = (key: string) => {
     }
 };
 
+const scrollIfNearViewBounds = (element: HTMLElement) => {
+    const minMargin = 0.1;
+
+    const rect = element.getBoundingClientRect();
+    const viewHeight = window.innerHeight;
+    const viewOffset = window.pageYOffset;
+
+    const marginTop = rect.top / viewHeight;
+    if (marginTop < minMargin) {
+        window.scrollTo(0, viewOffset - (minMargin - marginTop) * viewHeight);
+        return;
+    }
+
+    const marginBottom = (1 - rect.bottom / viewHeight);
+    if (marginBottom < minMargin) {
+        window.scrollTo(0, viewOffset + (minMargin - marginBottom) * viewHeight);
+        return;
+    }
+};
+
 const selectNode = (node: NaviNode, group: NaviGroup, callback: NodeSetterCallback, focus = true) => {
     if (!node) {
         return;
     }
     callback(node);
     if (focus) {
-        (document.getElementById(node.id) as HTMLElement)?.focus();
+        const element = document.getElementById(node.id) as HTMLElement;
+        if (!element) {
+            return;
+        }
+        element.focus();
+        scrollIfNearViewBounds(element);
     }
 };
 
