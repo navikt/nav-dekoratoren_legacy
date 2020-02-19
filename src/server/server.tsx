@@ -37,28 +37,6 @@ const backupCacheKey = 'navno-menu-backup';
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
-// Client environment
-// Obs! Don't expose secrets
-const clientEnv = isProduction
-    ? {
-          baseUrl: process.env.baseUrl,
-          baseUrlEnonic: process.env.baseUrlEnonic,
-          innloggingslinjenUrl: process.env.innloggingslinjenUrl,
-          menypunkter: process.env.menypunkter,
-          sokeresultat: process.env.sokeresultat,
-          minsideArbeidsgiverUrl: process.env.minsideArbeidsgiverUrl,
-          varselinnboksUrl: process.env.varselinnboksUrl,
-          dittNavUrl: process.env.dittNavUrl,
-          loginUrl: process.env.loginUrl,
-          logoutUrl: process.env.logoutUrl,
-      }
-    : localEnv;
-
-if (isProduction) {
-    FS.writeFile(`${buildPath}/env.json`, JSON.stringify(clientEnv), err =>
-        console.error(err)
-    );
-}
 // Cors
 app.disable('x-powered-by');
 app.use(function(req, res, next) {
@@ -73,7 +51,7 @@ app.use(function(req, res, next) {
 
 // Server-side rendering
 const store = getStore();
-const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/env.json`;
+const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/env`;
 const fileCss = `${process.env.URL_APP_BASE || defaultAppUrl}/css/client.css`;
 const fileScript = `${process.env.URL_APP_BASE || defaultAppUrl}/client.js`;
 const fileFavicon = `${process.env.baseUrl || localhost}${favicon}`;
@@ -90,6 +68,7 @@ const htmlFooter = ReactDOMServer.renderToString(
 );
 
 const template = (
+    parameters: object,
     fileFavicon: string,
     fileCss: string,
     htmlHeader: ReactNode,
@@ -123,7 +102,8 @@ const template = (
                 <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
             </div>
             <div id="scripts">
-                <div id="decorator-env" data-src="${fileEnv}"></div>
+                <div id="decorator-env" data-src="${fileEnv +
+                    parameters}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
                 <script
                     src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js"
@@ -139,19 +119,45 @@ const template = (
 };
 
 // Express config
-const pathsForTemplate = [
-    `${basePath}/`,
-    `${basePath}/person`,
-    `${basePath}/person/*`,
-    `${basePath}/bedrift`,
-    `${basePath}/bedrift/*`,
-    `${basePath}/samarbeidspartner`,
-    `${basePath}/samarbeidspartner/*`,
-];
+app.get(`${basePath}/env`, (req, res) => {
+    // Client environment
+    // Obs! Don't expose secrets
+    res.send({
+        ...{
+            ...(req.query && {
+                ...(req.query.language && {
+                    langugage: req.query.language,
+                }),
+                ...(req.query.language && {
+                    langugage: req.query.language,
+                }),
+                ...(req.query.language && {
+                    langugage: req.query.language,
+                }),
+            }),
+            ...(isProduction
+                ? {
+                      baseUrl: process.env.baseUrl,
+                      baseUrlEnonic: process.env.baseUrlEnonic,
+                      innloggingslinjenUrl: process.env.innloggingslinjenUrl,
+                      menypunkter: process.env.menypunkter,
+                      sokeresultat: process.env.sokeresultat,
+                      minsideArbeidsgiverUrl:
+                          process.env.minsideArbeidsgiverUrl,
+                      varselinnboksUrl: process.env.varselinnboksUrl,
+                      dittNavUrl: process.env.dittNavUrl,
+                      loginUrl: process.env.loginUrl,
+                      logoutUrl: process.env.logoutUrl,
+                  }
+                : localEnv),
+        },
+    });
+});
 
-app.get(pathsForTemplate, (req, res) => {
+app.get(`${basePath}/`, (req, res) => {
     res.send(
         template(
+            req.query,
             fileFavicon,
             fileCss,
             htmlHeader,
