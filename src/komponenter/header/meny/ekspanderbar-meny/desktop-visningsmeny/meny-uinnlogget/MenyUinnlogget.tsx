@@ -78,7 +78,7 @@ const MenyUinnlogget = (props: Props) => {
         };
 
         const kbHandler = KbNav.kbHandler(kbNaviNode, kbNaviGroup, setKbNaviNode);
-        const focusHandler = KbNav.focusHandler(kbNaviGraph, setKbNaviNode);
+        const focusHandler = KbNav.focusHandler(kbNaviNode, kbNaviGraph, setKbNaviNode);
 
         document.addEventListener('focusin', focusHandler);
         document.addEventListener('keydown', kbHandler);

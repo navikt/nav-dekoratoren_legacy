@@ -89,9 +89,9 @@ const kbHandler = (node: NaviNode, group: NaviGroup, callback: NodeSetterCallbac
     event.preventDefault();
 };
 
-const focusHandler = (graph: NaviGraphData | undefined, callback: NodeSetterCallback) => (event: FocusEvent) => {
+const focusHandler = (currentNode: NaviNode, graph: NaviGraphData | undefined, callback: NodeSetterCallback) => (event: FocusEvent) => {
     const id = (event.target as HTMLElement).id;
-    if (!id || !graph) {
+    if (!id || !graph || !currentNode || currentNode.id === id) {
         return;
     }
 
