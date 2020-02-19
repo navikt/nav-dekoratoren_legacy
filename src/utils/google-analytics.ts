@@ -1,10 +1,7 @@
 import ReactGA from 'react-ga';
 import { getSessionStorage, NAVHEADER } from './meny-storage-utils';
 
-const trackingIdAndersTest = 'UA-157705574-1';  // TODO: fjern denne :)
-const trackingIdNav = 'UA-9127381-16';
-
-const activeTrackers = ['testtracker', 'navtracker'];
+const trackingId = 'UA-9127381-16';
 
 export enum GACategory {
     Header = 'dekorator-header',
@@ -19,26 +16,16 @@ export type GAEventArgs = {
 }
 
 export const initGA = () => {
-    ReactGA.initialize([{
-        trackingId: trackingIdAndersTest,
-        titleCase: false,
-        gaOptions: {
-            name: 'testtracker',
-            userId: '1337',
-        },
-    }, {
-        trackingId: trackingIdNav,
-        titleCase: false,
-        gaOptions: {
-            name: 'navtracker',
-        },
-    }], {
-        debug: true,
-    });
-    ReactGA.pageview(window.location.pathname + window.location.search, activeTrackers);
+    ReactGA.initialize(trackingId,
+        {
+            titleCase: false,
+            debug: false,
+        }
+    );
+    ReactGA.pageview(window.location.pathname + window.location.search);
 };
 
-export const triggerGaEvent = ({ category, action, label }: GAEventArgs) => {
+export const triggerGaEvent = ({category, action, label}: GAEventArgs) => {
     const rolleValg = getSessionStorage(NAVHEADER);
     const actionFinal = `${rolleValg ? rolleValg + '/' : ''}${action}`;
 
@@ -46,5 +33,5 @@ export const triggerGaEvent = ({ category, action, label }: GAEventArgs) => {
         category: category,
         action: actionFinal.toLowerCase(),
         label: label || undefined,
-    }, activeTrackers);
+    });
 };
