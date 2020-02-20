@@ -14,7 +14,7 @@ export const Header = () => {
 
     useEffect(() => {
         fetchMenypunkter()(dispatch);
-    });
+    }, []);
 
     return (
         <>
