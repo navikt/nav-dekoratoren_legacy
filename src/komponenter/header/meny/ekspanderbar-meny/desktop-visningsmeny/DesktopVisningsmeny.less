@@ -1,16 +1,35 @@
-@import '../../../../../styling-variabler.less';
+@import (reference) '../../../../../styling-variabler.less';
 
 .meny {
-    &__meny-innhold {
-        max-width: @desktopLimitWidth;
+    &__meny-innhold-wrapper {
+        position: absolute;
+        z-index: 1001;
         overflow: hidden;
-        margin-bottom: 0;
         max-height: 0;
-        transition: all 0.7s ease-in-out;
+        max-width: @desktopLimitWidth/3;
+        visibility: hidden;
+        background-color: white;
+        border-bottom-left-radius: @border-radius-base;
+        border-bottom-right-radius: @border-radius-base;
+
+        transition-duration: 0.7s;
+        transition-timing-function: ease-in-out;
+        transition-property: all;
 
         &--aktive {
-            margin-bottom: 2rem;
-            max-height: 40rem;
+            max-height: 60rem;
+            max-width: 100%;
+            visibility: visible;
+        }
+    }
+
+    &__meny-innhold {
+        box-sizing: border-box;
+        padding: 0 @padding-horizontal 2rem @padding-horizontal;
+        overflow: hidden;
+        min-width: @tabletLimitWidth;
+        @media (min-width: @desktopLimitWidth) {
+            width: @desktopLimitWidth;
         }
     }
 
@@ -18,95 +37,21 @@
         display: flex;
     }
 
-    &__hovedSeksjon {
-        flex-grow: 6;
-        justify-content: center;
-        display: -ms-grid;
-        display: grid;
-        -ms-grid-columns: auto auto auto;
-        grid-template-columns: auto auto auto;
-        margin-bottom: 0.2rem;
-    }
+    &__bakgrunn {
+        z-index: 999;
+        visibility: hidden;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        transition-duration: 0.45s;
+        transition-timing-function: ease-in;
+        transition-property: all;
 
-    &__seksjon {
-        padding: 0.75rem 0 0.5rem 2rem;
-
-        li {
-            list-style-type: initial;
-            margin-bottom: 0.3rem;
-
-            .lenke {
-                text-decoration: none;
-                color: black;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-
-                &:focus {
-                    color: white;
-                }
-            }
-        }
-
-        ul {
-            margin: 0;
-        }
-    }
-
-    // this media query can only be read by ie-explorer. ie grid fix
-    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-        &__hovedSeksjon {
-            display: -ms-grid;
-            -ms-grid-columns: 1fr 1fr 1fr;
-        }
-
-        &__seksjon {
-            &:nth-child(2) {
-                -ms-grid-column: 2;
-            }
-
-            &:nth-child(3) {
-                -ms-grid-column: 3;
-            }
-            &:nth-child(4) {
-                -ms-grid-column: 1;
-                -ms-grid-row: 2;
-            }
-            &:nth-child(5) {
-                -ms-grid-column: 2;
-                -ms-grid-row: 2;
-            }
-
-            &:nth-child(6) {
-                -ms-grid-column: 3;
-                -ms-grid-row: 2;
-            }
-            &:nth-child(7) {
-                -ms-grid-column: 1;
-                -ms-grid-row: 3;
-            }
-            &:nth-child(8) {
-                -ms-grid-column: 2;
-                -ms-grid-row: 3;
-            }
-            &:nth-child(9) {
-                -ms-grid-column: 3;
-                -ms-grid-row: 3;
-            }
-            &:nth-child(10) {
-                -ms-grid-column: 1;
-                -ms-grid-row: 4;
-            }
-            &:nth-child(11) {
-                -ms-grid-column: 2;
-                -ms-grid-row: 4;
-            }
-
-            &:nth-child(12) {
-                -ms-grid-column: 3;
-                -ms-grid-row: 4;
-            }
+        &--active {
+            visibility: visible;
+            background-color: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(2px);
         }
     }
 

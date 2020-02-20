@@ -44,7 +44,7 @@ const Mobilmeny = () => {
                         />
                     </div>
                     <div className={mobilClass.element('hoyre-kolonne')}>
-                        <Ekspanderbarmeny />
+                        <Ekspanderbarmeny isMobile={true} />
                         <SokModalToggleknapp
                             className={mobilClass.element('sok')}
                             modalIsOpen={toggleModal}

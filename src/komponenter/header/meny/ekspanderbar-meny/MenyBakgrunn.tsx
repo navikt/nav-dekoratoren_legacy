@@ -1,25 +1,25 @@
 import React from 'react';
-import BEMHelper from '../../../../../../utils/bem';
+import BEMHelper from '../../../../utils/bem';
 
-const Mobilbakgrunn = ({
+const MenyBakgrunn = ({
     toggleWindow,
     backgroundIsActive,
+    className
 }: {
     toggleWindow: () => void;
     backgroundIsActive: boolean;
+    className: string;
 }) => {
-    const cls = BEMHelper('mobilmeny');
+    const cls = BEMHelper(className);
     return (
-        <div className="media-mobil-tablet">
             <div
                 className={cls.element(
-                    'mobilbakgrunn',
+                    'bakgrunn',
                     backgroundIsActive ? 'active' : ''
                 )}
                 onClick={() => toggleWindow()}
             />
-        </div>
     );
 };
 
-export default Mobilbakgrunn;
+export default MenyBakgrunn;

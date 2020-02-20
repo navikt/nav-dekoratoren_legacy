@@ -88,7 +88,7 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
                         </Undertittel>
                     </button>
                 </div>
-                <div className="media-md-tablet login-tablet-desktop">
+                <div className="media-tablet-desktop login-tablet-desktop">
                     <KnappBase
                         className="login-knapp"
                         type="standard"
