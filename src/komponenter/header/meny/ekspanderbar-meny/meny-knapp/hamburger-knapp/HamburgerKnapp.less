@@ -1,50 +1,52 @@
 @import (reference) '~nav-frontend-core/less/core';
 
-@width: 32px;
-@height: 24px;
-@line-spacing: 8px;
-@line-height: 3px;
-
-.hamburger-knapp-linje() {
-  width: @width;
-  height: @line-height;
-  background-color: @navBla;
-  position: absolute;
-}
-
-.hamburger-knapp-container {
-  width: @width;
-  height: @height;
-  padding: 0;
-  position: relative;
-}
-
 .hamburger-knapp {
-  .hamburger-knapp-linje();
-  top: @height/2 - @line-height/2;
-  left: 0;
+    @width: 32px;
+    @height: 24px;
+    @line-spacing: 8px;
+    @line-height: 3px;
+    @midtpunkt: @height/2 - @line-height/2;
 
-  &--open {
-    visibility: hidden;
-    &::before {
-      visibility: visible;
+    &__container {
+        width: @width;
+        height: @height;
+        padding: 0;
+        position: relative;
     }
-    &::after {
-      visibility: visible;
+
+    .hamburger-knapp-linje() {
+        width: @width;
+        height: @line-height;
+        background-color: @navBla;
+        position: absolute;
+        left: 0;
+        transition: all 0.35s ease-in-out;
     }
-  }
 
-  &::before {
-    .hamburger-knapp-linje();
-    content: '';
-    bottom: @line-spacing;
-    left: 0;
-  }
+    &__topp {
+        .hamburger-knapp-linje();
+        top: @midtpunkt - @line-spacing;
 
-  &::after {
-    .hamburger-knapp-linje();
-    content: '';
-    top: @line-spacing;
-    left: 0;
-  }
+        &--open {
+            transform: translateY(@line-spacing) rotateZ(-135deg) scale(0.8);
+        }
+    }
+
+    &__midt {
+        .hamburger-knapp-linje();
+        top: @midtpunkt;
+
+        &--open {
+            transform: scaleX(0);
+        }
+    }
+
+    &__bunn {
+        .hamburger-knapp-linje();
+        top: @midtpunkt + @line-spacing;
+
+        &--open {
+            transform: translateY(-@line-spacing) rotateZ(135deg) scale(0.8);
+        }
+    }
 }
