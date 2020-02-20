@@ -20,18 +20,12 @@ export const setSessionStorage = (key: string, value: MenuValue) => {
     return sessionStorage.setItem(key, value);
 };
 
-export const oppdaterSessionStorage = (
-    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-    valgVerdi: MenuValue,
-    url: string
-): void => {
-    e.preventDefault();
+export const oppdaterSessionStorage = (valgVerdi: MenuValue): void => {
     const headervalg = getSessionStorage(NAVHEADER);
     if (headervalg && headervalg === valgVerdi) {
         return;
     }
     setSessionStorage(NAVHEADER, valgVerdi);
-    // window.location.href = url;
 };
 
 export function selectMenu(

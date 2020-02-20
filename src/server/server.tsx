@@ -153,7 +153,7 @@ app.get(`${basePath}/env`, (req, res) => {
         ...{
             ...(req.query && {
                 language: req.query.language || 'nb',
-                context: req.query.context || 'privatperson',
+                context: (req.query.context || 'privatperson').toUpperCase(),
                 stripped: req.query.stripped || false,
                 redirectToApp: req.query.redirectToApp || false,
                 lvl: req.query.lvl || '3',
