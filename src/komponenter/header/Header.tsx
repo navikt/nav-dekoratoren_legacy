@@ -7,6 +7,7 @@ import Skiplinks from './skiplinks/Skiplinks';
 import Mobilmeny from './meny/Mobilmeny';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import Desktopmeny from './meny/Desktopmeny';
+import { MenuValue } from '../../utils/meny-storage-utils';
 import { oppdaterSessionStorage } from '../../utils/meny-storage-utils';
 import Environment from '../../utils/Environment';
 
@@ -16,7 +17,9 @@ export const Header = () => {
 
     useEffect(() => {
         fetchMenypunkter()(dispatch);
-        oppdaterSessionStorage(Environment.context);
+        if (Environment.context !== MenuValue.IKKEVALGT) {
+            oppdaterSessionStorage(Environment.context);
+        }
     }, []);
 
     return (
