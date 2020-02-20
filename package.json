@@ -6,10 +6,9 @@
     "scripts": {
         "start-server": "node buildfolder/server.js",
         "start-devserver": "nodemon buildfolder/server.js",
-        "start": "npm run setlocal-env && npm run build-dev && cross-env DEVELOPMENT=true npm-run-all -p -r build-and-watch-client-dev build-and-watch-server-dev start-devserver",
-        "setlocal-env": "node ./src/server/setenvironments.js",
+        "start": "npm run build-dev && cross-env DEVELOPMENT=true npm-run-all -p -r build-and-watch-client-dev build-and-watch-server-dev start-devserver",
         "build": "npm run build-client && npm run build-server",
-        "build-dev": "npm run setlocal-env && npm run build-client-dev && npm run build-server-dev",
+        "build-dev": "npm run build-client-dev && npm run build-server-dev",
         "build-client": "cross-env NODE_ENV=production webpack -p --display-error-details --config webpack.client.config.js",
         "build-server": "cross-env NODE_ENV=production webpack -p --display-error-details --config webpack.server.config.js",
         "build-client-dev": "cross-env NODE_ENV=development webpack --display-error-details --config webpack.client.config.js",

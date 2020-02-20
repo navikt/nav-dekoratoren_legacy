@@ -12,6 +12,13 @@ export default class Environment {
     static loginUrl: string;
     static logoutUrl: string;
 
+    // Parameters
+    static language: string;
+    static context: string;
+    static stripped: string;
+    static redirectToApp: string;
+    static lvl: string;
+
     static settEnv = (result: any) => {
         Environment.baseUrl = result.baseUrl;
         Environment.baseUrlEnonic = result.baseUrlEnonic;
@@ -23,6 +30,13 @@ export default class Environment {
         Environment.dittNavUrl = result.dittNavUrl;
         Environment.loginUrl = result.loginUrl;
         Environment.logoutUrl = result.logoutUrl;
+
+        // Parameters
+        Environment.language = result.language;
+        Environment.context = result.context;
+        Environment.stripped = result.stripped;
+        Environment.redirectToApp = result.redirectToApp;
+        Environment.lvl = result.lvl;
     };
 }
 
@@ -72,16 +86,3 @@ export const erDev =
     verifyWindowObj() &&
     process.env.NODE_ENV === 'development' &&
     window.location.origin.toLowerCase().includes('localhost');
-
-export const localEnv = {
-    baseUrl: 'http://localhost:3000',
-    baseUrlEnonic: 'https://www-q1.nav.no',
-    innloggingslinjenUrl: 'http://localhost:3000/innloggingslinje-api/auth',
-    menypunkter: `http://localhost:8088/dekoratoren/api/get/menyvalg`,
-    minsideArbeidsgiverUrl: `https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/`,
-    sokeresultat: `http://localhost:8088/dekoratoren/api/get/sokeresultat`,
-    varselinnboksUrl: `http://localhost:8088/person/varselinnboks`,
-    dittNavUrl: `http://localhost:8088/person/dittnav/`,
-    loginUrl: '#',
-    logoutUrl: '#',
-};
