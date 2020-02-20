@@ -104,7 +104,7 @@ const template = (
                 <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
             </div>
             <div id="scripts">
-                <div id="decorator-env" data-src="${fileEnv}?${reqQuery}"></div>
+                <div id="decorator-env" data-src="${fileEnv}${reqQuery}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
                 <script
                     src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js"
@@ -132,8 +132,10 @@ const pathsForTemplate = [
 ];
 
 app.get(pathsForTemplate, (req, res) => {
-    const i = req.url.indexOf('?');
-    const reqQuery = req.url.substr(i + 1);
+    const reqQuery = Object.keys(req.query).length
+        ? `?${req.url.split('?')[1]}`
+        : '';
+
     res.send(
         template(
             reqQuery,
