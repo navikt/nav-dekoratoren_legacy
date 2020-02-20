@@ -7,8 +7,6 @@ import Skiplinks from './skiplinks/Skiplinks';
 import Mobilmeny from './meny/Mobilmeny';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import Desktopmeny from './meny/Desktopmeny';
-import { oppdaterSessionStorage } from '../../utils/meny-storage-utils';
-import Environment from '../../utils/Environment';
 
 export const Header = () => {
     const dispatch = useDispatch();
