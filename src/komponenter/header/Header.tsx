@@ -17,7 +17,7 @@ export const Header = () => {
     useEffect(() => {
         fetchMenypunkter()(dispatch);
         oppdaterSessionStorage(Environment.context);
-    });
+    }, []);
 
     return (
         <>
