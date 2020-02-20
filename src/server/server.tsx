@@ -121,6 +121,7 @@ const template = (
 
 // Express config
 const pathsForTemplate = [
+    `${basePath}`,
     `${basePath}/`,
     `${basePath}/person`,
     `${basePath}/person/*`,
@@ -153,7 +154,7 @@ app.get(`${basePath}/env`, (req, res) => {
         ...{
             ...(req.query && {
                 language: req.query.language || 'nb',
-                context: (req.query.context || 'privatperson').toUpperCase(),
+                context: (req.query.context || 'ikkevalgt').toUpperCase(),
                 stripped: req.query.stripped || false,
                 redirectToApp: req.query.redirectToApp || false,
                 lvl: req.query.lvl || '3',
