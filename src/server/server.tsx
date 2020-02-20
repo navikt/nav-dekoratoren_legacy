@@ -26,9 +26,9 @@ const defaultAppUrl = `http://localhost:8088` + basePath;
 const localhost = 'http://localhost:8088';
 
 // Mock
+import mockEnv from './mock/env';
 import mockMenu from './mock/menu.json';
 import mockSok from './mock/sokeresultat.json';
-import { localEnv } from '../utils/Environment';
 import LanguageProvider from '../provider/Language-provider';
 
 // Cache setup
@@ -172,7 +172,7 @@ app.get(`${basePath}/env`, (req, res) => {
                       loginUrl: process.env.loginUrl,
                       logoutUrl: process.env.logoutUrl,
                   }
-                : localEnv),
+                : mockEnv),
         },
     });
 });

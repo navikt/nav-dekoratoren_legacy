@@ -86,16 +86,3 @@ export const erDev =
     verifyWindowObj() &&
     process.env.NODE_ENV === 'development' &&
     window.location.origin.toLowerCase().includes('localhost');
-
-export const localEnv = {
-    baseUrl: 'http://localhost:3000',
-    baseUrlEnonic: 'https://www-q1.nav.no',
-    innloggingslinjenUrl: 'http://localhost:3000/innloggingslinje-api/auth',
-    menypunkter: `http://localhost:8088/dekoratoren/api/get/menyvalg`,
-    minsideArbeidsgiverUrl: `https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/`,
-    sokeresultat: `http://localhost:8088/dekoratoren/api/get/sokeresultat`,
-    varselinnboksUrl: `http://localhost:8088/person/varselinnboks`,
-    dittNavUrl: `http://localhost:8088/person/dittnav/`,
-    loginUrl: '#',
-    logoutUrl: '#',
-};
