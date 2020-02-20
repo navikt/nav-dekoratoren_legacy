@@ -9,10 +9,10 @@ import { erDev, verifyWindowObj } from './utils/Environment';
 import Footer from './komponenter/footer/Footer';
 import { fetchEnv } from './utils/Environment';
 import { initGA } from './utils/google-analytics';
-import './index.less';
-import * as es6promise from 'es6-promise';
 import LanguageProvider from './provider/Language-provider';
 import Header from './komponenter/header/Header';
+import * as es6promise from 'es6-promise';
+import './index.less';
 
 const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];
