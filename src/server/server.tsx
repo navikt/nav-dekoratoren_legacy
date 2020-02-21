@@ -64,6 +64,7 @@ app.use(function(req, res, next) {
     next();
 });
 
+// Templates
 const htmlHeader = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
         <LanguageProvider>
@@ -71,6 +72,7 @@ const htmlHeader = ReactDOMServer.renderToString(
         </LanguageProvider>
     </ReduxProvider>
 );
+
 const htmlFooter = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
         <Footer />
@@ -241,7 +243,7 @@ const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)
 );
 
-function shutdown() {
+const shutdown = () => {
     console.log('Retrived signal terminate , shutting down node service');
 
     mainCache.flushAll();
@@ -256,7 +258,7 @@ function shutdown() {
         console.log('Closed out remaining connections');
         process.exit(0);
     });
-}
+};
 
 process.on('SIGTERM', shutdown);
 process.on('SIGINT', shutdown);
