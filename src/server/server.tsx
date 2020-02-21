@@ -29,8 +29,8 @@ const app = express();
 const PORT = 8088;
 
 // Default vars
-const defaultSearchUrl = `https://www.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2`;
-const defaultMenuUrl = `http://localhost:8080/navno/_/service/no.nav.navno/menu`;
+const defaultSearchUrl = `https://www.nav.no/_/service/navno.nav.no.search/search2`;
+const defaultMenuUrl = `https://www.nav.no/_/service/no.nav.navno/menu`;
 const defaultAppUrl = `http://localhost:8088${basePath}`;
 const localhost = 'http://localhost:8088';
 
