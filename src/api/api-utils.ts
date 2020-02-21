@@ -17,6 +17,7 @@ export function fetchThenDispatch<T>(
             const data = await fetchFunction();
             sendResultatTilDispatch<T>(dispatch, ok)(data);
         } catch (e) {
+            console.log(e);
             handterFeil(dispatch, feilet)(e);
         }
     };
