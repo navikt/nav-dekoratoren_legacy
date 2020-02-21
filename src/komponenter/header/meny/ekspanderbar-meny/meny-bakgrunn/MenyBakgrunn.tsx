@@ -1,5 +1,6 @@
 import React from 'react';
-import BEMHelper from '../../../../utils/bem';
+import BEMHelper from '../../../../../utils/bem';
+import './MenyBakgrunn.less';
 
 const MenyBakgrunn = ({
     toggleWindow,

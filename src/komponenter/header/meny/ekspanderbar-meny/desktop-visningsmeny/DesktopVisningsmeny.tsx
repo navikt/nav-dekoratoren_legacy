@@ -18,12 +18,14 @@ interface Props {
 export const DesktopVisningsmeny = (props: Props) => {
     const cls = BEMHelper(props.classname);
     return (
-        <div className={cls.element('seksjoner')}>
-            <MenyUinnlogget
-                classname={props.classname}
-                menyLenker={props.fellesmeny}
-                isOpen={props.isOpen}
-            />
+        <div className="media-lg-desktop media-mobil-tablet menyvisning-desktop">
+            <div className={cls.element('seksjoner')}>
+                <MenyUinnlogget
+                    classname={props.classname}
+                    menyLenker={props.fellesmeny}
+                    isOpen={props.isOpen}
+                />
+            </div>
         </div>
     );
 };

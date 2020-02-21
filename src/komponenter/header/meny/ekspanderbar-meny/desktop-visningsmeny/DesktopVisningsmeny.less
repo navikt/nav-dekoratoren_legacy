@@ -37,24 +37,6 @@
         display: flex;
     }
 
-    &__bakgrunn {
-        z-index: 999;
-        visibility: hidden;
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        left: 0;
-        transition-duration: 0.45s;
-        transition-timing-function: ease-in;
-        transition-property: all;
-
-        &--active {
-            visibility: visible;
-            background-color: rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(2px);
-        }
-    }
-
     &__minSideSeksjon {
         flex-grow: 1;
         margin: 0 0 0.2rem 0.5rem;

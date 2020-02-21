@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import BEMHelper from '../../../utils/bem';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import Ekspanderbarmeny from './ekspanderbar-meny/Ekspanderbarmeny';
+import MobilEkspanderbarmeny from './ekspanderbar-meny/MobilEkspanderbarmeny';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import SokModal from './sok/sok-innhold/sok-modal/Sokmodal';
 import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
-import './Mobilmeny.less';
+import './MobilMenylinje.less';
 import { verifyWindowObj } from '../../../utils/Environment';
 import { tabletview } from '../../../styling-mediaquery';
 import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
 
 const mobilClass = BEMHelper('mobilmeny');
 
-const Mobilmeny = () => {
+const MobilMenylinje = () => {
     const [clickedModal, setClickedModal] = useState<boolean>(false);
 
     useEffect(() => {
@@ -44,7 +44,7 @@ const Mobilmeny = () => {
                         />
                     </div>
                     <div className={mobilClass.element('hoyre-kolonne')}>
-                        <Ekspanderbarmeny isMobile={true} />
+                        <MobilEkspanderbarmeny />
                         <SokModalToggleknapp
                             className={mobilClass.element('sok')}
                             modalIsOpen={toggleModal}
@@ -64,4 +64,4 @@ const Mobilmeny = () => {
     );
 };
 
-export default Mobilmeny;
+export default MobilMenylinje;

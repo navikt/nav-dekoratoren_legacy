@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import Ekspanderbarmeny from './ekspanderbar-meny/Ekspanderbarmeny';
-import Mobilmeny from './Mobilmeny';
+import Ekspanderbarmeny from './ekspanderbar-meny/MobilEkspanderbarmeny';
+import MobilMenylinje from './MobilMenylinje';
 import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
 
 const shallowWithProps = () => {
-    return shallow(<Mobilmeny />);
+    return shallow(<MobilMenylinje />);
 };
 
 describe('<Mobilmeny>', () => {

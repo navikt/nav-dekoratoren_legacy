@@ -4,33 +4,35 @@ import { Language } from '../../../reducer/language-duck';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import Ekspanderbarmeny from './ekspanderbar-meny/Ekspanderbarmeny';
 import Sok from './sok/Sok';
 import MinsideLenke from './minside-lenke/MinsideLenke';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import Varselbjelle from './varsel/Varselbjelle';
 import VarselVisning from './varsel/varselvisning/Varselvisning';
-import './Desktopmeny.less';
+import './DesktopMenylinje.less';
+import Ekspanderbarmeny from './ekspanderbar-meny/Ekspanderbarmeny';
+import DesktopVisningsmeny from './ekspanderbar-meny/desktop-visningsmeny/DesktopVisningsmeny';
+import { selectMenu } from '../../../utils/meny-storage-utils';
 
-const desktopmeny = BEMHelper('desktopmeny');
+const desktopMenylinje = BEMHelper('desktopmeny');
 
 interface Props {
     language: Language;
 }
 
-const Desktopmeny = ({ language }: Props) => {
+const DesktopMenylinje = ({ language }: Props) => {
     return (
-        <nav className={desktopmeny.className} aria-label="Hovedmeny">
-            <div className={desktopmeny.element('content')}>
-                <div className={desktopmeny.element('elementer')}>
+        <nav className={desktopMenylinje.className} aria-label="Hovedmeny">
+            <div className={desktopMenylinje.element('content')}>
+                <div className={desktopMenylinje.element('elementer')}>
                     <NavLogoRod
                         width="88"
                         height="88"
-                        classname={desktopmeny.element('nav-brand')}
+                        classname={desktopMenylinje.element('nav-brand')}
                     />
                     {language === Language.NORSK ||
                     language === Language.ENGELSK ? (
-                        <Ekspanderbarmeny isMobile={false} />
+                        <Ekspanderbarmeny />
                     ) : null}
                     <Sok />
                     <InnloggingsstatusProvider>
@@ -58,4 +60,4 @@ const Desktopmeny = ({ language }: Props) => {
     );
 };
 
-export default Desktopmeny;
+export default DesktopMenylinje;

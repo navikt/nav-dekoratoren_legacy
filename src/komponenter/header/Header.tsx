@@ -5,9 +5,9 @@ import { AppState } from '../../reducer/reducer';
 import { Language } from '../../reducer/language-duck';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
-import Mobilmeny from './meny/Mobilmeny';
+import MobilMenylinje from './meny/MobilMenylinje';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
-import Desktopmeny from './meny/Desktopmeny';
+import DesktopMenylinje from './meny/DesktopMenylinje';
 
 interface StateProps {
     language: Language;
@@ -31,11 +31,11 @@ export const Header = ({ hentMenypunkter, language }: HeaderProps) => {
             <Skiplinks />
             <header className="siteheader">
                 <div className="media-sm-mobil mobil-meny">
-                    <Mobilmeny />
+                    <MobilMenylinje />
                 </div>
                 <div className="media-tablet-desktop tablet-desktop-meny">
                     {language === Language.NORSK && <Arbeidsflatemeny />}
-                    <Desktopmeny language={language} />
+                    <DesktopMenylinje language={language} />
                 </div>
             </header>
         </>

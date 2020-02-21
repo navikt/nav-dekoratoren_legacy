@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import DesktopMeny from './Desktopmeny';
+import DesktopMeny from './DesktopMenylinje';
 import { Language } from '../../../reducer/language-duck';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import Ekspanderbarmeny from './ekspanderbar-meny/Ekspanderbarmeny';
+import Ekspanderbarmeny from './ekspanderbar-meny/MobilEkspanderbarmeny';
 import Sok from './sok/Sok';
 
 const shallowWithProps = (language: Language) => {
