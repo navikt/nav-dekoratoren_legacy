@@ -20,7 +20,6 @@ export const setUpMock = async () => {
     });
 
     console.log('Mock data enabled');
-    fetchMock.get(Environment.innloggingslinjenUrl, innloggingsstatusResponse);
 
     fetchMock.get(
         `${Environment.varselinnboksUrl}/varsler(.*)`,

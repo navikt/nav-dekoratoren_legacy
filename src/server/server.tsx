@@ -156,7 +156,7 @@ app.get(`${basePath}/env`, (req, res) => {
                 context: req.query.context || 'privatperson',
                 stripped: req.query.stripped || false,
                 redirectToApp: req.query.redirectToApp || false,
-                lvl: req.query.lvl || '3',
+                lvl: req.query.lvl || 'Level3',
             }),
             ...(isProduction
                 ? {
