@@ -233,17 +233,13 @@ const fetchSearchResults = (req: any, res: any) => {
     const uri = `${process.env.URL_API_SOK || defaultSearchUrl}?ord=${
         req.query.ord
     }`;
-    if (isProduction) {
-        request({ method: 'GET', uri }, (error, response, body) => {
-            if (!error && response.statusCode === 200) {
-                res.send(body);
-            } else {
-                res.send(mockSok);
-            }
-        });
-    } else {
-        res.send(mockSok);
-    }
+    request({ method: 'GET', uri }, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+            res.send(body);
+        } else {
+            res.send(mockSok);
+        }
+    });
 };
 
 const server = app.listen(PORT, () =>
