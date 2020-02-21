@@ -6,7 +6,11 @@ import { verifyWindowObj } from '../../../../utils/Environment';
 import { desktopview } from '../../../../styling-mediaquery';
 import { Status } from '../../../../api/api';
 import { MenuValue, selectMenu } from '../../../../utils/meny-storage-utils';
-import { dataInitState, Meny, MenyPunkter } from '../../../../reducer/menu-duck';
+import {
+    dataInitState,
+    Meny,
+    MenyPunkter,
+} from '../../../../reducer/menu-duck';
 import { Language } from '../../../../reducer/language-duck';
 import Menyknapp from './meny-knapp/Menyknapp';
 import Mobilbakgrunn from './mobil-visningsmeny/mobil-innhold/Mobilbakgrunn';
@@ -42,7 +46,10 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
     }
 
     menutoggle = () => {
-        triggerGaEvent({category: GACategory.Header, action: `meny-${this.state.clicked ? 'close' : 'open'}`});
+        triggerGaEvent({
+            category: GACategory.Header,
+            action: `meny-${this.state.clicked ? 'close' : 'open'}`,
+        });
         this.setState({
             clicked: !this.state.clicked,
         });
@@ -127,10 +134,6 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                                     />
                                 </div>
                             </div>
-                            <Mobilbakgrunn
-                                toggleWindow={this.menutoggle}
-                                backgroundIsActive={this.state.clicked}
-                            />
                         </>
                     ) : null}
                 </div>

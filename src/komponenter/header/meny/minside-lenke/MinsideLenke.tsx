@@ -44,7 +44,11 @@ export const MinsideLenke = ({
                 <LenkeMedGA
                     href={lenkeurl}
                     tabIndex={tabindex ? 0 : -1}
-                    gaEventArgs={{category: GACategory.Header, action: 'minside', label: lenkeurl}}
+                    gaEventArgs={{
+                        category: GACategory.Header,
+                        action: 'minside',
+                        label: lenkeurl,
+                    }}
                 >
                     {lenketekst}
                 </LenkeMedGA>

@@ -6,7 +6,10 @@ import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import BEMHelper from '../../../utils/bem';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
-import { MenuValue, oppdaterSessionStorage } from '../../../utils/meny-storage-utils';
+import {
+    MenuValue,
+    oppdaterSessionStorage,
+} from '../../../utils/meny-storage-utils';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import './MobilarbeidsflateValg.less';
 import { GACategory } from '../../../utils/google-analytics';
@@ -23,6 +26,14 @@ interface StateProps {
 interface DispatchProps {
     settArbeidsflate: () => void;
 }
+
+const oppdatereArbeidsflateValg = (
+    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
+    valgVerdi: MenuValue
+) => {
+    e.preventDefault();
+    oppdaterSessionStorage(valgVerdi);
+};
 
 const MobilarbeidsflateValg = ({
     arbeidsflate,
@@ -43,15 +54,14 @@ const MobilarbeidsflateValg = ({
                             <LenkeMedGA
                                 href={lenke.url}
                                 onClick={event => {
-                                    oppdaterSessionStorage(
-                                        event,
-                                        lenke.key,
-                                        lenke.url
-                                    );
+                                    oppdatereArbeidsflateValg(event, lenke.key);
                                     settArbeidsflate();
                                 }}
                                 tabIndex={tabindex ? 0 : -1}
-                                gaEventArgs={{category: GACategory.Header, action: 'arbeidsflate-valg'}}
+                                gaEventArgs={{
+                                    category: GACategory.Header,
+                                    action: 'arbeidsflate-valg',
+                                }}
                             >
                                 <HoyreChevron />
                                 <Undertittel>

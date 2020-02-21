@@ -14,6 +14,7 @@ import Varselbjelle from '../../varsel/Varselbjelle';
 import VarselvisningMobil from '../../varsel/varselvisning/VarselvisningMobil';
 import MinsideLenke from '../../minside-lenke/MinsideLenke';
 import './MobilVisningsmeny.less';
+import KnappBase from 'nav-frontend-knapper';
 
 interface VisningsmenyProps {
     classname: string;
@@ -57,6 +58,16 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
             });
         }
     }
+
+    hideBackgroundOverflow = (
+        setOverflowHidden: boolean,
+        viewIsMobile: string
+    ) => {
+        document.body.style.overflow =
+            setOverflowHidden && false && viewIsMobile.includes('mobilmeny')
+                ? 'hidden'
+                : 'inherit';
+    };
 
     lukkMenyene = () => {
         this.props.togglemenu();
@@ -121,14 +132,14 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
             lang,
         } = this.props;
         const menyClass = BEMHelper(classname);
-
+        this.hideBackgroundOverflow(menuIsOpen, classname);
         return (
             <>
                 <section className={menyClass.element('startmeny')}>
-                    <Topseksjon
+                    {/*<Topseksjon
                         lukkmeny={togglemenu}
                         tabindex={this.hovedseksjonTabIndex()}
-                    />
+                    />*/}
                     <div
                         className={menyClass.element(
                             'minside-rad',

@@ -22,7 +22,10 @@ const Mobilmeny = () => {
     }, []);
 
     const toggleModal = () => {
-        triggerGaEvent({category: GACategory.Header, action: `mobilsøk-${clickedModal ? 'close' : 'open'}`});
+        triggerGaEvent({
+            category: GACategory.Header,
+            action: `mobilsøk-${clickedModal ? 'close' : 'open'}`,
+        });
         setClickedModal(!clickedModal);
     };
 

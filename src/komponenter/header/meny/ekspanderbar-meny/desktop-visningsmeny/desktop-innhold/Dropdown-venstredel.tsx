@@ -50,7 +50,12 @@ const Menylenker = ({ menygruppe, tabindex }: MenylenkerProps) => (
     <ul>
         {menygruppe.children.map((lenke: MenySeksjon, index: number) => {
             return (
-                <DropdownLenke key={index} lenke={lenke} menyGruppeNavn={menygruppe.displayName} tabindex={tabindex} />
+                <DropdownLenke
+                    key={index}
+                    lenke={lenke}
+                    menyGruppeNavn={menygruppe.displayName}
+                    tabindex={tabindex}
+                />
             );
         })}
     </ul>

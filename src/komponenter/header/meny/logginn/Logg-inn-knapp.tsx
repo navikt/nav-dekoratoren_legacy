@@ -4,7 +4,10 @@ import { AppState } from '../../../../reducer/reducer';
 import KnappBase from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
-import Environment, { erNavDekoratoren, verifyWindowObj } from '../../../../utils/Environment';
+import Environment, {
+    erNavDekoratoren,
+    verifyWindowObj,
+} from '../../../../utils/Environment';
 import LogginnIkon from '../../../../ikoner/mobilmeny/LogginnIkon';
 import Tekst from '../../../../tekster/finn-tekst';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
@@ -58,7 +61,10 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
         const path = erNavDekoratoren() ? getPath() : '/person/dittnav';
         const login = `${Environment.loginUrl}/login?redirect=${Environment.baseUrl}${path}`;
         const erInnlogget = this.props.erInnlogget;
-        triggerGaEvent({category: GACategory.Header, action: erInnlogget ? 'logg-ut' : 'logg-inn'});
+        triggerGaEvent({
+            category: GACategory.Header,
+            action: erInnlogget ? 'logg-ut' : 'logg-inn',
+        });
 
         if (process.env.NODE_ENV === 'production') {
             return erInnlogget
