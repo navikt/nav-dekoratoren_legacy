@@ -26,6 +26,4 @@ const VarselinnboksProvider = (props: Props) => {
     return <Datalaster avhengigheter={[varsler]}>{props.children}</Datalaster>;
 };
 
-``;
-
 export default VarselinnboksProvider;
