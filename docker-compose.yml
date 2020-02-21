@@ -58,15 +58,15 @@ services:
 #    ports:
 #      - "8088:8088"
 #    environment:
-#      URL_APP_BASE: "http://localhost:8100/dekoratoren"
-#      baseUrl: 'http://localhost:8100'
+#      URL_APP_BASE: "http://localhost:8088/dekoratoren"
+#      baseUrl: 'http://localhost:8088'
 #      baseUrlEnonic: 'https://www-q1.nav.no'
 #      innloggingslinjenUrl: 'http://localhost:8200/innloggingslinje-api/auth'
 #      loginUrl: 'http://localhost:5000'
 #      logoutUrl: 'http://localhost:5000/?logout'
-#      menypunkter: 'http://localhost:8100/dekoratoren/api/get/menyvalg'
+#      menypunkter: 'http://localhost:8088/dekoratoren/api/get/menyvalg'
 #      minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/'
-#      sokeresultat: 'http://localhost:8100/dekoratoren/api/get/sokeresultat'
+#      sokeresultat: 'http://localhost:8088/dekoratoren/api/get/sokeresultat'
 #      varselinnboksUrl: 'https://www-q0.nav.no/person/varselinnboks'
 
 networks:
