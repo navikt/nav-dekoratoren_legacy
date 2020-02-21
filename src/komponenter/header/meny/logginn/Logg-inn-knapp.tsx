@@ -52,7 +52,7 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
         const { erInnlogget } = this.props;
         const appUrl = location.origin + location.pathname;
         const loginUrl = `${
-            (Environment.redirectToApp || erNavDekoratoren) && verifyWindowObj()
+            Environment.redirectToApp || erNavDekoratoren
                 ? `${Environment.loginUrl}/login?redirect=${appUrl}`
                 : `${Environment.loginUrl}/login?redirect=${Environment.dittNavUrl}`
         }&level=${Environment.level}`;
