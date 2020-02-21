@@ -197,43 +197,35 @@ app.get(`${basePath}/api/get/menyvalg`, (req, res) => {
 });
 
 const fetchmenuOptions = (res: any) => {
-    request(
-        { method: 'GET', uri: process.env.URL_API_MENY || defaultMenuUrl },
-        (error, response, body) => {
-            if (!error && response.statusCode === 200 && body.length > 2) {
-                mainCache.set(mainCacheKey, body, 100);
-                backupCache.set(backupCacheKey, body, 0);
-                res.send(body);
-            } else {
-                backupCache.get(backupCacheKey, (err, response) => {
-                    if (!err && response !== undefined) {
-                        mainCache.set(mainCacheKey, response, 100);
-                        res.send(response);
-                    } else {
-                        const serverErr = {
-                            fetchresponse: error,
-                            cacheresponse: err,
-                        };
-                        res.send(mockMenu);
-                        mainCache.set(
-                            mainCacheKey,
-                            mockMenu,
-                            (err, success) => {
-                                if (!err && success) {
-                                    console.log(
-                                        'maincache updated successfully'
-                                    );
-                                } else {
-                                    console.log('mainCache-set error :', err);
-                                    console.log('server error:', serverErr);
-                                }
-                            }
-                        );
-                    }
-                });
-            }
+    const uri = process.env.URL_API_MENY || defaultMenuUrl;
+    request({ method: 'GET', uri }, (error, response, body) => {
+        if (!error && response.statusCode === 200 && body.length > 2) {
+            mainCache.set(mainCacheKey, body, 100);
+            backupCache.set(backupCacheKey, body, 0);
+            res.send(body);
+        } else {
+            backupCache.get(backupCacheKey, (err, response) => {
+                if (!err && response !== undefined) {
+                    mainCache.set(mainCacheKey, response, 100);
+                    res.send(response);
+                } else {
+                    const serverErr = {
+                        fetchresponse: error,
+                        cacheresponse: err,
+                    };
+                    res.send(mockMenu);
+                    mainCache.set(mainCacheKey, mockMenu, (err, success) => {
+                        if (!err && success) {
+                            console.log('maincache updated successfully');
+                        } else {
+                            console.log('mainCache-set error :', err);
+                            console.log('server error:', serverErr);
+                        }
+                    });
+                }
+            });
         }
-    );
+    });
 };
 
 app.use(`${basePath}/`, express.static(buildPath));
