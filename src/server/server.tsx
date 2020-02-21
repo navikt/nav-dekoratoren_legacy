@@ -185,6 +185,7 @@ app.get(`${basePath}/api/get/sokeresultat`, (req, res) => {
         }
     });
 });
+
 app.get(`${basePath}/api/get/menyvalg`, (req, res) => {
     mainCache.get(mainCacheKey, (err, response) => {
         if (!err && response !== undefined) {
