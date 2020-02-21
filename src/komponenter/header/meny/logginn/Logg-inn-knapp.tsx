@@ -50,11 +50,12 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
 
     handleButtonClick = () => {
         const { erInnlogget } = this.props;
+        const appUrl = location.origin + location.pathname;
         const loginUrl = `${
             (Environment.redirectToApp || erNavDekoratoren) && verifyWindowObj()
-                ? `${Environment.loginUrl}/login?redirect=${window.location.href}`
+                ? `${Environment.loginUrl}/login?redirect=${appUrl}`
                 : `${Environment.loginUrl}/login?redirect=${Environment.dittNavUrl}`
-        }&level=${Environment.lvl}`;
+        }&level=${Environment.level}`;
 
         triggerGaEvent({
             category: GACategory.Header,
