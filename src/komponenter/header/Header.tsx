@@ -1,6 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from '../../redux/dispatch-type';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../reducer/reducer';
 import { Language } from '../../reducer/language-duck';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
@@ -9,21 +8,12 @@ import Mobilmeny from './meny/Mobilmeny';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import Desktopmeny from './meny/Desktopmeny';
 
-interface StateProps {
-    language: Language;
-}
+export const Header = () => {
+    const dispatch = useDispatch();
+    const language = useSelector((state: AppState) => state.language.language);
 
-interface DispatchProps {
-    hentMenypunkter?: () => Promise<void>;
-}
-
-type HeaderProps = StateProps & DispatchProps;
-
-export const Header = ({ hentMenypunkter, language }: HeaderProps) => {
-    React.useEffect(() => {
-        if (hentMenypunkter) {
-            hentMenypunkter();
-        }
+    useEffect(() => {
+        fetchMenypunkter()(dispatch);
     }, []);
 
     return (
@@ -42,12 +32,4 @@ export const Header = ({ hentMenypunkter, language }: HeaderProps) => {
     );
 };
 
-const mapStateToProps = (state: AppState): StateProps => ({
-    language: state.language.language,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    hentMenypunkter: () => fetchMenypunkter()(dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

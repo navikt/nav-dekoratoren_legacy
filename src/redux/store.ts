@@ -2,25 +2,13 @@ import { createStore, compose, Store } from 'redux';
 import { reducer, AppState } from '../reducer/reducer';
 
 function create() {
-    /* tslint:disable:no-any */
-    let useExtension = false;
-    let composer = compose;
+    const composeEnhancers = (
+        (typeof window !== 'undefined' &&
+            (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+        compose
+    )();
 
-    if (typeof window !== 'undefined') {
-        useExtension =
-            (window as any).__REDUX_DEVTOOLS_EXTENSION__ !== undefined;
-
-        const composer = useExtension
-            ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-            : compose;
-    } else {
-        const useExtension = false;
-        composer = compose;
-    }
-
-    const composed = composer();
-
-    return composed(createStore)(reducer, {});
+    return composeEnhancers(createStore)(reducer, {});
 }
 
 let store: Store<AppState>;
