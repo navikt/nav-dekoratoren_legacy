@@ -2,7 +2,6 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'isomorphic-fetch';
-import FS from 'fs';
 import NodeCache from 'node-cache';
 import express from 'express';
 import React, { ReactNode } from 'react';
@@ -10,8 +9,8 @@ import ReactDOMServer from 'react-dom/server';
 import request from 'request';
 import { Provider as ReduxProvider } from 'react-redux';
 import Footer from '../komponenter/footer/Footer';
+import Header from '../komponenter/header/Header';
 import getStore from './../redux/store';
-import Head from '../Head';
 
 const basePath = '/dekoratoren';
 const isProduction = process.env.NODE_ENV === 'production';
@@ -27,9 +26,10 @@ const defaultAppUrl = `http://localhost:8088` + basePath;
 const localhost = 'http://localhost:8088';
 
 // Mock
+import mockEnv from './mock/env';
 import mockMenu from './mock/menu.json';
 import mockSok from './mock/sokeresultat.json';
-import { localEnv } from '../utils/Environment';
+import LanguageProvider from '../provider/Language-provider';
 
 // Cache setup
 const mainCacheKey = 'navno-menu';
@@ -37,28 +37,6 @@ const backupCacheKey = 'navno-menu-backup';
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
-// Client environment
-// Obs! Don't expose secrets
-const clientEnv = isProduction
-    ? {
-          baseUrl: process.env.baseUrl,
-          baseUrlEnonic: process.env.baseUrlEnonic,
-          innloggingslinjenUrl: process.env.innloggingslinjenUrl,
-          menypunkter: process.env.menypunkter,
-          sokeresultat: process.env.sokeresultat,
-          minsideArbeidsgiverUrl: process.env.minsideArbeidsgiverUrl,
-          varselinnboksUrl: process.env.varselinnboksUrl,
-          dittNavUrl: process.env.dittNavUrl,
-          loginUrl: process.env.loginUrl,
-          logoutUrl: process.env.logoutUrl,
-      }
-    : localEnv;
-
-if (isProduction) {
-    FS.writeFile(`${buildPath}/env.json`, JSON.stringify(clientEnv), err =>
-        console.error(err)
-    );
-}
 // Cors
 app.disable('x-powered-by');
 app.use(function(req, res, next) {
@@ -73,14 +51,16 @@ app.use(function(req, res, next) {
 
 // Server-side rendering
 const store = getStore();
-const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/env.json`;
+const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/env`;
 const fileCss = `${process.env.URL_APP_BASE || defaultAppUrl}/css/client.css`;
 const fileScript = `${process.env.URL_APP_BASE || defaultAppUrl}/client.js`;
 const fileFavicon = `${process.env.baseUrl || localhost}${favicon}`;
 
 const htmlHeader = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
-        <Head />
+        <LanguageProvider>
+            <Header />
+        </LanguageProvider>
     </ReduxProvider>
 );
 const htmlFooter = ReactDOMServer.renderToString(
@@ -90,6 +70,7 @@ const htmlFooter = ReactDOMServer.renderToString(
 );
 
 const template = (
+    reqQuery: string,
     fileFavicon: string,
     fileCss: string,
     htmlHeader: ReactNode,
@@ -123,7 +104,7 @@ const template = (
                 <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
             </div>
             <div id="scripts">
-                <div id="decorator-env" data-src="${fileEnv}"></div>
+                <div id="decorator-env" data-src="${fileEnv}?${reqQuery}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
                 <script
                     src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js"
@@ -150,8 +131,11 @@ const pathsForTemplate = [
 ];
 
 app.get(pathsForTemplate, (req, res) => {
+    const i = req.url.indexOf('?');
+    const reqQuery = req.url.substr(i + 1);
     res.send(
         template(
+            reqQuery,
             fileFavicon,
             fileCss,
             htmlHeader,
@@ -160,6 +144,37 @@ app.get(pathsForTemplate, (req, res) => {
             fileScript
         )
     );
+});
+
+app.get(`${basePath}/env`, (req, res) => {
+    // Client environment
+    // Obs! Don't expose secrets
+    res.send({
+        ...{
+            ...(req.query && {
+                language: req.query.language || 'nb',
+                context: req.query.context || 'privatperson',
+                stripped: req.query.stripped || false,
+                redirectToApp: req.query.redirectToApp || false,
+                lvl: req.query.lvl || '3',
+            }),
+            ...(isProduction
+                ? {
+                      baseUrl: process.env.baseUrl,
+                      baseUrlEnonic: process.env.baseUrlEnonic,
+                      innloggingslinjenUrl: process.env.innloggingslinjenUrl,
+                      menypunkter: process.env.menypunkter,
+                      sokeresultat: process.env.sokeresultat,
+                      minsideArbeidsgiverUrl:
+                          process.env.minsideArbeidsgiverUrl,
+                      varselinnboksUrl: process.env.varselinnboksUrl,
+                      dittNavUrl: process.env.dittNavUrl,
+                      loginUrl: process.env.loginUrl,
+                      logoutUrl: process.env.logoutUrl,
+                  }
+                : mockEnv),
+        },
+    });
 });
 
 app.get(`${basePath}/api/get/menyvalg`, (req, res) => {

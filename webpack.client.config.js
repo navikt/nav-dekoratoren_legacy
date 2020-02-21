@@ -10,7 +10,7 @@ const browserConfig = {
     mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'development',
     target: 'web',
     entry: {
-        client: './src/indexhydrat.tsx',
+        client: './src/index.tsx',
     },
     output: {
         path: path.resolve(__dirname, 'buildfolder/'),

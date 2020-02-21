@@ -1,26 +1,38 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { Language } from '../../reducer/language-duck';
 import { Header } from './Header';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
+import { createStore, Store } from 'redux';
+import { Provider } from 'react-redux';
+import { reducer } from '../../reducer/reducer';
 
-const shallowWithProps = (language: Language) => {
-    return shallow(<Header language={language} />);
-};
+const mountWithRedux = (store: Store) =>
+    mount(
+        <Provider store={store}>
+            <Header />
+        </Provider>
+    );
 
 describe('<Header>', () => {
     it('Skal rendre <Arbeidsflatemeny> komponent hvis språk er norsk', () => {
-        const wrapper = shallowWithProps(Language.NORSK);
-        expect(wrapper.find(Arbeidsflatemeny)).toHaveLength(1);
+        const store = createStore(reducer, {
+            language: { language: Language.NORSK },
+        });
+        expect(mountWithRedux(store).find(Arbeidsflatemeny)).toHaveLength(1);
     });
 
     it('Skal ikke rendre <Arbeidsflatemeny> komponent hvis språk er engelsk', () => {
-        const wrapper = shallowWithProps(Language.ENGELSK);
-        expect(wrapper.find(Arbeidsflatemeny)).toHaveLength(0);
+        const store = createStore(reducer, {
+            language: { language: Language.ENGELSK },
+        });
+        expect(mountWithRedux(store).find(Arbeidsflatemeny)).toHaveLength(0);
     });
 
     it('Skal ikke rendre <Arbeidsflatemeny> komponent hvis språk er samisk', () => {
-        const wrapper = shallowWithProps(Language.SAMISK);
-        expect(wrapper.find(Arbeidsflatemeny)).toHaveLength(0);
+        const store = createStore(reducer, {
+            language: { language: Language.SAMISK },
+        });
+        expect(mountWithRedux(store).find(Arbeidsflatemeny)).toHaveLength(0);
     });
 });
