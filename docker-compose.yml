@@ -27,7 +27,7 @@ services:
     depends_on:
       - oidc-provider
     environment:
-      REDIRECT_URL: "http://localhost:8088/dekoratoren/"
+      REDIRECT_URL: "http://localhost:8088/dekoratoren"
       AUTO_REDIRECT_TO_FRONTEND: "true"
 
   mocks:
