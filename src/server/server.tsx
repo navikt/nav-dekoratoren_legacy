@@ -171,6 +171,18 @@ app.get(`${basePath}/env`, (req, res) => {
     });
 });
 
+app.get(`${basePath}/api/get/sokeresultat`, (req, res) => {
+    const uri = `${process.env.URL_API_SOK || defaultSearchUrl}?ord=${
+        req.query.ord
+    }`;
+    request({ method: 'GET', uri }, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+            res.send(body);
+        } else {
+            res.send(mockSok);
+        }
+    });
+});
 app.get(`${basePath}/api/get/menyvalg`, (req, res) => {
     mainCache.get(mainCacheKey, (err, response) => {
         if (!err && response !== undefined) {
@@ -180,14 +192,6 @@ app.get(`${basePath}/api/get/menyvalg`, (req, res) => {
         }
     });
 });
-
-app.get(`${basePath}/api/get/sokeresultat`, (req, res) => {
-    fetchSearchResults(req, res);
-});
-
-app.use(`${basePath}/`, express.static(buildPath));
-app.get(`${basePath}/isAlive`, (req, res) => res.sendStatus(200));
-app.get(`${basePath}/isReady`, (req, res) => res.sendStatus(200));
 
 const fetchmenuOptions = (res: any) => {
     request(
@@ -229,18 +233,9 @@ const fetchmenuOptions = (res: any) => {
     );
 };
 
-const fetchSearchResults = (req: any, res: any) => {
-    const uri = `${process.env.URL_API_SOK || defaultSearchUrl}?ord=${
-        req.query.ord
-    }`;
-    request({ method: 'GET', uri }, (error, response, body) => {
-        if (!error && response.statusCode === 200) {
-            res.send(body);
-        } else {
-            res.send(mockSok);
-        }
-    });
-};
+app.use(`${basePath}/`, express.static(buildPath));
+app.get(`${basePath}/isAlive`, (req, res) => res.sendStatus(200));
+app.get(`${basePath}/isReady`, (req, res) => res.sendStatus(200));
 
 const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)
