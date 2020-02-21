@@ -8,14 +8,23 @@ import React, { ReactNode } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import request from 'request';
 import { Provider as ReduxProvider } from 'react-redux';
+import LanguageProvider from '../provider/Language-provider';
 import Footer from '../komponenter/footer/Footer';
 import Header from '../komponenter/header/Header';
 import getStore from './../redux/store';
 
+// Favicons
+const fileFavicon = require('../../src/ikoner/favicon/favicon.ico');
+const fileAppleTouchIcon = require('../../src/ikoner/favicon/apple-touch-icon.png');
+const fileFavicon16x16 = require('../../src/ikoner/favicon/favicon-16x16.png');
+const fileFavicon32x32 = require('../../src/ikoner/favicon/favicon-32x32.png');
+// const fileWebManifest = require('../../src/ikoner/favicon/site.webmanifest');
+const fileMaskIcon = require('../../src/ikoner/favicon/safari-pinned-tab.svg');
+
+// Config
 const basePath = '/dekoratoren';
 const isProduction = process.env.NODE_ENV === 'production';
 const buildPath = `${process.cwd()}/buildfolder`;
-const favicon = require('../../src/ikoner/favicon/favicon.ico');
 const app = express();
 const PORT = 8088;
 
@@ -29,13 +38,19 @@ const localhost = 'http://localhost:8088';
 import mockEnv from './mock/env';
 import mockMenu from './mock/menu.json';
 import mockSok from './mock/sokeresultat.json';
-import LanguageProvider from '../provider/Language-provider';
 
 // Cache setup
 const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
 const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
+
+// Server-side rendering
+const store = getStore();
+const baseUrl = `${process.env.baseUrl || localhost}`;
+const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/env`;
+const fileCss = `${process.env.URL_APP_BASE || defaultAppUrl}/css/client.css`;
+const fileScript = `${process.env.URL_APP_BASE || defaultAppUrl}/client.js`;
 
 // Cors
 app.disable('x-powered-by');
@@ -48,13 +63,6 @@ app.use(function(req, res, next) {
     );
     next();
 });
-
-// Server-side rendering
-const store = getStore();
-const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/env`;
-const fileCss = `${process.env.URL_APP_BASE || defaultAppUrl}/css/client.css`;
-const fileScript = `${process.env.URL_APP_BASE || defaultAppUrl}/client.js`;
-const fileFavicon = `${process.env.baseUrl || localhost}${favicon}`;
 
 const htmlHeader = ReactDOMServer.renderToString(
     <ReduxProvider store={store}>
@@ -69,16 +77,7 @@ const htmlFooter = ReactDOMServer.renderToString(
     </ReduxProvider>
 );
 
-const template = (
-    reqQuery: string,
-    fileFavicon: string,
-    fileCss: string,
-    htmlHeader: ReactNode,
-    htmlFooter: ReactNode,
-    fileEnv: string,
-    fileScript: string
-) => {
-    return `
+const template = (parameters: string) => `
     <!DOCTYPE html>
     <html lang="no">
         <head>
@@ -90,9 +89,15 @@ const template = (
             />
             <meta name="theme-color" content="#000000" />
             <title>NAV Dekoratør</title>
-            <link rel="icon" href=${fileFavicon} type="image/x-icon" />
+            <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
             <div id="styles">
-                <link rel="icon" href=${fileFavicon} type="image/x-icon" />
+                <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
+                <link rel="icon" type="image/png" sizes="16x16" href="${baseUrl}${fileFavicon16x16}">
+                <link rel="icon" type="image/png" sizes="32x32" href="${baseUrl}${fileFavicon32x32}">
+                <link rel="apple-touch-icon" sizes="180x180" href="${baseUrl}${fileAppleTouchIcon}">
+                <link rel="mask-icon" href="${baseUrl}${fileMaskIcon}" color="#5bbad5">
+                <meta name="msapplication-TileColor" content="#ffffff">
+                <meta name="theme-color" content="#ffffff">
                 <link href=${fileCss} rel="stylesheet" />
             </div>
         </head>
@@ -104,7 +109,7 @@ const template = (
                 <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
             </div>
             <div id="scripts">
-                <div id="decorator-env" data-src="${fileEnv}?${reqQuery}"></div>
+                <div id="decorator-env" data-src="${fileEnv}?${parameters}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
                 <script
                     src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js"
@@ -117,7 +122,6 @@ const template = (
             <div id="webstats-ga-notrack"></div>
         </body>
     </html>`;
-};
 
 // Express config
 const pathsForTemplate = [
@@ -132,18 +136,8 @@ const pathsForTemplate = [
 
 app.get(pathsForTemplate, (req, res) => {
     const i = req.url.indexOf('?');
-    const reqQuery = req.url.substr(i + 1);
-    res.send(
-        template(
-            reqQuery,
-            fileFavicon,
-            fileCss,
-            htmlHeader,
-            htmlFooter,
-            fileEnv,
-            fileScript
-        )
-    );
+    const parameters = req.url.substr(i + 1);
+    res.send(template(parameters));
 });
 
 app.get(`${basePath}/env`, (req, res) => {
