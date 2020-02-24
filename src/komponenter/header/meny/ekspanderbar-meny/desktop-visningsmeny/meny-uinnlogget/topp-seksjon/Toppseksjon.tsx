@@ -4,7 +4,7 @@ import Tekst from '../../../../../../../tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
-import KbNav, { NaviGroup } from '../../keyboard-navigation/kb-navigation';
+import KbNav, { NaviGroup } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
 import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
     arbeidsflate: MenuValue;
 }
 
-const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
+export const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
     const cls = BEMHelper(classname);
 
     return (
@@ -30,5 +30,3 @@ const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
         </div>
     );
 };
-
-export default Toppseksjon;

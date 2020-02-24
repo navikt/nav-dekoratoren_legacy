@@ -6,7 +6,7 @@ import { DesktopVisningsmeny } from './DesktopVisningsmeny';
 import { dataInitState } from '../../../../../reducer/menu-duck';
 import { Language } from '../../../../../reducer/language-duck';
 import { MenuValue } from '../../../../../utils/meny-storage-utils';
-import MenyUinnlogget from './meny-uinnlogget/MenyUinnlogget';
+import MenyUinnlogget from './meny-uinnlogget/UinnloggetDropdown';
 
 const store = getStore();
 

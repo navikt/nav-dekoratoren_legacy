@@ -1,26 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import BEMHelper, { BEMWrapper } from '../../../../../../utils/bem';
 import { MenySeksjon } from '../../../../../../reducer/menu-duck';
-import Toppseksjon from './topp-seksjon/Toppseksjon';
-import BunnSeksjon from './bunn-seksjon/BunnSeksjon';
-import './MenyUinnlogget.less';
-import { MenyUinnloggetHovedseksjon } from './hoved-seksjon/Hovedseksjon';
-import KbNav, { NaviGraphData, NaviGroup, NaviNode } from '../keyboard-navigation/kb-navigation';
+import { Language } from '../../../../../../reducer/language-duck';
+import { Toppseksjon } from './topp-seksjon/Toppseksjon';
+import { BunnSeksjon } from './bunn-seksjon/BunnSeksjon';
+import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
+import KbNav, { NaviGraphData, NaviGroup, NaviNode } from '../../../../../../utils/keyboard-navigation/kb-navigation';
 import { matchMediaPolyfill } from '../../../../../../utils/matchMediaPolyfill';
-import { AppState } from '../../../../../../reducer/reducer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
+import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 
-interface Props {
-    classname: string;
-    menyLenker: MenySeksjon;
-    isOpen: boolean;
-}
-
-const stateSelector = (state: AppState) => ({
-    arbeidsflate: state.arbeidsflate.status,
-    language: state.language.language,
-});
+// import './MenyUinnlogget.less';
 
 const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
 const kbRootIndex = { col: 0, row: 0, sub: 0 };
@@ -47,13 +38,21 @@ const getColSetup = (cls: BEMWrapper): Array<number> => {
     return [menyKnappCols, toppSeksjonCols, hovedSeksjonCols, bunnSeksjonCols];
 };
 
-const MenyUinnlogget = (props: Props) => {
-    const { classname, menyLenker, isOpen } = props;
+type Props = {
+    classname: string,
+    arbeidsflate: MenuValue,
+    language: Language,
+    menyLenker: MenySeksjon,
+    isOpen: boolean
+}
+
+export const UinnloggetDropdown = (props: Props) => {
+    const { arbeidsflate, classname, language, menyLenker, isOpen } = props;
+
     const cls = BEMHelper(classname);
     const dispatch = useDispatch();
 
-    const { arbeidsflate, language } = useSelector(stateSelector);
-    const settArbeidsflateFunc = () => dispatch(finnArbeidsflate());
+    const settArbeidsflate = () => dispatch(finnArbeidsflate());
 
     const matchMedia = matchMediaPolyfill;
     const mqlDesktop = matchMedia('(min-width: 1024px)');
@@ -113,7 +112,7 @@ const MenyUinnlogget = (props: Props) => {
                 classname={classname}
                 arbeidsflate={arbeidsflate}
             />
-            <MenyUinnloggetHovedseksjon
+            <Hovedseksjon
                 menyLenker={menyLenker}
                 classname={classname}
                 isOpen={isOpen}
@@ -122,10 +121,8 @@ const MenyUinnlogget = (props: Props) => {
                 classname={classname}
                 language={language}
                 arbeidsflate={arbeidsflate}
-                settArbeidsflateFunc={settArbeidsflateFunc}
+                settArbeidsflate={settArbeidsflate}
             />
         </div>
     );
 };
-
-export default MenyUinnlogget;

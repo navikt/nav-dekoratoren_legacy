@@ -10,6 +10,9 @@ import Menyknapp from './meny-knapp/Menyknapp';
 import MenyBakgrunn from './meny-bakgrunn/MenyBakgrunn';
 import MobilVisningsmeny from './mobil-visningsmeny/MobilVisningsmeny';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
+import MenyIkon from '../../../../ikoner/mobilmeny/MenyIkon';
+import { Undertittel } from 'nav-frontend-typografi';
+import Tekst from '../../../../tekster/finn-tekst';
 
 interface StateProps {
     meny: MenyPunkter;
@@ -44,16 +47,23 @@ class MobilEkspanderbarmeny extends React.Component<StateProps, State> {
         const {clicked} = this.state;
         const className = 'mobilmeny';
         const cls = BEMHelper(className);
+        const ariaControlsId = cls.element('dropdown-menu');
 
         return (
             <>
-                <Menyknapp
-                    ToggleMenu={this.menutoggle}
-                    clicked={clicked}
-                    lang={language}
-                    isMobile={true}
-                />
-                <div id="dropdown-menu" className={cls.element('meny-wrapper')}>
+                {language !== Language.SAMISK ? (
+                    <Menyknapp
+                        toggleMenu={this.menutoggle}
+                        clicked={clicked}
+                        ariaControlsId={ariaControlsId}
+                    >
+                        <MenyIkon />
+                        <Undertittel>
+                            <Tekst id="meny-knapp" />
+                        </Undertittel>
+                    </Menyknapp>
+                ) : null}
+                <div id={ariaControlsId} className={cls.element('meny-wrapper')}>
                     {meny.status === Status.OK ? (
                         <>
                             <div

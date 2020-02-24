@@ -16,11 +16,8 @@ const samarbeidspartnerFlate = '/dekoratoren/samarbeidspartner/';
 
 const onArbeidsflateClick =
     (url: string, arbeidsflate: MenuValue): OnArbeidsFlateClick => (settArbeidsflate: () => void) => (event: React.MouseEvent<HTMLAnchorElement>) => {
-    oppdaterSessionStorage(
-        event,
-        arbeidsflate,
-        url
-    );
+    event.preventDefault();
+    oppdaterSessionStorage(arbeidsflate);
     settArbeidsflate();
 };
 

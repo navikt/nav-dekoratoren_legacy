@@ -10,9 +10,7 @@ import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import Varselbjelle from './varsel/Varselbjelle';
 import VarselVisning from './varsel/varselvisning/Varselvisning';
 import './DesktopMenylinje.less';
-import Ekspanderbarmeny from './ekspanderbar-meny/Ekspanderbarmeny';
-import DesktopVisningsmeny from './ekspanderbar-meny/desktop-visningsmeny/DesktopVisningsmeny';
-import { selectMenu } from '../../../utils/meny-storage-utils';
+import { DesktopUinnloggetMeny } from './ekspanderbar-meny/desktop-visningsmeny/DesktopVisningsmeny';
 
 const desktopMenylinje = BEMHelper('desktopmeny');
 
@@ -32,7 +30,7 @@ const DesktopMenylinje = ({ language }: Props) => {
                     />
                     {language === Language.NORSK ||
                     language === Language.ENGELSK ? (
-                        <Ekspanderbarmeny />
+                        <DesktopUinnloggetMeny />
                     ) : null}
                     <Sok />
                     <InnloggingsstatusProvider>

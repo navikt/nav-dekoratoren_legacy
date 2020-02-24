@@ -21,6 +21,7 @@ export enum ActionType {
     ARBEIDSGIVER = 'ARBEIDSGIVER',
     SAMARBEIDSPARTNER = 'SAMARBEIDSPARTNER',
     IKKEVALGT = 'IKKEVALGT',
+    MENY_UINNLOGGET_TOGGLE = 'MENY_UINNLOGGET_TOGGLE',
 }
 
 export interface HentInnloggingsstatusOKAction {
@@ -95,6 +96,10 @@ export interface SettArbeidsflateIkkeValgt {
     type: ActionType.IKKEVALGT;
 }
 
+export interface MenyUinnloggetToggle {
+    type: ActionType.MENY_UINNLOGGET_TOGGLE;
+}
+
 export type Handling =
     | HentInnloggingsstatusOKAction
     | HentInnloggingsstatusFEILETAction
@@ -113,4 +118,5 @@ export type Handling =
     | SettPrivatpersonAction
     | SettArbeidsgiverAction
     | SettSamarbeidspartnerAction
-    | SettArbeidsflateIkkeValgt;
+    | SettArbeidsflateIkkeValgt
+    | MenyUinnloggetToggle;

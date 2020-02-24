@@ -8,6 +8,7 @@ import { DataElement } from '../api/api';
 import varselLestReducer from './varsel-lest-duck';
 import { languageDuck, LanguageState } from './language-duck';
 import arbeidsflateReducer, { Arbeidsflate } from './arbeidsflate-duck';
+import { ActionType } from '../redux/actions';
 
 export interface AppState {
     innloggingsstatus: InnloggingsstatusState;
@@ -16,6 +17,7 @@ export interface AppState {
     varslerLest: DataElement;
     language: LanguageState;
     arbeidsflate: Arbeidsflate;
+    uinnloggetMenyIsOpen: boolean;
 }
 
 export const reducer = combineReducers<AppState>({
@@ -25,4 +27,10 @@ export const reducer = combineReducers<AppState>({
     varslerLest: varselLestReducer,
     language: languageDuck.reducer,
     arbeidsflate: arbeidsflateReducer,
+    uinnloggetMenyIsOpen: (state = false, action) => {
+        if (action.type !== ActionType.MENY_UINNLOGGET_TOGGLE) {
+            return state;
+        }
+        return !state;
+    }
 });

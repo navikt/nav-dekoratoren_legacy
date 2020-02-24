@@ -1,33 +1,76 @@
 import React from 'react';
-import BEMHelper from '../../../../../utils/bem';
-import { MenuValue } from '../../../../../utils/meny-storage-utils';
-import { Language } from '../../../../../reducer/language-duck';
-import { MenySeksjon } from '../../../../../reducer/menu-duck';
-import MenyUinnlogget from './meny-uinnlogget/MenyUinnlogget';
+import { Ekspanderbarmeny } from '../Ekspanderbarmeny';
+import HamburgerIkon from '../../../../../ikoner/meny/HamburgerIkon';
+import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
+import { ActionType } from '../../../../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../../../../reducer/reducer';
+import { Status } from '../../../../../api/api';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import NavFrontendSpinner from 'nav-frontend-spinner';
+import { UinnloggetDropdown } from './meny-uinnlogget/UinnloggetDropdown';
+
 import './DesktopVisningsmeny.less';
+import { selectMenu } from '../../../../../utils/meny-storage-utils';
+import Tekst from '../../../../../tekster/finn-tekst';
 
-interface Props {
-    classname: string;
-    isOpen: boolean;
-    fellesmeny: MenySeksjon;
-    minsideMeny: MenySeksjon;
-    lang: Language;
-    arbeidsflate: MenuValue;
-}
+const stateSelector = (state: AppState) => ({
+    arbeidsflate: state.arbeidsflate.status,
+    meny: state.menypunkt,
+    language: state.language.language,
+    isOpen: state.uinnloggetMenyIsOpen
+});
 
-export const DesktopVisningsmeny = (props: Props) => {
-    const cls = BEMHelper(props.classname);
+const Spinner = () => (
+    <div className={'spinner-container'}>
+        <Normaltekst>{'Laster meny-innhold...'}</Normaltekst>
+        <NavFrontendSpinner/>
+    </div>
+);
+
+const menyKnappVisning = (
+    <>
+        <HamburgerIkon ikonClass="hamburger-ikon"/>
+        <Undertittel>
+            <Tekst id="meny-knapp" />
+        </Undertittel>
+    </>
+);
+
+export const DesktopUinnloggetMeny = () => {
+    const menutoggle = () => {
+        triggerGaEvent({
+            category: GACategory.Header,
+            action: `meny-${isOpen ? 'close' : 'open'}`
+        });
+        dispatch({ type: ActionType.MENY_UINNLOGGET_TOGGLE });
+    };
+
+    const className = 'desktop-uinnlogget-meny';
+    const dispatch = useDispatch();
+    const { arbeidsflate, meny, language, isOpen } = useSelector(stateSelector);
+    const menyLenker = selectMenu(meny.data, language, arbeidsflate);
+
     return (
-        <div className="media-lg-desktop media-mobil-tablet menyvisning-desktop">
-            <div className={cls.element('seksjoner')}>
-                <MenyUinnlogget
-                    classname={props.classname}
-                    menyLenker={props.fellesmeny}
-                    isOpen={props.isOpen}
-                />
-            </div>
-        </div>
-    );
+        <Ekspanderbarmeny
+            classname={className}
+            isOpen={isOpen}
+            language={language}
+            menyKnappVisning={menyKnappVisning}
+            toggleFunc={menutoggle}
+        >
+            {meny.status === Status.OK
+                ? (
+                    <UinnloggetDropdown
+                        classname={className}
+                        arbeidsflate={arbeidsflate}
+                        language={language}
+                        menyLenker={menyLenker}
+                        isOpen={isOpen}
+                    />
+                )
+                : <Spinner/>
+            }
+        </Ekspanderbarmeny>
+    )
 };
-
-export default DesktopVisningsmeny;

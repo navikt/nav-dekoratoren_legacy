@@ -1,7 +1,7 @@
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
 import BunnseksjonLenke from './BunnseksjonLenke';
-import KbNav, { NaviGroup } from '../../keyboard-navigation/kb-navigation';
+import KbNav, { NaviGroup } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
 import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
 import { Language } from '../../../../../../../reducer/language-duck';
 import { finnTekst } from '../../../../../../../tekster/finn-tekst';
@@ -9,12 +9,12 @@ import { bunnLenker } from './BunnseksjonLenkedata';
 
 interface Props {
     classname: string;
-    settArbeidsflateFunc: () => void;
+    settArbeidsflate: () => void;
     arbeidsflate: MenuValue;
     language: Language;
 }
 
-const BunnSeksjon = ({ classname, language, arbeidsflate, settArbeidsflateFunc }: Props) => {
+export const BunnSeksjon = ({ classname, language, arbeidsflate, settArbeidsflate }: Props) => {
     const cls = BEMHelper(classname);
     const lenker = bunnLenker[arbeidsflate];
 
@@ -31,7 +31,7 @@ const BunnSeksjon = ({ classname, language, arbeidsflate, settArbeidsflateFunc }
                             stikkord={finnTekst(lenke.stikkordId, language)}
                             className={classname}
                             id={KbNav.getKbId(NaviGroup.DesktopHeaderDropdown, kbNaviIndex)}
-                            onClick={lenke.onClick && lenke.onClick(settArbeidsflateFunc)}
+                            onClick={lenke.onClick && lenke.onClick(settArbeidsflate)}
                             key={lenke.lenkeTekstId}
                         />
                     );
@@ -40,5 +40,3 @@ const BunnSeksjon = ({ classname, language, arbeidsflate, settArbeidsflateFunc }
         </>
     );
 };
-
-export default BunnSeksjon;
