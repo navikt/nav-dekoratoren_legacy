@@ -2,14 +2,16 @@ import React, { ReactNode } from 'react';
 import BEMHelper from '../../../../../utils/bem';
 
 type Props = {
-    classname: string,
     isOpen: boolean,
     menyKnapp: React.ReactNode,
+    id: string,
     children: ReactNode,
 }
 
+const classname = 'dropdown-meny';
+
 export const EkspanderbarMeny = (props: Props) => {
-    const { classname, isOpen, menyKnapp, children } = props;
+    const { isOpen, menyKnapp, id, children } = props;
     const cls = BEMHelper(classname);
 
     return (
@@ -21,7 +23,7 @@ export const EkspanderbarMeny = (props: Props) => {
                         'innhold-wrapper',
                         isOpen ? 'aktive' : '',
                     )}
-                    id={cls.element('dropdown-menu')}
+                    id={id}
                 >
                     <div className={cls.element('innhold')}>
                         {children}

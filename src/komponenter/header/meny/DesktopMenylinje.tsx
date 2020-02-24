@@ -11,6 +11,7 @@ import Varselbjelle from './varsel/Varselbjelle';
 import VarselVisning from './varsel/varselvisning/Varselvisning';
 import './DesktopMenylinje.less';
 import { DesktopUinnloggetMeny } from './ekspanderende-menyer/meny-uinnlogget-desktop/DesktopUinnloggetMeny';
+import { SokDropdown } from './sok/SokDropdown';
 
 const desktopMenylinje = BEMHelper('desktopmeny');
 
@@ -31,23 +32,22 @@ const DesktopMenylinje = ({ language }: Props) => {
                     {(language === Language.NORSK || language === Language.ENGELSK) && (
                         <DesktopUinnloggetMeny />
                     )}
-                    <Sok />
+                    <SokDropdown />
+                    <span className={desktopMenylinje.element('spacer')}/>
                     <InnloggingsstatusProvider>
                         <>
-                            <div className="media-lg-desktop minsidelenke-varselbjelle">
-                                <VarselinnboksProvider>
-                                    <Varselbjelle tabindex={true}>
-                                        {clicked =>
-                                            clicked && (
-                                                <VarselVisning
-                                                    tabIndex={true}
-                                                />
-                                            )
-                                        }
-                                    </Varselbjelle>
-                                </VarselinnboksProvider>
-                                <MinsideLenke tabindex={true} />
-                            </div>
+                            <VarselinnboksProvider>
+                                <Varselbjelle tabindex={true}>
+                                    {clicked =>
+                                        clicked && (
+                                            <VarselVisning
+                                                tabIndex={true}
+                                            />
+                                        )
+                                    }
+                                </Varselbjelle>
+                            </VarselinnboksProvider>
+                            <MinsideLenke tabindex={true} />
                             <LoggInnKnapp />
                         </>
                     </InnloggingsstatusProvider>

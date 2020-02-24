@@ -6,11 +6,12 @@ interface Props {
     toggleMenu: () => void;
     clicked: boolean;
     classname: string;
+    ariaControlsId: string;
     children: React.ReactNode;
 }
 
 export const Menyknapp = (props: Props) => {
-    const {toggleMenu, clicked, classname, children} = props;
+    const {toggleMenu, clicked, classname, ariaControlsId, children} = props;
     const cls = BEMHelper(classname);
 
     return (
@@ -20,10 +21,10 @@ export const Menyknapp = (props: Props) => {
             id={cls.element('decorator-meny-toggleknapp')}
             aria-label="Menyknapp"
             aria-haspopup="true"
-            aria-controls={cls.element('dropdown-menu')}
+            aria-controls={ariaControlsId}
             aria-expanded={clicked}
         >
-            <div className={'dropdown__menyknapp--innhold'}>
+            <div className={'dropdown__menyknapp-visning'}>
                 {children}
             </div>
         </button>

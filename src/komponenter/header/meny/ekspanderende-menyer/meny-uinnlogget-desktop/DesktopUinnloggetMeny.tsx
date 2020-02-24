@@ -40,10 +40,9 @@ export const DesktopUinnloggetMeny = () => {
             toggleMenu={toggleMenu}
             clicked={isOpen}
             classname={classname}
+            ariaControlsId={classname}
         >
-            <div className={'hamburger-knapp'}>
-                <HamburgerKnapp isOpen={isOpen}/>
-            </div>
+            <HamburgerKnapp isOpen={isOpen}/>
             <Undertittel>
                 <Tekst id="meny-knapp" />
             </Undertittel>
@@ -64,9 +63,9 @@ export const DesktopUinnloggetMeny = () => {
 
     return (
         <EkspanderbarMeny
-            classname={classname}
             isOpen={isOpen}
             menyKnapp={menyKnapp}
+            id={classname}
         >
             {dropdownInnhold}
         </EkspanderbarMeny>

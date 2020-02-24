@@ -2,19 +2,15 @@
 
 .desktopmeny .varselbjelle,
 .mobilmeny .varselbjelle {
-    position: relative;
-    width: 31px;
+    //position: relative;
+    //width: 31px;
 
     .toggle-varsler-container {
-        display: inline-block;
-        height: 1.9375rem;
-        width: 1.9375rem;
+        //display: inline-block;
+        //height: 1.9375rem;
+        //width: 1.9375rem;
         border: 1px solid transparent;
-        vertical-align: middle;
-
-        @media (min-width: 48.0625rem) {
-            display: inline-block;
-        }
+        //vertical-align: middle;
 
         .toggle-varsler {
             background: url('../../../../ikoner/varsler/alarm.svg') no-repeat
@@ -23,6 +19,8 @@
             width: 100%;
             height: 100%;
             border: 2px solid transparent;
+            padding: 0;
+            margin: 0;
 
             &:hover {
                 background-image: url('../../../../ikoner/varsler/alarm_hover.svg');
@@ -36,6 +34,11 @@
                 outline: 0;
                 border: 2px solid @fokusFarge;
                 border-radius: 4px;
+            }
+
+            .varsler-tekst {
+                margin-left: 1.5rem;
+                color: @navBla;
             }
         }
 

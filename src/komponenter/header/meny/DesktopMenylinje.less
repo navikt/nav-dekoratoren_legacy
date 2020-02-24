@@ -22,7 +22,6 @@
 
     &__nav-brand {
         order: 1;
-        width: auto;
 
         &:focus {
             outline: 3px solid @fokusFarge;
@@ -36,50 +35,45 @@
 
     .desktop-uinnlogget-meny__menyknapp {
         order: 2;
-        width: auto;
+        margin: 0 2rem;
     }
 
-    .sok {
+    .sok-dropdown__menyknapp {
         order: 3;
-        width: auto;
         max-height: @maxheight-menuitem;
     }
 
-    .minsidelenke-varselbjelle {
-        display: none;
+    &__spacer {
+        order: 4;
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+
+    .varselbjelle {
+        order: 5;
+        max-height: @maxheight-menuitem;
+        //display: inline-block;
+    }
+
+    .minside-lenke {
+        order: 6;
+        margin: 0 2rem;
+        max-height: @maxheight-menuitem;
     }
 
     .login-container {
-        order: 3;
-        width: auto;
+        order: 7;
         max-height: @maxheight-menuitem;
     }
 
     .dropdown-container {
-        order: 4;
+        order: 8;
         width: 100%;
     }
 
     @media (min-width: @desktopLimitWidth) {
         &__content {
             width: @desktopLimitWidth;
-        }
-
-        .minsidelenke-varselbjelle {
-            min-width: 9.375rem;
-            order: 3;
-            .minside-lenke {
-                width: 6.375rem;
-                max-height: @maxheight-menuitem;
-                display: inline-block;
-            }
-
-            .varselbjelle {
-                margin-left: 1rem;
-                width: auto;
-                max-height: @maxheight-menuitem;
-                display: inline-block;
-            }
         }
     }
 }

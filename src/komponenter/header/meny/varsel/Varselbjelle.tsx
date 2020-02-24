@@ -6,6 +6,8 @@ import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import './Varselbjelle.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
+import Tekst from '../../../../tekster/finn-tekst';
+import { Element, Undertittel } from 'nav-frontend-typografi';
 
 interface Props {
     tabindex: boolean;
@@ -111,7 +113,11 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                                 aria-haspopup="true"
                                 aria-controls="varsler-display"
                                 aria-expanded={clicked}
-                            />
+                            >
+                                <Element className={'varsler-tekst'}>
+                                    <Tekst id={'Varsler'} />
+                                </Element>
+                            </button>
                         </div>
                         <div className="min-varsel-wrapper">
                             {children(clicked, this.handleClick)}
