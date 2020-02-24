@@ -4,12 +4,13 @@ import { AppState } from '../../reducer/reducer';
 import { Language } from '../../reducer/language-duck';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
-import Mobilmeny from './meny/Mobilmeny';
+import MobilMenylinje from './meny/MobilMenylinje';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
-import Desktopmeny from './meny/Desktopmeny';
 import { MenuValue } from '../../utils/meny-storage-utils';
 import { oppdaterSessionStorage } from '../../utils/meny-storage-utils';
 import Environment from '../../utils/Environment';
+import DesktopMenylinje from './meny/DesktopMenylinje';
+import MenyBakgrunn from './meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -27,11 +28,14 @@ export const Header = () => {
             <Skiplinks />
             <header className="siteheader">
                 <div className="media-sm-mobil mobil-meny">
-                    <Mobilmeny />
+                    <MobilMenylinje language={language} />
                 </div>
                 <div className="media-tablet-desktop tablet-desktop-meny">
-                    {language === Language.NORSK && <Arbeidsflatemeny />}
-                    <Desktopmeny language={language} />
+                    <div className="header-z-wrapper">
+                        {language === Language.NORSK && <Arbeidsflatemeny />}
+                        <DesktopMenylinje language={language} />
+                    </div>
+                    <MenyBakgrunn className={'desktopmeny'} />
                 </div>
             </header>
         </>

@@ -128,5 +128,8 @@ export const ledetekster: { [key: string]: string } = {
     'meny-bunnlenke-arbeidsgiver-stikkord-es': 'Tjenester og skjemaer|Rekruttering|Oppfølging|Inkluderende arbeidsliv|Hjelpemidler',
     'meny-bunnlenke-samarbeidspartner-stikkord': 'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
     'meny-bunnlenke-samarbeidspartner-stikkord-en': 'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
-    'meny-bunnlenke-samarbeidspartner-stikkord-es': 'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere'
+    'meny-bunnlenke-samarbeidspartner-stikkord-es': 'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
+    'meny-loading': 'Laster meny-innhold...',
+    'meny-loading-en': 'Laster meny-innhold...',
+    'meny-loading-es': 'Laster meny-innhold...',
 };
