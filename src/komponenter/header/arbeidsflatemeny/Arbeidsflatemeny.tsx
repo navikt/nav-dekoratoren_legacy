@@ -5,7 +5,10 @@ import { Dispatch } from '../../../redux/dispatch-type';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import BEMHelper from '../../../utils/bem';
-import { MenuValue, oppdaterSessionStorage } from '../../../utils/meny-storage-utils';
+import {
+    MenuValue,
+    oppdaterSessionStorage,
+} from '../../../utils/meny-storage-utils';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import './Arbeidsflatemeny.less';
 import { GACategory } from '../../../utils/google-analytics';
@@ -51,14 +54,14 @@ const Arbeidsflatemeny = ({
                                     classNameOverride={cls.element('lenke')}
                                     href={lenke.url}
                                     onClick={event => {
-                                        oppdaterSessionStorage(
-                                            event,
-                                            lenke.key,
-                                            lenke.url
-                                        );
+                                        event.preventDefault();
+                                        oppdaterSessionStorage(lenke.key);
                                         settArbeidsflate();
                                     }}
-                                    gaEventArgs={{category: GACategory.Header, action: 'arbeidsflate-valg'}}
+                                    gaEventArgs={{
+                                        category: GACategory.Header,
+                                        action: 'arbeidsflate-valg',
+                                    }}
                                 >
                                     <div
                                         className={cls.element(
