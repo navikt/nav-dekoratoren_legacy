@@ -43,15 +43,15 @@ const privatpersonLenker: LenkeData[] = [
 
 const arbeidsgiverLenker: LenkeData[] = [
     {
+        url: 'https://arbeidsgiver.nav.no/min-side-arbeidsgiver/',
+        lenkeTekstId: 'arbeidsgiver-minside-lenke',
+        stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
+    },
+    {
         url: pathPersonFlate,
         lenkeTekstId: 'rolle-privatperson',
         stikkordId: 'meny-bunnlenke-minside-stikkord',
         onClick: onArbeidsflateClick(pathPersonFlate, MenuValue.PRIVATPERSON)
-    },
-    {
-        url: 'https://arbeidsgiver.nav.no/min-side-arbeidsgiver/',
-        lenkeTekstId: 'arbeidsgiver-minside-lenke',
-        stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
     },
     {
         url: samarbeidspartnerFlate,
