@@ -1,4 +1,5 @@
 import { FooterLenke } from '../komponenter/footer/Footer-lenker';
+import { MenuValue } from './meny-storage-utils';
 
 export default class Environment {
     static baseUrl: string;
@@ -14,7 +15,7 @@ export default class Environment {
 
     // Parameters
     static language: string;
-    static context: string;
+    static context: MenuValue;
     static stripped: string;
     static redirectToApp: string;
     static level: string;
