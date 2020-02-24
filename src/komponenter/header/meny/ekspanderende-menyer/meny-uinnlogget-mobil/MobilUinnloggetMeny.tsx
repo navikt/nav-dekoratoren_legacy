@@ -10,7 +10,7 @@ import MenyIkon from '../../../../../ikoner/mobilmeny/MenyIkon';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { toggleUinnloggetMeny } from '../../../../../reducer/dropdown-toggle-duck';
-import { Ekspanderbarmeny } from '../ekspanderbar-meny/Ekspanderbarmeny';
+import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 
 const stateSelector = (state: AppState) => ({
@@ -38,6 +38,7 @@ export const MobilUinnloggetMeny = () => {
         <Menyknapp
             toggleMenu={menutoggle}
             clicked={isOpen}
+            classname={classname}
         >
             <MenyIkon />
             <Undertittel>
@@ -64,13 +65,13 @@ export const MobilUinnloggetMeny = () => {
             ) : <MenySpinner />;
 
     return (
-        <Ekspanderbarmeny
+        <EkspanderbarMeny
             classname={classname}
             isOpen={isOpen}
             menyKnapp={menyKnapp}
         >
             {dropdownInnhold}
-        </Ekspanderbarmeny>
+        </EkspanderbarMeny>
     );
 };
 

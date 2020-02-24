@@ -8,7 +8,7 @@ type Props = {
     children: ReactNode,
 }
 
-export const Ekspanderbarmeny = (props: Props) => {
+export const EkspanderbarMeny = (props: Props) => {
     const { classname, isOpen, menyKnapp, children } = props;
     const cls = BEMHelper(classname);
 
@@ -21,7 +21,7 @@ export const Ekspanderbarmeny = (props: Props) => {
                         'innhold-wrapper',
                         isOpen ? 'aktive' : '',
                     )}
-                    id={'dropdown-menu'}
+                    id={cls.element('dropdown-menu')}
                 >
                     <div className={cls.element('innhold')}>
                         {children}

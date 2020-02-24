@@ -29,10 +29,9 @@ const DesktopMenylinje = ({ language }: Props) => {
                         height="88"
                         classname={desktopMenylinje.element('nav-brand')}
                     />
-                    {language === Language.NORSK ||
-                    language === Language.ENGELSK ? (
+                    {(language === Language.NORSK || language === Language.ENGELSK) && (
                         <DesktopUinnloggetMeny />
-                    ) : null}
+                    )}
                     <Sok />
                     <InnloggingsstatusProvider>
                         <>

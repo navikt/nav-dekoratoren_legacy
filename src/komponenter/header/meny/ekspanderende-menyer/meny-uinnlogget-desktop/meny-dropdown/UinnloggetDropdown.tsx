@@ -11,12 +11,6 @@ import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
 
-const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
-const kbRootIndex = { col: 0, row: 0, sub: 0 };
-const kbIdMap = {
-    [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: 'decorator-meny-toggleknapp-desktop',
-};
-
 const getColSetup = (cls: BEMWrapper): Array<number> => {
     const getNumCols = (element: HTMLElement) => (
         parseInt(window.getComputedStyle(element).getPropertyValue('--num-cols'), 10)
@@ -58,6 +52,12 @@ export const UinnloggetDropdown = (props: Props) => {
 
     const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
     const [kbNaviNode, setKbNaviNode] = useState<NaviNode>(null);
+
+    const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
+    const kbRootIndex = { col: 0, row: 0, sub: 0 };
+    const kbIdMap = {
+        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element('decorator-meny-toggleknapp'),
+    };
 
     useEffect(() => {
         const removeListeners = () => {

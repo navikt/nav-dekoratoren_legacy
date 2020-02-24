@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ekspanderbarmeny } from '../ekspanderbar-meny/Ekspanderbarmeny';
+import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
 import HamburgerIkon from '../../../../../ikoner/meny/HamburgerIkon';
 import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,6 @@ import { AppState } from '../../../../../reducer/reducer';
 import { Status } from '../../../../../api/api';
 import { Undertittel } from 'nav-frontend-typografi';
 import { UinnloggetDropdown } from './meny-dropdown/UinnloggetDropdown';
-
 import './DesktopUinnloggetMeny.less';
 import { selectMenu } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
@@ -40,6 +39,7 @@ export const DesktopUinnloggetMeny = () => {
         <Menyknapp
             toggleMenu={toggleMenu}
             clicked={isOpen}
+            classname={classname}
         >
             <HamburgerIkon ikonClass="hamburger-ikon" />
             <Undertittel>
@@ -61,13 +61,13 @@ export const DesktopUinnloggetMeny = () => {
             ) : <MenySpinner />;
 
     return (
-        <Ekspanderbarmeny
+        <EkspanderbarMeny
             classname={classname}
             isOpen={isOpen}
             menyKnapp={menyKnapp}
         >
             {dropdownInnhold}
-        </Ekspanderbarmeny>
+        </EkspanderbarMeny>
     );
 };
 
