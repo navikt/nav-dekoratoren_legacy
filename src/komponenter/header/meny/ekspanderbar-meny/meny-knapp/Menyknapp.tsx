@@ -5,23 +5,21 @@ import './Menyknapp.less';
 interface Props {
     toggleMenu: () => void;
     clicked: boolean;
-    ariaControlsId: string;
-    id?: string;
     children: React.ReactNode;
 }
 
 export const Menyknapp = (props: Props) => {
-    const {toggleMenu, clicked, ariaControlsId, id, children} = props;
+    const {toggleMenu, clicked, children} = props;
     const cls = BEMHelper('dropdown');
 
     return (
         <button
             onClick={toggleMenu}
             className={cls.element('menyknapp')}
-            id={id}
+            id={'decorator-meny-toggleknapp'}   // TODO: skill desktop/mobil her?
             aria-label="Menyknapp"
             aria-haspopup="true"
-            aria-controls={ariaControlsId}
+            aria-controls={'dropdown-menu'}     // TODO: og her?
             aria-expanded={clicked}
         >
             <div className={cls.element('menyknapp', 'innhold')}>

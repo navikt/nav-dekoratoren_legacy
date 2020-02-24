@@ -21,7 +21,10 @@ export enum ActionType {
     ARBEIDSGIVER = 'ARBEIDSGIVER',
     SAMARBEIDSPARTNER = 'SAMARBEIDSPARTNER',
     IKKEVALGT = 'IKKEVALGT',
-    MENY_UINNLOGGET_TOGGLE = 'MENY_UINNLOGGET_TOGGLE',
+    TOGGLE_UINNLOGGET_MENY = 'TOGGLE_UINNLOGGET_MENY',
+    TOGGLE_MINSIDE_MENY = 'TOGGLE_MINSIDE_MENY',
+    TOGGLE_SOK = 'TOGGLE_SOK',
+    TOGGLE_LUKK_ALLE = 'TOGGLE_LUKK_ALLE'
 }
 
 export interface HentInnloggingsstatusOKAction {
@@ -96,8 +99,20 @@ export interface SettArbeidsflateIkkeValgt {
     type: ActionType.IKKEVALGT;
 }
 
-export interface MenyUinnloggetToggle {
-    type: ActionType.MENY_UINNLOGGET_TOGGLE;
+export interface ToggleUinnloggetMeny {
+    type: ActionType.TOGGLE_UINNLOGGET_MENY;
+}
+
+export interface ToggleMinsideMeny {
+    type: ActionType.TOGGLE_MINSIDE_MENY;
+}
+
+export interface ToggleSok {
+    type: ActionType.TOGGLE_SOK;
+}
+
+export interface ToggleLukkAlle {
+    type: ActionType.TOGGLE_LUKK_ALLE;
 }
 
 export type Handling =
@@ -114,9 +129,11 @@ export type Handling =
     | SettVarslerLestOKAction
     | SettVarslerLestFEILETAction
     | SettVarslerLestPENDINGAction
-    | HentInnloggingsstatusPENDINGAction
     | SettPrivatpersonAction
     | SettArbeidsgiverAction
     | SettSamarbeidspartnerAction
     | SettArbeidsflateIkkeValgt
-    | MenyUinnloggetToggle;
+    | ToggleUinnloggetMeny
+    | ToggleMinsideMeny
+    | ToggleSok
+    | ToggleLukkAlle;

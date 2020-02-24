@@ -47,7 +47,6 @@ class MobilEkspanderbarmeny extends React.Component<StateProps, State> {
         const {clicked} = this.state;
         const className = 'mobilmeny';
         const cls = BEMHelper(className);
-        const ariaControlsId = cls.element('dropdown-menu');
 
         return (
             <>
@@ -55,7 +54,6 @@ class MobilEkspanderbarmeny extends React.Component<StateProps, State> {
                     <Menyknapp
                         toggleMenu={this.menutoggle}
                         clicked={clicked}
-                        ariaControlsId={ariaControlsId}
                     >
                         <MenyIkon />
                         <Undertittel>
@@ -63,7 +61,7 @@ class MobilEkspanderbarmeny extends React.Component<StateProps, State> {
                         </Undertittel>
                     </Menyknapp>
                 ) : null}
-                <div id={ariaControlsId} className={cls.element('meny-wrapper')}>
+                <div id={'dropdown-menu'} className={cls.element('meny-wrapper')}>
                     {meny.status === Status.OK ? (
                         <>
                             <div

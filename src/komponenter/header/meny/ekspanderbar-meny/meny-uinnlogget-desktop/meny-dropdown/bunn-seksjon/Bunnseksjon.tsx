@@ -14,7 +14,7 @@ interface Props {
     language: Language;
 }
 
-export const BunnSeksjon = ({ classname, language, arbeidsflate, settArbeidsflate }: Props) => {
+export const Bunnseksjon = ({ classname, language, arbeidsflate, settArbeidsflate }: Props) => {
     const cls = BEMHelper(classname);
     const lenker = bunnLenker[arbeidsflate];
 

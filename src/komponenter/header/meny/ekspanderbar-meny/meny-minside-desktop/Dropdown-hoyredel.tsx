@@ -2,10 +2,10 @@ import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
-import BEMHelper from '../../../../../../utils/bem';
-import Tekst from '../../../../../../tekster/finn-tekst';
-import { MenySeksjon } from '../../../../../../reducer/menu-duck';
-import Environment from '../../../../../../utils/Environment';
+import BEMHelper from '../../../../../utils/bem';
+import Tekst from '../../../../../tekster/finn-tekst';
+import { MenySeksjon } from '../../../../../reducer/menu-duck';
+import Environment from '../../../../../utils/Environment';
 
 interface Props {
     minsideMeny: MenySeksjon;

@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import BEMHelper, { BEMWrapper } from '../../../../../../utils/bem';
-import { MenySeksjon } from '../../../../../../reducer/menu-duck';
-import { Language } from '../../../../../../reducer/language-duck';
-import { Toppseksjon } from './topp-seksjon/Toppseksjon';
-import { BunnSeksjon } from './bunn-seksjon/BunnSeksjon';
-import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
-import KbNav, { NaviGraphData, NaviGroup, NaviNode } from '../../../../../../utils/keyboard-navigation/kb-navigation';
-import { matchMediaPolyfill } from '../../../../../../utils/matchMediaPolyfill';
 import { useDispatch } from 'react-redux';
+import BEMHelper, { BEMWrapper } from '../../../../../../utils/bem';
 import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
-
-// import './MenyUinnlogget.less';
+import { MenySeksjon } from '../../../../../../reducer/menu-duck';
+import { Language } from '../../../../../../reducer/language-duck';
+import KbNav, { NaviGraphData, NaviGroup, NaviNode } from '../../../../../../utils/keyboard-navigation/kb-navigation';
+import { matchMediaPolyfill } from '../../../../../../utils/matchMediaPolyfill';
+import { Toppseksjon } from './topp-seksjon/Toppseksjon';
+import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
+import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
 
 const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
 const kbRootIndex = { col: 0, row: 0, sub: 0 };
@@ -117,7 +115,7 @@ export const UinnloggetDropdown = (props: Props) => {
                 classname={classname}
                 isOpen={isOpen}
             />
-            <BunnSeksjon
+            <Bunnseksjon
                 classname={classname}
                 language={language}
                 arbeidsflate={arbeidsflate}
@@ -126,3 +124,5 @@ export const UinnloggetDropdown = (props: Props) => {
         </div>
     );
 };
+
+export default UinnloggetDropdown
