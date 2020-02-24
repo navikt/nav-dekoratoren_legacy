@@ -103,7 +103,6 @@ const template = (parameters: string) => `
             }
             .decorator-dummy-app{
                 background: #f1f1f1;
-                text-align: center;
                 height:100%;
             }
             </style>
