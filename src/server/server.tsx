@@ -92,6 +92,20 @@ const template = (parameters: string) => `
             <meta name="theme-color" content="#000000" />
             <title>NAV Dekoratør</title>
             <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
+            <style>
+            /* Decorator development styling */
+            html, body {  height: 100%; }
+            .decorator-dev-container {
+                display:flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+            }
+            .decorator-dummy-app{
+                background: #f1f1f1;
+                height:100%;
+            }
+            </style>
             <div id="styles">
                 <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
                 <link rel="icon" type="image/png" sizes="16x16" href="${baseUrl}${fileFavicon16x16}">
@@ -104,11 +118,14 @@ const template = (parameters: string) => `
             </div>
         </head>
         <body>
-            <div id="header-withmenu">
-                <section class="navno-dekorator" id="decorator-header" role="main">${htmlHeader}</section>
-            </div>
-            <div id="footer-withmenu">
-                <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
+            <div class="decorator-dev-container">
+                <div id="header-withmenu">
+                    <section class="navno-dekorator" id="decorator-header" role="main">${htmlHeader}</section>
+                </div>
+                <div class="decorator-dummy-app"></div>
+                <div id="footer-withmenu">
+                    <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
+                </div>
             </div>
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}${parameters}"></div>
