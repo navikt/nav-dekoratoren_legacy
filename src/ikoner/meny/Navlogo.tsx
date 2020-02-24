@@ -1,4 +1,6 @@
 import React from 'react';
+import { GACategory } from '../../utils/google-analytics';
+import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
 
 const Navlogo = ({
     width,
@@ -12,10 +14,11 @@ const Navlogo = ({
     viewIndex?: boolean;
 }) => {
     return (
-        <a
+        <LenkeMedGA
             href="https://nav.no"
-            className="nav-brand-lenke"
+            classNameOverride="nav-brand-lenke"
             tabIndex={viewIndex ? 0 : -1}
+            gaEventArgs={{category: GACategory.Meny, action: 'navlogo-mobilmeny'}}
         >
             <svg
                 className="modal-logo-svg"
@@ -112,7 +115,7 @@ const Navlogo = ({
                     </g>
                 </g>
             </svg>
-        </a>
+        </LenkeMedGA>
     );
 };
 

@@ -6,6 +6,7 @@ import BEMHelper from '../../../../../../utils/bem';
 import TopSeksjon from './top-seksjon/Topseksjon';
 import Lukkundermeny from './Lukkundermeny';
 import Listelement from './Listelement';
+import { genererUrl } from '../../../../../../utils/Environment';
 
 interface Props {
     className: string;
@@ -44,7 +45,7 @@ const Undermeny = (props: Props) => {
                 {lenker.children.map((lenke, index: number) => {
                     return (
                         <Lenke
-                            href={lenke.path}
+                            href={genererUrl(lenke.path)}
                             key={index}
                             tabIndex={tabindex ? 0 : -1}
                         >

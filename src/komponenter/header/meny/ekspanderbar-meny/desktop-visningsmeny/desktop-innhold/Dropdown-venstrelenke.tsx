@@ -1,30 +1,33 @@
 import React from 'react';
-import Lenke from 'nav-frontend-lenker';
 import { MenySeksjon } from '../../../../../../reducer/menu-duck';
-import Environment from '../../../../../../utils/Environment';
+import { genererUrl } from '../../../../../../utils/Environment';
+import { GACategory } from '../../../../../../utils/google-analytics';
+import { LenkeMedGA } from '../../../../../LenkeMedGA';
 
 interface Props {
     lenke: MenySeksjon;
     tabindex: boolean;
+    menyGruppeNavn: string;
     listItemClassName?: string;
 }
 
-const genererUrl = (lenke: string): string => {
-    if (lenke.startsWith('/')) {
-        return Environment.baseUrlEnonic + lenke;
-    }
-    return lenke;
-};
-
 export const DropdownLenke = (props: Props) => {
-    const { lenke, tabindex, listItemClassName } = props;
-
+    const { lenke, tabindex, menyGruppeNavn, listItemClassName } = props;
     const href = genererUrl(lenke.path);
+
     return (
         <li className={listItemClassName}>
-            <Lenke tabIndex={tabindex ? 0 : -1} href={href}>
+            <LenkeMedGA
+                tabIndex={tabindex ? 0 : -1}
+                href={href}
+                gaEventArgs={{
+                    category: GACategory.Meny,
+                    action: `${menyGruppeNavn}/${lenke.displayName}`,
+                    label: href,
+                }}
+            >
                 {lenke.displayName}
-            </Lenke>
+            </LenkeMedGA>
         </li>
     );
 };

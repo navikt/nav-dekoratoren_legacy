@@ -11,6 +11,8 @@ import {
 } from '../../../utils/meny-storage-utils';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import './Arbeidsflatemeny.less';
+import { GACategory } from '../../../utils/google-analytics';
+import { LenkeMedGA } from '../../LenkeMedGA';
 
 interface StateProps {
     arbeidsflate: MenuValue;
@@ -29,7 +31,11 @@ const Arbeidsflatemeny = ({
     const cls = BEMHelper('arbeidsflate');
 
     return (
-        <nav className={cls.className} id="arbeidsflatemeny">
+        <nav
+            className={cls.className}
+            id="decorator-arbeidsflatemeny"
+            aria-label="Velg brukergruppe"
+        >
             <ul className={cls.element('topp-liste-rad')} role="tablist">
                 {arbeidsflateLenker.map(
                     (lenke: {
@@ -44,16 +50,17 @@ const Arbeidsflatemeny = ({
                                 className={cls.element('liste-element')}
                                 key={lenke.tittel}
                             >
-                                <a
-                                    className={cls.element('lenke')}
+                                <LenkeMedGA
+                                    classNameOverride={cls.element('lenke')}
                                     href={lenke.url}
                                     onClick={event => {
-                                        oppdaterSessionStorage(
-                                            event,
-                                            lenke.key,
-                                            lenke.url
-                                        );
+                                        event.preventDefault();
+                                        oppdaterSessionStorage(lenke.key);
                                         settArbeidsflate();
+                                    }}
+                                    gaEventArgs={{
+                                        category: GACategory.Header,
+                                        action: 'arbeidsflate-valg',
                                     }}
                                 >
                                     <div
@@ -68,7 +75,7 @@ const Arbeidsflatemeny = ({
                                             {lenke.tittel}
                                         </EtikettLiten>
                                     </div>
-                                </a>
+                                </LenkeMedGA>
                             </li>
                         );
                     }
@@ -86,7 +93,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     settArbeidsflate: () => dispatch(finnArbeidsflate()),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Arbeidsflatemeny);
+export default connect(mapStateToProps, mapDispatchToProps)(Arbeidsflatemeny);

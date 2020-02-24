@@ -25,9 +25,7 @@ interface DispatchProps {
 
 type LanguageProviderProps = OwnProps & DispatchProps;
 
-const LanguageProvider: React.FunctionComponent<
-    LanguageProviderProps
-> = props => {
+const LanguageProvider: React.FunctionComponent<LanguageProviderProps> = props => {
     useEffect(() => {
         props.doSettLanguage(sjekkUrl());
         props.doSettArbeidsflate();
@@ -42,7 +40,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     doSettArbeidsflate: () => dispatch(finnArbeidsflate()),
 });
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(LanguageProvider);
+export default connect(null, mapDispatchToProps)(LanguageProvider);

@@ -1,25 +1,27 @@
 import React from 'react';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
-import Lenke from 'nav-frontend-lenker';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import Environment from '../../../../utils/Environment';
 import './MinsideLenke.less';
+import { GACategory } from '../../../../utils/google-analytics';
+import { LenkeMedGA } from '../../../LenkeMedGA';
 
-interface StateProps {
-    erInnlogget: boolean;
-    arbeidsflate: MenuValue;
-}
-
-interface Props {
+interface OwnProps {
     tabindex: boolean;
 }
 
-const MinsideLenke = ({
-    erInnlogget,
+interface StateProps {
+    erinnlogget: boolean;
+    arbeidsflate: MenuValue;
+}
+
+type MinsideLenkeProps = StateProps & OwnProps;
+export const MinsideLenke = ({
+    erinnlogget,
     arbeidsflate,
     tabindex,
-}: StateProps & Props) => {
+}: MinsideLenkeProps) => {
     const lenketekst =
         arbeidsflate === MenuValue.IKKEVALGT ||
         arbeidsflate === MenuValue.PRIVATPERSON
@@ -38,17 +40,21 @@ const MinsideLenke = ({
 
     return (
         <div className="minside-lenke">
-            {erInnlogget && arbeidsflate !== MenuValue.SAMARBEIDSPARTNER ? (
-                <Lenke href={lenkeurl} tabIndex={tabindex ? 0 : -1}>
+            {erinnlogget && arbeidsflate !== MenuValue.SAMARBEIDSPARTNER ? (
+                <LenkeMedGA
+                    href={lenkeurl}
+                    tabIndex={tabindex ? 0 : -1}
+                    gaEventArgs={{category: GACategory.Header, action: 'minside', label: lenkeurl}}
+                >
                     {lenketekst}
-                </Lenke>
+                </LenkeMedGA>
             ) : null}
         </div>
     );
 };
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    erInnlogget: state.innloggingsstatus.data.authenticated,
+    erinnlogget: state.innloggingsstatus.data.authenticated,
     arbeidsflate: state.arbeidsflate.status,
 });
 

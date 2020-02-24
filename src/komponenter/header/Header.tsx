@@ -1,58 +1,41 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from '../../redux/dispatch-type';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../reducer/reducer';
 import { Language } from '../../reducer/language-duck';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
 import Mobilmeny from './meny/Mobilmeny';
-import Toppmeny from './arbeidsflatemeny/Arbeidsflatemeny';
+import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import Desktopmeny from './meny/Desktopmeny';
+import { MenuValue } from '../../utils/meny-storage-utils';
+import { oppdaterSessionStorage } from '../../utils/meny-storage-utils';
+import Environment from '../../utils/Environment';
 
-interface StateProps {
-    language: Language;
-}
+export const Header = () => {
+    const dispatch = useDispatch();
+    const language = useSelector((state: AppState) => state.language.language);
 
-interface DispatchProps {
-    hentMenypunkter: () => Promise<void>;
-}
-
-type HeaderProps = StateProps & DispatchProps;
-
-const Header = ({ hentMenypunkter, language }: HeaderProps) => {
-    React.useEffect(() => {
-        hentMenypunkter();
+    useEffect(() => {
+        fetchMenypunkter()(dispatch);
+        if (Environment.context !== MenuValue.IKKEVALGT) {
+            oppdaterSessionStorage(Environment.context);
+        }
     }, []);
 
     return (
-        <div className="navno-dekorator">
-            <div className="hodefot">
-                <Skiplinks />
-                <header className="siteheader">
-                    <div className="innhold-container">
-                        <div className="media-sm-mobil mobil-meny">
-                            <Mobilmeny />
-                        </div>
-                        <div className="media-md-tablet tablet-desktop-meny">
-                            {language === Language.NORSK && <Toppmeny />}
-                            <Desktopmeny language={language} />
-                        </div>
-                    </div>
-                </header>
-            </div>
-        </div>
+        <>
+            <Skiplinks />
+            <header className="siteheader">
+                <div className="media-sm-mobil mobil-meny">
+                    <Mobilmeny />
+                </div>
+                <div className="media-md-tablet tablet-desktop-meny">
+                    {language === Language.NORSK && <Arbeidsflatemeny />}
+                    <Desktopmeny language={language} />
+                </div>
+            </header>
+        </>
     );
 };
 
-const mapStateToProps = (state: AppState): StateProps => ({
-    language: state.language.language,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    hentMenypunkter: () => fetchMenypunkter()(dispatch),
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Header);
+export default Header;

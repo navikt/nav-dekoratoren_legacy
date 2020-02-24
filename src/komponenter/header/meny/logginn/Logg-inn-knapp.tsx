@@ -4,21 +4,23 @@ import { AppState } from '../../../../reducer/reducer';
 import KnappBase from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
-import Environment, { erNavDekoratoren } from '../../../../utils/Environment';
-import { verifyWindowObj } from '../../../../utils/Environment';
+import Environment, {
+    erNavDekoratoren,
+    verifyWindowObj,
+} from '../../../../utils/Environment';
 import LogginnIkon from '../../../../ikoner/mobilmeny/LogginnIkon';
 import Tekst from '../../../../tekster/finn-tekst';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
+import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 
 const getPath = () => {
     if (verifyWindowObj()) {
-        return window.location.pathname.split('/')[3] !== undefined
-            ? '/person/nav-dekoratoren/' +
-                  window.location.pathname.split('/')[3]
-            : '/person/nav-dekoratoren/';
+        return window.location.pathname.split('/')[2] !== undefined
+            ? '/dekoratoren/' + window.location.pathname.split('/')[2]
+            : '/dekoratoren/';
     }
-    return '/person/nav-dekoratoren/';
+    return '/dekoratoren/';
 };
 
 interface StateProps {
@@ -29,7 +31,7 @@ interface State {
     informasjonboks: Object;
 }
 
-class LoggInnKnapp extends React.Component<StateProps, State> {
+export class LoggInnKnapp extends React.Component<StateProps, State> {
     constructor(props: StateProps) {
         super(props);
         this.state = {
@@ -58,8 +60,14 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
     handleButtonClick = () => {
         const path = erNavDekoratoren() ? getPath() : '/person/dittnav';
         const login = `${Environment.loginUrl}/login?redirect=${Environment.baseUrl}${path}`;
+        const erInnlogget = this.props.erInnlogget;
+        triggerGaEvent({
+            category: GACategory.Header,
+            action: erInnlogget ? 'logg-ut' : 'logg-inn',
+        });
+
         if (process.env.NODE_ENV === 'production') {
-            return this.props.erInnlogget
+            return erInnlogget
                 ? (window.location.href = Environment.logoutUrl)
                 : (window.location.href = login);
         } else {
@@ -81,7 +89,7 @@ class LoggInnKnapp extends React.Component<StateProps, State> {
                         onClick={this.handleButtonClick}
                     >
                         <LogginnIkon />
-                        <Undertittel>
+                        <Undertittel className="knappetekst">
                             <Tekst id={knappetekst} />
                         </Undertittel>
                     </button>

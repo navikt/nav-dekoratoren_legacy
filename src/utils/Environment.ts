@@ -1,3 +1,6 @@
+import { FooterLenke } from '../komponenter/footer/Footer-lenker';
+import { MenuValue } from './meny-storage-utils';
+
 export default class Environment {
     static baseUrl: string;
     static baseUrlEnonic: string;
@@ -10,6 +13,13 @@ export default class Environment {
     static loginUrl: string;
     static logoutUrl: string;
 
+    // Parameters
+    static language: string;
+    static context: MenuValue;
+    static stripped: string;
+    static redirectToApp: string;
+    static lvl: string;
+
     static settEnv = (result: any) => {
         Environment.baseUrl = result.baseUrl;
         Environment.baseUrlEnonic = result.baseUrlEnonic;
@@ -21,6 +31,13 @@ export default class Environment {
         Environment.dittNavUrl = result.dittNavUrl;
         Environment.loginUrl = result.loginUrl;
         Environment.logoutUrl = result.logoutUrl;
+
+        // Parameters
+        Environment.language = result.language;
+        Environment.context = result.context;
+        Environment.stripped = result.stripped;
+        Environment.redirectToApp = result.redirectToApp;
+        Environment.lvl = result.lvl;
     };
 }
 
@@ -51,25 +68,22 @@ export const verifyWindowObj = () => {
 };
 
 export const erNavDekoratoren = (): boolean => {
-    return (
-        verifyWindowObj() && window.location.href.includes('/nav-dekoratoren')
-    );
+    return verifyWindowObj() && window.location.href.includes('/dekoratoren');
+};
+
+export const genererLenkerTilUrl = (footerlenker: FooterLenke[]) => {
+    const lenker = footerlenker.map(lenke => {
+        lenke.url = genererUrl(lenke.url);
+        return lenke;
+    });
+    return lenker;
+};
+
+export const genererUrl = (lenke: string): string => {
+    return lenke.startsWith('/') ? Environment.baseUrlEnonic + lenke : lenke;
 };
 
 export const erDev =
     verifyWindowObj() &&
     process.env.NODE_ENV === 'development' &&
     window.location.origin.toLowerCase().includes('localhost');
-
-export const localEnv = {
-    baseUrl: 'http://localhost:3000',
-    baseUrlEnonic: 'https://www-x1.nav.no',
-    innloggingslinjenUrl: 'http://localhost:3000/innloggingslinje-api/auth',
-    menypunkter: `http://localhost:8088/person/nav-dekoratoren/api/get/menyvalg`,
-    minsideArbeidsgiverUrl: `https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/`,
-    sokeresultat: `http://localhost:8088/person/nav-dekoratoren/api/get/sokeresultat`,
-    varselinnboksUrl: `http://localhost:8088/person/varselinnboks`,
-    dittNavUrl: `http://localhost:8088/person/dittnav/`,
-    loginUrl: '#',
-    logoutUrl: '#',
-};

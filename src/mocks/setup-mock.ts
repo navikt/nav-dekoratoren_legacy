@@ -3,7 +3,7 @@ import varselinnboksResponse from './varselinnboks-mock';
 import FetchMock, { Middleware, MiddlewareUtils } from 'yet-another-fetch-mock';
 import Environment from '../utils/Environment';
 
-export default () => {
+export const setUpMock = async () => {
     const loggingMiddleware: Middleware = (request, response) => {
         // console.log(request, response);
         return response;
