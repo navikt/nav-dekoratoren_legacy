@@ -16,7 +16,7 @@ export const Menyknapp = (props: Props) => {
     return (
         <button
             onClick={toggleMenu}
-            className={'dropdown__menyknapp'}
+            className={`dropdown__menyknapp ${cls.element('menyknapp')}`}
             id={cls.element('decorator-meny-toggleknapp')}
             aria-label="Menyknapp"
             aria-haspopup="true"
