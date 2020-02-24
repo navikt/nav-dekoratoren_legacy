@@ -97,14 +97,13 @@ const template = (parameters: string) => `
             html, body {  height: 100%; }
             .decorator-dev-container {
                 display:flex;
-                height: 100%;
                 flex-direction: column;
                 justify-content: space-between;
+                height: 100%;
             }
             .decorator-dummy-app{
                 background: #f1f1f1;
                 text-align: center;
-                padding: 5rem;
                 height:100%;
             }
             </style>
