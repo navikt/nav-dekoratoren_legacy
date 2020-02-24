@@ -7,6 +7,7 @@ import Skiplinks from './skiplinks/Skiplinks';
 import MobilMenylinje from './meny/MobilMenylinje';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import DesktopMenylinje from './meny/DesktopMenylinje';
+import MenyBakgrunn from './meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -24,8 +25,11 @@ export const Header = () => {
                     <MobilMenylinje language={language} />
                 </div>
                 <div className="media-tablet-desktop tablet-desktop-meny">
-                    {language === Language.NORSK && <Arbeidsflatemeny />}
-                    <DesktopMenylinje language={language} />
+                    <div className="z-wrapper">
+                        {language === Language.NORSK && <Arbeidsflatemeny />}
+                        <DesktopMenylinje language={language} />
+                    </div>
+                    <MenyBakgrunn className={'desktopmeny'} />
                 </div>
             </header>
         </>

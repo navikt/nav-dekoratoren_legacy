@@ -1,13 +1,12 @@
 
 .desktopmeny__bakgrunn {
-    @top-margin: 205px;     // TODO: ikke hardkode denne
     z-index: 999;
     visibility: hidden;
-    position: absolute;
+    position: fixed;
     width: 100%;
-    height: calc(100% - @top-margin);
+    height: 100%;
     left: 0;
-    top: @top-margin;
+    top: 0;
     transition-duration: 0.35s;
     transition-timing-function: ease-in;
     transition-property: all;
