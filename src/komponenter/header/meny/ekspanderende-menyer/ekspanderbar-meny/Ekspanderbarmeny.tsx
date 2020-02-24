@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import BEMHelper from '../../../../utils/bem';
+import BEMHelper from '../../../../../utils/bem';
 
 type Props = {
     classname: string,

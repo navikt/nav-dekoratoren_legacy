@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import DesktopMeny from './DesktopMenylinje';
 import { Language } from '../../../reducer/language-duck';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import Ekspanderbarmeny from './ekspanderbar-meny/MobilEkspanderbarmeny';
+import Ekspanderbarmeny from './ekspanderende-menyer/meny-uinnlogget-mobil/MobilUinnloggetMeny';
 import Sok from './sok/Sok';
 
 const shallowWithProps = (language: Language) => {

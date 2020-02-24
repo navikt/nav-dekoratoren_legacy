@@ -21,7 +21,7 @@ export const Header = () => {
             <Skiplinks />
             <header className="siteheader">
                 <div className="media-sm-mobil mobil-meny">
-                    <MobilMenylinje />
+                    <MobilMenylinje language={language} />
                 </div>
                 <div className="media-tablet-desktop tablet-desktop-meny">
                     {language === Language.NORSK && <Arbeidsflatemeny />}

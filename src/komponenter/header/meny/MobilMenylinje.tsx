@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import BEMHelper from '../../../utils/bem';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import MobilEkspanderbarmeny from './ekspanderbar-meny/MobilEkspanderbarmeny';
+import MobilUinnloggetMeny from './ekspanderende-menyer/meny-uinnlogget-mobil/MobilUinnloggetMeny';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import SokModal from './sok/sok-innhold/sok-modal/Sokmodal';
 import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
@@ -10,10 +10,16 @@ import './MobilMenylinje.less';
 import { verifyWindowObj } from '../../../utils/Environment';
 import { tabletview } from '../../../styling-mediaquery';
 import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
+import MenyBakgrunn from './ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
+import { Language } from '../../../reducer/language-duck';
 
 const mobilClass = BEMHelper('mobilmeny');
 
-const MobilMenylinje = () => {
+interface Props {
+    language: Language;
+}
+
+const MobilMenylinje = ({ language }: Props) => {
     const [clickedModal, setClickedModal] = useState<boolean>(false);
 
     useEffect(() => {
@@ -44,7 +50,10 @@ const MobilMenylinje = () => {
                         />
                     </div>
                     <div className={mobilClass.element('hoyre-kolonne')}>
-                        <MobilEkspanderbarmeny />
+                        {language === Language.NORSK ||
+                        language === Language.ENGELSK ? (
+                            <MobilUinnloggetMeny />
+                        ) : null}
                         <SokModalToggleknapp
                             className={mobilClass.element('sok')}
                             modalIsOpen={toggleModal}
@@ -52,6 +61,7 @@ const MobilMenylinje = () => {
                         <InnloggingsstatusProvider>
                             <LoggInnKnapp />
                         </InnloggingsstatusProvider>
+                        <MenyBakgrunn className={'mobilmeny'}/>
                     </div>
                 </div>
             </div>

@@ -16,10 +16,10 @@ export const Menyknapp = (props: Props) => {
         <button
             onClick={toggleMenu}
             className={cls.element('menyknapp')}
-            id={'decorator-meny-toggleknapp'}   // TODO: skill desktop/mobil her?
+            id={'decorator-meny-toggleknapp'}   // TODO: skill desktop/mobil her
             aria-label="Menyknapp"
             aria-haspopup="true"
-            aria-controls={'dropdown-menu'}     // TODO: og her?
+            aria-controls={'dropdown-menu'}     // TODO: og her
             aria-expanded={clicked}
         >
             <div className={cls.element('menyknapp', 'innhold')}>

@@ -1,18 +1,18 @@
 import React from 'react';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
-import BEMHelper from '../../../../../utils/bem';
-import { MenySeksjon } from '../../../../../reducer/menu-duck';
-import { MenuValue } from '../../../../../utils/meny-storage-utils';
-import { Language } from '../../../../../reducer/language-duck';
+import BEMHelper from '../../../../../../utils/bem';
+import { MenySeksjon } from '../../../../../../reducer/menu-duck';
+import { MenuValue } from '../../../../../../utils/meny-storage-utils';
+import { Language } from '../../../../../../reducer/language-duck';
 import Topseksjon from './mobil-innhold/top-seksjon/Topseksjon';
 import MenyIngress from './mobil-innhold/MenyIngress';
 import Undermeny from './mobil-innhold/Undermeny';
 import Listelement from './mobil-innhold/Listelement';
-import MobilarbeidsflateValg from '../../../arbeidsflatemeny/MobilarbeidsflateValg';
-import VarselinnboksProvider from '../../../../../provider/Varselinnboks-provider';
-import Varselbjelle from '../../varsel/Varselbjelle';
-import VarselvisningMobil from '../../varsel/varselvisning/VarselvisningMobil';
-import MinsideLenke from '../../minside-lenke/MinsideLenke';
+import MobilarbeidsflateValg from '../../../../arbeidsflatemeny/MobilarbeidsflateValg';
+import VarselinnboksProvider from '../../../../../../provider/Varselinnboks-provider';
+import Varselbjelle from '../../../varsel/Varselbjelle';
+import VarselvisningMobil from '../../../varsel/varselvisning/VarselvisningMobil';
+import MinsideLenke from '../../../minside-lenke/MinsideLenke';
 import './MobilVisningsmeny.less';
 
 interface VisningsmenyProps {

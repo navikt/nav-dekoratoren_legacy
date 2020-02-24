@@ -2,8 +2,8 @@ import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
 import VenstreChevron from 'nav-frontend-chevron/lib/venstre-chevron';
-import BEMHelper from '../../../../../../utils/bem';
-import Tekst from '../../../../../../tekster/finn-tekst';
+import BEMHelper from '../../../../../../../utils/bem';
+import Tekst from '../../../../../../../tekster/finn-tekst';
 
 interface Props {
     lukkundermeny: () => void;

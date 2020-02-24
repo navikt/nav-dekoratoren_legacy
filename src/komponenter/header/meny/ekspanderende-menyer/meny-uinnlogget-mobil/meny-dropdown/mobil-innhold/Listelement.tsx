@@ -1,6 +1,6 @@
 import React from 'react';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import BEMHelper from '../../../../../../utils/bem';
+import BEMHelper from '../../../../../../../utils/bem';
 
 interface Props {
     className: string;

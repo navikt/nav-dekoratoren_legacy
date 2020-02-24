@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ekspanderbarmeny } from '../Ekspanderbarmeny';
+import { Ekspanderbarmeny } from '../ekspanderbar-meny/Ekspanderbarmeny';
 import HamburgerIkon from '../../../../../ikoner/meny/HamburgerIkon';
 import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,7 +48,7 @@ export const DesktopUinnloggetMeny = () => {
         </Menyknapp>
     );
 
-    const menyDropdownInnhold =
+    const dropdownInnhold =
         meny.status === Status.OK
             ? (
                 <UinnloggetDropdown
@@ -58,8 +58,7 @@ export const DesktopUinnloggetMeny = () => {
                     menyLenker={selectMenu(meny.data, language, arbeidsflate)}
                     isOpen={isOpen}
                 />
-            )
-            : <MenySpinner />;
+            ) : <MenySpinner />;
 
     return (
         <Ekspanderbarmeny
@@ -67,7 +66,7 @@ export const DesktopUinnloggetMeny = () => {
             isOpen={isOpen}
             menyKnapp={menyKnapp}
         >
-            {menyDropdownInnhold}
+            {dropdownInnhold}
         </Ekspanderbarmeny>
     );
 };

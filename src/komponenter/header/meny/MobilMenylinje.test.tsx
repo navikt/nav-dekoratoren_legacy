@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import Ekspanderbarmeny from './ekspanderbar-meny/MobilEkspanderbarmeny';
+import Ekspanderbarmeny from './ekspanderende-menyer/meny-uinnlogget-mobil/MobilUinnloggetMeny';
 import MobilMenylinje from './MobilMenylinje';
 import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
+import { Language } from '../../../reducer/language-duck';
 
 const shallowWithProps = () => {
-    return shallow(<MobilMenylinje />);
+    return shallow(<MobilMenylinje language={Language.NORSK} />);
 };
 
 describe('<Mobilmeny>', () => {

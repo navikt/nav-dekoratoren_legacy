@@ -10,8 +10,8 @@ import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import Varselbjelle from './varsel/Varselbjelle';
 import VarselVisning from './varsel/varselvisning/Varselvisning';
 import './DesktopMenylinje.less';
-import { DesktopUinnloggetMeny } from './ekspanderbar-meny/meny-uinnlogget-desktop/DesktopUinnloggetMeny';
-import MenyBakgrunn from './ekspanderbar-meny/meny-bakgrunn/MenyBakgrunn';
+import { DesktopUinnloggetMeny } from './ekspanderende-menyer/meny-uinnlogget-desktop/DesktopUinnloggetMeny';
+import MenyBakgrunn from './ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
 
 const desktopMenylinje = BEMHelper('desktopmeny');
 
