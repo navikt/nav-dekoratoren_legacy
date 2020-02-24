@@ -31,13 +31,13 @@ export const lukkAlleDropdowns = () => ({
 export const reducer = (state: DropdownState = initialState, action: Handling): DropdownState => {
     switch (action.type) {
         case ActionType.TOGGLE_UINNLOGGET_MENY: {
-            return {...state, uinnlogget: !state.uinnlogget};
+            return {...initialState, uinnlogget: !state.uinnlogget};
         }
         case ActionType.TOGGLE_MINSIDE_MENY: {
-            return {...state, minside: !state.minside};
+            return {...initialState, minside: !state.minside};
         }
         case ActionType.TOGGLE_SOK: {
-            return {...state, sok: !state.sok};
+            return {...initialState, sok: !state.sok};
         }
         case ActionType.TOGGLE_LUKK_ALLE: {
             return initialState;
