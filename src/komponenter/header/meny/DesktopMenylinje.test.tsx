@@ -1,34 +1,34 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import DesktopMeny from './DesktopMenylinje';
+import DesktopMenylinje from './DesktopMenylinje';
 import { Language } from '../../../reducer/language-duck';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import Ekspanderbarmeny from './ekspanderende-menyer/meny-uinnlogget-mobil/MobilUinnloggetMeny';
 import Sok from './sok/Sok';
+import DesktopUinnloggetMeny from './ekspanderende-menyer/meny-uinnlogget-desktop/DesktopUinnloggetMeny';
 
 const shallowWithProps = (language: Language) => {
-    return shallow(<DesktopMeny language={language} />);
+    return shallow(<DesktopMenylinje language={language} />);
 };
 
-describe('<DesktopMeny>', () => {
+describe('<DesktopMenylinje>', () => {
     it('Skal rendre <NavLogoRod> komponent', () => {
         const wrapper = shallowWithProps(Language.NORSK);
         expect(wrapper.find(NavLogoRod)).toHaveLength(1);
     });
 
-    it('Skal rendre <Ekspanderbarmeny> komponent hvis språk er norsk', () => {
+    it('Skal rendre <DesktopUinnloggetMeny> komponent hvis språk er norsk', () => {
         const wrapper = shallowWithProps(Language.NORSK);
-        expect(wrapper.find(Ekspanderbarmeny)).toHaveLength(1);
+        expect(wrapper.find(DesktopUinnloggetMeny)).toHaveLength(1);
     });
 
-    it('Skal rendre <Ekspanderbarmeny> komponent hvis språk er engelsk', () => {
+    it('Skal rendre <DesktopUinnloggetMeny> komponent hvis språk er engelsk', () => {
         const wrapper = shallowWithProps(Language.ENGELSK);
-        expect(wrapper.find(Ekspanderbarmeny)).toHaveLength(1);
+        expect(wrapper.find(DesktopUinnloggetMeny)).toHaveLength(1);
     });
 
-    it('Skal IKKE rendre <Ekspanderbarmeny> komponent hvis språk er samisk', () => {
+    it('Skal IKKE rendre <DesktopUinnloggetMeny> komponent hvis språk er samisk', () => {
         const wrapper = shallowWithProps(Language.SAMISK);
-        expect(wrapper.find(Ekspanderbarmeny)).toHaveLength(0);
+        expect(wrapper.find(DesktopUinnloggetMeny)).toHaveLength(0);
     });
 
     it('Skal rendre <Sok> komponent', () => {
