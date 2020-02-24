@@ -138,8 +138,9 @@ const pathsForTemplate = [
 ];
 
 app.get(pathsForTemplate, (req, res) => {
-    const i = req.url.indexOf('?');
-    const parameters = req.url.substr(i + 1);
+    const parameters = Object.keys(req.query).length
+        ? `?${req.url.split('?')[1]}`
+        : ``;
     res.send(template(parameters));
 });
 
