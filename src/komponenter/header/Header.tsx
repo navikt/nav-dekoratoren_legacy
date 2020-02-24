@@ -25,7 +25,7 @@ export const Header = () => {
                     <MobilMenylinje language={language} />
                 </div>
                 <div className="media-tablet-desktop tablet-desktop-meny">
-                    <div className="z-wrapper">
+                    <div className="header-z-wrapper">
                         {language === Language.NORSK && <Arbeidsflatemeny />}
                         <DesktopMenylinje language={language} />
                     </div>
