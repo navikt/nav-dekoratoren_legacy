@@ -1,6 +1,5 @@
 import React from 'react';
 import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
-import HamburgerIkon from '../../../../../ikoner/meny/HamburgerIkon';
 import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../reducer/reducer';
@@ -13,6 +12,7 @@ import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { Menyknapp } from '../meny-knapp/Menyknapp';
 import { toggleUinnloggetMeny } from '../../../../../reducer/dropdown-toggle-duck';
+import HamburgerKnapp from '../meny-knapp/hamburger-knapp/HamburgerKnapp';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -41,7 +41,9 @@ export const DesktopUinnloggetMeny = () => {
             clicked={isOpen}
             classname={classname}
         >
-            <HamburgerIkon ikonClass="hamburger-ikon" />
+            <div className={'hamburger-knapp'}>
+                <HamburgerKnapp isOpen={isOpen}/>
+            </div>
             <Undertittel>
                 <Tekst id="meny-knapp" />
             </Undertittel>
