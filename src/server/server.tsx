@@ -121,13 +121,13 @@ const template = (parameters: string) => `
         </head>
         <body>
             <div class="decorator-dev-container">
-            <div id="header-withmenu">
-                <section class="navno-dekorator" id="decorator-header" role="main">${htmlHeader}</section>
-            </div>
-            <div class="decorator-dummy-app"></div>
-            <div id="footer-withmenu">
-                <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
-            </div>
+                <div id="header-withmenu">
+                    <section class="navno-dekorator" id="decorator-header" role="main">${htmlHeader}</section>
+                </div>
+                <div class="decorator-dummy-app"></div>
+                <div id="footer-withmenu">
+                    <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
+                </div>
             </div>
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}${parameters}"></div>
