@@ -42,13 +42,18 @@
 }
 
 .dekorator-under-arbeid {
-    padding: 0.5rem 0;
+    position: relative;
+    z-index: 1000;
+    padding: 0.5rem;
     width: 100%;
     height: auto;
     text-align: center;
     background-color: @navMorkGra;
     color: white;
-    @media (min-width: @tabletLimitWidth) {
-        height: 2.75rem;
+
+    .typo-element {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }

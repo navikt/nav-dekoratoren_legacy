@@ -1,0 +1,74 @@
+@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../styling-variabler.less';
+
+.mobilmeny {
+    &__content {
+        padding: 0.5rem 0.5rem 0.5rem 1rem;
+        border-bottom: 1px solid black;
+    }
+
+    &__elementer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__venstre-kolonne {
+        padding-left: 0.5rem;
+    }
+
+    &__hoyre-kolonne {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding-top: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    &__logo {
+        width: 66px;
+        height: 66px;
+
+        &:hover {
+            outline: 1px solid black;
+        }
+
+        &:focus {
+            outline: 3px solid @fokusFarge;
+        }
+    }
+
+    &__sok {
+        margin-left: 3px;
+        text-decoration: none;
+        color: black;
+        background-color: white;
+        border: none;
+        padding: 0.4rem 0.7rem 0.4rem 0.7rem;
+        order: 2;
+
+        &:hover {
+            outline: 1px black solid;
+        }
+
+        &:focus {
+            outline: 3px solid @fokusFarge;
+        }
+    }
+
+    .login-container {
+        order: 3;
+    }
+
+    .dropdown-container {
+        order: 4;
+        width: 100%;
+    }
+
+    @media (max-width: @minimumMobilWidth) {
+        &__sok {
+            padding: 0.4rem 0.2rem;
+        }
+    }
+}

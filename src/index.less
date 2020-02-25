@@ -9,6 +9,16 @@ body {
 .sitefooter {
     background-color: white;
 }
+.siteheader {
+    position: relative;
+    z-index: 1000;
+}
+
+.header-z-wrapper {
+    z-index: 1000;
+    position: relative;
+    background-color: white;
+}
 
 .site-skiplinks,
 .siteheader,
@@ -33,7 +43,8 @@ body {
 }
 
 .media-md-tablet,
-.media-lg-desktop {
+.media-lg-desktop,
+.media-tablet-desktop {
     display: none !important;
 }
 
@@ -42,7 +53,8 @@ body {
         display: none !important;
     }
 
-    .media-md-tablet {
+    .media-md-tablet,
+    .media-tablet-desktop {
         @media screen and (-ms-high-contrast: active),
             (-ms-high-contrast: none) {
             display: inline !important;
@@ -62,15 +74,33 @@ body {
 }
 
 @media (min-width: @desktopLimitWidth) {
-    .media-mobil-tablet {
-        display: none !important;
-    }
-
     .media-lg-desktop {
         @media screen and (-ms-high-contrast: active),
             (-ms-high-contrast: none) {
             display: inline !important;
         }
         display: initial !important;
+    }
+
+    .media-md-tablet {
+        display: none !important;
+    }
+}
+
+.decorator-dummy-app {
+    background: #8888;
+    height: 100%;
+    min-height: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .decorator-dummy-app__content {
+        background-color: @navBlaLighten80;
+        padding: 4rem;
+        font-family: 'Source Sans Pro', Arial, sans-serif;
+        font-size: 1rem;
+        box-shadow: @box-shadow;
+        border-radius: 4px;
     }
 }

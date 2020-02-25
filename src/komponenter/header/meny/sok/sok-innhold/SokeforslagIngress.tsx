@@ -23,7 +23,7 @@ const SokeforslagIngress = ({
                     </div>
                 </div>
             </div>
-            <div className="media-md-tablet sokeforslag-ingress">
+            <div className="media-tablet-desktop sokeforslag-ingress">
                 <div className="overskrift">
                     <Undertittel>
                         {displayName ? displayName : 'Ingen treff å vise.'}

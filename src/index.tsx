@@ -21,19 +21,15 @@ if (verifyWindowObj()) {
     es6promise.polyfill();
 }
 
+if (erDev) {
+    console.log('==========================');
+    console.log('======= DEVELOPMENT ======');
+    console.log('==========================');
+}
+
 const run = () => {
     initGA();
     fetchEnv()
-        .then(async () => {
-            if (erDev) {
-                console.log('==========================');
-                console.log('======= DEVELOPMENT ======');
-                console.log('==========================');
-                await import('./mocks/setup-mock').then(({ setUpMock }) =>
-                    setUpMock()
-                );
-            }
-        })
         .then(() => {
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>

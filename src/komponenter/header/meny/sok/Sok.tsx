@@ -20,6 +20,7 @@ import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
 import Sokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Sokknapp';
 import './Sok.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
+import BEMHelper from '../../../../utils/bem';
 
 interface StateProps {
     language: Language;
@@ -30,6 +31,7 @@ interface Props {
 }
 
 const predefinedlistview = 5;
+const mobileCls = BEMHelper('sok');
 
 class Sok extends React.Component<StateProps & Props, InputState> {
     handleChangeThrottled: ReturnType<typeof throttle>;
@@ -41,6 +43,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
             selectedInput: '',
             writtenInput: '',
             items: [defaultData],
+            setBackground: false,
         };
         this.handleChangeThrottled = throttle(
             this.handleValueChange.bind(this),
@@ -61,7 +64,11 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     handleValueChange(input: string) {
-        const url = Environment.sokeresultat;
+        const url = Environment.BACKEND_SOK_URL;
+        console.log('input', input);
+        if (input === '') {
+            this.setState({ setBackground: false });
+        }
 
         if (this.ismounted) {
             this.setState({
@@ -204,121 +211,144 @@ class Sok extends React.Component<StateProps & Props, InputState> {
         }
     };
 
+    enableBackground = (isOpen: boolean) => {
+        if (isOpen !== this.state.setBackground) {
+            this.setState({ setBackground: isOpen });
+        }
+    };
+
     render() {
         const { selectedInput, items } = this.state;
         const { language } = this.props;
-        const URL = `${Environment.baseUrlEnonic}/sok?ord=${selectedInput}`;
+        const URL = `${Environment.BASE_URL_ENONIC}/sok?ord=${selectedInput}`;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
         });
 
         return (
-            <Downshift
-                stateReducer={this.stateReducer}
-                onChange={selection => {
-                    this.handleSelect(selection);
-                }}
-                onInputValueChange={(changes: string, stateAndHelpers: any) => {
-                    stateAndHelpers.getInputProps();
-                    this.handleChangeThrottled(changes);
-                }}
-                itemToString={item => this.input(item)}
-            >
-                {({
-                    getInputProps,
-                    getItemProps,
-                    getLabelProps,
-                    getMenuProps,
-                    isOpen,
-                    inputValue,
-                }) => {
-                    return (
-                        <form
-                            className="sok"
-                            id="sok"
-                            role="search"
-                            onSubmit={event => {
-                                triggerGaEvent({
-                                    category: GACategory.Header,
-                                    action: 'søk',
-                                    label: selectedInput,
-                                });
-                                this.handleSubmit(event, URL);
-                            }}
-                        >
-                            <>
-                                <div className="sok-wrapper">
-                                    <div className="sok-container">
-                                        <div className="sok-input-resultat">
-                                            <Input
-                                                {...getInputProps()}
-                                                className={klassenavn}
-                                                placeholder={finnTekst(
-                                                    'sok-input-placeholder',
-                                                    language
-                                                )}
-                                                label={finnTekst(
-                                                    'sok-input-label',
-                                                    language
-                                                )}
-                                                aria-label={finnTekst(
-                                                    'sok-input-label',
-                                                    language
-                                                )}
-                                            />
-                                            <ul
-                                                className="sokeresultat-liste"
-                                                {...getMenuProps()}
-                                            >
-                                                {isOpen &&
-                                                inputValue !== '' &&
-                                                items
-                                                    ? items
-                                                          .slice(
-                                                              0,
-                                                              predefinedlistview +
-                                                                  1
-                                                          )
-                                                          .map(
-                                                              (item, index) => (
-                                                                  <li
-                                                                      {...getItemProps(
-                                                                          {
-                                                                              key: index,
-                                                                              index,
-                                                                              item,
-                                                                          }
-                                                                      )}
-                                                                      style={this.cssIndex(
-                                                                          index
-                                                                      )}
-                                                                  >
-                                                                      <SokeforslagIngress
-                                                                          className="sok-resultat-listItem"
-                                                                          displayName={
-                                                                              item.displayName
-                                                                          }
-                                                                      />
-                                                                      <Sokeforslagtext
-                                                                          highlight={
-                                                                              item.highlight
-                                                                          }
-                                                                      />
-                                                                  </li>
+            <>
+                <Downshift
+                    stateReducer={this.stateReducer}
+                    onChange={selection => {
+                        this.handleSelect(selection);
+                    }}
+                    onInputValueChange={(
+                        changes: string,
+                        stateAndHelpers: any
+                    ) => {
+                        this.enableBackground(stateAndHelpers.isOpen);
+                        stateAndHelpers.getInputProps();
+                        this.handleChangeThrottled(changes);
+                    }}
+                    itemToString={item => this.input(item)}
+                >
+                    {({
+                        getInputProps,
+                        getItemProps,
+                        getLabelProps,
+                        getMenuProps,
+                        isOpen,
+                        inputValue,
+                    }) => {
+                        return (
+                            <form
+                                className="sok"
+                                id="sok"
+                                role="search"
+                                onSubmit={event => {
+                                    triggerGaEvent({
+                                        category: GACategory.Header,
+                                        action: 'søk',
+                                        label: selectedInput,
+                                    });
+                                    this.handleSubmit(event, URL);
+                                }}
+                            >
+                                <>
+                                    <div className="sok-wrapper">
+                                        <div className="sok-container">
+                                            <div className="sok-input-resultat">
+                                                <Input
+                                                    {...getInputProps()}
+                                                    className={klassenavn}
+                                                    placeholder={finnTekst(
+                                                        'sok-input-placeholder',
+                                                        language
+                                                    )}
+                                                    label={finnTekst(
+                                                        'sok-input-label',
+                                                        language
+                                                    )}
+                                                    aria-label={finnTekst(
+                                                        'sok-input-label',
+                                                        language
+                                                    )}
+                                                />
+                                                <ul
+                                                    className="sokeresultat-liste"
+                                                    {...getMenuProps()}
+                                                >
+                                                    {isOpen &&
+                                                    inputValue !== '' &&
+                                                    items
+                                                        ? items
+                                                              .slice(
+                                                                  0,
+                                                                  predefinedlistview +
+                                                                      1
                                                               )
-                                                          )
-                                                    : null}
-                                            </ul>
+                                                              .map(
+                                                                  (
+                                                                      item,
+                                                                      index
+                                                                  ) => (
+                                                                      <li
+                                                                          {...getItemProps(
+                                                                              {
+                                                                                  key: index,
+                                                                                  index,
+                                                                                  item,
+                                                                              }
+                                                                          )}
+                                                                          style={this.cssIndex(
+                                                                              index
+                                                                          )}
+                                                                      >
+                                                                          <SokeforslagIngress
+                                                                              className="sok-resultat-listItem"
+                                                                              displayName={
+                                                                                  item.displayName
+                                                                              }
+                                                                          />
+                                                                          <Sokeforslagtext
+                                                                              highlight={
+                                                                                  item.highlight
+                                                                              }
+                                                                          />
+                                                                      </li>
+                                                                  )
+                                                              )
+                                                        : null}
+                                                </ul>
+                                            </div>
+                                            <DesktopSokknapp />
+                                            <Sokknapp />
                                         </div>
-                                        {false && <DesktopSokknapp />}
-                                        <Sokknapp />
                                     </div>
-                                </div>
-                            </>
-                        </form>
-                    );
-                }}
-            </Downshift>
+                                </>
+                            </form>
+                        );
+                    }}
+                </Downshift>
+                <div className="media-sm-mobil mobil-meny">
+                    <div
+                        className={mobileCls.element(
+                            'bakgrunn',
+                            this.state.setBackground ? 'active' : ''
+                        )}
+                    />
+                </div>
+            </>
         );
     }
 }

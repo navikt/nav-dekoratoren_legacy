@@ -14,15 +14,6 @@ import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 
-const getPath = () => {
-    if (verifyWindowObj()) {
-        return window.location.pathname.split('/')[2] !== undefined
-            ? '/dekoratoren/' + window.location.pathname.split('/')[2]
-            : '/dekoratoren/';
-    }
-    return '/dekoratoren/';
-};
-
 interface StateProps {
     erInnlogget: boolean;
 }
@@ -58,23 +49,22 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
     };
 
     handleButtonClick = () => {
-        const path = erNavDekoratoren() ? getPath() : '/person/dittnav';
-        const login = `${Environment.loginUrl}/login?redirect=${Environment.baseUrl}${path}`;
-        const erInnlogget = this.props.erInnlogget;
+        const { erInnlogget } = this.props;
+        const appUrl = location.origin + location.pathname;
+        const LOGIN_URL = `${
+            Environment.redirectToApp || erNavDekoratoren
+                ? `${Environment.LOGIN_URL}/login?redirect=${appUrl}`
+                : `${Environment.LOGIN_URL}/login?redirect=${Environment.DITT_NAV_URL}`
+        }&level=${Environment.level}`;
+
         triggerGaEvent({
             category: GACategory.Header,
             action: erInnlogget ? 'logg-ut' : 'logg-inn',
         });
 
-        if (process.env.NODE_ENV === 'production') {
-            return erInnlogget
-                ? (window.location.href = Environment.logoutUrl)
-                : (window.location.href = login);
-        } else {
-            this.setState({
-                informasjonboks: this.informasjon,
-            });
-        }
+        return erInnlogget
+            ? (window.location.href = Environment.LOGOUT_URL)
+            : (window.location.href = LOGIN_URL);
     };
 
     render() {
@@ -94,7 +84,7 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
                         </Undertittel>
                     </button>
                 </div>
-                <div className="media-md-tablet login-tablet-desktop">
+                <div className="media-tablet-desktop login-tablet-desktop">
                     <KnappBase
                         className="login-knapp"
                         type="standard"

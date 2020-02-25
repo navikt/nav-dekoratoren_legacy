@@ -1,0 +1,35 @@
+@import (reference) '../../../../../styling-variabler.less';
+
+.hovedmeny-desktop {
+    &__innhold-wrapper {
+        position: absolute;
+        z-index: 1001;
+        overflow: hidden;
+        max-height: 0;
+        max-width: @desktopLimitWidth / 3;
+        visibility: hidden;
+        background-color: white;
+        border-bottom-left-radius: @border-radius-base;
+        border-bottom-right-radius: @border-radius-base;
+
+        transition-duration: 0.7s;
+        transition-timing-function: ease-in-out;
+        transition-property: all;
+
+        &--aktive {
+            max-height: 60rem;
+            max-width: 100%;
+            visibility: visible;
+        }
+    }
+
+    &__innhold {
+        box-sizing: border-box;
+        padding: 0 @padding-horizontal 2rem @padding-horizontal;
+        overflow: hidden;
+        min-width: @tabletLimitWidth;
+        @media (min-width: @desktopLimitWidth) {
+            width: @desktopLimitWidth;
+        }
+    }
+}

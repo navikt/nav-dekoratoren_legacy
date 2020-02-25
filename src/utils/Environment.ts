@@ -1,42 +1,43 @@
 import { FooterLenke } from '../komponenter/footer/Footer-lenker';
+import { MenuValue } from './meny-storage-utils';
 
 export default class Environment {
-    static baseUrl: string;
-    static baseUrlEnonic: string;
-    static innloggingslinjenUrl: string;
-    static menypunkter: string;
-    static minsideArbeidsgiverUrl: string;
-    static sokeresultat: string;
-    static varselinnboksUrl: string;
-    static dittNavUrl: string;
-    static loginUrl: string;
-    static logoutUrl: string;
+    static BASE_URL: string;
+    static BASE_URL_ENONIC: string;
+    static API_INNLOGGINGSLINJE_URL: string;
+    static API_VARSELINNBOKS_URL: string;
+    static BACKEND_MENY_URL: string;
+    static BACKEND_SOK_URL: string;
+    static MINSIDE_ARBEIDSGIVER_URL: string;
+    static DITT_NAV_URL: string;
+    static LOGIN_URL: string;
+    static LOGOUT_URL: string;
 
     // Parameters
     static language: string;
-    static context: string;
+    static context: MenuValue;
     static stripped: string;
     static redirectToApp: string;
-    static lvl: string;
+    static level: string;
 
     static settEnv = (result: any) => {
-        Environment.baseUrl = result.baseUrl;
-        Environment.baseUrlEnonic = result.baseUrlEnonic;
-        Environment.innloggingslinjenUrl = result.innloggingslinjenUrl;
-        Environment.menypunkter = result.menypunkter;
-        Environment.minsideArbeidsgiverUrl = result.minsideArbeidsgiverUrl;
-        Environment.sokeresultat = result.sokeresultat;
-        Environment.varselinnboksUrl = result.varselinnboksUrl;
-        Environment.dittNavUrl = result.dittNavUrl;
-        Environment.loginUrl = result.loginUrl;
-        Environment.logoutUrl = result.logoutUrl;
+        Environment.BASE_URL = result.BASE_URL;
+        Environment.BASE_URL_ENONIC = result.BASE_URL_ENONIC;
+        Environment.API_INNLOGGINGSLINJE_URL = result.API_INNLOGGINGSLINJE_URL;
+        Environment.API_VARSELINNBOKS_URL = result.API_VARSELINNBOKS_URL;
+        Environment.MINSIDE_ARBEIDSGIVER_URL = result.MINSIDE_ARBEIDSGIVER_URL;
+        Environment.BACKEND_MENY_URL = result.BACKEND_MENY_URL;
+        Environment.BACKEND_SOK_URL = result.BACKEND_SOK_URL;
+        Environment.DITT_NAV_URL = result.DITT_NAV_URL;
+        Environment.LOGIN_URL = result.LOGIN_URL;
+        Environment.LOGOUT_URL = result.LOGOUT_URL;
 
         // Parameters
         Environment.language = result.language;
         Environment.context = result.context;
         Environment.stripped = result.stripped;
         Environment.redirectToApp = result.redirectToApp;
-        Environment.lvl = result.lvl;
+        Environment.level = result.level;
     };
 }
 
@@ -79,7 +80,7 @@ export const genererLenkerTilUrl = (footerlenker: FooterLenke[]) => {
 };
 
 export const genererUrl = (lenke: string): string => {
-    return lenke.startsWith('/') ? Environment.baseUrlEnonic + lenke : lenke;
+    return lenke.startsWith('/') ? Environment.BASE_URL_ENONIC + lenke : lenke;
 };
 
 export const erDev =

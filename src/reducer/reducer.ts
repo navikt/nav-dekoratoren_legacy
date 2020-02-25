@@ -8,6 +8,7 @@ import { DataElement } from '../api/api';
 import varselLestReducer from './varsel-lest-duck';
 import { languageDuck, LanguageState } from './language-duck';
 import arbeidsflateReducer, { Arbeidsflate } from './arbeidsflate-duck';
+import dropdownTogglesReducer, { DropdownState } from './dropdown-toggle-duck';
 
 export interface AppState {
     innloggingsstatus: InnloggingsstatusState;
@@ -16,6 +17,7 @@ export interface AppState {
     varslerLest: DataElement;
     language: LanguageState;
     arbeidsflate: Arbeidsflate;
+    dropdownToggles: DropdownState;
 }
 
 export const reducer = combineReducers<AppState>({
@@ -25,4 +27,5 @@ export const reducer = combineReducers<AppState>({
     varslerLest: varselLestReducer,
     language: languageDuck.reducer,
     arbeidsflate: arbeidsflateReducer,
+    dropdownToggles: dropdownTogglesReducer,
 });
