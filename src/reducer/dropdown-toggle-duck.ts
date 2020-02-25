@@ -13,31 +13,34 @@ const initialState: DropdownState = {
 };
 
 export const toggleHovedmeny = () => ({
-    type: ActionType.TOGGLE_HOVEDMENY
+    type: ActionType.TOGGLE_HOVEDMENY,
 });
 
 export const toggleMinsideMeny = () => ({
-    type: ActionType.TOGGLE_MINSIDE_MENY
+    type: ActionType.TOGGLE_MINSIDE_MENY,
 });
 
 export const toggleSok = () => ({
-    type: ActionType.TOGGLE_SOK
+    type: ActionType.TOGGLE_SOK,
 });
 
 export const lukkAlleDropdowns = () => ({
-    type: ActionType.TOGGLE_LUKK_ALLE
+    type: ActionType.TOGGLE_LUKK_ALLE,
 });
 
-export const reducer = (state: DropdownState = initialState, action: Handling): DropdownState => {
+export const reducer = (
+    state: DropdownState = initialState,
+    action: Handling
+): DropdownState => {
     switch (action.type) {
         case ActionType.TOGGLE_HOVEDMENY: {
-            return {...initialState, hovedmeny: !state.hovedmeny};
+            return { ...initialState, hovedmeny: !state.hovedmeny };
         }
         case ActionType.TOGGLE_MINSIDE_MENY: {
-            return {...initialState, minside: !state.minside};
+            return { ...initialState, minside: !state.minside };
         }
         case ActionType.TOGGLE_SOK: {
-            return {...initialState, sok: !state.sok};
+            return { ...initialState, sok: !state.sok };
         }
         case ActionType.TOGGLE_LUKK_ALLE: {
             return initialState;
@@ -47,4 +50,4 @@ export const reducer = (state: DropdownState = initialState, action: Handling): 
     }
 };
 
-export default reducer
+export default reducer;

@@ -1,7 +1,10 @@
 import React from 'react';
 import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
 import HamburgerIkon from '../../../../../ikoner/meny/HamburgerIkon';
-import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
+import {
+    GACategory,
+    triggerGaEvent,
+} from '../../../../../utils/google-analytics';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../reducer/reducer';
 import { Status } from '../../../../../api/api';
@@ -49,16 +52,17 @@ export const HovedmenyDesktop = () => {
     );
 
     const dropdownInnhold =
-        meny.status === Status.OK
-            ? (
-                <HovedmenyDropdown
-                    classname={classname}
-                    arbeidsflate={arbeidsflate}
-                    language={language}
-                    menyLenker={selectMenu(meny.data, language, arbeidsflate)}
-                    isOpen={isOpen}
-                />
-            ) : <MenySpinner />;
+        meny.status === Status.OK ? (
+            <HovedmenyDropdown
+                classname={classname}
+                arbeidsflate={arbeidsflate}
+                language={language}
+                menyLenker={selectMenu(meny.data, language, arbeidsflate)}
+                isOpen={isOpen}
+            />
+        ) : (
+            <MenySpinner />
+        );
 
     return (
         <EkspanderbarMeny
@@ -71,4 +75,4 @@ export const HovedmenyDesktop = () => {
     );
 };
 
-export default HovedmenyDesktop
+export default HovedmenyDesktop;

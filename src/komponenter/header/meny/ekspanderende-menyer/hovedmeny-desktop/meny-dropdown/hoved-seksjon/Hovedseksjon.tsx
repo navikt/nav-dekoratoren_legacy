@@ -9,12 +9,13 @@ interface Props {
     isOpen: boolean;
 }
 
-export const Hovedseksjon = ({menyLenker, classname, isOpen}: Props) => {
+export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
     const cls = BEMHelper(classname);
 
     return (
         <div className={cls.element('hoved-seksjon')}>
-            {menyLenker && menyLenker.children.map((menygruppe, index) => (
+            {menyLenker &&
+                menyLenker.children.map((menygruppe, index) => (
                     <HovedseksjonTema
                         menygruppe={menygruppe}
                         isOpen={isOpen}
@@ -22,8 +23,7 @@ export const Hovedseksjon = ({menyLenker, classname, isOpen}: Props) => {
                         temaIndex={index}
                         key={menygruppe.displayName}
                     />
-                ),
-            )}
+                ))}
         </div>
     );
 };

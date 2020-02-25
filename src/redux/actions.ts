@@ -24,7 +24,7 @@ export enum ActionType {
     TOGGLE_HOVEDMENY = 'TOGGLE_HOVEDMENY',
     TOGGLE_MINSIDE_MENY = 'TOGGLE_MINSIDE_MENY',
     TOGGLE_SOK = 'TOGGLE_SOK',
-    TOGGLE_LUKK_ALLE = 'TOGGLE_LUKK_ALLE'
+    TOGGLE_LUKK_ALLE = 'TOGGLE_LUKK_ALLE',
 }
 
 export interface HentInnloggingsstatusOKAction {

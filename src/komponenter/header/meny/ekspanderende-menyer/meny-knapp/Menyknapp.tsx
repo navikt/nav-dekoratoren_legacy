@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const Menyknapp = (props: Props) => {
-    const {toggleMenu, clicked, classname, children} = props;
+    const { toggleMenu, clicked, classname, children } = props;
     const cls = BEMHelper(classname);
 
     return (
@@ -23,11 +23,9 @@ export const Menyknapp = (props: Props) => {
             aria-controls={cls.element('dropdown-menu')}
             aria-expanded={clicked}
         >
-            <div className={'dropdown__menyknapp--innhold'}>
-                {children}
-            </div>
+            <div className={'dropdown__menyknapp--innhold'}>{children}</div>
         </button>
     );
 };
 
-export default Menyknapp
+export default Menyknapp;

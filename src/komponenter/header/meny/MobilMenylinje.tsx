@@ -28,7 +28,10 @@ const MobilMenylinje = ({ language }: Props) => {
     }, []);
 
     const toggleModal = () => {
-        triggerGaEvent({category: GACategory.Header, action: `mobilsøk-${clickedModal ? 'close' : 'open'}`});
+        triggerGaEvent({
+            category: GACategory.Header,
+            action: `mobilsøk-${clickedModal ? 'close' : 'open'}`,
+        });
         setClickedModal(!clickedModal);
     };
 
@@ -61,7 +64,7 @@ const MobilMenylinje = ({ language }: Props) => {
                         <InnloggingsstatusProvider>
                             <LoggInnKnapp />
                         </InnloggingsstatusProvider>
-                        <MenyBakgrunn className={'mobilmeny'}/>
+                        <MenyBakgrunn className={'mobilmeny'} />
                     </div>
                 </div>
             </div>
