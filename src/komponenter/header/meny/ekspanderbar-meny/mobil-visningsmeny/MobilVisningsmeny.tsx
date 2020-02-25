@@ -190,6 +190,7 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
                     </div>
                     */}
                     <Sok />
+
                     <MenyIngress
                         className={menyClass.element('meny', 'ingress')}
                         inputext={this.props.arbeidsflate}

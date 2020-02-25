@@ -25,9 +25,7 @@ interface DispatchProps {
 
 type VarselinnboksProviderProps = OwnProps & StateProps & DispatchProps;
 
-const VarselinnboksProvider: React.FunctionComponent<
-    VarselinnboksProviderProps
-> = props => {
+const VarselinnboksProvider: React.FunctionComponent<VarselinnboksProviderProps> = props => {
     useEffect(() => {
         if (props.erInnlogget) {
             props.doHentVarselinnboks();

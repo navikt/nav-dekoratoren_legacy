@@ -107,6 +107,10 @@
                     0px 41.8px 33.4px rgba(0, 0, 0, 0.086),
                     0px 100px 80px rgba(0, 0, 0, 0.12);
 
+                &:last-child {
+                    height: 18rem;
+                }
+
                 &:first-child {
                     border-top: 2px solid white;
                 }
@@ -157,7 +161,7 @@
         border: none;
 
         &:focus {
-            outline: 2px solid white;
+            outline: 2px solid @navBla;
         }
     }
 
@@ -236,6 +240,10 @@
                     color: black;
                     font-weight: normal;
                     border: #b7b1a9 1px solid;
+
+                    &:last-child {
+                        height: auto;
+                    }
 
                     &:focus,
                     &:hover {
