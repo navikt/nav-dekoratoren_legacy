@@ -193,26 +193,21 @@ app.get(`${basePath}/env`, (req, res) => {
 });
 
 app.get(`${basePath}/api/sok`, (req, res) => {
-    const uri = `${process.env.API_SOK_URL || defaultSearchUrl}?ord=${
-        req.query.ord
-    }`;
-    request({ method: 'GET', uri }, (error, response, body) => {
-        if (!error && response.statusCode === 200) {
-            res.send(body);
-        } else {
-            res.send(mockSok);
-        }
-    });
+    const base = process.env.API_SOK_URL || defaultSearchUrl;
+    const uri = `${base}?ord=${req.query.ord}`;
+    request({ method: 'GET', uri }, (error, response, body) =>
+        !error && response.statusCode === 200
+            ? res.send(body)
+            : res.send(mockSok)
+    );
 });
 
 app.get(`${basePath}/api/meny`, (req, res) => {
-    mainCache.get(mainCacheKey, (err, response) => {
-        if (!err && response !== undefined) {
-            res.send(response);
-        } else {
-            fetchmenuOptions(res);
-        }
-    });
+    mainCache.get(mainCacheKey, (err, response) =>
+        !err && response !== undefined
+            ? res.send(response)
+            : fetchmenuOptions(res)
+    );
 });
 
 const fetchmenuOptions = (res: any) => {
