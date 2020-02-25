@@ -29,10 +29,10 @@ const app = express();
 const PORT = 8088;
 
 // Default vars
+const defaultBaseUrl = 'http://localhost:8088';
 const defaultSearchUrl = `https://www.nav.no/_/service/navno.nav.no.search/search2`;
 const defaultMenuUrl = `https://www.nav.no/_/service/no.nav.navno/menu`;
-const defaultAppUrl = `http://localhost:8088${basePath}`;
-const localhost = 'http://localhost:8088';
+const defaultAppUrl = `${defaultBaseUrl}${basePath}`;
 
 // Mock
 import mockEnv from './mock/env';
@@ -47,7 +47,7 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 // Server-side rendering
 const store = getStore();
-const BASE_URL = `${process.env.BASE_URL || localhost}`;
+const baseUrl = `${process.env.BASE_URL || defaultBaseUrl}`;
 const fileEnv = `${process.env.BASE_URL_APP || defaultAppUrl}/env`;
 const fileCss = `${process.env.BASE_URL_APP || defaultAppUrl}/css/client.css`;
 const fileScript = `${process.env.BASE_URL_APP || defaultAppUrl}/client.js`;
@@ -91,7 +91,7 @@ const template = (parameters: string) => `
             />
             <meta name="theme-color" content="#000000" />
             <title>NAV Dekoratør</title>
-            <link rel="icon" type="image/x-icon" href="${BASE_URL}${fileFavicon}" />
+            <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
             <style>
             /* Decorator development styling */
             html, body {  height: 100%; }
@@ -107,11 +107,11 @@ const template = (parameters: string) => `
             }
             </style>
             <div id="styles">
-                <link rel="icon" type="image/x-icon" href="${BASE_URL}${fileFavicon}" />
-                <link rel="icon" type="image/png" sizes="16x16" href="${BASE_URL}${fileFavicon16x16}">
-                <link rel="icon" type="image/png" sizes="32x32" href="${BASE_URL}${fileFavicon32x32}">
-                <link rel="apple-touch-icon" sizes="180x180" href="${BASE_URL}${fileAppleTouchIcon}">
-                <link rel="mask-icon" href="${BASE_URL}${fileMaskIcon}" color="#5bbad5">
+                <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
+                <link rel="icon" type="image/png" sizes="16x16" href="${baseUrl}${fileFavicon16x16}">
+                <link rel="icon" type="image/png" sizes="32x32" href="${baseUrl}${fileFavicon32x32}">
+                <link rel="apple-touch-icon" sizes="180x180" href="${baseUrl}${fileAppleTouchIcon}">
+                <link rel="mask-icon" href="${baseUrl}${fileMaskIcon}" color="#5bbad5">
                 <meta name="msapplication-TileColor" content="#ffffff">
                 <meta name="theme-color" content="#ffffff">
                 <link href=${fileCss} rel="stylesheet" />
