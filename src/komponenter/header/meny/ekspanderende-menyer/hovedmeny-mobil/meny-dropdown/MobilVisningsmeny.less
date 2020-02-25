@@ -1,0 +1,151 @@
+@import '~nav-frontend-core/less/_variabler';
+@import '../../../../../../styling-variabler.less';
+
+.mobilmeny {
+    &__innhold-wrapper,
+    &__varsel-innhold {
+        position: fixed;
+        top: 0;
+        left: -(@mobilemenuwidth);
+        z-index: 1001;
+    }
+
+    ul {
+        padding: 0;
+    }
+
+    &__undermeny-innhold,
+    &__varsel-innhold {
+        top: 0;
+        left: -(@mobilemenuwidth);
+        width: @mobilemenuwidth;
+        position: fixed;
+
+        &--active {
+            left: 0;
+        }
+    }
+
+    &__innhold-wrapper,
+    &__undermeny-innhold,
+    &__varsel-innhold {
+        padding: 1rem;
+        background-color: white;
+        width: @mobilemenuwidth;
+        max-width: 375px;
+        height: 100%;
+        border-radius: 3px;
+        overflow: scroll;
+        transition: all 0.7s ease-in-out;
+
+        &--aktive {
+            left: 0;
+        }
+    }
+
+    &__meny {
+        &--list ul {
+            margin: 0;
+        }
+
+        &--list {
+            padding: 1rem 1rem 0.5rem 1rem;
+
+            .lenke {
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+
+                &:active,
+                &:focus,
+                &:focus-within {
+                    box-shadow: none;
+                    span {
+                        color: @navDypBla;
+                        outline: 3px solid @fokusFarge;
+                    }
+                }
+            }
+        }
+
+        &--listItem {
+            padding-bottom: 2rem;
+            padding-right: 0.5rem;
+        }
+
+        &--tilbakelenke {
+            padding-bottom: 0;
+        }
+
+        &--text-element {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &--text-element-undermeny {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        &--ingress {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 1.5rem 0 0;
+            color: @navGra80;
+
+            .typo-sidetittel {
+                font-weight: 500;
+            }
+        }
+    }
+
+    &__undermeny-chevron {
+        padding-right: 0.5rem;
+    }
+
+    &__lukk-undermeny {
+        .lenke {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 1rem 1rem 1rem 0;
+            i {
+                margin-right: 0.5rem;
+            }
+
+            &:active {
+                color: @navDypBla;
+            }
+        }
+    }
+
+    .min-varsel-wrapper {
+        .mobilmeny {
+            &__lukk-undermeny {
+                .lenke {
+                    padding-top: 0;
+                    padding-bottom: 2rem;
+                }
+            }
+        }
+    }
+
+    &__minside-rad {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem 0 0.5rem;
+
+        &--sett-rad-midt {
+            justify-content: flex-start;
+        }
+    }
+}

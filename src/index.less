@@ -10,6 +10,12 @@ body {
     background-color: white;
 }
 
+.header-z-wrapper {
+    z-index: 1000;
+    position: relative;
+    background-color: white;
+}
+
 .site-skiplinks,
 .siteheader,
 .sitefooter {
@@ -33,7 +39,8 @@ body {
 }
 
 .media-md-tablet,
-.media-lg-desktop {
+.media-lg-desktop,
+.media-tablet-desktop {
     display: none !important;
 }
 
@@ -42,7 +49,8 @@ body {
         display: none !important;
     }
 
-    .media-md-tablet {
+    .media-md-tablet,
+    .media-tablet-desktop {
         @media screen and (-ms-high-contrast: active),
             (-ms-high-contrast: none) {
             display: inline !important;
@@ -62,15 +70,15 @@ body {
 }
 
 @media (min-width: @desktopLimitWidth) {
-    .media-mobil-tablet {
-        display: none !important;
-    }
-
     .media-lg-desktop {
         @media screen and (-ms-high-contrast: active),
             (-ms-high-contrast: none) {
             display: inline !important;
         }
         display: initial !important;
+    }
+
+    .media-md-tablet {
+        display: none !important;
     }
 }
