@@ -105,7 +105,7 @@ export const HovedmenyDropdown = (props: Props) => {
     }, [isOpen, menyLenker, arbeidsflate]);
 
     return (
-        <div className={cls.element('hovedmeny-dropdown')}>
+        <div className={cls.element('dropdown')}>
             <Toppseksjon
                 classname={classname}
                 arbeidsflate={arbeidsflate}
