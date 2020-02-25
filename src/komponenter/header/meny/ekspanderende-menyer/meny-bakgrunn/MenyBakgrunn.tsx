@@ -9,7 +9,7 @@ const MenyBakgrunn = ({className}: {className: string}) => {
     const cls = BEMHelper(className);
     const dispatch = useDispatch();
     const toggles = useSelector((state: AppState) => state.dropdownToggles);
-    const isActive = toggles.uinnlogget || toggles.minside || toggles.sok;
+    const isActive = toggles.hovedmeny || toggles.minside || toggles.sok;
 
     return (
             <div

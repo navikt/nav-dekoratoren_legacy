@@ -6,24 +6,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../reducer/reducer';
 import { Status } from '../../../../../api/api';
 import { Undertittel } from 'nav-frontend-typografi';
-import { UinnloggetDropdown } from './meny-dropdown/UinnloggetDropdown';
-import './DesktopUinnloggetMeny.less';
+import { HovedmenyDropdown } from './meny-dropdown/HovedmenyDropdown';
+import './HovedmenyDesktop.less';
 import { selectMenu } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { Menyknapp } from '../meny-knapp/Menyknapp';
-import { toggleUinnloggetMeny } from '../../../../../reducer/dropdown-toggle-duck';
+import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
     meny: state.menypunkt,
     language: state.language.language,
-    isOpen: state.dropdownToggles.uinnlogget,
+    isOpen: state.dropdownToggles.hovedmeny,
 });
 
-const classname = 'desktop-uinnlogget-meny';
+const classname = 'hovedmeny-desktop';
 
-export const DesktopUinnloggetMeny = () => {
+export const HovedmenyDesktop = () => {
     const dispatch = useDispatch();
     const { arbeidsflate, meny, language, isOpen } = useSelector(stateSelector);
 
@@ -32,7 +32,7 @@ export const DesktopUinnloggetMeny = () => {
             category: GACategory.Header,
             action: `meny-${isOpen ? 'close' : 'open'}`,
         });
-        dispatch(toggleUinnloggetMeny());
+        dispatch(toggleHovedmeny());
     };
 
     const menyKnapp = (
@@ -51,7 +51,7 @@ export const DesktopUinnloggetMeny = () => {
     const dropdownInnhold =
         meny.status === Status.OK
             ? (
-                <UinnloggetDropdown
+                <HovedmenyDropdown
                     classname={classname}
                     arbeidsflate={arbeidsflate}
                     language={language}
@@ -71,4 +71,4 @@ export const DesktopUinnloggetMeny = () => {
     );
 };
 
-export default DesktopUinnloggetMeny
+export default HovedmenyDesktop

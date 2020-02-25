@@ -10,7 +10,7 @@ import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import Varselbjelle from './varsel/Varselbjelle';
 import VarselVisning from './varsel/varselvisning/Varselvisning';
 import './DesktopMenylinje.less';
-import { DesktopUinnloggetMeny } from './ekspanderende-menyer/meny-uinnlogget-desktop/DesktopUinnloggetMeny';
+import { HovedmenyDesktop } from './ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
 
 const desktopMenylinje = BEMHelper('desktopmeny');
 
@@ -29,7 +29,7 @@ const DesktopMenylinje = ({ language }: Props) => {
                         classname={desktopMenylinje.element('nav-brand')}
                     />
                     {(language === Language.NORSK || language === Language.ENGELSK) && (
-                        <DesktopUinnloggetMeny />
+                        <HovedmenyDesktop />
                     )}
                     <Sok />
                     <InnloggingsstatusProvider>

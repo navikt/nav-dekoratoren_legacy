@@ -38,7 +38,7 @@ type Props = {
     isOpen: boolean
 }
 
-export const UinnloggetDropdown = (props: Props) => {
+export const HovedmenyDropdown = (props: Props) => {
     const { arbeidsflate, classname, language, menyLenker, isOpen } = props;
 
     const cls = BEMHelper(classname);
@@ -105,7 +105,7 @@ export const UinnloggetDropdown = (props: Props) => {
     }, [isOpen, menyLenker, arbeidsflate]);
 
     return (
-        <div className={cls.element('meny-uinnlogget')}>
+        <div className={cls.element('hovedmeny-dropdown')}>
             <Toppseksjon
                 classname={classname}
                 arbeidsflate={arbeidsflate}
@@ -125,4 +125,4 @@ export const UinnloggetDropdown = (props: Props) => {
     );
 };
 
-export default UinnloggetDropdown
+export default HovedmenyDropdown

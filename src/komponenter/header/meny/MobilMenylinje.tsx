@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import BEMHelper from '../../../utils/bem';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import MobilUinnloggetMeny from './ekspanderende-menyer/meny-uinnlogget-mobil/MobilUinnloggetMeny';
+import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import SokModal from './sok/sok-innhold/sok-modal/Sokmodal';
 import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
@@ -52,7 +52,7 @@ const MobilMenylinje = ({ language }: Props) => {
                     <div className={mobilClass.element('hoyre-kolonne')}>
                         {language === Language.NORSK ||
                         language === Language.ENGELSK ? (
-                            <MobilUinnloggetMeny />
+                            <HovedmenyMobil />
                         ) : null}
                         <SokModalToggleknapp
                             className={mobilClass.element('sok')}
