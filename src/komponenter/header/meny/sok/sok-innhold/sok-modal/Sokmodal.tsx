@@ -37,20 +37,22 @@ class SokModal extends React.Component<Props, {}> {
                 isOpen={this.props.modalerApen}
                 contentLabel={'mobilt sokefelt for nav.no'}
                 onRequestClose={() => this.props.sokeknappToggle()}
-                className="navno-dekorator sok-modal-body"
+                className="navno-dekorator sok-modal__overlay"
             >
-                <div className={cls.className}>
-                    <div className={cls.element('logo')}>
-                        <Navlogo
-                            color="white"
-                            viewIndex={this.props.modalerApen}
-                        />
-                    </div>
-                    <div className={cls.element('lukknapp')}>
-                        <Lukknapp
-                            lukkvindu={this.props.sokeknappToggle}
-                            tabindex={this.props.modalerApen}
-                        />
+                <div className={`${cls.className} sok-modal__body`}>
+                    <div className={cls.element('header')}>
+                        <div className={cls.element('logo')}>
+                            <Navlogo
+                                color="white"
+                                viewIndex={this.props.modalerApen}
+                            />
+                        </div>
+                        <div className={cls.element('lukknapp')}>
+                            <Lukknapp
+                                lukkvindu={this.props.sokeknappToggle}
+                                tabindex={this.props.modalerApen}
+                            />
+                        </div>
                     </div>
                     <div className={cls.element('veiledende-tekst')}>
                         <Innholdstittel>Hva leter du etter?</Innholdstittel>

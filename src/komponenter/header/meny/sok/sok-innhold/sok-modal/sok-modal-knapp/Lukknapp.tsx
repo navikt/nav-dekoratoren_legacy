@@ -38,7 +38,7 @@ const Lukknapp = (props: Props) => {
                     closeAnimation ? 'flip' : ''
                 )}
             />
-            <label className="close">LUKK</label>
+            <label className="skjemaelement__label close">Lukk</label>
         </div>
     );
 };
