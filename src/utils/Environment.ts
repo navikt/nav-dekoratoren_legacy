@@ -1,4 +1,5 @@
 import { FooterLenke } from '../komponenter/footer/Footer-lenker';
+import { MenuValue } from './meny-storage-utils';
 
 export default class Environment {
     static baseUrl: string;
@@ -14,10 +15,10 @@ export default class Environment {
 
     // Parameters
     static language: string;
-    static context: string;
+    static context: MenuValue;
     static stripped: string;
     static redirectToApp: string;
-    static lvl: string;
+    static level: string;
 
     static settEnv = (result: any) => {
         Environment.baseUrl = result.baseUrl;
@@ -36,7 +37,7 @@ export default class Environment {
         Environment.context = result.context;
         Environment.stripped = result.stripped;
         Environment.redirectToApp = result.redirectToApp;
-        Environment.lvl = result.lvl;
+        Environment.level = result.level;
     };
 }
 

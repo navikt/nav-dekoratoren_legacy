@@ -8,6 +8,8 @@ import MobilMenylinje from './meny/MobilMenylinje';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import DesktopMenylinje from './meny/DesktopMenylinje';
 import MenyBakgrunn from './meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
+import { oppdaterSessionStorage, MenuValue } from '../../utils/meny-storage-utils';
+import Environment from '../../utils/Environment';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -15,6 +17,9 @@ export const Header = () => {
 
     useEffect(() => {
         fetchMenypunkter()(dispatch);
+        if (Environment.context !== MenuValue.IKKEVALGT) {
+            oppdaterSessionStorage(Environment.context);
+        }
     }, []);
 
     return (

@@ -4,21 +4,15 @@ import { AppState } from '../../../../reducer/reducer';
 import KnappBase from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
-import Environment, { erNavDekoratoren, verifyWindowObj } from '../../../../utils/Environment';
+import Environment, {
+    erNavDekoratoren,
+    verifyWindowObj,
+} from '../../../../utils/Environment';
 import LogginnIkon from '../../../../ikoner/mobilmeny/LogginnIkon';
 import Tekst from '../../../../tekster/finn-tekst';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
-
-const getPath = () => {
-    if (verifyWindowObj()) {
-        return window.location.pathname.split('/')[2] !== undefined
-            ? '/dekoratoren/' + window.location.pathname.split('/')[2]
-            : '/dekoratoren/';
-    }
-    return '/dekoratoren/';
-};
 
 interface StateProps {
     erInnlogget: boolean;
@@ -55,20 +49,22 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
     };
 
     handleButtonClick = () => {
-        const path = erNavDekoratoren() ? getPath() : '/person/dittnav';
-        const login = `${Environment.loginUrl}/login?redirect=${Environment.baseUrl}${path}`;
-        const erInnlogget = this.props.erInnlogget;
-        triggerGaEvent({category: GACategory.Header, action: erInnlogget ? 'logg-ut' : 'logg-inn'});
+        const { erInnlogget } = this.props;
+        const appUrl = location.origin + location.pathname;
+        const loginUrl = `${
+            Environment.redirectToApp || erNavDekoratoren
+                ? `${Environment.loginUrl}/login?redirect=${appUrl}`
+                : `${Environment.loginUrl}/login?redirect=${Environment.dittNavUrl}`
+        }&level=${Environment.level}`;
 
-        if (process.env.NODE_ENV === 'production') {
-            return erInnlogget
-                ? (window.location.href = Environment.logoutUrl)
-                : (window.location.href = login);
-        } else {
-            this.setState({
-                informasjonboks: this.informasjon,
-            });
-        }
+        triggerGaEvent({
+            category: GACategory.Header,
+            action: erInnlogget ? 'logg-ut' : 'logg-inn',
+        });
+
+        return erInnlogget
+            ? (window.location.href = Environment.logoutUrl)
+            : (window.location.href = loginUrl);
     };
 
     render() {
