@@ -57,16 +57,16 @@ services:
 #    ports:
 #      - "8088:8088"
 #    environment:
-#      URL_APP_BASE: "http://localhost:8088/dekoratoren"
-#      baseUrl: 'http://localhost:8088'
-#      baseUrlEnonic: 'https://www-q1.nav.no'
-#      innloggingslinjenUrl: 'http://localhost:8200/innloggingslinje-api/auth'
-#      loginUrl: 'http://localhost:5000'
-#      logoutUrl: 'http://localhost:5000/?logout'
-#      menypunkter: 'http://localhost:8088/dekoratoren/api/get/menyvalg'
-#      minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/'
-#      sokeresultat: 'http://localhost:8088/dekoratoren/api/get/sokeresultat'
-#      varselinnboksUrl: 'https://www-q0.nav.no/person/varselinnboks'
+#      BASE_URL: 'http://localhost:8088'
+#      BASE_URL_APP: "http://localhost:8088/dekoratoren"
+#      BASE_URL_ENONIC: 'https://www-q1.nav.no'
+#      API_INNLOGGINGSLINJE_URL: 'http://localhost:8200/innloggingslinje-api/auth'
+#      API_VARSELINNBOKS_URL: 'https://www-q0.nav.no/person/varselinnboks'
+#      BACKEND_MENY_URL: 'http://localhost:8088/dekoratoren/api/meny'
+#      BACKEND_SOK_URL: 'http://localhost:8088/dekoratoren/api/sok'
+#      MINSIDE_ARBEIDSGIVER_URL: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/'
+#      LOGOUT_URL: 'http://localhost:5000/?logout'
+#      LOGIN_URL: 'http://localhost:5000'
 
 networks:
     nav.docker-internal:

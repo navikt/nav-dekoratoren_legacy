@@ -8,7 +8,12 @@ import { Input } from 'nav-frontend-skjema';
 import { Language } from '../../../../reducer/language-duck';
 import Environment, { genererUrl } from '../../../../utils/Environment';
 import { finnTekst } from '../../../../tekster/finn-tekst';
-import { defaultData, InputState, SokeresultatData, visAlleTreff } from './sok-utils';
+import {
+    defaultData,
+    InputState,
+    SokeresultatData,
+    visAlleTreff,
+} from './sok-utils';
 import SokeforslagIngress from './sok-innhold/SokeforslagIngress';
 import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
 import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
@@ -56,7 +61,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     handleValueChange(input: string) {
-        const url = Environment.sokeresultat;
+        const url = Environment.BACKEND_SOK_URL;
 
         if (this.ismounted) {
             this.setState({
@@ -202,7 +207,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     render() {
         const { selectedInput, items } = this.state;
         const { language } = this.props;
-        const URL = `${Environment.baseUrlEnonic}/sok?ord=${selectedInput}`;
+        const URL = `${Environment.BASE_URL_ENONIC}/sok?ord=${selectedInput}`;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
         });
@@ -233,8 +238,12 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                             id="sok"
                             role="search"
                             onSubmit={event => {
-                                triggerGaEvent({category: GACategory.Header, action: 'søk', label: selectedInput});
-                                this.handleSubmit(event, URL)
+                                triggerGaEvent({
+                                    category: GACategory.Header,
+                                    action: 'søk',
+                                    label: selectedInput,
+                                });
+                                this.handleSubmit(event, URL);
                             }}
                         >
                             <>

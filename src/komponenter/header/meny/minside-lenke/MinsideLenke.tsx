@@ -33,9 +33,9 @@ export const MinsideLenke = ({
     const lenkeurl =
         arbeidsflate === MenuValue.IKKEVALGT ||
         arbeidsflate === MenuValue.PRIVATPERSON
-            ? Environment.dittNavUrl
+            ? Environment.DITT_NAV_URL
             : arbeidsflate === MenuValue.ARBEIDSGIVER
-            ? Environment.minsideArbeidsgiverUrl
+            ? Environment.MINSIDE_ARBEIDSGIVER_URL
             : '';
 
     return (
@@ -44,7 +44,11 @@ export const MinsideLenke = ({
                 <LenkeMedGA
                     href={lenkeurl}
                     tabIndex={tabindex ? 0 : -1}
-                    gaEventArgs={{category: GACategory.Header, action: 'minside', label: lenkeurl}}
+                    gaEventArgs={{
+                        category: GACategory.Header,
+                        action: 'minside',
+                        label: lenkeurl,
+                    }}
                 >
                     {lenketekst}
                 </LenkeMedGA>

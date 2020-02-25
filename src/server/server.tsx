@@ -29,15 +29,15 @@ const app = express();
 const PORT = 8088;
 
 // Default vars
+const defaultBaseUrl = 'http://localhost:8088';
 const defaultSearchUrl = `https://www.nav.no/_/service/navno.nav.no.search/search2`;
 const defaultMenuUrl = `https://www.nav.no/_/service/no.nav.navno/menu`;
-const defaultAppUrl = `http://localhost:8088${basePath}`;
-const localhost = 'http://localhost:8088';
+const defaultAppUrl = `${defaultBaseUrl}${basePath}`;
 
 // Mock
 import mockEnv from './mock/env';
 import mockMenu from './mock/menu.json';
-import mockSok from './mock/sokeresultat.json';
+import mockSok from './mock/sok.json';
 
 // Cache setup
 const mainCacheKey = 'navno-menu';
@@ -47,10 +47,10 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 // Server-side rendering
 const store = getStore();
-const baseUrl = `${process.env.baseUrl || localhost}`;
-const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/env`;
-const fileCss = `${process.env.URL_APP_BASE || defaultAppUrl}/css/client.css`;
-const fileScript = `${process.env.URL_APP_BASE || defaultAppUrl}/client.js`;
+const baseUrl = `${process.env.BASE_URL || defaultBaseUrl}`;
+const fileEnv = `${process.env.BASE_URL_APP || defaultAppUrl}/env`;
+const fileCss = `${process.env.BASE_URL_APP || defaultAppUrl}/css/client.css`;
+const fileScript = `${process.env.BASE_URL_APP || defaultAppUrl}/client.js`;
 
 // Cors
 app.disable('x-powered-by');
@@ -174,48 +174,44 @@ app.get(`${basePath}/env`, (req, res) => {
             }),
             ...(isProduction
                 ? {
-                      baseUrl: process.env.baseUrl,
-                      baseUrlEnonic: process.env.baseUrlEnonic,
-                      innloggingslinjenUrl: process.env.innloggingslinjenUrl,
-                      menypunkter: process.env.menypunkter,
-                      sokeresultat: process.env.sokeresultat,
-                      minsideArbeidsgiverUrl:
-                          process.env.minsideArbeidsgiverUrl,
-                      varselinnboksUrl: process.env.varselinnboksUrl,
-                      dittNavUrl: process.env.dittNavUrl,
-                      loginUrl: process.env.loginUrl,
-                      logoutUrl: process.env.logoutUrl,
+                      BASE_URL: process.env.BASE_URL,
+                      BASE_URL_ENONIC: process.env.BASE_URL_ENONIC,
+                      API_INNLOGGINGSLINJE_URL:
+                          process.env.API_INNLOGGINGSLINJE_URL,
+                      API_VARSELINNBOKS_URL: process.env.API_VARSELINNBOKS_URL,
+                      BACKEND_MENY_URL: process.env.BACKEND_MENY_URL,
+                      BACKEND_SOK_URL: process.env.BACKEND_SOK_URL,
+                      MINSIDE_ARBEIDSGIVER_URL:
+                          process.env.MINSIDE_ARBEIDSGIVER_URL,
+                      DITT_NAV_URL: process.env.DITT_NAV_URL,
+                      LOGIN_URL: process.env.LOGIN_URL,
+                      LOGOUT_URL: process.env.LOGOUT_URL,
                   }
                 : mockEnv),
         },
     });
 });
 
-app.get(`${basePath}/api/get/sokeresultat`, (req, res) => {
-    const uri = `${process.env.URL_API_SOK || defaultSearchUrl}?ord=${
-        req.query.ord
-    }`;
-    request({ method: 'GET', uri }, (error, response, body) => {
-        if (!error && response.statusCode === 200) {
-            res.send(body);
-        } else {
-            res.send(mockSok);
-        }
-    });
+app.get(`${basePath}/api/sok`, (req, res) => {
+    const base = process.env.API_SOK_URL || defaultSearchUrl;
+    const uri = `${base}?ord=${req.query.ord}`;
+    request({ method: 'GET', uri }, (error, response, body) =>
+        !error && response.statusCode === 200
+            ? res.send(body)
+            : res.send(mockSok)
+    );
 });
 
-app.get(`${basePath}/api/get/menyvalg`, (req, res) => {
-    mainCache.get(mainCacheKey, (err, response) => {
-        if (!err && response !== undefined) {
-            res.send(response);
-        } else {
-            fetchmenuOptions(res);
-        }
-    });
+app.get(`${basePath}/api/meny`, (req, res) => {
+    mainCache.get(mainCacheKey, (err, response) =>
+        !err && response !== undefined
+            ? res.send(response)
+            : fetchmenuOptions(res)
+    );
 });
 
 const fetchmenuOptions = (res: any) => {
-    const uri = process.env.URL_API_MENY || defaultMenuUrl;
+    const uri = process.env.API_MENY_URL || defaultMenuUrl;
     request({ method: 'GET', uri }, (error, response, body) => {
         if (!error && response.statusCode === 200 && body.length > 2) {
             mainCache.set(mainCacheKey, body, 100);
