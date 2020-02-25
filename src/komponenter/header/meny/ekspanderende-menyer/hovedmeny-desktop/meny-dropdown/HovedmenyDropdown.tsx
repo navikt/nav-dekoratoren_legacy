@@ -5,38 +5,52 @@ import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 import { MenySeksjon } from '../../../../../../reducer/menu-duck';
 import { Language } from '../../../../../../reducer/language-duck';
-import KbNav, { NaviGraphData, NaviGroup, NaviNode } from '../../../../../../utils/keyboard-navigation/kb-navigation';
+import KbNav, {
+    NaviGraphData,
+    NaviGroup,
+    NaviNode,
+} from '../../../../../../utils/keyboard-navigation/kb-navigation';
 import { matchMediaPolyfill } from '../../../../../../utils/matchMediaPolyfill';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
 
 const getColSetup = (cls: BEMWrapper): Array<number> => {
-    const getNumCols = (element: HTMLElement) => (
-        parseInt(window.getComputedStyle(element).getPropertyValue('--num-cols'), 10)
-    );
+    const getNumCols = (element: HTMLElement) =>
+        parseInt(
+            window.getComputedStyle(element).getPropertyValue('--num-cols'),
+            10
+        );
 
     const menyKnappCols = 1;
     const toppSeksjonCols = 1;
     const hovedSeksjonColsFallback = 4;
     const bunnSeksjonColsFallback = 3;
 
-    const hovedSeksjonElement = document.getElementsByClassName(cls.element('hoved-seksjon'))[0] as HTMLElement;
-    const hovedSeksjonCols = hovedSeksjonElement && getNumCols(hovedSeksjonElement) || hovedSeksjonColsFallback;
+    const hovedSeksjonElement = document.getElementsByClassName(
+        cls.element('hoved-seksjon')
+    )[0] as HTMLElement;
+    const hovedSeksjonCols =
+        (hovedSeksjonElement && getNumCols(hovedSeksjonElement)) ||
+        hovedSeksjonColsFallback;
 
-    const bunnSeksjonElement = document.getElementsByClassName(cls.element('bunn-seksjon'))[0] as HTMLElement;
-    const bunnSeksjonCols = bunnSeksjonElement && getNumCols(bunnSeksjonElement) || bunnSeksjonColsFallback;
+    const bunnSeksjonElement = document.getElementsByClassName(
+        cls.element('bunn-seksjon')
+    )[0] as HTMLElement;
+    const bunnSeksjonCols =
+        (bunnSeksjonElement && getNumCols(bunnSeksjonElement)) ||
+        bunnSeksjonColsFallback;
 
     return [menyKnappCols, toppSeksjonCols, hovedSeksjonCols, bunnSeksjonCols];
 };
 
 type Props = {
-    classname: string,
-    arbeidsflate: MenuValue,
-    language: Language,
-    menyLenker: MenySeksjon,
-    isOpen: boolean
-}
+    classname: string;
+    arbeidsflate: MenuValue;
+    language: Language;
+    menyLenker: MenySeksjon;
+    isOpen: boolean;
+};
 
 export const HovedmenyDropdown = (props: Props) => {
     const { arbeidsflate, classname, language, menyLenker, isOpen } = props;
@@ -56,7 +70,9 @@ export const HovedmenyDropdown = (props: Props) => {
     const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
     const kbRootIndex = { col: 0, row: 0, sub: 0 };
     const kbIdMap = {
-        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element('decorator-meny-toggleknapp'),
+        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element(
+            'decorator-meny-toggleknapp'
+        ),
     };
 
     useEffect(() => {
@@ -69,9 +85,16 @@ export const HovedmenyDropdown = (props: Props) => {
 
         const updateNaviGraph = () => {
             const colSetup = getColSetup(cls);
-            const updatedNaviGraph = KbNav.getNaviGraphData(kbNaviGroup, kbRootIndex, colSetup, kbIdMap);
+            const updatedNaviGraph = KbNav.getNaviGraphData(
+                kbNaviGroup,
+                kbRootIndex,
+                colSetup,
+                kbIdMap
+            );
             const currentNodeId = kbNaviNode?.id;
-            const newNode = (currentNodeId && updatedNaviGraph.nodeMap[currentNodeId]) || updatedNaviGraph.rootNode;
+            const newNode =
+                (currentNodeId && updatedNaviGraph.nodeMap[currentNodeId]) ||
+                updatedNaviGraph.rootNode;
             setKbNaviGraph(updatedNaviGraph);
             setKbNaviNode(newNode);
         };
@@ -81,8 +104,16 @@ export const HovedmenyDropdown = (props: Props) => {
             return;
         }
 
-        const kbHandler = KbNav.kbHandler(kbNaviNode, kbNaviGroup, setKbNaviNode);
-        const focusHandler = KbNav.focusHandler(kbNaviNode, kbNaviGraph, setKbNaviNode);
+        const kbHandler = KbNav.kbHandler(
+            kbNaviNode,
+            kbNaviGroup,
+            setKbNaviNode
+        );
+        const focusHandler = KbNav.focusHandler(
+            kbNaviNode,
+            kbNaviGraph,
+            setKbNaviNode
+        );
 
         document.addEventListener('focusin', focusHandler);
         document.addEventListener('keydown', kbHandler);
@@ -94,7 +125,12 @@ export const HovedmenyDropdown = (props: Props) => {
     useEffect(() => {
         const makeNewNaviGraph = () => {
             const colSetup = getColSetup(cls);
-            const freshNaviGraph = KbNav.getNaviGraphData(kbNaviGroup, kbRootIndex, colSetup, kbIdMap);
+            const freshNaviGraph = KbNav.getNaviGraphData(
+                kbNaviGroup,
+                kbRootIndex,
+                colSetup,
+                kbIdMap
+            );
             setKbNaviGraph(freshNaviGraph);
             setKbNaviNode(freshNaviGraph.rootNode);
         };
@@ -106,10 +142,7 @@ export const HovedmenyDropdown = (props: Props) => {
 
     return (
         <div className={cls.element('dropdown')}>
-            <Toppseksjon
-                classname={classname}
-                arbeidsflate={arbeidsflate}
-            />
+            <Toppseksjon classname={classname} arbeidsflate={arbeidsflate} />
             <Hovedseksjon
                 menyLenker={menyLenker}
                 classname={classname}
@@ -125,4 +158,4 @@ export const HovedmenyDropdown = (props: Props) => {
     );
 };
 
-export default HovedmenyDropdown
+export default HovedmenyDropdown;

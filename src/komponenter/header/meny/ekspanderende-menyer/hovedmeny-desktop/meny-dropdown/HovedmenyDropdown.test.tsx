@@ -27,10 +27,7 @@ const shallowWithProps = (lang: Language, arbeidsflate: MenuValue) => {
 };
 
 describe('<HovedmenyDropdown />', () => {
-    const wrapper = shallowWithProps(
-        Language.NORSK,
-        MenuValue.PRIVATPERSON
-    );
+    const wrapper = shallowWithProps(Language.NORSK, MenuValue.PRIVATPERSON);
     it('Rendrer <Toppseksjon> komponent', () => {
         expect(wrapper.find(Toppseksjon)).toHaveLength(1);
     });

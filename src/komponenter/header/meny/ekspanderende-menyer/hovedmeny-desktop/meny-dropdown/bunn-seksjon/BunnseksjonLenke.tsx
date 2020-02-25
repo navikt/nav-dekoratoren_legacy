@@ -13,7 +13,14 @@ interface Props {
     onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-const BunnseksjonLenke = ({ url, lenkeTekstId, stikkord, className , id, onClick}: Props) => {
+const BunnseksjonLenke = ({
+    url,
+    lenkeTekstId,
+    stikkord,
+    className,
+    id,
+    onClick,
+}: Props) => {
     const cls = BEMHelper(className);
 
     return (
@@ -25,14 +32,18 @@ const BunnseksjonLenke = ({ url, lenkeTekstId, stikkord, className , id, onClick
                     id={id}
                     onClick={onClick}
                 >
-                    <Tekst id={lenkeTekstId}/>
+                    <Tekst id={lenkeTekstId} />
                 </Lenke>
             </Undertittel>
             <ul className={cls.element('bunn-lenke-stikkord')}>
                 <Undertekst>
-                    {stikkord && stikkord.split('|').map(ord =>
-                        <li key={ord}><span className={'bullet'}/>{ord}</li>
-                    )}
+                    {stikkord &&
+                        stikkord.split('|').map(ord => (
+                            <li key={ord}>
+                                <span className={'bullet'} />
+                                {ord}
+                            </li>
+                        ))}
                 </Undertekst>
             </ul>
         </div>
@@ -40,4 +51,3 @@ const BunnseksjonLenke = ({ url, lenkeTekstId, stikkord, className , id, onClick
 };
 
 export default BunnseksjonLenke;
-

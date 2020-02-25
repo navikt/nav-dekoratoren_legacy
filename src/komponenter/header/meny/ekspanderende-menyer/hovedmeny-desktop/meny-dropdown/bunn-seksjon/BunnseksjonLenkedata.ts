@@ -1,4 +1,7 @@
-import { MenuValue, oppdaterSessionStorage } from '../../../../../../../utils/meny-storage-utils';
+import {
+    MenuValue,
+    oppdaterSessionStorage,
+} from '../../../../../../../utils/meny-storage-utils';
 import React from 'react';
 
 interface LenkeData {
@@ -8,14 +11,20 @@ interface LenkeData {
     onClick?: Function;
 }
 
-export type OnArbeidsFlateClick = (settArbeidsflateFunc: () => void) => (event: React.MouseEvent<HTMLAnchorElement>) => void;
+export type OnArbeidsFlateClick = (
+    settArbeidsflateFunc: () => void
+) => (event: React.MouseEvent<HTMLAnchorElement>) => void;
 
 const pathPersonFlate = '/dekoratoren/person/';
 const pathBedriftFlate = '/dekoratoren/bedrift/';
 const samarbeidspartnerFlate = '/dekoratoren/samarbeidspartner/';
 
-const onArbeidsflateClick =
-    (url: string, arbeidsflate: MenuValue): OnArbeidsFlateClick => (settArbeidsflate: () => void) => (event: React.MouseEvent<HTMLAnchorElement>) => {
+const onArbeidsflateClick = (
+    url: string,
+    arbeidsflate: MenuValue
+): OnArbeidsFlateClick => (settArbeidsflate: () => void) => (
+    event: React.MouseEvent<HTMLAnchorElement>
+) => {
     event.preventDefault();
     oppdaterSessionStorage(arbeidsflate);
     settArbeidsflate();
@@ -31,13 +40,16 @@ const privatpersonLenker: LenkeData[] = [
         url: pathBedriftFlate,
         lenkeTekstId: 'rolle-arbeidsgiver',
         stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
-        onClick: onArbeidsflateClick(pathBedriftFlate, MenuValue.ARBEIDSGIVER)
+        onClick: onArbeidsflateClick(pathBedriftFlate, MenuValue.ARBEIDSGIVER),
     },
     {
         url: samarbeidspartnerFlate,
         lenkeTekstId: 'rolle-samarbeidspartner',
         stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
-        onClick: onArbeidsflateClick(samarbeidspartnerFlate, MenuValue.SAMARBEIDSPARTNER)
+        onClick: onArbeidsflateClick(
+            samarbeidspartnerFlate,
+            MenuValue.SAMARBEIDSPARTNER
+        ),
     },
 ];
 
@@ -51,13 +63,16 @@ const arbeidsgiverLenker: LenkeData[] = [
         url: pathPersonFlate,
         lenkeTekstId: 'rolle-privatperson',
         stikkordId: 'meny-bunnlenke-minside-stikkord',
-        onClick: onArbeidsflateClick(pathPersonFlate, MenuValue.PRIVATPERSON)
+        onClick: onArbeidsflateClick(pathPersonFlate, MenuValue.PRIVATPERSON),
     },
     {
         url: samarbeidspartnerFlate,
         lenkeTekstId: 'rolle-samarbeidspartner',
         stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
-        onClick: onArbeidsflateClick(samarbeidspartnerFlate, MenuValue.SAMARBEIDSPARTNER)
+        onClick: onArbeidsflateClick(
+            samarbeidspartnerFlate,
+            MenuValue.SAMARBEIDSPARTNER
+        ),
     },
 ];
 
@@ -66,13 +81,13 @@ const samarbeidspartnerLenker: LenkeData[] = [
         url: pathPersonFlate,
         lenkeTekstId: 'rolle-privatperson',
         stikkordId: 'meny-bunnlenke-minside-stikkord',
-        onClick: onArbeidsflateClick(pathPersonFlate, MenuValue.PRIVATPERSON)
+        onClick: onArbeidsflateClick(pathPersonFlate, MenuValue.PRIVATPERSON),
     },
     {
         url: pathBedriftFlate,
         lenkeTekstId: 'rolle-arbeidsgiver',
         stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
-        onClick: onArbeidsflateClick(pathBedriftFlate, MenuValue.ARBEIDSGIVER)
+        onClick: onArbeidsflateClick(pathBedriftFlate, MenuValue.ARBEIDSGIVER),
     },
 ];
 
@@ -82,5 +97,5 @@ export const bunnLenker = {
     [MenuValue.PRIVATPERSON]: privatpersonLenker,
     [MenuValue.ARBEIDSGIVER]: arbeidsgiverLenker,
     [MenuValue.SAMARBEIDSPARTNER]: samarbeidspartnerLenker,
-    [MenuValue.IKKEVALGT]: ikkeValgtLenker
+    [MenuValue.IKKEVALGT]: ikkeValgtLenker,
 };

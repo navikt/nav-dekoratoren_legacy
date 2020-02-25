@@ -27,5 +27,5 @@ export const reducer = combineReducers<AppState>({
     varslerLest: varselLestReducer,
     language: languageDuck.reducer,
     arbeidsflate: arbeidsflateReducer,
-    dropdownToggles: dropdownTogglesReducer
+    dropdownToggles: dropdownTogglesReducer,
 });

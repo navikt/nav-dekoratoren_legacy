@@ -6,7 +6,9 @@ import Tekst from '../../../../../tekster/finn-tekst';
 
 export const MenySpinner = () => (
     <div className={'spinner-container'}>
-        <Normaltekst><Tekst id={'meny-loading'}/></Normaltekst>
-        <NavFrontendSpinner/>
+        <Normaltekst>
+            <Tekst id={'meny-loading'} />
+        </Normaltekst>
+        <NavFrontendSpinner />
     </div>
 );
