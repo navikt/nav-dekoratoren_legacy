@@ -143,8 +143,7 @@
         "svg-sprite-loader": "^4.1.6",
         "webpack-cli": "^3.3.9",
         "webpack-node-externals": "^1.7.2",
-        "window": "^4.2.6",
-        "yet-another-fetch-mock": "^3.3.0"
+        "window": "^4.2.6"
     },
     "browserslist": {
         "production": [

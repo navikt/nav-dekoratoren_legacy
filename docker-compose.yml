@@ -1,73 +1,72 @@
 version: '3.7'
 services:
+    oidc-provider:
+        container_name: oidc-provider
+        networks:
+            nav.docker-internal:
+                aliases:
+                    - oidc-provider.nav.docker-internal
+        image: 'navikt/stub-oidc-provider:latest'
+        ports:
+            - '9000:9000'
+        environment:
+            PORT: '9000'
+            CALLBACK_URL: 'http://localhost:5000/callback'
+            ISSUER: 'https://localhost:9000'
 
-  oidc-provider:
-    container_name: oidc-provider
-    networks:
-      nav.docker-internal:
-        aliases:
-          - oidc-provider.nav.docker-internal
-    image: "docker.pkg.github.com/navikt/stub-oidc-provider/stub-oidc-provider:latest"
-    ports:
-      - "9000:9000"
-    environment:
-      PORT: "9000"
-      CALLBACK_URL: "http://localhost:5000/callback"
-      ISSUER: "https://localhost:9000"
+    oidc-provider-gui:
+        container_name: oidc-provider-gui
+        networks:
+            nav.docker-internal:
+                aliases:
+                    - oidc-provider-gui.nav.docker-internal
+        image: 'navikt/pb-oidc-provider-gui:latest'
+        ports:
+            - '5000:5000'
+        depends_on:
+            - oidc-provider
+        environment:
+            REDIRECT_URL: 'http://localhost:8088/dekoratoren'
+            AUTO_REDIRECT_TO_FRONTEND: 'true'
 
-  oidc-provider-gui:
-    container_name: oidc-provider-gui
-    networks:
-      nav.docker-internal:
-        aliases:
-          - oidc-provider-gui.nav.docker-internal
-    image: "navikt/pb-oidc-provider-gui:latest"
-    ports:
-      - "5000:5000"
-    depends_on:
-      - oidc-provider
-    environment:
-      REDIRECT_URL: "http://localhost:8100/dekoratoren/?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true&skiplinks=true&megamenu-resources=true"
-      AUTO_REDIRECT_TO_FRONTEND: "true"
+    mocks:
+        container_name: mocks
+        networks:
+            nav.docker-internal:
+                aliases:
+                    - mocks.nav.docker-internal
+        image: 'navikt/pb-nav-mocked:latest'
+        ports:
+            - '8200:8080'
+        environment:
+            CORS_ALLOWED_ORIGINS: 'localhost:8088'
+            OIDC_ISSUER: 'https://localhost:9000'
+            OIDC_ACCEPTED_AUDIENCE: 'stubOidcClient'
+            OIDC_JWKS_URI: 'http://oidc-provider.nav.docker-internal:9000/certs'
+        depends_on:
+            - oidc-provider
 
-  mocks:
-    container_name: mocks
-    networks:
-      nav.docker-internal:
-        aliases:
-          - mocks.nav.docker-internal
-    image: "navikt/pb-nav-mocked:latest"
-    ports:
-      - "8200:8080"
-    environment:
-      CORS_ALLOWED_ORIGINS: "localhost:8100"
-      OIDC_ISSUER: "https://localhost:9000"
-      OIDC_ACCEPTED_AUDIENCE: "stubOidcClient"
-      OIDC_JWKS_URI: "http://oidc-provider.nav.docker-internal:9000/certs"
-    depends_on:
-      - oidc-provider
-
-  dekoratoren:
-    container_name: dekoratoren
-    networks:
-      nav.docker-internal:
-        aliases:
-          - dekoratoren.nav.docker-internal
+#  dekoratoren:
+#    container_name: dekoratoren
+#    networks:
+#      nav.docker-internal:
+#        aliases:
+#          - dekoratoren.nav.docker-internal
 #    image: "navikt/nav-dekoratoren:latest"
-    build: .
-    ports:
-      - "8100:8088"
-    environment:
-      URL_APP_BASE: "http://localhost:8100/dekoratoren"
-      baseUrl: 'http://localhost:8100'
-      baseUrlEnonic: 'https://www-q1.nav.no'
-      innloggingslinjenUrl: 'http://localhost:8200/innloggingslinje-api/auth'
-      loginUrl: 'http://localhost:5000'
-      logoutUrl: 'http://localhost:5000/?logout'
-      menypunkter: 'http://localhost:8100/dekoratoren/api/get/menyvalg'
-      minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/'
-      sokeresultat: 'http://localhost:8100/dekoratoren/api/get/sokeresultat'
-      varselinnboksUrl: 'https://www-q0.nav.no/person/varselinnboks'
+#    build: .
+#    ports:
+#      - "8088:8088"
+#    environment:
+#      URL_APP_BASE: "http://localhost:8088/dekoratoren"
+#      baseUrl: 'http://localhost:8088'
+#      baseUrlEnonic: 'https://www-q1.nav.no'
+#      innloggingslinjenUrl: 'http://localhost:8200/innloggingslinje-api/auth'
+#      loginUrl: 'http://localhost:5000'
+#      logoutUrl: 'http://localhost:5000/?logout'
+#      menypunkter: 'http://localhost:8088/dekoratoren/api/get/menyvalg'
+#      minsideArbeidsgiverUrl: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/'
+#      sokeresultat: 'http://localhost:8088/dekoratoren/api/get/sokeresultat'
+#      varselinnboksUrl: 'https://www-q0.nav.no/person/varselinnboks'
 
 networks:
-  nav.docker-internal:
+    nav.docker-internal:
