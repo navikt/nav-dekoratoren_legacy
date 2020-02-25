@@ -1,19 +1,19 @@
 import { ActionType, Handling } from '../redux/actions';
 
 export interface DropdownState {
-    uinnlogget: boolean;
+    hovedmeny: boolean;
     minside: boolean;
     sok: boolean;
 }
 
 const initialState: DropdownState = {
-    uinnlogget: false,
+    hovedmeny: false,
     minside: false,
     sok: false,
 };
 
-export const toggleUinnloggetMeny = () => ({
-    type: ActionType.TOGGLE_UINNLOGGET_MENY
+export const toggleHovedmeny = () => ({
+    type: ActionType.TOGGLE_HOVEDMENY
 });
 
 export const toggleMinsideMeny = () => ({
@@ -30,8 +30,8 @@ export const lukkAlleDropdowns = () => ({
 
 export const reducer = (state: DropdownState = initialState, action: Handling): DropdownState => {
     switch (action.type) {
-        case ActionType.TOGGLE_UINNLOGGET_MENY: {
-            return {...initialState, uinnlogget: !state.uinnlogget};
+        case ActionType.TOGGLE_HOVEDMENY: {
+            return {...initialState, hovedmeny: !state.hovedmeny};
         }
         case ActionType.TOGGLE_MINSIDE_MENY: {
             return {...initialState, minside: !state.minside};

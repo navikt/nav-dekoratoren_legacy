@@ -62,7 +62,10 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
     }
 
     handleClick = () => {
-        triggerGaEvent({category: GACategory.Header, action: this.state.clicked ? 'varsler-close' : 'varsler-open'});
+        triggerGaEvent({
+            category: GACategory.Header,
+            action: this.state.clicked ? 'varsler-close' : 'varsler-open',
+        });
         this.setState({
             clicked: !this.state.clicked,
         });
@@ -79,7 +82,10 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             return;
         }
         if (this.state.clicked) {
-            triggerGaEvent({category: GACategory.Header, action: 'varsler-close'});
+            triggerGaEvent({
+                category: GACategory.Header,
+                action: 'varsler-close',
+            });
         }
         this.setState({ clicked: false });
     };

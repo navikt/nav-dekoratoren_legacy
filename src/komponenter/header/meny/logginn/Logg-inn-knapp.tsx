@@ -14,15 +14,6 @@ import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 
-const getPath = () => {
-    if (verifyWindowObj()) {
-        return window.location.pathname.split('/')[2] !== undefined
-            ? '/dekoratoren/' + window.location.pathname.split('/')[2]
-            : '/dekoratoren/';
-    }
-    return '/dekoratoren/';
-};
-
 interface StateProps {
     erInnlogget: boolean;
 }
@@ -58,23 +49,22 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
     };
 
     handleButtonClick = () => {
-        const path = erNavDekoratoren() ? getPath() : '/person/dittnav';
-        const login = `${Environment.loginUrl}/login?redirect=${Environment.baseUrl}${path}`;
-        const erInnlogget = this.props.erInnlogget;
+        const { erInnlogget } = this.props;
+        const appUrl = location.origin + location.pathname;
+        const loginUrl = `${
+            Environment.redirectToApp || erNavDekoratoren
+                ? `${Environment.loginUrl}/login?redirect=${appUrl}`
+                : `${Environment.loginUrl}/login?redirect=${Environment.dittNavUrl}`
+        }&level=${Environment.level}`;
+
         triggerGaEvent({
             category: GACategory.Header,
             action: erInnlogget ? 'logg-ut' : 'logg-inn',
         });
 
-        if (process.env.NODE_ENV === 'production') {
-            return erInnlogget
-                ? (window.location.href = Environment.logoutUrl)
-                : (window.location.href = login);
-        } else {
-            this.setState({
-                informasjonboks: this.informasjon,
-            });
-        }
+        return erInnlogget
+            ? (window.location.href = Environment.logoutUrl)
+            : (window.location.href = loginUrl);
     };
 
     render() {

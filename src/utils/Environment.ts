@@ -18,7 +18,7 @@ export default class Environment {
     static context: MenuValue;
     static stripped: string;
     static redirectToApp: string;
-    static lvl: string;
+    static level: string;
 
     static settEnv = (result: any) => {
         Environment.baseUrl = result.baseUrl;
@@ -37,7 +37,7 @@ export default class Environment {
         Environment.context = result.context;
         Environment.stripped = result.stripped;
         Environment.redirectToApp = result.redirectToApp;
-        Environment.lvl = result.lvl;
+        Environment.level = result.level;
     };
 }
 

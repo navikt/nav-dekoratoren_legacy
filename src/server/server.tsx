@@ -92,6 +92,20 @@ const template = (parameters: string) => `
             <meta name="theme-color" content="#000000" />
             <title>NAV Dekoratør</title>
             <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
+            <style>
+            /* Decorator development styling */
+            html, body {  height: 100%; }
+            .decorator-dev-container {
+                display:flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+            }
+            .decorator-dummy-app{
+                background: #f1f1f1;
+                height:100%;
+            }
+            </style>
             <div id="styles">
                 <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
                 <link rel="icon" type="image/png" sizes="16x16" href="${baseUrl}${fileFavicon16x16}">
@@ -104,20 +118,22 @@ const template = (parameters: string) => `
             </div>
         </head>
         <body>
-            <div id="header-withmenu">
-                <section class="navno-dekorator" id="decorator-header" role="main">${htmlHeader}</section>
-            </div>
-            <div id="footer-withmenu">
-                <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
+            <div class="decorator-dev-container">
+                <div id="header-withmenu">
+                    <section class="navno-dekorator" id="decorator-header" role="main">${htmlHeader}</section>
+                </div>
+                <div class="decorator-dummy-app"></div>
+                <div id="footer-withmenu">
+                    <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
+                </div>
             </div>
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}${parameters}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
-                <script
-                    src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js"
-                    integrity="sha384-9YqOIesDhDEY++EsRGPyixeoD0vNAx2BZNvvygZQ+83K6mK9Z0uK5xh380SCBenA"
-                    crossorigin="anonymous"
-                ></script>
+                <script 
+                    src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js" 
+                    integrity="sha384-O8gbAZERPHZ6hLuGmdmxg66Z9i2XwrCJqQMqhyXGroS3nsNvMetwFTJgRpDRd3a5" 
+                    crossorigin="anonymous"></script>
             </div>
             <div id="skiplinks"></div>
             <div id="megamenu-resources"></div>
@@ -154,7 +170,7 @@ app.get(`${basePath}/env`, (req, res) => {
                 context: (req.query.context || 'ikkevalgt').toUpperCase(),
                 stripped: req.query.stripped || false,
                 redirectToApp: req.query.redirectToApp || false,
-                lvl: req.query.lvl || '3',
+                level: req.query.level || 'Level3',
             }),
             ...(isProduction
                 ? {

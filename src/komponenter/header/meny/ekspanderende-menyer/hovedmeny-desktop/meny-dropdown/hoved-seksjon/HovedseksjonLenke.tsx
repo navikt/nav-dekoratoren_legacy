@@ -1,7 +1,7 @@
 import React from 'react';
 import { MenySeksjon } from '../../../../../../../reducer/menu-duck';
 import { genererUrl } from '../../../../../../../utils/Environment';
-import '../UinnloggetDropdown.less';
+import '../HovedmenyDropdown.less';
 import { LenkeMedGA } from '../../../../../../LenkeMedGA';
 import { GACategory } from '../../../../../../../utils/google-analytics';
 

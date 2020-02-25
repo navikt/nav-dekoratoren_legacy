@@ -68,7 +68,7 @@
         "nav-frontend-lenker-style": "0.2.20",
         "nav-frontend-lukknapp": "^1.0.23",
         "nav-frontend-lukknapp-style": "^0.2.21",
-        "nav-frontend-modal": "^1.0.31",
+        "nav-frontend-modal": "^1.0.32",
         "nav-frontend-modal-style": "^0.3.31",
         "nav-frontend-paneler-style": "^0.3.17",
         "nav-frontend-skjema": "^1.0.67",
@@ -143,8 +143,7 @@
         "svg-sprite-loader": "^4.1.6",
         "webpack-cli": "^3.3.9",
         "webpack-node-externals": "^1.7.2",
-        "window": "^4.2.6",
-        "yet-another-fetch-mock": "^3.3.0"
+        "window": "^4.2.6"
     },
     "browserslist": {
         "production": [

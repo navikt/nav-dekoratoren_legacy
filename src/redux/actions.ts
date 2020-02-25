@@ -21,7 +21,7 @@ export enum ActionType {
     ARBEIDSGIVER = 'ARBEIDSGIVER',
     SAMARBEIDSPARTNER = 'SAMARBEIDSPARTNER',
     IKKEVALGT = 'IKKEVALGT',
-    TOGGLE_UINNLOGGET_MENY = 'TOGGLE_UINNLOGGET_MENY',
+    TOGGLE_HOVEDMENY = 'TOGGLE_HOVEDMENY',
     TOGGLE_MINSIDE_MENY = 'TOGGLE_MINSIDE_MENY',
     TOGGLE_SOK = 'TOGGLE_SOK',
     TOGGLE_LUKK_ALLE = 'TOGGLE_LUKK_ALLE'
@@ -99,8 +99,8 @@ export interface SettArbeidsflateIkkeValgt {
     type: ActionType.IKKEVALGT;
 }
 
-export interface ToggleUinnloggetMeny {
-    type: ActionType.TOGGLE_UINNLOGGET_MENY;
+export interface ToggleHovedmeny {
+    type: ActionType.TOGGLE_HOVEDMENY;
 }
 
 export interface ToggleMinsideMeny {
@@ -133,7 +133,7 @@ export type Handling =
     | SettArbeidsgiverAction
     | SettSamarbeidspartnerAction
     | SettArbeidsflateIkkeValgt
-    | ToggleUinnloggetMeny
+    | ToggleHovedmeny
     | ToggleMinsideMeny
     | ToggleSok
     | ToggleLukkAlle;

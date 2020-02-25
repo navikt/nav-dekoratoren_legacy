@@ -9,7 +9,7 @@ import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytic
 import MenyIkon from '../../../../../ikoner/mobilmeny/MenyIkon';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../../../tekster/finn-tekst';
-import { toggleUinnloggetMeny } from '../../../../../reducer/dropdown-toggle-duck';
+import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
 import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 
@@ -17,12 +17,12 @@ const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
     language: state.language.language,
     arbeidsflate: state.arbeidsflate.status,
-    isOpen: state.dropdownToggles.uinnlogget,
+    isOpen: state.dropdownToggles.hovedmeny,
 });
 
 const classname = 'mobilmeny';
 
-export const MobilUinnloggetMeny = () => {
+export const HovedmenyMobil = () => {
     const dispatch = useDispatch();
     const { meny, language, arbeidsflate, isOpen } = useSelector(stateSelector);
 
@@ -31,7 +31,7 @@ export const MobilUinnloggetMeny = () => {
             category: GACategory.Header,
             action: `meny-${isOpen ? 'close' : 'open'}`,
         });
-        dispatch(toggleUinnloggetMeny());
+        dispatch(toggleHovedmeny());
     };
 
     const menyKnapp = (
@@ -75,4 +75,4 @@ export const MobilUinnloggetMeny = () => {
     );
 };
 
-export default MobilUinnloggetMeny;
+export default HovedmenyMobil;

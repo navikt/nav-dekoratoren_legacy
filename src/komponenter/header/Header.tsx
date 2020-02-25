@@ -11,6 +11,8 @@ import { oppdaterSessionStorage } from '../../utils/meny-storage-utils';
 import Environment from '../../utils/Environment';
 import DesktopMenylinje from './meny/DesktopMenylinje';
 import MenyBakgrunn from './meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
+import { oppdaterSessionStorage, MenuValue } from '../../utils/meny-storage-utils';
+import Environment from '../../utils/Environment';
 
 export const Header = () => {
     const dispatch = useDispatch();

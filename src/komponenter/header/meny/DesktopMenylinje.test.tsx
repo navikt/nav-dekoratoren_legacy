@@ -4,7 +4,7 @@ import DesktopMenylinje from './DesktopMenylinje';
 import { Language } from '../../../reducer/language-duck';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
 import Sok from './sok/Sok';
-import DesktopUinnloggetMeny from './ekspanderende-menyer/meny-uinnlogget-desktop/DesktopUinnloggetMeny';
+import HovedmenyDesktop from './ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
 
 const shallowWithProps = (language: Language) => {
     return shallow(<DesktopMenylinje language={language} />);
@@ -16,19 +16,19 @@ describe('<DesktopMenylinje>', () => {
         expect(wrapper.find(NavLogoRod)).toHaveLength(1);
     });
 
-    it('Skal rendre <DesktopUinnloggetMeny> komponent hvis språk er norsk', () => {
+    it('Skal rendre <HovedmenyDesktop> komponent hvis språk er norsk', () => {
         const wrapper = shallowWithProps(Language.NORSK);
-        expect(wrapper.find(DesktopUinnloggetMeny)).toHaveLength(1);
+        expect(wrapper.find(HovedmenyDesktop)).toHaveLength(1);
     });
 
-    it('Skal rendre <DesktopUinnloggetMeny> komponent hvis språk er engelsk', () => {
+    it('Skal rendre <HovedmenyDesktop> komponent hvis språk er engelsk', () => {
         const wrapper = shallowWithProps(Language.ENGELSK);
-        expect(wrapper.find(DesktopUinnloggetMeny)).toHaveLength(1);
+        expect(wrapper.find(HovedmenyDesktop)).toHaveLength(1);
     });
 
-    it('Skal IKKE rendre <DesktopUinnloggetMeny> komponent hvis språk er samisk', () => {
+    it('Skal IKKE rendre <HovedmenyDesktop> komponent hvis språk er samisk', () => {
         const wrapper = shallowWithProps(Language.SAMISK);
-        expect(wrapper.find(DesktopUinnloggetMeny)).toHaveLength(0);
+        expect(wrapper.find(HovedmenyDesktop)).toHaveLength(0);
     });
 
     it('Skal rendre <Sok> komponent', () => {

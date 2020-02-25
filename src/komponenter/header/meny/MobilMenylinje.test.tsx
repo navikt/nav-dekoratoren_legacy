@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import Ekspanderbarmeny from './ekspanderende-menyer/meny-uinnlogget-mobil/MobilUinnloggetMeny';
+import Ekspanderbarmeny from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import MobilMenylinje from './MobilMenylinje';
 import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
 import { Language } from '../../../reducer/language-duck';
