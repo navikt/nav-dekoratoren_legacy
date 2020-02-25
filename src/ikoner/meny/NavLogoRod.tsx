@@ -17,7 +17,7 @@ const NavLogoRod = ({
         <LenkeMedGA
             classNameOverride={classname}
             href="https://nav.no"
-            gaEventArgs={{category: GACategory.Header, action: 'navlogo'}}
+            gaEventArgs={{ category: GACategory.Header, action: 'navlogo' }}
         >
             <svg
                 width={width ? width : '269px'}
