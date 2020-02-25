@@ -8,7 +8,7 @@ const Sokknapp = () => {
             type="submit"
         >
             <div className="media-sm-mobil">
-                <SokIkon width="39px" height="39px" color="#99c2e8" />
+                <SokIkon width="39px" height="39px" color="#0067C5" />
             </div>
             <div className="media-md-tablet">
                 <SokIkon width="26px" height="26px" color="#000000" />

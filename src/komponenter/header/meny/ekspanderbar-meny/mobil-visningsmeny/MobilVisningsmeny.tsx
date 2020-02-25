@@ -14,7 +14,15 @@ import Varselbjelle from '../../varsel/Varselbjelle';
 import VarselvisningMobil from '../../varsel/varselvisning/VarselvisningMobil';
 import MinsideLenke from '../../minside-lenke/MinsideLenke';
 import './MobilVisningsmeny.less';
-import KnappBase from 'nav-frontend-knapper';
+import { AppState } from '../../../../../reducer/reducer';
+import { Dispatch } from '../../../../../redux/dispatch-type';
+import { finnArbeidsflate } from '../../../../../reducer/arbeidsflate-duck';
+import { connect } from 'react-redux';
+import Sok from '../../sok/Sok';
+
+interface DispatchProps {
+    settArbeidsflate: () => void;
+}
 
 interface VisningsmenyProps {
     classname: string;
@@ -64,7 +72,7 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
         viewIsMobile: string
     ) => {
         document.body.style.overflow =
-            setOverflowHidden && false && viewIsMobile.includes('mobilmeny')
+            setOverflowHidden && viewIsMobile.includes('mobilmeny')
                 ? 'hidden'
                 : 'inherit';
     };
@@ -139,7 +147,7 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
                     {/*<Topseksjon
                         lukkmeny={togglemenu}
                         tabindex={this.hovedseksjonTabIndex()}
-                    />*/}
+                    />
                     <div
                         className={menyClass.element(
                             'minside-rad',
@@ -180,8 +188,11 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
                         </>
                         <MinsideLenke tabindex={this.hovedseksjonTabIndex()} />
                     </div>
+                    */}
+                    <Sok />
                     <MenyIngress
                         className={menyClass.element('meny', 'ingress')}
+                        inputext={this.props.arbeidsflate}
                     />
                     <ul className={menyClass.element('meny', 'list')}>
                         {menyLenker.children.map(
@@ -219,6 +230,7 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
                     {lang === Language.NORSK && (
                         <MobilarbeidsflateValg
                             tabindex={this.hovedseksjonTabIndex()}
+                            lang={lang}
                         />
                     )}
                 </section>
@@ -235,4 +247,12 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
     }
 }
 
-export default MobilVisningsmeny;
+const mapStateToProps = (state: AppState): StateProps => ({
+    arbeidsflate: state.arbeidsflate.status,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+    settArbeidsflate: () => dispatch(finnArbeidsflate()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MobilVisningsmeny);

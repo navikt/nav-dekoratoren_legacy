@@ -310,7 +310,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                                     : null}
                                             </ul>
                                         </div>
-                                        <DesktopSokknapp />
+                                        {false && <DesktopSokknapp />}
                                         <Sokknapp />
                                     </div>
                                 </div>

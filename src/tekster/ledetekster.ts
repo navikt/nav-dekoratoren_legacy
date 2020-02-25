@@ -62,7 +62,7 @@ export const ledetekster: { [key: string]: string } = {
     'sok-knapp': 'SØK',
     'sok-knapp-en': 'SEARCH',
     'sok-knapp-se': 'OZA',
-    'sok-input-placeholder': 'Søk på nav.no',
+    'sok-input-placeholder': 'Hva leter du etter?',
     'sok-input-placeholder-en': 'Search on nav.no',
     'sok-input-placeholder-se': 'Oza nav.no',
     'sok-input-label': 'Søk',
@@ -99,4 +99,22 @@ export const ledetekster: { [key: string]: string } = {
     'varsler-nye': 'nye',
     'varsler-nye-en': 'new',
     'varsler-nye-se': 'nye',
+    'arbeidsflate-stikkord-om-privatperson':
+        'Arbeid|Familie|Pensjon|Hjelpemidler|Flere Tema',
+    'arbeidsflate-stikkord-om-privatperson-en':
+        'Work|Family|Pension|aids|More Topics',
+    'arbeidsflate-stikkord-om-privatperson-se':
+        'Arbeid|Familie|Pensjon|Hjelpemidler|Flere Tema',
+    'arbeidsflate-stikkord-om-arbeidsgiver':
+        'Tjenester Og Skjemaer|Rekruttering|Oppfølging|Inkluderende Arbeidsliv| Hjelpemidler',
+    'arbeidsflate-stikkord-om-arbeidsgiver-en':
+        'Services And Forms|Recruitment|Follow-up|Inclusive Employment|Aids',
+    'arbeidsflate-stikkord-om-arbeidsgiver-se':
+        'Tjenester Og Skjemaer|Rekruttering|Oppfølging|Inkluderende Arbeidsliv| Hjelpemidler',
+    'arbeidsflate-stikkord-om-samarbeidspartner':
+        'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
+    'arbeidsflate-stikkord-om-samarbeidspartner-en':
+        'Municipalities|Education Area|Mental Health|Aids|Doctors And Therapists',
+    'arbeidsflate-stikkord-om-samarbeidspartner-se':
+        'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
 };

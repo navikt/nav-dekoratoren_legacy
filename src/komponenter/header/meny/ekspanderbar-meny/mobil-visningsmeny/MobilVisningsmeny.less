@@ -4,6 +4,7 @@
 .mobilmeny {
     &__meny-innhold,
     &__varsel-innhold {
+        overflow-y: scroll;
         position: fixed;
         top: 9.3rem;
         left: -(@mobilemenuwidth);
@@ -16,6 +17,7 @@
 
     &__undermeny-innhold,
     &__varsel-innhold {
+        overflow-y: scroll;
         top: 9.3rem;
         left: -(@mobilemenuwidth);
         width: @mobilemenuwidth;
@@ -29,11 +31,12 @@
     &__meny-innhold,
     &__undermeny-innhold,
     &__varsel-innhold {
-        padding: 1rem;
+        padding: 0.75rem 1rem 1rem 1rem;
+        margin-top: 0.5rem;
         background-color: white;
         width: @mobilemenuwidth;
         max-width: 375px;
-        height: 100%;
+        height: calc(100% - 9.3rem);
         border-radius: 3px;
         overflow: scroll;
         transition: all 0.7s ease-in-out;
@@ -49,7 +52,8 @@
         }
 
         &--list {
-            padding: 1rem 1rem 0.5rem 1rem;
+            padding: 1rem 1rem 1.5rem 1rem;
+            border-bottom: 1px solid black;
 
             .lenke {
                 text-decoration: none;
@@ -94,9 +98,8 @@
 
         &--ingress {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem 1.5rem 0 0;
+            flex-direction: column;
+            padding: 2rem 2rem 2rem 0;
             color: @navGra80;
 
             .typo-sidetittel {

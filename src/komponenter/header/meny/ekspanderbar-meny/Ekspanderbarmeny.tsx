@@ -137,6 +137,10 @@ class Ekspanderbarmeny extends React.Component<StateProps, State> {
                         </>
                     ) : null}
                 </div>
+                {/*<Mobilbakgrunn
+                    toggleWindow={this.menutoggle}
+                    backgroundIsActive={this.state.clicked}
+                />*/}
             </>
         );
     }
