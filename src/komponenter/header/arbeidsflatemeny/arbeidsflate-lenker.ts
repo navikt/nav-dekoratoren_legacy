@@ -1,22 +1,22 @@
 import { MenuValue } from '../../../utils/meny-storage-utils';
 
 export const arbeidsflateLenker: {
-    tittel: MenuValue;
+    tittelId: string;
     url: string;
     key: MenuValue;
 }[] = [
     {
-        tittel: MenuValue.PRIVATPERSON,
+        tittelId: 'rolle-privatperson',
         url: '/dekoratoren/person/',
         key: MenuValue.PRIVATPERSON,
     },
     {
-        tittel: MenuValue.ARBEIDSGIVER,
+        tittelId: 'rolle-arbeidsgiver',
         url: '/dekoratoren/bedrift/',
         key: MenuValue.ARBEIDSGIVER,
     },
     {
-        tittel: MenuValue.SAMARBEIDSPARTNER,
+        tittelId: 'rolle-samarbeidspartner',
         url: '/dekoratoren/samarbeidspartner/',
         key: MenuValue.SAMARBEIDSPARTNER,
     },

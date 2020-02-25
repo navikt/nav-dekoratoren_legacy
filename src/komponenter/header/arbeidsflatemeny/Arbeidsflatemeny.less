@@ -3,8 +3,9 @@
 
 .siteheader .arbeidsflate {
     width: 100%;
-    background-color: rgba(242, 242, 242, 1);
+    background-color: white;
     height: 2.75rem;
+    border-bottom: @navGra20 1px solid;
 
     &__topp-liste-rad {
         width: 28rem;
@@ -33,13 +34,16 @@
         padding-bottom: 0.6rem;
 
         &:hover {
-            border-bottom: @navDypBla 2px solid;
+            border-bottom: @navBla 2px solid;
         }
 
         &--active {
-            border-bottom: @navDypBla 2px solid;
+            border-bottom: @navBla 2px solid;
+            p {
+                font-weight: bold;
+            }
             &:hover {
-                border-bottom: @navDypBla 3px solid;
+                border-bottom: @navBla 3px solid;
             }
         }
     }
