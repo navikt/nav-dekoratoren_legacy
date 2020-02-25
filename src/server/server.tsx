@@ -37,7 +37,7 @@ const localhost = 'http://localhost:8088';
 // Mock
 import mockEnv from './mock/env';
 import mockMenu from './mock/menu.json';
-import mockSok from './mock/sokeresultat.json';
+import mockSok from './mock/sok.json';
 
 // Cache setup
 const mainCacheKey = 'navno-menu';
@@ -47,10 +47,10 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 // Server-side rendering
 const store = getStore();
-const baseUrl = `${process.env.baseUrl || localhost}`;
-const fileEnv = `${process.env.URL_APP_BASE || defaultAppUrl}/env`;
-const fileCss = `${process.env.URL_APP_BASE || defaultAppUrl}/css/client.css`;
-const fileScript = `${process.env.URL_APP_BASE || defaultAppUrl}/client.js`;
+const BASE_URL = `${process.env.BASE_URL || localhost}`;
+const fileEnv = `${process.env.BASE_URL_APP || defaultAppUrl}/env`;
+const fileCss = `${process.env.BASE_URL_APP || defaultAppUrl}/css/client.css`;
+const fileScript = `${process.env.BASE_URL_APP || defaultAppUrl}/client.js`;
 
 // Cors
 app.disable('x-powered-by');
@@ -91,7 +91,7 @@ const template = (parameters: string) => `
             />
             <meta name="theme-color" content="#000000" />
             <title>NAV Dekoratør</title>
-            <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
+            <link rel="icon" type="image/x-icon" href="${BASE_URL}${fileFavicon}" />
             <style>
             /* Decorator development styling */
             html, body {  height: 100%; }
@@ -107,11 +107,11 @@ const template = (parameters: string) => `
             }
             </style>
             <div id="styles">
-                <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
-                <link rel="icon" type="image/png" sizes="16x16" href="${baseUrl}${fileFavicon16x16}">
-                <link rel="icon" type="image/png" sizes="32x32" href="${baseUrl}${fileFavicon32x32}">
-                <link rel="apple-touch-icon" sizes="180x180" href="${baseUrl}${fileAppleTouchIcon}">
-                <link rel="mask-icon" href="${baseUrl}${fileMaskIcon}" color="#5bbad5">
+                <link rel="icon" type="image/x-icon" href="${BASE_URL}${fileFavicon}" />
+                <link rel="icon" type="image/png" sizes="16x16" href="${BASE_URL}${fileFavicon16x16}">
+                <link rel="icon" type="image/png" sizes="32x32" href="${BASE_URL}${fileFavicon32x32}">
+                <link rel="apple-touch-icon" sizes="180x180" href="${BASE_URL}${fileAppleTouchIcon}">
+                <link rel="mask-icon" href="${BASE_URL}${fileMaskIcon}" color="#5bbad5">
                 <meta name="msapplication-TileColor" content="#ffffff">
                 <meta name="theme-color" content="#ffffff">
                 <link href=${fileCss} rel="stylesheet" />
@@ -174,25 +174,26 @@ app.get(`${basePath}/env`, (req, res) => {
             }),
             ...(isProduction
                 ? {
-                      baseUrl: process.env.baseUrl,
-                      baseUrlEnonic: process.env.baseUrlEnonic,
-                      innloggingslinjenUrl: process.env.innloggingslinjenUrl,
-                      menypunkter: process.env.menypunkter,
-                      sokeresultat: process.env.sokeresultat,
-                      minsideArbeidsgiverUrl:
-                          process.env.minsideArbeidsgiverUrl,
-                      varselinnboksUrl: process.env.varselinnboksUrl,
-                      dittNavUrl: process.env.dittNavUrl,
-                      loginUrl: process.env.loginUrl,
-                      logoutUrl: process.env.logoutUrl,
+                      BASE_URL: process.env.BASE_URL,
+                      BASE_URL_ENONIC: process.env.BASE_URL_ENONIC,
+                      API_INNLOGGINGSLINJE_URL:
+                          process.env.API_INNLOGGINGSLINJE_URL,
+                      API_VARSELINNBOKS_URL: process.env.API_VARSELINNBOKS_URL,
+                      BACKEND_MENY_URL: process.env.BACKEND_MENY_URL,
+                      BACKEND_SOK_URL: process.env.BACKEND_SOK_URL,
+                      MINSIDE_ARBEIDSGIVER_URL:
+                          process.env.MINSIDE_ARBEIDSGIVER_URL,
+                      DITT_NAV_URL: process.env.DITT_NAV_URL,
+                      LOGIN_URL: process.env.LOGIN_URL,
+                      LOGOUT_URL: process.env.LOGOUT_URL,
                   }
                 : mockEnv),
         },
     });
 });
 
-app.get(`${basePath}/api/get/sokeresultat`, (req, res) => {
-    const uri = `${process.env.URL_API_SOK || defaultSearchUrl}?ord=${
+app.get(`${basePath}/api/sok`, (req, res) => {
+    const uri = `${process.env.API_SOK_URL || defaultSearchUrl}?ord=${
         req.query.ord
     }`;
     request({ method: 'GET', uri }, (error, response, body) => {
@@ -204,7 +205,7 @@ app.get(`${basePath}/api/get/sokeresultat`, (req, res) => {
     });
 });
 
-app.get(`${basePath}/api/get/menyvalg`, (req, res) => {
+app.get(`${basePath}/api/meny`, (req, res) => {
     mainCache.get(mainCacheKey, (err, response) => {
         if (!err && response !== undefined) {
             res.send(response);
@@ -215,7 +216,7 @@ app.get(`${basePath}/api/get/menyvalg`, (req, res) => {
 });
 
 const fetchmenuOptions = (res: any) => {
-    const uri = process.env.URL_API_MENY || defaultMenuUrl;
+    const uri = process.env.API_MENY_URL || defaultMenuUrl;
     request({ method: 'GET', uri }, (error, response, body) => {
         if (!error && response.statusCode === 200 && body.length > 2) {
             mainCache.set(mainCacheKey, body, 100);

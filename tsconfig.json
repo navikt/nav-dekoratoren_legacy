@@ -8,7 +8,7 @@
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "strict": true,
-        "baseUrl": "src",
+        "BASE_URL": "src",
         "module": "esnext",
         "moduleResolution": "node",
         "resolveJsonModule": true,

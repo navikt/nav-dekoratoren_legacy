@@ -18,7 +18,7 @@
     "jsx": "react",
     "forceConsistentCasingInFileNames": false,
     "noEmit": false,
-    "baseUrl": "./../"
+    "BASE_URL": "./../"
   },
   "include": [
     "./../src"

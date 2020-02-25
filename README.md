@@ -84,7 +84,7 @@ Fra:
 fasitResources:
   used:
   - alias: appres.cms
-    resourceType: baseUrl
+    resourceType: BASE_URL
 ```
 
 Til:
@@ -92,7 +92,7 @@ Til:
 fasitResources:
   used:
   - alias: nav.dekoratoren (denne peker på https://www{-miljø adresse}.nav.no, pus-decorator legger på path /dekoratoren)
-    resourceType: baseUrl
+    resourceType: BASE_URL
 ```
 For komplett oppsett se: https://github.com/navikt/pus-decorator
 
