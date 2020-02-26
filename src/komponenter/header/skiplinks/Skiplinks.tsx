@@ -1,41 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { Element } from 'nav-frontend-typografi';
 import Tekst from '../../../tekster/finn-tekst';
-import { desktopview, mobilviewMax, tabletview } from '../../../styling-mediaquery';
+import { mobilviewMax } from '../../../styling-mediaquery';
 import './Skiplinks.less';
 import { matchMedia } from '../../../utils/match-media-polyfill';
+import BEMHelper from '../../../utils/bem';
+import { hovedmenyDesktopClassname } from '../meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
+import { hovedmenyMobilClassname } from '../meny/ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 
 const Skiplinks = () => {
-    const [width, setWidth] = useState<number>(desktopview);
-    const [soklink, setSoklink] = useState<string>('#decorator-sok');
-    const [hovedmenylink, setHovedmenylink] = useState<string>(
-        '#decorator-arbeidsflatemeny'
-    );
+    const [soklink, setSoklink] = useState<string>('');
+    const [hovedmenylink, setHovedmenylink] = useState<string>('');
 
     const mqlMobilMax = matchMedia(`(max-width: ${mobilviewMax}px)`);
 
-
     useEffect(() => {
-        setSkiplinks();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [width]);
+        setSkiplinks(window.innerWidth <= mobilviewMax);
+        mqlMobilMax.addEventListener('change', handleResize);
+        return () => {
+            mqlMobilMax.removeEventListener('change', handleResize);
+        };
+    }, []);
 
-    const setSkiplinks = () => {
-        setHovedmenylink(
-            window.innerWidth >= desktopview
-                ? '#decorator-arbeidsflatemeny'
-                : '#decorator-meny-toggleknapp'
-        );
-        setSoklink(
-            window.innerWidth < tabletview
-                ? '#decorator-sok-toggle'
-                : '#decorator-sok'
-        );
+    const setSkiplinks = (isMobile: boolean) => {
+        const idHovedmenyLink = BEMHelper(
+            isMobile ? hovedmenyMobilClassname : hovedmenyDesktopClassname
+        ).element('menyknapp');
+        setHovedmenylink(`#${idHovedmenyLink}`);
+
+        // TODO: oppdater for ny søk-knapp/dropdown funksjonalitet
+        const idSokLink = isMobile
+            ? 'mobil-decorator-sok-toggle'
+            : 'desktop-decorator-sok-input';
+        setSoklink(`#${idSokLink}`);
     };
 
-    const handleResize = () => {
-        setWidth(window.innerWidth);
+    const handleResize = (event: MediaQueryListEvent) => {
+        setSkiplinks(event.matches);
     };
 
     return (

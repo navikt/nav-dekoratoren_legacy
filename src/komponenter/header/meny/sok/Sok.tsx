@@ -20,7 +20,6 @@ import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
 import Sokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Sokknapp';
 import './Sok.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
-import BEMHelper from '../../../../utils/bem';
 
 interface StateProps {
     language: Language;
@@ -28,7 +27,6 @@ interface StateProps {
 
 interface Props {
     tabindex?: boolean;
-    classname: string;
 }
 
 const predefinedlistview = 5;
@@ -208,7 +206,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 
     render() {
         const { selectedInput, items } = this.state;
-        const { language, classname } = this.props;
+        const { language } = this.props;
         const URL = `${Environment.BASE_URL_ENONIC}/sok?ord=${selectedInput}`;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
@@ -267,7 +265,9 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                                     'sok-input-label',
                                                     language
                                                 )}
-                                                id={BEMHelper(classname).element('decorator-sok')}
+                                                id={
+                                                    'desktop-decorator-sok-input'
+                                                }
                                             />
                                             <ul
                                                 className="sokeresultat-liste"

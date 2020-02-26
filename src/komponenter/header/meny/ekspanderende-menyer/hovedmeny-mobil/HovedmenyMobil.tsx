@@ -24,6 +24,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'mobilmeny';
+export const hovedmenyMobilClassname = classname;
 
 export const HovedmenyMobil = () => {
     const dispatch = useDispatch();

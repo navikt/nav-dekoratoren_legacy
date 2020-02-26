@@ -1,8 +1,8 @@
 import { verifyWindowObj } from './Environment';
 
 const noMatchMediaSupportFallback = {
-    addEventListener: (_: string, __: () => void) => null,
-    removeEventListener: (_: string, __: () => void) => null,
+    addEventListener: (_: string, __: (e: any) => void) => null,
+    removeEventListener: (_: string, __: (e: any) => void) => null,
 };
 
 export const matchMedia = (mediaQuery: string) => {
@@ -14,10 +14,10 @@ export const matchMedia = (mediaQuery: string) => {
     if (!MediaQueryList.prototype.addEventListener) {
         const mql = window.matchMedia(mediaQuery);
         // @ts-ignore
-        mql.addEventListener = (_: string, callback: () => void) =>
+        mql.addEventListener = (_: string, callback: (e: MediaQueryListEvent) => void) =>
             mql.addListener(callback);
         // @ts-ignore
-        mql.removeEventListener = (_: string, callback: () => void) =>
+        mql.removeEventListener = (_: string, callback: (e: MediaQueryListEvent) => void) =>
             mql.removeListener(callback);
         return mql;
     }
