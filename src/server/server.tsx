@@ -210,20 +210,20 @@ app.get(`${basePath}/api/meny`, (req, res) =>
 
 const fetchMenu = (res: Response) => {
     const uri = process.env.API_MENY_URL || defaultMenuUrl;
-    request({ method: 'GET', uri }, (error, response, body) => {
-        if (!error && response.statusCode === 200 && body.length > 2) {
-            mainCache.set(mainCacheKey, body, 100);
-            backupCache.set(backupCacheKey, body, 0);
-            res.send(body);
+    request({ method: 'GET', uri }, (reqError, reqResponse, reqBody) => {
+        if (!reqError && reqResponse.statusCode === 200 && reqBody.length > 2) {
+            mainCache.set(mainCacheKey, reqBody, 100);
+            backupCache.set(backupCacheKey, reqBody, 0);
+            res.send(reqBody);
         } else {
-            console.error('Failed to fetch decorator', error);
+            console.error('Failed to fetch decorator', reqError);
             backupCache.get(backupCacheKey, (err, backupCacheContent) => {
                 if (!err && backupCacheContent) {
                     console.log('Using backup cache - copy to main cache');
                     mainCache.set(mainCacheKey, backupCacheContent, 100);
                     res.send(backupCacheContent);
                 } else {
-                    console.log('Failed to use backup-cache - using mock');
+                    console.log('Failed to use backup-cache - using mock', err);
                     mainCache.set(mainCacheKey, mockMenu, 100);
                     backupCache.set(backupCacheKey, mockMenu, 0);
                     res.send(mockMenu);
