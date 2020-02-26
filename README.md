@@ -113,6 +113,9 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | redirectToApp     | boolean                                                 | false (Ditt Nav)   | Redirecter brukeren til app <br>etter innlogging fra dekoratøren.   |
 | level             | Level3 \| Level4                                        | Level4             | Krever innlogging basert på <br>definert sikkerhetsnivå             |
 
+Eksempel:<br>
+[https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3](https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3)
+
 ## Henvendelser
 
 Spørsmål knyttet til koden eller prosjektet kan rettes mot https://github.com/orgs/navikt/teams/team-personbruker
