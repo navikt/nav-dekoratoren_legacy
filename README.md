@@ -25,8 +25,8 @@ Starter en Node Express / dev - server på <br> http://localhost:8088/dekoratore
 ## Manuelt bygg
 
 ```
-npm run build (for produksjon)
 npm run build-dev (for testing lokalt)
+npm run build (for produksjon)
 ```
 
 ## Miljø på NAIS
