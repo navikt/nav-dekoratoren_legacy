@@ -1,7 +1,5 @@
-import React from 'react';
-import { MenySeksjon, Meny } from '../reducer/menu-duck';
-import { Language, spraakValgetErNorsk } from '../reducer/language-duck';
-import { verifyWindowObj } from './Environment';
+import { MenyNode } from '../reducer/menu-duck';
+import { Language } from '../reducer/language-duck';
 
 export const NAVHEADER = 'NAVHEADER';
 
@@ -28,52 +26,41 @@ export const oppdaterSessionStorage = (valgVerdi: MenuValue): void => {
     setSessionStorage(NAVHEADER, valgVerdi);
 };
 
-export function selectMenu(
-    menypunkter: Meny[],
+export const getMenuNode = (
+    menypunkter: MenyNode[],
     language: Language,
     arbeidsflate: MenuValue
-): MenySeksjon {
-    const languageSection = getChildren(language, menypunkter);
-    if (verifyWindowObj()) {
-        return spraakValgetErNorsk(language)
-            ? getDropdownMenuContent(arbeidsflate, languageSection)
-            : languageSection[0];
-    }
-    return languageSection[0];
-}
-
-export const getChildren = (lang: Language, menu: Meny[]): MenySeksjon[] => {
-    switch (lang) {
-        case Language.NORSK: {
-            const elem = menu.find(elem => elem.path === '/no');
-            return (elem && elem.children) || [];
-        }
-        case Language.ENGELSK: {
-            const elem = menu.find(elem => elem.path === '/en');
-            return (elem && elem.children) || [];
-        }
-        case Language.SAMISK: {
-            const elem = menu.find(elem => elem.path === '/se');
-            return (elem && elem.children) || [];
-        }
-        default:
-            return [];
-    }
+): MenyNode | undefined => {
+    const languageNode = getLanguageNode(language, menypunkter);
+    return languageNode
+        ? language === Language.NORSK
+            ? findNode(languageNode, arbeidsflate)
+            : findNode(languageNode, 'Main menu')
+        : undefined;
 };
 
-function getDropdownMenuContent(
-    storage: MenuValue,
-    content: MenySeksjon[]
-): MenySeksjon {
-    switch (storage) {
-        // Todo: Fix tree-search
-        case MenuValue.PRIVATPERSON:
-            return content[0].children[0].children[0];
-        case MenuValue.ARBEIDSGIVER:
-            return content[0].children[1].children[0];
-        case MenuValue.SAMARBEIDSPARTNER:
-            return content[0].children[3].children[0];
-        default:
-            return content[0].children[0].children[0];
+export const getLanguageNode = (
+    lang: Language,
+    nodeMenu: MenyNode[]
+): MenyNode | undefined =>
+    ({
+        NORSK: nodeMenu.find(n => n.path === '/no'),
+        ENGELSK: nodeMenu.find(n => n.path === '/en'),
+        SAMISK: nodeMenu.find(n => n.path === '/se'),
+    }[lang]);
+
+const findNode = (
+    node: MenyNode,
+    displayName: string
+): MenyNode | undefined => {
+    if (node.displayName.toLowerCase() === displayName.toLowerCase()) {
+        return node;
+    } else if (node.hasChildren) {
+        let result = undefined;
+        for (let i = 0; result == null && i < node.children.length; i++) {
+            result = findNode(node.children[i], displayName);
+        }
+        return result;
     }
-}
+    return undefined;
+};
