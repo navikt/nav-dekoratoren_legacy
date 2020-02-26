@@ -39,23 +39,19 @@ Dekoratøren har tatt utgangspunkt i at den skal være bakoverkompatibel, slik a
 
 En kan implementere menyen slik: 
 
-#### Eksempel 1:
-
+#### Eksempel 1
+Hent dekoratøren server-side:
 ```
-const url =
-    
-    'http://<test-mijø | prod-adr>/dekoratoren';
-const requestDecorator = callback => request(url, callback);
+const url = 'http://<test-mijø | prod-adr>/dekoratoren';
 const getDecorator = () =>
-    new Promise((resolve, reject) => {
-        const callback = (error, response, body) => {
-        {
-        håndtere inject av data med selektor, enten manuelt eller ved bruk av template engine
-        }
-        .....
+    request(url, (error, response, body) => {
+        // Håndtere inject av data med selektor, enten manuelt eller ved bruk av template engine
+    });
 ```
+Vis [implementasjon](https://github.com/navikt/personopplysninger/blob/master/server/dekorator.js) i Personopplysninger.<br>
+**Obs:** Cache anbefales
 
-#### Eksempel 2: 
+#### Eksempel 2
 Sett inn 5 linjer html i front-end:
 ```
 <html>
@@ -63,20 +59,20 @@ Sett inn 5 linjer html i front-end:
       <link href=http://<miljø adresse>/dekoratoren/css/client.css rel="stylesheet" /> 
   </head>
   <body>
-    <section class="navno-dekorator" id="decorator-header" role="main"></section>
+    <section id="decorator-header" class="navno-dekorator" role="main"></section>
     {
-      // deres app 
+      DIN_APP
     }
-    <section class="navno-dekorator" id="decorator-footer" role="main">
-    <div id="decorator-env" data-src="<miljø adresse>/dekoratoren/env.json"></div>
-    <script type="text/javascript" src=<miljø adresse>/dekoratoren/client.js></script>
+    <section id="decorator-footer" class="navno-dekorator" role="main"></section>
+    <div id="decorator-env" data-src="<miljø adresse>/dekoratoren/env.json?{DINE_PARAMETER}"></div>
+    <script type="text/javascript" src="<miljø adresse>/dekoratoren/client.js"></script>
   </body>
 </html>
 ```
+**Obs:** Faviconer vil ikke bli importert automatisk som i **Eksempel 1**.
 
-#### Eksempel 3:
-Bruk av pus-decorator
-
+#### Eksempel 3
+Bruk av pus-decorator:<br>
 I app-config.yaml, bytt ut fasitResources til å peke på ny dekoratør
 
 Fra:
