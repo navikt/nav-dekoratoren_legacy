@@ -5,7 +5,7 @@ const noMatchMediaSupportFallback = {
     removeEventListener: (_: string, __: (e: any) => void) => null,
 };
 
-export const matchMediaPolyfill = (mediaQuery: string) => {
+export const matchMedia = (mediaQuery: string) => {
     // @ts-ignore
     if (!verifyWindowObj() || !window.matchMedia) {
         return noMatchMediaSupportFallback;

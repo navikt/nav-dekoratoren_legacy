@@ -265,6 +265,9 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                                     'sok-input-label',
                                                     language
                                                 )}
+                                                id={
+                                                    'desktop-decorator-sok-input'
+                                                }
                                             />
                                             <ul
                                                 className="sokeresultat-liste"
