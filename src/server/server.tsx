@@ -24,7 +24,7 @@ const fileMaskIcon = require('../../src/ikoner/favicon/safari-pinned-tab.svg');
 // Config
 const basePath = '/dekoratoren';
 const isProduction = process.env.NODE_ENV === 'production';
-const buildPath = `${process.cwd()}/buildfolder`;
+const buildPath = `${process.cwd()}/build`;
 const app = express();
 const PORT = 8088;
 
