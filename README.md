@@ -9,7 +9,7 @@ Appen kjører på NAIS i en docker-container.
 ## Kom i gang
 Hent repoet fra github
 ```
-git clone git clone https://github.com/navikt/nav-dekoratoren.git
+git clone https://github.com/navikt/nav-dekoratoren.git
 ```
 Installer nødvendige avhengigheter
 ```
