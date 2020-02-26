@@ -33,7 +33,7 @@ export function selectMenu(
     language: Language,
     arbeidsflate: MenuValue
 ): MenySeksjon {
-    const languageSection = setLanguage(language, menypunkter);
+    const languageSection = getChildren(language, menypunkter);
     if (verifyWindowObj()) {
         return spraakValgetErNorsk(language)
             ? getDropdownMenuContent(arbeidsflate, languageSection)
@@ -42,16 +42,22 @@ export function selectMenu(
     return languageSection[0];
 }
 
-export const setLanguage = (lang: Language, menu: Meny[]): MenySeksjon[] => {
+export const getChildren = (lang: Language, menu: Meny[]): MenySeksjon[] => {
     switch (lang) {
-        case Language.NORSK:
-            return menu[0].children;
-        case Language.ENGELSK:
-            return menu[1].children;
-        case Language.SAMISK:
-            return menu[2].children;
+        case Language.NORSK: {
+            const elem = menu.find(elem => elem.path === '/no');
+            return (elem && elem.children) || [];
+        }
+        case Language.ENGELSK: {
+            const elem = menu.find(elem => elem.path === '/en');
+            return (elem && elem.children) || [];
+        }
+        case Language.SAMISK: {
+            const elem = menu.find(elem => elem.path === '/se');
+            return (elem && elem.children) || [];
+        }
         default:
-            return menu[0].children;
+            return [];
     }
 };
 
@@ -60,13 +66,14 @@ function getDropdownMenuContent(
     content: MenySeksjon[]
 ): MenySeksjon {
     switch (storage) {
+        // Todo: Fix tree-search
         case MenuValue.PRIVATPERSON:
-            return content[0];
+            return content[0].children[0].children[0];
         case MenuValue.ARBEIDSGIVER:
-            return content[1];
+            return content[0].children[1].children[0];
         case MenuValue.SAMARBEIDSPARTNER:
-            return content[2];
+            return content[0].children[3].children[0];
         default:
-            return content[0];
+            return content[0].children[0].children[0];
     }
 }
