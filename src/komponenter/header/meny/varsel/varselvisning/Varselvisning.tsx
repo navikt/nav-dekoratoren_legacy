@@ -147,12 +147,12 @@ class Varselvisning extends React.Component<Props, State> {
                 {antallVarsler > 5 && (
                     <div className="vis-alle-lenke skillelinje-topp">
                         <LenkeMedGA
-                            href={Environment.varselinnboksUrl}
+                            href={Environment.API_VARSELINNBOKS_URL}
                             tabIndex={tabIndex ? 0 : -1}
                             gaEventArgs={{
                                 category: GACategory.Header,
                                 action: 'varsler/visalle',
-                                label: Environment.varselinnboksUrl,
+                                label: Environment.API_VARSELINNBOKS_URL,
                             }}
                         >
                             <Tekst id={'varsler-visalle'} />

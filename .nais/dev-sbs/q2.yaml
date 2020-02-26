@@ -24,31 +24,31 @@ spec:
         - https://dekoratoren-q2.nais.oera-q.local/
         - https://www-q2.nav.no/dekoratoren
     env:
-        - name: URL_API_MENY
-          value: https://www-q1.nav.no/navno/_/service/no.nav.navno/menu
-        - name: URL_API_SOK
-          value: https://www-q1.nav.no/www.nav.no/sok/_/service/navno.nav.no.search/search2
-        - name: URL_APP_BASE
-          value: https://www-q2.nav.no/dekoratoren
-        - name: baseUrl
+        - name: BASE_URL
           value: https://www-q2.nav.no
-        - name: baseUrlEnonic
+        - name: BASE_URL_APP
+          value: https://www-q2.nav.no/dekoratoren
+        - name: BASE_URL_ENONIC
           value: https://www-q1.nav.no
-        - name: innloggingslinjenUrl
+        - name: API_MENY_URL
+          value: https://www-q1.nav.no/_/service/no.nav.navno/menu
+        - name: API_SOK_URL
+          value: https://www-q1.nav.no/_/service/navno.nav.no.search/search2
+        - name: API_INNLOGGINGSLINJE_URL
           value: https://www-q2.nav.no/innloggingslinje-api/auth
-        - name: menypunkter
-          value: https://www-q2.nav.no/dekoratoren/api/get/menyvalg
-        - name: sokeresultat
-          value: https://www-q2.nav.no/dekoratoren/api/get/sokeresultat
-        - name: minsideArbeidsgiverUrl
-          value: https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/
-        - name: varselinnboksUrl
+        - name: API_VARSELINNBOKS_URL
           value: https://www-q2.nav.no/person/varselinnboks
-        - name: dittNavUrl
+        - name: BACKEND_MENY_URL
+          value: https://www-q2.nav.no/dekoratoren/api/meny
+        - name: BACKEND_SOK_URL
+          value: https://www-q2.nav.no/dekoratoren/api/sok
+        - name: MINSIDE_ARBEIDSGIVER_URL
+          value: https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/
+        - name: DITT_NAV_URL
           value: https://www-q2.nav.no/person/dittnav/
-        - name: loginUrl
+        - name: LOGIN_URL
           value: https://loginservice-q.nav.no
-        - name: logoutUrl
+        - name: LOGOUT_URL
           value: https://loginservice-q.nav.no/slo
     resources:
         limits:

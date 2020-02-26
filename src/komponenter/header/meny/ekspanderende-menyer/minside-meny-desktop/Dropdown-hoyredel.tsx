@@ -78,7 +78,7 @@ interface MinSideLenkeProps {
 
 const MinSideLenke = ({ tabindex }: MinSideLenkeProps) => (
     <div className="minside-dittnav-lenke">
-        <Lenke tabIndex={tabindex ? 0 : -1} href={Environment.dittNavUrl}>
+        <Lenke tabIndex={tabindex ? 0 : -1} href={Environment.DITT_NAV_URL}>
             <>
                 <HoyreChevron />
                 <Tekst id="ga-til-min-side" />

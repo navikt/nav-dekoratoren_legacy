@@ -10,7 +10,7 @@ import KbNav, {
     NaviGroup,
     NaviNode,
 } from '../../../../../../utils/keyboard-navigation/kb-navigation';
-import { matchMediaPolyfill } from '../../../../../../utils/matchMediaPolyfill';
+import { matchMedia } from '../../../../../../utils/match-media-polyfill';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
@@ -60,7 +60,6 @@ export const HovedmenyDropdown = (props: Props) => {
 
     const settArbeidsflate = () => dispatch(finnArbeidsflate());
 
-    const matchMedia = matchMediaPolyfill;
     const mqlDesktop = matchMedia('(min-width: 1440px)');
     const mqlTablet = matchMedia('(min-width: 1024px)');
 

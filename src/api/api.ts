@@ -26,19 +26,21 @@ export interface DatalasterProps {
 }
 
 export function hentInnloggingsstatusFetch(): Promise<innloggingsstatusData> {
-    return fetchToJson(Environment.innloggingslinjenUrl, {
+    return fetchToJson(Environment.API_INNLOGGINGSLINJE_URL, {
         credentials: 'include',
     });
 }
 
 export function hentMenyPunkter(): Promise<menypunkterData[]> {
-    return fetchToJson(Environment.menypunkter);
+    return fetchToJson(Environment.BACKEND_MENY_URL);
 }
 
 export function hentVarslerFetch(): Promise<varselinnboksData> {
     const tidspunkt = new Date().getTime();
     const queryParams = `?noCache=${tidspunkt}&limit=5`;
-    return fetchToJson(`${Environment.varselinnboksUrl}/varsler${queryParams}`);
+    return fetchToJson(
+        `${Environment.API_VARSELINNBOKS_URL}/varsler${queryParams}`
+    );
 }
 
 export function lagreVarslerLestFetch(nyesteId: number): Promise<number> {
@@ -48,7 +50,7 @@ export function lagreVarslerLestFetch(nyesteId: number): Promise<number> {
         body: JSON.stringify(nyesteId),
     };
     return fetchToJson(
-        `${Environment.varselinnboksUrl}/rest/varsel/erles/${nyesteId}`,
+        `${Environment.API_VARSELINNBOKS_URL}/rest/varsel/erles/${nyesteId}`,
         config
     );
 }

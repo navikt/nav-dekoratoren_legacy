@@ -27,7 +27,9 @@ export const Header = () => {
 
     return (
         <>
-            <Skiplinks />
+            <div className="header-z-wrapper">
+                <Skiplinks />
+            </div>
             <header className="siteheader">
                 <div className="media-sm-mobil mobil-meny">
                     <MobilMenylinje language={language} />
