@@ -107,11 +107,11 @@ Appen blir serverside-rendret. Derfor anbefales det å bruke en .js fil til å f
 ## Parametere
 Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
 
-| Parameter         | Type                                                   | Default            | Forklaring                                                          |
-| ----------------- |--------------------------------------------------------|--------------------| --------------------------------------------------------------------|
-| redirectToApp     | boolean                                                | false (Ditt Nav)   | Redirecter brukeren til app <br>etter innlogging fra dekoratøren. |
-| level             | Level3 \| Level4                                          | Level4             | Krever innlogging basert på <br>definert sikkerhetsnivå             |
+| Parameter         | Type                                                    | Default            | Forklaring                                                          |
+| ----------------- |---------------------------------------------------------|--------------------| --------------------------------------------------------------------|
 | context           | privatperson \|<br>arbeidsgiver \|<br>samarbeidspartner | privatperson       | Setter menyen til valgt context                                     |
+| redirectToApp     | boolean                                                 | false (Ditt Nav)   | Redirecter brukeren til app <br>etter innlogging fra dekoratøren.   |
+| level             | Level3 \| Level4                                        | Level4             | Krever innlogging basert på <br>definert sikkerhetsnivå             |
 
 ## Henvendelser
 
