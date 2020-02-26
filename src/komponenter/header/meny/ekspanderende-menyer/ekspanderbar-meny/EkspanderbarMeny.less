@@ -1,9 +1,9 @@
 @import (reference) '../../../../../styling-variabler.less';
 
-.dropdown-meny {
+.desktop-dropdown {
     &__innhold-wrapper {
         position: absolute;
-        z-index: 1001;
+        z-index: 1;
         overflow: hidden;
         max-height: 0;
         max-width: @desktopLimitWidth / 3;
@@ -12,20 +12,22 @@
         border-bottom-left-radius: @border-radius-base;
         border-bottom-right-radius: @border-radius-base;
 
-        transition-duration: 0.7s;
+        transition-duration: 0.25s;
         transition-timing-function: ease-in-out;
-        transition-property: all;
+        transition-property: max-height, max-width, visibility;
 
         &--aktive {
             max-height: 60rem;
             max-width: 100%;
             visibility: visible;
+            transition-duration: 0.7s;
+            z-index: 1001;
         }
     }
 
     &__innhold {
         box-sizing: border-box;
-        padding: 0 @padding-horizontal 2rem @padding-horizontal;
+        padding: 0 @padding-sides 2rem @padding-sides;
         overflow: hidden;
         min-width: @tabletLimitWidth;
         @media (min-width: @desktopLimitWidth) {

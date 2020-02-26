@@ -1,12 +1,14 @@
 import React from 'react';
 import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
-import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
+import {
+    GACategory,
+    triggerGaEvent,
+} from '../../../../../utils/google-analytics';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../reducer/reducer';
 import { Status } from '../../../../../api/api';
 import { Undertittel } from 'nav-frontend-typografi';
 import { HovedmenyDropdown } from './meny-dropdown/HovedmenyDropdown';
-import './HovedmenyDesktop.less';
 import { selectMenu } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
@@ -42,7 +44,7 @@ export const HovedmenyDesktop = () => {
             classname={classname}
             ariaControlsId={classname}
         >
-            <HamburgerKnapp isOpen={isOpen}/>
+            <HamburgerKnapp isOpen={isOpen} />
             <Undertittel>
                 <Tekst id="meny-knapp" />
             </Undertittel>
@@ -50,21 +52,23 @@ export const HovedmenyDesktop = () => {
     );
 
     const dropdownInnhold =
-        meny.status === Status.OK
-            ? (
-                <HovedmenyDropdown
-                    classname={classname}
-                    arbeidsflate={arbeidsflate}
-                    language={language}
-                    menyLenker={selectMenu(meny.data, language, arbeidsflate)}
-                    isOpen={isOpen}
-                />
-            ) : <MenySpinner />;
+        meny.status === Status.OK ? (
+            <HovedmenyDropdown
+                classname={classname}
+                arbeidsflate={arbeidsflate}
+                language={language}
+                menyLenker={selectMenu(meny.data, language, arbeidsflate)}
+                isOpen={isOpen}
+            />
+        ) : (
+            <MenySpinner />
+        );
 
     return (
         <EkspanderbarMeny
             isOpen={isOpen}
             menyKnapp={menyKnapp}
+            classname={'desktop-dropdown'}
             id={classname}
         >
             {dropdownInnhold}
@@ -72,4 +76,4 @@ export const HovedmenyDesktop = () => {
     );
 };
 
-export default HovedmenyDesktop
+export default HovedmenyDesktop;

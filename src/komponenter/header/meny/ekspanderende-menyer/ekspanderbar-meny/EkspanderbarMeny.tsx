@@ -1,17 +1,17 @@
 import React, { ReactNode } from 'react';
 import BEMHelper from '../../../../../utils/bem';
+import './EkspanderbarMeny.less';
 
 type Props = {
-    isOpen: boolean,
-    menyKnapp: React.ReactNode,
-    id: string,
-    children: ReactNode,
-}
-
-const classname = 'dropdown-meny';
+    isOpen: boolean;
+    menyKnapp: React.ReactNode;
+    classname: string;
+    id: string;
+    children: ReactNode;
+};
 
 export const EkspanderbarMeny = (props: Props) => {
-    const { isOpen, menyKnapp, id, children } = props;
+    const { isOpen, menyKnapp, classname, id, children } = props;
     const cls = BEMHelper(classname);
 
     return (
@@ -21,13 +21,11 @@ export const EkspanderbarMeny = (props: Props) => {
                 <div
                     className={cls.element(
                         'innhold-wrapper',
-                        isOpen ? 'aktive' : '',
+                        isOpen ? 'aktive' : ''
                     )}
                     id={id}
                 >
-                    <div className={cls.element('innhold')}>
-                        {children}
-                    </div>
+                    <div className={cls.element('innhold')}>{children}</div>
                 </div>
             </div>
         </>
