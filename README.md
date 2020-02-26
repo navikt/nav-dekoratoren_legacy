@@ -109,9 +109,9 @@ Dekoratøren kan tilpasses med følgende [URL-parameter / query-strings](https:/
 
 | Parameter         | Type                                                   | Default            | Forklaring                                                          |
 | ----------------- |--------------------------------------------------------|--------------------| --------------------------------------------------------------------|
-| redirectToApp     | boolean                                                | false (Ditt Nav)   | Redirecter brukeren til appen <br>etter innlogging fra dekoratøren. |
-| level             | Level3 Level4                                          | Level4             | Krever innlogging basert på <br>definert sikkerhetsnivå             |
-| context           | privatperson\|<br>arbeidsgiver \|<br>samarbeidspartner | privatperson       | Setter menyen til valgt context                                     |
+| redirectToApp     | boolean                                                | false (Ditt Nav)   | Redirecter brukeren til app <br>etter innlogging fra dekoratøren. |
+| level             | Level3 \| Level4                                          | Level4             | Krever innlogging basert på <br>definert sikkerhetsnivå             |
+| context           | privatperson \|<br>arbeidsgiver \|<br>samarbeidspartner | privatperson       | Setter menyen til valgt context                                     |
 
 ## Henvendelser
 
