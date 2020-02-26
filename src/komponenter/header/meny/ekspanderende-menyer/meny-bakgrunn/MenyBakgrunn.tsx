@@ -5,20 +5,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../reducer/reducer';
 import { lukkAlleDropdowns } from '../../../../../reducer/dropdown-toggle-duck';
 
-const MenyBakgrunn = ({className}: {className: string}) => {
+const MenyBakgrunn = ({ className }: { className: string }) => {
     const cls = BEMHelper(className);
     const dispatch = useDispatch();
     const toggles = useSelector((state: AppState) => state.dropdownToggles);
     const isActive = toggles.hovedmeny || toggles.minside || toggles.sok;
 
     return (
-            <div
-                className={cls.element(
-                    'bakgrunn',
-                    isActive ? 'active' : ''
-                )}
-                onClick={() => dispatch(lukkAlleDropdowns())}
-            />
+        <div
+            className={cls.element('bakgrunn', isActive ? 'active' : '')}
+            onClick={() => dispatch(lukkAlleDropdowns())}
+        />
     );
 };
 

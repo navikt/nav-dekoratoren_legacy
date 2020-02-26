@@ -1,16 +1,24 @@
-import { getKbId, IdMap, NaviGroup, NaviIndex, NaviNode, NaviNodeMap } from './kb-navigation';
+import {
+    getKbId,
+    IdMap,
+    NaviGroup,
+    NaviIndex,
+    NaviNode,
+    NaviNodeMap,
+} from './kb-navigation';
 
 export const buildNaviGraphAndGetRootNode = (
     group: NaviGroup,
     rootIndex: NaviIndex,
     maxColsPerWrappedRow: number[],
     nodeMap: NaviNodeMap,
-    idMap: IdMap = {},
+    idMap: IdMap = {}
 ): NaviNode => {
     const getTopEdgeIndex = (index: NaviIndex) => {
         const { col, row, sub } = index;
 
-        const aboveIsSameCol = sub > 0 && !!getElement({ col: col, row: row, sub: sub - 1 });
+        const aboveIsSameCol =
+            sub > 0 && !!getElement({ col: col, row: row, sub: sub - 1 });
         if (aboveIsSameCol) {
             return {
                 col: col,
@@ -39,11 +47,16 @@ export const buildNaviGraphAndGetRootNode = (
         const maxColsAbove = maxColsPerWrappedRow[newRow];
         const lastColAbove = getLastCol(newRow);
         const lastWrappedPositionAbove = lastColAbove % maxColsAbove;
-        const bestAdjacentPositionAbove = Math.floor(col * maxColsAbove / maxColsCurrent + 0.5);
+        const bestAdjacentPositionAbove = Math.floor(
+            (col * maxColsAbove) / maxColsCurrent + 0.5
+        );
 
-        const newCol = bestAdjacentPositionAbove >= lastWrappedPositionAbove
-            ? lastColAbove
-            : lastColAbove - lastWrappedPositionAbove + bestAdjacentPositionAbove;
+        const newCol =
+            bestAdjacentPositionAbove >= lastWrappedPositionAbove
+                ? lastColAbove
+                : lastColAbove -
+                  lastWrappedPositionAbove +
+                  bestAdjacentPositionAbove;
         const newSub = getLastSub(newCol, newRow);
         return {
             col: newCol,
@@ -55,7 +68,11 @@ export const buildNaviGraphAndGetRootNode = (
     const getBottomEdgeIndex = (index: NaviIndex) => {
         const { col, row, sub } = index;
 
-        const belowIsSameCol = !!getElement({ col: col, row: row, sub: sub + 1 });
+        const belowIsSameCol = !!getElement({
+            col: col,
+            row: row,
+            sub: sub + 1,
+        });
         if (belowIsSameCol) {
             return {
                 col: col,
@@ -65,11 +82,19 @@ export const buildNaviGraphAndGetRootNode = (
         }
 
         const maxColsCurrent = maxColsPerWrappedRow[row];
-        const firstColBelow = col + (maxColsCurrent - col % maxColsCurrent);
-        const belowIsSameRowWrapped = !!getElement({ col: firstColBelow, row: row, sub: 0 });
+        const firstColBelow = col + (maxColsCurrent - (col % maxColsCurrent));
+        const belowIsSameRowWrapped = !!getElement({
+            col: firstColBelow,
+            row: row,
+            sub: 0,
+        });
         if (belowIsSameRowWrapped) {
             const newColAdjacent = col + maxColsCurrent;
-            const newCol = !!getElement({ col: newColAdjacent, row: row, sub: 0 })
+            const newCol = !!getElement({
+                col: newColAdjacent,
+                row: row,
+                sub: 0,
+            })
                 ? newColAdjacent
                 : getLastCol(row);
             return {
@@ -86,10 +111,13 @@ export const buildNaviGraphAndGetRootNode = (
         }
 
         const maxColsBelow = maxColsPerWrappedRow[newRow];
-        const bestAdjacentPositionBelow = Math.floor(col * maxColsBelow / maxColsCurrent + 0.5) % maxColsBelow;
-        const newCol = bestAdjacentPositionBelow < maxColsBelow
-            ? bestAdjacentPositionBelow
-            : maxColsBelow - 1;
+        const bestAdjacentPositionBelow =
+            Math.floor((col * maxColsBelow) / maxColsCurrent + 0.5) %
+            maxColsBelow;
+        const newCol =
+            bestAdjacentPositionBelow < maxColsBelow
+                ? bestAdjacentPositionBelow
+                : maxColsBelow - 1;
         return {
             col: newCol,
             row: newRow,
@@ -153,9 +181,8 @@ export const buildNaviGraphAndGetRootNode = (
         return sub;
     };
 
-    const getElement = (index: NaviIndex) => (
-        document.getElementById(getKbId(group, index, idMap)) as HTMLElement
-    );
+    const getElement = (index: NaviIndex) =>
+        document.getElementById(getKbId(group, index, idMap)) as HTMLElement;
 
     const getNodeAtIndex = (index: NaviIndex): NaviNode => {
         if (!index || !getElement(index)) {

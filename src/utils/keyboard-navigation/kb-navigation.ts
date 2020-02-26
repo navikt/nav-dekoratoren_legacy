@@ -1,41 +1,45 @@
 import { buildNaviGraphAndGetRootNode } from './kb-navi-graph-builder';
 
 export enum NaviGroup {
-    DesktopHeaderDropdown = 'desktop-meny-lenke'
+    DesktopHeaderDropdown = 'desktop-meny-lenke',
 }
 
 export type NaviIndex = {
-    col: number,
-    row: number,
-    sub: number
-}
+    col: number;
+    row: number;
+    sub: number;
+};
 
 export type NaviGraphData = {
-    groupName: NaviGroup,
-    rootNode: NaviNode,
-    nodeMap: NaviNodeMap,
-}
+    groupName: NaviGroup;
+    rootNode: NaviNode;
+    nodeMap: NaviNodeMap;
+};
 
 export type NaviNode = {
-    id: string,
-    index: NaviIndex,
-    up: NaviNode,
-    down: NaviNode,
-    left: NaviNode,
-    right: NaviNode
-} | null
+    id: string;
+    index: NaviIndex;
+    up: NaviNode;
+    down: NaviNode;
+    left: NaviNode;
+    right: NaviNode;
+} | null;
 
 export type NaviNodeMap = {
-    [id: string]: NaviNode
-}
+    [id: string]: NaviNode;
+};
 
 export type IdMap = {
-    [id: string]: string
-}
+    [id: string]: string;
+};
 
 type NodeSetterCallback = (node: NaviNode) => void;
 
-export const getKbId = (group: NaviGroup, index: NaviIndex, idMap: IdMap = {}) => {
+export const getKbId = (
+    group: NaviGroup,
+    index: NaviIndex,
+    idMap: IdMap = {}
+) => {
     const id = `${group}_${index.col}_${index.row}_${index.sub}`;
     return idMap[id] || id;
 };
@@ -68,14 +72,22 @@ const scrollIfNearViewBounds = (element: HTMLElement) => {
         return;
     }
 
-    const marginBottom = (1 - rect.bottom / viewHeight);
+    const marginBottom = 1 - rect.bottom / viewHeight;
     if (marginBottom < minMargin) {
-        window.scrollTo(0, viewOffset + (minMargin - marginBottom) * viewHeight);
+        window.scrollTo(
+            0,
+            viewOffset + (minMargin - marginBottom) * viewHeight
+        );
         return;
     }
 };
 
-const selectNode = (node: NaviNode, group: NaviGroup, callback: NodeSetterCallback, focus = true) => {
+const selectNode = (
+    node: NaviNode,
+    group: NaviGroup,
+    callback: NodeSetterCallback,
+    focus = true
+) => {
     if (!node) {
         return;
     }
@@ -90,7 +102,11 @@ const selectNode = (node: NaviNode, group: NaviGroup, callback: NodeSetterCallba
     }
 };
 
-const kbHandler = (node: NaviNode, group: NaviGroup, callback: NodeSetterCallback) => (event: KeyboardEvent) => {
+const kbHandler = (
+    node: NaviNode,
+    group: NaviGroup,
+    callback: NodeSetterCallback
+) => (event: KeyboardEvent) => {
     if (!node) {
         return;
     }
@@ -114,7 +130,11 @@ const kbHandler = (node: NaviNode, group: NaviGroup, callback: NodeSetterCallbac
     event.preventDefault();
 };
 
-const focusHandler = (currentNode: NaviNode, graph: NaviGraphData | undefined, callback: NodeSetterCallback) => (event: FocusEvent) => {
+const focusHandler = (
+    currentNode: NaviNode,
+    graph: NaviGraphData | undefined,
+    callback: NodeSetterCallback
+) => (event: FocusEvent) => {
     const id = (event.target as HTMLElement).id;
     if (!id || !graph || !currentNode || currentNode.id === id) {
         return;
@@ -128,9 +148,20 @@ const focusHandler = (currentNode: NaviNode, graph: NaviGraphData | undefined, c
     }
 };
 
-const getNaviGraphData = (group: NaviGroup, rootIndex: NaviIndex, maxColsPerRow: number[], idMap: IdMap = {}): NaviGraphData => {
+const getNaviGraphData = (
+    group: NaviGroup,
+    rootIndex: NaviIndex,
+    maxColsPerRow: number[],
+    idMap: IdMap = {}
+): NaviGraphData => {
     const nodeMap = {};
-    const rootNode = buildNaviGraphAndGetRootNode(group, rootIndex, maxColsPerRow, nodeMap, idMap);
+    const rootNode = buildNaviGraphAndGetRootNode(
+        group,
+        rootIndex,
+        maxColsPerRow,
+        nodeMap,
+        idMap
+    );
     return {
         groupName: group,
         rootNode: rootNode,
@@ -142,5 +173,5 @@ export default {
     getKbId,
     kbHandler,
     focusHandler,
-    getNaviGraphData
-}
+    getNaviGraphData,
+};

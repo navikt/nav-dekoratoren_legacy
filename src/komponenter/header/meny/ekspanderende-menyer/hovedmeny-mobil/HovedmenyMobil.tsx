@@ -5,7 +5,10 @@ import { Status } from '../../../../../api/api';
 import { selectMenu } from '../../../../../utils/meny-storage-utils';
 import Menyknapp from '../meny-knapp/Menyknapp';
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
-import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
+import {
+    GACategory,
+    triggerGaEvent,
+} from '../../../../../utils/google-analytics';
 import MenyIkon from '../../../../../ikoner/mobilmeny/MenyIkon';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../../../tekster/finn-tekst';
@@ -39,6 +42,7 @@ export const HovedmenyMobil = () => {
             toggleMenu={menutoggle}
             clicked={isOpen}
             classname={classname}
+            ariaControlsId={classname}
         >
             <MenyIkon />
             <Undertittel>
@@ -48,27 +52,25 @@ export const HovedmenyMobil = () => {
     );
 
     const dropdownInnhold =
-        meny.status === Status.OK
-            ? (
-                <MobilVisningsmeny
-                    classname={classname}
-                    menyLenker={selectMenu(
-                        meny.data,
-                        language,
-                        arbeidsflate,
-                    )}
-                    menuIsOpen={isOpen}
-                    togglemenu={menutoggle}
-                    arbeidsflate={arbeidsflate}
-                    lang={language}
-                />
-            ) : <MenySpinner />;
+        meny.status === Status.OK ? (
+            <MobilVisningsmeny
+                classname={classname}
+                menyLenker={selectMenu(meny.data, language, arbeidsflate)}
+                menuIsOpen={isOpen}
+                togglemenu={menutoggle}
+                arbeidsflate={arbeidsflate}
+                lang={language}
+            />
+        ) : (
+            <MenySpinner />
+        );
 
     return (
         <EkspanderbarMeny
             classname={classname}
             isOpen={isOpen}
             menyKnapp={menyKnapp}
+            id={classname}
         >
             {dropdownInnhold}
         </EkspanderbarMeny>

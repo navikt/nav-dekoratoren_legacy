@@ -5,7 +5,10 @@ import { AppState } from '../../../../../reducer/reducer';
 import { desktopview, tabletview } from '../../../../../styling-mediaquery';
 import Environment from '../../../../../utils/Environment';
 import './Varselvisning.less';
-import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
+import {
+    GACategory,
+    triggerGaEvent,
+} from '../../../../../utils/google-analytics';
 import Tekst, { finnTekst } from '../../../../../tekster/finn-tekst';
 import { Language } from '../../../../../reducer/language-duck';
 import { LenkeMedGA } from '../../../../LenkeMedGA';
@@ -95,7 +98,10 @@ class Varselvisning extends React.Component<Props, State> {
         for (const varselLenke of this.getVarselLenker()) {
             if (varselLenke.tagName.toUpperCase() === 'A') {
                 varselLenke.removeEventListener('click', this.gaEventHandler);
-                varselLenke.removeEventListener('auxclick', this.gaEventHandler);
+                varselLenke.removeEventListener(
+                    'auxclick',
+                    this.gaEventHandler
+                );
             }
         }
     };
@@ -151,7 +157,10 @@ class Varselvisning extends React.Component<Props, State> {
                         >
                             <Tekst id={'varsler-visalle'} />
                             {antallUlesteVarsler > 0
-                                ? ` (${antallUlesteVarsler} ${finnTekst('varsler-nye', this.props.language)})`
+                                ? ` (${antallUlesteVarsler} ${finnTekst(
+                                      'varsler-nye',
+                                      this.props.language
+                                  )})`
                                 : ''}
                         </LenkeMedGA>
                     </div>

@@ -29,20 +29,17 @@ const DesktopMenylinje = ({ language }: Props) => {
                         height="88"
                         classname={desktopMenylinje.element('nav-brand')}
                     />
-                    {(language === Language.NORSK || language === Language.ENGELSK) && (
-                        <HovedmenyDesktop />
-                    )}
+                    {(language === Language.NORSK ||
+                        language === Language.ENGELSK) && <HovedmenyDesktop />}
                     <SokDropdown />
-                    <span className={desktopMenylinje.element('spacer')}/>
+                    <span className={desktopMenylinje.element('spacer')} />
                     <InnloggingsstatusProvider>
                         <>
                             <VarselinnboksProvider>
                                 <Varselbjelle tabindex={true}>
                                     {clicked =>
                                         clicked && (
-                                            <VarselVisning
-                                                tabIndex={true}
-                                            />
+                                            <VarselVisning tabIndex={true} />
                                         )
                                     }
                                 </Varselbjelle>

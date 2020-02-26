@@ -120,15 +120,24 @@ export const ledetekster: { [key: string]: string } = {
     'samarbeidspartner-side-lenke': 'Samarbeidspartner',
     'samarbeidspartner-side-lenke-en': 'Samarbeidspartner',
     'samarbeidspartner-side-lenke-es': 'Samarbeidspartner',
-    'meny-bunnlenke-minside-stikkord': 'Utbetalingsoversikt|Saksoversikt|Sykefravær',
-    'meny-bunnlenke-minside-stikkord-en': 'Utbetalingsoversikt|Saksoversikt|Sykefravær',
-    'meny-bunnlenke-minside-stikkord-es': 'Utbetalingsoversikt|Saksoversikt|Sykefravær',
-    'meny-bunnlenke-arbeidsgiver-stikkord': 'Tjenester og skjemaer|Rekruttering|Oppfølging|Inkluderende arbeidsliv|Hjelpemidler',
-    'meny-bunnlenke-arbeidsgiver-stikkord-en': 'Tjenester og skjemaer|Rekruttering|Oppfølging|Inkluderende arbeidsliv|Hjelpemidler',
-    'meny-bunnlenke-arbeidsgiver-stikkord-es': 'Tjenester og skjemaer|Rekruttering|Oppfølging|Inkluderende arbeidsliv|Hjelpemidler',
-    'meny-bunnlenke-samarbeidspartner-stikkord': 'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
-    'meny-bunnlenke-samarbeidspartner-stikkord-en': 'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
-    'meny-bunnlenke-samarbeidspartner-stikkord-es': 'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
+    'meny-bunnlenke-minside-stikkord':
+        'Utbetalingsoversikt|Saksoversikt|Sykefravær',
+    'meny-bunnlenke-minside-stikkord-en':
+        'Utbetalingsoversikt|Saksoversikt|Sykefravær',
+    'meny-bunnlenke-minside-stikkord-es':
+        'Utbetalingsoversikt|Saksoversikt|Sykefravær',
+    'meny-bunnlenke-arbeidsgiver-stikkord':
+        'Tjenester og skjemaer|Rekruttering|Oppfølging|Inkluderende arbeidsliv|Hjelpemidler',
+    'meny-bunnlenke-arbeidsgiver-stikkord-en':
+        'Tjenester og skjemaer|Rekruttering|Oppfølging|Inkluderende arbeidsliv|Hjelpemidler',
+    'meny-bunnlenke-arbeidsgiver-stikkord-es':
+        'Tjenester og skjemaer|Rekruttering|Oppfølging|Inkluderende arbeidsliv|Hjelpemidler',
+    'meny-bunnlenke-samarbeidspartner-stikkord':
+        'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
+    'meny-bunnlenke-samarbeidspartner-stikkord-en':
+        'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
+    'meny-bunnlenke-samarbeidspartner-stikkord-es':
+        'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
     'meny-loading': 'Laster meny-innhold...',
     'meny-loading-en': 'Laster meny-innhold...',
     'meny-loading-es': 'Laster meny-innhold...',
