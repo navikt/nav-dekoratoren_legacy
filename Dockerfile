@@ -3,7 +3,6 @@ FROM navikt/node-express:1.0.0
 WORKDIR /app
 
 COPY src src/
-COPY config config/
 COPY *.json ./
 COPY *.js ./
 
