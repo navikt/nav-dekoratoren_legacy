@@ -170,7 +170,7 @@ app.get(`${basePath}/env`, (req, res) => {
                 context: (req.query.context || 'ikkevalgt').toUpperCase(),
                 stripped: req.query.stripped || false,
                 redirectToApp: req.query.redirectToApp || false,
-                level: req.query.level || 'Level3',
+                level: req.query.level || 'Level4',
             }),
             ...(isProduction
                 ? {
