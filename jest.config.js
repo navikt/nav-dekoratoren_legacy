@@ -1,11 +1,11 @@
 const { defaults } = require('jest-config');
 
 module.exports = {
-    setupTestFrameworkScriptFile: '<rootDir>/setupTest.js',
+    setupTestFrameworkScriptFile: '<rootDir>/src/utils/jest/setupTest.js',
 
     moduleNameMapper: {
-        '\\.(css|jpg|png|svg|less)$': '<rootDir>/styleMock.js',
-        'nav-(.*)-style': '<rootDir>/styleMock.js',
+        '\\.(css|jpg|png|svg|less)$': '<rootDir>/src/utils/jest/styleMock.js',
+        'nav-(.*)-style': '<rootDir>/src/utils/jest/styleMock.js',
     },
 
     testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
