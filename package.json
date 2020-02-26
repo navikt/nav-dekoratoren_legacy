@@ -145,6 +145,17 @@
         "webpack-node-externals": "^1.7.2",
         "window": "^4.2.6"
     },
+    "jest": {
+        "rootDir": ".",
+        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+        "setupFilesAfterEnv": [
+            "<rootDir>/src/utils/jest/setupTest.js"
+        ],
+        "moduleNameMapper": {
+            "\\.(css|jpg|png|svg|less)$": "<rootDir>/src/utils/jest/styleMock.js",
+            "nav-(.*)-style": "<rootDir>/src/utils/jest/styleMock.js"
+        }
+    },
     "browserslist": {
         "production": [
             ">0.2%",
