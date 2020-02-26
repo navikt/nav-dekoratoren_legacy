@@ -1,7 +1,5 @@
-import React from 'react';
-import { MenySeksjon, Meny } from '../reducer/menu-duck';
-import { Language, spraakValgetErNorsk } from '../reducer/language-duck';
-import { verifyWindowObj } from './Environment';
+import { MenyNode } from '../reducer/menu-duck';
+import { Language } from '../reducer/language-duck';
 
 export const NAVHEADER = 'NAVHEADER';
 
@@ -28,45 +26,41 @@ export const oppdaterSessionStorage = (valgVerdi: MenuValue): void => {
     setSessionStorage(NAVHEADER, valgVerdi);
 };
 
-export function selectMenu(
-    menypunkter: Meny[],
+export const getMenuNode = (
+    menypunkter: MenyNode[],
     language: Language,
     arbeidsflate: MenuValue
-): MenySeksjon {
-    const languageSection = setLanguage(language, menypunkter);
-    if (verifyWindowObj()) {
-        return spraakValgetErNorsk(language)
-            ? getDropdownMenuContent(arbeidsflate, languageSection)
-            : languageSection[0];
-    }
-    return languageSection[0];
-}
-
-export const setLanguage = (lang: Language, menu: Meny[]): MenySeksjon[] => {
-    switch (lang) {
-        case Language.NORSK:
-            return menu[0].children;
-        case Language.ENGELSK:
-            return menu[1].children;
-        case Language.SAMISK:
-            return menu[2].children;
-        default:
-            return menu[0].children;
-    }
+): MenyNode | undefined => {
+    const languageNode = getLanguageNode(language, menypunkter);
+    return languageNode
+        ? language === Language.NORSK
+            ? findNode(languageNode, arbeidsflate)
+            : findNode(languageNode, 'Main menu')
+        : undefined;
 };
 
-function getDropdownMenuContent(
-    storage: MenuValue,
-    content: MenySeksjon[]
-): MenySeksjon {
-    switch (storage) {
-        case MenuValue.PRIVATPERSON:
-            return content[0];
-        case MenuValue.ARBEIDSGIVER:
-            return content[1];
-        case MenuValue.SAMARBEIDSPARTNER:
-            return content[2];
-        default:
-            return content[0];
+export const getLanguageNode = (
+    lang: Language,
+    nodeMenu: MenyNode[]
+): MenyNode | undefined =>
+    ({
+        NORSK: nodeMenu.find(n => n.path === '/no'),
+        ENGELSK: nodeMenu.find(n => n.path === '/en'),
+        SAMISK: nodeMenu.find(n => n.path === '/se'),
+    }[lang]);
+
+const findNode = (
+    node: MenyNode,
+    displayName: string
+): MenyNode | undefined => {
+    if (node.displayName.toLowerCase() === displayName.toLowerCase()) {
+        return node;
+    } else if (node.hasChildren) {
+        let result = undefined;
+        for (let i = 0; result == null && i < node.children.length; i++) {
+            result = findNode(node.children[i], displayName);
+        }
+        return result;
     }
-}
+    return undefined;
+};

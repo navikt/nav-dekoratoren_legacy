@@ -2,7 +2,7 @@ import React from 'react';
 import { AppState } from '../../../../../reducer/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Status } from '../../../../../api/api';
-import { selectMenu } from '../../../../../utils/meny-storage-utils';
+import { getMenuNode } from '../../../../../utils/meny-storage-utils';
 import Menyknapp from '../meny-knapp/Menyknapp';
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
 import {
@@ -55,7 +55,7 @@ export const HovedmenyMobil = () => {
         meny.status === Status.OK ? (
             <MobilVisningsmeny
                 classname={classname}
-                menyLenker={selectMenu(meny.data, language, arbeidsflate)}
+                menyLenker={getMenuNode(meny.data, language, arbeidsflate)}
                 menuIsOpen={isOpen}
                 togglemenu={menutoggle}
                 arbeidsflate={arbeidsflate}

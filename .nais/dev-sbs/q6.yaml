@@ -29,11 +29,11 @@ spec:
         - name: BASE_URL_APP
           value: https://www-q6.nav.no/dekoratoren
         - name: BASE_URL_ENONIC
-          value: https://www-q1.nav.no
+          value: https://www-q6.nav.no
         - name: API_MENY_URL
-          value: https://www-q1.nav.no/_/service/no.nav.navno/menu
+          value: https://www-q6.nav.no/_/service/no.nav.navno/menu
         - name: API_SOK_URL
-          value: https://www-q1.nav.no/_/service/navno.nav.no.search/search2
+          value: https://www-q6.nav.no/_/service/navno.nav.no.search/search2
         - name: API_INNLOGGINGSLINJE_URL
           value: https://www-q6.nav.no/innloggingslinje-api/auth
         - name: API_VARSELINNBOKS_URL
