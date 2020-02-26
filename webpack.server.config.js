@@ -18,7 +18,7 @@ const browserConfig = {
         server: path.resolve(__dirname, './src/server/server.tsx'),
     },
     output: {
-        path: path.resolve(__dirname, 'buildfolder/'),
+        path: path.resolve(__dirname, 'build/'),
         filename: 'server.js',
         libraryTarget: 'commonjs2',
         publicPath: '/dekoratoren/',

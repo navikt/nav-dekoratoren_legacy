@@ -13,7 +13,7 @@ const browserConfig = {
         client: './src/index.tsx',
     },
     output: {
-        path: path.resolve(__dirname, 'buildfolder/'),
+        path: path.resolve(__dirname, 'build/'),
         filename: '[name].js',
         publicPath: '/dekoratoren/',
     },
