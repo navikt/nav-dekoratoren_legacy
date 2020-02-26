@@ -29,12 +29,12 @@ export const oppdaterSessionStorage = (valgVerdi: MenuValue): void => {
 export const getMenuNode = (
     menypunkter: MenyNode[],
     language: Language,
-    context: MenuValue
+    arbeidsflate: MenuValue
 ): MenyNode | undefined => {
     const languageNode = getLanguageNode(language, menypunkter);
     return languageNode
         ? language === Language.NORSK
-            ? findNode(languageNode, context)
+            ? findNode(languageNode, arbeidsflate)
             : findNode(languageNode, 'Main menu')
         : undefined;
 };
