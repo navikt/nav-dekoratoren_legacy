@@ -2,36 +2,50 @@
 # Nav-dekoratoren ![nav.no logo](./src/ikoner/meny/navlogo.svg) 
                      
 
-Node.js Express applikasjon med frontend-komponenter i React.
-Appen kjører på NAIS i en dockercontainer.
+Node.js Express applikasjon med frontend-komponenter i React.<br>
+Appen kjører på NAIS i en docker-container.
 
 
-## Installasjon
-
+## Kom i gang
+Hent repoet fra github
+```
+git clone git clone https://github.com/navikt/nav-dekoratoren.git
+```
+Installer nødvendige avhengigheter
 ```
 npm install
 ```
+Kjør applikasjonen lokalt med hot-reloading
 
-## Bygg applikasjonen
+```
+npm start
+```
+Starter en Node Express / dev - server på <br> http://localhost:8088/dekoratoren
+
+## Manuelt bygg
 
 ```
 npm run build (for produksjon)
 npm run build-dev (for testing lokalt)
 ```
 
-## Kjør applikasjonen
+## Miljø på NAIS
 
-Kjør Express-server/dev-server lokalt: http://localhost:8088/dekoratoren
+Dekoratøren ligger i  [Q6](https://www-q6.nav.no/dekoratoren/), [Q1](https://www-q1.nav.no/dekoratoren/), [Q0](https://www-q0.nav.no/dekoratoren/) og [Prod](https://www.nav.no/dekoratoren/).<br>
 
-```
-npm start
-```
+## Parametere
+Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
 
-## Nais-cluster
+| Parameter         | Type                                                    | Default            | Forklaring                                                          |
+| ----------------- |---------------------------------------------------------|--------------------| --------------------------------------------------------------------|
+| context           | privatperson \|<br>arbeidsgiver \|<br>samarbeidspartner | privatperson       | Setter menyen til valgt context                                     |
+| redirectToApp     | boolean                                                 | false (Ditt Nav)   | Redirecter brukeren til app <br>etter innlogging fra dekoratøren.   |
+| level             | Level3 \| Level4                                        | Level4             | Krever innlogging basert på <br>definert sikkerhetsnivå             |
 
-Dekoratøren ligger i [Q0](https://www-q0.nav.no/dekoratoren/), [Q1](https://www-q1.nav.no/dekoratoren/) og [Q6](https://www-q6.nav.no/dekoratoren/).<br>
+Eksempel:<br>
+[https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3](https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3)
 
-## Bruk av menyen
+## Bruk av dekoratøren
 
 Dekoratøren er bakoverkompatibel, slik at eksisterende applikasjoner som benytter dekoratør/:v4 kun endrer URL fra https://appres.nav.no/.... til https://www.nav.no/dekoratoren.
 
@@ -96,19 +110,6 @@ Appen blir serverside-rendret. Derfor anbefales det å bruke en .js fil til å f
       header-withmenu   (header mounting point)
       footer-withmenu   (footer mounting point)
       scripts           (inneholder javascript)
-
-
-## Parametere
-Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
-
-| Parameter         | Type                                                    | Default            | Forklaring                                                          |
-| ----------------- |---------------------------------------------------------|--------------------| --------------------------------------------------------------------|
-| context           | privatperson \|<br>arbeidsgiver \|<br>samarbeidspartner | privatperson       | Setter menyen til valgt context                                     |
-| redirectToApp     | boolean                                                 | false (Ditt Nav)   | Redirecter brukeren til app <br>etter innlogging fra dekoratøren.   |
-| level             | Level3 \| Level4                                        | Level4             | Krever innlogging basert på <br>definert sikkerhetsnivå             |
-
-Eksempel:<br>
-[https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3](https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3)
 
 ## Henvendelser
 
