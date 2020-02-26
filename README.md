@@ -104,6 +104,15 @@ Appen blir serverside-rendret. Derfor anbefales det å bruke en .js fil til å f
       scripts           (scripts til applikasjonen)
 
 
+## Parameter
+Dekoratøren kan tilpasses med følgende [URL-parameter / query-strings](https://en.wikipedia.org/wiki/Query_string). <br>
+
+| Parameter         | Type                                                   | Default            | Forklaring                                                          |
+| ----------------- |--------------------------------------------------------|--------------------| --------------------------------------------------------------------|
+| redirectToApp     | boolean                                                | false (Ditt Nav)   | Redirecter brukeren til appen <br>etter innlogging fra dekoratøren. |
+| level             | Level3 Level4                                          | Level4             | Krever innlogging basert på <br>definert sikkerhetsnivå             |
+| context           | privatperson\|<br>arbeidsgiver \|<br>samarbeidspartner | privatperson       | Setter menyen til valgt context                                     |
+
 ## Henvendelser
 
 Spørsmål knyttet til koden eller prosjektet kan rettes mot https://github.com/orgs/navikt/teams/team-personbruker
