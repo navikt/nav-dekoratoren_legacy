@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Element } from 'nav-frontend-typografi';
 import Tekst from '../../../tekster/finn-tekst';
-import { desktopview, tabletview } from '../../../styling-mediaquery';
+import { desktopview, mobilviewMax, tabletview } from '../../../styling-mediaquery';
 import './Skiplinks.less';
+import { matchMedia } from '../../../utils/match-media-polyfill';
 
 const Skiplinks = () => {
     const [width, setWidth] = useState<number>(desktopview);
@@ -10,6 +11,9 @@ const Skiplinks = () => {
     const [hovedmenylink, setHovedmenylink] = useState<string>(
         '#decorator-arbeidsflatemeny'
     );
+
+    const mqlMobilMax = matchMedia(`(max-width: ${mobilviewMax}px)`);
+
 
     useEffect(() => {
         setSkiplinks();
@@ -80,4 +84,5 @@ const Skiplinks = () => {
         </>
     );
 };
+
 export default Skiplinks;

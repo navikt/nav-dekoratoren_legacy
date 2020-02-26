@@ -25,6 +25,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'hovedmeny-desktop';
+export const hovedmenyDesktopClassname = classname;
 
 export const HovedmenyDesktop = () => {
     const dispatch = useDispatch();

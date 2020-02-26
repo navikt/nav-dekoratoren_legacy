@@ -1,11 +1,13 @@
+import { verifyWindowObj } from './Environment';
+
 const noMatchMediaSupportFallback = {
     addEventListener: (_: string, __: () => void) => null,
     removeEventListener: (_: string, __: () => void) => null,
 };
 
-export const matchMediaPolyfill = (mediaQuery: string) => {
+export const matchMedia = (mediaQuery: string) => {
     // @ts-ignore
-    if (!window.matchMedia) {
+    if (!verifyWindowObj() || !window.matchMedia) {
         return noMatchMediaSupportFallback;
     }
 
