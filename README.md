@@ -104,8 +104,8 @@ Appen blir serverside-rendret. Derfor anbefales det å bruke en .js fil til å f
       scripts           (scripts til applikasjonen)
 
 
-## Parameter
-Dekoratøren kan tilpasses med følgende [URL-parameter / query-strings](https://en.wikipedia.org/wiki/Query_string). <br>
+## Parametere
+Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
 
 | Parameter         | Type                                                   | Default            | Forklaring                                                          |
 | ----------------- |--------------------------------------------------------|--------------------| --------------------------------------------------------------------|
