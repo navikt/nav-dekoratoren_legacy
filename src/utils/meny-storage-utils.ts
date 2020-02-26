@@ -26,18 +26,18 @@ export const oppdaterSessionStorage = (valgVerdi: MenuValue): void => {
     setSessionStorage(NAVHEADER, valgVerdi);
 };
 
-export function selectMenu(
+export const getMenuNode = (
     menypunkter: MenyNode[],
     language: Language,
     context: MenuValue
-): MenyNode | undefined {
+): MenyNode | undefined => {
     const languageNode = getLanguageNode(language, menypunkter);
     return languageNode
         ? language === Language.NORSK
             ? findNode(languageNode, context)
             : findNode(languageNode, 'Main menu')
         : undefined;
-}
+};
 
 export const getLanguageNode = (
     lang: Language,
