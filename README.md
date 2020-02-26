@@ -49,7 +49,7 @@ Eksempel:<br>
 
 Dekoratøren er bakoverkompatibel, slik at eksisterende applikasjoner som benytter dekoratør/:v4 kun endrer URL fra https://appres.nav.no/.... til https://www.nav.no/dekoratoren.
 
-En kan implementere menyen slik: 
+Nye applikasjoner kan implementere menyen som følger: 
 
 ### Eksempel 1
 Hent dekoratøren server-side:
