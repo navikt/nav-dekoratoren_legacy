@@ -3,8 +3,8 @@ import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'isomorphic-fetch';
 import NodeCache from 'node-cache';
-import express from 'express';
-import React, { ReactNode } from 'react';
+import express, { Response } from 'express';
+import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import request from 'request';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -202,40 +202,31 @@ app.get(`${basePath}/api/sok`, (req, res) => {
     );
 });
 
-app.get(`${basePath}/api/meny`, (req, res) => {
-    mainCache.get(mainCacheKey, (err, response) =>
-        !err && response !== undefined
-            ? res.send(response)
-            : fetchmenuOptions(res)
-    );
-});
+app.get(`${basePath}/api/meny`, (req, res) =>
+    mainCache.get(mainCacheKey, (error, mainCacheContent) =>
+        !error && mainCacheContent ? res.send(mainCacheContent) : fetchMenu(res)
+    )
+);
 
-const fetchmenuOptions = (res: any) => {
+const fetchMenu = (res: Response) => {
     const uri = process.env.API_MENY_URL || defaultMenuUrl;
-    request({ method: 'GET', uri }, (error, response, body) => {
-        if (!error && response.statusCode === 200 && body.length > 2) {
-            mainCache.set(mainCacheKey, body, 100);
-            backupCache.set(backupCacheKey, body, 0);
-            res.send(body);
+    request({ method: 'GET', uri }, (reqError, reqResponse, reqBody) => {
+        if (!reqError && reqResponse.statusCode === 200 && reqBody.length > 2) {
+            mainCache.set(mainCacheKey, reqBody, 100);
+            backupCache.set(backupCacheKey, reqBody, 0);
+            res.send(reqBody);
         } else {
-            backupCache.get(backupCacheKey, (err, response) => {
-                if (!err && response !== undefined) {
-                    mainCache.set(mainCacheKey, response, 100);
-                    res.send(response);
+            console.error('Failed to fetch decorator', reqError);
+            backupCache.get(backupCacheKey, (err, backupCacheContent) => {
+                if (!err && backupCacheContent) {
+                    console.log('Using backup cache - copy to main cache');
+                    mainCache.set(mainCacheKey, backupCacheContent, 100);
+                    res.send(backupCacheContent);
                 } else {
-                    const serverErr = {
-                        fetchresponse: error,
-                        cacheresponse: err,
-                    };
+                    console.log('Failed to use backup-cache - using mock', err);
+                    mainCache.set(mainCacheKey, mockMenu, 100);
+                    backupCache.set(backupCacheKey, mockMenu, 0);
                     res.send(mockMenu);
-                    mainCache.set(mainCacheKey, mockMenu, (err, success) => {
-                        if (!err && success) {
-                            console.log('maincache updated successfully');
-                        } else {
-                            console.log('mainCache-set error :', err);
-                            console.log('server error:', serverErr);
-                        }
-                    });
                 }
             });
         }
