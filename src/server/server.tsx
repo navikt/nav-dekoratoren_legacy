@@ -214,8 +214,6 @@ const fetchMenu = (res: Response) => {
         if (!error && response.statusCode === 200 && body.length > 2) {
             mainCache.set(mainCacheKey, body, 100);
             backupCache.set(backupCacheKey, body, 0);
-            app.get(`${basePath}/isAlive`, (req, res) => res.sendStatus(200));
-            app.get(`${basePath}/isReady`, (req, res) => res.sendStatus(200));
             res.send(body);
         } else {
             console.error('Failed to fetch decorator', error);
@@ -236,6 +234,8 @@ const fetchMenu = (res: Response) => {
 };
 
 app.use(`${basePath}/`, express.static(buildPath));
+app.get(`${basePath}/isAlive`, (req, res) => res.sendStatus(200));
+app.get(`${basePath}/isReady`, (req, res) => res.sendStatus(200));
 
 const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)
