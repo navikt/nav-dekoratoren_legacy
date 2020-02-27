@@ -61,7 +61,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     handleValueChange(input: string) {
-        const url = Environment.API_ENONIC_SOK_URL;
+        const url = `${Environment.APP_BASE_URL}/api/sok`;
 
         if (this.ismounted) {
             this.setState({
