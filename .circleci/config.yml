@@ -126,13 +126,13 @@ commands:
       - run:
           name: Bygger Docker image
           command: |
-            echo $IMAGE_NAME:$IMAGE_VERSION
+            echo << parameters.tags >>
             docker build << parameters.tags >> .
       - run:
           name: Pusher Docker image
           command: |
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-            docker push $IMAGE_NAME:$IMAGE_VERSION
+            docker push $IMAGE_NAME
 
   deploy:
     parameters:
