@@ -185,6 +185,12 @@ app.get(`${basePath}/env`, (req, res) => {
     });
 });
 
+app.get(`${basePath}/api/meny`, (req, res) =>
+    mainCache.get(mainCacheKey, (error, mainCacheContent) =>
+        !error && mainCacheContent ? res.send(mainCacheContent) : fetchMenu(res)
+    )
+);
+
 const fetchMenu = (res: Response) => {
     const uri = process.env.API_ENONIC_MENY_URL || defaultEnonicMenuUrl;
     request({ method: 'GET', uri }, (reqError, reqResponse, reqBody) => {
@@ -210,7 +216,7 @@ const fetchMenu = (res: Response) => {
     });
 };
 
-// Proxy requests
+// Proxied requests
 app.use(
     `${basePath}/api/auth`,
     createProxyMiddleware(`${basePath}/api/auth`, {
@@ -235,12 +241,6 @@ app.use(
         target: `${process.env.API_ENONIC_SOK_URL || defaultEnonicSearchUrl}`,
         pathRewrite: { '^/dekoratoren/api/sok': '' },
     })
-);
-
-app.get(`${basePath}/api/meny`, (req, res) =>
-    mainCache.get(mainCacheKey, (error, mainCacheContent) =>
-        !error && mainCacheContent ? res.send(mainCacheContent) : fetchMenu(res)
-    )
 );
 
 app.use(`${basePath}/`, express.static(buildPath));
