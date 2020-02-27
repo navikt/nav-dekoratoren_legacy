@@ -31,8 +31,8 @@ const PORT = 8088;
 // Default vars
 const defaultBaseUrl = 'http://localhost:8088';
 const defaultAppUrl = `${defaultBaseUrl}${basePath}`;
-const defaultMenuUrl = `https://www.nav.no/_/service/no.nav.navno/menu`;
-const defaultSearchUrl = `https://www.nav.no/_/service/navno.nav.no.search/search2/sok`;
+const defaultEnonicMenuUrl = `https://www.nav.no/_/service/no.nav.navno/menu`;
+const defaultEnonicSearchUrl = `https://www.nav.no/_/service/navno.nav.no.search/search2/sok`;
 const defaultInnloggingslinjeUrl = `http://localhost:8095/innloggingslinje-api/auth`;
 const defaultVarselinnboksUrl = `http://localhost:8095/person/varselinnboks`;
 const defaultMinSideArbeidsGiverUrl = `https://arbeidsgiver.nav.no/min-side-arbeidsgiver/`;
@@ -187,7 +187,7 @@ app.get(`${basePath}/env`, (req, res) => {
 });
 
 const fetchMenu = (res: Response) => {
-    const uri = process.env.API_ENONIC_MENY_URL || defaultMenuUrl;
+    const uri = process.env.API_ENONIC_MENY_URL || defaultEnonicMenuUrl;
     request({ method: 'GET', uri }, (reqError, reqResponse, reqBody) => {
         if (!reqError && reqResponse.statusCode === 200 && reqBody.length > 2) {
             mainCache.set(mainCacheKey, reqBody, 100);
@@ -233,7 +233,7 @@ app.use(
 app.use(
     `${basePath}/api/sok`,
     createProxyMiddleware(`${basePath}/api/sok`, {
-        target: `${process.env.API_ENONIC_SOK_URL || defaultSearchUrl}`,
+        target: `${process.env.API_ENONIC_SOK_URL || defaultEnonicSearchUrl}`,
         pathRewrite: { '^/dekoratoren/api/sok': '' },
     })
 );
