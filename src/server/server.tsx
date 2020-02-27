@@ -7,6 +7,7 @@ import express, { Response } from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import request from 'request';
+const { createProxyMiddleware } = require('http-proxy-middleware');
 import { Provider as ReduxProvider } from 'react-redux';
 import LanguageProvider from '../provider/Language-provider';
 import Footer from '../komponenter/footer/Footer';
@@ -30,16 +31,15 @@ const PORT = 8088;
 
 // Default vars
 const defaultBaseUrl = 'http://localhost:8088';
-const defaultSearchUrl = `https://www.nav.no/_/service/navno.nav.no.search/search2`;
 const defaultMenuUrl = `https://www.nav.no/_/service/no.nav.navno/menu`;
-const defaultInnloggingslinjeUrl = `http://localhost:8200/innloggingslinje-api/auth`;
-const defaultVarselinnboksUrl = `http://localhost:8200/person/varselinnboks`;
+const defaultSearchUrl = `https://www.nav.no/_/service/navno.nav.no.search/search2/sok`;
+const defaultInnloggingslinjeUrl = `http://localhost:8095/innloggingslinje-api/auth`;
+const defaultVarselinnboksUrl = `http://localhost:8095/person/varselinnboks`;
 const defaultAppUrl = `${defaultBaseUrl}${basePath}`;
 
 // Mock
 import mockEnv from './mock/env';
 import mockMenu from './mock/menu.json';
-import mockSok from './mock/sok.json';
 
 // Cache setup
 const mainCacheKey = 'navno-menu';
@@ -57,8 +57,9 @@ const fileScript = `${process.env.APP_BASE_URL || defaultAppUrl}/client.js`;
 // Cors
 app.disable('x-powered-by');
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', req.get('origin'));
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+    res.header('Access-Control-Allow-Credentials', 'true');
     res.header(
         'Access-Control-Allow-Headers',
         'Origin, X-Requested-With, Content-Type, Accept, Authorization'
@@ -177,11 +178,7 @@ app.get(`${basePath}/env`, (req, res) => {
             ...(isProduction
                 ? {
                       BASE_URL: process.env.BASE_URL,
-                      BASE_URL_ENONIC: process.env.BASE_URL_ENONIC,
-                      API_AUTH_URL: process.env.API_AUTH_URL,
-                      API_VARSELINNBOKS_URL: process.env.API_VARSELINNBOKS_URL,
-                      API_ENONIC_MENY_URL: process.env.API_ENONIC_MENY_URL,
-                      API_SOK_URL: process.env.API_SOK_URL,
+                      APP_BASE_URL: process.env.APP_BASE_URL,
                       SITE_MINSIDE_ARBEIDSGIVER_URL:
                           process.env.SITE_MINSIDE_ARBEIDSGIVER_URL,
                       SITE_DITT_NAV_URL: process.env.SITE_DITT_NAV_URL,
@@ -193,43 +190,31 @@ app.get(`${basePath}/env`, (req, res) => {
     });
 });
 
-app.get(`${basePath}/api/sok`, (req, res) => {
-    const base = process.env.API_SOK_URL || defaultSearchUrl;
-    const uri = `${base}?ord=${req.query.ord}`;
-    request({ method: 'GET', uri }, (error, response, body) =>
-        !error && response.statusCode === 200
-            ? res.send(body)
-            : res.send(mockSok)
-    );
-});
+app.use(
+    `${basePath}/api/auth`,
+    createProxyMiddleware(`${basePath}/api/auth`, {
+        target: `${process.env.API_INNLOGGINGSLINJE_URL ||
+            defaultInnloggingslinjeUrl}`,
+        pathRewrite: { '^/dekoratoren/api/auth': '' },
+    })
+);
 
-app.get(`${basePath}/api/auth`, (req, res) => {
-    const env = process.env.API_INNLOGGINGSLINJE_URL;
-    const uri = env || defaultInnloggingslinjeUrl;
-    request({ method: 'GET', uri }, (error, response, body) =>
-        !error && response.statusCode === 200
-            ? res.send(body)
-            : res.send(mockSok)
-    );
-});
+app.use(
+    `${basePath}/api/varsler`,
+    createProxyMiddleware(`${basePath}/api/varsler`, {
+        target: `${process.env.API_VARSELINNBOKS_URL ||
+            defaultVarselinnboksUrl}`,
+        pathRewrite: { '^/dekoratoren/api/varsler': '' },
+    })
+);
 
-app.get(`${basePath}/api/varsler(/*)?`, (req, res) => {
-    const uri = process.env.API_VARSELINNBOKS_URL || defaultVarselinnboksUrl;
-    request({ method: 'GET', uri }, (error, response, body) =>
-        !error && response.statusCode === 200
-            ? res.send(body)
-            : res.send(mockSok)
-    );
-});
-
-app.get(`${basePath}/api/varsler/rest/varsel/erles/:id`, (req, res) => {
-    const uri = process.env.API_VARSELINNBOKS_URL || defaultVarselinnboksUrl;
-    request({ method: 'GET', uri }, (error, response, body) =>
-        !error && response.statusCode === 200
-            ? res.send(body)
-            : res.send(mockSok)
-    );
-});
+app.use(
+    `${basePath}/api/sok`,
+    createProxyMiddleware(`${basePath}/api/sok`, {
+        target: `${process.env.API_ENONIC_SOK_URL || defaultSearchUrl}`,
+        pathRewrite: { '^/dekoratoren/api/sok': '' },
+    })
+);
 
 app.get(`${basePath}/api/meny`, (req, res) =>
     mainCache.get(mainCacheKey, (error, mainCacheContent) =>

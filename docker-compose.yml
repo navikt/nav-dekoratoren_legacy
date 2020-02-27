@@ -37,7 +37,7 @@ services:
                     - mocks.nav.docker-internal
         image: 'navikt/pb-nav-mocked:latest'
         ports:
-            - '8200:8080'
+            - '8095:8080'
         environment:
             CORS_ALLOWED_ORIGINS: 'localhost:8088'
             OIDC_ISSUER: 'https://localhost:9000'

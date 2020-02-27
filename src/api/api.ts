@@ -25,25 +25,23 @@ export interface DatalasterProps {
     feilmeldingId?: string;
 }
 
-export function hentInnloggingsstatusFetch(): Promise<innloggingsstatusData> {
-    return fetchToJson(`${Environment.APP_BASE_URL}/api/auth`, {
+export const hentInnloggingsstatusFetch = (): Promise<innloggingsstatusData> =>
+    fetchToJson(`${Environment.APP_BASE_URL}/api/auth`, {
         credentials: 'include',
     });
-}
 
-export function hentMenyPunkter(): Promise<menypunkterData[]> {
-    return fetchToJson(`${Environment.APP_BASE_URL}/api/meny`);
-}
+export const hentMenyPunkter = (): Promise<menypunkterData[]> =>
+    fetchToJson(`${Environment.APP_BASE_URL}/api/meny`);
 
-export function hentVarslerFetch(): Promise<varselinnboksData> {
+export const hentVarslerFetch = (): Promise<varselinnboksData> => {
     const tidspunkt = new Date().getTime();
     return fetchToJson(
-        `${Environment.APP_BASE_URL}/api/varsler?noCache=${tidspunkt}&limit=5`
+        `${Environment.APP_BASE_URL}/api/varsler/varsler?noCache=${tidspunkt}&limit=5`
     );
-}
+};
 
-export function lagreVarslerLestFetch(nyesteId: number): Promise<number> {
-    return fetchToJson(
+export const lagreVarslerLestFetch = (nyesteId: number): Promise<number> =>
+    fetchToJson(
         `${Environment.APP_BASE_URL}/api/varsler/rest/varsel/erles/${nyesteId}`,
         {
             headers: { 'Content-Type': 'application/json' },
@@ -51,4 +49,3 @@ export function lagreVarslerLestFetch(nyesteId: number): Promise<number> {
             body: JSON.stringify(nyesteId),
         }
     );
-}
