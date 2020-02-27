@@ -51,7 +51,7 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 // Server-side rendering
 const store = getStore();
-const baseUrl = `${process.env.BASE_URL || defaultBaseUrl}`;
+const baseUrl = `${process.env.NAV_BASE_URL || defaultBaseUrl}`;
 const fileEnv = `${process.env.APP_BASE_URL || defaultAppUrl}/env`;
 const fileCss = `${process.env.APP_BASE_URL || defaultAppUrl}/css/client.css`;
 const fileScript = `${process.env.APP_BASE_URL || defaultAppUrl}/client.js`;
