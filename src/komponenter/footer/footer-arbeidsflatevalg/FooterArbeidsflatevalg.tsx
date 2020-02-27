@@ -57,12 +57,8 @@ const FooterArbeidsflatevalg = ({
                                     <HoyreChevron />
                                     <LenkeMedGA
                                         href={lenke.url}
-                                        onClick={event => {
-                                            oppdaterSessionStorage(
-                                                event,
-                                                lenke.key,
-                                                lenke.url
-                                            );
+                                        onClick={() => {
+                                            oppdaterSessionStorage(lenke.key);
                                             settArbeidsflate();
                                         }}
                                         tabIndex={tabindex ? 0 : -1}
