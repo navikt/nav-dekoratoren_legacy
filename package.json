@@ -4,7 +4,7 @@
     "homepage": "/dekoratoren",
     "private": true,
     "scripts": {
-        "sIV-843-decoratortart-server": "node build/server.js",
+        "start-server": "node build/server.js",
         "start-devserver": "nodemon build/server.js",
         "start": "npm run build-dev && cross-env DEVELOPMENT=true npm-run-all -p -r build-and-watch-client-dev build-and-watch-server-dev start-devserver",
         "build": "npm run build-client && npm run build-server",
