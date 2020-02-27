@@ -12,7 +12,7 @@ const SokModalToggleknapp = ({ className, modalIsOpen }: Props) => {
     return (
         <button
             className={className}
-            id="decorator-sok-toggle"
+            id="mobil-decorator-sok-toggle"
             onClick={() => modalIsOpen()}
         >
             <SokIkon />

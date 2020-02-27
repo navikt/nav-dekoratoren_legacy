@@ -4,8 +4,8 @@
     "homepage": "/dekoratoren",
     "private": true,
     "scripts": {
-        "start-server": "node buildfolder/server.js",
-        "start-devserver": "nodemon buildfolder/server.js",
+        "start-server": "node build/server.js",
+        "start-devserver": "nodemon build/server.js",
         "start": "npm run build-dev && cross-env DEVELOPMENT=true npm-run-all -p -r build-and-watch-client-dev build-and-watch-server-dev start-devserver",
         "build": "npm run build-client && npm run build-server",
         "build-dev": "npm run build-client-dev && npm run build-server-dev",
@@ -144,6 +144,17 @@
         "webpack-cli": "^3.3.9",
         "webpack-node-externals": "^1.7.2",
         "window": "^4.2.6"
+    },
+    "jest": {
+        "rootDir": ".",
+        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+        "setupFilesAfterEnv": [
+            "<rootDir>/src/utils/jest/setupTest.js"
+        ],
+        "moduleNameMapper": {
+            "\\.(css|jpg|png|svg|less)$": "<rootDir>/src/utils/jest/styleMock.js",
+            "nav-(.*)-style": "<rootDir>/src/utils/jest/styleMock.js"
+        }
     },
     "browserslist": {
         "production": [

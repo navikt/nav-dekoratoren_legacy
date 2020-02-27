@@ -12,12 +12,13 @@ interface Props {
 export const Menyknapp = (props: Props) => {
     const { toggleMenu, clicked, classname, children } = props;
     const cls = BEMHelper(classname);
+    const id = cls.element('menyknapp');
 
     return (
         <button
             onClick={toggleMenu}
-            className={`dropdown__menyknapp ${cls.element('menyknapp')}`}
-            id={cls.element('decorator-meny-toggleknapp')}
+            className={`dropdown__menyknapp ${id}`}
+            id={id}
             aria-label="Menyknapp"
             aria-haspopup="true"
             aria-controls={cls.element('dropdown-menu')}

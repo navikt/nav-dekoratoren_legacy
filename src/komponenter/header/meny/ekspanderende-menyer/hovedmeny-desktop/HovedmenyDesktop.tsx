@@ -11,7 +11,7 @@ import { Status } from '../../../../../api/api';
 import { Undertittel } from 'nav-frontend-typografi';
 import { HovedmenyDropdown } from './meny-dropdown/HovedmenyDropdown';
 import './HovedmenyDesktop.less';
-import { selectMenu } from '../../../../../utils/meny-storage-utils';
+import { getMenuNode } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { Menyknapp } from '../meny-knapp/Menyknapp';
@@ -25,6 +25,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'hovedmeny-desktop';
+export const hovedmenyDesktopClassname = classname;
 
 export const HovedmenyDesktop = () => {
     const dispatch = useDispatch();
@@ -57,7 +58,7 @@ export const HovedmenyDesktop = () => {
                 classname={classname}
                 arbeidsflate={arbeidsflate}
                 language={language}
-                menyLenker={selectMenu(meny.data, language, arbeidsflate)}
+                menyLenker={getMenuNode(meny.data, language, arbeidsflate)}
                 isOpen={isOpen}
             />
         ) : (

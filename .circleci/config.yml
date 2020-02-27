@@ -4,198 +4,218 @@
 #
 version: 2.1
 jobs:
-    build-app:
-        docker:
-            - image: circleci/node:10
-        steps:
-            - checkout
-            - restore_cache:
-                  keys:
-                      - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-                      - node-v1-{{ .Branch }}-
-                      - node-v1-
-            - run:
-                  name: Bygg React app
-                  command: |
-                      npm ci
-            - save_cache:
-                  paths:
-                      - ~/usr/local/lib/node_modules
-                  key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - run:
-                  name: Tester
-                  command: |
-                      npm run test
-            - run:
-                  name: Bygg produksjonsversjon av React app
-                  command: npm run build
+  build-app:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
+      - run:
+          name: Bygg React app
+          command: |
+            npm ci
+      - save_cache:
+          paths:
+            - ~/usr/local/lib/node_modules
+          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run:
+          name: Tester
+          command: |
+            npm run test
+      - run:
+          name: Bygg produksjonsversjon av React app
+          command: npm run build
 
-    build-docker:
-        docker:
-            - image: navikt/deployment-cli:latest
-        steps:
-            - checkout
-            - sett-miljovariabler
-            - setup_remote_docker
-            - attach_workspace:
-                  at: .
-            - run:
-                  name: Bygger Docker image
-                  command: |
-                      echo $IMAGE_NAME
-                      docker build -t $IMAGE_NAME .
-            - run:
-                  name: Pusher Docker image
-                  command: |
-                      echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                      docker push $IMAGE_NAME
+  build-docker-preprod:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - setup_remote_docker
+      - attach_workspace:
+          at: .
+      - build-docker:
+          tags: -t $IMAGE_NAME:$IMAGE_VERSION
 
-    deploy-til-q6:
-        docker:
-            - image: navikt/deployment-cli:latest
-        steps:
-            - checkout
-            - sett-miljovariabler
-            - deploy:
-                  cluster: dev-sbs
-                  namespace: q6
+  build-docker-prod:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - setup_remote_docker
+      - attach_workspace:
+          at: .
+      - build-docker:
+          tags: -t $IMAGE_NAME:$IMAGE_VERSION -t $IMAGE_NAME:latest
 
-    deploy-til-q2:
-      docker:
-        - image: navikt/deployment-cli:latest
-      steps:
-        - checkout
-        - sett-miljovariabler
-        - deploy:
-            cluster: dev-sbs
-            namespace: q2
+  deploy-til-q6:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - deploy:
+          cluster: dev-sbs
+          namespace: q6
 
-    deploy-til-q1:
-        docker:
-            - image: navikt/deployment-cli:latest
-        steps:
-            - checkout
-            - sett-miljovariabler
-            - deploy:
-                  cluster: dev-sbs
-                  namespace: q1
+  deploy-til-q2:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - deploy:
+          cluster: dev-sbs
+          namespace: q2
 
-    deploy-til-q0:
-        docker:
-            - image: navikt/deployment-cli:latest
-        steps:
-            - checkout
-            - sett-miljovariabler
-            - deploy:
-                  cluster: dev-sbs
-                  namespace: q0
+  deploy-til-q1:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - deploy:
+          cluster: dev-sbs
+          namespace: q1
 
-    deploy-til-prod:
-        docker:
-            - image: navikt/deployment-cli:latest
-        steps:
-            - checkout
-            - sett-miljovariabler
-            - deploy:
-                  cluster: prod-sbs
-                  namespace: default
+  deploy-til-q0:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - deploy:
+          cluster: dev-sbs
+          namespace: q0
+
+  deploy-til-prod:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - deploy:
+          cluster: prod-sbs
+          namespace: default
 
 commands:
-    deploy:
-        parameters:
-            cluster:
-                type: string
-            namespace:
-                type: string
-        steps:
-            - run:
-                  name: Deployer til << parameters.cluster >>, namespace << parameters.namespace >>
-                  command: |
-                      echo $GH_DEPLOY_KEY | base64 -d | dos2unix > gh_deploy_key.pem
-                      deployment-cli deploy create \
-                          --team=personbruker \
-                          --cluster=<< parameters.cluster >> \
-                          --resource=.nais/<< parameters.cluster >>/<< parameters.namespace >>.yaml \
-                          --repository=$CIRCLE_PROJECT_USERNAME/$REPO_NAME \
-                          --var namespace=<< parameters.namespace >> \
-                          --var reponame=$REPO_NAME \
-                          --var version=$IMAGE_VERSION \
-                          --key=gh_deploy_key.pem \
-                          --ref=$COMMIT_SHORT \
-                          --appid=34043
+  sett-miljovariabler:
+    steps:
+      - run:
+          name: Definerer git-referanse, versjonsnummer og repo-navn
+          command: |
+            echo "export COMMIT_SHORT='$(git rev-parse --short HEAD)'" >> $BASH_ENV
+            echo "export IMAGE_VERSION='$CIRCLE_WORKFLOW_ID-${CIRCLE_BRANCH////-}$CIRCLE_TAG'" >> $BASH_ENV
+            echo "export REPO_NAME='$CIRCLE_PROJECT_REPONAME'" >> $BASH_ENV
+      - run:
+          name: Definerer navn på docker-image
+          command: |
+            echo "export IMAGE_NAME='$CIRCLE_PROJECT_USERNAME/$REPO_NAME'" >> $BASH_ENV
 
-    sett-miljovariabler:
-        steps:
-            - run:
-                  name: Definerer git-referanse, versjonsnummer og repo-navn
-                  command: |
-                      echo "export COMMIT_SHORT='$(git rev-parse --short HEAD)'" >> $BASH_ENV
-                      echo "export IMAGE_VERSION='$CIRCLE_WORKFLOW_ID-${CIRCLE_BRANCH////-}$CIRCLE_TAG'" >> $BASH_ENV
-                      echo "export REPO_NAME='$CIRCLE_PROJECT_REPONAME'" >> $BASH_ENV
-            - run:
-                  name: Definerer navn på docker-image
-                  command: |
-                      echo "export IMAGE_NAME='$CIRCLE_PROJECT_USERNAME/$REPO_NAME:$IMAGE_VERSION'" >> $BASH_ENV
+  build-docker:
+    parameters:
+      tags:
+        type: string
+    steps:
+      - run:
+          name: Bygger Docker image
+          command: |
+            echo << parameters.tags >>
+            docker build << parameters.tags >> .
+      - run:
+          name: Pusher Docker image
+          command: |
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+            docker push $IMAGE_NAME
+
+  deploy:
+    parameters:
+      cluster:
+        type: string
+      namespace:
+        type: string
+    steps:
+      - run:
+          name: Deployer til << parameters.cluster >>, namespace << parameters.namespace >>
+          command: |
+            echo $GH_DEPLOY_KEY | base64 -d | dos2unix > gh_deploy_key.pem
+            deployment-cli deploy create \
+                --team=personbruker \
+                --cluster=<< parameters.cluster >> \
+                --resource=.nais/<< parameters.cluster >>/<< parameters.namespace >>.yaml \
+                --repository=$CIRCLE_PROJECT_USERNAME/$REPO_NAME \
+                --var namespace=<< parameters.namespace >> \
+                --var reponame=$REPO_NAME \
+                --var version=$IMAGE_VERSION \
+                --key=gh_deploy_key.pem \
+                --ref=$COMMIT_SHORT \
+                --appid=34043
 
 workflows:
-    bygg-og-deploy:
-        jobs:
+  bygg-og-deploy:
+    jobs:
+      - build-app
+      - bekreft-deploy-til-q6:
+          type: approval
+          requires:
             - build-app
-            - bekreft-deploy-til-q6:
-                  type: approval
-                  requires:
-                      - build-app
-                  filters:
-                      branches:
-                          ignore: master
+          filters:
+            branches:
+              ignore: master
 
-            - build-docker:
-                  name: build-docker-q6
-                  requires:
-                      - bekreft-deploy-til-q6
+      - build-docker-preprod:
+          name: build-docker-q6
+          requires:
+            - bekreft-deploy-til-q6
 
-            - deploy-til-q6:
-                  name: manuell-deploy-til-q6
-                  requires:
-                      - build-docker-q6
+      - deploy-til-q6:
+          name: manuell-deploy-til-q6
+          requires:
+            - build-docker-q6
 
-            - build-docker:
-                  name: build-docker-preprod
-                  requires:
-                      - build-app
-                  filters:
-                      branches:
-                          only: master
+      - build-docker-preprod:
+          name: build-docker-preprod
+          requires:
+            - build-app
+          filters:
+            branches:
+              only: master
 
-            - deploy-til-q6:
-                  requires:
-                      - build-docker-preprod
+      - deploy-til-q6:
+          requires:
+            - build-docker-preprod
 
-            - deploy-til-q2:
-                requires:
-                      - build-docker-preprod
+      - deploy-til-q2:
+          requires:
+            - build-docker-preprod
 
-            - deploy-til-q1:
-                  requires:
-                      - build-docker-preprod
+      - deploy-til-q1:
+          requires:
+            - build-docker-preprod
 
-            - bekreft-deploy-til-prod:
-                  type: approval
-                  requires:
-                      - build-app
-                  filters:
-                      branches:
-                          only: master
+      - bekreft-deploy-til-prod:
+          type: approval
+          requires:
+            - build-app
+          filters:
+            branches:
+              only: master
 
-            - build-docker:
-                  name: build-docker-prod
-                  requires:
-                      - bekreft-deploy-til-prod
+      - build-docker-prod:
+          name: build-docker-prod
+          requires:
+            - bekreft-deploy-til-prod
 
-            - deploy-til-q0:
-                  requires:
-                      - build-docker-prod
+      - deploy-til-q0:
+          requires:
+            - build-docker-prod
 
-            - deploy-til-prod:
-                  requires:
-                      - build-docker-prod
+      - deploy-til-prod:
+          requires:
+            - build-docker-prod

@@ -24,7 +24,7 @@ const fileMaskIcon = require('../../src/ikoner/favicon/safari-pinned-tab.svg');
 // Config
 const basePath = '/dekoratoren';
 const isProduction = process.env.NODE_ENV === 'production';
-const buildPath = `${process.cwd()}/buildfolder`;
+const buildPath = `${process.cwd()}/build`;
 const app = express();
 const PORT = 8088;
 
@@ -170,7 +170,7 @@ app.get(`${basePath}/env`, (req, res) => {
                 context: (req.query.context || 'ikkevalgt').toUpperCase(),
                 stripped: req.query.stripped || false,
                 redirectToApp: req.query.redirectToApp || false,
-                level: req.query.level || 'Level3',
+                level: req.query.level || 'Level4',
             }),
             ...(isProduction
                 ? {
