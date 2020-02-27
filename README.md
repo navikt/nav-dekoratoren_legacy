@@ -1,5 +1,5 @@
 
-# Nav-dekoratoren ![nav.no logo](./src/ikoner/meny/navlogo.svg) 
+# Nav-dekoratoren ![nav.no logo](./src/ikoner/meny/navlogo.svg) [![CircleCI](https://circleci.com/gh/navikt/nav-dekoratoren.svg?style=svg)](https://circleci.com/gh/navikt/nav-dekoratoren)
                      
 
 Node.js Express applikasjon med frontend-komponenter i React.<br>
