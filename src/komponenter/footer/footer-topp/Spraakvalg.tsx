@@ -1,13 +1,18 @@
-import * as React from 'react';
-import { AppState } from '../../../reducer/reducer';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Language } from '../../../reducer/language-duck';
+import { AppState } from '../../../reducer/reducer';
 import { Undertittel } from 'nav-frontend-typografi';
-import Tekst from '../../../tekster/finn-tekst';
-import { erNavDekoratoren } from '../../../utils/Environment';
-import { getSpraaklenker, Spraaklenke, spraaklenker } from './Spraakvalg-lenker';
+import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
+import { Language } from '../../../reducer/language-duck';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
+import Tekst from '../../../tekster/finn-tekst';
+import { erNavDekoratoren } from '../../../utils/Environment';
+import {
+    getSpraaklenker,
+    Spraaklenke,
+    spraaklenker,
+} from './Spraakvalg-lenker';
 
 interface StateProps {
     language: Language;
@@ -56,13 +61,17 @@ class Spraakvalg extends React.Component<StateProps, State> {
                     {this.state.spraaklenker.map(lenke => {
                         return (
                             <li key={lenke.lang}>
+                                <HoyreChevron />
                                 <LenkeMedGA
                                     href={
                                         this.state.erNavDekoratoren
                                             ? lenke.testurl
                                             : lenke.url
                                     }
-                                    gaEventArgs={{category: GACategory.Footer, action: `språkvalg/${lenke.lang}`}}
+                                    gaEventArgs={{
+                                        category: GACategory.Footer,
+                                        action: `språkvalg/${lenke.lang}`,
+                                    }}
                                 >
                                     {lenke.lenketekst}
                                 </LenkeMedGA>

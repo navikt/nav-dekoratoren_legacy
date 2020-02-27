@@ -7,80 +7,108 @@
     min-height: 12.5rem;
     border-bottom: @navMorkGra 2px solid;
 
-    &__innhold {
-        text-align: center;
+    .nav-frontend-chevron {
+        color: @navBla;
     }
 
-    &__menylinje-topp {
-        .menylenker-seksjon {
-            .typo-undertittel {
-                color: @navGra40;
-            }
-            ul {
-                &:first-child,
-                &:last-child {
-                    margin-top: 0;
-                }
-            }
-            li {
-                margin-bottom: 0.8rem;
-            }
+    .lenke {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
         }
     }
 
-    &__menylinje-topp .menylenker-seksjon .venstre .lenke,
-    &__menylinje-topp .menylenker-seksjon .midt .lenke,
-    &__menylinje-bottom .lenke {
-        color: @navMorkGra;
-        font-weight: 600;
+    &__innhold {
+        text-align: left;
+        padding: 0 1rem;
+    }
 
-        &:focus {
-            color: white;
+    &__menylinje-topp {
+        .menylenker-seksjon .typo-undertittel {
+            font-weight: bolder;
+        }
+    }
+
+    &__menylinje-topp,
+    &__menylinje-arbeidsflatevalg {
+        ul {
+            margin-top: 0.8rem;
+        }
+
+        li {
+            margin-bottom: 1.3rem;
         }
     }
 
     @media (min-width: @tabletLimitWidth) {
-        padding: 0.5rem 1rem 1.5rem;
+        padding: 1.5rem 2rem 5rem;
 
         &__innhold {
             width: auto;
             margin: 0 auto;
+            padding: 0;
             text-align: initial;
+            position: relative;
         }
+
         &__menylinje-topp {
             display: flex;
             flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
 
             .menylenker-seksjon {
-                width: 25%;
+                width: 33.3%;
+            }
+        }
+
+        &__menylinje-arbeidsflatevalg {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+
+            .ga-til-innhold-for {
+                margin-right: 1rem;
+            }
+
+            .arbeidsflatevalg {
+                width: 30rem;
+                display: flex;
+                align-items: center;
 
                 ul {
-                    &:first-child,
-                    &:last-child {
-                        margin-top: 0.5rem;
-                    }
+                    margin-top: 0;
                 }
 
-                .logo {
-                    display: flex;
-                    justify-content: center;
+                li {
+                    min-width: 9rem;
+                    max-width: 14rem;
+                    margin-bottom: 0;
                 }
             }
         }
-        &__menylinje-bottom {
-            display: flex;
 
-            .bottom-venstre {
-                width: 75%;
+        &__menylinje-bottom {
+            .menylinje-bottom__innhold {
+                display: flex;
+                align-items: center;
+
                 ul {
-                    display: flex;
+                    width: 24.5rem;
+                    margin: 0;
                 }
-                li {
-                    margin-right: 2.5rem;
+
+                .menylinje-bottom__logo {
+                    width: 65px;
+                    height: 65px;
+                    margin-right: 1rem;
                 }
-            }
-            .bottom-hoyre {
-                width: 25%;
+
+                .menylinje-bottom__tekst {
+                    width: 11rem;
+                    margin-right: 1rem;
+                }
             }
         }
     }
@@ -89,6 +117,23 @@
         &__innhold {
             width: @desktopLimitWidth;
             margin: 0 auto;
+        }
+
+        &__menylinje-topp {
+            .menylenker-seksjon {
+                width: 22%;
+            }
+        }
+
+        &__menylinje-bottom {
+            .menylinje-bottom__innhold {
+                .menylinje-bottom__logo {
+                    position: absolute;
+                    left: -90px;
+                    bottom: -23px;
+                    margin-right: 0;
+                }
+            }
         }
     }
 }

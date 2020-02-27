@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
+import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
+import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../../utils/bem';
 import Tekst from '../../../tekster/finn-tekst';
 import { genererLenkerTilUrl } from '../../../utils/Environment';
 import { FooterLenke, lenkerHoyre, lenkerVenstre } from '../Footer-lenker';
-import NavLogoFooter from '../../../ikoner/meny/NavLogoFooter';
 import Spraakvalg from './Spraakvalg';
-import { GACategory } from '../../../utils/google-analytics';
+import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
+import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
 
 interface Props {
     classname: string;
@@ -18,6 +20,7 @@ const FooterTopp = ({ classname }: Props) => {
         lenkerVenstre
     );
     const [hoyrelenker, setHoyrelenker] = useState<FooterLenke[]>(lenkerHoyre);
+    const [visDelSkjermModal, setVisDelSkjermModal] = useState(false);
 
     useEffect(() => {
         setVenstrelenker(genererLenkerTilUrl(lenkerVenstre));
@@ -25,51 +28,79 @@ const FooterTopp = ({ classname }: Props) => {
     }, []);
 
     const cls = BEMHelper(classname);
+
+    const openModal = () => {
+        triggerGaEvent({
+            category: GACategory.Footer,
+            action: `bunn/del-skjerm-open`,
+        });
+        setVisDelSkjermModal(true);
+    };
+    const closeModal = () => {
+        triggerGaEvent({
+            category: GACategory.Footer,
+            action: `bunn/del-skjerm-close`,
+        });
+        setVisDelSkjermModal(false);
+    };
+
     return (
         <section className={cls.element('menylinje-topp')}>
-            <div className="menylenker-seksjon logo">
-                <NavLogoFooter
-                    width="65"
-                    height="65"
-                    classname={cls.element('svg')}
-                />
-            </div>
             <div className="menylenker-seksjon venstre">
                 <Undertittel className="blokk-xxs">
-                    <Tekst id={'footer-hjelp-overskrift'} />
+                    <Tekst id={'footer-kontakt-overskrift'} />
                 </Undertittel>
                 <ul>
                     {venstrelenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
+                                <HoyreChevron />
                                 <LenkeMedGA
                                     href={lenke.url}
-                                    gaEventArgs={{category: GACategory.Footer, action: `hjelp/${lenke.lenketekst}`, label: lenke.url}}
+                                    gaEventArgs={{
+                                        category: GACategory.Footer,
+                                        action: `hjelp/${lenke.lenketekst}`,
+                                        label: lenke.url,
+                                    }}
                                 >
                                     {lenke.lenketekst}
                                 </LenkeMedGA>
                             </li>
                         );
                     })}
+                    <li>
+                        <HoyreChevron />
+                        <Lenke href="#" onClick={openModal}>
+                            <Tekst id="footer-del-skjerm" />
+                        </Lenke>
+                        {visDelSkjermModal && (
+                            <DelSkjermModal
+                                isOpen={visDelSkjermModal}
+                                onClose={closeModal}
+                            />
+                        )}
+                    </li>
                 </ul>
             </div>
             <div className="menylenker-seksjon midt">
                 <Spraakvalg />
             </div>
             <div className="menylenker-seksjon hoyre">
-                <Undertittel className="tilgjengelighet-overskrift blokk-xxs">
-                    <Tekst id="footer-tilgjengelighet-overskrift" />
+                <Undertittel className="nav-samfunn-overskrift blokk-xxs">
+                    <Tekst id="footer-navsamfunn-overskrift" />
                 </Undertittel>
-                <Normaltekst className="tilgjengelighet-ingress">
-                    <Tekst id="footer-tilgjengelighet-ingress" />
-                </Normaltekst>
                 <ul>
                     {hoyrelenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
+                                <HoyreChevron />
                                 <LenkeMedGA
                                     href={lenke.url}
-                                    gaEventArgs={{category: GACategory.Footer, action: `om-nettstedet/${lenke.lenketekst}`, label: lenke.url}}
+                                    gaEventArgs={{
+                                        category: GACategory.Footer,
+                                        action: `om-nettstedet/${lenke.lenketekst}`,
+                                        label: lenke.url,
+                                    }}
                                 >
                                     {lenke.lenketekst}
                                 </LenkeMedGA>
