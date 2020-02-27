@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import BEMHelper, { BEMWrapper } from '../../../../../../utils/bem';
 import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
-import { MenySeksjon } from '../../../../../../reducer/menu-duck';
+import { MenyNode } from '../../../../../../reducer/menu-duck';
 import { Language } from '../../../../../../reducer/language-duck';
 import KbNav, {
     NaviGraphData,
@@ -48,7 +48,7 @@ type Props = {
     classname: string;
     arbeidsflate: MenuValue;
     language: Language;
-    menyLenker: MenySeksjon;
+    menyLenker: MenyNode | undefined;
     isOpen: boolean;
 };
 
@@ -138,6 +138,10 @@ export const HovedmenyDropdown = (props: Props) => {
             makeNewNaviGraph();
         }
     }, [isOpen, menyLenker, arbeidsflate]);
+
+    if (!menyLenker) {
+        return null;
+    }
 
     return (
         <div className={cls.element('dropdown')}>

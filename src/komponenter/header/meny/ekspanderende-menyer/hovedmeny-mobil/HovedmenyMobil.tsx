@@ -3,7 +3,7 @@ import { AppState } from '../../../../../reducer/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Status } from '../../../../../api/api';
 import { getMenuNode } from '../../../../../utils/meny-storage-utils';
-import Menyknapp from '../meny-knapp/Menyknapp';
+import HovedmenyKnapp from '../../meny-knapper/HovedmenyKnapp';
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
 import {
     GACategory,
@@ -39,7 +39,7 @@ export const HovedmenyMobil = () => {
     };
 
     const menyKnapp = (
-        <Menyknapp
+        <HovedmenyKnapp
             toggleMenu={menutoggle}
             clicked={isOpen}
             classname={classname}
@@ -49,7 +49,7 @@ export const HovedmenyMobil = () => {
             <Undertittel>
                 <Tekst id="meny-knapp" />
             </Undertittel>
-        </Menyknapp>
+        </HovedmenyKnapp>
     );
 
     const dropdownInnhold =

@@ -1,6 +1,6 @@
 import React from 'react';
-import BEMHelper from '../../../../../utils/bem';
-import './Menyknapp.less';
+import BEMHelper from '../../../../utils/bem';
+import './HovedmenyKnapp.less';
 
 interface Props {
     toggleMenu: () => void;
@@ -10,7 +10,7 @@ interface Props {
     children: React.ReactNode;
 }
 
-export const Menyknapp = (props: Props) => {
+export const HovedmenyKnapp = (props: Props) => {
     const { toggleMenu, clicked, classname, ariaControlsId, children } = props;
     const cls = BEMHelper(classname);
     const id = cls.element('menyknapp');
@@ -30,4 +30,4 @@ export const Menyknapp = (props: Props) => {
     );
 };
 
-export default Menyknapp;
+export default HovedmenyKnapp;

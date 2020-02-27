@@ -12,9 +12,9 @@ import { HovedmenyDropdown } from './meny-dropdown/HovedmenyDropdown';
 import { getMenuNode } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
-import { Menyknapp } from '../meny-knapp/Menyknapp';
+import { HovedmenyKnapp } from '../../meny-knapper/HovedmenyKnapp';
 import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
-import HamburgerKnapp from '../meny-knapp/hamburger-knapp/HamburgerKnapp';
+import HamburgerKnapp from '../../meny-knapper/hamburger-knapp/HamburgerKnapp';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -39,7 +39,7 @@ export const HovedmenyDesktop = () => {
     };
 
     const menyKnapp = (
-        <Menyknapp
+        <HovedmenyKnapp
             toggleMenu={toggleMenu}
             clicked={isOpen}
             classname={classname}
@@ -49,7 +49,7 @@ export const HovedmenyDesktop = () => {
             <Undertittel>
                 <Tekst id="meny-knapp" />
             </Undertittel>
-        </Menyknapp>
+        </HovedmenyKnapp>
     );
 
     const dropdownInnhold =

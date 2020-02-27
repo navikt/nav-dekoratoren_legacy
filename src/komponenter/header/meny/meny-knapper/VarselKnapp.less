@@ -1,0 +1,35 @@
+@import '~nav-frontend-core/less/_variabler';
+
+.varselknapp {
+
+    &__container {
+        border: none;
+        display: inline-block;
+        position: relative;
+        background-color: white;
+        height: 40px;
+
+        padding: 0.4rem 0.7rem;
+
+        &:hover {
+            outline: 1px black solid;
+            cursor: pointer;
+        }
+    }
+
+    &__button {
+        border: none;
+        background-color: white;
+    }
+
+    &__tekst {
+        display: inline-block;
+        color: @navBla;
+        & > * {
+            margin-left: 1rem;
+        }
+    }
+
+    &__bjelle {
+    }
+}

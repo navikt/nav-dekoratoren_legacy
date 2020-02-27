@@ -1,0 +1,23 @@
+@height: 40px;
+@padding-y: 4px;
+@padding-x: 12px;
+
+.menylinje-knapp {
+    height: @height;
+    background-color: white;
+    border: none;
+    box-shadow: none;
+    padding: @padding-y @padding-x;
+
+    &:hover {
+        outline: 1px black solid;
+        cursor: pointer;
+    }
+
+    &:focus {
+    }
+
+    &__visning {
+        height: @height - @padding-y * 2;
+    }
+}

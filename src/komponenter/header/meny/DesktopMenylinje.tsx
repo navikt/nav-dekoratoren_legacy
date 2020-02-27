@@ -36,7 +36,7 @@ const DesktopMenylinje = ({ language }: Props) => {
                     <InnloggingsstatusProvider>
                         <>
                             <VarselinnboksProvider>
-                                <Varselbjelle tabindex={true}>
+                                <Varselbjelle tabindex={0}>
                                     {clicked =>
                                         clicked && (
                                             <VarselVisning tabIndex={true} />

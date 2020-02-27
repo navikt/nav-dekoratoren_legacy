@@ -1,7 +1,7 @@
 import React from 'react';
 import './SokMenyKnapp.less';
 import BEMHelper from '../../../../utils/bem';
-import Menyknapp from '../ekspanderende-menyer/meny-knapp/Menyknapp';
+import HovedmenyKnapp from './HovedmenyKnapp';
 import { toggleSok } from '../../../../reducer/dropdown-toggle-duck';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../../tekster/finn-tekst';
@@ -20,7 +20,7 @@ export const SokMenyKnapp = ({ isOpen }: Props) => {
     const dispatch = useDispatch();
 
     return (
-        <Menyknapp
+        <HovedmenyKnapp
             toggleMenu={() => dispatch(toggleSok())}
             clicked={isOpen}
             classname={'sok-dropdown'}
@@ -37,7 +37,7 @@ export const SokMenyKnapp = ({ isOpen }: Props) => {
             <Undertittel>
                 <Tekst id={'sok-knapp'} />
             </Undertittel>
-        </Menyknapp>
+        </HovedmenyKnapp>
     );
 };
 

@@ -3,7 +3,7 @@ import { AppState } from '../../../../reducer/reducer';
 import { useSelector } from 'react-redux';
 import { EkspanderbarMeny } from '../ekspanderende-menyer/ekspanderbar-meny/EkspanderbarMeny';
 import Sok from './Sok';
-import SokMenyKnapp from './SokMenyKnapp';
+import SokMenyKnapp from '../meny-knapper/SokMenyKnapp';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.sok,

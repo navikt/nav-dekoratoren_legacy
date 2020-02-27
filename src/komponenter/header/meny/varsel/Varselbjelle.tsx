@@ -6,11 +6,10 @@ import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import './Varselbjelle.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
-import Tekst from '../../../../tekster/finn-tekst';
-import { Element, Undertittel } from 'nav-frontend-typografi';
+import { VarselKnapp } from '../meny-knapper/VarselKnapp';
 
 interface Props {
-    tabindex: boolean;
+    tabindex: number;
 }
 
 interface StateProps {
@@ -33,6 +32,17 @@ interface State {
     clicked: boolean;
     classname: string;
 }
+
+const stateSelector = (state: AppState) => ({
+    antallVarsler: state.varsler.data.antall,
+    antallUlesteVarsler: state.varsler.data.uleste,
+    erInnlogget:
+        state.innloggingsstatus.data.authenticated &&
+        (state.innloggingsstatus.data.securityLevel === '3' ||
+            state.innloggingsstatus.data.securityLevel === '4'),
+    nyesteId: state.varsler.data.nyesteId,
+    arbeidsflate: state.arbeidsflate.status,
+});
 
 type VarselbjelleProps = StateProps & DispatchProps & FunctionProps & Props;
 
@@ -107,23 +117,13 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                             id="toggle-varsler-container"
                             className={classname}
                         >
-                            <button
-                                onClick={this.handleClick}
-                                className="toggle-varsler"
-                                tabIndex={tabindex ? 0 : -1}
-                                title="Varsler"
-                                aria-label={`Varsler. Du har ${
-                                    antallVarsler > 0 ? antallVarsler : 'ingen'
-                                } varsler.`}
-                                aria-pressed={clicked}
-                                aria-haspopup="true"
-                                aria-controls="varsler-display"
-                                aria-expanded={clicked}
-                            >
-                                <Element className={'varsler-tekst'}>
-                                    <Tekst id={'Varsler'} />
-                                </Element>
-                            </button>
+                            <VarselKnapp
+                                isOpen={clicked}
+                                className={classname}
+                                handleClick={this.handleClick}
+                                tabIndex={tabindex}
+                                antallVarsler={antallVarsler}
+                            />
                         </div>
                         <div className="min-varsel-wrapper">
                             {children(clicked, this.handleClick)}

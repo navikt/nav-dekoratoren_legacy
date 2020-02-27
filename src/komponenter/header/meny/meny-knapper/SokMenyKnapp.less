@@ -4,9 +4,9 @@
     @width: 32px;
     @height: 24px;
     @circleRadius: 10px;
-    @midtpunkt: @height / 2;
     @stroke-width: 2px;
     @color: @navBla;
+    @handleAngle: 30deg;
 
     .line(@rotation) {
         width: @height;
@@ -44,18 +44,19 @@
 
     &__line {
         transform-origin: top left;
-        transform: rotate(45deg);
+        transform: translate(
+                @circleRadius + @circleRadius * cos(@handleAngle),
+                @circleRadius + @circleRadius * sin(@handleAngle)
+            )
+            rotate(@handleAngle);
         height: @stroke-width;
         width: @circleRadius;
         background-color: @color;
         position: absolute;
-        top: (@circleRadius + @stroke-width) * 2 * sin(45deg);
-        left: (@circleRadius + @stroke-width) * 2 * cos(45deg);
 
-        transition: 0.25s all ease-in-out;
+        transition: 0.25s all ease-in;
 
         &--open {
-            //visibility: hidden;
             .line(-45deg);
         }
     }
