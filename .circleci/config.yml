@@ -30,7 +30,8 @@ jobs:
                   name: Bygg produksjonsversjon av React app
                   command: npm run build
 
-    build-docker:
+
+    build-docker-preprod:
         docker:
             - image: navikt/deployment-cli:latest
         steps:
@@ -39,16 +40,20 @@ jobs:
             - setup_remote_docker
             - attach_workspace:
                   at: .
-            - run:
-                  name: Bygger Docker image
-                  command: |
-                      echo $IMAGE_NAME
-                      docker build -t $IMAGE_NAME .
-            - run:
-                  name: Pusher Docker image
-                  command: |
-                      echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                      docker push $IMAGE_NAME
+            - build-docker:
+                - tags: $IMAGE_NAME:$IMAGE_VERSION
+
+    build-docker-prod:
+      docker:
+            - image: navikt/deployment-cli:latest
+      steps:
+            - checkout
+            - sett-miljovariabler
+            - setup_remote_docker
+            - attach_workspace:
+                  at: .
+            - build-docker:
+                  - tags: $IMAGE_NAME:$IMAGE_VERSION $IMAGE_NAME:latest
 
     deploy-til-q6:
         docker:
@@ -64,11 +69,11 @@ jobs:
       docker:
         - image: navikt/deployment-cli:latest
       steps:
-        - checkout
-        - sett-miljovariabler
-        - deploy:
-            cluster: dev-sbs
-            namespace: q2
+          - checkout
+          - sett-miljovariabler
+          - deploy:
+                  cluster: dev-sbs
+                  namespace: q2
 
     deploy-til-q1:
         docker:
@@ -101,6 +106,22 @@ jobs:
                   namespace: default
 
 commands:
+    build-docker:
+        parameters:
+            tags:
+                type: string
+        steps:
+          - run:
+              name: Bygger Docker image
+              command: |
+                echo $IMAGE_NAME:$IMAGE_VERSION
+                docker build -t $IMAGE_NAME:$IMAGE_VERSION .
+          - run:
+              name: Pusher Docker image
+              command: |
+                echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                docker push << parameters.tags >>
+
     deploy:
         parameters:
             cluster:
@@ -135,7 +156,7 @@ commands:
             - run:
                   name: Definerer navn på docker-image
                   command: |
-                      echo "export IMAGE_NAME='$CIRCLE_PROJECT_USERNAME/$REPO_NAME:$IMAGE_VERSION'" >> $BASH_ENV
+                      echo "export IMAGE_NAME='$CIRCLE_PROJECT_USERNAME/$REPO_NAME'" >> $BASH_ENV
 
 workflows:
     bygg-og-deploy:
@@ -149,7 +170,7 @@ workflows:
                       branches:
                           ignore: master
 
-            - build-docker:
+            - build-docker-preprod:
                   name: build-docker-q6
                   requires:
                       - bekreft-deploy-til-q6
@@ -159,7 +180,7 @@ workflows:
                   requires:
                       - build-docker-q6
 
-            - build-docker:
+            - build-docker-preprod:
                   name: build-docker-preprod
                   requires:
                       - build-app
@@ -187,7 +208,7 @@ workflows:
                       branches:
                           only: master
 
-            - build-docker:
+            - build-docker-prod:
                   name: build-docker-prod
                   requires:
                       - bekreft-deploy-til-prod
