@@ -25,13 +25,13 @@ export interface DatalasterProps {
     feilmeldingId?: string;
 }
 
+export const hentMenyPunkter = (): Promise<menypunkterData[]> =>
+    fetchToJson(`${Environment.APP_BASE_URL}/api/meny`);
+
 export const hentInnloggingsstatusFetch = (): Promise<innloggingsstatusData> =>
     fetchToJson(`${Environment.APP_BASE_URL}/api/auth`, {
         credentials: 'include',
     });
-
-export const hentMenyPunkter = (): Promise<menypunkterData[]> =>
-    fetchToJson(`${Environment.APP_BASE_URL}/api/meny`);
 
 export const hentVarslerFetch = (): Promise<varselinnboksData> => {
     const tidspunkt = new Date().getTime();
