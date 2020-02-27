@@ -41,7 +41,7 @@ jobs:
             - attach_workspace:
                   at: .
             - build-docker:
-                - tags: $IMAGE_NAME:$IMAGE_VERSION
+                  tags: $IMAGE_NAME:$IMAGE_VERSION
 
     build-docker-prod:
       docker:
@@ -53,7 +53,7 @@ jobs:
             - attach_workspace:
                   at: .
             - build-docker:
-                  - tags: $IMAGE_NAME:$IMAGE_VERSION $IMAGE_NAME:latest
+                  tags: $IMAGE_NAME:$IMAGE_VERSION $IMAGE_NAME:latest
 
     deploy-til-q6:
         docker:
