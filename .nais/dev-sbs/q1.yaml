@@ -36,9 +36,9 @@ spec:
           value: https://www-q1.nav.no/person/varselinnboks
         - name: API_INNLOGGINGSLINJE_URL
           value: https://www-q1.nav.no/innloggingslinje-api/auth
-        - name: SITE_MINSIDE_ARBEIDSGIVER_URL
+        - name: MINSIDE_ARBEIDSGIVER_URL
           value: https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/
-        - name: SITE_DITT_NAV_URL
+        - name: DITT_NAV_URL
           value: https://www-q1.nav.no/person/dittnav/
         - name: LOGIN_URL
           value: https://loginservice-q.nav.no

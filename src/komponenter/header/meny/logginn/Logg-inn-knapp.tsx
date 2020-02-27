@@ -54,7 +54,7 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
         const LOGIN_URL = `${
             Environment.redirectToApp || erNavDekoratoren
                 ? `${Environment.LOGIN_URL}/login?redirect=${appUrl}`
-                : `${Environment.LOGIN_URL}/login?redirect=${Environment.SITE_DITT_NAV_URL}`
+                : `${Environment.LOGIN_URL}/login?redirect=${Environment.DITT_NAV_URL}`
         }&level=${Environment.level}`;
 
         triggerGaEvent({

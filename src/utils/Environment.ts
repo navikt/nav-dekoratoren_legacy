@@ -5,8 +5,8 @@ export default class Environment {
     static NAV_BASE_URL: string;
     static APP_BASE_URL: string;
     static API_VARSELINNBOKS_URL: string;
-    static SITE_MINSIDE_ARBEIDSGIVER_URL: string;
-    static SITE_DITT_NAV_URL: string;
+    static MINSIDE_ARBEIDSGIVER_URL: string;
+    static DITT_NAV_URL: string;
     static LOGIN_URL: string;
     static LOGOUT_URL: string;
 
@@ -21,9 +21,9 @@ export default class Environment {
         Environment.NAV_BASE_URL = result.NAV_BASE_URL;
         Environment.APP_BASE_URL = result.APP_BASE_URL;
         Environment.API_VARSELINNBOKS_URL = result.API_VARSELINNBOKS_URL;
-        Environment.SITE_MINSIDE_ARBEIDSGIVER_URL =
-            result.SITE_MINSIDE_ARBEIDSGIVER_URL;
-        Environment.SITE_DITT_NAV_URL = result.SITE_DITT_NAV_URL;
+        Environment.MINSIDE_ARBEIDSGIVER_URL =
+            result.MINSIDE_ARBEIDSGIVER_URL;
+        Environment.DITT_NAV_URL = result.DITT_NAV_URL;
         Environment.LOGIN_URL = result.LOGIN_URL;
         Environment.LOGOUT_URL = result.LOGOUT_URL;
 
@@ -75,7 +75,7 @@ export const genererLenkerTilUrl = (footerlenker: FooterLenke[]) => {
 };
 
 export const genererUrl = (lenke: string): string => {
-    return lenke.startsWith('/') ? Environment.SITE_ + lenke : lenke;
+    return lenke.startsWith('/') ? Environment. + lenke : lenke;
 };
 
 export const erDev =

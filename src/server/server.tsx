@@ -175,11 +175,10 @@ app.get(`${basePath}/env`, (req, res) => {
             APP_BASE_URL: process.env.APP_BASE_URL || defaultAppUrl,
             API_VARSELINNBOKS_URL:
                 process.env.API_VARSELINNBOKS_URL || defaultVarselinnboksUrl,
-            SITE_MINSIDE_ARBEIDSGIVER_URL:
-                process.env.SITE_MINSIDE_ARBEIDSGIVER_URL ||
+            MINSIDE_ARBEIDSGIVER_URL:
+                process.env.MINSIDE_ARBEIDSGIVER_URL ||
                 defaultMinSideArbeidsGiverUrl,
-            SITE_DITT_NAV_URL:
-                process.env.SITE_DITT_NAV_URL || defaultDittNavUrl,
+            DITT_NAV_URL: process.env.DITT_NAV_URL || defaultDittNavUrl,
             LOGIN_URL: process.env.LOGIN_URL || defaultLoginUrl,
             LOGOUT_URL: process.env.LOGOUT_URL || defaultLogoutUrl,
         },
