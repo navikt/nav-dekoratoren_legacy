@@ -24,21 +24,23 @@ const fileMaskIcon = require('../../src/ikoner/favicon/safari-pinned-tab.svg');
 
 // Config
 const basePath = '/dekoratoren';
-const isProduction = process.env.NODE_ENV === 'production';
 const buildPath = `${process.cwd()}/build`;
 const app = express();
 const PORT = 8088;
 
 // Default vars
 const defaultBaseUrl = 'http://localhost:8088';
+const defaultAppUrl = `${defaultBaseUrl}${basePath}`;
 const defaultMenuUrl = `https://www.nav.no/_/service/no.nav.navno/menu`;
 const defaultSearchUrl = `https://www.nav.no/_/service/navno.nav.no.search/search2/sok`;
 const defaultInnloggingslinjeUrl = `http://localhost:8095/innloggingslinje-api/auth`;
 const defaultVarselinnboksUrl = `http://localhost:8095/person/varselinnboks`;
-const defaultAppUrl = `${defaultBaseUrl}${basePath}`;
+const defaultMinSideArbeidsGiverUrl = `https://arbeidsgiver.nav.no/min-side-arbeidsgiver/`;
+const defaultDittNavUrl = `https:/www.nav.no/person/dittnav/`;
+const defaultLoginUrl = 'http://localhost:5000';
+const defaultLogoutUrl = 'http://localhost:5000/?logout';
 
 // Mock
-import mockEnv from './mock/env';
 import mockMenu from './mock/menu.json';
 
 // Cache setup
@@ -169,17 +171,17 @@ app.get(`${basePath}/env`, (req, res) => {
                 redirectToApp: req.query.redirectToApp || false,
                 level: req.query.level || 'Level4',
             }),
-            ...(isProduction
-                ? {
-                      BASE_URL: process.env.BASE_URL,
-                      APP_BASE_URL: process.env.APP_BASE_URL,
-                      SITE_MINSIDE_ARBEIDSGIVER_URL:
-                          process.env.SITE_MINSIDE_ARBEIDSGIVER_URL,
-                      SITE_DITT_NAV_URL: process.env.SITE_DITT_NAV_URL,
-                      LOGIN_URL: process.env.LOGIN_URL,
-                      LOGOUT_URL: process.env.LOGOUT_URL,
-                  }
-                : mockEnv),
+            BASE_URL: process.env.APP_BASE_URL || defaultAppUrl,
+            APP_BASE_URL: process.env.APP_BASE_URL || defaultAppUrl,
+            API_VARSELINNBOKS_URL:
+                process.env.API_VARSELINNBOKS_URL || defaultVarselinnboksUrl,
+            SITE_MINSIDE_ARBEIDSGIVER_URL:
+                process.env.SITE_MINSIDE_ARBEIDSGIVER_URL ||
+                defaultMinSideArbeidsGiverUrl,
+            SITE_DITT_NAV_URL:
+                process.env.SITE_DITT_NAV_URL || defaultDittNavUrl,
+            LOGIN_URL: process.env.LOGIN_URL || defaultLoginUrl,
+            LOGOUT_URL: process.env.LOGOUT_URL || defaultLogoutUrl,
         },
     });
 });
