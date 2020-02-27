@@ -5,7 +5,7 @@ metadata:
     name: nav-dekoratoren
     namespace: {{namespace}}
     labels:
-      team: {{team}}
+        team: {{team}}
 spec:
     image: navikt/{{reponame}}:{{version}}
     port: 8088
