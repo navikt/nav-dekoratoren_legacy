@@ -40,7 +40,7 @@ jobs:
       - attach_workspace:
           at: .
       - build-docker:
-          tags: $IMAGE_NAME:$IMAGE_VERSION
+          tags: -t $IMAGE_NAME:$IMAGE_VERSION
 
   build-docker-prod:
     docker:
@@ -52,7 +52,7 @@ jobs:
       - attach_workspace:
           at: .
       - build-docker:
-          tags: $IMAGE_NAME:$IMAGE_VERSION $IMAGE_NAME:latest
+          tags: -t $IMAGE_NAME:$IMAGE_VERSION -t $IMAGE_NAME:latest
 
   deploy-til-q6:
     docker:
@@ -127,12 +127,12 @@ commands:
           name: Bygger Docker image
           command: |
             echo $IMAGE_NAME:$IMAGE_VERSION
-            docker build -t $IMAGE_NAME:$IMAGE_VERSION .
+            docker build << parameters.tags >> .
       - run:
           name: Pusher Docker image
           command: |
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-            docker push << parameters.tags >>
+            docker push $IMAGE_NAME:$IMAGE_VERSION
 
   deploy:
     parameters:
