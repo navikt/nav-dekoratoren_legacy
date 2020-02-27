@@ -21,8 +21,7 @@ export default class Environment {
         Environment.NAV_BASE_URL = result.NAV_BASE_URL;
         Environment.APP_BASE_URL = result.APP_BASE_URL;
         Environment.API_VARSELINNBOKS_URL = result.API_VARSELINNBOKS_URL;
-        Environment.MINSIDE_ARBEIDSGIVER_URL =
-            result.MINSIDE_ARBEIDSGIVER_URL;
+        Environment.MINSIDE_ARBEIDSGIVER_URL = result.MINSIDE_ARBEIDSGIVER_URL;
         Environment.DITT_NAV_URL = result.DITT_NAV_URL;
         Environment.LOGIN_URL = result.LOGIN_URL;
         Environment.LOGOUT_URL = result.LOGOUT_URL;
@@ -75,7 +74,7 @@ export const genererLenkerTilUrl = (footerlenker: FooterLenke[]) => {
 };
 
 export const genererUrl = (lenke: string): string => {
-    return lenke.startsWith('/') ? Environment. + lenke : lenke;
+    return lenke.startsWith('/') ? Environment.NAV_BASE_URL + lenke : lenke;
 };
 
 export const erDev =
