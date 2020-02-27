@@ -25,7 +25,7 @@ spec:
         - https://www-q0.nav.no/dekoratoren
     env:
         - name: NAV_BASE_URL
-          value: https://www-q0.nav.no
+          value: https://www-q1.nav.no
         - name: APP_BASE_URL
           value: https://www-q0.nav.no/dekoratoren
         - name: API_ENONIC_MENY_URL
@@ -36,9 +36,9 @@ spec:
           value: https://www-q0.nav.no/person/varselinnboks
         - name: API_INNLOGGINGSLINJE_URL
           value: https://www-q0.nav.no/innloggingslinje-api/auth
-        - name: PAGE_MINSIDE_ARBEIDSGIVER_URL
+        - name: SITE_MINSIDE_ARBEIDSGIVER_URL
           value: https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/
-        - name: PAGE_DITT_NAV_URL
+        - name: SITE_DITT_NAV_URL
           value: https://www-q0.nav.no/person/dittnav/
         - name: LOGIN_URL
           value: https://loginservice-q.nav.no

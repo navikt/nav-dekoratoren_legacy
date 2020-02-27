@@ -182,9 +182,9 @@ app.get(`${basePath}/env`, (req, res) => {
                       API_VARSELINNBOKS_URL: process.env.API_VARSELINNBOKS_URL,
                       API_ENONIC_MENY_URL: process.env.API_ENONIC_MENY_URL,
                       API_SOK_URL: process.env.API_SOK_URL,
-                      PAGE_MINSIDE_ARBEIDSGIVER_URL:
-                          process.env.PAGE_MINSIDE_ARBEIDSGIVER_URL,
-                      PAGE_DITT_NAV_URL: process.env.PAGE_DITT_NAV_URL,
+                      SITE_MINSIDE_ARBEIDSGIVER_URL:
+                          process.env.SITE_MINSIDE_ARBEIDSGIVER_URL,
+                      SITE_DITT_NAV_URL: process.env.SITE_DITT_NAV_URL,
                       LOGIN_URL: process.env.LOGIN_URL,
                       LOGOUT_URL: process.env.LOGOUT_URL,
                   }

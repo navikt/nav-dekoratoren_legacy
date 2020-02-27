@@ -33,9 +33,9 @@ export const MinsideLenke = ({
     const lenkeurl =
         arbeidsflate === MenuValue.IKKEVALGT ||
         arbeidsflate === MenuValue.PRIVATPERSON
-            ? Environment.PAGE_DITT_NAV_URL
+            ? Environment.SITE_DITT_NAV_URL
             : arbeidsflate === MenuValue.ARBEIDSGIVER
-            ? Environment.PAGE_MINSIDE_ARBEIDSGIVER_URL
+            ? Environment.SITE_MINSIDE_ARBEIDSGIVER_URL
             : '';
 
     return (
