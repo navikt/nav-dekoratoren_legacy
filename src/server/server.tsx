@@ -145,14 +145,9 @@ const template = (parameters: string) => `
 
 // Express config
 const pathsForTemplate = [
-    `${basePath}`,
     `${basePath}/`,
     `${basePath}/person`,
     `${basePath}/person/*`,
-    `${basePath}/bedrift`,
-    `${basePath}/bedrift/*`,
-    `${basePath}/samarbeidspartner`,
-    `${basePath}/samarbeidspartner/*`,
 ];
 
 app.get(pathsForTemplate, (req, res) => {
@@ -189,6 +184,32 @@ app.get(`${basePath}/env`, (req, res) => {
     });
 });
 
+const fetchMenu = (res: Response) => {
+    const uri = process.env.API_ENONIC_MENY_URL || defaultMenuUrl;
+    request({ method: 'GET', uri }, (reqError, reqResponse, reqBody) => {
+        if (!reqError && reqResponse.statusCode === 200 && reqBody.length > 2) {
+            mainCache.set(mainCacheKey, reqBody, 100);
+            backupCache.set(backupCacheKey, reqBody, 0);
+            res.send(reqBody);
+        } else {
+            console.error('Failed to fetch decorator', reqError);
+            backupCache.get(backupCacheKey, (err, backupCacheContent) => {
+                if (!err && backupCacheContent) {
+                    console.log('Using backup cache - copy to main cache');
+                    mainCache.set(mainCacheKey, backupCacheContent, 100);
+                    res.send(backupCacheContent);
+                } else {
+                    console.log('Failed to use backup-cache - using mock', err);
+                    mainCache.set(mainCacheKey, mockMenu, 100);
+                    backupCache.set(backupCacheKey, mockMenu, 0);
+                    res.send(mockMenu);
+                }
+            });
+        }
+    });
+};
+
+// Proxy requests
 app.use(
     `${basePath}/api/auth`,
     createProxyMiddleware(`${basePath}/api/auth`, {
@@ -220,31 +241,6 @@ app.get(`${basePath}/api/meny`, (req, res) =>
         !error && mainCacheContent ? res.send(mainCacheContent) : fetchMenu(res)
     )
 );
-
-const fetchMenu = (res: Response) => {
-    const uri = process.env.API_ENONIC_MENY_URL || defaultMenuUrl;
-    request({ method: 'GET', uri }, (reqError, reqResponse, reqBody) => {
-        if (!reqError && reqResponse.statusCode === 200 && reqBody.length > 2) {
-            mainCache.set(mainCacheKey, reqBody, 100);
-            backupCache.set(backupCacheKey, reqBody, 0);
-            res.send(reqBody);
-        } else {
-            console.error('Failed to fetch decorator', reqError);
-            backupCache.get(backupCacheKey, (err, backupCacheContent) => {
-                if (!err && backupCacheContent) {
-                    console.log('Using backup cache - copy to main cache');
-                    mainCache.set(mainCacheKey, backupCacheContent, 100);
-                    res.send(backupCacheContent);
-                } else {
-                    console.log('Failed to use backup-cache - using mock', err);
-                    mainCache.set(mainCacheKey, mockMenu, 100);
-                    backupCache.set(backupCacheKey, mockMenu, 0);
-                    res.send(mockMenu);
-                }
-            });
-        }
-    });
-};
 
 app.use(`${basePath}/`, express.static(buildPath));
 app.get(`${basePath}/isAlive`, (req, res) => res.sendStatus(200));
