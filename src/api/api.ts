@@ -26,31 +26,29 @@ export interface DatalasterProps {
 }
 
 export function hentInnloggingsstatusFetch(): Promise<innloggingsstatusData> {
-    return fetchToJson(Environment.API_INNLOGGINGSLINJE_URL, {
+    return fetchToJson(`${Environment.APP_BASE_URL}/api/auth`, {
         credentials: 'include',
     });
 }
 
 export function hentMenyPunkter(): Promise<menypunkterData[]> {
-    return fetchToJson(Environment.BACKEND_MENY_URL);
+    return fetchToJson(`${Environment.APP_BASE_URL}/api/meny`);
 }
 
 export function hentVarslerFetch(): Promise<varselinnboksData> {
     const tidspunkt = new Date().getTime();
-    const queryParams = `?noCache=${tidspunkt}&limit=5`;
     return fetchToJson(
-        `${Environment.API_VARSELINNBOKS_URL}/varsler${queryParams}`
+        `${Environment.APP_BASE_URL}/api/varsler?noCache=${tidspunkt}&limit=5`
     );
 }
 
 export function lagreVarslerLestFetch(nyesteId: number): Promise<number> {
-    const config = {
-        headers: { 'Content-Type': 'application/json' },
-        method: 'POST',
-        body: JSON.stringify(nyesteId),
-    };
     return fetchToJson(
-        `${Environment.API_VARSELINNBOKS_URL}/rest/varsel/erles/${nyesteId}`,
-        config
+        `${Environment.APP_BASE_URL}/api/varsler/rest/varsel/erles/${nyesteId}`,
+        {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            body: JSON.stringify(nyesteId),
+        }
     );
 }

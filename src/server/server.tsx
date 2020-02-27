@@ -32,6 +32,8 @@ const PORT = 8088;
 const defaultBaseUrl = 'http://localhost:8088';
 const defaultSearchUrl = `https://www.nav.no/_/service/navno.nav.no.search/search2`;
 const defaultMenuUrl = `https://www.nav.no/_/service/no.nav.navno/menu`;
+const defaultInnloggingslinjeUrl = `http://localhost:8200/innloggingslinje-api/auth`;
+const defaultVarselinnboksUrl = `http://localhost:8200/person/varselinnboks`;
 const defaultAppUrl = `${defaultBaseUrl}${basePath}`;
 
 // Mock
@@ -48,9 +50,9 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 // Server-side rendering
 const store = getStore();
 const baseUrl = `${process.env.BASE_URL || defaultBaseUrl}`;
-const fileEnv = `${process.env.BASE_URL_APP || defaultAppUrl}/env`;
-const fileCss = `${process.env.BASE_URL_APP || defaultAppUrl}/css/client.css`;
-const fileScript = `${process.env.BASE_URL_APP || defaultAppUrl}/client.js`;
+const fileEnv = `${process.env.APP_BASE_URL || defaultAppUrl}/env`;
+const fileCss = `${process.env.APP_BASE_URL || defaultAppUrl}/css/client.css`;
+const fileScript = `${process.env.APP_BASE_URL || defaultAppUrl}/client.js`;
 
 // Cors
 app.disable('x-powered-by');
@@ -176,14 +178,13 @@ app.get(`${basePath}/env`, (req, res) => {
                 ? {
                       BASE_URL: process.env.BASE_URL,
                       BASE_URL_ENONIC: process.env.BASE_URL_ENONIC,
-                      API_INNLOGGINGSLINJE_URL:
-                          process.env.API_INNLOGGINGSLINJE_URL,
+                      API_AUTH_URL: process.env.API_AUTH_URL,
                       API_VARSELINNBOKS_URL: process.env.API_VARSELINNBOKS_URL,
-                      BACKEND_MENY_URL: process.env.BACKEND_MENY_URL,
-                      BACKEND_SOK_URL: process.env.BACKEND_SOK_URL,
-                      MINSIDE_ARBEIDSGIVER_URL:
-                          process.env.MINSIDE_ARBEIDSGIVER_URL,
-                      DITT_NAV_URL: process.env.DITT_NAV_URL,
+                      API_ENONIC_MENY_URL: process.env.API_ENONIC_MENY_URL,
+                      API_SOK_URL: process.env.API_SOK_URL,
+                      PAGE_MINSIDE_ARBEIDSGIVER_URL:
+                          process.env.PAGE_MINSIDE_ARBEIDSGIVER_URL,
+                      PAGE_DITT_NAV_URL: process.env.PAGE_DITT_NAV_URL,
                       LOGIN_URL: process.env.LOGIN_URL,
                       LOGOUT_URL: process.env.LOGOUT_URL,
                   }
@@ -202,6 +203,34 @@ app.get(`${basePath}/api/sok`, (req, res) => {
     );
 });
 
+app.get(`${basePath}/api/auth`, (req, res) => {
+    const env = process.env.API_INNLOGGINGSLINJE_URL;
+    const uri = env || defaultInnloggingslinjeUrl;
+    request({ method: 'GET', uri }, (error, response, body) =>
+        !error && response.statusCode === 200
+            ? res.send(body)
+            : res.send(mockSok)
+    );
+});
+
+app.get(`${basePath}/api/varsler(/*)?`, (req, res) => {
+    const uri = process.env.API_VARSELINNBOKS_URL || defaultVarselinnboksUrl;
+    request({ method: 'GET', uri }, (error, response, body) =>
+        !error && response.statusCode === 200
+            ? res.send(body)
+            : res.send(mockSok)
+    );
+});
+
+app.get(`${basePath}/api/varsler/rest/varsel/erles/:id`, (req, res) => {
+    const uri = process.env.API_VARSELINNBOKS_URL || defaultVarselinnboksUrl;
+    request({ method: 'GET', uri }, (error, response, body) =>
+        !error && response.statusCode === 200
+            ? res.send(body)
+            : res.send(mockSok)
+    );
+});
+
 app.get(`${basePath}/api/meny`, (req, res) =>
     mainCache.get(mainCacheKey, (error, mainCacheContent) =>
         !error && mainCacheContent ? res.send(mainCacheContent) : fetchMenu(res)
@@ -209,7 +238,7 @@ app.get(`${basePath}/api/meny`, (req, res) =>
 );
 
 const fetchMenu = (res: Response) => {
-    const uri = process.env.API_MENY_URL || defaultMenuUrl;
+    const uri = process.env.API_ENONIC_MENY_URL || defaultMenuUrl;
     request({ method: 'GET', uri }, (reqError, reqResponse, reqBody) => {
         if (!reqError && reqResponse.statusCode === 200 && reqBody.length > 2) {
             mainCache.set(mainCacheKey, reqBody, 100);

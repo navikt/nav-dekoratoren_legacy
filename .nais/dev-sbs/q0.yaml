@@ -24,27 +24,21 @@ spec:
         - https://dekoratoren-q0.nais.oera-q.local/
         - https://www-q0.nav.no/dekoratoren
     env:
-        - name: BASE_URL
+        - name: NAV_BASE_URL
           value: https://www-q0.nav.no
-        - name: BASE_URL_APP
+        - name: APP_BASE_URL
           value: https://www-q0.nav.no/dekoratoren
-        - name: BASE_URL_ENONIC
-          value: https://www-q1.nav.no
-        - name: API_MENY_URL
+        - name: API_ENONIC_MENY_URL
           value: https://www-q1.nav.no/_/service/no.nav.navno/menu
-        - name: API_SOK_URL
+        - name: API_ENONIC_SOK_URL
           value: https://www-q1.nav.no/_/service/navno.nav.no.search/search2
-        - name: API_INNLOGGINGSLINJE_URL
-          value: https://www-q0.nav.no/innloggingslinje-api/auth
         - name: API_VARSELINNBOKS_URL
           value: https://www-q0.nav.no/person/varselinnboks
-        - name: BACKEND_MENY_URL
-          value: https://www-q0.nav.no/dekoratoren/api/meny
-        - name: BACKEND_SOK_URL
-          value: https://www-q0.nav.no/dekoratoren/api/sok
-        - name: MINSIDE_ARBEIDSGIVER_URL
+        - name: API_INNLOGGINGSLINJE_URL
+          value: https://www-q0.nav.no/innloggingslinje-api/auth
+        - name: PAGE_MINSIDE_ARBEIDSGIVER_URL
           value: https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/
-        - name: DITT_NAV_URL
+        - name: PAGE_DITT_NAV_URL
           value: https://www-q0.nav.no/person/dittnav/
         - name: LOGIN_URL
           value: https://loginservice-q.nav.no

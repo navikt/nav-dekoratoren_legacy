@@ -20,7 +20,7 @@ export const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
     return (
         <div className={cls.element('topp-seksjon')}>
             <Lenke
-                href={Environment.BASE_URL}
+                href={Environment.NAV_BASE_URL}
                 className={cls.element('topp-seksjon-lenke')}
                 id={KbNav.getKbId(NaviGroup.DesktopHeaderDropdown, {
                     col: 0,
