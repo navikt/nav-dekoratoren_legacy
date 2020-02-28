@@ -21,18 +21,18 @@ const FooterBottom = ({ classname }: Props) => {
 
     return (
         <section className={cls.element('menylinje-bottom')}>
-            <div className="menylinje-bottom__innhold">
-                <div className="menylinje-bottom__logo">
+            <div className="bottom__innhold">
+                <div className="bottom__logo">
                     <NavLogoFooter
                         width="65"
                         height="65"
                         classname={cls.element('svg')}
                     />
                 </div>
-                <Normaltekst className="menylinje-bottom__tekst">
+                <Normaltekst className="bottom__tekst">
                     Arbeids- og velferdsetaten
                 </Normaltekst>
-                <ul>
+                <ul className="bottom-lenke">
                     {lenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>

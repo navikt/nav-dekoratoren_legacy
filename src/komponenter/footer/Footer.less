@@ -90,7 +90,7 @@
         }
 
         &__menylinje-bottom {
-            .menylinje-bottom__innhold {
+            .bottom__innhold {
                 display: flex;
                 align-items: center;
 
@@ -99,15 +99,19 @@
                     margin: 0;
                 }
 
-                .menylinje-bottom__logo {
+                .bottom__logo {
                     width: 65px;
                     height: 65px;
                     margin-right: 1rem;
                 }
 
-                .menylinje-bottom__tekst {
+                .bottom__tekst {
                     width: 11rem;
                     margin-right: 1rem;
+                }
+
+                .bottom__lenke {
+                    text-transform: lowercase;
                 }
             }
         }
@@ -126,13 +130,11 @@
         }
 
         &__menylinje-bottom {
-            .menylinje-bottom__innhold {
-                .menylinje-bottom__logo {
-                    position: absolute;
-                    left: -90px;
-                    bottom: -23px;
-                    margin-right: 0;
-                }
+            .bottom__innhold .bottom__logo {
+                position: absolute;
+                left: -90px;
+                bottom: -23px;
+                margin-right: 0;
             }
         }
     }
