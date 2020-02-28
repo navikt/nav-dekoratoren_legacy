@@ -25,8 +25,9 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 // Cors
 app.disable('x-powered-by');
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', req.get('origin'));
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+    res.header('Access-Control-Allow-Credentials', 'true');
     res.header(
         'Access-Control-Allow-Headers',
         'Origin,Content-Type,Accept,Authorization'
