@@ -114,6 +114,7 @@ app.use(
     createProxyMiddleware(proxiedAuthUrl, {
         target: `${process.env.API_INNLOGGINGSLINJE_URL}`,
         pathRewrite: { [`^${proxiedAuthUrl}`]: '' },
+        changeOrigin: true,
     })
 );
 
@@ -122,6 +123,7 @@ app.use(
     createProxyMiddleware(proxiedVarslerUrl, {
         target: `${process.env.API_VARSELINNBOKS_URL}`,
         pathRewrite: { [`^${proxiedVarslerUrl}`]: '' },
+        changeOrigin: true,
     })
 );
 
@@ -130,6 +132,7 @@ app.use(
     createProxyMiddleware(proxiedSokUrl, {
         target: `${process.env.API_ENONIC_SOK_URL}`,
         pathRewrite: { [`^${proxiedSokUrl}`]: '' },
+        changeOrigin: true,
     })
 );
 
