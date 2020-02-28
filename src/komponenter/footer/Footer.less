@@ -31,7 +31,7 @@
     }
 
     &__menylinje-topp,
-    &__menylinje-arbeidsflatevalg {
+    &__menylinje-arbeidsflatevalg .arbeidsflatevalg-innhold .arbeidsflatevalg {
         ul {
             margin-top: 0.8rem;
         }
@@ -64,27 +64,29 @@
         }
 
         &__menylinje-arbeidsflatevalg {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-
-            .ga-til-innhold-for {
-                margin-right: 1rem;
-            }
-
-            .arbeidsflatevalg {
-                width: 30rem;
+            .arbeidsflatevalg-innhold {
                 display: flex;
                 align-items: center;
+                margin-bottom: 1.5rem;
 
-                ul {
-                    margin-top: 0;
+                .ga-til-innhold-for {
+                    margin-right: 1rem;
                 }
 
-                li {
-                    min-width: 9rem;
-                    max-width: 14rem;
-                    margin-bottom: 0;
+                .arbeidsflatevalg {
+                    width: 30rem;
+                    display: flex;
+                    align-items: center;
+
+                    ul {
+                        margin-top: 0;
+                    }
+
+                    li {
+                        min-width: 9rem;
+                        max-width: 14rem;
+                        margin-bottom: 0;
+                    }
                 }
             }
         }

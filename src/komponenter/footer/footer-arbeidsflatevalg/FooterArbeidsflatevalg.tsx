@@ -1,86 +1,109 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import { Dispatch } from '../../../redux/dispatch-type';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
+import { Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
+import { Language } from '../../../reducer/language-duck';
 import {
     MenuValue,
     oppdaterSessionStorage,
 } from '../../../utils/meny-storage-utils';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
-import { arbeidsflateLenker } from '../../header/arbeidsflatemeny/arbeidsflate-lenker';
-import { Normaltekst } from 'nav-frontend-typografi';
+import {
+    ArbeidsflateLenke,
+    arbeidsflateLenker,
+    getArbeidsflatelenker,
+} from '../../header/arbeidsflatemeny/arbeidsflate-lenker';
 
-interface Props {
+interface OwnProps {
     classname: string;
-    tabindex: boolean;
 }
 
 interface StateProps {
     arbeidsflate: MenuValue;
+    language: Language;
 }
 
 interface DispatchProps {
     settArbeidsflate: () => void;
 }
 
+type Props = OwnProps & StateProps & DispatchProps;
+
 const FooterArbeidsflatevalg = ({
     arbeidsflate,
+    language,
     settArbeidsflate,
     classname,
-    tabindex,
-}: StateProps & DispatchProps & Props) => {
+}: Props) => {
     const cls = BEMHelper(classname);
+    const [arbeidsflatevalgLenker, setArbeidsflatevalgLenker] = useState<
+        ArbeidsflateLenke[]
+    >([arbeidsflateLenker[1], arbeidsflateLenker[2]]);
+
+    useEffect(() => {
+        setArbeidsflatevalgLenker(getArbeidsflatelenker(arbeidsflate));
+    }, [arbeidsflate]);
 
     return (
         <section className={cls.element('menylinje-arbeidsflatevalg')}>
-            <Undertittel className="ga-til-innhold-for">
-                Gå til innhold for
-            </Undertittel>
-            <ul className="arbeidsflatevalg">
-                {arbeidsflateLenker.map(
-                    (lenke: {
-                        tittel: string;
-                        url: string;
-                        key: MenuValue;
-                    }) => {
-                        return arbeidsflate === lenke.key ? null : (
-                            <li
-                                key={lenke.tittel}
-                                className={cls.element('liste-element')}
-                            >
-                                <Normaltekst>
-                                    <HoyreChevron />
-                                    <LenkeMedGA
-                                        href={lenke.url}
-                                        onClick={() => {
-                                            oppdaterSessionStorage(lenke.key);
-                                            settArbeidsflate();
-                                        }}
-                                        tabIndex={tabindex ? 0 : -1}
-                                        gaEventArgs={{
-                                            category: GACategory.Header,
-                                            action: 'arbeidsflate-valg',
-                                        }}
+            {language === Language.NORSK && (
+                <div className="arbeidsflatevalg-innhold">
+                    <Undertittel
+                        className="ga-til-innhold-for"
+                        id="ga-til-innhold-for"
+                    >
+                        Gå til innhold for
+                    </Undertittel>
+                    <ul
+                        className="arbeidsflatevalg"
+                        aria-labelledby="ga-til-innhold-for"
+                    >
+                        {arbeidsflatevalgLenker.map(
+                            (lenke: ArbeidsflateLenke) => {
+                                return (
+                                    <li
+                                        key={lenke.tittel}
+                                        className={cls.element('liste-element')}
                                     >
-                                        {lenke.tittel}
-                                    </LenkeMedGA>
-                                </Normaltekst>
-                            </li>
-                        );
-                    }
-                )}
-            </ul>
+                                        <Normaltekst>
+                                            <HoyreChevron />
+                                            <LenkeMedGA
+                                                href={lenke.url}
+                                                onClick={event => {
+                                                    event.preventDefault();
+                                                    oppdaterSessionStorage(
+                                                        lenke.key
+                                                    );
+                                                    settArbeidsflate();
+                                                }}
+                                                gaEventArgs={{
+                                                    category: GACategory.Header,
+                                                    action: 'arbeidsflate-valg',
+                                                }}
+                                            >
+                                                {lenke.tittel}
+                                            </LenkeMedGA>
+                                        </Normaltekst>
+                                    </li>
+                                );
+                            }
+                        )}
+                    </ul>
+                </div>
+            )}
         </section>
     );
 };
 
 const mapStateToProps = (state: AppState): StateProps => ({
     arbeidsflate: state.arbeidsflate.status,
+    language: state.language.language,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

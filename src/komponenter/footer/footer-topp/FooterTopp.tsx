@@ -47,10 +47,13 @@ const FooterTopp = ({ classname }: Props) => {
     return (
         <section className={cls.element('menylinje-topp')}>
             <div className="menylenker-seksjon venstre">
-                <Undertittel className="blokk-xxs">
-                    <Tekst id={'footer-kontakt-overskrift'} />
+                <Undertittel
+                    className="blokk-xxs"
+                    id="venstrelenker-overskrift"
+                >
+                    <Tekst id="footer-kontakt-overskrift" />
                 </Undertittel>
-                <ul>
+                <ul aria-labelledby="venstrelenker-overskrift">
                     {venstrelenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
@@ -86,10 +89,13 @@ const FooterTopp = ({ classname }: Props) => {
                 <Spraakvalg />
             </div>
             <div className="menylenker-seksjon hoyre">
-                <Undertittel className="nav-samfunn-overskrift blokk-xxs">
+                <Undertittel
+                    className="nav-samfunn-overskrift blokk-xxs"
+                    id="hoyrelenker-overskrift"
+                >
                     <Tekst id="footer-navsamfunn-overskrift" />
                 </Undertittel>
-                <ul>
+                <ul aria-labelledby="hoyrelenker-overskrift">
                     {hoyrelenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
