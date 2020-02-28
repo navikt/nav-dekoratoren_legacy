@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
@@ -35,16 +35,22 @@ const Spraakvalg = () => {
                 {spraklenker.map(lenke => {
                     return (
                         <li key={lenke.lang}>
-                            <HoyreChevron />
-                            <LenkeMedGA
-                                href={erDekoratoren ? lenke.testurl : lenke.url}
-                                gaEventArgs={{
-                                    category: GACategory.Footer,
-                                    action: `språkvalg/${lenke.lang}`,
-                                }}
-                            >
-                                {lenke.lenketekst}
-                            </LenkeMedGA>
+                            <Normaltekst>
+                                <HoyreChevron />
+                                <LenkeMedGA
+                                    href={
+                                        erDekoratoren
+                                            ? lenke.testurl
+                                            : lenke.url
+                                    }
+                                    gaEventArgs={{
+                                        category: GACategory.Footer,
+                                        action: `språkvalg/${lenke.lang}`,
+                                    }}
+                                >
+                                    {lenke.lenketekst}
+                                </LenkeMedGA>
+                            </Normaltekst>
                         </li>
                     );
                 })}

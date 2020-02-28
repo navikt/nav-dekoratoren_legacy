@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../../utils/bem';
@@ -57,17 +57,19 @@ const FooterTopp = ({ classname }: Props) => {
                     {venstrelenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
-                                <HoyreChevron />
-                                <LenkeMedGA
-                                    href={lenke.url}
-                                    gaEventArgs={{
-                                        category: GACategory.Footer,
-                                        action: `kontakt/${lenke.lenketekst}`,
-                                        label: lenke.url,
-                                    }}
-                                >
-                                    {lenke.lenketekst}
-                                </LenkeMedGA>
+                                <Normaltekst>
+                                    <HoyreChevron />
+                                    <LenkeMedGA
+                                        href={lenke.url}
+                                        gaEventArgs={{
+                                            category: GACategory.Footer,
+                                            action: `kontakt/${lenke.lenketekst}`,
+                                            label: lenke.url,
+                                        }}
+                                    >
+                                        {lenke.lenketekst}
+                                    </LenkeMedGA>
+                                </Normaltekst>
                             </li>
                         );
                     })}
@@ -99,17 +101,19 @@ const FooterTopp = ({ classname }: Props) => {
                     {hoyrelenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
-                                <HoyreChevron />
-                                <LenkeMedGA
-                                    href={lenke.url}
-                                    gaEventArgs={{
-                                        category: GACategory.Footer,
-                                        action: `nav-og-samfunn/${lenke.lenketekst}`,
-                                        label: lenke.url,
-                                    }}
-                                >
-                                    {lenke.lenketekst}
-                                </LenkeMedGA>
+                                <Normaltekst>
+                                    <HoyreChevron />
+                                    <LenkeMedGA
+                                        href={lenke.url}
+                                        gaEventArgs={{
+                                            category: GACategory.Footer,
+                                            action: `nav-og-samfunn/${lenke.lenketekst}`,
+                                            label: lenke.url,
+                                        }}
+                                    >
+                                        {lenke.lenketekst}
+                                    </LenkeMedGA>
+                                </Normaltekst>
                             </li>
                         );
                     })}

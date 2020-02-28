@@ -37,16 +37,18 @@ const FooterBottom = ({ classname }: Props) => {
                     {lenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
-                                <LenkeMedGA
-                                    href={lenke.url}
-                                    gaEventArgs={{
-                                        category: GACategory.Footer,
-                                        action: `bunn/${lenke.lenketekst}`,
-                                        label: lenke.url,
-                                    }}
-                                >
-                                    {lenke.lenketekst}
-                                </LenkeMedGA>
+                                <Normaltekst>
+                                    <LenkeMedGA
+                                        href={lenke.url}
+                                        gaEventArgs={{
+                                            category: GACategory.Footer,
+                                            action: `bunn/${lenke.lenketekst}`,
+                                            label: lenke.url,
+                                        }}
+                                    >
+                                        {lenke.lenketekst}
+                                    </LenkeMedGA>
+                                </Normaltekst>
                             </li>
                         );
                     })}

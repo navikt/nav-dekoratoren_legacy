@@ -2,17 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import Tekst from '../../../tekster/finn-tekst';
 import BEMHelper from '../../../utils/bem';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import { Language } from '../../../reducer/language-duck';
-import {
-    MenuValue,
-    oppdaterSessionStorage,
-} from '../../../utils/meny-storage-utils';
+import { oppdaterSessionStorage } from '../../../utils/meny-storage-utils';
 import {
     ArbeidsflateLenke,
     arbeidsflateLenker,
@@ -33,7 +30,6 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
 
     const dispatch = useDispatch();
     const { arbeidsflate, language } = useSelector(stateSelector);
-
     const [arbeidsflatevalgLenker, setArbeidsflatevalgLenker] = useState<
         ArbeidsflateLenke[]
     >([arbeidsflateLenker[1], arbeidsflateLenker[2]]);
@@ -50,7 +46,7 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                         className="ga-til-innhold-for"
                         id="ga-til-innhold-for"
                     >
-                        Gå til innhold for
+                        <Tekst id={'footer-ga-til-innhold-for'} />
                     </Undertittel>
                     <ul
                         className="arbeidsflatevalg"
