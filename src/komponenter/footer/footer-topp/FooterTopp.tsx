@@ -3,19 +3,20 @@ import { Undertittel } from 'nav-frontend-typografi';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../../utils/bem';
+import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
+import { LenkeMedGA } from '../../LenkeMedGA';
 import Tekst from '../../../tekster/finn-tekst';
 import { genererLenkerTilUrl } from '../../../utils/Environment';
 import { FooterLenke, lenkerHoyre, lenkerVenstre } from '../Footer-lenker';
-import Spraakvalg from './Spraakvalg';
-import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
-import { LenkeMedGA } from '../../LenkeMedGA';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
+import Spraakvalg from './Spraakvalg';
 
 interface Props {
     classname: string;
 }
 
 const FooterTopp = ({ classname }: Props) => {
+    const cls = BEMHelper(classname);
     const [venstrelenker, setVenstrelenker] = useState<FooterLenke[]>(
         lenkerVenstre
     );
@@ -27,19 +28,18 @@ const FooterTopp = ({ classname }: Props) => {
         setHoyrelenker(genererLenkerTilUrl(lenkerHoyre));
     }, []);
 
-    const cls = BEMHelper(classname);
-
     const openModal = () => {
         triggerGaEvent({
             category: GACategory.Footer,
-            action: `bunn/del-skjerm-open`,
+            action: `kontakt/del-skjerm-open`,
         });
         setVisDelSkjermModal(true);
     };
+
     const closeModal = () => {
         triggerGaEvent({
             category: GACategory.Footer,
-            action: `bunn/del-skjerm-close`,
+            action: `kontakt/del-skjerm-close`,
         });
         setVisDelSkjermModal(false);
     };
@@ -62,7 +62,7 @@ const FooterTopp = ({ classname }: Props) => {
                                     href={lenke.url}
                                     gaEventArgs={{
                                         category: GACategory.Footer,
-                                        action: `hjelp/${lenke.lenketekst}`,
+                                        action: `kontakt/${lenke.lenketekst}`,
                                         label: lenke.url,
                                     }}
                                 >
@@ -73,7 +73,7 @@ const FooterTopp = ({ classname }: Props) => {
                     })}
                     <li>
                         <HoyreChevron />
-                        <Lenke href="#" onClick={openModal}>
+                        <Lenke href="#" role="button" onClick={openModal}>
                             <Tekst id="footer-del-skjerm" />
                         </Lenke>
                         {visDelSkjermModal && (
@@ -99,15 +99,15 @@ const FooterTopp = ({ classname }: Props) => {
                     {hoyrelenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
-                                <HoyreChevron />
                                 <LenkeMedGA
                                     href={lenke.url}
                                     gaEventArgs={{
                                         category: GACategory.Footer,
-                                        action: `om-nettstedet/${lenke.lenketekst}`,
+                                        action: `nav-og-samfunn/${lenke.lenketekst}`,
                                         label: lenke.url,
                                     }}
                                 >
+                                    <HoyreChevron />
                                     {lenke.lenketekst}
                                 </LenkeMedGA>
                             </li>

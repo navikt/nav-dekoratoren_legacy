@@ -6,14 +6,14 @@ import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
+import { GACategory } from '../../../utils/google-analytics';
+import { LenkeMedGA } from '../../LenkeMedGA';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import { Language } from '../../../reducer/language-duck';
 import {
     MenuValue,
     oppdaterSessionStorage,
 } from '../../../utils/meny-storage-utils';
-import { GACategory } from '../../../utils/google-analytics';
-import { LenkeMedGA } from '../../LenkeMedGA';
 import {
     ArbeidsflateLenke,
     arbeidsflateLenker,

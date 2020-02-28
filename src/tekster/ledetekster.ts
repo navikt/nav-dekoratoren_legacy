@@ -1,4 +1,7 @@
 export const ledetekster: { [key: string]: string } = {
+    'footer-arbeids-og-veldferdsetaten': 'Arbeids- og veldferdsetaten',
+    'footer-arbeids-og-veldferdsetaten-en': 'Arbeids- og veldferdsetaten',
+    'footer-arbeids-og-veldferdsetaten-se': 'Arbeids- og veldferdsetaten',
     'footer-languages-overskrift': 'Andre språk',
     'footer-languages-overskrift-en': 'Other languages',
     'footer-languages-overskrift-se': 'Languages',

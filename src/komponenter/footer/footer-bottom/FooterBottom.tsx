@@ -4,6 +4,7 @@ import { genererLenkerTilUrl } from '../../../utils/Environment';
 import BEMHelper from '../../../utils/bem';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
+import Tekst from '../../../tekster/finn-tekst';
 import { FooterLenke, lenkerBunn } from '../Footer-lenker';
 import NavLogoFooter from '../../../ikoner/meny/NavLogoFooter';
 
@@ -21,16 +22,16 @@ const FooterBottom = ({ classname }: Props) => {
 
     return (
         <section className={cls.element('menylinje-bottom')}>
-            <div className="bottom__innhold">
-                <div className="bottom__logo">
+            <div className="bottom-innhold">
+                <div className="bottom-logo">
                     <NavLogoFooter
                         width="65"
                         height="65"
                         classname={cls.element('svg')}
                     />
                 </div>
-                <Normaltekst className="bottom__tekst">
-                    Arbeids- og velferdsetaten
+                <Normaltekst className="bottom-tekst">
+                    <Tekst id="footer-arbeids-og-veldferdsetaten" />
                 </Normaltekst>
                 <ul className="bottom-lenke">
                     {lenker.map(lenke => {
