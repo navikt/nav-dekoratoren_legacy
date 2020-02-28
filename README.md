@@ -15,10 +15,6 @@ Installer nødvendige avhengigheter
 ```
 npm install
 ```
-Definer nødvendige miljøvariabler
-```
-cp .env.sample .env
-```
 Start eksterne tjenester som oidc-provider og mocks
 ```
 docker-compose up -d
