@@ -54,7 +54,7 @@ app.get(`${basePath}/env`, (req, res) => {
     // Obs! Don't expose secrets
     res.send({
         ...{
-            BASE_URL: process.env.APP_BASE_URL,
+            XP_BASE_URL: process.env.XP_BASE_URL,
             APP_BASE_URL: process.env.APP_BASE_URL,
             API_VARSELINNBOKS_URL: process.env.API_VARSELINNBOKS_URL,
             MINSIDE_ARBEIDSGIVER_URL: process.env.MINSIDE_ARBEIDSGIVER_URL,
