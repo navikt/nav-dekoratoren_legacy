@@ -1,10 +1,9 @@
 import React from 'react';
-import './HamburgerKnapp.less';
+import './HamburgerIkon.less';
 import BEMHelper from '../../../../../utils/bem';
 
 type Props = {
     isOpen: boolean;
-    className?: string;
 };
 
 const Linje = ({
@@ -15,15 +14,11 @@ const Linje = ({
     isOpen: boolean;
 }) => <span className={`${className}${isOpen ? ` ${className}--open` : ''}`} />;
 
-const HamburgerKnapp = ({ isOpen, className }: Props) => {
-    const cls = BEMHelper('hamburger-knapp');
+const HamburgerIkon = ({ isOpen }: Props) => {
+    const cls = BEMHelper('hamburger-ikon');
 
     return (
-        <div
-            className={`${cls.element('container')}${
-                className ? ` ${className}` : ''
-            }`}
-        >
+        <div className={cls.element('container')}>
             <Linje className={cls.element('topp')} isOpen={isOpen} />
             <Linje className={cls.element('midt')} isOpen={isOpen} />
             <Linje className={cls.element('bunn')} isOpen={isOpen} />
@@ -31,4 +26,5 @@ const HamburgerKnapp = ({ isOpen, className }: Props) => {
     );
 };
 
-export default HamburgerKnapp;
+export default HamburgerIkon;
+

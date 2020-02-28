@@ -12,9 +12,10 @@ import { HovedmenyDropdown } from './meny-dropdown/HovedmenyDropdown';
 import { getMenuNode } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
-import { HovedmenyKnapp } from '../../meny-knapper/HovedmenyKnapp';
 import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
-import HamburgerKnapp from '../../meny-knapper/hamburger-knapp/HamburgerKnapp';
+import HamburgerIkon from '../../meny-knapper/hamburger-ikon/HamburgerIkon';
+import BEMHelper from '../../../../../utils/bem';
+import MenylinjeKnapp from '../../meny-knapper/MenylinjeKnapp';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -23,12 +24,12 @@ const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.hovedmeny,
 });
 
-const classname = 'hovedmeny-desktop';
+const classname = 'desktop-hovedmeny';
 export const hovedmenyDesktopClassname = classname;
 
 export const HovedmenyDesktop = () => {
-    const dispatch = useDispatch();
     const { arbeidsflate, meny, language, isOpen } = useSelector(stateSelector);
+    const dispatch = useDispatch();
 
     const toggleMenu = () => {
         triggerGaEvent({
@@ -38,18 +39,18 @@ export const HovedmenyDesktop = () => {
         dispatch(toggleHovedmeny());
     };
 
-    const menyKnapp = (
-        <HovedmenyKnapp
+    const knapp = (
+        <MenylinjeKnapp
             toggleMenu={toggleMenu}
-            clicked={isOpen}
-            classname={classname}
-            ariaControlsId={classname}
+            isOpen={isOpen}
+            parentClassname={classname}
+            ariaLabel={'Hovedmenyknapp'}
         >
-            <HamburgerKnapp isOpen={isOpen} />
+            <HamburgerIkon isOpen={isOpen} />
             <Undertittel>
                 <Tekst id="meny-knapp" />
             </Undertittel>
-        </HovedmenyKnapp>
+        </MenylinjeKnapp>
     );
 
     const dropdownInnhold =
@@ -68,7 +69,7 @@ export const HovedmenyDesktop = () => {
     return (
         <EkspanderbarMeny
             isOpen={isOpen}
-            menyKnapp={menyKnapp}
+            menyKnapp={knapp}
             classname={'desktop-dropdown'}
             id={classname}
         >

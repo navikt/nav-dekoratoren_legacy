@@ -7,10 +7,12 @@ import { MenuValue } from '../../../../utils/meny-storage-utils';
 import './Varselbjelle.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 import { VarselKnapp } from '../meny-knapper/VarselKnapp';
+import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
+import { Undertittel } from 'nav-frontend-typografi';
+import Tekst from '../../../../tekster/finn-tekst';
+import BEMHelper from '../../../../utils/bem';
 
-interface Props {
-    tabindex: number;
-}
+const ikon = require('../../../../ikoner/varsler/alarm.svg');
 
 interface StateProps {
     antallVarsler: number;
@@ -44,7 +46,7 @@ const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
 });
 
-type VarselbjelleProps = StateProps & DispatchProps & FunctionProps & Props;
+type VarselbjelleProps = StateProps & DispatchProps & FunctionProps;
 
 class Varselbjelle extends React.Component<VarselbjelleProps, State> {
     private varselbjelleRef = createRef<HTMLDivElement>();
@@ -105,10 +107,11 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             erInnlogget,
             antallVarsler,
             arbeidsflate,
-            tabindex,
             children,
         } = this.props;
         const { clicked, classname } = this.state;
+        const cls = BEMHelper(classname);
+
         return (
             <div ref={this.varselbjelleRef} className="varselbjelle">
                 {erInnlogget && arbeidsflate === MenuValue.PRIVATPERSON ? (
@@ -117,13 +120,21 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                             id="toggle-varsler-container"
                             className={classname}
                         >
-                            <VarselKnapp
+                            <MenylinjeKnapp
+                                toggleMenu={this.handleClick}
                                 isOpen={clicked}
-                                className={classname}
-                                handleClick={this.handleClick}
-                                tabIndex={tabindex}
-                                antallVarsler={antallVarsler}
-                            />
+                                parentClassname={classname}
+                                ariaLabel={`Varsler. Du har ${
+                                    antallVarsler > 0 ? antallVarsler : 'ingen'
+                                } varsler.`}
+                            >
+                                <img alt={''} src={ikon} className={cls.element('bjelle')} />
+                                <div className={cls.element('tekst')}>
+                                    <Undertittel className={'varsler-tekst'}>
+                                        <Tekst id={'varsler'} />
+                                    </Undertittel>
+                                </div>
+                            </MenylinjeKnapp>
                         </div>
                         <div className="min-varsel-wrapper">
                             {children(clicked, this.handleClick)}

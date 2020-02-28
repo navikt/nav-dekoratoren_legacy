@@ -1,38 +1,9 @@
 @import '../../../../../src/styling-variabler.less';
 @import '~nav-frontend-core/less/_variabler';
+@import 'hamburger-ikon/HamburgerIkon';
 
-.dropdown {
-    &__menyknapp {
-        text-decoration: none;
-        background-color: white;
-        border: none;
-        padding: 0;
-
-        //&:focus {
-        //    text-decoration: none;
-        //    box-shadow: none;
-        //    outline: @navDypBla 3px solid;
-        //    border-radius: 4px;
-        //}
-    }
-
-    &__menyknapp-visning {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        padding: 0.4rem 0.7rem;
-        color: @navBla;
-
-        &:hover {
-            outline: 1px black solid;
-            cursor: pointer;
-        }
-    }
-
-    &__hamburger-knapp {
-        width: 32px;
-        height: 24px;
+.desktop-hovedmeny {
+    &__knapp-visning {
     }
 
     @media (max-width: @minimumMobilWidth) {

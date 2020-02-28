@@ -3,7 +3,7 @@ import { AppState } from '../../../../../reducer/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Status } from '../../../../../api/api';
 import { getMenuNode } from '../../../../../utils/meny-storage-utils';
-import HovedmenyKnapp from '../../meny-knapper/HovedmenyKnapp';
+import MenylinjeKnapp from '../../meny-knapper/MenylinjeKnapp';
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
 import {
     GACategory,
@@ -39,17 +39,17 @@ export const HovedmenyMobil = () => {
     };
 
     const menyKnapp = (
-        <HovedmenyKnapp
+        <MenylinjeKnapp
             toggleMenu={menutoggle}
             clicked={isOpen}
-            classname={classname}
+            parentClassname={classname}
             ariaControlsId={classname}
         >
             <MenyIkon />
             <Undertittel>
                 <Tekst id="meny-knapp" />
             </Undertittel>
-        </HovedmenyKnapp>
+        </MenylinjeKnapp>
     );
 
     const dropdownInnhold =

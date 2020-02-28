@@ -1,7 +1,7 @@
 import React from 'react';
 import './VarselKnapp.less';
 import BEMHelper from '../../../../utils/bem';
-import { Element, Undertittel } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../../tekster/finn-tekst';
 
 const ikon = require('../../../../ikoner/varsler/alarm.svg');

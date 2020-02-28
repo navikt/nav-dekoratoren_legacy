@@ -1,6 +1,6 @@
 @import (reference) '~nav-frontend-core/less/core';
 
-.sok-knapp {
+.sok-meny-ikon {
     @width: 32px;
     @height: 24px;
     @circleRadius: 10px;
@@ -9,6 +9,7 @@
     @handleAngle: 30deg;
 
     .line(@rotation) {
+        position: absolute;
         width: @height;
         height: @stroke-width;
         border: 0;
@@ -26,6 +27,10 @@
         padding: 0;
         position: relative;
         margin-right: 0.5em;
+
+        &--hover {
+            background-color: red;
+        }
     }
 
     &__circle {
@@ -38,17 +43,20 @@
         transition: 0.25s all ease-in-out;
 
         &--open {
-            .line(45deg);
+            height: 0;
+            width: 0;
+            opacity: 0;
+            transform-origin: center;
         }
     }
 
     &__line {
         transform-origin: top left;
         transform: translate(
-                @circleRadius + @circleRadius * cos(@handleAngle),
-                @circleRadius + @circleRadius * sin(@handleAngle)
-            )
-            rotate(@handleAngle);
+                    @circleRadius + @circleRadius * cos(@handleAngle),
+                    @circleRadius + @circleRadius * sin(@handleAngle)
+        )
+        rotate(@handleAngle);
         height: @stroke-width;
         width: @circleRadius;
         background-color: @color;
@@ -57,7 +65,33 @@
         transition: 0.25s all ease-in;
 
         &--open {
-            .line(-45deg);
+            //.line(-45deg);
+            width: 0;
+            transform: rotate(360deg);
+        }
+    }
+
+    &__line-x-1 {
+        visibility: hidden;
+        .line(45deg);
+        width: 0;
+        transition: 0.25s all ease-in;
+
+        &--open {
+            visibility: visible;
+            width: @circleRadius;
+        }
+    }
+
+    &__line-x-2 {
+        visibility: hidden;
+        .line(-45deg);
+        width: 0;
+        transition: 0.25s all ease-in;
+
+        &--open {
+            visibility: visible;
+            width: @circleRadius;
         }
     }
 }
