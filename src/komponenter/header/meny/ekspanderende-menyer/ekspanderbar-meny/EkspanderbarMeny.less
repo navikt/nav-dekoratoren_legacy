@@ -12,7 +12,7 @@
         border-bottom-left-radius: @border-radius-base;
         border-bottom-right-radius: @border-radius-base;
 
-        transition-duration: 0.25s;
+        transition-duration: 0.7s;
         transition-timing-function: ease-in-out;
         transition-property: max-height, max-width, visibility;
 
@@ -20,7 +20,6 @@
             max-height: 60rem;
             max-width: 100%;
             visibility: visible;
-            transition-duration: 0.7s;
             z-index: 1001;
         }
     }
@@ -30,6 +29,7 @@
         padding: 0 @margins-sides 2rem @margins-sides;
         overflow: hidden;
         min-width: @tabletLimitWidth;
+        width: 100vw;
         @media (min-width: @desktopLimitWidth) {
             width: @desktopLimitWidth;
         }

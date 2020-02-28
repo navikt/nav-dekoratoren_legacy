@@ -6,13 +6,11 @@ import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import './Varselbjelle.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
-import { VarselKnapp } from '../meny-knapper/VarselKnapp';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../../tekster/finn-tekst';
 import BEMHelper from '../../../../utils/bem';
-
-const ikon = require('../../../../ikoner/varsler/alarm.svg');
+import VarselIkon from '../meny-knapper/varsel-ikon/VarselIkon';
 
 interface StateProps {
     antallVarsler: number;
@@ -128,12 +126,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                                     antallVarsler > 0 ? antallVarsler : 'ingen'
                                 } varsler.`}
                             >
-                                <img alt={''} src={ikon} className={cls.element('bjelle')} />
-                                <div className={cls.element('tekst')}>
-                                    <Undertittel className={'varsler-tekst'}>
-                                        <Tekst id={'varsler'} />
-                                    </Undertittel>
-                                </div>
+                                <VarselIkon isOpen={clicked}/>
                             </MenylinjeKnapp>
                         </div>
                         <div className="min-varsel-wrapper">

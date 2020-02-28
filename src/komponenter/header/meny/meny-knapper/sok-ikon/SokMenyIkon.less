@@ -4,21 +4,19 @@
     @width: 32px;
     @height: 24px;
     @circleRadius: 10px;
-    @stroke-width: 2px;
+    @stroke-width: 3px;
     @color: @navBla;
     @handleAngle: 30deg;
+    @middle: (@height - @stroke-width) / 2;
 
-    .line(@rotation) {
+
+    .line() {
         position: absolute;
-        width: @height;
+        width: @width;
         height: @stroke-width;
         border: 0;
         border-radius: 0;
         background-color: @color;
-        transform: rotate(@rotation);
-        transform-origin: center;
-        top: @height / 2;
-        left: 0;
     }
 
     &__container {
@@ -27,10 +25,6 @@
         padding: 0;
         position: relative;
         margin-right: 0.5em;
-
-        &--hover {
-            background-color: red;
-        }
     }
 
     &__circle {
@@ -39,59 +33,39 @@
         height: @circleRadius*2;
         width: @circleRadius*2;
         position: absolute;
-
-        transition: 0.25s all ease-in-out;
+        transform-origin: center;
+        transition: 0.35s all ease-in;
 
         &--open {
-            height: 0;
-            width: 0;
-            opacity: 0;
-            transform-origin: center;
+            //opacity: 0;
+            transform: translate(@width/2 - @circleRadius, @height/2 - @circleRadius) scale(0);
         }
     }
 
     &__line {
-        transform-origin: top left;
-        transform: translate(
-                    @circleRadius + @circleRadius * cos(@handleAngle),
-                    @circleRadius + @circleRadius * sin(@handleAngle)
-        )
-        rotate(@handleAngle);
+        transform-origin: center;
+        transform: translate(@circleRadius + @circleRadius * cos(@handleAngle),
+            @circleRadius + @circleRadius * sin(@handleAngle)) rotate(@handleAngle);
         height: @stroke-width;
         width: @circleRadius;
         background-color: @color;
         position: absolute;
-
-        transition: 0.25s all ease-in;
+        transition: 0.35s all ease-in;
 
         &--open {
-            //.line(-45deg);
-            width: 0;
-            transform: rotate(360deg);
+            .line();
+            transform: translateY(@middle) rotate(315deg) scale(.8);
         }
     }
 
-    &__line-x-1 {
-        visibility: hidden;
-        .line(45deg);
-        width: 0;
-        transition: 0.25s all ease-in;
+    &__line-x {
+        .line();
+        transform-origin: center;
+        transform: translateY(@middle) rotate(45deg) scaleX(0);
+        transition: 0.35s all ease-in;
 
         &--open {
-            visibility: visible;
-            width: @circleRadius;
-        }
-    }
-
-    &__line-x-2 {
-        visibility: hidden;
-        .line(-45deg);
-        width: 0;
-        transition: 0.25s all ease-in;
-
-        &--open {
-            visibility: visible;
-            width: @circleRadius;
+            transform: translateY(@middle) rotate(45deg) scale(.8);
         }
     }
 }

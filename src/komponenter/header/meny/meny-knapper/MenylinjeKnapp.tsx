@@ -1,6 +1,5 @@
 import React from 'react';
 import BEMHelper from '../../../../utils/bem';
-import './HovedmenyKnapp.less';
 
 interface Props {
     toggleMenu: () => void;

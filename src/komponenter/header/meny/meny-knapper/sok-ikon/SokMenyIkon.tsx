@@ -15,8 +15,7 @@ export const SokMenyIkon = ({isOpen}: Props) => {
         >
             <div className={cls.element('circle', isOpen ? 'open' : '')} />
             <div className={cls.element('line', isOpen ? 'open' : '')} />
-            <div className={cls.element('line-x-1', isOpen ? 'open' : '')} />
-            <div className={cls.element('line-x-2', isOpen ? 'open' : '')} />
+            <div className={cls.element('line-x', isOpen ? 'open' : '')} />
         </div>
     );
 };
