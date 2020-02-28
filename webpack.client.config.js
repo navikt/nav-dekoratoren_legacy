@@ -13,9 +13,9 @@ const browserConfig = {
         client: './src/index.tsx',
     },
     output: {
-        path: path.resolve(__dirname, 'build/'),
-        filename: '[name].js',
-        publicPath: '/dekoratoren/',
+        path: path.resolve(__dirname, 'build'),
+        publicPath: '/dekoratoren',
+        filename: '[name].js'
     },
     devtool: 'cheap-module-source-map',
     resolve: {
@@ -52,7 +52,7 @@ const browserConfig = {
                         ],
                         loader: 'file-loader',
                         options: {
-                            name: './media/[name].[ext]',
+                            name: '/media/[name].[ext]',
                         },
                     },
                     {
@@ -142,7 +142,7 @@ const browserConfig = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: './css/[name].css',
+            filename: '/css/[name].css',
         }),
 
         new webpack.DefinePlugin({
