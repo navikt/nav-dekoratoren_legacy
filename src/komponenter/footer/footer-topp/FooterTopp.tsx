@@ -99,6 +99,7 @@ const FooterTopp = ({ classname }: Props) => {
                     {hoyrelenker.map(lenke => {
                         return (
                             <li key={lenke.lenketekst}>
+                                <HoyreChevron />
                                 <LenkeMedGA
                                     href={lenke.url}
                                     gaEventArgs={{
@@ -107,7 +108,6 @@ const FooterTopp = ({ classname }: Props) => {
                                         label: lenke.url,
                                     }}
                                 >
-                                    <HoyreChevron />
                                     {lenke.lenketekst}
                                 </LenkeMedGA>
                             </li>

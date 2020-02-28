@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
-import { Dispatch } from '../../../redux/dispatch-type';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -20,28 +19,21 @@ import {
     getArbeidsflatelenker,
 } from '../../header/arbeidsflatemeny/arbeidsflate-lenker';
 
-interface OwnProps {
+interface Props {
     classname: string;
 }
 
-interface StateProps {
-    arbeidsflate: MenuValue;
-    language: Language;
-}
+const stateSelector = (state: AppState) => ({
+    arbeidsflate: state.arbeidsflate.status,
+    language: state.language.language,
+});
 
-interface DispatchProps {
-    settArbeidsflate: () => void;
-}
-
-type Props = OwnProps & StateProps & DispatchProps;
-
-const FooterArbeidsflatevalg = ({
-    arbeidsflate,
-    language,
-    settArbeidsflate,
-    classname,
-}: Props) => {
+const FooterArbeidsflatevalg = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
+
+    const dispatch = useDispatch();
+    const { arbeidsflate, language } = useSelector(stateSelector);
+
     const [arbeidsflatevalgLenker, setArbeidsflatevalgLenker] = useState<
         ArbeidsflateLenke[]
     >([arbeidsflateLenker[1], arbeidsflateLenker[2]]);
@@ -80,7 +72,9 @@ const FooterArbeidsflatevalg = ({
                                                     oppdaterSessionStorage(
                                                         lenke.key
                                                     );
-                                                    settArbeidsflate();
+                                                    dispatch(
+                                                        finnArbeidsflate()
+                                                    );
                                                 }}
                                                 gaEventArgs={{
                                                     category: GACategory.Header,
@@ -101,16 +95,4 @@ const FooterArbeidsflatevalg = ({
     );
 };
 
-const mapStateToProps = (state: AppState): StateProps => ({
-    arbeidsflate: state.arbeidsflate.status,
-    language: state.language.language,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    settArbeidsflate: () => dispatch(finnArbeidsflate()),
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(FooterArbeidsflatevalg);
+export default FooterArbeidsflatevalg;
