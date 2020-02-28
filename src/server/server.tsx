@@ -19,7 +19,6 @@ const fileFavicon = require('../../src/ikoner/favicon/favicon.ico');
 const fileAppleTouchIcon = require('../../src/ikoner/favicon/apple-touch-icon.png');
 const fileFavicon16x16 = require('../../src/ikoner/favicon/favicon-16x16.png');
 const fileFavicon32x32 = require('../../src/ikoner/favicon/favicon-32x32.png');
-// const fileWebManifest = require('../../src/ikoner/favicon/site.webmanifest');
 const fileMaskIcon = require('../../src/ikoner/favicon/safari-pinned-tab.svg');
 
 // Config
@@ -27,18 +26,6 @@ const basePath = '/dekoratoren';
 const buildPath = `${process.cwd()}/build`;
 const app = express();
 const PORT = 8088;
-
-// Default vars
-const defaultBaseUrl = 'http://localhost:8088';
-const defaultAppUrl = `${defaultBaseUrl}${basePath}`;
-const defaultEnonicMenuUrl = `https://www.nav.no/_/service/no.nav.navno/menu`;
-const defaultEnonicSearchUrl = `https://www.nav.no/_/service/navno.nav.no.search/search2/sok`;
-const defaultInnloggingslinjeUrl = `http://localhost:8095/innloggingslinje-api/auth`;
-const defaultVarselinnboksUrl = `http://localhost:8095/person/varselinnboks`;
-const defaultMinSideArbeidsGiverUrl = `https://arbeidsgiver.nav.no/min-side-arbeidsgiver/`;
-const defaultDittNavUrl = `https:/www.nav.no/person/dittnav/`;
-const defaultLoginUrl = 'http://localhost:5000';
-const defaultLogoutUrl = 'http://localhost:5000/?logout';
 
 // Mock
 import mockMenu from './mock/menu.json';
@@ -51,10 +38,10 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 // Server-side rendering
 const store = getStore();
-const baseUrl = `${process.env.NAV_BASE_URL || defaultBaseUrl}`;
-const fileEnv = `${process.env.APP_BASE_URL || defaultAppUrl}/env`;
-const fileCss = `${process.env.APP_BASE_URL || defaultAppUrl}/css/client.css`;
-const fileScript = `${process.env.APP_BASE_URL || defaultAppUrl}/client.js`;
+const baseUrl = `${process.env.NAV_BASE_URL}`;
+const fileEnv = `${process.env.APP_BASE_URL}/env`;
+const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
+const fileScript = `${process.env.APP_BASE_URL}/client.js`;
 
 // Cors
 app.disable('x-powered-by');
@@ -164,16 +151,13 @@ app.get(`${basePath}/env`, (req, res) => {
     // Obs! Don't expose secrets
     res.send({
         ...{
-            BASE_URL: process.env.APP_BASE_URL || defaultAppUrl,
-            APP_BASE_URL: process.env.APP_BASE_URL || defaultAppUrl,
-            API_VARSELINNBOKS_URL:
-                process.env.API_VARSELINNBOKS_URL || defaultVarselinnboksUrl,
-            MINSIDE_ARBEIDSGIVER_URL:
-                process.env.MINSIDE_ARBEIDSGIVER_URL ||
-                defaultMinSideArbeidsGiverUrl,
-            DITT_NAV_URL: process.env.DITT_NAV_URL || defaultDittNavUrl,
-            LOGIN_URL: process.env.LOGIN_URL || defaultLoginUrl,
-            LOGOUT_URL: process.env.LOGOUT_URL || defaultLogoutUrl,
+            BASE_URL: process.env.APP_BASE_URL,
+            APP_BASE_URL: process.env.APP_BASE_URL,
+            API_VARSELINNBOKS_URL: process.env.API_VARSELINNBOKS_URL,
+            MINSIDE_ARBEIDSGIVER_URL: process.env.MINSIDE_ARBEIDSGIVER_URL,
+            DITT_NAV_URL: process.env.DITT_NAV_URL,
+            LOGIN_URL: process.env.LOGIN_URL,
+            LOGOUT_URL: process.env.LOGOUT_URL,
             ...(req.query && {
                 PARAMS: {
                     LANGAUGE: req.query.language || 'nb',
@@ -194,7 +178,7 @@ app.get(`${basePath}/api/meny`, (req, res) =>
 );
 
 const fetchMenu = (res: Response) => {
-    const uri = process.env.API_ENONIC_MENY_URL || defaultEnonicMenuUrl;
+    const uri = `${process.env.API_ENONIC_MENY_URL}`;
     request({ method: 'GET', uri }, (reqError, reqResponse, reqBody) => {
         if (!reqError && reqResponse.statusCode === 200 && reqBody.length > 2) {
             mainCache.set(mainCacheKey, reqBody, 100);
@@ -222,8 +206,7 @@ const fetchMenu = (res: Response) => {
 app.use(
     `${basePath}/api/auth`,
     createProxyMiddleware(`${basePath}/api/auth`, {
-        target: `${process.env.API_INNLOGGINGSLINJE_URL ||
-            defaultInnloggingslinjeUrl}`,
+        target: `${process.env.API_INNLOGGINGSLINJE_URL}`,
         pathRewrite: { '^/dekoratoren/api/auth': '' },
     })
 );
@@ -231,8 +214,7 @@ app.use(
 app.use(
     `${basePath}/api/varsler`,
     createProxyMiddleware(`${basePath}/api/varsler`, {
-        target: `${process.env.API_VARSELINNBOKS_URL ||
-            defaultVarselinnboksUrl}`,
+        target: `${process.env.API_VARSELINNBOKS_URL}`,
         pathRewrite: { '^/dekoratoren/api/varsler': '' },
     })
 );
@@ -240,7 +222,7 @@ app.use(
 app.use(
     `${basePath}/api/sok`,
     createProxyMiddleware(`${basePath}/api/sok`, {
-        target: `${process.env.API_ENONIC_SOK_URL || defaultEnonicSearchUrl}`,
+        target: `${process.env.API_ENONIC_SOK_URL}`,
         pathRewrite: { '^/dekoratoren/api/sok': '' },
     })
 );
