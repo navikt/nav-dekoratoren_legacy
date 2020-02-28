@@ -2,7 +2,7 @@ import { FooterLenke } from '../komponenter/footer/Footer-lenker';
 import { MenuValue } from './meny-storage-utils';
 
 export default class Environment {
-    static NAV_BASE_URL: string;
+    static XP_BASE_URL: string;
     static APP_BASE_URL: string;
     static API_VARSELINNBOKS_URL: string;
     static MINSIDE_ARBEIDSGIVER_URL: string;
@@ -18,7 +18,7 @@ export default class Environment {
     static LEVEL: string;
 
     static settEnv = (result: any) => {
-        Environment.NAV_BASE_URL = result.NAV_BASE_URL;
+        Environment.XP_BASE_URL = result.XP_BASE_URL;
         Environment.APP_BASE_URL = result.APP_BASE_URL;
         Environment.API_VARSELINNBOKS_URL = result.API_VARSELINNBOKS_URL;
         Environment.MINSIDE_ARBEIDSGIVER_URL = result.MINSIDE_ARBEIDSGIVER_URL;
@@ -74,7 +74,7 @@ export const genererLenkerTilUrl = (footerlenker: FooterLenke[]) => {
 };
 
 export const genererUrl = (lenke: string): string => {
-    return lenke.startsWith('/') ? Environment.NAV_BASE_URL + lenke : lenke;
+    return lenke.startsWith('/') ? Environment.XP_BASE_URL + lenke : lenke;
 };
 
 export const erDev =

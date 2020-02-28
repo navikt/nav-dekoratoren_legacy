@@ -81,7 +81,7 @@ app.get(`${basePath}/api/meny`, (req, res) =>
 );
 
 const fetchMenu = (res: Response) => {
-    const uri = `${process.env.API_ENONIC_MENY_URL}`;
+    const uri = `${process.env.API_XP_MENY_URL}`;
     request({ method: 'GET', uri }, (reqError, reqResponse, reqBody) => {
         if (!reqError && reqResponse.statusCode === 200 && reqBody.length > 2) {
             mainCache.set(mainCacheKey, reqBody, 100);
@@ -129,7 +129,7 @@ app.use(
 app.use(
     proxiedSokUrl,
     createProxyMiddleware(proxiedSokUrl, {
-        target: `${process.env.API_ENONIC_SOK_URL}`,
+        target: `${process.env.API_XP_SOK_URL}`,
         pathRewrite: { [`^${proxiedSokUrl}`]: '' },
         changeOrigin: true,
     })

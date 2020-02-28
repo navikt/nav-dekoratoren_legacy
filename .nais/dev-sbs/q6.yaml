@@ -24,13 +24,13 @@ spec:
         - https://dekoratoren-q6.nais.oera-q.local/
         - https://www-q6.nav.no/dekoratoren
     env:
-        - name: NAV_BASE_URL
+        - name: XP_BASE_URL
           value: https://www-q6.nav.no
         - name: APP_BASE_URL
           value: https://www-q6.nav.no/dekoratoren
-        - name: API_ENONIC_MENY_URL
+        - name: API_XP_MENY_URL
           value: https://www-q6.nav.no/_/service/no.nav.navno/menu
-        - name: API_ENONIC_SOK_URL
+        - name: API_XP_SOK_URL
           value: https://www-q6.nav.no/_/service/navno.nav.no.search/search2/sok
         - name: API_VARSELINNBOKS_URL
           value: https://www-q6.nav.no/person/varselinnboks
