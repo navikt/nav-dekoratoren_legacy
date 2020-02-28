@@ -164,15 +164,6 @@ app.get(`${basePath}/env`, (req, res) => {
     // Obs! Don't expose secrets
     res.send({
         ...{
-            ...(req.query && {
-                PARAMS: {
-                    LANGAUGE: req.query.language || 'nb',
-                    CONTEXT: (req.query.context || 'ikkevalgt').toUpperCase(),
-                    STRIPPED: req.query.stripped || false,
-                    REDIRECT_TO_APP: req.query.redirectToApp || false,
-                    LEVEL: req.query.level || 'Level4',
-                },
-            }),
             BASE_URL: process.env.APP_BASE_URL || defaultAppUrl,
             APP_BASE_URL: process.env.APP_BASE_URL || defaultAppUrl,
             API_VARSELINNBOKS_URL:
@@ -183,6 +174,15 @@ app.get(`${basePath}/env`, (req, res) => {
             DITT_NAV_URL: process.env.DITT_NAV_URL || defaultDittNavUrl,
             LOGIN_URL: process.env.LOGIN_URL || defaultLoginUrl,
             LOGOUT_URL: process.env.LOGOUT_URL || defaultLogoutUrl,
+            ...(req.query && {
+                PARAMS: {
+                    LANGAUGE: req.query.language || 'nb',
+                    CONTEXT: (req.query.context || 'ikkevalgt').toUpperCase(),
+                    STRIPPED: req.query.stripped || false,
+                    REDIRECT_TO_APP: req.query.redirectToApp || false,
+                    LEVEL: req.query.level || 'Level4',
+                },
+            }),
         },
     });
 });
