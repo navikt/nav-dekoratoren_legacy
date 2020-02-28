@@ -45,7 +45,10 @@ const MobilarbeidsflateValg = ({
                         >
                             <LenkeMedGA
                                 href={lenke.url}
-                                onClick={() => {}}
+                                onClick={() => {
+                                    oppdaterSessionStorage(lenke.key);
+                                    settArbeidsflate();
+                                }}
                                 tabIndex={tabindex ? 0 : -1}
                                 gaEventArgs={{
                                     category: GACategory.Header,
