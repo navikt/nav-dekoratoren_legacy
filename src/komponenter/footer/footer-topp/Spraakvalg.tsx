@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -24,65 +24,45 @@ interface State {
     spraaklenker: Spraaklenke[];
 }
 
-class Spraakvalg extends React.Component<StateProps, State> {
-    constructor(props: StateProps) {
-        super(props);
+const Spraakvalg = ({ language }: StateProps) => {
+    const [erDekoratoren, setErDekoratoren] = useState<boolean>(false);
+    const [spraklenker, setSpraklenker] = useState<Spraaklenke[]>([
+        spraaklenker[1],
+        spraaklenker[2],
+    ]);
 
-        this.state = {
-            hasMounted: false,
-            erNavDekoratoren: false,
-            spraaklenker: [spraaklenker[1], spraaklenker[2]],
-        };
-    }
+    useEffect(() => {
+        setErDekoratoren(erNavDekoratoren());
+        setSpraklenker(getSpraaklenker(language));
+    }, []);
 
-    componentDidMount(): void {
-        this.setState(
-            {
-                hasMounted: true,
-            },
-            () => {
-                if (this.state.hasMounted) {
-                    this.setState({
-                        erNavDekoratoren: erNavDekoratoren(),
-                        spraaklenker: getSpraaklenker(this.props.language),
-                    });
-                }
-            }
-        );
-    }
+    return (
+        <>
+            <Undertittel className="blokk-xxs" id="spraaklenker-overskrift">
+                <Tekst id="footer-languages-overskrift" />
+            </Undertittel>
+            <ul aria-labelledby="spraaklenker-overskrift">
+                {spraklenker.map(lenke => {
+                    return (
+                        <li key={lenke.lang}>
+                            <HoyreChevron />
+                            <LenkeMedGA
+                                href={erDekoratoren ? lenke.testurl : lenke.url}
+                                gaEventArgs={{
+                                    category: GACategory.Footer,
+                                    action: `språkvalg/${lenke.lang}`,
+                                }}
+                            >
+                                {lenke.lenketekst}
+                            </LenkeMedGA>
+                        </li>
+                    );
+                })}
+            </ul>
+        </>
+    );
+};
 
-    render() {
-        return (
-            <>
-                <Undertittel className="blokk-xxs">
-                    <Tekst id="footer-languages-overskrift" />
-                </Undertittel>
-                <ul>
-                    {this.state.spraaklenker.map(lenke => {
-                        return (
-                            <li key={lenke.lang}>
-                                <HoyreChevron />
-                                <LenkeMedGA
-                                    href={
-                                        this.state.erNavDekoratoren
-                                            ? lenke.testurl
-                                            : lenke.url
-                                    }
-                                    gaEventArgs={{
-                                        category: GACategory.Footer,
-                                        action: `språkvalg/${lenke.lang}`,
-                                    }}
-                                >
-                                    {lenke.lenketekst}
-                                </LenkeMedGA>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </>
-        );
-    }
-}
 const mapStateToProps = (state: AppState): StateProps => ({
     language: state.language.language,
 });
