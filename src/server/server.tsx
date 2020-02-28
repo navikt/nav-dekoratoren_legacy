@@ -165,11 +165,13 @@ app.get(`${basePath}/env`, (req, res) => {
     res.send({
         ...{
             ...(req.query && {
-                language: req.query.language || 'nb',
-                context: (req.query.context || 'ikkevalgt').toUpperCase(),
-                stripped: req.query.stripped || false,
-                redirectToApp: req.query.redirectToApp || false,
-                level: req.query.level || 'Level4',
+                PARAMS: {
+                    LANGAUGE: req.query.language || 'nb',
+                    CONTEXT: (req.query.context || 'ikkevalgt').toUpperCase(),
+                    STRIPPED: req.query.stripped || false,
+                    REDIRECT_TO_APP: req.query.redirectToApp || false,
+                    LEVEL: req.query.level || 'Level4',
+                },
             }),
             BASE_URL: process.env.APP_BASE_URL || defaultAppUrl,
             APP_BASE_URL: process.env.APP_BASE_URL || defaultAppUrl,

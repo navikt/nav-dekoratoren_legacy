@@ -20,8 +20,8 @@ export const Header = () => {
 
     useEffect(() => {
         fetchMenypunkter()(dispatch);
-        if (Environment.context !== MenuValue.IKKEVALGT) {
-            oppdaterSessionStorage(Environment.context);
+        if (Environment.CONTEXT !== MenuValue.IKKEVALGT) {
+            oppdaterSessionStorage(Environment.CONTEXT);
         }
     }, []);
 

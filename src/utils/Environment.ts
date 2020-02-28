@@ -11,11 +11,11 @@ export default class Environment {
     static LOGOUT_URL: string;
 
     // Parameters
-    static language: string;
-    static context: MenuValue;
-    static stripped: string;
-    static redirectToApp: string;
-    static level: string;
+    static LANGUAGE: string;
+    static CONTEXT: MenuValue;
+    static STRIPPED: string;
+    static REDIRECT_TO_APP: string;
+    static LEVEL: string;
 
     static settEnv = (result: any) => {
         Environment.NAV_BASE_URL = result.NAV_BASE_URL;
@@ -27,11 +27,11 @@ export default class Environment {
         Environment.LOGOUT_URL = result.LOGOUT_URL;
 
         // Parameters
-        Environment.language = result.language;
-        Environment.context = result.context;
-        Environment.stripped = result.stripped;
-        Environment.redirectToApp = result.redirectToApp;
-        Environment.level = result.level;
+        Environment.LANGUAGE = result.PARAMS.LANGAUGE;
+        Environment.CONTEXT = result.PARAMS.CONTEXT;
+        Environment.STRIPPED = result.PARAMS.STRIPPED;
+        Environment.REDIRECT_TO_APP = result.PARAMS.REDIRECT_TO_APP;
+        Environment.LEVEL = result.PARAMS.LEVEL;
     };
 }
 

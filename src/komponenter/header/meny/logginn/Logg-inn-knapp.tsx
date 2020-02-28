@@ -52,10 +52,10 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
         const { erInnlogget } = this.props;
         const appUrl = location.origin + location.pathname;
         const LOGIN_URL = `${
-            Environment.redirectToApp || erNavDekoratoren
+            Environment.REDIRECT_TO_APP || erNavDekoratoren
                 ? `${Environment.LOGIN_URL}/login?redirect=${appUrl}`
                 : `${Environment.LOGIN_URL}/login?redirect=${Environment.DITT_NAV_URL}`
-        }&level=${Environment.level}`;
+        }&level=${Environment.LEVEL}`;
 
         triggerGaEvent({
             category: GACategory.Header,

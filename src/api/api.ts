@@ -53,8 +53,8 @@ export const lagreVarslerLestFetch = (nyesteId: number): Promise<number> =>
     fetchToJson(
         `${Environment.APP_BASE_URL}/api/varsler/rest/varsel/erles/${nyesteId}`,
         {
-            headers: { 'Content-Type': 'application/json' },
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(nyesteId),
         }
     );
