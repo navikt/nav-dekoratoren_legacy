@@ -6,7 +6,7 @@
     &__varsel-innhold {
         overflow-y: scroll;
         position: fixed;
-        top: 7.925rem;
+        top: 7.87rem;
         left: -(@mobilemenuwidth);
         z-index: 1001;
     }
@@ -18,7 +18,7 @@
     &__undermeny-innhold,
     &__varsel-innhold {
         overflow-y: scroll;
-        top: 7.925rem;
+        top: 7.87rem;
         left: -(@mobilemenuwidth);
         width: @mobilemenuwidth;
         position: fixed;
@@ -44,15 +44,34 @@
             left: 0;
         }
     }
+    &__undermeny-innhold,
+    &__varsel-innhold {
+        z-index: 1002;
+        .mobilmeny {
+            &__meny {
+                &--list {
+                    max-width: 17rem;
+                }
+            }
+        }
+    }
+
+    &__undermeny-innhold {
+        padding-left: 1.85rem;
+    }
 
     &__meny {
         &--list ul {
             margin: 0;
         }
 
-        &--list {
-            padding: 1rem 1rem 1.5rem 1rem;
+        &--mainlist {
             border-bottom: 1px solid black;
+        }
+
+        &--list,
+        &--mainlist {
+            padding: 1rem 1rem 1.5rem 1rem;
 
             .lenke {
                 text-decoration: none;
@@ -98,7 +117,7 @@
         &--ingress {
             display: flex;
             flex-direction: column;
-            padding: 2rem 2rem 2rem 0;
+            padding: 2rem 2rem 1.25rem 0;
             color: @navGra80;
 
             .typo-sidetittel {

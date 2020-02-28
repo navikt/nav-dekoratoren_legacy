@@ -6,6 +6,7 @@ import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import './Varselbjelle.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
+import { toggleVarselVisning } from '../../../../reducer/dropdown-toggle-duck';
 
 interface Props {
     tabindex: boolean;
@@ -17,14 +18,16 @@ interface StateProps {
     erInnlogget: boolean;
     nyesteId: number;
     arbeidsflate: MenuValue;
+    visvarsel: boolean;
 }
 
 interface FunctionProps {
-    children: (clicked: boolean, handleClick?: () => void) => ReactNode;
+    children: (clicked?: boolean, handleClick?: () => void) => ReactNode | any;
 }
 
 interface DispatchProps {
     doSettVarslerSomLest: (nyesteId: number) => void;
+    toggleVarsel: () => void;
 }
 
 interface State {
@@ -32,7 +35,7 @@ interface State {
     classname: string;
 }
 
-type VarselbjelleProps = StateProps & DispatchProps & FunctionProps & Props;
+type VarselbjelleProps = StateProps & DispatchProps & Props;
 
 class Varselbjelle extends React.Component<VarselbjelleProps, State> {
     private varselbjelleRef = createRef<HTMLDivElement>();
@@ -59,15 +62,18 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
         document.removeEventListener('click', this.handleOutsideClick, false);
     }
 
-    handleClick = () => {
+    public handleClick = () => {
         triggerGaEvent({
             category: GACategory.Header,
-            action: this.state.clicked ? 'varsler-close' : 'varsler-open',
+            action: this.props.visvarsel ? 'varsler-close' : 'varsler-open',
         });
+
+        this.props.toggleVarsel();
+        /*
         this.setState({
             clicked: !this.state.clicked,
         });
-
+*/
         if (this.props.antallUlesteVarsler > 0) {
             this.setState({ classname: 'toggle-varsler-container' });
             this.props.doSettVarslerSomLest(this.props.nyesteId);
@@ -79,13 +85,14 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
         if (node && node.contains(e.target as HTMLElement)) {
             return;
         }
-        if (this.state.clicked) {
+        if (this.props.visvarsel) {
             triggerGaEvent({
                 category: GACategory.Header,
                 action: 'varsler-close',
             });
         }
-        this.setState({ clicked: false });
+        this.props.toggleVarsel();
+        // this.setState({ clicked: false });
     };
 
     render() {
@@ -120,7 +127,9 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                             />
                         </div>
                         <div className="min-varsel-wrapper">
-                            {children(clicked, this.handleClick)}
+                            {
+                                // children(clicked, this.handleClick)}
+                            }
                         </div>
                     </>
                 ) : null}
@@ -138,11 +147,13 @@ const mapStateToProps = (state: AppState): StateProps => ({
             state.innloggingsstatus.data.securityLevel === '4'),
     nyesteId: state.varsler.data.nyesteId,
     arbeidsflate: state.arbeidsflate.status,
+    visvarsel: state.dropdownToggles.varsel,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     doSettVarslerSomLest: (nyesteId: number) =>
         settVarslerSomLest(nyesteId)(dispatch),
+    toggleVarsel: () => dispatch(toggleVarselVisning()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Varselbjelle);

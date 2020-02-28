@@ -4,16 +4,22 @@
 .dropdown {
     &__menyknapp {
         text-decoration: none;
-        color: black;
-        background-color: white;
-        border: none;
-        padding: 0;
+        text-transform: none;
+        padding: 0.5rem 1rem;
+        margin-left: 0.5rem;
 
-        &:focus {
-            text-decoration: none;
-            box-shadow: none;
-            outline: @navDypBla 3px solid;
-            border-radius: 4px;
+        &:focus,
+        &:hover {
+            background-color: white;
+            color: @navBla;
+        }
+
+        &:active {
+            background-color: white;
+            color: @navBla;
+        }
+        &:hover {
+            outline: 2px solid @navBla;
         }
 
         &--innhold {
@@ -36,6 +42,8 @@
     }
     @media (max-width: @minimumMobilWidth) {
         &__menyknapp {
+            padding: 0.5rem 0.5rem;
+            margin-left: 0.1rem;
             &--innhold {
                 padding: 0.4rem 0.2rem;
             }
@@ -45,6 +53,12 @@
     @media (min-width: @tabletLimitWidth) {
         &__menyknapp {
             border-radius: 3px;
+            &:focus,
+            &:hover {
+                background-color: white;
+                color: @navBla;
+            }
+
             &--innhold {
                 padding: 0.4rem 0.7rem 0;
 

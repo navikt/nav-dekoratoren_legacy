@@ -35,17 +35,11 @@ const DesktopMenylinje = ({ language }: Props) => {
                         <>
                             <div className="media-lg-desktop minsidelenke-varselbjelle">
                                 <MinsideLenke tabindex={true} />
-                                <VarselinnboksProvider>
-                                    <Varselbjelle tabindex={true}>
-                                        {clicked =>
-                                            clicked && (
-                                                <VarselVisning
-                                                    tabIndex={true}
-                                                />
-                                            )
-                                        }
-                                    </Varselbjelle>
-                                </VarselinnboksProvider>
+                                {/*
+                                    <VarselinnboksProvider>
+                                        <Varselbjelle tabindex={true}/>
+                                    </VarselinnboksProvider>
+                                */}
                             </div>
                             <LoggInnKnapp />
                         </>

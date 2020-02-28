@@ -25,6 +25,7 @@ export enum ActionType {
     TOGGLE_MINSIDE_MENY = 'TOGGLE_MINSIDE_MENY',
     TOGGLE_SOK = 'TOGGLE_SOK',
     TOGGLE_LUKK_ALLE = 'TOGGLE_LUKK_ALLE',
+    TOGGLE_VARSEL = 'TOGGLE_VARSEL',
 }
 
 export interface HentInnloggingsstatusOKAction {
@@ -111,6 +112,10 @@ export interface ToggleSok {
     type: ActionType.TOGGLE_SOK;
 }
 
+export interface ToggleVarsel {
+    type: ActionType.TOGGLE_VARSEL;
+}
+
 export interface ToggleLukkAlle {
     type: ActionType.TOGGLE_LUKK_ALLE;
 }
@@ -136,4 +141,5 @@ export type Handling =
     | ToggleHovedmeny
     | ToggleMinsideMeny
     | ToggleSok
-    | ToggleLukkAlle;
+    | ToggleLukkAlle
+    | ToggleVarsel;

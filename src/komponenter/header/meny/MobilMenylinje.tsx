@@ -5,40 +5,58 @@ import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
 import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import SokModal from './sok/sok-innhold/sok-modal/Sokmodal';
-import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
 import './MobilMenylinje.less';
 import { verifyWindowObj } from '../../../utils/Environment';
 import { tabletview } from '../../../styling-mediaquery';
 import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
-import MenyBakgrunn from './ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
 import { Language } from '../../../reducer/language-duck';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../reducer/reducer';
+import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
+import Varselbjelle from './varsel/Varselbjelle';
 
 const mobilClass = BEMHelper('mobilmeny');
 
 interface Props {
     language: Language;
 }
+const stateSelector = (state: AppState) => ({
+    innloggingsstatus: state.innloggingsstatus,
+});
 
 const MobilMenylinje = ({ language }: Props) => {
-    const [clickedModal, setClickedModal] = useState<boolean>(false);
+    const { innloggingsstatus } = useSelector(stateSelector);
+    const [navIkonSize, setNavIkonSize] = useState<string>('66');
+    const [varselClicked, setVarselClicked] = useState<boolean>(false);
+    const [handleVarselvisning, setHandleVarselvisning] = useState<any>(void 0);
 
     useEffect(() => {
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        if (verifyWindowObj()) {
+            window.addEventListener('resize', handleResize);
+            return () => window.removeEventListener('resize', handleResize);
+        }
     }, []);
 
-    const toggleModal = () => {
+    const toggleModal = (
+        isOpen: boolean,
+        handlevarsel: (() => void) | undefined
+    ) => {
         triggerGaEvent({
             category: GACategory.Header,
-            action: `mobilsøk-${clickedModal ? 'close' : 'open'}`,
+            action: `varselvisning-${isOpen ? 'open' : 'close'}`,
         });
-        setClickedModal(!clickedModal);
+        if (handlevarsel) {
+            setHandleVarselvisning(handlevarsel);
+        }
+
+        setVarselClicked(isOpen);
     };
 
     const handleResize = () => {
-        if (verifyWindowObj() && window.innerWidth >= tabletview) {
-            setClickedModal(false);
+        if (window.innerWidth >= tabletview) {
+            setVarselClicked(false);
         }
+        window.innerWidth <= 400 ? setNavIkonSize('44') : setNavIkonSize('66');
     };
 
     return (
@@ -47,31 +65,24 @@ const MobilMenylinje = ({ language }: Props) => {
                 <div className={mobilClass.element('elementer')}>
                     <div className={mobilClass.element('venstre-kolonne')}>
                         <NavLogoRod
-                            width="66"
-                            height="66"
+                            width={navIkonSize}
+                            height={navIkonSize}
                             classname={mobilClass.element('logo')}
                         />
                     </div>
                     <div className={mobilClass.element('hoyre-kolonne')}>
+                        {!innloggingsstatus.data.authenticated ? (
+                            <InnloggingsstatusProvider>
+                                <LoggInnKnapp />
+                            </InnloggingsstatusProvider>
+                        ) : null}
                         {language === Language.NORSK ||
                         language === Language.ENGELSK ? (
                             <HovedmenyMobil />
                         ) : null}
-                        <SokModalToggleknapp
-                            className={mobilClass.element('sok')}
-                            modalIsOpen={toggleModal}
-                        />
-                        <InnloggingsstatusProvider>
-                            <LoggInnKnapp />
-                        </InnloggingsstatusProvider>
                     </div>
                 </div>
             </div>
-
-            <SokModal
-                modalerApen={clickedModal}
-                sokeknappToggle={toggleModal}
-            />
         </nav>
     );
 };

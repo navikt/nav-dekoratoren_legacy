@@ -22,13 +22,17 @@ import {
 } from '../../../../../../reducer/arbeidsflate-duck';
 import { connect } from 'react-redux';
 import Sok from '../../../sok/Sok';
+import InnloggetBruker from './mobil-innhold/innloggetbruker/InnloggetBruker';
+import { toggleVarselVisning } from '../../../../../../reducer/dropdown-toggle-duck';
 
 interface DispatchProps {
     settArbeidsflate: () => void;
+    toggleVarsel: () => void;
 }
 
 interface StateProps {
     arbeidsflate: MenuValue;
+    visvarsel: boolean;
 }
 
 interface VisningsmenyProps {
@@ -152,10 +156,12 @@ class MobilVisningsmeny extends React.Component<Props, State> {
         return (
             <>
                 <section className={menyClass.element('startmeny')}>
-                    {/*<Topseksjon
+                    {/*
+                    <Topseksjon
                         lukkmeny={togglemenu}
                         tabindex={this.hovedseksjonTabIndex()}
                     />
+                    */}
                     <div
                         className={menyClass.element(
                             'minside-rad',
@@ -165,45 +171,37 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                         )}
                     >
                         <>
-                            <VarselinnboksProvider>
-                                <Varselbjelle
-                                    tabindex={this.hovedseksjonTabIndex()}
-                                >
-                                    {(clicked, handleClick) => (
-                                        <VarselvisningMobil
-                                            visvarsel={clicked}
-                                            visningmenyClassname={
-                                                menyClass.className
-                                            }
-                                            togglevarselmeny={this.togglevarsel}
-                                            lukkvarselmeny={
-                                                handleClick
-                                                    ? handleClick
-                                                    : () => void 0
-                                            }
-                                            tabindex={
-                                                menuIsOpen &&
-                                                clicked &&
-                                                !this.state.toggleundermeny
-                                            }
-                                            clicked={this.state.toggleundermeny}
-                                            lukkmenyene={this.lukkMenyene}
-                                            menuIsOpen={menuIsOpen}
-                                        />
-                                    )}
-                                </Varselbjelle>
-                            </VarselinnboksProvider>
+                            {/*
+                                <VarselvisningMobil
+                                    visvarsel={this.props.visvarsel}
+                                    visningmenyClassname={menyClass.className}
+                                    togglevarselmeny={this.togglevarsel}
+                                    lukkvarselmeny={
+                                        this.props.toggleVarsel
+                                            ? this.props.toggleVarsel
+                                            : () => void 0
+                                    }
+                                    tabindex={
+                                        menuIsOpen &&
+                                        this.props.visvarsel &&
+                                        !this.state.toggleundermeny
+                                    }
+                                    clicked={this.state.toggleundermeny}
+                                    lukkmenyene={this.lukkMenyene}
+                                    menuIsOpen={menuIsOpen}
+                                />
+                            */}
                         </>
                         <MinsideLenke tabindex={this.hovedseksjonTabIndex()} />
                     </div>
-                    */}
-                    <Sok />
 
+                    <Sok />
+                    <InnloggetBruker />
                     <MenyIngress
                         className={menyClass.element('meny', 'ingress')}
                         inputext={this.props.arbeidsflate}
                     />
-                    <ul className={menyClass.element('meny', 'list')}>
+                    <ul className={menyClass.element('meny', 'mainlist')}>
                         {menyLenker.children.map(
                             (menyElement: MenySeksjon, index: number) => {
                                 return (
@@ -258,10 +256,12 @@ class MobilVisningsmeny extends React.Component<Props, State> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     arbeidsflate: state.arbeidsflate.status,
+    visvarsel: state.dropdownToggles.varsel,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     settArbeidsflate: () => dispatch(finnArbeidsflate()),
+    toggleVarsel: () => dispatch(toggleVarselVisning()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MobilVisningsmeny);

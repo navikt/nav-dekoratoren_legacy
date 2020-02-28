@@ -9,12 +9,14 @@ import {
     GACategory,
     triggerGaEvent,
 } from '../../../../../utils/google-analytics';
-import MenyIkon from '../../../../../ikoner/mobilmeny/MenyIkon';
 import { Undertittel } from 'nav-frontend-typografi';
-import Tekst from '../../../../../tekster/finn-tekst';
+import { finnTekst } from '../../../../../tekster/finn-tekst';
 import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
 import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
+import { Language } from '../../../../../reducer/language-duck';
+import BEMHelper from '../../../../../utils/bem';
+import HamburgerKnapp from '../meny-knapp/hamburger-knapp/HamburgerKnapp';
 
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
@@ -24,6 +26,18 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'mobilmeny';
+const cls = BEMHelper('hamburger-knapp');
+
+export const textTransformFirstLetterToUppercase = (
+    text: string,
+    lang: Language
+) => {
+    const txt = finnTekst(text, lang);
+    return txt
+        .charAt(0)
+        .toUpperCase()
+        .concat(txt.slice(1).toLowerCase());
+};
 
 export const HovedmenyMobil = () => {
     const dispatch = useDispatch();
@@ -43,9 +57,9 @@ export const HovedmenyMobil = () => {
             clicked={isOpen}
             classname={classname}
         >
-            <MenyIkon />
+            <HamburgerKnapp isOpen={isOpen} />
             <Undertittel>
-                <Tekst id="meny-knapp" />
+                {textTransformFirstLetterToUppercase('meny-knapp', language)}
             </Undertittel>
         </Menyknapp>
     );

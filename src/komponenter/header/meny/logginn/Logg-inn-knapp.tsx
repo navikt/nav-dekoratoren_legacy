@@ -2,51 +2,24 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../reducer/reducer';
 import KnappBase from 'nav-frontend-knapper';
-import AlertStripe from 'nav-frontend-alertstriper';
-import Lukknapp from 'nav-frontend-lukknapp';
-import Environment, {
-    erNavDekoratoren,
-    verifyWindowObj,
-} from '../../../../utils/Environment';
-import LogginnIkon from '../../../../ikoner/mobilmeny/LogginnIkon';
+import Environment, { erNavDekoratoren } from '../../../../utils/Environment';
 import Tekst from '../../../../tekster/finn-tekst';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
+import { Knapp } from 'nav-frontend-knapper';
+import { Language } from '../../../../reducer/language-duck';
+import { textTransformFirstLetterToUppercase } from '../ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 
 interface StateProps {
     erInnlogget: boolean;
+    lang: Language;
 }
 
-interface State {
-    informasjonboks: Object;
-}
-
-export class LoggInnKnapp extends React.Component<StateProps, State> {
+export class LoggInnKnapp extends React.Component<StateProps, {}> {
     constructor(props: StateProps) {
         super(props);
-        this.state = {
-            informasjonboks: <div />,
-        };
     }
-
-    lukkdialogBoks = () => {
-        this.setState({
-            informasjonboks: <div />,
-        });
-    };
-
-    informasjon = () => {
-        return (
-            <div>
-                <AlertStripe type={'advarsel'}>
-                    I localhost fungerer ikke innloggingslinjen. Og har blitt
-                    erstattet med mock-api{' '}
-                    <Lukknapp onClick={this.lukkdialogBoks} />
-                </AlertStripe>
-            </div>
-        );
-    };
 
     handleButtonClick = () => {
         const { erInnlogget } = this.props;
@@ -74,15 +47,18 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
         return (
             <div className="login-container">
                 <div className="media-sm-mobil login-mobil">
-                    <button
+                    <Knapp
+                        type="standard"
                         className="mobil-login-knapp"
                         onClick={this.handleButtonClick}
                     >
-                        <LogginnIkon />
                         <Undertittel className="knappetekst">
-                            <Tekst id={knappetekst} />
+                            {textTransformFirstLetterToUppercase(
+                                knappetekst,
+                                this.props.lang
+                            )}
                         </Undertittel>
-                    </button>
+                    </Knapp>
                 </div>
                 <div className="media-tablet-desktop login-tablet-desktop">
                     <KnappBase
@@ -99,6 +75,7 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
 }
 const mapStateToProps = (state: AppState): StateProps => ({
     erInnlogget: state.innloggingsstatus.data.authenticated,
+    lang: state.language.language,
 });
 
 export default connect(mapStateToProps)(LoggInnKnapp);
