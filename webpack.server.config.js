@@ -15,13 +15,12 @@ const browserConfig = {
         }),
     ],
     entry: {
-        server: path.resolve(__dirname, './src/server/server.tsx'),
+        server: path.resolve(__dirname, './src/server/server.ts'),
     },
     output: {
         path: path.resolve(__dirname, 'build/'),
         filename: 'server.js',
         libraryTarget: 'commonjs2',
-        publicPath: '/dekoratoren/',
     },
 
     devtool: 'source-map',
