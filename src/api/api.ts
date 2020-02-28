@@ -26,17 +26,26 @@ export interface DatalasterProps {
 }
 
 export const hentMenyPunkter = (): Promise<menypunkterData[]> =>
-    fetchToJson(`${Environment.APP_BASE_URL}/api/meny`);
+    fetchToJson(`${Environment.APP_BASE_URL}/api/meny`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+    });
 
 export const hentInnloggingsstatusFetch = (): Promise<innloggingsstatusData> =>
     fetchToJson(`${Environment.APP_BASE_URL}/api/auth`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
     });
 
 export const hentVarslerFetch = (): Promise<varselinnboksData> => {
     const tidspunkt = new Date().getTime();
     return fetchToJson(
-        `${Environment.APP_BASE_URL}/api/varsler/varsler?noCache=${tidspunkt}&limit=5`
+        `${Environment.APP_BASE_URL}/api/varsler/varsler?noCache=${tidspunkt}&limit=5`,
+        {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        }
     );
 };
 
