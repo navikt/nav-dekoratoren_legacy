@@ -22,11 +22,17 @@ const FooterBottom = ({ classname }: Props) => {
     }, []);
 
     const openModal = () => {
-        triggerGaEvent({category: GACategory.Footer, action: `bunn/del-skjerm-open`});
+        triggerGaEvent({
+            category: GACategory.Footer,
+            action: `bunn/del-skjerm-open`,
+        });
         setVisDelSkjermModal(true);
     };
     const closeModal = () => {
-        triggerGaEvent({category: GACategory.Footer, action: `bunn/del-skjerm-close`});
+        triggerGaEvent({
+            category: GACategory.Footer,
+            action: `bunn/del-skjerm-close`,
+        });
         setVisDelSkjermModal(false);
     };
 
@@ -39,7 +45,11 @@ const FooterBottom = ({ classname }: Props) => {
                             <li key={lenke.lenketekst}>
                                 <LenkeMedGA
                                     href={lenke.url}
-                                    gaEventArgs={{category: GACategory.Footer, action: `bunn/${lenke.lenketekst}`, label: lenke.url}}
+                                    gaEventArgs={{
+                                        category: GACategory.Footer,
+                                        action: `bunn/${lenke.lenketekst}`,
+                                        label: lenke.url,
+                                    }}
                                 >
                                     {lenke.lenketekst}
                                 </LenkeMedGA>
@@ -50,10 +60,7 @@ const FooterBottom = ({ classname }: Props) => {
             </div>
             <ul className="bottom-hoyre">
                 <li>
-                    <Lenke
-                        href="#"
-                        onClick={openModal}
-                    >
+                    <Lenke href="#" onClick={openModal}>
                         <Tekst id="footer-del-skjerm" />
                     </Lenke>
                     {visDelSkjermModal && (
