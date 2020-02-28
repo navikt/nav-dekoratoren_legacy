@@ -49,7 +49,7 @@ export const template = (parameters: string) => {
             />
             <meta name="theme-color" content="#000000" />
             <title>NAV Dekoratør</title>
-            <link rel="icon" type="image/x-icon" href="${baseUrl}/${fileFavicon}" />
+            <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
             <style>
             /* Decorator development styling */
             html, body {  height: 100%; }
@@ -65,11 +65,11 @@ export const template = (parameters: string) => {
             }
             </style>
             <div id="styles">
-                <link rel="icon" type="image/x-icon" href="${baseUrl}/${fileFavicon}" />
-                <link rel="icon" type="image/png" sizes="16x16" href="${baseUrl}/${fileFavicon16x16}">
-                <link rel="icon" type="image/png" sizes="32x32" href="${baseUrl}/${fileFavicon32x32}">
-                <link rel="apple-touch-icon" sizes="180x180" href="${baseUrl}/${fileAppleTouchIcon}">
-                <link rel="mask-icon" href="${baseUrl}/${fileMaskIcon}" color="#5bbad5">
+                <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
+                <link rel="icon" type="image/png" sizes="16x16" href="${baseUrl}${fileFavicon16x16}">
+                <link rel="icon" type="image/png" sizes="32x32" href="${baseUrl}${fileFavicon32x32}">
+                <link rel="apple-touch-icon" sizes="180x180" href="${baseUrl}${fileAppleTouchIcon}">
+                <link rel="mask-icon" href="${baseUrl}${fileMaskIcon}" color="#5bbad5">
                 <meta name="msapplication-TileColor" content="#ffffff">
                 <meta name="theme-color" content="#ffffff">
                 <link href=${fileCss} rel="stylesheet" />

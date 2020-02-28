@@ -18,9 +18,9 @@ const browserConfig = {
         server: path.resolve(__dirname, './src/server/server.ts'),
     },
     output: {
-        path: path.resolve(__dirname, 'build/'),
+        path: path.resolve(__dirname, 'build'),
         filename: 'server.js',
-        libraryTarget: 'commonjs2',
+        libraryTarget: 'commonjs2'
     },
 
     devtool: 'source-map',
@@ -58,7 +58,7 @@ const browserConfig = {
                         ],
                         loader: 'file-loader',
                         options: {
-                            name: './media/[name].[ext]',
+                            name: '/media/[name].[ext]',
                             emit: false,
                         },
                     },
@@ -149,7 +149,7 @@ const browserConfig = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: './css/[name].css',
+            filename: '/css/[name].css',
         }),
 
         new webpack.DefinePlugin({
