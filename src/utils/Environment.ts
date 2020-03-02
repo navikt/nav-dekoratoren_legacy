@@ -27,11 +27,13 @@ export default class Environment {
         Environment.LOGOUT_URL = result.LOGOUT_URL;
 
         // Parameters
-        Environment.LANGUAGE = result.PARAMS.LANGAUGE;
-        Environment.CONTEXT = result.PARAMS.CONTEXT;
-        Environment.STRIPPED = result.PARAMS.STRIPPED;
-        Environment.REDIRECT_TO_APP = result.PARAMS.REDIRECT_TO_APP;
-        Environment.LEVEL = result.PARAMS.LEVEL;
+        if (result.PARAMS) {
+            Environment.LANGUAGE = result.PARAMS.LANGAUGE;
+            Environment.CONTEXT = result.PARAMS.CONTEXT;
+            Environment.STRIPPED = result.PARAMS.STRIPPED;
+            Environment.REDIRECT_TO_APP = result.PARAMS.REDIRECT_TO_APP;
+            Environment.LEVEL = result.PARAMS.LEVEL;
+        }
     };
 }
 
