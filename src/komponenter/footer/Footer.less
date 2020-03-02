@@ -42,7 +42,7 @@
     }
 
     @media (min-width: @tabletLimitWidth) {
-        padding: 1.5rem 2rem 5rem;
+        padding: 1.5rem 1.5rem 5rem;
 
         &__innhold {
             width: auto;
@@ -69,23 +69,26 @@
                 align-items: center;
                 margin-bottom: 1.5rem;
 
-                .ga-til-innhold-for {
-                    margin-right: 1rem;
-                }
-
                 .arbeidsflatevalg {
                     width: 30rem;
                     display: flex;
                     align-items: center;
 
                     ul {
-                        margin-top: 0;
+                        margin: 0;
                     }
 
                     li {
                         min-width: 9rem;
                         max-width: 14rem;
                         margin-bottom: 0;
+
+                        .arbeidsflatevalg-tekst {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            line-height: 1.5625rem;
+                        }
                     }
                 }
             }
@@ -130,12 +133,14 @@
                 width: 22%;
             }
         }
+    }
 
+    @media (min-width: 1300px) {
         &__menylinje-bottom {
             .bottom-innhold .bottom-logo {
                 position: absolute;
-                left: -90px;
-                bottom: -23px;
+                left: -92px;
+                bottom: -18px;
                 margin-right: 0;
             }
         }

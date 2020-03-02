@@ -55,11 +55,8 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                         {arbeidsflatevalgLenker.map(
                             (lenke: ArbeidsflateLenke) => {
                                 return (
-                                    <li
-                                        key={lenke.tittel}
-                                        className={cls.element('liste-element')}
-                                    >
-                                        <Normaltekst>
+                                    <li key={lenke.tittel}>
+                                        <Normaltekst className="arbeidsflatevalg-tekst">
                                             <HoyreChevron />
                                             <LenkeMedGA
                                                 href={lenke.url}
