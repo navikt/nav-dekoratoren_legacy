@@ -5,7 +5,11 @@ import { Language } from '../../../reducer/language-duck';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../tekster/finn-tekst';
 import { erNavDekoratoren } from '../../../utils/Environment';
-import { getSpraaklenker, Spraaklenke, spraaklenker } from './Spraakvalg-lenker';
+import {
+    getSpraaklenker,
+    Spraaklenke,
+    spraaklenker,
+} from './Spraakvalg-lenker';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
 
@@ -62,7 +66,10 @@ class Spraakvalg extends React.Component<StateProps, State> {
                                             ? lenke.testurl
                                             : lenke.url
                                     }
-                                    gaEventArgs={{category: GACategory.Footer, action: `språkvalg/${lenke.lang}`}}
+                                    gaEventArgs={{
+                                        category: GACategory.Footer,
+                                        action: `språkvalg/${lenke.lang}`,
+                                    }}
                                 >
                                     {lenke.lenketekst}
                                 </LenkeMedGA>

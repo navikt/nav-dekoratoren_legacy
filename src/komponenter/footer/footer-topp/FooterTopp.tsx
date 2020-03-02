@@ -44,7 +44,11 @@ const FooterTopp = ({ classname }: Props) => {
                             <li key={lenke.lenketekst}>
                                 <LenkeMedGA
                                     href={lenke.url}
-                                    gaEventArgs={{category: GACategory.Footer, action: `hjelp/${lenke.lenketekst}`, label: lenke.url}}
+                                    gaEventArgs={{
+                                        category: GACategory.Footer,
+                                        action: `hjelp/${lenke.lenketekst}`,
+                                        label: lenke.url,
+                                    }}
                                 >
                                     {lenke.lenketekst}
                                 </LenkeMedGA>
@@ -69,7 +73,11 @@ const FooterTopp = ({ classname }: Props) => {
                             <li key={lenke.lenketekst}>
                                 <LenkeMedGA
                                     href={lenke.url}
-                                    gaEventArgs={{category: GACategory.Footer, action: `om-nettstedet/${lenke.lenketekst}`, label: lenke.url}}
+                                    gaEventArgs={{
+                                        category: GACategory.Footer,
+                                        action: `om-nettstedet/${lenke.lenketekst}`,
+                                        label: lenke.url,
+                                    }}
                                 >
                                     {lenke.lenketekst}
                                 </LenkeMedGA>

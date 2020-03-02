@@ -1,6 +1,7 @@
 import React from 'react';
 import { GACategory } from '../../utils/google-analytics';
 import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
+import Environment from '../../utils/Environment';
 
 const Navlogo = ({
     width,
@@ -15,7 +16,7 @@ const Navlogo = ({
 }) => {
     return (
         <LenkeMedGA
-            href="https://nav.no"
+            href={Environment.XP_BASE_URL}
             classNameOverride="nav-brand-lenke"
             tabIndex={viewIndex ? 0 : -1}
             gaEventArgs={{

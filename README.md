@@ -1,5 +1,5 @@
 
-# Nav-dekoratoren ![nav.no logo](./src/ikoner/meny/navlogo.svg) 
+# Nav-dekoratoren ![nav.no logo](./src/ikoner/meny/navlogo.svg) [![CircleCI](https://circleci.com/gh/navikt/nav-dekoratoren.svg?style=svg)](https://circleci.com/gh/navikt/nav-dekoratoren)
                      
 
 Node.js Express applikasjon med frontend-komponenter i React.<br>
@@ -15,8 +15,11 @@ Installer nødvendige avhengigheter
 ```
 npm install
 ```
+Start eksterne tjenester som oidc-provider og mocks
+```
+docker-compose up -d
+```
 Kjør applikasjonen lokalt med hot-reloading
-
 ```
 npm start
 ```
@@ -36,11 +39,11 @@ Dekoratøren ligger i  [Q6](https://www-q6.nav.no/dekoratoren/), [Q1](https://ww
 ## Parametere
 Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
 
-| Parameter         | Type                                                    | Default            | Forklaring                                                          |
-| ----------------- |---------------------------------------------------------|--------------------| --------------------------------------------------------------------|
-| context           | privatperson \|<br>arbeidsgiver \|<br>samarbeidspartner | privatperson       | Setter menyen til valgt context                                     |
-| redirectToApp     | boolean                                                 | false (ditt-nav)   | Redirecter brukeren til app <br>etter innlogging fra dekoratøren.   |
-| level             | Level3 \| Level4                                        | Level4             | Krever innlogging basert på <br>definert sikkerhetsnivå             |
+| Parameter         | Type                                                    | Default              | Forklaring                                                          |
+| ----------------- |---------------------------------------------------------|----------------------| --------------------------------------------------------------------|
+| context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til valgt context                                     |
+| redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Redirecter brukeren til app etter innlogging fra dekoratøren.       |
+| level             | Level3 \| Level4                                        | Level4               | Krever innlogging basert på definert sikkerhetsnivå                 |
 
 Eksempel:<br>
 [https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3](https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3)
@@ -110,6 +113,32 @@ Appen blir serverside-rendret. Derfor anbefales det å bruke en .js fil til å f
       header-withmenu   (header mounting point)
       footer-withmenu   (footer mounting point)
       scripts           (inneholder javascript)
+
+## Oppstart via docker-compose
+
+Start **navikt/nav-dekoratoren**, **navikt/pb-nav-mocked**, **navikt/stub-oidc-provider** og **navikt/pb-oidc-provider-gui**. Oppsettet vil replikere innlogging og eksterne avhengigheter som varselinnboks.
+```
+dekoratoren:
+    container_name: dekoratoren
+    image: "navikt/nav-dekoratoren:latest"
+    ports:
+      - "8100:8088"
+    environment:
+      XP_BASE_URL: 'https://www-q1.nav.no'
+      APP_BASE_URL: "http://localhost:8100/dekoratoren"
+      API_XP_MENY_URL: 'https://www-q1.nav.no/_/service/no.nav.navno/menu'
+      API_XP_SOK_URL: 'https://www-q1.nav.no/_/service/navno.nav.no.search/search2/sok'
+      API_INNLOGGINGSLINJE_URL: 'http://mocks:8080/innloggingslinje-api/auth'
+      API_VARSELINNBOKS_URL: 'http://mocks:8080/person/varselinnboks'
+      MINSIDE_ARBEIDSGIVER_URL: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/'
+      DITT_NAV_URL: 'https:/www.nav.no/person/dittnav/'
+      LOGIN_URL: 'http://localhost:5000'
+      LOGOUT_URL: 'http://localhost:5000/?logout'
+    depends_on:
+      - mocks
+```
+[Eksempel i Enonic XP](https://github.com/navikt/nav-enonicxp/blob/IV-843-decorator/docker-compose.yml).
+
 
 ## Henvendelser
 

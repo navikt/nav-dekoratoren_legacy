@@ -61,7 +61,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     handleValueChange(input: string) {
-        const url = Environment.BACKEND_SOK_URL;
+        const url = `${Environment.APP_BASE_URL}/api/sok`;
 
         if (this.ismounted) {
             this.setState({
@@ -207,7 +207,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     render() {
         const { selectedInput, items } = this.state;
         const { language } = this.props;
-        const URL = `${Environment.BASE_URL_ENONIC}/sok?ord=${selectedInput}`;
+        const URL = `${Environment.APP_BASE_URL}/api/sok?ord=${selectedInput}`;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
         });
