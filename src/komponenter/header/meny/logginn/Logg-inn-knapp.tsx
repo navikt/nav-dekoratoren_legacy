@@ -6,7 +6,6 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
 import Environment, {
     erNavDekoratoren,
-    verifyWindowObj,
 } from '../../../../utils/Environment';
 import LogginnIkon from '../../../../ikoner/mobilmeny/LogginnIkon';
 import Tekst from '../../../../tekster/finn-tekst';
@@ -97,6 +96,7 @@ export class LoggInnKnapp extends React.Component<StateProps, State> {
         );
     }
 }
+
 const mapStateToProps = (state: AppState): StateProps => ({
     erInnlogget: state.innloggingsstatus.data.authenticated,
 });

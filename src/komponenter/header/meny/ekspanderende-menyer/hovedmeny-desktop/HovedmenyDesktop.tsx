@@ -14,12 +14,11 @@ import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
 import HamburgerIkon from '../../meny-knapper/hamburger-ikon/HamburgerIkon';
-import BEMHelper from '../../../../../utils/bem';
 import MenylinjeKnapp from '../../meny-knapper/MenylinjeKnapp';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
-    meny: state.menypunkt,
+    menyPunkter: state.menypunkt,
     language: state.language.language,
     isOpen: state.dropdownToggles.hovedmeny,
 });
@@ -28,7 +27,7 @@ const classname = 'desktop-hovedmeny';
 export const hovedmenyDesktopClassname = classname;
 
 export const HovedmenyDesktop = () => {
-    const { arbeidsflate, meny, language, isOpen } = useSelector(stateSelector);
+    const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(stateSelector);
     const dispatch = useDispatch();
 
     const toggleMenu = () => {
@@ -53,19 +52,6 @@ export const HovedmenyDesktop = () => {
         </MenylinjeKnapp>
     );
 
-    const dropdownInnhold =
-        meny.status === Status.OK ? (
-            <HovedmenyDropdown
-                classname={classname}
-                arbeidsflate={arbeidsflate}
-                language={language}
-                menyLenker={getMenuNode(meny.data, language, arbeidsflate)}
-                isOpen={isOpen}
-            />
-        ) : (
-            <MenySpinner />
-        );
-
     return (
         <EkspanderbarMeny
             isOpen={isOpen}
@@ -73,7 +59,15 @@ export const HovedmenyDesktop = () => {
             classname={'desktop-dropdown'}
             id={classname}
         >
-            {dropdownInnhold}
+            {menyPunkter.status === Status.OK ? (
+                <HovedmenyDropdown
+                    classname={classname}
+                    arbeidsflate={arbeidsflate}
+                    language={language}
+                    menyLenker={getMenuNode(menyPunkter.data, language, arbeidsflate)}
+                    isOpen={isOpen}
+                />
+            ) : <MenySpinner />}
         </EkspanderbarMeny>
     );
 };

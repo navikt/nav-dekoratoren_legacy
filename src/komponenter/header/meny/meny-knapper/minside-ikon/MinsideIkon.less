@@ -1,0 +1,62 @@
+@import (reference) '~nav-frontend-core/less/core';
+
+.minside-meny-ikon {
+    @width: 32px;
+    @height: 32px;
+    @stroke-width: 1px;
+    @color: @navBla;
+    @hode-diameter: 12px;
+    @kropp-radius: @hode-diameter;
+    @kropp-slimness: 4px;
+
+    &__container {
+        position: relative;
+        width: @width;
+        height: @height;
+        padding: 0;
+        top: 2px;
+        margin-right: 0.25em;
+
+        .hamburger-ikon__container {
+            right: @kropp-radius;
+            top: 2px;
+            transform-origin: center;
+            transform: scale(0.75);
+        }
+    }
+
+    &__circle-hode {
+        border-radius: 50%;
+        border: @color @stroke-width solid;
+        height: @hode-diameter;
+        width: @hode-diameter;
+        position: absolute;
+        top: 0;
+        right: @kropp-radius - (@hode-diameter + @kropp-slimness)/2;
+        background-color: white;
+
+        transition: all 0.35s ease-in-out;
+
+        &--open {
+        }
+    }
+
+    &__circle-kropp {
+        border-top-left-radius: @kropp-radius + @stroke-width;
+        border-top-right-radius: @kropp-radius + @stroke-width;
+        border: @color @stroke-width solid;
+        height: @kropp-radius;
+        width: @kropp-radius * 2 - @kropp-slimness;
+        position: absolute;
+        top: @hode-diameter;
+        right: 0;
+        background-color: white;
+        border-bottom: 0;
+
+        transition: all 0.35s ease-in-out;
+
+        &--open {
+
+        }
+    }
+}

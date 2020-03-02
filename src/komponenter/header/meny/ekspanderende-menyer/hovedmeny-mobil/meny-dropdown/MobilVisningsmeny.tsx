@@ -12,7 +12,7 @@ import MobilarbeidsflateValg from '../../../../arbeidsflatemeny/Mobilarbeidsflat
 import VarselinnboksProvider from '../../../../../../provider/Varselinnboks-provider';
 import Varselbjelle from '../../../varsel/Varselbjelle';
 import VarselvisningMobil from '../../../varsel/varselvisning/VarselvisningMobil';
-import MinsideLenke from '../../../minside-lenke/MinsideLenke';
+import MinsideLenke from '../../minside-meny-desktop/MinsideMenyDesktop';
 import './MobilVisningsmeny.less';
 
 interface VisningsmenyProps {

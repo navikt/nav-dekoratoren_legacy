@@ -49,6 +49,16 @@ export const getLanguageNode = (
         SAMISK: nodeMenu.find(n => n.path === '/se'),
     }[lang]);
 
+export const getMinsideMenuNode = (
+    menypunkter: MenyNode[],
+    language: Language,
+): MenyNode | undefined => {
+    const languageNode = getLanguageNode(language, menypunkter);
+    return languageNode && language === Language.NORSK
+        ? findNode(languageNode, 'My page menu')
+        : undefined;
+};
+
 const findNode = (
     node: MenyNode,
     displayName: string

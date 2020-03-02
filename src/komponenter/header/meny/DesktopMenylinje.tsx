@@ -4,8 +4,7 @@ import { Language } from '../../../reducer/language-duck';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import Sok from './sok/Sok';
-import MinsideLenke from './minside-lenke/MinsideLenke';
+import MinsideLenke from './ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import Varselbjelle from './varsel/Varselbjelle';
 import VarselVisning from './varsel/varselvisning/Varselvisning';
@@ -44,7 +43,7 @@ const DesktopMenylinje = ({ language }: Props) => {
                                     }
                                 </Varselbjelle>
                             </VarselinnboksProvider>
-                            <MinsideLenke tabindex={true} />
+                            <MinsideLenke />
                             <LoggInnKnapp />
                         </>
                     </InnloggingsstatusProvider>

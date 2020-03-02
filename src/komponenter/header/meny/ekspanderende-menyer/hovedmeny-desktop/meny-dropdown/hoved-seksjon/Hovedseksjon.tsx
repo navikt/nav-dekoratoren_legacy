@@ -1,10 +1,10 @@
-import { MenySeksjon } from '../../../../../../../reducer/menu-duck';
+import { MenyNode } from '../../../../../../../reducer/menu-duck';
 import { HovedseksjonTema } from './HovedseksjonTema';
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
 
 interface Props {
-    menyLenker: MenySeksjon;
+    menyLenker: MenyNode;
     classname: string;
     isOpen: boolean;
 }
