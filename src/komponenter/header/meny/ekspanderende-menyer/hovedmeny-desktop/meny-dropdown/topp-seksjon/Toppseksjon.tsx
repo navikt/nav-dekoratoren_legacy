@@ -31,7 +31,7 @@ export const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
                 gaEventArgs={{
                 category: GACategory.Header,
                 action: 'forside',
-                label: Environment.BASE_URL,
+                label: Environment.XP_BASE_URL,
             }}
             >
                 <Tekst id={'til-forside'} />
