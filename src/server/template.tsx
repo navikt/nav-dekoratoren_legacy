@@ -10,7 +10,7 @@ import dotenv from 'dotenv';
 const env = dotenv.config();
 
 // Set server-side environment
-Environment.settEnv(env.parsed);
+Environment.settEnv(env.parsed || process.env);
 
 // Favicons
 const fileFavicon = require('../../src/ikoner/favicon/favicon.ico');
