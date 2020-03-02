@@ -5,8 +5,12 @@ import LanguageProvider from '../provider/Language-provider';
 import Header from '../komponenter/header/Header';
 import Footer from '../komponenter/footer/Footer';
 import getStore from '../redux/store';
+import Environment from '../utils/Environment';
 import dotenv from 'dotenv';
-dotenv.config();
+const env = dotenv.config();
+
+// Set server-side environment
+Environment.settEnv(env.parsed);
 
 // Favicons
 const fileFavicon = require('../../src/ikoner/favicon/favicon.ico');
