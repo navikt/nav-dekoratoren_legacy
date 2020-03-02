@@ -2,6 +2,7 @@ import React from 'react';
 import Tekst from '../../tekster/finn-tekst';
 import { GACategory } from '../../utils/google-analytics';
 import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
+import Environment from '../../utils/Environment';
 import './NavLogoFooter.less';
 
 const NavLogoRod = ({
@@ -17,7 +18,7 @@ const NavLogoRod = ({
         <div className="sitefooter__logo">
             <LenkeMedGA
                 classNameOverride="navbar-brand"
-                href="https://nav.no"
+                href={Environment.XP_BASE_URL}
                 gaEventArgs={{ category: GACategory.Footer, action: 'navlogo' }}
             >
                 <svg
