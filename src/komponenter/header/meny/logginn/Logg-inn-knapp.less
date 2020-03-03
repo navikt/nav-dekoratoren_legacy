@@ -35,12 +35,22 @@
     }
 }
 
+@media (min-width: @tabletLimitWidth) {
+    .login-container .login-knapp {
+        margin-right: 1.5rem;
+    }
+}
+
 @media (min-width: @desktopLimitWidth) {
     .login-container {
         margin-left: 3px;
 
         &:hover {
             outline: 0;
+        }
+
+        .login-knapp {
+            margin-right: 0;
         }
     }
 }

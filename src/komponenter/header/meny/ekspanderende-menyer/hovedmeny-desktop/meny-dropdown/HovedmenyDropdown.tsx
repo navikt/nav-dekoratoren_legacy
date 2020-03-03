@@ -69,9 +69,7 @@ export const HovedmenyDropdown = (props: Props) => {
     const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
     const kbRootIndex = { col: 0, row: 0, sub: 0 };
     const kbIdMap = {
-        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element(
-            'decorator-meny-toggleknapp'
-        ),
+        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element('menyknapp')
     };
 
     useEffect(() => {
@@ -146,11 +144,13 @@ export const HovedmenyDropdown = (props: Props) => {
     return (
         <div className={cls.element('dropdown')}>
             <Toppseksjon classname={classname} arbeidsflate={arbeidsflate} />
-            <Hovedseksjon
-                menyLenker={menyLenker}
-                classname={classname}
-                isOpen={isOpen}
-            />
+            {menyLenker &&
+                <Hovedseksjon
+                    menyLenker={menyLenker}
+                    classname={classname}
+                    isOpen={isOpen}
+                />
+            }
             <Bunnseksjon
                 classname={classname}
                 language={language}
