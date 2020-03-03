@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
@@ -13,7 +13,6 @@ import { oppdaterSessionStorage } from '../../../utils/meny-storage-utils';
 import {
     ArbeidsflateLenke,
     arbeidsflateLenker,
-    getArbeidsflatelenker,
 } from '../../header/arbeidsflatemeny/arbeidsflate-lenker';
 
 interface Props {
@@ -30,13 +29,7 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
 
     const dispatch = useDispatch();
     const { arbeidsflate, language } = useSelector(stateSelector);
-    const [arbeidsflatevalgLenker, setArbeidsflatevalgLenker] = useState<
-        ArbeidsflateLenke[]
-    >([arbeidsflateLenker[1], arbeidsflateLenker[2]]);
-
-    useEffect(() => {
-        setArbeidsflatevalgLenker(getArbeidsflatelenker(arbeidsflate));
-    }, [arbeidsflate]);
+    const arbeidsflatevalgLenker = arbeidsflateLenker.filter(lenke => lenke.key !== arbeidsflate);
 
     return (
         <section className={cls.element('menylinje-arbeidsflatevalg')}>
@@ -55,7 +48,7 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                         {arbeidsflatevalgLenker.map(
                             (lenke: ArbeidsflateLenke) => {
                                 return (
-                                    <li key={lenke.tittel}>
+                                    <li key={lenke.tittelId}>
                                         <Normaltekst className="arbeidsflatevalg-tekst">
                                             <HoyreChevron />
                                             <LenkeMedGA
@@ -74,7 +67,7 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                                     action: 'arbeidsflate-valg',
                                                 }}
                                             >
-                                                {lenke.tittel}
+                                                <Tekst id={lenke.tittelId} />
                                             </LenkeMedGA>
                                         </Normaltekst>
                                     </li>
