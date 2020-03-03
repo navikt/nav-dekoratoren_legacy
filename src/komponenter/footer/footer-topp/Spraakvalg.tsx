@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
-import { connect } from 'react-redux';
-import { Language } from '../../../reducer/language-duck';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
+import { GACategory } from '../../../utils/google-analytics';
+import { LenkeMedGA } from '../../LenkeMedGA';
 import Tekst from '../../../tekster/finn-tekst';
 import { erNavDekoratoren } from '../../../utils/Environment';
 import {
@@ -10,59 +12,34 @@ import {
     Spraaklenke,
     spraaklenker,
 } from './Spraakvalg-lenker';
-import { GACategory } from '../../../utils/google-analytics';
-import { LenkeMedGA } from '../../LenkeMedGA';
 
-interface StateProps {
-    language: Language;
-}
+const Spraakvalg = () => {
+    const language = useSelector((state: AppState) => state.language.language);
+    const [erDekoratoren, setErDekoratoren] = useState<boolean>(false);
+    const [spraklenker, setSpraklenker] = useState<Spraaklenke[]>([
+        spraaklenker[1],
+        spraaklenker[2],
+    ]);
 
-interface State {
-    hasMounted: boolean;
-    erNavDekoratoren: boolean;
-    spraaklenker: Spraaklenke[];
-}
+    useEffect(() => {
+        setErDekoratoren(erNavDekoratoren());
+        setSpraklenker(getSpraaklenker(language));
+    }, []);
 
-class Spraakvalg extends React.Component<StateProps, State> {
-    constructor(props: StateProps) {
-        super(props);
-
-        this.state = {
-            hasMounted: false,
-            erNavDekoratoren: false,
-            spraaklenker: [spraaklenker[1], spraaklenker[2]],
-        };
-    }
-
-    componentDidMount(): void {
-        this.setState(
-            {
-                hasMounted: true,
-            },
-            () => {
-                if (this.state.hasMounted) {
-                    this.setState({
-                        erNavDekoratoren: erNavDekoratoren(),
-                        spraaklenker: getSpraaklenker(this.props.language),
-                    });
-                }
-            }
-        );
-    }
-
-    render() {
-        return (
-            <>
-                <Undertittel className="blokk-xxs">
-                    <Tekst id="footer-languages-overskrift" />
-                </Undertittel>
-                <ul>
-                    {this.state.spraaklenker.map(lenke => {
-                        return (
-                            <li key={lenke.lang}>
+    return (
+        <>
+            <Undertittel className="blokk-xxs" id="spraaklenker-overskrift">
+                <Tekst id="footer-languages-overskrift" />
+            </Undertittel>
+            <ul aria-labelledby="spraaklenker-overskrift">
+                {spraklenker.map(lenke => {
+                    return (
+                        <li key={lenke.lang}>
+                            <Normaltekst>
+                                <HoyreChevron />
                                 <LenkeMedGA
                                     href={
-                                        this.state.erNavDekoratoren
+                                        erDekoratoren
                                             ? lenke.testurl
                                             : lenke.url
                                     }
@@ -73,16 +50,13 @@ class Spraakvalg extends React.Component<StateProps, State> {
                                 >
                                     {lenke.lenketekst}
                                 </LenkeMedGA>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </>
-        );
-    }
-}
-const mapStateToProps = (state: AppState): StateProps => ({
-    language: state.language.language,
-});
+                            </Normaltekst>
+                        </li>
+                    );
+                })}
+            </ul>
+        </>
+    );
+};
 
-export default connect(mapStateToProps)(Spraakvalg);
+export default Spraakvalg;

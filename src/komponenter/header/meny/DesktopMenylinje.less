@@ -23,6 +23,7 @@
     &__nav-brand {
         order: 1;
         width: auto;
+        margin-left: 1.5rem;
 
         &:focus {
             outline: 3px solid @fokusFarge;
@@ -63,6 +64,10 @@
     @media (min-width: @desktopLimitWidth) {
         &__content {
             width: @desktopLimitWidth;
+        }
+
+        &__nav-brand {
+            margin-left: 0;
         }
 
         .minsidelenke-varselbjelle {

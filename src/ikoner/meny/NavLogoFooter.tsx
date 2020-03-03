@@ -1,9 +1,9 @@
 import React from 'react';
 import Tekst from '../../tekster/finn-tekst';
-import './NavLogoFooter.less';
 import { GACategory } from '../../utils/google-analytics';
 import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
 import Environment from '../../utils/Environment';
+import './NavLogoFooter.less';
 
 const NavLogoRod = ({
     width,
@@ -53,16 +53,16 @@ const NavLogoRod = ({
                                     d="M125.3091,168.942 C78.6681,168.942 40.8491,131.125 40.8491,84.477 C40.8491,37.824 78.6681,0 125.3091,0 C171.9671,0
                                     209.7901,37.824 209.7901,84.477 C209.7901,131.125 171.9671,168.942 125.3091,168.942 Z"
                                     id="Fill-1"
-                                    fill="#C30000"
+                                    fill="#000000"
                                 />
                                 <polygon
                                     id="Fill-3"
-                                    fill="#C30000"
+                                    fill="#000000"
                                     points="0 121.3588 17.265 78.6298 33.854 78.6298 16.611 121.3588"
                                 />
                                 <polygon
                                     id="Fill-5"
-                                    fill="#C30000"
+                                    fill="#000000"
                                     points="213.044 121.3588 230.088 78.6298 239.132 78.6298 222.089 121.3588"
                                 />
                                 <g
@@ -75,7 +75,7 @@ const NavLogoRod = ({
                                     <g id="Clip-8" />
                                     <polygon
                                         id="Fill-7"
-                                        fill="#C30000"
+                                        fill="#000000"
                                         mask="url(#mask-2)"
                                         points="0.5635 43.4168 17.6045 0.6878 22.4075 0.6878 5.3645 43.4168"
                                     />
