@@ -1,54 +1,43 @@
 import React from 'react';
-// import { mount } from 'enzyme';
-// import { MenuValue } from '../../../../../utils/meny-storage-utils';
-// import { MinsideMenyDesktop } from './MinsideMenyDesktop';
+import { mount } from 'enzyme';
+import { MinsideMenyDesktop } from './MinsideMenyDesktop';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { reducer } from '../../../../../reducer/reducer';
+import { settPersonflate } from '../../../../../reducer/arbeidsflate-duck';
 
-// TODO: oppdater
-// const mountWithProps = (erInnlogget: boolean, arbeidsflate: MenuValue) => {
-//     return mount(
-//         <MinsideMeny
-//             erInnlogget={erInnlogget}
-//             arbeidsflate={arbeidsflate}
-//             tabindex={true}
-//         />
-//     );
-// };
-//
-// describe('<MinsideLenke>', () => {
-//     it('Skal rendre minside-container (.minside-lenke)', () => {
-//         const wrapper = mountWithProps(true, MenuValue.PRIVATPERSON);
-//         expect(wrapper.find('div.minside-lenke')).toHaveLength(1);
-//     });
-//
-//     it('Skal ikke vise minsidelenke når bruker er PRIVATPERSON og uinnlogget', () => {
-//         const wrapper = mountWithProps(false, MenuValue.PRIVATPERSON);
-//         expect(wrapper.find('.lenke')).toHaveLength(0);
-//     });
-//
-//     it('Skal vise minsidelenke når bruker er PRIVATPERSON og innlogget', () => {
-//         const wrapper = mountWithProps(true, MenuValue.PRIVATPERSON);
-//         expect(wrapper.find('.lenke')).toHaveLength(1);
-//     });
-//
-//     it('Skal ikke vise minsidelenke når bruker er SAMARBEIDSPARTNER og innlogget', () => {
-//         const wrapper = mountWithProps(true, MenuValue.SAMARBEIDSPARTNER);
-//         expect(wrapper.find('.lenke')).toHaveLength(0);
-//     });
-//
-//     it('Skal vise riktig tekst på lenke når bruker er PRIVATPERSON', () => {
-//         const wrapper = mountWithProps(true, MenuValue.PRIVATPERSON);
-//         expect(wrapper.find('.lenke').text()).toEqual('Gå til min side');
-//     });
-//
-//     it('Skal vise riktig tekst på lenke når bruker er ARBEIDSIVER', () => {
-//         const wrapper = mountWithProps(true, MenuValue.ARBEIDSGIVER);
-//         expect(wrapper.find('.lenke').text()).toEqual(
-//             'Gå til min side arbeidsgiver'
-//         );
-//     });
-//
-//     it('Skal vise riktig tabindex', () => {
-//         const wrapper = mountWithProps(true, MenuValue.ARBEIDSGIVER);
-//         expect(wrapper.find('a[tabindex="0"]')).toBeTruthy();
-//     });
-// });
+const store = createStore(reducer);
+
+const mountWithRedux = () => {
+    return mount(
+        <Provider store={store}>
+            <MinsideMenyDesktop />
+        </Provider>
+    );
+};
+
+// TODO: lage nye passende tester for denne komponenten
+describe('<MinsideMenyDesktop>', () => {
+    it('Skal ikke vise minsidelenke når bruker er PRIVATPERSON og uinnlogget', () => {
+        store.dispatch(settPersonflate());
+        const wrapper = mountWithRedux();
+        expect(wrapper.find('#desktop-minside-meny__knapp')).toHaveLength(0);
+    });
+
+    // it('Skal vise minsidelenke når bruker er PRIVATPERSON og innlogget', () => {
+    //     store.dispatch(settPersonflate());
+    //     store.dispatch();
+    //     const wrapper = mountWithRedux();
+    //     expect(wrapper.find('#desktop-minside-meny__knapp')).toHaveLength(1);
+    // });
+    //
+    // it('Skal ikke vise minsidelenke når bruker er SAMARBEIDSPARTNER og innlogget', () => {
+    //     const wrapper = mountWithRedux(true, MenuValue.SAMARBEIDSPARTNER);
+    //     expect(wrapper.find('.lenke')).toHaveLength(0);
+    // });
+
+    // it('Skal vise riktig tabindex', () => {
+    //     const wrapper = mountWithRedux(true, MenuValue.ARBEIDSGIVER);
+    //     expect(wrapper.find('a[tabindex="0"]')).toBeTruthy();
+    // });
+});
