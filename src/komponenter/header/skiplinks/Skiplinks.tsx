@@ -25,13 +25,13 @@ const Skiplinks = () => {
     const setSkiplinks = (isMobile: boolean) => {
         const idHovedmenyLink = BEMHelper(
             isMobile ? hovedmenyMobilClassname : hovedmenyDesktopClassname
-        ).element('menyknapp');
+        ).element('knapp');
         setHovedmenylink(`#${idHovedmenyLink}`);
 
         // TODO: oppdater for ny søk-knapp/dropdown funksjonalitet
         const idSokLink = isMobile
             ? 'mobil-decorator-sok-toggle'
-            : 'desktop-decorator-sok-input';
+            : 'desktop-sok-dropdown__knapp';
         setSoklink(`#${idSokLink}`);
     };
 
