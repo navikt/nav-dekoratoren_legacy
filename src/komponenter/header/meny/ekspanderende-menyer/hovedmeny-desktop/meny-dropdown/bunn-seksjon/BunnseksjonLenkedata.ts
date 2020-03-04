@@ -3,8 +3,9 @@ import {
     oppdaterSessionStorage,
 } from '../../../../../../../utils/meny-storage-utils';
 import React from 'react';
+import Environment from '../../../../../../../utils/Environment';
 
-interface LenkeData {
+type LenkeData = {
     url: string;
     lenkeTekstId: string;
     stikkordId: string;
@@ -12,7 +13,7 @@ interface LenkeData {
 }
 
 export type OnArbeidsFlateClick = (
-    settArbeidsflateFunc: () => void
+    settArbeidsflateFunc: () => void,
 ) => (event: React.MouseEvent<HTMLAnchorElement>) => void;
 
 const pathPersonFlate = '/dekoratoren/person/';
@@ -21,77 +22,65 @@ const samarbeidspartnerFlate = '/dekoratoren/samarbeidspartner/';
 
 const onArbeidsflateClick = (
     url: string,
-    arbeidsflate: MenuValue
+    arbeidsflate: MenuValue,
 ): OnArbeidsFlateClick => (settArbeidsflate: () => void) => (
-    event: React.MouseEvent<HTMLAnchorElement>
+    event: React.MouseEvent<HTMLAnchorElement>,
 ) => {
     event.preventDefault();
     oppdaterSessionStorage(arbeidsflate);
     settArbeidsflate();
 };
 
-const privatpersonLenker: LenkeData[] = [
+const personContextLenke = {
+    url: pathPersonFlate,
+    lenkeTekstId: 'rolle-privatperson',
+    stikkordId: 'meny-bunnlenke-minside-stikkord',
+    onClick: onArbeidsflateClick(pathPersonFlate, MenuValue.PRIVATPERSON),
+};
+
+const arbeidsgiverContextLenke = {
+    url: pathBedriftFlate,
+    lenkeTekstId: 'rolle-arbeidsgiver',
+    stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
+    onClick: onArbeidsflateClick(pathBedriftFlate, MenuValue.ARBEIDSGIVER),
+};
+
+const samarbeidspartnerContextLenke = {
+    url: samarbeidspartnerFlate,
+    lenkeTekstId: 'rolle-samarbeidspartner',
+    stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
+    onClick: onArbeidsflateClick(
+        samarbeidspartnerFlate,
+        MenuValue.SAMARBEIDSPARTNER,
+    ),
+};
+
+const privatpersonLenker = (): LenkeData[] => [
     {
-        url: 'https://www.nav.no/person/dittnav',
+        url: Environment.DITT_NAV_URL,
         lenkeTekstId: 'person-minside-lenke',
         stikkordId: 'meny-bunnlenke-minside-stikkord',
     },
-    {
-        url: pathBedriftFlate,
-        lenkeTekstId: 'rolle-arbeidsgiver',
-        stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
-        onClick: onArbeidsflateClick(pathBedriftFlate, MenuValue.ARBEIDSGIVER),
-    },
-    {
-        url: samarbeidspartnerFlate,
-        lenkeTekstId: 'rolle-samarbeidspartner',
-        stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
-        onClick: onArbeidsflateClick(
-            samarbeidspartnerFlate,
-            MenuValue.SAMARBEIDSPARTNER
-        ),
-    },
+    arbeidsgiverContextLenke,
+    samarbeidspartnerContextLenke
 ];
 
-const arbeidsgiverLenker: LenkeData[] = [
+const arbeidsgiverLenker = (): LenkeData[] => [
     {
-        url: 'https://arbeidsgiver.nav.no/min-side-arbeidsgiver/',
+        url: Environment.MINSIDE_ARBEIDSGIVER_URL,
         lenkeTekstId: 'arbeidsgiver-minside-lenke',
         stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
     },
-    {
-        url: pathPersonFlate,
-        lenkeTekstId: 'rolle-privatperson',
-        stikkordId: 'meny-bunnlenke-minside-stikkord',
-        onClick: onArbeidsflateClick(pathPersonFlate, MenuValue.PRIVATPERSON),
-    },
-    {
-        url: samarbeidspartnerFlate,
-        lenkeTekstId: 'rolle-samarbeidspartner',
-        stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
-        onClick: onArbeidsflateClick(
-            samarbeidspartnerFlate,
-            MenuValue.SAMARBEIDSPARTNER
-        ),
-    },
+    personContextLenke,
+    samarbeidspartnerContextLenke
 ];
 
-const samarbeidspartnerLenker: LenkeData[] = [
-    {
-        url: pathPersonFlate,
-        lenkeTekstId: 'rolle-privatperson',
-        stikkordId: 'meny-bunnlenke-minside-stikkord',
-        onClick: onArbeidsflateClick(pathPersonFlate, MenuValue.PRIVATPERSON),
-    },
-    {
-        url: pathBedriftFlate,
-        lenkeTekstId: 'rolle-arbeidsgiver',
-        stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
-        onClick: onArbeidsflateClick(pathBedriftFlate, MenuValue.ARBEIDSGIVER),
-    },
+const samarbeidspartnerLenker = (): LenkeData[] => [
+    personContextLenke,
+    arbeidsgiverContextLenke
 ];
 
-const ikkeValgtLenker: LenkeData[] = [];
+const ikkeValgtLenker = (): LenkeData[] => [];
 
 export const bunnLenker = {
     [MenuValue.PRIVATPERSON]: privatpersonLenker,
