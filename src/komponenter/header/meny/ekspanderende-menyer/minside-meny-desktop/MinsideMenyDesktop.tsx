@@ -1,87 +1,62 @@
 import React from 'react';
 import { AppState } from '../../../../../reducer/reducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMinsideMenuNode, MenuValue } from '../../../../../utils/meny-storage-utils';
+import { MenuValue } from '../../../../../utils/meny-storage-utils';
 import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
 import { toggleMinsideMeny } from '../../../../../reducer/dropdown-toggle-duck';
-import MenylinjeKnapp from '../../meny-knapper/MenylinjeKnapp';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import Tekst from '../../../../../tekster/finn-tekst';
-import MinsideIkon from '../../meny-knapper/minside-ikon/MinsideIkon';
 import { Status } from '../../../../../api/api';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
 import MinsideDropdown from './minside-dropdown/MinsideDropdown';
-import BEMHelper from '../../../../../utils/bem';
 import './MinsideMenyDesktop.less';
+import { getMinsideMenyPunkter } from './minside-dropdown/minside-lenker';
+import MinsidePersonKnapp from '../../meny-knapper/minside-knapp/MinsidePersonKnapp';
+import Environment from '../../../../../utils/Environment';
+import MinsideArbgiverKnapp from '../../meny-knapper/minside-knapp/MinsideArbgiverKnapp';
 
 const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,
     arbeidsflate: state.arbeidsflate.status,
     isOpen: state.dropdownToggles.minside,
-    language: state.language.language,
-    menyPunkter: state.menypunkt,
+    // menyPunkter: state.menypunkt,
 });
 
 const classname = 'desktop-minside-meny';
 
 export const MinsideMenyDesktop = () => {
-    const { arbeidsflate, innloggetStatus, isOpen, language, menyPunkter } = useSelector(stateSelector);
+    const { arbeidsflate, innloggetStatus, isOpen } = useSelector(stateSelector);
     const dispatch = useDispatch();
 
-    if (!innloggetStatus.authenticated || arbeidsflate === MenuValue.SAMARBEIDSPARTNER) {
+    if (!innloggetStatus.authenticated
+        || arbeidsflate === MenuValue.SAMARBEIDSPARTNER
+        || arbeidsflate === MenuValue.IKKEVALGT) {
         return null;
     }
 
-    const cls = BEMHelper(classname);
+    if (arbeidsflate === MenuValue.ARBEIDSGIVER) {
+        return (
+            <MinsideArbgiverKnapp
+                classname={classname}
+                href={Environment.MINSIDE_ARBEIDSGIVER_URL}
+            />);
+    }
 
-    const toggleMenu = () => {
-        triggerGaEvent({
-            category: GACategory.Header,
-            action: `minside-meny-${isOpen ? 'close' : 'open'}`,
-        });
-        dispatch(toggleMinsideMeny());
-    };
-
-    const knappTekst =
-        arbeidsflate === MenuValue.IKKEVALGT ||
-        arbeidsflate === MenuValue.PRIVATPERSON
-            ? <Tekst id={'person-minside-lenke'} />
-            : arbeidsflate === MenuValue.ARBEIDSGIVER
-            ? <Tekst id={'arbeidsgiver-minside-lenke'} />
-            : '';
-
-    // const lenkeurl =
-    //     arbeidsflate === MenuValue.IKKEVALGT ||
-    //     arbeidsflate === MenuValue.PRIVATPERSON
-    //         ? Environment.DITT_NAV_URL
-    //         : arbeidsflate === MenuValue.ARBEIDSGIVER
-    //         ? Environment.MINSIDE_ARBEIDSGIVER_URL
-    //         : '';
+    const menyPunkter = getMinsideMenyPunkter();
 
     const knapp = (
-        <MenylinjeKnapp
-            toggleMenu={toggleMenu}
+        <MinsidePersonKnapp
+            toggleMenu={() => {
+                triggerGaEvent({
+                    category: GACategory.Header,
+                    action: `minside-meny-${isOpen ? 'close' : 'open'}`,
+                });
+                dispatch(toggleMinsideMeny());
+            }}
             isOpen={isOpen}
-            parentClassname={classname}
+            classname={classname}
             ariaLabel={'Min side menyknapp'}
-        >
-            <MinsideIkon isOpen={isOpen} />
-            <div className={cls.element('knapp-tekst')}>
-                <Normaltekst className={cls.element('knapp-tekst-topp')}>
-                    {knappTekst}
-                </Normaltekst>
-                {
-                    arbeidsflate === MenuValue.PRIVATPERSON &&
-                    innloggetStatus.authenticated && (
-                        <Undertekst className={cls.element('knapp-tekst-bunn')}>
-                            {innloggetStatus.name}
-                        </Undertekst>
-                    )
-                }
-            </div>
-        </MenylinjeKnapp>
-    );
+            brukerNavn={innloggetStatus.name}
+        />);
 
     return (
         <EkspanderbarMeny
@@ -94,7 +69,7 @@ export const MinsideMenyDesktop = () => {
                 <MinsideDropdown
                     classname={classname}
                     isOpen={isOpen}
-                    menyLenker={getMinsideMenuNode(menyPunkter.data, language)}
+                    menyLenker={menyPunkter.data[0]}
                 />
             ) : <MenySpinner />}
         </EkspanderbarMeny>

@@ -8,6 +8,7 @@ import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
 import { Language } from '../../../../../../../reducer/language-duck';
 import { finnTekst } from '../../../../../../../tekster/finn-tekst';
 import { bunnLenker } from './BunnseksjonLenkedata';
+import './Bunnseksjon.less';
 
 interface Props {
     classname: string;
@@ -38,7 +39,7 @@ export const Bunnseksjon = ({
                             stikkord={finnTekst(lenke.stikkordId, language)}
                             className={classname}
                             id={KbNav.getKbId(
-                                NaviGroup.DesktopHeaderDropdown,
+                                NaviGroup.DesktopHovedmeny,
                                 kbNaviIndex
                             )}
                             onClick={

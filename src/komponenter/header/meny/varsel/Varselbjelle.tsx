@@ -7,9 +7,6 @@ import { MenuValue } from '../../../../utils/meny-storage-utils';
 import './Varselbjelle.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
-import { Undertittel } from 'nav-frontend-typografi';
-import Tekst from '../../../../tekster/finn-tekst';
-import BEMHelper from '../../../../utils/bem';
 import VarselIkon from '../meny-knapper/varsel-ikon/VarselIkon';
 
 interface StateProps {
@@ -32,17 +29,6 @@ interface State {
     clicked: boolean;
     classname: string;
 }
-
-const stateSelector = (state: AppState) => ({
-    antallVarsler: state.varsler.data.antall,
-    antallUlesteVarsler: state.varsler.data.uleste,
-    erInnlogget:
-        state.innloggingsstatus.data.authenticated &&
-        (state.innloggingsstatus.data.securityLevel === '3' ||
-            state.innloggingsstatus.data.securityLevel === '4'),
-    nyesteId: state.varsler.data.nyesteId,
-    arbeidsflate: state.arbeidsflate.status,
-});
 
 type VarselbjelleProps = StateProps & DispatchProps & FunctionProps;
 
@@ -108,7 +94,6 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             children,
         } = this.props;
         const { clicked, classname } = this.state;
-        const cls = BEMHelper(classname);
 
         return (
             <div ref={this.varselbjelleRef} className="varselbjelle">
@@ -121,7 +106,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                             <MenylinjeKnapp
                                 toggleMenu={this.handleClick}
                                 isOpen={clicked}
-                                parentClassname={classname}
+                                classname={classname}
                                 ariaLabel={`Varsler. Du har ${
                                     antallVarsler > 0 ? antallVarsler : 'ingen'
                                 } varsler.`}

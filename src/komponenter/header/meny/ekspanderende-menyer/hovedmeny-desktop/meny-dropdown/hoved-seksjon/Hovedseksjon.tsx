@@ -1,7 +1,9 @@
 import { MenyNode } from '../../../../../../../reducer/menu-duck';
-import { MenyLenkeKategori } from '../../../meny-lenker/MenyLenkeKategori';
+import { MenyLenkeSeksjon } from '../../../meny-lenker/MenyLenkeSeksjon';
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
+import './Hovedseksjon.less';
+import { NaviGroup } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
 
 interface Props {
     menyLenker: MenyNode;
@@ -16,11 +18,12 @@ export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
         <div className={cls.element('hoved-seksjon')}>
             {menyLenker &&
                 menyLenker.children.map((menygruppe, index) => (
-                    <MenyLenkeKategori
+                    <MenyLenkeSeksjon
                         menygruppe={menygruppe}
                         isOpen={isOpen}
-                        className={classname}
-                        temaIndex={index}
+                        colIndex={index}
+                        rowIndex={2}
+                        kbNaviGroup={NaviGroup.DesktopHovedmeny}
                         key={menygruppe.displayName}
                     />
                 ))}

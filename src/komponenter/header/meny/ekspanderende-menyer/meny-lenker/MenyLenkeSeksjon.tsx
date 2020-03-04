@@ -6,33 +6,37 @@ import { MenyLenke } from './MenyLenke';
 import KbNav, {
     NaviGroup,
 } from '../../../../../utils/keyboard-navigation/kb-navigation';
+import './MenyLenker.less';
 
 interface Props {
     menygruppe: MenyNode;
     isOpen: boolean;
-    className: string;
-    temaIndex: number;
+    colIndex: number;
+    rowIndex: number;
+    kbNaviGroup: NaviGroup;
 }
 
-export const MenyLenkeKategori = ({
+export const MenyLenkeSeksjon = ({
     menygruppe,
     isOpen,
-    className,
-    temaIndex,
+    colIndex,
+    rowIndex,
+    kbNaviGroup,
 }: Props) => {
-    const cls = BEMHelper(className);
+    const classname = 'lenkeseksjon';
+    const cls = BEMHelper(classname);
 
     return (
-        <section className={cls.element('kategori')}>
-            <div className={cls.element('kategori-tittel')}>
+        <section className={classname}>
+            <div className={cls.element('tittel')}>
                 <Element>{menygruppe.displayName}</Element>
             </div>
             <ul className={cls.element('lenker')}>
                 {menygruppe.children.map(
                     (lenke: MenyNode, index: number) => {
                         const kbNaviIndex = {
-                            col: temaIndex,
-                            row: 2,
+                            col: colIndex,
+                            row: rowIndex,
                             sub: index,
                         };
                         return (
@@ -42,7 +46,7 @@ export const MenyLenkeKategori = ({
                                 isOpen={isOpen}
                                 menyGruppeNavn={menygruppe.displayName}
                                 id={KbNav.getKbId(
-                                    NaviGroup.DesktopHeaderDropdown,
+                                    kbNaviGroup,
                                     kbNaviIndex
                                 )}
                             />

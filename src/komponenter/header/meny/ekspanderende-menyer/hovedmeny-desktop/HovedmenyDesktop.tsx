@@ -42,7 +42,7 @@ export const HovedmenyDesktop = () => {
         <MenylinjeKnapp
             toggleMenu={toggleMenu}
             isOpen={isOpen}
-            parentClassname={classname}
+            classname={classname}
             ariaLabel={'Hovedmenyknapp'}
         >
             <HamburgerIkon isOpen={isOpen} />

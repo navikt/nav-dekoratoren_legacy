@@ -1,6 +1,10 @@
 @import (reference) '../../../../../styling-variabler.less';
+@import (reference) '../meny-lenker/MenyLenker';
 
 .desktop-minside-meny {
+    @lenkeseksjoner-cols: 3;
+    @lenkeseksjoner-margin: 1.5em;
+
     &__knapp-tekst {
         text-align: left;
     }
@@ -13,5 +17,27 @@
         margin-top: -0.25em;
         overflow-x: hidden;
         white-space: nowrap;
+    }
+
+    &__lenke-seksjoner {
+        display: flex;
+        justify-content: flex-start;
+
+        & > * {
+            .col-setup(@lenkeseksjoner-cols, @lenkeseksjoner-margin)
+        }
+    }
+
+    &__topp-seksjon {
+        margin: 1.5rem -3rem;
+        padding: 1rem 3rem;
+    }
+
+    &__topp-seksjon-lenke {
+        .lenke-stil();
+    }
+
+    &__topp-seksjon-tittel {
+        margin-top: 0.15em;
     }
 }

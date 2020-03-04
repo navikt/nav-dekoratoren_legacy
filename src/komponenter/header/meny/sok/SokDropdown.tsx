@@ -4,12 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { EkspanderbarMeny } from '../ekspanderende-menyer/ekspanderbar-meny/EkspanderbarMeny';
 import Sok from './Sok';
 import { toggleSok } from '../../../../reducer/dropdown-toggle-duck';
-import BEMHelper from '../../../../utils/bem';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../../tekster/finn-tekst';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
-import HamburgerIkon from '../meny-knapper/hamburger-ikon/HamburgerIkon';
 import SokMenyIkon from '../meny-knapper/sok-ikon/SokMenyIkon';
 
 const stateSelector = (state: AppState) => ({
@@ -34,7 +32,7 @@ export const SokDropdown = () => {
         <MenylinjeKnapp
             toggleMenu={toggleMenu}
             isOpen={isOpen}
-            parentClassname={classname}
+            classname={classname}
             ariaLabel={'Søkeknapp'}
         >
             <SokMenyIkon isOpen={isOpen}/>

@@ -15,6 +15,14 @@ import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
 
+type Props = {
+    classname: string;
+    arbeidsflate: MenuValue;
+    language: Language;
+    menyLenker: MenyNode | undefined;
+    isOpen: boolean;
+};
+
 const getColSetup = (cls: BEMWrapper): Array<number> => {
     const getNumCols = (element: HTMLElement) =>
         parseInt(
@@ -44,14 +52,6 @@ const getColSetup = (cls: BEMWrapper): Array<number> => {
     return [menyKnappCols, toppSeksjonCols, hovedSeksjonCols, bunnSeksjonCols];
 };
 
-type Props = {
-    classname: string;
-    arbeidsflate: MenuValue;
-    language: Language;
-    menyLenker: MenyNode | undefined;
-    isOpen: boolean;
-};
-
 export const HovedmenyDropdown = (props: Props) => {
     const { arbeidsflate, classname, language, menyLenker, isOpen } = props;
 
@@ -66,10 +66,10 @@ export const HovedmenyDropdown = (props: Props) => {
     const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
     const [kbNaviNode, setKbNaviNode] = useState<NaviNode>(null);
 
-    const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
+    const kbNaviGroup = NaviGroup.DesktopHovedmeny;
     const kbRootIndex = { col: 0, row: 0, sub: 0 };
     const kbIdMap = {
-        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element('menyknapp')
+        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element('knapp')
     };
 
     useEffect(() => {
@@ -144,13 +144,11 @@ export const HovedmenyDropdown = (props: Props) => {
     return (
         <div className={cls.element('dropdown')}>
             <Toppseksjon classname={classname} arbeidsflate={arbeidsflate} />
-            {menyLenker &&
-                <Hovedseksjon
-                    menyLenker={menyLenker}
-                    classname={classname}
-                    isOpen={isOpen}
-                />
-            }
+            <Hovedseksjon
+                menyLenker={menyLenker}
+                classname={classname}
+                isOpen={isOpen}
+            />
             <Bunnseksjon
                 classname={classname}
                 language={language}
