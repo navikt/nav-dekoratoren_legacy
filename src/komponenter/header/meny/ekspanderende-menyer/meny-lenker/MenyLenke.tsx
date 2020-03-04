@@ -1,18 +1,18 @@
 import React from 'react';
-import { MenySeksjon } from '../../../../../../../reducer/menu-duck';
-import { genererUrl } from '../../../../../../../utils/Environment';
-import '../HovedmenyDropdown.less';
-import { LenkeMedGA } from '../../../../../../LenkeMedGA';
-import { GACategory } from '../../../../../../../utils/google-analytics';
+import { MenyNode } from '../../../../../reducer/menu-duck';
+import { genererUrl } from '../../../../../utils/Environment';
+import '../hovedmeny-desktop/meny-dropdown/HovedmenyDropdown.less';
+import { LenkeMedGA } from '../../../../LenkeMedGA';
+import { GACategory } from '../../../../../utils/google-analytics';
 
 interface Props {
-    lenke: MenySeksjon;
+    lenke: MenyNode;
     isOpen: boolean;
     menyGruppeNavn: string;
     id: string;
 }
 
-export const HovedseksjonLenke = (props: Props) => {
+export const MenyLenke = (props: Props) => {
     const { lenke, isOpen, menyGruppeNavn } = props;
     const href = genererUrl(lenke.path);
 

@@ -1,5 +1,5 @@
 import { MenyNode } from '../../../../../../../reducer/menu-duck';
-import { HovedseksjonTema } from './HovedseksjonTema';
+import { MenyLenkeKategori } from '../../../meny-lenker/MenyLenkeKategori';
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
 
@@ -16,7 +16,7 @@ export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
         <div className={cls.element('hoved-seksjon')}>
             {menyLenker &&
                 menyLenker.children.map((menygruppe, index) => (
-                    <HovedseksjonTema
+                    <MenyLenkeKategori
                         menygruppe={menygruppe}
                         isOpen={isOpen}
                         className={classname}

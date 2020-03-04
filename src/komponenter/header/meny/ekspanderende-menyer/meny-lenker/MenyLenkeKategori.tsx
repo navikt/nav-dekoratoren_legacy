@@ -1,20 +1,20 @@
-import { MenySeksjon } from '../../../../../../../reducer/menu-duck';
+import { MenyNode } from '../../../../../reducer/menu-duck';
 import React from 'react';
 import { Element } from 'nav-frontend-typografi';
-import BEMHelper from '../../../../../../../utils/bem';
-import { HovedseksjonLenke } from './HovedseksjonLenke';
+import BEMHelper from '../../../../../utils/bem';
+import { MenyLenke } from './MenyLenke';
 import KbNav, {
     NaviGroup,
-} from '../../../../../../../utils/keyboard-navigation/kb-navigation';
+} from '../../../../../utils/keyboard-navigation/kb-navigation';
 
 interface Props {
-    menygruppe: MenySeksjon;
+    menygruppe: MenyNode;
     isOpen: boolean;
     className: string;
     temaIndex: number;
 }
 
-export const HovedseksjonTema = ({
+export const MenyLenkeKategori = ({
     menygruppe,
     isOpen,
     className,
@@ -23,20 +23,20 @@ export const HovedseksjonTema = ({
     const cls = BEMHelper(className);
 
     return (
-        <section className={cls.element('hoved-seksjon-tema')}>
-            <div className={cls.element('hoved-seksjon-tema-tittel')}>
+        <section className={cls.element('kategori')}>
+            <div className={cls.element('kategori-tittel')}>
                 <Element>{menygruppe.displayName}</Element>
             </div>
-            <ul className={cls.element('hoved-seksjon-tema-lenker')}>
+            <ul className={cls.element('lenker')}>
                 {menygruppe.children.map(
-                    (lenke: MenySeksjon, index: number) => {
+                    (lenke: MenyNode, index: number) => {
                         const kbNaviIndex = {
                             col: temaIndex,
                             row: 2,
                             sub: index,
                         };
                         return (
-                            <HovedseksjonLenke
+                            <MenyLenke
                                 key={index}
                                 lenke={lenke}
                                 isOpen={isOpen}
