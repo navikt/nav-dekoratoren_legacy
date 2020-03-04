@@ -101,7 +101,6 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                     <>
                         <div
                             id="toggle-varsler-container"
-                            className={classname}
                         >
                             <MenylinjeKnapp
                                 toggleMenu={this.handleClick}
