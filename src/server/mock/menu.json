@@ -45,7 +45,7 @@
                                             },
                                             {
                                                 "displayName": "Skjemaer for arbeidsgivere",
-                                                "path": "https://www.nav.no/soknader/nb/bedrift",
+                                                "path": "/soknader/nb/bedrift",
                                                 "id": "75f3d1af-30ff-4496-a1a9-e49223eb0528",
                                                 "hasChildren": false,
                                                 "children": []
@@ -339,7 +339,7 @@
                                             },
                                             {
                                                 "displayName": "Sykdom i familien",
-                                                "path": "https://www.nav.no/familie/sykdom-i-familien/nb/",
+                                                "path": "/familie/sykdom-i-familien/nb/",
                                                 "id": "56b34e65-bda1-426e-9de9-3cde30f1d787",
                                                 "hasChildren": false,
                                                 "children": []
@@ -668,14 +668,14 @@
                             },
                             {
                                 "displayName": "Klage og tilbakemeldinger",
-                                "path": "https://www.nav.no/person/kontakt-oss/tilbakemeldinger",
+                                "path": "/person/kontakt-oss/tilbakemeldinger",
                                 "id": "f560b646-5699-421d-b77f-1c7101e4797f",
                                 "hasChildren": false,
                                 "children": []
                             },
                             {
                                 "displayName": "Kontakt oss",
-                                "path": "https://www.nav.no/person/kontakt-oss/",
+                                "path": "/person/kontakt-oss/",
                                 "id": "7501288c-d241-4878-b191-3d9389e8d0bb",
                                 "hasChildren": false,
                                 "children": []
@@ -754,7 +754,7 @@
                                     },
                                     {
                                         "displayName": "Forms and applications",
-                                        "path": "https://www.nav.no/soknader/en/person",
+                                        "path": "/soknader/en/person",
                                         "id": "1a9bce8f-e99c-4e54-8290-f8b0acc9add2",
                                         "hasChildren": false,
                                         "children": []
@@ -1038,14 +1038,14 @@
                     },
                     {
                         "displayName": "Klage og tilbakemeldinger",
-                        "path": "https://www.nav.no/person/kontakt-oss/tilbakemeldinger",
+                        "path": "/person/kontakt-oss/tilbakemeldinger",
                         "id": "ab34b1a5-a63c-43c1-b0d9-435e6f2382d3",
                         "hasChildren": false,
                         "children": []
                     },
                     {
                         "displayName": "Kontakt oss",
-                        "path": "https://www.nav.no/person/kontakt-oss/",
+                        "path": "/person/kontakt-oss/",
                         "id": "de15a920-1c1b-4384-92a1-608e01eecf50",
                         "hasChildren": false,
                         "children": []

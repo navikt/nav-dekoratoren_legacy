@@ -32,7 +32,7 @@ const onArbeidsflateClick = (
 
 const privatpersonLenker: LenkeData[] = [
     {
-        url: 'https://www.nav.no/person/dittnav',
+        url: '/person/dittnav',
         lenkeTekstId: 'person-minside-lenke',
         stikkordId: 'meny-bunnlenke-minside-stikkord',
     },
