@@ -16,7 +16,7 @@ enum MenuName {
 }
 
 export const validateMenuNode = (menyNode: MenyNode | undefined) =>
-    !menyNode || !menyNode.children || menyNode.children.length === 0;
+    menyNode && menyNode.children && menyNode.children.length > 0;
 
 export const getSessionStorage = (key: string): string | null => {
     return sessionStorage.getItem(key);
