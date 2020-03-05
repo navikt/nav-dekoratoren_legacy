@@ -98,7 +98,7 @@ export const MinsideDropdown = (props: Props) => {
                     <Tekst id={'til-forside'} />
                 </LenkeMedGA>
                 <Systemtittel className={cls.element('topp-seksjon-tittel')}>
-                    {menyLenker.displayName}
+                    <Tekst id={'min-side'} />
                 </Systemtittel>
             </div>
             <div className={cls.element('lenke-seksjoner')}>

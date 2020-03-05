@@ -1,6 +1,5 @@
 import React from 'react';
 import BEMHelper from '../../../utils/bem';
-import { Language } from '../../../reducer/language-duck';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
@@ -14,11 +13,7 @@ import { HovedmenyDesktop } from './ekspanderende-menyer/hovedmeny-desktop/Hoved
 
 const desktopMenylinje = BEMHelper('desktopmeny');
 
-interface Props {
-    language: Language;
-}
-
-const DesktopMenylinje = ({ language }: Props) => {
+const DesktopMenylinje = () => {
     return (
         <nav className={desktopMenylinje.className} aria-label="Hovedmeny">
             <div className={desktopMenylinje.element('content')}>
@@ -28,8 +23,7 @@ const DesktopMenylinje = ({ language }: Props) => {
                         height="88"
                         classname={desktopMenylinje.element('nav-brand')}
                     />
-                    {(language === Language.NORSK ||
-                        language === Language.ENGELSK) && <HovedmenyDesktop />}
+                    <HovedmenyDesktop />
                     <SokDropdown />
                     <span className={desktopMenylinje.element('spacer')} />
                     <InnloggingsstatusProvider>

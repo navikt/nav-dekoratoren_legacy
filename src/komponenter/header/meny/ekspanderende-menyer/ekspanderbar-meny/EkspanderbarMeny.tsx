@@ -12,12 +12,12 @@ type Props = {
 
 export const EkspanderbarMeny = (props: Props) => {
     const { isOpen, menyKnapp, classname, id, children } = props;
-    const cls = BEMHelper(classname);
+    const cls = BEMHelper(`ekspanderbar ${classname}`);
 
     return (
         <>
             {menyKnapp}
-            <div className={'dropdown-container'}>
+            <div className={cls.element('container')}>
                 <div
                     className={cls.element(
                         'innhold-wrapper',

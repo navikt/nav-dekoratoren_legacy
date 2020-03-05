@@ -45,7 +45,7 @@ export const SokDropdown = () => {
 
     return (
         <EkspanderbarMeny
-            classname={`ekspanderbar ${classname}`}
+            classname={classname}
             id={classname}
             isOpen={isOpen}
             menyKnapp={knapp}

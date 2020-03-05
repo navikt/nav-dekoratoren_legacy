@@ -1,12 +1,18 @@
 import React from 'react';
 import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
-import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
+import {
+    GACategory,
+    triggerGaEvent,
+} from '../../../../../utils/google-analytics';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../reducer/reducer';
 import { Status } from '../../../../../api/api';
 import { Undertittel } from 'nav-frontend-typografi';
 import { HovedmenyDropdown } from './hovedmeny-dropdown/HovedmenyDropdown';
-import { getHovedmenyNode } from '../../../../../utils/meny-storage-utils';
+import {
+    getHovedmenyNode,
+    validateMenuNode,
+} from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
@@ -25,8 +31,19 @@ const classname = 'desktop-hovedmeny';
 export const hovedmenyDesktopClassname = classname;
 
 export const HovedmenyDesktop = () => {
-    const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(stateSelector);
+    const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(
+        stateSelector
+    );
     const dispatch = useDispatch();
+
+    const hovedmenyPunkter = getHovedmenyNode(
+        menyPunkter.data,
+        language,
+        arbeidsflate
+    );
+    if (!validateMenuNode(hovedmenyPunkter)) {
+        return null;
+    }
 
     const toggleMenu = () => {
         triggerGaEvent({
@@ -54,7 +71,7 @@ export const HovedmenyDesktop = () => {
         <EkspanderbarMeny
             isOpen={isOpen}
             menyKnapp={knapp}
-            classname={`ekspanderbar ${classname}`}
+            classname={classname}
             id={classname}
         >
             {menyPunkter.status === Status.OK ? (
@@ -62,10 +79,12 @@ export const HovedmenyDesktop = () => {
                     classname={classname}
                     arbeidsflate={arbeidsflate}
                     language={language}
-                    menyLenker={getHovedmenyNode(menyPunkter.data, language, arbeidsflate)}
+                    menyLenker={hovedmenyPunkter}
                     isOpen={isOpen}
                 />
-            ) : <MenySpinner />}
+            ) : (
+                <MenySpinner />
+            )}
         </EkspanderbarMeny>
     );
 };

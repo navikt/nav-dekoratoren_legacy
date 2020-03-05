@@ -15,6 +15,9 @@ enum MenuName {
     MinsideMeny = 'My page menu',
 }
 
+export const validateMenuNode = (menyNode: MenyNode | undefined) =>
+    !menyNode || !menyNode.children || menyNode.children.length === 0;
+
 export const getSessionStorage = (key: string): string | null => {
     return sessionStorage.getItem(key);
 };
@@ -34,7 +37,7 @@ export const oppdaterSessionStorage = (valgVerdi: MenuValue): void => {
 export const getHovedmenyNode = (
     menypunkter: MenyNode[],
     language: Language,
-    arbeidsflate: MenuValue,
+    arbeidsflate: MenuValue
 ): MenyNode | undefined => {
     const languageNode = getLanguageNode(language, menypunkter);
     return languageNode
@@ -46,7 +49,7 @@ export const getHovedmenyNode = (
 
 export const getMinsideMenyNode = (
     menypunkter: MenyNode[],
-    language: Language,
+    language: Language
 ): MenyNode | undefined => {
     const languageNode = getLanguageNode(language, menypunkter);
     return languageNode
