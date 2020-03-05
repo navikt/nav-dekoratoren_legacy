@@ -1,3 +1,5 @@
+import Environment from '../../utils/Environment';
+
 export enum FooterSeksjon {
     VENSTRE,
     HOYRE,
@@ -13,7 +15,7 @@ export interface FooterLenke {
 const footerlenker: FooterLenke[] = [
     {
         lenketekst: 'Kontakt oss',
-        url: 'https://www.nav.no/person/kontakt-oss/',
+        url: `/person/kontakt-oss/`,
         seksjon: FooterSeksjon.VENSTRE,
     },
     {
@@ -23,7 +25,7 @@ const footerlenker: FooterLenke[] = [
     },
     {
         lenketekst: 'Klage og tilbakemeldinger',
-        url: 'https://www.nav.no/person/kontakt-oss/tilbakemeldinger',
+        url: `/person/kontakt-oss/tilbakemeldinger`,
         seksjon: FooterSeksjon.VENSTRE,
     },
     {
