@@ -5,17 +5,24 @@ export interface BEMWrapper {
 }
 
 const BEMHelper = (cls: BEMWrapper['className']) => {
-    const classNames = cls && cls.split(' ') || [];
+    const classNames = (cls && cls.split(' ')) || [];
 
-    return ({
+    return {
         className: cls,
-        element: (e?: string, m?: string) => classNames.reduce((acc, className, index) => {
-            return acc + `${index === 0 ? '' : ' '}${className}__${e}${m ? ` ${className}__${e}--${m}` : ''}`;
-        }, ''),
-        modifier: (m?: string) => classNames.reduce((acc, className, index) => {
-            return acc + `${index === 0 ? '' : ' '}${className}--${m}`;
-        }, ''),
-    });
+        element: (e?: string, m?: string) =>
+            classNames.reduce((acc, className, index) => {
+                return (
+                    acc +
+                    `${index === 0 ? '' : ' '}${className}__${e}${
+                        m ? ` ${className}__${e}--${m}` : ''
+                    }`
+                );
+            }, ''),
+        modifier: (m?: string) =>
+            classNames.reduce((acc, className, index) => {
+                return acc + `${index === 0 ? '' : ' '}${className}--${m}`;
+            }, ''),
+    };
 };
 
 export default BEMHelper;
