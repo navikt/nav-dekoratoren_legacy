@@ -1,11 +1,11 @@
 import React from 'react';
-import BEMHelper from '../../../../../utils/bem';
-import MinsideIkon from './ikon/MinsideIkon';
+import BEMHelper from '../../../../../../utils/bem';
+import MinsideIkon from '../ikoner/minside-ikon/MinsideIkon';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import Tekst from '../../../../../tekster/finn-tekst';
+import Tekst from '../../../../../../tekster/finn-tekst';
 import './MinsideKnapper.less';
-import { LenkeMedGA } from '../../../../LenkeMedGA';
-import { GACategory } from '../../../../../utils/google-analytics';
+import { LenkeMedGA } from '../../../../../LenkeMedGA';
+import { GACategory } from '../../../../../../utils/google-analytics';
 
 type Props = {
     classname: string;
@@ -31,10 +31,10 @@ export const MinsideArbgiverKnapp = (props: Props) => {
                 <MinsideIkon hasMenu={false} />
                 <div className={cls.element('knapp-tekst')}>
                     <Normaltekst className={cls.element('knapp-tekst-topp')}>
-                        <Tekst id={'Gå til min side'} />
+                        <Tekst id={'ga-til-min-side'} />
                     </Normaltekst>
                     <Undertekst className={cls.element('knapp-tekst-bunn')}>
-                        <Tekst id={'Arbeidsgiver'} />
+                        <Tekst id={'rolle-arbeidsgiver'} />
                     </Undertekst>
                 </div>
             </div>

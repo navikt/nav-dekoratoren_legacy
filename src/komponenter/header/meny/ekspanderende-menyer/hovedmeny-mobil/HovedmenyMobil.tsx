@@ -3,7 +3,7 @@ import { AppState } from '../../../../../reducer/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Status } from '../../../../../api/api';
 import { getMenuNode } from '../../../../../utils/meny-storage-utils';
-import MenylinjeKnapp from '../../meny-knapper/MenylinjeKnapp';
+import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
 import {
     GACategory,

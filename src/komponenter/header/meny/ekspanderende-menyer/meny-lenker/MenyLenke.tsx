@@ -1,7 +1,7 @@
 import React from 'react';
 import { MenyNode } from '../../../../../reducer/menu-duck';
 import { genererUrl } from '../../../../../utils/Environment';
-import '../hovedmeny-desktop/meny-dropdown/HovedmenyDropdown.less';
+import '../hovedmeny-desktop/hovedmeny-dropdown/HovedmenyDropdown.less';
 import { LenkeMedGA } from '../../../../LenkeMedGA';
 import { GACategory } from '../../../../../utils/google-analytics';
 

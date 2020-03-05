@@ -9,7 +9,7 @@ import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import Varselbjelle from './varsel/Varselbjelle';
 import VarselVisning from './varsel/varselvisning/Varselvisning';
 import './DesktopMenylinje.less';
-import { SokDropdown } from './sok/SokDropdown';
+import { SokDropdown } from './ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
 import { HovedmenyDesktop } from './ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
 
 const desktopMenylinje = BEMHelper('desktopmeny');

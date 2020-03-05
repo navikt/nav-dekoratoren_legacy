@@ -8,13 +8,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../reducer/reducer';
 import { Status } from '../../../../../api/api';
 import { Undertittel } from 'nav-frontend-typografi';
-import { HovedmenyDropdown } from './meny-dropdown/HovedmenyDropdown';
+import { HovedmenyDropdown } from './hovedmeny-dropdown/HovedmenyDropdown';
 import { getMenuNode } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
-import HamburgerIkon from '../../meny-knapper/hamburger-ikon/HamburgerIkon';
-import MenylinjeKnapp from '../../meny-knapper/MenylinjeKnapp';
+import HamburgerIkon from '../meny-knapper/ikoner/hamburger-ikon/HamburgerIkon';
+import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -56,7 +56,7 @@ export const HovedmenyDesktop = () => {
         <EkspanderbarMeny
             isOpen={isOpen}
             menyKnapp={knapp}
-            classname={'desktop-dropdown'}
+            classname={`desktop-dropdown `}
             id={classname}
         >
             {menyPunkter.status === Status.OK ? (

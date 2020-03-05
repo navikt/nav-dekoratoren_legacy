@@ -1,11 +1,10 @@
 import React from 'react';
 import './VarselIkon.less'
-import BEMHelper from '../../../../../utils/bem';
+import BEMHelper from '../../../../../../../utils/bem';
 import { Undertittel } from 'nav-frontend-typografi';
-import Tekst from '../../../../../tekster/finn-tekst';
-import MenylinjeKnapp from '../MenylinjeKnapp';
+import Tekst from '../../../../../../../tekster/finn-tekst';
 
-const ikon = require('../../../../../ikoner/varsler/alarm.svg');
+const ikon = require('../../../../../../../ikoner/varsler/alarm.svg');
 
 type Props = {
     isOpen: boolean;

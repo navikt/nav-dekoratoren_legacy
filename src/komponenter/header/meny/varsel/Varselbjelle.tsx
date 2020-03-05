@@ -6,8 +6,8 @@ import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import './Varselbjelle.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
-import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
-import VarselIkon from '../meny-knapper/varsel-ikon/VarselIkon';
+import MenylinjeKnapp from '../ekspanderende-menyer/meny-knapper/MenylinjeKnapp';
+import VarselIkon from '../ekspanderende-menyer/meny-knapper/ikoner/varsel-ikon/VarselIkon';
 
 interface StateProps {
     antallVarsler: number;

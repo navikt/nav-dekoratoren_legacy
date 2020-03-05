@@ -4,7 +4,7 @@ import DesktopMenylinje from './DesktopMenylinje';
 import { Language } from '../../../reducer/language-duck';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
 import HovedmenyDesktop from './ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
-import { SokDropdown } from './sok/SokDropdown';
+import { SokDropdown } from './ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
 
 const shallowWithProps = (language: Language) => {
     return shallow(<DesktopMenylinje language={language} />);

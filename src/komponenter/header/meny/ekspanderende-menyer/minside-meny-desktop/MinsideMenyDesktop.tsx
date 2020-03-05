@@ -10,9 +10,9 @@ import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
 import MinsideDropdown from './minside-dropdown/MinsideDropdown';
 import './MinsideMenyDesktop.less';
 import { getMinsideMenyPunkter } from './minside-dropdown/minside-lenker';
-import MinsidePersonKnapp from '../../meny-knapper/minside-knapp/MinsidePersonKnapp';
+import MinsidePersonKnapp from '../meny-knapper/minside-knapper/MinsidePersonKnapp';
 import Environment from '../../../../../utils/Environment';
-import MinsideArbgiverKnapp from '../../meny-knapper/minside-knapp/MinsideArbgiverKnapp';
+import MinsideArbgiverKnapp from '../meny-knapper/minside-knapper/MinsideArbgiverKnapp';
 
 const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,

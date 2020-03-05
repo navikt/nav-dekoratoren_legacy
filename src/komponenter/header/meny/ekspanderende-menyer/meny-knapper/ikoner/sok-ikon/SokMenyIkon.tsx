@@ -1,6 +1,6 @@
 import React from 'react';
 import './SokMenyIkon.less'
-import BEMHelper from '../../../../../utils/bem';
+import BEMHelper from '../../../../../../../utils/bem';
 
 type Props = {
     isOpen: boolean;

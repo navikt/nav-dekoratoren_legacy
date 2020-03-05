@@ -138,9 +138,7 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
                     >
                         <>
                             <VarselinnboksProvider>
-                                <Varselbjelle
-                                    tabindex={this.hovedseksjonTabIndex()}
-                                >
+                                <Varselbjelle>
                                     {(clicked, handleClick) => (
                                         <VarselvisningMobil
                                             visvarsel={clicked}

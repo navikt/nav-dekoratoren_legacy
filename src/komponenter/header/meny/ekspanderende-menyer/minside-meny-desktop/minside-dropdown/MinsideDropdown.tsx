@@ -31,8 +31,6 @@ export const MinsideDropdown = (props: Props) => {
         [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element('knapp')
     };
 
-    console.log(kbNaviNode);
-
     useEffect(() => {
         const removeListeners = () => {
             document.removeEventListener('keydown', kbHandler);
