@@ -29,6 +29,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-minside-meny';
+export const minsideMenyDesktopClassname = classname;
 
 export const MinsideMenyDesktop = () => {
     const {

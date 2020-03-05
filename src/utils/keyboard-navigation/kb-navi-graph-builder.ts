@@ -1,10 +1,12 @@
 import {
+    createNode,
     getKbId,
     IdMap,
     NaviGroup,
     NaviIndex,
     NaviNode,
     NaviNodeMap,
+    NodeEdge,
 } from './kb-navigation';
 
 export const buildNaviGraphAndGetRootNode = (
@@ -195,21 +197,24 @@ export const buildNaviGraphAndGetRootNode = (
             return nodeMap[id];
         }
 
-        const node: NaviNode = {
-            id: id,
-            index: index,
-            up: null,
-            down: null,
-            left: null,
-            right: null,
-        };
-
+        const node: NaviNode = createNode(id, index);
         nodeMap[id] = node;
 
-        node.up = getNodeAtIndex(getTopEdgeIndex(index));
-        node.down = getNodeAtIndex(getBottomEdgeIndex(index));
-        node.left = getNodeAtIndex(getLeftEdgeIndex(index));
-        node.right = getNodeAtIndex(getRightEdgeIndex(index));
+        if (node) {
+            node.connect(getNodeAtIndex(getTopEdgeIndex(index)), NodeEdge.Top);
+            node.connect(
+                getNodeAtIndex(getBottomEdgeIndex(index)),
+                NodeEdge.Bottom
+            );
+            node.connect(
+                getNodeAtIndex(getLeftEdgeIndex(index)),
+                NodeEdge.Left
+            );
+            node.connect(
+                getNodeAtIndex(getRightEdgeIndex(index)),
+                NodeEdge.Right
+            );
+        }
 
         return node;
     };

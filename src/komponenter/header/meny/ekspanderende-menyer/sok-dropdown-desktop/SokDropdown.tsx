@@ -19,6 +19,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-sok-dropdown';
+export const sokDropdownDesktopClassname = classname;
 
 export const SokDropdown = () => {
     const { isOpen } = useSelector(stateSelector);

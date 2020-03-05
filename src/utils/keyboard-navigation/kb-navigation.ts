@@ -1,8 +1,17 @@
 import { buildNaviGraphAndGetRootNode } from './kb-navi-graph-builder';
 
 export enum NaviGroup {
-    DesktopHovedmeny = 'desktop-meny-lenke',
-    DesktopMinsideMeny = 'desktop-minside-lenke',
+    DesktopHovedmeny = 'desktop-hovedmeny',
+    DesktopSokDropdown = 'desktop-sok',
+    DesktopVarslerDropdown = 'desktop-varsler',
+    DesktopMinsideMeny = 'desktop-minside',
+}
+
+export enum NodeEdge {
+    Top,
+    Bottom,
+    Left,
+    Right,
 }
 
 export type NaviIndex = {
@@ -20,10 +29,11 @@ export type NaviGraphData = {
 export type NaviNode = {
     id: string;
     index: NaviIndex;
-    up: NaviNode;
-    down: NaviNode;
-    left: NaviNode;
-    right: NaviNode;
+    [NodeEdge.Top]: NaviNode;
+    [NodeEdge.Bottom]: NaviNode;
+    [NodeEdge.Left]: NaviNode;
+    [NodeEdge.Right]: NaviNode;
+    connect: typeof connectNodes;
 } | null;
 
 export type NaviNodeMap = {
@@ -35,6 +45,40 @@ export type IdMap = {
 };
 
 type NodeSetterCallback = (node: NaviNode) => void;
+
+export const createNode = (id: string, index: NaviIndex): NaviNode => ({
+    id: id,
+    index: index,
+    [NodeEdge.Top]: null,
+    [NodeEdge.Bottom]: null,
+    [NodeEdge.Left]: null,
+    [NodeEdge.Right]: null,
+    connect: connectNodes,
+});
+
+function connectNodes(this: NaviNode, node: NaviNode, edge: NodeEdge) {
+    if (!this || !node) {
+        return;
+    }
+    switch (edge) {
+        case NodeEdge.Top:
+            this[NodeEdge.Top] = node;
+            node[NodeEdge.Bottom] = this;
+            return;
+        case NodeEdge.Bottom:
+            this[NodeEdge.Bottom] = node;
+            node[NodeEdge.Top] = this;
+            return;
+        case NodeEdge.Left:
+            this[NodeEdge.Left] = node;
+            node[NodeEdge.Right] = this;
+            return;
+        case NodeEdge.Right:
+            this[NodeEdge.Right] = node;
+            node[NodeEdge.Left] = this;
+            return;
+    }
+}
 
 export const getKbId = (
     group: NaviGroup,
@@ -114,16 +158,16 @@ const kbHandler = (
     const key = ieKeyMap(event.key) || event.key;
     switch (key) {
         case 'ArrowLeft':
-            selectNode(node.left, group, callback);
+            selectNode(node[NodeEdge.Left], group, callback);
             break;
         case 'ArrowUp':
-            selectNode(node.up, group, callback);
+            selectNode(node[NodeEdge.Top], group, callback);
             break;
         case 'ArrowRight':
-            selectNode(node.right, group, callback);
+            selectNode(node[NodeEdge.Right], group, callback);
             break;
         case 'ArrowDown':
-            selectNode(node.down, group, callback);
+            selectNode(node[NodeEdge.Bottom], group, callback);
             break;
         default:
             return;
