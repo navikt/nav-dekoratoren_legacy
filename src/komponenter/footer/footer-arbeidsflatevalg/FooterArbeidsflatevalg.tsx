@@ -29,7 +29,9 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
 
     const dispatch = useDispatch();
     const { arbeidsflate, language } = useSelector(stateSelector);
-    const arbeidsflatevalgLenker = arbeidsflateLenker.filter(lenke => lenke.key !== arbeidsflate);
+    const arbeidsflatevalgLenker = arbeidsflateLenker.filter(
+        lenke => lenke.key !== arbeidsflate
+    );
 
     return (
         <section className={cls.element('menylinje-arbeidsflatevalg')}>

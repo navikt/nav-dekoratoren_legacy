@@ -10,10 +10,10 @@ type LenkeData = {
     lenkeTekstId: string;
     stikkordId: string;
     onClick?: Function;
-}
+};
 
 export type OnArbeidsFlateClick = (
-    settArbeidsflateFunc: () => void,
+    settArbeidsflateFunc: () => void
 ) => (event: React.MouseEvent<HTMLAnchorElement>) => void;
 
 const pathPersonFlate = '/dekoratoren/person/';
@@ -22,9 +22,9 @@ const samarbeidspartnerFlate = '/dekoratoren/samarbeidspartner/';
 
 const onArbeidsflateClick = (
     url: string,
-    arbeidsflate: MenuValue,
+    arbeidsflate: MenuValue
 ): OnArbeidsFlateClick => (settArbeidsflate: () => void) => (
-    event: React.MouseEvent<HTMLAnchorElement>,
+    event: React.MouseEvent<HTMLAnchorElement>
 ) => {
     event.preventDefault();
     oppdaterSessionStorage(arbeidsflate);
@@ -51,7 +51,7 @@ const samarbeidspartnerContextLenke = {
     stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
     onClick: onArbeidsflateClick(
         samarbeidspartnerFlate,
-        MenuValue.SAMARBEIDSPARTNER,
+        MenuValue.SAMARBEIDSPARTNER
     ),
 };
 
@@ -62,7 +62,7 @@ const privatpersonLenker = (): LenkeData[] => [
         stikkordId: 'meny-bunnlenke-minside-stikkord',
     },
     arbeidsgiverContextLenke,
-    samarbeidspartnerContextLenke
+    samarbeidspartnerContextLenke,
 ];
 
 const arbeidsgiverLenker = (): LenkeData[] => [
@@ -72,12 +72,12 @@ const arbeidsgiverLenker = (): LenkeData[] => [
         stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
     },
     personContextLenke,
-    samarbeidspartnerContextLenke
+    samarbeidspartnerContextLenke,
 ];
 
 const samarbeidspartnerLenker = (): LenkeData[] => [
     personContextLenke,
-    arbeidsgiverContextLenke
+    arbeidsgiverContextLenke,
 ];
 
 const ikkeValgtLenker = (): LenkeData[] => [];

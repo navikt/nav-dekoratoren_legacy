@@ -30,10 +30,10 @@ export const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
                     sub: 0,
                 })}
                 gaEventArgs={{
-                category: GACategory.Header,
-                action: 'forside',
-                label: Environment.XP_BASE_URL,
-            }}
+                    category: GACategory.Header,
+                    action: 'forside',
+                    label: Environment.XP_BASE_URL,
+                }}
             >
                 <Tekst id={'til-forside'} />
             </LenkeMedGA>

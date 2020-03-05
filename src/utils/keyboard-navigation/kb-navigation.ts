@@ -2,7 +2,7 @@ import { buildNaviGraphAndGetRootNode } from './kb-navi-graph-builder';
 
 export enum NaviGroup {
     DesktopHovedmeny = 'desktop-meny-lenke',
-    DesktopMinsideMeny = 'desktop-minside-lenke'
+    DesktopMinsideMeny = 'desktop-minside-lenke',
 }
 
 export type NaviIndex = {

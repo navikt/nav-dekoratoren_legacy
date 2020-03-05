@@ -6,7 +6,10 @@ import Sok from '../../sok/Sok';
 import { toggleSok } from '../../../../../reducer/dropdown-toggle-duck';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../../../tekster/finn-tekst';
-import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
+import {
+    GACategory,
+    triggerGaEvent,
+} from '../../../../../utils/google-analytics';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import SokMenyIkon from '../meny-knapper/ikoner/sok-ikon/SokMenyIkon';
 import './SokDropdown.less';
@@ -26,7 +29,7 @@ export const SokDropdown = () => {
             category: GACategory.Header,
             action: `sok-${isOpen ? 'close' : 'open'}`,
         });
-        dispatch(toggleSok())
+        dispatch(toggleSok());
     };
 
     const knapp = (
@@ -36,7 +39,7 @@ export const SokDropdown = () => {
             classname={classname}
             ariaLabel={'Søkeknapp'}
         >
-            <SokMenyIkon isOpen={isOpen}/>
+            <SokMenyIkon isOpen={isOpen} />
             <Undertittel>
                 <Tekst id={'sok-knapp'} />
             </Undertittel>

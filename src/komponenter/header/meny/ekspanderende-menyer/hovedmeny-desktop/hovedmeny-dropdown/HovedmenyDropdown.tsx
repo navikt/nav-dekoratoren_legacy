@@ -69,7 +69,7 @@ export const HovedmenyDropdown = (props: Props) => {
     const kbNaviGroup = NaviGroup.DesktopHovedmeny;
     const kbRootIndex = { col: 0, row: 0, sub: 0 };
     const kbIdMap = {
-        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element('knapp')
+        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element('knapp'),
     };
 
     useEffect(() => {

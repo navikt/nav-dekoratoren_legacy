@@ -99,9 +99,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             <div ref={this.varselbjelleRef} className="varselbjelle">
                 {erInnlogget && arbeidsflate === MenuValue.PRIVATPERSON ? (
                     <>
-                        <div
-                            id="toggle-varsler-container"
-                        >
+                        <div id="toggle-varsler-container">
                             <MenylinjeKnapp
                                 toggleMenu={this.handleClick}
                                 isOpen={clicked}
@@ -110,7 +108,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                                     antallVarsler > 0 ? antallVarsler : 'ingen'
                                 } varsler.`}
                             >
-                                <VarselIkon isOpen={clicked}/>
+                                <VarselIkon isOpen={clicked} />
                             </MenylinjeKnapp>
                         </div>
                         <div className="min-varsel-wrapper">

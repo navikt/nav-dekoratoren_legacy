@@ -9,7 +9,6 @@
     @handleAngle: 30deg;
     @middle: (@height - @stroke-width) / 2;
 
-
     .line() {
         position: absolute;
         width: @width;
@@ -38,14 +37,21 @@
 
         &--open {
             //opacity: 0;
-            transform: translate(@width/2 - @circleRadius, @height/2 - @circleRadius) scale(0);
+            transform: translate(
+                    @width / 2 - @circleRadius,
+                    @height / 2 - @circleRadius
+                )
+                scale(0);
         }
     }
 
     &__line {
         transform-origin: center;
-        transform: translate(@circleRadius + @circleRadius * cos(@handleAngle),
-            @circleRadius + @circleRadius * sin(@handleAngle)) rotate(@handleAngle);
+        transform: translate(
+                @circleRadius + @circleRadius * cos(@handleAngle),
+                @circleRadius + @circleRadius * sin(@handleAngle)
+            )
+            rotate(@handleAngle);
         height: @stroke-width;
         width: @circleRadius;
         background-color: @color;
@@ -54,7 +60,7 @@
 
         &--open {
             .line();
-            transform: translateY(@middle) rotate(315deg) scale(.8);
+            transform: translateY(@middle) rotate(315deg) scale(0.8);
         }
     }
 
@@ -65,7 +71,7 @@
         transition: 0.35s all ease-in;
 
         &--open {
-            transform: translateY(@middle) rotate(45deg) scale(.8);
+            transform: translateY(@middle) rotate(45deg) scale(0.8);
         }
     }
 }

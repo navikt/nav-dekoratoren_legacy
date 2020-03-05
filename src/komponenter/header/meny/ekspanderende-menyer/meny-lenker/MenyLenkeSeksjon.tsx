@@ -32,27 +32,22 @@ export const MenyLenkeSeksjon = ({
                 <Element>{menygruppe.displayName}</Element>
             </div>
             <ul className={cls.element('lenker')}>
-                {menygruppe.children.map(
-                    (lenke: MenyNode, index: number) => {
-                        const kbNaviIndex = {
-                            col: colIndex,
-                            row: rowIndex,
-                            sub: index,
-                        };
-                        return (
-                            <MenyLenke
-                                key={index}
-                                lenke={lenke}
-                                isOpen={isOpen}
-                                menyGruppeNavn={menygruppe.displayName}
-                                id={KbNav.getKbId(
-                                    kbNaviGroup,
-                                    kbNaviIndex
-                                )}
-                            />
-                        );
-                    }
-                )}
+                {menygruppe.children.map((lenke: MenyNode, index: number) => {
+                    const kbNaviIndex = {
+                        col: colIndex,
+                        row: rowIndex,
+                        sub: index,
+                    };
+                    return (
+                        <MenyLenke
+                            key={index}
+                            lenke={lenke}
+                            isOpen={isOpen}
+                            menyGruppeNavn={menygruppe.displayName}
+                            id={KbNav.getKbId(kbNaviGroup, kbNaviIndex)}
+                        />
+                    );
+                })}
             </ul>
         </section>
     );

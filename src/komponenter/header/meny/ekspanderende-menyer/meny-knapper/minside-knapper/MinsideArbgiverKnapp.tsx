@@ -10,7 +10,7 @@ import { GACategory } from '../../../../../../utils/google-analytics';
 type Props = {
     classname: string;
     href: string;
-}
+};
 
 export const MinsideArbgiverKnapp = (props: Props) => {
     const { classname, href } = props;
@@ -27,7 +27,11 @@ export const MinsideArbgiverKnapp = (props: Props) => {
             }}
             tabIndex={0}
         >
-            <div className={`menylinje-knapp-visning ${cls.element('knapp-visning')}`}>
+            <div
+                className={`menylinje-knapp-visning ${cls.element(
+                    'knapp-visning'
+                )}`}
+            >
                 <MinsideIkon hasMenu={false} />
                 <div className={cls.element('knapp-tekst')}>
                     <Normaltekst className={cls.element('knapp-tekst-topp')}>

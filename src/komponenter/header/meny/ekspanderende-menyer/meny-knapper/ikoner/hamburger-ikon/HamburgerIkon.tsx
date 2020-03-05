@@ -27,4 +27,3 @@ const HamburgerIkon = ({ isOpen }: Props) => {
 };
 
 export default HamburgerIkon;
-

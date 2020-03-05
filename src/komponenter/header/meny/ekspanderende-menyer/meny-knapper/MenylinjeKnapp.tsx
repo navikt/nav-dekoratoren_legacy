@@ -26,7 +26,11 @@ export const MenylinjeKnapp = (props: Props) => {
             aria-controls={classname}
             aria-expanded={isOpen}
         >
-            <div className={`menylinje-knapp-visning ${cls.element('knapp-visning')}`}>
+            <div
+                className={`menylinje-knapp-visning ${cls.element(
+                    'knapp-visning'
+                )}`}
+            >
                 {children}
             </div>
         </button>
@@ -34,4 +38,3 @@ export const MenylinjeKnapp = (props: Props) => {
 };
 
 export default MenylinjeKnapp;
-

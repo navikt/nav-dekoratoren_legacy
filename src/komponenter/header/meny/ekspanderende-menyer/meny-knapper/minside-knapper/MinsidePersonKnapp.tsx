@@ -12,7 +12,7 @@ type Props = {
     brukerNavn: string;
     classname: string;
     ariaLabel: string;
-}
+};
 
 export const MinsidePersonKnapp = (props: Props) => {
     const { toggleMenu, isOpen, classname, ariaLabel, brukerNavn } = props;

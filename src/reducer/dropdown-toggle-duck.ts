@@ -27,7 +27,7 @@ export const toggleSok = () => ({
 });
 
 export const toggleVarsler = () => ({
-   type: ActionType.TOGGLE_VARSLER,
+    type: ActionType.TOGGLE_VARSLER,
 });
 
 export const lukkAlleDropdowns = () => ({
@@ -49,10 +49,10 @@ export const reducer = (
             return { ...initialState, sok: !state.sok };
         }
         case ActionType.TOGGLE_VARSLER: {
-            return {...state, varsler: !state.varsler};
+            return { ...state, varsler: !state.varsler };
         }
         case ActionType.TOGGLE_LUKK_ALLE: {
-            return {...initialState, varsler: state.varsler};
+            return { ...initialState, varsler: state.varsler };
         }
         default:
             return state;
