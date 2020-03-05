@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     getMinsideMenyNode,
     MenuValue,
-    validateMenuNode,
+    validateMenuRootNode,
 } from '../../../../../utils/meny-storage-utils';
 import {
     GACategory,
@@ -58,7 +58,7 @@ export const MinsideMenyDesktop = () => {
     }
 
     const minsideMenyPunkter = getMinsideMenyNode(menyPunkter.data, language);
-    if (!validateMenuNode(minsideMenyPunkter)) {
+    if (!validateMenuRootNode(minsideMenyPunkter)) {
         return null;
     }
 

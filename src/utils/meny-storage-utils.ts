@@ -15,7 +15,7 @@ enum MenuName {
     MinsideMeny = 'My page menu',
 }
 
-export const validateMenuNode = (menyNode: MenyNode | undefined) =>
+export const validateMenuRootNode = (menyNode: MenyNode | undefined) =>
     menyNode && menyNode.children && menyNode.children.length > 0;
 
 export const getSessionStorage = (key: string): string | null => {
