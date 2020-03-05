@@ -24,7 +24,7 @@ export const Bunnseksjon = ({
     settArbeidsflate,
 }: Props) => {
     const cls = BEMHelper(classname);
-    const lenker = bunnLenker[arbeidsflate];
+    const lenker = bunnLenker[arbeidsflate]();
 
     return (
         <>
