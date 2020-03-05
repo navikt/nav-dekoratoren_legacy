@@ -5,7 +5,7 @@ export interface BEMWrapper {
 }
 
 const BEMHelper = (cls: BEMWrapper['className']) => {
-    const classNames = cls.split(' ');
+    const classNames = cls && cls.split(' ') || [];
 
     return ({
         className: cls,
