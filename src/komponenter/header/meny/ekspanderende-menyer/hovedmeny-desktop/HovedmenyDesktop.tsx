@@ -15,6 +15,7 @@ import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
 import HamburgerIkon from '../meny-knapper/ikoner/hamburger-ikon/HamburgerIkon';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
+import './HovedmenyDesktop.less';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -56,7 +57,7 @@ export const HovedmenyDesktop = () => {
         <EkspanderbarMeny
             isOpen={isOpen}
             menyKnapp={knapp}
-            classname={`desktop-dropdown `}
+            classname={`ekspanderbar ${classname}`}
             id={classname}
         >
             {menyPunkter.status === Status.OK ? (

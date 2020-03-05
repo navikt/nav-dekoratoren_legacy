@@ -9,6 +9,7 @@ import Tekst from '../../../../../tekster/finn-tekst';
 import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import SokMenyIkon from '../meny-knapper/ikoner/sok-ikon/SokMenyIkon';
+import './SokDropdown.less';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.sok,
@@ -44,7 +45,7 @@ export const SokDropdown = () => {
 
     return (
         <EkspanderbarMeny
-            classname={'desktop-dropdown'}
+            classname={`ekspanderbar ${classname}`}
             id={classname}
             isOpen={isOpen}
             menyKnapp={knapp}

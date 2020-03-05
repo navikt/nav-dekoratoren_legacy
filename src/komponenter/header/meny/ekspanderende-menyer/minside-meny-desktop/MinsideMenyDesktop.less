@@ -1,9 +1,25 @@
 @import (reference) '../../../../../styling-variabler.less';
 @import (reference) '../meny-lenker/MenyLenker';
+@import (reference) '../ekspanderbar-meny/EkspanderbarMeny';
 
 .desktop-minside-meny {
     @lenkeseksjoner-cols: 3;
     @lenkeseksjoner-margin: 1.5em;
+
+    &__innhold-wrapper {
+        right: 200px;
+        max-width: 150px;
+        transition-property: @ekspanderbar-transition-props, max-width, right;
+
+        &--aktive {
+            max-width: 100%;
+            right: 0;
+        }
+    }
+
+    &__innhold {
+
+    }
 
     &__knapp-tekst {
         text-align: left;

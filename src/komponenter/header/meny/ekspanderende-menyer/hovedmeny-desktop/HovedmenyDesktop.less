@@ -1,12 +1,11 @@
-@import (reference) '../../../../../styling-variabler.less';
+@import (reference) '../../../../../../src/styling-variabler.less';
 @import (reference) '../ekspanderbar-meny/EkspanderbarMeny';
 
-.desktop-sok-dropdown {
+.desktop-hovedmeny {
     &__innhold-wrapper {
-        left: 300px;
+        left: 150px;
         max-width: 150px;
         transition-property: @ekspanderbar-transition-props, max-width, left;
-
 
         &--aktive {
             max-width: 100%;
@@ -15,6 +14,6 @@
     }
 
     &__innhold {
-        text-align: center;
+
     }
 }

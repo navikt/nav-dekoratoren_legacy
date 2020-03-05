@@ -1,37 +1,43 @@
 @import (reference) '../../../../../styling-variabler.less';
 
-.desktop-dropdown {
-    &__innhold-wrapper {
-        position: absolute;
-        z-index: 1;
-        overflow: hidden;
-        max-height: 0;
-        max-width: @desktopLimitWidth / 3;
-        visibility: hidden;
-        background-color: white;
-        border-bottom-left-radius: @border-radius-base;
-        border-bottom-right-radius: @border-radius-base;
+@ekspanderbar-transition-props: max-height, visibility;
 
-        transition-duration: 0.7s;
-        transition-timing-function: ease-in-out;
-        transition-property: max-height, max-width, visibility;
-
-        &--aktive {
-            max-height: 60rem;
+.ekspanderbar {
+    @media (min-width: @tabletLimitWidth) {
+        &__innhold-wrapper {
+            position: absolute;
+            z-index: 1;
+            overflow: hidden;
+            max-height: 0;
             max-width: 100%;
-            visibility: visible;
-            z-index: 1001;
-        }
-    }
+            visibility: hidden;
+            background-color: white;
+            border-bottom-left-radius: @border-radius-base;
+            border-bottom-right-radius: @border-radius-base;
 
-    &__innhold {
-        box-sizing: border-box;
-        padding: 0 @margins-sides 2rem @margins-sides;
-        overflow: hidden;
-        min-width: @tabletLimitWidth;
-        width: 100vw;
-        @media (min-width: @desktopLimitWidth) {
-            width: @desktopLimitWidth;
+            transition-duration: 0.4s;
+            transition-timing-function: ease-in;
+            transition-property: @ekspanderbar-transition-props;
+
+            &--aktive {
+                max-height: 60rem;
+                max-width: 100%;
+                visibility: visible;
+                z-index: 1001;
+                transition-duration: 0.6s;
+                transition-timing-function: ease-in-out;
+                transition-property: @ekspanderbar-transition-props;
+            }
+        }
+
+        &__innhold {
+            box-sizing: border-box;
+            padding: 0 @margins-sides 2rem @margins-sides;
+            overflow: hidden;
+            width: 100vw;
+            @media (min-width: @desktopLimitWidth) {
+                width: @desktopLimitWidth;
+            }
         }
     }
 }

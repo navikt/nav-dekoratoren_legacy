@@ -62,7 +62,7 @@ export const MinsideMenyDesktop = () => {
         <EkspanderbarMeny
             isOpen={isOpen}
             menyKnapp={knapp}
-            classname={'desktop-dropdown'}
+            classname={`ekspanderbar ${classname}`}
             id={classname}
         >
             {menyPunkter.status === Status.OK ? (
