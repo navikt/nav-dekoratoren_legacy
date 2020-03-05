@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppState } from '../../../../../reducer/reducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { MenuValue } from '../../../../../utils/meny-storage-utils';
+import { getMinsideMenyNode, MenuValue } from '../../../../../utils/meny-storage-utils';
 import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
 import { toggleMinsideMeny } from '../../../../../reducer/dropdown-toggle-duck';
 import { Status } from '../../../../../api/api';
@@ -9,7 +9,6 @@ import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
 import MinsideDropdown from './minside-dropdown/MinsideDropdown';
 import './MinsideMenyDesktop.less';
-import { getMinsideMenyPunkter } from './minside-dropdown/minside-lenker';
 import MinsidePersonKnapp from '../meny-knapper/minside-knapper/MinsidePersonKnapp';
 import Environment from '../../../../../utils/Environment';
 import MinsideArbgiverKnapp from '../meny-knapper/minside-knapper/MinsideArbgiverKnapp';
@@ -18,13 +17,14 @@ const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,
     arbeidsflate: state.arbeidsflate.status,
     isOpen: state.dropdownToggles.minside,
-    // menyPunkter: state.menypunkt,
+    language: state.language.language,
+    menyPunkter: state.menypunkt,
 });
 
 const classname = 'desktop-minside-meny';
 
 export const MinsideMenyDesktop = () => {
-    const { arbeidsflate, innloggetStatus, isOpen } = useSelector(stateSelector);
+    const { arbeidsflate, innloggetStatus, isOpen, language, menyPunkter } = useSelector(stateSelector);
     const dispatch = useDispatch();
 
     if (!innloggetStatus.authenticated
@@ -40,8 +40,6 @@ export const MinsideMenyDesktop = () => {
                 href={Environment.MINSIDE_ARBEIDSGIVER_URL}
             />);
     }
-
-    const menyPunkter = getMinsideMenyPunkter();
 
     const knapp = (
         <MinsidePersonKnapp
@@ -69,7 +67,7 @@ export const MinsideMenyDesktop = () => {
                 <MinsideDropdown
                     classname={classname}
                     isOpen={isOpen}
-                    menyLenker={menyPunkter.data[0]}
+                    menyLenker={getMinsideMenyNode(menyPunkter.data, language)}
                 />
             ) : <MenySpinner />}
         </EkspanderbarMeny>

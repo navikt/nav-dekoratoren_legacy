@@ -10,6 +10,11 @@ export enum MenuValue {
     IKKEVALGT = 'IKKEVALGT',
 }
 
+enum MenuName {
+    Hovedmeny = 'Main menu',
+    MinsideMeny = 'My page menu',
+}
+
 export const getSessionStorage = (key: string): string | null => {
     return sessionStorage.getItem(key);
 };
@@ -26,16 +31,26 @@ export const oppdaterSessionStorage = (valgVerdi: MenuValue): void => {
     setSessionStorage(NAVHEADER, valgVerdi);
 };
 
-export const getMenuNode = (
+export const getHovedmenyNode = (
     menypunkter: MenyNode[],
     language: Language,
-    arbeidsflate: MenuValue
+    arbeidsflate: MenuValue,
 ): MenyNode | undefined => {
     const languageNode = getLanguageNode(language, menypunkter);
     return languageNode
         ? language === Language.NORSK
             ? findNode(languageNode, arbeidsflate)
-            : findNode(languageNode, 'Main menu')
+            : findNode(languageNode, MenuName.Hovedmeny)
+        : undefined;
+};
+
+export const getMinsideMenyNode = (
+    menypunkter: MenyNode[],
+    language: Language,
+): MenyNode | undefined => {
+    const languageNode = getLanguageNode(language, menypunkter);
+    return languageNode
+        ? findNode(languageNode, MenuName.MinsideMeny)
         : undefined;
 };
 

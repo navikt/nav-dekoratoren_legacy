@@ -1,15 +1,12 @@
 import React from 'react';
 import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
-import {
-    GACategory,
-    triggerGaEvent,
-} from '../../../../../utils/google-analytics';
+import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../reducer/reducer';
 import { Status } from '../../../../../api/api';
 import { Undertittel } from 'nav-frontend-typografi';
 import { HovedmenyDropdown } from './hovedmeny-dropdown/HovedmenyDropdown';
-import { getMenuNode } from '../../../../../utils/meny-storage-utils';
+import { getHovedmenyNode } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
@@ -65,7 +62,7 @@ export const HovedmenyDesktop = () => {
                     classname={classname}
                     arbeidsflate={arbeidsflate}
                     language={language}
-                    menyLenker={getMenuNode(menyPunkter.data, language, arbeidsflate)}
+                    menyLenker={getHovedmenyNode(menyPunkter.data, language, arbeidsflate)}
                     isOpen={isOpen}
                 />
             ) : <MenySpinner />}

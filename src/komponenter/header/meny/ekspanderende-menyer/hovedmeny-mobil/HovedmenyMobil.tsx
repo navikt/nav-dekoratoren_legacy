@@ -2,7 +2,7 @@ import React from 'react';
 import { AppState } from '../../../../../reducer/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Status } from '../../../../../api/api';
-import { getMenuNode } from '../../../../../utils/meny-storage-utils';
+import { getHovedmenyNode } from '../../../../../utils/meny-storage-utils';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
 import {
@@ -41,9 +41,9 @@ export const HovedmenyMobil = () => {
     const menyKnapp = (
         <MenylinjeKnapp
             toggleMenu={menutoggle}
-            clicked={isOpen}
-            parentClassname={classname}
-            ariaControlsId={classname}
+            isOpen={isOpen}
+            classname={classname}
+            ariaLabel={'Hovedmenyknapp'}
         >
             <MenyIkon />
             <Undertittel>
@@ -56,7 +56,7 @@ export const HovedmenyMobil = () => {
         meny.status === Status.OK ? (
             <MobilVisningsmeny
                 classname={classname}
-                menyLenker={getMenuNode(meny.data, language, arbeidsflate)}
+                menyLenker={getHovedmenyNode(meny.data, language, arbeidsflate)}
                 menuIsOpen={isOpen}
                 togglemenu={menutoggle}
                 arbeidsflate={arbeidsflate}
