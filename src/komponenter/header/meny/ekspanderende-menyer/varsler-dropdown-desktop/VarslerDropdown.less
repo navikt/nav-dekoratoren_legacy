@@ -2,19 +2,21 @@
 @import (reference) '../ekspanderbar-meny/EkspanderbarMeny';
 
 .desktop-varsler-dropdown {
+    @dropdown-width: @tabletLimitWidth * 0.5;
+
     &__innhold-wrapper {
-        right: 400px;
+        right: 375px;
         max-width: 150px;
         transition-property: @ekspanderbar-transition-props, max-width, right;
 
         &--aktive {
-            max-width: @tabletLimitWidth * 0.75;
-            right: 0;
+            max-width: @dropdown-width;
+            right: 125px;
         }
     }
 
     &__innhold {
-        width: @tabletLimitWidth * 0.75;
+        width: @dropdown-width;
     }
 }
 

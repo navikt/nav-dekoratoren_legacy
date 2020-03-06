@@ -8,8 +8,8 @@ import Tekst from '../../../../../tekster/finn-tekst';
 import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import './VarslerDropdown.less';
-import VarselIkon from '../meny-knapper/ikoner/varsel-ikon/VarselIkon';
-import Varselvisning from './varselvisning/Varselvisning';
+import { VarselIkon } from '../meny-knapper/ikoner/varsel-ikon/VarselIkon';
+import { Varselvisning } from './varselvisning/Varselvisning';
 import { MenuValue } from '../../../../../utils/meny-storage-utils';
 
 const stateSelector = (state: AppState) => ({
@@ -63,7 +63,7 @@ export const VarslerDropdown = () => {
             isOpen={isOpen}
             menyKnapp={knapp}
         >
-            <Varselvisning tabIndex={true} />
+            <Varselvisning tabIndex={0} />
         </EkspanderbarMeny>
     );
 };
