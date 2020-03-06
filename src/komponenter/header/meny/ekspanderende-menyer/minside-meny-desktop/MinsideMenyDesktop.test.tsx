@@ -30,8 +30,6 @@ const uInnloggetAction = {
     type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
     data: {
         authenticated: false,
-        name: '',
-        securityLevel: '',
     },
     status: Status.IKKE_STARTET,
 };
