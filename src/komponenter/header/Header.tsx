@@ -39,8 +39,8 @@ export const Header = () => {
                         {language === Language.NORSK && <Arbeidsflatemeny />}
                         <DesktopMenylinje />
                     </div>
-                    <MenyBakgrunn className={'desktopmeny'} />
                 </div>
+                <MenyBakgrunn />
             </header>
         </>
     );

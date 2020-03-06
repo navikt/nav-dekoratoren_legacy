@@ -3,13 +3,14 @@ import BEMHelper from '../../../utils/bem';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import MinsideLenke, {
+import {
     minsideMenyDesktopClassname,
 } from './ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import Varselbjelle from './varsel/Varselbjelle';
 import VarselVisning from './varsel/varselvisning/Varselvisning';
 import './DesktopMenylinje.less';
+import MinsideMenyDesktop from './ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
 import {
     SokDropdown,
     sokDropdownDesktopClassname,
@@ -85,7 +86,7 @@ const DesktopMenylinje = () => {
                                     }
                                 </Varselbjelle>
                             </VarselinnboksProvider>
-                            <MinsideLenke />
+                            <MinsideMenyDesktop />
                             <LoggInnKnapp />
                         </>
                     </InnloggingsstatusProvider>
