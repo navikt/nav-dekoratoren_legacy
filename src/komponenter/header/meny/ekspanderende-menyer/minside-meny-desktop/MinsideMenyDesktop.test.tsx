@@ -28,10 +28,10 @@ const innloggetAction = {
 
 const uInnloggetAction = {
     type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
+    status: Status.OK,
     data: {
         authenticated: false,
     },
-    status: Status.IKKE_STARTET,
 };
 
 const mountWithRedux = () => {
