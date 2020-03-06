@@ -1,0 +1,44 @@
+@import (reference) '../../../../../styling-variabler.less';
+@import (reference) '../ekspanderbar-meny/EkspanderbarMeny';
+
+.desktop-varsler-dropdown {
+    &__innhold-wrapper {
+        right: 400px;
+        max-width: 150px;
+        transition-property: @ekspanderbar-transition-props, max-width, right;
+
+        &--aktive {
+            max-width: @tabletLimitWidth * 0.75;
+            right: 0;
+        }
+    }
+
+    &__innhold {
+        width: @tabletLimitWidth * 0.75;
+    }
+}
+
+.varselbjelle {
+    &__knapp:hover:not(:focus) {
+        .varselbjelle-ikon__bjelle:not(.varselbjelle-ikon__bjelle--open) {
+            animation-duration: 0.25s;
+            animation-name: ring-bjelle;
+        }
+    }
+
+    &__tekst {
+        font-weight: bold;
+    }
+
+    @keyframes ring-bjelle {
+        @theta: 15deg;
+
+        30% {
+            transform: rotate(@theta);
+        }
+
+        55% {
+            transform: rotate(-@theta);
+        }
+    }
+}

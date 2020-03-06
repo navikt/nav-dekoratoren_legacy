@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import parse from 'html-react-parser';
-import { AppState } from '../../../../../reducer/reducer';
-import { desktopview, tabletview } from '../../../../../styling-mediaquery';
-import Environment from '../../../../../utils/Environment';
+import { AppState } from '../../../../../../reducer/reducer';
+import { desktopview, tabletview } from '../../../../../../styling-mediaquery';
+import Environment from '../../../../../../utils/Environment';
 import './Varselvisning.less';
 import {
     GACategory,
     triggerGaEvent,
-} from '../../../../../utils/google-analytics';
-import Tekst, { finnTekst } from '../../../../../tekster/finn-tekst';
-import { Language } from '../../../../../reducer/language-duck';
-import { LenkeMedGA } from '../../../../LenkeMedGA';
+} from '../../../../../../utils/google-analytics';
+import Tekst, { finnTekst } from '../../../../../../tekster/finn-tekst';
+import { Language } from '../../../../../../reducer/language-duck';
+import { LenkeMedGA } from '../../../../../LenkeMedGA';
 
 interface OwnProps {
     tabIndex: boolean;

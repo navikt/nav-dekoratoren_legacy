@@ -1,11 +1,165 @@
 @import '~nav-frontend-core/less/_variabler';
 
-.varsel-meny-ikon {
+.varselbjelle-ikon {
+    @main-color: @navBla;
+    @ulest-color: @navRodLighten40;
+
+    @transition-props: all 0.35s ease-in;
+
+    @width: 28px;
+    @height: 32px;
+    @stroke-width: 1px;
+
+    @ring-diameter: 6px;
+
+    @bell-width: 22px;
+    @bell-height: 22px;
+
+    @lip-width: @width;
+    @lip-height: 3px;
+
+    @clapper-width: 6px;
+    @clapper-height: @bell-height + @lip-height + 2px;
+
+    @ulest-diameter: 16px;
+    @ulest-top: @height * 0.2;
+    @ulest-left: @width * 0.05;
+
     &__container {
-        border: none;
-        display: inline-block;
         position: relative;
+        width: @width;
+        height: @height;
+        padding: 0;
+        top: 0;
+        border: none;
+        margin-right: 0.25em;
+    }
+
+    &__bjelle {
+        transform-origin: top center;
+        transform: scale(1);
+        transition: @transition-props;
+
+        &--open {
+            transform: scale(0.5) translate(@width/2, @height);
+        }
+    }
+
+    &__ring {
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        left: (@width - @ring-diameter) / 2;
+
+        border-radius: 50%;
+        height: @ring-diameter;
+        width: @ring-diameter;
+        background-color: @main-color;
+    }
+
+    &__bell {
+        z-index: 2;
+        position: absolute;
+        top: @ring-diameter - @stroke-width;
+        left: (@width - @bell-width) / 2;
+
+        border-top-left-radius: @bell-height + @stroke-width;
+        border-top-right-radius: @bell-height + @stroke-width;
+        border: @main-color @stroke-width solid;
+        height: @bell-height;
+        width: @bell-width;
         background-color: white;
-        margin-right: 0.5rem;
+        border-bottom: 0;
+
+        transition: @transition-props;
+
+        &--open {
+            background-color: @main-color;
+        }
+    }
+
+    &__lip {
+        z-index: 2;
+        position: absolute;
+        top: @ring-diameter + @bell-height - @stroke-width;
+        left: 0;
+
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+
+        width: @lip-width;
+        height: @lip-height;
+        background-color: @main-color;
+    }
+
+    &__clapper {
+        z-index: 1;
+        position: absolute;
+        top: @ring-diameter;
+        left: (@width - @clapper-width) / 2;
+        border-radius: 50%;
+
+        width: @clapper-width;
+        height: @clapper-height;
+        background-color: @main-color;
+    }
+
+    &__ulest-sirkel {
+        opacity: 1;
+        z-index: 3;
+        position: absolute;
+        top: @ulest-top;
+        left: @ulest-left;
+
+        border-radius: 50%;
+        height: @ulest-diameter;
+        width: @ulest-diameter;
+        background-color: @ulest-color;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        transition: @transition-props;
+
+        &--open {
+            opacity: 0;
+        }
+    }
+
+    &__ulest-antall {
+        color: white;
+        font-weight: bold;
+        font-size: 11px;
+    }
+
+    .kryss-linje(@rotation) {
+        visibility: hidden;
+        position: absolute;
+        top: @ring-diameter;
+        left: 0;
+
+        width: @width;
+        height: 3px;
+        background-color: @navBla;
+
+        transform-origin: center;
+        transform: translate(0) rotate(0) scaleX(0);
+        transition: @transition-props;
+
+        &--open {
+            top: 12px;
+            left: 6px;
+            visibility: visible;
+            transform: translateX(-@width/2) rotate(@rotation) scale(0.8);
+        }
+    }
+
+    &__kryss-linje-1 {
+        .kryss-linje(45deg);
+    }
+
+    &__kryss-linje-2 {
+        .kryss-linje(-45deg);
     }
 }

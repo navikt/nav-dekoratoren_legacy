@@ -1,25 +1,33 @@
 import React from 'react';
 import './VarselIkon.less';
 import BEMHelper from '../../../../../../../utils/bem';
-
-const ikon = require('../../../../../../../ikoner/varsler/alarm.svg');
+import { EtikettLiten } from 'nav-frontend-typografi';
 
 type Props = {
     isOpen: boolean;
+    antallUleste?: number;
 };
 
-export const VarselIkon = ({ isOpen }: Props) => {
-    const cls = BEMHelper('varsel-meny-ikon');
+export const VarselIkon = ({ isOpen, antallUleste = 0 }: Props) => {
+    const cls = BEMHelper('varselbjelle-ikon');
 
     return (
         <div className={cls.element('container')}>
-            <img
-                alt={''}
-                src={ikon}
-                className={cls.element('bjelle', isOpen ? 'open' : '')}
-            />
+            <div className={cls.element('bjelle', isOpen ? 'open' : '')}>
+                <div className={cls.element('ring')}/>
+                <div className={cls.element('bell', isOpen ? 'open' : '')}/>
+                <div className={cls.element('lip')}/>
+                <div className={cls.element('clapper')}/>
+                { antallUleste &&
+                    <div className={cls.element('ulest-sirkel', isOpen ? 'open' : '')}>
+                        <EtikettLiten className={cls.element('ulest-antall')}>
+                            {antallUleste < 10 ? antallUleste : '9+'}
+                        </EtikettLiten>
+                    </div>
+                }
+            </div>
+            <div className={cls.element('kryss-linje-1', isOpen ? 'open' : '')} />
+            <div className={cls.element('kryss-linje-2', isOpen ? 'open' : '')} />
         </div>
     );
 };
-
-export default VarselIkon;

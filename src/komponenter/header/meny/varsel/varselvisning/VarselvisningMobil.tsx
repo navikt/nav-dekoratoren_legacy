@@ -1,9 +1,9 @@
 import React from 'react';
 import BEMHelper from '../../../../../utils/bem';
 import Lukkundermeny from '../../ekspanderende-menyer/hovedmeny-mobil/meny-dropdown/mobil-innhold/Lukkundermeny';
-import VarselVisning from './Varselvisning';
+import VarselVisning from '../../ekspanderende-menyer/varsler-dropdown-desktop/varselvisning/Varselvisning';
 import TopSeksjon from '../../ekspanderende-menyer/hovedmeny-mobil/meny-dropdown/mobil-innhold/top-seksjon/Topseksjon';
-import './Varselvisning.less';
+import './VarselvisningMobil.less';
 
 interface OwnProps {
     visvarsel: boolean;
