@@ -1,11 +1,10 @@
 {
     "name": "nav-dekoratoren",
     "version": "0.1.0",
-    "homepage": "/dekoratoren",
     "private": true,
     "scripts": {
-        "start-server": "node buildfolder/server.js",
-        "start-devserver": "nodemon buildfolder/server.js",
+        "start-server": "node build/server.js",
+        "start-devserver": "nodemon build/server.js",
         "start": "npm run build-dev && cross-env DEVELOPMENT=true npm-run-all -p -r build-and-watch-client-dev build-and-watch-server-dev start-devserver",
         "build": "npm run build-client && npm run build-server",
         "build-dev": "npm run build-client-dev && npm run build-server-dev",
@@ -45,11 +44,13 @@
         "babel-preset-react-app": "^9.0.2",
         "classnames": "^2.2.6",
         "css-loader": "^3.2.0",
+        "dotenv": "^8.2.0",
         "downshift": "^3.2.10",
         "es6-promise": "^4.2.8",
         "express": "^4.17.1",
         "file-loader": "^4.2.0",
         "html-react-parser": "^0.9.1",
+        "http-proxy-middleware": "^1.0.0",
         "isomorphic-fetch": "^2.2.1",
         "less-plugin-npm-import": "^2.1.0",
         "lodash.throttle": "^4.1.1",
@@ -144,6 +145,17 @@
         "webpack-cli": "^3.3.9",
         "webpack-node-externals": "^1.7.2",
         "window": "^4.2.6"
+    },
+    "jest": {
+        "rootDir": ".",
+        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+        "setupFilesAfterEnv": [
+            "<rootDir>/src/utils/jest/setupTest.js"
+        ],
+        "moduleNameMapper": {
+            "\\.(css|jpg|png|svg|less)$": "<rootDir>/src/utils/jest/styleMock.js",
+            "nav-(.*)-style": "<rootDir>/src/utils/jest/styleMock.js"
+        }
     },
     "browserslist": {
         "production": [

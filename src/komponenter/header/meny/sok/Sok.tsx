@@ -64,8 +64,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     handleValueChange(input: string) {
-        const url = Environment.BACKEND_SOK_URL;
-        console.log('input', input);
+        const url = `${Environment.APP_BASE_URL}/api/sok`;
         if (input === '') {
             this.setState({ setBackground: false });
         }
@@ -220,7 +219,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     render() {
         const { selectedInput, items } = this.state;
         const { language } = this.props;
-        const URL = `${Environment.BASE_URL_ENONIC}/sok?ord=${selectedInput}`;
+        const URL = `${Environment.APP_BASE_URL}/api/sok?ord=${selectedInput}`;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
         });
@@ -283,6 +282,10 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                                         'sok-input-label',
                                                         language
                                                     )}
+                                                    id={
+                                                        'desktop-decorator-sok-input'
+                                                    }
+                                                />
                                                 />
                                                 <ul
                                                     className="sokeresultat-liste"

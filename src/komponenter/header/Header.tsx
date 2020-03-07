@@ -20,14 +20,16 @@ export const Header = () => {
 
     useEffect(() => {
         fetchMenypunkter()(dispatch);
-        if (Environment.context !== MenuValue.IKKEVALGT) {
-            oppdaterSessionStorage(Environment.context);
+        if (Environment.CONTEXT !== MenuValue.IKKEVALGT) {
+            oppdaterSessionStorage(Environment.CONTEXT);
         }
     }, []);
 
     return (
         <>
-            <Skiplinks />
+            <div className="header-z-wrapper">
+                <Skiplinks />
+            </div>
             <header className="siteheader">
                 <div className="media-sm-mobil mobil-meny">
                     <MobilMenylinje language={language} />

@@ -64,7 +64,6 @@ const MobilarbeidsflateValg = ({
                                 href={lenke.url}
                                 onClick={event => {
                                     oppdatereArbeidsflateValg(event, lenke.key);
-                                    settArbeidsflate();
                                 }}
                                 tabIndex={tabindex ? 0 : -1}
                                 gaEventArgs={{
