@@ -80,6 +80,7 @@ export const Header = () => {
                     graphData.nodeMap[
                         BEMHelper('toggle-varsler-container').element('knapp')
                     ],
+                currentNode: graphData.rootNode,
             };
             dispatch(settKeyboardNodes(nodes));
         }

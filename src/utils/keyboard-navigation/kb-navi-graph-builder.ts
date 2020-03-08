@@ -13,8 +13,8 @@ export const buildNaviGraphAndGetRootNode = (
     group: NaviGroup,
     rootIndex: NaviIndex,
     maxColsPerWrappedRow: number[],
-    nodeMap: NaviNodeMap,
-    idMap: IdMap = {}
+    idMap: IdMap = {},
+    nodeMap: NaviNodeMap = {}
 ): NaviNode => {
     const getTopEdgeIndex = (index: NaviIndex) => {
         const { col, row, sub } = index;
@@ -197,7 +197,7 @@ export const buildNaviGraphAndGetRootNode = (
             return nodeMap[id];
         }
 
-        const node: NaviNode = createNode(id, index);
+        const node: NaviNode = createNode(id, index, group);
         nodeMap[id] = node;
 
         if (node) {

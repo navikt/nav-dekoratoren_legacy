@@ -88,7 +88,6 @@ export const HovedmenyDropdown = (props: Props) => {
             if (kbNode && naviGraph.rootNode) {
                 kbNode[NodeEdge.Bottom] = naviGraph.rootNode;
                 naviGraph.rootNode[NodeEdge.Top] = kbNode;
-                console.log(naviGraph);
             }
         };
 
@@ -113,7 +112,6 @@ export const HovedmenyDropdown = (props: Props) => {
             if (kbNode && naviGraph.rootNode) {
                 kbNode[NodeEdge.Bottom] = naviGraph.rootNode;
                 naviGraph.rootNode[NodeEdge.Top] = kbNode;
-                console.log(naviGraph);
             }
         };
 

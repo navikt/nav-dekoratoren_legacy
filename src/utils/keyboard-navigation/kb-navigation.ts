@@ -9,11 +9,18 @@ export enum NaviGroup {
 }
 
 export enum NodeEdge {
-    Top,
-    Bottom,
-    Left,
-    Right,
+    Top = 'Top',
+    Bottom = 'Bottom',
+    Left = 'Left',
+    Right = 'Right',
 }
+
+export const NodeEdgeOpposite = {
+    [NodeEdge.Top]: NodeEdge.Bottom,
+    [NodeEdge.Bottom]: NodeEdge.Top,
+    [NodeEdge.Left]: NodeEdge.Right,
+    [NodeEdge.Right]: NodeEdge.Left,
+};
 
 export type NaviIndex = {
     col: number;
@@ -30,6 +37,7 @@ export type NaviGraphData = {
 export type NaviNode = {
     id: string;
     index: NaviIndex;
+    group: NaviGroup;
     [NodeEdge.Top]: NaviNode;
     [NodeEdge.Bottom]: NaviNode;
     [NodeEdge.Left]: NaviNode;
@@ -46,9 +54,14 @@ export type IdMap = {
 
 export type NodeSetterCallback = (node: NaviNode) => void;
 
-export const createNode = (id: string, index: NaviIndex): NaviNode => ({
+export const createNode = (
+    id: string,
+    index: NaviIndex,
+    group: NaviGroup
+): NaviNode => ({
     id: id,
     index: index,
+    group: group,
     [NodeEdge.Top]: null,
     [NodeEdge.Bottom]: null,
     [NodeEdge.Left]: null,
@@ -102,9 +115,9 @@ const scrollIfNearViewBounds = (element: HTMLElement) => {
     }
 };
 
-const selectNode = (
+export const selectNode = (
     node: NaviNode,
-    callback: NodeSetterCallback,
+    callback: NodeSetterCallback = () => null,
     focus = true
 ) => {
     if (!node) {
@@ -176,8 +189,8 @@ export const getNaviGraphData = (
         group,
         rootIndex,
         maxColsPerRow,
-        nodeMap,
-        idMap
+        idMap,
+        nodeMap
     );
     return {
         groupName: group,

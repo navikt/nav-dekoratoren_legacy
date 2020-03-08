@@ -2,6 +2,7 @@ import { ActionType, Handling } from '../redux/actions';
 import { NaviNode } from '../utils/keyboard-navigation/kb-navigation';
 
 export interface KeyboardNodeState {
+    currentNode: NaviNode;
     hovedmeny: NaviNode;
     minside: NaviNode;
     sok: NaviNode;
@@ -9,6 +10,7 @@ export interface KeyboardNodeState {
 }
 
 const initialState: KeyboardNodeState = {
+    currentNode: null,
     hovedmeny: null,
     minside: null,
     sok: null,
