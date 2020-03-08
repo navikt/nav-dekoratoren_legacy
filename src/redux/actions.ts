@@ -1,6 +1,7 @@
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../reducer/menu-duck';
+import { KeyboardNodeState } from '../reducer/keyboard-nav-duck';
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',
@@ -26,6 +27,7 @@ export enum ActionType {
     TOGGLE_SOK = 'TOGGLE_SOK',
     TOGGLE_VARSLER = 'TOGGLE_VARSLER',
     TOGGLE_LUKK_ALLE = 'TOGGLE_LUKK_ALLE',
+    SETT_KEYBOARD_NODES = 'SETT_KEYBOARD_NODES',
 }
 
 export interface HentInnloggingsstatusOKAction {
@@ -120,6 +122,11 @@ export interface ToggleLukkAlle {
     type: ActionType.TOGGLE_LUKK_ALLE;
 }
 
+export interface SettKeyboardNodes {
+    type: ActionType.SETT_KEYBOARD_NODES;
+    nodes: KeyboardNodeState;
+}
+
 export type Handling =
     | HentInnloggingsstatusOKAction
     | HentInnloggingsstatusFEILETAction
@@ -142,4 +149,5 @@ export type Handling =
     | ToggleMinsideMeny
     | ToggleSok
     | ToggleVarsler
-    | ToggleLukkAlle;
+    | ToggleLukkAlle
+    | SettKeyboardNodes;

@@ -31,7 +31,7 @@ export const Bunnseksjon = ({
             <hr className={cls.element('bunn-separator')} />
             <div className={cls.element('bunn-seksjon')}>
                 {lenker.map((lenke, index) => {
-                    const kbNaviIndex = { col: index, row: 3, sub: 0 };
+                    const kbNaviIndex = { col: index, row: 2, sub: 0 };
                     return (
                         <BunnseksjonLenke
                             url={lenke.url}

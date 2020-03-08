@@ -1,6 +1,7 @@
 import { buildNaviGraphAndGetRootNode } from './kb-navi-graph-builder';
 
 export enum NaviGroup {
+    DesktopHeaderMenylinje = 'desktop-header-menylinje',
     DesktopHovedmeny = 'desktop-hovedmeny',
     DesktopSokDropdown = 'desktop-sok',
     DesktopVarslerDropdown = 'desktop-varsler',
@@ -33,7 +34,6 @@ export type NaviNode = {
     [NodeEdge.Bottom]: NaviNode;
     [NodeEdge.Left]: NaviNode;
     [NodeEdge.Right]: NaviNode;
-    connect: typeof connectNodes;
 } | null;
 
 export type NaviNodeMap = {
@@ -44,7 +44,7 @@ export type IdMap = {
     [id: string]: string;
 };
 
-type NodeSetterCallback = (node: NaviNode) => void;
+export type NodeSetterCallback = (node: NaviNode) => void;
 
 export const createNode = (id: string, index: NaviIndex): NaviNode => ({
     id: id,
@@ -53,32 +53,7 @@ export const createNode = (id: string, index: NaviIndex): NaviNode => ({
     [NodeEdge.Bottom]: null,
     [NodeEdge.Left]: null,
     [NodeEdge.Right]: null,
-    connect: connectNodes,
 });
-
-function connectNodes(this: NaviNode, node: NaviNode, edge: NodeEdge) {
-    if (!this || !node) {
-        return;
-    }
-    switch (edge) {
-        case NodeEdge.Top:
-            this[NodeEdge.Top] = node;
-            node[NodeEdge.Bottom] = this;
-            return;
-        case NodeEdge.Bottom:
-            this[NodeEdge.Bottom] = node;
-            node[NodeEdge.Top] = this;
-            return;
-        case NodeEdge.Left:
-            this[NodeEdge.Left] = node;
-            node[NodeEdge.Right] = this;
-            return;
-        case NodeEdge.Right:
-            this[NodeEdge.Right] = node;
-            node[NodeEdge.Left] = this;
-            return;
-    }
-}
 
 export const getKbId = (
     group: NaviGroup,
@@ -129,7 +104,6 @@ const scrollIfNearViewBounds = (element: HTMLElement) => {
 
 const selectNode = (
     node: NaviNode,
-    group: NaviGroup,
     callback: NodeSetterCallback,
     focus = true
 ) => {
@@ -147,27 +121,25 @@ const selectNode = (
     }
 };
 
-const kbHandler = (
-    node: NaviNode,
-    group: NaviGroup,
-    callback: NodeSetterCallback
-) => (event: KeyboardEvent) => {
+const kbHandler = (node: NaviNode, callback: NodeSetterCallback) => (
+    event: KeyboardEvent
+) => {
     if (!node) {
         return;
     }
     const key = ieKeyMap(event.key) || event.key;
     switch (key) {
         case 'ArrowLeft':
-            selectNode(node[NodeEdge.Left], group, callback);
+            selectNode(node[NodeEdge.Left], callback);
             break;
         case 'ArrowUp':
-            selectNode(node[NodeEdge.Top], group, callback);
+            selectNode(node[NodeEdge.Top], callback);
             break;
         case 'ArrowRight':
-            selectNode(node[NodeEdge.Right], group, callback);
+            selectNode(node[NodeEdge.Right], callback);
             break;
         case 'ArrowDown':
-            selectNode(node[NodeEdge.Bottom], group, callback);
+            selectNode(node[NodeEdge.Bottom], callback);
             break;
         default:
             return;
@@ -187,13 +159,13 @@ const focusHandler = (
 
     const focusedNode = graph.nodeMap[id];
     if (focusedNode) {
-        selectNode(focusedNode, graph.groupName, callback, false);
+        selectNode(focusedNode, callback, false);
     } else {
-        selectNode(graph.rootNode, graph.groupName, callback, false);
+        selectNode(graph.rootNode, callback, false);
     }
 };
 
-const getNaviGraphData = (
+export const getNaviGraphData = (
     group: NaviGroup,
     rootIndex: NaviIndex,
     maxColsPerRow: number[],

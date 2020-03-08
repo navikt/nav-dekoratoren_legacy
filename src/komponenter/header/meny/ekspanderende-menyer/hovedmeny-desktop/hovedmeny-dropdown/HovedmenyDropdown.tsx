@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import BEMHelper, { BEMWrapper } from '../../../../../../utils/bem';
 import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 import { MenyNode } from '../../../../../../reducer/menu-duck';
 import { Language } from '../../../../../../reducer/language-duck';
 import KbNav, {
-    NaviGraphData,
     NaviGroup,
-    NaviNode,
+    NodeEdge,
 } from '../../../../../../utils/keyboard-navigation/kb-navigation';
 import { matchMedia } from '../../../../../../utils/match-media-polyfill';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
+import { AppState } from '../../../../../../reducer/reducer';
 
 type Props = {
     classname: string;
@@ -30,7 +30,6 @@ const getColSetup = (cls: BEMWrapper): Array<number> => {
             10
         );
 
-    const menyKnappCols = 1;
     const toppSeksjonCols = 1;
     const hovedSeksjonColsFallback = 4;
     const bunnSeksjonColsFallback = 3;
@@ -49,87 +48,73 @@ const getColSetup = (cls: BEMWrapper): Array<number> => {
         (bunnSeksjonElement && getNumCols(bunnSeksjonElement)) ||
         bunnSeksjonColsFallback;
 
-    return [menyKnappCols, toppSeksjonCols, hovedSeksjonCols, bunnSeksjonCols];
+    return [toppSeksjonCols, hovedSeksjonCols, bunnSeksjonCols];
 };
 
 export const HovedmenyDropdown = (props: Props) => {
     const { arbeidsflate, classname, language, menyLenker, isOpen } = props;
 
-    const cls = BEMHelper(classname);
     const dispatch = useDispatch();
+    const kbNode = useSelector(
+        (state: AppState) => state.keyboardNodes.hovedmeny
+    );
+
+    const cls = BEMHelper(classname);
 
     const settArbeidsflate = () => dispatch(finnArbeidsflate());
 
     const mqlDesktop = matchMedia('(min-width: 1440px)');
     const mqlTablet = matchMedia('(min-width: 1024px)');
 
-    const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
-    const [kbNaviNode, setKbNaviNode] = useState<NaviNode>(null);
-
     const kbNaviGroup = NaviGroup.DesktopHovedmeny;
     const kbRootIndex = { col: 0, row: 0, sub: 0 };
-    const kbIdMap = {
-        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element('knapp'),
-    };
 
     useEffect(() => {
-        const removeListeners = () => {
-            document.removeEventListener('keydown', kbHandler);
-            document.removeEventListener('focusin', focusHandler);
+        const cleanUp = () => {
             mqlDesktop.removeEventListener('change', updateNaviGraph);
             mqlTablet.removeEventListener('change', updateNaviGraph);
+            if (kbNode) {
+                kbNode[NodeEdge.Bottom] = kbNode;
+            }
         };
 
         const updateNaviGraph = () => {
             const colSetup = getColSetup(cls);
-            const updatedNaviGraph = KbNav.getNaviGraphData(
+            const naviGraph = KbNav.getNaviGraphData(
                 kbNaviGroup,
                 kbRootIndex,
-                colSetup,
-                kbIdMap
+                colSetup
             );
-            const currentNodeId = kbNaviNode?.id;
-            const newNode =
-                (currentNodeId && updatedNaviGraph.nodeMap[currentNodeId]) ||
-                updatedNaviGraph.rootNode;
-            setKbNaviGraph(updatedNaviGraph);
-            setKbNaviNode(newNode);
+            if (kbNode && naviGraph.rootNode) {
+                kbNode[NodeEdge.Bottom] = naviGraph.rootNode;
+                naviGraph.rootNode[NodeEdge.Top] = kbNode;
+                console.log(naviGraph);
+            }
         };
 
         if (!isOpen) {
-            removeListeners();
+            cleanUp();
             return;
         }
 
-        const kbHandler = KbNav.kbHandler(
-            kbNaviNode,
-            kbNaviGroup,
-            setKbNaviNode
-        );
-        const focusHandler = KbNav.focusHandler(
-            kbNaviNode,
-            kbNaviGraph,
-            setKbNaviNode
-        );
-
-        document.addEventListener('focusin', focusHandler);
-        document.addEventListener('keydown', kbHandler);
         mqlDesktop.addEventListener('change', updateNaviGraph);
         mqlTablet.addEventListener('change', updateNaviGraph);
-        return removeListeners;
-    }, [isOpen, kbNaviNode]);
+        return cleanUp;
+    }, [isOpen]);
 
     useEffect(() => {
         const makeNewNaviGraph = () => {
             const colSetup = getColSetup(cls);
-            const freshNaviGraph = KbNav.getNaviGraphData(
+            const naviGraph = KbNav.getNaviGraphData(
                 kbNaviGroup,
                 kbRootIndex,
-                colSetup,
-                kbIdMap
+                colSetup
             );
-            setKbNaviGraph(freshNaviGraph);
-            setKbNaviNode(freshNaviGraph.rootNode);
+            if (kbNode && naviGraph.rootNode) {
+                kbNode[NodeEdge.Bottom] = naviGraph.rootNode;
+                naviGraph.rootNode[NodeEdge.Top] = kbNode;
+                console.log(naviGraph);
+            }
         };
 
         if (isOpen) {

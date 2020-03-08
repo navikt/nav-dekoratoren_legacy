@@ -26,7 +26,7 @@ export const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
                 className={cls.element('topp-seksjon-lenke')}
                 id={KbNav.getKbId(NaviGroup.DesktopHovedmeny, {
                     col: 0,
-                    row: 1,
+                    row: 0,
                     sub: 0,
                 })}
                 gaEventArgs={{

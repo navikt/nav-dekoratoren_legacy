@@ -46,11 +46,7 @@ export const MinsideDropdown = (props: Props) => {
             return;
         }
 
-        const kbHandler = KbNav.kbHandler(
-            kbNaviNode,
-            kbNaviGroup,
-            setKbNaviNode
-        );
+        const kbHandler = KbNav.kbHandler(kbNaviNode, setKbNaviNode);
         const focusHandler = KbNav.focusHandler(
             kbNaviNode,
             kbNaviGraph,

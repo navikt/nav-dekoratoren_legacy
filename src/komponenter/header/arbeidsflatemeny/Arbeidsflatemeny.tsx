@@ -14,6 +14,10 @@ import './Arbeidsflatemeny.less';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
 import Tekst from '../../../tekster/finn-tekst';
+import {
+    getKbId,
+    NaviGroup,
+} from '../../../utils/keyboard-navigation/kb-navigation';
 
 interface StateProps {
     arbeidsflate: MenuValue;
@@ -39,11 +43,14 @@ const Arbeidsflatemeny = ({
         >
             <ul className={cls.element('topp-liste-rad')} role="tablist">
                 {arbeidsflateLenker.map(
-                    (lenke: {
-                        tittelId: string;
-                        url: string;
-                        key: MenuValue;
-                    }) => {
+                    (
+                        lenke: {
+                            tittelId: string;
+                            url: string;
+                            key: MenuValue;
+                        },
+                        index
+                    ) => {
                         return (
                             <li
                                 role="tab"
@@ -53,6 +60,10 @@ const Arbeidsflatemeny = ({
                             >
                                 <LenkeMedGA
                                     classNameOverride={cls.element('lenke')}
+                                    id={getKbId(
+                                        NaviGroup.DesktopHeaderMenylinje,
+                                        { col: index, row: 0, sub: 0 }
+                                    )}
                                     href={lenke.url}
                                     onClick={event => {
                                         event.preventDefault();

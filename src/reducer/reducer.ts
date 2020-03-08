@@ -9,6 +9,7 @@ import varselLestReducer from './varsel-lest-duck';
 import { languageDuck, LanguageState } from './language-duck';
 import arbeidsflateReducer, { Arbeidsflate } from './arbeidsflate-duck';
 import dropdownTogglesReducer, { DropdownState } from './dropdown-toggle-duck';
+import keyboardNodesReducer, { KeyboardNodeState } from './keyboard-nav-duck';
 
 export interface AppState {
     innloggingsstatus: InnloggingsstatusState;
@@ -18,6 +19,7 @@ export interface AppState {
     language: LanguageState;
     arbeidsflate: Arbeidsflate;
     dropdownToggles: DropdownState;
+    keyboardNodes: KeyboardNodeState;
 }
 
 export const reducer = combineReducers<AppState>({
@@ -28,4 +30,5 @@ export const reducer = combineReducers<AppState>({
     language: languageDuck.reducer,
     arbeidsflate: arbeidsflateReducer,
     dropdownToggles: dropdownTogglesReducer,
+    keyboardNodes: keyboardNodesReducer,
 });

@@ -9,14 +9,17 @@ const NavLogoRod = ({
     width,
     height,
     classname,
+    id,
 }: {
     width?: string;
     height?: string;
     classname?: string;
+    id?: string;
 }) => {
     return (
         <LenkeMedGA
             classNameOverride={classname}
+            id={id}
             href={Environment.XP_BASE_URL}
             gaEventArgs={{ category: GACategory.Header, action: 'navlogo' }}
         >

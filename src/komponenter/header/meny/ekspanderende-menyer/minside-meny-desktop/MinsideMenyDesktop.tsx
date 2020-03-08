@@ -98,5 +98,3 @@ export const MinsideMenyDesktop = () => {
         </EkspanderbarMeny>
     );
 };
-
-export default MinsideMenyDesktop;

@@ -201,19 +201,10 @@ export const buildNaviGraphAndGetRootNode = (
         nodeMap[id] = node;
 
         if (node) {
-            node.connect(getNodeAtIndex(getTopEdgeIndex(index)), NodeEdge.Top);
-            node.connect(
-                getNodeAtIndex(getBottomEdgeIndex(index)),
-                NodeEdge.Bottom
-            );
-            node.connect(
-                getNodeAtIndex(getLeftEdgeIndex(index)),
-                NodeEdge.Left
-            );
-            node.connect(
-                getNodeAtIndex(getRightEdgeIndex(index)),
-                NodeEdge.Right
-            );
+            node[NodeEdge.Top] = getNodeAtIndex(getTopEdgeIndex(index));
+            node[NodeEdge.Bottom] = getNodeAtIndex(getBottomEdgeIndex(index));
+            node[NodeEdge.Left] = getNodeAtIndex(getLeftEdgeIndex(index));
+            node[NodeEdge.Right] = getNodeAtIndex(getRightEdgeIndex(index));
         }
 
         return node;
