@@ -16,7 +16,7 @@ import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
 import MinsideDropdown from './minside-dropdown/MinsideDropdown';
 import './MinsideMenyDesktop.less';
-import MinsidePersonKnapp from '../meny-knapper/minside-knapper/MinsidePersonKnapp';
+import { MinsidePersonKnapp } from '../meny-knapper/minside-knapper/MinsidePersonKnapp';
 import Environment from '../../../../../utils/Environment';
 import MinsideArbgiverKnapp from '../meny-knapper/minside-knapper/MinsideArbgiverKnapp';
 
@@ -29,6 +29,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-minside-meny';
+export const desktopMinsideKnappId = `${classname}-knapp-id`;
 
 export const MinsideMenyDesktop = () => {
     const {
@@ -52,6 +53,7 @@ export const MinsideMenyDesktop = () => {
         return (
             <MinsideArbgiverKnapp
                 classname={classname}
+                id={desktopMinsideKnappId}
                 href={Environment.MINSIDE_ARBEIDSGIVER_URL}
             />
         );
@@ -73,6 +75,7 @@ export const MinsideMenyDesktop = () => {
             }}
             isOpen={isOpen}
             classname={classname}
+            id={desktopMinsideKnappId}
             ariaLabel={'Min side menyknapp'}
             brukerNavn={innloggetStatus.name}
         />

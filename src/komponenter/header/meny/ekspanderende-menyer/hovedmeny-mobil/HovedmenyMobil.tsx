@@ -24,7 +24,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'mobilmeny';
-export const hovedmenyMobilClassname = classname;
+export const mobilHovedmenyKnappId = `${classname}-knapp-id`;
 
 export const HovedmenyMobil = () => {
     const dispatch = useDispatch();
@@ -43,6 +43,7 @@ export const HovedmenyMobil = () => {
             toggleMenu={menutoggle}
             isOpen={isOpen}
             classname={classname}
+            id={mobilHovedmenyKnappId}
             ariaLabel={'Hovedmenyknapp'}
         >
             <MenyIkon />

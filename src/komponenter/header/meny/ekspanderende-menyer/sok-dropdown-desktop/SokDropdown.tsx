@@ -19,6 +19,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-sok-dropdown';
+export const desktopSokKnappId = `${classname}-knapp-id`;
 
 export const SokDropdown = () => {
     const { isOpen } = useSelector(stateSelector);
@@ -37,6 +38,7 @@ export const SokDropdown = () => {
             toggleMenu={toggleMenu}
             isOpen={isOpen}
             classname={classname}
+            id={desktopSokKnappId}
             ariaLabel={'Søkeknapp'}
         >
             <SokMenyIkon isOpen={isOpen} />
