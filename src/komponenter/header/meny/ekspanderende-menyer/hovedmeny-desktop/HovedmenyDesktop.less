@@ -7,7 +7,8 @@
         overflow: hidden;
         max-height: 0;
         max-width: @desktopLimitWidth / 3;
-        visibility: hidden;
+        //visibility: hidden;
+        opacity: 0;
         background-color: white;
         border-bottom-left-radius: @border-radius-base;
         border-bottom-right-radius: @border-radius-base;
@@ -17,9 +18,11 @@
         transition-property: all;
 
         &--aktive {
-            max-height: 60rem;
-            max-width: 100%;
-            visibility: visible;
+            //    max-height: 60rem;
+            opacity: 1;
+            transform: translate(60rem, 100%);
+            //max-width: 100%;
+            //  visibility: visible;
         }
     }
 

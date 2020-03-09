@@ -286,7 +286,6 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                                         'desktop-decorator-sok-input'
                                                     }
                                                 />
-                                                />
                                                 <ul
                                                     className="sokeresultat-liste"
                                                     {...getMenuProps()}

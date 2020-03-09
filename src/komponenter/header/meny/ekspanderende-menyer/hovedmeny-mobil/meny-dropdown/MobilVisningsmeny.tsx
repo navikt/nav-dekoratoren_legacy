@@ -1,7 +1,7 @@
 import React from 'react';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import BEMHelper from '../../../../../../utils/bem';
-import { MenySeksjon } from '../../../../../../reducer/menu-duck';
+import { MenyNode } from '../../../../../../reducer/menu-duck';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 import { Language } from '../../../../../../reducer/language-duck';
 import Topseksjon from './mobil-innhold/top-seksjon/Topseksjon';
@@ -37,15 +37,18 @@ interface StateProps {
 
 interface VisningsmenyProps {
     classname: string;
-    menyLenker: MenySeksjon;
+    menyLenker: MenyNode;
     togglemenu: () => void;
+    togglehovedmenu: () => void;
     menuIsOpen: boolean;
+    underMenuIsOpen: boolean;
+    varslerIsOpen: boolean;
     lang: Language;
 }
 
 interface State {
     className: string;
-    lenker: MenySeksjon;
+    lenker: MenyNode;
     toggleundermeny: boolean;
     togglevarsel: boolean;
 }
@@ -72,10 +75,15 @@ class MobilVisningsmeny extends React.Component<Props, State> {
 
     componentDidUpdate(prevProps: Readonly<Props>): void {
         if (!this.props.menuIsOpen && prevProps.menuIsOpen) {
+            console.log(
+                'componentDidUpdate(prevProps: Readonly<Props>): void  => (!this.props.menuIsOpen && prevProps.menuIsOpen)'
+            );
+            /*
             this.setState({
                 toggleundermeny: this.props.menuIsOpen,
                 togglevarsel: this.props.menuIsOpen,
             });
+            */
         }
     }
 
@@ -124,7 +132,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
 
     setMenyliste = (
         event: React.MouseEvent<HTMLAnchorElement>,
-        meny: MenySeksjon,
+        meny: MenyNode,
         pointer: any
     ) => {
         event.preventDefault();
@@ -134,7 +142,9 @@ class MobilVisningsmeny extends React.Component<Props, State> {
             {
                 lenker: meny,
             },
-            () => this.toggleundermeny()
+            () => {
+                this.props.togglehovedmenu();
+            }
         );
     };
 
@@ -150,51 +160,23 @@ class MobilVisningsmeny extends React.Component<Props, State> {
             togglemenu,
             arbeidsflate,
             lang,
+            underMenuIsOpen,
+            varslerIsOpen,
         } = this.props;
         const menyClass = BEMHelper(classname);
-        this.hideBackgroundOverflow(menuIsOpen, classname);
+        this.hideBackgroundOverflow(
+            underMenuIsOpen || varslerIsOpen,
+            classname
+        );
         return (
             <>
-                <section className={menyClass.element('startmeny')}>
-                    {/*
-                    <Topseksjon
-                        lukkmeny={togglemenu}
-                        tabindex={this.hovedseksjonTabIndex()}
-                    />
-                    */}
-                    <div
-                        className={menyClass.element(
-                            'minside-rad',
-                            arbeidsflate === MenuValue.PRIVATPERSON
-                                ? ''
-                                : 'sett-rad-midt'
-                        )}
-                    >
-                        <>
-                            {/*
-                                <VarselvisningMobil
-                                    visvarsel={this.props.visvarsel}
-                                    visningmenyClassname={menyClass.className}
-                                    togglevarselmeny={this.togglevarsel}
-                                    lukkvarselmeny={
-                                        this.props.toggleVarsel
-                                            ? this.props.toggleVarsel
-                                            : () => void 0
-                                    }
-                                    tabindex={
-                                        menuIsOpen &&
-                                        this.props.visvarsel &&
-                                        !this.state.toggleundermeny
-                                    }
-                                    clicked={this.state.toggleundermeny}
-                                    lukkmenyene={this.lukkMenyene}
-                                    menuIsOpen={menuIsOpen}
-                                />
-                            */}
-                        </>
-                        <MinsideLenke tabindex={this.hovedseksjonTabIndex()} />
-                    </div>
-
+                {console.log('meny is Open ', this.props.menuIsOpen)}
+                <section
+                    className={menyClass.element(
+                        'startmeny',
+                        this.props.menuIsOpen ? 'aktive' : ''
+                    )}
+                >
                     <Sok />
                     <InnloggetBruker />
                     <MenyIngress
@@ -203,7 +185,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                     />
                     <ul className={menyClass.element('meny', 'mainlist')}>
                         {menyLenker.children.map(
-                            (menyElement: MenySeksjon, index: number) => {
+                            (menyElement: MenyNode, index: number) => {
                                 return (
                                     <a
                                         className="lenke"
@@ -243,12 +225,30 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                 </section>
                 <Undermeny
                     className={menyClass.className}
-                    clicked={this.state.toggleundermeny}
-                    lukkMenyene={this.lukkMenyene}
+                    clicked={this.props.underMenuIsOpen}
                     lukkMeny={this.lukkUnderMeny}
                     tabindex={this.underseksjonTabIndex()}
                     lenker={this.state.lenker}
+                    arbeidsflatenavn={this.props.arbeidsflate}
                 />
+                <>
+                    <VarselinnboksProvider>
+                        <VarselvisningMobil
+                            visvarsel={this.props.visvarsel}
+                            visningmenyClassname={menyClass.className}
+                            togglevarselmeny={this.togglevarsel}
+                            lukkvarselmeny={this.props.toggleVarsel}
+                            tabindex={
+                                menuIsOpen &&
+                                this.props.visvarsel &&
+                                !this.state.toggleundermeny
+                            }
+                            clicked={this.state.toggleundermeny}
+                            lukkmenyene={this.lukkMenyene}
+                            menuIsOpen={menuIsOpen}
+                        />
+                    </VarselinnboksProvider>
+                </>
             </>
         );
     }

@@ -1,32 +1,36 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
-import { MenySeksjon } from '../../../../../../../reducer/menu-duck';
+import { MenyNode } from '../../../../../../../reducer/menu-duck';
 import BEMHelper from '../../../../../../../utils/bem';
-import TopSeksjon from './top-seksjon/Topseksjon';
 import Lukkundermeny from './Lukkundermeny';
 import Listelement from './Listelement';
 import { genererUrl } from '../../../../../../../utils/Environment';
+import { Systemtittel } from 'nav-frontend-typografi';
 
 interface Props {
     className: string;
     clicked: boolean;
-    lukkMenyene: () => void;
     lukkMeny: () => void;
     tabindex: boolean;
-    lenker: MenySeksjon;
+    lenker: MenyNode;
+    arbeidsflatenavn: string;
 }
 
 const Undermeny = (props: Props) => {
     const {
         className,
         clicked,
-        lukkMenyene,
         lukkMeny,
         tabindex,
         lenker,
+        arbeidsflatenavn,
     } = props;
     const menyClass = BEMHelper(className);
+    const arbeidsflate = arbeidsflatenavn
+        .charAt(0)
+        .toUpperCase()
+        .concat(arbeidsflatenavn.slice(1).toLowerCase());
     return (
         <section
             className={menyClass.element(
@@ -34,13 +38,16 @@ const Undermeny = (props: Props) => {
                 clicked ? 'active' : ''
             )}
         >
-            <TopSeksjon lukkmeny={lukkMenyene} tabindex={props.tabindex} />
-
             <Lukkundermeny
                 lukkundermeny={lukkMeny}
                 className={menyClass.className}
                 tabindex={props.tabindex}
             />
+            <Systemtittel
+                className={menyClass.element('undermeny-arbeidsflate')}
+            >
+                {arbeidsflate}
+            </Systemtittel>
             <ul className={menyClass.element('meny', 'list')}>
                 {lenker.children.map((lenke, index: number) => {
                     return (
@@ -66,6 +73,13 @@ const Undermeny = (props: Props) => {
                     );
                 })}
             </ul>
+            <div className={menyClass.element('blokk-divider')}>
+                <Lukkundermeny
+                    lukkundermeny={lukkMeny}
+                    className={menyClass.className}
+                    tabindex={props.tabindex}
+                />
+            </div>
         </section>
     );
 };

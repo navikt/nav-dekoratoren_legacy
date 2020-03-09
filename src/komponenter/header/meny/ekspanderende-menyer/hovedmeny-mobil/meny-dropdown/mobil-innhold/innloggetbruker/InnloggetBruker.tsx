@@ -27,11 +27,9 @@ const InnloggetBruker = () => {
                     <Tekst id="logget-inn-som" />
                 </Undertittel>
             </div>
-            <Ingress>
-                <div className={cls.element('bruker')}>
-                    {innlogget.data.name}
-                </div>
-            </Ingress>
+            <div className={cls.element('bruker')}>
+                <Ingress>{innlogget.data.name}</Ingress>
+            </div>
             <div className={cls.element('loggut')} onClick={() => loggut()}>
                 <LoggutIkonMobil />
                 <div className={cls.element('loggut', 'text')}>

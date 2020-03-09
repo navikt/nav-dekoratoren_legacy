@@ -9,13 +9,21 @@ const MenyBakgrunn = ({ className }: { className: string }) => {
     const cls = BEMHelper(className);
     const dispatch = useDispatch();
     const toggles = useSelector((state: AppState) => state.dropdownToggles);
-    const isActive = toggles.hovedmeny || toggles.minside || toggles.sok;
+    const isActive =
+        toggles.hovedmeny ||
+        toggles.minside ||
+        toggles.sok ||
+        toggles.undermeny ||
+        toggles.varsel;
 
     return (
-        <div
-            className={cls.element('bakgrunn', isActive ? 'active' : '')}
-            onClick={() => dispatch(lukkAlleDropdowns())}
-        />
+        <>
+            {console.log('toggles varsel: ', toggles, 'isActive: ', isActive)}
+            <div
+                className={cls.element('bakgrunn', isActive ? 'active' : '')}
+                onClick={() => dispatch(lukkAlleDropdowns())}
+            />
+        </>
     );
 };
 

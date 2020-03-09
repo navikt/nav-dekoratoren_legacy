@@ -6,7 +6,16 @@ import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import './Varselbjelle.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
-import { toggleVarselVisning } from '../../../../reducer/dropdown-toggle-duck';
+import {
+    lukkAlleDropdowns,
+    toggleHovedmeny,
+    toggleHovedOgUndermenyVisning,
+    toggleUndermenyVisning,
+    toggleVarselVisning,
+} from '../../../../reducer/dropdown-toggle-duck';
+import { Normaltekst } from 'nav-frontend-typografi';
+import Tekst from '../../../../tekster/finn-tekst';
+import { Flatknapp } from 'nav-frontend-knapper';
 
 interface Props {
     tabindex: boolean;
@@ -18,16 +27,20 @@ interface StateProps {
     erInnlogget: boolean;
     nyesteId: number;
     arbeidsflate: MenuValue;
-    visvarsel: boolean;
+    visVarsel: boolean;
+    hovedMenyAapen: boolean;
+    underMenyAapen: boolean;
 }
 
 interface FunctionProps {
-    children: (clicked?: boolean, handleClick?: () => void) => ReactNode | any;
+    // children: (clicked: boolean, handleClick?: () => void) => ReactNode;
 }
 
 interface DispatchProps {
     doSettVarslerSomLest: (nyesteId: number) => void;
-    toggleVarsel: () => void;
+    togglevisvarsel: () => void;
+    togglemeny: () => void;
+    togglemenyer: () => void;
 }
 
 interface State {
@@ -62,18 +75,15 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
         document.removeEventListener('click', this.handleOutsideClick, false);
     }
 
-    public handleClick = () => {
+    handleClick = () => {
         triggerGaEvent({
             category: GACategory.Header,
-            action: this.props.visvarsel ? 'varsler-close' : 'varsler-open',
+            action: this.state.clicked ? 'varsler-close' : 'varsler-open',
         });
-
-        this.props.toggleVarsel();
-        /*
         this.setState({
             clicked: !this.state.clicked,
         });
-*/
+
         if (this.props.antallUlesteVarsler > 0) {
             this.setState({ classname: 'toggle-varsler-container' });
             this.props.doSettVarslerSomLest(this.props.nyesteId);
@@ -82,17 +92,25 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
 
     handleOutsideClick: { (event: MouseEvent): void } = (e: MouseEvent) => {
         const node = this.varselbjelleRef.current;
-        if (node && node.contains(e.target as HTMLElement)) {
+        if (node && !node.contains(e.target as HTMLElement)) {
             return;
         }
-        if (this.props.visvarsel) {
+
+        this.props.togglevisvarsel();
+        if (this.props.underMenyAapen) {
+            this.props.hovedMenyAapen
+                ? this.props.togglemenyer()
+                : this.props.togglemeny();
+        }
+
+        if (this.state.clicked) {
             triggerGaEvent({
                 category: GACategory.Header,
                 action: 'varsler-close',
             });
         }
-        this.props.toggleVarsel();
-        // this.setState({ clicked: false });
+
+        this.setState({ clicked: false });
     };
 
     render() {
@@ -102,16 +120,59 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             arbeidsflate,
             tabindex,
             children,
+            visVarsel,
         } = this.props;
         const { clicked, classname } = this.state;
         return (
             <div ref={this.varselbjelleRef} className="varselbjelle">
                 {erInnlogget && arbeidsflate === MenuValue.PRIVATPERSON ? (
                     <>
-                        <div
-                            id="toggle-varsler-container"
-                            className={classname}
-                        >
+                        <div className="media-sm-mobil mobil-meny">
+                            <div
+                                id="toggle-varsler-container"
+                                className={classname}
+                            >
+                                <Flatknapp
+                                    onClick={this.handleClick}
+                                    className="varselknapp-mobil"
+                                >
+                                    <div
+                                        className="toggle-varsler"
+                                        tabIndex={tabindex ? 0 : -1}
+                                        title="Varsler"
+                                        aria-label={`Varsler. Du har ${
+                                            antallVarsler > 0
+                                                ? antallVarsler
+                                                : 'ingen'
+                                        } varsler.`}
+                                        aria-pressed={clicked}
+                                        aria-haspopup="true"
+                                        aria-controls="varsler-display"
+                                        aria-expanded={clicked}
+                                    />
+                                    <span className="word-wrapper">
+                                        <Normaltekst
+                                            className={
+                                                !visVarsel
+                                                    ? 'er-synlig'
+                                                    : 'er-usynlig'
+                                            }
+                                        >
+                                            <Tekst id="varsler-mobil" />
+                                        </Normaltekst>
+                                        <Normaltekst
+                                            className={
+                                                visVarsel
+                                                    ? 'er-synlig'
+                                                    : 'er-usynlig'
+                                            }
+                                        >
+                                            <Tekst id="varsler-mobil-lukk" />
+                                        </Normaltekst>
+                                    </span>
+                                </Flatknapp>
+                            </div>
+                            {/*
                             <button
                                 onClick={this.handleClick}
                                 className="toggle-varsler"
@@ -124,13 +185,16 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                                 aria-haspopup="true"
                                 aria-controls="varsler-display"
                                 aria-expanded={clicked}
-                            />
+                            >
+                                <div className="media-sm-mobil mobil-meny">
+                                    <Normaltekst>
+                                        <Tekst id="varsler-mobil" />
+                                    </Normaltekst>
+                                </div>
+                            </button>
+                            */}
                         </div>
-                        <div className="min-varsel-wrapper">
-                            {
-                                // children(clicked, this.handleClick)}
-                            }
-                        </div>
+                        <div className="min-varsel-wrapper"></div>
                     </>
                 ) : null}
             </div>
@@ -147,13 +211,17 @@ const mapStateToProps = (state: AppState): StateProps => ({
             state.innloggingsstatus.data.securityLevel === '4'),
     nyesteId: state.varsler.data.nyesteId,
     arbeidsflate: state.arbeidsflate.status,
-    visvarsel: state.dropdownToggles.varsel,
+    visVarsel: state.dropdownToggles.varsel,
+    hovedMenyAapen: state.dropdownToggles.hovedmeny,
+    underMenyAapen: state.dropdownToggles.undermeny,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     doSettVarslerSomLest: (nyesteId: number) =>
         settVarslerSomLest(nyesteId)(dispatch),
-    toggleVarsel: () => dispatch(toggleVarselVisning()),
+    togglevisvarsel: () => dispatch(toggleVarselVisning()),
+    togglemeny: () => dispatch(toggleUndermenyVisning()),
+    togglemenyer: () => dispatch(toggleHovedOgUndermenyVisning()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Varselbjelle);

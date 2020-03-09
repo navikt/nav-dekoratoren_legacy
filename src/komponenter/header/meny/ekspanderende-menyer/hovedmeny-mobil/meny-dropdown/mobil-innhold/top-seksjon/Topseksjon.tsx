@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Navlogo from '../../../../../../../../ikoner/meny/Navlogo';
 import BEMHelper from '../../../../../../../../utils/bem';
 import './Toppseksjon.less';
+import { useDispatch } from 'react-redux';
+import { lukkAlleDropdowns } from '../../../../../../../../reducer/dropdown-toggle-duck';
 
 interface Props {
     lukkmeny: () => void;
@@ -9,11 +11,12 @@ interface Props {
 }
 
 const TopSeksjon = (props: Props) => {
+    const dispatch = useDispatch();
     const className = BEMHelper('mobilmeny');
     const [heartbeat, setHeartbeat] = useState<boolean>(false);
     const setheartbeatOgLukkmeny = () => {
         setHeartbeat(true);
-        props.lukkmeny();
+        dispatch(lukkAlleDropdowns());
     };
 
     return (

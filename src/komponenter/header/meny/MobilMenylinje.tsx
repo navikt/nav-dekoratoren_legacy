@@ -14,6 +14,8 @@ import { useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import Varselbjelle from './varsel/Varselbjelle';
+import Tekst from '../../../tekster/finn-tekst';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 const mobilClass = BEMHelper('mobilmeny');
 
@@ -56,7 +58,7 @@ const MobilMenylinje = ({ language }: Props) => {
         if (window.innerWidth >= tabletview) {
             setVarselClicked(false);
         }
-        window.innerWidth <= 400 ? setNavIkonSize('44') : setNavIkonSize('66');
+        window.innerWidth <= 400 ? setNavIkonSize('66') : setNavIkonSize('66');
     };
 
     return (
@@ -75,7 +77,13 @@ const MobilMenylinje = ({ language }: Props) => {
                             <InnloggingsstatusProvider>
                                 <LoggInnKnapp />
                             </InnloggingsstatusProvider>
-                        ) : null}
+                        ) : (
+                            <VarselinnboksProvider>
+                                <>
+                                    <Varselbjelle tabindex={true} />
+                                </>
+                            </VarselinnboksProvider>
+                        )}
                         {language === Language.NORSK ||
                         language === Language.ENGELSK ? (
                             <HovedmenyMobil />

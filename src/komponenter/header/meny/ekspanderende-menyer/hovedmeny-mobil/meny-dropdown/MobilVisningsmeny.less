@@ -3,22 +3,19 @@
 
 .mobilmeny {
     &__innhold-wrapper,
+    &__startmeny,
     &__varsel-innhold {
         overflow-y: scroll;
         position: fixed;
-        top: 7.87rem;
+        top: 7.875rem;
         left: -(@mobilemenuwidth);
         z-index: 1001;
-    }
-
-    ul {
-        padding: 0;
     }
 
     &__undermeny-innhold,
     &__varsel-innhold {
         overflow-y: scroll;
-        top: 7.87rem;
+        top: 7.875rem;
         left: -(@mobilemenuwidth);
         width: @mobilemenuwidth;
         position: fixed;
@@ -29,35 +26,51 @@
     }
 
     &__innhold-wrapper,
+    &__startmeny,
     &__undermeny-innhold,
     &__varsel-innhold {
         padding: 0.75rem 1rem 1rem 1rem;
         background-color: white;
         width: @mobilemenuwidth;
-        max-width: 375px;
-        height: calc(100% - 7.925rem);
+        max-width: 575px;
+        height: calc(100% - 7.875rem);
         border-radius: 3px;
         overflow: scroll;
-        transition: all 0.7s ease-in-out;
+        transition: all 0.4s ease-in-out;
 
         &--aktive {
             left: 0;
         }
     }
+
+    &__startmeny {
+        z-index: 1003;
+    }
+
     &__undermeny-innhold,
     &__varsel-innhold {
         z-index: 1002;
         .mobilmeny {
             &__meny {
+                &--top {
+                    padding-bottom: 0.75rem;
+                }
+
                 &--list {
-                    max-width: 17rem;
+                    padding: 1.25rem 1rem 1.5rem 0;
+                    margin-top: 0;
+                    max-width: 20rem;
                 }
             }
         }
     }
 
+    &__undermeny-arbeidsflate {
+        padding: 0.25rem 0 0.75rem 0;
+    }
+
     &__undermeny-innhold {
-        padding-left: 1.85rem;
+        padding-left: 1.5rem;
     }
 
     &__meny {
@@ -67,12 +80,11 @@
 
         &--mainlist {
             border-bottom: 1px solid black;
+            padding: 0;
         }
 
         &--list,
         &--mainlist {
-            padding: 1rem 1rem 1.5rem 1rem;
-
             .lenke {
                 text-decoration: none;
 
@@ -131,12 +143,15 @@
     }
 
     &__lukk-undermeny {
+        margin-top: 1rem;
         .lenke {
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
             align-items: center;
-            padding: 1rem 1rem 1rem 0;
+            padding: 1rem 0;
+            max-width: 20rem;
+            margin-bottom: 2rem;
             i {
                 margin-right: 0.5rem;
             }

@@ -1,7 +1,7 @@
 @import '../../../../../../node_modules/nav-frontend-core/less/_variabler';
 
 .desktopmeny .min-varsel-wrapper,
-.mobilmeny .min-varsel-wrapper {
+.mobilmeny .varsler-display-mobil-tablet {
     .varsler-display-desktop {
         display: block;
         position: absolute;
@@ -35,6 +35,10 @@
     .nav-varsler {
         margin-bottom: 0;
         padding: 0;
+
+        .varsel-liste {
+            padding-left: 0.5rem;
+        }
 
         .varsel-liste .varsel-container {
             &:not(:last-child) {
@@ -144,7 +148,7 @@
     }
     .vis-alle-lenke {
         border-top: 1px solid @navGra60;
-        padding-left: 3.125rem;
+        padding: 1.25rem 1rem 1rem 3.125rem;
         margin-top: 0.75rem;
     }
 

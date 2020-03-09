@@ -15,9 +15,9 @@ const LoggutIkonMobil = () => {
             <g
                 id="Ikoner"
                 stroke="none"
-                stroke-width="1"
+                strokeWidth="1"
                 fill="none"
-                fill-rule="evenodd"
+                fillRule="evenodd"
             >
                 <g
                     id="Desktop"

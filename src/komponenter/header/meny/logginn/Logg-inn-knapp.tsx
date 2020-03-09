@@ -48,7 +48,7 @@ export class LoggInnKnapp extends React.Component<StateProps, {}> {
             <div className="login-container">
                 <div className="media-sm-mobil login-mobil">
                     <Knapp
-                        type="standard"
+                        type="flat"
                         className="mobil-login-knapp"
                         onClick={this.handleButtonClick}
                     >

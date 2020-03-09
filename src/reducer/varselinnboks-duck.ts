@@ -6,7 +6,6 @@ import {
     HentVarslerPENDINGAction,
     SettVarslerOKAction,
 } from '../redux/actions';
-import { JSONObject } from 'yet-another-fetch-mock';
 import { Dispatch } from '../redux/dispatch-type';
 import { fetchThenDispatch } from '../api/api-utils';
 import { hentVarslerFetch } from '../api/api';
@@ -16,7 +15,7 @@ export interface VarselinnboksState extends DataElement {
     data: Data;
 }
 
-export interface Data extends JSONObject {
+export interface Data {
     uleste: number;
     antall: number;
     nyesteId: number;

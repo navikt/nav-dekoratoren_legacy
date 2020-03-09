@@ -29,7 +29,7 @@ class VarselvisningMobil extends React.Component<OwnProps> {
 
     componentDidUpdate(prevProps: Readonly<OwnProps>): void {
         if (!this.props.menuIsOpen && this.props.visvarsel) {
-            this.lukkvarselmenyOgfjernTabindex();
+            // this.lukkvarselmenyOgfjernTabindex();
         }
     }
 
@@ -47,11 +47,13 @@ class VarselvisningMobil extends React.Component<OwnProps> {
                     lukkmeny={this.lukkvarselOgMenyer}
                     tabindex={this.props.tabindex}
                 />
-                <Lukkundermeny
-                    lukkundermeny={this.lukkvarselmenyOgfjernTabindex}
-                    className={cls.className}
-                    tabindex={this.props.tabindex}
-                />
+                {/*
+                    <Lukkundermeny
+                        lukkundermeny={this.lukkvarselmenyOgfjernTabindex}
+                        className={cls.className}
+                        tabindex={this.props.tabindex}
+                    />
+                */}
                 <VarselVisning
                     tabIndex={this.props.tabindex}
                     togglevarselmeny={this.props.togglevarselmeny}

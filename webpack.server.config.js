@@ -20,7 +20,7 @@ const browserConfig = {
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'server.js',
-        libraryTarget: 'commonjs2'
+        libraryTarget: 'commonjs2',
     },
 
     devtool: 'source-map',

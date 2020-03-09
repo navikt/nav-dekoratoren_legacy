@@ -1,7 +1,7 @@
 import React from 'react';
 import BEMHelper from '../../../../../utils/bem';
 import './Menyknapp.less';
-import { Knapp } from 'nav-frontend-knapper';
+import { Flatknapp } from 'nav-frontend-knapper';
 
 interface Props {
     toggleMenu: () => void;
@@ -17,7 +17,7 @@ export const Menyknapp = (props: Props) => {
 
     return (
         <>
-            <Knapp
+            <Flatknapp
                 onClick={toggleMenu}
                 className={`dropdown__menyknapp ${id}`}
                 id={id}
@@ -27,7 +27,7 @@ export const Menyknapp = (props: Props) => {
                 aria-expanded={clicked}
             >
                 {children}
-            </Knapp>
+            </Flatknapp>
         </>
     );
 };

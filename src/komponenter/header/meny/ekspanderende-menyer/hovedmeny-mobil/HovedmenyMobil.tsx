@@ -11,18 +11,26 @@ import {
 } from '../../../../../utils/google-analytics';
 import { Undertittel } from 'nav-frontend-typografi';
 import { finnTekst } from '../../../../../tekster/finn-tekst';
-import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
+import {
+    toggleHovedmeny,
+    toggleHovedOgUndermenyVisning,
+    toggleUndermenyVisning,
+    toggleVarselVisning,
+} from '../../../../../reducer/dropdown-toggle-duck';
 import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { Language } from '../../../../../reducer/language-duck';
 import BEMHelper from '../../../../../utils/bem';
 import HamburgerKnapp from '../meny-knapp/hamburger-knapp/HamburgerKnapp';
+import { dataInitState } from '../../../../../reducer/menu-duck';
 
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
     language: state.language.language,
     arbeidsflate: state.arbeidsflate.status,
-    isOpen: state.dropdownToggles.hovedmeny,
+    hovedIsOpen: state.dropdownToggles.hovedmeny,
+    underIsOpen: state.dropdownToggles.undermeny,
+    varselIsOpen: state.dropdownToggles.varsel,
 });
 
 const classname = 'mobilmeny';
@@ -42,23 +50,43 @@ export const hovedmenyMobilClassname = classname;
 
 export const HovedmenyMobil = () => {
     const dispatch = useDispatch();
-    const { meny, language, arbeidsflate, isOpen } = useSelector(stateSelector);
+    const {
+        meny,
+        language,
+        arbeidsflate,
+        underIsOpen,
+        hovedIsOpen,
+        varselIsOpen,
+    } = useSelector(stateSelector);
 
     const menutoggle = () => {
         triggerGaEvent({
             category: GACategory.Header,
-            action: `meny-${isOpen ? 'close' : 'open'}`,
+            action: `meny-${underIsOpen ? 'close' : 'open'}`,
         });
+
+        console.log('hovedIsOpen', hovedIsOpen, '!underIsOpen', !underIsOpen);
+        dispatch(
+            hovedIsOpen || !underIsOpen
+                ? toggleHovedOgUndermenyVisning()
+                : toggleUndermenyVisning()
+        );
+        if (varselIsOpen) {
+            dispatch(toggleVarselVisning());
+        }
+    };
+
+    const hovedmenutoggle = () => {
         dispatch(toggleHovedmeny());
     };
 
     const menyKnapp = (
         <Menyknapp
             toggleMenu={menutoggle}
-            clicked={isOpen}
+            clicked={underIsOpen}
             classname={classname}
         >
-            <HamburgerKnapp isOpen={isOpen} />
+            <HamburgerKnapp isOpen={underIsOpen} />
             <Undertittel>
                 {textTransformFirstLetterToUppercase('meny-knapp', language)}
             </Undertittel>
@@ -69,9 +97,15 @@ export const HovedmenyMobil = () => {
         meny.status === Status.OK ? (
             <MobilVisningsmeny
                 classname={classname}
-                menyLenker={getMenuNode(meny.data, language, arbeidsflate)}
-                menuIsOpen={isOpen}
+                menyLenker={
+                    getMenuNode(meny.data, language, arbeidsflate) ||
+                    dataInitState
+                }
+                menuIsOpen={hovedIsOpen}
+                underMenuIsOpen={underIsOpen}
+                varslerIsOpen={varselIsOpen}
                 togglemenu={menutoggle}
+                togglehovedmenu={hovedmenutoggle}
                 lang={language}
             />
         ) : (
@@ -81,7 +115,7 @@ export const HovedmenyMobil = () => {
     return (
         <EkspanderbarMeny
             classname={classname}
-            isOpen={isOpen}
+            isOpen={hovedIsOpen}
             menyKnapp={menyKnapp}
         >
             {dropdownInnhold}

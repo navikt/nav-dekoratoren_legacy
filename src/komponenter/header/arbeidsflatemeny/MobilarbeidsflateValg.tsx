@@ -30,14 +30,6 @@ interface DispatchProps {
     settArbeidsflate: () => void;
 }
 
-const oppdatereArbeidsflateValg = (
-    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-    valgVerdi: MenuValue
-) => {
-    e.preventDefault();
-    oppdaterSessionStorage(valgVerdi);
-};
-
 const MobilarbeidsflateValg = ({
     arbeidsflate,
     settArbeidsflate,
@@ -45,6 +37,14 @@ const MobilarbeidsflateValg = ({
     lang,
 }: StateProps & DispatchProps & Props) => {
     const cls = BEMHelper('mobil-arbeidsflate-valg');
+    const oppdatereArbeidsflateValg = (
+        e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
+        valgVerdi: MenuValue
+    ) => {
+        e.preventDefault();
+        oppdaterSessionStorage(valgVerdi);
+        settArbeidsflate();
+    };
 
     return (
         <ul className={cls.className}>
