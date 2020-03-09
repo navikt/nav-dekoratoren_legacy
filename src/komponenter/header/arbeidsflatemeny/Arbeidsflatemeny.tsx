@@ -60,7 +60,7 @@ const Arbeidsflatemeny = ({
                                         settArbeidsflate();
                                         oppdaterSessionStorage(lenke.key);
                                         if (!erNavDekoratoren) {
-                                            window.location.assign(lenke.url);
+                                            window.location.href = lenke.url;
                                         }
                                     }}
                                     gaEventArgs={{
