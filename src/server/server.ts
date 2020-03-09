@@ -8,7 +8,8 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
 
 // Config
-const basePath = '/dekoratoren';
+const appBasePath = '/dekoratoren';
+const oldBasePath = '/common-html/v4/navno';
 const buildPath = `${process.cwd()}/build`;
 const app = express();
 const PORT = 8088;
@@ -37,9 +38,9 @@ app.use((req, res, next) => {
 
 // Express config
 const pathsForTemplate = [
-    `${basePath}/`,
-    `${basePath}/person`,
-    `${basePath}/person/*`,
+    `${appBasePath}`,
+    `${appBasePath}/:locale(no|en|se)/*`,
+    `${oldBasePath}`,
 ];
 
 app.get(pathsForTemplate, (req, res) => {
@@ -49,7 +50,7 @@ app.get(pathsForTemplate, (req, res) => {
     res.send(template(parameters));
 });
 
-app.get(`${basePath}/env`, (req, res) => {
+app.get(`${appBasePath}/env`, (req, res) => {
     // Client environment
     // Obs! Don't expose secrets
     res.send({
@@ -74,7 +75,7 @@ app.get(`${basePath}/env`, (req, res) => {
     });
 });
 
-app.get(`${basePath}/api/meny`, (req, res) =>
+app.get(`${appBasePath}/api/meny`, (req, res) =>
     mainCache.get(mainCacheKey, (error, mainCacheContent) =>
         !error && mainCacheContent ? res.send(mainCacheContent) : fetchMenu(res)
     )
@@ -106,9 +107,9 @@ const fetchMenu = (res: Response) => {
 };
 
 // Proxied requests
-const proxiedAuthUrl = `${basePath}/api/auth`;
-const proxiedVarslerUrl = `${basePath}/api/varsler`;
-const proxiedSokUrl = `${basePath}/api/sok`;
+const proxiedAuthUrl = `${appBasePath}/api/auth`;
+const proxiedVarslerUrl = `${appBasePath}/api/varsler`;
+const proxiedSokUrl = `${appBasePath}/api/sok`;
 
 app.use(
     proxiedAuthUrl,
@@ -135,9 +136,9 @@ app.use(
     })
 );
 
-app.get(`${basePath}/isAlive`, (req, res) => res.sendStatus(200));
-app.get(`${basePath}/isReady`, (req, res) => res.sendStatus(200));
-app.use(`${basePath}/`, express.static(buildPath));
+app.get(`${appBasePath}/isAlive`, (req, res) => res.sendStatus(200));
+app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));
+app.use(`${appBasePath}/`, express.static(buildPath));
 
 const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)
