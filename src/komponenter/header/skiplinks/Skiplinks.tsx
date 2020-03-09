@@ -4,9 +4,9 @@ import Tekst from '../../../tekster/finn-tekst';
 import { mobilviewMax } from '../../../styling-mediaquery';
 import './Skiplinks.less';
 import { matchMedia } from '../../../utils/match-media-polyfill';
-import BEMHelper from '../../../utils/bem';
-import { hovedmenyDesktopClassname } from '../meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
-import { hovedmenyMobilClassname } from '../meny/ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
+import { mobilHovedmenyKnappId } from '../meny/ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
+import { desktopHovedmenyKnappId } from '../meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
+import { desktopSokKnappId } from '../meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
 
 const Skiplinks = () => {
     const [soklink, setSoklink] = useState<string>('');
@@ -23,15 +23,13 @@ const Skiplinks = () => {
     }, []);
 
     const setSkiplinks = (isMobile: boolean) => {
-        const idHovedmenyLink = BEMHelper(
-            isMobile ? hovedmenyMobilClassname : hovedmenyDesktopClassname
-        ).element('knapp');
-        setHovedmenylink(`#${idHovedmenyLink}`);
+        const hovedmenyKnappId = isMobile ? mobilHovedmenyKnappId : desktopHovedmenyKnappId;
+        setHovedmenylink(`#${hovedmenyKnappId}`);
 
         // TODO: oppdater for ny søk-knapp/dropdown funksjonalitet
         const idSokLink = isMobile
             ? 'mobil-decorator-sok-toggle'
-            : 'desktop-sok-dropdown__knapp';
+            : desktopSokKnappId;
         setSoklink(`#${idSokLink}`);
     };
 

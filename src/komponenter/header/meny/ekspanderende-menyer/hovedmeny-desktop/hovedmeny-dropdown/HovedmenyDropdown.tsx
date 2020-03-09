@@ -14,6 +14,7 @@ import { matchMedia } from '../../../../../../utils/match-media-polyfill';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
+import { desktopHovedmenyKnappId } from '../HovedmenyDesktop';
 
 type Props = {
     classname: string;
@@ -69,7 +70,7 @@ export const HovedmenyDropdown = (props: Props) => {
     const kbNaviGroup = NaviGroup.DesktopHovedmeny;
     const kbRootIndex = { col: 0, row: 0, sub: 0 };
     const kbIdMap = {
-        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element('knapp'),
+        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: desktopHovedmenyKnappId,
     };
 
     useEffect(() => {
