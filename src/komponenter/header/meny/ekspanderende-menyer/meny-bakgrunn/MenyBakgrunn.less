@@ -1,4 +1,5 @@
 @import (reference) '../../../../../styling-variabler.less';
+@import (reference) '../ekspanderbar-meny/EkspanderbarMeny';
 
 .meny-bakgrunn {
     visibility: hidden;
@@ -11,11 +12,23 @@
 
     transition-duration: 0.35s;
     transition-timing-function: ease-in;
-    transition-property: all;
+    transition-property: background-color, visibility;
 
+    animation-duration: 0.25s;
+    animation-delay: @ekspanderbar-transition-duration-out;
     &--active {
         visibility: visible;
         background-color: rgba(0, 0, 0, 0.35);
-        backdrop-filter: blur(2px);
+        animation-name: blurBakgrunn;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes blurBakgrunn {
+        from {
+            backdrop-filter: none;
+        }
+        to {
+            backdrop-filter: blur(2px);
+        }
     }
 }
