@@ -4,7 +4,11 @@ import { MinsideMenyDesktop } from './MinsideMenyDesktop';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { reducer } from '../../../../../reducer/reducer';
-import { settArbeidsgiverflate, settPersonflate, settSamarbeidspartnerflate } from '../../../../../reducer/arbeidsflate-duck';
+import {
+    settArbeidsgiverflate,
+    settPersonflate,
+    settSamarbeidspartnerflate,
+} from '../../../../../reducer/arbeidsflate-duck';
 import { ActionType } from '../../../../../redux/actions';
 import { Status } from '../../../../../api/api';
 import mockMenu from '../../../../../server/mock/menu.json';
@@ -13,7 +17,7 @@ const store = createStore(reducer);
 store.dispatch({
     type: ActionType.HENT_MENY_OK,
     status: Status.OK,
-    data: mockMenu
+    data: mockMenu,
 });
 
 const innloggetAction = {
@@ -23,7 +27,7 @@ const innloggetAction = {
         authenticated: true,
         name: 'Ola Nordmann',
         securityLevel: '4',
-    }
+    },
 };
 
 const uInnloggetAction = {
