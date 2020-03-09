@@ -68,9 +68,8 @@ export const getHeaderKbNavGraphData = (
     ).element('knapp');
 
     if (arbeidsflate === MenuValue.PRIVATPERSON && erInnlogget) {
-        idMap[
-            KbNav.getKbId(naviGroup, { ...index, col: index.col++ })
-        ] = BEMHelper('toggle-varsler-container').element('knapp');
+        idMap[KbNav.getKbId(naviGroup, { ...index, col: index.col++ })] =
+            'toggle-varsler-container__knapp';
     }
 
     if (

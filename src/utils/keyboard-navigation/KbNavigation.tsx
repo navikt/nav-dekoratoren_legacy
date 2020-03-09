@@ -20,6 +20,7 @@ type Props = {
     isEnabled: boolean;
     parentNode: NaviNode;
     parentEdge: NodeEdge;
+    children: JSX.Element;
 };
 
 export const KbNavigation = (props: Props) => {
@@ -31,10 +32,11 @@ export const KbNavigation = (props: Props) => {
         isEnabled,
         parentNode,
         parentEdge,
+        children,
     } = props;
 
     if (!parentNode) {
-        return null;
+        return children;
     }
 
     const currentNode = useSelector(
@@ -65,9 +67,7 @@ export const KbNavigation = (props: Props) => {
             parentNode[parentEdge] = rootNode;
             rootNode[NodeEdgeOpposite[parentEdge]] = parentNode;
         }
-
-        return cleanUp;
     }, [group, rootIndex, idMap, maxColsPerSection, isEnabled]);
 
-    return null;
+    return children;
 };

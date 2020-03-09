@@ -24,6 +24,7 @@ import {
 } from '../../utils/keyboard-navigation/kb-navigation';
 import {
     KeyboardNodeState,
+    settCurrentNode,
     settKeyboardNodes,
 } from '../../reducer/keyboard-nav-duck';
 import BEMHelper from '../../utils/bem';
@@ -82,6 +83,7 @@ export const Header = () => {
                     ],
                 currentNode: graphData.rootNode,
             };
+            console.log(nodes);
             dispatch(settKeyboardNodes(nodes));
         }
     }, [language, arbeidsflate, menyStatus, erInnlogget]);
@@ -90,6 +92,8 @@ export const Header = () => {
         if (!kbNaviGraph) {
             return;
         }
+
+        dispatch(settCurrentNode(kbNaviNode));
 
         const eventHandlers = addEventListenersAndReturnHandlers(
             kbNaviNode,

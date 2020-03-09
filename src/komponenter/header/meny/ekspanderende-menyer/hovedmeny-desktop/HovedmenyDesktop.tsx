@@ -58,6 +58,7 @@ export const HovedmenyDesktop = () => {
             toggleMenu={toggleMenu}
             isOpen={isOpen}
             classname={classname}
+            id={'desktop-hovedmeny__knapp'}
             ariaLabel={'Hovedmenyknapp'}
         >
             <HamburgerIkon isOpen={isOpen} />

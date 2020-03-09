@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import BEMHelper, { BEMWrapper } from '../../../../../../utils/bem';
-import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 import { MenyNode } from '../../../../../../reducer/menu-duck';
 import { Language } from '../../../../../../reducer/language-duck';
-import KbNav, {
+import {
     NaviGroup,
     NodeEdge,
 } from '../../../../../../utils/keyboard-navigation/kb-navigation';
@@ -14,6 +13,7 @@ import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
 import { AppState } from '../../../../../../reducer/reducer';
+import { KbNavigation } from '../../../../../../utils/keyboard-navigation/KbNavigation';
 
 type Props = {
     classname: string;
@@ -23,30 +23,26 @@ type Props = {
     isOpen: boolean;
 };
 
-const getColSetup = (cls: BEMWrapper): Array<number> => {
-    const getNumCols = (element: HTMLElement) =>
+const getMaxColsPerSection = (cls: BEMWrapper): Array<number> => {
+    const getNumColsFromCss = (element: HTMLElement) =>
         parseInt(
             window.getComputedStyle(element).getPropertyValue('--num-cols'),
             10
         );
 
     const toppSeksjonCols = 1;
-    const hovedSeksjonColsFallback = 4;
-    const bunnSeksjonColsFallback = 3;
 
     const hovedSeksjonElement = document.getElementsByClassName(
         cls.element('hoved-seksjon')
     )[0] as HTMLElement;
     const hovedSeksjonCols =
-        (hovedSeksjonElement && getNumCols(hovedSeksjonElement)) ||
-        hovedSeksjonColsFallback;
+        (hovedSeksjonElement && getNumColsFromCss(hovedSeksjonElement)) || 1;
 
     const bunnSeksjonElement = document.getElementsByClassName(
         cls.element('bunn-seksjon')
     )[0] as HTMLElement;
     const bunnSeksjonCols =
-        (bunnSeksjonElement && getNumCols(bunnSeksjonElement)) ||
-        bunnSeksjonColsFallback;
+        (bunnSeksjonElement && getNumColsFromCss(bunnSeksjonElement)) || 1;
 
     return [toppSeksjonCols, hovedSeksjonCols, bunnSeksjonCols];
 };
@@ -54,91 +50,63 @@ const getColSetup = (cls: BEMWrapper): Array<number> => {
 export const HovedmenyDropdown = (props: Props) => {
     const { arbeidsflate, classname, language, menyLenker, isOpen } = props;
 
-    const dispatch = useDispatch();
-    const kbNode = useSelector(
+    const [maxColsPerSection, setMaxColsPerSection] = useState();
+    const updateMaxCols = () => setMaxColsPerSection(getMaxColsPerSection(cls));
+
+    const parentKbNode = useSelector(
         (state: AppState) => state.keyboardNodes.hovedmeny
     );
 
     const cls = BEMHelper(classname);
 
-    const settArbeidsflate = () => dispatch(finnArbeidsflate());
-
     const mqlDesktop = matchMedia('(min-width: 1440px)');
     const mqlTablet = matchMedia('(min-width: 1024px)');
 
-    const kbNaviGroup = NaviGroup.DesktopHovedmeny;
-    const kbRootIndex = { col: 0, row: 0, sub: 0 };
-
     useEffect(() => {
         const cleanUp = () => {
-            mqlDesktop.removeEventListener('change', updateNaviGraph);
-            mqlTablet.removeEventListener('change', updateNaviGraph);
-            if (kbNode) {
-                kbNode[NodeEdge.Bottom] = kbNode;
-            }
+            mqlDesktop.removeEventListener('change', updateMaxCols);
+            mqlTablet.removeEventListener('change', updateMaxCols);
         };
 
-        const updateNaviGraph = () => {
-            const colSetup = getColSetup(cls);
-            const naviGraph = KbNav.getNaviGraphData(
-                kbNaviGroup,
-                kbRootIndex,
-                colSetup
-            );
-            if (kbNode && naviGraph.rootNode) {
-                kbNode[NodeEdge.Bottom] = naviGraph.rootNode;
-                naviGraph.rootNode[NodeEdge.Top] = kbNode;
-            }
-        };
-
-        if (!isOpen) {
-            cleanUp();
-            return;
-        }
-
-        mqlDesktop.addEventListener('change', updateNaviGraph);
-        mqlTablet.addEventListener('change', updateNaviGraph);
+        mqlDesktop.addEventListener('change', updateMaxCols);
+        mqlTablet.addEventListener('change', updateMaxCols);
         return cleanUp;
-    }, [isOpen]);
+    }, []);
 
     useEffect(() => {
-        const makeNewNaviGraph = () => {
-            const colSetup = getColSetup(cls);
-            const naviGraph = KbNav.getNaviGraphData(
-                kbNaviGroup,
-                kbRootIndex,
-                colSetup
-            );
-            if (kbNode && naviGraph.rootNode) {
-                kbNode[NodeEdge.Bottom] = naviGraph.rootNode;
-                naviGraph.rootNode[NodeEdge.Top] = kbNode;
-            }
-        };
-
-        if (isOpen) {
-            makeNewNaviGraph();
-        }
-    }, [isOpen, menyLenker, arbeidsflate]);
+        updateMaxCols();
+    }, [menyLenker, arbeidsflate]);
 
     if (!menyLenker) {
         return null;
     }
 
     return (
-        <div className={cls.element('dropdown')}>
-            <Toppseksjon classname={classname} arbeidsflate={arbeidsflate} />
-            <Hovedseksjon
-                menyLenker={menyLenker}
-                classname={classname}
-                isOpen={isOpen}
-            />
-            <Bunnseksjon
-                classname={classname}
-                language={language}
-                arbeidsflate={arbeidsflate}
-                settArbeidsflate={settArbeidsflate}
-            />
-        </div>
+        <KbNavigation
+            group={NaviGroup.DesktopHovedmeny}
+            rootIndex={{ col: 0, row: 0, sub: 0 }}
+            maxColsPerSection={maxColsPerSection}
+            isEnabled={isOpen}
+            parentNode={parentKbNode}
+            parentEdge={NodeEdge.Bottom}
+        >
+            <div className={cls.element('dropdown')}>
+                <Toppseksjon
+                    classname={classname}
+                    arbeidsflate={arbeidsflate}
+                />
+                <Hovedseksjon
+                    menyLenker={menyLenker}
+                    classname={classname}
+                    isOpen={isOpen}
+                />
+                <Bunnseksjon
+                    classname={classname}
+                    language={language}
+                    arbeidsflate={arbeidsflate}
+                />
+            </div>
+        </KbNavigation>
     );
 };
 

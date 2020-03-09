@@ -23,6 +23,7 @@ export const MinsidePersonKnapp = (props: Props) => {
             toggleMenu={toggleMenu}
             isOpen={isOpen}
             classname={classname}
+            id={'desktop-minside-meny_knapp'}
             ariaLabel={ariaLabel}
         >
             <MinsideIkon isOpen={isOpen} hasMenu={true} />

@@ -38,6 +38,7 @@ export const SokDropdown = () => {
             toggleMenu={toggleMenu}
             isOpen={isOpen}
             classname={classname}
+            id={'desktop-sok-dropdown__knapp'}
             ariaLabel={'Søkeknapp'}
         >
             <SokMenyIkon isOpen={isOpen} />

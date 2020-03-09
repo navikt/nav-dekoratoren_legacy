@@ -9,22 +9,21 @@ import { Language } from '../../../../../../../reducer/language-duck';
 import { finnTekst } from '../../../../../../../tekster/finn-tekst';
 import { bunnLenker } from './BunnseksjonLenkedata';
 import './Bunnseksjon.less';
+import { useDispatch } from 'react-redux';
+import { finnArbeidsflate } from '../../../../../../../reducer/arbeidsflate-duck';
 
 interface Props {
     classname: string;
-    settArbeidsflate: () => void;
     arbeidsflate: MenuValue;
     language: Language;
 }
 
-export const Bunnseksjon = ({
-    classname,
-    language,
-    arbeidsflate,
-    settArbeidsflate,
-}: Props) => {
+export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
     const cls = BEMHelper(classname);
     const lenker = bunnLenker[arbeidsflate]();
+
+    const dispatch = useDispatch();
+    const settArbeidsflate = () => dispatch(finnArbeidsflate());
 
     return (
         <>
