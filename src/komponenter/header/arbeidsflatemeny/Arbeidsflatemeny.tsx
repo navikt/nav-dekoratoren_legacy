@@ -14,7 +14,7 @@ import './Arbeidsflatemeny.less';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
 import Tekst from '../../../tekster/finn-tekst';
-import Environment, { erNavDekoratoren } from '../../../utils/Environment';
+import { erNavDekoratoren } from '../../../utils/Environment';
 
 interface StateProps {
     arbeidsflate: MenuValue;
