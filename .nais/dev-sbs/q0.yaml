@@ -37,7 +37,7 @@ spec:
         - name: API_INNLOGGINGSLINJE_URL
           value: https://www-q0.nav.no/innloggingslinje-api/auth
         - name: MINSIDE_ARBEIDSGIVER_URL
-          value: https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/
+          value: https://arbeidsgiver-q0.nav.no/min-side-arbeidsgiver/
         - name: DITT_NAV_URL
           value: https://www-q0.nav.no/person/dittnav/
         - name: LOGIN_URL

@@ -11,7 +11,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import { HovedmenyDropdown } from './hovedmeny-dropdown/HovedmenyDropdown';
 import {
     getHovedmenyNode,
-    validateMenuNode,
+    validateMenuRootNode,
 } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
@@ -41,7 +41,7 @@ export const HovedmenyDesktop = () => {
         language,
         arbeidsflate
     );
-    if (!validateMenuNode(hovedmenyPunkter)) {
+    if (!validateMenuRootNode(hovedmenyPunkter)) {
         return null;
     }
 

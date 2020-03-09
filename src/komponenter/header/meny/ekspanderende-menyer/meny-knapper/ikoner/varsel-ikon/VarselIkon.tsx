@@ -1,8 +1,6 @@
 import React from 'react';
 import './VarselIkon.less';
 import BEMHelper from '../../../../../../../utils/bem';
-import { Undertittel } from 'nav-frontend-typografi';
-import Tekst from '../../../../../../../tekster/finn-tekst';
 
 const ikon = require('../../../../../../../ikoner/varsler/alarm.svg');
 
@@ -20,11 +18,6 @@ export const VarselIkon = ({ isOpen }: Props) => {
                 src={ikon}
                 className={cls.element('bjelle', isOpen ? 'open' : '')}
             />
-            <div className={cls.element('tekst')}>
-                <Undertittel className={'varsler-tekst'}>
-                    <Tekst id={'varsler'} />
-                </Undertittel>
-            </div>
         </div>
     );
 };

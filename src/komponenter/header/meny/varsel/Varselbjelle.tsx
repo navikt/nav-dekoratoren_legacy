@@ -8,6 +8,8 @@ import './Varselbjelle.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 import MenylinjeKnapp from '../ekspanderende-menyer/meny-knapper/MenylinjeKnapp';
 import VarselIkon from '../ekspanderende-menyer/meny-knapper/ikoner/varsel-ikon/VarselIkon';
+import { Undertittel } from 'nav-frontend-typografi';
+import Tekst from '../../../../tekster/finn-tekst';
 
 interface StateProps {
     antallVarsler: number;
@@ -109,6 +111,9 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                                 } varsler.`}
                             >
                                 <VarselIkon isOpen={clicked} />
+                                <Undertittel className={'varsler-tekst'}>
+                                    <Tekst id={'varsler'} />
+                                </Undertittel>
                             </MenylinjeKnapp>
                         </div>
                         <div className="min-varsel-wrapper">

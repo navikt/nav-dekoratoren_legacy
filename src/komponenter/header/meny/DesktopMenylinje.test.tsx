@@ -26,10 +26,10 @@ describe('<DesktopMenylinje>', () => {
         expect(wrapper.find(HovedmenyDesktop)).toHaveLength(1);
     });
 
-    it('Skal IKKE rendre <HovedmenyDesktop> komponent hvis språk er samisk', () => {
-        const wrapper = shallowWithProps(Language.SAMISK);
-        expect(wrapper.find(HovedmenyDesktop)).toHaveLength(0);
-    });
+    // it('Skal IKKE rendre <HovedmenyDesktop> komponent hvis språk er samisk', () => {
+    //     const wrapper = shallowWithProps(Language.SAMISK);
+    //     expect(wrapper.find(HovedmenyDesktop)).toHaveLength(0);
+    // });
 
     it('Skal rendre <SokDropdown> komponent', () => {
         const wrapper = shallowWithProps(Language.NORSK);
