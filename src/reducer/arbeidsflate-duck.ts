@@ -100,20 +100,20 @@ const erArbeidsflate = (
     return (isSessionKey && key === menuKeyValue) || key === urlKeyvalue;
 };
 
-function settPersonflate(): SettPrivatpersonAction {
+export const settPersonflate = (): SettPrivatpersonAction => {
     return {
         type: ActionType.PRIVATPERSON,
     };
-}
+};
 
-function settArbeidsgiverflate(): SettArbeidsgiverAction {
+export const settArbeidsgiverflate = (): SettArbeidsgiverAction => {
     return {
         type: ActionType.ARBEIDSGIVER,
     };
-}
+};
 
-function settSamarbeidspartnerflate(): SettSamarbeidspartnerAction {
+export const settSamarbeidspartnerflate = (): SettSamarbeidspartnerAction => {
     return {
         type: ActionType.SAMARBEIDSPARTNER,
     };
-}
+};

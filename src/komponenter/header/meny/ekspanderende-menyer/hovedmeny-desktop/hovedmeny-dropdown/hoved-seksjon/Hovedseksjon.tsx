@@ -1,10 +1,12 @@
-import { MenySeksjon } from '../../../../../../../reducer/menu-duck';
-import { HovedseksjonTema } from './HovedseksjonTema';
+import { MenyNode } from '../../../../../../../reducer/menu-duck';
+import { MenyLenkeSeksjon } from '../../../meny-lenker/MenyLenkeSeksjon';
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
+import './Hovedseksjon.less';
+import { NaviGroup } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
 
 interface Props {
-    menyLenker: MenySeksjon;
+    menyLenker: MenyNode;
     classname: string;
     isOpen: boolean;
 }
@@ -16,11 +18,12 @@ export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
         <div className={cls.element('hoved-seksjon')}>
             {menyLenker &&
                 menyLenker.children.map((menygruppe, index) => (
-                    <HovedseksjonTema
+                    <MenyLenkeSeksjon
                         menygruppe={menygruppe}
                         isOpen={isOpen}
-                        className={classname}
-                        temaIndex={index}
+                        colIndex={index}
+                        rowIndex={2}
+                        kbNaviGroup={NaviGroup.DesktopHovedmeny}
                         key={menygruppe.displayName}
                     />
                 ))}

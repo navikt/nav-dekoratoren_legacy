@@ -2,8 +2,8 @@ import React from 'react';
 import { AppState } from '../../../../../reducer/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Status } from '../../../../../api/api';
-import { getMenuNode } from '../../../../../utils/meny-storage-utils';
-import Menyknapp from '../meny-knapp/Menyknapp';
+import { getHovedmenyNode } from '../../../../../utils/meny-storage-utils';
+import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
 import {
     GACategory,
@@ -24,7 +24,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'mobilmeny';
-export const hovedmenyMobilClassname = classname;
+export const mobilHovedmenyKnappId = `${classname}-knapp-id`;
 
 export const HovedmenyMobil = () => {
     const dispatch = useDispatch();
@@ -39,23 +39,25 @@ export const HovedmenyMobil = () => {
     };
 
     const menyKnapp = (
-        <Menyknapp
+        <MenylinjeKnapp
             toggleMenu={menutoggle}
-            clicked={isOpen}
+            isOpen={isOpen}
             classname={classname}
+            id={mobilHovedmenyKnappId}
+            ariaLabel={'Hovedmenyknapp'}
         >
             <MenyIkon />
             <Undertittel>
                 <Tekst id="meny-knapp" />
             </Undertittel>
-        </Menyknapp>
+        </MenylinjeKnapp>
     );
 
     const dropdownInnhold =
         meny.status === Status.OK ? (
             <MobilVisningsmeny
                 classname={classname}
-                menyLenker={getMenuNode(meny.data, language, arbeidsflate)}
+                menyLenker={getHovedmenyNode(meny.data, language, arbeidsflate)}
                 menuIsOpen={isOpen}
                 togglemenu={menutoggle}
                 arbeidsflate={arbeidsflate}
@@ -70,6 +72,7 @@ export const HovedmenyMobil = () => {
             classname={classname}
             isOpen={isOpen}
             menyKnapp={menyKnapp}
+            id={classname}
         >
             {dropdownInnhold}
         </EkspanderbarMeny>

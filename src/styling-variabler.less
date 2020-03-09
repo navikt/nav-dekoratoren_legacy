@@ -1,7 +1,8 @@
 @import (reference) '~nav-frontend-core';
 
 //desktop breakpoint width
-@desktopLimitWidth: 1024px;
+@desktopLimitWidth: 1440px;
+@smallDesktopLimitWidth: 1024px;
 
 //tablet breakpoint width
 @tabletLimitWidth: 768px;
@@ -15,4 +16,16 @@
 //set common max-heigh for buttons and form-elements, to easily align-items on row.
 @maxheight-menuitem: 40px;
 
-@padding-horizontal: 3rem;
+@margins-sides-desktop: 3rem;
+@margins-sides-desktop-small: 1rem;
+
+.col-setup(@cols, @margins) {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: calc(percentage(1 / (@cols + 1)) + 1px);
+    max-width: calc(percentage(1 / @cols) - (@margins - @margins / @cols));
+
+    &:not(:nth-child(@{cols}n)) {
+        margin-right: @margins;
+    }
+}

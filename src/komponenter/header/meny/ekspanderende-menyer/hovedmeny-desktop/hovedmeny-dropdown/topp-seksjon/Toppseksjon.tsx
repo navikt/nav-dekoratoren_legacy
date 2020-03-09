@@ -9,6 +9,7 @@ import KbNav, {
 import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
 import { GACategory } from '../../../../../../../utils/google-analytics';
 import { LenkeMedGA } from '../../../../../../LenkeMedGA';
+import './Toppseksjon.less';
 
 interface Props {
     classname: string;
@@ -23,7 +24,7 @@ export const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
             <LenkeMedGA
                 href={Environment.XP_BASE_URL}
                 className={cls.element('topp-seksjon-lenke')}
-                id={KbNav.getKbId(NaviGroup.DesktopHeaderDropdown, {
+                id={KbNav.getKbId(NaviGroup.DesktopHovedmeny, {
                     col: 0,
                     row: 1,
                     sub: 0,

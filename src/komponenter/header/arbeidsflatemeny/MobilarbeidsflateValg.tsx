@@ -14,6 +14,7 @@ import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import './MobilarbeidsflateValg.less';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
+import Tekst from '../../../tekster/finn-tekst';
 
 interface Props {
     tabindex: boolean;
@@ -37,15 +38,16 @@ const MobilarbeidsflateValg = ({
     return (
         <ul className={cls.className}>
             {arbeidsflateLenker.map(
-                (lenke: { tittel: string; url: string; key: MenuValue }) => {
+                (lenke: { tittelId: string; url: string; key: MenuValue }) => {
                     return arbeidsflate === lenke.key ? null : (
                         <li
-                            key={lenke.tittel}
+                            key={lenke.key}
                             className={cls.element('liste-element')}
                         >
                             <LenkeMedGA
                                 href={lenke.url}
-                                onClick={() => {
+                                onClick={(event: MouseEvent) => {
+                                    event.preventDefault();
                                     oppdaterSessionStorage(lenke.key);
                                     settArbeidsflate();
                                 }}
@@ -61,7 +63,7 @@ const MobilarbeidsflateValg = ({
                                     <span
                                         className={cls.element('lenke-tittel')}
                                     >
-                                        {lenke.tittel}
+                                        <Tekst id={lenke.tittelId} />
                                     </span>{' '}
                                 </Undertittel>
                             </LenkeMedGA>

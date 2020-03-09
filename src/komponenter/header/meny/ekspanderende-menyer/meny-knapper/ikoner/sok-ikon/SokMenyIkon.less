@@ -1,0 +1,74 @@
+@import (reference) '~nav-frontend-core/less/core';
+
+.sok-meny-ikon {
+    @width: 32px;
+    @height: 24px;
+    @circleRadius: 10px;
+    @stroke-width: 3px;
+    @color: @navBla;
+    @handleAngle: 35deg;
+    @middle: (@height - @stroke-width) / 2;
+
+    .line() {
+        position: absolute;
+        width: @width;
+        height: @stroke-width;
+        border: 0;
+        border-radius: 0;
+        background-color: @color;
+    }
+
+    &__container {
+        width: @width;
+        height: @height;
+        padding: 0;
+        position: relative;
+        margin-right: 0.5em;
+    }
+
+    &__circle {
+        border-radius: 50%;
+        border: @color @stroke-width solid;
+        height: @circleRadius*2;
+        width: @circleRadius*2;
+        position: absolute;
+        transform-origin: center;
+        transition: 0.35s all ease-in;
+
+        &--open {
+            //opacity: 0;
+            transform: translate(@width / 2 - @circleRadius,
+                @height / 2 - @circleRadius) scale(0);
+        }
+    }
+
+    &__line {
+        transform-origin: top left;
+        transform: translate(
+                @circleRadius * (1 + cos(@handleAngle)),
+                @circleRadius * (1 + sin(@handleAngle)))
+            rotate(@handleAngle);
+        height: @stroke-width;
+        width: @circleRadius;
+        background-color: @color;
+        position: absolute;
+        transition: 0.35s all ease-in;
+
+        &--open {
+            .line();
+            transform-origin: center;
+            transform: translateY(@middle) rotate(315deg) scale(0.8);
+        }
+    }
+
+    &__line-x {
+        .line();
+        transform-origin: center;
+        transform: translateY(@middle) rotate(45deg) scaleX(0);
+        transition: 0.35s all ease-in;
+
+        &--open {
+            transform: translateY(@middle) rotate(45deg) scale(0.8);
+        }
+    }
+}

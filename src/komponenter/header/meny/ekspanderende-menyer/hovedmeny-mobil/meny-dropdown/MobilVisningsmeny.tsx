@@ -1,7 +1,7 @@
 import React from 'react';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import BEMHelper from '../../../../../../utils/bem';
-import { MenySeksjon } from '../../../../../../reducer/menu-duck';
+import { MenyNode } from '../../../../../../reducer/menu-duck';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 import { Language } from '../../../../../../reducer/language-duck';
 import Topseksjon from './mobil-innhold/top-seksjon/Topseksjon';
@@ -12,12 +12,11 @@ import MobilarbeidsflateValg from '../../../../arbeidsflatemeny/Mobilarbeidsflat
 import VarselinnboksProvider from '../../../../../../provider/Varselinnboks-provider';
 import Varselbjelle from '../../../varsel/Varselbjelle';
 import VarselvisningMobil from '../../../varsel/varselvisning/VarselvisningMobil';
-import MinsideLenke from '../../../minside-lenke/MinsideLenke';
 import './MobilVisningsmeny.less';
 
 interface VisningsmenyProps {
     classname: string;
-    menyLenker: MenySeksjon;
+    menyLenker: MenyNode;
     togglemenu: () => void;
     menuIsOpen: boolean;
     arbeidsflate: MenuValue;
@@ -26,7 +25,7 @@ interface VisningsmenyProps {
 
 interface State {
     className: string;
-    lenker: MenySeksjon;
+    lenker: MenyNode;
     toggleundermeny: boolean;
     togglevarsel: boolean;
 }
@@ -93,7 +92,7 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
 
     setMenyliste = (
         event: React.MouseEvent<HTMLAnchorElement>,
-        meny: MenySeksjon,
+        meny: MenyNode,
         pointer: any
     ) => {
         event.preventDefault();
@@ -139,9 +138,7 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
                     >
                         <>
                             <VarselinnboksProvider>
-                                <Varselbjelle
-                                    tabindex={this.hovedseksjonTabIndex()}
-                                >
+                                <Varselbjelle>
                                     {(clicked, handleClick) => (
                                         <VarselvisningMobil
                                             visvarsel={clicked}
@@ -167,14 +164,14 @@ class MobilVisningsmeny extends React.Component<VisningsmenyProps, State> {
                                 </Varselbjelle>
                             </VarselinnboksProvider>
                         </>
-                        <MinsideLenke tabindex={this.hovedseksjonTabIndex()} />
+                        {/*<MinsideLenke tabindex={this.hovedseksjonTabIndex()} />*/}
                     </div>
                     <MenyIngress
                         className={menyClass.element('meny', 'ingress')}
                     />
                     <ul className={menyClass.element('meny', 'list')}>
                         {menyLenker.children.map(
-                            (menyElement: MenySeksjon, index: number) => {
+                            (menyElement: MenyNode, index: number) => {
                                 return (
                                     <a
                                         className="lenke"

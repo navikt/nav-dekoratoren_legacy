@@ -76,9 +76,7 @@
             list-style: none;
             padding: 0;
             z-index: 1020;
-            position: absolute;
             background-color: @navBlaDarken60;
-            top: 100%;
             width: 100%;
             overflow: hidden;
             margin: 0;
@@ -146,10 +144,17 @@
     @media (min-width: @tabletLimitWidth) {
         .sok .sok-container {
             width: auto;
-            justify-content: space-between;
+            justify-content: center;
             margin-bottom: 0;
-            margin-top: 0;
-            align-items: center;
+            margin-top: 1rem;
+            align-items: flex-start;
+            min-height: 50vh;
+            .sok-ikon {
+                position: relative;
+                top: 0.35rem;
+                right: 2.75rem;
+                pointer-events: none;
+            }
         }
 
         .sok-input-resultat {
@@ -196,19 +201,20 @@
             .sokeresultat-liste {
                 list-style: none;
                 z-index: 10;
-                position: absolute;
+                position: relative;
                 background-color: white;
-                left: 0;
-                overflow: hidden;
+                overflow-y: scroll;
+                overflow-x: hidden;
                 margin: 0;
                 width: 20rem;
+                max-height: 500px;
                 box-shadow: 0px 2.8px 2.2px rgba(0, 0, 0, 0.034),
                     0px 6.7px 5.3px rgba(0, 0, 0, 0.048),
                     0px 12.5px 10px rgba(0, 0, 0, 0.06),
                     0px 22.3px 17.9px rgba(0, 0, 0, 0.072),
                     0px 41.8px 33.4px rgba(0, 0, 0, 0.086),
                     0px 100px 80px rgba(0, 0, 0, 0.12);
-                top: 120%;
+                //top: 120%;
                 border-radius: 1px;
 
                 li {
@@ -260,32 +266,6 @@
 
             &:focus {
                 outline: 3px solid @fokusFarge;
-            }
-        }
-    }
-
-    @media (min-width: @desktopLimitWidth) {
-        .sok .sok-container {
-            width: 27.5rem;
-        }
-
-        .sok-input-resultat {
-            .sokeresultat-liste {
-                width: 27.5rem;
-            }
-
-            .sok-input {
-                margin-right: 0;
-                width: 20rem;
-
-                &.engelsk {
-                    width: 18.2rem;
-                }
-
-                input[placeholder] {
-                    font-size: 1rem;
-                    line-height: 1.425rem;
-                }
             }
         }
     }

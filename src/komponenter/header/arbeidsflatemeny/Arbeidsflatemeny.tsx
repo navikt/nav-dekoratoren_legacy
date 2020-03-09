@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import { Dispatch } from '../../../redux/dispatch-type';
-import { EtikettLiten } from 'nav-frontend-typografi';
+import { Undertekst } from 'nav-frontend-typografi';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import BEMHelper from '../../../utils/bem';
 import {
@@ -13,6 +13,7 @@ import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import './Arbeidsflatemeny.less';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
+import Tekst from '../../../tekster/finn-tekst';
 
 interface StateProps {
     arbeidsflate: MenuValue;
@@ -39,16 +40,16 @@ const Arbeidsflatemeny = ({
             <ul className={cls.element('topp-liste-rad')} role="tablist">
                 {arbeidsflateLenker.map(
                     (lenke: {
-                        tittel: string;
+                        tittelId: string;
                         url: string;
                         key: MenuValue;
                     }) => {
                         return (
                             <li
                                 role="tab"
-                                aria-selected={arbeidsflate === lenke.tittel}
+                                aria-selected={arbeidsflate === lenke.key}
                                 className={cls.element('liste-element')}
-                                key={lenke.tittel}
+                                key={lenke.key}
                             >
                                 <LenkeMedGA
                                     classNameOverride={cls.element('lenke')}
@@ -66,14 +67,14 @@ const Arbeidsflatemeny = ({
                                     <div
                                         className={cls.element(
                                             'lenke-inner',
-                                            arbeidsflate === lenke.tittel
+                                            arbeidsflate === lenke.key
                                                 ? 'active'
                                                 : ''
                                         )}
                                     >
-                                        <EtikettLiten>
-                                            {lenke.tittel}
-                                        </EtikettLiten>
+                                        <Undertekst>
+                                            <Tekst id={lenke.tittelId} />
+                                        </Undertekst>
                                     </div>
                                 </LenkeMedGA>
                             </li>

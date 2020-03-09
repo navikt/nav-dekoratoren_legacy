@@ -6,10 +6,10 @@ import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import './Varselbjelle.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
-
-interface Props {
-    tabindex: boolean;
-}
+import MenylinjeKnapp from '../ekspanderende-menyer/meny-knapper/MenylinjeKnapp';
+import VarselIkon from '../ekspanderende-menyer/meny-knapper/ikoner/varsel-ikon/VarselIkon';
+import { Undertittel } from 'nav-frontend-typografi';
+import Tekst from '../../../../tekster/finn-tekst';
 
 interface StateProps {
     antallVarsler: number;
@@ -32,7 +32,7 @@ interface State {
     classname: string;
 }
 
-type VarselbjelleProps = StateProps & DispatchProps & FunctionProps & Props;
+type VarselbjelleProps = StateProps & DispatchProps & FunctionProps;
 
 class Varselbjelle extends React.Component<VarselbjelleProps, State> {
     private varselbjelleRef = createRef<HTMLDivElement>();
@@ -93,31 +93,29 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             erInnlogget,
             antallVarsler,
             arbeidsflate,
-            tabindex,
             children,
         } = this.props;
         const { clicked, classname } = this.state;
+
         return (
             <div ref={this.varselbjelleRef} className="varselbjelle">
                 {erInnlogget && arbeidsflate === MenuValue.PRIVATPERSON ? (
                     <>
-                        <div
-                            id="toggle-varsler-container"
-                            className={classname}
-                        >
-                            <button
-                                onClick={this.handleClick}
-                                className="toggle-varsler"
-                                tabIndex={tabindex ? 0 : -1}
-                                title="Varsler"
-                                aria-label={`Varsler. Du har ${
+                        <div id="toggle-varsler-container">
+                            <MenylinjeKnapp
+                                toggleMenu={this.handleClick}
+                                isOpen={clicked}
+                                classname={classname}
+                                id={'toggle-varsler-knapp-id'}
+                                ariaLabel={`Varsler. Du har ${
                                     antallVarsler > 0 ? antallVarsler : 'ingen'
                                 } varsler.`}
-                                aria-pressed={clicked}
-                                aria-haspopup="true"
-                                aria-controls="varsler-display"
-                                aria-expanded={clicked}
-                            />
+                            >
+                                <VarselIkon isOpen={clicked} />
+                                <Undertittel className={'varsler-tekst'}>
+                                    <Tekst id={'varsler'} />
+                                </Undertittel>
+                            </MenylinjeKnapp>
                         </div>
                         <div className="min-varsel-wrapper">
                             {children(clicked, this.handleClick)}
