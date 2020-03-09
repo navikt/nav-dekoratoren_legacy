@@ -3,6 +3,7 @@ import { MenuValue } from '../../../utils/meny-storage-utils';
 export interface ArbeidsflateLenke {
     tittel: MenuValue;
     url: string;
+    beskrivelse: string;
     key: MenuValue;
 }
 
@@ -10,16 +11,21 @@ export const arbeidsflateLenker: ArbeidsflateLenke[] = [
     {
         tittel: MenuValue.PRIVATPERSON,
         url: '/dekoratoren/person/',
+        beskrivelse: 'Utbetalingsoversikt, saksoversikt, sykefravær',
         key: MenuValue.PRIVATPERSON,
     },
     {
         tittel: MenuValue.ARBEIDSGIVER,
         url: '/dekoratoren/bedrift/',
+        beskrivelse:
+            'Tjenester og skjemaer, rekruttering, oppfølging, inkluderende arbeidsliv, hjelpemidler',
         key: MenuValue.ARBEIDSGIVER,
     },
     {
         tittel: MenuValue.SAMARBEIDSPARTNER,
         url: '/dekoratoren/samarbeidspartner/',
+        beskrivelse:
+            'Kommuner, utdanningsområdet, psykisk helse, hjelpemidler, leger og behandlere',
         key: MenuValue.SAMARBEIDSPARTNER,
     },
 ];

@@ -30,29 +30,31 @@ const FooterBottom = ({ classname }: Props) => {
                         classname={cls.element('svg')}
                     />
                 </div>
-                <Normaltekst className="bottom-tekst">
-                    <Tekst id="footer-arbeids-og-veldferdsetaten" />
-                </Normaltekst>
-                <ul className="bottom-lenke">
-                    {lenker.map(lenke => {
-                        return (
-                            <li key={lenke.lenketekst}>
-                                <Normaltekst>
-                                    <LenkeMedGA
-                                        href={lenke.url}
-                                        gaEventArgs={{
-                                            category: GACategory.Footer,
-                                            action: `bunn/${lenke.lenketekst}`,
-                                            label: lenke.url,
-                                        }}
-                                    >
-                                        {lenke.lenketekst}
-                                    </LenkeMedGA>
-                                </Normaltekst>
-                            </li>
-                        );
-                    })}
-                </ul>
+                <div className="bottom-lenker">
+                    <Normaltekst className="bottom-tekst">
+                        <Tekst id="footer-arbeids-og-veldferdsetaten" />
+                    </Normaltekst>
+                    <ul className="bottom-lenke">
+                        {lenker.map(lenke => {
+                            return (
+                                <li key={lenke.lenketekst}>
+                                    <Normaltekst>
+                                        <LenkeMedGA
+                                            href={lenke.url}
+                                            gaEventArgs={{
+                                                category: GACategory.Footer,
+                                                action: `bunn/${lenke.lenketekst}`,
+                                                label: lenke.url,
+                                            }}
+                                        >
+                                            {lenke.lenketekst}
+                                        </LenkeMedGA>
+                                    </Normaltekst>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
             </div>
         </section>
     );
