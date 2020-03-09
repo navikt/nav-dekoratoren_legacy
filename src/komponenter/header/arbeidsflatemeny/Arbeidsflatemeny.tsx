@@ -57,8 +57,8 @@ const Arbeidsflatemeny = ({
                                     href={lenke.url}
                                     onClick={event => {
                                         event.preventDefault();
-                                        settArbeidsflate();
                                         oppdaterSessionStorage(lenke.key);
+                                        settArbeidsflate();
                                         if (!erNavDekoratoren) {
                                             window.location.href = lenke.url;
                                         }
