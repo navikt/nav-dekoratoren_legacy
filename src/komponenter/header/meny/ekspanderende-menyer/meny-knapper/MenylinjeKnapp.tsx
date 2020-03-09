@@ -6,20 +6,20 @@ interface Props {
     toggleMenu?: () => void;
     isOpen: boolean;
     classname: string;
+    id: string;
     ariaLabel: string;
     children: React.ReactNode;
 }
 
 export const MenylinjeKnapp = (props: Props) => {
-    const { toggleMenu, isOpen, classname, ariaLabel, children } = props;
+    const { toggleMenu, isOpen, classname, id, ariaLabel, children } = props;
     const cls = BEMHelper(classname);
-    const knappClassname = cls.element('knapp');
 
     return (
         <button
             onClick={toggleMenu}
-            className={`menylinje-knapp ${knappClassname}`}
-            id={knappClassname}
+            className={`menylinje-knapp ${cls.element('knapp')}`}
+            id={id}
             aria-label={ariaLabel}
             aria-pressed={isOpen}
             aria-haspopup="true"

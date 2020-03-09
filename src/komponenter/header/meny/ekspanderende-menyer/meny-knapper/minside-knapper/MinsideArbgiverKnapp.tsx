@@ -9,16 +9,18 @@ import { GACategory } from '../../../../../../utils/google-analytics';
 
 type Props = {
     classname: string;
+    id: string;
     href: string;
 };
 
 export const MinsideArbgiverKnapp = (props: Props) => {
-    const { classname, href } = props;
+    const { classname, id, href } = props;
     const cls = BEMHelper(classname);
 
     return (
         <LenkeMedGA
             classNameOverride={`menylinje-knapp ${cls.element('knapp')}`}
+            id={id}
             href={href}
             gaEventArgs={{
                 category: GACategory.Header,

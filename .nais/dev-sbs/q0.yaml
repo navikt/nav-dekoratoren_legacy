@@ -21,7 +21,8 @@ spec:
         min: 2
         max: 4
     ingresses:
-        - https://dekoratoren-q0.nais.oera-q.local/
+        - https://dekoratoren-q0.nais.oera-q.local
+        - https://appres-q0.nav.no/common-html/v4/navno
         - https://www-q0.nav.no/dekoratoren
     env:
         - name: XP_BASE_URL

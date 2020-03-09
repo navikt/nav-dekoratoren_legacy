@@ -28,7 +28,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-hovedmeny';
-export const hovedmenyDesktopClassname = classname;
+export const desktopHovedmenyKnappId = `${classname}-knapp-id`;
 
 export const HovedmenyDesktop = () => {
     const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(
@@ -58,6 +58,7 @@ export const HovedmenyDesktop = () => {
             toggleMenu={toggleMenu}
             isOpen={isOpen}
             classname={classname}
+            id={desktopHovedmenyKnappId}
             ariaLabel={'Hovedmenyknapp'}
         >
             <HamburgerIkon isOpen={isOpen} />

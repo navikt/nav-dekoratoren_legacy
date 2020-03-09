@@ -12,6 +12,7 @@ import Environment from '../../../../../../utils/Environment';
 import { GACategory } from '../../../../../../utils/google-analytics';
 import Tekst from '../../../../../../tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
+import { desktopMinsideKnappId } from '../MinsideMenyDesktop';
 
 type Props = {
     classname: string;
@@ -32,7 +33,7 @@ export const MinsideDropdown = (props: Props) => {
     const kbNaviGroup = NaviGroup.DesktopMinsideMeny;
     const kbRootIndex = { col: 0, row: 0, sub: 0 };
     const kbIdMap = {
-        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element('knapp'),
+        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: desktopMinsideKnappId,
     };
 
     useEffect(() => {
