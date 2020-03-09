@@ -51,7 +51,7 @@ const MobilarbeidsflateValg = ({
                                     event.preventDefault();
                                     oppdaterSessionStorage(lenke.key);
                                     settArbeidsflate();
-                                    if (!erNavDekoratoren) {
+                                    if (!erNavDekoratoren()) {
                                         window.location.href = lenke.url;
                                     }
                                 }}

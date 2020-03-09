@@ -64,7 +64,7 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                                     dispatch(
                                                         finnArbeidsflate()
                                                     );
-                                                    if (!erNavDekoratoren) {
+                                                    if (!erNavDekoratoren()) {
                                                         window.location.href =
                                                             lenke.url;
                                                     }
