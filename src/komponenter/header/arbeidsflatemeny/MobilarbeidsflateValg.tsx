@@ -37,7 +37,7 @@ const MobilarbeidsflateValg = ({
 
     return (
         <ul className={cls.className}>
-            {arbeidsflateLenker.map(
+            {arbeidsflateLenker().map(
                 (lenke: { tittelId: string; url: string; key: MenuValue }) => {
                     return arbeidsflate === lenke.key ? null : (
                         <li
