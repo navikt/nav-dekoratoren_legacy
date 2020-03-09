@@ -7,8 +7,8 @@ import KbNav, {
     NaviGroup,
 } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
 import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
-import { LenkeMedGA } from '../../../../../../LenkeMedGA';
 import { GACategory } from '../../../../../../../utils/google-analytics';
+import { LenkeMedGA } from '../../../../../../LenkeMedGA';
 import './Toppseksjon.less';
 
 interface Props {
@@ -30,8 +30,8 @@ export const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
                     sub: 0,
                 })}
                 gaEventArgs={{
-                    category: GACategory.Header,
-                    action: 'forside',
+                    category: GACategory.Meny,
+                    action: `hovedmeny/forsidelenke`,
                     label: Environment.XP_BASE_URL,
                 }}
             >
