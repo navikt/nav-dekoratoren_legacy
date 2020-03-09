@@ -9,6 +9,7 @@ import { template } from './template';
 
 // Config
 const basePath = '/dekoratoren';
+const oldBasePath = '/common-html/v4/navno';
 const buildPath = `${process.cwd()}/build`;
 const app = express();
 const PORT = 8088;
@@ -36,11 +37,7 @@ app.use((req, res, next) => {
 });
 
 // Express config
-const pathsForTemplate = [
-    `${basePath}/`,
-    `${basePath}/person`,
-    `${basePath}/person/*`,
-];
+const pathsForTemplate = [`${basePath}`, `${oldBasePath}`];
 
 app.get(pathsForTemplate, (req, res) => {
     const parameters = Object.keys(req.query).length
