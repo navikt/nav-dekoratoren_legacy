@@ -5,7 +5,10 @@ import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import BEMHelper from '../../../utils/bem';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
-import { arbeidsflateLenker, byttArbeidsflate } from './arbeidsflate-lenker';
+import {
+    arbeidsflateLenker,
+    settArbeidsflateOgRedirect,
+} from './arbeidsflate-lenker';
 import './MobilarbeidsflateValg.less';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
@@ -35,7 +38,10 @@ const MobilarbeidsflateValg = ({ tabindex }: Props) => {
                             href={lenke.url}
                             onClick={event => {
                                 event.preventDefault();
-                                byttArbeidsflate(lenke, settArbeidsflate);
+                                settArbeidsflateOgRedirect(
+                                    lenke,
+                                    settArbeidsflate
+                                );
                             }}
                             tabIndex={tabindex ? 0 : -1}
                             gaEventArgs={{

@@ -5,7 +5,7 @@ import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
 import { useDispatch } from 'react-redux';
 import { finnArbeidsflate } from '../../reducer/arbeidsflate-duck';
 import {
-    byttArbeidsflate,
+    settArbeidsflateOgRedirect,
     getArbeidsflateContext,
 } from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
 import { MenuValue } from '../../utils/meny-storage-utils';
@@ -32,7 +32,7 @@ const NavLogoRod = ({
                 gaEventArgs={{ category: GACategory.Footer, action: 'navlogo' }}
                 onClick={event => {
                     event.preventDefault();
-                    byttArbeidsflate(context, settArbeidsflate);
+                    settArbeidsflateOgRedirect(context, settArbeidsflate);
                 }}
             >
                 <svg

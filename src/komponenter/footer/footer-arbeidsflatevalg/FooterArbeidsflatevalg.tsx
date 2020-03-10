@@ -12,7 +12,7 @@ import { Language } from '../../../reducer/language-duck';
 import {
     ArbeidsflateLenke,
     arbeidsflateLenker,
-    byttArbeidsflate,
+    settArbeidsflateOgRedirect,
 } from '../../header/arbeidsflatemeny/arbeidsflate-lenker';
 
 interface Props {
@@ -57,7 +57,7 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                             href={lenke.url}
                                             onClick={event => {
                                                 event.preventDefault();
-                                                byttArbeidsflate(
+                                                settArbeidsflateOgRedirect(
                                                     lenke,
                                                     settArbeidsflate
                                                 );

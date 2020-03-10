@@ -45,7 +45,7 @@ export const getArbeidsflateContext = (arbeidsflate: MenuValue) =>
         ? samarbeidspartnerContextLenke()
         : personContextLenke();
 
-export const byttArbeidsflate = (
+export const settArbeidsflateOgRedirect = (
     lenke: ArbeidsflateLenke,
     settArbeidsflate: () => void
 ) => {

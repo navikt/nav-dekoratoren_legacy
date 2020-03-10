@@ -6,7 +6,10 @@ import { Undertekst } from 'nav-frontend-typografi';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import BEMHelper from '../../../utils/bem';
 import { MenuValue } from '../../../utils/meny-storage-utils';
-import { arbeidsflateLenker, byttArbeidsflate } from './arbeidsflate-lenker';
+import {
+    arbeidsflateLenker,
+    settArbeidsflateOgRedirect,
+} from './arbeidsflate-lenker';
 import './Arbeidsflatemeny.less';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
@@ -47,7 +50,10 @@ const Arbeidsflatemeny = ({ arbeidsflate }: arbeidsflateProps) => {
                                 href={lenke.url}
                                 onClick={event => {
                                     event.preventDefault();
-                                    byttArbeidsflate(lenke, settArbeidsflate);
+                                    settArbeidsflateOgRedirect(
+                                        lenke,
+                                        settArbeidsflate
+                                    );
                                 }}
                                 gaEventArgs={{
                                     category: GACategory.Header,
