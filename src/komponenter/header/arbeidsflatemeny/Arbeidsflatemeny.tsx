@@ -14,6 +14,7 @@ import './Arbeidsflatemeny.less';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
 import Tekst from '../../../tekster/finn-tekst';
+import { erNavDekoratoren } from '../../../utils/Environment';
 
 interface StateProps {
     arbeidsflate: MenuValue;
@@ -38,7 +39,7 @@ const Arbeidsflatemeny = ({
             aria-label="Velg brukergruppe"
         >
             <ul className={cls.element('topp-liste-rad')} role="tablist">
-                {arbeidsflateLenker.map(
+                {arbeidsflateLenker().map(
                     (lenke: {
                         tittelId: string;
                         url: string;
@@ -57,7 +58,11 @@ const Arbeidsflatemeny = ({
                                     onClick={event => {
                                         event.preventDefault();
                                         oppdaterSessionStorage(lenke.key);
-                                        settArbeidsflate();
+                                        if (erNavDekoratoren()) {
+                                            settArbeidsflate();
+                                        } else {
+                                            window.location.href = lenke.url;
+                                        }
                                     }}
                                     gaEventArgs={{
                                         category: GACategory.Header,

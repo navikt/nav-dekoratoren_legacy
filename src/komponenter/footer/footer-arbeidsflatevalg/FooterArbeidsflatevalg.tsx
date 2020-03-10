@@ -14,6 +14,7 @@ import {
     ArbeidsflateLenke,
     arbeidsflateLenker,
 } from '../../header/arbeidsflatemeny/arbeidsflate-lenker';
+import { erNavDekoratoren } from '../../../utils/Environment';
 
 interface Props {
     classname: string;
@@ -29,7 +30,7 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
 
     const dispatch = useDispatch();
     const { arbeidsflate, language } = useSelector(stateSelector);
-    const arbeidsflatevalgLenker = arbeidsflateLenker.filter(
+    const arbeidsflatevalgLenker = arbeidsflateLenker().filter(
         lenke => lenke.key !== arbeidsflate
     );
 
@@ -60,9 +61,14 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                                     oppdaterSessionStorage(
                                                         lenke.key
                                                     );
-                                                    dispatch(
-                                                        finnArbeidsflate()
-                                                    );
+                                                    if (erNavDekoratoren()) {
+                                                        dispatch(
+                                                            finnArbeidsflate()
+                                                        );
+                                                    } else {
+                                                        window.location.href =
+                                                            lenke.url;
+                                                    }
                                                 }}
                                                 gaEventArgs={{
                                                     category: GACategory.Header,

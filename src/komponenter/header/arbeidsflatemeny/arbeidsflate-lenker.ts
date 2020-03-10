@@ -1,4 +1,5 @@
 import { MenuValue } from '../../../utils/meny-storage-utils';
+import Environment from '../../../utils/Environment';
 
 export interface ArbeidsflateLenke {
     tittelId: string;
@@ -6,20 +7,20 @@ export interface ArbeidsflateLenke {
     key: MenuValue;
 }
 
-export const arbeidsflateLenker: ArbeidsflateLenke[] = [
+export const arbeidsflateLenker = (): ArbeidsflateLenke[] => [
     {
         tittelId: 'rolle-privatperson',
-        url: '/dekoratoren/person/',
+        url: `${Environment.XP_BASE_URL}`,
         key: MenuValue.PRIVATPERSON,
     },
     {
         tittelId: 'rolle-arbeidsgiver',
-        url: '/dekoratoren/bedrift/',
+        url: `${Environment.XP_BASE_URL}/no/bedrift`,
         key: MenuValue.ARBEIDSGIVER,
     },
     {
         tittelId: 'rolle-samarbeidspartner',
-        url: '/dekoratoren/samarbeidspartner/',
+        url: `${Environment.XP_BASE_URL}/no/nav-og-samfunn`,
         key: MenuValue.SAMARBEIDSPARTNER,
     },
 ];

@@ -23,7 +23,9 @@ const Skiplinks = () => {
     }, []);
 
     const setSkiplinks = (isMobile: boolean) => {
-        const hovedmenyKnappId = isMobile ? mobilHovedmenyKnappId : desktopHovedmenyKnappId;
+        const hovedmenyKnappId = isMobile
+            ? mobilHovedmenyKnappId
+            : desktopHovedmenyKnappId;
         setHovedmenylink(`#${hovedmenyKnappId}`);
 
         // TODO: oppdater for ny søk-knapp/dropdown funksjonalitet
