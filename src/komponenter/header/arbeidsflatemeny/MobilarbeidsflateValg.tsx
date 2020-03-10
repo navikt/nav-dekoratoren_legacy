@@ -50,8 +50,9 @@ const MobilarbeidsflateValg = ({
                                 onClick={(event: MouseEvent) => {
                                     event.preventDefault();
                                     oppdaterSessionStorage(lenke.key);
-                                    settArbeidsflate();
-                                    if (!erNavDekoratoren()) {
+                                    if (erNavDekoratoren()) {
+                                        settArbeidsflate();
+                                    } else {
                                         window.location.href = lenke.url;
                                     }
                                 }}
