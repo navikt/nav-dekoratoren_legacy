@@ -9,40 +9,28 @@ type LenkeData = {
     url: string;
     lenkeTekstId: string;
     stikkordId: string;
-    onClick?: Function;
-};
-
-export type OnArbeidsFlateClick = (
-    settArbeidsflateFunc: () => void
-) => (event: React.MouseEvent<HTMLAnchorElement>) => void;
-
-const onArbeidsflateClick = (arbeidsflate: MenuValue): OnArbeidsFlateClick => (
-    settArbeidsflate: () => void
-) => (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    oppdaterSessionStorage(arbeidsflate);
-    settArbeidsflate();
+    key?: MenuValue;
 };
 
 const personContextLenke = () => ({
     url: `${Environment.XP_BASE_URL}`,
     lenkeTekstId: 'rolle-privatperson',
     stikkordId: 'meny-bunnlenke-minside-stikkord',
-    onClick: onArbeidsflateClick(MenuValue.PRIVATPERSON),
+    key: MenuValue.PRIVATPERSON,
 });
 
 const arbeidsgiverContextLenke = () => ({
     url: `${Environment.XP_BASE_URL}/no/bedrift`,
     lenkeTekstId: 'rolle-arbeidsgiver',
     stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
-    onClick: onArbeidsflateClick(MenuValue.ARBEIDSGIVER),
+    key: MenuValue.ARBEIDSGIVER,
 });
 
 const samarbeidspartnerContextLenke = () => ({
     url: `${Environment.XP_BASE_URL}/no/nav-og-samfunn`,
     lenkeTekstId: 'rolle-samarbeidspartner',
     stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
-    onClick: onArbeidsflateClick(MenuValue.SAMARBEIDSPARTNER),
+    key: MenuValue.SAMARBEIDSPARTNER,
 });
 
 const privatpersonLenker = (): LenkeData[] => [

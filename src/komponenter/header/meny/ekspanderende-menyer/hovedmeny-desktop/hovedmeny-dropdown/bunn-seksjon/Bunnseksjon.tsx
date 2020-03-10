@@ -46,9 +46,13 @@ export const Bunnseksjon = ({
                                 NaviGroup.DesktopHovedmeny,
                                 kbNaviIndex
                             )}
-                            onClick={() => {
-                                if (lenke.onClick && erNavDekoratoren()) {
-                                    lenke.onClick(settArbeidsflate);
+                            onClick={event => {
+                                event.preventDefault();
+                                if (lenke.key) {
+                                    oppdaterSessionStorage(lenke.key);
+                                }
+                                if (lenke.key && erNavDekoratoren()) {
+                                    settArbeidsflate();
                                 } else {
                                     window.location.href = lenke.url;
                                 }
