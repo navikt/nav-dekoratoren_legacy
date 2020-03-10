@@ -6,15 +6,13 @@ import Lenkepanel from 'nav-frontend-lenkepanel/lib';
 import BEMHelper from '../../../../utils/bem';
 import { GACategory } from '../../../../utils/google-analytics';
 import { LenkeMedGA } from '../../../LenkeMedGA';
-import { finnArbeidsflate } from '../../../../reducer/arbeidsflate-duck';
 import { Language } from '../../../../reducer/language-duck';
 import Tekst from '../../../../tekster/finn-tekst';
-import { oppdaterSessionStorage } from '../../../../utils/meny-storage-utils';
 import {
     ArbeidsflateLenke,
     arbeidsflateLenker,
+    settArbeidsflate,
 } from '../../../header/arbeidsflatemeny/arbeidsflate-lenker';
-import { erNavDekoratoren } from '../../../../utils/Environment';
 
 interface Props {
     classname: string;
@@ -45,7 +43,7 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                         {arbeidsflatevalgLenker.map(
                             (lenke: ArbeidsflateLenke) => {
                                 return (
-                                    <li key={lenke.tittelId}>
+                                    <li key={lenke.key}>
                                         <Lenkepanel
                                             href={lenke.url}
                                             tittelProps="normaltekst"
@@ -57,19 +55,7 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                                     href={lenke.url}
                                                     onClick={event => {
                                                         event.preventDefault();
-                                                        oppdaterSessionStorage(
-                                                            lenke.key
-                                                        );
-                                                        if (
-                                                            erNavDekoratoren()
-                                                        ) {
-                                                            dispatch(
-                                                                finnArbeidsflate()
-                                                            );
-                                                        } else {
-                                                            window.location.href =
-                                                                lenke.url;
-                                                        }
+                                                        settArbeidsflate(lenke);
                                                     }}
                                                     gaEventArgs={{
                                                         category:
@@ -80,12 +66,12 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                                 >
                                                     <Undertittel>
                                                         <Tekst
-                                                            id={lenke.tittelId}
+                                                            id={
+                                                                lenke.lenkeTekstId
+                                                            }
                                                         />
                                                     </Undertittel>
-                                                    <Normaltekst>
-                                                        {lenke.beskrivelse}
-                                                    </Normaltekst>
+                                                    {lenke.stikkordId}
                                                 </LenkeMedGA>
                                             </Normaltekst>
                                         </Lenkepanel>
