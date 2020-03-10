@@ -125,7 +125,7 @@ const FooterTopp = ({ classname }: Props) => {
                         ))}
                     </ul>
                 </div>
-                <FooterArbeidsflatevalg classname={cls.className} />
+                <FooterArbeidsflatevalg />
             </div>
         </section>
     );
