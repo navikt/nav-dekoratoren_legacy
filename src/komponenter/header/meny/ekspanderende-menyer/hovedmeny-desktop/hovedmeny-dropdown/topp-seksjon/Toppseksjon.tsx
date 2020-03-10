@@ -24,7 +24,6 @@ interface Props {
 export const Toppseksjon = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
     const dispatch = useDispatch();
-    const settArbeidsflate = () => dispatch(finnArbeidsflate());
     const { arbeidsflate } = useSelector((state: AppState) => ({
         arbeidsflate: state.arbeidsflate.status,
     }));
@@ -36,7 +35,9 @@ export const Toppseksjon = ({ classname }: Props) => {
                 href={context.url}
                 onClick={event => {
                     event.preventDefault();
-                    settArbeidsflateOgRedirect(context, settArbeidsflate);
+                    settArbeidsflateOgRedirect(context, () =>
+                        dispatch(finnArbeidsflate())
+                    );
                 }}
                 className={cls.element('topp-seksjon-lenke')}
                 id={KbNav.getKbId(NaviGroup.DesktopHovedmeny, {

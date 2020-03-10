@@ -28,7 +28,6 @@ type arbeidsflateProps = StateProps & DispatchProps;
 const Arbeidsflatemeny = ({ arbeidsflate }: arbeidsflateProps) => {
     const cls = BEMHelper('arbeidsflate');
     const dispatch = useDispatch();
-    const settArbeidsflate = () => dispatch(finnArbeidsflate());
 
     return (
         <nav
@@ -50,9 +49,8 @@ const Arbeidsflatemeny = ({ arbeidsflate }: arbeidsflateProps) => {
                                 href={lenke.url}
                                 onClick={event => {
                                     event.preventDefault();
-                                    settArbeidsflateOgRedirect(
-                                        lenke,
-                                        settArbeidsflate
+                                    settArbeidsflateOgRedirect(lenke, () =>
+                                        dispatch(finnArbeidsflate())
                                     );
                                 }}
                                 gaEventArgs={{

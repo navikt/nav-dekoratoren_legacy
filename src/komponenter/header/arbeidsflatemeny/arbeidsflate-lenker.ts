@@ -47,11 +47,11 @@ export const getArbeidsflateContext = (arbeidsflate: MenuValue) =>
 
 export const settArbeidsflateOgRedirect = (
     lenke: ArbeidsflateLenke,
-    settArbeidsflate: () => void
+    runWhenDev: () => void
 ) => {
     oppdaterSessionStorage(lenke.key);
     if (erNavDekoratoren()) {
-        settArbeidsflate();
+        runWhenDev();
     } else {
         window.location.href = lenke.url;
     }

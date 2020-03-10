@@ -21,7 +21,6 @@ const Navlogo = ({
     viewIndex?: boolean;
 }) => {
     const dispatch = useDispatch();
-    const settArbeidsflate = () => dispatch(finnArbeidsflate());
     const context = getArbeidsflateContext(MenuValue.PRIVATPERSON);
 
     return (
@@ -31,7 +30,9 @@ const Navlogo = ({
             tabIndex={viewIndex ? 0 : -1}
             onClick={event => {
                 event.preventDefault();
-                settArbeidsflateOgRedirect(context, settArbeidsflate);
+                settArbeidsflateOgRedirect(context, () =>
+                    dispatch(finnArbeidsflate())
+                );
             }}
             gaEventArgs={{
                 category: GACategory.Meny,

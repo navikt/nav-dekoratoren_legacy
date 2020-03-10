@@ -25,7 +25,6 @@ interface Props {
 export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
     const cls = BEMHelper(classname);
     const dispatch = useDispatch();
-    const settArbeidsflate = () => dispatch(finnArbeidsflate());
     const lenker = bunnLenker[arbeidsflate]();
 
     return (
@@ -34,6 +33,7 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
             <div className={cls.element('bunn-seksjon')}>
                 {lenker.map((lenke, index) => {
                     const kbNaviIndex = { col: index, row: 3, sub: 0 };
+                    const context = lenke as ArbeidsflateLenke;
                     return (
                         <BunnseksjonLenke
                             url={lenke.url}
@@ -46,9 +46,8 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                             )}
                             onClick={event => {
                                 event.preventDefault();
-                                settArbeidsflateOgRedirect(
-                                    lenke as ArbeidsflateLenke,
-                                    settArbeidsflate
+                                settArbeidsflateOgRedirect(context, () =>
+                                    dispatch(finnArbeidsflate())
                                 );
                             }}
                             key={lenke.lenkeTekstId}

@@ -21,7 +21,6 @@ const NavLogoRod = ({
     classname?: string;
 }) => {
     const dispatch = useDispatch();
-    const settArbeidsflate = () => dispatch(finnArbeidsflate());
     const context = getArbeidsflateContext(MenuValue.PRIVATPERSON);
 
     return (
@@ -32,7 +31,9 @@ const NavLogoRod = ({
                 gaEventArgs={{ category: GACategory.Footer, action: 'navlogo' }}
                 onClick={event => {
                     event.preventDefault();
-                    settArbeidsflateOgRedirect(context, settArbeidsflate);
+                    settArbeidsflateOgRedirect(context, () =>
+                        dispatch(finnArbeidsflate())
+                    );
                 }}
             >
                 <svg
