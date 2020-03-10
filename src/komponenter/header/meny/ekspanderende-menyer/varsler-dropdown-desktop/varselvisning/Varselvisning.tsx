@@ -2,18 +2,13 @@ import React from 'react';
 import { AppState } from '../../../../../../reducer/reducer';
 import Environment from '../../../../../../utils/Environment';
 import './Varselvisning.less';
-import {
-    GACategory,
-} from '../../../../../../utils/google-analytics';
+import { GACategory } from '../../../../../../utils/google-analytics';
 import Tekst, { finnTekst } from '../../../../../../tekster/finn-tekst';
 import { LenkeMedGA } from '../../../../../LenkeMedGA';
 import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
 import { Undertittel } from 'nav-frontend-typografi';
-
-type Props = {
-    tabIndex: number;
-}
+import { getKbId, NaviGroup } from '../../../../../../utils/keyboard-navigation/kb-navigation';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
@@ -24,39 +19,43 @@ const stateSelector = (state: AppState) => ({
 
 const classname = 'varsler-display-desktop';
 
-export const Varselvisning = ({ tabIndex }: Props) => {
+const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => (
+    <div className="vis-alle-lenke">
+        <LenkeMedGA
+            href={Environment.API_VARSELINNBOKS_URL}
+            id={getKbId(NaviGroup.Varsler, {col: 0, row: index, sub: 0})}
+            tabIndex={0}
+            gaEventArgs={{
+                category: GACategory.Header,
+                action: 'varsler/visalle',
+                label: Environment.API_VARSELINNBOKS_URL,
+            }}
+        >
+            <Tekst id={'varsler-visalle'} />
+            {nyeVarslerMsg}
+        </LenkeMedGA>
+    </div>
+);
+
+export const Varselvisning = () => {
     const { varsler, varslerAntall, varslerUleste, language } = useSelector(stateSelector);
 
-    const alleVarslerLenke = varslerAntall > 5 ? (
-        <div className="vis-alle-lenke">
-            <LenkeMedGA
-                href={Environment.API_VARSELINNBOKS_URL}
-                tabIndex={tabIndex ? 0 : -1}
-                gaEventArgs={{
-                    category: GACategory.Header,
-                    action: 'varsler/visalle',
-                    label: Environment.API_VARSELINNBOKS_URL,
-                }}
-            >
-                <Tekst id={'varsler-visalle'} />
-                {varslerUleste > 0
-                    ? ` (${varslerUleste} ${finnTekst(
-                        'varsler-nye',
-                        language,
-                    )})`
-                    : ''}
-            </LenkeMedGA>
-        </div>
-    ) : null;
+    const nyeVarslerMsg = varslerUleste > 0
+        ? ` (${varslerUleste} ${finnTekst(
+            'varsler-nye',
+            language,
+        )})`
+        : '';
+    const visAlleVarslerLenke = varslerAntall > 5;
 
     return (
         <div className={classname}>
             <Undertittel>
                 <Tekst id={'varsler'} />
             </Undertittel>
-            {alleVarslerLenke}
+            { visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
             <VarslerParsed varsler={varsler} />
-            {alleVarslerLenke}
+            { visAlleVarslerLenke && alleVarslerLenke(1, nyeVarslerMsg)}
         </div>
     );
 };

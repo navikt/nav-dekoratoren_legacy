@@ -14,10 +14,10 @@ export const VarselIkon = ({ isOpen, antallUleste = 0 }: Props) => {
     return (
         <div className={cls.element('container')}>
             <div className={cls.element('bjelle', isOpen ? 'open' : '')}>
-                <div className={cls.element('ring')}/>
+                <div className={cls.element('ring', isOpen ? 'open' : '')}/>
                 <div className={cls.element('bell', isOpen ? 'open' : '')}/>
-                <div className={cls.element('lip')}/>
-                <div className={cls.element('clapper')}/>
+                <div className={cls.element('lip', isOpen ? 'open' : '')}/>
+                <div className={cls.element('clapper', isOpen ? 'open' : '')}/>
                 { antallUleste &&
                     <div className={cls.element('ulest-sirkel', isOpen ? 'open' : '')}>
                         <EtikettLiten className={cls.element('ulest-antall')}>
@@ -26,8 +26,6 @@ export const VarselIkon = ({ isOpen, antallUleste = 0 }: Props) => {
                     </div>
                 }
             </div>
-            <div className={cls.element('kryss-linje-1', isOpen ? 'open' : '')} />
-            <div className={cls.element('kryss-linje-2', isOpen ? 'open' : '')} />
         </div>
     );
 };

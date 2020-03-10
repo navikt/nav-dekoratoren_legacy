@@ -1,5 +1,8 @@
 import React from 'react';
-import htmlReactParser from 'html-react-parser';
+import htmlReactParser, { DomElement, domToReact } from 'html-react-parser';
+import { LenkeMedGA } from '../../../../../LenkeMedGA';
+import { GACategory } from '../../../../../../utils/google-analytics';
+import { getKbId, NaviGroup } from '../../../../../../utils/keyboard-navigation/kb-navigation';
 
 const ikonDefault = 'alarm-ikon';
 const ikonDefaultPath = require('../../../../../../ikoner/varsler/alarm.svg');
@@ -15,19 +18,46 @@ type Props = {
     varsler: string
 }
 
+const parseIkon = (ikonStr: string) => {
+    const ikon = ikoner[ikonStr] || ikonDefaultPath;
+    return (
+        <div className={`varsel-ikon-row`}>
+            <div className={`varsel-ikon-container ${ikonStr}`}>
+                <img src={ikon} alt={''} className={`varsel-ikon`} />
+            </div>
+        </div>
+    );
+};
+
+const parseLenke = (href: string | undefined, children: DomElement[] | undefined, index: number) => {
+    return (
+        <LenkeMedGA
+            href={href || ''}
+            tabIndex={0}
+            className={'varsel-lenke'}
+            id={getKbId(NaviGroup.Varsler, {col: 0, row: 1, sub: index})}
+            gaEventArgs={{
+                category: GACategory.Header,
+                action: 'varsel-lenke',
+                label: href,
+            }}
+        >
+            {children ? domToReact(children) : 'Lenke'}
+        </LenkeMedGA>
+    );
+};
+
 export const VarslerParsed = ({ varsler }: Props) => {
+    let lenkeIndex = 0;
     const varslerParsed = htmlReactParser(varsler, {
-        replace: ({ attribs, children }) => {
+        replace: ({ name, attribs, children }) => {
             if (attribs?.class.includes('varsel-ikon') && children) {
                 const ikonStr = children[0] && children[0].data || ikonDefault;
-                const ikon = ikoner[ikonStr] || ikonDefaultPath;
-                return (
-                    <div className={`varsel-ikon-row`}>
-                        <div className={`varsel-ikon-container ${ikonStr}`}>
-                            <img src={ikon} alt={''} className={`varsel-ikon`} />
-                        </div>
-                    </div>
-                );
+                return parseIkon(ikonStr);
+            }
+
+            if (name?.toLowerCase() === 'a') {
+                return parseLenke(attribs?.href, children, lenkeIndex++);
             }
         },
     });

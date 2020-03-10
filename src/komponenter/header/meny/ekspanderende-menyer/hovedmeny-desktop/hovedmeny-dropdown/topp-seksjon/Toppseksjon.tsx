@@ -24,7 +24,7 @@ export const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
             <LenkeMedGA
                 href={Environment.XP_BASE_URL}
                 className={cls.element('topp-seksjon-lenke')}
-                id={KbNav.getKbId(NaviGroup.DesktopHovedmeny, {
+                id={KbNav.getKbId(NaviGroup.Hovedmeny, {
                     col: 0,
                     row: 1,
                     sub: 0,

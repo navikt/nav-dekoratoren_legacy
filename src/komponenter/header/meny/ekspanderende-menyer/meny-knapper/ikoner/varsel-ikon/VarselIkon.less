@@ -10,6 +10,10 @@
     @height: 32px;
     @stroke-width: 1px;
 
+    @cross-width: 32px;
+    @cross-stroke-width: 3px;
+    @cross-scale: 0.8;
+
     @ring-diameter: 6px;
 
     @bell-width: 22px;
@@ -18,12 +22,19 @@
     @lip-width: @width;
     @lip-height: 3px;
 
-    @clapper-width: 6px;
-    @clapper-height: @bell-height + @lip-height + 2px;
+    @clapper-thickness: 6px;
+    @clapper-length: @bell-height + @lip-height + 2px;
 
     @ulest-diameter: 16px;
     @ulest-top: @height * 0.2;
     @ulest-left: @width * 0.05;
+
+    .cross-line-transform(@rotation) {
+        border-radius: 0;
+        width: @cross-width;
+        height: @cross-stroke-width;
+        transform: translateY(@height / 2) rotate(@rotation) scale(@cross-scale);
+    }
 
     &__container {
         position: relative;
@@ -32,36 +43,32 @@
         padding: 0;
         top: 0;
         border: none;
-        margin-right: 0.25em;
-    }
-
-    &__bjelle {
-        transform-origin: top center;
-        transform: scale(1);
-        transition: @transition-props;
-
-        &--open {
-            transform: scale(0.5) translate(@width/2, @height);
-        }
+        margin-right: 0.25rem;
     }
 
     &__ring {
-        z-index: 2;
         position: absolute;
-        top: 0;
-        left: (@width - @ring-diameter) / 2;
+        z-index: 2;
+
+        transform: translateX((@width - @ring-diameter) / 2);
 
         border-radius: 50%;
         height: @ring-diameter;
         width: @ring-diameter;
         background-color: @main-color;
+
+        transition: @transition-props;
+
+        &--open {
+            transform: translate((@width - @ring-diameter) / 2, @height / 2) scale(0);
+        }
     }
 
     &__bell {
-        z-index: 2;
         position: absolute;
-        top: @ring-diameter - @stroke-width;
-        left: (@width - @bell-width) / 2;
+        z-index: 2;
+
+        transform: translate((@width - @bell-width) / 2, @ring-diameter - @stroke-width);
 
         border-top-left-radius: @bell-height + @stroke-width;
         border-top-right-radius: @bell-height + @stroke-width;
@@ -74,15 +81,15 @@
         transition: @transition-props;
 
         &--open {
-            background-color: @main-color;
+            .cross-line-transform(-(45deg));
         }
     }
 
     &__lip {
-        z-index: 2;
         position: absolute;
-        top: @ring-diameter + @bell-height - @stroke-width;
-        left: 0;
+        z-index: 2;
+
+        transform: translateY(@ring-diameter + @bell-height - @stroke-width);
 
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
@@ -90,26 +97,38 @@
         width: @lip-width;
         height: @lip-height;
         background-color: @main-color;
+
+        transition: @transition-props;
+
+        &--open {
+            .cross-line-transform(-(45deg));
+        }
     }
 
     &__clapper {
-        z-index: 1;
         position: absolute;
-        top: @ring-diameter;
-        left: (@width - @clapper-width) / 2;
-        border-radius: 50%;
+        z-index: 1;
 
-        width: @clapper-width;
-        height: @clapper-height;
+        transform: translate((@width - @clapper-length) / 2, @height / 2) rotate(90deg);
+
+        border-radius: @clapper-thickness / 2;
+
+        width: @clapper-length;
+        height: @clapper-thickness;
         background-color: @main-color;
+
+        transition: @transition-props;
+
+        &--open {
+            .cross-line-transform(-(45deg + 90deg));
+        }
     }
 
     &__ulest-sirkel {
-        opacity: 1;
-        z-index: 3;
         position: absolute;
-        top: @ulest-top;
-        left: @ulest-left;
+        z-index: 3;
+
+        transform: translate(@ulest-left, @ulest-top);
 
         border-radius: 50%;
         height: @ulest-diameter;
@@ -123,7 +142,8 @@
         transition: @transition-props;
 
         &--open {
-            opacity: 0;
+            transform: translate(@ulest-left, @ulest-top) scale(0);
+            transition: 0.2s all linear;
         }
     }
 
@@ -131,35 +151,5 @@
         color: white;
         font-weight: bold;
         font-size: 11px;
-    }
-
-    .kryss-linje(@rotation) {
-        visibility: hidden;
-        position: absolute;
-        top: @ring-diameter;
-        left: 0;
-
-        width: @width;
-        height: 3px;
-        background-color: @navBla;
-
-        transform-origin: center;
-        transform: translate(0) rotate(0) scaleX(0);
-        transition: @transition-props;
-
-        &--open {
-            top: 12px;
-            left: 6px;
-            visibility: visible;
-            transform: translateX(-@width/2) rotate(@rotation) scale(0.8);
-        }
-    }
-
-    &__kryss-linje-1 {
-        .kryss-linje(45deg);
-    }
-
-    &__kryss-linje-2 {
-        .kryss-linje(-45deg);
     }
 }
