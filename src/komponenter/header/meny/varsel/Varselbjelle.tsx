@@ -106,7 +106,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                                 toggleMenu={this.handleClick}
                                 isOpen={clicked}
                                 classname={classname}
-                                id={'toggle-varsler-container__knapp'}
+                                id={'toggle-varsler-knapp-id'}
                                 ariaLabel={`Varsler. Du har ${
                                     antallVarsler > 0 ? antallVarsler : 'ingen'
                                 } varsler.`}

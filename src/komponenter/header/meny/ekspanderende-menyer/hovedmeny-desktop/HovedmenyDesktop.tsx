@@ -9,10 +9,7 @@ import { AppState } from '../../../../../reducer/reducer';
 import { Status } from '../../../../../api/api';
 import { Undertittel } from 'nav-frontend-typografi';
 import { HovedmenyDropdown } from './hovedmeny-dropdown/HovedmenyDropdown';
-import {
-    getHovedmenyNode,
-    validateMenuRootNode,
-} from '../../../../../utils/meny-storage-utils';
+import { getHovedmenyNode } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
@@ -28,7 +25,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-hovedmeny';
-export const hovedmenyDesktopClassname = classname;
+export const desktopHovedmenyKnappId = `${classname}-knapp-id`;
 
 export const HovedmenyDesktop = () => {
     const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(
@@ -41,7 +38,7 @@ export const HovedmenyDesktop = () => {
         language,
         arbeidsflate
     );
-    if (!validateMenuRootNode(hovedmenyPunkter)) {
+    if (!hovedmenyPunkter?.hasChildren) {
         return null;
     }
 
@@ -58,7 +55,7 @@ export const HovedmenyDesktop = () => {
             toggleMenu={toggleMenu}
             isOpen={isOpen}
             classname={classname}
-            id={'desktop-hovedmeny__knapp'}
+            id={desktopHovedmenyKnappId}
             ariaLabel={'Hovedmenyknapp'}
         >
             <HamburgerIkon isOpen={isOpen} />

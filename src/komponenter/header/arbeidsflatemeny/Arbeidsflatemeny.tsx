@@ -1,15 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import { Dispatch } from '../../../redux/dispatch-type';
 import { Undertekst } from 'nav-frontend-typografi';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import BEMHelper from '../../../utils/bem';
+import { MenuValue } from '../../../utils/meny-storage-utils';
 import {
-    MenuValue,
-    oppdaterSessionStorage,
-} from '../../../utils/meny-storage-utils';
-import { arbeidsflateLenker } from './arbeidsflate-lenker';
+    arbeidsflateLenker,
+    settArbeidsflateOgRedirect,
+} from './arbeidsflate-lenker';
 import './Arbeidsflatemeny.less';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
@@ -29,11 +29,9 @@ interface DispatchProps {
 
 type arbeidsflateProps = StateProps & DispatchProps;
 
-const Arbeidsflatemeny = ({
-    settArbeidsflate,
-    arbeidsflate,
-}: arbeidsflateProps) => {
+const Arbeidsflatemeny = ({ arbeidsflate }: arbeidsflateProps) => {
     const cls = BEMHelper('arbeidsflate');
+    const dispatch = useDispatch();
 
     return (
         <nav
@@ -42,56 +40,48 @@ const Arbeidsflatemeny = ({
             aria-label="Velg brukergruppe"
         >
             <ul className={cls.element('topp-liste-rad')} role="tablist">
-                {arbeidsflateLenker.map(
-                    (
-                        lenke: {
-                            tittelId: string;
-                            url: string;
-                            key: MenuValue;
-                        },
-                        index
-                    ) => {
-                        return (
-                            <li
-                                role="tab"
-                                aria-selected={arbeidsflate === lenke.key}
-                                className={cls.element('liste-element')}
-                                key={lenke.key}
+                {arbeidsflateLenker().map((lenke, index) => {
+                    return (
+                        <li
+                            role="tab"
+                            aria-selected={arbeidsflate === lenke.key}
+                            className={cls.element('liste-element')}
+                            key={lenke.key}
+                        >
+                            <LenkeMedGA
+                                classNameOverride={cls.element('lenke')}
+                                id={getKbId(
+                                    NaviGroup.DesktopHeaderMenylinje,
+                                    { col: index, row: 0, sub: 0 }
+                                )}
+                                href={lenke.url}
+                                onClick={event => {
+                                    event.preventDefault();
+                                    settArbeidsflateOgRedirect(lenke, () =>
+                                        dispatch(finnArbeidsflate())
+                                    );
+                                }}
+                                gaEventArgs={{
+                                    category: GACategory.Header,
+                                    action: 'arbeidsflate-valg',
+                                }}
                             >
-                                <LenkeMedGA
-                                    classNameOverride={cls.element('lenke')}
-                                    id={getKbId(
-                                        NaviGroup.DesktopHeaderMenylinje,
-                                        { col: index, row: 0, sub: 0 }
+                                <div
+                                    className={cls.element(
+                                        'lenke-inner',
+                                        arbeidsflate === lenke.key
+                                            ? 'active'
+                                            : ''
                                     )}
-                                    href={lenke.url}
-                                    onClick={event => {
-                                        event.preventDefault();
-                                        oppdaterSessionStorage(lenke.key);
-                                        settArbeidsflate();
-                                    }}
-                                    gaEventArgs={{
-                                        category: GACategory.Header,
-                                        action: 'arbeidsflate-valg',
-                                    }}
                                 >
-                                    <div
-                                        className={cls.element(
-                                            'lenke-inner',
-                                            arbeidsflate === lenke.key
-                                                ? 'active'
-                                                : ''
-                                        )}
-                                    >
-                                        <Undertekst>
-                                            <Tekst id={lenke.tittelId} />
-                                        </Undertekst>
-                                    </div>
-                                </LenkeMedGA>
-                            </li>
-                        );
-                    }
-                )}
+                                    <Undertekst>
+                                        <Tekst id={lenke.lenkeTekstId} />
+                                    </Undertekst>
+                                </div>
+                            </LenkeMedGA>
+                        </li>
+                    );
+                })}
             </ul>
         </nav>
     );

@@ -1,8 +1,9 @@
-import Lenke from 'nav-frontend-lenker';
 import Tekst from '../../../../../../../tekster/finn-tekst';
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
+import { LenkeMedGA } from '../../../../../../LenkeMedGA';
+import { GACategory } from '../../../../../../../utils/google-analytics';
 
 interface Props {
     url: string;
@@ -10,7 +11,7 @@ interface Props {
     stikkord: string;
     className: string;
     id: string;
-    onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+    onClick?: (event: MouseEvent) => void;
 }
 
 const BunnseksjonLenke = ({
@@ -26,14 +27,19 @@ const BunnseksjonLenke = ({
     return (
         <div className={cls.element('bunn-seksjon-col')}>
             <Undertittel>
-                <Lenke
+                <LenkeMedGA
                     href={url}
                     className={cls.element('bunn-lenke')}
                     id={id}
                     onClick={onClick}
+                    gaEventArgs={{
+                        category: GACategory.Meny,
+                        action: `hovedmeny/arbeidsflatelenke`,
+                        label: url,
+                    }}
                 >
                     <Tekst id={lenkeTekstId} />
-                </Lenke>
+                </LenkeMedGA>
             </Undertittel>
             <ul className={cls.element('bunn-lenke-stikkord')}>
                 <Undertekst>

@@ -19,7 +19,7 @@ export const MinsideArbgiverKnapp = (props: Props) => {
     return (
         <LenkeMedGA
             classNameOverride={`menylinje-knapp ${cls.element('knapp')}`}
-            id={'desktop-minside-meny_knapp'}
+            id={'desktop-minside-meny-knapp-id'}
             href={href}
             gaEventArgs={{
                 category: GACategory.Header,

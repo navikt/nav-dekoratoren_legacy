@@ -37,8 +37,11 @@
 
         &--open {
             //opacity: 0;
-            transform: translate(@width / 2 - @circleRadius,
-                @height / 2 - @circleRadius) scale(0);
+            transform: translate(
+                    @width / 2 - @circleRadius,
+                    @height / 2 - @circleRadius
+                )
+                scale(0);
         }
     }
 
@@ -46,7 +49,8 @@
         transform-origin: top left;
         transform: translate(
                 @circleRadius * (1 + cos(@handleAngle)),
-                @circleRadius * (1 + sin(@handleAngle)))
+                @circleRadius * (1 + sin(@handleAngle))
+            )
             rotate(@handleAngle);
         height: @stroke-width;
         width: @circleRadius;

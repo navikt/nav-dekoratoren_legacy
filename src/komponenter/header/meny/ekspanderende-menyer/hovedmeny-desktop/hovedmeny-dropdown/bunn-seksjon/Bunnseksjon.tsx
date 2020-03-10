@@ -9,6 +9,10 @@ import { Language } from '../../../../../../../reducer/language-duck';
 import { finnTekst } from '../../../../../../../tekster/finn-tekst';
 import { bunnLenker } from './BunnseksjonLenkedata';
 import './Bunnseksjon.less';
+import {
+    ArbeidsflateLenke,
+    settArbeidsflateOgRedirect,
+} from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
 import { useDispatch } from 'react-redux';
 import { finnArbeidsflate } from '../../../../../../../reducer/arbeidsflate-duck';
 
@@ -20,16 +24,15 @@ interface Props {
 
 export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
     const cls = BEMHelper(classname);
-    const lenker = bunnLenker[arbeidsflate]();
-
     const dispatch = useDispatch();
-    const settArbeidsflate = () => dispatch(finnArbeidsflate());
+    const lenker = bunnLenker[arbeidsflate]();
 
     return (
         <>
             <hr className={cls.element('bunn-separator')} />
             <div className={cls.element('bunn-seksjon')}>
                 {lenker.map((lenke, index) => {
+                    const context = lenke as ArbeidsflateLenke;
                     const kbNaviIndex = { col: index, row: 2, sub: 0 };
                     return (
                         <BunnseksjonLenke
@@ -41,9 +44,12 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                                 NaviGroup.DesktopHovedmeny,
                                 kbNaviIndex
                             )}
-                            onClick={
-                                lenke.onClick && lenke.onClick(settArbeidsflate)
-                            }
+                            onClick={event => {
+                                event.preventDefault();
+                                settArbeidsflateOgRedirect(context, () =>
+                                    dispatch(finnArbeidsflate())
+                                );
+                            }}
                             key={lenke.lenkeTekstId}
                         />
                     );

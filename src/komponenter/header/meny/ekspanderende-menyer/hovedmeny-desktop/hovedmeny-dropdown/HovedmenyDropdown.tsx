@@ -91,10 +91,7 @@ export const HovedmenyDropdown = (props: Props) => {
             parentEdge={NodeEdge.Bottom}
         >
             <div className={cls.element('dropdown')}>
-                <Toppseksjon
-                    classname={classname}
-                    arbeidsflate={arbeidsflate}
-                />
+                <Toppseksjon classname={classname} />
                 <Hovedseksjon
                     menyLenker={menyLenker}
                     classname={classname}
