@@ -11,7 +11,7 @@ interface Props {
     stikkord: string;
     className: string;
     id: string;
-    onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+    onClick?: (event: MouseEvent) => void;
 }
 
 const BunnseksjonLenke = ({

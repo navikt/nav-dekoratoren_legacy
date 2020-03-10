@@ -1,9 +1,13 @@
 import React from 'react';
 import Tekst from '../../tekster/finn-tekst';
-import './NavLogoRod.less';
 import { GACategory } from '../../utils/google-analytics';
 import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
-import Environment from '../../utils/Environment';
+import {
+    getArbeidsflateContext,
+    settArbeidsflate,
+} from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
+import { MenuValue } from '../../utils/meny-storage-utils';
+import './NavLogoRod.less';
 
 const NavLogoRod = ({
     width,
@@ -14,11 +18,17 @@ const NavLogoRod = ({
     height?: string;
     classname?: string;
 }) => {
+    const context = getArbeidsflateContext(MenuValue.PRIVATPERSON);
+
     return (
         <LenkeMedGA
+            href={context.url}
             classNameOverride={classname}
-            href={Environment.XP_BASE_URL}
             gaEventArgs={{ category: GACategory.Header, action: 'navlogo' }}
+            onClick={event => {
+                event.preventDefault();
+                settArbeidsflate(context);
+            }}
         >
             <svg
                 width={width ? width : '269px'}

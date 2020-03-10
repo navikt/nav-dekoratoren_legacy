@@ -1,9 +1,10 @@
-import {
-    MenuValue,
-    oppdaterSessionStorage,
-} from '../../../../../../../utils/meny-storage-utils';
-import React from 'react';
+import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
 import Environment from '../../../../../../../utils/Environment';
+import {
+    arbeidsgiverContextLenke,
+    personContextLenke,
+    samarbeidspartnerContextLenke,
+} from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
 
 type LenkeData = {
     url: string;
@@ -11,27 +12,6 @@ type LenkeData = {
     stikkordId: string;
     key?: MenuValue;
 };
-
-const personContextLenke = () => ({
-    url: `${Environment.XP_BASE_URL}`,
-    lenkeTekstId: 'rolle-privatperson',
-    stikkordId: 'meny-bunnlenke-minside-stikkord',
-    key: MenuValue.PRIVATPERSON,
-});
-
-const arbeidsgiverContextLenke = () => ({
-    url: `${Environment.XP_BASE_URL}/no/bedrift`,
-    lenkeTekstId: 'rolle-arbeidsgiver',
-    stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
-    key: MenuValue.ARBEIDSGIVER,
-});
-
-const samarbeidspartnerContextLenke = () => ({
-    url: `${Environment.XP_BASE_URL}/no/nav-og-samfunn`,
-    lenkeTekstId: 'rolle-samarbeidspartner',
-    stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
-    key: MenuValue.SAMARBEIDSPARTNER,
-});
 
 const privatpersonLenker = (): LenkeData[] => [
     {
