@@ -27,25 +27,25 @@ import {
     settCurrentNode,
     settKeyboardNodes,
 } from '../../reducer/keyboard-nav-duck';
-import BEMHelper from '../../utils/bem';
-import { desktopHovedmenyClassname } from './meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
-import { desktopSokDropdownClassname } from './meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
-import { desktopMinsideMenyClassname } from './meny/ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
+import { desktopHovedmenyKnappId } from './meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
+import { desktopSokKnappId } from './meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
+import { desktopMinsideKnappId } from './meny/ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
+import { desktopVarslerKnappId } from './meny/ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
 
 const stateSelector = (state: AppState) => ({
     language: state.language.language,
     arbeidsflate: state.arbeidsflate.status,
     menyStatus: state.menypunkt.status,
-    erInnlogget: state.innloggingsstatus.data.authenticated,
+    innloggingsStatus: state.innloggingsstatus.data,
+    currentNode: state.keyboardNodes.currentNode,
 });
 
 export const Header = () => {
     const dispatch = useDispatch();
-    const { language, arbeidsflate, menyStatus, erInnlogget } = useSelector(
-        stateSelector
+    const { language, arbeidsflate, menyStatus, innloggingsStatus, currentNode } = useSelector(
+        stateSelector,
     );
     const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
-    const [kbNaviNode, setKbNaviNode] = useState<NaviNode>(null);
 
     useEffect(() => {
         fetchMenypunkter()(dispatch);
@@ -59,49 +59,34 @@ export const Header = () => {
             language,
             arbeidsflate,
             menyStatus,
-            erInnlogget
+            innloggingsStatus.authenticated,
         );
-        console.log(graphData);
         if (graphData?.rootNode) {
             setKbNaviGraph(graphData);
-            setKbNaviNode(graphData.rootNode);
             const nodes: KeyboardNodeState = {
-                hovedmeny:
-                    graphData.nodeMap[
-                        BEMHelper(desktopHovedmenyClassname).element('knapp')
-                    ],
-                minside:
-                    graphData.nodeMap[
-                        BEMHelper(desktopMinsideMenyClassname).element('knapp')
-                    ],
-                sok:
-                    graphData.nodeMap[
-                        BEMHelper(desktopSokDropdownClassname).element('knapp')
-                    ],
-                varsler:
-                    graphData.nodeMap[
-                        BEMHelper('toggle-varsler-container').element('knapp')
-                    ],
+                hovedmeny: graphData.nodeMap[desktopHovedmenyKnappId],
+                minside: graphData.nodeMap[desktopMinsideKnappId],
+                sok: graphData.nodeMap[desktopSokKnappId],
+                varsler: graphData.nodeMap[desktopVarslerKnappId],
                 currentNode: graphData.rootNode,
             };
             dispatch(settKeyboardNodes(nodes));
+            dispatch(settCurrentNode(graphData.rootNode));
         }
-    }, [language, arbeidsflate, menyStatus, erInnlogget]);
+    }, [language, arbeidsflate, menyStatus, innloggingsStatus]);
 
     useEffect(() => {
         if (!kbNaviGraph) {
             return;
         }
 
-        dispatch(settCurrentNode(kbNaviNode));
-
         const eventHandlers = addEventListenersAndReturnHandlers(
-            kbNaviNode,
+            currentNode,
             kbNaviGraph,
-            setKbNaviNode
+            (node: NaviNode) => dispatch(settCurrentNode(node)),
         );
         return removeListeners.bind(document, eventHandlers);
-    }, [kbNaviNode]);
+    }, [currentNode]);
 
     return (
         <>

@@ -36,7 +36,7 @@ export const MinsideDropdown = (props: Props) => {
         <KbNavigation
             group={NaviGroup.MinsideMeny}
             rootIndex={{ col: 0, row: 0, sub: 0 }}
-            maxColsPerSection={[1, 1, 3]}
+            maxColsPerSection={[1, 3]}
             isEnabled={isOpen}
             parentNode={parentKbNode}
             parentEdge={NodeEdge.Bottom}
@@ -47,7 +47,7 @@ export const MinsideDropdown = (props: Props) => {
                         href={Environment.DITT_NAV_URL}
                         id={KbNav.getKbId(NaviGroup.MinsideMeny, {
                             col: 0,
-                            row: 1,
+                            row: 0,
                             sub: 0,
                         })}
                         gaEventArgs={{
@@ -69,7 +69,7 @@ export const MinsideDropdown = (props: Props) => {
                                 menygruppe={menygruppe}
                                 isOpen={isOpen}
                                 colIndex={index}
-                                rowIndex={2}
+                                rowIndex={1}
                                 kbNaviGroup={NaviGroup.MinsideMeny}
                                 key={menygruppe.displayName}
                             />

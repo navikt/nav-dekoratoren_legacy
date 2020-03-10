@@ -22,7 +22,7 @@ const DesktopMenylinje = () => {
                         width="88"
                         height="88"
                         classname={desktopMenylinje.element('nav-brand')}
-                        id={desktopMenylinje.element('nav-brand')}
+                        id={desktopHeaderLogoId}
                     />
                     <HovedmenyDesktop />
                     <SokDropdown />

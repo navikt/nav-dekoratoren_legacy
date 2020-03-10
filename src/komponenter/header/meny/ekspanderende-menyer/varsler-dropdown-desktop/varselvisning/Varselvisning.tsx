@@ -8,13 +8,19 @@ import { LenkeMedGA } from '../../../../../LenkeMedGA';
 import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
 import { Undertittel } from 'nav-frontend-typografi';
-import { getKbId, NaviGroup } from '../../../../../../utils/keyboard-navigation/kb-navigation';
+import { getKbId, NaviGroup, NodeEdge } from '../../../../../../utils/keyboard-navigation/kb-navigation';
+import { KbNavigation } from '../../../../../../utils/keyboard-navigation/KbNavigation';
+
+type Props = {
+    isOpen: boolean
+}
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
     varslerAntall: state.varsler.data.antall,
     varslerUleste: state.varsler.data.uleste,
     language: state.language.language,
+    parentKbNode: state.keyboardNodes.varsler
 });
 
 const classname = 'varsler-display-desktop';
@@ -37,8 +43,8 @@ const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => (
     </div>
 );
 
-export const Varselvisning = () => {
-    const { varsler, varslerAntall, varslerUleste, language } = useSelector(stateSelector);
+export const Varselvisning = ({isOpen}: Props) => {
+    const { varsler, varslerAntall, varslerUleste, language, parentKbNode } = useSelector(stateSelector);
 
     const nyeVarslerMsg = varslerUleste > 0
         ? ` (${varslerUleste} ${finnTekst(
@@ -48,14 +54,25 @@ export const Varselvisning = () => {
         : '';
     const visAlleVarslerLenke = varslerAntall > 5;
 
+    console.log(parentKbNode);
+
     return (
-        <div className={classname}>
-            <Undertittel>
-                <Tekst id={'varsler'} />
-            </Undertittel>
-            { visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
-            <VarslerParsed varsler={varsler} />
-            { visAlleVarslerLenke && alleVarslerLenke(1, nyeVarslerMsg)}
-        </div>
+        <KbNavigation
+            group={NaviGroup.Varsler}
+            rootIndex={{col: 0, row: 0, sub: 0}}
+            maxColsPerSection={[1, 1, 1]}
+            isEnabled={isOpen}
+            parentNode={parentKbNode}
+            parentEdge={NodeEdge.Bottom}
+        >
+            <div className={classname}>
+                <Undertittel>
+                    <Tekst id={'varsler'} />
+                </Undertittel>
+                { visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
+                <VarslerParsed varsler={varsler} />
+                { visAlleVarslerLenke && alleVarslerLenke(2, nyeVarslerMsg)}
+            </div>
+        </KbNavigation>
     );
 };

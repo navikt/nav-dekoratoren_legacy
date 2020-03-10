@@ -11,11 +11,12 @@ type Props = {
     isOpen: boolean;
     brukerNavn: string;
     classname: string;
+    id: string;
     ariaLabel: string;
 };
 
 export const MinsidePersonKnapp = (props: Props) => {
-    const { toggleMenu, isOpen, classname, ariaLabel, brukerNavn } = props;
+    const { toggleMenu, isOpen, classname, id, ariaLabel, brukerNavn } = props;
     const cls = BEMHelper(classname);
 
     return (
@@ -23,7 +24,7 @@ export const MinsidePersonKnapp = (props: Props) => {
             toggleMenu={toggleMenu}
             isOpen={isOpen}
             classname={classname}
-            id={'desktop-minside-meny_knapp'}
+            id={id}
             ariaLabel={ariaLabel}
         >
             <MinsideIkon isOpen={isOpen} hasMenu={true} />

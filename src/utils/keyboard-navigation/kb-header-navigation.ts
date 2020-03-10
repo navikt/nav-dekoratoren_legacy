@@ -6,18 +6,15 @@ import KbNav, {
     NaviNode,
     NodeSetterCallback,
 } from './kb-navigation';
-import BEMHelper from '../bem';
 import { Language } from '../../reducer/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from '../../api/api';
 import {
-    desktopHovedmenyClassname,
     desktopHovedmenyKnappId,
 } from '../../komponenter/header/meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
-import { desktopSokDropdownClassname, desktopSokKnappId } from '../../komponenter/header/meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
+import { desktopSokKnappId } from '../../komponenter/header/meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
 import {
     desktopMinsideKnappId,
-    desktopMinsideMenyClassname,
 } from '../../komponenter/header/meny/ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
 import { desktopVarslerKnappId } from '../../komponenter/header/meny/ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
 import { desktopHeaderLogoId } from '../../komponenter/header/meny/DesktopMenylinje';

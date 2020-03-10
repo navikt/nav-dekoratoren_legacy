@@ -53,6 +53,7 @@ export const MinsideMenyDesktop = () => {
         return (
             <MinsideArbgiverKnapp
                 classname={classname}
+                id={desktopMinsideKnappId}
                 href={Environment.MINSIDE_ARBEIDSGIVER_URL}
             />
         );
@@ -74,6 +75,7 @@ export const MinsideMenyDesktop = () => {
             }}
             isOpen={isOpen}
             classname={classname}
+            id={desktopMinsideKnappId}
             ariaLabel={'Min side menyknapp'}
             brukerNavn={innloggetStatus.name}
         />
