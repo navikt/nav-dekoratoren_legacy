@@ -12,10 +12,9 @@ import './Toppseksjon.less';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../../../reducer/reducer';
 import {
-    settArbeidsflateOgRedirect,
     getArbeidsflateContext,
+    settArbeidsflate,
 } from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
-import { finnArbeidsflate } from '../../../../../../../reducer/arbeidsflate-duck';
 
 interface Props {
     classname: string;
@@ -35,9 +34,7 @@ export const Toppseksjon = ({ classname }: Props) => {
                 href={context.url}
                 onClick={event => {
                     event.preventDefault();
-                    settArbeidsflateOgRedirect(context, () =>
-                        dispatch(finnArbeidsflate())
-                    );
+                    settArbeidsflate(context);
                 }}
                 className={cls.element('topp-seksjon-lenke')}
                 id={KbNav.getKbId(NaviGroup.DesktopHovedmeny, {

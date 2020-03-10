@@ -11,10 +11,9 @@ import { bunnLenker } from './BunnseksjonLenkedata';
 import './Bunnseksjon.less';
 import {
     ArbeidsflateLenke,
-    settArbeidsflateOgRedirect,
+    settArbeidsflate,
 } from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
 import { useDispatch } from 'react-redux';
-import { finnArbeidsflate } from '../../../../../../../reducer/arbeidsflate-duck';
 
 interface Props {
     classname: string;
@@ -46,9 +45,7 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                             )}
                             onClick={event => {
                                 event.preventDefault();
-                                settArbeidsflateOgRedirect(context, () =>
-                                    dispatch(finnArbeidsflate())
-                                );
+                                settArbeidsflate(context);
                             }}
                             key={lenke.lenkeTekstId}
                         />
