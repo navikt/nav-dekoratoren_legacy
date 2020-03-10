@@ -25,6 +25,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-hovedmeny';
+export const desktopHovedmenyClassname = classname;
 export const desktopHovedmenyKnappId = `${classname}-knapp-id`;
 
 export const HovedmenyDesktop = () => {

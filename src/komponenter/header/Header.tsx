@@ -28,9 +28,9 @@ import {
     settKeyboardNodes,
 } from '../../reducer/keyboard-nav-duck';
 import BEMHelper from '../../utils/bem';
-import { hovedmenyDesktopClassname } from './meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
-import { sokDropdownDesktopClassname } from './meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
-import { minsideMenyDesktopClassname } from './meny/ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
+import { desktopHovedmenyClassname } from './meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
+import { desktopSokDropdownClassname } from './meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
+import { desktopMinsideMenyClassname } from './meny/ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
 
 const stateSelector = (state: AppState) => ({
     language: state.language.language,
@@ -61,21 +61,22 @@ export const Header = () => {
             menyStatus,
             erInnlogget
         );
+        console.log(graphData);
         if (graphData?.rootNode) {
             setKbNaviGraph(graphData);
             setKbNaviNode(graphData.rootNode);
             const nodes: KeyboardNodeState = {
                 hovedmeny:
                     graphData.nodeMap[
-                        BEMHelper(hovedmenyDesktopClassname).element('knapp')
+                        BEMHelper(desktopHovedmenyClassname).element('knapp')
                     ],
                 minside:
                     graphData.nodeMap[
-                        BEMHelper(minsideMenyDesktopClassname).element('knapp')
+                        BEMHelper(desktopMinsideMenyClassname).element('knapp')
                     ],
                 sok:
                     graphData.nodeMap[
-                        BEMHelper(sokDropdownDesktopClassname).element('knapp')
+                        BEMHelper(desktopSokDropdownClassname).element('knapp')
                     ],
                 varsler:
                     graphData.nodeMap[
@@ -83,7 +84,6 @@ export const Header = () => {
                     ],
                 currentNode: graphData.rootNode,
             };
-            console.log(nodes);
             dispatch(settKeyboardNodes(nodes));
         }
     }, [language, arbeidsflate, menyStatus, erInnlogget]);

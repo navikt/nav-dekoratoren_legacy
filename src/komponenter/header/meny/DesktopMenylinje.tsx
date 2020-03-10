@@ -11,6 +11,7 @@ import { HovedmenyDesktop } from './ekspanderende-menyer/hovedmeny-desktop/Hoved
 import { VarslerDropdown } from './ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
 
 const desktopMenylinje = BEMHelper('desktopmeny');
+export const desktopHeaderLogoId = 'desktop-header-logo-id';
 
 const DesktopMenylinje = () => {
     return (

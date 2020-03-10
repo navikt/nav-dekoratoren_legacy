@@ -28,6 +28,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-minside-meny';
+export const desktopMinsideMenyClassname = classname;
 export const desktopMinsideKnappId = `${classname}-knapp-id`;
 
 export const MinsideMenyDesktop = () => {
@@ -73,7 +74,6 @@ export const MinsideMenyDesktop = () => {
             }}
             isOpen={isOpen}
             classname={classname}
-            id={desktopMinsideKnappId}
             ariaLabel={'Min side menyknapp'}
             brukerNavn={innloggetStatus.name}
         />

@@ -83,7 +83,7 @@ export const HovedmenyDropdown = (props: Props) => {
 
     return (
         <KbNavigation
-            group={NaviGroup.DesktopHovedmeny}
+            group={NaviGroup.Hovedmeny}
             rootIndex={{ col: 0, row: 0, sub: 0 }}
             maxColsPerSection={maxColsPerSection}
             isEnabled={isOpen}
