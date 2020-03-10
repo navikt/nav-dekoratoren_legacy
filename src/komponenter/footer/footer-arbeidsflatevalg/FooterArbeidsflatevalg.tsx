@@ -61,10 +61,11 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                                     oppdaterSessionStorage(
                                                         lenke.key
                                                     );
-                                                    dispatch(
-                                                        finnArbeidsflate()
-                                                    );
-                                                    if (!erNavDekoratoren()) {
+                                                    if (erNavDekoratoren()) {
+                                                        dispatch(
+                                                            finnArbeidsflate()
+                                                        );
+                                                    } else {
                                                         window.location.href =
                                                             lenke.url;
                                                     }
