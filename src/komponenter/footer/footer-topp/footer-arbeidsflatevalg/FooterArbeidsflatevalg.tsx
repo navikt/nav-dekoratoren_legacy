@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AppState } from '../../../../reducer/reducer';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
@@ -7,7 +7,7 @@ import BEMHelper from '../../../../utils/bem';
 import { GACategory } from '../../../../utils/google-analytics';
 import { LenkeMedGA } from '../../../LenkeMedGA';
 import { Language } from '../../../../reducer/language-duck';
-import Tekst from '../../../../tekster/finn-tekst';
+import Tekst, { finnTekst } from '../../../../tekster/finn-tekst';
 import {
     ArbeidsflateLenke,
     arbeidsflateLenker,
@@ -25,8 +25,6 @@ const stateSelector = (state: AppState) => ({
 
 const FooterArbeidsflatevalg = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
-
-    const dispatch = useDispatch();
     const { arbeidsflate, language } = useSelector(stateSelector);
     const arbeidsflatevalgLenker = arbeidsflateLenker().filter(
         lenke => lenke.key !== arbeidsflate
@@ -42,6 +40,18 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                     >
                         {arbeidsflatevalgLenker.map(
                             (lenke: ArbeidsflateLenke) => {
+                                /* const stikkord = finnTekst(
+                                    lenke.stikkordId,
+                                    Language.NORSK
+                                )
+                                    .split('|')
+                                    .map((ord, index) => (
+                                        <li key={index}>
+                                            <span className={'bullet'} />
+                                            {ord}
+                                        </li>
+                                    ));
+                                 */
                                 return (
                                     <li key={lenke.key}>
                                         <Lenkepanel
@@ -50,7 +60,7 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                             key={lenke.key}
                                             border
                                         >
-                                            <Normaltekst className="arbeidsflatevalg-tekst">
+                                            <div className="arbeidsflatevalg-tekst">
                                                 <LenkeMedGA
                                                     href={lenke.url}
                                                     onClick={event => {
@@ -71,9 +81,13 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                                             }
                                                         />
                                                     </Undertittel>
-                                                    {lenke.stikkordId}
+                                                    <Tekst
+                                                        id={
+                                                            lenke.footerStikkordId
+                                                        }
+                                                    />
                                                 </LenkeMedGA>
-                                            </Normaltekst>
+                                            </div>
                                         </Lenkepanel>
                                     </li>
                                 );
