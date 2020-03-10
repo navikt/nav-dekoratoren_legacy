@@ -66,7 +66,6 @@ export const HovedmenyMobil = () => {
             action: `meny-${underIsOpen ? 'close' : 'open'}`,
         });
 
-        console.log('hovedIsOpen', hovedIsOpen, '!underIsOpen', !underIsOpen);
         dispatch(
             hovedIsOpen || !underIsOpen
                 ? toggleHovedOgUndermenyVisning()

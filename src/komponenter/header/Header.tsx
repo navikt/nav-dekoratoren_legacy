@@ -40,10 +40,9 @@ export const Header = () => {
                         <DesktopMenylinje />
                     </div>
                 </div>
-                <MenyBakgrunn />
             </header>
             <div className="media-sm-mobil mobil-meny">
-                <MenyBakgrunn className={'mobilmeny'} />
+                <MenyBakgrunn />
             </div>
         </>
     );

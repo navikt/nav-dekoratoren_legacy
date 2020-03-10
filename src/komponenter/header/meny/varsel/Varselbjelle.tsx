@@ -121,6 +121,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             erInnlogget,
             antallVarsler,
             arbeidsflate,
+            tabindex,
             children,
             visVarsel,
         } = this.props;
@@ -174,61 +175,40 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                                     </span>
                                 </Flatknapp>
                             </div>
-                            {/*
-                            <button
-                                onClick={this.handleClick}
-                                className="toggle-varsler"
-                                tabIndex={tabindex ? 0 : -1}
-                                title="Varsler"
-                                aria-label={`Varsler. Du har ${
-                                    antallVarsler > 0 ? antallVarsler : 'ingen'
-                                } varsler.`}
-                                aria-pressed={clicked}
-                                aria-haspopup="true"
-                                aria-controls="varsler-display"
-                                aria-expanded={clicked}
-                            >
-                                <div className="media-sm-mobil mobil-meny">
-                                    <Normaltekst>
-                                        <Tekst id="varsler-mobil" />
-                                    </Normaltekst>
-                                </div>
-                            </button>
-                            */}
                         </div>
+                        <div className="media-tablet-desktop">
+                            <>
+                                <div id="toggle-varsler-container">
+                                    <MenylinjeKnapp
+                                        toggleMenu={this.handleClick}
+                                        isOpen={clicked}
+                                        classname={classname}
+                                        id={'toggle-varsler-knapp-id'}
+                                        ariaLabel={`Varsler. Du har ${
+                                            antallVarsler > 0
+                                                ? antallVarsler
+                                                : 'ingen'
+                                        } varsler.`}
+                                    >
+                                        <VarselIkon isOpen={clicked} />
+                                        <Undertittel
+                                            className={'varsler-tekst'}
+                                        >
+                                            <Tekst id={'varsler'} />
+                                        </Undertittel>
+                                    </MenylinjeKnapp>
+                                </div>
+                                <div className="min-varsel-wrapper">
+                                    {
+                                        //    children(clicked, this.handleClick)
+                                    }
+                                </div>
+                            </>
+                        </div>
+
                         <div className="min-varsel-wrapper"></div>
                     </>
                 ) : null}
-
-                <div ref={this.varselbjelleRef} className="varselbjelle">
-                    {erInnlogget && arbeidsflate === MenuValue.PRIVATPERSON ? (
-                        <>
-                            <div id="toggle-varsler-container">
-                                <MenylinjeKnapp
-                                    toggleMenu={this.handleClick}
-                                    isOpen={clicked}
-                                    classname={classname}
-                                    id={'toggle-varsler-knapp-id'}
-                                    ariaLabel={`Varsler. Du har ${
-                                        antallVarsler > 0
-                                            ? antallVarsler
-                                            : 'ingen'
-                                    } varsler.`}
-                                >
-                                    <VarselIkon isOpen={clicked} />
-                                    <Undertittel className={'varsler-tekst'}>
-                                        <Tekst id={'varsler'} />
-                                    </Undertittel>
-                                </MenylinjeKnapp>
-                            </div>
-                            <div className="min-varsel-wrapper">
-                                {
-                                    //    children(clicked, this.handleClick)
-                                }
-                            </div>
-                        </>
-                    ) : null}
-                </div>
             </div>
         );
     }

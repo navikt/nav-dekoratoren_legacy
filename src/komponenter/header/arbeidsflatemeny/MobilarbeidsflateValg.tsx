@@ -46,9 +46,6 @@ const MobilarbeidsflateValg = ({
         e.preventDefault();
         oppdaterSessionStorage(valgVerdi);
         settArbeidsflate();
-        if (!erNavDekoratoren()) {
-            window.location.href = lenke.url;
-        }
     };
 
     return (
@@ -69,6 +66,9 @@ const MobilarbeidsflateValg = ({
                                 href={lenke.url}
                                 onClick={event => {
                                     oppdatereArbeidsflateValg(event, lenke.key);
+                                    if (!erNavDekoratoren()) {
+                                        window.location.href = lenke.url;
+                                    }
                                 }}
                                 tabIndex={tabindex ? 0 : -1}
                                 gaEventArgs={{

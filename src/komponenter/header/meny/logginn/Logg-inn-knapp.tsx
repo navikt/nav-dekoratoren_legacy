@@ -1,18 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../reducer/reducer';
-import KnappBase from 'nav-frontend-knapper';
-import AlertStripe from 'nav-frontend-alertstriper';
-import Lukknapp from 'nav-frontend-lukknapp';
-import LogginnIkon from '../../../../ikoner/mobilmeny/LogginnIkon';
 import Environment, { erNavDekoratoren } from '../../../../utils/Environment';
 import Tekst from '../../../../tekster/finn-tekst';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
-import { Knapp } from 'nav-frontend-knapper';
+
 import { Language } from '../../../../reducer/language-duck';
 import { textTransformFirstLetterToUppercase } from '../ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
+import KnappBase from 'nav-frontend-knapper';
 
 interface StateProps {
     erInnlogget: boolean;
@@ -50,7 +47,7 @@ export class LoggInnKnapp extends React.Component<StateProps, {}> {
         return (
             <div className="login-container">
                 <div className="media-sm-mobil login-mobil">
-                    <Knapp
+                    <KnappBase
                         type="flat"
                         className="mobil-login-knapp"
                         onClick={this.handleButtonClick}
@@ -61,12 +58,12 @@ export class LoggInnKnapp extends React.Component<StateProps, {}> {
                                 this.props.lang
                             )}
                         </Undertittel>
-                    </Knapp>
+                    </KnappBase>
                 </div>
                 <div className="media-tablet-desktop login-tablet-desktop">
                     <KnappBase
-                        className="login-knapp"
                         type="standard"
+                        className="login-knapp"
                         onClick={this.handleButtonClick}
                     >
                         <Tekst id={knappetekst} />

@@ -4,18 +4,13 @@ import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provi
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
 import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
-import SokModal from './sok/sok-innhold/sok-modal/Sokmodal';
 import './MobilMenylinje.less';
 import { verifyWindowObj } from '../../../utils/Environment';
-import { tabletview } from '../../../styling-mediaquery';
-import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
 import { Language } from '../../../reducer/language-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import Varselbjelle from './varsel/Varselbjelle';
-import Tekst from '../../../tekster/finn-tekst';
-import { Normaltekst } from 'nav-frontend-typografi';
 
 const mobilClass = BEMHelper('mobilmeny');
 
@@ -29,8 +24,6 @@ const stateSelector = (state: AppState) => ({
 const MobilMenylinje = ({ language }: Props) => {
     const { innloggingsstatus } = useSelector(stateSelector);
     const [navIkonSize, setNavIkonSize] = useState<string>('66');
-    const [varselClicked, setVarselClicked] = useState<boolean>(false);
-    const [handleVarselvisning, setHandleVarselvisning] = useState<any>(void 0);
 
     useEffect(() => {
         if (verifyWindowObj()) {
@@ -39,25 +32,7 @@ const MobilMenylinje = ({ language }: Props) => {
         }
     }, []);
 
-    const toggleModal = (
-        isOpen: boolean,
-        handlevarsel: (() => void) | undefined
-    ) => {
-        triggerGaEvent({
-            category: GACategory.Header,
-            action: `varselvisning-${isOpen ? 'open' : 'close'}`,
-        });
-        if (handlevarsel) {
-            setHandleVarselvisning(handlevarsel);
-        }
-
-        setVarselClicked(isOpen);
-    };
-
     const handleResize = () => {
-        if (window.innerWidth >= tabletview) {
-            setVarselClicked(false);
-        }
         window.innerWidth <= 400 ? setNavIkonSize('66') : setNavIkonSize('66');
     };
 
@@ -88,10 +63,6 @@ const MobilMenylinje = ({ language }: Props) => {
                         language === Language.ENGELSK ? (
                             <HovedmenyMobil />
                         ) : null}
-
-                        <InnloggingsstatusProvider>
-                            <LoggInnKnapp />
-                        </InnloggingsstatusProvider>
                     </div>
                 </div>
             </div>

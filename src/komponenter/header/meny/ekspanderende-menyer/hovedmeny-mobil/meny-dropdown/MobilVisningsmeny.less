@@ -4,6 +4,30 @@
 .mobilmeny {
     &__innhold-wrapper,
     &__startmeny,
+    &__varsel-innhold,
+    &__undermeny-innhold {
+        overflow-y: scroll;
+        position: fixed;
+        top: 7.875rem;
+        left: -(@mobilemenuwidth);
+        z-index: 1001;
+        padding: 0.75rem 1rem 1rem 1rem;
+        background-color: white;
+        width: @mobilemenuwidth;
+        max-width: 575px;
+        height: calc(100% - 7.875rem);
+        border-radius: 3px;
+        transition: all 0.4s ease-in-out;
+
+        &--active,
+        &--aktive {
+            left: 0;
+        }
+    }
+
+    /*
+    &__innhold-wrapper,
+    &__startmeny,
     &__varsel-innhold {
         overflow-y: scroll;
         position: fixed;
@@ -42,6 +66,7 @@
             left: 0;
         }
     }
+  */
 
     &__startmeny {
         z-index: 1003;

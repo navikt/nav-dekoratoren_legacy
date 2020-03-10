@@ -4,21 +4,16 @@ import BEMHelper from '../../../../../../utils/bem';
 import { MenyNode } from '../../../../../../reducer/menu-duck';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 import { Language } from '../../../../../../reducer/language-duck';
-import Topseksjon from './mobil-innhold/top-seksjon/Topseksjon';
 import MenyIngress from './mobil-innhold/MenyIngress';
 import Undermeny from './mobil-innhold/Undermeny';
 import Listelement from './mobil-innhold/Listelement';
 import MobilarbeidsflateValg from '../../../../arbeidsflatemeny/MobilarbeidsflateValg';
 import VarselinnboksProvider from '../../../../../../provider/Varselinnboks-provider';
-import Varselbjelle from '../../../varsel/Varselbjelle';
 import VarselvisningMobil from '../../../varsel/varselvisning/VarselvisningMobil';
 import './MobilVisningsmeny.less';
 import { AppState } from '../../../../../../reducer/reducer';
 import { Dispatch } from '../../../../../../redux/dispatch-type';
-import {
-    Arbeidsflate,
-    finnArbeidsflate,
-} from '../../../../../../reducer/arbeidsflate-duck';
+import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
 import { connect } from 'react-redux';
 import Sok from '../../../sok/Sok';
 import InnloggetBruker from './mobil-innhold/innloggetbruker/InnloggetBruker';
@@ -74,9 +69,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
 
     componentDidUpdate(prevProps: Readonly<Props>): void {
         if (!this.props.menuIsOpen && prevProps.menuIsOpen) {
-            console.log(
-                'componentDidUpdate(prevProps: Readonly<Props>): void  => (!this.props.menuIsOpen && prevProps.menuIsOpen)'
-            );
             /*
             this.setState({
                 toggleundermeny: this.props.menuIsOpen,

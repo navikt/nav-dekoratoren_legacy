@@ -9,6 +9,6 @@ export const MenySpinner = () => (
         <Normaltekst>
             <Tekst id={'meny-loading'} />
         </Normaltekst>
-        <NavFrontendSpinner className={'hovedmeny-spinner'} />
+        <NavFrontendSpinner className={'hovedmeny-spinner'} type="M" />
     </div>
 );
