@@ -3,6 +3,7 @@ import Tekst from '../../tekster/finn-tekst';
 import './NavLogoRod.less';
 import { GACategory } from '../../utils/google-analytics';
 import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
+import Environment from '../../utils/Environment';
 
 const NavLogoRod = ({
     width,
@@ -16,7 +17,7 @@ const NavLogoRod = ({
     return (
         <LenkeMedGA
             classNameOverride={classname}
-            href="https://nav.no"
+            href={Environment.XP_BASE_URL}
             gaEventArgs={{ category: GACategory.Header, action: 'navlogo' }}
         >
             <svg

@@ -7,80 +7,113 @@
     min-height: 12.5rem;
     border-bottom: @navMorkGra 2px solid;
 
-    &__innhold {
-        text-align: center;
+    .nav-frontend-chevron {
+        color: @navBla;
     }
 
-    &__menylinje-topp {
-        .menylenker-seksjon {
-            .typo-undertittel {
-                color: @navGra40;
-            }
-            ul {
-                &:first-child,
-                &:last-child {
-                    margin-top: 0;
-                }
-            }
-            li {
-                margin-bottom: 0.8rem;
-            }
+    .lenke {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
         }
     }
 
-    &__menylinje-topp .menylenker-seksjon .venstre .lenke,
-    &__menylinje-topp .menylenker-seksjon .midt .lenke,
-    &__menylinje-bottom .lenke {
-        color: @navMorkGra;
-        font-weight: 600;
+    &__innhold {
+        text-align: left;
+        padding: 0 @margins-sides-desktop;
+    }
 
-        &:focus {
-            color: white;
+    &__menylinje-topp {
+        .menylenker-seksjon .typo-undertittel {
+            font-weight: bolder;
+        }
+    }
+
+    &__menylinje-topp,
+    &__menylinje-arbeidsflatevalg .arbeidsflatevalg-innhold .arbeidsflatevalg {
+        ul {
+            margin-top: 0.8rem;
+        }
+
+        li {
+            margin-bottom: 1.3rem;
         }
     }
 
     @media (min-width: @tabletLimitWidth) {
-        padding: 0.5rem 1rem 1.5rem;
+        padding: 1.5rem 1.5rem 5rem;
 
         &__innhold {
             width: auto;
             margin: 0 auto;
+            padding: 0;
             text-align: initial;
+            position: relative;
         }
+
         &__menylinje-topp {
             display: flex;
             flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
 
             .menylenker-seksjon {
-                width: 25%;
+                width: 33.3%;
+            }
+        }
 
-                ul {
-                    &:first-child,
-                    &:last-child {
-                        margin-top: 0.5rem;
-                    }
-                }
+        &__menylinje-arbeidsflatevalg {
+            .arbeidsflatevalg-innhold {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1.5rem;
 
-                .logo {
+                .arbeidsflatevalg {
+                    width: 30rem;
                     display: flex;
-                    justify-content: center;
+                    align-items: center;
+
+                    ul {
+                        margin: 0;
+                    }
+
+                    li {
+                        min-width: 9rem;
+                        max-width: 14rem;
+                        margin-bottom: 0;
+
+                        .arbeidsflatevalg-tekst {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            line-height: 1.5625rem;
+                        }
+                    }
                 }
             }
         }
-        &__menylinje-bottom {
-            display: flex;
 
-            .bottom-venstre {
-                width: 75%;
+        &__menylinje-bottom {
+            .bottom-innhold {
+                display: flex;
+                align-items: center;
+
                 ul {
-                    display: flex;
+                    width: 24.5rem;
+                    margin: 0;
                 }
-                li {
-                    margin-right: 2.5rem;
+
+                .bottom-logo {
+                    width: 65px;
+                    height: 65px;
+                    margin-right: 1rem;
                 }
-            }
-            .bottom-hoyre {
-                width: 25%;
+
+                .bottom-tekst {
+                    width: 11rem;
+                    margin-right: 1rem;
+                }
             }
         }
     }
@@ -89,6 +122,23 @@
         &__innhold {
             width: @desktopLimitWidth;
             margin: 0 auto;
+        }
+
+        &__menylinje-topp {
+            .menylenker-seksjon {
+                width: 22%;
+            }
+        }
+    }
+
+    @media (min-width: 1300px) {
+        &__menylinje-bottom {
+            .bottom-innhold .bottom-logo {
+                position: absolute;
+                left: -92px;
+                bottom: -18px;
+                margin-right: 0;
+            }
         }
     }
 }

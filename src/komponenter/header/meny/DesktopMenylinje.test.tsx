@@ -3,8 +3,8 @@ import { shallow } from 'enzyme';
 import DesktopMenylinje from './DesktopMenylinje';
 import { Language } from '../../../reducer/language-duck';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import Sok from './sok/Sok';
 import HovedmenyDesktop from './ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
+import { SokDropdown } from './ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
 
 const shallowWithProps = (language: Language) => {
     return shallow(<DesktopMenylinje language={language} />);
@@ -26,13 +26,13 @@ describe('<DesktopMenylinje>', () => {
         expect(wrapper.find(HovedmenyDesktop)).toHaveLength(1);
     });
 
-    it('Skal IKKE rendre <HovedmenyDesktop> komponent hvis språk er samisk', () => {
-        const wrapper = shallowWithProps(Language.SAMISK);
-        expect(wrapper.find(HovedmenyDesktop)).toHaveLength(0);
-    });
+    // it('Skal IKKE rendre <HovedmenyDesktop> komponent hvis språk er samisk', () => {
+    //     const wrapper = shallowWithProps(Language.SAMISK);
+    //     expect(wrapper.find(HovedmenyDesktop)).toHaveLength(0);
+    // });
 
-    it('Skal rendre <Sok> komponent', () => {
+    it('Skal rendre <SokDropdown> komponent', () => {
         const wrapper = shallowWithProps(Language.NORSK);
-        expect(wrapper.find(Sok)).toHaveLength(1);
+        expect(wrapper.find(SokDropdown)).toHaveLength(1);
     });
 });

@@ -6,6 +6,7 @@ export interface DropdownState {
     sok: boolean;
     varsel: boolean;
     undermeny: boolean;
+    varsler: boolean;
 }
 
 const initialState: DropdownState = {
@@ -14,6 +15,7 @@ const initialState: DropdownState = {
     sok: false,
     varsel: false,
     undermeny: false,
+    varsler: false,
 };
 
 export const toggleHovedOgUndermenyVisning = () => ({
@@ -38,6 +40,10 @@ export const toggleMinsideMeny = () => ({
 
 export const toggleSok = () => ({
     type: ActionType.TOGGLE_SOK,
+});
+
+export const toggleVarsler = () => ({
+    type: ActionType.TOGGLE_VARSLER,
 });
 
 export const lukkAlleDropdowns = () => ({
@@ -72,8 +78,11 @@ export const reducer = (
             };
         }
 
+        case ActionType.TOGGLE_VARSLER: {
+            return { ...state, varsler: !state.varsler };
+        }
         case ActionType.TOGGLE_LUKK_ALLE: {
-            return initialState;
+            return { ...initialState, varsler: state.varsler };
         }
         default:
             return state;

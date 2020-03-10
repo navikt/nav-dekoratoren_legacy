@@ -24,7 +24,9 @@ export const LenkeMedGA = ({
 }: Props) => (
     <a
         href={href}
-        className={classNameOverride || `lenke ${className}`}
+        className={
+            classNameOverride || `lenke${className ? ' ' + className : ''}`
+        }
         id={id}
         tabIndex={tabIndex}
         onAuxClick={event =>

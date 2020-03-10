@@ -1,3 +1,5 @@
+import Environment from '../../utils/Environment';
+
 export enum FooterSeksjon {
     VENSTRE,
     HOYRE,
@@ -13,40 +15,50 @@ export interface FooterLenke {
 const footerlenker: FooterLenke[] = [
     {
         lenketekst: 'Kontakt oss',
-        url: 'https://www.nav.no/person/kontakt-oss/',
+        url: `/person/kontakt-oss/`,
+        seksjon: FooterSeksjon.VENSTRE,
+    },
+    {
+        lenketekst: 'NAV i ditt fylke',
+        url: '/no/nav-og-samfunn/kontakt-nav/nav-i-ditt-fylke',
         seksjon: FooterSeksjon.VENSTRE,
     },
     {
         lenketekst: 'Klage og tilbakemeldinger',
-        url: 'https://www.nav.no/person/kontakt-oss/tilbakemeldinger',
+        url: `/person/kontakt-oss/tilbakemeldinger`,
         seksjon: FooterSeksjon.VENSTRE,
     },
     {
-        lenketekst: 'Lover og regler',
+        lenketekst: 'Lover og regler (ekstern lenke)',
         url: 'https://lovdata.no/nav/',
         seksjon: FooterSeksjon.VENSTRE,
     },
     {
-        lenketekst: 'Om NAV',
+        lenketekst: 'Om oss',
         url: '/no/nav-og-samfunn/om-nav/fakta-om-nav',
-        seksjon: FooterSeksjon.BUNN,
+        seksjon: FooterSeksjon.HOYRE,
     },
     {
-        lenketekst: 'Forskning og statistikk',
+        lenketekst: 'Jobb i NAV',
+        url: '/no/nav-og-samfunn/om-nav/sok-jobb-i-nav',
+        seksjon: FooterSeksjon.HOYRE,
+    },
+    {
+        lenketekst: 'Statistikk og analyse',
         url:
             '/no/nav-og-samfunn/statistikk/arbeidssokere-og-stillinger-statistikk/relatert-informasjon/statistikk-og-analyse',
-        seksjon: FooterSeksjon.BUNN,
+        seksjon: FooterSeksjon.HOYRE,
     },
     {
         lenketekst: 'Nyheter og presse',
         url: '/no/nav-og-samfunn/kontakt-nav/presse',
-        seksjon: FooterSeksjon.BUNN,
+        seksjon: FooterSeksjon.HOYRE,
     },
     {
-        lenketekst: 'Les mer om databeskyttelse og informasjonskapsler',
+        lenketekst: 'Personvern og informasjonskapsler (cookies) på nav.no',
         url:
             '/no/nav-og-samfunn/om-nav/personvern-i-arbeids-og-velferdsetaten/personvern-og-sikkerhet-pa-nav.no',
-        seksjon: FooterSeksjon.HOYRE,
+        seksjon: FooterSeksjon.BUNN,
     },
 ];
 

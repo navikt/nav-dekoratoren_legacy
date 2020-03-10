@@ -88,6 +88,10 @@ const MobilMenylinje = ({ language }: Props) => {
                         language === Language.ENGELSK ? (
                             <HovedmenyMobil />
                         ) : null}
+
+                        <InnloggingsstatusProvider>
+                            <LoggInnKnapp />
+                        </InnloggingsstatusProvider>
                     </div>
                 </div>
             </div>

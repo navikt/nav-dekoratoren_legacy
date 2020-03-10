@@ -219,7 +219,6 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     render() {
         const { selectedInput, items } = this.state;
         const { language } = this.props;
-        const URL = `${Environment.APP_BASE_URL}/api/sok?ord=${selectedInput}`;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
         });
@@ -260,6 +259,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                         action: 'søk',
                                         label: selectedInput,
                                     });
+                                    const URL = `/api/sok?ord=${selectedInput}`;
                                     this.handleSubmit(event, URL);
                                 }}
                             >

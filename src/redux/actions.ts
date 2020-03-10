@@ -24,6 +24,7 @@ export enum ActionType {
     TOGGLE_HOVEDMENY = 'TOGGLE_HOVEDMENY',
     TOGGLE_MINSIDE_MENY = 'TOGGLE_MINSIDE_MENY',
     TOGGLE_SOK = 'TOGGLE_SOK',
+    TOGGLE_VARSLER = 'TOGGLE_VARSLER',
     TOGGLE_LUKK_ALLE = 'TOGGLE_LUKK_ALLE',
     TOGGLE_VARSEL = 'TOGGLE_VARSEL',
     TOGGLE_UNDERMENY = 'TOGGLE_UNDERMENY',
@@ -122,6 +123,10 @@ export interface ToggleSok {
     type: ActionType.TOGGLE_SOK;
 }
 
+export interface ToggleVarsler {
+    type: ActionType.TOGGLE_VARSLER;
+}
+
 export interface ToggleVarsel {
     type: ActionType.TOGGLE_VARSEL;
 }
@@ -154,4 +159,6 @@ export type Handling =
     | ToggleLukkAlle
     | ToggleVarsel
     | ToggleUnderMeny
-    | ToggleHovedOgUnderMeny;
+    | ToggleHovedOgUnderMeny
+    | ToggleVarsler
+    | ToggleLukkAlle;

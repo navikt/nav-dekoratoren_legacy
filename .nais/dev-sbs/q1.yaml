@@ -21,7 +21,8 @@ spec:
         min: 2
         max: 4
     ingresses:
-        - https://dekoratoren-q1.nais.oera-q.local/
+        - https://dekoratoren-q1.nais.oera-q.local
+        - https://appres-q1.nav.no/common-html/v4/navno
         - https://www-q1.nav.no/dekoratoren
     env:
         - name: XP_BASE_URL
@@ -37,7 +38,7 @@ spec:
         - name: API_INNLOGGINGSLINJE_URL
           value: https://www-q1.nav.no/innloggingslinje-api/auth
         - name: MINSIDE_ARBEIDSGIVER_URL
-          value: https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/
+          value: https://arbeidsgiver-q1.nav.no/min-side-arbeidsgiver/
         - name: DITT_NAV_URL
           value: https://www-q1.nav.no/person/dittnav/
         - name: LOGIN_URL

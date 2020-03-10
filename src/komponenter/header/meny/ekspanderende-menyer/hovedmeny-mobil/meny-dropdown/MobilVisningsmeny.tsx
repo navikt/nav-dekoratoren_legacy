@@ -12,7 +12,6 @@ import MobilarbeidsflateValg from '../../../../arbeidsflatemeny/Mobilarbeidsflat
 import VarselinnboksProvider from '../../../../../../provider/Varselinnboks-provider';
 import Varselbjelle from '../../../varsel/Varselbjelle';
 import VarselvisningMobil from '../../../varsel/varselvisning/VarselvisningMobil';
-import MinsideLenke from '../../../minside-lenke/MinsideLenke';
 import './MobilVisningsmeny.less';
 import { AppState } from '../../../../../../reducer/reducer';
 import { Dispatch } from '../../../../../../redux/dispatch-type';
@@ -170,7 +169,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
         );
         return (
             <>
-                {console.log('meny is Open ', this.props.menuIsOpen)}
                 <section
                     className={menyClass.element(
                         'startmeny',

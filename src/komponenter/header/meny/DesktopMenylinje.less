@@ -5,11 +5,26 @@
     width: 100%;
     padding: 0.5rem 0 1rem;
     border-bottom: 2px solid @navBla;
+    @margin-mellom: 2rem;
+    @margin-mellom-sm: 0.5rem;
+
+    .margin-left-section() {
+        margin-left: @margin-mellom;
+        @media (max-width: @smallDesktopLimitWidth) {
+            margin-left: @margin-mellom-sm;
+        }
+    }
+
+    .margin-right-section() {
+        margin-right: @margin-mellom;
+        @media (max-width: @smallDesktopLimitWidth) {
+            margin-right: @margin-mellom-sm;
+        }
+    }
 
     &__content {
         width: 100%;
         margin: 0 auto;
-        padding: 0;
     }
 
     &__elementer {
@@ -22,7 +37,10 @@
 
     &__nav-brand {
         order: 1;
-        width: auto;
+        margin-left: @margins-sides-desktop;
+        @media (max-width: @smallDesktopLimitWidth) {
+            margin-left: @margins-sides-desktop-small;
+        }
 
         &:focus {
             outline: 3px solid @fokusFarge;
@@ -34,52 +52,52 @@
         }
     }
 
-    .hovedmeny-desktop__menyknapp {
+    .desktop-hovedmeny__knapp {
         order: 2;
-        width: auto;
+        .margin-left-section();
     }
 
-    .sok {
+    .desktop-sok-dropdown__knapp {
         order: 3;
-        width: auto;
+        max-height: @maxheight-menuitem;
+        .margin-left-section();
+    }
+
+    &__spacer {
+        order: 4;
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+
+    .varselbjelle {
+        order: 5;
+        .margin-right-section();
         max-height: @maxheight-menuitem;
     }
 
-    .minsidelenke-varselbjelle {
-        display: none;
+    .desktop-minside-meny__knapp {
+        order: 6;
+        .margin-right-section();
+        max-height: @maxheight-menuitem;
     }
 
     .login-container {
-        order: 3;
-        width: auto;
+        order: 7;
         max-height: @maxheight-menuitem;
+        margin-right: @margins-sides-desktop;
+        @media (max-width: @smallDesktopLimitWidth) {
+            margin-right: @margins-sides-desktop-small;
+        }
     }
 
-    .dropdown-container {
-        order: 4;
+    .ekspanderbar__container {
+        order: 8;
         width: 100%;
     }
 
     @media (min-width: @desktopLimitWidth) {
         &__content {
             width: @desktopLimitWidth;
-        }
-
-        .minsidelenke-varselbjelle {
-            min-width: 9.375rem;
-            order: 3;
-            .minside-lenke {
-                width: 6.375rem;
-                max-height: @maxheight-menuitem;
-                display: inline-block;
-            }
-
-            .varselbjelle {
-                margin-left: 1rem;
-                width: auto;
-                max-height: @maxheight-menuitem;
-                display: inline-block;
-            }
         }
     }
 }

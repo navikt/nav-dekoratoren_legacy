@@ -1,7 +1,13 @@
-@import (reference) '../../../../../styling-variabler.less';
+@import (reference) '../../../../../../src/styling-variabler.less';
+@import (reference) '../ekspanderbar-meny/EkspanderbarMeny';
 
-.hovedmeny-desktop {
+.desktop-hovedmeny {
     &__innhold-wrapper {
+        left: 150px;
+        max-width: 150px;
+        transition-property: @ekspanderbar-transition-props, max-width, left;
+
+        /*
         position: absolute;
         z-index: 1001;
         overflow: hidden;
@@ -12,29 +18,24 @@
         background-color: white;
         border-bottom-left-radius: @border-radius-base;
         border-bottom-right-radius: @border-radius-base;
-
+        */
         //transition-duration: 0.7s;
         //transition-timing-function: ease-in-out;
         //transition-property: all;
 
         &--aktive {
+            max-width: 100%;
+            left: 0;
             //    max-height: 60rem;
-            opacity: 1;
-            transform: translate(60rem, 100%);
-            transition: transform 300ms linear;
-            will-change: transform;
+            // opacity: 1;
+            // transform: translate(60rem, 100%);
+            // transition: transform 300ms linear;
+            // will-change: transform;
             //max-width: 100%;
             //  visibility: visible;
         }
     }
 
     &__innhold {
-        box-sizing: border-box;
-        padding: 0 @padding-horizontal 2rem @padding-horizontal;
-        overflow: hidden;
-        min-width: @tabletLimitWidth;
-        @media (min-width: @desktopLimitWidth) {
-            width: @desktopLimitWidth;
-        }
     }
 }

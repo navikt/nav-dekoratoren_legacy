@@ -1,26 +1,29 @@
 import { MenuValue } from '../../../utils/meny-storage-utils';
+import Environment from '../../../utils/Environment';
 
-export const arbeidsflateLenker: {
-    tittel: MenuValue;
+export interface ArbeidsflateLenke {
+    tittelId: string;
     url: string;
     key: MenuValue;
     stikkord: string;
-}[] = [
+}
+
+export const arbeidsflateLenker = (): ArbeidsflateLenke[] => [
     {
-        tittel: MenuValue.PRIVATPERSON,
-        url: '/dekoratoren/person/',
+        tittelId: 'rolle-privatperson',
+        url: `${Environment.XP_BASE_URL}`,
         key: MenuValue.PRIVATPERSON,
         stikkord: 'arbeidsflate-stikkord-om-privatperson',
     },
     {
-        tittel: MenuValue.ARBEIDSGIVER,
-        url: '/dekoratoren/bedrift/',
+        tittelId: 'rolle-arbeidsgiver',
+        url: `${Environment.XP_BASE_URL}/no/bedrift`,
         key: MenuValue.ARBEIDSGIVER,
         stikkord: 'arbeidsflate-stikkord-om-arbeidsgiver',
     },
     {
-        tittel: MenuValue.SAMARBEIDSPARTNER,
-        url: '/dekoratoren/samarbeidspartner/',
+        tittelId: 'rolle-samarbeidspartner',
+        url: `${Environment.XP_BASE_URL}/no/nav-og-samfunn`,
         key: MenuValue.SAMARBEIDSPARTNER,
         stikkord: 'arbeidsflate-stikkord-om-samarbeidspartner',
     },

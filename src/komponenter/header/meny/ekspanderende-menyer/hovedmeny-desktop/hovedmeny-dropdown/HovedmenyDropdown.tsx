@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import BEMHelper, { BEMWrapper } from '../../../../../../utils/bem';
 import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
-import { MenySeksjon } from '../../../../../../reducer/menu-duck';
+import { MenyNode } from '../../../../../../reducer/menu-duck';
 import { Language } from '../../../../../../reducer/language-duck';
 import KbNav, {
     NaviGraphData,
@@ -14,6 +14,15 @@ import { matchMedia } from '../../../../../../utils/match-media-polyfill';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
+import { desktopHovedmenyKnappId } from '../HovedmenyDesktop';
+
+type Props = {
+    classname: string;
+    arbeidsflate: MenuValue;
+    language: Language;
+    menyLenker: MenyNode | undefined;
+    isOpen: boolean;
+};
 
 const getColSetup = (cls: BEMWrapper): Array<number> => {
     const getNumCols = (element: HTMLElement) =>
@@ -44,14 +53,6 @@ const getColSetup = (cls: BEMWrapper): Array<number> => {
     return [menyKnappCols, toppSeksjonCols, hovedSeksjonCols, bunnSeksjonCols];
 };
 
-type Props = {
-    classname: string;
-    arbeidsflate: MenuValue;
-    language: Language;
-    menyLenker: MenySeksjon;
-    isOpen: boolean;
-};
-
 export const HovedmenyDropdown = (props: Props) => {
     const { arbeidsflate, classname, language, menyLenker, isOpen } = props;
 
@@ -60,18 +61,16 @@ export const HovedmenyDropdown = (props: Props) => {
 
     const settArbeidsflate = () => dispatch(finnArbeidsflate());
 
-    const mqlDesktop = matchMedia('(min-width: 1024px)');
-    const mqlTablet = matchMedia('(min-width: 896px)');
+    const mqlDesktop = matchMedia('(min-width: 1440px)');
+    const mqlTablet = matchMedia('(min-width: 1024px)');
 
     const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
     const [kbNaviNode, setKbNaviNode] = useState<NaviNode>(null);
 
-    const kbNaviGroup = NaviGroup.DesktopHeaderDropdown;
+    const kbNaviGroup = NaviGroup.DesktopHovedmeny;
     const kbRootIndex = { col: 0, row: 0, sub: 0 };
     const kbIdMap = {
-        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: cls.element(
-            'decorator-meny-toggleknapp'
-        ),
+        [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: desktopHovedmenyKnappId,
     };
 
     useEffect(() => {
@@ -138,6 +137,10 @@ export const HovedmenyDropdown = (props: Props) => {
             makeNewNaviGraph();
         }
     }, [isOpen, menyLenker, arbeidsflate]);
+
+    if (!menyLenker) {
+        return null;
+    }
 
     return (
         <div className={cls.element('dropdown')}>

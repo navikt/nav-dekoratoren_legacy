@@ -16,6 +16,8 @@ import { LenkeMedGA } from '../../LenkeMedGA';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import { finnTekst } from '../../../tekster/finn-tekst';
 import { Language } from '../../../reducer/language-duck';
+import Tekst from '../../../tekster/finn-tekst';
+import { erNavDekoratoren } from '../../../utils/Environment';
 
 interface Props {
     tabindex: boolean;
@@ -44,20 +46,23 @@ const MobilarbeidsflateValg = ({
         e.preventDefault();
         oppdaterSessionStorage(valgVerdi);
         settArbeidsflate();
+        if (!erNavDekoratoren()) {
+            window.location.href = lenke.url;
+        }
     };
 
     return (
         <ul className={cls.className}>
-            {arbeidsflateLenker.map(
+            {arbeidsflateLenker().map(
                 (lenke: {
-                    tittel: MenuValue;
+                    tittelId: string;
                     url: string;
                     key: MenuValue;
                     stikkord: string;
                 }) => {
                     return arbeidsflate === lenke.key ? null : (
                         <li
-                            key={lenke.tittel}
+                            key={lenke.key}
                             className={cls.element('liste-element')}
                         >
                             <LenkeMedGA
@@ -75,11 +80,11 @@ const MobilarbeidsflateValg = ({
                                     <span
                                         className={cls.element('lenke-tittel')}
                                     >
-                                        {lenke.tittel
+                                        {lenke.tittelId
                                             .charAt(0)
                                             .toUpperCase()
                                             .concat(
-                                                lenke.tittel
+                                                lenke.tittelId
                                                     .slice(1)
                                                     .toLowerCase()
                                             )}

@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../reducer/reducer';
 import KnappBase from 'nav-frontend-knapper';
+import AlertStripe from 'nav-frontend-alertstriper';
+import Lukknapp from 'nav-frontend-lukknapp';
+import LogginnIkon from '../../../../ikoner/mobilmeny/LogginnIkon';
 import Environment, { erNavDekoratoren } from '../../../../utils/Environment';
 import Tekst from '../../../../tekster/finn-tekst';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
@@ -25,7 +28,7 @@ export class LoggInnKnapp extends React.Component<StateProps, {}> {
         const { erInnlogget } = this.props;
         const appUrl = location.origin + location.pathname;
         const LOGIN_URL = `${
-            Environment.REDIRECT_TO_APP || erNavDekoratoren
+            Environment.REDIRECT_TO_APP || erNavDekoratoren()
                 ? `${Environment.LOGIN_URL}/login?redirect=${appUrl}`
                 : `${Environment.LOGIN_URL}/login?redirect=${Environment.DITT_NAV_URL}`
         }&level=${Environment.LEVEL}`;
@@ -73,6 +76,7 @@ export class LoggInnKnapp extends React.Component<StateProps, {}> {
         );
     }
 }
+
 const mapStateToProps = (state: AppState): StateProps => ({
     erInnlogget: state.innloggingsstatus.data.authenticated,
     lang: state.language.language,

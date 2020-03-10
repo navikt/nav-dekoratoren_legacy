@@ -1,22 +1,22 @@
 export const ledetekster: { [key: string]: string } = {
-    'footer-languages-overskrift': 'Languages',
-    'footer-languages-overskrift-en': 'Languages',
-    'footer-languages-overskrift-se': 'Languages',
-    'footer-hjelp-overskrift': 'Hjelp',
-    'footer-hjelp-overskrift-en': 'Help',
-    'footer-hjelp-overskrift-se': 'Hjelp',
-    'footer-tilgjengelighet-overskrift': 'Om nettstedet',
-    'footer-tilgjengelighet-overskrift-en': 'About',
-    'footer-tilgjengelighet-overskrift-se': 'Om nettstedet',
+    'footer-arbeids-og-veldferdsetaten': 'Arbeids- og velferdsetaten',
+    'footer-arbeids-og-veldferdsetaten-en': 'Arbeids- og velferdsetaten',
+    'footer-arbeids-og-veldferdsetaten-se': 'Arbeids- og velferdsetaten',
+    'footer-ga-til-innhold-for': 'Gå til innhold for',
+    'footer-ga-til-innhold-for-en': 'Gå til innhold for',
+    'footer-ga-til-innhold-for-se': 'Gå til innhold for',
+    'footer-languages-overskrift': 'Andre språk',
+    'footer-languages-overskrift-en': 'Other languages',
+    'footer-languages-overskrift-se': 'Andre språk',
+    'footer-kontakt-overskrift': 'Kontakt',
+    'footer-kontakt-overskrift-en': 'Contact',
+    'footer-kontakt-overskrift-se': 'Kontakt',
+    'footer-navsamfunn-overskrift': 'NAV og samfunn',
+    'footer-navsamfunn-overskrift-en': 'NAV og samfunn',
+    'footer-navsamfunn-overskrift-se': 'NAV og samfunn',
     'footer-del-skjerm': 'Del skjerm med veileder',
     'footer-del-skjerm-en': 'Share screen with your tutor',
     'footer-del-skjerm-se': 'Del skjerm med veileder',
-    'footer-tilgjengelighet-ingress':
-        'Nettstedet er designet for å være tilgjengelig og nyttig for så mange mennesker som mulig. Vi vil også beskytte ditt privatliv når du kontakter oss/når du besøker oss på nav.no.',
-    'footer-tilgjengelighet-ingress-en':
-        'This site is designed to be accessible and useful to as many people as possible. Your privacy is also protected when you contact us/visit nav.no',
-    'footer-tilgjengelighet-ingress-se':
-        'Nettstedet er designet for å være tilgjengelig og nyttig for så mange mennesker som mulig. Vi vil også beskytte ditt privatliv når du kontakter oss/når du besøker oss på nav.no.',
     'ga-til-min-side': 'Gå til Min side',
     'ga-til-min-side-en': 'Gå til Min side',
     'ga-til-min-side-se': 'Gå til Min side',
@@ -102,6 +102,9 @@ export const ledetekster: { [key: string]: string } = {
     'varsler-nye': 'nye',
     'varsler-nye-en': 'new',
     'varsler-nye-se': 'nye',
+    varsler: 'Varsler',
+    'varsler-en': 'Varsler',
+    'varsler-se': 'Varsler',
     'varsler-mobil': 'Varsler',
     'varsler-mobil-en': 'Notifications',
     'varsler-mobil-se': 'Varsler',
@@ -119,36 +122,37 @@ export const ledetekster: { [key: string]: string } = {
     'rolle-arbeidsgiver-se': 'Arbeidsgiver',
     'rolle-samarbeidspartner': 'Samarbeidspartner',
     'rolle-samarbeidspartner-en': 'Samarbeidspartner',
-    'rolle-samarbeidspartner-es': 'Samarbeidspartner',
+    'rolle-samarbeidspartner-se': 'Samarbeidspartner',
     'person-minside-lenke': 'Ditt NAV',
     'person-minside-lenke-en': 'Ditt NAV',
-    'person-minside-lenke-es': 'Ditt NAV',
+    'person-minside-lenke-se': 'Ditt NAV',
     'arbeidsgiver-minside-lenke': 'Min side - arbeidsgiver',
     'arbeidsgiver-minside-lenke-en': 'Min side - arbeidsgiver',
-    'arbeidsgiver-minside-lenke-es': 'Min side - arbeidsgiver',
+    'arbeidsgiver-minside-lenke-se': 'Min side - arbeidsgiver',
     'samarbeidspartner-side-lenke': 'Samarbeidspartner',
     'samarbeidspartner-side-lenke-en': 'Samarbeidspartner',
-    'samarbeidspartner-side-lenke-es': 'Samarbeidspartner',
+    'samarbeidspartner-side-lenke-se': 'Samarbeidspartner',
     'meny-bunnlenke-minside-stikkord':
         'Utbetalingsoversikt|Saksoversikt|Sykefravær',
     'meny-bunnlenke-minside-stikkord-en':
         'Utbetalingsoversikt|Saksoversikt|Sykefravær',
-    'meny-bunnlenke-minside-stikkord-es':
+    'meny-bunnlenke-minside-stikkord-se':
         'Utbetalingsoversikt|Saksoversikt|Sykefravær',
     'meny-bunnlenke-arbeidsgiver-stikkord':
         'Tjenester og skjemaer|Rekruttering|Oppfølging|Inkluderende arbeidsliv|Hjelpemidler',
     'meny-bunnlenke-arbeidsgiver-stikkord-en':
         'Tjenester og skjemaer|Rekruttering|Oppfølging|Inkluderende arbeidsliv|Hjelpemidler',
-    'meny-bunnlenke-arbeidsgiver-stikkord-es':
+    'meny-bunnlenke-arbeidsgiver-stikkord-se':
         'Tjenester og skjemaer|Rekruttering|Oppfølging|Inkluderende arbeidsliv|Hjelpemidler',
     'meny-bunnlenke-samarbeidspartner-stikkord':
         'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
     'meny-bunnlenke-samarbeidspartner-stikkord-en':
         'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
-    'meny-bunnlenke-samarbeidspartner-stikkord-es':
+    'meny-bunnlenke-samarbeidspartner-stikkord-se':
         'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
     'meny-loading': 'Laster meny-innhold...',
     'meny-loading-en': 'Laster meny-innhold...',
+    'meny-loading-se': 'Laster meny-innhold...',
     'meny-loading-es': 'Laster meny-innhold...',
     'arbeidsflate-stikkord-om-privatperson':
         'Arbeid|Familie|Pensjon|Hjelpemidler|Flere Tema',

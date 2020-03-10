@@ -37,10 +37,10 @@ export const Header = () => {
                 <div className="media-tablet-desktop tablet-desktop-meny">
                     <div className="header-z-wrapper">
                         {language === Language.NORSK && <Arbeidsflatemeny />}
-                        <DesktopMenylinje language={language} />
+                        <DesktopMenylinje />
                     </div>
-                    <MenyBakgrunn className={'desktopmeny'} />
                 </div>
+                <MenyBakgrunn />
             </header>
             <div className="media-sm-mobil mobil-meny">
                 <MenyBakgrunn className={'mobilmeny'} />

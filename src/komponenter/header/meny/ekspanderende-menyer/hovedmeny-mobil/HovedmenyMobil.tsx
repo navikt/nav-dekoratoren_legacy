@@ -2,8 +2,8 @@ import React from 'react';
 import { AppState } from '../../../../../reducer/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Status } from '../../../../../api/api';
-import { getMenuNode } from '../../../../../utils/meny-storage-utils';
-import Menyknapp from '../meny-knapp/Menyknapp';
+import { getHovedmenyNode } from '../../../../../utils/meny-storage-utils';
+import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
 import {
     GACategory,
@@ -34,6 +34,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'mobilmeny';
+export const mobilHovedmenyKnappId = `${classname}-knapp-id`;
 const cls = BEMHelper('hamburger-knapp');
 
 export const textTransformFirstLetterToUppercase = (
@@ -81,16 +82,18 @@ export const HovedmenyMobil = () => {
     };
 
     const menyKnapp = (
-        <Menyknapp
+        <MenylinjeKnapp
             toggleMenu={menutoggle}
-            clicked={underIsOpen}
+            isOpen={underIsOpen}
             classname={classname}
+            id={mobilHovedmenyKnappId}
+            ariaLabel={'Hovedmenyknapp'}
         >
             <HamburgerKnapp isOpen={underIsOpen} />
             <Undertittel>
                 {textTransformFirstLetterToUppercase('meny-knapp', language)}
             </Undertittel>
-        </Menyknapp>
+        </MenylinjeKnapp>
     );
 
     const dropdownInnhold =
@@ -98,7 +101,7 @@ export const HovedmenyMobil = () => {
             <MobilVisningsmeny
                 classname={classname}
                 menyLenker={
-                    getMenuNode(meny.data, language, arbeidsflate) ||
+                    getHovedmenyNode(meny.data, language, arbeidsflate) ||
                     dataInitState
                 }
                 menuIsOpen={hovedIsOpen}
@@ -117,6 +120,7 @@ export const HovedmenyMobil = () => {
             classname={classname}
             isOpen={hovedIsOpen}
             menyKnapp={menyKnapp}
+            id={classname}
         >
             {dropdownInnhold}
         </EkspanderbarMeny>
