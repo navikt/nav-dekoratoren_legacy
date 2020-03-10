@@ -62,7 +62,7 @@ export const HovedmenyDropdown = (props: Props) => {
     const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
     const [kbNaviNode, setKbNaviNode] = useState<NaviNode>(null);
 
-    const kbNaviGroup = NaviGroup.DesktopHovedmeny;
+    const kbNaviGroup = NaviGroup.Hovedmeny;
     const kbRootIndex = { col: 0, row: 0, sub: 0 };
     const kbIdMap = {
         [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: desktopHovedmenyKnappId,

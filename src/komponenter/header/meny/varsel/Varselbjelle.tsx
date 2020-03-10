@@ -7,7 +7,7 @@ import { MenuValue } from '../../../../utils/meny-storage-utils';
 import './Varselbjelle.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 import MenylinjeKnapp from '../ekspanderende-menyer/meny-knapper/MenylinjeKnapp';
-import VarselIkon from '../ekspanderende-menyer/meny-knapper/ikoner/varsel-ikon/VarselIkon';
+import { VarselIkon } from '../ekspanderende-menyer/meny-knapper/ikoner/varsel-ikon/VarselIkon';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../../tekster/finn-tekst';
 

@@ -30,7 +30,7 @@ export const MinsideDropdown = (props: Props) => {
     const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
     const [kbNaviNode, setKbNaviNode] = useState<NaviNode>(null);
 
-    const kbNaviGroup = NaviGroup.DesktopMinsideMeny;
+    const kbNaviGroup = NaviGroup.MinsideMeny;
     const kbRootIndex = { col: 0, row: 0, sub: 0 };
     const kbIdMap = {
         [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: desktopMinsideKnappId,
@@ -89,7 +89,7 @@ export const MinsideDropdown = (props: Props) => {
             <div className={cls.element('topp-seksjon')}>
                 <LenkeMedGA
                     href={Environment.DITT_NAV_URL}
-                    id={KbNav.getKbId(NaviGroup.DesktopMinsideMeny, {
+                    id={KbNav.getKbId(NaviGroup.MinsideMeny, {
                         col: 0,
                         row: 1,
                         sub: 0,
@@ -114,7 +114,7 @@ export const MinsideDropdown = (props: Props) => {
                             isOpen={isOpen}
                             colIndex={index}
                             rowIndex={2}
-                            kbNaviGroup={NaviGroup.DesktopMinsideMeny}
+                            kbNaviGroup={NaviGroup.MinsideMeny}
                             key={menygruppe.displayName}
                         />
                     ))}
