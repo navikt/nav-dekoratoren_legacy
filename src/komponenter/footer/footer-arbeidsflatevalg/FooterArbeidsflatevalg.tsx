@@ -9,12 +9,11 @@ import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import { Language } from '../../../reducer/language-duck';
-import { oppdaterSessionStorage } from '../../../utils/meny-storage-utils';
 import {
     ArbeidsflateLenke,
     arbeidsflateLenker,
+    settArbeidsflateOgRedirect,
 } from '../../header/arbeidsflatemeny/arbeidsflate-lenker';
-import { erNavDekoratoren } from '../../../utils/Environment';
 
 interface Props {
     classname: string;
@@ -29,6 +28,7 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
 
     const dispatch = useDispatch();
+    const settArbeidsflate = () => dispatch(finnArbeidsflate());
     const { arbeidsflate, language } = useSelector(stateSelector);
     const arbeidsflatevalgLenker = arbeidsflateLenker().filter(
         lenke => lenke.key !== arbeidsflate
@@ -49,38 +49,29 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                         aria-labelledby="ga-til-innhold-for"
                     >
                         {arbeidsflatevalgLenker.map(
-                            (lenke: ArbeidsflateLenke) => {
-                                return (
-                                    <li key={lenke.tittelId}>
-                                        <Normaltekst className="arbeidsflatevalg-tekst">
-                                            <HoyreChevron />
-                                            <LenkeMedGA
-                                                href={lenke.url}
-                                                onClick={event => {
-                                                    event.preventDefault();
-                                                    oppdaterSessionStorage(
-                                                        lenke.key
-                                                    );
-                                                    if (erNavDekoratoren()) {
-                                                        dispatch(
-                                                            finnArbeidsflate()
-                                                        );
-                                                    } else {
-                                                        window.location.href =
-                                                            lenke.url;
-                                                    }
-                                                }}
-                                                gaEventArgs={{
-                                                    category: GACategory.Header,
-                                                    action: 'arbeidsflate-valg',
-                                                }}
-                                            >
-                                                <Tekst id={lenke.tittelId} />
-                                            </LenkeMedGA>
-                                        </Normaltekst>
-                                    </li>
-                                );
-                            }
+                            (lenke: ArbeidsflateLenke) => (
+                                <li key={lenke.key}>
+                                    <Normaltekst className="arbeidsflatevalg-tekst">
+                                        <HoyreChevron />
+                                        <LenkeMedGA
+                                            href={lenke.url}
+                                            onClick={event => {
+                                                event.preventDefault();
+                                                settArbeidsflateOgRedirect(
+                                                    lenke,
+                                                    settArbeidsflate
+                                                );
+                                            }}
+                                            gaEventArgs={{
+                                                category: GACategory.Header,
+                                                action: 'arbeidsflate-valg',
+                                            }}
+                                        >
+                                            <Tekst id={lenke.lenkeTekstId} />
+                                        </LenkeMedGA>
+                                    </Normaltekst>
+                                </li>
+                            )
                         )}
                     </ul>
                 </div>
