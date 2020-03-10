@@ -4,30 +4,27 @@ import BunnseksjonLenke from './BunnseksjonLenke';
 import KbNav, {
     NaviGroup,
 } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
-import {
-    MenuValue,
-    oppdaterSessionStorage,
-} from '../../../../../../../utils/meny-storage-utils';
+import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
 import { Language } from '../../../../../../../reducer/language-duck';
 import { finnTekst } from '../../../../../../../tekster/finn-tekst';
 import { bunnLenker } from './BunnseksjonLenkedata';
 import './Bunnseksjon.less';
-import { erNavDekoratoren } from '../../../../../../../utils/Environment';
+import {
+    ArbeidsflateLenke,
+    settArbeidsflateOgRedirect,
+} from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
+import { useDispatch } from 'react-redux';
+import { finnArbeidsflate } from '../../../../../../../reducer/arbeidsflate-duck';
 
 interface Props {
     classname: string;
-    settArbeidsflate: () => void;
     arbeidsflate: MenuValue;
     language: Language;
 }
 
-export const Bunnseksjon = ({
-    classname,
-    language,
-    arbeidsflate,
-    settArbeidsflate,
-}: Props) => {
+export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
     const cls = BEMHelper(classname);
+    const dispatch = useDispatch();
     const lenker = bunnLenker[arbeidsflate]();
 
     return (
@@ -36,6 +33,7 @@ export const Bunnseksjon = ({
             <div className={cls.element('bunn-seksjon')}>
                 {lenker.map((lenke, index) => {
                     const kbNaviIndex = { col: index, row: 3, sub: 0 };
+                    const context = lenke as ArbeidsflateLenke;
                     return (
                         <BunnseksjonLenke
                             url={lenke.url}
@@ -48,14 +46,9 @@ export const Bunnseksjon = ({
                             )}
                             onClick={event => {
                                 event.preventDefault();
-                                if (lenke.key) {
-                                    oppdaterSessionStorage(lenke.key);
-                                }
-                                if (lenke.key && erNavDekoratoren()) {
-                                    settArbeidsflate();
-                                } else {
-                                    window.location.href = lenke.url;
-                                }
+                                settArbeidsflateOgRedirect(context, () =>
+                                    dispatch(finnArbeidsflate())
+                                );
                             }}
                             key={lenke.lenkeTekstId}
                         />

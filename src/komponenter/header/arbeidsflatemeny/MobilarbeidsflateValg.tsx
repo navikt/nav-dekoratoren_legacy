@@ -1,94 +1,67 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
-import { Dispatch } from '../../../redux/dispatch-type';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import BEMHelper from '../../../utils/bem';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import {
-    MenuValue,
-    oppdaterSessionStorage,
-} from '../../../utils/meny-storage-utils';
-import { arbeidsflateLenker } from './arbeidsflate-lenker';
+    arbeidsflateLenker,
+    settArbeidsflateOgRedirect,
+} from './arbeidsflate-lenker';
 import './MobilarbeidsflateValg.less';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
 import Tekst from '../../../tekster/finn-tekst';
-import { erNavDekoratoren } from '../../../utils/Environment';
 
 interface Props {
     tabindex: boolean;
 }
 
-interface StateProps {
-    arbeidsflate: MenuValue;
-}
-
-interface DispatchProps {
-    settArbeidsflate: () => void;
-}
-
-const MobilarbeidsflateValg = ({
-    arbeidsflate,
-    settArbeidsflate,
-    tabindex,
-}: StateProps & DispatchProps & Props) => {
+const MobilarbeidsflateValg = ({ tabindex }: Props) => {
     const cls = BEMHelper('mobil-arbeidsflate-valg');
+    const dispatch = useDispatch();
+    const settArbeidsflate = () => dispatch(finnArbeidsflate());
+    const { arbeidsflate } = useSelector((state: AppState) => ({
+        arbeidsflate: state.arbeidsflate.status,
+    }));
 
     return (
         <ul className={cls.className}>
-            {arbeidsflateLenker().map(
-                (lenke: { tittelId: string; url: string; key: MenuValue }) => {
-                    return arbeidsflate === lenke.key ? null : (
-                        <li
-                            key={lenke.key}
-                            className={cls.element('liste-element')}
+            {arbeidsflateLenker().map(lenke =>
+                arbeidsflate === lenke.key ? null : (
+                    <li
+                        key={lenke.key}
+                        className={cls.element('liste-element')}
+                    >
+                        <LenkeMedGA
+                            href={lenke.url}
+                            onClick={event => {
+                                event.preventDefault();
+                                settArbeidsflateOgRedirect(
+                                    lenke,
+                                    settArbeidsflate
+                                );
+                            }}
+                            tabIndex={tabindex ? 0 : -1}
+                            gaEventArgs={{
+                                category: GACategory.Header,
+                                action: 'arbeidsflate-valg',
+                            }}
                         >
-                            <LenkeMedGA
-                                href={lenke.url}
-                                onClick={(event: MouseEvent) => {
-                                    event.preventDefault();
-                                    oppdaterSessionStorage(lenke.key);
-                                    if (erNavDekoratoren()) {
-                                        settArbeidsflate();
-                                    } else {
-                                        window.location.href = lenke.url;
-                                    }
-                                }}
-                                tabIndex={tabindex ? 0 : -1}
-                                gaEventArgs={{
-                                    category: GACategory.Header,
-                                    action: 'arbeidsflate-valg',
-                                }}
-                            >
-                                <HoyreChevron />
-                                <Undertittel>
-                                    <span>For </span>
-                                    <span
-                                        className={cls.element('lenke-tittel')}
-                                    >
-                                        <Tekst id={lenke.tittelId} />
-                                    </span>{' '}
-                                </Undertittel>
-                            </LenkeMedGA>
-                        </li>
-                    );
-                }
+                            <HoyreChevron />
+                            <Undertittel>
+                                <span>For </span>
+                                <span className={cls.element('lenke-tittel')}>
+                                    <Tekst id={lenke.lenkeTekstId} />
+                                </span>{' '}
+                            </Undertittel>
+                        </LenkeMedGA>
+                    </li>
+                )
             )}
         </ul>
     );
 };
 
-const mapStateToProps = (state: AppState): StateProps => ({
-    arbeidsflate: state.arbeidsflate.status,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    settArbeidsflate: () => dispatch(finnArbeidsflate()),
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MobilarbeidsflateValg);
+export default MobilarbeidsflateValg;
