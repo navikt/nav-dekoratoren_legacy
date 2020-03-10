@@ -1,14 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import BEMHelper from '../../../utils/bem';
-import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
-import {
-    arbeidsflateLenker,
-    settArbeidsflateOgRedirect,
-} from './arbeidsflate-lenker';
+import { arbeidsflateLenker, settArbeidsflate } from './arbeidsflate-lenker';
 import './MobilarbeidsflateValg.less';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
@@ -20,8 +16,6 @@ interface Props {
 
 const MobilarbeidsflateValg = ({ tabindex }: Props) => {
     const cls = BEMHelper('mobil-arbeidsflate-valg');
-    const dispatch = useDispatch();
-    const settArbeidsflate = () => dispatch(finnArbeidsflate());
     const { arbeidsflate } = useSelector((state: AppState) => ({
         arbeidsflate: state.arbeidsflate.status,
     }));
@@ -38,10 +32,7 @@ const MobilarbeidsflateValg = ({ tabindex }: Props) => {
                             href={lenke.url}
                             onClick={event => {
                                 event.preventDefault();
-                                settArbeidsflateOgRedirect(
-                                    lenke,
-                                    settArbeidsflate
-                                );
+                                settArbeidsflate(lenke);
                             }}
                             tabIndex={tabindex ? 0 : -1}
                             gaEventArgs={{

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
@@ -7,12 +7,11 @@ import Tekst from '../../../tekster/finn-tekst';
 import BEMHelper from '../../../utils/bem';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
-import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import { Language } from '../../../reducer/language-duck';
 import {
     ArbeidsflateLenke,
     arbeidsflateLenker,
-    settArbeidsflateOgRedirect,
+    settArbeidsflate,
 } from '../../header/arbeidsflatemeny/arbeidsflate-lenker';
 
 interface Props {
@@ -26,9 +25,6 @@ const stateSelector = (state: AppState) => ({
 
 const FooterArbeidsflatevalg = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
-
-    const dispatch = useDispatch();
-    const settArbeidsflate = () => dispatch(finnArbeidsflate());
     const { arbeidsflate, language } = useSelector(stateSelector);
     const arbeidsflatevalgLenker = arbeidsflateLenker().filter(
         lenke => lenke.key !== arbeidsflate
@@ -57,10 +53,7 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                             href={lenke.url}
                                             onClick={event => {
                                                 event.preventDefault();
-                                                settArbeidsflateOgRedirect(
-                                                    lenke,
-                                                    settArbeidsflate
-                                                );
+                                                settArbeidsflate(lenke);
                                             }}
                                             gaEventArgs={{
                                                 category: GACategory.Header,

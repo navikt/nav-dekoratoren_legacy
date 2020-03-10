@@ -1,15 +1,9 @@
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
-import { Dispatch } from '../../../redux/dispatch-type';
 import { Undertekst } from 'nav-frontend-typografi';
-import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import BEMHelper from '../../../utils/bem';
-import { MenuValue } from '../../../utils/meny-storage-utils';
-import {
-    arbeidsflateLenker,
-    settArbeidsflateOgRedirect,
-} from './arbeidsflate-lenker';
+import { arbeidsflateLenker, settArbeidsflate } from './arbeidsflate-lenker';
 import './Arbeidsflatemeny.less';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
@@ -19,19 +13,11 @@ import {
     NaviGroup,
 } from '../../../utils/keyboard-navigation/kb-navigation';
 
-interface StateProps {
-    arbeidsflate: MenuValue;
-}
-
-interface DispatchProps {
-    settArbeidsflate: () => void;
-}
-
-type arbeidsflateProps = StateProps & DispatchProps;
-
-const Arbeidsflatemeny = ({ arbeidsflate }: arbeidsflateProps) => {
+const Arbeidsflatemeny = () => {
     const cls = BEMHelper('arbeidsflate');
-    const dispatch = useDispatch();
+    const { arbeidsflate } = useSelector((state: AppState) => ({
+        arbeidsflate: state.arbeidsflate.status,
+    }));
 
     return (
         <nav
@@ -57,9 +43,7 @@ const Arbeidsflatemeny = ({ arbeidsflate }: arbeidsflateProps) => {
                                 href={lenke.url}
                                 onClick={event => {
                                     event.preventDefault();
-                                    settArbeidsflateOgRedirect(lenke, () =>
-                                        dispatch(finnArbeidsflate())
-                                    );
+                                    settArbeidsflate(lenke);
                                 }}
                                 gaEventArgs={{
                                     category: GACategory.Header,
@@ -87,12 +71,4 @@ const Arbeidsflatemeny = ({ arbeidsflate }: arbeidsflateProps) => {
     );
 };
 
-const mapStateToProps = (state: AppState): StateProps => ({
-    arbeidsflate: state.arbeidsflate.status,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    settArbeidsflate: () => dispatch(finnArbeidsflate()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Arbeidsflatemeny);
+export default Arbeidsflatemeny;
