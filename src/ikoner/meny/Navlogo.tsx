@@ -1,7 +1,13 @@
 import React from 'react';
 import { GACategory } from '../../utils/google-analytics';
 import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
-import Environment from '../../utils/Environment';
+import { useDispatch } from 'react-redux';
+import { finnArbeidsflate } from '../../reducer/arbeidsflate-duck';
+import {
+    byttArbeidsflate,
+    getArbeidsflateContext,
+} from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
+import { MenuValue } from '../../utils/meny-storage-utils';
 
 const Navlogo = ({
     width,
@@ -14,11 +20,19 @@ const Navlogo = ({
     color?: string;
     viewIndex?: boolean;
 }) => {
+    const dispatch = useDispatch();
+    const settArbeidsflate = () => dispatch(finnArbeidsflate());
+    const context = getArbeidsflateContext(MenuValue.PRIVATPERSON);
+
     return (
         <LenkeMedGA
-            href={Environment.XP_BASE_URL}
+            href={context.url}
             classNameOverride="nav-brand-lenke"
             tabIndex={viewIndex ? 0 : -1}
+            onClick={event => {
+                event.preventDefault();
+                byttArbeidsflate(context, settArbeidsflate);
+            }}
             gaEventArgs={{
                 category: GACategory.Meny,
                 action: 'navlogo-mobilmeny',

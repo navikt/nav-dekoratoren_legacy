@@ -1,26 +1,58 @@
-import { MenuValue } from '../../../utils/meny-storage-utils';
-import Environment from '../../../utils/Environment';
+import {
+    MenuValue,
+    oppdaterSessionStorage,
+} from '../../../utils/meny-storage-utils';
+import Environment, { erNavDekoratoren } from '../../../utils/Environment';
 
 export interface ArbeidsflateLenke {
-    tittelId: string;
     url: string;
+    lenkeTekstId: string;
+    stikkordId: string;
     key: MenuValue;
 }
 
 export const arbeidsflateLenker = (): ArbeidsflateLenke[] => [
-    {
-        tittelId: 'rolle-privatperson',
-        url: `${Environment.XP_BASE_URL}`,
-        key: MenuValue.PRIVATPERSON,
-    },
-    {
-        tittelId: 'rolle-arbeidsgiver',
-        url: `${Environment.XP_BASE_URL}/no/bedrift`,
-        key: MenuValue.ARBEIDSGIVER,
-    },
-    {
-        tittelId: 'rolle-samarbeidspartner',
-        url: `${Environment.XP_BASE_URL}/no/nav-og-samfunn`,
-        key: MenuValue.SAMARBEIDSPARTNER,
-    },
+    personContextLenke(),
+    arbeidsgiverContextLenke(),
+    samarbeidspartnerContextLenke(),
 ];
+
+export const personContextLenke = () => ({
+    url: `${Environment.XP_BASE_URL}`,
+    lenkeTekstId: 'rolle-privatperson',
+    stikkordId: 'meny-bunnlenke-minside-stikkord',
+    key: MenuValue.PRIVATPERSON,
+});
+
+export const arbeidsgiverContextLenke = () => ({
+    url: `${Environment.XP_BASE_URL}/no/bedrift`,
+    lenkeTekstId: 'rolle-arbeidsgiver',
+    stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
+    key: MenuValue.ARBEIDSGIVER,
+});
+
+export const samarbeidspartnerContextLenke = () => ({
+    url: `${Environment.XP_BASE_URL}/no/nav-og-samfunn`,
+    lenkeTekstId: 'rolle-samarbeidspartner',
+    stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
+    key: MenuValue.SAMARBEIDSPARTNER,
+});
+
+export const getArbeidsflateContext = (arbeidsflate: MenuValue) =>
+    arbeidsflate === MenuValue.ARBEIDSGIVER
+        ? arbeidsgiverContextLenke()
+        : arbeidsflate === MenuValue.SAMARBEIDSPARTNER
+        ? samarbeidspartnerContextLenke()
+        : personContextLenke();
+
+export const byttArbeidsflate = (
+    lenke: ArbeidsflateLenke,
+    settArbeidsflate: () => void
+) => {
+    oppdaterSessionStorage(lenke.key);
+    if (erNavDekoratoren()) {
+        settArbeidsflate();
+    } else {
+        window.location.href = lenke.url;
+    }
+};

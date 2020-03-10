@@ -4,30 +4,28 @@ import BunnseksjonLenke from './BunnseksjonLenke';
 import KbNav, {
     NaviGroup,
 } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
-import {
-    MenuValue,
-    oppdaterSessionStorage,
-} from '../../../../../../../utils/meny-storage-utils';
+import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
 import { Language } from '../../../../../../../reducer/language-duck';
 import { finnTekst } from '../../../../../../../tekster/finn-tekst';
 import { bunnLenker } from './BunnseksjonLenkedata';
 import './Bunnseksjon.less';
-import { erNavDekoratoren } from '../../../../../../../utils/Environment';
+import {
+    ArbeidsflateLenke,
+    byttArbeidsflate,
+} from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
+import { useDispatch } from 'react-redux';
+import { finnArbeidsflate } from '../../../../../../../reducer/arbeidsflate-duck';
 
 interface Props {
     classname: string;
-    settArbeidsflate: () => void;
     arbeidsflate: MenuValue;
     language: Language;
 }
 
-export const Bunnseksjon = ({
-    classname,
-    language,
-    arbeidsflate,
-    settArbeidsflate,
-}: Props) => {
+export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
     const cls = BEMHelper(classname);
+    const dispatch = useDispatch();
+    const settArbeidsflate = () => dispatch(finnArbeidsflate());
     const lenker = bunnLenker[arbeidsflate]();
 
     return (
@@ -48,14 +46,10 @@ export const Bunnseksjon = ({
                             )}
                             onClick={event => {
                                 event.preventDefault();
-                                if (lenke.key) {
-                                    oppdaterSessionStorage(lenke.key);
-                                }
-                                if (lenke.key && erNavDekoratoren()) {
-                                    settArbeidsflate();
-                                } else {
-                                    window.location.href = lenke.url;
-                                }
+                                byttArbeidsflate(
+                                    lenke as ArbeidsflateLenke,
+                                    settArbeidsflate
+                                );
                             }}
                             key={lenke.lenkeTekstId}
                         />

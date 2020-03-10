@@ -2,7 +2,13 @@ import React from 'react';
 import Tekst from '../../tekster/finn-tekst';
 import { GACategory } from '../../utils/google-analytics';
 import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
-import Environment from '../../utils/Environment';
+import { useDispatch } from 'react-redux';
+import { finnArbeidsflate } from '../../reducer/arbeidsflate-duck';
+import {
+    byttArbeidsflate,
+    getArbeidsflateContext,
+} from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
+import { MenuValue } from '../../utils/meny-storage-utils';
 import './NavLogoFooter.less';
 
 const NavLogoRod = ({
@@ -14,12 +20,20 @@ const NavLogoRod = ({
     height?: string;
     classname?: string;
 }) => {
+    const dispatch = useDispatch();
+    const settArbeidsflate = () => dispatch(finnArbeidsflate());
+    const context = getArbeidsflateContext(MenuValue.PRIVATPERSON);
+
     return (
         <div className="sitefooter__logo">
             <LenkeMedGA
                 classNameOverride="navbar-brand"
-                href={Environment.XP_BASE_URL}
+                href={context.url}
                 gaEventArgs={{ category: GACategory.Footer, action: 'navlogo' }}
+                onClick={event => {
+                    event.preventDefault();
+                    byttArbeidsflate(context, settArbeidsflate);
+                }}
             >
                 <svg
                     className={classname}
