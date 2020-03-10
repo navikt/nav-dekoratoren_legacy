@@ -3,6 +3,8 @@ import {
     oppdaterSessionStorage,
 } from '../../../utils/meny-storage-utils';
 import Environment, { erNavDekoratoren } from '../../../utils/Environment';
+import getStore from '../../../redux/store';
+import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 
 export interface ArbeidsflateLenke {
     url: string;
@@ -45,13 +47,10 @@ export const getArbeidsflateContext = (arbeidsflate: MenuValue) =>
         ? samarbeidspartnerContextLenke()
         : personContextLenke();
 
-export const settArbeidsflateOgRedirect = (
-    lenke: ArbeidsflateLenke,
-    runWhenDev: () => void
-) => {
+export const settArbeidsflate = (lenke: ArbeidsflateLenke) => {
     oppdaterSessionStorage(lenke.key);
     if (erNavDekoratoren()) {
-        runWhenDev();
+        getStore().dispatch(finnArbeidsflate());
     } else {
         window.location.href = lenke.url;
     }

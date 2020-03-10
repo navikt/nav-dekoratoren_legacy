@@ -1,11 +1,9 @@
 import React from 'react';
 import { GACategory } from '../../utils/google-analytics';
 import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
-import { useDispatch } from 'react-redux';
-import { finnArbeidsflate } from '../../reducer/arbeidsflate-duck';
 import {
-    settArbeidsflateOgRedirect,
     getArbeidsflateContext,
+    settArbeidsflate,
 } from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
 import { MenuValue } from '../../utils/meny-storage-utils';
 
@@ -20,7 +18,6 @@ const Navlogo = ({
     color?: string;
     viewIndex?: boolean;
 }) => {
-    const dispatch = useDispatch();
     const context = getArbeidsflateContext(MenuValue.PRIVATPERSON);
 
     return (
@@ -30,9 +27,7 @@ const Navlogo = ({
             tabIndex={viewIndex ? 0 : -1}
             onClick={event => {
                 event.preventDefault();
-                settArbeidsflateOgRedirect(context, () =>
-                    dispatch(finnArbeidsflate())
-                );
+                settArbeidsflate(context);
             }}
             gaEventArgs={{
                 category: GACategory.Meny,
