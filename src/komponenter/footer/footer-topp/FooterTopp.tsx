@@ -120,7 +120,7 @@ const FooterTopp = ({ classname }: Props) => {
                         })}
                     </ul>
                 </div>
-                <div className="menylenker-seksjon arbeidsflatevalg">
+                <div className="menylenker-seksjon arbeidsflate">
                     <FooterArbeidsflatevalg classname={cls.className} />
                 </div>
             </div>

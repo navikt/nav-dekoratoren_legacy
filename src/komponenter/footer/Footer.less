@@ -98,7 +98,7 @@
                     padding-left: 2rem;
                 }
 
-                .menylenker-seksjon.arbeidsflatevalg {
+                .menylenker-seksjon.arbeidsflate {
                     width: 100%;
                     margin-top: 3rem;
                 }
@@ -144,13 +144,14 @@
         }
     }
 
-    @media (min-width: @desktopLimitWidth) {
+    @media (min-width: @smallDesktopLimitWidth) {
         &__menylinje-topp {
-            padding: 1rem 2rem 1.5rem;
+            padding: 1.5rem 2rem;
 
             .topp-kolonner {
                 .menylenker-seksjon.til-toppen {
                     padding-left: 0;
+                    width: 100%;
                 }
 
                 .menylenker-seksjon.venstre {
@@ -163,8 +164,8 @@
                     padding-left: 0;
                 }
 
-                .menylenker-seksjon.arbeidsflatevalg {
-                    width: 30%;
+                .menylenker-seksjon.arbeidsflate {
+                    width: 29%;
                     margin-top: 0;
                 }
 
@@ -181,14 +182,11 @@
         }
     }
 
-    @media (min-width: 1367px) {
+    @media (min-width: 1200px) {
         &__menylinje-topp {
-            padding: 2rem;
+            padding: 1.5rem 2rem;
 
             .topp-kolonner {
-                width: 1300px;
-                margin: 0 auto;
-
                 .menylenker-seksjon.til-toppen {
                     width: 15%;
                     margin-bottom: 0;
@@ -200,8 +198,9 @@
                     width: 20%;
                 }
 
-                .menylenker-seksjon.arbeidsflatevalg {
+                .menylenker-seksjon.arbeidsflate {
                     width: 24%;
+                    margin-top: 0;
                 }
 
                 .arbeidsflatevalg-innhold {
@@ -221,8 +220,6 @@
 
         &__menylinje-bottom {
             .bottom-innhold {
-                width: 1300px;
-                margin: 0 auto;
                 justify-content: center;
 
                 .bottom-lenker {
@@ -233,6 +230,24 @@
                     width: 15%;
                     margin-right: 0;
                 }
+            }
+        }
+    }
+
+    @media (min-width: @desktopLimitWidth) {
+        &__menylinje-topp {
+            padding: 1.5rem 0;
+
+            .topp-kolonner {
+                width: 1344px;
+                margin: 0 auto;
+            }
+        }
+
+        &__menylinje-bottom {
+            .bottom-innhold {
+                width: 1344px;
+                margin: 0 auto;
             }
         }
     }
