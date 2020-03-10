@@ -22,7 +22,6 @@ interface Props {
 
 export const Toppseksjon = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
-    const dispatch = useDispatch();
     const { arbeidsflate } = useSelector((state: AppState) => ({
         arbeidsflate: state.arbeidsflate.status,
     }));
