@@ -23,7 +23,7 @@ export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
                         isOpen={isOpen}
                         colIndex={index}
                         rowIndex={1}
-                        kbNaviGroup={NaviGroup.DesktopHovedmeny}
+                        kbNaviGroup={NaviGroup.Hovedmeny}
                         key={menygruppe.displayName}
                     />
                 ))}
