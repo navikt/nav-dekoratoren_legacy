@@ -24,11 +24,11 @@ export const ledetekster: { [key: string]: string } = {
     'footer-stikkord-privatperson-se':
         'Utbetalingsoversikt, saksoversikt, sykefravær',
     'footer-stikkord-arbeidsgiver':
-        'Tjenester og skjemaer, rekruttering. oppfølging, inkluderende arbeidsliv, hjelpemidler',
+        'Tjenester og skjemaer, rekruttering, oppfølging, inkluderende arbeidsliv, hjelpemidler',
     'footer-stikkord-arbeidsgiver-en':
-        'Tjenester og skjemaer, rekruttering. oppfølging, inkluderende arbeidsliv, hjelpemidler',
+        'Tjenester og skjemaer, rekruttering, oppfølging, inkluderende arbeidsliv, hjelpemidler',
     'footer-stikkord-arbeidsgiver-se':
-        'Tjenester og skjemaer, rekruttering. oppfølging, inkluderende arbeidsliv, hjelpemidler',
+        'Tjenester og skjemaer, rekruttering, oppfølging, inkluderende arbeidsliv, hjelpemidler',
     'footer-stikkord-samarbeidspartner':
         'Kommuner, utdanningsområdet, psykisk helse, hjelpemidler, leger og behandlere',
     'footer-stikkord-samarbeidspartner-en':
