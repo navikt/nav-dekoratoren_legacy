@@ -44,11 +44,20 @@ const FooterTopp = ({ classname }: Props) => {
         setVisDelSkjermModal(false);
     };
 
+    const scrollToTop = () =>
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+        });
+
     return (
         <section className={cls.element('menylinje-topp')}>
             <div className="topp-kolonner">
                 <div className="menylenker-seksjon til-toppen">
-                    <Lenke href="#">Til toppen</Lenke>
+                    <Lenke href="#" onClick={() => scrollToTop()}>
+                        <Tekst id="footer-til-toppen" />
+                    </Lenke>
                 </div>
                 <div className="menylenker-seksjon venstre">
                     <Undertittel
@@ -116,9 +125,7 @@ const FooterTopp = ({ classname }: Props) => {
                         ))}
                     </ul>
                 </div>
-                <div className="menylenker-seksjon arbeidsflate">
-                    <FooterArbeidsflatevalg classname={cls.className} />
-                </div>
+                <FooterArbeidsflatevalg classname={cls.className} />
             </div>
         </section>
     );

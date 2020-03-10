@@ -4,12 +4,6 @@
 .sitefooter {
     width: 100%;
 
-    .lenke {
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
     &__menylinje-topp {
         padding: 1rem;
         color: white;
@@ -33,32 +27,6 @@
             }
         }
 
-        .lenke {
-            color: white;
-        }
-
-        .lenkepanel {
-            color: white;
-            background-color: @navBlaDarken40;
-            border: 1px solid white;
-            border-radius: 8px;
-
-            &__heading {
-                min-height: 101px;
-            }
-
-            .lenke {
-                text-decoration: none;
-            }
-
-            .typo-undertittel {
-                margin-bottom: 0.6rem;
-            }
-        }
-    }
-
-    &__menylinje-topp,
-    &__menylinje-arbeidsflatevalg .arbeidsflatevalg-innhold .arbeidsflatevalg {
         ul {
             margin-top: 0.8rem;
             margin-bottom: 2.5rem;
@@ -66,6 +34,31 @@
 
         li {
             margin-bottom: 1.3rem;
+        }
+
+        .lenke,
+        .lenkepanel {
+            color: white;
+        }
+
+        .lenkepanel {
+            background-color: @navBlaDarken40;
+            border: 1px solid white;
+            border-radius: 8px;
+            text-decoration: none;
+
+            &:hover .lenkepanel__heading,
+            &--hover .lenkepanel__heading {
+                color: white;
+            }
+
+            &__heading {
+                min-height: 101px;
+            }
+
+            .typo-undertittel {
+                margin-bottom: 0.6rem;
+            }
         }
     }
 

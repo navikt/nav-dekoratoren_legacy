@@ -1,64 +1,76 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../../reducer/reducer';
 import { Undertittel } from 'nav-frontend-typografi';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
-import BEMHelper from '../../../../utils/bem';
 import { GACategory } from '../../../../utils/google-analytics';
-import { LenkeMedGA } from '../../../LenkeMedGA';
+import {
+    GAEventArgs,
+    triggerGaEvent,
+} from '../../../../utils/google-analytics';
 import { Language } from '../../../../reducer/language-duck';
 import Tekst from '../../../../tekster/finn-tekst';
 import {
     ArbeidsflateLenke,
     arbeidsflateLenker,
+    arbeidsgiverContextLenke,
+    samarbeidspartnerContextLenke,
     settArbeidsflate,
 } from '../../../header/arbeidsflatemeny/arbeidsflate-lenker';
 
-interface Props {
-    classname: string;
-}
+const gaEventArgs: GAEventArgs = {
+    category: GACategory.Header,
+    action: 'arbeidsflate-valg',
+};
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
     language: state.language.language,
 });
 
-const FooterArbeidsflatevalg = ({ classname }: Props) => {
-    const cls = BEMHelper(classname);
+const FooterArbeidsflatevalg = () => {
     const { arbeidsflate, language } = useSelector(stateSelector);
-    const arbeidsflatevalgLenker = arbeidsflateLenker().filter(
-        lenke => lenke.key !== arbeidsflate
-    );
+
+    const [arbeidsflatevalgLenker, setArbeidsflatevalgLenker] = useState<
+        ArbeidsflateLenke[]
+    >([arbeidsgiverContextLenke(), samarbeidspartnerContextLenke()]);
+
+    const finnArbeidsflateLenker = () =>
+        arbeidsflateLenker().filter(lenke => lenke.key !== arbeidsflate);
+
+    useEffect(() => {
+        setArbeidsflatevalgLenker(finnArbeidsflateLenker);
+    }, [arbeidsflate]);
 
     return (
-        <section className={cls.element('menylinje-arbeidsflatevalg')}>
+        <>
             {language === Language.NORSK && (
-                <div className="arbeidsflatevalg-innhold">
-                    <ul
-                        className="arbeidsflatevalg"
-                        aria-label="Gå til innhold for privatperson, arbeidsgiver eller samarbeidspartner"
-                    >
-                        {arbeidsflatevalgLenker.map(
-                            (lenke: ArbeidsflateLenke) => (
-                                <li key={lenke.key}>
-                                    <Lenkepanel
-                                        href={lenke.url}
-                                        tittelProps="normaltekst"
-                                        key={lenke.key}
-                                        border
-                                    >
-                                        <div className="arbeidsflatevalg-tekst">
-                                            <LenkeMedGA
-                                                href={lenke.url}
-                                                onClick={event => {
-                                                    event.preventDefault();
-                                                    settArbeidsflate(lenke);
-                                                }}
-                                                gaEventArgs={{
-                                                    category: GACategory.Header,
-                                                    action: 'arbeidsflate-valg',
-                                                }}
-                                            >
+                <div className="menylenker-seksjon arbeidsflate">
+                    <div className="arbeidsflatevalg-innhold">
+                        <ul
+                            className="arbeidsflatevalg"
+                            aria-label="Gå til innhold for privatperson, arbeidsgiver eller samarbeidspartner"
+                        >
+                            {arbeidsflatevalgLenker.map(
+                                (lenke: ArbeidsflateLenke) => (
+                                    <li key={lenke.key}>
+                                        <Lenkepanel
+                                            href={lenke.url}
+                                            onClick={event => {
+                                                event.preventDefault();
+                                                settArbeidsflate(lenke);
+                                                triggerGaEvent(gaEventArgs);
+                                            }}
+                                            onAuxClick={event =>
+                                                event.button &&
+                                                event.button === 1 &&
+                                                triggerGaEvent(gaEventArgs)
+                                            }
+                                            tittelProps="normaltekst"
+                                            key={lenke.key}
+                                            border
+                                        >
+                                            <div className="arbeidsflatevalg-tekst">
                                                 <Undertittel>
                                                     <Tekst
                                                         id={lenke.lenkeTekstId}
@@ -67,16 +79,16 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                                 <Tekst
                                                     id={lenke.footerStikkordId}
                                                 />
-                                            </LenkeMedGA>
-                                        </div>
-                                    </Lenkepanel>
-                                </li>
-                            )
-                        )}
-                    </ul>
+                                            </div>
+                                        </Lenkepanel>
+                                    </li>
+                                )
+                            )}
+                        </ul>
+                    </div>
                 </div>
             )}
-        </section>
+        </>
     );
 };
 
