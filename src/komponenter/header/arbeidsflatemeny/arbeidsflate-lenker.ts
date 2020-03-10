@@ -21,7 +21,7 @@ export const arbeidsflateLenker = (): ArbeidsflateLenke[] => [
 ];
 
 export const personContextLenke = () => ({
-    url: `${Environment.XP_BASE_URL}/no/person`,
+    url: `${Environment.XP_BASE_URL}`,
     lenkeTekstId: 'rolle-privatperson',
     stikkordId: 'meny-bunnlenke-minside-stikkord',
     footerStikkordId: 'footer-stikkord-privatperson',

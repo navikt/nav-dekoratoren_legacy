@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../../reducer/reducer';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
 import BEMHelper from '../../../../utils/bem';
 import { GACategory } from '../../../../utils/google-analytics';
 import { LenkeMedGA } from '../../../LenkeMedGA';
 import { Language } from '../../../../reducer/language-duck';
-import Tekst, { finnTekst } from '../../../../tekster/finn-tekst';
+import Tekst from '../../../../tekster/finn-tekst';
 import {
     ArbeidsflateLenke,
     arbeidsflateLenker,
@@ -39,7 +39,7 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                         aria-label="Gå til innhold for privatperson, arbeidsgiver eller samarbeidspartner"
                     >
                         {arbeidsflatevalgLenker.map(
-                            (lenke: ArbeidsflateLenke) => {
+                            (lenke: ArbeidsflateLenke) => (
                                 <li key={lenke.key}>
                                     <Lenkepanel
                                         href={lenke.url}
@@ -70,8 +70,8 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                             </LenkeMedGA>
                                         </div>
                                     </Lenkepanel>
-                                </li>;
-                            }
+                                </li>
+                            )
                         )}
                     </ul>
                 </div>
