@@ -16,44 +16,34 @@ export type OnArbeidsFlateClick = (
     settArbeidsflateFunc: () => void
 ) => (event: React.MouseEvent<HTMLAnchorElement>) => void;
 
-const pathPersonFlate = '/dekoratoren/person/';
-const pathBedriftFlate = '/dekoratoren/bedrift/';
-const samarbeidspartnerFlate = '/dekoratoren/samarbeidspartner/';
-
-const onArbeidsflateClick = (
-    url: string,
-    arbeidsflate: MenuValue
-): OnArbeidsFlateClick => (settArbeidsflate: () => void) => (
-    event: React.MouseEvent<HTMLAnchorElement>
-) => {
+const onArbeidsflateClick = (arbeidsflate: MenuValue): OnArbeidsFlateClick => (
+    settArbeidsflate: () => void
+) => (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     oppdaterSessionStorage(arbeidsflate);
     settArbeidsflate();
 };
 
-const personContextLenke = {
-    url: pathPersonFlate,
+const personContextLenke = () => ({
+    url: `${Environment.XP_BASE_URL}`,
     lenkeTekstId: 'rolle-privatperson',
     stikkordId: 'meny-bunnlenke-minside-stikkord',
-    onClick: onArbeidsflateClick(pathPersonFlate, MenuValue.PRIVATPERSON),
-};
+    onClick: onArbeidsflateClick(MenuValue.PRIVATPERSON),
+});
 
-const arbeidsgiverContextLenke = {
-    url: pathBedriftFlate,
+const arbeidsgiverContextLenke = () => ({
+    url: `${Environment.XP_BASE_URL}/no/bedrift`,
     lenkeTekstId: 'rolle-arbeidsgiver',
     stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
-    onClick: onArbeidsflateClick(pathBedriftFlate, MenuValue.ARBEIDSGIVER),
-};
+    onClick: onArbeidsflateClick(MenuValue.ARBEIDSGIVER),
+});
 
-const samarbeidspartnerContextLenke = {
-    url: samarbeidspartnerFlate,
+const samarbeidspartnerContextLenke = () => ({
+    url: `${Environment.XP_BASE_URL}/no/nav-og-samfunn`,
     lenkeTekstId: 'rolle-samarbeidspartner',
     stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
-    onClick: onArbeidsflateClick(
-        samarbeidspartnerFlate,
-        MenuValue.SAMARBEIDSPARTNER
-    ),
-};
+    onClick: onArbeidsflateClick(MenuValue.SAMARBEIDSPARTNER),
+});
 
 const privatpersonLenker = (): LenkeData[] => [
     {
@@ -61,8 +51,8 @@ const privatpersonLenker = (): LenkeData[] => [
         lenkeTekstId: 'person-minside-lenke',
         stikkordId: 'meny-bunnlenke-minside-stikkord',
     },
-    arbeidsgiverContextLenke,
-    samarbeidspartnerContextLenke,
+    arbeidsgiverContextLenke(),
+    samarbeidspartnerContextLenke(),
 ];
 
 const arbeidsgiverLenker = (): LenkeData[] => [
@@ -71,13 +61,13 @@ const arbeidsgiverLenker = (): LenkeData[] => [
         lenkeTekstId: 'arbeidsgiver-minside-lenke',
         stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
     },
-    personContextLenke,
-    samarbeidspartnerContextLenke,
+    personContextLenke(),
+    samarbeidspartnerContextLenke(),
 ];
 
 const samarbeidspartnerLenker = (): LenkeData[] => [
-    personContextLenke,
-    arbeidsgiverContextLenke,
+    personContextLenke(),
+    arbeidsgiverContextLenke(),
 ];
 
 const ikkeValgtLenker = (): LenkeData[] => [];
