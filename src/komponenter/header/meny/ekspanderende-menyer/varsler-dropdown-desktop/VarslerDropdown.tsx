@@ -20,6 +20,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-varsler-dropdown';
+export const desktopVarslerKnappId = `${classname}-knapp-id`;
 
 export const VarslerDropdown = () => {
     const { isOpen, varsler, innloggetStatus, arbeidsflate } = useSelector(stateSelector);
@@ -35,7 +36,6 @@ export const VarslerDropdown = () => {
             action: `varsler-${isOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleVarsler());
-
     };
 
     const ariaLabel = `Varsler. Du har ${
@@ -47,6 +47,7 @@ export const VarslerDropdown = () => {
             toggleMenu={toggleDropdown}
             isOpen={isOpen}
             classname={'varselbjelle'}
+            id={desktopVarslerKnappId}
             ariaLabel={ariaLabel}
         >
             <VarselIkon isOpen={isOpen} antallUleste={varsler.uleste} />
