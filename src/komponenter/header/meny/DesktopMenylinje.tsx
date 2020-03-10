@@ -1,24 +1,19 @@
 import React from 'react';
 import BEMHelper from '../../../utils/bem';
-import { Language } from '../../../reducer/language-duck';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import Sok from './sok/Sok';
-import MinsideLenke from './minside-lenke/MinsideLenke';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import Varselbjelle from './varsel/Varselbjelle';
 import VarselVisning from './varsel/varselvisning/Varselvisning';
 import './DesktopMenylinje.less';
+import { SokDropdown } from './ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
 import { HovedmenyDesktop } from './ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
+import MinsideMenyDesktop from './ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
 
 const desktopMenylinje = BEMHelper('desktopmeny');
 
-interface Props {
-    language: Language;
-}
-
-const DesktopMenylinje = ({ language }: Props) => {
+const DesktopMenylinje = () => {
     return (
         <nav className={desktopMenylinje.className} aria-label="Hovedmeny">
             <div className={desktopMenylinje.element('content')}>
@@ -28,25 +23,21 @@ const DesktopMenylinje = ({ language }: Props) => {
                         height="88"
                         classname={desktopMenylinje.element('nav-brand')}
                     />
-                    {(language === Language.NORSK ||
-                        language === Language.ENGELSK) && <HovedmenyDesktop />}
-                    <Sok />
+                    <HovedmenyDesktop />
+                    <SokDropdown />
+                    <span className={desktopMenylinje.element('spacer')} />
                     <InnloggingsstatusProvider>
                         <>
-                            <div className="media-lg-desktop minsidelenke-varselbjelle">
-                                <MinsideLenke tabindex={true} />
-                                <VarselinnboksProvider>
-                                    <Varselbjelle tabindex={true}>
-                                        {clicked =>
-                                            clicked && (
-                                                <VarselVisning
-                                                    tabIndex={true}
-                                                />
-                                            )
-                                        }
-                                    </Varselbjelle>
-                                </VarselinnboksProvider>
-                            </div>
+                            <VarselinnboksProvider>
+                                <Varselbjelle>
+                                    {clicked =>
+                                        clicked && (
+                                            <VarselVisning tabIndex={true} />
+                                        )
+                                    }
+                                </Varselbjelle>
+                            </VarselinnboksProvider>
+                            <MinsideMenyDesktop />
                             <LoggInnKnapp />
                         </>
                     </InnloggingsstatusProvider>

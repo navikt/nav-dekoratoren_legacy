@@ -1,4 +1,3 @@
-import Lenke from 'nav-frontend-lenker';
 import Environment from '../../../../../../../utils/Environment';
 import Tekst from '../../../../../../../tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
@@ -8,6 +7,9 @@ import KbNav, {
     NaviGroup,
 } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
 import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
+import { GACategory } from '../../../../../../../utils/google-analytics';
+import { LenkeMedGA } from '../../../../../../LenkeMedGA';
+import './Toppseksjon.less';
 
 interface Props {
     classname: string;
@@ -19,17 +21,22 @@ export const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
 
     return (
         <div className={cls.element('topp-seksjon')}>
-            <Lenke
+            <LenkeMedGA
                 href={Environment.XP_BASE_URL}
                 className={cls.element('topp-seksjon-lenke')}
-                id={KbNav.getKbId(NaviGroup.DesktopHeaderDropdown, {
+                id={KbNav.getKbId(NaviGroup.DesktopHovedmeny, {
                     col: 0,
                     row: 1,
                     sub: 0,
                 })}
+                gaEventArgs={{
+                    category: GACategory.Meny,
+                    action: `hovedmeny/forsidelenke`,
+                    label: Environment.XP_BASE_URL,
+                }}
             >
                 <Tekst id={'til-forside'} />
-            </Lenke>
+            </LenkeMedGA>
             <Systemtittel className={cls.element('topp-seksjon-tittel')}>
                 <Tekst id={`rolle-${arbeidsflate.toLowerCase()}`} />
             </Systemtittel>

@@ -12,19 +12,19 @@ export const spraaklenker: Spraaklenke[] = [
     {
         lenketekst: 'Norske sider',
         url: '/no/person',
-        testurl: '/dekoratoren/person/no/',
+        testurl: '/dekoratoren/no/person',
         lang: Language.NORSK,
     },
     {
         lenketekst: 'English pages',
-        url: '/en/Home',
-        testurl: '/dekoratoren/person/en/',
+        url: '/en/home',
+        testurl: '/dekoratoren/en/home',
         lang: Language.ENGELSK,
     },
     {
         lenketekst: 'Sámegiel skovit',
-        url: '/se/Samegiella',
-        testurl: '/dekoratoren/person/se/',
+        url: '/se/samegiella',
+        testurl: '/dekoratoren/se/samegiella',
         lang: Language.SAMISK,
     },
 ];

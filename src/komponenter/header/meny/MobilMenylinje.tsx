@@ -10,7 +10,6 @@ import './MobilMenylinje.less';
 import { verifyWindowObj } from '../../../utils/Environment';
 import { tabletview } from '../../../styling-mediaquery';
 import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
-import MenyBakgrunn from './ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
 import { Language } from '../../../reducer/language-duck';
 
 const mobilClass = BEMHelper('mobilmeny');
@@ -64,7 +63,6 @@ const MobilMenylinje = ({ language }: Props) => {
                         <InnloggingsstatusProvider>
                             <LoggInnKnapp />
                         </InnloggingsstatusProvider>
-                        <MenyBakgrunn className={'mobilmeny'} />
                     </div>
                 </div>
             </div>

@@ -246,78 +246,65 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                 this.handleSubmit(event, URL);
                             }}
                         >
-                            <>
-                                <div className="sok-wrapper">
-                                    <div className="sok-container">
-                                        <div className="sok-input-resultat">
-                                            <Input
-                                                {...getInputProps()}
-                                                className={klassenavn}
-                                                placeholder={finnTekst(
-                                                    'sok-input-placeholder',
-                                                    language
-                                                )}
-                                                label={finnTekst(
-                                                    'sok-input-label',
-                                                    language
-                                                )}
-                                                aria-label={finnTekst(
-                                                    'sok-input-label',
-                                                    language
-                                                )}
-                                                id={
-                                                    'desktop-decorator-sok-input'
-                                                }
-                                            />
-                                            <ul
-                                                className="sokeresultat-liste"
-                                                {...getMenuProps()}
-                                            >
-                                                {isOpen &&
-                                                inputValue !== '' &&
-                                                items
-                                                    ? items
-                                                          .slice(
-                                                              0,
-                                                              predefinedlistview +
-                                                                  1
-                                                          )
-                                                          .map(
-                                                              (item, index) => (
-                                                                  <li
-                                                                      {...getItemProps(
-                                                                          {
-                                                                              key: index,
-                                                                              index,
-                                                                              item,
-                                                                          }
-                                                                      )}
-                                                                      style={this.cssIndex(
-                                                                          index
-                                                                      )}
-                                                                  >
-                                                                      <SokeforslagIngress
-                                                                          className="sok-resultat-listItem"
-                                                                          displayName={
-                                                                              item.displayName
-                                                                          }
-                                                                      />
-                                                                      <Sokeforslagtext
-                                                                          highlight={
-                                                                              item.highlight
-                                                                          }
-                                                                      />
-                                                                  </li>
-                                                              )
-                                                          )
-                                                    : null}
-                                            </ul>
-                                        </div>
-                                        <DesktopSokknapp />
-                                        <Sokknapp />
-                                    </div>
+                            <div className="sok-container">
+                                <div className="sok-input-resultat">
+                                    <Input
+                                        {...getInputProps()}
+                                        className={klassenavn}
+                                        placeholder={finnTekst(
+                                            'sok-input-placeholder',
+                                            language
+                                        )}
+                                        label={finnTekst(
+                                            'sok-input-label',
+                                            language
+                                        )}
+                                        aria-label={finnTekst(
+                                            'sok-input-label',
+                                            language
+                                        )}
+                                        id={'desktop-decorator-sok-input'}
+                                    />
+                                    <ul
+                                        className="sokeresultat-liste"
+                                        {...getMenuProps()}
+                                    >
+                                        {isOpen && inputValue !== '' && items
+                                            ? items
+                                                  .slice(
+                                                      0,
+                                                      predefinedlistview + 1
+                                                  )
+                                                  .map((item, index) => (
+                                                      <li
+                                                          {...getItemProps({
+                                                              key: index,
+                                                              index,
+                                                              item,
+                                                          })}
+                                                          style={this.cssIndex(
+                                                              index
+                                                          )}
+                                                      >
+                                                          <SokeforslagIngress
+                                                              className="sok-resultat-listItem"
+                                                              displayName={
+                                                                  item.displayName
+                                                              }
+                                                          />
+                                                          <Sokeforslagtext
+                                                              highlight={
+                                                                  item.highlight
+                                                              }
+                                                          />
+                                                      </li>
+                                                  ))
+                                            : null}
+                                    </ul>
                                 </div>
-                            </>
+                                <DesktopSokknapp />
+                                <Sokknapp />
+                            </div>
                         </form>
                     );
                 }}

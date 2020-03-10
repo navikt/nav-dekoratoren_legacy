@@ -1,6 +1,5 @@
 import React from 'react';
 import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
-import HamburgerIkon from '../../../../../ikoner/meny/HamburgerIkon';
 import {
     GACategory,
     triggerGaEvent,
@@ -9,27 +8,41 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../reducer/reducer';
 import { Status } from '../../../../../api/api';
 import { Undertittel } from 'nav-frontend-typografi';
-import { HovedmenyDropdown } from './meny-dropdown/HovedmenyDropdown';
-import './HovedmenyDesktop.less';
-import { getMenuNode } from '../../../../../utils/meny-storage-utils';
+import { HovedmenyDropdown } from './hovedmeny-dropdown/HovedmenyDropdown';
+import {
+    getHovedmenyNode,
+} from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
-import { Menyknapp } from '../meny-knapp/Menyknapp';
 import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
+import HamburgerIkon from '../meny-knapper/ikoner/hamburger-ikon/HamburgerIkon';
+import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
+import './HovedmenyDesktop.less';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
-    meny: state.menypunkt,
+    menyPunkter: state.menypunkt,
     language: state.language.language,
     isOpen: state.dropdownToggles.hovedmeny,
 });
 
-const classname = 'hovedmeny-desktop';
-export const hovedmenyDesktopClassname = classname;
+const classname = 'desktop-hovedmeny';
+export const desktopHovedmenyKnappId = `${classname}-knapp-id`;
 
 export const HovedmenyDesktop = () => {
+    const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(
+        stateSelector
+    );
     const dispatch = useDispatch();
-    const { arbeidsflate, meny, language, isOpen } = useSelector(stateSelector);
+
+    const hovedmenyPunkter = getHovedmenyNode(
+        menyPunkter.data,
+        language,
+        arbeidsflate
+    );
+    if (!hovedmenyPunkter?.hasChildren) {
+        return null;
+    }
 
     const toggleMenu = () => {
         triggerGaEvent({
@@ -39,39 +52,39 @@ export const HovedmenyDesktop = () => {
         dispatch(toggleHovedmeny());
     };
 
-    const menyKnapp = (
-        <Menyknapp
+    const knapp = (
+        <MenylinjeKnapp
             toggleMenu={toggleMenu}
-            clicked={isOpen}
+            isOpen={isOpen}
             classname={classname}
+            id={desktopHovedmenyKnappId}
+            ariaLabel={'Hovedmenyknapp'}
         >
-            <HamburgerIkon ikonClass="hamburger-ikon" />
+            <HamburgerIkon isOpen={isOpen} />
             <Undertittel>
                 <Tekst id="meny-knapp" />
             </Undertittel>
-        </Menyknapp>
+        </MenylinjeKnapp>
     );
-
-    const dropdownInnhold =
-        meny.status === Status.OK ? (
-            <HovedmenyDropdown
-                classname={classname}
-                arbeidsflate={arbeidsflate}
-                language={language}
-                menyLenker={getMenuNode(meny.data, language, arbeidsflate)}
-                isOpen={isOpen}
-            />
-        ) : (
-            <MenySpinner />
-        );
 
     return (
         <EkspanderbarMeny
-            classname={classname}
             isOpen={isOpen}
-            menyKnapp={menyKnapp}
+            menyKnapp={knapp}
+            classname={classname}
+            id={classname}
         >
-            {dropdownInnhold}
+            {menyPunkter.status === Status.OK ? (
+                <HovedmenyDropdown
+                    classname={classname}
+                    arbeidsflate={arbeidsflate}
+                    language={language}
+                    menyLenker={hovedmenyPunkter}
+                    isOpen={isOpen}
+                />
+            ) : (
+                <MenySpinner />
+            )}
         </EkspanderbarMeny>
     );
 };

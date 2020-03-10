@@ -1,6 +1,6 @@
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
-import { Meny as menypunkterData } from '../reducer/menu-duck';
+import { MenyNode as menypunkterData } from '../reducer/menu-duck';
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',
@@ -24,6 +24,7 @@ export enum ActionType {
     TOGGLE_HOVEDMENY = 'TOGGLE_HOVEDMENY',
     TOGGLE_MINSIDE_MENY = 'TOGGLE_MINSIDE_MENY',
     TOGGLE_SOK = 'TOGGLE_SOK',
+    TOGGLE_VARSLER = 'TOGGLE_VARSLER',
     TOGGLE_LUKK_ALLE = 'TOGGLE_LUKK_ALLE',
 }
 
@@ -111,6 +112,10 @@ export interface ToggleSok {
     type: ActionType.TOGGLE_SOK;
 }
 
+export interface ToggleVarsler {
+    type: ActionType.TOGGLE_VARSLER;
+}
+
 export interface ToggleLukkAlle {
     type: ActionType.TOGGLE_LUKK_ALLE;
 }
@@ -136,4 +141,5 @@ export type Handling =
     | ToggleHovedmeny
     | ToggleMinsideMeny
     | ToggleSok
+    | ToggleVarsler
     | ToggleLukkAlle;
