@@ -35,24 +35,22 @@ const FooterBottom = ({ classname }: Props) => {
                         <Tekst id="footer-arbeids-og-veldferdsetaten" />
                     </Normaltekst>
                     <ul className="bottom-lenke">
-                        {lenker.map(lenke => {
-                            return (
-                                <li key={lenke.lenketekst}>
-                                    <Normaltekst>
-                                        <LenkeMedGA
-                                            href={lenke.url}
-                                            gaEventArgs={{
-                                                category: GACategory.Footer,
-                                                action: `bunn/${lenke.lenketekst}`,
-                                                label: lenke.url,
-                                            }}
-                                        >
-                                            {lenke.lenketekst}
-                                        </LenkeMedGA>
-                                    </Normaltekst>
-                                </li>
-                            );
-                        })}
+                        {lenker.map(lenke => (
+                            <li key={lenke.lenketekst}>
+                                <Normaltekst>
+                                    <LenkeMedGA
+                                        href={lenke.url}
+                                        gaEventArgs={{
+                                            category: GACategory.Footer,
+                                            action: `bunn/${lenke.lenketekst}`,
+                                            label: lenke.url,
+                                        }}
+                                    >
+                                        {lenke.lenketekst}
+                                    </LenkeMedGA>
+                                </Normaltekst>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>

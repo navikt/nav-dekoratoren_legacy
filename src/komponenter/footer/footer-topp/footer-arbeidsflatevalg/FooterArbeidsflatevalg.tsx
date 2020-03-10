@@ -40,57 +40,37 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                     >
                         {arbeidsflatevalgLenker.map(
                             (lenke: ArbeidsflateLenke) => {
-                                /* const stikkord = finnTekst(
-                                    lenke.stikkordId,
-                                    Language.NORSK
-                                )
-                                    .split('|')
-                                    .map((ord, index) => (
-                                        <li key={index}>
-                                            <span className={'bullet'} />
-                                            {ord}
-                                        </li>
-                                    ));
-                                 */
-                                return (
-                                    <li key={lenke.key}>
-                                        <Lenkepanel
-                                            href={lenke.url}
-                                            tittelProps="normaltekst"
-                                            key={lenke.key}
-                                            border
-                                        >
-                                            <div className="arbeidsflatevalg-tekst">
-                                                <LenkeMedGA
-                                                    href={lenke.url}
-                                                    onClick={event => {
-                                                        event.preventDefault();
-                                                        settArbeidsflate(lenke);
-                                                    }}
-                                                    gaEventArgs={{
-                                                        category:
-                                                            GACategory.Header,
-                                                        action:
-                                                            'arbeidsflate-valg',
-                                                    }}
-                                                >
-                                                    <Undertittel>
-                                                        <Tekst
-                                                            id={
-                                                                lenke.lenkeTekstId
-                                                            }
-                                                        />
-                                                    </Undertittel>
+                                <li key={lenke.key}>
+                                    <Lenkepanel
+                                        href={lenke.url}
+                                        tittelProps="normaltekst"
+                                        key={lenke.key}
+                                        border
+                                    >
+                                        <div className="arbeidsflatevalg-tekst">
+                                            <LenkeMedGA
+                                                href={lenke.url}
+                                                onClick={event => {
+                                                    event.preventDefault();
+                                                    settArbeidsflate(lenke);
+                                                }}
+                                                gaEventArgs={{
+                                                    category: GACategory.Header,
+                                                    action: 'arbeidsflate-valg',
+                                                }}
+                                            >
+                                                <Undertittel>
                                                     <Tekst
-                                                        id={
-                                                            lenke.footerStikkordId
-                                                        }
+                                                        id={lenke.lenkeTekstId}
                                                     />
-                                                </LenkeMedGA>
-                                            </div>
-                                        </Lenkepanel>
-                                    </li>
-                                );
+                                                </Undertittel>
+                                                <Tekst
+                                                    id={lenke.footerStikkordId}
+                                                />
+                                            </LenkeMedGA>
+                                        </div>
+                                    </Lenkepanel>
+                                </li>;
                             }
                         )}
                     </ul>

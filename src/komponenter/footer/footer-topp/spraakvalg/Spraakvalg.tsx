@@ -34,27 +34,21 @@ const Spraakvalg = () => {
                 <Tekst id="footer-languages-overskrift" />
             </Undertittel>
             <ul aria-labelledby="spraaklenker-overskrift">
-                {spraklenker.map(lenke => {
-                    return (
-                        <li key={lenke.lang}>
-                            <Normaltekst>
-                                <LenkeMedGA
-                                    href={
-                                        erDekoratoren
-                                            ? lenke.testurl
-                                            : lenke.url
-                                    }
-                                    gaEventArgs={{
-                                        category: GACategory.Footer,
-                                        action: `språkvalg/${lenke.lang}`,
-                                    }}
-                                >
-                                    {lenke.lenketekst}
-                                </LenkeMedGA>
-                            </Normaltekst>
-                        </li>
-                    );
-                })}
+                {spraklenker.map(lenke => (
+                    <li key={lenke.lang}>
+                        <Normaltekst>
+                            <LenkeMedGA
+                                href={erDekoratoren ? lenke.testurl : lenke.url}
+                                gaEventArgs={{
+                                    category: GACategory.Footer,
+                                    action: `språkvalg/${lenke.lang}`,
+                                }}
+                            >
+                                {lenke.lenketekst}
+                            </LenkeMedGA>
+                        </Normaltekst>
+                    </li>
+                ))}
             </ul>
         </>
     );

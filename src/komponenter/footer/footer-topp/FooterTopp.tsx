@@ -58,24 +58,22 @@ const FooterTopp = ({ classname }: Props) => {
                         <Tekst id="footer-kontakt-overskrift" />
                     </Undertittel>
                     <ul aria-labelledby="venstrelenker-overskrift">
-                        {venstrelenker.map(lenke => {
-                            return (
-                                <li key={lenke.lenketekst}>
-                                    <Normaltekst>
-                                        <LenkeMedGA
-                                            href={lenke.url}
-                                            gaEventArgs={{
-                                                category: GACategory.Footer,
-                                                action: `kontakt/${lenke.lenketekst}`,
-                                                label: lenke.url,
-                                            }}
-                                        >
-                                            {lenke.lenketekst}
-                                        </LenkeMedGA>
-                                    </Normaltekst>
-                                </li>
-                            );
-                        })}
+                        {venstrelenker.map(lenke => (
+                            <li key={lenke.lenketekst}>
+                                <Normaltekst>
+                                    <LenkeMedGA
+                                        href={lenke.url}
+                                        gaEventArgs={{
+                                            category: GACategory.Footer,
+                                            action: `kontakt/${lenke.lenketekst}`,
+                                            label: lenke.url,
+                                        }}
+                                    >
+                                        {lenke.lenketekst}
+                                    </LenkeMedGA>
+                                </Normaltekst>
+                            </li>
+                        ))}
                         <li>
                             <Lenke href="#" role="button" onClick={openModal}>
                                 <Tekst id="footer-del-skjerm" />
@@ -100,24 +98,22 @@ const FooterTopp = ({ classname }: Props) => {
                         <Tekst id="footer-navsamfunn-overskrift" />
                     </Undertittel>
                     <ul aria-labelledby="hoyrelenker-overskrift">
-                        {hoyrelenker.map(lenke => {
-                            return (
-                                <li key={lenke.lenketekst}>
-                                    <Normaltekst>
-                                        <LenkeMedGA
-                                            href={lenke.url}
-                                            gaEventArgs={{
-                                                category: GACategory.Footer,
-                                                action: `nav-og-samfunn/${lenke.lenketekst}`,
-                                                label: lenke.url,
-                                            }}
-                                        >
-                                            {lenke.lenketekst}
-                                        </LenkeMedGA>
-                                    </Normaltekst>
-                                </li>
-                            );
-                        })}
+                        {hoyrelenker.map(lenke => (
+                            <li key={lenke.lenketekst}>
+                                <Normaltekst>
+                                    <LenkeMedGA
+                                        href={lenke.url}
+                                        gaEventArgs={{
+                                            category: GACategory.Footer,
+                                            action: `nav-og-samfunn/${lenke.lenketekst}`,
+                                            label: lenke.url,
+                                        }}
+                                    >
+                                        {lenke.lenketekst}
+                                    </LenkeMedGA>
+                                </Normaltekst>
+                            </li>
+                        ))}
                     </ul>
                 </div>
                 <div className="menylenker-seksjon arbeidsflate">
