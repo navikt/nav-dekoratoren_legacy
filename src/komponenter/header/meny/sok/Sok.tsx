@@ -248,23 +248,28 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         >
                             <div className="sok-container">
                                 <div className="sok-input-resultat">
-                                    <Input
-                                        {...getInputProps()}
-                                        className={klassenavn}
-                                        placeholder={finnTekst(
-                                            'sok-input-placeholder',
-                                            language
-                                        )}
-                                        label={finnTekst(
-                                            'sok-input-label',
-                                            language
-                                        )}
-                                        aria-label={finnTekst(
-                                            'sok-input-label',
-                                            language
-                                        )}
-                                        id={'desktop-decorator-sok-input'}
-                                    />
+                                    <h2>Søk</h2>
+                                    <div className="sok-input-container">
+                                        <Input
+                                            {...getInputProps()}
+                                            className={klassenavn}
+                                            placeholder={finnTekst(
+                                                'sok-input-placeholder',
+                                                language
+                                            )}
+                                            label={finnTekst(
+                                                'sok-input-label',
+                                                language
+                                            )}
+                                            aria-label={finnTekst(
+                                                'sok-input-label',
+                                                language
+                                            )}
+                                            id={'desktop-decorator-sok-input'}
+                                        />
+                                        <DesktopSokknapp />
+                                        <Sokknapp />
+                                    </div>
                                     <ul
                                         className="sokeresultat-liste"
                                         {...getMenuProps()}
@@ -302,8 +307,6 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                             : null}
                                     </ul>
                                 </div>
-                                <DesktopSokknapp />
-                                <Sokknapp />
                             </div>
                         </form>
                     );

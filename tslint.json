@@ -24,14 +24,7 @@
         "no-arg": true,
         "no-bitwise": true,
         "no-console": {
-            "options": [
-                true,
-                "debug",
-                "info",
-                "time",
-                "timeEnd",
-                "trace"
-            ],
+            "options": [true, "debug", "info", "time", "timeEnd", "trace"],
             "severity": "warning"
         },
         "no-consecutive-blank-lines": false,

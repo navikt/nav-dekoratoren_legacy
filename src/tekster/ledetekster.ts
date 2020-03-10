@@ -99,7 +99,7 @@ export const ledetekster: { [key: string]: string } = {
     'varsler-nye': 'nye',
     'varsler-nye-en': 'new',
     'varsler-nye-se': 'nye',
-    'varsler': 'Varsler',
+    varsler: 'Varsler',
     'varsler-en': 'Varsler',
     'varsler-se': 'Varsler',
     'til-forside': 'Til forsiden',

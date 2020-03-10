@@ -3,7 +3,7 @@ import { buildNaviGraphAndGetRootNode } from './kb-navi-graph-builder';
 export enum NaviGroup {
     Hovedmeny = 'desktop-meny-lenke',
     MinsideMeny = 'desktop-minside-lenke',
-    Varsler = 'desktop-varsel-lenke'
+    Varsler = 'desktop-varsel-lenke',
 }
 
 export type NaviIndex = {

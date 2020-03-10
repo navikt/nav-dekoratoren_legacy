@@ -158,9 +158,9 @@ class Varselvisning extends React.Component<Props, State> {
                             <Tekst id={'varsler-visalle'} />
                             {antallUlesteVarsler > 0
                                 ? ` (${antallUlesteVarsler} ${finnTekst(
-                                    'varsler-nye',
-                                    this.props.language
-                                )})`
+                                      'varsler-nye',
+                                      this.props.language
+                                  )})`
                                 : ''}
                         </LenkeMedGA>
                     </div>

@@ -8,7 +8,10 @@ import { LenkeMedGA } from '../../../../../LenkeMedGA';
 import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
 import { Undertittel } from 'nav-frontend-typografi';
-import { getKbId, NaviGroup } from '../../../../../../utils/keyboard-navigation/kb-navigation';
+import {
+    getKbId,
+    NaviGroup,
+} from '../../../../../../utils/keyboard-navigation/kb-navigation';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
@@ -23,7 +26,7 @@ const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => (
     <div className="vis-alle-lenke">
         <LenkeMedGA
             href={Environment.API_VARSELINNBOKS_URL}
-            id={getKbId(NaviGroup.Varsler, {col: 0, row: index, sub: 0})}
+            id={getKbId(NaviGroup.Varsler, { col: 0, row: index, sub: 0 })}
             tabIndex={0}
             gaEventArgs={{
                 category: GACategory.Header,
@@ -38,14 +41,14 @@ const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => (
 );
 
 export const Varselvisning = () => {
-    const { varsler, varslerAntall, varslerUleste, language } = useSelector(stateSelector);
+    const { varsler, varslerAntall, varslerUleste, language } = useSelector(
+        stateSelector
+    );
 
-    const nyeVarslerMsg = varslerUleste > 0
-        ? ` (${varslerUleste} ${finnTekst(
-            'varsler-nye',
-            language,
-        )})`
-        : '';
+    const nyeVarslerMsg =
+        varslerUleste > 0
+            ? ` (${varslerUleste} ${finnTekst('varsler-nye', language)})`
+            : '';
     const visAlleVarslerLenke = varslerAntall > 5;
 
     return (
@@ -53,9 +56,9 @@ export const Varselvisning = () => {
             <Undertittel>
                 <Tekst id={'varsler'} />
             </Undertittel>
-            { visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
+            {visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
             <VarslerParsed varsler={varsler} />
-            { visAlleVarslerLenke && alleVarslerLenke(1, nyeVarslerMsg)}
+            {visAlleVarslerLenke && alleVarslerLenke(1, nyeVarslerMsg)}
         </div>
     );
 };

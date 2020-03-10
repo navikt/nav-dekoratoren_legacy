@@ -29,46 +29,8 @@
         width: 100%;
 
         .sok-input {
-            margin-bottom: 0;
-            input {
-                border-radius: 0;
-                padding: 2rem 1rem 1.5rem;
-                background-color: @navBlaDarken60;
-                border: 2px solid @navBlaLighten60;
-                color: white;
-
-                &:focus,
-                &:active {
-                    border: 2px solid @navBlaLighten60;
-                }
-
-                &::-webkit-input-placeholder,
-                &::-moz-placeholder,
-                &:-ms-input-placeholder,
-                &:-moz-placeholder {
-                    color: white;
-                }
-            }
-
-            input[type='search'] {
-                box-sizing: border-box;
-            }
-
-            input[placeholder] {
-                color: white;
-                margin: 0;
-                font-size: 1.375rem;
-                line-height: 1.625rem;
-                font-weight: 300;
-            }
-
             .skjemaelement__label {
-                opacity: 0;
-                position: absolute;
-                line-height: 0;
-                height: 0;
-                width: 0;
-                color: transparent;
+                display: none;
             }
         }
 
@@ -76,7 +38,6 @@
             list-style: none;
             padding: 0;
             z-index: 1020;
-            background-color: @navBlaDarken60;
             width: 100%;
             overflow: hidden;
             margin: 0;
@@ -84,28 +45,10 @@
 
             li {
                 padding: 1rem;
-                background-color: @navBlaDarken60;
                 color: white;
-
-                &:first-child {
-                    border-top: 2px solid white;
-                }
-
-                &:last-child {
-                    border-bottom: 2px solid white;
-                    border-left: 2px solid white;
-                    border-right: 2px solid white;
-                }
-
-                &:not(:last-child) {
-                    border-left: 2px solid white;
-                    border-right: 2px solid white;
-                    border-bottom: none;
-                }
             }
 
             li[aria-selected='true'] {
-                background-color: @navBlaLighten20;
                 font-weight: bold;
             }
 
@@ -141,14 +84,15 @@
         }
     }
 
+    .sok-input-container {
+        display: flex;
+    }
+
     @media (min-width: @tabletLimitWidth) {
         .sok .sok-container {
             width: auto;
             justify-content: center;
-            margin-bottom: 0;
-            margin-top: 1rem;
             align-items: flex-start;
-            min-height: 50vh;
             .sok-ikon {
                 position: relative;
                 top: 0.35rem;
@@ -158,71 +102,23 @@
         }
 
         .sok-input-resultat {
-            width: auto;
-
             .sok-input {
-                margin-right: 0;
-                width: 20rem;
-                input {
-                    margin-right: 0.5rem;
-                    background-color: white;
-                    color: black;
-                    border-radius: 2px;
-                    -webkit-appearance: none;
-                    -moz-appearance: none;
-                    padding: 0.5rem;
-                    border: 1px solid #78706a;
-                    box-sizing: border-box;
-                    line-height: 1.37rem;
-
-                    &:focus,
-                    &:active {
-                        border: initial;
-                    }
-
-                    &::-webkit-input-placeholder,
-                    &::-moz-placeholder,
-                    &:-ms-input-placeholder,
-                    &:-moz-placeholder {
-                        color: black;
-                    }
-
-                    &.engelsk {
-                        width: 18.2rem;
-                    }
-                }
-
-                input[placeholder] {
-                    color: black;
-                    font-size: 1.1rem;
-                }
+                margin-right: 0.5rem;
+                width: 90%;
             }
 
             .sokeresultat-liste {
                 list-style: none;
-                z-index: 10;
                 position: relative;
-                background-color: white;
-                overflow-y: scroll;
-                overflow-x: hidden;
-                margin: 0;
-                width: 20rem;
-                max-height: 500px;
-                box-shadow: 0px 2.8px 2.2px rgba(0, 0, 0, 0.034),
-                    0px 6.7px 5.3px rgba(0, 0, 0, 0.048),
-                    0px 12.5px 10px rgba(0, 0, 0, 0.06),
-                    0px 22.3px 17.9px rgba(0, 0, 0, 0.072),
-                    0px 41.8px 33.4px rgba(0, 0, 0, 0.086),
-                    0px 100px 80px rgba(0, 0, 0, 0.12);
-                //top: 120%;
-                border-radius: 1px;
 
                 li {
                     padding: 1rem;
                     background-color: white;
                     color: black;
                     font-weight: normal;
-                    border: #b7b1a9 1px solid;
+                    border-bottom: #b7b1a9 1px solid;
+                    text-align: left;
+                    cursor: pointer;
                     animation-name: animateIn;
                     animation-duration: 150ms;
                     animation-delay: calc(var(--listmap) * 50ms);
@@ -235,13 +131,7 @@
                         font-weight: bold;
                     }
 
-                    &:first-child,
-                    &:last-child,
-                    &:not(:last-child) {
-                        border: #b7b1a9 1px solid;
-                    }
-
-                    &:not(:last-child) {
+                    &:last-child {
                         border-bottom: none;
                     }
                 }
@@ -258,15 +148,7 @@
         }
 
         .sok-input-mobil-submit {
-            position: absolute;
-            top: 0.35rem;
-            right: 0.2rem;
-            background-color: white;
-            border: none;
-
-            &:focus {
-                outline: 3px solid @fokusFarge;
-            }
+            display: none;
         }
     }
 }
