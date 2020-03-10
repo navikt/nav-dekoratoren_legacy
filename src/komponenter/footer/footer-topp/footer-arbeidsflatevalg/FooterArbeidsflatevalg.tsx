@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../reducer/reducer';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import Lenkepanel from 'nav-frontend-lenkepanel/lib';
 import BEMHelper from '../../../../utils/bem';
 import { GACategory } from '../../../../utils/google-analytics';
 import { LenkeMedGA } from '../../../LenkeMedGA';
 import { finnArbeidsflate } from '../../../../reducer/arbeidsflate-duck';
 import { Language } from '../../../../reducer/language-duck';
+import Tekst from '../../../../tekster/finn-tekst';
 import { oppdaterSessionStorage } from '../../../../utils/meny-storage-utils';
 import {
     ArbeidsflateLenke,
     arbeidsflateLenker,
-    getArbeidsflatelenker,
 } from '../../../header/arbeidsflatemeny/arbeidsflate-lenker';
-import Lenkepanel from 'nav-frontend-lenkepanel/lib';
+import { erNavDekoratoren } from '../../../../utils/Environment';
 
 interface Props {
     classname: string;
@@ -29,13 +30,9 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
 
     const dispatch = useDispatch();
     const { arbeidsflate, language } = useSelector(stateSelector);
-    const [arbeidsflatevalgLenker, setArbeidsflatevalgLenker] = useState<
-        ArbeidsflateLenke[]
-    >([arbeidsflateLenker[1], arbeidsflateLenker[2]]);
-
-    useEffect(() => {
-        setArbeidsflatevalgLenker(getArbeidsflatelenker(arbeidsflate));
-    }, [arbeidsflate]);
+    const arbeidsflatevalgLenker = arbeidsflateLenker().filter(
+        lenke => lenke.key !== arbeidsflate
+    );
 
     return (
         <section className={cls.element('menylinje-arbeidsflatevalg')}>
@@ -48,11 +45,11 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                         {arbeidsflatevalgLenker.map(
                             (lenke: ArbeidsflateLenke) => {
                                 return (
-                                    <li>
+                                    <li key={lenke.tittelId}>
                                         <Lenkepanel
                                             href={lenke.url}
                                             tittelProps="normaltekst"
-                                            key={lenke.tittel}
+                                            key={lenke.key}
                                             border
                                         >
                                             <Normaltekst className="arbeidsflatevalg-tekst">
@@ -66,6 +63,12 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                                         dispatch(
                                                             finnArbeidsflate()
                                                         );
+                                                        if (
+                                                            !erNavDekoratoren()
+                                                        ) {
+                                                            window.location.href =
+                                                                lenke.url;
+                                                        }
                                                     }}
                                                     gaEventArgs={{
                                                         category:
@@ -75,7 +78,9 @@ const FooterArbeidsflatevalg = ({ classname }: Props) => {
                                                     }}
                                                 >
                                                     <Undertittel>
-                                                        {lenke.tittel}
+                                                        <Tekst
+                                                            id={lenke.tittelId}
+                                                        />
                                                     </Undertittel>
                                                     <Normaltekst>
                                                         {lenke.beskrivelse}

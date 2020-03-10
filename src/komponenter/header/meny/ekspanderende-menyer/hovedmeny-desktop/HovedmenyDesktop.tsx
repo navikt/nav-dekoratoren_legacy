@@ -9,9 +9,7 @@ import { AppState } from '../../../../../reducer/reducer';
 import { Status } from '../../../../../api/api';
 import { Undertittel } from 'nav-frontend-typografi';
 import { HovedmenyDropdown } from './hovedmeny-dropdown/HovedmenyDropdown';
-import {
-    getHovedmenyNode,
-} from '../../../../../utils/meny-storage-utils';
+import { getHovedmenyNode } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
