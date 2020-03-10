@@ -6,23 +6,39 @@ import BEMHelper from '../../../../../../../utils/bem';
 import KbNav, {
     NaviGroup,
 } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
-import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
 import { GACategory } from '../../../../../../../utils/google-analytics';
 import { LenkeMedGA } from '../../../../../../LenkeMedGA';
 import './Toppseksjon.less';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../../../../../../reducer/reducer';
+import {
+    settArbeidsflateOgRedirect,
+    getArbeidsflateContext,
+} from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
+import { finnArbeidsflate } from '../../../../../../../reducer/arbeidsflate-duck';
 
 interface Props {
     classname: string;
-    arbeidsflate: MenuValue;
 }
 
-export const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
+export const Toppseksjon = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
+    const dispatch = useDispatch();
+    const { arbeidsflate } = useSelector((state: AppState) => ({
+        arbeidsflate: state.arbeidsflate.status,
+    }));
+    const context = getArbeidsflateContext(arbeidsflate);
 
     return (
         <div className={cls.element('topp-seksjon')}>
             <LenkeMedGA
-                href={Environment.XP_BASE_URL}
+                href={context.url}
+                onClick={event => {
+                    event.preventDefault();
+                    settArbeidsflateOgRedirect(context, () =>
+                        dispatch(finnArbeidsflate())
+                    );
+                }}
                 className={cls.element('topp-seksjon-lenke')}
                 id={KbNav.getKbId(NaviGroup.Hovedmeny, {
                     col: 0,
