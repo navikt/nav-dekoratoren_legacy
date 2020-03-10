@@ -4,7 +4,7 @@ import parse from 'html-react-parser';
 import { AppState } from '../../../../../reducer/reducer';
 import { desktopview, tabletview } from '../../../../../styling-mediaquery';
 import Environment from '../../../../../utils/Environment';
-import './Varselvisning.less';
+import './VarselvisningOld.less';
 import {
     GACategory,
     triggerGaEvent,
@@ -158,9 +158,9 @@ class Varselvisning extends React.Component<Props, State> {
                             <Tekst id={'varsler-visalle'} />
                             {antallUlesteVarsler > 0
                                 ? ` (${antallUlesteVarsler} ${finnTekst(
-                                      'varsler-nye',
-                                      this.props.language
-                                  )})`
+                                    'varsler-nye',
+                                    this.props.language
+                                )})`
                                 : ''}
                         </LenkeMedGA>
                     </div>

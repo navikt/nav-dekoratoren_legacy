@@ -36,7 +36,7 @@ export const Toppseksjon = ({ classname }: Props) => {
                     settArbeidsflate(context);
                 }}
                 className={cls.element('topp-seksjon-lenke')}
-                id={KbNav.getKbId(NaviGroup.DesktopHovedmeny, {
+                id={KbNav.getKbId(NaviGroup.Hovedmeny, {
                     col: 0,
                     row: 1,
                     sub: 0,

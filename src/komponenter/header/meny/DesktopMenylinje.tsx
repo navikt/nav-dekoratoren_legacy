@@ -4,12 +4,11 @@ import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
-import Varselbjelle from './varsel/Varselbjelle';
-import VarselVisning from './varsel/varselvisning/Varselvisning';
 import './DesktopMenylinje.less';
 import { SokDropdown } from './ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
 import { HovedmenyDesktop } from './ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
 import MinsideMenyDesktop from './ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
+import { VarslerDropdown } from './ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
 
 const desktopMenylinje = BEMHelper('desktopmeny');
 
@@ -29,13 +28,7 @@ const DesktopMenylinje = () => {
                     <InnloggingsstatusProvider>
                         <>
                             <VarselinnboksProvider>
-                                <Varselbjelle>
-                                    {clicked =>
-                                        clicked && (
-                                            <VarselVisning tabIndex={true} />
-                                        )
-                                    }
-                                </Varselbjelle>
+                                <VarslerDropdown />
                             </VarselinnboksProvider>
                             <MinsideMenyDesktop />
                             <LoggInnKnapp />

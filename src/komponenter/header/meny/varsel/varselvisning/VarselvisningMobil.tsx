@@ -3,7 +3,7 @@ import BEMHelper from '../../../../../utils/bem';
 import Lukkundermeny from '../../ekspanderende-menyer/hovedmeny-mobil/meny-dropdown/mobil-innhold/Lukkundermeny';
 import VarselVisning from './Varselvisning';
 import TopSeksjon from '../../ekspanderende-menyer/hovedmeny-mobil/meny-dropdown/mobil-innhold/top-seksjon/Topseksjon';
-import './Varselvisning.less';
+import './VarselvisningOld.less';
 
 interface OwnProps {
     visvarsel: boolean;

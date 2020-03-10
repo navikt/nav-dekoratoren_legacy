@@ -40,7 +40,7 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                             stikkord={finnTekst(lenke.stikkordId, language)}
                             className={classname}
                             id={KbNav.getKbId(
-                                NaviGroup.DesktopHovedmeny,
+                                NaviGroup.Hovedmeny,
                                 kbNaviIndex
                             )}
                             onClick={event => {

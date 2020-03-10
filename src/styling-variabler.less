@@ -1,4 +1,5 @@
-@import (reference) '~nav-frontend-core';
+@import (reference) '~nav-frontend-core/less/core';
+@import (reference) '~nav-frontend-lenker-style/src/lenker-style';
 
 //desktop breakpoint width
 @desktopLimitWidth: 1440px;
@@ -27,5 +28,13 @@
 
     &:not(:nth-child(@{cols}n)) {
         margin-right: @margins;
+    }
+}
+
+.lenke-stil() {
+    .lenke;
+    text-decoration: underline;
+    &:hover {
+        text-decoration: none;
     }
 }
