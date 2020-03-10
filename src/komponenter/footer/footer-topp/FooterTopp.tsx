@@ -52,7 +52,7 @@ const FooterTopp = ({ classname }: Props) => {
                 </div>
                 <div className="menylenker-seksjon venstre">
                     <Undertittel
-                        className="venstrelenker-overskrift"
+                        className="menylenker-overskrift"
                         id="venstrelenker-overskrift"
                     >
                         <Tekst id="footer-kontakt-overskrift" />
@@ -94,7 +94,7 @@ const FooterTopp = ({ classname }: Props) => {
                 </div>
                 <div className="menylenker-seksjon hoyre">
                     <Undertittel
-                        className="nav-samfunn-overskrift"
+                        className="menylenker-overskrift"
                         id="hoyrelenker-overskrift"
                     >
                         <Tekst id="footer-navsamfunn-overskrift" />

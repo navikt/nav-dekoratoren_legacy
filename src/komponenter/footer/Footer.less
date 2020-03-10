@@ -3,22 +3,10 @@
 
 .sitefooter {
     width: 100%;
-    border-bottom: @navMorkGra 2px solid;
-    text-align: left;
+
     .lenke {
         &:hover {
             text-decoration: underline;
-        }
-    }
-
-    .lenkepanel {
-        color: white;
-        background-color: @navBlaDarken40;
-        border: 1px solid white;
-        border-radius: 8px;
-        min-height: 125px;
-        .lenke {
-            text-decoration: none;
         }
     }
 
@@ -27,20 +15,10 @@
         color: white;
         background-color: @navBlaDarken40;
 
-        .lenke {
-            color: white;
-
-            &:focus {
-                color: black;
-                background-color: @navBlaLighten80;
-                box-shadow: 0 0 0 2px @navBlaLighten80;
-            }
-        }
-
         .topp-kolonner {
-            .menylenker-seksjon .typo-undertittel {
+            .menylenker-seksjon .menylenker-overskrift {
                 font-weight: bolder;
-                margin-bottom: 0.7rem;
+                margin-bottom: 1.2rem;
             }
 
             .menylenker-seksjon.til-toppen {
@@ -52,6 +30,29 @@
             .menylenker-seksjon.midt,
             .menylenker-seksjon.hoyre {
                 padding-left: 1.2rem;
+            }
+        }
+
+        .lenke {
+            color: white;
+        }
+
+        .lenkepanel {
+            color: white;
+            background-color: @navBlaDarken40;
+            border: 1px solid white;
+            border-radius: 8px;
+
+            &__heading {
+                min-height: 101px;
+            }
+
+            .lenke {
+                text-decoration: none;
+            }
+
+            .typo-undertittel {
+                margin-bottom: 0.6rem;
             }
         }
     }
@@ -84,10 +85,12 @@
                 .menylenker-seksjon.til-toppen {
                     width: 100%;
                     margin-bottom: 2rem;
+                    padding-left: 0;
                 }
 
                 .menylenker-seksjon.venstre {
                     width: 31%;
+                    padding-left: 0;
                 }
                 .menylenker-seksjon.midt,
                 .menylenker-seksjon.hoyre {
@@ -143,21 +146,17 @@
 
     @media (min-width: @desktopLimitWidth) {
         &__menylinje-topp {
-            padding: 1rem 2rem;
+            padding: 1rem 2rem 1.5rem;
 
             .topp-kolonner {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-
                 .menylenker-seksjon.til-toppen {
-                    width: 100%;
-                    margin-bottom: 2rem;
+                    padding-left: 0;
                 }
 
                 .menylenker-seksjon.venstre {
                     width: 24%;
                 }
+
                 .menylenker-seksjon.midt,
                 .menylenker-seksjon.hoyre {
                     width: 23%;
@@ -170,17 +169,11 @@
                 }
 
                 .arbeidsflatevalg-innhold {
-                    margin-bottom: 0;
-
                     .arbeidsflatevalg {
-                        display: flex;
                         flex-direction: column;
-                        // justify-content: space-between;
-                        margin: 0;
 
                         li {
                             width: auto;
-                            // margin-bottom: 0;
                         }
                     }
                 }
@@ -190,6 +183,8 @@
 
     @media (min-width: 1367px) {
         &__menylinje-topp {
+            padding: 2rem;
+
             .topp-kolonner {
                 width: 1300px;
                 margin: 0 auto;
@@ -229,9 +224,11 @@
                 width: 1300px;
                 margin: 0 auto;
                 justify-content: center;
+
                 .bottom-lenker {
                     width: 85%;
                 }
+
                 .bottom-logo {
                     width: 15%;
                     margin-right: 0;

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../reducer/reducer';
-import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import Tekst from '../../../../tekster/finn-tekst';
 import BEMHelper from '../../../../utils/bem';
 import { GACategory } from '../../../../utils/google-analytics';
 import { LenkeMedGA } from '../../../LenkeMedGA';
