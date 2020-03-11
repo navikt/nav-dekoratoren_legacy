@@ -1,6 +1,7 @@
 import Environment from '../../../../utils/Environment';
 
 export interface InputState {
+    loading: boolean;
     selectedInput: string;
     writtenInput: string;
     items: SokeresultatData[];

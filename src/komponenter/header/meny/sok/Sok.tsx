@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppState } from '../../../../reducer/reducer';
 import { connect } from 'react-redux';
-import throttle from 'lodash.throttle';
+import debounce from 'lodash.debounce';
 import Downshift, { DownshiftState, StateChangeOptions } from 'downshift';
 import cls from 'classnames';
 import { Input } from 'nav-frontend-skjema';
@@ -16,6 +16,7 @@ import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
 import Sokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Sokknapp';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 import { Systemtittel } from 'nav-frontend-typografi';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 import './Sok.less';
 
 interface StateProps {
@@ -29,9 +30,10 @@ interface Props {
 const predefinedlistview = 5;
 
 class Sok extends React.Component<StateProps & Props, InputState> {
-    fetchSearchResultThrottled: ReturnType<typeof throttle>;
+    fetchSearchResultThrottled: ReturnType<typeof debounce>;
     ismounted: boolean = false;
     initialState = {
+        loading: false,
         selectedInput: '',
         writtenInput: '',
         items: [defaultData],
@@ -40,7 +42,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     constructor(props: StateProps & Props) {
         super(props);
         this.state = this.initialState;
-        this.fetchSearchResultThrottled = throttle(this.fetchSearchResult, 200);
+        this.fetchSearchResultThrottled = debounce(this.fetchSearchResult, 250);
     }
 
     componentDidMount(): void {
@@ -56,6 +58,12 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     handleValueChange = (input: string) => {
+        if (input) {
+            this.setState({
+                ...this.initialState,
+                loading: true,
+            });
+        }
         if (this.ismounted) {
             this.setState({
                 selectedInput: input,
@@ -82,6 +90,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     tmp.unshift(visAlleTreff(this.state.writtenInput));
                     this.setState({
                         items: tmp,
+                        loading: false,
                     });
                 }
             });
@@ -271,39 +280,48 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                     />
                                     <Sokknapp />
                                 </div>
-                                <ul
-                                    className="sokeresultat-liste"
-                                    {...getMenuProps()}
-                                >
-                                    {isOpen && inputValue !== '' && items
-                                        ? items
-                                              .slice(0, predefinedlistview + 1)
-                                              .map((item, index) => (
-                                                  <li
-                                                      {...getItemProps({
-                                                          key: index,
-                                                          index,
-                                                          item,
-                                                      })}
-                                                      style={this.cssIndex(
-                                                          index
-                                                      )}
-                                                  >
-                                                      <SokeforslagIngress
-                                                          className="sok-resultat-listItem"
-                                                          displayName={
-                                                              item.displayName
-                                                          }
-                                                      />
-                                                      <Sokeforslagtext
-                                                          highlight={
-                                                              item.highlight
-                                                          }
-                                                      />
-                                                  </li>
-                                              ))
-                                        : null}
-                                </ul>
+                                {this.state.loading ? (
+                                    <div className={'sokeresultat-spinner'}>
+                                        <NavFrontendSpinner />
+                                    </div>
+                                ) : (
+                                    <ul
+                                        {...getMenuProps()}
+                                        className="sokeresultat-liste"
+                                    >
+                                        {isOpen && inputValue !== '' && items
+                                            ? items
+                                                  .slice(
+                                                      0,
+                                                      predefinedlistview + 1
+                                                  )
+                                                  .map((item, index) => (
+                                                      <li
+                                                          {...getItemProps({
+                                                              key: index,
+                                                              index,
+                                                              item,
+                                                          })}
+                                                          style={this.cssIndex(
+                                                              index
+                                                          )}
+                                                      >
+                                                          <SokeforslagIngress
+                                                              className="sok-resultat-listItem"
+                                                              displayName={
+                                                                  item.displayName
+                                                              }
+                                                          />
+                                                          <Sokeforslagtext
+                                                              highlight={
+                                                                  item.highlight
+                                                              }
+                                                          />
+                                                      </li>
+                                                  ))
+                                            : null}
+                                    </ul>
+                                )}
                             </div>
                         </div>
                     </form>
