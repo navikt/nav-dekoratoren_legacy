@@ -9,6 +9,7 @@ const LoggutIkonMobil = () => {
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
+            tabIndex={-1}
         >
             <title>loggut.nav.no</title>
             <desc>Logg ut av nav.no</desc>

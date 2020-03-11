@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { toggleHovedmeny } from '../../../../../../../reducer/dropdown-toggle-duck';
 
 interface Props {
-    lukkundermeny: () => void;
+    setFocusIndex: () => void;
     className: string;
     tabindex: boolean;
 }
@@ -23,6 +23,7 @@ const Lukkundermeny = (props: Props) => {
                     href="https://nav.no"
                     onClick={event => {
                         event.preventDefault();
+                        props.setFocusIndex();
                         dispatch(toggleHovedmeny());
                     }}
                     tabIndex={props.tabindex ? 0 : -1}

@@ -285,6 +285,11 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                                     id={
                                                         'desktop-decorator-sok-input'
                                                     }
+                                                    tabIndex={
+                                                        this.props.tabindex
+                                                            ? 0
+                                                            : -1
+                                                    }
                                                 />
                                                 <ul
                                                     className="sokeresultat-liste"
@@ -334,7 +339,13 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                                 </ul>
                                             </div>
                                             <DesktopSokknapp />
-                                            <Sokknapp />
+                                            <Sokknapp
+                                                sokKnappTabindex={
+                                                    this.props.tabindex
+                                                        ? this.props.tabindex
+                                                        : false
+                                                }
+                                            />
                                         </div>
                                     </div>
                                 </>

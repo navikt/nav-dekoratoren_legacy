@@ -16,7 +16,6 @@ import { LenkeMedGA } from '../../LenkeMedGA';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import { finnTekst } from '../../../tekster/finn-tekst';
 import { Language } from '../../../reducer/language-duck';
-import Tekst from '../../../tekster/finn-tekst';
 import { erNavDekoratoren } from '../../../utils/Environment';
 
 interface Props {

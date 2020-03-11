@@ -10,8 +10,8 @@ import { Systemtittel } from 'nav-frontend-typografi';
 
 interface Props {
     className: string;
-    clicked: boolean;
-    lukkMeny: () => void;
+    undermenyIsOpen: boolean;
+    setFocusNode: () => void;
     tabindex: boolean;
     lenker: MenyNode;
     arbeidsflatenavn: string;
@@ -20,8 +20,8 @@ interface Props {
 const Undermeny = (props: Props) => {
     const {
         className,
-        clicked,
-        lukkMeny,
+        undermenyIsOpen,
+        setFocusNode,
         tabindex,
         lenker,
         arbeidsflatenavn,
@@ -35,11 +35,11 @@ const Undermeny = (props: Props) => {
         <section
             className={menyClass.element(
                 'undermeny-innhold',
-                clicked ? 'active' : ''
+                undermenyIsOpen ? 'active' : ''
             )}
         >
             <Lukkundermeny
-                lukkundermeny={lukkMeny}
+                setFocusIndex={setFocusNode}
                 className={menyClass.className}
                 tabindex={props.tabindex}
             />
@@ -75,7 +75,7 @@ const Undermeny = (props: Props) => {
             </ul>
             <div className={menyClass.element('blokk-divider')}>
                 <Lukkundermeny
-                    lukkundermeny={lukkMeny}
+                    setFocusIndex={setFocusNode}
                     className={menyClass.className}
                     tabindex={props.tabindex}
                 />

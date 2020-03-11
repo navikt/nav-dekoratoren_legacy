@@ -15,7 +15,6 @@ import { LenkeMedGA } from '../../../../LenkeMedGA';
 
 interface OwnProps {
     tabIndex: boolean;
-    togglevarselmeny?: () => void;
 }
 
 interface StateProps {
@@ -113,11 +112,8 @@ class Varselvisning extends React.Component<Props, State> {
     }
 
     componentDidUpdate(prevProps: Readonly<Props>): void {
-        if (this.props.togglevarselmeny) {
+        if (this.props.tabIndex !== prevProps.tabIndex) {
             this.setTabIndex();
-            if (this.props.tabIndex && !prevProps.tabIndex) {
-                this.props.togglevarselmeny();
-            }
         }
     }
 

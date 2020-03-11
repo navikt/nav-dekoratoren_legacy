@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { lukkAlleDropdowns } from '../../../../../../../../reducer/dropdown-toggle-duck';
 
 interface Props {
-    lukkmeny: () => void;
     tabindex: boolean;
 }
 
