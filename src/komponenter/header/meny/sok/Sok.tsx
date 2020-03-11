@@ -42,7 +42,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     constructor(props: StateProps & Props) {
         super(props);
         this.state = this.initialState;
-        this.fetchSearchResultThrottled = debounce(this.fetchSearchResult, 250);
+        this.fetchSearchResultThrottled = debounce(this.fetchSearchResult, 200);
     }
 
     componentDidMount(): void {
@@ -58,19 +58,25 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     handleValueChange = (input: string) => {
-        if (input) {
+        if (this.ismounted) {
+            if (input === this.state.writtenInput) {
+                return;
+            }
+
             this.setState({
                 ...this.initialState,
-                loading: true,
-            });
-        }
-        if (this.ismounted) {
-            this.setState({
                 selectedInput: input,
                 writtenInput: input,
             });
+
+            if (input) {
+                this.setState({
+                    loading: true,
+                });
+            }
+
+            this.fetchSearchResultThrottled(input);
         }
-        this.fetchSearchResultThrottled(input);
     };
 
     fetchSearchResult = (input: string) => {
@@ -218,7 +224,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     render() {
-        const { items, writtenInput } = this.state;
+        const { items, writtenInput, loading } = this.state;
         const { language } = this.props;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
@@ -236,9 +242,8 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     getInputProps,
                     getItemProps,
                     getMenuProps,
-                    setState,
-                    isOpen,
                     inputValue,
+                    setState,
                 }) => (
                     <form
                         id="sok"
@@ -280,7 +285,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                     />
                                     <Sokknapp />
                                 </div>
-                                {this.state.loading ? (
+                                {loading ? (
                                     <div className={'sokeresultat-spinner'}>
                                         <NavFrontendSpinner />
                                     </div>
@@ -289,37 +294,52 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                         {...getMenuProps()}
                                         className="sokeresultat-liste"
                                     >
-                                        {isOpen && inputValue !== '' && items
-                                            ? items
-                                                  .slice(
-                                                      0,
-                                                      predefinedlistview + 1
-                                                  )
-                                                  .map((item, index) => (
-                                                      <li
-                                                          {...getItemProps({
-                                                              key: index,
-                                                              index,
-                                                              item,
-                                                          })}
-                                                          style={this.cssIndex(
-                                                              index
-                                                          )}
-                                                      >
-                                                          <SokeforslagIngress
-                                                              className="sok-resultat-listItem"
-                                                              displayName={
-                                                                  item.displayName
-                                                              }
-                                                          />
-                                                          <Sokeforslagtext
-                                                              highlight={
-                                                                  item.highlight
-                                                              }
-                                                          />
-                                                      </li>
-                                                  ))
-                                            : null}
+                                        {inputValue &&
+                                            (items.length > 1 ? (
+                                                items
+                                                    .slice(
+                                                        0,
+                                                        predefinedlistview + 1
+                                                    )
+                                                    .map((item, index) => (
+                                                        <li
+                                                            {...getItemProps({
+                                                                key: index,
+                                                                index,
+                                                                item,
+                                                            })}
+                                                            style={this.cssIndex(
+                                                                index
+                                                            )}
+                                                        >
+                                                            <SokeforslagIngress
+                                                                className="sok-resultat-listItdem"
+                                                                displayName={
+                                                                    item.displayName
+                                                                }
+                                                            />
+                                                            <Sokeforslagtext
+                                                                highlight={
+                                                                    item.highlight
+                                                                }
+                                                            />
+                                                        </li>
+                                                    ))
+                                            ) : (
+                                                <div
+                                                    className={
+                                                        'sokeresultat-ingen-treff'
+                                                    }
+                                                >
+                                                    <SokeforslagIngress
+                                                        className="sok-resultat-listItdem"
+                                                        displayName={`${finnTekst(
+                                                            'sok-ingen-treff',
+                                                            language
+                                                        )} (${writtenInput})`}
+                                                    />
+                                                </div>
+                                            ))}
                                     </ul>
                                 )}
                             </div>
