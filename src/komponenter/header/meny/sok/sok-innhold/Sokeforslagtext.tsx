@@ -7,11 +7,9 @@ const Sokeforslagtext = ({ highlight }: { highlight?: string }) => {
             <Normaltekst>
                 <div
                     dangerouslySetInnerHTML={{
-                        __html: highlight
-                            ? highlight
-                                  .replace(/<\/?[^>]+(>|$)/g, '') // Remove html
-                                  .replace(/\[.*?\]/g, '') // Remove shortcodes
-                            : '',
+                        __html: (highlight || '')
+                            .replace(/<\/?[^>]+(>|$)/g, '') // Remove html
+                            .replace(/\[.*?\]/g, ''), // Remove shortc
                     }}
                 />
             </Normaltekst>
