@@ -34,14 +34,15 @@ const predefinedlistview = 5;
 class Sok extends React.Component<StateProps & Props, InputState> {
     handleChangeThrottled: ReturnType<typeof throttle>;
     ismounted: boolean = false;
+    initialState = {
+        selectedInput: '',
+        writtenInput: '',
+        items: [defaultData],
+    };
 
     constructor(props: StateProps & Props) {
         super(props);
-        this.state = {
-            selectedInput: '',
-            writtenInput: '',
-            items: [defaultData],
-        };
+        this.state = this.initialState;
         this.handleChangeThrottled = throttle(
             this.handleValueChange.bind(this),
             200
@@ -205,7 +206,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     render() {
-        const { selectedInput, items } = this.state;
+        const { selectedInput, items, writtenInput } = this.state;
         const { language } = this.props;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
@@ -228,6 +229,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     getItemProps,
                     getLabelProps,
                     getMenuProps,
+                    setState,
                     isOpen,
                     inputValue,
                 }) => {
@@ -242,7 +244,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                     action: 'søk',
                                     label: selectedInput,
                                 });
-                                const URL = `/api/sok?ord=${selectedInput}`;
+                                const URL = `${Environment.XP_BASE_URL}/sok?ord=${selectedInput}`;
                                 this.handleSubmit(event, URL);
                             }}
                         >
@@ -252,6 +254,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                     <div className="sok-input-container">
                                         <Input
                                             {...getInputProps()}
+                                            value={writtenInput}
                                             className={klassenavn}
                                             placeholder={finnTekst(
                                                 'sok-input-placeholder',
@@ -267,7 +270,15 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                             )}
                                             id={'desktop-decorator-sok-input'}
                                         />
-                                        <DesktopSokknapp />
+                                        <DesktopSokknapp
+                                            writtenInput={writtenInput}
+                                            onReset={() => {
+                                                setState({ isOpen: false });
+                                                this.setState(
+                                                    this.initialState
+                                                );
+                                            }}
+                                        />
                                         <Sokknapp />
                                     </div>
                                     <ul

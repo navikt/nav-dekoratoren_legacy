@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import Tekst from '../../../../../tekster/finn-tekst';
 import BEMHelper from '../../../../../utils/bem';
 
-const DesktopSokknapp = () => {
+interface Props {
+    writtenInput?: string;
+    onReset: () => void;
+}
+const DesktopSokknapp = (props: Props) => {
     const cls = BEMHelper('sok-knapp');
     return (
         <div className="sok-knapper">
-            <button className="sok-knapp sok-knapp-avbryt">
-                <div className={cls.element('container')}>
-                    <div className={cls.element('reset-line-x')} />
-                    <div className={cls.element('reset-line-y')} />
-                </div>
-                <Tekst id="sok-reset" />
-            </button>
+            {props.writtenInput && (
+                <button
+                    type={'button'}
+                    className="sok-knapp sok-knapp-avbryt"
+                    onClick={props.onReset}
+                >
+                    <div className={cls.element('container')}>
+                        <div className={cls.element('reset-line-x')} />
+                        <div className={cls.element('reset-line-y')} />
+                    </div>
+                    <Tekst id="sok-reset" />
+                </button>
+            )}
             <button className="sok-knapp sok-knapp-submit" type="submit">
                 <div className={cls.element('container')}>
                     <div className={cls.element('sok-circle')} />
