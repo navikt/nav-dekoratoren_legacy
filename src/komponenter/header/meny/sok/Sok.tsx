@@ -8,19 +8,15 @@ import { Input } from 'nav-frontend-skjema';
 import { Language } from '../../../../reducer/language-duck';
 import Environment, { genererUrl } from '../../../../utils/Environment';
 import Tekst, { finnTekst } from '../../../../tekster/finn-tekst';
-import {
-    defaultData,
-    InputState,
-    SokeresultatData,
-    visAlleTreff,
-} from './sok-utils';
+import { defaultData, InputState } from './sok-utils';
+import { SokeresultatData, visAlleTreff } from './sok-utils';
 import SokeforslagIngress from './sok-innhold/SokeforslagIngress';
 import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
 import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
 import Sokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Sokknapp';
-import './Sok.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
-import { Systemtittel, Undertittel } from 'nav-frontend-typografi';
+import { Systemtittel } from 'nav-frontend-typografi';
+import './Sok.less';
 
 interface StateProps {
     language: Language;
@@ -213,7 +209,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     render() {
-        const { selectedInput, items, writtenInput } = this.state;
+        const { items, writtenInput } = this.state;
         const { language } = this.props;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
