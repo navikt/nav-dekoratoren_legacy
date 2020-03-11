@@ -20,6 +20,7 @@ import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
 import Sokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Sokknapp';
 import './Sok.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
+import { Systemtittel, Undertittel } from 'nav-frontend-typografi';
 
 interface StateProps {
     language: Language;
@@ -250,7 +251,9 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         >
                             <div className="sok-container">
                                 <div className="sok-input-resultat">
-                                    <h2>Søk</h2>
+                                    <div className={'sok-input__tittel'}>
+                                        <Systemtittel>Søk</Systemtittel>
+                                    </div>
                                     <div className="sok-input-container">
                                         <Input
                                             {...getInputProps()}
