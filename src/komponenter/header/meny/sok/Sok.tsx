@@ -33,7 +33,7 @@ interface Props {
 const predefinedlistview = 5;
 
 class Sok extends React.Component<StateProps & Props, InputState> {
-    handleChangeThrottled: ReturnType<typeof throttle>;
+    fetchSearchResultThrottled: ReturnType<typeof throttle>;
     ismounted: boolean = false;
     initialState = {
         selectedInput: '',
@@ -44,10 +44,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     constructor(props: StateProps & Props) {
         super(props);
         this.state = this.initialState;
-        this.handleChangeThrottled = throttle(
-            this.handleValueChange.bind(this),
-            200
-        );
+        this.fetchSearchResultThrottled = throttle(this.fetchSearchResult, 200);
     }
 
     componentDidMount(): void {
@@ -63,15 +60,17 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     handleValueChange(input: string) {
-        const url = `${Environment.APP_BASE_URL}/api/sok`;
-
         if (this.ismounted) {
             this.setState({
                 selectedInput: input,
                 writtenInput: input,
             });
         }
+        this.fetchSearchResultThrottled(input);
+    }
 
+    fetchSearchResult = (input: string) => {
+        const url = `${Environment.APP_BASE_URL}/api/sok`;
         fetch(`${url}?ord=${input}`)
             .then(response => {
                 if (response.ok) {
@@ -90,7 +89,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     });
                 }
             });
-    }
+    };
 
     handleSelect(selection: SokeresultatData) {
         window.location.href = genererUrl(selection.href);
@@ -219,10 +218,10 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                 onChange={selection => {
                     this.handleSelect(selection);
                 }}
-                onInputValueChange={(changes: string, stateAndHelpers: any) => {
-                    stateAndHelpers.getInputProps();
-                    this.handleChangeThrottled(changes);
+                onInputValueChange={(value: string) => {
+                    this.handleValueChange(value);
                 }}
+                inputValue={writtenInput}
                 itemToString={item => this.input(item)}
             >
                 {({
@@ -257,7 +256,6 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                     <div className="sok-input-container">
                                         <Input
                                             {...getInputProps()}
-                                            value={writtenInput}
                                             className={klassenavn}
                                             placeholder={finnTekst(
                                                 'sok-input-placeholder',
