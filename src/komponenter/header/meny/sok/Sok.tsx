@@ -59,7 +59,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
         return { '--listmap': index } as React.CSSProperties;
     };
 
-    handleValueChange(input: string) {
+    handleValueChange = (input: string) => {
         if (this.ismounted) {
             this.setState({
                 selectedInput: input,
@@ -67,7 +67,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
             });
         }
         this.fetchSearchResultThrottled(input);
-    }
+    };
 
     fetchSearchResult = (input: string) => {
         const url = `${Environment.APP_BASE_URL}/api/sok`;
@@ -91,14 +91,21 @@ class Sok extends React.Component<StateProps & Props, InputState> {
             });
     };
 
-    handleSelect(selection: SokeresultatData) {
+    handleSelect = (selection: SokeresultatData) => {
         window.location.href = genererUrl(selection.href);
-    }
+    };
 
-    handleSubmit(e: React.FormEvent<HTMLFormElement>, url: string) {
+    handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const { selectedInput } = this.state;
+        triggerGaEvent({
+            category: GACategory.Header,
+            label: selectedInput,
+            action: 'søk',
+        });
+        const url = `${Environment.XP_BASE_URL}/sok?ord=${selectedInput}`;
         window.location.href = genererUrl(url);
-    }
+    };
 
     input = (inputValue: SokeresultatData): string => {
         if (inputValue) {
@@ -215,116 +222,96 @@ class Sok extends React.Component<StateProps & Props, InputState> {
         return (
             <Downshift
                 stateReducer={this.stateReducer}
-                onChange={selection => {
-                    this.handleSelect(selection);
-                }}
-                onInputValueChange={(value: string) => {
-                    this.handleValueChange(value);
-                }}
+                onChange={this.handleSelect}
+                onInputValueChange={this.handleValueChange}
                 inputValue={writtenInput}
                 itemToString={item => this.input(item)}
             >
                 {({
                     getInputProps,
                     getItemProps,
-                    getLabelProps,
                     getMenuProps,
                     setState,
                     isOpen,
                     inputValue,
-                }) => {
-                    return (
-                        <form
-                            className="sok"
-                            id="sok"
-                            role="search"
-                            onSubmit={event => {
-                                triggerGaEvent({
-                                    category: GACategory.Header,
-                                    action: 'søk',
-                                    label: selectedInput,
-                                });
-                                const URL = `${Environment.XP_BASE_URL}/sok?ord=${selectedInput}`;
-                                this.handleSubmit(event, URL);
-                            }}
-                        >
-                            <div className="sok-container">
-                                <div className="sok-input-resultat">
-                                    <div className={'sok-input__tittel'}>
-                                        <Systemtittel>
-                                            <Tekst id="sok-knapp" />
-                                        </Systemtittel>
-                                    </div>
-                                    <div className="sok-input-container">
-                                        <Input
-                                            {...getInputProps()}
-                                            className={klassenavn}
-                                            placeholder={finnTekst(
-                                                'sok-input-placeholder',
-                                                language
-                                            )}
-                                            label={finnTekst(
-                                                'sok-input-label',
-                                                language
-                                            )}
-                                            aria-label={finnTekst(
-                                                'sok-input-label',
-                                                language
-                                            )}
-                                            id={'desktop-decorator-sok-input'}
-                                        />
-                                        <DesktopSokknapp
-                                            writtenInput={writtenInput}
-                                            onReset={() => {
-                                                setState({ isOpen: false });
-                                                this.setState(
-                                                    this.initialState
-                                                );
-                                            }}
-                                        />
-                                        <Sokknapp />
-                                    </div>
-                                    <ul
-                                        className="sokeresultat-liste"
-                                        {...getMenuProps()}
-                                    >
-                                        {isOpen && inputValue !== '' && items
-                                            ? items
-                                                  .slice(
-                                                      0,
-                                                      predefinedlistview + 1
-                                                  )
-                                                  .map((item, index) => (
-                                                      <li
-                                                          {...getItemProps({
-                                                              key: index,
-                                                              index,
-                                                              item,
-                                                          })}
-                                                          style={this.cssIndex(
-                                                              index
-                                                          )}
-                                                      >
-                                                          <SokeforslagIngress
-                                                              className="sok-resultat-listItem"
-                                                              displayName={
-                                                                  item.displayName
-                                                              }
-                                                          />
-                                                          <Sokeforslagtext
-                                                              highlight={
-                                                                  item.highlight
-                                                              }
-                                                          />
-                                                      </li>
-                                                  ))
-                                            : null}
-                                    </ul>
+                }) => (
+                    <form
+                        id="sok"
+                        role="search"
+                        className="sok"
+                        onSubmit={this.handleSubmit}
+                    >
+                        <div className="sok-container">
+                            <div className="sok-input-resultat">
+                                <div className={'sok-input__tittel'}>
+                                    <Systemtittel>
+                                        <Tekst id="sok-knapp" />
+                                    </Systemtittel>
                                 </div>
+                                <div className="sok-input-container">
+                                    <Input
+                                        {...getInputProps()}
+                                        className={klassenavn}
+                                        placeholder={finnTekst(
+                                            'sok-input-placeholder',
+                                            language
+                                        )}
+                                        label={finnTekst(
+                                            'sok-input-label',
+                                            language
+                                        )}
+                                        aria-label={finnTekst(
+                                            'sok-input-label',
+                                            language
+                                        )}
+                                        id={'desktop-decorator-sok-input'}
+                                    />
+                                    <DesktopSokknapp
+                                        writtenInput={writtenInput}
+                                        onReset={() => {
+                                            setState({ isOpen: false });
+                                            this.setState(this.initialState);
+                                        }}
+                                    />
+                                    <Sokknapp />
+                                </div>
+                                <ul
+                                    className="sokeresultat-liste"
+                                    {...getMenuProps()}
+                                >
+                                    {isOpen && inputValue !== '' && items
+                                        ? items
+                                              .slice(0, predefinedlistview + 1)
+                                              .map((item, index) => (
+                                                  <li
+                                                      {...getItemProps({
+                                                          key: index,
+                                                          index,
+                                                          item,
+                                                      })}
+                                                      style={this.cssIndex(
+                                                          index
+                                                      )}
+                                                  >
+                                                      <SokeforslagIngress
+                                                          className="sok-resultat-listItem"
+                                                          displayName={
+                                                              item.displayName
+                                                          }
+                                                      />
+                                                      <Sokeforslagtext
+                                                          highlight={
+                                                              item.highlight
+                                                          }
+                                                      />
+                                                  </li>
+                                              ))
+                                        : null}
+                                </ul>
                             </div>
-                        </form>
-                    );
-                }}
+                        </div>
+                    </form>
+                )}
             </Downshift>
         );
     }
