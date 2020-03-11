@@ -36,10 +36,11 @@ const Arbeidsflatemeny = () => {
                         >
                             <LenkeMedGA
                                 classNameOverride={cls.element('lenke')}
-                                id={getKbId(
-                                    NaviGroup.HeaderMenylinje,
-                                    { col: index, row: 0, sub: 0 }
-                                )}
+                                id={getKbId(NaviGroup.HeaderMenylinje, {
+                                    col: index,
+                                    row: 0,
+                                    sub: 0,
+                                })}
                                 href={lenke.url}
                                 onClick={event => {
                                     event.preventDefault();

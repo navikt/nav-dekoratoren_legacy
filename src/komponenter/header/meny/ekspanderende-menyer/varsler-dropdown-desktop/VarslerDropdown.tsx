@@ -5,7 +5,10 @@ import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
 import { toggleVarsler } from '../../../../../reducer/dropdown-toggle-duck';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Tekst from '../../../../../tekster/finn-tekst';
-import { GACategory, triggerGaEvent } from '../../../../../utils/google-analytics';
+import {
+    GACategory,
+    triggerGaEvent,
+} from '../../../../../utils/google-analytics';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import './VarslerDropdown.less';
 import { VarselIkon } from '../meny-knapper/ikoner/varsel-ikon/VarselIkon';
@@ -23,10 +26,15 @@ const classname = 'desktop-varsler-dropdown';
 export const desktopVarslerKnappId = `${classname}-knapp-id`;
 
 export const VarslerDropdown = () => {
-    const { isOpen, varsler, innloggetStatus, arbeidsflate } = useSelector(stateSelector);
+    const { isOpen, varsler, innloggetStatus, arbeidsflate } = useSelector(
+        stateSelector
+    );
     const dispatch = useDispatch();
 
-    if (!innloggetStatus.authenticated || arbeidsflate !== MenuValue.PRIVATPERSON) {
+    if (
+        !innloggetStatus.authenticated ||
+        arbeidsflate !== MenuValue.PRIVATPERSON
+    ) {
         return null;
     }
 

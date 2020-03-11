@@ -4,10 +4,8 @@ import {
     IdMap,
     NaviGroup,
     NaviIndex,
-    NaviNode,
     NodeEdge,
     NodeEdgeOpposite,
-    selectNode,
 } from './kb-navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../reducer/reducer';

@@ -13,7 +13,6 @@ import {
     ArbeidsflateLenke,
     settArbeidsflate,
 } from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
-import { useDispatch } from 'react-redux';
 
 interface Props {
     classname: string;
@@ -23,7 +22,6 @@ interface Props {
 
 export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
     const cls = BEMHelper(classname);
-    const dispatch = useDispatch();
     const lenker = bunnLenker[arbeidsflate]();
 
     return (
@@ -39,10 +37,7 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                             lenkeTekstId={lenke.lenkeTekstId}
                             stikkord={finnTekst(lenke.stikkordId, language)}
                             className={classname}
-                            id={KbNav.getKbId(
-                                NaviGroup.Hovedmeny,
-                                kbNaviIndex
-                            )}
+                            id={KbNav.getKbId(NaviGroup.Hovedmeny, kbNaviIndex)}
                             onClick={event => {
                                 event.preventDefault();
                                 settArbeidsflate(context);

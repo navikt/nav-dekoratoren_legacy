@@ -119,7 +119,7 @@ const scrollIfNearViewBounds = (element: HTMLElement) => {
     }
 };
 
-export const selectNode = (
+const selectNode = (
     node: NaviNode,
     callback: NodeSetterCallback = () => null,
     focus = true
@@ -180,7 +180,6 @@ const focusHandler = (
     if (focusedNode) {
         selectNode(focusedNode, setCurrentNode, false);
     } else {
-        // selectNode(graph.rootNode, setCurrentNode, false);
         document.removeEventListener('keydown', currentKbHandler);
     }
 };

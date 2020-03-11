@@ -46,6 +46,10 @@ const getMaxColsPerSection = (cls: BEMWrapper): Array<number> => {
     return [toppSeksjonCols, hovedSeksjonCols, bunnSeksjonCols];
 };
 
+const rootIndex = { col: 0, row: 0, sub: 0 };
+const mqlDesktop = matchMedia('(min-width: 1440px)');
+const mqlTablet = matchMedia('(min-width: 1024px)');
+
 export const HovedmenyDropdown = (props: Props) => {
     const { arbeidsflate, classname, language, menyLenker, isOpen } = props;
 
@@ -53,9 +57,6 @@ export const HovedmenyDropdown = (props: Props) => {
     const updateMaxCols = () => setMaxColsPerSection(getMaxColsPerSection(cls));
 
     const cls = BEMHelper(classname);
-
-    const mqlDesktop = matchMedia('(min-width: 1440px)');
-    const mqlTablet = matchMedia('(min-width: 1024px)');
 
     useEffect(() => {
         const cleanUp = () => {
@@ -79,7 +80,7 @@ export const HovedmenyDropdown = (props: Props) => {
     return (
         <KbNavigation
             group={NaviGroup.Hovedmeny}
-            rootIndex={{ col: 0, row: 0, sub: 0 }}
+            rootIndex={rootIndex}
             maxColsPerSection={maxColsPerSection}
             isEnabled={isOpen}
             parentEdge={NodeEdge.Bottom}

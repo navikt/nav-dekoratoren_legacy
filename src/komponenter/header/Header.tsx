@@ -72,12 +72,9 @@ export const Header = () => {
             },
             (node: NaviNode) => dispatch(setCurrentNode(node))
         );
-        console.log('header-2');
 
         return () => removeListeners(handlers);
-    }, [kbNavState.currentNode]);
-
-    console.log('header-0');
+    }, [kbNavState]);
 
     return (
         <>

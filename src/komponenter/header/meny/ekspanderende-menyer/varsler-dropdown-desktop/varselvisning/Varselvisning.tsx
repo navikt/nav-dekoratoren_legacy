@@ -14,6 +14,7 @@ import {
     NodeEdge,
 } from '../../../../../../utils/keyboard-navigation/kb-navigation';
 import { KbNavigation } from '../../../../../../utils/keyboard-navigation/KbNavigation';
+import { desktopVarslerKnappId } from '../VarslerDropdown';
 
 type Props = {
     isOpen: boolean;
@@ -27,6 +28,8 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'varsler-display-desktop';
+const rootIndex = { col: 0, row: 0, sub: 0 };
+const colSetup = [1, 1, 1];
 
 const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => (
     <div className="vis-alle-lenke">
@@ -58,22 +61,22 @@ export const Varselvisning = ({ isOpen }: Props) => {
     const visAlleVarslerLenke = varslerAntall > 5;
 
     return (
-        // <KbNavigation
-        //     group={NaviGroup.Varsler}
-        //     rootIndex={{col: 0, row: 0, sub: 0}}
-        //     maxColsPerSection={[1, 1, 1]}
-        //     isEnabled={isOpen}
-        //     parentNode={parentKbNode}
-        //     parentEdge={NodeEdge.Bottom}
-        // >
-        <div className={classname}>
-            <Undertittel>
-                <Tekst id={'varsler'} />
-            </Undertittel>
-            {visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
-            <VarslerParsed varsler={varsler} />
-            {visAlleVarslerLenke && alleVarslerLenke(2, nyeVarslerMsg)}
-        </div>
-        // </KbNavigation>
+        <KbNavigation
+            group={NaviGroup.Varsler}
+            rootIndex={rootIndex}
+            maxColsPerSection={colSetup}
+            isEnabled={isOpen}
+            parentNodeId={desktopVarslerKnappId}
+            parentEdge={NodeEdge.Bottom}
+        >
+            <div className={classname}>
+                <Undertittel>
+                    <Tekst id={'varsler'} />
+                </Undertittel>
+                {visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
+                <VarslerParsed varsler={varsler} />
+                {visAlleVarslerLenke && alleVarslerLenke(2, nyeVarslerMsg)}
+            </div>
+        </KbNavigation>
     );
 };
