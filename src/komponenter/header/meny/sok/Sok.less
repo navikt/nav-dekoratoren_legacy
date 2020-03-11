@@ -1,95 +1,189 @@
 @import '../../../../../node_modules/nav-frontend-core/less/_variabler';
 @import '../../../../styling-variabler.less';
 
+@keyframes animateIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(-8px);
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .desktopmeny,
 .sok-modal__body {
+    // Global styling
     .sok .sok-container {
         position: relative;
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: center;
-        margin-bottom: 1rem;
-        margin-top: 1rem;
-    }
-
-    @keyframes animateIn {
-        0% {
-            opacity: 0;
-            transform: scale(0.6) translateY(-8px);
-        }
-
-        100% {
-            opacity: 1;
-        }
     }
 
     .sok-input-resultat {
         position: relative;
         width: 100%;
+    }
 
-        .sok-input {
-            .skjemaelement__label {
-                display: none;
-            }
-        }
+    .skjemaelement__label {
+        display: none;
+    }
 
-        .sokeresultat-liste {
-            list-style: none;
-            padding: 0;
-            z-index: 1020;
-            width: 100%;
-            overflow: hidden;
-            margin: 0;
-            left: 0;
+    .sokeresultat-liste {
+        list-style: none;
+        position: relative;
+        margin: 0;
+        left: 0;
 
-            li {
-                padding: 1rem;
-                color: white;
-            }
+        li {
+            padding: 1rem;
+            color: black;
+            font-weight: normal;
+            border-bottom: #b7b1a9 1px solid;
+            text-align: left;
+            cursor: pointer;
+            animation-name: animateIn;
+            animation-duration: 150ms;
+            animation-delay: calc(var(--listmap) * 50ms);
+            animation-fill-mode: both;
+            animation-timing-function: ease-in-out;
 
-            li[aria-selected='true'] {
+            &:focus,
+            &:hover {
+                background-color: lightgray;
                 font-weight: bold;
             }
 
-            .sokeresultat-liste ul {
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        li[aria-selected='true'] {
+            background-color: lightgray;
+            font-weight: bold;
+        }
+
+        .sok-resultat-listItem-text {
+            padding-left: 0;
+        }
+    }
+
+    // Mobile
+    @media (max-width: @tabletLimitWidth) {
+        .sok-input-resultat {
+            .sok-input {
+                margin-bottom: 0;
+                input {
+                    border-radius: 0;
+                    padding: 2rem 1rem 1.5rem;
+                    background-color: @navBlaDarken60;
+                    border: 2px solid @navBlaLighten60;
+                    color: white;
+
+                    &:focus,
+                    &:active {
+                        border: 2px solid @navBlaLighten60;
+                    }
+
+                    &::-webkit-input-placeholder,
+                    &::-moz-placeholder,
+                    &:-ms-input-placeholder,
+                    &:-moz-placeholder {
+                        color: white;
+                    }
+                }
+
+                input[type='search'] {
+                    box-sizing: border-box;
+                }
+
+                input[placeholder] {
+                    color: white;
+                    margin: 0;
+                    font-size: 1.375rem;
+                    line-height: 1.625rem;
+                    font-weight: 300;
+                }
+            }
+
+            .sokeresultat-liste {
+                list-style: none;
                 padding: 0;
-            }
+                z-index: 1020;
+                width: 100%;
+                overflow: hidden;
 
-            .sok-resultat-listItem {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-            }
+                li {
+                    padding: 1rem;
+                    color: white;
+                }
 
-            .sok-resultat-chevron {
-                padding: 0 1rem 0 0;
-            }
+                li[aria-selected='true'] {
+                    font-weight: bold;
+                }
 
-            .sok-resultat-listItem-text {
-                padding-left: 2.25rem;
+                .sokeresultat-liste ul {
+                    padding: 0;
+                }
+
+                .sok-resultat-listItem {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                .sok-resultat-chevron {
+                    padding: 0 1rem 0 0;
+                }
+
+                .sok-resultat-listItem-text {
+                    padding-left: 2.25rem;
+                }
             }
+        }
+
+        .sok-input-mobil-submit {
+            position: absolute;
+            top: 1.25rem;
+            right: 2rem;
+            background-color: @navBlaDarken60;
+            border: none;
+
+            &:focus {
+                outline: 2px solid white;
+            }
+        }
+
+        // Hide desktop stuff
+        .sok-input__tittel,
+        .desktop-sok__knapper {
+            display: none;
         }
     }
 
-    .sok-input-mobil-submit {
-        position: absolute;
-        top: 1.25rem;
-        right: 2rem;
-        background-color: @navBlaDarken60;
-        border: none;
-
-        &:focus {
-            outline: 2px solid white;
-        }
-    }
-
-    .sok-input-container {
-        position: relative;
-        display: flex;
-    }
-
+    // Desktop
     @media (min-width: @tabletLimitWidth) {
+        .sok-input-container {
+            position: relative;
+            display: flex;
+        }
+
+        .sok-input {
+            width: 100%;
+
+            &__tittel {
+                margin: 1rem 0;
+            }
+
+            input {
+                padding: 0.75rem;
+                border: 2px solid @navBla;
+            }
+        }
+
         .sok .sok-container {
             width: auto;
             justify-content: center;
@@ -208,62 +302,9 @@
             }
         }
 
-        .sok-input-resultat {
-            .sok-input {
-                width: 100%;
-
-                &__tittel {
-                    margin: 1rem 0;
-                }
-
-                input {
-                    padding: 0.75rem;
-                    border: 2px solid @navBla;
-                }
-            }
-
-            .sokeresultat-liste {
-                list-style: none;
-                position: relative;
-
-                li {
-                    padding: 1rem;
-                    background-color: white;
-                    color: black;
-                    font-weight: normal;
-                    border-bottom: #b7b1a9 1px solid;
-                    text-align: left;
-                    cursor: pointer;
-                    animation-name: animateIn;
-                    animation-duration: 150ms;
-                    animation-delay: calc(var(--listmap) * 50ms);
-                    animation-fill-mode: both;
-                    animation-timing-function: ease-in-out;
-
-                    &:focus,
-                    &:hover {
-                        background-color: lightgray;
-                        font-weight: bold;
-                    }
-
-                    &:last-child {
-                        border-bottom: none;
-                    }
-                }
-
-                li[aria-selected='true'] {
-                    background-color: lightgray;
-                    font-weight: bold;
-                }
-
-                .sok-resultat-listItem-text {
-                    padding-left: 0;
-                }
-            }
-        }
-
+        // Hide mobile stuff
         .sok-input-mobil-submit {
-            display: none;
+            display: none !important;
         }
     }
 }
