@@ -7,13 +7,15 @@ interface Props {
     onReset: () => void;
 }
 const DesktopSokknapp = (props: Props) => {
-    const cls = BEMHelper('sok-knapp');
+    const cls = BEMHelper('desktop-sok');
     return (
-        <div className="sok-knapper">
+        <div className={cls.element('knapper')}>
             {props.writtenInput && (
                 <button
                     type={'button'}
-                    className="sok-knapp sok-knapp-avbryt"
+                    className={`${cls.element('knapp')} ${cls.element(
+                        'knapp-avbryt'
+                    )}`}
                     onClick={props.onReset}
                 >
                     <div className={cls.element('container')}>
@@ -23,7 +25,12 @@ const DesktopSokknapp = (props: Props) => {
                     <Tekst id="sok-reset" />
                 </button>
             )}
-            <button className="sok-knapp sok-knapp-submit" type="submit">
+            <button
+                type="submit"
+                className={`${cls.element('knapp')} ${cls.element(
+                    'knapp-submit'
+                )}`}
+            >
                 <div className={cls.element('container')}>
                     <div className={cls.element('sok-circle')} />
                     <div className={cls.element('sok-line')} />
