@@ -2,9 +2,6 @@ export const ledetekster: { [key: string]: string } = {
     'footer-arbeids-og-veldferdsetaten': 'Arbeids- og velferdsetaten',
     'footer-arbeids-og-veldferdsetaten-en': 'Arbeids- og velferdsetaten',
     'footer-arbeids-og-veldferdsetaten-se': 'Arbeids- og velferdsetaten',
-    'footer-ga-til-innhold-for': 'Gå til innhold for',
-    'footer-ga-til-innhold-for-en': 'Gå til innhold for',
-    'footer-ga-til-innhold-for-se': 'Gå til innhold for',
     'footer-languages-overskrift': 'Andre språk',
     'footer-languages-overskrift-en': 'Other languages',
     'footer-languages-overskrift-se': 'Andre språk',
@@ -17,6 +14,27 @@ export const ledetekster: { [key: string]: string } = {
     'footer-del-skjerm': 'Del skjerm med veileder',
     'footer-del-skjerm-en': 'Share screen with your tutor',
     'footer-del-skjerm-se': 'Del skjerm med veileder',
+    'footer-stikkord-privatperson':
+        'Utbetalingsoversikt, saksoversikt, sykefravær',
+    'footer-stikkord-privatperson-en':
+        'Utbetalingsoversikt, saksoversikt, sykefravær',
+    'footer-stikkord-privatperson-se':
+        'Utbetalingsoversikt, saksoversikt, sykefravær',
+    'footer-stikkord-arbeidsgiver':
+        'Tjenester og skjemaer, rekruttering, oppfølging, inkluderende arbeidsliv, hjelpemidler',
+    'footer-stikkord-arbeidsgiver-en':
+        'Tjenester og skjemaer, rekruttering, oppfølging, inkluderende arbeidsliv, hjelpemidler',
+    'footer-stikkord-arbeidsgiver-se':
+        'Tjenester og skjemaer, rekruttering, oppfølging, inkluderende arbeidsliv, hjelpemidler',
+    'footer-stikkord-samarbeidspartner':
+        'Kommuner, utdanningsområdet, psykisk helse, hjelpemidler, leger og behandlere',
+    'footer-stikkord-samarbeidspartner-en':
+        'Kommuner, utdanningsområdet, psykisk helse, hjelpemidler, leger og behandlere',
+    'footer-stikkord-samarbeidspartner-se':
+        'Kommuner, utdanningsområdet, psykisk helse, hjelpemidler, leger og behandlere',
+    'footer-til-toppen': 'Til toppen',
+    'footer-til-toppen-en': 'To the top',
+    'footer-til-toppen-se': 'Til toppen',
     'ga-til-min-side': 'Gå til Min side',
     'ga-til-min-side-en': 'Gå til Min side',
     'ga-til-min-side-se': 'Gå til Min side',

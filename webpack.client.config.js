@@ -15,7 +15,7 @@ const browserConfig = {
     output: {
         path: path.resolve(__dirname, 'build'),
         publicPath: '/dekoratoren',
-        filename: '[name].js'
+        filename: '[name].js',
     },
     devtool: 'cheap-module-source-map',
     resolve: {

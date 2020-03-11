@@ -30,12 +30,12 @@ const FooterBottom = ({ classname }: Props) => {
                         classname={cls.element('svg')}
                     />
                 </div>
-                <Normaltekst className="bottom-tekst">
-                    <Tekst id="footer-arbeids-og-veldferdsetaten" />
-                </Normaltekst>
-                <ul className="bottom-lenke">
-                    {lenker.map(lenke => {
-                        return (
+                <div className="bottom-lenker">
+                    <Normaltekst className="bottom-tekst">
+                        <Tekst id="footer-arbeids-og-veldferdsetaten" />
+                    </Normaltekst>
+                    <ul className="bottom-lenke">
+                        {lenker.map(lenke => (
                             <li key={lenke.lenketekst}>
                                 <Normaltekst>
                                     <LenkeMedGA
@@ -50,9 +50,9 @@ const FooterBottom = ({ classname }: Props) => {
                                     </LenkeMedGA>
                                 </Normaltekst>
                             </li>
-                        );
-                    })}
-                </ul>
+                        ))}
+                    </ul>
+                </div>
             </div>
         </section>
     );

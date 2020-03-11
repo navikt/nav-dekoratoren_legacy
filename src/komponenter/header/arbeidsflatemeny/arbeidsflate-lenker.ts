@@ -10,6 +10,7 @@ export interface ArbeidsflateLenke {
     url: string;
     lenkeTekstId: string;
     stikkordId: string;
+    footerStikkordId: string;
     key: MenuValue;
 }
 
@@ -23,6 +24,7 @@ export const personContextLenke = () => ({
     url: `${Environment.XP_BASE_URL}`,
     lenkeTekstId: 'rolle-privatperson',
     stikkordId: 'meny-bunnlenke-minside-stikkord',
+    footerStikkordId: 'footer-stikkord-privatperson',
     key: MenuValue.PRIVATPERSON,
 });
 
@@ -30,6 +32,7 @@ export const arbeidsgiverContextLenke = () => ({
     url: `${Environment.XP_BASE_URL}/no/bedrift`,
     lenkeTekstId: 'rolle-arbeidsgiver',
     stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
+    footerStikkordId: 'footer-stikkord-arbeidsgiver',
     key: MenuValue.ARBEIDSGIVER,
 });
 
@@ -37,6 +40,7 @@ export const samarbeidspartnerContextLenke = () => ({
     url: `${Environment.XP_BASE_URL}/no/nav-og-samfunn`,
     lenkeTekstId: 'rolle-samarbeidspartner',
     stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
+    footerStikkordId: 'footer-stikkord-samarbeidspartner',
     key: MenuValue.SAMARBEIDSPARTNER,
 });
 

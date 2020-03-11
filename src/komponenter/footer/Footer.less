@@ -2,92 +2,230 @@
 @import '../../styling-variabler.less';
 
 .sitefooter {
-    padding: 1rem;
     width: 100%;
-    min-height: 12.5rem;
-    border-bottom: @navMorkGra 2px solid;
-
-    .nav-frontend-chevron {
-        color: @navBla;
-    }
-
-    .lenke {
-        text-decoration: none;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
-    &__innhold {
-        text-align: left;
-        padding: 0 @margins-sides-desktop;
-    }
 
     &__menylinje-topp {
-        .menylenker-seksjon .typo-undertittel {
-            font-weight: bolder;
-        }
-    }
+        padding: 1rem;
+        color: white;
+        background-color: @navBlaDarken40;
 
-    &__menylinje-topp,
-    &__menylinje-arbeidsflatevalg .arbeidsflatevalg-innhold .arbeidsflatevalg {
+        .topp-kolonner {
+            .menylenker-seksjon .menylenker-overskrift {
+                font-weight: bolder;
+                margin-bottom: 1.2rem;
+            }
+
+            .menylenker-seksjon.til-toppen {
+                margin-bottom: 2rem;
+                padding-left: 1.2rem;
+
+                .til-toppen-innhold {
+                    display: flex;
+                    justify-content: center;
+                    width: 100px;
+
+                    .footer-pil-opp {
+                        display: flex;
+                        height: 18px;
+                        margin-left: -14px;
+                        margin-right: 0.4rem;
+                    }
+
+                    .lenke {
+                        text-decoration: none;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+
+            .menylenker-seksjon.venstre,
+            .menylenker-seksjon.midt,
+            .menylenker-seksjon.hoyre {
+                padding-left: 1.2rem;
+            }
+        }
+
         ul {
             margin-top: 0.8rem;
+            margin-bottom: 2.5rem;
         }
 
         li {
             margin-bottom: 1.3rem;
         }
+
+        .lenke,
+        .lenkepanel {
+            color: white;
+        }
+
+        .lenkepanel {
+            background-color: @navBlaDarken40;
+            border: 1px solid white;
+            border-radius: 8px;
+            text-decoration: none;
+
+            &:hover .lenkepanel__heading,
+            &--hover .lenkepanel__heading {
+                color: white;
+            }
+
+            &__heading {
+                min-height: 101px;
+            }
+
+            .typo-undertittel {
+                margin-bottom: 0.6rem;
+            }
+        }
+    }
+
+    &__menylinje-bottom {
+        padding: 1rem;
     }
 
     @media (min-width: @tabletLimitWidth) {
-        padding: 1.5rem 1.5rem 5rem;
-
-        &__innhold {
-            width: auto;
-            margin: 0 auto;
-            padding: 0;
-            text-align: initial;
-            position: relative;
-        }
-
         &__menylinje-topp {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
+            padding: 1rem 2rem;
 
-            .menylenker-seksjon {
-                width: 33.3%;
+            .topp-kolonner {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+
+                .menylenker-seksjon.til-toppen {
+                    width: 100%;
+                    margin-bottom: 2rem;
+                    padding-left: 0;
+                }
+
+                .menylenker-seksjon.venstre {
+                    width: 31%;
+                    padding-left: 0;
+                }
+                .menylenker-seksjon.midt,
+                .menylenker-seksjon.hoyre {
+                    width: 31%;
+                    padding-left: 2rem;
+                }
+
+                .menylenker-seksjon.arbeidsflate {
+                    width: 100%;
+                    margin-top: 3rem;
+                }
+
+                .arbeidsflatevalg-innhold {
+                    margin-bottom: 0;
+
+                    .arbeidsflatevalg {
+                        display: flex;
+                        justify-content: space-between;
+                        margin: 0;
+
+                        li {
+                            width: 48%;
+                            margin-bottom: 0;
+                        }
+                    }
+                }
             }
         }
 
-        &__menylinje-arbeidsflatevalg {
-            .arbeidsflatevalg-innhold {
+        &__menylinje-bottom {
+            padding: 2rem;
+
+            .bottom-innhold {
                 display: flex;
                 align-items: center;
-                margin-bottom: 1.5rem;
 
-                .arbeidsflatevalg {
-                    width: 30rem;
-                    display: flex;
-                    align-items: center;
+                ul {
+                    margin: 0;
+                }
 
-                    ul {
-                        margin: 0;
+                .bottom-logo {
+                    width: 65px;
+                    height: 65px;
+                    margin-right: 0.8rem;
+                }
+
+                .bottom-lenker {
+                    width: 400px;
+                }
+            }
+        }
+    }
+
+    @media (min-width: @smallDesktopLimitWidth) {
+        &__menylinje-topp {
+            padding: 1.5rem 2rem;
+
+            .topp-kolonner {
+                .menylenker-seksjon.til-toppen {
+                    padding-left: 0;
+                    width: 100%;
+                }
+
+                .menylenker-seksjon.venstre {
+                    width: 24%;
+                }
+
+                .menylenker-seksjon.midt,
+                .menylenker-seksjon.hoyre {
+                    width: 23%;
+                    padding-left: 0;
+                }
+
+                .menylenker-seksjon.arbeidsflate {
+                    width: 29%;
+                    margin-top: 0;
+                }
+
+                .arbeidsflatevalg-innhold {
+                    .arbeidsflatevalg {
+                        flex-direction: column;
+
+                        li {
+                            width: auto;
+                        }
                     }
+                }
+            }
+        }
+    }
 
-                    li {
-                        min-width: 9rem;
-                        max-width: 14rem;
-                        margin-bottom: 0;
+    @media (min-width: 1300px) {
+        &__menylinje-topp {
+            padding: 1.5rem 2rem;
 
-                        .arbeidsflatevalg-tekst {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            line-height: 1.5625rem;
+            .topp-kolonner {
+                .menylenker-seksjon.til-toppen {
+                    width: 15%;
+                    margin-bottom: 0;
+                }
+
+                .menylenker-seksjon.venstre,
+                .menylenker-seksjon.midt,
+                .menylenker-seksjon.hoyre {
+                    width: 20%;
+                }
+
+                .menylenker-seksjon.arbeidsflate {
+                    width: 24%;
+                    margin-top: 0;
+                }
+
+                .arbeidsflatevalg-innhold {
+                    margin-bottom: 0;
+
+                    .arbeidsflatevalg {
+                        flex-direction: column;
+                        justify-content: left;
+
+                        li {
+                            width: auto;
                         }
                     }
                 }
@@ -96,48 +234,34 @@
 
         &__menylinje-bottom {
             .bottom-innhold {
-                display: flex;
-                align-items: center;
+                justify-content: center;
 
-                ul {
-                    width: 24.5rem;
-                    margin: 0;
+                .bottom-lenker {
+                    width: 85%;
                 }
 
                 .bottom-logo {
-                    width: 65px;
-                    height: 65px;
-                    margin-right: 1rem;
-                }
-
-                .bottom-tekst {
-                    width: 11rem;
-                    margin-right: 1rem;
+                    width: 15%;
+                    margin-right: 0;
                 }
             }
         }
     }
 
     @media (min-width: @desktopLimitWidth) {
-        &__innhold {
-            width: @desktopLimitWidth;
-            margin: 0 auto;
-        }
-
         &__menylinje-topp {
-            .menylenker-seksjon {
-                width: 22%;
+            padding: 1.5rem 0;
+
+            .topp-kolonner {
+                width: 1344px;
+                margin: 0 auto;
             }
         }
-    }
 
-    @media (min-width: 1300px) {
         &__menylinje-bottom {
-            .bottom-innhold .bottom-logo {
-                position: absolute;
-                left: -92px;
-                bottom: -18px;
-                margin-right: 0;
+            .bottom-innhold {
+                width: 1344px;
+                margin: 0 auto;
             }
         }
     }
