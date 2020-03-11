@@ -2,7 +2,10 @@ import React from 'react';
 import htmlReactParser, { DomElement, domToReact } from 'html-react-parser';
 import { LenkeMedGA } from '../../../../../LenkeMedGA';
 import { GACategory } from '../../../../../../utils/google-analytics';
-import { getKbId, NaviGroup } from '../../../../../../utils/keyboard-navigation/kb-navigation';
+import {
+    getKbId,
+    NaviGroup,
+} from '../../../../../../utils/keyboard-navigation/kb-navigation';
 
 const ikonDefault = 'alarm-ikon';
 const ikonDefaultPath = require('../../../../../../ikoner/varsler/alarm.svg');
@@ -15,8 +18,8 @@ const ikoner: { [str: string]: string } = {
 };
 
 type Props = {
-    varsler: string
-}
+    varsler: string;
+};
 
 const parseIkon = (ikonStr: string) => {
     const ikon = ikoner[ikonStr] || ikonDefaultPath;
@@ -29,13 +32,17 @@ const parseIkon = (ikonStr: string) => {
     );
 };
 
-const parseLenke = (href: string | undefined, children: DomElement[] | undefined, index: number) => {
+const parseLenke = (
+    href: string | undefined,
+    children: DomElement[] | undefined,
+    index: number
+) => {
     return (
         <LenkeMedGA
             href={href || ''}
             tabIndex={0}
             className={'varsel-lenke'}
-            id={getKbId(NaviGroup.Varsler, {col: 0, row: 1, sub: index})}
+            id={getKbId(NaviGroup.Varsler, { col: 0, row: 1, sub: index })}
             gaEventArgs={{
                 category: GACategory.Header,
                 action: 'varsel-lenke',
@@ -52,7 +59,8 @@ export const VarslerParsed = ({ varsler }: Props) => {
     const varslerParsed = htmlReactParser(varsler, {
         replace: ({ name, attribs, children }) => {
             if (attribs?.class.includes('varsel-ikon') && children) {
-                const ikonStr = children[0] && children[0].data || ikonDefault;
+                const ikonStr =
+                    (children[0] && children[0].data) || ikonDefault;
                 return parseIkon(ikonStr);
             }
 

@@ -1,5 +1,3 @@
-import Environment from '../../utils/Environment';
-
 export enum FooterSeksjon {
     VENSTRE,
     HOYRE,

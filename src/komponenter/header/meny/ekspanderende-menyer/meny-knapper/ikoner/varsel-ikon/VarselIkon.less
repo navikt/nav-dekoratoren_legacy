@@ -60,7 +60,8 @@
         transition: @transition-props;
 
         &--open {
-            transform: translate((@width - @ring-diameter) / 2, @height / 2) scale(0);
+            transform: translate((@width - @ring-diameter) / 2, @height / 2)
+                scale(0);
         }
     }
 
@@ -68,7 +69,10 @@
         position: absolute;
         z-index: 2;
 
-        transform: translate((@width - @bell-width) / 2, @ring-diameter - @stroke-width);
+        transform: translate(
+            (@width - @bell-width) / 2,
+            @ring-diameter - @stroke-width
+        );
 
         border-top-left-radius: @bell-height + @stroke-width;
         border-top-right-radius: @bell-height + @stroke-width;
@@ -109,7 +113,8 @@
         position: absolute;
         z-index: 1;
 
-        transform: translate((@width - @clapper-length) / 2, @height / 2) rotate(90deg);
+        transform: translate((@width - @clapper-length) / 2, @height / 2)
+            rotate(90deg);
 
         border-radius: @clapper-thickness / 2;
 
