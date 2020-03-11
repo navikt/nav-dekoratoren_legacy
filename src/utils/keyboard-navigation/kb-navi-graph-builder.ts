@@ -8,6 +8,7 @@ import {
     NaviNodeMap,
     NodeEdge,
 } from './kb-navigation';
+import { create } from 'domain';
 
 export const buildNaviGraphAndGetRootNode = (
     group: NaviGroup,
@@ -186,7 +187,7 @@ export const buildNaviGraphAndGetRootNode = (
     const getElement = (index: NaviIndex) =>
         document.getElementById(getKbId(group, index, idMap)) as HTMLElement;
 
-    const getNodeAtIndex = (index: NaviIndex): NaviNode => {
+    const getNodeAtIndex = (index: NaviIndex): NaviNode | null => {
         if (!index || !getElement(index)) {
             return null;
         }
@@ -201,14 +202,21 @@ export const buildNaviGraphAndGetRootNode = (
         nodeMap[id] = node;
 
         if (node) {
-            node[NodeEdge.Top] = getNodeAtIndex(getTopEdgeIndex(index));
-            node[NodeEdge.Bottom] = getNodeAtIndex(getBottomEdgeIndex(index));
-            node[NodeEdge.Left] = getNodeAtIndex(getLeftEdgeIndex(index));
-            node[NodeEdge.Right] = getNodeAtIndex(getRightEdgeIndex(index));
+            node[NodeEdge.Top] = getNodeAtIndex(getTopEdgeIndex(index)) || node;
+            node[NodeEdge.Bottom] =
+                getNodeAtIndex(getBottomEdgeIndex(index)) || node;
+            node[NodeEdge.Left] =
+                getNodeAtIndex(getLeftEdgeIndex(index)) || node;
+            node[NodeEdge.Right] =
+                getNodeAtIndex(getRightEdgeIndex(index)) || node;
         }
 
         return node;
     };
 
-    return getNodeAtIndex(rootIndex);
+    // TODO: løs dette på en annen måte...
+    return (
+        getNodeAtIndex(rootIndex) ||
+        createNode('blank-node-id', rootIndex, group)
+    );
 };

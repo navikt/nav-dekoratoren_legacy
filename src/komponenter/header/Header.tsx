@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../reducer/reducer';
 import { Language } from '../../reducer/language-duck';
@@ -15,37 +15,33 @@ import {
 import Environment from '../../utils/Environment';
 import {
     addEventListenersAndReturnHandlers,
-    getHeaderKbNavGraphData,
+    createHeaderKbNaviGraph,
     removeListeners,
 } from '../../utils/keyboard-navigation/kb-header-navigation';
 import {
-    NaviGraphData,
-    NaviNode,
-} from '../../utils/keyboard-navigation/kb-navigation';
-import {
-    KeyboardNodeState,
-    settCurrentNode,
-    settKeyboardNodes,
+    setCurrentNode,
+    setKbMainGraph,
 } from '../../reducer/keyboard-nav-duck';
-import { desktopHovedmenyKnappId } from './meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
-import { desktopSokKnappId } from './meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
-import { desktopMinsideKnappId } from './meny/ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
-import { desktopVarslerKnappId } from './meny/ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
+import { NaviNode } from '../../utils/keyboard-navigation/kb-navigation';
 
 const stateSelector = (state: AppState) => ({
     language: state.language.language,
     arbeidsflate: state.arbeidsflate.status,
     menyStatus: state.menypunkt.status,
     innloggingsStatus: state.innloggingsstatus.data,
-    currentNode: state.keyboardNodes.currentNode,
+    kbNavState: state.keyboardNodes,
 });
 
 export const Header = () => {
     const dispatch = useDispatch();
-    const { language, arbeidsflate, menyStatus, innloggingsStatus, currentNode } = useSelector(
-        stateSelector,
-    );
-    const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
+
+    const {
+        language,
+        arbeidsflate,
+        menyStatus,
+        innloggingsStatus,
+        kbNavState,
+    } = useSelector(stateSelector);
 
     useEffect(() => {
         fetchMenypunkter()(dispatch);
@@ -55,38 +51,33 @@ export const Header = () => {
     }, []);
 
     useEffect(() => {
-        const graphData = getHeaderKbNavGraphData(
+        const mainGraph = createHeaderKbNaviGraph(
             language,
             arbeidsflate,
             menyStatus,
-            innloggingsStatus.authenticated,
+            innloggingsStatus.authenticated
         );
-        if (graphData?.rootNode) {
-            setKbNaviGraph(graphData);
-            const nodes: KeyboardNodeState = {
-                hovedmeny: graphData.nodeMap[desktopHovedmenyKnappId],
-                minside: graphData.nodeMap[desktopMinsideKnappId],
-                sok: graphData.nodeMap[desktopSokKnappId],
-                varsler: graphData.nodeMap[desktopVarslerKnappId],
-                currentNode: graphData.rootNode,
-            };
-            dispatch(settKeyboardNodes(nodes));
-            dispatch(settCurrentNode(graphData.rootNode));
+        if (mainGraph) {
+            dispatch(setKbMainGraph(mainGraph));
+            dispatch(setCurrentNode(mainGraph.rootNode));
         }
     }, [language, arbeidsflate, menyStatus, innloggingsStatus]);
 
     useEffect(() => {
-        if (!kbNaviGraph) {
-            return;
-        }
-
-        const eventHandlers = addEventListenersAndReturnHandlers(
-            currentNode,
-            kbNaviGraph,
-            (node: NaviNode) => dispatch(settCurrentNode(node)),
+        const handlers = addEventListenersAndReturnHandlers(
+            kbNavState.currentNode,
+            {
+                ...kbNavState.mainGraph.nodeMap,
+                ...kbNavState.subGraph?.nodeMap,
+            },
+            (node: NaviNode) => dispatch(setCurrentNode(node))
         );
-        return removeListeners.bind(document, eventHandlers);
-    }, [currentNode]);
+        console.log('header-2');
+
+        return () => removeListeners(handlers);
+    }, [kbNavState.currentNode]);
+
+    console.log('header-0');
 
     return (
         <>

@@ -1,21 +1,17 @@
 import KbNav, {
-    getNaviGraphData,
+    createNaviGraph,
     IdMap,
-    NaviGraphData,
     NaviGroup,
     NaviNode,
+    NaviNodeMap,
     NodeSetterCallback,
 } from './kb-navigation';
 import { Language } from '../../reducer/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from '../../api/api';
-import {
-    desktopHovedmenyKnappId,
-} from '../../komponenter/header/meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
+import { desktopHovedmenyKnappId } from '../../komponenter/header/meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
 import { desktopSokKnappId } from '../../komponenter/header/meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
-import {
-    desktopMinsideKnappId,
-} from '../../komponenter/header/meny/ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
+import { desktopMinsideKnappId } from '../../komponenter/header/meny/ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
 import { desktopVarslerKnappId } from '../../komponenter/header/meny/ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
 import { desktopHeaderLogoId } from '../../komponenter/header/meny/DesktopMenylinje';
 
@@ -25,12 +21,17 @@ type Handlers = {
 };
 
 export const addEventListenersAndReturnHandlers = (
-    node: NaviNode,
-    graphData: NaviGraphData,
-    setKbNaviNode: NodeSetterCallback,
+    currentNode: NaviNode,
+    nodeMap: NaviNodeMap,
+    setCurrentNode: NodeSetterCallback
 ): Handlers => {
-    const kbHandler = KbNav.kbHandler(node, setKbNaviNode);
-    const focusHandler = KbNav.focusHandler(node, graphData, setKbNaviNode);
+    const kbHandler = KbNav.kbHandler(currentNode, setCurrentNode);
+    const focusHandler = KbNav.focusHandler(
+        currentNode,
+        nodeMap,
+        setCurrentNode,
+        kbHandler
+    );
     document.addEventListener('focusin', focusHandler);
     document.addEventListener('keydown', kbHandler);
 
@@ -42,35 +43,40 @@ export const removeListeners = ({ focusIn, keyDown }: Handlers) => {
     document.removeEventListener('keydown', keyDown);
 };
 
-export const getHeaderKbNavGraphData = (
+export const createHeaderKbNaviGraph = (
     language: Language,
     arbeidsflate: MenuValue,
     menyStatus: Status,
-    erInnlogget: boolean,
+    erInnlogget: boolean
 ) => {
     const headerElement = document.getElementById('dekorator-desktop-header');
     if (!headerElement) {
-        return;
+        return null;
     }
 
-    const naviGroup = NaviGroup.HeaderMenylinje;
-    const rootIndex = { col: 0, row: 1, sub: 0 };
-    const index = { col: 0, row: 1, sub: 0 };
+    const group = NaviGroup.HeaderMenylinje;
+    const rootIndex = { col: 0, row: 0, sub: 0 };
+    const index = { col: 0, row: 0, sub: 0 };
     const idMap: IdMap = {};
 
-    idMap[KbNav.getKbId(naviGroup, { ...index, col: index.col++ })] = desktopHeaderLogoId;
+    idMap[
+        KbNav.getKbId(group, { ...index, col: index.col++ })
+    ] = desktopHeaderLogoId;
 
     if (language !== Language.SAMISK && menyStatus === Status.OK) {
         idMap[
-            KbNav.getKbId(naviGroup, { ...index, col: index.col++ })
-            ] = desktopHovedmenyKnappId;
+            KbNav.getKbId(group, { ...index, col: index.col++ })
+        ] = desktopHovedmenyKnappId;
     }
 
-    idMap[KbNav.getKbId(naviGroup, { ...index, col: index.col++ })] = desktopSokKnappId;
+    idMap[
+        KbNav.getKbId(group, { ...index, col: index.col++ })
+    ] = desktopSokKnappId;
 
     if (arbeidsflate === MenuValue.PRIVATPERSON && erInnlogget) {
-        idMap[KbNav.getKbId(naviGroup, { ...index, col: index.col++ })] =
-            desktopVarslerKnappId;
+        idMap[
+            KbNav.getKbId(group, { ...index, col: index.col++ })
+        ] = desktopVarslerKnappId;
     }
 
     if (
@@ -79,11 +85,11 @@ export const getHeaderKbNavGraphData = (
         erInnlogget
     ) {
         idMap[
-            KbNav.getKbId(naviGroup, { ...index, col: index.col++ })
-            ] = desktopMinsideKnappId;
+            KbNav.getKbId(group, { ...index, col: index.col++ })
+        ] = desktopMinsideKnappId;
     }
 
-    const colLayout = [3, index.col];
+    const colLayout = [index.col];
 
-    return getNaviGraphData(naviGroup, rootIndex, colLayout, idMap);
+    return createNaviGraph(group, rootIndex, colLayout, idMap);
 };

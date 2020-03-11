@@ -1,41 +1,67 @@
-import { ActionType, Handling } from '../redux/actions';
-import { NaviNode } from '../utils/keyboard-navigation/kb-navigation';
-import { act } from 'react-dom/test-utils';
+import {
+    ActionType,
+    Handling,
+    SettKbCurrentNode,
+    SettKbMainGraph,
+    SettKbSubGraph,
+} from '../redux/actions';
+import {
+    createNode,
+    NaviGraphData,
+    NaviGroup,
+    NaviNode,
+} from '../utils/keyboard-navigation/kb-navigation';
+import { desktopHeaderLogoId } from '../komponenter/header/meny/DesktopMenylinje';
 
-export interface KeyboardNodeState {
+export type KeyboardNaviState = {
     currentNode: NaviNode;
-    hovedmeny: NaviNode;
-    minside: NaviNode;
-    sok: NaviNode;
-    varsler: NaviNode;
-}
-
-const initialState: KeyboardNodeState = {
-    currentNode: null,
-    hovedmeny: null,
-    minside: null,
-    sok: null,
-    varsler: null,
+    mainGraph: NaviGraphData;
+    subGraph?: NaviGraphData;
 };
 
-export const settKeyboardNodes = (nodes: KeyboardNodeState) => ({
-    type: ActionType.SETT_KEYBOARD_NODES,
-    nodes: nodes,
+const initialNode = createNode(
+    desktopHeaderLogoId,
+    { col: 0, row: 0, sub: 0 },
+    NaviGroup.HeaderMenylinje
+);
+
+const initialGraph = {
+    groupName: NaviGroup.HeaderMenylinje,
+    rootNode: initialNode,
+    nodeMap: { desktopHeaderLogoId: initialNode },
+};
+
+const initialState: KeyboardNaviState = {
+    currentNode: initialNode,
+    mainGraph: initialGraph,
+};
+
+export const setKbMainGraph = (graph: NaviGraphData): SettKbMainGraph => ({
+    type: ActionType.SETT_KB_MAIN_GRAPH,
+    mainGraph: graph,
 });
 
-export const settCurrentNode = (currentNode: NaviNode) => ({
-    type: ActionType.SETT_KEYBOARD_NODE_CURRENT,
-    currentNode: currentNode,
+export const setKbSubGraph = (graph: NaviGraphData): SettKbSubGraph => ({
+    type: ActionType.SETT_KB_SUB_GRAPH,
+    subGraph: graph,
+});
+
+export const setCurrentNode = (node: NaviNode): SettKbCurrentNode => ({
+    type: ActionType.SETT_KB_NODE_CURRENT,
+    currentNode: node,
 });
 
 export const reducer = (
-    state: KeyboardNodeState = initialState,
+    state: KeyboardNaviState = initialState,
     action: Handling
-): KeyboardNodeState => {
-    if (action.type === ActionType.SETT_KEYBOARD_NODES) {
-        return { ...action.nodes, currentNode: state.currentNode };
+): KeyboardNaviState => {
+    if (action.type === ActionType.SETT_KB_MAIN_GRAPH) {
+        return { ...state, mainGraph: action.mainGraph };
     }
-    if (action.type === ActionType.SETT_KEYBOARD_NODE_CURRENT) {
+    if (action.type === ActionType.SETT_KB_SUB_GRAPH) {
+        return { ...state, subGraph: action.subGraph };
+    }
+    if (action.type === ActionType.SETT_KB_NODE_CURRENT) {
         return { ...state, currentNode: action.currentNode };
     }
     return state;

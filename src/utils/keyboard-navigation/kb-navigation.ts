@@ -42,7 +42,7 @@ export type NaviNode = {
     [NodeEdge.Bottom]: NaviNode;
     [NodeEdge.Left]: NaviNode;
     [NodeEdge.Right]: NaviNode;
-} | null;
+};
 
 export type NaviNodeMap = {
     [id: string]: NaviNode;
@@ -54,19 +54,23 @@ export type IdMap = {
 
 export type NodeSetterCallback = (node: NaviNode) => void;
 
-export const createNode = (
+export function createNode(
     id: string,
     index: NaviIndex,
     group: NaviGroup
-): NaviNode => ({
-    id: id,
-    index: index,
-    group: group,
-    [NodeEdge.Top]: null,
-    [NodeEdge.Bottom]: null,
-    [NodeEdge.Left]: null,
-    [NodeEdge.Right]: null,
-});
+): NaviNode {
+    const node: Partial<NaviNode> = {
+        id: id,
+        index: index,
+        group: group,
+    };
+    node[NodeEdge.Top] = node as NaviNode;
+    node[NodeEdge.Bottom] = node as NaviNode;
+    node[NodeEdge.Left] = node as NaviNode;
+    node[NodeEdge.Right] = node as NaviNode;
+
+    return node as NaviNode;
+}
 
 export const getKbId = (
     group: NaviGroup,
@@ -134,25 +138,26 @@ export const selectNode = (
     }
 };
 
-const kbHandler = (node: NaviNode, callback: NodeSetterCallback) => (
-    event: KeyboardEvent
-) => {
-    if (!node) {
+const kbHandler = (
+    currentNode: NaviNode,
+    setCurrentNode: NodeSetterCallback
+) => (event: KeyboardEvent) => {
+    if (!currentNode) {
         return;
     }
     const key = ieKeyMap(event.key) || event.key;
     switch (key) {
         case 'ArrowLeft':
-            selectNode(node[NodeEdge.Left], callback);
+            selectNode(currentNode[NodeEdge.Left], setCurrentNode);
             break;
         case 'ArrowUp':
-            selectNode(node[NodeEdge.Top], callback);
+            selectNode(currentNode[NodeEdge.Top], setCurrentNode);
             break;
         case 'ArrowRight':
-            selectNode(node[NodeEdge.Right], callback);
+            selectNode(currentNode[NodeEdge.Right], setCurrentNode);
             break;
         case 'ArrowDown':
-            selectNode(node[NodeEdge.Bottom], callback);
+            selectNode(currentNode[NodeEdge.Bottom], setCurrentNode);
             break;
         default:
             return;
@@ -162,23 +167,25 @@ const kbHandler = (node: NaviNode, callback: NodeSetterCallback) => (
 
 const focusHandler = (
     currentNode: NaviNode,
-    graph: NaviGraphData | undefined,
-    callback: NodeSetterCallback
+    nodeMap: NaviNodeMap,
+    setCurrentNode: NodeSetterCallback,
+    currentKbHandler: (e: KeyboardEvent) => void
 ) => (event: FocusEvent) => {
     const id = (event.target as HTMLElement).id;
-    if (!id || !graph || !currentNode || currentNode.id === id) {
+    if (!id || !currentNode || currentNode.id === id) {
         return;
     }
 
-    const focusedNode = graph.nodeMap[id];
+    const focusedNode = nodeMap[id];
     if (focusedNode) {
-        selectNode(focusedNode, callback, false);
+        selectNode(focusedNode, setCurrentNode, false);
     } else {
-        selectNode(graph.rootNode, callback, false);
+        // selectNode(graph.rootNode, setCurrentNode, false);
+        document.removeEventListener('keydown', currentKbHandler);
     }
 };
 
-export const getNaviGraphData = (
+export const createNaviGraph = (
     group: NaviGroup,
     rootIndex: NaviIndex,
     maxColsPerRow: number[],
@@ -203,5 +210,5 @@ export default {
     getKbId,
     kbHandler,
     focusHandler,
-    getNaviGraphData,
+    getNaviGraphData: createNaviGraph,
 };

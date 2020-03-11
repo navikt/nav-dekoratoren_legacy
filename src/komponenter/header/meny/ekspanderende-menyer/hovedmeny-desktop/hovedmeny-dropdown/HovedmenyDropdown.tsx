@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import BEMHelper, { BEMWrapper } from '../../../../../../utils/bem';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 import { MenyNode } from '../../../../../../reducer/menu-duck';
@@ -12,8 +11,8 @@ import { matchMedia } from '../../../../../../utils/match-media-polyfill';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
-import { AppState } from '../../../../../../reducer/reducer';
 import { KbNavigation } from '../../../../../../utils/keyboard-navigation/KbNavigation';
+import { desktopHovedmenyKnappId } from '../HovedmenyDesktop';
 
 type Props = {
     classname: string;
@@ -53,10 +52,6 @@ export const HovedmenyDropdown = (props: Props) => {
     const [maxColsPerSection, setMaxColsPerSection] = useState();
     const updateMaxCols = () => setMaxColsPerSection(getMaxColsPerSection(cls));
 
-    const parentKbNode = useSelector(
-        (state: AppState) => state.keyboardNodes.hovedmeny
-    );
-
     const cls = BEMHelper(classname);
 
     const mqlDesktop = matchMedia('(min-width: 1440px)');
@@ -87,8 +82,8 @@ export const HovedmenyDropdown = (props: Props) => {
             rootIndex={{ col: 0, row: 0, sub: 0 }}
             maxColsPerSection={maxColsPerSection}
             isEnabled={isOpen}
-            parentNode={parentKbNode}
             parentEdge={NodeEdge.Bottom}
+            parentNodeId={desktopHovedmenyKnappId}
         >
             <div className={cls.element('dropdown')}>
                 <Toppseksjon classname={classname} />

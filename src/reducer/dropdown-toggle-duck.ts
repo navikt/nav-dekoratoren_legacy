@@ -2,9 +2,9 @@ import { ActionType, Handling } from '../redux/actions';
 
 export interface DropdownState {
     hovedmeny: boolean;
-    minside: boolean;
     sok: boolean;
     varsler: boolean;
+    minside: boolean;
 }
 
 const initialState: DropdownState = {

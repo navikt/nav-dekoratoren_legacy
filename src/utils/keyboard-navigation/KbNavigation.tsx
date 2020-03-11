@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import {
+    createNaviGraph,
     IdMap,
     NaviGroup,
     NaviIndex,
@@ -8,9 +9,9 @@ import {
     NodeEdgeOpposite,
     selectNode,
 } from './kb-navigation';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../reducer/reducer';
-import { buildNaviGraphAndGetRootNode } from './kb-navi-graph-builder';
+import { setKbSubGraph } from '../../reducer/keyboard-nav-duck';
 
 type Props = {
     group: NaviGroup;
@@ -18,10 +19,14 @@ type Props = {
     maxColsPerSection: number[];
     idMap?: IdMap;
     isEnabled: boolean;
-    parentNode: NaviNode;
+    parentNodeId: string;
     parentEdge: NodeEdge;
     children: JSX.Element;
 };
+
+const stateSelector = (state: AppState) => ({
+    mainNodeMap: state.keyboardNodes.mainGraph.nodeMap,
+});
 
 export const KbNavigation = (props: Props) => {
     const {
@@ -30,24 +35,19 @@ export const KbNavigation = (props: Props) => {
         maxColsPerSection,
         idMap,
         isEnabled,
-        parentNode,
+        parentNodeId,
         parentEdge,
         children,
     } = props;
 
-    if (!parentNode) {
-        return children;
-    }
-
-    const currentNode = useSelector(
-        (state: AppState) => state.keyboardNodes.currentNode
-    );
+    const dispatch = useDispatch();
+    const { mainNodeMap } = useSelector(stateSelector);
+    const parentNode = mainNodeMap[parentNodeId];
 
     useEffect(() => {
         const cleanUp = () => {
-            parentNode[parentEdge] = parentNode;
-            if (currentNode?.group === group) {
-                selectNode(parentNode);
+            if (parentNode) {
+                parentNode[parentEdge] = parentNode;
             }
         };
 
@@ -56,16 +56,16 @@ export const KbNavigation = (props: Props) => {
             return;
         }
 
-        const rootNode = buildNaviGraphAndGetRootNode(
+        const graph = createNaviGraph(
             group,
             rootIndex,
             maxColsPerSection,
             idMap
         );
-
-        if (rootNode) {
-            parentNode[parentEdge] = rootNode;
-            rootNode[NodeEdgeOpposite[parentEdge]] = parentNode;
+        if (graph) {
+            dispatch(setKbSubGraph(graph));
+            parentNode[parentEdge] = graph.rootNode;
+            graph.rootNode[NodeEdgeOpposite[parentEdge]] = parentNode;
         }
     }, [group, rootIndex, idMap, maxColsPerSection, isEnabled]);
 

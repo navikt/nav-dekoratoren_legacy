@@ -8,19 +8,22 @@ import { LenkeMedGA } from '../../../../../LenkeMedGA';
 import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
 import { Undertittel } from 'nav-frontend-typografi';
-import { getKbId, NaviGroup, NodeEdge } from '../../../../../../utils/keyboard-navigation/kb-navigation';
+import {
+    getKbId,
+    NaviGroup,
+    NodeEdge,
+} from '../../../../../../utils/keyboard-navigation/kb-navigation';
 import { KbNavigation } from '../../../../../../utils/keyboard-navigation/KbNavigation';
 
 type Props = {
-    isOpen: boolean
-}
+    isOpen: boolean;
+};
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
     varslerAntall: state.varsler.data.antall,
     varslerUleste: state.varsler.data.uleste,
     language: state.language.language,
-    parentKbNode: state.keyboardNodes.varsler
 });
 
 const classname = 'varsler-display-desktop';
@@ -29,7 +32,7 @@ const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => (
     <div className="vis-alle-lenke">
         <LenkeMedGA
             href={Environment.API_VARSELINNBOKS_URL}
-            id={getKbId(NaviGroup.Varsler, {col: 0, row: index, sub: 0})}
+            id={getKbId(NaviGroup.Varsler, { col: 0, row: index, sub: 0 })}
             tabIndex={0}
             gaEventArgs={{
                 category: GACategory.Header,
@@ -43,36 +46,34 @@ const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => (
     </div>
 );
 
-export const Varselvisning = ({isOpen}: Props) => {
-    const { varsler, varslerAntall, varslerUleste, language, parentKbNode } = useSelector(stateSelector);
+export const Varselvisning = ({ isOpen }: Props) => {
+    const { varsler, varslerAntall, varslerUleste, language } = useSelector(
+        stateSelector
+    );
 
-    const nyeVarslerMsg = varslerUleste > 0
-        ? ` (${varslerUleste} ${finnTekst(
-            'varsler-nye',
-            language,
-        )})`
-        : '';
+    const nyeVarslerMsg =
+        varslerUleste > 0
+            ? ` (${varslerUleste} ${finnTekst('varsler-nye', language)})`
+            : '';
     const visAlleVarslerLenke = varslerAntall > 5;
 
-    console.log(parentKbNode);
-
     return (
-        <KbNavigation
-            group={NaviGroup.Varsler}
-            rootIndex={{col: 0, row: 0, sub: 0}}
-            maxColsPerSection={[1, 1, 1]}
-            isEnabled={isOpen}
-            parentNode={parentKbNode}
-            parentEdge={NodeEdge.Bottom}
-        >
-            <div className={classname}>
-                <Undertittel>
-                    <Tekst id={'varsler'} />
-                </Undertittel>
-                { visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
-                <VarslerParsed varsler={varsler} />
-                { visAlleVarslerLenke && alleVarslerLenke(2, nyeVarslerMsg)}
-            </div>
-        </KbNavigation>
+        // <KbNavigation
+        //     group={NaviGroup.Varsler}
+        //     rootIndex={{col: 0, row: 0, sub: 0}}
+        //     maxColsPerSection={[1, 1, 1]}
+        //     isEnabled={isOpen}
+        //     parentNode={parentKbNode}
+        //     parentEdge={NodeEdge.Bottom}
+        // >
+        <div className={classname}>
+            <Undertittel>
+                <Tekst id={'varsler'} />
+            </Undertittel>
+            {visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
+            <VarslerParsed varsler={varsler} />
+            {visAlleVarslerLenke && alleVarslerLenke(2, nyeVarslerMsg)}
+        </div>
+        // </KbNavigation>
     );
 };

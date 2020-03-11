@@ -23,9 +23,6 @@ type Props = {
 
 export const MinsideDropdown = (props: Props) => {
     const { classname, isOpen, menyLenker } = props;
-    const parentKbNode = useSelector(
-        (state: AppState) => state.keyboardNodes.minside
-    );
     const cls = BEMHelper(classname);
 
     if (!menyLenker) {
@@ -33,50 +30,50 @@ export const MinsideDropdown = (props: Props) => {
     }
 
     return (
-        <KbNavigation
-            group={NaviGroup.MinsideMeny}
-            rootIndex={{ col: 0, row: 0, sub: 0 }}
-            maxColsPerSection={[1, 3]}
-            isEnabled={isOpen}
-            parentNode={parentKbNode}
-            parentEdge={NodeEdge.Bottom}
-        >
-            <>
-                <div className={cls.element('topp-seksjon')}>
-                    <LenkeMedGA
-                        href={Environment.DITT_NAV_URL}
-                        id={KbNav.getKbId(NaviGroup.MinsideMeny, {
-                            col: 0,
-                            row: 0,
-                            sub: 0,
-                        })}
-                        gaEventArgs={{
-                            category: GACategory.Header,
-                            action: 'dittnav',
-                            label: Environment.DITT_NAV_URL,
-                        }}
-                    >
-                        <Tekst id={'til-forside'} />
-                    </LenkeMedGA>
-                    <Systemtittel className={cls.element('topp-seksjon-tittel')}>
-                        <Tekst id={'min-side'} />
-                    </Systemtittel>
-                </div>
-                <div className={cls.element('lenke-seksjoner')}>
-                    {menyLenker &&
-                        menyLenker.children.map((menygruppe, index) => (
-                            <MenyLenkeSeksjon
-                                menygruppe={menygruppe}
-                                isOpen={isOpen}
-                                colIndex={index}
-                                rowIndex={1}
-                                kbNaviGroup={NaviGroup.MinsideMeny}
-                                key={menygruppe.displayName}
-                            />
-                        ))}
-                </div>
-            </>
-        </KbNavigation>
+        // <KbNavigation
+        //     group={NaviGroup.MinsideMeny}
+        //     rootIndex={{ col: 0, row: 0, sub: 0 }}
+        //     maxColsPerSection={[1, 3]}
+        //     isEnabled={isOpen}
+        //     parentNode={parentKbNode}
+        //     parentEdge={NodeEdge.Bottom}
+        // >
+        <>
+            <div className={cls.element('topp-seksjon')}>
+                <LenkeMedGA
+                    href={Environment.DITT_NAV_URL}
+                    id={KbNav.getKbId(NaviGroup.MinsideMeny, {
+                        col: 0,
+                        row: 0,
+                        sub: 0,
+                    })}
+                    gaEventArgs={{
+                        category: GACategory.Header,
+                        action: 'dittnav',
+                        label: Environment.DITT_NAV_URL,
+                    }}
+                >
+                    <Tekst id={'til-forside'} />
+                </LenkeMedGA>
+                <Systemtittel className={cls.element('topp-seksjon-tittel')}>
+                    <Tekst id={'min-side'} />
+                </Systemtittel>
+            </div>
+            <div className={cls.element('lenke-seksjoner')}>
+                {menyLenker &&
+                    menyLenker.children.map((menygruppe, index) => (
+                        <MenyLenkeSeksjon
+                            menygruppe={menygruppe}
+                            isOpen={isOpen}
+                            colIndex={index}
+                            rowIndex={1}
+                            kbNaviGroup={NaviGroup.MinsideMeny}
+                            key={menygruppe.displayName}
+                        />
+                    ))}
+            </div>
+        </>
+        // </KbNavigation>
     );
 };
 

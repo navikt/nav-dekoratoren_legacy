@@ -50,11 +50,7 @@ class Varselvisning extends React.Component<Props, State> {
     }
 
     setTabIndex = () => {
-        const varslerWrapperElement: string = this.erTabletEllerDesktop()
-            ? '.desktopmeny .nav-varsler'
-            : '.mobilmeny .nav-varsler';
-
-        const varsler = document.querySelector(varslerWrapperElement);
+        const varsler = document.querySelector('.mobilmeny .nav-varsler');
 
         if (varsler) {
             for (
@@ -158,9 +154,9 @@ class Varselvisning extends React.Component<Props, State> {
                             <Tekst id={'varsler-visalle'} />
                             {antallUlesteVarsler > 0
                                 ? ` (${antallUlesteVarsler} ${finnTekst(
-                                    'varsler-nye',
-                                    this.props.language
-                                )})`
+                                      'varsler-nye',
+                                      this.props.language
+                                  )})`
                                 : ''}
                         </LenkeMedGA>
                     </div>
