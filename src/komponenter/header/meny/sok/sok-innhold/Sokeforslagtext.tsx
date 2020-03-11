@@ -5,7 +5,7 @@ const Sokeforslagtext = ({ highlight }: { highlight?: string }) => {
     return (
         <div className="sok-resultat-listItem-text">
             <Normaltekst>
-                <div
+                <span
                     dangerouslySetInnerHTML={{
                         __html: (highlight || '')
                             .replace(/<\/?[^>]+(>|$)/g, '') // Remove html
