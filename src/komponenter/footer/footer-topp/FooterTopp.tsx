@@ -10,6 +10,7 @@ import { FooterLenke, lenkerHoyre, lenkerVenstre } from '../Footer-lenker';
 import DelSkjermModal from './del-skjerm-modal/DelSkjermModal';
 import Spraakvalg from './spraakvalg/Spraakvalg';
 import FooterArbeidsflatevalg from './footer-arbeidsflatevalg/FooterArbeidsflatevalg';
+import PilOppHvit from '../../../ikoner/meny/PilOppHvit';
 
 interface Props {
     classname: string;
@@ -55,9 +56,18 @@ const FooterTopp = ({ classname }: Props) => {
         <section className={cls.element('menylinje-topp')}>
             <div className="topp-kolonner">
                 <div className="menylenker-seksjon til-toppen">
-                    <Lenke href="#" onClick={() => scrollToTop()}>
-                        <Tekst id="footer-til-toppen" />
-                    </Lenke>
+                    <div className="til-toppen-innhold">
+                        <PilOppHvit />
+                        <Lenke
+                            href="#"
+                            onClick={e => {
+                                e.preventDefault();
+                                scrollToTop();
+                            }}
+                        >
+                            <Tekst id="footer-til-toppen" />
+                        </Lenke>
+                    </div>
                 </div>
                 <div className="menylenker-seksjon venstre">
                     <Undertittel
