@@ -7,7 +7,7 @@ import cls from 'classnames';
 import { Input } from 'nav-frontend-skjema';
 import { Language } from '../../../../reducer/language-duck';
 import Environment, { genererUrl } from '../../../../utils/Environment';
-import { finnTekst } from '../../../../tekster/finn-tekst';
+import Tekst, { finnTekst } from '../../../../tekster/finn-tekst';
 import {
     defaultData,
     InputState,
@@ -251,7 +251,9 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                             <div className="sok-container">
                                 <div className="sok-input-resultat">
                                     <div className={'sok-input__tittel'}>
-                                        <Systemtittel>Søk</Systemtittel>
+                                        <Systemtittel>
+                                            <Tekst id="sok-knapp" />
+                                        </Systemtittel>
                                     </div>
                                     <div className="sok-input-container">
                                         <Input
