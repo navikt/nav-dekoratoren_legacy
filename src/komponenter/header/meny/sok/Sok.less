@@ -1,154 +1,203 @@
 @import '../../../../../node_modules/nav-frontend-core/less/_variabler';
 @import '../../../../styling-variabler.less';
 
+@keyframes animateIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(-8px);
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .desktopmeny,
 .sok-modal__body {
+    // Global styling
     .sok .sok-container {
         position: relative;
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: center;
-        margin-bottom: 1rem;
-        margin-top: 1rem;
-    }
-
-    @keyframes animateIn {
-        0% {
-            opacity: 0;
-            transform: scale(0.6) translateY(-8px);
-        }
-
-        100% {
-            opacity: 1;
-        }
     }
 
     .sok-input-resultat {
         position: relative;
         width: 100%;
+    }
 
-        .sok-input {
-            margin-bottom: 0;
-            input {
-                border-radius: 0;
-                padding: 2rem 1rem 1.5rem;
-                background-color: @navBlaDarken60;
-                border: 2px solid @navBlaLighten60;
-                color: white;
+    .sokeresultat-ingen-treff {
+        margin: 1rem 1rem 0 1rem;
+    }
 
-                &:focus,
-                &:active {
-                    border: 2px solid @navBlaLighten60;
-                }
+    .sokeresultat-spinner {
+        display: flex;
+        justify-content: center;
+        margin: 1rem 0;
+    }
 
-                &::-webkit-input-placeholder,
-                &::-moz-placeholder,
-                &:-ms-input-placeholder,
-                &:-moz-placeholder {
-                    color: white;
-                }
-            }
+    .skjemaelement__label {
+        display: none;
+    }
 
-            input[type='search'] {
-                box-sizing: border-box;
-            }
+    .sokeresultat-liste {
+        list-style: none;
+        position: relative;
+        margin: 0;
+        left: 0;
 
-            input[placeholder] {
-                color: white;
-                margin: 0;
-                font-size: 1.375rem;
-                line-height: 1.625rem;
-                font-weight: 300;
-            }
+        li {
+            padding: 1rem;
+            color: black;
+            font-weight: normal;
+            border-bottom: #b7b1a9 1px solid;
+            text-align: left;
+            cursor: pointer;
+            animation-name: animateIn;
+            animation-duration: 150ms;
+            animation-delay: calc(var(--listmap) * 50ms);
+            animation-fill-mode: both;
+            animation-timing-function: ease-in-out;
 
-            .skjemaelement__label {
-                opacity: 0;
-                position: absolute;
-                line-height: 0;
-                height: 0;
-                width: 0;
-                color: transparent;
-            }
-        }
-
-        .sokeresultat-liste {
-            list-style: none;
-            padding: 0;
-            z-index: 1020;
-            background-color: @navBlaDarken60;
-            width: 100%;
-            overflow: hidden;
-            margin: 0;
-            left: 0;
-
-            li {
-                padding: 1rem;
-                background-color: @navBlaDarken60;
-                color: white;
-
-                &:first-child {
-                    border-top: 2px solid white;
-                }
-
-                &:last-child {
-                    border-bottom: 2px solid white;
-                    border-left: 2px solid white;
-                    border-right: 2px solid white;
-                }
-
-                &:not(:last-child) {
-                    border-left: 2px solid white;
-                    border-right: 2px solid white;
-                    border-bottom: none;
-                }
-            }
-
-            li[aria-selected='true'] {
-                background-color: @navBlaLighten20;
+            &:focus,
+            &:hover {
+                background-color: lightgray;
                 font-weight: bold;
             }
 
-            .sokeresultat-liste ul {
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        li[aria-selected='true'] {
+            background-color: lightgray;
+            font-weight: bold;
+        }
+
+        .sok-resultat-listItem-text {
+            padding-left: 0;
+        }
+    }
+
+    // Mobile
+    @media (max-width: @tabletLimitWidth) {
+        .sok-input-resultat {
+            .sok-input {
+                margin-bottom: 0;
+                input {
+                    border-radius: 0;
+                    padding: 2rem 1rem 1.5rem;
+                    background-color: @navBlaDarken60;
+                    border: 2px solid @navBlaLighten60;
+                    color: white;
+
+                    &:focus,
+                    &:active {
+                        border: 2px solid @navBlaLighten60;
+                    }
+
+                    &::-webkit-input-placeholder,
+                    &::-moz-placeholder,
+                    &:-ms-input-placeholder,
+                    &:-moz-placeholder {
+                        color: white;
+                    }
+                }
+
+                input[type='search'] {
+                    box-sizing: border-box;
+                }
+
+                input[placeholder] {
+                    color: white;
+                    margin: 0;
+                    font-size: 1.375rem;
+                    line-height: 1.625rem;
+                    font-weight: 300;
+                }
+            }
+
+            .sokeresultat-liste {
+                list-style: none;
                 padding: 0;
-            }
+                z-index: 1020;
+                width: 100%;
+                overflow: hidden;
 
-            .sok-resultat-listItem {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-            }
+                li {
+                    padding: 1rem;
+                    color: white;
+                }
 
-            .sok-resultat-chevron {
-                padding: 0 1rem 0 0;
-            }
+                li[aria-selected='true'] {
+                    font-weight: bold;
+                }
 
-            .sok-resultat-listItem-text {
-                padding-left: 2.25rem;
+                .sokeresultat-liste ul {
+                    padding: 0;
+                }
+
+                .sok-resultat-listItem {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                .sok-resultat-chevron {
+                    padding: 0 1rem 0 0;
+                }
+
+                .sok-resultat-listItem-text {
+                    padding-left: 2.25rem;
+                }
             }
+        }
+
+        .sok-input-mobil-submit {
+            position: absolute;
+            top: 1.25rem;
+            right: 2rem;
+            background-color: @navBlaDarken60;
+            border: none;
+
+            &:focus {
+                outline: 2px solid white;
+            }
+        }
+
+        // Hide desktop stuff
+        .sok-input__tittel,
+        .desktop-sok__knapper {
+            display: none;
         }
     }
 
-    .sok-input-mobil-submit {
-        position: absolute;
-        top: 1.25rem;
-        right: 2rem;
-        background-color: @navBlaDarken60;
-        border: none;
-
-        &:focus {
-            outline: 2px solid white;
-        }
-    }
-
+    // Desktop
     @media (min-width: @tabletLimitWidth) {
+        .sok-input-container {
+            position: relative;
+            display: flex;
+        }
+
+        .sok-input {
+            width: 100%;
+
+            &__tittel {
+                margin: 2rem 0 1rem 0;
+            }
+
+            input {
+                padding: 0.75rem;
+                border: 2px solid @navBla;
+            }
+        }
+
         .sok .sok-container {
             width: auto;
             justify-content: center;
-            margin-bottom: 0;
-            margin-top: 1rem;
             align-items: flex-start;
-            min-height: 50vh;
             .sok-ikon {
                 position: relative;
                 top: 0.35rem;
@@ -157,116 +206,115 @@
             }
         }
 
-        .sok-input-resultat {
-            width: auto;
+        .desktop-sok {
+            &__container {
+                width: 32px;
+                height: 24px;
+                padding: 0;
+                position: relative;
+                margin-right: 0.5em;
+            }
 
-            .sok-input {
-                margin-right: 0;
-                width: 20rem;
-                input {
-                    margin-right: 0.5rem;
+            &__knapper {
+                display: flex;
+                height: 50px;
+                position: absolute;
+                right: 0;
+            }
+
+            &__knapp {
+                display: flex;
+                height: 100%;
+                background: none;
+                align-items: center;
+                color: @navBla;
+                font-family: 'Source Sans Pro', Arial, sans-serif;
+                font-size: 1rem;
+                padding: 0 1rem;
+                font-weight: 600;
+                border: 2px solid transparent;
+                cursor: pointer;
+                &:focus {
+                    outline: 0;
                     background-color: white;
-                    color: black;
-                    border-radius: 2px;
-                    -webkit-appearance: none;
-                    -moz-appearance: none;
-                    padding: 0.5rem;
-                    border: 1px solid #78706a;
-                    box-sizing: border-box;
-                    line-height: 1.37rem;
-
-                    &:focus,
-                    &:active {
-                        border: initial;
+                    box-shadow: 0 0 0 3px @navBlaDarken60;
+                    color: @navBla;
+                }
+                &:hover {
+                    border: 2px solid @navBla;
+                }
+            }
+            &__knapp-submit {
+                background: @navBla;
+                border-radius: 0 5px 5px 0;
+                color: white;
+                &:active,
+                &:hover {
+                    color: white;
+                    border-color: #0074df;
+                    background-color: #0074df;
+                    .desktop-sok__sok-circle {
+                        border: white 3px solid !important;
                     }
-
-                    &::-webkit-input-placeholder,
-                    &::-moz-placeholder,
-                    &:-ms-input-placeholder,
-                    &:-moz-placeholder {
-                        color: black;
-                    }
-
-                    &.engelsk {
-                        width: 18.2rem;
+                    .desktop-sok__sok-line {
+                        background-color: white !important;
                     }
                 }
-
-                input[placeholder] {
-                    color: black;
-                    font-size: 1.1rem;
+                &:focus {
+                    .desktop-sok__sok-circle {
+                        border: @navBla 3px solid;
+                    }
+                    .desktop-sok__sok-line {
+                        background-color: @navBla;
+                    }
                 }
             }
 
-            .sokeresultat-liste {
-                list-style: none;
-                z-index: 10;
-                position: relative;
+            &__sok-line {
+                transform-origin: top left;
+                transform: translate(18.19152044px, 15.73576436px) rotate(35deg);
+                height: 3px;
+                width: 10px;
                 background-color: white;
-                overflow-y: scroll;
-                overflow-x: hidden;
-                margin: 0;
-                width: 20rem;
-                max-height: 500px;
-                box-shadow: 0px 2.8px 2.2px rgba(0, 0, 0, 0.034),
-                    0px 6.7px 5.3px rgba(0, 0, 0, 0.048),
-                    0px 12.5px 10px rgba(0, 0, 0, 0.06),
-                    0px 22.3px 17.9px rgba(0, 0, 0, 0.072),
-                    0px 41.8px 33.4px rgba(0, 0, 0, 0.086),
-                    0px 100px 80px rgba(0, 0, 0, 0.12);
-                //top: 120%;
-                border-radius: 1px;
+                position: absolute;
+                transition: 0.35s all ease-in;
+            }
 
-                li {
-                    padding: 1rem;
-                    background-color: white;
-                    color: black;
-                    font-weight: normal;
-                    border: #b7b1a9 1px solid;
-                    animation-name: animateIn;
-                    animation-duration: 150ms;
-                    animation-delay: calc(var(--listmap) * 50ms);
-                    animation-fill-mode: both;
-                    animation-timing-function: ease-in-out;
+            &__sok-circle {
+                border-radius: 50%;
+                border: white 3px solid;
+                height: 20px;
+                width: 20px;
+                position: absolute;
+                transform-origin: center;
+                transition: 0.35s all ease-in;
+            }
 
-                    &:focus,
-                    &:hover {
-                        background-color: lightgray;
-                        font-weight: bold;
-                    }
-
-                    &:first-child,
-                    &:last-child,
-                    &:not(:last-child) {
-                        border: #b7b1a9 1px solid;
-                    }
-
-                    &:not(:last-child) {
-                        border-bottom: none;
-                    }
-                }
-
-                li[aria-selected='true'] {
-                    background-color: lightgray;
-                    font-weight: bold;
-                }
-
-                .sok-resultat-listItem-text {
-                    padding-left: 0;
-                }
+            &__reset-line-x {
+                width: 28px;
+                height: 3px;
+                background-color: @navBla;
+                transform: rotate(-45deg);
+                position: absolute;
+                left: 0;
+                transition: all 0.35s ease-in-out;
+                top: 10px;
+            }
+            &__reset-line-y {
+                width: 28px;
+                height: 3px;
+                background-color: @navBla;
+                transform: rotate(45deg);
+                position: absolute;
+                left: 0;
+                transition: all 0.35s ease-in-out;
+                top: 10px;
             }
         }
 
+        // Hide mobile stuff
         .sok-input-mobil-submit {
-            position: absolute;
-            top: 0.35rem;
-            right: 0.2rem;
-            background-color: white;
-            border: none;
-
-            &:focus {
-                outline: 3px solid @fokusFarge;
-            }
+            display: none !important;
         }
     }
 }

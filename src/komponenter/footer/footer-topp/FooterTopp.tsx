@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from '../../../utils/bem';
 import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
@@ -8,8 +7,10 @@ import { LenkeMedGA } from '../../LenkeMedGA';
 import Tekst from '../../../tekster/finn-tekst';
 import { genererLenkerTilUrl } from '../../../utils/Environment';
 import { FooterLenke, lenkerHoyre, lenkerVenstre } from '../Footer-lenker';
-import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
-import Spraakvalg from './Spraakvalg';
+import DelSkjermModal from './del-skjerm-modal/DelSkjermModal';
+import Spraakvalg from './spraakvalg/Spraakvalg';
+import FooterArbeidsflatevalg from './footer-arbeidsflatevalg/FooterArbeidsflatevalg';
+import PilOppHvit from '../../../ikoner/meny/PilOppHvit';
 
 interface Props {
     classname: string;
@@ -44,21 +45,41 @@ const FooterTopp = ({ classname }: Props) => {
         setVisDelSkjermModal(false);
     };
 
+    const scrollToTop = () =>
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+        });
+
     return (
         <section className={cls.element('menylinje-topp')}>
-            <div className="menylenker-seksjon venstre">
-                <Undertittel
-                    className="blokk-xxs"
-                    id="venstrelenker-overskrift"
-                >
-                    <Tekst id="footer-kontakt-overskrift" />
-                </Undertittel>
-                <ul aria-labelledby="venstrelenker-overskrift">
-                    {venstrelenker.map(lenke => {
-                        return (
+            <div className="topp-kolonner">
+                <div className="menylenker-seksjon til-toppen">
+                    <div className="til-toppen-innhold">
+                        <PilOppHvit />
+                        <Lenke
+                            href="#"
+                            onClick={e => {
+                                e.preventDefault();
+                                scrollToTop();
+                            }}
+                        >
+                            <Tekst id="footer-til-toppen" />
+                        </Lenke>
+                    </div>
+                </div>
+                <div className="menylenker-seksjon venstre">
+                    <Undertittel
+                        className="menylenker-overskrift"
+                        id="venstrelenker-overskrift"
+                    >
+                        <Tekst id="footer-kontakt-overskrift" />
+                    </Undertittel>
+                    <ul aria-labelledby="venstrelenker-overskrift">
+                        {venstrelenker.map(lenke => (
                             <li key={lenke.lenketekst}>
                                 <Normaltekst>
-                                    <HoyreChevron />
                                     <LenkeMedGA
                                         href={lenke.url}
                                         gaEventArgs={{
@@ -71,38 +92,34 @@ const FooterTopp = ({ classname }: Props) => {
                                     </LenkeMedGA>
                                 </Normaltekst>
                             </li>
-                        );
-                    })}
-                    <li>
-                        <HoyreChevron />
-                        <Lenke href="#" role="button" onClick={openModal}>
-                            <Tekst id="footer-del-skjerm" />
-                        </Lenke>
-                        {visDelSkjermModal && (
-                            <DelSkjermModal
-                                isOpen={visDelSkjermModal}
-                                onClose={closeModal}
-                            />
-                        )}
-                    </li>
-                </ul>
-            </div>
-            <div className="menylenker-seksjon midt">
-                <Spraakvalg />
-            </div>
-            <div className="menylenker-seksjon hoyre">
-                <Undertittel
-                    className="nav-samfunn-overskrift blokk-xxs"
-                    id="hoyrelenker-overskrift"
-                >
-                    <Tekst id="footer-navsamfunn-overskrift" />
-                </Undertittel>
-                <ul aria-labelledby="hoyrelenker-overskrift">
-                    {hoyrelenker.map(lenke => {
-                        return (
+                        ))}
+                        <li>
+                            <Lenke href="#" role="button" onClick={openModal}>
+                                <Tekst id="footer-del-skjerm" />
+                            </Lenke>
+                            {visDelSkjermModal && (
+                                <DelSkjermModal
+                                    isOpen={visDelSkjermModal}
+                                    onClose={closeModal}
+                                />
+                            )}
+                        </li>
+                    </ul>
+                </div>
+                <div className="menylenker-seksjon midt">
+                    <Spraakvalg />
+                </div>
+                <div className="menylenker-seksjon hoyre">
+                    <Undertittel
+                        className="menylenker-overskrift"
+                        id="hoyrelenker-overskrift"
+                    >
+                        <Tekst id="footer-navsamfunn-overskrift" />
+                    </Undertittel>
+                    <ul aria-labelledby="hoyrelenker-overskrift">
+                        {hoyrelenker.map(lenke => (
                             <li key={lenke.lenketekst}>
                                 <Normaltekst>
-                                    <HoyreChevron />
                                     <LenkeMedGA
                                         href={lenke.url}
                                         gaEventArgs={{
@@ -115,9 +132,10 @@ const FooterTopp = ({ classname }: Props) => {
                                     </LenkeMedGA>
                                 </Normaltekst>
                             </li>
-                        );
-                    })}
-                </ul>
+                        ))}
+                    </ul>
+                </div>
+                <FooterArbeidsflatevalg />
             </div>
         </section>
     );
