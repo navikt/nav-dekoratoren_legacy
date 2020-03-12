@@ -41,16 +41,17 @@ export const reducer = (
     state: KeyboardNaviState = initialState,
     action: Handling
 ): KeyboardNaviState => {
-    if (action.type === ActionType.SETT_KB_MAIN_GRAPH) {
-        return { ...state, mainGraph: action.mainGraph };
+    console.log(state);
+    switch (action.type) {
+        case ActionType.SETT_KB_MAIN_GRAPH:
+            return { ...state, mainGraph: action.mainGraph };
+        case ActionType.SETT_KB_SUB_GRAPH:
+            return { ...state, subGraph: action.subGraph };
+        case ActionType.SETT_KB_NODE_CURRENT:
+            return { ...state, currentNode: action.currentNode };
+        default:
+            return state;
     }
-    if (action.type === ActionType.SETT_KB_SUB_GRAPH) {
-        return { ...state, subGraph: action.subGraph };
-    }
-    if (action.type === ActionType.SETT_KB_NODE_CURRENT) {
-        return { ...state, currentNode: action.currentNode };
-    }
-    return state;
 };
 
 export default reducer;
