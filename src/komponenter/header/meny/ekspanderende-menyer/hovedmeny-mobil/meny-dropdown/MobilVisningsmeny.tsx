@@ -63,14 +63,9 @@ class MobilVisningsmeny extends React.Component<Props, State> {
         };
     }
 
-    hideBackgroundOverflow = (
-        setOverflowHidden: boolean,
-        viewIsMobile: string
-    ) => {
+    hideBackgroundOverflow = (setOverflowHidden: boolean) => {
         document.body.style.overflow =
-            setOverflowHidden && viewIsMobile.includes('mobilmeny')
-                ? 'hidden'
-                : 'inherit';
+            setOverflowHidden && window.innerWidth < 768 ? 'hidden' : 'inherit';
     };
 
     hovedseksjonTabIndex = (): boolean => {
@@ -117,10 +112,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
             varslerIsOpen,
         } = this.props;
         const menyClass = BEMHelper(classname);
-        this.hideBackgroundOverflow(
-            underMenuIsOpen || varslerIsOpen,
-            classname
-        );
+        this.hideBackgroundOverflow(underMenuIsOpen || varslerIsOpen);
         return (
             <>
                 <section
