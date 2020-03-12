@@ -41,7 +41,6 @@ export const reducer = (
     state: KeyboardNaviState = initialState,
     action: Handling
 ): KeyboardNaviState => {
-    console.log(state);
     switch (action.type) {
         case ActionType.SETT_KB_MAIN_GRAPH:
             return { ...state, mainGraph: action.mainGraph };
