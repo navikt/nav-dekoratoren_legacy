@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppState } from '../../../../../../reducer/reducer';
 import Environment from '../../../../../../utils/Environment';
 import './VarselVisning.less';
@@ -7,13 +7,16 @@ import Tekst, { finnTekst } from '../../../../../../tekster/finn-tekst';
 import { LenkeMedGA } from '../../../../../LenkeMedGA';
 import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import {
     getKbId,
     NodeGroup,
 } from '../../../../../../utils/keyboard-navigation/kb-navigation';
 import { KbNavigationWrapper } from '../../../../../../utils/keyboard-navigation/KbNavigationWrapper';
-import { configForNodeGroup } from '../../../../../../utils/keyboard-navigation/kb-navigation-setup';
+import {
+    configForNodeGroup,
+    KbNavConfig,
+} from '../../../../../../utils/keyboard-navigation/kb-navigation-setup';
 
 type Props = {
     isOpen: boolean;
@@ -51,6 +54,24 @@ export const VarselVisning = ({ isOpen }: Props) => {
     const { varsler, varslerAntall, varslerUleste, language } = useSelector(
         stateSelector
     );
+    const [kbNavConfig, setKbNavConfig] = useState<KbNavConfig>();
+
+    useEffect(() => {
+        setKbNavConfig({
+            ...configForNodeGroup[nodeGroup],
+            maxColsPerRow: visAlleVarslerLenke ? [1, 1, 1] : [1],
+        });
+    }, []);
+
+    if (varslerAntall === 0) {
+        return (
+            <div className={classname}>
+                <Normaltekst>
+                    <Tekst id={'varsler-ingen'} />
+                </Normaltekst>
+            </div>
+        );
+    }
 
     const nyeVarslerMsg =
         varslerUleste > 0
@@ -61,7 +82,7 @@ export const VarselVisning = ({ isOpen }: Props) => {
 
     return (
         <KbNavigationWrapper
-            config={configForNodeGroup[nodeGroup]}
+            config={kbNavConfig || configForNodeGroup[nodeGroup]}
             isEnabled={isOpen}
         >
             <div className={classname}>
