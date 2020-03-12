@@ -7,10 +7,11 @@ import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import './MobilMenylinje.less';
 import { verifyWindowObj } from '../../../utils/Environment';
 import { Language } from '../../../reducer/language-duck';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import Varselbjelle from './varsel/Varselbjelle';
+import { toggleVarselVisning } from '../../../reducer/dropdown-toggle-duck';
 
 const mobilClass = BEMHelper('mobilmeny');
 
@@ -19,10 +20,12 @@ interface Props {
 }
 const stateSelector = (state: AppState) => ({
     innloggingsstatus: state.innloggingsstatus,
+    visVarsel: state.dropdownToggles.varsel,
 });
 
 const MobilMenylinje = ({ language }: Props) => {
-    const { innloggingsstatus } = useSelector(stateSelector);
+    const dispatch = useDispatch();
+    const { innloggingsstatus, visVarsel } = useSelector(stateSelector);
     const [navIkonSize, setNavIkonSize] = useState<string>('66');
 
     useEffect(() => {
@@ -34,6 +37,10 @@ const MobilMenylinje = ({ language }: Props) => {
 
     const handleResize = () => {
         window.innerWidth <= 400 ? setNavIkonSize('66') : setNavIkonSize('66');
+    };
+
+    const LukkVarsel = ({ clicked }: { clicked: boolean }) => {
+        return <>{!clicked && visVarsel && dispatch(toggleVarselVisning())}</>;
     };
 
     return (
@@ -53,11 +60,17 @@ const MobilMenylinje = ({ language }: Props) => {
                                 <LoggInnKnapp />
                             </InnloggingsstatusProvider>
                         ) : (
-                            <VarselinnboksProvider>
-                                <>
-                                    <Varselbjelle tabindex={true} />
-                                </>
-                            </VarselinnboksProvider>
+                            <>
+                                <VarselinnboksProvider>
+                                    <Varselbjelle tabindex={true}>
+                                        {clicked =>
+                                            clicked && (
+                                                <LukkVarsel clicked={clicked} />
+                                            )
+                                        }
+                                    </Varselbjelle>
+                                </VarselinnboksProvider>
+                            </>
                         )}
                         {language === Language.NORSK ||
                         language === Language.ENGELSK ? (

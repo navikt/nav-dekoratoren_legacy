@@ -28,9 +28,8 @@ const DesktopMenylinje = () => {
                     <span className={desktopMenylinje.element('spacer')} />
                     <InnloggingsstatusProvider>
                         <>
-                            {/*
                             <VarselinnboksProvider>
-                                <Varselbjelle>
+                                <Varselbjelle tabindex={true}>
                                     {clicked =>
                                         clicked && (
                                             <VarselVisning tabIndex={true} />
@@ -38,7 +37,7 @@ const DesktopMenylinje = () => {
                                     }
                                 </Varselbjelle>
                             </VarselinnboksProvider>
-                            */}
+
                             <MinsideMenyDesktop />
                             <LoggInnKnapp />
                         </>

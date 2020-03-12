@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React, { createRef, ReactNode } from 'react';
 import { AppState } from '../../../../reducer/reducer';
 import { Dispatch } from '../../../../redux/dispatch-type';
 import { connect } from 'react-redux';
@@ -19,6 +19,11 @@ import VarselKnappMobil from './varselknapp/VarselKnappMobil';
 
 interface Props {
     tabindex: boolean;
+    isMobil?: boolean;
+}
+
+interface FunctionProps {
+    children: (clicked: boolean, handleClick?: () => void) => ReactNode;
 }
 
 interface StateProps {
@@ -44,7 +49,7 @@ interface State {
     classname: string;
 }
 
-type VarselbjelleProps = StateProps & DispatchProps & Props;
+type VarselbjelleProps = StateProps & DispatchProps & Props & FunctionProps;
 
 class Varselbjelle extends React.Component<VarselbjelleProps, State> {
     private varselbjelleRef = createRef<HTMLDivElement>();
@@ -87,6 +92,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
         });
 
         this.toggleVarsel();
+        this.setState({ clicked: !this.state.clicked });
         if (this.props.antallUlesteVarsler > 0) {
             this.setState({ classname: 'toggle-varsler-container' });
             this.props.settVarselLest(this.props.nyesteId);
@@ -98,13 +104,12 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
         if (node && node.contains(e.target as HTMLElement)) {
             return;
         }
-
-        if (this.props.visVarsel) {
-            this.toggleVarsel();
+        if (this.state.clicked) {
             triggerGaEvent({
                 category: GACategory.Header,
                 action: 'varsler-close',
             });
+            this.setState({ clicked: false });
         }
     };
 
@@ -115,6 +120,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             arbeidsflate,
             tabindex,
             visVarsel,
+            children,
         } = this.props;
         const { clicked, classname } = this.state;
         return (
@@ -148,9 +154,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                                 </MenylinjeKnapp>
                             </div>
                             <div className="min-varsel-wrapper">
-                                {
-                                    //    children(clicked, this.handleClick)
-                                }
+                                {children(clicked, this.ApneVarselEvent)}
                             </div>
                         </div>
                     </>
