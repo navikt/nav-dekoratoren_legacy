@@ -13,7 +13,7 @@ import { toggleMinsideMeny } from '../../../../../reducer/dropdown-toggle-duck';
 import { Status } from '../../../../../api/api';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
-import MinsideDropdown from './minside-dropdown/MinsideDropdown';
+import MinsideVisning from './minside-visning/MinsideVisning';
 import './MinsideMenyDesktop.less';
 import { MinsidePersonKnapp } from '../meny-knapper/minside-knapper/MinsidePersonKnapp';
 import Environment from '../../../../../utils/Environment';
@@ -89,7 +89,7 @@ export const MinsideMenyDesktop = () => {
             id={classname}
         >
             {menyPunkter.status === Status.OK ? (
-                <MinsideDropdown
+                <MinsideVisning
                     classname={classname}
                     isOpen={isOpen}
                     menyLenker={minsideMenyPunkter}

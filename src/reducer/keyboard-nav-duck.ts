@@ -6,47 +6,33 @@ import {
     SettKbSubGraph,
 } from '../redux/actions';
 import {
-    createNode,
-    NaviGraphData,
-    NaviGroup,
-    NaviNode,
+    GraphData,
+    KbNaviNode,
 } from '../utils/keyboard-navigation/kb-navigation';
-import { desktopHeaderLogoId } from '../komponenter/header/meny/DesktopMenylinje';
+import { initialMainGraph } from '../utils/keyboard-navigation/kb-navigation-setup';
 
 export type KeyboardNaviState = {
-    currentNode: NaviNode;
-    mainGraph: NaviGraphData;
-    subGraph?: NaviGraphData;
-};
-
-const initialNode = createNode(
-    desktopHeaderLogoId,
-    { col: 0, row: 0, sub: 0 },
-    NaviGroup.HeaderMenylinje
-);
-
-const initialGraph = {
-    groupName: NaviGroup.HeaderMenylinje,
-    rootNode: initialNode,
-    nodeMap: { desktopHeaderLogoId: initialNode },
+    currentNode: KbNaviNode;
+    mainGraph: GraphData;
+    subGraph?: GraphData;
 };
 
 const initialState: KeyboardNaviState = {
-    currentNode: initialNode,
-    mainGraph: initialGraph,
+    currentNode: initialMainGraph.rootNode,
+    mainGraph: initialMainGraph,
 };
 
-export const setKbMainGraph = (graph: NaviGraphData): SettKbMainGraph => ({
+export const setKbMainGraph = (graph: GraphData): SettKbMainGraph => ({
     type: ActionType.SETT_KB_MAIN_GRAPH,
     mainGraph: graph,
 });
 
-export const setKbSubGraph = (graph: NaviGraphData): SettKbSubGraph => ({
+export const setKbSubGraph = (graph: GraphData): SettKbSubGraph => ({
     type: ActionType.SETT_KB_SUB_GRAPH,
     subGraph: graph,
 });
 
-export const setCurrentNode = (node: NaviNode): SettKbCurrentNode => ({
+export const setCurrentNode = (node: KbNaviNode): SettKbCurrentNode => ({
     type: ActionType.SETT_KB_NODE_CURRENT,
     currentNode: node,
 });

@@ -3,16 +3,15 @@ import BEMHelper from '../../../../../../utils/bem';
 import { MenyNode } from '../../../../../../reducer/menu-duck';
 import { MenyLenkeSeksjon } from '../../meny-lenker/MenyLenkeSeksjon';
 import KbNav, {
-    NaviGroup,
-    NodeEdge,
+    NodeGroup,
 } from '../../../../../../utils/keyboard-navigation/kb-navigation';
 import { LenkeMedGA } from '../../../../../LenkeMedGA';
 import Environment from '../../../../../../utils/Environment';
 import { GACategory } from '../../../../../../utils/google-analytics';
 import Tekst from '../../../../../../tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
-import { KbNavigation } from '../../../../../../utils/keyboard-navigation/KbNavigation';
-import { desktopMinsideKnappId } from '../MinsideMenyDesktop';
+import { KbNavigationWrapper } from '../../../../../../utils/keyboard-navigation/KbNavigationWrapper';
+import { configForNodeGroup } from '../../../../../../utils/keyboard-navigation/kb-navigation-setup';
 
 type Props = {
     classname: string;
@@ -20,10 +19,9 @@ type Props = {
     menyLenker: MenyNode | undefined;
 };
 
-const rootIndex = { col: 0, row: 0, sub: 0 };
-const colSetup = [1, 3];
+const nodeGroup = NodeGroup.MinsideMeny;
 
-export const MinsideDropdown = (props: Props) => {
+export const MinsideVisning = (props: Props) => {
     const { classname, isOpen, menyLenker } = props;
     const cls = BEMHelper(classname);
 
@@ -32,19 +30,15 @@ export const MinsideDropdown = (props: Props) => {
     }
 
     return (
-        <KbNavigation
-            group={NaviGroup.MinsideMeny}
-            rootIndex={rootIndex}
-            maxColsPerSection={colSetup}
+        <KbNavigationWrapper
+            config={configForNodeGroup[nodeGroup]}
             isEnabled={isOpen}
-            parentNodeId={desktopMinsideKnappId}
-            parentEdge={NodeEdge.Bottom}
         >
             <>
                 <div className={cls.element('topp-seksjon')}>
                     <LenkeMedGA
                         href={Environment.DITT_NAV_URL}
-                        id={KbNav.getKbId(NaviGroup.MinsideMeny, {
+                        id={KbNav.getKbId(nodeGroup, {
                             col: 0,
                             row: 0,
                             sub: 0,
@@ -71,14 +65,14 @@ export const MinsideDropdown = (props: Props) => {
                                 isOpen={isOpen}
                                 colIndex={index}
                                 rowIndex={1}
-                                kbNaviGroup={NaviGroup.MinsideMeny}
+                                kbNaviGroup={nodeGroup}
                                 key={menygruppe.displayName}
                             />
                         ))}
                 </div>
             </>
-        </KbNavigation>
+        </KbNavigationWrapper>
     );
 };
 
-export default MinsideDropdown;
+export default MinsideVisning;

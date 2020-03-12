@@ -2,7 +2,7 @@ import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
 import BunnseksjonLenke from './BunnseksjonLenke';
 import KbNav, {
-    NaviGroup,
+    NodeGroup,
 } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
 import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
 import { Language } from '../../../../../../../reducer/language-duck';
@@ -37,7 +37,7 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                             lenkeTekstId={lenke.lenkeTekstId}
                             stikkord={finnTekst(lenke.stikkordId, language)}
                             className={classname}
-                            id={KbNav.getKbId(NaviGroup.Hovedmeny, kbNaviIndex)}
+                            id={KbNav.getKbId(NodeGroup.Hovedmeny, kbNaviIndex)}
                             onClick={event => {
                                 event.preventDefault();
                                 settArbeidsflate(context);

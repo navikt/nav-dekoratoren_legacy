@@ -1,23 +1,22 @@
 import {
-    createNode,
+    createKbNaviNode,
     getKbId,
-    IdMap,
-    NaviGroup,
-    NaviIndex,
-    NaviNode,
-    NaviNodeMap,
+    KbIdMap,
+    NodeGroup,
+    NodeIndex,
+    KbNaviNode,
+    KbNaviNodeMap,
     NodeEdge,
 } from './kb-navigation';
-import { create } from 'domain';
 
-export const buildNaviGraphAndGetRootNode = (
-    group: NaviGroup,
-    rootIndex: NaviIndex,
-    maxColsPerWrappedRow: number[],
-    idMap: IdMap = {},
-    nodeMap: NaviNodeMap = {}
-): NaviNode => {
-    const getTopEdgeIndex = (index: NaviIndex) => {
+export const buildGraphAndGetRootNode = (
+    group: NodeGroup,
+    rootIndex: NodeIndex,
+    maxColsPerWrappedRow: Array<number>,
+    idMap: KbIdMap = {},
+    nodeMap: KbNaviNodeMap = {}
+): KbNaviNode => {
+    const getTopEdgeIndex = (index: NodeIndex) => {
         const { col, row, sub } = index;
 
         const aboveIsSameCol =
@@ -68,7 +67,7 @@ export const buildNaviGraphAndGetRootNode = (
         };
     };
 
-    const getBottomEdgeIndex = (index: NaviIndex) => {
+    const getBottomEdgeIndex = (index: NodeIndex) => {
         const { col, row, sub } = index;
 
         const belowIsSameCol = !!getElement({
@@ -128,7 +127,7 @@ export const buildNaviGraphAndGetRootNode = (
         };
     };
 
-    const getLeftEdgeIndex = (index: NaviIndex) => {
+    const getLeftEdgeIndex = (index: NodeIndex) => {
         const { col, row, sub } = index;
         const maxCols = maxColsPerWrappedRow[row];
 
@@ -148,7 +147,7 @@ export const buildNaviGraphAndGetRootNode = (
         };
     };
 
-    const getRightEdgeIndex = (index: NaviIndex) => {
+    const getRightEdgeIndex = (index: NodeIndex) => {
         const { col, row, sub } = index;
         const maxCols = maxColsPerWrappedRow[row];
 
@@ -184,11 +183,11 @@ export const buildNaviGraphAndGetRootNode = (
         return sub;
     };
 
-    const getElement = (index: NaviIndex) =>
+    const getElement = (index: NodeIndex) =>
         document.getElementById(getKbId(group, index, idMap)) as HTMLElement;
 
-    const getNodeAtIndex = (index: NaviIndex): NaviNode | null => {
-        if (!index || !getElement(index)) {
+    const getNodeAtIndex = (index: NodeIndex): KbNaviNode | null => {
+        if (!index) {
             return null;
         }
 
@@ -198,7 +197,7 @@ export const buildNaviGraphAndGetRootNode = (
             return nodeMap[id];
         }
 
-        const node: NaviNode = createNode(id, index, group);
+        const node: KbNaviNode = createKbNaviNode(id, index, group);
         nodeMap[id] = node;
 
         if (node) {
@@ -217,6 +216,6 @@ export const buildNaviGraphAndGetRootNode = (
     // TODO: løs dette på en annen måte...
     return (
         getNodeAtIndex(rootIndex) ||
-        createNode('blank-node-id', rootIndex, group)
+        createKbNaviNode('blank-node-id', rootIndex, group)
     );
 };

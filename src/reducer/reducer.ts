@@ -19,7 +19,7 @@ export interface AppState {
     language: LanguageState;
     arbeidsflate: Arbeidsflate;
     dropdownToggles: DropdownState;
-    keyboardNodes: KeyboardNaviState;
+    kbNavigation: KeyboardNaviState;
 }
 
 export const reducer = combineReducers<AppState>({
@@ -30,5 +30,5 @@ export const reducer = combineReducers<AppState>({
     language: languageDuck.reducer,
     arbeidsflate: arbeidsflateReducer,
     dropdownToggles: dropdownTogglesReducer,
-    keyboardNodes: keyboardNodesReducer,
+    kbNavigation: keyboardNodesReducer,
 });

@@ -5,7 +5,7 @@ import getStore from '../../../../../../redux/store';
 import { dataInitState } from '../../../../../../reducer/menu-duck';
 import { Language } from '../../../../../../reducer/language-duck';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
-import HovedmenyDropdown from './HovedmenyDropdown';
+import HovedmenyVisning from './HovedmenyVisning';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
@@ -15,7 +15,7 @@ const store = getStore();
 const shallowWithProps = (lang: Language, arbeidsflate: MenuValue) => {
     return mount(
         <ReduxProvider store={store}>
-            <HovedmenyDropdown
+            <HovedmenyVisning
                 classname={'meny'}
                 isOpen={true}
                 arbeidsflate={arbeidsflate}
@@ -26,7 +26,7 @@ const shallowWithProps = (lang: Language, arbeidsflate: MenuValue) => {
     );
 };
 
-describe('<HovedmenyDropdown />', () => {
+describe('<HovedmenyVisning />', () => {
     const wrapper = shallowWithProps(Language.NORSK, MenuValue.PRIVATPERSON);
     it('Rendrer <Toppseksjon> komponent', () => {
         expect(wrapper.find(Toppseksjon)).toHaveLength(1);

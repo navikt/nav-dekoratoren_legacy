@@ -2,8 +2,8 @@ import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../reducer/menu-duck';
 import {
-    NaviGraphData,
-    NaviNode,
+    GraphData,
+    KbNaviNode,
 } from '../utils/keyboard-navigation/kb-navigation';
 
 export enum ActionType {
@@ -129,17 +129,17 @@ export interface ToggleLukkAlle {
 
 export interface SettKbMainGraph {
     type: ActionType.SETT_KB_MAIN_GRAPH;
-    mainGraph: NaviGraphData;
+    mainGraph: GraphData;
 }
 
 export interface SettKbSubGraph {
     type: ActionType.SETT_KB_SUB_GRAPH;
-    subGraph: NaviGraphData;
+    subGraph: GraphData;
 }
 
 export interface SettKbCurrentNode {
     type: ActionType.SETT_KB_NODE_CURRENT;
-    currentNode: NaviNode;
+    currentNode: KbNaviNode;
 }
 
 export type Handling =

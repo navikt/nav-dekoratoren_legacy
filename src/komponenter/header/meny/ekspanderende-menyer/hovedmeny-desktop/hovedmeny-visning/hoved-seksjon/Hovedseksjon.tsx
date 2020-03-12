@@ -3,7 +3,7 @@ import { MenyLenkeSeksjon } from '../../../meny-lenker/MenyLenkeSeksjon';
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
 import './Hovedseksjon.less';
-import { NaviGroup } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
+import { NodeGroup } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
 
 interface Props {
     menyLenker: MenyNode;
@@ -23,7 +23,7 @@ export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
                         isOpen={isOpen}
                         colIndex={index}
                         rowIndex={1}
-                        kbNaviGroup={NaviGroup.Hovedmeny}
+                        kbNaviGroup={NodeGroup.Hovedmeny}
                         key={menygruppe.displayName}
                     />
                 ))}

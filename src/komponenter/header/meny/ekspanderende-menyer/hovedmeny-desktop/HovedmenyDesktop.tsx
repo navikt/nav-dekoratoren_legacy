@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../reducer/reducer';
 import { Status } from '../../../../../api/api';
 import { Undertittel } from 'nav-frontend-typografi';
-import { HovedmenyDropdown } from './hovedmeny-dropdown/HovedmenyDropdown';
+import { HovedmenyVisning } from './hovedmeny-visning/HovedmenyVisning';
 import { getHovedmenyNode } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { MenySpinner } from '../meny-spinner/MenySpinner';
@@ -74,7 +74,7 @@ export const HovedmenyDesktop = () => {
             id={classname}
         >
             {menyPunkter.status === Status.OK ? (
-                <HovedmenyDropdown
+                <HovedmenyVisning
                     classname={classname}
                     arbeidsflate={arbeidsflate}
                     language={language}

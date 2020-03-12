@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppState } from '../../../../../../reducer/reducer';
 import Environment from '../../../../../../utils/Environment';
-import './Varselvisning.less';
+import './VarselVisning.less';
 import { GACategory } from '../../../../../../utils/google-analytics';
 import Tekst, { finnTekst } from '../../../../../../tekster/finn-tekst';
 import { LenkeMedGA } from '../../../../../LenkeMedGA';
@@ -10,11 +10,10 @@ import { VarslerParsed } from './VarslerParsed';
 import { Undertittel } from 'nav-frontend-typografi';
 import {
     getKbId,
-    NaviGroup,
-    NodeEdge,
+    NodeGroup,
 } from '../../../../../../utils/keyboard-navigation/kb-navigation';
-import { KbNavigation } from '../../../../../../utils/keyboard-navigation/KbNavigation';
-import { desktopVarslerKnappId } from '../VarslerDropdown';
+import { KbNavigationWrapper } from '../../../../../../utils/keyboard-navigation/KbNavigationWrapper';
+import { configForNodeGroup } from '../../../../../../utils/keyboard-navigation/kb-navigation-setup';
 
 type Props = {
     isOpen: boolean;
@@ -28,14 +27,13 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'varsler-display-desktop';
-const rootIndex = { col: 0, row: 0, sub: 0 };
-const colSetup = [1, 1, 1];
+const nodeGroup = NodeGroup.Varsler;
 
 const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => (
     <div className="vis-alle-lenke">
         <LenkeMedGA
             href={Environment.API_VARSELINNBOKS_URL}
-            id={getKbId(NaviGroup.Varsler, { col: 0, row: index, sub: 0 })}
+            id={getKbId(NodeGroup.Varsler, { col: 0, row: index, sub: 0 })}
             tabIndex={0}
             gaEventArgs={{
                 category: GACategory.Header,
@@ -49,7 +47,7 @@ const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => (
     </div>
 );
 
-export const Varselvisning = ({ isOpen }: Props) => {
+export const VarselVisning = ({ isOpen }: Props) => {
     const { varsler, varslerAntall, varslerUleste, language } = useSelector(
         stateSelector
     );
@@ -59,24 +57,23 @@ export const Varselvisning = ({ isOpen }: Props) => {
             ? ` (${varslerUleste} ${finnTekst('varsler-nye', language)})`
             : '';
     const visAlleVarslerLenke = varslerAntall > 5;
+    let rowIndex = 0;
 
     return (
-        <KbNavigation
-            group={NaviGroup.Varsler}
-            rootIndex={rootIndex}
-            maxColsPerSection={colSetup}
+        <KbNavigationWrapper
+            config={configForNodeGroup[nodeGroup]}
             isEnabled={isOpen}
-            parentNodeId={desktopVarslerKnappId}
-            parentEdge={NodeEdge.Bottom}
         >
             <div className={classname}>
                 <Undertittel>
                     <Tekst id={'varsler'} />
                 </Undertittel>
-                {visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
-                <VarslerParsed varsler={varsler} />
-                {visAlleVarslerLenke && alleVarslerLenke(2, nyeVarslerMsg)}
+                {visAlleVarslerLenke &&
+                    alleVarslerLenke(rowIndex++, nyeVarslerMsg)}
+                <VarslerParsed varsler={varsler} rowIndex={rowIndex++} />
+                {visAlleVarslerLenke &&
+                    alleVarslerLenke(rowIndex, nyeVarslerMsg)}
             </div>
-        </KbNavigation>
+        </KbNavigationWrapper>
     );
 };

@@ -3,16 +3,16 @@ import BEMHelper, { BEMWrapper } from '../../../../../../utils/bem';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 import { MenyNode } from '../../../../../../reducer/menu-duck';
 import { Language } from '../../../../../../reducer/language-duck';
-import {
-    NaviGroup,
-    NodeEdge,
-} from '../../../../../../utils/keyboard-navigation/kb-navigation';
+import { NodeGroup } from '../../../../../../utils/keyboard-navigation/kb-navigation';
 import { matchMedia } from '../../../../../../utils/match-media-polyfill';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
-import { KbNavigation } from '../../../../../../utils/keyboard-navigation/KbNavigation';
-import { desktopHovedmenyKnappId } from '../HovedmenyDesktop';
+import { KbNavigationWrapper } from '../../../../../../utils/keyboard-navigation/KbNavigationWrapper';
+import {
+    configForNodeGroup,
+    KbNavConfig,
+} from '../../../../../../utils/keyboard-navigation/kb-navigation-setup';
 
 type Props = {
     classname: string;
@@ -46,17 +46,21 @@ const getMaxColsPerSection = (cls: BEMWrapper): Array<number> => {
     return [toppSeksjonCols, hovedSeksjonCols, bunnSeksjonCols];
 };
 
-const rootIndex = { col: 0, row: 0, sub: 0 };
+const nodeGroup = NodeGroup.Hovedmeny;
 const mqlDesktop = matchMedia('(min-width: 1440px)');
 const mqlTablet = matchMedia('(min-width: 1024px)');
 
-export const HovedmenyDropdown = (props: Props) => {
+export const HovedmenyVisning = (props: Props) => {
     const { arbeidsflate, classname, language, menyLenker, isOpen } = props;
 
-    const [maxColsPerSection, setMaxColsPerSection] = useState();
-    const updateMaxCols = () => setMaxColsPerSection(getMaxColsPerSection(cls));
-
     const cls = BEMHelper(classname);
+
+    const [kbNavConfig, setKbNavConfig] = useState<KbNavConfig>();
+    const updateMaxCols = () =>
+        setKbNavConfig({
+            ...configForNodeGroup[nodeGroup],
+            maxColsPerRow: getMaxColsPerSection(cls),
+        });
 
     useEffect(() => {
         const cleanUp = () => {
@@ -78,13 +82,9 @@ export const HovedmenyDropdown = (props: Props) => {
     }
 
     return (
-        <KbNavigation
-            group={NaviGroup.Hovedmeny}
-            rootIndex={rootIndex}
-            maxColsPerSection={maxColsPerSection}
+        <KbNavigationWrapper
+            config={kbNavConfig || configForNodeGroup[nodeGroup]}
             isEnabled={isOpen}
-            parentEdge={NodeEdge.Bottom}
-            parentNodeId={desktopHovedmenyKnappId}
         >
             <div className={cls.element('dropdown')}>
                 <Toppseksjon classname={classname} />
@@ -99,8 +99,8 @@ export const HovedmenyDropdown = (props: Props) => {
                     arbeidsflate={arbeidsflate}
                 />
             </div>
-        </KbNavigation>
+        </KbNavigationWrapper>
     );
 };
 
-export default HovedmenyDropdown;
+export default HovedmenyVisning;

@@ -83,27 +83,38 @@ app.get(`${appBasePath}/api/meny`, (req, res) =>
 
 const fetchMenu = (res: Response) => {
     const uri = `${process.env.API_XP_MENY_URL}`;
-    request({ method: 'GET', uri }, (reqError, reqResponse, reqBody) => {
-        if (!reqError && reqResponse.statusCode === 200 && reqBody.length > 2) {
-            mainCache.set(mainCacheKey, reqBody, 100);
-            backupCache.set(backupCacheKey, reqBody, 0);
-            res.send(reqBody);
-        } else {
-            console.error('Failed to fetch decorator', reqError);
-            backupCache.get(backupCacheKey, (err, backupCacheContent) => {
-                if (!err && backupCacheContent) {
-                    console.log('Using backup cache - copy to main cache');
-                    mainCache.set(mainCacheKey, backupCacheContent, 100);
-                    res.send(backupCacheContent);
-                } else {
-                    console.log('Failed to use backup-cache - using mock', err);
-                    mainCache.set(mainCacheKey, mockMenu, 100);
-                    backupCache.set(backupCacheKey, mockMenu, 0);
-                    res.send(mockMenu);
-                }
-            });
+    const isLocal = process.env.APP_BASE_URL?.includes('localhost'); // TODO: fjern
+    request(
+        { method: 'GET', uri, timeout: isLocal ? 1 : undefined },
+        (reqError, reqResponse, reqBody) => {
+            if (
+                !reqError &&
+                reqResponse.statusCode === 200 &&
+                reqBody.length > 2
+            ) {
+                mainCache.set(mainCacheKey, reqBody, 100);
+                backupCache.set(backupCacheKey, reqBody, 0);
+                res.send(reqBody);
+            } else {
+                console.error('Failed to fetch decorator', reqError);
+                backupCache.get(backupCacheKey, (err, backupCacheContent) => {
+                    if (!err && backupCacheContent) {
+                        console.log('Using backup cache - copy to main cache');
+                        mainCache.set(mainCacheKey, backupCacheContent, 100);
+                        res.send(backupCacheContent);
+                    } else {
+                        console.log(
+                            'Failed to use backup-cache - using mock',
+                            err
+                        );
+                        mainCache.set(mainCacheKey, mockMenu, 100);
+                        backupCache.set(backupCacheKey, mockMenu, 0);
+                        res.send(mockMenu);
+                    }
+                });
+            }
         }
-    });
+    );
 };
 
 // Proxied requests

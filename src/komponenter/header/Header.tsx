@@ -15,26 +15,25 @@ import {
 import Environment from '../../utils/Environment';
 import {
     addEventListenersAndReturnHandlers,
-    createHeaderKbNaviGraph,
+    createHeaderMainGraph,
     removeListeners,
-} from '../../utils/keyboard-navigation/kb-header-navigation';
+} from '../../utils/keyboard-navigation/kb-navigation-setup';
 import {
     setCurrentNode,
     setKbMainGraph,
 } from '../../reducer/keyboard-nav-duck';
-import { NaviNode } from '../../utils/keyboard-navigation/kb-navigation';
+import { KbNaviNode } from '../../utils/keyboard-navigation/kb-navigation';
+import { lukkAlleDropdowns } from '../../reducer/dropdown-toggle-duck';
 
 const stateSelector = (state: AppState) => ({
     language: state.language.language,
     arbeidsflate: state.arbeidsflate.status,
     menyStatus: state.menypunkt.status,
     innloggingsStatus: state.innloggingsstatus.data,
-    kbNavState: state.keyboardNodes,
+    kbNavState: state.kbNavigation,
 });
 
-export const Header = () => {
-    const dispatch = useDispatch();
-
+const KbNavMain = ({ children }: { children: JSX.Element }) => {
     const {
         language,
         arbeidsflate,
@@ -42,24 +41,18 @@ export const Header = () => {
         innloggingsStatus,
         kbNavState,
     } = useSelector(stateSelector);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchMenypunkter()(dispatch);
-        if (Environment.CONTEXT !== MenuValue.IKKEVALGT) {
-            oppdaterSessionStorage(Environment.CONTEXT);
-        }
-    }, []);
-
-    useEffect(() => {
-        const mainGraph = createHeaderKbNaviGraph(
+        const graph = createHeaderMainGraph(
             language,
             arbeidsflate,
             menyStatus,
             innloggingsStatus.authenticated
         );
-        if (mainGraph) {
-            dispatch(setKbMainGraph(mainGraph));
-            dispatch(setCurrentNode(mainGraph.rootNode));
+        if (graph) {
+            dispatch(setKbMainGraph(graph));
+            dispatch(setCurrentNode(graph.rootNode));
         }
     }, [language, arbeidsflate, menyStatus, innloggingsStatus]);
 
@@ -70,11 +63,27 @@ export const Header = () => {
                 ...kbNavState.mainGraph.nodeMap,
                 ...kbNavState.subGraph?.nodeMap,
             },
-            (node: NaviNode) => dispatch(setCurrentNode(node))
+            (node: KbNaviNode) => dispatch(setCurrentNode(node)),
+            () => dispatch(lukkAlleDropdowns())
         );
 
         return () => removeListeners(handlers);
     }, [kbNavState]);
+
+    return children;
+};
+
+export const Header = () => {
+    const dispatch = useDispatch();
+
+    const { language } = useSelector(stateSelector);
+
+    useEffect(() => {
+        fetchMenypunkter()(dispatch);
+        if (Environment.CONTEXT !== MenuValue.IKKEVALGT) {
+            oppdaterSessionStorage(Environment.CONTEXT);
+        }
+    }, []);
 
     return (
         <>
@@ -89,10 +98,14 @@ export const Header = () => {
                     className="media-tablet-desktop tablet-desktop-meny"
                     id="dekorator-desktop-header"
                 >
-                    <div className="header-z-wrapper">
-                        {language === Language.NORSK && <Arbeidsflatemeny />}
-                        <DesktopMenylinje />
-                    </div>
+                    <KbNavMain>
+                        <div className="header-z-wrapper">
+                            {language === Language.NORSK && (
+                                <Arbeidsflatemeny />
+                            )}
+                            <DesktopMenylinje />
+                        </div>
+                    </KbNavMain>
                 </div>
                 <MenyBakgrunn />
             </header>

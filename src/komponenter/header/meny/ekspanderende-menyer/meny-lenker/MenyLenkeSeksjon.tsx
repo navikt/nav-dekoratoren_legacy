@@ -4,7 +4,7 @@ import { Element } from 'nav-frontend-typografi';
 import BEMHelper from '../../../../../utils/bem';
 import { MenyLenke } from './MenyLenke';
 import KbNav, {
-    NaviGroup,
+    NodeGroup,
 } from '../../../../../utils/keyboard-navigation/kb-navigation';
 import './MenyLenker.less';
 
@@ -13,7 +13,7 @@ interface Props {
     isOpen: boolean;
     colIndex: number;
     rowIndex: number;
-    kbNaviGroup: NaviGroup;
+    kbNaviGroup: NodeGroup;
 }
 
 export const MenyLenkeSeksjon = ({

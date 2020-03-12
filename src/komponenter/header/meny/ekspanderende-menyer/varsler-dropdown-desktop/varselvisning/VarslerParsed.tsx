@@ -4,7 +4,7 @@ import { LenkeMedGA } from '../../../../../LenkeMedGA';
 import { GACategory } from '../../../../../../utils/google-analytics';
 import {
     getKbId,
-    NaviGroup,
+    NodeGroup,
 } from '../../../../../../utils/keyboard-navigation/kb-navigation';
 
 const ikonDefault = 'alarm-ikon';
@@ -19,6 +19,7 @@ const ikoner: { [str: string]: string } = {
 
 type Props = {
     varsler: string;
+    rowIndex: number;
 };
 
 const parseIkon = (ikonStr: string) => {
@@ -35,14 +36,19 @@ const parseIkon = (ikonStr: string) => {
 const parseLenke = (
     href: string | undefined,
     children: DomElement[] | undefined,
-    index: number
+    rowIndex: number,
+    subIndex: number
 ) => {
     return (
         <LenkeMedGA
             href={href || ''}
             tabIndex={0}
             className={'varsel-lenke'}
-            id={getKbId(NaviGroup.Varsler, { col: 0, row: 1, sub: index })}
+            id={getKbId(NodeGroup.Varsler, {
+                col: 0,
+                row: rowIndex,
+                sub: subIndex,
+            })}
             gaEventArgs={{
                 category: GACategory.Header,
                 action: 'varsel-lenke',
@@ -54,7 +60,7 @@ const parseLenke = (
     );
 };
 
-export const VarslerParsed = ({ varsler }: Props) => {
+export const VarslerParsed = ({ varsler, rowIndex }: Props) => {
     let lenkeIndex = 0;
     const varslerParsed = htmlReactParser(varsler, {
         replace: ({ name, attribs, children }) => {
@@ -65,7 +71,12 @@ export const VarslerParsed = ({ varsler }: Props) => {
             }
 
             if (name?.toLowerCase() === 'a') {
-                return parseLenke(attribs?.href, children, lenkeIndex++);
+                return parseLenke(
+                    attribs?.href,
+                    children,
+                    rowIndex,
+                    lenkeIndex++
+                );
             }
         },
     });

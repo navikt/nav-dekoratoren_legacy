@@ -10,7 +10,7 @@ import { LenkeMedGA } from '../../LenkeMedGA';
 import Tekst from '../../../tekster/finn-tekst';
 import {
     getKbId,
-    NaviGroup,
+    NodeGroup,
 } from '../../../utils/keyboard-navigation/kb-navigation';
 
 const Arbeidsflatemeny = () => {
@@ -36,7 +36,7 @@ const Arbeidsflatemeny = () => {
                         >
                             <LenkeMedGA
                                 classNameOverride={cls.element('lenke')}
-                                id={getKbId(NaviGroup.HeaderMenylinje, {
+                                id={getKbId(NodeGroup.HeaderMenylinje, {
                                     col: index,
                                     row: 0,
                                     sub: 0,

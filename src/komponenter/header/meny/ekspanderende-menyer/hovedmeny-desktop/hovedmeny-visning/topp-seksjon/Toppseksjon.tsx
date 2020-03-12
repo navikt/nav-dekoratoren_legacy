@@ -4,12 +4,12 @@ import { Systemtittel } from 'nav-frontend-typografi';
 import React from 'react';
 import BEMHelper from '../../../../../../../utils/bem';
 import KbNav, {
-    NaviGroup,
+    NodeGroup,
 } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
 import { GACategory } from '../../../../../../../utils/google-analytics';
 import { LenkeMedGA } from '../../../../../../LenkeMedGA';
 import './Toppseksjon.less';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AppState } from '../../../../../../../reducer/reducer';
 import {
     getArbeidsflateContext,
@@ -36,7 +36,7 @@ export const Toppseksjon = ({ classname }: Props) => {
                     settArbeidsflate(context);
                 }}
                 className={cls.element('topp-seksjon-lenke')}
-                id={KbNav.getKbId(NaviGroup.Hovedmeny, {
+                id={KbNav.getKbId(NodeGroup.Hovedmeny, {
                     col: 0,
                     row: 0,
                     sub: 0,

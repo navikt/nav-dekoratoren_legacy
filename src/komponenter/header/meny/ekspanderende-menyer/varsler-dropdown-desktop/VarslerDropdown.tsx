@@ -12,7 +12,7 @@ import {
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import './VarslerDropdown.less';
 import { VarselIkon } from '../meny-knapper/ikoner/varsel-ikon/VarselIkon';
-import { Varselvisning } from './varselvisning/Varselvisning';
+import { VarselVisning } from './varselvisning/VarselVisning';
 import { MenuValue } from '../../../../../utils/meny-storage-utils';
 
 const stateSelector = (state: AppState) => ({
@@ -30,11 +30,11 @@ export const VarslerDropdown = () => {
         stateSelector
     );
     const dispatch = useDispatch();
+    const skalVises =
+        innloggetStatus.authenticated &&
+        arbeidsflate === MenuValue.PRIVATPERSON;
 
-    if (
-        !innloggetStatus.authenticated ||
-        arbeidsflate !== MenuValue.PRIVATPERSON
-    ) {
+    if (!skalVises) {
         return null;
     }
 
@@ -72,7 +72,7 @@ export const VarslerDropdown = () => {
             isOpen={isOpen}
             menyKnapp={knapp}
         >
-            <Varselvisning isOpen={isOpen} />
+            <VarselVisning isOpen={isOpen} />
         </EkspanderbarMeny>
     );
 };
