@@ -13,10 +13,15 @@ import {
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import SokMenyIkon from '../meny-knapper/ikoner/sok-ikon/SokMenyIkon';
 import './SokDropdown.less';
+import { NodeGroup } from '../../../../../utils/keyboard-navigation/kb-navigation';
+import { KbNavigationWrapper } from '../../../../../utils/keyboard-navigation/KbNavigationWrapper';
+import { configForNodeGroup } from '../../../../../utils/keyboard-navigation/kb-navigation-setup';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.sok,
 });
+
+const nodeGroup = NodeGroup.Sok;
 
 const classname = 'desktop-sok-dropdown';
 export const desktopSokDropdownClassname = classname;
@@ -56,7 +61,12 @@ export const SokDropdown = () => {
             isOpen={isOpen}
             menyKnapp={knapp}
         >
-            <Sok />
+            <KbNavigationWrapper
+                config={configForNodeGroup[nodeGroup]}
+                isEnabled={isOpen}
+            >
+                <Sok />
+            </KbNavigationWrapper>
         </EkspanderbarMeny>
     );
 };

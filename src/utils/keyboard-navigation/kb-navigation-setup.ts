@@ -1,6 +1,7 @@
 import KbNav, {
     createKbNaviNode,
     createNaviGraph,
+    getKbId,
     GraphData,
     KbIdMap,
     KbNaviNode,
@@ -63,9 +64,26 @@ export const configForNodeGroup: { [key in NodeGroup]: KbNavConfig } = {
     [NodeGroup.Sok]: {
         group: NodeGroup.Sok,
         rootIndex: { col: 0, row: 0, sub: 0 },
-        maxColsPerRow: [1],
+        maxColsPerRow: [3],
         parentNodeId: desktopSokKnappId,
         parentNodeEdge: NodeEdge.Bottom,
+        idMap: {
+            [getKbId(NodeGroup.Sok, {
+                col: 0,
+                row: 0,
+                sub: 0,
+            })]: 'desktop-decorator-sok-input',
+            [getKbId(NodeGroup.Sok, {
+                col: 1,
+                row: 0,
+                sub: 0,
+            })]: 'desktop-sok-reset-knapp',
+            [getKbId(NodeGroup.Sok, {
+                col: 2,
+                row: 0,
+                sub: 0,
+            })]: 'desktop-sok-submit-knapp',
+        },
     },
     [NodeGroup.Varsler]: {
         group: NodeGroup.Varsler,

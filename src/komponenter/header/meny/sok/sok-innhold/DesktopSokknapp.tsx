@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
 import Tekst from '../../../../../tekster/finn-tekst';
 import BEMHelper from '../../../../../utils/bem';
 
@@ -17,6 +17,7 @@ const DesktopSokknapp = (props: Props) => {
                         'knapp-avbryt'
                     )}`}
                     onClick={props.onReset}
+                    id={'desktop-sok-reset-knapp'}
                 >
                     <div className={cls.element('container')}>
                         <div className={cls.element('reset-line-x')} />
@@ -30,6 +31,7 @@ const DesktopSokknapp = (props: Props) => {
                 className={`${cls.element('knapp')} ${cls.element(
                     'knapp-submit'
                 )}`}
+                id={'desktop-sok-submit-knapp'}
             >
                 <div className={cls.element('container')}>
                     <div className={cls.element('sok-circle')} />
