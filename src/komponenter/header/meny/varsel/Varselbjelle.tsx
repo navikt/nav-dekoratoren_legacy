@@ -1,4 +1,4 @@
-import React, { createRef, ReactNode } from 'react';
+import React, { createRef } from 'react';
 import { AppState } from '../../../../reducer/reducer';
 import { Dispatch } from '../../../../redux/dispatch-type';
 import { connect } from 'react-redux';
@@ -11,14 +11,11 @@ import VarselIkon from '../ekspanderende-menyer/meny-knapper/ikoner/varsel-ikon/
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../../tekster/finn-tekst';
 import {
-    lukkAlleDropdowns,
-    toggleHovedmeny,
     toggleHovedOgUndermenyVisning,
     toggleUndermenyVisning,
     toggleVarselVisning,
 } from '../../../../reducer/dropdown-toggle-duck';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { Flatknapp } from 'nav-frontend-knapper';
+import VarselKnappMobil from './varselknapp/VarselKnappMobil';
 
 interface Props {
     tabindex: boolean;
@@ -35,12 +32,8 @@ interface StateProps {
     underMenyAapen: boolean;
 }
 
-interface FunctionProps {
-    // children: (clicked: boolean, handleClick?: () => void) => ReactNode;
-}
-
 interface DispatchProps {
-    doSettVarslerSomLest: (nyesteId: number) => void;
+    settVarselLest: (nyesteId: number) => void;
     togglevisvarsel: () => void;
     togglemeny: () => void;
     togglemenyer: () => void;
@@ -66,54 +59,53 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                     : 'toggle-varsler-container',
         };
 
-        this.handleClick = this.handleClick.bind(this);
-        this.handleOutsideClick = this.handleOutsideClick.bind(this);
+        this.ApneVarselEvent = this.ApneVarselEvent.bind(this);
+        this.varselClickEvent = this.varselClickEvent.bind(this);
     }
 
     componentDidMount() {
-        document.addEventListener('click', this.handleOutsideClick, false);
+        document.addEventListener('click', this.varselClickEvent, false);
     }
 
     componentWillUnmount() {
-        document.removeEventListener('click', this.handleOutsideClick, false);
+        document.removeEventListener('click', this.varselClickEvent, false);
     }
 
-    handleClick = () => {
-        triggerGaEvent({
-            category: GACategory.Header,
-            action: this.state.clicked ? 'varsler-close' : 'varsler-open',
-        });
-        this.setState({
-            clicked: !this.state.clicked,
-        });
-
-        if (this.props.antallUlesteVarsler > 0) {
-            this.setState({ classname: 'toggle-varsler-container' });
-            this.props.doSettVarslerSomLest(this.props.nyesteId);
-        }
-    };
-
-    handleOutsideClick: { (event: MouseEvent): void } = (e: MouseEvent) => {
-        const node = this.varselbjelleRef.current;
-        if (node && !node.contains(e.target as HTMLElement)) {
-            return;
-        }
-
+    toggleVarsel = () => {
         this.props.togglevisvarsel();
         if (this.props.underMenyAapen) {
             this.props.hovedMenyAapen
                 ? this.props.togglemenyer()
                 : this.props.togglemeny();
         }
+    };
 
-        if (this.state.clicked) {
+    ApneVarselEvent = () => {
+        triggerGaEvent({
+            category: GACategory.Header,
+            action: this.state.clicked ? 'varsler-close' : 'varsler-open',
+        });
+
+        this.toggleVarsel();
+        if (this.props.antallUlesteVarsler > 0) {
+            this.setState({ classname: 'toggle-varsler-container' });
+            this.props.settVarselLest(this.props.nyesteId);
+        }
+    };
+
+    varselClickEvent: { (event: MouseEvent): void } = (e: MouseEvent) => {
+        const node = this.varselbjelleRef.current;
+        if (node && node.contains(e.target as HTMLElement)) {
+            return;
+        }
+
+        if (this.props.visVarsel) {
+            this.toggleVarsel();
             triggerGaEvent({
                 category: GACategory.Header,
                 action: 'varsler-close',
             });
         }
-
-        this.setState({ clicked: false });
     };
 
     render() {
@@ -122,7 +114,6 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             antallVarsler,
             arbeidsflate,
             tabindex,
-            children,
             visVarsel,
         } = this.props;
         const { clicked, classname } = this.state;
@@ -130,83 +121,38 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             <div ref={this.varselbjelleRef} className="varselbjelle">
                 {erInnlogget && arbeidsflate === MenuValue.PRIVATPERSON ? (
                     <>
-                        <div className="media-sm-mobil mobil-meny">
-                            <div
-                                id="toggle-varsler-container"
-                                className={classname}
-                            >
-                                <Flatknapp
-                                    onClick={this.handleClick}
-                                    className="varselknapp-mobil"
+                        <VarselKnappMobil
+                            triggerVarsel={this.ApneVarselEvent}
+                            antallVarsel={antallVarsler}
+                            varselIsOpen={visVarsel}
+                            tabIndex={tabindex}
+                            clsName={classname}
+                        />
+                        <div className="media-tablet-desktop">
+                            <div id="toggle-varsler-container">
+                                <MenylinjeKnapp
+                                    toggleMenu={this.ApneVarselEvent}
+                                    isOpen={clicked}
+                                    classname={classname}
+                                    id={'toggle-varsler-knapp-id'}
+                                    ariaLabel={`Varsler. Du har ${
+                                        antallVarsler > 0
+                                            ? antallVarsler
+                                            : 'ingen'
+                                    } varsler.`}
                                 >
-                                    <div
-                                        className="toggle-varsler"
-                                        tabIndex={tabindex ? 0 : -1}
-                                        title="Varsler"
-                                        aria-label={`Varsler. Du har ${
-                                            antallVarsler > 0
-                                                ? antallVarsler
-                                                : 'ingen'
-                                        } varsler.`}
-                                        aria-pressed={clicked}
-                                        aria-haspopup="true"
-                                        aria-controls="varsler-display"
-                                        aria-expanded={clicked}
-                                    />
-                                    <span className="word-wrapper">
-                                        <Normaltekst
-                                            className={
-                                                !visVarsel
-                                                    ? 'er-synlig'
-                                                    : 'er-usynlig'
-                                            }
-                                        >
-                                            <Tekst id="varsler-mobil" />
-                                        </Normaltekst>
-                                        <Normaltekst
-                                            className={
-                                                visVarsel
-                                                    ? 'er-synlig'
-                                                    : 'er-usynlig'
-                                            }
-                                        >
-                                            <Tekst id="varsler-mobil-lukk" />
-                                        </Normaltekst>
-                                    </span>
-                                </Flatknapp>
+                                    <VarselIkon isOpen={clicked} />
+                                    <Undertittel className={'varsler-tekst'}>
+                                        <Tekst id={'varsler'} />
+                                    </Undertittel>
+                                </MenylinjeKnapp>
+                            </div>
+                            <div className="min-varsel-wrapper">
+                                {
+                                    //    children(clicked, this.handleClick)
+                                }
                             </div>
                         </div>
-                        <div className="media-tablet-desktop">
-                            <>
-                                <div id="toggle-varsler-container">
-                                    <MenylinjeKnapp
-                                        toggleMenu={this.handleClick}
-                                        isOpen={clicked}
-                                        classname={classname}
-                                        id={'toggle-varsler-knapp-id'}
-                                        ariaLabel={`Varsler. Du har ${
-                                            antallVarsler > 0
-                                                ? antallVarsler
-                                                : 'ingen'
-                                        } varsler.`}
-                                    >
-                                        <VarselIkon isOpen={clicked} />
-                                        <Undertittel
-                                            className={'varsler-tekst'}
-                                        >
-                                            <Tekst id={'varsler'} />
-                                        </Undertittel>
-                                    </MenylinjeKnapp>
-                                </div>
-                                <div className="min-varsel-wrapper">
-                                    {
-                                        //    children(clicked, this.handleClick)
-                                    }
-                                </div>
-                            </>
-                        </div>
-
-                        <div className="min-varsel-wrapper"></div>
                     </>
                 ) : null}
             </div>
@@ -229,7 +175,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    doSettVarslerSomLest: (nyesteId: number) =>
+    settVarselLest: (nyesteId: number) =>
         settVarslerSomLest(nyesteId)(dispatch),
     togglevisvarsel: () => dispatch(toggleVarselVisning()),
     togglemeny: () => dispatch(toggleUndermenyVisning()),

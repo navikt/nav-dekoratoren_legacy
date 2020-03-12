@@ -8,6 +8,10 @@ import './InnloggetBruker.less';
 import LoggutIkonMobil from '../../../../../../../../ikoner/mobilmeny/LoggutIkonMobil';
 import Environment from '../../../../../../../../utils/Environment';
 
+interface Props {
+    tabIndex: boolean;
+}
+
 const cls = BEMHelper('innloggetbruker');
 
 const stateSelector = (state: AppState) => ({
@@ -18,7 +22,7 @@ const loggut = () => {
     return (window.location.href = Environment.LOGOUT_URL);
 };
 
-const InnloggetBruker = () => {
+const InnloggetBruker = (props: Props) => {
     const { innlogget } = useSelector(stateSelector);
     return innlogget.data.authenticated ? (
         <div className={cls.className}>
@@ -30,14 +34,18 @@ const InnloggetBruker = () => {
             <div className={cls.element('bruker')}>
                 <Ingress>{innlogget.data.name}</Ingress>
             </div>
-            <div className={cls.element('loggut')} onClick={() => loggut()}>
+            <button
+                className={cls.element('loggut')}
+                onClick={() => loggut()}
+                tabIndex={props.tabIndex ? 0 : -1}
+            >
                 <LoggutIkonMobil />
                 <div className={cls.element('loggut', 'text')}>
                     <Ingress>
                         <Tekst id="logg-ut-knapp" />
                     </Ingress>
                 </div>
-            </div>
+            </button>
         </div>
     ) : null;
 };

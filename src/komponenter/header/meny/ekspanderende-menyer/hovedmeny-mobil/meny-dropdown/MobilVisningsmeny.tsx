@@ -74,9 +74,10 @@ class MobilVisningsmeny extends React.Component<Props, State> {
     };
 
     hovedseksjonTabIndex = (): boolean => {
+        console.log();
         return (
             this.props.menuIsOpen &&
-            !this.props.underMenuIsOpen &&
+            this.props.underMenuIsOpen &&
             !this.props.varslerIsOpen
         );
     };
@@ -88,6 +89,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
     ) => {
         event.preventDefault();
         this.node = pointer;
+        console.log(typeof this.node);
 
         this.setState(
             {
@@ -128,7 +130,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                     )}
                 >
                     <Sok tabindex={this.hovedseksjonTabIndex()} />
-                    <InnloggetBruker />
+                    <InnloggetBruker tabIndex={this.hovedseksjonTabIndex()} />
                     <MenyIngress
                         className={menyClass.element('meny', 'ingress')}
                         inputext={arbeidsflate}

@@ -3,34 +3,34 @@ import React from 'react';
 const LoggutIkonMobil = () => {
     return (
         <svg
-            width="20px"
+            width="22px"
             height="24px"
-            viewBox="0 0 20 24"
+            viewBox="0 0 22 24"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
-            tabIndex={-1}
+            tabIndex={0}
         >
-            <title>loggut.nav.no</title>
-            <desc>Logg ut av nav.no</desc>
+            <title>logg ut ikon</title>
+            <desc>logg ut knapp mobilvisning</desc>
             <g
-                id="Ikoner"
+                id="Step-Flow-V1"
                 stroke="none"
                 strokeWidth="1"
                 fill="none"
                 fillRule="evenodd"
             >
                 <g
-                    id="Desktop"
-                    transform="translate(-90.000000, -82.000000)"
+                    id="Innlogget-meny-droppdown---vektig-av-innhold"
+                    transform="translate(-30.000000, -284.000000)"
                     fill="#0067C5"
                 >
                     <g
                         id="New-icons-2px/24px/logout"
-                        transform="translate(88.000000, 82.000000)"
+                        transform="translate(29.000000, 284.000000)"
                     >
                         <path
-                            d="M20,0 C21.1045695,0 22,0.8954305 22,2 L22,22 C22,23.1045695 21.1045695,24 20,24 L6,24 C4.8954305,24 4,23.1045695 4,22 L4,17 L6,17 L6,22 L20,22 L20,2 L6,2 L6,7 L4,7 L4,2 C4,0.8954305 4.8954305,0 6,0 L20,0 Z M9.3745507,5 L16,12 L9.3745507,19 L8,17.5454545 L12.295,13 L2,13 L2,11 L12.295,11 L8,6.45454545 L9.3745507,5 Z"
+                            d="M21,0 C22.1045695,0 23,0.8954305 23,2 L23,22 C23,23.1045695 22.1045695,24 21,24 L11,24 C9.8954305,24 9,23.1045695 9,22 L9,19 L11,19 L11,22 L21,22 L21,2 L11,2 L11,5 L9,5 L9,2 C9,0.8954305 9.8954305,0 11,0 L21,0 Z M6.6254493,6 L1,12 L6.6254493,18 L8,16.5454545 L4.705,13 L18,13 L18,11 L4.705,11 L8,7.45454545 L6.6254493,6 Z"
                             id="Shape"
                             transform="translate(12.000000, 12.000000) scale(-1, 1) translate(-12.000000, -12.000000) "
                         />
