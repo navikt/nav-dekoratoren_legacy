@@ -130,7 +130,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
                         <VarselKnappMobil
                             triggerVarsel={this.ApneVarselEvent}
                             antallVarsel={antallVarsler}
-                            varselIsOpen={visVarsel}
+                            varselIsOpen={this.state.clicked}
                             tabIndex={tabindex}
                             clsName={classname}
                         />

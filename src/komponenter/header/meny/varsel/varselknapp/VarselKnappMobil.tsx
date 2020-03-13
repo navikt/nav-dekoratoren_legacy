@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Tekst from '../../../../../tekster/finn-tekst';
@@ -12,6 +12,11 @@ interface Props {
 }
 
 const VarselKnappMobil = (props: Props) => {
+    const [animasjon, setAnimasjon] = useState<boolean>(false);
+    useEffect(() => {
+        setAnimasjon(props.varselIsOpen);
+    }, [props.varselIsOpen]);
+
     const {
         triggerVarsel,
         antallVarsel,
@@ -40,16 +45,13 @@ const VarselKnappMobil = (props: Props) => {
                     />
                     <span className="word-wrapper">
                         <Normaltekst
-                            className={
-                                !varselIsOpen ? 'er-synlig' : 'er-usynlig'
-                            }
+                            className={!animasjon ? 'er-synlig' : 'er-usynlig'}
                         >
                             <Tekst id="varsler-mobil" />
                         </Normaltekst>
+
                         <Normaltekst
-                            className={
-                                varselIsOpen ? 'er-synlig' : 'er-usynlig'
-                            }
+                            className={animasjon ? 'er-synlig' : 'er-usynlig'}
                         >
                             <Tekst id="varsler-mobil-lukk" />
                         </Normaltekst>

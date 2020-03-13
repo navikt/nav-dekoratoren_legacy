@@ -17,6 +17,7 @@
             display: flex;
             align-items: center;
             padding: 0.3rem 0.5rem;
+            min-width: 7.4375rem;
         }
 
         .word-wrapper {
@@ -32,6 +33,10 @@
                 left: 0;
                 top: 0;
             }
+            p.er-usynlig {
+                opacity: 0;
+            }
+
             p.er-synlig {
                 opacity: 1;
                 position: relative;
@@ -40,7 +45,6 @@
 
         @keyframes dytt-ut {
             0% {
-                opacity: 1;
                 transform: translateX(0);
             }
             60% {
@@ -71,10 +75,9 @@
         .er-usynlig {
             animation-timing-function: ease;
             animation-delay: 0s;
-            animation-iteration-count: 1;
+            animation-iteration-count: 0;
             animation-direction: normal;
             animation-fill-mode: none;
-            animation-play-state: running;
         }
 
         .er-synlig {

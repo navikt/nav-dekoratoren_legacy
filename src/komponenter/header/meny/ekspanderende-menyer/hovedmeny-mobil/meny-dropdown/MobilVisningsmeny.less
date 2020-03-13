@@ -166,4 +166,46 @@
             justify-content: flex-start;
         }
     }
+
+    &__varseltittel {
+        padding-left: 0.5rem;
+    }
+
+    &__varsel-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        padding: 0.5rem 0.75rem 0.5rem 0;
+
+        .typo-innholdstittel,
+        .typo-undertittel,
+        .typo-systemtittel {
+            font-weight: 100;
+        }
+    }
+
+    &__lukk-varsel {
+        position: relative;
+        text-decoration: none;
+
+        &:after,
+        &:before {
+            left: -15%;
+            top: 50%;
+            margin-left: -11px;
+            width: 22px;
+            height: 2px;
+            background-color: @navBla;
+            content: '';
+            position: absolute;
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+    }
 }
