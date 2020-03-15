@@ -56,8 +56,13 @@ const parseLenke = (
 
 export const VarslerParsed = ({ varsler }: Props) => {
     let lenkeIndex = 0;
-    const varslerParsed = htmlReactParser(varsler, {
-        replace: ({ name, attribs, children }) => {
+    const options = {
+        replace: ({ name, attribs, children }: DomElement) => {
+            if (attribs?.class.includes('nav-varsler') && children) {
+                console.log(attribs);
+                return <div>{domToReact(children, options)}</div>;
+            }
+
             if (attribs?.class.includes('varsel-ikon') && children) {
                 const ikonStr =
                     (children[0] && children[0].data) || ikonDefault;
@@ -68,7 +73,9 @@ export const VarslerParsed = ({ varsler }: Props) => {
                 return parseLenke(attribs?.href, children, lenkeIndex++);
             }
         },
-    });
+    };
+
+    const varslerParsed = htmlReactParser(varsler, options);
 
     return <>{varslerParsed}</>;
 };
