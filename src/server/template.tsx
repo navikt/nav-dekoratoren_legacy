@@ -41,6 +41,7 @@ const htmlFooter = ReactDOMServer.renderToString(
 );
 
 export const template = (parameters: string) => {
+    parameters.replace('footer=true', 'footer-withmenu=true');
     return `
     <!DOCTYPE html>
     <html lang="no">
