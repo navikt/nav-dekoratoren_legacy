@@ -1,11 +1,160 @@
 @import '~nav-frontend-core/less/_variabler';
 
-.varsel-meny-ikon {
+.varselbjelle-ikon {
+    @main-color: @navBla;
+    @ulest-color: @navRodLighten40;
+
+    @transition-props: all 0.35s ease-in;
+
+    @width: 28px;
+    @height: 32px;
+    @stroke-width: 1px;
+
+    @cross-width: 32px;
+    @cross-stroke-width: 3px;
+    @cross-scale: 0.8;
+
+    @ring-diameter: 6px;
+
+    @bell-width: 22px;
+    @bell-height: 22px;
+
+    @lip-width: @width;
+    @lip-height: 3px;
+
+    @clapper-thickness: 6px;
+    @clapper-length: @bell-height + @lip-height + 2px;
+
+    @ulest-diameter: 16px;
+    @ulest-top: @height * 0.2;
+    @ulest-left: @width * 0.05;
+
+    .cross-line-transform(@rotation) {
+        border-radius: 0;
+        width: @cross-width;
+        height: @cross-stroke-width;
+        transform: translateY(@height / 2) rotate(@rotation) scale(@cross-scale);
+    }
+
     &__container {
-        border: none;
-        display: inline-block;
         position: relative;
+        width: @width;
+        height: @height;
+        padding: 0;
+        top: 0;
+        border: none;
+        margin-right: 0.25rem;
+    }
+
+    &__ring {
+        position: absolute;
+        z-index: 2;
+
+        transform: translateX((@width - @ring-diameter) / 2);
+
+        border-radius: 50%;
+        height: @ring-diameter;
+        width: @ring-diameter;
+        background-color: @main-color;
+
+        transition: @transition-props;
+
+        &--open {
+            transform: translate((@width - @ring-diameter) / 2, @height / 2)
+                scale(0);
+        }
+    }
+
+    &__bell {
+        position: absolute;
+        z-index: 2;
+
+        transform: translate(
+            (@width - @bell-width) / 2,
+            @ring-diameter - @stroke-width
+        );
+
+        border-top-left-radius: @bell-height + @stroke-width;
+        border-top-right-radius: @bell-height + @stroke-width;
+        border: @main-color @stroke-width solid;
+        height: @bell-height;
+        width: @bell-width;
         background-color: white;
-        margin-right: 0.5rem;
+        border-bottom: 0;
+
+        transition: @transition-props;
+
+        &--open {
+            .cross-line-transform(-(45deg));
+        }
+    }
+
+    &__lip {
+        position: absolute;
+        z-index: 2;
+
+        transform: translateY(@ring-diameter + @bell-height - @stroke-width);
+
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+
+        width: @lip-width;
+        height: @lip-height;
+        background-color: @main-color;
+
+        transition: @transition-props;
+
+        &--open {
+            .cross-line-transform(-(45deg));
+        }
+    }
+
+    &__clapper {
+        position: absolute;
+        z-index: 1;
+
+        transform: translate((@width - @clapper-length) / 2, @height / 2)
+            rotate(90deg);
+
+        border-radius: @clapper-thickness / 2;
+
+        width: @clapper-length;
+        height: @clapper-thickness;
+        background-color: @main-color;
+
+        transition: @transition-props;
+
+        &--open {
+            .cross-line-transform(-(45deg + 90deg));
+        }
+    }
+
+    &__ulest-sirkel {
+        position: absolute;
+        z-index: 3;
+
+        transform: translate(@ulest-left, @ulest-top);
+
+        border-radius: 50%;
+        height: @ulest-diameter;
+        width: @ulest-diameter;
+        background-color: @ulest-color;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        transition: @transition-props;
+
+        &--open {
+            transform: translate(@ulest-left, @ulest-top) scale(0);
+            transition: 0.2s all linear;
+        }
+    }
+
+    &__ulest-antall {
+        color: white;
+        font-weight: bold;
+        font-size: 11px;
     }
 }

@@ -79,10 +79,10 @@ export const reducer = (
         }
 
         case ActionType.TOGGLE_VARSLER: {
-            return { ...state, varsler: !state.varsler };
+            return { ...initialState, varsler: !state.varsler };
         }
         case ActionType.TOGGLE_LUKK_ALLE: {
-            return { ...initialState, varsler: state.varsler };
+            return initialState;
         }
         default:
             return state;

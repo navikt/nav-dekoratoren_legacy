@@ -6,25 +6,37 @@ import BEMHelper from '../../../../../../../utils/bem';
 import KbNav, {
     NaviGroup,
 } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
-import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
 import { GACategory } from '../../../../../../../utils/google-analytics';
 import { LenkeMedGA } from '../../../../../../LenkeMedGA';
 import './Toppseksjon.less';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../../../../../../reducer/reducer';
+import {
+    getArbeidsflateContext,
+    settArbeidsflate,
+} from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
 
 interface Props {
     classname: string;
-    arbeidsflate: MenuValue;
 }
 
-export const Toppseksjon = ({ classname, arbeidsflate }: Props) => {
+export const Toppseksjon = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
+    const { arbeidsflate } = useSelector((state: AppState) => ({
+        arbeidsflate: state.arbeidsflate.status,
+    }));
+    const context = getArbeidsflateContext(arbeidsflate);
 
     return (
         <div className={cls.element('topp-seksjon')}>
             <LenkeMedGA
-                href={Environment.XP_BASE_URL}
+                href={context.url}
+                onClick={event => {
+                    event.preventDefault();
+                    settArbeidsflate(context);
+                }}
                 className={cls.element('topp-seksjon-lenke')}
-                id={KbNav.getKbId(NaviGroup.DesktopHovedmeny, {
+                id={KbNav.getKbId(NaviGroup.Hovedmeny, {
                     col: 0,
                     row: 1,
                     sub: 0,

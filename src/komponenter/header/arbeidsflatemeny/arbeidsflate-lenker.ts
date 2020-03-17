@@ -1,30 +1,61 @@
-import { MenuValue } from '../../../utils/meny-storage-utils';
-import Environment from '../../../utils/Environment';
+import {
+    MenuValue,
+    oppdaterSessionStorage,
+} from '../../../utils/meny-storage-utils';
+import Environment, { erNavDekoratoren } from '../../../utils/Environment';
+import getStore from '../../../redux/store';
+import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 
 export interface ArbeidsflateLenke {
-    tittelId: string;
     url: string;
+    lenkeTekstId: string;
+    stikkordId: string;
+    footerStikkordId: string;
     key: MenuValue;
-    stikkord: string;
 }
 
 export const arbeidsflateLenker = (): ArbeidsflateLenke[] => [
-    {
-        tittelId: 'rolle-privatperson',
-        url: `${Environment.XP_BASE_URL}`,
-        key: MenuValue.PRIVATPERSON,
-        stikkord: 'arbeidsflate-stikkord-om-privatperson',
-    },
-    {
-        tittelId: 'rolle-arbeidsgiver',
-        url: `${Environment.XP_BASE_URL}/no/bedrift`,
-        key: MenuValue.ARBEIDSGIVER,
-        stikkord: 'arbeidsflate-stikkord-om-arbeidsgiver',
-    },
-    {
-        tittelId: 'rolle-samarbeidspartner',
-        url: `${Environment.XP_BASE_URL}/no/nav-og-samfunn`,
-        key: MenuValue.SAMARBEIDSPARTNER,
-        stikkord: 'arbeidsflate-stikkord-om-samarbeidspartner',
-    },
+    personContextLenke(),
+    arbeidsgiverContextLenke(),
+    samarbeidspartnerContextLenke(),
 ];
+
+export const personContextLenke = () => ({
+    url: `${Environment.XP_BASE_URL}`,
+    lenkeTekstId: 'rolle-privatperson',
+    stikkordId: 'meny-bunnlenke-minside-stikkord',
+    footerStikkordId: 'footer-stikkord-privatperson',
+    key: MenuValue.PRIVATPERSON,
+});
+
+export const arbeidsgiverContextLenke = () => ({
+    url: `${Environment.XP_BASE_URL}/no/bedrift`,
+    lenkeTekstId: 'rolle-arbeidsgiver',
+    stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
+    footerStikkordId: 'footer-stikkord-arbeidsgiver',
+    key: MenuValue.ARBEIDSGIVER,
+});
+
+export const samarbeidspartnerContextLenke = () => ({
+    url: `${Environment.XP_BASE_URL}/no/nav-og-samfunn`,
+    lenkeTekstId: 'rolle-samarbeidspartner',
+    stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
+    footerStikkordId: 'footer-stikkord-samarbeidspartner',
+    key: MenuValue.SAMARBEIDSPARTNER,
+});
+
+export const getArbeidsflateContext = (arbeidsflate: MenuValue) =>
+    arbeidsflate === MenuValue.ARBEIDSGIVER
+        ? arbeidsgiverContextLenke()
+        : arbeidsflate === MenuValue.SAMARBEIDSPARTNER
+        ? samarbeidspartnerContextLenke()
+        : personContextLenke();
+
+export const settArbeidsflate = (lenke: ArbeidsflateLenke) => {
+    oppdaterSessionStorage(lenke.key);
+    if (erNavDekoratoren()) {
+        getStore().dispatch(finnArbeidsflate());
+    } else {
+        window.location.href = lenke.url;
+    }
+};

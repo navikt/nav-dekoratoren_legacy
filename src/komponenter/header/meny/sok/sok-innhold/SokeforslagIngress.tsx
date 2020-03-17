@@ -17,17 +17,13 @@ const SokeforslagIngress = ({
                         <HoyreChevron />
                     </div>
                     <div className="overskrift">
-                        <Undertittel>
-                            {displayName ? displayName : 'Ingen treff å vise.'}
-                        </Undertittel>
+                        <Undertittel>{displayName}</Undertittel>
                     </div>
                 </div>
             </div>
             <div className="media-tablet-desktop sokeforslag-ingress">
                 <div className="overskrift">
-                    <Undertittel>
-                        {displayName ? displayName : 'Ingen treff å vise.'}
-                    </Undertittel>
+                    <Undertittel>{displayName}</Undertittel>
                 </div>
             </div>
         </>

@@ -51,10 +51,11 @@ const MobilarbeidsflateValg = ({
         <ul className={cls.className}>
             {arbeidsflateLenker().map(
                 (lenke: {
-                    tittelId: string;
                     url: string;
+                    lenkeTekstId: string;
+                    stikkordId: string;
+                    footerStikkordId: string;
                     key: MenuValue;
-                    stikkord: string;
                 }) => {
                     return arbeidsflate === lenke.key ? null : (
                         <li
@@ -79,18 +80,16 @@ const MobilarbeidsflateValg = ({
                                     <span
                                         className={cls.element('lenke-tittel')}
                                     >
-                                        {lenke.tittelId
+                                        {lenke.key
                                             .charAt(0)
                                             .toUpperCase()
                                             .concat(
-                                                lenke.tittelId
-                                                    .slice(1)
-                                                    .toLowerCase()
+                                                lenke.key.slice(1).toLowerCase()
                                             )}
                                     </span>{' '}
                                 </Undertittel>
                                 <Normaltekst>
-                                    {finnTekst(lenke.stikkord, lang)
+                                    {finnTekst(lenke.stikkordId, lang)
                                         .split('|')
                                         .map(ord => {
                                             return (

@@ -2,7 +2,10 @@ import React from 'react';
 import { AppState } from '../../../../../reducer/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Status } from '../../../../../api/api';
-import { getHovedmenyNode } from '../../../../../utils/meny-storage-utils';
+import {
+    getHovedmenyNode,
+    getMinsideMenyNode,
+} from '../../../../../utils/meny-storage-utils';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
 import {
@@ -102,6 +105,9 @@ export const HovedmenyMobil = () => {
                 menyLenker={
                     getHovedmenyNode(meny.data, language, arbeidsflate) ||
                     dataInitState
+                }
+                minsideLenker={
+                    getMinsideMenyNode(meny.data, language) || dataInitState
                 }
                 menuIsOpen={hovedIsOpen}
                 underMenuIsOpen={underIsOpen}

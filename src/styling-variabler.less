@@ -1,4 +1,5 @@
-@import (reference) '~nav-frontend-core';
+@import (reference) '~nav-frontend-core/less/core';
+@import (reference) '~nav-frontend-lenker-style/src/lenker-style';
 
 //desktop breakpoint width
 @desktopLimitWidth: 1440px;
@@ -8,7 +9,7 @@
 @tabletLimitWidth: 768px;
 
 //minimun mobile support-width (used to remove padding etc on screen-size below)
-@minimumMobilWidth: 350px;
+@minimumMobilWidth: 330px;
 
 //slide-out menu common-width
 @mobilemenuwidth: 100%;
@@ -36,3 +37,11 @@
     0px 6.7px 5.3px rgba(0, 0, 0, 0.048), 0px 12.5px 10px rgba(0, 0, 0, 0.06),
     0px 22.3px 17.9px rgba(0, 0, 0, 0.072),
     0px 41.8px 33.4px rgba(0, 0, 0, 0.086), 0px 100px 80px rgba(0, 0, 0, 0.12);
+
+.lenke-stil() {
+    .lenke;
+    text-decoration: underline;
+    &:hover {
+        text-decoration: none;
+    }
+}

@@ -55,7 +55,7 @@ export const SokDropdown = () => {
             isOpen={isOpen}
             menyKnapp={knapp}
         >
-            <Sok />
+            <Sok tabindex={true} />
         </EkspanderbarMeny>
     );
 };

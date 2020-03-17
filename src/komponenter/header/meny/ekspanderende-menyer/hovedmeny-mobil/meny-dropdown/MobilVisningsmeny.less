@@ -7,6 +7,7 @@
     &__varsel-innhold,
     &__undermeny-innhold {
         overflow-y: scroll;
+        overflow-x: hidden;
         position: fixed;
         top: 7.875rem;
         left: -(@mobilemenuwidth);
@@ -60,13 +61,15 @@
             margin: 0;
         }
 
-        &--mainlist {
+        &--mainlist,
+        &--minsidelist {
             border-bottom: 1px solid black;
             padding: 0;
         }
 
         &--list,
-        &--mainlist {
+        &--mainlist,
+        &--minsidelist {
             .lenke {
                 text-decoration: none;
 
@@ -84,6 +87,10 @@
                     }
                 }
             }
+        }
+
+        &--minsidelist {
+            padding-bottom: 0.75rem;
         }
 
         &--listItem {
@@ -117,6 +124,12 @@
             .typo-sidetittel {
                 font-weight: 500;
             }
+        }
+    }
+
+    &__submeny {
+        &--wrap {
+            padding-top: 1rem;
         }
     }
 

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import BEMHelper, { BEMWrapper } from '../../../../../../utils/bem';
-import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 import { MenyNode } from '../../../../../../reducer/menu-duck';
 import { Language } from '../../../../../../reducer/language-duck';
@@ -57,9 +55,6 @@ export const HovedmenyDropdown = (props: Props) => {
     const { arbeidsflate, classname, language, menyLenker, isOpen } = props;
 
     const cls = BEMHelper(classname);
-    const dispatch = useDispatch();
-
-    const settArbeidsflate = () => dispatch(finnArbeidsflate());
 
     const mqlDesktop = matchMedia('(min-width: 1440px)');
     const mqlTablet = matchMedia('(min-width: 1024px)');
@@ -67,7 +62,7 @@ export const HovedmenyDropdown = (props: Props) => {
     const [kbNaviGraph, setKbNaviGraph] = useState<NaviGraphData>();
     const [kbNaviNode, setKbNaviNode] = useState<NaviNode>(null);
 
-    const kbNaviGroup = NaviGroup.DesktopHovedmeny;
+    const kbNaviGroup = NaviGroup.Hovedmeny;
     const kbRootIndex = { col: 0, row: 0, sub: 0 };
     const kbIdMap = {
         [KbNav.getKbId(kbNaviGroup, kbRootIndex)]: desktopHovedmenyKnappId,
@@ -144,7 +139,7 @@ export const HovedmenyDropdown = (props: Props) => {
 
     return (
         <div className={cls.element('dropdown')}>
-            <Toppseksjon classname={classname} arbeidsflate={arbeidsflate} />
+            <Toppseksjon classname={classname} />
             <Hovedseksjon
                 menyLenker={menyLenker}
                 classname={classname}
@@ -154,7 +149,6 @@ export const HovedmenyDropdown = (props: Props) => {
                 classname={classname}
                 language={language}
                 arbeidsflate={arbeidsflate}
-                settArbeidsflate={settArbeidsflate}
             />
         </div>
     );

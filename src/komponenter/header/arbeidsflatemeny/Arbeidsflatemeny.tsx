@@ -1,36 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
-import { Dispatch } from '../../../redux/dispatch-type';
 import { Undertekst } from 'nav-frontend-typografi';
-import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
 import BEMHelper from '../../../utils/bem';
-import {
-    MenuValue,
-    oppdaterSessionStorage,
-} from '../../../utils/meny-storage-utils';
-import { arbeidsflateLenker } from './arbeidsflate-lenker';
+import { arbeidsflateLenker, settArbeidsflate } from './arbeidsflate-lenker';
 import './Arbeidsflatemeny.less';
 import { GACategory } from '../../../utils/google-analytics';
 import { LenkeMedGA } from '../../LenkeMedGA';
 import Tekst from '../../../tekster/finn-tekst';
-import { erNavDekoratoren } from '../../../utils/Environment';
 
-interface StateProps {
-    arbeidsflate: MenuValue;
-}
-
-interface DispatchProps {
-    settArbeidsflate: () => void;
-}
-
-type arbeidsflateProps = StateProps & DispatchProps;
-
-const Arbeidsflatemeny = ({
-    settArbeidsflate,
-    arbeidsflate,
-}: arbeidsflateProps) => {
+const Arbeidsflatemeny = () => {
     const cls = BEMHelper('arbeidsflate');
+    const { arbeidsflate } = useSelector((state: AppState) => ({
+        arbeidsflate: state.arbeidsflate.status,
+    }));
 
     return (
         <nav
@@ -39,63 +22,45 @@ const Arbeidsflatemeny = ({
             aria-label="Velg brukergruppe"
         >
             <ul className={cls.element('topp-liste-rad')} role="tablist">
-                {arbeidsflateLenker().map(
-                    (lenke: {
-                        tittelId: string;
-                        url: string;
-                        key: MenuValue;
-                    }) => {
-                        return (
-                            <li
-                                role="tab"
-                                aria-selected={arbeidsflate === lenke.key}
-                                className={cls.element('liste-element')}
-                                key={lenke.key}
+                {arbeidsflateLenker().map(lenke => {
+                    return (
+                        <li
+                            role="tab"
+                            aria-selected={arbeidsflate === lenke.key}
+                            className={cls.element('liste-element')}
+                            key={lenke.key}
+                        >
+                            <LenkeMedGA
+                                classNameOverride={cls.element('lenke')}
+                                href={lenke.url}
+                                onClick={event => {
+                                    event.preventDefault();
+                                    settArbeidsflate(lenke);
+                                }}
+                                gaEventArgs={{
+                                    category: GACategory.Header,
+                                    action: 'arbeidsflate-valg',
+                                }}
                             >
-                                <LenkeMedGA
-                                    classNameOverride={cls.element('lenke')}
-                                    href={lenke.url}
-                                    onClick={event => {
-                                        event.preventDefault();
-                                        oppdaterSessionStorage(lenke.key);
-                                        settArbeidsflate();
-                                        if (!erNavDekoratoren()) {
-                                            window.location.href = lenke.url;
-                                        }
-                                    }}
-                                    gaEventArgs={{
-                                        category: GACategory.Header,
-                                        action: 'arbeidsflate-valg',
-                                    }}
+                                <div
+                                    className={cls.element(
+                                        'lenke-inner',
+                                        arbeidsflate === lenke.key
+                                            ? 'active'
+                                            : ''
+                                    )}
                                 >
-                                    <div
-                                        className={cls.element(
-                                            'lenke-inner',
-                                            arbeidsflate === lenke.key
-                                                ? 'active'
-                                                : ''
-                                        )}
-                                    >
-                                        <Undertekst>
-                                            <Tekst id={lenke.tittelId} />
-                                        </Undertekst>
-                                    </div>
-                                </LenkeMedGA>
-                            </li>
-                        );
-                    }
-                )}
+                                    <Undertekst>
+                                        <Tekst id={lenke.lenkeTekstId} />
+                                    </Undertekst>
+                                </div>
+                            </LenkeMedGA>
+                        </li>
+                    );
+                })}
             </ul>
         </nav>
     );
 };
 
-const mapStateToProps = (state: AppState): StateProps => ({
-    arbeidsflate: state.arbeidsflate.status,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    settArbeidsflate: () => dispatch(finnArbeidsflate()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Arbeidsflatemeny);
+export default Arbeidsflatemeny;

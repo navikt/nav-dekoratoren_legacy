@@ -14,7 +14,6 @@ interface Props {
     setFocusNode: () => void;
     tabindex: boolean;
     lenker: MenyNode;
-    arbeidsflatenavn: string;
 }
 
 const Undermeny = (props: Props) => {
@@ -24,13 +23,12 @@ const Undermeny = (props: Props) => {
         setFocusNode,
         tabindex,
         lenker,
-        arbeidsflatenavn,
     } = props;
     const menyClass = BEMHelper(className);
-    const arbeidsflate = arbeidsflatenavn
+    const arbeidsflate = lenker.displayName
         .charAt(0)
         .toUpperCase()
-        .concat(arbeidsflatenavn.slice(1).toLowerCase());
+        .concat(lenker.displayName.slice(1).toLowerCase());
     return (
         <section
             className={menyClass.element(

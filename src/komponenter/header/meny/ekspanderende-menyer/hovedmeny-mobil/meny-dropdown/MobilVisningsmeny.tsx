@@ -18,6 +18,9 @@ import { connect } from 'react-redux';
 import Sok from '../../../sok/Sok';
 import InnloggetBruker from './mobil-innhold/innloggetbruker/InnloggetBruker';
 import { toggleVarselVisning } from '../../../../../../reducer/dropdown-toggle-duck';
+import ForsideLenke from './mobil-innhold/ForsideLenke';
+import Dittnavmeny from './mobil-innhold/dittnavmeny/Dittnavmeny';
+import { InnloggingsstatusState } from '../../../../../../reducer/innloggingsstatus-duck';
 
 interface DispatchProps {
     settArbeidsflate: () => void;
@@ -27,11 +30,13 @@ interface DispatchProps {
 interface StateProps {
     arbeidsflate: MenuValue;
     visvarsel: boolean;
+    innloggingsstatus: InnloggingsstatusState;
 }
 
 interface VisningsmenyProps {
     classname: string;
     menyLenker: MenyNode;
+    minsideLenker: MenyNode;
     togglemenu: () => void;
     togglehovedmenu: () => void;
     menuIsOpen: boolean;
@@ -49,6 +54,9 @@ type Props = VisningsmenyProps & StateProps & DispatchProps;
 
 class MobilVisningsmeny extends React.Component<Props, State> {
     private visningslenker = this.props.menyLenker.children.map(() =>
+        React.createRef<HTMLAnchorElement>()
+    );
+    private minsidelenkerRef = this.props.minsideLenker.children.map(() =>
         React.createRef<HTMLAnchorElement>()
     );
 
@@ -69,11 +77,22 @@ class MobilVisningsmeny extends React.Component<Props, State> {
     };
 
     hovedseksjonTabIndex = (): boolean => {
-        console.log();
         return (
             this.props.menuIsOpen &&
             this.props.underMenuIsOpen &&
             !this.props.varslerIsOpen
+        );
+    };
+
+    setSubmenu = (meny: MenyNode, pointer: any) => {
+        this.node = pointer;
+        this.setState(
+            {
+                lenker: meny,
+            },
+            () => {
+                this.props.togglehovedmenu();
+            }
         );
     };
 
@@ -84,8 +103,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
     ) => {
         event.preventDefault();
         this.node = pointer;
-        console.log(typeof this.node);
-
         this.setState(
             {
                 lenker: meny,
@@ -110,6 +127,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
             lang,
             underMenuIsOpen,
             varslerIsOpen,
+            minsideLenker,
         } = this.props;
         const menyClass = BEMHelper(classname);
         this.hideBackgroundOverflow(underMenuIsOpen || varslerIsOpen);
@@ -123,6 +141,28 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                 >
                     <Sok tabindex={this.hovedseksjonTabIndex()} />
                     <InnloggetBruker tabIndex={this.hovedseksjonTabIndex()} />
+
+                    <ForsideLenke
+                        arbeidsflate={arbeidsflate}
+                        erInnlogget={
+                            this.props.innloggingsstatus.data.authenticated
+                        }
+                        tabindex={this.hovedseksjonTabIndex()}
+                    />
+                    {this.props.innloggingsstatus.data.authenticated &&
+                        arbeidsflate === MenuValue.PRIVATPERSON && (
+                            <div
+                                className={menyClass.element('submeny', 'wrap')}
+                            >
+                                <Dittnavmeny
+                                    minsideLenker={minsideLenker}
+                                    tabIndex={this.hovedseksjonTabIndex()}
+                                    className={menyClass.className}
+                                    openMeny={this.setSubmenu}
+                                    test={this.minsidelenkerRef}
+                                />
+                            </div>
+                        )}
                     <MenyIngress
                         className={menyClass.element('meny', 'ingress')}
                         inputext={arbeidsflate}
@@ -172,9 +212,8 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                     className={menyClass.className}
                     undermenyIsOpen={underMenuIsOpen}
                     setFocusNode={this.focusNode}
-                    tabindex={underMenuIsOpen}
+                    tabindex={underMenuIsOpen && !menuIsOpen}
                     lenker={this.state.lenker}
-                    arbeidsflatenavn={arbeidsflate}
                 />
                 <>
                     <VarselinnboksProvider>
@@ -195,6 +234,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
 const mapStateToProps = (state: AppState): StateProps => ({
     arbeidsflate: state.arbeidsflate.status,
     visvarsel: state.dropdownToggles.varsel,
+    innloggingsstatus: state.innloggingsstatus,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
