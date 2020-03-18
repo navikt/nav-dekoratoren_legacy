@@ -26,18 +26,6 @@ const stateSelector = (state: AppState) => ({
 const MobilMenylinje = ({ language }: Props) => {
     const dispatch = useDispatch();
     const { innloggingsstatus, visVarsel } = useSelector(stateSelector);
-    const [navIkonSize, setNavIkonSize] = useState<string>('66');
-
-    useEffect(() => {
-        if (verifyWindowObj()) {
-            window.addEventListener('resize', handleResize);
-            return () => window.removeEventListener('resize', handleResize);
-        }
-    }, []);
-
-    const handleResize = () => {
-        window.innerWidth <= 400 ? setNavIkonSize('66') : setNavIkonSize('66');
-    };
 
     const LukkVarsel = ({ clicked }: { clicked: boolean }) => {
         return <>{!clicked && visVarsel && dispatch(toggleVarselVisning())}</>;
@@ -49,8 +37,8 @@ const MobilMenylinje = ({ language }: Props) => {
                 <div className={mobilClass.element('elementer')}>
                     <div className={mobilClass.element('venstre-kolonne')}>
                         <NavLogoRod
-                            width={navIkonSize}
-                            height={navIkonSize}
+                            width="66"
+                            height="66"
                             classname={mobilClass.element('logo')}
                         />
                     </div>
