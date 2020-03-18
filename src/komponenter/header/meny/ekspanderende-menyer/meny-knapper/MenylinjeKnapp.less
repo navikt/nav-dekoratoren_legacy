@@ -1,4 +1,5 @@
 @import '~nav-frontend-core/less/_variabler';
+@import '../../../../../styling-variabler';
 
 @height: 48px;
 @padding-y: 4px;
@@ -31,6 +32,12 @@
     }
 
     &-visning {
-        height: @height - @padding-y * 2;
+        height: 45px;
+    }
+
+    @media (min-width: @tabletLimitWidth) {
+        &-visning {
+            height: @height - @padding-y * 2;
+        }
     }
 }

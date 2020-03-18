@@ -9,28 +9,15 @@
     height: 100%;
     left: 0;
     top: 0;
-    color: black;
-    will-change: opacity;
 
-    //transition-duration: 0.35s;
-    //transition-timing-function: ease-in;
-    //transition-property: background-color, visibility;
+    transition-duration: 0.35s;
+    transition-timing-function: ease-in;
+    transition-property: background-color, visibility;
 
-    //animation-duration: 0.25s;
-    //animation-delay: @ekspanderbar-transition-duration-out;
+    animation-duration: 0.25s;
+    animation-delay: @ekspanderbar-transition-duration-out;
     &--active {
         visibility: visible;
-        opacity: 0.35;
-        //animation-name: blurBakgrunn;
-        //animation-fill-mode: forwards;
-    }
-
-    @keyframes blurBakgrunn {
-        from {
-            backdrop-filter: none;
-        }
-        to {
-            backdrop-filter: blur(2px);
-        }
+        background-color: rgba(0, 0, 0, 0.35);
     }
 }

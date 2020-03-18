@@ -41,9 +41,7 @@ export const Header = () => {
                     </div>
                 </div>
             </header>
-            <div className="media-sm-mobil mobil-meny">
-                <MenyBakgrunn />
-            </div>
+            <MenyBakgrunn />
         </>
     );
 };

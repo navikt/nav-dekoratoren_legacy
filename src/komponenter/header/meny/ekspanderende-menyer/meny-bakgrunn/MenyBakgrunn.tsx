@@ -12,13 +12,13 @@ const MenyBakgrunn = () => {
     const isActive =
         toggles.hovedmeny ||
         toggles.minside ||
-        (toggles.sok && window.innerWidth > 768) ||
+        toggles.sok ||
         toggles.undermeny ||
         toggles.varsel;
 
     return (
         <div
-            className={`${classname}${false ? clsActive : ''}`}
+            className={`${classname}${isActive ? clsActive : ''}`}
             onClick={() => dispatch(lukkAlleDropdowns())}
         />
     );

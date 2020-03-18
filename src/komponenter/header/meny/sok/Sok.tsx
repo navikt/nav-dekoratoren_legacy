@@ -229,8 +229,9 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 
     enableBackground = (isOpen: boolean) => {
         if (
-            isOpen !== this.state.setBackground &&
-            this.state.writtenInput !== ''
+            (isOpen !== this.state.setBackground &&
+                this.state.writtenInput === '') ||
+            (!isOpen && this.state.writtenInput === '')
         ) {
             this.setState({ setBackground: isOpen });
         }
