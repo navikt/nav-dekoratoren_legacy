@@ -12,7 +12,7 @@ import {
     GACategory,
     triggerGaEvent,
 } from '../../../../../utils/google-analytics';
-import Tekst, { finnTekst } from '../../../../../tekster/finn-tekst';
+import { finnTekst } from '../../../../../tekster/finn-tekst';
 import {
     toggleHovedmeny,
     toggleHovedOgUndermenyVisning,

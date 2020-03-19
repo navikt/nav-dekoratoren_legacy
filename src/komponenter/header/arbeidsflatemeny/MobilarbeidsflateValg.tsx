@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducer';
-import { Dispatch } from '../../../redux/dispatch-type';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import BEMHelper from '../../../utils/bem';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
@@ -23,20 +22,13 @@ interface Props {
     lang: Language;
 }
 
-interface StateProps {
-    arbeidsflate: MenuValue;
-}
+const stateProps = (state: AppState) => ({
+    arbeidsflate: state.arbeidsflate.status,
+});
 
-interface DispatchProps {
-    settArbeidsflate: () => void;
-}
-
-const MobilarbeidsflateValg = ({
-    arbeidsflate,
-    settArbeidsflate,
-    tabindex,
-    lang,
-}: StateProps & DispatchProps & Props) => {
+const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
+    const dispatch = useDispatch();
+    const { arbeidsflate } = useSelector(stateProps);
     const cls = BEMHelper('mobil-arbeidsflate-valg');
     const oppdatereArbeidsflateValg = (
         e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
@@ -44,7 +36,7 @@ const MobilarbeidsflateValg = ({
     ) => {
         e.preventDefault();
         oppdaterSessionStorage(valgVerdi);
-        settArbeidsflate();
+        dispatch(finnArbeidsflate());
     };
 
     return (
@@ -111,15 +103,4 @@ const MobilarbeidsflateValg = ({
     );
 };
 
-const mapStateToProps = (state: AppState): StateProps => ({
-    arbeidsflate: state.arbeidsflate.status,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    settArbeidsflate: () => dispatch(finnArbeidsflate()),
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MobilarbeidsflateValg);
+export default MobilarbeidsflateValg;
