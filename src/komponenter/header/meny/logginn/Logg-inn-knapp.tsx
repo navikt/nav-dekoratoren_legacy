@@ -8,7 +8,7 @@ import './Logg-inn-knapp.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 
 import { Language } from '../../../../reducer/language-duck';
-import { textTransformFirstLetterToUppercase } from '../ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
+import { TextTransformFirstLetterToUppercase } from '../ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import KnappBase from 'nav-frontend-knapper';
 
 interface StateProps {
@@ -53,10 +53,10 @@ export class LoggInnKnapp extends React.Component<StateProps, {}> {
                         onClick={this.handleButtonClick}
                     >
                         <Undertittel className="knappetekst">
-                            {textTransformFirstLetterToUppercase(
-                                knappetekst,
-                                this.props.lang
-                            )}
+                            <TextTransformFirstLetterToUppercase
+                                text={knappetekst}
+                                lang={this.props.lang}
+                            />
                         </Undertittel>
                     </KnappBase>
                 </div>

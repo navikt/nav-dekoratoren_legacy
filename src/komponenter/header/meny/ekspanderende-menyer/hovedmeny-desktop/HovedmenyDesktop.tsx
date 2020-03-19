@@ -1,5 +1,5 @@
 import React from 'react';
-import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
+import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import {
     GACategory,
     triggerGaEvent,
@@ -11,7 +11,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import { HovedmenyDropdown } from './hovedmeny-dropdown/HovedmenyDropdown';
 import { getHovedmenyNode } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
-import { MenySpinner } from '../meny-spinner/MenySpinner';
+import MenySpinner from '../meny-spinner/MenySpinner';
 import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
 import HamburgerIkon from '../meny-knapper/ikoner/hamburger-ikon/HamburgerIkon';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';

@@ -4,13 +4,13 @@ import './EkspanderbarMeny.less';
 
 type Props = {
     isOpen: boolean;
-    menyKnapp: React.ReactNode;
+    menyKnapp: ReactNode;
     classname: string;
     id: string;
     children: ReactNode;
 };
 
-export const EkspanderbarMeny = (props: Props) => {
+const EkspanderbarMeny = (props: Props) => {
     const { isOpen, menyKnapp, classname, id, children } = props;
     const cls = BEMHelper(`ekspanderbar ${classname}`);
 
@@ -31,3 +31,5 @@ export const EkspanderbarMeny = (props: Props) => {
         </>
     );
 };
+
+export default EkspanderbarMeny;

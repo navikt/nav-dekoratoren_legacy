@@ -9,7 +9,7 @@ export interface DropdownState {
     varsler: boolean;
 }
 
-const initialState: DropdownState = {
+export const initialState: DropdownState = {
     hovedmeny: false,
     minside: false,
     sok: false,

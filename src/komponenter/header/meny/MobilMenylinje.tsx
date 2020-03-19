@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import BEMHelper from '../../../utils/bem';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import './MobilMenylinje.less';
 import { verifyWindowObj } from '../../../utils/Environment';
@@ -12,6 +11,7 @@ import { AppState } from '../../../reducer/reducer';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import Varselbjelle from './varsel/Varselbjelle';
 import { toggleVarselVisning } from '../../../reducer/dropdown-toggle-duck';
+import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 
 const mobilClass = BEMHelper('mobilmeny');
 

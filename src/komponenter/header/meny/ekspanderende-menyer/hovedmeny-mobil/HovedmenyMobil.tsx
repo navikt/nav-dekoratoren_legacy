@@ -6,26 +6,27 @@ import {
     getHovedmenyNode,
     getMinsideMenyNode,
 } from '../../../../../utils/meny-storage-utils';
-import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
+
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
 import {
     GACategory,
     triggerGaEvent,
 } from '../../../../../utils/google-analytics';
-import { Undertittel } from 'nav-frontend-typografi';
-import { finnTekst } from '../../../../../tekster/finn-tekst';
+import Tekst, { finnTekst } from '../../../../../tekster/finn-tekst';
 import {
     toggleHovedmeny,
     toggleHovedOgUndermenyVisning,
     toggleUndermenyVisning,
     toggleVarselVisning,
 } from '../../../../../reducer/dropdown-toggle-duck';
-import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
-import { MenySpinner } from '../meny-spinner/MenySpinner';
 import { Language } from '../../../../../reducer/language-duck';
+import { dataInitState } from '../../../../../reducer/menu-duck';
 import BEMHelper from '../../../../../utils/bem';
 import HamburgerKnapp from '../meny-knapp/hamburger-knapp/HamburgerKnapp';
-import { dataInitState } from '../../../../../reducer/menu-duck';
+import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
+import MenySpinner from '../meny-spinner/MenySpinner';
+import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
+import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
@@ -40,19 +41,22 @@ const classname = 'mobilmeny';
 export const mobilHovedmenyKnappId = `${classname}-knapp-id`;
 const cls = BEMHelper('hamburger-knapp');
 
-export const textTransformFirstLetterToUppercase = (
-    text: string,
-    lang: Language
-) => {
+export const TextTransformFirstLetterToUppercase = ({
+    text,
+    lang,
+}: {
+    text: string;
+    lang: Language;
+}) => {
     const txt = finnTekst(text, lang);
-    return txt
+    const output = txt
         .charAt(0)
         .toUpperCase()
         .concat(txt.slice(1).toLowerCase());
+    return <>{output}</>;
 };
-export const hovedmenyMobilClassname = classname;
 
-export const HovedmenyMobil = () => {
+const HovedmenyMobil = () => {
     const dispatch = useDispatch();
     const {
         meny,
@@ -84,18 +88,25 @@ export const HovedmenyMobil = () => {
     };
 
     const menyKnapp = (
-        <MenylinjeKnapp
-            toggleMenu={menutoggle}
-            isOpen={underIsOpen}
-            classname={classname}
-            id={mobilHovedmenyKnappId}
-            ariaLabel={'Hovedmenyknapp'}
-        >
-            <HamburgerKnapp isOpen={underIsOpen} />
-            <Undertittel>
-                {textTransformFirstLetterToUppercase('meny-knapp', language)}
-            </Undertittel>
-        </MenylinjeKnapp>
+        <>
+            <MenylinjeKnapp
+                toggleMenu={menutoggle}
+                isOpen={underIsOpen}
+                classname={classname}
+                id={mobilHovedmenyKnappId}
+                ariaLabel={'Hovedmenyknapp'}
+            >
+                <>
+                    <HamburgerKnapp isOpen={underIsOpen} />
+                    <Undertittel>
+                        <TextTransformFirstLetterToUppercase
+                            text="meny-knapp"
+                            lang={language}
+                        />
+                    </Undertittel>
+                </>
+            </MenylinjeKnapp>
+        </>
     );
 
     const dropdownInnhold =
@@ -121,14 +132,16 @@ export const HovedmenyMobil = () => {
         );
 
     return (
-        <EkspanderbarMeny
-            classname={classname}
-            isOpen={hovedIsOpen}
-            menyKnapp={menyKnapp}
-            id={classname}
-        >
-            {dropdownInnhold}
-        </EkspanderbarMeny>
+        <>
+            <EkspanderbarMeny
+                classname={classname}
+                isOpen={hovedIsOpen}
+                menyKnapp={menyKnapp}
+                id={classname}
+            >
+                {dropdownInnhold}
+            </EkspanderbarMeny>
+        </>
     );
 };
 

@@ -22,7 +22,7 @@ export interface Data {
     varsler: string;
 }
 
-const initialState: VarselinnboksState = {
+export const initialState: VarselinnboksState = {
     data: {
         uleste: 0,
         antall: 0,
