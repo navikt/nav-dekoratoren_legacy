@@ -18,9 +18,9 @@ const store = createStore(reducer);
 
 describe('<Header>', () => {
     it('Skal rendre <Arbeidsflatemeny> komponent hvis språk er norsk', () => {
-        /* store.dispatch(
+        store.dispatch(
             languageDuck.actionCreator({ language: Language.NORSK })
-        );*/
+        );
         expect(mountWithRedux(store).find(Arbeidsflatemeny)).toHaveLength(1);
     });
 
