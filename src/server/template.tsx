@@ -63,10 +63,7 @@ export const template = (parameters: string) => {
                 justify-content: space-between;
                 height: 100%;
             }
-            .decorator-dummy-app{
-                background: #f1f1f1;
-                height:100%;
-            }
+            
             </style>
             <div id="styles">
                 <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
@@ -84,7 +81,9 @@ export const template = (parameters: string) => {
                 <div id="header-withmenu">
                     <section class="navno-dekorator" id="decorator-header" role="main">${htmlHeader}</section>
                 </div>
-                <div class="decorator-dummy-app"></div>
+                <div class="decorator-dummy-app">
+                    <div class="decorator-dummy-app__content">App content</div>
+                </div>
                 <div id="footer-withmenu">
                     <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
                 </div>
