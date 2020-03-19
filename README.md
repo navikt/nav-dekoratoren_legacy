@@ -1,6 +1,7 @@
 
 # Nav-dekoratoren ![nav.no logo](./src/ikoner/meny/navlogo.svg) [![CircleCI](https://circleci.com/gh/navikt/nav-dekoratoren.svg?style=svg)](https://circleci.com/gh/navikt/nav-dekoratoren)
                      
+:warning: **OBS! Denne versjonen av header og footer er under arbeid. Kan ikke prodsettes.**
 
 Node.js Express applikasjon med frontend-komponenter i React.<br>
 Appen kjører på NAIS i en docker-container.
