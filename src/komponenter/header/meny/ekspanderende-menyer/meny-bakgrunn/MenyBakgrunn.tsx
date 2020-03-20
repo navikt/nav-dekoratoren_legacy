@@ -7,10 +7,14 @@ import { lukkAlleDropdowns } from '../../../../../reducer/dropdown-toggle-duck';
 const MenyBakgrunn = () => {
     const dispatch = useDispatch();
     const toggles = useSelector((state: AppState) => state.dropdownToggles);
-    const isActive =
-        toggles.hovedmeny || toggles.minside || toggles.sok || toggles.varsler;
     const classname = 'meny-bakgrunn';
     const clsActive = ` ${classname}--active`;
+    const isActive =
+        toggles.hovedmeny ||
+        toggles.minside ||
+        toggles.sok ||
+        toggles.undermeny ||
+        toggles.varsel;
 
     return (
         <div

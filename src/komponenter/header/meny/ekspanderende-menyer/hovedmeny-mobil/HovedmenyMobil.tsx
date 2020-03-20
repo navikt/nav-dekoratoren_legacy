@@ -2,65 +2,129 @@ import React from 'react';
 import { AppState } from '../../../../../reducer/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Status } from '../../../../../api/api';
-import { getHovedmenyNode } from '../../../../../utils/meny-storage-utils';
-import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
+import {
+    getHovedmenyNode,
+    getMinsideMenyNode,
+} from '../../../../../utils/meny-storage-utils';
+
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
 import {
     GACategory,
     triggerGaEvent,
 } from '../../../../../utils/google-analytics';
-import MenyIkon from '../../../../../ikoner/mobilmeny/MenyIkon';
-import { Undertittel } from 'nav-frontend-typografi';
-import Tekst from '../../../../../tekster/finn-tekst';
-import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
-import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
-import { MenySpinner } from '../meny-spinner/MenySpinner';
+import { finnTekst } from '../../../../../tekster/finn-tekst';
+import {
+    toggleHovedmeny,
+    toggleHovedOgUndermenyVisning,
+    toggleUndermenyVisning,
+    toggleVarselVisning,
+} from '../../../../../reducer/dropdown-toggle-duck';
+import { Language } from '../../../../../reducer/language-duck';
+import { dataInitState } from '../../../../../reducer/menu-duck';
+import BEMHelper from '../../../../../utils/bem';
+import HamburgerKnapp from '../meny-knapp/hamburger-knapp/HamburgerKnapp';
+import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
+import MenySpinner from '../meny-spinner/MenySpinner';
+import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
+import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
     language: state.language.language,
     arbeidsflate: state.arbeidsflate.status,
-    isOpen: state.dropdownToggles.hovedmeny,
+    hovedIsOpen: state.dropdownToggles.hovedmeny,
+    underIsOpen: state.dropdownToggles.undermeny,
+    varselIsOpen: state.dropdownToggles.varsel,
 });
 
 const classname = 'mobilmeny';
 export const mobilHovedmenyKnappId = `${classname}-knapp-id`;
+const cls = BEMHelper('hamburger-knapp');
 
-export const HovedmenyMobil = () => {
+export const TextTransformFirstLetterToUppercase = ({
+    text,
+    lang,
+}: {
+    text: string;
+    lang: Language;
+}) => {
+    const txt = finnTekst(text, lang);
+    const output = txt
+        .charAt(0)
+        .toUpperCase()
+        .concat(txt.slice(1).toLowerCase());
+    return <>{output}</>;
+};
+
+const HovedmenyMobil = () => {
     const dispatch = useDispatch();
-    const { meny, language, arbeidsflate, isOpen } = useSelector(stateSelector);
+    const {
+        meny,
+        language,
+        arbeidsflate,
+        underIsOpen,
+        hovedIsOpen,
+        varselIsOpen,
+    } = useSelector(stateSelector);
 
     const menutoggle = () => {
         triggerGaEvent({
             category: GACategory.Header,
-            action: `meny-${isOpen ? 'close' : 'open'}`,
+            action: `meny-${underIsOpen ? 'close' : 'open'}`,
         });
+
+        dispatch(
+            hovedIsOpen || !underIsOpen
+                ? toggleHovedOgUndermenyVisning()
+                : toggleUndermenyVisning()
+        );
+        if (varselIsOpen) {
+            dispatch(toggleVarselVisning());
+        }
+    };
+
+    const hovedmenutoggle = () => {
         dispatch(toggleHovedmeny());
     };
 
     const menyKnapp = (
-        <MenylinjeKnapp
-            toggleMenu={menutoggle}
-            isOpen={isOpen}
-            classname={classname}
-            id={mobilHovedmenyKnappId}
-            ariaLabel={'Hovedmenyknapp'}
-        >
-            <MenyIkon />
-            <Undertittel>
-                <Tekst id="meny-knapp" />
-            </Undertittel>
-        </MenylinjeKnapp>
+        <>
+            <MenylinjeKnapp
+                toggleMenu={menutoggle}
+                isOpen={underIsOpen}
+                classname={classname}
+                id={mobilHovedmenyKnappId}
+                ariaLabel={'Hovedmenyknapp'}
+            >
+                <>
+                    <HamburgerKnapp isOpen={underIsOpen} />
+                    <Undertittel>
+                        <TextTransformFirstLetterToUppercase
+                            text="meny-knapp"
+                            lang={language}
+                        />
+                    </Undertittel>
+                </>
+            </MenylinjeKnapp>
+        </>
     );
 
     const dropdownInnhold =
         meny.status === Status.OK ? (
             <MobilVisningsmeny
                 classname={classname}
-                menyLenker={getHovedmenyNode(meny.data, language, arbeidsflate)}
-                menuIsOpen={isOpen}
+                menyLenker={
+                    getHovedmenyNode(meny.data, language, arbeidsflate) ||
+                    dataInitState
+                }
+                minsideLenker={
+                    getMinsideMenyNode(meny.data, language) || dataInitState
+                }
+                menuIsOpen={hovedIsOpen}
+                underMenuIsOpen={underIsOpen}
+                varslerIsOpen={varselIsOpen}
                 togglemenu={menutoggle}
-                arbeidsflate={arbeidsflate}
+                togglehovedmenu={hovedmenutoggle}
                 lang={language}
             />
         ) : (
@@ -68,14 +132,16 @@ export const HovedmenyMobil = () => {
         );
 
     return (
-        <EkspanderbarMeny
-            classname={classname}
-            isOpen={isOpen}
-            menyKnapp={menyKnapp}
-            id={classname}
-        >
-            {dropdownInnhold}
-        </EkspanderbarMeny>
+        <>
+            <EkspanderbarMeny
+                classname={classname}
+                isOpen={hovedIsOpen}
+                menyKnapp={menyKnapp}
+                id={classname}
+            >
+                {dropdownInnhold}
+            </EkspanderbarMeny>
+        </>
     );
 };
 

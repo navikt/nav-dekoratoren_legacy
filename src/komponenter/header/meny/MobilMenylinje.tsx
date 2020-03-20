@@ -2,42 +2,33 @@ import React, { useEffect, useState } from 'react';
 import BEMHelper from '../../../utils/bem';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
-import SokModal from './sok/sok-innhold/sok-modal/Sokmodal';
-import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
 import './MobilMenylinje.less';
 import { verifyWindowObj } from '../../../utils/Environment';
-import { tabletview } from '../../../styling-mediaquery';
-import { GACategory, triggerGaEvent } from '../../../utils/google-analytics';
 import { Language } from '../../../reducer/language-duck';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../../reducer/reducer';
+import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
+import Varselbjelle from './varsel/Varselbjelle';
+import { toggleVarselVisning } from '../../../reducer/dropdown-toggle-duck';
+import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 
 const mobilClass = BEMHelper('mobilmeny');
 
 interface Props {
     language: Language;
 }
+const stateSelector = (state: AppState) => ({
+    innloggingsstatus: state.innloggingsstatus,
+    visVarsel: state.dropdownToggles.varsel,
+});
 
 const MobilMenylinje = ({ language }: Props) => {
-    const [clickedModal, setClickedModal] = useState<boolean>(false);
+    const dispatch = useDispatch();
+    const { innloggingsstatus, visVarsel } = useSelector(stateSelector);
 
-    useEffect(() => {
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    const toggleModal = () => {
-        triggerGaEvent({
-            category: GACategory.Header,
-            action: `mobilsøk-${clickedModal ? 'close' : 'open'}`,
-        });
-        setClickedModal(!clickedModal);
-    };
-
-    const handleResize = () => {
-        if (verifyWindowObj() && window.innerWidth >= tabletview) {
-            setClickedModal(false);
-        }
+    const LukkVarsel = ({ clicked }: { clicked: boolean }) => {
+        return <>{!clicked && visVarsel && dispatch(toggleVarselVisning())}</>;
     };
 
     return (
@@ -52,25 +43,30 @@ const MobilMenylinje = ({ language }: Props) => {
                         />
                     </div>
                     <div className={mobilClass.element('hoyre-kolonne')}>
+                        {!innloggingsstatus.data.authenticated ? (
+                            <InnloggingsstatusProvider>
+                                <LoggInnKnapp />
+                            </InnloggingsstatusProvider>
+                        ) : (
+                            <>
+                                <VarselinnboksProvider>
+                                    <Varselbjelle tabindex={true}>
+                                        {clicked =>
+                                            clicked && (
+                                                <LukkVarsel clicked={clicked} />
+                                            )
+                                        }
+                                    </Varselbjelle>
+                                </VarselinnboksProvider>
+                            </>
+                        )}
                         {language === Language.NORSK ||
                         language === Language.ENGELSK ? (
                             <HovedmenyMobil />
                         ) : null}
-                        <SokModalToggleknapp
-                            className={mobilClass.element('sok')}
-                            modalIsOpen={toggleModal}
-                        />
-                        <InnloggingsstatusProvider>
-                            <LoggInnKnapp />
-                        </InnloggingsstatusProvider>
                     </div>
                 </div>
             </div>
-
-            <SokModal
-                modalerApen={clickedModal}
-                sokeknappToggle={toggleModal}
-            />
         </nav>
     );
 };

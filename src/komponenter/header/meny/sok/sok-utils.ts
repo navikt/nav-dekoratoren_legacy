@@ -5,6 +5,7 @@ export interface InputState {
     selectedInput: string;
     writtenInput: string;
     items: SokeresultatData[];
+    setBackground: boolean;
 }
 
 export interface SokeresultatData {

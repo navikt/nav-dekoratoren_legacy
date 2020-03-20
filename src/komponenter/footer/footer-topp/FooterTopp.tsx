@@ -59,7 +59,7 @@ const FooterTopp = ({ classname }: Props) => {
                     <div className="til-toppen-innhold">
                         <PilOppHvit />
                         <Lenke
-                            href="#"
+                            href="#scroll-til-toppen"
                             onClick={e => {
                                 e.preventDefault();
                                 scrollToTop();

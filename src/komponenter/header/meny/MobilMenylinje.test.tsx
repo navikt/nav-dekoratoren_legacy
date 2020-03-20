@@ -1,28 +1,39 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
-import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
-import Ekspanderbarmeny from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
-import MobilMenylinje from './MobilMenylinje';
-import SokModalToggleknapp from './sok/sok-innhold/SokModalToggleknapp';
+import { mount } from 'enzyme';
 import { Language } from '../../../reducer/language-duck';
+import { Provider } from 'react-redux';
+import { reducer } from '../../../reducer/reducer';
+import { createStore, Store } from 'redux';
+import MobilMenylinje from './../meny/MobilMenylinje';
+import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
+import LoggInnKnapp from './logginn/Logg-inn-knapp';
+import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 
-const shallowWithProps = () => {
-    return shallow(<MobilMenylinje language={Language.NORSK} />);
-};
+const store = createStore(reducer);
 
-describe('<Mobilmeny>', () => {
+const getWrapper = (store: Store) =>
+    mount(
+        <Provider store={store}>
+            <MobilMenylinje language={Language.NORSK} />
+        </Provider>
+    );
+
+describe('<MobilMenylinje /> sjekk at komponent finner logo', () => {
     it('Skal rendre <NavLogoRod> komponent', () => {
-        const wrapper = shallowWithProps();
-        expect(wrapper.find(NavLogoRod)).toHaveLength(1);
+        expect(getWrapper(store).find(NavLogoRod)).toHaveLength(1);
     });
+});
 
-    it('Skal rendre <Ekspanderbarmeny> komponent', () => {
-        const wrapper = shallowWithProps();
-        expect(wrapper.find(Ekspanderbarmeny)).toHaveLength(1);
+describe('<LoggInnKnapp/> sjekk at komponent finner logg-inn knapp', () => {
+    it('Skal rendre <LoggInnKnapp/> komponent', () => {
+        const wrapper = getWrapper(store);
+        expect(wrapper.find(LoggInnKnapp)).toHaveLength(1);
     });
+});
 
-    it('Skal rendre <SokModalToggleknapp> komponent', () => {
-        const wrapper = shallowWithProps();
-        expect(wrapper.find(SokModalToggleknapp)).toHaveLength(1);
+describe('<HovedmenyMobil/> sjekk at komponent finner Varselbjelle', () => {
+    it('skal rendre <HovedmenyMobil/> komponent', () => {
+        const wrapper = getWrapper(store);
+        expect(wrapper.find(HovedmenyMobil)).toHaveLength(1);
     });
 });

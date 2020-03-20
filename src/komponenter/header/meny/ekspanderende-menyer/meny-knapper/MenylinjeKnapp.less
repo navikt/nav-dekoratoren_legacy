@@ -1,4 +1,5 @@
 @import '~nav-frontend-core/less/_variabler';
+@import '../../../../../styling-variabler';
 
 @height: 48px;
 @padding-y: 4px;
@@ -10,6 +11,7 @@
     box-shadow: none;
     text-decoration: none;
     padding: 0;
+    border-radius: 0.125em;
 
     &-visning {
         height: @height;
@@ -27,10 +29,20 @@
     }
 
     &:focus {
-        outline: 3px solid @fokusFarge;
+        background-color: transparent;
+        border: 2px solid @navBla;
+        color: @navBla;
+        outline: none;
+        box-shadow: 0 0 0 3px @fokusFarge;
     }
 
     &-visning {
-        height: @height - @padding-y * 2;
+        height: 45px;
+    }
+
+    @media (min-width: @tabletLimitWidth) {
+        &-visning {
+            height: @height - @padding-y * 2;
+        }
     }
 }

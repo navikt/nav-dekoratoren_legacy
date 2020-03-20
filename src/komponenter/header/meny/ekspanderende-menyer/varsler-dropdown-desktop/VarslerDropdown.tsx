@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppState } from '../../../../../reducer/reducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
+import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import { toggleVarsler } from '../../../../../reducer/dropdown-toggle-duck';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Tekst from '../../../../../tekster/finn-tekst';

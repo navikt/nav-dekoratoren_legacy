@@ -40,8 +40,8 @@ export const Header = () => {
                         <DesktopMenylinje />
                     </div>
                 </div>
-                <MenyBakgrunn />
             </header>
+            <MenyBakgrunn />
         </>
     );
 };

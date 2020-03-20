@@ -5,7 +5,6 @@ import {
     HentInnloggingsstatusOKAction,
     HentInnloggingsstatusPENDINGAction,
 } from '../redux/actions';
-import { JSONObject } from 'yet-another-fetch-mock';
 import { Dispatch } from '../redux/dispatch-type';
 import { fetchThenDispatch } from '../api/api-utils';
 import { hentInnloggingsstatusFetch } from '../api/api';
@@ -15,7 +14,7 @@ export interface InnloggingsstatusState extends DataElement {
     data: Data;
 }
 
-export interface Data extends JSONObject {
+export interface Data {
     authenticated: boolean;
     name: string;
     securityLevel: string;

@@ -126,6 +126,7 @@ const browserConfig = {
                                                 '.sitefooter',
                                                 /\b(\w*lukk-container\w*)\b/,
                                                 /\b(\w*close\w*)\b/,
+                                                /\b(\w*decorator-dummy-app\w*)\b/,
                                                 '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
                                             ],
                                         }),

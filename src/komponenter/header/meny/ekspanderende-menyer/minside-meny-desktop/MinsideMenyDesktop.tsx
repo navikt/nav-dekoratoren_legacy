@@ -11,8 +11,8 @@ import {
 } from '../../../../../utils/google-analytics';
 import { toggleMinsideMeny } from '../../../../../reducer/dropdown-toggle-duck';
 import { Status } from '../../../../../api/api';
-import { MenySpinner } from '../meny-spinner/MenySpinner';
-import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
+import MenySpinner from '../meny-spinner/MenySpinner';
+import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import MinsideDropdown from './minside-dropdown/MinsideDropdown';
 import './MinsideMenyDesktop.less';
 import { MinsidePersonKnapp } from '../meny-knapper/minside-knapper/MinsidePersonKnapp';
