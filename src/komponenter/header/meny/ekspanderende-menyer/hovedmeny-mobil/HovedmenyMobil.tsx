@@ -135,7 +135,7 @@ const HovedmenyMobil = () => {
         <>
             <EkspanderbarMeny
                 classname={classname}
-                isOpen={hovedIsOpen}
+                isOpen={hovedIsOpen || underIsOpen || varselIsOpen}
                 menyKnapp={menyKnapp}
                 id={classname}
             >
