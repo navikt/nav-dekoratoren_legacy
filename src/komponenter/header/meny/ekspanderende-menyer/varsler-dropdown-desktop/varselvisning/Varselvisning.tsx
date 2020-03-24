@@ -23,7 +23,7 @@ const stateSelector = (state: AppState) => ({
 const classname = 'varsler-display-desktop';
 
 const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => (
-    <div className="vis-alle-lenke">
+    <div className="dekorator-vis-alle-lenke">
         <LenkeMedGA
             href={Environment.API_VARSELINNBOKS_URL}
             id={getKbId(NaviGroup.Varsler, { col: 0, row: index, sub: 0 })}
