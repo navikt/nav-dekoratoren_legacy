@@ -62,6 +62,18 @@ export const VarslerParsed = ({ varsler }: Props) => {
                 return <div>{domToReact(children, options)}</div>;
             }
 
+            if (attribs?.class.includes('varsel-liste') && children) {
+                return <ul>{domToReact(children, options)}</ul>;
+            }
+
+            if (attribs?.class.includes('varsel-container') && children) {
+                return <li className={'dekorator-varsel-container'}>{domToReact(children, options)}</li>;
+            }
+
+            if (attribs?.class === 'varsel' && children) {
+                return <section className={'dekorator-varsel'}>{domToReact(children, options)}</section>;
+            }
+
             if (attribs?.class.includes('varsel-ikon') && children) {
                 const ikonStr =
                     (children[0] && children[0].data) || ikonDefault;

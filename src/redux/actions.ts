@@ -156,7 +156,6 @@ export type Handling =
     | ToggleHovedmeny
     | ToggleMinsideMeny
     | ToggleSok
-    | ToggleLukkAlle
     | ToggleVarsel
     | ToggleUnderMeny
     | ToggleHovedOgUnderMeny
