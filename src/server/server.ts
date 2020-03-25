@@ -44,10 +44,7 @@ const pathsForTemplate = [
 ];
 
 app.get(pathsForTemplate, (req, res) => {
-    const parameters = Object.keys(req.query).length
-        ? `?${req.url.split('?')[1]}`
-        : ``;
-    res.send(template(parameters));
+    res.send(template(req));
 });
 
 app.get(`${appBasePath}/env`, (req, res) => {
@@ -66,7 +63,7 @@ app.get(`${appBasePath}/env`, (req, res) => {
                 PARAMS: {
                     LANGAUGE: req.query.language || 'nb',
                     CONTEXT: (req.query.context || 'ikkevalgt').toUpperCase(),
-                    STRIPPED: req.query.stripped || false,
+                    STRIPPED: req.query.header || req.query.stripped || false,
                     REDIRECT_TO_APP: req.query.redirectToApp || false,
                     LEVEL: req.query.level || 'Level4',
                 },
