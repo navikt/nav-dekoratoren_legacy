@@ -1,0 +1,25 @@
+@import '~nav-frontend-core/less/_variabler';
+@import '../../styling-variabler.less';
+
+.simple-header {
+    background-color: white;
+    width: 100%;
+    padding: 0.5rem 0 1rem;
+    border-bottom: 2px solid #0067c5;
+    display: flex;
+    justify-content: center;
+
+    &__content {
+        width: 100%;
+        max-width: 1440px;
+    }
+    &__logo {
+        order: 1;
+        @media (min-width: @smallDesktopLimitWidth) {
+            margin-left: 3rem;
+        }
+        @media (max-width: @smallDesktopLimitWidth) {
+            margin-left: 1rem;
+        }
+    }
+}
