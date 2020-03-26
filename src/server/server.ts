@@ -7,7 +7,11 @@ import express, { Response } from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
 import dotenv from 'dotenv';
-dotenv.config();
+
+// Local environment - import .env
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 
 // Config
 const appBasePath = '/dekoratoren';
