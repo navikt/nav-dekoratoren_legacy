@@ -10,10 +10,10 @@ interface Props {
 
 const SimpleFooter = ({ className }: Props) => {
     return (
-        <>
+        <Fragment>
             <FooterTopp classname={className} />
             <FooterBottom classname={className} />
-        </>
+        </Fragment>
     );
 };
 

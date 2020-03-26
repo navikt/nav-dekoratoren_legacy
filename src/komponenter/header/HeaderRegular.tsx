@@ -1,15 +1,15 @@
+import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../reducer/reducer';
 import MobilMenylinje from './meny/MobilMenylinje';
 import { Language } from '../../reducer/language-duck';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import DesktopMenylinje from './meny/DesktopMenylinje';
-import React from 'react';
 
 export const RegularHeader = () => {
     const language = useSelector((state: AppState) => state.language.language);
     return (
-        <>
+        <Fragment>
             <div className="media-sm-mobil mobil-meny">
                 <MobilMenylinje language={language} />
             </div>
@@ -19,6 +19,6 @@ export const RegularHeader = () => {
                     <DesktopMenylinje />
                 </div>
             </div>
-        </>
+        </Fragment>
     );
 };
