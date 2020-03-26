@@ -1,21 +1,22 @@
-import React, { useEffect, Fragment } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, Fragment, useState } from 'react';
+import { useDispatch, useSelector, useStore } from 'react-redux';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
 import MenyBakgrunn from './meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
 import { MenuValue } from '../../utils/meny-storage-utils';
 import { oppdaterSessionStorage } from '../../utils/meny-storage-utils';
-import Environment from '../../utils/Environment';
 import { SimpleHeader } from './HeaderSimple';
 import { RegularHeader } from './HeaderRegular';
+import { AppState } from '../../reducer/reducer';
 
 export const Header = () => {
     const dispatch = useDispatch();
+    const { PARAMS } = useSelector((state: AppState) => state.environment);
 
     useEffect(() => {
         fetchMenypunkter()(dispatch);
-        if (Environment.CONTEXT !== MenuValue.IKKEVALGT) {
-            oppdaterSessionStorage(Environment.CONTEXT);
+        if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
+            oppdaterSessionStorage(PARAMS.CONTEXT);
         }
     }, []);
 
@@ -25,7 +26,7 @@ export const Header = () => {
                 <Skiplinks />
             </div>
             <header className="siteheader">
-                {Environment.SIMPLE ? <SimpleHeader /> : <RegularHeader />}
+                {PARAMS.SIMPLE ? <SimpleHeader /> : <RegularHeader />}
             </header>
             <MenyBakgrunn />
         </Fragment>

@@ -38,7 +38,7 @@ export const visAlleTreff = (inputString: string): SokeresultatData => {
     return {
         priority: false,
         displayName: `${inputString}`,
-        href: `${Environment.XP_BASE_URL}/sok?ord=${inputString}`,
+        href: `${Environment().XP_BASE_URL}/sok?ord=${inputString}`,
         highlight: `Se alle treff ("${inputString}")`,
         publish: {
             from: '',

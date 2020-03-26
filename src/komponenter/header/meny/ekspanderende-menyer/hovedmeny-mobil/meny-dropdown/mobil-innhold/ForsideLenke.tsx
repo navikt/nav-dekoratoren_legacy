@@ -23,7 +23,7 @@ const ForsideLenke = (props: Props) => {
                             <Tekst id="person-minside-lenke" />
                         </Undertittel>
                         <Lenke
-                            href={Environment.DITT_NAV_URL}
+                            href={Environment().DITT_NAV_URL}
                             className={cls.element('lenke')}
                             tabIndex={props.tabindex ? 0 : -1}
                         >
@@ -37,7 +37,7 @@ const ForsideLenke = (props: Props) => {
                         <Tekst id="min-side-arbeidsgiver" />
                     </Undertittel>
                     <Lenke
-                        href={Environment.MINSIDE_ARBEIDSGIVER_URL}
+                        href={Environment().MINSIDE_ARBEIDSGIVER_URL}
                         className={cls.element('lenke')}
                         tabIndex={props.tabindex ? 0 : -1}
                     >

@@ -14,7 +14,6 @@ import Header from './komponenter/header/Header';
 import * as es6promise from 'es6-promise';
 import './index.less';
 
-const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
 if (verifyWindowObj()) {
@@ -30,7 +29,9 @@ if (erDev) {
 const run = () => {
     initGA();
     fetchEnv()
-        .then(() => {
+        .then(environment => {
+            const store = getStore(environment);
+            // store.dispatch(settEnviromment(environment));
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
                     <LanguageProvider>

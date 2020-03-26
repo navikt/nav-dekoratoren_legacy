@@ -84,7 +84,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     fetchSearchResult = (input: string) => {
-        const url = `${Environment.APP_BASE_URL}/api/sok`;
+        const url = `${Environment().APP_BASE_URL}/api/sok`;
         fetch(`${url}?ord=${input}`)
             .then(response => {
                 if (response.ok) {
@@ -118,7 +118,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
             label: selectedInput,
             action: 'søk',
         });
-        const url = `${Environment.XP_BASE_URL}/sok?ord=${selectedInput}`;
+        const url = `${Environment().XP_BASE_URL}/sok?ord=${selectedInput}`;
         window.location.href = genererUrl(url);
     };
 

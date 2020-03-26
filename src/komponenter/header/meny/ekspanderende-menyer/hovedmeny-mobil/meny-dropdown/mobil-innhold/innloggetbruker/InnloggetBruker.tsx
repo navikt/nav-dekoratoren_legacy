@@ -19,7 +19,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const loggut = () => {
-    return (window.location.href = Environment.LOGOUT_URL);
+    return (window.location.href = Environment().LOGOUT_URL);
 };
 
 const InnloggetBruker = (props: Props) => {

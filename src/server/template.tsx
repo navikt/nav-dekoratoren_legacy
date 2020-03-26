@@ -6,9 +6,9 @@ import Header from '../komponenter/header/Header';
 import Footer from '../komponenter/footer/Footer';
 import getStore from '../redux/store';
 import { Request } from 'express';
-import Environment from '../utils/Environment';
 import { clientEnv } from './utils';
 import dotenv from 'dotenv';
+import { settEnviromment } from '../reducer/environment-duck';
 dotenv.config();
 
 // Favicons
@@ -19,7 +19,6 @@ const fileFavicon32x32 = require('../../src/ikoner/favicon/favicon-32x32.png');
 const fileMaskIcon = require('../../src/ikoner/favicon/safari-pinned-tab.svg');
 
 // Resources
-const store = getStore();
 const baseUrl = `${process.env.APP_BASE_URL}`;
 const fileEnv = `${process.env.APP_BASE_URL}/env`;
 const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
@@ -27,7 +26,9 @@ const fileScript = `${process.env.APP_BASE_URL}/client.js`;
 
 export const template = (req: Request) => {
     // Set server-side environment
-    Environment.settEnv(clientEnv(req));
+    const env = clientEnv(req);
+    const store = getStore(env);
+    store.dispatch(settEnviromment(env));
 
     // Fetch params and forward to client
     const params = req.query;

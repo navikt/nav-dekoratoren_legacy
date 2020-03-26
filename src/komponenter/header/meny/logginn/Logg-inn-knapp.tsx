@@ -25,10 +25,12 @@ export class LoggInnKnapp extends React.Component<StateProps, {}> {
         const { erInnlogget } = this.props;
         const appUrl = location.origin + location.pathname;
         const LOGIN_URL = `${
-            Environment.REDIRECT_TO_APP || erNavDekoratoren()
-                ? `${Environment.LOGIN_URL}/login?redirect=${appUrl}`
-                : `${Environment.LOGIN_URL}/login?redirect=${Environment.DITT_NAV_URL}`
-        }&level=${Environment.LEVEL}`;
+            Environment().REDIRECT_TO_APP || erNavDekoratoren()
+                ? `${Environment().LOGIN_URL}/login?redirect=${appUrl}`
+                : `${Environment().LOGIN_URL}/login?redirect=${
+                      Environment().DITT_NAV_URL
+                  }`
+        }&level=${Environment().LEVEL}`;
 
         triggerGaEvent({
             category: GACategory.Header,
@@ -36,7 +38,7 @@ export class LoggInnKnapp extends React.Component<StateProps, {}> {
         });
 
         return erInnlogget
-            ? (window.location.href = Environment.LOGOUT_URL)
+            ? (window.location.href = Environment().LOGOUT_URL)
             : (window.location.href = LOGIN_URL);
     };
 
