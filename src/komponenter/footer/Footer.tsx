@@ -1,18 +1,20 @@
 import React from 'react';
+import Environment from '../../utils/Environment';
+import SimpleFooter from './FooterSimple';
+import RegularFooter from './FooterRegular';
 import BEMHelper from '../../utils/bem';
-import FooterTopp from './footer-topp/FooterTopp';
-import FooterBottom from './footer-bottom/FooterBottom';
 import './Footer.less';
 
 const cls = BEMHelper('sitefooter');
 
-const Footer = () => {
-    return (
-        <footer className={cls.className} role="contentinfo">
-            <FooterTopp classname={cls.className} />
-            <FooterBottom classname={cls.className} />
-        </footer>
-    );
-};
+const Footer = () => (
+    <footer className={cls.className} role="contentinfo">
+        {Environment.SIMPLE ? (
+            <SimpleFooter className={cls.className} />
+        ) : (
+            <RegularFooter className={cls.className} />
+        )}
+    </footer>
+);
 
 export default Footer;
