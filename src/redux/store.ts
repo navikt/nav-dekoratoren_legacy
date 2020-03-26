@@ -1,21 +1,27 @@
 import { createStore, compose, Store } from 'redux';
-import { reducer, AppState } from '../reducer/reducer';
+import reducers, { AppState } from '../reducer/reducers';
 import { EnvironmentState } from '../reducer/environment-duck';
 
-function create() {
+const create = (env?: EnvironmentState) => {
     const composeEnhancers = (
         (typeof window !== 'undefined' &&
             (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
         compose
     )();
 
-    return composeEnhancers(createStore)(reducer, {});
-}
+    return composeEnhancers(createStore)(reducers, {
+        ...(env && {
+            environment: env,
+        }),
+    });
+};
 
 let store: Store<AppState>;
-export default function getStore(env?: EnvironmentState): Store<AppState> {
+export const getStore = (env?: EnvironmentState): Store<AppState> => {
     if (!store) {
-        store = create();
+        store = create(env);
     }
     return store;
-}
+};
+
+export default getStore;

@@ -7,7 +7,7 @@ import { MenuValue } from '../../utils/meny-storage-utils';
 import { oppdaterSessionStorage } from '../../utils/meny-storage-utils';
 import { SimpleHeader } from './HeaderSimple';
 import { RegularHeader } from './HeaderRegular';
-import { AppState } from '../../reducer/reducer';
+import { AppState } from '../../reducer/reducers';
 
 export const Header = () => {
     const dispatch = useDispatch();

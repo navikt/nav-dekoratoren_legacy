@@ -31,7 +31,6 @@ const run = () => {
     fetchEnv()
         .then(environment => {
             const store = getStore(environment);
-            // store.dispatch(settEnviromment(environment));
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
                     <LanguageProvider>

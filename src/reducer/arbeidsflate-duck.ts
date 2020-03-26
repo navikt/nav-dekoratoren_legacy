@@ -16,7 +16,7 @@ export interface Arbeidsflate {
     status: MenuValue;
 }
 
-export const dataInitState: Arbeidsflate = {
+export const initialState: Arbeidsflate = {
     status: MenuValue.IKKEVALGT,
 };
 
@@ -26,10 +26,10 @@ export enum UrlValue {
     SAMARBEIDSPARTNER = 'samarbeidspartner',
 }
 
-export default function reducer(
-    state: Arbeidsflate = dataInitState,
+export const reducer = (
+    state: Arbeidsflate = initialState,
     action: Handling
-): Arbeidsflate {
+): Arbeidsflate => {
     switch (action.type) {
         case ActionType.PRIVATPERSON: {
             return { ...state, status: MenuValue.PRIVATPERSON };
@@ -43,7 +43,9 @@ export default function reducer(
         default:
             return state;
     }
-}
+};
+
+export default reducer;
 
 export const finnArbeidsflate = () => {
     const sessionkey = verifyWindowObj() ? getSessionStorage(NAVHEADER) : null;
@@ -56,25 +58,22 @@ export const finnArbeidsflate = () => {
         UrlValue.ARBEIDSGIVER,
         UrlValue.SAMARBEIDSPARTNER,
     ];
-    arbeidsflate.map(typeArbeidsflate => {
-        return verifyWindowObj() && domeneInneholder(typeArbeidsflate)
+    arbeidsflate.map(typeArbeidsflate =>
+        verifyWindowObj() && domeneInneholder(typeArbeidsflate)
             ? settArbeidsflate(typeArbeidsflate)
             : verifyWindowObj()
             ? settPersonflate()
-            : null;
-    });
+            : null
+    );
     return settPersonflate();
 };
 
-const domeneInneholder = (key: any): boolean => {
-    return (
-        window.location.pathname.indexOf(key) !== -1 ||
-        window.location.origin.indexOf(key) !== -1
-    );
-};
+const domeneInneholder = (key: any): boolean =>
+    window.location.pathname.indexOf(key) !== -1 ||
+    window.location.origin.indexOf(key) !== -1;
 
-const settArbeidsflate = (key: string, isSessionKey: boolean = false) => {
-    return erArbeidsflate(
+const settArbeidsflate = (key: string, isSessionKey: boolean = false) =>
+    erArbeidsflate(
         key,
         isSessionKey,
         MenuValue.ARBEIDSGIVER,
@@ -89,31 +88,22 @@ const settArbeidsflate = (key: string, isSessionKey: boolean = false) => {
           )
         ? settSamarbeidspartnerflate()
         : settPersonflate();
-};
 
 const erArbeidsflate = (
     key: string,
     isSessionKey: boolean = false,
     menuKeyValue: MenuValue,
     urlKeyvalue: UrlValue
-): boolean => {
-    return (isSessionKey && key === menuKeyValue) || key === urlKeyvalue;
-};
+): boolean => (isSessionKey && key === menuKeyValue) || key === urlKeyvalue;
 
-export const settPersonflate = (): SettPrivatpersonAction => {
-    return {
-        type: ActionType.PRIVATPERSON,
-    };
-};
+export const settPersonflate = (): SettPrivatpersonAction => ({
+    type: ActionType.PRIVATPERSON,
+});
 
-export const settArbeidsgiverflate = (): SettArbeidsgiverAction => {
-    return {
-        type: ActionType.ARBEIDSGIVER,
-    };
-};
+export const settArbeidsgiverflate = (): SettArbeidsgiverAction => ({
+    type: ActionType.ARBEIDSGIVER,
+});
 
-export const settSamarbeidspartnerflate = (): SettSamarbeidspartnerAction => {
-    return {
-        type: ActionType.SAMARBEIDSPARTNER,
-    };
-};
+export const settSamarbeidspartnerflate = (): SettSamarbeidspartnerAction => ({
+    type: ActionType.SAMARBEIDSPARTNER,
+});

@@ -8,7 +8,6 @@ import getStore from '../redux/store';
 import { Request } from 'express';
 import { clientEnv } from './utils';
 import dotenv from 'dotenv';
-import { settEnviromment } from '../reducer/environment-duck';
 dotenv.config();
 
 // Favicons
@@ -28,7 +27,6 @@ export const template = (req: Request) => {
     // Set server-side environment
     const env = clientEnv(req);
     const store = getStore(env);
-    store.dispatch(settEnviromment(env));
 
     // Fetch params and forward to client
     const params = req.query;

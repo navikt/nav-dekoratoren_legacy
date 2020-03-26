@@ -2,14 +2,14 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { Language } from '../../../reducer/language-duck';
 import { Provider } from 'react-redux';
-import { reducer } from '../../../reducer/reducer';
+import { reducers } from '../../../reducer/reducers';
 import { createStore, Store } from 'redux';
 import MobilMenylinje from './../meny/MobilMenylinje';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 
-const store = createStore(reducer);
+const store = createStore(reducers);
 
 const getWrapper = (store: Store) =>
     mount(
