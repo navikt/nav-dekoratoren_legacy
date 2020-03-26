@@ -41,21 +41,19 @@ export const template = (req: Request) => {
     const footerId = params.footer ? `footer` : `footer-withmenu`;
 
     // Render SSR
-    const HtmlHeader = () =>
-        ReactDOMServer.renderToString(
-            <ReduxProvider store={store}>
-                <LanguageProvider>
-                    <Header />
-                </LanguageProvider>
-            </ReduxProvider>
-        );
+    const HtmlHeader = ReactDOMServer.renderToString(
+        <ReduxProvider store={store}>
+            <LanguageProvider>
+                <Header />
+            </LanguageProvider>
+        </ReduxProvider>
+    );
 
-    const HtmlFooter = () =>
-        ReactDOMServer.renderToString(
-            <ReduxProvider store={store}>
-                <Footer />
-            </ReduxProvider>
-        );
+    const HtmlFooter = ReactDOMServer.renderToString(
+        <ReduxProvider store={store}>
+            <Footer />
+        </ReduxProvider>
+    );
 
     return `
     <!DOCTYPE html>
@@ -103,12 +101,12 @@ export const template = (req: Request) => {
         <body>
             <div class="decorator-dev-container">
                 <div id="${headerId}">
-                    <section class="navno-dekorator" id="decorator-header" role="main">${HtmlHeader()}</section>
+                    <section class="navno-dekorator" id="decorator-header" role="main">${HtmlHeader}</section>
                 </div>
                 <div class="decorator-dummy-app">
                 </div>
                 <div id="${footerId}">
-                    <section class="navno-dekorator" id="decorator-footer" role="main">${HtmlFooter()}</section>
+                    <section class="navno-dekorator" id="decorator-footer" role="main">${HtmlFooter}</section>
                 </div>
             </div>
             <div id="scripts">
