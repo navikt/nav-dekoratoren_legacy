@@ -7,9 +7,11 @@ import Footer from '../komponenter/footer/Footer';
 import getStore from '../redux/store';
 import { Request } from 'express';
 import Environment from '../utils/Environment';
-import { clientEnv } from './utils';
 import dotenv from 'dotenv';
-dotenv.config();
+const env = dotenv.config();
+
+// Set server-side environment
+Environment.settEnv(env.parsed || process.env);
 
 // Favicons
 const fileFavicon = require('../../src/ikoner/favicon/favicon.ico');
@@ -25,10 +27,21 @@ const fileEnv = `${process.env.APP_BASE_URL}/env`;
 const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
 const fileScript = `${process.env.APP_BASE_URL}/client.js`;
 
-export const template = (req: Request) => {
-    // Set server-side environment
-    Environment.settEnv(clientEnv(req));
+const htmlHeader = ReactDOMServer.renderToString(
+    <ReduxProvider store={store}>
+        <LanguageProvider>
+            <Header />
+        </LanguageProvider>
+    </ReduxProvider>
+);
 
+const htmlFooter = ReactDOMServer.renderToString(
+    <ReduxProvider store={store}>
+        <Footer />
+    </ReduxProvider>
+);
+
+export const template = (req: Request) => {
     // Fetch params and forward to client
     const params = req.query;
     const paramsAsString = Object.keys(req.query).length
@@ -36,24 +49,9 @@ export const template = (req: Request) => {
         : ``;
 
     // Backward compatibility
-    // for simple header and footer
+    // for stripped header and footer
     const headerId = params.header ? `header` : `header-withmenu`;
     const footerId = params.footer ? `footer` : `footer-withmenu`;
-
-    // Render SSR
-    const HtmlHeader = ReactDOMServer.renderToString(
-        <ReduxProvider store={store}>
-            <LanguageProvider>
-                <Header />
-            </LanguageProvider>
-        </ReduxProvider>
-    );
-
-    const HtmlFooter = ReactDOMServer.renderToString(
-        <ReduxProvider store={store}>
-            <Footer />
-        </ReduxProvider>
-    );
 
     return `
     <!DOCTYPE html>
@@ -101,12 +99,12 @@ export const template = (req: Request) => {
         <body>
             <div class="decorator-dev-container">
                 <div id="${headerId}">
-                    <section class="navno-dekorator" id="decorator-header" role="main">${HtmlHeader}</section>
+                    <section class="navno-dekorator" id="decorator-header" role="main">${htmlHeader}</section>
                 </div>
                 <div class="decorator-dummy-app">
                 </div>
                 <div id="${footerId}">
-                    <section class="navno-dekorator" id="decorator-footer" role="main">${HtmlFooter}</section>
+                    <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
                 </div>
             </div>
             <div id="scripts">
