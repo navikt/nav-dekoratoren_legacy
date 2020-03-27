@@ -13,7 +13,7 @@ export default class Environment {
     // Parameters
     static LANGUAGE: string;
     static CONTEXT: MenuValue;
-    static SIMPLE: boolean;
+    static STRIPPED: string;
     static REDIRECT_TO_APP: string;
     static LEVEL: string;
 
@@ -30,7 +30,7 @@ export default class Environment {
         if (result.PARAMS) {
             Environment.LANGUAGE = result.PARAMS.LANGAUGE;
             Environment.CONTEXT = result.PARAMS.CONTEXT;
-            Environment.SIMPLE = result.PARAMS.SIMPLE;
+            Environment.STRIPPED = result.PARAMS.STRIPPED;
             Environment.REDIRECT_TO_APP = result.PARAMS.REDIRECT_TO_APP;
             Environment.LEVEL = result.PARAMS.LEVEL;
         }
