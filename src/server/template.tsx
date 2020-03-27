@@ -7,8 +7,6 @@ import Footer from '../komponenter/footer/Footer';
 import getStore from '../redux/store';
 import { Request } from 'express';
 import { clientEnv } from './utils';
-import dotenv from 'dotenv';
-dotenv.config();
 
 // Favicons
 const fileFavicon = require('../../src/ikoner/favicon/favicon.ico');
