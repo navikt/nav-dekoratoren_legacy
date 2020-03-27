@@ -1,9 +1,8 @@
 import { FooterLenke } from '../komponenter/footer/Footer-lenker';
 import { EnvironmentState } from '../reducer/environment-duck';
-import getStore from '../redux/store';
+import { useSelector } from 'react-redux';
+import { AppState } from '../reducer/reducers';
 
-export const Environment = () => getStore().getState().environment;
-export default Environment;
 export const fetchEnv = (): Promise<EnvironmentState> => {
     return new Promise(resolve => {
         const envDom = document.getElementById('decorator-env');
@@ -31,16 +30,19 @@ export const erNavDekoratoren = (): boolean => {
     return verifyWindowObj() && window.location.href.includes('/dekoratoren');
 };
 
-export const genererLenkerTilUrl = (footerlenker: FooterLenke[]) => {
+export const genererLenkerTilUrl = (
+    XP_BASE_URL: string,
+    footerlenker: FooterLenke[]
+) => {
     const lenker = footerlenker.map(lenke => {
-        lenke.url = genererUrl(lenke.url);
+        lenke.url = genererUrl(XP_BASE_URL, lenke.url);
         return lenke;
     });
     return lenker;
 };
 
-export const genererUrl = (lenke: string): string => {
-    return lenke.startsWith('/') ? Environment().XP_BASE_URL + lenke : lenke;
+export const genererUrl = (XP_BASE_URL: string, lenke: string): string => {
+    return lenke.startsWith('/') ? XP_BASE_URL + lenke : lenke;
 };
 
 export const erDev =

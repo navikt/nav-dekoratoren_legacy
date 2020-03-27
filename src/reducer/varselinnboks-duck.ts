@@ -56,8 +56,10 @@ export default function reducer(
     }
 }
 
-export function hentVarsler(): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Data>(() => hentVarslerFetch(), {
+export function hentVarsler(
+    APP_BASE_URL: string
+): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<Data>(() => hentVarslerFetch(APP_BASE_URL), {
         ok: hentVarslerOk,
         feilet: hentVarslerFeilet,
         pending: hentVarslerPending,

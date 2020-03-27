@@ -50,12 +50,17 @@ export default function reducer(
     }
 }
 
-export function hentInnloggingsstatus(): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Data>(() => hentInnloggingsstatusFetch(), {
-        ok: hentInnloggingsstatusOk,
-        feilet: hentnnloggingsstatusFeilet,
-        pending: hentnnloggingsstatusPending,
-    });
+export function hentInnloggingsstatus(
+    APP_BASE_URL: string
+): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<Data>(
+        () => hentInnloggingsstatusFetch(APP_BASE_URL),
+        {
+            ok: hentInnloggingsstatusOk,
+            feilet: hentnnloggingsstatusFeilet,
+            pending: hentnnloggingsstatusPending,
+        }
+    );
 }
 
 function hentInnloggingsstatusOk(data: Data): HentInnloggingsstatusOKAction {

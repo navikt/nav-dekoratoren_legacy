@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppState } from '../../../../reducer/reducer';
-import Environment, { erNavDekoratoren } from '../../../../utils/Environment';
+import { AppState } from '../../../../reducer/reducers';
+import { erNavDekoratoren } from '../../../../utils/Environment';
 import Tekst from '../../../../tekster/finn-tekst';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
@@ -10,8 +10,10 @@ import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
 import { Language } from '../../../../reducer/language-duck';
 import { TextTransformFirstLetterToUppercase } from '../ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import KnappBase from 'nav-frontend-knapper';
+import { EnvironmentState } from '../../../../reducer/environment-duck';
 
 interface StateProps {
+    environment: EnvironmentState;
     erInnlogget: boolean;
     lang: Language;
 }
@@ -22,15 +24,14 @@ export class LoggInnKnapp extends React.Component<StateProps, {}> {
     }
 
     handleButtonClick = () => {
-        const { erInnlogget } = this.props;
+        const { erInnlogget, environment } = this.props;
+        const { PARAMS, LOGIN_URL, DITT_NAV_URL, LOGOUT_URL } = environment;
         const appUrl = location.origin + location.pathname;
-        const LOGIN_URL = `${
-            Environment().REDIRECT_TO_APP || erNavDekoratoren()
-                ? `${Environment().LOGIN_URL}/login?redirect=${appUrl}`
-                : `${Environment().LOGIN_URL}/login?redirect=${
-                      Environment().DITT_NAV_URL
-                  }`
-        }&level=${Environment().LEVEL}`;
+        const loginUrl = `${
+            PARAMS.REDIRECT_TO_APP || erNavDekoratoren()
+                ? `${LOGIN_URL}/login?redirect=${appUrl}`
+                : `${LOGIN_URL}/login?redirect=${DITT_NAV_URL}`
+        }&level=${PARAMS.LEVEL}`;
 
         triggerGaEvent({
             category: GACategory.Header,
@@ -38,8 +39,8 @@ export class LoggInnKnapp extends React.Component<StateProps, {}> {
         });
 
         return erInnlogget
-            ? (window.location.href = Environment().LOGOUT_URL)
-            : (window.location.href = LOGIN_URL);
+            ? (window.location.href = LOGOUT_URL)
+            : (window.location.href = loginUrl);
     };
 
     render() {
@@ -77,6 +78,7 @@ export class LoggInnKnapp extends React.Component<StateProps, {}> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
+    environment: state.environment,
     erInnlogget: state.innloggingsstatus.data.authenticated,
     lang: state.language.language,
 });

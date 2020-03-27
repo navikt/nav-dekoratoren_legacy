@@ -4,7 +4,8 @@ import BEMHelper from '../../../../../../../utils/bem';
 import Tekst from '../../../../../../../tekster/finn-tekst';
 import Lenke from 'nav-frontend-lenker';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import Environment from '../../../../../../../utils/Environment';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../../../../../reducer/reducers';
 
 interface Props {
     arbeidsflate: MenuValue;
@@ -14,6 +15,9 @@ interface Props {
 
 const ForsideLenke = (props: Props) => {
     const cls = BEMHelper('forsideLenke');
+    const { DITT_NAV_URL, MINSIDE_ARBEIDSGIVER_URL } = useSelector(
+        (state: AppState) => state.environment
+    );
     return (
         <>
             {props.arbeidsflate === MenuValue.PRIVATPERSON &&
@@ -23,7 +27,7 @@ const ForsideLenke = (props: Props) => {
                             <Tekst id="person-minside-lenke" />
                         </Undertittel>
                         <Lenke
-                            href={Environment().DITT_NAV_URL}
+                            href={DITT_NAV_URL}
                             className={cls.element('lenke')}
                             tabIndex={props.tabindex ? 0 : -1}
                         >
@@ -37,7 +41,7 @@ const ForsideLenke = (props: Props) => {
                         <Tekst id="min-side-arbeidsgiver" />
                     </Undertittel>
                     <Lenke
-                        href={Environment().MINSIDE_ARBEIDSGIVER_URL}
+                        href={MINSIDE_ARBEIDSGIVER_URL}
                         className={cls.element('lenke')}
                         tabIndex={props.tabindex ? 0 : -1}
                     >

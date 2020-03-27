@@ -1,12 +1,12 @@
 import React from 'react';
-import { AppState } from '../../../../reducer/reducer';
+import { AppState } from '../../../../reducer/reducers';
 import { connect } from 'react-redux';
 import debounce from 'lodash.debounce';
 import Downshift, { DownshiftState, StateChangeOptions } from 'downshift';
 import cls from 'classnames';
 import { Input } from 'nav-frontend-skjema';
 import { Language } from '../../../../reducer/language-duck';
-import Environment, { genererUrl } from '../../../../utils/Environment';
+import { genererUrl } from '../../../../utils/Environment';
 import Tekst, { finnTekst } from '../../../../tekster/finn-tekst';
 import { defaultData, InputState } from './sok-utils';
 import { SokeresultatData, visAlleTreff } from './sok-utils';
@@ -19,9 +19,11 @@ import { Systemtittel } from 'nav-frontend-typografi';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import './Sok.less';
 import BEMHelper from '../../../../utils/bem';
+import { EnvironmentState } from '../../../../reducer/environment-duck';
 
 interface StateProps {
     language: Language;
+    environment: EnvironmentState;
 }
 
 interface Props {
@@ -84,7 +86,8 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     fetchSearchResult = (input: string) => {
-        const url = `${Environment().APP_BASE_URL}/api/sok`;
+        const { APP_BASE_URL, XP_BASE_URL } = this.props.environment;
+        const url = `${APP_BASE_URL}/api/sok`;
         fetch(`${url}?ord=${input}`)
             .then(response => {
                 if (response.ok) {
@@ -97,7 +100,9 @@ class Sok extends React.Component<StateProps & Props, InputState> {
             .then(json => {
                 if (this.ismounted) {
                     const tmp = [...json.hits];
-                    tmp.unshift(visAlleTreff(this.state.writtenInput));
+                    tmp.unshift(
+                        visAlleTreff(XP_BASE_URL, this.state.writtenInput)
+                    );
                     this.setState({
                         items: tmp,
                         loading: false,
@@ -107,19 +112,21 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     handleSelect = (selection: SokeresultatData) => {
-        window.location.href = genererUrl(selection.href);
+        const { XP_BASE_URL } = this.props.environment;
+        window.location.href = genererUrl(XP_BASE_URL, selection.href);
     };
 
     handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const { XP_BASE_URL } = this.props.environment;
         const { selectedInput } = this.state;
         triggerGaEvent({
             category: GACategory.Header,
             label: selectedInput,
             action: 'søk',
         });
-        const url = `${Environment().XP_BASE_URL}/sok?ord=${selectedInput}`;
-        window.location.href = genererUrl(url);
+        const url = `${XP_BASE_URL}/sok?ord=${selectedInput}`;
+        window.location.href = genererUrl(XP_BASE_URL, url);
     };
 
     input = (inputValue: SokeresultatData): string => {
@@ -401,6 +408,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     language: state.language.language,
+    environment: state.environment,
 });
 
 export default connect(mapStateToProps)(Sok);

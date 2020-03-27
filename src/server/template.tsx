@@ -4,9 +4,15 @@ import { Provider as ReduxProvider } from 'react-redux';
 import LanguageProvider from '../provider/Language-provider';
 import Header from '../komponenter/header/Header';
 import Footer from '../komponenter/footer/Footer';
-import getStore from '../redux/store';
 import { Request } from 'express';
 import { clientEnv } from './utils';
+import { createStore } from '../redux/store';
+import dotenv from 'dotenv';
+
+// Local environment - import .env
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 
 // Favicons
 const fileFavicon = require('../../src/ikoner/favicon/favicon.ico');
@@ -24,7 +30,7 @@ const fileScript = `${process.env.APP_BASE_URL}/client.js`;
 export const template = (req: Request) => {
     // Set server-side environment
     const env = clientEnv(req);
-    const store = getStore(env);
+    const store = createStore(env);
 
     // Fetch params and forward to client
     const params = req.query;

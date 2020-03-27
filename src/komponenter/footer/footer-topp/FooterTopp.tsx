@@ -11,6 +11,8 @@ import DelSkjermModal from './del-skjerm-modal/DelSkjermModal';
 import Spraakvalg from './spraakvalg/Spraakvalg';
 import FooterArbeidsflatevalg from './footer-arbeidsflatevalg/FooterArbeidsflatevalg';
 import PilOppHvit from '../../../ikoner/meny/PilOppHvit';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../reducer/reducers';
 
 interface Props {
     classname: string;
@@ -23,10 +25,11 @@ const FooterTopp = ({ classname }: Props) => {
     );
     const [hoyrelenker, setHoyrelenker] = useState<FooterLenke[]>(lenkerHoyre);
     const [visDelSkjermModal, setVisDelSkjermModal] = useState(false);
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
     useEffect(() => {
-        setVenstrelenker(genererLenkerTilUrl(lenkerVenstre));
-        setHoyrelenker(genererLenkerTilUrl(lenkerHoyre));
+        setVenstrelenker(genererLenkerTilUrl(XP_BASE_URL, lenkerVenstre));
+        setHoyrelenker(genererLenkerTilUrl(XP_BASE_URL, lenkerHoyre));
     }, []);
 
     const openModal = () => {

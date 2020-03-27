@@ -1,5 +1,5 @@
-import React, { useEffect, Fragment, useState } from 'react';
-import { useDispatch, useSelector, useStore } from 'react-redux';
+import React, { useEffect, Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenypunkter } from '../../reducer/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
 import MenyBakgrunn from './meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
@@ -11,10 +11,12 @@ import { AppState } from '../../reducer/reducers';
 
 export const Header = () => {
     const dispatch = useDispatch();
-    const { PARAMS } = useSelector((state: AppState) => state.environment);
+    const { PARAMS, APP_BASE_URL } = useSelector(
+        (state: AppState) => state.environment
+    );
 
     useEffect(() => {
-        fetchMenypunkter()(dispatch);
+        fetchMenypunkter(APP_BASE_URL)(dispatch);
         if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
             oppdaterSessionStorage(PARAMS.CONTEXT);
         }
