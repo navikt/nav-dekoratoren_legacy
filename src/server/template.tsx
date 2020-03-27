@@ -117,9 +117,9 @@ export const template = (req: Request) => {
                     integrity="sha384-O8gbAZERPHZ6hLuGmdmxg66Z9i2XwrCJqQMqhyXGroS3nsNvMetwFTJgRpDRd3a5" 
                     crossorigin="anonymous"></script>
             </div>
-            <div id="skiplinks"></div>
-            <div id="megamenu-resources"></div>
-            <div id="webstats-ga-notrack"></div>
+            <div id="skiplinks"><div class="empty-node"/></div>
+            <div id="megamenu-resources"><div class="empty-node"/></div>
+            <div id="webstats-ga-notrack"><div class="empty-node"/></div>
         </body>
     </html>`;
 };
