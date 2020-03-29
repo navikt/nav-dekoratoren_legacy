@@ -5,6 +5,7 @@ import LanguageProvider from '../provider/Language-provider';
 import Header from '../komponenter/header/Header';
 import Footer from '../komponenter/footer/Footer';
 import getStore from '../redux/store';
+import { Request } from 'express';
 import Environment from '../utils/Environment';
 import dotenv from 'dotenv';
 const env = dotenv.config();
@@ -40,7 +41,18 @@ const htmlFooter = ReactDOMServer.renderToString(
     </ReduxProvider>
 );
 
-export const template = (parameters: string) => {
+export const template = (req: Request) => {
+    // Fetch params and forward to client
+    const params = req.query;
+    const paramsAsString = Object.keys(req.query).length
+        ? `?${req.url.split('?')[1]}`
+        : ``;
+
+    // Backward compatibility
+    // for stripped header and footer
+    const headerId = params.header ? `header` : `header-withmenu`;
+    const footerId = params.footer ? `footer` : `footer-withmenu`;
+
     return `
     <!DOCTYPE html>
     <html lang="no">
@@ -86,17 +98,17 @@ export const template = (parameters: string) => {
         </head>
         <body>
             <div class="decorator-dev-container">
-                <div id="header-withmenu">
+                <div id="${headerId}">
                     <section class="navno-dekorator" id="decorator-header" role="main">${htmlHeader}</section>
                 </div>
                 <div class="decorator-dummy-app">
                 </div>
-                <div id="footer-withmenu">
+                <div id="${footerId}">
                     <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
                 </div>
             </div>
             <div id="scripts">
-                <div id="decorator-env" data-src="${fileEnv}${parameters}"></div>
+                <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
                 <script 
                     src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js" 

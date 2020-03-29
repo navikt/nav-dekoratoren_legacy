@@ -8,7 +8,7 @@ const cls = BEMHelper('sitefooter');
 
 const Footer = () => {
     return (
-        <footer className={cls.className} id="footer" role="contentinfo">
+        <footer className={cls.className} role="contentinfo">
             <FooterTopp classname={cls.className} />
             <FooterBottom classname={cls.className} />
         </footer>

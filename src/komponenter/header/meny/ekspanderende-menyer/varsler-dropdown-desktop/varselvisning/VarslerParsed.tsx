@@ -67,11 +67,19 @@ export const VarslerParsed = ({ varsler }: Props) => {
             }
 
             if (attribs?.class.includes('varsel-container') && children) {
-                return <li className={'dekorator-varsel-container'}>{domToReact(children, options)}</li>;
+                return (
+                    <li className={'dekorator-varsel-container'}>
+                        {domToReact(children, options)}
+                    </li>
+                );
             }
 
             if (attribs?.class === 'varsel' && children) {
-                return <section className={'dekorator-varsel'}>{domToReact(children, options)}</section>;
+                return (
+                    <section className={'dekorator-varsel'}>
+                        {domToReact(children, options)}
+                    </section>
+                );
             }
 
             if (attribs?.class.includes('varsel-ikon') && children) {

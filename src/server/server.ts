@@ -6,6 +6,12 @@ import request from 'request';
 import express, { Response } from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
+import dotenv from 'dotenv';
+
+// Local environment - import .env
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 
 // Config
 const appBasePath = '/dekoratoren';
@@ -44,10 +50,7 @@ const pathsForTemplate = [
 ];
 
 app.get(pathsForTemplate, (req, res) => {
-    const parameters = Object.keys(req.query).length
-        ? `?${req.url.split('?')[1]}`
-        : ``;
-    res.send(template(parameters));
+    res.send(template(req));
 });
 
 app.get(`${appBasePath}/env`, (req, res) => {
@@ -66,7 +69,7 @@ app.get(`${appBasePath}/env`, (req, res) => {
                 PARAMS: {
                     LANGAUGE: req.query.language || 'nb',
                     CONTEXT: (req.query.context || 'ikkevalgt').toUpperCase(),
-                    STRIPPED: req.query.stripped || false,
+                    STRIPPED: req.query.header || req.query.stripped || false,
                     REDIRECT_TO_APP: req.query.redirectToApp || false,
                     LEVEL: req.query.level || 'Level4',
                 },
