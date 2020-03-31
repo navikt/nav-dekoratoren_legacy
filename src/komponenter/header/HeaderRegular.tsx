@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../reducer/reducer';
+import { AppState } from '../../reducer/reducers';
 import MobilMenylinje from './meny/MobilMenylinje';
 import { Language } from '../../reducer/language-duck';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';

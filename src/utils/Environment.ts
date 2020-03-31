@@ -1,7 +1,5 @@
 import { FooterLenke } from '../komponenter/footer/Footer-lenker';
 import { EnvironmentState } from '../reducer/environment-duck';
-import { useSelector } from 'react-redux';
-import { AppState } from '../reducer/reducers';
 
 export const fetchEnv = (): Promise<EnvironmentState> => {
     return new Promise(resolve => {

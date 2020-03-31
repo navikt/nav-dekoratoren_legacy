@@ -8,6 +8,7 @@ import { Request } from 'express';
 import { clientEnv } from './utils';
 import { createStore } from '../redux/store';
 import dotenv from 'dotenv';
+import NodeCache from 'node-cache';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -26,6 +27,8 @@ const baseUrl = `${process.env.APP_BASE_URL}`;
 const fileEnv = `${process.env.APP_BASE_URL}/env`;
 const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
 const fileScript = `${process.env.APP_BASE_URL}/client.js`;
+
+const devCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
 export const template = (req: Request) => {
     // Set server-side environment

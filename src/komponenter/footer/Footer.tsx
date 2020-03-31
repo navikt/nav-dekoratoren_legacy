@@ -4,7 +4,7 @@ import RegularFooter from './FooterRegular';
 import BEMHelper from '../../utils/bem';
 import './Footer.less';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../reducer/reducer';
+import { AppState } from '../../reducer/reducers';
 
 const cls = BEMHelper('sitefooter');
 const Footer = () => {
