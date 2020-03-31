@@ -12,14 +12,26 @@
     &__content {
         width: 100%;
         max-width: 1440px;
-    }
-    &__logo {
-        order: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
         @media (min-width: @smallDesktopLimitWidth) {
-            margin-left: 3rem;
+            margin: 0 3rem;
         }
         @media (max-width: @smallDesktopLimitWidth) {
-            margin-left: 1rem;
+            margin: 0 1rem;
+        }
+    }
+
+    &__logo svg {
+        @media (min-width: @tabletLimitWidth) {
+            height: 88px;
+            width: 88px;
+        }
+        @media (max-width: @tabletLimitWidth) {
+            height: 66px;
+            width: 66px;
         }
     }
 }
