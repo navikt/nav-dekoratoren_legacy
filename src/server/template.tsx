@@ -33,9 +33,8 @@ const fileScript = `${process.env.APP_BASE_URL}/client.js`;
 const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
 export const template = (req: Request) => {
-    // Set server-side environment
+    // Set environment based on request params
     const env = clientEnv(req);
-
     const envHash = hash({ env });
     const cachedHtml = cache.get(envHash);
 
@@ -44,7 +43,7 @@ export const template = (req: Request) => {
         return cachedHtml;
     }
 
-    // Create store equal to client
+    // Create store based on request params
     const store = createStore(env);
 
     // Fetch params and forward to client
