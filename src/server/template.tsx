@@ -141,7 +141,6 @@ export const template = (req: Request) => {
         </body>
     </html>`;
 
-    console.log(`Creating cache with key ${envHash}`);
     cache.set(envHash, html);
     return html;
 };
