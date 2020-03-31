@@ -94,7 +94,7 @@ export const template = (req: Request) => {
                 justify-content: space-between;
                 height: 100%;
             }
-            .decorator-dummy-app {np
+            .decorator-dummy-app {
                 background: #8888;
                 height: 100%;
                 min-height: 25rem;
