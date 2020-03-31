@@ -2,10 +2,8 @@ import React from 'react';
 import Tekst from '../../tekster/finn-tekst';
 import { GACategory } from '../../utils/google-analytics';
 import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
-import {
-    getArbeidsflateContext,
-    settArbeidsflate,
-} from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
+import { settArbeidsflate } from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
+import { getArbeidsflateContext } from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
 import { MenuValue } from '../../utils/meny-storage-utils';
 import './NavLogoFooter.less';
 import { useDispatch, useSelector } from 'react-redux';
