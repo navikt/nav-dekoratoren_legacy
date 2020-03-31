@@ -6,6 +6,8 @@ import Header from '../komponenter/header/Header';
 import Footer from '../komponenter/footer/Footer';
 import { Request } from 'express';
 import { clientEnv } from './utils';
+import hash from 'object-hash';
+
 import { createStore } from '../redux/store';
 import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
@@ -28,11 +30,21 @@ const fileEnv = `${process.env.APP_BASE_URL}/env`;
 const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
 const fileScript = `${process.env.APP_BASE_URL}/client.js`;
 
-const devCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
+const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
 export const template = (req: Request) => {
     // Set server-side environment
     const env = clientEnv(req);
+
+    const envHash = hash({ env });
+    const cachedHtml = cache.get(envHash);
+
+    // Retreive from cache
+    if (cachedHtml) {
+        return cachedHtml;
+    }
+
+    // Create store equal to client
     const store = createStore(env);
 
     // Fetch params and forward to client
@@ -61,7 +73,7 @@ export const template = (req: Request) => {
         </ReduxProvider>
     );
 
-    return `
+    const html = `
     <!DOCTYPE html>
     <html lang="no">
         <head>
@@ -83,7 +95,7 @@ export const template = (req: Request) => {
                 justify-content: space-between;
                 height: 100%;
             }
-            .decorator-dummy-app {
+            .decorator-dummy-app {np
                 background: #8888;
                 height: 100%;
                 min-height: 25rem;
@@ -128,4 +140,8 @@ export const template = (req: Request) => {
             <div id="webstats-ga-notrack"></div>
         </body>
     </html>`;
+
+    console.log(`Creating cache with key ${envHash}`);
+    cache.set(envHash, html);
+    return html;
 };
