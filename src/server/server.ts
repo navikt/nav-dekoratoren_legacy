@@ -71,7 +71,7 @@ app.get(`${appBasePath}/env`, (req, res) => {
                     CONTEXT: (req.query.context || 'ikkevalgt').toUpperCase(),
                     STRIPPED: req.query.header || req.query.stripped || false,
                     REDIRECT_TO_APP: req.query.redirectToApp || false,
-                    LEVEL: req.query.level || 'Level4',
+                    LEVEL: req.query.level || 'Level3',
                 },
             }),
         },
