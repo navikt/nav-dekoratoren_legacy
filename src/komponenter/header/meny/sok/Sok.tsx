@@ -22,6 +22,7 @@ import BEMHelper from '../../../../utils/bem';
 
 interface StateProps {
     language: Language;
+    menuIsOpen: boolean;
 }
 
 interface Props {
@@ -390,7 +391,9 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     <div
                         className={mobileCls.element(
                             'bakgrunn',
-                            this.state.setBackground ? 'active' : ''
+                            this.state.setBackground && this.props.menuIsOpen
+                                ? 'active'
+                                : ''
                         )}
                     />
                 </div>
@@ -401,6 +404,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     language: state.language.language,
+    menuIsOpen: state.dropdownToggles.hovedmeny,
 });
 
 export default connect(mapStateToProps)(Sok);
