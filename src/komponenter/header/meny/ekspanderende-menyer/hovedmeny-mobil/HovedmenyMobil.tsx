@@ -80,13 +80,13 @@ const HovedmenyMobil = () => {
         <>
             <MenylinjeKnapp
                 toggleMenu={hovedmenutoggle}
-                isOpen={underIsOpen}
+                isOpen={hovedIsOpen}
                 classname={classname}
                 id={mobilHovedmenyKnappId}
                 ariaLabel={'Hovedmenyknapp'}
             >
                 <>
-                    <HamburgerKnapp isOpen={underIsOpen} />
+                    <HamburgerKnapp isOpen={hovedIsOpen} />
                     <Undertittel>
                         <TextTransformFirstLetterToUppercase
                             text="meny-knapp"

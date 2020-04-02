@@ -145,7 +145,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                                     minsideLenker={minsideLenker}
                                     tabIndex={this.hovedseksjonTabIndex()}
                                     className={menyClass.className}
-                                    openMeny={this.setSubmenu}
+                                    openMeny={this.setMenyliste}
                                     test={this.minsidelenkerRef}
                                 />
                             </div>

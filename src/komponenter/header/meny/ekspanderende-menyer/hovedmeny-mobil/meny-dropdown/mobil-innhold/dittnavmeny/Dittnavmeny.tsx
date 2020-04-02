@@ -6,7 +6,11 @@ import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 
 interface Props {
     minsideLenker: MenyNode;
-    openMeny: (menyElement: MenyNode, ref: any) => void;
+    openMeny: (
+        event: React.MouseEvent<HTMLAnchorElement>,
+        menyElement: MenyNode,
+        ref: any
+    ) => void;
     className: string;
     tabIndex: boolean;
     test: any;
@@ -14,15 +18,6 @@ interface Props {
 
 const Dittnavmeny = (props: Props) => {
     const cls = BEMHelper(props.className);
-
-    const setMenu = (
-        event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-        submeny: MenyNode,
-        pointer: any
-    ) => {
-        event.preventDefault();
-        props.openMeny(submeny, pointer);
-    };
 
     return (
         <ul className={cls.element('meny', 'minsidelist')}>
@@ -34,7 +29,7 @@ const Dittnavmeny = (props: Props) => {
                             key={index}
                             href="https://nav.no"
                             onClick={event =>
-                                setMenu(
+                                props.openMeny(
                                     event,
                                     menyElement,
                                     props.test[index].current
