@@ -117,7 +117,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
             minsideLenker,
         } = this.props;
         const menyClass = BEMHelper(classname);
-        this.hideBackgroundOverflow(underMenuIsOpen || varslerIsOpen);
+        this.hideBackgroundOverflow(menuIsOpen || varslerIsOpen);
         return (
             <>
                 <section
