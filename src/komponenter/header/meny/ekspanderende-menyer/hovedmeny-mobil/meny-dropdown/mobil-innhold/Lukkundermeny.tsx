@@ -5,7 +5,7 @@ import VenstreChevron from 'nav-frontend-chevron/lib/venstre-chevron';
 import BEMHelper from '../../../../../../../utils/bem';
 import Tekst from '../../../../../../../tekster/finn-tekst';
 import { useDispatch } from 'react-redux';
-import { toggleHovedmeny } from '../../../../../../../reducer/dropdown-toggle-duck';
+import { toggleUndermenyVisning } from '../../../../../../../reducer/dropdown-toggle-duck';
 
 interface Props {
     setFocusIndex: () => void;
@@ -24,7 +24,7 @@ const Lukkundermeny = (props: Props) => {
                     onClick={event => {
                         event.preventDefault();
                         props.setFocusIndex();
-                        dispatch(toggleHovedmeny());
+                        dispatch(toggleUndermenyVisning());
                     }}
                     tabIndex={props.tabindex ? 0 : -1}
                 >

@@ -12,10 +12,7 @@ import { HovedmenyDropdown } from './hovedmeny-dropdown/HovedmenyDropdown';
 import { getHovedmenyNode } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
 import MenySpinner from '../meny-spinner/MenySpinner';
-import {
-    toggleHovedmeny,
-    toggleSok,
-} from '../../../../../reducer/dropdown-toggle-duck';
+import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
 import HamburgerIkon from '../meny-knapper/ikoner/hamburger-ikon/HamburgerIkon';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import './HovedmenyDesktop.less';
@@ -32,13 +29,9 @@ const classname = 'desktop-hovedmeny';
 export const desktopHovedmenyKnappId = `${classname}-knapp-id`;
 
 export const HovedmenyDesktop = () => {
-    const {
-        arbeidsflate,
-        menyPunkter,
-        language,
-        isOpen,
-        sokIsOpen,
-    } = useSelector(stateSelector);
+    const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(
+        stateSelector
+    );
     const dispatch = useDispatch();
 
     const hovedmenyPunkter = getHovedmenyNode(
@@ -56,9 +49,6 @@ export const HovedmenyDesktop = () => {
             action: `meny-${isOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleHovedmeny());
-        if (sokIsOpen) {
-            dispatch(toggleSok());
-        }
     };
 
     const knapp = (
