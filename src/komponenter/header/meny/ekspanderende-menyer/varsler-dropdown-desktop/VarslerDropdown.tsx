@@ -60,7 +60,7 @@ export const VarslerDropdown = () => {
         >
             <VarselIkon isOpen={isOpen} antallUleste={varsler.uleste} />
             <Normaltekst className={'varselbjelle__tekst'}>
-                <Tekst id={'varsler'} />
+                <Tekst id={'varsler-tittel'} />
             </Normaltekst>
         </MenylinjeKnapp>
     );
