@@ -28,8 +28,8 @@ const SimpleFooter = () => {
         <Fragment>
             <div className={cls.element('container')}>
                 <div className={cls.element('content')}>
-                    {lenker.map(lenke => (
-                        <div className={cls.element('lenke')}>
+                    {lenker.map((lenke, i) => (
+                        <div className={cls.element('lenke')} key={i}>
                             <Normaltekst>
                                 <LenkeMedGA
                                     href={lenke.url}
