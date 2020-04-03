@@ -13,11 +13,13 @@ const Navlogo = ({
     width,
     height,
     color,
+    className,
     viewIndex,
 }: {
     width?: string;
     height?: string;
     color?: string;
+    className?: string;
     viewIndex?: boolean;
 }) => {
     const dispatch = useDispatch();
@@ -27,7 +29,7 @@ const Navlogo = ({
     return (
         <LenkeMedGA
             href={context.url}
-            classNameOverride="nav-brand-lenke"
+            classNameOverride={`nav-brand-lenke ${className ? className : ``}`}
             tabIndex={viewIndex ? 0 : -1}
             onClick={event => {
                 event.preventDefault();
