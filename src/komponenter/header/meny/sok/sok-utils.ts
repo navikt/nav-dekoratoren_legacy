@@ -1,5 +1,3 @@
-import Environment from '../../../../utils/Environment';
-
 export interface InputState {
     loading: boolean;
     selectedInput: string;
@@ -34,11 +32,14 @@ export const defaultData: SokeresultatData = {
     className: '',
 };
 
-export const visAlleTreff = (inputString: string): SokeresultatData => {
+export const visAlleTreff = (
+    XP_BASE_URL: string,
+    inputString: string
+): SokeresultatData => {
     return {
         priority: false,
         displayName: `${inputString}`,
-        href: `${Environment.XP_BASE_URL}/sok?ord=${inputString}`,
+        href: `${XP_BASE_URL}/sok?ord=${inputString}`,
         highlight: `Se alle treff ("${inputString}")`,
         publish: {
             from: '',

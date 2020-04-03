@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../reducer/reducer';
+import { AppState } from '../reducer/reducers';
 import { hentVarsler, settVarslerOK } from '../reducer/varselinnboks-duck';
 import Datalaster from '../api/Datalaster';
 
@@ -11,13 +11,16 @@ interface Props {
 const VarselinnboksProvider = (props: Props) => {
     const dispatch = useDispatch();
     const varsler = useSelector((state: AppState) => state.varsler);
+    const { APP_BASE_URL } = useSelector(
+        (state: AppState) => state.environment
+    );
     const erInnlogget = useSelector(
         (state: AppState) => state.innloggingsstatus.data.authenticated === true
     );
 
     useEffect(() => {
         if (erInnlogget) {
-            hentVarsler()(dispatch);
+            hentVarsler(APP_BASE_URL)(dispatch);
         } else {
             dispatch(settVarslerOK());
         }

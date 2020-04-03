@@ -5,7 +5,7 @@ import {
     triggerGaEvent,
 } from '../../../../../utils/google-analytics';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../../../reducer/reducer';
+import { AppState } from '../../../../../reducer/reducers';
 import { Status } from '../../../../../api/api';
 import { Undertittel } from 'nav-frontend-typografi';
 import { HovedmenyDropdown } from './hovedmeny-dropdown/HovedmenyDropdown';

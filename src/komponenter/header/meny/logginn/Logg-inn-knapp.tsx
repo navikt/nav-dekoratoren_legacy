@@ -1,82 +1,68 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { AppState } from '../../../../reducer/reducer';
-import Environment, { erNavDekoratoren } from '../../../../utils/Environment';
+import { erNavDekoratoren } from '../../../../utils/Environment';
 import Tekst from '../../../../tekster/finn-tekst';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './Logg-inn-knapp.less';
 import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
-
-import { Language } from '../../../../reducer/language-duck';
 import { TextTransformFirstLetterToUppercase } from '../ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import KnappBase from 'nav-frontend-knapper';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../../reducer/reducers';
 
-interface StateProps {
-    erInnlogget: boolean;
-    lang: Language;
-}
+export const LoggInnKnapp = () => {
+    const { environment } = useSelector((state: AppState) => state);
+    const { language } = useSelector((state: AppState) => state.language);
+    const { authenticated } = useSelector(
+        (state: AppState) => state.innloggingsstatus.data
+    );
 
-export class LoggInnKnapp extends React.Component<StateProps, {}> {
-    constructor(props: StateProps) {
-        super(props);
-    }
-
-    handleButtonClick = () => {
-        const { erInnlogget } = this.props;
+    const handleButtonClick = () => {
+        const { PARAMS, LOGIN_URL, DITT_NAV_URL, LOGOUT_URL } = environment;
         const appUrl = location.origin + location.pathname;
-        const LOGIN_URL = `${
-            Environment.REDIRECT_TO_APP || erNavDekoratoren()
-                ? `${Environment.LOGIN_URL}/login?redirect=${appUrl}`
-                : `${Environment.LOGIN_URL}/login?redirect=${Environment.DITT_NAV_URL}`
-        }&level=${Environment.LEVEL}`;
+        const loginUrl = `${
+            PARAMS.REDIRECT_TO_APP || erNavDekoratoren()
+                ? `${LOGIN_URL}/login?redirect=${appUrl}`
+                : `${LOGIN_URL}/login?redirect=${DITT_NAV_URL}`
+        }&level=${PARAMS.LEVEL}`;
 
         triggerGaEvent({
             category: GACategory.Header,
-            action: erInnlogget ? 'logg-ut' : 'logg-inn',
+            action: authenticated ? 'logg-ut' : 'logg-inn',
         });
 
-        return erInnlogget
-            ? (window.location.href = Environment.LOGOUT_URL)
-            : (window.location.href = LOGIN_URL);
+        return authenticated
+            ? (window.location.href = LOGOUT_URL)
+            : (window.location.href = loginUrl);
     };
 
-    render() {
-        const { erInnlogget } = this.props;
-        const knappetekst = erInnlogget ? 'logg-ut-knapp' : 'logg-inn-knapp';
-
-        return (
-            <div className="login-container">
-                <div className="media-sm-mobil login-mobil">
-                    <KnappBase
-                        type="flat"
-                        className="mobil-login-knapp"
-                        onClick={this.handleButtonClick}
-                    >
-                        <Undertittel className="knappetekst">
-                            <TextTransformFirstLetterToUppercase
-                                text={knappetekst}
-                                lang={this.props.lang}
-                            />
-                        </Undertittel>
-                    </KnappBase>
-                </div>
-                <div className="media-tablet-desktop login-tablet-desktop">
-                    <KnappBase
-                        type="standard"
-                        className="login-knapp"
-                        onClick={this.handleButtonClick}
-                    >
-                        <Tekst id={knappetekst} />
-                    </KnappBase>
-                </div>
+    const knappetekst = authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp';
+    return (
+        <div className="login-container">
+            <div className="media-sm-mobil login-mobil">
+                <KnappBase
+                    type="flat"
+                    className="mobil-login-knapp"
+                    onClick={handleButtonClick}
+                >
+                    <Undertittel className="knappetekst">
+                        <TextTransformFirstLetterToUppercase
+                            text={knappetekst}
+                            lang={language}
+                        />
+                    </Undertittel>
+                </KnappBase>
             </div>
-        );
-    }
-}
+            <div className="media-tablet-desktop login-tablet-desktop">
+                <KnappBase
+                    type="standard"
+                    className="login-knapp"
+                    onClick={handleButtonClick}
+                >
+                    <Tekst id={knappetekst} />
+                </KnappBase>
+            </div>
+        </div>
+    );
+};
 
-const mapStateToProps = (state: AppState): StateProps => ({
-    erInnlogget: state.innloggingsstatus.data.authenticated,
-    lang: state.language.language,
-});
-
-export default connect(mapStateToProps)(LoggInnKnapp);
+export default LoggInnKnapp;

@@ -3,6 +3,8 @@ import { MenyNode } from '../../../../../reducer/menu-duck';
 import { genererUrl } from '../../../../../utils/Environment';
 import { LenkeMedGA } from '../../../../LenkeMedGA';
 import { GACategory } from '../../../../../utils/google-analytics';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../../../reducer/reducers';
 
 interface Props {
     lenke: MenyNode;
@@ -12,8 +14,9 @@ interface Props {
 }
 
 export const MenyLenke = (props: Props) => {
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const { lenke, isOpen, menyGruppeNavn } = props;
-    const href = genererUrl(lenke.path);
+    const href = genererUrl(XP_BASE_URL, lenke.path);
 
     return (
         <li>

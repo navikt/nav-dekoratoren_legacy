@@ -1,4 +1,3 @@
-import Environment from '../../../../../../../utils/Environment';
 import Tekst from '../../../../../../../tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
 import React from 'react';
@@ -10,7 +9,7 @@ import { GACategory } from '../../../../../../../utils/google-analytics';
 import { LenkeMedGA } from '../../../../../../LenkeMedGA';
 import './Toppseksjon.less';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../../../../../reducer/reducer';
+import { AppState } from '../../../../../../../reducer/reducers';
 import {
     getArbeidsflateContext,
     settArbeidsflate,
@@ -22,10 +21,12 @@ interface Props {
 
 export const Toppseksjon = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
+    const dispatch = useDispatch();
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const { arbeidsflate } = useSelector((state: AppState) => ({
         arbeidsflate: state.arbeidsflate.status,
     }));
-    const context = getArbeidsflateContext(arbeidsflate);
+    const context = getArbeidsflateContext(XP_BASE_URL, arbeidsflate);
 
     return (
         <div className={cls.element('topp-seksjon')}>
@@ -33,7 +34,7 @@ export const Toppseksjon = ({ classname }: Props) => {
                 href={context.url}
                 onClick={event => {
                     event.preventDefault();
-                    settArbeidsflate(context);
+                    settArbeidsflate(dispatch, context);
                 }}
                 className={cls.element('topp-seksjon-lenke')}
                 id={KbNav.getKbId(NaviGroup.Hovedmeny, {
@@ -44,7 +45,7 @@ export const Toppseksjon = ({ classname }: Props) => {
                 gaEventArgs={{
                     category: GACategory.Meny,
                     action: `hovedmeny/forsidelenke`,
-                    label: Environment.XP_BASE_URL,
+                    label: XP_BASE_URL,
                 }}
             >
                 <Tekst id={'til-forside'} />

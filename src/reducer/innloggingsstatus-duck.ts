@@ -50,28 +50,35 @@ export default function reducer(
     }
 }
 
-export function hentInnloggingsstatus(): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Data>(() => hentInnloggingsstatusFetch(), {
-        ok: hentInnloggingsstatusOk,
-        feilet: hentnnloggingsstatusFeilet,
-        pending: hentnnloggingsstatusPending,
-    });
+export function hentInnloggingsstatus(
+    APP_BASE_URL: string
+): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<Data>(
+        () => hentInnloggingsstatusFetch(APP_BASE_URL),
+        {
+            ok: hentInnloggingsstatusOk,
+            feilet: hentnnloggingsstatusFeilet,
+            pending: hentnnloggingsstatusPending,
+        }
+    );
 }
 
-function hentInnloggingsstatusOk(data: Data): HentInnloggingsstatusOKAction {
+export function hentInnloggingsstatusOk(
+    data: Data
+): HentInnloggingsstatusOKAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
         data: data,
     };
 }
 
-function hentnnloggingsstatusFeilet(): HentInnloggingsstatusFEILETAction {
+export function hentnnloggingsstatusFeilet(): HentInnloggingsstatusFEILETAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_FEILET,
     };
 }
 
-function hentnnloggingsstatusPending(): HentInnloggingsstatusPENDINGAction {
+export function hentnnloggingsstatusPending(): HentInnloggingsstatusPENDINGAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_PENDING,
     };

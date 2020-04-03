@@ -11,7 +11,7 @@ import MobilarbeidsflateValg from '../../../../arbeidsflatemeny/Mobilarbeidsflat
 import VarselinnboksProvider from '../../../../../../provider/Varselinnboks-provider';
 import VarselvisningMobil from '../../../varsel/varselvisning/VarselvisningMobil';
 import './MobilVisningsmeny.less';
-import { AppState } from '../../../../../../reducer/reducer';
+import { AppState } from '../../../../../../reducer/reducers';
 import { Dispatch } from '../../../../../../redux/dispatch-type';
 import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
 import { connect } from 'react-redux';

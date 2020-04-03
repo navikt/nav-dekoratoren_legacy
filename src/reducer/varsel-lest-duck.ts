@@ -32,13 +32,17 @@ export default function reducer(
 }
 
 export function settVarslerSomLest(
+    APP_BASE_URL: string,
     nyesteId: number
 ): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<number>(() => lagreVarslerLestFetch(nyesteId), {
-        ok: settVarslerLestOk,
-        feilet: settVarslerLestFeilet,
-        pending: settVarslerLestPending,
-    });
+    return fetchThenDispatch<number>(
+        () => lagreVarslerLestFetch(APP_BASE_URL, nyesteId),
+        {
+            ok: settVarslerLestOk,
+            feilet: settVarslerLestFeilet,
+            pending: settVarslerLestPending,
+        }
+    );
 }
 
 function settVarslerLestOk(nyesteId: number): SettVarslerLestOKAction {
