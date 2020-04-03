@@ -13,14 +13,27 @@
         width: 100%;
         max-width: 1440px;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
 
         @media (min-width: @smallDesktopLimitWidth) {
+            justify-content: space-between;
+            align-items: center;
             padding: 0 3rem;
         }
         @media (max-width: @smallDesktopLimitWidth) {
-            padding: 0 1rem;
+            flex-direction: column;
+            padding: 1rem 1rem;
+        }
+    }
+
+    &__lenke {
+        @media (max-width: @smallDesktopLimitWidth) {
+            :first-child {
+                margin: 0 0 1rem 0;
+            }
+
+            :not(:first-child) {
+                margin: 1rem 0;
+            }
         }
     }
 }

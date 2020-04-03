@@ -28,41 +28,35 @@ const SimpleFooter = () => {
         <Fragment>
             <div className={cls.element('container')}>
                 <div className={cls.element('content')}>
-                    <div className="bottom-lenker">
-                        <ul className="bottom-lenke">
-                            {lenker.map(lenke => (
-                                <li key={lenke.lenketekst}>
-                                    <Normaltekst>
-                                        <LenkeMedGA
-                                            href={lenke.url}
-                                            gaEventArgs={{
-                                                category: GACategory.Footer,
-                                                action: `bunn/${lenke.lenketekst}`,
-                                                label: lenke.url,
-                                            }}
-                                        >
-                                            {lenke.lenketekst}
-                                        </LenkeMedGA>
-                                    </Normaltekst>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className="bottom-lenker">
-                        <Lenke
-                            href="#"
-                            role="button"
-                            onClick={() => setIsOpen(true)}
-                        >
-                            <Tekst id="footer-del-skjerm" />
-                        </Lenke>
-                        {isOpen && (
-                            <DelSkjermModal
-                                isOpen={isOpen}
-                                onClose={() => setIsOpen(false)}
-                            />
-                        )}
-                    </div>
+                    {lenker.map(lenke => (
+                        <div className={cls.element('lenke')}>
+                            <Normaltekst>
+                                <LenkeMedGA
+                                    href={lenke.url}
+                                    gaEventArgs={{
+                                        category: GACategory.Footer,
+                                        action: `bunn/${lenke.lenketekst}`,
+                                        label: lenke.url,
+                                    }}
+                                >
+                                    {lenke.lenketekst}
+                                </LenkeMedGA>
+                            </Normaltekst>
+                        </div>
+                    ))}
+                    <Lenke
+                        href="#"
+                        role="button"
+                        onClick={() => setIsOpen(true)}
+                    >
+                        <Tekst id="footer-del-skjerm" />
+                    </Lenke>
+                    {isOpen && (
+                        <DelSkjermModal
+                            isOpen={isOpen}
+                            onClose={() => setIsOpen(false)}
+                        />
+                    )}
                 </div>
             </div>
         </Fragment>
