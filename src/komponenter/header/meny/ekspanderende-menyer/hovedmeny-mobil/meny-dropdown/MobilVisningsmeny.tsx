@@ -86,14 +86,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
 
     setSubmenu = (meny: MenyNode, pointer: any) => {
         this.node = pointer;
-        this.setState(
-            {
-                lenker: meny,
-            },
-            () => {
-                this.props.togglehovedmenu();
-            }
-        );
+        this.setState({ lenker: meny });
     };
 
     setMenyliste = (
@@ -102,15 +95,9 @@ class MobilVisningsmeny extends React.Component<Props, State> {
         pointer: any
     ) => {
         event.preventDefault();
+        this.props.togglemenu();
         this.node = pointer;
-        this.setState(
-            {
-                lenker: meny,
-            },
-            () => {
-                this.props.togglehovedmenu();
-            }
-        );
+        this.setState({ lenker: meny });
     };
 
     focusNode = () => {
@@ -130,13 +117,13 @@ class MobilVisningsmeny extends React.Component<Props, State> {
             minsideLenker,
         } = this.props;
         const menyClass = BEMHelper(classname);
-        this.hideBackgroundOverflow(underMenuIsOpen || varslerIsOpen);
+        this.hideBackgroundOverflow(menuIsOpen || varslerIsOpen);
         return (
             <>
                 <section
                     className={menyClass.element(
                         'startmeny',
-                        this.props.menuIsOpen ? 'aktive' : ''
+                        menuIsOpen && !underMenuIsOpen ? 'aktive' : ''
                     )}
                 >
                     <Sok tabindex={this.hovedseksjonTabIndex()} />
@@ -158,7 +145,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                                     minsideLenker={minsideLenker}
                                     tabIndex={this.hovedseksjonTabIndex()}
                                     className={menyClass.className}
-                                    openMeny={this.setSubmenu}
+                                    openMeny={this.setMenyliste}
                                     test={this.minsidelenkerRef}
                                 />
                             </div>
@@ -210,7 +197,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                 </section>
                 <Undermeny
                     className={menyClass.className}
-                    undermenyIsOpen={underMenuIsOpen}
+                    undermenyIsOpen={menuIsOpen}
                     setFocusNode={this.focusNode}
                     tabindex={underMenuIsOpen && !menuIsOpen}
                     lenker={this.state.lenker}

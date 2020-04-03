@@ -15,13 +15,10 @@ import {
 import { finnTekst } from '../../../../../tekster/finn-tekst';
 import {
     toggleHovedmeny,
-    toggleHovedOgUndermenyVisning,
     toggleUndermenyVisning,
-    toggleVarselVisning,
 } from '../../../../../reducer/dropdown-toggle-duck';
 import { Language } from '../../../../../reducer/language-duck';
 import { dataInitState } from '../../../../../reducer/menu-duck';
-import BEMHelper from '../../../../../utils/bem';
 import HamburgerKnapp from '../meny-knapp/hamburger-knapp/HamburgerKnapp';
 import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import MenySpinner from '../meny-spinner/MenySpinner';
@@ -39,7 +36,6 @@ const stateSelector = (state: AppState) => ({
 
 const classname = 'mobilmeny';
 export const mobilHovedmenyKnappId = `${classname}-knapp-id`;
-const cls = BEMHelper('hamburger-knapp');
 
 export const TextTransformFirstLetterToUppercase = ({
     text,
@@ -73,14 +69,7 @@ const HovedmenyMobil = () => {
             action: `meny-${underIsOpen ? 'close' : 'open'}`,
         });
 
-        dispatch(
-            hovedIsOpen || !underIsOpen
-                ? toggleHovedOgUndermenyVisning()
-                : toggleUndermenyVisning()
-        );
-        if (varselIsOpen) {
-            dispatch(toggleVarselVisning());
-        }
+        dispatch(toggleUndermenyVisning());
     };
 
     const hovedmenutoggle = () => {
@@ -90,14 +79,14 @@ const HovedmenyMobil = () => {
     const menyKnapp = (
         <>
             <MenylinjeKnapp
-                toggleMenu={menutoggle}
-                isOpen={underIsOpen}
+                toggleMenu={hovedmenutoggle}
+                isOpen={hovedIsOpen}
                 classname={classname}
                 id={mobilHovedmenyKnappId}
                 ariaLabel={'Hovedmenyknapp'}
             >
                 <>
-                    <HamburgerKnapp isOpen={underIsOpen} />
+                    <HamburgerKnapp isOpen={hovedIsOpen} />
                     <Undertittel>
                         <TextTransformFirstLetterToUppercase
                             text="meny-knapp"

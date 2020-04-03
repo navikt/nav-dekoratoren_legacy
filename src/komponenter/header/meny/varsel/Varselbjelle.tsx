@@ -10,11 +10,7 @@ import MenylinjeKnapp from '../ekspanderende-menyer/meny-knapper/MenylinjeKnapp'
 import { VarselIkon } from '../ekspanderende-menyer/meny-knapper/ikoner/varsel-ikon/VarselIkon';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../../tekster/finn-tekst';
-import {
-    toggleHovedOgUndermenyVisning,
-    toggleUndermenyVisning,
-    toggleVarselVisning,
-} from '../../../../reducer/dropdown-toggle-duck';
+import { toggleVarselVisning } from '../../../../reducer/dropdown-toggle-duck';
 import VarselKnappMobil from './varselknapp/VarselKnappMobil';
 
 interface Props {
@@ -40,8 +36,6 @@ interface StateProps {
 interface DispatchProps {
     settVarselLest: (nyesteId: number) => void;
     togglevisvarsel: () => void;
-    togglemeny: () => void;
-    togglemenyer: () => void;
 }
 
 interface State {
@@ -78,11 +72,6 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
 
     toggleVarsel = () => {
         this.props.togglevisvarsel();
-        if (this.props.underMenyAapen) {
-            this.props.hovedMenyAapen
-                ? this.props.togglemenyer()
-                : this.props.togglemeny();
-        }
     };
 
     ApneVarselEvent = () => {
@@ -119,7 +108,6 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
             antallVarsler,
             arbeidsflate,
             tabindex,
-            visVarsel,
             children,
         } = this.props;
         const { clicked, classname } = this.state;
@@ -182,8 +170,6 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     settVarselLest: (nyesteId: number) =>
         settVarslerSomLest(nyesteId)(dispatch),
     togglevisvarsel: () => dispatch(toggleVarselVisning()),
-    togglemeny: () => dispatch(toggleUndermenyVisning()),
-    togglemenyer: () => dispatch(toggleHovedOgUndermenyVisning()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Varselbjelle);

@@ -24,6 +24,7 @@ import { EnvironmentState } from '../../../../reducer/environment-duck';
 interface StateProps {
     language: Language;
     environment: EnvironmentState;
+    menuIsOpen: boolean;
 }
 
 interface Props {
@@ -397,7 +398,9 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     <div
                         className={mobileCls.element(
                             'bakgrunn',
-                            this.state.setBackground ? 'active' : ''
+                            this.state.setBackground && this.props.menuIsOpen
+                                ? 'active'
+                                : ''
                         )}
                     />
                 </div>
@@ -409,6 +412,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 const mapStateToProps = (state: AppState): StateProps => ({
     language: state.language.language,
     environment: state.environment,
+    menuIsOpen: state.dropdownToggles.hovedmeny,
 });
 
 export default connect(mapStateToProps)(Sok);

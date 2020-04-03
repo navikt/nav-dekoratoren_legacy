@@ -18,10 +18,6 @@ export const initialState: DropdownState = {
     varsler: false,
 };
 
-export const toggleHovedOgUndermenyVisning = () => ({
-    type: ActionType.TOGGLE_HOVEDOGUNDERMENY,
-});
-
 export const toggleUndermenyVisning = () => ({
     type: ActionType.TOGGLE_UNDERMENY,
 });
@@ -56,28 +52,20 @@ export const reducer = (
 ): DropdownState => {
     switch (action.type) {
         case ActionType.TOGGLE_HOVEDMENY: {
-            return { ...state, hovedmeny: !state.hovedmeny };
+            return { ...initialState, hovedmeny: !state.hovedmeny };
         }
         case ActionType.TOGGLE_MINSIDE_MENY: {
-            return { ...state, minside: !state.minside };
+            return { ...initialState, minside: !state.minside };
         }
         case ActionType.TOGGLE_SOK: {
-            return { ...state, sok: !state.sok };
+            return { ...initialState, sok: !state.sok };
         }
         case ActionType.TOGGLE_VARSEL: {
-            return { ...state, varsel: !state.varsel };
+            return { ...initialState, varsel: !state.varsel };
         }
         case ActionType.TOGGLE_UNDERMENY: {
             return { ...state, undermeny: !state.undermeny };
         }
-        case ActionType.TOGGLE_HOVEDOGUNDERMENY: {
-            return {
-                ...state,
-                undermeny: !state.undermeny,
-                hovedmeny: !state.hovedmeny,
-            };
-        }
-
         case ActionType.TOGGLE_VARSLER: {
             return { ...initialState, varsler: !state.varsler };
         }

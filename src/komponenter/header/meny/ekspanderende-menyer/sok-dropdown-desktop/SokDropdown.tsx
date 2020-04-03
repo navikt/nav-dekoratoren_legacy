@@ -3,10 +3,7 @@ import { AppState } from '../../../../../reducer/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import Sok from '../../sok/Sok';
-import {
-    toggleHovedmeny,
-    toggleSok,
-} from '../../../../../reducer/dropdown-toggle-duck';
+import { toggleSok } from '../../../../../reducer/dropdown-toggle-duck';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from '../../../../../tekster/finn-tekst';
 import {
@@ -26,7 +23,7 @@ const classname = 'desktop-sok-dropdown';
 export const desktopSokKnappId = `${classname}-knapp-id`;
 
 export const SokDropdown = () => {
-    const { sokIsOpen, menyIsOpen } = useSelector(stateSelector);
+    const { sokIsOpen } = useSelector(stateSelector);
     const dispatch = useDispatch();
 
     const toggleMenu = () => {
@@ -35,9 +32,6 @@ export const SokDropdown = () => {
             action: `sok-${sokIsOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleSok());
-        if (menyIsOpen) {
-            dispatch(toggleHovedmeny());
-        }
     };
 
     const knapp = (
