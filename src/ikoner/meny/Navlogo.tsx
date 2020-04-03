@@ -6,6 +6,8 @@ import {
     settArbeidsflate,
 } from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
 import { MenuValue } from '../../utils/meny-storage-utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../reducer/reducers';
 
 const Navlogo = ({
     width,
@@ -18,7 +20,9 @@ const Navlogo = ({
     color?: string;
     viewIndex?: boolean;
 }) => {
-    const context = getArbeidsflateContext(MenuValue.PRIVATPERSON);
+    const dispatch = useDispatch();
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
+    const context = getArbeidsflateContext(XP_BASE_URL, MenuValue.PRIVATPERSON);
 
     return (
         <LenkeMedGA
@@ -27,7 +31,7 @@ const Navlogo = ({
             tabIndex={viewIndex ? 0 : -1}
             onClick={event => {
                 event.preventDefault();
-                settArbeidsflate(context);
+                settArbeidsflate(dispatch, context);
             }}
             gaEventArgs={{
                 category: GACategory.Meny,

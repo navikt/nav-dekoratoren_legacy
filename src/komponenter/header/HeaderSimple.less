@@ -4,11 +4,18 @@
 .simple-header {
     background-color: white;
     width: 100%;
-    padding: 0.5rem 0 1rem;
+    padding: 0.5rem 0;
     border-bottom: 2px solid #0067c5;
     display: flex;
     justify-content: center;
 
+    &__right {
+        display: flex;
+        align-items: center;
+        & > :first-child {
+            margin: 1rem;
+        }
+    }
     &__content {
         width: 100%;
         max-width: 1440px;
