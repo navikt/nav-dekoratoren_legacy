@@ -1,2 +1,26 @@
 @import '../../../node_modules/nav-frontend-core/less/_variabler';
 @import '../../styling-variabler.less';
+
+.simple-footer {
+    &__container {
+        min-height: 5rem;
+        display: flex;
+        padding: 0.5rem 0;
+        border-top: 2px solid #0067c5;
+    }
+
+    &__content {
+        width: 100%;
+        max-width: 1440px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @media (min-width: @smallDesktopLimitWidth) {
+            padding: 0 3rem;
+        }
+        @media (max-width: @smallDesktopLimitWidth) {
+            padding: 0 1rem;
+        }
+    }
+}
