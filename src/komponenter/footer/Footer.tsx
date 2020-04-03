@@ -11,7 +11,7 @@ const Footer = () => {
     const { PARAMS } = useSelector((state: AppState) => state.environment);
     return (
         <footer className={cls.className} role="contentinfo">
-            {PARAMS.SIMPLE ? (
+            {PARAMS.SIMPLE || PARAMS.SIMPLE_FOOTER ? (
                 <SimpleFooter className={cls.className} />
             ) : (
                 <RegularFooter className={cls.className} />
