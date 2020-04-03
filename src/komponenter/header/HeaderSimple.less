@@ -13,6 +13,9 @@
         display: flex;
         align-items: center;
         & > :first-child {
+            @media (max-width: @screen-sm) {
+                display: none;
+            }
             margin: 1rem;
         }
     }
