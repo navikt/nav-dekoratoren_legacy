@@ -1,17 +1,17 @@
 import React from 'react';
-import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
+import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import {
     GACategory,
     triggerGaEvent,
 } from '../../../../../utils/google-analytics';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../../../reducer/reducer';
+import { AppState } from '../../../../../reducer/reducers';
 import { Status } from '../../../../../api/api';
 import { Undertittel } from 'nav-frontend-typografi';
 import { HovedmenyVisning } from './hovedmeny-visning/HovedmenyVisning';
 import { getHovedmenyNode } from '../../../../../utils/meny-storage-utils';
 import Tekst from '../../../../../tekster/finn-tekst';
-import { MenySpinner } from '../meny-spinner/MenySpinner';
+import MenySpinner from '../meny-spinner/MenySpinner';
 import { toggleHovedmeny } from '../../../../../reducer/dropdown-toggle-duck';
 import HamburgerIkon from '../meny-knapper/ikoner/hamburger-ikon/HamburgerIkon';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
@@ -22,6 +22,7 @@ const stateSelector = (state: AppState) => ({
     menyPunkter: state.menypunkt,
     language: state.language.language,
     isOpen: state.dropdownToggles.hovedmeny,
+    sokIsOpen: state.dropdownToggles.sok,
 });
 
 const classname = 'desktop-hovedmeny';

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { AppState } from '../../../reducer/reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../../reducer/reducers';
 import { Undertekst } from 'nav-frontend-typografi';
 import BEMHelper from '../../../utils/bem';
 import { arbeidsflateLenker, settArbeidsflate } from './arbeidsflate-lenker';
@@ -15,8 +15,11 @@ import {
 
 const Arbeidsflatemeny = () => {
     const cls = BEMHelper('arbeidsflate');
+    const dispatch = useDispatch();
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const { arbeidsflate } = useSelector((state: AppState) => ({
         arbeidsflate: state.arbeidsflate.status,
+        environment: state.environment,
     }));
 
     return (
@@ -26,7 +29,7 @@ const Arbeidsflatemeny = () => {
             aria-label="Velg brukergruppe"
         >
             <ul className={cls.element('topp-liste-rad')} role="tablist">
-                {arbeidsflateLenker().map((lenke, index) => {
+                {arbeidsflateLenker(XP_BASE_URL).map((lenke, index) => {
                     return (
                         <li
                             role="tab"
@@ -44,7 +47,7 @@ const Arbeidsflatemeny = () => {
                                 href={lenke.url}
                                 onClick={event => {
                                     event.preventDefault();
-                                    settArbeidsflate(lenke);
+                                    settArbeidsflate(dispatch, lenke);
                                 }}
                                 gaEventArgs={{
                                     category: GACategory.Header,

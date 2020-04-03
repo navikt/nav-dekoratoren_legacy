@@ -4,13 +4,18 @@ import { Provider as ReduxProvider } from 'react-redux';
 import LanguageProvider from '../provider/Language-provider';
 import Header from '../komponenter/header/Header';
 import Footer from '../komponenter/footer/Footer';
-import getStore from '../redux/store';
-import Environment from '../utils/Environment';
-import dotenv from 'dotenv';
-const env = dotenv.config();
+import { Request } from 'express';
+import { clientEnv } from './utils';
+import hash from 'object-hash';
 
-// Set server-side environment
-Environment.settEnv(env.parsed || process.env);
+import { createStore } from '../redux/store';
+import dotenv from 'dotenv';
+import NodeCache from 'node-cache';
+
+// Local environment - import .env
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 
 // Favicons
 const fileFavicon = require('../../src/ikoner/favicon/favicon.ico');
@@ -20,28 +25,55 @@ const fileFavicon32x32 = require('../../src/ikoner/favicon/favicon-32x32.png');
 const fileMaskIcon = require('../../src/ikoner/favicon/safari-pinned-tab.svg');
 
 // Resources
-const store = getStore();
 const baseUrl = `${process.env.APP_BASE_URL}`;
 const fileEnv = `${process.env.APP_BASE_URL}/env`;
 const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
 const fileScript = `${process.env.APP_BASE_URL}/client.js`;
 
-const htmlHeader = ReactDOMServer.renderToString(
-    <ReduxProvider store={store}>
-        <LanguageProvider>
-            <Header />
-        </LanguageProvider>
-    </ReduxProvider>
-);
+const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
-const htmlFooter = ReactDOMServer.renderToString(
-    <ReduxProvider store={store}>
-        <Footer />
-    </ReduxProvider>
-);
+export const template = (req: Request) => {
+    // Set environment based on request params
+    const env = clientEnv(req);
 
-export const template = (parameters: string) => {
-    return `
+    const envHash = hash({ env });
+    const cachedHtml = cache.get(envHash);
+
+    // Retreive from cache
+    if (cachedHtml) {
+        return cachedHtml;
+    }
+
+    // Create store based on request params
+    const store = createStore(env);
+
+    // Fetch params and forward to client
+    const params = req.query;
+    const paramsAsString = Object.keys(req.query).length
+        ? `?${req.url.split('?')[1]}`
+        : ``;
+
+    // Backward compatibility
+    // for simple header and footer
+    const headerId = params.header ? `header` : `header-withmenu`;
+    const footerId = params.footer ? `footer` : `footer-withmenu`;
+
+    // Render SSR
+    const HtmlHeader = ReactDOMServer.renderToString(
+        <ReduxProvider store={store}>
+            <LanguageProvider>
+                <Header />
+            </LanguageProvider>
+        </ReduxProvider>
+    );
+
+    const HtmlFooter = ReactDOMServer.renderToString(
+        <ReduxProvider store={store}>
+            <Footer />
+        </ReduxProvider>
+    );
+
+    const html = `
     <!DOCTYPE html>
     <html lang="no">
         <head>
@@ -63,10 +95,15 @@ export const template = (parameters: string) => {
                 justify-content: space-between;
                 height: 100%;
             }
-            .decorator-dummy-app{
-                background: #f1f1f1;
-                height:100%;
+            .decorator-dummy-app {
+                background: #8888;
+                height: 100%;
+                min-height: 25rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
+           
             </style>
             <div id="styles">
                 <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
@@ -81,16 +118,17 @@ export const template = (parameters: string) => {
         </head>
         <body>
             <div class="decorator-dev-container">
-                <div id="header-withmenu">
-                    <section class="navno-dekorator" id="decorator-header" role="main">${htmlHeader}</section>
+                <div id="${headerId}">
+                    <section class="navno-dekorator" id="decorator-header" role="main">${HtmlHeader}</section>
                 </div>
-                <div class="decorator-dummy-app"></div>
-                <div id="footer-withmenu">
-                    <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
+                <div class="decorator-dummy-app">
+                </div>
+                <div id="${footerId}">
+                    <section class="navno-dekorator" id="decorator-footer" role="main">${HtmlFooter}</section>
                 </div>
             </div>
             <div id="scripts">
-                <div id="decorator-env" data-src="${fileEnv}${parameters}"></div>
+                <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
                 <script 
                     src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js" 
@@ -102,4 +140,7 @@ export const template = (parameters: string) => {
             <div id="webstats-ga-notrack"></div>
         </body>
     </html>`;
+
+    cache.set(envHash, html);
+    return html;
 };

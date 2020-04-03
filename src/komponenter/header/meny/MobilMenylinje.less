@@ -3,7 +3,9 @@
 
 .mobilmeny {
     &__content {
+        min-height: 88px;
         padding: 0.5rem 0.5rem 0.5rem 1rem;
+        border-bottom: 1px solid black;
     }
 
     &__elementer {
@@ -14,6 +16,7 @@
 
     &__venstre-kolonne {
         padding-left: 0.5rem;
+        width: 40px;
     }
 
     &__hoyre-kolonne {
@@ -57,7 +60,16 @@
     }
 
     .login-container {
+        order: 2;
+        margin-right: 3px;
+    }
+
+    .mobilmeny__knapp {
         order: 3;
+        &__frame {
+            order: 3;
+            margin-left: 0.5rem;
+        }
     }
 
     .ekspanderbar__container {

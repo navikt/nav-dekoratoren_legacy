@@ -1,7 +1,7 @@
 import React from 'react';
-import { AppState } from '../../../../../reducer/reducer';
+import { AppState } from '../../../../../reducer/reducers';
 import { useDispatch, useSelector } from 'react-redux';
-import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
+import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import { toggleVarsler } from '../../../../../reducer/dropdown-toggle-duck';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Tekst from '../../../../../tekster/finn-tekst';
@@ -12,7 +12,7 @@ import {
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import './VarslerDropdown.less';
 import { VarselIkon } from '../meny-knapper/ikoner/varsel-ikon/VarselIkon';
-import { VarselVisning } from './varselvisning/VarselVisning';
+import { Varselvisning } from './varselvisning/Varselvisning';
 import { MenuValue } from '../../../../../utils/meny-storage-utils';
 
 const stateSelector = (state: AppState) => ({
@@ -60,7 +60,7 @@ export const VarslerDropdown = () => {
         >
             <VarselIkon isOpen={isOpen} antallUleste={varsler.uleste} />
             <Normaltekst className={'varselbjelle__tekst'}>
-                <Tekst id={'varsler'} />
+                <Tekst id={'varsler-tittel'} />
             </Normaltekst>
         </MenylinjeKnapp>
     );
@@ -72,7 +72,7 @@ export const VarslerDropdown = () => {
             isOpen={isOpen}
             menyKnapp={knapp}
         >
-            <VarselVisning isOpen={isOpen} />
+            <Varselvisning />
         </EkspanderbarMeny>
     );
 };

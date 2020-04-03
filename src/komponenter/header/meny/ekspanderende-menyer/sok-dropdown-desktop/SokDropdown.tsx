@@ -1,7 +1,7 @@
 import React from 'react';
-import { AppState } from '../../../../../reducer/reducer';
+import { AppState } from '../../../../../reducer/reducers';
 import { useDispatch, useSelector } from 'react-redux';
-import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
+import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import Sok from '../../sok/Sok';
 import { toggleSok } from '../../../../../reducer/dropdown-toggle-duck';
 import { Undertittel } from 'nav-frontend-typografi';

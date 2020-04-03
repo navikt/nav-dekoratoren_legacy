@@ -1,10 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
-import { AppState } from '../../../../../reducer/reducer';
+import { AppState } from '../../../../../reducer/reducers';
 import { desktopview, tabletview } from '../../../../../styling-mediaquery';
-import Environment from '../../../../../utils/Environment';
-import './VarselvisningOld.less';
+import './Varselvisning.less';
 import {
     GACategory,
     triggerGaEvent,
@@ -15,7 +14,6 @@ import { LenkeMedGA } from '../../../../LenkeMedGA';
 
 interface OwnProps {
     tabIndex: boolean;
-    togglevarselmeny?: () => void;
 }
 
 interface StateProps {
@@ -109,11 +107,8 @@ class Varselvisning extends React.Component<Props, State> {
     }
 
     componentDidUpdate(prevProps: Readonly<Props>): void {
-        if (this.props.togglevarselmeny) {
+        if (this.props.tabIndex !== prevProps.tabIndex) {
             this.setTabIndex();
-            if (this.props.tabIndex && !prevProps.tabIndex) {
-                this.props.togglevarselmeny();
-            }
         }
     }
 
@@ -131,40 +126,78 @@ class Varselvisning extends React.Component<Props, State> {
     };
 
     render() {
-        const { tabIndex, antallUlesteVarsler, antallVarsler } = this.props;
+        const {
+            tabIndex,
+            antallUlesteVarsler,
+            antallVarsler,
+            language,
+        } = this.props;
         const klassenavn = this.erDesktop()
             ? 'varsler-display-desktop'
             : 'varsler-display-mobil-tablet';
 
         return (
             <div className={klassenavn}>
-                {this.state.parsedVarsler}
-
-                {antallVarsler > 5 && (
-                    <div className="vis-alle-lenke skillelinje-topp">
-                        <LenkeMedGA
-                            href={Environment.API_VARSELINNBOKS_URL}
-                            tabIndex={tabIndex ? 0 : -1}
-                            gaEventArgs={{
-                                category: GACategory.Header,
-                                action: 'varsler/visalle',
-                                label: Environment.API_VARSELINNBOKS_URL,
-                            }}
-                        >
-                            <Tekst id={'varsler-visalle'} />
-                            {antallUlesteVarsler > 0
-                                ? ` (${antallUlesteVarsler} ${finnTekst(
-                                      'varsler-nye',
-                                      this.props.language
-                                  )})`
-                                : ''}
-                        </LenkeMedGA>
+                <div className="media-sm-mobil mobil-meny">
+                    <div className="nye-varsler-mobil-wrapper">
+                        <NyVarsel
+                            antallUlesteVarsler={antallUlesteVarsler}
+                            antallVarsler={antallVarsler}
+                            language={language}
+                            tabIndex={tabIndex}
+                        />
                     </div>
-                )}
+                </div>
+                {this.state.parsedVarsler}
+                <div className="media-tablet-desktop tablet-desktop-meny">
+                    <NyVarsel
+                        antallUlesteVarsler={antallUlesteVarsler}
+                        antallVarsler={antallVarsler}
+                        language={language}
+                        tabIndex={tabIndex}
+                    />
+                </div>
             </div>
         );
     }
 }
+
+const NyVarsel = ({
+    antallVarsler,
+    antallUlesteVarsler,
+    language,
+    tabIndex,
+}: {
+    antallVarsler: number;
+    antallUlesteVarsler: number;
+    language: Language;
+    tabIndex: boolean;
+}) => {
+    const { API_VARSELINNBOKS_URL } = useSelector(
+        (state: AppState) => state.environment
+    );
+    return antallVarsler > 5 ? (
+        <div className="vis-alle-lenke skillelinje-topp">
+            <LenkeMedGA
+                href={API_VARSELINNBOKS_URL}
+                tabIndex={tabIndex ? 0 : -1}
+                gaEventArgs={{
+                    category: GACategory.Header,
+                    action: 'varsler/visalle',
+                    label: API_VARSELINNBOKS_URL,
+                }}
+            >
+                <Tekst id={'varsler-visalle'} />
+                {antallUlesteVarsler > 0
+                    ? ` (${antallUlesteVarsler} ${finnTekst(
+                          'varsler-nye',
+                          language
+                      )})`
+                    : ''}
+            </LenkeMedGA>
+        </div>
+    ) : null;
+};
 
 const mapStateToProps = (state: AppState): StateProps => ({
     varsler: state.varsler.data.varsler,

@@ -62,8 +62,32 @@ const parseLenke = (
 
 export const VarslerParsed = ({ varsler, rowIndex }: Props) => {
     let lenkeIndex = 0;
-    const varslerParsed = htmlReactParser(varsler, {
-        replace: ({ name, attribs, children }) => {
+    const options = {
+        replace: ({ name, attribs, children }: DomElement) => {
+            if (attribs?.class.includes('nav-varsler') && children) {
+                return <div>{domToReact(children, options)}</div>;
+            }
+
+            if (attribs?.class.includes('varsel-liste') && children) {
+                return <ul>{domToReact(children, options)}</ul>;
+            }
+
+            if (attribs?.class.includes('varsel-container') && children) {
+                return (
+                    <li className={'dekorator-varsel-container'}>
+                        {domToReact(children, options)}
+                    </li>
+                );
+            }
+
+            if (attribs?.class === 'varsel' && children) {
+                return (
+                    <section className={'dekorator-varsel'}>
+                        {domToReact(children, options)}
+                    </section>
+                );
+            }
+
             if (attribs?.class.includes('varsel-ikon') && children) {
                 const ikonStr =
                     (children[0] && children[0].data) || ikonDefault;
@@ -79,7 +103,9 @@ export const VarslerParsed = ({ varsler, rowIndex }: Props) => {
                 );
             }
         },
-    });
+    };
+
+    const varslerParsed = htmlReactParser(varsler, options);
 
     return <>{varslerParsed}</>;
 };

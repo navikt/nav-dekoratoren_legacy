@@ -1,16 +1,21 @@
 import React from 'react';
+import SimpleFooter from './FooterSimple';
+import RegularFooter from './FooterRegular';
 import BEMHelper from '../../utils/bem';
-import FooterTopp from './footer-topp/FooterTopp';
-import FooterBottom from './footer-bottom/FooterBottom';
 import './Footer.less';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../reducer/reducers';
 
 const cls = BEMHelper('sitefooter');
-
 const Footer = () => {
+    const { PARAMS } = useSelector((state: AppState) => state.environment);
     return (
-        <footer className={cls.className} id="footer" role="contentinfo">
-            <FooterTopp classname={cls.className} />
-            <FooterBottom classname={cls.className} />
+        <footer className={cls.className} role="contentinfo">
+            {PARAMS.SIMPLE || PARAMS.SIMPLE_FOOTER ? (
+                <SimpleFooter className={cls.className} />
+            ) : (
+                <RegularFooter className={cls.className} />
+            )}
         </footer>
     );
 };

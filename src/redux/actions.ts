@@ -1,6 +1,7 @@
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../reducer/menu-duck';
+import { EnvironmentState } from '../reducer/environment-duck';
 import {
     GraphData,
     KbNaviNode,
@@ -21,6 +22,7 @@ export enum ActionType {
     SETT_VARSLER_LEST_FEILET = 'SETT_VARSLER_LEST_FEILET',
     SETT_VARSLER_LEST_PENDING = 'SETT_VARSLER_LEST_PENDING',
     SETT_LANGUAGE = 'SETT_LANGUAGE',
+    SETT_ENVIRONMENT = 'SETT_ENVIRONMENT',
     PRIVATPERSON = 'PRIVATPERSON',
     ARBEIDSGIVER = 'ARBEIDSGIVER',
     SAMARBEIDSPARTNER = 'SAMARBEIDSPARTNER',
@@ -33,6 +35,9 @@ export enum ActionType {
     SETT_KB_MAIN_GRAPH = 'SETT_KB_MAIN_GRAPH',
     SETT_KB_SUB_GRAPH = 'SETT_KB_SUB_GRAPH',
     SETT_KB_NODE_CURRENT = 'SETT_KB_NODE_CURRENT',
+    TOGGLE_VARSEL = 'TOGGLE_VARSEL',
+    TOGGLE_UNDERMENY = 'TOGGLE_UNDERMENY',
+    TOGGLE_HOVEDOGUNDERMENY = 'TOGGLE_HOVEDOGUNDERMENY',
 }
 
 export interface HentInnloggingsstatusOKAction {
@@ -72,6 +77,11 @@ export interface HentVarslerPENDINGAction {
 
 export interface HentVarslerFEILETAction {
     type: ActionType.HENT_VARSLER_FEILET;
+}
+
+export interface SettEnviroment {
+    type: ActionType.SETT_ENVIRONMENT;
+    data: EnvironmentState;
 }
 
 export interface SettVarslerOKAction {
@@ -115,12 +125,24 @@ export interface ToggleMinsideMeny {
     type: ActionType.TOGGLE_MINSIDE_MENY;
 }
 
+export interface ToggleUnderMeny {
+    type: ActionType.TOGGLE_UNDERMENY;
+}
+
+export interface ToggleHovedOgUnderMeny {
+    type: ActionType.TOGGLE_HOVEDOGUNDERMENY;
+}
+
 export interface ToggleSok {
     type: ActionType.TOGGLE_SOK;
 }
 
 export interface ToggleVarsler {
     type: ActionType.TOGGLE_VARSLER;
+}
+
+export interface ToggleVarsel {
+    type: ActionType.TOGGLE_VARSEL;
 }
 
 export interface ToggleLukkAlle {
@@ -152,6 +174,7 @@ export type Handling =
     | HentVarslerOKAction
     | HentVarslerFEILETAction
     | HentVarslerPENDINGAction
+    | SettEnviroment
     | SettVarslerOKAction
     | SettVarslerLestOKAction
     | SettVarslerLestFEILETAction
@@ -163,6 +186,9 @@ export type Handling =
     | ToggleHovedmeny
     | ToggleMinsideMeny
     | ToggleSok
+    | ToggleVarsel
+    | ToggleUnderMeny
+    | ToggleHovedOgUnderMeny
     | ToggleVarsler
     | ToggleLukkAlle
     | SettKbMainGraph

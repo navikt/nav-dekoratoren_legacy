@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider as ReduxProvider } from 'react-redux';
-import getStore from '../../../../../../redux/store';
+import { createStore } from '../../../../../../redux/store';
 import { dataInitState } from '../../../../../../reducer/menu-duck';
 import { Language } from '../../../../../../reducer/language-duck';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
@@ -10,7 +10,7 @@ import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 
-const store = getStore();
+const store = createStore();
 
 const shallowWithProps = (lang: Language, arbeidsflate: MenuValue) => {
     return mount(

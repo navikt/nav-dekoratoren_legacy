@@ -1,64 +1,54 @@
 import React from 'react';
 import BEMHelper from '../../../../../utils/bem';
-import Lukkundermeny from '../../ekspanderende-menyer/hovedmeny-mobil/meny-dropdown/mobil-innhold/Lukkundermeny';
 import VarselVisning from './Varselvisning';
-import TopSeksjon from '../../ekspanderende-menyer/hovedmeny-mobil/meny-dropdown/mobil-innhold/top-seksjon/Topseksjon';
-import './VarselvisningOld.less';
+import './Varselvisning.less';
+import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
+import Lenke from 'nav-frontend-lenker';
+import Tekst from '../../../../../tekster/finn-tekst';
+import { useDispatch } from 'react-redux';
+import { toggleVarselVisning } from '../../../../../reducer/dropdown-toggle-duck';
+
+import './Varselvisning.less';
 
 interface OwnProps {
     visvarsel: boolean;
     visningmenyClassname: string;
-    togglevarselmeny: () => void;
-    lukkvarselmeny: () => void;
-    lukkmenyene: () => void;
     tabindex: boolean;
-    clicked: boolean;
-    menuIsOpen: boolean;
 }
 
-class VarselvisningMobil extends React.Component<OwnProps> {
-    lukkvarselmenyOgfjernTabindex = () => {
-        this.props.togglevarselmeny();
-        this.props.lukkvarselmeny();
+const VarselvisningMobil = (props: OwnProps) => {
+    const dispatch = useDispatch();
+    const lukkVarsler = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault();
+        dispatch(toggleVarselVisning());
     };
-
-    lukkvarselOgMenyer = () => {
-        this.lukkvarselmenyOgfjernTabindex();
-        this.props.lukkmenyene();
-    };
-
-    componentDidUpdate(prevProps: Readonly<OwnProps>): void {
-        if (!this.props.menuIsOpen && this.props.visvarsel) {
-            this.lukkvarselmenyOgfjernTabindex();
-        }
-    }
-
-    render() {
-        const cls = BEMHelper(this.props.visningmenyClassname);
-
-        return (
-            <section
-                className={cls.element(
-                    'varsel-innhold',
-                    this.props.visvarsel ? 'active' : ''
-                )}
-            >
-                <TopSeksjon
-                    lukkmeny={this.lukkvarselOgMenyer}
-                    tabindex={this.props.tabindex}
-                />
-                <Lukkundermeny
-                    lukkundermeny={this.lukkvarselmenyOgfjernTabindex}
-                    className={cls.className}
-                    tabindex={this.props.tabindex}
-                />
-                <VarselVisning
-                    tabIndex={this.props.tabindex}
-                    togglevarselmeny={this.props.togglevarselmeny}
-                />
-            </section>
-        );
-    }
-}
+    const cls = BEMHelper(props.visningmenyClassname);
+    return (
+        <section
+            className={cls.element(
+                'varsel-innhold',
+                props.visvarsel ? 'active' : ''
+            )}
+        >
+            <div className={cls.element('varsel-wrapper')}>
+                <Lenke
+                    href="#https//nav.no/Lukk/varsler"
+                    onClick={event => lukkVarsler(event)}
+                    tabIndex={props.tabindex ? 0 : -1}
+                >
+                    <Undertittel>
+                        <span className={cls.element('lukk-varsel')}>
+                            <Tekst id="varsler-lukk-knapp" />
+                        </span>
+                    </Undertittel>
+                </Lenke>
+            </div>
+            <Innholdstittel className={cls.element('varseltittel')}>
+                <Tekst id="varsler-tittel" />
+            </Innholdstittel>
+            <VarselVisning tabIndex={props.tabindex} />
+        </section>
+    );
+};
 
 export default VarselvisningMobil;

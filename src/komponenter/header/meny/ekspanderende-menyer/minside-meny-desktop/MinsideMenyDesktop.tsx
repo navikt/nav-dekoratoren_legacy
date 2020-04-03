@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppState } from '../../../../../reducer/reducer';
+import { AppState } from '../../../../../reducer/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     getMinsideMenyNode,
@@ -11,12 +11,11 @@ import {
 } from '../../../../../utils/google-analytics';
 import { toggleMinsideMeny } from '../../../../../reducer/dropdown-toggle-duck';
 import { Status } from '../../../../../api/api';
-import { MenySpinner } from '../meny-spinner/MenySpinner';
-import { EkspanderbarMeny } from '../ekspanderbar-meny/EkspanderbarMeny';
+import MenySpinner from '../meny-spinner/MenySpinner';
+import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import MinsideVisning from './minside-visning/MinsideVisning';
 import './MinsideMenyDesktop.less';
 import { MinsidePersonKnapp } from '../meny-knapper/minside-knapper/MinsidePersonKnapp';
-import Environment from '../../../../../utils/Environment';
 import MinsideArbgiverKnapp from '../meny-knapper/minside-knapper/MinsideArbgiverKnapp';
 
 const stateSelector = (state: AppState) => ({
@@ -32,14 +31,10 @@ export const desktopMinsideMenyClassname = classname;
 export const desktopMinsideKnappId = `${classname}-knapp-id`;
 
 export const MinsideMenyDesktop = () => {
-    const {
-        arbeidsflate,
-        innloggetStatus,
-        isOpen,
-        language,
-        menyPunkter,
-    } = useSelector(stateSelector);
     const dispatch = useDispatch();
+    const { environment } = useSelector((state: AppState) => state);
+    const { arbeidsflate, innloggetStatus } = useSelector(stateSelector);
+    const { isOpen, language, menyPunkter } = useSelector(stateSelector);
 
     if (
         !innloggetStatus.authenticated ||
@@ -54,7 +49,7 @@ export const MinsideMenyDesktop = () => {
             <MinsideArbgiverKnapp
                 classname={classname}
                 id={desktopMinsideKnappId}
-                href={Environment.MINSIDE_ARBEIDSGIVER_URL}
+                href={environment.MINSIDE_ARBEIDSGIVER_URL}
             />
         );
     }

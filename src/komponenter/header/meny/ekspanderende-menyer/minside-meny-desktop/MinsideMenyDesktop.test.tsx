@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { MinsideMenyDesktop } from './MinsideMenyDesktop';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { reducer } from '../../../../../reducer/reducer';
+import { reducers } from '../../../../../reducer/reducers';
 import {
     settArbeidsgiverflate,
     settPersonflate,
@@ -13,7 +13,8 @@ import { ActionType } from '../../../../../redux/actions';
 import { Status } from '../../../../../api/api';
 import mockMenu from '../../../../../server/mock/menu.json';
 
-const store = createStore(reducer);
+const store = createStore(reducers);
+
 store.dispatch({
     type: ActionType.HENT_MENY_OK,
     status: Status.OK,

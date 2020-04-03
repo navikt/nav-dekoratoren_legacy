@@ -32,6 +32,7 @@ const DesktopMenylinje = () => {
                             <VarselinnboksProvider>
                                 <VarslerDropdown />
                             </VarselinnboksProvider>
+
                             <MinsideMenyDesktop />
                             <LoggInnKnapp />
                         </>

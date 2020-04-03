@@ -5,7 +5,6 @@ import {
     HentInnloggingsstatusOKAction,
     HentInnloggingsstatusPENDINGAction,
 } from '../redux/actions';
-import { JSONObject } from 'yet-another-fetch-mock';
 import { Dispatch } from '../redux/dispatch-type';
 import { fetchThenDispatch } from '../api/api-utils';
 import { hentInnloggingsstatusFetch } from '../api/api';
@@ -15,7 +14,7 @@ export interface InnloggingsstatusState extends DataElement {
     data: Data;
 }
 
-export interface Data extends JSONObject {
+export interface Data {
     authenticated: boolean;
     name: string;
     securityLevel: string;
@@ -51,28 +50,35 @@ export default function reducer(
     }
 }
 
-export function hentInnloggingsstatus(): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Data>(() => hentInnloggingsstatusFetch(), {
-        ok: hentInnloggingsstatusOk,
-        feilet: hentnnloggingsstatusFeilet,
-        pending: hentnnloggingsstatusPending,
-    });
+export function hentInnloggingsstatus(
+    APP_BASE_URL: string
+): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<Data>(
+        () => hentInnloggingsstatusFetch(APP_BASE_URL),
+        {
+            ok: hentInnloggingsstatusOk,
+            feilet: hentnnloggingsstatusFeilet,
+            pending: hentnnloggingsstatusPending,
+        }
+    );
 }
 
-function hentInnloggingsstatusOk(data: Data): HentInnloggingsstatusOKAction {
+export function hentInnloggingsstatusOk(
+    data: Data
+): HentInnloggingsstatusOKAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
         data: data,
     };
 }
 
-function hentnnloggingsstatusFeilet(): HentInnloggingsstatusFEILETAction {
+export function hentnnloggingsstatusFeilet(): HentInnloggingsstatusFEILETAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_FEILET,
     };
 }
 
-function hentnnloggingsstatusPending(): HentInnloggingsstatusPENDINGAction {
+export function hentnnloggingsstatusPending(): HentInnloggingsstatusPENDINGAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_PENDING,
     };

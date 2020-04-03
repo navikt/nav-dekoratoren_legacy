@@ -1,37 +1,37 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { Provider as ReduxProvider } from 'react-redux';
-import getStore from '../../../../redux/store';
 import Tekst from '../../../../tekster/finn-tekst';
-import { LoggInnKnapp } from './Logg-inn-knapp';
+import LoggInnKnapp from './Logg-inn-knapp';
+import { createStore } from '../../../../redux/store';
+import { Store } from 'redux';
+import { hentInnloggingsstatusOk } from '../../../../reducer/innloggingsstatus-duck';
 
-const store = getStore();
-
-const mountWithProps = (erInnlogget: boolean) => {
-    return mount(
+const mountWithRedux = (store: Store) =>
+    mount(
         <ReduxProvider store={store}>
-            <LoggInnKnapp erInnlogget={erInnlogget} />
+            <LoggInnKnapp />
         </ReduxProvider>
     );
-};
 
 describe('<LoggInnKnapp />', () => {
+    const store = createStore();
+
     it('Rendrer to <Tekst> komponenter (en for mobil og en for tablet/desktop)', () => {
-        const wrapper = mountWithProps(true);
-        expect(wrapper.find(Tekst)).toHaveLength(2);
+        expect(mountWithRedux(store).find(Tekst)).toHaveLength(1);
     });
 
+    // Logged out
     it('Teksten på knappen er LOGG INN når bruker er uinnlogget', () => {
-        const wrapper = mountWithProps(false);
         expect(
-            wrapper
+            mountWithRedux(store)
                 .find('.knappetekst')
                 .at(0)
                 .text()
         ).toEqual('Logg inn');
 
         expect(
-            wrapper
+            mountWithRedux(store)
                 .find('.login-knapp')
                 .at(0)
                 .text()
@@ -39,15 +39,23 @@ describe('<LoggInnKnapp />', () => {
     });
 
     it('Teksten på knappen er LOGG UT når bruker er innlogget', () => {
-        const wrapper = mountWithProps(true);
+        // Logged in
+        store.dispatch(
+            hentInnloggingsstatusOk({
+                authenticated: true,
+                securityLevel: 'Level4',
+                name: 'Test',
+            })
+        );
+
         expect(
-            wrapper
+            mountWithRedux(store)
                 .find('.knappetekst')
                 .first()
                 .text()
         ).toEqual('Logg ut');
         expect(
-            wrapper
+            mountWithRedux(store)
                 .find('.login-knapp')
                 .first()
                 .text()

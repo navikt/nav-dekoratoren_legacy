@@ -1,10 +1,10 @@
 import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
-import Environment from '../../../../../../../utils/Environment';
 import {
     arbeidsgiverContextLenke,
     personContextLenke,
     samarbeidspartnerContextLenke,
 } from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
+import { EnvironmentState } from '../../../../../../../reducer/environment-duck';
 
 type LenkeData = {
     url: string;
@@ -13,36 +13,36 @@ type LenkeData = {
     key?: MenuValue;
 };
 
-const privatpersonLenker = (): LenkeData[] => [
+const privatpersonLenker = (env: EnvironmentState): LenkeData[] => [
     {
-        url: Environment.DITT_NAV_URL,
+        url: env.DITT_NAV_URL,
         lenkeTekstId: 'person-minside-lenke',
         stikkordId: 'meny-bunnlenke-minside-stikkord',
     },
-    arbeidsgiverContextLenke(),
-    samarbeidspartnerContextLenke(),
+    arbeidsgiverContextLenke(env.XP_BASE_URL),
+    samarbeidspartnerContextLenke(env.XP_BASE_URL),
 ];
 
-const arbeidsgiverLenker = (): LenkeData[] => [
+const arbeidsgiverLenker = (env: EnvironmentState): LenkeData[] => [
     {
-        url: Environment.MINSIDE_ARBEIDSGIVER_URL,
+        url: env.MINSIDE_ARBEIDSGIVER_URL,
         lenkeTekstId: 'arbeidsgiver-minside-lenke',
         stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
     },
-    personContextLenke(),
-    samarbeidspartnerContextLenke(),
+    personContextLenke(env.XP_BASE_URL),
+    samarbeidspartnerContextLenke(env.XP_BASE_URL),
 ];
 
-const samarbeidspartnerLenker = (): LenkeData[] => [
-    personContextLenke(),
-    arbeidsgiverContextLenke(),
+const samarbeidspartnerLenker = (env: EnvironmentState): LenkeData[] => [
+    personContextLenke(env.XP_BASE_URL),
+    arbeidsgiverContextLenke(env.XP_BASE_URL),
 ];
 
 const ikkeValgtLenker = (): LenkeData[] => [];
 
-export const bunnLenker = {
-    [MenuValue.PRIVATPERSON]: privatpersonLenker,
-    [MenuValue.ARBEIDSGIVER]: arbeidsgiverLenker,
-    [MenuValue.SAMARBEIDSPARTNER]: samarbeidspartnerLenker,
-    [MenuValue.IKKEVALGT]: ikkeValgtLenker,
-};
+export const bunnLenker = (env: EnvironmentState) => ({
+    [MenuValue.PRIVATPERSON]: privatpersonLenker(env),
+    [MenuValue.ARBEIDSGIVER]: arbeidsgiverLenker(env),
+    [MenuValue.SAMARBEIDSPARTNER]: samarbeidspartnerLenker(env),
+    [MenuValue.IKKEVALGT]: ikkeValgtLenker(),
+});

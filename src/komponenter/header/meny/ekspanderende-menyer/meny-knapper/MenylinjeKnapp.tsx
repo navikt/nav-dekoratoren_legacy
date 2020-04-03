@@ -11,7 +11,7 @@ interface Props {
     children: React.ReactNode;
 }
 
-export const MenylinjeKnapp = (props: Props) => {
+const MenylinjeKnapp = (props: Props) => {
     const { toggleMenu, isOpen, classname, id, ariaLabel, children } = props;
     const cls = BEMHelper(classname);
 

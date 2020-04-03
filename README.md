@@ -1,6 +1,7 @@
 
 # Nav-dekoratoren ![nav.no logo](./src/ikoner/meny/navlogo.svg) [![CircleCI](https://circleci.com/gh/navikt/nav-dekoratoren.svg?style=svg)](https://circleci.com/gh/navikt/nav-dekoratoren)
                      
+:warning: **OBS! Denne versjonen av header og footer er under arbeid. Kan ikke prodsettes.**
 
 Node.js Express applikasjon med frontend-komponenter i React.<br>
 Appen kjører på NAIS i en docker-container.
@@ -42,6 +43,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | Parameter         | Type                                                    | Default              | Forklaring                                                          |
 | ----------------- |---------------------------------------------------------|----------------------| --------------------------------------------------------------------|
 | context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til valgt context                                     |
+| simple            | boolean                                                 | false                | Forenklet header og footer                                          |
 | redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Redirecter brukeren til app etter innlogging fra dekoratøren.       |
 | level             | Level3 \| Level4                                        | Level4               | Krever innlogging basert på definert sikkerhetsnivå                 |
 

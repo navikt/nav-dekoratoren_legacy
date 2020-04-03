@@ -63,8 +63,10 @@ export default function reducer(
     }
 }
 
-export function fetchMenypunkter(): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<MenyNode[]>(() => hentMenyPunkter(), {
+export function fetchMenypunkter(
+    APP_BASE_URL: string
+): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<MenyNode[]>(() => hentMenyPunkter(APP_BASE_URL), {
         ok: menypunkterSuksess,
         feilet: menypunkterFeilet,
         pending: menypunkterPending,
