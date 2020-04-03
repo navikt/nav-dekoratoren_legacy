@@ -1,6 +1,6 @@
 import React from 'react';
 import { ledetekster } from './ledetekster';
-import { AppState } from '../reducer/reducer';
+import { AppState } from '../reducer/reducers';
 import { connect } from 'react-redux';
 import {
     Language,

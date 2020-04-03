@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../reducer/reducer';
+import { AppState } from '../../../reducer/reducers';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import BEMHelper from '../../../utils/bem';
 import { finnArbeidsflate } from '../../../reducer/arbeidsflate-duck';
@@ -28,6 +28,7 @@ const stateProps = (state: AppState) => ({
 
 const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
     const dispatch = useDispatch();
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const { arbeidsflate } = useSelector(stateProps);
     const cls = BEMHelper('mobil-arbeidsflate-valg');
     const oppdatereArbeidsflateValg = (
@@ -41,7 +42,7 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
 
     return (
         <ul className={cls.className}>
-            {arbeidsflateLenker().map(
+            {arbeidsflateLenker(XP_BASE_URL).map(
                 (lenke: {
                     url: string;
                     lenkeTekstId: string;

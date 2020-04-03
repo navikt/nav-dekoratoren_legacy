@@ -4,14 +4,18 @@ import { Provider as ReduxProvider } from 'react-redux';
 import LanguageProvider from '../provider/Language-provider';
 import Header from '../komponenter/header/Header';
 import Footer from '../komponenter/footer/Footer';
-import getStore from '../redux/store';
 import { Request } from 'express';
-import Environment from '../utils/Environment';
-import dotenv from 'dotenv';
-const env = dotenv.config();
+import { clientEnv } from './utils';
+import hash from 'object-hash';
 
-// Set server-side environment
-Environment.settEnv(env.parsed || process.env);
+import { createStore } from '../redux/store';
+import dotenv from 'dotenv';
+import NodeCache from 'node-cache';
+
+// Local environment - import .env
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 
 // Favicons
 const fileFavicon = require('../../src/ikoner/favicon/favicon.ico');
@@ -21,27 +25,28 @@ const fileFavicon32x32 = require('../../src/ikoner/favicon/favicon-32x32.png');
 const fileMaskIcon = require('../../src/ikoner/favicon/safari-pinned-tab.svg');
 
 // Resources
-const store = getStore();
 const baseUrl = `${process.env.APP_BASE_URL}`;
 const fileEnv = `${process.env.APP_BASE_URL}/env`;
 const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
 const fileScript = `${process.env.APP_BASE_URL}/client.js`;
 
-const htmlHeader = ReactDOMServer.renderToString(
-    <ReduxProvider store={store}>
-        <LanguageProvider>
-            <Header />
-        </LanguageProvider>
-    </ReduxProvider>
-);
-
-const htmlFooter = ReactDOMServer.renderToString(
-    <ReduxProvider store={store}>
-        <Footer />
-    </ReduxProvider>
-);
+const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
 export const template = (req: Request) => {
+    // Set environment based on request params
+    const env = clientEnv(req);
+
+    const envHash = hash({ env });
+    const cachedHtml = cache.get(envHash);
+
+    // Retreive from cache
+    if (cachedHtml) {
+        return cachedHtml;
+    }
+
+    // Create store based on request params
+    const store = createStore(env);
+
     // Fetch params and forward to client
     const params = req.query;
     const paramsAsString = Object.keys(req.query).length
@@ -49,11 +54,26 @@ export const template = (req: Request) => {
         : ``;
 
     // Backward compatibility
-    // for stripped header and footer
+    // for simple header and footer
     const headerId = params.header ? `header` : `header-withmenu`;
     const footerId = params.footer ? `footer` : `footer-withmenu`;
 
-    return `
+    // Render SSR
+    const HtmlHeader = ReactDOMServer.renderToString(
+        <ReduxProvider store={store}>
+            <LanguageProvider>
+                <Header />
+            </LanguageProvider>
+        </ReduxProvider>
+    );
+
+    const HtmlFooter = ReactDOMServer.renderToString(
+        <ReduxProvider store={store}>
+            <Footer />
+        </ReduxProvider>
+    );
+
+    const html = `
     <!DOCTYPE html>
     <html lang="no">
         <head>
@@ -99,12 +119,12 @@ export const template = (req: Request) => {
         <body>
             <div class="decorator-dev-container">
                 <div id="${headerId}">
-                    <section class="navno-dekorator" id="decorator-header" role="main">${htmlHeader}</section>
+                    <section class="navno-dekorator" id="decorator-header" role="main">${HtmlHeader}</section>
                 </div>
                 <div class="decorator-dummy-app">
                 </div>
                 <div id="${footerId}">
-                    <section class="navno-dekorator" id="decorator-footer" role="main">${htmlFooter}</section>
+                    <section class="navno-dekorator" id="decorator-footer" role="main">${HtmlFooter}</section>
                 </div>
             </div>
             <div id="scripts">
@@ -120,4 +140,7 @@ export const template = (req: Request) => {
             <div id="webstats-ga-notrack"></div>
         </body>
     </html>`;
+
+    cache.set(envHash, html);
+    return html;
 };

@@ -29,9 +29,12 @@ export const spraaklenker: Spraaklenke[] = [
     },
 ];
 
-export const getSpraaklenker = (language: Language): Spraaklenke[] => {
+export const getSpraaklenker = (
+    XP_BASE_URL: string,
+    language: Language
+): Spraaklenke[] => {
     const lenker = spraaklenker.map(lenke => {
-        lenke.url = genererUrl(lenke.url);
+        lenke.url = genererUrl(XP_BASE_URL, lenke.url);
         return lenke;
     });
 

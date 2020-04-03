@@ -2,12 +2,12 @@ import React from 'react';
 import Tekst from '../../tekster/finn-tekst';
 import { GACategory } from '../../utils/google-analytics';
 import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
-import {
-    getArbeidsflateContext,
-    settArbeidsflate,
-} from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
+import { settArbeidsflate } from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
+import { getArbeidsflateContext } from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
 import { MenuValue } from '../../utils/meny-storage-utils';
 import './NavLogoFooter.less';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../reducer/reducers';
 
 const NavLogoRod = ({
     width,
@@ -18,7 +18,9 @@ const NavLogoRod = ({
     height?: string;
     classname?: string;
 }) => {
-    const context = getArbeidsflateContext(MenuValue.PRIVATPERSON);
+    const dispatch = useDispatch();
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
+    const context = getArbeidsflateContext(XP_BASE_URL, MenuValue.PRIVATPERSON);
 
     return (
         <div className="sitefooter__logo">
@@ -28,7 +30,7 @@ const NavLogoRod = ({
                 gaEventArgs={{ category: GACategory.Footer, action: 'navlogo' }}
                 onClick={event => {
                     event.preventDefault();
-                    settArbeidsflate(context);
+                    settArbeidsflate(dispatch, context);
                 }}
             >
                 <svg

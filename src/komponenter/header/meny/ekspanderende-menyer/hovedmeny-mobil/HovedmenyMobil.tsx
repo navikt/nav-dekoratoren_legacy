@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppState } from '../../../../../reducer/reducer';
+import { AppState } from '../../../../../reducer/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { Status } from '../../../../../api/api';
 import {

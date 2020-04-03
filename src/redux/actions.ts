@@ -1,6 +1,7 @@
 import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
 import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../reducer/menu-duck';
+import { EnvironmentState } from '../reducer/environment-duck';
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',
@@ -17,6 +18,7 @@ export enum ActionType {
     SETT_VARSLER_LEST_FEILET = 'SETT_VARSLER_LEST_FEILET',
     SETT_VARSLER_LEST_PENDING = 'SETT_VARSLER_LEST_PENDING',
     SETT_LANGUAGE = 'SETT_LANGUAGE',
+    SETT_ENVIRONMENT = 'SETT_ENVIRONMENT',
     PRIVATPERSON = 'PRIVATPERSON',
     ARBEIDSGIVER = 'ARBEIDSGIVER',
     SAMARBEIDSPARTNER = 'SAMARBEIDSPARTNER',
@@ -68,6 +70,11 @@ export interface HentVarslerPENDINGAction {
 
 export interface HentVarslerFEILETAction {
     type: ActionType.HENT_VARSLER_FEILET;
+}
+
+export interface SettEnviroment {
+    type: ActionType.SETT_ENVIRONMENT;
+    data: EnvironmentState;
 }
 
 export interface SettVarslerOKAction {
@@ -145,6 +152,7 @@ export type Handling =
     | HentVarslerOKAction
     | HentVarslerFEILETAction
     | HentVarslerPENDINGAction
+    | SettEnviroment
     | SettVarslerOKAction
     | SettVarslerLestOKAction
     | SettVarslerLestFEILETAction

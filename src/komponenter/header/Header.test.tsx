@@ -5,7 +5,7 @@ import { Header } from './Header';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import { createStore, Store } from 'redux';
 import { Provider } from 'react-redux';
-import { reducer } from '../../reducer/reducer';
+import { reducers } from '../../reducer/reducers';
 
 const mountWithRedux = (store: Store) =>
     mount(
@@ -14,7 +14,7 @@ const mountWithRedux = (store: Store) =>
         </Provider>
     );
 
-const store = createStore(reducer);
+const store = createStore(reducers);
 
 describe('<Header>', () => {
     it('Skal rendre <Arbeidsflatemeny> komponent hvis språk er norsk', () => {

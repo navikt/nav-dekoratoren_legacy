@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppState } from '../../../../../reducer/reducer';
+import { AppState } from '../../../../../reducer/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     getMinsideMenyNode,
@@ -16,7 +16,6 @@ import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import MinsideDropdown from './minside-dropdown/MinsideDropdown';
 import './MinsideMenyDesktop.less';
 import { MinsidePersonKnapp } from '../meny-knapper/minside-knapper/MinsidePersonKnapp';
-import Environment from '../../../../../utils/Environment';
 import MinsideArbgiverKnapp from '../meny-knapper/minside-knapper/MinsideArbgiverKnapp';
 
 const stateSelector = (state: AppState) => ({
@@ -31,14 +30,10 @@ const classname = 'desktop-minside-meny';
 export const desktopMinsideKnappId = `${classname}-knapp-id`;
 
 export const MinsideMenyDesktop = () => {
-    const {
-        arbeidsflate,
-        innloggetStatus,
-        isOpen,
-        language,
-        menyPunkter,
-    } = useSelector(stateSelector);
     const dispatch = useDispatch();
+    const { environment } = useSelector((state: AppState) => state);
+    const { arbeidsflate, innloggetStatus } = useSelector(stateSelector);
+    const { isOpen, language, menyPunkter } = useSelector(stateSelector);
 
     if (
         !innloggetStatus.authenticated ||
@@ -53,7 +48,7 @@ export const MinsideMenyDesktop = () => {
             <MinsideArbgiverKnapp
                 classname={classname}
                 id={desktopMinsideKnappId}
-                href={Environment.MINSIDE_ARBEIDSGIVER_URL}
+                href={environment.MINSIDE_ARBEIDSGIVER_URL}
             />
         );
     }

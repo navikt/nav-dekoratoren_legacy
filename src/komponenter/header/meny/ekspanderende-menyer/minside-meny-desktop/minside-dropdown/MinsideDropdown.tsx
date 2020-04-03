@@ -8,11 +8,12 @@ import KbNav, {
     NaviNode,
 } from '../../../../../../utils/keyboard-navigation/kb-navigation';
 import { LenkeMedGA } from '../../../../../LenkeMedGA';
-import Environment from '../../../../../../utils/Environment';
 import { GACategory } from '../../../../../../utils/google-analytics';
 import Tekst from '../../../../../../tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { desktopMinsideKnappId } from '../MinsideMenyDesktop';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../../../../reducer/reducers';
 
 type Props = {
     classname: string;
@@ -23,6 +24,7 @@ type Props = {
 const colSetup = [1, 1, 3];
 
 export const MinsideDropdown = (props: Props) => {
+    const { environment } = useSelector((state: AppState) => state);
     const { classname, isOpen, menyLenker } = props;
 
     const cls = BEMHelper(classname);
@@ -88,7 +90,7 @@ export const MinsideDropdown = (props: Props) => {
         <>
             <div className={cls.element('topp-seksjon')}>
                 <LenkeMedGA
-                    href={Environment.DITT_NAV_URL}
+                    href={environment.DITT_NAV_URL}
                     id={KbNav.getKbId(NaviGroup.MinsideMeny, {
                         col: 0,
                         row: 1,
@@ -97,7 +99,7 @@ export const MinsideDropdown = (props: Props) => {
                     gaEventArgs={{
                         category: GACategory.Header,
                         action: 'dittnav',
-                        label: Environment.DITT_NAV_URL,
+                        label: environment.DITT_NAV_URL,
                     }}
                 >
                     <Tekst id={'til-forside'} />

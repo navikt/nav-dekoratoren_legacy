@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import BEMHelper from '../../../utils/bem';
 import InnloggingsstatusProvider from '../../../provider/Innloggingsstatus-provider';
 import NavLogoRod from '../../../ikoner/meny/NavLogoRod';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import './MobilMenylinje.less';
-import { verifyWindowObj } from '../../../utils/Environment';
 import { Language } from '../../../reducer/language-duck';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../reducer/reducer';
+import { AppState } from '../../../reducer/reducers';
 import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
 import Varselbjelle from './varsel/Varselbjelle';
 import { toggleVarselVisning } from '../../../reducer/dropdown-toggle-duck';

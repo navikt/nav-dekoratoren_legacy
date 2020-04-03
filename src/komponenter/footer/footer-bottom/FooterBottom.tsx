@@ -7,6 +7,8 @@ import { LenkeMedGA } from '../../LenkeMedGA';
 import Tekst from '../../../tekster/finn-tekst';
 import { FooterLenke, lenkerBunn } from '../Footer-lenker';
 import NavLogoFooter from '../../../ikoner/meny/NavLogoFooter';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../reducer/reducers';
 
 interface Props {
     classname: string;
@@ -14,10 +16,11 @@ interface Props {
 
 const FooterBottom = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const [lenker, setLenker] = useState<FooterLenke[]>(lenkerBunn);
 
     useEffect(() => {
-        setLenker(genererLenkerTilUrl(lenkerBunn));
+        setLenker(genererLenkerTilUrl(XP_BASE_URL, lenkerBunn));
     }, []);
 
     return (

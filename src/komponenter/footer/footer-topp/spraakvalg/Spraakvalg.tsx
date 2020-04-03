@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../../reducer/reducer';
+import { AppState } from '../../../../reducer/reducers';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { GACategory } from '../../../../utils/google-analytics';
 import { LenkeMedGA } from '../../../LenkeMedGA';
@@ -14,6 +14,7 @@ import {
 
 const Spraakvalg = () => {
     const language = useSelector((state: AppState) => state.language.language);
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const [erDekoratoren, setErDekoratoren] = useState<boolean>(false);
     const [spraklenker, setSpraklenker] = useState<Spraaklenke[]>([
         spraaklenker[1],
@@ -22,7 +23,7 @@ const Spraakvalg = () => {
 
     useEffect(() => {
         setErDekoratoren(erNavDekoratoren());
-        setSpraklenker(getSpraaklenker(language));
+        setSpraklenker(getSpraaklenker(XP_BASE_URL, language));
     }, []);
 
     return (

@@ -7,6 +7,8 @@ import Lukkundermeny from './Lukkundermeny';
 import Listelement from './Listelement';
 import { genererUrl } from '../../../../../../../utils/Environment';
 import { Systemtittel } from 'nav-frontend-typografi';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../../../../../reducer/reducers';
 
 interface Props {
     className: string;
@@ -17,18 +19,16 @@ interface Props {
 }
 
 const Undermeny = (props: Props) => {
-    const {
-        className,
-        undermenyIsOpen,
-        setFocusNode,
-        tabindex,
-        lenker,
-    } = props;
+    const { setFocusNode, tabindex, lenker } = props;
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
+    const { className, undermenyIsOpen } = props;
     const menyClass = BEMHelper(className);
+
     const arbeidsflate = lenker.displayName
         .charAt(0)
         .toUpperCase()
         .concat(lenker.displayName.slice(1).toLowerCase());
+
     return (
         <section
             className={menyClass.element(
@@ -50,7 +50,7 @@ const Undermeny = (props: Props) => {
                 {lenker.children.map((lenke, index: number) => {
                     return (
                         <Lenke
-                            href={genererUrl(lenke.path)}
+                            href={genererUrl(XP_BASE_URL, lenke.path)}
                             key={index}
                             tabIndex={tabindex ? 0 : -1}
                         >

@@ -1,6 +1,7 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'isomorphic-fetch';
+require('console-stamp')(console, '[HH:MM:ss.l]');
 import NodeCache from 'node-cache';
 import request from 'request';
 import express, { Response } from 'express';
@@ -22,6 +23,7 @@ const PORT = 8088;
 
 // Mock
 import mockMenu from './mock/menu.json';
+import { clientEnv } from './utils';
 
 // Cache setup
 const mainCacheKey = 'navno-menu';
@@ -54,28 +56,7 @@ app.get(pathsForTemplate, (req, res) => {
 });
 
 app.get(`${appBasePath}/env`, (req, res) => {
-    // Client environment
-    // Obs! Don't expose secrets
-    res.send({
-        ...{
-            XP_BASE_URL: process.env.XP_BASE_URL,
-            APP_BASE_URL: process.env.APP_BASE_URL,
-            API_VARSELINNBOKS_URL: process.env.API_VARSELINNBOKS_URL,
-            MINSIDE_ARBEIDSGIVER_URL: process.env.MINSIDE_ARBEIDSGIVER_URL,
-            DITT_NAV_URL: process.env.DITT_NAV_URL,
-            LOGIN_URL: process.env.LOGIN_URL,
-            LOGOUT_URL: process.env.LOGOUT_URL,
-            ...(req.query && {
-                PARAMS: {
-                    LANGAUGE: req.query.language || 'nb',
-                    CONTEXT: (req.query.context || 'ikkevalgt').toUpperCase(),
-                    STRIPPED: req.query.header || req.query.stripped || false,
-                    REDIRECT_TO_APP: req.query.redirectToApp || false,
-                    LEVEL: req.query.level || 'Level3',
-                },
-            }),
-        },
-    });
+    res.send(clientEnv(req));
 });
 
 app.get(`${appBasePath}/api/meny`, (req, res) =>

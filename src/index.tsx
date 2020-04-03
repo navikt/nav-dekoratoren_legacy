@@ -4,7 +4,7 @@ import 'isomorphic-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
-import getStore from './redux/store';
+import { createStore } from './redux/store';
 import { erDev, verifyWindowObj } from './utils/Environment';
 import Footer from './komponenter/footer/Footer';
 import { fetchEnv } from './utils/Environment';
@@ -14,7 +14,6 @@ import Header from './komponenter/header/Header';
 import * as es6promise from 'es6-promise';
 import './index.less';
 
-const store = getStore();
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
 if (verifyWindowObj()) {
@@ -30,7 +29,8 @@ if (erDev) {
 const run = () => {
     initGA();
     fetchEnv()
-        .then(() => {
+        .then(environment => {
+            const store = createStore(environment);
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
                     <LanguageProvider>
