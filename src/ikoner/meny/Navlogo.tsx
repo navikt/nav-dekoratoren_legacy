@@ -40,8 +40,8 @@ const Navlogo = ({
         >
             <svg
                 className="modal-logo-svg"
-                width={width ? width : '73px'}
-                height={height ? height : '46px'}
+                width={width}
+                height={height}
                 viewBox="0 0 73 46"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"

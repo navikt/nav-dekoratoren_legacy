@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { AppState } from '../../../../reducer/reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../../../reducer/reducers';
 import { Undertittel } from 'nav-frontend-typografi';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
 import { GACategory } from '../../../../utils/google-analytics';
@@ -29,14 +29,21 @@ const stateSelector = (state: AppState) => ({
 });
 
 const FooterArbeidsflatevalg = () => {
+    const dispatch = useDispatch();
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const { arbeidsflate, language } = useSelector(stateSelector);
 
     const [arbeidsflatevalgLenker, setArbeidsflatevalgLenker] = useState<
         ArbeidsflateLenke[]
-    >([arbeidsgiverContextLenke(), samarbeidspartnerContextLenke()]);
+    >([
+        arbeidsgiverContextLenke(XP_BASE_URL),
+        samarbeidspartnerContextLenke(XP_BASE_URL),
+    ]);
 
     const finnArbeidsflateLenker = () =>
-        arbeidsflateLenker().filter(lenke => lenke.key !== arbeidsflate);
+        arbeidsflateLenker(XP_BASE_URL).filter(
+            lenke => lenke.key !== arbeidsflate
+        );
 
     useEffect(() => {
         setArbeidsflatevalgLenker(finnArbeidsflateLenker);
@@ -58,7 +65,10 @@ const FooterArbeidsflatevalg = () => {
                                             href={lenke.url}
                                             onClick={event => {
                                                 event.preventDefault();
-                                                settArbeidsflate(lenke);
+                                                settArbeidsflate(
+                                                    dispatch,
+                                                    lenke
+                                                );
                                                 triggerGaEvent(gaEventArgs);
                                             }}
                                             onAuxClick={event =>

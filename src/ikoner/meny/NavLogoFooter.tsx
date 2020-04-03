@@ -35,8 +35,8 @@ const NavLogoRod = ({
             >
                 <svg
                     className={classname}
-                    width={width ? width : '269px'}
-                    height={height ? height : '169px'}
+                    width={width}
+                    height={height}
                     viewBox="0 0 269 169"
                     version="1.1"
                     xmlns="http://www.w3.org/2000/svg"
