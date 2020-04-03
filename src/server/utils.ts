@@ -15,7 +15,9 @@ export const clientEnv = (req: Request): EnvironmentState => ({
         PARAMS: {
             LANGUAGE: req.query.language || 'nb',
             CONTEXT: (req.query.context || 'ikkevalgt').toUpperCase(),
-            SIMPLE: req.query.header || req.query.simple || false,
+            SIMPLE: req.query.simple || false,
+            SIMPLE_HEADER: req.query.header || false,
+            SIMPLE_FOOTER: req.query.footer || false,
             REDIRECT_TO_APP: req.query.redirectToApp || false,
             LEVEL: req.query.level || 'Level4',
         },

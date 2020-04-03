@@ -15,6 +15,8 @@ export interface EnvironmentState {
         LANGUAGE: string;
         CONTEXT: MenuValue;
         SIMPLE: boolean;
+        SIMPLE_HEADER: boolean;
+        SIMPLE_FOOTER: boolean;
         REDIRECT_TO_APP: boolean;
         LEVEL: string;
     };
@@ -34,6 +36,8 @@ export const initialState: EnvironmentState = {
         LANGUAGE: 'string',
         CONTEXT: MenuValue.IKKEVALGT,
         SIMPLE: false,
+        SIMPLE_HEADER: false,
+        SIMPLE_FOOTER: false,
         REDIRECT_TO_APP: false,
         LEVEL: 'string',
     },

@@ -35,6 +35,7 @@ const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 export const template = (req: Request) => {
     // Set environment based on request params
     const env = clientEnv(req);
+
     const envHash = hash({ env });
     const cachedHtml = cache.get(envHash);
 

@@ -28,7 +28,11 @@ export const Header = () => {
                 <Skiplinks />
             </div>
             <header className="siteheader">
-                {PARAMS.SIMPLE ? <SimpleHeader /> : <RegularHeader />}
+                {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
+                    <SimpleHeader />
+                ) : (
+                    <RegularHeader />
+                )}
             </header>
             <MenyBakgrunn />
         </Fragment>
