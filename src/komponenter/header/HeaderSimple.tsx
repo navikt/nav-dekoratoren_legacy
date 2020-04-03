@@ -12,7 +12,7 @@ export const SimpleHeader = () => {
     return (
         <div className={cls.className}>
             <div className={cls.element('content')}>
-                <Navlogo />
+                <Navlogo className={cls.element('logo')} />
                 <InnloggingsstatusProvider>
                     <div className={cls.element('right')}>
                         <Navn />
