@@ -53,7 +53,7 @@ const footerlenker: FooterLenke[] = [
         seksjon: FooterSeksjon.HOYRE,
     },
     {
-        lenketekst: 'Personvern og informasjonskapsler (cookies) på nav.no',
+        lenketekst: 'Personvern og informasjonskapsler på nav.no',
         url:
             '/no/nav-og-samfunn/om-nav/personvern-i-arbeids-og-velferdsetaten/personvern-og-sikkerhet-pa-nav.no',
         seksjon: FooterSeksjon.BUNN,
