@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../../reducer/reducers';
+import { AppState } from '../../../../../reducer/reducers';
 import { Undertittel } from 'nav-frontend-typografi';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
-import { GACategory } from '../../../../utils/google-analytics';
+import { GACategory } from '../../../../../utils/google-analytics';
 import {
     GAEventArgs,
     triggerGaEvent,
-} from '../../../../utils/google-analytics';
-import { Language } from '../../../../reducer/language-duck';
-import Tekst from '../../../../tekster/finn-tekst';
+} from '../../../../../utils/google-analytics';
+import { Language } from '../../../../../reducer/language-duck';
+import Tekst from '../../../../../tekster/finn-tekst';
 import {
     ArbeidsflateLenke,
     arbeidsflateLenker,
     arbeidsgiverContextLenke,
     samarbeidspartnerContextLenke,
     settArbeidsflate,
-} from '../../../header/arbeidsflatemeny/arbeidsflate-lenker';
+} from '../../../../header/arbeidsflatemeny/arbeidsflate-lenker';
 
 const gaEventArgs: GAEventArgs = {
     category: GACategory.Header,

@@ -1,17 +1,17 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import './FooterSimple.less';
-import './Footer';
-import BEMHelper from '../../utils/bem';
+import '../Footer';
+import BEMHelper from '../../../utils/bem';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { LenkeMedGA } from '../LenkeMedGA';
-import { GACategory } from '../../utils/google-analytics';
-import { FooterLenke, lenkerBunn } from './Footer-lenker';
-import { genererLenkerTilUrl } from '../../utils/Environment';
+import { LenkeMedGA } from '../../LenkeMedGA';
+import { GACategory } from '../../../utils/google-analytics';
+import { FooterLenke, lenkerBunn } from '../Footer-lenker';
+import { genererLenkerTilUrl } from '../../../utils/Environment';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../reducer/reducers';
+import { AppState } from '../../../reducer/reducers';
 import Lenke from 'nav-frontend-lenker';
-import Tekst from '../../tekster/finn-tekst';
-import DelSkjermModal from './footer-topp/del-skjerm-modal/DelSkjermModal';
+import Tekst from '../../../tekster/finn-tekst';
+import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
 
 const cls = BEMHelper('simple-footer');
 

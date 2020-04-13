@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { genererLenkerTilUrl } from '../../../utils/Environment';
-import BEMHelper from '../../../utils/bem';
-import { GACategory } from '../../../utils/google-analytics';
-import { LenkeMedGA } from '../../LenkeMedGA';
-import Tekst from '../../../tekster/finn-tekst';
-import { FooterLenke, lenkerBunn } from '../Footer-lenker';
-import NavLogoFooter from '../../../ikoner/meny/NavLogoFooter';
-import { AppState } from '../../../reducer/reducers';
+import { genererLenkerTilUrl } from '../../../../utils/Environment';
+import BEMHelper from '../../../../utils/bem';
+import { GACategory } from '../../../../utils/google-analytics';
+import { LenkeMedGA } from '../../../LenkeMedGA';
+import Tekst from '../../../../tekster/finn-tekst';
+import { FooterLenke, lenkerBunn } from '../../Footer-lenker';
+import NavLogoFooter from '../../../../ikoner/meny/NavLogoFooter';
+import { AppState } from '../../../../reducer/reducers';
 
 import './footerBottom.less';
 
