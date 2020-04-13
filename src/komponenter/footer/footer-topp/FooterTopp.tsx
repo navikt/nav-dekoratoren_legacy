@@ -14,12 +14,10 @@ import PilOppHvit from '../../../ikoner/meny/PilOppHvit';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducers';
 
-interface Props {
-    classname: string;
-}
+import './footerTopp.less';
 
-const FooterTopp = ({ classname }: Props) => {
-    const cls = BEMHelper(classname);
+const FooterTopp = () => {
+    const cls = BEMHelper('menylinje-topp');
     const [venstrelenker, setVenstrelenker] = useState<FooterLenke[]>(
         lenkerVenstre
     );
@@ -56,7 +54,7 @@ const FooterTopp = ({ classname }: Props) => {
         });
 
     return (
-        <section className={cls.element('menylinje-topp')}>
+        <section className={cls.className}>
             <div className="topp-kolonner">
                 <div className="menylenker-seksjon til-toppen">
                     <div className="til-toppen-innhold">

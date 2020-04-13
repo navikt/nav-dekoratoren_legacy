@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
+
 import { genererLenkerTilUrl } from '../../../utils/Environment';
 import BEMHelper from '../../../utils/bem';
 import { GACategory } from '../../../utils/google-analytics';
@@ -7,15 +9,13 @@ import { LenkeMedGA } from '../../LenkeMedGA';
 import Tekst from '../../../tekster/finn-tekst';
 import { FooterLenke, lenkerBunn } from '../Footer-lenker';
 import NavLogoFooter from '../../../ikoner/meny/NavLogoFooter';
-import { useSelector } from 'react-redux';
 import { AppState } from '../../../reducer/reducers';
 
-interface Props {
-    classname: string;
-}
+import './footerBottom.less';
 
-const FooterBottom = ({ classname }: Props) => {
-    const cls = BEMHelper(classname);
+
+const FooterBottom = () => {
+    const cls = BEMHelper("menylinje-bottom");
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const [lenker, setLenker] = useState<FooterLenke[]>(lenkerBunn);
 
@@ -24,7 +24,7 @@ const FooterBottom = ({ classname }: Props) => {
     }, []);
 
     return (
-        <section className={cls.element('menylinje-bottom')}>
+        <section className={cls.className}>
             <div className="bottom-innhold">
                 <div className="bottom-logo">
                     <NavLogoFooter

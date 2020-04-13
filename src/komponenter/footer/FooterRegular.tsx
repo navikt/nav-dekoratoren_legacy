@@ -1,17 +1,15 @@
 import React, { Fragment } from 'react';
 import FooterTopp from './footer-topp/FooterTopp';
 import FooterBottom from './footer-bottom/FooterBottom';
+
 import './Footer.less';
 
-interface Props {
-    className: string;
-}
 
-const RegularFooter = ({ className }: Props) => {
+const RegularFooter = () => {
     return (
         <Fragment>
-            <FooterTopp classname={className} />
-            <FooterBottom classname={className} />
+            <FooterTopp />
+            <FooterBottom />
         </Fragment>
     );
 };
