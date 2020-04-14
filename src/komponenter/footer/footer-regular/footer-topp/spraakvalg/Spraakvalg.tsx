@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../../reducer/reducers';
+import { AppState } from '../../../../../reducer/reducers';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { GACategory } from '../../../../utils/google-analytics';
-import { LenkeMedGA } from '../../../LenkeMedGA';
-import Tekst from '../../../../tekster/finn-tekst';
-import { erNavDekoratoren } from '../../../../utils/Environment';
+import { GACategory } from '../../../../../utils/google-analytics';
+import { LenkeMedGA } from '../../../../LenkeMedGA';
+import Tekst from '../../../../../tekster/finn-tekst';
+import { erNavDekoratoren } from '../../../../../utils/Environment';
 import {
     getSpraaklenker,
     Spraaklenke,
