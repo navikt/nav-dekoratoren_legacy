@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import Spinner from 'nav-frontend-spinner';
 import { Status, DataElement, DatalasterProps } from './api';
 
 const harStatus = (dataElement: DataElement, status: Status): boolean => {

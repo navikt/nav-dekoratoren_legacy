@@ -1,15 +1,15 @@
 import React, { createRef, ReactNode } from 'react';
-import { AppState } from 'reducer/reducers';
+import { AppState } from 'reducers/reducers';
 import { Dispatch } from 'state/dispatch-type';
 import { connect } from 'react-redux';
-import { settVarslerSomLest } from 'reducer/varsel-lest-duck';
+import { settVarslerSomLest } from 'reducers/varsel-lest-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import MenylinjeKnapp from '../ekspanderende-menyer/meny-knapper/MenylinjeKnapp';
 import { VarselIkon } from '../ekspanderende-menyer/meny-knapper/ikoner/varsel-ikon/VarselIkon';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
-import { toggleVarselVisning } from 'reducer/dropdown-toggle-duck';
+import { toggleVarselVisning } from 'reducers/dropdown-toggle-duck';
 import VarselKnappMobil from './varselknapp/VarselKnappMobil';
 import './Varselbjelle.less';
 

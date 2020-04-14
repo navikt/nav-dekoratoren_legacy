@@ -1,4 +1,4 @@
-import { MenyNode } from 'reducer/menu-duck';
+import { MenyNode } from 'reducers/menu-duck';
 import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';

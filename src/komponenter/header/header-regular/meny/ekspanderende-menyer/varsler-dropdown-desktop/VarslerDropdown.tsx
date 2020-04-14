@@ -1,8 +1,8 @@
 import React from 'react';
-import { AppState } from 'reducer/reducers';
+import { AppState } from 'reducers/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
-import { toggleVarsler } from 'reducer/dropdown-toggle-duck';
+import { toggleVarsler } from 'reducers/dropdown-toggle-duck';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';

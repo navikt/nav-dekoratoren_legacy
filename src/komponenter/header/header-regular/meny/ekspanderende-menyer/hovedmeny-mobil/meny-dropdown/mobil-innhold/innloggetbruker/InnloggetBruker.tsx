@@ -1,7 +1,7 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
-import { AppState } from 'reducer/reducers';
+import { AppState } from 'reducers/reducers';
 import { useSelector } from 'react-redux';
 import { Undertittel, Ingress } from 'nav-frontend-typografi';
 import LoggutIkonMobil from 'ikoner/mobilmeny/LoggutIkonMobil';

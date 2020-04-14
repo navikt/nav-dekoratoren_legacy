@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider as ReduxProvider } from 'react-redux';
-import LanguageProvider from '../provider/Language-provider';
+import LanguageProvider from '../providers/Language';
 import Header from '../komponenter/header/Header';
 import Footer from '../komponenter/footer/Footer';
 import { Request } from 'express';

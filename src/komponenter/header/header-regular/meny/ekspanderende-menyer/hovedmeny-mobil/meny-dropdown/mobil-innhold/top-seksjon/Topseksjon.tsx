@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navlogo from 'ikoner/meny/Navlogo';
 import BEMHelper from 'utils/bem';
 import { useDispatch } from 'react-redux';
-import { lukkAlleDropdowns } from 'reducer/dropdown-toggle-duck';
+import { lukkAlleDropdowns } from 'reducers/dropdown-toggle-duck';
 import './Toppseksjon.less';
 
 interface Props {

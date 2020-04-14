@@ -9,7 +9,7 @@ import { erDev, verifyWindowObj } from './utils/Environment';
 import Footer from './komponenter/footer/Footer';
 import { fetchEnv } from './utils/Environment';
 import { initGA } from './utils/google-analytics';
-import LanguageProvider from './provider/Language-provider';
+import LanguageProvider from './providers/Language';
 import Header from './komponenter/header/Header';
 import * as es6promise from 'es6-promise';
 import './index.less';

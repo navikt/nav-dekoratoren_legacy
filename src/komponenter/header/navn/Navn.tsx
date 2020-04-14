@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { AppState } from 'reducer/reducers';
+import { AppState } from 'reducers/reducers';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import './Navn.less';

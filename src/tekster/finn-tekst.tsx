@@ -1,13 +1,10 @@
 import React from 'react';
 import { ledetekster } from './ledetekster';
-import { AppState } from '../reducer/reducers';
+import { AppState } from '../reducers/reducers';
 import { connect } from 'react-redux';
-import {
-    Language,
-    spraakValgetErEngelsk,
-    spraakValgetErNorsk,
-    spraakValgetErSamisk,
-} from '../reducer/language-duck';
+import { spraakValgetErSamisk } from 'reducers/language-duck';
+import { spraakValgetErNorsk } from 'reducers/language-duck';
+import { Language, spraakValgetErEngelsk } from 'reducers/language-duck';
 
 export function finnTekst(id: string, language: Language): string {
     let ledetekst: string = ledetekster[id];

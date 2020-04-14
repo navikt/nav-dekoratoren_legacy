@@ -1,5 +1,5 @@
 import React from 'react';
-import { Language } from '../reducer/language-duck';
+import { Language } from '../reducers/language-duck';
 import { finnTekst } from './finn-tekst';
 
 describe('finnTekst', () => {

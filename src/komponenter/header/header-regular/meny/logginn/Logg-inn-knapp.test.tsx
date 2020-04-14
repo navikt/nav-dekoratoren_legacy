@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { Provider as ReduxProvider } from 'react-redux';
-import { hentInnloggingsstatusOk } from 'reducer/innloggingsstatus-duck';
+import { hentInnloggingsstatusOk } from 'reducers/innloggingsstatus-duck';
 import Tekst from 'tekster/finn-tekst';
 import LoggInnKnapp from './Logg-inn-knapp';
 import { createStore } from 'state/store';

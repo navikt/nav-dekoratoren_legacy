@@ -1,4 +1,4 @@
-import { Language } from '../../../../../reducer/language-duck';
+import { Language } from '../../../../../reducers/language-duck';
 import { genererUrl } from '../../../../../utils/Environment';
 
 export interface Spraaklenke {

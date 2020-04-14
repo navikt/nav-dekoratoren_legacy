@@ -5,7 +5,7 @@ import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import Tekst from 'tekster/finn-tekst';
 import { useDispatch } from 'react-redux';
-import { toggleVarselVisning } from 'reducer/dropdown-toggle-duck';
+import { toggleVarselVisning } from 'reducers/dropdown-toggle-duck';
 import './Varselvisning.less';
 
 interface OwnProps {

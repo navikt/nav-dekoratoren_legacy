@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../reducer/reducers';
-import { hentVarsler, settVarslerOK } from '../reducer/varselinnboks-duck';
+import { AppState } from '../reducers/reducers';
+import { hentVarsler, settVarslerOK } from '../reducers/varselinnboks-duck';
 import Datalaster from '../api/Datalaster';
 
 interface Props {

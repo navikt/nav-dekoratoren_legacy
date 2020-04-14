@@ -1,5 +1,5 @@
-import { MenyNode } from '../reducer/menu-duck';
-import { Language } from '../reducer/language-duck';
+import { MenyNode } from '../reducers/menu-duck';
+import { Language } from '../reducers/language-duck';
 
 export const NAVHEADER = 'NAVHEADER';
 

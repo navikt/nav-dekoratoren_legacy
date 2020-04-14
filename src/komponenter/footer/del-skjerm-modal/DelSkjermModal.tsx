@@ -5,7 +5,7 @@ import { Input } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
 
-import { AppState } from 'reducer/reducers';
+import { AppState } from 'reducers/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import Veileder from 'ikoner/veiledere/Veileder.svg';
 

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
-import BEMHelper from '../../../../utils/bem';
-import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
-import { LenkeMedGA } from '../../../LenkeMedGA';
-import Tekst from '../../../../tekster/finn-tekst';
-import { genererLenkerTilUrl } from '../../../../utils/Environment';
+import BEMHelper from 'utils/bem';
+import { GACategory, triggerGaEvent } from 'utils/google-analytics';
+import { LenkeMedGA } from 'komponenter/LenkeMedGA';
+import Tekst from 'tekster/finn-tekst';
+import { genererLenkerTilUrl } from 'utils/Environment';
 import { FooterLenke, lenkerHoyre, lenkerVenstre } from '../../Footer-lenker';
 import DelSkjermModal from '../../del-skjerm-modal/DelSkjermModal';
 import Spraakvalg from './spraakvalg/Spraakvalg';
 import FooterArbeidsflatevalg from './footer-arbeidsflatevalg/FooterArbeidsflatevalg';
-import PilOppHvit from '../../../../ikoner/meny/PilOppHvit';
+import PilOppHvit from 'ikoner/meny/PilOppHvit';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../../reducer/reducers';
-
+import { AppState } from 'reducers/reducers';
 import './footerTopp.less';
 
 const FooterTopp = () => {

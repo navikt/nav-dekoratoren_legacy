@@ -6,7 +6,7 @@ import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import { TextTransformFirstLetterToUppercase } from '../ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import KnappBase from 'nav-frontend-knapper';
 import { useSelector } from 'react-redux';
-import { AppState } from 'reducer/reducers';
+import { AppState } from 'reducers/reducers';
 import './Logg-inn-knapp.less';
 
 export const LoggInnKnapp = () => {

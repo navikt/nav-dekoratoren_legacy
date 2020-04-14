@@ -1,14 +1,12 @@
-import {
-    ActionType,
-    Handling,
-    HentInnloggingsstatusFEILETAction,
-    HentInnloggingsstatusOKAction,
-    HentInnloggingsstatusPENDINGAction,
-} from '../state/actions';
-import { Dispatch } from '../state/dispatch-type';
-import { fetchThenDispatch } from '../api/api-utils';
-import { hentInnloggingsstatusFetch } from '../api/api';
-import { DataElement, Status } from '../api/api';
+import { ActionType } from 'state/actions';
+import { Handling } from 'state/actions';
+import { HentInnloggingsstatusPENDINGAction } from 'state/actions';
+import { HentInnloggingsstatusOKAction } from 'state/actions';
+import { HentInnloggingsstatusFEILETAction } from 'state/actions';
+import { Dispatch } from 'state/dispatch-type';
+import { fetchThenDispatch } from 'api/api-utils';
+import { hentInnloggingsstatusFetch } from 'api/api';
+import { DataElement, Status } from 'api/api';
 
 export interface InnloggingsstatusState extends DataElement {
     data: Data;

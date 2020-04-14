@@ -3,13 +3,13 @@ import BEMHelper from 'utils/bem';
 import BunnseksjonLenke from './BunnseksjonLenke';
 import KbNav, { NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { Language } from 'reducer/language-duck';
+import { Language } from 'reducers/language-duck';
 import { finnTekst } from 'tekster/finn-tekst';
 import { bunnLenker } from './BunnseksjonLenkedata';
 import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { ArbeidsflateLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from 'reducer/reducers';
+import { AppState } from 'reducers/reducers';
 import './Bunnseksjon.less';
 
 interface Props {
