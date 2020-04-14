@@ -7,7 +7,7 @@ import { AppState } from 'store/reducers';
 import Tekst from 'tekster/finn-tekst';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import { MenyNode } from 'store/reducers/menu-duck';
-import FooterLenke from '../../Lenker';
+import FooterLenker from '../../Lenker';
 import './footerBottom.less';
 
 const FooterBottom = () => {
@@ -38,7 +38,7 @@ const FooterBottom = () => {
                         <Tekst id="footer-arbeids-og-veldferdsetaten" />
                     </Normaltekst>
                     <ul className="bottom-lenke">
-                        <FooterLenke node={personvernNode} />
+                        <FooterLenker node={personvernNode} />
                     </ul>
                 </div>
             </div>
