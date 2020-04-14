@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 

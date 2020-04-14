@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BEMHelper from '../../../../../../../../utils/bem';
+import BEMHelper from 'utils/bem';
 import './Lukknapp.less';
 
 interface Props {

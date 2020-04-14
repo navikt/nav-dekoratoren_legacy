@@ -7,7 +7,7 @@ import { Language } from 'reducer/language-duck';
 import MenyIngress from './mobil-innhold/MenyIngress';
 import Undermeny from './mobil-innhold/Undermeny';
 import Listelement from './mobil-innhold/Listelement';
-import MobilarbeidsflateValg from '../../../../arbeidsflatemeny/MobilarbeidsflateValg';
+import MobilarbeidsflateValg from 'komponenter/header/header-regular/arbeidsflatemeny/MobilarbeidsflateValg';
 import VarselinnboksProvider from 'provider/Varselinnboks-provider';
 import VarselvisningMobil from '../../../varsel/varselvisning/VarselvisningMobil';
 import './MobilVisningsmeny.less';

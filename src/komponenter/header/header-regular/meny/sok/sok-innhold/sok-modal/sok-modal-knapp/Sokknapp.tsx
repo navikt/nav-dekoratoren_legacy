@@ -1,5 +1,5 @@
 import React from 'react';
-import SokIkon from '../../../../../../../../ikoner/mobilmeny/SokIkon';
+import SokIkon from 'ikoner/mobilmeny/SokIkon';
 
 const Sokknapp = ({ sokKnappTabindex }: { sokKnappTabindex: boolean }) => {
     return (

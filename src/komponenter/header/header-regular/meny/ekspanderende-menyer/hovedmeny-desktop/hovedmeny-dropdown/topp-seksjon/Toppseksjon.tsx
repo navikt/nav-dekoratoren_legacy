@@ -4,7 +4,7 @@ import React from 'react';
 import BEMHelper from 'utils/bem';
 import KbNav, { NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { GACategory } from 'utils/google-analytics';
-import { LenkeMedGA } from '../../../../../../../LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'reducer/reducers';
 import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';

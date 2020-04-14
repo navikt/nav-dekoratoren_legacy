@@ -1,7 +1,7 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
-import { LenkeMedGA } from '../../../../../../../LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import BEMHelper from 'utils/bem';
 

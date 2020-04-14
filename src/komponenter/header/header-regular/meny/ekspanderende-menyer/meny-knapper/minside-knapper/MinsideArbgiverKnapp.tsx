@@ -3,7 +3,7 @@ import BEMHelper from 'utils/bem';
 import MinsideIkon from '../ikoner/minside-ikon/MinsideIkon';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
-import { LenkeMedGA } from '../../../../../../LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import './MinsideKnapper.less';
 

@@ -1,20 +1,17 @@
 import React from 'react';
 import htmlReactParser, { DomElement, domToReact } from 'html-react-parser';
-import { LenkeMedGA } from '../../../../../../LenkeMedGA';
-import { GACategory } from '../../../../../../../utils/google-analytics';
-import {
-    getKbId,
-    NaviGroup,
-} from '../../../../../../../utils/keyboard-navigation/kb-navigation';
+import { LenkeMedGA } from 'komponenter/LenkeMedGA';
+import { GACategory } from 'utils/google-analytics';
+import { getKbId, NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
 
 const ikonDefault = 'alarm-ikon';
-const ikonDefaultPath = require('../../../../../../../ikoner/varsler/alarm.svg');
+const ikonDefaultPath = require('ikoner/varsler/alarm.svg');
 const ikoner: { [str: string]: string } = {
     'alarm-ikon': ikonDefaultPath,
-    'kalender-ikon': require('../../../../../../../ikoner/varsler/calendar-3.svg'),
-    'snakkeboble-ikon': require('../../../../../../../ikoner/varsler/bubble-chat-2.svg'),
-    'dokument-ikon': require('../../../../../../../ikoner/varsler/file-new-1.svg'),
-    'plaster-ikon': require('../../../../../../../ikoner/varsler/first-aid-plaster.svg'),
+    'kalender-ikon': require('ikoner/varsler/calendar-3.svg'),
+    'snakkeboble-ikon': require('ikoner/varsler/bubble-chat-2.svg'),
+    'dokument-ikon': require('ikoner/varsler/file-new-1.svg'),
+    'plaster-ikon': require('ikoner/varsler/first-aid-plaster.svg'),
 };
 
 type Props = {
