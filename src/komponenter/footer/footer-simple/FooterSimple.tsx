@@ -3,7 +3,7 @@ import BEMHelper from 'utils/bem';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { LenkeMedGA } from '../../LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
-import { FooterLenke, lenkerBunn } from '../Footer-lenker';
+import { FooterLenke, lenkerBunn } from '../footer-regular/FooterLenker';
 import { genererLenkerTilUrl } from 'utils/Environment';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';

@@ -6,7 +6,7 @@ import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import Tekst from 'tekster/finn-tekst';
 import { genererLenkerTilUrl } from 'utils/Environment';
-import { FooterLenke, lenkerHoyre, lenkerVenstre } from '../../Footer-lenker';
+import { FooterLenke, lenkerHoyre, lenkerVenstre } from '../FooterLenker';
 import DelSkjermModal from '../../del-skjerm-modal/DelSkjermModal';
 import Spraakvalg from './spraakvalg/Spraakvalg';
 import FooterArbeidsflatevalg from './footer-arbeidsflatevalg/FooterArbeidsflatevalg';

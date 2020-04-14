@@ -5,7 +5,7 @@ import { genererLenkerTilUrl } from 'utils/Environment';
 import BEMHelper from 'utils/bem';
 import { GACategory } from 'utils/google-analytics';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
-import { FooterLenke, lenkerBunn } from '../../Footer-lenker';
+import { FooterLenke, lenkerBunn } from '../FooterLenker';
 import NavLogoFooter from 'ikoner/meny/NavLogoFooter';
 import { AppState } from 'store/reducers';
 import Tekst from 'tekster/finn-tekst';
