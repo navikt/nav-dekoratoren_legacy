@@ -1,33 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from 'utils/bem';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
-import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import Tekst from 'tekster/finn-tekst';
-import { genererLenkerTilUrl } from 'utils/Environment';
-import { FooterLenke, lenkerHoyre, lenkerVenstre } from '../FooterLenker';
 import DelSkjermModal from '../../del-skjerm-modal/DelSkjermModal';
 import Spraakvalg from './spraakvalg/Spraakvalg';
 import FooterArbeidsflatevalg from './footer-arbeidsflatevalg/FooterArbeidsflatevalg';
 import PilOppHvit from 'ikoner/meny/PilOppHvit';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
+import { MenyNode } from 'store/reducers/menu-duck';
+import FooterLenker from '../../Lenker';
 import './footerTopp.less';
 
 const FooterTopp = () => {
     const cls = BEMHelper('menylinje-topp');
-    const [venstrelenker, setVenstrelenker] = useState<FooterLenke[]>(
-        lenkerVenstre
-    );
-    const [hoyrelenker, setHoyrelenker] = useState<FooterLenke[]>(lenkerHoyre);
+    const { language } = useSelector((state: AppState) => state.language);
+    const { data } = useSelector((state: AppState) => state.menypunkt);
+
+    const [kontaktNode, settKontaktNode] = useState<MenyNode>();
+    const [samfunnNode, settSamfunnNode] = useState<MenyNode>();
     const [visDelSkjermModal, setVisDelSkjermModal] = useState(false);
-    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
     useEffect(() => {
-        setVenstrelenker(genererLenkerTilUrl(XP_BASE_URL, lenkerVenstre));
-        setHoyrelenker(genererLenkerTilUrl(XP_BASE_URL, lenkerHoyre));
-    }, []);
+        const noder = getLanguageNode(language, data);
+        if (noder && !kontaktNode && !samfunnNode) {
+            settKontaktNode(findNode(noder, 'Kontakt'));
+            settSamfunnNode(findNode(noder, 'NAV og samfunn'));
+        }
+    }, [data, kontaktNode, samfunnNode]);
 
     const openModal = () => {
         triggerGaEvent({
@@ -77,22 +80,7 @@ const FooterTopp = () => {
                         <Tekst id="footer-kontakt-overskrift" />
                     </Undertittel>
                     <ul aria-labelledby="venstrelenker-overskrift">
-                        {venstrelenker.map(lenke => (
-                            <li key={lenke.lenketekst}>
-                                <Normaltekst>
-                                    <LenkeMedGA
-                                        href={lenke.url}
-                                        gaEventArgs={{
-                                            category: GACategory.Footer,
-                                            action: `kontakt/${lenke.lenketekst}`,
-                                            label: lenke.url,
-                                        }}
-                                    >
-                                        {lenke.lenketekst}
-                                    </LenkeMedGA>
-                                </Normaltekst>
-                            </li>
-                        ))}
+                        <FooterLenker node={kontaktNode} />
                         <li>
                             <Lenke href="#" role="button" onClick={openModal}>
                                 <Tekst id="footer-del-skjerm" />
@@ -117,22 +105,7 @@ const FooterTopp = () => {
                         <Tekst id="footer-navsamfunn-overskrift" />
                     </Undertittel>
                     <ul aria-labelledby="hoyrelenker-overskrift">
-                        {hoyrelenker.map(lenke => (
-                            <li key={lenke.lenketekst}>
-                                <Normaltekst>
-                                    <LenkeMedGA
-                                        href={lenke.url}
-                                        gaEventArgs={{
-                                            category: GACategory.Footer,
-                                            action: `nav-og-samfunn/${lenke.lenketekst}`,
-                                            label: lenke.url,
-                                        }}
-                                    >
-                                        {lenke.lenketekst}
-                                    </LenkeMedGA>
-                                </Normaltekst>
-                            </li>
-                        ))}
+                        <FooterLenker node={samfunnNode} />
                     </ul>
                 </div>
                 <FooterArbeidsflatevalg />

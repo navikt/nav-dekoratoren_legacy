@@ -64,7 +64,7 @@ export const getLanguageNode = (
         SAMISK: nodeMenu.find(n => n.path === '/se'),
     }[lang]);
 
-const findNode = (
+export const findNode = (
     node: MenyNode,
     displayName: string
 ): MenyNode | undefined => {
