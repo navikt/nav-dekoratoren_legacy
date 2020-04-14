@@ -4,7 +4,6 @@ import FooterBottom from './footer-bottom/FooterBottom';
 
 import './Footer.less';
 
-
 const RegularFooter = () => {
     return (
         <Fragment>

@@ -13,9 +13,8 @@ import { AppState } from '../../../../reducer/reducers';
 
 import './footerBottom.less';
 
-
 const FooterBottom = () => {
-    const cls = BEMHelper("menylinje-bottom");
+    const cls = BEMHelper('menylinje-bottom');
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const [lenker, setLenker] = useState<FooterLenke[]>(lenkerBunn);
 
