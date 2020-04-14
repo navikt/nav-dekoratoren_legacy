@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from 'utils/bem';
-import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import Tekst from 'tekster/finn-tekst';
-import DelSkjermModal from '../../del-skjerm-modal/DelSkjermModal';
 import Spraakvalg from './spraakvalg/Spraakvalg';
 import FooterArbeidsflatevalg from './footer-arbeidsflatevalg/FooterArbeidsflatevalg';
 import PilOppHvit from 'ikoner/meny/PilOppHvit';
@@ -64,11 +62,6 @@ const FooterTopp = () => {
                     </Undertittel>
                     <ul aria-labelledby="venstrelenker-overskrift">
                         <FooterLenker node={kontaktNode} />
-                        <li>
-                            <Lenke href="#" role="button" onClick={openModal}>
-                                <Tekst id="footer-del-skjerm" />
-                            </Lenke>
-                        </li>
                     </ul>
                 </div>
                 <div className="menylenker-seksjon midt">
