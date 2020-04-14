@@ -1,14 +1,12 @@
-import {
-    ActionType,
-    Handling,
-    SettVarslerLestFEILETAction,
-    SettVarslerLestOKAction,
-    SettVarslerLestPENDINGAction,
-} from '../state/actions';
-import { Dispatch } from '../state/dispatch-type';
-import { fetchThenDispatch } from '../api/api-utils';
-import { lagreVarslerLestFetch } from '../api/api';
-import { DataElement, Status } from '../api/api';
+import { ActionType } from 'store/actions';
+import { Handling } from 'store/actions';
+import { SettVarslerLestFEILETAction } from 'store/actions';
+import { SettVarslerLestPENDINGAction } from 'store/actions';
+import { SettVarslerLestOKAction } from 'store/actions';
+import { Dispatch } from 'store/dispatch-type';
+import { fetchThenDispatch } from 'api/api-utils';
+import { lagreVarslerLestFetch } from 'api/api';
+import { DataElement, Status } from 'api/api';
 
 export const initialLestMeldingState: DataElement = {
     status: Status.IKKE_STARTET,

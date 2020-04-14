@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenyNode } from 'reducer/menu-duck';
+import { MenyNode } from 'store/reducers/menu-duck';
 import BEMHelper from 'utils/bem';
 import Listelement from '../Listelement';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';

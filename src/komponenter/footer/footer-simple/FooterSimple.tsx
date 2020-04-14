@@ -6,7 +6,7 @@ import { GACategory } from 'utils/google-analytics';
 import { FooterLenke, lenkerBunn } from '../Footer-lenker';
 import { genererLenkerTilUrl } from 'utils/Environment';
 import { useSelector } from 'react-redux';
-import { AppState } from 'reducer/reducers';
+import { AppState } from 'store/reducers';
 import Lenke from 'nav-frontend-lenker';
 import Tekst from 'tekster/finn-tekst';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';

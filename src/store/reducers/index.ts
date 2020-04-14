@@ -4,7 +4,7 @@ import innloggingsstatusReducer from './innloggingsstatus-duck';
 import { InnloggingsstatusState } from './innloggingsstatus-duck';
 import menypunktReducer, { MenyPunkter } from './menu-duck';
 import varselinnboksReducer, { VarselinnboksState } from './varselinnboks-duck';
-import { DataElement } from '../api/api';
+import { DataElement } from 'api/api';
 import varselLestReducer from './varsel-lest-duck';
 import { languageDuck, LanguageState } from './language-duck';
 import dropdownTogglesReducer, { DropdownState } from './dropdown-toggle-duck';

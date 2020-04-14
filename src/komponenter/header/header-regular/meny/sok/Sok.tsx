@@ -1,11 +1,11 @@
 import React from 'react';
-import { AppState } from 'reducer/reducers';
+import { AppState } from 'store/reducers';
 import { connect } from 'react-redux';
 import debounce from 'lodash.debounce';
 import Downshift, { DownshiftState, StateChangeOptions } from 'downshift';
 import cls from 'classnames';
 import { Input } from 'nav-frontend-skjema';
-import { Language } from 'reducer/language-duck';
+import { Language } from 'store/reducers/language-duck';
 import { genererUrl } from 'utils/Environment';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { defaultData, InputState } from './sok-utils';
@@ -18,7 +18,7 @@ import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import { Systemtittel } from 'nav-frontend-typografi';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import BEMHelper from 'utils/bem';
-import { EnvironmentState } from 'reducer/environment-duck';
+import { EnvironmentState } from 'store/reducers/environment-duck';
 import './Sok.less';
 
 interface StateProps {

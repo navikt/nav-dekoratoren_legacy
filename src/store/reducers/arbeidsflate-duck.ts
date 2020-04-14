@@ -1,16 +1,11 @@
-import {
-    getSessionStorage,
-    MenuValue,
-    NAVHEADER,
-} from '../utils/meny-storage-utils';
-import {
-    ActionType,
-    Handling,
-    SettArbeidsgiverAction,
-    SettPrivatpersonAction,
-    SettSamarbeidspartnerAction,
-} from '../state/actions';
-import { verifyWindowObj } from '../utils/Environment';
+import { getSessionStorage } from 'utils/meny-storage-utils';
+import { MenuValue, NAVHEADER } from 'utils/meny-storage-utils';
+import { ActionType } from 'store/actions';
+import { Handling } from 'store/actions';
+import { SettArbeidsgiverAction } from 'store/actions';
+import { SettSamarbeidspartnerAction } from 'store/actions';
+import { SettPrivatpersonAction } from 'store/actions';
+import { verifyWindowObj } from '../../utils/Environment';
 
 export interface Arbeidsflate {
     status: MenuValue;

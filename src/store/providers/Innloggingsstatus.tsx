@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { AppState } from '../reducer/reducers';
-import { Dispatch } from '../state/dispatch-type';
-import {
-    hentInnloggingsstatus,
-    InnloggingsstatusState,
-} from '../reducer/innloggingsstatus-duck';
-import { EnvironmentState } from '../reducer/environment-duck';
+import { AppState } from 'store/reducers';
+import { Dispatch } from 'store/dispatch-type';
+import { InnloggingsstatusState } from 'store/reducers/innloggingsstatus-duck';
+import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
+import { EnvironmentState } from 'store/reducers/environment-duck';
 
 interface OwnProps {
     children: React.ReactElement<any>; // tslint:disable-line:no-any

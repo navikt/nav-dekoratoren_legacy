@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../reducer/reducers';
-import { hentVarsler, settVarslerOK } from '../reducer/varselinnboks-duck';
-import Datalaster from '../api/Datalaster';
+import { AppState } from 'store/reducers';
+import { hentVarsler, settVarslerOK } from '../reducers/varselinnboks-duck';
+import Datalaster from '../../api/Datalaster';
 
 interface Props {
     children: React.ReactElement<any>; // tslint:disable-line:no-any

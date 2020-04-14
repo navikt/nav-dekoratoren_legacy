@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from 'reducer/reducers';
+import { AppState } from 'store/reducers';
 import { Undertekst } from 'nav-frontend-typografi';
 import { arbeidsflateLenker, settArbeidsflate } from './arbeidsflate-lenker';
 import { GACategory } from 'utils/google-analytics';

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BEMHelper from 'utils/bem';
-import { MenyNode } from 'reducer/menu-duck';
+import { MenyNode } from 'store/reducers/menu-duck';
 import { MenyLenkeSeksjon } from '../../meny-lenker/MenyLenkeSeksjon';
 import KbNav from 'utils/keyboard-navigation/kb-navigation';
 import {
@@ -14,7 +14,7 @@ import Tekst from 'tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { desktopMinsideKnappId } from '../MinsideMenyDesktop';
 import { useSelector } from 'react-redux';
-import { AppState } from 'reducer/reducers';
+import { AppState } from 'store/reducers';
 
 type Props = {
     classname: string;

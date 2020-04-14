@@ -5,7 +5,7 @@ import Tekst from 'tekster/finn-tekst';
 import Lenke from 'nav-frontend-lenker';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { useSelector } from 'react-redux';
-import { AppState } from 'reducer/reducers';
+import { AppState } from 'store/reducers';
 
 interface Props {
     arbeidsflate: MenuValue;
