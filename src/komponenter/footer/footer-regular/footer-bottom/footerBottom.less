@@ -3,18 +3,30 @@
 
 .menylinje-bottom {
     display: flex;
-    padding: 2rem;
+    padding: 1rem;
+    justify-content: center;
+    @media (min-width: @tabletLimitWidth) {
+        padding: 2rem;
+    }
+}
 
-    .bottom-logo {
+.footer-bottom-content {
+    display: flex;
+    width: 100%;
+    max-width: 1344px;
+
+    &__bottom-logo {
         margin-right: 0.8rem;
     }
 
     @media (min-width: @tabletLimitWidth) {
-        .bottom-lenker {
+        justify-content: space-between;
+        
+        &__bottom-lenker {
             display: flex;
             justify-content: space-between;
-            width: 100%;
             align-items: center;
+            width: 100%;
         }
 
         ul {
@@ -23,13 +35,8 @@
     }
 
     @media (min-width: 1300px) {
-        .bottom-logo {
-            width: 15%;
+        &__bottom-lenker {
+            width: 85%;
         }
-    }
-
-    @media (min-width: @desktopLimitWidth) {
-        width: 1344px;
-        margin: 0 auto;
     }
 }

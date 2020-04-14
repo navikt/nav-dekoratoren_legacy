@@ -18,7 +18,7 @@ import { FooterLenke, lenkerBunn } from '../FooterLenker';
 import './footerBottom.less';
 
 const FooterBottom = () => {
-    const cls = BEMHelper('menylinje-bottom');
+    const cls = BEMHelper('footer-bottom-content');
     const [visDelSkjermModal, setVisDelSkjermModal] = useState(false);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const [lenker, setLenker] = useState<FooterLenke[]>(lenkerBunn);
@@ -44,51 +44,51 @@ const FooterBottom = () => {
     };
 
     return (
-        <section className={cls.className}>
-            <div className="bottom-logo">
+        <section className="menylinje-bottom">
+            <div className={cls.className}>
                 <NavLogoFooter
                     width="65"
                     height="65"
-                    classname={cls.element('svg')}
+                    classname={cls.element('bottom-logo')}
                 />
-            </div>
-            <div className="bottom-lenker">
-                <div>
-                    <Normaltekst className="bottom-tekst">
-                        <Tekst id="footer-arbeids-og-veldferdsetaten" />
-                    </Normaltekst>
-                    <ul>
-                        {lenker.map(lenke => (
-                            <li key={lenke.lenketekst}>
-                                <Normaltekst>
-                                    <LenkeMedGA
-                                        href={lenke.url}
-                                        gaEventArgs={{
-                                            category: GACategory.Footer,
-                                            action: `bunn/${lenke.lenketekst}`,
-                                            label: lenke.url,
-                                        }}
-                                    >
-                                        {lenke.lenketekst}
-                                    </LenkeMedGA>
-                                </Normaltekst>
-                            </li>
-                        ))}
-                    </ul>
+                <div className={cls.element('bottom-lenker')}>
+                    <div>
+                        <Normaltekst className="bottom-tekst">
+                            <Tekst id="footer-arbeids-og-veldferdsetaten" />
+                        </Normaltekst>
+                        <ul>
+                            {lenker.map(lenke => (
+                                <li key={lenke.lenketekst}>
+                                    <Normaltekst>
+                                        <LenkeMedGA
+                                            href={lenke.url}
+                                            gaEventArgs={{
+                                                category: GACategory.Footer,
+                                                action: `bunn/${lenke.lenketekst}`,
+                                                label: lenke.url,
+                                            }}
+                                        >
+                                            {lenke.lenketekst}
+                                        </LenkeMedGA>
+                                    </Normaltekst>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <LenkeMedIkon
+                        className={cls.element('del-skjerm')}
+                        onClick={openModal}
+                        tekst={<Tekst id="footer-del-skjerm" />}
+                        ikon={<DelSkjerm height={24} width={24} />}
+                    />
                 </div>
-                <LenkeMedIkon
-                    className={cls.element('del-skjerm')}
-                    onClick={openModal}
-                    tekst={<Tekst id="footer-del-skjerm" />}
-                    ikon={<DelSkjerm height={24} width={24} />}
-                />
+                {visDelSkjermModal && (
+                    <DelSkjermModal
+                        isOpen={visDelSkjermModal}
+                        onClose={closeModal}
+                    />
+                )}
             </div>
-            {visDelSkjermModal && (
-                <DelSkjermModal
-                    isOpen={visDelSkjermModal}
-                    onClose={closeModal}
-                />
-            )}
         </section>
     );
 };
