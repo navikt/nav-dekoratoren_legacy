@@ -21,9 +21,12 @@ const browserConfig = {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         alias: {
             api: path.resolve(__dirname, './src/api'),
+            ikoner: path.resolve(__dirname, './src/ikoner'),
             komponenter: path.resolve(__dirname, './src/komponenter'),
             reducer: path.resolve(__dirname, './src/reducer'),
+            redux: path.resolve(__dirname, './src/redux'),
             tekster: path.resolve(__dirname, './src/tekster'),
+            types: path.resolve(__dirname, './src/types'),
             utils: path.resolve(__dirname, './src/utils'),
         }
     },

@@ -1,9 +1,9 @@
 import React from 'react';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import Lenke from 'nav-frontend-lenker';
-import { arbeidsflateLenker } from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
+import { arbeidsflateLenker } from 'komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../../../../../reducer/reducers';
+import { AppState } from 'reducer/reducers';
 
 const MenyIngress = ({
     className,
