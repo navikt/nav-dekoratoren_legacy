@@ -26,6 +26,13 @@ const browserConfig = {
     devtool: 'source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
+        alias: {
+            api: path.resolve(__dirname, './src/api'),
+            komponenter: path.resolve(__dirname, './src/komponenter'),
+            reducer: path.resolve(__dirname, './src/reducer'),
+            tekster: path.resolve(__dirname, './src/tekster'),
+            utils: path.resolve(__dirname, './src/utils'),
+        }
     },
     stats: 'errors-only',
     module: {
