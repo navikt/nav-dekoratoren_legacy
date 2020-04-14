@@ -1,14 +1,14 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
-import { MenyNode } from 'reducers/menu-duck';
+import { MenyNode } from 'store/reducers/menu-duck';
 import BEMHelper from 'utils/bem';
 import Lukkundermeny from './Lukkundermeny';
 import Listelement from './Listelement';
 import { genererUrl } from 'utils/Environment';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { useSelector } from 'react-redux';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'store/reducers';
 
 interface Props {
     className: string;

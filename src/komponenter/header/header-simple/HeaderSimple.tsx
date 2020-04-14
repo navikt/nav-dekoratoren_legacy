@@ -1,6 +1,6 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import InnloggingsstatusProvider from 'providers/Innloggingsstatus';
+import InnloggingsstatusProvider from 'store/providers/Innloggingsstatus';
 import LoggInnKnapp from '../header-regular/meny/logginn/Logg-inn-knapp';
 import Navlogo from 'ikoner/meny/Navlogo';
 import Navn from '../navn/Navn';

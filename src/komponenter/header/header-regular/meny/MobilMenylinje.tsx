@@ -1,14 +1,14 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import InnloggingsstatusProvider from 'providers/Innloggingsstatus';
+import InnloggingsstatusProvider from 'store/providers/Innloggingsstatus';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
-import { Language } from 'reducers/language-duck';
+import { Language } from 'store/reducers/language-duck';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from 'reducers/reducers';
-import VarselinnboksProvider from 'providers/Varselinnboks';
+import { AppState } from 'store/reducers';
+import VarselinnboksProvider from 'store/providers/Varselinnboks';
 import Varselbjelle from './varsel/Varselbjelle';
-import { toggleVarselVisning } from 'reducers/dropdown-toggle-duck';
+import { toggleVarselVisning } from 'store/reducers/dropdown-toggle-duck';
 import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import './MobilMenylinje.less';
 

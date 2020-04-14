@@ -1,10 +1,10 @@
 import React from 'react';
-import { MenyNode } from '../../../../../../reducers/menu-duck';
+import { MenyNode } from '../../../../../../store/reducers/menu-duck';
 import { genererUrl } from '../../../../../../utils/Environment';
 import { LenkeMedGA } from '../../../../../LenkeMedGA';
 import { GACategory } from '../../../../../../utils/google-analytics';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../../../../reducers/reducers';
+import { AppState } from '../../../../../../store/reducers';
 
 interface Props {
     lenke: MenyNode;

@@ -9,7 +9,7 @@ import { LenkeMedGA } from '../../../LenkeMedGA';
 import Tekst from '../../../../tekster/finn-tekst';
 import { FooterLenke, lenkerBunn } from '../../Footer-lenker';
 import NavLogoFooter from '../../../../ikoner/meny/NavLogoFooter';
-import { AppState } from '../../../../reducers/reducers';
+import { AppState } from '../../../../store/reducers';
 
 import './footerBottom.less';
 

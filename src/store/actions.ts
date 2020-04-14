@@ -1,7 +1,7 @@
-import { Data as innloggingsstatusData } from '../reducers/innloggingsstatus-duck';
-import { Data as varselinnboksData } from '../reducers/varselinnboks-duck';
-import { MenyNode as menypunkterData } from '../reducers/menu-duck';
-import { EnvironmentState } from '../reducers/environment-duck';
+import { Data as innloggingsstatusData } from './reducers/innloggingsstatus-duck';
+import { Data as varselinnboksData } from './reducers/varselinnboks-duck';
+import { MenyNode as menypunkterData } from './reducers/menu-duck';
+import { EnvironmentState } from './reducers/environment-duck';
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',

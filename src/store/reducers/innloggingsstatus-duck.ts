@@ -1,9 +1,9 @@
-import { ActionType } from 'state/actions';
-import { Handling } from 'state/actions';
-import { HentInnloggingsstatusPENDINGAction } from 'state/actions';
-import { HentInnloggingsstatusOKAction } from 'state/actions';
-import { HentInnloggingsstatusFEILETAction } from 'state/actions';
-import { Dispatch } from 'state/dispatch-type';
+import { ActionType } from 'store/actions';
+import { Handling } from 'store/actions';
+import { HentInnloggingsstatusPENDINGAction } from 'store/actions';
+import { HentInnloggingsstatusOKAction } from 'store/actions';
+import { HentInnloggingsstatusFEILETAction } from 'store/actions';
+import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
 import { hentInnloggingsstatusFetch } from 'api/api';
 import { DataElement, Status } from 'api/api';

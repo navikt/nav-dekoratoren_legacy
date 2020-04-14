@@ -3,11 +3,11 @@ import { mount } from 'enzyme';
 import { MinsideMenyDesktop } from './MinsideMenyDesktop';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { reducers } from 'reducers/reducers';
-import { settArbeidsgiverflate } from 'reducers/arbeidsflate-duck';
-import { settPersonflate } from 'reducers/arbeidsflate-duck';
-import { settSamarbeidspartnerflate } from 'reducers/arbeidsflate-duck';
-import { ActionType } from 'state/actions';
+import { reducers } from 'store/reducers';
+import { settArbeidsgiverflate } from 'store/reducers/arbeidsflate-duck';
+import { settPersonflate } from 'store/reducers/arbeidsflate-duck';
+import { settSamarbeidspartnerflate } from 'store/reducers/arbeidsflate-duck';
+import { ActionType } from 'store/actions';
 import { Status } from 'api/api';
 import mockMenu from 'server/mock/menu.json';
 

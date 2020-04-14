@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../../../reducers/reducers';
+import { AppState } from '../../../../../store/reducers';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { GACategory } from '../../../../../utils/google-analytics';
 import { LenkeMedGA } from '../../../../LenkeMedGA';

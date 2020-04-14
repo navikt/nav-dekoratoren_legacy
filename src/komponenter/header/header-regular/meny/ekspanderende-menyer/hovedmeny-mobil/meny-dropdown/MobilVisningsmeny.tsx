@@ -1,26 +1,26 @@
 import React from 'react';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import BEMHelper from 'utils/bem';
-import { MenyNode } from 'reducers/menu-duck';
+import { MenyNode } from 'store/reducers/menu-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { Language } from 'reducers/language-duck';
+import { Language } from 'store/reducers/language-duck';
 import MenyIngress from './mobil-innhold/MenyIngress';
 import Undermeny from './mobil-innhold/Undermeny';
 import Listelement from './mobil-innhold/Listelement';
 import MobilarbeidsflateValg from 'komponenter/header/header-regular/arbeidsflatemeny/MobilarbeidsflateValg';
-import VarselinnboksProvider from 'providers/Varselinnboks';
+import VarselinnboksProvider from 'store/providers/Varselinnboks';
 import VarselvisningMobil from '../../../varsel/varselvisning/VarselvisningMobil';
 import './MobilVisningsmeny.less';
-import { AppState } from 'reducers/reducers';
-import { Dispatch } from 'state/dispatch-type';
-import { finnArbeidsflate } from 'reducers/arbeidsflate-duck';
+import { AppState } from 'store/reducers';
+import { Dispatch } from 'store/dispatch-type';
+import { finnArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { connect } from 'react-redux';
 import Sok from '../../../sok/Sok';
 import InnloggetBruker from './mobil-innhold/innloggetbruker/InnloggetBruker';
-import { toggleVarselVisning } from 'reducers/dropdown-toggle-duck';
+import { toggleVarselVisning } from 'store/reducers/dropdown-toggle-duck';
 import ForsideLenke from './mobil-innhold/ForsideLenke';
 import Dittnavmeny from './mobil-innhold/dittnavmeny/Dittnavmeny';
-import { InnloggingsstatusState } from 'reducers/innloggingsstatus-duck';
+import { InnloggingsstatusState } from 'store/reducers/innloggingsstatus-duck';
 
 interface DispatchProps {
     settArbeidsflate: () => void;

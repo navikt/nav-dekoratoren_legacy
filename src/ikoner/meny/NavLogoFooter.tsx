@@ -6,7 +6,7 @@ import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflate
 import { getArbeidsflateContext } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'store/reducers';
 import './NavLogoFooter.less';
 
 const NavLogoRod = ({

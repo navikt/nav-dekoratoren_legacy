@@ -1,5 +1,5 @@
 import { FooterLenke } from 'komponenter/footer/Footer-lenker';
-import { EnvironmentState } from 'reducers/environment-duck';
+import { EnvironmentState } from 'store/reducers/environment-duck';
 
 export const fetchEnv = (): Promise<EnvironmentState> => {
     return new Promise(resolve => {

@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider as ReduxProvider } from 'react-redux';
-import { createStore } from 'state/store';
-import { dataInitState } from 'reducers/menu-duck';
-import { Language } from 'reducers/language-duck';
+import { createStore } from 'store';
+import { dataInitState } from 'store/reducers/menu-duck';
+import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import HovedmenyDropdown from './HovedmenyDropdown';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';

@@ -5,12 +5,12 @@ import { arbeidsgiverContextLenke } from 'komponenter/header/header-regular/arbe
 import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { samarbeidspartnerContextLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'store/reducers';
 import { Undertittel } from 'nav-frontend-typografi';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
 import { GACategory } from 'utils/google-analytics';
 import { GAEventArgs, triggerGaEvent } from 'utils/google-analytics';
-import { Language } from 'reducers/language-duck';
+import { Language } from 'store/reducers/language-duck';
 import Tekst from 'tekster/finn-tekst';
 
 const gaEventArgs: GAEventArgs = {

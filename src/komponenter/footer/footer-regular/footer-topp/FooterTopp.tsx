@@ -12,7 +12,7 @@ import Spraakvalg from './spraakvalg/Spraakvalg';
 import FooterArbeidsflatevalg from './footer-arbeidsflatevalg/FooterArbeidsflatevalg';
 import PilOppHvit from 'ikoner/meny/PilOppHvit';
 import { useSelector } from 'react-redux';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'store/reducers';
 import './footerTopp.less';
 
 const FooterTopp = () => {

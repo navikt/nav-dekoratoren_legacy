@@ -1,9 +1,9 @@
 import React from 'react';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMinsideMenyNode, MenuValue } from 'utils/meny-storage-utils';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
-import { toggleMinsideMeny } from 'reducers/dropdown-toggle-duck';
+import { toggleMinsideMeny } from 'store/reducers/dropdown-toggle-duck';
 import { Status } from 'api/api';
 import MenySpinner from '../meny-spinner/MenySpinner';
 import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';

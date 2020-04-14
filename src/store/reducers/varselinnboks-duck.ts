@@ -1,10 +1,10 @@
-import { ActionType } from 'state/actions';
-import { Handling } from 'state/actions';
-import { HentVarslerFEILETAction } from 'state/actions';
-import { HentVarslerOKAction } from 'state/actions';
-import { SettVarslerOKAction } from 'state/actions';
-import { HentVarslerPENDINGAction } from 'state/actions';
-import { Dispatch } from 'state/dispatch-type';
+import { ActionType } from 'store/actions';
+import { Handling } from 'store/actions';
+import { HentVarslerFEILETAction } from 'store/actions';
+import { HentVarslerOKAction } from 'store/actions';
+import { SettVarslerOKAction } from 'store/actions';
+import { HentVarslerPENDINGAction } from 'store/actions';
+import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
 import { hentVarslerFetch } from 'api/api';
 import { DataElement, Status } from 'api/api';

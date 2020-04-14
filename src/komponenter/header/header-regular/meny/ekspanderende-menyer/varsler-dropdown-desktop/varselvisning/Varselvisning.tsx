@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'store/reducers';
 import { GACategory } from 'utils/google-analytics';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { Language } from 'reducers/language-duck';
+import { Language } from 'store/reducers/language-duck';
 import { Provider } from 'react-redux';
-import { reducers } from 'reducers/reducers';
+import { reducers } from 'store/reducers';
 import { createStore, Store } from 'redux';
 import MobilMenylinje from './MobilMenylinje';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';

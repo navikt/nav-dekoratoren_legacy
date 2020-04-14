@@ -3,7 +3,7 @@ import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import Lenke from 'nav-frontend-lenker';
 import { arbeidsflateLenker } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { useSelector } from 'react-redux';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'store/reducers';
 
 const MenyIngress = ({
     className,

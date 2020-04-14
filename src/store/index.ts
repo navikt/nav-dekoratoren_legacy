@@ -1,6 +1,6 @@
 import { createStore as createReduxStore, compose } from 'redux';
-import reducers from 'reducers/reducers';
-import { EnvironmentState } from 'reducers/environment-duck';
+import { EnvironmentState } from './reducers/environment-duck';
+import reducers from './reducers';
 
 export const createStore = (env?: EnvironmentState) => {
     const composeEnhancers = (

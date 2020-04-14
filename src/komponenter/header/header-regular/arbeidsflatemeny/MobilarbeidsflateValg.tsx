@@ -1,16 +1,16 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'store/reducers';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import BEMHelper from 'utils/bem';
-import { finnArbeidsflate } from 'reducers/arbeidsflate-duck';
+import { finnArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { MenuValue, oppdaterSessionStorage } from 'utils/meny-storage-utils';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import { GACategory } from 'utils/google-analytics';
 import { LenkeMedGA } from '../../../LenkeMedGA';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import { finnTekst } from 'tekster/finn-tekst';
-import { Language } from 'reducers/language-duck';
+import { Language } from 'store/reducers/language-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import './MobilarbeidsflateValg.less';
 

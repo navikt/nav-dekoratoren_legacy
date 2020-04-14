@@ -1,9 +1,9 @@
 import React from 'react';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import Sok from '../../sok/Sok';
-import { toggleSok } from 'reducers/dropdown-toggle-duck';
+import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';

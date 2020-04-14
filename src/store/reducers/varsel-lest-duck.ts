@@ -1,9 +1,9 @@
-import { ActionType } from 'state/actions';
-import { Handling } from 'state/actions';
-import { SettVarslerLestFEILETAction } from 'state/actions';
-import { SettVarslerLestPENDINGAction } from 'state/actions';
-import { SettVarslerLestOKAction } from 'state/actions';
-import { Dispatch } from 'state/dispatch-type';
+import { ActionType } from 'store/actions';
+import { Handling } from 'store/actions';
+import { SettVarslerLestFEILETAction } from 'store/actions';
+import { SettVarslerLestPENDINGAction } from 'store/actions';
+import { SettVarslerLestOKAction } from 'store/actions';
+import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
 import { lagreVarslerLestFetch } from 'api/api';
 import { DataElement, Status } from 'api/api';

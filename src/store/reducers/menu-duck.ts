@@ -1,9 +1,9 @@
-import { ActionType } from 'state/actions';
-import { Handling } from 'state/actions';
-import { HentMenyLenkerFAILED } from 'state/actions';
-import { HentMenyLenkerSUCCESS } from 'state/actions';
-import { HentMenyLenkerPENDING } from 'state/actions';
-import { Dispatch } from 'state/dispatch-type';
+import { ActionType } from 'store/actions';
+import { Handling } from 'store/actions';
+import { HentMenyLenkerFAILED } from 'store/actions';
+import { HentMenyLenkerSUCCESS } from 'store/actions';
+import { HentMenyLenkerPENDING } from 'store/actions';
+import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
 import { hentMenyPunkter, DataElement, Status } from 'api/api';
 

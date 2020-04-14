@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from 'reducers/reducers';
-import { lukkAlleDropdowns } from 'reducers/dropdown-toggle-duck';
+import { AppState } from 'store/reducers';
+import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import './MenyBakgrunn.less';
 
 const MenyBakgrunn = () => {

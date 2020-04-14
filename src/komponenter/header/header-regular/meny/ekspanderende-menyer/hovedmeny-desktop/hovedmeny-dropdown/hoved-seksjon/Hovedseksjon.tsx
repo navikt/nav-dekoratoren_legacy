@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenyNode } from 'reducers/menu-duck';
+import { MenyNode } from 'store/reducers/menu-duck';
 import { MenyLenkeSeksjon } from '../../../meny-lenker/MenyLenkeSeksjon';
 import BEMHelper from 'utils/bem';
 import { NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
