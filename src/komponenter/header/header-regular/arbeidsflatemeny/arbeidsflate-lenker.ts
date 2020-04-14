@@ -41,7 +41,7 @@ export const arbeidsgiverContextLenke = (XP_BASE_URL: string) => {
 
 export const samarbeidspartnerContextLenke = (XP_BASE_URL: string) => {
     return {
-        url: `${XP_BASE_URL}/no/nav-og-samfunn`,
+        url: `${XP_BASE_URL}/no/samarbeidspartner`,
         lenkeTekstId: 'rolle-samarbeidspartner',
         stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
         footerStikkordId: 'footer-stikkord-samarbeidspartner',
