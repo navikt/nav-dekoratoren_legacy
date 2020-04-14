@@ -11,7 +11,6 @@ import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import FooterLenker from '../Lenker';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import './FooterSimple.less';
-import { Normaltekst } from 'nav-frontend-typografi';
 
 const cls = BEMHelper('simple-footer');
 
@@ -19,9 +18,7 @@ const SimpleFooter = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { language } = useSelector((state: AppState) => state.language);
     const { data } = useSelector((state: AppState) => state.menypunkt);
-    const [personvernNode, settPersonvernNode] = useState<
-        MenyNode | undefined
-    >();
+    const [personvernNode, settPersonvernNode] = useState<MenyNode>();
 
     useEffect(() => {
         const noder = getLanguageNode(language, data);
