@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { ArbeidsflateLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { arbeidsflateLenker } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { arbeidsgiverContextLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { samarbeidspartnerContextLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../../../reducer/reducers';
+import { AppState } from 'reducer/reducers';
 import { Undertittel } from 'nav-frontend-typografi';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
-import { GACategory } from '../../../../../utils/google-analytics';
-import {
-    GAEventArgs,
-    triggerGaEvent,
-} from '../../../../../utils/google-analytics';
-import { Language } from '../../../../../reducer/language-duck';
-import Tekst from '../../../../../tekster/finn-tekst';
-import {
-    ArbeidsflateLenke,
-    arbeidsflateLenker,
-    arbeidsgiverContextLenke,
-    samarbeidspartnerContextLenke,
-    settArbeidsflate,
-} from '../../../../header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { GACategory } from 'utils/google-analytics';
+import { GAEventArgs, triggerGaEvent } from 'utils/google-analytics';
+import { Language } from 'reducer/language-duck';
+import Tekst from 'tekster/finn-tekst';
 
 const gaEventArgs: GAEventArgs = {
     category: GACategory.Header,
