@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../store/reducers';
-import { genererUrl } from '../../utils/Environment';
+import { AppState } from 'store/reducers';
+import { genererUrl } from 'utils/Environment';
 
 interface Props {
     node?: MenyNode;
@@ -19,7 +19,7 @@ export const FooterLenker = ({ node }: Props) => {
     }
 
     return (
-        <>
+        <Fragment>
             {node.children.map(lenkeNode => (
                 <li key={lenkeNode.id}>
                     <Normaltekst>
@@ -36,7 +36,7 @@ export const FooterLenker = ({ node }: Props) => {
                     </Normaltekst>
                 </li>
             ))}
-        </>
+        </Fragment>
     );
 };
 
