@@ -5,7 +5,7 @@ import Skiplinks from './skiplinks/Skiplinks';
 import MenyBakgrunn from './meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
 import { MenuValue } from '../../utils/meny-storage-utils';
 import { oppdaterSessionStorage } from '../../utils/meny-storage-utils';
-import { SimpleHeader } from './HeaderSimple';
+import { SimpleHeader } from './header-simple/HeaderSimple';
 import { RegularHeader } from './HeaderRegular';
 import { AppState } from '../../reducer/reducers';
 

@@ -1,10 +1,12 @@
 import React from 'react';
-import BEMHelper from '../../utils/bem';
-import InnloggingsstatusProvider from '../../provider/Innloggingsstatus-provider';
-import LoggInnKnapp from './meny/logginn/Logg-inn-knapp';
-import Navlogo from '../../ikoner/meny/Navlogo';
+import BEMHelper from 'utils/bem';
+import Navlogo from 'ikoner/meny/Navlogo';
+import InnloggingsstatusProvider from 'provider/Innloggingsstatus-provider';
+
+import LoggInnKnapp from '../meny/logginn/Logg-inn-knapp';
+import Navn from '../meny/navn/Navn';
+
 import './HeaderSimple.less';
-import Navn from './meny/navn/Navn';
 
 const cls = BEMHelper('simple-header');
 
