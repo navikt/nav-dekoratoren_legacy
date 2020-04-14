@@ -1,13 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../../reducer/reducers';
+import { AppState } from 'reducer/reducers';
 import { Undertekst } from 'nav-frontend-typografi';
-import BEMHelper from '../../../../utils/bem';
 import { arbeidsflateLenker, settArbeidsflate } from './arbeidsflate-lenker';
+import { GACategory } from 'utils/google-analytics';
+import { LenkeMedGA } from '../../../LenkeMedGA';
+import Tekst from 'tekster/finn-tekst';
+import BEMHelper from 'utils/bem';
 import './Arbeidsflatemeny.less';
-import { GACategory } from '../../../utils/google-analytics';
-import { LenkeMedGA } from '../../LenkeMedGA';
-import Tekst from '../../../tekster/finn-tekst';
 
 const Arbeidsflatemeny = () => {
     const cls = BEMHelper('arbeidsflate');

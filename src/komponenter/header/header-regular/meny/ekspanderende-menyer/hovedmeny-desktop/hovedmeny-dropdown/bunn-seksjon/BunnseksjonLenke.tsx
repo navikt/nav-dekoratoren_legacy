@@ -1,9 +1,9 @@
-import Tekst from '../../../../../../../../tekster/finn-tekst';
 import React from 'react';
-import BEMHelper from '../../../../../../../../utils/bem';
+import Tekst from 'tekster/finn-tekst';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { LenkeMedGA } from '../../../../../../../LenkeMedGA';
-import { GACategory } from '../../../../../../../../utils/google-analytics';
+import { GACategory } from 'utils/google-analytics';
+import BEMHelper from 'utils/bem';
 
 interface Props {
     url: string;

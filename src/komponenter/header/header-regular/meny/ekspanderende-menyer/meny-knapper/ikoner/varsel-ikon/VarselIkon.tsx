@@ -1,7 +1,7 @@
 import React from 'react';
-import './VarselIkon.less';
-import BEMHelper from '../../../../../../../utils/bem';
+import BEMHelper from 'utils/bem';
 import { EtikettLiten } from 'nav-frontend-typografi';
+import './VarselIkon.less';
 
 type Props = {
     isOpen: boolean;

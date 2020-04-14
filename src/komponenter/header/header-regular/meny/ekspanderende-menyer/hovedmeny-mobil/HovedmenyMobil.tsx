@@ -1,24 +1,15 @@
 import React from 'react';
-import { AppState } from '../../../../../../reducer/reducers';
+import { AppState } from 'reducer/reducers';
 import { useDispatch, useSelector } from 'react-redux';
-import { Status } from '../../../../../../api/api';
-import {
-    getHovedmenyNode,
-    getMinsideMenyNode,
-} from '../../../../../../utils/meny-storage-utils';
-
+import { Status } from 'api/api';
+import { getHovedmenyNode, getMinsideMenyNode } from 'utils/meny-storage-utils';
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
-import {
-    GACategory,
-    triggerGaEvent,
-} from '../../../../../../utils/google-analytics';
-import { finnTekst } from '../../../../../../tekster/finn-tekst';
-import {
-    toggleHovedmeny,
-    toggleUndermenyVisning,
-} from '../../../../../../reducer/dropdown-toggle-duck';
-import { Language } from '../../../../../../reducer/language-duck';
-import { dataInitState } from '../../../../../../reducer/menu-duck';
+import { GACategory, triggerGaEvent } from 'utils/google-analytics';
+import { finnTekst } from 'tekster/finn-tekst';
+import { toggleUndermenyVisning } from 'reducer/dropdown-toggle-duck';
+import { toggleHovedmeny } from 'reducer/dropdown-toggle-duck';
+import { Language } from 'reducer/language-duck';
+import { dataInitState } from 'reducer/menu-duck';
 import HamburgerKnapp from '../meny-knapp/hamburger-knapp/HamburgerKnapp';
 import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import MenySpinner from '../meny-spinner/MenySpinner';

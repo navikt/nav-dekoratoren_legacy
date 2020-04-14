@@ -1,21 +1,18 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../../reducer/reducers';
+import { AppState } from 'reducer/reducers';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import BEMHelper from '../../../../utils/bem';
-import { finnArbeidsflate } from '../../../../reducer/arbeidsflate-duck';
-import {
-    MenuValue,
-    oppdaterSessionStorage,
-} from '../../../../utils/meny-storage-utils';
+import BEMHelper from 'utils/bem';
+import { finnArbeidsflate } from 'reducer/arbeidsflate-duck';
+import { MenuValue, oppdaterSessionStorage } from 'utils/meny-storage-utils';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
-import './MobilarbeidsflateValg.less';
-import { GACategory } from '../../../utils/google-analytics';
-import { LenkeMedGA } from '../../LenkeMedGA';
+import { GACategory } from 'utils/google-analytics';
+import { LenkeMedGA } from '../../../LenkeMedGA';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
-import { finnTekst } from '../../../tekster/finn-tekst';
-import { Language } from '../../../reducer/language-duck';
-import { erNavDekoratoren } from '../../../utils/Environment';
+import { finnTekst } from 'tekster/finn-tekst';
+import { Language } from 'reducer/language-duck';
+import { erNavDekoratoren } from 'utils/Environment';
+import './MobilarbeidsflateValg.less';
 
 interface Props {
     tabindex: boolean;

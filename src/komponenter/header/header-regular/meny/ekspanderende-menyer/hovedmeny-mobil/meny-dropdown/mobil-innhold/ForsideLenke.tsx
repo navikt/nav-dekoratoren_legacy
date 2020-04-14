@@ -1,11 +1,11 @@
 import React from 'react';
-import { MenuValue } from '../../../../../../../../utils/meny-storage-utils';
-import BEMHelper from '../../../../../../../../utils/bem';
-import Tekst from '../../../../../../../../tekster/finn-tekst';
+import { MenuValue } from 'utils/meny-storage-utils';
+import BEMHelper from 'utils/bem';
+import Tekst from 'tekster/finn-tekst';
 import Lenke from 'nav-frontend-lenker';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../../../../../../reducer/reducers';
+import { AppState } from 'reducer/reducers';
 
 interface Props {
     arbeidsflate: MenuValue;

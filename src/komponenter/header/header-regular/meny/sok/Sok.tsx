@@ -1,28 +1,25 @@
 import React from 'react';
-import { AppState } from '../../../../../reducer/reducers';
+import { AppState } from 'reducer/reducers';
 import { connect } from 'react-redux';
 import debounce from 'lodash.debounce';
 import Downshift, { DownshiftState, StateChangeOptions } from 'downshift';
 import cls from 'classnames';
 import { Input } from 'nav-frontend-skjema';
-import { Language } from '../../../../../reducer/language-duck';
-import { genererUrl } from '../../../../../utils/Environment';
-import Tekst, { finnTekst } from '../../../../../tekster/finn-tekst';
+import { Language } from 'reducer/language-duck';
+import { genererUrl } from 'utils/Environment';
+import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { defaultData, InputState } from './sok-utils';
 import { SokeresultatData, visAlleTreff } from './sok-utils';
 import SokeforslagIngress from './sok-innhold/SokeforslagIngress';
 import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
 import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
 import Sokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Sokknapp';
-import {
-    GACategory,
-    triggerGaEvent,
-} from '../../../../../utils/google-analytics';
+import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import { Systemtittel } from 'nav-frontend-typografi';
 import NavFrontendSpinner from 'nav-frontend-spinner';
+import BEMHelper from 'utils/bem';
+import { EnvironmentState } from 'reducer/environment-duck';
 import './Sok.less';
-import BEMHelper from '../../../../utils/bem';
-import { EnvironmentState } from '../../../../reducer/environment-duck';
 
 interface StateProps {
     language: Language;

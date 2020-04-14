@@ -1,6 +1,6 @@
 import React from 'react';
+import BEMHelper from 'utils/bem';
 import './HamburgerIkon.less';
-import BEMHelper from '../../../../../../../utils/bem';
 
 type Props = {
     isOpen: boolean;

@@ -1,9 +1,9 @@
-import { MenyNode } from '../../../../../../../../reducer/menu-duck';
-import { MenyLenkeSeksjon } from '../../../meny-lenker/MenyLenkeSeksjon';
 import React from 'react';
-import BEMHelper from '../../../../../../../../utils/bem';
+import { MenyNode } from 'reducer/menu-duck';
+import { MenyLenkeSeksjon } from '../../../meny-lenker/MenyLenkeSeksjon';
+import BEMHelper from 'utils/bem';
+import { NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './Hovedseksjon.less';
-import { NaviGroup } from '../../../../../../../utils/keyboard-navigation/kb-navigation';
 
 interface Props {
     menyLenker: MenyNode;

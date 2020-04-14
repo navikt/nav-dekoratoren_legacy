@@ -1,16 +1,14 @@
 import React from 'react';
-import { AppState } from '../../../../../../../reducer/reducers';
-import './Varselvisning.less';
-import { GACategory } from '../../../../../../utils/google-analytics';
-import Tekst, { finnTekst } from '../../../../../../tekster/finn-tekst';
-import { LenkeMedGA } from '../../../../../LenkeMedGA';
+import { AppState } from 'reducer/reducers';
+import { GACategory } from 'utils/google-analytics';
+import Tekst, { finnTekst } from 'tekster/finn-tekst';
+import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
 import { Undertittel } from 'nav-frontend-typografi';
-import {
-    getKbId,
-    NaviGroup,
-} from '../../../../../../utils/keyboard-navigation/kb-navigation';
+import { NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { getKbId } from 'utils/keyboard-navigation/kb-navigation';
+import './Varselvisning.less';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,

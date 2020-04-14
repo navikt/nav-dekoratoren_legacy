@@ -1,16 +1,16 @@
 import React from 'react';
-import BEMHelper from '../../../../utils/bem';
-import InnloggingsstatusProvider from '../../../../provider/Innloggingsstatus-provider';
-import NavLogoRod from '../../../../ikoner/meny/NavLogoRod';
+import BEMHelper from 'utils/bem';
+import InnloggingsstatusProvider from 'provider/Innloggingsstatus-provider';
+import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
-import './MobilMenylinje.less';
-import { Language } from '../../../reducer/language-duck';
+import { Language } from 'reducer/language-duck';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../reducer/reducers';
-import VarselinnboksProvider from '../../../provider/Varselinnboks-provider';
+import { AppState } from 'reducer/reducers';
+import VarselinnboksProvider from 'provider/Varselinnboks-provider';
 import Varselbjelle from './varsel/Varselbjelle';
-import { toggleVarselVisning } from '../../../reducer/dropdown-toggle-duck';
+import { toggleVarselVisning } from 'reducer/dropdown-toggle-duck';
 import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
+import './MobilMenylinje.less';
 
 const mobilClass = BEMHelper('mobilmeny');
 

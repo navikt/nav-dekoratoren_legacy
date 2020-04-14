@@ -1,19 +1,15 @@
-import Tekst from '../../../../../../../../tekster/finn-tekst';
+import Tekst from 'tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
 import React from 'react';
-import BEMHelper from '../../../../../../../../utils/bem';
-import KbNav, {
-    NaviGroup,
-} from '../../../../../../../../utils/keyboard-navigation/kb-navigation';
-import { GACategory } from '../../../../../../../../utils/google-analytics';
+import BEMHelper from 'utils/bem';
+import KbNav, { NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { GACategory } from 'utils/google-analytics';
 import { LenkeMedGA } from '../../../../../../../LenkeMedGA';
-import './Toppseksjon.less';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../../../../../reducer/reducers';
-import {
-    getArbeidsflateContext,
-    settArbeidsflate,
-} from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
+import { AppState } from 'reducer/reducers';
+import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { getArbeidsflateContext } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import './Toppseksjon.less';
 
 interface Props {
     classname: string;

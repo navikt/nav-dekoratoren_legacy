@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import DesktopMenylinje from './DesktopMenylinje';
-import NavLogoRod from '../../../../ikoner/meny/NavLogoRod';
+import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import HovedmenyDesktop from './ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
 import { SokDropdown } from './ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
 

@@ -3,15 +3,13 @@ import { mount } from 'enzyme';
 import { MinsideMenyDesktop } from './MinsideMenyDesktop';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { reducers } from '../../../../../../reducer/reducers';
-import {
-    settArbeidsgiverflate,
-    settPersonflate,
-    settSamarbeidspartnerflate,
-} from '../../../../../../reducer/arbeidsflate-duck';
-import { ActionType } from '../../../../../../state/actions';
-import { Status } from '../../../../../../api/api';
-import mockMenu from '../../../../../../server/mock/menu.json';
+import { reducers } from 'reducer/reducers';
+import { settArbeidsgiverflate } from 'reducer/arbeidsflate-duck';
+import { settPersonflate } from 'reducer/arbeidsflate-duck';
+import { settSamarbeidspartnerflate } from 'reducer/arbeidsflate-duck';
+import { ActionType } from 'state/actions';
+import { Status } from 'api/api';
+import mockMenu from 'server/mock/menu.json';
 
 const store = createStore(reducers);
 

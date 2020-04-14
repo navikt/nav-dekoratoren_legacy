@@ -1,6 +1,6 @@
 import React, { MouseEvent } from 'react';
-import Tekst from '../../../../../../tekster/finn-tekst';
-import BEMHelper from '../../../../../../utils/bem';
+import Tekst from 'tekster/finn-tekst';
+import BEMHelper from 'utils/bem';
 
 interface Props {
     writtenInput?: string;

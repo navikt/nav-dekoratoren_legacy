@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import BEMHelper from '../../../../../../../utils/bem';
-import { MenyNode } from '../../../../../../../reducer/menu-duck';
+import BEMHelper from 'utils/bem';
+import { MenyNode } from 'reducer/menu-duck';
 import { MenyLenkeSeksjon } from '../../meny-lenker/MenyLenkeSeksjon';
-import KbNav, {
+import KbNav from 'utils/keyboard-navigation/kb-navigation';
+import {
     NaviGraphData,
     NaviGroup,
     NaviNode,
-} from '../../../../../../../utils/keyboard-navigation/kb-navigation';
-import { LenkeMedGA } from '../../../../../../LenkeMedGA';
-import { GACategory } from '../../../../../../../utils/google-analytics';
-import Tekst from '../../../../../../../tekster/finn-tekst';
+} from 'utils/keyboard-navigation/kb-navigation';
+import { LenkeMedGA } from 'komponenter/LenkeMedGA';
+import { GACategory } from 'utils/google-analytics';
+import Tekst from 'tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { desktopMinsideKnappId } from '../MinsideMenyDesktop';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../../../../../reducer/reducers';
+import { AppState } from 'reducer/reducers';
 
 type Props = {
     classname: string;

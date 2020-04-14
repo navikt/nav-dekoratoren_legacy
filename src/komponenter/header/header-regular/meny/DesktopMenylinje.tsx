@@ -1,14 +1,14 @@
 import React from 'react';
-import BEMHelper from '../../../../utils/bem';
-import VarselinnboksProvider from '../../../../provider/Varselinnboks-provider';
-import InnloggingsstatusProvider from '../../../../provider/Innloggingsstatus-provider';
-import NavLogoRod from '../../../../ikoner/meny/NavLogoRod';
+import BEMHelper from 'utils/bem';
+import VarselinnboksProvider from 'provider/Varselinnboks-provider';
+import InnloggingsstatusProvider from 'provider/Innloggingsstatus-provider';
+import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
-import './DesktopMenylinje.less';
 import { SokDropdown } from './ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
 import { HovedmenyDesktop } from './ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
 import MinsideMenyDesktop from './ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
 import { VarslerDropdown } from './ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
+import './DesktopMenylinje.less';
 
 const desktopMenylinje = BEMHelper('desktopmeny');
 

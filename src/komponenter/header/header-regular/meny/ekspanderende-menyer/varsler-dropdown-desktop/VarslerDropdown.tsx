@@ -1,19 +1,16 @@
 import React from 'react';
-import { AppState } from '../../../../../reducer/reducer';
+import { AppState } from 'reducer/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
-import { toggleVarsler } from '../../../../../../reducer/dropdown-toggle-duck';
+import { toggleVarsler } from 'reducer/dropdown-toggle-duck';
 import { Normaltekst } from 'nav-frontend-typografi';
-import Tekst from '../../../../../../tekster/finn-tekst';
-import {
-    GACategory,
-    triggerGaEvent,
-} from '../../../../../../utils/google-analytics';
+import Tekst from 'tekster/finn-tekst';
+import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
-import './VarslerDropdown.less';
 import { VarselIkon } from '../meny-knapper/ikoner/varsel-ikon/VarselIkon';
 import { Varselvisning } from './varselvisning/Varselvisning';
-import { MenuValue } from '../../../../../utils/meny-storage-utils';
+import { MenuValue } from 'utils/meny-storage-utils';
+import './VarslerDropdown.less';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.varsler,

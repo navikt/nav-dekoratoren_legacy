@@ -1,8 +1,8 @@
+import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import React from 'react';
+import Tekst from 'tekster/finn-tekst';
 import './MenySpinner.less';
-import Tekst from '../../../../../tekster/finn-tekst';
 
 const MenySpinner = () => (
     <div className={'spinner-container'}>

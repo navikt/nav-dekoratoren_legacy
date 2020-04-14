@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import BEMHelper, { BEMWrapper } from '../../../../../../../utils/bem';
-import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
-import { MenyNode } from '../../../../../../../reducer/menu-duck';
-import { Language } from '../../../../../../../reducer/language-duck';
-import KbNav, {
-    NaviGraphData,
-    NaviGroup,
-    NaviNode,
-} from '../../../../../../../utils/keyboard-navigation/kb-navigation';
-import { matchMedia } from '../../../../../../../utils/match-media-polyfill';
+import BEMHelper, { BEMWrapper } from 'utils/bem';
+import { MenuValue } from 'utils/meny-storage-utils';
+import { MenyNode } from 'reducer/menu-duck';
+import { Language } from 'reducer/language-duck';
+import KbNav from 'utils/keyboard-navigation/kb-navigation';
+import { NaviGroup, NaviNode } from 'utils/keyboard-navigation/kb-navigation';
+import { NaviGraphData } from 'utils/keyboard-navigation/kb-navigation';
+import { matchMedia } from 'utils/match-media-polyfill';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';

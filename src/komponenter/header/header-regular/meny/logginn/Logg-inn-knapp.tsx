@@ -1,13 +1,13 @@
 import React from 'react';
-import { erNavDekoratoren } from '../../../../../utils/Environment';
-import Tekst from '../../../../../tekster/finn-tekst';
+import { erNavDekoratoren } from 'utils/Environment';
+import Tekst from 'tekster/finn-tekst';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import './Logg-inn-knapp.less';
-import { GACategory, triggerGaEvent } from '../../../../utils/google-analytics';
+import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import { TextTransformFirstLetterToUppercase } from '../ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import KnappBase from 'nav-frontend-knapper';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../../reducer/reducers';
+import { AppState } from 'reducer/reducers';
+import './Logg-inn-knapp.less';
 
 export const LoggInnKnapp = () => {
     const { environment } = useSelector((state: AppState) => state);

@@ -1,7 +1,7 @@
 import React from 'react';
-import './MinsideIkon.less';
-import BEMHelper from '../../../../../../../utils/bem';
+import BEMHelper from 'utils/bem';
 import HamburgerIkon from '../../ikoner/hamburger-ikon/HamburgerIkon';
+import './MinsideIkon.less';
 
 type Props = {
     hasMenu: boolean;

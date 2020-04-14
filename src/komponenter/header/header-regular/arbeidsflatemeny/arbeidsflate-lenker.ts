@@ -1,9 +1,6 @@
-import {
-    MenuValue,
-    oppdaterSessionStorage,
-} from '../../../../utils/meny-storage-utils';
-import { erNavDekoratoren } from '../../../../utils/Environment';
-import { finnArbeidsflate } from '../../../../reducer/arbeidsflate-duck';
+import { MenuValue, oppdaterSessionStorage } from 'utils/meny-storage-utils';
+import { erNavDekoratoren } from 'utils/Environment';
+import { finnArbeidsflate } from 'reducer/arbeidsflate-duck';
 import { Dispatch } from 'redux';
 
 export interface ArbeidsflateLenke {

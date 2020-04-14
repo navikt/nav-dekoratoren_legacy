@@ -1,20 +1,16 @@
 import React from 'react';
-import BEMHelper from '../../../../../../../../utils/bem';
+import BEMHelper from 'utils/bem';
 import BunnseksjonLenke from './BunnseksjonLenke';
-import KbNav, {
-    NaviGroup,
-} from '../../../../../../../../utils/keyboard-navigation/kb-navigation';
-import { MenuValue } from '../../../../../../../../utils/meny-storage-utils';
-import { Language } from '../../../../../../../../reducer/language-duck';
-import { finnTekst } from '../../../../../../../../tekster/finn-tekst';
+import KbNav, { NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { MenuValue } from 'utils/meny-storage-utils';
+import { Language } from 'reducer/language-duck';
+import { finnTekst } from 'tekster/finn-tekst';
 import { bunnLenker } from './BunnseksjonLenkedata';
-import './Bunnseksjon.less';
-import {
-    ArbeidsflateLenke,
-    settArbeidsflate,
-} from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
+import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { ArbeidsflateLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../../../../../reducer/reducers';
+import { AppState } from 'reducer/reducers';
+import './Bunnseksjon.less';
 
 interface Props {
     classname: string;

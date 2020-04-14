@@ -1,10 +1,8 @@
-import { MenuValue } from '../../../../../../../../utils/meny-storage-utils';
-import {
-    arbeidsgiverContextLenke,
-    personContextLenke,
-    samarbeidspartnerContextLenke,
-} from '../../../../../arbeidsflatemeny/arbeidsflate-lenker';
-import { EnvironmentState } from '../../../../../../../../reducer/environment-duck';
+import { MenuValue } from 'utils/meny-storage-utils';
+import { arbeidsgiverContextLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { personContextLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { samarbeidspartnerContextLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { EnvironmentState } from 'reducer/environment-duck';
 
 type LenkeData = {
     url: string;

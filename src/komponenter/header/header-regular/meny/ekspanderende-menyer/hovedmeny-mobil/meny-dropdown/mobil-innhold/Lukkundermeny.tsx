@@ -2,10 +2,10 @@ import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import { Undertittel } from 'nav-frontend-typografi/';
 import VenstreChevron from 'nav-frontend-chevron/lib/venstre-chevron';
-import BEMHelper from '../../../../../../../../utils/bem';
-import Tekst from '../../../../../../../../tekster/finn-tekst';
+import BEMHelper from 'utils/bem';
+import Tekst from 'tekster/finn-tekst';
 import { useDispatch } from 'react-redux';
-import { toggleUndermenyVisning } from '../../../../../../../../reducer/dropdown-toggle-duck';
+import { toggleUndermenyVisning } from 'reducer/dropdown-toggle-duck';
 
 interface Props {
     setFocusIndex: () => void;

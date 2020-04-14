@@ -1,8 +1,8 @@
 import React from 'react';
-import './MenyBakgrunn.less';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../../../reducer/reducer';
-import { lukkAlleDropdowns } from '../../../../../reducer/dropdown-toggle-duck';
+import { AppState } from 'reducer/reducers';
+import { lukkAlleDropdowns } from 'reducer/dropdown-toggle-duck';
+import './MenyBakgrunn.less';
 
 const MenyBakgrunn = () => {
     const dispatch = useDispatch();

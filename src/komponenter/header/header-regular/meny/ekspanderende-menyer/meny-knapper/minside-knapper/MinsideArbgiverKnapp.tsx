@@ -1,11 +1,11 @@
 import React from 'react';
-import BEMHelper from '../../../../../../../utils/bem';
+import BEMHelper from 'utils/bem';
 import MinsideIkon from '../ikoner/minside-ikon/MinsideIkon';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import Tekst from '../../../../../../../tekster/finn-tekst';
+import Tekst from 'tekster/finn-tekst';
+import { LenkeMedGA } from '../../../../../../LenkeMedGA';
+import { GACategory } from 'utils/google-analytics';
 import './MinsideKnapper.less';
-import { LenkeMedGA } from '../../../../../LenkeMedGA';
-import { GACategory } from '../../../../../../utils/google-analytics';
 
 type Props = {
     classname: string;

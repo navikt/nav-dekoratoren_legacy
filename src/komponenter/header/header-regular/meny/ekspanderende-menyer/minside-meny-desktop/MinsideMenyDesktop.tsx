@@ -1,22 +1,16 @@
 import React from 'react';
-import { AppState } from '../../../../../../reducer/reducers';
+import { AppState } from 'reducer/reducers';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    getMinsideMenyNode,
-    MenuValue,
-} from '../../../../../../utils/meny-storage-utils';
-import {
-    GACategory,
-    triggerGaEvent,
-} from '../../../../../../utils/google-analytics';
-import { toggleMinsideMeny } from '../../../../../../reducer/dropdown-toggle-duck';
-import { Status } from '../../../../../../api/api';
+import { getMinsideMenyNode, MenuValue } from 'utils/meny-storage-utils';
+import { GACategory, triggerGaEvent } from 'utils/google-analytics';
+import { toggleMinsideMeny } from 'reducer/dropdown-toggle-duck';
+import { Status } from 'api/api';
 import MenySpinner from '../meny-spinner/MenySpinner';
 import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import MinsideDropdown from './minside-dropdown/MinsideDropdown';
-import './MinsideMenyDesktop.less';
 import { MinsidePersonKnapp } from '../meny-knapper/minside-knapper/MinsidePersonKnapp';
 import MinsideArbgiverKnapp from '../meny-knapper/minside-knapper/MinsideArbgiverKnapp';
+import './MinsideMenyDesktop.less';
 
 const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,

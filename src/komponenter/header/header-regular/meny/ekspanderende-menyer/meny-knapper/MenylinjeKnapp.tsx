@@ -1,5 +1,5 @@
 import React from 'react';
-import BEMHelper from '../../../../../../utils/bem';
+import BEMHelper from 'utils/bem';
 import './MenylinjeKnapp.less';
 
 interface Props {

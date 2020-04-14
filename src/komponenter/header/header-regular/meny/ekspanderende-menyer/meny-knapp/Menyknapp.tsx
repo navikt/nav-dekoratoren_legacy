@@ -1,7 +1,7 @@
 import React from 'react';
-import BEMHelper from '../../../../../../utils/bem';
-import './Menyknapp.less';
+import BEMHelper from 'utils/bem';
 import { Flatknapp } from 'nav-frontend-knapper';
+import './Menyknapp.less';
 
 interface Props {
     toggleMenu: () => void;

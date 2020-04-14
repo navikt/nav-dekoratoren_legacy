@@ -7,13 +7,11 @@ import { getHovedmenyNode } from 'utils/meny-storage-utils';
 import Tekst from 'tekster/finn-tekst';
 import { toggleHovedmeny } from 'reducer/dropdown-toggle-duck';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
-
 import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import { HovedmenyDropdown } from './hovedmeny-dropdown/HovedmenyDropdown';
 import MenySpinner from '../meny-spinner/MenySpinner';
 import HamburgerIkon from '../meny-knapper/ikoner/hamburger-ikon/HamburgerIkon';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
-
 import './HovedmenyDesktop.less';
 
 const stateSelector = (state: AppState) => ({

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Navlogo from '../../../../../../../../../ikoner/meny/Navlogo';
-import BEMHelper from '../../../../../../../../../utils/bem';
-import './Toppseksjon.less';
+import Navlogo from 'ikoner/meny/Navlogo';
+import BEMHelper from 'utils/bem';
 import { useDispatch } from 'react-redux';
-import { lukkAlleDropdowns } from '../../../../../../../../reducer/dropdown-toggle-duck';
+import { lukkAlleDropdowns } from 'reducer/dropdown-toggle-duck';
+import './Toppseksjon.less';
 
 interface Props {
     tabindex: boolean;

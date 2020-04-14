@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
-import Tekst from '../../../../../../tekster/finn-tekst';
+import Tekst from 'tekster/finn-tekst';
 
 interface Props {
     triggerVarsel: () => void;
