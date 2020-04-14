@@ -1,5 +1,5 @@
 import { Action, Reducer } from 'redux';
-import { ActionType } from '../redux/actions';
+import { ActionType } from '../state/actions';
 
 export enum Language {
     NORSK = 'NORSK',

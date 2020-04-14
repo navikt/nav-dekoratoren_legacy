@@ -1,6 +1,6 @@
 import React, { createRef, ReactNode } from 'react';
 import { AppState } from '../../../../reducer/reducers';
-import { Dispatch } from '../../../../redux/dispatch-type';
+import { Dispatch } from '../../../../state/dispatch-type';
 import { connect } from 'react-redux';
 import { settVarslerSomLest } from '../../../../reducer/varsel-lest-duck';
 import { MenuValue } from '../../../../utils/meny-storage-utils';

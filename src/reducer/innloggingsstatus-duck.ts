@@ -4,8 +4,8 @@ import {
     HentInnloggingsstatusFEILETAction,
     HentInnloggingsstatusOKAction,
     HentInnloggingsstatusPENDINGAction,
-} from '../redux/actions';
-import { Dispatch } from '../redux/dispatch-type';
+} from '../state/actions';
+import { Dispatch } from '../state/dispatch-type';
 import { fetchThenDispatch } from '../api/api-utils';
 import { hentInnloggingsstatusFetch } from '../api/api';
 import { DataElement, Status } from '../api/api';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { createStore } from '../../../redux/store';
+import { createStore } from '../../../state/store';
 import { Provider as ReduxProvider } from 'react-redux';
 import Skiplinks from './Skiplinks';
 

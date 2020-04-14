@@ -1,5 +1,5 @@
 import { MenuValue } from '../utils/meny-storage-utils';
-import { ActionType, Handling } from '../redux/actions';
+import { ActionType, Handling } from '../state/actions';
 
 export interface EnvironmentState {
     XP_BASE_URL: string;

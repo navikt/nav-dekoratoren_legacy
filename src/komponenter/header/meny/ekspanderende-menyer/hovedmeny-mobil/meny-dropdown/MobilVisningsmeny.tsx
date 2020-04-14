@@ -12,7 +12,7 @@ import VarselinnboksProvider from '../../../../../../provider/Varselinnboks-prov
 import VarselvisningMobil from '../../../varsel/varselvisning/VarselvisningMobil';
 import './MobilVisningsmeny.less';
 import { AppState } from '../../../../../../reducer/reducers';
-import { Dispatch } from '../../../../../../redux/dispatch-type';
+import { Dispatch } from '../../../../../../state/dispatch-type';
 import { finnArbeidsflate } from '../../../../../../reducer/arbeidsflate-duck';
 import { connect } from 'react-redux';
 import Sok from '../../../sok/Sok';

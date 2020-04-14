@@ -4,7 +4,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { hentInnloggingsstatusOk } from 'reducer/innloggingsstatus-duck';
 import Tekst from 'tekster/finn-tekst';
 import LoggInnKnapp from './Logg-inn-knapp';
-import { createStore } from 'redux/store';
+import { createStore } from 'state/store';
 import { Store } from 'redux';
 
 const mountWithRedux = (store: Store) =>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../reducer/reducers';
-import { Dispatch } from '../redux/dispatch-type';
+import { Dispatch } from '../state/dispatch-type';
 import {
     hentInnloggingsstatus,
     InnloggingsstatusState,

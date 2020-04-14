@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider as ReduxProvider } from 'react-redux';
-import { createStore } from '../../../../../../redux/store';
+import { createStore } from '../../../../../../state/store';
 import { dataInitState } from '../../../../../../reducer/menu-duck';
 import { Language } from '../../../../../../reducer/language-duck';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
