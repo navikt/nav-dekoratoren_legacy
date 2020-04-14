@@ -4,7 +4,7 @@ import 'isomorphic-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
-import { createStore } from './redux/store';
+import { createStore } from './state/store';
 import { erDev, verifyWindowObj } from './utils/Environment';
 import Footer from './komponenter/footer/Footer';
 import { fetchEnv } from './utils/Environment';

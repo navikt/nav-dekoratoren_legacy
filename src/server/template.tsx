@@ -8,7 +8,7 @@ import { Request } from 'express';
 import { clientEnv } from './utils';
 import hash from 'object-hash';
 
-import { createStore } from '../redux/store';
+import { createStore } from '../state/store';
 import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 

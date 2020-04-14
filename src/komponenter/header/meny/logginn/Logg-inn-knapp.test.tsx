@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { Provider as ReduxProvider } from 'react-redux';
-import Tekst from '../../../../tekster/finn-tekst';
+import { hentInnloggingsstatusOk } from 'reducer/innloggingsstatus-duck';
+import Tekst from 'tekster/finn-tekst';
 import LoggInnKnapp from './Logg-inn-knapp';
-import { createStore } from '../../../../redux/store';
+import { createStore } from 'state/store';
 import { Store } from 'redux';
-import { hentInnloggingsstatusOk } from '../../../../reducer/innloggingsstatus-duck';
 
 const mountWithRedux = (store: Store) =>
     mount(

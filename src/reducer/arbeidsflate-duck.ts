@@ -9,7 +9,7 @@ import {
     SettArbeidsgiverAction,
     SettPrivatpersonAction,
     SettSamarbeidspartnerAction,
-} from '../redux/actions';
+} from '../state/actions';
 import { verifyWindowObj } from '../utils/Environment';
 
 export interface Arbeidsflate {

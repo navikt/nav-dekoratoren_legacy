@@ -156,6 +156,11 @@
     "jest": {
         "rootDir": ".",
         "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+        "moduleDirectories": [
+            "node_modules",
+            "bower_components",
+            "src"
+        ],
         "setupFilesAfterEnv": [
             "<rootDir>/src/utils/jest/setupTest.js"
         ],

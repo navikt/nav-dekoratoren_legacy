@@ -4,8 +4,8 @@ import {
     HentMenyLenkerFAILED,
     HentMenyLenkerPENDING,
     HentMenyLenkerSUCCESS,
-} from '../redux/actions';
-import { Dispatch } from '../redux/dispatch-type';
+} from '../state/actions';
+import { Dispatch } from '../state/dispatch-type';
 import { fetchThenDispatch } from '../api/api-utils';
 import { hentMenyPunkter, DataElement, Status } from '../api/api';
 

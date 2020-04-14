@@ -5,8 +5,8 @@ import {
     HentVarslerOKAction,
     HentVarslerPENDINGAction,
     SettVarslerOKAction,
-} from '../redux/actions';
-import { Dispatch } from '../redux/dispatch-type';
+} from '../state/actions';
+import { Dispatch } from '../state/dispatch-type';
 import { fetchThenDispatch } from '../api/api-utils';
 import { hentVarslerFetch } from '../api/api';
 import { DataElement, Status } from '../api/api';

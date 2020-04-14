@@ -9,7 +9,7 @@ import {
     settPersonflate,
     settSamarbeidspartnerflate,
 } from '../../../../../reducer/arbeidsflate-duck';
-import { ActionType } from '../../../../../redux/actions';
+import { ActionType } from '../../../../../state/actions';
 import { Status } from '../../../../../api/api';
 import mockMenu from '../../../../../server/mock/menu.json';
 

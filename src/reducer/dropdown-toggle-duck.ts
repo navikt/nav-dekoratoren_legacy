@@ -1,4 +1,4 @@
-import { ActionType, Handling } from '../redux/actions';
+import { ActionType, Handling } from '../state/actions';
 
 export interface DropdownState {
     hovedmeny: boolean;
