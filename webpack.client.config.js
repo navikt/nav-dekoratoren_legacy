@@ -23,11 +23,12 @@ const browserConfig = {
             api: path.resolve(__dirname, './src/api'),
             ikoner: path.resolve(__dirname, './src/ikoner'),
             komponenter: path.resolve(__dirname, './src/komponenter'),
+            provider: path.resolve(__dirname, './src/provider'),
             reducer: path.resolve(__dirname, './src/reducer'),
             state: path.resolve(__dirname, './src/state'),
             tekster: path.resolve(__dirname, './src/tekster'),
             types: path.resolve(__dirname, './src/types'),
-            utils: path.resolve(__dirname, './src/utils'),
+            utils: path.resolve(__dirname, './src/utils')
         }
     },
     stats: 'errors-only',
