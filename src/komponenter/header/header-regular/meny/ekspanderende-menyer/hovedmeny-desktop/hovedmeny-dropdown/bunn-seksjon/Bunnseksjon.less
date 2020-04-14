@@ -1,0 +1,49 @@
+@import (reference) '../../../../../../../../styling-variabler.less';
+@import (reference) '../../../meny-lenker/MenyLenker';
+
+.desktop-hovedmeny {
+    @bunnseksjon-margin: 2.5em;
+    @bunnseksjon-cols: 3;
+
+    &__bunn-separator {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        border: none;
+        border-top: 1px solid @navGra60;
+    }
+
+    &__bunn-seksjon {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 2rem;
+        --num-cols: @bunnseksjon-cols;
+
+        & > * {
+            .col-setup(@bunnseksjon-cols, @bunnseksjon-margin);
+        }
+    }
+
+    &__bunn-lenke {
+        .lenke-stil();
+    }
+
+    &__bunn-lenke-stikkord {
+        display: inline-block;
+        list-style-type: disc;
+        list-style-position: inside;
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: inline-block;
+
+            &:not(:first-of-type) {
+                .bullet::before {
+                    content: '•';
+                    margin: 0 0.25em;
+                }
+            }
+        }
+    }
+}

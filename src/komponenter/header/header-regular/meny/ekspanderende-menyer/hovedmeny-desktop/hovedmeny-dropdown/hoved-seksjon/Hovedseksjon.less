@@ -1,0 +1,35 @@
+@import (reference) '../../../../../../../../styling-variabler.less';
+@import (reference) '../../../meny-lenker/MenyLenker';
+
+.desktop-hovedmeny {
+    @hovedseksjon-margin: 1.5em;
+    @hovedseksjon-cols-sm: 3;
+    @hovedseksjon-cols-md: 4;
+    @hovedseksjon-cols-lg: 5;
+
+    &__hoved-seksjon {
+        display: flex;
+        flex-grow: 6;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+        @media (max-width: @smallDesktopLimitWidth) {
+            --num-cols: @hovedseksjon-cols-sm;
+            & > * {
+                .col-setup(@hovedseksjon-cols-sm, @hovedseksjon-margin);
+            }
+        }
+        @media (min-width: @smallDesktopLimitWidth) {
+            --num-cols: @hovedseksjon-cols-md;
+            & > * {
+                .col-setup(@hovedseksjon-cols-md, @hovedseksjon-margin);
+            }
+        }
+        @media (min-width: @desktopLimitWidth) {
+            --num-cols: @hovedseksjon-cols-lg;
+            & > * {
+                .col-setup(@hovedseksjon-cols-lg, @hovedseksjon-margin);
+            }
+        }
+    }
+}

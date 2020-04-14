@@ -26,6 +26,17 @@
         }
     }
 
+    &__del-skjerm {
+        display: flex;
+        @media (min-width: @smallDesktopLimitWidth) {
+            justify-content: center;
+            align-items: center;
+        }
+        & > *:last-child {
+            margin-left: 0.5rem;
+        }
+    }
+
     &__lenke {
         @media (max-width: @smallDesktopLimitWidth) {
             :first-child {

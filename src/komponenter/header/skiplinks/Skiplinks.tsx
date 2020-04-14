@@ -4,9 +4,9 @@ import Tekst from '../../../tekster/finn-tekst';
 import { mobilviewMax } from '../../../styling-mediaquery';
 import './Skiplinks.less';
 import { matchMedia } from '../../../utils/match-media-polyfill';
-import { mobilHovedmenyKnappId } from '../meny/ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
-import { desktopHovedmenyKnappId } from '../meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
-import { desktopSokKnappId } from '../meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
+import { mobilHovedmenyKnappId } from '../header-regular/meny/ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
+import { desktopHovedmenyKnappId } from '../header-regular/meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
+import { desktopSokKnappId } from '../header-regular/meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
 
 const Skiplinks = () => {
     const [soklink, setSoklink] = useState<string>('');

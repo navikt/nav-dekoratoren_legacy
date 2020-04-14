@@ -1,17 +1,17 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import './FooterSimple.less';
-import '../Footer';
-import BEMHelper from '../../../utils/bem';
+import BEMHelper from 'utils/bem';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { LenkeMedGA } from '../../LenkeMedGA';
-import { GACategory } from '../../../utils/google-analytics';
+import { GACategory } from 'utils/google-analytics';
 import { FooterLenke, lenkerBunn } from '../Footer-lenker';
-import { genererLenkerTilUrl } from '../../../utils/Environment';
+import { genererLenkerTilUrl } from 'utils/Environment';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../reducer/reducers';
+import { AppState } from 'reducer/reducers';
 import Lenke from 'nav-frontend-lenker';
-import Tekst from '../../../tekster/finn-tekst';
+import Tekst from 'tekster/finn-tekst';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
+import DelSkjermIkon from 'ikoner/del-skjerm/DelSkjerm';
+import './FooterSimple.less';
 
 const cls = BEMHelper('simple-footer');
 
@@ -47,9 +47,11 @@ const SimpleFooter = () => {
                     <Lenke
                         href="#"
                         role="button"
+                        className={cls.element('del-skjerm')}
                         onClick={() => setIsOpen(true)}
                     >
                         <Tekst id="footer-del-skjerm" />
+                        <DelSkjermIkon height={20} width={20} />
                     </Lenke>
                     {isOpen && (
                         <DelSkjermModal
