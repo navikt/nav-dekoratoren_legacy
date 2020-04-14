@@ -21,29 +21,12 @@ const FooterTopp = () => {
         lenkerVenstre
     );
     const [hoyrelenker, setHoyrelenker] = useState<FooterLenke[]>(lenkerHoyre);
-    const [visDelSkjermModal, setVisDelSkjermModal] = useState(false);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
     useEffect(() => {
         setVenstrelenker(genererLenkerTilUrl(XP_BASE_URL, lenkerVenstre));
         setHoyrelenker(genererLenkerTilUrl(XP_BASE_URL, lenkerHoyre));
     }, []);
-
-    const openModal = () => {
-        triggerGaEvent({
-            category: GACategory.Footer,
-            action: `kontakt/del-skjerm-open`,
-        });
-        setVisDelSkjermModal(true);
-    };
-
-    const closeModal = () => {
-        triggerGaEvent({
-            category: GACategory.Footer,
-            action: `kontakt/del-skjerm-close`,
-        });
-        setVisDelSkjermModal(false);
-    };
 
     const scrollToTop = () =>
         window.scrollTo({
@@ -93,17 +76,6 @@ const FooterTopp = () => {
                                 </Normaltekst>
                             </li>
                         ))}
-                        <li>
-                            <Lenke href="#" role="button" onClick={openModal}>
-                                <Tekst id="footer-del-skjerm" />
-                            </Lenke>
-                            {visDelSkjermModal && (
-                                <DelSkjermModal
-                                    isOpen={visDelSkjermModal}
-                                    onClose={closeModal}
-                                />
-                            )}
-                        </li>
                     </ul>
                 </div>
                 <div className="menylenker-seksjon midt">

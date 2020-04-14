@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
+
 import { genererLenkerTilUrl } from 'utils/Environment';
 import BEMHelper from 'utils/bem';
-import { GACategory } from 'utils/google-analytics';
+import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
-import { FooterLenke, lenkerBunn } from '../FooterLenker';
 import NavLogoFooter from 'ikoner/meny/NavLogoFooter';
+import DelSkjerm from 'ikoner/del-skjerm/DelSkjerm';
 import { AppState } from 'store/reducers';
 import Tekst from 'tekster/finn-tekst';
+import LenkeMedIkon from 'komponenter/footer/lenke-med-ikon/LenkeMedIkon';
+import DelSkjermModal from 'komponenter/footer/del-skjerm-modal/DelSkjermModal';
+
+import { FooterLenke, lenkerBunn } from '../FooterLenker';
+
 import './footerBottom.less';
 
 const FooterBottom = () => {
     const cls = BEMHelper('menylinje-bottom');
+    const [visDelSkjermModal, setVisDelSkjermModal] = useState(false);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const [lenker, setLenker] = useState<FooterLenke[]>(lenkerBunn);
 
@@ -20,21 +27,37 @@ const FooterBottom = () => {
         setLenker(genererLenkerTilUrl(XP_BASE_URL, lenkerBunn));
     }, []);
 
+    const openModal = () => {
+        triggerGaEvent({
+            category: GACategory.Footer,
+            action: `kontakt/del-skjerm-open`,
+        });
+        setVisDelSkjermModal(true);
+    };
+
+    const closeModal = () => {
+        triggerGaEvent({
+            category: GACategory.Footer,
+            action: `kontakt/del-skjerm-close`,
+        });
+        setVisDelSkjermModal(false);
+    };
+
     return (
         <section className={cls.className}>
-            <div className="bottom-innhold">
-                <div className="bottom-logo">
-                    <NavLogoFooter
-                        width="65"
-                        height="65"
-                        classname={cls.element('svg')}
-                    />
-                </div>
-                <div className="bottom-lenker">
+            <div className="bottom-logo">
+                <NavLogoFooter
+                    width="65"
+                    height="65"
+                    classname={cls.element('svg')}
+                />
+            </div>
+            <div className="bottom-lenker">
+                <div>
                     <Normaltekst className="bottom-tekst">
                         <Tekst id="footer-arbeids-og-veldferdsetaten" />
                     </Normaltekst>
-                    <ul className="bottom-lenke">
+                    <ul>
                         {lenker.map(lenke => (
                             <li key={lenke.lenketekst}>
                                 <Normaltekst>
@@ -53,7 +76,19 @@ const FooterBottom = () => {
                         ))}
                     </ul>
                 </div>
+                <LenkeMedIkon
+                    className={cls.element('del-skjerm')}
+                    onClick={openModal}
+                    tekst={<Tekst id="footer-del-skjerm" />}
+                    ikon={<DelSkjerm height={24} width={24} />}
+                />
             </div>
+            {visDelSkjermModal && (
+                <DelSkjermModal
+                    isOpen={visDelSkjermModal}
+                    onClose={closeModal}
+                />
+            )}
         </section>
     );
 };
