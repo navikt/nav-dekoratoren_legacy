@@ -2,50 +2,35 @@
 @import '../../../../styling-variabler.less';
 
 .menylinje-bottom {
-    padding: 1rem;
+    display: flex;
+    padding: 2rem;
+
+    .bottom-logo {
+        margin-right: 0.8rem;
+    }
 
     @media (min-width: @tabletLimitWidth) {
-        padding: 2rem;
-
-        .bottom-innhold {
+        .bottom-lenker {
             display: flex;
+            justify-content: space-between;
+            width: 100%;
             align-items: center;
+        }
 
-            ul {
-                margin: 0;
-            }
-
-            .bottom-logo {
-                width: 65px;
-                height: 65px;
-                margin-right: 0.8rem;
-            }
-
-            .bottom-lenker {
-                width: 400px;
-            }
+        ul {
+            margin: 0;
         }
     }
 
     @media (min-width: 1300px) {
-        .bottom-innhold {
-            justify-content: center;
-
-            .bottom-lenker {
-                width: 85%;
-            }
-
-            .bottom-logo {
-                width: 15%;
-                margin-right: 0;
-            }
+        padding: 2rem 1rem;
+        .bottom-logo {
+            width: 15%;
         }
     }
 
     @media (min-width: @desktopLimitWidth) {
-        .bottom-innhold {
-            width: 1344px;
-            margin: 0 auto;
-        }
+        width: 1344px;
+        margin: 0 auto;
     }
 }
