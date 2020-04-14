@@ -1,10 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { AppState } from 'reducer/reducers';
-
+import { AppState } from 'store/reducers';
 import SimpleFooter from './footer-simple/FooterSimple';
 import RegularFooter from './footer-regular/FooterRegular';
-
 import './Footer.less';
 
 const Footer = () => {

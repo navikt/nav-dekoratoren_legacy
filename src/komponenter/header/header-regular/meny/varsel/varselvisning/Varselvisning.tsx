@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
-import { AppState } from 'reducer/reducers';
+import { AppState } from 'store/reducers';
 import { desktopview, tabletview } from '../../../../../../styling-mediaquery';
 import { triggerGaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
-import { Language } from 'reducer/language-duck';
+import { Language } from 'store/reducers/language-duck';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import './Varselvisning.less';
 

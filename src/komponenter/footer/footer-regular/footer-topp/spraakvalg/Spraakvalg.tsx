@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../../../reducer/reducers';
+import { AppState } from 'store/reducers';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { GACategory } from '../../../../../utils/google-analytics';
-import { LenkeMedGA } from '../../../../LenkeMedGA';
-import Tekst from '../../../../../tekster/finn-tekst';
-import { erNavDekoratoren } from '../../../../../utils/Environment';
-import {
-    getSpraaklenker,
-    Spraaklenke,
-    spraaklenker,
-} from './Spraakvalg-lenker';
+import { GACategory } from 'utils/google-analytics';
+import { LenkeMedGA } from 'komponenter/LenkeMedGA';
+import { erNavDekoratoren } from 'utils/Environment';
+import { Spraaklenke, spraaklenker } from './Spraakvalg-lenker';
+import { getSpraaklenker } from './Spraakvalg-lenker';
+import Tekst from 'tekster/finn-tekst';
 
 const Spraakvalg = () => {
     const language = useSelector((state: AppState) => state.language.language);

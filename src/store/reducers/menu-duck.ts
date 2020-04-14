@@ -1,13 +1,11 @@
-import {
-    ActionType,
-    Handling,
-    HentMenyLenkerFAILED,
-    HentMenyLenkerPENDING,
-    HentMenyLenkerSUCCESS,
-} from '../state/actions';
-import { Dispatch } from '../state/dispatch-type';
-import { fetchThenDispatch } from '../api/api-utils';
-import { hentMenyPunkter, DataElement, Status } from '../api/api';
+import { ActionType } from 'store/actions';
+import { Handling } from 'store/actions';
+import { HentMenyLenkerFAILED } from 'store/actions';
+import { HentMenyLenkerSUCCESS } from 'store/actions';
+import { HentMenyLenkerPENDING } from 'store/actions';
+import { Dispatch } from 'store/dispatch-type';
+import { fetchThenDispatch } from 'api/api-utils';
+import { hentMenyPunkter, DataElement, Status } from 'api/api';
 
 export interface MenyPunkter extends DataElement {
     data: MenyNode[];

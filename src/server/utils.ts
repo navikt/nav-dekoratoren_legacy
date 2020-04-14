@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { EnvironmentState } from '../reducer/environment-duck';
+import { EnvironmentState } from '../store/reducers/environment-duck';
 
 // Client environment
 // Obs! Don't expose secrets

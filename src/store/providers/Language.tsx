@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { Dispatch } from '../state/dispatch-type';
+import { Dispatch } from 'store/dispatch-type';
 import { connect } from 'react-redux';
-import { Language, languageDuck } from '../reducer/language-duck';
-import { finnArbeidsflate } from '../reducer/arbeidsflate-duck';
+import { Language, languageDuck } from 'store/reducers/language-duck';
+import { finnArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 
 function sjekkUrl(): Language {
     const locationPath = window.location.pathname;

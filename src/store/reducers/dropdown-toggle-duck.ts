@@ -1,4 +1,4 @@
-import { ActionType, Handling } from '../state/actions';
+import { ActionType, Handling } from '../actions';
 
 export interface DropdownState {
     hovedmeny: boolean;

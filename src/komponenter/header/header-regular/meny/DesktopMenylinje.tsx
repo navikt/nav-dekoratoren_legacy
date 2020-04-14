@@ -1,7 +1,7 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import VarselinnboksProvider from 'provider/Varselinnboks-provider';
-import InnloggingsstatusProvider from 'provider/Innloggingsstatus-provider';
+import VarselinnboksProvider from 'store/providers/Varselinnboks';
+import InnloggingsstatusProvider from 'store/providers/Innloggingsstatus';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import { SokDropdown } from './ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';

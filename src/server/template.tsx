@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider as ReduxProvider } from 'react-redux';
-import LanguageProvider from '../provider/Language-provider';
+import LanguageProvider from '../store/providers/Language';
 import Header from '../komponenter/header/Header';
 import Footer from '../komponenter/footer/Footer';
 import { Request } from 'express';
 import { clientEnv } from './utils';
 import hash from 'object-hash';
 
-import { createStore } from '../state/store';
+import { createStore } from '../store';
 import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 
