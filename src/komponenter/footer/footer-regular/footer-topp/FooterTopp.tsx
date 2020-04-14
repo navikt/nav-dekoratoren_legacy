@@ -13,7 +13,7 @@ import { AppState } from 'store/reducers';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import { MenyNode } from 'store/reducers/menu-duck';
 import FooterLenker from '../../Lenker';
-import './footerTopp.less';
+import './FooterTopp.less';
 
 const FooterTopp = () => {
     const cls = BEMHelper('menylinje-topp');

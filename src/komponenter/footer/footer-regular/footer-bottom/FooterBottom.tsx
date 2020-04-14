@@ -8,7 +8,7 @@ import Tekst from 'tekster/finn-tekst';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import { MenyNode } from 'store/reducers/menu-duck';
 import FooterLenker from '../../Lenker';
-import './footerBottom.less';
+import './FooterBottom.less';
 
 const FooterBottom = () => {
     const cls = BEMHelper('menylinje-bottom');
