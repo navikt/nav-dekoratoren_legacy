@@ -16,7 +16,7 @@ import {
     arbeidsgiverContextLenke,
     samarbeidspartnerContextLenke,
     settArbeidsflate,
-} from '../../../../header/arbeidsflatemeny/arbeidsflate-lenker';
+} from '../../../../header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 
 const gaEventArgs: GAEventArgs = {
     category: GACategory.Header,

@@ -1,0 +1,48 @@
+@import (reference) '../../../../../../styling-variabler.less';
+
+@ekspanderbar-transition-props: max-height, visibility;
+@ekspanderbar-transition-duration-out: 0.6s;
+@ekspanderbar-transition-duration-in: 0.4s;
+
+.ekspanderbar {
+    @media (min-width: @tabletLimitWidth) {
+        &__innhold-wrapper {
+            position: absolute;
+            z-index: 1;
+            overflow: hidden;
+            max-height: 0;
+            max-width: 100%;
+            visibility: hidden;
+            background-color: white;
+            border-bottom-left-radius: @border-radius-base;
+            border-bottom-right-radius: @border-radius-base;
+
+            transition-duration: @ekspanderbar-transition-duration-in;
+            transition-timing-function: ease-in;
+            transition-property: @ekspanderbar-transition-props;
+
+            &--aktive {
+                max-height: 60rem;
+                max-width: 100%;
+                visibility: visible;
+                z-index: 1001;
+                transition-duration: @ekspanderbar-transition-duration-out;
+                transition-timing-function: ease-in-out;
+            }
+        }
+
+        &__innhold {
+            box-sizing: border-box;
+            padding: 0 @margins-sides-desktop 2rem @margins-sides-desktop;
+            overflow: hidden;
+            width: 100vw;
+            @media (min-width: @desktopLimitWidth) {
+                width: @desktopLimitWidth;
+            }
+        }
+
+        &__container {
+            position: relative;
+        }
+    }
+}

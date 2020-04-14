@@ -1,8 +1,8 @@
 import React from 'react';
 import { GACategory } from 'utils/google-analytics';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
-import { settArbeidsflate } from 'komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
-import { getArbeidsflateContext } from 'komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
+import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { getArbeidsflateContext } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'reducer/reducers';
