@@ -3,8 +3,8 @@ import BEMHelper from '../../utils/bem';
 import InnloggingsstatusProvider from '../../provider/Innloggingsstatus-provider';
 import LoggInnKnapp from './meny/logginn/Logg-inn-knapp';
 import Navlogo from '../../ikoner/meny/Navlogo';
-import './HeaderSimple.less';
 import Navn from './meny/navn/Navn';
+import './HeaderSimple.less';
 
 const cls = BEMHelper('simple-header');
 
