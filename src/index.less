@@ -10,9 +10,22 @@ body {
 .sitefooter {
     background-color: white;
 }
-.siteheader {
+
+.head-wrapper {
+    min-height: 201px;
+}
+.siteheader,
+.head-wrapper,
+.head-container {
     position: relative;
     z-index: 1000;
+    width: 100%;
+}
+
+.head-container.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 .header-z-wrapper {
