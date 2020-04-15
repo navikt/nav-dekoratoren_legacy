@@ -59,13 +59,13 @@ app.get(`${appBasePath}/env`, (req, res) => {
     res.send(clientEnv(req));
 });
 
-app.get(`${appBasePath}/api/meny`, async (req, res) => {
+app.get(`${appBasePath}/api/meny`, (req, res) => {
     const mainCacheContent = mainCache.get(mainCacheKey);
     if (mainCacheContent) {
         res.send(mainCacheContent);
     } else {
         // Fetch fom XP
-        await fetch(`${process.env.API_XP_MENY_URL}`, { method: 'GET' })
+        fetch(`${process.env.API_XP_MENY_URL}`, { method: 'GET' })
             .then(xpRes => xpRes.json())
             .then(xpData => {
                 mainCache.set(mainCacheKey, xpData, 100);
