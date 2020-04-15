@@ -14,9 +14,9 @@ export const LinksLoader = ({ id }: { id: string }) => (
         backgroundColor={'white'}
         foregroundColor={'lightgray'}
     >
-        <rect x="0" y="0" rx="4" ry="4" width="150" height="10" />
-        <rect x="0" y="40" rx="4" ry="4" width="200" height="10" />
-        <rect x="0" y="80" rx="4" ry="4" width="100" height="10" />
-        <rect x="0" y="120" rx="4" ry="4" width="125" height="10" />
+        <rect x="0" y="5" rx="4" ry="4" width="100" height="10" />
+        <rect x="0" y="50" rx="4" ry="4" width="135" height="10" />
+        <rect x="0" y="95" rx="4" ry="4" width="175" height="10" />
+        <rect x="0" y="140" rx="4" ry="4" width="150" height="10" />
     </ContentLoader>
 );
