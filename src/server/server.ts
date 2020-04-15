@@ -106,7 +106,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
                 }
             })
             .catch(err => {
-                console.error('Failed to use backup cache - ', err);
+                console.error('Failed to use backup mock - ', err);
             });
     }
 });
