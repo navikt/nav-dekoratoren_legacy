@@ -72,12 +72,14 @@ app.get(`${appBasePath}/api/meny`, async (req, res) => {
                 backupCache.set(backupCacheKey, xpData, 0);
                 res.send(xpData);
             })
-            .catch(err => console.error('Failed to fetch decorator - ', err))
+            .catch(err => {
+                console.error('Failed to fetch decorator - ', err);
+            })
 
             // Use backup cache
             .then(() => {
-                console.log('Using backup cache');
                 if (!res.headersSent) {
+                    console.log('Using backup cache');
                     const backupCacheData = backupCache.get(backupCacheKey);
                     if (backupCacheData) {
                         mainCache.set(mainCacheKey, backupCacheData, 100);
@@ -87,12 +89,14 @@ app.get(`${appBasePath}/api/meny`, async (req, res) => {
                     }
                 }
             })
-            .catch(err => console.error('Failed to use backup cache - ', err))
+            .catch(err => {
+                console.error('Failed to use backup cache - ', err);
+            })
 
             // Use backup mock
             .then(() => {
-                console.log('Using backup mock');
                 if (!res.headersSent) {
+                    console.log('Using backup mock');
                     if (mockMenu) {
                         mainCache.set(mainCacheKey, mockMenu, 100);
                         res.send(mockMenu);
@@ -101,7 +105,9 @@ app.get(`${appBasePath}/api/meny`, async (req, res) => {
                     }
                 }
             })
-            .catch(err => console.error('Failed to use backup cache - ', err));
+            .catch(err => {
+                console.error('Failed to use backup cache - ', err);
+            });
     }
 });
 
