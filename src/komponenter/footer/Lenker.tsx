@@ -6,9 +6,10 @@ import { MenyNode } from 'store/reducers/menu-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { genererUrl } from 'utils/Environment';
+import { LinkLoader } from '../common/content-loaders/LinkLoader';
 
 interface Props {
-    node?: MenyNode;
+    node: MenyNode;
 }
 
 export const FooterLenker = ({ node }: Props) => {
