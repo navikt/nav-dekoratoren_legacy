@@ -15,7 +15,7 @@ interface Props {
 export const FooterLenker = ({ node }: Props) => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
-    if (!node.children) {
+    if (!node || !node.children) {
         return null;
     }
 
