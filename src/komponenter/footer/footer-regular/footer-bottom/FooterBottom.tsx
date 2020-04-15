@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { genererLenkerTilUrl } from 'utils/Environment';
 import BEMHelper from 'utils/bem';
-import { GACategory } from 'utils/google-analytics';
-import { LenkeMedGA } from 'komponenter/LenkeMedGA';
-import { FooterLenke, lenkerBunn } from '../FooterLenker';
 import NavLogoFooter from 'ikoner/meny/NavLogoFooter';
 import { AppState } from 'store/reducers';
 import Tekst from 'tekster/finn-tekst';
-import './footerBottom.less';
+import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
+import { MenyNode } from 'store/reducers/menu-duck';
+import FooterLenker from '../../Lenker';
+import './FooterBottom.less';
 
 const FooterBottom = () => {
     const cls = BEMHelper('menylinje-bottom');
-    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
-    const [lenker, setLenker] = useState<FooterLenke[]>(lenkerBunn);
+    const { language } = useSelector((state: AppState) => state.language);
+    const { data } = useSelector((state: AppState) => state.menypunkt);
+    const [personvernNode, settPersonvernNode] = useState<MenyNode>();
 
     useEffect(() => {
-        setLenker(genererLenkerTilUrl(XP_BASE_URL, lenkerBunn));
-    }, []);
+        const noder = getLanguageNode(language, data);
+        if (noder && !personvernNode) {
+            settPersonvernNode(findNode(noder, 'Personvern'));
+        }
+    }, [data, personvernNode]);
 
     return (
         <section className={cls.className}>
@@ -35,22 +38,7 @@ const FooterBottom = () => {
                         <Tekst id="footer-arbeids-og-veldferdsetaten" />
                     </Normaltekst>
                     <ul className="bottom-lenke">
-                        {lenker.map(lenke => (
-                            <li key={lenke.lenketekst}>
-                                <Normaltekst>
-                                    <LenkeMedGA
-                                        href={lenke.url}
-                                        gaEventArgs={{
-                                            category: GACategory.Footer,
-                                            action: `bunn/${lenke.lenketekst}`,
-                                            label: lenke.url,
-                                        }}
-                                    >
-                                        {lenke.lenketekst}
-                                    </LenkeMedGA>
-                                </Normaltekst>
-                            </li>
-                        ))}
+                        <FooterLenker node={personvernNode} />
                     </ul>
                 </div>
             </div>
