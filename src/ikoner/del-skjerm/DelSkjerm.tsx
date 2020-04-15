@@ -30,4 +30,4 @@ const DelSkjerm = ({ height, width }: Props) => (
         </g>
     </svg>
 );
-export default DelSkjerm
+export default DelSkjerm;

@@ -3,7 +3,7 @@ import 'react-app-polyfill/stable';
 import 'isomorphic-fetch';
 require('console-stamp')(console, '[HH:MM:ss.l]');
 import NodeCache from 'node-cache';
-import request from 'request';
+import fetch from 'node-fetch';
 import express, { Response } from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
@@ -59,35 +59,52 @@ app.get(`${appBasePath}/env`, (req, res) => {
     res.send(clientEnv(req));
 });
 
-app.get(`${appBasePath}/api/meny`, (req, res) =>
-    mainCache.get(mainCacheKey, (error, mainCacheContent) =>
-        !error && mainCacheContent ? res.send(mainCacheContent) : fetchMenu(res)
-    )
-);
+app.get(`${appBasePath}/api/meny`, (req, res) => {
+    const mainCacheContent = mainCache.get(mainCacheKey);
+    if (mainCacheContent) {
+        res.send(mainCacheContent);
+    } else {
+        // Fetch fom XP
+        fetch(`${process.env.API_XP_MENY_URL}`, { method: 'GET' })
+            .then(res => res.json())
+            .then(xpData => {
+                mainCache.set(mainCacheKey, xpData, 100);
+                backupCache.set(backupCacheKey, xpData, 0);
+                res.send(xpData);
+            })
+            .catch(err => console.error('Failed to fetch decorator - ', err))
 
-const fetchMenu = (res: Response) => {
-    const uri = `${process.env.API_XP_MENY_URL}`;
-    request({ method: 'GET', uri }, (reqError, reqResponse, reqBody) => {
-        if (!reqError && reqResponse.statusCode === 200 && reqBody.length > 2) {
-            mainCache.set(mainCacheKey, reqBody, 100);
-            backupCache.set(backupCacheKey, reqBody, 0);
-            res.send(reqBody);
-        } else {
-            console.error('Failed to fetch decorator', reqError);
-            backupCache.get(backupCacheKey, (err, backupCacheContent) => {
-                if (!err && backupCacheContent) {
-                    console.log('Using backup cache - copy to main cache');
-                    mainCache.set(mainCacheKey, backupCacheContent, 100);
-                    res.send(backupCacheContent);
-                } else {
-                    console.log('Failed to use backup-cache - using mock', err);
-                    mainCache.set(mainCacheKey, mockMenu, 100);
-                    backupCache.set(backupCacheKey, mockMenu, 0);
-                    res.send(mockMenu);
-                }
+            // Use backup cache
+            .then(() => useBackupCache())
+            .then(backupCacheContent => {
+                mainCache.set(mainCacheKey, backupCacheContent, 100);
+                res.send(backupCacheContent);
+            })
+            .catch(err => console.error('Failed to use backup cache - ', err))
+
+            // Use backup mock
+            .then(() => useBackupMock())
+            .then(mockMenu => {
+                mainCache.set(mainCacheKey, mockMenu, 100);
+                res.send(mockMenu);
             });
-        }
-    });
+    }
+});
+
+// Menu utils
+const useBackupCache = () => {
+    console.log('Using backup cache - copy to main cache');
+    const backupCacheContent = backupCache.get(backupCacheKey);
+    if (backupCacheContent) {
+        return backupCacheContent;
+    } else {
+        throw 'Invalid cache';
+    }
+};
+
+const useBackupMock = () => {
+    console.log('Using backup mock - copy to main and backup cache');
+    return mockMenu;
 };
 
 // Proxied requests
