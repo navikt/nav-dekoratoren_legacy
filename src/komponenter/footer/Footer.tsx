@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import SimpleFooter from './footer-simple/FooterSimple';
-import RegularFooter from './footer-regular/FooterRegular';
+import FooterRegular from './footer-regular/FooterRegular';
 import './Footer.less';
 
 const Footer = () => {
@@ -12,7 +12,7 @@ const Footer = () => {
             {PARAMS.SIMPLE || PARAMS.SIMPLE_FOOTER ? (
                 <SimpleFooter />
             ) : (
-                <RegularFooter />
+                <FooterRegular />
             )}
         </footer>
     );
