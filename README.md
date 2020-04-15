@@ -1,5 +1,5 @@
 
-# Nav-dekoratoren ![nav.no logo](./src/ikoner/meny/navlogo.svg) [![CircleCI](https://circleci.com/gh/navikt/nav-dekoratoren.svg?style=svg)](https://circleci.com/gh/navikt/nav-dekoratoren)
+# Nav-dekoratoren ![nav.no logo](./src/ikoner/meny/Navlogo.svg) [![CircleCI](https://circleci.com/gh/navikt/nav-dekoratoren.svg?style=svg)](https://circleci.com/gh/navikt/nav-dekoratoren)
                      
 :warning: **OBS! Denne versjonen av header og footer er under arbeid. Kan ikke prodsettes.**
 

@@ -1,5 +1,4 @@
-import { FooterLenke } from '../komponenter/footer/Footer-lenker';
-import { EnvironmentState } from '../reducer/environment-duck';
+import { EnvironmentState } from 'store/reducers/environment-duck';
 
 export const fetchEnv = (): Promise<EnvironmentState> => {
     return new Promise(resolve => {
@@ -26,17 +25,6 @@ export const verifyWindowObj = () => {
 
 export const erNavDekoratoren = (): boolean => {
     return verifyWindowObj() && window.location.href.includes('/dekoratoren');
-};
-
-export const genererLenkerTilUrl = (
-    XP_BASE_URL: string,
-    footerlenker: FooterLenke[]
-) => {
-    const lenker = footerlenker.map(lenke => {
-        lenke.url = genererUrl(XP_BASE_URL, lenke.url);
-        return lenke;
-    });
-    return lenker;
 };
 
 export const genererUrl = (XP_BASE_URL: string, lenke: string): string => {

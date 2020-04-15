@@ -2,7 +2,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
-const resolve = require('resolve');
 const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 
@@ -20,6 +19,18 @@ const browserConfig = {
     devtool: 'cheap-module-source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
+        alias: {
+            src: path.resolve(__dirname, './src'),
+            api: path.resolve(__dirname, './src/api'),
+            ikoner: path.resolve(__dirname, './src/ikoner'),
+            komponenter: path.resolve(__dirname, './src/komponenter'),
+            providers: path.resolve(__dirname, './src/providers'),
+            reducers: path.resolve(__dirname, './src/reducers'),
+            store: path.resolve(__dirname, './src/store'),
+            tekster: path.resolve(__dirname, './src/tekster'),
+            types: path.resolve(__dirname, './src/types'),
+            utils: path.resolve(__dirname, './src/utils')
+        }
     },
     stats: 'errors-only',
     module: {

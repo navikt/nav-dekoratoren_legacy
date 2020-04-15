@@ -1,11 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { Language, languageDuck } from '../../reducer/language-duck';
+import { Language, languageDuck } from 'store/reducers/language-duck';
 import { Header } from './Header';
-import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
+import Arbeidsflatemeny from './header-regular/arbeidsflatemeny/Arbeidsflatemeny';
 import { createStore, Store } from 'redux';
 import { Provider } from 'react-redux';
-import { reducers } from '../../reducer/reducers';
+import { reducers } from 'store/reducers';
 
 const mountWithRedux = (store: Store) =>
     mount(

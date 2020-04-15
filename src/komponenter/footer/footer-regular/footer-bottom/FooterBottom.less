@@ -1,0 +1,51 @@
+@import '../../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../styling-variabler.less';
+
+.menylinje-bottom {
+    padding: 1rem;
+
+    @media (min-width: @tabletLimitWidth) {
+        padding: 2rem;
+
+        .bottom-innhold {
+            display: flex;
+            align-items: center;
+
+            ul {
+                margin: 0;
+            }
+
+            .bottom-logo {
+                width: 65px;
+                height: 65px;
+                margin-right: 0.8rem;
+            }
+
+            .bottom-lenker {
+                width: 400px;
+            }
+        }
+    }
+
+    @media (min-width: 1300px) {
+        .bottom-innhold {
+            justify-content: center;
+
+            .bottom-lenker {
+                width: 85%;
+            }
+
+            .bottom-logo {
+                width: 15%;
+                margin-right: 0;
+            }
+        }
+    }
+
+    @media (min-width: @desktopLimitWidth) {
+        .bottom-innhold {
+            width: 1344px;
+            margin: 0 auto;
+        }
+    }
+}
