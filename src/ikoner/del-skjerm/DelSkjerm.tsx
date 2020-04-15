@@ -6,8 +6,6 @@ interface Props {
 }
 const DelSkjerm = ({ height, width }: Props) => (
     <svg
-        contentScriptType="text/ecmascript"
-        contentStyleType="text/css"
         viewBox="0 0 24 24"
         height={height}
         width={width}

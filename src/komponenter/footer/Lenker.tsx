@@ -9,13 +9,13 @@ import { genererUrl } from 'utils/Environment';
 import { LinkLoader } from '../common/content-loaders/LinkLoader';
 
 interface Props {
-    node?: MenyNode;
+    node: MenyNode;
 }
 
 export const FooterLenker = ({ node }: Props) => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
-    if (!node || !node.children) {
+    if (!node.children) {
         return null;
     }
 

@@ -65,7 +65,7 @@ const FooterTopp = () => {
                         {kontaktNode ? (
                             <FooterLenker node={kontaktNode} />
                         ) : (
-                            <LinksLoader />
+                            <LinksLoader id="kontakt-loader" />
                         )}
                     </ul>
                 </div>
@@ -83,7 +83,7 @@ const FooterTopp = () => {
                         {samfunnNode ? (
                             <FooterLenker node={samfunnNode} />
                         ) : (
-                            <LinksLoader />
+                            <LinksLoader id="samfunn-loader" />
                         )}
                     </ul>
                 </div>
