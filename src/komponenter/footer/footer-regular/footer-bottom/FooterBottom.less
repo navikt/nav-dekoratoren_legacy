@@ -2,50 +2,41 @@
 @import '../../../../styling-variabler.less';
 
 .menylinje-bottom {
+    display: flex;
     padding: 1rem;
-
+    justify-content: center;
     @media (min-width: @tabletLimitWidth) {
         padding: 2rem;
+    }
+}
 
-        .bottom-innhold {
+.footer-bottom-content {
+    display: flex;
+    width: 100%;
+    max-width: 1344px;
+
+    &__bottom-logo {
+        margin-right: 0.8rem;
+    }
+
+    @media (min-width: @tabletLimitWidth) {
+        justify-content: space-between;
+        
+        &__bottom-lenker {
             display: flex;
+            justify-content: space-between;
             align-items: center;
+            width: 100%;
+        }
 
-            ul {
-                margin: 0;
-            }
-
-            .bottom-logo {
-                width: 65px;
-                height: 65px;
-                margin-right: 0.8rem;
-            }
-
-            .bottom-lenker {
-                width: 400px;
-            }
+        ul {
+            margin: 0;
         }
     }
 
     @media (min-width: 1300px) {
-        .bottom-innhold {
-            justify-content: center;
-
-            .bottom-lenker {
-                width: 85%;
-            }
-
-            .bottom-logo {
-                width: 15%;
-                margin-right: 0;
-            }
-        }
-    }
-
-    @media (min-width: @desktopLimitWidth) {
-        .bottom-innhold {
-            width: 1344px;
-            margin: 0 auto;
+        &__bottom-lenker {
+            width: 85%;
         }
     }
 }

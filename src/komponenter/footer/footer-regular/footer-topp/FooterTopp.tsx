@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from 'utils/bem';
-import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import Tekst from 'tekster/finn-tekst';
-import DelSkjermModal from '../../del-skjerm-modal/DelSkjermModal';
 import Spraakvalg from './spraakvalg/Spraakvalg';
 import FooterArbeidsflatevalg from './footer-arbeidsflatevalg/FooterArbeidsflatevalg';
 import PilOppHvit from 'ikoner/meny/PilOppHvit';
@@ -22,7 +20,6 @@ const FooterTopp = () => {
 
     const [kontaktNode, settKontaktNode] = useState<MenyNode>();
     const [samfunnNode, settSamfunnNode] = useState<MenyNode>();
-    const [visDelSkjermModal, setVisDelSkjermModal] = useState(false);
 
     useEffect(() => {
         const noder = getLanguageNode(language, data);
@@ -31,22 +28,6 @@ const FooterTopp = () => {
             settSamfunnNode(findNode(noder, 'NAV og samfunn'));
         }
     }, [data, kontaktNode, samfunnNode]);
-
-    const openModal = () => {
-        triggerGaEvent({
-            category: GACategory.Footer,
-            action: `kontakt/del-skjerm-open`,
-        });
-        setVisDelSkjermModal(true);
-    };
-
-    const closeModal = () => {
-        triggerGaEvent({
-            category: GACategory.Footer,
-            action: `kontakt/del-skjerm-close`,
-        });
-        setVisDelSkjermModal(false);
-    };
 
     const scrollToTop = () =>
         window.scrollTo({
@@ -81,17 +62,6 @@ const FooterTopp = () => {
                     </Undertittel>
                     <ul aria-labelledby="venstrelenker-overskrift">
                         <FooterLenker node={kontaktNode} />
-                        <li>
-                            <Lenke href="#" role="button" onClick={openModal}>
-                                <Tekst id="footer-del-skjerm" />
-                            </Lenke>
-                            {visDelSkjermModal && (
-                                <DelSkjermModal
-                                    isOpen={visDelSkjermModal}
-                                    onClose={closeModal}
-                                />
-                            )}
-                        </li>
                     </ul>
                 </div>
                 <div className="menylenker-seksjon midt">
