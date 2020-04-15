@@ -89,6 +89,7 @@
         "react": "^16.13.0",
         "react-app-polyfill": "^1.0.4",
         "react-collapse": "^4.0.3",
+        "react-content-loader": "^5.0.4",
         "react-dom": "^16.8.6",
         "react-ga": "^2.7.0",
         "react-gtm-module": "^2.0.8",
