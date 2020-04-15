@@ -72,7 +72,6 @@ app.get(`${appBasePath}/api/meny`, async (req, res) => {
                 backupCache.set(backupCacheKey, xpData, 0);
                 res.send(xpData);
             })
-
             .catch(err => console.error('Failed to fetch decorator - ', err))
 
             // Use backup cache
