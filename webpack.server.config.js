@@ -36,8 +36,8 @@ const browserConfig = {
             store: path.resolve(__dirname, './src/store'),
             tekster: path.resolve(__dirname, './src/tekster'),
             types: path.resolve(__dirname, './src/types'),
-            utils: path.resolve(__dirname, './src/utils')
-        }
+            utils: path.resolve(__dirname, './src/utils'),
+        },
     },
     stats: 'errors-only',
     module: {
