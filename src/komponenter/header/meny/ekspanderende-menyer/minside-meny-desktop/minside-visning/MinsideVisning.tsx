@@ -6,7 +6,6 @@ import KbNav, {
     NodeGroup,
 } from '../../../../../../utils/keyboard-navigation/kb-navigation';
 import { LenkeMedGA } from '../../../../../LenkeMedGA';
-import Environment from '../../../../../../utils/Environment';
 import { GACategory } from '../../../../../../utils/google-analytics';
 import Tekst from '../../../../../../tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
@@ -17,17 +16,19 @@ type Props = {
     classname: string;
     isOpen: boolean;
     menyLenker: MenyNode | undefined;
+    dittNavUrl: string;
 };
 
 const nodeGroup = NodeGroup.MinsideMeny;
 
 export const MinsideVisning = (props: Props) => {
-    const { classname, isOpen, menyLenker } = props;
-    const cls = BEMHelper(classname);
+    const { classname, isOpen, menyLenker, dittNavUrl } = props;
 
     if (!menyLenker) {
         return null;
     }
+
+    const cls = BEMHelper(classname);
 
     return (
         <KbNavigationWrapper
@@ -37,7 +38,7 @@ export const MinsideVisning = (props: Props) => {
             <>
                 <div className={cls.element('topp-seksjon')}>
                     <LenkeMedGA
-                        href={Environment.DITT_NAV_URL}
+                        href={dittNavUrl}
                         id={KbNav.getKbId(nodeGroup, {
                             col: 0,
                             row: 0,
@@ -46,7 +47,7 @@ export const MinsideVisning = (props: Props) => {
                         gaEventArgs={{
                             category: GACategory.Header,
                             action: 'dittnav',
-                            label: Environment.DITT_NAV_URL,
+                            label: dittNavUrl,
                         }}
                     >
                         <Tekst id={'til-forside'} />

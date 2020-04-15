@@ -12,6 +12,7 @@ import {
     getKbId,
     NodeGroup,
 } from '../../../utils/keyboard-navigation/kb-navigation';
+import { lukkAlleDropdowns } from '../../../reducer/dropdown-toggle-duck';
 
 const Arbeidsflatemeny = () => {
     const cls = BEMHelper('arbeidsflate');
@@ -47,6 +48,7 @@ const Arbeidsflatemeny = () => {
                                 href={lenke.url}
                                 onClick={event => {
                                     event.preventDefault();
+                                    dispatch(lukkAlleDropdowns());
                                     settArbeidsflate(dispatch, lenke);
                                 }}
                                 gaEventArgs={{

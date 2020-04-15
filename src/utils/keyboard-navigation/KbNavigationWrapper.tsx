@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { createNaviGraph, NodeEdgeOpposite, selectNode } from './kb-navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../reducer/reducer';
+import { AppState } from '../../reducer/reducers';
 import { setCurrentNode, setKbSubGraph } from '../../reducer/keyboard-nav-duck';
 import { KbNavConfig } from './kb-navigation-setup';
 

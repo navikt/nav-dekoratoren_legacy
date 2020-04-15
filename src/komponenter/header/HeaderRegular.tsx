@@ -58,7 +58,6 @@ const KbNavMain = ({ children }: { children: JSX.Element }) => {
             (node: KbNaviNode) => dispatch(setCurrentNode(node)),
             () => dispatch(lukkAlleDropdowns())
         );
-        console.log(kbNavState);
 
         return () => removeListeners(handlers);
     }, [kbNavState]);

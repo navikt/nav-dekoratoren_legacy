@@ -88,6 +88,7 @@ export const MinsideMenyDesktop = () => {
                     classname={classname}
                     isOpen={isOpen}
                     menyLenker={minsideMenyPunkter}
+                    dittNavUrl={environment.DITT_NAV_URL}
                 />
             ) : (
                 <MenySpinner />

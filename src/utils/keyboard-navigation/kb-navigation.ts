@@ -127,6 +127,7 @@ export const selectNode = (
     if (!node) {
         return;
     }
+    // TODO: robustifiser
     callback(node);
     if (focus) {
         const element = document.getElementById(node.id) as HTMLElement;
@@ -198,6 +199,7 @@ export const createNaviGraph = (
         idMap,
         nodeMap
     );
+    console.log(rootNode, group, nodeMap);
     return {
         group: group,
         rootNode: rootNode,

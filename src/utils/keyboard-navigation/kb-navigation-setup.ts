@@ -72,7 +72,7 @@ export const configForNodeGroup: { [key in NodeGroup]: KbNavConfig } = {
                 col: 0,
                 row: 0,
                 sub: 0,
-            })]: 'desktop-decorator-sok-input',
+            })]: 'desktop-sok-input',
             [getKbId(NodeGroup.Sok, {
                 col: 1,
                 row: 0,
@@ -135,11 +135,6 @@ export const createHeaderMainGraph = (
     menyStatus: Status,
     erInnlogget: boolean
 ) => {
-    const headerElement = document.getElementById('dekorator-desktop-header');
-    if (!headerElement) {
-        return null;
-    }
-
     const hovedmenyEnabled =
         language !== Language.SAMISK && menyStatus === Status.OK;
     const varslerEnabled =
