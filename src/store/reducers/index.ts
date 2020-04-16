@@ -10,6 +10,7 @@ import { languageDuck, LanguageState } from './language-duck';
 import dropdownTogglesReducer, { DropdownState } from './dropdown-toggle-duck';
 import environmentReducer, { EnvironmentState } from './environment-duck';
 import { persistReducer } from 'redux-persist';
+import createCompressor from 'redux-persist-transform-compress';
 import session from 'redux-persist/lib/storage/session';
 
 export interface AppState {
@@ -23,9 +24,11 @@ export interface AppState {
     dropdownToggles: DropdownState;
 }
 
+const rootCompressor = createCompressor();
 const rootPersistConfig = {
     key: 'root',
     storage: session,
+    transforms: [rootCompressor],
     whitelist: ['menypunkt'],
 };
 
