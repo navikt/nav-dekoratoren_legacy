@@ -53,7 +53,7 @@ export const finnArbeidsflate = () => {
         UrlValue.ARBEIDSGIVER,
         UrlValue.SAMARBEIDSPARTNER,
     ];
-    arbeidsflate.map(typeArbeidsflate =>
+    arbeidsflate.forEach(typeArbeidsflate =>
         verifyWindowObj() && domeneInneholder(typeArbeidsflate)
             ? settArbeidsflate(typeArbeidsflate)
             : verifyWindowObj()
