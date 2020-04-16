@@ -12,6 +12,7 @@ import { initGA } from './utils/google-analytics';
 import LanguageProvider from './store/providers/Language';
 import Header from './komponenter/header/Header';
 import * as es6promise from 'es6-promise';
+import { PersistGate } from 'redux-persist/integration/react';
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
@@ -30,18 +31,22 @@ const run = () => {
     initGA();
     fetchEnv()
         .then(environment => {
-            const store = createStore(environment);
+            const { store, persistor } = createStore(environment);
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
-                    <LanguageProvider>
-                        <Header />
-                    </LanguageProvider>
+                    <PersistGate loading={null} persistor={persistor}>
+                        <LanguageProvider>
+                            <Header />
+                        </LanguageProvider>
+                    </PersistGate>
                 </ReduxProvider>,
                 document.getElementById('decorator-header')
             );
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
-                    <Footer />
+                    <PersistGate loading={null} persistor={persistor}>
+                        <Footer />
+                    </PersistGate>
                 </ReduxProvider>,
                 document.getElementById('decorator-footer')
             );

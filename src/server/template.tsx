@@ -11,6 +11,8 @@ import hash from 'object-hash';
 import { createStore } from '../store';
 import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -45,7 +47,7 @@ export const template = (req: Request) => {
     }
 
     // Create store based on request params
-    const store = createStore(env);
+    const { store, persistor } = createStore(env);
 
     // Fetch params and forward to client
     const params = req.query;
@@ -61,15 +63,19 @@ export const template = (req: Request) => {
     // Render SSR
     const HtmlHeader = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
-            <LanguageProvider>
-                <Header />
-            </LanguageProvider>
+            <PersistGate loading={null} persistor={persistor}>
+                <LanguageProvider>
+                    <Header />
+                </LanguageProvider>
+            </PersistGate>
         </ReduxProvider>
     );
 
     const HtmlFooter = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
-            <Footer />
+            <PersistGate loading={null} persistor={persistor}>
+                <Footer />
+            </PersistGate>
         </ReduxProvider>
     );
 

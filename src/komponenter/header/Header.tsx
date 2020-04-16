@@ -1,26 +1,30 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenypunkter } from 'store/reducers/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
 import MenyBakgrunn from './header-regular/meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
-import { MenuValue } from 'utils/meny-storage-utils';
-import { oppdaterSessionStorage } from 'utils/meny-storage-utils';
+import { MenuValue, oppdaterSessionStorage } from 'utils/meny-storage-utils';
 import { SimpleHeader } from './header-simple/HeaderSimple';
 import { RegularHeader } from './header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
+import { Status } from '../../api/api';
 
 export const Header = () => {
     const dispatch = useDispatch();
+    const { status, data } = useSelector((state: AppState) => state.menypunkt);
     const { PARAMS, APP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
     );
 
     useEffect(() => {
-        fetchMenypunkter(APP_BASE_URL)(dispatch);
-        if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
-            oppdaterSessionStorage(PARAMS.CONTEXT);
+        console.log(data);
+        if (status !== Status.OK) {
+            fetchMenypunkter(APP_BASE_URL)(dispatch);
+            if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
+                oppdaterSessionStorage(PARAMS.CONTEXT);
+            }
         }
-    }, []);
+    }, [data]);
 
     return (
         <Fragment>

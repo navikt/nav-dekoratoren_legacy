@@ -9,6 +9,8 @@ import varselLestReducer from './varsel-lest-duck';
 import { languageDuck, LanguageState } from './language-duck';
 import dropdownTogglesReducer, { DropdownState } from './dropdown-toggle-duck';
 import environmentReducer, { EnvironmentState } from './environment-duck';
+import { persistReducer } from 'redux-persist';
+import session from 'redux-persist/lib/storage/session';
 
 export interface AppState {
     environment: EnvironmentState;
@@ -21,6 +23,12 @@ export interface AppState {
     dropdownToggles: DropdownState;
 }
 
+const rootPersistConfig = {
+    key: 'root',
+    storage: session,
+    whitelist: ['menypunkt'],
+};
+
 export const reducers = combineReducers<AppState>({
     environment: environmentReducer,
     innloggingsstatus: innloggingsstatusReducer,
@@ -32,4 +40,4 @@ export const reducers = combineReducers<AppState>({
     dropdownToggles: dropdownTogglesReducer,
 });
 
-export default reducers;
+export default persistReducer(rootPersistConfig, reducers);

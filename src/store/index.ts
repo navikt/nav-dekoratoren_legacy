@@ -1,5 +1,6 @@
 import { createStore as createReduxStore, compose } from 'redux';
 import { EnvironmentState } from './reducers/environment-duck';
+import { persistStore } from 'redux-persist';
 import reducers from './reducers';
 
 export const createStore = (env?: EnvironmentState) => {
@@ -9,9 +10,12 @@ export const createStore = (env?: EnvironmentState) => {
         compose
     )();
 
-    return composeEnhancers(createReduxStore)(reducers, {
+    const store = composeEnhancers(createReduxStore)(reducers, {
         ...(env && {
             environment: env,
         }),
     });
+
+    const persistor = persistStore(store);
+    return { store, persistor };
 };
