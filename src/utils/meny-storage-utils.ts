@@ -1,5 +1,5 @@
-import { MenyNode } from '../reducer/menu-duck';
-import { Language } from '../reducer/language-duck';
+import { MenyNode } from '../store/reducers/menu-duck';
+import { Language } from '../store/reducers/language-duck';
 
 export const NAVHEADER = 'NAVHEADER';
 
@@ -64,7 +64,7 @@ export const getLanguageNode = (
         SAMISK: nodeMenu.find(n => n.path === '/se'),
     }[lang]);
 
-const findNode = (
+export const findNode = (
     node: MenyNode,
     displayName: string
 ): MenyNode | undefined => {

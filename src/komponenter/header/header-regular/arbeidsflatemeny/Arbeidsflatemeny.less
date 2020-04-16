@@ -1,0 +1,50 @@
+@import '../../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../styling-variabler.less';
+
+.siteheader .arbeidsflate {
+    width: 100%;
+    background-color: white;
+    height: 2.75rem;
+    border-bottom: @navGra20 1px solid;
+
+    &__topp-liste-rad {
+        white-space: nowrap;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    &__liste-element {
+        display: inline-block;
+        outline: 0;
+    }
+
+    &__lenke {
+        display: inline-block;
+        padding: 0.75rem 1rem 0;
+        text-decoration: none;
+        color: black;
+
+        &:focus,
+        &:active {
+            outline: 3px solid @fokusFarge;
+        }
+    }
+
+    &__lenke-inner {
+        padding-bottom: 0.6rem;
+
+        &:hover {
+            border-bottom: @navBla 2px solid;
+        }
+
+        &--active {
+            border-bottom: @navBla 2px solid;
+            p {
+                font-weight: bold;
+            }
+            &:hover {
+                border-bottom: @navBla 3px solid;
+            }
+        }
+    }
+}

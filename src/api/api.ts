@@ -1,9 +1,9 @@
 // tslint:disable-line:no-any
 import React from 'react';
 import { fetchToJson } from './api-utils';
-import { Data as innloggingsstatusData } from '../reducer/innloggingsstatus-duck';
-import { Data as varselinnboksData } from '../reducer/varselinnboks-duck';
-import { MenyNode as menypunkterData } from '../reducer/menu-duck';
+import { Data as innloggingsstatusData } from '../store/reducers/innloggingsstatus-duck';
+import { Data as varselinnboksData } from '../store/reducers/varselinnboks-duck';
+import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
 
 export enum Status {
     OK = 'OK',

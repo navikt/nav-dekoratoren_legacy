@@ -1,33 +1,37 @@
 import React from 'react';
-import { GACategory } from '../../utils/google-analytics';
-import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
-import {
-    getArbeidsflateContext,
-    settArbeidsflate,
-} from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
-import { MenuValue } from '../../utils/meny-storage-utils';
+import { GACategory } from 'utils/google-analytics';
+import { LenkeMedGA } from 'komponenter/LenkeMedGA';
+import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { getArbeidsflateContext } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { MenuValue } from 'utils/meny-storage-utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
 
 const Navlogo = ({
     width,
     height,
     color,
+    className,
     viewIndex,
 }: {
     width?: string;
     height?: string;
     color?: string;
+    className?: string;
     viewIndex?: boolean;
 }) => {
-    const context = getArbeidsflateContext(MenuValue.PRIVATPERSON);
+    const dispatch = useDispatch();
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
+    const context = getArbeidsflateContext(XP_BASE_URL, MenuValue.PRIVATPERSON);
 
     return (
         <LenkeMedGA
             href={context.url}
-            classNameOverride="nav-brand-lenke"
+            classNameOverride={`nav-brand-lenke ${className ? className : ``}`}
             tabIndex={viewIndex ? 0 : -1}
             onClick={event => {
                 event.preventDefault();
-                settArbeidsflate(context);
+                settArbeidsflate(dispatch, context);
             }}
             gaEventArgs={{
                 category: GACategory.Meny,
@@ -36,8 +40,8 @@ const Navlogo = ({
         >
             <svg
                 className="modal-logo-svg"
-                width={width ? width : '73px'}
-                height={height ? height : '46px'}
+                width={width}
+                height={height}
                 viewBox="0 0 73 46"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"

@@ -1,0 +1,51 @@
+@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../styling-variabler.less';
+
+.simple-footer {
+    &__container {
+        min-height: 5rem;
+        display: flex;
+        padding: 0.5rem 0;
+        border-top: 2px solid #0067c5;
+        justify-content: center;
+    }
+
+    &__content {
+        width: 100%;
+        max-width: 1440px;
+        display: flex;
+
+        @media (min-width: @smallDesktopLimitWidth) {
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 3rem;
+        }
+        @media (max-width: @smallDesktopLimitWidth) {
+            flex-direction: column;
+            padding: 1rem 1rem;
+        }
+    }
+
+    &__del-skjerm {
+        display: flex;
+        @media (min-width: @smallDesktopLimitWidth) {
+            justify-content: center;
+            align-items: center;
+        }
+        & > *:last-child {
+            margin-left: 0.5rem;
+        }
+    }
+
+    &__lenke {
+        @media (max-width: @smallDesktopLimitWidth) {
+            :first-child {
+                margin: 0 0 1rem 0;
+            }
+
+            :not(:first-child) {
+                margin: 1rem 0;
+            }
+        }
+    }
+}

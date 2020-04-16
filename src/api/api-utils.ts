@@ -1,5 +1,5 @@
-import { Handling } from '../redux/actions';
-import { Dispatch } from '../redux/dispatch-type';
+import { Handling } from 'store/actions';
+import { Dispatch } from 'store/dispatch-type';
 
 interface StatusActions<T> {
     ok: (temaer: T) => Handling;

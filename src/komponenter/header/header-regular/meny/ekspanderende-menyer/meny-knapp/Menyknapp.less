@@ -1,0 +1,71 @@
+@import '../../../../../../styling-variabler.less';
+@import '../../../../../../../node_modules/nav-frontend-core/less/_variabler';
+
+.dropdown {
+    &__menyknapp {
+        text-decoration: none;
+        text-transform: none;
+        padding: 0.5rem 1rem;
+        margin-left: 0.5rem;
+
+        &:focus,
+        &:hover {
+            background-color: white;
+            color: @navBla;
+        }
+
+        &:active {
+            background-color: white;
+            color: @navBla;
+        }
+        &:hover {
+            outline: 2px solid @navBla;
+        }
+
+        &--innhold {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.4rem 0.7rem;
+            width: fit-content;
+
+            &:hover {
+                outline: 1px black solid;
+                cursor: pointer;
+            }
+
+            .hamburger-ikon {
+                margin-right: 0.5rem;
+            }
+        }
+    }
+    @media (max-width: @minimumMobilWidth) {
+        &__menyknapp {
+            padding: 0.5rem 0.5rem;
+            margin-left: 0.1rem;
+            &--innhold {
+                padding: 0.4rem 0.2rem;
+            }
+        }
+    }
+
+    @media (min-width: @tabletLimitWidth) {
+        &__menyknapp {
+            border-radius: 3px;
+            &:focus,
+            &:hover {
+                background-color: white;
+                color: @navBla;
+            }
+
+            &--innhold {
+                padding: 0.4rem 0.7rem 0;
+
+                .hamburger-ikon {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}

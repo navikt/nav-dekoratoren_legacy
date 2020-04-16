@@ -3,7 +3,7 @@ import 'react-app-polyfill/stable';
 import 'isomorphic-fetch';
 require('console-stamp')(console, '[HH:MM:ss.l]');
 import NodeCache from 'node-cache';
-import request from 'request';
+import fetch from 'node-fetch';
 import express, { Response } from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
@@ -59,47 +59,57 @@ app.get(`${appBasePath}/env`, (req, res) => {
     res.send(clientEnv(req));
 });
 
-app.get(`${appBasePath}/api/meny`, (req, res) =>
-    mainCache.get(mainCacheKey, (error, mainCacheContent) =>
-        !error && mainCacheContent ? res.send(mainCacheContent) : fetchMenu(res)
-    )
-);
+app.get(`${appBasePath}/api/meny`, (req, res) => {
+    const mainCacheContent = mainCache.get(mainCacheKey);
+    if (mainCacheContent) {
+        res.send(mainCacheContent);
+    } else {
+        // Fetch fom XP
+        fetch(`${process.env.API_XP_MENY_URL}`, { method: 'GET' })
+            .then(xpRes => xpRes.json())
+            .then(xpData => {
+                mainCache.set(mainCacheKey, xpData, 100);
+                backupCache.set(backupCacheKey, xpData, 0);
+                res.send(xpData);
+            })
+            .catch(err => {
+                console.error('Failed to fetch decorator - ', err);
+            })
 
-const fetchMenu = (res: Response) => {
-    const uri = `${process.env.API_XP_MENY_URL}`;
-    const isLocal = process.env.APP_BASE_URL?.includes('localhost'); // TODO: fjern
-    request(
-        { method: 'GET', uri, timeout: isLocal ? 1 : undefined },
-        (reqError, reqResponse, reqBody) => {
-            if (
-                !reqError &&
-                reqResponse.statusCode === 200 &&
-                reqBody.length > 2
-            ) {
-                mainCache.set(mainCacheKey, reqBody, 100);
-                backupCache.set(backupCacheKey, reqBody, 0);
-                res.send(reqBody);
-            } else {
-                console.error('Failed to fetch decorator', reqError);
-                backupCache.get(backupCacheKey, (err, backupCacheContent) => {
-                    if (!err && backupCacheContent) {
-                        console.log('Using backup cache - copy to main cache');
-                        mainCache.set(mainCacheKey, backupCacheContent, 100);
-                        res.send(backupCacheContent);
+            // Use backup cache
+            .then(() => {
+                if (!res.headersSent) {
+                    console.log('Using backup cache');
+                    const backupCacheData = backupCache.get(backupCacheKey);
+                    if (backupCacheData) {
+                        mainCache.set(mainCacheKey, backupCacheData, 100);
+                        res.send(backupCacheData);
                     } else {
-                        console.log(
-                            'Failed to use backup-cache - using mock',
-                            err
-                        );
-                        mainCache.set(mainCacheKey, mockMenu, 100);
-                        backupCache.set(backupCacheKey, mockMenu, 0);
-                        res.send(mockMenu);
+                        throw 'Invalid cache';
                     }
-                });
-            }
-        }
-    );
-};
+                }
+            })
+            .catch(err => {
+                console.error('Failed to use backup cache - ', err);
+            })
+
+            // Use backup mock
+            .then(() => {
+                if (!res.headersSent) {
+                    console.log('Using backup mock');
+                    if (mockMenu) {
+                        mainCache.set(mainCacheKey, mockMenu, 100);
+                        res.send(mockMenu);
+                    } else {
+                        throw 'Mock is undefined';
+                    }
+                }
+            })
+            .catch(err => {
+                console.error('Failed to use backup mock - ', err);
+            });
+    }
+});
 
 // Proxied requests
 const proxiedAuthUrl = `${appBasePath}/api/auth`;

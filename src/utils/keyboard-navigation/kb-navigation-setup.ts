@@ -11,12 +11,12 @@ import KbNav, {
     NodeIndex,
     NodeSetterCallback,
 } from './kb-navigation';
-import { desktopHeaderLogoId } from '../../komponenter/header/meny/DesktopMenylinje';
-import { desktopHovedmenyKnappId } from '../../komponenter/header/meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
-import { desktopSokKnappId } from '../../komponenter/header/meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
-import { desktopVarslerKnappId } from '../../komponenter/header/meny/ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
-import { desktopMinsideKnappId } from '../../komponenter/header/meny/ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
-import { Language } from '../../reducer/language-duck';
+import { desktopHeaderLogoId } from 'komponenter/header/header-regular/meny/DesktopMenylinje';
+import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
+import { desktopSokKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
+import { desktopVarslerKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
+import { desktopMinsideKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
+import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from '../../api/api';
 

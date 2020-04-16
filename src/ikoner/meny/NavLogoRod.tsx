@@ -1,13 +1,13 @@
 import React from 'react';
-import Tekst from '../../tekster/finn-tekst';
-import { GACategory } from '../../utils/google-analytics';
-import { LenkeMedGA } from '../../komponenter/LenkeMedGA';
-import { settArbeidsflate } from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
-import { getArbeidsflateContext } from '../../komponenter/header/arbeidsflatemeny/arbeidsflate-lenker';
-import { MenuValue } from '../../utils/meny-storage-utils';
-import './NavLogoRod.less';
+import Tekst from 'tekster/finn-tekst';
+import { GACategory } from 'utils/google-analytics';
+import { LenkeMedGA } from 'komponenter/LenkeMedGA';
+import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { getArbeidsflateContext } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../reducer/reducers';
+import { AppState } from 'store/reducers';
+import './NavLogoRod.less';
 
 const NavLogoRod = ({
     width,
@@ -36,8 +36,8 @@ const NavLogoRod = ({
             }}
         >
             <svg
-                width={width ? width : '269px'}
-                height={height ? height : '169px'}
+                width={width}
+                height={height}
                 viewBox="0 0 269 169"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"

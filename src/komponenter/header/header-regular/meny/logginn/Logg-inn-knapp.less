@@ -1,0 +1,27 @@
+@import '../../../../../styling-variabler.less';
+@import '../../../../../../node_modules/nav-frontend-core/less/_variabler';
+
+.login-container {
+    width: auto !important; // TODO: finn ut hvorfor denne overstyres i Q6 :)
+
+    .knapp {
+        text-transform: none;
+        letter-spacing: initial;
+        @media (max-width: @smallDesktopLimitWidth) {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+    }
+
+    .mobil-login-knapp {
+        padding: 0.5rem 1rem;
+        margin-left: 3px;
+        text-transform: none;
+    }
+
+    @media (max-width: @minimumMobilWidth) {
+        .mobil-login-knapp {
+            padding: 0.5rem 0.5rem;
+        }
+    }
+}
