@@ -9,7 +9,6 @@ import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import './Arbeidsflatemeny.less';
 import { getKbId, NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 
 const Arbeidsflatemeny = () => {
     const cls = BEMHelper('arbeidsflate');
@@ -45,7 +44,6 @@ const Arbeidsflatemeny = () => {
                                 href={lenke.url}
                                 onClick={event => {
                                     event.preventDefault();
-                                    dispatch(lukkAlleDropdowns());
                                     settArbeidsflate(dispatch, lenke);
                                 }}
                                 gaEventArgs={{

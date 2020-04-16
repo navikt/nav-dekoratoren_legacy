@@ -5,11 +5,11 @@ import { Language } from 'store/reducers/language-duck';
 import MobilMenylinje from './meny/MobilMenylinje';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import DesktopMenylinje from './meny/DesktopMenylinje';
-import { useKbNavigationMenyLinje } from '../../../utils/keyboard-navigation/useKbNavigationMenyLinje';
+import { useKbNavigationHeader } from '../../../utils/keyboard-navigation/useKbNavigationHeader';
 
 export const RegularHeader = () => {
     const language = useSelector((state: AppState) => state.language.language);
-    useKbNavigationMenyLinje();
+    useKbNavigationHeader();
 
     return (
         <Fragment>

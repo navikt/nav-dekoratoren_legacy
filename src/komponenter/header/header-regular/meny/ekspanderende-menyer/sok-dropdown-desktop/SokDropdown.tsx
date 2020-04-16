@@ -18,8 +18,6 @@ const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.sok,
 });
 
-const nodeGroup = NodeGroup.Sok;
-
 const classname = 'desktop-sok-dropdown';
 export const desktopSokDropdownClassname = classname;
 export const desktopSokKnappId = `${classname}-knapp-id`;
@@ -27,7 +25,7 @@ export const desktopSokKnappId = `${classname}-knapp-id`;
 export const SokDropdown = () => {
     const { isOpen } = useSelector(stateSelector);
     const dispatch = useDispatch();
-    useKbNavigationDropdown(configForNodeGroup[nodeGroup], isOpen);
+    useKbNavigationDropdown(configForNodeGroup[NodeGroup.Sok], isOpen);
 
     const toggleMenu = () => {
         triggerGaEvent({

@@ -2,11 +2,11 @@ import { ActionType, Handling } from '../actions';
 
 export interface DropdownState {
     hovedmeny: boolean;
+    minside: boolean;
     sok: boolean;
     varsel: boolean;
     undermeny: boolean;
     varsler: boolean;
-    minside: boolean;
 }
 
 export const initialState: DropdownState = {

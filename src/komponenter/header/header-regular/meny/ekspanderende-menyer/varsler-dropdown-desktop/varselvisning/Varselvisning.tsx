@@ -8,8 +8,8 @@ import { VarslerParsed } from './VarslerParsed';
 import { Undertittel } from 'nav-frontend-typografi';
 import { getKbId, NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
+import { useKbNavigationDropdown } from 'utils/keyboard-navigation/useKbNavigationDropdown';
 import './Varselvisning.less';
-import { useKbNavigationDropdown } from '../../../../../../../utils/keyboard-navigation/useKbNavigationDropdown';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
@@ -23,8 +23,9 @@ type Props = {
 };
 
 const classname = 'varsler-display-desktop';
+const nodeGroup = NodeGroup.Varsler;
 
-const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => {
+const alleVarslerLenke = (rowIndex: number, nyeVarslerMsg: string) => {
     const { API_VARSELINNBOKS_URL } = useSelector(
         (state: AppState) => state.environment
     );
@@ -32,7 +33,7 @@ const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => {
         <div className="dekorator-vis-alle-lenke">
             <LenkeMedGA
                 href={API_VARSELINNBOKS_URL}
-                id={getKbId(NodeGroup.Varsler, { col: 0, row: index, sub: 0 })}
+                id={getKbId(nodeGroup, { col: 0, row: rowIndex, sub: 0 })}
                 tabIndex={0}
                 gaEventArgs={{
                     category: GACategory.Header,
@@ -51,7 +52,7 @@ export const Varselvisning = ({ isOpen }: Props) => {
     const { varsler, varslerAntall, varslerUleste, language } = useSelector(
         stateSelector
     );
-    useKbNavigationDropdown(configForNodeGroup[NodeGroup.Varsler], isOpen);
+    useKbNavigationDropdown(configForNodeGroup[nodeGroup], isOpen);
 
     const nyeVarslerMsg =
         varslerUleste > 0
@@ -65,7 +66,10 @@ export const Varselvisning = ({ isOpen }: Props) => {
                 <Tekst id={'varsler-tittel'} />
             </Undertittel>
             {visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
-            <VarslerParsed varsler={varsler} rowIndex={1} />
+            <VarslerParsed
+                varsler={varsler}
+                rowIndex={visAlleVarslerLenke ? 1 : 0}
+            />
             {visAlleVarslerLenke && alleVarslerLenke(2, nyeVarslerMsg)}
         </div>
     );

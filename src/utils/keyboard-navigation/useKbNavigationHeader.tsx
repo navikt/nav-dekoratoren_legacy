@@ -21,7 +21,7 @@ const stateSelector = (state: AppState) => ({
     kbNavState: state.kbNavigation,
 });
 
-export const useKbNavigationMenyLinje = () => {
+export const useKbNavigationHeader = () => {
     const {
         language,
         arbeidsflate,

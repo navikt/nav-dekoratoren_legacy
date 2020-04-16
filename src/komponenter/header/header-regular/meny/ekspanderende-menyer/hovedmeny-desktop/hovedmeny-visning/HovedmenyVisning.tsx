@@ -55,11 +55,10 @@ export const HovedmenyVisning = (props: Props) => {
 
     const cls = BEMHelper(classname);
 
-    const [kbNavConfig, setKbNavConfig] = useState<KbNavConfig>();
-    useKbNavigationDropdown(
-        kbNavConfig || configForNodeGroup[nodeGroup],
-        isOpen
+    const [kbNavConfig, setKbNavConfig] = useState<KbNavConfig>(
+        configForNodeGroup[nodeGroup]
     );
+    useKbNavigationDropdown(kbNavConfig, isOpen);
 
     const updateMaxCols = () =>
         setKbNavConfig({

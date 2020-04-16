@@ -12,7 +12,7 @@ import {
 export const buildGraphAndGetRootNode = (
     group: NodeGroup,
     rootIndex: NodeIndex,
-    maxColsPerWrappedRow: Array<number>,
+    maxColsPerWrappedRow: number[],
     idMap: KbIdMap = {},
     nodeMap: KbNaviNodeMap = {}
 ): KbNaviNode => {
@@ -206,8 +206,5 @@ export const buildGraphAndGetRootNode = (
         return node;
     };
 
-    return (
-        getNodeAtIndex(rootIndex) ||
-        createKbNaviNode('blank-node-id', rootIndex, group)
-    );
+    return getNodeAtIndex(rootIndex);
 };
