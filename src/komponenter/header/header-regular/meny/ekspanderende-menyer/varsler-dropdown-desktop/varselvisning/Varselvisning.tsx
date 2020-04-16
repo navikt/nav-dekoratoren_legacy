@@ -7,9 +7,9 @@ import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
 import { Undertittel } from 'nav-frontend-typografi';
 import { getKbId, NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { KbNavigationWrapper } from 'utils/keyboard-navigation/KbNavigationWrapper';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import './Varselvisning.less';
+import { useKbNavigationDropdown } from '../../../../../../../utils/keyboard-navigation/useKbNavigationDropdown';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
@@ -51,6 +51,7 @@ export const Varselvisning = ({ isOpen }: Props) => {
     const { varsler, varslerAntall, varslerUleste, language } = useSelector(
         stateSelector
     );
+    useKbNavigationDropdown(configForNodeGroup[NodeGroup.Varsler], isOpen);
 
     const nyeVarslerMsg =
         varslerUleste > 0
@@ -59,18 +60,13 @@ export const Varselvisning = ({ isOpen }: Props) => {
     const visAlleVarslerLenke = varslerAntall > 5;
 
     return (
-        <KbNavigationWrapper
-            config={configForNodeGroup[NodeGroup.Varsler]}
-            isEnabled={isOpen}
-        >
-            <div className={classname}>
-                <Undertittel>
-                    <Tekst id={'varsler-tittel'} />
-                </Undertittel>
-                {visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
-                <VarslerParsed varsler={varsler} rowIndex={1} />
-                {visAlleVarslerLenke && alleVarslerLenke(2, nyeVarslerMsg)}
-            </div>
-        </KbNavigationWrapper>
+        <div className={classname}>
+            <Undertittel>
+                <Tekst id={'varsler-tittel'} />
+            </Undertittel>
+            {visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
+            <VarslerParsed varsler={varsler} rowIndex={1} />
+            {visAlleVarslerLenke && alleVarslerLenke(2, nyeVarslerMsg)}
+        </div>
     );
 };

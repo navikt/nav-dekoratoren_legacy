@@ -21,7 +21,7 @@ const stateSelector = (state: AppState) => ({
     kbNavState: state.kbNavigation,
 });
 
-export const KbNavigationMain = ({ children }: { children: JSX.Element }) => {
+export const useKbNavigationMenyLinje = () => {
     const {
         language,
         arbeidsflate,
@@ -56,6 +56,4 @@ export const KbNavigationMain = ({ children }: { children: JSX.Element }) => {
 
         return () => removeListeners(handlers);
     }, [kbNavState]);
-
-    return children;
 };

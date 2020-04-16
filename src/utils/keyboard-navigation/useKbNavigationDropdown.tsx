@@ -8,20 +8,16 @@ import {
 } from 'store/reducers/keyboard-nav-duck';
 import { KbNavConfig } from './kb-navigation-setup';
 
-type Props = {
-    config: KbNavConfig;
-    isEnabled: boolean;
-    children: JSX.Element;
-};
-
 const stateSelector = (state: AppState) => ({
     currentNode: state.kbNavigation.currentNode,
     mainNodeMap: state.kbNavigation.mainGraph.nodeMap,
     subNodeMap: state.kbNavigation.subGraph?.nodeMap,
 });
 
-export const KbNavigationWrapper = (props: Props) => {
-    const { config, isEnabled, children } = props;
+export const useKbNavigationDropdown = (
+    config: KbNavConfig,
+    isEnabled: boolean
+) => {
     const {
         group,
         rootIndex,
@@ -62,6 +58,4 @@ export const KbNavigationWrapper = (props: Props) => {
             graph.rootNode[NodeEdgeOpposite[parentNodeEdge]] = parentNode;
         }
     }, [group, rootIndex, idMap, maxColsPerRow, isEnabled]);
-
-    return children;
 };

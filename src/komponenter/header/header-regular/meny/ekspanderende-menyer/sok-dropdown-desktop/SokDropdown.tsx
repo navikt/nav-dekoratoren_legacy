@@ -11,8 +11,8 @@ import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import SokMenyIkon from '../meny-knapper/ikoner/sok-ikon/SokMenyIkon';
 import './SokDropdown.less';
 import { NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { KbNavigationWrapper } from 'utils/keyboard-navigation/KbNavigationWrapper';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
+import { useKbNavigationDropdown } from '../../../../../../utils/keyboard-navigation/useKbNavigationDropdown';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.sok,
@@ -27,6 +27,7 @@ export const desktopSokKnappId = `${classname}-knapp-id`;
 export const SokDropdown = () => {
     const { isOpen } = useSelector(stateSelector);
     const dispatch = useDispatch();
+    useKbNavigationDropdown(configForNodeGroup[nodeGroup], isOpen);
 
     const toggleMenu = () => {
         triggerGaEvent({
@@ -58,12 +59,7 @@ export const SokDropdown = () => {
             isOpen={isOpen}
             menyKnapp={knapp}
         >
-            <KbNavigationWrapper
-                config={configForNodeGroup[nodeGroup]}
-                isEnabled={isOpen}
-            >
-                <Sok />
-            </KbNavigationWrapper>
+            <Sok />
         </EkspanderbarMeny>
     );
 };

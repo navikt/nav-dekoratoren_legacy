@@ -8,11 +8,11 @@ import { matchMedia } from 'utils/match-media-polyfill';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
-import { KbNavigationWrapper } from 'utils/keyboard-navigation/KbNavigationWrapper';
 import {
     configForNodeGroup,
     KbNavConfig,
 } from 'utils/keyboard-navigation/kb-navigation-setup';
+import { useKbNavigationDropdown } from '../../../../../../../utils/keyboard-navigation/useKbNavigationDropdown';
 
 type Props = {
     classname: string;
@@ -56,6 +56,11 @@ export const HovedmenyVisning = (props: Props) => {
     const cls = BEMHelper(classname);
 
     const [kbNavConfig, setKbNavConfig] = useState<KbNavConfig>();
+    useKbNavigationDropdown(
+        kbNavConfig || configForNodeGroup[nodeGroup],
+        isOpen
+    );
+
     const updateMaxCols = () =>
         setKbNavConfig({
             ...configForNodeGroup[nodeGroup],
@@ -82,24 +87,19 @@ export const HovedmenyVisning = (props: Props) => {
     }
 
     return (
-        <KbNavigationWrapper
-            config={kbNavConfig || configForNodeGroup[nodeGroup]}
-            isEnabled={isOpen}
-        >
-            <div className={cls.element('dropdown')}>
-                <Toppseksjon classname={classname} />
-                <Hovedseksjon
-                    menyLenker={menyLenker}
-                    classname={classname}
-                    isOpen={isOpen}
-                />
-                <Bunnseksjon
-                    classname={classname}
-                    language={language}
-                    arbeidsflate={arbeidsflate}
-                />
-            </div>
-        </KbNavigationWrapper>
+        <div className={cls.element('dropdown')}>
+            <Toppseksjon classname={classname} />
+            <Hovedseksjon
+                menyLenker={menyLenker}
+                classname={classname}
+                isOpen={isOpen}
+            />
+            <Bunnseksjon
+                classname={classname}
+                language={language}
+                arbeidsflate={arbeidsflate}
+            />
+        </div>
     );
 };
 

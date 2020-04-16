@@ -2,7 +2,6 @@ import KbNav, {
     createKbNaviNode,
     createNaviGraph,
     getKbId,
-    GraphData,
     KbIdMap,
     KbNaviNode,
     KbNaviNodeMap,
@@ -19,6 +18,7 @@ import { desktopMinsideKnappId } from 'komponenter/header/header-regular/meny/ek
 import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from '../../api/api';
+import { KeyboardNaviState } from '../../store/reducers/keyboard-nav-duck';
 
 export type KbNavConfig = {
     group: NodeGroup;
@@ -40,10 +40,13 @@ const masterNode = createKbNaviNode(
     NodeGroup.HeaderMenylinje
 );
 
-export const initialMainGraph: GraphData = {
-    group: masterNode.group,
-    rootNode: masterNode,
-    nodeMap: { [masterNode.id]: masterNode },
+export const kbNavInitialState: KeyboardNaviState = {
+    currentNode: masterNode,
+    mainGraph: {
+        group: masterNode.group,
+        rootNode: masterNode,
+        nodeMap: { [masterNode.id]: masterNode },
+    },
 };
 
 export const configForNodeGroup: { [key in NodeGroup]: KbNavConfig } = {

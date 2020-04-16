@@ -6,17 +6,12 @@ import {
     SettKbSubGraph,
 } from '../actions';
 import { GraphData, KbNaviNode } from 'utils/keyboard-navigation/kb-navigation';
-import { initialMainGraph } from 'utils/keyboard-navigation/kb-navigation-setup';
+import { kbNavInitialState } from '../../utils/keyboard-navigation/kb-navigation-setup';
 
 export type KeyboardNaviState = {
     currentNode: KbNaviNode;
     mainGraph: GraphData;
     subGraph?: GraphData;
-};
-
-const initialState: KeyboardNaviState = {
-    currentNode: initialMainGraph.rootNode,
-    mainGraph: initialMainGraph,
 };
 
 export const setKbMainGraph = (graph: GraphData): SettKbMainGraph => ({
@@ -35,7 +30,7 @@ export const setCurrentNode = (node: KbNaviNode): SettKbCurrentNode => ({
 });
 
 export const reducer = (
-    state: KeyboardNaviState = initialState,
+    state: KeyboardNaviState = kbNavInitialState,
     action: Handling
 ): KeyboardNaviState => {
     switch (action.type) {
