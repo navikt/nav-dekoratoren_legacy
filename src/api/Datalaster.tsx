@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Status, DataElement, DatalasterProps } from './api';
 
 const harStatus = (dataElement: DataElement, status: Status): boolean => {
@@ -9,12 +8,7 @@ const Datalaster = ({
     avhengigheter,
     ventPa,
     children,
-    feilmeldingId,
 }: DatalasterProps) => {
-    const feilmelding = feilmeldingId
-        ? feilmeldingId
-        : 'feilmelding-tekniskfefil';
-
     if (
         avhengigheter.every(a => harStatus(a, Status.OK)) &&
         (!ventPa ||

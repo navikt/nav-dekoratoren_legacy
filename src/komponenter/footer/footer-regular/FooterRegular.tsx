@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import FooterTopp from './footer-topp/FooterTopp';
 import FooterBottom from './footer-bottom/FooterBottom';
 
-const RegularFooter = () => {
+const FooterRegular = () => {
     return (
         <Fragment>
             <FooterTopp />
@@ -11,4 +11,4 @@ const RegularFooter = () => {
     );
 };
 
-export default RegularFooter;
+export default FooterRegular;

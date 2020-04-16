@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import './NavLogoFooter.less';
 
-const NavLogoRod = ({
+const NavLogoFooter = ({
     width,
     height,
     classname,
@@ -127,4 +127,4 @@ const NavLogoRod = ({
     );
 };
 
-export default NavLogoRod;
+export default NavLogoFooter;
