@@ -17,14 +17,13 @@ export const Header = () => {
     );
 
     useEffect(() => {
-        console.log(data);
         if (status !== Status.OK) {
             fetchMenypunkter(APP_BASE_URL)(dispatch);
             if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
                 oppdaterSessionStorage(PARAMS.CONTEXT);
             }
         }
-    }, [data]);
+    }, []);
 
     return (
         <Fragment>
