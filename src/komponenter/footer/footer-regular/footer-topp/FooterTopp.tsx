@@ -12,6 +12,7 @@ import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import { MenyNode } from 'store/reducers/menu-duck';
 import FooterLenker from '../../Lenker';
 import './FooterTopp.less';
+import { LinksLoader } from '../../../common/content-loaders/LinkLoader';
 
 const FooterTopp = () => {
     const cls = BEMHelper('menylinje-topp');
@@ -61,7 +62,11 @@ const FooterTopp = () => {
                         <Tekst id="footer-kontakt-overskrift" />
                     </Undertittel>
                     <ul aria-labelledby="venstrelenker-overskrift">
-                        <FooterLenker node={kontaktNode} />
+                        {kontaktNode ? (
+                            <FooterLenker node={kontaktNode} />
+                        ) : (
+                            <LinksLoader id="kontakt-loader" />
+                        )}
                     </ul>
                 </div>
                 <div className="menylenker-seksjon midt">
@@ -75,7 +80,11 @@ const FooterTopp = () => {
                         <Tekst id="footer-navsamfunn-overskrift" />
                     </Undertittel>
                     <ul aria-labelledby="hoyrelenker-overskrift">
-                        <FooterLenker node={samfunnNode} />
+                        {samfunnNode ? (
+                            <FooterLenker node={samfunnNode} />
+                        ) : (
+                            <LinksLoader id="samfunn-loader" />
+                        )}
                     </ul>
                 </div>
                 <FooterArbeidsflatevalg />

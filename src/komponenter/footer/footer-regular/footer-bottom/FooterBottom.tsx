@@ -12,6 +12,7 @@ import { MenyNode } from 'store/reducers/menu-duck';
 import FooterLenker from '../../Lenker';
 import LenkeMedIkon from 'komponenter/footer/lenke-med-ikon/LenkeMedIkon';
 import DelSkjermModal from 'komponenter/footer/del-skjerm-modal/DelSkjermModal';
+import { LinkLoader } from '../../../common/content-loaders/LinkLoader';
 
 import './FooterBottom.less';
 
@@ -59,7 +60,11 @@ const FooterBottom = () => {
                             <Tekst id="footer-arbeids-og-veldferdsetaten" />
                         </Normaltekst>
                         <ul className="bottom-lenke">
-                            <FooterLenker node={personvernNode} />
+                            {personvernNode ? (
+                                <FooterLenker node={personvernNode} />
+                            ) : (
+                                <LinkLoader id={'personvern-loader'} />
+                            )}
                         </ul>
                     </div>
 
