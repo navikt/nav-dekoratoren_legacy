@@ -39,12 +39,6 @@ export const getSpraaklenker = (
     });
 
     switch (language) {
-        case Language.NORSK:
-            return lenker.filter(
-                lenke =>
-                    lenke.lang === Language.ENGELSK ||
-                    lenke.lang === Language.SAMISK
-            );
         case Language.ENGELSK:
             return lenker.filter(
                 lenke =>
