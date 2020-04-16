@@ -14,7 +14,7 @@ const mountWithRedux = (store: Store) =>
         </Provider>
     );
 
-const { store } = createStore(reducers);
+const store = createStore(reducers);
 
 describe('<Header>', () => {
     it('Skal rendre <Arbeidsflatemeny> komponent hvis språk er norsk', () => {

@@ -9,7 +9,7 @@ import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 
-const { store } = createStore(reducers);
+const store = createStore(reducers);
 
 const getWrapper = (store: Store) =>
     mount(
