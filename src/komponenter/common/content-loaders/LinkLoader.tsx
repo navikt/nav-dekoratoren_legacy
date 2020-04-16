@@ -2,8 +2,8 @@ import React from 'react';
 import ContentLoader from 'react-content-loader';
 
 export const LinkLoader = ({ id }: { id: string }) => (
-    <ContentLoader uniqueKey={id} speed={1} viewBox="0 0 200 26">
-        <rect x="0" y="10" rx="4" ry="4" width="200" height="16" />
+    <ContentLoader uniqueKey={id} speed={1} width={225} height={18}>
+        <rect x="0" y="4" rx="4" ry="4" width="225" height="16" />
     </ContentLoader>
 );
 
