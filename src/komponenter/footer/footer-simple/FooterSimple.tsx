@@ -11,6 +11,8 @@ import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import FooterLenker from '../Lenker';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import './FooterSimple.less';
+import LenkeMedIkon from '../lenke-med-ikon/LenkeMedIkon';
+import DelSkjerm from 'ikoner/del-skjerm/DelSkjerm';
 
 const cls = BEMHelper('simple-footer');
 
@@ -50,15 +52,12 @@ const SimpleFooter = () => {
                     <ul className="bottom-lenke">
                         <FooterLenker node={personvernNode} />
                     </ul>
-                    <Lenke
-                        href="#"
-                        role="button"
+                    <LenkeMedIkon
                         className={cls.element('del-skjerm')}
                         onClick={openModal}
-                    >
-                        <Tekst id="footer-del-skjerm" />
-                        <DelSkjermIkon height={20} width={20} />
-                    </Lenke>
+                        tekst={<Tekst id="footer-del-skjerm" />}
+                        ikon={<DelSkjerm height={20} width={20} />}
+                    />
                     {isOpen && (
                         <DelSkjermModal isOpen={isOpen} onClose={closeModal} />
                     )}

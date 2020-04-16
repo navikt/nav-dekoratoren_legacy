@@ -4,10 +4,8 @@ interface Props {
     height: number;
     width: number;
 }
-export default ({ height, width }: Props) => (
+const DelSkjerm = ({ height, width }: Props) => (
     <svg
-        contentScriptType="text/ecmascript"
-        contentStyleType="text/css"
         viewBox="0 0 24 24"
         height={height}
         width={width}
@@ -30,3 +28,4 @@ export default ({ height, width }: Props) => (
         </g>
     </svg>
 );
+export default DelSkjerm;
