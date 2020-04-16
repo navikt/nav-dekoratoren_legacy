@@ -5,10 +5,10 @@ import { createStore } from 'store';
 import { dataInitState } from 'store/reducers/menu-duck';
 import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
+import HovedmenyVisning from './HovedmenyVisning';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
-import HovedmenyVisning from './HovedmenyVisning';
 
 const store = createStore();
 

@@ -53,7 +53,6 @@ describe('<MinsideMenyDesktop>', () => {
         expect(wrapper.find('.desktop-minside-meny__knapp')).toHaveLength(0);
     });
 
-    // TODO: noe feiler kun i test med reduceren her ("no reducer provided for key kbNavigation")
     it('Skal vise minside knapp når bruker er PRIVATPERSON og innlogget', () => {
         store.dispatch(settPersonflate());
         store.dispatch(innloggetAction);
