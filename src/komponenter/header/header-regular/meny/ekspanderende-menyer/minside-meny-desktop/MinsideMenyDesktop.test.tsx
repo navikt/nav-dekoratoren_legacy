@@ -11,7 +11,7 @@ import { ActionType } from 'store/actions';
 import { Status } from 'api/api';
 import mockMenu from 'server/mock/menu.json';
 
-const store = createStore(reducers);
+const { store } = createStore(reducers);
 
 store.dispatch({
     type: ActionType.HENT_MENY_OK,

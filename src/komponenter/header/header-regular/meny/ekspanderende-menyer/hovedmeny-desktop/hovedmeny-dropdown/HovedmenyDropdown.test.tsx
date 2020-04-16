@@ -10,7 +10,7 @@ import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
 
-const store = createStore();
+const { store } = createStore();
 
 const shallowWithProps = (lang: Language, arbeidsflate: MenuValue) => {
     return mount(

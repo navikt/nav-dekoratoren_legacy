@@ -4,7 +4,7 @@ import { createStore } from '../../../store';
 import { Provider as ReduxProvider } from 'react-redux';
 import Skiplinks from './Skiplinks';
 
-const store = createStore();
+const { store } = createStore();
 
 describe('<Skiplinks>', () => {
     const wrapper = mount(

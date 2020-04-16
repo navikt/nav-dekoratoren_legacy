@@ -15,7 +15,7 @@ const mountWithRedux = (store: Store) =>
     );
 
 describe('<LoggInnKnapp />', () => {
-    const store = createStore();
+    const { store } = createStore();
 
     it('Rendrer to <Tekst> komponenter (en for mobil og en for tablet/desktop)', () => {
         expect(mountWithRedux(store).find(Tekst)).toHaveLength(1);
