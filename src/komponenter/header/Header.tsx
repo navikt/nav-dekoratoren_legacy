@@ -18,9 +18,8 @@ export const Header = () => {
         number | undefined
     >(undefined);
 
-    const setMinHeight = () => {
-        const headwrapper = document.getElementById('head-wrapper');
-        setHeaderoffsetHeight(headwrapper ? headwrapper.offsetHeight : 201);
+    const setMinHeight = (element: HTMLElement | null) => {
+        setHeaderoffsetHeight(element ? element.offsetHeight : 0);
     };
 
     useEffect(() => {
@@ -28,8 +27,8 @@ export const Header = () => {
         if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
             oppdaterSessionStorage(PARAMS.CONTEXT);
         }
-        setMinHeight();
         const header = document.getElementById('stickyhead');
+        setMinHeight(header);
         window.onscroll = function stickHeader() {
             setClassList(header);
         };
@@ -48,7 +47,6 @@ export const Header = () => {
             <div
                 className="head-wrapper"
                 style={{ minHeight: headeroffsetHeight }}
-                id="head-wrapper"
             >
                 <div className="head-container sticky" id="stickyhead">
                     <div className="header-z-wrapper">
