@@ -113,7 +113,7 @@
         "@babel/plugin-transform-modules-commonjs": "^7.6.0",
         "@babel/plugin-transform-typescript": "^7.6.0",
         "@babel/preset-env": "^7.6.2",
-        "@babel/preset-react": "^7.0.0",
+        "@babel/preset-react": "^7.9.4",
         "@types/express": "^4.17.1",
         "@types/react-gtm-module": "^2.0.0",
         "@types/classnames": "^2.2.9",
