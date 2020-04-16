@@ -11,6 +11,8 @@ import {
     getKbId,
     NodeGroup,
 } from '../../../../../../utils/keyboard-navigation/kb-navigation';
+import { KbNavigationWrapper } from '../../../../../../utils/keyboard-navigation/KbNavigationWrapper';
+import { configForNodeGroup } from '../../../../../../utils/keyboard-navigation/kb-navigation-setup';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
@@ -18,6 +20,10 @@ const stateSelector = (state: AppState) => ({
     varslerUleste: state.varsler.data.uleste,
     language: state.language.language,
 });
+
+type Props = {
+    isOpen: boolean;
+};
 
 const classname = 'varsler-display-desktop';
 
@@ -44,7 +50,7 @@ const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => {
     );
 };
 
-export const Varselvisning = () => {
+export const Varselvisning = ({ isOpen }: Props) => {
     const { varsler, varslerAntall, varslerUleste, language } = useSelector(
         stateSelector
     );
@@ -56,13 +62,18 @@ export const Varselvisning = () => {
     const visAlleVarslerLenke = varslerAntall > 5;
 
     return (
-        <div className={classname}>
-            <Undertittel>
-                <Tekst id={'varsler'} />
-            </Undertittel>
-            {visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
-            <VarslerParsed varsler={varsler} rowIndex={1} />
-            {visAlleVarslerLenke && alleVarslerLenke(2, nyeVarslerMsg)}
-        </div>
+        <KbNavigationWrapper
+            config={configForNodeGroup[NodeGroup.Varsler]}
+            isEnabled={isOpen}
+        >
+            <div className={classname}>
+                <Undertittel>
+                    <Tekst id={'varsler'} />
+                </Undertittel>
+                {visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
+                <VarslerParsed varsler={varsler} rowIndex={1} />
+                {visAlleVarslerLenke && alleVarslerLenke(2, nyeVarslerMsg)}
+            </div>
+        </KbNavigationWrapper>
     );
 };

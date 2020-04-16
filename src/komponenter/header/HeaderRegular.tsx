@@ -67,6 +67,7 @@ const KbNavMain = ({ children }: { children: JSX.Element }) => {
 
 export const RegularHeader = () => {
     const language = useSelector((state: AppState) => state.language.language);
+
     return (
         <Fragment>
             <div className="media-sm-mobil mobil-meny">

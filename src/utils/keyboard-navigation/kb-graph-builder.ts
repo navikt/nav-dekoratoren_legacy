@@ -186,11 +186,7 @@ export const buildGraphAndGetRootNode = (
     const getElement = (index: NodeIndex) =>
         document.getElementById(getKbId(group, index, idMap)) as HTMLElement;
 
-    const getNodeAtIndex = (index: NodeIndex): KbNaviNode | null => {
-        if (!index) {
-            return null;
-        }
-
+    const getNodeAtIndex = (index: NodeIndex): KbNaviNode => {
         const generatedId = getKbId(group, index, idMap);
         const id = idMap[generatedId] || generatedId;
         if (nodeMap[id]) {
@@ -201,19 +197,15 @@ export const buildGraphAndGetRootNode = (
         nodeMap[id] = node;
 
         if (node) {
-            node[NodeEdge.Top] = getNodeAtIndex(getTopEdgeIndex(index)) || node;
-            node[NodeEdge.Bottom] =
-                getNodeAtIndex(getBottomEdgeIndex(index)) || node;
-            node[NodeEdge.Left] =
-                getNodeAtIndex(getLeftEdgeIndex(index)) || node;
-            node[NodeEdge.Right] =
-                getNodeAtIndex(getRightEdgeIndex(index)) || node;
+            node[NodeEdge.Top] = getNodeAtIndex(getTopEdgeIndex(index));
+            node[NodeEdge.Bottom] = getNodeAtIndex(getBottomEdgeIndex(index));
+            node[NodeEdge.Left] = getNodeAtIndex(getLeftEdgeIndex(index));
+            node[NodeEdge.Right] = getNodeAtIndex(getRightEdgeIndex(index));
         }
 
         return node;
     };
 
-    // TODO: løs dette på en annen måte...
     return (
         getNodeAtIndex(rootIndex) ||
         createKbNaviNode('blank-node-id', rootIndex, group)

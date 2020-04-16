@@ -72,7 +72,7 @@ export const VarslerDropdown = () => {
             isOpen={isOpen}
             menyKnapp={knapp}
         >
-            <Varselvisning />
+            <Varselvisning isOpen={isOpen} />
         </EkspanderbarMeny>
     );
 };
