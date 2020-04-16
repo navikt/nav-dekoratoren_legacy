@@ -36,9 +36,6 @@ export const HovedmenyDesktop = () => {
         language,
         arbeidsflate
     );
-    if (!hovedmenyPunkter?.hasChildren) {
-        return null;
-    }
 
     const toggleMenu = () => {
         triggerGaEvent({
@@ -62,6 +59,11 @@ export const HovedmenyDesktop = () => {
             </Undertittel>
         </MenylinjeKnapp>
     );
+
+    // Hide empty menues
+    if (menyPunkter.status === Status.OK && !hovedmenyPunkter?.hasChildren) {
+        return null;
+    }
 
     return (
         <EkspanderbarMeny
