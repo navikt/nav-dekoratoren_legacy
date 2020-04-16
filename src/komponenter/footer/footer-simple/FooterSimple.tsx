@@ -2,10 +2,8 @@ import React, { Fragment, useEffect, useState } from 'react';
 import BEMHelper from 'utils/bem';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import Lenke from 'nav-frontend-lenker';
 import Tekst from 'tekster/finn-tekst';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
-import DelSkjermIkon from 'ikoner/del-skjerm/DelSkjerm';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import FooterLenker from '../Lenker';
@@ -16,7 +14,7 @@ import DelSkjerm from 'ikoner/del-skjerm/DelSkjerm';
 
 const cls = BEMHelper('simple-footer');
 
-const SimpleFooter = () => {
+const FooterSimple = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { language } = useSelector((state: AppState) => state.language);
     const { data } = useSelector((state: AppState) => state.menypunkt);
@@ -67,4 +65,4 @@ const SimpleFooter = () => {
     );
 };
 
-export default SimpleFooter;
+export default FooterSimple;
