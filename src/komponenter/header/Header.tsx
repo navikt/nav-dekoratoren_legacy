@@ -22,7 +22,6 @@ export const Header = () => {
             if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
                 oppdaterSessionStorage(PARAMS.CONTEXT);
             }
-            pe;
         }
     }, []);
 
