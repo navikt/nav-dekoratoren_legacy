@@ -1,5 +1,5 @@
 import ReactGA from 'react-ga';
-import { MenuValue, NAVHEADER } from './meny-storage-utils';
+import { MenuValue } from './meny-storage-utils';
 
 const trackingId = 'UA-9127381-16';
 
