@@ -5,8 +5,10 @@ import { getArbeidsflateContext } from 'komponenter/header/header-regular/arbeid
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { AppState } from 'store/reducers';
+import { useCookies } from 'react-cookie';
 
 const Navlogo = ({
     width,
@@ -22,6 +24,7 @@ const Navlogo = ({
     viewIndex?: boolean;
 }) => {
     const dispatch = useDispatch();
+    const [, setCookie] = useCookies(['decorator-context']);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const context = getArbeidsflateContext(XP_BASE_URL, MenuValue.PRIVATPERSON);
     const arbeidsflate = useSelector(
@@ -36,6 +39,7 @@ const Navlogo = ({
             onClick={event => {
                 event.preventDefault();
                 dispatch(settArbeidsflate(context.key));
+                setCookie('decorator-context', context.key, cookieOptions);
                 if (!erNavDekoratoren()) {
                     window.location.href = context.url;
                 }

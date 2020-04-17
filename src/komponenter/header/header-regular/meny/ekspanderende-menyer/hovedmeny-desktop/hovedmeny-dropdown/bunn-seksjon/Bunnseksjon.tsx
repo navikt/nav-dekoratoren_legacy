@@ -10,8 +10,10 @@ import { ArbeidsflateLenke } from 'komponenter/header/header-regular/arbeidsflat
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import './Bunnseksjon.less';
+import { useCookies } from 'react-cookie';
 
 interface Props {
     classname: string;
@@ -22,6 +24,7 @@ interface Props {
 export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
     const cls = BEMHelper(classname);
     const dispatch = useDispatch();
+    const [, setCookie] = useCookies(['decorator-context']);
     const { environment } = useSelector((state: AppState) => state);
     const lenker = bunnLenker(environment)[arbeidsflate];
 
@@ -42,8 +45,13 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                             onClick={event => {
                                 event.preventDefault();
                                 dispatch(settArbeidsflate(context.key));
+                                setCookie(
+                                    'decorator-context',
+                                    context.key,
+                                    cookieOptions
+                                );
                                 if (!erNavDekoratoren()) {
-                                    window.location.href = lenke.url;
+                                    window.location.href = context.url;
                                 }
                             }}
                             key={lenke.lenkeTekstId}

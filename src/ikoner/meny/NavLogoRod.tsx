@@ -7,8 +7,10 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import './NavLogoRod.less';
+import { useCookies } from 'react-cookie';
 
 const NavLogoRod = ({
     width,
@@ -20,17 +22,26 @@ const NavLogoRod = ({
     classname?: string;
 }) => {
     const dispatch = useDispatch();
+    const [, setCookie] = useCookies(['decorator-context']);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const context = getArbeidsflateContext(XP_BASE_URL, MenuValue.PRIVATPERSON);
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.arbeidsflate.status
+    );
 
     return (
         <LenkeMedGA
             href={context.url}
             classNameOverride={classname}
-            gaEventArgs={{ category: GACategory.Header, action: 'navlogo' }}
+            gaEventArgs={{
+                context: arbeidsflate,
+                category: GACategory.Header,
+                action: 'navlogo',
+            }}
             onClick={event => {
                 event.preventDefault();
                 dispatch(settArbeidsflate(context.key));
+                setCookie('decorator-context', context.key, cookieOptions);
                 if (!erNavDekoratoren()) {
                     window.location.href = context.url;
                 }

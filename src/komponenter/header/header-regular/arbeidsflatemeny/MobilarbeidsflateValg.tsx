@@ -13,8 +13,8 @@ import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import { finnTekst } from 'tekster/finn-tekst';
 import { Language } from 'store/reducers/language-duck';
 import { erNavDekoratoren } from 'utils/Environment';
-import './MobilarbeidsflateValg.less';
 import { useCookies } from 'react-cookie';
+import './MobilarbeidsflateValg.less';
 
 interface Props {
     tabindex: boolean;
@@ -31,15 +31,6 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
     const [, setCookie] = useCookies(['decorator-context']);
     const { arbeidsflate } = useSelector(stateProps);
     const cls = BEMHelper('mobil-arbeidsflate-valg');
-
-    const oppdatereArbeidsflateValg = (
-        e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-        valgVerdi: MenuValue
-    ) => {
-        e.preventDefault();
-        dispatch(settArbeidsflate(valgVerdi));
-        setCookie('decorator-context', valgVerdi, cookieOptions);
-    };
 
     return (
         <ul className={cls.className}>
@@ -59,7 +50,13 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
                             <LenkeMedGA
                                 href={lenke.url}
                                 onClick={event => {
-                                    oppdatereArbeidsflateValg(event, lenke.key);
+                                    event.preventDefault();
+                                    dispatch(settArbeidsflate(lenke.key));
+                                    setCookie(
+                                        'decorator-context',
+                                        lenke.key,
+                                        cookieOptions
+                                    );
                                     if (!erNavDekoratoren()) {
                                         window.location.href = lenke.url;
                                     }

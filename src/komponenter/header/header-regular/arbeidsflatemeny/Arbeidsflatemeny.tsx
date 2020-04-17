@@ -5,7 +5,6 @@ import { Undertekst } from 'nav-frontend-typografi';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import { GACategory } from 'utils/google-analytics';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
-import { MenuValue } from 'utils/meny-storage-utils';
 import { useCookies } from 'react-cookie';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
@@ -22,15 +21,6 @@ const Arbeidsflatemeny = () => {
     const arbeidsflate = useSelector(
         (state: AppState) => state.arbeidsflate.status
     );
-
-    const oppdatereArbeidsflateValg = (
-        e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-        valgVerdi: MenuValue
-    ) => {
-        e.preventDefault();
-        dispatch(settArbeidsflate(valgVerdi));
-        setCookie('decorator-context', valgVerdi, cookieOptions);
-    };
 
     return (
         <nav
@@ -51,7 +41,13 @@ const Arbeidsflatemeny = () => {
                                 classNameOverride={cls.element('lenke')}
                                 href={lenke.url}
                                 onClick={event => {
-                                    oppdatereArbeidsflateValg(event, lenke.key);
+                                    event.preventDefault();
+                                    dispatch(settArbeidsflate(lenke.key));
+                                    setCookie(
+                                        'decorator-context',
+                                        lenke.key,
+                                        cookieOptions
+                                    );
                                     if (!erNavDekoratoren()) {
                                         window.location.href = lenke.url;
                                     }

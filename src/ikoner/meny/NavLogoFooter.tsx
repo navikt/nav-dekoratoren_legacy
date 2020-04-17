@@ -7,7 +7,9 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
+import { useCookies } from 'react-cookie';
 import './NavLogoFooter.less';
 
 const NavLogoFooter = ({
@@ -20,18 +22,27 @@ const NavLogoFooter = ({
     classname?: string;
 }) => {
     const dispatch = useDispatch();
+    const [, setCookie] = useCookies(['decorator-context']);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const context = getArbeidsflateContext(XP_BASE_URL, MenuValue.PRIVATPERSON);
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.arbeidsflate.status
+    );
 
     return (
         <div className="sitefooter__logo">
             <LenkeMedGA
                 classNameOverride="navbar-brand"
                 href={context.url}
-                gaEventArgs={{ category: GACategory.Footer, action: 'navlogo' }}
+                gaEventArgs={{
+                    context: arbeidsflate,
+                    category: GACategory.Footer,
+                    action: 'navlogo',
+                }}
                 onClick={event => {
                     event.preventDefault();
                     dispatch(settArbeidsflate(context.key));
+                    setCookie('decorator-context', context.key, cookieOptions);
                     if (!erNavDekoratoren()) {
                         window.location.href = context.url;
                     }

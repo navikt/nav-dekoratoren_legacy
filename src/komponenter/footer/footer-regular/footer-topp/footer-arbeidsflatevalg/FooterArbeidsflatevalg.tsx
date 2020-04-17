@@ -8,8 +8,11 @@ import Lenkepanel from 'nav-frontend-lenkepanel/lib';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import { Language } from 'store/reducers/language-duck';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import Tekst from 'tekster/finn-tekst';
-import { MenuValue } from '../../../../../utils/meny-storage-utils';
+import { MenuValue } from 'utils/meny-storage-utils';
+import { useCookies } from 'react-cookie';
+import { erNavDekoratoren } from 'utils/Environment';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -18,6 +21,7 @@ const stateSelector = (state: AppState) => ({
 
 const FooterArbeidsflatevalg = () => {
     const dispatch = useDispatch();
+    const [, setCookie] = useCookies(['decorator-context']);
     const { arbeidsflate, language } = useSelector(stateSelector);
     const { XP_BASE_URL, COOKIES } = useSelector(
         (state: AppState) => state.environment
@@ -69,6 +73,15 @@ const FooterArbeidsflatevalg = () => {
                                                 category: GACategory.Header,
                                                 action: 'arbeidsflate-valg',
                                             });
+                                            setCookie(
+                                                'decorator-context',
+                                                lenke.key,
+                                                cookieOptions
+                                            );
+                                            if (!erNavDekoratoren()) {
+                                                window.location.href =
+                                                    lenke.url;
+                                            }
                                         }}
                                         onAuxClick={event =>
                                             event.button &&

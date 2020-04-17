@@ -7,11 +7,11 @@ import { Language } from 'store/reducers/language-duck';
 export function finnTekst(
     id: string,
     urlLanguage: Language,
-    sessionLanguage: Language
+    sessionLanguage?: Language
 ): string {
     let language = urlLanguage;
 
-    if (urlLanguage === Language.IKKEBESTEMT) {
+    if (urlLanguage === Language.IKKEBESTEMT && sessionLanguage) {
         language = sessionLanguage;
     }
 
