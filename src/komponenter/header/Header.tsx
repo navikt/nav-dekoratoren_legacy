@@ -19,16 +19,23 @@ export const Header = () => {
 
     useEffect(() => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
-        if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
-            setCookie('decorator-context', PARAMS.CONTEXT);
-            dispatch(settArbeidsflate(PARAMS.CONTEXT));
-        }
     }, []);
 
     useEffect(() => {
-        const context = cookies['decorator-context'];
-        if (context) {
-            dispatch(settArbeidsflate(context));
+        // Set params if app overrides cookie
+        if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
+            setCookie('decorator-context', PARAMS.CONTEXT);
+            dispatch(settArbeidsflate(PARAMS.CONTEXT));
+        } else {
+            const context = cookies['decorator-context'];
+            if (context) {
+                // Use cookie
+                dispatch(settArbeidsflate(context));
+            } else {
+                // Default to privatperson
+                setCookie('decorator-context', MenuValue.PRIVATPERSON);
+                dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
+            }
         }
     }, []);
 
