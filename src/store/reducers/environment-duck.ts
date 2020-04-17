@@ -20,6 +20,11 @@ export interface EnvironmentState {
         REDIRECT_TO_APP: boolean;
         LEVEL: string;
     };
+
+    COOKIES: {
+        LANGUAGE: string;
+        CONTEXT: MenuValue;
+    };
 }
 
 export const initialState: EnvironmentState = {
@@ -33,13 +38,19 @@ export const initialState: EnvironmentState = {
 
     // Parameters
     PARAMS: {
-        LANGUAGE: 'string',
+        LANGUAGE: 'NORSK',
         CONTEXT: MenuValue.IKKEVALGT,
         SIMPLE: false,
         SIMPLE_HEADER: false,
         SIMPLE_FOOTER: false,
         REDIRECT_TO_APP: false,
         LEVEL: 'string',
+    },
+
+    // Cookies
+    COOKIES: {
+        LANGUAGE: 'NORSK',
+        CONTEXT: MenuValue.IKKEVALGT,
     },
 };
 

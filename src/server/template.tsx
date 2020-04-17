@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider as ReduxProvider } from 'react-redux';
-import LanguageProvider from '../store/providers/Language';
 import Header from '../komponenter/header/Header';
 import Footer from '../komponenter/footer/Footer';
 import { Request } from 'express';
@@ -35,9 +34,13 @@ const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
 export const template = (req: Request) => {
     // Set environment based on request params
-    const env = clientEnv(req);
+    const universalCookies = (req as any).universalCookies;
+    const cookies = universalCookies.cookies;
+    const env = clientEnv({ req, cookies });
 
-    const envHash = hash({ env });
+    const envHash = hash({
+        env,
+    });
     const cachedHtml = cache.get(envHash);
 
     // Retreive from cache
@@ -62,7 +65,7 @@ export const template = (req: Request) => {
     // Render SSR
     const HtmlHeader = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
-            <CookiesProvider cookies={(req as any).universalCookies}>
+            <CookiesProvider cookies={universalCookies}>
                 <Header />
             </CookiesProvider>
         </ReduxProvider>
