@@ -36,11 +36,11 @@ const samarbeidspartnerLenker = (env: EnvironmentState): LenkeData[] => [
     arbeidsgiverContextLenke(env.XP_BASE_URL),
 ];
 
-const ikkeValgtLenker = (): LenkeData[] => [];
+const IKKEBESTEMTLenker = (): LenkeData[] => [];
 
 export const bunnLenker = (env: EnvironmentState) => ({
     [MenuValue.PRIVATPERSON]: privatpersonLenker(env),
     [MenuValue.ARBEIDSGIVER]: arbeidsgiverLenker(env),
     [MenuValue.SAMARBEIDSPARTNER]: samarbeidspartnerLenker(env),
-    [MenuValue.IKKEVALGT]: ikkeValgtLenker(),
+    [MenuValue.IKKEBESTEMT]: IKKEBESTEMTLenker(),
 });

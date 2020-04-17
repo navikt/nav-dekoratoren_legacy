@@ -10,7 +10,7 @@ export interface Arbeidsflate {
 }
 
 export const initialState: Arbeidsflate = {
-    status: MenuValue.IKKEVALGT,
+    status: MenuValue.IKKEBESTEMT,
 };
 
 export const reducer = (

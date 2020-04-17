@@ -24,7 +24,7 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => ({
     ...(req.query && {
         PARAMS: {
             LANGUAGE: req.query.language || 'nb',
-            CONTEXT: (req.query.context || 'ikkevalgt').toUpperCase(),
+            CONTEXT: (req.query.context || 'IKKEBESTEMT').toUpperCase(),
             SIMPLE: req.query.simple || false,
             SIMPLE_HEADER: req.query.header || false,
             SIMPLE_FOOTER: req.query.footer || false,

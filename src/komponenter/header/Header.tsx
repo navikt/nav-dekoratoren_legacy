@@ -15,17 +15,19 @@ import { Language, languageDuck } from '../../store/reducers/language-duck';
 export const Header = () => {
     const dispatch = useDispatch();
     const [cookies, setCookie] = useCookies(['decorator-context']);
+    const { language } = useSelector((state: AppState) => state.language);
     const { PARAMS, APP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
     );
 
+    console.log(language);
     useEffect(() => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
     }, []);
 
     useEffect(() => {
         // Change context
-        if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
+        if (PARAMS.CONTEXT !== MenuValue.IKKEBESTEMT) {
             // Set params if app overrides cookie
             dispatch(settArbeidsflate(PARAMS.CONTEXT));
             setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);

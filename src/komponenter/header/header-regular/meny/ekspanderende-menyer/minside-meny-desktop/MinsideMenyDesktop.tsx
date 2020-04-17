@@ -33,7 +33,7 @@ export const MinsideMenyDesktop = () => {
     if (
         !innloggetStatus.authenticated ||
         arbeidsflate === MenuValue.SAMARBEIDSPARTNER ||
-        arbeidsflate === MenuValue.IKKEVALGT
+        arbeidsflate === MenuValue.IKKEBESTEMT
     ) {
         return null;
     }

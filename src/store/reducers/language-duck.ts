@@ -58,15 +58,3 @@ function genericDuck<I extends object, T>(
         actionCreator,
     };
 }
-
-export const spraakValgetErNorsk = (lang: Language): boolean => {
-    return lang === Language.NORSK;
-};
-
-export const spraakValgetErEngelsk = (lang: Language): boolean => {
-    return lang === Language.ENGELSK;
-};
-
-export const spraakValgetErSamisk = (lang: Language): boolean => {
-    return lang === Language.SAMISK;
-};

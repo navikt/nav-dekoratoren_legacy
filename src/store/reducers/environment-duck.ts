@@ -1,5 +1,6 @@
 import { MenuValue } from '../../utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
+import { Language } from './language-duck';
 
 export interface EnvironmentState {
     XP_BASE_URL: string;
@@ -12,7 +13,7 @@ export interface EnvironmentState {
 
     // Parameters
     PARAMS: {
-        LANGUAGE: string;
+        LANGUAGE: Language;
         CONTEXT: MenuValue;
         SIMPLE: boolean;
         SIMPLE_HEADER: boolean;
@@ -22,7 +23,7 @@ export interface EnvironmentState {
     };
 
     COOKIES: {
-        LANGUAGE: string;
+        LANGUAGE: Language;
         CONTEXT: MenuValue;
     };
 }
@@ -38,8 +39,8 @@ export const initialState: EnvironmentState = {
 
     // Parameters
     PARAMS: {
-        LANGUAGE: 'NORSK',
-        CONTEXT: MenuValue.IKKEVALGT,
+        LANGUAGE: Language.IKKEBESTEMT,
+        CONTEXT: MenuValue.IKKEBESTEMT,
         SIMPLE: false,
         SIMPLE_HEADER: false,
         SIMPLE_FOOTER: false,
@@ -49,8 +50,8 @@ export const initialState: EnvironmentState = {
 
     // Cookies
     COOKIES: {
-        LANGUAGE: 'NORSK',
-        CONTEXT: MenuValue.IKKEVALGT,
+        LANGUAGE: Language.IKKEBESTEMT,
+        CONTEXT: MenuValue.IKKEBESTEMT,
     },
 };
 
