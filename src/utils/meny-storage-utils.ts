@@ -15,22 +15,6 @@ enum MenuName {
     MinsideMeny = 'My page menu',
 }
 
-export const getSessionStorage = (key: string): string | null => {
-    return sessionStorage.getItem(key);
-};
-
-export const setSessionStorage = (key: string, value: MenuValue) => {
-    return sessionStorage.setItem(key, value);
-};
-
-export const oppdaterSessionStorage = (valgVerdi: MenuValue): void => {
-    const headervalg = getSessionStorage(NAVHEADER);
-    if (headervalg && headervalg === valgVerdi) {
-        return;
-    }
-    setSessionStorage(NAVHEADER, valgVerdi);
-};
-
 export const getHovedmenyNode = (
     menypunkter: MenyNode[],
     language: Language,

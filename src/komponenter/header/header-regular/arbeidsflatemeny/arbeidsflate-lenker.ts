@@ -1,7 +1,4 @@
-import { MenuValue, oppdaterSessionStorage } from 'utils/meny-storage-utils';
-import { erNavDekoratoren } from 'utils/Environment';
-import { finnArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { Dispatch } from 'redux';
+import { MenuValue } from 'utils/meny-storage-utils';
 
 export interface ArbeidsflateLenke {
     url: string;
@@ -58,15 +55,3 @@ export const getArbeidsflateContext = (
         : arbeidsflate === MenuValue.SAMARBEIDSPARTNER
         ? samarbeidspartnerContextLenke(XP_BASE_URL)
         : personContextLenke(XP_BASE_URL);
-
-export const settArbeidsflate = (
-    dispatch: Dispatch,
-    lenke: ArbeidsflateLenke
-) => {
-    oppdaterSessionStorage(lenke.key);
-    if (erNavDekoratoren()) {
-        dispatch(finnArbeidsflate());
-    } else {
-        window.location.href = lenke.url;
-    }
-};

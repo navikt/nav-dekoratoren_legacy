@@ -2,11 +2,12 @@ import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import { GACategory } from 'utils/google-analytics';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
-import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { getArbeidsflateContext } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { erNavDekoratoren } from 'utils/Environment';
 import './NavLogoFooter.less';
 
 const NavLogoFooter = ({
@@ -30,7 +31,10 @@ const NavLogoFooter = ({
                 gaEventArgs={{ category: GACategory.Footer, action: 'navlogo' }}
                 onClick={event => {
                     event.preventDefault();
-                    settArbeidsflate(dispatch, context);
+                    dispatch(settArbeidsflate(context.key));
+                    if (!erNavDekoratoren()) {
+                        window.location.href = context.url;
+                    }
                 }}
             >
                 <svg

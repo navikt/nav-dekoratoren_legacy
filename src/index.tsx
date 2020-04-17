@@ -12,6 +12,7 @@ import { initGA } from './utils/google-analytics';
 import LanguageProvider from './store/providers/Language';
 import Header from './komponenter/header/Header';
 import * as es6promise from 'es6-promise';
+import { CookiesProvider } from 'react-cookie';
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
@@ -33,15 +34,19 @@ const run = () => {
             const store = createStore(environment);
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
-                    <LanguageProvider>
-                        <Header />
-                    </LanguageProvider>
+                    <CookiesProvider>
+                        <LanguageProvider>
+                            <Header />
+                        </LanguageProvider>
+                    </CookiesProvider>
                 </ReduxProvider>,
                 document.getElementById('decorator-header')
             );
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
-                    <Footer />
+                    <CookiesProvider>
+                        <Footer />
+                    </CookiesProvider>
                 </ReduxProvider>,
                 document.getElementById('decorator-footer')
             );

@@ -23,6 +23,10 @@ const MenyIngress = ({
         ? inputext.charAt(0).concat(inputext.slice(1).toLowerCase())
         : '';
 
+    if (!lenke.length) {
+        return null;
+    }
+
     return (
         <div className={className}>
             <Undertittel>{textToLowercase}</Undertittel>

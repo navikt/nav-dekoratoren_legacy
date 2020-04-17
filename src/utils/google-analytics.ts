@@ -1,5 +1,5 @@
 import ReactGA from 'react-ga';
-import { getSessionStorage, NAVHEADER } from './meny-storage-utils';
+import { MenuValue, NAVHEADER } from './meny-storage-utils';
 
 const trackingId = 'UA-9127381-16';
 
@@ -11,6 +11,7 @@ export enum GACategory {
 
 export type GAEventArgs = {
     category: GACategory;
+    context: MenuValue;
     action: string;
     label?: string;
 };
@@ -23,9 +24,9 @@ export const initGA = () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
 };
 
-export const triggerGaEvent = ({ category, action, label }: GAEventArgs) => {
-    const rolleValg = getSessionStorage(NAVHEADER);
-    const actionFinal = `${rolleValg ? rolleValg + '/' : ''}${action}`;
+export const triggerGaEvent = (props: GAEventArgs) => {
+    const { context, category, action, label } = props;
+    const actionFinal = `${context ? context + '/' : ''}${action}`;
 
     ReactGA.event({
         category: category,

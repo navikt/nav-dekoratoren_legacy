@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import BEMHelper from 'utils/bem';
-import { finnArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { MenuValue, oppdaterSessionStorage } from 'utils/meny-storage-utils';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { MenuValue } from 'utils/meny-storage-utils';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import { GACategory } from 'utils/google-analytics';
 import { LenkeMedGA } from '../../../LenkeMedGA';
@@ -13,6 +13,7 @@ import { finnTekst } from 'tekster/finn-tekst';
 import { Language } from 'store/reducers/language-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import './MobilarbeidsflateValg.less';
+import { useCookies } from 'react-cookie';
 
 interface Props {
     tabindex: boolean;
@@ -26,15 +27,17 @@ const stateProps = (state: AppState) => ({
 const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
     const dispatch = useDispatch();
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
+    const [, setCookie] = useCookies(['decorator-context']);
     const { arbeidsflate } = useSelector(stateProps);
     const cls = BEMHelper('mobil-arbeidsflate-valg');
+
     const oppdatereArbeidsflateValg = (
         e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
         valgVerdi: MenuValue
     ) => {
         e.preventDefault();
-        oppdaterSessionStorage(valgVerdi);
-        dispatch(finnArbeidsflate());
+        dispatch(settArbeidsflate(valgVerdi));
+        setCookie('decorator-context', valgVerdi);
     };
 
     return (
@@ -55,6 +58,7 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
                             <LenkeMedGA
                                 href={lenke.url}
                                 onClick={event => {
+                                    event.preventDefault();
                                     oppdatereArbeidsflateValg(event, lenke.key);
                                     if (!erNavDekoratoren()) {
                                         window.location.href = lenke.url;

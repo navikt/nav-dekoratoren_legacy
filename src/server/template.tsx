@@ -11,6 +11,7 @@ import hash from 'object-hash';
 import { createStore } from '../store';
 import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
+import { CookiesProvider } from 'react-cookie';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -61,15 +62,19 @@ export const template = (req: Request) => {
     // Render SSR
     const HtmlHeader = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
-            <LanguageProvider>
-                <Header />
-            </LanguageProvider>
+            <CookiesProvider cookies={(req as any).universalCookies}>
+                <LanguageProvider>
+                    <Header />
+                </LanguageProvider>
+            </CookiesProvider>
         </ReduxProvider>
     );
 
     const HtmlFooter = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
-            <Footer />
+            <CookiesProvider>
+                <Footer />
+            </CookiesProvider>
         </ReduxProvider>
     );
 

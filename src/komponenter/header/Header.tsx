@@ -4,13 +4,15 @@ import { fetchMenypunkter } from 'store/reducers/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
 import MenyBakgrunn from './header-regular/meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { oppdaterSessionStorage } from 'utils/meny-storage-utils';
 import { SimpleHeader } from './header-simple/HeaderSimple';
 import { RegularHeader } from './header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
+import { settArbeidsflate } from '../../store/reducers/arbeidsflate-duck';
+import { useCookies } from 'react-cookie';
 
 export const Header = () => {
     const dispatch = useDispatch();
+    const [cookies, setCookie] = useCookies(['decorator-context']);
     const { PARAMS, APP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
     );
@@ -18,7 +20,15 @@ export const Header = () => {
     useEffect(() => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
         if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
-            oppdaterSessionStorage(PARAMS.CONTEXT);
+            setCookie('decorator-context', PARAMS.CONTEXT);
+            dispatch(settArbeidsflate(PARAMS.CONTEXT));
+        }
+    }, []);
+
+    useEffect(() => {
+        const context = cookies['decorator-context'];
+        if (context) {
+            dispatch(settArbeidsflate(context));
         }
     }, []);
 
