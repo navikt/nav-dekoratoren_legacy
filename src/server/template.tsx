@@ -38,9 +38,7 @@ export const template = (req: Request) => {
     const cookies = universalCookies.cookies;
     const env = clientEnv({ req, cookies });
 
-    const envHash = hash({
-        env,
-    });
+    const envHash = hash({ env });
     const cachedHtml = cache.get(envHash);
 
     // Retreive from cache
