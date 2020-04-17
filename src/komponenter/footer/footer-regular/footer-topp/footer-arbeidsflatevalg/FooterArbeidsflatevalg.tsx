@@ -20,8 +20,10 @@ const stateSelector = (state: AppState) => ({
 
 const FooterArbeidsflatevalg = () => {
     const dispatch = useDispatch();
-    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const { arbeidsflate, language } = useSelector(stateSelector);
+    const { XP_BASE_URL, COOKIES } = useSelector(
+        (state: AppState) => state.environment
+    );
 
     const [arbeidsflatevalgLenker, setArbeidsflatevalgLenker] = useState<
         ArbeidsflateLenke[]
@@ -39,9 +41,14 @@ const FooterArbeidsflatevalg = () => {
         setArbeidsflatevalgLenker(finnArbeidsflateLenker);
     }, [arbeidsflate]);
 
+    const showContextMenu =
+        (language === Language.IKKEBESTEMT &&
+            COOKIES.LANGUAGE === Language.NORSK) ||
+        language === Language.NORSK;
+
     return (
         <>
-            {language === Language.NORSK && (
+            {showContextMenu && (
                 <div className="menylenker-seksjon arbeidsflate">
                     <div className="arbeidsflatevalg-innhold">
                         <ul
