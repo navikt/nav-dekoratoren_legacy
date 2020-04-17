@@ -76,6 +76,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
 
     ApneVarselEvent = () => {
         triggerGaEvent({
+            context: this.props.arbeidsflate,
             category: GACategory.Header,
             action: this.state.clicked ? 'varsler-close' : 'varsler-open',
         });
@@ -95,6 +96,7 @@ class Varselbjelle extends React.Component<VarselbjelleProps, State> {
         }
         if (this.state.clicked) {
             triggerGaEvent({
+                context: this.props.arbeidsflate,
                 category: GACategory.Header,
                 action: 'varsler-close',
             });

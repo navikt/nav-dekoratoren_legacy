@@ -28,13 +28,13 @@ export const Header = () => {
     useEffect(() => {
         // Change context
         if (PARAMS.CONTEXT !== MenuValue.IKKEBESTEMT) {
-            // Set params if app overrides cookie
+            // Use params if defined
             dispatch(settArbeidsflate(PARAMS.CONTEXT));
             setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
         } else {
             const context = cookies['decorator-context'];
             if (context) {
-                // Use cookie
+                // Fetch state from cookie to prevent flickering
                 dispatch(settArbeidsflate(context));
             } else {
                 // Default to privatperson

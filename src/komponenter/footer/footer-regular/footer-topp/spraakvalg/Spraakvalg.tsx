@@ -7,14 +7,16 @@ import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { erNavDekoratoren } from 'utils/Environment';
 import { getSpraaklenker, Spraaklenke } from './Spraakvalg-lenker';
 import Tekst from 'tekster/finn-tekst';
-import { Language } from '../../../../../store/reducers/language-duck';
-import { arbeidsflateLenker } from '../../../../header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { Language } from 'store/reducers/language-duck';
 
 const Spraakvalg = () => {
     const language = useSelector((state: AppState) => state.language.language);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const { COOKIES } = useSelector((state: AppState) => state.environment);
     const [erDekoratoren, setErDekoratoren] = useState<boolean>(false);
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.arbeidsflate.status
+    );
 
     const getLenker = () => {
         switch (language) {
@@ -46,6 +48,7 @@ const Spraakvalg = () => {
                             <LenkeMedGA
                                 href={erDekoratoren ? lenke.testurl : lenke.url}
                                 gaEventArgs={{
+                                    context: arbeidsflate,
                                     category: GACategory.Footer,
                                     action: `språkvalg/${lenke.lang}`,
                                 }}
