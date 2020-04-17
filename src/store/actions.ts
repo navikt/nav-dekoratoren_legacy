@@ -106,7 +106,7 @@ export interface SettSamarbeidspartnerAction {
     type: ActionType.SAMARBEIDSPARTNER;
 }
 
-export interface SettArbeidsflateIKKEBESTEMT {
+export interface SettArbeidsflateIkkeBestemt {
     type: ActionType.IKKEBESTEMT;
 }
 
@@ -160,7 +160,7 @@ export type Handling =
     | SettPrivatpersonAction
     | SettArbeidsgiverAction
     | SettSamarbeidspartnerAction
-    | SettArbeidsflateIKKEBESTEMT
+    | SettArbeidsflateIkkeBestemt
     | ToggleHovedmeny
     | ToggleMinsideMeny
     | ToggleSok
