@@ -1,22 +1,22 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Language, languageDuck } from 'store/reducers/language-duck';
-import { Header } from './Header';
-import Arbeidsflatemeny from './header-regular/arbeidsflatemeny/Arbeidsflatemeny';
+import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import { createStore, Store } from 'redux';
 import { Provider } from 'react-redux';
 import { reducers } from 'store/reducers';
+import { RegularHeader } from './HeaderRegular';
 
 const mountWithRedux = (store: Store) =>
     mount(
         <Provider store={store}>
-            <Header />
+            <RegularHeader />
         </Provider>
     );
 
 const store = createStore(reducers);
 
-describe('<Header>', () => {
+describe('<RegularHeader>', () => {
     it('Skal rendre <Arbeidsflatemeny> komponent hvis språk er norsk', () => {
         store.dispatch(
             languageDuck.actionCreator({ language: Language.NORSK })
