@@ -4,11 +4,7 @@ const harStatus = (dataElement: DataElement, status: Status): boolean => {
     return dataElement.status === status;
 };
 
-const Datalaster = ({
-    avhengigheter,
-    ventPa,
-    children,
-}: DatalasterProps) => {
+const Datalaster = ({ avhengigheter, ventPa, children }: DatalasterProps) => {
     if (
         avhengigheter.every(a => harStatus(a, Status.OK)) &&
         (!ventPa ||
