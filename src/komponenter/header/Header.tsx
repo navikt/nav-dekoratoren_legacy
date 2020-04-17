@@ -44,9 +44,9 @@ export const Header = () => {
 
     useEffect(() => {
         // Change language
-        const action = languageDuck.actionCreator({
-            language: checkUrlForLanguage(),
-        });
+        const language = checkUrlForLanguage();
+        const action = languageDuck.actionCreator({ language });
+        setCookie('decorator-language', language, cookieOptions);
         dispatch(action);
     }, []);
 
