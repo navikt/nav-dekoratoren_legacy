@@ -35,21 +35,13 @@ export const reducer = (
 export const settArbeidsflate = (type: MenuValue) => {
     switch (type) {
         case MenuValue.PRIVATPERSON:
-            return {
-                type: ActionType.PRIVATPERSON,
-            };
+            return { type: ActionType.PRIVATPERSON };
         case MenuValue.ARBEIDSGIVER:
-            return {
-                type: ActionType.ARBEIDSGIVER,
-            };
+            return { type: ActionType.ARBEIDSGIVER };
         case MenuValue.SAMARBEIDSPARTNER:
-            return {
-                type: ActionType.SAMARBEIDSPARTNER,
-            };
+            return { type: ActionType.SAMARBEIDSPARTNER };
         default:
-            return {
-                type: ActionType.PRIVATPERSON,
-            };
+            return { type: ActionType.PRIVATPERSON };
     }
 };
 
