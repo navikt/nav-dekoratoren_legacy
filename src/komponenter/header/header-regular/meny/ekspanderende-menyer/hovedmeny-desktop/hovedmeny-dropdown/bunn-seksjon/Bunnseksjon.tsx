@@ -6,10 +6,11 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { Language } from 'store/reducers/language-duck';
 import { finnTekst } from 'tekster/finn-tekst';
 import { bunnLenker } from './BunnseksjonLenkedata';
-import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { ArbeidsflateLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { erNavDekoratoren } from 'utils/Environment';
 import './Bunnseksjon.less';
 
 interface Props {
@@ -40,7 +41,10 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                             id={KbNav.getKbId(NaviGroup.Hovedmeny, kbNaviIndex)}
                             onClick={event => {
                                 event.preventDefault();
-                                settArbeidsflate(dispatch, context);
+                                dispatch(settArbeidsflate(context.key));
+                                if (!erNavDekoratoren()) {
+                                    window.location.href = lenke.url;
+                                }
                             }}
                             key={lenke.lenkeTekstId}
                         />

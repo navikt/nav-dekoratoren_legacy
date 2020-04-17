@@ -24,6 +24,9 @@ const Navlogo = ({
     const dispatch = useDispatch();
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const context = getArbeidsflateContext(XP_BASE_URL, MenuValue.PRIVATPERSON);
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.arbeidsflate.status
+    );
 
     return (
         <LenkeMedGA
@@ -38,6 +41,7 @@ const Navlogo = ({
                 }
             }}
             gaEventArgs={{
+                context: arbeidsflate,
                 category: GACategory.Meny,
                 action: 'navlogo-mobilmeny',
             }}

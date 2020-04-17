@@ -18,10 +18,9 @@ const Arbeidsflatemeny = () => {
     const dispatch = useDispatch();
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const [, setCookie] = useCookies(['decorator-context']);
-    const { arbeidsflate } = useSelector((state: AppState) => ({
-        arbeidsflate: state.arbeidsflate.status,
-        environment: state.environment,
-    }));
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.arbeidsflate.status
+    );
 
     const oppdatereArbeidsflateValg = (
         e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
@@ -58,6 +57,7 @@ const Arbeidsflatemeny = () => {
                                     }
                                 }}
                                 gaEventArgs={{
+                                    context: arbeidsflate,
                                     category: GACategory.Header,
                                     action: 'arbeidsflate-valg',
                                 }}
