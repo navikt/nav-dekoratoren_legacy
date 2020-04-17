@@ -43,6 +43,7 @@ export const getLanguageNode = (
     nodeMenu: MenyNode[]
 ): MenyNode | undefined =>
     ({
+        IKKEBESTEMT: undefined,
         NORSK: nodeMenu.find(n => n.path === '/no'),
         ENGELSK: nodeMenu.find(n => n.path === '/en'),
         SAMISK: nodeMenu.find(n => n.path === '/se'),
