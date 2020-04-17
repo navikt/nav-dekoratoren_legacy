@@ -12,6 +12,7 @@ export interface Arbeidsflate {
 export const initialState: Arbeidsflate = {
     status: MenuValue.IKKEVALGT,
 };
+
 export const reducer = (
     state: Arbeidsflate = initialState,
     action: Handling
@@ -30,8 +31,6 @@ export const reducer = (
             return state;
     }
 };
-
-export default reducer;
 
 export const settArbeidsflate = (type: MenuValue) => {
     switch (type) {
@@ -65,3 +64,10 @@ export const settArbeidsgiverflate = (): SettArbeidsgiverAction => ({
 export const settSamarbeidspartnerflate = (): SettSamarbeidspartnerAction => ({
     type: ActionType.SAMARBEIDSPARTNER,
 });
+
+export const cookieOptions = {
+    path: '/',
+    domain: process.env.NODE_ENV === 'development' ? 'localhost' : '.nav.no',
+};
+
+export default reducer;

@@ -8,6 +8,7 @@ import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useCookies } from 'react-cookie';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { erNavDekoratoren } from 'utils/Environment';
@@ -28,7 +29,7 @@ const Arbeidsflatemeny = () => {
     ) => {
         e.preventDefault();
         dispatch(settArbeidsflate(valgVerdi));
-        setCookie('decorator-context', valgVerdi);
+        setCookie('decorator-context', valgVerdi, cookieOptions);
     };
 
     return (
@@ -50,7 +51,6 @@ const Arbeidsflatemeny = () => {
                                 classNameOverride={cls.element('lenke')}
                                 href={lenke.url}
                                 onClick={event => {
-                                    event.preventDefault();
                                     oppdatereArbeidsflateValg(event, lenke.key);
                                     if (!erNavDekoratoren()) {
                                         window.location.href = lenke.url;

@@ -43,11 +43,6 @@ export const initialState: EnvironmentState = {
     },
 };
 
-export const settEnviromment = (data: EnvironmentState) => ({
-    type: ActionType.SETT_ENVIRONMENT,
-    data,
-});
-
 export const reducer = (
     state: EnvironmentState = initialState,
     action: Handling

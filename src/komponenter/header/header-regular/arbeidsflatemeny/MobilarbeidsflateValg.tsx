@@ -4,6 +4,7 @@ import { AppState } from 'store/reducers';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import BEMHelper from 'utils/bem';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import { GACategory } from 'utils/google-analytics';
@@ -37,7 +38,7 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
     ) => {
         e.preventDefault();
         dispatch(settArbeidsflate(valgVerdi));
-        setCookie('decorator-context', valgVerdi);
+        setCookie('decorator-context', valgVerdi, cookieOptions);
     };
 
     return (
@@ -58,7 +59,6 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
                             <LenkeMedGA
                                 href={lenke.url}
                                 onClick={event => {
-                                    event.preventDefault();
                                     oppdatereArbeidsflateValg(event, lenke.key);
                                     if (!erNavDekoratoren()) {
                                         window.location.href = lenke.url;
@@ -66,6 +66,7 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
                                 }}
                                 tabIndex={tabindex ? 0 : -1}
                                 gaEventArgs={{
+                                    context: arbeidsflate,
                                     category: GACategory.Header,
                                     action: 'arbeidsflate-valg',
                                 }}

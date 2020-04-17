@@ -7,7 +7,10 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { SimpleHeader } from './header-simple/HeaderSimple';
 import { RegularHeader } from './header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
-import { settArbeidsflate } from '../../store/reducers/arbeidsflate-duck';
+import {
+    cookieOptions,
+    settArbeidsflate,
+} from '../../store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
 
 export const Header = () => {
@@ -24,8 +27,8 @@ export const Header = () => {
     useEffect(() => {
         // Set params if app overrides cookie
         if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
-            setCookie('decorator-context', PARAMS.CONTEXT);
             dispatch(settArbeidsflate(PARAMS.CONTEXT));
+            setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
         } else {
             const context = cookies['decorator-context'];
             if (context) {
@@ -33,8 +36,8 @@ export const Header = () => {
                 dispatch(settArbeidsflate(context));
             } else {
                 // Default to privatperson
-                setCookie('decorator-context', MenuValue.PRIVATPERSON);
                 dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
+                setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
             }
         }
     }, []);
