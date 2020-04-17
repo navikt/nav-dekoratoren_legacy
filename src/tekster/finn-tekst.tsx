@@ -18,7 +18,6 @@ export function finnTekst(
     // Correct language
     let ledetekst: string;
     switch (language) {
-        default:
         case Language.NORSK:
             ledetekst = ledetekster[id];
             break;
@@ -28,6 +27,9 @@ export function finnTekst(
             break;
         case Language.SAMISK:
             id += '-se';
+            ledetekst = ledetekster[id];
+            break;
+        default:
             ledetekst = ledetekster[id];
             break;
     }
