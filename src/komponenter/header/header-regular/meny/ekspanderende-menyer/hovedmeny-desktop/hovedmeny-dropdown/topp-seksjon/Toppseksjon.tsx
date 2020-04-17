@@ -7,9 +7,12 @@ import { GACategory } from 'utils/google-analytics';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { getArbeidsflateContext } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import { erNavDekoratoren } from 'utils/Environment';
 import './Toppseksjon.less';
+import { useCookies } from 'react-cookie';
 
 interface Props {
     classname: string;
@@ -18,10 +21,11 @@ interface Props {
 export const Toppseksjon = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
     const dispatch = useDispatch();
+    const [, setCookie] = useCookies(['decorator-context']);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
-    const { arbeidsflate } = useSelector((state: AppState) => ({
-        arbeidsflate: state.arbeidsflate.status,
-    }));
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.arbeidsflate.status
+    );
     const context = getArbeidsflateContext(XP_BASE_URL, arbeidsflate);
 
     return (
@@ -30,7 +34,11 @@ export const Toppseksjon = ({ classname }: Props) => {
                 href={context.url}
                 onClick={event => {
                     event.preventDefault();
-                    settArbeidsflate(dispatch, context);
+                    dispatch(settArbeidsflate(context.key));
+                    setCookie('decorator-context', context.key, cookieOptions);
+                    if (!erNavDekoratoren()) {
+                        window.location.href = context.url;
+                    }
                 }}
                 className={cls.element('topp-seksjon-lenke')}
                 id={KbNav.getKbId(NaviGroup.Hovedmeny, {
@@ -39,6 +47,7 @@ export const Toppseksjon = ({ classname }: Props) => {
                     sub: 0,
                 })}
                 gaEventArgs={{
+                    context: arbeidsflate,
                     category: GACategory.Meny,
                     action: `hovedmeny/forsidelenke`,
                     label: XP_BASE_URL,

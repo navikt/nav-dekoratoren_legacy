@@ -1,5 +1,6 @@
 import { MenuValue } from '../../utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
+import { Language } from './language-duck';
 
 export interface EnvironmentState {
     XP_BASE_URL: string;
@@ -12,13 +13,18 @@ export interface EnvironmentState {
 
     // Parameters
     PARAMS: {
-        LANGUAGE: string;
+        LANGUAGE: Language;
         CONTEXT: MenuValue;
         SIMPLE: boolean;
         SIMPLE_HEADER: boolean;
         SIMPLE_FOOTER: boolean;
         REDIRECT_TO_APP: boolean;
         LEVEL: string;
+    };
+
+    COOKIES: {
+        LANGUAGE: Language;
+        CONTEXT: MenuValue;
     };
 }
 
@@ -33,20 +39,21 @@ export const initialState: EnvironmentState = {
 
     // Parameters
     PARAMS: {
-        LANGUAGE: 'string',
-        CONTEXT: MenuValue.IKKEVALGT,
+        LANGUAGE: Language.IKKEBESTEMT,
+        CONTEXT: MenuValue.IKKEBESTEMT,
         SIMPLE: false,
         SIMPLE_HEADER: false,
         SIMPLE_FOOTER: false,
         REDIRECT_TO_APP: false,
         LEVEL: 'string',
     },
-};
 
-export const settEnviromment = (data: EnvironmentState) => ({
-    type: ActionType.SETT_ENVIRONMENT,
-    data,
-});
+    // Cookies
+    COOKIES: {
+        LANGUAGE: Language.IKKEBESTEMT,
+        CONTEXT: MenuValue.IKKEBESTEMT,
+    },
+};
 
 export const reducer = (
     state: EnvironmentState = initialState,

@@ -15,6 +15,9 @@ export const LoggInnKnapp = () => {
     const { authenticated } = useSelector(
         (state: AppState) => state.innloggingsstatus.data
     );
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.arbeidsflate.status
+    );
 
     const handleButtonClick = () => {
         const { PARAMS, LOGIN_URL, DITT_NAV_URL, LOGOUT_URL } = environment;
@@ -26,6 +29,7 @@ export const LoggInnKnapp = () => {
         }&level=${PARAMS.LEVEL}`;
 
         triggerGaEvent({
+            context: arbeidsflate,
             category: GACategory.Header,
             action: authenticated ? 'logg-ut' : 'logg-inn',
         });

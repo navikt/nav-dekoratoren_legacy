@@ -90,6 +90,7 @@
         "react-app-polyfill": "^1.0.4",
         "react-collapse": "^4.0.3",
         "react-content-loader": "^5.0.4",
+        "react-cookie": "^4.0.3",
         "react-dom": "^16.8.6",
         "react-ga": "^2.7.0",
         "react-gtm-module": "^2.0.8",
@@ -102,6 +103,7 @@
         "ts-loader": "^7.0.0",
         "tslint": "^5.16.0",
         "typescript": "^3.4.5",
+        "universal-cookie-express": "^4.0.3",
         "webpack": "4.28.3",
         "whatwg-fetch": "^3.0.0"
     },

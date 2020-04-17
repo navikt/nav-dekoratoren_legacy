@@ -4,7 +4,8 @@ import 'isomorphic-fetch';
 require('console-stamp')(console, '[HH:MM:ss.l]');
 import NodeCache from 'node-cache';
 import fetch from 'node-fetch';
-import express, { Response } from 'express';
+import express from 'express';
+import cookiesMiddleware from 'universal-cookie-express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
 import dotenv from 'dotenv';
@@ -33,6 +34,7 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 // Cors
 app.disable('x-powered-by');
+app.use(cookiesMiddleware());
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', req.get('origin'));
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
@@ -56,7 +58,8 @@ app.get(pathsForTemplate, (req, res) => {
 });
 
 app.get(`${appBasePath}/env`, (req, res) => {
-    res.send(clientEnv(req));
+    const cookies = (req as any).universalCookies.cookies;
+    res.send(clientEnv({ req, cookies }));
 });
 
 app.get(`${appBasePath}/api/meny`, (req, res) => {

@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import BEMHelper from 'utils/bem';
-import { finnArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { MenuValue, oppdaterSessionStorage } from 'utils/meny-storage-utils';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import { MenuValue } from 'utils/meny-storage-utils';
 import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import { GACategory } from 'utils/google-analytics';
 import { LenkeMedGA } from '../../../LenkeMedGA';
@@ -12,6 +13,7 @@ import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import { finnTekst } from 'tekster/finn-tekst';
 import { Language } from 'store/reducers/language-duck';
 import { erNavDekoratoren } from 'utils/Environment';
+import { useCookies } from 'react-cookie';
 import './MobilarbeidsflateValg.less';
 
 interface Props {
@@ -26,16 +28,9 @@ const stateProps = (state: AppState) => ({
 const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
     const dispatch = useDispatch();
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
+    const [, setCookie] = useCookies(['decorator-context']);
     const { arbeidsflate } = useSelector(stateProps);
     const cls = BEMHelper('mobil-arbeidsflate-valg');
-    const oppdatereArbeidsflateValg = (
-        e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-        valgVerdi: MenuValue
-    ) => {
-        e.preventDefault();
-        oppdaterSessionStorage(valgVerdi);
-        dispatch(finnArbeidsflate());
-    };
 
     return (
         <ul className={cls.className}>
@@ -55,13 +50,20 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
                             <LenkeMedGA
                                 href={lenke.url}
                                 onClick={event => {
-                                    oppdatereArbeidsflateValg(event, lenke.key);
+                                    event.preventDefault();
+                                    dispatch(settArbeidsflate(lenke.key));
+                                    setCookie(
+                                        'decorator-context',
+                                        lenke.key,
+                                        cookieOptions
+                                    );
                                     if (!erNavDekoratoren()) {
                                         window.location.href = lenke.url;
                                     }
                                 }}
                                 tabIndex={tabindex ? 0 : -1}
                                 gaEventArgs={{
+                                    context: arbeidsflate,
                                     category: GACategory.Header,
                                     action: 'arbeidsflate-valg',
                                 }}

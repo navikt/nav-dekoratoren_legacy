@@ -2,21 +2,25 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Undertekst } from 'nav-frontend-typografi';
-import { arbeidsflateLenker, settArbeidsflate } from './arbeidsflate-lenker';
+import { arbeidsflateLenker } from './arbeidsflate-lenker';
 import { GACategory } from 'utils/google-analytics';
-import { LenkeMedGA } from '../../../LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/LenkeMedGA';
+import { useCookies } from 'react-cookie';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
+import { erNavDekoratoren } from 'utils/Environment';
 import './Arbeidsflatemeny.less';
 
 const Arbeidsflatemeny = () => {
     const cls = BEMHelper('arbeidsflate');
     const dispatch = useDispatch();
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
-    const { arbeidsflate } = useSelector((state: AppState) => ({
-        arbeidsflate: state.arbeidsflate.status,
-        environment: state.environment,
-    }));
+    const [, setCookie] = useCookies(['decorator-context']);
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.arbeidsflate.status
+    );
 
     return (
         <nav
@@ -38,9 +42,18 @@ const Arbeidsflatemeny = () => {
                                 href={lenke.url}
                                 onClick={event => {
                                     event.preventDefault();
-                                    settArbeidsflate(dispatch, lenke);
+                                    dispatch(settArbeidsflate(lenke.key));
+                                    setCookie(
+                                        'decorator-context',
+                                        lenke.key,
+                                        cookieOptions
+                                    );
+                                    if (!erNavDekoratoren()) {
+                                        window.location.href = lenke.url;
+                                    }
                                 }}
                                 gaEventArgs={{
+                                    context: arbeidsflate,
                                     category: GACategory.Header,
                                     action: 'arbeidsflate-valg',
                                 }}

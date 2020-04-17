@@ -26,10 +26,10 @@ const classname = 'desktop-hovedmeny';
 export const desktopHovedmenyKnappId = `${classname}-knapp-id`;
 
 export const HovedmenyDesktop = () => {
+    const dispatch = useDispatch();
     const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(
         stateSelector
     );
-    const dispatch = useDispatch();
 
     const hovedmenyPunkter = getHovedmenyNode(
         menyPunkter.data,
@@ -39,6 +39,7 @@ export const HovedmenyDesktop = () => {
 
     const toggleMenu = () => {
         triggerGaEvent({
+            context: arbeidsflate,
             category: GACategory.Header,
             action: `meny-${isOpen ? 'close' : 'open'}`,
         });
