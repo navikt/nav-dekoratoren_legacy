@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { ArbeidsflateLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { arbeidsflateLenker } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
-import { arbeidsgiverContextLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
-import { samarbeidspartnerContextLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { ArbeidsflateLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Undertittel } from 'nav-frontend-typografi';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
-import { GACategory } from 'utils/google-analytics';
-import { triggerGaEvent } from 'utils/google-analytics';
+import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import { Language } from 'store/reducers/language-duck';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import Tekst from 'tekster/finn-tekst';
+import { MenuValue } from '../../../../../utils/meny-storage-utils';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -25,20 +23,22 @@ const FooterArbeidsflatevalg = () => {
         (state: AppState) => state.environment
     );
 
-    const [arbeidsflatevalgLenker, setArbeidsflatevalgLenker] = useState<
-        ArbeidsflateLenke[]
-    >([
-        arbeidsgiverContextLenke(XP_BASE_URL),
-        samarbeidspartnerContextLenke(XP_BASE_URL),
-    ]);
+    const getLenker = () => {
+        switch (arbeidsflate) {
+            case MenuValue.IKKEBESTEMT:
+                return arbeidsflateLenker(XP_BASE_URL).filter(
+                    lenke => lenke.key !== COOKIES.CONTEXT
+                );
+            default:
+                return arbeidsflateLenker(XP_BASE_URL).filter(
+                    lenke => lenke.key !== arbeidsflate
+                );
+        }
+    };
 
-    const finnArbeidsflateLenker = () =>
-        arbeidsflateLenker(XP_BASE_URL).filter(
-            lenke => lenke.key !== arbeidsflate
-        );
-
+    const [lenker, setLenker] = useState<ArbeidsflateLenke[]>(getLenker());
     useEffect(() => {
-        setArbeidsflatevalgLenker(finnArbeidsflateLenker);
+        setLenker(getLenker());
     }, [arbeidsflate]);
 
     const showContextMenu =
@@ -55,49 +55,47 @@ const FooterArbeidsflatevalg = () => {
                             className="arbeidsflatevalg"
                             aria-label="Gå til innhold for privatperson, arbeidsgiver eller samarbeidspartner"
                         >
-                            {arbeidsflatevalgLenker.map(
-                                (lenke: ArbeidsflateLenke) => (
-                                    <li key={lenke.key}>
-                                        <Lenkepanel
-                                            href={lenke.url}
-                                            onClick={event => {
-                                                event.preventDefault();
-                                                dispatch(
-                                                    settArbeidsflate(lenke.key)
-                                                );
-                                                triggerGaEvent({
-                                                    context: arbeidsflate,
-                                                    category: GACategory.Header,
-                                                    action: 'arbeidsflate-valg',
-                                                });
-                                            }}
-                                            onAuxClick={event =>
-                                                event.button &&
-                                                event.button === 1 &&
-                                                triggerGaEvent({
-                                                    context: arbeidsflate,
-                                                    category: GACategory.Header,
-                                                    action: 'arbeidsflate-valg',
-                                                })
-                                            }
-                                            tittelProps="normaltekst"
-                                            key={lenke.key}
-                                            border
-                                        >
-                                            <div className="arbeidsflatevalg-tekst">
-                                                <Undertittel>
-                                                    <Tekst
-                                                        id={lenke.lenkeTekstId}
-                                                    />
-                                                </Undertittel>
+                            {lenker.map((lenke: ArbeidsflateLenke) => (
+                                <li key={lenke.key}>
+                                    <Lenkepanel
+                                        href={lenke.url}
+                                        onClick={event => {
+                                            event.preventDefault();
+                                            dispatch(
+                                                settArbeidsflate(lenke.key)
+                                            );
+                                            triggerGaEvent({
+                                                context: arbeidsflate,
+                                                category: GACategory.Header,
+                                                action: 'arbeidsflate-valg',
+                                            });
+                                        }}
+                                        onAuxClick={event =>
+                                            event.button &&
+                                            event.button === 1 &&
+                                            triggerGaEvent({
+                                                context: arbeidsflate,
+                                                category: GACategory.Header,
+                                                action: 'arbeidsflate-valg',
+                                            })
+                                        }
+                                        tittelProps="normaltekst"
+                                        key={lenke.key}
+                                        border
+                                    >
+                                        <div className="arbeidsflatevalg-tekst">
+                                            <Undertittel>
                                                 <Tekst
-                                                    id={lenke.footerStikkordId}
+                                                    id={lenke.lenkeTekstId}
                                                 />
-                                            </div>
-                                        </Lenkepanel>
-                                    </li>
-                                )
-                            )}
+                                            </Undertittel>
+                                            <Tekst
+                                                id={lenke.footerStikkordId}
+                                            />
+                                        </div>
+                                    </Lenkepanel>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
