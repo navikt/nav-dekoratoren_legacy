@@ -9,7 +9,6 @@ import { erDev, verifyWindowObj } from './utils/Environment';
 import Footer from './komponenter/footer/Footer';
 import { fetchEnv } from './utils/Environment';
 import { initGA } from './utils/google-analytics';
-import LanguageProvider from './store/providers/Language';
 import Header from './komponenter/header/Header';
 import * as es6promise from 'es6-promise';
 import { CookiesProvider } from 'react-cookie';
@@ -35,9 +34,7 @@ const run = () => {
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
                     <CookiesProvider>
-                        <LanguageProvider>
-                            <Header />
-                        </LanguageProvider>
+                        <Header />
                     </CookiesProvider>
                 </ReduxProvider>,
                 document.getElementById('decorator-header')

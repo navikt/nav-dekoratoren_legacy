@@ -63,9 +63,7 @@ export const template = (req: Request) => {
     const HtmlHeader = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
             <CookiesProvider cookies={(req as any).universalCookies}>
-                <LanguageProvider>
-                    <Header />
-                </LanguageProvider>
+                <Header />
             </CookiesProvider>
         </ReduxProvider>
     );

@@ -7,11 +7,10 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { SimpleHeader } from './header-simple/HeaderSimple';
 import { RegularHeader } from './header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
-import {
-    cookieOptions,
-    settArbeidsflate,
-} from '../../store/reducers/arbeidsflate-duck';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
+import { Language, languageDuck } from '../../store/reducers/language-duck';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -25,8 +24,9 @@ export const Header = () => {
     }, []);
 
     useEffect(() => {
-        // Set params if app overrides cookie
+        // Change context
         if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
+            // Set params if app overrides cookie
             dispatch(settArbeidsflate(PARAMS.CONTEXT));
             setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
         } else {
@@ -40,6 +40,14 @@ export const Header = () => {
                 setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
             }
         }
+    }, []);
+
+    useEffect(() => {
+        // Change language
+        const action = languageDuck.actionCreator({
+            language: checkUrlForLanguage(),
+        });
+        dispatch(action);
     }, []);
 
     return (
@@ -57,6 +65,16 @@ export const Header = () => {
             <MenyBakgrunn />
         </Fragment>
     );
+};
+
+const checkUrlForLanguage = (): Language => {
+    const locationPath = window.location.pathname;
+    if (locationPath.includes('/en/')) {
+        return Language.ENGELSK;
+    } else if (locationPath.includes('/se/')) {
+        return Language.SAMISK;
+    }
+    return Language.NORSK;
 };
 
 export default Header;
