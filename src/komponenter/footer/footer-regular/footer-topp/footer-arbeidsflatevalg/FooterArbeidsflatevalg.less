@@ -6,8 +6,24 @@
     justify-content: space-between;
     margin: 0;
 
+    .arbeidsflatevalg-innhold {
+        margin-bottom: 0;
+
+        .arbeidsflatevalg {
+            display: flex;
+            justify-content: space-between;
+            margin: 0;
+
+            li {
+                width: 48%;
+                margin-bottom: 0;
+            }
+        }
+    }
+
     .lenkepanel {
         background-color: @navBlaDarken40;
+        color: white;
         border: 1px solid white;
         border-radius: 8px;
         text-decoration: none;
@@ -34,5 +50,9 @@
     li {
         width: 48%;
         margin-bottom: 0;
+    }
+
+    .arbeidsflate {
+        width: 100%;
     }
 }
