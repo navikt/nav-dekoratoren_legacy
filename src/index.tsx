@@ -29,7 +29,7 @@ if (erDev) {
 const run = () => {
     initGA();
     fetchEnv()
-        .then(environment => {
+        .then((environment) => {
             const store = createStore(environment);
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
@@ -48,7 +48,7 @@ const run = () => {
                 document.getElementById('decorator-footer')
             );
         })
-        .catch(e => {
+        .catch((e) => {
             console.error(e);
         });
 };
