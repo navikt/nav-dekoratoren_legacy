@@ -77,7 +77,11 @@ const FooterBottom = () => {
                         className={cls.element('del-skjerm')}
                         onClick={openModal}
                         tekst={<Tekst id="footer-del-skjerm" />}
-                        ikon={<DelSkjerm height={24} width={24} />}
+                        ikon={
+                            <DelSkjerm
+                                style={{ height: '24px', width: '24px' }}
+                            />
+                        }
                     />
                 </div>
                 {visDelSkjermModal && (
