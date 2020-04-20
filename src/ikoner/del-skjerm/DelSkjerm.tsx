@@ -1,17 +1,12 @@
-import React from 'react';
+import React, { SVGProps } from 'react';
 
-interface Props {
-    height: number;
-    width: number;
-}
-const DelSkjerm = ({ height, width }: Props) => (
+const DelSkjerm = (props: SVGProps<SVGSVGElement>) => (
     <svg
         viewBox="0 0 24 24"
-        height={height}
-        width={width}
         preserveAspectRatio="xMidYMid meet"
         xmlns="http://www.w3.org/2000/svg"
         version="1.0"
+        {...props}
     >
         <g
             fill="none"
