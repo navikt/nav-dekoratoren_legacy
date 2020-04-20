@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { arbeidsflateLenker } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
-import { ArbeidsflateLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from 'store/reducers';
+import { useCookies } from 'react-cookie';
 import { Undertittel } from 'nav-frontend-typografi';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
-import { GACategory, triggerGaEvent } from 'utils/google-analytics';
+
+import Tekst from 'tekster/finn-tekst';
+import { arbeidsflateLenker } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { ArbeidsflateLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { AppState } from 'store/reducers';
 import { Language } from 'store/reducers/language-duck';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
-import Tekst from 'tekster/finn-tekst';
+import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { useCookies } from 'react-cookie';
 import { erNavDekoratoren } from 'utils/Environment';
 
 import './FooterArbeidsflatevalg.less';

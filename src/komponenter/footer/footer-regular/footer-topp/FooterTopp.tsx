@@ -13,6 +13,7 @@ import { MenyNode } from 'store/reducers/menu-duck';
 import FooterLenker from '../../Lenker';
 import './FooterTopp.less';
 import { LinksLoader } from '../../../common/content-loaders/LinkLoader';
+import LenkeMedIkon from 'komponenter/footer/lenke-med-ikon/LenkeMedIkon';
 
 const FooterTopp = () => {
     const cls = BEMHelper('menylinje-topp');
@@ -42,16 +43,13 @@ const FooterTopp = () => {
             <div className="topp-kolonner">
                 <div className="menylenker-seksjon til-toppen">
                     <div className="til-toppen-innhold">
-                        <PilOppHvit />
-                        <Lenke
+                        <LenkeMedIkon
                             href="#scroll-til-toppen"
-                            onClick={e => {
-                                e.preventDefault();
-                                scrollToTop();
-                            }}
-                        >
-                            <Tekst id="footer-til-toppen" />
-                        </Lenke>
+                            onClick={scrollToTop}
+                            tekst={<Tekst id="footer-til-toppen" />}
+                            ikon={<PilOppHvit />}
+                            venstrestiltIkon={true}
+                        />
                     </div>
                 </div>
                 <div className="menylenker-seksjon venstre">
