@@ -23,13 +23,13 @@ const Arbeidsflatemeny = () => {
     );
 
     return (
-        <nav
+        <div
             className={cls.className}
             id="decorator-arbeidsflatemeny"
             aria-label="Velg brukergruppe"
         >
             <ul className={cls.element('topp-liste-rad')} role="tablist">
-                {arbeidsflateLenker(XP_BASE_URL).map(lenke => {
+                {arbeidsflateLenker(XP_BASE_URL).map((lenke) => {
                     return (
                         <li
                             role="tab"
@@ -40,7 +40,7 @@ const Arbeidsflatemeny = () => {
                             <LenkeMedGA
                                 classNameOverride={cls.element('lenke')}
                                 href={lenke.url}
-                                onClick={event => {
+                                onClick={(event) => {
                                     event.preventDefault();
                                     dispatch(settArbeidsflate(lenke.key));
                                     setCookie(
@@ -75,7 +75,7 @@ const Arbeidsflatemeny = () => {
                     );
                 })}
             </ul>
-        </nav>
+        </div>
     );
 };
 
