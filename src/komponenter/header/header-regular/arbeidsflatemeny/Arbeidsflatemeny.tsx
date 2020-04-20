@@ -23,7 +23,7 @@ const Arbeidsflatemeny = () => {
     );
 
     return (
-        <div
+        <nav
             className={cls.className}
             id="decorator-arbeidsflatemeny"
             aria-label="Velg brukergruppe"
@@ -75,7 +75,7 @@ const Arbeidsflatemeny = () => {
                     );
                 })}
             </ul>
-        </div>
+        </nav>
     );
 };
 
