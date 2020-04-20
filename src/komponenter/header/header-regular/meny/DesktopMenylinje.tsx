@@ -14,30 +14,28 @@ const desktopMenylinje = BEMHelper('desktopmeny');
 
 const DesktopMenylinje = () => {
     return (
-        <div className={desktopMenylinje.className} aria-label="Hovedmeny">
-            <div className={desktopMenylinje.element('content')}>
-                <div className={desktopMenylinje.element('elementer')}>
-                    <NavLogoRod
-                        width="88"
-                        height="88"
-                        classname={desktopMenylinje.element('nav-brand')}
-                    />
-                    <HovedmenyDesktop />
-                    <SokDropdown />
-                    <span className={desktopMenylinje.element('spacer')} />
-                    <InnloggingsstatusProvider>
-                        <>
-                            <VarselinnboksProvider>
-                                <VarslerDropdown />
-                            </VarselinnboksProvider>
+        <nav className={desktopMenylinje.className} aria-label="Hovedmeny">
+            <div className={desktopMenylinje.element('elementer')}>
+                <NavLogoRod
+                    width="88"
+                    height="88"
+                    classname={desktopMenylinje.element('nav-brand')}
+                />
+                <HovedmenyDesktop />
+                <SokDropdown />
+                <span className={desktopMenylinje.element('spacer')} />
+                <InnloggingsstatusProvider>
+                    <>
+                        <VarselinnboksProvider>
+                            <VarslerDropdown />
+                        </VarselinnboksProvider>
 
-                            <MinsideMenyDesktop />
-                            <LoggInnKnapp />
-                        </>
-                    </InnloggingsstatusProvider>
-                </div>
+                        <MinsideMenyDesktop />
+                        <LoggInnKnapp />
+                    </>
+                </InnloggingsstatusProvider>
             </div>
-        </div>
+        </nav>
     );
 };
 
