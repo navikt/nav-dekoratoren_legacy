@@ -14,6 +14,8 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { useCookies } from 'react-cookie';
 import { erNavDekoratoren } from 'utils/Environment';
 
+import './FooterArbeidsflatevalg.less';
+
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
     language: state.language.language,
