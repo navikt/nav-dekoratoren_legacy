@@ -25,21 +25,17 @@ const LenkeMedIkon: React.StatelessComponent<Props> = ({
 }) => {
     const cls = BEMHelper('lenke-med-ikon');
     return (
-        <div
+        <Lenke
             className={classnames(className, cls.className, {
                 [cls.modifier('venstrestiltIkon')]: venstrestiltIkon,
             })}
+            onClick={onClick}
+            href={href}
+            role="button"
         >
-            <Lenke
-                className={cls.element('lenke')}
-                onClick={onClick}
-                href={href}
-                role="button"
-            >
-                {tekst}
-            </Lenke>
-            <span className={cls.element('ikon')}>{ikon}</span>
-        </div>
+            <span>{tekst}</span>
+            <div>{ikon}</div>
+        </Lenke>
     );
 };
 export default LenkeMedIkon;
