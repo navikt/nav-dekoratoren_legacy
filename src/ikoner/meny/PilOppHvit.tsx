@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { SVGProps } from 'react';
 
-const PilOppHvit = () => {
+const PilOppHvit = (props: SVGProps<SVGSVGElement>) => {
     return (
         <svg
             width="18px"
@@ -12,6 +12,7 @@ const PilOppHvit = () => {
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
+            {...props}
         >
             <path
                 fill="#ffffff"
