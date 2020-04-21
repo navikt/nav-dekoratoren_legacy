@@ -10,8 +10,8 @@
         color: @navBla;
         background-color: white;
     }
-
-    .topp-kolonner {    
+    
+    .topp-kolonner {
         .menylenker-seksjon .menylenker-overskrift {
             font-weight: bolder;
             margin-bottom: 1.2rem;
@@ -24,11 +24,20 @@
             .til-toppen-innhold {
                 display: flex;
                 justify-content: start;
-                .lenke {
+                .lenke-med-ikon {
                     text-decoration: none;
-
+                    svg {
+                        fill: white;
+                        stroke: white;
+                    }
                     &:hover {
                         text-decoration: underline;
+                    }
+                    &:focus {
+                        svg {
+                            fill: @navBla;
+                            stroke: @navBla;
+                        }
                     }
                 }
             }
@@ -144,6 +153,7 @@
                 margin-bottom: 0;
 
                 .arbeidsflatevalg {
+                    margin: 0;
                     flex-direction: column;
                     justify-content: left;
 

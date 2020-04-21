@@ -34,7 +34,7 @@ const LenkeMedIkon: React.StatelessComponent<Props> = ({
             role="button"
         >
             <span>{tekst}</span>
-            <div>{ikon}</div>
+            <div className={cls.element('ikon')}>{ikon}</div>
         </Lenke>
     );
 };
