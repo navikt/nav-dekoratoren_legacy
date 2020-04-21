@@ -10,9 +10,10 @@ import MinsideMenyDesktop from './ekspanderende-menyer/minside-meny-desktop/Mins
 import { VarslerDropdown } from './ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
 import './DesktopMenylinje.less';
 
-const cls = BEMHelper('desktopmeny');
-const key = 'nav-desktopmeny';
 const DesktopMenylinje = () => {
+    const cls = BEMHelper('desktopmeny');
+    const key = 'nav-desktopmeny';
+
     return (
         <nav key={key} className={cls.className} aria-label="Hovedmeny">
             <div className={cls.element('elementer')}>
