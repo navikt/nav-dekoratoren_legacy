@@ -12,7 +12,7 @@ interface Props<T> {
     };
     data?: T[];
     typografiTypeliste?: string;
-    listElement: (lenke: T) => JSX.Element;
+    listElement: (data: T) => JSX.Element;
     linkLoader?: JSX.Element;
 }
 
