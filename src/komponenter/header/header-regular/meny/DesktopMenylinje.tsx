@@ -12,10 +12,8 @@ import './DesktopMenylinje.less';
 
 const DesktopMenylinje = () => {
     const cls = BEMHelper('desktopmeny');
-    const key = 'nav-desktopmeny';
-
     return (
-        <nav key={key} className={cls.className} aria-label="Hovedmeny">
+        <nav className={cls.className} aria-label="Hovedmeny">
             <div className={cls.element('elementer')}>
                 <NavLogoRod
                     width="88"
