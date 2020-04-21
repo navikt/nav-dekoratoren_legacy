@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { AppState } from 'store/reducers';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { GACategory } from 'utils/google-analytics';
-import { LenkeMedGA } from 'komponenter/LenkeMedGA';
-import { erNavDekoratoren } from 'utils/Environment';
-import { getSpraaklenker, Spraaklenke } from './Spraakvalg-lenker';
+
 import Tekst from 'tekster/finn-tekst';
+import { AppState } from 'store/reducers';
+import { LenkeMedGA } from 'komponenter/LenkeMedGA';
+import LenkeListe from 'komponenter/common/lenke-liste/LenkeListe';
+import { erNavDekoratoren } from 'utils/Environment';
+import { GACategory } from 'utils/google-analytics';
+import { getSpraaklenker, Spraaklenke } from './Spraakvalg-lenker';
 import { Language } from 'store/reducers/language-duck';
 
 const Spraakvalg = () => {
@@ -34,32 +35,25 @@ const Spraakvalg = () => {
     }, []);
 
     return (
-        <>
-            <Undertittel
-                className="menylenker-overskrift"
-                id="spraaklenker-overskrift"
-            >
-                <Tekst id="footer-languages-overskrift" />
-            </Undertittel>
-            <ul aria-labelledby="spraaklenker-overskrift">
-                {spraklenker.map((lenke) => (
-                    <li key={lenke.lang}>
-                        <Normaltekst>
-                            <LenkeMedGA
-                                href={erDekoratoren ? lenke.testurl : lenke.url}
-                                gaEventArgs={{
-                                    context: arbeidsflate,
-                                    category: GACategory.Footer,
-                                    action: `språkvalg/${lenke.lang}`,
-                                }}
-                            >
-                                {lenke.lenketekst}
-                            </LenkeMedGA>
-                        </Normaltekst>
-                    </li>
-                ))}
-            </ul>
-        </>
+        <LenkeListe
+            tittel={{
+                tekst: <Tekst id="footer-languages-overskrift" />,
+                typografitype: 'undertittel',
+            }}
+            data={spraklenker}
+            listElement={({ testurl, url, lang, lenketekst }) => (
+                <LenkeMedGA
+                    href={erDekoratoren ? testurl : url}
+                    gaEventArgs={{
+                        context: arbeidsflate,
+                        category: GACategory.Footer,
+                        action: `språkvalg/${lang}`,
+                    }}
+                >
+                    {lenketekst}
+                </LenkeMedGA>
+            )}
+        />
     );
 };
 

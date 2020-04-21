@@ -1,16 +1,21 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import BEMHelper from 'utils/bem';
 import { useSelector } from 'react-redux';
+
+import { LinkLoader } from 'komponenter/common/content-loaders/LinkLoader';
+import LenkeListe from 'komponenter/common/lenke-liste/LenkeListe';
 import { AppState } from 'store/reducers';
 import Tekst from 'tekster/finn-tekst';
-import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
 import { MenyNode } from 'store/reducers/menu-duck';
-import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
-import FooterLenker from '../Lenker';
-import { GACategory, triggerGaEvent } from 'utils/google-analytics';
-import './FooterSimple.less';
-import LenkeMedIkon from '../lenke-med-ikon/LenkeMedIkon';
 import DelSkjerm from 'ikoner/del-skjerm/DelSkjerm';
+import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
+import { GACategory, triggerGaEvent } from 'utils/google-analytics';
+import BEMHelper from 'utils/bem';
+
+import LenkeMedIkon from '../lenke-med-ikon/LenkeMedIkon';
+import FooterLenker from '../FooterLenker';
+import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
+
+import './FooterSimple.less';
 
 const cls = BEMHelper('simple-footer');
 
@@ -47,9 +52,13 @@ const FooterSimple = () => {
         <Fragment>
             <div className={cls.element('container')}>
                 <div className={cls.element('content')}>
-                    <ul className="bottom-lenke">
-                        <FooterLenker node={personvernNode} />
-                    </ul>
+                    <LenkeListe
+                        data={
+                            personvernNode ? personvernNode.children : undefined
+                        }
+                        listElement={(props) => <FooterLenker {...props} />}
+                        linkLoader={<LinkLoader id="personvern-loader" />}
+                    />
                     <LenkeMedIkon
                         className={cls.element('del-skjerm')}
                         onClick={openModal}

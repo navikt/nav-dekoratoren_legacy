@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
+import { useSelector } from 'react-redux';
 import Lenke from 'nav-frontend-lenker';
-import BEMHelper from 'utils/bem';
+
+import LenkeListe from 'komponenter/common/lenke-liste/LenkeListe';
 import Tekst from 'tekster/finn-tekst';
+import PilOppHvit from 'ikoner/meny/PilOppHvit';
+import { AppState } from 'store/reducers';
+import { MenyNode } from 'store/reducers/menu-duck';
+import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
+import BEMHelper from 'utils/bem';
+
 import Spraakvalg from './spraakvalg/Spraakvalg';
 import FooterArbeidsflatevalg from './footer-arbeidsflatevalg/FooterArbeidsflatevalg';
-import PilOppHvit from 'ikoner/meny/PilOppHvit';
-import { useSelector } from 'react-redux';
-import { AppState } from 'store/reducers';
-import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
-import { MenyNode } from 'store/reducers/menu-duck';
-import FooterLenker from '../../Lenker';
+import FooterLenker from '../../FooterLenker';
+
 import './FooterTopp.less';
-import { LinksLoader } from '../../../common/content-loaders/LinkLoader';
+import {
+    LinkLoader,
+    LinksLoader,
+} from 'komponenter/common/content-loaders/LinkLoader';
 
 const FooterTopp = () => {
     const cls = BEMHelper('menylinje-topp');
@@ -45,7 +51,7 @@ const FooterTopp = () => {
                         <PilOppHvit />
                         <Lenke
                             href="#scroll-til-toppen"
-                            onClick={e => {
+                            onClick={(e) => {
                                 e.preventDefault();
                                 scrollToTop();
                             }}
@@ -54,39 +60,33 @@ const FooterTopp = () => {
                         </Lenke>
                     </div>
                 </div>
-                <div className="menylenker-seksjon venstre">
-                    <Undertittel
-                        className="menylenker-overskrift"
-                        id="venstrelenker-overskrift"
-                    >
-                        <Tekst id="footer-kontakt-overskrift" />
-                    </Undertittel>
-                    <ul aria-labelledby="venstrelenker-overskrift">
-                        {kontaktNode ? (
-                            <FooterLenker node={kontaktNode} />
-                        ) : (
-                            <LinksLoader id="kontakt-loader" />
-                        )}
-                    </ul>
-                </div>
+
+                <LenkeListe
+                    className="menylenker-seksjon venstre"
+                    tittel={{
+                        tekst: <Tekst id="footer-kontakt-overskrift" />,
+                        typografitype: 'undertittel',
+                    }}
+                    data={kontaktNode ? kontaktNode.children : undefined}
+                    listElement={(props) => <FooterLenker {...props} />}
+                    linkLoader={<LinksLoader id="kontakt-loader" />}
+                />
+
                 <div className="menylenker-seksjon midt">
                     <Spraakvalg />
                 </div>
-                <div className="menylenker-seksjon hoyre">
-                    <Undertittel
-                        className="menylenker-overskrift"
-                        id="hoyrelenker-overskrift"
-                    >
-                        <Tekst id="footer-navsamfunn-overskrift" />
-                    </Undertittel>
-                    <ul aria-labelledby="hoyrelenker-overskrift">
-                        {samfunnNode ? (
-                            <FooterLenker node={samfunnNode} />
-                        ) : (
-                            <LinksLoader id="samfunn-loader" />
-                        )}
-                    </ul>
-                </div>
+
+                <LenkeListe
+                    className="menylenker-seksjon hoyre"
+                    tittel={{
+                        tekst: <Tekst id="footer-navsamfunn-overskrift" />,
+                        typografitype: 'undertittel',
+                    }}
+                    data={samfunnNode ? samfunnNode.children : undefined}
+                    listElement={(props) => <FooterLenker {...props} />}
+                    linkLoader={<LinksLoader id="samfunn-loader" />}
+                />
+
                 <FooterArbeidsflatevalg />
             </div>
         </section>

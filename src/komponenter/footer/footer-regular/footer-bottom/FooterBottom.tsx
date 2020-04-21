@@ -9,12 +9,13 @@ import { AppState } from 'store/reducers';
 import Tekst from 'tekster/finn-tekst';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import { MenyNode } from 'store/reducers/menu-duck';
-import FooterLenker from '../../Lenker';
+import FooterLenker from '../../FooterLenker';
 import LenkeMedIkon from 'komponenter/footer/lenke-med-ikon/LenkeMedIkon';
 import DelSkjermModal from 'komponenter/footer/del-skjerm-modal/DelSkjermModal';
-import { LinkLoader } from '../../../common/content-loaders/LinkLoader';
+import LenkeListe from 'komponenter/common/lenke-liste/LenkeListe';
 
 import './FooterBottom.less';
+import { LinkLoader } from 'komponenter/common/content-loaders/LinkLoader';
 
 const FooterBottom = () => {
     const cls = BEMHelper('footer-bottom-content');
@@ -60,18 +61,18 @@ const FooterBottom = () => {
                     classname={cls.element('bottom-logo')}
                 />
                 <div className={cls.element('bottom-lenker')}>
-                    <div>
-                        <Normaltekst className="bottom-tekst">
-                            <Tekst id="footer-arbeids-og-veldferdsetaten" />
-                        </Normaltekst>
-                        <ul className="bottom-lenke">
-                            {personvernNode ? (
-                                <FooterLenker node={personvernNode} />
-                            ) : (
-                                <LinkLoader id={'personvern-loader'} />
-                            )}
-                        </ul>
-                    </div>
+                    <LenkeListe
+                        tittel={{
+                            tekst: (
+                                <Tekst id="footer-arbeids-og-veldferdsetaten" />
+                            ),
+                        }}
+                        data={
+                            personvernNode ? personvernNode.children : undefined
+                        }
+                        listElement={(props) => <FooterLenker {...props} />}
+                        linkLoader={<LinkLoader id="personvern-loader" />}
+                    />
 
                     <LenkeMedIkon
                         className={cls.element('del-skjerm')}
