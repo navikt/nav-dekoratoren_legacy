@@ -51,7 +51,7 @@ export const Header = () => {
         element.style.top = `${distance}px`;
     };
 
-    const transformMyNodeList = (menuHeight: number): void => {
+    const transformNodeList = (menuHeight: number): void => {
         const nodeList = document.getElementsByClassName(
             'mobilmeny__menuheight'
         );
@@ -61,6 +61,14 @@ export const Header = () => {
                 element.style.height = `calc(100% - ${menuHeight}px)`;
             });
         }
+    };
+
+    const throttleMenuPosition = (menuHeight: number) => {
+        const throttleMobilmenyPlacement = debounce(
+            () => transformNodeList(menuHeight),
+            100
+        );
+        throttleMobilmenyPlacement();
     };
 
     const initializeSticky = (
@@ -79,6 +87,8 @@ export const Header = () => {
 
         current.windowHeight = window.pageYOffset;
         mainmenu.style.position = 'fixed';
+        current.desktop = window.innerWidth > desktopBreakpoint;
+        throttleMenuPosition(current.navbarHeight + mainmenu.offsetHeight);
     };
 
     const scrollActionUp = (current: Windowview): boolean => {
@@ -92,6 +102,9 @@ export const Header = () => {
                 (current.navbarHeight =
                     current.topheaderHeight - window.pageYOffset)
             );
+            if (!current.desktop) {
+                throttleMenuPosition(current.navbarHeight + menu.offsetHeight);
+            }
         }
         if (current.navbarHeight < 0) {
             const buffer =
@@ -100,6 +113,9 @@ export const Header = () => {
             buffer > 0
                 ? setElementStyleTop(menu, (current.navbarHeight = 0))
                 : setElementStyleTop(menu, (current.navbarHeight = buffer));
+            if (!current.desktop) {
+                throttleMenuPosition(current.navbarHeight + menu.offsetHeight);
+            }
         }
     };
 
@@ -115,6 +131,9 @@ export const Header = () => {
                       (current.navbarHeight = menu.offsetHeight * -1)
                   )
                 : setElementStyleTop(menu, (current.navbarHeight = buffer));
+            if (!current.desktop) {
+                throttleMenuPosition(current.navbarHeight + menu.offsetHeight);
+            }
         }
     };
 
@@ -130,7 +149,6 @@ export const Header = () => {
             (current.desktop && window.innerWidth < desktopBreakpoint) ||
             (!current.desktop && window.innerWidth >= desktopBreakpoint)
         ) {
-            current.desktop = !current.desktop;
             hovedmeny = verifyWindowObj()
                 ? document.getElementById(
                       window.innerWidth > desktopBreakpoint
@@ -138,10 +156,6 @@ export const Header = () => {
                           : 'mobilmeny'
                   )
                 : null;
-
-            if (!current.desktop) {
-                // transformMyNodeList();
-            }
 
             if (decoratorHeader && hovedmeny) {
                 hovedmeny.style.position = 'static';
@@ -171,8 +185,6 @@ export const Header = () => {
                 window.removeEventListener('resize', initStickySelectors);
         }
     }, []);
-
-    const throttleMobilmenyPlacement = debounce(transformMyNodeList, 100);
 
     return (
         <Fragment>
