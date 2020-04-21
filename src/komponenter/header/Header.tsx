@@ -8,8 +8,34 @@ import { oppdaterSessionStorage } from 'utils/meny-storage-utils';
 import { SimpleHeader } from './header-simple/HeaderSimple';
 import { RegularHeader } from './header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
+import { verifyWindowObj } from '../../utils/Environment';
+import debounce from 'lodash.debounce';
+
+interface Windowview {
+    windowHeight: number;
+    navbarHeight: number;
+    topheaderHeight: number;
+    desktop: boolean;
+}
+
+export const desktopBreakpoint: number = 768;
 
 export const Header = () => {
+    const current: Windowview = {
+        windowHeight: 0,
+        navbarHeight: 0,
+        topheaderHeight: 0,
+        desktop: true,
+    };
+    const decoratorHeader = verifyWindowObj()
+        ? document.getElementById('decorator-header')
+        : null;
+    let hovedmeny = verifyWindowObj()
+        ? document.getElementById(
+              window.innerWidth > desktopBreakpoint ? 'hovedmeny' : 'mobilmeny'
+          )
+        : null;
+
     const dispatch = useDispatch();
     const { PARAMS, APP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
@@ -18,8 +44,112 @@ export const Header = () => {
         number | undefined
     >(undefined);
 
-    const setMinHeight = (element: HTMLElement | null) => {
-        setHeaderoffsetHeight(element ? element.offsetHeight : 0);
+    const setElementStyleTop = (
+        element: HTMLElement,
+        distance: number
+    ): void => {
+        element.style.top = `${distance}px`;
+    };
+
+    const transformMyNodeList = (menuHeight: number): void => {
+        const nodeList = document.getElementsByClassName(
+            'mobilmeny__menuheight'
+        );
+        if (nodeList) {
+            Array.from(nodeList).forEach((element: any) => {
+                element.style.top = `${menuHeight}px`;
+                element.style.height = `calc(100% - ${menuHeight}px)`;
+            });
+        }
+    };
+
+    const initializeSticky = (
+        mainmenu: HTMLElement,
+        topheader: HTMLElement
+    ): void => {
+        current.topheaderHeight =
+            topheader.offsetHeight - mainmenu.offsetHeight;
+        window.pageYOffset > current.topheaderHeight
+            ? setElementStyleTop(mainmenu, 0)
+            : setElementStyleTop(
+                  mainmenu,
+                  (current.navbarHeight =
+                      current.topheaderHeight - window.pageYOffset)
+              );
+
+        current.windowHeight = window.pageYOffset;
+        mainmenu.style.position = 'fixed';
+    };
+
+    const scrollActionUp = (current: Windowview): boolean => {
+        return window.pageYOffset < current.windowHeight;
+    };
+
+    const handleScrollup = (menu: HTMLElement): void => {
+        if (window.pageYOffset < current.topheaderHeight) {
+            setElementStyleTop(
+                menu,
+                (current.navbarHeight =
+                    current.topheaderHeight - window.pageYOffset)
+            );
+        }
+        if (current.navbarHeight < 0) {
+            const buffer =
+                current.navbarHeight +
+                (current.windowHeight - window.pageYOffset);
+            buffer > 0
+                ? setElementStyleTop(menu, (current.navbarHeight = 0))
+                : setElementStyleTop(menu, (current.navbarHeight = buffer));
+        }
+    };
+
+    const handleScrollDown = (menu: HTMLElement): void => {
+        if (current.navbarHeight > menu.offsetHeight * -1) {
+            const buffer =
+                current.navbarHeight -
+                (window.pageYOffset - current.windowHeight);
+
+            buffer < menu.offsetHeight * -1
+                ? setElementStyleTop(
+                      menu,
+                      (current.navbarHeight = menu.offsetHeight * -1)
+                  )
+                : setElementStyleTop(menu, (current.navbarHeight = buffer));
+        }
+    };
+
+    const positionNavbar = (mainmenu: HTMLElement): void => {
+        scrollActionUp(current)
+            ? handleScrollup(mainmenu)
+            : handleScrollDown(mainmenu);
+        current.windowHeight = window.pageYOffset;
+    };
+
+    const initStickySelectors = (): void => {
+        if (
+            (current.desktop && window.innerWidth < desktopBreakpoint) ||
+            (!current.desktop && window.innerWidth >= desktopBreakpoint)
+        ) {
+            current.desktop = !current.desktop;
+            hovedmeny = verifyWindowObj()
+                ? document.getElementById(
+                      window.innerWidth > desktopBreakpoint
+                          ? 'hovedmeny'
+                          : 'mobilmeny'
+                  )
+                : null;
+
+            if (!current.desktop) {
+                // transformMyNodeList();
+            }
+
+            if (decoratorHeader && hovedmeny) {
+                hovedmeny.style.position = 'static';
+                setHeaderoffsetHeight(0);
+                setHeaderoffsetHeight(decoratorHeader.offsetHeight);
+                initializeSticky(hovedmeny, decoratorHeader);
+            }
+        }
     };
 
     useEffect(() => {
@@ -27,20 +157,22 @@ export const Header = () => {
         if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
             oppdaterSessionStorage(PARAMS.CONTEXT);
         }
-        const header = document.getElementById('stickyhead');
-        setMinHeight(header);
-        window.onscroll = function stickHeader() {
-            setClassList(header);
-        };
+
+        if (hovedmeny && decoratorHeader) {
+            setHeaderoffsetHeight(decoratorHeader.offsetHeight);
+            window.onscroll = function stickyheader() {
+                if (hovedmeny) {
+                    positionNavbar(hovedmeny);
+                }
+            };
+            initializeSticky(hovedmeny, decoratorHeader);
+            window.addEventListener('resize', initStickySelectors);
+            return () =>
+                window.removeEventListener('resize', initStickySelectors);
+        }
     }, []);
 
-    const setClassList = (element: HTMLElement | null) => {
-        if (element) {
-            window.pageYOffset > element.offsetTop
-                ? element.classList.add('sticky')
-                : element.classList.remove('sticky');
-        }
-    };
+    const throttleMobilmenyPlacement = debounce(transformMyNodeList, 100);
 
     return (
         <Fragment>
@@ -48,7 +180,7 @@ export const Header = () => {
                 className="head-wrapper"
                 style={{ minHeight: headeroffsetHeight }}
             >
-                <div className="head-container sticky" id="stickyhead">
+                <div className="head-container " id="stickyhead">
                     <div className="header-z-wrapper">
                         <Skiplinks />
                     </div>

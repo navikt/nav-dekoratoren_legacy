@@ -14,7 +14,11 @@ const desktopMenylinje = BEMHelper('desktopmeny');
 
 const DesktopMenylinje = () => {
     return (
-        <nav className={desktopMenylinje.className} aria-label="Hovedmeny">
+        <nav
+            className={desktopMenylinje.className}
+            aria-label="Hovedmeny"
+            id="hovedmeny"
+        >
             <div className={desktopMenylinje.element('content')}>
                 <div className={desktopMenylinje.element('elementer')}>
                     <NavLogoRod
