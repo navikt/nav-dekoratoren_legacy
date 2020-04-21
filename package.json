@@ -42,7 +42,7 @@
         "babel-preset-react-app": "^9.0.2",
         "classnames": "^2.2.6",
         "console-stamp": "^0.2.9",
-        "css-loader": "^3.2.0",
+        "css-loader": "^3.5.2",
         "dotenv": "^8.2.0",
         "downshift": "^3.2.10",
         "es6-promise": "^4.2.8",
