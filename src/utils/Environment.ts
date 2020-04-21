@@ -6,7 +6,7 @@ export const fetchEnv = (): Promise<EnvironmentState> => {
         if (envDom) {
             const url = envDom.getAttribute('data-src');
             if (url) {
-                fetch(url)
+                fetch(url, { credentials: 'include' })
                     .then(result => result.json())
                     .then(result => resolve(result))
                     .catch(error => {
