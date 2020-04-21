@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Lenke from 'nav-frontend-lenker';
 
+import { LinksLoader } from 'komponenter/common/content-loaders/LinkLoader';
 import LenkeListe from 'komponenter/common/lenke-liste/LenkeListe';
 import Tekst from 'tekster/finn-tekst';
 import PilOppHvit from 'ikoner/meny/PilOppHvit';
@@ -15,10 +16,6 @@ import FooterArbeidsflatevalg from './footer-arbeidsflatevalg/FooterArbeidsflate
 import FooterLenker from '../../FooterLenker';
 
 import './FooterTopp.less';
-import {
-    LinkLoader,
-    LinksLoader,
-} from 'komponenter/common/content-loaders/LinkLoader';
 
 const FooterTopp = () => {
     const cls = BEMHelper('menylinje-topp');
