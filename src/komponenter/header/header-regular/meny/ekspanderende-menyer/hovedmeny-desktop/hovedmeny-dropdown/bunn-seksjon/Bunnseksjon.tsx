@@ -42,7 +42,7 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                             stikkord={finnTekst(lenke.stikkordId, language)}
                             className={classname}
                             id={KbNav.getKbId(NaviGroup.Hovedmeny, kbNaviIndex)}
-                            onClick={event => {
+                            onClick={(event) => {
                                 event.preventDefault();
                                 dispatch(settArbeidsflate(context.key));
                                 setCookie(

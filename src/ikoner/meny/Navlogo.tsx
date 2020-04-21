@@ -36,7 +36,7 @@ const Navlogo = ({
             href={context.url}
             classNameOverride={`nav-brand-lenke ${className ? className : ``}`}
             tabIndex={viewIndex ? 0 : -1}
-            onClick={event => {
+            onClick={(event) => {
                 event.preventDefault();
                 dispatch(settArbeidsflate(context.key));
                 setCookie('decorator-context', context.key, cookieOptions);

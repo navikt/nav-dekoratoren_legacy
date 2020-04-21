@@ -1,9 +1,10 @@
 import { Request } from 'express';
 import { EnvironmentState } from '../store/reducers/environment-duck';
 import { MenuValue } from '../utils/meny-storage-utils';
+import { Language } from '../store/reducers/language-duck';
 
 interface Cookies {
-    [key: string]: MenuValue & string;
+    [key: string]: MenuValue | Language | string;
 }
 
 interface Props {
@@ -34,8 +35,8 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => ({
     }),
     ...(cookies && {
         COOKIES: {
-            CONTEXT: cookies['decorator-context'],
-            LANGUAGE: cookies['decorator-language'],
+            CONTEXT: cookies['decorator-context'] as MenuValue,
+            LANGUAGE: cookies['decorator-language'] as Language,
         },
     }),
 });

@@ -31,11 +31,11 @@ const FooterArbeidsflatevalg = () => {
         switch (arbeidsflate) {
             case MenuValue.IKKEBESTEMT:
                 return arbeidsflateLenker(XP_BASE_URL).filter(
-                    lenke => lenke.key !== COOKIES.CONTEXT
+                    (lenke) => lenke.key !== COOKIES.CONTEXT
                 );
             default:
                 return arbeidsflateLenker(XP_BASE_URL).filter(
-                    lenke => lenke.key !== arbeidsflate
+                    (lenke) => lenke.key !== arbeidsflate
                 );
         }
     };
@@ -63,7 +63,7 @@ const FooterArbeidsflatevalg = () => {
                                 <li key={lenke.key}>
                                     <Lenkepanel
                                         href={lenke.url}
-                                        onClick={event => {
+                                        onClick={(event) => {
                                             event.preventDefault();
                                             dispatch(
                                                 settArbeidsflate(lenke.key)
@@ -83,7 +83,7 @@ const FooterArbeidsflatevalg = () => {
                                                     lenke.url;
                                             }
                                         }}
-                                        onAuxClick={event =>
+                                        onAuxClick={(event) =>
                                             event.button &&
                                             event.button === 1 &&
                                             triggerGaEvent({

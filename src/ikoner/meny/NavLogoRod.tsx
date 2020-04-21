@@ -38,7 +38,7 @@ const NavLogoRod = ({
                 category: GACategory.Header,
                 action: 'navlogo',
             }}
-            onClick={event => {
+            onClick={(event) => {
                 event.preventDefault();
                 dispatch(settArbeidsflate(context.key));
                 setCookie('decorator-context', context.key, cookieOptions);

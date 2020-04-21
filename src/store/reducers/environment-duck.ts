@@ -23,8 +23,8 @@ export interface EnvironmentState {
     };
 
     COOKIES: {
-        LANGUAGE: Language;
         CONTEXT: MenuValue;
+        LANGUAGE: Language;
     };
 }
 

@@ -42,7 +42,7 @@ const Spraakvalg = () => {
                 <Tekst id="footer-languages-overskrift" />
             </Undertittel>
             <ul aria-labelledby="spraaklenker-overskrift">
-                {spraklenker.map(lenke => (
+                {spraklenker.map((lenke) => (
                     <li key={lenke.lang}>
                         <Normaltekst>
                             <LenkeMedGA

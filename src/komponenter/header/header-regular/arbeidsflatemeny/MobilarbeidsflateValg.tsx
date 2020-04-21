@@ -49,7 +49,7 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
                         >
                             <LenkeMedGA
                                 href={lenke.url}
-                                onClick={event => {
+                                onClick={(event) => {
                                     event.preventDefault();
                                     dispatch(settArbeidsflate(lenke.key));
                                     setCookie(
@@ -83,7 +83,7 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
                                 <Normaltekst>
                                     {finnTekst(lenke.stikkordId, lang)
                                         .split('|')
-                                        .map(ord => {
+                                        .map((ord) => {
                                             return (
                                                 <span
                                                     className="bullet"

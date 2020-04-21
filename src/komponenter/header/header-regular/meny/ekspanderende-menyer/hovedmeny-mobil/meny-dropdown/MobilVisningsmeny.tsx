@@ -162,7 +162,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                                         ref={this.visningslenker[index]}
                                         key={index}
                                         href="https://nav.no"
-                                        onClick={event =>
+                                        onClick={(event) =>
                                             this.setMenyliste(
                                                 event,
                                                 menyElement,

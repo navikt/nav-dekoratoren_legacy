@@ -69,13 +69,13 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
     } else {
         // Fetch fom XP
         fetch(`${process.env.API_XP_MENY_URL}`, { method: 'GET' })
-            .then(xpRes => xpRes.json())
-            .then(xpData => {
+            .then((xpRes) => xpRes.json())
+            .then((xpData) => {
                 mainCache.set(mainCacheKey, xpData, 100);
                 backupCache.set(backupCacheKey, xpData, 0);
                 res.send(xpData);
             })
-            .catch(err => {
+            .catch((err) => {
                 console.error('Failed to fetch decorator - ', err);
             })
 
@@ -92,7 +92,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
                     }
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 console.error('Failed to use backup cache - ', err);
             })
 
@@ -108,7 +108,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
                     }
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 console.error('Failed to use backup mock - ', err);
             });
     }
