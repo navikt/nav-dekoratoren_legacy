@@ -22,9 +22,9 @@ export const RegularHeader = () => {
             </div>
             <div className="media-tablet-desktop tablet-desktop-meny">
                 <div className="header-z-wrapper">
-                    {showContextMenu && (
+                    {showContextMenu ? (
                         <Arbeidsflatemeny key={'arbeidsflatemeny'} />
-                    )}
+                    ) : null}
                     <DesktopMenylinje key={`header`} />
                 </div>
             </div>

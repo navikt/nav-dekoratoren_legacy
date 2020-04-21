@@ -52,7 +52,7 @@ const FooterArbeidsflatevalg = () => {
 
     return (
         <>
-            {showContextMenu && (
+            {showContextMenu ? (
                 <div className="menylenker-seksjon arbeidsflate">
                     <div className="arbeidsflatevalg-innhold">
                         <ul
@@ -112,7 +112,7 @@ const FooterArbeidsflatevalg = () => {
                         </ul>
                     </div>
                 </div>
-            )}
+            ) : null}
         </>
     );
 };
