@@ -45,10 +45,7 @@ const FooterArbeidsflatevalg = () => {
         setLenker(getLenker());
     }, [arbeidsflate]);
 
-    const showContextMenu =
-        (language === Language.IKKEBESTEMT &&
-            COOKIES.LANGUAGE === Language.NORSK) ||
-        language === Language.NORSK;
+    const showContextMenu = language === Language.NORSK;
 
     return (
         <>
