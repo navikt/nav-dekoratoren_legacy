@@ -37,7 +37,7 @@ export const Header = () => {
             } else {
                 // Default to privatperson
                 dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
-                setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
+                setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
             }
         }
     }, []);
