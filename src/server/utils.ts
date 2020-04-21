@@ -4,7 +4,7 @@ import { MenuValue } from '../utils/meny-storage-utils';
 import { Language } from '../store/reducers/language-duck';
 
 interface Cookies {
-    [key: string]: string;
+    [key: string]: MenuValue | Language | string;
 }
 
 interface Props {

@@ -32,7 +32,7 @@ export const Toppseksjon = ({ classname }: Props) => {
         <div className={cls.element('topp-seksjon')}>
             <LenkeMedGA
                 href={context.url}
-                onClick={event => {
+                onClick={(event) => {
                     event.preventDefault();
                     dispatch(settArbeidsflate(context.key));
                     setCookie('decorator-context', context.key, cookieOptions);
