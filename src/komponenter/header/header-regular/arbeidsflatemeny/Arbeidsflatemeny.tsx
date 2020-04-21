@@ -13,6 +13,7 @@ import BEMHelper from 'utils/bem';
 import { erNavDekoratoren } from 'utils/Environment';
 import './Arbeidsflatemeny.less';
 
+const key = 'nav-arbeidsflatemeny';
 const Arbeidsflatemeny = () => {
     const cls = BEMHelper('arbeidsflate');
     const dispatch = useDispatch();
@@ -23,11 +24,7 @@ const Arbeidsflatemeny = () => {
     );
 
     return (
-        <nav
-            className={cls.className}
-            id="decorator-arbeidsflatemeny"
-            aria-label="Velg brukergruppe"
-        >
+        <nav key={key} className={cls.className} aria-label="Velg brukergruppe">
             <ul className={cls.element('topp-liste-rad')} role="tablist">
                 {arbeidsflateLenker(XP_BASE_URL).map((lenke) => {
                     return (

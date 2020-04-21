@@ -10,20 +10,20 @@ import MinsideMenyDesktop from './ekspanderende-menyer/minside-meny-desktop/Mins
 import { VarslerDropdown } from './ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
 import './DesktopMenylinje.less';
 
-const desktopMenylinje = BEMHelper('desktopmeny');
-
+const cls = BEMHelper('desktopmeny');
+const key = 'nav-desktopmeny';
 const DesktopMenylinje = () => {
     return (
-        <nav className={desktopMenylinje.className} aria-label="Hovedmeny">
-            <div className={desktopMenylinje.element('elementer')}>
+        <nav key={key} className={cls.className} aria-label="Hovedmeny">
+            <div className={cls.element('elementer')}>
                 <NavLogoRod
                     width="88"
                     height="88"
-                    classname={desktopMenylinje.element('nav-brand')}
+                    classname={cls.element('nav-brand')}
                 />
                 <HovedmenyDesktop />
                 <SokDropdown />
-                <span className={desktopMenylinje.element('spacer')} />
+                <span className={cls.element('spacer')} />
                 <InnloggingsstatusProvider>
                     <>
                         <VarselinnboksProvider>
