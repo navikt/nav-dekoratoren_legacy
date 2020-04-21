@@ -33,7 +33,6 @@
     },
     "dependencies": {
         "@babel/polyfill": "^7.6.0",
-        "@types/express": "^4.17.1",
         "babel-loader": "8.1.0",
         "babel-plugin-named-asset-import": "^0.3.4",
         "babel-plugin-styled-components": "^1.10.6",
