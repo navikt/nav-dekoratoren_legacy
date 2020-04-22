@@ -91,7 +91,7 @@ export const Header = () => {
         throttleMenuPosition(current.navbarHeight + mainmenu.offsetHeight);
     };
 
-    const scrollActionUp = (current: Windowview): boolean => {
+    const scrollActionUp = (): boolean => {
         return window.pageYOffset < current.windowHeight;
     };
 
@@ -138,7 +138,7 @@ export const Header = () => {
     };
 
     const positionNavbar = (mainmenu: HTMLElement): void => {
-        scrollActionUp(current)
+        scrollActionUp()
             ? handleScrollup(mainmenu)
             : handleScrollDown(mainmenu);
         current.windowHeight = window.pageYOffset;
