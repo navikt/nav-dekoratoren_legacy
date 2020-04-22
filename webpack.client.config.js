@@ -32,24 +32,17 @@ const browserConfig = {
             utils: path.resolve(__dirname, './src/utils'),
         },
     },
-    stats: 'errors-only',
+    stats: 'minimal',
     module: {
         rules: [
             { parser: { requireEnsure: false } },
-
             {
-                test: /\.(js|jsx|ts|tsx)$/,
+                test: /\.(ts|tsx)$/,
+                loader: require.resolve('tslint-loader'),
                 enforce: 'pre',
-                use: [
-                    {
-                        options: {
-                            formatter: 'react-dev-utils/eslintFormatter',
-                            eslintPath: 'eslint',
-                        },
-                        loader: 'eslint-loader',
-                    },
-                ],
-                include: path.resolve(__dirname, 'src'),
+                resolve: {
+                    extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
+                },
             },
             {
                 oneOf: [
