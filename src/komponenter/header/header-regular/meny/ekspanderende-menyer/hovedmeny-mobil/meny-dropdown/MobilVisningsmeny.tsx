@@ -13,7 +13,6 @@ import VarselvisningMobil from '../../../varsel/varselvisning/VarselvisningMobil
 import './MobilVisningsmeny.less';
 import { AppState } from 'store/reducers';
 import { Dispatch } from 'store/dispatch-type';
-import { finnArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { connect } from 'react-redux';
 import Sok from '../../../sok/Sok';
 import InnloggetBruker from './mobil-innhold/innloggetbruker/InnloggetBruker';
@@ -23,7 +22,6 @@ import Dittnavmeny from './mobil-innhold/dittnavmeny/Dittnavmeny';
 import { InnloggingsstatusState } from 'store/reducers/innloggingsstatus-duck';
 
 interface DispatchProps {
-    settArbeidsflate: () => void;
     toggleVarsel: () => void;
 }
 
@@ -167,7 +165,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                                         ref={this.visningslenker[index]}
                                         key={index}
                                         href="https://nav.no"
-                                        onClick={event =>
+                                        onClick={(event) =>
                                             this.setMenyliste(
                                                 event,
                                                 menyElement,
@@ -228,7 +226,6 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    settArbeidsflate: () => dispatch(finnArbeidsflate()),
     toggleVarsel: () => dispatch(toggleVarselVisning()),
 });
 

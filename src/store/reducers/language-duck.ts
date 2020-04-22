@@ -2,6 +2,7 @@ import { Action, Reducer } from 'redux';
 import { ActionType } from '../actions';
 
 export enum Language {
+    IKKEBESTEMT = 'IKKEBESTEMT',
     NORSK = 'NORSK',
     ENGELSK = 'ENGELSK',
     SAMISK = 'SAMISK',
@@ -12,7 +13,7 @@ export interface LanguageState {
 }
 
 const initialLanguageState: LanguageState = {
-    language: Language.NORSK,
+    language: Language.IKKEBESTEMT,
 };
 
 export const languageDuck = genericDuck<
@@ -57,15 +58,3 @@ function genericDuck<I extends object, T>(
         actionCreator,
     };
 }
-
-export const spraakValgetErNorsk = (lang: Language): boolean => {
-    return lang === Language.NORSK;
-};
-
-export const spraakValgetErEngelsk = (lang: Language): boolean => {
-    return lang === Language.ENGELSK;
-};
-
-export const spraakValgetErSamisk = (lang: Language): boolean => {
-    return lang === Language.SAMISK;
-};

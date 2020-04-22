@@ -6,11 +6,14 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { Language } from 'store/reducers/language-duck';
 import { finnTekst } from 'tekster/finn-tekst';
 import { bunnLenker } from './BunnseksjonLenkedata';
-import { settArbeidsflate } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { ArbeidsflateLenke } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import { erNavDekoratoren } from 'utils/Environment';
 import './Bunnseksjon.less';
+import { useCookies } from 'react-cookie';
 
 interface Props {
     classname: string;
@@ -21,6 +24,7 @@ interface Props {
 export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
     const cls = BEMHelper(classname);
     const dispatch = useDispatch();
+    const [, setCookie] = useCookies(['decorator-context']);
     const { environment } = useSelector((state: AppState) => state);
     const lenker = bunnLenker(environment)[arbeidsflate];
 
@@ -38,9 +42,17 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                             stikkord={finnTekst(lenke.stikkordId, language)}
                             className={classname}
                             id={KbNav.getKbId(NaviGroup.Hovedmeny, kbNaviIndex)}
-                            onClick={event => {
+                            onClick={(event) => {
                                 event.preventDefault();
-                                settArbeidsflate(dispatch, context);
+                                dispatch(settArbeidsflate(context.key));
+                                setCookie(
+                                    'decorator-context',
+                                    context.key,
+                                    cookieOptions
+                                );
+                                if (!erNavDekoratoren()) {
+                                    window.location.href = context.url;
+                                }
                             }}
                             key={lenke.lenkeTekstId}
                         />

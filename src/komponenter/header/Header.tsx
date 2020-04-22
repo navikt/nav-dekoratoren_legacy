@@ -4,10 +4,13 @@ import { fetchMenypunkter } from 'store/reducers/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
 import MenyBakgrunn from './header-regular/meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { oppdaterSessionStorage } from 'utils/meny-storage-utils';
 import { SimpleHeader } from './header-simple/HeaderSimple';
 import { RegularHeader } from './header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import { useCookies } from 'react-cookie';
+import { Language, languageDuck } from '../../store/reducers/language-duck';
 import { verifyWindowObj } from '../../utils/Environment';
 import debounce from 'lodash.debounce';
 
@@ -30,13 +33,10 @@ export const Header = () => {
     const decoratorHeader = verifyWindowObj()
         ? document.getElementById('decorator-header')
         : null;
-    let hovedmeny = verifyWindowObj()
-        ? document.getElementById(
-              window.innerWidth > desktopBreakpoint ? 'hovedmeny' : 'mobilmeny'
-          )
-        : null;
+    let hovedmeny: any = null;
 
     const dispatch = useDispatch();
+    const [cookies, setCookie] = useCookies(['decorator-context']);
     const { PARAMS, APP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
     );
@@ -168,10 +168,47 @@ export const Header = () => {
 
     useEffect(() => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
-        if (PARAMS.CONTEXT !== MenuValue.IKKEVALGT) {
-            oppdaterSessionStorage(PARAMS.CONTEXT);
-        }
+    }, []);
 
+    useEffect(() => {
+        // Change context
+        if (PARAMS.CONTEXT !== MenuValue.IKKEBESTEMT) {
+            // Use params if defined
+            dispatch(settArbeidsflate(PARAMS.CONTEXT));
+            setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
+        } else {
+            const context = cookies['decorator-context'];
+            if (context) {
+                // Fetch state from cookie to prevent flickering
+                dispatch(settArbeidsflate(context));
+            } else {
+                // Default to privatperson
+                dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
+                setCookie(
+                    'decorator-context',
+                    MenuValue.PRIVATPERSON,
+                    cookieOptions
+                );
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        // Change language
+        const language = checkUrlForLanguage();
+        const action = languageDuck.actionCreator({ language });
+        setCookie('decorator-language', language, cookieOptions);
+        dispatch(action);
+    }, []);
+
+    useEffect(() => {
+        hovedmeny = verifyWindowObj()
+            ? document.getElementById(
+                  window.innerWidth > desktopBreakpoint
+                      ? 'hovedmeny'
+                      : 'mobilmeny'
+              )
+            : null;
         if (hovedmeny && decoratorHeader) {
             setHeaderoffsetHeight(decoratorHeader.offsetHeight);
             window.onscroll = function stickyheader() {
@@ -208,6 +245,16 @@ export const Header = () => {
             </div>
         </Fragment>
     );
+};
+
+const checkUrlForLanguage = (): Language => {
+    const locationPath = window.location.pathname;
+    if (locationPath.includes('/en/')) {
+        return Language.ENGELSK;
+    } else if (locationPath.includes('/se/')) {
+        return Language.SAMISK;
+    }
+    return Language.NORSK;
 };
 
 export default Header;

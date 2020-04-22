@@ -7,29 +7,13 @@ export enum MenuValue {
     PRIVATPERSON = 'PRIVATPERSON',
     ARBEIDSGIVER = 'ARBEIDSGIVER',
     SAMARBEIDSPARTNER = 'SAMARBEIDSPARTNER',
-    IKKEVALGT = 'IKKEVALGT',
+    IKKEBESTEMT = 'IKKEBESTEMT',
 }
 
 enum MenuName {
     Hovedmeny = 'Main menu',
     MinsideMeny = 'My page menu',
 }
-
-export const getSessionStorage = (key: string): string | null => {
-    return sessionStorage.getItem(key);
-};
-
-export const setSessionStorage = (key: string, value: MenuValue) => {
-    return sessionStorage.setItem(key, value);
-};
-
-export const oppdaterSessionStorage = (valgVerdi: MenuValue): void => {
-    const headervalg = getSessionStorage(NAVHEADER);
-    if (headervalg && headervalg === valgVerdi) {
-        return;
-    }
-    setSessionStorage(NAVHEADER, valgVerdi);
-};
 
 export const getHovedmenyNode = (
     menypunkter: MenyNode[],
@@ -59,9 +43,10 @@ export const getLanguageNode = (
     nodeMenu: MenyNode[]
 ): MenyNode | undefined =>
     ({
-        NORSK: nodeMenu.find(n => n.path === '/no'),
-        ENGELSK: nodeMenu.find(n => n.path === '/en'),
-        SAMISK: nodeMenu.find(n => n.path === '/se'),
+        IKKEBESTEMT: undefined,
+        NORSK: nodeMenu.find((n) => n.path === '/no'),
+        ENGELSK: nodeMenu.find((n) => n.path === '/en'),
+        SAMISK: nodeMenu.find((n) => n.path === '/se'),
     }[lang]);
 
 export const findNode = (
