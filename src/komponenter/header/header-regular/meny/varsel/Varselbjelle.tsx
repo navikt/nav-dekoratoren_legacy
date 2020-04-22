@@ -10,6 +10,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import VarselKnappMobil from './varselknapp/VarselKnappMobil';
 import './Varselbjelle.less';
+import { toggleVarselVisning } from '../../../../../store/reducers/dropdown-toggle-duck';
 
 interface Props {
     tabindex: boolean;
@@ -56,10 +57,11 @@ const Varselbjelle = (props: VarselbjelleProps) => {
     );
 
     const toggleVarsel = () => {
-        dispatch(toggleVarsel());
+        dispatch(toggleVarselVisning());
     };
 
     const ApneVarselEvent = () => {
+        console.log('ApneVarselEvent()');
         triggerGaEvent({
             context: arbeidsflate,
             category: GACategory.Header,
