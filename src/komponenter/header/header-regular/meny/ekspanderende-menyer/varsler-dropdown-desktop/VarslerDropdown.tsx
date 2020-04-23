@@ -38,13 +38,15 @@ export const VarslerDropdown = () => {
     }
 
     const toggleDropdown = () => {
+        if (!isOpen) {
+            settVarslerSomLest(appBaseUrl, varsler.nyesteId)(dispatch);
+        }
         triggerGaEvent({
             context: arbeidsflate,
             category: GACategory.Header,
             action: `varsler-${isOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleVarsler());
-        settVarslerSomLest(appBaseUrl, varsler.nyesteId)(dispatch);
     };
 
     const ariaLabel = `Varsler. Du har ${
