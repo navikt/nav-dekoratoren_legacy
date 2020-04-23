@@ -152,7 +152,7 @@
         "typescript": "^3.4.5",
         "webpack-cli": "^3.3.9",
         "webpack-node-externals": "^1.7.2",
-        "webpack": "4.28.3",
+        "webpack": "4.43.0",
         "window": "^4.2.7"
     },
     "jest": {
