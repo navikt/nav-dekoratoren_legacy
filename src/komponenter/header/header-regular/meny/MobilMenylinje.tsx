@@ -31,7 +31,11 @@ const MobilMenylinje = ({ language }: Props) => {
     };
 
     return (
-        <nav className={mobilClass.className} aria-label="Hovedmeny">
+        <nav
+            className={mobilClass.className}
+            id={mobilClass.className}
+            aria-label="Hovedmeny"
+        >
             <div className={mobilClass.element('content')}>
                 <div className={mobilClass.element('elementer')}>
                     <div className={mobilClass.element('venstre-kolonne')}>

@@ -9,9 +9,29 @@ body {
 .sitefooter {
     background-color: white;
 }
-.siteheader {
+
+.siteheader,
+.head-wrapper {
     position: relative;
+}
+
+.desktopmeny,
+.mobilmeny {
+    width: 100%;
+    background-color: white;
+}
+
+.siteheader,
+.head-wrapper,
+.head-container {
     z-index: 1000;
+    width: 100%;
+}
+
+.head-container.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 .header-z-wrapper {
