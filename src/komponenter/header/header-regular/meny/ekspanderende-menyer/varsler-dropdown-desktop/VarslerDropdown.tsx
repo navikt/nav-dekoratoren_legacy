@@ -11,19 +11,21 @@ import { VarselIkon } from '../meny-knapper/ikoner/varsel-ikon/VarselIkon';
 import { Varselvisning } from './varselvisning/Varselvisning';
 import { MenuValue } from 'utils/meny-storage-utils';
 import './VarslerDropdown.less';
+import { settVarslerSomLest } from '../../../../../../store/reducers/varsel-lest-duck';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.varsler,
     varsler: state.varsler.data,
     innloggetStatus: state.innloggingsstatus.data,
     arbeidsflate: state.arbeidsflate.status,
+    appBaseUrl: state.environment.APP_BASE_URL
 });
 
 const classname = 'desktop-varsler-dropdown';
 export const desktopVarslerKnappId = `${classname}-knapp-id`;
 
 export const VarslerDropdown = () => {
-    const { isOpen, varsler, innloggetStatus, arbeidsflate } = useSelector(
+    const { isOpen, varsler, innloggetStatus, arbeidsflate, appBaseUrl } = useSelector(
         stateSelector
     );
     const dispatch = useDispatch();
@@ -37,10 +39,12 @@ export const VarslerDropdown = () => {
 
     const toggleDropdown = () => {
         triggerGaEvent({
+            context: arbeidsflate,
             category: GACategory.Header,
             action: `varsler-${isOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleVarsler());
+        settVarslerSomLest(appBaseUrl, varsler.nyesteId)(dispatch);
     };
 
     const ariaLabel = `Varsler. Du har ${

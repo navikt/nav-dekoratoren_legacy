@@ -11,8 +11,8 @@ export enum GACategory {
 
 export type GAEventArgs = {
     category: GACategory;
-    context: MenuValue;
     action: string;
+    context?: MenuValue;
     label?: string;
 };
 
