@@ -8,11 +8,7 @@ const DelSkjerm = (props: SVGProps<SVGSVGElement>) => (
         version="1.0"
         {...props}
     >
-        <g
-            fill="none"
-            strokeMiterlimit="10"
-            strokeLinejoin="round"
-        >
+        <g fill="none" strokeMiterlimit="10" strokeLinejoin="round">
             <path strokeLinecap="round" d="M5 23.5h6M8 21.5v1.98" />
             <path d="M.5 19.5h15" />
             <path
