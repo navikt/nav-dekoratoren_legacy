@@ -1,0 +1,58 @@
+@import '../../../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../../styling-variabler.less';
+
+.arbeidsflatevalg {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+
+    .arbeidsflatevalg-innhold {
+        margin-bottom: 0;
+
+        .arbeidsflatevalg {
+            display: flex;
+            justify-content: space-between;
+            margin: 0;
+
+            li {
+                width: 48%;
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .lenkepanel {
+        background-color: @navBlaDarken40;
+        color: white;
+        border: 1px solid white;
+        border-radius: 8px;
+        text-decoration: none;
+
+        &:hover .lenkepanel__heading,
+        &--hover .lenkepanel__heading {
+            color: white;
+        }
+
+        &__heading {
+            min-height: 101px;
+        }
+
+        .typo-undertittel {
+            margin-bottom: 0.6rem;
+        }
+    }
+
+    .lenkepanel:focus {
+        color: @navBla;
+        background-color: white;
+    }
+
+    li {
+        width: 48%;
+        margin-bottom: 0;
+    }
+
+    .arbeidsflate {
+        width: 100%;
+    }
+}
