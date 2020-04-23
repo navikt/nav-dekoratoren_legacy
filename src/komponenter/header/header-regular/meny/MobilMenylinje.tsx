@@ -50,7 +50,7 @@ const MobilMenylinje = ({ language }: Props) => {
                             <>
                                 <VarselinnboksProvider>
                                     <Varselbjelle tabindex={true}>
-                                        {clicked =>
+                                        {(clicked) =>
                                             clicked && (
                                                 <LukkVarsel clicked={clicked} />
                                             )

@@ -31,7 +31,7 @@ const VarselvisningMobil = (props: OwnProps) => {
             <div className={cls.element('varsel-wrapper')}>
                 <Lenke
                     href="#https//nav.no/Lukk/varsler"
-                    onClick={event => lukkVarsler(event)}
+                    onClick={(event) => lukkVarsler(event)}
                     tabIndex={props.tabindex ? 0 : -1}
                 >
                     <Undertittel>
