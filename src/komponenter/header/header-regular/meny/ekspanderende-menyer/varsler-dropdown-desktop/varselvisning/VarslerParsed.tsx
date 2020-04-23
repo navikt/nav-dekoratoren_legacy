@@ -41,6 +41,9 @@ const parseLenke = (
     children: DomElement[] | undefined,
     index: number
 ) => {
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.arbeidsflate.status
+    );
     return (
         <LenkeMedGA
             href={href || ''}
@@ -48,6 +51,7 @@ const parseLenke = (
             className={'varsel-lenke'}
             id={getKbId(NaviGroup.Varsler, { col: 0, row: 1, sub: index })}
             gaEventArgs={{
+                context: arbeidsflate,
                 category: GACategory.Header,
                 action: 'varsel-lenke',
                 label: href,
