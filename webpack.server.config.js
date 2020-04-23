@@ -43,21 +43,6 @@ const browserConfig = {
     module: {
         rules: [
             { parser: { requireEnsure: false } },
-
-            {
-                test: /\.(js|jsx|ts|tsx)$/,
-                enforce: 'pre',
-                use: [
-                    {
-                        options: {
-                            formatter: 'react-dev-utils/eslintFormatter',
-                            eslintPath: 'eslint',
-                        },
-                        loader: 'eslint-loader',
-                    },
-                ],
-                include: path.resolve(__dirname, 'src'),
-            },
             {
                 oneOf: [
                     {
