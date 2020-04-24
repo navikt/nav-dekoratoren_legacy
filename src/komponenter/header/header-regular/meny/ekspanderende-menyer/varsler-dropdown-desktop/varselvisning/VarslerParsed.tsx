@@ -21,7 +21,7 @@ type Props = {
 };
 
 const parseIkon = (ikonStr: string) => {
-    const ikon = (ikoner[ikonStr] || ikonDefaultPath).default;
+    const ikon = ikoner[ikonStr] || ikonDefaultPath;
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     return (
         <div className={`varsel-ikon-row`}>

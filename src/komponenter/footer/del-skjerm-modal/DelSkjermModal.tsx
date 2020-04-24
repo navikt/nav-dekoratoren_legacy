@@ -76,7 +76,7 @@ const DelSkjermModal = (props: Props) => {
             <div className={'delskjerm__header'}>
                 <img
                     className={'delskjerm__veileder'}
-                    src={`${XP_BASE_URL}${Veileder.default}`}
+                    src={`${XP_BASE_URL}${Veileder}`}
                 />
             </div>
             <div className={'delskjerm__content'}>
