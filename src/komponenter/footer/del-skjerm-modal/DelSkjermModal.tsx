@@ -18,10 +18,10 @@ interface Props {
 
 const DelSkjermModal = (props: Props) => {
     // Language
-    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const language = useSelector((state: AppState) => state.language).language;
     const feilmelding = finnTekst('delskjerm-modal-feilmelding', language);
     const label = finnTekst('delskjerm-modal-label', language);
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
     // State
     const [code, setCode] = useState('');

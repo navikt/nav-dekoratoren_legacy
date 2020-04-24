@@ -4,7 +4,7 @@ import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import { getKbId, NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../../../../../store/reducers';
+import { AppState } from 'store/reducers';
 
 const ikonDefault = 'alarm-ikon';
 const ikonDefaultPath = require('ikoner/varsler/alarm.svg');
