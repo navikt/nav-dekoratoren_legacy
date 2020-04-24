@@ -6,13 +6,14 @@ import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import { createStore } from './store';
 import { erDev, verifyWindowObj } from './utils/Environment';
-import Footer from './komponenter/footer/Footer';
 import { fetchEnv } from './utils/Environment';
 import { initGA } from './utils/google-analytics';
+import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
+import Styles from './komponenter/styles/Styles';
+import Scripts from './komponenter/scripts/Scripts';
 import * as es6promise from 'es6-promise';
 import { CookiesProvider } from 'react-cookie';
-import Styles from './komponenter/styles/Styles';
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
@@ -34,6 +35,12 @@ const run = () => {
             const store = createStore(environment);
             ReactDOM.render(
                 <ReduxProvider store={store}>
+                    <Styles />
+                </ReduxProvider>,
+                document.getElementById('decorator-styles')
+            );
+            ReactDOM.render(
+                <ReduxProvider store={store}>
                     <CookiesProvider>
                         <Header />
                     </CookiesProvider>
@@ -50,11 +57,9 @@ const run = () => {
             );
             ReactDOM.render(
                 <ReduxProvider store={store}>
-                    <CookiesProvider>
-                        <Styles />
-                    </CookiesProvider>
+                    <Scripts />
                 </ReduxProvider>,
-                document.getElementById('decorator-styles')
+                document.getElementById('decorator-scripts')
             );
         })
         .catch((e) => {
