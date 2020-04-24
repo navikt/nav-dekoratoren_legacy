@@ -50,11 +50,11 @@ const Varselbjelle = (props: VarselbjelleProps) => {
     } = useSelector(stateSelector);
 
     const [clicked, settClicked] = useState(false);
-    const [classname, settClassname] = useState(
+
+    const classname =
         antallUlesteVarsler > 0
             ? 'toggle-varsler-container har-nye-varsler'
-            : 'toggle-varsler-container'
-    );
+            : 'toggle-varsler-container';
 
     const toggleVarsel = () => {
         dispatch(toggleVarselVisning());
@@ -70,7 +70,6 @@ const Varselbjelle = (props: VarselbjelleProps) => {
         toggleVarsel();
         settClicked(!clicked);
         if (antallUlesteVarsler > 0) {
-            settClassname('toggle-varsler-container');
             settVarslerSomLest(environment.APP_BASE_URL, nyesteId, dispatch);
         }
     };
