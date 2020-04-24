@@ -12,6 +12,7 @@ import { initGA } from './utils/google-analytics';
 import Header from './komponenter/header/Header';
 import * as es6promise from 'es6-promise';
 import { CookiesProvider } from 'react-cookie';
+import Styles from './komponenter/styles/Styles';
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
@@ -46,6 +47,14 @@ const run = () => {
                     </CookiesProvider>
                 </ReduxProvider>,
                 document.getElementById('decorator-footer')
+            );
+            ReactDOM.render(
+                <ReduxProvider store={store}>
+                    <CookiesProvider>
+                        <Styles />
+                    </CookiesProvider>
+                </ReduxProvider>,
+                document.getElementById('decorator-styles')
             );
         })
         .catch((e) => {

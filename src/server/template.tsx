@@ -3,6 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import { Provider as ReduxProvider } from 'react-redux';
 import Header from '../komponenter/header/Header';
 import Footer from '../komponenter/footer/Footer';
+import Styles from '../komponenter/styles/Styles';
 import { Request } from 'express';
 import { clientEnv } from './utils';
 import hash from 'object-hash';
@@ -77,6 +78,14 @@ export const template = (req: Request) => {
         </ReduxProvider>
     );
 
+    const HtmlStyles = ReactDOMServer.renderToString(
+        <ReduxProvider store={store}>
+            <CookiesProvider cookies={universalCookies}>
+                <Styles />
+            </CookiesProvider>
+        </ReduxProvider>
+    );
+
     const html = `
     <!DOCTYPE html>
     <html lang="no">
@@ -89,7 +98,6 @@ export const template = (req: Request) => {
             />
             <meta name="theme-color" content="#000000" />
             <title>NAV Dekoratør</title>
-            <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
             <style>
             /* Decorator development styling */
             html, body {  height: 100%; }
@@ -107,17 +115,9 @@ export const template = (req: Request) => {
                 justify-content: center;
                 align-items: center;
             }
-           
             </style>
             <div id="styles">
-                <link rel="icon" type="image/x-icon" href="${baseUrl}${fileFavicon}" />
-                <link rel="icon" type="image/png" sizes="16x16" href="${baseUrl}${fileFavicon16x16}">
-                <link rel="icon" type="image/png" sizes="32x32" href="${baseUrl}${fileFavicon32x32}">
-                <link rel="apple-touch-icon" sizes="180x180" href="${baseUrl}${fileAppleTouchIcon}">
-                <link rel="mask-icon" href="${baseUrl}${fileMaskIcon}" color="#5bbad5">
-                <meta name="msapplication-TileColor" content="#ffffff">
-                <meta name="theme-color" content="#ffffff">
-                <link href=${fileCss} rel="stylesheet" />
+                <section id="decorator-styles" role="main">${HtmlStyles}</section>
             </div>
         </head>
         <body>
