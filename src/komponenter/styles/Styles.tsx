@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import ReactDOMServer from 'react-dom/server';
 
 // Favicons
 const fileFavicon = require('ikoner/favicon/favicon.ico');
@@ -14,40 +15,90 @@ const Styles = () => {
         (state: AppState) => state.environment
     );
 
-    return (
-        <>
-            <link
-                rel="icon"
-                type="image/x-icon"
-                href={`${XP_BASE_URL}${fileFavicon}`}
-            />
-            <link
-                rel="icon"
-                type="image/png"
-                sizes="16x16"
-                href={`${XP_BASE_URL}${fileFavicon16x16}`}
-            />
-            <link
-                rel="icon"
-                type="image/png"
-                sizes="32x32"
-                href={`${XP_BASE_URL}${fileFavicon32x32}`}
-            />
-            <link
-                rel="apple-touch-icon"
-                sizes="180x180"
-                href={`${XP_BASE_URL}${fileAppleTouchIcon}`}
-            />
-            <link
-                rel="mask-icon"
-                href={`${XP_BASE_URL}${fileMaskIcon}`}
-                color="#5bbad5"
-            />
-            <meta name="msapplication-TileColor" content="#ffffff" />
-            <meta name="theme-color" content="#ffffff" />
-            <link href={`${APP_BASE_URL}/css/client.css`} rel="stylesheet" />
-        </>
-    );
+    const Elements = [
+        {
+            id: 'file-favicon',
+            component: (
+                <link
+                    id="file-favicon"
+                    rel="icon"
+                    type="image/x-icon"
+                    href={`${XP_BASE_URL}${fileFavicon}`}
+                />
+            ),
+        },
+        {
+            id: 'file-favicon-16x16',
+            component: (
+                <link
+                    id="file-favicon-16x16"
+                    rel="icon"
+                    type="image/png"
+                    sizes="16x16"
+                    href={`${XP_BASE_URL}${fileFavicon16x16}`}
+                />
+            ),
+        },
+        {
+            id: 'file-favicon-32x32',
+            component: (
+                <link
+                    id="file-favicon-32x32"
+                    rel="icon"
+                    type="image/png"
+                    sizes="32x32"
+                    href={`${XP_BASE_URL}${fileFavicon32x32}`}
+                />
+            ),
+        },
+        {
+            id: 'file-apple-touch-icon',
+            component: (
+                <link
+                    id="file-apple-touch-icon"
+                    rel="apple-touch-icon"
+                    sizes="180x180"
+                    href={`${XP_BASE_URL}${fileAppleTouchIcon}`}
+                />
+            ),
+        },
+        {
+            id: 'file-mask-icon',
+            component: (
+                <link
+                    id="file-mask-icon"
+                    rel="mask-icon"
+                    color="#5bbad5"
+                    href={`${XP_BASE_URL}${fileMaskIcon}`}
+                />
+            ),
+        },
+        {
+            id: 'decorator-style',
+            component: (
+                <link
+                    id="decorator-style"
+                    href={`${APP_BASE_URL}/css/client.css`}
+                    rel="stylesheet"
+                />
+            ),
+        },
+    ];
+
+    // CSR (Client-side-rendering)
+    if (typeof window !== 'undefined') {
+        Elements.map((Element) => {
+            if (!document.getElementById(Element.id)) {
+                document.head.insertAdjacentHTML(
+                    'beforeend',
+                    ReactDOMServer.renderToString(Element.component)
+                );
+            }
+        });
+    }
+
+    // SSR (Server-side-rendering)
+    return Elements.map((Element) => Element.component);
 };
 
 export default Styles;
