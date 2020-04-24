@@ -107,7 +107,7 @@ export const template = (req: Request) => {
             </style>
             <!-- Styling fetched by apps -->
             <div id="styles">
-                <section id="decorator-styles">${HtmlStyles}</section>
+                ${HtmlStyles}
             </div>
         </head>
         <body>
