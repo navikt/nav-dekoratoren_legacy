@@ -1,15 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
     addEventListenersAndReturnHandlers,
     createHeaderMainGraph,
+    kbNavInitialState,
     removeListeners,
 } from './kb-navigation-setup';
-import {
-    setCurrentNode,
-    setKbMainGraph,
-} from '../../store/reducers/keyboard-nav-duck';
-import { KbNaviNode } from './kb-navigation';
+import { GraphData, KbNaviNode } from './kb-navigation';
 import { lukkAlleDropdowns } from '../../store/reducers/dropdown-toggle-duck';
 import { AppState } from '../../store/reducers';
 
@@ -18,8 +15,13 @@ const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
     menyStatus: state.menypunkt.status,
     innloggingsStatus: state.innloggingsstatus.data,
-    kbNavState: state.kbNavigation,
 });
+
+export type KeyboardNaviState = {
+    currentNode: KbNaviNode;
+    mainGraph: GraphData;
+    subGraph?: GraphData;
+};
 
 export const useKbNavigationHeader = () => {
     const {
@@ -27,9 +29,18 @@ export const useKbNavigationHeader = () => {
         arbeidsflate,
         menyStatus,
         innloggingsStatus,
-        kbNavState,
     } = useSelector(stateSelector);
     const dispatch = useDispatch();
+
+    const [kbNavState, setKbNavState] = useState<KeyboardNaviState>(
+        kbNavInitialState
+    );
+    const setCurrentNode = (node: KbNaviNode) => {
+        setKbNavState({ ...kbNavState, currentNode: node });
+    };
+    const setSubGraph = (graph: GraphData) => {
+        setKbNavState({ ...kbNavState, subGraph: graph });
+    };
 
     useEffect(() => {
         const graph = createHeaderMainGraph(
@@ -39,7 +50,7 @@ export const useKbNavigationHeader = () => {
             innloggingsStatus.authenticated
         );
         if (graph) {
-            dispatch(setKbMainGraph(graph));
+            setKbNavState({ ...kbNavState, mainGraph: graph });
         }
     }, [language, arbeidsflate, menyStatus, innloggingsStatus]);
 
@@ -56,4 +67,12 @@ export const useKbNavigationHeader = () => {
 
         return () => removeListeners(handlers);
     }, [kbNavState]);
+
+    return {
+        mainNodeMap: kbNavState.mainGraph.nodeMap,
+        subNodeMap: kbNavState.subGraph?.nodeMap,
+        currentNode: kbNavState.currentNode,
+        setCurrentNode,
+        setSubGraph,
+    };
 };

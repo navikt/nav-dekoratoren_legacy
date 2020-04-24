@@ -1,18 +1,11 @@
 import React, { useEffect } from 'react';
 import { createNaviGraph, NodeEdgeOpposite, selectNode } from './kb-navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from 'store/reducers';
 import {
     setCurrentNode,
     setKbSubGraph,
 } from 'store/reducers/keyboard-nav-duck';
 import { KbNavConfig } from './kb-navigation-setup';
-
-const stateSelector = (state: AppState) => ({
-    currentNode: state.kbNavigation.currentNode,
-    mainNodeMap: state.kbNavigation.mainGraph.nodeMap,
-    subNodeMap: state.kbNavigation.subGraph?.nodeMap,
-});
 
 export const useKbNavigationDropdown = (
     config: KbNavConfig,
