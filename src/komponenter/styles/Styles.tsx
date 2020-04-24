@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import ReactDOMServer from 'react-dom/server';
 
 // Favicons
 const fileFavicon = require('ikoner/favicon/favicon.ico');
@@ -18,9 +17,9 @@ const Styles = () => {
     const Elements = [
         {
             id: 'file-favicon',
-            component: (
+            component: ({ id }: { id: string }) => (
                 <link
-                    id="file-favicon"
+                    id={id}
                     rel="icon"
                     type="image/x-icon"
                     href={`${XP_BASE_URL}${fileFavicon}`}
@@ -29,9 +28,9 @@ const Styles = () => {
         },
         {
             id: 'file-favicon-16x16',
-            component: (
+            component: ({ id }: { id: string }) => (
                 <link
-                    id="file-favicon-16x16"
+                    id={id}
                     rel="icon"
                     type="image/png"
                     sizes="16x16"
@@ -41,9 +40,9 @@ const Styles = () => {
         },
         {
             id: 'file-favicon-32x32',
-            component: (
+            component: ({ id }: { id: string }) => (
                 <link
-                    id="file-favicon-32x32"
+                    id={id}
                     rel="icon"
                     type="image/png"
                     sizes="32x32"
@@ -53,9 +52,9 @@ const Styles = () => {
         },
         {
             id: 'file-apple-touch-icon',
-            component: (
+            component: ({ id }: { id: string }) => (
                 <link
-                    id="file-apple-touch-icon"
+                    id={id}
                     rel="apple-touch-icon"
                     sizes="180x180"
                     href={`${XP_BASE_URL}${fileAppleTouchIcon}`}
@@ -64,9 +63,9 @@ const Styles = () => {
         },
         {
             id: 'file-mask-icon',
-            component: (
+            component: ({ id }: { id: string }) => (
                 <link
-                    id="file-mask-icon"
+                    id={id}
                     rel="mask-icon"
                     color="#5bbad5"
                     href={`${XP_BASE_URL}${fileMaskIcon}`}
@@ -75,9 +74,9 @@ const Styles = () => {
         },
         {
             id: 'decorator-style',
-            component: (
+            component: ({ id }: { id: string }) => (
                 <link
-                    id="decorator-style"
+                    id={id}
                     href={`${APP_BASE_URL}/css/client.css`}
                     rel="stylesheet"
                 />
@@ -103,7 +102,9 @@ const Styles = () => {
     return (
         <>
             {Elements.map((Element) => (
-                <Fragment key={Element.id}>{Element.component}</Fragment>
+                <Fragment key={Element.id}>
+                    <Element.component id={Element.id} />
+                </Fragment>
             ))}
         </>
     );
