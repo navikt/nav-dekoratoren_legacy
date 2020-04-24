@@ -161,26 +161,37 @@ workflows:
   bygg-og-deploy:
     jobs:
       - build-app
-      - bekreft-deploy-til-q6:
-          type: approval
+
+      - build-docker-preprod:
+          name: build-docker-test
           requires:
             - build-app
           filters:
             branches:
               ignore: master
 
-      - build-docker-preprod:
-          name: build-docker-q6
+      - bekreft-deploy-til-q6:
+          type: approval
           requires:
-            - bekreft-deploy-til-q6
+            - build-docker-test
 
       - deploy-til-q6:
           name: manuell-deploy-til-q6
           requires:
-            - build-docker-q6
+            - bekreft-deploy-til-q6
+
+      - bekreft-deploy-til-q1:
+          type: approval
+          requires:
+            - build-docker-test
+
+      - deploy-til-q1:
+          name: manuell-deploy-til-q1
+          requires:
+            - bekreft-deploy-til-q1
 
       - build-docker-preprod:
-          name: build-docker-preprod
+          name: build-docker-preprod-master
           requires:
             - build-app
           filters:
@@ -189,15 +200,15 @@ workflows:
 
       - deploy-til-q6:
           requires:
-            - build-docker-preprod
+            - build-docker-preprod-master
 
       - deploy-til-q2:
           requires:
-            - build-docker-preprod
+            - build-docker-preprod-master
 
       - deploy-til-q1:
           requires:
-            - build-docker-preprod
+            - build-docker-preprod-master
 
       - bekreft-deploy-til-prod:
           type: approval
