@@ -86,6 +86,7 @@ const Styles = () => {
     ];
 
     // CSR (Client-side-rendering)
+    /*
     if (typeof window !== 'undefined') {
         Elements.map((Element) => {
             if (!document.getElementById(Element.id)) {
@@ -96,6 +97,7 @@ const Styles = () => {
             }
         });
     }
+    */
 
     // SSR (Server-side-rendering)
     return (
