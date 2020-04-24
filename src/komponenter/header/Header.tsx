@@ -10,8 +10,9 @@ import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
-import { Language, languageDuck } from '../../store/reducers/language-duck';
-import { verifyWindowObj } from '../../utils/Environment';
+import { Language, languageDuck } from 'store/reducers/language-duck';
+import { verifyWindowObj } from 'utils/Environment';
+import { appendVergic } from 'utils/scripts';
 import debounce from 'lodash.debounce';
 
 interface Windowview {
@@ -42,7 +43,7 @@ export const Header = () => {
     );
     const [headeroffsetHeight, setHeaderoffsetHeight] = useState<
         number | undefined
-    >(undefined);
+    >();
 
     const setElementStyleTop = (
         element: HTMLElement,
@@ -167,11 +168,34 @@ export const Header = () => {
     };
 
     useEffect(() => {
+        hovedmeny = verifyWindowObj()
+            ? document.getElementById(
+                  window.innerWidth > desktopBreakpoint
+                      ? 'hovedmeny'
+                      : 'mobilmeny'
+              )
+            : null;
+        if (hovedmeny && decoratorHeader) {
+            setHeaderoffsetHeight(decoratorHeader.offsetHeight);
+            window.onscroll = function stickyheader() {
+                if (hovedmeny) {
+                    positionNavbar(hovedmeny);
+                }
+            };
+            initializeSticky(hovedmeny, decoratorHeader);
+            window.addEventListener('resize', initStickySelectors);
+            return () =>
+                window.removeEventListener('resize', initStickySelectors);
+        }
+    }, []);
+
+    // External data
+    useEffect(() => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
     }, []);
 
+    // Change context
     useEffect(() => {
-        // Change context
         if (PARAMS.CONTEXT !== MenuValue.IKKEBESTEMT) {
             // Use params if defined
             dispatch(settArbeidsflate(PARAMS.CONTEXT));
@@ -193,33 +217,21 @@ export const Header = () => {
         }
     }, []);
 
+    // Change language
     useEffect(() => {
-        // Change language
         const language = checkUrlForLanguage();
         const action = languageDuck.actionCreator({ language });
         setCookie('decorator-language', language, cookieOptions);
         dispatch(action);
     }, []);
 
+    // External scripts
     useEffect(() => {
-        hovedmeny = verifyWindowObj()
-            ? document.getElementById(
-                  window.innerWidth > desktopBreakpoint
-                      ? 'hovedmeny'
-                      : 'mobilmeny'
-              )
-            : null;
-        if (hovedmeny && decoratorHeader) {
-            setHeaderoffsetHeight(decoratorHeader.offsetHeight);
-            window.onscroll = function stickyheader() {
-                if (hovedmeny) {
-                    positionNavbar(hovedmeny);
-                }
-            };
-            initializeSticky(hovedmeny, decoratorHeader);
-            window.addEventListener('resize', initStickySelectors);
-            return () =>
-                window.removeEventListener('resize', initStickySelectors);
+        if (typeof window) {
+            /*
+                Importeres foreløpig via tagmanager
+                appendVergic();
+             */
         }
     }, []);
 
