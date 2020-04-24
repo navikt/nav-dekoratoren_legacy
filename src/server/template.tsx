@@ -106,7 +106,7 @@ export const template = (req: Request) => {
             }
             </style>
             <div id="styles">
-                <section id="decorator-styles" role="main">${HtmlStyles}</section>
+                <section id="decorator-styles">${HtmlStyles}</section>
             </div>
         </head>
         <body>
