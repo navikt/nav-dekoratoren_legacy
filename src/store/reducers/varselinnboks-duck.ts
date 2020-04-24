@@ -1,15 +1,13 @@
-import {
-    ActionType,
-    Handling,
-    HentVarslerFEILETAction,
-    HentVarslerOKAction,
-    HentVarslerPENDINGAction,
-    SettVarslerLestAction,
-    SettVarslerOKAction,
-} from 'store/actions';
 import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
 import { DataElement, hentVarslerFetch, Status } from 'api/api';
+import { Handling } from '../actions';
+import { ActionType } from '../actions';
+import { HentVarslerOKAction } from '../actions';
+import { HentVarslerFEILETAction } from '../actions';
+import { HentVarslerPENDINGAction } from '../actions';
+import { SettVarslerOKAction } from '../actions';
+import { SettVarslerLestAction } from '../actions';
 
 export interface VarselinnboksState extends DataElement {
     data: Data;
