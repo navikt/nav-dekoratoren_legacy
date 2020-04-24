@@ -52,7 +52,7 @@ export default function reducer(
         case ActionType.SETT_VARSLER_OK:
             return { ...state, status: Status.OK };
         case ActionType.SETT_VARSLER_LEST:
-            return {...state, data: {...state.data, uleste: 0}}
+            return { ...state, data: { ...state.data, uleste: 0 } };
         default:
             return state;
     }

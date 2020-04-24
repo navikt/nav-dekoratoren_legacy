@@ -16,7 +16,7 @@ export const initialLestMeldingState: DataElement = {
 //  Reducer
 export default function reducer(
     state: DataElement = initialLestMeldingState,
-    action: Handling,
+    action: Handling
 ): DataElement {
     switch (action.type) {
         case ActionType.SETT_VARSLER_LEST_OK:
@@ -30,7 +30,11 @@ export default function reducer(
     }
 }
 
-export function settVarslerSomLest(APP_BASE_URL: string, nyesteId: number, dispatch: Dispatch) {
+export function settVarslerSomLest(
+    APP_BASE_URL: string,
+    nyesteId: number,
+    dispatch: Dispatch
+) {
     dispatch(settVarslerLest());
     fetchThenDispatch<number>(
         () => lagreVarslerLestFetch(APP_BASE_URL, nyesteId),
@@ -38,7 +42,7 @@ export function settVarslerSomLest(APP_BASE_URL: string, nyesteId: number, dispa
             ok: settVarslerLestOk,
             feilet: settVarslerLestFeilet,
             pending: settVarslerLestPending,
-        },
+        }
     )(dispatch);
 }
 
