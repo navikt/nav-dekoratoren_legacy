@@ -73,7 +73,7 @@ Sett inn 5 linjer HTML:
 ```
 <html>
   <head>
-    <section id="decorator-styles"></section>
+      <link href=http://<miljø adresse>/dekoratoren/css/client.css rel="stylesheet" /> 
   </head>
   <body>
     <section id="decorator-header" class="navno-dekorator" role="main"></section>
