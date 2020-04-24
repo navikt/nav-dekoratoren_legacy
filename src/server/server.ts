@@ -4,7 +4,8 @@ import 'isomorphic-fetch';
 require('console-stamp')(console, '[HH:MM:ss.l]');
 import NodeCache from 'node-cache';
 import fetch from 'node-fetch';
-import express, { Response } from 'express';
+import express from 'express';
+import cookiesMiddleware from 'universal-cookie-express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
 import dotenv from 'dotenv';
@@ -33,6 +34,7 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 // Cors
 app.disable('x-powered-by');
+app.use(cookiesMiddleware());
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', req.get('origin'));
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
@@ -56,7 +58,8 @@ app.get(pathsForTemplate, (req, res) => {
 });
 
 app.get(`${appBasePath}/env`, (req, res) => {
-    res.send(clientEnv(req));
+    const cookies = (req as any).universalCookies.cookies;
+    res.send(clientEnv({ req, cookies }));
 });
 
 app.get(`${appBasePath}/api/meny`, (req, res) => {
@@ -66,13 +69,13 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
     } else {
         // Fetch fom XP
         fetch(`${process.env.API_XP_MENY_URL}`, { method: 'GET' })
-            .then(xpRes => xpRes.json())
-            .then(xpData => {
+            .then((xpRes) => xpRes.json())
+            .then((xpData) => {
                 mainCache.set(mainCacheKey, xpData, 100);
                 backupCache.set(backupCacheKey, xpData, 0);
                 res.send(xpData);
             })
-            .catch(err => {
+            .catch((err) => {
                 console.error('Failed to fetch decorator - ', err);
             })
 
@@ -89,7 +92,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
                     }
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 console.error('Failed to use backup cache - ', err);
             })
 
@@ -105,7 +108,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
                     }
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 console.error('Failed to use backup mock - ', err);
             });
     }

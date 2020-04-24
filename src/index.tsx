@@ -9,9 +9,9 @@ import { erDev, verifyWindowObj } from './utils/Environment';
 import Footer from './komponenter/footer/Footer';
 import { fetchEnv } from './utils/Environment';
 import { initGA } from './utils/google-analytics';
-import LanguageProvider from './store/providers/Language';
 import Header from './komponenter/header/Header';
 import * as es6promise from 'es6-promise';
+import { CookiesProvider } from 'react-cookie';
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
@@ -29,24 +29,26 @@ if (erDev) {
 const run = () => {
     initGA();
     fetchEnv()
-        .then(environment => {
+        .then((environment) => {
             const store = createStore(environment);
-            ReactDOM.hydrate(
+            ReactDOM.render(
                 <ReduxProvider store={store}>
-                    <LanguageProvider>
+                    <CookiesProvider>
                         <Header />
-                    </LanguageProvider>
+                    </CookiesProvider>
                 </ReduxProvider>,
                 document.getElementById('decorator-header')
             );
-            ReactDOM.hydrate(
+            ReactDOM.render(
                 <ReduxProvider store={store}>
-                    <Footer />
+                    <CookiesProvider>
+                        <Footer />
+                    </CookiesProvider>
                 </ReduxProvider>,
                 document.getElementById('decorator-footer')
             );
         })
-        .catch(e => {
+        .catch((e) => {
             console.error(e);
         });
 };

@@ -29,11 +29,12 @@ export const MinsideMenyDesktop = () => {
     const { environment } = useSelector((state: AppState) => state);
     const { arbeidsflate, innloggetStatus } = useSelector(stateSelector);
     const { isOpen, language, menyPunkter } = useSelector(stateSelector);
+    const minsideMenyPunkter = getMinsideMenyNode(menyPunkter.data, language);
 
     if (
         !innloggetStatus.authenticated ||
         arbeidsflate === MenuValue.SAMARBEIDSPARTNER ||
-        arbeidsflate === MenuValue.IKKEVALGT
+        arbeidsflate === MenuValue.IKKEBESTEMT
     ) {
         return null;
     }
@@ -48,15 +49,11 @@ export const MinsideMenyDesktop = () => {
         );
     }
 
-    const minsideMenyPunkter = getMinsideMenyNode(menyPunkter.data, language);
-    if (!minsideMenyPunkter?.hasChildren) {
-        return null;
-    }
-
     const knapp = (
         <MinsidePersonKnapp
             toggleMenu={() => {
                 triggerGaEvent({
+                    context: arbeidsflate,
                     category: GACategory.Header,
                     action: `minside-meny-${isOpen ? 'close' : 'open'}`,
                 });
@@ -69,6 +66,11 @@ export const MinsideMenyDesktop = () => {
             brukerNavn={innloggetStatus.name}
         />
     );
+
+    // Hide empty menues
+    if (menyPunkter.status === Status.OK && !minsideMenyPunkter?.hasChildren) {
+        return null;
+    }
 
     return (
         <EkspanderbarMeny

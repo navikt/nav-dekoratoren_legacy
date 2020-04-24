@@ -26,7 +26,7 @@ export enum ActionType {
     PRIVATPERSON = 'PRIVATPERSON',
     ARBEIDSGIVER = 'ARBEIDSGIVER',
     SAMARBEIDSPARTNER = 'SAMARBEIDSPARTNER',
-    IKKEVALGT = 'IKKEVALGT',
+    IKKEBESTEMT = 'IKKEBESTEMT',
     TOGGLE_HOVEDMENY = 'TOGGLE_HOVEDMENY',
     TOGGLE_MINSIDE_MENY = 'TOGGLE_MINSIDE_MENY',
     TOGGLE_SOK = 'TOGGLE_SOK',
@@ -113,8 +113,8 @@ export interface SettSamarbeidspartnerAction {
     type: ActionType.SAMARBEIDSPARTNER;
 }
 
-export interface SettArbeidsflateIkkeValgt {
-    type: ActionType.IKKEVALGT;
+export interface SettArbeidsflateIkkeBestemt {
+    type: ActionType.IKKEBESTEMT;
 }
 
 export interface ToggleHovedmeny {
@@ -182,7 +182,7 @@ export type Handling =
     | SettPrivatpersonAction
     | SettArbeidsgiverAction
     | SettSamarbeidspartnerAction
-    | SettArbeidsflateIkkeValgt
+    | SettArbeidsflateIkkeBestemt
     | ToggleHovedmeny
     | ToggleMinsideMeny
     | ToggleSok

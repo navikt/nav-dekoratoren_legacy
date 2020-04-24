@@ -10,33 +10,32 @@ import { MinsideMenyDesktop } from './ekspanderende-menyer/minside-meny-desktop/
 import { VarslerDropdown } from './ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
 import './DesktopMenylinje.less';
 
-const desktopMenylinje = BEMHelper('desktopmeny');
 export const desktopHeaderLogoId = 'desktop-header-logo-id';
 
 const DesktopMenylinje = () => {
+    const cls = BEMHelper('desktopmeny');
     return (
-        <nav className={desktopMenylinje.className} aria-label="Hovedmeny">
-            <div className={desktopMenylinje.element('content')}>
-                <div className={desktopMenylinje.element('elementer')}>
-                    <NavLogoRod
-                        width="88"
-                        height="88"
-                        classname={desktopMenylinje.element('nav-brand')}
-                        id={desktopHeaderLogoId}
-                    />
-                    <HovedmenyDesktop />
-                    <SokDropdown />
-                    <span className={desktopMenylinje.element('spacer')} />
-                    <InnloggingsstatusProvider>
-                        <>
-                            <VarselinnboksProvider>
-                                <VarslerDropdown />
-                            </VarselinnboksProvider>
-                            <MinsideMenyDesktop />
-                            <LoggInnKnapp />
-                        </>
-                    </InnloggingsstatusProvider>
-                </div>
+        <nav className={cls.className} aria-label="Hovedmeny" id="hovedmeny">
+            <div className={cls.element('elementer')}>
+                <NavLogoRod
+                    width="88"
+                    height="88"
+                    classname={cls.element('nav-brand')}
+                    id={desktopHeaderLogoId}
+                />
+                <HovedmenyDesktop />
+                <SokDropdown />
+                <span className={cls.element('spacer')} />
+                <InnloggingsstatusProvider>
+                    <>
+                        <VarselinnboksProvider>
+                            <VarslerDropdown />
+                        </VarselinnboksProvider>
+
+                        <MinsideMenyDesktop />
+                        <LoggInnKnapp />
+                    </>
+                </InnloggingsstatusProvider>
             </div>
         </nav>
     );

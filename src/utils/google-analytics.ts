@@ -1,7 +1,13 @@
 import ReactGA from 'react-ga';
-import { getSessionStorage, NAVHEADER } from './meny-storage-utils';
+import TagManager from 'react-gtm-module';
+import { MenuValue } from './meny-storage-utils';
 
 const trackingId = 'UA-9127381-16';
+
+const tagManagerArgs = {
+    gtmId: 'GTM-PM9RP3',
+    dataLayerName: 'dataLayer',
+};
 
 export enum GACategory {
     Header = 'dekorator-header',
@@ -12,10 +18,13 @@ export enum GACategory {
 export type GAEventArgs = {
     category: GACategory;
     action: string;
+    context?: MenuValue;
     label?: string;
 };
 
 export const initGA = () => {
+    TagManager.initialize(tagManagerArgs);
+
     ReactGA.initialize(trackingId, {
         titleCase: false,
         debug: false,
@@ -23,9 +32,9 @@ export const initGA = () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
 };
 
-export const triggerGaEvent = ({ category, action, label }: GAEventArgs) => {
-    const rolleValg = getSessionStorage(NAVHEADER);
-    const actionFinal = `${rolleValg ? rolleValg + '/' : ''}${action}`;
+export const triggerGaEvent = (props: GAEventArgs) => {
+    const { context, category, action, label } = props;
+    const actionFinal = `${context ? context + '/' : ''}${action}`;
 
     ReactGA.event({
         category: category,

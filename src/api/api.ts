@@ -40,7 +40,8 @@ export const hentVarslerFetch = (
 ): Promise<varselinnboksData> => {
     const tidspunkt = new Date().getTime();
     return fetchToJson(
-        `${APP_BASE_URL}/api/varsler/varsler?noCache=${tidspunkt}&limit=5`
+        `${APP_BASE_URL}/api/varsler/varsler?noCache=${tidspunkt}&limit=5`,
+        { credentials: 'include' }
     );
 };
 
@@ -52,4 +53,5 @@ export const lagreVarslerLestFetch = (
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nyesteId),
+        credentials: 'include',
     });

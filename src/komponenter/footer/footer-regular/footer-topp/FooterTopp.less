@@ -6,6 +6,11 @@
     color: white;
     background-color: @navBlaDarken40;
 
+    .lenke:focus {
+        color: @navBla;
+        background-color: white;
+    }
+
     .topp-kolonner {
         .menylenker-seksjon .menylenker-overskrift {
             font-weight: bolder;
@@ -18,21 +23,21 @@
 
             .til-toppen-innhold {
                 display: flex;
-                justify-content: center;
-                width: 100px;
-
-                .footer-pil-opp {
-                    display: flex;
-                    height: 18px;
-                    margin-left: -14px;
-                    margin-right: 0.4rem;
-                }
-
-                .lenke {
+                justify-content: start;
+                .lenke-med-ikon {
                     text-decoration: none;
-
+                    svg {
+                        fill: white;
+                        stroke: white;
+                    }
                     &:hover {
                         text-decoration: underline;
+                    }
+                    &:focus {
+                        svg {
+                            fill: @navBla;
+                            stroke: @navBla;
+                        }
                     }
                 }
             }
@@ -54,29 +59,8 @@
         margin-bottom: 1.3rem;
     }
 
-    .lenke,
-    .lenkepanel {
+    .lenke {
         color: white;
-    }
-
-    .lenkepanel {
-        background-color: @navBlaDarken40;
-        border: 1px solid white;
-        border-radius: 8px;
-        text-decoration: none;
-
-        &:hover .lenkepanel__heading,
-        &--hover .lenkepanel__heading {
-            color: white;
-        }
-
-        &__heading {
-            min-height: 101px;
-        }
-
-        .typo-undertittel {
-            margin-bottom: 0.6rem;
-        }
     }
 
     @media (min-width: @tabletLimitWidth) {
@@ -104,23 +88,7 @@
             }
 
             .menylenker-seksjon.arbeidsflate {
-                width: 100%;
                 margin-top: 3rem;
-            }
-
-            .arbeidsflatevalg-innhold {
-                margin-bottom: 0;
-
-                .arbeidsflatevalg {
-                    display: flex;
-                    justify-content: space-between;
-                    margin: 0;
-
-                    li {
-                        width: 48%;
-                        margin-bottom: 0;
-                    }
-                }
             }
         }
     }
@@ -185,6 +153,7 @@
                 margin-bottom: 0;
 
                 .arbeidsflatevalg {
+                    margin: 0;
                     flex-direction: column;
                     justify-content: left;
 

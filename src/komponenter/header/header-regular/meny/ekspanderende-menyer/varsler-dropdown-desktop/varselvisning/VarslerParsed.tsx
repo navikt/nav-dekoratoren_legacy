@@ -3,6 +3,8 @@ import htmlReactParser, { DomElement, domToReact } from 'html-react-parser';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import { getKbId, NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
 
 const ikonDefault = 'alarm-ikon';
 const ikonDefaultPath = require('ikoner/varsler/alarm.svg');
@@ -21,10 +23,15 @@ type Props = {
 
 const parseIkon = (ikonStr: string) => {
     const ikon = ikoner[ikonStr] || ikonDefaultPath;
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     return (
         <div className={`varsel-ikon-row`}>
             <div className={`varsel-ikon-container ${ikonStr}`}>
-                <img src={ikon} alt={''} className={`varsel-ikon`} />
+                <img
+                    alt={'varsel-ikon'}
+                    src={`${XP_BASE_URL}${ikon}`}
+                    className={`varsel-ikon`}
+                />
             </div>
         </div>
     );
@@ -36,6 +43,9 @@ const parseLenke = (
     rowIndex: number,
     subIndex: number
 ) => {
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.arbeidsflate.status
+    );
     return (
         <LenkeMedGA
             href={href || ''}
@@ -47,6 +57,7 @@ const parseLenke = (
                 sub: subIndex,
             })}
             gaEventArgs={{
+                context: arbeidsflate,
                 category: GACategory.Header,
                 action: 'varsel-lenke',
                 label: href,

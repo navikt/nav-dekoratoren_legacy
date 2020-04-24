@@ -2,11 +2,12 @@
 @import '../../../../styling-variabler.less';
 
 .desktopmeny {
+    @margin-mellom: 2rem;
+    @margin-mellom-sm: 0.5rem;
+
     width: 100%;
     padding: 0.5rem 0 1rem;
     border-bottom: 2px solid @navBla;
-    @margin-mellom: 2rem;
-    @margin-mellom-sm: 0.5rem;
 
     .margin-left-section() {
         margin-left: @margin-mellom;
@@ -22,17 +23,18 @@
         }
     }
 
-    &__content {
-        width: 100%;
-        margin: 0 auto;
-    }
-
     &__elementer {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
         justify-content: space-between;
         padding: 0;
+        width: 100%;
+        margin: 0 auto;
+
+        @media (min-width: @desktopLimitWidth) {
+            width: @desktopLimitWidth;
+        }
     }
 
     &__nav-brand {
@@ -94,11 +96,5 @@
     .ekspanderbar__container {
         order: 8;
         width: 100%;
-    }
-
-    @media (min-width: @desktopLimitWidth) {
-        &__content {
-            width: @desktopLimitWidth;
-        }
     }
 }

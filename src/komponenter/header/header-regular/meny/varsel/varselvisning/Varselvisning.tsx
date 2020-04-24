@@ -174,12 +174,16 @@ const NyVarsel = ({
     const { API_VARSELINNBOKS_URL } = useSelector(
         (state: AppState) => state.environment
     );
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.arbeidsflate.status
+    );
     return antallVarsler > 5 ? (
         <div className="vis-alle-lenke skillelinje-topp">
             <LenkeMedGA
                 href={API_VARSELINNBOKS_URL}
                 tabIndex={tabIndex ? 0 : -1}
                 gaEventArgs={{
+                    context: arbeidsflate,
                     category: GACategory.Header,
                     action: 'varsler/visalle',
                     label: API_VARSELINNBOKS_URL,

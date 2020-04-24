@@ -3,6 +3,7 @@ import { AppState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
+import { settVarslerSomLest } from 'store/reducers/varsel-lest-duck';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
@@ -17,15 +18,20 @@ const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data,
     innloggetStatus: state.innloggingsstatus.data,
     arbeidsflate: state.arbeidsflate.status,
+    appBaseUrl: state.environment.APP_BASE_URL,
 });
 
 const classname = 'desktop-varsler-dropdown';
 export const desktopVarslerKnappId = `${classname}-knapp-id`;
 
 export const VarslerDropdown = () => {
-    const { isOpen, varsler, innloggetStatus, arbeidsflate } = useSelector(
-        stateSelector
-    );
+    const {
+        isOpen,
+        varsler,
+        innloggetStatus,
+        arbeidsflate,
+        appBaseUrl,
+    } = useSelector(stateSelector);
     const dispatch = useDispatch();
 
     if (
@@ -36,7 +42,11 @@ export const VarslerDropdown = () => {
     }
 
     const toggleDropdown = () => {
+        if (!isOpen && varsler.uleste > 0) {
+            settVarslerSomLest(appBaseUrl, varsler.nyesteId)(dispatch);
+        }
         triggerGaEvent({
+            context: arbeidsflate,
             category: GACategory.Header,
             action: `varsler-${isOpen ? 'close' : 'open'}`,
         });
