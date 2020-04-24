@@ -56,7 +56,7 @@ export const Varselvisning = () => {
     return (
         <div className={classname}>
             <Undertittel>
-                <Tekst id={'varsler'} />
+                <Tekst id={'varsler-tittel'} />
             </Undertittel>
             {visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
             <VarslerParsed varsler={varsler} />

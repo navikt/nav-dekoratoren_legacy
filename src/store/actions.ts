@@ -17,6 +17,7 @@ export enum ActionType {
     SETT_VARSLER_LEST_OK = 'SETT_VARSLER_LEST_OK',
     SETT_VARSLER_LEST_FEILET = 'SETT_VARSLER_LEST_FEILET',
     SETT_VARSLER_LEST_PENDING = 'SETT_VARSLER_LEST_PENDING',
+    SETT_VARSLER_LEST = 'SETT_VARSLER_LEST',
     SETT_LANGUAGE = 'SETT_LANGUAGE',
     SETT_ENVIRONMENT = 'SETT_ENVIRONMENT',
     PRIVATPERSON = 'PRIVATPERSON',
@@ -94,6 +95,10 @@ export interface SettVarslerLestFEILETAction {
     type: ActionType.SETT_VARSLER_LEST_FEILET;
 }
 
+export interface SettVarslerLestAction {
+    type: ActionType.SETT_VARSLER_LEST;
+}
+
 export interface SettPrivatpersonAction {
     type: ActionType.PRIVATPERSON;
 }
@@ -157,6 +162,7 @@ export type Handling =
     | SettVarslerLestOKAction
     | SettVarslerLestFEILETAction
     | SettVarslerLestPENDINGAction
+    | SettVarslerLestAction
     | SettPrivatpersonAction
     | SettArbeidsgiverAction
     | SettSamarbeidspartnerAction

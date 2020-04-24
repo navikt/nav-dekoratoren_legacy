@@ -1,13 +1,15 @@
-import { ActionType } from 'store/actions';
-import { Handling } from 'store/actions';
-import { HentVarslerFEILETAction } from 'store/actions';
-import { HentVarslerOKAction } from 'store/actions';
-import { SettVarslerOKAction } from 'store/actions';
-import { HentVarslerPENDINGAction } from 'store/actions';
+import {
+    ActionType,
+    Handling,
+    HentVarslerFEILETAction,
+    HentVarslerOKAction,
+    HentVarslerPENDINGAction,
+    SettVarslerLestAction,
+    SettVarslerOKAction,
+} from 'store/actions';
 import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
-import { hentVarslerFetch } from 'api/api';
-import { DataElement, Status } from 'api/api';
+import { DataElement, hentVarslerFetch, Status } from 'api/api';
 
 export interface VarselinnboksState extends DataElement {
     data: Data;
@@ -49,6 +51,8 @@ export default function reducer(
             return { ...state, status: Status.FEILET };
         case ActionType.SETT_VARSLER_OK:
             return { ...state, status: Status.OK };
+        case ActionType.SETT_VARSLER_LEST:
+            return {...state, data: {...state.data, uleste: 0}}
         default:
             return state;
     }
@@ -85,4 +89,8 @@ function hentVarslerPending(): HentVarslerPENDINGAction {
 
 export const settVarslerOK = (): SettVarslerOKAction => ({
     type: ActionType.SETT_VARSLER_OK,
+});
+
+export const settVarslerLest = (): SettVarslerLestAction => ({
+    type: ActionType.SETT_VARSLER_LEST,
 });

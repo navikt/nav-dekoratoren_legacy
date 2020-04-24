@@ -71,7 +71,7 @@ const Varselbjelle = (props: VarselbjelleProps) => {
         settClicked(!clicked);
         if (antallUlesteVarsler > 0) {
             settClassname('toggle-varsler-container');
-            settVarslerSomLest(environment.APP_BASE_URL, nyesteId)(dispatch);
+            settVarslerSomLest(environment.APP_BASE_URL, nyesteId, dispatch);
         }
     };
 
@@ -121,7 +121,7 @@ const Varselbjelle = (props: VarselbjelleProps) => {
                             >
                                 <VarselIkon isOpen={clicked} />
                                 <Undertittel className={'varsler-tekst'}>
-                                    <Tekst id={'varsler'} />
+                                    <Tekst id={'varsler-tittel'} />
                                 </Undertittel>
                             </MenylinjeKnapp>
                         </div>
