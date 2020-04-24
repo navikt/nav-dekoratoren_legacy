@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import ReactDOMServer from 'react-dom/server';
@@ -98,7 +98,13 @@ const Styles = () => {
     }
 
     // SSR (Server-side-rendering)
-    return <>Elements.map((Element) => Element.component)</>;
+    return (
+        <>
+            {Elements.map((Element) => (
+                <Fragment key={Element.id}>{Element.component}</Fragment>
+            ))}
+        </>
+    );
 };
 
 export default Styles;

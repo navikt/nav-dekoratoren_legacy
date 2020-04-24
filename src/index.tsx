@@ -36,7 +36,7 @@ const run = () => {
                 <ReduxProvider store={store}>
                     <Styles />
                 </ReduxProvider>,
-                document.getElementById('decorator-styles')
+                document.getElementById('styles')
             );
             ReactDOM.render(
                 <ReduxProvider store={store}>
