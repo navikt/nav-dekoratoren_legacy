@@ -87,8 +87,8 @@ export const template = (req: Request) => {
             />
             <meta name="theme-color" content="#000000" />
             <title>NAV Dekoratør</title>
+            <!-- Decorator development styling -->
             <style>
-            /* Decorator development styling */
             html, body {  height: 100%; }
             .decorator-dev-container {
                 display:flex;
@@ -105,21 +105,25 @@ export const template = (req: Request) => {
                 align-items: center;
             }
             </style>
+            <!-- Styling fetched by apps -->
             <div id="styles">
                 <section id="decorator-styles">${HtmlStyles}</section>
             </div>
         </head>
         <body>
             <div class="decorator-dev-container">
+                <!-- Header fetched by apps -->
                 <div id="${headerId}">
                     <section id="decorator-header" class="navno-dekorator" role="main">${HtmlHeader}</section>
                 </div>
                 <div class="decorator-dummy-app">
                 </div>
+                <!-- Footer fetched by apps -->
                 <div id="${footerId}">
                     <section id="decorator-footer" class="navno-dekorator" role="main">${HtmlFooter}</section>
                 </div>
             </div>
+            <!-- Scripts fetched by apps -->
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
