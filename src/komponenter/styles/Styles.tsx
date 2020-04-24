@@ -16,7 +16,7 @@ const Styles = () => {
     );
 
     const Elements = () => (
-        <>
+        <Fragment>
             <link
                 rel="icon"
                 type="image/x-icon"
@@ -45,17 +45,16 @@ const Styles = () => {
                 href={`${XP_BASE_URL}${fileMaskIcon}`}
             />
             <link href={`${APP_BASE_URL}/css/client.css`} rel="stylesheet" />
-        </>
+        </Fragment>
     );
 
-    // SSR (Server-side-rendering)
     return (
-        <>
+        <Fragment>
             <Elements />
             <MetaTags>
                 <Elements />
             </MetaTags>
-        </>
+        </Fragment>
     );
 };
 
