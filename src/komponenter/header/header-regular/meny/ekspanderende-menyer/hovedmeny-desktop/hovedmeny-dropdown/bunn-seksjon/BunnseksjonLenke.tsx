@@ -44,7 +44,7 @@ const BunnseksjonLenke = ({
             <ul className={cls.element('bunn-lenke-stikkord')}>
                 <Undertekst>
                     {stikkord &&
-                        stikkord.split('|').map(ord => (
+                        stikkord.split('|').map((ord) => (
                             <li key={ord}>
                                 <span className={'bullet'} />
                                 {ord}
