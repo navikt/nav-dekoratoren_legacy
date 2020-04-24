@@ -9,6 +9,7 @@ import { VarselIkon } from '../ekspanderende-menyer/meny-knapper/ikoner/varsel-i
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import VarselKnappMobil from './varselknapp/VarselKnappMobil';
+import { toggleVarselVisning } from 'store/reducers/dropdown-toggle-duck';
 import './Varselbjelle.less';
 
 interface Props {
@@ -56,7 +57,7 @@ const Varselbjelle = (props: VarselbjelleProps) => {
     );
 
     const toggleVarsel = () => {
-        dispatch(toggleVarsel());
+        dispatch(toggleVarselVisning());
     };
 
     const ApneVarselEvent = () => {
