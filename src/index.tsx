@@ -34,12 +34,6 @@ const run = () => {
             const store = createStore(environment);
             ReactDOM.render(
                 <ReduxProvider store={store}>
-                    <Styles />
-                </ReduxProvider>,
-                document.getElementById('decorator-styles')
-            );
-            ReactDOM.render(
-                <ReduxProvider store={store}>
                     <CookiesProvider>
                         <Header />
                     </CookiesProvider>
