@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider as ReduxProvider } from 'react-redux';
-import Header from '../komponenter/header/Header';
-import Footer from '../komponenter/footer/Footer';
-import Styles from '../komponenter/styles/Styles';
+import Header from 'komponenter/header/Header';
+import Footer from 'komponenter/footer/Footer';
+import MetaTagsServer from 'react-meta-tags/server';
+import { MetaTagsContext } from 'react-meta-tags';
 import { Request } from 'express';
 import { clientEnv } from './utils';
-import hash from 'object-hash';
-
-import { createStore } from '../store';
+import { createStore } from 'store';
 import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 import { CookiesProvider } from 'react-cookie';
+import hash from 'object-hash';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -39,6 +39,7 @@ export const template = (req: Request) => {
     }
 
     // Create store based on request params
+    const metaTags = MetaTagsServer();
     const store = createStore(env);
 
     // Fetch params and forward to client
@@ -55,9 +56,11 @@ export const template = (req: Request) => {
     // Render SSR
     const HtmlHeader = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
-            <CookiesProvider cookies={universalCookies}>
-                <Header />
-            </CookiesProvider>
+            <MetaTagsContext extract={metaTags.extract}>
+                <CookiesProvider cookies={universalCookies}>
+                    <Header />
+                </CookiesProvider>
+            </MetaTagsContext>
         </ReduxProvider>
     );
 
@@ -66,12 +69,6 @@ export const template = (req: Request) => {
             <CookiesProvider>
                 <Footer />
             </CookiesProvider>
-        </ReduxProvider>
-    );
-
-    const HtmlStyles = ReactDOMServer.renderToString(
-        <ReduxProvider store={store}>
-            <Styles />
         </ReduxProvider>
     );
 
@@ -107,7 +104,7 @@ export const template = (req: Request) => {
             </style>
             <!-- Styling fetched by apps -->
             <div id="styles">
-                ${HtmlStyles}
+                ${metaTags.renderToString()}
             </div>
         </head>
         <body>

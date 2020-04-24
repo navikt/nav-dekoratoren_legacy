@@ -10,7 +10,6 @@ import { fetchEnv } from './utils/Environment';
 import { initGA } from './utils/google-analytics';
 import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
-import Styles from './komponenter/styles/Styles';
 import * as es6promise from 'es6-promise';
 import { CookiesProvider } from 'react-cookie';
 import './index.less';

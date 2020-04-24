@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import MetaTags from 'react-meta-tags';
@@ -10,13 +10,12 @@ const fileFavicon16x16 = require('ikoner/favicon/favicon-16x16.png');
 const fileFavicon32x32 = require('ikoner/favicon/favicon-32x32.png');
 const fileMaskIcon = require('ikoner/favicon/safari-pinned-tab.svg');
 
-const Styles = () => {
+export const HeadElements = () => {
     const { APP_BASE_URL, XP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
     );
-
-    const Elements = () => (
-        <Fragment>
+    return (
+        <MetaTags>
             <link
                 rel="icon"
                 type="image/x-icon"
@@ -45,17 +44,8 @@ const Styles = () => {
                 href={`${XP_BASE_URL}${fileMaskIcon}`}
             />
             <link href={`${APP_BASE_URL}/css/client.css`} rel="stylesheet" />
-        </Fragment>
-    );
-
-    return (
-        <Fragment>
-            <Elements />
-            <MetaTags>
-                <Elements />
-            </MetaTags>
-        </Fragment>
+        </MetaTags>
     );
 };
 
-export default Styles;
+export default HeadElements;
