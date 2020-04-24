@@ -32,6 +32,7 @@
         "url": "https://github.com/navikt/nav-dekoratoren/issues"
     },
     "dependencies": {
+        "@types/react-gtm-module": "^2.0.0",
         "classnames": "^2.2.6",
         "console-stamp": "^0.2.9",
         "dotenv": "^8.2.0",
