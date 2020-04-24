@@ -12,7 +12,7 @@ import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
 import { Language, languageDuck } from 'store/reducers/language-duck';
 import { verifyWindowObj } from 'utils/Environment';
-import { appendVergic } from 'utils/scripts';
+import { HeadElements } from 'komponenter/HeadElements';
 import debounce from 'lodash.debounce';
 
 interface Windowview {
@@ -237,6 +237,7 @@ export const Header = () => {
 
     return (
         <Fragment>
+            <HeadElements />
             <div
                 className="head-wrapper"
                 style={{ minHeight: headeroffsetHeight }}

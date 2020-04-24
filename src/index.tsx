@@ -10,7 +10,6 @@ import { fetchEnv } from './utils/Environment';
 import { initGA } from './utils/google-analytics';
 import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
-import Styles from './komponenter/styles/Styles';
 import * as es6promise from 'es6-promise';
 import { CookiesProvider } from 'react-cookie';
 import './index.less';
@@ -32,12 +31,6 @@ const run = () => {
     fetchEnv()
         .then((environment) => {
             const store = createStore(environment);
-            ReactDOM.render(
-                <ReduxProvider store={store}>
-                    <Styles />
-                </ReduxProvider>,
-                document.getElementById('decorator-styles')
-            );
             ReactDOM.render(
                 <ReduxProvider store={store}>
                     <CookiesProvider>
