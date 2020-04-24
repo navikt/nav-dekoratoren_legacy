@@ -1,7 +1,13 @@
 import ReactGA from 'react-ga';
+import TagManager from 'react-gtm-module';
 import { MenuValue } from './meny-storage-utils';
 
 const trackingId = 'UA-9127381-16';
+
+const tagManagerArgs = {
+    gtmId: 'GTM-PM9RP3',
+    dataLayerName: 'dataLayer',
+};
 
 export enum GACategory {
     Header = 'dekorator-header',
@@ -17,6 +23,8 @@ export type GAEventArgs = {
 };
 
 export const initGA = () => {
+    TagManager.initialize(tagManagerArgs);
+
     ReactGA.initialize(trackingId, {
         titleCase: false,
         debug: false,
