@@ -81,7 +81,6 @@ Sett inn 5 linjer HTML:
       DIN_APP
     }
     <section id="decorator-footer" class="navno-dekorator" role="main"></section>
-    <section id="decorator-scripts"></section>
     <div id="decorator-env" data-src="<miljø adresse>/dekoratoren/env?{DINE_PARAMETERE}"></div>
     <script type="text/javascript" src="<miljø adresse>/dekoratoren/client.js"></script>
   </body>

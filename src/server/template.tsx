@@ -12,7 +12,6 @@ import { createStore } from '../store';
 import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 import { CookiesProvider } from 'react-cookie';
-import Scripts from '../komponenter/scripts/Scripts';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -76,12 +75,6 @@ export const template = (req: Request) => {
         </ReduxProvider>
     );
 
-    const HtmlScripts = ReactDOMServer.renderToString(
-        <ReduxProvider store={store}>
-            <Scripts />
-        </ReduxProvider>
-    );
-
     const html = `
     <!DOCTYPE html>
     <html lang="no">
@@ -128,7 +121,6 @@ export const template = (req: Request) => {
                 </div>
             </div>
             <div id="scripts">
-                <section id="decorator-scripts">${HtmlScripts}</section>
                 <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
                 <script type="text/javascript" src=${fileScript}></script>
             </div>
