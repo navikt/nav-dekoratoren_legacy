@@ -13,7 +13,7 @@ import './DesktopMenylinje.less';
 const DesktopMenylinje = () => {
     const cls = BEMHelper('desktopmeny');
     return (
-        <nav className={cls.className} aria-label="Hovedmeny">
+        <nav className={cls.className} aria-label="Hovedmeny" id="hovedmeny">
             <div className={cls.element('elementer')}>
                 <NavLogoRod
                     width="88"

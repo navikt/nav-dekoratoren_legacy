@@ -15,14 +15,14 @@ interface Props {
     venstrestiltIkon?: boolean;
 }
 
-const LenkeMedIkon: React.StatelessComponent<Props> = ({
+const LenkeMedIkon = ({
     className,
     href = '#',
     onClick,
     ikon,
     tekst,
     venstrestiltIkon = false,
-}) => {
+}: Props) => {
     const cls = BEMHelper('lenke-med-ikon');
     return (
         <Lenke

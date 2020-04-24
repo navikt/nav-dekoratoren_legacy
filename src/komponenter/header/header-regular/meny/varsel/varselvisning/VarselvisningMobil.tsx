@@ -23,15 +23,15 @@ const VarselvisningMobil = (props: OwnProps) => {
     const cls = BEMHelper(props.visningmenyClassname);
     return (
         <section
-            className={cls.element(
-                'varsel-innhold',
-                props.visvarsel ? 'active' : ''
-            )}
+            className={cls
+                .element('varsel-innhold', props.visvarsel ? 'active' : '')
+                .concat(' ')
+                .concat(cls.element('menuheight'))}
         >
             <div className={cls.element('varsel-wrapper')}>
                 <Lenke
                     href="#https//nav.no/Lukk/varsler"
-                    onClick={event => lukkVarsler(event)}
+                    onClick={(event) => lukkVarsler(event)}
                     tabIndex={props.tabindex ? 0 : -1}
                 >
                     <Undertittel>

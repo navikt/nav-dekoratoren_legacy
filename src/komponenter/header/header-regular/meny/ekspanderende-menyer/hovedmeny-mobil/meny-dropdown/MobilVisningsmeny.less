@@ -9,13 +9,11 @@
         overflow-y: scroll;
         overflow-x: hidden;
         position: fixed;
-        top: 7.875rem;
         left: -(@mobilemenuwidth);
         z-index: 1001;
         padding: 0.75rem 1rem 1rem 1rem;
         background-color: white;
         width: @mobilemenuwidth;
-        height: calc(100% - 7.875rem);
         border-radius: 3px;
         transition: all 0.4s ease-in-out;
 
@@ -23,6 +21,11 @@
         &--aktive {
             left: 0;
         }
+    }
+
+    &__menuheight {
+        top: 7.875rem;
+        height: calc(100% - 7.875rem);
     }
 
     &__startmeny {
