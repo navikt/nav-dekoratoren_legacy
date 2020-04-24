@@ -72,6 +72,7 @@ export const template = (req: Request) => {
         </ReduxProvider>
     );
 
+    const HtmlMetaTags = metaTags.renderToString();
     const html = `
     <!DOCTYPE html>
     <html lang="no">
@@ -104,7 +105,7 @@ export const template = (req: Request) => {
             </style>
             <!-- Styling fetched by apps -->
             <div id="styles">
-                ${metaTags.renderToString()}
+                ${HtmlMetaTags}
             </div>
         </head>
         <body>
