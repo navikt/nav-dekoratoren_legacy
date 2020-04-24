@@ -70,6 +70,7 @@ const browserConfig = {
                         ],
                         loader: 'file-loader',
                         options: {
+                            esModule:false,
                             name: '/media/[name].[ext]',
                             emit: false,
                         },
