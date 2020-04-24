@@ -98,7 +98,7 @@ const Styles = () => {
     }
 
     // SSR (Server-side-rendering)
-    return Elements.map((Element) => Element.component);
+    return <>Elements.map((Element) => Element.component)</>;
 };
 
 export default Styles;
