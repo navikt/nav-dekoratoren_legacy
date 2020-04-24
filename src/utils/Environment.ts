@@ -1,15 +1,15 @@
 import { EnvironmentState } from 'store/reducers/environment-duck';
 
 export const fetchEnv = (): Promise<EnvironmentState> => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         const envDom = document.getElementById('decorator-env');
         if (envDom) {
             const url = envDom.getAttribute('data-src');
             if (url) {
                 fetch(url, { credentials: 'include' })
-                    .then(result => result.json())
-                    .then(result => resolve(result))
-                    .catch(error => {
+                    .then((result) => result.json())
+                    .then((result) => resolve(result))
+                    .catch((error) => {
                         throw error;
                     });
             }

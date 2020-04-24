@@ -43,7 +43,7 @@ export const VarslerDropdown = () => {
 
     const toggleDropdown = () => {
         if (!isOpen && varsler.uleste > 0) {
-            settVarslerSomLest(appBaseUrl, varsler.nyesteId)(dispatch);
+            settVarslerSomLest(appBaseUrl, varsler.nyesteId, dispatch);
         }
         triggerGaEvent({
             context: arbeidsflate,

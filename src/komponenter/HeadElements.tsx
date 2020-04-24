@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import MetaTags from 'react-meta-tags';
 
 // Favicons
 const fileFavicon = require('ikoner/favicon/favicon.ico');
@@ -9,13 +10,12 @@ const fileFavicon16x16 = require('ikoner/favicon/favicon-16x16.png');
 const fileFavicon32x32 = require('ikoner/favicon/favicon-32x32.png');
 const fileMaskIcon = require('ikoner/favicon/safari-pinned-tab.svg');
 
-const Styles = () => {
+export const HeadElements = () => {
     const { APP_BASE_URL, XP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
     );
-
     return (
-        <>
+        <MetaTags>
             <link
                 rel="icon"
                 type="image/x-icon"
@@ -40,14 +40,12 @@ const Styles = () => {
             />
             <link
                 rel="mask-icon"
-                href={`${XP_BASE_URL}${fileMaskIcon}`}
                 color="#5bbad5"
+                href={`${XP_BASE_URL}${fileMaskIcon}`}
             />
-            <meta name="msapplication-TileColor" content="#ffffff" />
-            <meta name="theme-color" content="#ffffff" />
             <link href={`${APP_BASE_URL}/css/client.css`} rel="stylesheet" />
-        </>
+        </MetaTags>
     );
 };
 
-export default Styles;
+export default HeadElements;

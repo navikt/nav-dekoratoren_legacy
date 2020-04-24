@@ -18,7 +18,7 @@ export const VarselIkon = ({ isOpen, antallUleste = 0 }: Props) => {
                 <div className={cls.element('bell', isOpen ? 'open' : '')} />
                 <div className={cls.element('lip', isOpen ? 'open' : '')} />
                 <div className={cls.element('clapper', isOpen ? 'open' : '')} />
-                {!!antallUleste && (
+                {antallUleste > 0 && (
                     <div
                         className={cls.element(
                             'ulest-sirkel',
