@@ -7,6 +7,7 @@ import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
 import { lagreVarslerLestFetch } from 'api/api';
 import { DataElement, Status } from 'api/api';
+import { settVarslerLest } from './varselinnboks-duck';
 
 export const initialLestMeldingState: DataElement = {
     status: Status.IKKE_STARTET,
@@ -31,16 +32,18 @@ export default function reducer(
 
 export function settVarslerSomLest(
     APP_BASE_URL: string,
-    nyesteId: number
-): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<number>(
+    nyesteId: number,
+    dispatch: Dispatch
+) {
+    dispatch(settVarslerLest());
+    fetchThenDispatch<number>(
         () => lagreVarslerLestFetch(APP_BASE_URL, nyesteId),
         {
             ok: settVarslerLestOk,
             feilet: settVarslerLestFeilet,
             pending: settVarslerLestPending,
         }
-    );
+    )(dispatch);
 }
 
 function settVarslerLestOk(nyesteId: number): SettVarslerLestOKAction {

@@ -49,7 +49,7 @@ export const lagreVarslerLestFetch = (
     APP_BASE_URL: string,
     nyesteId: number
 ): Promise<number> =>
-    fetchToJson(`${APP_BASE_URL}/api/varsler/rest/varsel/erles/${nyesteId}`, {
+    fetchToJson(`${APP_BASE_URL}/api/varsler/rest/varsel/erlest/${nyesteId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nyesteId),
