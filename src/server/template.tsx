@@ -12,6 +12,7 @@ import { createStore } from '../store';
 import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 import { CookiesProvider } from 'react-cookie';
+import Scripts from '../komponenter/scripts/Scripts';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -71,9 +72,13 @@ export const template = (req: Request) => {
 
     const HtmlStyles = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
-            <CookiesProvider cookies={universalCookies}>
-                <Styles />
-            </CookiesProvider>
+            <Styles />
+        </ReduxProvider>
+    );
+
+    const HtmlScripts = ReactDOMServer.renderToString(
+        <ReduxProvider store={store}>
+            <Scripts />
         </ReduxProvider>
     );
 
@@ -114,17 +119,17 @@ export const template = (req: Request) => {
         <body>
             <div class="decorator-dev-container">
                 <div id="${headerId}">
-                    <section class="navno-dekorator" id="decorator-header" role="main">${HtmlHeader}</section>
+                    <section id="decorator-header" class="navno-dekorator" role="main">${HtmlHeader}</section>
                 </div>
                 <div class="decorator-dummy-app">
                 </div>
                 <div id="${footerId}">
-                    <section class="navno-dekorator" id="decorator-footer" role="main">${HtmlFooter}</section>
+                    <section id="decorator-footer" class="navno-dekorator" role="main">${HtmlFooter}</section>
                 </div>
             </div>
             <div id="scripts">
+                <section id="decorator-scripts">${HtmlScripts}</section>
                 <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
-                <script src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js"></script>
                 <script type="text/javascript" src=${fileScript}></script>
             </div>
             <div id="skiplinks"></div>
