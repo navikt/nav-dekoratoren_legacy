@@ -18,17 +18,8 @@ if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
 
-// Favicons
-const fileFavicon = require('../../src/ikoner/favicon/favicon.ico');
-const fileAppleTouchIcon = require('../../src/ikoner/favicon/apple-touch-icon.png');
-const fileFavicon16x16 = require('../../src/ikoner/favicon/favicon-16x16.png');
-const fileFavicon32x32 = require('../../src/ikoner/favicon/favicon-32x32.png');
-const fileMaskIcon = require('../../src/ikoner/favicon/safari-pinned-tab.svg');
-
 // Resources
-const baseUrl = `${process.env.APP_BASE_URL}`;
 const fileEnv = `${process.env.APP_BASE_URL}/env`;
-const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
 const fileScript = `${process.env.APP_BASE_URL}/client.js`;
 
 const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
@@ -133,8 +124,8 @@ export const template = (req: Request) => {
             </div>
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
-                <script type="text/javascript" src=${fileScript}></script>
                 <script src="https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js"></script>
+                <script type="text/javascript" src=${fileScript}></script>
             </div>
             <div id="skiplinks"></div>
             <div id="megamenu-resources"></div>
