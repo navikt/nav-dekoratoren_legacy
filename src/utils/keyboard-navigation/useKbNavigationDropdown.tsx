@@ -35,7 +35,7 @@ export const useKbNavigationDropdown = (
             if (parentNode) {
                 parentNode[parentNodeEdge] = parentNode;
                 if (subNodeMap && subNodeMap[currentNode.id]) {
-                    selectNode(parentNode, node =>
+                    selectNode(parentNode, (node) =>
                         dispatch(setCurrentNode(node))
                     );
                 }

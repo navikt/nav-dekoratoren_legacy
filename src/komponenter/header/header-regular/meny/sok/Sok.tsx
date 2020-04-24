@@ -90,15 +90,15 @@ class Sok extends React.Component<StateProps & Props, InputState> {
         const { APP_BASE_URL, XP_BASE_URL } = this.props.environment;
         const url = `${APP_BASE_URL}/api/sok`;
         fetch(`${url}?ord=${input}`)
-            .then(response => {
+            .then((response) => {
                 if (response.ok) {
                     return response;
                 } else {
                     throw new Error(response.statusText);
                 }
             })
-            .then(response => response.json())
-            .then(json => {
+            .then((response) => response.json())
+            .then((json) => {
                 if (this.ismounted) {
                     const tmp = [...json.hits];
                     tmp.unshift(
@@ -269,7 +269,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         this.handleValueChange(changes);
                     }}
                     inputValue={selectedInput}
-                    itemToString={item => this.input(item)}
+                    itemToString={(item) => this.input(item)}
                 >
                     {({
                         getInputProps,
