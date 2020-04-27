@@ -9,8 +9,8 @@ import VarselinnboksProvider from 'store/providers/Varselinnboks';
 import Varselbjelle from './varsel/Varselbjelle';
 import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
-import './MobilMenylinje.less';
 import { LoggInnKnappMobil } from 'komponenter/header/header-regular/meny/logginn/LoggInnKnappMobil';
+import './MobilMenylinje.less';
 
 const mobilClass = BEMHelper('mobilmeny');
 

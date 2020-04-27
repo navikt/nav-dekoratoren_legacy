@@ -6,15 +6,13 @@ import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 
 export const LoggInnKnappMobil = () => {
     const knapp = ({ handleButtonClick, tekst }: LoggInnKnappProps) => (
-        <div className="media-sm-mobil login-mobil">
-            <KnappBase
-                type="flat"
-                className="mobil-login-knapp"
-                onClick={handleButtonClick}
-            >
-                <Undertittel className="knappetekst">{tekst}</Undertittel>
-            </KnappBase>
-        </div>
+        <KnappBase
+            type="flat"
+            className="mobil-login-knapp"
+            onClick={handleButtonClick}
+        >
+            <Undertittel className="knappetekst">{tekst}</Undertittel>
+        </KnappBase>
     );
 
     return <LoggInn Knapp={knapp} />;
