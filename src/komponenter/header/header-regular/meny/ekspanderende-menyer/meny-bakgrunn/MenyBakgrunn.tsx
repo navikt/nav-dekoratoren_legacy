@@ -14,7 +14,7 @@ const MenyBakgrunn = () => {
         toggles.minside ||
         toggles.sok ||
         toggles.undermeny ||
-        toggles.varsel;
+        toggles.varsler;
 
     return (
         <div
