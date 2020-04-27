@@ -4,7 +4,6 @@ export interface DropdownState {
     hovedmeny: boolean;
     minside: boolean;
     sok: boolean;
-    varsel: boolean;
     undermeny: boolean;
     varsler: boolean;
 }
@@ -13,17 +12,12 @@ export const initialState: DropdownState = {
     hovedmeny: false,
     minside: false,
     sok: false,
-    varsel: false,
     undermeny: false,
     varsler: false,
 };
 
 export const toggleUndermenyVisning = () => ({
     type: ActionType.TOGGLE_UNDERMENY,
-});
-
-export const toggleVarselVisning = () => ({
-    type: ActionType.TOGGLE_VARSEL,
 });
 
 export const toggleHovedmeny = () => ({
@@ -59,9 +53,6 @@ export const reducer = (
         }
         case ActionType.TOGGLE_SOK: {
             return { ...initialState, sok: !state.sok };
-        }
-        case ActionType.TOGGLE_VARSEL: {
-            return { ...initialState, varsel: !state.varsel };
         }
         case ActionType.TOGGLE_UNDERMENY: {
             return { ...state, undermeny: !state.undermeny };

@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import VarselinnboksProvider from 'store/providers/Varselinnboks';
 import Varselbjelle from './varsel/Varselbjelle';
-import { toggleVarselVisning } from 'store/reducers/dropdown-toggle-duck';
 import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
+import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import './MobilMenylinje.less';
 
 const mobilClass = BEMHelper('mobilmeny');
@@ -19,7 +19,7 @@ interface Props {
 }
 const stateSelector = (state: AppState) => ({
     innloggingsstatus: state.innloggingsstatus,
-    visVarsel: state.dropdownToggles.varsel,
+    visVarsel: state.dropdownToggles.varsler,
 });
 
 const MobilMenylinje = ({ language }: Props) => {
@@ -27,7 +27,7 @@ const MobilMenylinje = ({ language }: Props) => {
     const { innloggingsstatus, visVarsel } = useSelector(stateSelector);
 
     const LukkVarsel = ({ clicked }: { clicked: boolean }) => {
-        return <>{!clicked && visVarsel && dispatch(toggleVarselVisning())}</>;
+        return <>{!clicked && visVarsel && dispatch(toggleVarsler())}</>;
     };
 
     return (

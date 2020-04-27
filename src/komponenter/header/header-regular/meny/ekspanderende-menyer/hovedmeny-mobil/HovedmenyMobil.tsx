@@ -22,7 +22,7 @@ const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
     hovedIsOpen: state.dropdownToggles.hovedmeny,
     underIsOpen: state.dropdownToggles.undermeny,
-    varselIsOpen: state.dropdownToggles.varsel,
+    varselIsOpen: state.dropdownToggles.varsler,
 });
 
 const classname = 'mobilmeny';
