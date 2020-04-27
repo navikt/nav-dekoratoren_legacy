@@ -221,7 +221,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     arbeidsflate: state.arbeidsflate.status,
-    visvarsel: state.dropdownToggles.varsel,
+    visvarsel: state.dropdownToggles.varsler,
     innloggingsstatus: state.innloggingsstatus,
 });
 

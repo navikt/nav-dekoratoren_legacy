@@ -19,7 +19,7 @@ interface Props {
 }
 const stateSelector = (state: AppState) => ({
     innloggingsstatus: state.innloggingsstatus,
-    visVarsel: state.dropdownToggles.varsel,
+    visVarsel: state.dropdownToggles.varsler,
 });
 
 const MobilMenylinje = ({ language }: Props) => {
