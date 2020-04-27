@@ -6,7 +6,7 @@ import { reducers } from 'store/reducers';
 import { createStore, Store } from 'redux';
 import MobilMenylinje from './MobilMenylinje';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
-import LoggInnKnapp from './logginn/Logg-inn-knapp';
+import LoggInn from 'komponenter/header/header-regular/meny/logginn/LoggInn';
 import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 
 const store = createStore(reducers);
@@ -24,10 +24,10 @@ describe('<MobilMenylinje /> sjekk at komponent finner logo', () => {
     });
 });
 
-describe('<LoggInnKnapp/> sjekk at komponent finner logg-inn knapp', () => {
-    it('Skal rendre <LoggInnKnapp/> komponent', () => {
+describe('<LoggInn/> sjekk at komponent finner logg-inn knapp', () => {
+    it('Skal rendre <LoggInn/> komponent', () => {
         const wrapper = getWrapper(store);
-        expect(wrapper.find(LoggInnKnapp)).toHaveLength(1);
+        expect(wrapper.find(LoggInn)).toHaveLength(1);
     });
 });
 
