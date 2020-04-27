@@ -6,7 +6,6 @@ import Navlogo from 'ikoner/meny/Navlogo';
 import Navn from '../navn/Navn';
 import './HeaderSimple.less';
 
-
 export const SimpleHeader = () => {
     const cls = BEMHelper('simple-header');
 

@@ -23,19 +23,13 @@ describe('<LoggInnKnapp />', () => {
 
     // Logged out
     it('Teksten på knappen er LOGG INN når bruker er uinnlogget', () => {
-        expect(
-            mountWithRedux(store)
-                .find('.knappetekst')
-                .at(0)
-                .text()
-        ).toEqual('Logg inn');
+        expect(mountWithRedux(store).find('.knappetekst').at(0).text()).toEqual(
+            'Logg inn'
+        );
 
-        expect(
-            mountWithRedux(store)
-                .find('.login-knapp')
-                .at(0)
-                .text()
-        ).toEqual('Logg inn');
+        expect(mountWithRedux(store).find('.login-knapp').at(0).text()).toEqual(
+            'Logg inn'
+        );
     });
 
     it('Teksten på knappen er LOGG UT når bruker er innlogget', () => {
@@ -49,16 +43,10 @@ describe('<LoggInnKnapp />', () => {
         );
 
         expect(
-            mountWithRedux(store)
-                .find('.knappetekst')
-                .first()
-                .text()
+            mountWithRedux(store).find('.knappetekst').first().text()
         ).toEqual('Logg ut');
         expect(
-            mountWithRedux(store)
-                .find('.login-knapp')
-                .first()
-                .text()
+            mountWithRedux(store).find('.login-knapp').first().text()
         ).toEqual('Logg ut');
     });
 });
