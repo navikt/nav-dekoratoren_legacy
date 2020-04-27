@@ -7,8 +7,6 @@ import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
 import { Undertittel } from 'nav-frontend-typografi';
 import { getKbId, NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
-import { useKbNavigationDropdown } from 'utils/keyboard-navigation/useKbNavigationDropdown';
 import './Varselvisning.less';
 
 const stateSelector = (state: AppState) => ({
@@ -18,12 +16,7 @@ const stateSelector = (state: AppState) => ({
     language: state.language.language,
 });
 
-type Props = {
-    isOpen: boolean;
-};
-
 const classname = 'varsler-display-desktop';
-const nodeGroup = NodeGroup.Varsler;
 
 const alleVarslerLenke = (rowIndex: number, nyeVarslerMsg: string) => {
     const { API_VARSELINNBOKS_URL } = useSelector(
@@ -33,7 +26,11 @@ const alleVarslerLenke = (rowIndex: number, nyeVarslerMsg: string) => {
         <div className="dekorator-vis-alle-lenke">
             <LenkeMedGA
                 href={API_VARSELINNBOKS_URL}
-                id={getKbId(nodeGroup, { col: 0, row: rowIndex, sub: 0 })}
+                id={getKbId(NodeGroup.Varsler, {
+                    col: 0,
+                    row: rowIndex,
+                    sub: 0,
+                })}
                 tabIndex={0}
                 gaEventArgs={{
                     category: GACategory.Header,
@@ -48,11 +45,10 @@ const alleVarslerLenke = (rowIndex: number, nyeVarslerMsg: string) => {
     );
 };
 
-export const Varselvisning = ({ isOpen }: Props) => {
+export const Varselvisning = () => {
     const { varsler, varslerAntall, varslerUleste, language } = useSelector(
         stateSelector
     );
-    useKbNavigationDropdown(configForNodeGroup[nodeGroup], isOpen);
 
     const nyeVarslerMsg =
         varslerUleste > 0

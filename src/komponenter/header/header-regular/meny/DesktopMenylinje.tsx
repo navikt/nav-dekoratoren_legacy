@@ -8,12 +8,15 @@ import { SokDropdown } from './ekspanderende-menyer/sok-dropdown-desktop/SokDrop
 import { HovedmenyDesktop } from './ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
 import { MinsideMenyDesktop } from './ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
 import { VarslerDropdown } from './ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
+import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import './DesktopMenylinje.less';
 
 export const desktopHeaderLogoId = 'desktop-header-logo-id';
 
 const DesktopMenylinje = () => {
     const cls = BEMHelper('desktopmeny');
+    const kbNavMainState = useKbNavMain();
+
     return (
         <nav className={cls.className} aria-label="Hovedmeny" id="hovedmeny">
             <div className={cls.element('elementer')}>
@@ -23,16 +26,15 @@ const DesktopMenylinje = () => {
                     classname={cls.element('nav-brand')}
                     id={desktopHeaderLogoId}
                 />
-                <HovedmenyDesktop />
-                <SokDropdown />
+                <HovedmenyDesktop kbNavMainState={kbNavMainState} />
+                <SokDropdown kbNavMainState={kbNavMainState} />
                 <span className={cls.element('spacer')} />
                 <InnloggingsstatusProvider>
                     <>
                         <VarselinnboksProvider>
-                            <VarslerDropdown />
+                            <VarslerDropdown kbNavMainState={kbNavMainState} />
                         </VarselinnboksProvider>
-
-                        <MinsideMenyDesktop />
+                        <MinsideMenyDesktop kbNavMainState={kbNavMainState} />
                         <LoggInnKnapp />
                     </>
                 </InnloggingsstatusProvider>

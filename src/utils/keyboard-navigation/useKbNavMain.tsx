@@ -3,12 +3,15 @@ import { useEffect, useState } from 'react';
 import {
     addEventListenersAndReturnHandlers,
     createHeaderMainGraph,
-    kbNavInitialState,
     removeListeners,
 } from './kb-navigation-setup';
-import { GraphData, KbNaviNode } from './kb-navigation';
-import { lukkAlleDropdowns } from '../../store/reducers/dropdown-toggle-duck';
-import { AppState } from '../../store/reducers';
+import { KbNavGraph, KbNavNode } from './kb-navigation';
+import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
+import { AppState } from 'store/reducers';
+import { KbNavNodeMap } from './kb-navigation';
+import { createKbNaviNode } from './kb-navigation';
+import { desktopHeaderLogoId } from 'komponenter/header/header-regular/meny/DesktopMenylinje';
+import { NodeGroup } from './kb-navigation';
 
 const stateSelector = (state: AppState) => ({
     language: state.language.language,
@@ -17,13 +20,36 @@ const stateSelector = (state: AppState) => ({
     innloggingsStatus: state.innloggingsstatus.data,
 });
 
-export type KeyboardNaviState = {
-    currentNode: KbNaviNode;
-    mainGraph: GraphData;
-    subGraph?: GraphData;
+export type KbNavMain = {
+    mainNodeMap: KbNavNodeMap;
+    subNodeMap?: KbNavNodeMap;
+    currentNode: KbNavNode;
+    setCurrentNode: (node: KbNavNode) => void;
+    setSubGraph: (graph: KbNavGraph) => void;
 };
 
-export const useKbNavigationHeader = () => {
+type KeyboardNavState = {
+    currentNode: KbNavNode;
+    mainGraph: KbNavGraph;
+    subGraph?: KbNavGraph;
+};
+
+export const kbMasterNode = createKbNaviNode(
+    desktopHeaderLogoId,
+    { col: 0, row: 1, sub: 0 },
+    NodeGroup.HeaderMenylinje
+);
+
+export const kbNavInitialState: KeyboardNavState = {
+    currentNode: kbMasterNode,
+    mainGraph: {
+        group: kbMasterNode.group,
+        rootNode: kbMasterNode,
+        nodeMap: { [kbMasterNode.id]: kbMasterNode },
+    },
+};
+
+export const useKbNavMain = (): KbNavMain => {
     const {
         language,
         arbeidsflate,
@@ -32,13 +58,13 @@ export const useKbNavigationHeader = () => {
     } = useSelector(stateSelector);
     const dispatch = useDispatch();
 
-    const [kbNavState, setKbNavState] = useState<KeyboardNaviState>(
+    const [kbNavState, setKbNavState] = useState<KeyboardNavState>(
         kbNavInitialState
     );
-    const setCurrentNode = (node: KbNaviNode) => {
+    const setCurrentNode = (node: KbNavNode) => {
         setKbNavState({ ...kbNavState, currentNode: node });
     };
-    const setSubGraph = (graph: GraphData) => {
+    const setSubGraph = (graph: KbNavGraph) => {
         setKbNavState({ ...kbNavState, subGraph: graph });
     };
 
@@ -61,7 +87,7 @@ export const useKbNavigationHeader = () => {
                 ...kbNavState.mainGraph.nodeMap,
                 ...kbNavState.subGraph?.nodeMap,
             },
-            (node: KbNaviNode) => dispatch(setCurrentNode(node)),
+            (node: KbNavNode) => setCurrentNode(node),
             () => dispatch(lukkAlleDropdowns())
         );
 

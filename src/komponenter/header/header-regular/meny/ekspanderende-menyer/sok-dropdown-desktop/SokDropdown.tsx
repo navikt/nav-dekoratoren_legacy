@@ -9,10 +9,11 @@ import Tekst from 'tekster/finn-tekst';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import SokMenyIkon from '../meny-knapper/ikoner/sok-ikon/SokMenyIkon';
-import './SokDropdown.less';
 import { NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
-import { useKbNavigationDropdown } from '../../../../../../utils/keyboard-navigation/useKbNavigationDropdown';
+import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
+import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
+import './SokDropdown.less';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.sok,
@@ -22,10 +23,14 @@ const classname = 'desktop-sok-dropdown';
 export const desktopSokDropdownClassname = classname;
 export const desktopSokKnappId = `${classname}-knapp-id`;
 
-export const SokDropdown = () => {
+type Props = {
+    kbNavMainState: KbNavMain;
+};
+
+export const SokDropdown = ({ kbNavMainState }: Props) => {
     const { isOpen } = useSelector(stateSelector);
     const dispatch = useDispatch();
-    useKbNavigationDropdown(configForNodeGroup[NodeGroup.Sok], isOpen);
+    useKbNavSub(configForNodeGroup[NodeGroup.Sok], kbNavMainState, isOpen);
 
     const toggleMenu = () => {
         triggerGaEvent({

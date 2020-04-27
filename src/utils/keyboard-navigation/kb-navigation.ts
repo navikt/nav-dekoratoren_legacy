@@ -28,48 +28,48 @@ export type NodeIndex = {
     sub: number;
 };
 
-export type GraphData = {
+export type KbNavGraph = {
     group: NodeGroup;
-    rootNode: KbNaviNode;
-    nodeMap: KbNaviNodeMap;
+    rootNode: KbNavNode;
+    nodeMap: KbNavNodeMap;
 };
 
-export type KbNaviNode = {
+export type KbNavNode = {
     id: string;
     index: NodeIndex;
     group: NodeGroup;
-    [NodeEdge.Top]: KbNaviNode;
-    [NodeEdge.Bottom]: KbNaviNode;
-    [NodeEdge.Left]: KbNaviNode;
-    [NodeEdge.Right]: KbNaviNode;
+    [NodeEdge.Top]: KbNavNode;
+    [NodeEdge.Bottom]: KbNavNode;
+    [NodeEdge.Left]: KbNavNode;
+    [NodeEdge.Right]: KbNavNode;
 };
 
-export type KbNaviNodeMap = {
-    [id: string]: KbNaviNode;
+export type KbNavNodeMap = {
+    [id: string]: KbNavNode;
 };
 
 export type KbIdMap = {
     [id: string]: string;
 };
 
-export type NodeSetterCallback = (node: KbNaviNode) => void;
+export type NodeSetterCallback = (node: KbNavNode) => void;
 
 export function createKbNaviNode(
     id: string,
     index: NodeIndex,
     group: NodeGroup
-): KbNaviNode {
-    const node: Partial<KbNaviNode> = {
+): KbNavNode {
+    const node: Partial<KbNavNode> = {
         id: id,
         index: index,
         group: group,
     };
-    node[NodeEdge.Top] = node as KbNaviNode;
-    node[NodeEdge.Bottom] = node as KbNaviNode;
-    node[NodeEdge.Left] = node as KbNaviNode;
-    node[NodeEdge.Right] = node as KbNaviNode;
+    node[NodeEdge.Top] = node as KbNavNode;
+    node[NodeEdge.Bottom] = node as KbNavNode;
+    node[NodeEdge.Left] = node as KbNavNode;
+    node[NodeEdge.Right] = node as KbNavNode;
 
-    return node as KbNaviNode;
+    return node as KbNavNode;
 }
 
 export const getKbId = (
@@ -120,7 +120,7 @@ const scrollIfNearViewBounds = (element: HTMLElement) => {
 };
 
 export const selectNode = (
-    node: KbNaviNode,
+    node: KbNavNode,
     callback: NodeSetterCallback = () => null,
     focus = true
 ) => {
@@ -139,7 +139,7 @@ export const selectNode = (
 };
 
 const kbHandler = (
-    currentNode: KbNaviNode,
+    currentNode: KbNavNode,
     setCurrentNode: NodeSetterCallback,
     lukkAlleDropdowns: () => void
 ) => (event: KeyboardEvent) => {
@@ -170,8 +170,8 @@ const kbHandler = (
 };
 
 const focusHandler = (
-    currentNode: KbNaviNode,
-    nodeMap: KbNaviNodeMap,
+    currentNode: KbNavNode,
+    nodeMap: KbNavNodeMap,
     setCurrentNode: NodeSetterCallback,
     currentKbHandler: (e: KeyboardEvent) => void
 ) => (event: FocusEvent) => {
@@ -189,7 +189,7 @@ export const createNaviGraph = (
     rootIndex: NodeIndex,
     maxColsPerRow: Array<number>,
     idMap: KbIdMap = {}
-): GraphData => {
+): KbNavGraph => {
     const nodeMap = {};
     const rootNode = buildGraphAndGetRootNode(
         group,

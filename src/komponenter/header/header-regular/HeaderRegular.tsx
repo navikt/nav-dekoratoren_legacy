@@ -5,12 +5,10 @@ import { Language } from 'store/reducers/language-duck';
 import MobilMenylinje from './meny/MobilMenylinje';
 import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
 import DesktopMenylinje from './meny/DesktopMenylinje';
-import { useKbNavigationHeader } from '../../../utils/keyboard-navigation/useKbNavigationHeader';
 
 export const RegularHeader = () => {
     const { COOKIES } = useSelector((state: AppState) => state.environment);
     const language = useSelector((state: AppState) => state.language.language);
-    useKbNavigationHeader();
 
     const showContextMenu =
         (language === Language.IKKEBESTEMT &&

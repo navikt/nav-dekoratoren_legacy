@@ -2,10 +2,6 @@ import { Data as innloggingsstatusData } from './reducers/innloggingsstatus-duck
 import { Data as varselinnboksData } from './reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from './reducers/menu-duck';
 import { EnvironmentState } from './reducers/environment-duck';
-import {
-    GraphData,
-    KbNaviNode,
-} from '../utils/keyboard-navigation/kb-navigation';
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',
@@ -33,9 +29,7 @@ export enum ActionType {
     TOGGLE_SOK = 'TOGGLE_SOK',
     TOGGLE_VARSLER = 'TOGGLE_VARSLER',
     TOGGLE_LUKK_ALLE = 'TOGGLE_LUKK_ALLE',
-    SETT_KB_MAIN_GRAPH = 'SETT_KB_MAIN_GRAPH',
-    SETT_KB_SUB_GRAPH = 'SETT_KB_SUB_GRAPH',
-    SETT_KB_NODE_CURRENT = 'SETT_KB_NODE_CURRENT',
+    SETT_KB_NAV_MAIN = 'SETT_KB_NAV_MAIN',
     TOGGLE_VARSEL = 'TOGGLE_VARSEL',
     TOGGLE_UNDERMENY = 'TOGGLE_UNDERMENY',
     TOGGLE_HOVEDOGUNDERMENY = 'TOGGLE_HOVEDOGUNDERMENY',
@@ -154,21 +148,6 @@ export interface ToggleLukkAlle {
     type: ActionType.TOGGLE_LUKK_ALLE;
 }
 
-export interface SettKbMainGraph {
-    type: ActionType.SETT_KB_MAIN_GRAPH;
-    mainGraph: GraphData;
-}
-
-export interface SettKbSubGraph {
-    type: ActionType.SETT_KB_SUB_GRAPH;
-    subGraph: GraphData;
-}
-
-export interface SettKbCurrentNode {
-    type: ActionType.SETT_KB_NODE_CURRENT;
-    currentNode: KbNaviNode;
-}
-
 export type Handling =
     | HentInnloggingsstatusOKAction
     | HentInnloggingsstatusFEILETAction
@@ -196,7 +175,4 @@ export type Handling =
     | ToggleUnderMeny
     | ToggleHovedOgUnderMeny
     | ToggleVarsler
-    | ToggleLukkAlle
-    | SettKbMainGraph
-    | SettKbSubGraph
-    | SettKbCurrentNode;
+    | ToggleLukkAlle;

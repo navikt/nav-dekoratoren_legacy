@@ -7,8 +7,6 @@ import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import Tekst from 'tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
-import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
-import { useKbNavigationDropdown } from '../../../../../../../utils/keyboard-navigation/useKbNavigationDropdown';
 
 type Props = {
     classname: string;
@@ -21,8 +19,6 @@ const nodeGroup = NodeGroup.MinsideMeny;
 
 export const MinsideVisning = (props: Props) => {
     const { classname, isOpen, menyLenker, dittNavUrl } = props;
-
-    useKbNavigationDropdown(configForNodeGroup[nodeGroup], isOpen);
 
     if (!menyLenker) {
         return null;

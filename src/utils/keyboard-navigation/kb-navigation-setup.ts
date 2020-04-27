@@ -1,24 +1,23 @@
 import KbNav, {
-    createKbNaviNode,
     createNaviGraph,
     getKbId,
     KbIdMap,
-    KbNaviNode,
-    KbNaviNodeMap,
+    KbNavNode,
+    KbNavNodeMap,
     NodeEdge,
     NodeGroup,
     NodeIndex,
     NodeSetterCallback,
 } from './kb-navigation';
-import { desktopHeaderLogoId } from 'komponenter/header/header-regular/meny/DesktopMenylinje';
 import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
+import { desktopHeaderLogoId } from 'komponenter/header/header-regular/meny/DesktopMenylinje';
 import { desktopSokKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
 import { desktopVarslerKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
 import { desktopMinsideKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
 import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
-import { Status } from '../../api/api';
-import { KeyboardNaviState } from '../../store/reducers/keyboard-nav-duck';
+import { Status } from 'api/api';
+import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
 
 export type KbNavConfig = {
     group: NodeGroup;
@@ -34,25 +33,14 @@ type Handlers = {
     keyDown: (e: KeyboardEvent) => void;
 };
 
-const masterNode = createKbNaviNode(
-    desktopHeaderLogoId,
-    { col: 0, row: 1, sub: 0 },
-    NodeGroup.HeaderMenylinje
-);
-
-export const kbNavInitialState: KeyboardNaviState = {
-    currentNode: masterNode,
-    mainGraph: {
-        group: masterNode.group,
-        rootNode: masterNode,
-        nodeMap: { [masterNode.id]: masterNode },
-    },
-};
+// TODO: Hvorfor blir den desktopHovedmenyKnappId noen ganger undefined?!
+const hovedmenyKnappId =
+    desktopHovedmenyKnappId || 'desktop-hovedmeny-knapp-id';
 
 export const configForNodeGroup: { [key in NodeGroup]: KbNavConfig } = {
     [NodeGroup.HeaderMenylinje]: {
         group: NodeGroup.HeaderMenylinje,
-        rootIndex: masterNode.index,
+        rootIndex: kbMasterNode.index,
         maxColsPerRow: [3, 6],
         parentNodeId: desktopHeaderLogoId,
         parentNodeEdge: NodeEdge.Right,
@@ -61,7 +49,7 @@ export const configForNodeGroup: { [key in NodeGroup]: KbNavConfig } = {
         group: NodeGroup.Hovedmeny,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 4, 3],
-        parentNodeId: desktopHovedmenyKnappId,
+        parentNodeId: hovedmenyKnappId,
         parentNodeEdge: NodeEdge.Bottom,
     },
     [NodeGroup.Sok]: {
@@ -105,8 +93,8 @@ export const configForNodeGroup: { [key in NodeGroup]: KbNavConfig } = {
 };
 
 export const addEventListenersAndReturnHandlers = (
-    currentNode: KbNaviNode,
-    nodeMap: KbNaviNodeMap,
+    currentNode: KbNavNode,
+    nodeMap: KbNavNodeMap,
     setCurrentNode: NodeSetterCallback,
     lukkAlleDropdowns: () => void
 ): Handlers => {
@@ -162,7 +150,7 @@ export const createHeaderMainGraph = (
     if (hovedmenyEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = desktopHovedmenyKnappId;
+        ] = hovedmenyKnappId;
     }
 
     idMap[

@@ -4,8 +4,8 @@ import {
     KbIdMap,
     NodeGroup,
     NodeIndex,
-    KbNaviNode,
-    KbNaviNodeMap,
+    KbNavNode,
+    KbNavNodeMap,
     NodeEdge,
 } from './kb-navigation';
 
@@ -14,8 +14,8 @@ export const buildGraphAndGetRootNode = (
     rootIndex: NodeIndex,
     maxColsPerWrappedRow: number[],
     idMap: KbIdMap = {},
-    nodeMap: KbNaviNodeMap = {}
-): KbNaviNode => {
+    nodeMap: KbNavNodeMap = {}
+): KbNavNode => {
     const getTopEdgeIndex = (index: NodeIndex) => {
         const { col, row, sub } = index;
 
@@ -186,14 +186,14 @@ export const buildGraphAndGetRootNode = (
     const getElement = (index: NodeIndex) =>
         document.getElementById(getKbId(group, index, idMap)) as HTMLElement;
 
-    const getNodeAtIndex = (index: NodeIndex): KbNaviNode => {
+    const getNodeAtIndex = (index: NodeIndex): KbNavNode => {
         const generatedId = getKbId(group, index, idMap);
         const id = idMap[generatedId] || generatedId;
         if (nodeMap[id]) {
             return nodeMap[id];
         }
 
-        const node: KbNaviNode = createKbNaviNode(id, index, group);
+        const node: KbNavNode = createKbNaviNode(id, index, group);
         nodeMap[id] = node;
 
         if (node) {

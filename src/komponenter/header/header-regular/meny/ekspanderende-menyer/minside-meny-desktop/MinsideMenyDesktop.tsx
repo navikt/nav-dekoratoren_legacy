@@ -10,6 +10,10 @@ import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import MinsideVisning from './minside-visning/MinsideVisning';
 import { MinsidePersonKnapp } from '../meny-knapper/minside-knapper/MinsidePersonKnapp';
 import MinsideArbgiverKnapp from '../meny-knapper/minside-knapper/MinsideArbgiverKnapp';
+import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
+import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
+import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
+import { NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './MinsideMenyDesktop.less';
 
 const stateSelector = (state: AppState) => ({
@@ -20,16 +24,24 @@ const stateSelector = (state: AppState) => ({
     menyPunkter: state.menypunkt,
 });
 
-const classname = 'desktop-minside-meny';
-export const desktopMinsideMenyClassname = classname;
-export const desktopMinsideKnappId = `${classname}-knapp-id`;
+export const desktopMinsideMenyClassname = 'desktop-minside-meny';
+export const desktopMinsideKnappId = 'desktop-minside-meny-knapp-id';
 
-export const MinsideMenyDesktop = () => {
+type Props = {
+    kbNavMainState: KbNavMain;
+};
+
+export const MinsideMenyDesktop = ({ kbNavMainState }: Props) => {
     const dispatch = useDispatch();
     const { environment } = useSelector((state: AppState) => state);
     const { arbeidsflate, innloggetStatus } = useSelector(stateSelector);
     const { isOpen, language, menyPunkter } = useSelector(stateSelector);
     const minsideMenyPunkter = getMinsideMenyNode(menyPunkter.data, language);
+    useKbNavSub(
+        configForNodeGroup[NodeGroup.MinsideMeny],
+        kbNavMainState,
+        isOpen
+    );
 
     if (
         !innloggetStatus.authenticated ||
@@ -42,7 +54,7 @@ export const MinsideMenyDesktop = () => {
     if (arbeidsflate === MenuValue.ARBEIDSGIVER) {
         return (
             <MinsideArbgiverKnapp
-                classname={classname}
+                classname={desktopMinsideMenyClassname}
                 id={desktopMinsideKnappId}
                 href={environment.MINSIDE_ARBEIDSGIVER_URL}
             />
@@ -60,7 +72,7 @@ export const MinsideMenyDesktop = () => {
                 dispatch(toggleMinsideMeny());
             }}
             isOpen={isOpen}
-            classname={classname}
+            classname={desktopMinsideMenyClassname}
             id={desktopMinsideKnappId}
             ariaLabel={'Min side menyknapp'}
             brukerNavn={innloggetStatus.name}
@@ -76,12 +88,12 @@ export const MinsideMenyDesktop = () => {
         <EkspanderbarMeny
             isOpen={isOpen}
             menyKnapp={knapp}
-            classname={classname}
-            id={classname}
+            classname={desktopMinsideMenyClassname}
+            id={desktopMinsideMenyClassname}
         >
             {menyPunkter.status === Status.OK ? (
                 <MinsideVisning
-                    classname={classname}
+                    classname={desktopMinsideMenyClassname}
                     isOpen={isOpen}
                     menyLenker={minsideMenyPunkter}
                     dittNavUrl={environment.DITT_NAV_URL}
