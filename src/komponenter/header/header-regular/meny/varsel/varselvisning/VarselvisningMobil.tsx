@@ -5,7 +5,7 @@ import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import Tekst from 'tekster/finn-tekst';
 import { useDispatch } from 'react-redux';
-import { toggleVarselVisning } from 'store/reducers/dropdown-toggle-duck';
+import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import './Varselvisning.less';
 
 interface OwnProps {
@@ -18,7 +18,7 @@ const VarselvisningMobil = (props: OwnProps) => {
     const dispatch = useDispatch();
     const lukkVarsler = (event: React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
-        dispatch(toggleVarselVisning());
+        dispatch(toggleVarsler());
     };
     const cls = BEMHelper(props.visningmenyClassname);
     return (

@@ -10,16 +10,16 @@ import Listelement from './mobil-innhold/Listelement';
 import MobilarbeidsflateValg from 'komponenter/header/header-regular/arbeidsflatemeny/MobilarbeidsflateValg';
 import VarselinnboksProvider from 'store/providers/Varselinnboks';
 import VarselvisningMobil from '../../../varsel/varselvisning/VarselvisningMobil';
-import './MobilVisningsmeny.less';
 import { AppState } from 'store/reducers';
 import { Dispatch } from 'store/dispatch-type';
 import { connect } from 'react-redux';
-import Sok from '../../../sok/Sok';
 import InnloggetBruker from './mobil-innhold/innloggetbruker/InnloggetBruker';
-import { toggleVarselVisning } from 'store/reducers/dropdown-toggle-duck';
 import ForsideLenke from './mobil-innhold/ForsideLenke';
 import Dittnavmeny from './mobil-innhold/dittnavmeny/Dittnavmeny';
 import { InnloggingsstatusState } from 'store/reducers/innloggingsstatus-duck';
+import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
+import Sok from '../../../sok/Sok';
+import './MobilVisningsmeny.less';
 
 interface DispatchProps {
     toggleVarsel: () => void;
@@ -221,12 +221,12 @@ class MobilVisningsmeny extends React.Component<Props, State> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     arbeidsflate: state.arbeidsflate.status,
-    visvarsel: state.dropdownToggles.varsel,
+    visvarsel: state.dropdownToggles.varsler,
     innloggingsstatus: state.innloggingsstatus,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    toggleVarsel: () => dispatch(toggleVarselVisning()),
+    toggleVarsel: () => dispatch(toggleVarsler()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MobilVisningsmeny);

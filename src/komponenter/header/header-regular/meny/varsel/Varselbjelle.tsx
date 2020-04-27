@@ -9,7 +9,7 @@ import { VarselIkon } from '../ekspanderende-menyer/meny-knapper/ikoner/varsel-i
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import VarselKnappMobil from './varselknapp/VarselKnappMobil';
-import { toggleVarselVisning } from 'store/reducers/dropdown-toggle-duck';
+import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import './Varselbjelle.less';
 
 interface Props {
@@ -32,7 +32,7 @@ const stateSelector = (state: AppState) => ({
             state.innloggingsstatus.data.securityLevel === '4'),
     nyesteId: state.varsler.data.nyesteId,
     arbeidsflate: state.arbeidsflate.status,
-    visVarsel: state.dropdownToggles.varsel,
+    visVarsel: state.dropdownToggles.varsler,
     hovedMenyAapen: state.dropdownToggles.hovedmeny,
     underMenyAapen: state.dropdownToggles.undermeny,
 });
@@ -56,10 +56,6 @@ const Varselbjelle = (props: VarselbjelleProps) => {
             ? 'toggle-varsler-container har-nye-varsler'
             : 'toggle-varsler-container';
 
-    const toggleVarsel = () => {
-        dispatch(toggleVarselVisning());
-    };
-
     const ApneVarselEvent = () => {
         triggerGaEvent({
             context: arbeidsflate,
@@ -67,8 +63,8 @@ const Varselbjelle = (props: VarselbjelleProps) => {
             action: clicked ? 'varsler-close' : 'varsler-open',
         });
 
-        toggleVarsel();
         settClicked(!clicked);
+        dispatch(toggleVarsler());
         if (antallUlesteVarsler > 0) {
             settVarslerSomLest(environment.APP_BASE_URL, nyesteId, dispatch);
         }
