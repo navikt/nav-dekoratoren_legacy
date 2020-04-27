@@ -26,14 +26,14 @@ const VarselKnappMobil = (props: Props) => {
     } = props;
     return (
         <div className="media-sm-mobil mobil-meny">
-            <div id="toggle-varsler-container" className={clsName}>
+            <div id="varsler-toggle-container" className={clsName}>
                 <Flatknapp
                     onClick={triggerVarsel}
                     className="varselknapp-mobil"
                     tabIndex={tabIndex ? 0 : -1}
                 >
                     <div
-                        className="toggle-varsler"
+                        className="varsler-toggle"
                         title="Varsler"
                         aria-label={`Varsler. Du har ${
                             antallVarsel > 0 ? antallVarsel : 'ingen'

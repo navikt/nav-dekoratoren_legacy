@@ -53,8 +53,8 @@ const Varselbjelle = (props: VarselbjelleProps) => {
 
     const classname =
         antallUlesteVarsler > 0
-            ? 'toggle-varsler-container har-nye-varsler'
-            : 'toggle-varsler-container';
+            ? 'varsler-toggle-container har-nye-varsler'
+            : 'varsler-toggle-container';
 
     const ApneVarselEvent = () => {
         triggerGaEvent({
@@ -104,12 +104,12 @@ const Varselbjelle = (props: VarselbjelleProps) => {
                         clsName={classname}
                     />
                     <div className="media-tablet-desktop">
-                        <div id="toggle-varsler-container">
+                        <div id="varsler-toggle-container">
                             <MenylinjeKnapp
                                 toggleMenu={ApneVarselEvent}
                                 isOpen={clicked}
                                 classname={classname}
-                                id={'toggle-varsler-knapp-id'}
+                                id={'varsler-toggle-knapp-id'}
                                 ariaLabel={`Varsler. Du har ${
                                     antallVarsler > 0 ? antallVarsler : 'ingen'
                                 } varsler.`}
