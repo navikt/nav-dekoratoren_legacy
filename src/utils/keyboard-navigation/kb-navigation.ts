@@ -203,7 +203,7 @@ export const createNaviGraph = (
 
 export default {
     getKbId,
-    arrowsHandler: arrowsHandler,
+    arrowsHandler,
     focusHandler,
     createNaviGraph,
 };

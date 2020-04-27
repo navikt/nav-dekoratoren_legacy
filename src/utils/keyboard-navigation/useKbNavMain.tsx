@@ -125,26 +125,6 @@ export const useKbNavMain = (): KbNavMain => {
         };
     }, [kbNavState, dropdownIsOpen]);
 
-    useEffect(() => {
-        const escapeHandler = (event: KeyboardEvent) => {
-            if (event.key !== 'Escape') {
-                return;
-            }
-
-            if (dropdownIsOpen) {
-                dispatch(lukkAlleDropdowns());
-            } else {
-                const focusElement = document.activeElement;
-                if (focusElement && focusElement instanceof HTMLElement) {
-                    focusElement.blur();
-                }
-            }
-        };
-
-        document.addEventListener('keydown', escapeHandler);
-        return () => document.removeEventListener('keydown', escapeHandler);
-    }, [dropdownIsOpen]);
-
     return {
         mainNodeMap: kbNavState.mainGraph.nodeMap,
         subNodeMap: kbNavState.subGraph?.nodeMap,

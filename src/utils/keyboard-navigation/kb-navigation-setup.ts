@@ -15,6 +15,7 @@ import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from 'api/api';
 import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
+import { desktopLoginKnappId } from 'komponenter/header/header-regular/meny/logginn/LoggInnKnappDesktop';
 
 export type KbNavConfig = {
     group: NodeGroup;
@@ -132,6 +133,10 @@ export const createHeaderMainGraph = (
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
         ] = desktopMinsideKnappId;
     }
+
+    idMap[
+        KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
+    ] = desktopLoginKnappId;
 
     const maxColsPerRow = arbeidsflatemenyEnabled ? [3, colIndex] : [colIndex];
 
