@@ -138,10 +138,9 @@ export const selectNode = (
     }
 };
 
-const kbHandler = (
+const arrowsHandler = (
     currentNode: KbNavNode,
-    setCurrentNode: NodeSetterCallback,
-    lukkAlleDropdowns: () => void
+    setCurrentNode: NodeSetterCallback
 ) => (event: KeyboardEvent) => {
     if (!currentNode) {
         return;
@@ -159,9 +158,6 @@ const kbHandler = (
             break;
         case 'ArrowDown':
             selectNode(currentNode[NodeEdge.Bottom], setCurrentNode);
-            break;
-        case 'Escape':
-            lukkAlleDropdowns();
             break;
         default:
             return;
@@ -207,7 +203,7 @@ export const createNaviGraph = (
 
 export default {
     getKbId,
-    kbHandler,
+    arrowsHandler: arrowsHandler,
     focusHandler,
     createNaviGraph,
 };

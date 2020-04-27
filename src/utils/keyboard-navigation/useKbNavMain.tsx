@@ -1,23 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import {
-    addEventListenersAndReturnHandlers,
-    createHeaderMainGraph,
-    removeListeners,
-} from './kb-navigation-setup';
+import { createHeaderMainGraph } from './kb-navigation-setup';
 import { KbNavGraph, KbNavNode } from './kb-navigation';
-import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
-import { AppState } from 'store/reducers';
 import { KbNavNodeMap } from './kb-navigation';
 import { createKbNaviNode } from './kb-navigation';
-import { desktopHeaderLogoId } from 'komponenter/header/header-regular/meny/DesktopMenylinje';
 import { NodeGroup } from './kb-navigation';
+import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
+import { AppState } from 'store/reducers';
+import { desktopHeaderLogoId } from 'komponenter/header/header-regular/meny/DesktopMenylinje';
+import KbNav from 'utils/keyboard-navigation/kb-navigation';
 
 const stateSelector = (state: AppState) => ({
     language: state.language.language,
     arbeidsflate: state.arbeidsflate.status,
     menyStatus: state.menypunkt.status,
     innloggingsStatus: state.innloggingsstatus.data,
+    dropdownToggles: state.dropdownToggles,
 });
 
 export type KbNavMain = {
@@ -55,6 +53,7 @@ export const useKbNavMain = (): KbNavMain => {
         arbeidsflate,
         menyStatus,
         innloggingsStatus,
+        dropdownToggles,
     } = useSelector(stateSelector);
     const dispatch = useDispatch();
 
@@ -67,6 +66,12 @@ export const useKbNavMain = (): KbNavMain => {
     const setSubGraph = (graph: KbNavGraph) => {
         setKbNavState({ ...kbNavState, subGraph: graph });
     };
+
+    const dropdownIsOpen =
+        dropdownToggles.hovedmeny ||
+        dropdownToggles.minside ||
+        dropdownToggles.sok ||
+        dropdownToggles.varsler;
 
     useEffect(() => {
         const graph = createHeaderMainGraph(
@@ -81,18 +86,64 @@ export const useKbNavMain = (): KbNavMain => {
     }, [language, arbeidsflate, menyStatus, innloggingsStatus]);
 
     useEffect(() => {
-        const handlers = addEventListenersAndReturnHandlers(
+        const arrowsHandler = KbNav.arrowsHandler(
+            kbNavState.currentNode,
+            setCurrentNode
+        );
+        const focusHandler = KbNav.focusHandler(
             kbNavState.currentNode,
             {
                 ...kbNavState.mainGraph.nodeMap,
                 ...kbNavState.subGraph?.nodeMap,
             },
-            (node: KbNavNode) => setCurrentNode(node),
-            () => dispatch(lukkAlleDropdowns())
+            setCurrentNode,
+            arrowsHandler
         );
+        const escapeHandler = (event: KeyboardEvent) => {
+            if (event.key !== 'Escape') {
+                return;
+            }
+            if (dropdownIsOpen) {
+                dispatch(lukkAlleDropdowns());
+            } else {
+                const focusElement = document.activeElement;
+                if (focusElement && focusElement instanceof HTMLElement) {
+                    focusElement.blur();
+                }
+                document.removeEventListener('keydown', arrowsHandler);
+            }
+        };
 
-        return () => removeListeners(handlers);
-    }, [kbNavState]);
+        document.addEventListener('focusin', focusHandler);
+        document.addEventListener('keydown', arrowsHandler);
+        document.addEventListener('keydown', escapeHandler);
+
+        return () => {
+            document.removeEventListener('focusin', focusHandler);
+            document.removeEventListener('keydown', arrowsHandler);
+            document.removeEventListener('keydown', escapeHandler);
+        };
+    }, [kbNavState, dropdownIsOpen]);
+
+    useEffect(() => {
+        const escapeHandler = (event: KeyboardEvent) => {
+            if (event.key !== 'Escape') {
+                return;
+            }
+
+            if (dropdownIsOpen) {
+                dispatch(lukkAlleDropdowns());
+            } else {
+                const focusElement = document.activeElement;
+                if (focusElement && focusElement instanceof HTMLElement) {
+                    focusElement.blur();
+                }
+            }
+        };
+
+        document.addEventListener('keydown', escapeHandler);
+        return () => document.removeEventListener('keydown', escapeHandler);
+    }, [dropdownIsOpen]);
 
     return {
         mainNodeMap: kbNavState.mainGraph.nodeMap,

@@ -24,7 +24,7 @@ const stateSelector = (state: AppState) => ({
     menyPunkter: state.menypunkt,
 });
 
-export const desktopMinsideMenyClassname = 'desktop-minside-meny';
+const classname = 'desktop-minside-meny';
 export const desktopMinsideKnappId = 'desktop-minside-meny-knapp-id';
 
 type Props = {
@@ -54,7 +54,7 @@ export const MinsideMenyDesktop = ({ kbNavMainState }: Props) => {
     if (arbeidsflate === MenuValue.ARBEIDSGIVER) {
         return (
             <MinsideArbgiverKnapp
-                classname={desktopMinsideMenyClassname}
+                classname={classname}
                 id={desktopMinsideKnappId}
                 href={environment.MINSIDE_ARBEIDSGIVER_URL}
             />
@@ -72,7 +72,7 @@ export const MinsideMenyDesktop = ({ kbNavMainState }: Props) => {
                 dispatch(toggleMinsideMeny());
             }}
             isOpen={isOpen}
-            classname={desktopMinsideMenyClassname}
+            classname={classname}
             id={desktopMinsideKnappId}
             ariaLabel={'Min side menyknapp'}
             brukerNavn={innloggetStatus.name}
@@ -88,12 +88,12 @@ export const MinsideMenyDesktop = ({ kbNavMainState }: Props) => {
         <EkspanderbarMeny
             isOpen={isOpen}
             menyKnapp={knapp}
-            classname={desktopMinsideMenyClassname}
-            id={desktopMinsideMenyClassname}
+            classname={classname}
+            id={classname}
         >
             {menyPunkter.status === Status.OK ? (
                 <MinsideVisning
-                    classname={desktopMinsideMenyClassname}
+                    classname={classname}
                     isOpen={isOpen}
                     menyLenker={minsideMenyPunkter}
                     dittNavUrl={environment.DITT_NAV_URL}

@@ -30,7 +30,7 @@ const stateSelector = (state: AppState) => ({
     sokIsOpen: state.dropdownToggles.sok,
 });
 
-export const desktopHovedmenyClassname = 'desktop-hovedmeny';
+const classname = 'desktop-hovedmeny';
 export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';
 
 const nodeGroup = NodeGroup.Hovedmeny;
@@ -47,13 +47,13 @@ const getMaxColsPerRow = (): Array<number> => {
     const toppSeksjonCols = 1;
 
     const hovedSeksjonElement = document.getElementsByClassName(
-        `${desktopHovedmenyClassname}__hoved-seksjon`
+        `${classname}__hoved-seksjon`
     )[0] as HTMLElement;
     const hovedSeksjonCols =
         (hovedSeksjonElement && getNumColsFromCss(hovedSeksjonElement)) || 1;
 
     const bunnSeksjonElement = document.getElementsByClassName(
-        `${desktopHovedmenyClassname}__bunn-seksjon`
+        `${classname}__bunn-seksjon`
     )[0] as HTMLElement;
     const bunnSeksjonCols =
         (bunnSeksjonElement && getNumColsFromCss(bunnSeksjonElement)) || 1;
@@ -115,7 +115,7 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
         <MenylinjeKnapp
             toggleMenu={toggleMenu}
             isOpen={isOpen}
-            classname={desktopHovedmenyClassname}
+            classname={classname}
             id={desktopHovedmenyKnappId}
             ariaLabel={'Hovedmenyknapp'}
         >
@@ -135,12 +135,12 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
         <EkspanderbarMeny
             isOpen={isOpen}
             menyKnapp={knapp}
-            classname={desktopHovedmenyClassname}
-            id={desktopHovedmenyClassname}
+            classname={classname}
+            id={classname}
         >
             {menyPunkter.status === Status.OK ? (
                 <HovedmenyVisning
-                    classname={desktopHovedmenyClassname}
+                    classname={classname}
                     arbeidsflate={arbeidsflate}
                     language={language}
                     menyLenker={hovedmenyPunkter}

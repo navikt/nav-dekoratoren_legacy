@@ -20,8 +20,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-sok-dropdown';
-export const desktopSokDropdownClassname = classname;
-export const desktopSokKnappId = `${classname}-knapp-id`;
+export const desktopSokKnappId = 'desktop-sok-dropdown-knapp-id';
 
 type Props = {
     kbNavMainState: KbNavMain;

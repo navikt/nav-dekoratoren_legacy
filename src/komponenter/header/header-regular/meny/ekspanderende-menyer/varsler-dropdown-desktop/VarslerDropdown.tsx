@@ -26,7 +26,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-varsler-dropdown';
-export const desktopVarslerKnappId = `${classname}-knapp-id`;
+export const desktopVarslerKnappId = 'desktop-varsler-dropdown-knapp-id';
 
 type Props = {
     kbNavMainState: KbNavMain;
@@ -88,7 +88,7 @@ export const VarslerDropdown = ({ kbNavMainState }: Props) => {
             isOpen={isOpen}
             menyKnapp={knapp}
         >
-            <Varselvisning isOpen={isOpen} />
+            <Varselvisning />
         </EkspanderbarMeny>
     );
 };

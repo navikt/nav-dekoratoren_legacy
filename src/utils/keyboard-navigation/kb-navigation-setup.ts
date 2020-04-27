@@ -2,12 +2,9 @@ import KbNav, {
     createNaviGraph,
     getKbId,
     KbIdMap,
-    KbNavNode,
-    KbNavNodeMap,
     NodeEdge,
     NodeGroup,
     NodeIndex,
-    NodeSetterCallback,
 } from './kb-navigation';
 import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
 import { desktopHeaderLogoId } from 'komponenter/header/header-regular/meny/DesktopMenylinje';
@@ -28,12 +25,7 @@ export type KbNavConfig = {
     idMap?: KbIdMap;
 };
 
-type Handlers = {
-    focusIn: (e: FocusEvent) => void;
-    keyDown: (e: KeyboardEvent) => void;
-};
-
-// TODO: Hvorfor blir den desktopHovedmenyKnappId noen ganger undefined?!
+// TODO: Hvorfor blir desktopHovedmenyKnappId noen ganger undefined?!
 const hovedmenyKnappId =
     desktopHovedmenyKnappId || 'desktop-hovedmeny-knapp-id';
 
@@ -90,34 +82,6 @@ export const configForNodeGroup: { [key in NodeGroup]: KbNavConfig } = {
         parentNodeId: desktopMinsideKnappId,
         parentNodeEdge: NodeEdge.Bottom,
     },
-};
-
-export const addEventListenersAndReturnHandlers = (
-    currentNode: KbNavNode,
-    nodeMap: KbNavNodeMap,
-    setCurrentNode: NodeSetterCallback,
-    lukkAlleDropdowns: () => void
-): Handlers => {
-    const kbHandler = KbNav.kbHandler(
-        currentNode,
-        setCurrentNode,
-        lukkAlleDropdowns
-    );
-    const focusHandler = KbNav.focusHandler(
-        currentNode,
-        nodeMap,
-        setCurrentNode,
-        kbHandler
-    );
-    document.addEventListener('focusin', focusHandler);
-    document.addEventListener('keydown', kbHandler);
-
-    return { focusIn: focusHandler, keyDown: kbHandler };
-};
-
-export const removeListeners = ({ focusIn, keyDown }: Handlers) => {
-    document.removeEventListener('focusin', focusIn);
-    document.removeEventListener('keydown', keyDown);
 };
 
 export const createHeaderMainGraph = (
