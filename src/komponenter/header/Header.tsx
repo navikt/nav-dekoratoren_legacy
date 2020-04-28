@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenypunkter } from 'store/reducers/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
@@ -7,8 +7,10 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { SimpleHeader } from './header-simple/HeaderSimple';
 import { RegularHeader } from './header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
-import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import {
+    cookieOptions,
+    settArbeidsflate,
+} from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
 import { Language, languageDuck } from 'store/reducers/language-duck';
 import { verifyWindowObj } from 'utils/Environment';
@@ -31,19 +33,32 @@ export const Header = () => {
         topheaderHeight: 0,
         desktop: true,
     };
+
     const decoratorHeader = verifyWindowObj()
         ? document.getElementById('decorator-header')
         : null;
+    let arbeidsflate: any = null;
     let hovedmeny: any = null;
 
     const dispatch = useDispatch();
     const [cookies, setCookie] = useCookies(['decorator-context']);
+    const language = useSelector((state: AppState) => state.language.language);
     const { PARAMS, APP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
     );
     const [headeroffsetHeight, setHeaderoffsetHeight] = useState<
         number | undefined
     >();
+
+    const getHovedmenyNode = () => {
+        hovedmeny = verifyWindowObj()
+            ? document.getElementById(
+                  window.innerWidth > desktopBreakpoint
+                      ? 'hovedmeny'
+                      : 'mobilmeny'
+              )
+            : null;
+    };
 
     const setElementStyleTop = (
         element: HTMLElement,
@@ -72,19 +87,51 @@ export const Header = () => {
         throttleMobilmenyPlacement();
     };
 
-    const initializeSticky = (
-        mainmenu: HTMLElement,
-        topheader: HTMLElement
-    ): void => {
+    const setMinHeightOnHeader = (
+        decoratorHeader: HTMLElement,
+        arbeidsflate: HTMLElement
+    ) => {
+        hovedmeny.style.position = 'static';
+        setHeaderoffsetHeight(0);
+        setHeaderoffsetHeight(
+            language === Language.NORSK && current.desktop
+                ? decoratorHeader.offsetHeight
+                : decoratorHeader.offsetHeight - arbeidsflate.offsetHeight
+        );
+    };
+
+    const setTopHeaderOffSetHeigh = (
+        topheaderHeight: number,
+        mainmenuHeight: number,
+        arbeidsflateHeight: number
+    ) => {
         current.topheaderHeight =
-            topheader.offsetHeight - mainmenu.offsetHeight;
+            language === Language.NORSK
+                ? topheaderHeight - mainmenuHeight
+                : topheaderHeight - arbeidsflateHeight - mainmenuHeight;
+    };
+
+    const setMenuStartPoint = (menu: HTMLElement) => {
         window.pageYOffset > current.topheaderHeight
-            ? setElementStyleTop(mainmenu, 0)
+            ? setElementStyleTop(menu, 0)
             : setElementStyleTop(
-                  mainmenu,
+                  menu,
                   (current.navbarHeight =
                       current.topheaderHeight - window.pageYOffset)
               );
+    };
+
+    const initializeSticky = (
+        mainmenu: HTMLElement,
+        topheader: HTMLElement,
+        arbeidsflate: HTMLElement
+    ): void => {
+        setTopHeaderOffSetHeigh(
+            topheader.offsetHeight,
+            mainmenu.offsetHeight,
+            arbeidsflate.offsetHeight
+        );
+        setMenuStartPoint(mainmenu);
 
         current.windowHeight = window.pageYOffset;
         mainmenu.style.position = 'fixed';
@@ -145,49 +192,42 @@ export const Header = () => {
         current.windowHeight = window.pageYOffset;
     };
 
-    const initStickySelectors = (): void => {
-        if (
+    const changeBetweenDesktopAndMobilView = () => {
+        return (
             (current.desktop && window.innerWidth < desktopBreakpoint) ||
             (!current.desktop && window.innerWidth >= desktopBreakpoint)
-        ) {
-            hovedmeny = verifyWindowObj()
-                ? document.getElementById(
-                      window.innerWidth > desktopBreakpoint
-                          ? 'hovedmeny'
-                          : 'mobilmeny'
-                  )
-                : null;
+        );
+    };
 
-            if (decoratorHeader && hovedmeny) {
-                hovedmeny.style.position = 'static';
-                setHeaderoffsetHeight(0);
-                setHeaderoffsetHeight(decoratorHeader.offsetHeight);
-                initializeSticky(hovedmeny, decoratorHeader);
+    const initStickySelectors = (): void => {
+        if (changeBetweenDesktopAndMobilView()) {
+            getHovedmenyNode();
+            if (decoratorHeader && hovedmeny && arbeidsflate) {
+                setMinHeightOnHeader(decoratorHeader, arbeidsflate);
+                initializeSticky(hovedmeny, decoratorHeader, arbeidsflate);
             }
         }
     };
 
     useEffect(() => {
-        hovedmeny = verifyWindowObj()
-            ? document.getElementById(
-                  window.innerWidth > desktopBreakpoint
-                      ? 'hovedmeny'
-                      : 'mobilmeny'
-              )
+        getHovedmenyNode();
+        arbeidsflate = verifyWindowObj()
+            ? document.getElementById('arbeidsflate')
             : null;
-        if (hovedmeny && decoratorHeader) {
-            setHeaderoffsetHeight(decoratorHeader.offsetHeight);
+
+        if (hovedmeny && decoratorHeader && arbeidsflate) {
+            setMinHeightOnHeader(decoratorHeader, arbeidsflate);
             window.onscroll = function stickyheader() {
                 if (hovedmeny) {
                     positionNavbar(hovedmeny);
                 }
             };
-            initializeSticky(hovedmeny, decoratorHeader);
+            initializeSticky(hovedmeny, decoratorHeader, arbeidsflate);
             window.addEventListener('resize', initStickySelectors);
             return () =>
                 window.removeEventListener('resize', initStickySelectors);
         }
-    }, []);
+    }, [language]);
 
     // External data
     useEffect(() => {
@@ -223,16 +263,6 @@ export const Header = () => {
         const action = languageDuck.actionCreator({ language });
         setCookie('decorator-language', language, cookieOptions);
         dispatch(action);
-    }, []);
-
-    // External scripts
-    useEffect(() => {
-        if (typeof window) {
-            /*
-                Importeres foreløpig via tagmanager
-                appendVergic();
-             */
-        }
     }, []);
 
     return (

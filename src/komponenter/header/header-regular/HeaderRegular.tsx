@@ -22,7 +22,7 @@ export const RegularHeader = () => {
             </div>
             <div className="media-tablet-desktop tablet-desktop-meny">
                 <div className="header-z-wrapper">
-                    {showContextMenu ? <Arbeidsflatemeny /> : null}
+                    <Arbeidsflatemeny />
                     <DesktopMenylinje />
                 </div>
             </div>
