@@ -18,7 +18,7 @@ import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { KbNavConfig } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
-import { NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { matchMedia } from 'utils/match-media-polyfill';
 import './HovedmenyDesktop.less';
 
@@ -33,7 +33,7 @@ const stateSelector = (state: AppState) => ({
 const classname = 'desktop-hovedmeny';
 export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';
 
-const nodeGroup = NodeGroup.Hovedmeny;
+const nodeGroup = KbNavGroup.Hovedmeny;
 const mqlDesktop = matchMedia('(min-width: 1440px)');
 const mqlTablet = matchMedia('(min-width: 1024px)');
 

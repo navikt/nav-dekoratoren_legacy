@@ -3,7 +3,7 @@ import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
 import { MenyLenke } from './MenyLenke';
-import KbNav, { NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
+import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './MenyLenker.less';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
     isOpen: boolean;
     colIndex: number;
     rowIndex: number;
-    kbNodeGroup: NodeGroup;
+    kbNodeGroup: KbNavGroup;
 }
 
 export const MenyLenkeSeksjon = ({

@@ -6,7 +6,7 @@ import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
 import { Undertittel } from 'nav-frontend-typografi';
-import { getKbId, NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './Varselvisning.less';
 
 const stateSelector = (state: AppState) => ({
@@ -26,7 +26,7 @@ const alleVarslerLenke = (rowIndex: number, nyeVarslerMsg: string) => {
         <div className="dekorator-vis-alle-lenke">
             <LenkeMedGA
                 href={API_VARSELINNBOKS_URL}
-                id={getKbId(NodeGroup.Varsler, {
+                id={getKbId(KbNavGroup.Varsler, {
                     col: 0,
                     row: rowIndex,
                     sub: 0,

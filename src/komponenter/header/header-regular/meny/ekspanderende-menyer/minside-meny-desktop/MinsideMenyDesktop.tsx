@@ -13,7 +13,7 @@ import MinsideArbgiverKnapp from '../meny-knapper/minside-knapper/MinsideArbgive
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
-import { NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './MinsideMenyDesktop.less';
 
 const stateSelector = (state: AppState) => ({
@@ -38,7 +38,7 @@ export const MinsideMenyDesktop = ({ kbNavMainState }: Props) => {
     const { isOpen, language, menyPunkter } = useSelector(stateSelector);
     const minsideMenyPunkter = getMinsideMenyNode(menyPunkter.data, language);
     useKbNavSub(
-        configForNodeGroup[NodeGroup.MinsideMeny],
+        configForNodeGroup[KbNavGroup.MinsideMeny],
         kbNavMainState,
         isOpen
     );

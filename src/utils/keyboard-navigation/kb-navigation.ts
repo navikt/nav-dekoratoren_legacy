@@ -1,6 +1,6 @@
 import { buildGraphAndGetRootNode } from './kb-graph-builder';
 
-export enum NodeGroup {
+export enum KbNavGroup {
     HeaderMenylinje = 'desktop-header-menylinje',
     Hovedmeny = 'desktop-hovedmeny',
     Sok = 'desktop-sok',
@@ -29,7 +29,7 @@ export type NodeIndex = {
 };
 
 export type KbNavGraph = {
-    group: NodeGroup;
+    group: KbNavGroup;
     rootNode: KbNavNode;
     nodeMap: KbNavNodeMap;
 };
@@ -37,7 +37,7 @@ export type KbNavGraph = {
 export type KbNavNode = {
     id: string;
     index: NodeIndex;
-    group: NodeGroup;
+    group: KbNavGroup;
     [NodeEdge.Top]: KbNavNode;
     [NodeEdge.Bottom]: KbNavNode;
     [NodeEdge.Left]: KbNavNode;
@@ -52,12 +52,12 @@ export type KbIdMap = {
     [id: string]: string;
 };
 
-export type NodeSetterCallback = (node: KbNavNode) => void;
+type NodeSetterCallback = (node: KbNavNode) => void;
 
-export function createKbNaviNode(
+export function createKbNavNode(
     id: string,
     index: NodeIndex,
-    group: NodeGroup
+    group: KbNavGroup
 ): KbNavNode {
     const node: Partial<KbNavNode> = {
         id: id,
@@ -73,7 +73,7 @@ export function createKbNaviNode(
 }
 
 export const getKbId = (
-    group: NodeGroup,
+    group: KbNavGroup,
     index: NodeIndex,
     idMap: KbIdMap = {}
 ) => {
@@ -138,7 +138,7 @@ export const selectNode = (
     }
 };
 
-const arrowsHandler = (
+const arrowkeysHandler = (
     currentNode: KbNavNode,
     setCurrentNode: NodeSetterCallback
 ) => (event: KeyboardEvent) => {
@@ -169,19 +169,19 @@ const focusHandler = (
     currentNode: KbNavNode,
     nodeMap: KbNavNodeMap,
     setCurrentNode: NodeSetterCallback,
-    currentKbHandler: (e: KeyboardEvent) => void
+    arrowkeysHandler: (e: KeyboardEvent) => void
 ) => (event: FocusEvent) => {
     const id = (event.target as HTMLElement).id;
     const focusedNode = nodeMap[id];
     if (focusedNode) {
         selectNode(focusedNode, setCurrentNode, false);
     } else {
-        document.removeEventListener('keydown', currentKbHandler);
+        document.removeEventListener('keydown', arrowkeysHandler);
     }
 };
 
-export const createNaviGraph = (
-    group: NodeGroup,
+export const createKbNavGraph = (
+    group: KbNavGroup,
     rootIndex: NodeIndex,
     maxColsPerRow: Array<number>,
     idMap: KbIdMap = {}
@@ -203,7 +203,7 @@ export const createNaviGraph = (
 
 export default {
     getKbId,
-    arrowsHandler,
+    arrowkeysHandler,
     focusHandler,
-    createNaviGraph,
+    createKbNavGraph,
 };

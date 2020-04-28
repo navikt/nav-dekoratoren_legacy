@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
-import { createNaviGraph, NodeEdgeOpposite, selectNode } from './kb-navigation';
+import {
+    createKbNavGraph,
+    NodeEdgeOpposite,
+    selectNode,
+} from './kb-navigation';
 import { KbNavConfig } from './kb-navigation-setup';
 import { KbNavMain } from './useKbNavMain';
 
@@ -45,7 +49,7 @@ export const useKbNavSub = (
             return;
         }
 
-        const graph = createNaviGraph(group, rootIndex, maxColsPerRow, idMap);
+        const graph = createKbNavGraph(group, rootIndex, maxColsPerRow, idMap);
         if (graph) {
             setSubGraph(graph);
             parentNode[parentNodeEdge] = graph.rootNode;

@@ -2,7 +2,7 @@ import React from 'react';
 import htmlReactParser, { DomElement, domToReact } from 'html-react-parser';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
-import { getKbId, NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 
@@ -51,7 +51,7 @@ const parseLenke = (
             href={href || ''}
             tabIndex={0}
             className={'varsel-lenke'}
-            id={getKbId(NodeGroup.Varsler, {
+            id={getKbId(KbNavGroup.Varsler, {
                 col: 0,
                 row: rowIndex,
                 sub: subIndex,

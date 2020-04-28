@@ -15,7 +15,7 @@ import './VarslerDropdown.less';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
-import { NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.varsler,
@@ -41,7 +41,7 @@ export const VarslerDropdown = ({ kbNavMainState }: Props) => {
         appBaseUrl,
     } = useSelector(stateSelector);
     const dispatch = useDispatch();
-    useKbNavSub(configForNodeGroup[NodeGroup.Varsler], kbNavMainState, isOpen);
+    useKbNavSub(configForNodeGroup[KbNavGroup.Varsler], kbNavMainState, isOpen);
 
     if (
         !innloggetStatus.authenticated ||

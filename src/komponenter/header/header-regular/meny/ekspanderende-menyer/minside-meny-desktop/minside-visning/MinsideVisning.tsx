@@ -2,7 +2,7 @@ import React from 'react';
 import BEMHelper from 'utils/bem';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { MenyLenkeSeksjon } from '../../meny-lenker/MenyLenkeSeksjon';
-import KbNav, { NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
+import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import Tekst from 'tekster/finn-tekst';
@@ -15,7 +15,7 @@ type Props = {
     dittNavUrl: string;
 };
 
-const nodeGroup = NodeGroup.MinsideMeny;
+const nodeGroup = KbNavGroup.MinsideMeny;
 
 export const MinsideVisning = (props: Props) => {
     const { classname, isOpen, menyLenker, dittNavUrl } = props;

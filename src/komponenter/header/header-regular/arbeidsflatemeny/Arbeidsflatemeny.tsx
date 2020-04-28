@@ -11,7 +11,7 @@ import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { erNavDekoratoren } from 'utils/Environment';
-import { getKbId, NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './Arbeidsflatemeny.less';
 
 const Arbeidsflatemeny = () => {
@@ -36,7 +36,7 @@ const Arbeidsflatemeny = () => {
                         >
                             <LenkeMedGA
                                 classNameOverride={cls.element('lenke')}
-                                id={getKbId(NodeGroup.HeaderMenylinje, {
+                                id={getKbId(KbNavGroup.HeaderMenylinje, {
                                     col: index,
                                     row: 0,
                                     sub: 0,

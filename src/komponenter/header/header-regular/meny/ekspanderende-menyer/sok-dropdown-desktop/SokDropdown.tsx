@@ -9,7 +9,7 @@ import Tekst from 'tekster/finn-tekst';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import SokMenyIkon from '../meny-knapper/ikoner/sok-ikon/SokMenyIkon';
-import { NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
@@ -29,7 +29,7 @@ type Props = {
 export const SokDropdown = ({ kbNavMainState }: Props) => {
     const { isOpen } = useSelector(stateSelector);
     const dispatch = useDispatch();
-    useKbNavSub(configForNodeGroup[NodeGroup.Sok], kbNavMainState, isOpen);
+    useKbNavSub(configForNodeGroup[KbNavGroup.Sok], kbNavMainState, isOpen);
 
     const toggleMenu = () => {
         triggerGaEvent({

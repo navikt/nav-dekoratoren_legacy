@@ -1,9 +1,9 @@
 import KbNav, {
-    createNaviGraph,
+    createKbNavGraph,
     getKbId,
     KbIdMap,
     NodeEdge,
-    NodeGroup,
+    KbNavGroup,
     NodeIndex,
 } from './kb-navigation';
 import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
@@ -18,7 +18,7 @@ import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
 import { desktopLoginKnappId } from 'komponenter/header/header-regular/meny/logginn/LoggInnKnappDesktop';
 
 export type KbNavConfig = {
-    group: NodeGroup;
+    group: KbNavGroup;
     rootIndex: NodeIndex;
     maxColsPerRow: Array<number>;
     parentNodeId: string;
@@ -30,54 +30,54 @@ export type KbNavConfig = {
 const hovedmenyKnappId =
     desktopHovedmenyKnappId || 'desktop-hovedmeny-knapp-id';
 
-export const configForNodeGroup: { [key in NodeGroup]: KbNavConfig } = {
-    [NodeGroup.HeaderMenylinje]: {
-        group: NodeGroup.HeaderMenylinje,
+export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
+    [KbNavGroup.HeaderMenylinje]: {
+        group: KbNavGroup.HeaderMenylinje,
         rootIndex: kbMasterNode.index,
         maxColsPerRow: [3, 6],
         parentNodeId: desktopHeaderLogoId,
         parentNodeEdge: NodeEdge.Right,
     },
-    [NodeGroup.Hovedmeny]: {
-        group: NodeGroup.Hovedmeny,
+    [KbNavGroup.Hovedmeny]: {
+        group: KbNavGroup.Hovedmeny,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 4, 3],
         parentNodeId: hovedmenyKnappId,
         parentNodeEdge: NodeEdge.Bottom,
     },
-    [NodeGroup.Sok]: {
-        group: NodeGroup.Sok,
+    [KbNavGroup.Sok]: {
+        group: KbNavGroup.Sok,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [3],
         parentNodeId: desktopSokKnappId,
         parentNodeEdge: NodeEdge.Bottom,
         idMap: {
-            [getKbId(NodeGroup.Sok, {
+            [getKbId(KbNavGroup.Sok, {
                 col: 0,
                 row: 0,
                 sub: 0,
             })]: 'desktop-sok-input',
-            [getKbId(NodeGroup.Sok, {
+            [getKbId(KbNavGroup.Sok, {
                 col: 1,
                 row: 0,
                 sub: 0,
             })]: 'desktop-sok-reset-knapp',
-            [getKbId(NodeGroup.Sok, {
+            [getKbId(KbNavGroup.Sok, {
                 col: 2,
                 row: 0,
                 sub: 0,
             })]: 'desktop-sok-submit-knapp',
         },
     },
-    [NodeGroup.Varsler]: {
-        group: NodeGroup.Varsler,
+    [KbNavGroup.Varsler]: {
+        group: KbNavGroup.Varsler,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 1, 1],
         parentNodeId: desktopVarslerKnappId,
         parentNodeEdge: NodeEdge.Bottom,
     },
-    [NodeGroup.MinsideMeny]: {
-        group: NodeGroup.MinsideMeny,
+    [KbNavGroup.MinsideMeny]: {
+        group: KbNavGroup.MinsideMeny,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 3],
         parentNodeId: desktopMinsideKnappId,
@@ -102,7 +102,7 @@ export const createHeaderMainGraph = (
         arbeidsflate !== MenuValue.SAMARBEIDSPARTNER;
     const arbeidsflatemenyEnabled = Language.NORSK;
 
-    const group = NodeGroup.HeaderMenylinje;
+    const group = KbNavGroup.HeaderMenylinje;
     const rootIndex = configForNodeGroup[group].rootIndex;
     const idMap: KbIdMap = {};
 
@@ -140,5 +140,5 @@ export const createHeaderMainGraph = (
 
     const maxColsPerRow = arbeidsflatemenyEnabled ? [3, colIndex] : [colIndex];
 
-    return createNaviGraph(group, rootIndex, maxColsPerRow, idMap);
+    return createKbNavGraph(group, rootIndex, maxColsPerRow, idMap);
 };

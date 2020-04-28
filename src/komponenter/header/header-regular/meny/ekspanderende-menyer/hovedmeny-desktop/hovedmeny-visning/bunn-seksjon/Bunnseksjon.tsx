@@ -1,7 +1,7 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
 import BunnseksjonLenke from './BunnseksjonLenke';
-import KbNav, { NodeGroup } from 'utils/keyboard-navigation/kb-navigation';
+import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Language } from 'store/reducers/language-duck';
 import { finnTekst } from 'tekster/finn-tekst';
@@ -46,7 +46,7 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                                 stikkord={finnTekst(lenke.stikkordId, language)}
                                 className={classname}
                                 id={KbNav.getKbId(
-                                    NodeGroup.Hovedmeny,
+                                    KbNavGroup.Hovedmeny,
                                     kbNaviIndex
                                 )}
                                 onClick={(event) => {

@@ -1,8 +1,8 @@
 import {
-    createKbNaviNode,
+    createKbNavNode,
     getKbId,
     KbIdMap,
-    NodeGroup,
+    KbNavGroup,
     NodeIndex,
     KbNavNode,
     KbNavNodeMap,
@@ -10,7 +10,7 @@ import {
 } from './kb-navigation';
 
 export const buildGraphAndGetRootNode = (
-    group: NodeGroup,
+    group: KbNavGroup,
     rootIndex: NodeIndex,
     maxColsPerWrappedRow: number[],
     idMap: KbIdMap = {},
@@ -193,7 +193,7 @@ export const buildGraphAndGetRootNode = (
             return nodeMap[id];
         }
 
-        const node: KbNavNode = createKbNaviNode(id, index, group);
+        const node: KbNavNode = createKbNavNode(id, index, group);
         nodeMap[id] = node;
 
         if (node) {

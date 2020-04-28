@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { createHeaderMainGraph } from './kb-navigation-setup';
 import { KbNavGraph, KbNavNode } from './kb-navigation';
 import { KbNavNodeMap } from './kb-navigation';
-import { createKbNaviNode } from './kb-navigation';
-import { NodeGroup } from './kb-navigation';
+import { createKbNavNode } from './kb-navigation';
+import { KbNavGroup } from './kb-navigation';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
 import { desktopHeaderLogoId } from 'komponenter/header/header-regular/meny/DesktopMenylinje';
@@ -32,10 +32,10 @@ type KeyboardNavState = {
     subGraph?: KbNavGraph;
 };
 
-export const kbMasterNode = createKbNaviNode(
+export const kbMasterNode = createKbNavNode(
     desktopHeaderLogoId,
     { col: 0, row: 1, sub: 0 },
-    NodeGroup.HeaderMenylinje
+    KbNavGroup.HeaderMenylinje
 );
 
 export const kbNavInitialState: KeyboardNavState = {
@@ -86,7 +86,7 @@ export const useKbNavMain = (): KbNavMain => {
     }, [language, arbeidsflate, menyStatus, innloggingsStatus]);
 
     useEffect(() => {
-        const arrowsHandler = KbNav.arrowsHandler(
+        const arrowkeysHandler = KbNav.arrowkeysHandler(
             kbNavState.currentNode,
             setCurrentNode
         );
@@ -97,7 +97,7 @@ export const useKbNavMain = (): KbNavMain => {
                 ...kbNavState.subGraph?.nodeMap,
             },
             setCurrentNode,
-            arrowsHandler
+            arrowkeysHandler
         );
         const escapeHandler = (event: KeyboardEvent) => {
             if (event.key !== 'Escape') {
@@ -110,17 +110,17 @@ export const useKbNavMain = (): KbNavMain => {
                 if (focusElement && focusElement instanceof HTMLElement) {
                     focusElement.blur();
                 }
-                document.removeEventListener('keydown', arrowsHandler);
+                document.removeEventListener('keydown', arrowkeysHandler);
             }
         };
 
         document.addEventListener('focusin', focusHandler);
-        document.addEventListener('keydown', arrowsHandler);
+        document.addEventListener('keydown', arrowkeysHandler);
         document.addEventListener('keydown', escapeHandler);
 
         return () => {
             document.removeEventListener('focusin', focusHandler);
-            document.removeEventListener('keydown', arrowsHandler);
+            document.removeEventListener('keydown', arrowkeysHandler);
             document.removeEventListener('keydown', escapeHandler);
         };
     }, [kbNavState, dropdownIsOpen]);
