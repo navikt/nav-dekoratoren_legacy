@@ -10,8 +10,6 @@ export const RegularHeader = () => {
     const { COOKIES } = useSelector((state: AppState) => state.environment);
     const language = useSelector((state: AppState) => state.language.language);
 
-    console.log('COOKIES.LANGUAGE', COOKIES.LANGUAGE);
-    console.log('COOKIES.LANGUAGE', COOKIES.LANGUAGE);
     const showContextMenu =
         (language === Language.IKKEBESTEMT &&
             COOKIES.LANGUAGE === Language.NORSK) ||
