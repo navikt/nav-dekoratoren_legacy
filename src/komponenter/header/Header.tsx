@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenypunkter } from 'store/reducers/menu-duck';
 import Skiplinks from './skiplinks/Skiplinks';
@@ -7,37 +7,33 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { SimpleHeader } from './header-simple/HeaderSimple';
 import { RegularHeader } from './header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
-import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import {
+    cookieOptions,
+    settArbeidsflate,
+} from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
 import { Language, languageDuck } from 'store/reducers/language-duck';
 import { verifyWindowObj } from 'utils/Environment';
 import { HeadElements } from 'komponenter/HeadElements';
-import debounce from 'lodash.debounce';
-
-interface Windowview {
-    windowHeight: number;
-    navbarHeight: number;
-    topheaderHeight: number;
-    desktop: boolean;
-}
+import {
+    changeBetweenDesktopAndMobilView,
+    current,
+    initializeSticky,
+    positionNavbar,
+} from '../../utils/stickyheader-utils';
 
 export const desktopBreakpoint: number = 768;
 
 export const Header = () => {
-    const current: Windowview = {
-        windowHeight: 0,
-        navbarHeight: 0,
-        topheaderHeight: 0,
-        desktop: true,
-    };
     const decoratorHeader = verifyWindowObj()
         ? document.getElementById('decorator-header')
         : null;
+    let arbeidsflate: any = null;
     let hovedmeny: any = null;
 
     const dispatch = useDispatch();
     const [cookies, setCookie] = useCookies(['decorator-context']);
+    const lang = useSelector((state: AppState) => state.language.language);
     const { PARAMS, APP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
     );
@@ -45,129 +41,7 @@ export const Header = () => {
         number | undefined
     >();
 
-    const setElementStyleTop = (
-        element: HTMLElement,
-        distance: number
-    ): void => {
-        element.style.top = `${distance}px`;
-    };
-
-    const transformNodeList = (menuHeight: number): void => {
-        const nodeList = document.getElementsByClassName(
-            'mobilmeny__menuheight'
-        );
-        if (nodeList) {
-            Array.from(nodeList).forEach((element: any) => {
-                element.style.top = `${menuHeight}px`;
-                element.style.height = `calc(100% - ${menuHeight}px)`;
-            });
-        }
-    };
-
-    const throttleMenuPosition = (menuHeight: number) => {
-        const throttleMobilmenyPlacement = debounce(
-            () => transformNodeList(menuHeight),
-            100
-        );
-        throttleMobilmenyPlacement();
-    };
-
-    const initializeSticky = (
-        mainmenu: HTMLElement,
-        topheader: HTMLElement
-    ): void => {
-        current.topheaderHeight =
-            topheader.offsetHeight - mainmenu.offsetHeight;
-        window.pageYOffset > current.topheaderHeight
-            ? setElementStyleTop(mainmenu, 0)
-            : setElementStyleTop(
-                  mainmenu,
-                  (current.navbarHeight =
-                      current.topheaderHeight - window.pageYOffset)
-              );
-
-        current.windowHeight = window.pageYOffset;
-        mainmenu.style.position = 'fixed';
-        current.desktop = window.innerWidth > desktopBreakpoint;
-        throttleMenuPosition(current.navbarHeight + mainmenu.offsetHeight);
-    };
-
-    const scrollActionUp = (): boolean => {
-        return window.pageYOffset < current.windowHeight;
-    };
-
-    const handleScrollup = (menu: HTMLElement): void => {
-        if (window.pageYOffset < current.topheaderHeight) {
-            setElementStyleTop(
-                menu,
-                (current.navbarHeight =
-                    current.topheaderHeight - window.pageYOffset)
-            );
-            if (!current.desktop) {
-                throttleMenuPosition(current.navbarHeight + menu.offsetHeight);
-            }
-        }
-        if (current.navbarHeight < 0) {
-            const buffer =
-                current.navbarHeight +
-                (current.windowHeight - window.pageYOffset);
-            buffer > 0
-                ? setElementStyleTop(menu, (current.navbarHeight = 0))
-                : setElementStyleTop(menu, (current.navbarHeight = buffer));
-            if (!current.desktop) {
-                throttleMenuPosition(current.navbarHeight + menu.offsetHeight);
-            }
-        }
-    };
-
-    const handleScrollDown = (menu: HTMLElement): void => {
-        if (current.navbarHeight > menu.offsetHeight * -1) {
-            const buffer =
-                current.navbarHeight -
-                (window.pageYOffset - current.windowHeight);
-
-            buffer < menu.offsetHeight * -1
-                ? setElementStyleTop(
-                      menu,
-                      (current.navbarHeight = menu.offsetHeight * -1)
-                  )
-                : setElementStyleTop(menu, (current.navbarHeight = buffer));
-            if (!current.desktop) {
-                throttleMenuPosition(current.navbarHeight + menu.offsetHeight);
-            }
-        }
-    };
-
-    const positionNavbar = (mainmenu: HTMLElement): void => {
-        scrollActionUp()
-            ? handleScrollup(mainmenu)
-            : handleScrollDown(mainmenu);
-        current.windowHeight = window.pageYOffset;
-    };
-
-    const initStickySelectors = (): void => {
-        if (
-            (current.desktop && window.innerWidth < desktopBreakpoint) ||
-            (!current.desktop && window.innerWidth >= desktopBreakpoint)
-        ) {
-            hovedmeny = verifyWindowObj()
-                ? document.getElementById(
-                      window.innerWidth > desktopBreakpoint
-                          ? 'hovedmeny'
-                          : 'mobilmeny'
-                  )
-                : null;
-
-            if (decoratorHeader && hovedmeny) {
-                hovedmeny.style.position = 'static';
-                setHeaderoffsetHeight(0);
-                setHeaderoffsetHeight(decoratorHeader.offsetHeight);
-                initializeSticky(hovedmeny, decoratorHeader);
-            }
-        }
-    };
-
-    useEffect(() => {
+    const getHovedmenyNode = () => {
         hovedmeny = verifyWindowObj()
             ? document.getElementById(
                   window.innerWidth > desktopBreakpoint
@@ -175,19 +49,64 @@ export const Header = () => {
                       : 'mobilmeny'
               )
             : null;
-        if (hovedmeny && decoratorHeader) {
-            setHeaderoffsetHeight(decoratorHeader.offsetHeight);
+    };
+
+    const getArbeidsflatNode = () => {
+        arbeidsflate = verifyWindowObj()
+            ? document.getElementById('arbeidsflate')
+            : null;
+    };
+
+    const setMinHeightOnHeader = (
+        decorator: HTMLElement,
+        arbeidsmeny: HTMLElement
+    ) => {
+        hovedmeny.style.position = 'static';
+        setHeaderoffsetHeight(0);
+        setHeaderoffsetHeight(
+            lang === Language.NORSK && current.desktop
+                ? decorator.offsetHeight
+                : decorator.offsetHeight - arbeidsmeny.offsetHeight
+        );
+    };
+
+    const initStickySelectors = (): void => {
+        if (changeBetweenDesktopAndMobilView()) {
+            getHovedmenyNode();
+            if (decoratorHeader && hovedmeny && arbeidsflate) {
+                setMinHeightOnHeader(decoratorHeader, arbeidsflate);
+
+                initializeSticky(
+                    hovedmeny,
+                    decoratorHeader,
+                    arbeidsflate,
+                    lang
+                );
+            }
+        }
+    };
+
+    const defaultToPerson = () => {
+        dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
+        setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
+    };
+
+    useEffect(() => {
+        getHovedmenyNode();
+        getArbeidsflatNode();
+        if (hovedmeny && decoratorHeader && arbeidsflate) {
+            setMinHeightOnHeader(decoratorHeader, arbeidsflate);
             window.onscroll = function stickyheader() {
                 if (hovedmeny) {
                     positionNavbar(hovedmeny);
                 }
             };
-            initializeSticky(hovedmeny, decoratorHeader);
+            initializeSticky(hovedmeny, decoratorHeader, arbeidsflate, lang);
             window.addEventListener('resize', initStickySelectors);
             return () =>
                 window.removeEventListener('resize', initStickySelectors);
         }
-    }, []);
+    }, [lang]);
 
     // External data
     useEffect(() => {
@@ -202,18 +121,9 @@ export const Header = () => {
             setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
         } else {
             const context = cookies['decorator-context'];
-            if (context) {
-                // Fetch state from cookie to prevent flickering
-                dispatch(settArbeidsflate(context));
-            } else {
-                // Default to privatperson
-                dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
-                setCookie(
-                    'decorator-context',
-                    MenuValue.PRIVATPERSON,
-                    cookieOptions
-                );
-            }
+
+            // Fetch state from cookie OR default to private-person
+            context ? dispatch(settArbeidsflate(context)) : defaultToPerson();
         }
     }, []);
 
@@ -223,16 +133,6 @@ export const Header = () => {
         const action = languageDuck.actionCreator({ language });
         setCookie('decorator-language', language, cookieOptions);
         dispatch(action);
-    }, []);
-
-    // External scripts
-    useEffect(() => {
-        if (typeof window) {
-            /*
-                Importeres foreløpig via tagmanager
-                appendVergic();
-             */
-        }
     }, []);
 
     return (
