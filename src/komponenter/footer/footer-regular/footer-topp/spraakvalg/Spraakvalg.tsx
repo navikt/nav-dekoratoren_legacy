@@ -39,10 +39,10 @@ const Spraakvalg = () => {
     const setCookieAndRedirect = (
         event: React.MouseEvent<MouseEvent | HTMLAnchorElement>,
         url: string,
-        language: Language
+        lang: Language
     ) => {
         event.preventDefault();
-        setCookie('decorator-language', language, cookieOptions);
+        setCookie('decorator-language', lang, cookieOptions);
         document.location.href = url;
     };
 
