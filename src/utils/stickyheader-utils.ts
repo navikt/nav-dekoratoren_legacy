@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { verifyWindowObj } from './Environment';
 import debounce from 'lodash.debounce';
 import { desktopBreakpoint } from '../komponenter/header/Header';
 import { Language } from '../store/reducers/language-duck';
@@ -9,13 +7,15 @@ interface Windowview {
     navbarHeight: number;
     topheaderHeight: number;
     desktop: boolean;
+    language: Language;
 }
 
-const current: Windowview = {
+export const current: Windowview = {
     windowHeight: 0,
     navbarHeight: 0,
     topheaderHeight: 0,
     desktop: true,
+    language: Language.IKKEBESTEMT,
 };
 
 const setElementStyleTop = (element: HTMLElement, distance: number): void => {
@@ -46,7 +46,7 @@ const setTopHeaderOffSetHeigh = (
     arbeidsflateHeight: number
 ) => {
     current.topheaderHeight =
-        language === Language.NORSK
+        current.language === Language.NORSK
             ? topheaderHeight - mainmenuHeight
             : topheaderHeight - arbeidsflateHeight - mainmenuHeight;
 };
@@ -64,8 +64,10 @@ const setMenuStartPoint = (menu: HTMLElement) => {
 export const initializeSticky = (
     mainmenu: HTMLElement,
     topheader: HTMLElement,
-    arbeidsflate: HTMLElement
+    arbeidsflate: HTMLElement,
+    language: Language
 ): void => {
+    current.language = language;
     setTopHeaderOffSetHeigh(
         topheader.offsetHeight,
         mainmenu.offsetHeight,
@@ -126,4 +128,11 @@ const handleScrollDown = (menu: HTMLElement): void => {
 export const positionNavbar = (mainmenu: HTMLElement): void => {
     scrollActionUp() ? handleScrollup(mainmenu) : handleScrollDown(mainmenu);
     current.windowHeight = window.pageYOffset;
+};
+
+export const changeBetweenDesktopAndMobilView = () => {
+    return (
+        (current.desktop && window.innerWidth < desktopBreakpoint) ||
+        (!current.desktop && window.innerWidth >= desktopBreakpoint)
+    );
 };

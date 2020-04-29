@@ -15,25 +15,16 @@ import { useCookies } from 'react-cookie';
 import { Language, languageDuck } from 'store/reducers/language-duck';
 import { verifyWindowObj } from 'utils/Environment';
 import { HeadElements } from 'komponenter/HeadElements';
-import debounce from 'lodash.debounce';
-
-interface Windowview {
-    windowHeight: number;
-    navbarHeight: number;
-    topheaderHeight: number;
-    desktop: boolean;
-}
+import {
+    changeBetweenDesktopAndMobilView,
+    current,
+    initializeSticky,
+    positionNavbar,
+} from '../../utils/stickyheader-utils';
 
 export const desktopBreakpoint: number = 768;
 
 export const Header = () => {
-    const current: Windowview = {
-        windowHeight: 0,
-        navbarHeight: 0,
-        topheaderHeight: 0,
-        desktop: true,
-    };
-
     const decoratorHeader = verifyWindowObj()
         ? document.getElementById('decorator-header')
         : null;
@@ -51,7 +42,6 @@ export const Header = () => {
     >();
 
     const getHovedmenyNode = () => {
-        // bli igjen
         hovedmeny = verifyWindowObj()
             ? document.getElementById(
                   window.innerWidth > desktopBreakpoint
@@ -62,37 +52,9 @@ export const Header = () => {
     };
 
     const getArbeidsflatNode = () => {
-        // bli igjen
         arbeidsflate = verifyWindowObj()
             ? document.getElementById('arbeidsflate')
             : null;
-    };
-
-    const setElementStyleTop = (
-        element: HTMLElement,
-        distance: number
-    ): void => {
-        element.style.top = `${distance}px`;
-    };
-
-    const transformNodeList = (menuHeight: number): void => {
-        const nodeList = document.getElementsByClassName(
-            'mobilmeny__menuheight'
-        );
-        if (nodeList) {
-            Array.from(nodeList).forEach((element: any) => {
-                element.style.top = `${menuHeight}px`;
-                element.style.height = `calc(100% - ${menuHeight}px)`;
-            });
-        }
-    };
-
-    const throttleMenuPosition = (menuHeight: number) => {
-        const throttleMobilmenyPlacement = debounce(
-            () => transformNodeList(menuHeight),
-            100
-        );
-        throttleMobilmenyPlacement();
     };
 
     const setMinHeightOnHeader = (
@@ -108,124 +70,30 @@ export const Header = () => {
         );
     };
 
-    const setTopHeaderOffSetHeigh = (
-        topheaderHeight: number,
-        mainmenuHeight: number,
-        arbeidsflateHeight: number
-    ) => {
-        current.topheaderHeight =
-            language === Language.NORSK
-                ? topheaderHeight - mainmenuHeight
-                : topheaderHeight - arbeidsflateHeight - mainmenuHeight;
-    };
-
-    const setMenuStartPoint = (menu: HTMLElement) => {
-        window.pageYOffset > current.topheaderHeight
-            ? setElementStyleTop(menu, 0)
-            : setElementStyleTop(
-                  menu,
-                  (current.navbarHeight =
-                      current.topheaderHeight - window.pageYOffset)
-              );
-    };
-
-    const initializeSticky = (
-        mainmenu: HTMLElement,
-        topheader: HTMLElement,
-        arbeidsflate: HTMLElement
-    ): void => {
-        setTopHeaderOffSetHeigh(
-            topheader.offsetHeight,
-            mainmenu.offsetHeight,
-            arbeidsflate.offsetHeight
-        );
-        setMenuStartPoint(mainmenu);
-
-        current.windowHeight = window.pageYOffset;
-        mainmenu.style.position = 'fixed';
-        current.desktop = window.innerWidth > desktopBreakpoint;
-        throttleMenuPosition(current.navbarHeight + mainmenu.offsetHeight);
-    };
-
-    const scrollActionUp = (): boolean => {
-        return window.pageYOffset < current.windowHeight;
-    };
-
-    const handleScrollup = (menu: HTMLElement): void => {
-        if (window.pageYOffset < current.topheaderHeight) {
-            setElementStyleTop(
-                menu,
-                (current.navbarHeight =
-                    current.topheaderHeight - window.pageYOffset)
-            );
-            if (!current.desktop) {
-                throttleMenuPosition(current.navbarHeight + menu.offsetHeight);
-            }
-        }
-        if (current.navbarHeight < 0) {
-            const buffer =
-                current.navbarHeight +
-                (current.windowHeight - window.pageYOffset);
-            buffer > 0
-                ? setElementStyleTop(menu, (current.navbarHeight = 0))
-                : setElementStyleTop(menu, (current.navbarHeight = buffer));
-            if (!current.desktop) {
-                throttleMenuPosition(current.navbarHeight + menu.offsetHeight);
-            }
-        }
-    };
-
-    const handleScrollDown = (menu: HTMLElement): void => {
-        if (current.navbarHeight > menu.offsetHeight * -1) {
-            const buffer =
-                current.navbarHeight -
-                (window.pageYOffset - current.windowHeight);
-
-            buffer < menu.offsetHeight * -1
-                ? setElementStyleTop(
-                      menu,
-                      (current.navbarHeight = menu.offsetHeight * -1)
-                  )
-                : setElementStyleTop(menu, (current.navbarHeight = buffer));
-            if (!current.desktop) {
-                throttleMenuPosition(current.navbarHeight + menu.offsetHeight);
-            }
-        }
-    };
-
-    const positionNavbar = (mainmenu: HTMLElement): void => {
-        scrollActionUp()
-            ? handleScrollup(mainmenu)
-            : handleScrollDown(mainmenu);
-        current.windowHeight = window.pageYOffset;
-    };
-
-    const changeBetweenDesktopAndMobilView = () => {
-        return (
-            (current.desktop && window.innerWidth < desktopBreakpoint) ||
-            (!current.desktop && window.innerWidth >= desktopBreakpoint)
-        );
-    };
-
     const initStickySelectors = (): void => {
-        // bli igjen
         if (changeBetweenDesktopAndMobilView()) {
             getHovedmenyNode();
             if (decoratorHeader && hovedmeny && arbeidsflate) {
                 setMinHeightOnHeader(decoratorHeader, arbeidsflate);
-                initializeSticky(hovedmeny, decoratorHeader, arbeidsflate);
+
+                initializeSticky(
+                    hovedmeny,
+                    decoratorHeader,
+                    arbeidsflate,
+                    language
+                );
             }
         }
     };
 
+    const defaultToPerson = () => {
+        dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
+        setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
+    };
+
     useEffect(() => {
-        // bli igjen
         getHovedmenyNode();
         getArbeidsflatNode();
-        arbeidsflate = verifyWindowObj()
-            ? document.getElementById('arbeidsflate')
-            : null;
-
         if (hovedmeny && decoratorHeader && arbeidsflate) {
             setMinHeightOnHeader(decoratorHeader, arbeidsflate);
             window.onscroll = function stickyheader() {
@@ -233,7 +101,12 @@ export const Header = () => {
                     positionNavbar(hovedmeny);
                 }
             };
-            initializeSticky(hovedmeny, decoratorHeader, arbeidsflate);
+            initializeSticky(
+                hovedmeny,
+                decoratorHeader,
+                arbeidsflate,
+                language
+            );
             window.addEventListener('resize', initStickySelectors);
             return () =>
                 window.removeEventListener('resize', initStickySelectors);
@@ -253,18 +126,9 @@ export const Header = () => {
             setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
         } else {
             const context = cookies['decorator-context'];
-            if (context) {
-                // Fetch state from cookie to prevent flickering
-                dispatch(settArbeidsflate(context));
-            } else {
-                // Default to privatperson
-                dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
-                setCookie(
-                    'decorator-context',
-                    MenuValue.PRIVATPERSON,
-                    cookieOptions
-                );
-            }
+
+            // Fetch state from cookie OR default to private-person
+            context ? dispatch(settArbeidsflate(context)) : defaultToPerson();
         }
     }, []);
 
