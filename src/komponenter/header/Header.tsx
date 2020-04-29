@@ -33,7 +33,7 @@ export const Header = () => {
 
     const dispatch = useDispatch();
     const [cookies, setCookie] = useCookies(['decorator-context']);
-    const language = useSelector((state: AppState) => state.language.language);
+    const lang = useSelector((state: AppState) => state.language.language);
     const { PARAMS, APP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
     );
@@ -58,15 +58,15 @@ export const Header = () => {
     };
 
     const setMinHeightOnHeader = (
-        decoratorHeader: HTMLElement,
-        arbeidsflate: HTMLElement
+        decorator: HTMLElement,
+        arbeidsmeny: HTMLElement
     ) => {
         hovedmeny.style.position = 'static';
         setHeaderoffsetHeight(0);
         setHeaderoffsetHeight(
-            language === Language.NORSK && current.desktop
-                ? decoratorHeader.offsetHeight
-                : decoratorHeader.offsetHeight - arbeidsflate.offsetHeight
+            lang === Language.NORSK && current.desktop
+                ? decorator.offsetHeight
+                : decorator.offsetHeight - arbeidsmeny.offsetHeight
         );
     };
 
@@ -80,7 +80,7 @@ export const Header = () => {
                     hovedmeny,
                     decoratorHeader,
                     arbeidsflate,
-                    language
+                    lang
                 );
             }
         }
@@ -101,17 +101,12 @@ export const Header = () => {
                     positionNavbar(hovedmeny);
                 }
             };
-            initializeSticky(
-                hovedmeny,
-                decoratorHeader,
-                arbeidsflate,
-                language
-            );
+            initializeSticky(hovedmeny, decoratorHeader, arbeidsflate, lang);
             window.addEventListener('resize', initStickySelectors);
             return () =>
                 window.removeEventListener('resize', initStickySelectors);
         }
-    }, [language]);
+    }, [lang]);
 
     // External data
     useEffect(() => {
