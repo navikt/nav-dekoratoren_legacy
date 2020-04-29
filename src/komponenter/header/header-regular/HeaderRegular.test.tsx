@@ -28,13 +28,13 @@ describe('<RegularHeader>', () => {
         store.dispatch(
             languageDuck.actionCreator({ language: Language.ENGELSK })
         );
-        expect(mountWithRedux(store).find(Arbeidsflatemeny)).toHaveLength(1);
+        expect(mountWithRedux(store).find(Arbeidsflatemeny)).toHaveLength(0);
     });
 
     it('Skal ikke rendre <Arbeidsflatemeny> komponent hvis språk er samisk', () => {
         store.dispatch(
             languageDuck.actionCreator({ language: Language.SAMISK })
         );
-        expect(mountWithRedux(store).find(Arbeidsflatemeny)).toHaveLength(1);
+        expect(mountWithRedux(store).find(Arbeidsflatemeny)).toHaveLength(0);
     });
 });
