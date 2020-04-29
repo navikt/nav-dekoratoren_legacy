@@ -97,7 +97,7 @@ export const template = (req: Request) => {
             .decorator-dummy-app {
                 background: #8888;
                 height: 100%;
-                min-height: 75rem;
+                min-height: 55rem;
                 display: flex;
                 justify-content: center;
                 align-items: center;

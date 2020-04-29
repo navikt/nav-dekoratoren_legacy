@@ -59,21 +59,22 @@ export const Header = () => {
 
     const setMinHeightOnHeader = (
         decorator: HTMLElement,
-        arbeidsmeny: HTMLElement
+        arbeidsmeny: HTMLElement | null
     ) => {
+        const arbeidsflateHeight = arbeidsmeny ? arbeidsmeny.offsetHeight : 44;
         hovedmeny.style.position = 'static';
         setHeaderoffsetHeight(0);
         setHeaderoffsetHeight(
             lang === Language.NORSK && current.desktop
                 ? decorator.offsetHeight
-                : decorator.offsetHeight - arbeidsmeny.offsetHeight
+                : decorator.offsetHeight - arbeidsflateHeight
         );
     };
 
     const initStickySelectors = (): void => {
         if (changeBetweenDesktopAndMobilView()) {
             getHovedmenyNode();
-            if (decoratorHeader && hovedmeny && arbeidsflate) {
+            if (decoratorHeader && hovedmeny) {
                 setMinHeightOnHeader(decoratorHeader, arbeidsflate);
 
                 initializeSticky(
@@ -94,7 +95,7 @@ export const Header = () => {
     useEffect(() => {
         getHovedmenyNode();
         getArbeidsflatNode();
-        if (hovedmeny && decoratorHeader && arbeidsflate) {
+        if (hovedmeny && decoratorHeader) {
             setMinHeightOnHeader(decoratorHeader, arbeidsflate);
             window.onscroll = function stickyheader() {
                 if (hovedmeny) {
