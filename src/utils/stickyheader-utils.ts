@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { verifyWindowObj } from './Environment';
 import debounce from 'lodash.debounce';
 import { desktopBreakpoint } from '../komponenter/header/Header';
+import { Language } from '../store/reducers/language-duck';
 
 interface Windowview {
     windowHeight: number;
@@ -16,16 +17,6 @@ const current: Windowview = {
     topheaderHeight: 0,
     desktop: true,
 };
-
-export const [headeroffsetHeight, setHeaderoffsetHeight] = useState<
-    number | undefined
->();
-
-const decoratorHeader = verifyWindowObj()
-    ? document.getElementById('decorator-header')
-    : null;
-
-let hovedmeny: any = null;
 
 const setElementStyleTop = (element: HTMLElement, distance: number): void => {
     element.style.top = `${distance}px`;
@@ -49,18 +40,38 @@ const throttleMenuPosition = (menuHeight: number) => {
     throttleMobilmenyPlacement();
 };
 
-const initializeStickyheader = (
-    mainmenu: HTMLElement,
-    topheader: HTMLElement
-): void => {
-    current.topheaderHeight = topheader.offsetHeight - mainmenu.offsetHeight;
+const setTopHeaderOffSetHeigh = (
+    topheaderHeight: number,
+    mainmenuHeight: number,
+    arbeidsflateHeight: number
+) => {
+    current.topheaderHeight =
+        language === Language.NORSK
+            ? topheaderHeight - mainmenuHeight
+            : topheaderHeight - arbeidsflateHeight - mainmenuHeight;
+};
+
+const setMenuStartPoint = (menu: HTMLElement) => {
     window.pageYOffset > current.topheaderHeight
-        ? setElementStyleTop(mainmenu, 0)
+        ? setElementStyleTop(menu, 0)
         : setElementStyleTop(
-              mainmenu,
+              menu,
               (current.navbarHeight =
                   current.topheaderHeight - window.pageYOffset)
           );
+};
+
+export const initializeSticky = (
+    mainmenu: HTMLElement,
+    topheader: HTMLElement,
+    arbeidsflate: HTMLElement
+): void => {
+    setTopHeaderOffSetHeigh(
+        topheader.offsetHeight,
+        mainmenu.offsetHeight,
+        arbeidsflate.offsetHeight
+    );
+    setMenuStartPoint(mainmenu);
 
     current.windowHeight = window.pageYOffset;
     mainmenu.style.position = 'fixed';
@@ -112,48 +123,7 @@ const handleScrollDown = (menu: HTMLElement): void => {
     }
 };
 
-const positionNavbar = (mainmenu: HTMLElement): void => {
+export const positionNavbar = (mainmenu: HTMLElement): void => {
     scrollActionUp() ? handleScrollup(mainmenu) : handleScrollDown(mainmenu);
     current.windowHeight = window.pageYOffset;
-};
-
-const initStickySelectors = (): void => {
-    if (
-        (current.desktop && window.innerWidth < desktopBreakpoint) ||
-        (!current.desktop && window.innerWidth >= desktopBreakpoint)
-    ) {
-        hovedmeny = verifyWindowObj()
-            ? document.getElementById(
-                  window.innerWidth > desktopBreakpoint
-                      ? 'hovedmeny'
-                      : 'mobilmeny'
-              )
-            : null;
-
-        if (decoratorHeader && hovedmeny) {
-            hovedmeny.style.position = 'static';
-            setHeaderoffsetHeight(0);
-            setHeaderoffsetHeight(decoratorHeader.offsetHeight);
-            initializeStickyheader(hovedmeny, decoratorHeader);
-        }
-    }
-};
-
-const initializeSticky2 = () => {
-    hovedmeny = verifyWindowObj()
-        ? document.getElementById(
-              window.innerWidth > desktopBreakpoint ? 'hovedmeny' : 'mobilmeny'
-          )
-        : null;
-    if (hovedmeny && decoratorHeader) {
-        setHeaderoffsetHeight(decoratorHeader.offsetHeight);
-        window.onscroll = function stickyheader() {
-            if (hovedmeny) {
-                positionNavbar(hovedmeny);
-            }
-        };
-        initializeStickyheader(hovedmeny, decoratorHeader);
-        window.addEventListener('resize', initStickySelectors);
-        return () => window.removeEventListener('resize', initStickySelectors);
-    }
 };

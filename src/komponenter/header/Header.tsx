@@ -51,12 +51,20 @@ export const Header = () => {
     >();
 
     const getHovedmenyNode = () => {
+        // bli igjen
         hovedmeny = verifyWindowObj()
             ? document.getElementById(
                   window.innerWidth > desktopBreakpoint
                       ? 'hovedmeny'
                       : 'mobilmeny'
               )
+            : null;
+    };
+
+    const getArbeidsflatNode = () => {
+        // bli igjen
+        arbeidsflate = verifyWindowObj()
+            ? document.getElementById('arbeidsflate')
             : null;
     };
 
@@ -200,6 +208,7 @@ export const Header = () => {
     };
 
     const initStickySelectors = (): void => {
+        // bli igjen
         if (changeBetweenDesktopAndMobilView()) {
             getHovedmenyNode();
             if (decoratorHeader && hovedmeny && arbeidsflate) {
@@ -210,7 +219,9 @@ export const Header = () => {
     };
 
     useEffect(() => {
+        // bli igjen
         getHovedmenyNode();
+        getArbeidsflatNode();
         arbeidsflate = verifyWindowObj()
             ? document.getElementById('arbeidsflate')
             : null;
