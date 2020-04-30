@@ -24,11 +24,9 @@ import {
 export const desktopBreakpoint: number = 768;
 
 export const Header = () => {
-    const decoratorHeader = verifyWindowObj()
-        ? document.getElementById('decorator-header')
-        : null;
     let arbeidsflate: any = null;
     let hovedmeny: any = null;
+    let headerInfoBanner: any = null;
 
     const dispatch = useDispatch();
     const [cookies, setCookie] = useCookies(['decorator-context']);
@@ -40,52 +38,53 @@ export const Header = () => {
         number | undefined
     >();
 
-    const getHovedmenyNode = () => {
-        hovedmeny = verifyWindowObj()
-            ? document.getElementById(
-                  window.innerWidth > desktopBreakpoint
-                      ? 'hovedmeny'
-                      : 'mobilmeny'
-              )
-            : null;
-    };
+    const getHovedmenyNode = () =>
+        (hovedmeny = document.getElementById(
+            window.innerWidth > desktopBreakpoint ? 'hovedmeny' : 'mobilmeny'
+        ));
 
-    const getArbeidsflatNode = () => {
-        arbeidsflate = verifyWindowObj()
-            ? document.getElementById('arbeidsflate')
-            : null;
-    };
+    const getArbeidsflatNode = () =>
+        (arbeidsflate = document.getElementById('arbeidsflate'));
+
+    const getHeaderInfoBanner = () =>
+        (headerInfoBanner = document.getElementById('dekorator-under-arbeid'));
 
     const setMinHeightOnHeader = (
-        decorator: HTMLElement,
-        arbeidsmeny: HTMLElement | null
+        main: HTMLElement,
+        arbeidsmeny: HTMLElement | null,
+        headerInfo: HTMLElement
     ) => {
         const arbeidsflateHeight = arbeidsmeny ? arbeidsmeny.offsetHeight : 44;
         hovedmeny.style.position = 'static';
         setHeaderoffsetHeight(0);
+
         arbeidsmeny
             ? setHeaderoffsetHeight(
                   lang === Language.NORSK || lang === Language.IKKEBESTEMT
-                      ? decorator.offsetHeight
-                      : decorator.offsetHeight - arbeidsflateHeight
+                      ? headerInfo.offsetHeight +
+                            arbeidsflateHeight +
+                            main.offsetHeight
+                      : headerInfo.offsetHeight + main.offsetHeight
               )
             : setHeaderoffsetHeight(
                   lang !== Language.NORSK
-                      ? decorator.offsetHeight
-                      : decorator.offsetHeight + arbeidsflateHeight
+                      ? headerInfo.offsetHeight + main.offsetHeight
+                      : headerInfo.offsetHeight +
+                            arbeidsflateHeight +
+                            main.offsetHeight
               );
     };
 
     const initStickySelectors = (): void => {
         if (changeBetweenDesktopAndMobilView()) {
             getHovedmenyNode();
-            if (decoratorHeader && hovedmeny) {
-                setMinHeightOnHeader(decoratorHeader, arbeidsflate);
+            if (hovedmeny && headerInfoBanner) {
+                setMinHeightOnHeader(hovedmeny, arbeidsflate, headerInfoBanner);
 
                 initializeSticky(
                     hovedmeny,
-                    decoratorHeader,
                     arbeidsflate,
+                    headerInfoBanner,
                     lang
                 );
             }
@@ -100,14 +99,15 @@ export const Header = () => {
     useEffect(() => {
         getHovedmenyNode();
         getArbeidsflatNode();
-        if (hovedmeny && decoratorHeader) {
-            setMinHeightOnHeader(decoratorHeader, arbeidsflate);
+        getHeaderInfoBanner();
+        if (hovedmeny && headerInfoBanner) {
+            setMinHeightOnHeader(hovedmeny, arbeidsflate, headerInfoBanner);
             window.onscroll = function stickyheader() {
                 if (hovedmeny) {
                     positionNavbar(hovedmeny);
                 }
             };
-            initializeSticky(hovedmeny, decoratorHeader, arbeidsflate, lang);
+            initializeSticky(hovedmeny, arbeidsflate, headerInfoBanner, lang);
             window.addEventListener('resize', initStickySelectors);
             return () =>
                 window.removeEventListener('resize', initStickySelectors);

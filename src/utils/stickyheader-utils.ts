@@ -40,9 +40,9 @@ const throttleMenuPosition = (menuHeight: number) => {
     throttleMobilmenyPlacement();
 };
 
-const setTopHeaderOffSetHeigh = (
-    topheaderHeight: number,
+const setTopHeaderOffsetHeight = (
     mainmenuHeight: number,
+    headerInfobannerHeight: number,
     arbeidsflateHeight: number,
     selectorFoundArbeidsflate: boolean
 ) => {
@@ -50,12 +50,12 @@ const setTopHeaderOffSetHeigh = (
         ? (current.topheaderHeight =
               current.language === Language.NORSK ||
               current.language === Language.IKKEBESTEMT
-                  ? topheaderHeight - mainmenuHeight
-                  : topheaderHeight - mainmenuHeight - arbeidsflateHeight)
+                  ? +arbeidsflateHeight + headerInfobannerHeight
+                  : headerInfobannerHeight)
         : (current.topheaderHeight =
               current.language !== Language.NORSK
-                  ? topheaderHeight - mainmenuHeight
-                  : topheaderHeight - mainmenuHeight + arbeidsflateHeight);
+                  ? headerInfobannerHeight
+                  : arbeidsflateHeight + headerInfobannerHeight);
 };
 
 const setMenuStartPoint = (menu: HTMLElement) => {
@@ -70,15 +70,15 @@ const setMenuStartPoint = (menu: HTMLElement) => {
 
 export const initializeSticky = (
     mainmenu: HTMLElement,
-    topheader: HTMLElement,
     arbeidsflate: HTMLElement | null,
+    headerBanner: HTMLElement,
     language: Language
 ): void => {
     const arbeidsflateHeight = arbeidsflate ? arbeidsflate.offsetHeight : 44;
     current.language = language;
-    setTopHeaderOffSetHeigh(
-        topheader.offsetHeight,
+    setTopHeaderOffsetHeight(
         mainmenu.offsetHeight,
+        headerBanner.offsetHeight,
         arbeidsflateHeight,
         !!arbeidsflate
     );
