@@ -1,6 +1,6 @@
 import debounce from 'lodash.debounce';
-import { desktopBreakpoint } from '../komponenter/header/Header';
-import { Language } from '../store/reducers/language-duck';
+import { desktopBreakpoint } from 'komponenter/header/Header';
+import { Language } from 'store/reducers/language-duck';
 
 interface Windowview {
     windowHeight: number;
@@ -40,15 +40,22 @@ const throttleMenuPosition = (menuHeight: number) => {
     throttleMobilmenyPlacement();
 };
 
-const setTopHeaderOffSetHeigh = (
-    topheaderHeight: number,
+const setTopHeaderOffsetHeight = (
     mainmenuHeight: number,
-    arbeidsflateHeight: number
+    headerInfobannerHeight: number,
+    arbeidsflateHeight: number,
+    selectorFoundArbeidsflate: boolean
 ) => {
-    current.topheaderHeight =
-        current.language === Language.NORSK
-            ? topheaderHeight - mainmenuHeight
-            : topheaderHeight - arbeidsflateHeight - mainmenuHeight;
+    selectorFoundArbeidsflate
+        ? (current.topheaderHeight =
+              current.language === Language.NORSK ||
+              current.language === Language.IKKEBESTEMT
+                  ? +arbeidsflateHeight + headerInfobannerHeight
+                  : headerInfobannerHeight)
+        : (current.topheaderHeight =
+              current.language !== Language.NORSK
+                  ? headerInfobannerHeight
+                  : arbeidsflateHeight + headerInfobannerHeight);
 };
 
 const setMenuStartPoint = (menu: HTMLElement) => {
@@ -63,15 +70,17 @@ const setMenuStartPoint = (menu: HTMLElement) => {
 
 export const initializeSticky = (
     mainmenu: HTMLElement,
-    topheader: HTMLElement,
-    arbeidsflate: HTMLElement,
+    arbeidsflate: HTMLElement | null,
+    headerBanner: HTMLElement,
     language: Language
 ): void => {
+    const arbeidsflateHeight = arbeidsflate ? arbeidsflate.offsetHeight : 44;
     current.language = language;
-    setTopHeaderOffSetHeigh(
-        topheader.offsetHeight,
+    setTopHeaderOffsetHeight(
         mainmenu.offsetHeight,
-        arbeidsflate.offsetHeight
+        headerBanner.offsetHeight,
+        arbeidsflateHeight,
+        !!arbeidsflate
     );
     setMenuStartPoint(mainmenu);
 

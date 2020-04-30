@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenypunkter } from 'store/reducers/menu-duck';
-import Skiplinks from './skiplinks/Skiplinks';
-import MenyBakgrunn from './header-regular/meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
+import Skiplinks from 'komponenter/header/skiplinks/Skiplinks';
+import MenyBakgrunn from 'komponenter/header/header-regular/meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { SimpleHeader } from './header-simple/HeaderSimple';
-import { RegularHeader } from './header-regular/HeaderRegular';
+import { SimpleHeader } from 'komponenter/header/header-simple/HeaderSimple';
+import { RegularHeader } from 'komponenter/header/header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
 import {
     cookieOptions,
@@ -13,23 +13,19 @@ import {
 } from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
 import { Language, languageDuck } from 'store/reducers/language-duck';
-import { verifyWindowObj } from 'utils/Environment';
 import { HeadElements } from 'komponenter/HeadElements';
 import {
     changeBetweenDesktopAndMobilView,
-    current,
     initializeSticky,
     positionNavbar,
-} from '../../utils/stickyheader-utils';
+} from 'utils/stickyheader-utils';
 
 export const desktopBreakpoint: number = 768;
 
 export const Header = () => {
-    const decoratorHeader = verifyWindowObj()
-        ? document.getElementById('decorator-header')
-        : null;
     let arbeidsflate: any = null;
     let hovedmeny: any = null;
+    let headerInfoBanner: any = null;
 
     const dispatch = useDispatch();
     const [cookies, setCookie] = useCookies(['decorator-context']);
@@ -41,45 +37,53 @@ export const Header = () => {
         number | undefined
     >();
 
-    const getHovedmenyNode = () => {
-        hovedmeny = verifyWindowObj()
-            ? document.getElementById(
-                  window.innerWidth > desktopBreakpoint
-                      ? 'hovedmeny'
-                      : 'mobilmeny'
-              )
-            : null;
-    };
+    const getHovedmenyNode = () =>
+        (hovedmeny = document.getElementById(
+            window.innerWidth > desktopBreakpoint ? 'hovedmeny' : 'mobilmeny'
+        ));
 
-    const getArbeidsflatNode = () => {
-        arbeidsflate = verifyWindowObj()
-            ? document.getElementById('arbeidsflate')
-            : null;
-    };
+    const getArbeidsflatNode = () =>
+        (arbeidsflate = document.getElementById('arbeidsflate'));
+
+    const getHeaderInfoBanner = () =>
+        (headerInfoBanner = document.getElementById('dekorator-under-arbeid'));
 
     const setMinHeightOnHeader = (
-        decorator: HTMLElement,
-        arbeidsmeny: HTMLElement
+        main: HTMLElement,
+        arbeidsmeny: HTMLElement | null,
+        headerInfo: HTMLElement
     ) => {
+        const arbeidsflateHeight = arbeidsmeny ? arbeidsmeny.offsetHeight : 44;
         hovedmeny.style.position = 'static';
         setHeaderoffsetHeight(0);
-        setHeaderoffsetHeight(
-            lang === Language.NORSK && current.desktop
-                ? decorator.offsetHeight
-                : decorator.offsetHeight - arbeidsmeny.offsetHeight
-        );
+
+        arbeidsmeny
+            ? setHeaderoffsetHeight(
+                  lang === Language.NORSK || lang === Language.IKKEBESTEMT
+                      ? headerInfo.offsetHeight +
+                            arbeidsflateHeight +
+                            main.offsetHeight
+                      : headerInfo.offsetHeight + main.offsetHeight
+              )
+            : setHeaderoffsetHeight(
+                  lang !== Language.NORSK
+                      ? headerInfo.offsetHeight + main.offsetHeight
+                      : headerInfo.offsetHeight +
+                            arbeidsflateHeight +
+                            main.offsetHeight
+              );
     };
 
     const initStickySelectors = (): void => {
         if (changeBetweenDesktopAndMobilView()) {
             getHovedmenyNode();
-            if (decoratorHeader && hovedmeny && arbeidsflate) {
-                setMinHeightOnHeader(decoratorHeader, arbeidsflate);
+            if (hovedmeny && headerInfoBanner) {
+                setMinHeightOnHeader(hovedmeny, arbeidsflate, headerInfoBanner);
 
                 initializeSticky(
                     hovedmeny,
-                    decoratorHeader,
                     arbeidsflate,
+                    headerInfoBanner,
                     lang
                 );
             }
@@ -94,14 +98,15 @@ export const Header = () => {
     useEffect(() => {
         getHovedmenyNode();
         getArbeidsflatNode();
-        if (hovedmeny && decoratorHeader && arbeidsflate) {
-            setMinHeightOnHeader(decoratorHeader, arbeidsflate);
+        getHeaderInfoBanner();
+        if (hovedmeny && headerInfoBanner) {
+            setMinHeightOnHeader(hovedmeny, arbeidsflate, headerInfoBanner);
             window.onscroll = function stickyheader() {
                 if (hovedmeny) {
                     positionNavbar(hovedmeny);
                 }
             };
-            initializeSticky(hovedmeny, decoratorHeader, arbeidsflate, lang);
+            initializeSticky(hovedmeny, arbeidsflate, headerInfoBanner, lang);
             window.addEventListener('resize', initStickySelectors);
             return () =>
                 window.removeEventListener('resize', initStickySelectors);
