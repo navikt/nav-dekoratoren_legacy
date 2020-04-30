@@ -1,6 +1,6 @@
 import debounce from 'lodash.debounce';
-import { desktopBreakpoint } from '../komponenter/header/Header';
-import { Language } from '../store/reducers/language-duck';
+import { desktopBreakpoint } from 'komponenter/header/Header';
+import { Language } from 'store/reducers/language-duck';
 
 interface Windowview {
     windowHeight: number;

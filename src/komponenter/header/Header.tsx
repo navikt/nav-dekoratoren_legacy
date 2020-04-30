@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenypunkter } from 'store/reducers/menu-duck';
-import Skiplinks from './skiplinks/Skiplinks';
-import MenyBakgrunn from './header-regular/meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
+import Skiplinks from 'komponenter/header/skiplinks/Skiplinks';
+import MenyBakgrunn from 'komponenter/header/header-regular/meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { SimpleHeader } from './header-simple/HeaderSimple';
-import { RegularHeader } from './header-regular/HeaderRegular';
+import { SimpleHeader } from 'komponenter/header/header-simple/HeaderSimple';
+import { RegularHeader } from 'komponenter/header/header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
 import {
     cookieOptions,
@@ -13,13 +13,12 @@ import {
 } from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
 import { Language, languageDuck } from 'store/reducers/language-duck';
-import { verifyWindowObj } from 'utils/Environment';
 import { HeadElements } from 'komponenter/HeadElements';
 import {
     changeBetweenDesktopAndMobilView,
     initializeSticky,
     positionNavbar,
-} from '../../utils/stickyheader-utils';
+} from 'utils/stickyheader-utils';
 
 export const desktopBreakpoint: number = 768;
 
