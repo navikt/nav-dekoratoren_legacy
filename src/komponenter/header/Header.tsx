@@ -17,7 +17,6 @@ import { verifyWindowObj } from 'utils/Environment';
 import { HeadElements } from 'komponenter/HeadElements';
 import {
     changeBetweenDesktopAndMobilView,
-    current,
     initializeSticky,
     positionNavbar,
 } from '../../utils/stickyheader-utils';
@@ -64,11 +63,17 @@ export const Header = () => {
         const arbeidsflateHeight = arbeidsmeny ? arbeidsmeny.offsetHeight : 44;
         hovedmeny.style.position = 'static';
         setHeaderoffsetHeight(0);
-        setHeaderoffsetHeight(
-            lang === Language.NORSK && current.desktop
-                ? decorator.offsetHeight
-                : decorator.offsetHeight - arbeidsflateHeight
-        );
+        arbeidsmeny
+            ? setHeaderoffsetHeight(
+                  lang === Language.NORSK || lang === Language.IKKEBESTEMT
+                      ? decorator.offsetHeight
+                      : decorator.offsetHeight - arbeidsflateHeight
+              )
+            : setHeaderoffsetHeight(
+                  lang !== Language.NORSK
+                      ? decorator.offsetHeight
+                      : decorator.offsetHeight + arbeidsflateHeight
+              );
     };
 
     const initStickySelectors = (): void => {

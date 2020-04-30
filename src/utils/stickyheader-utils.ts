@@ -48,13 +48,14 @@ const setTopHeaderOffSetHeigh = (
 ) => {
     selectorFoundArbeidsflate
         ? (current.topheaderHeight =
-              current.language === Language.NORSK
+              current.language === Language.NORSK ||
+              current.language === Language.IKKEBESTEMT
                   ? topheaderHeight - mainmenuHeight
-                  : topheaderHeight - arbeidsflateHeight - mainmenuHeight)
+                  : topheaderHeight - mainmenuHeight - arbeidsflateHeight)
         : (current.topheaderHeight =
               current.language !== Language.NORSK
                   ? topheaderHeight - mainmenuHeight
-                  : topheaderHeight - arbeidsflateHeight - mainmenuHeight);
+                  : topheaderHeight - mainmenuHeight + arbeidsflateHeight);
 };
 
 const setMenuStartPoint = (menu: HTMLElement) => {
