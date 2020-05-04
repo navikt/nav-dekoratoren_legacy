@@ -4,10 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { settVarslerSomLest } from 'store/reducers/varsel-lest-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
-import MenylinjeKnapp from '../ekspanderende-menyer/meny-knapper/MenylinjeKnapp';
-import { VarselIkon } from '../ekspanderende-menyer/meny-knapper/ikoner/varsel-ikon/VarselIkon';
-import { Undertittel } from 'nav-frontend-typografi';
-import Tekst from 'tekster/finn-tekst';
 import VarselKnappMobil from './varselknapp/VarselKnappMobil';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import './Varselbjelle.less';
@@ -32,7 +28,7 @@ const stateSelector = (state: AppState) => ({
             state.innloggingsstatus.data.securityLevel === '4'),
     nyesteId: state.varsler.data.nyesteId,
     arbeidsflate: state.arbeidsflate.status,
-    visVarsel: state.dropdownToggles.varsler,
+    isOpen: state.dropdownToggles.varsler,
     hovedMenyAapen: state.dropdownToggles.hovedmeny,
     underMenyAapen: state.dropdownToggles.undermeny,
 });
@@ -46,24 +42,22 @@ const Varselbjelle = (props: VarselbjelleProps) => {
         antallUlesteVarsler,
         erInnlogget,
         nyesteId,
+        isOpen,
         arbeidsflate,
     } = useSelector(stateSelector);
-
-    const [clicked, settClicked] = useState(false);
 
     const classname =
         antallUlesteVarsler > 0
             ? 'varsler-toggle-container har-nye-varsler'
             : 'varsler-toggle-container';
 
-    const ApneVarselEvent = () => {
+    const apneVarselEvent = () => {
         triggerGaEvent({
             context: arbeidsflate,
             category: GACategory.Header,
-            action: clicked ? 'varsler-close' : 'varsler-open',
+            action: isOpen ? 'varsler-close' : 'varsler-open',
         });
 
-        settClicked(!clicked);
         dispatch(toggleVarsler());
         if (antallUlesteVarsler > 0) {
             settVarslerSomLest(environment.APP_BASE_URL, nyesteId, dispatch);
@@ -75,13 +69,12 @@ const Varselbjelle = (props: VarselbjelleProps) => {
         if (node && node.contains(e.target as HTMLElement)) {
             return;
         }
-        if (clicked) {
+        if (isOpen) {
             triggerGaEvent({
                 context: arbeidsflate,
                 category: GACategory.Header,
                 action: 'varsler-close',
             });
-            settClicked(false);
         }
     };
 
@@ -95,36 +88,13 @@ const Varselbjelle = (props: VarselbjelleProps) => {
     return (
         <div ref={varselbjelleRef} className="varselbjelle">
             {erInnlogget && arbeidsflate === MenuValue.PRIVATPERSON ? (
-                <>
-                    <VarselKnappMobil
-                        triggerVarsel={ApneVarselEvent}
-                        antallVarsel={antallVarsler}
-                        varselIsOpen={clicked}
-                        tabIndex={props.tabindex}
-                        clsName={classname}
-                    />
-                    <div className="media-tablet-desktop">
-                        <div id="varsler-toggle-container">
-                            <MenylinjeKnapp
-                                toggleMenu={ApneVarselEvent}
-                                isOpen={clicked}
-                                classname={classname}
-                                id={'varsler-toggle-knapp-id'}
-                                ariaLabel={`Varsler. Du har ${
-                                    antallVarsler > 0 ? antallVarsler : 'ingen'
-                                } varsler.`}
-                            >
-                                <VarselIkon isOpen={clicked} />
-                                <Undertittel className={'varsler-tekst'}>
-                                    <Tekst id={'varsler-tittel'} />
-                                </Undertittel>
-                            </MenylinjeKnapp>
-                        </div>
-                        <div className="min-varsel-wrapper">
-                            {props.children(clicked, ApneVarselEvent)}
-                        </div>
-                    </div>
-                </>
+                <VarselKnappMobil
+                    triggerVarsel={apneVarselEvent}
+                    antallVarsel={antallVarsler}
+                    varselIsOpen={isOpen}
+                    tabIndex={props.tabindex}
+                    clsName={classname}
+                />
             ) : null}
         </div>
     );
