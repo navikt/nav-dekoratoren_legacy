@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { genererUrl } from 'utils/Environment';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
@@ -19,10 +19,18 @@ export const MenyLenke = (props: Props) => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const { lenke, isOpen, menyGruppeNavn } = props;
     const href = genererUrl(XP_BASE_URL, lenke.path);
+    const lockStyle = {
+        position: 'absolute',
+        left: '-24px',
+    } as CSSProperties;
 
     return (
-        <li>
-            {props.displayLock && <Lock height={'16px'} width={'16px'} />}
+        <li style={{ position: 'relative' }}>
+            {props.displayLock && (
+                <div style={lockStyle}>
+                    <Lock height={'18px'} width={'18px'} />
+                </div>
+            )}
             <LenkeMedGA
                 tabIndex={isOpen ? 0 : -1}
                 href={href}
