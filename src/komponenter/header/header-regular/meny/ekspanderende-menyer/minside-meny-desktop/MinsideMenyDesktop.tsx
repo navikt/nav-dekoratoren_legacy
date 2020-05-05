@@ -11,6 +11,7 @@ import MinsideDropdown from './minside-dropdown/MinsideDropdown';
 import { MinsidePersonKnapp } from '../meny-knapper/minside-knapper/MinsidePersonKnapp';
 import MinsideArbgiverKnapp from '../meny-knapper/minside-knapper/MinsideArbgiverKnapp';
 import './MinsideMenyDesktop.less';
+import MinsideDropdownLockMsg from './minside-dropdown/MinsideDropdownLockMsg';
 
 const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,
@@ -79,11 +80,14 @@ export const MinsideMenyDesktop = () => {
             id={classname}
         >
             {menyPunkter.status === Status.OK ? (
-                <MinsideDropdown
-                    classname={classname}
-                    isOpen={isOpen}
-                    menyLenker={minsideMenyPunkter}
-                />
+                <>
+                    <MinsideDropdown
+                        classname={classname}
+                        isOpen={isOpen}
+                        menyLenker={minsideMenyPunkter}
+                    />
+                    <MinsideDropdownLockMsg classname={classname} />
+                </>
             ) : (
                 <MenySpinner />
             )}

@@ -21,7 +21,7 @@ export const MenyLenke = (props: Props) => {
     const href = genererUrl(XP_BASE_URL, lenke.path);
     const lockStyle = {
         position: 'absolute',
-        left: '-24px',
+        left: '-20px',
     } as CSSProperties;
 
     return (
