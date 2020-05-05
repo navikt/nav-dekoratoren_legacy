@@ -8,12 +8,15 @@ import { erNavDekoratoren } from 'utils/Environment';
 import { getSpraaklenker, Spraaklenke } from './Spraakvalg-lenker';
 import Tekst from 'tekster/finn-tekst';
 import { Language } from 'store/reducers/language-duck';
+import { useCookies } from 'react-cookie';
+import { cookieOptions } from '../../../../../store/reducers/arbeidsflate-duck';
 
 const Spraakvalg = () => {
     const language = useSelector((state: AppState) => state.language.language);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const { COOKIES } = useSelector((state: AppState) => state.environment);
     const [erDekoratoren, setErDekoratoren] = useState<boolean>(false);
+    const [, setCookie] = useCookies(['decorator-context']);
     const arbeidsflate = useSelector(
         (state: AppState) => state.arbeidsflate.status
     );
@@ -33,6 +36,16 @@ const Spraakvalg = () => {
         setSpraklenker(getLenker());
     }, []);
 
+    const setCookieAndRedirect = (
+        event: React.MouseEvent<MouseEvent | HTMLAnchorElement>,
+        url: string,
+        lang: Language
+    ) => {
+        event.preventDefault();
+        setCookie('decorator-language', lang, cookieOptions);
+        document.location.href = url;
+    };
+
     return (
         <>
             <Undertittel
@@ -47,6 +60,15 @@ const Spraakvalg = () => {
                         <Normaltekst>
                             <LenkeMedGA
                                 href={erDekoratoren ? lenke.testurl : lenke.url}
+                                onClick={(event) =>
+                                    setCookieAndRedirect(
+                                        event,
+                                        erDekoratoren
+                                            ? lenke.testurl
+                                            : lenke.url,
+                                        lenke.lang
+                                    )
+                                }
                                 gaEventArgs={{
                                     context: arbeidsflate,
                                     category: GACategory.Footer,

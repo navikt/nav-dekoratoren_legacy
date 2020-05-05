@@ -48,7 +48,7 @@ const browserConfig = {
                         ],
                         loader: 'file-loader',
                         options: {
-                            esModule:false,
+                            esModule: false,
                             name: '/media/[name].[ext]',
                         },
                     },

@@ -51,17 +51,15 @@ const MobilMenylinje = ({ language }: Props) => {
                                 <LoggInnKnappMobil />
                             </InnloggingsstatusProvider>
                         ) : (
-                            <>
-                                <VarselinnboksProvider>
-                                    <Varselbjelle tabindex={true}>
-                                        {(clicked) =>
-                                            clicked && (
-                                                <LukkVarsel clicked={clicked} />
-                                            )
-                                        }
-                                    </Varselbjelle>
-                                </VarselinnboksProvider>
-                            </>
+                            <VarselinnboksProvider>
+                                <Varselbjelle tabindex={true}>
+                                    {(clicked) =>
+                                        clicked && (
+                                            <LukkVarsel clicked={clicked} />
+                                        )
+                                    }
+                                </Varselbjelle>
+                            </VarselinnboksProvider>
                         )}
                         {language === Language.NORSK ||
                         language === Language.ENGELSK ? (
