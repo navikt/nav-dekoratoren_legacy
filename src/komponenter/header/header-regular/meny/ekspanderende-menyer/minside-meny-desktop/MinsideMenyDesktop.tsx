@@ -7,9 +7,13 @@ import { toggleMinsideMeny } from 'store/reducers/dropdown-toggle-duck';
 import { Status } from 'api/api';
 import MenySpinner from '../meny-spinner/MenySpinner';
 import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
-import MinsideDropdown from './minside-dropdown/MinsideDropdown';
+import MinsideVisning from './minside-visning/MinsideVisning';
 import { MinsidePersonKnapp } from '../meny-knapper/minside-knapper/MinsidePersonKnapp';
 import MinsideArbgiverKnapp from '../meny-knapper/minside-knapper/MinsideArbgiverKnapp';
+import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
+import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
+import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
+import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './MinsideMenyDesktop.less';
 
 const stateSelector = (state: AppState) => ({
@@ -21,14 +25,23 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-minside-meny';
-export const desktopMinsideKnappId = `${classname}-knapp-id`;
+export const desktopMinsideKnappId = 'desktop-minside-meny-knapp-id';
 
-export const MinsideMenyDesktop = () => {
+type Props = {
+    kbNavMainState: KbNavMain;
+};
+
+export const MinsideMenyDesktop = ({ kbNavMainState }: Props) => {
     const dispatch = useDispatch();
     const { environment } = useSelector((state: AppState) => state);
     const { arbeidsflate, innloggetStatus } = useSelector(stateSelector);
     const { isOpen, language, menyPunkter } = useSelector(stateSelector);
     const minsideMenyPunkter = getMinsideMenyNode(menyPunkter.data, language);
+    useKbNavSub(
+        configForNodeGroup[KbNavGroup.MinsideMeny],
+        kbNavMainState,
+        isOpen
+    );
 
     if (
         !innloggetStatus.authenticated ||
@@ -79,10 +92,11 @@ export const MinsideMenyDesktop = () => {
             id={classname}
         >
             {menyPunkter.status === Status.OK ? (
-                <MinsideDropdown
+                <MinsideVisning
                     classname={classname}
                     isOpen={isOpen}
                     menyLenker={minsideMenyPunkter}
+                    dittNavUrl={environment.DITT_NAV_URL}
                 />
             ) : (
                 <MenySpinner />

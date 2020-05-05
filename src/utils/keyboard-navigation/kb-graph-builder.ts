@@ -1,20 +1,22 @@
 import {
+    createKbNavNode,
     getKbId,
-    IdMap,
-    NaviGroup,
-    NaviIndex,
-    NaviNode,
-    NaviNodeMap,
+    KbIdMap,
+    KbNavGroup,
+    NodeIndex,
+    KbNavNode,
+    KbNavNodeMap,
+    NodeEdge,
 } from './kb-navigation';
 
-export const buildNaviGraphAndGetRootNode = (
-    group: NaviGroup,
-    rootIndex: NaviIndex,
+export const buildGraphAndGetRootNode = (
+    group: KbNavGroup,
+    rootIndex: NodeIndex,
     maxColsPerWrappedRow: number[],
-    nodeMap: NaviNodeMap,
-    idMap: IdMap = {}
-): NaviNode => {
-    const getTopEdgeIndex = (index: NaviIndex) => {
+    idMap: KbIdMap = {},
+    nodeMap: KbNavNodeMap = {}
+): KbNavNode => {
+    const getTopEdgeIndex = (index: NodeIndex) => {
         const { col, row, sub } = index;
 
         const aboveIsSameCol =
@@ -65,7 +67,7 @@ export const buildNaviGraphAndGetRootNode = (
         };
     };
 
-    const getBottomEdgeIndex = (index: NaviIndex) => {
+    const getBottomEdgeIndex = (index: NodeIndex) => {
         const { col, row, sub } = index;
 
         const belowIsSameCol = !!getElement({
@@ -125,7 +127,7 @@ export const buildNaviGraphAndGetRootNode = (
         };
     };
 
-    const getLeftEdgeIndex = (index: NaviIndex) => {
+    const getLeftEdgeIndex = (index: NodeIndex) => {
         const { col, row, sub } = index;
         const maxCols = maxColsPerWrappedRow[row];
 
@@ -145,7 +147,7 @@ export const buildNaviGraphAndGetRootNode = (
         };
     };
 
-    const getRightEdgeIndex = (index: NaviIndex) => {
+    const getRightEdgeIndex = (index: NodeIndex) => {
         const { col, row, sub } = index;
         const maxCols = maxColsPerWrappedRow[row];
 
@@ -181,35 +183,25 @@ export const buildNaviGraphAndGetRootNode = (
         return sub;
     };
 
-    const getElement = (index: NaviIndex) =>
+    const getElement = (index: NodeIndex) =>
         document.getElementById(getKbId(group, index, idMap)) as HTMLElement;
 
-    const getNodeAtIndex = (index: NaviIndex): NaviNode => {
-        if (!index || !getElement(index)) {
-            return null;
-        }
-
+    const getNodeAtIndex = (index: NodeIndex): KbNavNode => {
         const generatedId = getKbId(group, index, idMap);
         const id = idMap[generatedId] || generatedId;
         if (nodeMap[id]) {
             return nodeMap[id];
         }
 
-        const node: NaviNode = {
-            id: id,
-            index: index,
-            up: null,
-            down: null,
-            left: null,
-            right: null,
-        };
-
+        const node: KbNavNode = createKbNavNode(id, index, group);
         nodeMap[id] = node;
 
-        node.up = getNodeAtIndex(getTopEdgeIndex(index));
-        node.down = getNodeAtIndex(getBottomEdgeIndex(index));
-        node.left = getNodeAtIndex(getLeftEdgeIndex(index));
-        node.right = getNodeAtIndex(getRightEdgeIndex(index));
+        if (node) {
+            node[NodeEdge.Top] = getNodeAtIndex(getTopEdgeIndex(index));
+            node[NodeEdge.Bottom] = getNodeAtIndex(getBottomEdgeIndex(index));
+            node[NodeEdge.Left] = getNodeAtIndex(getLeftEdgeIndex(index));
+            node[NodeEdge.Right] = getNodeAtIndex(getRightEdgeIndex(index));
+        }
 
         return node;
     };

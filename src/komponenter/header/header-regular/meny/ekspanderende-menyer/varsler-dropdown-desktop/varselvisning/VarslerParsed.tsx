@@ -2,7 +2,7 @@ import React from 'react';
 import htmlReactParser, { DomElement, domToReact } from 'html-react-parser';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
-import { getKbId, NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 
@@ -18,6 +18,7 @@ const ikoner: { [str: string]: string } = {
 
 type Props = {
     varsler: string;
+    rowIndex: number;
 };
 
 const parseIkon = (ikonStr: string) => {
@@ -39,7 +40,8 @@ const parseIkon = (ikonStr: string) => {
 const parseLenke = (
     href: string | undefined,
     children: DomElement[] | undefined,
-    index: number
+    rowIndex: number,
+    subIndex: number
 ) => {
     const arbeidsflate = useSelector(
         (state: AppState) => state.arbeidsflate.status
@@ -49,7 +51,11 @@ const parseLenke = (
             href={href || ''}
             tabIndex={0}
             className={'varsel-lenke'}
-            id={getKbId(NaviGroup.Varsler, { col: 0, row: 1, sub: index })}
+            id={getKbId(KbNavGroup.Varsler, {
+                col: 0,
+                row: rowIndex,
+                sub: subIndex,
+            })}
             gaEventArgs={{
                 context: arbeidsflate,
                 category: GACategory.Header,
@@ -62,7 +68,7 @@ const parseLenke = (
     );
 };
 
-export const VarslerParsed = ({ varsler }: Props) => {
+export const VarslerParsed = ({ varsler, rowIndex }: Props) => {
     let lenkeIndex = 0;
     const options = {
         replace: ({ name, attribs, children }: DomElement) => {
@@ -97,7 +103,12 @@ export const VarslerParsed = ({ varsler }: Props) => {
             }
 
             if (name?.toLowerCase() === 'a') {
-                return parseLenke(attribs?.href, children, lenkeIndex++);
+                return parseLenke(
+                    attribs?.href,
+                    children,
+                    rowIndex,
+                    lenkeIndex++
+                );
             }
         },
     };

@@ -2,7 +2,7 @@ import React from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { MenyLenkeSeksjon } from '../../../meny-lenker/MenyLenkeSeksjon';
 import BEMHelper from 'utils/bem';
-import { NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './Hovedseksjon.less';
 
 interface Props {
@@ -22,8 +22,8 @@ export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
                         menygruppe={menygruppe}
                         isOpen={isOpen}
                         colIndex={index}
-                        rowIndex={2}
-                        kbNaviGroup={NaviGroup.Hovedmeny}
+                        rowIndex={1}
+                        kbNodeGroup={KbNavGroup.Hovedmeny}
                         key={menygruppe.displayName}
                     />
                 ))}

@@ -309,7 +309,6 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                                 'sok-input-label',
                                                 language
                                             )}
-                                            id={'desktop-decorator-sok-input'}
                                             tabIndex={
                                                 this.props.tabindex ? 0 : -1
                                             }

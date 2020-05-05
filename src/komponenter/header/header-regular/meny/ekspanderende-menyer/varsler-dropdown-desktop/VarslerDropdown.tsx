@@ -12,6 +12,10 @@ import { VarselIkon } from '../meny-knapper/ikoner/varsel-ikon/VarselIkon';
 import { Varselvisning } from './varselvisning/Varselvisning';
 import { MenuValue } from 'utils/meny-storage-utils';
 import './VarslerDropdown.less';
+import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
+import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
+import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
+import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.varsler,
@@ -22,9 +26,13 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-varsler-dropdown';
-export const desktopVarslerKnappId = `${classname}-knapp-id`;
+export const desktopVarslerKnappId = 'desktop-varsler-dropdown-knapp-id';
 
-export const VarslerDropdown = () => {
+type Props = {
+    kbNavMainState: KbNavMain;
+};
+
+export const VarslerDropdown = ({ kbNavMainState }: Props) => {
     const {
         isOpen,
         varsler,
@@ -33,6 +41,7 @@ export const VarslerDropdown = () => {
         appBaseUrl,
     } = useSelector(stateSelector);
     const dispatch = useDispatch();
+    useKbNavSub(configForNodeGroup[KbNavGroup.Varsler], kbNavMainState, isOpen);
 
     if (
         !innloggetStatus.authenticated ||

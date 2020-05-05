@@ -9,17 +9,19 @@ import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
-import './NavLogoRod.less';
 import { useCookies } from 'react-cookie';
+import './NavLogoRod.less';
 
 const NavLogoRod = ({
     width,
     height,
     classname,
+    id,
 }: {
     width?: string;
     height?: string;
     classname?: string;
+    id?: string;
 }) => {
     const dispatch = useDispatch();
     const [, setCookie] = useCookies(['decorator-context']);
@@ -33,6 +35,7 @@ const NavLogoRod = ({
         <LenkeMedGA
             href={context.url}
             classNameOverride={classname}
+            id={id}
             gaEventArgs={{
                 context: arbeidsflate,
                 category: GACategory.Header,

@@ -1,4 +1,6 @@
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Status } from 'api/api';
@@ -8,10 +10,16 @@ import Tekst from 'tekster/finn-tekst';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
-import { HovedmenyDropdown } from './hovedmeny-dropdown/HovedmenyDropdown';
+import { HovedmenyVisning } from './hovedmeny-visning/HovedmenyVisning';
 import MenySpinner from '../meny-spinner/MenySpinner';
 import HamburgerIkon from '../meny-knapper/ikoner/hamburger-ikon/HamburgerIkon';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
+import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
+import { KbNavConfig } from 'utils/keyboard-navigation/kb-navigation-setup';
+import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
+import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
+import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { matchMedia } from 'utils/match-media-polyfill';
 import './HovedmenyDesktop.less';
 
 const stateSelector = (state: AppState) => ({
@@ -23,9 +31,41 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-hovedmeny';
-export const desktopHovedmenyKnappId = `${classname}-knapp-id`;
+export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';
 
-export const HovedmenyDesktop = () => {
+const nodeGroup = KbNavGroup.Hovedmeny;
+const mqlDesktop = matchMedia('(min-width: 1440px)');
+const mqlTablet = matchMedia('(min-width: 1024px)');
+
+const getMaxColsPerRow = (): Array<number> => {
+    const getNumColsFromCss = (element: HTMLElement) =>
+        parseInt(
+            window.getComputedStyle(element).getPropertyValue('--num-cols'),
+            10
+        );
+
+    const toppSeksjonCols = 1;
+
+    const hovedSeksjonElement = document.getElementsByClassName(
+        `${classname}__hoved-seksjon`
+    )[0] as HTMLElement;
+    const hovedSeksjonCols =
+        (hovedSeksjonElement && getNumColsFromCss(hovedSeksjonElement)) || 1;
+
+    const bunnSeksjonElement = document.getElementsByClassName(
+        `${classname}__bunn-seksjon`
+    )[0] as HTMLElement;
+    const bunnSeksjonCols =
+        (bunnSeksjonElement && getNumColsFromCss(bunnSeksjonElement)) || 1;
+
+    return [toppSeksjonCols, hovedSeksjonCols, bunnSeksjonCols];
+};
+
+type Props = {
+    kbNavMainState: KbNavMain;
+};
+
+export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
     const dispatch = useDispatch();
     const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(
         stateSelector
@@ -36,6 +76,31 @@ export const HovedmenyDesktop = () => {
         language,
         arbeidsflate
     );
+
+    const kbConfig = configForNodeGroup[nodeGroup];
+    const [kbNavConfig, setKbNavConfig] = useState<KbNavConfig>(kbConfig);
+    useKbNavSub(kbNavConfig, kbNavMainState, isOpen);
+
+    const updateMaxCols = () =>
+        setKbNavConfig({
+            ...kbNavConfig,
+            maxColsPerRow: getMaxColsPerRow(),
+        });
+
+    useEffect(() => {
+        const cleanUp = () => {
+            mqlDesktop.removeEventListener('change', updateMaxCols);
+            mqlTablet.removeEventListener('change', updateMaxCols);
+        };
+
+        mqlDesktop.addEventListener('change', updateMaxCols);
+        mqlTablet.addEventListener('change', updateMaxCols);
+        return cleanUp;
+    }, []);
+
+    useEffect(() => {
+        updateMaxCols();
+    }, [hovedmenyPunkter, arbeidsflate]);
 
     const toggleMenu = () => {
         triggerGaEvent({
@@ -74,7 +139,7 @@ export const HovedmenyDesktop = () => {
             id={classname}
         >
             {menyPunkter.status === Status.OK ? (
-                <HovedmenyDropdown
+                <HovedmenyVisning
                     classname={classname}
                     arbeidsflate={arbeidsflate}
                     language={language}

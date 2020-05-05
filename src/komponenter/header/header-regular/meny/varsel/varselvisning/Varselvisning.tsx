@@ -46,11 +46,7 @@ class Varselvisning extends React.Component<Props, State> {
     }
 
     setTabIndex = () => {
-        const varslerWrapperElement: string = this.erTabletEllerDesktop()
-            ? '.desktopmeny .nav-varsler'
-            : '.mobilmeny .nav-varsler';
-
-        const varsler = document.querySelector(varslerWrapperElement);
+        const varsler = document.querySelector('.mobilmeny .nav-varsler');
 
         if (varsler) {
             for (
