@@ -9,24 +9,32 @@ import Tekst from 'tekster/finn-tekst';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import SokMenyIkon from '../meny-knapper/ikoner/sok-ikon/SokMenyIkon';
+import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
+import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
+import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import './SokDropdown.less';
 
 const stateSelector = (state: AppState) => ({
-    sokIsOpen: state.dropdownToggles.sok,
-    menyIsOpen: state.dropdownToggles.hovedmeny,
+    isOpen: state.dropdownToggles.sok,
 });
 
 const classname = 'desktop-sok-dropdown';
-export const desktopSokKnappId = `${classname}-knapp-id`;
+export const desktopSokKnappId = 'desktop-sok-dropdown-knapp-id';
 
-export const SokDropdown = () => {
-    const { sokIsOpen } = useSelector(stateSelector);
+type Props = {
+    kbNavMainState: KbNavMain;
+};
+
+export const SokDropdown = ({ kbNavMainState }: Props) => {
+    const { isOpen } = useSelector(stateSelector);
     const dispatch = useDispatch();
+    useKbNavSub(configForNodeGroup[KbNavGroup.Sok], kbNavMainState, isOpen);
 
     const toggleMenu = () => {
         triggerGaEvent({
             category: GACategory.Header,
-            action: `sok-${sokIsOpen ? 'close' : 'open'}`,
+            action: `sok-${isOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleSok());
     };
@@ -34,12 +42,12 @@ export const SokDropdown = () => {
     const knapp = (
         <MenylinjeKnapp
             toggleMenu={toggleMenu}
-            isOpen={sokIsOpen}
+            isOpen={isOpen}
             classname={classname}
             id={desktopSokKnappId}
             ariaLabel={'Søkeknapp'}
         >
-            <SokMenyIkon isOpen={sokIsOpen} />
+            <SokMenyIkon isOpen={isOpen} />
             <Undertittel>
                 <Tekst id={'sok-knapp'} />
             </Undertittel>
@@ -50,7 +58,7 @@ export const SokDropdown = () => {
         <EkspanderbarMeny
             classname={classname}
             id={classname}
-            isOpen={sokIsOpen}
+            isOpen={isOpen}
             menyKnapp={knapp}
         >
             <Sok tabindex={true} />

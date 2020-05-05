@@ -5,7 +5,7 @@ import { createStore } from 'store';
 import { dataInitState } from 'store/reducers/menu-duck';
 import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
-import HovedmenyDropdown from './HovedmenyDropdown';
+import HovedmenyVisning from './HovedmenyVisning';
 import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
 import { Toppseksjon } from './topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
@@ -15,7 +15,7 @@ const store = createStore();
 const shallowWithProps = (lang: Language, arbeidsflate: MenuValue) => {
     return mount(
         <ReduxProvider store={store}>
-            <HovedmenyDropdown
+            <HovedmenyVisning
                 classname={'meny'}
                 isOpen={true}
                 arbeidsflate={arbeidsflate}

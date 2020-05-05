@@ -1,7 +1,7 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
 import BunnseksjonLenke from './BunnseksjonLenke';
-import KbNav, { NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
+import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Language } from 'store/reducers/language-duck';
 import { finnTekst } from 'tekster/finn-tekst';
@@ -12,8 +12,8 @@ import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
-import './Bunnseksjon.less';
 import { useCookies } from 'react-cookie';
+import './Bunnseksjon.less';
 
 interface Props {
     classname: string;
@@ -37,7 +37,7 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                         language !== Language.NORSK ? !lenke.key : true
                     )
                     .map((lenke, index) => {
-                        const kbNaviIndex = { col: index, row: 3, sub: 0 };
+                        const kbNaviIndex = { col: index, row: 2, sub: 0 };
                         const context = lenke as ArbeidsflateLenke;
                         return (
                             <BunnseksjonLenke
@@ -46,7 +46,7 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                                 stikkord={finnTekst(lenke.stikkordId, language)}
                                 className={classname}
                                 id={KbNav.getKbId(
-                                    NaviGroup.Hovedmeny,
+                                    KbNavGroup.Hovedmeny,
                                     kbNaviIndex
                                 )}
                                 onClick={(event) => {

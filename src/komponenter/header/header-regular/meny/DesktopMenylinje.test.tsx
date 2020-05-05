@@ -1,13 +1,21 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
 import DesktopMenylinje from './DesktopMenylinje';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import HovedmenyDesktop from './ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
 import { SokDropdown } from './ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { reducers } from 'store/reducers';
+import { mount } from 'enzyme';
 
-const shallowWithProps = () => {
-    return shallow(<DesktopMenylinje />);
-};
+const store = createStore(reducers);
+
+const shallowWithProps = () =>
+    mount(
+        <Provider store={store}>
+            <DesktopMenylinje />
+        </Provider>
+    );
 
 describe('<DesktopMenylinje>', () => {
     it('Skal rendre <NavLogoRod> komponent', () => {

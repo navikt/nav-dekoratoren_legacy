@@ -3,7 +3,7 @@ import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
 import { MenyLenke } from './MenyLenke';
-import KbNav, { NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
+import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './MenyLenker.less';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
     isOpen: boolean;
     colIndex: number;
     rowIndex: number;
-    kbNaviGroup: NaviGroup;
+    kbNodeGroup: KbNavGroup;
 }
 
 export const MenyLenkeSeksjon = ({
@@ -19,7 +19,7 @@ export const MenyLenkeSeksjon = ({
     isOpen,
     colIndex,
     rowIndex,
-    kbNaviGroup,
+    kbNodeGroup,
 }: Props) => {
     const classname = 'lenkeseksjon';
     const cls = BEMHelper(classname);
@@ -43,7 +43,7 @@ export const MenyLenkeSeksjon = ({
                             isOpen={isOpen}
                             displayLock={lenke.displayLock}
                             menyGruppeNavn={menygruppe.displayName}
-                            id={KbNav.getKbId(kbNaviGroup, kbNaviIndex)}
+                            id={KbNav.getKbId(kbNodeGroup, kbNaviIndex)}
                         />
                     );
                 })}

@@ -11,6 +11,7 @@ import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { erNavDekoratoren } from 'utils/Environment';
+import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './Arbeidsflatemeny.less';
 
 const Arbeidsflatemeny = () => {
@@ -29,7 +30,7 @@ const Arbeidsflatemeny = () => {
             aria-label="Velg brukergruppe"
         >
             <ul className={cls.element('topp-liste-rad')} role="tablist">
-                {arbeidsflateLenker(XP_BASE_URL).map((lenke) => {
+                {arbeidsflateLenker(XP_BASE_URL).map((lenke, index) => {
                     return (
                         <li
                             role="tab"
@@ -39,6 +40,11 @@ const Arbeidsflatemeny = () => {
                         >
                             <LenkeMedGA
                                 classNameOverride={cls.element('lenke')}
+                                id={getKbId(KbNavGroup.HeaderMenylinje, {
+                                    col: index,
+                                    row: 0,
+                                    sub: 0,
+                                })}
                                 href={lenke.url}
                                 onClick={(event) => {
                                     event.preventDefault();

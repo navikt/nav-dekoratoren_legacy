@@ -6,8 +6,7 @@ import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
 import { Undertittel } from 'nav-frontend-typografi';
-import { NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { getKbId } from 'utils/keyboard-navigation/kb-navigation';
+import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './Varselvisning.less';
 
 const stateSelector = (state: AppState) => ({
@@ -19,7 +18,7 @@ const stateSelector = (state: AppState) => ({
 
 const classname = 'varsler-display-desktop';
 
-const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => {
+const alleVarslerLenke = (rowIndex: number, nyeVarslerMsg: string) => {
     const { API_VARSELINNBOKS_URL } = useSelector(
         (state: AppState) => state.environment
     );
@@ -27,7 +26,11 @@ const alleVarslerLenke = (index: number, nyeVarslerMsg: string) => {
         <div className="dekorator-vis-alle-lenke">
             <LenkeMedGA
                 href={API_VARSELINNBOKS_URL}
-                id={getKbId(NaviGroup.Varsler, { col: 0, row: index, sub: 0 })}
+                id={getKbId(KbNavGroup.Varsler, {
+                    col: 0,
+                    row: rowIndex,
+                    sub: 0,
+                })}
                 tabIndex={0}
                 gaEventArgs={{
                     category: GACategory.Header,
@@ -59,8 +62,11 @@ export const Varselvisning = () => {
                 <Tekst id={'varsler-tittel'} />
             </Undertittel>
             {visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
-            <VarslerParsed varsler={varsler} />
-            {visAlleVarslerLenke && alleVarslerLenke(1, nyeVarslerMsg)}
+            <VarslerParsed
+                varsler={varsler}
+                rowIndex={visAlleVarslerLenke ? 1 : 0}
+            />
+            {visAlleVarslerLenke && alleVarslerLenke(2, nyeVarslerMsg)}
         </div>
     );
 };

@@ -2,7 +2,7 @@ import Tekst from 'tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import KbNav, { NaviGroup } from 'utils/keyboard-navigation/kb-navigation';
+import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { GACategory } from 'utils/google-analytics';
 import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { useDispatch, useSelector } from 'react-redux';
@@ -41,9 +41,9 @@ export const Toppseksjon = ({ classname }: Props) => {
                     }
                 }}
                 className={cls.element('topp-seksjon-lenke')}
-                id={KbNav.getKbId(NaviGroup.Hovedmeny, {
+                id={KbNav.getKbId(KbNavGroup.Hovedmeny, {
                     col: 0,
-                    row: 1,
+                    row: 0,
                     sub: 0,
                 })}
                 gaEventArgs={{

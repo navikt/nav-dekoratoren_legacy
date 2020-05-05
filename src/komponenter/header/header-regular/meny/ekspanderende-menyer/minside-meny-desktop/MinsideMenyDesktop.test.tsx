@@ -12,6 +12,7 @@ import { Status } from 'api/api';
 import mockMenu from 'server/mock/menu.json';
 import { languageDuck } from 'store/reducers/language-duck';
 import { Language } from 'store/reducers/language-duck';
+import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
 
 const innloggetAction = {
     type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
@@ -41,10 +42,18 @@ const languageAction = languageDuck.actionCreator({
     language: Language.NORSK,
 });
 
+const kbNavDummy = {
+    mainNodeMap: {},
+    subNodeMap: {},
+    currentNode: kbMasterNode,
+    setCurrentNode: () => null,
+    setSubGraph: () => null,
+};
+
 const mountWithRedux = (store: Store) => {
     return mount(
         <Provider store={store}>
-            <MinsideMenyDesktop />
+            <MinsideMenyDesktop kbNavMainState={kbNavDummy} />
         </Provider>
     );
 };

@@ -1,46 +1,81 @@
-import { buildNaviGraphAndGetRootNode } from './kb-navi-graph-builder';
+import { buildGraphAndGetRootNode } from './kb-graph-builder';
 
-export enum NaviGroup {
-    Hovedmeny = 'desktop-meny-lenke',
-    MinsideMeny = 'desktop-minside-lenke',
-    Varsler = 'desktop-varsel-lenke',
+export enum KbNavGroup {
+    HeaderMenylinje = 'desktop-header-menylinje',
+    Hovedmeny = 'desktop-hovedmeny',
+    Sok = 'desktop-sok',
+    Varsler = 'desktop-varsler',
+    MinsideMeny = 'desktop-minside',
 }
 
-export type NaviIndex = {
+export enum NodeEdge {
+    Top = 'Top',
+    Bottom = 'Bottom',
+    Left = 'Left',
+    Right = 'Right',
+}
+
+export const NodeEdgeOpposite = {
+    [NodeEdge.Top]: NodeEdge.Bottom,
+    [NodeEdge.Bottom]: NodeEdge.Top,
+    [NodeEdge.Left]: NodeEdge.Right,
+    [NodeEdge.Right]: NodeEdge.Left,
+};
+
+export type NodeIndex = {
     col: number;
     row: number;
     sub: number;
 };
 
-export type NaviGraphData = {
-    groupName: NaviGroup;
-    rootNode: NaviNode;
-    nodeMap: NaviNodeMap;
+export type KbNavGraph = {
+    group: KbNavGroup;
+    rootNode: KbNavNode;
+    nodeMap: KbNavNodeMap;
 };
 
-export type NaviNode = {
+export type KbNavNode = {
     id: string;
-    index: NaviIndex;
-    up: NaviNode;
-    down: NaviNode;
-    left: NaviNode;
-    right: NaviNode;
-} | null;
-
-export type NaviNodeMap = {
-    [id: string]: NaviNode;
+    index: NodeIndex;
+    group: KbNavGroup;
+    [NodeEdge.Top]: KbNavNode;
+    [NodeEdge.Bottom]: KbNavNode;
+    [NodeEdge.Left]: KbNavNode;
+    [NodeEdge.Right]: KbNavNode;
 };
 
-export type IdMap = {
+export type KbNavNodeMap = {
+    [id: string]: KbNavNode;
+};
+
+export type KbIdMap = {
     [id: string]: string;
 };
 
-type NodeSetterCallback = (node: NaviNode) => void;
+type NodeSetterCallback = (node: KbNavNode) => void;
+
+export function createKbNavNode(
+    id: string,
+    index: NodeIndex,
+    group: KbNavGroup
+): KbNavNode {
+    const node: Partial<KbNavNode> = {
+        id: id,
+        index: index,
+        group: group,
+    };
+    node[NodeEdge.Top] = node as KbNavNode;
+    node[NodeEdge.Bottom] = node as KbNavNode;
+    node[NodeEdge.Left] = node as KbNavNode;
+    node[NodeEdge.Right] = node as KbNavNode;
+
+    return node as KbNavNode;
+}
 
 export const getKbId = (
-    group: NaviGroup,
-    index: NaviIndex,
-    idMap: IdMap = {}
+    group: KbNavGroup,
+    index: NodeIndex,
+    idMap: KbIdMap = {}
 ) => {
     const id = `${group}_${index.col}_${index.row}_${index.sub}`;
     return idMap[id] || id;
@@ -84,47 +119,45 @@ const scrollIfNearViewBounds = (element: HTMLElement) => {
     }
 };
 
-const selectNode = (
-    node: NaviNode,
-    group: NaviGroup,
-    callback: NodeSetterCallback,
+export const selectNode = (
+    node: KbNavNode,
+    callback: NodeSetterCallback = () => null,
     focus = true
 ) => {
     if (!node) {
         return;
     }
+    const element = document.getElementById(node.id) as HTMLElement;
+    if (!element) {
+        return;
+    }
     callback(node);
     if (focus) {
-        const element = document.getElementById(node.id) as HTMLElement;
-        if (!element) {
-            return;
-        }
         element.focus();
         scrollIfNearViewBounds(element);
     }
 };
 
-const kbHandler = (
-    node: NaviNode,
-    group: NaviGroup,
-    callback: NodeSetterCallback
+const arrowkeysHandler = (
+    currentNode: KbNavNode,
+    setCurrentNode: NodeSetterCallback
 ) => (event: KeyboardEvent) => {
-    if (!node) {
+    if (!currentNode) {
         return;
     }
     const key = ieKeyMap(event.key) || event.key;
     switch (key) {
         case 'ArrowLeft':
-            selectNode(node.left, group, callback);
+            selectNode(currentNode[NodeEdge.Left], setCurrentNode);
             break;
         case 'ArrowUp':
-            selectNode(node.up, group, callback);
+            selectNode(currentNode[NodeEdge.Top], setCurrentNode);
             break;
         case 'ArrowRight':
-            selectNode(node.right, group, callback);
+            selectNode(currentNode[NodeEdge.Right], setCurrentNode);
             break;
         case 'ArrowDown':
-            selectNode(node.down, group, callback);
+            selectNode(currentNode[NodeEdge.Bottom], setCurrentNode);
             break;
         default:
             return;
@@ -133,39 +166,36 @@ const kbHandler = (
 };
 
 const focusHandler = (
-    currentNode: NaviNode,
-    graph: NaviGraphData | undefined,
-    callback: NodeSetterCallback
+    currentNode: KbNavNode,
+    nodeMap: KbNavNodeMap,
+    setCurrentNode: NodeSetterCallback,
+    kbNavHandler: (e: KeyboardEvent) => void
 ) => (event: FocusEvent) => {
     const id = (event.target as HTMLElement).id;
-    if (!id || !graph || !currentNode || currentNode.id === id) {
-        return;
-    }
-
-    const focusedNode = graph.nodeMap[id];
+    const focusedNode = nodeMap[id];
     if (focusedNode) {
-        selectNode(focusedNode, graph.groupName, callback, false);
+        selectNode(focusedNode, setCurrentNode, false);
     } else {
-        selectNode(graph.rootNode, graph.groupName, callback, false);
+        document.removeEventListener('keydown', kbNavHandler);
     }
 };
 
-const getNaviGraphData = (
-    group: NaviGroup,
-    rootIndex: NaviIndex,
-    maxColsPerRow: number[],
-    idMap: IdMap = {}
-): NaviGraphData => {
+export const createKbNavGraph = (
+    group: KbNavGroup,
+    rootIndex: NodeIndex,
+    maxColsPerRow: Array<number>,
+    idMap: KbIdMap = {}
+): KbNavGraph => {
     const nodeMap = {};
-    const rootNode = buildNaviGraphAndGetRootNode(
+    const rootNode = buildGraphAndGetRootNode(
         group,
         rootIndex,
         maxColsPerRow,
-        nodeMap,
-        idMap
+        idMap,
+        nodeMap
     );
     return {
-        groupName: group,
+        group: group,
         rootNode: rootNode,
         nodeMap: nodeMap,
     };
@@ -173,7 +203,7 @@ const getNaviGraphData = (
 
 export default {
     getKbId,
-    kbHandler,
+    arrowkeysHandler,
     focusHandler,
-    getNaviGraphData,
+    createKbNavGraph,
 };
