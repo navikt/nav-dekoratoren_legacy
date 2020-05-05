@@ -7,14 +7,12 @@
     @lenkeseksjoner-margin: 1.5em;
 
     &__innhold-wrapper {
-        right: 200px;
-        max-width: 150px;
-        transition-property: @ekspanderbar-transition-props, max-width, right;
+        right: 0;
+        max-width: @smallDesktopLimitWidth;
+    }
 
-        &--aktive {
-            max-width: 100%;
-            right: 0;
-        }
+    &__innhold {
+        max-width: @smallDesktopLimitWidth;
     }
 
     &__knapp-tekst {
