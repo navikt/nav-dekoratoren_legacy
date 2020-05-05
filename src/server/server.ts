@@ -36,6 +36,7 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 app.disable('x-powered-by');
 app.use(cookiesMiddleware());
 app.use((req, res, next) => {
+    // Allowed origins
     res.header('Access-Control-Allow-Origin', req.get('origin'));
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -43,6 +44,11 @@ app.use((req, res, next) => {
         'Access-Control-Allow-Headers',
         'Origin,Content-Type,Accept,Authorization'
     );
+
+    // Cache control
+    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    res.header('Pragma', 'no-cache');
+    res.header('Expires', '-1');
     next();
 });
 
