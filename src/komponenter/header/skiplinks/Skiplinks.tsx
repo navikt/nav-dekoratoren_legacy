@@ -76,7 +76,7 @@ const Skiplinks = () => {
                     </li>
                 </ul>
             </nav>
-            <div className="dekorator-under-arbeid">
+            <div className="dekorator-under-arbeid" id="dekorator-under-arbeid">
                 <Element>
                     OBS! Denne versjonen av header og footer er under arbeid.
                     Kan ikke prodsettes.

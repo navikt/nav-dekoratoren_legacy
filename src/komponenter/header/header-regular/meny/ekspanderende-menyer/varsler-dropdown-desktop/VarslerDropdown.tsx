@@ -59,6 +59,7 @@ export const VarslerDropdown = ({ kbNavMainState }: Props) => {
             category: GACategory.Header,
             action: `varsler-${isOpen ? 'close' : 'open'}`,
         });
+
         dispatch(toggleVarsler());
     };
 
