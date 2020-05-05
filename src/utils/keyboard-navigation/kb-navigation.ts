@@ -169,14 +169,14 @@ const focusHandler = (
     currentNode: KbNavNode,
     nodeMap: KbNavNodeMap,
     setCurrentNode: NodeSetterCallback,
-    arrowkeysHandler: (e: KeyboardEvent) => void
+    kbNavHandler: (e: KeyboardEvent) => void
 ) => (event: FocusEvent) => {
     const id = (event.target as HTMLElement).id;
     const focusedNode = nodeMap[id];
     if (focusedNode) {
         selectNode(focusedNode, setCurrentNode, false);
     } else {
-        document.removeEventListener('keydown', arrowkeysHandler);
+        document.removeEventListener('keydown', kbNavHandler);
     }
 };
 
