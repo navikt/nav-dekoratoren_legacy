@@ -205,10 +205,9 @@ export const ledetekster: { [key: string]: string } = {
         'Municipalities|Education Area|Mental Health|Aids|Doctors And Therapists',
     'arbeidsflate-stikkord-om-samarbeidspartner-se':
         'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
-    'lock-msg':
-        'Tjenester markert med hengelås krever BankId, Bypass eller Commfides',
+    'lock-msg': 'Tjenester med hengelås krever BankID, Buypass eller Commfides',
     'lock-msg-en':
-        'Tjenester markert med hengelås krever BankId, Bypass eller Commfides',
+        'Tjenester med hengelås krever BankID, Buypass eller Commfides',
     'lock-msg-se':
-        'Tjenester markert med hengelås krever BankId, Bypass eller Commfides',
+        'Tjenester med hengelås krever BankID, Buypass eller Commfides',
 };
