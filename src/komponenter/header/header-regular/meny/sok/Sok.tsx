@@ -10,16 +10,14 @@ import { genererUrl } from 'utils/Environment';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { defaultData, InputState } from './sok-utils';
 import { SokeresultatData, visAlleTreff } from './sok-utils';
-import SokeforslagIngress from './sok-innhold/SokeforslagIngress';
-import Sokeforslagtext from './sok-innhold/Sokeforslagtext';
-import DesktopSokknapp from './sok-innhold/DesktopSokknapp';
-import Sokknapp from './sok-innhold/sok-modal/sok-modal-knapp/Sokknapp';
+import SokKnapper from 'komponenter/header/header-regular/meny/sok/sok-innhold/SokKnapper';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import { Systemtittel } from 'nav-frontend-typografi';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import BEMHelper from 'utils/bem';
 import { EnvironmentState } from 'store/reducers/environment-duck';
 import './Sok.less';
+import SokResultater from 'komponenter/header/header-regular/meny/sok/sok-innhold/SokResultater';
 
 interface StateProps {
     language: Language;
@@ -58,10 +56,6 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     componentWillUnmount(): void {
         this.ismounted = false;
     }
-
-    cssIndex = (index: number) => {
-        return { '--listmap': index } as React.CSSProperties;
-    };
 
     handleValueChange = (input: string) => {
         if (this.ismounted) {
@@ -102,7 +96,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                 if (this.ismounted) {
                     const tmp = [...json.hits];
                     tmp.unshift(
-                        visAlleTreff(XP_BASE_URL, this.state.writtenInput)
+                        visAlleTreff(XP_BASE_URL, this.state.writtenInput),
                     );
                     this.setState({
                         items: tmp,
@@ -139,16 +133,16 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 
     gethighlightedindex = (
         state: DownshiftState<any>,
-        keypressdown: boolean
+        keypressdown: boolean,
     ) => {
         if (state.isOpen) {
             if (typeof state.highlightedIndex === 'number') {
                 return keypressdown &&
-                    state.highlightedIndex !== predefinedlistview
+                state.highlightedIndex !== predefinedlistview
                     ? (state.highlightedIndex += 1)
                     : !keypressdown && state.highlightedIndex !== 0
-                    ? (state.highlightedIndex -= 1)
-                    : state.highlightedIndex;
+                        ? (state.highlightedIndex -= 1)
+                        : state.highlightedIndex;
             }
             if (typeof state.highlightedIndex === 'object') {
                 return (state.highlightedIndex = 0);
@@ -160,7 +154,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
         isopen: boolean,
         highlightedindex: number | null,
         inputvalue: string,
-        changes: StateChangeOptions<any>
+        changes: StateChangeOptions<any>,
     ) => {
         return {
             ...changes,
@@ -172,7 +166,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 
     stateReducer = (
         state: DownshiftState<any>,
-        changes: StateChangeOptions<any>
+        changes: StateChangeOptions<any>,
     ) => {
         switch (changes.type) {
             case Downshift.stateChangeTypes.keyDownArrowDown:
@@ -183,7 +177,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         this.setState({
                             selectedInput: this.state.items[
                                 state.highlightedIndex
-                            ].displayName,
+                                ].displayName,
                         });
                         return this.setDownshiftchanges(
                             state.isOpen,
@@ -192,8 +186,8 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                 state.highlightedIndex
                                     ? state.highlightedIndex
                                     : 0
-                            ].displayName,
-                            changes
+                                ].displayName,
+                            changes,
                         );
                     }
                 }
@@ -201,7 +195,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     state.isOpen,
                     state.highlightedIndex,
                     this.state.selectedInput,
-                    changes
+                    changes,
                 );
 
             case Downshift.stateChangeTypes.keyDownArrowUp:
@@ -211,7 +205,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         this.setState({
                             selectedInput: this.state.items[
                                 state.highlightedIndex
-                            ].displayName,
+                                ].displayName,
                         });
                         return this.setDownshiftchanges(
                             state.isOpen,
@@ -220,8 +214,8 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                 state.highlightedIndex
                                     ? state.highlightedIndex
                                     : 0
-                            ].displayName,
-                            changes
+                                ].displayName,
+                            changes,
                         );
                     }
                 }
@@ -263,7 +257,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     onChange={this.handleSelect}
                     onInputValueChange={(
                         changes: string,
-                        stateAndHelpers: any
+                        stateAndHelpers: any,
                     ) => {
                         this.enableBackground(stateAndHelpers.isOpen);
                         this.handleValueChange(changes);
@@ -272,14 +266,14 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     itemToString={(item) => this.input(item)}
                 >
                     {({
-                        getInputProps,
-                        getItemProps,
-                        getMenuProps,
-                        inputValue,
-                        setState,
-                        itemToString,
-                        clearItems,
-                    }) => (
+                          getInputProps,
+                          getItemProps,
+                          getMenuProps,
+                          inputValue,
+                          setState,
+                          itemToString,
+                          clearItems,
+                      }) => (
                         <form
                             id="sok"
                             role="search"
@@ -299,94 +293,41 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                             className={klassenavn}
                                             placeholder={finnTekst(
                                                 'sok-input-placeholder',
-                                                language
+                                                language,
                                             )}
                                             label={finnTekst(
                                                 'sok-input-label',
-                                                language
+                                                language,
                                             )}
                                             aria-label={finnTekst(
                                                 'sok-input-label',
-                                                language
+                                                language,
                                             )}
                                             tabIndex={
                                                 this.props.tabindex ? 0 : -1
                                             }
                                         />
-                                        <DesktopSokknapp
+                                        <SokKnapper
                                             writtenInput={writtenInput}
                                             onReset={() => {
                                                 setState({ isOpen: false });
                                                 this.resetDisplay();
                                             }}
                                         />
-                                        <Sokknapp
-                                            sokKnappTabindex={
-                                                this.props.tabindex
-                                                    ? this.props.tabindex
-                                                    : false
-                                            }
-                                        />
                                     </div>
                                     {loading ? (
                                         <div className={'sokeresultat-spinner'}>
                                             <NavFrontendSpinner />
                                         </div>
-                                    ) : (
-                                        <ul
-                                            {...getMenuProps()}
-                                            className="sokeresultat-liste"
-                                        >
-                                            {inputValue &&
-                                                (items.length > 1 ? (
-                                                    items
-                                                        .slice(
-                                                            0,
-                                                            predefinedlistview +
-                                                                1
-                                                        )
-                                                        .map((item, index) => (
-                                                            <li
-                                                                {...getItemProps(
-                                                                    {
-                                                                        key: index,
-                                                                        index,
-                                                                        item,
-                                                                    }
-                                                                )}
-                                                                style={this.cssIndex(
-                                                                    index
-                                                                )}
-                                                            >
-                                                                <SokeforslagIngress
-                                                                    className="sok-resultat-listItem"
-                                                                    displayName={
-                                                                        item.displayName
-                                                                    }
-                                                                />
-                                                                <Sokeforslagtext
-                                                                    highlight={
-                                                                        item.highlight
-                                                                    }
-                                                                />
-                                                            </li>
-                                                        ))
-                                                ) : (
-                                                    <div
-                                                        className={
-                                                            'sokeresultat-ingen-treff'
-                                                        }
-                                                    >
-                                                        <SokeforslagIngress
-                                                            className="sok-resultat-listItem"
-                                                            displayName={`${finnTekst(
-                                                                'sok-ingen-treff',
-                                                                language
-                                                            )} (${writtenInput})`}
-                                                        />
-                                                    </div>
-                                                ))}
-                                        </ul>
+                                    ) : inputValue && (
+                                        <SokResultater
+                                            writtenInput={writtenInput}
+                                            items={items}
+                                            predefinedlistview={predefinedlistview}
+                                            getMenuProps={getMenuProps}
+                                            getItemProps={getItemProps}
+                                            language={language}
+                                        />
                                     )}
                                 </div>
                             </div>
@@ -399,7 +340,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                             'bakgrunn',
                             this.state.setBackground && this.props.menuIsOpen
                                 ? 'active'
-                                : ''
+                                : '',
                         )}
                     />
                 </div>
