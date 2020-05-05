@@ -3,11 +3,11 @@ import BEMHelper from 'utils/bem';
 import VarselinnboksProvider from 'store/providers/Varselinnboks';
 import InnloggingsstatusProvider from 'store/providers/Innloggingsstatus';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
-import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import { SokDropdown } from './ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
 import { HovedmenyDesktop } from './ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
 import MinsideMenyDesktop from './ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
 import { VarslerDropdown } from './ekspanderende-menyer/varsler-dropdown-desktop/VarslerDropdown';
+import { LoggInnKnappDesktop } from 'komponenter/header/header-regular/meny/logginn/LoggInnKnappDesktop';
 import './DesktopMenylinje.less';
 
 const DesktopMenylinje = () => {
@@ -28,9 +28,8 @@ const DesktopMenylinje = () => {
                         <VarselinnboksProvider>
                             <VarslerDropdown />
                         </VarselinnboksProvider>
-
                         <MinsideMenyDesktop />
-                        <LoggInnKnapp />
+                        <LoggInnKnappDesktop />
                     </>
                 </InnloggingsstatusProvider>
             </div>

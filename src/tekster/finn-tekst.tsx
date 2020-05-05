@@ -1,6 +1,6 @@
 import React from 'react';
 import { ledetekster } from './ledetekster';
-import { AppState } from '../store/reducers';
+import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { Language } from 'store/reducers/language-duck';
 

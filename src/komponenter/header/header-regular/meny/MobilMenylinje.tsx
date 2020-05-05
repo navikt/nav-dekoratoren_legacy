@@ -2,7 +2,6 @@ import React from 'react';
 import BEMHelper from 'utils/bem';
 import InnloggingsstatusProvider from 'store/providers/Innloggingsstatus';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
-import LoggInnKnapp from './logginn/Logg-inn-knapp';
 import { Language } from 'store/reducers/language-duck';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
@@ -10,6 +9,7 @@ import VarselinnboksProvider from 'store/providers/Varselinnboks';
 import Varselbjelle from './varsel/Varselbjelle';
 import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
+import { LoggInnKnappMobil } from 'komponenter/header/header-regular/meny/logginn/LoggInnKnappMobil';
 import './MobilMenylinje.less';
 
 const mobilClass = BEMHelper('mobilmeny');
@@ -48,20 +48,18 @@ const MobilMenylinje = ({ language }: Props) => {
                     <div className={mobilClass.element('hoyre-kolonne')}>
                         {!innloggingsstatus.data.authenticated ? (
                             <InnloggingsstatusProvider>
-                                <LoggInnKnapp />
+                                <LoggInnKnappMobil />
                             </InnloggingsstatusProvider>
                         ) : (
-                            <>
-                                <VarselinnboksProvider>
-                                    <Varselbjelle tabindex={true}>
-                                        {(clicked) =>
-                                            clicked && (
-                                                <LukkVarsel clicked={clicked} />
-                                            )
-                                        }
-                                    </Varselbjelle>
-                                </VarselinnboksProvider>
-                            </>
+                            <VarselinnboksProvider>
+                                <Varselbjelle tabindex={true}>
+                                    {(clicked) =>
+                                        clicked && (
+                                            <LukkVarsel clicked={clicked} />
+                                        )
+                                    }
+                                </Varselbjelle>
+                            </VarselinnboksProvider>
                         )}
                         {language === Language.NORSK ||
                         language === Language.ENGELSK ? (
