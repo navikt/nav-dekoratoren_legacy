@@ -40,7 +40,6 @@ export const useKbNavSub = (
         };
 
         if (!parentNode) {
-            console.log('no parent', parentNodeId, mainNodeMap);
             return;
         }
 
