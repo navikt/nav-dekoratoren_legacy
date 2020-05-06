@@ -7,7 +7,7 @@
     @circleRadius: 10px;
     @stroke-width: 3px;
     @color: @navBla;
-    @handleAngle: 35deg;
+    @handleAngle: 40deg;
     @middle: (@height - @stroke-width) / 2;
 
     width: @width;
@@ -32,10 +32,10 @@
         width: @circleRadius*2;
         position: absolute;
         transform-origin: center;
-        transition: 0.35s all ease-in;
+        transition: 0.35s all ease-out;
 
         &--open {
-            //opacity: 0;
+            opacity: 0;
             transform: translate(
                     @width / 2 - @circleRadius,
                     @height / 2 - @circleRadius
@@ -44,7 +44,8 @@
         }
     }
 
-    &__line {
+    &__line,
+    &__line-x {
         transform-origin: top left;
         transform: translate(
                 @circleRadius * (1 + cos(@handleAngle)),
@@ -55,23 +56,19 @@
         width: @circleRadius;
         background-color: @color;
         position: absolute;
-        transition: 0.35s all ease-in;
+        transition: 0.35s all ease-out;
 
         &--open {
             .line();
             transform-origin: center;
-            transform: translateY(@middle) rotate(315deg) scale(0.8);
         }
     }
 
-    &__line-x {
-        .line();
-        transform-origin: center;
-        transform: translateY(@middle) rotate(45deg) scaleX(0);
-        transition: 0.35s all ease-in;
+    &__line--open {
+        transform: translate(-2px, @middle) rotate(-225deg) scale(0.8);
+    }
 
-        &--open {
-            transform: translateY(@middle) rotate(45deg) scale(0.8);
-        }
+    &__line-x--open {
+        transform: translate(-2px, @middle) rotate(-315deg) scale(0.8);
     }
 }
