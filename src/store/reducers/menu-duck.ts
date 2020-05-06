@@ -13,6 +13,7 @@ export interface MenyPunkter extends DataElement {
 
 export interface MenyNode {
     displayName: string;
+    displayLock?: boolean;
     path: string;
     id?: string;
     hasChildren: boolean;
