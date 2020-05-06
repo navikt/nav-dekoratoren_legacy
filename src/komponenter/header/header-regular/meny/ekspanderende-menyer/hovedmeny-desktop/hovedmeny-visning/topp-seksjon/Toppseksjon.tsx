@@ -30,6 +30,9 @@ export const Toppseksjon = ({ classname }: Props) => {
 
     return (
         <div className={cls.element('topp-seksjon')}>
+            <Systemtittel className={cls.element('topp-seksjon-tittel')}>
+                <Tekst id={`rolle-${arbeidsflate.toLowerCase()}`} />
+            </Systemtittel>
             <LenkeMedGA
                 href={context.url}
                 onClick={(event) => {
@@ -55,9 +58,6 @@ export const Toppseksjon = ({ classname }: Props) => {
             >
                 <Tekst id={'til-forside'} />
             </LenkeMedGA>
-            <Systemtittel className={cls.element('topp-seksjon-tittel')}>
-                <Tekst id={`rolle-${arbeidsflate.toLowerCase()}`} />
-            </Systemtittel>
         </div>
     );
 };

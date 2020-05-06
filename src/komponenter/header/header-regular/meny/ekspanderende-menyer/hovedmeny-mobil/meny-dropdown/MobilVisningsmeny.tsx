@@ -127,7 +127,10 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                         .concat(' ')
                         .concat(menyClass.element('menuheight'))}
                 >
-                    <Sok tabindex={this.hovedseksjonTabIndex()} />
+                    <Sok
+                        tabindex={this.hovedseksjonTabIndex()}
+                        isOpen={menuIsOpen}
+                    />
                     <InnloggetBruker tabIndex={this.hovedseksjonTabIndex()} />
 
                     <ForsideLenke
