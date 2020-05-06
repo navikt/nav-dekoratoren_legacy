@@ -16,7 +16,7 @@ const SokKnapper = (props: Props) => {
                 <button
                     type={'button'}
                     className={`${cls.element('knapp')} ${cls.element(
-                        'knapp-avbryt',
+                        'knapp-avbryt'
                     )}`}
                     onClick={props.onReset}
                     id={'desktop-sok-reset-knapp'}
@@ -33,7 +33,7 @@ const SokKnapper = (props: Props) => {
             <button
                 type="submit"
                 className={`${cls.element('knapp')} ${cls.element(
-                    'knapp-submit',
+                    'knapp-submit'
                 )}`}
                 id={'desktop-sok-submit-knapp'}
             >

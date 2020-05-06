@@ -8,6 +8,8 @@ import { GACategory } from 'utils/google-analytics';
 import Tekst from 'tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
 import MinsideDropdownLockMsg from '../minside-dropdown/MinsideDropdownLockMsg';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../../../../../store/reducers';
 
 type Props = {
     classname: string;
@@ -20,6 +22,7 @@ const nodeGroup = KbNavGroup.MinsideMeny;
 
 export const MinsideVisning = (props: Props) => {
     const { classname, isOpen, menyLenker, dittNavUrl } = props;
+    const auth = useSelector((state: AppState) => state.innloggingsstatus.data);
 
     if (!menyLenker) {
         return null;
@@ -30,6 +33,9 @@ export const MinsideVisning = (props: Props) => {
     return (
         <div className={cls.element('innhold-bredde')}>
             <div className={cls.element('topp-seksjon')}>
+                <Systemtittel className={cls.element('topp-seksjon-tittel')}>
+                    <Tekst id={'min-side'} />
+                </Systemtittel>
                 <LenkeMedGA
                     href={dittNavUrl}
                     id={KbNav.getKbId(nodeGroup, {
@@ -45,10 +51,9 @@ export const MinsideVisning = (props: Props) => {
                 >
                     <Tekst id={'til-forside'} />
                 </LenkeMedGA>
-                <Systemtittel className={cls.element('topp-seksjon-tittel')}>
-                    <Tekst id={'min-side'} />
-                </Systemtittel>
-                <MinsideDropdownLockMsg classname={classname} />
+                {auth.securityLevel !== '4' && (
+                    <MinsideDropdownLockMsg classname={classname} />
+                )}
             </div>
             <div className={cls.element('lenke-seksjoner')}>
                 {menyLenker &&

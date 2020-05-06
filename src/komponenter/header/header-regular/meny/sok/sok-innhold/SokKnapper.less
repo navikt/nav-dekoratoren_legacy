@@ -15,8 +15,11 @@
     }
     .make-handle(@circle-size) {
         transform-origin: top left;
-        transform: translate(@circle-size * (1+cos(@handle-angle)),
-            @circle-size * (1+sin(@handle-angle))) rotate(@handle-angle);
+        transform: translate(
+                @circle-size * (1 + cos(@handle-angle)),
+                @circle-size * (1 + sin(@handle-angle))
+            )
+            rotate(@handle-angle);
         height: @stroke-width;
     }
 
@@ -57,11 +60,13 @@
         position: relative;
     }
 
-    &__sok-line, &__sok-circle {
+    &__sok-line,
+    &__sok-circle {
         position: absolute;
     }
 
-    &__reset-line-x, &__reset-line-y {
+    &__reset-line-x,
+    &__reset-line-y {
         width: 28px;
         height: @stroke-width;
         background-color: @navBla;
