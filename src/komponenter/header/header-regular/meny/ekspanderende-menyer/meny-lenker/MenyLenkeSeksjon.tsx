@@ -41,6 +41,7 @@ export const MenyLenkeSeksjon = ({
                             key={index}
                             lenke={lenke}
                             isOpen={isOpen}
+                            displayLock={lenke.displayLock}
                             menyGruppeNavn={menygruppe.displayName}
                             id={KbNav.getKbId(kbNodeGroup, kbNaviIndex)}
                         />

@@ -7,6 +7,7 @@ import { LenkeMedGA } from 'komponenter/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import Tekst from 'tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
+import MinsideDropdownLockMsg from '../minside-dropdown/MinsideDropdownLockMsg';
 
 type Props = {
     classname: string;
@@ -27,7 +28,7 @@ export const MinsideVisning = (props: Props) => {
     const cls = BEMHelper(classname);
 
     return (
-        <>
+        <div className={cls.element('innhold-bredde')}>
             <div className={cls.element('topp-seksjon')}>
                 <LenkeMedGA
                     href={dittNavUrl}
@@ -47,6 +48,7 @@ export const MinsideVisning = (props: Props) => {
                 <Systemtittel className={cls.element('topp-seksjon-tittel')}>
                     <Tekst id={'min-side'} />
                 </Systemtittel>
+                <MinsideDropdownLockMsg classname={classname} />
             </div>
             <div className={cls.element('lenke-seksjoner')}>
                 {menyLenker &&
@@ -61,7 +63,7 @@ export const MinsideVisning = (props: Props) => {
                         />
                     ))}
             </div>
-        </>
+        </div>
     );
 };
 
