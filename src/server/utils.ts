@@ -24,13 +24,13 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => ({
     LOGOUT_URL: process.env.LOGOUT_URL as string,
     ...(req.query && {
         PARAMS: {
-            LANGUAGE: req.query.language || 'nb',
-            CONTEXT: (req.query.context || 'IKKEBESTEMT').toUpperCase(),
-            SIMPLE: req.query.simple || false,
-            SIMPLE_HEADER: req.query.header || false,
-            SIMPLE_FOOTER: req.query.footer || false,
-            REDIRECT_TO_APP: req.query.redirectToApp || false,
-            LEVEL: req.query.level || 'Level4',
+            LANGUAGE: (req.query.language || Language.NORSK) as Language,
+            CONTEXT: (req.query.context as MenuValue) || MenuValue.IKKEBESTEMT,
+            SIMPLE: !!req.query.simple,
+            SIMPLE_HEADER: !!req.query.header,
+            SIMPLE_FOOTER: !!req.query.footer,
+            REDIRECT_TO_APP: !!req.query.redirectToApp,
+            LEVEL: (req.query.level || 'Level3') as string,
         },
     }),
     ...(cookies && {
