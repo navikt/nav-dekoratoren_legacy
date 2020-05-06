@@ -10,7 +10,6 @@ import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
-import { useCookies } from 'react-cookie';
 import { Language, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/HeadElements';
 import { changeBetweenDesktopAndMobilView } from 'utils/stickyheader-utils';
