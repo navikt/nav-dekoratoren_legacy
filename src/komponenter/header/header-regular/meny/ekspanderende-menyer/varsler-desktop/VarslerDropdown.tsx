@@ -8,7 +8,7 @@ import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { VarslerKnapp } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/meny-knapper/varsler-knapp/VarslerKnapp';
+import { VarslerKnapp } from '../meny-knapper/varsler-knapp/VarslerKnapp';
 import './VarslerDropdown.less';
 
 const stateSelector = (state: AppState) => ({
