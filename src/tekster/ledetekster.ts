@@ -206,15 +206,9 @@ export const ledetekster: { [key: string]: string } = {
     'arbeidsflate-stikkord-om-samarbeidspartner-se':
         'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
     'lock-msg-infotekst':
-        'Tjenester med hengelås krever BankID, Buypass eller Commfides',
+        'Menypunktene med hengelås sender deg til ny innlogging fordi du må logge inn med BankID, BuyPass eller Commfides for å kunne bruke dem.',
     'lock-msg-infotekst-en':
-        'Tjenester med hengelås krever BankID, Buypass eller Commfides',
+        'Menypunktene med hengelås sender deg til ny innlogging fordi du må logge inn med BankID, BuyPass eller Commfides for å kunne bruke dem.',
     'lock-msg-infotekst-se':
-        'Tjenester med hengelås krever BankID, Buypass eller Commfides',
-    'lock-msg-hjelpetekst':
-        'Du må logge inn med BankID, Buypass eller Commfides for å kunne bruke disse tjenestene.',
-    'lock-msg-hjelpetekst-en':
-        'Du må logge inn med BankID, Buypass eller Commfides for å kunne bruke disse tjenestene.',
-    'lock-msg-hjelpetekst-se':
-        'Du må logge inn med BankID, Buypass eller Commfides for å kunne bruke disse tjenestene.',
+        'Menypunktene med hengelås sender deg til ny innlogging fordi du må logge inn med BankID, BuyPass eller Commfides for å kunne bruke dem.',
 };

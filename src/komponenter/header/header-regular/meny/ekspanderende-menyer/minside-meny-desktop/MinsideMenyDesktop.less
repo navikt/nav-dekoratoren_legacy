@@ -2,9 +2,19 @@
 @import (reference) '../meny-lenker/MenyLenker';
 @import (reference) '../ekspanderbar-meny/EkspanderbarMeny';
 
+/*
+.alertstripe__tekst {
+    max-width: 100% !important;
+}
+*/
+
 .desktop-minside-meny {
     @lenkeseksjoner-cols: 3;
     @lenkeseksjoner-margin: 1.5em;
+
+    &__innhold-bredde {
+        max-width: 55rem;
+    }
 
     &__innhold-wrapper {
         right: 200px;
@@ -41,7 +51,7 @@
     }
 
     &__topp-seksjon {
-        margin: 1.5rem -3rem;
+        margin: 1.5rem -3rem 1rem -3rem;
         padding: 1rem 3rem;
     }
 
@@ -57,14 +67,10 @@
         display: flex;
         justify-content: center;
         align-content: center;
+        margin-top: 1.5rem;
     }
 
-    &__lock-msg-infotekst {
-        padding-left: 0.25rem;
-        padding-top: 0.25rem;
-    }
-
-    &__lock-msg-hjelpetekst {
-        padding-left: 0.5rem;
+    &__lock-msg-alert {
+        width: 100%;
     }
 }

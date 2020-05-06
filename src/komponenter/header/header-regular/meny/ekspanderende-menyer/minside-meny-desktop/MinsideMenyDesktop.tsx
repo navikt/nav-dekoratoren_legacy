@@ -14,7 +14,6 @@ import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import MinsideDropdownLockMsg from './minside-dropdown/MinsideDropdownLockMsg';
 import './MinsideMenyDesktop.less';
 
 const stateSelector = (state: AppState) => ({
@@ -93,15 +92,12 @@ export const MinsideMenyDesktop = ({ kbNavMainState }: Props) => {
             id={classname}
         >
             {menyPunkter.status === Status.OK ? (
-                <>
-                    <MinsideVisning
-                        classname={classname}
-                        isOpen={isOpen}
-                        menyLenker={minsideMenyPunkter}
-                        dittNavUrl={environment.DITT_NAV_URL}
-                    />
-                    <MinsideDropdownLockMsg classname={classname} />
-                </>
+                <MinsideVisning
+                    classname={classname}
+                    isOpen={isOpen}
+                    menyLenker={minsideMenyPunkter}
+                    dittNavUrl={environment.DITT_NAV_URL}
+                />
             ) : (
                 <MenySpinner />
             )}
