@@ -1,8 +1,6 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import Lock from 'ikoner/meny/Lock';
 import Tekst from 'tekster/finn-tekst';
-import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 

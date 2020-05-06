@@ -16,7 +16,9 @@ interface Props {
 }
 
 export const MenyLenke = (props: Props) => {
+    const auth = useSelector((state: AppState) => state.innloggingsstatus.data);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
+    const lockDisplay = props.displayLock && auth.securityLevel !== '4';
     const { lenke, isOpen, menyGruppeNavn } = props;
     const href = genererUrl(XP_BASE_URL, lenke.path);
     const lockStyle = {
@@ -26,7 +28,7 @@ export const MenyLenke = (props: Props) => {
 
     return (
         <li style={{ position: 'relative' }}>
-            {props.displayLock && (
+            {lockDisplay && (
                 <div style={lockStyle}>
                     <Lock height={'18px'} width={'18px'} />
                 </div>
