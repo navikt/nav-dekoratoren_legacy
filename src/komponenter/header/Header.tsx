@@ -134,12 +134,17 @@ export const Header = () => {
     }, []);
 
     // Change language
-    useEffect(() => {
-        const language = checkUrlForLanguage();
+    const checkUrlForLanguage = () => {
+        const language = getLanguageFromUrl();
         const action = languageDuck.actionCreator({ language });
         setCookie('decorator-language', language, cookieOptions);
         dispatch(action);
-    }, [typeof window !== 'undefined' && window.location.pathname]);
+    };
+
+    useEffect(() => {
+        window.addEventListener('popstate', checkUrlForLanguage);
+        checkUrlForLanguage();
+    }, []);
 
     return (
         <Fragment>
@@ -166,7 +171,7 @@ export const Header = () => {
     );
 };
 
-const checkUrlForLanguage = (): Language => {
+const getLanguageFromUrl = (): Language => {
     const locationPath = window.location.pathname;
     if (locationPath.includes('/en/')) {
         return Language.ENGELSK;
