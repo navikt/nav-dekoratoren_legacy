@@ -1,21 +1,8 @@
 @import '../../../../../../node_modules/nav-frontend-core/less/_variabler';
 @import '../../../../../styling-variabler.less';
 
-@keyframes animateIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.6) translateY(-8px);
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
 .desktopmeny,
-.mobilmeny__startmeny,
-.sok-modal-body,
-.sok-modal__body {
+.mobilmeny__startmeny {
     .sok .sok-container {
         position: relative;
         width: 100%;
@@ -29,68 +16,10 @@
         width: 100%;
     }
 
-    .sokeresultat-ingen-treff {
-        margin: 1rem 1rem 1.5rem 1rem;
-    }
-
     .sokeresultat-spinner {
         display: flex;
         justify-content: center;
         margin: 1rem 0;
-    }
-
-    .skjemaelement__label {
-        display: none;
-    }
-
-    .sokeresultat-liste {
-        list-style: none;
-        position: relative;
-        margin: 0;
-        left: 0;
-
-        li {
-            padding: 1rem;
-            color: black;
-            font-weight: normal;
-            border-bottom: #b7b1a9 1px solid;
-            text-align: left;
-            cursor: pointer;
-            animation-name: animateIn;
-            animation-duration: 150ms;
-            animation-delay: calc(var(--listmap) * 50ms);
-            animation-fill-mode: both;
-            animation-timing-function: ease-in-out;
-
-            &:focus,
-            &:hover {
-                background-color: lightgray;
-                font-weight: bold;
-            }
-
-            &:last-child {
-                border-bottom: none;
-            }
-        }
-
-        li[aria-selected='true'] {
-            background-color: lightgray;
-            font-weight: bold;
-        }
-
-        .sok-resultat-listItem-text {
-            padding-left: 0;
-        }
-    }
-
-    // Hide desktop stuff
-    .sok-input__tittel {
-        display: none;
-    }
-
-    .sok-input-container {
-        position: relative;
-        display: flex;
     }
 
     @media (max-width: @tabletLimitWidth) {
@@ -98,6 +27,11 @@
             margin-bottom: 1rem;
             margin-top: 1rem;
             z-index: 101;
+        }
+
+        .sok-input-resultat {
+            position: relative;
+            width: 100%;
         }
 
         .sok__bakgrunn {
@@ -113,175 +47,6 @@
             &--active {
                 visibility: visible;
             }
-        }
-
-        .sok-input-resultat {
-            position: relative;
-            width: 100%;
-        }
-
-        .sok-input {
-            margin-bottom: 0;
-            width: 100%;
-
-            input {
-                border-radius: 50px;
-                padding: 1.25rem 1rem;
-                background-color: white;
-                border: 2px solid @navBla;
-                color: white;
-
-                &:focus,
-                &:active {
-                    border: 2px solid @navBla;
-                }
-
-                &::-webkit-input-placeholder,
-                &::-moz-placeholder,
-                &:-ms-input-placeholder,
-                &:-moz-placeholder {
-                    color: @navBla;
-                }
-            }
-
-            input[type='search'] {
-                box-sizing: border-box;
-            }
-
-            input[placeholder] {
-                color: @navBla;
-                margin: 0;
-                font-size: 1.375rem;
-                line-height: 1.625rem;
-                font-weight: 300;
-            }
-
-            input::placeholder {
-                color: @navBla;
-            }
-
-            .skjemaelement__label {
-                opacity: 0;
-                position: absolute;
-                line-height: 0;
-                height: 0;
-                width: 0;
-                color: transparent;
-            }
-        }
-
-        .sokeresultat-liste {
-            list-style: none;
-            padding: 0;
-            z-index: 1020;
-            position: absolute;
-            background-color: white;
-            top: 115%;
-            width: 100%;
-            overflow: hidden;
-            margin: 0;
-            left: 0;
-
-            li {
-                padding: 1rem;
-                background-color: white;
-                color: black;
-                animation-name: animateIn;
-                animation-duration: 150ms;
-                animation-delay: calc(var(--listmap) * 50ms);
-                animation-fill-mode: both;
-                animation-timing-function: ease-in-out;
-                border: none;
-
-                &:not(:last-child) {
-                    //  border-bottom: 1px solid black;
-                }
-            }
-
-            li[aria-selected='true'] {
-                background-color: lightgray;
-                font-weight: bold;
-            }
-
-            .sokeresultat-liste ul {
-                padding: 0;
-            }
-
-            .sok-resultat-listItem {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-            }
-
-            .sok-resultat-chevron {
-                padding: 0 1rem 0 0;
-            }
-
-            .sok-resultat-listItem-text {
-                padding-left: 2.25rem;
-            }
-        }
-
-        .sok-input-mobil-submit {
-            position: absolute;
-            top: 0.85rem;
-            right: 0.9rem;
-            background-color: white;
-            border: none;
-            border-radius: 50px;
-
-            &:focus {
-                outline: 2px solid @navBla;
-            }
-        }
-
-        .sok-resultat-listItem {
-            display: flex;
-        }
-    }
-
-    // Desktop
-    @media (min-width: @tabletLimitWidth) {
-        .sok-input__tittel,
-        .desktop-sok__knapper {
-            display: initial;
-        }
-
-        .sok-input__tittel {
-            .typo-systemtittel {
-                margin: 2rem 0 1rem 0;
-            }
-        }
-
-        .sok-input {
-            width: 100%;
-
-            &__tittel {
-                margin: 2rem 0 1rem 0;
-            }
-
-            input {
-                padding: 0.75rem;
-                border: 2px solid @navBla;
-            }
-        }
-
-        .sok .sok-container {
-            width: auto;
-            justify-content: center;
-            align-items: flex-start;
-            z-index: initial;
-            .sok-ikon {
-                position: relative;
-                top: 0.35rem;
-                right: 2.75rem;
-                pointer-events: none;
-            }
-        }
-
-        // Hide mobile stuff
-        .sok-input-mobil-submit {
-            display: none !important;
         }
     }
 }

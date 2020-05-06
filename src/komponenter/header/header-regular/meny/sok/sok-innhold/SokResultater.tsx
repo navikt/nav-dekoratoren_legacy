@@ -4,6 +4,7 @@ import { finnTekst } from 'tekster/finn-tekst';
 import React from 'react';
 import { Language } from 'store/reducers/language-duck';
 import { SokeresultatData } from 'komponenter/header/header-regular/meny/sok/sok-utils';
+import './SokResultater.less';
 
 type Props = {
     writtenInput: string;

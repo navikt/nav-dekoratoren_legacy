@@ -4,20 +4,17 @@ import { connect } from 'react-redux';
 import debounce from 'lodash.debounce';
 import Downshift, { DownshiftState, StateChangeOptions } from 'downshift';
 import cls from 'classnames';
-import { Input } from 'nav-frontend-skjema';
 import { Language } from 'store/reducers/language-duck';
 import { genererUrl } from 'utils/Environment';
-import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { defaultData, InputState } from './sok-utils';
 import { SokeresultatData, visAlleTreff } from './sok-utils';
-import SokKnapper from 'komponenter/header/header-regular/meny/sok/sok-innhold/SokKnapper';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
-import { Systemtittel } from 'nav-frontend-typografi';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import BEMHelper from 'utils/bem';
 import { EnvironmentState } from 'store/reducers/environment-duck';
-import './Sok.less';
 import SokResultater from 'komponenter/header/header-regular/meny/sok/sok-innhold/SokResultater';
+import { SokInput } from 'komponenter/header/header-regular/meny/sok/sok-innhold/SokInput';
+import './Sok.less';
 
 interface StateProps {
     language: Language;
@@ -96,7 +93,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                 if (this.ismounted) {
                     const tmp = [...json.hits];
                     tmp.unshift(
-                        visAlleTreff(XP_BASE_URL, this.state.writtenInput),
+                        visAlleTreff(XP_BASE_URL, this.state.writtenInput)
                     );
                     this.setState({
                         items: tmp,
@@ -106,7 +103,10 @@ class Sok extends React.Component<StateProps & Props, InputState> {
             });
     };
 
-    handleSelect = (selection: SokeresultatData) => {
+    handleSelect = (selection: SokeresultatData | null) => {
+        if (!selection) {
+            return;
+        }
         const { XP_BASE_URL } = this.props.environment;
         window.location.href = genererUrl(XP_BASE_URL, selection.href);
     };
@@ -124,7 +124,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
         window.location.href = genererUrl(XP_BASE_URL, url);
     };
 
-    input = (inputValue: SokeresultatData): string => {
+    input = (inputValue: SokeresultatData | null): string => {
         if (inputValue) {
             return inputValue.displayName;
         }
@@ -133,16 +133,16 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 
     gethighlightedindex = (
         state: DownshiftState<any>,
-        keypressdown: boolean,
+        keypressdown: boolean
     ) => {
         if (state.isOpen) {
             if (typeof state.highlightedIndex === 'number') {
                 return keypressdown &&
-                state.highlightedIndex !== predefinedlistview
+                    state.highlightedIndex !== predefinedlistview
                     ? (state.highlightedIndex += 1)
                     : !keypressdown && state.highlightedIndex !== 0
-                        ? (state.highlightedIndex -= 1)
-                        : state.highlightedIndex;
+                    ? (state.highlightedIndex -= 1)
+                    : state.highlightedIndex;
             }
             if (typeof state.highlightedIndex === 'object') {
                 return (state.highlightedIndex = 0);
@@ -154,7 +154,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
         isopen: boolean,
         highlightedindex: number | null,
         inputvalue: string,
-        changes: StateChangeOptions<any>,
+        changes: StateChangeOptions<any>
     ) => {
         return {
             ...changes,
@@ -166,7 +166,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 
     stateReducer = (
         state: DownshiftState<any>,
-        changes: StateChangeOptions<any>,
+        changes: StateChangeOptions<any>
     ) => {
         switch (changes.type) {
             case Downshift.stateChangeTypes.keyDownArrowDown:
@@ -177,7 +177,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         this.setState({
                             selectedInput: this.state.items[
                                 state.highlightedIndex
-                                ].displayName,
+                            ].displayName,
                         });
                         return this.setDownshiftchanges(
                             state.isOpen,
@@ -186,8 +186,8 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                 state.highlightedIndex
                                     ? state.highlightedIndex
                                     : 0
-                                ].displayName,
-                            changes,
+                            ].displayName,
+                            changes
                         );
                     }
                 }
@@ -195,7 +195,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     state.isOpen,
                     state.highlightedIndex,
                     this.state.selectedInput,
-                    changes,
+                    changes
                 );
 
             case Downshift.stateChangeTypes.keyDownArrowUp:
@@ -205,7 +205,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         this.setState({
                             selectedInput: this.state.items[
                                 state.highlightedIndex
-                                ].displayName,
+                            ].displayName,
                         });
                         return this.setDownshiftchanges(
                             state.isOpen,
@@ -214,8 +214,8 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                 state.highlightedIndex
                                     ? state.highlightedIndex
                                     : 0
-                                ].displayName,
-                            changes,
+                            ].displayName,
+                            changes
                         );
                     }
                 }
@@ -257,7 +257,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     onChange={this.handleSelect}
                     onInputValueChange={(
                         changes: string,
-                        stateAndHelpers: any,
+                        stateAndHelpers: any
                     ) => {
                         this.enableBackground(stateAndHelpers.isOpen);
                         this.handleValueChange(changes);
@@ -266,14 +266,12 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     itemToString={(item) => this.input(item)}
                 >
                     {({
-                          getInputProps,
-                          getItemProps,
-                          getMenuProps,
-                          inputValue,
-                          setState,
-                          itemToString,
-                          clearItems,
-                      }) => (
+                        getInputProps,
+                        getItemProps,
+                        getMenuProps,
+                        inputValue,
+                        setState,
+                    }) => (
                         <form
                             id="sok"
                             role="search"
@@ -282,52 +280,34 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         >
                             <div className="sok-container">
                                 <div className="sok-input-resultat">
-                                    <div className={'sok-input__tittel'}>
-                                        <Systemtittel>
-                                            <Tekst id="sok-knapp" />
-                                        </Systemtittel>
-                                    </div>
-                                    <div className="sok-input-container">
-                                        <Input
-                                            {...getInputProps()}
-                                            className={klassenavn}
-                                            placeholder={finnTekst(
-                                                'sok-input-placeholder',
-                                                language,
-                                            )}
-                                            label={finnTekst(
-                                                'sok-input-label',
-                                                language,
-                                            )}
-                                            aria-label={finnTekst(
-                                                'sok-input-label',
-                                                language,
-                                            )}
-                                            tabIndex={
-                                                this.props.tabindex ? 0 : -1
-                                            }
-                                        />
-                                        <SokKnapper
-                                            writtenInput={writtenInput}
-                                            onReset={() => {
-                                                setState({ isOpen: false });
-                                                this.resetDisplay();
-                                            }}
-                                        />
-                                    </div>
+                                    <SokInput
+                                        className={klassenavn}
+                                        getInputProps={getInputProps}
+                                        language={language}
+                                        tabIndex={this.props.tabindex}
+                                        writtenInput={writtenInput}
+                                        onReset={() => {
+                                            setState({ isOpen: false });
+                                            this.resetDisplay();
+                                        }}
+                                    />
                                     {loading ? (
                                         <div className={'sokeresultat-spinner'}>
                                             <NavFrontendSpinner />
                                         </div>
-                                    ) : inputValue && (
-                                        <SokResultater
-                                            writtenInput={writtenInput}
-                                            items={items}
-                                            predefinedlistview={predefinedlistview}
-                                            getMenuProps={getMenuProps}
-                                            getItemProps={getItemProps}
-                                            language={language}
-                                        />
+                                    ) : (
+                                        inputValue && (
+                                            <SokResultater
+                                                writtenInput={writtenInput}
+                                                items={items}
+                                                predefinedlistview={
+                                                    predefinedlistview
+                                                }
+                                                getMenuProps={getMenuProps}
+                                                getItemProps={getItemProps}
+                                                language={language}
+                                            />
+                                        )
                                     )}
                                 </div>
                             </div>
@@ -340,7 +320,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                             'bakgrunn',
                             this.state.setBackground && this.props.menuIsOpen
                                 ? 'active'
-                                : '',
+                                : ''
                         )}
                     />
                 </div>

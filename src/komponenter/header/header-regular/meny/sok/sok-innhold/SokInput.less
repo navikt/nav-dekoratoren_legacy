@@ -1,0 +1,106 @@
+@import '../../../../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../../../styling-variabler.less';
+
+.sok-input-resultat {
+    .sok-input-container {
+        position: relative;
+        display: flex;
+    }
+
+    // Desktop
+    @media (min-width: @tabletLimitWidth) {
+        .sok-input__tittel,
+        .desktop-sok__knapper {
+            display: initial;
+        }
+
+        .sok-input__tittel {
+            .typo-systemtittel {
+                margin: 2rem 0 1rem 0;
+            }
+        }
+
+        .sok-input {
+            width: 100%;
+
+            &__tittel {
+                margin: 2rem 0 1rem 0;
+            }
+
+            input {
+                padding: 0.75rem;
+                border: 2px solid @navBla;
+            }
+
+            .skjemaelement__label {
+                display: none;
+            }
+        }
+
+        .sok .sok-container {
+            width: auto;
+            justify-content: center;
+            align-items: flex-start;
+            z-index: initial;
+            .sok-ikon {
+                position: relative;
+                top: 0.35rem;
+                right: 2.75rem;
+                pointer-events: none;
+            }
+        }
+    }
+
+    // Mobil
+    @media (max-width: @tabletLimitWidth) {
+        .sok-input {
+            margin-bottom: 0;
+            width: 100%;
+
+            input {
+                border-radius: 50px;
+                padding: 1.25rem 1rem;
+                background-color: white;
+                border: 2px solid @navBla;
+                color: white;
+
+                &:focus,
+                &:active {
+                    border: 2px solid @navBla;
+                }
+
+                &::-webkit-input-placeholder,
+                &::-moz-placeholder,
+                &:-ms-input-placeholder,
+                &:-moz-placeholder {
+                    color: @navBla;
+                }
+            }
+
+            input[type='search'] {
+                box-sizing: border-box;
+            }
+
+            input[placeholder] {
+                color: @navBla;
+                margin: 0;
+                font-size: 1.375rem;
+                line-height: 1.625rem;
+                font-weight: 300;
+            }
+
+            input::placeholder {
+                color: @navBla;
+            }
+
+            .skjemaelement__label {
+                opacity: 0;
+                position: absolute;
+                line-height: 0;
+                height: 0;
+                width: 0;
+                color: transparent;
+            }
+        }
+    }
+}
