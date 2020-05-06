@@ -207,8 +207,4 @@ export const ledetekster: { [key: string]: string } = {
         'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
     'lock-msg-infotekst':
         'Menypunktene med hengelås sender deg til ny innlogging fordi du må logge inn med BankID, BuyPass eller Commfides for å kunne bruke dem.',
-    'lock-msg-infotekst-en':
-        'Menypunktene med hengelås sender deg til ny innlogging fordi du må logge inn med BankID, BuyPass eller Commfides for å kunne bruke dem.',
-    'lock-msg-infotekst-se':
-        'Menypunktene med hengelås sender deg til ny innlogging fordi du må logge inn med BankID, BuyPass eller Commfides for å kunne bruke dem.',
 };
