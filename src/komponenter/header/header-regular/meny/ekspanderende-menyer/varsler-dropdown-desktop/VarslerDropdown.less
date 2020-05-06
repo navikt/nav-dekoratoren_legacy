@@ -5,18 +5,15 @@
     @dropdown-width: 525px;
 
     &__innhold-wrapper {
-        right: 375px;
-        max-width: 150px;
-        transition-property: @ekspanderbar-transition-props, max-width, right;
-
-        &--aktive {
-            max-width: @dropdown-width;
+        right: 40px;
+        max-width: @dropdown-width;
+        @media (max-width: @smallDesktopLimitWidth) {
             right: 0;
         }
     }
 
     &__innhold {
-        width: @dropdown-width;
+        max-width: @dropdown-width;
         padding: 1.5rem 2rem 2rem 2rem;
     }
 }
