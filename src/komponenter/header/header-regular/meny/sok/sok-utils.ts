@@ -4,6 +4,7 @@ export interface InputState {
     writtenInput: string;
     items: SokeresultatData[];
     setBackground: boolean;
+    fetchError: boolean;
 }
 
 export interface SokeresultatData {
