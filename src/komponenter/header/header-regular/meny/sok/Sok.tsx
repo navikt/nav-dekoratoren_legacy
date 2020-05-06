@@ -91,7 +91,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
         const url = `${APP_BASE_URL}/api/sok`;
         fetch(`${url}?ord=${input}`)
             .then((response) => {
-                if (!response.ok) {
+                if (response.ok) {
                     return response;
                 } else {
                     throw new Error(response.statusText);
