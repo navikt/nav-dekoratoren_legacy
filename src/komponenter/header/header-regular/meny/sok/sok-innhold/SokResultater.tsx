@@ -19,26 +19,29 @@ const cssIndex = (index: number) => {
     return { '--listmap': index } as React.CSSProperties;
 };
 
-export const SokResultater = ({ writtenInput, items, getMenuProps, getItemProps, predefinedlistview, language }: Props) => {
+export const SokResultater = ({
+    writtenInput,
+    items,
+    getMenuProps,
+    getItemProps,
+    predefinedlistview,
+    language,
+}: Props) => {
     return (
         <ul {...getMenuProps()} className="sokeresultat-liste">
             {items.length > 1 ? (
                 items.slice(0, predefinedlistview + 1).map((item, index) => (
                     <li
-                        {...getItemProps(
-                            {
-                                key: index,
-                                index,
-                                item,
-                            },
-                        )}
+                        {...getItemProps({
+                            key: index,
+                            index,
+                            item,
+                        })}
                         style={cssIndex(index)}
                     >
                         <SokeforslagIngress
                             className="sok-resultat-listItem"
-                            displayName={
-                                item.displayName
-                            }
+                            displayName={item.displayName}
                         />
                         <Sokeforslagtext highlight={item.highlight} />
                     </li>
@@ -49,7 +52,7 @@ export const SokResultater = ({ writtenInput, items, getMenuProps, getItemProps,
                         className="sok-resultat-listItem"
                         displayName={`${finnTekst(
                             'sok-ingen-treff',
-                            language,
+                            language
                         )} (${writtenInput})`}
                     />
                 </div>

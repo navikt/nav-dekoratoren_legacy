@@ -33,6 +33,9 @@ export const MinsideVisning = (props: Props) => {
     return (
         <div className={cls.element('innhold-bredde')}>
             <div className={cls.element('topp-seksjon')}>
+                <Systemtittel className={cls.element('topp-seksjon-tittel')}>
+                    <Tekst id={'min-side'} />
+                </Systemtittel>
                 <LenkeMedGA
                     href={dittNavUrl}
                     id={KbNav.getKbId(nodeGroup, {
@@ -48,9 +51,6 @@ export const MinsideVisning = (props: Props) => {
                 >
                     <Tekst id={'til-forside'} />
                 </LenkeMedGA>
-                <Systemtittel className={cls.element('topp-seksjon-tittel')}>
-                    <Tekst id={'min-side'} />
-                </Systemtittel>
                 {auth.securityLevel !== '4' && (
                     <MinsideDropdownLockMsg classname={classname} />
                 )}
