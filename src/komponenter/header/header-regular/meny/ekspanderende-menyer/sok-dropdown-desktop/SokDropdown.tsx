@@ -61,7 +61,7 @@ export const SokDropdown = ({ kbNavMainState }: Props) => {
             isOpen={isOpen}
             menyKnapp={knapp}
         >
-            <Sok tabindex={true} />
+            <Sok tabindex={true} isOpen={isOpen} />
         </EkspanderbarMeny>
     );
 };

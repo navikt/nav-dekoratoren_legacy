@@ -24,6 +24,7 @@ interface StateProps {
 
 interface Props {
     tabindex?: boolean;
+    isOpen: boolean;
 }
 
 const predefinedlistview = 5;
@@ -52,6 +53,12 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 
     componentWillUnmount(): void {
         this.ismounted = false;
+    }
+
+    componentDidUpdate(prevProps: Readonly<StateProps & Props>) {
+        if (prevProps !== this.props && !this.props.isOpen) {
+            this.setState(this.initialState);
+        }
     }
 
     handleValueChange = (input: string) => {
