@@ -19,6 +19,7 @@ import {
     initializeSticky,
     positionNavbar,
 } from 'utils/stickyheader-utils';
+import { verifyWindowObj } from '../../utils/Environment';
 
 export const desktopBreakpoint: number = 768;
 
@@ -138,7 +139,7 @@ export const Header = () => {
         const action = languageDuck.actionCreator({ language });
         setCookie('decorator-language', language, cookieOptions);
         dispatch(action);
-    }, []);
+    }, [typeof window !== 'undefined' && window.location.pathname]);
 
     return (
         <Fragment>
