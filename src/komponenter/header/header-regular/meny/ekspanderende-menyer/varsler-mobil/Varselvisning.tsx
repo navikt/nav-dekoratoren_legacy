@@ -130,12 +130,9 @@ class Varselvisning extends React.Component<Props, State> {
             antallVarsler,
             language,
         } = this.props;
-        const klassenavn = this.erDesktop()
-            ? 'varsler-display-desktop'
-            : 'varsler-display-mobil-tablet';
 
         return (
-            <div className={klassenavn}>
+            <div className={'varsler-display-mobil-tablet'}>
                 <div className="media-sm-mobil mobil-meny">
                     <div className="nye-varsler-mobil-wrapper">
                         <NyVarsel

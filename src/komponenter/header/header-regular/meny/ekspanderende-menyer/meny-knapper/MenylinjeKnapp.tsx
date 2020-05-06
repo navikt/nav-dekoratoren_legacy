@@ -3,21 +3,21 @@ import BEMHelper from 'utils/bem';
 import './MenylinjeKnapp.less';
 
 interface Props {
-    toggleMenu?: () => void;
+    onClick?: () => void;
     isOpen: boolean;
     classname: string;
-    id: string;
+    id?: string;
     ariaLabel: string;
     children: React.ReactNode;
 }
 
 const MenylinjeKnapp = (props: Props) => {
-    const { toggleMenu, isOpen, classname, id, ariaLabel, children } = props;
+    const { onClick, isOpen, classname, id, ariaLabel, children } = props;
     const cls = BEMHelper(classname);
 
     return (
         <button
-            onClick={toggleMenu}
+            onClick={onClick}
             className={`menylinje-knapp ${cls.element('knapp')}`}
             id={id}
             aria-label={ariaLabel}

@@ -63,7 +63,7 @@ export const MinsideMenyDesktop = ({ kbNavMainState }: Props) => {
 
     const knapp = (
         <MinsidePersonKnapp
-            toggleMenu={() => {
+            onClick={() => {
                 triggerGaEvent({
                     context: arbeidsflate,
                     category: GACategory.Header,

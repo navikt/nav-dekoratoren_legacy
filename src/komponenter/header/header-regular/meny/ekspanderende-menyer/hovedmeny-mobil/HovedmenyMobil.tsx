@@ -70,7 +70,7 @@ const HovedmenyMobil = () => {
     const menyKnapp = (
         <>
             <MenylinjeKnapp
-                toggleMenu={hovedmenutoggle}
+                onClick={hovedmenutoggle}
                 isOpen={hovedIsOpen}
                 classname={classname}
                 id={mobilHovedmenyKnappId}

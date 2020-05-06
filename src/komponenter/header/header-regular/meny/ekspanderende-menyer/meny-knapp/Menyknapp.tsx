@@ -4,21 +4,21 @@ import { Flatknapp } from 'nav-frontend-knapper';
 import './Menyknapp.less';
 
 interface Props {
-    toggleMenu: () => void;
+    onClick: () => void;
     clicked: boolean;
     classname: string;
     children: React.ReactNode;
 }
 
 export const Menyknapp = (props: Props) => {
-    const { toggleMenu, clicked, classname, children } = props;
+    const { onClick, clicked, classname, children } = props;
     const cls = BEMHelper(classname);
     const id = cls.element('menyknapp');
 
     return (
         <>
             <Flatknapp
-                onClick={toggleMenu}
+                onClick={onClick}
                 className={`dropdown__menyknapp ${id}`}
                 id={id}
                 aria-label="Menyknapp"

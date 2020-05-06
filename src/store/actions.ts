@@ -1,5 +1,5 @@
 import { Data as innloggingsstatusData } from './reducers/innloggingsstatus-duck';
-import { Data as varselinnboksData } from './reducers/varselinnboks-duck';
+import { VarslerData as varselinnboksData } from './reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from './reducers/menu-duck';
 import { EnvironmentState } from './reducers/environment-duck';
 

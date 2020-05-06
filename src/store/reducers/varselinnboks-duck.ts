@@ -10,10 +10,10 @@ import { SettVarslerOKAction } from '../actions';
 import { SettVarslerLestAction } from '../actions';
 
 export interface VarselinnboksState extends DataElement {
-    data: Data;
+    data: VarslerData;
 }
 
-export interface Data {
+export interface VarslerData {
     uleste: number;
     antall: number;
     nyesteId: number;
@@ -59,14 +59,17 @@ export default function reducer(
 export function hentVarsler(
     APP_BASE_URL: string
 ): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Data>(() => hentVarslerFetch(APP_BASE_URL), {
-        ok: hentVarslerOk,
-        feilet: hentVarslerFeilet,
-        pending: hentVarslerPending,
-    });
+    return fetchThenDispatch<VarslerData>(
+        () => hentVarslerFetch(APP_BASE_URL),
+        {
+            ok: hentVarslerOk,
+            feilet: hentVarslerFeilet,
+            pending: hentVarslerPending,
+        }
+    );
 }
 
-function hentVarslerOk(data: Data): HentVarslerOKAction {
+function hentVarslerOk(data: VarslerData): HentVarslerOKAction {
     return {
         type: ActionType.HENT_VARSLER_OK,
         data: data,
