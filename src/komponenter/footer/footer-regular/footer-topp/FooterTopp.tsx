@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Undertittel } from 'nav-frontend-typografi';
-
 import Tekst from 'tekster/finn-tekst';
 import PilOppHvit from 'ikoner/meny/PilOppHvit';
 import LenkeMedIkon from 'komponenter/footer/lenke-med-ikon/LenkeMedIkon';
@@ -9,29 +8,35 @@ import { AppState } from 'store/reducers';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import BEMHelper from 'utils/bem';
-
-import Spraakvalg from './spraakvalg/Spraakvalg';
 import FooterArbeidsflatevalg from './footer-arbeidsflatevalg/FooterArbeidsflatevalg';
-import FooterLenker from '../../Lenker';
 import { LinksLoader } from '../../../common/content-loaders/LinkLoader';
-
+import FooterLenker from '../../Lenker';
+import { Language } from 'store/reducers/language-duck';
 import './FooterTopp.less';
 
 const FooterTopp = () => {
     const cls = BEMHelper('menylinje-topp');
     const { language } = useSelector((state: AppState) => state.language);
+    const context = useSelector((state: AppState) => state.arbeidsflate.status);
     const { data } = useSelector((state: AppState) => state.menypunkt);
 
-    const [kontaktNode, settKontaktNode] = useState<MenyNode>();
-    const [samfunnNode, settSamfunnNode] = useState<MenyNode>();
-
+    const [columnsNode, settColumnsNode] = useState<MenyNode>();
     useEffect(() => {
-        const noder = getLanguageNode(language, data);
-        if (noder && !kontaktNode && !samfunnNode) {
-            settKontaktNode(findNode(noder, 'Kontakt'));
-            settSamfunnNode(findNode(noder, 'NAV og samfunn'));
+        const languageNode = getLanguageNode(language, data);
+        if (!columnsNode && languageNode) {
+            const footerNode = findNode(languageNode, 'Footer');
+            if (footerNode) {
+                const columnsNode = findNode(footerNode, 'Columns');
+                if (columnsNode) {
+                    if (language === Language.NORSK) {
+                        settColumnsNode(findNode(columnsNode, context));
+                    } else {
+                        settColumnsNode(columnsNode);
+                    }
+                }
+            }
         }
-    }, [data, kontaktNode, samfunnNode]);
+    }, [data, settColumnsNode]);
 
     const scrollToTop = () =>
         window.scrollTo({
@@ -58,39 +63,36 @@ const FooterTopp = () => {
                         />
                     </div>
                 </div>
-                <div className="menylenker-seksjon venstre">
-                    <Undertittel
-                        className="menylenker-overskrift"
-                        id="venstrelenker-overskrift"
-                    >
-                        <Tekst id="footer-kontakt-overskrift" />
-                    </Undertittel>
-                    <ul aria-labelledby="venstrelenker-overskrift">
-                        {kontaktNode ? (
-                            <FooterLenker node={kontaktNode} />
-                        ) : (
-                            <LinksLoader id="kontakt-loader" />
-                        )}
-                    </ul>
-                </div>
-                <div className="menylenker-seksjon midt">
-                    <Spraakvalg />
-                </div>
-                <div className="menylenker-seksjon hoyre">
-                    <Undertittel
-                        className="menylenker-overskrift"
-                        id="hoyrelenker-overskrift"
-                    >
-                        <Tekst id="footer-navsamfunn-overskrift" />
-                    </Undertittel>
-                    <ul aria-labelledby="hoyrelenker-overskrift">
-                        {samfunnNode ? (
-                            <FooterLenker node={samfunnNode} />
-                        ) : (
-                            <LinksLoader id="samfunn-loader" />
-                        )}
-                    </ul>
-                </div>
+                {columnsNode
+                    ? columnsNode.children.map((columnNode, i) => (
+                          <div
+                              key={i}
+                              className={`menylenker-seksjon ${
+                                  !i ? 'venstre' : i === 2 ? 'hoyre' : 'midt'
+                              }`}
+                          >
+                              <Undertittel
+                                  className="menylenker-overskrift"
+                                  id="venstrelenker-overskrift"
+                              >
+                                  {columnNode.displayName}
+                              </Undertittel>
+                              <ul aria-labelledby="venstrelenker-overskrift">
+                                  <FooterLenker node={columnNode} />
+                              </ul>
+                          </div>
+                      ))
+                    : [...Array(3)].map((i) => (
+                          <div
+                              className={`menylenker-seksjon ${
+                                  !i ? 'venstre' : i === 2 ? 'hoyre' : 'midt'
+                              }`}
+                          >
+                              <ul aria-labelledby="hoyrelenker-overskrift">
+                                  <LinksLoader id="kontakt-loader" />
+                              </ul>
+                          </div>
+                      ))}
                 <FooterArbeidsflatevalg />
             </div>
         </section>
