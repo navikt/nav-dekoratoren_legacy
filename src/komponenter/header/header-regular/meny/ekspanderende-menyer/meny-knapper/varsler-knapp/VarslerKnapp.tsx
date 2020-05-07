@@ -1,5 +1,5 @@
-import MenylinjeKnapp from 'komponenter/header/header-regular/meny/ekspanderende-menyer/meny-knapper/MenylinjeKnapp';
-import { VarselIkon } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/meny-knapper/ikoner/varsel-ikon/VarselIkon';
+import MenylinjeKnapp from '../MenylinjeKnapp';
+import { VarselIkon } from '../ikoner/varsel-ikon/VarselIkon';
 import Tekst from 'tekster/finn-tekst';
 import React from 'react';
 import { settVarslerSomLest } from 'store/reducers/varsel-lest-duck';
@@ -9,7 +9,8 @@ import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
+import './VarslerKnapp.less';
 
 type Props = {
     id?: string;
@@ -49,9 +50,9 @@ export const VarslerKnapp = ({ id }: Props) => {
             ariaLabel={ariaLabel}
         >
             <VarselIkon isOpen={isOpen} antallUleste={varsler.uleste} />
-            <Undertittel className={'varselbjelle__tekst'}>
+            <Normaltekst className={'varselbjelle__tekst'}>
                 <Tekst id={'varsler-tittel'} />
-            </Undertittel>
+            </Normaltekst>
         </MenylinjeKnapp>
     );
 };
