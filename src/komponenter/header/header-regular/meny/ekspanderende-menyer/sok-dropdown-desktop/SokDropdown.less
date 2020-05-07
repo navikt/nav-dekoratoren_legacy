@@ -11,9 +11,10 @@
 
     &__innhold-wrapper {
         max-width: @dropdownwidth;
-
+        transition-duration: 0.2s;
         &--aktive {
-            transition-duration: @ekspanderbar-transition-duration-out * 1.5;
+            max-height: 12rem;
+            transition-duration: 0.3s;
         }
     }
 }
