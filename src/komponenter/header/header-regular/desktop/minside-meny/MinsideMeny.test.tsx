@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { MinsideMenyDesktop } from './MinsideMenyDesktop';
+import { MinsideMeny } from './MinsideMeny';
 import { Provider } from 'react-redux';
 import { createStore, Store } from 'redux';
 import { reducers } from 'store/reducers';
@@ -53,12 +53,12 @@ const kbNavDummy = {
 const mountWithRedux = (store: Store) => {
     return mount(
         <Provider store={store}>
-            <MinsideMenyDesktop kbNavMainState={kbNavDummy} />
+            <MinsideMeny kbNavMainState={kbNavDummy} />
         </Provider>
     );
 };
 
-describe('<MinsideMenyDesktop>', () => {
+describe('<MinsideMeny>', () => {
     const store = createStore(reducers);
     store.dispatch(languageAction);
     store.dispatch(menuAction);

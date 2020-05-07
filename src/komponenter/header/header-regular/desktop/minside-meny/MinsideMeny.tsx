@@ -14,7 +14,7 @@ import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import './MinsideMenyDesktop.less';
+import './MinsideMeny.less';
 
 const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,
@@ -31,7 +31,7 @@ type Props = {
     kbNavMainState: KbNavMain;
 };
 
-export const MinsideMenyDesktop = ({ kbNavMainState }: Props) => {
+export const MinsideMeny = ({ kbNavMainState }: Props) => {
     const dispatch = useDispatch();
     const { environment } = useSelector((state: AppState) => state);
     const { arbeidsflate, innloggetStatus } = useSelector(stateSelector);
@@ -105,4 +105,4 @@ export const MinsideMenyDesktop = ({ kbNavMainState }: Props) => {
     );
 };
 
-export default MinsideMenyDesktop;
+export default MinsideMeny;

@@ -6,7 +6,7 @@ import { Language } from 'store/reducers/language-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import VarselinnboksProvider from 'store/providers/Varselinnboks';
-import HovedmenyMobil from './hovedmeny-mobil/HovedmenyMobil';
+import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
 import { LoggInnKnappMobil } from './logg-inn/LoggInnKnappMobil';
 import { VarslerKnapp } from 'komponenter/header/header-regular/common/meny-knapper/varsler-knapp/VarslerKnapp';
 import './MobilMenylinje.less';

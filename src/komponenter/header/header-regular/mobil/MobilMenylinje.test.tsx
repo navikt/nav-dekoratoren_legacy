@@ -6,7 +6,7 @@ import { reducers } from 'store/reducers';
 import { createStore, Store } from 'redux';
 import MobilMenylinje from './MobilMenylinje';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
-import HovedmenyMobil from './hovedmeny-mobil/HovedmenyMobil';
+import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
 import { LoggInnKnappMobil } from './logg-inn/LoggInnKnappMobil';
 
 const store = createStore(reducers);

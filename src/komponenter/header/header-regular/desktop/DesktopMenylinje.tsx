@@ -5,7 +5,7 @@ import InnloggingsstatusProvider from 'store/providers/Innloggingsstatus';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import { SokDropdown } from './sok/SokDropdown';
 import { HovedmenyDesktop } from './hovedmeny/HovedmenyDesktop';
-import { MinsideMenyDesktop } from './minside-meny/MinsideMenyDesktop';
+import { MinsideMeny } from './minside-meny/MinsideMeny';
 import { VarslerDropdown } from './varsler-desktop/VarslerDropdown';
 import { LoggInnKnappDesktop } from './logg-inn/LoggInnKnappDesktop';
 import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
@@ -34,7 +34,7 @@ const DesktopMenylinje = () => {
                         <VarselinnboksProvider>
                             <VarslerDropdown kbNavMainState={kbNavMainState} />
                         </VarselinnboksProvider>
-                        <MinsideMenyDesktop kbNavMainState={kbNavMainState} />
+                        <MinsideMeny kbNavMainState={kbNavMainState} />
                         <LoggInnKnappDesktop />
                     </>
                 </InnloggingsstatusProvider>
