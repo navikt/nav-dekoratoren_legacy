@@ -40,6 +40,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
         writtenInput: '',
         items: [defaultData],
         setBackground: false,
+        fetchError: false,
     };
 
     constructor(props: StateProps & Props) {
@@ -92,6 +93,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
             this.setState({
                 selectedInput: input,
                 writtenInput: input,
+                fetchError: false,
             });
 
             if (input) {
@@ -124,7 +126,17 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     this.setState({
                         items: tmp,
                         loading: false,
+                        fetchError: false,
                     });
+                }
+            })
+            .catch((err) => {
+                if (this.ismounted) {
+                    this.setState({
+                        loading: false,
+                        fetchError: true,
+                    });
+                    console.error(err);
                 }
             });
     };
@@ -270,7 +282,13 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     render() {
-        const { items, writtenInput, loading, selectedInput } = this.state;
+        const {
+            items,
+            writtenInput,
+            loading,
+            selectedInput,
+            fetchError,
+        } = this.state;
         const { language } = this.props;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
@@ -332,6 +350,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                                 getMenuProps={getMenuProps}
                                                 getItemProps={getItemProps}
                                                 language={language}
+                                                fetchError={fetchError}
                                             />
                                         )
                                     )}
