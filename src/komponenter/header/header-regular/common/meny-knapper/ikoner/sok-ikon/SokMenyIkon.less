@@ -1,0 +1,73 @@
+@import '../../../../../../../styling-variabler.less';
+
+.sok-meny-ikon {
+    @width: 32px;
+    @height: 24px;
+    @circleRadius: 10px;
+    @stroke-width: 3px;
+    @color: @navBla;
+    @handleAngle: 40deg;
+    @middle: (@height - @stroke-width) / 2;
+
+    width: @width;
+    height: @height;
+    padding: 0;
+    position: relative;
+    margin-right: 0.5em;
+
+    .line() {
+        position: absolute;
+        width: @width;
+        height: @stroke-width;
+        border: 0;
+        border-radius: 0;
+        background-color: @color;
+    }
+
+    &__circle {
+        border-radius: 50%;
+        border: @color @stroke-width solid;
+        height: @circleRadius*2;
+        width: @circleRadius*2;
+        position: absolute;
+        transform-origin: center;
+        transition: 0.35s all ease-out;
+
+        &--open {
+            opacity: 0;
+            transform: translate(
+                    @width / 2 - @circleRadius,
+                    @height / 2 - @circleRadius
+                )
+                scale(0);
+        }
+    }
+
+    &__line,
+    &__line-x {
+        transform-origin: top left;
+        transform: translate(
+                @circleRadius * (1 + cos(@handleAngle)),
+                @circleRadius * (1 + sin(@handleAngle))
+            )
+            rotate(@handleAngle);
+        height: @stroke-width;
+        width: @circleRadius;
+        background-color: @color;
+        position: absolute;
+        transition: 0.35s all ease-out;
+
+        &--open {
+            .line();
+            transform-origin: center;
+        }
+    }
+
+    &__line--open {
+        transform: translate(-4px, @middle) rotate(-225deg) scale(0.8);
+    }
+
+    &__line-x--open {
+        transform: translate(-4px, @middle) rotate(-315deg) scale(0.8);
+    }
+}

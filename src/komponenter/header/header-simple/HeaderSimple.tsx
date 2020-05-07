@@ -2,8 +2,8 @@ import React from 'react';
 import BEMHelper from 'utils/bem';
 import InnloggingsstatusProvider from 'store/providers/Innloggingsstatus';
 import Navlogo from 'ikoner/meny/Navlogo';
-import Navn from '../navn/Navn';
-import { LoggInnKnappMobil } from 'komponenter/header/header-regular/meny/logginn/LoggInnKnappMobil';
+import Navn from './navn/Navn';
+import { LoggInnKnappMobil } from 'komponenter/header/header-regular/mobil/logg-inn/LoggInnKnappMobil';
 import './HeaderSimple.less';
 
 export const SimpleHeader = () => {

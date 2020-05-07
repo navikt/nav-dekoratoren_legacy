@@ -1,0 +1,21 @@
+@import '../../../../../styling-variabler.less';
+@import '../../common/ekspanderbar-meny/EkspanderbarMeny';
+
+.desktop-sok-dropdown {
+    @dropdownwidth: 700px;
+
+    &__innhold {
+        left: 0;
+        max-width: @dropdownwidth;
+    }
+
+    &__innhold-wrapper {
+        max-width: @dropdownwidth;
+        transition-duration: 0.2s;
+
+        &--aktive {
+            max-height: 12rem;
+            transition-duration: 0.3s;
+        }
+    }
+}

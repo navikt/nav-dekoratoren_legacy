@@ -1,8 +1,8 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import { GACategory } from 'utils/google-analytics';
-import { LenkeMedGA } from 'komponenter/LenkeMedGA';
-import { getArbeidsflateContext } from 'komponenter/header/header-regular/arbeidsflatemeny/arbeidsflate-lenker';
+import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
+import { getArbeidsflateContext } from 'komponenter/header/header-regular/common/arbeidsflate-lenker';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';

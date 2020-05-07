@@ -3,9 +3,9 @@ import { Element } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { mobilviewMax } from '../../../styling-mediaquery';
 import { matchMedia } from 'utils/match-media-polyfill';
-import { mobilHovedmenyKnappId } from '../header-regular/meny/ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
-import { desktopHovedmenyKnappId } from '../header-regular/meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
-import { desktopSokKnappId } from '../header-regular/meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
+import { mobilHovedmenyKnappId } from '../header-regular/mobil/hovedmeny/HovedmenyMobil';
+import { desktopHovedmenyKnappId } from '../header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import { desktopSokKnappId } from '../header-regular/desktop/sok/SokDropdown';
 import './Skiplinks.less';
 
 const Skiplinks = () => {

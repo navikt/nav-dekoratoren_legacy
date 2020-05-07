@@ -1,0 +1,144 @@
+@import '../../../../../styling-variabler.less';
+
+.mobilmeny .varsler-display-mobil-tablet {
+    @ikoner-path: '../../../../../ikoner/varsler';
+
+    .panel {
+        display: block;
+        border-radius: 0.25rem;
+    }
+
+    .nav-varsler {
+        margin-bottom: 0;
+        padding: 0;
+
+        .varsel-liste {
+            padding-left: 0.5rem;
+        }
+
+        .varsel-liste .varsel-container {
+            &:not(:last-child) {
+                border-bottom: 1px solid #7f756c;
+                padding-bottom: 0.75rem;
+                margin-bottom: 0.75rem;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+
+            .varsel {
+                display: flex;
+                padding: 0.25rem;
+
+                .varsel-ikon {
+                    background: #ffe4c2 url('@{ikoner-path}/alarm.svg')
+                        no-repeat center;
+                    flex: 0 0 3.5rem;
+                    width: 2.5rem;
+                    height: 3.5rem;
+                    margin-right: 0.5rem;
+                    border-radius: 50px;
+                }
+
+                .varsel-ikon.kalender {
+                    background: #ecefcc url('@{ikoner-path}/calendar-3.svg')
+                        no-repeat center;
+                }
+
+                .varsel-ikon.boble {
+                    background: #f1d8d4 url('@{ikoner-path}/bubble-chat-2.svg')
+                        no-repeat center;
+                }
+
+                .varsel-ikon.dokument {
+                    background: #e0dae7 url('@{ikoner-path}/file-new-1.svg')
+                        no-repeat center;
+                }
+
+                .varsel-ikon.digisyfo {
+                    background: #e0f5fb
+                        url('@{ikoner-path}/first-aid-plaster.svg') no-repeat
+                        center;
+                }
+
+                .varsel-innhold {
+                    width: ~'calc(100% - 2.5rem)';
+                    overflow-wrap: break-word;
+                    font-size: 0.875rem;
+
+                    p {
+                        margin-bottom: 0.25rem;
+                    }
+
+                    .varsel-dato {
+                        color: @navGra60;
+                    }
+
+                    .typo-infotekst {
+                        color: @navMorkGra;
+                        line-height: 1.375rem;
+                        font-size: 1rem;
+                        font-weight: 400;
+                    }
+
+                    .varsel-lenke {
+                        color: @navBla;
+                        background: none;
+                        text-decoration: underline;
+                        cursor: pointer;
+
+                        &:hover,
+                        &--hover {
+                            text-decoration: none;
+                        }
+
+                        &:focus,
+                        &--focus {
+                            outline: 0;
+                            color: white;
+                            text-decoration: none;
+                            background-color: @fokusFarge;
+                            box-shadow: 0 0 0 2px @fokusFarge;
+                        }
+
+                        &:active,
+                        &--active {
+                            color: white;
+                        }
+                    }
+                }
+
+                .hide-text {
+                    text-indent: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+    .nye-varsler-mobil-wrapper {
+        padding-left: 0.5rem;
+
+        .vis-alle-lenke {
+            border-top: none;
+            border-bottom: 1px solid @navGra60;
+            padding: 0 1rem 1rem 0;
+            margin-top: 0;
+        }
+    }
+
+    .vis-alle-lenke {
+        border-top: 1px solid @navGra60;
+        padding: 1.25rem 1rem 1rem 3.125rem;
+        margin-top: 0.75rem;
+    }
+
+    .varsler-display-mobil-tablet {
+        .vis-alle-lenke {
+            padding: 1.5rem 0.75rem 0 3.125rem;
+        }
+    }
+}

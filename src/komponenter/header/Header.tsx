@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenypunkter } from 'store/reducers/menu-duck';
 import Skiplinks from 'komponenter/header/skiplinks/Skiplinks';
-import MenyBakgrunn from 'komponenter/header/header-regular/meny/ekspanderende-menyer/meny-bakgrunn/MenyBakgrunn';
+import MenyBakgrunn from 'komponenter/header/header-regular/common/meny-bakgrunn/MenyBakgrunn';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { SimpleHeader } from 'komponenter/header/header-simple/HeaderSimple';
 import { RegularHeader } from 'komponenter/header/header-regular/HeaderRegular';

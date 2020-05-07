@@ -6,16 +6,16 @@ import KbNav, {
     KbNavGroup,
     NodeIndex,
 } from './kb-navigation';
-import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/hovedmeny-desktop/HovedmenyDesktop';
-import { desktopHeaderLogoId } from 'komponenter/header/header-regular/meny/DesktopMenylinje';
-import { desktopSokKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/sok-dropdown-desktop/SokDropdown';
-import { desktopVarslerKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/varsler-desktop/VarslerDropdown';
-import { desktopMinsideKnappId } from 'komponenter/header/header-regular/meny/ekspanderende-menyer/minside-meny-desktop/MinsideMenyDesktop';
+import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import { desktopHeaderLogoId } from 'komponenter/header/header-regular/desktop/DesktopMenylinje';
+import { desktopSokKnappId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
+import { desktopVarslerKnappId } from 'komponenter/header/header-regular/desktop/varsler/VarslerDropdown';
+import { desktopMinsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
 import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from 'api/api';
 import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
-import { desktopLoginKnappId } from 'komponenter/header/header-regular/meny/logginn/LoggInnKnappDesktop';
+import { desktopLoginKnappId } from 'komponenter/header/header-regular/desktop/logg-inn/LoggInnKnappDesktop';
 
 export type KbNavConfig = {
     group: KbNavGroup;

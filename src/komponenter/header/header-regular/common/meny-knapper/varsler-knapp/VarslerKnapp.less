@@ -1,0 +1,15 @@
+@import '../../../../../../styling-variabler.less';
+
+.varselbjelle {
+    @media (min-width: @tabletLimitWidth) {
+        &__tekst {
+            font-weight: bold;
+        }
+    }
+
+    @media (max-width: @tabletLimitWidth) {
+        &__tekst {
+            .typo-undertittel;
+        }
+    }
+}
