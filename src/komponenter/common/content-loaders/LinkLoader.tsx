@@ -18,5 +18,6 @@ export const LinksLoader = ({ id }: { id: string }) => (
         <rect x="0" y="50" rx="4" ry="4" width="135" height="10" />
         <rect x="0" y="95" rx="4" ry="4" width="175" height="10" />
         <rect x="0" y="140" rx="4" ry="4" width="150" height="10" />
+        <rect x="0" y="195" rx="4" ry="4" width="150" height="10" />
     </ContentLoader>
 );
