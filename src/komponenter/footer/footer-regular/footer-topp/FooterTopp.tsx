@@ -82,12 +82,16 @@ const FooterTopp = () => {
                               </ul>
                           </div>
                       ))
-                    : [...Array(3)].map((i) => (
+                    : [...Array(3)].map((_, index) => (
                           <div
                               className={`menylenker-seksjon ${
-                                  !i ? 'venstre' : i === 2 ? 'hoyre' : 'midt'
+                                  !index
+                                      ? 'venstre'
+                                      : index === 2
+                                      ? 'hoyre'
+                                      : 'midt'
                               }`}
-                              key={i}
+                              key={index}
                           >
                               <ul aria-labelledby="hoyrelenker-overskrift">
                                   <LinksLoader id="kontakt-loader" />
