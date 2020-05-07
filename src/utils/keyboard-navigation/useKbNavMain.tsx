@@ -7,7 +7,7 @@ import { createKbNavNode } from './kb-navigation';
 import { KbNavGroup } from './kb-navigation';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
-import { desktopHeaderLogoId } from 'komponenter/header/header-regular/meny/DesktopMenylinje';
+import { desktopHeaderLogoId } from 'komponenter/header/header-regular/desktop/DesktopMenylinje';
 import KbNav from 'utils/keyboard-navigation/kb-navigation';
 
 const stateSelector = (state: AppState) => ({

@@ -1,0 +1,225 @@
+@import '../../../../../../styling-variabler.less';
+
+.mobilmeny {
+    &__innhold-wrapper,
+    &__startmeny,
+    &__varsel-innhold,
+    &__undermeny-innhold {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        position: fixed;
+        left: -(@mobilemenuwidth);
+        z-index: 1001;
+        padding: 0.75rem 1rem 1rem 1rem;
+        background-color: white;
+        width: @mobilemenuwidth;
+        border-radius: 3px;
+        transition: all 0.4s ease-in-out;
+
+        &--active,
+        &--aktive {
+            left: 0;
+        }
+    }
+
+    &__menuheight {
+        top: 7.875rem;
+        height: calc(100% - 7.875rem);
+    }
+
+    &__startmeny {
+        z-index: 1003;
+    }
+
+    &__undermeny-innhold,
+    &__varsel-innhold {
+        z-index: 1002;
+        .mobilmeny {
+            &__meny {
+                &--top {
+                    padding-bottom: 0.75rem;
+                }
+
+                &--list {
+                    padding: 1.25rem 1rem 1.5rem 0;
+                    margin-top: 0;
+                    max-width: 20rem;
+                }
+            }
+        }
+    }
+
+    &__undermeny-arbeidsflate {
+        padding: 0.25rem 0 0.75rem 0;
+    }
+
+    &__undermeny-innhold {
+        padding-left: 1.5rem;
+    }
+
+    &__meny {
+        &--list ul {
+            margin: 0;
+        }
+
+        &--mainlist,
+        &--minsidelist {
+            border-bottom: 1px solid black;
+            padding: 0;
+        }
+
+        &--list,
+        &--mainlist,
+        &--minsidelist {
+            .lenke {
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+
+                &:active,
+                &:focus,
+                &:focus-within {
+                    box-shadow: none;
+                    span {
+                        color: @navDypBla;
+                        outline: 3px solid @fokusFarge;
+                    }
+                }
+            }
+        }
+
+        &--minsidelist {
+            padding-bottom: 0.75rem;
+        }
+
+        &--listItem {
+            padding-bottom: 2rem;
+            padding-right: 0.5rem;
+        }
+
+        &--tilbakelenke {
+            padding-bottom: 0;
+        }
+
+        &--text-element {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &--text-element-undermeny {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        &--ingress {
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 2rem 1.25rem 0;
+            color: @navGra80;
+
+            .typo-sidetittel {
+                font-weight: 500;
+            }
+        }
+    }
+
+    &__submeny {
+        &--wrap {
+            padding-top: 1rem;
+        }
+    }
+
+    &__undermeny-chevron {
+        padding-right: 0.5rem;
+    }
+
+    &__lukk-undermeny {
+        margin-top: 1rem;
+        .lenke {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 1rem 0;
+            max-width: 20rem;
+            margin-bottom: 2rem;
+            i {
+                margin-right: 0.5rem;
+            }
+
+            &:active {
+                color: @navDypBla;
+            }
+        }
+    }
+
+    .min-varsel-wrapper {
+        .mobilmeny {
+            &__lukk-undermeny {
+                .lenke {
+                    padding-top: 0;
+                    padding-bottom: 2rem;
+                }
+            }
+        }
+    }
+
+    &__minside-rad {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem 0 0.5rem;
+
+        &--sett-rad-midt {
+            justify-content: flex-start;
+        }
+    }
+
+    &__varseltittel {
+        padding-left: 0.5rem;
+    }
+
+    &__varsel-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        padding: 0.5rem 0.75rem 0.5rem 0;
+
+        .typo-innholdstittel,
+        .typo-undertittel,
+        .typo-systemtittel {
+            font-weight: 100;
+        }
+    }
+
+    &__lukk-varsel {
+        position: relative;
+        text-decoration: none;
+
+        &:after,
+        &:before {
+            left: -15%;
+            top: 50%;
+            margin-left: -11px;
+            width: 22px;
+            height: 2px;
+            background-color: @navBla;
+            content: '';
+            position: absolute;
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+    }
+}

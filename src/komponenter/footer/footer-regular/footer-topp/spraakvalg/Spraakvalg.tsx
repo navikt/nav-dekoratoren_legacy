@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { GACategory } from 'utils/google-analytics';
-import { LenkeMedGA } from 'komponenter/LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
 import { erNavDekoratoren } from 'utils/Environment';
 import { getSpraaklenker, Spraaklenke } from './Spraakvalg-lenker';
 import Tekst from 'tekster/finn-tekst';

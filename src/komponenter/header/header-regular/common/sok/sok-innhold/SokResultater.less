@@ -1,0 +1,112 @@
+@import '../../../../../../styling-variabler.less';
+
+@keyframes animateIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(-8px);
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.sok-input-resultat {
+    .sokeresultat-liste {
+        list-style: none;
+        position: relative;
+        margin: 0;
+        left: 0;
+
+        li {
+            padding: 1rem;
+            color: black;
+            font-weight: normal;
+            border-bottom: #b7b1a9 1px solid;
+            text-align: left;
+            cursor: pointer;
+            animation-name: animateIn;
+            animation-duration: 150ms;
+            animation-delay: calc(var(--listmap) * 50ms);
+            animation-fill-mode: both;
+            animation-timing-function: ease-in-out;
+
+            &:focus,
+            &:hover {
+                background-color: lightgray;
+                font-weight: bold;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        li[aria-selected='true'] {
+            background-color: lightgray;
+            font-weight: bold;
+        }
+
+        .sok-resultat-listItem-text {
+            padding-left: 0;
+        }
+    }
+
+    .sokeresultat-ingen-treff {
+        margin: 1rem 1rem 1.5rem 1rem;
+    }
+
+    @media (max-width: @tabletLimitWidth) {
+        .sokeresultat-liste {
+            list-style: none;
+            padding: 0;
+            z-index: 1020;
+            position: absolute;
+            background-color: white;
+            top: 115%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            left: 0;
+
+            li {
+                padding: 1rem;
+                background-color: white;
+                color: black;
+                animation-name: animateIn;
+                animation-duration: 150ms;
+                animation-delay: calc(var(--listmap) * 50ms);
+                animation-fill-mode: both;
+                animation-timing-function: ease-in-out;
+                border: none;
+            }
+
+            li[aria-selected='true'] {
+                background-color: lightgray;
+                font-weight: bold;
+            }
+
+            .sokeresultat-liste ul {
+                padding: 0;
+            }
+
+            .sok-resultat-listItem {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .sok-resultat-chevron {
+                padding: 0 1rem 0 0;
+            }
+
+            .sok-resultat-listItem-text {
+                padding-left: 2.25rem;
+            }
+        }
+
+        .sok-resultat-listItem {
+            display: flex;
+        }
+    }
+}

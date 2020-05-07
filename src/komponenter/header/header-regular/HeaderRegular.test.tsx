@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Language, languageDuck } from 'store/reducers/language-duck';
-import Arbeidsflatemeny from './arbeidsflatemeny/Arbeidsflatemeny';
+import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
 import { createStore, Store } from 'redux';
 import { Provider } from 'react-redux';
 import { reducers } from 'store/reducers';

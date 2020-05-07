@@ -1,0 +1,51 @@
+@import '../../../../../styling-variabler.less';
+
+.desktopmeny,
+.mobilmeny__startmeny {
+    .sok .sok-container {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .sok-input-resultat {
+        position: relative;
+        width: 100%;
+    }
+
+    .sokeresultat-spinner {
+        display: flex;
+        justify-content: center;
+        margin: 1rem 0;
+    }
+
+    @media (max-width: @tabletLimitWidth) {
+        .sok .sok-container {
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+            z-index: 101;
+        }
+
+        .sok-input-resultat {
+            position: relative;
+            width: 100%;
+        }
+
+        .sok__bakgrunn {
+            position: fixed;
+            visibility: hidden;
+            width: 100%;
+            height: 135%;
+            left: 0;
+            top: 8rem;
+            z-index: 100;
+            background-color: white;
+
+            &--active {
+                visibility: visible;
+            }
+        }
+    }
+}

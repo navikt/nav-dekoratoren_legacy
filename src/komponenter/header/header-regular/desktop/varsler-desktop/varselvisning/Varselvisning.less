@@ -1,0 +1,73 @@
+@import '../../../../../../styling-variabler.less';
+
+.varsler-display-desktop {
+    .dekorator-varsel-container {
+        @separator-props: @navMorkGra solid 1px;
+        border-bottom: @separator-props;
+        &:first-of-type {
+            border-top: @separator-props;
+        }
+    }
+
+    .dekorator-vis-alle-lenke {
+        margin-top: 0.5rem;
+    }
+
+    .dekorator-varsel {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        margin: 1.25rem 0;
+
+        .varsel-ikon-row {
+            padding-right: 1rem;
+        }
+
+        .varsel-ikon-container {
+            @ikonSize: 28px;
+            padding: 0.75rem;
+            border-radius: 50%;
+
+            .varsel-ikon {
+                width: @ikonSize;
+                height: @ikonSize;
+            }
+
+            &.alarm-ikon {
+                background-color: #ffe4c2;
+            }
+
+            &.kalender-ikon {
+                background-color: #ecefcc;
+            }
+
+            &.snakkeboble-ikon {
+                background-color: #f1d8d4;
+            }
+
+            &.dokument-ikon {
+                background-color: #e0dae7;
+            }
+
+            &.plaster-ikon {
+                background-color: #e0f5fb;
+            }
+        }
+
+        .varsel-innhold {
+            .varsel-dato {
+                .typo-etikett-liten;
+                margin-bottom: 0.25rem;
+            }
+
+            .typo-infotekst {
+                .typo-normal;
+                margin-bottom: 0.5rem;
+            }
+
+            .varsel-lenke {
+                .lenke-stil();
+            }
+        }
+    }
+}
