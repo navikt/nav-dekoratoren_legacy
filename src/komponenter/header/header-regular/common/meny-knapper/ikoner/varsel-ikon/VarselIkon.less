@@ -2,9 +2,9 @@
 
 .varselbjelle-ikon {
     @main-color: @navBla;
-    @ulest-color: @navRodLighten40;
 
-    @transition-props: all 0.35s ease-in;
+    @transition-duration: 0.35s;
+    @transition: all @transition-duration ease-in;
 
     @width: 26px;
     @height: 30px;
@@ -41,31 +41,32 @@
         border-radius: 0;
         width: @cross-width;
         height: @cross-stroke-width;
-        transform: translate(-2px, @height / 2) rotate(@rotation)
-            scale(@cross-scale);
+        transform: translate(-2px, @height / 2) rotate(@rotation) scale(@cross-scale);
+    }
+
+    .fade-transform() {
+        z-index: 0;
+        opacity: 0;
+        transition-duration: @transition-duration / 2;
+        transform: translateY(@height / 2) scale(0);
     }
 
     &--open {
-        .varselbjelle-ikon__ring {
-            opacity: 0;
-            z-index: 0;
-            transition-duration: 0.35s / 3;
-            .cross-line-transform(-135deg/3);
+        .varselbjelle-ikon__ring, .varselbjelle-ikon__bell, .varselbjelle-ikon__ulest-sirkel {
+            .fade-transform();
         }
-        .varselbjelle-ikon__bell {
-            opacity: 0;
-            z-index: 0;
-            transition-duration: 0.35s / 3;
-            .cross-line-transform(-225deg/3);
-        }
+
         .varselbjelle-ikon__lip {
             .cross-line-transform(-225deg);
         }
+
         .varselbjelle-ikon__clapper {
-            .cross-line-transform(-315deg);
+            .cross-line-transform(-135deg);
+            transition-property: transform, width;
         }
-        .varselbjelle-ikon__ulest-sirkel {
-            transform: translate(@ulest-left, @ulest-top) scale(0);
+
+        .varselbjelle-ikon__ulest-antall {
+            visibility: hidden;
         }
     }
 
@@ -84,7 +85,7 @@
         border-bottom: none;
         background-color: white;
 
-        transition: @transition-props;
+        transition: @transition;
     }
 
     &__bell {
@@ -102,7 +103,7 @@
         border-bottom: none;
         background-color: white;
 
-        transition: @transition-props;
+        transition: @transition;
     }
 
     &__lip {
@@ -118,15 +119,14 @@
         height: @lip-height;
         background-color: @main-color;
 
-        transition: @transition-props;
+        transition: @transition;
     }
 
     &__clapper {
         position: absolute;
         z-index: 1;
 
-        transform: translate((@width - @clapper-length) / 2, @height / 2)
-            rotate(90deg);
+        transform: translate((@width - @clapper-length) / 2, @height / 2) rotate(90deg);
 
         border-radius: @clapper-thickness / 2;
 
@@ -134,7 +134,7 @@
         height: @clapper-thickness;
         background-color: @main-color;
 
-        transition: @transition-props;
+        transition: @transition;
     }
 
     &__ulest-sirkel {
@@ -146,13 +146,13 @@
         border-radius: 50%;
         height: @ulest-diameter;
         width: @ulest-diameter;
-        background-color: @ulest-color;
+        background-color: @navRodLighten40;
 
         display: flex;
         justify-content: center;
         align-items: center;
 
-        transition: @transition-props visibility;
+        transition: @transition visibility;
 
         &--hide {
             visibility: hidden;

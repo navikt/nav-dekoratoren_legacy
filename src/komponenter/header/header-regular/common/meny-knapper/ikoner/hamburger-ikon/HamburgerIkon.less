@@ -1,18 +1,17 @@
 @import '../../../../../../../styling-variabler.less';
 
 .hamburger-ikon {
-    @width: 32px;
+    @width: 28px;
     @height: 24px;
     @line-spacing: 8px;
     @line-height: 3px;
-    @midtpunkt: @height / 2 - @line-height / 2;
+    @midtpunkt: floor(@height / 2 - @line-height / 2);
 
     width: @width;
     height: @height;
     padding: 0;
     position: relative;
     margin-right: 0.5em;
-    transition: all 0.35s ease-in;
 
     .hamburger-knapp-linje() {
         width: @width;
@@ -28,6 +27,7 @@
         top: @midtpunkt - @line-spacing;
 
         &--open {
+            width: 32px;
             transform: translateY(@line-spacing) rotateZ(-135deg) scale(0.8);
         }
     }
@@ -37,7 +37,7 @@
         top: @midtpunkt;
 
         &--open {
-            transform: scaleX(0);
+            transform: rotateZ(-180deg) scale(0);
         }
     }
 
@@ -46,6 +46,7 @@
         top: @midtpunkt + @line-spacing;
 
         &--open {
+            width: 32px;
             transform: translateY(-@line-spacing) rotateZ(-225deg) scale(0.8);
         }
     }
