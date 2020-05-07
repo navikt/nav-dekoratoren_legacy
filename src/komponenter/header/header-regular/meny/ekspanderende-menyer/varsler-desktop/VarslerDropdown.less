@@ -5,26 +5,24 @@
     @dropdown-width: 525px;
 
     &__innhold-wrapper {
-        right: 375px;
-        max-width: 150px;
-        transition-property: @ekspanderbar-transition-props, max-width, right;
-
-        &--aktive {
-            max-width: @dropdown-width;
+        right: 40px;
+        max-width: @dropdown-width;
+        @media (max-width: @smallDesktopLimitWidth) {
             right: 0;
         }
     }
 
     &__innhold {
-        width: @dropdown-width;
+        max-width: @dropdown-width;
         padding: 1.5rem 2rem 2rem 2rem;
     }
 }
 
 .varselbjelle {
     &__knapp:hover:not(:focus) {
-        .varselbjelle-ikon__bjelle:not(.varselbjelle-ikon__bjelle--open) {
-            animation-duration: 0.25s;
+        .varselbjelle-ikon:not(.varselbjelle-ikon--open) {
+            transform-origin: top center;
+            animation-duration: 1s;
             animation-name: ring-bjelle;
         }
     }
@@ -34,14 +32,36 @@
     }
 
     @keyframes ring-bjelle {
-        @theta: 15deg;
-
-        30% {
-            transform: rotate(@theta);
+        10% {
+            transform: rotate(20deg);
         }
 
-        55% {
-            transform: rotate(-@theta);
+        20% {
+            transform: rotate(-15deg);
+        }
+
+        30% {
+            transform: rotate(12.5deg);
+        }
+
+        40% {
+            transform: rotate(-10deg);
+        }
+
+        50% {
+            transform: rotate(7.5deg);
+        }
+
+        60% {
+            transform: rotate(-5deg);
+        }
+
+        70% {
+            transform: rotate(2.5deg);
+        }
+
+        80% {
+            transform: rotate(0);
         }
     }
 }

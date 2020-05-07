@@ -207,4 +207,7 @@ export const ledetekster: { [key: string]: string } = {
         'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
     'lock-msg-infotekst':
         'Menypunktene med hengelås sender deg til ny innlogging fordi du må logge inn med BankID, BuyPass eller Commfides for å kunne bruke dem.',
+    'feil-sok-fetch': 'Feil mot søketjeneste.',
+    'feil-sok-fetch-en': 'Search system malfunction.',
+    'feil-sok-fetch-se': 'Feil mot søketjeneste.',
 };
