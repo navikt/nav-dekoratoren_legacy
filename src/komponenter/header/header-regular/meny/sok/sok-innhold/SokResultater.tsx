@@ -5,6 +5,8 @@ import React from 'react';
 import { Language } from 'store/reducers/language-duck';
 import { SokeresultatData } from 'komponenter/header/header-regular/meny/sok/sok-utils';
 import './SokResultater.less';
+import { AlertStripeFeil } from 'nav-frontend-alertstriper';
+import Tekst from 'tekster/finn-tekst';
 
 type Props = {
     writtenInput: string;
@@ -13,6 +15,7 @@ type Props = {
     getMenuProps: any;
     getItemProps: any;
     language: Language;
+    fetchError: boolean;
 };
 
 const cssIndex = (index: number) => {
@@ -26,9 +29,15 @@ export const SokResultater = ({
     getItemProps,
     predefinedlistview,
     language,
+    fetchError,
 }: Props) => {
     return (
         <ul {...getMenuProps()} className="sokeresultat-liste">
+            {fetchError && (
+                <AlertStripeFeil>
+                    <Tekst id={'feil-sok-fetch'} />
+                </AlertStripeFeil>
+            )}
             {items.length > 1 ? (
                 items.slice(0, predefinedlistview + 1).map((item, index) => (
                     <li

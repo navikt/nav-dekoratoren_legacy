@@ -10,11 +10,11 @@ import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { Language } from 'store/reducers/language-duck';
 import { dataInitState } from 'store/reducers/menu-duck';
-import HamburgerKnapp from '../meny-knapp/hamburger-knapp/HamburgerKnapp';
 import EkspanderbarMeny from '../ekspanderbar-meny/EkspanderbarMeny';
 import MenySpinner from '../meny-spinner/MenySpinner';
 import MenylinjeKnapp from '../meny-knapper/MenylinjeKnapp';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
+import HamburgerIkon from 'komponenter/header/header-regular/meny/ekspanderende-menyer/meny-knapper/ikoner/hamburger-ikon/HamburgerIkon';
 
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
@@ -70,14 +70,14 @@ const HovedmenyMobil = () => {
     const menyKnapp = (
         <>
             <MenylinjeKnapp
-                toggleMenu={hovedmenutoggle}
+                onClick={hovedmenutoggle}
                 isOpen={hovedIsOpen}
                 classname={classname}
                 id={mobilHovedmenyKnappId}
                 ariaLabel={'Hovedmenyknapp'}
             >
                 <>
-                    <HamburgerKnapp isOpen={hovedIsOpen} />
+                    <HamburgerIkon isOpen={hovedIsOpen} />
                     <Undertittel>
                         <TextTransformFirstLetterToUppercase
                             text="meny-knapp"

@@ -6,94 +6,110 @@
 
     @transition-props: all 0.35s ease-in;
 
-    @width: 28px;
-    @height: 32px;
-    @stroke-width: 1px;
+    @width: 26px;
+    @height: 30px;
+    @stroke-width: 2px;
 
     @cross-width: 32px;
     @cross-stroke-width: 3px;
     @cross-scale: 0.8;
 
-    @ring-diameter: 6px;
+    @ring-diameter: 11px;
 
     @bell-width: 22px;
     @bell-height: 22px;
 
     @lip-width: @width;
-    @lip-height: 3px;
+    @lip-height: 2px;
 
-    @clapper-thickness: 6px;
-    @clapper-length: @bell-height + @lip-height + 2px;
+    @clapper-thickness: 5px;
+    @clapper-length: @bell-height + @lip-height;
 
     @ulest-diameter: 16px;
     @ulest-top: @height * 0.2;
     @ulest-left: @width * 0.05;
 
+    position: relative;
+    width: @width;
+    height: @height;
+    padding: 0;
+    top: 0;
+    border: none;
+    margin-right: 0.25rem;
+
     .cross-line-transform(@rotation) {
         border-radius: 0;
         width: @cross-width;
         height: @cross-stroke-width;
-        transform: translateY(@height / 2) rotate(@rotation) scale(@cross-scale);
+        transform: translate(-2px, @height / 2) rotate(@rotation)
+            scale(@cross-scale);
     }
 
-    &__container {
-        position: relative;
-        width: @width;
-        height: @height;
-        padding: 0;
-        top: 0;
-        border: none;
-        margin-right: 0.25rem;
+    &--open {
+        .varselbjelle-ikon__ring {
+            opacity: 0;
+            z-index: 0;
+            transition-duration: 0.35s / 3;
+            .cross-line-transform(-135deg/3);
+        }
+        .varselbjelle-ikon__bell {
+            opacity: 0;
+            z-index: 0;
+            transition-duration: 0.35s / 3;
+            .cross-line-transform(-225deg/3);
+        }
+        .varselbjelle-ikon__lip {
+            .cross-line-transform(-225deg);
+        }
+        .varselbjelle-ikon__clapper {
+            .cross-line-transform(-315deg);
+        }
+        .varselbjelle-ikon__ulest-sirkel {
+            transform: translate(@ulest-left, @ulest-top) scale(0);
+        }
     }
 
     &__ring {
         position: absolute;
-        z-index: 2;
+        z-index: 3;
 
         transform: translateX((@width - @ring-diameter) / 2);
 
-        border-radius: 50%;
-        height: @ring-diameter;
+        height: @ring-diameter * 0.65;
         width: @ring-diameter;
-        background-color: @main-color;
+
+        border-top-left-radius: @ring-diameter / 2;
+        border-top-right-radius: @ring-diameter / 2;
+        border: @main-color @stroke-width solid;
+        border-bottom: none;
+        background-color: white;
 
         transition: @transition-props;
-
-        &--open {
-            transform: translate((@width - @ring-diameter) / 2, @height / 2)
-                scale(0);
-        }
     }
 
     &__bell {
         position: absolute;
         z-index: 2;
 
-        transform: translate(
-            (@width - @bell-width) / 2,
-            @ring-diameter - @stroke-width
-        );
+        transform: translate((@width - @bell-width) / 2, @ring-diameter * 0.35);
 
-        border-top-left-radius: @bell-height + @stroke-width;
-        border-top-right-radius: @bell-height + @stroke-width;
-        border: @main-color @stroke-width solid;
         height: @bell-height;
         width: @bell-width;
+
+        border-top-left-radius: @bell-height / 2;
+        border-top-right-radius: @bell-height / 2;
+        border: @main-color @stroke-width solid;
+        border-bottom: none;
         background-color: white;
-        border-bottom: 0;
 
         transition: @transition-props;
-
-        &--open {
-            .cross-line-transform(-(45deg));
-        }
     }
 
     &__lip {
         position: absolute;
         z-index: 2;
 
-        transform: translateY(@ring-diameter + @bell-height - @stroke-width);
+        transform: translateY(@bell-height + @ring-diameter * 0.25);
 
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
@@ -103,10 +119,6 @@
         background-color: @main-color;
 
         transition: @transition-props;
-
-        &--open {
-            .cross-line-transform(-(45deg));
-        }
     }
 
     &__clapper {
@@ -123,15 +135,11 @@
         background-color: @main-color;
 
         transition: @transition-props;
-
-        &--open {
-            .cross-line-transform(-(45deg + 90deg));
-        }
     }
 
     &__ulest-sirkel {
         position: absolute;
-        z-index: 3;
+        z-index: 4;
 
         transform: translate(@ulest-left, @ulest-top);
 
@@ -144,10 +152,10 @@
         justify-content: center;
         align-items: center;
 
-        transition: @transition-props;
+        transition: @transition-props visibility;
 
-        &--open {
-            transform: translate(@ulest-left, @ulest-top) scale(0);
+        &--hide {
+            visibility: hidden;
             transition: 0.2s all linear;
         }
     }

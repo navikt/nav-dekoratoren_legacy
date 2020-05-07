@@ -2,17 +2,19 @@
 @import (reference) '../ekspanderbar-meny/EkspanderbarMeny';
 
 .desktop-sok-dropdown {
-    &__innhold {
-        max-width: 700px;
-    }
-    &__innhold-wrapper {
-        left: 300px;
-        max-width: 150px;
-        transition-property: @ekspanderbar-transition-props, max-width, left;
+    @dropdownwidth: 700px;
 
+    &__innhold {
+        left: 0;
+        max-width: @dropdownwidth;
+    }
+
+    &__innhold-wrapper {
+        max-width: @dropdownwidth;
+        transition-duration: 0.2s;
         &--aktive {
-            max-width: 700px;
-            left: 0;
+            max-height: 12rem;
+            transition-duration: 0.3s;
         }
     }
 }

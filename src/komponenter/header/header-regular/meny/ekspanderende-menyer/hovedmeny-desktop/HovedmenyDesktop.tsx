@@ -113,7 +113,7 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
 
     const knapp = (
         <MenylinjeKnapp
-            toggleMenu={toggleMenu}
+            onClick={toggleMenu}
             isOpen={isOpen}
             classname={classname}
             id={desktopHovedmenyKnappId}
