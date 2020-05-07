@@ -29,6 +29,7 @@ interface Props {
 
 const predefinedlistview = 5;
 const mobileCls = BEMHelper('sok');
+const dropdownTransitionDuration = 300;
 
 class Sok extends React.Component<StateProps & Props, InputState> {
     fetchSearchResultThrottled: ReturnType<typeof debounce>;
@@ -57,8 +58,26 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     }
 
     componentDidUpdate(prevProps: Readonly<StateProps & Props>) {
-        if (prevProps !== this.props && !this.props.isOpen) {
-            this.setState(this.initialState);
+        if (prevProps !== this.props) {
+            const dropdownElement = document.getElementById(
+                'desktop-sok-dropdown'
+            ) as HTMLElement;
+            if (this.props.isOpen) {
+                if (dropdownElement) {
+                    setTimeout(
+                        () => (dropdownElement.style.maxHeight = '100rem'),
+                        dropdownTransitionDuration
+                    );
+                }
+            } else {
+                if (dropdownElement) {
+                    dropdownElement.style.removeProperty('max-height');
+                    setTimeout(
+                        () => this.setState(this.initialState),
+                        dropdownTransitionDuration
+                    );
+                }
+            }
         }
     }
 

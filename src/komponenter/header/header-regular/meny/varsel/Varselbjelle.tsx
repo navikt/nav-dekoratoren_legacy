@@ -1,4 +1,4 @@
-import React, { createRef, ReactNode, useEffect, useState } from 'react';
+import React, { createRef, ReactNode, useEffect } from 'react';
 import { AppState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { settVarslerSomLest } from 'store/reducers/varsel-lest-duck';
