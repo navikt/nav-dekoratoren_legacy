@@ -7,19 +7,14 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { SimpleHeader } from 'komponenter/header/header-simple/HeaderSimple';
 import { RegularHeader } from 'komponenter/header/header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
-import {
-    cookieOptions,
-    settArbeidsflate,
-} from 'store/reducers/arbeidsflate-duck';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { Language, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/HeadElements';
-import {
-    changeBetweenDesktopAndMobilView,
-    initializeSticky,
-    positionNavbar,
-} from 'utils/stickyheader-utils';
-import { verifyWindowObj } from '../../utils/Environment';
+import { changeBetweenDesktopAndMobilView } from 'utils/stickyheader-utils';
+import { positionNavbar } from 'utils/stickyheader-utils';
+import { initializeSticky } from 'utils/stickyheader-utils';
 
 export const desktopBreakpoint: number = 768;
 
@@ -134,12 +129,17 @@ export const Header = () => {
     }, []);
 
     // Change language
-    useEffect(() => {
-        const language = checkUrlForLanguage();
+    const checkUrlForLanguage = () => {
+        const language = getLanguageFromUrl();
         const action = languageDuck.actionCreator({ language });
         setCookie('decorator-language', language, cookieOptions);
         dispatch(action);
-    }, [typeof window !== 'undefined' && window.location.pathname]);
+    };
+
+    useEffect(() => {
+        window.addEventListener('popstate', checkUrlForLanguage);
+        checkUrlForLanguage();
+    }, []);
 
     return (
         <Fragment>
@@ -166,7 +166,7 @@ export const Header = () => {
     );
 };
 
-const checkUrlForLanguage = (): Language => {
+const getLanguageFromUrl = (): Language => {
     const locationPath = window.location.pathname;
     if (locationPath.includes('/en/')) {
         return Language.ENGELSK;

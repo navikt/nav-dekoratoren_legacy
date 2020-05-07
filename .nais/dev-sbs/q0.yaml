@@ -26,7 +26,7 @@ spec:
         - https://www-q0.nav.no/dekoratoren
     env:
         - name: XP_BASE_URL
-          value: https://www-q1.nav.no
+          value: https://www-q0.nav.no
         - name: APP_BASE_URL
           value: https://www-q0.nav.no/dekoratoren
         - name: API_XP_MENY_URL
