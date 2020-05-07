@@ -6,7 +6,7 @@ import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import { SokDropdown } from './sok/SokDropdown';
 import { HovedmenyDesktop } from './hovedmeny/HovedmenyDesktop';
 import { MinsideMeny } from './minside-meny/MinsideMeny';
-import { VarslerDropdown } from './varsler-desktop/VarslerDropdown';
+import { VarslerDropdown } from './varsler/VarslerDropdown';
 import { LoggInnKnappDesktop } from './logg-inn/LoggInnKnappDesktop';
 import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import './DesktopMenylinje.less';

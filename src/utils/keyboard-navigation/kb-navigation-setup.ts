@@ -9,7 +9,7 @@ import KbNav, {
 import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
 import { desktopHeaderLogoId } from 'komponenter/header/header-regular/desktop/DesktopMenylinje';
 import { desktopSokKnappId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
-import { desktopVarslerKnappId } from 'komponenter/header/header-regular/desktop/varsler-desktop/VarslerDropdown';
+import { desktopVarslerKnappId } from 'komponenter/header/header-regular/desktop/varsler/VarslerDropdown';
 import { desktopMinsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
 import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
