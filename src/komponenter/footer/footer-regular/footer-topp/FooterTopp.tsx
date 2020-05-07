@@ -87,6 +87,7 @@ const FooterTopp = () => {
                               className={`menylenker-seksjon ${
                                   !i ? 'venstre' : i === 2 ? 'hoyre' : 'midt'
                               }`}
+                              key={i}
                           >
                               <ul aria-labelledby="hoyrelenker-overskrift">
                                   <LinksLoader id="kontakt-loader" />
