@@ -65,7 +65,12 @@ const FooterTopp = () => {
                 </div>
                 {columnsNode
                     ? columnsNode.children.map((columnNode, i) => (
-                          <div key={i} className="menylenker-seksjon">
+                          <div
+                              key={i}
+                              className={`menylenker-seksjon ${
+                                  !i ? 'venstre' : i === 2 ? 'hoyre' : 'midt'
+                              }`}
+                          >
                               <Undertittel
                                   className="menylenker-overskrift"
                                   id="venstrelenker-overskrift"
@@ -77,8 +82,12 @@ const FooterTopp = () => {
                               </ul>
                           </div>
                       ))
-                    : [...Array(3)].map(() => (
-                          <div className="menylenker-seksjon hoyre">
+                    : [...Array(3)].map((i) => (
+                          <div
+                              className={`menylenker-seksjon ${
+                                  !i ? 'venstre' : i === 2 ? 'hoyre' : 'midt'
+                              }`}
+                          >
                               <ul aria-labelledby="hoyrelenker-overskrift">
                                   <LinksLoader id="kontakt-loader" />
                               </ul>
