@@ -3,13 +3,12 @@ import BEMHelper from 'utils/bem';
 import InnloggingsstatusProvider from 'store/providers/Innloggingsstatus';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import { Language } from 'store/reducers/language-duck';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import VarselinnboksProvider from 'store/providers/Varselinnboks';
-import Varselbjelle from './varsel/Varselbjelle';
 import HovedmenyMobil from './ekspanderende-menyer/hovedmeny-mobil/HovedmenyMobil';
-import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import { LoggInnKnappMobil } from 'komponenter/header/header-regular/meny/logginn/LoggInnKnappMobil';
+import { VarslerKnapp } from './ekspanderende-menyer/meny-knapper/varsler-knapp/VarslerKnapp';
 import './MobilMenylinje.less';
 
 const mobilClass = BEMHelper('mobilmeny');
@@ -23,12 +22,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const MobilMenylinje = ({ language }: Props) => {
-    const dispatch = useDispatch();
-    const { innloggingsstatus, visVarsel } = useSelector(stateSelector);
-
-    const LukkVarsel = ({ clicked }: { clicked: boolean }) => {
-        return <>{!clicked && visVarsel && dispatch(toggleVarsler())}</>;
-    };
+    const { innloggingsstatus } = useSelector(stateSelector);
 
     return (
         <nav
@@ -52,13 +46,7 @@ const MobilMenylinje = ({ language }: Props) => {
                             </InnloggingsstatusProvider>
                         ) : (
                             <VarselinnboksProvider>
-                                <Varselbjelle tabindex={true}>
-                                    {(clicked) =>
-                                        clicked && (
-                                            <LukkVarsel clicked={clicked} />
-                                        )
-                                    }
-                                </Varselbjelle>
+                                <VarslerKnapp />
                             </VarselinnboksProvider>
                         )}
                         {language === Language.NORSK ||

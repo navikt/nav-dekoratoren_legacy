@@ -9,7 +9,7 @@ import Undermeny from './mobil-innhold/Undermeny';
 import Listelement from './mobil-innhold/Listelement';
 import MobilarbeidsflateValg from 'komponenter/header/header-regular/arbeidsflatemeny/MobilarbeidsflateValg';
 import VarselinnboksProvider from 'store/providers/Varselinnboks';
-import VarselvisningMobil from '../../../varsel/varselvisning/VarselvisningMobil';
+import VarselvisningMobil from '../../varsler-mobil/VarselvisningMobil';
 import { AppState } from 'store/reducers';
 import { Dispatch } from 'store/dispatch-type';
 import { connect } from 'react-redux';

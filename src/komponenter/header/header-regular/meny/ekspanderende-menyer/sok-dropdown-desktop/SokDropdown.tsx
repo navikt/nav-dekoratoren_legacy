@@ -41,7 +41,7 @@ export const SokDropdown = ({ kbNavMainState }: Props) => {
 
     const knapp = (
         <MenylinjeKnapp
-            toggleMenu={toggleMenu}
+            onClick={toggleMenu}
             isOpen={isOpen}
             classname={classname}
             id={desktopSokKnappId}

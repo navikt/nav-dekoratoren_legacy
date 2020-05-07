@@ -1,0 +1,17 @@
+@import (reference)
+    '../../../../../../../../node_modules/nav-frontend-typografi-style/src/index';
+@import (reference) '../../../../../../../styling-variabler';
+
+.varselbjelle {
+    @media (min-width: @tabletLimitWidth) {
+        &__tekst {
+            font-weight: bold;
+        }
+    }
+
+    @media (max-width: @tabletLimitWidth) {
+        &__tekst {
+            .typo-undertittel;
+        }
+    }
+}

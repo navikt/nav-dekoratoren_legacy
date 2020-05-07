@@ -7,7 +7,7 @@ import MenylinjeKnapp from '../MenylinjeKnapp';
 import './MinsideKnapper.less';
 
 type Props = {
-    toggleMenu: () => void;
+    onClick: () => void;
     isOpen: boolean;
     brukerNavn: string;
     classname: string;
@@ -16,12 +16,12 @@ type Props = {
 };
 
 export const MinsidePersonKnapp = (props: Props) => {
-    const { toggleMenu, isOpen, classname, id, ariaLabel, brukerNavn } = props;
+    const { onClick, isOpen, classname, id, ariaLabel, brukerNavn } = props;
     const cls = BEMHelper(classname);
 
     return (
         <MenylinjeKnapp
-            toggleMenu={toggleMenu}
+            onClick={onClick}
             isOpen={isOpen}
             classname={classname}
             id={id}
