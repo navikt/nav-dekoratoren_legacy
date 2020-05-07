@@ -62,16 +62,20 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                 'desktop-sok-dropdown'
             ) as HTMLElement;
             if (this.props.isOpen) {
-                setTimeout(
-                    () => (dropdownElement.style.maxHeight = '100rem'),
-                    dropdownTransitionDuration
-                );
+                if (dropdownElement) {
+                    setTimeout(
+                        () => (dropdownElement.style.maxHeight = '100rem'),
+                        dropdownTransitionDuration
+                    );
+                }
             } else {
-                dropdownElement.style.removeProperty('max-height');
-                setTimeout(
-                    () => this.setState(this.initialState),
-                    dropdownTransitionDuration
-                );
+                if (dropdownElement) {
+                    dropdownElement.style.removeProperty('max-height');
+                    setTimeout(
+                        () => this.setState(this.initialState),
+                        dropdownTransitionDuration
+                    );
+                }
             }
         }
     }
