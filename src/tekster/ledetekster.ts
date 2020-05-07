@@ -123,7 +123,7 @@ export const ledetekster: { [key: string]: string } = {
     'delskjerm-modal-avbryt': `Avbryt`,
     'delskjerm-modal-avbryt-en': `Cancel`,
     'delskjerm-modal-avbryt-se': `Avbryt`,
-    'delskjerm-modal-stengt': 'Chatten er stengt',
+    'delskjerm-modal-stengt': 'Skjermdeling er stengt',
     'delskjerm-modal-stengt-en': 'Screen sharing is closed',
     'delskjerm-modal-stengt-se': 'Chatten er stengt',
     'varsler-visalle': 'Vis alle dine varsler',
