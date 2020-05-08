@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
-import { GACategory, triggerGaEvent } from 'utils/google-analytics';
+import { GACategory, gaEvent } from 'utils/google-analytics';
 import NavLogoFooter from 'ikoner/meny/NavLogoFooter';
 import DelSkjerm from 'ikoner/del-skjerm/DelSkjerm';
 import { AppState } from 'store/reducers';
@@ -34,7 +34,7 @@ const FooterBottom = () => {
     }, [data, personvernNode]);
 
     const openModal = () => {
-        triggerGaEvent({
+        gaEvent({
             context: arbeidsflate,
             category: GACategory.Footer,
             action: `kontakt/del-skjerm-open`,
@@ -43,7 +43,7 @@ const FooterBottom = () => {
     };
 
     const closeModal = () => {
-        triggerGaEvent({
+        gaEvent({
             context: arbeidsflate,
             category: GACategory.Footer,
             action: `kontakt/del-skjerm-close`,

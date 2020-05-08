@@ -42,6 +42,7 @@ export const MenyLenke = (props: Props) => {
                     action: `${menyGruppeNavn}/${lenke.displayName}`,
                     label: href,
                 }}
+                withChevron={true}
             >
                 {lenke.displayName}
             </LenkeMedGA>

@@ -3,7 +3,7 @@ import { VarselIkon } from '../ikoner/varsel-ikon/VarselIkon';
 import Tekst from 'tekster/finn-tekst';
 import React from 'react';
 import { settVarslerSomLest } from 'store/reducers/varsel-lest-duck';
-import { triggerGaEvent } from 'utils/google-analytics';
+import { gaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
@@ -30,7 +30,7 @@ export const VarslerKnapp = ({ id }: Props) => {
         if (!isOpen && varsler.uleste > 0) {
             settVarslerSomLest(appBaseUrl, varsler.nyesteId, dispatch);
         }
-        triggerGaEvent({
+        gaEvent({
             category: GACategory.Header,
             action: `varsler-${isOpen ? 'close' : 'open'}`,
         });

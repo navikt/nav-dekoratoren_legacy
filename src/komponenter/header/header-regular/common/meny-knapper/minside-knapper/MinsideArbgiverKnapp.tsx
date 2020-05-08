@@ -1,11 +1,12 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import MinsideIkon from '../ikoner/minside-ikon/MinsideIkon';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import './MinsideKnapper.less';
+
+import briefcaseIkon from 'ikoner/meny/Briefcase_icon_nav.svg';
 
 type Props = {
     classname: string;
@@ -34,7 +35,7 @@ export const MinsideArbgiverKnapp = (props: Props) => {
                     'knapp-visning'
                 )}`}
             >
-                <MinsideIkon hasMenu={false} />
+                <img src={briefcaseIkon} alt="" />
                 <div className={cls.element('knapp-tekst')}>
                     <Normaltekst className={cls.element('knapp-tekst-topp')}>
                         <Tekst id={'ga-til-min-side'} />

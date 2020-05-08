@@ -8,7 +8,7 @@ import { AppState } from 'store/reducers';
 import { getHovedmenyNode } from 'utils/meny-storage-utils';
 import Tekst from 'tekster/finn-tekst';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
-import { GACategory, triggerGaEvent } from 'utils/google-analytics';
+import { GACategory, gaEvent } from 'utils/google-analytics';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
 import { HovedmenyVisning } from './hovedmeny-visning/HovedmenyVisning';
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
@@ -103,7 +103,7 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
     }, [hovedmenyPunkter, arbeidsflate]);
 
     const toggleMenu = () => {
-        triggerGaEvent({
+        gaEvent({
             context: arbeidsflate,
             category: GACategory.Header,
             action: `meny-${isOpen ? 'close' : 'open'}`,

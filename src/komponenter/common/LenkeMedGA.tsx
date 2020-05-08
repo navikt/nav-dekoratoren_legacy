@@ -1,5 +1,6 @@
 import React from 'react';
-import { GAEventArgs, triggerGaEvent } from 'utils/google-analytics';
+import { GAEventArgs, gaEvent } from 'utils/google-analytics';
+import { HoyreChevron } from 'nav-frontend-chevron';
 
 type Props = {
     href: string;
@@ -10,6 +11,7 @@ type Props = {
     id?: string;
     onClick?: (...args: any) => void;
     tabIndex?: number;
+    withChevron?: boolean;
 };
 
 export const LenkeMedGA = ({
@@ -21,29 +23,40 @@ export const LenkeMedGA = ({
     id,
     onClick,
     tabIndex,
+    withChevron,
 }: Props) => (
     <a
         href={href}
         className={
-            classNameOverride || `lenke${className ? ' ' + className : ''}`
+            classNameOverride ||
+            `${withChevron ? 'chevronlenke' : 'lenke'}${
+                className ? ' ' + className : ''
+            }`
         }
         id={id}
         tabIndex={tabIndex}
-        onAuxClick={(event) =>
+        onAuxClick={(event: React.MouseEvent) =>
             gaEventArgs &&
             event.button &&
             event.button === 1 &&
-            triggerGaEvent(gaEventArgs)
+            gaEvent(gaEventArgs)
         }
-        onClick={(e) => {
+        onClick={(event: React.MouseEvent) => {
             if (onClick) {
-                onClick(e);
+                onClick(event);
             }
             if (gaEventArgs) {
-                triggerGaEvent(gaEventArgs);
+                gaEvent(gaEventArgs);
             }
         }}
     >
-        {children}
+        <>
+            {withChevron && (
+                <div>
+                    <HoyreChevron className={'chevronlenke__chevron'} />
+                </div>
+            )}
+            {children}
+        </>
     </a>
 );

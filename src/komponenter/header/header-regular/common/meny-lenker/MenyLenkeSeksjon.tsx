@@ -1,9 +1,9 @@
 import { MenyNode } from 'store/reducers/menu-duck';
 import React from 'react';
-import { Element } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
 import { MenyLenke } from './MenyLenke';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { Undertittel } from 'nav-frontend-typografi';
 import './MenyLenker.less';
 
 interface Props {
@@ -27,7 +27,7 @@ export const MenyLenkeSeksjon = ({
     return (
         <section className={classname}>
             <div className={cls.element('tittel')}>
-                <Element>{menygruppe.displayName}</Element>
+                <Undertittel>{menygruppe.displayName}</Undertittel>
             </div>
             <ul className={cls.element('lenker')}>
                 {menygruppe.children.map((lenke: MenyNode, index: number) => {

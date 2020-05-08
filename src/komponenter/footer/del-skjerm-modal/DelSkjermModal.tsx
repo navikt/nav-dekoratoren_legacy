@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Modal from 'nav-frontend-modal';
 import { Input } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
+import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
@@ -17,6 +17,8 @@ interface Props {
 }
 
 const DelSkjermModal = (props: Props) => {
+    const classname = 'delskjerm__modal';
+
     // Language
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const language = useSelector((state: AppState) => state.language).language;
@@ -66,10 +68,26 @@ const DelSkjermModal = (props: Props) => {
         }
     };
 
+    const setZIndex = (zIndex: string) => {
+        const elementsArray = document.getElementsByClassName(
+            'ReactModal__Overlay'
+        );
+        const element = elementsArray[0] as HTMLElement;
+        if (
+            !element ||
+            !element.children[0] ||
+            !element.children[0].classList.contains(classname)
+        ) {
+            return;
+        }
+        element.style.zIndex = zIndex;
+    };
+
     return (
         <Modal
+            onAfterOpen={() => setZIndex('9999')}
             isOpen={props.isOpen}
-            className="navno-dekorator delskjerm__modal"
+            className={`navno-dekorator ${classname}`}
             contentLabel={'Skjermdeling'}
             onRequestClose={props.onClose}
         >
@@ -77,6 +95,7 @@ const DelSkjermModal = (props: Props) => {
                 <img
                     className={'delskjerm__veileder'}
                     src={`${XP_BASE_URL}${Veileder}`}
+                    alt={''}
                 />
             </div>
             <div className={'delskjerm__content'}>
