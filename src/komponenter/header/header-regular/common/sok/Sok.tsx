@@ -335,7 +335,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                             this.resetDisplay();
                                         }}
                                     />
-                                    {!loading ? (
+                                    {loading ? (
                                         <Spinner tekstId={'spinner-sok'} />
                                     ) : (
                                         inputValue && (
