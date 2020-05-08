@@ -20,7 +20,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const classname = 'desktop-sok-dropdown';
-export const desktopSokKnappId = 'desktop-sok-dropdown-knapp-id';
+export const desktopSokKnappId = 'desktop-sok-knapp';
 
 type Props = {
     kbNavMainState: KbNavMain;
@@ -61,7 +61,7 @@ export const SokDropdown = ({ kbNavMainState }: Props) => {
             isOpen={isOpen}
             menyKnapp={knapp}
         >
-            <Sok tabindex={true} isOpen={isOpen} />
+            <Sok tabindex={true} isOpen={isOpen} id={'desktop-sok'} />
         </EkspanderbarMeny>
     );
 };

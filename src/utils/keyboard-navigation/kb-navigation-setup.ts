@@ -61,12 +61,12 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
                 col: 1,
                 row: 0,
                 sub: 0,
-            })]: 'desktop-sok-reset-knapp',
+            })]: 'desktop-sok-reset',
             [getKbId(KbNavGroup.Sok, {
                 col: 2,
                 row: 0,
                 sub: 0,
-            })]: 'desktop-sok-submit-knapp',
+            })]: 'desktop-sok-submit',
         },
     },
     [KbNavGroup.Varsler]: {

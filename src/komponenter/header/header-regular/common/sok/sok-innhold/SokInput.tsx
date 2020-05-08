@@ -14,18 +14,20 @@ type Props = {
     tabIndex: boolean | undefined;
     writtenInput: string;
     onReset: () => void;
+    id?: string;
 };
 
 const defaultKeys = ['Home', 'End'];
 
 export const SokInput = ({
-    language,
-    writtenInput,
-    onReset,
-    className,
-    getInputProps,
-    tabIndex,
-}: Props) => {
+                             language,
+                             writtenInput,
+                             onReset,
+                             className,
+                             getInputProps,
+                             tabIndex,
+                             id,
+                         }: Props) => {
     return (
         <>
             <div className={'sok-input__tittel'}>
@@ -40,15 +42,16 @@ export const SokInput = ({
                             if (defaultKeys.includes(e.key)) {
                                 e.nativeEvent.preventDownshiftDefault = true;
                             }
-                        }
+                        },
                     })}
                     className={className}
                     placeholder={finnTekst('sok-input-placeholder', language)}
                     label={finnTekst('sok-input-label', language)}
                     aria-label={finnTekst('sok-input-label', language)}
                     tabIndex={tabIndex ? 0 : -1}
+                    id={`${id}-input`}
                 />
-                <SokKnapper writtenInput={writtenInput} onReset={onReset} />
+                <SokKnapper writtenInput={writtenInput} onReset={onReset} id={id} />
             </div>
         </>
     );

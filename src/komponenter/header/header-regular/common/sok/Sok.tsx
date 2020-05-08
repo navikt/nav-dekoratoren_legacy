@@ -24,6 +24,7 @@ interface StateProps {
 
 interface Props {
     tabindex?: boolean;
+    id?: string;
     isOpen: boolean;
 }
 
@@ -334,6 +335,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                             setState({ isOpen: false });
                                             this.resetDisplay();
                                         }}
+                                        id={this.props.id}
                                     />
                                     {loading ? (
                                         <Spinner tekstId={'spinner-sok'} />
