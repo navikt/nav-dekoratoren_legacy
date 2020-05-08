@@ -8,7 +8,7 @@ import { Language } from 'store/reducers/language-duck';
 import { genererUrl } from 'utils/Environment';
 import { defaultData, InputState } from './sok-utils';
 import { SokeresultatData, visAlleTreff } from './sok-utils';
-import { GACategory, triggerGaEvent } from 'utils/google-analytics';
+import { GACategory, gaEvent } from 'utils/google-analytics';
 import BEMHelper from 'utils/bem';
 import { EnvironmentState } from 'store/reducers/environment-duck';
 import SokResultater from './sok-innhold/SokResultater';
@@ -153,7 +153,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
         e.preventDefault();
         const { XP_BASE_URL } = this.props.environment;
         const { selectedInput } = this.state;
-        triggerGaEvent({
+        gaEvent({
             category: GACategory.Header,
             label: selectedInput,
             action: 'søk',

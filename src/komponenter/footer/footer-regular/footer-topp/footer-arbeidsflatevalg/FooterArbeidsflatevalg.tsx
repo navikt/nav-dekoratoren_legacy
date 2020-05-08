@@ -11,7 +11,7 @@ import { AppState } from 'store/reducers';
 import { Language } from 'store/reducers/language-duck';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
-import { GACategory, triggerGaEvent } from 'utils/google-analytics';
+import { GACategory, gaEvent } from 'utils/google-analytics';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { erNavDekoratoren } from 'utils/Environment';
 
@@ -71,7 +71,7 @@ const FooterArbeidsflatevalg = () => {
                                             dispatch(
                                                 settArbeidsflate(lenke.key)
                                             );
-                                            triggerGaEvent({
+                                            gaEvent({
                                                 context: arbeidsflate,
                                                 category: GACategory.Header,
                                                 action: 'arbeidsflate-valg',
@@ -89,7 +89,7 @@ const FooterArbeidsflatevalg = () => {
                                         onAuxClick={(event) =>
                                             event.button &&
                                             event.button === 1 &&
-                                            triggerGaEvent({
+                                            gaEvent({
                                                 context: arbeidsflate,
                                                 category: GACategory.Header,
                                                 action: 'arbeidsflate-valg',

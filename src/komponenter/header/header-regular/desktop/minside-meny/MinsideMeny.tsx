@@ -2,7 +2,7 @@ import React from 'react';
 import { AppState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMinsideMenyNode, MenuValue } from 'utils/meny-storage-utils';
-import { GACategory, triggerGaEvent } from 'utils/google-analytics';
+import { GACategory, gaEvent } from 'utils/google-analytics';
 import { toggleMinsideMeny } from 'store/reducers/dropdown-toggle-duck';
 import { Status } from 'api/api';
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
@@ -64,7 +64,7 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
     const knapp = (
         <MinsidePersonKnapp
             onClick={() => {
-                triggerGaEvent({
+                gaEvent({
                     context: arbeidsflate,
                     category: GACategory.Header,
                     action: `minside-meny-${isOpen ? 'close' : 'open'}`,

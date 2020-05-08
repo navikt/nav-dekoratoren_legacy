@@ -6,7 +6,7 @@ import Sok from 'komponenter/header/header-regular/common/sok/Sok';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
-import { GACategory, triggerGaEvent } from 'utils/google-analytics';
+import { GACategory, gaEvent } from 'utils/google-analytics';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapper/MenylinjeKnapp';
 import SokMenyIkon from 'komponenter/header/header-regular/common/meny-knapper/ikoner/sok-ikon/SokMenyIkon';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
@@ -32,7 +32,7 @@ export const SokDropdown = ({ kbNavMainState }: Props) => {
     useKbNavSub(configForNodeGroup[KbNavGroup.Sok], kbNavMainState, isOpen);
 
     const toggleMenu = () => {
-        triggerGaEvent({
+        gaEvent({
             category: GACategory.Header,
             action: `sok-${isOpen ? 'close' : 'open'}`,
         });
