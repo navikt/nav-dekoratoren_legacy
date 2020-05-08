@@ -32,7 +32,7 @@ export const MinsideArbgiverKnapp = (props: Props) => {
         >
             <div
                 className={`menylinje-knapp-visning ${cls.element(
-                    'knapp-visning',
+                    'knapp-visning'
                 )}`}
             >
                 <img src={briefcaseIkon} alt="" />

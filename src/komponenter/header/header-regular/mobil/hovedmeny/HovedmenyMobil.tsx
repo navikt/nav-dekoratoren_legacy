@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Status } from 'api/api';
 import { getHovedmenyNode, getMinsideMenyNode } from 'utils/meny-storage-utils';
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
-import { GACategory, triggerGaEvent } from 'utils/google-analytics';
+import { GACategory, gaEvent } from 'utils/google-analytics';
 import { finnTekst } from 'tekster/finn-tekst';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
@@ -55,7 +55,7 @@ const HovedmenyMobil = () => {
     } = useSelector(stateSelector);
 
     const menutoggle = () => {
-        triggerGaEvent({
+        gaEvent({
             category: GACategory.Header,
             action: `meny-${underIsOpen ? 'close' : 'open'}`,
         });

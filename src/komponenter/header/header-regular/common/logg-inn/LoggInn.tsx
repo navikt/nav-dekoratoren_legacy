@@ -1,7 +1,7 @@
 import React from 'react';
 import { erNavDekoratoren } from 'utils/Environment';
 import { finnTekst } from 'tekster/finn-tekst';
-import { GACategory, triggerGaEvent } from 'utils/google-analytics';
+import { GACategory, gaEvent } from 'utils/google-analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import 'komponenter/header/header-regular/common/logg-inn/LoggInn.less';
@@ -34,7 +34,7 @@ export const LoggInn = ({ Knapp }: Props) => {
                 : `${LOGIN_URL}/login?redirect=${DITT_NAV_URL}`
         }&level=${PARAMS.LEVEL}`;
 
-        triggerGaEvent({
+        gaEvent({
             context: arbeidsflate,
             category: GACategory.Header,
             action: authenticated ? 'logg-ut' : 'logg-inn',

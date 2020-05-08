@@ -32,7 +32,7 @@ export const initGA = () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
 };
 
-export const triggerGaEvent = (props: GAEventArgs) => {
+export const gaEvent = (props: GAEventArgs) => {
     const { context, category, action, label } = props;
     const actionFinal = `${context ? context + '/' : ''}${action}`;
 

@@ -3,7 +3,7 @@ import { connect, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 import { AppState } from 'store/reducers';
 import { desktopview, tabletview } from '../../../../../styling-mediaquery';
-import { triggerGaEvent } from 'utils/google-analytics';
+import { gaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { Language } from 'store/reducers/language-duck';
@@ -68,7 +68,7 @@ class Varselvisning extends React.Component<Props, State> {
         if (event.type === 'auxclick' && (event as MouseEvent).button !== 1) {
             return;
         }
-        triggerGaEvent({
+        gaEvent({
             category: GACategory.Header,
             action: 'varsel-lenke',
             label: (event.target as HTMLAnchorElement).href,
