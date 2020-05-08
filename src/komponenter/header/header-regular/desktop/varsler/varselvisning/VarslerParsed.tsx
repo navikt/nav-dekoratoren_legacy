@@ -6,14 +6,20 @@ import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 
+import alarmIkon from 'ikoner/varsler/alarm.svg';
+import kalenderIkon from 'ikoner/varsler/calendar-3.svg';
+import chatIkon from 'ikoner/varsler/bubble-chat-2.svg';
+import dokumentIkon from 'ikoner/varsler/file-new-1.svg';
+import plasterIkon from 'ikoner/varsler/first-aid-plaster.svg';
+
 const ikonDefault = 'alarm-ikon';
-const ikonDefaultPath = require('ikoner/varsler/alarm.svg');
+
 const ikoner: { [str: string]: string } = {
-    'alarm-ikon': ikonDefaultPath,
-    'kalender-ikon': require('ikoner/varsler/calendar-3.svg'),
-    'snakkeboble-ikon': require('ikoner/varsler/bubble-chat-2.svg'),
-    'dokument-ikon': require('ikoner/varsler/file-new-1.svg'),
-    'plaster-ikon': require('ikoner/varsler/first-aid-plaster.svg'),
+    'alarm-ikon': alarmIkon,
+    'kalender-ikon': kalenderIkon,
+    'snakkeboble-ikon': chatIkon,
+    'dokument-ikon': dokumentIkon,
+    'plaster-ikon': plasterIkon,
 };
 
 type Props = {
@@ -22,7 +28,7 @@ type Props = {
 };
 
 const parseIkon = (ikonStr: string) => {
-    const ikon = ikoner[ikonStr] || ikonDefaultPath;
+    const ikon = ikoner[ikonStr] || alarmIkon;
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     return (
         <div className={`varsel-ikon-row`}>
