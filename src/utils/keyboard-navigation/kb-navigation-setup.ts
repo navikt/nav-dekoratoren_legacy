@@ -26,6 +26,8 @@ export type KbNavConfig = {
     idMap?: KbIdMap;
 };
 
+export const disabledGroups = [KbNavGroup.Sok];
+
 // TODO: Hvorfor blir desktopHovedmenyKnappId noen ganger undefined?!
 const hovedmenyKnappId =
     desktopHovedmenyKnappId || 'desktop-hovedmeny-knapp-id';
@@ -57,16 +59,6 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
                 row: 0,
                 sub: 0,
             })]: 'desktop-sok-input',
-            [getKbId(KbNavGroup.Sok, {
-                col: 1,
-                row: 0,
-                sub: 0,
-            })]: 'desktop-sok-reset',
-            [getKbId(KbNavGroup.Sok, {
-                col: 2,
-                row: 0,
-                sub: 0,
-            })]: 'desktop-sok-submit',
         },
     },
     [KbNavGroup.Varsler]: {

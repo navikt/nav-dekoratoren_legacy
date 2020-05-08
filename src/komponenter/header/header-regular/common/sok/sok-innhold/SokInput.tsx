@@ -41,6 +41,7 @@ export const SokInput = ({
                         onKeyDown: (e: any) => {
                             if (defaultKeys.includes(e.key)) {
                                 e.nativeEvent.preventDownshiftDefault = true;
+                                return;
                             }
                         },
                     })}
@@ -51,7 +52,7 @@ export const SokInput = ({
                     tabIndex={tabIndex ? 0 : -1}
                     id={`${id}-input`}
                 />
-                <SokKnapper writtenInput={writtenInput} onReset={onReset} id={id} />
+                <SokKnapper writtenInput={writtenInput} onReset={onReset} />
             </div>
         </>
     );
