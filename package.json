@@ -35,7 +35,7 @@
         "classnames": "^2.2.6",
         "console-stamp": "^0.2.9",
         "dotenv": "^8.2.0",
-        "downshift": "^5.2.0",
+        "downshift": "^5.2.6",
         "es6-promise": "^4.2.8",
         "express": "^4.17.1",
         "html-react-parser": "^0.10.3",
