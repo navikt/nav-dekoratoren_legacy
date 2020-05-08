@@ -16,6 +16,8 @@ type Props = {
     onReset: () => void;
 };
 
+const defaultKeys = ['Home', 'End'];
+
 export const SokInput = ({
     language,
     writtenInput,
@@ -33,7 +35,13 @@ export const SokInput = ({
             </div>
             <div className="sok-input-container">
                 <Input
-                    {...getInputProps()}
+                    {...getInputProps({
+                        onKeyDown: (e: any) => {
+                            if (defaultKeys.includes(e.key)) {
+                                e.nativeEvent.preventDownshiftDefault = true;
+                            }
+                        }
+                    })}
                     className={className}
                     placeholder={finnTekst('sok-input-placeholder', language)}
                     label={finnTekst('sok-input-label', language)}
