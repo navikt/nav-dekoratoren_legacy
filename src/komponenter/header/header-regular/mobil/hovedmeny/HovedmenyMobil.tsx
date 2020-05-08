@@ -11,7 +11,7 @@ import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { Language } from 'store/reducers/language-duck';
 import { dataInitState } from 'store/reducers/menu-duck';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
-import MenySpinner from 'komponenter/header/header-regular/common/meny-spinner/MenySpinner';
+import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapper/MenylinjeKnapp';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import HamburgerIkon from 'komponenter/header/header-regular/common/meny-knapper/ikoner/hamburger-ikon/HamburgerIkon';
@@ -108,7 +108,7 @@ const HovedmenyMobil = () => {
                 lang={language}
             />
         ) : (
-            <MenySpinner />
+            <Spinner tekstId={'meny-loading'} />
         );
 
     return (
