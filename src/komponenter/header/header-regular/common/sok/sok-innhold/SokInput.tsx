@@ -20,14 +20,14 @@ type Props = {
 const defaultKeys = ['Home', 'End'];
 
 export const SokInput = ({
-                             language,
-                             writtenInput,
-                             onReset,
-                             className,
-                             getInputProps,
-                             tabIndex,
-                             id,
-                         }: Props) => {
+    language,
+    writtenInput,
+    onReset,
+    className,
+    getInputProps,
+    tabIndex,
+    id,
+}: Props) => {
     return (
         <>
             <div className={'sok-input__tittel'}>
@@ -50,7 +50,7 @@ export const SokInput = ({
                     label={finnTekst('sok-input-label', language)}
                     aria-label={finnTekst('sok-input-label', language)}
                     tabIndex={tabIndex ? 0 : -1}
-                    id={`${id}-input`}
+                    id={id}
                 />
                 <SokKnapper writtenInput={writtenInput} onReset={onReset} />
             </div>
