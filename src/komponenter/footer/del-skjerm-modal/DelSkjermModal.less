@@ -1,11 +1,14 @@
-@import '../../../../node_modules/nav-frontend-core/less/_variabler';
 @import '../../../styling-variabler.less';
+@import '~nav-frontend-modal-style/src/index';
 
 .delskjerm {
-    &__modal {
+    &__modal.modal {
+        all: unset;
+        .modal;
         max-width: 35rem;
-        overflow: visible !important;
+        overflow: visible;
     }
+
     &__content {
         @media (min-width: @tabletLimitWidth) {
             padding: 3rem 4rem 2rem 4rem;
@@ -14,9 +17,11 @@
             padding-top: 2rem;
         }
     }
+
     &__beskrivelse {
         margin: 1rem 0 1.5rem 0;
     }
+
     &__header {
         width: 100%;
         top: -2rem;
@@ -25,6 +30,7 @@
         position: absolute;
         justify-content: center;
     }
+
     &__veileder {
         padding-top: 0.25rem;
         height: 4.5rem;
@@ -32,12 +38,14 @@
         border-radius: 2.25rem;
         background-color: @navBlaDarken60;
     }
+
     &__knapper {
         margin-top: 1rem;
         display: flex;
         @media (max-width: @tabletLimitWidth) {
             flex-direction: column;
         }
+
         > * {
             margin: 0.5rem 0.5rem 0 0;
         }
