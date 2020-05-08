@@ -5,8 +5,8 @@ import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
 import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
-import { Undertittel } from 'nav-frontend-typografi';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { Systemtittel } from 'nav-frontend-typografi';
 import './Varselvisning.less';
 
 const stateSelector = (state: AppState) => ({
@@ -58,15 +58,14 @@ export const Varselvisning = () => {
 
     return (
         <div className={classname}>
-            <Undertittel>
+            <Systemtittel>
                 <Tekst id={'varsler-tittel'} />
-            </Undertittel>
-            {visAlleVarslerLenke && alleVarslerLenke(0, nyeVarslerMsg)}
+            </Systemtittel>
             <VarslerParsed
                 varsler={varsler}
-                rowIndex={visAlleVarslerLenke ? 1 : 0}
+                rowIndex={0}
             />
-            {visAlleVarslerLenke && alleVarslerLenke(2, nyeVarslerMsg)}
+            {visAlleVarslerLenke && alleVarslerLenke(1, nyeVarslerMsg)}
         </div>
     );
 };
