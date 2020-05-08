@@ -24,6 +24,7 @@ interface StateProps {
 
 interface Props {
     tabindex?: boolean;
+    id?: string;
     isOpen: boolean;
 }
 
@@ -60,13 +61,13 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     componentDidUpdate(prevProps: Readonly<StateProps & Props>) {
         if (prevProps !== this.props) {
             const dropdownElement = document.getElementById(
-                'desktop-sok-dropdown'
+                'desktop-sok-dropdown',
             ) as HTMLElement;
             if (this.props.isOpen) {
                 if (dropdownElement) {
                     setTimeout(
                         () => (dropdownElement.style.maxHeight = '100rem'),
-                        dropdownTransitionDuration
+                        dropdownTransitionDuration,
                     );
                 }
             } else {
@@ -74,7 +75,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     dropdownElement.style.removeProperty('max-height');
                     setTimeout(
                         () => this.setState(this.initialState),
-                        dropdownTransitionDuration
+                        dropdownTransitionDuration,
                     );
                 }
             }
@@ -121,7 +122,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                 if (this.ismounted) {
                     const tmp = [...json.hits];
                     tmp.unshift(
-                        visAlleTreff(XP_BASE_URL, this.state.writtenInput)
+                        visAlleTreff(XP_BASE_URL, this.state.writtenInput),
                     );
                     this.setState({
                         items: tmp,
@@ -171,16 +172,16 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 
     gethighlightedindex = (
         state: DownshiftState<any>,
-        keypressdown: boolean
+        keypressdown: boolean,
     ) => {
         if (state.isOpen) {
             if (typeof state.highlightedIndex === 'number') {
                 return keypressdown &&
-                    state.highlightedIndex !== predefinedlistview
+                state.highlightedIndex !== predefinedlistview
                     ? (state.highlightedIndex += 1)
                     : !keypressdown && state.highlightedIndex !== 0
-                    ? (state.highlightedIndex -= 1)
-                    : state.highlightedIndex;
+                        ? (state.highlightedIndex -= 1)
+                        : state.highlightedIndex;
             }
             if (typeof state.highlightedIndex === 'object') {
                 return (state.highlightedIndex = 0);
@@ -192,7 +193,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
         isopen: boolean,
         highlightedindex: number | null,
         inputvalue: string,
-        changes: StateChangeOptions<any>
+        changes: StateChangeOptions<any>,
     ) => {
         return {
             ...changes,
@@ -204,7 +205,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 
     stateReducer = (
         state: DownshiftState<any>,
-        changes: StateChangeOptions<any>
+        changes: StateChangeOptions<any>,
     ) => {
         switch (changes.type) {
             case Downshift.stateChangeTypes.keyDownArrowDown:
@@ -215,7 +216,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         this.setState({
                             selectedInput: this.state.items[
                                 state.highlightedIndex
-                            ].displayName,
+                                ].displayName,
                         });
                         return this.setDownshiftchanges(
                             state.isOpen,
@@ -224,8 +225,8 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                 state.highlightedIndex
                                     ? state.highlightedIndex
                                     : 0
-                            ].displayName,
-                            changes
+                                ].displayName,
+                            changes,
                         );
                     }
                 }
@@ -233,7 +234,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     state.isOpen,
                     state.highlightedIndex,
                     this.state.selectedInput,
-                    changes
+                    changes,
                 );
 
             case Downshift.stateChangeTypes.keyDownArrowUp:
@@ -243,7 +244,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         this.setState({
                             selectedInput: this.state.items[
                                 state.highlightedIndex
-                            ].displayName,
+                                ].displayName,
                         });
                         return this.setDownshiftchanges(
                             state.isOpen,
@@ -252,8 +253,8 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                 state.highlightedIndex
                                     ? state.highlightedIndex
                                     : 0
-                            ].displayName,
-                            changes
+                                ].displayName,
+                            changes,
                         );
                     }
                 }
@@ -301,7 +302,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     onChange={this.handleSelect}
                     onInputValueChange={(
                         changes: string,
-                        stateAndHelpers: any
+                        stateAndHelpers: any,
                     ) => {
                         this.enableBackground(stateAndHelpers.isOpen);
                         this.handleValueChange(changes);
@@ -310,12 +311,12 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                     itemToString={(item) => this.input(item)}
                 >
                     {({
-                        getInputProps,
-                        getItemProps,
-                        getMenuProps,
-                        inputValue,
-                        setState,
-                    }) => (
+                          getInputProps,
+                          getItemProps,
+                          getMenuProps,
+                          inputValue,
+                          setState,
+                      }) => (
                         <form
                             id="sok"
                             role="search"
@@ -334,6 +335,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                             setState({ isOpen: false });
                                             this.resetDisplay();
                                         }}
+                                        id={this.props.id}
                                     />
                                     {loading ? (
                                         <Spinner tekstId={'spinner-sok'} />
@@ -363,7 +365,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                             'bakgrunn',
                             this.state.setBackground && this.props.menuIsOpen
                                 ? 'active'
-                                : ''
+                                : '',
                         )}
                     />
                 </div>

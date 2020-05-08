@@ -8,18 +8,17 @@ interface Props {
     onReset: () => void;
 }
 
-const SokKnapper = (props: Props) => {
+const SokKnapper = ({ writtenInput, onReset }: Props) => {
     const cls = BEMHelper('sok-knapper');
     return (
         <div className={cls.element('container')}>
-            {props.writtenInput && (
+            {writtenInput && (
                 <button
                     type={'button'}
                     className={`${cls.element('knapp')} ${cls.element(
                         'knapp-avbryt'
                     )}`}
-                    onClick={props.onReset}
-                    id={'desktop-sok-reset-knapp'}
+                    onClick={onReset}
                 >
                     <div className={cls.element('ikon-container')}>
                         <div className={cls.element('reset-line-x')} />
@@ -35,7 +34,6 @@ const SokKnapper = (props: Props) => {
                 className={`${cls.element('knapp')} ${cls.element(
                     'knapp-submit'
                 )}`}
-                id={'desktop-sok-submit-knapp'}
             >
                 <div className={cls.element('ikon-container')}>
                     <div className={cls.element('sok-circle')} />
