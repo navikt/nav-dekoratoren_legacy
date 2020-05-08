@@ -5,7 +5,7 @@ import { getMinsideMenyNode, MenuValue } from 'utils/meny-storage-utils';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import { toggleMinsideMeny } from 'store/reducers/dropdown-toggle-duck';
 import { Status } from 'api/api';
-import MenySpinner from 'komponenter/header/header-regular/common/meny-spinner/MenySpinner';
+import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
 import MinsideVisning from './minside-visning/MinsideVisning';
 import { MinsidePersonKnapp } from 'komponenter/header/header-regular/common/meny-knapper/minside-knapper/MinsidePersonKnapp';
@@ -99,7 +99,7 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
                     dittNavUrl={environment.DITT_NAV_URL}
                 />
             ) : (
-                <MenySpinner />
+                <Spinner tekstId={'meny-loading'} />
             )}
         </EkspanderbarMeny>
     );

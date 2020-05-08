@@ -61,10 +61,7 @@ export const Varselvisning = () => {
             <Systemtittel>
                 <Tekst id={'varsler-tittel'} />
             </Systemtittel>
-            <VarslerParsed
-                varsler={varsler}
-                rowIndex={0}
-            />
+            <VarslerParsed varsler={varsler} rowIndex={0} />
             {visAlleVarslerLenke && alleVarslerLenke(1, nyeVarslerMsg)}
         </div>
     );

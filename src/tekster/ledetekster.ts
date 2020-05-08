@@ -186,7 +186,6 @@ export const ledetekster: { [key: string]: string } = {
     'meny-loading': 'Laster meny-innhold...',
     'meny-loading-en': 'Laster meny-innhold...',
     'meny-loading-se': 'Laster meny-innhold...',
-    'meny-loading-es': 'Laster meny-innhold...',
     'arbeidsflate-stikkord-om-privatperson':
         'Arbeid|Familie|Pensjon|Hjelpemidler|Flere Tema',
     'arbeidsflate-stikkord-om-privatperson-en':
@@ -210,4 +209,7 @@ export const ledetekster: { [key: string]: string } = {
     'feil-sok-fetch': 'Feil mot søketjeneste.',
     'feil-sok-fetch-en': 'Search system malfunction.',
     'feil-sok-fetch-se': 'Feil mot søketjeneste.',
+    'spinner-sok': 'Laster forhåndsvisning...',
+    'spinner-sok-en': 'Loading search preview...',
+    'spinner-sok-se': 'Laster forhåndsvisning...',
 };

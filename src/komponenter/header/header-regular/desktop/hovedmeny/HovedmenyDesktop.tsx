@@ -11,7 +11,7 @@ import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
 import { HovedmenyVisning } from './hovedmeny-visning/HovedmenyVisning';
-import MenySpinner from 'komponenter/header/header-regular/common/meny-spinner/MenySpinner';
+import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import HamburgerIkon from 'komponenter/header/header-regular/common/meny-knapper/ikoner/hamburger-ikon/HamburgerIkon';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapper/MenylinjeKnapp';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
@@ -147,7 +147,7 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
                     isOpen={isOpen}
                 />
             ) : (
-                <MenySpinner />
+                <Spinner tekstId={'meny-loading'} />
             )}
         </EkspanderbarMeny>
     );

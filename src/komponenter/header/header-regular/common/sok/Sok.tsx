@@ -9,11 +9,11 @@ import { genererUrl } from 'utils/Environment';
 import { defaultData, InputState } from './sok-utils';
 import { SokeresultatData, visAlleTreff } from './sok-utils';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
-import NavFrontendSpinner from 'nav-frontend-spinner';
 import BEMHelper from 'utils/bem';
 import { EnvironmentState } from 'store/reducers/environment-duck';
 import SokResultater from './sok-innhold/SokResultater';
 import { SokInput } from './sok-innhold/SokInput';
+import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import './Sok.less';
 
 interface StateProps {
@@ -335,10 +335,8 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                             this.resetDisplay();
                                         }}
                                     />
-                                    {loading ? (
-                                        <div className={'sokeresultat-spinner'}>
-                                            <NavFrontendSpinner />
-                                        </div>
+                                    {!loading ? (
+                                        <Spinner tekstId={'spinner-sok'} />
                                     ) : (
                                         inputValue && (
                                             <SokResultater
