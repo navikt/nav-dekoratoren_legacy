@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import { MenyNode } from 'store/reducers/menu-duck';
@@ -9,6 +9,7 @@ import { genererUrl } from 'utils/Environment';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import Lock from '../../../../../../../ikoner/meny/Lock';
 
 interface Props {
     className: string;
@@ -28,6 +29,11 @@ const Undermeny = (props: Props) => {
         .charAt(0)
         .toUpperCase()
         .concat(lenker.displayName.slice(1).toLowerCase());
+
+    const lockStyle = {
+        position: 'absolute',
+        left: '-20px',
+    } as CSSProperties;
 
     return (
         <section
@@ -58,6 +64,11 @@ const Undermeny = (props: Props) => {
                                 className={menyClass.className}
                                 classElement="text-element-undermeny"
                             >
+                                {lenke.displayLock && (
+                                    <div style={lockStyle}>
+                                        <Lock height={'18px'} width={'18px'} />
+                                    </div>
+                                )}
                                 <div
                                     className={menyClass.element(
                                         'undermeny-chevron'
