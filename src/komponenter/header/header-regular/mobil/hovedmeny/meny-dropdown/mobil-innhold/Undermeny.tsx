@@ -8,8 +8,8 @@ import Listelement from './Listelement';
 import { genererUrl } from 'utils/Environment';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { useSelector } from 'react-redux';
+import Lock from 'ikoner/meny/Lock';
 import { AppState } from 'store/reducers';
-import Lock from '../../../../../../../ikoner/meny/Lock';
 
 interface Props {
     className: string;
