@@ -9,8 +9,8 @@ import { GACategory, gaEvent } from 'utils/google-analytics';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import BEMHelper from 'utils/bem';
 
-import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
-import LenkeMedIkon from '../lenke-med-ikon/LenkeMedIkon';
+import DelSkjermModal from '../common/del-skjerm-modal/DelSkjermModal';
+import LenkeMedIkon from '../common/lenke-med-ikon/LenkeMedIkon';
 import FooterLenker from '../Lenker';
 
 import './FooterSimple.less';
