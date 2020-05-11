@@ -23,7 +23,7 @@ const FooterTopp = () => {
     const [columnsNode, settColumnsNode] = useState<MenyNode>();
     useEffect(() => {
         const languageNode = getLanguageNode(language, data);
-        if (!columnsNode && languageNode) {
+        if (languageNode) {
             const footerNode = findNode(languageNode, 'Footer');
             if (footerNode) {
                 const columnsNode = findNode(footerNode, 'Columns');
@@ -36,7 +36,7 @@ const FooterTopp = () => {
                 }
             }
         }
-    }, [data, settColumnsNode]);
+    }, [context, data, settColumnsNode]);
 
     const scrollToTop = () =>
         window.scrollTo({
