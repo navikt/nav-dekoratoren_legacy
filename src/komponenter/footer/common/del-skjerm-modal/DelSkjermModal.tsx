@@ -7,6 +7,7 @@ import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
+import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import './DelSkjermModal.less';
 
 const Veileder = require('ikoner/veiledere/Veileder.svg');
@@ -20,7 +21,9 @@ const DelSkjermModal = (props: Props) => {
     const classname = 'delskjerm__modal';
 
     // Language
-    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
+    const { XP_BASE_URL, COOKIES } = useSelector(
+        (state: AppState) => state.environment
+    );
     const language = useSelector((state: AppState) => state.language).language;
     const feilmelding = finnTekst('delskjerm-modal-feilmelding', language);
     const label = finnTekst('delskjerm-modal-label', language);
@@ -106,6 +109,29 @@ const DelSkjermModal = (props: Props) => {
                     <Normaltekst>
                         <Tekst id={'delskjerm-modal-beskrivelse'} />
                     </Normaltekst>
+                    <Lesmerpanel
+                        apneTekst={
+                            <Normaltekst>
+                                <Tekst
+                                    id={
+                                        'delskjerm-modal-hjelpetekst-overskrift'
+                                    }
+                                />
+                            </Normaltekst>
+                        }
+                    >
+                        <ul>
+                            {[...Array(5)].map((_, i) => (
+                                <li key={i}>
+                                    <Normaltekst>
+                                        <Tekst
+                                            id={`delskjerm-modal-hjelpetekst-${i}`}
+                                        />
+                                    </Normaltekst>
+                                </li>
+                            ))}
+                        </ul>
+                    </Lesmerpanel>
                 </div>
                 {isOpen ? (
                     <>
