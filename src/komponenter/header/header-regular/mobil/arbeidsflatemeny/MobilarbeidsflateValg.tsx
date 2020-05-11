@@ -51,13 +51,14 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
                                 href={lenke.url}
                                 onClick={(event) => {
                                     event.preventDefault();
-                                    dispatch(settArbeidsflate(lenke.key));
                                     setCookie(
                                         'decorator-context',
                                         lenke.key,
                                         cookieOptions
                                     );
-                                    if (!erNavDekoratoren()) {
+                                    if (erNavDekoratoren()) {
+                                        dispatch(settArbeidsflate(lenke.key));
+                                    } else {
                                         window.location.href = lenke.url;
                                     }
                                 }}

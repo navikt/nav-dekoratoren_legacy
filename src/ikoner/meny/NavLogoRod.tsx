@@ -43,9 +43,10 @@ const NavLogoRod = ({
             }}
             onClick={(event) => {
                 event.preventDefault();
-                dispatch(settArbeidsflate(context.key));
                 setCookie('decorator-context', context.key, cookieOptions);
-                if (!erNavDekoratoren()) {
+                if (erNavDekoratoren()) {
+                    dispatch(settArbeidsflate(context.key));
+                } else {
                     window.location.href = context.url;
                 }
             }}
