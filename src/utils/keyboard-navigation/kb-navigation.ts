@@ -3,7 +3,6 @@ import { buildGraphAndGetRootNode } from './kb-graph-builder';
 export enum KbNavGroup {
     HeaderMenylinje = 'desktop-header-menylinje',
     Hovedmeny = 'desktop-hovedmeny',
-    Sok = 'desktop-sok',
     Varsler = 'desktop-varsler',
     MinsideMeny = 'desktop-minside',
 }

@@ -51,6 +51,7 @@ export const SokInput = ({
                     aria-label={finnTekst('sok-input-label', language)}
                     tabIndex={tabIndex ? 0 : -1}
                     id={id}
+                    autoFocus={true}
                 />
                 <SokKnapper writtenInput={writtenInput} onReset={onReset} />
             </div>

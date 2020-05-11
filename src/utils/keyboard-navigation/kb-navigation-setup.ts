@@ -16,7 +16,6 @@ import { MenuValue } from '../meny-storage-utils';
 import { Status } from 'api/api';
 import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
 import { desktopLoginKnappId } from 'komponenter/header/header-regular/desktop/logg-inn/LoggInnKnappDesktop';
-import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
 
 export type KbNavConfig = {
     group: KbNavGroup;
@@ -26,8 +25,6 @@ export type KbNavConfig = {
     parentNodeEdge: NodeEdge;
     idMap?: KbIdMap;
 };
-
-export const disabledGroups = [KbNavGroup.Sok];
 
 // TODO: Hvorfor blir desktopHovedmenyKnappId noen ganger undefined?!
 const hovedmenyKnappId =
@@ -47,20 +44,6 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
         maxColsPerRow: [1, 4, 3],
         parentNodeId: hovedmenyKnappId,
         parentNodeEdge: NodeEdge.Bottom,
-    },
-    [KbNavGroup.Sok]: {
-        group: KbNavGroup.Sok,
-        rootIndex: { col: 0, row: 0, sub: 0 },
-        maxColsPerRow: [3],
-        parentNodeId: desktopSokKnappId,
-        parentNodeEdge: NodeEdge.Bottom,
-        idMap: {
-            [getKbId(KbNavGroup.Sok, {
-                col: 0,
-                row: 0,
-                sub: 0,
-            })]: desktopSokInputId,
-        },
     },
     [KbNavGroup.Varsler]: {
         group: KbNavGroup.Varsler,

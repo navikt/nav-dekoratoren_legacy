@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { createHeaderMainGraph } from './kb-navigation-setup';
-import { disabledGroups } from './kb-navigation-setup';
 import { KbNavGraph, KbNavNode } from './kb-navigation';
 import { KbNavNodeMap } from './kb-navigation';
 import { createKbNavNode } from './kb-navigation';
@@ -115,10 +114,7 @@ export const useKbNavMain = (): KbNavMain => {
             }
         };
 
-        if (!disabledGroups.includes(kbNavState.currentNode.group)) {
-            document.addEventListener('keydown', arrowkeysHandler);
-        }
-
+        document.addEventListener('keydown', arrowkeysHandler);
         document.addEventListener('focusin', focusHandler);
         document.addEventListener('keydown', escapeHandler);
 

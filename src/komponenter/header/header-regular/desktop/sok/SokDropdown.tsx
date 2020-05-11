@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { AppState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
@@ -9,9 +10,6 @@ import Tekst from 'tekster/finn-tekst';
 import { GACategory, gaEvent } from 'utils/google-analytics';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapper/MenylinjeKnapp';
 import SokMenyIkon from 'komponenter/header/header-regular/common/meny-knapper/ikoner/sok-ikon/SokMenyIkon';
-import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
-import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import './SokDropdown.less';
 
@@ -22,6 +20,7 @@ const stateSelector = (state: AppState) => ({
 const classname = 'desktop-sok-dropdown';
 export const desktopSokKnappId = 'desktop-sok-knapp';
 export const desktopSokInputId = 'desktop-sok-input';
+const dropdownTransitionDuration = 300;
 
 type Props = {
     kbNavMainState: KbNavMain;
@@ -30,7 +29,22 @@ type Props = {
 export const SokDropdown = ({ kbNavMainState }: Props) => {
     const { isOpen } = useSelector(stateSelector);
     const dispatch = useDispatch();
-    useKbNavSub(configForNodeGroup[KbNavGroup.Sok], kbNavMainState, isOpen);
+
+    useEffect(() => {
+        const dropdownElement = document.getElementById(classname) as HTMLElement;
+        if (dropdownElement) {
+            if (isOpen) {
+                setTimeout(
+                    () => (dropdownElement.style.maxHeight = '100rem'),
+                    dropdownTransitionDuration,
+                );
+                document.getElementById(desktopSokInputId)?.focus();
+            } else {
+                dropdownElement.style.removeProperty('max-height');
+                document.getElementById(desktopSokKnappId)?.focus();
+            }
+        }
+    }, [isOpen]);
 
     const toggleMenu = () => {
         gaEvent({
