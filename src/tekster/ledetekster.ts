@@ -204,8 +204,8 @@ export const ledetekster: { [key: string]: string } = {
         'Municipalities|Education Area|Mental Health|Aids|Doctors And Therapists',
     'arbeidsflate-stikkord-om-samarbeidspartner-se':
         'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
-    'lock-msg-infotekst':
-        'Menypunktene med hengelås sender deg til ny innlogging fordi du må logge inn med BankID, BuyPass eller Commfides for å kunne bruke dem.',
+    g:
+        'Menypunkt med hengelås sender deg til ny innlogging. Disse tjenestene krever BankID, Buypass eller Commfides',
     'feil-sok-fetch': 'Feil mot søketjeneste.',
     'feil-sok-fetch-en': 'Search system malfunction.',
     'feil-sok-fetch-se': 'Feil mot søketjeneste.',

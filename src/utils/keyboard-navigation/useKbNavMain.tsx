@@ -36,7 +36,7 @@ type KeyboardNavState = {
 export const kbMasterNode = createKbNavNode(
     desktopHeaderLogoId,
     { col: 0, row: 1, sub: 0 },
-    KbNavGroup.HeaderMenylinje,
+    KbNavGroup.HeaderMenylinje
 );
 
 export const kbNavInitialState: KeyboardNavState = {
@@ -59,7 +59,7 @@ export const useKbNavMain = (): KbNavMain => {
     const dispatch = useDispatch();
 
     const [kbNavState, setKbNavState] = useState<KeyboardNavState>(
-        kbNavInitialState,
+        kbNavInitialState
     );
     const setCurrentNode = (node: KbNavNode) => {
         setKbNavState({ ...kbNavState, currentNode: node });
@@ -79,7 +79,7 @@ export const useKbNavMain = (): KbNavMain => {
             language,
             arbeidsflate,
             menyStatus,
-            innloggingsStatus.authenticated,
+            innloggingsStatus.authenticated
         );
         if (graph) {
             setKbNavState({ ...kbNavState, mainGraph: graph });
@@ -89,7 +89,7 @@ export const useKbNavMain = (): KbNavMain => {
     useEffect(() => {
         const arrowkeysHandler = KbNav.arrowkeysHandler(
             kbNavState.currentNode,
-            setCurrentNode,
+            setCurrentNode
         );
         const focusHandler = KbNav.focusHandler(
             kbNavState.currentNode,
@@ -98,7 +98,7 @@ export const useKbNavMain = (): KbNavMain => {
                 ...kbNavState.subGraph?.nodeMap,
             },
             setCurrentNode,
-            arrowkeysHandler,
+            arrowkeysHandler
         );
         const escapeHandler = (event: KeyboardEvent) => {
             if (event.key !== 'Escape') {
