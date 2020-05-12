@@ -21,7 +21,9 @@ interface DispatchProps {
 
 type InnloggingsstatusProviderProps = OwnProps & StateProps & DispatchProps;
 
-const InnloggingsstatusProvider: React.FunctionComponent<InnloggingsstatusProviderProps> = props => {
+const InnloggingsstatusProvider: React.FunctionComponent<InnloggingsstatusProviderProps> = (
+    props
+) => {
     useEffect(() => {
         const { APP_BASE_URL } = props.environment;
         props.doHentInnloggingsstatus(APP_BASE_URL);
