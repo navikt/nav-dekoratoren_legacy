@@ -4,7 +4,7 @@ import 'isomorphic-fetch';
 require('console-stamp')(console, '[HH:MM:ss.l]');
 import NodeCache from 'node-cache';
 import fetch from 'node-fetch';
-import express from 'express';
+import express, { Request, Response } from 'express';
 const { createMiddleware } = require('@promster/express');
 const { getSummary, getContentType } = require('@promster/express');
 import cookiesMiddleware from 'universal-cookie-express';
@@ -37,7 +37,6 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 // Cors
 app.disable('x-powered-by');
 app.use(cookiesMiddleware());
-app.use(createMiddleware({ app }));
 app.use((req, res, next) => {
     // Allowed origins
     res.header('Access-Control-Allow-Origin', req.get('origin'));
@@ -54,6 +53,21 @@ app.use((req, res, next) => {
     res.header('Expires', '-1');
     next();
 });
+
+// Metrics
+app.use(
+    createMiddleware({
+        app,
+        options: {
+            labels: ['app', 'namespace', 'cluster'],
+            getLabelValues: (req: Request, res: Response) => ({
+                app: process.env.NAIS_APP_NAME,
+                namespce: process.env.NAIS_NAMESPACE,
+                cluster: process.env.NAIS_CLUSTER_NAME,
+            }),
+        },
+    })
+);
 
 // Express config
 const pathsForTemplate = [
