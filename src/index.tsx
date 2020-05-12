@@ -1,4 +1,4 @@
-// import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'isomorphic-fetch';
 import React from 'react';
@@ -30,7 +30,6 @@ const run = () => {
     initGA();
     fetchEnv()
         .then((environment) => {
-
             const store = createStore(environment);
             ReactDOM.render(
                 <ReduxProvider store={store}>

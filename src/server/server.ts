@@ -1,4 +1,4 @@
-// import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'isomorphic-fetch';
 require('console-stamp')(console, '[HH:MM:ss.l]');
