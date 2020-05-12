@@ -14,19 +14,22 @@ type Props = {
     href: string;
 };
 
-export const MinsideArbgiverKnapp = (props: Props) => {
-    const { classname, id, href } = props;
-    const cls = BEMHelper(classname);
+export const valgtbedrift = () => {
     const orgnummerFraUrl = new URLSearchParams(window.location.search).get(
         'bedrift'
     );
-    const valgtbedrift = orgnummerFraUrl ? `?bedrift=${orgnummerFraUrl}` : '';
+    return orgnummerFraUrl ? `?bedrift=${orgnummerFraUrl}` : '';
+};
+
+export const MinsideArbgiverKnapp = (props: Props) => {
+    const { classname, id, href } = props;
+    const cls = BEMHelper(classname);
 
     return (
         <LenkeMedGA
             classNameOverride={`menylinje-knapp ${cls.element('knapp')}`}
             id={id}
-            href={href + valgtbedrift}
+            href={href + valgtbedrift()}
             gaEventArgs={{
                 category: GACategory.Header,
                 action: 'minside-arbeidsgiver',
