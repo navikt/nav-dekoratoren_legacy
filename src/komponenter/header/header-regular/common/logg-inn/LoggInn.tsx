@@ -51,9 +51,7 @@ export const LoggInn = ({ Knapp }: Props) => {
     );
 
     return (
-        <div className="login-container">
-            <Knapp handleButtonClick={handleButtonClick} tekst={knappetekst} />
-        </div>
+        <Knapp handleButtonClick={handleButtonClick} tekst={knappetekst} />
     );
 };
 
