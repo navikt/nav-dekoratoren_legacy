@@ -60,10 +60,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 
     componentDidUpdate(prevProps: Readonly<StateProps & Props>) {
         if (!this.props.isOpen && prevProps !== this.props) {
-            setTimeout(
-                this.resetDisplay,
-                dropdownTransitionDuration,
-            );
+            setTimeout(this.resetDisplay, dropdownTransitionDuration);
         }
     }
 
