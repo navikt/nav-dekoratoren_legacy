@@ -1,7 +1,5 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import VarselinnboksProvider from 'store/providers/Varselinnboks';
-import InnloggingsstatusProvider from 'store/providers/Innloggingsstatus';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import { SokDropdown } from './sok/SokDropdown';
 import { HovedmenyDesktop } from './hovedmeny/HovedmenyDesktop';
@@ -29,15 +27,9 @@ const DesktopMenylinje = () => {
                 <HovedmenyDesktop kbNavMainState={kbNavMainState} />
                 <SokDropdown kbNavMainState={kbNavMainState} />
                 <span className={cls.element('spacer')} />
-                <InnloggingsstatusProvider>
-                    <>
-                        <VarselinnboksProvider>
-                            <VarslerDropdown kbNavMainState={kbNavMainState} />
-                        </VarselinnboksProvider>
-                        <MinsideMeny kbNavMainState={kbNavMainState} />
-                        <LoggInnKnappDesktop />
-                    </>
-                </InnloggingsstatusProvider>
+                <VarslerDropdown kbNavMainState={kbNavMainState} />
+                <MinsideMeny kbNavMainState={kbNavMainState} />
+                <LoggInnKnappDesktop />
             </div>
         </nav>
     );
