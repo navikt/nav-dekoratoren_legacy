@@ -21,7 +21,6 @@ export const desktopBreakpoint: number = 768;
 export const Header = () => {
     let arbeidsflate: any = null;
     let hovedmeny: any = null;
-    let headerInfoBanner: any = null;
 
     const dispatch = useDispatch();
     const [cookies, setCookie] = useCookies(['decorator-context']);
