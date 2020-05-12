@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { hentVarsler, settVarslerOK } from '../reducers/varselinnboks-duck';
+import { hentVarsler } from '../reducers/varselinnboks-duck';
 import Datalaster from '../../api/Datalaster';
+import { Status } from '../../api/api';
 
 interface Props {
     children: React.ReactElement<any>; // tslint:disable-line:no-any
@@ -14,17 +15,15 @@ const VarselinnboksProvider = (props: Props) => {
     const { APP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
     );
-    const erInnlogget = useSelector(
-        (state: AppState) => state.innloggingsstatus.data.authenticated === true
+    const status = useSelector(
+        (state: AppState) => state.innloggingsstatus.status
     );
 
     useEffect(() => {
-        if (erInnlogget) {
+        if (status === Status.IKKE_STARTET) {
             hentVarsler(APP_BASE_URL)(dispatch);
-        } else {
-            dispatch(settVarslerOK());
         }
-    }, [erInnlogget]);
+    }, []);
 
     return <Datalaster avhengigheter={[varsler]}>{props.children}</Datalaster>;
 };
