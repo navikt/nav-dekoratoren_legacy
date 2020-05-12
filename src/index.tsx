@@ -30,23 +30,23 @@ const run = () => {
     initGA();
     fetchEnv()
         .then((environment) => {
-            // const store = createStore(environment);
-            // ReactDOM.render(
-            //     <ReduxProvider store={store}>
-            //         <CookiesProvider>
-            //             <Header />
-            //         </CookiesProvider>
-            //     </ReduxProvider>,
-            //     document.getElementById('decorator-header')
-            // );
-            // ReactDOM.render(
-            //     <ReduxProvider store={store}>
-            //         <CookiesProvider>
-            //             <Footer />
-            //         </CookiesProvider>
-            //     </ReduxProvider>,
-            //     document.getElementById('decorator-footer')
-            // );
+            const store = createStore(environment);
+            ReactDOM.render(
+                <ReduxProvider store={store}>
+                    <CookiesProvider>
+                        <Header />
+                    </CookiesProvider>
+                </ReduxProvider>,
+                document.getElementById('decorator-header')
+            );
+            ReactDOM.render(
+                <ReduxProvider store={store}>
+                    <CookiesProvider>
+                        <Footer />
+                    </CookiesProvider>
+                </ReduxProvider>,
+                document.getElementById('decorator-footer')
+            );
         })
         .catch((e) => {
             console.error(e);
