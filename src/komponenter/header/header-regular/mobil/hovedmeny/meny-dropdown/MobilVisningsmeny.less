@@ -4,7 +4,8 @@
     &__innhold-wrapper,
     &__startmeny,
     &__varsel-innhold,
-    &__undermeny-innhold {
+    &__undermeny-innhold,
+    .spinner-container {
         overflow-y: scroll;
         overflow-x: hidden;
         position: fixed;
@@ -15,8 +16,7 @@
         width: @mobilemenuwidth;
         transition: all 0.4s ease-in-out;
 
-        &--active,
-        &--aktive {
+        &--active {
             left: 0;
         }
     }

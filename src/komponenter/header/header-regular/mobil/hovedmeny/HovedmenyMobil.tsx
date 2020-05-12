@@ -29,9 +29,9 @@ const classname = 'mobilmeny';
 export const mobilHovedmenyKnappId = `${classname}-knapp-id`;
 
 export const TextTransformFirstLetterToUppercase = ({
-    text,
-    lang,
-}: {
+                                                        text,
+                                                        lang,
+                                                    }: {
     text: string;
     lang: Language;
 }) => {
@@ -110,7 +110,10 @@ const HovedmenyMobil = () => {
                 lang={language}
             />
         ) : (
-            isOpen && <Spinner tekstId={'meny-loading'} />
+            <Spinner
+                tekstId={'meny-loading'}
+                className={isOpen ? 'spinner-container--active' : ''}
+            />
         );
 
     return (
