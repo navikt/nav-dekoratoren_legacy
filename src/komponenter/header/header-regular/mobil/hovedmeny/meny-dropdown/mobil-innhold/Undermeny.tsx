@@ -58,9 +58,9 @@ const Undermeny = (props: Props) => {
             >
                 {arbeidsflate}
             </Systemtittel>
-            {hasLevel4Elements && (
+            {hasLevel4Elements ? (
                 <MinsideDropdownLockMsg classname={className} />
-            )}
+            ) : null}
             <ul className={menyClass.element('meny', 'list')}>
                 {lenker.children.map((lenke, index: number) => {
                     return (
