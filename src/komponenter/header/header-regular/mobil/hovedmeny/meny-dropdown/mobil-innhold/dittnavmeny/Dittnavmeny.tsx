@@ -3,7 +3,6 @@ import { MenyNode } from 'store/reducers/menu-duck';
 import BEMHelper from 'utils/bem';
 import Listelement from '../Listelement';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
-import Lock from 'ikoner/meny/Lock';
 
 interface Props {
     minsideLenker: MenyNode;
@@ -23,34 +22,30 @@ const Dittnavmeny = (props: Props) => {
     return (
         <ul className={cls.element('meny', 'minsidelist')}>
             {props.minsideLenker.children.map(
-                (menyElement: MenyNode, index: number) => {
-                    return menyElement.displayLock ? (
-                        <Lock />
-                    ) : (
-                        <a
-                            className="lenke"
-                            key={index}
-                            href="https://nav.no"
-                            onClick={(event) =>
-                                props.openMeny(
-                                    event,
-                                    menyElement,
-                                    props.test[index].current
-                                )
-                            }
-                            ref={props.test[index]}
-                            tabIndex={props.tabIndex ? 0 : -1}
+                (menyElement: MenyNode, index: number) => (
+                    <a
+                        className="lenke"
+                        key={index}
+                        href="https://nav.no"
+                        onClick={(event) =>
+                            props.openMeny(
+                                event,
+                                menyElement,
+                                props.test[index].current
+                            )
+                        }
+                        ref={props.test[index]}
+                        tabIndex={props.tabIndex ? 0 : -1}
+                    >
+                        <Listelement
+                            className={cls.className}
+                            classElement="text-element"
                         >
-                            <Listelement
-                                className={cls.className}
-                                classElement="text-element"
-                            >
-                                {menyElement.displayName}
-                                <HoyreChevron />
-                            </Listelement>
-                        </a>
-                    );
-                }
+                            {menyElement.displayName}
+                            <HoyreChevron />
+                        </Listelement>
+                    </a>
+                )
             )}
         </ul>
     );

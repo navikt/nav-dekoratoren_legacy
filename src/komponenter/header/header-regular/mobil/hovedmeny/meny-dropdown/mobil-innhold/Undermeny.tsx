@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import { MenyNode } from 'store/reducers/menu-duck';
@@ -8,7 +8,9 @@ import Listelement from './Listelement';
 import { genererUrl } from 'utils/Environment';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { useSelector } from 'react-redux';
+import Lock from 'ikoner/meny/Lock';
 import { AppState } from 'store/reducers';
+import MinsideDropdownLockMsg from '../../../../desktop/minside-meny/minside-visning/MinsideDropdownLockMsg';
 
 interface Props {
     className: string;
@@ -21,13 +23,23 @@ interface Props {
 const Undermeny = (props: Props) => {
     const { setFocusNode, tabindex, lenker } = props;
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
+    const auth = useSelector((state: AppState) => state.innloggingsstatus.data);
     const { className, undermenyIsOpen } = props;
     const menyClass = BEMHelper(className);
+
+    const hasLevel4Elements =
+        auth.securityLevel !== '4' &&
+        lenker.children.filter((lenke) => lenke.displayLock).length;
 
     const arbeidsflate = lenker.displayName
         .charAt(0)
         .toUpperCase()
         .concat(lenker.displayName.slice(1).toLowerCase());
+
+    const lockStyle = {
+        position: 'absolute',
+        left: '-20px',
+    } as CSSProperties;
 
     return (
         <section
@@ -46,6 +58,9 @@ const Undermeny = (props: Props) => {
             >
                 {arbeidsflate}
             </Systemtittel>
+            {hasLevel4Elements && (
+                <MinsideDropdownLockMsg classname={className} />
+            )}
             <ul className={menyClass.element('meny', 'list')}>
                 {lenker.children.map((lenke, index: number) => {
                     return (
@@ -58,6 +73,11 @@ const Undermeny = (props: Props) => {
                                 className={menyClass.className}
                                 classElement="text-element-undermeny"
                             >
+                                {lenke.displayLock && (
+                                    <div style={lockStyle}>
+                                        <Lock height={'18px'} width={'18px'} />
+                                    </div>
+                                )}
                                 <div
                                     className={menyClass.element(
                                         'undermeny-chevron'
