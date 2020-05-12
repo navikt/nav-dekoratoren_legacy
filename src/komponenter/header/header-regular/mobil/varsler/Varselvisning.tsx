@@ -2,7 +2,6 @@ import React from 'react';
 import { connect, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 import { AppState } from 'store/reducers';
-import { desktopview, tabletview } from '../../../../../styling-mediaquery';
 import { gaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
@@ -23,28 +22,11 @@ interface StateProps {
 
 interface State {
     parsedVarsler: any;
-    windowSize: number;
 }
 
 type Props = OwnProps & StateProps;
 
 class Varselvisning extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-
-        this.state = {
-            parsedVarsler: parse(this.props.varsler),
-            windowSize: window.innerWidth,
-        };
-        this.handleWindowSize = this.handleWindowSize.bind(this);
-    }
-
-    handleWindowSize() {
-        this.setState({
-            windowSize: window.innerWidth,
-        });
-    }
-
     setTabIndex = () => {
         const varsler = document.querySelector('.mobilmeny .nav-varsler');
 
@@ -99,7 +81,6 @@ class Varselvisning extends React.Component<Props, State> {
     };
 
     componentDidMount(): void {
-        window.addEventListener('resize', this.handleWindowSize);
         this.addGaEventTriggers();
         this.setTabIndex();
     }
@@ -111,17 +92,8 @@ class Varselvisning extends React.Component<Props, State> {
     }
 
     componentWillUnmount() {
-        window.removeEventListener('resize', this.handleWindowSize);
         this.removeGaEventTriggers();
     }
-
-    erTabletEllerDesktop = () => {
-        return this.state.windowSize > tabletview - 1;
-    };
-
-    erDesktop = () => {
-        return this.state.windowSize > desktopview - 1;
-    };
 
     render() {
         const {
@@ -129,7 +101,10 @@ class Varselvisning extends React.Component<Props, State> {
             antallUlesteVarsler,
             antallVarsler,
             language,
+            varsler,
         } = this.props;
+
+        const parsedVarsler = parse(varsler);
 
         return (
             <div className={'varsler-display-mobil-tablet'}>
@@ -143,7 +118,7 @@ class Varselvisning extends React.Component<Props, State> {
                         />
                     </div>
                 </div>
-                {this.state.parsedVarsler}
+                {parsedVarsler}
                 <div className="media-tablet-desktop tablet-desktop-meny">
                     <NyVarsel
                         antallUlesteVarsler={antallUlesteVarsler}

@@ -1,5 +1,3 @@
-// tslint:disable-line:no-any
-import React from 'react';
 import { fetchToJson } from './api-utils';
 import { Data as innloggingsstatusData } from '../store/reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from '../store/reducers/varselinnboks-duck';
@@ -15,13 +13,6 @@ export enum Status {
 
 export interface DataElement {
     status: Status;
-}
-
-export interface DatalasterProps {
-    avhengigheter: DataElement[];
-    ventPa?: DataElement[];
-    children: React.ReactElement<any>;
-    feilmeldingId?: string;
 }
 
 export const hentMenyPunkter = (

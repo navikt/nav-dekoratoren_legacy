@@ -14,18 +14,20 @@ const stateSelector = (state: AppState) => ({
     varslerAntall: state.varsler.data.antall,
     varslerUleste: state.varsler.data.uleste,
     language: state.language.language,
+    varselInnboksUrl: state.environment.API_VARSELINNBOKS_URL,
 });
 
 const classname = 'varsler-display-desktop';
 
-const alleVarslerLenke = (rowIndex: number, nyeVarslerMsg: string) => {
-    const { API_VARSELINNBOKS_URL } = useSelector(
-        (state: AppState) => state.environment
-    );
+const alleVarslerLenke = (
+    rowIndex: number,
+    nyeVarslerMsg: string,
+    varselInnboksUrl: string
+) => {
     return (
         <div className="dekorator-vis-alle-lenke">
             <LenkeMedGA
-                href={API_VARSELINNBOKS_URL}
+                href={varselInnboksUrl}
                 id={getKbId(KbNavGroup.Varsler, {
                     col: 0,
                     row: rowIndex,
@@ -35,7 +37,7 @@ const alleVarslerLenke = (rowIndex: number, nyeVarslerMsg: string) => {
                 gaEventArgs={{
                     category: GACategory.Header,
                     action: 'varsler/visalle',
-                    label: API_VARSELINNBOKS_URL,
+                    label: varselInnboksUrl,
                 }}
             >
                 <Tekst id={'varsler-visalle'} />
@@ -46,9 +48,13 @@ const alleVarslerLenke = (rowIndex: number, nyeVarslerMsg: string) => {
 };
 
 export const Varselvisning = () => {
-    const { varsler, varslerAntall, varslerUleste, language } = useSelector(
-        stateSelector
-    );
+    const {
+        varsler,
+        varslerAntall,
+        varslerUleste,
+        language,
+        varselInnboksUrl,
+    } = useSelector(stateSelector);
 
     const nyeVarslerMsg =
         varslerUleste > 0
@@ -62,7 +68,8 @@ export const Varselvisning = () => {
                 <Tekst id={'varsler-tittel'} />
             </Systemtittel>
             <VarslerParsed varsler={varsler} rowIndex={0} />
-            {visAlleVarslerLenke && alleVarslerLenke(1, nyeVarslerMsg)}
+            {visAlleVarslerLenke &&
+                alleVarslerLenke(1, nyeVarslerMsg, varselInnboksUrl)}
         </div>
     );
 };

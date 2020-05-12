@@ -15,6 +15,8 @@ import { HeadElements } from 'komponenter/HeadElements';
 import { changeBetweenDesktopAndMobilView } from 'utils/stickyheader-utils';
 import { positionNavbar } from 'utils/stickyheader-utils';
 import { initializeSticky } from 'utils/stickyheader-utils';
+import { hentVarsler } from 'store/reducers/varselinnboks-duck';
+import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 
 export const desktopBreakpoint: number = 768;
 
@@ -25,6 +27,9 @@ export const Header = () => {
     const dispatch = useDispatch();
     const [cookies, setCookie] = useCookies(['decorator-context']);
     const lang = useSelector((state: AppState) => state.language.language);
+    const erInnlogget = useSelector(
+        (state: AppState) => state.innloggingsstatus.data.authenticated
+    );
     const { PARAMS, APP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
     );
@@ -125,6 +130,16 @@ export const Header = () => {
         window.addEventListener('popstate', checkUrlForLanguage);
         checkUrlForLanguage();
     }, []);
+
+    useEffect(() => {
+        hentInnloggingsstatus(APP_BASE_URL)(dispatch);
+    }, []);
+
+    useEffect(() => {
+        if (erInnlogget) {
+            hentVarsler(APP_BASE_URL)(dispatch);
+        }
+    }, [erInnlogget]);
 
     return (
         <Fragment>

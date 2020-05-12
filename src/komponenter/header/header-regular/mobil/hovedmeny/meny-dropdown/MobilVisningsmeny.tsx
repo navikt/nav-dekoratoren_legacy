@@ -8,7 +8,6 @@ import MenyIngress from './mobil-innhold/MenyIngress';
 import Undermeny from './mobil-innhold/Undermeny';
 import Listelement from './mobil-innhold/Listelement';
 import MobilarbeidsflateValg from '../../arbeidsflatemeny/MobilarbeidsflateValg';
-import VarselinnboksProvider from 'store/providers/Varselinnboks';
 import VarselvisningMobil from '../../varsler/VarselvisningMobil';
 import { AppState } from 'store/reducers';
 import { Dispatch } from 'store/dispatch-type';
@@ -207,17 +206,11 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                     tabindex={underMenuIsOpen && !menuIsOpen}
                     lenker={this.state.lenker}
                 />
-                <>
-                    <VarselinnboksProvider>
-                        <VarselvisningMobil
-                            visvarsel={visvarsel}
-                            visningmenyClassname={menyClass.className}
-                            tabindex={
-                                varslerIsOpen && !menuIsOpen && !underMenuIsOpen
-                            }
-                        />
-                    </VarselinnboksProvider>
-                </>
+                <VarselvisningMobil
+                    visvarsel={visvarsel}
+                    visningmenyClassname={menyClass.className}
+                    tabindex={varslerIsOpen && !menuIsOpen && !underMenuIsOpen}
+                />
             </>
         );
     }
