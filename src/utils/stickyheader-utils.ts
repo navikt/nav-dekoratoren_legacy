@@ -42,7 +42,6 @@ const throttleMenuPosition = (menuHeight: number) => {
 
 const setTopHeaderOffsetHeight = (
     mainmenuHeight: number,
-    headerInfobannerHeight: number,
     arbeidsflateHeight: number,
     selectorFoundArbeidsflate: boolean
 ) => {
@@ -50,12 +49,10 @@ const setTopHeaderOffsetHeight = (
         ? (current.topheaderHeight =
               current.language === Language.NORSK ||
               current.language === Language.IKKEBESTEMT
-                  ? +arbeidsflateHeight + headerInfobannerHeight
-                  : headerInfobannerHeight)
+                  ? arbeidsflateHeight
+                  : 0)
         : (current.topheaderHeight =
-              current.language !== Language.NORSK
-                  ? headerInfobannerHeight
-                  : arbeidsflateHeight + headerInfobannerHeight);
+              current.language !== Language.NORSK ? 0 : arbeidsflateHeight);
 };
 
 const setMenuStartPoint = (menu: HTMLElement) => {
@@ -71,14 +68,12 @@ const setMenuStartPoint = (menu: HTMLElement) => {
 export const initializeSticky = (
     mainmenu: HTMLElement,
     arbeidsflate: HTMLElement | null,
-    headerBanner: HTMLElement,
     language: Language
 ): void => {
     const arbeidsflateHeight = arbeidsflate ? arbeidsflate.offsetHeight : 44;
     current.language = language;
     setTopHeaderOffsetHeight(
         mainmenu.offsetHeight,
-        headerBanner.offsetHeight,
         arbeidsflateHeight,
         !!arbeidsflate
     );

@@ -7,7 +7,7 @@ interface Props {
     classElement: string;
 }
 
-const Listelement: React.FunctionComponent<Props> = props => {
+const Listelement: React.FunctionComponent<Props> = (props) => {
     const listelementClass = BEMHelper(props.className);
     return (
         <li className={listelementClass.element('meny', 'listItem')}>

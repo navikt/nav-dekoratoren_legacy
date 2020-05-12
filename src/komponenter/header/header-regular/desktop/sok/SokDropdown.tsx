@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
-import { Undertittel } from 'nav-frontend-typografi';
+import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import Tekst from 'tekster/finn-tekst';
 import { GACategory, triggerGaEvent } from 'utils/google-analytics';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapper/MenylinjeKnapp';

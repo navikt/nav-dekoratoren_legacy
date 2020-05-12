@@ -21,7 +21,7 @@ const Lukkundermeny = (props: Props) => {
             <Undertittel className={cls.element('meny', 'tilbakelenke')}>
                 <Lenke
                     href="https://nav.no"
-                    onClick={event => {
+                    onClick={(event) => {
                         event.preventDefault();
                         props.setFocusIndex();
                         dispatch(toggleUndermenyVisning());

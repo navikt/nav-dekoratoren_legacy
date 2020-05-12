@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Undertittel } from 'nav-frontend-typografi';
+import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { Status } from 'api/api';
 import { AppState } from 'store/reducers';
 import { getHovedmenyNode } from 'utils/meny-storage-utils';

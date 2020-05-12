@@ -41,13 +41,9 @@ export const Header = () => {
     const getArbeidsflatNode = () =>
         (arbeidsflate = document.getElementById('arbeidsflate'));
 
-    const getHeaderInfoBanner = () =>
-        (headerInfoBanner = document.getElementById('dekorator-under-arbeid'));
-
     const setMinHeightOnHeader = (
         main: HTMLElement,
-        arbeidsmeny: HTMLElement | null,
-        headerInfo: HTMLElement
+        arbeidsmeny: HTMLElement | null
     ) => {
         const arbeidsflateHeight = arbeidsmeny ? arbeidsmeny.offsetHeight : 44;
         hovedmeny.style.position = 'static';
@@ -56,32 +52,23 @@ export const Header = () => {
         arbeidsmeny
             ? setHeaderoffsetHeight(
                   lang === Language.NORSK || lang === Language.IKKEBESTEMT
-                      ? headerInfo.offsetHeight +
-                            arbeidsflateHeight +
-                            main.offsetHeight
-                      : headerInfo.offsetHeight + main.offsetHeight
+                      ? arbeidsflateHeight + main.offsetHeight
+                      : main.offsetHeight
               )
             : setHeaderoffsetHeight(
                   lang !== Language.NORSK
-                      ? headerInfo.offsetHeight + main.offsetHeight
-                      : headerInfo.offsetHeight +
-                            arbeidsflateHeight +
-                            main.offsetHeight
+                      ? main.offsetHeight
+                      : arbeidsflateHeight + main.offsetHeight
               );
     };
 
     const initStickySelectors = (): void => {
         if (changeBetweenDesktopAndMobilView()) {
             getHovedmenyNode();
-            if (hovedmeny && headerInfoBanner) {
-                setMinHeightOnHeader(hovedmeny, arbeidsflate, headerInfoBanner);
+            if (hovedmeny) {
+                setMinHeightOnHeader(hovedmeny, arbeidsflate);
 
-                initializeSticky(
-                    hovedmeny,
-                    arbeidsflate,
-                    headerInfoBanner,
-                    lang
-                );
+                initializeSticky(hovedmeny, arbeidsflate, lang);
             }
         }
     };
@@ -94,15 +81,14 @@ export const Header = () => {
     useEffect(() => {
         getHovedmenyNode();
         getArbeidsflatNode();
-        getHeaderInfoBanner();
-        if (hovedmeny && headerInfoBanner) {
-            setMinHeightOnHeader(hovedmeny, arbeidsflate, headerInfoBanner);
+        if (hovedmeny) {
+            setMinHeightOnHeader(hovedmeny, arbeidsflate);
             window.onscroll = function stickyheader() {
                 if (hovedmeny) {
                     positionNavbar(hovedmeny);
                 }
             };
-            initializeSticky(hovedmeny, arbeidsflate, headerInfoBanner, lang);
+            initializeSticky(hovedmeny, arbeidsflate, lang);
             window.addEventListener('resize', initStickySelectors);
             return () =>
                 window.removeEventListener('resize', initStickySelectors);

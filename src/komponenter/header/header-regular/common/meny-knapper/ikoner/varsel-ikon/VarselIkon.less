@@ -41,7 +41,8 @@
         border-radius: 0;
         width: @cross-width;
         height: @cross-stroke-width;
-        transform: translate(-2px, @height / 2) rotate(@rotation) scale(@cross-scale);
+        transform: translate(-2px, @height / 2) rotate(@rotation)
+            scale(@cross-scale);
     }
 
     .fade-transform() {
@@ -52,7 +53,9 @@
     }
 
     &--open {
-        .varselbjelle-ikon__ring, .varselbjelle-ikon__bell, .varselbjelle-ikon__ulest-sirkel {
+        .varselbjelle-ikon__ring,
+        .varselbjelle-ikon__bell,
+        .varselbjelle-ikon__ulest-sirkel {
             .fade-transform();
         }
 
@@ -126,7 +129,8 @@
         position: absolute;
         z-index: 1;
 
-        transform: translate((@width - @clapper-length) / 2, @height / 2) rotate(90deg);
+        transform: translate((@width - @clapper-length) / 2, @height / 2)
+            rotate(90deg);
 
         border-radius: @clapper-thickness / 2;
 
