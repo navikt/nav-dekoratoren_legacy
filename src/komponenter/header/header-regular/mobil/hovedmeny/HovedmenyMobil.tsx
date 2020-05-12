@@ -29,9 +29,9 @@ const classname = 'mobilmeny';
 export const mobilHovedmenyKnappId = `${classname}-knapp-id`;
 
 export const TextTransformFirstLetterToUppercase = ({
-                                                        text,
-                                                        lang,
-                                                    }: {
+    text,
+    lang,
+}: {
     text: string;
     lang: Language;
 }) => {
