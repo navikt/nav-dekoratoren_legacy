@@ -38,19 +38,12 @@
 
     &__nav-brand {
         order: 1;
-        margin-left: @margins-sides-desktop;
+        margin: 4px 0 4px @margins-sides-desktop;
         @media (max-width: @smallDesktopLimitWidth) {
             margin-left: @margins-sides-desktop-small;
         }
 
-        &:focus {
-            outline: 3px solid @fokusFarge;
-        }
-        svg {
-            &:focus {
-                outline: 0;
-            }
-        }
+        .knapp-focus();
     }
 
     .desktop-hovedmeny__knapp {

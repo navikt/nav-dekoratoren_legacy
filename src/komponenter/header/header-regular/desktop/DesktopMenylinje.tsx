@@ -22,7 +22,7 @@ const DesktopMenylinje = () => {
             <div className={cls.element('elementer')}>
                 <NavLogoRod
                     width="88"
-                    height="88"
+                    height="80"
                     classname={cls.element('nav-brand')}
                     id={desktopHeaderLogoId}
                 />

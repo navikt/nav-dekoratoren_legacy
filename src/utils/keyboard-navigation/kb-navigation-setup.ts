@@ -16,6 +16,7 @@ import { MenuValue } from '../meny-storage-utils';
 import { Status } from 'api/api';
 import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
 import { desktopLoginKnappId } from 'komponenter/header/header-regular/desktop/logg-inn/LoggInnKnappDesktop';
+import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
 
 export type KbNavConfig = {
     group: KbNavGroup;
@@ -25,6 +26,8 @@ export type KbNavConfig = {
     parentNodeEdge: NodeEdge;
     idMap?: KbIdMap;
 };
+
+export const disabledGroups = [KbNavGroup.Sok];
 
 // TODO: Hvorfor blir desktopHovedmenyKnappId noen ganger undefined?!
 const hovedmenyKnappId =
@@ -44,6 +47,30 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
         maxColsPerRow: [1, 4, 3],
         parentNodeId: hovedmenyKnappId,
         parentNodeEdge: NodeEdge.Bottom,
+    },
+    [KbNavGroup.Sok]: {
+        group: KbNavGroup.Sok,
+        rootIndex: { col: 0, row: 0, sub: 0 },
+        maxColsPerRow: [3],
+        parentNodeId: desktopSokKnappId,
+        parentNodeEdge: NodeEdge.Bottom,
+        idMap: {
+            [getKbId(KbNavGroup.Sok, {
+                col: 0,
+                row: 0,
+                sub: 0,
+            })]: desktopSokInputId,
+            [getKbId(KbNavGroup.Sok, {
+                col: 1,
+                row: 0,
+                sub: 0,
+            })]: `${desktopSokInputId}-reset`,
+            [getKbId(KbNavGroup.Sok, {
+                col: 2,
+                row: 0,
+                sub: 0,
+            })]: `${desktopSokInputId}-submit`,
+        },
     },
     [KbNavGroup.Varsler]: {
         group: KbNavGroup.Varsler,
@@ -86,33 +113,33 @@ export const createHeaderMainGraph = (
 
     idMap[
         KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-    ] = desktopHeaderLogoId;
+        ] = desktopHeaderLogoId;
 
     if (hovedmenyEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = hovedmenyKnappId;
+            ] = hovedmenyKnappId;
     }
 
     idMap[
         KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-    ] = desktopSokKnappId;
+        ] = desktopSokKnappId;
 
     if (varslerEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = desktopVarslerKnappId;
+            ] = desktopVarslerKnappId;
     }
 
     if (minsideMenyEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = desktopMinsideKnappId;
+            ] = desktopMinsideKnappId;
     }
 
     idMap[
         KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-    ] = desktopLoginKnappId;
+        ] = desktopLoginKnappId;
 
     const maxColsPerRow = arbeidsflatemenyEnabled ? [3, colIndex] : [colIndex];
 

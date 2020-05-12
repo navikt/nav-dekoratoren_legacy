@@ -12,6 +12,9 @@ import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knappe
 import SokMenyIkon from 'komponenter/header/header-regular/common/meny-knapper/ikoner/sok-ikon/SokMenyIkon';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import './SokDropdown.less';
+import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
+import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
+import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.sok,
@@ -29,19 +32,21 @@ type Props = {
 export const SokDropdown = ({ kbNavMainState }: Props) => {
     const { isOpen } = useSelector(stateSelector);
     const dispatch = useDispatch();
+    useKbNavSub(configForNodeGroup[KbNavGroup.Sok], kbNavMainState, isOpen);
 
     useEffect(() => {
         const dropdownElement = document.getElementById(classname) as HTMLElement;
         if (dropdownElement) {
             if (isOpen) {
                 setTimeout(
-                    () => (dropdownElement.style.maxHeight = '100rem'),
+                    () => {
+                        dropdownElement.style.maxHeight = '100rem';
+                        document.getElementById(desktopSokInputId)?.focus();
+                    },
                     dropdownTransitionDuration,
                 );
-                document.getElementById(desktopSokInputId)?.focus();
             } else {
                 dropdownElement.style.removeProperty('max-height');
-                document.getElementById(desktopSokKnappId)?.focus();
             }
         }
     }, [isOpen]);

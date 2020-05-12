@@ -2,7 +2,13 @@
 @import '../../common/ekspanderbar-meny/EkspanderbarMeny';
 
 .desktop-hovedmeny {
-    &__topp-seksjon-tittel {
-        margin-bottom: 0.15em;
+    .ekspanderbar {
+        &__topp-seksjon-tittel {
+            margin-bottom: 0.15em;
+        }
+
+        &__innhold-wrapper--aktive {
+            max-height: 70rem;
+        }
     }
 }

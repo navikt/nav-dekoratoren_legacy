@@ -11,6 +11,7 @@
             overflow: hidden;
             max-height: 0;
             max-width: 100%;
+            visibility: hidden;
             background-color: white;
             opacity: 0;
             border-bottom-left-radius: @border-radius-base;
@@ -18,16 +19,17 @@
 
             transition-duration: @ekspanderbar-transition-duration-in;
             transition-timing-function: ease-in;
-            transition-property: max-height, opacity;
+            transition-property: max-height, visibility, opacity;
 
             &--aktive {
                 max-height: 60rem;
                 max-width: 100%;
+                visibility: visible;
                 opacity: 1;
                 z-index: 1001;
                 transition-duration: @ekspanderbar-transition-duration-out;
                 transition-timing-function: ease-in-out;
-                transition-property: max-height;
+                transition-property: max-height, visibility;
             }
         }
 
