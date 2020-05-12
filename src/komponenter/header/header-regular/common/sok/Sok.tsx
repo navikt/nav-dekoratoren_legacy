@@ -26,11 +26,11 @@ interface Props {
     tabindex?: boolean;
     id?: string;
     isOpen: boolean;
+    dropdownTransitionMs?: number;
 }
 
 const predefinedlistview = 5;
 const mobileCls = BEMHelper('sok');
-const dropdownTransitionDuration = 300;
 
 class Sok extends React.Component<StateProps & Props, InputState> {
     fetchSearchResultThrottled: ReturnType<typeof debounce>;
@@ -60,7 +60,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
 
     componentDidUpdate(prevProps: Readonly<StateProps & Props>) {
         if (!this.props.isOpen && prevProps !== this.props) {
-            setTimeout(this.resetDisplay, dropdownTransitionDuration);
+            setTimeout(this.resetDisplay, this.props.dropdownTransitionMs);
         }
     }
 

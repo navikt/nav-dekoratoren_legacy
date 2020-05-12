@@ -67,6 +67,8 @@ const HovedmenyMobil = () => {
         dispatch(toggleHovedmeny());
     };
 
+    const isOpen = hovedIsOpen || underIsOpen || varselIsOpen;
+
     const menyKnapp = (
         <>
             <MenylinjeKnapp
@@ -108,14 +110,14 @@ const HovedmenyMobil = () => {
                 lang={language}
             />
         ) : (
-            <Spinner tekstId={'meny-loading'} />
+            isOpen && <Spinner tekstId={'meny-loading'} />
         );
 
     return (
         <>
             <EkspanderbarMeny
                 classname={classname}
-                isOpen={hovedIsOpen || underIsOpen || varselIsOpen}
+                isOpen={isOpen}
                 menyKnapp={menyKnapp}
                 id={classname}
             >

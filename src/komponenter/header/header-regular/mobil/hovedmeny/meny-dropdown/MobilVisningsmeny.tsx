@@ -52,10 +52,10 @@ type Props = VisningsmenyProps & StateProps & DispatchProps;
 
 class MobilVisningsmeny extends React.Component<Props, State> {
     private visningslenker = this.props.menyLenker.children.map(() =>
-        React.createRef<HTMLAnchorElement>(),
+        React.createRef<HTMLAnchorElement>()
     );
     private minsidelenkerRef = this.props.minsideLenker.children.map(() =>
-        React.createRef<HTMLAnchorElement>(),
+        React.createRef<HTMLAnchorElement>()
     );
 
     private node: any;
@@ -90,7 +90,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
     setMenyliste = (
         event: React.MouseEvent<HTMLAnchorElement>,
         meny: MenyNode,
-        pointer: any,
+        pointer: any
     ) => {
         event.preventDefault();
         this.props.togglemenu();
@@ -122,12 +122,16 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                     className={menyClass
                         .element(
                             'startmeny',
-                            menuIsOpen && !underMenuIsOpen ? 'aktive' : '',
+                            menuIsOpen && !underMenuIsOpen ? 'aktive' : ''
                         )
                         .concat(' ')
                         .concat(menyClass.element('menuheight'))}
                 >
-                    <Sok tabindex={this.hovedseksjonTabIndex()} isOpen={true} />
+                    <Sok
+                        tabindex={this.hovedseksjonTabIndex()}
+                        isOpen={menuIsOpen}
+                        dropdownTransitionMs={400}
+                    />
                     <InnloggetBruker tabIndex={this.hovedseksjonTabIndex()} />
 
                     <ForsideLenke
@@ -138,19 +142,19 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                         tabindex={this.hovedseksjonTabIndex()}
                     />
                     {this.props.innloggingsstatus.data.authenticated &&
-                    arbeidsflate === MenuValue.PRIVATPERSON && (
-                        <div
-                            className={menyClass.element('submeny', 'wrap')}
-                        >
-                            <Dittnavmeny
-                                minsideLenker={minsideLenker}
-                                tabIndex={this.hovedseksjonTabIndex()}
-                                className={menyClass.className}
-                                openMeny={this.setMenyliste}
-                                test={this.minsidelenkerRef}
-                            />
-                        </div>
-                    )}
+                        arbeidsflate === MenuValue.PRIVATPERSON && (
+                            <div
+                                className={menyClass.element('submeny', 'wrap')}
+                            >
+                                <Dittnavmeny
+                                    minsideLenker={minsideLenker}
+                                    tabIndex={this.hovedseksjonTabIndex()}
+                                    className={menyClass.className}
+                                    openMeny={this.setMenyliste}
+                                    test={this.minsidelenkerRef}
+                                />
+                            </div>
+                        )}
                     <MenyIngress
                         className={menyClass.element('meny', 'ingress')}
                         inputext={arbeidsflate}
@@ -170,7 +174,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                                                 event,
                                                 menyElement,
                                                 this.visningslenker[index]
-                                                    .current,
+                                                    .current
                                             )
                                         }
                                         tabIndex={
@@ -186,7 +190,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                                         </Listelement>
                                     </a>
                                 );
-                            },
+                            }
                         )}
                     </ul>
                     {lang === Language.NORSK && (

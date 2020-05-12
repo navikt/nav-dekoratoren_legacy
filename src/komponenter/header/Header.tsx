@@ -111,7 +111,6 @@ export const Header = () => {
 
     // External data
     useEffect(() => {
-        console.log(APP_BASE_URL);
         fetchMenypunkter(APP_BASE_URL)(dispatch);
     }, []);
 

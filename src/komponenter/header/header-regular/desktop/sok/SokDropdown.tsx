@@ -11,10 +11,10 @@ import { GACategory, gaEvent } from 'utils/google-analytics';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapper/MenylinjeKnapp';
 import SokMenyIkon from 'komponenter/header/header-regular/common/meny-knapper/ikoner/sok-ikon/SokMenyIkon';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
-import './SokDropdown.less';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
+import './SokDropdown.less';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.sok,
@@ -23,7 +23,7 @@ const stateSelector = (state: AppState) => ({
 const classname = 'desktop-sok-dropdown';
 export const desktopSokKnappId = 'desktop-sok-knapp';
 export const desktopSokInputId = 'desktop-sok-input';
-const dropdownTransitionDuration = 300;
+const dropdownTransitionMs = 300;
 
 type Props = {
     kbNavMainState: KbNavMain;
@@ -35,16 +35,15 @@ export const SokDropdown = ({ kbNavMainState }: Props) => {
     useKbNavSub(configForNodeGroup[KbNavGroup.Sok], kbNavMainState, isOpen);
 
     useEffect(() => {
-        const dropdownElement = document.getElementById(classname) as HTMLElement;
+        const dropdownElement = document.getElementById(
+            classname
+        ) as HTMLElement;
         if (dropdownElement) {
             if (isOpen) {
-                setTimeout(
-                    () => {
-                        dropdownElement.style.maxHeight = '100rem';
-                        document.getElementById(desktopSokInputId)?.focus();
-                    },
-                    dropdownTransitionDuration,
-                );
+                setTimeout(() => {
+                    dropdownElement.style.maxHeight = '100rem';
+                    document.getElementById(desktopSokInputId)?.focus();
+                }, dropdownTransitionMs);
             } else {
                 dropdownElement.style.removeProperty('max-height');
             }
@@ -81,7 +80,12 @@ export const SokDropdown = ({ kbNavMainState }: Props) => {
             isOpen={isOpen}
             menyKnapp={knapp}
         >
-            <Sok tabindex={true} isOpen={isOpen} id={desktopSokInputId} />
+            <Sok
+                tabindex={true}
+                isOpen={isOpen}
+                id={desktopSokInputId}
+                dropdownTransitionMs={dropdownTransitionMs}
+            />
         </EkspanderbarMeny>
     );
 };
