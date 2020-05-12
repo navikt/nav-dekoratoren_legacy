@@ -113,33 +113,33 @@ export const createHeaderMainGraph = (
 
     idMap[
         KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = desktopHeaderLogoId;
+    ] = desktopHeaderLogoId;
 
     if (hovedmenyEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-            ] = hovedmenyKnappId;
+        ] = hovedmenyKnappId;
     }
 
     idMap[
         KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = desktopSokKnappId;
+    ] = desktopSokKnappId;
 
     if (varslerEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-            ] = desktopVarslerKnappId;
+        ] = desktopVarslerKnappId;
     }
 
     if (minsideMenyEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-            ] = desktopMinsideKnappId;
+        ] = desktopMinsideKnappId;
     }
 
     idMap[
         KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = desktopLoginKnappId;
+    ] = desktopLoginKnappId;
 
     const maxColsPerRow = arbeidsflatemenyEnabled ? [3, colIndex] : [colIndex];
 
