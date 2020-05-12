@@ -6,10 +6,11 @@ import './Spinner.less';
 
 type Props = {
     tekstId?: string;
+    className?: string;
 };
 
-const Spinner = ({ tekstId }: Props) => (
-    <div className={'spinner-container'}>
+const Spinner = ({ tekstId, className }: Props) => (
+    <div className={`spinner-container${className ? ` ${className}` : ''}`}>
         {tekstId && (
             <Normaltekst>
                 <Tekst id={tekstId} />

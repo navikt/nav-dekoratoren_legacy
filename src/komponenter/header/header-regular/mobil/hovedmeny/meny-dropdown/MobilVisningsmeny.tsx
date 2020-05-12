@@ -121,7 +121,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                     className={menyClass
                         .element(
                             'startmeny',
-                            menuIsOpen && !underMenuIsOpen ? 'aktive' : ''
+                            menuIsOpen && !underMenuIsOpen ? 'active' : ''
                         )
                         .concat(' ')
                         .concat(menyClass.element('menuheight'))}

@@ -110,7 +110,10 @@ const HovedmenyMobil = () => {
                 lang={language}
             />
         ) : (
-            isOpen && <Spinner tekstId={'meny-loading'} />
+            <Spinner
+                tekstId={'meny-loading'}
+                className={isOpen ? 'spinner-container--active' : ''}
+            />
         );
 
     return (
