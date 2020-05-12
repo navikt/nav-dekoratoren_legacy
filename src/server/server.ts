@@ -61,9 +61,9 @@ app.use(
         options: {
             labels: ['app', 'namespace', 'cluster'],
             getLabelValues: (req: Request, res: Response) => ({
-                app: process.env.NAIS_APP_NAME,
-                namespce: process.env.NAIS_NAMESPACE,
-                cluster: process.env.NAIS_CLUSTER_NAME,
+                app: process.env.NAIS_APP_NAME || 'nav-dekoratoren',
+                namespace: process.env.NAIS_NAMESPACE || 'local',
+                cluster: process.env.NAIS_CLUSTER_NAME || 'local',
             }),
         },
     })
