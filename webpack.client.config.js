@@ -6,7 +6,7 @@ const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 
 const browserConfig = {
-    mode: 'development',
+    mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'development',
     target: 'web',
     entry: {
         client: './src/index.tsx',
