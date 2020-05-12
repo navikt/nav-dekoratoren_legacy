@@ -10,6 +10,7 @@ import { Systemtittel } from 'nav-frontend-typografi';
 import { useSelector } from 'react-redux';
 import Lock from 'ikoner/meny/Lock';
 import { AppState } from 'store/reducers';
+import MinsideDropdownLockMsg from '../../../../desktop/minside-meny/minside-visning/MinsideDropdownLockMsg';
 
 interface Props {
     className: string;
@@ -22,8 +23,13 @@ interface Props {
 const Undermeny = (props: Props) => {
     const { setFocusNode, tabindex, lenker } = props;
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
+    const auth = useSelector((state: AppState) => state.innloggingsstatus.data);
     const { className, undermenyIsOpen } = props;
     const menyClass = BEMHelper(className);
+
+    const hasLevel4Elements =
+        auth.securityLevel !== '4' &&
+        lenker.children.filter((lenke) => lenke.displayLock).length;
 
     const arbeidsflate = lenker.displayName
         .charAt(0)
@@ -52,6 +58,9 @@ const Undermeny = (props: Props) => {
             >
                 {arbeidsflate}
             </Systemtittel>
+            {hasLevel4Elements && (
+                <MinsideDropdownLockMsg classname={className} />
+            )}
             <ul className={menyClass.element('meny', 'list')}>
                 {lenker.children.map((lenke, index: number) => {
                     return (
