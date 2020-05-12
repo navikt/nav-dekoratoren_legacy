@@ -10,8 +10,8 @@ import Tekst from 'tekster/finn-tekst';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import { MenyNode } from 'store/reducers/menu-duck';
 import FooterLenker from '../../Lenker';
-import LenkeMedIkon from 'komponenter/footer/lenke-med-ikon/LenkeMedIkon';
-import DelSkjermModal from 'komponenter/footer/del-skjerm-modal/DelSkjermModal';
+import LenkeMedIkon from 'komponenter/footer/common/lenke-med-ikon/LenkeMedIkon';
+import DelSkjermModal from 'komponenter/footer/common/del-skjerm-modal/DelSkjermModal';
 import { LinkLoader } from '../../../common/content-loaders/LinkLoader';
 
 import './FooterBottom.less';

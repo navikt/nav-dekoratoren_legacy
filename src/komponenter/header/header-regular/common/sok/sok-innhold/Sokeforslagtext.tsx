@@ -5,9 +5,10 @@ const Sokeforslagtext = ({ highlight }: { highlight?: string }) => {
     return (
         <div className="sok-resultat-listItem-text">
             <Normaltekst>
-                {(highlight || '')
-                    .replace(/<\/?[^>]+(>|$)/g, '') // Remove html
-                    .replace(/\[.*?\]/g, '') // Remove shortcodes
+                {
+                    (highlight || '')
+                        .replace(/<\/?[^>]+(>|$)/g, '') // Remove html
+                        .replace(/\[.*?\]/g, '') // Remove shortcodes
                 }
             </Normaltekst>
         </div>

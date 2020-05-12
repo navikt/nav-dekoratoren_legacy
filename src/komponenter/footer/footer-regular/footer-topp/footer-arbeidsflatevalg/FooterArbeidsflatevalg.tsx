@@ -68,9 +68,6 @@ const FooterArbeidsflatevalg = () => {
                                         href={lenke.url}
                                         onClick={(event) => {
                                             event.preventDefault();
-                                            dispatch(
-                                                settArbeidsflate(lenke.key)
-                                            );
                                             gaEvent({
                                                 context: arbeidsflate,
                                                 category: GACategory.Header,
@@ -81,7 +78,11 @@ const FooterArbeidsflatevalg = () => {
                                                 lenke.key,
                                                 cookieOptions
                                             );
-                                            if (!erNavDekoratoren()) {
+                                            if (erNavDekoratoren()) {
+                                                dispatch(
+                                                    settArbeidsflate(lenke.key)
+                                                );
+                                            } else {
                                                 window.location.href =
                                                     lenke.url;
                                             }

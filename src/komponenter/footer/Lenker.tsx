@@ -8,7 +8,7 @@ import { AppState } from 'store/reducers';
 import { genererUrl } from 'utils/Environment';
 
 interface Props {
-    node: MenyNode;
+    node?: MenyNode;
 }
 
 export const FooterLenker = ({ node }: Props) => {

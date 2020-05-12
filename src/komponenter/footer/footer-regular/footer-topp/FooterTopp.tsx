@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import PilOppHvit from 'ikoner/meny/PilOppHvit';
-import LenkeMedIkon from 'komponenter/footer/lenke-med-ikon/LenkeMedIkon';
+import LenkeMedIkon from 'komponenter/footer/common/lenke-med-ikon/LenkeMedIkon';
 import { AppState } from 'store/reducers';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
@@ -23,7 +23,7 @@ const FooterTopp = () => {
     const [columnsNode, settColumnsNode] = useState<MenyNode>();
     useEffect(() => {
         const languageNode = getLanguageNode(language, data);
-        if (!columnsNode && languageNode) {
+        if (languageNode) {
             const footerNode = findNode(languageNode, 'Footer');
             if (footerNode) {
                 const columnsNode = findNode(footerNode, 'Columns');
@@ -36,7 +36,7 @@ const FooterTopp = () => {
                 }
             }
         }
-    }, [data, settColumnsNode]);
+    }, [context, data, settColumnsNode]);
 
     const scrollToTop = () =>
         window.scrollTo({

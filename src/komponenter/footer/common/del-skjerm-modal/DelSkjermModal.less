@@ -1,5 +1,28 @@
-@import '../../../styling-variabler.less';
+@import '../../../../styling-variabler.less';
 @import '~nav-frontend-modal-style/src/index';
+@import '~nav-frontend-hjelpetekst-style';
+
+.lesMerPanel {
+    padding: 0 !important;
+
+    &__mer ul {
+        margin: 0;
+    }
+
+    &__toggleChevron {
+        margin-left: 0.5rem;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    &__togglelink {
+        flex-direction: row-reverse !important;
+    }
+
+    &__toggle {
+        justify-content: flex-start !important;
+    }
+}
 
 .delskjerm {
     &__modal.modal {
@@ -18,13 +41,20 @@
         }
     }
 
+    &__overskrift {
+        display: flex;
+        & > * {
+            margin-right: 0.5rem;
+        }
+    }
+
     &__beskrivelse {
         margin: 1rem 0 1.5rem 0;
     }
 
     &__header {
         width: 100%;
-        top: -2rem;
+        top: -2.5rem;
         left: 0;
         display: flex;
         position: absolute;
@@ -32,11 +62,9 @@
     }
 
     &__veileder {
-        padding-top: 0.25rem;
-        height: 4.5rem;
-        width: 4.5rem;
+        height: 5rem;
+        width: 5rem;
         border-radius: 2.25rem;
-        background-color: @navBlaDarken60;
     }
 
     &__knapper {
