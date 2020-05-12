@@ -5,6 +5,8 @@ require('console-stamp')(console, '[HH:MM:ss.l]');
 import NodeCache from 'node-cache';
 import fetch from 'node-fetch';
 import express from 'express';
+const { createMiddleware } = require('@promster/express');
+const { getSummary, getContentType } = require('@promster/express');
 import cookiesMiddleware from 'universal-cookie-express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
@@ -35,6 +37,7 @@ const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 // Cors
 app.disable('x-powered-by');
 app.use(cookiesMiddleware());
+app.use(createMiddleware({ app }));
 app.use((req, res, next) => {
     // Allowed origins
     res.header('Access-Control-Allow-Origin', req.get('origin'));
@@ -149,6 +152,12 @@ app.use(
         changeOrigin: true,
     })
 );
+
+app.use(`${appBasePath}/metrics`, (req, res) => {
+    req.statusCode = 200;
+    res.setHeader('Content-Type', getContentType());
+    res.end(getSummary());
+});
 
 app.get(`${appBasePath}/isAlive`, (req, res) => res.sendStatus(200));
 app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));

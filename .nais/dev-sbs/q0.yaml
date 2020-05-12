@@ -10,13 +10,13 @@ spec:
     image: navikt/{{reponame}}:{{version}}
     port: 8088
     liveness:
-        path: /dekoratoren/isalive
+        path: /dekoratoren/isAlive
         initialDelay: 10
     readiness:
-        path: /dekoratoren/isready
+        path: /dekoratoren/isReady
         initialDelay: 10
     prometheus:
-        path: /metrics
+        path: /dekoratoren/metrics
     replicas:
         min: 2
         max: 4
