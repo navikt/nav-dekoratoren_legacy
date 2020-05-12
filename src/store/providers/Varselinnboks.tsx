@@ -23,7 +23,7 @@ const VarselinnboksProvider = (props: Props) => {
         if (status === Status.IKKE_STARTET) {
             hentVarsler(APP_BASE_URL)(dispatch);
         }
-    }, []);
+    }, [status]);
 
     return <Datalaster avhengigheter={[varsler]}>{props.children}</Datalaster>;
 };
