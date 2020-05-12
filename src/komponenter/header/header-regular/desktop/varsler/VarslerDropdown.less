@@ -4,16 +4,18 @@
 .desktop-varsler-dropdown {
     @dropdown-width: 525px;
 
-    &__innhold-wrapper {
-        right: 40px;
-        max-width: @dropdown-width;
-        @media (max-width: @smallDesktopLimitWidth) {
-            right: 0;
+    .ekspanderbar {
+        &__innhold-wrapper {
+            right: 40px;
+            max-width: @dropdown-width;
+            @media (max-width: @smallDesktopLimitWidth) {
+                right: 0;
+            }
         }
-    }
 
-    &__innhold {
-        max-width: @dropdown-width;
+        &__innhold {
+            max-width: @dropdown-width;
+        }
     }
 }
 

@@ -5,18 +5,21 @@
     @lenkeseksjoner-cols: 3;
     @lenkeseksjoner-margin: 1.5em;
 
+    .ekspanderbar {
+        &__innhold-wrapper {
+            right: 0;
+            max-width: @smallDesktopLimitWidth;
+        }
+
+        &__innhold {
+            max-width: @smallDesktopLimitWidth;
+        }
+    }
+
     &__innhold-bredde {
         max-width: 55rem;
     }
 
-    &__innhold-wrapper {
-        right: 0;
-        max-width: @smallDesktopLimitWidth;
-    }
-
-    &__innhold {
-        max-width: @smallDesktopLimitWidth;
-    }
 
     &__knapp-tekst {
         text-align: left;

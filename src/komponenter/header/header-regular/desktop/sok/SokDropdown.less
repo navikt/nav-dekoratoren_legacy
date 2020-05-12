@@ -4,18 +4,20 @@
 .desktop-sok-dropdown {
     @dropdownwidth: 700px;
 
-    &__innhold {
-        left: 0;
-        max-width: @dropdownwidth;
-    }
+    .ekspanderbar {
+        &__innhold-wrapper {
+            max-width: @dropdownwidth;
+            transition-duration: 0.2s;
 
-    &__innhold-wrapper {
-        max-width: @dropdownwidth;
-        transition-duration: 0.2s;
+            &--aktive {
+                max-height: 12rem;
+                transition-duration: 0.3s;
+            }
+        }
 
-        &--aktive {
-            max-height: 12rem;
-            transition-duration: 0.3s;
+        &__innhold {
+            left: 0;
+            max-width: @dropdownwidth;
         }
     }
 }

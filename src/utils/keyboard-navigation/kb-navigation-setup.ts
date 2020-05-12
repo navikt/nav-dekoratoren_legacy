@@ -60,6 +60,16 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
                 row: 0,
                 sub: 0,
             })]: desktopSokInputId,
+            [getKbId(KbNavGroup.Sok, {
+                col: 1,
+                row: 0,
+                sub: 0,
+            })]: `${desktopSokInputId}-reset`,
+            [getKbId(KbNavGroup.Sok, {
+                col: 2,
+                row: 0,
+                sub: 0,
+            })]: `${desktopSokInputId}-submit`,
         },
     },
     [KbNavGroup.Varsler]: {
@@ -103,33 +113,33 @@ export const createHeaderMainGraph = (
 
     idMap[
         KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-    ] = desktopHeaderLogoId;
+        ] = desktopHeaderLogoId;
 
     if (hovedmenyEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = hovedmenyKnappId;
+            ] = hovedmenyKnappId;
     }
 
     idMap[
         KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-    ] = desktopSokKnappId;
+        ] = desktopSokKnappId;
 
     if (varslerEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = desktopVarslerKnappId;
+            ] = desktopVarslerKnappId;
     }
 
     if (minsideMenyEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = desktopMinsideKnappId;
+            ] = desktopMinsideKnappId;
     }
 
     idMap[
         KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-    ] = desktopLoginKnappId;
+        ] = desktopLoginKnappId;
 
     const maxColsPerRow = arbeidsflatemenyEnabled ? [3, colIndex] : [colIndex];
 

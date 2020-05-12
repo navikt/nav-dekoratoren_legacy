@@ -130,6 +130,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                     <Sok
                         tabindex={this.hovedseksjonTabIndex()}
                         isOpen={menuIsOpen}
+                        dropdownTransitionMs={400}
                     />
                     <InnloggetBruker tabIndex={this.hovedseksjonTabIndex()} />
 
