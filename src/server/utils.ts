@@ -34,7 +34,7 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
             PARAMS: {
                 LANGUAGE: chosenLanguage,
                 CONTEXT: chosenContext,
-                SIMPLE: !!req.query.simple,
+                SIMPLE: req.query.simple === 'true',
                 SIMPLE_HEADER: !!req.query.header,
                 SIMPLE_FOOTER: !!req.query.footer,
                 REDIRECT_TO_APP: !!req.query.redirectToApp,
