@@ -6,6 +6,7 @@ import Lenke from 'nav-frontend-lenker';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { valgtbedrift } from '../../../../common/meny-knapper/minside-knapper/MinsideArbgiverKnapp';
 
 interface Props {
     arbeidsflate: MenuValue;
@@ -41,7 +42,7 @@ const ForsideLenke = (props: Props) => {
                         <Tekst id="min-side-arbeidsgiver" />
                     </Undertittel>
                     <Lenke
-                        href={MINSIDE_ARBEIDSGIVER_URL}
+                        href={MINSIDE_ARBEIDSGIVER_URL + valgtbedrift()}
                         className={cls.element('lenke')}
                         tabIndex={props.tabindex ? 0 : -1}
                     >
