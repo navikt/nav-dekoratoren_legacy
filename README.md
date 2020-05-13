@@ -8,7 +8,7 @@ Appen kjører på NAIS i en docker-container.
 
 ## Bruk av dekoratøren
 
-Dekoratøren er bakoverkompatibel; med andre ord vil eksisterende applikasjoner som benytter dekoratør:v4 (https://appres.nav.no/common-html/v4/navno) automatisk få ny dekoratør. 
+:information_source: Dekoratøren er bakoverkompatibel; med andre ord vil eksisterende applikasjoner som benytter dekoratør:v4 (https://appres.nav.no/common-html/v4/navno) automatisk få ny dekoratør. 
 
 Den nye dekoratøren vil serveres på følgende ingresser etter prodsetting 13. mai:
 - https://appres.nav.no/common-html/v4/navno
