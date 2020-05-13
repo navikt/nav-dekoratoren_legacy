@@ -8,6 +8,8 @@ import MobilMenylinje from './MobilMenylinje';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
 import { LoggInnKnappMobil } from './logg-inn/LoggInnKnappMobil';
+import { ActionType } from '../../../../store/actions';
+import { Status } from '../../../../api/api';
 
 const store = createStore(reducers);
 
@@ -17,6 +19,14 @@ const getWrapper = (store: Store) =>
             <MobilMenylinje language={Language.NORSK} />
         </Provider>
     );
+
+store.dispatch({
+    type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
+    status: Status.OK,
+    data: {
+        authenticated: false,
+    },
+});
 
 describe('<MobilMenylinje /> sjekk at komponent finner logo', () => {
     it('Skal rendre <NavLogoRod> komponent', () => {
