@@ -35,8 +35,8 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
 
     return (
         <ul className={cls.className}>
-            {lenker.map((lenke) => (
-                <li key={lenke.key} className={cls.element('liste-element')}>
+            {lenker.map((lenke, i) => (
+                <li key={i} className={cls.element('liste-element')}>
                     <LenkeMedGA
                         href={lenke.url}
                         onClick={(event) => {
