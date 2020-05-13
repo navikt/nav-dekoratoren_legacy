@@ -1,5 +1,10 @@
 
 # Nav-dekoratoren ![nav.no logo](./src/ikoner/meny/Navlogo.svg)
+
+![Deploy-to-q1](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-prod/badge.svg)
+![Deploy-to-q1](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-q0/badge.svg)
+![Deploy-to-q1](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-q1/badge.svg)
+![Deploy-to-q1](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-q6/badge.svg)
                      
 :warning: **OBS! Denne versjonen av header og footer er under arbeid. Kan ikke prodsettes.**
 
