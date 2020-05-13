@@ -50,9 +50,7 @@ export const LoggInn = ({ Knapp }: Props) => {
         language
     );
 
-    return (
-        <Knapp handleButtonClick={handleButtonClick} tekst={knappetekst} />
-    );
+    return <Knapp handleButtonClick={handleButtonClick} tekst={knappetekst} />;
 };
 
 export default LoggInn;

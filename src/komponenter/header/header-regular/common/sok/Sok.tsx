@@ -272,7 +272,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
             selectedInput,
             fetchError,
         } = this.state;
-        const { language } = this.props;
+        const { language, id } = this.props;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
         });
@@ -299,7 +299,11 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         inputValue,
                         setState,
                     }) => (
-                        <form role="search" onSubmit={this.handleSubmit}>
+                        <form
+                            role="search"
+                            id={`search-form${id ? `-${id}` : ''}`}
+                            onSubmit={this.handleSubmit}
+                        >
                             <div className="sok-container">
                                 <div className="sok-input-resultat">
                                     <SokInput
@@ -312,7 +316,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                             setState({ isOpen: false });
                                             this.resetDisplay();
                                         }}
-                                        id={this.props.id}
+                                        id={id}
                                     />
                                     {loading ? (
                                         <Spinner tekstId={'spinner-sok'} />

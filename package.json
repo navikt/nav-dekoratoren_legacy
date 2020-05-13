@@ -35,6 +35,7 @@
         "@promster/express": "^4.1.11",
         "classnames": "^2.2.6",
         "console-stamp": "^0.2.9",
+        "core-js": "3.5.0",
         "dotenv": "^8.2.0",
         "downshift": "^5.2.0",
         "es6-promise": "^4.2.8",

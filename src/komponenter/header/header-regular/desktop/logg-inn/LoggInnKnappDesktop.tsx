@@ -2,6 +2,7 @@ import KnappBase from 'nav-frontend-knapper';
 import React from 'react';
 import { LoggInnKnappProps } from 'komponenter/header/header-regular/common/logg-inn/LoggInn';
 import LoggInn from 'komponenter/header/header-regular/common/logg-inn/LoggInn';
+import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './LoggInnKnappDesktop.less';
 
 export const desktopLoginKnappId = 'desktop-login-knapp';
@@ -13,7 +14,7 @@ const Knapp = ({ handleButtonClick, tekst }: LoggInnKnappProps) => (
         id={desktopLoginKnappId}
         onClick={handleButtonClick}
     >
-        {tekst}
+        <Undertittel>{tekst}</Undertittel>
     </KnappBase>
 );
 

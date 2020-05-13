@@ -1,9 +1,10 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
-import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import BEMHelper from 'utils/bem';
+import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
+import { gaEvent } from 'utils/google-analytics';
 
 interface Props {
     url: string;
@@ -11,7 +12,7 @@ interface Props {
     stikkord: string;
     className: string;
     id: string;
-    onClick?: (event: MouseEvent) => void;
+    onClick?: (event: React.MouseEvent<Element, MouseEvent>) => void;
 }
 
 const BunnseksjonLenke = ({
@@ -25,34 +26,39 @@ const BunnseksjonLenke = ({
     const cls = BEMHelper(className);
 
     return (
-        <div className={cls.element('bunn-seksjon-col')}>
-            <Undertittel>
-                <LenkeMedGA
-                    href={url}
-                    className={cls.element('bunn-lenke')}
-                    id={id}
-                    onClick={onClick}
-                    gaEventArgs={{
-                        category: GACategory.Meny,
-                        action: `hovedmeny/arbeidsflatelenke`,
-                        label: url,
-                    }}
-                >
+        <LenkepanelBase
+            href={url}
+            className={cls.element('bunn-lenke')}
+            id={id}
+            onClick={(event) => {
+                if (onClick) {
+                    onClick(event);
+                }
+                gaEvent({
+                    category: GACategory.Meny,
+                    action: `hovedmeny/arbeidsflatelenke`,
+                    label: url,
+                });
+            }}
+            border={true}
+        >
+            <div className={cls.element('bunn-lenke-visning')}>
+                <Undertittel className={'lenkepanel__heading'}>
                     <Tekst id={lenkeTekstId} />
-                </LenkeMedGA>
-            </Undertittel>
-            <ul className={cls.element('bunn-lenke-stikkord')}>
-                <Undertekst>
-                    {stikkord &&
-                        stikkord.split('|').map((ord) => (
-                            <li key={ord}>
-                                <span className={'bullet'} />
-                                {ord}
-                            </li>
-                        ))}
-                </Undertekst>
-            </ul>
-        </div>
+                </Undertittel>
+                <ul className={cls.element('bunn-lenke-stikkord')}>
+                    <Undertekst>
+                        {stikkord &&
+                            stikkord.split('|').map((ord) => (
+                                <li key={ord}>
+                                    <span className={'bullet'} />
+                                    {ord}
+                                </li>
+                            ))}
+                    </Undertekst>
+                </ul>
+            </div>
+        </LenkepanelBase>
     );
 };
 

@@ -8,6 +8,8 @@ import MobilMenylinje from './MobilMenylinje';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
 import { LoggInnKnappMobil } from './logg-inn/LoggInnKnappMobil';
+import { ActionType } from '../../../../store/actions';
+import { Status } from '../../../../api/api';
 
 const store = createStore(reducers);
 
@@ -25,6 +27,14 @@ describe('<MobilMenylinje /> sjekk at komponent finner logo', () => {
 });
 
 describe('<LoggInnKnappMobil/> sjekk at komponent finner logg-inn knapp', () => {
+    store.dispatch({
+        type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
+        status: Status.OK,
+        data: {
+            authenticated: false,
+        },
+    });
+
     it('Skal rendre <LoggInnKnappMobil/> komponent', () => {
         const wrapper = getWrapper(store);
         expect(wrapper.find(LoggInnKnappMobil)).toHaveLength(1);

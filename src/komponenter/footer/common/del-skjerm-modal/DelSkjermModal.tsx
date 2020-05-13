@@ -121,7 +121,7 @@ const DelSkjermModal = (props: Props) => {
                         }
                     >
                         <ul>
-                            {[...Array(5)].map((_, i) => (
+                            {[...Array(3)].map((_, i) => (
                                 <li key={i}>
                                     <Normaltekst>
                                         <Tekst
