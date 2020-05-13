@@ -5,9 +5,9 @@ metadata:
     name: nav-dekoratoren
     namespace: {{namespace}}
     labels:
-        team: {{team}}
+        team: personbruker
 spec:
-    image: navikt/{{reponame}}:{{version}}
+    image: {{image}}:{{version}}
     port: 8088
     liveness:
         path: /dekoratoren/isAlive
@@ -51,4 +51,4 @@ spec:
             cpu: '3'
             memory: 1500Mi
         requests:
-          memory: 1500Mi
+            memory: 1500Mi
