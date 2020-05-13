@@ -30,7 +30,6 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
 
     return (
         <>
-            <hr className={cls.element('bunn-separator')} />
             <div className={cls.element('bunn-seksjon')}>
                 {lenker
                     .filter((lenke) =>
