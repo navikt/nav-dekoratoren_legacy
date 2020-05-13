@@ -15,20 +15,33 @@
     &__bunn-seksjon {
         display: flex;
         justify-content: flex-start;
-        margin-top: 2rem;
+        margin: 1rem 0;
         --num-cols: @bunnseksjon-cols;
     }
 
     &__bunn-lenke {
         .col-setup(@bunnseksjon-cols, @bunnseksjon-margin);
-        border-color: @navGra60;
-        margin-bottom: 0;
+        margin-bottom: 3px;
+        border: 2px @navBla solid;
+
+        &:hover {
+            border: 2px @navBla solid;
+        }
+
+        .lenkepanel__indikator {
+            color: @navBla;
+        }
     }
 
     &__bunn-lenke-visning {
         display: flex;
         flex-direction: column;
+        flex-basis: 100%;
         height: 100%;
+
+        .lenkepanel__heading {
+            color: @navBla;
+        }
     }
 
     &__bunn-lenke-stikkord {
