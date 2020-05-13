@@ -149,9 +149,7 @@ export const Header = () => {
                 style={{ minHeight: headeroffsetHeight }}
             >
                 <div className="head-container " id="stickyhead">
-                    <div className="header-z-wrapper">
-                        <Skiplinks />
-                    </div>
+                    <Skiplinks />
                     <header className="siteheader">
                         {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
                             <SimpleHeader />
