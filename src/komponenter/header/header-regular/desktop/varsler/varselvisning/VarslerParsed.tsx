@@ -47,23 +47,24 @@ const parseLenke = (
     href: string | undefined,
     children: DomElement[] | undefined,
     rowIndex?: number,
-    subIndex?: number,
+    subIndex?: number
 ) => {
     const arbeidsflate = useSelector(
-        (state: AppState) => state.arbeidsflate.status,
+        (state: AppState) => state.arbeidsflate.status
     );
     return (
         <LenkeMedGA
             href={href || ''}
             tabIndex={0}
             className={'varsel-lenke'}
-            id={rowIndex !== undefined && subIndex !== undefined
-                ? getKbId(KbNavGroup.Varsler, {
-                    col: 0,
-                    row: rowIndex,
-                    sub: subIndex,
-                })
-                : undefined
+            id={
+                rowIndex !== undefined && subIndex !== undefined
+                    ? getKbId(KbNavGroup.Varsler, {
+                          col: 0,
+                          row: rowIndex,
+                          sub: subIndex,
+                      })
+                    : undefined
             }
             gaEventArgs={{
                 context: arbeidsflate,
@@ -116,7 +117,7 @@ export const VarslerParsed = ({ varsler, rowIndex }: Props) => {
                     attribs?.href,
                     children,
                     rowIndex,
-                    lenkeIndex++,
+                    lenkeIndex++
                 );
             }
         },
