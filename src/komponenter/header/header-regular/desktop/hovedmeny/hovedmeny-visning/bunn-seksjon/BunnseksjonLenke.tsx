@@ -25,34 +25,34 @@ const BunnseksjonLenke = ({
     const cls = BEMHelper(className);
 
     return (
-        <div className={cls.element('bunn-seksjon-col')}>
-            <Undertittel>
-                <LenkeMedGA
-                    href={url}
-                    className={cls.element('bunn-lenke')}
-                    id={id}
-                    onClick={onClick}
-                    gaEventArgs={{
-                        category: GACategory.Meny,
-                        action: `hovedmeny/arbeidsflatelenke`,
-                        label: url,
-                    }}
-                >
+        <LenkeMedGA
+            href={url}
+            className={cls.element('bunn-lenke')}
+            id={id}
+            onClick={onClick}
+            gaEventArgs={{
+                category: GACategory.Meny,
+                action: `hovedmeny/arbeidsflatelenke`,
+                label: url,
+            }}
+        >
+            <div className={cls.element('bunn-lenke-visning')}>
+                <Undertittel className={cls.element('bunn-lenke-tekst')}>
                     <Tekst id={lenkeTekstId} />
-                </LenkeMedGA>
-            </Undertittel>
-            <ul className={cls.element('bunn-lenke-stikkord')}>
-                <Undertekst>
-                    {stikkord &&
-                        stikkord.split('|').map((ord) => (
-                            <li key={ord}>
-                                <span className={'bullet'} />
-                                {ord}
-                            </li>
-                        ))}
-                </Undertekst>
-            </ul>
-        </div>
+                </Undertittel>
+                <ul className={cls.element('bunn-lenke-stikkord')}>
+                    <Undertekst>
+                        {stikkord &&
+                            stikkord.split('|').map((ord) => (
+                                <li key={ord}>
+                                    <span className={'bullet'} />
+                                    {ord}
+                                </li>
+                            ))}
+                    </Undertekst>
+                </ul>
+            </div>
+        </LenkeMedGA>
     );
 };
 
