@@ -57,6 +57,7 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
                 classname={classname}
                 id={desktopMinsideKnappId}
                 href={environment.MINSIDE_ARBEIDSGIVER_URL}
+                baseUrl={environment.XP_BASE_URL}
             />
         );
     }

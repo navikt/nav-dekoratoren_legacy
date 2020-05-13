@@ -12,6 +12,7 @@ type Props = {
     classname: string;
     id: string;
     href: string;
+    baseUrl: string;
 };
 
 export const valgtbedrift = () => {
@@ -22,7 +23,7 @@ export const valgtbedrift = () => {
 };
 
 export const MinsideArbgiverKnapp = (props: Props) => {
-    const { classname, id, href } = props;
+    const { classname, id, href, baseUrl } = props;
     const cls = BEMHelper(classname);
 
     return (
@@ -42,7 +43,7 @@ export const MinsideArbgiverKnapp = (props: Props) => {
                     'knapp-visning'
                 )}`}
             >
-                <img src={briefcaseIkon} alt="" />
+                <img src={`${baseUrl}${briefcaseIkon}`} alt="" />
                 <div className={cls.element('knapp-tekst')}>
                     <Normaltekst className={cls.element('knapp-tekst-topp')}>
                         <Tekst id={'ga-til-min-side'} />
