@@ -17,13 +17,39 @@
         justify-content: flex-start;
         margin-top: 2rem;
         --num-cols: @bunnseksjon-cols;
-
-        & > * {
-            .col-setup(@bunnseksjon-cols, @bunnseksjon-margin);
-        }
     }
 
     &__bunn-lenke {
+        .col-setup(@bunnseksjon-cols, @bunnseksjon-margin);
+        border: 4px solid transparent;
+        border-radius: 4px;
+        min-height: 100%;
+        width: 100%;
+        padding: 4px;
+        &:focus {
+            box-shadow: 0 0 0 4px @fokusFarge;
+            background-color: transparent;
+            .desktop-hovedmeny__bunn-lenke-tekst {
+                text-decoration: none;
+            }
+        }
+    }
+
+    &__bunn-lenke-visning {
+        height: 100%;
+        &:hover {
+            .desktop-hovedmeny__bunn-lenke-stikkord {
+                text-decoration: none;
+                color: black;
+            }
+
+            .desktop-hovedmeny__bunn-lenke-tekst {
+                text-decoration: none;
+            }
+        }
+    }
+
+    &__bunn-lenke-tekst {
         .lenke-stil();
     }
 
@@ -33,6 +59,7 @@
         list-style-position: inside;
         margin: 0;
         padding: 0;
+        color: black;
 
         li {
             display: inline-block;
