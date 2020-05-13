@@ -52,7 +52,8 @@ Eksempel:<br>
 
 ## Bruk av dekoratøren
 
-Dekoratøren er bakoverkompatibel, slik at eksisterende applikasjoner som benytter dekoratør/:v4 kun endrer URL fra https://appres.nav.no/.... til https://www.nav.no/dekoratoren.
+Dekoratøren er bakoverkompatibel, slik at eksisterende applikasjoner som benytter dekoratør/:v4 ikke trenger å foreta seg noe. 
+Vi oppfordrer derimot å gå over til nytt endepunkt etter prodsetting ettersom appres.nav.no vil bli deprecated på et senere tidspunkt.
 
 Nye applikasjoner kan implementere menyen som følger: 
 
