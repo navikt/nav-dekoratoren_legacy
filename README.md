@@ -22,7 +22,7 @@ Vi oppfordrer å gå over til nytt endepunkt (https://www.nav.no/dekoratoren/) e
 Nye applikasjoner kan implementere menyen som følger: 
 
 ### Eksempel 1
-Hent dekoratøren server-side:
+Hent dekoratøren server-side og send HTML til brukeren som inkluderer dekoratøren
 ```
 const url = 'http://<test-mijø | prod-adr>/dekoratoren?{DINE_PARAMETERE}';
 const getDecorator = () =>x
@@ -34,7 +34,9 @@ Vis [implementasjon](https://github.com/navikt/personopplysninger/blob/master/se
 **Obs:** Cache anbefales
 
 ### Eksempel 2
-Sett inn 5 linjer HTML:
+:warning: **Dette eksempelet benytter CSR (Client-Side-Rendering) av dekoratøren, noe som kan påvirke ytelsen **
+
+Sett inn 5 linjer HTML: <br>
 ```
 <html>
   <head>
@@ -51,7 +53,6 @@ Sett inn 5 linjer HTML:
   </body>
 </html>
 ```
-**Obs:** Faviconer vil ikke bli importert automatisk som i **Eksempel 1**.
 
 ### Eksempel 3
 Bruk av pus-decorator:<br>

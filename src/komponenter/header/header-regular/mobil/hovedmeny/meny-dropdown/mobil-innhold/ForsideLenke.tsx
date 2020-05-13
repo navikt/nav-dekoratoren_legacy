@@ -23,6 +23,7 @@ const ForsideLenke = (props: Props) => {
     if (!props.erInnlogget) {
         return null;
     }
+
     return (
         <>
             {props.arbeidsflate === MenuValue.PRIVATPERSON && (
