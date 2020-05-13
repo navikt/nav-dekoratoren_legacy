@@ -1,7 +1,7 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'isomorphic-fetch';
-import 'core-js';
+import 'core-js/stable/regexp';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
