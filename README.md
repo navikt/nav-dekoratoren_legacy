@@ -6,8 +6,6 @@
 ![Deploy til q1](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-q1/badge.svg)
 ![Deploy til q6](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-q6/badge.svg)
                      
-:warning: **OBS! Denne versjonen av header og footer er under arbeid. Kan ikke prodsettes.**
-
 Node.js Express applikasjon med frontend-komponenter i React.<br>
 Appen kjører på NAIS i en docker-container.
 
