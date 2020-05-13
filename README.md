@@ -52,8 +52,13 @@ Eksempel:<br>
 
 ## Bruk av dekoratøren
 
-Dekoratøren er bakoverkompatibel, slik at eksisterende applikasjoner som benytter dekoratør/:v4 (https://appres.nav.no/common-html/v4/navno) ikke trenger å foreta seg noe. 
-Vi oppfordrer derimot å gå over til nytt endepunkt (https://www.nav.no/dekoratoren/) etter prodsetting ettersom https://appres.nav.no vil bli deprecated på et senere tidspunkt.
+Dekoratøren er bakoverkompatibel, med andre ord vil eksisterende applikasjoner som benytter dekoratør:v4 (https://appres.nav.no/common-html/v4/navno) automatisk få ny dekoratør. 
+
+Den nye dekoratøren vil serveres på følgende url-er etter porodsetting 13. mai:
+- https://appres.nav.no/common-html/v4/navno
+- https://www.nav.no/dekoratoren/ 
+
+Vi oppfordrer å gå over til nytt endepunkt (https://www.nav.no/dekoratoren/) etter prodsetting ettersom https://appres.nav.no vil bli deprecated på et senere tidspunkt.
 
 Nye applikasjoner kan implementere menyen som følger: 
 
