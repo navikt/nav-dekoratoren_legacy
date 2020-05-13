@@ -1,9 +1,10 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
-import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import BEMHelper from 'utils/bem';
+import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
+import { gaEvent } from 'utils/google-analytics';
 
 interface Props {
     url: string;
@@ -11,7 +12,7 @@ interface Props {
     stikkord: string;
     className: string;
     id: string;
-    onClick?: (event: MouseEvent) => void;
+    onClick?: (event: React.MouseEvent<Element, MouseEvent>) => void;
 }
 
 const BunnseksjonLenke = ({
@@ -25,19 +26,24 @@ const BunnseksjonLenke = ({
     const cls = BEMHelper(className);
 
     return (
-        <LenkeMedGA
+        <LenkepanelBase
             href={url}
             className={cls.element('bunn-lenke')}
             id={id}
-            onClick={onClick}
-            gaEventArgs={{
-                category: GACategory.Meny,
-                action: `hovedmeny/arbeidsflatelenke`,
-                label: url,
+            onClick={(event) => {
+                if (onClick) {
+                    onClick(event);
+                }
+                gaEvent({
+                    category: GACategory.Meny,
+                    action: `hovedmeny/arbeidsflatelenke`,
+                    label: url,
+                });
             }}
+            border={true}
         >
             <div className={cls.element('bunn-lenke-visning')}>
-                <Undertittel className={cls.element('bunn-lenke-tekst')}>
+                <Undertittel className={'lenkepanel__heading'}>
                     <Tekst id={lenkeTekstId} />
                 </Undertittel>
                 <ul className={cls.element('bunn-lenke-stikkord')}>
@@ -52,7 +58,7 @@ const BunnseksjonLenke = ({
                     </Undertekst>
                 </ul>
             </div>
-        </LenkeMedGA>
+        </LenkepanelBase>
     );
 };
 
