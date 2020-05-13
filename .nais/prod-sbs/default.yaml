@@ -17,7 +17,7 @@ spec:
         initialDelay: 10
     prometheus:
         enabled: true
-        path: /dekoratoren/metricgs
+        path: /dekoratoren/metrics
     replicas:
         min: 2
         max: 4
