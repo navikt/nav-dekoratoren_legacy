@@ -62,7 +62,9 @@ export const MinsideVisning = (props: Props) => {
                     <UndertekstBold>
                         <Tekst id={'logget-inn-som'} />
                     </UndertekstBold>
-                    <Normaltekst>{brukerNavn}</Normaltekst>
+                    <Normaltekst className={cls.element('brukernavn')}>
+                        {brukerNavn}
+                    </Normaltekst>
                 </div>
             </div>
             {auth.securityLevel !== '4' && (

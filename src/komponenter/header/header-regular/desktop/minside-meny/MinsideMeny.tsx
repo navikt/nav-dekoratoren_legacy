@@ -14,7 +14,6 @@ import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { formatName } from 'utils/name-utils';
 import './MinsideMeny.less';
 
 const stateSelector = (state: AppState) => ({
@@ -62,7 +61,7 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
         );
     }
 
-    const brukerNavn = formatName(innloggetStatus.name);
+    const brukerNavn = innloggetStatus.name.toLowerCase();
 
     const knapp = (
         <MinsidePersonKnapp
