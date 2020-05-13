@@ -299,7 +299,11 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         inputValue,
                         setState,
                     }) => (
-                        <form role="search" onSubmit={this.handleSubmit}>
+                        <form
+                            role="search"
+                            id={'search-form'}
+                            onSubmit={this.handleSubmit}
+                        >
                             <div className="sok-container">
                                 <div className="sok-input-resultat">
                                     <SokInput
