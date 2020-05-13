@@ -14,6 +14,13 @@ type Props = {
     href: string;
 };
 
+export const valgtbedrift = () => {
+    const orgnummerFraUrl = new URLSearchParams(window.location.search).get(
+        'bedrift'
+    );
+    return orgnummerFraUrl ? `?bedrift=${orgnummerFraUrl}` : '';
+};
+
 export const MinsideArbgiverKnapp = (props: Props) => {
     const { classname, id, href } = props;
     const cls = BEMHelper(classname);
@@ -22,7 +29,7 @@ export const MinsideArbgiverKnapp = (props: Props) => {
         <LenkeMedGA
             classNameOverride={`menylinje-knapp ${cls.element('knapp')}`}
             id={id}
-            href={href}
+            href={href + valgtbedrift()}
             gaEventArgs={{
                 category: GACategory.Header,
                 action: 'minside-arbeidsgiver',
