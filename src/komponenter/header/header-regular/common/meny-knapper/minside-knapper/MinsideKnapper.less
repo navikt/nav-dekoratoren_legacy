@@ -6,8 +6,11 @@
     }
 
     &__knapp-visning {
-        width: 10rem;
         overflow: hidden;
+        max-width: 12rem;
+        @media (max-width: @smallDesktopLimitWidth) {
+            max-width: 10rem;
+        }
 
         img {
             width: 32px;
@@ -17,15 +20,40 @@
 
     &__knapp-tekst {
         text-align: left;
+        transition: all 0.35s ease-in-out;
     }
 
     &__knapp-tekst-topp {
+        .typo-normal;
         font-weight: bold;
+        transition: all 0.35s ease-in-out;
+
+        &--open {
+            .typo-undertittel;
+            font-weight: normal;
+            transform: translate(2px, 7px);
+        }
     }
 
     &__knapp-tekst-bunn {
+        .typo-undertekst;
+        position: relative;
+        bottom: 0;
+        max-width: 9rem;
+
         margin-top: -0.25em;
-        overflow-x: hidden;
+        overflow: hidden;
+        text-overflow: ellipsis;
         white-space: nowrap;
+
+        transition: all 0.35s ease-in-out;
+
+        @media (max-width: @smallDesktopLimitWidth) {
+            max-width: 7rem;
+        }
+
+        &--open {
+            bottom: -100px;
+        }
     }
 }

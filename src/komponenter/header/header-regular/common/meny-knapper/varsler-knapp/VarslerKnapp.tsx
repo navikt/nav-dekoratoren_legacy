@@ -9,7 +9,7 @@ import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import './VarslerKnapp.less';
 
 type Props = {
@@ -50,9 +50,9 @@ export const VarslerKnapp = ({ id }: Props) => {
             ariaLabel={ariaLabel}
         >
             <VarselIkon isOpen={isOpen} antallUleste={varsler.uleste} />
-            <Normaltekst className={'varselbjelle__tekst'}>
+            <Undertittel className={'varselbjelle__tekst'}>
                 <Tekst id={'varsler-tittel'} />
-            </Normaltekst>
+            </Undertittel>
         </MenylinjeKnapp>
     );
 };

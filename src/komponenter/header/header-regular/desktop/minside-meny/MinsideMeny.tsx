@@ -14,6 +14,7 @@ import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { formatName } from 'utils/name-utils';
 import './MinsideMeny.less';
 
 const stateSelector = (state: AppState) => ({
@@ -61,6 +62,8 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
         );
     }
 
+    const brukerNavn = formatName(innloggetStatus.name);
+
     const knapp = (
         <MinsidePersonKnapp
             onClick={() => {
@@ -75,7 +78,7 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
             classname={classname}
             id={desktopMinsideKnappId}
             ariaLabel={'Min side menyknapp'}
-            brukerNavn={innloggetStatus.name}
+            brukerNavn={brukerNavn}
         />
     );
 
@@ -97,6 +100,7 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
                     isOpen={isOpen}
                     menyLenker={minsideMenyPunkter}
                     dittNavUrl={environment.DITT_NAV_URL}
+                    brukerNavn={brukerNavn}
                 />
             ) : (
                 <Spinner tekstId={'meny-loading'} />

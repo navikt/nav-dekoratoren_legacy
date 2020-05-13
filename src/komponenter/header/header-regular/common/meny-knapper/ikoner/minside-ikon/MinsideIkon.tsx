@@ -1,6 +1,6 @@
 import React from 'react';
-import BEMHelper from 'utils/bem';
 import HamburgerIkon from '../hamburger-ikon/HamburgerIkon';
+import HodeKroppIkon from '../hode-kropp-ikon/HodeKroppIkon';
 import './MinsideIkon.less';
 
 type Props = {
@@ -9,15 +9,10 @@ type Props = {
 };
 
 export const MinsideIkon = ({ isOpen = false, hasMenu }: Props) => {
-    const cls = BEMHelper('minside-meny-ikon');
-
     return (
-        <div className={cls.element('container')}>
+        <div className={'minside-meny-ikon'}>
             {hasMenu && <HamburgerIkon isOpen={isOpen} />}
-            <div className={cls.element('circle-hode', isOpen ? 'open' : '')} />
-            <div
-                className={cls.element('circle-kropp', isOpen ? 'open' : '')}
-            />
+            <HodeKroppIkon isOpen={isOpen} />
         </div>
     );
 };

@@ -16,10 +16,6 @@
         }
     }
 
-    &__innhold-bredde {
-        max-width: 55rem;
-    }
-
     &__knapp-tekst {
         text-align: left;
     }
@@ -44,8 +40,16 @@
     }
 
     &__topp-seksjon {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
         margin: 1.5rem -3rem;
         padding: 1rem 3rem;
+    }
+
+    &__topp-seksjon-right {
+        text-align: right;
     }
 
     &__topp-seksjon-lenke {
