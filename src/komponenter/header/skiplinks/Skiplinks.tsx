@@ -30,9 +30,7 @@ const Skiplinks = () => {
             : desktopHovedmenyKnappId;
         setHovedmenylink(`#${hovedmenyKnappId}`);
 
-        const idSokLink = isMobile
-            ? 'mobil-decorator-sok-toggle'
-            : '';
+        const idSokLink = isMobile ? 'mobil-decorator-sok-toggle' : '';
         setSoklink(`#${idSokLink}`);
     }, [isMobile]);
 
