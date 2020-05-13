@@ -17,14 +17,18 @@
         justify-content: flex-start;
         margin-top: 2rem;
         --num-cols: @bunnseksjon-cols;
-
-        & > * {
-            .col-setup(@bunnseksjon-cols, @bunnseksjon-margin);
-        }
     }
 
     &__bunn-lenke {
-        .lenke-stil();
+        .col-setup(@bunnseksjon-cols, @bunnseksjon-margin);
+        border-color: @navGra60;
+        margin-bottom: 0;
+    }
+
+    &__bunn-lenke-visning {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
 
     &__bunn-lenke-stikkord {
@@ -33,6 +37,7 @@
         list-style-position: inside;
         margin: 0;
         padding: 0;
+        color: black;
 
         li {
             display: inline-block;

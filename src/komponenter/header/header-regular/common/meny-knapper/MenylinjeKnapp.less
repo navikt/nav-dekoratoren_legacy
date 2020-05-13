@@ -12,6 +12,8 @@
     padding: 0;
     border-radius: 0.125em;
 
+    .knapp-focus();
+
     &-visning {
         height: 45px;
         display: flex;
@@ -25,13 +27,6 @@
         outline: 1px black solid;
         outline-offset: -10px -20px;
         cursor: pointer;
-    }
-
-    &:focus {
-        background-color: transparent;
-        color: @navBla;
-        outline: none;
-        box-shadow: 0 0 0 4px @fokusFarge;
     }
 
     @media (min-width: @tabletLimitWidth) {

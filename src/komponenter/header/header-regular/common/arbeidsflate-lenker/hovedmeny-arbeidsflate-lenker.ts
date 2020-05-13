@@ -1,8 +1,9 @@
 import { MenuValue } from 'utils/meny-storage-utils';
-import { arbeidsgiverContextLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker';
-import { personContextLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker';
-import { samarbeidspartnerContextLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker';
+import { arbeidsgiverContextLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { personContextLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { samarbeidspartnerContextLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { EnvironmentState } from 'store/reducers/environment-duck';
+import { valgtbedrift } from '../meny-knapper/minside-knapper/MinsideArbgiverKnapp';
 
 type LenkeData = {
     url: string;
@@ -23,7 +24,7 @@ const privatpersonLenker = (env: EnvironmentState): LenkeData[] => [
 
 const arbeidsgiverLenker = (env: EnvironmentState): LenkeData[] => [
     {
-        url: env.MINSIDE_ARBEIDSGIVER_URL,
+        url: env.MINSIDE_ARBEIDSGIVER_URL + valgtbedrift(),
         lenkeTekstId: 'arbeidsgiver-minside-lenke',
         stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
     },

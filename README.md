@@ -1,58 +1,25 @@
 
 # Nav-dekoratoren ![nav.no logo](./src/ikoner/meny/Navlogo.svg)
+
+![Deploy til prod](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-prod/badge.svg)
+![Deploy til q0](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-q0/badge.svg)
+![Deploy til q1](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-q1/badge.svg)
+![Deploy til q6](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-q6/badge.svg)
                      
 :warning: **OBS! Denne versjonen av header og footer er under arbeid. Kan ikke prodsettes.**
 
 Node.js Express applikasjon med frontend-komponenter i React.<br>
 Appen kjører på NAIS i en docker-container.
 
-
-## Kom i gang
-Hent repoet fra github
-```
-git clone https://github.com/navikt/nav-dekoratoren.git
-```
-Installer nødvendige avhengigheter
-```
-npm install
-```
-Start eksterne tjenester som oidc-provider og mocks
-```
-docker-compose up -d
-```
-Kjør applikasjonen lokalt med hot-reloading
-```
-npm start
-```
-Starter en Node Express / dev - server på <br> http://localhost:8088/dekoratoren
-
-## Manuelt bygg
-
-```
-npm run build-dev (for testing lokalt)
-npm run build (for produksjon)
-```
-
-## Miljø på NAIS
-
-Dekoratøren ligger i  [Q6](https://www-q6.nav.no/dekoratoren/), [Q1](https://www-q1.nav.no/dekoratoren/), [Q0](https://www-q0.nav.no/dekoratoren/) og [Prod](https://www.nav.no/dekoratoren/).<br>
-
-## Parametere
-Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
-
-| Parameter         | Type                                                    | Default              | Forklaring                                                          |
-| ----------------- |---------------------------------------------------------|----------------------| --------------------------------------------------------------------|
-| context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til valgt context                                     |
-| simple            | boolean                                                 | false                | Forenklet header og footer                                          |
-| redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Redirecter brukeren til app etter innlogging fra dekoratøren.       |
-| level             | Level3 \| Level4                                        | Level4               | Krever innlogging basert på definert sikkerhetsnivå                 |
-
-Eksempel:<br>
-[https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3](https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3)
-
 ## Bruk av dekoratøren
 
-Dekoratøren er bakoverkompatibel, slik at eksisterende applikasjoner som benytter dekoratør/:v4 kun endrer URL fra https://appres.nav.no/.... til https://www.nav.no/dekoratoren.
+:information_source: Dekoratøren er bakoverkompatibel; med andre ord vil eksisterende applikasjoner som benytter dekoratør:v4 (https://appres.nav.no/common-html/v4/navno) automatisk få ny dekoratør. 
+
+Den nye dekoratøren vil serveres på følgende ingresser etter prodsetting 13. mai:
+- https://appres.nav.no/common-html/v4/navno
+- https://www.nav.no/dekoratoren/ 
+
+Vi oppfordrer å gå over til nytt endepunkt (https://www.nav.no/dekoratoren/) etter prodsetting ettersom https://appres.nav.no vil bli deprecated på et senere tidspunkt.
 
 Nye applikasjoner kan implementere menyen som følger: 
 
@@ -141,6 +108,48 @@ dekoratoren:
 ```
 [Eksempel i Enonic XP](https://github.com/navikt/nav-enonicxp/blob/IV-843-decorator/docker-compose.yml).
 
+## Parametere
+Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
+
+| Parameter         | Type                                                    | Default              | Forklaring                                                          |
+| ----------------- |---------------------------------------------------------|----------------------| --------------------------------------------------------------------|
+| context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til valgt context                                     |
+| simple            | boolean                                                 | false                | Forenklet header og footer                                          |
+| redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Redirecter brukeren til app etter innlogging fra dekoratøren.       |
+| level             | Level3 \| Level4                                        | Level4               | Krever innlogging basert på definert sikkerhetsnivå                 |
+
+Eksempel:<br>
+[https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3](https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3)
+
+## Miljø på NAIS
+
+Dekoratøren ligger i  [Q6](https://www-q6.nav.no/dekoratoren/), [Q1](https://www-q1.nav.no/dekoratoren/), [Q0](https://www-q0.nav.no/dekoratoren/) og [Prod](https://www.nav.no/dekoratoren/).<br>
+
+## Utvikling - Kom i gang
+Hent repoet fra github
+```
+git clone https://github.com/navikt/nav-dekoratoren.git
+```
+Installer nødvendige avhengigheter
+```
+npm install
+```
+Start eksterne tjenester som oidc-provider og mocks
+```
+docker-compose up -d
+```
+Kjør applikasjonen lokalt med hot-reloading
+```
+npm start
+```
+Starter en Node Express / dev - server på <br> http://localhost:8088/dekoratoren
+
+## Manuelt bygg
+
+```
+npm run build-dev (for testing lokalt)
+npm run build (for produksjon)
+```
 
 ## Henvendelser
 

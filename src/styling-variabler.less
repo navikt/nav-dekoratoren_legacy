@@ -16,9 +16,6 @@
 //slide-out menu common-width
 @mobilemenuwidth: 100%;
 
-//set common max-heigh for buttons and form-elements, to easily align-items on row.
-@maxheight-menuitem: 40px;
-
 @padding-horizontal: 3rem;
 
 @margins-sides-desktop: 3rem;
@@ -47,5 +44,15 @@
     text-decoration: underline;
     &:hover {
         text-decoration: none;
+    }
+}
+
+.knapp-focus() {
+    &:focus {
+        background-color: transparent;
+        color: @navBla;
+        outline: none;
+        box-shadow: 0 0 0 4px @fokusFarge;
+        border-radius: 4px;
     }
 }

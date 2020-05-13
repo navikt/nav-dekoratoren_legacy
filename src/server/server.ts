@@ -4,7 +4,9 @@ import 'isomorphic-fetch';
 require('console-stamp')(console, '[HH:MM:ss.l]');
 import NodeCache from 'node-cache';
 import fetch from 'node-fetch';
-import express from 'express';
+import express, { Request, Response } from 'express';
+const { createMiddleware } = require('@promster/express');
+const { getSummary, getContentType } = require('@promster/express');
 import cookiesMiddleware from 'universal-cookie-express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
@@ -51,6 +53,21 @@ app.use((req, res, next) => {
     res.header('Expires', '-1');
     next();
 });
+
+// Metrics
+app.use(
+    createMiddleware({
+        app,
+        options: {
+            labels: ['app', 'namespace', 'cluster'],
+            getLabelValues: (req: Request, res: Response) => ({
+                app: process.env.NAIS_APP_NAME || 'nav-dekoratoren',
+                namespace: process.env.NAIS_NAMESPACE || 'local',
+                cluster: process.env.NAIS_CLUSTER_NAME || 'local',
+            }),
+        },
+    })
+);
 
 // Express config
 const pathsForTemplate = [
@@ -149,6 +166,12 @@ app.use(
         changeOrigin: true,
     })
 );
+
+app.use(`${appBasePath}/metrics`, (req, res) => {
+    req.statusCode = 200;
+    res.setHeader('Content-Type', getContentType());
+    res.end(getSummary());
+});
 
 app.get(`${appBasePath}/isAlive`, (req, res) => res.sendStatus(200));
 app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));

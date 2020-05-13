@@ -6,9 +6,10 @@ import './SokKnapper.less';
 interface Props {
     writtenInput?: string;
     onReset: () => void;
+    id?: string;
 }
 
-const SokKnapper = ({ writtenInput, onReset }: Props) => {
+const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
     const cls = BEMHelper('sok-knapper');
     return (
         <div className={cls.element('container')}>
@@ -19,6 +20,7 @@ const SokKnapper = ({ writtenInput, onReset }: Props) => {
                         'knapp-avbryt'
                     )}`}
                     onClick={onReset}
+                    id={id ? `${id}-reset` : undefined}
                 >
                     <div className={cls.element('ikon-container')}>
                         <div className={cls.element('reset-line-x')} />
@@ -34,6 +36,7 @@ const SokKnapper = ({ writtenInput, onReset }: Props) => {
                 className={`${cls.element('knapp')} ${cls.element(
                     'knapp-submit'
                 )}`}
+                id={id ? `${id}-submit` : undefined}
             >
                 <div className={cls.element('ikon-container')}>
                     <div className={cls.element('sok-circle')} />

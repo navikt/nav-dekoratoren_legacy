@@ -12,20 +12,24 @@ type Props = {
 
 const EkspanderbarMeny = (props: Props) => {
     const { isOpen, menyKnapp, classname, id, children } = props;
-    const cls = BEMHelper(`ekspanderbar ${classname}`);
+    const cls = BEMHelper('ekspanderbar');
 
     return (
         <>
             {menyKnapp}
-            <div className={cls.element('container')}>
+            <div className={`${cls.element('container')} ${classname}`}>
                 <div
                     className={cls
-                        .element('innhold-wrapper', isOpen ? 'aktive' : '')
+                        .element('innhold-wrapper', isOpen ? 'active' : '')
                         .concat(' ')
                         .concat(cls.element('menuheight'))}
                     id={id}
                 >
-                    <div className={cls.element('innhold')}>{children}</div>
+                    <div className={cls.element('innhold')}>
+                        <div className={cls.element('scroll-wrapper')}>
+                            {children}
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

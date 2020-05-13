@@ -60,6 +60,16 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
                 row: 0,
                 sub: 0,
             })]: desktopSokInputId,
+            [getKbId(KbNavGroup.Sok, {
+                col: 1,
+                row: 0,
+                sub: 0,
+            })]: `${desktopSokInputId}-reset`,
+            [getKbId(KbNavGroup.Sok, {
+                col: 2,
+                row: 0,
+                sub: 0,
+            })]: `${desktopSokInputId}-submit`,
         },
     },
     [KbNavGroup.Varsler]: {

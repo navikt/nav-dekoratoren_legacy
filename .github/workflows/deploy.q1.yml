@@ -1,0 +1,46 @@
+name: Deploy-to-q1
+on:
+  push:
+    tags:
+      - "v*-test"
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Define build environment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo ::set-env name=CI::true
+          echo ::set-env name=IMAGE_REGISTRY::docker.pkg.github.com/$(echo ${GITHUB_REPOSITORY})
+          echo ::set-env name=IMAGE_NAME::$(echo ${GITHUB_REPOSITORY##*/})
+          echo ::set-env name=IMAGE_VERSION::$(echo ${GITHUB_WORKFLOW})-$(echo ${GITHUB_SHA})
+          echo ::set-env name=GITHUB_TOKEN::$(echo ${GITHUB_TOKEN})
+      - uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - name: Docker build and push
+        run: |
+          echo $GITHUB_TOKEN | docker login $IMAGE_REGISTRY -u ${GITHUB_REPOSITORY} --password-stdin
+          docker build -t $IMAGE_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION .
+          docker push $IMAGE_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION
+      - name: Generate nais variables
+        run: |
+          cat > .nais/vars.yaml <<EOF
+          namespace: q1
+          image: $IMAGE_REGISTRY/$IMAGE_NAME
+          version: $IMAGE_VERSION
+          EOF
+      - uses: nais/deploy/actions/deploy@master
+        env:
+          CLUSTER: dev-sbs
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: .nais/dev-sbs/q1.yaml
+          VARS: .nais/vars.yaml

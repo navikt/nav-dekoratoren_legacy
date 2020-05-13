@@ -24,7 +24,7 @@ const ikoner: { [str: string]: string } = {
 
 type Props = {
     varsler: string;
-    rowIndex: number;
+    rowIndex?: number;
 };
 
 const parseIkon = (ikonStr: string) => {
@@ -46,8 +46,8 @@ const parseIkon = (ikonStr: string) => {
 const parseLenke = (
     href: string | undefined,
     children: DomElement[] | undefined,
-    rowIndex: number,
-    subIndex: number
+    rowIndex?: number,
+    subIndex?: number
 ) => {
     const arbeidsflate = useSelector(
         (state: AppState) => state.arbeidsflate.status
@@ -57,11 +57,15 @@ const parseLenke = (
             href={href || ''}
             tabIndex={0}
             className={'varsel-lenke'}
-            id={getKbId(KbNavGroup.Varsler, {
-                col: 0,
-                row: rowIndex,
-                sub: subIndex,
-            })}
+            id={
+                rowIndex !== undefined && subIndex !== undefined
+                    ? getKbId(KbNavGroup.Varsler, {
+                          col: 0,
+                          row: rowIndex,
+                          sub: subIndex,
+                      })
+                    : undefined
+            }
             gaEventArgs={{
                 context: arbeidsflate,
                 category: GACategory.Header,

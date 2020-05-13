@@ -15,17 +15,21 @@ import { HeadElements } from 'komponenter/HeadElements';
 import { changeBetweenDesktopAndMobilView } from 'utils/stickyheader-utils';
 import { positionNavbar } from 'utils/stickyheader-utils';
 import { initializeSticky } from 'utils/stickyheader-utils';
+import { hentVarsler } from 'store/reducers/varselinnboks-duck';
+import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 
 export const desktopBreakpoint: number = 768;
 
 export const Header = () => {
     let arbeidsflate: any = null;
     let hovedmeny: any = null;
-    let headerInfoBanner: any = null;
 
     const dispatch = useDispatch();
     const [cookies, setCookie] = useCookies(['decorator-context']);
     const lang = useSelector((state: AppState) => state.language.language);
+    const erInnlogget = useSelector(
+        (state: AppState) => state.innloggingsstatus.data.authenticated
+    );
     const { PARAMS, APP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
     );
@@ -41,13 +45,9 @@ export const Header = () => {
     const getArbeidsflatNode = () =>
         (arbeidsflate = document.getElementById('arbeidsflate'));
 
-    const getHeaderInfoBanner = () =>
-        (headerInfoBanner = document.getElementById('dekorator-under-arbeid'));
-
     const setMinHeightOnHeader = (
         main: HTMLElement,
-        arbeidsmeny: HTMLElement | null,
-        headerInfo: HTMLElement
+        arbeidsmeny: HTMLElement | null
     ) => {
         const arbeidsflateHeight = arbeidsmeny ? arbeidsmeny.offsetHeight : 44;
         hovedmeny.style.position = 'static';
@@ -56,32 +56,23 @@ export const Header = () => {
         arbeidsmeny
             ? setHeaderoffsetHeight(
                   lang === Language.NORSK || lang === Language.IKKEBESTEMT
-                      ? headerInfo.offsetHeight +
-                            arbeidsflateHeight +
-                            main.offsetHeight
-                      : headerInfo.offsetHeight + main.offsetHeight
+                      ? arbeidsflateHeight + main.offsetHeight
+                      : main.offsetHeight
               )
             : setHeaderoffsetHeight(
                   lang !== Language.NORSK
-                      ? headerInfo.offsetHeight + main.offsetHeight
-                      : headerInfo.offsetHeight +
-                            arbeidsflateHeight +
-                            main.offsetHeight
+                      ? main.offsetHeight
+                      : arbeidsflateHeight + main.offsetHeight
               );
     };
 
     const initStickySelectors = (): void => {
         if (changeBetweenDesktopAndMobilView()) {
             getHovedmenyNode();
-            if (hovedmeny && headerInfoBanner) {
-                setMinHeightOnHeader(hovedmeny, arbeidsflate, headerInfoBanner);
+            if (hovedmeny) {
+                setMinHeightOnHeader(hovedmeny, arbeidsflate);
 
-                initializeSticky(
-                    hovedmeny,
-                    arbeidsflate,
-                    headerInfoBanner,
-                    lang
-                );
+                initializeSticky(hovedmeny, arbeidsflate, lang);
             }
         }
     };
@@ -94,15 +85,14 @@ export const Header = () => {
     useEffect(() => {
         getHovedmenyNode();
         getArbeidsflatNode();
-        getHeaderInfoBanner();
-        if (hovedmeny && headerInfoBanner) {
-            setMinHeightOnHeader(hovedmeny, arbeidsflate, headerInfoBanner);
+        if (hovedmeny) {
+            setMinHeightOnHeader(hovedmeny, arbeidsflate);
             window.onscroll = function stickyheader() {
                 if (hovedmeny) {
                     positionNavbar(hovedmeny);
                 }
             };
-            initializeSticky(hovedmeny, arbeidsflate, headerInfoBanner, lang);
+            initializeSticky(hovedmeny, arbeidsflate, lang);
             window.addEventListener('resize', initStickySelectors);
             return () =>
                 window.removeEventListener('resize', initStickySelectors);
@@ -141,6 +131,16 @@ export const Header = () => {
         checkUrlForLanguage();
     }, []);
 
+    useEffect(() => {
+        hentInnloggingsstatus(APP_BASE_URL)(dispatch);
+    }, []);
+
+    useEffect(() => {
+        if (erInnlogget) {
+            hentVarsler(APP_BASE_URL)(dispatch);
+        }
+    }, [erInnlogget]);
+
     return (
         <Fragment>
             <HeadElements />
@@ -149,9 +149,7 @@ export const Header = () => {
                 style={{ minHeight: headeroffsetHeight }}
             >
                 <div className="head-container " id="stickyhead">
-                    <div className="header-z-wrapper">
-                        <Skiplinks />
-                    </div>
+                    <Skiplinks />
                     <header className="siteheader">
                         {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
                             <SimpleHeader />

@@ -26,11 +26,11 @@ interface Props {
     tabindex?: boolean;
     id?: string;
     isOpen: boolean;
+    dropdownTransitionMs?: number;
 }
 
 const predefinedlistview = 5;
 const mobileCls = BEMHelper('sok');
-const dropdownTransitionDuration = 300;
 
 class Sok extends React.Component<StateProps & Props, InputState> {
     fetchSearchResultThrottled: ReturnType<typeof debounce>;
@@ -59,26 +59,8 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     }
 
     componentDidUpdate(prevProps: Readonly<StateProps & Props>) {
-        if (prevProps !== this.props) {
-            const dropdownElement = document.getElementById(
-                'desktop-sok-dropdown'
-            ) as HTMLElement;
-            if (this.props.isOpen) {
-                if (dropdownElement) {
-                    setTimeout(
-                        () => (dropdownElement.style.maxHeight = '100rem'),
-                        dropdownTransitionDuration
-                    );
-                }
-            } else {
-                if (dropdownElement) {
-                    dropdownElement.style.removeProperty('max-height');
-                    setTimeout(
-                        () => this.setState(this.initialState),
-                        dropdownTransitionDuration
-                    );
-                }
-            }
+        if (!this.props.isOpen && prevProps !== this.props) {
+            setTimeout(this.resetDisplay, this.props.dropdownTransitionMs);
         }
     }
 
@@ -290,7 +272,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
             selectedInput,
             fetchError,
         } = this.state;
-        const { language } = this.props;
+        const { language, id } = this.props;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
         });
@@ -318,9 +300,8 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         setState,
                     }) => (
                         <form
-                            id="sok"
                             role="search"
-                            className="sok"
+                            id={`search-form${id ? `-${id}` : ''}`}
                             onSubmit={this.handleSubmit}
                         >
                             <div className="sok-container">
@@ -335,7 +316,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                             setState({ isOpen: false });
                                             this.resetDisplay();
                                         }}
-                                        id={this.props.id}
+                                        id={id}
                                     />
                                     {loading ? (
                                         <Spinner tekstId={'spinner-sok'} />

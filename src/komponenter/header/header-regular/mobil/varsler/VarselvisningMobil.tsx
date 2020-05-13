@@ -15,11 +15,6 @@ interface OwnProps {
 }
 
 const VarselvisningMobil = (props: OwnProps) => {
-    const dispatch = useDispatch();
-    const lukkVarsler = (event: React.MouseEvent<HTMLAnchorElement>) => {
-        event.preventDefault();
-        dispatch(toggleVarsler());
-    };
     const cls = BEMHelper(props.visningmenyClassname);
     return (
         <section
@@ -28,19 +23,6 @@ const VarselvisningMobil = (props: OwnProps) => {
                 .concat(' ')
                 .concat(cls.element('menuheight'))}
         >
-            <div className={cls.element('varsel-wrapper')}>
-                <Lenke
-                    href="#https//nav.no/Lukk/varsler"
-                    onClick={(event) => lukkVarsler(event)}
-                    tabIndex={props.tabindex ? 0 : -1}
-                >
-                    <Undertittel>
-                        <span className={cls.element('lukk-varsel')}>
-                            <Tekst id="varsler-lukk-knapp" />
-                        </span>
-                    </Undertittel>
-                </Lenke>
-            </div>
             <Innholdstittel className={cls.element('varseltittel')}>
                 <Tekst id="varsler-tittel" />
             </Innholdstittel>

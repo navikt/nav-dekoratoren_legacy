@@ -1,14 +1,14 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import InnloggingsstatusProvider from 'store/providers/Innloggingsstatus';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import { Language } from 'store/reducers/language-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import VarselinnboksProvider from 'store/providers/Varselinnboks';
 import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
 import { LoggInnKnappMobil } from './logg-inn/LoggInnKnappMobil';
 import { VarslerKnapp } from 'komponenter/header/header-regular/common/meny-knapper/varsler-knapp/VarslerKnapp';
+import { MenuValue } from 'utils/meny-storage-utils';
+import { Status } from 'api/api';
 import './MobilMenylinje.less';
 
 const mobilClass = BEMHelper('mobilmeny');
@@ -23,6 +23,22 @@ const stateSelector = (state: AppState) => ({
 
 const MobilMenylinje = ({ language }: Props) => {
     const { innloggingsstatus } = useSelector(stateSelector);
+    const innlogga = innloggingsstatus.data.authenticated;
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.arbeidsflate.status
+    );
+
+    const harLasta =
+        innloggingsstatus.status !== Status.IKKE_STARTET &&
+        innloggingsstatus.status !== Status.PENDING;
+
+    const visInnloggingsKnapp = harLasta && !innlogga;
+
+    const visVarslerDropdown =
+        harLasta && innlogga && arbeidsflate === MenuValue.PRIVATPERSON;
+
+    const visHovedMeny =
+        language === Language.NORSK || language === Language.ENGELSK;
 
     return (
         <nav
@@ -40,19 +56,9 @@ const MobilMenylinje = ({ language }: Props) => {
                         />
                     </div>
                     <div className={mobilClass.element('hoyre-kolonne')}>
-                        {!innloggingsstatus.data.authenticated ? (
-                            <InnloggingsstatusProvider>
-                                <LoggInnKnappMobil />
-                            </InnloggingsstatusProvider>
-                        ) : (
-                            <VarselinnboksProvider>
-                                <VarslerKnapp />
-                            </VarselinnboksProvider>
-                        )}
-                        {language === Language.NORSK ||
-                        language === Language.ENGELSK ? (
-                            <HovedmenyMobil />
-                        ) : null}
+                        {visInnloggingsKnapp && <LoggInnKnappMobil />}
+                        {visVarslerDropdown && <VarslerKnapp />}
+                        {visHovedMeny && <HovedmenyMobil />}
                     </div>
                 </div>
             </div>

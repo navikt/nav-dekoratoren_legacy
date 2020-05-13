@@ -58,11 +58,13 @@ const Undermeny = (props: Props) => {
             >
                 {arbeidsflate}
             </Systemtittel>
-            {hasLevel4Elements && (
+            {hasLevel4Elements ? (
                 <MinsideDropdownLockMsg classname={className} />
-            )}
+            ) : null}
             <ul className={menyClass.element('meny', 'list')}>
                 {lenker.children.map((lenke, index: number) => {
+                    const displayLock =
+                        lenke.displayLock && auth.securityLevel !== '4';
                     return (
                         <Lenke
                             href={genererUrl(XP_BASE_URL, lenke.path)}
@@ -73,7 +75,7 @@ const Undermeny = (props: Props) => {
                                 className={menyClass.className}
                                 classElement="text-element-undermeny"
                             >
-                                {lenke.displayLock && (
+                                {displayLock && (
                                     <div style={lockStyle}>
                                         <Lock height={'18px'} width={'18px'} />
                                     </div>

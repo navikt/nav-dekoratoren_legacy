@@ -3,9 +3,10 @@
 .desktopmeny {
     @margin-mellom: 2rem;
     @margin-mellom-sm: 0.5rem;
+    @maxheight-menuitem: 48px;
 
     width: 100%;
-    padding: 0.5rem 0 1rem;
+    padding: 0.5rem 0;
     border-bottom: 2px solid @header-separator-farge;
 
     .margin-left-section() {
@@ -38,19 +39,12 @@
 
     &__nav-brand {
         order: 1;
-        margin-left: @margins-sides-desktop;
+        margin: 4px 0 4px @margins-sides-desktop;
         @media (max-width: @smallDesktopLimitWidth) {
             margin-left: @margins-sides-desktop-small;
         }
 
-        &:focus {
-            outline: 3px solid @fokusFarge;
-        }
-        svg {
-            &:focus {
-                outline: 0;
-            }
-        }
+        .knapp-focus();
     }
 
     .desktop-hovedmeny__knapp {
@@ -83,7 +77,7 @@
         max-height: @maxheight-menuitem;
     }
 
-    .login-container {
+    .login-knapp {
         order: 7;
         max-height: @maxheight-menuitem;
         margin-right: @margins-sides-desktop;

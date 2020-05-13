@@ -21,7 +21,7 @@
             transition-timing-function: ease-in;
             transition-property: max-height, visibility, opacity;
 
-            &--aktive {
+            &--active {
                 max-height: 60rem;
                 max-width: 100%;
                 visibility: visible;
@@ -35,12 +35,20 @@
 
         &__innhold {
             box-sizing: border-box;
-            padding: 0 @margins-sides-desktop 2rem @margins-sides-desktop;
+            padding: 0 @margins-sides-desktop / 2 2rem @margins-sides-desktop /
+                2;
             overflow: hidden;
             width: 100vw;
             @media (min-width: @desktopLimitWidth) {
                 width: @desktopLimitWidth;
             }
+        }
+
+        &__scroll-wrapper {
+            max-height: 100vh;
+            padding: 0 @margins-sides-desktop / 2;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         &__container {

@@ -11,12 +11,6 @@ import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { VarslerKnapp } from 'komponenter/header/header-regular/common/meny-knapper/varsler-knapp/VarslerKnapp';
 import './VarslerDropdown.less';
 
-const stateSelector = (state: AppState) => ({
-    isOpen: state.dropdownToggles.varsler,
-    innloggetStatus: state.innloggingsstatus.data,
-    arbeidsflate: state.arbeidsflate.status,
-});
-
 const classname = 'desktop-varsler-dropdown';
 export const desktopVarslerKnappId = 'desktop-varsler-dropdown-knapp-id';
 
@@ -25,17 +19,10 @@ type Props = {
 };
 
 export const VarslerDropdown = ({ kbNavMainState }: Props) => {
-    const { isOpen, innloggetStatus, arbeidsflate } = useSelector(
-        stateSelector
+    const isOpen = useSelector(
+        (state: AppState) => state.dropdownToggles.varsler
     );
     useKbNavSub(configForNodeGroup[KbNavGroup.Varsler], kbNavMainState, isOpen);
-
-    if (
-        !innloggetStatus.authenticated ||
-        arbeidsflate !== MenuValue.PRIVATPERSON
-    ) {
-        return null;
-    }
 
     return (
         <EkspanderbarMeny
