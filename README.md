@@ -34,7 +34,7 @@ Vis [implementasjon](https://github.com/navikt/personopplysninger/blob/master/se
 **Obs:** Cache anbefales
 
 ### Eksempel 2
-:warning: **Dette eksempelet benytter CSR (Client-Side-Rendering) av dekoratøren, noe som kan påvirke ytelsen**
+:warning: **Benytter CSR (Client-Side-Rendering) av dekoratøren, noe som kan påvirke ytelsen.**
 
 Sett inn 5 linjer HTML: <br>
 ```
