@@ -15,23 +15,23 @@ export const ledetekster: { [key: string]: string } = {
     'footer-del-skjerm-en': 'Share screen with your counsellor',
     'footer-del-skjerm-se': 'Del skjerm med veileder',
     'footer-stikkord-privatperson':
-        'Utbetalingsoversikt, saksoversikt, sykefravær',
+        'Arbeidsledig, tiltak, familie, helse, hjelpemidler, sosiale tjenester, pensjon, kurs, til eller fra Norge m.m.',
     'footer-stikkord-privatperson-en':
-        'Utbetalingsoversikt, saksoversikt, sykefravær',
+        'Arbeidsledig, tiltak, familie, helse, hjelpemidler, sosiale tjenester, pensjon, kurs, til eller fra Norge m.m.',
     'footer-stikkord-privatperson-se':
-        'Utbetalingsoversikt, saksoversikt, sykefravær',
+        'Arbeidsledig, tiltak, familie, helse, hjelpemidler, sosiale tjenester, pensjon, kurs, til eller fra Norge m.m.',
     'footer-stikkord-arbeidsgiver':
-        'Tjenester og skjemaer, rekruttering, oppfølging, inkluderende arbeidsliv, hjelpemidler',
+        'Tjenester, skjemaer, rekruttering, inkludering, oppfølging sykmeldte, hjelpemidler, selvstendig næringsdrivende m.m.',
     'footer-stikkord-arbeidsgiver-en':
-        'Tjenester og skjemaer, rekruttering, oppfølging, inkluderende arbeidsliv, hjelpemidler',
+        'Tjenester, skjemaer, rekruttering, inkludering, oppfølging sykmeldte, hjelpemidler, selvstendig næringsdrivende m.m.',
     'footer-stikkord-arbeidsgiver-se':
-        'Tjenester og skjemaer, rekruttering, oppfølging, inkluderende arbeidsliv, hjelpemidler',
+        'Tjenester, skjemaer, rekruttering, inkludering, oppfølging sykmeldte, hjelpemidler, selvstendig næringsdrivende m.m.',
     'footer-stikkord-samarbeidspartner':
-        'Kommuner, utdanningsområdet, psykisk helse, hjelpemidler, leger og behandlere',
+        'Leger/behandlere, hjelpemidler, tilskudd, skjema tiltaksarrangører, arbeidslivskriminalitet, for kommunen m.m.',
     'footer-stikkord-samarbeidspartner-en':
-        'Kommuner, utdanningsområdet, psykisk helse, hjelpemidler, leger og behandlere',
+        'Leger/behandlere, hjelpemidler, tilskudd, skjema tiltaksarrangører, arbeidslivskriminalitet, for kommunen m.m.',
     'footer-stikkord-samarbeidspartner-se':
-        'Kommuner, utdanningsområdet, psykisk helse, hjelpemidler, leger og behandlere',
+        'Leger/behandlere, hjelpemidler, tilskudd, skjema tiltaksarrangører, arbeidslivskriminalitet, for kommunen m.m.',
     'footer-til-toppen': 'Til toppen',
     'footer-til-toppen-en': 'To the top',
     'footer-til-toppen-se': 'Til toppen',
@@ -178,44 +178,44 @@ export const ledetekster: { [key: string]: string } = {
     'samarbeidspartner-side-lenke-en': 'Samarbeidspartner',
     'samarbeidspartner-side-lenke-se': 'Samarbeidspartner',
     'meny-bunnlenke-minside-stikkord':
-        'Utbetalingsoversikt|Saksoversikt|Sykefravær',
+        'Dine saker, utbetalinger, meldinger, meldekort, aktivitetsplan, personopplysninger og flere tjenester',
     'meny-bunnlenke-minside-stikkord-en':
-        'Utbetalingsoversikt|Saksoversikt|Sykefravær',
+        'Dine saker, utbetalinger, meldinger, meldekort, aktivitetsplan, personopplysninger og flere tjenester',
     'meny-bunnlenke-minside-stikkord-se':
-        'Utbetalingsoversikt|Saksoversikt|Sykefravær',
+        'Dine saker, utbetalinger, meldinger, meldekort, aktivitetsplan, personopplysninger og flere tjenester',
     'meny-bunnlenke-arbeidsgiver-stikkord':
-        'Tjenester og skjemaer|Rekruttering|Oppfølging|Inkluderende arbeidsliv|Hjelpemidler',
+        'Dine sykmeldte, rekruttering, digitale skjemaer',
     'meny-bunnlenke-arbeidsgiver-stikkord-en':
-        'Tjenester og skjemaer|Rekruttering|Oppfølging|Inkluderende arbeidsliv|Hjelpemidler',
+        'Dine sykmeldte, rekruttering, digitale skjemaer',
     'meny-bunnlenke-arbeidsgiver-stikkord-se':
-        'Tjenester og skjemaer|Rekruttering|Oppfølging|Inkluderende arbeidsliv|Hjelpemidler',
+        'Dine sykmeldte, rekruttering, digitale skjemaer',
     'meny-bunnlenke-samarbeidspartner-stikkord':
-        'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
+        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
     'meny-bunnlenke-samarbeidspartner-stikkord-en':
-        'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
+        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
     'meny-bunnlenke-samarbeidspartner-stikkord-se':
-        'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
+        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
     'meny-loading': 'Laster meny-innhold...',
     'meny-loading-en': 'Laster meny-innhold...',
     'meny-loading-se': 'Laster meny-innhold...',
     'arbeidsflate-stikkord-om-privatperson':
-        'Arbeid|Familie|Pensjon|Hjelpemidler|Flere Tema',
+        'Arbeidssøker, syk, foreldre og barn, pensjon, hjelpemidler, sosiale tjenester, internasjonalt',
     'arbeidsflate-stikkord-om-privatperson-en':
-        'Work|Family|Pension|aids|More Topics',
+        'Arbeidssøker, syk, foreldre og barn, pensjon, hjelpemidler, sosiale tjenester, internasjonalt',
     'arbeidsflate-stikkord-om-privatperson-se':
-        'Arbeid|Familie|Pensjon|Hjelpemidler|Flere Tema',
+        'Arbeidssøker, syk, foreldre og barn, pensjon, hjelpemidler, sosiale tjenester, internasjonalt',
     'arbeidsflate-stikkord-om-arbeidsgiver':
-        'Tjenester Og Skjemaer|Rekruttering|Oppfølging|Inkluderende Arbeidsliv| Hjelpemidler',
+        'Tjenester, skjemaer, rekruttere, inkludere, sykmeldte, selvstendig næringsdrivende',
     'arbeidsflate-stikkord-om-arbeidsgiver-en':
-        'Services And Forms|Recruitment|Follow-up|Inclusive Employment|Aids',
+        'Tjenester, skjemaer, rekruttere, inkludere, sykmeldte, selvstendig næringsdrivende',
     'arbeidsflate-stikkord-om-arbeidsgiver-se':
-        'Tjenester Og Skjemaer|Rekruttering|Oppfølging|Inkluderende Arbeidsliv| Hjelpemidler',
+        'Tjenester, skjemaer, rekruttere, inkludere, sykmeldte, selvstendig næringsdrivende',
     'arbeidsflate-stikkord-om-samarbeidspartner':
-        'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
+        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
     'arbeidsflate-stikkord-om-samarbeidspartner-en':
-        'Municipalities|Education Area|Mental Health|Aids|Doctors And Therapists',
+        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
     'arbeidsflate-stikkord-om-samarbeidspartner-se':
-        'Kommuner|Utdanningsområdet|Psykisk helse|Hjelpemidler|Leger og behandlere',
+        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
     'lock-msg-infotekst':
         'Menypunkt med hengelås sender deg til ny innlogging. Disse tjenestene krever BankID, Buypass eller Commfides.',
     'feil-sok-fetch': 'Feil mot søketjeneste.',
