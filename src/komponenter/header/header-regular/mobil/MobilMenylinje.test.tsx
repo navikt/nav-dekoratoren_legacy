@@ -20,14 +20,6 @@ const getWrapper = (store: Store) =>
         </Provider>
     );
 
-store.dispatch({
-    type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
-    status: Status.OK,
-    data: {
-        authenticated: false,
-    },
-});
-
 describe('<MobilMenylinje /> sjekk at komponent finner logo', () => {
     it('Skal rendre <NavLogoRod> komponent', () => {
         expect(getWrapper(store).find(NavLogoRod)).toHaveLength(1);
@@ -35,6 +27,14 @@ describe('<MobilMenylinje /> sjekk at komponent finner logo', () => {
 });
 
 describe('<LoggInnKnappMobil/> sjekk at komponent finner logg-inn knapp', () => {
+    store.dispatch({
+        type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
+        status: Status.OK,
+        data: {
+            authenticated: false,
+        },
+    });
+
     it('Skal rendre <LoggInnKnappMobil/> komponent', () => {
         const wrapper = getWrapper(store);
         expect(wrapper.find(LoggInnKnappMobil)).toHaveLength(1);
