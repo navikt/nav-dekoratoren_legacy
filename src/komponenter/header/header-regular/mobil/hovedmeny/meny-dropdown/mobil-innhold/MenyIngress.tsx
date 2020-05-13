@@ -32,7 +32,6 @@ const MenyIngress = ({
             <Undertittel>{textToLowercase}</Undertittel>
             <Lenke
                 href={lenke[0].url ? lenke[0].url : 'https://nav.no'}
-                onClick={(event) => event.preventDefault()}
                 tabIndex={tabindex ? 0 : -1}
             >
                 Til forsiden
