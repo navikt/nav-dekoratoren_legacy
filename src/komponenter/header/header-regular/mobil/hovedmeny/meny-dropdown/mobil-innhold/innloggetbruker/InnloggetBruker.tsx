@@ -32,7 +32,7 @@ const InnloggetBruker = (props: Props) => {
                 </Undertittel>
             </div>
             <div className={cls.element('bruker')}>
-                <Ingress>{innlogget.data.name}</Ingress>
+                <Ingress>{innlogget.data.name.toLowerCase()}</Ingress>
             </div>
             <button
                 className={cls.element('loggut')}

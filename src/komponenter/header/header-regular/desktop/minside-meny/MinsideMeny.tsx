@@ -61,6 +61,8 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
         );
     }
 
+    const brukerNavn = innloggetStatus.name.toLowerCase();
+
     const knapp = (
         <MinsidePersonKnapp
             onClick={() => {
@@ -75,7 +77,7 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
             classname={classname}
             id={desktopMinsideKnappId}
             ariaLabel={'Min side menyknapp'}
-            brukerNavn={innloggetStatus.name}
+            brukerNavn={brukerNavn}
         />
     );
 
@@ -97,6 +99,7 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
                     isOpen={isOpen}
                     menyLenker={minsideMenyPunkter}
                     dittNavUrl={environment.DITT_NAV_URL}
+                    brukerNavn={brukerNavn}
                 />
             ) : (
                 <Spinner tekstId={'meny-loading'} />
