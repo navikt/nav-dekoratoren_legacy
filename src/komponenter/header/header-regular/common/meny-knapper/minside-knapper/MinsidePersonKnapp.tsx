@@ -1,7 +1,6 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
 import MinsideIkon from '../ikoner/minside-ikon/MinsideIkon';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import MenylinjeKnapp from '../MenylinjeKnapp';
 import './MinsideKnapper.less';
@@ -29,12 +28,20 @@ export const MinsidePersonKnapp = (props: Props) => {
         >
             <MinsideIkon isOpen={isOpen} hasMenu={true} />
             <div className={cls.element('knapp-tekst')}>
-                <Normaltekst className={cls.element('knapp-tekst-topp')}>
+                <div
+                    className={`${cls.element('knapp-tekst-topp')} ${
+                        isOpen ? cls.element('knapp-tekst-topp', 'open') : ''
+                    }`}
+                >
                     <Tekst id={'person-minside-lenke'} />
-                </Normaltekst>
-                <Undertekst className={cls.element('knapp-tekst-bunn')}>
+                </div>
+                <div
+                    className={`${cls.element('knapp-tekst-bunn')} ${
+                        isOpen ? cls.element('knapp-tekst-bunn', 'open') : ''
+                    }`}
+                >
                     {brukerNavn}
-                </Undertekst>
+                </div>
             </div>
         </MenylinjeKnapp>
     );
