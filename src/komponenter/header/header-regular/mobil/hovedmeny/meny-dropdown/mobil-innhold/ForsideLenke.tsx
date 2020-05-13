@@ -19,23 +19,26 @@ const ForsideLenke = (props: Props) => {
     const { DITT_NAV_URL, MINSIDE_ARBEIDSGIVER_URL } = useSelector(
         (state: AppState) => state.environment
     );
+
+    if (!props.erInnlogget) {
+        return null;
+    }
     return (
         <>
-            {props.arbeidsflate === MenuValue.PRIVATPERSON &&
-                props.erInnlogget && (
-                    <div className={cls.className}>
-                        <Undertittel className={cls.element('ingress')}>
-                            <Tekst id="person-minside-lenke" />
-                        </Undertittel>
-                        <Lenke
-                            href={DITT_NAV_URL}
-                            className={cls.element('lenke')}
-                            tabIndex={props.tabindex ? 0 : -1}
-                        >
-                            <Tekst id="ga-til-min-side-mobil" />
-                        </Lenke>
-                    </div>
-                )}
+            {props.arbeidsflate === MenuValue.PRIVATPERSON && (
+                <div className={cls.className}>
+                    <Undertittel className={cls.element('ingress')}>
+                        <Tekst id="person-minside-lenke" />
+                    </Undertittel>
+                    <Lenke
+                        href={DITT_NAV_URL}
+                        className={cls.element('lenke')}
+                        tabIndex={props.tabindex ? 0 : -1}
+                    >
+                        <Tekst id="ga-til-min-side-mobil" />
+                    </Lenke>
+                </div>
+            )}
             {props.arbeidsflate === MenuValue.ARBEIDSGIVER && (
                 <div className={cls.className}>
                     <Undertittel className={cls.element('ingress')}>
