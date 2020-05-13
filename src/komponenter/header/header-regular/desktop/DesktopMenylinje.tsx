@@ -7,6 +7,9 @@ import { MinsideMeny } from './minside-meny/MinsideMeny';
 import { VarslerDropdown } from './varsler/VarslerDropdown';
 import { LoggInnKnappDesktop } from './logg-inn/LoggInnKnappDesktop';
 import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
+import { MenuValue } from 'utils/meny-storage-utils';
+import { useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
 import './DesktopMenylinje.less';
 
 export const desktopHeaderLogoId = 'desktop-header-logo-id';
@@ -14,6 +17,16 @@ export const desktopHeaderLogoId = 'desktop-header-logo-id';
 const DesktopMenylinje = () => {
     const cls = BEMHelper('desktopmeny');
     const kbNavMainState = useKbNavMain();
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.arbeidsflate.status
+    );
+
+    const innlogga = useSelector(
+        (state: AppState) => state.innloggingsstatus.data.authenticated
+    );
+
+    const visVarslerDropdown =
+        innlogga && arbeidsflate === MenuValue.PRIVATPERSON;
 
     return (
         <nav className={cls.className} aria-label="Hovedmeny" id="hovedmeny">
@@ -27,7 +40,9 @@ const DesktopMenylinje = () => {
                 <HovedmenyDesktop kbNavMainState={kbNavMainState} />
                 <SokDropdown kbNavMainState={kbNavMainState} />
                 <span className={cls.element('spacer')} />
-                <VarslerDropdown kbNavMainState={kbNavMainState} />
+                {visVarslerDropdown && (
+                    <VarslerDropdown kbNavMainState={kbNavMainState} />
+                )}
                 <MinsideMeny kbNavMainState={kbNavMainState} />
                 <LoggInnKnappDesktop />
             </div>
