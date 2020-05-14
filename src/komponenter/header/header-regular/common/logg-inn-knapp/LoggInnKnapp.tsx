@@ -5,25 +5,23 @@ import { GACategory, gaEvent } from 'utils/google-analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { MenuValue } from 'utils/meny-storage-utils';
-import 'komponenter/header/header-regular/common/logg-inn/LoggInn.less';
-
-export type LoggInnKnappProps = {
-    handleButtonClick: () => string;
-    tekst: string;
-};
+import KnappBase from 'nav-frontend-knapper';
+import Undertittel from 'nav-frontend-typografi/lib/undertittel';
+import './LoggInnKnapp.less';
 
 type Props = {
-    Knapp: (props: LoggInnKnappProps) => JSX.Element;
+    type?: 'standard' | 'hoved' | 'fare' | 'flat';
+    id?: string;
 };
 
-export const LoggInn = ({ Knapp }: Props) => {
+export const LoggInnKnapp = ({ type, id }: Props) => {
     const { environment } = useSelector((state: AppState) => state);
     const { language } = useSelector((state: AppState) => state.language);
     const { authenticated } = useSelector(
-        (state: AppState) => state.innloggingsstatus.data
+        (state: AppState) => state.innloggingsstatus.data,
     );
     const arbeidsflate = useSelector(
-        (state: AppState) => state.arbeidsflate.status
+        (state: AppState) => state.arbeidsflate.status,
     );
 
     const handleButtonClick = () => {
@@ -51,10 +49,23 @@ export const LoggInn = ({ Knapp }: Props) => {
 
     const knappetekst = finnTekst(
         authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp',
-        language
+        language,
     );
 
-    return <Knapp handleButtonClick={handleButtonClick} tekst={knappetekst} />;
+    return (
+        <div
+            className={'login-knapp-container'}
+        >
+            <KnappBase
+                className={'login-knapp'}
+                onClick={handleButtonClick}
+                id={id}
+                type={type}
+            >
+                <Undertittel>{knappetekst}</Undertittel>
+            </KnappBase>
+        </div>
+    );
 };
 
-export default LoggInn;
+export default LoggInnKnapp;

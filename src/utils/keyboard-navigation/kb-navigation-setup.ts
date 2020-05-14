@@ -15,8 +15,8 @@ import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from 'api/api';
 import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
-import { desktopLoginKnappId } from 'komponenter/header/header-regular/desktop/logg-inn/LoggInnKnappDesktop';
 import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
+import { desktopLoginKnappId } from 'komponenter/header/header-regular/desktop/DesktopMenylinje';
 
 export type KbNavConfig = {
     group: KbNavGroup;

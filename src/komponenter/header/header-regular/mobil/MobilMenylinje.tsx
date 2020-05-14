@@ -5,10 +5,10 @@ import { Language } from 'store/reducers/language-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
-import { LoggInnKnappMobil } from './logg-inn/LoggInnKnappMobil';
 import { VarslerKnapp } from 'komponenter/header/header-regular/common/meny-knapper/varsler-knapp/VarslerKnapp';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Status } from 'api/api';
+import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn-knapp/LoggInnKnapp';
 import './MobilMenylinje.less';
 
 const mobilClass = BEMHelper('mobilmeny');
@@ -16,6 +16,7 @@ const mobilClass = BEMHelper('mobilmeny');
 interface Props {
     language: Language;
 }
+
 const stateSelector = (state: AppState) => ({
     innloggingsstatus: state.innloggingsstatus,
     visVarsel: state.dropdownToggles.varsler,
@@ -25,7 +26,7 @@ const MobilMenylinje = ({ language }: Props) => {
     const { innloggingsstatus } = useSelector(stateSelector);
     const innlogga = innloggingsstatus.data.authenticated;
     const arbeidsflate = useSelector(
-        (state: AppState) => state.arbeidsflate.status
+        (state: AppState) => state.arbeidsflate.status,
     );
 
     const harLasta =
@@ -56,7 +57,7 @@ const MobilMenylinje = ({ language }: Props) => {
                         />
                     </div>
                     <div className={mobilClass.element('hoyre-kolonne')}>
-                        {visInnloggingsKnapp && <LoggInnKnappMobil />}
+                        {visInnloggingsKnapp && <LoggInnKnapp type={'flat'} />}
                         {visVarslerDropdown && <VarslerKnapp />}
                         {visHovedMeny && <HovedmenyMobil />}
                     </div>

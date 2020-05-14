@@ -1,0 +1,52 @@
+@import '../../../../../styling-variabler.less';
+
+.login-knapp() {
+    box-sizing: border-box;
+    text-transform: none;
+    letter-spacing: initial;
+    font: initial;
+
+    @media (min-width: @tabletLimitWidth) {
+        padding: 0.625rem 1rem;
+        font-size: 20px;
+    }
+
+    @media (max-width: @tabletLimitWidth) {
+        padding: 0.5rem 1rem;
+        margin-left: 3px;
+    }
+
+    @media (max-width: @minimumMobilWidth) {
+        padding: 0.5rem 0.5rem;
+    }
+}
+
+.login-knapp.knapp {
+    all: unset;
+    .knapp;
+    .login-knapp();
+}
+
+.login-knapp.knapp--standard {
+    all: unset;
+    .knapp;
+    .login-knapp();
+}
+
+.login-knapp.knapp--flat {
+    all: unset;
+    .knapp--flat;
+    .login-knapp();
+}
+
+.login-knapp.knapp--fare {
+    all: unset;
+    .knapp--fare;
+    .login-knapp();
+}
+
+.login-knapp.knapp--hoved {
+    all: unset;
+    .knapp--hoved;
+    .login-knapp();
+}

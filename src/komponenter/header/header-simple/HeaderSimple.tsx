@@ -2,7 +2,7 @@ import React from 'react';
 import BEMHelper from 'utils/bem';
 import Navlogo from 'ikoner/meny/Navlogo';
 import Navn from './navn/Navn';
-import { LoggInnKnappMobil } from 'komponenter/header/header-regular/mobil/logg-inn/LoggInnKnappMobil';
+import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn-knapp/LoggInnKnapp';
 import './HeaderSimple.less';
 
 export const SimpleHeader = () => {
@@ -14,7 +14,7 @@ export const SimpleHeader = () => {
                 <Navlogo className={cls.element('logo')} viewIndex={true} />
                 <div className={cls.element('right')}>
                     <Navn />
-                    <LoggInnKnappMobil />
+                    <LoggInnKnapp />
                 </div>
             </div>
         </div>
