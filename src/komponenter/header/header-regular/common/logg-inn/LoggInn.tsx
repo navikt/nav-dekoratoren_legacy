@@ -38,8 +38,6 @@ export const LoggInn = ({ Knapp }: Props) => {
                 : `${LOGIN_URL}/login?redirect=${DITT_NAV_URL}`
         }&level=${PARAMS.LEVEL}`;
 
-        console.log(loginUrl);
-
         gaEvent({
             context: arbeidsflate,
             category: GACategory.Header,
