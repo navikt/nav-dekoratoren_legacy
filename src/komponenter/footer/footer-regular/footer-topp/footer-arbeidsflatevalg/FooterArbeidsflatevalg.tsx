@@ -107,7 +107,7 @@ const FooterArbeidsflatevalg = () => {
                                                 />
                                             </Undertittel>
                                             <Tekst
-                                                id={lenke.footerStikkordId}
+                                                id={lenke.stikkordId}
                                             />
                                         </div>
                                     </Lenkepanel>

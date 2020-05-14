@@ -56,13 +56,12 @@
         @theta: 45deg;
         @transition-props: all 0.4s ease-in-out;
         text-transform: capitalize;
-        transform: rotateZ(@theta) translateX(-16rem);
+        transform: rotateZ(@theta) translateX(-16rem) scale(0.8);
         transition: @transition-props;
         opacity: 0;
         color: @navBla;
 
         p {
-            .typo-undertekst;
             transition: @transition-props;
             transform: rotateZ(-@theta);
         }
@@ -73,7 +72,6 @@
             color: black;
 
             p {
-                .typo-normal;
                 transform: none;
             }
         }
