@@ -42,21 +42,20 @@ export const showContextMenu = (
     cookieLanguage: Language,
     urlLanguage: Language
 ) => {
-    // Overstyr dersom språk er satt eksplisitt
-    if (paramLanguage !== Language.IKKEBESTEMT) {
-        return paramLanguage === Language.NORSK;
-    } else {
+    if (urlLanguage === Language.IKKEBESTEMT) {
+        // Overstyr dersom språk er satt eksplisitt
+        if (paramLanguage !== Language.IKKEBESTEMT) {
+            return paramLanguage === Language.NORSK;
+        }
+
         // Sjekk om cookien er definert
         if (cookieLanguage !== Language.IKKEBESTEMT) {
             return cookieLanguage === Language.NORSK;
-        } else {
-            // Vis menyen ved oppstart
-            if (urlLanguage === Language.IKKEBESTEMT) {
-                return true;
-            } else {
-                // Vis meny dersom url ikke innholder /en eller /se
-                return urlLanguage === Language.NORSK;
-            }
         }
+
+        // Vis menyen ved oppstart
+        return true;
+    } else {
+        return urlLanguage === Language.NORSK;
     }
 };
