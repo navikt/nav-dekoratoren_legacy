@@ -5,12 +5,16 @@ import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
 
 import Tekst from 'tekster/finn-tekst';
-import { arbeidsflateLenker } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
-import { ArbeidsflateLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import {
+    ArbeidsflateLenke,
+    arbeidsflateLenker,
+} from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { AppState } from 'store/reducers';
 import { Language } from 'store/reducers/language-duck';
-import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import {
+    cookieOptions,
+    settArbeidsflate,
+} from 'store/reducers/arbeidsflate-duck';
 import { GACategory, gaEvent } from 'utils/google-analytics';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { erNavDekoratoren } from 'utils/Environment';
@@ -26,7 +30,7 @@ const FooterArbeidsflatevalg = () => {
     const dispatch = useDispatch();
     const [, setCookie] = useCookies(['decorator-context']);
     const { arbeidsflate, language } = useSelector(stateSelector);
-    const { XP_BASE_URL, COOKIES } = useSelector(
+    const { XP_BASE_URL, COOKIES, PARAMS } = useSelector(
         (state: AppState) => state.environment
     );
 
@@ -49,10 +53,12 @@ const FooterArbeidsflatevalg = () => {
     }, [arbeidsflate]);
 
     const showContextMenu =
-        (language === Language.IKKEBESTEMT &&
-            COOKIES.LANGUAGE === Language.NORSK) ||
-        language === Language.NORSK;
-
+        PARAMS.LANGUAGE !== Language.IKKEBESTEMT
+            ? PARAMS.LANGUAGE === Language.NORSK
+            : COOKIES.LANGUAGE !== Language.IKKEBESTEMT
+            ? COOKIES.LANGUAGE === Language.NORSK
+            : PARAMS.LANGUAGE === Language.IKKEBESTEMT ||
+              language === Language.NORSK;
     return (
         <>
             {showContextMenu ? (

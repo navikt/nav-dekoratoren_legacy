@@ -120,7 +120,11 @@ export const Header = () => {
 
     // Change language
     const checkUrlForLanguage = () => {
-        const language = getLanguageFromUrl();
+        const language =
+            PARAMS.LANGUAGE === Language.IKKEBESTEMT
+                ? getLanguageFromUrl()
+                : PARAMS.LANGUAGE;
+
         const action = languageDuck.actionCreator({ language });
         setCookie('decorator-language', language, cookieOptions);
         dispatch(action);

@@ -7,13 +7,18 @@ import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
 import DesktopMenylinje from './desktop/DesktopMenylinje';
 
 export const RegularHeader = () => {
-    const { COOKIES } = useSelector((state: AppState) => state.environment);
+    const { COOKIES, PARAMS } = useSelector(
+        (state: AppState) => state.environment
+    );
     const language = useSelector((state: AppState) => state.language.language);
 
     const showContextMenu =
-        (language === Language.IKKEBESTEMT &&
-            COOKIES.LANGUAGE === Language.NORSK) ||
-        language === Language.NORSK;
+        PARAMS.LANGUAGE !== Language.IKKEBESTEMT
+            ? PARAMS.LANGUAGE === Language.NORSK
+            : COOKIES.LANGUAGE !== Language.IKKEBESTEMT
+            ? COOKIES.LANGUAGE === Language.NORSK
+            : PARAMS.LANGUAGE === Language.IKKEBESTEMT ||
+              language === Language.NORSK;
 
     return (
         <Fragment>
