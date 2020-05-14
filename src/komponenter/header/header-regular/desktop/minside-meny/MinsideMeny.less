@@ -53,28 +53,7 @@
     }
 
     &__brukernavn {
-        @theta: 45deg;
-        @transition-props: all 0.4s ease-in-out;
         text-transform: capitalize;
-        transform: rotateZ(@theta) translateX(-16rem) scale(0.8);
-        transition: @transition-props;
-        opacity: 0;
-        color: @navBla;
-
-        p {
-            transition: @transition-props;
-            transform: rotateZ(-@theta);
-        }
-
-        &--open {
-            transform: none;
-            opacity: 1;
-            color: black;
-
-            p {
-                transform: none;
-            }
-        }
     }
 
     &__topp-seksjon-lenke {
