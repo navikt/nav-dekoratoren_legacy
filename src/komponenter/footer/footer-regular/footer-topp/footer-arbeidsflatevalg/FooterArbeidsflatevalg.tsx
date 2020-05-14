@@ -3,17 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
-
 import Tekst from 'tekster/finn-tekst';
-import {
-    ArbeidsflateLenke,
-    arbeidsflateLenker,
-} from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { arbeidsflateLenker } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { ArbeidsflateLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { AppState } from 'store/reducers';
-import {
-    cookieOptions,
-    settArbeidsflate,
-} from 'store/reducers/arbeidsflate-duck';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { GACategory, gaEvent } from 'utils/google-analytics';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { erNavDekoratoren, showContextMenu } from 'utils/Environment';
