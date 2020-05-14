@@ -4,6 +4,7 @@ import { finnTekst } from 'tekster/finn-tekst';
 import { GACategory, gaEvent } from 'utils/google-analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { MenuValue } from 'utils/meny-storage-utils';
 import 'komponenter/header/header-regular/common/logg-inn/LoggInn.less';
 
 export type LoggInnKnappProps = {
@@ -27,10 +28,13 @@ export const LoggInn = ({ Knapp }: Props) => {
 
     const handleButtonClick = () => {
         const { PARAMS, LOGIN_URL, DITT_NAV_URL, LOGOUT_URL } = environment;
+        const { MINSIDE_ARBEIDSGIVER_URL } = environment;
         const appUrl = location.origin + location.pathname;
         const loginUrl = `${
             PARAMS.REDIRECT_TO_APP || erNavDekoratoren()
                 ? `${LOGIN_URL}/login?redirect=${appUrl}`
+                : arbeidsflate === MenuValue.ARBEIDSGIVER
+                ? `${LOGIN_URL}/login?redirect=${MINSIDE_ARBEIDSGIVER_URL}`
                 : `${LOGIN_URL}/login?redirect=${DITT_NAV_URL}`
         }&level=${PARAMS.LEVEL}`;
 
