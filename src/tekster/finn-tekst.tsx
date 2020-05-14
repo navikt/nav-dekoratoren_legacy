@@ -7,12 +7,20 @@ import { Language } from 'store/reducers/language-duck';
 export function finnTekst(
     id: string,
     urlLanguage: Language,
-    sessionLanguage?: Language
+    sessionLanguage?: Language,
+    paramLanguage?: Language
 ): string {
     let language = urlLanguage;
 
-    if (urlLanguage === Language.IKKEBESTEMT && sessionLanguage) {
-        language = sessionLanguage;
+    // Override language
+    if (urlLanguage === Language.IKKEBESTEMT) {
+        if (sessionLanguage && sessionLanguage !== Language.IKKEBESTEMT) {
+            language = sessionLanguage;
+        }
+
+        if (paramLanguage && paramLanguage !== Language.IKKEBESTEMT) {
+            language = paramLanguage;
+        }
     }
 
     // Correct language
@@ -51,7 +59,8 @@ interface Props {
 const Tekst = ({ id }: Props) => {
     const { language } = useSelector((state: AppState) => state.language);
     const { COOKIES } = useSelector((state: AppState) => state.environment);
-    return <>{finnTekst(id, language, COOKIES.LANGUAGE)}</>;
+    const { PARAMS } = useSelector((state: AppState) => state.environment);
+    return <>{finnTekst(id, language, COOKIES.LANGUAGE, PARAMS.LANGUAGE)}</>;
 };
 
 export default Tekst;

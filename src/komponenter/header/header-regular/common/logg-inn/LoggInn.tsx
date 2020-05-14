@@ -18,7 +18,14 @@ type Props = {
 
 export const LoggInn = ({ Knapp }: Props) => {
     const { environment } = useSelector((state: AppState) => state);
-    const { language } = useSelector((state: AppState) => state.language);
+    const { COOKIES, PARAMS } = useSelector(
+        (state: AppState) => state.environment
+    );
+    const urlLanguage = useSelector(
+        (state: AppState) => state.language.language
+    );
+    const sessionLanguage = COOKIES.LANGUAGE;
+    const paramLanguage = COOKIES.LANGUAGE;
     const { authenticated } = useSelector(
         (state: AppState) => state.innloggingsstatus.data
     );
@@ -27,7 +34,7 @@ export const LoggInn = ({ Knapp }: Props) => {
     );
 
     const handleButtonClick = () => {
-        const { PARAMS, LOGIN_URL, DITT_NAV_URL, LOGOUT_URL } = environment;
+        const { LOGIN_URL, DITT_NAV_URL, LOGOUT_URL } = environment;
         const { MINSIDE_ARBEIDSGIVER_URL } = environment;
         const appUrl = location.origin + location.pathname;
         const loginUrl = `${
@@ -51,7 +58,9 @@ export const LoggInn = ({ Knapp }: Props) => {
 
     const knappetekst = finnTekst(
         authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp',
-        language
+        urlLanguage,
+        sessionLanguage,
+        paramLanguage
     );
 
     return <Knapp handleButtonClick={handleButtonClick} tekst={knappetekst} />;
