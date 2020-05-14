@@ -30,7 +30,7 @@ export const Header = () => {
     const erInnlogget = useSelector(
         (state: AppState) => state.innloggingsstatus.data.authenticated
     );
-    const { PARAMS, APP_BASE_URL } = useSelector(
+    const { PARAMS, APP_BASE_URL, COOKIES } = useSelector(
         (state: AppState) => state.environment
     );
     const [headeroffsetHeight, setHeaderoffsetHeight] = useState<
@@ -104,6 +104,7 @@ export const Header = () => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
     }, []);
 
+    console.log(COOKIES);
     // Change context
     useEffect(() => {
         if (PARAMS.CONTEXT !== MenuValue.IKKEBESTEMT) {
@@ -120,14 +121,16 @@ export const Header = () => {
 
     // Change language
     const checkUrlForLanguage = () => {
-        const language =
-            PARAMS.LANGUAGE === Language.IKKEBESTEMT
-                ? getLanguageFromUrl()
-                : PARAMS.LANGUAGE;
-
-        const action = languageDuck.actionCreator({ language });
-        setCookie('decorator-language', language, cookieOptions);
-        dispatch(action);
+        if (PARAMS.LANGUAGE !== Language.IKKEBESTEMT) {
+            dispatch(languageDuck.actionCreator({ language: PARAMS.LANGUAGE }));
+            setCookie('decorator-language', PARAMS.LANGUAGE, cookieOptions);
+        } else {
+            // Fetch state from cookie OR default to norsk
+            const language = getLanguageFromUrl();
+            const action = languageDuck.actionCreator({ language });
+            setCookie('decorator-language', language, cookieOptions);
+            dispatch(action);
+        }
     };
 
     useEffect(() => {
