@@ -33,6 +33,8 @@
     },
     "dependencies": {
         "@promster/express": "^4.1.11",
+        "@types/amplitude-js": "^5.11.0",
+        "amplitude-js": "^6.2.0",
         "classnames": "^2.2.6",
         "console-stamp": "^0.2.9",
         "core-js": "3.5.0",
