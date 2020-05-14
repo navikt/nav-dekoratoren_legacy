@@ -104,7 +104,6 @@ export const Header = () => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
     }, []);
 
-    console.log(COOKIES);
     // Change context
     useEffect(() => {
         if (PARAMS.CONTEXT !== MenuValue.IKKEBESTEMT) {
