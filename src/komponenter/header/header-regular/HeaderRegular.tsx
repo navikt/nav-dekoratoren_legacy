@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { Language } from 'store/reducers/language-duck';
 import MobilMenylinje from './mobil/MobilMenylinje';
 import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
 import DesktopMenylinje from './desktop/DesktopMenylinje';
+import { showContextMenu } from 'utils/Environment';
 
 export const RegularHeader = () => {
     const { COOKIES, PARAMS } = useSelector(
@@ -12,13 +12,11 @@ export const RegularHeader = () => {
     );
     const language = useSelector((state: AppState) => state.language.language);
 
-    const showContextMenu =
-        PARAMS.LANGUAGE !== Language.IKKEBESTEMT
-            ? PARAMS.LANGUAGE === Language.NORSK
-            : COOKIES.LANGUAGE !== Language.IKKEBESTEMT
-            ? COOKIES.LANGUAGE === Language.NORSK
-            : PARAMS.LANGUAGE === Language.IKKEBESTEMT ||
-              language === Language.NORSK;
+    const displayContextMenu = showContextMenu(
+        PARAMS.LANGUAGE,
+        COOKIES.LANGUAGE,
+        language
+    );
 
     return (
         <Fragment>
@@ -27,7 +25,7 @@ export const RegularHeader = () => {
             </div>
             <div className="media-tablet-desktop tablet-desktop-meny">
                 <div className="header-z-wrapper">
-                    {showContextMenu ? <Arbeidsflatemeny /> : null}
+                    {displayContextMenu && <Arbeidsflatemeny />}
                     <DesktopMenylinje />
                 </div>
             </div>

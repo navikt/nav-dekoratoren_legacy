@@ -10,14 +10,13 @@ import {
     arbeidsflateLenker,
 } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { AppState } from 'store/reducers';
-import { Language } from 'store/reducers/language-duck';
 import {
     cookieOptions,
     settArbeidsflate,
 } from 'store/reducers/arbeidsflate-duck';
 import { GACategory, gaEvent } from 'utils/google-analytics';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { erNavDekoratoren } from 'utils/Environment';
+import { erNavDekoratoren, showContextMenu } from 'utils/Environment';
 
 import './FooterArbeidsflatevalg.less';
 
@@ -52,16 +51,15 @@ const FooterArbeidsflatevalg = () => {
         setLenker(getLenker());
     }, [arbeidsflate]);
 
-    const showContextMenu =
-        PARAMS.LANGUAGE !== Language.IKKEBESTEMT
-            ? PARAMS.LANGUAGE === Language.NORSK
-            : COOKIES.LANGUAGE !== Language.IKKEBESTEMT
-            ? COOKIES.LANGUAGE === Language.NORSK
-            : PARAMS.LANGUAGE === Language.IKKEBESTEMT ||
-              language === Language.NORSK;
+    const displayContextMenu = showContextMenu(
+        PARAMS.LANGUAGE,
+        COOKIES.LANGUAGE,
+        language
+    );
+
     return (
         <>
-            {showContextMenu ? (
+            {displayContextMenu && (
                 <div className="menylenker-seksjon arbeidsflate">
                     <div className="arbeidsflatevalg-innhold">
                         <ul
@@ -122,7 +120,7 @@ const FooterArbeidsflatevalg = () => {
                         </ul>
                     </div>
                 </div>
-            ) : null}
+            )}
         </>
     );
 };
