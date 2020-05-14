@@ -126,9 +126,8 @@ export const Header = () => {
         } else {
             // Fetch state from cookie OR default to norsk
             const language = getLanguageFromUrl();
-            const action = languageDuck.actionCreator({ language });
+            dispatch(languageDuck.actionCreator({ language }));
             setCookie('decorator-language', language, cookieOptions);
-            dispatch(action);
         }
     };
 
