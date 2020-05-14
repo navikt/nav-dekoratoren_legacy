@@ -13,6 +13,7 @@ import { createStore } from './store';
 import { erDev, verifyWindowObj } from './utils/Environment';
 import { fetchEnv } from './utils/Environment';
 import { initGA } from './utils/google-analytics';
+import { initAmplitude } from './utils/amplitude';
 import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import * as es6promise from 'es6-promise';
@@ -34,6 +35,7 @@ if (erDev) {
 
 const run = () => {
     initGA();
+    initAmplitude();
     fetchEnv()
         .then((environment) => {
             const cookies = new Cookies();
