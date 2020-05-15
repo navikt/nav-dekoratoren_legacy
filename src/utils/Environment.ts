@@ -1,5 +1,4 @@
 import { EnvironmentState } from 'store/reducers/environment-duck';
-import { Language } from '../store/reducers/language-duck';
 
 export const fetchEnv = (): Promise<EnvironmentState> => {
     return new Promise((resolve) => {
