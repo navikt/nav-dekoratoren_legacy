@@ -49,7 +49,7 @@ export const showContextMenu = (
         }
 
         // Sjekk om cookien er definert
-        if (!cookieLanguage) {
+        if (cookieLanguage) {
             return cookieLanguage === Language.NORSK;
         }
 
