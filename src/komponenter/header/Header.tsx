@@ -120,10 +120,15 @@ export const Header = () => {
 
     // Change language
     const checkUrlForLanguage = () => {
-        const language = getLanguageFromUrl();
-        const action = languageDuck.actionCreator({ language });
-        setCookie('decorator-language', language, cookieOptions);
-        dispatch(action);
+        if (PARAMS.LANGUAGE !== Language.IKKEBESTEMT) {
+            dispatch(languageDuck.actionCreator({ language: PARAMS.LANGUAGE }));
+            setCookie('decorator-language', PARAMS.LANGUAGE, cookieOptions);
+        } else {
+            // Fetch state from cookie OR default to norsk
+            const language = getLanguageFromUrl();
+            dispatch(languageDuck.actionCreator({ language }));
+            setCookie('decorator-language', language, cookieOptions);
+        }
     };
 
     useEffect(() => {

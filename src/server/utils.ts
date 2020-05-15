@@ -16,7 +16,7 @@ interface Props {
 // Obs! Don't expose secrets
 export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
     const chosenLanguage = (req.query.language?.toString().toUpperCase() ||
-        Language.NORSK) as Language;
+        Language.IKKEBESTEMT) as Language;
 
     const chosenContext = (req.query.context?.toString().toUpperCase() ||
         MenuValue.IKKEBESTEMT) as MenuValue;
