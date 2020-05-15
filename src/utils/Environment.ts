@@ -36,26 +36,3 @@ export const erDev =
     verifyWindowObj() &&
     process.env.NODE_ENV === 'development' &&
     window.location.origin.toLowerCase().includes('localhost');
-
-export const showContextMenu = (
-    paramLanguage: Language,
-    cookieLanguage: Language,
-    urlLanguage: Language
-) => {
-    if (urlLanguage === Language.IKKEBESTEMT) {
-        // Overstyr dersom språk er satt eksplisitt
-        if (paramLanguage !== Language.IKKEBESTEMT) {
-            return paramLanguage === Language.NORSK;
-        }
-
-        // Sjekk om cookien er definert
-        if (cookieLanguage) {
-            return cookieLanguage === Language.NORSK;
-        }
-
-        // Vis menyen ved oppstart
-        return true;
-    } else {
-        return urlLanguage === Language.NORSK;
-    }
-};
