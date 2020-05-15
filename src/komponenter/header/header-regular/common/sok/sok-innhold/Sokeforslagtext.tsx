@@ -2,7 +2,7 @@ import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 const Sokeforslagtext = ({ highlight }: { highlight?: string }) => {
-    const filteredHighlight =
+    const highlightFiltered =
         highlight &&
         highlight
             .replace(/<\/?[^>]+(>|$)/g, '') // Remove html
@@ -11,7 +11,7 @@ const Sokeforslagtext = ({ highlight }: { highlight?: string }) => {
 
     return (
         <div className="sok-resultat-listItem-text">
-            <Normaltekst>{filteredHighlight || ''}</Normaltekst>
+            <Normaltekst>{highlightFiltered || ''}</Normaltekst>
         </div>
     );
 };
