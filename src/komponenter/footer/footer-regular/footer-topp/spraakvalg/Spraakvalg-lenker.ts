@@ -33,7 +33,7 @@ export const getSpraaklenker = (
     XP_BASE_URL: string,
     language: Language
 ): Spraaklenke[] => {
-    const lenker = spraaklenker.map(lenke => {
+    const lenker = spraaklenker.map((lenke) => {
         lenke.url = genererUrl(XP_BASE_URL, lenke.url);
         return lenke;
     });
@@ -41,21 +41,21 @@ export const getSpraaklenker = (
     switch (language) {
         case Language.ENGELSK:
             return lenker.filter(
-                lenke =>
+                (lenke) =>
                     lenke.lang === Language.NORSK ||
                     lenke.lang === Language.SAMISK
             );
         // tslint:disable-next-line:no-switch-case-fall-through
         case Language.SAMISK:
             return lenker.filter(
-                lenke =>
+                (lenke) =>
                     lenke.lang === Language.NORSK ||
                     lenke.lang === Language.ENGELSK
             );
         // tslint:disable-next-line:no-switch-case-fall-through
         default:
             return lenker.filter(
-                lenke =>
+                (lenke) =>
                     lenke.lang === Language.ENGELSK ||
                     lenke.lang === Language.SAMISK
             );
