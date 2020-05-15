@@ -1,12 +1,11 @@
 import { compose, createStore as createReduxStore } from 'redux';
-import { Request } from 'express';
 import { EnvironmentState } from './reducers/environment-duck';
 import reducers from './reducers';
 import Cookies from 'universal-cookie';
 import { Language } from './reducers/language-duck';
 import { MenuValue } from '../utils/meny-storage-utils';
 
-export const createStore = (env?: EnvironmentState, req?: Request) => {
+export const createStore = (env?: EnvironmentState, cookies?: Cookies) => {
     const composeEnhancers = (
         (typeof window !== 'undefined' &&
             (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
@@ -18,9 +17,8 @@ export const createStore = (env?: EnvironmentState, req?: Request) => {
     const paramContext =
         env?.PARAMS.CONTEXT !== MenuValue.IKKEBESTEMT && env?.PARAMS.CONTEXT;
 
-    const cookies = new Cookies(req && req.headers.cookie);
-    const cookieLanguage = cookies.get('decorator-language');
-    const cookieContext = cookies.get('decorator-context');
+    const cookieLanguage = cookies?.get('decorator-language');
+    const cookieContext = cookies?.get('decorator-context');
 
     const initialLanguage = paramLanguage || cookieLanguage;
     const initialContext = cookieContext || paramContext;

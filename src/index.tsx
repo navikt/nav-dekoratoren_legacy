@@ -13,6 +13,7 @@ import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import * as es6promise from 'es6-promise';
 import { CookiesProvider } from 'react-cookie';
+import Cookies from 'universal-cookie';
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
@@ -31,8 +32,8 @@ const run = () => {
     initGA();
     fetchEnv()
         .then((environment) => {
-            const store = createStore(environment);
-            console.log(store.getState());
+            const cookies = new Cookies();
+            const store = createStore(environment, cookies);
             ReactDOM.render(
                 <ReduxProvider store={store}>
                     <CookiesProvider>
