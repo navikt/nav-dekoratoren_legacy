@@ -21,7 +21,7 @@ export const createStore = (env?: EnvironmentState, cookies?: Cookies) => {
     const cookieContext = cookies?.get('decorator-context');
 
     const initialLanguage = paramLanguage || cookieLanguage;
-    const initialContext = cookieContext || paramContext;
+    const initialContext = paramContext || cookieContext;
 
     return composeEnhancers(createReduxStore)(reducers, {
         ...(env && {
