@@ -53,24 +53,22 @@ export const SokResultater = ({
                 </AlertStripeFeil>
             )}
             {itemsFiltered ? (
-                itemsFiltered
-                    .slice(0, predefinedlistview + 1)
-                    .map((item, index) => (
-                        <li
-                            {...getItemProps({
-                                key: index,
-                                index,
-                                item,
-                            })}
-                            style={cssIndex(index)}
-                        >
-                            <SokeforslagIngress
-                                className="sok-resultat-listItem"
-                                displayName={item.displayName}
-                            />
-                            <Sokeforslagtext highlight={item.highlight} />
-                        </li>
-                    ))
+                itemsFiltered.map((item, index) => (
+                    <li
+                        {...getItemProps({
+                            key: index,
+                            index,
+                            item,
+                        })}
+                        style={cssIndex(index)}
+                    >
+                        <SokeforslagIngress
+                            className="sok-resultat-listItem"
+                            displayName={item.displayName}
+                        />
+                        <Sokeforslagtext highlight={item.highlight} />
+                    </li>
+                ))
             ) : (
                 <div className={'sokeresultat-ingen-treff'}>
                     <SokeforslagIngress
