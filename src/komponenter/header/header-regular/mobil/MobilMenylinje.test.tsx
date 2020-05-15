@@ -7,9 +7,9 @@ import { createStore, Store } from 'redux';
 import MobilMenylinje from './MobilMenylinje';
 import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
-import { LoggInnKnappMobil } from './logg-inn/LoggInnKnappMobil';
 import { ActionType } from '../../../../store/actions';
 import { Status } from '../../../../api/api';
+import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn-knapp/LoggInnKnapp';
 
 const store = createStore(reducers);
 
@@ -26,7 +26,7 @@ describe('<MobilMenylinje /> sjekk at komponent finner logo', () => {
     });
 });
 
-describe('<LoggInnKnappMobil/> sjekk at komponent finner logg-inn knapp', () => {
+describe('<LoggInnKnapp/> sjekk at komponent finner logg-inn knapp', () => {
     store.dispatch({
         type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
         status: Status.OK,
@@ -35,9 +35,9 @@ describe('<LoggInnKnappMobil/> sjekk at komponent finner logg-inn knapp', () => 
         },
     });
 
-    it('Skal rendre <LoggInnKnappMobil/> komponent', () => {
+    it('Skal rendre <LoggInnKnapp/> komponent', () => {
         const wrapper = getWrapper(store);
-        expect(wrapper.find(LoggInnKnappMobil)).toHaveLength(1);
+        expect(wrapper.find(LoggInnKnapp)).toHaveLength(1);
     });
 });
 
