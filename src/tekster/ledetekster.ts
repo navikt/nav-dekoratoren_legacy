@@ -14,24 +14,6 @@ export const ledetekster: { [key: string]: string } = {
     'footer-del-skjerm': 'Del skjerm med veileder',
     'footer-del-skjerm-en': 'Share screen with your counsellor',
     'footer-del-skjerm-se': 'Del skjerm med veileder',
-    'footer-stikkord-privatperson':
-        'Arbeidsledig, tiltak, familie, helse, hjelpemidler, sosiale tjenester, pensjon, kurs, til eller fra Norge m.m.',
-    'footer-stikkord-privatperson-en':
-        'Arbeidsledig, tiltak, familie, helse, hjelpemidler, sosiale tjenester, pensjon, kurs, til eller fra Norge m.m.',
-    'footer-stikkord-privatperson-se':
-        'Arbeidsledig, tiltak, familie, helse, hjelpemidler, sosiale tjenester, pensjon, kurs, til eller fra Norge m.m.',
-    'footer-stikkord-arbeidsgiver':
-        'Tjenester, skjemaer, rekruttering, inkludering, oppfølging sykmeldte, hjelpemidler, selvstendig næringsdrivende m.m.',
-    'footer-stikkord-arbeidsgiver-en':
-        'Tjenester, skjemaer, rekruttering, inkludering, oppfølging sykmeldte, hjelpemidler, selvstendig næringsdrivende m.m.',
-    'footer-stikkord-arbeidsgiver-se':
-        'Tjenester, skjemaer, rekruttering, inkludering, oppfølging sykmeldte, hjelpemidler, selvstendig næringsdrivende m.m.',
-    'footer-stikkord-samarbeidspartner':
-        'Leger/behandlere, hjelpemidler, tilskudd, skjema tiltaksarrangører, arbeidslivskriminalitet, for kommunen m.m.',
-    'footer-stikkord-samarbeidspartner-en':
-        'Leger/behandlere, hjelpemidler, tilskudd, skjema tiltaksarrangører, arbeidslivskriminalitet, for kommunen m.m.',
-    'footer-stikkord-samarbeidspartner-se':
-        'Leger/behandlere, hjelpemidler, tilskudd, skjema tiltaksarrangører, arbeidslivskriminalitet, for kommunen m.m.',
     'footer-til-toppen': 'Til toppen',
     'footer-til-toppen-en': 'To the top',
     'footer-til-toppen-se': 'Til toppen',
