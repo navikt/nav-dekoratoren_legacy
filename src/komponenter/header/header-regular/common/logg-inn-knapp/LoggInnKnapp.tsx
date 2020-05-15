@@ -16,14 +16,8 @@ type Props = {
 
 export const LoggInnKnapp = ({ type, id }: Props) => {
     const { environment } = useSelector((state: AppState) => state);
-    const { COOKIES, PARAMS } = useSelector(
-        (state: AppState) => state.environment
-    );
-    const urlLanguage = useSelector(
-        (state: AppState) => state.language.language
-    );
-    const sessionLanguage = COOKIES.LANGUAGE;
-    const paramLanguage = COOKIES.LANGUAGE;
+    const { PARAMS } = useSelector((state: AppState) => state.environment);
+    const language = useSelector((state: AppState) => state.language.language);
     const { authenticated } = useSelector(
         (state: AppState) => state.innloggingsstatus.data
     );
@@ -56,9 +50,7 @@ export const LoggInnKnapp = ({ type, id }: Props) => {
 
     const knappetekst = finnTekst(
         authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp',
-        urlLanguage,
-        sessionLanguage,
-        paramLanguage
+        language
     );
 
     return (

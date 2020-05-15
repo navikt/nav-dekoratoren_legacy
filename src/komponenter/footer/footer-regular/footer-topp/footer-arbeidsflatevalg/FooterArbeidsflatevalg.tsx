@@ -10,9 +10,8 @@ import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { GACategory, gaEvent } from 'utils/google-analytics';
-import { MenuValue } from 'utils/meny-storage-utils';
-import { erNavDekoratoren, showContextMenu } from 'utils/Environment';
-
+import { erNavDekoratoren } from 'utils/Environment';
+import { Language } from 'store/reducers/language-duck';
 import './FooterArbeidsflatevalg.less';
 
 const stateSelector = (state: AppState) => ({
@@ -24,37 +23,21 @@ const FooterArbeidsflatevalg = () => {
     const dispatch = useDispatch();
     const [, setCookie] = useCookies(['decorator-context']);
     const { arbeidsflate, language } = useSelector(stateSelector);
-    const { XP_BASE_URL, COOKIES, PARAMS } = useSelector(
-        (state: AppState) => state.environment
-    );
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
-    const getLenker = () => {
-        switch (arbeidsflate) {
-            case MenuValue.IKKEBESTEMT:
-                return arbeidsflateLenker(XP_BASE_URL).filter(
-                    (lenke) => lenke.key !== COOKIES.CONTEXT
-                );
-            default:
-                return arbeidsflateLenker(XP_BASE_URL).filter(
-                    (lenke) => lenke.key !== arbeidsflate
-                );
-        }
-    };
+    const getLenker = () =>
+        arbeidsflateLenker(XP_BASE_URL).filter(
+            (lenke) => lenke.key !== arbeidsflate
+        );
 
     const [lenker, setLenker] = useState<ArbeidsflateLenke[]>(getLenker());
     useEffect(() => {
         setLenker(getLenker());
     }, [arbeidsflate]);
 
-    const displayContextMenu = showContextMenu(
-        PARAMS.LANGUAGE,
-        COOKIES.LANGUAGE,
-        language
-    );
-
     return (
         <>
-            {displayContextMenu && (
+            {language === Language.NORSK && (
                 <div className="menylenker-seksjon arbeidsflate">
                     <div className="arbeidsflatevalg-innhold">
                         <ul
