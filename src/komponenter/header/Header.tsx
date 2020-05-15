@@ -30,7 +30,7 @@ export const Header = () => {
     const erInnlogget = useSelector(
         (state: AppState) => state.innloggingsstatus.data.authenticated
     );
-    const { PARAMS, APP_BASE_URL, COOKIES } = useSelector(
+    const { PARAMS, APP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
     );
     const [headeroffsetHeight, setHeaderoffsetHeight] = useState<
