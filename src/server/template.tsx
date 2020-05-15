@@ -40,7 +40,7 @@ export const template = (req: Request) => {
 
     // Create store based on request params
     const metaTags = MetaTagsServer();
-    const store = createStore(env);
+    const store = createStore(env, universalCookies);
 
     // Fetch params and forward to client
     const params = req.query;

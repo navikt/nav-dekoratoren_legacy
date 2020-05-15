@@ -16,7 +16,8 @@ type Props = {
 
 export const LoggInnKnapp = ({ type, id }: Props) => {
     const { environment } = useSelector((state: AppState) => state);
-    const { language } = useSelector((state: AppState) => state.language);
+    const { PARAMS } = useSelector((state: AppState) => state.environment);
+    const language = useSelector((state: AppState) => state.language.language);
     const { authenticated } = useSelector(
         (state: AppState) => state.innloggingsstatus.data
     );
@@ -25,7 +26,7 @@ export const LoggInnKnapp = ({ type, id }: Props) => {
     );
 
     const handleButtonClick = () => {
-        const { PARAMS, LOGIN_URL, DITT_NAV_URL, LOGOUT_URL } = environment;
+        const { LOGIN_URL, DITT_NAV_URL, LOGOUT_URL } = environment;
         const { MINSIDE_ARBEIDSGIVER_URL } = environment;
         const appUrl = location.origin + location.pathname;
         const loginUrl = `${

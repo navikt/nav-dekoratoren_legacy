@@ -4,17 +4,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { Language } from 'store/reducers/language-duck';
 
-export function finnTekst(
-    id: string,
-    urlLanguage: Language,
-    sessionLanguage?: Language
-): string {
-    let language = urlLanguage;
-
-    if (urlLanguage === Language.IKKEBESTEMT && sessionLanguage) {
-        language = sessionLanguage;
-    }
-
+export function finnTekst(id: string, language: Language): string {
     // Correct language
     let ledetekst: string;
     switch (language) {
@@ -50,8 +40,7 @@ interface Props {
 
 const Tekst = ({ id }: Props) => {
     const { language } = useSelector((state: AppState) => state.language);
-    const { COOKIES } = useSelector((state: AppState) => state.environment);
-    return <>{finnTekst(id, language, COOKIES.LANGUAGE)}</>;
+    return <>{finnTekst(id, language)}</>;
 };
 
 export default Tekst;

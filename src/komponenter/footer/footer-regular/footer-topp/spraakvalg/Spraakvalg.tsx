@@ -9,31 +9,24 @@ import { getSpraaklenker, Spraaklenke } from './Spraakvalg-lenker';
 import Tekst from 'tekster/finn-tekst';
 import { Language } from 'store/reducers/language-duck';
 import { useCookies } from 'react-cookie';
-import { cookieOptions } from '../../../../../store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 
 const Spraakvalg = () => {
     const language = useSelector((state: AppState) => state.language.language);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
-    const { COOKIES } = useSelector((state: AppState) => state.environment);
     const [erDekoratoren, setErDekoratoren] = useState<boolean>(false);
     const [, setCookie] = useCookies(['decorator-context']);
     const arbeidsflate = useSelector(
         (state: AppState) => state.arbeidsflate.status
     );
 
-    const getLenker = () => {
-        switch (language) {
-            case Language.IKKEBESTEMT:
-                return getSpraaklenker(XP_BASE_URL, COOKIES.LANGUAGE);
-            default:
-                return getSpraaklenker(XP_BASE_URL, language);
-        }
-    };
+    const [spraklenker, setSpraklenker] = useState<Spraaklenke[]>(
+        getSpraaklenker(XP_BASE_URL, language)
+    );
 
-    const [spraklenker, setSpraklenker] = useState<Spraaklenke[]>(getLenker());
     useEffect(() => {
         setErDekoratoren(erNavDekoratoren());
-        setSpraklenker(getLenker());
+        setSpraklenker(getSpraaklenker(XP_BASE_URL, language));
     }, []);
 
     const setCookieAndRedirect = (

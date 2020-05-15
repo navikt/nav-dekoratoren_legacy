@@ -115,7 +115,8 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til valgt context                                     |
 | simple            | boolean                                                 | false                | Forenklet header og footer                                          |
 | redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Redirecter brukeren til app etter innlogging fra dekoratøren.       |
-| level             | Level3 \| Level4                                        | Level4               | Krever innlogging basert på definert sikkerhetsnivå                 |
+| level             | Level3 \| Level4                                        | Level3               | Krever innlogging basert på definert sikkerhetsnivå                 |
+| language          | norsk \| engelsk \| samisk                              | norsk                | Setter språket til dekoratøren                                      |
 
 Eksempel:<br>
 [https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3](https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3)
