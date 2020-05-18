@@ -149,6 +149,7 @@ export const Header = () => {
     return (
         <Fragment>
             <HeadElements />
+            <span id={'top-element'} tabIndex={-1} />
             <div
                 className="head-wrapper"
                 style={{ minHeight: headeroffsetHeight }}
