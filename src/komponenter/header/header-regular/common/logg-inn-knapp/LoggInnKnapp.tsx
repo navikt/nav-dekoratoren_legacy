@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { MenuValue } from 'utils/meny-storage-utils';
 import KnappBase from 'nav-frontend-knapper';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import './LoggInnKnapp.less';
 
 type Props = {
@@ -61,7 +60,7 @@ export const LoggInnKnapp = ({ type, id }: Props) => {
                 id={id}
                 type={type}
             >
-                <Undertittel>{knappetekst}</Undertittel>
+                {knappetekst}
             </KnappBase>
         </div>
     );
