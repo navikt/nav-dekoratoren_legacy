@@ -43,7 +43,7 @@ app.disable('x-powered-by');
 app.use(cookiesMiddleware());
 app.use((req, res, next) => {
     // Allowed origins
-    res.header('Access-Control-Allow-Origin', req.get('origin'));
+    res.header('Access-Control-Allow-Origin', req.get('Origin'));
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header(
@@ -182,7 +182,7 @@ app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));
 app.use(
     `${appBasePath}/`,
     express.static(buildPath, {
-        setHeaders: function (res: Response, path: string) {
+        setHeaders: (res: Response) => {
             // Override cache on static files
             res.header('Cache-Control', `max-age=${fiveMinutesInSeconds}`);
             res.header('Pragma', `max-age=${fiveMinutesInSeconds}`);
