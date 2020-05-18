@@ -54,7 +54,6 @@ const FooterTopp = () => {
                 <div className="menylenker-seksjon til-toppen">
                     <div className="til-toppen-innhold">
                         <LenkeMedIkon
-                            href=""
                             onClick={scrollToTop}
                             tekst={<Tekst id="footer-til-toppen" />}
                             ikon={
