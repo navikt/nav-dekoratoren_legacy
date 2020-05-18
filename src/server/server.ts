@@ -43,7 +43,7 @@ app.disable('x-powered-by');
 app.use(cookiesMiddleware());
 app.use((req, res, next) => {
     // Allowed origins
-    res.header('Access-Control-Allow-Origin', req.get('Origin'));
+    res.header('Access-Control-Allow-Origin', req.get('origin'));
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header(
