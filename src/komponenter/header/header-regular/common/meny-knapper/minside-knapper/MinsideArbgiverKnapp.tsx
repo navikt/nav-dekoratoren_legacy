@@ -46,7 +46,7 @@ export const MinsideArbgiverKnapp = (props: Props) => {
                 <img src={`${baseUrl}${briefcaseIkon}`} alt="" />
                 <div className={cls.element('knapp-tekst')}>
                     <Normaltekst className={cls.element('knapp-tekst-topp')}>
-                        <Tekst id={'ga-til-min-side'} />
+                        <Tekst id={'ga-til-min-side-arbeidsgiver'} />
                     </Normaltekst>
                     <Undertekst className={cls.element('knapp-tekst-bunn')}>
                         <Tekst id={'rolle-arbeidsgiver'} />
