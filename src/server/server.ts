@@ -46,11 +46,6 @@ app.use((req, res, next) => {
         'Access-Control-Allow-Headers',
         'Origin,Content-Type,Accept,Authorization'
     );
-
-    // Cache control
-    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-    res.header('Pragma', 'no-cache');
-    res.header('Expires', '-1');
     next();
 });
 
