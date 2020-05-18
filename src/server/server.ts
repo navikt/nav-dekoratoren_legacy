@@ -27,13 +27,22 @@ const PORT = 8088;
 // Mock
 import mockMenu from './mock/menu.json';
 import { clientEnv } from './utils';
-import { ClientRequest } from 'http';
+
+// Time utils
+const fiveMinutesInSeconds = 5 * 60;
+const oneMinuteInSeconds = 60;
 
 // Cache setup
 const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
-const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
-const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
+const mainCache = new NodeCache({
+    stdTTL: fiveMinutesInSeconds,
+    checkperiod: oneMinuteInSeconds,
+});
+const backupCache = new NodeCache({
+    stdTTL: 0,
+    checkperiod: 0,
+});
 
 // Cors
 app.disable('x-powered-by');
@@ -47,6 +56,11 @@ app.use((req, res, next) => {
         'Access-Control-Allow-Headers',
         'Origin,Content-Type,Accept,Authorization'
     );
+
+    // Cache control
+    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    res.header('Pragma', 'no-cache');
+    res.header('Expires', '-1');
     next();
 });
 
@@ -143,9 +157,6 @@ app.use(
     createProxyMiddleware(proxiedAuthUrl, {
         target: `${process.env.API_INNLOGGINGSLINJE_URL}`,
         pathRewrite: { [`^${proxiedAuthUrl}`]: '' },
-        onProxyReq(proxyReq: ClientRequest, req: Request, res: Response) {
-            noCache(res);
-        },
     })
 );
 
@@ -154,9 +165,6 @@ app.use(
     createProxyMiddleware(proxiedVarslerUrl, {
         target: `${process.env.API_VARSELINNBOKS_URL}`,
         pathRewrite: { [`^${proxiedVarslerUrl}`]: '' },
-        onProxyReq(proxyReq: ClientRequest, req: Request, res: Response) {
-            noCache(res);
-        },
     })
 );
 
@@ -177,18 +185,20 @@ app.use(`${appBasePath}/metrics`, (req, res) => {
 
 app.get(`${appBasePath}/isAlive`, (req, res) => res.sendStatus(200));
 app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));
-app.use(`${appBasePath}/`, express.static(buildPath));
+app.use(
+    `${appBasePath}/`,
+    express.static(buildPath, {
+        setHeaders: function (res: Response, path: string) {
+            // Override cache on static files
+            res.header('Cache-Control', `max-age=${fiveMinutesInSeconds}`);
+            res.header('Pragma', `max-age=${fiveMinutesInSeconds}`);
+        },
+    })
+);
 
 const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)
 );
-
-const noCache = (res: Response) => {
-    // Cache control
-    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-    res.header('Pragma', 'no-cache');
-    res.header('Expires', '-1');
-};
 
 const shutdown = () => {
     console.log('Retrived signal terminate , shutting down node service');
