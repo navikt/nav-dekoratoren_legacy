@@ -26,9 +26,9 @@ export const MenyLenkeSeksjon = ({
 
     return (
         <section className={classname}>
-            <div className={cls.element('tittel')}>
-                <Undertittel>{menygruppe.displayName}</Undertittel>
-            </div>
+            <Undertittel className={cls.element('tittel')}>
+                {menygruppe.displayName}
+            </Undertittel>
             <ul className={cls.element('lenker')}>
                 {menygruppe.children.map((lenke: MenyNode, index: number) => {
                     const kbNaviIndex = {

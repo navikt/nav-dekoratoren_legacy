@@ -2,8 +2,26 @@
 
 .desktop-hovedmeny {
     &__topp-seksjon {
-        margin: 1.5rem -3rem;
-        padding: 1rem 3rem;
+        display: flex;
+        flex-direction: column;
+
+        margin: 1.5rem -@padding-horizontal;
+        padding: 1rem @padding-horizontal;
+
+        @media (max-height: @desktopLowHeightLimit),
+            (max-width: @smallDesktopLimitWidth) {
+            flex-direction: row;
+            align-items: flex-end;
+            margin: 0 -@padding-horizontal;
+            padding-top: 0.5rem;
+
+            &-tittel {
+                &::after {
+                    content: '-';
+                    margin: 0 0.5rem;
+                }
+            }
+        }
     }
 
     &__topp-seksjon-lenke {

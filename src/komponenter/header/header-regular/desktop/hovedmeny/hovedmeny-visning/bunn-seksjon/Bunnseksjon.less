@@ -17,6 +17,11 @@
         justify-content: flex-start;
         margin: 1rem 0;
         --num-cols: @bunnseksjon-cols;
+
+        @media (max-height: @desktopLowHeightLimit),
+            (max-width: @smallDesktopLimitWidth) {
+            margin: 0;
+        }
     }
 
     &__bunn-lenke {
@@ -38,6 +43,18 @@
         .lenkepanel__indikator {
             color: @navBla;
         }
+
+        @media (max-height: @desktopLowHeightLimit) and (max-width: @smallDesktopLimitWidth) {
+            padding: 0.5rem;
+            border: none;
+            .lenkepanel__indikator {
+                display: none;
+            }
+
+            &:hover {
+                border: none;
+            }
+        }
     }
 
     &__bunn-lenke-visning {
@@ -58,16 +75,5 @@
         margin: 0;
         padding: 0;
         color: black;
-
-        li {
-            display: inline-block;
-
-            &:not(:first-of-type) {
-                .bullet::before {
-                    content: '•';
-                    margin: 0 0.25em;
-                }
-            }
-        }
     }
 }

@@ -3,8 +3,17 @@
 .lenkeseksjon {
     margin-bottom: 2rem;
 
+    @media (max-height: @desktopLowHeightLimit) {
+        margin-bottom: 0.75rem;
+    }
+
     &__tittel {
-        margin-bottom: 0.5em;
+        margin-bottom: 0.5rem;
+
+        @media (max-height: @desktopLowHeightLimit) {
+            .typo-element-mixin();
+            margin-bottom: 0.25rem;
+        }
     }
 
     &__lenker {
@@ -25,8 +34,10 @@
                 flex-direction: row;
                 align-items: flex-start;
                 text-decoration: none;
+
                 &:hover {
                     text-decoration: underline;
+
                     .chevronlenke__chevron {
                         left: 0.33em;
                     }
@@ -37,6 +48,15 @@
                     transition: left 250ms;
                     left: 0;
                 }
+            }
+
+            @media (max-height: @desktopLowHeightLimit),
+                (max-width: @smallDesktopLimitWidth) {
+                margin-bottom: 0.5rem;
+            }
+
+            @media (max-height: @desktopLowHeightLimit) and (max-width: @smallDesktopLimitWidth) {
+                margin-bottom: 0.25rem;
             }
         }
     }

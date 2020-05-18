@@ -2,9 +2,9 @@ import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { GACategory } from 'utils/google-analytics';
+import { gaEvent } from 'utils/google-analytics';
 import BEMHelper from 'utils/bem';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
-import { gaEvent } from 'utils/google-analytics';
 
 interface Props {
     url: string;
@@ -47,15 +47,7 @@ const BunnseksjonLenke = ({
                     <Tekst id={lenkeTekstId} />
                 </Undertittel>
                 <ul className={cls.element('bunn-lenke-stikkord')}>
-                    <Undertekst>
-                        {stikkord &&
-                            stikkord.split('|').map((ord) => (
-                                <li key={ord}>
-                                    <span className={'bullet'} />
-                                    {ord}
-                                </li>
-                            ))}
-                    </Undertekst>
+                    <Undertekst>{stikkord}</Undertekst>
                 </ul>
             </div>
         </LenkepanelBase>
