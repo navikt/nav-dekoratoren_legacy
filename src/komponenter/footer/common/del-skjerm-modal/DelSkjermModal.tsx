@@ -21,9 +21,7 @@ const DelSkjermModal = (props: Props) => {
     const classname = 'delskjerm__modal';
 
     // Language
-    const { XP_BASE_URL, COOKIES } = useSelector(
-        (state: AppState) => state.environment
-    );
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const language = useSelector((state: AppState) => state.language).language;
     const feilmelding = finnTekst('delskjerm-modal-feilmelding', language);
     const label = finnTekst('delskjerm-modal-label', language);
@@ -71,7 +69,7 @@ const DelSkjermModal = (props: Props) => {
         }
     };
 
-    const setZIndex = (zIndex: string) => {
+    const setOverlayCss = () => {
         const elementsArray = document.getElementsByClassName(
             'ReactModal__Overlay'
         );
@@ -83,12 +81,13 @@ const DelSkjermModal = (props: Props) => {
         ) {
             return;
         }
-        element.style.zIndex = zIndex;
+        element.style.zIndex = '9999';
+        element.style.backgroundColor = 'rgba(50, 65, 79, 0.8)'; // #32414f
     };
 
     return (
         <Modal
-            onAfterOpen={() => setZIndex('9999')}
+            onAfterOpen={setOverlayCss}
             isOpen={props.isOpen}
             className={`navno-dekorator ${classname}`}
             contentLabel={'Skjermdeling'}
