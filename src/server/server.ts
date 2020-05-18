@@ -27,6 +27,7 @@ const PORT = 8088;
 // Mock
 import mockMenu from './mock/menu.json';
 import { clientEnv } from './utils';
+import { ClientRequest } from 'http';
 
 // Cache setup
 const mainCacheKey = 'navno-menu';
@@ -142,6 +143,9 @@ app.use(
     createProxyMiddleware(proxiedAuthUrl, {
         target: `${process.env.API_INNLOGGINGSLINJE_URL}`,
         pathRewrite: { [`^${proxiedAuthUrl}`]: '' },
+        onProxyReq(proxyReq: ClientRequest, req: Request, res: Response) {
+            noCache(res);
+        },
     })
 );
 
@@ -150,6 +154,9 @@ app.use(
     createProxyMiddleware(proxiedVarslerUrl, {
         target: `${process.env.API_VARSELINNBOKS_URL}`,
         pathRewrite: { [`^${proxiedVarslerUrl}`]: '' },
+        onProxyReq(proxyReq: ClientRequest, req: Request, res: Response) {
+            noCache(res);
+        },
     })
 );
 
@@ -175,6 +182,13 @@ app.use(`${appBasePath}/`, express.static(buildPath));
 const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)
 );
+
+const noCache = (res: Response) => {
+    // Cache control
+    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    res.header('Pragma', 'no-cache');
+    res.header('Expires', '-1');
+};
 
 const shutdown = () => {
     console.log('Retrived signal terminate , shutting down node service');
