@@ -20,6 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Resources
 const fileEnv = `${process.env.APP_BASE_URL}/env`;
+const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
 const fileScript = `${process.env.APP_BASE_URL}/client.js`;
 
 const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
@@ -106,6 +107,7 @@ export const template = (req: Request) => {
             <!-- Styling fetched by apps -->
             <div id="styles">
                 ${HtmlMetaTags}
+                <link href="${fileCss}" rel="stylesheet" />
             </div>
         </head>
         <body>

@@ -11,9 +11,7 @@ const fileFavicon32x32 = require('ikoner/favicon/favicon-32x32.png');
 const fileMaskIcon = require('ikoner/favicon/safari-pinned-tab.svg');
 
 export const HeadElements = () => {
-    const { APP_BASE_URL, XP_BASE_URL } = useSelector(
-        (state: AppState) => state.environment
-    );
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     return (
         <MetaTags>
             <link
@@ -43,7 +41,6 @@ export const HeadElements = () => {
                 color="#5bbad5"
                 href={`${XP_BASE_URL}${fileMaskIcon}`}
             />
-            <link href={`${APP_BASE_URL}/css/client.css`} rel="stylesheet" />
         </MetaTags>
     );
 };
