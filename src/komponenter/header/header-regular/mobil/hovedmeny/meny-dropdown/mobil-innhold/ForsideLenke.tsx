@@ -36,7 +36,7 @@ const ForsideLenke = (props: Props) => {
                         className={cls.element('lenke')}
                         tabIndex={props.tabindex ? 0 : -1}
                     >
-                        <Tekst id="ga-til-min-side-mobil" />
+                        <Tekst id="til-forsiden" />
                     </Lenke>
                 </div>
             )}
@@ -50,7 +50,7 @@ const ForsideLenke = (props: Props) => {
                         className={cls.element('lenke')}
                         tabIndex={props.tabindex ? 0 : -1}
                     >
-                        <Tekst id="ga-til-min-side-mobil" />
+                        <Tekst id="ga-til-min-side-arbeidsgiver" />
                     </Lenke>
                 </div>
             )}
