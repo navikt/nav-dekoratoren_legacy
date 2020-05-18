@@ -7,10 +7,12 @@ import fetch from 'node-fetch';
 import express, { Request, Response } from 'express';
 const { createMiddleware } = require('@promster/express');
 const { getSummary, getContentType } = require('@promster/express');
+import { clientEnv, fiveMinutesInSeconds, oneMinuteInSeconds } from './utils';
 import cookiesMiddleware from 'universal-cookie-express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
 import dotenv from 'dotenv';
+import mockMenu from './mock/menu.json';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -23,14 +25,6 @@ const oldBasePath = '/common-html/v4/navno';
 const buildPath = `${process.cwd()}/build`;
 const app = express();
 const PORT = 8088;
-
-// Mock
-import mockMenu from './mock/menu.json';
-import { clientEnv } from './utils';
-
-// Time utils
-const fiveMinutesInSeconds = 5 * 60;
-const oneMinuteInSeconds = 60;
 
 // Cache setup
 const mainCacheKey = 'navno-menu';

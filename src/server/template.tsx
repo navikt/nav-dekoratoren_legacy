@@ -6,7 +6,7 @@ import Footer from 'komponenter/footer/Footer';
 import MetaTagsServer from 'react-meta-tags/server';
 import { MetaTagsContext } from 'react-meta-tags';
 import { Request } from 'express';
-import { clientEnv } from './utils';
+import { clientEnv, fiveMinutesInSeconds, oneMinuteInSeconds } from './utils';
 import { createStore } from 'store';
 import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
@@ -23,7 +23,10 @@ const fileEnv = `${process.env.APP_BASE_URL}/env`;
 const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
 const fileScript = `${process.env.APP_BASE_URL}/client.js`;
 
-const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
+const cache = new NodeCache({
+    stdTTL: fiveMinutesInSeconds,
+    checkperiod: oneMinuteInSeconds,
+});
 
 export const template = (req: Request) => {
     // Set environment based on request params
