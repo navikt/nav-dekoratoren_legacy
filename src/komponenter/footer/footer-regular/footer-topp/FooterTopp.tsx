@@ -38,12 +38,15 @@ const FooterTopp = () => {
         }
     }, [context, data, settColumnsNode]);
 
-    const scrollToTop = () =>
+    const scrollToTop = (event: React.MouseEvent) => {
+        event.preventDefault();
         window.scrollTo({
             top: 0,
             left: 0,
             behavior: 'smooth',
         });
+        (document.getElementById('top-element') as HTMLElement)?.focus();
+    };
 
     return (
         <section className={cls.className}>
@@ -51,7 +54,7 @@ const FooterTopp = () => {
                 <div className="menylenker-seksjon til-toppen">
                     <div className="til-toppen-innhold">
                         <LenkeMedIkon
-                            href="#scroll-til-toppen"
+                            href=""
                             onClick={scrollToTop}
                             tekst={<Tekst id="footer-til-toppen" />}
                             ikon={
