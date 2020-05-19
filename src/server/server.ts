@@ -7,10 +7,12 @@ import fetch from 'node-fetch';
 import express, { Request, Response } from 'express';
 const { createMiddleware } = require('@promster/express');
 const { getSummary, getContentType } = require('@promster/express');
+import { clientEnv, fiveMinutesInSeconds, oneMinuteInSeconds } from './utils';
 import cookiesMiddleware from 'universal-cookie-express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
 import dotenv from 'dotenv';
+import mockMenu from './mock/menu.json';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -24,15 +26,17 @@ const buildPath = `${process.cwd()}/build`;
 const app = express();
 const PORT = 8088;
 
-// Mock
-import mockMenu from './mock/menu.json';
-import { clientEnv } from './utils';
-
 // Cache setup
 const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
-const mainCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
-const backupCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
+const mainCache = new NodeCache({
+    stdTTL: fiveMinutesInSeconds,
+    checkperiod: oneMinuteInSeconds,
+});
+const backupCache = new NodeCache({
+    stdTTL: 0,
+    checkperiod: 0,
+});
 
 // Cors
 app.disable('x-powered-by');
@@ -175,7 +179,18 @@ app.use(`${appBasePath}/metrics`, (req, res) => {
 
 app.get(`${appBasePath}/isAlive`, (req, res) => res.sendStatus(200));
 app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));
-app.use(`${appBasePath}/`, express.static(buildPath));
+app.use(
+    `${appBasePath}/`,
+    express.static(buildPath, {
+        setHeaders: (res: Response) => {
+            if (process.env.NODE_ENV === 'production') {
+                // Override cache on static files
+                res.header('Cache-Control', `max-age=${fiveMinutesInSeconds}`);
+                res.header('Pragma', `max-age=${fiveMinutesInSeconds}`);
+            }
+        },
+    })
+);
 
 const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)

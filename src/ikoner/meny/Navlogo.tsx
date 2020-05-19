@@ -11,14 +11,10 @@ import { AppState } from 'store/reducers';
 import { useCookies } from 'react-cookie';
 
 const Navlogo = ({
-    width,
-    height,
     color,
     className,
     viewIndex,
 }: {
-    width?: string;
-    height?: string;
     color?: string;
     className?: string;
     viewIndex?: boolean;
@@ -53,8 +49,6 @@ const Navlogo = ({
         >
             <svg
                 className="modal-logo-svg"
-                width={width}
-                height={height}
                 viewBox="0 0 73 46"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"

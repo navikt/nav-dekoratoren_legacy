@@ -12,15 +12,7 @@ import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import './NavLogoFooter.less';
 
-const NavLogoFooter = ({
-    width,
-    height,
-    classname,
-}: {
-    width?: string;
-    height?: string;
-    classname?: string;
-}) => {
+const NavLogoFooter = ({ classname }: { classname?: string }) => {
     const dispatch = useDispatch();
     const [, setCookie] = useCookies(['decorator-context']);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
@@ -51,8 +43,6 @@ const NavLogoFooter = ({
             >
                 <svg
                     className={classname}
-                    width={width}
-                    height={height}
                     viewBox="0 0 269 169"
                     version="1.1"
                     xmlns="http://www.w3.org/2000/svg"
