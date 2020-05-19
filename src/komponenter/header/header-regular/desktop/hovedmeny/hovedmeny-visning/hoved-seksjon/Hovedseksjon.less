@@ -71,6 +71,9 @@
 
         @media (min-width: @desktopLimitWidth) {
             --num-cols: @hovedseksjon-cols-lg;
+            @media (max-height: @desktopLowHeightLimit) {
+                .mosaic-setup(400px, 550px, @hovedseksjon-cols-lg);
+            }
             .lenkeseksjon {
                 .col-setup(@hovedseksjon-cols-lg, @hovedseksjon-margin);
             }
