@@ -18,7 +18,6 @@
     }
 
     &__liste-element {
-        padding: 2px 0;
         display: inline-block;
         outline: 0;
     }
@@ -33,6 +32,7 @@
         &:active {
             background-color: transparent;
             outline: 3px solid @fokusFarge;
+            outline-offset: -3px;
         }
     }
 
@@ -43,15 +43,18 @@
         align-items: center;
 
         &:hover {
+            border-top: transparent 3px solid;
             border-bottom: @navBla 3px solid;
         }
 
         &--active {
+            border-top: transparent 3px solid;
             border-bottom: @navBla 3px solid;
             p {
                 text-shadow: 0 0 1px black;
             }
             &:hover {
+                border-top: transparent 3px solid;
                 border-bottom: @navBla 3px solid;
             }
         }
