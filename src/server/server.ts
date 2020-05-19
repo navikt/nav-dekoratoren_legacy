@@ -183,9 +183,11 @@ app.use(
     `${appBasePath}/`,
     express.static(buildPath, {
         setHeaders: (res: Response) => {
-            // Override cache on static files
-            res.header('Cache-Control', `max-age=${fiveMinutesInSeconds}`);
-            res.header('Pragma', `max-age=${fiveMinutesInSeconds}`);
+            if (process.env.NODE_ENV === 'production') {
+                // Override cache on static files
+                res.header('Cache-Control', `max-age=${fiveMinutesInSeconds}`);
+                res.header('Pragma', `max-age=${fiveMinutesInSeconds}`);
+            }
         },
     })
 );
