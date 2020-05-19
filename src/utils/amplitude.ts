@@ -1,4 +1,5 @@
 import amplitude from 'amplitude-js';
+import { contentEngaged } from './content-engaged';
 
 export const initAmplitude = () => {
     amplitude.getInstance().init('default', '', {
@@ -8,11 +9,16 @@ export const initAmplitude = () => {
         includeReferrer: true,
         platform: window.location.toString(),
     });
-    logAmplitudeEvent('sidevisning');
+    contentEngaged(1, ()=>{
+        logAmplitudeEvent('sidevisning')
+    })
 };
 
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
     return new Promise(function (resolve) {
-        amplitude.getInstance().logEvent(eventName, data, resolve)
+        const eventData = data || {}
+        eventData.origin = 'dekoratøren'
+        eventData.originVersion = 'unknown'
+        amplitude.getInstance().logEvent(eventName, eventData, resolve)
     });
 }
