@@ -5,6 +5,7 @@ import { GACategory } from 'utils/google-analytics';
 import { gaEvent } from 'utils/google-analytics';
 import BEMHelper from 'utils/bem';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
+import { HoyreChevron } from 'nav-frontend-chevron';
 
 interface Props {
     url: string;
@@ -44,6 +45,9 @@ const BunnseksjonLenke = ({
         >
             <div className={cls.element('bunn-lenke-visning')}>
                 <Undertittel className={'lenkepanel__heading'}>
+                    <HoyreChevron
+                        className={cls.element('bunn-lenke-chevron')}
+                    />
                     <Tekst id={lenkeTekstId} />
                 </Undertittel>
                 <Undertekst className={cls.element('bunn-lenke-stikkord')}>

@@ -24,6 +24,21 @@
         .lenkepanel__heading {
             color: @navBla;
         }
+
+        @media (max-height: @desktopLowHeightLimit),
+            (max-width: @smallDesktopLimitWidth) {
+            display: inline-block;
+            & > * {
+                display: inline;
+            }
+
+            .lenkepanel__heading {
+                &::after {
+                    content: ' ';
+                    margin-right: 0.4rem;
+                }
+            }
+        }
     }
 
     &__bunn-lenke {
@@ -46,10 +61,41 @@
             color: @navBla;
         }
 
-        @media (max-height: @desktopLowHeightLimit),
-            (max-width: @smallDesktopLimitWidth) {
+        &-chevron {
+            display: none;
+        }
+
+        @media (max-height: @desktopLowHeightLimit) {
             padding: 0.5rem 0.75rem;
             margin-bottom: 4px;
+            .col-setup(@bunnseksjon-cols, 0.5rem);
+
+            @media (max-width: @smallDesktopLimitWidth) {
+                border: none;
+                padding: 0 0.5rem;
+                &:hover {
+                    border: none;
+                }
+            }
+
+            &-chevron {
+                display: inline-block;
+                align-self: center;
+                margin-right: 8px;
+                margin-left: -4px;
+                left: 0;
+                transition: left 0.25s;
+            }
+
+            &:hover {
+                .desktop-hovedmeny__bunn-lenke-chevron {
+                    left: 6px;
+                }
+            }
+
+            .lenkepanel__indikator {
+                display: none;
+            }
         }
     }
 }

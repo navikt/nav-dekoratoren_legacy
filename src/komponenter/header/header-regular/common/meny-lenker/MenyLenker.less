@@ -3,6 +3,11 @@
 .lenkeseksjon {
     margin-bottom: 1.75rem;
 
+    @media (max-height: @desktopLowHeightLimit),
+        (max-width: @smallDesktopLimitWidth) {
+        margin-bottom: 1rem;
+    }
+
     &__tittel {
         margin-bottom: 0.1875rem;
 

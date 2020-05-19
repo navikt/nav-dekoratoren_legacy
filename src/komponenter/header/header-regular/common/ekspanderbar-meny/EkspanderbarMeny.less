@@ -39,6 +39,17 @@
                 @margins-sides-desktop / 2;
             overflow: hidden;
             width: 100vw;
+
+            @media (max-width: @smallDesktopLimitWidth) {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            @media (max-height: @desktopLowHeightLimit) {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+
             @media (min-width: @desktopLimitWidth) {
                 width: @desktopLimitWidth;
             }

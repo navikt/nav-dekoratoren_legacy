@@ -9,6 +9,11 @@
     padding: 0.5rem 0;
     border-bottom: 2px solid @header-separator-farge;
 
+    @media (max-height: @desktopLowHeightLimit),
+        (max-width: @smallDesktopLimitWidth) {
+        padding: 0;
+    }
+
     .margin-left-section() {
         margin-left: @margin-mellom;
         @media (max-width: @smallDesktopLimitWidth) {
