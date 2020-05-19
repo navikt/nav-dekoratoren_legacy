@@ -15,7 +15,6 @@
 
     &__venstre-kolonne {
         padding-left: 0.5rem;
-        width: 40px;
     }
 
     &__hoyre-kolonne {
@@ -28,11 +27,24 @@
     }
 
     &__logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 66px;
         height: 66px;
 
+        svg {
+            width: 62px;
+            height: 62px;
+        }
+
+        svg:hover {
+            width: 66px;
+            height: 66px;
+        }
+
         &:hover {
-            outline: 1px solid black;
+            outline: 3px solid black;
         }
 
         &:focus {
