@@ -13,7 +13,7 @@ export interface LanguageState {
 }
 
 const initialLanguageState: LanguageState = {
-    language: Language.IKKEBESTEMT,
+    language: Language.NORSK,
 };
 
 export const languageDuck = genericDuck<

@@ -12,36 +12,49 @@
         text-align: center;
     }
 
+    ul,
+    li {
+        height: 100%;
+    }
+
     &__liste-element {
         display: inline-block;
         outline: 0;
     }
 
     &__lenke {
+        height: 100%;
         display: inline-block;
-        padding: 0.75rem 1rem 0;
         text-decoration: none;
         color: black;
 
         &:focus,
         &:active {
+            background-color: transparent;
             outline: 3px solid @fokusFarge;
+            outline-offset: -3px;
         }
     }
 
     &__lenke-inner {
-        padding-bottom: 0.6rem;
+        height: 100%;
+        display: flex;
+        margin: 0 1rem;
+        align-items: center;
 
         &:hover {
-            border-bottom: @navBla 2px solid;
+            border-top: transparent 3px solid;
+            border-bottom: @navBla 3px solid;
         }
 
         &--active {
-            border-bottom: @navBla 2px solid;
+            border-top: transparent 3px solid;
+            border-bottom: @navBla 3px solid;
             p {
                 text-shadow: 0 0 1px black;
             }
             &:hover {
+                border-top: transparent 3px solid;
                 border-bottom: @navBla 3px solid;
             }
         }

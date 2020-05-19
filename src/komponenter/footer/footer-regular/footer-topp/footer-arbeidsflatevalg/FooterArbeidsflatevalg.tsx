@@ -3,18 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
-
 import Tekst from 'tekster/finn-tekst';
 import { arbeidsflateLenker } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { ArbeidsflateLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { AppState } from 'store/reducers';
-import { Language } from 'store/reducers/language-duck';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { GACategory, gaEvent } from 'utils/google-analytics';
-import { MenuValue } from 'utils/meny-storage-utils';
 import { erNavDekoratoren } from 'utils/Environment';
-
+import { Language } from 'store/reducers/language-duck';
 import './FooterArbeidsflatevalg.less';
 
 const stateSelector = (state: AppState) => ({
@@ -26,36 +23,21 @@ const FooterArbeidsflatevalg = () => {
     const dispatch = useDispatch();
     const [, setCookie] = useCookies(['decorator-context']);
     const { arbeidsflate, language } = useSelector(stateSelector);
-    const { XP_BASE_URL, COOKIES } = useSelector(
-        (state: AppState) => state.environment
-    );
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
-    const getLenker = () => {
-        switch (arbeidsflate) {
-            case MenuValue.IKKEBESTEMT:
-                return arbeidsflateLenker(XP_BASE_URL).filter(
-                    (lenke) => lenke.key !== COOKIES.CONTEXT
-                );
-            default:
-                return arbeidsflateLenker(XP_BASE_URL).filter(
-                    (lenke) => lenke.key !== arbeidsflate
-                );
-        }
-    };
+    const getLenker = () =>
+        arbeidsflateLenker(XP_BASE_URL).filter(
+            (lenke) => lenke.key !== arbeidsflate
+        );
 
     const [lenker, setLenker] = useState<ArbeidsflateLenke[]>(getLenker());
     useEffect(() => {
         setLenker(getLenker());
     }, [arbeidsflate]);
 
-    const showContextMenu =
-        (language === Language.IKKEBESTEMT &&
-            COOKIES.LANGUAGE === Language.NORSK) ||
-        language === Language.NORSK;
-
     return (
         <>
-            {showContextMenu ? (
+            {language === Language.NORSK && (
                 <div className="menylenker-seksjon arbeidsflate">
                     <div className="arbeidsflatevalg-innhold">
                         <ul
@@ -106,9 +88,7 @@ const FooterArbeidsflatevalg = () => {
                                                     id={lenke.lenkeTekstId}
                                                 />
                                             </Undertittel>
-                                            <Tekst
-                                                id={lenke.footerStikkordId}
-                                            />
+                                            <Tekst id={lenke.stikkordId} />
                                         </div>
                                     </Lenkepanel>
                                 </li>
@@ -116,7 +96,7 @@ const FooterArbeidsflatevalg = () => {
                         </ul>
                     </div>
                 </div>
-            ) : null}
+            )}
         </>
     );
 };

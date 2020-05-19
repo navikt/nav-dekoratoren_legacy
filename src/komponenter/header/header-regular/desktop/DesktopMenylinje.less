@@ -39,7 +39,24 @@
 
     &__nav-brand {
         order: 1;
-        margin: 4px 0 4px @margins-sides-desktop;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 88px;
+        height: 88px;
+
+        svg {
+            width: 84px;
+            height: 84px;
+        }
+
+        svg:hover {
+            width: 88px;
+            height: 88px;
+        }
+
+        margin-left: @margins-sides-desktop;
         @media (max-width: @smallDesktopLimitWidth) {
             margin-left: @margins-sides-desktop-small;
         }
@@ -76,7 +93,7 @@
         max-height: @maxheight-menuitem;
     }
 
-    .login-knapp {
+    .login-knapp-container {
         order: 7;
         max-height: @maxheight-menuitem;
         margin-right: @margins-sides-desktop;

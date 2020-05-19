@@ -22,6 +22,16 @@ const cssIndex = (index: number) => {
     return { '--listmap': index } as React.CSSProperties;
 };
 
+const removeDuplicates = (items: SokeresultatData[]) =>
+    items.filter(
+        (itemA, index) =>
+            items.findIndex(
+                (itemB) =>
+                    itemA.href === itemB.href &&
+                    itemA.displayName === itemB.displayName
+            ) === index
+    );
+
 export const SokResultater = ({
     writtenInput,
     items,
@@ -31,6 +41,10 @@ export const SokResultater = ({
     language,
     fetchError,
 }: Props) => {
+    const itemsFiltered =
+        items.length > 1 &&
+        removeDuplicates(items).slice(0, predefinedlistview + 1);
+
     return (
         <ul {...getMenuProps()} className="sokeresultat-liste">
             {fetchError && (
@@ -38,8 +52,8 @@ export const SokResultater = ({
                     <Tekst id={'feil-sok-fetch'} />
                 </AlertStripeFeil>
             )}
-            {items.length > 1 ? (
-                items.slice(0, predefinedlistview + 1).map((item, index) => (
+            {itemsFiltered ? (
+                itemsFiltered.map((item, index) => (
                     <li
                         {...getItemProps({
                             key: index,

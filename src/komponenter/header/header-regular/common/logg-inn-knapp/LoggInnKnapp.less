@@ -1,0 +1,70 @@
+@import '../../../../../styling-variabler.less';
+
+// Safari fix
+.set-text-color(@mainColor, @activeColor, @hoverColor, @focusColor) {
+    -webkit-text-fill-color: @mainColor;
+    &:hover,
+    &:hover:focus {
+        -webkit-text-fill-color: @hoverColor;
+    }
+    &:active,
+    &:active:hover,
+    &:active:focus {
+        -webkit-text-fill-color: @activeColor;
+    }
+    &:focus {
+        -webkit-text-fill-color: @focusColor;
+    }
+}
+
+.login-knapp() {
+    box-sizing: border-box;
+    text-transform: none;
+    letter-spacing: initial;
+    .typo-undertittel;
+
+    &:focus {
+        box-shadow: 0 0 0 4px @fokusFarge;
+        border-radius: 4px;
+    }
+
+    @media (min-width: @tabletLimitWidth) {
+        padding: 0.625rem 1rem;
+    }
+
+    @media (max-width: @tabletLimitWidth) {
+        padding: 0.5rem 1rem;
+    }
+
+    @media (max-width: @minimumMobilWidth) {
+        padding: 0.5rem 0.5rem;
+    }
+}
+
+.login-knapp.knapp--standard {
+    all: unset;
+    .knapp;
+    .login-knapp();
+    .set-text-color(@navBla, @white, @white, @navBla);
+}
+
+.login-knapp.knapp--flat {
+    all: unset;
+    .knapp--flat;
+    .login-knapp();
+    .set-text-color(@navBla, @navBla, @navBla, @navBla);
+}
+
+.login-knapp.knapp--fare {
+    all: unset;
+    .knapp--fare;
+    .login-knapp();
+    .set-text-color(@white, @white, @white, @redError);
+}
+
+.login-knapp.knapp--hoved {
+    all: unset;
+    .knapp--hoved;
+    .login-knapp();
+    .set-text-color(@white, @white, @white, @navBla);
+}

@@ -5,14 +5,15 @@ import { SokDropdown } from './sok/SokDropdown';
 import { HovedmenyDesktop } from './hovedmeny/HovedmenyDesktop';
 import { MinsideMeny } from './minside-meny/MinsideMeny';
 import { VarslerDropdown } from './varsler/VarslerDropdown';
-import { LoggInnKnappDesktop } from './logg-inn/LoggInnKnappDesktop';
 import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn-knapp/LoggInnKnapp';
 import './DesktopMenylinje.less';
 
 export const desktopHeaderLogoId = 'desktop-header-logo-id';
+export const desktopLoginKnappId = 'desktop-login-knapp';
 
 const DesktopMenylinje = () => {
     const cls = BEMHelper('desktopmeny');
@@ -32,8 +33,6 @@ const DesktopMenylinje = () => {
         <nav className={cls.className} aria-label="Hovedmeny" id="hovedmeny">
             <div className={cls.element('elementer')}>
                 <NavLogoRod
-                    width="88"
-                    height="80"
                     classname={cls.element('nav-brand')}
                     id={desktopHeaderLogoId}
                 />
@@ -44,7 +43,7 @@ const DesktopMenylinje = () => {
                     <VarslerDropdown kbNavMainState={kbNavMainState} />
                 )}
                 <MinsideMeny kbNavMainState={kbNavMainState} />
-                <LoggInnKnappDesktop />
+                <LoggInnKnapp id={desktopLoginKnappId} />
             </div>
         </nav>
     );
