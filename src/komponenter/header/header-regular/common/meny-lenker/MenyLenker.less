@@ -3,7 +3,7 @@
 .lenkeseksjon {
     margin-bottom: 1.75rem;
 
-    @media (max-height: @desktopLowHeightLimit),
+    @media (max-height: @smallDesktopLimitHeight),
         (max-width: @smallDesktopLimitWidth) {
         margin-bottom: 1rem;
     }
@@ -11,7 +11,7 @@
     &__tittel {
         margin-bottom: 0.1875rem;
 
-        @media (max-height: @desktopLowHeightLimit),
+        @media (max-height: @smallDesktopLimitHeight),
             (max-width: @smallDesktopLimitWidth) {
             .typo-element-mixin();
             margin-bottom: 0.125rem;
@@ -26,7 +26,7 @@
 
         li {
             .lenke {
-                .lenke-stil();
+                .lenke-stil-mixin();
             }
 
             .chevronlenke {
@@ -51,7 +51,7 @@
                     left: 0;
                 }
 
-                @media (max-height: @desktopLowHeightLimit),
+                @media (max-height: @smallDesktopLimitHeight),
                     (max-width: @smallDesktopLimitWidth) {
                     padding: 0.25rem 0;
                 }

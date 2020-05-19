@@ -36,7 +36,7 @@
 
         .lenkeseksjon {
             flex-grow: 1;
-            .col-setup(@lenkeseksjoner-cols, @lenkeseksjoner-margin);
+            .flex-col-width-mixin(@lenkeseksjoner-cols, @lenkeseksjoner-margin);
         }
     }
 
@@ -45,8 +45,8 @@
         justify-content: space-between;
         align-items: flex-start;
 
-        margin: 0 -@padding-horizontal 2rem -@padding-horizontal;
-        padding: 0 @padding-horizontal;
+        margin: 0 -@margins-sides-desktop 2rem -@margins-sides-desktop;
+        padding: 0 @margins-sides-desktop;
     }
 
     &__topp-seksjon-right {
@@ -58,7 +58,7 @@
     }
 
     &__topp-seksjon-lenke {
-        .lenke-stil();
+        .lenke-stil-mixin();
     }
 
     &__topp-seksjon-tittel {

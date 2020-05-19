@@ -4,41 +4,32 @@
 @import (reference) '~nav-frontend-typografi-style/src/index';
 @import (reference) '~nav-frontend-knapper-style/src/index';
 
-//desktop breakpoint width
-@desktopLimitWidth: 1440px;
+//desktop breakpoints
+@desktopMaxWidth: 1440px;
+@desktopMinWidth: 768px;
+
 @smallDesktopLimitWidth: 1024px;
-
-@desktopLowHeightLimit: 900px;
-
-//tablet breakpoint width
-@tabletLimitWidth: 768px;
+@smallDesktopLimitHeight: 900px;
 
 //minimun mobile support-width (used to remove padding etc on screen-size below)
-@minimumMobilWidth: 330px;
+@mobileMinWidth: 330px;
 
 //slide-out menu common-width
-@mobilemenuwidth: 100%;
-
-@padding-horizontal: 3rem;
+@mobileMenuWidth: 100%;
 
 @margins-sides-desktop: 3rem;
 @margins-sides-desktop-small: 1rem;
 
 @header-separator-farge: @navGra20;
 
-.col-setup(@cols, @margins) {
+.flex-col-width-mixin(@cols, @margins) {
     max-width: calc(percentage(1 / @cols) - (@margins - @margins / @cols));
     &:not(:nth-child(@{cols}n)) {
         margin-right: @margins;
     }
 }
 
-@box-shadow: 0px 2.8px 2.2px rgba(0, 0, 0, 0.034),
-    0px 6.7px 5.3px rgba(0, 0, 0, 0.048), 0px 12.5px 10px rgba(0, 0, 0, 0.06),
-    0px 22.3px 17.9px rgba(0, 0, 0, 0.072),
-    0px 41.8px 33.4px rgba(0, 0, 0, 0.086), 0px 100px 80px rgba(0, 0, 0, 0.12);
-
-.lenke-stil() {
+.lenke-stil-mixin() {
     .lenke;
     text-decoration: underline;
     &:hover {
@@ -46,7 +37,7 @@
     }
 }
 
-.knapp-focus() {
+.header-knapp-focus-mixin() {
     &:focus {
         background-color: transparent;
         color: @navBla;

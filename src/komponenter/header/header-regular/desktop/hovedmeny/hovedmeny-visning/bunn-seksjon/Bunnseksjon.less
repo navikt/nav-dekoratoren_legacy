@@ -9,7 +9,7 @@
         margin-top: 0.75rem;
         --num-cols: @bunnseksjon-cols;
 
-        @media (max-height: @desktopLowHeightLimit),
+        @media (max-height: @smallDesktopLimitHeight),
             (max-width: @smallDesktopLimitWidth) {
             margin: 0;
         }
@@ -25,7 +25,7 @@
             color: @navBla;
         }
 
-        @media (max-height: @desktopLowHeightLimit),
+        @media (max-height: @smallDesktopLimitHeight),
             (max-width: @smallDesktopLimitWidth) {
             display: inline-block;
             & > * {
@@ -42,7 +42,7 @@
     }
 
     &__bunn-lenke {
-        .col-setup(@bunnseksjon-cols, 1rem);
+        .flex-col-width-mixin(@bunnseksjon-cols, 1rem);
         flex-grow: 1;
         border: 2px @navBla solid;
 
@@ -65,12 +65,12 @@
             display: none;
         }
 
-        @media (max-height: @desktopLowHeightLimit) {
+        @media (max-height: @smallDesktopLimitHeight) {
             padding: 0.5rem 0.75rem;
             margin-bottom: 4px;
-            .col-setup(@bunnseksjon-cols, 0.5rem);
 
             @media (max-width: @smallDesktopLimitWidth) {
+                .flex-col-width-mixin(@bunnseksjon-cols, 0.5rem);
                 border: none;
                 padding: 0 0.5rem;
                 &:hover {

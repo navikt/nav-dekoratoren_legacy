@@ -4,7 +4,7 @@
 @ekspanderbar-transition-duration-in: 0.4s;
 
 .ekspanderbar {
-    @media (min-width: @tabletLimitWidth) {
+    @media (min-width: @desktopMinWidth) {
         &__innhold-wrapper {
             position: absolute;
             z-index: 1;
@@ -45,13 +45,13 @@
                 padding-right: 0;
             }
 
-            @media (max-height: @desktopLowHeightLimit) {
+            @media (max-height: @smallDesktopLimitHeight) {
                 padding-top: 0.75rem;
-                padding-bottom: 0.75rem;
+                padding-bottom: 1rem;
             }
 
-            @media (min-width: @desktopLimitWidth) {
-                width: @desktopLimitWidth;
+            @media (min-width: @desktopMaxWidth) {
+                width: @desktopMaxWidth;
             }
         }
 
