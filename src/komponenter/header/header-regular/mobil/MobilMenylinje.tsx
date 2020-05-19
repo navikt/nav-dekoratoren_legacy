@@ -50,11 +50,7 @@ const MobilMenylinje = ({ language }: Props) => {
             <div className={mobilClass.element('content')}>
                 <div className={mobilClass.element('elementer')}>
                     <div className={mobilClass.element('venstre-kolonne')}>
-                        <NavLogoRod
-                            width="66"
-                            height="66"
-                            classname={mobilClass.element('logo')}
-                        />
+                        <NavLogoRod classname={mobilClass.element('logo')} />
                     </div>
                     <div className={mobilClass.element('hoyre-kolonne')}>
                         {visInnloggingsKnapp && <LoggInnKnapp type={'flat'} />}
