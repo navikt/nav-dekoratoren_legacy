@@ -39,7 +39,10 @@ const Arbeidsflatemeny = () => {
                             key={lenke.key}
                         >
                             <LenkeMedGA
-                                classNameOverride={cls.element('lenke')}
+                                classNameOverride={cls.element(
+                                    'lenke',
+                                    arbeidsflate === lenke.key ? 'active' : ''
+                                )}
                                 id={getKbId(KbNavGroup.HeaderMenylinje, {
                                     col: index,
                                     row: 0,
@@ -65,18 +68,9 @@ const Arbeidsflatemeny = () => {
                                     action: 'arbeidsflate-valg',
                                 }}
                             >
-                                <div
-                                    className={cls.element(
-                                        'lenke-inner',
-                                        arbeidsflate === lenke.key
-                                            ? 'active'
-                                            : ''
-                                    )}
-                                >
-                                    <Normaltekst>
-                                        <Tekst id={lenke.lenkeTekstId} />
-                                    </Normaltekst>
-                                </div>
+                                <Normaltekst>
+                                    <Tekst id={lenke.lenkeTekstId} />
+                                </Normaltekst>
                             </LenkeMedGA>
                         </li>
                     );

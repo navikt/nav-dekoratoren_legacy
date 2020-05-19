@@ -24,22 +24,17 @@
     }
 
     &__lenke {
+        display: flex;
         height: 100%;
-        display: inline-block;
         text-decoration: none;
         color: black;
+        margin: 0 1rem;
+        align-items: center;
 
         &:focus,
         &:active {
             outline: 3px solid @fokusFarge;
         }
-    }
-
-    &__lenke-inner {
-        height: 100%;
-        display: flex;
-        margin: 0 1rem;
-        align-items: center;
 
         &:hover {
             border-bottom: @navBla 3px solid;
@@ -54,5 +49,8 @@
                 border-bottom: @navBla 3px solid;
             }
         }
+    }
+
+    &__lenke-inner {
     }
 }
