@@ -3,7 +3,7 @@
 
 .desktop-minside-meny {
     @lenkeseksjoner-cols: 3;
-    @lenkeseksjoner-margin: 1.5em;
+    @lenkeseksjoner-margin: 1.5rem;
 
     .ekspanderbar {
         &__innhold-wrapper {
@@ -34,7 +34,8 @@
         display: flex;
         justify-content: flex-start;
 
-        & > * {
+        .lenkeseksjon {
+            flex-grow: 1;
             .col-setup(@lenkeseksjoner-cols, @lenkeseksjoner-margin);
         }
     }
@@ -44,8 +45,8 @@
         justify-content: space-between;
         align-items: flex-start;
 
-        margin: 1.5rem -3rem;
-        padding: 1rem 3rem;
+        margin: 0 -@padding-horizontal 2rem -@padding-horizontal;
+        padding: 0 @padding-horizontal;
     }
 
     &__topp-seksjon-right {

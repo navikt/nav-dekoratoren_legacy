@@ -46,9 +46,9 @@ const BunnseksjonLenke = ({
                 <Undertittel className={'lenkepanel__heading'}>
                     <Tekst id={lenkeTekstId} />
                 </Undertittel>
-                <ul className={cls.element('bunn-lenke-stikkord')}>
-                    <Undertekst>{stikkord}</Undertekst>
-                </ul>
+                <Undertekst className={cls.element('bunn-lenke-stikkord')}>
+                    {stikkord}
+                </Undertekst>
             </div>
         </LenkepanelBase>
     );

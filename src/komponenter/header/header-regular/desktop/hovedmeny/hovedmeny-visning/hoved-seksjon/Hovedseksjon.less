@@ -1,32 +1,77 @@
 @import '../../../../../../../styling-variabler.less';
 
 .desktop-hovedmeny {
-    @hovedseksjon-margin: 1.5em;
+    @hovedseksjon-margin: 1rem;
     @hovedseksjon-cols-sm: 3;
     @hovedseksjon-cols-md: 4;
     @hovedseksjon-cols-lg: 4;
 
+    .mosaic-order(@index, @numcols) when (@index <= @numcols) {
+        &:nth-child(@{numcols}n + @{index}) {
+            order: @index;
+        }
+        .mosaic-order(@index + 1, @numcols);
+    }
+
+    .mosaic-setup(@minHeight, @maxHeight, @numCols) {
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: space-between;
+        max-height: @maxHeight;
+        overflow-x: auto;
+
+        .col-breaker {
+            display: block;
+            height: 100%;
+            flex-basis: 100%;
+            width: 0;
+            margin: 0;
+            min-height: @minHeight;
+            .mosaic-order(1, @numCols);
+        }
+
+        .lenkeseksjon {
+            flex-grow: 0;
+            min-height: @maxHeight - @minHeight + 1px;
+            .mosaic-order(1, @numCols);
+        }
+    }
+
     &__hoved-seksjon {
         display: flex;
-        flex-grow: 6;
+        flex-direction: row;
         flex-wrap: wrap;
-        justify-content: flex-start;
+
+        .lenkeseksjon {
+            flex-grow: 1;
+            flex-shrink: 0;
+        }
+
+        .col-breaker {
+            display: none;
+        }
 
         @media (max-width: @smallDesktopLimitWidth) {
             --num-cols: @hovedseksjon-cols-sm;
-            & > * {
+            .mosaic-setup(550px, 700px, @hovedseksjon-cols-sm);
+            .lenkeseksjon {
                 .col-setup(@hovedseksjon-cols-sm, @hovedseksjon-margin);
             }
         }
-        @media (min-width: @smallDesktopLimitWidth) {
+
+        @media (min-width: @smallDesktopLimitWidth) and (max-width: @desktopLimitWidth) {
             --num-cols: @hovedseksjon-cols-md;
-            & > * {
+            @media (max-height: @desktopLowHeightLimit) {
+                .mosaic-setup(400px, 550px, @hovedseksjon-cols-md);
+            }
+            .lenkeseksjon {
                 .col-setup(@hovedseksjon-cols-md, @hovedseksjon-margin);
             }
         }
+
         @media (min-width: @desktopLimitWidth) {
             --num-cols: @hovedseksjon-cols-lg;
-            & > * {
+            .lenkeseksjon {
                 .col-setup(@hovedseksjon-cols-lg, @hovedseksjon-margin);
             }
         }

@@ -11,6 +11,8 @@ interface Props {
     isOpen: boolean;
 }
 
+const maxCols = 4;
+
 export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
     const cls = BEMHelper(classname);
 
@@ -27,6 +29,9 @@ export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
                         key={menygruppe.displayName}
                     />
                 ))}
+            {[...Array(maxCols)].map((_, index) => (
+                <div className={'col-breaker'} id={`col-breaker-${index}`} />
+            ))}
         </div>
     );
 };

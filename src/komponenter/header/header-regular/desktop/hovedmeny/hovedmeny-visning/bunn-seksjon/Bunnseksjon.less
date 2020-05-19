@@ -1,21 +1,12 @@
 @import '../../../../../../../styling-variabler.less';
 
 .desktop-hovedmeny {
-    @bunnseksjon-margin: 2.5em;
     @bunnseksjon-cols: 3;
-
-    &__bunn-separator {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        border: none;
-        border-top: 1px solid @navGra60;
-    }
 
     &__bunn-seksjon {
         display: flex;
-        justify-content: flex-start;
-        margin: 1rem 0;
+        justify-content: space-between;
+        margin-top: 0.75rem;
         --num-cols: @bunnseksjon-cols;
 
         @media (max-height: @desktopLowHeightLimit),
@@ -24,9 +15,20 @@
         }
     }
 
+    &__bunn-lenke-visning {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100%;
+        height: 100%;
+
+        .lenkepanel__heading {
+            color: @navBla;
+        }
+    }
+
     &__bunn-lenke {
-        .col-setup(@bunnseksjon-cols, @bunnseksjon-margin);
-        margin-bottom: 3px;
+        .col-setup(@bunnseksjon-cols, 1rem);
+        flex-grow: 1;
         border: 2px @navBla solid;
 
         &:hover {
@@ -44,8 +46,10 @@
             color: @navBla;
         }
 
-        @media (max-height: @desktopLowHeightLimit) and (max-width: @smallDesktopLimitWidth) {
+        @media (max-height: @desktopLowHeightLimit),
+            (max-width: @smallDesktopLimitWidth) {
             padding: 0.5rem;
+            margin-bottom: 0;
             border: none;
             .lenkepanel__indikator {
                 display: none;
@@ -55,25 +59,5 @@
                 border: none;
             }
         }
-    }
-
-    &__bunn-lenke-visning {
-        display: flex;
-        flex-direction: column;
-        flex-basis: 100%;
-        height: 100%;
-
-        .lenkepanel__heading {
-            color: @navBla;
-        }
-    }
-
-    &__bunn-lenke-stikkord {
-        display: inline-block;
-        list-style-type: disc;
-        list-style-position: inside;
-        margin: 0;
-        padding: 0;
-        color: black;
     }
 }

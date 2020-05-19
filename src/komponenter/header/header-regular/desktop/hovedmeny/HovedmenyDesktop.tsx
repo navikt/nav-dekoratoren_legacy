@@ -20,7 +20,6 @@ import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setu
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { matchMedia } from 'utils/match-media-polyfill';
-import './HovedmenyDesktop.less';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,

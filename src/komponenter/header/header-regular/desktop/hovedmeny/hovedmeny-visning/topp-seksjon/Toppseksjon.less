@@ -5,19 +5,18 @@
         display: flex;
         flex-direction: column;
 
-        margin: 1.5rem -@padding-horizontal;
-        padding: 1rem @padding-horizontal;
+        margin: 0 -@padding-horizontal 1.5rem -@padding-horizontal;
+        padding: 0 @padding-horizontal;
 
         @media (max-height: @desktopLowHeightLimit),
             (max-width: @smallDesktopLimitWidth) {
             flex-direction: row;
             align-items: flex-end;
-            margin: 0 -@padding-horizontal;
-            padding-top: 0.5rem;
+            margin-bottom: 0.75rem;
 
             &-tittel {
                 &::after {
-                    content: '-';
+                    content: '•';
                     margin: 0 0.5rem;
                 }
             }
@@ -26,9 +25,5 @@
 
     &__topp-seksjon-lenke {
         .lenke-stil();
-    }
-
-    &__topp-seksjon-tittel {
-        margin-top: 0.15em;
     }
 }

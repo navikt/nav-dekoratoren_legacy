@@ -27,8 +27,6 @@
 @header-separator-farge: @navGra20;
 
 .col-setup(@cols, @margins) {
-    flex-grow: 1;
-    flex-shrink: 0;
     max-width: calc(percentage(1 / @cols) - (@margins - @margins / @cols));
     &:not(:nth-child(@{cols}n)) {
         margin-right: @margins;
