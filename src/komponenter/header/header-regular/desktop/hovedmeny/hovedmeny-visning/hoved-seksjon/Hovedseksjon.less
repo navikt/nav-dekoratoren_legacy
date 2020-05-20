@@ -20,11 +20,6 @@
         max-height: @maxHeight;
         overflow-x: auto;
 
-        // Ugly fix for IE11  :|
-        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-            height: @maxHeight;
-        }
-
         .col-breaker {
             display: block;
             flex-basis: 100%;
@@ -59,6 +54,11 @@
         @media (max-width: @smallDesktopLimitWidth) {
             --num-cols: @hovedseksjon-cols-sm;
             .mosaic-setup(550px, 700px, @hovedseksjon-cols-sm);
+            // Ugly fix for IE11  :|
+            @media all and (-ms-high-contrast: none),
+                (-ms-high-contrast: active) {
+                height: 700px;
+            }
             .lenkeseksjon {
                 .flex-col-width-mixin(@hovedseksjon-cols-sm, @hovedseksjon-margin);
             }
@@ -68,6 +68,11 @@
             --num-cols: @hovedseksjon-cols-md;
             @media (max-height: @smallDesktopLimitHeight) {
                 .mosaic-setup(400px, 525px, @hovedseksjon-cols-md);
+                // Ugly fix for IE11  :|
+                @media all and (-ms-high-contrast: none),
+                    (-ms-high-contrast: active) {
+                    height: 525px;
+                }
             }
             .lenkeseksjon {
                 .flex-col-width-mixin(@hovedseksjon-cols-md, @hovedseksjon-margin);
@@ -78,6 +83,11 @@
             --num-cols: @hovedseksjon-cols-lg;
             @media (max-height: @smallDesktopLimitHeight) {
                 .mosaic-setup(400px, 525px, @hovedseksjon-cols-lg);
+                // Ugly fix for IE11  :|
+                @media all and (-ms-high-contrast: none),
+                    (-ms-high-contrast: active) {
+                    height: 525px;
+                }
             }
             .lenkeseksjon {
                 .flex-col-width-mixin(@hovedseksjon-cols-lg, @hovedseksjon-margin);
