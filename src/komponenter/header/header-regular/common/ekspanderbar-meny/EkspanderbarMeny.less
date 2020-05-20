@@ -61,7 +61,8 @@
         &__scroll-wrapper {
             max-height: calc(100vh - @padding-top);
             padding: 0 @margins-sides-desktop / 2;
-            overflow: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
             @media (max-height: @smallDesktopLimitHeight),
                 (max-width: @smallDesktopLimitWidth) {
                 max-height: calc(100vh - @padding-top / 2);
