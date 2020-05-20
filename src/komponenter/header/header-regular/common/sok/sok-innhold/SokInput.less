@@ -7,12 +7,12 @@
     }
 
     // Desktop
-    @media (min-width: @tabletLimitWidth) {
+    @media (min-width: @desktopMinWidth) {
         .sok-input {
             width: 100%;
 
             &__tittel {
-                margin: 2.5rem 0 1rem 0;
+                margin-bottom: 1rem;
             }
 
             input {
@@ -44,7 +44,7 @@
     }
 
     // Mobil
-    @media (max-width: @tabletLimitWidth) {
+    @media (max-width: @desktopMinWidth) {
         .sok-input__tittel {
             display: none;
         }

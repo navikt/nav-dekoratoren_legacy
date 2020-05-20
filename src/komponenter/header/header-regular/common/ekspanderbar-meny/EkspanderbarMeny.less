@@ -4,7 +4,9 @@
 @ekspanderbar-transition-duration-in: 0.4s;
 
 .ekspanderbar {
-    @media (min-width: @tabletLimitWidth) {
+    @media (min-width: @desktopMinWidth) {
+        @padding-top: 1.5rem;
+
         &__innhold-wrapper {
             position: absolute;
             z-index: 1;
@@ -22,7 +24,7 @@
             transition-property: max-height, visibility, opacity;
 
             &--active {
-                max-height: 60rem;
+                max-height: 100vh;
                 max-width: 100%;
                 visibility: visible;
                 opacity: 1;
@@ -35,20 +37,36 @@
 
         &__innhold {
             box-sizing: border-box;
-            padding: 0 @margins-sides-desktop / 2 2rem @margins-sides-desktop /
-                2;
+            padding: @padding-top @margins-sides-desktop / 2 2rem
+                @margins-sides-desktop / 2;
             overflow: hidden;
             width: 100vw;
-            @media (min-width: @desktopLimitWidth) {
-                width: @desktopLimitWidth;
+
+            @media (max-width: @smallDesktopLimitWidth) {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            @media (max-height: @smallDesktopLimitHeight),
+                (max-width: @smallDesktopLimitWidth) {
+                padding-top: @padding-top / 2;
+                padding-bottom: 1rem;
+            }
+
+            @media (min-width: @desktopMaxWidth) {
+                width: @desktopMaxWidth;
             }
         }
 
         &__scroll-wrapper {
-            max-height: 100vh;
+            max-height: calc(100vh - @padding-top);
             padding: 0 @margins-sides-desktop / 2;
-            overflow-x: hidden;
             overflow-y: auto;
+            overflow-x: hidden;
+            @media (max-height: @smallDesktopLimitHeight),
+                (max-width: @smallDesktopLimitWidth) {
+                max-height: calc(100vh - @padding-top / 2);
+            }
         }
 
         &__container {

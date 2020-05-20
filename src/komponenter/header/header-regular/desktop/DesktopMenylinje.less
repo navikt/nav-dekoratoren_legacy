@@ -9,6 +9,11 @@
     padding: 0.5rem 0;
     border-bottom: 2px solid @header-separator-farge;
 
+    @media (max-height: @smallDesktopLimitHeight),
+        (max-width: @smallDesktopLimitWidth) {
+        padding: 0;
+    }
+
     .margin-left-section() {
         margin-left: @margin-mellom;
         @media (max-width: @smallDesktopLimitWidth) {
@@ -32,8 +37,8 @@
         width: 100%;
         margin: 0 auto;
 
-        @media (min-width: @desktopLimitWidth) {
-            width: @desktopLimitWidth;
+        @media (min-width: @desktopMaxWidth) {
+            width: @desktopMaxWidth;
         }
     }
 
@@ -61,7 +66,7 @@
             margin-left: @margins-sides-desktop-small;
         }
 
-        .knapp-focus();
+        .header-knapp-focus-mixin();
     }
 
     .desktop-hovedmeny__knapp {

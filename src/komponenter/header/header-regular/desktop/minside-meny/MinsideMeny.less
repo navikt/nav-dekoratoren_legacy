@@ -3,7 +3,7 @@
 
 .desktop-minside-meny {
     @lenkeseksjoner-cols: 3;
-    @lenkeseksjoner-margin: 1.5em;
+    @lenkeseksjoner-margin: 1.5rem;
 
     .ekspanderbar {
         &__innhold-wrapper {
@@ -34,8 +34,9 @@
         display: flex;
         justify-content: flex-start;
 
-        & > * {
-            .col-setup(@lenkeseksjoner-cols, @lenkeseksjoner-margin);
+        .lenkeseksjon {
+            flex-grow: 1;
+            .flex-col-width-mixin(@lenkeseksjoner-cols, @lenkeseksjoner-margin);
         }
     }
 
@@ -44,8 +45,8 @@
         justify-content: space-between;
         align-items: flex-start;
 
-        margin: 1.5rem -3rem;
-        padding: 1rem 3rem;
+        margin: 0 -@margins-sides-desktop 2rem -@margins-sides-desktop;
+        padding: 0 @margins-sides-desktop;
     }
 
     &__topp-seksjon-right {
@@ -57,7 +58,7 @@
     }
 
     &__topp-seksjon-lenke {
-        .lenke-stil();
+        .lenke-stil-mixin();
     }
 
     &__topp-seksjon-tittel {
