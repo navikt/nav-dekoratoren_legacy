@@ -20,7 +20,7 @@
         overflow-x: auto;
 
         // Ugly fix for IE11 :|
-        *::-ms-backdrop {
+        &.is-ie {
             height: @maxHeight;
         }
 
@@ -63,10 +63,10 @@
 
         @media (max-width: @smallDesktopLimitWidth) {
             --num-cols: @hovedseksjon-cols-sm;
-            .mosaic-setup(550px, 700px, @hovedseksjon-cols-sm);
             .lenkeseksjon {
                 .flex-col-width-mixin(@hovedseksjon-cols-sm, @hovedseksjon-margin);
             }
+            .mosaic-setup(550px, 700px, @hovedseksjon-cols-sm);
         }
     }
 }

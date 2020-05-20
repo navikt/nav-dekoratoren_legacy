@@ -13,11 +13,19 @@ interface Props {
 
 const maxCols = 4;
 
+const isIE = () =>
+    window.navigator.userAgent &&
+    /(Trident|MSIE)/.test(window.navigator.userAgent);
+
 export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
     const cls = BEMHelper(classname);
 
     return (
-        <div className={cls.element('hoved-seksjon')}>
+        <div
+            className={`${cls.element('hoved-seksjon')}${
+                isIE() ? ' is-ie' : ''
+            }`}
+        >
             {menyLenker &&
                 menyLenker.children.map((menygruppe, index) => (
                     <MenyLenkeSeksjon
@@ -29,8 +37,8 @@ export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
                         key={menygruppe.displayName}
                     />
                 ))}
-            {[...Array(maxCols)].map(() => (
-                <div className={'col-breaker'} />
+            {[...Array(maxCols)].map((_, index) => (
+                <div className={'col-breaker'} key={index} />
             ))}
         </div>
     );
