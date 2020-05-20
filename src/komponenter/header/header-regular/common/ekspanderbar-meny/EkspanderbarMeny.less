@@ -5,6 +5,8 @@
 
 .ekspanderbar {
     @media (min-width: @desktopMinWidth) {
+        @padding-top: 1.5rem;
+
         &__innhold-wrapper {
             position: absolute;
             z-index: 1;
@@ -35,7 +37,7 @@
 
         &__innhold {
             box-sizing: border-box;
-            padding: 1.5rem @margins-sides-desktop / 2 2rem
+            padding: @padding-top @margins-sides-desktop / 2 2rem
                 @margins-sides-desktop / 2;
             overflow: hidden;
             width: 100vw;
@@ -47,7 +49,7 @@
 
             @media (max-height: @smallDesktopLimitHeight),
                 (max-width: @smallDesktopLimitWidth) {
-                padding-top: 0.75rem;
+                padding-top: @padding-top / 2;
                 padding-bottom: 1rem;
             }
 
@@ -57,10 +59,13 @@
         }
 
         &__scroll-wrapper {
-            max-height: 100vh;
+            max-height: calc(100vh - @padding-top);
             padding: 0 @margins-sides-desktop / 2;
-            overflow-x: hidden;
-            overflow-y: auto;
+            overflow: auto;
+            @media (max-height: @smallDesktopLimitHeight),
+                (max-width: @smallDesktopLimitWidth) {
+                max-height: calc(100vh - @padding-top / 2);
+            }
         }
 
         &__container {
