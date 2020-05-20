@@ -19,10 +19,11 @@
         max-height: @maxHeight;
         overflow-x: auto;
 
-        // Ugly fix for IE11  :|
-        //@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-        height: @maxHeight;
-        //}
+        // Ugly fix for IE11 :|
+        @media screen and (-ms-high-contrast: none),
+            screen and (-ms-high-contrast: active) {
+            height: @maxHeight;
+        }
 
         .col-breaker {
             display: block;
@@ -42,6 +43,7 @@
     }
 
     &__hoved-seksjon {
+        --num-cols: @hovedseksjon-cols-lg; // Used by keyboard-navigation system
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -49,10 +51,15 @@
         .lenkeseksjon {
             flex-grow: 1;
             flex-shrink: 0;
+            .flex-col-width-mixin(@hovedseksjon-cols-lg, @hovedseksjon-margin);
         }
 
         .col-breaker {
             display: none;
+        }
+
+        @media (max-height: @smallDesktopLimitHeight) {
+            .mosaic-setup(400px, 525px, @hovedseksjon-cols-lg);
         }
 
         @media (max-width: @smallDesktopLimitWidth) {
@@ -60,16 +67,6 @@
             .mosaic-setup(550px, 700px, @hovedseksjon-cols-sm);
             .lenkeseksjon {
                 .flex-col-width-mixin(@hovedseksjon-cols-sm, @hovedseksjon-margin);
-            }
-        }
-
-        @media (min-width: @smallDesktopLimitWidth) {
-            --num-cols: @hovedseksjon-cols-lg;
-            @media (max-height: @smallDesktopLimitHeight) {
-                .mosaic-setup(400px, 525px, @hovedseksjon-cols-lg);
-            }
-            .lenkeseksjon {
-                .flex-col-width-mixin(@hovedseksjon-cols-lg, @hovedseksjon-margin);
             }
         }
     }
