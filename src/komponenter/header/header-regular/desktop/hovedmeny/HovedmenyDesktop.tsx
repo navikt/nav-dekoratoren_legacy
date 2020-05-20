@@ -33,8 +33,7 @@ const classname = 'desktop-hovedmeny';
 export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';
 
 const nodeGroup = KbNavGroup.Hovedmeny;
-const mqlDesktop = matchMedia('(min-width: 1440px)');
-const mqlTablet = matchMedia('(min-width: 1024px)');
+const mqlScreenWidth = matchMedia('(min-width: 1024px)');
 
 const getMaxColsPerRow = (): Array<number> => {
     const getNumColsFromCss = (element: HTMLElement) =>
@@ -88,12 +87,10 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
 
     useEffect(() => {
         const cleanUp = () => {
-            mqlDesktop.removeEventListener('change', updateMaxCols);
-            mqlTablet.removeEventListener('change', updateMaxCols);
+            mqlScreenWidth.removeEventListener('change', updateMaxCols);
         };
 
-        mqlDesktop.addEventListener('change', updateMaxCols);
-        mqlTablet.addEventListener('change', updateMaxCols);
+        mqlScreenWidth.addEventListener('change', updateMaxCols);
         return cleanUp;
     }, []);
 

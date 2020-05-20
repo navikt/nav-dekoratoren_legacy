@@ -65,17 +65,14 @@
             display: none;
         }
 
-        @media (max-height: @smallDesktopLimitHeight) {
+        @media (max-height: @smallDesktopLimitHeight),
+            (max-width: @smallDesktopLimitWidth) {
             padding: 0.5rem 0.75rem;
             margin-bottom: 4px;
 
             @media (max-width: @smallDesktopLimitWidth) {
                 .flex-col-width-mixin(@bunnseksjon-cols, 0.5rem);
-                border: none;
-                padding: 0 0.5rem;
-                &:hover {
-                    border: none;
-                }
+                padding: 0.25rem 0.375rem;
             }
 
             &-chevron {

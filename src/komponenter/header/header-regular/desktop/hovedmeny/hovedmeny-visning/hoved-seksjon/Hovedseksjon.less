@@ -3,7 +3,6 @@
 .desktop-hovedmeny {
     @hovedseksjon-margin: 1rem;
     @hovedseksjon-cols-sm: 3;
-    @hovedseksjon-cols-md: 4;
     @hovedseksjon-cols-lg: 4;
 
     .mosaic-order(@index, @numcols) when (@index <= @numcols) {
@@ -19,6 +18,11 @@
         align-content: space-between;
         max-height: @maxHeight;
         overflow-x: auto;
+
+        // Ugly fix for IE11  :|
+        //@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        height: @maxHeight;
+        //}
 
         .col-breaker {
             display: block;
@@ -54,40 +58,15 @@
         @media (max-width: @smallDesktopLimitWidth) {
             --num-cols: @hovedseksjon-cols-sm;
             .mosaic-setup(550px, 700px, @hovedseksjon-cols-sm);
-            // Ugly fix for IE11  :|
-            @media all and (-ms-high-contrast: none),
-                (-ms-high-contrast: active) {
-                height: 700px;
-            }
             .lenkeseksjon {
                 .flex-col-width-mixin(@hovedseksjon-cols-sm, @hovedseksjon-margin);
             }
         }
 
-        @media (min-width: @smallDesktopLimitWidth) and (max-width: @desktopMaxWidth) {
-            --num-cols: @hovedseksjon-cols-md;
-            @media (max-height: @smallDesktopLimitHeight) {
-                .mosaic-setup(400px, 525px, @hovedseksjon-cols-md);
-                // Ugly fix for IE11  :|
-                @media all and (-ms-high-contrast: none),
-                    (-ms-high-contrast: active) {
-                    height: 525px;
-                }
-            }
-            .lenkeseksjon {
-                .flex-col-width-mixin(@hovedseksjon-cols-md, @hovedseksjon-margin);
-            }
-        }
-
-        @media (min-width: @desktopMaxWidth) {
+        @media (min-width: @smallDesktopLimitWidth) {
             --num-cols: @hovedseksjon-cols-lg;
             @media (max-height: @smallDesktopLimitHeight) {
                 .mosaic-setup(400px, 525px, @hovedseksjon-cols-lg);
-                // Ugly fix for IE11  :|
-                @media all and (-ms-high-contrast: none),
-                    (-ms-high-contrast: active) {
-                    height: 525px;
-                }
             }
             .lenkeseksjon {
                 .flex-col-width-mixin(@hovedseksjon-cols-lg, @hovedseksjon-margin);
