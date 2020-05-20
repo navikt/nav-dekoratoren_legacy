@@ -20,9 +20,13 @@
         max-height: @maxHeight;
         overflow-x: auto;
 
+        // Ugly fix for IE11  :|
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+            height: @maxHeight;
+        }
+
         .col-breaker {
             display: block;
-            height: 100%;
             flex-basis: 100%;
             width: 0;
             margin: 0;
@@ -32,6 +36,7 @@
 
         .lenkeseksjon {
             flex-grow: 0;
+            flex-basis: auto;
             min-height: @maxHeight - @minHeight + 1px;
             .mosaic-order(1, @numCols);
         }

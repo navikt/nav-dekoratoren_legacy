@@ -24,6 +24,7 @@
 
 .flex-col-width-mixin(@cols, @margins) {
     max-width: calc(percentage(1 / @cols) - (@margins - @margins / @cols));
+    flex-basis: 100%;
     &:not(:nth-child(@{cols}n)) {
         margin-right: @margins;
     }

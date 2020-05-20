@@ -29,8 +29,8 @@ export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
                         key={menygruppe.displayName}
                     />
                 ))}
-            {[...Array(maxCols)].map((_, index) => (
-                <div className={'col-breaker'} id={`col-breaker-${index}`} />
+            {[...Array(maxCols)].map(() => (
+                <div className={'col-breaker'} />
             ))}
         </div>
     );
