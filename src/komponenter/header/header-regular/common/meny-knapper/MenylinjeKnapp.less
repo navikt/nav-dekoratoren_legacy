@@ -12,7 +12,7 @@
     padding: 0;
     border-radius: 0.125em;
 
-    .knapp-focus();
+    .header-knapp-focus-mixin();
 
     &-visning {
         height: 45px;
@@ -29,7 +29,7 @@
         cursor: pointer;
     }
 
-    @media (min-width: @tabletLimitWidth) {
+    @media (min-width: @desktopMinWidth) {
         &-visning {
             height: @height - @padding-y * 2;
         }

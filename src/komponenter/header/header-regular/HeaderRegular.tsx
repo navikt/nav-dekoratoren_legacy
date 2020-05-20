@@ -11,10 +11,10 @@ export const RegularHeader = () => {
 
     return (
         <Fragment>
-            <div className="media-sm-mobil mobil-meny">
+            <div className="media-sm-mobil">
                 <MobilMenylinje language={language} />
             </div>
-            <div className="media-tablet-desktop tablet-desktop-meny">
+            <div className="media-tablet-desktop">
                 <div className="header-z-wrapper">
                     {language === Language.NORSK && <Arbeidsflatemeny />}
                     <DesktopMenylinje />

@@ -5,21 +5,28 @@
     display: flex;
     padding: 1rem;
     justify-content: center;
-    @media (min-width: @tabletLimitWidth) {
+    @media (min-width: @desktopMinWidth) {
         padding: 2rem;
     }
 }
 
 .footer-bottom-content {
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     max-width: 1344px;
 
     &__bottom-logo {
-        margin-right: 0.8rem;
+        height: 64px;
+        width: 64px;
+        &:hover {
+            height: 68px;
+            width: 68px;
+        }
     }
 
-    @media (min-width: @tabletLimitWidth) {
+    @media (min-width: @desktopMinWidth) {
         justify-content: space-between;
 
         &__bottom-lenker {

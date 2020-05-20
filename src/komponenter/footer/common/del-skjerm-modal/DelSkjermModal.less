@@ -33,10 +33,10 @@
     }
 
     &__content {
-        @media (min-width: @tabletLimitWidth) {
+        @media (min-width: @desktopMinWidth) {
             padding: 3rem 4rem 2rem 4rem;
         }
-        @media (max-width: @tabletLimitWidth) {
+        @media (max-width: @desktopMinWidth) {
             padding-top: 2rem;
         }
     }
@@ -70,7 +70,7 @@
     &__knapper {
         margin-top: 1rem;
         display: flex;
-        @media (max-width: @tabletLimitWidth) {
+        @media (max-width: @desktopMinWidth) {
             flex-direction: column;
         }
 

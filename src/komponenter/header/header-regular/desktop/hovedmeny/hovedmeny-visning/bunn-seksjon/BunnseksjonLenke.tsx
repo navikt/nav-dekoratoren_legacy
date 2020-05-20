@@ -2,9 +2,10 @@ import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { GACategory } from 'utils/google-analytics';
+import { gaEvent } from 'utils/google-analytics';
 import BEMHelper from 'utils/bem';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
-import { gaEvent } from 'utils/google-analytics';
+import { HoyreChevron } from 'nav-frontend-chevron';
 
 interface Props {
     url: string;
@@ -44,19 +45,14 @@ const BunnseksjonLenke = ({
         >
             <div className={cls.element('bunn-lenke-visning')}>
                 <Undertittel className={'lenkepanel__heading'}>
+                    <HoyreChevron
+                        className={cls.element('bunn-lenke-chevron')}
+                    />
                     <Tekst id={lenkeTekstId} />
                 </Undertittel>
-                <ul className={cls.element('bunn-lenke-stikkord')}>
-                    <Undertekst>
-                        {stikkord &&
-                            stikkord.split('|').map((ord) => (
-                                <li key={ord}>
-                                    <span className={'bullet'} />
-                                    {ord}
-                                </li>
-                            ))}
-                    </Undertekst>
-                </ul>
+                <Undertekst className={cls.element('bunn-lenke-stikkord')}>
+                    {stikkord}
+                </Undertekst>
             </div>
         </LenkepanelBase>
     );

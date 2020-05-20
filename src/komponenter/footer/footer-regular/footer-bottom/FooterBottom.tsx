@@ -54,11 +54,7 @@ const FooterBottom = () => {
     return (
         <section className="menylinje-bottom">
             <div className={cls.className}>
-                <NavLogoFooter
-                    width="65"
-                    height="65"
-                    classname={cls.element('bottom-logo')}
-                />
+                <NavLogoFooter classname={cls.element('bottom-logo')} />
                 <div className={cls.element('bottom-lenker')}>
                     <div>
                         <Normaltekst className="bottom-tekst">

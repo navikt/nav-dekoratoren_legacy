@@ -9,6 +9,11 @@
     padding: 0.5rem 0;
     border-bottom: 2px solid @header-separator-farge;
 
+    @media (max-height: @smallDesktopLimitHeight),
+        (max-width: @smallDesktopLimitWidth) {
+        padding: 0;
+    }
+
     .margin-left-section() {
         margin-left: @margin-mellom;
         @media (max-width: @smallDesktopLimitWidth) {
@@ -32,19 +37,36 @@
         width: 100%;
         margin: 0 auto;
 
-        @media (min-width: @desktopLimitWidth) {
-            width: @desktopLimitWidth;
+        @media (min-width: @desktopMaxWidth) {
+            width: @desktopMaxWidth;
         }
     }
 
     &__nav-brand {
         order: 1;
-        margin: 4px 0 4px @margins-sides-desktop;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 88px;
+        height: 88px;
+
+        svg {
+            width: 84px;
+            height: 84px;
+        }
+
+        svg:hover {
+            width: 88px;
+            height: 88px;
+        }
+
+        margin-left: @margins-sides-desktop;
         @media (max-width: @smallDesktopLimitWidth) {
             margin-left: @margins-sides-desktop-small;
         }
 
-        .knapp-focus();
+        .header-knapp-focus-mixin();
     }
 
     .desktop-hovedmeny__knapp {

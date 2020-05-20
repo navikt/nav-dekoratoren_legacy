@@ -20,7 +20,6 @@ import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setu
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { matchMedia } from 'utils/match-media-polyfill';
-import './HovedmenyDesktop.less';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -34,8 +33,7 @@ const classname = 'desktop-hovedmeny';
 export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';
 
 const nodeGroup = KbNavGroup.Hovedmeny;
-const mqlDesktop = matchMedia('(min-width: 1440px)');
-const mqlTablet = matchMedia('(min-width: 1024px)');
+const mqlScreenWidth = matchMedia('(min-width: 1024px)');
 
 const getMaxColsPerRow = (): Array<number> => {
     const getNumColsFromCss = (element: HTMLElement) =>
@@ -88,14 +86,10 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
         });
 
     useEffect(() => {
-        const cleanUp = () => {
-            mqlDesktop.removeEventListener('change', updateMaxCols);
-            mqlTablet.removeEventListener('change', updateMaxCols);
+        mqlScreenWidth.addEventListener('change', updateMaxCols);
+        return () => {
+            mqlScreenWidth.removeEventListener('change', updateMaxCols);
         };
-
-        mqlDesktop.addEventListener('change', updateMaxCols);
-        mqlTablet.addEventListener('change', updateMaxCols);
-        return cleanUp;
     }, []);
 
     useEffect(() => {

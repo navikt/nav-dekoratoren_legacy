@@ -1,6 +1,6 @@
 {
     "name": "nav-dekoratoren",
-    "version": "1.3.7-prod",
+    "version": "1.5.3-test",
     "private": true,
     "scripts": {
         "start-server": "node build/server.js",
