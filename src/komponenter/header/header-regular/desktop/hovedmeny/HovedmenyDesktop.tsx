@@ -86,12 +86,10 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
         });
 
     useEffect(() => {
-        const cleanUp = () => {
+        mqlScreenWidth.addEventListener('change', updateMaxCols);
+        return () => {
             mqlScreenWidth.removeEventListener('change', updateMaxCols);
         };
-
-        mqlScreenWidth.addEventListener('change', updateMaxCols);
-        return cleanUp;
     }, []);
 
     useEffect(() => {
