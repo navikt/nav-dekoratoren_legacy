@@ -20,8 +20,7 @@
         overflow-x: auto;
 
         // Ugly fix for IE11 :|
-        @media screen and (-ms-high-contrast: none),
-            screen and (-ms-high-contrast: active) {
+        *::-ms-backdrop {
             height: @maxHeight;
         }
 
