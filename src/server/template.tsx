@@ -104,7 +104,7 @@ export const template = (req: Request) => {
                 min-height: 55rem;
                 display: flex;
                 justify-content: center;
-                align-items: center;
+                align-items: flex-start;
             }
             </style>
             <!-- Styling fetched by apps -->
@@ -120,6 +120,7 @@ export const template = (req: Request) => {
                     <section id="decorator-header" class="navno-dekorator" role="main">${HtmlHeader}</section>
                 </div>
                 <div class="decorator-dummy-app">
+                    <div>"sdfsdfsdfsdfsdf"</div>
                 </div>
                 <!-- Footer fetched by apps -->
                 <div id="${footerId}">
