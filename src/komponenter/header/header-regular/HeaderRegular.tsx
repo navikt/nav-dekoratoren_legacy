@@ -9,11 +9,15 @@ import { Sticky } from 'komponenter/header/header-regular/common/sticky/Sticky';
 
 export const RegularHeader = () => {
     const language = useSelector((state: AppState) => state.language.language);
+    const mobilMenyIsOpen = useSelector(
+        (state: AppState) =>
+            state.dropdownToggles.hovedmeny || state.dropdownToggles.varsler
+    );
 
     return (
         <Fragment>
             <div className="media-sm-mobil">
-                <Sticky>
+                <Sticky fixed={mobilMenyIsOpen}>
                     <MobilMenylinje language={language} />
                 </Sticky>
             </div>
