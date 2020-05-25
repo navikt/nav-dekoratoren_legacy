@@ -2,11 +2,10 @@ FROM navikt/node-express:12.2.0-alpine
 
 WORKDIR /app
 
-COPY src src/
 COPY *.json ./
-COPY *.js ./
+COPY build ./build/
 
-RUN npm install && npm run build
+RUN npm install
 ENV NODE_ENV production
 
 EXPOSE 8088
