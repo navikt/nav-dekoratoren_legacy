@@ -146,6 +146,13 @@ export const Header = () => {
         }
     }, [erInnlogget]);
 
+    // Fjerner placeholder styling satt av enonic
+    useEffect(() => {
+        document
+            .getElementById('decorator-header')
+            ?.style.removeProperty('min-height');
+    }, []);
+
     return (
         <Fragment>
             <HeadElements />
