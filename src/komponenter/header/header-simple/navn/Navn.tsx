@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
-import './Navn.less';
 
 export const Navn = () => {
     const { authenticated, name } = useSelector(
