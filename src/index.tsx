@@ -1,6 +1,5 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
-import 'isomorphic-fetch';
 import 'core-js/stable/regexp';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -11,16 +10,11 @@ import { fetchEnv } from './utils/Environment';
 import { initGA } from './utils/google-analytics';
 import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
-import * as es6promise from 'es6-promise';
 import { CookiesProvider } from 'react-cookie';
 import Cookies from 'universal-cookie';
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
-
-if (verifyWindowObj()) {
-    es6promise.polyfill();
-}
 
 if (erDev) {
     console.log('==========================');
