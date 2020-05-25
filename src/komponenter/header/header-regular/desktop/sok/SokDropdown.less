@@ -2,11 +2,8 @@
 @import '../../common/ekspanderbar-meny/EkspanderbarMeny';
 
 .desktop-sok-dropdown {
-    @dropdownwidth: 700px;
-
     .ekspanderbar {
         &__innhold-wrapper {
-            max-width: @dropdownwidth;
             transition-duration: 0.2s;
 
             &--active {
@@ -17,7 +14,7 @@
 
         &__innhold {
             left: 0;
-            max-width: @dropdownwidth;
+            width: 700px;
         }
     }
 }

@@ -4,7 +4,7 @@ import './Sticky.less';
 const setTop = (element: HTMLElement, top: number) =>
     (element.style.top = `${top}px`);
 
-const onScroll = (
+const stickyScrollHandler = (
     prevScrollOffset: React.MutableRefObject<number>,
     baseOffset: React.MutableRefObject<number>,
     element: HTMLElement
@@ -49,13 +49,12 @@ const onScroll = (
     prevScrollOffset.current = scrollOffset;
 };
 
-export const Sticky = ({
-    fixed = false,
-    children,
-}: {
-    fixed?: boolean;
+type Props = {
+    alwaysSticky?: boolean;
     children: JSX.Element;
-}) => {
+};
+
+export const Sticky = ({ alwaysSticky = false, children }: Props) => {
     const prevScrollOffset = useRef(0);
     const baseOffset = useRef(0);
 
@@ -63,10 +62,9 @@ export const Sticky = ({
     const stickyRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const stickyElement = stickyRef.current;
-        if (stickyElement) {
+        if (stickyRef.current) {
             prevScrollOffset.current = window.pageYOffset;
-            stickyElement.style.position = 'absolute';
+            stickyRef.current.style.position = 'absolute';
         }
     }, []);
 
@@ -76,13 +74,13 @@ export const Sticky = ({
         if (!placeholderElement || !stickyElement) {
             return;
         }
-        if (fixed && stickyElement) {
+        if (alwaysSticky) {
             stickyElement.style.position = 'fixed';
             setTop(stickyElement, 0);
             return;
         }
 
-        const scrollHandler = onScroll(
+        const scrollHandler = stickyScrollHandler(
             prevScrollOffset,
             baseOffset,
             stickyElement
@@ -100,7 +98,7 @@ export const Sticky = ({
             window.removeEventListener('scroll', scrollHandler);
             window.removeEventListener('resize', resizeHandler);
         };
-    }, [fixed]);
+    }, [alwaysSticky]);
 
     return (
         <div className={'sticky-placeholder'} ref={placeholderRef}>

@@ -6,6 +6,7 @@ import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
 import DesktopMenylinje from './desktop/DesktopMenylinje';
 import { Language } from 'store/reducers/language-duck';
 import { Sticky } from 'komponenter/header/header-regular/common/sticky/Sticky';
+import { useEffect } from 'react';
 
 export const RegularHeader = () => {
     const language = useSelector((state: AppState) => state.language.language);
@@ -14,10 +15,16 @@ export const RegularHeader = () => {
             state.dropdownToggles.hovedmeny || state.dropdownToggles.varsler
     );
 
+    useEffect(() => {
+        mobilMenyIsOpen
+            ? document.body.classList.add('no-scroll')
+            : document.body.classList.remove('no-scroll');
+    }, [mobilMenyIsOpen]);
+
     return (
         <Fragment>
             <div className="media-sm-mobil">
-                <Sticky fixed={mobilMenyIsOpen}>
+                <Sticky alwaysSticky={mobilMenyIsOpen}>
                     <MobilMenylinje language={language} />
                 </Sticky>
             </div>
