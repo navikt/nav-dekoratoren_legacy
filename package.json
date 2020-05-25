@@ -3,8 +3,8 @@
     "version": "1.5.3-test",
     "private": true,
     "scripts": {
-        "start": "npm-run-all -p -r build-client-and-watch build-server-and-watch start-server-dev",
-        "start-server-dev": "nodemon build/server.js",
+        "start": "npm-run-all -p -r build-client-and-watch build-server-and-watch start-server-and-watch",
+        "start-server-and-watch": "nodemon build/server.js",
         "build": "npm-run-all -p -r build-client && npm run build-server",
         "build-client": "cross-env NODE_ENV=production webpack -p --display-error-details --config webpack.client.config.js",
         "build-server": "cross-env NODE_ENV=production webpack -p --display-error-details --config webpack.server.config.js",
