@@ -10,7 +10,7 @@ export const SimpleHeader = () => {
     const cls = BEMHelper('simple-header');
 
     return (
-        <Sticky id={'simple-sticky'}>
+        <Sticky>
             <div className={cls.className}>
                 <div className={cls.element('content')}>
                     <Navlogo className={cls.element('logo')} viewIndex={true} />

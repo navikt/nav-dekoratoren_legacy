@@ -13,14 +13,14 @@ export const RegularHeader = () => {
     return (
         <Fragment>
             <div className="media-sm-mobil">
-                {/*<Sticky id={'mobil-sticky'}>*/}
-                <MobilMenylinje language={language} />
-                {/*</Sticky>*/}
+                <Sticky>
+                    <MobilMenylinje language={language} />
+                </Sticky>
             </div>
             <div className="media-tablet-desktop">
                 <div className="header-z-wrapper">
                     {language === Language.NORSK && <Arbeidsflatemeny />}
-                    <Sticky id={'desktop-sticky'}>
+                    <Sticky>
                         <DesktopMenylinje />
                     </Sticky>
                 </div>

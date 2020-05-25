@@ -1,82 +1,96 @@
 import React, { useEffect, useRef } from 'react';
 import './Sticky.less';
 
-type Props = {
-    id: string;
-    children: JSX.Element;
-};
-
 const onScroll = (
     prevScrollOffset: React.MutableRefObject<number>,
-    minOffset: number,
+    baseOffset: React.MutableRefObject<number>,
     element: HTMLElement
 ) => () => {
+    const elementHeight = element.offsetHeight;
+    if (!elementHeight) {
+        return;
+    }
+
     const scrollOffset = window.pageYOffset;
     const elementOffset = element.offsetTop;
-    const scrollDelta = scrollOffset - prevScrollOffset.current;
+    const scrollChange = scrollOffset - prevScrollOffset.current;
 
     const setTop = (top: number) => (element.style.top = `${top}px`);
 
     const onScrollDown = () => {
         if (element.style.position !== 'absolute') {
-            const absoluteOffset = scrollOffset + Math.min(elementOffset, 0);
-            setTop(absoluteOffset);
             element.style.position = 'absolute';
+            const absoluteOffsetFromFixed =
+                scrollOffset + Math.min(elementOffset, 0) - baseOffset.current;
+            setTop(absoluteOffsetFromFixed);
         }
     };
 
     const onScrollUp = () => {
-        if (element.style.position !== 'fixed') {
-            const fixedOffset = Math.max(
-                elementOffset - scrollOffset,
-                scrollDelta - element.scrollHeight
-            );
-            setTop(Math.min(fixedOffset, 0));
-            element.style.position = 'fixed';
+        if (element.style.position === 'fixed') {
+            setTop(Math.min(elementOffset - scrollChange, 0));
         } else {
-            setTop(Math.min(elementOffset - scrollDelta, 0));
+            element.style.position = 'fixed';
+            const fixedOffsetFromAbsolute = Math.max(
+                elementOffset - scrollOffset + baseOffset.current,
+                scrollChange - element.scrollHeight
+            );
+            setTop(Math.min(fixedOffsetFromAbsolute, 0));
         }
     };
 
-    if (scrollOffset <= minOffset) {
-        setTop(minOffset);
+    if (scrollOffset <= baseOffset.current) {
         element.style.position = 'absolute';
+        setTop(0);
     } else {
-        scrollDelta >= 0 ? onScrollDown() : onScrollUp();
+        scrollChange >= 0 ? onScrollDown() : onScrollUp();
     }
 
     prevScrollOffset.current = scrollOffset;
 };
 
-export const Sticky = ({ id, children }: Props) => {
+export const Sticky = ({ children }: { children: JSX.Element }) => {
     const prevScrollOffset = useRef(0);
-    const placeholderId = `${id}-placeholder`;
+    const baseOffset = useRef(0);
+
+    const placeholderRef = useRef<HTMLDivElement>(null);
+    const stickyRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const element = document.getElementById(id);
-        const placeholder = document.getElementById(placeholderId);
-        if (!element || !placeholder) {
+        const placeholderElement = placeholderRef.current;
+        const stickyElement = stickyRef.current;
+        if (!placeholderElement || !stickyElement) {
             return;
         }
+
         const scrollHandler = onScroll(
             prevScrollOffset,
-            element.offsetTop,
-            element
+            baseOffset,
+            stickyElement
         );
+        const resizeHandler = () => {
+            placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
+            baseOffset.current = placeholderElement.offsetTop;
+            scrollHandler();
+        };
+
         prevScrollOffset.current = window.pageYOffset;
-        element.style.position = 'absolute';
-        placeholder.style.height = `${element.scrollHeight}px`;
-        scrollHandler();
+        stickyElement.style.position = 'absolute';
+        resizeHandler();
+
         window.addEventListener('scroll', scrollHandler);
-        return () => window.removeEventListener('scroll', scrollHandler);
+        window.addEventListener('resize', resizeHandler);
+        return () => {
+            window.removeEventListener('scroll', scrollHandler);
+            window.removeEventListener('resize', resizeHandler);
+        };
     }, []);
 
     return (
-        <>
-            <div className={'sticky-placeholder'} id={placeholderId} />
-            <div className={'sticky-container'} id={id}>
+        <div className={'sticky-placeholder'} ref={placeholderRef}>
+            <div className={'sticky-container'} ref={stickyRef}>
                 {children}
             </div>
-        </>
+        </div>
     );
 };

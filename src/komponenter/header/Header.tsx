@@ -78,10 +78,9 @@ export const Header = () => {
 
     // Fjerner placeholder styling satt av enonic
     useEffect(() => {
-        const headerElement = document.getElementById('decorator-header');
-        if (headerElement) {
-            headerElement.style.removeProperty('min-height');
-        }
+        document
+            .getElementById('decorator-header')
+            ?.style.removeProperty('min-height');
     }, []);
 
     return (

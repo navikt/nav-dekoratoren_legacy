@@ -120,7 +120,7 @@ export const template = (req: Request) => {
                     <section id="decorator-header" class="navno-dekorator" role="main">${HtmlHeader}</section>
                 </div>
                 <div class="decorator-dummy-app">
-                    <div>"sdfsdfsdfsdfsdf"</div>
+                    <div>Hello world!</div>
                 </div>
                 <!-- Footer fetched by apps -->
                 <div id="${footerId}">
