@@ -1,10 +1,12 @@
 @import '../../../../../styling-variabler.less';
 
 .siteheader .arbeidsflate {
+    @separator-height: 1px;
+
     width: 100%;
     background-color: white;
     height: 2.75rem;
-    border-bottom: @navGra20 1px solid;
+    border-bottom: @navGra20 @separator-height solid;
 
     &__topp-liste-rad {
         white-space: nowrap;
@@ -23,7 +25,7 @@
     }
 
     &__lenke {
-        height: 100%;
+        height: calc(100% + @separator-height);
         display: inline-block;
         text-decoration: none;
         color: black;
@@ -42,20 +44,18 @@
         display: flex;
         margin: 0 1rem;
         align-items: center;
+        border-bottom: transparent 3px solid;
 
         &:hover {
-            border-top: transparent 3px solid;
             border-bottom: @navBla 3px solid;
         }
 
         &--active {
-            border-top: transparent 3px solid;
             border-bottom: @navBla 3px solid;
             p {
                 text-shadow: 0 0 1px black;
             }
             &:hover {
-                border-top: transparent 3px solid;
                 border-bottom: @navBla 3px solid;
             }
         }
