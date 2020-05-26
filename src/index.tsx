@@ -1,6 +1,10 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'isomorphic-fetch';
+
+// Nødvendig for IE11-støtte i visse apper.
+// Ikke oppgrader fra v.3.5.0 før denne er fikset:
+// https://github.com/zloirock/core-js/issues/741
 import 'core-js/stable/regexp';
 import React from 'react';
 import ReactDOM from 'react-dom';

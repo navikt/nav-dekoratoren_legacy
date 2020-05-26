@@ -1,20 +1,13 @@
 .desktop-sok-dropdown {
-    @dropdownwidth: 700px;
-
     .ekspanderbar {
         &__innhold-wrapper {
-            max-width: @dropdownwidth;
+            width: 700px;
             transition-duration: 0.2s;
 
             &--active {
                 max-height: 12rem;
                 transition-duration: 0.3s;
             }
-        }
-
-        &__innhold {
-            left: 0;
-            max-width: @dropdownwidth;
         }
     }
 }

@@ -4,6 +4,13 @@ body {
     overflow-y: scroll;
 }
 
+body.no-scroll {
+    overflow-y: hidden;
+    @media (min-width: @desktopMinWidth) {
+        overflow-y: scroll;
+    }
+}
+
 #top-element {
     width: 0;
     height: 0;
@@ -14,22 +21,16 @@ body {
     background-color: white;
 }
 
-.siteheader,
-.head-wrapper {
+.siteheader {
     position: relative;
+    z-index: 1000;
+    width: 100%;
 }
 
 .desktopmeny,
 .mobilmeny {
     width: 100%;
     background-color: white;
-}
-
-.siteheader,
-.head-wrapper,
-.head-container {
-    z-index: 1000;
-    width: 100%;
 }
 
 .header-z-wrapper {

@@ -6,12 +6,11 @@
 
     .ekspanderbar {
         &__innhold-wrapper {
+            width: @smallDesktopLimitWidth;
+            @media (max-width: @smallDesktopLimitWidth) {
+                width: 100vw;
+            }
             right: 0;
-            max-width: @smallDesktopLimitWidth;
-        }
-
-        &__innhold {
-            max-width: @smallDesktopLimitWidth;
         }
     }
 
