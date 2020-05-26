@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { reducers } from 'store/reducers';
 import { createStore, Store } from 'redux';
 import MobilMenylinje from './MobilMenylinje';
-import NavLogoRod from 'ikoner/meny/NavLogoRod';
+import HeaderLogoRod from 'komponenter/header/header-regular/common/logo/HeaderLogoRod';
 import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
 import { ActionType } from '../../../../store/actions';
 import { Status } from '../../../../api/api';
@@ -22,7 +22,7 @@ const getWrapper = (store: Store) =>
 
 describe('<MobilMenylinje /> sjekk at komponent finner logo', () => {
     it('Skal rendre <NavLogoRod> komponent', () => {
-        expect(getWrapper(store).find(NavLogoRod)).toHaveLength(1);
+        expect(getWrapper(store).find(HeaderLogoRod)).toHaveLength(1);
     });
 });
 

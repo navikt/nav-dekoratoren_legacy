@@ -1,0 +1,42 @@
+@import '../../../../../styling-variabler.less';
+
+.header-logo-rod {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        //transition: transform 0.1s ease-out;
+        &:hover {
+            transform: scale(1.08);
+        }
+    }
+
+    @media (max-width: @desktopMinWidth) {
+        width: 66px;
+        height: 66px;
+
+        img {
+            width: 62px;
+            height: 62px;
+        }
+
+        &:hover {
+            outline: 3px solid black;
+        }
+        &:focus {
+            outline: 3px solid @fokusFarge;
+        }
+    }
+
+    @media (min-width: @desktopMinWidth) {
+        .header-knapp-focus-mixin();
+        width: 92px;
+        height: 68px;
+
+        img {
+            width: 88px;
+            height: 68px;
+        }
+    }
+}

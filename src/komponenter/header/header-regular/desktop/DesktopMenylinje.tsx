@@ -1,6 +1,6 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import NavLogoRod from 'ikoner/meny/NavLogoRod';
+import HeaderLogoRod from 'komponenter/header/header-regular/common/logo/HeaderLogoRod';
 import { SokDropdown } from './sok/SokDropdown';
 import { HovedmenyDesktop } from './hovedmeny/HovedmenyDesktop';
 import { MinsideMeny } from './minside-meny/MinsideMeny';
@@ -32,7 +32,7 @@ const DesktopMenylinje = () => {
     return (
         <nav className={cls.className} aria-label="Hovedmeny" id="hovedmeny">
             <div className={cls.element('elementer')}>
-                <NavLogoRod
+                <HeaderLogoRod
                     classname={cls.element('nav-brand')}
                     id={desktopHeaderLogoId}
                 />

@@ -6,7 +6,6 @@
     @maxheight-menuitem: 48px;
 
     width: 100%;
-    padding: 0.5rem 0;
     border-bottom: 2px solid @header-separator-farge;
 
     @media (max-height: @smallDesktopLimitHeight),
@@ -33,40 +32,22 @@
         align-items: center;
         flex-wrap: wrap;
         justify-content: space-between;
-        padding: 0;
         width: 100%;
         margin: 0 auto;
+        padding: 1rem 0;
 
         @media (min-width: @desktopMaxWidth) {
             width: @desktopMaxWidth;
         }
     }
 
-    &__nav-brand {
+    .header-logo-rod {
         order: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        width: 88px;
-        height: 88px;
-
-        svg {
-            width: 84px;
-            height: 84px;
-        }
-
-        svg:hover {
-            width: 88px;
-            height: 88px;
-        }
 
         margin-left: @margins-sides-desktop;
         @media (max-width: @smallDesktopLimitWidth) {
             margin-left: @margins-sides-desktop-small;
         }
-
-        .header-knapp-focus-mixin();
     }
 
     .desktop-hovedmeny__knapp {

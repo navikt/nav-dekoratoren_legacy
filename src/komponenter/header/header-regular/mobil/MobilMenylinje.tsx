@@ -1,6 +1,6 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import NavLogoRod from 'ikoner/meny/NavLogoRod';
+import HeaderLogoRod from 'komponenter/header/header-regular/common/logo/HeaderLogoRod';
 import { Language } from 'store/reducers/language-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
@@ -50,7 +50,7 @@ const MobilMenylinje = ({ language }: Props) => {
             <div className={mobilClass.element('content')}>
                 <div className={mobilClass.element('elementer')}>
                     <div className={mobilClass.element('venstre-kolonne')}>
-                        <NavLogoRod classname={mobilClass.element('logo')} />
+                        <HeaderLogoRod classname={mobilClass.element('logo')} />
                     </div>
                     <div className={mobilClass.element('hoyre-kolonne')}>
                         {visInnloggingsKnapp && <LoggInnKnapp type={'flat'} />}
