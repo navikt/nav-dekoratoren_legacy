@@ -1,14 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { Status } from 'api/api';
 import { AppState } from 'store/reducers';
 import { getHovedmenyNode } from 'utils/meny-storage-utils';
 import Tekst from 'tekster/finn-tekst';
-import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
-import { GACategory, gaEvent } from 'utils/google-analytics';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
 import { HovedmenyVisning } from './hovedmeny-visning/HovedmenyVisning';
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
@@ -64,7 +62,6 @@ type Props = {
 };
 
 export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
-    const dispatch = useDispatch();
     const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(
         stateSelector
     );
@@ -96,14 +93,10 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
         updateMaxCols();
     }, [hovedmenyPunkter, arbeidsflate]);
 
-    const toggleMenu = () => {
-        gaEvent({
-            context: arbeidsflate,
-            category: GACategory.Header,
-            action: `meny-${isOpen ? 'close' : 'open'}`,
-        });
-        dispatch(toggleHovedmeny());
-    };
+    // Hide empty menues
+    if (menyPunkter.status === Status.OK && !hovedmenyPunkter?.hasChildren) {
+        return null;
+    }
 
     const knapp = (
         <MenylinjeKnapp
@@ -119,11 +112,6 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
             </Undertittel>
         </MenylinjeKnapp>
     );
-
-    // Hide empty menues
-    if (menyPunkter.status === Status.OK && !hovedmenyPunkter?.hasChildren) {
-        return null;
-    }
 
     return (
         <EkspanderbarMeny
