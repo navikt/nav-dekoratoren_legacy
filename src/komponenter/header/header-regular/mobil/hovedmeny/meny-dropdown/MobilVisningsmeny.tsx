@@ -68,11 +68,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
         };
     }
 
-    hideBackgroundOverflow = (setOverflowHidden: boolean) => {
-        document.body.style.overflow =
-            setOverflowHidden && window.innerWidth < 768 ? 'hidden' : 'inherit';
-    };
-
     hovedseksjonTabIndex = (): boolean => {
         return (
             this.props.menuIsOpen &&
@@ -114,7 +109,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
             minsideLenker,
         } = this.props;
         const menyClass = BEMHelper(classname);
-        this.hideBackgroundOverflow(menuIsOpen || varslerIsOpen);
         return (
             <>
                 <section

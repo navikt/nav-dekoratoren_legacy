@@ -119,6 +119,7 @@ const browserConfig = {
                                             exclude: [
                                                 /\b(\w*(M|m)odal\w*)\b/,
                                                 'body',
+                                                'body.no-scroll',
                                                 '.siteheader',
                                                 '.sitefooter',
                                                 /\b(\w*lukk-container\w*)\b/,
