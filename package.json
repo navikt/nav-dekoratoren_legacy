@@ -28,6 +28,7 @@
     "dependencies": {
         "@navikt/fnrvalidator": "^1.1.2",
         "@promster/express": "^4.1.11",
+        "amplitude-js": "^6.2.0",
         "classnames": "^2.2.6",
         "console-stamp": "^0.2.9",
         "core-js": "3.6.5",
