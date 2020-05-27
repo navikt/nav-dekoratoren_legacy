@@ -2,12 +2,13 @@ require('console-stamp')(console, '[HH:MM:ss.l]');
 import NodeCache from 'node-cache';
 import fetch from 'node-fetch';
 import express, { Request, Response } from 'express';
-const { createMiddleware } = require('@promster/express');
-const { getSummary, getContentType } = require('@promster/express');
+import { createMiddleware } from '@promster/express';
+import { getSummary, getContentType } from '@promster/express';
 import { clientEnv, fiveMinutesInSeconds, oneMinuteInSeconds } from './utils';
 import cookiesMiddleware from 'universal-cookie-express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
+import compression from 'compression';
 import dotenv from 'dotenv';
 import mockMenu from './mock/menu.json';
 
@@ -35,8 +36,9 @@ const backupCache = new NodeCache({
     checkperiod: 0,
 });
 
-// Cors
+// Middleware
 app.disable('x-powered-by');
+app.use(compression());
 app.use(cookiesMiddleware());
 app.use((req, res, next) => {
     // Allowed origins

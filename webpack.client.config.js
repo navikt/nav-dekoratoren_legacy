@@ -1,7 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpack = require('webpack');
-const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
@@ -153,8 +152,6 @@ const browserConfig = {
         new SpriteLoaderPlugin({
             plainSprite: true,
         }),
-
-        new CompressionWebpackPlugin(),
     ],
 };
 
