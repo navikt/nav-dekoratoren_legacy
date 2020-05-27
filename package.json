@@ -30,6 +30,7 @@
         "@promster/express": "^4.1.11",
         "amplitude-js": "^6.2.0",
         "classnames": "^2.2.6",
+        "compression-webpack-plugin": "^4.0.0",
         "console-stamp": "^0.2.9",
         "core-js": "3.6.5",
         "dotenv": "^8.2.0",

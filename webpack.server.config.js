@@ -1,13 +1,14 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpack = require('webpack');
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const nodeExternals = require('webpack-node-externals');
 const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 
 const browserConfig = {
-    mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'development',
+    mode: process.env.NODE_ENV || 'development',
     target: 'node',
     externals: [
         nodeExternals({
@@ -23,8 +24,7 @@ const browserConfig = {
         filename: 'server.js',
         libraryTarget: 'commonjs2',
     },
-
-    devtool: 'source-map',
+    devtool: process.env.NODE_ENV === "production" ? '' : 'source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         alias: {
@@ -161,6 +161,8 @@ const browserConfig = {
         new SpriteLoaderPlugin({
             plainSprite: true,
         }),
+
+        new CompressionWebpackPlugin(),
     ],
 };
 
