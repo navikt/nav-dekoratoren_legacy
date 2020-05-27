@@ -15,7 +15,7 @@ export const initAmplitude = () => {
 };
 
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
-    return new Promise(function (resolve) {
+    return new Promise((resolve) => {
         const eventData = data || {};
         eventData.origin = 'dekoratøren';
         eventData.originVersion = 'unknown';
