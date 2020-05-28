@@ -3,12 +3,12 @@ import BEMHelper from 'utils/bem';
 import './MenylinjeKnapp.less';
 
 interface Props {
-    onClick?: () => void;
     isOpen: boolean;
     classname: string;
-    id?: string;
+    onClick: () => void;
+    ariaControls: string;
     ariaLabel?: string;
-    ariaControls?: string;
+    id?: string;
     children: React.ReactNode;
 }
 

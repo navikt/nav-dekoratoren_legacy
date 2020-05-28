@@ -13,9 +13,10 @@ import { MenuValue } from 'utils/meny-storage-utils';
 type Props = {
     isOpen: boolean;
     arbeidsflate: MenuValue;
+    className: string;
 };
 
-export const HovedmenyKnapp = ({ isOpen, arbeidsflate }: Props) => {
+export const HovedmenyKnapp = ({ isOpen, arbeidsflate, className }: Props) => {
     const dispatch = useDispatch();
 
     const toggleMenu = () => {
@@ -29,11 +30,11 @@ export const HovedmenyKnapp = ({ isOpen, arbeidsflate }: Props) => {
 
     return (
         <MenylinjeKnapp
-            onClick={toggleMenu}
             isOpen={isOpen}
-            classname={classname}
+            classname={className}
+            onClick={toggleMenu}
+            ariaControls={className}
             id={desktopHovedmenyKnappId}
-            ariaLabel={'Hovedmenyknapp'}
         >
             <HamburgerIkon isOpen={isOpen} />
             <Undertittel>
