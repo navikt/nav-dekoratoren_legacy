@@ -1,11 +1,10 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { genererUrl } from 'utils/Environment';
-import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import Lock from 'ikoner/meny/Lock';
 
 interface Props {
     lenke: MenyNode;
@@ -21,18 +20,9 @@ export const MenyLenke = (props: Props) => {
     const displayLock = props.displayLock && auth.securityLevel !== '4';
     const { lenke, isOpen, menyGruppeNavn } = props;
     const href = genererUrl(XP_BASE_URL, lenke.path);
-    const lockStyle = {
-        position: 'absolute',
-        left: '-20px',
-    } as CSSProperties;
 
     return (
-        <li style={{ position: 'relative' }}>
-            {displayLock && (
-                <div style={lockStyle}>
-                    <Lock height={'18px'} width={'18px'} />
-                </div>
-            )}
+        <li>
             <LenkeMedGA
                 tabIndex={isOpen ? 0 : -1}
                 href={href}
@@ -43,6 +33,7 @@ export const MenyLenke = (props: Props) => {
                     label: href,
                 }}
                 withChevron={true}
+                withLock={displayLock}
             >
                 {lenke.displayName}
             </LenkeMedGA>

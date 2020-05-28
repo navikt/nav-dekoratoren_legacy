@@ -25,7 +25,6 @@
 
         .col-breaker {
             display: block;
-            flex-basis: 100%;
             width: 0;
             margin: 0;
             min-height: @minHeight;
@@ -38,6 +37,11 @@
             min-height: @maxHeight - @minHeight + 1px;
             .mosaic-order(1, @numCols);
         }
+    }
+
+    &__hoved-seksjon-wrapper {
+        width: 100%;
+        overflow-x: auto;
     }
 
     &__hoved-seksjon {
@@ -57,7 +61,7 @@
         }
 
         @media (max-height: @smallDesktopLimitHeight) {
-            .mosaic-setup(400px, 525px, @hovedseksjon-cols-lg);
+            .mosaic-setup(400px, 550px, @hovedseksjon-cols-lg);
         }
 
         @media (max-width: @smallDesktopLimitWidth) {

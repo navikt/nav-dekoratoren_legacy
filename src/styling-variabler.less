@@ -25,16 +25,9 @@
 .flex-col-width-mixin(@cols, @margins) {
     max-width: calc(percentage(1 / @cols) - (@margins - @margins / @cols));
     flex-basis: 100%;
-    &:not(:nth-child(@{cols}n)) {
-        margin-right: @margins;
-    }
-}
-
-.lenke-stil-mixin() {
-    .lenke;
-    text-decoration: underline;
-    &:hover {
-        text-decoration: none;
+    margin-right: @margins;
+    &:nth-child(@{cols}n) {
+        margin-right: 0;
     }
 }
 

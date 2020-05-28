@@ -2,7 +2,7 @@ import React from 'react';
 import BEMHelper from 'utils/bem';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
-import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import './MinsideKnapper.less';
 
