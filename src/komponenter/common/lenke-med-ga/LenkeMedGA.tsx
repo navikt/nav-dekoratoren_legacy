@@ -1,8 +1,8 @@
 import React from 'react';
 import { GAEventArgs, gaEvent } from 'utils/google-analytics';
 import { HoyreChevron } from 'nav-frontend-chevron';
-import './LenkeMedGA.less';
 import Lock from 'ikoner/meny/Lock';
+import './LenkeMedGA.less';
 
 type Props = {
     href: string;
