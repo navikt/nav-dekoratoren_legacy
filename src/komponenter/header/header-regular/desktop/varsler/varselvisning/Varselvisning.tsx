@@ -2,7 +2,7 @@ import React from 'react';
 import { AppState } from 'store/reducers';
 import { GACategory } from 'utils/google-analytics';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
-import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';

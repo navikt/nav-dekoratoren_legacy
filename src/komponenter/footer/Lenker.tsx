@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { useSelector } from 'react-redux';
