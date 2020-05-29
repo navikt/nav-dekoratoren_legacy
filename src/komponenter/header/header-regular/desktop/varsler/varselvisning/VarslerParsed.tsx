@@ -1,6 +1,6 @@
 import React from 'react';
 import htmlReactParser, { DomElement, domToReact } from 'html-react-parser';
-import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { useSelector } from 'react-redux';
@@ -56,7 +56,6 @@ const parseLenke = (
         <LenkeMedGA
             href={href || ''}
             tabIndex={0}
-            className={'varsel-lenke'}
             id={
                 rowIndex !== undefined && subIndex !== undefined
                     ? getKbId(KbNavGroup.Varsler, {
