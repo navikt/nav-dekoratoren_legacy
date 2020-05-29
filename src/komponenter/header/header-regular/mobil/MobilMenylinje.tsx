@@ -5,10 +5,10 @@ import { Language } from 'store/reducers/language-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
-import { VarslerKnapp } from 'komponenter/header/header-regular/common/meny-knapper/varsler-knapp/VarslerKnapp';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Status } from 'api/api';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn-knapp/LoggInnKnapp';
+import { Varselbjelle } from 'komponenter/header/header-regular/mobil/varsler/Varselbjelle';
 import './MobilMenylinje.less';
 
 const mobilClass = BEMHelper('mobilmeny');
@@ -54,7 +54,7 @@ const MobilMenylinje = ({ language }: Props) => {
                     </div>
                     <div className={mobilClass.element('hoyre-kolonne')}>
                         {visInnloggingsKnapp && <LoggInnKnapp type={'flat'} />}
-                        {visVarslerDropdown && <VarslerKnapp />}
+                        {visVarslerDropdown && <Varselbjelle />}
                         {visHovedMeny && <HovedmenyMobil />}
                     </div>
                 </div>

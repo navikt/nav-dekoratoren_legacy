@@ -3,9 +3,9 @@ import BEMHelper from 'utils/bem';
 import './MenylinjeKnapp.less';
 
 interface Props {
+    onClick: () => void;
     isOpen: boolean;
     classname: string;
-    onClick: () => void;
     ariaControls: string;
     ariaLabel?: string;
     id?: string;

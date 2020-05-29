@@ -62,30 +62,31 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
         );
     }
 
-    const brukerNavn = innloggetStatus.name.toLowerCase();
-
-    const knapp = (
-        <MinsidePersonKnapp
-            onClick={() => {
-                gaEvent({
-                    context: arbeidsflate,
-                    category: GACategory.Header,
-                    action: `minside-meny-${isOpen ? 'close' : 'open'}`,
-                });
-                dispatch(toggleMinsideMeny());
-            }}
-            isOpen={isOpen}
-            classname={classname}
-            id={desktopMinsideKnappId}
-            ariaLabel={'Min side menyknapp'}
-            brukerNavn={brukerNavn}
-        />
-    );
-
     // Hide empty menues
     if (menyPunkter.status === Status.OK && !minsideMenyPunkter?.hasChildren) {
         return null;
     }
+
+    const toggleMinSideDropdown = () => {
+        gaEvent({
+            context: arbeidsflate,
+            category: GACategory.Header,
+            action: `minside-meny-${isOpen ? 'close' : 'open'}`,
+        });
+        dispatch(toggleMinsideMeny());
+    };
+
+    const brukerNavn = innloggetStatus.name.toLowerCase();
+
+    const knapp = (
+        <MinsidePersonKnapp
+            onClick={toggleMinSideDropdown}
+            isOpen={isOpen}
+            minsideDropdownClassname={classname}
+            id={desktopMinsideKnappId}
+            brukerNavn={brukerNavn}
+        />
+    );
 
     return (
         <EkspanderbarMeny

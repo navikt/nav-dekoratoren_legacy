@@ -16,6 +16,10 @@ import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { matchMedia } from 'utils/match-media-polyfill';
 import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapper/hovedmeny-knapp/HovedmenyKnapp';
 import { getHovedmenyMaxColsPerRow } from 'utils/keyboard-navigation/kb-navigation-setup';
+import { gaEvent } from 'utils/google-analytics';
+import { GACategory } from 'utils/google-analytics';
+import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
+import { useDispatch } from 'react-redux';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -36,6 +40,7 @@ type Props = {
 };
 
 export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
+    const dispatch = useDispatch();
     const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(
         stateSelector
     );
@@ -72,11 +77,21 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
         return null;
     }
 
+    const toggleMenu = () => {
+        gaEvent({
+            context: arbeidsflate,
+            category: GACategory.Header,
+            action: `meny-${isOpen ? 'close' : 'open'}`,
+        });
+        dispatch(toggleHovedmeny());
+    };
+
     const knapp = (
         <HovedmenyKnapp
             isOpen={isOpen}
-            arbeidsflate={arbeidsflate}
-            className={classname}
+            onClick={toggleMenu}
+            hovedmenyClassname={classname}
+            id={desktopHovedmenyKnappId}
         />
     );
 
