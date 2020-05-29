@@ -21,25 +21,27 @@ export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
     const cls = BEMHelper(classname);
 
     return (
-        <div
-            className={`${cls.element('hoved-seksjon')}${
-                isIE() ? ' is-ie' : ''
-            }`}
-        >
-            {menyLenker &&
-                menyLenker.children.map((menygruppe, index) => (
-                    <MenyLenkeSeksjon
-                        menygruppe={menygruppe}
-                        isOpen={isOpen}
-                        colIndex={index}
-                        rowIndex={1}
-                        kbNodeGroup={KbNavGroup.Hovedmeny}
-                        key={menygruppe.displayName}
-                    />
+        <div className={cls.element('hoved-seksjon-wrapper')}>
+            <div
+                className={`${cls.element('hoved-seksjon')}${
+                    isIE() ? ' is-ie' : ''
+                }`}
+            >
+                {menyLenker &&
+                    menyLenker.children.map((menygruppe, index) => (
+                        <MenyLenkeSeksjon
+                            menygruppe={menygruppe}
+                            isOpen={isOpen}
+                            colIndex={index}
+                            rowIndex={1}
+                            kbNodeGroup={KbNavGroup.Hovedmeny}
+                            key={menygruppe.displayName}
+                        />
+                    ))}
+                {[...Array(maxCols)].map((_, index) => (
+                    <div className={'col-breaker'} key={index} />
                 ))}
-            {[...Array(maxCols)].map((_, index) => (
-                <div className={'col-breaker'} key={index} />
-            ))}
+            </div>
         </div>
     );
 };

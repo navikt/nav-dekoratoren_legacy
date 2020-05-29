@@ -4,7 +4,7 @@ import React from 'react';
 import BEMHelper from 'utils/bem';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { GACategory } from 'utils/google-analytics';
-import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { getArbeidsflateContext } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
@@ -44,7 +44,6 @@ export const Toppseksjon = ({ classname }: Props) => {
                         window.location.href = context.url;
                     }
                 }}
-                className={cls.element('topp-seksjon-lenke')}
                 id={KbNav.getKbId(KbNavGroup.Hovedmeny, {
                     col: 0,
                     row: 0,

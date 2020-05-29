@@ -6,7 +6,7 @@ import { gaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { Language } from 'store/reducers/language-duck';
-import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import './Varselvisning.less';
 
 interface OwnProps {
