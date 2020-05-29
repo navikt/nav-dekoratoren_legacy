@@ -9,16 +9,16 @@ export const initAmplitude = () => {
         includeReferrer: true,
         platform: window.location.toString(),
     });
-    contentEngaged(1, ()=>{
-        logAmplitudeEvent('sidevisning')
-    })
+    contentEngaged(1, () => {
+        logAmplitudeEvent('sidevisning');
+    });
 };
 
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
     return new Promise(function (resolve) {
-        const eventData = data || {}
-        eventData.origin = 'dekoratøren'
-        eventData.originVersion = 'unknown'
-        amplitude.getInstance().logEvent(eventName, eventData, resolve)
+        const eventData = data || {};
+        eventData.origin = 'dekoratøren';
+        eventData.originVersion = 'unknown';
+        amplitude.getInstance().logEvent(eventName, eventData, resolve);
     });
 }
