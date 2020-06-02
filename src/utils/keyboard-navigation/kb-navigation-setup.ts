@@ -145,3 +145,27 @@ export const createHeaderMainGraph = (
 
     return createKbNavGraph(group, rootIndex, maxColsPerRow, idMap);
 };
+
+export const getHovedmenyMaxColsPerRow = (classname: string): Array<number> => {
+    const getNumColsFromCss = (element: HTMLElement) =>
+        parseInt(
+            window.getComputedStyle(element).getPropertyValue('--num-cols'),
+            10
+        );
+
+    const toppSeksjonCols = 1;
+
+    const hovedSeksjonElement = document.getElementsByClassName(
+        `${classname}__hoved-seksjon`
+    )[0] as HTMLElement;
+    const hovedSeksjonCols =
+        (hovedSeksjonElement && getNumColsFromCss(hovedSeksjonElement)) || 1;
+
+    const bunnSeksjonElement = document.getElementsByClassName(
+        `${classname}__bunn-seksjon`
+    )[0] as HTMLElement;
+    const bunnSeksjonCols =
+        (bunnSeksjonElement && getNumColsFromCss(bunnSeksjonElement)) || 1;
+
+    return [toppSeksjonCols, hovedSeksjonCols, bunnSeksjonCols];
+};

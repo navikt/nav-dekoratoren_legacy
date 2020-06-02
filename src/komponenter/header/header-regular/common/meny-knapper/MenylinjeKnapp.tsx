@@ -3,35 +3,33 @@ import BEMHelper from 'utils/bem';
 import './MenylinjeKnapp.less';
 
 interface Props {
-    onClick?: () => void;
+    onClick: () => void;
     isOpen: boolean;
     classname: string;
+    ariaControls: string;
+    ariaLabel?: string;
     id?: string;
-    ariaLabel: string;
     children: React.ReactNode;
 }
 
 const MenylinjeKnapp = (props: Props) => {
-    const { onClick, isOpen, classname, id, ariaLabel, children } = props;
-    const cls = BEMHelper(classname);
+    const cls = BEMHelper(props.classname);
 
     return (
         <button
-            onClick={onClick}
+            onClick={props.onClick}
             className={`menylinje-knapp ${cls.element('knapp')}`}
-            id={id}
-            aria-label={ariaLabel}
-            aria-pressed={isOpen}
-            aria-haspopup="true"
-            aria-controls={classname}
-            aria-expanded={isOpen}
+            id={props.id}
+            aria-label={props.ariaLabel}
+            aria-controls={props.ariaControls}
+            aria-expanded={props.isOpen}
         >
             <div
                 className={`menylinje-knapp-visning ${cls.element(
                     'knapp-visning'
                 )}`}
             >
-                {children}
+                {props.children}
             </div>
         </button>
     );
