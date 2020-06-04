@@ -40,4 +40,16 @@
             box-shadow: 0 0 0 2px @fokusFarge;
         }
     }
+
+    &__mobil {
+        @media (min-width: @desktopMinWidth) {
+            display: none;
+        }
+    }
+
+    &__desktop {
+        @media (max-width: @desktopMinWidth) {
+            display: none;
+        }
+    }
 }

@@ -1,42 +1,64 @@
 import React, { useEffect, useState } from 'react';
 import Tekst from 'tekster/finn-tekst';
-import { mobilviewMax } from '../../../styling-mediaquery';
-import { matchMedia } from 'utils/match-media-polyfill';
 import { mobilHovedmenyKnappId } from '../header-regular/mobil/hovedmeny/HovedmenyMobil';
 import { desktopHovedmenyKnappId } from '../header-regular/desktop/hovedmeny/HovedmenyDesktop';
-import './Skiplinks.less';
 import { useDispatch } from 'react-redux';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
+import './Skiplinks.less';
+
+type SkipLink = {
+    href?: string;
+    tekstId: string;
+    onClick?: () => void;
+};
+
+const SkipLinkElement = ({
+    link,
+    className,
+}: {
+    link: SkipLink;
+    className?: string;
+}) => (
+    <li>
+        <a
+            href={`#${link.href || ''}`}
+            className={`visuallyhidden focusable ${className || ''}`}
+            onClick={link.onClick}
+        >
+            <Tekst id={link.tekstId} />
+        </a>
+    </li>
+);
 
 const Skiplinks = () => {
-    const [soklink, setSoklink] = useState<string>('');
-    const [hovedmenylink, setHovedmenylink] = useState<string>('');
-    const [isMobile, setIsMobile] = useState<boolean>();
     const dispatch = useDispatch();
+    const [hasMainContent, setHasMainContent] = useState(false);
 
-    const mqlMobilMax = matchMedia(`(max-width: ${mobilviewMax}px)`);
+    const mobilLinks: SkipLink[] = [
+        {
+            href: mobilHovedmenyKnappId,
+            tekstId: 'skiplinks-ga-til-hovedmeny',
+        },
+        {
+            tekstId: 'skiplinks-ga-til-sok',
+        },
+    ];
+
+    const desktopLinks: SkipLink[] = [
+        {
+            href: desktopHovedmenyKnappId,
+            tekstId: 'skiplinks-ga-til-hovedmeny',
+        },
+        {
+            tekstId: 'skiplinks-ga-til-sok',
+            onClick: () => dispatch(toggleSok()),
+        },
+    ];
 
     useEffect(() => {
-        setIsMobile(window.innerWidth <= mobilviewMax);
-        mqlMobilMax.addEventListener('change', handleResize);
-        return () => {
-            mqlMobilMax.removeEventListener('change', handleResize);
-        };
+        const mainContentElement = document.getElementById('maincontent');
+        setHasMainContent(!!mainContentElement);
     }, []);
-
-    useEffect(() => {
-        const hovedmenyKnappId = isMobile
-            ? mobilHovedmenyKnappId
-            : desktopHovedmenyKnappId;
-        setHovedmenylink(`#${hovedmenyKnappId}`);
-
-        const idSokLink = isMobile ? 'mobil-decorator-sok-toggle' : '';
-        setSoklink(`#${idSokLink}`);
-    }, [isMobile]);
-
-    const handleResize = (event: MediaQueryListEvent) => {
-        setIsMobile(event.matches);
-    };
 
     return (
         <nav
@@ -45,34 +67,28 @@ const Skiplinks = () => {
             aria-label="Hopp til innhold"
         >
             <ul>
-                <li>
-                    <a
-                        href={hovedmenylink}
-                        className="visuallyhidden focusable"
-                        id="hovedmenylenke"
-                    >
-                        <Tekst id="skiplinks-ga-til-hovedmeny" />
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="#maincontent"
-                        className="visuallyhidden focusable"
-                        id="hovedinnholdlenke"
-                    >
-                        <Tekst id="skiplinks-ga-til-hovedinnhold" />
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href={soklink}
-                        className="visuallyhidden focusable"
-                        id="soklenke"
-                        onClick={() => !isMobile && dispatch(toggleSok())}
-                    >
-                        <Tekst id="skiplinks-ga-til-sok" />
-                    </a>
-                </li>
+                {mobilLinks.map((link, index) => (
+                    <SkipLinkElement
+                        link={link}
+                        className={'site-skiplinks__mobil'}
+                        key={index}
+                    />
+                ))}
+                {desktopLinks.map((link, index) => (
+                    <SkipLinkElement
+                        link={link}
+                        className={'site-skiplinks__desktop'}
+                        key={index}
+                    />
+                ))}
+                {hasMainContent && (
+                    <SkipLinkElement
+                        link={{
+                            href: '#maincontent',
+                            tekstId: 'skiplinks-ga-til-hovedinnhold',
+                        }}
+                    />
+                )}
             </ul>
         </nav>
     );
