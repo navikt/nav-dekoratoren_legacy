@@ -50,8 +50,9 @@ const Skiplinks = () => {
 
     const mobilLinks: SkipLink[] = [
         {
-            anchorId: mobilHovedmenyKnappId,
             tekstId: 'skiplinks-ga-til-hovedmeny',
+            onClick: () =>
+                document.getElementById(mobilHovedmenyKnappId)?.focus(),
         },
         {
             tekstId: 'skiplinks-ga-til-sok',
@@ -61,8 +62,9 @@ const Skiplinks = () => {
 
     const desktopLinks: SkipLink[] = [
         {
-            anchorId: desktopHovedmenyKnappId,
             tekstId: 'skiplinks-ga-til-hovedmeny',
+            onClick: () =>
+                document.getElementById(desktopHovedmenyKnappId)?.focus(),
         },
         {
             tekstId: 'skiplinks-ga-til-sok',
