@@ -1,6 +1,5 @@
 import React from 'react';
 import { GACategory } from 'utils/google-analytics';
-import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
 import { getArbeidsflateContext } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +10,7 @@ import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import ikon from 'ikoner/meny/NavLogoRod.svg';
 import './HeaderLogoRod.less';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 
 const HeaderLogoRod = ({ id }: { id?: string }) => {
     const dispatch = useDispatch();
