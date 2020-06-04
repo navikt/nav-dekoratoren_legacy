@@ -13,23 +13,33 @@ describe('<Skiplinks>', () => {
         </ReduxProvider>
     );
 
-    it('Skal rendre lenke til hovedmeny', () => {
-        expect(wrapper.find('#hovedmenylenke').text()).toEqual(
-            'Gå til hovedmeny'
+    it('Skal rendre 2 skiplinks for mobil', () => {
+        expect(wrapper.find('.skiplink.skiplink__mobil')).toHaveLength(2);
+    });
+
+    it('Skal rendre 2 skiplinks for desktop', () => {
+        expect(wrapper.find('.skiplink.skiplink__desktop')).toHaveLength(2);
+    });
+
+    it('Skal rendre 4 skiplinks totalt', () => {
+        expect(wrapper.find('.skiplink')).toHaveLength(4);
+    });
+
+    describe('Rendrer med #maincontent element', () => {
+        const container = document.createElement('div');
+        container.setAttribute('id', 'container');
+        document.body.appendChild(container);
+
+        const wrapperWithMaincontent = mount(
+            <ReduxProvider store={store}>
+                <div id="maincontent">{'asdf'}</div>
+                <Skiplinks />
+            </ReduxProvider>,
+            { attachTo: document.getElementById('container') }
         );
-    });
 
-    it('Skal rendre lenke til hovedinnhold', () => {
-        expect(wrapper.find('#hovedinnholdlenke').text()).toEqual(
-            'Gå til hovedinnhold'
-        );
-    });
-
-    it('Skal rendre lenke til Søk', () => {
-        expect(wrapper.find('#soklenke').text()).toEqual('Gå til søk');
-    });
-
-    it('Skal rendre 3 skiplinks-lenker', () => {
-        expect(wrapper.find('.visuallyhidden.focusable')).toHaveLength(3);
+        it('Skal rendre 5 skiplinks totalt', () => {
+            expect(wrapperWithMaincontent.find('.skiplink')).toHaveLength(5);
+        });
     });
 });
