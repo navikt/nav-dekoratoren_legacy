@@ -18,7 +18,7 @@ const shallowWithProps = () =>
     );
 
 describe('<DesktopMenylinje>', () => {
-    it('Skal rendre <NavLogoRod> komponent', () => {
+    it('Skal rendre <NavLogoHeader> komponent', () => {
         const wrapper = shallowWithProps();
         expect(wrapper.find(NavLogoHeader)).toHaveLength(1);
     });

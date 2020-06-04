@@ -21,7 +21,7 @@ const getWrapper = (store: Store) =>
     );
 
 describe('<MobilMenylinje /> sjekk at komponent finner logo', () => {
-    it('Skal rendre <NavLogoRod> komponent', () => {
+    it('Skal rendre <NavLogoHeader> komponent', () => {
         expect(getWrapper(store).find(NavLogoHeader)).toHaveLength(1);
     });
 });
