@@ -4,7 +4,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { hentInnloggingsstatusOk } from 'store/reducers/innloggingsstatus-duck';
 import { createStore } from 'store';
 import { Store } from 'redux';
-import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn-knapp/LoggInnKnapp';
+import LoggInnKnapp from './LoggInnKnapp';
 
 describe('<LoggInnKnapp />', () => {
     const store = createStore();

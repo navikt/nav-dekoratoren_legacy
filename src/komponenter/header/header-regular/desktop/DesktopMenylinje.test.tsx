@@ -1,6 +1,6 @@
 import * as React from 'react';
 import DesktopMenylinje from './DesktopMenylinje';
-import HeaderLogoRod from 'komponenter/header/header-regular/common/logo/HeaderLogoRod';
+import NavLogoHeader from 'komponenter/header/header-regular/common/logo/NavLogoHeader';
 import HovedmenyDesktop from './hovedmeny/HovedmenyDesktop';
 import { SokDropdown } from './sok/SokDropdown';
 import { Provider } from 'react-redux';
@@ -20,7 +20,7 @@ const shallowWithProps = () =>
 describe('<DesktopMenylinje>', () => {
     it('Skal rendre <NavLogoRod> komponent', () => {
         const wrapper = shallowWithProps();
-        expect(wrapper.find(HeaderLogoRod)).toHaveLength(1);
+        expect(wrapper.find(NavLogoHeader)).toHaveLength(1);
     });
 
     it('Skal rendre <HovedmenyDesktop> komponent hvis språk er norsk', () => {

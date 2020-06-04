@@ -1,8 +1,8 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import Navlogo from 'ikoner/meny/Navlogo';
+import NavLogoSimple from 'komponenter/header/header-simple/logo/NavLogoSimple';
 import Navn from './navn/Navn';
-import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn-knapp/LoggInnKnapp';
+import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
 import { Sticky } from 'komponenter/header/header-regular/common/sticky/Sticky';
 import './HeaderSimple.less';
 
@@ -13,7 +13,10 @@ export const SimpleHeader = () => {
         <Sticky>
             <div className={cls.className}>
                 <div className={cls.element('content')}>
-                    <Navlogo className={cls.element('logo')} viewIndex={true} />
+                    <NavLogoSimple
+                        className={cls.element('logo')}
+                        viewIndex={true}
+                    />
                     <div className={cls.element('right')}>
                         <Navn />
                         <LoggInnKnapp />

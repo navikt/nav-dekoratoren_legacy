@@ -1,6 +1,6 @@
 import React from 'react';
-import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapper/MenylinjeKnapp';
-import SokMenyIkon from 'komponenter/header/header-regular/common/meny-knapper/ikoner/sok-ikon/SokMenyIkon';
+import MenylinjeKnapp from 'komponenter/header/header-regular/common/knapper/MenylinjeKnapp';
+import SokMenyIkon from 'komponenter/header/header-regular/common/knapper/ikoner/sok-ikon/SokMenyIkon';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import Tekst from 'tekster/finn-tekst';
 

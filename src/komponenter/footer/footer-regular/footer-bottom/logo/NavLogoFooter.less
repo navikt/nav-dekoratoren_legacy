@@ -1,4 +1,4 @@
-@import (reference) '../../styling-variabler.less';
+@import (reference) '../../../../../styling-variabler.less';
 
 .sitefooter {
     &__logo .navbar-brand {
@@ -11,15 +11,19 @@
         margin-right: 0.8rem;
         border-radius: 4px;
 
+        img {
+            width: 100%;
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+
         &:focus,
         &:active {
             box-shadow: 0 0 0 4px @fokusFarge;
             background-color: transparent;
-        }
-        svg {
-            &:focus {
-                outline: 0;
-            }
+            outline: none;
+            border-color: transparent;
         }
     }
 

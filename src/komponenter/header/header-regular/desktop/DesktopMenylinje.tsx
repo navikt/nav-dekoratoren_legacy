@@ -1,6 +1,6 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import HeaderLogoRod from 'komponenter/header/header-regular/common/logo/HeaderLogoRod';
+import NavLogoHeader from 'komponenter/header/header-regular/common/logo/NavLogoHeader';
 import { SokDropdown } from './sok/SokDropdown';
 import { HovedmenyDesktop } from './hovedmeny/HovedmenyDesktop';
 import { MinsideMeny } from './minside-meny/MinsideMeny';
@@ -9,7 +9,7 @@ import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn-knapp/LoggInnKnapp';
+import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
 import './DesktopMenylinje.less';
 
 export const desktopHeaderLogoId = 'desktop-header-logo-id';
@@ -32,10 +32,7 @@ const DesktopMenylinje = () => {
     return (
         <nav className={cls.className} aria-label="Hovedmeny" id="hovedmeny">
             <div className={cls.element('elementer')}>
-                <HeaderLogoRod
-                    classname={cls.element('nav-brand')}
-                    id={desktopHeaderLogoId}
-                />
+                <NavLogoHeader id={desktopHeaderLogoId} />
                 <HovedmenyDesktop kbNavMainState={kbNavMainState} />
                 <SokDropdown kbNavMainState={kbNavMainState} />
                 <span className={cls.element('spacer')} />

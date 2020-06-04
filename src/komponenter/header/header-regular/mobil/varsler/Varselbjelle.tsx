@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { settVarslerSomLest } from 'store/reducers/varsel-lest-duck';
 import { gaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';
-import { VarslerKnapp } from 'komponenter/header/header-regular/common/meny-knapper/varsler-knapp/VarslerKnapp';
+import { VarslerKnapp } from 'komponenter/header/header-regular/common/knapper/varsler-knapp/VarslerKnapp';
 import { AppState } from 'store/reducers';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import HeaderLogoRod from 'komponenter/header/header-regular/common/logo/HeaderLogoRod';
+import NavLogoHeader from 'komponenter/header/header-regular/common/logo/NavLogoHeader';
 import { Language } from 'store/reducers/language-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Status } from 'api/api';
-import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn-knapp/LoggInnKnapp';
+import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
 import { Varselbjelle } from 'komponenter/header/header-regular/mobil/varsler/Varselbjelle';
 import './MobilMenylinje.less';
 
@@ -48,7 +48,7 @@ const MobilMenylinje = ({ language }: Props) => {
             aria-label="Hovedmeny"
         >
             <div className={mobilClass.element('elementer')}>
-                <HeaderLogoRod />
+                <NavLogoHeader />
                 <div className={mobilClass.element('hoyre-kolonne')}>
                     {visInnloggingsKnapp && <LoggInnKnapp type={'flat'} />}
                     {visVarslerDropdown && <Varselbjelle />}
