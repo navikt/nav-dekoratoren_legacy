@@ -117,9 +117,12 @@ export const ledetekster: { [key: string]: string } = {
     'delskjerm-modal-avbryt': `Avbryt`,
     'delskjerm-modal-avbryt-en': `Cancel`,
     'delskjerm-modal-avbryt-se': `Avbryt`,
-    'delskjerm-modal-stengt': 'Skjermdeling er stengt',
-    'delskjerm-modal-stengt-en': 'Screen sharing is closed',
-    'delskjerm-modal-stengt-se': 'Chatten er stengt',
+    'delskjerm-modal-stengt':
+        'Skjermdeling er for øyeblikket stengt, prøv igjen senere',
+    'delskjerm-modal-stengt-en':
+        'Screen sharing is currently closed, please try again later',
+    'delskjerm-modal-stengt-se':
+        'Skjermdeling er for øyeblikket stengt, prøv igjen senere',
     'varsler-visalle': 'Vis alle dine varsler',
     'varsler-visalle-en': 'Show all your notifications',
     'varsler-visalle-se': 'Vis alle dine varsler',
