@@ -1,8 +1,14 @@
-@import '../node_modules/nav-frontend-core/less/core';
 @import './styling-variabler.less';
 
 body {
     overflow-y: scroll;
+}
+
+body.no-scroll {
+    overflow-y: hidden;
+    @media (min-width: @desktopMinWidth) {
+        overflow-y: scroll;
+    }
 }
 
 #top-element {
@@ -12,25 +18,21 @@ body {
 
 .siteheader,
 .sitefooter {
+    color: initial;
     background-color: white;
+    line-height: normal;
 }
 
-.siteheader,
-.head-wrapper {
+.siteheader {
     position: relative;
+    z-index: 1000;
+    width: 100%;
 }
 
 .desktopmeny,
 .mobilmeny {
     width: 100%;
     background-color: white;
-}
-
-.siteheader,
-.head-wrapper,
-.head-container {
-    z-index: 1000;
-    width: 100%;
 }
 
 .header-z-wrapper {
@@ -61,8 +63,6 @@ body {
     display: initial !important;
 }
 
-.media-md-tablet,
-.media-lg-desktop,
 .media-tablet-desktop {
     display: none !important;
 }
@@ -72,36 +72,11 @@ body {
         display: none !important;
     }
 
-    .media-md-tablet,
     .media-tablet-desktop {
         @media screen and (-ms-high-contrast: active),
             (-ms-high-contrast: none) {
             display: inline !important;
         }
         display: initial !important;
-    }
-}
-
-@media (max-width: 1023px) {
-    .media-mobil-tablet {
-        @media screen and (-ms-high-contrast: active),
-            (-ms-high-contrast: none) {
-            display: inline !important;
-        }
-        display: initial !important;
-    }
-}
-
-@media (min-width: @desktopMaxWidth) {
-    .media-lg-desktop {
-        @media screen and (-ms-high-contrast: active),
-            (-ms-high-contrast: none) {
-            display: inline !important;
-        }
-        display: initial !important;
-    }
-
-    .media-md-tablet {
-        display: none !important;
     }
 }

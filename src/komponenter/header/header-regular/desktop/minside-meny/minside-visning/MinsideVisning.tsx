@@ -3,7 +3,7 @@ import BEMHelper from 'utils/bem';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { MenyLenkeSeksjon } from 'komponenter/header/header-regular/common/meny-lenker/MenyLenkeSeksjon';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import Tekst from 'tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';

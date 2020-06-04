@@ -1,6 +1,3 @@
-@import '../../../../../styling-variabler.less';
-@import '../ekspanderbar-meny/EkspanderbarMeny';
-
 .meny-bakgrunn {
     visibility: hidden;
     z-index: 999;
@@ -14,8 +11,6 @@
     transition-timing-function: ease-in;
     transition-property: background-color, visibility;
 
-    animation-duration: 0.25s;
-    animation-delay: @ekspanderbar-transition-duration-out;
     &--active {
         visibility: visible;
         background-color: rgba(#32414f, 0.8);

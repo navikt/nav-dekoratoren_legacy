@@ -1,4 +1,4 @@
-@import '../../../../styling-variabler.less';
+@import (reference) '../../../../styling-variabler.less';
 
 .desktopmeny {
     @margin-mellom: 2rem;
@@ -7,11 +7,6 @@
 
     width: 100%;
     border-bottom: 2px solid @header-separator-farge;
-
-    @media (max-height: @smallDesktopLimitHeight),
-        (max-width: @smallDesktopLimitWidth) {
-        padding: 0;
-    }
 
     .margin-left-section() {
         margin-left: @margin-mellom;
@@ -37,7 +32,7 @@
         padding: 1rem 0;
 
         @media (min-width: @desktopMaxWidth) {
-            width: @desktopMaxWidth;
+            max-width: @desktopMaxWidth;
         }
     }
 

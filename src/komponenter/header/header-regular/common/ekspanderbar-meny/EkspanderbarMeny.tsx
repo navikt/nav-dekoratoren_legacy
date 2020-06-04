@@ -25,11 +25,7 @@ const EkspanderbarMeny = (props: Props) => {
                         .concat(cls.element('menuheight'))}
                     id={id}
                 >
-                    <div className={cls.element('innhold')}>
-                        <div className={cls.element('scroll-wrapper')}>
-                            {children}
-                        </div>
-                    </div>
+                    <div className={cls.element('innhold')}>{children}</div>
                 </div>
             </div>
         </>

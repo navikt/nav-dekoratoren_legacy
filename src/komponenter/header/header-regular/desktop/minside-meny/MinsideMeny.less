@@ -1,5 +1,4 @@
-@import '../../../../../styling-variabler.less';
-@import '../../common/ekspanderbar-meny/EkspanderbarMeny';
+@import (reference) '../../../../../styling-variabler.less';
 
 .desktop-minside-meny {
     @lenkeseksjoner-cols: 3;
@@ -7,12 +6,11 @@
 
     .ekspanderbar {
         &__innhold-wrapper {
+            width: @smallDesktopLimitWidth;
+            @media (max-width: @smallDesktopLimitWidth) {
+                width: 100%;
+            }
             right: 0;
-            max-width: @smallDesktopLimitWidth;
-        }
-
-        &__innhold {
-            max-width: @smallDesktopLimitWidth;
         }
     }
 
@@ -55,10 +53,6 @@
 
     &__brukernavn {
         text-transform: capitalize;
-    }
-
-    &__topp-seksjon-lenke {
-        .lenke-stil-mixin();
     }
 
     &__topp-seksjon-tittel {

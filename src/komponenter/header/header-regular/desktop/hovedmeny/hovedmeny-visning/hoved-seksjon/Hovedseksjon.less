@@ -1,4 +1,4 @@
-@import '../../../../../../../styling-variabler.less';
+@import (reference) '../../../../../../../styling-variabler.less';
 
 .desktop-hovedmeny {
     @hovedseksjon-margin: 1rem;
@@ -17,7 +17,6 @@
         flex-wrap: wrap;
         align-content: space-between;
         max-height: @maxHeight;
-        overflow-x: auto;
 
         // Ugly fix for IE11 :|
         &.is-ie {
@@ -26,7 +25,6 @@
 
         .col-breaker {
             display: block;
-            flex-basis: 100%;
             width: 0;
             margin: 0;
             min-height: @minHeight;
@@ -39,6 +37,11 @@
             min-height: @maxHeight - @minHeight + 1px;
             .mosaic-order(1, @numCols);
         }
+    }
+
+    &__hoved-seksjon-wrapper {
+        width: 100%;
+        overflow-x: auto;
     }
 
     &__hoved-seksjon {
@@ -58,7 +61,7 @@
         }
 
         @media (max-height: @smallDesktopLimitHeight) {
-            .mosaic-setup(400px, 525px, @hovedseksjon-cols-lg);
+            .mosaic-setup(400px, 550px, @hovedseksjon-cols-lg);
         }
 
         @media (max-width: @smallDesktopLimitWidth) {
