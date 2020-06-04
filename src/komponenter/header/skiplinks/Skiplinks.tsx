@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { mobilSokInputId } from '../header-regular/mobil/hovedmeny/HovedmenyMobil';
+import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
 import './Skiplinks.less';
 
 export type SkipLink = {
@@ -20,22 +21,31 @@ export type SkipLink = {
 const stateSelector = (state: AppState) => ({
     mainMenuOpen: state.dropdownToggles.hovedmeny,
     subMenuOpen: state.dropdownToggles.undermeny,
+    sokOpen: state.dropdownToggles.sok,
 });
 
 const mainContentId = 'maincontent';
 
 const Skiplinks = () => {
     const dispatch = useDispatch();
-    const { mainMenuOpen, subMenuOpen } = useSelector(stateSelector);
+    const { mainMenuOpen, subMenuOpen, sokOpen } = useSelector(stateSelector);
     const [hasMainContent, setHasMainContent] = useState(false);
 
-    const toggleMobilSok = () => {
+    const openMobilSok = () => {
         if (subMenuOpen) {
             dispatch(toggleUndermenyVisning());
         } else if (!mainMenuOpen) {
             dispatch(toggleHovedmeny());
         }
         document.getElementById(mobilSokInputId)?.focus();
+    };
+
+    const openDesktopSok = () => {
+        if (sokOpen) {
+            document.getElementById(desktopSokInputId)?.focus();
+        } else {
+            dispatch(toggleSok());
+        }
     };
 
     const mobilLinks: SkipLink[] = [
@@ -45,7 +55,7 @@ const Skiplinks = () => {
         },
         {
             tekstId: 'skiplinks-ga-til-sok',
-            onClick: toggleMobilSok,
+            onClick: openMobilSok,
         },
     ];
 
@@ -56,7 +66,7 @@ const Skiplinks = () => {
         },
         {
             tekstId: 'skiplinks-ga-til-sok',
-            onClick: () => dispatch(toggleSok()),
+            onClick: openDesktopSok,
         },
     ];
 

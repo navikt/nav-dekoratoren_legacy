@@ -11,9 +11,17 @@ export const SkipLinkElement = ({
 }) => (
     <li>
         <a
-            href={`#${link.anchorId || ''}`}
+            href={''}
             className={`skiplink ${className || ''}`}
-            onClick={link.onClick}
+            onClick={(e) => {
+                e.preventDefault();
+                if (link.anchorId) {
+                    document.getElementById(link.anchorId)?.focus();
+                }
+                if (link.onClick) {
+                    link.onClick();
+                }
+            }}
         >
             <Tekst id={link.tekstId} />
         </a>
