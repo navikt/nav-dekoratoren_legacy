@@ -5,12 +5,7 @@
         margin: 0;
     }
 
-    li > .visuallyhidden.focusable:focus,
-    li > .visuallyhidden.focusable:active {
-        height: 2.625rem;
-    }
-
-    .visuallyhidden {
+    .skiplink {
         border: 0;
         clip: rect(0 0 0 0);
         height: 1px;
@@ -21,10 +16,10 @@
         position: absolute;
         z-index: 1001;
 
-        &.focusable:focus,
-        &.focusable:active {
+        &:focus,
+        &:active {
             clip: auto;
-            height: auto;
+            height: 2.625rem;
             width: auto;
             padding: 0.8rem;
             margin: 0;
@@ -32,24 +27,24 @@
             position: absolute;
         }
 
-        &.focusable:focus {
+        &:focus {
             outline: none;
             color: white;
             text-decoration: none;
             background-color: @fokusFarge;
             box-shadow: 0 0 0 2px @fokusFarge;
         }
-    }
 
-    &__mobil {
-        @media (min-width: @desktopMinWidth) {
-            display: none;
+        &__mobil {
+            @media (min-width: @desktopMinWidth) {
+                display: none;
+            }
         }
-    }
 
-    &__desktop {
-        @media (max-width: @desktopMinWidth) {
-            display: none;
+        &__desktop {
+            @media (max-width: calc(@desktopMinWidth - 1px)) {
+                display: none;
+            }
         }
     }
 }
