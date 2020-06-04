@@ -32,7 +32,7 @@ describe('<Skiplinks>', () => {
 
         const wrapperWithMaincontent = mount(
             <ReduxProvider store={store}>
-                <div id="maincontent">{'asdf'}</div>
+                <div id="maincontent" />
                 <Skiplinks />
             </ReduxProvider>,
             { attachTo: document.getElementById('container') }
