@@ -13,7 +13,6 @@ import FooterLenker from 'komponenter/footer/common/Lenker';
 import LenkeMedIkon from 'komponenter/footer/common/lenke-med-ikon/LenkeMedIkon';
 import DelSkjermModal from 'komponenter/footer/common/del-skjerm-modal/DelSkjermModal';
 import { LinkLoader } from '../../../common/content-loaders/LinkLoader';
-
 import './FooterBottom.less';
 
 const FooterBottom = () => {
@@ -54,7 +53,7 @@ const FooterBottom = () => {
     return (
         <section className="menylinje-bottom">
             <div className={cls.className}>
-                <NavLogoFooter classname={cls.element('bottom-logo')} />
+                <NavLogoFooter />
                 <div className={cls.element('bottom-lenker')}>
                     <div>
                         <Normaltekst className="bottom-tekst">
