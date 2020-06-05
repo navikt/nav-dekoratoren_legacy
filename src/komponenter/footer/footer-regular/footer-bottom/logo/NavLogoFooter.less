@@ -1,7 +1,7 @@
 @import (reference) '../../../../../styling-variabler.less';
 
 .sitefooter {
-    &__logo .navbar-brand {
+    .navbar-brand {
         width: 68px;
         height: 68px;
 
@@ -28,10 +28,8 @@
             outline: none;
             border-color: transparent;
         }
-    }
 
-    @media (min-width: @desktopMinWidth) {
-        &__logo .navbar-brand {
+        @media (min-width: @desktopMinWidth) {
             width: 65px;
             height: 65px;
         }

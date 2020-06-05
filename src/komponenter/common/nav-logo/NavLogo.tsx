@@ -1,5 +1,4 @@
 import React from 'react';
-import { GACategory } from 'utils/google-analytics';
 import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { getArbeidsflateContext } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { MenuValue } from 'utils/meny-storage-utils';
@@ -9,21 +8,26 @@ import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
-import logo from 'ikoner/meny/NavLogoSvart.svg';
+import { GAEventArgs } from 'utils/google-analytics';
+import { NavLogoIkon } from 'ikoner/meny/NavLogoIkon';
+import './NavLogo.less';
 
-const NavLogoSimple = ({ className }: { className?: string }) => {
+type Props = {
+    gaEventArgs: GAEventArgs;
+    id?: string;
+};
+
+export const NavLogo = (props: Props) => {
     const dispatch = useDispatch();
     const [, setCookie] = useCookies(['decorator-context']);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const context = getArbeidsflateContext(XP_BASE_URL, MenuValue.PRIVATPERSON);
-    const arbeidsflate = useSelector(
-        (state: AppState) => state.arbeidsflate.status
-    );
 
     return (
         <LenkeMedGA
+            classNameOverride={'nav-logo-lenke'}
             href={context.url}
-            classNameOverride={`nav-brand-lenke ${className ? className : ``}`}
+            gaEventArgs={props.gaEventArgs}
             onClick={(event) => {
                 event.preventDefault();
                 setCookie('decorator-context', context.key, cookieOptions);
@@ -33,15 +37,11 @@ const NavLogoSimple = ({ className }: { className?: string }) => {
                     window.location.href = context.url;
                 }
             }}
-            gaEventArgs={{
-                context: arbeidsflate,
-                category: GACategory.Meny,
-                action: 'navlogo-mobilmeny',
-            }}
+            id={props.id}
         >
-            <img src={logo} alt="Til forsiden" />
+            <NavLogoIkon altText={'Til forsiden'} />
         </LenkeMedGA>
     );
 };
 
-export default NavLogoSimple;
+export default NavLogo;

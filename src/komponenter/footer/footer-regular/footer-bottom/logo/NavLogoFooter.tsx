@@ -22,28 +22,26 @@ const NavLogoFooter = () => {
     );
 
     return (
-        <div className="sitefooter__logo">
-            <LenkeMedGA
-                classNameOverride="navbar-brand"
-                href={context.url}
-                gaEventArgs={{
-                    context: arbeidsflate,
-                    category: GACategory.Footer,
-                    action: 'navlogo',
-                }}
-                onClick={(event) => {
-                    event.preventDefault();
-                    setCookie('decorator-context', context.key, cookieOptions);
-                    if (erNavDekoratoren()) {
-                        dispatch(settArbeidsflate(context.key));
-                    } else {
-                        window.location.href = context.url;
-                    }
-                }}
-            >
-                <img src={logo} alt="Til forsiden" />
-            </LenkeMedGA>
-        </div>
+        <LenkeMedGA
+            classNameOverride="navbar-brand"
+            href={context.url}
+            gaEventArgs={{
+                context: arbeidsflate,
+                category: GACategory.Footer,
+                action: 'navlogo',
+            }}
+            onClick={(event) => {
+                event.preventDefault();
+                setCookie('decorator-context', context.key, cookieOptions);
+                if (erNavDekoratoren()) {
+                    dispatch(settArbeidsflate(context.key));
+                } else {
+                    window.location.href = context.url;
+                }
+            }}
+        >
+            <img src={logo} alt="Til forsiden" />
+        </LenkeMedGA>
     );
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { GACategory } from 'utils/google-analytics';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { getArbeidsflateContext } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,8 +9,7 @@ import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
-import ikon from 'ikoner/meny/NavLogoRod.svg';
+import logo from 'ikoner/meny/NavLogoRod.svg';
 import './NavLogoHeader.less';
 
 const NavLogoHeader = ({ id }: { id?: string }) => {
@@ -23,9 +23,8 @@ const NavLogoHeader = ({ id }: { id?: string }) => {
 
     return (
         <LenkeMedGA
-            href={context.url}
             classNameOverride={'header-logo-rod'}
-            id={id}
+            href={context.url}
             gaEventArgs={{
                 context: arbeidsflate,
                 category: GACategory.Header,
@@ -40,8 +39,9 @@ const NavLogoHeader = ({ id }: { id?: string }) => {
                     window.location.href = context.url;
                 }
             }}
+            id={id}
         >
-            <img src={ikon} alt="Til forsiden" />
+            <img src={logo} alt="Til forsiden" />
         </LenkeMedGA>
     );
 };

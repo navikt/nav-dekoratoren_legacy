@@ -1,10 +1,9 @@
-
 <svg
         viewBox="0 0 73 46"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
 >
-    <title>NAV Brand/NAV logo / hvit </title>
+    <title>NAV Brand/NAV logo / hvit</title>
     <desc>Created with Sketch.</desc>
     <defs>
         <polygon
@@ -31,26 +30,26 @@
                     <polygon
                             id="Fill-3"
                             fill="black"
-                    points="0 33.0325728 4.6852974 21.4021941 9.18714498 21.4021941 4.50781784 33.0325728"
+                            points="0 33.0325728 4.6852974 21.4021941 9.18714498 21.4021941 4.50781784 33.0325728"
                     />
                     <polygon
                             id="Fill-5"
                             fill="black"
-                    points="57.8149145 33.0325728 62.4402379 21.4021941 64.8945576 21.4021941 60.2695056 33.0325728"
+                            points="57.8149145 33.0325728 62.4402379 21.4021941 64.8945576 21.4021941 60.2695056 33.0325728"
                     />
                     <g
                             id="Group-9"
                             transform="translate(66.758364, 21.214982)"
                     >
                         <mask id="mask-2" fill="white">
-                            <use href="#path-1" />
+                            <use href="#path-1"/>
                         </mask>
-                        <g id="Clip-8" />
+                        <g id="Clip-8"/>
                         <polygon
                                 id="Fill-7"
                                 fill="black"
-                        mask="url(#mask-2)"
-                        points="0.152920074 11.8175905 4.77742937 0.187211834 6.08084572 0.187211834 1.45579368 11.8175905"
+                                mask="url(#mask-2)"
+                                points="0.152920074 11.8175905 4.77742937 0.187211834 6.08084572 0.187211834 1.45579368 11.8175905"
                         />
                     </g>
                     <path

@@ -13,10 +13,7 @@ export const SimpleHeader = () => {
         <Sticky>
             <div className={cls.className}>
                 <div className={cls.element('content')}>
-                    <NavLogoSimple
-                        className={cls.element('logo')}
-                        viewIndex={true}
-                    />
+                    <NavLogoSimple className={cls.element('logo')} />
                     <div className={cls.element('right')}>
                         <Navn />
                         <LoggInnKnapp />

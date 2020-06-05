@@ -11,6 +11,8 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
 import './DesktopMenylinje.less';
+import NavLogo from 'komponenter/common/nav-logo/NavLogo';
+import { GACategory } from 'utils/google-analytics';
 
 export const desktopHeaderLogoId = 'desktop-header-logo-id';
 export const desktopLoginKnappId = 'desktop-login-knapp';
@@ -32,7 +34,14 @@ const DesktopMenylinje = () => {
     return (
         <nav className={cls.className} aria-label="Hovedmeny" id="hovedmeny">
             <div className={cls.element('elementer')}>
-                <NavLogoHeader id={desktopHeaderLogoId} />
+                <NavLogo
+                    gaEventArgs={{
+                        context: arbeidsflate,
+                        category: GACategory.Header,
+                        action: 'navlogo',
+                    }}
+                    id={desktopHeaderLogoId}
+                />
                 <HovedmenyDesktop kbNavMainState={kbNavMainState} />
                 <SokDropdown kbNavMainState={kbNavMainState} />
                 <span className={cls.element('spacer')} />

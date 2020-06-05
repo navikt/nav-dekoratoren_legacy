@@ -1,58 +1,69 @@
-<svg
+import React from 'react';
+
+type Props = {
+    altText: string;
+};
+
+export const NavLogoIkon = ({ altText }: Props) => (
+    <svg
         width="33px"
         height="22px"
         viewBox="0 0 269 169"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
->
-    <defs>
-        <polygon
+    >
+        <title>{altText}</title>
+        <defs>
+            <polygon
                 id="path-1"
                 points="22.407 43.4168 22.407 0.6878 0.5635 0.6878 0.5635 43.4168 22.407 43.4168"
-        />
-    </defs>
-    <g
+            />
+        </defs>
+        <g
             id="Modul-forslag"
             stroke="none"
-            stroke-width="1"
+            strokeWidth="1"
             fill="none"
-            fill-rule="evenodd"
-    >
-        <g id="NAV-logo-/-rød">
-            <g id="Page-1-Copy">
-                <path
+            fillRule="evenodd"
+        >
+            <g id="NAV-logo-/-rød">
+                <g id="Page-1-Copy">
+                    <path
                         d="M125.3091,168.942 C78.6681,168.942 40.8491,131.125 40.8491,84.477 C40.8491,37.824 78.6681,0 125.3091,0 C171.9671,0
                                 209.7901,37.824 209.7901,84.477 C209.7901,131.125 171.9671,168.942 125.3091,168.942 Z"
                         id="Fill-1"
-                        fill="#C30000"
-                />
-                <polygon
+                        className={'nav-logo-fill'}
+                        fill="#c30000"
+                    />
+                    <polygon
                         id="Fill-3"
-                        fill="#C30000"
+                        className={'nav-logo-fill'}
+                        fill="#c30000"
                         points="0 121.3588 17.265 78.6298 33.854 78.6298 16.611 121.3588"
-                />
-                <polygon
+                    />
+                    <polygon
                         id="Fill-5"
-                        fill="#C30000"
+                        className={'nav-logo-fill'}
+                        fill="#c30000"
                         points="213.044 121.3588 230.088 78.6298 239.132 78.6298 222.089 121.3588"
-                />
-                <g
+                    />
+                    <g
                         id="Group-9"
                         transform="translate(246.000000, 77.942000)"
-                >
-                    <mask id="mask-2" fill="white">
-                        <use xlink:href="#path-1"/>
-                    </mask>
-                    <g id="Clip-8"/>
-                    <polygon
+                    >
+                        <mask id="mask-2" fill="white">
+                            <use href="#path-1" />
+                        </mask>
+                        <g id="Clip-8" />
+                        <polygon
                             id="Fill-7"
-                            fill="#C30000"
+                            className={'nav-logo-fill'}
+                            fill="#c30000"
                             mask="url(#mask-2)"
                             points="0.5635 43.4168 17.6045 0.6878 22.4075 0.6878 5.3645 43.4168"
-                    />
-                </g>
-                <path
+                        />
+                    </g>
+                    <path
                         d="M197.3604,78.6298 L182.3444,78.6298 C182.3444,78.6298 181.3094,78.6298 180.9434,79.5438 L172.6334,104.9828
                                 L164.3304,79.5438 C163.9644,78.6298 162.9234,78.6298 162.9234,78.6298 L134.0514,78.6298 C133.4264,78.6298
                                 132.9024,79.1518 132.9024,79.7728 L132.9024,88.4118 C132.9024,81.5588 125.6104,78.6298 121.3404,78.6298
@@ -77,8 +88,9 @@
                                 132.9024,96.1828 132.9024,99.6438 L132.9024,105.9148 Z"
                         id="Fill-10"
                         fill="#FEFEFE"
-                />
+                    />
+                </g>
             </g>
         </g>
-    </g>
-</svg>
+    </svg>
+);

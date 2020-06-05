@@ -1,0 +1,43 @@
+@import '../../../styling-variabler.less';
+
+.nav-logo-lenke {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    &:hover {
+        svg {
+            transform: scale(1.05);
+        }
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 4px @fokusFarge inset;
+        border-radius: 8px;
+        outline: none;
+        border-color: transparent;
+    }
+
+    @media (max-width: @desktopMinWidth) {
+        width: 72px;
+        padding: 4px;
+    }
+
+    @media (min-width: @desktopMinWidth) {
+        @padding: 8px;
+        width: 100px;
+        padding: @padding;
+
+        margin-left: calc(@margins-sides-desktop - @padding);
+        margin-right: -@padding;
+
+        @media (max-width: @smallDesktopLimitWidth) {
+            margin-left: calc(@margins-sides-desktop-small - @padding);
+        }
+    }
+}
