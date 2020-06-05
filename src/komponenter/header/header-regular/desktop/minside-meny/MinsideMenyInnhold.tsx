@@ -7,7 +7,7 @@ import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import Tekst from 'tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
-import MinsideDropdownLockMsg from './MinsideDropdownLockMsg';
+import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -23,7 +23,7 @@ type Props = {
 
 const nodeGroup = KbNavGroup.MinsideMeny;
 
-export const MinsideVisning = (props: Props) => {
+export const MinsideMenyInnhold = (props: Props) => {
     const { classname, isOpen, menyLenker, dittNavUrl, brukerNavn } = props;
     const auth = useSelector((state: AppState) => state.innloggingsstatus.data);
 
@@ -67,9 +67,7 @@ export const MinsideVisning = (props: Props) => {
                     </Normaltekst>
                 </div>
             </div>
-            {auth.securityLevel !== '4' && (
-                <MinsideDropdownLockMsg classname={classname} />
-            )}
+            {auth.securityLevel !== '4' && <MinsideLockMsg />}
             <div className={cls.element('lenke-seksjoner')}>
                 {menyLenker &&
                     menyLenker.children.map((menygruppe, index) => (
@@ -87,4 +85,4 @@ export const MinsideVisning = (props: Props) => {
     );
 };
 
-export default MinsideVisning;
+export default MinsideMenyInnhold;

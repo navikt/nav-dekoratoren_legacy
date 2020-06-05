@@ -10,7 +10,7 @@ import { Systemtittel } from 'nav-frontend-typografi';
 import { useSelector } from 'react-redux';
 import Lock from 'ikoner/meny/Lock';
 import { AppState } from 'store/reducers';
-import MinsideDropdownLockMsg from '../../../../desktop/minside-meny/minside-visning/MinsideDropdownLockMsg';
+import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
 
 interface Props {
     className: string;
@@ -58,9 +58,7 @@ const Undermeny = (props: Props) => {
             >
                 {arbeidsflate}
             </Systemtittel>
-            {hasLevel4Elements ? (
-                <MinsideDropdownLockMsg classname={className} />
-            ) : null}
+            {hasLevel4Elements && <MinsideLockMsg />}
             <ul className={menyClass.element('meny', 'list')}>
                 {lenker.children.map((lenke, index: number) => {
                     const displayLock =
