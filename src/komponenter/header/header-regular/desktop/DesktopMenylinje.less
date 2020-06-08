@@ -28,9 +28,7 @@
         flex-wrap: wrap;
         justify-content: space-between;
         width: 100%;
-        height: 106px;
         margin: 0 auto;
-        padding: 1rem 0;
 
         @media (min-width: @desktopMaxWidth) {
             max-width: @desktopMaxWidth;
@@ -39,7 +37,17 @@
 
     .nav-logo-lenke {
         order: 1;
-        width: 80px;
+
+        @padding: 8px;
+        width: 100px;
+        padding: @padding;
+
+        margin-left: calc(@margins-sides-desktop - @padding);
+        margin-right: -@padding;
+
+        @media (max-width: @smallDesktopLimitWidth) {
+            margin-left: calc(@margins-sides-desktop-small - @padding);
+        }
         .nav-logo-fill {
             fill: @nav-logo-rod;
         }
@@ -47,6 +55,7 @@
 
     .desktop-hovedmeny__knapp {
         order: 2;
+        max-height: @maxheight-menuitem;
         .margin-left-section();
     }
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import NavLogoHeader from 'komponenter/header/header-regular/common/logo/NavLogoHeader';
 import { SokDropdown } from './sok/SokDropdown';
 import { HovedmenyDesktop } from './hovedmeny/HovedmenyDesktop';
 import { MinsideMeny } from './minside-meny/MinsideMeny';
@@ -11,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
 import './DesktopMenylinje.less';
-import NavLogo from 'komponenter/common/nav-logo/NavLogo';
+import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import { GACategory } from 'utils/google-analytics';
 
 export const desktopHeaderLogoId = 'desktop-header-logo-id';
@@ -34,7 +33,7 @@ const DesktopMenylinje = () => {
     return (
         <nav className={cls.className} aria-label="Hovedmeny" id="hovedmeny">
             <div className={cls.element('elementer')}>
-                <NavLogo
+                <NavLogoLenke
                     gaEventArgs={{
                         context: arbeidsflate,
                         category: GACategory.Header,
