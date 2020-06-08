@@ -4,14 +4,8 @@ type Props = {
     altText: string;
 };
 
-export const NavLogoIkon = ({ altText }: Props) => (
-    <svg
-        width="33px"
-        height="22px"
-        viewBox="0 0 269 169"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-    >
+export const NavLogo = ({ altText }: Props) => (
+    <svg viewBox="0 0 269 169" version="1.1" xmlns="http://www.w3.org/2000/svg">
         <title>{altText}</title>
         <defs>
             <polygon
