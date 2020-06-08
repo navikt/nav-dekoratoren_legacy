@@ -14,7 +14,7 @@ const setIdle = function () {
 /*  Reset the X second idle timer.
  If the user was idle, start the non-idle timer */
 const pulse = function (w: any, pulseSec: number) {
-    return function (event: Event) {
+    return function () {
         if (idle) {
             idle = false;
             startEngage = Date.now();

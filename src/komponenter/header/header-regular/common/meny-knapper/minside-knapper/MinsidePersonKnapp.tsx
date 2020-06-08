@@ -9,38 +9,40 @@ type Props = {
     onClick: () => void;
     isOpen: boolean;
     brukerNavn: string;
-    classname: string;
+    minsideDropdownClassname: string;
     id: string;
-    ariaLabel: string;
 };
 
 export const MinsidePersonKnapp = (props: Props) => {
-    const { onClick, isOpen, classname, id, ariaLabel, brukerNavn } = props;
-    const cls = BEMHelper(classname);
+    const cls = BEMHelper(props.minsideDropdownClassname);
 
     return (
         <MenylinjeKnapp
-            onClick={onClick}
-            isOpen={isOpen}
-            classname={classname}
-            id={id}
-            ariaLabel={ariaLabel}
+            onClick={props.onClick}
+            isOpen={props.isOpen}
+            ariaControls={props.minsideDropdownClassname}
+            classname={props.minsideDropdownClassname}
+            id={props.id}
         >
-            <MinsideIkon isOpen={isOpen} hasMenu={true} />
+            <MinsideIkon isOpen={props.isOpen} hasMenu={true} />
             <div className={cls.element('knapp-tekst')}>
                 <div
                     className={`${cls.element('knapp-tekst-topp')} ${
-                        isOpen ? cls.element('knapp-tekst-topp', 'open') : ''
+                        props.isOpen
+                            ? cls.element('knapp-tekst-topp', 'open')
+                            : ''
                     }`}
                 >
                     <Tekst id={'person-minside-lenke'} />
                 </div>
                 <div
                     className={`${cls.element('knapp-tekst-bunn')} ${
-                        isOpen ? cls.element('knapp-tekst-bunn', 'open') : ''
+                        props.isOpen
+                            ? cls.element('knapp-tekst-bunn', 'open')
+                            : ''
                     }`}
                 >
-                    {brukerNavn}
+                    {props.brukerNavn}
                 </div>
             </div>
         </MenylinjeKnapp>

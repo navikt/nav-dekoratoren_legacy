@@ -1,42 +1,81 @@
 import React, { useEffect, useState } from 'react';
-import Tekst from 'tekster/finn-tekst';
-import { mobilviewMax } from '../../../styling-mediaquery';
-import { matchMedia } from 'utils/match-media-polyfill';
 import { mobilHovedmenyKnappId } from '../header-regular/mobil/hovedmeny/HovedmenyMobil';
 import { desktopHovedmenyKnappId } from '../header-regular/desktop/hovedmeny/HovedmenyDesktop';
-import './Skiplinks.less';
 import { useDispatch } from 'react-redux';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
+import { SkipLinkElement } from 'komponenter/header/skiplinks/SkiplinkElement';
+import { AppState } from 'store/reducers';
+import { useSelector } from 'react-redux';
+import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
+import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
+import { mobilSokInputId } from '../header-regular/mobil/hovedmeny/HovedmenyMobil';
+import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
+import './Skiplinks.less';
+
+export type SkipLink = {
+    anchorId?: string;
+    tekstId: string;
+    onClick?: () => void;
+};
+
+const stateSelector = (state: AppState) => ({
+    mainMenuOpen: state.dropdownToggles.hovedmeny,
+    subMenuOpen: state.dropdownToggles.undermeny,
+    sokOpen: state.dropdownToggles.sok,
+});
+
+const mainContentId = 'maincontent';
 
 const Skiplinks = () => {
-    const [soklink, setSoklink] = useState<string>('');
-    const [hovedmenylink, setHovedmenylink] = useState<string>('');
-    const [isMobile, setIsMobile] = useState<boolean>();
     const dispatch = useDispatch();
+    const { mainMenuOpen, subMenuOpen, sokOpen } = useSelector(stateSelector);
+    const [hasMainContent, setHasMainContent] = useState(false);
 
-    const mqlMobilMax = matchMedia(`(max-width: ${mobilviewMax}px)`);
-
-    useEffect(() => {
-        setIsMobile(window.innerWidth <= mobilviewMax);
-        mqlMobilMax.addEventListener('change', handleResize);
-        return () => {
-            mqlMobilMax.removeEventListener('change', handleResize);
-        };
-    }, []);
-
-    useEffect(() => {
-        const hovedmenyKnappId = isMobile
-            ? mobilHovedmenyKnappId
-            : desktopHovedmenyKnappId;
-        setHovedmenylink(`#${hovedmenyKnappId}`);
-
-        const idSokLink = isMobile ? 'mobil-decorator-sok-toggle' : '';
-        setSoklink(`#${idSokLink}`);
-    }, [isMobile]);
-
-    const handleResize = (event: MediaQueryListEvent) => {
-        setIsMobile(event.matches);
+    const openMobilSok = () => {
+        if (subMenuOpen) {
+            dispatch(toggleUndermenyVisning());
+        } else if (!mainMenuOpen) {
+            dispatch(toggleHovedmeny());
+        }
+        document.getElementById(mobilSokInputId)?.focus();
     };
+
+    const openDesktopSok = () => {
+        if (sokOpen) {
+            document.getElementById(desktopSokInputId)?.focus();
+        } else {
+            dispatch(toggleSok());
+        }
+    };
+
+    const mobilLinks: SkipLink[] = [
+        {
+            tekstId: 'skiplinks-ga-til-hovedmeny',
+            onClick: () =>
+                document.getElementById(mobilHovedmenyKnappId)?.focus(),
+        },
+        {
+            tekstId: 'skiplinks-ga-til-sok',
+            onClick: openMobilSok,
+        },
+    ];
+
+    const desktopLinks: SkipLink[] = [
+        {
+            tekstId: 'skiplinks-ga-til-hovedmeny',
+            onClick: () =>
+                document.getElementById(desktopHovedmenyKnappId)?.focus(),
+        },
+        {
+            tekstId: 'skiplinks-ga-til-sok',
+            onClick: openDesktopSok,
+        },
+    ];
+
+    useEffect(() => {
+        const mainContentElement = document.getElementById(mainContentId);
+        setHasMainContent(!!mainContentElement);
+    }, []);
 
     return (
         <nav
@@ -45,34 +84,28 @@ const Skiplinks = () => {
             aria-label="Hopp til innhold"
         >
             <ul>
-                <li>
-                    <a
-                        href={hovedmenylink}
-                        className="visuallyhidden focusable"
-                        id="hovedmenylenke"
-                    >
-                        <Tekst id="skiplinks-ga-til-hovedmeny" />
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="#maincontent"
-                        className="visuallyhidden focusable"
-                        id="hovedinnholdlenke"
-                    >
-                        <Tekst id="skiplinks-ga-til-hovedinnhold" />
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href={soklink}
-                        className="visuallyhidden focusable"
-                        id="soklenke"
-                        onClick={() => !isMobile && dispatch(toggleSok())}
-                    >
-                        <Tekst id="skiplinks-ga-til-sok" />
-                    </a>
-                </li>
+                {mobilLinks.map((link, index) => (
+                    <SkipLinkElement
+                        link={link}
+                        className={'skiplink__mobil'}
+                        key={index}
+                    />
+                ))}
+                {desktopLinks.map((link, index) => (
+                    <SkipLinkElement
+                        link={link}
+                        className={'skiplink__desktop'}
+                        key={index}
+                    />
+                ))}
+                {hasMainContent && (
+                    <SkipLinkElement
+                        link={{
+                            anchorId: mainContentId,
+                            tekstId: 'skiplinks-ga-til-hovedinnhold',
+                        }}
+                    />
+                )}
             </ul>
         </nav>
     );

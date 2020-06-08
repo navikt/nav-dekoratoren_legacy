@@ -6,7 +6,7 @@ import BEMHelper from 'utils/bem';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { GACategory } from 'utils/google-analytics';
-import { LenkeMedGA } from 'komponenter/common/LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import { finnTekst } from 'tekster/finn-tekst';
 import { Language } from 'store/reducers/language-duck';

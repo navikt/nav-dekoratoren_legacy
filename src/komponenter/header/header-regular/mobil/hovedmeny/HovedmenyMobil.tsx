@@ -5,16 +5,12 @@ import { Status } from 'api/api';
 import { getHovedmenyNode, getMinsideMenyNode } from 'utils/meny-storage-utils';
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
 import { GACategory, gaEvent } from 'utils/google-analytics';
-import { finnTekst } from 'tekster/finn-tekst';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
-import { Language } from 'store/reducers/language-duck';
 import { dataInitState } from 'store/reducers/menu-duck';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
-import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapper/MenylinjeKnapp';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import HamburgerIkon from 'komponenter/header/header-regular/common/meny-knapper/ikoner/hamburger-ikon/HamburgerIkon';
+import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapper/hovedmeny-knapp/HovedmenyKnapp';
 
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
@@ -27,21 +23,7 @@ const stateSelector = (state: AppState) => ({
 
 const classname = 'mobilmeny';
 export const mobilHovedmenyKnappId = `${classname}-knapp-id`;
-
-export const TextTransformFirstLetterToUppercase = ({
-    text,
-    lang,
-}: {
-    text: string;
-    lang: Language;
-}) => {
-    const txt = finnTekst(text, lang);
-    const output = txt
-        .charAt(0)
-        .toUpperCase()
-        .concat(txt.slice(1).toLowerCase());
-    return <>{output}</>;
-};
+export const mobilSokInputId = `${classname}-sok-input`;
 
 const HovedmenyMobil = () => {
     const dispatch = useDispatch();
@@ -59,36 +41,27 @@ const HovedmenyMobil = () => {
             category: GACategory.Header,
             action: `meny-${underIsOpen ? 'close' : 'open'}`,
         });
-
         dispatch(toggleUndermenyVisning());
     };
 
     const hovedmenutoggle = () => {
+        gaEvent({
+            context: arbeidsflate,
+            category: GACategory.Header,
+            action: `meny-${isOpen ? 'close' : 'open'}`,
+        });
         dispatch(toggleHovedmeny());
     };
 
     const isOpen = hovedIsOpen || underIsOpen || varselIsOpen;
 
     const menyKnapp = (
-        <>
-            <MenylinjeKnapp
-                onClick={hovedmenutoggle}
-                isOpen={hovedIsOpen}
-                classname={classname}
-                id={mobilHovedmenyKnappId}
-                ariaLabel={'Hovedmenyknapp'}
-            >
-                <>
-                    <HamburgerIkon isOpen={hovedIsOpen} />
-                    <Undertittel>
-                        <TextTransformFirstLetterToUppercase
-                            text="meny-knapp"
-                            lang={language}
-                        />
-                    </Undertittel>
-                </>
-            </MenylinjeKnapp>
-        </>
+        <HovedmenyKnapp
+            isOpen={hovedIsOpen}
+            onClick={hovedmenutoggle}
+            hovedmenyClassname={classname}
+            id={mobilHovedmenyKnappId}
+        />
     );
 
     const dropdownInnhold =

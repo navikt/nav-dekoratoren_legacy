@@ -4,11 +4,11 @@ import Modal from 'nav-frontend-modal';
 import { Input } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
-
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import './DelSkjermModal.less';
+import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 
 const Veileder = require('ikoner/veiledere/Veileder.svg');
 
@@ -153,9 +153,9 @@ const DelSkjermModal = (props: Props) => {
                         </div>
                     </>
                 ) : (
-                    <Normaltekst>
+                    <AlertStripeFeil>
                         <Tekst id={'delskjerm-modal-stengt'} />
-                    </Normaltekst>
+                    </AlertStripeFeil>
                 )}
             </div>
         </Modal>
