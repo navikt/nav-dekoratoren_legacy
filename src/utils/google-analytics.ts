@@ -29,7 +29,6 @@ export const initGA = () => {
         titleCase: false,
         debug: false,
     });
-    ReactGA.pageview(window.location.pathname + window.location.search);
 };
 
 export const gaEvent = (props: GAEventArgs) => {
