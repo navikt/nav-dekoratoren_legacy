@@ -8,6 +8,7 @@ import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import './DelSkjermModal.less';
+import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 
 const Veileder = require('ikoner/del-skjerm/Veileder.svg');
 
@@ -152,9 +153,9 @@ const DelSkjermModal = (props: Props) => {
                         </div>
                     </>
                 ) : (
-                    <Normaltekst>
+                    <AlertStripeFeil>
                         <Tekst id={'delskjerm-modal-stengt'} />
-                    </Normaltekst>
+                    </AlertStripeFeil>
                 )}
             </div>
         </Modal>
