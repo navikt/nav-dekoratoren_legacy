@@ -9,9 +9,9 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
-import './DesktopMenylinje.less';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import { GACategory } from 'utils/google-analytics';
+import './DesktopMenylinje.less';
 
 export const desktopHeaderLogoId = 'desktop-header-logo-id';
 export const desktopLoginKnappId = 'desktop-login-knapp';
