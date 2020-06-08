@@ -18,6 +18,7 @@ import Dittnavmeny from './mobil-innhold/dittnavmeny/Dittnavmeny';
 import { InnloggingsstatusState } from 'store/reducers/innloggingsstatus-duck';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
+import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
 import './MobilVisningsmeny.less';
 
 interface DispatchProps {
@@ -124,6 +125,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                         tabindex={this.hovedseksjonTabIndex()}
                         isOpen={menuIsOpen}
                         dropdownTransitionMs={400}
+                        id={mobilSokInputId}
                     />
                     <InnloggetBruker tabIndex={this.hovedseksjonTabIndex()} />
 
