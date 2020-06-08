@@ -23,6 +23,7 @@ const stateSelector = (state: AppState) => ({
 
 const classname = 'mobilmeny';
 export const mobilHovedmenyKnappId = `${classname}-knapp-id`;
+export const mobilSokInputId = `${classname}-sok-input`;
 
 const HovedmenyMobil = () => {
     const dispatch = useDispatch();
