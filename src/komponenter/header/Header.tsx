@@ -12,6 +12,7 @@ import { Language, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
+import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -85,6 +86,7 @@ export const Header = () => {
                     <RegularHeader />
                 )}
             </header>
+            <MenyBakgrunn />
         </Fragment>
     );
 };

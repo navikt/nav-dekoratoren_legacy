@@ -8,7 +8,6 @@ import { Language } from 'store/reducers/language-duck';
 import { Sticky } from 'komponenter/header/header-regular/common/sticky/Sticky';
 import { useEffect } from 'react';
 import Skiplinks from 'komponenter/header/skiplinks/Skiplinks';
-import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
 
 export const RegularHeader = () => {
     const language = useSelector((state: AppState) => state.language.language);
@@ -39,7 +38,6 @@ export const RegularHeader = () => {
                     </Sticky>
                 </div>
             </div>
-            <MenyBakgrunn />
         </Fragment>
     );
 };
