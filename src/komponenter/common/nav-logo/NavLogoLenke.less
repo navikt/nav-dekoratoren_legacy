@@ -1,24 +1,8 @@
 @import '../../../styling-variabler.less';
 
 .nav-logo-lenke {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    // Browser compatibility hack
-    .nav-logo-container {
-        width: 100%;
-        height: 0;
-        padding-top: (169 / 269) * 100%;
-        position: relative;
-    }
-
     svg {
-        position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
-        height: 100%;
     }
 
     &:hover {
@@ -32,5 +16,6 @@
         border-radius: 8px;
         outline: none;
         border-color: transparent;
+        background-color: transparent;
     }
 }
