@@ -1,6 +1,5 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import { SokDropdown } from './sok/SokDropdown';
 import { HovedmenyDesktop } from './hovedmeny/HovedmenyDesktop';
 import { MinsideMeny } from './minside-meny/MinsideMeny';
@@ -9,7 +8,9 @@ import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn-knapp/LoggInnKnapp';
+import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
+import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
+import { GACategory } from 'utils/google-analytics';
 import './DesktopMenylinje.less';
 
 export const desktopHeaderLogoId = 'desktop-header-logo-id';
@@ -32,8 +33,12 @@ const DesktopMenylinje = () => {
     return (
         <nav className={cls.className} aria-label="Hovedmeny" id="hovedmeny">
             <div className={cls.element('elementer')}>
-                <NavLogoRod
-                    classname={cls.element('nav-brand')}
+                <NavLogoLenke
+                    gaEventArgs={{
+                        context: arbeidsflate,
+                        category: GACategory.Header,
+                        action: 'navlogo',
+                    }}
                     id={desktopHeaderLogoId}
                 />
                 <HovedmenyDesktop kbNavMainState={kbNavMainState} />

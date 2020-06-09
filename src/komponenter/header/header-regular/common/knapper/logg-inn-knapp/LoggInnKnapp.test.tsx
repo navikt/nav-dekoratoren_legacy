@@ -3,12 +3,11 @@ import { mount } from 'enzyme';
 import { Provider as ReduxProvider } from 'react-redux';
 import { hentInnloggingsstatusOk } from 'store/reducers/innloggingsstatus-duck';
 import { createStore } from 'store';
-import { Store } from 'redux';
-import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn-knapp/LoggInnKnapp';
+import LoggInnKnapp from './LoggInnKnapp';
 
 describe('<LoggInnKnapp />', () => {
     const store = createStore();
-    const mountWithRedux = (store: Store) =>
+    const mountWithRedux = () =>
         mount(
             <ReduxProvider store={store}>
                 <LoggInnKnapp />
@@ -17,7 +16,7 @@ describe('<LoggInnKnapp />', () => {
 
     // Logged out
     it('Teksten på knappen er LOGG INN når bruker er uinnlogget', () => {
-        expect(mountWithRedux(store).find('.login-knapp').at(0).text()).toEqual(
+        expect(mountWithRedux().find('.login-knapp').at(0).text()).toEqual(
             'Logg inn'
         );
     });
@@ -32,8 +31,8 @@ describe('<LoggInnKnapp />', () => {
             })
         );
 
-        expect(
-            mountWithRedux(store).find('.login-knapp').first().text()
-        ).toEqual('Logg ut');
+        expect(mountWithRedux().find('.login-knapp').first().text()).toEqual(
+            'Logg ut'
+        );
     });
 });

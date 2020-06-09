@@ -11,7 +11,7 @@ import BEMHelper from 'utils/bem';
 
 import DelSkjermModal from '../common/del-skjerm-modal/DelSkjermModal';
 import LenkeMedIkon from '../common/lenke-med-ikon/LenkeMedIkon';
-import FooterLenker from '../Lenker';
+import FooterLenker from 'komponenter/footer/common/Lenker';
 
 import './FooterSimple.less';
 

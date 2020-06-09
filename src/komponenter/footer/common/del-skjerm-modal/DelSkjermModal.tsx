@@ -10,7 +10,7 @@ import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import './DelSkjermModal.less';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 
-const Veileder = require('ikoner/veiledere/Veileder.svg');
+const Veileder = require('ikoner/del-skjerm/Veileder.svg');
 
 interface Props {
     isOpen: boolean;
