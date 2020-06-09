@@ -98,8 +98,8 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
         fetch(`${process.env.API_XP_MENY_URL}`, { method: 'GET' })
             .then((xpRes) => xpRes.json())
             .then((xpData) => {
-                mainCache.set(mainCacheKey, xpData, mainCacheTtl);
-                backupCache.set(backupCacheKey, xpData, 0);
+                mainCache.set(mainCacheKey, xpData);
+                backupCache.set(backupCacheKey, xpData);
                 res.send(xpData);
             })
             .catch((err) => {
@@ -112,11 +112,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
                     console.log('Using backup cache');
                     const backupCacheData = backupCache.get(backupCacheKey);
                     if (backupCacheData) {
-                        mainCache.set(
-                            mainCacheKey,
-                            backupCacheData,
-                            mainCacheTtl
-                        );
+                        mainCache.set(mainCacheKey, backupCacheData);
                         res.send(backupCacheData);
                     } else {
                         throw 'Invalid cache';
@@ -132,7 +128,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
                 if (!res.headersSent) {
                     console.log('Using backup mock');
                     if (mockMenu) {
-                        mainCache.set(mainCacheKey, mockMenu, mainCacheTtl);
+                        mainCache.set(mainCacheKey, mockMenu);
                         res.send(mockMenu);
                     } else {
                         throw 'Mock is undefined';
