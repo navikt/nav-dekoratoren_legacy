@@ -13,7 +13,7 @@ export const NavLogo = ({ altText }: Props) => (
     >
         <title>{altText}</title>
         <defs>
-            <path id="a" d="M22.4 43.42V.69H.57v42.73h21.85z" />
+            <path id="nav-logo-a" d="M22.4 43.42V.69H.57v42.73h21.85z" />
         </defs>
         <g fill="none">
             <path
@@ -22,14 +22,14 @@ export const NavLogo = ({ altText }: Props) => (
                 d="M125.3 168.94A84.47 84.47 0 11125.34 0a84.47 84.47 0 01-.02 168.94zM0 121.36l17.27-42.73h16.58l-17.24 42.73zM213.04 121.36l17.05-42.73h9.04l-17.04 42.73z"
             />
             <g transform="translate(246 77.94)">
-                <mask id="b" fill="#fff">
-                    <use href="#a" />
+                <mask id="nav-logo-b" fill="#fff">
+                    <use href="#nav-logo-a" />
                 </mask>
                 <path
                     fill="#c30000"
                     className="nav-logo-fill"
                     d="M.56 43.42L17.6.69h4.8L5.37 43.42z"
-                    mask="url(#b)"
+                    mask="url(#nav-logo-b)"
                 />
             </g>
             <path

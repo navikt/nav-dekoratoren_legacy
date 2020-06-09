@@ -58,7 +58,7 @@ const Undermeny = (props: Props) => {
             >
                 {arbeidsflate}
             </Systemtittel>
-            {hasLevel4Elements && <MinsideLockMsg />}
+            {!!hasLevel4Elements && <MinsideLockMsg />}
             <ul className={menyClass.element('meny', 'list')}>
                 {lenker.children.map((lenke, index: number) => {
                     const displayLock =

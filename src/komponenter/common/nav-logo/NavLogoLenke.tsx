@@ -39,9 +39,7 @@ export const NavLogoLenke = (props: Props) => {
             }}
             id={props.id}
         >
-            <div className={'nav-logo-container'}>
-                <NavLogo altText={'Til forsiden'} />
-            </div>
+            <NavLogo altText={'Til forsiden'} />
         </LenkeMedGA>
     );
 };
