@@ -11,21 +11,23 @@ export const SimpleHeader = () => {
     const cls = BEMHelper('simple-header');
 
     return (
-        <Sticky>
-            <div className={cls.className}>
-                <div className={cls.element('content')}>
-                    <NavLogoLenke
-                        gaEventArgs={{
-                            category: GACategory.Header,
-                            action: 'navlogo-mobilmeny',
-                        }}
-                    />
-                    <div className={cls.element('right')}>
-                        <Navn />
-                        <LoggInnKnapp />
+        <header className="siteheader">
+            <Sticky>
+                <div className={cls.className}>
+                    <div className={cls.element('content')}>
+                        <NavLogoLenke
+                            gaEventArgs={{
+                                category: GACategory.Header,
+                                action: 'navlogo-mobilmeny',
+                            }}
+                        />
+                        <div className={cls.element('right')}>
+                            <Navn />
+                            <LoggInnKnapp />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Sticky>
+            </Sticky>
+        </header>
     );
 };

@@ -1,8 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenypunkter } from 'store/reducers/menu-duck';
-import Skiplinks from 'komponenter/header/skiplinks/Skiplinks';
-import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { SimpleHeader } from 'komponenter/header/header-simple/HeaderSimple';
 import { RegularHeader } from 'komponenter/header/header-regular/HeaderRegular';
@@ -80,15 +78,11 @@ export const Header = () => {
         <Fragment>
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
-            <Skiplinks />
-            <header className="siteheader">
-                {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
-                    <SimpleHeader />
-                ) : (
-                    <RegularHeader />
-                )}
-            </header>
-            <MenyBakgrunn />
+            {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
+                <SimpleHeader />
+            ) : (
+                <RegularHeader />
+            )}
         </Fragment>
     );
 };
