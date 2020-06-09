@@ -23,7 +23,7 @@ const browserConfig = {
         filename: 'server.js',
         libraryTarget: 'commonjs2',
     },
-    devtool: process.env.NODE_ENV === "production" ? '' : 'source-map',
+    devtool: process.env.NODE_ENV === 'production' ? '' : 'source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         alias: {

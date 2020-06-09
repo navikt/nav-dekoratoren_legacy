@@ -16,7 +16,8 @@ const browserConfig = {
         publicPath: '/dekoratoren',
         filename: '[name].js',
     },
-    devtool: process.env.NODE_ENV === "production" ? '' : 'cheap-module-source-map',
+    devtool:
+        process.env.NODE_ENV === 'production' ? '' : 'cheap-module-source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         alias: {
