@@ -5,7 +5,12 @@ type Props = {
 };
 
 export const NavLogo = ({ altText }: Props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 269 169">
+    <svg
+        width="84px"
+        height="53px"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 269 169"
+    >
         <title>{altText}</title>
         <defs>
             <path id="a" d="M22.4 43.42V.69H.57v42.73h21.85z" />
