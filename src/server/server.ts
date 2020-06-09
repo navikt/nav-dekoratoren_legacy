@@ -30,14 +30,13 @@ const PORT = 8088;
 const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
 const mainCache = new NodeCache({
-    stdTTL: fiveMinutesInSeconds,
+    stdTTL: 10,
     checkperiod: oneMinuteInSeconds,
 });
 const backupCache = new NodeCache({
     stdTTL: 0,
     checkperiod: 0,
 });
-const mainCacheTtl = 10;
 
 // Cors
 app.disable('x-powered-by');
