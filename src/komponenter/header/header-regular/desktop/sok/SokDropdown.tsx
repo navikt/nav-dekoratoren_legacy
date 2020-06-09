@@ -10,7 +10,7 @@ import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { SokKnapp } from 'komponenter/header/header-regular/common/meny-knapper/sok-knapp/SokKnapp';
+import { SokKnapp } from 'komponenter/header/header-regular/common/knapper/sok-knapp/SokKnapp';
 import './SokDropdown.less';
 
 const stateSelector = (state: AppState) => ({

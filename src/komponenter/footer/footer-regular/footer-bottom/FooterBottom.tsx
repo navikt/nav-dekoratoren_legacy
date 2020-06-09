@@ -3,17 +3,16 @@ import { useSelector } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
 import { GACategory, gaEvent } from 'utils/google-analytics';
-import NavLogoFooter from 'ikoner/meny/NavLogoFooter';
 import DelSkjerm from 'ikoner/del-skjerm/DelSkjerm';
 import { AppState } from 'store/reducers';
 import Tekst from 'tekster/finn-tekst';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import { MenyNode } from 'store/reducers/menu-duck';
-import FooterLenker from '../../Lenker';
+import FooterLenker from 'komponenter/footer/common/Lenker';
 import LenkeMedIkon from 'komponenter/footer/common/lenke-med-ikon/LenkeMedIkon';
 import DelSkjermModal from 'komponenter/footer/common/del-skjerm-modal/DelSkjermModal';
 import { LinkLoader } from '../../../common/content-loaders/LinkLoader';
-
+import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import './FooterBottom.less';
 
 const FooterBottom = () => {
@@ -54,7 +53,13 @@ const FooterBottom = () => {
     return (
         <section className="menylinje-bottom">
             <div className={cls.className}>
-                <NavLogoFooter classname={cls.element('bottom-logo')} />
+                <NavLogoLenke
+                    gaEventArgs={{
+                        context: arbeidsflate,
+                        category: GACategory.Footer,
+                        action: 'navlogo',
+                    }}
+                />
                 <div className={cls.element('bottom-lenker')}>
                     <div>
                         <Normaltekst className="bottom-tekst">

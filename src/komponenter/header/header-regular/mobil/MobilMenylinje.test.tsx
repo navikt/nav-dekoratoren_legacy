@@ -5,11 +5,11 @@ import { Provider } from 'react-redux';
 import { reducers } from 'store/reducers';
 import { createStore, Store } from 'redux';
 import MobilMenylinje from './MobilMenylinje';
-import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
 import { ActionType } from '../../../../store/actions';
 import { Status } from '../../../../api/api';
-import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn-knapp/LoggInnKnapp';
+import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
+import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 
 const store = createStore(reducers);
 
@@ -21,8 +21,8 @@ const getWrapper = (store: Store) =>
     );
 
 describe('<MobilMenylinje /> sjekk at komponent finner logo', () => {
-    it('Skal rendre <NavLogoRod> komponent', () => {
-        expect(getWrapper(store).find(NavLogoRod)).toHaveLength(1);
+    it('Skal rendre <NavLogoLenke> komponent', () => {
+        expect(getWrapper(store).find(NavLogoLenke)).toHaveLength(1);
     });
 });
 

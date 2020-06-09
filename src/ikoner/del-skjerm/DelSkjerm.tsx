@@ -18,4 +18,5 @@ const DelSkjerm = (props: SVGProps<SVGSVGElement>) => (
         </g>
     </svg>
 );
+
 export default DelSkjerm;

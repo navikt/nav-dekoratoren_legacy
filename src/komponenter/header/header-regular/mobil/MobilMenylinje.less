@@ -1,22 +1,13 @@
 @import (reference) '../../../../styling-variabler.less';
 
 .mobilmeny {
-    &__content {
-        min-height: 88px;
-        padding: 0.5rem 0.5rem 0.5rem 1rem;
-        border-bottom: 2px solid @header-separator-farge;
-    }
-
     &__elementer {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-    }
-
-    &__venstre-kolonne {
-        padding-left: 0.5rem;
-        width: 66px;
-        height: 66px;
+        min-height: 88px;
+        padding: 0.5rem 0.5rem 0.5rem 1rem;
+        border-bottom: 2px solid @header-separator-farge;
     }
 
     &__hoyre-kolonne {
@@ -26,32 +17,6 @@
         align-items: center;
         padding-top: 0.5rem;
         flex-wrap: wrap;
-    }
-
-    &__logo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 66px;
-        height: 66px;
-
-        svg {
-            width: 62px;
-            height: 62px;
-        }
-
-        svg:hover {
-            width: 66px;
-            height: 66px;
-        }
-
-        &:hover {
-            outline: 3px solid black;
-        }
-
-        &:focus {
-            outline: 3px solid @fokusFarge;
-        }
     }
 
     &__sok {
@@ -70,6 +35,11 @@
         &:focus {
             outline: 3px solid @fokusFarge;
         }
+    }
+
+    .nav-logo-lenke {
+        width: 72px;
+        padding: 4px;
     }
 
     .login-knapp-container {

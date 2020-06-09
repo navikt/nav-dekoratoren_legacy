@@ -3,7 +3,7 @@ import { arbeidsgiverContextLenke } from 'komponenter/header/header-regular/comm
 import { personContextLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { samarbeidspartnerContextLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { EnvironmentState } from 'store/reducers/environment-duck';
-import { valgtbedrift } from '../meny-knapper/minside-knapper/MinsideArbgiverKnapp';
+import { valgtbedrift } from '../knapper/minside-knapper/MinsideArbgiverKnapp';
 
 type LenkeData = {
     url: string;

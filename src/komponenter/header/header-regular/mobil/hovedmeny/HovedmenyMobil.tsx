@@ -10,7 +10,7 @@ import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { dataInitState } from 'store/reducers/menu-duck';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
-import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapper/hovedmeny-knapp/HovedmenyKnapp';
+import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/knapper/hovedmeny-knapp/HovedmenyKnapp';
 
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
