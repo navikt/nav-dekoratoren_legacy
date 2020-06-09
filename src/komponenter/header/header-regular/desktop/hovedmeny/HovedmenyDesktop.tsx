@@ -14,7 +14,7 @@ import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setu
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { matchMedia } from 'utils/match-media-polyfill';
-import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapper/hovedmeny-knapp/HovedmenyKnapp';
+import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/knapper/hovedmeny-knapp/HovedmenyKnapp';
 import { getHovedmenyMaxColsPerRow } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { gaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';

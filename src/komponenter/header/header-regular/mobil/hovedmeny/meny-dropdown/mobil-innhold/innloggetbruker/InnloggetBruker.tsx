@@ -4,7 +4,7 @@ import Tekst from 'tekster/finn-tekst';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { Undertittel, Ingress } from 'nav-frontend-typografi';
-import LoggutIkonMobil from 'ikoner/mobilmeny/LoggutIkonMobil';
+import LoggutIkonMobil from 'ikoner/meny/LoggutIkonMobil';
 import './InnloggetBruker.less';
 
 interface Props {

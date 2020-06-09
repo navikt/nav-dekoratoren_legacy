@@ -6,7 +6,6 @@
     @maxheight-menuitem: 48px;
 
     width: 100%;
-    padding: 0.5rem 0;
     border-bottom: 2px solid @header-separator-farge;
 
     .margin-left-section() {
@@ -28,7 +27,6 @@
         align-items: center;
         flex-wrap: wrap;
         justify-content: space-between;
-        padding: 0;
         width: 100%;
         margin: 0 auto;
 
@@ -37,35 +35,27 @@
         }
     }
 
-    &__nav-brand {
+    .nav-logo-lenke {
         order: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
 
-        width: 88px;
-        height: 88px;
+        @padding: 8px;
+        width: 100px;
+        padding: @padding;
 
-        svg {
-            width: 84px;
-            height: 84px;
-        }
+        margin-left: calc(@margins-sides-desktop - @padding);
+        margin-right: -@padding;
 
-        svg:hover {
-            width: 88px;
-            height: 88px;
-        }
-
-        margin-left: @margins-sides-desktop;
         @media (max-width: @smallDesktopLimitWidth) {
-            margin-left: @margins-sides-desktop-small;
+            margin-left: calc(@margins-sides-desktop-small - @padding);
         }
-
-        .header-knapp-focus-mixin();
+        .nav-logo-fill {
+            fill: @nav-logo-rod;
+        }
     }
 
     .desktop-hovedmeny__knapp {
         order: 2;
+        max-height: @maxheight-menuitem;
         .margin-left-section();
     }
 

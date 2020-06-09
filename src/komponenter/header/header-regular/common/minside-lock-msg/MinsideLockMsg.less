@@ -1,0 +1,40 @@
+@import (reference) '../../../../../styling-variabler.less';
+
+.minside-lock {
+    &__panel {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 1rem;
+        margin-top: -1.5rem;
+        padding: 1rem;
+        background-color: @navLysBlaLighten80;
+        border: 2px solid @navLysBla;
+
+        @media (max-width: @desktopMinWidth) {
+            margin: 0;
+        }
+    }
+
+    &__ikon {
+        flex-grow: 0;
+        width: 3rem;
+        height: 3rem;
+        margin-right: 0.625rem;
+        padding: 0.75rem 1rem;
+        background-color: @navLysBlaLighten40;
+        border-radius: 1.5rem;
+
+        svg {
+            width: 1rem;
+            g {
+                fill: @navMorkGra;
+            }
+        }
+    }
+
+    &__msg {
+        flex-grow: 1;
+        max-width: 37.5rem;
+    }
+}

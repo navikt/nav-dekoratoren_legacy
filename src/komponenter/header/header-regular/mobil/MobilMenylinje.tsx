@@ -1,14 +1,15 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import NavLogoRod from 'ikoner/meny/NavLogoRod';
 import { Language } from 'store/reducers/language-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Status } from 'api/api';
-import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn-knapp/LoggInnKnapp';
+import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
 import { Varselbjelle } from 'komponenter/header/header-regular/mobil/varsler/Varselbjelle';
+import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
+import { GACategory } from 'utils/google-analytics';
 import './MobilMenylinje.less';
 
 const mobilClass = BEMHelper('mobilmeny');
@@ -47,16 +48,18 @@ const MobilMenylinje = ({ language }: Props) => {
             id={mobilClass.className}
             aria-label="Hovedmeny"
         >
-            <div className={mobilClass.element('content')}>
-                <div className={mobilClass.element('elementer')}>
-                    <div className={mobilClass.element('venstre-kolonne')}>
-                        <NavLogoRod classname={mobilClass.element('logo')} />
-                    </div>
-                    <div className={mobilClass.element('hoyre-kolonne')}>
-                        {visInnloggingsKnapp && <LoggInnKnapp type={'flat'} />}
-                        {visVarslerDropdown && <Varselbjelle />}
-                        {visHovedMeny && <HovedmenyMobil />}
-                    </div>
+            <div className={mobilClass.element('elementer')}>
+                <NavLogoLenke
+                    gaEventArgs={{
+                        context: arbeidsflate,
+                        category: GACategory.Header,
+                        action: 'navlogo',
+                    }}
+                />
+                <div className={mobilClass.element('hoyre-kolonne')}>
+                    {visInnloggingsKnapp && <LoggInnKnapp type={'flat'} />}
+                    {visVarslerDropdown && <Varselbjelle />}
+                    {visHovedMeny && <HovedmenyMobil />}
                 </div>
             </div>
         </nav>

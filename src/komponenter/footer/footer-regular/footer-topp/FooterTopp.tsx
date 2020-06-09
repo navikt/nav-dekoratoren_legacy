@@ -10,7 +10,7 @@ import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import BEMHelper from 'utils/bem';
 import FooterArbeidsflatevalg from './footer-arbeidsflatevalg/FooterArbeidsflatevalg';
 import { LinksLoader } from '../../../common/content-loaders/LinkLoader';
-import FooterLenker from '../../Lenker';
+import FooterLenker from 'komponenter/footer/common/Lenker';
 import { Language } from 'store/reducers/language-duck';
 import './FooterTopp.less';
 
