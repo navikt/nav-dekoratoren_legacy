@@ -78,11 +78,13 @@ export const Header = () => {
         <Fragment>
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
-            {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
-                <SimpleHeader />
-            ) : (
-                <RegularHeader />
-            )}
+            <header className="siteheader">
+                {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
+                    <SimpleHeader />
+                ) : (
+                    <RegularHeader />
+                )}
+            </header>
         </Fragment>
     );
 };

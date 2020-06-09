@@ -26,21 +26,19 @@ export const RegularHeader = () => {
     return (
         <Fragment>
             <Skiplinks />
-            <header className="siteheader">
-                <div className="media-sm-mobil">
-                    <Sticky alwaysSticky={mobilMenyIsOpen}>
-                        <MobilMenylinje language={language} />
+            <div className="media-sm-mobil">
+                <Sticky alwaysSticky={mobilMenyIsOpen}>
+                    <MobilMenylinje language={language} />
+                </Sticky>
+            </div>
+            <div className="media-tablet-desktop">
+                <div className="header-z-wrapper">
+                    {language === Language.NORSK && <Arbeidsflatemeny />}
+                    <Sticky>
+                        <DesktopMenylinje />
                     </Sticky>
                 </div>
-                <div className="media-tablet-desktop">
-                    <div className="header-z-wrapper">
-                        {language === Language.NORSK && <Arbeidsflatemeny />}
-                        <Sticky>
-                            <DesktopMenylinje />
-                        </Sticky>
-                    </div>
-                </div>
-            </header>
+            </div>
             <MenyBakgrunn />
         </Fragment>
     );
