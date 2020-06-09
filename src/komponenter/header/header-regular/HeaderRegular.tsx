@@ -39,7 +39,6 @@ export const RegularHeader = () => {
                     </Sticky>
                 </div>
             </div>
-            <MenyBakgrunn />
         </Fragment>
     );
 };
