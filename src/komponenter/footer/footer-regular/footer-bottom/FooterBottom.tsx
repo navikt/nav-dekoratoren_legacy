@@ -65,7 +65,7 @@ const FooterBottom = () => {
                         <Normaltekst className="bottom-tekst">
                             <Tekst id="footer-arbeids-og-veldferdsetaten" />
                         </Normaltekst>
-                        <ul className="bottom-lenke">
+                        <ul className={cls.element('personvern-lenker')}>
                             {personvernNode ? (
                                 <FooterLenker node={personvernNode} />
                             ) : (
