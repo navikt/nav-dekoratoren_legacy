@@ -1,6 +1,5 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
-import 'isomorphic-fetch';
 
 // Nødvendig for IE11-støtte i visse apper.
 // Ikke oppgrader fra v.3.5.0 før denne er fikset:
@@ -16,16 +15,11 @@ import { initGA } from './utils/google-analytics';
 import { initAmplitude } from './utils/amplitude';
 import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
-import * as es6promise from 'es6-promise';
 import { CookiesProvider } from 'react-cookie';
 import Cookies from 'universal-cookie';
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
-
-if (verifyWindowObj()) {
-    es6promise.polyfill();
-}
 
 if (erDev) {
     console.log('==========================');
