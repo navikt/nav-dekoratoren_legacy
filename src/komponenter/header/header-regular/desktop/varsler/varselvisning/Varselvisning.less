@@ -1,6 +1,16 @@
 @import (reference) '../../../../../../styling-variabler.less';
 
-.varsler-display-desktop {
+.varsler-visning {
+    ul {
+        padding: 0;
+    }
+
+    &__tittel {
+        @media (max-width: @mobilMaxWidth) {
+            .typo-innholdstittel;
+        }
+    }
+
     .dekorator-varsel-container {
         @separator-props: @navMorkGra solid 1px;
         border-bottom: @separator-props;

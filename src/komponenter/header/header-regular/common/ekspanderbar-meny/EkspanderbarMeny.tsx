@@ -19,10 +19,10 @@ const EkspanderbarMeny = (props: Props) => {
             {menyKnapp}
             <div className={`${cls.element('container')} ${classname}`}>
                 <div
-                    className={cls
-                        .element('innhold-wrapper', isOpen ? 'active' : '')
-                        .concat(' ')
-                        .concat(cls.element('menuheight'))}
+                    className={cls.element(
+                        'innhold-wrapper',
+                        isOpen ? 'active' : ''
+                    )}
                     id={id}
                 >
                     <div className={cls.element('innhold')}>{children}</div>

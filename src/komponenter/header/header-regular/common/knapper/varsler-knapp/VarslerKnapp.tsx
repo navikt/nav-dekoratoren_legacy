@@ -1,37 +1,57 @@
+import React from 'react';
 import MenylinjeKnapp from '../MenylinjeKnapp';
 import { VarselIkon } from '../ikoner/varsel-ikon/VarselIkon';
 import Tekst from 'tekster/finn-tekst';
-import React from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
-import { VarslerData } from 'store/reducers/varselinnboks-duck';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { settVarslerSomLest } from 'store/reducers/varsel-lest-duck';
+import { gaEvent } from 'utils/google-analytics';
+import { GACategory } from 'utils/google-analytics';
+import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
+import { AppState } from 'store/reducers';
 import './VarslerKnapp.less';
 
 type Props = {
-    onClick: () => void;
-    isOpen: boolean;
-    varsler: VarslerData;
-    varslerDropdownClassname: string;
+    dropdownClassname: string;
     id?: string;
 };
 
+const stateSelector = (state: AppState) => ({
+    isOpen: state.dropdownToggles.varsler,
+    varsler: state.varsler.data,
+    appBaseUrl: state.environment.APP_BASE_URL,
+});
+
 export const VarslerKnapp = (props: Props) => {
+    const dispatch = useDispatch();
+    const { isOpen, varsler, appBaseUrl } = useSelector(stateSelector);
+
+    const toggleVarslerDropdown = () => {
+        if (!isOpen && varsler.uleste > 0) {
+            settVarslerSomLest(appBaseUrl, varsler.nyesteId, dispatch);
+        }
+        gaEvent({
+            category: GACategory.Header,
+            action: `varsler-${isOpen ? 'close' : 'open'}`,
+        });
+        dispatch(toggleVarsler());
+    };
+
     const ariaLabel = `Varsler. Du har ${
-        props.varsler.antall > 0 ? props.varsler.antall : 'ingen'
+        varsler.antall > 0 ? varsler.antall : 'ingen'
     } varsler.`;
 
     return (
         <MenylinjeKnapp
-            onClick={props.onClick}
-            isOpen={props.isOpen}
+            onClick={toggleVarslerDropdown}
+            isOpen={isOpen}
             classname={'varselbjelle'}
             id={props.id}
-            ariaControls={props.varslerDropdownClassname}
+            ariaControls={props.dropdownClassname}
             ariaLabel={ariaLabel}
         >
-            <VarselIkon
-                isOpen={props.isOpen}
-                antallUleste={props.varsler.uleste}
-            />
+            <VarselIkon isOpen={isOpen} antallUleste={varsler.uleste} />
             <Undertittel className={'varselbjelle__tekst'}>
                 <Tekst id={'varsler-tittel'} />
             </Undertittel>
