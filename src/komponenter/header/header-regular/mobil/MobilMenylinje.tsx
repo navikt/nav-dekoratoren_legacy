@@ -12,43 +12,38 @@ import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import { GACategory } from 'utils/google-analytics';
 import './MobilMenylinje.less';
 
-const mobilClass = BEMHelper('mobilmeny');
-
 interface Props {
     language: Language;
 }
 
 const stateSelector = (state: AppState) => ({
-    innloggingsstatus: state.innloggingsstatus,
-    visVarsel: state.dropdownToggles.varsler,
+    innlogga: state.innloggingsstatus.data.authenticated,
+    innloggingsstatus: state.innloggingsstatus.status,
+    arbeidsflate: state.arbeidsflate.status,
 });
 
 const MobilMenylinje = ({ language }: Props) => {
-    const { innloggingsstatus } = useSelector(stateSelector);
-    const innlogga = innloggingsstatus.data.authenticated;
-    const arbeidsflate = useSelector(
-        (state: AppState) => state.arbeidsflate.status
+    const cls = BEMHelper('mobilmeny');
+    const { innlogga, innloggingsstatus, arbeidsflate } = useSelector(
+        stateSelector
     );
 
     const harLasta =
-        innloggingsstatus.status !== Status.IKKE_STARTET &&
-        innloggingsstatus.status !== Status.PENDING;
+        innloggingsstatus !== Status.IKKE_STARTET &&
+        innloggingsstatus !== Status.PENDING;
 
     const visInnloggingsKnapp = harLasta && !innlogga;
 
     const visVarslerDropdown =
         harLasta && innlogga && arbeidsflate === MenuValue.PRIVATPERSON;
 
-    const visHovedMeny =
-        language === Language.NORSK || language === Language.ENGELSK;
-
     return (
         <nav
-            className={mobilClass.className}
-            id={mobilClass.className}
+            className={cls.className}
+            id={cls.className}
             aria-label="Hovedmeny"
         >
-            <div className={mobilClass.element('elementer')}>
+            <div className={cls.element('elementer')}>
                 <NavLogoLenke
                     gaEventArgs={{
                         context: arbeidsflate,
@@ -56,10 +51,10 @@ const MobilMenylinje = ({ language }: Props) => {
                         action: 'navlogo',
                     }}
                 />
-                <div className={mobilClass.element('hoyre-kolonne')}>
+                <div className={cls.element('hoyre-kolonne')}>
                     {visInnloggingsKnapp && <LoggInnKnapp type={'flat'} />}
                     {visVarslerDropdown && <Varselbjelle />}
-                    {visHovedMeny && <HovedmenyMobil />}
+                    <HovedmenyMobil />
                 </div>
             </div>
         </nav>

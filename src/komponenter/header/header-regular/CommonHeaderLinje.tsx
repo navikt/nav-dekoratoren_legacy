@@ -1,0 +1,56 @@
+import React from 'react';
+import BEMHelper from 'utils/bem';
+import { AppState } from 'store/reducers';
+import { useSelector } from 'react-redux';
+import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
+import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
+import { GACategory } from 'utils/google-analytics';
+import { SokDropdown } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
+import { MinsideMeny } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
+import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
+import { VarslerDropdown } from 'komponenter/header/header-regular/desktop/varsler/VarslerDropdown';
+import { MenuValue } from 'utils/meny-storage-utils';
+import { HovedmenyDesktop } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import { Varselbjelle } from 'komponenter/header/header-regular/mobil/varsler/Varselbjelle';
+import HovedmenyMobil from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
+
+export const headerLogoId = 'header-logo-id';
+
+const stateSelector = (state: AppState) => ({
+    innlogget: state.innloggingsstatus.data.authenticated,
+    arbeidsflate: state.arbeidsflate.status,
+});
+
+export const CommonHeaderLinje = () => {
+    const cls = BEMHelper('header-linje');
+    const { innlogget, arbeidsflate } = useSelector(stateSelector);
+    const kbNavMainState = useKbNavMain();
+
+    const visVarslerDropdown =
+        innlogget && arbeidsflate === MenuValue.PRIVATPERSON;
+
+    return (
+        <nav className={cls.className} aria-label={'Hovedmeny'}>
+            <div className={cls.element('elementer')}>
+                <NavLogoLenke
+                    gaEventArgs={{
+                        context: arbeidsflate,
+                        category: GACategory.Header,
+                        action: 'navlogo',
+                    }}
+                    id={headerLogoId}
+                />
+                <HovedmenyDesktop kbNavMainState={kbNavMainState} />
+                <SokDropdown kbNavMainState={kbNavMainState} />
+                <span className={cls.element('spacer')} />
+                {visVarslerDropdown && (
+                    <VarslerDropdown kbNavMainState={kbNavMainState} />
+                )}
+                <MinsideMeny kbNavMainState={kbNavMainState} />
+                <LoggInnKnapp />
+                {visVarslerDropdown && <Varselbjelle />}
+                <HovedmenyMobil />
+            </div>
+        </nav>
+    );
+};

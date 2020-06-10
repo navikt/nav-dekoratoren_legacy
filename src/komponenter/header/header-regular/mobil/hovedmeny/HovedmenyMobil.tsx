@@ -36,6 +36,17 @@ const HovedmenyMobil = () => {
         varselIsOpen,
     } = useSelector(stateSelector);
 
+    const hovedmenyPunkter = getHovedmenyNode(
+        meny.data,
+        language,
+        arbeidsflate
+    );
+
+    // Hide empty menues
+    if (meny.status === Status.OK && !hovedmenyPunkter?.hasChildren) {
+        return null;
+    }
+
     const menutoggle = () => {
         gaEvent({
             category: GACategory.Header,
@@ -68,10 +79,7 @@ const HovedmenyMobil = () => {
         meny.status === Status.OK ? (
             <MobilVisningsmeny
                 classname={classname}
-                menyLenker={
-                    getHovedmenyNode(meny.data, language, arbeidsflate) ||
-                    dataInitState
-                }
+                menyLenker={hovedmenyPunkter || dataInitState}
                 minsideLenker={
                     getMinsideMenyNode(meny.data, language) || dataInitState
                 }

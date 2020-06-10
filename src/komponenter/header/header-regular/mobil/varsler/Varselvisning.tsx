@@ -119,14 +119,6 @@ class Varselvisning extends React.Component<Props, State> {
                     </div>
                 </div>
                 {parsedVarsler}
-                <div className="media-tablet-desktop tablet-desktop-meny">
-                    <NyVarsel
-                        antallUlesteVarsler={antallUlesteVarsler}
-                        antallVarsler={antallVarsler}
-                        language={language}
-                        tabIndex={tabIndex}
-                    />
-                </div>
             </div>
         );
     }

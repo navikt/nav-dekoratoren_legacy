@@ -16,19 +16,19 @@ import './DesktopMenylinje.less';
 export const desktopHeaderLogoId = 'desktop-header-logo-id';
 export const desktopLoginKnappId = 'desktop-login-knapp';
 
+const stateSelector = (state: AppState) => ({
+    innlogga: state.innloggingsstatus.data.authenticated,
+    arbeidsflate: state.arbeidsflate.status,
+});
+
 const DesktopMenylinje = () => {
     const cls = BEMHelper('desktopmeny');
-    const kbNavMainState = useKbNavMain();
-    const arbeidsflate = useSelector(
-        (state: AppState) => state.arbeidsflate.status
-    );
-
-    const innlogga = useSelector(
-        (state: AppState) => state.innloggingsstatus.data.authenticated
-    );
+    const { innlogga, arbeidsflate } = useSelector(stateSelector);
 
     const visVarslerDropdown =
         innlogga && arbeidsflate === MenuValue.PRIVATPERSON;
+
+    const kbNavMainState = useKbNavMain();
 
     return (
         <nav className={cls.className} aria-label="Hovedmeny" id="hovedmeny">

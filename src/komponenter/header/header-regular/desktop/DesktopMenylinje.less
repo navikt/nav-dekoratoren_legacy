@@ -5,7 +5,6 @@
     @margin-mellom-sm: 0.5rem;
     @maxheight-menuitem: 48px;
 
-    width: 100%;
     border-bottom: 2px solid @header-separator-farge;
 
     .margin-left-section() {
@@ -24,15 +23,12 @@
 
     &__elementer {
         display: flex;
+        flex-direction: row;
         align-items: center;
         flex-wrap: wrap;
         justify-content: space-between;
-        width: 100%;
         margin: 0 auto;
-
-        @media (min-width: @desktopMaxWidth) {
-            max-width: @desktopMaxWidth;
-        }
+        max-width: @desktopMaxWidth;
     }
 
     .nav-logo-lenke {
