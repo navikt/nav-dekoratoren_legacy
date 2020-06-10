@@ -80,11 +80,9 @@ class Sok extends React.Component<StateProps & Props, InputState> {
             });
 
             if (input) {
-                this.setState({
-                    loading: true,
-                });
+                this.setState({ loading: true });
+                this.fetchSearchResultThrottled(input);
             }
-            this.fetchSearchResultThrottled(input);
         }
     };
 
