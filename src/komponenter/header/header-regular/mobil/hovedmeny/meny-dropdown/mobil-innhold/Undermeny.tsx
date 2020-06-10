@@ -43,10 +43,10 @@ const Undermeny = (props: Props) => {
 
     return (
         <section
-            className={menyClass
-                .element('undermeny-innhold', undermenyIsOpen ? 'active' : '')
-                .concat(' ')
-                .concat(menyClass.element('menuheight'))}
+            className={menyClass.element(
+                'undermeny-innhold',
+                undermenyIsOpen ? 'active' : ''
+            )}
         >
             <Lukkundermeny
                 setFocusIndex={setFocusNode}

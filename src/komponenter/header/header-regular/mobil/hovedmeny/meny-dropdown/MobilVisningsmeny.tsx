@@ -106,20 +106,16 @@ class MobilVisningsmeny extends React.Component<Props, State> {
             arbeidsflate,
             lang,
             underMenuIsOpen,
-            varslerIsOpen,
             minsideLenker,
         } = this.props;
         const menyClass = BEMHelper(classname);
         return (
             <>
                 <section
-                    className={menyClass
-                        .element(
-                            'startmeny',
-                            menuIsOpen && !underMenuIsOpen ? 'active' : ''
-                        )
-                        .concat(' ')
-                        .concat(menyClass.element('menuheight'))}
+                    className={menyClass.element(
+                        'startmeny',
+                        menuIsOpen && !underMenuIsOpen ? 'active' : ''
+                    )}
                 >
                     <Sok
                         tabindex={this.hovedseksjonTabIndex()}
@@ -205,7 +201,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                 <VarselvisningMobil
                     visvarsel={visvarsel}
                     visningmenyClassname={menyClass.className}
-                    tabindex={varslerIsOpen && !menuIsOpen && !underMenuIsOpen}
                 />
             </>
         );

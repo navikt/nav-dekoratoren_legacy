@@ -8,6 +8,7 @@ import { VarslerParsed } from './VarslerParsed';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { Systemtittel } from 'nav-frontend-typografi';
 import './Varselvisning.less';
+import BEMHelper from 'utils/bem';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
@@ -17,22 +18,24 @@ const stateSelector = (state: AppState) => ({
     varselInnboksUrl: state.environment.API_VARSELINNBOKS_URL,
 });
 
-const classname = 'varsler-display-desktop';
-
 const alleVarslerLenke = (
-    rowIndex: number,
     nyeVarslerMsg: string,
-    varselInnboksUrl: string
+    varselInnboksUrl: string,
+    rowIndex?: number
 ) => {
     return (
         <div className="dekorator-vis-alle-lenke">
             <LenkeMedGA
                 href={varselInnboksUrl}
-                id={getKbId(KbNavGroup.Varsler, {
-                    col: 0,
-                    row: rowIndex,
-                    sub: 0,
-                })}
+                id={
+                    rowIndex !== undefined
+                        ? getKbId(KbNavGroup.Varsler, {
+                              col: 0,
+                              row: rowIndex,
+                              sub: 0,
+                          })
+                        : undefined
+                }
                 tabIndex={0}
                 gaEventArgs={{
                     category: GACategory.Header,
@@ -47,7 +50,9 @@ const alleVarslerLenke = (
     );
 };
 
-export const Varselvisning = () => {
+type Props = { setKbId?: boolean };
+
+export const Varselvisning = ({ setKbId }: Props) => {
     const {
         varsler,
         varslerAntall,
@@ -56,6 +61,8 @@ export const Varselvisning = () => {
         varselInnboksUrl,
     } = useSelector(stateSelector);
 
+    const cls = BEMHelper('varsler-visning');
+
     const nyeVarslerMsg =
         varslerUleste > 0
             ? ` (${varslerUleste} ${finnTekst('varsler-nye', language)})`
@@ -63,13 +70,20 @@ export const Varselvisning = () => {
     const visAlleVarslerLenke = varslerAntall > 5;
 
     return (
-        <div className={classname}>
-            <Systemtittel>
+        <div className={cls.className}>
+            <Systemtittel className={cls.element('tittel')}>
                 <Tekst id={'varsler-tittel'} />
             </Systemtittel>
-            <VarslerParsed varsler={varsler} rowIndex={0} />
+            <VarslerParsed
+                varsler={varsler}
+                rowIndex={setKbId ? 0 : undefined}
+            />
             {visAlleVarslerLenke &&
-                alleVarslerLenke(1, nyeVarslerMsg, varselInnboksUrl)}
+                alleVarslerLenke(
+                    nyeVarslerMsg,
+                    varselInnboksUrl,
+                    setKbId ? 1 : undefined
+                )}
         </div>
     );
 };
