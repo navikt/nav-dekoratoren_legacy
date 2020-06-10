@@ -79,7 +79,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                 fetchError: false,
             });
 
-            if (input && input.length > 3) {
+            if (input && input.length > 2) {
                 this.setState({ loading: true });
                 this.fetchSearchResultThrottled(input);
             }
