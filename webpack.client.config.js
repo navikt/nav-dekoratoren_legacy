@@ -6,7 +6,7 @@ const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 
 const browserConfig = {
-    mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'development',
+    mode: process.env.NODE_ENV || 'development',
     target: 'web',
     entry: {
         client: './src/index.tsx',
@@ -16,7 +16,8 @@ const browserConfig = {
         publicPath: '/dekoratoren',
         filename: '[name].js',
     },
-    devtool: 'cheap-module-source-map',
+    devtool:
+        process.env.NODE_ENV === 'production' ? '' : 'cheap-module-source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         alias: {

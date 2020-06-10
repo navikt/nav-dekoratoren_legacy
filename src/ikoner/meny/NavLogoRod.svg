@@ -8,7 +8,7 @@
 >
     <defs>
         <polygon
-                id="path-1"
+                id="decorator-path-1"
                 points="22.407 43.4168 22.407 0.6878 0.5635 0.6878 0.5635 43.4168 22.407 43.4168"
         />
     </defs>
@@ -42,7 +42,7 @@
                         transform="translate(246.000000, 77.942000)"
                 >
                     <mask id="mask-2" fill="white">
-                        <use xlink:href="#path-1"/>
+                        <use xlink:href="#decorator-path-1"/>
                     </mask>
                     <g id="Clip-8"/>
                     <polygon
