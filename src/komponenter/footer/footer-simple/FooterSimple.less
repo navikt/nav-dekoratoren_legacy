@@ -25,6 +25,22 @@
         }
     }
 
+    &__personvern-lenker {
+        @media (min-width: @smallDesktopLimitWidth) {
+            margin: 0;
+            display: flex;
+            li {
+                padding-right: 2rem;
+            }
+        }
+        @media (max-width: @smallDesktopLimitWidth) {
+            margin: 0 0 1rem 0;
+            li {
+                padding: 0.375rem 0 0.375rem 0;
+            }
+        }
+    }
+
     &__del-skjerm {
         display: flex;
         @media (min-width: @smallDesktopLimitWidth) {

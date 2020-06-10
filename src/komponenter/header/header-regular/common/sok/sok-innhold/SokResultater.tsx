@@ -47,12 +47,13 @@ export const SokResultater = ({
 
     return (
         <ul {...getMenuProps()} className="sokeresultat-liste">
-            {fetchError && (
-                <AlertStripeFeil>
-                    <Tekst id={'feil-sok-fetch'} />
-                </AlertStripeFeil>
-            )}
-            {itemsFiltered ? (
+            {fetchError ? (
+                <div className={'sokeresultat-feil'}>
+                    <AlertStripeFeil>
+                        <Tekst id={'feil-sok-fetch'} />
+                    </AlertStripeFeil>
+                </div>
+            ) : itemsFiltered ? (
                 itemsFiltered.map((item, index) => (
                     <li
                         {...getItemProps({
