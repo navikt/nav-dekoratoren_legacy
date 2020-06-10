@@ -7,7 +7,7 @@ const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 
 const browserConfig = {
-    mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'development',
+    mode: process.env.NODE_ENV || 'development',
     target: 'node',
     externals: [
         nodeExternals({
@@ -23,8 +23,7 @@ const browserConfig = {
         filename: 'server.js',
         libraryTarget: 'commonjs2',
     },
-
-    devtool: 'source-map',
+    devtool: process.env.NODE_ENV === 'production' ? '' : 'source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         alias: {
