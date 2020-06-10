@@ -47,7 +47,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     constructor(props: StateProps & Props) {
         super(props);
         this.state = this.initialState;
-        this.fetchSearchResultThrottled = debounce(this.fetchSearchResult, 200);
+        this.fetchSearchResultThrottled = debounce(this.fetchSearchResult, 500);
     }
 
     componentDidMount(): void {
@@ -79,7 +79,7 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                 fetchError: false,
             });
 
-            if (input) {
+            if (input && input.length > 3) {
                 this.setState({ loading: true });
                 this.fetchSearchResultThrottled(input);
             }
@@ -263,13 +263,8 @@ class Sok extends React.Component<StateProps & Props, InputState> {
     };
 
     render() {
-        const {
-            items,
-            writtenInput,
-            loading,
-            selectedInput,
-            fetchError,
-        } = this.state;
+        const { selectedInput, fetchError } = this.state;
+        const { items, writtenInput, loading } = this.state;
         const { language, id } = this.props;
         const klassenavn = cls('sok-input', {
             engelsk: language === Language.ENGELSK,
@@ -296,47 +291,50 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                         getMenuProps,
                         inputValue,
                         setState,
-                    }) => (
-                        <form
-                            role="search"
-                            id={`search-form${id ? `-${id}` : ''}`}
-                            onSubmit={this.handleSubmit}
-                        >
-                            <div className="sok-container">
-                                <div className="sok-input-resultat">
-                                    <SokInput
-                                        className={klassenavn}
-                                        getInputProps={getInputProps}
-                                        language={language}
-                                        tabIndex={this.props.tabindex}
-                                        writtenInput={writtenInput}
-                                        onReset={() => {
-                                            setState({ isOpen: false });
-                                            this.resetDisplay();
-                                        }}
-                                        id={id}
-                                    />
-                                    {loading ? (
-                                        <Spinner tekstId={'spinner-sok'} />
-                                    ) : (
-                                        inputValue && (
-                                            <SokResultater
-                                                writtenInput={writtenInput}
-                                                items={items}
-                                                predefinedlistview={
-                                                    predefinedlistview
-                                                }
-                                                getMenuProps={getMenuProps}
-                                                getItemProps={getItemProps}
-                                                language={language}
-                                                fetchError={fetchError}
-                                            />
-                                        )
-                                    )}
+                    }) => {
+                        const showResults = inputValue && inputValue.length > 2;
+                        return (
+                            <form
+                                role="search"
+                                id={`search-form${id ? `-${id}` : ''}`}
+                                onSubmit={this.handleSubmit}
+                            >
+                                <div className="sok-container">
+                                    <div className="sok-input-resultat">
+                                        <SokInput
+                                            className={klassenavn}
+                                            getInputProps={getInputProps}
+                                            language={language}
+                                            tabIndex={this.props.tabindex}
+                                            writtenInput={writtenInput}
+                                            onReset={() => {
+                                                setState({ isOpen: false });
+                                                this.resetDisplay();
+                                            }}
+                                            id={id}
+                                        />
+                                        {loading ? (
+                                            <Spinner tekstId={'spinner-sok'} />
+                                        ) : (
+                                            showResults && (
+                                                <SokResultater
+                                                    writtenInput={writtenInput}
+                                                    items={items}
+                                                    predefinedlistview={
+                                                        predefinedlistview
+                                                    }
+                                                    getMenuProps={getMenuProps}
+                                                    getItemProps={getItemProps}
+                                                    language={language}
+                                                    fetchError={fetchError}
+                                                />
+                                            )
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    )}
+                            </form>
+                        );
+                    }}
                 </Downshift>
                 <div className="media-sm-mobil mobil-meny">
                     <div
