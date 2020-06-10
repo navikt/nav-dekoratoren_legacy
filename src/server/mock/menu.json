@@ -7,13 +7,13 @@
         "children": [
             {
                 "displayName": "Header",
-                "path": "/",
+                "path": "",
                 "id": "f13f8012-7bfb-4300-bbc8-4eb72ca875ce",
                 "hasChildren": true,
                 "children": [
                     {
                         "displayName": "Main menu",
-                        "path": "/",
+                        "path": "",
                         "id": "33818a1a-6ac5-4e66-9349-c57d7a6320aa",
                         "hasChildren": true,
                         "children": [
@@ -31,7 +31,8 @@
                                         "children": [
                                             {
                                                 "displayName": "Arbeidsledig og jobbsøker",
-                                                "path": "https://veiledearbeidssoker.nav.no",
+                                                "path": "https://veiledearbeidssoker-q1.nav.no",
+                                                "displayLock": false,
                                                 "id": "d742e21a-3738-4e27-a0a0-045256a79d17",
                                                 "hasChildren": false,
                                                 "children": []
@@ -39,6 +40,7 @@
                                             {
                                                 "displayName": "Dagpenger ved arbeidsløshet og permittering",
                                                 "path": "/no/person/arbeid/dagpenger-ved-arbeidsloshet-og-permittering",
+                                                "displayLock": false,
                                                 "id": "203b80c5-3ee8-4fad-b876-8cbb4b8c3cda",
                                                 "hasChildren": false,
                                                 "children": []
@@ -52,24 +54,25 @@
                                             },
                                             {
                                                 "displayName": "Ungdom",
-                                                "path": "https://tjenester.nav.no/veiledearbeidssoker/ung-lite-erfaring?sprak=nb",
+                                                "path": "https://tjenester-q1.nav.no/veiledearbeidssoker/ung-lite-erfaring?sprak=nb",
                                                 "id": "997136c7-9f17-40c4-b37b-ba199c8ff945",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
                                             {
                                                 "displayName": "Jobbsøkertips",
-                                                "path": "https://tjenester.nav.no/veiviserarbeidssoker/?situasjon=mistet-jobben",
+                                                "path": "https://tjenester-q1.nav.no/veiviserarbeidssoker/",
                                                 "displayLock": false,
-                                                "id": "32be8b85-5c09-4fa3-995f-a4201e820a49",
+                                                "id": "f312ade6-a12f-419a-8323-4f8319900242",
                                                 "hasChildren": false,
                                                 "children": []
                                             }
                                         ]
                                     },
                                     {
-                                        "displayName": "Helse",
-                                        "path": "/",
+                                        "displayName": "Syk",
+                                        "path": "",
+                                        "displayLock": false,
                                         "id": "22412f86-daeb-4154-8a05-a963badfee47",
                                         "hasChildren": true,
                                         "children": [
@@ -102,13 +105,6 @@
                                                 "children": []
                                             },
                                             {
-                                                "displayName": "Sykdom i familien",
-                                                "path": "https://www.nav.no/familie/sykdom-i-familien/nb/",
-                                                "id": "56b34e65-bda1-426e-9de9-3cde30f1d787",
-                                                "hasChildren": false,
-                                                "children": []
-                                            },
-                                            {
                                                 "displayName": "Yrkesskade og yrkessykdom",
                                                 "path": "/no/person/arbeid/yrkesskade-og-yrkessykdom",
                                                 "id": "3f4cd33f-bc1d-496a-a2c6-12646aef66fc",
@@ -125,7 +121,7 @@
                                         "children": [
                                             {
                                                 "displayName": "Foreldrepenger, svangerskapspenger og engangsstønad",
-                                                "path": "https://familie.nav.no/",
+                                                "path": "https://familie-q1.nav.no/",
                                                 "id": "67be69a8-3d43-48e9-9f8a-90a2f26a09cf",
                                                 "hasChildren": false,
                                                 "children": []
@@ -155,6 +151,13 @@
                                                 "displayName": "Barnebidrag",
                                                 "path": "/no/person/familie/barne-og-ektefellebidrag",
                                                 "id": "960fba7b-2aaa-4771-8306-5f0448462b28",
+                                                "hasChildren": false,
+                                                "children": []
+                                            },
+                                            {
+                                                "displayName": "Sykdom i familien",
+                                                "path": "/familie/sykdom-i-familien/nb/",
+                                                "id": "56b34e65-bda1-426e-9de9-3cde30f1d787",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
@@ -212,21 +215,14 @@
                                     },
                                     {
                                         "displayName": "Sosiale tjenester",
-                                        "path": "/",
+                                        "path": "",
                                         "id": "321b44ed-5899-4090-ada9-ee93c9d77dde",
                                         "hasChildren": true,
                                         "children": [
                                             {
                                                 "displayName": "Økonomisk sosialhjelp",
-                                                "path": "https://tjenester.nav.no/veivisersosialhjelp/",
+                                                "path": "https://tjenester-q1.nav.no/veivisersosialhjelp/",
                                                 "id": "f8d2d062-0956-4b70-a8f2-2c287345b51d",
-                                                "hasChildren": false,
-                                                "children": []
-                                            },
-                                            {
-                                                "displayName": "Økonomisk rådgivning og gjeldsrådgivning",
-                                                "path": "/no/person/flere-tema/sosiale-tjenester/okonomisk-radgivning-og-gjeldsradgivning",
-                                                "id": "8dda0beb-59cd-410c-8f31-540658255e36",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
@@ -256,6 +252,7 @@
                                     {
                                         "displayName": "Hjelpemidler",
                                         "path": "/no/person/hjelpemidler",
+                                        "displayLock": false,
                                         "id": "8b4d4cc9-ca01-4270-801a-b72e9d82f53c",
                                         "hasChildren": true,
                                         "children": [
@@ -291,7 +288,7 @@
                                     },
                                     {
                                         "displayName": "Til eller fra Norge",
-                                        "path": "/",
+                                        "path": "",
                                         "id": "667fdcd5-facb-4923-b14b-f5b70bfba391",
                                         "hasChildren": true,
                                         "children": [
@@ -312,8 +309,8 @@
                                         ]
                                     },
                                     {
-                                        "displayName": "Ofte brukte sider",
-                                        "path": "/",
+                                        "displayName": "Flere tema",
+                                        "path": "",
                                         "displayLock": false,
                                         "id": "c73650df-2e69-41e3-ae15-96ed90de4b0b",
                                         "hasChildren": true,
@@ -359,16 +356,10 @@
                                     {
                                         "displayName": "Tjenester og skjemaer",
                                         "path": "/no/bedrift/tjenester-og-skjemaer",
+                                        "displayLock": false,
                                         "id": "6132488e-d40f-4729-abe4-afc9b0baed2d",
                                         "hasChildren": true,
                                         "children": [
-                                            {
-                                                "displayName": "Skjemaer for arbeidsgivere",
-                                                "path": "/soknader/nb/bedrift",
-                                                "id": "75f3d1af-30ff-4496-a1a9-e49223eb0528",
-                                                "hasChildren": false,
-                                                "children": []
-                                            },
                                             {
                                                 "displayName": "Altinn - refusjoner, søknader, rapporter, foreldre-, omsorgs- og pleiepenger m.m.",
                                                 "path": "/no/bedrift/tjenester-og-skjemaer/nav-og-altinn-tjenester",
@@ -429,14 +420,14 @@
                                             },
                                             {
                                                 "displayName": "Støtte ved tilrettelegging på arbeidsplassen",
-                                                "path": "https://tjenester.nav.no/veiviserarbeidsgiver/tilrettelegge",
+                                                "path": "https://tjenester-q1.nav.no/veiviserarbeidsgiver/tilrettelegge",
                                                 "id": "514c2cd6-ba8d-4781-a460-10655db232f4",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
                                             {
                                                 "displayName": "Sykefraværsstatistikk",
-                                                "path": "https://arbeidsgiver.nav.no/sykefravarsstatistikk/",
+                                                "path": "https://arbeidsgiver-q1.nav.no/sykefravarsstatistikk/",
                                                 "id": "017271da-1f66-448e-875d-360675b544ee",
                                                 "hasChildren": false,
                                                 "children": []
@@ -458,27 +449,27 @@
                                         "children": [
                                             {
                                                 "displayName": "Annonser stilling eller finn kandidater i CV-basen",
-                                                "path": "https://arbeidsplassen.nav.no/bedrift",
+                                                "path": "https://arbeidsplassen-q1.nav.no/bedrift",
                                                 "id": "620b8d91-1be4-4654-8bca-723d21bc57dc",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
                                             {
                                                 "displayName": "Tilby arbeidstrening",
-                                                "path": "https://tjenester.nav.no/veiviserarbeidsgiver/rekruttere-og-inkludere/arbeidstrening",
+                                                "path": "https://tjenester-q1.nav.no/veiviserarbeidsgiver/rekruttere-og-inkludere/arbeidstrening",
                                                 "id": "4d163455-d5b6-42e0-8eca-2cf5c63424ae",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
                                             {
                                                 "displayName": "Støtte ved ansettelser",
-                                                "path": "https://tjenester.nav.no/veiviserarbeidsgiver/rekruttere-og-inkludere/ansette",
+                                                "path": "https://tjenester-q1.nav.no/veiviserarbeidsgiver/rekruttere-og-inkludere/ansette",
                                                 "id": "ea03eafc-c107-49b7-af01-2309762af65e",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
                                             {
-                                                "displayName": "Ønsker du hjelp fra NAV til å rekruttere?",
+                                                "displayName": "Ønsker  du hjelp fra NAV til å rekruttere?",
                                                 "path": "/no/bedrift/rekruttering/rekruttere-hjelp-og-selvhjelp",
                                                 "id": "92809261-cacb-4802-bae5-4af7b8833170",
                                                 "hasChildren": false,
@@ -494,7 +485,7 @@
                                         "children": [
                                             {
                                                 "displayName": "Meld fra til NAV",
-                                                "path": "https://arbeidsgiver.nav.no/permittering/",
+                                                "path": "https://arbeidsgiver-q1.nav.no/permittering/",
                                                 "id": "5ec73cb2-6061-4739-b515-44e8919354cb",
                                                 "hasChildren": false,
                                                 "children": []
@@ -507,62 +498,21 @@
                                                 "children": []
                                             }
                                         ]
-                                    },
-                                    {
-                                        "displayName": "Hjelpemidler",
-                                        "path": "/no/bedrift/hjelpemidler",
-                                        "id": "32502981-d7ba-4b5c-a8a7-e272c1c3f9da",
-                                        "hasChildren": true,
-                                        "children": [
-                                            {
-                                                "displayName": "Tolking på arbeidsplassen",
-                                                "path": "/no/bedrift/hjelpemidler/tolking-pa-arbeidsplassen",
-                                                "id": "f985118f-60c2-45b6-8784-51449c49a6ca",
-                                                "hasChildren": false,
-                                                "children": []
-                                            },
-                                            {
-                                                "displayName": "Lese- og sekretærhjelp",
-                                                "path": "/no/bedrift/hjelpemidler/lese-og-sekretarhjelp",
-                                                "id": "e6c5f0a5-5a19-4234-985b-327ebbc7fc4f",
-                                                "hasChildren": false,
-                                                "children": []
-                                            },
-                                            {
-                                                "displayName": "Tilrettelegging i arbeid",
-                                                "path": "/no/bedrift/hjelpemidler/kartlegging-og-radgivning",
-                                                "id": "fb1fc7a3-b8ae-4436-9733-262c211c4549",
-                                                "hasChildren": false,
-                                                "children": []
-                                            },
-                                            {
-                                                "displayName": "Funksjonsassistanse",
-                                                "path": "/no/bedrift/hjelpemidler/funksjonsassistanse",
-                                                "id": "848761fe-bb8c-458e-abe2-90076881707b",
-                                                "hasChildren": false,
-                                                "children": []
-                                            },
-                                            {
-                                                "displayName": "Tilrettelegging for ansatte",
-                                                "path": "/_/error/404?message=Content+with+id+%5B9bcbd80d-983d-4e89-b9a7-55ae5345f652%5D+was+not+found+in+branch+%5Bmaster%5D",
-                                                "id": "5fddc674-5135-49ed-a511-22c784055284",
-                                                "hasChildren": false,
-                                                "children": []
-                                            }
-                                        ]
                                     }
                                 ]
                             },
                             {
                                 "displayName": "Samarbeidspartner",
-                                "path": "/",
+                                "path": "/no/nav-og-samfunn/samarbeid",
+                                "displayLock": false,
                                 "id": "5942d16e-8ab2-490c-900d-99ba80ffe6e5",
                                 "hasChildren": true,
                                 "children": [
                                     {
-                                        "displayName": "Samarbeid",
-                                        "path": "/",
-                                        "id": "a1fec356-92f9-4b86-899a-4d6613a17f24",
+                                        "displayName": "Helsepersonell",
+                                        "path": "/no/nav-og-samfunn/samarbeid",
+                                        "displayLock": false,
+                                        "id": "8b391e2b-3a59-4a18-aa99-12e8864b523e",
                                         "hasChildren": true,
                                         "children": [
                                             {
@@ -578,12 +528,20 @@
                                                 "id": "3a48480b-8cf5-4e9b-8255-486e48f9d5b4",
                                                 "hasChildren": false,
                                                 "children": []
-                                            },
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "displayName": "Kommuner og fylker",
+                                        "path": "/no/nav-og-samfunn/samarbeid",
+                                        "displayLock": false,
+                                        "id": "af82deb0-2741-4dd6-a189-cd8c316e8688",
+                                        "hasChildren": true,
+                                        "children": [
                                             {
-                                                "displayName": "Skjema for tiltaksarrangør/leverandør",
-                                                "path": "/soknader/nb/bedrift",
-                                                "displayLock": false,
-                                                "id": "a41a29ef-6cd0-4cef-9971-09f0ede680db",
+                                                "displayName": "For kommunen",
+                                                "path": "/no/nav-og-samfunn/samarbeid/for-kommunen",
+                                                "id": "175cf6ee-2ab3-41f0-b748-acac59674406",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
@@ -593,7 +551,33 @@
                                                 "id": "b2eab083-8dd1-4ab2-a780-569ca4b9d71e",
                                                 "hasChildren": false,
                                                 "children": []
-                                            },
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "displayName": "Tiltaksarrangører",
+                                        "path": "/nav.no-ressurser",
+                                        "displayLock": false,
+                                        "id": "eea9ace1-a4e3-4a75-8804-878fc4241c89",
+                                        "hasChildren": true,
+                                        "children": [
+                                            {
+                                                "displayName": "Skjema for tiltaksarrangør/leverandør",
+                                                "path": "https://www-q1.nav.no/soknader/nb/bedrift/for-tiltaksarrangor",
+                                                "displayLock": false,
+                                                "id": "a41a29ef-6cd0-4cef-9971-09f0ede680db",
+                                                "hasChildren": false,
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "displayName": "På tvers",
+                                        "path": "/no/nav-og-samfunn/samarbeid",
+                                        "displayLock": false,
+                                        "id": "69606fd0-49c4-490e-ae31-207296ea82fd",
+                                        "hasChildren": true,
+                                        "children": [
                                             {
                                                 "displayName": "Tilskudd gjennom NAV",
                                                 "path": "/no/nav-og-samfunn/samarbeid/tilskudd-gjennom-nav",
@@ -621,13 +605,6 @@
                                                 "id": "76cb9ada-a525-4b01-81cc-6251d0ebbc82",
                                                 "hasChildren": false,
                                                 "children": []
-                                            },
-                                            {
-                                                "displayName": "For kommunen",
-                                                "path": "/no/nav-og-samfunn/samarbeid/for-kommunen",
-                                                "id": "175cf6ee-2ab3-41f0-b748-acac59674406",
-                                                "hasChildren": false,
-                                                "children": []
                                             }
                                         ]
                                     }
@@ -637,19 +614,19 @@
                     },
                     {
                         "displayName": "My page menu",
-                        "path": "/",
+                        "path": "",
                         "id": "b14909cb-10eb-4ba2-b4fb-e68ac40b4a35",
                         "hasChildren": true,
                         "children": [
                             {
                                 "displayName": "Din oversikt",
-                                "path": "/",
+                                "path": "",
                                 "id": "87902576-3ce1-48bb-88bd-798d04352984",
                                 "hasChildren": true,
                                 "children": [
                                     {
                                         "displayName": "Dine saker",
-                                        "path": "https://tjenester.nav.no/esso/saml2/jsp/spSSOInit.jsp?metaAlias=/sp&idpEntityID=idporten.difi.no-v4&NameIDFormat=transient&goto=https://tjenester.nav.no/saksoversikt/&AuthLevel=4",
+                                        "path": "https://tjenester-q1.nav.no/saksoversikt",
                                         "displayLock": true,
                                         "id": "15e2dca8-a68c-484a-b7fe-5ec9fe7ed7bb",
                                         "hasChildren": false,
@@ -657,7 +634,7 @@
                                     },
                                     {
                                         "displayName": "Din innboks",
-                                        "path": "https://tjenester.nav.no/esso/saml2/jsp/spSSOInit.jsp?metaAlias=/sp&idpEntityID=idporten.difi.no-v4&NameIDFormat=transient&goto=https://tjenester.nav.no/mininnboks/&AuthLevel=4",
+                                        "path": "https://mininnboks-q1.nav.no",
                                         "displayLock": true,
                                         "id": "79ae75ad-7473-4414-b411-129151107f4b",
                                         "hasChildren": false,
@@ -665,7 +642,7 @@
                                     },
                                     {
                                         "displayName": "Dine utbetalinger",
-                                        "path": "https://tjenester.nav.no/utbetalingsoversikt/",
+                                        "path": "https://tjenester-q1.nav.no/utbetalingsoversikt/",
                                         "id": "2462c7e9-6497-4d5d-bb05-d129a3f599d5",
                                         "hasChildren": false,
                                         "children": []
@@ -713,21 +690,13 @@
                             },
                             {
                                 "displayName": "Arbeid",
-                                "path": "/",
+                                "path": "",
                                 "id": "a6d04c66-3f5b-431f-8db3-420b25aa3a75",
                                 "hasChildren": true,
                                 "children": [
                                     {
-                                        "displayName": "Dialog med veilederen din",
-                                        "path": "http://nav.no/arbeid/dialog",
-                                        "displayLock": true,
-                                        "id": "b2041cba-9580-499e-815b-caa624d49304",
-                                        "hasChildren": false,
-                                        "children": []
-                                    },
-                                    {
                                         "displayName": "Registrer deg som arbeidssøker",
-                                        "path": "https://arbeidssokerregistrering.nav.no/start",
+                                        "path": "https://arbeidssokerregistrering-q1.nav.no/start",
                                         "displayLock": true,
                                         "id": "d01301f4-e83d-4358-9ef7-4184c00c52bd",
                                         "hasChildren": false,
@@ -742,30 +711,38 @@
                                     },
                                     {
                                         "displayName": "Finn ledige stillinger",
-                                        "path": "https://arbeidsplassen.nav.no/stillinger",
+                                        "path": "https://arbeidsplassen-q1.nav.no/stillinger",
                                         "id": "d1500b8b-7afa-429c-8b52-e48c73e24c2d",
                                         "hasChildren": false,
                                         "children": []
                                     },
                                     {
                                         "displayName": "Din CV",
-                                        "path": "https://arbeidsplassen.nav.no/minside",
+                                        "path": "https://arbeidsplassen-q1.nav.no/minside",
                                         "id": "d10cdf61-dfa3-4d4a-a0ef-60cbec525ab4",
                                         "hasChildren": false,
                                         "children": []
                                     },
                                     {
                                         "displayName": "Dine lagrede søk",
-                                        "path": "https://arbeidsplassen.nav.no/stillinger/lagrede-sok",
+                                        "path": "https://arbeidsplassen-q1.nav.no/stillinger/lagrede-sok",
                                         "id": "7e06bac1-81d7-4f22-a1ae-1ba41502b802",
                                         "hasChildren": false,
                                         "children": []
                                     },
                                     {
                                         "displayName": "Din aktivitetsplan",
-                                        "path": "https://aktivitetsplan.nav.no",
+                                        "path": "https://aktivitetsplan-q1.nav.no",
                                         "displayLock": true,
                                         "id": "df13e0c0-ab47-4bd8-9593-7a5dca7986d6",
+                                        "hasChildren": false,
+                                        "children": []
+                                    },
+                                    {
+                                        "displayName": "Dialog med veilederen din",
+                                        "path": "http://nav.no/arbeid/dialog",
+                                        "displayLock": true,
+                                        "id": "10cd508c-a188-4692-b3f7-29acb00f7d8c",
                                         "hasChildren": false,
                                         "children": []
                                     }
@@ -773,35 +750,27 @@
                             },
                             {
                                 "displayName": "Flere tjenester",
-                                "path": "/",
+                                "path": "",
                                 "id": "ecfbac87-4259-4402-8f64-6c65b2ed2dfd",
                                 "hasChildren": true,
                                 "children": [
                                     {
-                                        "displayName": "Dine fullmakter",
-                                        "path": "https://www.nav.no/person/pdl-fullmakt-ui",
-                                        "displayLock": true,
-                                        "id": "ff549cdc-c3ac-4056-8838-c3a01cf8b086",
-                                        "hasChildren": false,
-                                        "children": []
-                                    },
-                                    {
                                         "displayName": "Din pensjon",
-                                        "path": "https://tjenester.nav.no/pselv/publisering/dinpensjon.jsf?context=pensjon",
+                                        "path": "https://tjenester-q1.nav.no/pselv/publisering/dinpensjon.jsf?context=pensjon",
                                         "id": "bfe43e1e-a074-4300-a480-618ac9b054f6",
                                         "hasChildren": false,
                                         "children": []
                                     },
                                     {
                                         "displayName": "Din uføretrygd",
-                                        "path": "https://tjenester.nav.no/pselv/publisering/uforetrygd.jsf?context=ut",
+                                        "path": "https://tjenester-q1.nav.no/pselv/publisering/uforetrygd.jsf?context=ut",
                                         "id": "02f4c191-dee0-43e9-acff-c05d8b9aec10",
                                         "hasChildren": false,
                                         "children": []
                                     },
                                     {
                                         "displayName": "Ditt sykefravær",
-                                        "path": "https://tjenester.nav.no/sykefravaer/",
+                                        "path": "https://tjenester-q1.nav.no/sykefravaer/",
                                         "displayLock": true,
                                         "id": "d5c02d97-3041-4c72-9555-993efb7605b0",
                                         "hasChildren": false,
@@ -809,9 +778,17 @@
                                     },
                                     {
                                         "displayName": "Dine foreldrepenger",
-                                        "path": "https://foreldrepenger.nav.no",
+                                        "path": "https://foreldrepenger-q.nav.no/",
                                         "displayLock": true,
                                         "id": "7c5a5ff5-c06e-4279-ab85-e9a87f9743c2",
+                                        "hasChildren": false,
+                                        "children": []
+                                    },
+                                    {
+                                        "displayName": "Dine fullmakter",
+                                        "path": "https://www-q1.nav.no/person/pdl-fullmakt-ui",
+                                        "displayLock": true,
+                                        "id": "6ecca7b6-97de-4158-81a5-5a18c518824c",
                                         "hasChildren": false,
                                         "children": []
                                     }
@@ -823,27 +800,35 @@
             },
             {
                 "displayName": "Footer",
-                "path": "/",
+                "path": "",
                 "id": "47215fbb-fa9b-4c6e-ac0a-eaeafc20ebf5",
                 "hasChildren": true,
                 "children": [
                     {
                         "displayName": "Columns",
-                        "path": "/",
+                        "path": "",
                         "displayLock": false,
                         "id": "8f7cbdb0-cd86-4969-a32d-f7f1b5e7cd18",
                         "hasChildren": true,
                         "children": [
                             {
+                                "displayName": "Tilgjengelighet",
+                                "path": "",
+                                "displayLock": false,
+                                "id": "b58ee888-0456-4274-ad63-54ad47c92aa9",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
                                 "displayName": "Privatperson",
-                                "path": "/",
+                                "path": "",
                                 "displayLock": false,
                                 "id": "8204cd54-da1b-488f-806b-1c0012c8bb58",
                                 "hasChildren": true,
                                 "children": [
                                     {
                                         "displayName": "Kontakt",
-                                        "path": "/",
+                                        "path": "",
                                         "id": "e35bfafa-2ff3-4544-8905-ef26854e0a52",
                                         "hasChildren": true,
                                         "children": [
@@ -888,7 +873,7 @@
                                     },
                                     {
                                         "displayName": "Andre språk",
-                                        "path": "/",
+                                        "path": "",
                                         "id": "b4480f59-129d-4ce4-8ed3-55cf2648e870",
                                         "hasChildren": true,
                                         "children": [
@@ -910,13 +895,14 @@
                                     },
                                     {
                                         "displayName": "NAV og samfunn",
-                                        "path": "/",
+                                        "path": "",
                                         "id": "3e980cde-dc39-46ab-ad4e-9f547293c16b",
                                         "hasChildren": true,
                                         "children": [
                                             {
-                                                "displayName": "Statisikk, analyse og FoU",
-                                                "path": "/_/error/404?message=Content+with+id+%5B9d89e556-4b94-46d5-b6f5-29b347da4498%5D+was+not+found+in+branch+%5Bmaster%5D",
+                                                "displayName": "Statistikk, analyse og FoU",
+                                                "path": "/no/nav-og-samfunn/statistikk-analyse-og-fou",
+                                                "displayLock": false,
                                                 "id": "7ed42ea2-4ff9-4992-b51d-a8321e2dc666",
                                                 "hasChildren": false,
                                                 "children": []
@@ -930,7 +916,7 @@
                                             },
                                             {
                                                 "displayName": "Om NAV",
-                                                "path": "/_/error/404?message=Content+with+id+%5Bb392f581-9cd1-4114-9415-47ef682bf680%5D+was+not+found+in+branch+%5Bmaster%5D",
+                                                "path": "/no/nav-og-samfunn/om-nav/om-nav",
                                                 "id": "1c679d24-8679-4b16-abd1-be71a6937ed2",
                                                 "hasChildren": false,
                                                 "children": []
@@ -949,21 +935,21 @@
                             },
                             {
                                 "displayName": "Arbeidsgiver",
-                                "path": "/",
+                                "path": "",
                                 "displayLock": false,
                                 "id": "306c0965-1534-479c-8a41-5a88ff998e2f",
                                 "hasChildren": true,
                                 "children": [
                                     {
                                         "displayName": "Kontakt",
-                                        "path": "/",
+                                        "path": "",
                                         "displayLock": false,
                                         "id": "10fa8fe6-bd96-4dc0-b6f2-1d9e97346c2c",
                                         "hasChildren": true,
                                         "children": [
                                             {
                                                 "displayName": "Kontakt NAV - arbeidsgiver",
-                                                "path": "https://arbeidsgiver.nav.no/kontakt-oss/",
+                                                "path": "https://arbeidsgiver-q1.nav.no/kontakt-oss/",
                                                 "displayLock": false,
                                                 "id": "007300b7-a4f3-465c-9067-18c0904c6c95",
                                                 "hasChildren": false,
@@ -979,7 +965,7 @@
                                             },
                                             {
                                                 "displayName": "Søk opp NAV-kontor",
-                                                "path": "https://www.nav.no/person/kontakt-oss/finnkontor",
+                                                "path": "https://www-q1.nav.no/person/kontakt-oss/nb/finnkontor",
                                                 "displayLock": false,
                                                 "id": "6da31757-b514-44fe-8065-642c5ab10e56",
                                                 "hasChildren": false,
@@ -1010,7 +996,7 @@
                                     },
                                     {
                                         "displayName": "Andre språk",
-                                        "path": "/",
+                                        "path": "",
                                         "displayLock": false,
                                         "id": "85885413-222c-4e9e-a99d-0479e02287e0",
                                         "hasChildren": true,
@@ -1033,14 +1019,15 @@
                                     },
                                     {
                                         "displayName": "NAV og samfunn",
-                                        "path": "/",
+                                        "path": "",
                                         "displayLock": false,
                                         "id": "61ab2ded-7cfc-416f-bdbc-e88726256a82",
                                         "hasChildren": true,
                                         "children": [
                                             {
-                                                "displayName": "Statisikk, analyse og FoU",
-                                                "path": "/_/error/404?message=Content+with+id+%5B9d89e556-4b94-46d5-b6f5-29b347da4498%5D+was+not+found+in+branch+%5Bmaster%5D",
+                                                "displayName": "Statistikk, analyse og FoU",
+                                                "path": "/no/nav-og-samfunn/statistikk-analyse-og-fou",
+                                                "displayLock": false,
                                                 "id": "5cde3072-a72e-4d84-aeb2-75d22aef478d",
                                                 "hasChildren": false,
                                                 "children": []
@@ -1054,7 +1041,7 @@
                                             },
                                             {
                                                 "displayName": "Om NAV",
-                                                "path": "/_/error/404?message=Content+with+id+%5Bb392f581-9cd1-4114-9415-47ef682bf680%5D+was+not+found+in+branch+%5Bmaster%5D",
+                                                "path": "/no/nav-og-samfunn/om-nav/om-nav",
                                                 "id": "154f9fbc-20ca-4b4a-a2ec-20123786c8f8",
                                                 "hasChildren": false,
                                                 "children": []
@@ -1073,14 +1060,14 @@
                             },
                             {
                                 "displayName": "Samarbeidspartner",
-                                "path": "/",
+                                "path": "",
                                 "displayLock": false,
                                 "id": "3b76226f-beb3-4075-91d8-db1ba2b98a4f",
                                 "hasChildren": true,
                                 "children": [
                                     {
                                         "displayName": "Kontakt",
-                                        "path": "/",
+                                        "path": "",
                                         "displayLock": false,
                                         "id": "27165a8d-5cd8-4622-ae7a-0c04454199c9",
                                         "hasChildren": true,
@@ -1097,14 +1084,6 @@
                                                 "path": "/no/nav-og-samfunn/kontakt-nav/nav-i-ditt-fylke",
                                                 "displayLock": false,
                                                 "id": "89e352a8-049e-4c0c-85de-fe1164a7b5b4",
-                                                "hasChildren": false,
-                                                "children": []
-                                            },
-                                            {
-                                                "displayName": "Søk opp NAV-kontor",
-                                                "path": "https://www.nav.no/person/kontakt-oss/finnkontor",
-                                                "displayLock": false,
-                                                "id": "3e9d63cf-35b4-4f8e-b426-04fbac053353",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
@@ -1133,7 +1112,7 @@
                                     },
                                     {
                                         "displayName": "Andre språk",
-                                        "path": "/",
+                                        "path": "",
                                         "displayLock": false,
                                         "id": "36699ef2-34cf-467e-96f6-97a2e44f367d",
                                         "hasChildren": true,
@@ -1156,14 +1135,15 @@
                                     },
                                     {
                                         "displayName": "NAV og samfunn",
-                                        "path": "/",
+                                        "path": "",
                                         "displayLock": false,
                                         "id": "d2685148-742e-4c8d-badb-46b133cb9393",
                                         "hasChildren": true,
                                         "children": [
                                             {
-                                                "displayName": "Statisikk, analyse og FoU",
-                                                "path": "/_/error/404?message=Content+with+id+%5B9d89e556-4b94-46d5-b6f5-29b347da4498%5D+was+not+found+in+branch+%5Bmaster%5D",
+                                                "displayName": "Statistikk, analyse og FoU",
+                                                "path": "/no/nav-og-samfunn/statistikk-analyse-og-fou",
+                                                "displayLock": false,
                                                 "id": "de02db0d-ac1d-4c2e-89a4-4304b73f75de",
                                                 "hasChildren": false,
                                                 "children": []
@@ -1177,7 +1157,7 @@
                                             },
                                             {
                                                 "displayName": "Om NAV",
-                                                "path": "/_/error/404?message=Content+with+id+%5Bb392f581-9cd1-4114-9415-47ef682bf680%5D+was+not+found+in+branch+%5Bmaster%5D",
+                                                "path": "/no/nav-og-samfunn/om-nav/om-nav",
                                                 "id": "faa2b268-ef0f-4316-aa38-679b25ae9d45",
                                                 "hasChildren": false,
                                                 "children": []
@@ -1198,14 +1178,23 @@
                     },
                     {
                         "displayName": "Personvern",
-                        "path": "/",
+                        "path": "",
                         "id": "cc983e39-e7bf-40a6-b184-9fa71d5ef671",
                         "hasChildren": true,
                         "children": [
                             {
-                                "displayName": "Les mer om databeskyttelse og informasjonskapsler",
-                                "path": "/no/nav-og-samfunn/om-nav/personvern-i-arbeids-og-velferdsetaten/personvern-og-sikkerhet-pa-nav.no",
+                                "displayName": "Personvern og informasjonskapsler",
+                                "path": "/no/nav-og-samfunn/om-nav/personvern-i-arbeids-og-velferdsetaten",
+                                "displayLock": false,
                                 "id": "431518f0-99f7-4704-bbac-326bad6ac38e",
+                                "hasChildren": false,
+                                "children": []
+                            },
+                            {
+                                "displayName": "Tilgjengelighet",
+                                "path": "/no/nav-og-samfunn/kontakt-nav/teknisk-brukerstotte/nyttig-a-vite/tilgjengelighet",
+                                "displayLock": false,
+                                "id": "625335a2-6a36-460c-aeaa-bfe157f071dd",
                                 "hasChildren": false,
                                 "children": []
                             }
@@ -1223,7 +1212,7 @@
         "children": [
             {
                 "displayName": "Header",
-                "path": "/",
+                "path": "",
                 "id": "38ef14ae-d2ef-4bc0-bb32-ec1522a625de",
                 "hasChildren": true,
                 "children": [
@@ -1487,7 +1476,7 @@
                     },
                     {
                         "displayName": "My page menu",
-                        "path": "/",
+                        "path": "",
                         "id": "fe6e127d-937f-4a49-960b-b61dea53492b",
                         "hasChildren": false,
                         "children": []
@@ -1496,27 +1485,27 @@
             },
             {
                 "displayName": "Footer",
-                "path": "/",
+                "path": "",
                 "id": "d0370644-4b46-45f5-a55c-b70ef41f92cd",
                 "hasChildren": true,
                 "children": [
                     {
                         "displayName": "Columns",
-                        "path": "/",
+                        "path": "",
                         "displayLock": false,
                         "id": "79d19f31-9de9-4022-b046-18e525f6c0c1",
                         "hasChildren": true,
                         "children": [
                             {
                                 "displayName": "Contact",
-                                "path": "/",
+                                "path": "",
                                 "displayLock": false,
                                 "id": "64749d01-9206-4e76-af46-a77f0cfc1108",
                                 "hasChildren": true,
                                 "children": [
                                     {
                                         "displayName": "Contact us",
-                                        "path": "/footer-contactus-en",
+                                        "path": "/person/kontakt-oss/en/",
                                         "displayLock": false,
                                         "id": "09bc6662-b951-4f18-9f3b-016a908e8737",
                                         "hasChildren": false,
@@ -1532,7 +1521,7 @@
                                     },
                                     {
                                         "displayName": "Complaints and feedback",
-                                        "path": "https://www.nav.no/person/kontakt-oss/en/tilbakemeldinger",
+                                        "path": "/person/kontakt-oss/en/tilbakemeldinger",
                                         "id": "e9c5a005-30ed-4b1d-8256-f1d197df55ee",
                                         "hasChildren": false,
                                         "children": []
@@ -1548,7 +1537,7 @@
                             },
                             {
                                 "displayName": "Other languages",
-                                "path": "/",
+                                "path": "",
                                 "displayLock": false,
                                 "id": "d722bdeb-7f04-4eb5-8ae4-52b78aa9bf14",
                                 "hasChildren": true,
@@ -1571,14 +1560,14 @@
                             },
                             {
                                 "displayName": "NAV and society",
-                                "path": "/",
+                                "path": "",
                                 "displayLock": false,
                                 "id": "0ae60aea-aeae-4984-8f0b-04ab2e97289a",
                                 "hasChildren": true,
                                 "children": [
                                     {
                                         "displayName": "Statistics, analysis and R&D",
-                                        "path": "/_/error/404?message=Content+with+id+%5B9d89e556-4b94-46d5-b6f5-29b347da4498%5D+was+not+found+in+branch+%5Bmaster%5D",
+                                        "path": "/no/nav-og-samfunn/statistikk-analyse-og-fou",
                                         "displayLock": false,
                                         "id": "482fca21-3f48-484b-bfd7-74c4658b2f01",
                                         "hasChildren": false,
@@ -1612,7 +1601,7 @@
                     },
                     {
                         "displayName": "Personvern",
-                        "path": "/",
+                        "path": "",
                         "id": "2b7912c8-30c4-47ce-a8a7-1bd0329c4c6e",
                         "hasChildren": true,
                         "children": [
@@ -1637,7 +1626,7 @@
         "children": [
             {
                 "displayName": "Header",
-                "path": "/",
+                "path": "",
                 "id": "36ec8d04-4ee9-48fd-9c96-e487d2f4ef30",
                 "hasChildren": true,
                 "children": [
@@ -1650,7 +1639,7 @@
                     },
                     {
                         "displayName": "My page menu",
-                        "path": "/",
+                        "path": "",
                         "id": "2a33428e-4558-4e53-a534-e92bed970cd8",
                         "hasChildren": false,
                         "children": []
@@ -1659,20 +1648,20 @@
             },
             {
                 "displayName": "Footer",
-                "path": "/",
+                "path": "",
                 "id": "384e74ec-cadc-46a1-9b52-8c0761a31062",
                 "hasChildren": true,
                 "children": [
                     {
                         "displayName": "Columns",
-                        "path": "/",
+                        "path": "",
                         "displayLock": false,
                         "id": "111fad83-a3a7-4d71-8968-f60d9e26f517",
                         "hasChildren": true,
                         "children": [
                             {
                                 "displayName": "Kontakt",
-                                "path": "/",
+                                "path": "",
                                 "id": "15da0414-ee4b-4834-aa3d-91b1d77cb095",
                                 "hasChildren": true,
                                 "children": [
@@ -1685,7 +1674,7 @@
                                     },
                                     {
                                         "displayName": "NAV i ditt fylke",
-                                        "path": "/no/nav-og-samfunn/kontakt-nav/nav-i-ditt-fylke",
+                                        "path": "/megamenu/no/nav-og-samfunn/kontakt-nav/nav-i-ditt-fylke",
                                         "id": "b2cf40cd-300f-4c3a-b4e3-9b6832f900c8",
                                         "hasChildren": false,
                                         "children": []
@@ -1708,7 +1697,7 @@
                             },
                             {
                                 "displayName": "Andre språk",
-                                "path": "/",
+                                "path": "",
                                 "id": "7148dc8c-6f83-4257-bf66-35ce0e80e875",
                                 "hasChildren": true,
                                 "children": [
@@ -1721,7 +1710,7 @@
                                     },
                                     {
                                         "displayName": "English pages",
-                                        "path": "/en",
+                                        "path": "",
                                         "id": "fae1bf66-18de-43fc-9a10-a6997cf1f8a0",
                                         "hasChildren": false,
                                         "children": []
@@ -1730,13 +1719,14 @@
                             },
                             {
                                 "displayName": "NAV og samfunn",
-                                "path": "/",
+                                "path": "",
                                 "id": "1b9e8d59-61bd-410f-baeb-b78935a5b8ac",
                                 "hasChildren": true,
                                 "children": [
                                     {
-                                        "displayName": "Statisikk, analyse og FoU",
-                                        "path": "/_/error/404?message=Content+with+id+%5B9d89e556-4b94-46d5-b6f5-29b347da4498%5D+was+not+found+in+branch+%5Bmaster%5D",
+                                        "displayName": "Statistikk, analyse og FoU",
+                                        "path": "/no/nav-og-samfunn/statistikk-analyse-og-fou",
+                                        "displayLock": false,
                                         "id": "0170b020-2a31-4b0a-a20e-f6223ec3073d",
                                         "hasChildren": false,
                                         "children": []
@@ -1750,13 +1740,14 @@
                                     },
                                     {
                                         "displayName": "Om NAV",
-                                        "path": "/_/error/404?message=Content+with+id+%5Bb392f581-9cd1-4114-9415-47ef682bf680%5D+was+not+found+in+branch+%5Bmaster%5D",
+                                        "path": "/se/samegiella/forside/relatert-innhold/nav",
+                                        "displayLock": false,
                                         "id": "df37b52f-361f-47ca-bfb0-218d48d9c23b",
                                         "hasChildren": false,
                                         "children": []
                                     },
                                     {
-                                        "displayName": "Jobbe i NAV",
+                                        "displayName": "Jobb i NAV",
                                         "path": "/no/nav-og-samfunn/om-nav/sok-jobb-i-nav",
                                         "displayLock": false,
                                         "id": "414435ec-d974-453d-8153-755571b303ce",
@@ -1769,7 +1760,7 @@
                     },
                     {
                         "displayName": "Personvern",
-                        "path": "/",
+                        "path": "",
                         "id": "4193edd0-2db2-451d-9e00-79f5fe01b99a",
                         "hasChildren": true,
                         "children": [
