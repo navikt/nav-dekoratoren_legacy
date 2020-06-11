@@ -34,6 +34,7 @@
 
     @media (max-width: @mobilMaxWidth) {
         padding: 0.5rem 1rem;
+        .knapp--flat;
     }
 
     @media (max-width: @minimumMobilWidth) {
@@ -41,27 +42,25 @@
     }
 }
 
+// Hindrer overstyring av styling på knapper fra appene
 .login-knapp.knapp--standard {
     all: unset;
     .knapp;
     .login-knapp();
     .set-text-color(@navBla, @white, @white, @navBla);
 }
-
 .login-knapp.knapp--flat {
     all: unset;
     .knapp--flat;
     .login-knapp();
     .set-text-color(@navBla, @navBla, @navBla, @navBla);
 }
-
 .login-knapp.knapp--fare {
     all: unset;
     .knapp--fare;
     .login-knapp();
     .set-text-color(@white, @white, @white, @redError);
 }
-
 .login-knapp.knapp--hoved {
     all: unset;
     .knapp--hoved;
