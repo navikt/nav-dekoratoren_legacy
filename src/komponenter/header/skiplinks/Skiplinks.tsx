@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { mobilHovedmenyKnappId } from '../header-regular/mobil/hovedmeny/HovedmenyMobil';
-import { desktopHovedmenyKnappId } from '../header-regular/desktop/hovedmeny/HovedmenyDesktop';
 import { useDispatch } from 'react-redux';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
 import { SkipLinkElement } from 'komponenter/header/skiplinks/SkiplinkElement';
@@ -11,12 +9,7 @@ import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { mobilSokInputId } from '../header-regular/mobil/hovedmeny/HovedmenyMobil';
 import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
 import './Skiplinks.less';
-
-export type SkipLink = {
-    anchorId?: string;
-    tekstId: string;
-    onClick?: () => void;
-};
+import { hovedmenyKnappId } from 'komponenter/header/header-regular/Hovedmeny';
 
 const stateSelector = (state: AppState) => ({
     mainMenuOpen: state.dropdownToggles.hovedmeny,
@@ -48,30 +41,6 @@ const Skiplinks = () => {
         }
     };
 
-    const mobilLinks: SkipLink[] = [
-        {
-            tekstId: 'skiplinks-ga-til-hovedmeny',
-            onClick: () =>
-                document.getElementById(mobilHovedmenyKnappId)?.focus(),
-        },
-        {
-            tekstId: 'skiplinks-ga-til-sok',
-            onClick: openMobilSok,
-        },
-    ];
-
-    const desktopLinks: SkipLink[] = [
-        {
-            tekstId: 'skiplinks-ga-til-hovedmeny',
-            onClick: () =>
-                document.getElementById(desktopHovedmenyKnappId)?.focus(),
-        },
-        {
-            tekstId: 'skiplinks-ga-til-sok',
-            onClick: openDesktopSok,
-        },
-    ];
-
     useEffect(() => {
         const mainContentElement = document.getElementById(mainContentId);
         setHasMainContent(!!mainContentElement);
@@ -84,26 +53,26 @@ const Skiplinks = () => {
             aria-label="Hopp til innhold"
         >
             <ul>
-                {mobilLinks.map((link, index) => (
-                    <SkipLinkElement
-                        link={link}
-                        className={'skiplink__mobil'}
-                        key={index}
-                    />
-                ))}
-                {desktopLinks.map((link, index) => (
-                    <SkipLinkElement
-                        link={link}
-                        className={'skiplink__desktop'}
-                        key={index}
-                    />
-                ))}
+                <SkipLinkElement
+                    tekstId={'skiplinks-ga-til-hovedmeny'}
+                    onClick={() =>
+                        document.getElementById(hovedmenyKnappId)?.focus()
+                    }
+                />
+                <SkipLinkElement
+                    tekstId={'skiplinks-ga-til-sok'}
+                    onClick={openDesktopSok}
+                    className={'skiplink__desktop'}
+                />
+                <SkipLinkElement
+                    tekstId={'skiplinks-ga-til-sok'}
+                    onClick={openMobilSok}
+                    className={'skiplink__mobil'}
+                />
                 {hasMainContent && (
                     <SkipLinkElement
-                        link={{
-                            anchorId: mainContentId,
-                            tekstId: 'skiplinks-ga-til-hovedinnhold',
-                        }}
+                        anchorId={mainContentId}
+                        tekstId={'skiplinks-ga-til-hovedinnhold'}
                     />
                 )}
             </ul>

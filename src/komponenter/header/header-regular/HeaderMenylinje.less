@@ -3,6 +3,8 @@
 @import 'mobil/MobilHeader';
 
 .header-linje {
+    display: flex;
+    align-items: center;
     border-bottom: 2px solid @header-separator-farge;
 
     &__elementer {
@@ -11,8 +13,8 @@
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
+        flex-grow: 1;
         margin: 0 auto;
-        height: 100%;
     }
 
     &__spacer {

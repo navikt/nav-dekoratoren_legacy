@@ -16,7 +16,6 @@ import { Hovedseksjon } from 'komponenter/header/header-regular/desktop/hovedmen
 import { Bunnseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/bunn-seksjon/Bunnseksjon';
 
 const classname = 'desktop-hovedmeny';
-export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';
 
 const nodeGroup = KbNavGroup.Hovedmeny;
 const mqlScreenWidth = matchMedia('(min-width: 1024px)');

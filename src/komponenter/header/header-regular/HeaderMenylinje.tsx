@@ -19,7 +19,7 @@ const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
 });
 
-export const CommonHeaderLinje = () => {
+export const HeaderMenylinje = () => {
     const cls = BEMHelper('header-linje');
     const { innlogget, arbeidsflate } = useSelector(stateSelector);
     const kbNavMainState = useKbNavMain();

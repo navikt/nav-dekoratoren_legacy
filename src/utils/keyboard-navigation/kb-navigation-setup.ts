@@ -6,8 +6,6 @@ import KbNav, {
     KbNavGroup,
     NodeIndex,
 } from './kb-navigation';
-import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
-import { desktopHeaderLogoId } from 'komponenter/header/header-regular/desktop/DesktopMenylinje';
 import { desktopSokKnappId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
 import { varslerKnappId } from 'komponenter/header/header-regular/varsler/VarslerDropdown';
 import { desktopMinsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
@@ -15,8 +13,10 @@ import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from 'api/api';
 import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
-import { desktopLoginKnappId } from 'komponenter/header/header-regular/desktop/DesktopMenylinje';
 import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
+import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
+import { loginKnappId } from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
+import { hovedmenyKnappId } from 'komponenter/header/header-regular/Hovedmeny';
 
 export type KbNavConfig = {
     group: KbNavGroup;
@@ -29,23 +29,20 @@ export type KbNavConfig = {
 
 export const disabledGroups = [KbNavGroup.Sok];
 
-// TODO: Hvorfor blir desktopHovedmenyKnappId noen ganger undefined?!
-const hovedmenyKnappId =
-    desktopHovedmenyKnappId || 'desktop-hovedmeny-knapp-id';
-
 export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
     [KbNavGroup.HeaderMenylinje]: {
         group: KbNavGroup.HeaderMenylinje,
         rootIndex: kbMasterNode.index,
         maxColsPerRow: [3, 6],
-        parentNodeId: desktopHeaderLogoId,
+        parentNodeId: headerLogoId,
         parentNodeEdge: NodeEdge.Right,
     },
     [KbNavGroup.Hovedmeny]: {
         group: KbNavGroup.Hovedmeny,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 4, 3],
-        parentNodeId: hovedmenyKnappId,
+        // TODO: Hvorfor blir desktopHovedmenyKnappId noen ganger undefined?!
+        parentNodeId: hovedmenyKnappId || 'hovedmeny-knapp-id',
         parentNodeEdge: NodeEdge.Bottom,
     },
     [KbNavGroup.Sok]: {
@@ -113,7 +110,7 @@ export const createHeaderMainGraph = (
 
     idMap[
         KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-    ] = desktopHeaderLogoId;
+    ] = headerLogoId;
 
     if (hovedmenyEnabled) {
         idMap[
@@ -139,7 +136,7 @@ export const createHeaderMainGraph = (
 
     idMap[
         KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-    ] = desktopLoginKnappId;
+    ] = loginKnappId;
 
     const maxColsPerRow = arbeidsflatemenyEnabled ? [3, colIndex] : [colIndex];
 

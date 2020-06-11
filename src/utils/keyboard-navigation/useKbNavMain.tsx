@@ -7,9 +7,9 @@ import { createKbNavNode } from './kb-navigation';
 import { KbNavGroup } from './kb-navigation';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
-import { desktopHeaderLogoId } from 'komponenter/header/header-regular/desktop/DesktopMenylinje';
 import KbNav from 'utils/keyboard-navigation/kb-navigation';
 import { disabledGroups } from './kb-navigation-setup';
+import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
 
 const stateSelector = (state: AppState) => ({
     language: state.language.language,
@@ -34,7 +34,7 @@ type KeyboardNavState = {
 };
 
 export const kbMasterNode = createKbNavNode(
-    desktopHeaderLogoId,
+    headerLogoId,
     { col: 0, row: 1, sub: 0 },
     KbNavGroup.HeaderMenylinje
 );

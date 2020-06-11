@@ -5,8 +5,8 @@ import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
 import { Language } from 'store/reducers/language-duck';
 import { useEffect } from 'react';
 import Skiplinks from 'komponenter/header/skiplinks/Skiplinks';
-import { CommonHeaderLinje } from 'komponenter/header/header-regular/CommonHeaderLinje';
-import './HeaderRegular.less';
+import { HeaderMenylinje } from 'komponenter/header/header-regular/HeaderMenylinje';
+import 'komponenter/header/header-regular/HeaderMenylinje.less';
 
 export const RegularHeader = () => {
     const language = useSelector((state: AppState) => state.language.language);
@@ -26,7 +26,7 @@ export const RegularHeader = () => {
             <Skiplinks />
             <div className="header-z-wrapper">
                 {language === Language.NORSK && <Arbeidsflatemeny />}
-                <CommonHeaderLinje />
+                <HeaderMenylinje />
             </div>
         </Fragment>
     );

@@ -10,10 +10,11 @@ import './LoggInnKnapp.less';
 
 type Props = {
     type?: 'standard' | 'hoved' | 'fare' | 'flat';
-    id?: string;
 };
 
-export const LoggInnKnapp = ({ type, id }: Props) => {
+export const loginKnappId = 'desktop-login-knapp';
+
+export const LoggInnKnapp = ({ type }: Props) => {
     const { environment } = useSelector((state: AppState) => state);
     const { PARAMS } = useSelector((state: AppState) => state.environment);
     const language = useSelector((state: AppState) => state.language.language);
@@ -57,7 +58,7 @@ export const LoggInnKnapp = ({ type, id }: Props) => {
             <KnappBase
                 className={`login-knapp${authenticated ? ' logout-knapp' : ''}`}
                 onClick={handleButtonClick}
-                id={id}
+                id={loginKnappId}
                 type={type}
             >
                 {knappetekst}

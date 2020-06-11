@@ -1,8 +1,7 @@
 @import (reference) '../../../../styling-variabler.less';
 
 .mobil-header() {
-    height: 88px;
-    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    height: @header-height-mobil;
 
     .desktop-hovedmeny,
     .desktop-sok-dropdown__knapp,
@@ -14,9 +13,10 @@
     }
 
     .nav-logo-lenke {
+        order: 1;
+        margin-left: @margins-sides-mobil;
         width: 72px;
         padding: 4px;
-        order: 1;
     }
 
     &__spacer {
@@ -26,9 +26,11 @@
     .login-knapp-container,
     .varselbjelle__knapp {
         order: 3;
+        margin-right: 0.5rem;
     }
 
     .hovedmeny__knapp {
         order: 4;
+        margin-right: @margins-sides-mobil;
     }
 }

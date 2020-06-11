@@ -1,3 +1,5 @@
+@import (reference) '../../../../../styling-variabler.less';
+
 .meny-bakgrunn {
     visibility: hidden;
     z-index: 999;
@@ -14,5 +16,9 @@
     &--active {
         visibility: visible;
         background-color: rgba(#32414f, 0.8);
+    }
+
+    @media (max-width: @mobilMaxWidth) {
+        display: none;
     }
 }
