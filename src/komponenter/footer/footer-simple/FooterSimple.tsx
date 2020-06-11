@@ -14,6 +14,7 @@ import LenkeMedIkon from '../common/lenke-med-ikon/LenkeMedIkon';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 
 import './FooterSimple.less';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 const cls = BEMHelper('simple-footer');
 
@@ -50,7 +51,7 @@ const FooterSimple = () => {
         <Fragment>
             <div className={cls.element('container')}>
                 <div className={cls.element('content')}>
-                    <ul className="bottom-lenke">
+                    <ul className={cls.element('personvern-lenker')}>
                         <FooterLenker node={personvernNode} />
                     </ul>
                     <LenkeMedIkon
