@@ -55,7 +55,7 @@ export const LoggInnKnapp = ({ type, id }: Props) => {
     return (
         <div className={'login-knapp-container'}>
             <KnappBase
-                className={'login-knapp'}
+                className={`login-knapp${authenticated ? ' logout-knapp' : ''}`}
                 onClick={handleButtonClick}
                 id={id}
                 type={type}

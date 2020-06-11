@@ -2,7 +2,7 @@ import React from 'react';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
-import { Varselvisning } from './varselvisning/Varselvisning';
+import { Varselvisning } from 'komponenter/header/header-regular/varsler/varselvisning/Varselvisning';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
@@ -10,8 +10,8 @@ import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { VarslerKnapp } from 'komponenter/header/header-regular/common/knapper/varsler-knapp/VarslerKnapp';
 import './VarslerDropdown.less';
 
-const classname = 'desktop-varsler-dropdown';
-export const desktopVarslerKnappId = 'desktop-varsler-dropdown-knapp-id';
+const classname = 'varsler-dropdown';
+export const varslerKnappId = 'varsler-knapp-id';
 
 type Props = {
     kbNavMainState: KbNavMain;
@@ -26,10 +26,7 @@ export const VarslerDropdown = ({ kbNavMainState }: Props) => {
     useKbNavSub(configForNodeGroup[KbNavGroup.Varsler], kbNavMainState, isOpen);
 
     const knapp = (
-        <VarslerKnapp
-            dropdownClassname={classname}
-            id={desktopVarslerKnappId}
-        />
+        <VarslerKnapp dropdownClassname={classname} id={varslerKnappId} />
     );
 
     return (

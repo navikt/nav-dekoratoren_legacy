@@ -1,19 +1,20 @@
-@import (reference) '../../../../../styling-variabler.less';
+@import (reference) '../../../../styling-variabler.less';
 
-.desktop-varsler-dropdown {
-    @dropdown-width: 525px;
-
-    .ekspanderbar {
-        &__innhold-wrapper {
-            right: 40px;
-            max-width: @dropdown-width;
-            @media (max-width: @smallDesktopLimitWidth) {
-                right: 0;
+.varsler-dropdown {
+    @media (min-width: @desktopMinWidth) {
+        @dropdown-width: 525px;
+        .ekspanderbar {
+            &__innhold-wrapper {
+                right: 40px;
+                max-width: @dropdown-width;
+                @media (max-width: @smallDesktopLimitWidth) {
+                    right: 0;
+                }
             }
-        }
 
-        &__innhold {
-            max-width: @dropdown-width;
+            &__innhold {
+                max-width: @dropdown-width;
+            }
         }
     }
 }

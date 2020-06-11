@@ -9,7 +9,7 @@ import KbNav, {
 import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
 import { desktopHeaderLogoId } from 'komponenter/header/header-regular/desktop/DesktopMenylinje';
 import { desktopSokKnappId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
-import { desktopVarslerKnappId } from 'komponenter/header/header-regular/desktop/varsler/VarslerDropdown';
+import { varslerKnappId } from 'komponenter/header/header-regular/varsler/VarslerDropdown';
 import { desktopMinsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
 import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
@@ -76,7 +76,7 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
         group: KbNavGroup.Varsler,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 1, 1],
-        parentNodeId: desktopVarslerKnappId,
+        parentNodeId: varslerKnappId,
         parentNodeEdge: NodeEdge.Bottom,
     },
     [KbNavGroup.MinsideMeny]: {
@@ -128,7 +128,7 @@ export const createHeaderMainGraph = (
     if (varslerEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = desktopVarslerKnappId;
+        ] = varslerKnappId;
     }
 
     if (minsideMenyEnabled) {

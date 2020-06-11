@@ -1,6 +1,6 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import { Varselvisning } from 'komponenter/header/header-regular/desktop/varsler/varselvisning/Varselvisning';
+import { Varselvisning } from 'komponenter/header/header-regular/varsler/varselvisning/Varselvisning';
 
 interface OwnProps {
     visvarsel: boolean;

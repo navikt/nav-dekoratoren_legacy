@@ -3,7 +3,6 @@ import BEMHelper from 'utils/bem';
 import { Language } from 'store/reducers/language-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Status } from 'api/api';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
@@ -58,7 +57,7 @@ const MobilMenylinje = ({ language }: Props) => {
                             dropdownClassname={'mobilmeny__varsel-innhold'}
                         />
                     )}
-                    <HovedmenyMobil />
+                    {/*<HovedmenyMobil />*/}
                 </div>
             </div>
         </nav>

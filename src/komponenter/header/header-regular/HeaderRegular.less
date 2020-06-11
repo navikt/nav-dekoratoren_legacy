@@ -1,4 +1,6 @@
 @import (reference) '../../../styling-variabler.less';
+@import 'desktop/DesktopHeader';
+@import 'mobil/MobilHeader';
 
 .header-linje {
     border-bottom: 2px solid @header-separator-farge;
@@ -10,43 +12,24 @@
         justify-content: space-between;
         align-items: center;
         margin: 0 auto;
-    }
-
-    .nav-logo-lenke,
-    .desktop-hovedmeny__knapp,
-    .desktop-sok-dropdown__knapp {
-        order: 1;
+        height: 100%;
     }
 
     &__spacer {
-        order: 2;
         flex-grow: 1;
         flex-shrink: 0;
     }
 
-    .varselbjelle__knapp,
-    .desktop-minside-meny__knapp,
-    .login-knapp-container,
-    .mobilmeny__knapp {
-        order: 3;
-    }
-
     .ekspanderbar__container {
-        order: 4;
+        order: 10;
+        width: 100%;
     }
 
     @media (min-width: @desktopMinWidth) {
-        .mobilmeny__knapp {
-            display: none;
-        }
+        .desktop-header();
     }
 
     @media (max-width: @mobilMaxWidth) {
-        .ekspanderbar__container:not(.mobilmeny),
-        .desktop-hovedmeny__knapp,
-        .desktop-sok-dropdown__knapp,
-        .desktop-minside-meny__knapp {
-            display: none;
-        }
+        .mobil-header();
     }
 }

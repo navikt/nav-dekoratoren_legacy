@@ -3,7 +3,7 @@ import { MenyNode } from 'store/reducers/menu-duck';
 import { MenyLenkeSeksjon } from 'komponenter/header/header-regular/common/meny-lenker/MenyLenkeSeksjon';
 import BEMHelper from 'utils/bem';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import './Hovedseksjon.less';
+import 'komponenter/header/header-regular/desktop/hovedmeny/hoved-seksjon/Hovedseksjon.less';
 
 interface Props {
     menyLenker: MenyNode;

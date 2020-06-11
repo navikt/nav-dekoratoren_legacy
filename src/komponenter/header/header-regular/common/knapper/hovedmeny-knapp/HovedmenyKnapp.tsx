@@ -7,21 +7,17 @@ import Tekst from 'tekster/finn-tekst';
 type Props = {
     isOpen: boolean;
     onClick: () => void;
-    hovedmenyClassname: string;
     id?: string;
 };
 
-export const HovedmenyKnapp = ({
-    isOpen,
-    onClick,
-    hovedmenyClassname,
-    id,
-}: Props) => (
+const classname = 'hovedmeny';
+
+export const HovedmenyKnapp = ({ isOpen, onClick, id }: Props) => (
     <MenylinjeKnapp
         isOpen={isOpen}
-        classname={hovedmenyClassname}
+        classname={classname}
         onClick={onClick}
-        ariaControls={hovedmenyClassname}
+        ariaControls={classname}
         id={id}
     >
         <HamburgerIkon isOpen={isOpen} />

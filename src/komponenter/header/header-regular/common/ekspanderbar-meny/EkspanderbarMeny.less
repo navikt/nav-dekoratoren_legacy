@@ -4,30 +4,43 @@
 @ekspanderbar-transition-duration-in: 0.4s;
 
 .ekspanderbar {
+    &__container {
+        position: relative;
+    }
+
+    &__innhold-wrapper {
+        position: absolute;
+        z-index: 1;
+        overflow: hidden;
+        width: 100%;
+        visibility: hidden;
+        background-color: white;
+
+        transition-duration: @ekspanderbar-transition-duration-in;
+        transition-timing-function: ease-in;
+
+        &--active {
+            visibility: visible;
+            z-index: 1001;
+            transition-duration: @ekspanderbar-transition-duration-out;
+            transition-timing-function: ease-in-out;
+        }
+    }
+
     @media (min-width: @desktopMinWidth) {
         &__innhold-wrapper {
-            position: absolute;
-            z-index: 1;
-            overflow: hidden;
             max-height: 0;
-            width: 100%;
-            visibility: hidden;
-            background-color: white;
             opacity: 0;
             border-bottom-left-radius: @border-radius-base;
             border-bottom-right-radius: @border-radius-base;
 
             transition-duration: @ekspanderbar-transition-duration-in;
-            transition-timing-function: ease-in;
             transition-property: max-height, visibility, opacity;
 
             &--active {
                 max-height: 100rem;
-                visibility: visible;
                 opacity: 1;
-                z-index: 1001;
                 transition-duration: @ekspanderbar-transition-duration-out;
-                transition-timing-function: ease-in-out;
                 transition-property: max-height, visibility;
             }
         }
@@ -53,9 +66,18 @@
                 max-width: @desktopMaxWidth;
             }
         }
+    }
 
-        &__container {
-            position: relative;
+    @media (max-width: @mobilMaxWidth) {
+        &__innhold-wrapper {
+            top: 0;
+            left: -100%;
+            transition-property: left, visibility;
+
+            &--active {
+                left: 0;
+                z-index: 1001;
+            }
         }
     }
 }

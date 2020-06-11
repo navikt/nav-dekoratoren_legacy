@@ -1,0 +1,34 @@
+@import (reference) '../../../../styling-variabler.less';
+
+.mobil-header() {
+    height: 88px;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+
+    .desktop-hovedmeny,
+    .desktop-sok-dropdown__knapp,
+    .desktop-sok-dropdown,
+    .desktop-minside-meny__knapp,
+    .desktop-minside-meny,
+    .logout-knapp {
+        display: none;
+    }
+
+    .nav-logo-lenke {
+        width: 72px;
+        padding: 4px;
+        order: 1;
+    }
+
+    &__spacer {
+        order: 2;
+    }
+
+    .login-knapp-container,
+    .varselbjelle__knapp {
+        order: 3;
+    }
+
+    .hovedmeny__knapp {
+        order: 4;
+    }
+}

@@ -21,13 +21,8 @@ import Sok from 'komponenter/header/header-regular/common/sok/Sok';
 import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
 import './MobilVisningsmeny.less';
 
-interface DispatchProps {
-    toggleVarsel: () => void;
-}
-
 interface StateProps {
     arbeidsflate: MenuValue;
-    visvarsel: boolean;
     innloggingsstatus: InnloggingsstatusState;
 }
 
@@ -48,7 +43,7 @@ interface State {
     lenker: MenyNode;
 }
 
-type Props = VisningsmenyProps & StateProps & DispatchProps;
+type Props = VisningsmenyProps & StateProps;
 
 class MobilVisningsmeny extends React.Component<Props, State> {
     private visningslenker = this.props.menyLenker.children.map(() =>
@@ -102,7 +97,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
             classname,
             menyLenker,
             menuIsOpen,
-            visvarsel,
             arbeidsflate,
             lang,
             underMenuIsOpen,
@@ -110,7 +104,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
         } = this.props;
         const menyClass = BEMHelper(classname);
         return (
-            <>
+            <div className={menyClass.className}>
                 <section
                     className={menyClass.element(
                         'startmeny',
@@ -198,23 +192,14 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                     tabindex={underMenuIsOpen && !menuIsOpen}
                     lenker={this.state.lenker}
                 />
-                <VarselvisningMobil
-                    visvarsel={visvarsel}
-                    visningmenyClassname={menyClass.className}
-                />
-            </>
+            </div>
         );
     }
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
     arbeidsflate: state.arbeidsflate.status,
-    visvarsel: state.dropdownToggles.varsler,
     innloggingsstatus: state.innloggingsstatus,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    toggleVarsel: () => dispatch(toggleVarsler()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MobilVisningsmeny);
+export default connect(mapStateToProps)(MobilVisningsmeny);

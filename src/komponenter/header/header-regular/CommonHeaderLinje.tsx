@@ -8,11 +8,9 @@ import { GACategory } from 'utils/google-analytics';
 import { SokDropdown } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
 import { MinsideMeny } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
-import { VarslerDropdown } from 'komponenter/header/header-regular/desktop/varsler/VarslerDropdown';
+import { VarslerDropdown } from 'komponenter/header/header-regular/varsler/VarslerDropdown';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { HovedmenyDesktop } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
-import { Varselbjelle } from 'komponenter/header/header-regular/mobil/varsler/Varselbjelle';
-import HovedmenyMobil from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
+import { Hovedmeny } from 'komponenter/header/header-regular/Hovedmeny';
 
 export const headerLogoId = 'header-logo-id';
 
@@ -40,7 +38,7 @@ export const CommonHeaderLinje = () => {
                     }}
                     id={headerLogoId}
                 />
-                <HovedmenyDesktop kbNavMainState={kbNavMainState} />
+                <Hovedmeny kbNavMainState={kbNavMainState} />
                 <SokDropdown kbNavMainState={kbNavMainState} />
                 <span className={cls.element('spacer')} />
                 {visVarslerDropdown && (
@@ -48,8 +46,6 @@ export const CommonHeaderLinje = () => {
                 )}
                 <MinsideMeny kbNavMainState={kbNavMainState} />
                 <LoggInnKnapp />
-                {visVarslerDropdown && <Varselbjelle />}
-                <HovedmenyMobil />
             </div>
         </nav>
     );

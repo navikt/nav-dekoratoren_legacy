@@ -5,22 +5,24 @@ import { createStore } from 'store';
 import { dataInitState } from 'store/reducers/menu-duck';
 import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
-import HovedmenyVisning from './HovedmenyVisning';
-import { Hovedseksjon } from './hoved-seksjon/Hovedseksjon';
-import { Toppseksjon } from './topp-seksjon/Toppseksjon';
-import { Bunnseksjon } from './bunn-seksjon/Bunnseksjon';
+import { Hovedseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/hoved-seksjon/Hovedseksjon';
+import { Toppseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/topp-seksjon/Toppseksjon';
+import { Bunnseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/bunn-seksjon/Bunnseksjon';
+import HovedmenyDesktop from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 
 const store = createStore();
+const kb = useKbNavMain();
 
 const shallowWithProps = (lang: Language, arbeidsflate: MenuValue) => {
     return mount(
         <ReduxProvider store={store}>
-            <HovedmenyVisning
-                classname={'meny'}
-                isOpen={true}
+            <HovedmenyDesktop
                 arbeidsflate={arbeidsflate}
+                menyPunkter={dataInitState}
                 language={lang}
-                menyLenker={dataInitState}
+                isOpen={true}
+                kbNavMainState={kb}
             />
         </ReduxProvider>
     );
