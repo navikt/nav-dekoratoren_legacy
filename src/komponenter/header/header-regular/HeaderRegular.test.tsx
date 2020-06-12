@@ -5,12 +5,12 @@ import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
 import { createStore, Store } from 'redux';
 import { Provider } from 'react-redux';
 import { reducers } from 'store/reducers';
-import { RegularHeader } from './HeaderRegular';
+import { HeaderRegular } from './HeaderRegular';
 
 const mountWithRedux = (store: Store) =>
     mount(
         <Provider store={store}>
-            <RegularHeader />
+            <HeaderRegular />
         </Provider>
     );
 

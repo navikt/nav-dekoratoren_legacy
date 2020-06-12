@@ -4,10 +4,9 @@ body {
     overflow-y: scroll;
 }
 
-body.no-scroll {
-    overflow-y: hidden;
-    @media (min-width: @desktopMinWidth) {
-        overflow-y: scroll;
+body.no-scroll-mobil {
+    @media (max-width: @mobilMaxWidth) {
+        overflow-y: hidden;
     }
 }
 

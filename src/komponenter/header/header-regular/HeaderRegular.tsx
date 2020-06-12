@@ -9,7 +9,7 @@ import { HeaderMenylinje } from 'komponenter/header/header-regular/HeaderMenylin
 import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
 import { Sticky } from './common/sticky/Sticky';
 
-export const RegularHeader = () => {
+export const HeaderRegular = () => {
     const language = useSelector((state: AppState) => state.language.language);
     const mobilMenyIsOpen = useSelector(
         (state: AppState) =>
@@ -18,8 +18,8 @@ export const RegularHeader = () => {
 
     useEffect(() => {
         mobilMenyIsOpen
-            ? document.body.classList.add('no-scroll')
-            : document.body.classList.remove('no-scroll');
+            ? document.body.classList.add('no-scroll-mobil')
+            : document.body.classList.remove('no-scroll-mobil');
     }, [mobilMenyIsOpen]);
 
     return (
@@ -27,7 +27,7 @@ export const RegularHeader = () => {
             <Skiplinks />
             <div className="header-z-wrapper">
                 {language === Language.NORSK && <Arbeidsflatemeny />}
-                <Sticky>
+                <Sticky mobilFixed={mobilMenyIsOpen}>
                     <HeaderMenylinje />
                 </Sticky>
             </div>

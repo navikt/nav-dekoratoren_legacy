@@ -7,7 +7,7 @@ import { Sticky } from 'komponenter/header/header-regular/common/sticky/Sticky';
 import { GACategory } from 'utils/google-analytics';
 import './HeaderSimple.less';
 
-export const SimpleHeader = () => {
+export const HeaderSimple = () => {
     const cls = BEMHelper('simple-header');
 
     return (
