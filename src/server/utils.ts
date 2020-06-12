@@ -53,3 +53,4 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
 // Time utils
 export const fiveMinutesInSeconds = 5 * 60;
 export const oneMinuteInSeconds = 60;
+export const tenSeconds = 10;

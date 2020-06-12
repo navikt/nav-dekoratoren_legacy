@@ -4,7 +4,12 @@ import fetch from 'node-fetch';
 import express, { Request, Response } from 'express';
 import { createMiddleware } from '@promster/express';
 import { getSummary, getContentType } from '@promster/express';
-import { clientEnv, fiveMinutesInSeconds, oneMinuteInSeconds } from './utils';
+import {
+    clientEnv,
+    fiveMinutesInSeconds,
+    oneMinuteInSeconds,
+    tenSeconds,
+} from './utils';
 import cookiesMiddleware from 'universal-cookie-express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
@@ -28,7 +33,7 @@ const PORT = 8088;
 const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
 const mainCache = new NodeCache({
-    stdTTL: fiveMinutesInSeconds,
+    stdTTL: tenSeconds,
     checkperiod: oneMinuteInSeconds,
 });
 const backupCache = new NodeCache({
@@ -97,8 +102,8 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
         fetch(`${process.env.API_XP_MENY_URL}`, { method: 'GET' })
             .then((xpRes) => xpRes.json())
             .then((xpData) => {
-                mainCache.set(mainCacheKey, xpData, 100);
-                backupCache.set(backupCacheKey, xpData, 0);
+                mainCache.set(mainCacheKey, xpData);
+                backupCache.set(backupCacheKey, xpData);
                 res.send(xpData);
             })
             .catch((err) => {
@@ -111,7 +116,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
                     console.log('Using backup cache');
                     const backupCacheData = backupCache.get(backupCacheKey);
                     if (backupCacheData) {
-                        mainCache.set(mainCacheKey, backupCacheData, 100);
+                        mainCache.set(mainCacheKey, backupCacheData);
                         res.send(backupCacheData);
                     } else {
                         throw 'Invalid cache';
@@ -127,7 +132,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
                 if (!res.headersSent) {
                     console.log('Using backup mock');
                     if (mockMenu) {
-                        mainCache.set(mainCacheKey, mockMenu, 100);
+                        mainCache.set(mainCacheKey, mockMenu);
                         res.send(mockMenu);
                     } else {
                         throw 'Mock is undefined';
