@@ -4,9 +4,10 @@ import { AppState } from 'store/reducers';
 import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
 import { Language } from 'store/reducers/language-duck';
 import { useEffect } from 'react';
-import Skiplinks from 'komponenter/header/skiplinks/Skiplinks';
+import Skiplinks from 'komponenter/header/header-regular/skiplinks/Skiplinks';
 import { HeaderMenylinje } from 'komponenter/header/header-regular/HeaderMenylinje';
-import 'komponenter/header/header-regular/HeaderMenylinje.less';
+import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
+import { Sticky } from './common/sticky/Sticky';
 
 export const RegularHeader = () => {
     const language = useSelector((state: AppState) => state.language.language);
@@ -26,8 +27,11 @@ export const RegularHeader = () => {
             <Skiplinks />
             <div className="header-z-wrapper">
                 {language === Language.NORSK && <Arbeidsflatemeny />}
-                <HeaderMenylinje />
+                <Sticky>
+                    <HeaderMenylinje />
+                </Sticky>
             </div>
+            <MenyBakgrunn />
         </Fragment>
     );
 };

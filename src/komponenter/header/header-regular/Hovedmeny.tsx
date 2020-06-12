@@ -6,11 +6,6 @@ import { getHovedmenyNode } from 'utils/meny-storage-utils';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
-import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/knapper/hovedmeny-knapp/HovedmenyKnapp';
-import { gaEvent } from 'utils/google-analytics';
-import { GACategory } from 'utils/google-analytics';
-import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
-import { useDispatch } from 'react-redux';
 import { HovedmenyMobil } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
 import HovedmenyDesktop from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
 
@@ -43,24 +38,18 @@ export const Hovedmeny = ({ kbNavMainState }: Props) => {
         return null;
     }
 
-    const mobilMeny = <HovedmenyMobil />;
-
-    const desktopMeny = (
-        <HovedmenyDesktop
-            arbeidsflate={arbeidsflate}
-            isOpen={isOpen}
-            language={language}
-            menyPunkter={hovedmenyPunkter}
-            kbNavMainState={kbNavMainState}
-        />
-    );
-
     return (
         <EkspanderbarMeny isOpen={isOpen} classname={classname} id={classname}>
             {menyPunkter.status === Status.OK ? (
                 <>
-                    {mobilMeny}
-                    {desktopMeny}
+                    <HovedmenyMobil />
+                    <HovedmenyDesktop
+                        arbeidsflate={arbeidsflate}
+                        isOpen={isOpen}
+                        language={language}
+                        menyPunkter={hovedmenyPunkter}
+                        kbNavMainState={kbNavMainState}
+                    />
                 </>
             ) : (
                 <Spinner

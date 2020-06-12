@@ -1,19 +1,19 @@
 import * as React from 'react';
-import DesktopMenylinje from './DesktopMenylinje';
-import HovedmenyDesktop from './hovedmeny/HovedmenyDesktop';
-import { SokDropdown } from './sok/SokDropdown';
+import HovedmenyDesktop from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import { SokDropdown } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { reducers } from 'store/reducers';
 import { mount } from 'enzyme';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
+import { HeaderMenylinje } from 'komponenter/header/header-regular/HeaderMenylinje';
 
 const store = createStore(reducers);
 
 const shallowWithProps = () =>
     mount(
         <Provider store={store}>
-            <DesktopMenylinje />
+            <HeaderMenylinje />
         </Provider>
     );
 

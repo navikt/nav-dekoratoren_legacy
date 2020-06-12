@@ -9,7 +9,7 @@ import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
-import { sokDropdownClassname } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
+import { sokDropdownClassname } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 
 export const desktopSokKnappId = 'desktop-sok-knapp';
 

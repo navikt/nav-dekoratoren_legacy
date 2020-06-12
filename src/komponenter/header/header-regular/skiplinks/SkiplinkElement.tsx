@@ -1,33 +1,28 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
-
-type Props = {
-    tekstId: string;
-    className?: string;
-    anchorId?: string;
-    onClick?: () => void;
-};
+import { SkipLink } from './Skiplinks';
 
 export const SkipLinkElement = ({
-    tekstId,
+    link,
     className,
-    anchorId,
-    onClick,
-}: Props) => (
+}: {
+    link: SkipLink;
+    className?: string;
+}) => (
     <li>
         <a
-            href={`#${anchorId || ''}`}
+            href={`#${link.anchorId || ''}`}
             className={`skiplink ${className || ''}`}
             onClick={(e) => {
-                if (!anchorId) {
+                if (!link.anchorId) {
                     e.preventDefault();
                 }
-                if (onClick) {
-                    onClick();
+                if (link.onClick) {
+                    link.onClick();
                 }
             }}
         >
-            <Tekst id={tekstId} />
+            <Tekst id={link.tekstId} />
         </a>
     </li>
 );

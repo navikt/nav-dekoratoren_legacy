@@ -17,9 +17,6 @@ const stateSelector = (state: AppState) => ({
     varselIsOpen: state.dropdownToggles.varsler,
 });
 
-const classname = 'mobilmeny';
-export const mobilSokInputId = `${classname}-sok-input`;
-
 export const HovedmenyMobil = () => {
     const dispatch = useDispatch();
     const {
@@ -58,7 +55,7 @@ export const HovedmenyMobil = () => {
 
     return (
         <MobilVisningsmeny
-            classname={classname}
+            classname={'mobilmeny'}
             menyLenker={hovedmenyPunkter || dataInitState}
             minsideLenker={
                 getMinsideMenyNode(meny.data, language) || dataInitState

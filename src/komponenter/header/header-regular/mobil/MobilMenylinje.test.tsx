@@ -1,22 +1,21 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { Language } from 'store/reducers/language-duck';
 import { Provider } from 'react-redux';
 import { reducers } from 'store/reducers';
 import { createStore, Store } from 'redux';
-import MobilMenylinje from './MobilMenylinje';
-import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
-import { ActionType } from '../../../../store/actions';
-import { Status } from '../../../../api/api';
+import { ActionType } from 'store/actions';
+import { Status } from 'api/api';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
+import { HovedmenyMobil } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
+import { HeaderMenylinje } from 'komponenter/header/header-regular/HeaderMenylinje';
 
 const store = createStore(reducers);
 
 const getWrapper = (store: Store) =>
     mount(
         <Provider store={store}>
-            <MobilMenylinje language={Language.NORSK} />
+            <HeaderMenylinje />
         </Provider>
     );
 

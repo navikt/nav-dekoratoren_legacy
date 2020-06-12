@@ -6,17 +6,17 @@ import KbNav, {
     KbNavGroup,
     NodeIndex,
 } from './kb-navigation';
-import { desktopSokKnappId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
-import { varslerKnappId } from 'komponenter/header/header-regular/varsler/VarslerDropdown';
-import { desktopMinsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
 import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from 'api/api';
 import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
-import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
+import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
 import { loginKnappId } from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
-import { hovedmenyKnappId } from 'komponenter/header/header-regular/Hovedmeny';
+import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/HeaderMenylinje';
+import { desktopSokKnappId } from 'komponenter/header/header-regular/common/knapper/sok-knapp/SokKnapp';
+import { varslerKnappId } from 'komponenter/header/header-regular/common/knapper/varsler-knapp/VarslerKnapp';
+import { desktopMinsideKnappId } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp';
 
 export type KbNavConfig = {
     group: KbNavGroup;
@@ -42,7 +42,7 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 4, 3],
         // TODO: Hvorfor blir desktopHovedmenyKnappId noen ganger undefined?!
-        parentNodeId: hovedmenyKnappId || 'hovedmeny-knapp-id',
+        parentNodeId: desktopHovedmenyKnappId || 'desktop-hovedmeny-knapp-id',
         parentNodeEdge: NodeEdge.Bottom,
     },
     [KbNavGroup.Sok]: {
@@ -115,7 +115,7 @@ export const createHeaderMainGraph = (
     if (hovedmenyEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = hovedmenyKnappId;
+        ] = desktopHovedmenyKnappId;
     }
 
     idMap[

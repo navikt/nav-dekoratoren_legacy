@@ -15,8 +15,9 @@ import ForsideLenke from './mobil-innhold/ForsideLenke';
 import Dittnavmeny from './mobil-innhold/dittnavmeny/Dittnavmeny';
 import { InnloggingsstatusState } from 'store/reducers/innloggingsstatus-duck';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
-import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
 import './MobilVisningsmeny.less';
+
+export const mobilSokInputId = `mobil-sok-input`;
 
 interface StateProps {
     arbeidsflate: MenuValue;
