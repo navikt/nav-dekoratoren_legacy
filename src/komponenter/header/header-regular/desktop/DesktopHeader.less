@@ -11,28 +11,23 @@
         max-width: @desktopMaxWidth;
     }
 
-    .mobilmeny {
+    .mobilmeny,
+    #mobil-hovedmeny-knapp-id {
         display: none;
     }
 
     .nav-logo-lenke,
     .hovedmeny__knapp,
     .desktop-sok-dropdown__knapp {
-        order: 1;
         margin-left: @margin-mellom;
         @media (max-width: @smallDesktopLimitWidth) {
             margin-left: @margin-mellom-sm;
         }
     }
 
-    &__spacer {
-        order: 2;
-    }
-
     .varselbjelle__knapp,
     .desktop-minside-meny__knapp,
     .login-knapp-container {
-        order: 3;
         margin-right: @margin-mellom;
         @media (max-width: @smallDesktopLimitWidth) {
             margin-right: @margin-mellom-sm;

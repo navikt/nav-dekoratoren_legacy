@@ -19,18 +19,15 @@ const stateSelector = (state: AppState) => ({
     menyPunkter: state.menypunkt,
     language: state.language.language,
     isOpen: state.dropdownToggles.hovedmeny,
-    sokIsOpen: state.dropdownToggles.sok,
 });
 
 const classname = 'hovedmeny';
-export const hovedmenyKnappId = 'hovedmeny-knapp-id';
 
 type Props = {
     kbNavMainState: KbNavMain;
 };
 
 export const Hovedmeny = ({ kbNavMainState }: Props) => {
-    const dispatch = useDispatch();
     const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(
         stateSelector
     );
@@ -46,23 +43,6 @@ export const Hovedmeny = ({ kbNavMainState }: Props) => {
         return null;
     }
 
-    const toggleMenu = () => {
-        gaEvent({
-            context: arbeidsflate,
-            category: GACategory.Header,
-            action: `meny-${isOpen ? 'close' : 'open'}`,
-        });
-        dispatch(toggleHovedmeny());
-    };
-
-    const knapp = (
-        <HovedmenyKnapp
-            isOpen={isOpen}
-            onClick={toggleMenu}
-            id={hovedmenyKnappId}
-        />
-    );
-
     const mobilMeny = <HovedmenyMobil />;
 
     const desktopMeny = (
@@ -76,12 +56,7 @@ export const Hovedmeny = ({ kbNavMainState }: Props) => {
     );
 
     return (
-        <EkspanderbarMeny
-            isOpen={isOpen}
-            menyKnapp={knapp}
-            classname={classname}
-            id={classname}
-        >
+        <EkspanderbarMeny isOpen={isOpen} classname={classname} id={classname}>
             {menyPunkter.status === Status.OK ? (
                 <>
                     {mobilMeny}

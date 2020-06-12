@@ -11,8 +11,11 @@ import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-
 import { VarslerDropdown } from 'komponenter/header/header-regular/varsler/VarslerDropdown';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Hovedmeny } from 'komponenter/header/header-regular/Hovedmeny';
+import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/knapper/hovedmeny-knapp/HovedmenyKnapp';
 
 export const headerLogoId = 'header-logo-id';
+export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';
+export const mobilHovedmenyKnappId = 'mobil-hovedmeny-knapp-id';
 
 const stateSelector = (state: AppState) => ({
     innlogget: state.innloggingsstatus.data.authenticated,
@@ -38,6 +41,7 @@ export const HeaderMenylinje = () => {
                     }}
                     id={headerLogoId}
                 />
+                <HovedmenyKnapp id={desktopHovedmenyKnappId} />
                 <Hovedmeny kbNavMainState={kbNavMainState} />
                 <SokDropdown kbNavMainState={kbNavMainState} />
                 <span className={cls.element('spacer')} />
@@ -46,6 +50,7 @@ export const HeaderMenylinje = () => {
                 )}
                 <MinsideMeny kbNavMainState={kbNavMainState} />
                 <LoggInnKnapp />
+                <HovedmenyKnapp id={mobilHovedmenyKnappId} />
             </div>
         </nav>
     );
