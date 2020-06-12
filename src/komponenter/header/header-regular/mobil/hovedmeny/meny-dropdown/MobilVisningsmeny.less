@@ -1,7 +1,6 @@
 @import (reference) '../../../../../../styling-variabler.less';
 
 .mobilmeny {
-    &__innhold-wrapper,
     &__startmeny,
     &__varsel-innhold,
     &__undermeny-innhold,
@@ -9,43 +8,29 @@
         overflow-y: scroll;
         overflow-x: hidden;
         position: fixed;
+        visibility: hidden;
+        top: 5.5rem;
         left: -100%;
-        z-index: 1001;
         padding: 0.75rem 1rem 1rem 1rem;
         background-color: white;
         width: 100%;
+        height: calc(100% - 5.5rem);
         transition: all 0.4s ease-in-out;
 
         &--active {
+            visibility: visible;
             left: 0;
         }
-    }
-
-    &__menuheight {
-        top: 5.5rem;
-        height: calc(100% - 5.5rem);
-    }
-
-    &__startmeny {
-        z-index: 1003;
     }
 
     &__undermeny-innhold,
     &__varsel-innhold {
         z-index: 1002;
-        .mobilmeny {
-            &__meny {
-                &--top {
-                    padding-bottom: 0.75rem;
-                }
+    }
 
-                &--list {
-                    padding: 1.25rem 1rem 1.5rem 0;
-                    margin-top: 0;
-                    max-width: 20rem;
-                }
-            }
-        }
+    &__startmeny,
+    .spinner-container {
+        z-index: 1003;
     }
 
     &__undermeny-arbeidsflate {
@@ -158,17 +143,6 @@
         }
     }
 
-    .min-varsel-wrapper {
-        .mobilmeny {
-            &__lukk-undermeny {
-                .lenke {
-                    padding-top: 0;
-                    padding-bottom: 2rem;
-                }
-            }
-        }
-    }
-
     &__minside-rad {
         display: flex;
         flex-direction: row;
@@ -178,48 +152,6 @@
 
         &--sett-rad-midt {
             justify-content: flex-start;
-        }
-    }
-
-    &__varseltittel {
-        padding-left: 0.5rem;
-    }
-
-    &__varsel-wrapper {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        padding: 0.5rem 0.75rem 0.5rem 0;
-
-        .typo-innholdstittel,
-        .typo-undertittel,
-        .typo-systemtittel {
-            font-weight: 100;
-        }
-    }
-
-    &__lukk-varsel {
-        position: relative;
-        text-decoration: none;
-
-        &:after,
-        &:before {
-            left: -15%;
-            top: 50%;
-            margin-left: -11px;
-            width: 22px;
-            height: 2px;
-            background-color: @navBla;
-            content: '';
-            position: absolute;
-        }
-
-        &:after {
-            transform: rotate(-45deg);
-        }
-
-        &:before {
-            transform: rotate(45deg);
         }
     }
 }

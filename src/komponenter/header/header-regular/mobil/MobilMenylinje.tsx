@@ -7,9 +7,9 @@ import HovedmenyMobil from './hovedmeny/HovedmenyMobil';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Status } from 'api/api';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
-import { Varselbjelle } from 'komponenter/header/header-regular/mobil/varsler/Varselbjelle';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import { GACategory } from 'utils/google-analytics';
+import { VarslerKnapp } from 'komponenter/header/header-regular/common/knapper/varsler-knapp/VarslerKnapp';
 import './MobilMenylinje.less';
 
 const mobilClass = BEMHelper('mobilmeny');
@@ -58,7 +58,11 @@ const MobilMenylinje = ({ language }: Props) => {
                 />
                 <div className={mobilClass.element('hoyre-kolonne')}>
                     {visInnloggingsKnapp && <LoggInnKnapp type={'flat'} />}
-                    {visVarslerDropdown && <Varselbjelle />}
+                    {visVarslerDropdown && (
+                        <VarslerKnapp
+                            dropdownClassname={'mobilmeny__varsel-innhold'}
+                        />
+                    )}
                     {visHovedMeny && <HovedmenyMobil />}
                 </div>
             </div>

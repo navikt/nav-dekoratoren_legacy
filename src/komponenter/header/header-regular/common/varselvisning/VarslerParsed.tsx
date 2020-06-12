@@ -82,7 +82,7 @@ export const VarslerParsed = ({ varsler, rowIndex }: Props) => {
     const options = {
         replace: ({ name, attribs, children }: DomElement) => {
             if (attribs?.class.includes('nav-varsler') && children) {
-                return <div>{domToReact(children, options)}</div>;
+                return <>{domToReact(children, options)}</>;
             }
 
             if (attribs?.class.includes('varsel-liste') && children) {
