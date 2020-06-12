@@ -1,52 +1,63 @@
-import React from 'react';
 import BEMHelper from 'utils/bem';
-import MinsideIkon from '../ikoner/minside-ikon/MinsideIkon';
+import { minsideDropdownClassname } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
+import { gaEvent } from 'utils/google-analytics';
+import { GACategory } from 'utils/google-analytics';
+import { toggleMinsideMeny } from 'store/reducers/dropdown-toggle-duck';
+import MenylinjeKnapp from 'komponenter/header/header-regular/common/knapper/MenylinjeKnapp';
+import MinsideIkon from 'komponenter/header/header-regular/common/knapper/ikoner/minside-ikon/MinsideIkon';
 import Tekst from 'tekster/finn-tekst';
-import MenylinjeKnapp from '../MenylinjeKnapp';
-import './MinsideKnapper.less';
+import React from 'react';
+import { desktopMinsideKnappId } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp';
+import { AppState } from 'store/reducers';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { MenuValue } from 'utils/meny-storage-utils';
 
-type Props = {
-    onClick: () => void;
-    isOpen: boolean;
-    brukerNavn: string;
-    minsideDropdownClassname: string;
-    id: string;
-};
+const stateSelector = (state: AppState) => ({
+    brukernavn: state.innloggingsstatus.data.name,
+    isOpen: state.dropdownToggles.minside,
+});
 
-export const MinsidePersonKnapp = (props: Props) => {
-    const cls = BEMHelper(props.minsideDropdownClassname);
+export const MinsidePersonKnapp = () => {
+    const dispatch = useDispatch();
+    const { isOpen, brukernavn } = useSelector(stateSelector);
+
+    const cls = BEMHelper(minsideDropdownClassname);
+
+    const toggleMinSideDropdown = () => {
+        gaEvent({
+            context: MenuValue.PRIVATPERSON,
+            category: GACategory.Header,
+            action: `minside-meny-${isOpen ? 'close' : 'open'}`,
+        });
+        dispatch(toggleMinsideMeny());
+    };
 
     return (
         <MenylinjeKnapp
-            onClick={props.onClick}
-            isOpen={props.isOpen}
-            ariaControls={props.minsideDropdownClassname}
-            classname={props.minsideDropdownClassname}
-            id={props.id}
+            onClick={toggleMinSideDropdown}
+            isOpen={isOpen}
+            ariaControls={minsideDropdownClassname}
+            classname={minsideDropdownClassname}
+            id={desktopMinsideKnappId}
         >
-            <MinsideIkon isOpen={props.isOpen} hasMenu={true} />
+            <MinsideIkon isOpen={isOpen} hasMenu={true} />
             <div className={cls.element('knapp-tekst')}>
                 <div
                     className={`${cls.element('knapp-tekst-topp')} ${
-                        props.isOpen
-                            ? cls.element('knapp-tekst-topp', 'open')
-                            : ''
+                        isOpen ? cls.element('knapp-tekst-topp', 'open') : ''
                     }`}
                 >
                     <Tekst id={'person-minside-lenke'} />
                 </div>
                 <div
                     className={`${cls.element('knapp-tekst-bunn')} ${
-                        props.isOpen
-                            ? cls.element('knapp-tekst-bunn', 'open')
-                            : ''
+                        isOpen ? cls.element('knapp-tekst-bunn', 'open') : ''
                     }`}
                 >
-                    {props.brukerNavn}
+                    {brukernavn?.toLowerCase() || ''}
                 </div>
             </div>
         </MenylinjeKnapp>
     );
 };
-
-export default MinsidePersonKnapp;

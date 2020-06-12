@@ -7,34 +7,27 @@ import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { VarslerKnapp } from 'komponenter/header/header-regular/common/knapper/varsler-knapp/VarslerKnapp';
 import './VarslerDropdown.less';
 
-const classname = 'varsler-dropdown';
-export const varslerKnappId = 'varsler-knapp-id';
-
-type Props = {
-    kbNavMainState: KbNavMain;
-};
+export const varslerDropdownClassname = 'varsler-dropdown';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.varsler,
 });
 
+type Props = {
+    kbNavMainState: KbNavMain;
+};
+
 export const VarslerDropdown = ({ kbNavMainState }: Props) => {
     const { isOpen } = useSelector(stateSelector);
     useKbNavSub(configForNodeGroup[KbNavGroup.Varsler], kbNavMainState, isOpen);
 
-    const knapp = (
-        <VarslerKnapp dropdownClassname={classname} id={varslerKnappId} />
-    );
-
     return (
         <EkspanderbarMeny
-            classname={classname}
-            id={classname}
+            classname={varslerDropdownClassname}
+            id={varslerDropdownClassname}
             isOpen={isOpen}
-            menyKnapp={knapp}
         >
             <Varselvisning setKbId={true} />
         </EkspanderbarMeny>

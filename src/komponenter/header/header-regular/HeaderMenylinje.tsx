@@ -12,6 +12,9 @@ import { VarslerDropdown } from 'komponenter/header/header-regular/varsler/Varsl
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Hovedmeny } from 'komponenter/header/header-regular/Hovedmeny';
 import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/knapper/hovedmeny-knapp/HovedmenyKnapp';
+import { SokKnapp } from 'komponenter/header/header-regular/common/knapper/sok-knapp/SokKnapp';
+import { MinsideKnapp } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp';
+import { VarslerKnapp } from 'komponenter/header/header-regular/common/knapper/varsler-knapp/VarslerKnapp';
 
 export const headerLogoId = 'header-logo-id';
 export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';
@@ -27,12 +30,12 @@ export const HeaderMenylinje = () => {
     const { innlogget, arbeidsflate } = useSelector(stateSelector);
     const kbNavMainState = useKbNavMain();
 
-    const visVarslerDropdown =
+    const innloggetPrivatperson =
         innlogget && arbeidsflate === MenuValue.PRIVATPERSON;
 
     return (
         <nav className={cls.className} aria-label={'Hovedmeny'}>
-            <div className={cls.element('elementer')}>
+            <div className={cls.element('knapper')}>
                 <NavLogoLenke
                     gaEventArgs={{
                         context: arbeidsflate,
@@ -42,15 +45,22 @@ export const HeaderMenylinje = () => {
                     id={headerLogoId}
                 />
                 <HovedmenyKnapp id={desktopHovedmenyKnappId} />
-                <Hovedmeny kbNavMainState={kbNavMainState} />
-                <SokDropdown kbNavMainState={kbNavMainState} />
+                <SokKnapp />
                 <span className={cls.element('spacer')} />
-                {visVarslerDropdown && (
-                    <VarslerDropdown kbNavMainState={kbNavMainState} />
-                )}
-                <MinsideMeny kbNavMainState={kbNavMainState} />
+                {innloggetPrivatperson && <VarslerKnapp />}
+                {innlogget && <MinsideKnapp arbeidsflate={arbeidsflate} />}
                 <LoggInnKnapp />
                 <HovedmenyKnapp id={mobilHovedmenyKnappId} />
+            </div>
+            <div className={cls.element('menyer')}>
+                <Hovedmeny kbNavMainState={kbNavMainState} />
+                <SokDropdown kbNavMainState={kbNavMainState} />
+                {innloggetPrivatperson && (
+                    <VarslerDropdown kbNavMainState={kbNavMainState} />
+                )}
+                {innloggetPrivatperson && (
+                    <MinsideMeny kbNavMainState={kbNavMainState} />
+                )}
             </div>
         </nav>
     );

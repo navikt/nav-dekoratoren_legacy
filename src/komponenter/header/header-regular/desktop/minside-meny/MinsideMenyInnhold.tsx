@@ -8,24 +8,29 @@ import { GACategory } from 'utils/google-analytics';
 import Tekst from 'tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
 import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
-import { useSelector } from 'react-redux';
-import { AppState } from 'store/reducers';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { UndertekstBold } from 'nav-frontend-typografi';
+
+const nodeGroup = KbNavGroup.MinsideMeny;
 
 type Props = {
     classname: string;
     isOpen: boolean;
     menyLenker: MenyNode | undefined;
     dittNavUrl: string;
-    brukerNavn: string;
+    brukernavn: string;
+    authLevel: string;
 };
 
-const nodeGroup = KbNavGroup.MinsideMeny;
-
 export const MinsideMenyInnhold = (props: Props) => {
-    const { classname, isOpen, menyLenker, dittNavUrl, brukerNavn } = props;
-    const auth = useSelector((state: AppState) => state.innloggingsstatus.data);
+    const {
+        classname,
+        isOpen,
+        menyLenker,
+        dittNavUrl,
+        brukernavn,
+        authLevel,
+    } = props;
 
     if (!menyLenker) {
         return null;
@@ -63,23 +68,22 @@ export const MinsideMenyInnhold = (props: Props) => {
                         <Tekst id={'logget-inn-som'} />
                     </UndertekstBold>
                     <Normaltekst className={cls.element('brukernavn')}>
-                        {brukerNavn}
+                        {brukernavn}
                     </Normaltekst>
                 </div>
             </div>
-            {auth.securityLevel !== '4' && <MinsideLockMsg />}
+            {authLevel !== '4' && <MinsideLockMsg />}
             <div className={cls.element('lenke-seksjoner')}>
-                {menyLenker &&
-                    menyLenker.children.map((menygruppe, index) => (
-                        <MenyLenkeSeksjon
-                            menygruppe={menygruppe}
-                            isOpen={isOpen}
-                            colIndex={index}
-                            rowIndex={1}
-                            kbNodeGroup={nodeGroup}
-                            key={menygruppe.displayName}
-                        />
-                    ))}
+                {menyLenker.children.map((menygruppe, index) => (
+                    <MenyLenkeSeksjon
+                        menygruppe={menygruppe}
+                        isOpen={isOpen}
+                        colIndex={index}
+                        rowIndex={1}
+                        kbNodeGroup={nodeGroup}
+                        key={menygruppe.displayName}
+                    />
+                ))}
             </div>
         </>
     );
