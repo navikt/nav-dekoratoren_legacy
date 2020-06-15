@@ -91,7 +91,7 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
         const deferredScrollHandler = debounce(() => {
             window.removeEventListener('scroll', deferredScrollHandler);
             window.addEventListener('scroll', scrollHandler);
-        });
+        }, 250);
 
         const deferOnAnchorLink = () => {
             const hash = window.location.hash;
