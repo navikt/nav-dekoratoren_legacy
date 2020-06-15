@@ -34,7 +34,7 @@
         "console-stamp": "^0.2.9",
         "core-js": "3.6.5",
         "dotenv": "^8.2.0",
-        "downshift": "^5.4.2",
+        "downshift": "^5.4.3",
         "express": "^4.17.1",
         "html-react-parser": "^0.13.0",
         "http-proxy-middleware": "^1.0.4",
