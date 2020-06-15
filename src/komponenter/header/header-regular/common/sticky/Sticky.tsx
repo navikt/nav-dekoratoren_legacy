@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import debounce from 'lodash.debounce';
 import './Sticky.less';
 
 const setTop = (element: HTMLElement, top: number) =>
@@ -85,6 +86,26 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
             baseOffset,
             stickyElement
         );
+        const onHashChange = () => {
+            const hash = window.location.hash;
+            if (!hash) {
+                return;
+            }
+
+            const element = document.getElementById(hash.slice(1));
+            if (!element) {
+                return;
+            }
+
+            const deferredScrollHandler = () =>
+                debounce(() => {
+                    window.removeEventListener('scroll', deferredScrollHandler);
+                    window.addEventListener('scroll', scrollHandler);
+                });
+
+            window.removeEventListener('scroll', scrollHandler);
+            window.addEventListener('scroll', deferredScrollHandler);
+        };
         const resizeHandler = () => {
             placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
             baseOffset.current = placeholderElement.offsetTop;
@@ -94,9 +115,11 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
 
         window.addEventListener('scroll', scrollHandler);
         window.addEventListener('resize', resizeHandler);
+        window.addEventListener('hashchange', onHashChange);
         return () => {
             window.removeEventListener('scroll', scrollHandler);
             window.removeEventListener('resize', resizeHandler);
+            window.removeEventListener('hashchange', onHashChange);
         };
     }, [alwaysSticky]);
 
