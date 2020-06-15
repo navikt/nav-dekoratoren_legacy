@@ -131,7 +131,7 @@
         "babel-preset-env": "^1.7.0",
         "babel-preset-react-app": "^9.1.2",
         "cross-env": "^7.0.2",
-        "css-loader": "^3.5.3",
+        "css-loader": "^3.6.0",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.2",
         "enzyme-to-json": "^3.5.0",
