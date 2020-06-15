@@ -75,6 +75,7 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
         if (!placeholderElement || !stickyElement) {
             return;
         }
+
         if (alwaysSticky) {
             stickyElement.style.position = 'fixed';
             setTop(stickyElement, 0);
@@ -86,7 +87,13 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
             baseOffset,
             stickyElement
         );
-        const onHashChange = () => {
+
+        const deferredScrollHandler = debounce(() => {
+            window.removeEventListener('scroll', deferredScrollHandler);
+            window.addEventListener('scroll', scrollHandler);
+        });
+
+        const deferOnAnchorLink = () => {
             const hash = window.location.hash;
             if (!hash) {
                 return;
@@ -97,29 +104,29 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
                 return;
             }
 
-            const deferredScrollHandler = () =>
-                debounce(() => {
-                    window.removeEventListener('scroll', deferredScrollHandler);
-                    window.addEventListener('scroll', scrollHandler);
-                });
+            stickyElement.style.position = 'absolute';
+            prevScrollOffset.current = 0;
+            setTop(stickyElement, 0);
 
             window.removeEventListener('scroll', scrollHandler);
             window.addEventListener('scroll', deferredScrollHandler);
         };
+
         const resizeHandler = () => {
             placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
             baseOffset.current = placeholderElement.offsetTop;
             scrollHandler();
         };
+
         resizeHandler();
 
         window.addEventListener('scroll', scrollHandler);
         window.addEventListener('resize', resizeHandler);
-        window.addEventListener('hashchange', onHashChange);
+        window.addEventListener('hashchange', deferOnAnchorLink);
         return () => {
             window.removeEventListener('scroll', scrollHandler);
             window.removeEventListener('resize', resizeHandler);
-            window.removeEventListener('hashchange', onHashChange);
+            window.removeEventListener('hashchange', deferOnAnchorLink);
         };
     }, [alwaysSticky]);
 
