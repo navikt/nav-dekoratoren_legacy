@@ -88,19 +88,25 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
             stickyElement
         );
 
+        const resizeHandler = () => {
+            placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
+            baseOffset.current = placeholderElement.offsetTop;
+            scrollHandler();
+        };
+
         const deferredScrollHandler = debounce(() => {
             window.removeEventListener('scroll', deferredScrollHandler);
             window.addEventListener('scroll', scrollHandler);
         }, 250);
 
-        const deferOnAnchorLink = () => {
+        const deferScrollingOnAnchorLink = () => {
             const hash = window.location.hash;
             if (!hash) {
                 return;
             }
 
-            const element = document.getElementById(hash.slice(1));
-            if (!element) {
+            const targetElement = document.getElementById(hash.slice(1));
+            if (!targetElement) {
                 return;
             }
 
@@ -112,21 +118,18 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
             window.addEventListener('scroll', deferredScrollHandler);
         };
 
-        const resizeHandler = () => {
-            placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
-            baseOffset.current = placeholderElement.offsetTop;
-            scrollHandler();
-        };
-
         resizeHandler();
 
         window.addEventListener('scroll', scrollHandler);
         window.addEventListener('resize', resizeHandler);
-        window.addEventListener('hashchange', deferOnAnchorLink);
+        window.addEventListener('hashchange', deferScrollingOnAnchorLink);
         return () => {
             window.removeEventListener('scroll', scrollHandler);
             window.removeEventListener('resize', resizeHandler);
-            window.removeEventListener('hashchange', deferOnAnchorLink);
+            window.removeEventListener(
+                'hashchange',
+                deferScrollingOnAnchorLink
+            );
         };
     }, [alwaysSticky]);
 
