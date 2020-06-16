@@ -88,16 +88,16 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
             stickyElement
         );
 
+        const deferredScrollHandler = debounce(() => {
+            window.removeEventListener('scroll', deferredScrollHandler);
+            window.addEventListener('scroll', scrollHandler);
+        }, 250);
+
         const resizeHandler = () => {
             placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
             baseOffset.current = placeholderElement.offsetTop;
             scrollHandler();
         };
-
-        const deferredScrollHandler = debounce(() => {
-            window.removeEventListener('scroll', deferredScrollHandler);
-            window.addEventListener('scroll', scrollHandler);
-        }, 250);
 
         const deferScrollingOnAnchorLink = () => {
             const hash = window.location.hash;
