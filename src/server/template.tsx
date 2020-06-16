@@ -100,20 +100,11 @@ export const template = (req: Request) => {
             }
             .decorator-dummy-app {
                 background: #8888;
-                height: 300%;
+                height: 100%;
                 min-height: 55rem;
                 display: flex;
-                flex-direction: column
                 justify-content: center;
                 align-items: center;
-            }
-            .dec-topp {
-                align-self: flex-start;
-                top: 500px;
-            }
-            
-            .dec-bunn {
-                align-self: flex-end;
             }
             </style>
             <!-- Styling fetched by apps -->
@@ -129,8 +120,6 @@ export const template = (req: Request) => {
                     <section id="decorator-header" class="navno-dekorator" role="main">${HtmlHeader}</section>
                 </div>
                 <div class="decorator-dummy-app">
-                <div class="dec-topp" id="derp" tabindex="-1">Toppen!</div>
-                <div class="dec-bunn"><a href="#derp">Til toppen</a></div>
                 </div>
                 <!-- Footer fetched by apps -->
                 <div id="${footerId}">
