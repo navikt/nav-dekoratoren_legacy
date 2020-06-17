@@ -28,7 +28,9 @@
 
     @media (min-width: @desktopMinWidth) {
         &__container {
-            position: relative;
+            position: absolute;
+            max-width: @desktopMaxWidth;
+            top: calc(@header-height-desktop - 2px);
         }
 
         &__innhold-wrapper {
@@ -50,7 +52,7 @@
         }
 
         &__innhold {
-            padding: 1.5rem @margins-sides-desktop 2rem @margins-sides-desktop;
+            padding: 0.5rem @margins-sides-desktop 2rem @margins-sides-desktop;
             overflow: hidden;
 
             @media (max-width: @smallDesktopLimitWidth) {
@@ -60,12 +62,8 @@
 
             @media (max-height: @smallDesktopLimitHeight),
                 (max-width: @smallDesktopLimitWidth) {
-                padding-top: 0.75rem;
+                padding-top: 0;
                 padding-bottom: 1rem;
-            }
-
-            @media (min-width: @desktopMaxWidth) {
-                max-width: @desktopMaxWidth;
             }
         }
     }

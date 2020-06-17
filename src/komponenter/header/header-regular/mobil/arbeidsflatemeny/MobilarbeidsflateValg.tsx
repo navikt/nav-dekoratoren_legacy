@@ -17,7 +17,6 @@ import { bunnLenker } from 'komponenter/header/header-regular/common/arbeidsflat
 import Tekst from 'tekster/finn-tekst';
 
 interface Props {
-    tabindex: boolean;
     lang: Language;
 }
 
@@ -26,7 +25,7 @@ const stateProps = (state: AppState) => ({
     environment: state.environment,
 });
 
-const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
+const MobilarbeidsflateValg = ({ lang }: Props) => {
     const dispatch = useDispatch();
     const [, setCookie] = useCookies(['decorator-context']);
     const { arbeidsflate, environment } = useSelector(stateProps);
@@ -52,7 +51,6 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
                                 window.location.href = lenke.url;
                             }
                         }}
-                        tabIndex={tabindex ? 0 : -1}
                         gaEventArgs={{
                             context: arbeidsflate,
                             category: GACategory.Header,

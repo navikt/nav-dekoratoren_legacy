@@ -62,14 +62,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
         };
     }
 
-    hovedseksjonTabIndex = (): boolean => {
-        return (
-            this.props.menuIsOpen &&
-            this.props.underMenuIsOpen &&
-            !this.props.varslerIsOpen
-        );
-    };
-
     setSubmenu = (meny: MenyNode, pointer: any) => {
         this.node = pointer;
         this.setState({ lenker: meny });
@@ -110,19 +102,17 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                     )}
                 >
                     <Sok
-                        tabindex={this.hovedseksjonTabIndex()}
                         isOpen={menuIsOpen}
                         dropdownTransitionMs={400}
                         id={mobilSokInputId}
                     />
-                    <InnloggetBruker tabIndex={this.hovedseksjonTabIndex()} />
+                    <InnloggetBruker />
 
                     <ForsideLenke
                         arbeidsflate={arbeidsflate}
                         erInnlogget={
                             this.props.innloggingsstatus.data.authenticated
                         }
-                        tabindex={this.hovedseksjonTabIndex()}
                     />
                     {this.props.innloggingsstatus.data.authenticated &&
                         arbeidsflate === MenuValue.PRIVATPERSON && (
@@ -131,7 +121,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                             >
                                 <Dittnavmeny
                                     minsideLenker={minsideLenker}
-                                    tabIndex={this.hovedseksjonTabIndex()}
                                     className={menyClass.className}
                                     openMeny={this.setMenyliste}
                                     test={this.minsidelenkerRef}
@@ -141,7 +130,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                     <MenyIngress
                         className={menyClass.element('meny', 'ingress')}
                         inputext={arbeidsflate}
-                        tabindex={this.hovedseksjonTabIndex()}
                     />
                     <ul className={menyClass.element('meny', 'mainlist')}>
                         {menyLenker.children.map(
@@ -160,9 +148,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                                                     .current
                                             )
                                         }
-                                        tabIndex={
-                                            this.hovedseksjonTabIndex() ? 0 : -1
-                                        }
                                     >
                                         <Listelement
                                             className={menyClass.className}
@@ -177,17 +162,13 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                         )}
                     </ul>
                     {lang === Language.NORSK && (
-                        <MobilarbeidsflateValg
-                            tabindex={this.hovedseksjonTabIndex()}
-                            lang={lang}
-                        />
+                        <MobilarbeidsflateValg lang={lang} />
                     )}
                 </section>
                 <Undermeny
                     className={menyClass.className}
-                    undermenyIsOpen={menuIsOpen}
+                    undermenyIsOpen={underMenuIsOpen}
                     setFocusNode={this.focusNode}
-                    tabindex={underMenuIsOpen && !menuIsOpen}
                     lenker={this.state.lenker}
                 />
             </div>

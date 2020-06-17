@@ -8,6 +8,7 @@ import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './VarslerDropdown.less';
+import { VarslerKnapp } from 'komponenter/header/header-regular/common/knapper/varsler-knapp/VarslerKnapp';
 
 export const varslerDropdownClassname = 'varsler-dropdown';
 
@@ -24,12 +25,15 @@ export const VarslerDropdown = ({ kbNavMainState }: Props) => {
     useKbNavSub(configForNodeGroup[KbNavGroup.Varsler], kbNavMainState, isOpen);
 
     return (
-        <EkspanderbarMeny
-            classname={varslerDropdownClassname}
-            id={varslerDropdownClassname}
-            isOpen={isOpen}
-        >
-            <Varselvisning setKbId={true} />
-        </EkspanderbarMeny>
+        <>
+            <VarslerKnapp />
+            <EkspanderbarMeny
+                classname={varslerDropdownClassname}
+                id={varslerDropdownClassname}
+                isOpen={isOpen}
+            >
+                <Varselvisning setKbId={true} />
+            </EkspanderbarMeny>
+        </>
     );
 };

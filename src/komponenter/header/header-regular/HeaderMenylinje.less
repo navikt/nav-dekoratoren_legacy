@@ -8,8 +8,9 @@
     align-items: center;
     border-bottom: 2px solid @header-separator-farge;
     background-color: white;
+    position: relative;
 
-    &__knapper {
+    &__elementer {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -28,6 +29,10 @@
     &__spacer {
         flex-grow: 1;
         flex-shrink: 0;
+    }
+
+    .ekspanderbar__container {
+        order: 10;
     }
 
     @media (min-width: @desktopMinWidth) {

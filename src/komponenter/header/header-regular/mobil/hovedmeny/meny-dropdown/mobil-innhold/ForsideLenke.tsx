@@ -11,7 +11,6 @@ import { valgtbedrift } from '../../../../common/knapper/minside-knapper/Minside
 interface Props {
     arbeidsflate: MenuValue;
     erInnlogget: boolean;
-    tabindex: boolean;
 }
 
 const ForsideLenke = (props: Props) => {
@@ -31,11 +30,7 @@ const ForsideLenke = (props: Props) => {
                     <Undertittel className={cls.element('ingress')}>
                         <Tekst id="person-minside-lenke" />
                     </Undertittel>
-                    <Lenke
-                        href={DITT_NAV_URL}
-                        className={cls.element('lenke')}
-                        tabIndex={props.tabindex ? 0 : -1}
-                    >
+                    <Lenke href={DITT_NAV_URL} className={cls.element('lenke')}>
                         <Tekst id="til-forsiden" />
                     </Lenke>
                 </div>
@@ -48,7 +43,6 @@ const ForsideLenke = (props: Props) => {
                     <Lenke
                         href={MINSIDE_ARBEIDSGIVER_URL + valgtbedrift()}
                         className={cls.element('lenke')}
-                        tabIndex={props.tabindex ? 0 : -1}
                     >
                         <Tekst id="ga-til-min-side-arbeidsgiver" />
                     </Lenke>

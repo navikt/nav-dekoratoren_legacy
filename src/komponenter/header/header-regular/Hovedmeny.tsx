@@ -8,6 +8,8 @@ import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { HovedmenyMobil } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
 import HovedmenyDesktop from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/knapper/hovedmeny-knapp/HovedmenyKnapp';
+import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/HeaderMenylinje';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -39,24 +41,31 @@ export const Hovedmeny = ({ kbNavMainState }: Props) => {
     }
 
     return (
-        <EkspanderbarMeny isOpen={isOpen} classname={classname} id={classname}>
-            {menyPunkter.status === Status.OK ? (
-                <>
-                    <HovedmenyMobil />
-                    <HovedmenyDesktop
-                        arbeidsflate={arbeidsflate}
-                        isOpen={isOpen}
-                        language={language}
-                        menyPunkter={hovedmenyPunkter}
-                        kbNavMainState={kbNavMainState}
+        <>
+            <HovedmenyKnapp id={desktopHovedmenyKnappId} />
+            <EkspanderbarMeny
+                isOpen={isOpen}
+                classname={classname}
+                id={classname}
+            >
+                {menyPunkter.status === Status.OK ? (
+                    <>
+                        <HovedmenyMobil />
+                        <HovedmenyDesktop
+                            arbeidsflate={arbeidsflate}
+                            isOpen={isOpen}
+                            language={language}
+                            menyPunkter={hovedmenyPunkter}
+                            kbNavMainState={kbNavMainState}
+                        />
+                    </>
+                ) : (
+                    <Spinner
+                        tekstId={'meny-loading'}
+                        className={isOpen ? 'spinner-container--active' : ''}
                     />
-                </>
-            ) : (
-                <Spinner
-                    tekstId={'meny-loading'}
-                    className={isOpen ? 'spinner-container--active' : ''}
-                />
-            )}
-        </EkspanderbarMeny>
+                )}
+            </EkspanderbarMeny>
+        </>
     );
 };

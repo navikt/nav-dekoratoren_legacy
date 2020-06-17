@@ -37,7 +37,6 @@ export const MinsideArbgiverKnapp = ({ classname, id }: Props) => {
                 action: 'minside-arbeidsgiver',
                 label: href,
             }}
-            tabIndex={0}
         >
             <div
                 className={`menylinje-knapp-visning ${cls.element(

@@ -55,7 +55,6 @@ const parseLenke = (
     return (
         <LenkeMedGA
             href={href || ''}
-            tabIndex={0}
             id={
                 rowIndex !== undefined && subIndex !== undefined
                     ? getKbId(KbNavGroup.Varsler, {

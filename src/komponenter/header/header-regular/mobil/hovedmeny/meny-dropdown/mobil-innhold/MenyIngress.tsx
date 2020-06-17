@@ -8,11 +8,9 @@ import { AppState } from 'store/reducers';
 const MenyIngress = ({
     className,
     inputext,
-    tabindex,
 }: {
     className: string;
     inputext: string;
-    tabindex: boolean;
 }) => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const lenke = arbeidsflateLenker(XP_BASE_URL).filter(
@@ -30,10 +28,7 @@ const MenyIngress = ({
     return (
         <div className={className}>
             <Undertittel>{textToLowercase}</Undertittel>
-            <Lenke
-                href={lenke[0].url ? lenke[0].url : 'https://nav.no'}
-                tabIndex={tabindex ? 0 : -1}
-            >
+            <Lenke href={lenke[0].url ? lenke[0].url : 'https://nav.no'}>
                 Til forsiden
             </Lenke>
         </div>

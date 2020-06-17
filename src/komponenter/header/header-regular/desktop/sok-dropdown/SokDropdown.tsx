@@ -8,6 +8,7 @@ import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { SokKnapp } from 'komponenter/header/header-regular/common/knapper/sok-knapp/SokKnapp';
 import './SokDropdown.less';
 
 export const sokDropdownClassname = 'desktop-sok-dropdown';
@@ -43,17 +44,19 @@ export const SokDropdown = ({ kbNavMainState }: Props) => {
     }, [isOpen]);
 
     return (
-        <EkspanderbarMeny
-            classname={sokDropdownClassname}
-            id={sokDropdownClassname}
-            isOpen={isOpen}
-        >
-            <Sok
-                tabindex={true}
+        <>
+            <SokKnapp />
+            <EkspanderbarMeny
+                classname={sokDropdownClassname}
+                id={sokDropdownClassname}
                 isOpen={isOpen}
-                id={desktopSokInputId}
-                dropdownTransitionMs={dropdownTransitionMs}
-            />
-        </EkspanderbarMeny>
+            >
+                <Sok
+                    isOpen={isOpen}
+                    id={desktopSokInputId}
+                    dropdownTransitionMs={dropdownTransitionMs}
+                />
+            </EkspanderbarMeny>
+        </>
     );
 };

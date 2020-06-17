@@ -8,7 +8,6 @@ import { AppState } from 'store/reducers';
 
 interface Props {
     lenke: MenyNode;
-    isOpen: boolean;
     displayLock?: boolean;
     menyGruppeNavn: string;
     id: string;
@@ -18,13 +17,12 @@ export const MenyLenke = (props: Props) => {
     const auth = useSelector((state: AppState) => state.innloggingsstatus.data);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const displayLock = props.displayLock && auth.securityLevel !== '4';
-    const { lenke, isOpen, menyGruppeNavn } = props;
+    const { lenke, menyGruppeNavn } = props;
     const href = genererUrl(XP_BASE_URL, lenke.path);
 
     return (
         <li>
             <LenkeMedGA
-                tabIndex={isOpen ? 0 : -1}
                 href={href}
                 id={props.id}
                 gaEventArgs={{

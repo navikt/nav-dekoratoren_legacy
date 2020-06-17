@@ -36,7 +36,6 @@ const alleVarslerLenke = (
                           })
                         : undefined
                 }
-                tabIndex={0}
                 gaEventArgs={{
                     category: GACategory.Header,
                     action: 'varsler/visalle',

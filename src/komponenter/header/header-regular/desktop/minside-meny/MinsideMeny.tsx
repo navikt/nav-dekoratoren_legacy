@@ -11,12 +11,14 @@ import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './MinsideMeny.less';
+import { MinsideKnapp } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp';
 
 const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,
     isOpen: state.dropdownToggles.minside,
     language: state.language.language,
     menyPunkter: state.menypunkt,
+    arbeidsflate: state.arbeidsflate.status,
 });
 
 export const minsideDropdownClassname = 'desktop-minside-meny';
@@ -27,7 +29,7 @@ type Props = {
 
 export const MinsideMeny = ({ kbNavMainState }: Props) => {
     const { environment } = useSelector((state: AppState) => state);
-    const { innloggetStatus } = useSelector(stateSelector);
+    const { innloggetStatus, arbeidsflate } = useSelector(stateSelector);
     const { isOpen, language, menyPunkter } = useSelector(stateSelector);
     useKbNavSub(
         configForNodeGroup[KbNavGroup.MinsideMeny],
@@ -43,24 +45,27 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
     }
 
     return (
-        <EkspanderbarMeny
-            isOpen={isOpen}
-            classname={minsideDropdownClassname}
-            id={minsideDropdownClassname}
-        >
-            {menyPunkter.status === Status.OK ? (
-                <MinsideMenyInnhold
-                    classname={minsideDropdownClassname}
-                    isOpen={isOpen}
-                    menyLenker={minsideMenyPunkter}
-                    dittNavUrl={environment.DITT_NAV_URL}
-                    brukernavn={innloggetStatus.name?.toLowerCase() || ''}
-                    authLevel={innloggetStatus.securityLevel}
-                />
-            ) : (
-                <Spinner tekstId={'meny-loading'} />
-            )}
-        </EkspanderbarMeny>
+        <>
+            <MinsideKnapp arbeidsflate={arbeidsflate} />
+            <EkspanderbarMeny
+                isOpen={isOpen}
+                classname={minsideDropdownClassname}
+                id={minsideDropdownClassname}
+            >
+                {menyPunkter.status === Status.OK ? (
+                    <MinsideMenyInnhold
+                        classname={minsideDropdownClassname}
+                        isOpen={isOpen}
+                        menyLenker={minsideMenyPunkter}
+                        dittNavUrl={environment.DITT_NAV_URL}
+                        brukernavn={innloggetStatus.name?.toLowerCase() || ''}
+                        authLevel={innloggetStatus.securityLevel}
+                    />
+                ) : (
+                    <Spinner tekstId={'meny-loading'} />
+                )}
+            </EkspanderbarMeny>
+        </>
     );
 };
 

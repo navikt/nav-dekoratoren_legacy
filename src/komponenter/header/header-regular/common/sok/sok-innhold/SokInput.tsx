@@ -11,7 +11,6 @@ type Props = {
     className: string;
     getInputProps: any;
     language: Language;
-    tabIndex: boolean | undefined;
     writtenInput: string;
     onReset: () => void;
     id?: string;
@@ -25,7 +24,6 @@ export const SokInput = ({
     onReset,
     className,
     getInputProps,
-    tabIndex,
     id,
 }: Props) => {
     return (
@@ -49,7 +47,6 @@ export const SokInput = ({
                     placeholder={finnTekst('sok-input-placeholder', language)}
                     label={finnTekst('sok-input-label', language)}
                     aria-label={finnTekst('sok-input-label', language)}
-                    tabIndex={tabIndex ? 0 : -1}
                     id={id}
                 />
                 <SokKnapper writtenInput={writtenInput} onReset={onReset} />

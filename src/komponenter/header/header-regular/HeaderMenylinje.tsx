@@ -11,10 +11,6 @@ import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-
 import { VarslerDropdown } from 'komponenter/header/header-regular/varsler/VarslerDropdown';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Hovedmeny } from 'komponenter/header/header-regular/Hovedmeny';
-import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/knapper/hovedmeny-knapp/HovedmenyKnapp';
-import { SokKnapp } from 'komponenter/header/header-regular/common/knapper/sok-knapp/SokKnapp';
-import { MinsideKnapp } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp';
-import { VarslerKnapp } from 'komponenter/header/header-regular/common/knapper/varsler-knapp/VarslerKnapp';
 import 'komponenter/header/header-regular/HeaderMenylinje.less';
 
 export const headerLogoId = 'header-logo-id';
@@ -36,7 +32,7 @@ export const HeaderMenylinje = () => {
 
     return (
         <nav className={cls.className} aria-label={'Hovedmeny'}>
-            <div className={cls.element('knapper')}>
+            <div className={cls.element('elementer')}>
                 <NavLogoLenke
                     gaEventArgs={{
                         context: arbeidsflate,
@@ -45,23 +41,14 @@ export const HeaderMenylinje = () => {
                     }}
                     id={headerLogoId}
                 />
-                <HovedmenyKnapp id={desktopHovedmenyKnappId} />
-                <SokKnapp />
-                <span className={cls.element('spacer')} />
-                {innloggetPrivatperson && <VarslerKnapp />}
-                {innlogget && <MinsideKnapp arbeidsflate={arbeidsflate} />}
-                <LoggInnKnapp />
-                <HovedmenyKnapp id={mobilHovedmenyKnappId} />
-            </div>
-            <div className={cls.element('menyer')}>
                 <Hovedmeny kbNavMainState={kbNavMainState} />
                 <SokDropdown kbNavMainState={kbNavMainState} />
+                <span className={cls.element('spacer')} />
                 {innloggetPrivatperson && (
                     <VarslerDropdown kbNavMainState={kbNavMainState} />
                 )}
-                {innloggetPrivatperson && (
-                    <MinsideMeny kbNavMainState={kbNavMainState} />
-                )}
+                {innlogget && <MinsideMeny kbNavMainState={kbNavMainState} />}
+                <LoggInnKnapp />
             </div>
         </nav>
     );

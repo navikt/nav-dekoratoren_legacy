@@ -31,12 +31,6 @@ export const Sticky = ({ mobilFixed = false, children }: Props) => {
             return;
         }
 
-        if (mobilFixed) {
-            stickyElement.style.position = 'fixed';
-            setTop(stickyElement, 0);
-            return;
-        }
-
         const setStickyOffset = stickyScrollHandler(
             prevScrollOffset,
             baseOffset,
