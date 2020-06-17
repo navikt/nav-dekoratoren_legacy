@@ -100,7 +100,7 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
             }
 
             const targetId = link.href.split('#')[1];
-            if (!targetId || !document.getElementById(targetId)) {
+            if (!targetId) {
                 return;
             }
 
