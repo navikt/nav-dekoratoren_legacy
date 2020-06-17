@@ -93,20 +93,14 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
             window.addEventListener('scroll', scrollHandler);
         }, 250);
 
-        const resizeHandler = () => {
-            placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
-            baseOffset.current = placeholderElement.offsetTop;
-            scrollHandler();
-        };
-
-        const deferScrollingOnAnchorLink = () => {
-            const hash = window.location.hash;
-            if (!hash) {
+        const deferStickyOnAnchorLink = (e: MouseEvent) => {
+            const link = e.target as HTMLAnchorElement;
+            if (link.tagName.toLowerCase() !== 'a') {
                 return;
             }
 
-            const targetElement = document.getElementById(hash.slice(1));
-            if (!targetElement) {
+            const targetId = link.href.split('#')[1];
+            if (!targetId || !document.getElementById(targetId)) {
                 return;
             }
 
@@ -118,18 +112,21 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
             window.addEventListener('scroll', deferredScrollHandler);
         };
 
+        const resizeHandler = () => {
+            placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
+            baseOffset.current = placeholderElement.offsetTop;
+            scrollHandler();
+        };
+
         resizeHandler();
 
         window.addEventListener('scroll', scrollHandler);
         window.addEventListener('resize', resizeHandler);
-        window.addEventListener('hashchange', deferScrollingOnAnchorLink);
+        window.addEventListener('click', deferStickyOnAnchorLink);
         return () => {
             window.removeEventListener('scroll', scrollHandler);
             window.removeEventListener('resize', resizeHandler);
-            window.removeEventListener(
-                'hashchange',
-                deferScrollingOnAnchorLink
-            );
+            window.removeEventListener('click', deferStickyOnAnchorLink);
         };
     }, [alwaysSticky]);
 
