@@ -37,7 +37,7 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
             return;
         }
 
-        const scrollHandler = stickyScrollHandler(
+        const setStickyOffset = stickyScrollHandler(
             prevScrollOffset,
             baseOffset,
             stickyElement
@@ -45,7 +45,7 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
 
         const deferredScrollHandler = debounce(() => {
             window.removeEventListener('scroll', deferredScrollHandler);
-            window.addEventListener('scroll', scrollHandler);
+            window.addEventListener('scroll', setStickyOffset);
         }, 100);
 
         const deferStickyOnAnchorLink = (e: MouseEvent) => {
@@ -58,24 +58,24 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
             prevScrollOffset.current = 0;
             setTop(stickyElement, 0);
 
-            window.removeEventListener('scroll', scrollHandler);
+            window.removeEventListener('scroll', setStickyOffset);
             window.addEventListener('scroll', deferredScrollHandler);
         };
 
-        const resizeHandler = () => {
+        const setElementSizeAndBaseOffset = () => {
             placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
             baseOffset.current = placeholderElement.offsetTop;
-            scrollHandler();
+            setStickyOffset();
         };
 
-        resizeHandler();
+        setElementSizeAndBaseOffset();
 
-        window.addEventListener('scroll', scrollHandler);
-        window.addEventListener('resize', resizeHandler);
+        window.addEventListener('scroll', setStickyOffset);
+        window.addEventListener('resize', setElementSizeAndBaseOffset);
         window.addEventListener('click', deferStickyOnAnchorLink);
         return () => {
-            window.removeEventListener('scroll', scrollHandler);
-            window.removeEventListener('resize', resizeHandler);
+            window.removeEventListener('scroll', setStickyOffset);
+            window.removeEventListener('resize', setElementSizeAndBaseOffset);
             window.removeEventListener('click', deferStickyOnAnchorLink);
         };
     }, [alwaysSticky]);
