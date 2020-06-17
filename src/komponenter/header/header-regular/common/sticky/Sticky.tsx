@@ -1,54 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import debounce from 'lodash.debounce';
+import { stickyScrollHandler } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
+import { setTop } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
+import { getLinkAnchorId } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
 import './Sticky.less';
-
-const setTop = (element: HTMLElement, top: number) =>
-    (element.style.top = `${top}px`);
-
-const stickyScrollHandler = (
-    prevScrollOffset: React.MutableRefObject<number>,
-    baseOffset: React.MutableRefObject<number>,
-    element: HTMLElement
-) => () => {
-    if (!element.offsetHeight) {
-        return;
-    }
-
-    const scrollOffset = window.pageYOffset;
-    const elementOffset = element.offsetTop;
-    const scrollChange = scrollOffset - prevScrollOffset.current;
-
-    const onScrollDown = () => {
-        if (element.style.position !== 'absolute') {
-            element.style.position = 'absolute';
-            const absoluteOffsetFromFixed =
-                scrollOffset + Math.min(elementOffset, 0) - baseOffset.current;
-            setTop(element, absoluteOffsetFromFixed);
-        }
-    };
-
-    const onScrollUp = () => {
-        if (element.style.position === 'fixed') {
-            setTop(element, Math.min(elementOffset - scrollChange, 0));
-        } else {
-            element.style.position = 'fixed';
-            const fixedOffsetFromAbsolute = Math.max(
-                elementOffset - scrollOffset + baseOffset.current,
-                scrollChange - element.scrollHeight
-            );
-            setTop(element, Math.min(fixedOffsetFromAbsolute, 0));
-        }
-    };
-
-    if (scrollOffset <= baseOffset.current) {
-        element.style.position = 'absolute';
-        setTop(element, 0);
-    } else {
-        scrollChange >= 0 ? onScrollDown() : onScrollUp();
-    }
-
-    prevScrollOffset.current = scrollOffset;
-};
 
 type Props = {
     alwaysSticky?: boolean;
@@ -91,16 +46,11 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
         const deferredScrollHandler = debounce(() => {
             window.removeEventListener('scroll', deferredScrollHandler);
             window.addEventListener('scroll', scrollHandler);
-        }, 250);
+        }, 100);
 
         const deferStickyOnAnchorLink = (e: MouseEvent) => {
-            const link = e.target as HTMLAnchorElement;
-            if (link.tagName.toLowerCase() !== 'a') {
-                return;
-            }
-
-            const targetId = link.href.split('#')[1];
-            if (!targetId) {
+            const anchorId = getLinkAnchorId(e.target as HTMLElement);
+            if (!anchorId) {
                 return;
             }
 
