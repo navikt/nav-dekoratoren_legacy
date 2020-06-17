@@ -1,5 +1,5 @@
 import * as React from 'react';
-import HovedmenyDesktop from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import HovedmenyDesktopInnhold from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktopInnhold';
 import { SokDropdown } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -25,12 +25,12 @@ describe('<DesktopMenylinje>', () => {
 
     it('Skal rendre <HovedmenyDesktop> komponent hvis språk er norsk', () => {
         const wrapper = shallowWithProps();
-        expect(wrapper.find(HovedmenyDesktop)).toHaveLength(1);
+        expect(wrapper.find(HovedmenyDesktopInnhold)).toHaveLength(1);
     });
 
     it('Skal rendre <HovedmenyDesktop> komponent hvis språk er engelsk', () => {
         const wrapper = shallowWithProps();
-        expect(wrapper.find(HovedmenyDesktop)).toHaveLength(1);
+        expect(wrapper.find(HovedmenyDesktopInnhold)).toHaveLength(1);
     });
 
     it('Skal rendre <SokDropdown> komponent', () => {

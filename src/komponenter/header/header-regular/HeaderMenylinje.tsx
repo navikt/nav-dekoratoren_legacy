@@ -10,21 +10,24 @@ import { MinsideMeny } from 'komponenter/header/header-regular/desktop/minside-m
 import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
 import { VarslerDropdown } from 'komponenter/header/header-regular/varsler/VarslerDropdown';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { Hovedmeny } from 'komponenter/header/header-regular/Hovedmeny';
+import { HovedmenyDesktop } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import { HovedmenyMobil } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
+import { Status } from 'api/api';
 import 'komponenter/header/header-regular/HeaderMenylinje.less';
 
 export const headerLogoId = 'header-logo-id';
-export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';
-export const mobilHovedmenyKnappId = 'mobil-hovedmeny-knapp-id';
 
 const stateSelector = (state: AppState) => ({
     innlogget: state.innloggingsstatus.data.authenticated,
+    innloggingsstatus: state.innloggingsstatus.status,
     arbeidsflate: state.arbeidsflate.status,
 });
 
 export const HeaderMenylinje = () => {
     const cls = BEMHelper('header-linje');
-    const { innlogget, arbeidsflate } = useSelector(stateSelector);
+    const { innlogget, innloggingsstatus, arbeidsflate } = useSelector(
+        stateSelector
+    );
     const kbNavMainState = useKbNavMain();
 
     const innloggetPrivatperson =
@@ -41,14 +44,15 @@ export const HeaderMenylinje = () => {
                     }}
                     id={headerLogoId}
                 />
-                <Hovedmeny kbNavMainState={kbNavMainState} />
+                <HovedmenyDesktop kbNavMainState={kbNavMainState} />
                 <SokDropdown kbNavMainState={kbNavMainState} />
                 <span className={cls.element('spacer')} />
                 {innloggetPrivatperson && (
                     <VarslerDropdown kbNavMainState={kbNavMainState} />
                 )}
                 {innlogget && <MinsideMeny kbNavMainState={kbNavMainState} />}
-                <LoggInnKnapp />
+                {innloggingsstatus === Status.OK && <LoggInnKnapp />}
+                <HovedmenyMobil />
             </div>
         </nav>
     );

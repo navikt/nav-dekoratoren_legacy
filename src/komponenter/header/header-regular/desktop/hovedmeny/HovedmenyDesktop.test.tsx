@@ -8,7 +8,7 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { Hovedseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/hoved-seksjon/Hovedseksjon';
 import { Toppseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/bunn-seksjon/Bunnseksjon';
-import HovedmenyDesktop from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import HovedmenyDesktopInnhold from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktopInnhold';
 import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 
 const store = createStore();
@@ -17,7 +17,7 @@ const kb = useKbNavMain();
 const shallowWithProps = (lang: Language, arbeidsflate: MenuValue) => {
     return mount(
         <ReduxProvider store={store}>
-            <HovedmenyDesktop
+            <HovedmenyDesktopInnhold
                 arbeidsflate={arbeidsflate}
                 menyPunkter={dataInitState}
                 language={lang}

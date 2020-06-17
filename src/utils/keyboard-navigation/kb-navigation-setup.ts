@@ -13,10 +13,10 @@ import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
 import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
 import { loginKnappId } from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
-import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/HeaderMenylinje';
 import { desktopSokKnappId } from 'komponenter/header/header-regular/common/knapper/sok-knapp/SokKnapp';
 import { varslerKnappId } from 'komponenter/header/header-regular/common/knapper/varsler-knapp/VarslerKnapp';
 import { desktopMinsideKnappId } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp';
+import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
 
 export type KbNavConfig = {
     group: KbNavGroup;
