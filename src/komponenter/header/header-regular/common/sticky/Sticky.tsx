@@ -1,53 +1,9 @@
 import React, { useEffect, useRef } from 'react';
+import debounce from 'lodash.debounce';
+import { stickyScrollHandler } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
+import { setTop } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
+import { getLinkAnchorId } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
 import './Sticky.less';
-
-const setTop = (element: HTMLElement, top: number) =>
-    (element.style.top = `${top}px`);
-
-const stickyScrollHandler = (
-    prevScrollOffset: React.MutableRefObject<number>,
-    baseOffset: React.MutableRefObject<number>,
-    element: HTMLElement
-) => () => {
-    if (!element.offsetHeight) {
-        return;
-    }
-
-    const scrollOffset = window.pageYOffset;
-    const elementOffset = element.offsetTop;
-    const scrollChange = scrollOffset - prevScrollOffset.current;
-
-    const onScrollDown = () => {
-        if (element.style.position !== 'absolute') {
-            element.style.position = 'absolute';
-            const absoluteOffsetFromFixed =
-                scrollOffset + Math.min(elementOffset, 0) - baseOffset.current;
-            setTop(element, absoluteOffsetFromFixed);
-        }
-    };
-
-    const onScrollUp = () => {
-        if (element.style.position === 'fixed') {
-            setTop(element, Math.min(elementOffset - scrollChange, 0));
-        } else {
-            element.style.position = 'fixed';
-            const fixedOffsetFromAbsolute = Math.max(
-                elementOffset - scrollOffset + baseOffset.current,
-                scrollChange - element.scrollHeight
-            );
-            setTop(element, Math.min(fixedOffsetFromAbsolute, 0));
-        }
-    };
-
-    if (scrollOffset <= baseOffset.current) {
-        element.style.position = 'absolute';
-        setTop(element, 0);
-    } else {
-        scrollChange >= 0 ? onScrollDown() : onScrollUp();
-    }
-
-    prevScrollOffset.current = scrollOffset;
-};
 
 type Props = {
     mobilFixed?: boolean;
@@ -75,23 +31,52 @@ export const Sticky = ({ mobilFixed = false, children }: Props) => {
             return;
         }
 
-        const scrollHandler = stickyScrollHandler(
+        if (mobilFixed) {
+            stickyElement.style.position = 'fixed';
+            setTop(stickyElement, 0);
+            return;
+        }
+
+        const setStickyOffset = stickyScrollHandler(
             prevScrollOffset,
             baseOffset,
             stickyElement
         );
-        const resizeHandler = () => {
+
+        const deferredScrollHandler = debounce(() => {
+            window.removeEventListener('scroll', deferredScrollHandler);
+            window.addEventListener('scroll', setStickyOffset);
+        }, 100);
+
+        const deferStickyOnAnchorLink = (e: MouseEvent) => {
+            const anchorId = getLinkAnchorId(e.target as HTMLElement);
+            if (!anchorId) {
+                return;
+            }
+
+            stickyElement.style.position = 'absolute';
+            prevScrollOffset.current = 0;
+            setTop(stickyElement, 0);
+
+            window.removeEventListener('scroll', setStickyOffset);
+            window.addEventListener('scroll', deferredScrollHandler);
+        };
+
+        const setElementSizeAndBaseOffset = () => {
             placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
             baseOffset.current = placeholderElement.offsetTop;
-            scrollHandler();
+            setStickyOffset();
         };
-        resizeHandler();
 
-        window.addEventListener('scroll', scrollHandler);
-        window.addEventListener('resize', resizeHandler);
+        setElementSizeAndBaseOffset();
+
+        window.addEventListener('scroll', setStickyOffset);
+        window.addEventListener('resize', setElementSizeAndBaseOffset);
+        window.addEventListener('click', deferStickyOnAnchorLink);
         return () => {
-            window.removeEventListener('scroll', scrollHandler);
-            window.removeEventListener('resize', resizeHandler);
+            window.removeEventListener('scroll', setStickyOffset);
+            window.removeEventListener('resize', setElementSizeAndBaseOffset);
+            window.removeEventListener('click', deferStickyOnAnchorLink);
         };
     }, [mobilFixed]);
 
