@@ -72,7 +72,7 @@ export const Sticky = ({ mobilFixed = false, children }: Props) => {
             window.removeEventListener('resize', setElementSizeAndBaseOffset);
             window.removeEventListener('click', deferStickyOnAnchorLink);
         };
-    }, [mobilFixed]);
+    }, []);
 
     return (
         <div className={'sticky-placeholder'} ref={placeholderRef}>

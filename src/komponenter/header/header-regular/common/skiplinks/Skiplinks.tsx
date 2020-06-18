@@ -6,11 +6,11 @@ import { useSelector } from 'react-redux';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
-import { mobilHovedmenyKnappId } from 'komponenter/header/header-regular/HeaderMenylinje';
-import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/HeaderMenylinje';
-import { SkipLinkElement } from 'komponenter/header/header-regular/skiplinks/SkiplinkElement';
-import './Skiplinks.less';
+import { SkipLinkElement } from 'komponenter/header/header-regular/common/skiplinks/SkiplinkElement';
 import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/hovedmeny/meny-dropdown/MobilVisningsmeny';
+import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import { mobilmenyKnappId } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
+import './Skiplinks.less';
 
 export type SkipLink = {
     anchorId?: string;
@@ -55,8 +55,7 @@ const Skiplinks = () => {
     const mobilLinks: SkipLink[] = [
         {
             tekstId: 'skiplinks-ga-til-hovedmeny',
-            onClick: () =>
-                document.getElementById(mobilHovedmenyKnappId)?.focus(),
+            onClick: () => document.getElementById(mobilmenyKnappId)?.focus(),
         },
         {
             tekstId: 'skiplinks-ga-til-sok',

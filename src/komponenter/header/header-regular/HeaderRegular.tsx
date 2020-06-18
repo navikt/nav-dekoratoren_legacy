@@ -4,7 +4,7 @@ import { AppState } from 'store/reducers';
 import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
 import { Language } from 'store/reducers/language-duck';
 import { useEffect } from 'react';
-import Skiplinks from 'komponenter/header/header-regular/skiplinks/Skiplinks';
+import Skiplinks from 'komponenter/header/header-regular/common/skiplinks/Skiplinks';
 import { HeaderMenylinje } from 'komponenter/header/header-regular/HeaderMenylinje';
 import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
 import { Sticky } from './common/sticky/Sticky';

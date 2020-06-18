@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { arbeidsflateLenker } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { GACategory } from 'utils/google-analytics';
 import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { useCookies } from 'react-cookie';

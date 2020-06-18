@@ -13,7 +13,7 @@ import { Language } from 'store/reducers/language-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import './MobilarbeidsflateValg.less';
-import { bunnLenker } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
+import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
 import Tekst from 'tekster/finn-tekst';
 
 interface Props {

@@ -10,7 +10,7 @@ import { gaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
-import { varslerDropdownClassname } from 'komponenter/header/header-regular/varsler/VarslerDropdown';
+import { varslerDropdownClassname } from 'komponenter/header/header-regular/common/varsler/VarslerDropdown';
 import './VarslerKnapp.less';
 
 export const varslerKnappId = 'varsler-knapp-id';

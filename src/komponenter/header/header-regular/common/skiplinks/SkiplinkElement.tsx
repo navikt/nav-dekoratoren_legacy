@@ -1,6 +1,6 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
-import { SkipLink } from './Skiplinks';
+import { SkipLink } from 'komponenter/header/header-regular/common/skiplinks/Skiplinks';
 
 export const SkipLinkElement = ({
     link,

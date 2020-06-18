@@ -1,9 +1,9 @@
 import { MenuValue } from 'utils/meny-storage-utils';
-import { arbeidsgiverContextLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
-import { personContextLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
-import { samarbeidspartnerContextLenke } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { arbeidsgiverContextLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { personContextLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { samarbeidspartnerContextLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { EnvironmentState } from 'store/reducers/environment-duck';
-import { valgtbedrift } from '../knapper/minside-knapper/MinsideArbgiverKnapp';
+import { valgtbedrift } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideArbgiverKnapp';
 
 type LenkeData = {
     url: string;

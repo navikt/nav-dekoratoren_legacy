@@ -1,7 +1,7 @@
 import React from 'react';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import Lenke from 'nav-frontend-lenker';
-import { arbeidsflateLenker } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 
