@@ -15,7 +15,7 @@ import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje'
 import { loginKnappId } from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
 import { desktopSokKnappId } from 'komponenter/header/header-regular/common/knapper/sok-knapp/SokKnapp';
 import { varslerKnappId } from 'komponenter/header/header-regular/common/knapper/varsler-knapp/VarslerKnapp';
-import { desktopMinsideKnappId } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp';
+import { minsideKnappId } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp';
 import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
 
 export type KbNavConfig = {
@@ -80,7 +80,7 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
         group: KbNavGroup.MinsideMeny,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 3],
-        parentNodeId: desktopMinsideKnappId,
+        parentNodeId: minsideKnappId,
         parentNodeEdge: NodeEdge.Bottom,
     },
 };
@@ -131,7 +131,7 @@ export const createHeaderMainGraph = (
     if (minsideMenyEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = desktopMinsideKnappId;
+        ] = minsideKnappId;
     }
 
     idMap[

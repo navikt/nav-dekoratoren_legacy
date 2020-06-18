@@ -5,7 +5,7 @@ import MinsideArbgiverKnapp from './MinsideArbgiverKnapp';
 import { MinsidePersonKnapp } from './MinsidePersonKnapp';
 import 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp.less';
 
-export const desktopMinsideKnappId = 'desktop-minside-knapp-id';
+export const minsideKnappId = 'desktop-minside-knapp-id';
 
 type Props = {
     arbeidsflate: MenuValue;
@@ -13,14 +13,19 @@ type Props = {
 
 export const MinsideKnapp = ({ arbeidsflate }: Props) => {
     if (arbeidsflate === MenuValue.PRIVATPERSON) {
-        return <MinsidePersonKnapp />;
+        return (
+            <MinsidePersonKnapp
+                classname={minsideDropdownClassname}
+                id={minsideKnappId}
+            />
+        );
     }
 
     if (arbeidsflate === MenuValue.ARBEIDSGIVER) {
         return (
             <MinsideArbgiverKnapp
                 classname={minsideDropdownClassname}
-                id={desktopMinsideKnappId}
+                id={minsideKnappId}
             />
         );
     }

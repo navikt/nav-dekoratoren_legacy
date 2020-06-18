@@ -8,7 +8,7 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import KnappBase from 'nav-frontend-knapper';
 import './LoggInnKnapp.less';
 
-export const loginKnappId = 'desktop-login-knapp';
+export const loginKnappId = 'login-knapp-id';
 
 const stateSelector = (state: AppState) => ({
     innlogget: state.innloggingsstatus.data.authenticated,

@@ -1,5 +1,4 @@
 import BEMHelper from 'utils/bem';
-import { minsideDropdownClassname } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
 import { gaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';
 import { toggleMinsideMeny } from 'store/reducers/dropdown-toggle-duck';
@@ -7,7 +6,6 @@ import MenylinjeKnapp from 'komponenter/header/header-regular/common/knapper/Men
 import MinsideIkon from 'komponenter/header/header-regular/common/knapper/ikoner/minside-ikon/MinsideIkon';
 import Tekst from 'tekster/finn-tekst';
 import React from 'react';
-import { desktopMinsideKnappId } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp';
 import { AppState } from 'store/reducers';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -18,11 +16,16 @@ const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.minside,
 });
 
-export const MinsidePersonKnapp = () => {
+type Props = {
+    classname: string;
+    id: string;
+};
+
+export const MinsidePersonKnapp = ({ classname, id }: Props) => {
     const dispatch = useDispatch();
     const { isOpen, brukernavn } = useSelector(stateSelector);
 
-    const cls = BEMHelper(minsideDropdownClassname);
+    const cls = BEMHelper(classname);
 
     const toggleMinSideDropdown = () => {
         gaEvent({
@@ -37,9 +40,9 @@ export const MinsidePersonKnapp = () => {
         <MenylinjeKnapp
             onClick={toggleMinSideDropdown}
             isOpen={isOpen}
-            ariaControls={minsideDropdownClassname}
-            classname={minsideDropdownClassname}
-            id={desktopMinsideKnappId}
+            ariaControls={classname}
+            classname={classname}
+            id={id}
         >
             <MinsideIkon isOpen={isOpen} hasMenu={true} />
             <div className={cls.element('knapp-tekst')}>
