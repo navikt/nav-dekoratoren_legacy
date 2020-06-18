@@ -9,10 +9,17 @@ import { Hovedseksjon } from 'komponenter/header/header-regular/desktop/hovedmen
 import { Toppseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/bunn-seksjon/Bunnseksjon';
 import HovedmenyDesktopInnhold from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktopInnhold';
-import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
+import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
 
 const store = createStore();
-const kb = useKbNavMain();
+
+const kbNavDummy = {
+    mainNodeMap: {},
+    subNodeMap: {},
+    currentNode: kbMasterNode,
+    setCurrentNode: () => null,
+    setSubGraph: () => null,
+};
 
 const shallowWithProps = (lang: Language, arbeidsflate: MenuValue) => {
     return mount(
@@ -22,7 +29,7 @@ const shallowWithProps = (lang: Language, arbeidsflate: MenuValue) => {
                 menyPunkter={dataInitState}
                 language={lang}
                 isOpen={true}
-                kbNavMainState={kb}
+                kbNavMainState={kbNavDummy}
             />
         </ReduxProvider>
     );

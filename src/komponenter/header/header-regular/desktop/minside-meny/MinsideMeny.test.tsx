@@ -13,6 +13,9 @@ import mockMenu from 'server/mock/menu.json';
 import { languageDuck } from 'store/reducers/language-duck';
 import { Language } from 'store/reducers/language-duck';
 import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
+import { MinsidePersonKnapp } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsidePersonKnapp';
+import MinsideArbgiverKnapp from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideArbgiverKnapp';
+import { MinsideKnapp } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp';
 
 const innloggetAction = {
     type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
@@ -21,14 +24,6 @@ const innloggetAction = {
         authenticated: true,
         name: 'Ola Nordmann',
         securityLevel: '4',
-    },
-};
-
-const uInnloggetAction = {
-    type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
-    status: Status.OK,
-    data: {
-        authenticated: false,
     },
 };
 
@@ -62,32 +57,23 @@ describe('<MinsideMeny>', () => {
     const store = createStore(reducers);
     store.dispatch(languageAction);
     store.dispatch(menuAction);
+    store.dispatch(innloggetAction);
 
-    it('Skal ikke vise minside knapp når bruker er PRIVATPERSON og uinnlogget', () => {
+    it('Skal vise <MinsidePersonKnapp/> knapp når bruker er PRIVATPERSON', () => {
         store.dispatch(settPersonflate());
-        store.dispatch(uInnloggetAction);
         const wrapper = mountWithRedux(store);
-        expect(wrapper.find('.desktop-minside-meny__knapp')).toHaveLength(0);
+        expect(wrapper.find(MinsidePersonKnapp)).toHaveLength(1);
     });
 
-    it('Skal vise minside knapp når bruker er PRIVATPERSON og innlogget', () => {
-        store.dispatch(settPersonflate());
-        store.dispatch(innloggetAction);
-        const wrapper = mountWithRedux(store);
-        expect(wrapper.find('.desktop-minside-meny__knapp')).toHaveLength(1);
-    });
-
-    it('Skal ikke vise minside knapp når bruker er SAMARBEIDSPARTNER og innlogget', () => {
-        store.dispatch(settSamarbeidspartnerflate());
-        store.dispatch(innloggetAction);
-        const wrapper = mountWithRedux(store);
-        expect(wrapper.find('.desktop-minside-meny__knapp')).toHaveLength(0);
-    });
-
-    it('Skal vise riktig tabindex', () => {
+    it('Skal vise <MinsideArbgiverKnapp/> knapp når bruker er PRIVATPERSON', () => {
         store.dispatch(settArbeidsgiverflate());
-        store.dispatch(innloggetAction);
         const wrapper = mountWithRedux(store);
-        expect(wrapper.find('a[tabindex="0"]')).toBeTruthy();
+        expect(wrapper.find(MinsideArbgiverKnapp)).toHaveLength(1);
+    });
+
+    it('<MinsideKnapp/> komponent skal være tom når bruker er SAMARBEIDSPARTNER', () => {
+        store.dispatch(settSamarbeidspartnerflate());
+        const wrapper = mountWithRedux(store);
+        expect(wrapper.find(MinsideKnapp).isEmptyRender()).toBe(true);
     });
 });
