@@ -6,16 +6,10 @@ import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { GACategory } from 'utils/google-analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
 import 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp.less';
 
 import briefcaseIkon from 'ikoner/meny/Briefcase_icon_nav.svg';
-
-export const valgtbedrift = () => {
-    const orgnummerFraUrl = new URLSearchParams(window.location.search).get(
-        'bedrift'
-    );
-    return orgnummerFraUrl ? `?bedrift=${orgnummerFraUrl}` : '';
-};
 
 type Props = {
     classname: string;

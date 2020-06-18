@@ -3,13 +3,19 @@ import { arbeidsgiverContextLenke } from 'komponenter/common/arbeidsflate-lenker
 import { personContextLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { samarbeidspartnerContextLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { EnvironmentState } from 'store/reducers/environment-duck';
-import { valgtbedrift } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideArbgiverKnapp';
 
 type LenkeData = {
     url: string;
     lenkeTekstId: string;
     stikkordId: string;
     key?: MenuValue;
+};
+
+export const valgtbedrift = () => {
+    const orgnummerFraUrl = new URLSearchParams(window.location.search).get(
+        'bedrift'
+    );
+    return orgnummerFraUrl ? `?bedrift=${orgnummerFraUrl}` : '';
 };
 
 const privatpersonLenker = (env: EnvironmentState): LenkeData[] => [
