@@ -12,7 +12,9 @@ import BEMHelper from 'utils/bem';
 import DelSkjermModal from '../common/del-skjerm-modal/DelSkjermModal';
 import LenkeMedIkon from '../common/lenke-med-ikon/LenkeMedIkon';
 import FooterLenker from 'komponenter/footer/common/Lenker';
+
 import './FooterSimple.less';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 const cls = BEMHelper('simple-footer');
 

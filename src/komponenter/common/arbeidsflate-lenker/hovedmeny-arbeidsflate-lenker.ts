@@ -1,7 +1,7 @@
 import { MenuValue } from 'utils/meny-storage-utils';
-import { arbeidsgiverContextLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
-import { personContextLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
-import { samarbeidspartnerContextLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { arbeidsgiverContextLenke } from './arbeidsflate-lenker';
+import { personContextLenke } from './arbeidsflate-lenker';
+import { samarbeidspartnerContextLenke } from './arbeidsflate-lenker';
 import { EnvironmentState } from 'store/reducers/environment-duck';
 
 type LenkeData = {

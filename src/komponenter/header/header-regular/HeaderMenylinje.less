@@ -6,11 +6,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-bottom: 2px solid @header-separator-farge;
+    border-bottom: @header-separator-height solid @header-separator-farge;
     background-color: white;
     position: relative;
 
     &__elementer {
+        position: relative;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -24,15 +25,11 @@
         flex-shrink: 0;
     }
 
-    .ekspanderbar__container {
-        order: 10;
+    @media (max-width: @mobilMaxWidth) {
+        .mobil-header();
     }
 
     @media (min-width: @desktopMinWidth) {
         .desktop-header();
-    }
-
-    @media (max-width: @mobilMaxWidth) {
-        .mobil-header();
     }
 }

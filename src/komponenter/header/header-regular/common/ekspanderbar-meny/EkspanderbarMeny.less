@@ -6,7 +6,6 @@
     }
 
     &__innhold-wrapper {
-        position: absolute;
         z-index: 1;
         width: 100%;
         visibility: hidden;
@@ -28,9 +27,10 @@
 
     @media (min-width: @desktopMinWidth) {
         &__container {
-            position: absolute;
             max-width: @desktopMaxWidth;
-            top: calc(@header-height-desktop - 2px);
+            position: absolute;
+            top: calc(@header-height-desktop - @header-separator-height);
+            left: 0;
         }
 
         &__innhold-wrapper {
