@@ -12,12 +12,11 @@ import { Undertekst } from 'nav-frontend-typografi';
 import './BrowserSupportMsg.less';
 
 import ikon from 'nav-frontend-ikoner-assets/assets/advarsel-sirkel-fyll.svg';
+import { BrowserInfo } from 'detect-browser';
 
 const storageKey = 'browser-warning-closed';
 
-const isBrowserSupported = () => {
-    const browser = detect();
-    console.log(browser);
+const isBrowserSupported = (browser: BrowserInfo) => {
     if (!browser?.name) {
         return true;
     }
@@ -48,9 +47,7 @@ const isBrowserSupported = () => {
     }
 };
 
-const getBrowserSpecificMsg = () => {
-    const browser = detect();
-
+const getBrowserSpecificMsg = (browser: BrowserInfo) => {
     if (!browser?.name) {
         return null;
     }
@@ -72,22 +69,23 @@ type Props = {
 export const BrowserSupportMsg = ({ baseUrl }: Props) => {
     const [meldingLukket, setMeldingLukket] = useState(true);
 
+    const browser = detect() as BrowserInfo;
+
     useEffect(() => {
         setMeldingLukket(getStorageItem(storageKey) === 'true');
     }, []);
 
-    if (isBrowserSupported() || meldingLukket) {
+    if (isBrowserSupported(browser) || meldingLukket) {
         return null;
     }
 
     const cls = BEMHelper('browser-utdatert');
+    const browserSpecificMsg = getBrowserSpecificMsg(browser);
 
-    const lukk = () => {
+    const closeWarning = () => {
         setMeldingLukket(true);
         setStorageItem(storageKey, 'true');
     };
-
-    const browserSpecificMsg = getBrowserSpecificMsg();
 
     return (
         <div className={cls.element('wrapper')}>
@@ -111,7 +109,7 @@ export const BrowserSupportMsg = ({ baseUrl }: Props) => {
                 </div>
                 <button
                     className={cls.element('lukk-knapp')}
-                    onClick={lukk}
+                    onClick={closeWarning}
                     aria-label={'Lukk advarsel for nettleser'}
                 >
                     <div className={cls.element('lukk-ikon-1')} />
