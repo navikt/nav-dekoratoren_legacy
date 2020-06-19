@@ -1,6 +1,5 @@
 import amplitude from 'amplitude-js';
 import { contentEngaged } from './content-engaged';
-import { verifyWindowObj } from 'utils/Environment';
 
 export const initAmplitude = () => {
     amplitude.getInstance().init('default', '', {

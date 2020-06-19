@@ -3,7 +3,7 @@ import TagManager from 'react-gtm-module';
 import { MenuValue } from './meny-storage-utils';
 import { verifyWindowObj } from 'utils/Environment';
 
-// hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
+// Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
