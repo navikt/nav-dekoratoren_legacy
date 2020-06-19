@@ -121,6 +121,7 @@ const browserConfig = {
                                                 /\b(\w*(M|m)odal\w*)\b/,
                                                 'body',
                                                 'body.no-scroll',
+                                                'body.dark-mode',
                                                 '.siteheader',
                                                 '.sitefooter',
                                                 /\b(\w*lukk-container\w*)\b/,

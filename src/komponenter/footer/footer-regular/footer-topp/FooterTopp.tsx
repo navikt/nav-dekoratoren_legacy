@@ -13,6 +13,7 @@ import { LinksLoader } from '../../../common/content-loaders/LinkLoader';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import { Language } from 'store/reducers/language-duck';
 import './FooterTopp.less';
+import { DarkModeKnapp } from 'komponenter/common/dark-mode/DarkModeKnapp';
 
 const FooterTopp = () => {
     const cls = BEMHelper('menylinje-topp');
@@ -64,6 +65,7 @@ const FooterTopp = () => {
                             venstrestiltIkon={true}
                         />
                     </div>
+                    <DarkModeKnapp />
                 </div>
                 {columnsNode
                     ? columnsNode.children.map((columnNode, i) => (
