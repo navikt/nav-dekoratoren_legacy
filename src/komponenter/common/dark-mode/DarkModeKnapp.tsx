@@ -8,6 +8,21 @@ import { desktopHeaderLogoId } from 'komponenter/header/header-regular/desktop/D
 
 const storageKey = 'darkmode-toggle';
 
+const setDarkModeStyle = (enabled: boolean) => {
+    const headerLogoDesktop = document.getElementById(desktopHeaderLogoId);
+    if (enabled) {
+        document.body.classList.add('dark-mode');
+        if (headerLogoDesktop) {
+            headerLogoDesktop.style.filter = 'invert(100%)';
+        }
+    } else {
+        document.body.classList.remove('dark-mode');
+        if (headerLogoDesktop) {
+            headerLogoDesktop.style.removeProperty('filter');
+        }
+    }
+};
+
 export const DarkModeKnapp = () => {
     const [darkMode, setDarkMode] = useState(false);
 
@@ -15,29 +30,17 @@ export const DarkModeKnapp = () => {
         setDarkMode(getStorageItem(storageKey) === 'true');
     }, []);
 
-    const toggleDarkMode = () => {
-        setDarkMode(!darkMode);
+    useEffect(() => {
+        setDarkModeStyle(darkMode);
         setStorageItem(storageKey, darkMode.toString());
-        const headerLogoDesktop = document.getElementById(desktopHeaderLogoId);
-        if (darkMode) {
-            document.body.classList.add('dark-mode');
-            if (headerLogoDesktop) {
-                headerLogoDesktop.style.filter = 'invert(100%)';
-            }
-        } else {
-            document.body.classList.remove('dark-mode');
-            if (headerLogoDesktop) {
-                headerLogoDesktop.style.removeProperty('filter');
-            }
-        }
-    };
+    }, [darkMode]);
 
     return (
         <LenkeMedGA
             href={''}
             onClick={(e) => {
                 e.preventDefault();
-                toggleDarkMode();
+                setDarkMode(!darkMode);
             }}
         >
             {'Invertér farger'}
