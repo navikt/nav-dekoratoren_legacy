@@ -102,30 +102,28 @@ export const BrowserSupportMsg = ({ baseUrl }: Props) => {
     };
 
     return (
-        <div className={cls.element('position-wrapper')}>
-            <div className={cls.element('width-wrapper')}>
-                <div className={cls.element('innhold')}>
-                    <div className={cls.element('varsel-ikon')}>
-                        <img alt={''} src={`${baseUrl}${ikon}`} />
-                    </div>
-                    <div className={cls.element('tekst')}>
-                        <Undertittel>
-                            <Tekst id={'browser-utdatert-msg'} />{' '}
-                            <Lenke href={'#'}>
-                                <Tekst id={'browser-utdatert-lenke'} />
-                            </Lenke>
-                        </Undertittel>
-                        <Undertekst>{getBrowserSpecificString()}</Undertekst>
-                    </div>
-                    <button
-                        className={cls.element('lukk-knapp')}
-                        onClick={lukk}
-                        aria-label={'Lukk advarsel for nettleser'}
-                    >
-                        <div className={cls.element('lukk-ikon-1')} />
-                        <div className={cls.element('lukk-ikon-2')} />
-                    </button>
+        <div className={cls.element('wrapper')}>
+            <div className={cls.element('innhold')}>
+                <div className={cls.element('varsel-ikon')}>
+                    <img alt={''} src={`${baseUrl}${ikon}`} />
                 </div>
+                <div className={cls.element('tekst')}>
+                    <Undertittel>
+                        <Tekst id={'browser-utdatert-msg'} />{' '}
+                        <Lenke href={'#'}>
+                            <Tekst id={'browser-utdatert-lenke'} />
+                        </Lenke>
+                    </Undertittel>
+                    <Undertekst>{getBrowserSpecificString()}</Undertekst>
+                </div>
+                <button
+                    className={cls.element('lukk-knapp')}
+                    onClick={lukk}
+                    aria-label={'Lukk advarsel for nettleser'}
+                >
+                    <div className={cls.element('lukk-ikon-1')} />
+                    <div className={cls.element('lukk-ikon-2')} />
+                </button>
             </div>
         </div>
     );
