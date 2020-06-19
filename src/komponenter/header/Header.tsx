@@ -13,6 +13,8 @@ import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
+import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/browser-support-msg/BrowserSupportMsg';
+import { verifyWindowObj } from 'utils/Environment';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -85,6 +87,10 @@ export const Header = () => {
                 ) : (
                     <RegularHeader />
                 )}
+                <BrowserSupportMsg
+                    // TODO: fix før prod!
+                    baseUrl={verifyWindowObj() ? document.location.origin : ''}
+                />
             </header>
             <MenyBakgrunn />
         </Fragment>

@@ -33,6 +33,7 @@
         "compression": "^1.7.4",
         "console-stamp": "^0.2.9",
         "core-js": "3.6.5",
+        "detect-browser": "^5.1.1",
         "dotenv": "^8.2.0",
         "downshift": "^5.4.2",
         "express": "^4.17.1",
