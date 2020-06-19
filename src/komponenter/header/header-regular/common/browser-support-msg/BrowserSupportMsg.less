@@ -51,9 +51,10 @@
         box-shadow: none;
         border: none;
         padding: 0 @lukkIkonSize / 2;
-        margin: 4px 0;
+        margin: 8px 0;
         width: @lukkIkonSize * 2;
-        height: calc(100% - 8px);
+        height: calc(100% - 16px);
+        color: @navBla;
 
         .header-knapp-focus-mixin();
 
@@ -75,7 +76,6 @@
         background-color: @navBla;
         transform: rotateZ(@theta);
     }
-
     &__lukk-ikon-1 {
         .line-rotated(45deg);
     }

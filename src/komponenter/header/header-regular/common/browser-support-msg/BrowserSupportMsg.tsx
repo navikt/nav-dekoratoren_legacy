@@ -8,10 +8,10 @@ import BEMHelper from 'utils/bem';
 import { setStorageItem } from 'utils/sessionStorage';
 import { getStorageItem } from 'utils/sessionStorage';
 import { detect } from 'detect-browser';
+import { Undertekst } from 'nav-frontend-typografi';
 import './BrowserSupportMsg.less';
 
 import ikon from 'nav-frontend-ikoner-assets/assets/advarsel-sirkel-fyll.svg';
-import { Undertekst } from 'nav-frontend-typografi';
 
 const storageKey = 'browser-warning-closed';
 
