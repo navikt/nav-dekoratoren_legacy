@@ -41,41 +41,27 @@ const isBrowserSupported = () => {
     switch (browser.name) {
         case 'chrome':
             return false;
-        case 'firefox':
-            return versionCheck(68);
-        case 'edge':
-            return versionCheck(18);
         case 'ie':
             return false;
-        case 'safari':
-            return true;
-        case 'opera':
-            return true;
-        case 'samsung':
-            return true;
         default:
             return true;
     }
 };
 
-const getBrowserSpecificString = () => {
+const getBrowserSpecificMsg = () => {
     const browser = detect();
 
     if (!browser?.name) {
-        return '';
+        return null;
     }
 
     switch (browser.name) {
         case 'chrome':
             return `Google Chrome v.${browser.version} (kun for test, denne er ok!)`;
-        case 'firefox':
-            return `Mozilla Firefox v.${browser.version}`;
-        case 'edge':
-            return `Microsoft Edge v.${browser.version}`;
         case 'ie':
             return `Microsoft Internet Explorer v.${browser.version}`;
         default:
-            return '';
+            return null;
     }
 };
 
@@ -101,6 +87,8 @@ export const BrowserSupportMsg = ({ baseUrl }: Props) => {
         setStorageItem(storageKey, 'true');
     };
 
+    const browserSpecificMsg = getBrowserSpecificMsg();
+
     return (
         <div className={cls.element('wrapper')}>
             <div className={cls.element('innhold')}>
@@ -114,7 +102,12 @@ export const BrowserSupportMsg = ({ baseUrl }: Props) => {
                             <Tekst id={'browser-utdatert-lenke'} />
                         </Lenke>
                     </Undertittel>
-                    <Undertekst>{getBrowserSpecificString()}</Undertekst>
+                    {browserSpecificMsg && (
+                        <Undertekst>
+                            <Tekst id={'browser-utdatert-din-nettleser'} />
+                            {browserSpecificMsg}
+                        </Undertekst>
+                    )}
                 </div>
                 <button
                     className={cls.element('lukk-knapp')}

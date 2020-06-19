@@ -12,7 +12,6 @@ type Props = {
 
 export const Sticky = ({ alwaysSticky = false, children }: Props) => {
     const prevScrollOffset = useRef(0);
-    const baseOffset = useRef(0);
 
     const placeholderRef = useRef<HTMLDivElement>(null);
     const stickyRef = useRef<HTMLDivElement>(null);
@@ -39,8 +38,8 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
 
         const setStickyOffset = stickyScrollHandler(
             prevScrollOffset,
-            baseOffset,
-            stickyElement
+            stickyElement,
+            placeholderElement
         );
 
         const deferredScrollHandler = debounce(() => {
@@ -64,7 +63,6 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
 
         const setElementSizeAndBaseOffset = () => {
             placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
-            baseOffset.current = placeholderElement.offsetTop;
             setStickyOffset();
         };
 

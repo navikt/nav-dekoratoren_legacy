@@ -210,12 +210,15 @@ export const ledetekster: { [key: string]: string } = {
     'spinner-sok-en': 'Loading search preview...',
     'spinner-sok-se': 'Laster forhåndsvisning...',
     'browser-utdatert-msg':
-        'Du bruker en nettleser som ikke er støttet på dette nettstedet. ',
+        'Du bruker en nettleser som ikke er støttet av dette nettstedet. ',
     'browser-utdatert-msg-en':
         'You are using a web browser which is not supported by this website. ',
     'browser-utdatert-msg-se':
-        'Du bruker en nettleser som ikke er støttet på dette nettstedet. ',
+        'Du bruker en nettleser som ikke er støttet av dette nettstedet. ',
     'browser-utdatert-lenke': 'Klikk her for mer informasjon.',
     'browser-utdatert-lenke-en': 'Click here for more information.',
     'browser-utdatert-lenke-se': 'Klikk her for mer informasjon.',
+    'browser-utdatert-din-nettleser': 'Din nettleser: ',
+    'browser-utdatert-din-nettleser-en': 'Your web browser: ',
+    'browser-utdatert-din-nettleser-se': 'Din nettleser: ',
 };

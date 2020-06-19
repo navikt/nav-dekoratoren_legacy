@@ -81,16 +81,16 @@ export const Header = () => {
         <Fragment>
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
+            <BrowserSupportMsg
+                // TODO: fix før prod!
+                baseUrl={verifyWindowObj() ? document.location.origin : ''}
+            />
             <header className="siteheader">
                 {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
                     <SimpleHeader />
                 ) : (
                     <RegularHeader />
                 )}
-                <BrowserSupportMsg
-                    // TODO: fix før prod!
-                    baseUrl={verifyWindowObj() ? document.location.origin : ''}
-                />
             </header>
             <MenyBakgrunn />
         </Fragment>
