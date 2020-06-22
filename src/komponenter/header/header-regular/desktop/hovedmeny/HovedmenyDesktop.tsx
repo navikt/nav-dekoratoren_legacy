@@ -40,7 +40,7 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
     }
 
     return (
-        <>
+        <div className={'media-tablet-desktop'}>
             <HovedmenyKnapp id={desktopHovedmenyKnappId} />
             <EkspanderbarMeny
                 isOpen={isOpen}
@@ -62,6 +62,6 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
                     />
                 )}
             </EkspanderbarMeny>
-        </>
+        </div>
     );
 };

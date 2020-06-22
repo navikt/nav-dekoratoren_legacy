@@ -2,6 +2,7 @@
 
 .ekspanderbar {
     &__container {
+        position: absolute;
         width: 100%;
     }
 
@@ -28,7 +29,6 @@
     @media (min-width: @desktopMinWidth) {
         &__container {
             max-width: @desktopMaxWidth;
-            position: absolute;
             top: calc(@header-height-desktop - @header-separator-height);
             left: 0;
         }
@@ -69,14 +69,9 @@
     }
 
     @media (max-width: @mobilMaxWidth) {
-        &__container {
+        &__innhold-wrapper {
             position: fixed;
             top: @header-height-mobil;
-        }
-
-        &__innhold-wrapper {
-            position: absolute;
-            top: 0;
             left: -100%;
             height: calc(100vh - @header-height-mobil);
             transition-property: left, visibility;

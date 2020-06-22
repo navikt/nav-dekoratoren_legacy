@@ -45,7 +45,7 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
     }
 
     return (
-        <>
+        <div className={'media-tablet-desktop'}>
             <MinsideKnapp arbeidsflate={arbeidsflate} />
             <EkspanderbarMeny
                 isOpen={isOpen}
@@ -65,7 +65,7 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
                     <Spinner tekstId={'meny-loading'} />
                 )}
             </EkspanderbarMeny>
-        </>
+        </div>
     );
 };
 

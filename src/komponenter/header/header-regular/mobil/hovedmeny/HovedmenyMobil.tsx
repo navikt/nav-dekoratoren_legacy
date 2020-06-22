@@ -61,7 +61,7 @@ export const HovedmenyMobil = () => {
     const isOpen = hovedIsOpen || underIsOpen || varselIsOpen;
 
     return (
-        <>
+        <div className={'media-sm-mobil'}>
             <HovedmenyKnapp id={mobilmenyKnappId} />
             <EkspanderbarMeny
                 isOpen={hovedIsOpen}
@@ -90,6 +90,6 @@ export const HovedmenyMobil = () => {
                     />
                 )}
             </EkspanderbarMeny>
-        </>
+        </div>
     );
 };

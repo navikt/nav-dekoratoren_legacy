@@ -44,7 +44,7 @@ export const SokDropdown = ({ kbNavMainState }: Props) => {
     }, [isOpen]);
 
     return (
-        <>
+        <div className={'media-tablet-desktop'}>
             <SokKnapp />
             <EkspanderbarMeny
                 classname={sokDropdownClassname}
@@ -57,6 +57,6 @@ export const SokDropdown = ({ kbNavMainState }: Props) => {
                     dropdownTransitionMs={dropdownTransitionMs}
                 />
             </EkspanderbarMeny>
-        </>
+        </div>
     );
 };
