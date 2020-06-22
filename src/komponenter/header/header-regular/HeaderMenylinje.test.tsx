@@ -14,26 +14,10 @@ import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { VarslerKnapp } from 'komponenter/header/header-regular/common/knapper/varsler-knapp/VarslerKnapp';
 import MinsideMeny from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
+import { innloggetAction } from 'utils/jest/testObjects';
+import { uInnloggetAction } from 'utils/jest/testObjects';
 
 const store = createStore(reducers);
-
-const innloggetAction = {
-    type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
-    status: Status.OK,
-    data: {
-        authenticated: true,
-        name: 'Ola Nordmann',
-        securityLevel: '4',
-    },
-};
-
-const uInnloggetAction = {
-    type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
-    status: Status.OK,
-    data: {
-        authenticated: false,
-    },
-};
 
 const shallowWithProps = () =>
     mount(

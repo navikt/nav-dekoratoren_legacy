@@ -9,17 +9,9 @@ import { Hovedseksjon } from 'komponenter/header/header-regular/desktop/hovedmen
 import { Toppseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/topp-seksjon/Toppseksjon';
 import { Bunnseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/bunn-seksjon/Bunnseksjon';
 import HovedmenyDesktopInnhold from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktopInnhold';
-import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
+import { kbNavDummy } from 'utils/jest/testObjects';
 
 const store = createStore();
-
-const kbNavDummy = {
-    mainNodeMap: {},
-    subNodeMap: {},
-    currentNode: kbMasterNode,
-    setCurrentNode: () => null,
-    setSubGraph: () => null,
-};
 
 const shallowWithProps = (lang: Language, arbeidsflate: MenuValue) => {
     return mount(

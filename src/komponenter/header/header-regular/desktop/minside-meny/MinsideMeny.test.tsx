@@ -12,20 +12,11 @@ import { Status } from 'api/api';
 import mockMenu from 'server/mock/menu.json';
 import { languageDuck } from 'store/reducers/language-duck';
 import { Language } from 'store/reducers/language-duck';
-import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
 import { MinsidePersonKnapp } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsidePersonKnapp';
 import MinsideArbgiverKnapp from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideArbgiverKnapp';
 import { MinsideKnapp } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp';
-
-const innloggetAction = {
-    type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
-    status: Status.OK,
-    data: {
-        authenticated: true,
-        name: 'Ola Nordmann',
-        securityLevel: '4',
-    },
-};
+import { innloggetAction } from 'utils/jest/testObjects';
+import { kbNavDummy } from 'utils/jest/testObjects';
 
 const menuAction = {
     type: ActionType.HENT_MENY_OK,
@@ -36,14 +27,6 @@ const menuAction = {
 const languageAction = languageDuck.actionCreator({
     language: Language.NORSK,
 });
-
-const kbNavDummy = {
-    mainNodeMap: {},
-    subNodeMap: {},
-    currentNode: kbMasterNode,
-    setCurrentNode: () => null,
-    setSubGraph: () => null,
-};
 
 const mountWithRedux = (store: Store) => {
     return mount(
