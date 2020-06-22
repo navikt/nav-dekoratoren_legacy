@@ -100,7 +100,7 @@
         "@babel/cli": "^7.10.1",
         "@babel/core": "^7.10.2",
         "@babel/plugin-proposal-class-properties": "^7.10.1",
-        "@babel/plugin-proposal-object-rest-spread": "^7.10.1",
+        "@babel/plugin-proposal-object-rest-spread": "^7.10.3",
         "@babel/plugin-transform-modules-commonjs": "^7.10.1",
         "@babel/plugin-transform-typescript": "^7.10.1",
         "@babel/polyfill": "^7.10.1",
