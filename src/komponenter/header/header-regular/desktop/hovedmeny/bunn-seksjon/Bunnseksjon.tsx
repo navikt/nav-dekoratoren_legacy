@@ -1,6 +1,6 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import BunnseksjonLenke from 'komponenter/header/header-regular/desktop/hovedmeny/bunn-seksjon/BunnseksjonLenke';
+import BunnseksjonLenke from './BunnseksjonLenke';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Language } from 'store/reducers/language-duck';
@@ -13,7 +13,7 @@ import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
-import 'komponenter/header/header-regular/desktop/hovedmeny/bunn-seksjon/Bunnseksjon.less';
+import './Bunnseksjon.less';
 
 interface Props {
     classname: string;

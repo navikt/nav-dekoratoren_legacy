@@ -48,7 +48,7 @@ describe('<MinsideMeny>', () => {
         expect(wrapper.find(MinsidePersonKnapp)).toHaveLength(1);
     });
 
-    it('Skal vise <MinsideArbgiverKnapp/> knapp når bruker er PRIVATPERSON', () => {
+    it('Skal vise <MinsideArbgiverKnapp/> knapp når bruker er ARBEIDSGIVER', () => {
         store.dispatch(settArbeidsgiverflate());
         const wrapper = mountWithRedux(store);
         expect(wrapper.find(MinsideArbgiverKnapp)).toHaveLength(1);

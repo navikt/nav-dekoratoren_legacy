@@ -15,7 +15,6 @@ const nodeGroup = KbNavGroup.MinsideMeny;
 
 type Props = {
     classname: string;
-    isOpen: boolean;
     menyLenker: MenyNode | undefined;
     dittNavUrl: string;
     brukernavn: string;
@@ -23,14 +22,7 @@ type Props = {
 };
 
 export const MinsideMenyInnhold = (props: Props) => {
-    const {
-        classname,
-        isOpen,
-        menyLenker,
-        dittNavUrl,
-        brukernavn,
-        authLevel,
-    } = props;
+    const { classname, menyLenker, dittNavUrl, brukernavn, authLevel } = props;
 
     if (!menyLenker) {
         return null;
@@ -77,7 +69,6 @@ export const MinsideMenyInnhold = (props: Props) => {
                 {menyLenker.children.map((menygruppe, index) => (
                     <MenyLenkeSeksjon
                         menygruppe={menygruppe}
-                        isOpen={isOpen}
                         colIndex={index}
                         rowIndex={1}
                         kbNodeGroup={nodeGroup}

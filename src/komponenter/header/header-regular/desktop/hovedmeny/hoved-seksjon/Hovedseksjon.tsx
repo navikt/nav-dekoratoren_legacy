@@ -3,12 +3,11 @@ import { MenyNode } from 'store/reducers/menu-duck';
 import { MenyLenkeSeksjon } from 'komponenter/header/header-regular/common/meny-lenker/MenyLenkeSeksjon';
 import BEMHelper from 'utils/bem';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import 'komponenter/header/header-regular/desktop/hovedmeny/hoved-seksjon/Hovedseksjon.less';
+import './Hovedseksjon.less';
 
 interface Props {
     menyLenker: MenyNode;
     classname: string;
-    isOpen: boolean;
 }
 
 const maxCols = 4;
@@ -17,7 +16,7 @@ const isIE = () =>
     window.navigator.userAgent &&
     /(Trident|MSIE)/.test(window.navigator.userAgent);
 
-export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
+export const Hovedseksjon = ({ menyLenker, classname }: Props) => {
     const cls = BEMHelper(classname);
 
     return (
@@ -31,7 +30,6 @@ export const Hovedseksjon = ({ menyLenker, classname, isOpen }: Props) => {
                     menyLenker.children.map((menygruppe, index) => (
                         <MenyLenkeSeksjon
                             menygruppe={menygruppe}
-                            isOpen={isOpen}
                             colIndex={index}
                             rowIndex={1}
                             kbNodeGroup={KbNavGroup.Hovedmeny}

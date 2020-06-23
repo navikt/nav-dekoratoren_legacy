@@ -1,16 +1,16 @@
 import React from 'react';
 import { AppState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
+import { Status } from 'api/api';
 import { getHovedmenyNode, getMinsideMenyNode } from 'utils/meny-storage-utils';
 import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
 import { GACategory, gaEvent } from 'utils/google-analytics';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { dataInitState } from 'store/reducers/menu-duck';
-import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapp/hovedmeny-knapp/HovedmenyKnapp';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
-import { Status } from 'api/api';
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
+import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapp/hovedmeny-knapp/HovedmenyKnapp';
 
 export const mobilmenyKnappId = 'mobilmeny-knapp-id';
 const classname = 'mobilmeny';
@@ -60,6 +60,28 @@ export const HovedmenyMobil = () => {
 
     const isOpen = hovedIsOpen || underIsOpen || varselIsOpen;
 
+    const dropdownInnhold =
+        meny.status === Status.OK ? (
+            <MobilVisningsmeny
+                classname={classname}
+                menyLenker={hovedmenyPunkter || dataInitState}
+                minsideLenker={
+                    getMinsideMenyNode(meny.data, language) || dataInitState
+                }
+                menuIsOpen={hovedIsOpen}
+                underMenuIsOpen={underIsOpen}
+                varslerIsOpen={varselIsOpen}
+                togglemenu={menutoggle}
+                togglehovedmenu={hovedmenutoggle}
+                lang={language}
+            />
+        ) : (
+            <Spinner
+                tekstId={'meny-loading'}
+                className={isOpen ? 'spinner-container--active' : ''}
+            />
+        );
+
     return (
         <div className={'media-sm-mobil'}>
             <HovedmenyKnapp id={mobilmenyKnappId} />
@@ -68,27 +90,7 @@ export const HovedmenyMobil = () => {
                 classname={classname}
                 id={classname}
             >
-                {meny.status === Status.OK ? (
-                    <MobilVisningsmeny
-                        classname={classname}
-                        menyLenker={hovedmenyPunkter || dataInitState}
-                        minsideLenker={
-                            getMinsideMenyNode(meny.data, language) ||
-                            dataInitState
-                        }
-                        menuIsOpen={hovedIsOpen}
-                        underMenuIsOpen={underIsOpen}
-                        varslerIsOpen={varselIsOpen}
-                        togglemenu={menutoggle}
-                        togglehovedmenu={hovedmenutoggle}
-                        lang={language}
-                    />
-                ) : (
-                    <Spinner
-                        tekstId={'meny-loading'}
-                        className={isOpen ? 'spinner-container--active' : ''}
-                    />
-                )}
+                {dropdownInnhold}
             </EkspanderbarMeny>
         </div>
     );

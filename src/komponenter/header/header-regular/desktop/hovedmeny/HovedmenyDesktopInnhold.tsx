@@ -63,11 +63,7 @@ export const HovedmenyDesktopInnhold = ({
     return (
         <div className={classname}>
             <Toppseksjon classname={classname} />
-            <Hovedseksjon
-                menyLenker={menyPunkter}
-                classname={classname}
-                isOpen={isOpen}
-            />
+            <Hovedseksjon menyLenker={menyPunkter} classname={classname} />
             <Bunnseksjon
                 classname={classname}
                 language={language}

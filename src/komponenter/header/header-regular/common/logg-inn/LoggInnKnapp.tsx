@@ -11,49 +11,49 @@ import './LoggInnKnapp.less';
 export const loginKnappId = 'login-knapp-id';
 
 const stateSelector = (state: AppState) => ({
-    innlogget: state.innloggingsstatus.data.authenticated,
+    authenticated: state.innloggingsstatus.data.authenticated,
     arbeidsflate: state.arbeidsflate.status,
     language: state.language.language,
     environment: state.environment,
 });
 
 export const LoggInnKnapp = () => {
-    const { innlogget, arbeidsflate, language, environment } = useSelector(
+    const { authenticated, arbeidsflate, language, environment } = useSelector(
         stateSelector
     );
 
     const handleButtonClick = () => {
         const { LOGIN_URL, DITT_NAV_URL, LOGOUT_URL } = environment;
-        const { MINSIDE_ARBEIDSGIVER_URL } = environment;
+        const { MINSIDE_ARBEIDSGIVER_URL, PARAMS } = environment;
         const appUrl = location.origin + location.pathname;
         const loginUrl = `${
-            environment.PARAMS.REDIRECT_TO_APP || erNavDekoratoren()
+            PARAMS.REDIRECT_TO_APP || erNavDekoratoren()
                 ? `${LOGIN_URL}/login?redirect=${appUrl}`
                 : arbeidsflate === MenuValue.ARBEIDSGIVER
                 ? `${LOGIN_URL}/login?redirect=${MINSIDE_ARBEIDSGIVER_URL}`
                 : `${LOGIN_URL}/login?redirect=${DITT_NAV_URL}`
-        }&level=${environment.PARAMS.LEVEL}`;
+        }&level=${PARAMS.LEVEL}`;
 
         gaEvent({
             context: arbeidsflate,
             category: GACategory.Header,
-            action: innlogget ? 'logg-ut' : 'logg-inn',
+            action: authenticated ? 'logg-ut' : 'logg-inn',
         });
 
-        return innlogget
+        return authenticated
             ? (window.location.href = LOGOUT_URL)
             : (window.location.href = loginUrl);
     };
 
     const knappetekst = finnTekst(
-        innlogget ? 'logg-ut-knapp' : 'logg-inn-knapp',
+        authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp',
         language
     );
 
     return (
         <div className={'login-knapp-container'}>
             <KnappBase
-                className={`login-knapp${innlogget ? ' logout-knapp' : ''}`}
+                className={`login-knapp${authenticated ? ' logout-knapp' : ''}`}
                 onClick={handleButtonClick}
                 id={loginKnappId}
             >

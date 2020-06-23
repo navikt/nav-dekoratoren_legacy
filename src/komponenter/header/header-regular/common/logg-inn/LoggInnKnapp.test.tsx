@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { Provider as ReduxProvider } from 'react-redux';
 import { hentInnloggingsstatusOk } from 'store/reducers/innloggingsstatus-duck';
 import { createStore } from 'store';
-import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
+import LoggInnKnapp from './LoggInnKnapp';
 
 describe('<LoggInnKnapp />', () => {
     const store = createStore();

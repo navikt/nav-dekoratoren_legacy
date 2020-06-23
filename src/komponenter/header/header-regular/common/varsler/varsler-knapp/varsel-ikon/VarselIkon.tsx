@@ -1,14 +1,14 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
 import { EtikettLiten } from 'nav-frontend-typografi';
-import './VarslerIkon.less';
+import './VarselIkon.less';
 
 type Props = {
     isOpen: boolean;
     antallUleste?: number;
 };
 
-export const VarslerIkon = ({ isOpen, antallUleste = 0 }: Props) => {
+export const VarselIkon = ({ isOpen, antallUleste = 0 }: Props) => {
     const cls = BEMHelper('varselbjelle-ikon');
 
     return (

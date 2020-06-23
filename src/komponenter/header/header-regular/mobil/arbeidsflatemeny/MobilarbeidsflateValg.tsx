@@ -12,9 +12,9 @@ import { finnTekst } from 'tekster/finn-tekst';
 import { Language } from 'store/reducers/language-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
-import './MobilarbeidsflateValg.less';
-import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
 import Tekst from 'tekster/finn-tekst';
+import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
+import './MobilarbeidsflateValg.less';
 
 interface Props {
     lang: Language;

@@ -4,11 +4,11 @@ import { GACategory } from 'utils/google-analytics';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { useSelector } from 'react-redux';
-import { VarslerParsed } from 'komponenter/header/header-regular/common/varsler/varselvisning/VarslerParsed';
+import { VarslerParsed } from './VarslerParsed';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { Systemtittel } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
-import 'komponenter/header/header-regular/common/varsler/varselvisning/Varselvisning.less';
+import './Varselvisning.less';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
