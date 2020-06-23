@@ -1,6 +1,6 @@
 import React from 'react';
-import MenylinjeKnapp from 'komponenter/header/header-regular/common/knapper/MenylinjeKnapp';
-import SokMenyIkon from 'komponenter/header/header-regular/common/knapper/ikoner/sok-ikon/SokMenyIkon';
+import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
+import SokMenyIkon from 'komponenter/header/header-regular/desktop/sok-dropdown/sok-knapp/SokMenyIkon';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import Tekst from 'tekster/finn-tekst';
 import { gaEvent } from 'utils/google-analytics';
@@ -9,7 +9,7 @@ import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
-import { sokDropdownClassname } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
+import { sokDropdownClassname } from '../SokDropdown';
 
 export const desktopSokKnappId = 'desktop-sok-knapp';
 

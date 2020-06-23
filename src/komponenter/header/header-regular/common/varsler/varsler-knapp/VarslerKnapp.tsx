@@ -1,6 +1,6 @@
 import React from 'react';
-import MenylinjeKnapp from '../MenylinjeKnapp';
-import { VarselIkon } from '../ikoner/varsel-ikon/VarselIkon';
+import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
+import { VarslerIkon } from 'komponenter/header/header-regular/common/varsler/varsler-knapp/varsler-ikon/VarslerIkon';
 import Tekst from 'tekster/finn-tekst';
 import { Undertittel } from 'nav-frontend-typografi';
 import { useDispatch } from 'react-redux';
@@ -49,7 +49,7 @@ export const VarslerKnapp = () => {
             ariaControls={varslerDropdownClassname}
             ariaLabel={ariaLabel}
         >
-            <VarselIkon isOpen={isOpen} antallUleste={varsler.uleste} />
+            <VarslerIkon isOpen={isOpen} antallUleste={varsler.uleste} />
             <Undertittel className={'varselbjelle__tekst'}>
                 <Tekst id={'varsler-tittel'} />
             </Undertittel>

@@ -7,13 +7,13 @@ import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import { GACategory } from 'utils/google-analytics';
 import { SokDropdown } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 import { MinsideMeny } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
-import LoggInnKnapp from 'komponenter/header/header-regular/common/knapper/logg-inn-knapp/LoggInnKnapp';
+import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
 import { VarslerDropdown } from 'komponenter/header/header-regular/common/varsler/VarslerDropdown';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { HovedmenyDesktop } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
 import { HovedmenyMobil } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
 import { Status } from 'api/api';
-import 'komponenter/header/header-regular/HeaderMenylinje.less';
+import './HeaderMenylinje.less';
 
 export const headerLogoId = 'header-logo-id';
 

@@ -7,7 +7,7 @@ import { GACategory } from 'utils/google-analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
-import 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp.less';
+import './MinsideKnapp.less';
 
 import briefcaseIkon from 'ikoner/meny/Briefcase_icon_nav.svg';
 

@@ -11,7 +11,7 @@ import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import './MinsideMeny.less';
-import { MinsideKnapp } from 'komponenter/header/header-regular/common/knapper/minside-knapper/MinsideKnapp';
+import { MinsideKnapp } from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideKnapp';
 
 const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,

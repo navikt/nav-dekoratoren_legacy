@@ -7,7 +7,7 @@ import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspander
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import HovedmenyDesktopInnhold from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktopInnhold';
-import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/knapper/hovedmeny-knapp/HovedmenyKnapp';
+import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapp/hovedmeny-knapp/HovedmenyKnapp';
 
 const classname = 'desktop-hovedmeny';
 export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';

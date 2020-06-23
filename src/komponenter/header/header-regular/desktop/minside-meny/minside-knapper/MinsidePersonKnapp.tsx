@@ -1,11 +1,11 @@
+import React from 'react';
 import BEMHelper from 'utils/bem';
 import { gaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';
 import { toggleMinsideMeny } from 'store/reducers/dropdown-toggle-duck';
-import MenylinjeKnapp from 'komponenter/header/header-regular/common/knapper/MenylinjeKnapp';
-import MinsideIkon from 'komponenter/header/header-regular/common/knapper/ikoner/minside-ikon/MinsideIkon';
+import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
+import MinsideIkon from './minside-ikon/MinsideIkon';
 import Tekst from 'tekster/finn-tekst';
-import React from 'react';
 import { AppState } from 'store/reducers';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';

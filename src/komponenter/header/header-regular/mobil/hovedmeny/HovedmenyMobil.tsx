@@ -7,7 +7,7 @@ import { GACategory, gaEvent } from 'utils/google-analytics';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { dataInitState } from 'store/reducers/menu-duck';
-import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/knapper/hovedmeny-knapp/HovedmenyKnapp';
+import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapp/hovedmeny-knapp/HovedmenyKnapp';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
 import { Status } from 'api/api';
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
