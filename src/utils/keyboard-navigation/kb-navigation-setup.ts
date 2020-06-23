@@ -10,13 +10,13 @@ import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from 'api/api';
 import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
-import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
+import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
 import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
-import { loginKnappId } from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
 import { desktopSokKnappId } from 'komponenter/header/header-regular/desktop/sok-dropdown/sok-knapp/SokKnapp';
+import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 import { varslerKnappId } from 'komponenter/header/header-regular/common/varsler/varsler-knapp/VarslerKnapp';
 import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideKnapp';
-import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import { loginKnappId } from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
 
 export type KbNavConfig = {
     group: KbNavGroup;
@@ -41,8 +41,7 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
         group: KbNavGroup.Hovedmeny,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 4, 3],
-        // TODO: Hvorfor blir desktopHovedmenyKnappId noen ganger undefined?!
-        parentNodeId: desktopHovedmenyKnappId || 'desktop-hovedmeny-knapp-id',
+        parentNodeId: desktopHovedmenyKnappId,
         parentNodeEdge: NodeEdge.Bottom,
     },
     [KbNavGroup.Sok]: {

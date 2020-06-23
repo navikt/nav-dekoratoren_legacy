@@ -7,9 +7,9 @@ import { createKbNavNode } from './kb-navigation';
 import { KbNavGroup } from './kb-navigation';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
+import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
 import KbNav from 'utils/keyboard-navigation/kb-navigation';
 import { disabledGroups } from './kb-navigation-setup';
-import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
 
 const stateSelector = (state: AppState) => ({
     language: state.language.language,
