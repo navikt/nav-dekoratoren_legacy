@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
-import { RadioGruppe, Radio } from 'nav-frontend-skjema';
+import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
 import { Textarea } from 'nav-frontend-skjema';
+import './Elaborated.less'
 
 const Elaborated = () => {
 
@@ -10,12 +11,12 @@ const Elaborated = () => {
     }
 
     return (
-        <Fragment>
-            <RadioGruppe legend='Hva gikk galt?'>
-                <Radio label={'Jeg ble forvirret'} name='feil'/>
-                <Radio label={'For mye tekst'} name='feil'/>
-                <Radio label={'Annet. Gjerne spesifiser under'} name='feil' />
-            </RadioGruppe>
+        <div className="elaborated-wrapper">
+            <CheckboxGruppe legend='Hva gikk galt?'>
+                <Checkbox label={'Jeg ble forvirret'} name='feil'/>
+                <Checkbox label={'For mye tekst'} name='feil'/>
+                <Checkbox label={'Annet. Gjerne spesifiser under'} name='feil' />
+            </CheckboxGruppe>
 
             <Textarea 
                 label='Din tilbakemelding'
@@ -24,7 +25,7 @@ const Elaborated = () => {
                 onChange={textareaDidChange}
             >
             </Textarea>
-        </Fragment>
+        </div>
     );
 };
 
