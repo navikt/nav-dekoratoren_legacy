@@ -3,7 +3,7 @@ import { mobilmenyKnappId } from 'komponenter/header/header-regular/mobil/hovedm
 import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
 import { useDispatch } from 'react-redux';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
-import { SkipLinkElement } from 'komponenter/header/header-regular/common/skiplinks/SkiplinkElement';
+import { SkipLinkElement } from './SkiplinkElement';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
