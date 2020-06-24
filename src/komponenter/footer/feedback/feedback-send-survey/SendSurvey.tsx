@@ -1,12 +1,18 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 import Tekstomrade from 'nav-frontend-tekstomrade';
 import { Input } from 'nav-frontend-skjema';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import './SendSurvey.less'
+import e from 'express';
 
 const SendSurvey = () => {
+    const [email, setEmail] = useState({});
+
+    const handleSubmit = () => {
+        console.log(`${email}`)
+    }
 
     return (
 
@@ -20,12 +26,12 @@ const SendSurvey = () => {
             <Input
                 label='Din e-postaddresse'
                 name='email-input'
-            >
-
-            </Input>
+                onChange={e => setEmail(e.target.value)}
+                />
 
             <Hovedknapp
                 inputMode='text'
+                onClick={handleSubmit}
             >
                 Videre
             </Hovedknapp>
