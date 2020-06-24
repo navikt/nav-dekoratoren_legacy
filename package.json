@@ -72,6 +72,7 @@
         "nav-frontend-skjema-style": "^2.0.8",
         "nav-frontend-spinner": "^2.0.2",
         "nav-frontend-spinner-style": "^0.2.5",
+        "nav-frontend-tekstomrade": "^2.0.46",
         "nav-frontend-typografi": "^2.0.20",
         "nav-frontend-typografi-style": "^1.0.21",
         "node-cache": "^5.1.1",
