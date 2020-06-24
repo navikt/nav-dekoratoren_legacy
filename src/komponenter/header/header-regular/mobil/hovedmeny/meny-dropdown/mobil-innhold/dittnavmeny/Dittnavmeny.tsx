@@ -23,28 +23,28 @@ const Dittnavmeny = (props: Props) => {
         <ul className={cls.element('meny', 'minsidelist')}>
             {props.minsideLenker.children.map(
                 (menyElement: MenyNode, index: number) => (
-                    <a
-                        className="lenke"
-                        key={index}
-                        href="https://nav.no"
-                        onClick={(event) =>
-                            props.openMeny(
-                                event,
-                                menyElement,
-                                props.test[index].current
-                            )
-                        }
-                        ref={props.test[index]}
-                        tabIndex={props.tabIndex ? 0 : -1}
+                    <Listelement
+                        className={cls.className}
+                        classElement="text-element"
                     >
-                        <Listelement
-                            className={cls.className}
-                            classElement="text-element"
+                        <a
+                            className="lenke"
+                            key={index}
+                            href="https://nav.no"
+                            onClick={(event) =>
+                                props.openMeny(
+                                    event,
+                                    menyElement,
+                                    props.test[index].current
+                                )
+                            }
+                            ref={props.test[index]}
+                            tabIndex={props.tabIndex ? 0 : -1}
                         >
                             {menyElement.displayName}
                             <HoyreChevron />
-                        </Listelement>
-                    </a>
+                        </a>
+                    </Listelement>
                 )
             )}
         </ul>
