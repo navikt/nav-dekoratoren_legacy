@@ -73,8 +73,13 @@
         "nav-frontend-spinner": "^2.0.2",
         "nav-frontend-spinner-style": "^0.2.5",
         "nav-frontend-tekstomrade": "^2.0.46",
+<<<<<<< HEAD
         "nav-frontend-typografi": "^2.0.21",
         "nav-frontend-typografi-style": "^1.0.22",
+=======
+        "nav-frontend-typografi": "^2.0.20",
+        "nav-frontend-typografi-style": "^1.0.21",
+>>>>>>> acb4635b990a36a802c26192b8c4a40ede5ccd78
         "node-cache": "^5.1.1",
         "node-fetch": "^2.6.0",
         "object-hash": "^2.0.3",

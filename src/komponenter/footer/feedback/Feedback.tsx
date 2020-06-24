@@ -4,6 +4,7 @@ import { Element } from 'nav-frontend-typografi';
 
 import './Feedback.less';
 import Elaborated from './feedback-elaborated/Elaborated';
+import SendSurvey from './feedback-send-survey/SendSurvey';
 
 const Feedback = () => {
     return (
