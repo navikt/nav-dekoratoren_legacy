@@ -18,6 +18,10 @@ import { varslerKnappId } from 'komponenter/header/header-regular/common/varsler
 import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideKnapp';
 import { loginKnappId } from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
 
+// TODO: Finn ut hvorfor akkurat denne noen ganger blir undefined :|
+const hovedmenyKnappId =
+    desktopHovedmenyKnappId || 'desktop-hovedmeny-knapp-id';
+
 export type KbNavConfig = {
     group: KbNavGroup;
     rootIndex: NodeIndex;
@@ -41,7 +45,7 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
         group: KbNavGroup.Hovedmeny,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 4, 3],
-        parentNodeId: desktopHovedmenyKnappId,
+        parentNodeId: hovedmenyKnappId,
         parentNodeEdge: NodeEdge.Bottom,
     },
     [KbNavGroup.Sok]: {
@@ -114,7 +118,7 @@ export const createHeaderMainGraph = (
     if (hovedmenyEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = desktopHovedmenyKnappId;
+        ] = hovedmenyKnappId;
     }
 
     idMap[
