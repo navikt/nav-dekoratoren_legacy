@@ -155,31 +155,33 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                         {menyLenker.children.map(
                             (menyElement: MenyNode, index: number) => {
                                 return (
-                                    <a
-                                        className="lenke"
-                                        ref={this.visningslenker[index]}
-                                        key={index}
-                                        href="https://nav.no"
-                                        onClick={(event) =>
-                                            this.setMenyliste(
-                                                event,
-                                                menyElement,
-                                                this.visningslenker[index]
-                                                    .current
-                                            )
-                                        }
-                                        tabIndex={
-                                            this.hovedseksjonTabIndex() ? 0 : -1
-                                        }
+                                    <Listelement
+                                        className={menyClass.className}
+                                        classElement="text-element"
                                     >
-                                        <Listelement
-                                            className={menyClass.className}
-                                            classElement="text-element"
+                                        <a
+                                            className="lenke"
+                                            ref={this.visningslenker[index]}
+                                            key={index}
+                                            href="https://nav.no"
+                                            onClick={(event) =>
+                                                this.setMenyliste(
+                                                    event,
+                                                    menyElement,
+                                                    this.visningslenker[index]
+                                                        .current
+                                                )
+                                            }
+                                            tabIndex={
+                                                this.hovedseksjonTabIndex()
+                                                    ? 0
+                                                    : -1
+                                            }
                                         >
                                             {menyElement.displayName}
                                             <HoyreChevron />
-                                        </Listelement>
-                                    </a>
+                                        </a>
+                                    </Listelement>
                                 );
                             }
                         )}
