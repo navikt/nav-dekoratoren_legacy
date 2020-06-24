@@ -1,7 +1,35 @@
 .feedback-content {
-    display: flex;
-    justify-content: center;
+    display: inline-flex;
+    justify-content: space-between;
     width: 100%;
-    background-color: blueviolet;
+    height: auto;
+    background-color: white;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
 
+    .tekst {
+        width: 25%;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: space-around;
+        padding: 1.2rem;
+    }
+
+    .knapper {
+        width: auto;
+        display: flex;
+        flex-direction: row;
+
+        .ja-knapp {
+            display: flex;
+            padding: 1rem;
+        }
+    
+        .nei-knapp {
+            display: flex;
+            padding: 1rem;
+        }
+    }
 }
