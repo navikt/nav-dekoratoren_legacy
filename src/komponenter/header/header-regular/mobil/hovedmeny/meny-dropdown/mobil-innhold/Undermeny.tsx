@@ -15,12 +15,11 @@ import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-loc
 interface Props {
     className: string;
     undermenyIsOpen: boolean;
-    setFocusNode: () => void;
     lenker: MenyNode;
 }
 
 const Undermeny = (props: Props) => {
-    const { setFocusNode, lenker } = props;
+    const { lenker } = props;
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const auth = useSelector((state: AppState) => state.innloggingsstatus.data);
     const { className, undermenyIsOpen } = props;
@@ -47,10 +46,7 @@ const Undermeny = (props: Props) => {
                 undermenyIsOpen ? 'active' : ''
             )}
         >
-            <Lukkundermeny
-                setFocusIndex={setFocusNode}
-                className={menyClass.className}
-            />
+            <Lukkundermeny className={menyClass.className} />
             <Systemtittel
                 className={menyClass.element('undermeny-arbeidsflate')}
             >
@@ -89,10 +85,7 @@ const Undermeny = (props: Props) => {
                 })}
             </ul>
             <div className={menyClass.element('blokk-divider')}>
-                <Lukkundermeny
-                    setFocusIndex={setFocusNode}
-                    className={menyClass.className}
-                />
+                <Lukkundermeny className={menyClass.className} />
             </div>
         </section>
     );

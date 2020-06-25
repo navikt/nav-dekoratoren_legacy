@@ -8,11 +8,9 @@ interface Props {
     minsideLenker: MenyNode;
     openMeny: (
         event: React.MouseEvent<HTMLAnchorElement>,
-        menyElement: MenyNode,
-        ref: any
+        menyElement: MenyNode
     ) => void;
     className: string;
-    test: any;
 }
 
 const Dittnavmeny = (props: Props) => {
@@ -26,14 +24,7 @@ const Dittnavmeny = (props: Props) => {
                         className="lenke"
                         key={index}
                         href="https://nav.no"
-                        onClick={(event) =>
-                            props.openMeny(
-                                event,
-                                menyElement,
-                                props.test[index].current
-                            )
-                        }
-                        ref={props.test[index]}
+                        onClick={(event) => props.openMeny(event, menyElement)}
                     >
                         <Listelement
                             className={cls.className}
