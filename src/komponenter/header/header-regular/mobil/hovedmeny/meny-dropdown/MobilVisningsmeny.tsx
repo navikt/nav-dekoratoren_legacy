@@ -114,25 +114,25 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                         {menyLenker.children.map(
                             (menyElement: MenyNode, index: number) => {
                                 return (
-                                    <a
-                                        className="lenke"
-                                        key={index}
-                                        href="https://nav.no"
-                                        onClick={(event) =>
-                                            this.setMenyliste(
-                                                event,
-                                                menyElement
-                                            )
-                                        }
+                                    <Listelement
+                                        className={menyClass.className}
+                                        classElement="text-element"
                                     >
-                                        <Listelement
-                                            className={menyClass.className}
-                                            classElement="text-element"
+                                        <a
+                                            className="lenke"
+                                            key={index}
+                                            href="https://nav.no"
+                                            onClick={(event) =>
+                                                this.setMenyliste(
+                                                    event,
+                                                    menyElement
+                                                )
+                                            }
                                         >
                                             {menyElement.displayName}
                                             <HoyreChevron />
-                                        </Listelement>
-                                    </a>
+                                        </a>
+                                    </Listelement>
                                 );
                             }
                         )}

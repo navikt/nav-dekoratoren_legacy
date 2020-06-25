@@ -58,14 +58,12 @@ const Undermeny = (props: Props) => {
                     const displayLock =
                         lenke.displayLock && auth.securityLevel !== '4';
                     return (
-                        <Lenke
-                            href={genererUrl(XP_BASE_URL, lenke.path)}
+                        <Listelement
                             key={index}
+                            className={menyClass.className}
+                            classElement="text-element-undermeny"
                         >
-                            <Listelement
-                                className={menyClass.className}
-                                classElement="text-element-undermeny"
-                            >
+                            <Lenke href={genererUrl(XP_BASE_URL, lenke.path)}>
                                 {displayLock && (
                                     <div style={lockStyle}>
                                         <Lock height={'18px'} width={'18px'} />
@@ -79,8 +77,8 @@ const Undermeny = (props: Props) => {
                                     <HoyreChevron />
                                 </div>
                                 {lenke.displayName}
-                            </Listelement>
-                        </Lenke>
+                            </Lenke>
+                        </Listelement>
                     );
                 })}
             </ul>
