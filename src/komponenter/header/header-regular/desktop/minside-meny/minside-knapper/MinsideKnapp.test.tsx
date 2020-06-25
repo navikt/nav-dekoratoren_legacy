@@ -1,6 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { MinsideMeny } from './MinsideMeny';
 import { Provider } from 'react-redux';
 import { createStore, Store } from 'redux';
 import { reducers } from 'store/reducers';
@@ -14,9 +13,8 @@ import { languageDuck } from 'store/reducers/language-duck';
 import { Language } from 'store/reducers/language-duck';
 import { MinsidePersonKnapp } from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsidePersonKnapp';
 import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
-import { MinsideKnapp } from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideKnapp';
 import { innloggetAction } from 'utils/jest/testObjects';
-import { kbNavDummy } from 'utils/jest/testObjects';
+import { HeaderMenylinje } from 'komponenter/header/header-regular/HeaderMenylinje';
 
 const menuAction = {
     type: ActionType.HENT_MENY_OK,
@@ -31,12 +29,12 @@ const languageAction = languageDuck.actionCreator({
 const mountWithRedux = (store: Store) => {
     return mount(
         <Provider store={store}>
-            <MinsideMeny kbNavMainState={kbNavDummy} />
+            <HeaderMenylinje />
         </Provider>
     );
 };
 
-describe('<MinsideMeny>', () => {
+describe('Minside knapper', () => {
     const store = createStore(reducers);
     store.dispatch(languageAction);
     store.dispatch(menuAction);
@@ -54,9 +52,9 @@ describe('<MinsideMeny>', () => {
         expect(wrapper.find(MinsideArbgiverKnapp)).toHaveLength(1);
     });
 
-    it('<MinsideKnapp/> komponent skal være tom når bruker er SAMARBEIDSPARTNER', () => {
+    it('Skal ikke vise minside knapp når bruker er SAMARBEIDSPARTNER', () => {
         store.dispatch(settSamarbeidspartnerflate());
         const wrapper = mountWithRedux(store);
-        expect(wrapper.find(MinsideKnapp).isEmptyRender()).toBe(true);
+        expect(wrapper.find('.desktop-minside-meny__knapp')).toHaveLength(0);
     });
 });

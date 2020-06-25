@@ -7,24 +7,21 @@ import { GACategory } from 'utils/google-analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
+import { minsideDropdownClassname } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
+import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
 import './MinsideKnapp.less';
 
 import briefcaseIkon from 'ikoner/meny/Briefcase_icon_nav.svg';
 
-type Props = {
-    classname: string;
-    id: string;
-};
-
-export const MinsideArbgiverKnapp = ({ classname, id }: Props) => {
+export const MinsideArbgiverKnapp = () => {
     const { environment } = useSelector((state: AppState) => state);
     const href = environment.MINSIDE_ARBEIDSGIVER_URL + valgtbedrift();
-    const cls = BEMHelper(classname);
+    const cls = BEMHelper(minsideDropdownClassname);
 
     return (
         <LenkeMedGA
             classNameOverride={`menylinje-knapp ${cls.element('knapp')}`}
-            id={id}
+            id={minsideKnappId}
             href={href}
             gaEventArgs={{
                 category: GACategory.Header,
