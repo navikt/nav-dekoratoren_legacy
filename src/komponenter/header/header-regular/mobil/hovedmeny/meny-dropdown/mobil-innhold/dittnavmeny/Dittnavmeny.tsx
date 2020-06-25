@@ -28,10 +28,12 @@ const Dittnavmeny = (props: Props) => {
                             className="lenke"
                             key={index}
                             href="https://nav.no"
-                            onClick={(event) => props.openMeny(event, menyElement)}
+                            onClick={(event) =>
+                                props.openMeny(event, menyElement)
+                            }
                         >
-                                {menyElement.displayName}
-                                <HoyreChevron />
+                            {menyElement.displayName}
+                            <HoyreChevron />
                         </a>
                     </Listelement>
                 )
