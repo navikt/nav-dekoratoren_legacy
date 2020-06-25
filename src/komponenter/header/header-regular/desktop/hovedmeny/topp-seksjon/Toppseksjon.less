@@ -1,0 +1,27 @@
+@import (reference) '../../../../../../styling-variabler.less';
+
+.desktop-hovedmeny {
+    &__topp-seksjon {
+        display: flex;
+        flex-direction: column;
+
+        margin: 0 -@margins-sides-desktop 1.5rem -@margins-sides-desktop;
+        padding: 0 @margins-sides-desktop;
+
+        @media (max-height: @smallDesktopLimitHeight),
+            (max-width: @smallDesktopLimitWidth) {
+            flex-direction: row;
+            align-items: flex-end;
+            margin-bottom: 0.75rem;
+
+            &-tittel {
+                &::after {
+                    content: '//';
+                    .typo-normal;
+                    font-weight: bold;
+                    margin: 0 0.5rem;
+                }
+            }
+        }
+    }
+}

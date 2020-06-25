@@ -12,7 +12,6 @@ interface Props {
         ref: any
     ) => void;
     className: string;
-    tabIndex: boolean;
     test: any;
 }
 
@@ -39,7 +38,6 @@ const Dittnavmeny = (props: Props) => {
                                 )
                             }
                             ref={props.test[index]}
-                            tabIndex={props.tabIndex ? 0 : -1}
                         >
                             {menyElement.displayName}
                             <HoyreChevron />

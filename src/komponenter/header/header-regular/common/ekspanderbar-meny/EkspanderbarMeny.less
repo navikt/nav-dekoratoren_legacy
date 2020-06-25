@@ -1,42 +1,59 @@
 @import (reference) '../../../../../styling-variabler.less';
 
-@ekspanderbar-transition-duration-out: 0.6s;
-@ekspanderbar-transition-duration-in: 0.4s;
-
 .ekspanderbar {
+    &__container {
+        position: absolute;
+        width: 100%;
+    }
+
+    &__innhold-wrapper {
+        z-index: 1;
+        width: 100%;
+        visibility: hidden;
+        background-color: white;
+
+        transition-timing-function: ease-in;
+
+        &--active {
+            visibility: visible;
+            z-index: 1001;
+            transition-timing-function: ease-in-out;
+        }
+    }
+
+    &__innhold {
+        box-sizing: border-box;
+        width: 100%;
+    }
+
     @media (min-width: @desktopMinWidth) {
+        &__container {
+            max-width: @desktopMaxWidth;
+            top: calc(@header-height-desktop - @header-separator-height);
+            left: 0;
+        }
+
         &__innhold-wrapper {
-            position: absolute;
-            z-index: 1;
             overflow: hidden;
             max-height: 0;
-            width: 100%;
-            visibility: hidden;
-            background-color: white;
             opacity: 0;
             border-bottom-left-radius: @border-radius-base;
             border-bottom-right-radius: @border-radius-base;
 
-            transition-duration: @ekspanderbar-transition-duration-in;
-            transition-timing-function: ease-in;
+            transition-duration: 0.4s;
             transition-property: max-height, visibility, opacity;
 
             &--active {
                 max-height: 100rem;
-                visibility: visible;
                 opacity: 1;
-                z-index: 1001;
-                transition-duration: @ekspanderbar-transition-duration-out;
-                transition-timing-function: ease-in-out;
+                transition-duration: 0.6s;
                 transition-property: max-height, visibility;
             }
         }
 
         &__innhold {
-            box-sizing: border-box;
-            padding: 1.5rem @margins-sides-desktop 2rem @margins-sides-desktop;
+            padding: 0.5rem @margins-sides-desktop 2rem @margins-sides-desktop;
             overflow: hidden;
-            width: 100%;
 
             @media (max-width: @smallDesktopLimitWidth) {
                 padding-left: @margins-sides-desktop-small;
@@ -45,17 +62,31 @@
 
             @media (max-height: @smallDesktopLimitHeight),
                 (max-width: @smallDesktopLimitWidth) {
-                padding-top: 0.75rem;
+                padding-top: 0;
                 padding-bottom: 1rem;
             }
+        }
+    }
 
-            @media (min-width: @desktopMaxWidth) {
-                max-width: @desktopMaxWidth;
+    @media (max-width: @mobilMaxWidth) {
+        &__innhold-wrapper {
+            position: fixed;
+            top: @header-height-mobil;
+            left: -100%;
+            height: calc(100vh - @header-height-mobil);
+            transition-property: left, visibility;
+            transition-duration: 0.25s;
+
+            &--active {
+                left: 0;
+                z-index: 1001;
+                overflow: auto;
+                transition-duration: 0.4s;
             }
         }
 
-        &__container {
-            position: relative;
+        &__innhold {
+            padding: 1rem @margins-sides-mobil;
         }
     }
 }

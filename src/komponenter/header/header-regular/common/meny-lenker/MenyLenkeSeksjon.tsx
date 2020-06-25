@@ -8,7 +8,6 @@ import './MenyLenker.less';
 
 interface Props {
     menygruppe: MenyNode;
-    isOpen: boolean;
     colIndex: number;
     rowIndex: number;
     kbNodeGroup: KbNavGroup;
@@ -16,7 +15,6 @@ interface Props {
 
 export const MenyLenkeSeksjon = ({
     menygruppe,
-    isOpen,
     colIndex,
     rowIndex,
     kbNodeGroup,
@@ -40,7 +38,6 @@ export const MenyLenkeSeksjon = ({
                         <MenyLenke
                             key={index}
                             lenke={lenke}
-                            isOpen={isOpen}
                             displayLock={lenke.displayLock}
                             menyGruppeNavn={menygruppe.displayName}
                             id={KbNav.getKbId(kbNodeGroup, kbNaviIndex)}

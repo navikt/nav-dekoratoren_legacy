@@ -1,6 +1,6 @@
 import React from 'react';
 import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
-import { getArbeidsflateContext } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { getArbeidsflateContext } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';

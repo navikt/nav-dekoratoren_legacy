@@ -16,12 +16,11 @@ interface Props {
     className: string;
     undermenyIsOpen: boolean;
     setFocusNode: () => void;
-    tabindex: boolean;
     lenker: MenyNode;
 }
 
 const Undermeny = (props: Props) => {
-    const { setFocusNode, tabindex, lenker } = props;
+    const { setFocusNode, lenker } = props;
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const auth = useSelector((state: AppState) => state.innloggingsstatus.data);
     const { className, undermenyIsOpen } = props;
@@ -51,7 +50,6 @@ const Undermeny = (props: Props) => {
             <Lukkundermeny
                 setFocusIndex={setFocusNode}
                 className={menyClass.className}
-                tabindex={props.tabindex}
             />
             <Systemtittel
                 className={menyClass.element('undermeny-arbeidsflate')}
@@ -71,7 +69,6 @@ const Undermeny = (props: Props) => {
                             <Lenke
                                 href={genererUrl(XP_BASE_URL, lenke.path)}
                                 key={index}
-                                tabIndex={tabindex ? 0 : -1}
                             >
                                 {displayLock && (
                                     <div style={lockStyle}>
@@ -95,7 +92,6 @@ const Undermeny = (props: Props) => {
                 <Lukkundermeny
                     setFocusIndex={setFocusNode}
                     className={menyClass.className}
-                    tabindex={props.tabindex}
                 />
             </div>
         </section>

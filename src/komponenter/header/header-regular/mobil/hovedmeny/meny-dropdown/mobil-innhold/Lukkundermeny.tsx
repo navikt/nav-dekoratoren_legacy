@@ -10,7 +10,6 @@ import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 interface Props {
     setFocusIndex: () => void;
     className: string;
-    tabindex: boolean;
 }
 
 const Lukkundermeny = (props: Props) => {
@@ -26,7 +25,6 @@ const Lukkundermeny = (props: Props) => {
                         props.setFocusIndex();
                         dispatch(toggleUndermenyVisning());
                     }}
-                    tabIndex={props.tabindex ? 0 : -1}
                 >
                     <VenstreChevron />
                     <Tekst id="tilbake-til-overskrift" />

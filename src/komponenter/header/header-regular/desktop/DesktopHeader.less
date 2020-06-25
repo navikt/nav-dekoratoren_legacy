@@ -1,0 +1,54 @@
+@import (reference) '../../../../styling-variabler.less';
+
+.desktop-header() {
+    @margin-mellom: 2rem;
+    @margin-mellom-sm: 0.5rem;
+
+    height: @header-height-desktop;
+
+    &__elementer {
+        max-width: @desktopMaxWidth;
+    }
+
+    .nav-logo-lenke,
+    .hovedmeny__knapp,
+    .desktop-sok-dropdown__knapp {
+        margin-left: @margin-mellom;
+        @media (max-width: @smallDesktopLimitWidth) {
+            margin-left: @margin-mellom-sm;
+        }
+    }
+
+    .varselbjelle__knapp,
+    .desktop-minside-meny__knapp,
+    .login-knapp-container {
+        margin-right: @margin-mellom;
+        @media (max-width: @smallDesktopLimitWidth) {
+            margin-right: @margin-mellom-sm;
+        }
+    }
+
+    .nav-logo-lenke {
+        @padding: 8px;
+        width: 100px;
+        padding: @padding;
+
+        margin-left: calc(@margins-sides-desktop - @padding);
+        margin-right: -@padding;
+
+        @media (max-width: @smallDesktopLimitWidth) {
+            margin-left: calc(@margins-sides-desktop-small - @padding);
+        }
+
+        .nav-logo-fill {
+            fill: @nav-logo-rod;
+        }
+    }
+
+    .login-knapp-container {
+        margin-right: @margins-sides-desktop;
+        @media (max-width: @smallDesktopLimitWidth) {
+            margin-right: @margins-sides-desktop-small;
+        }
+    }
+}

@@ -2,8 +2,8 @@ import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenypunkter } from 'store/reducers/menu-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { SimpleHeader } from 'komponenter/header/header-simple/HeaderSimple';
-import { RegularHeader } from 'komponenter/header/header-regular/HeaderRegular';
+import { HeaderSimple } from 'komponenter/header/header-simple/HeaderSimple';
+import { HeaderRegular } from 'komponenter/header/header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
@@ -12,7 +12,6 @@ import { Language, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
-import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -81,12 +80,11 @@ export const Header = () => {
             <span id={'top-element'} tabIndex={-1} />
             <header className="siteheader">
                 {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
-                    <SimpleHeader />
+                    <HeaderSimple />
                 ) : (
-                    <RegularHeader />
+                    <HeaderRegular />
                 )}
             </header>
-            <MenyBakgrunn />
         </Fragment>
     );
 };
