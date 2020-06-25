@@ -6,7 +6,7 @@ import Lenke from 'nav-frontend-lenker';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { valgtbedrift } from '../../../../desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
+import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
 
 interface Props {
     arbeidsflate: MenuValue;
