@@ -10,7 +10,7 @@ import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { MinsideKnapp } from './minside-knapper/MinsideKnapp';
+import { MinsidePersonKnapp } from './minside-knapper/MinsidePersonKnapp';
 import './MinsideMeny.less';
 
 const stateSelector = (state: AppState) => ({
@@ -21,7 +21,8 @@ const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
 });
 
-export const minsideDropdownClassname = 'desktop-minside-meny';
+export const minsideMenyClassname = 'desktop-minside-meny';
+export const minsideKnappId = 'desktop-minside-knapp-id';
 
 type Props = {
     kbNavMainState: KbNavMain;
@@ -29,7 +30,7 @@ type Props = {
 
 export const MinsideMeny = ({ kbNavMainState }: Props) => {
     const { environment } = useSelector((state: AppState) => state);
-    const { arbeidsflate, innloggetStatus } = useSelector(stateSelector);
+    const { innloggetStatus } = useSelector(stateSelector);
     const { isOpen, language, menyPunkter } = useSelector(stateSelector);
     useKbNavSub(
         configForNodeGroup[KbNavGroup.MinsideMeny],
@@ -46,15 +47,18 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
 
     return (
         <div className={'media-tablet-desktop'}>
-            <MinsideKnapp arbeidsflate={arbeidsflate} />
+            <MinsidePersonKnapp
+                classname={minsideMenyClassname}
+                id={minsideKnappId}
+            />
             <EkspanderbarMeny
                 isOpen={isOpen}
-                classname={minsideDropdownClassname}
-                id={minsideDropdownClassname}
+                classname={minsideMenyClassname}
+                id={minsideMenyClassname}
             >
                 {menyPunkter.status === Status.OK ? (
                     <MinsideMenyInnhold
-                        classname={minsideDropdownClassname}
+                        classname={minsideMenyClassname}
                         menyLenker={minsideMenyPunkter}
                         dittNavUrl={environment.DITT_NAV_URL}
                         brukernavn={innloggetStatus.name?.toLowerCase() || ''}

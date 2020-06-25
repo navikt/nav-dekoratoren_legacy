@@ -13,6 +13,7 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { HovedmenyDesktop } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
 import { HovedmenyMobil } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
 import { Status } from 'api/api';
+import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
 import './HeaderMenylinje.less';
 
 export const headerLogoId = 'header-logo-id';
@@ -33,6 +34,9 @@ export const HeaderMenylinje = () => {
     const innloggetPrivatperson =
         innlogget && arbeidsflate === MenuValue.PRIVATPERSON;
 
+    const innloggetArbgiver =
+        innlogget && arbeidsflate === MenuValue.ARBEIDSGIVER;
+
     return (
         <nav className={cls.className} aria-label={'Hovedmeny'}>
             <div className={cls.element('elementer')}>
@@ -48,9 +52,12 @@ export const HeaderMenylinje = () => {
                 <SokDropdown kbNavMainState={kbNavMainState} />
                 <span className={cls.element('spacer')} />
                 {innloggetPrivatperson && (
-                    <VarslerDropdown kbNavMainState={kbNavMainState} />
+                    <>
+                        <VarslerDropdown kbNavMainState={kbNavMainState} />
+                        <MinsideMeny kbNavMainState={kbNavMainState} />
+                    </>
                 )}
-                {innlogget && <MinsideMeny kbNavMainState={kbNavMainState} />}
+                {innloggetArbgiver && <MinsideArbgiverKnapp />}
                 {innloggingsstatus === Status.OK && <LoggInnKnapp />}
                 <HovedmenyMobil />
             </div>

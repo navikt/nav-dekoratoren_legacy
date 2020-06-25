@@ -10,6 +10,7 @@ import { AppState } from 'store/reducers';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { MenuValue } from 'utils/meny-storage-utils';
+import './MinsideKnapp.less';
 
 const stateSelector = (state: AppState) => ({
     brukernavn: state.innloggingsstatus.data.name,

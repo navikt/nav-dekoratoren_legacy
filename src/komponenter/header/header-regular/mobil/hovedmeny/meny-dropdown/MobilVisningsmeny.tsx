@@ -117,10 +117,10 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                                     <Listelement
                                         className={menyClass.className}
                                         classElement="text-element"
+                                        key={index}
                                     >
                                         <a
                                             className="lenke"
-                                            key={index}
                                             href="https://nav.no"
                                             onClick={(event) =>
                                                 this.setMenyliste(
