@@ -7,10 +7,6 @@ import { Undertittel, Ingress } from 'nav-frontend-typografi';
 import LoggutIkonMobil from 'ikoner/meny/LoggutIkonMobil';
 import './InnloggetBruker.less';
 
-interface Props {
-    tabIndex: boolean;
-}
-
 const cls = BEMHelper('innloggetbruker');
 
 const stateSelector = (state: AppState) => ({
@@ -21,7 +17,7 @@ const loggut = (LOGOUT_URL: string) => {
     return (window.location.href = LOGOUT_URL);
 };
 
-const InnloggetBruker = (props: Props) => {
+const InnloggetBruker = () => {
     const { LOGOUT_URL } = useSelector((state: AppState) => state.environment);
     const { innlogget } = useSelector(stateSelector);
     return innlogget.data.authenticated ? (
@@ -37,7 +33,6 @@ const InnloggetBruker = (props: Props) => {
             <button
                 className={cls.element('loggut')}
                 onClick={() => loggut(LOGOUT_URL)}
-                tabIndex={props.tabIndex ? 0 : -1}
             >
                 <LoggutIkonMobil />
                 <div className={cls.element('loggut', 'text')}>

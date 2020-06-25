@@ -6,11 +6,11 @@ import { getLinkAnchorId } from 'komponenter/header/header-regular/common/sticky
 import './Sticky.less';
 
 type Props = {
-    alwaysSticky?: boolean;
+    mobilFixed?: boolean;
     children: JSX.Element;
 };
 
-export const Sticky = ({ alwaysSticky = false, children }: Props) => {
+export const Sticky = ({ mobilFixed = false, children }: Props) => {
     const prevScrollOffset = useRef(0);
     const baseOffset = useRef(0);
 
@@ -28,12 +28,6 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
         const placeholderElement = placeholderRef.current;
         const stickyElement = stickyRef.current;
         if (!placeholderElement || !stickyElement) {
-            return;
-        }
-
-        if (alwaysSticky) {
-            stickyElement.style.position = 'fixed';
-            setTop(stickyElement, 0);
             return;
         }
 
@@ -78,11 +72,16 @@ export const Sticky = ({ alwaysSticky = false, children }: Props) => {
             window.removeEventListener('resize', setElementSizeAndBaseOffset);
             window.removeEventListener('click', deferStickyOnAnchorLink);
         };
-    }, [alwaysSticky]);
+    }, []);
 
     return (
         <div className={'sticky-placeholder'} ref={placeholderRef}>
-            <div className={'sticky-container'} ref={stickyRef}>
+            <div
+                className={`sticky-container${
+                    mobilFixed ? ' sticky-container--mobil-fixed' : ''
+                }`}
+                ref={stickyRef}
+            >
                 {children}
             </div>
         </div>
