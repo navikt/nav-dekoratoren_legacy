@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 
 interface Props {
-    setFocusIndex: () => void;
     className: string;
 }
 
@@ -22,7 +21,6 @@ const Lukkundermeny = (props: Props) => {
                     href="https://nav.no"
                     onClick={(event) => {
                         event.preventDefault();
-                        props.setFocusIndex();
                         dispatch(toggleUndermenyVisning());
                     }}
                 >
