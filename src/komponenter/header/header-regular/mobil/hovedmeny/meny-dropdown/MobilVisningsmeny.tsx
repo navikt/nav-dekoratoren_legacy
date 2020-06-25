@@ -136,13 +136,13 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                             (menyElement: MenyNode, index: number) => {
                                 return (
                                     <Listelement
+                                        key={index}
                                         className={menyClass.className}
                                         classElement="text-element"
                                     >
                                         <a
                                             className="lenke"
                                             ref={this.visningslenker[index]}
-                                            key={index}
                                             href="https://nav.no"
                                             onClick={(event) =>
                                                 this.setMenyliste(
@@ -151,11 +151,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                                                     this.visningslenker[index]
                                                         .current
                                                 )
-                                            }
-                                            tabIndex={
-                                                this.hovedseksjonTabIndex()
-                                                    ? 0
-                                                    : -1
                                             }
                                         >
                                             {menyElement.displayName}
