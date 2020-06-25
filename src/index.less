@@ -53,9 +53,14 @@ body.no-scroll-mobil {
 
 .site-skiplinks ul,
 .sitefooter ul,
-.siteheader .header-linje ul,
 .siteheader .arbeidsflate ul {
     padding: 0;
+}
+
+.sideheader .header-linje ul {
+    @media (min-width: @desktopMinWidth) {
+        padding: 0;
+    }
 }
 
 .media-sm-mobil {
