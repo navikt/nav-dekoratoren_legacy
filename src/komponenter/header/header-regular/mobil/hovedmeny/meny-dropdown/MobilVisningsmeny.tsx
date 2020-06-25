@@ -44,15 +44,6 @@ interface State {
 type Props = VisningsmenyProps & StateProps;
 
 class MobilVisningsmeny extends React.Component<Props, State> {
-    private visningslenker = this.props.menyLenker.children.map(() =>
-        React.createRef<HTMLAnchorElement>()
-    );
-    private minsidelenkerRef = this.props.minsideLenker.children.map(() =>
-        React.createRef<HTMLAnchorElement>()
-    );
-
-    private node: any;
-
     constructor(props: Props) {
         super(props);
 
@@ -62,24 +53,13 @@ class MobilVisningsmeny extends React.Component<Props, State> {
         };
     }
 
-    setSubmenu = (meny: MenyNode, pointer: any) => {
-        this.node = pointer;
-        this.setState({ lenker: meny });
-    };
-
     setMenyliste = (
         event: React.MouseEvent<HTMLAnchorElement>,
-        meny: MenyNode,
-        pointer: any
+        meny: MenyNode
     ) => {
         event.preventDefault();
         this.props.togglemenu();
-        this.node = pointer;
         this.setState({ lenker: meny });
-    };
-
-    focusNode = () => {
-        this.node.focus();
     };
 
     render(): React.ReactNode {
@@ -123,7 +103,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                                     minsideLenker={minsideLenker}
                                     className={menyClass.className}
                                     openMeny={this.setMenyliste}
-                                    test={this.minsidelenkerRef}
                                 />
                             </div>
                         )}
@@ -136,20 +115,17 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                             (menyElement: MenyNode, index: number) => {
                                 return (
                                     <Listelement
-                                        key={index}
                                         className={menyClass.className}
                                         classElement="text-element"
                                     >
                                         <a
                                             className="lenke"
-                                            ref={this.visningslenker[index]}
+                                            key={index}
                                             href="https://nav.no"
                                             onClick={(event) =>
                                                 this.setMenyliste(
                                                     event,
-                                                    menyElement,
-                                                    this.visningslenker[index]
-                                                        .current
+                                                    menyElement
                                                 )
                                             }
                                         >
@@ -168,7 +144,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                 <Undermeny
                     className={menyClass.className}
                     undermenyIsOpen={underMenuIsOpen}
-                    setFocusNode={this.focusNode}
                     lenker={this.state.lenker}
                 />
             </div>
