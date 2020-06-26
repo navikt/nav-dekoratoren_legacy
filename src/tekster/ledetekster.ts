@@ -221,7 +221,10 @@ export const ledetekster: { [key: string]: string } = {
     'browser-utdatert-din-nettleser': 'Din nettleser: ',
     'browser-utdatert-din-nettleser-en': 'Your web browser: ',
     'browser-utdatert-din-nettleser-se': 'Din nettleser: ',
-    'session-timeout': 'Innlogget sesjon utløper om: ',
-    'session-timeout-en': 'Authenticated session expires in: ',
-    'session-timeout-se': 'Innlogget sesjon utløper om: ',
+    'session-countdown': 'Innlogget sesjon utløper om: ',
+    'session-countdown-en': 'Authenticated session expires in: ',
+    'session-countdown-se': 'Innlogget sesjon utløper om: ',
+    'session-timeout': 'Innlogget sesjon har utløpt.',
+    'session-timeout-en': 'Authenticated session has expired.',
+    'session-timeout-se': 'Innlogget sesjon har utløpt.',
 };

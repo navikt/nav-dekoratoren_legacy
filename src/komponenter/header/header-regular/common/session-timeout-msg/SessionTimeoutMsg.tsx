@@ -1,6 +1,4 @@
 import React from 'react';
-import jwtDecode from 'jwt-decode';
-import { useCookies } from 'react-cookie';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
@@ -9,47 +7,35 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
 import BEMHelper from 'utils/bem';
+import { useAuthExpire } from 'utils/authExpire';
 import './SessionTimeoutMsg.less';
 
-const cookieName = 'selvbetjening-idtoken';
 const warningThresholdSeconds = 3600;
 
 const secondsToMinSecString = (seconds: number) => {
     const secMod = Math.floor(seconds % 60);
     const mins = (seconds - secMod) / 60;
 
-    return `${mins}m ${secMod}s`;
-};
-
-type IdToken = {
-    auth_time: string;
-    exp: string;
+    return `${mins ? `${mins}m` : ''} ${secMod}s`;
 };
 
 export const SessionTimeoutMsg = () => {
     const { authenticated } = useSelector(
         (state: AppState) => state.innloggingsstatus.data
     );
-    const [secRemaining, setSecRemaining] = useState(0);
+    const [secRemaining, setSecRemaining] = useState(-1);
     const [isClosed, setIsClosed] = useState(false);
-    const [cookies] = useCookies([cookieName]);
-    const cls = BEMHelper('session-timeout-msg');
+    const expires = useAuthExpire();
 
-    const idToken = cookies[cookieName];
+    const cls = BEMHelper('session-timeout-msg');
     const showWarning =
         authenticated &&
         !isClosed &&
-        secRemaining > 0 &&
+        secRemaining >= 0 &&
         secRemaining < warningThresholdSeconds;
 
     useEffect(() => {
-        if (!authenticated || !idToken) {
-            return;
-        }
-
-        const decodedToken = jwtDecode(idToken) as IdToken;
-        const expires = Number(decodedToken?.exp);
-        if (!expires) {
+        if (!authenticated || !expires) {
             return;
         }
 
@@ -62,7 +48,7 @@ export const SessionTimeoutMsg = () => {
 
         const timer = setInterval(countdown, 1000);
         return () => clearInterval(timer);
-    }, [authenticated, idToken]);
+    }, [authenticated, expires]);
 
     return (
         <div
@@ -73,8 +59,14 @@ export const SessionTimeoutMsg = () => {
             <AlertStripeInfo>
                 <div className={cls.element('content')}>
                     <span>
-                        <Tekst id={'session-timeout'} />
-                        {secondsToMinSecString(secRemaining)}
+                        {secRemaining > 0 ? (
+                            <>
+                                <Tekst id={'session-countdown'} />
+                                {secondsToMinSecString(secRemaining)}
+                            </>
+                        ) : (
+                            <Tekst id={'session-timeout'} />
+                        )}
                     </span>
                     <LukkKnapp onClick={() => setIsClosed(true)} />
                 </div>
