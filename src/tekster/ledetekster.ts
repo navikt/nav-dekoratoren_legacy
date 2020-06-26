@@ -209,4 +209,5 @@ export const ledetekster: { [key: string]: string } = {
     'spinner-sok': 'Laster forhåndsvisning...',
     'spinner-sok-en': 'Loading search preview...',
     'spinner-sok-se': 'Laster forhåndsvisning...',
+    'session-timeout': 'Innlogget sesjon utløper: ',
 };

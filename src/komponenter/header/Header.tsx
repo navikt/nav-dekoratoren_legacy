@@ -12,6 +12,7 @@ import { Language, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
+import { SessionTimeoutMsg } from 'komponenter/header/header-regular/common/session-timeout-msg/SessionTimeoutMsg';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -84,6 +85,7 @@ export const Header = () => {
                 ) : (
                     <HeaderRegular />
                 )}
+                <SessionTimeoutMsg />
             </header>
         </Fragment>
     );
