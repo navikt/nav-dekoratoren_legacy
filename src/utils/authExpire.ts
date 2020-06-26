@@ -8,7 +8,7 @@ type IdToken = {
     exp: string;
 };
 
-export const useAuthExpire = () => {
+export const useAuthExpireTimeSeconds = () => {
     const [cookies] = useCookies([cookieName]);
     const idToken = cookies[cookieName];
 

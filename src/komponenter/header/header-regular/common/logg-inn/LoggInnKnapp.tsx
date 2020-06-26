@@ -7,6 +7,7 @@ import { AppState } from 'store/reducers';
 import { MenuValue } from 'utils/meny-storage-utils';
 import KnappBase from 'nav-frontend-knapper';
 import './LoggInnKnapp.less';
+import { useAuthExpireTimeSeconds } from 'utils/authExpire';
 
 export const loginKnappId = 'login-knapp-id';
 
@@ -21,6 +22,8 @@ export const LoggInnKnapp = () => {
     const { authenticated, arbeidsflate, language, environment } = useSelector(
         stateSelector
     );
+    const expireTime = useAuthExpireTimeSeconds();
+    const expired = expireTime && expireTime - Date.now() / 1000 > 0;
 
     const handleButtonClick = () => {
         const { LOGIN_URL, DITT_NAV_URL, LOGOUT_URL } = environment;
@@ -40,13 +43,13 @@ export const LoggInnKnapp = () => {
             action: authenticated ? 'logg-ut' : 'logg-inn',
         });
 
-        return authenticated
+        return authenticated && !expired
             ? (window.location.href = LOGOUT_URL)
             : (window.location.href = loginUrl);
     };
 
     const knappetekst = finnTekst(
-        authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp',
+        authenticated && !expired ? 'logg-ut-knapp' : 'logg-inn-knapp',
         language
     );
 

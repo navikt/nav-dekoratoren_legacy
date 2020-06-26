@@ -7,7 +7,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
 import BEMHelper from 'utils/bem';
-import { useAuthExpire } from 'utils/authExpire';
+import { useAuthExpireTimeSeconds } from 'utils/authExpire';
 import './SessionTimeoutMsg.less';
 
 const warningThresholdSeconds = 3600;
@@ -25,7 +25,7 @@ export const SessionTimeoutMsg = () => {
     );
     const [secRemaining, setSecRemaining] = useState(-1);
     const [isClosed, setIsClosed] = useState(false);
-    const expires = useAuthExpire();
+    const expires = useAuthExpireTimeSeconds();
 
     const cls = BEMHelper('session-timeout-msg');
     const showWarning =
@@ -33,6 +33,8 @@ export const SessionTimeoutMsg = () => {
         !isClosed &&
         secRemaining >= 0 &&
         secRemaining < warningThresholdSeconds;
+
+    console.log(expires, authenticated, secRemaining);
 
     useEffect(() => {
         if (!authenticated || !expires) {
