@@ -1,0 +1,45 @@
+@import (reference) '../../../styling-variabler.less';
+
+.lukk-knapp {
+    @lukkIkonSize: 24px;
+
+    position: absolute;
+    top: 0;
+    right: @margins-sides-desktop;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0 @lukkIkonSize / 2;
+    margin: 8px 0;
+    width: @lukkIkonSize * 2;
+    height: calc(100% - 16px);
+    color: @navBla;
+
+    .header-knapp-focus-mixin();
+
+    &:hover {
+        cursor: pointer;
+        outline: 1px @navBla solid;
+    }
+
+    @media (max-width: @smallDesktopLimitWidth) {
+        right: @margins-sides-desktop-small;
+    }
+
+    .line-rotated(@theta) {
+        position: absolute;
+        top: 50%;
+        width: @lukkIkonSize;
+        height: 2px;
+        background-color: @navBla;
+        transform: rotateZ(@theta);
+    }
+
+    &__ikon-1 {
+        .line-rotated(45deg);
+    }
+
+    &__ikon-2 {
+        .line-rotated(-45deg);
+    }
+}
