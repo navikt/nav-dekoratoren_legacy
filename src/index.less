@@ -4,10 +4,9 @@ body {
     overflow-y: scroll;
 }
 
-body.no-scroll {
-    overflow-y: hidden;
-    @media (min-width: @desktopMinWidth) {
-        overflow-y: scroll;
+body.no-scroll-mobil {
+    @media (max-width: @mobilMaxWidth) {
+        overflow-y: hidden;
     }
 }
 
@@ -29,21 +28,16 @@ body.no-scroll {
     width: 100%;
 }
 
-.desktopmeny,
-.mobilmeny {
-    width: 100%;
-    background-color: white;
-}
-
-.desktopmeny {
-    height: 106px;
-    padding: 1rem 0;
-}
-
 .header-z-wrapper {
     z-index: 1000;
     position: relative;
     background-color: white;
+}
+
+.arbeidsflate {
+    @media (max-width: @mobilMaxWidth) {
+        display: none;
+    }
 }
 
 .site-skiplinks,
@@ -59,9 +53,14 @@ body.no-scroll {
 
 .site-skiplinks ul,
 .sitefooter ul,
-.siteheader .desktopmeny ul,
 .siteheader .arbeidsflate ul {
     padding: 0;
+}
+
+.sideheader .header-linje ul {
+    @media (min-width: @desktopMinWidth) {
+        padding: 0;
+    }
 }
 
 .media-sm-mobil {

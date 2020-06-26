@@ -1,0 +1,35 @@
+@import (reference) '../../../styling-variabler.less';
+@import 'desktop/DesktopHeader';
+@import 'mobil/MobilHeader';
+
+.header-linje {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: @header-separator-height @header-separator-farge solid;
+    background-color: white;
+    position: relative;
+
+    &__elementer {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__spacer {
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: @mobilMaxWidth) {
+        .mobil-header();
+    }
+
+    @media (min-width: @desktopMinWidth) {
+        .desktop-header();
+    }
+}

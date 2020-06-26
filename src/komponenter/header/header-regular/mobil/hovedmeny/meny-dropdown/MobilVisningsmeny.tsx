@@ -8,26 +8,19 @@ import MenyIngress from './mobil-innhold/MenyIngress';
 import Undermeny from './mobil-innhold/Undermeny';
 import Listelement from './mobil-innhold/Listelement';
 import MobilarbeidsflateValg from '../../arbeidsflatemeny/MobilarbeidsflateValg';
-import VarselvisningMobil from '../../varsler/VarselvisningMobil';
 import { AppState } from 'store/reducers';
-import { Dispatch } from 'store/dispatch-type';
 import { connect } from 'react-redux';
 import InnloggetBruker from './mobil-innhold/innloggetbruker/InnloggetBruker';
 import ForsideLenke from './mobil-innhold/ForsideLenke';
 import Dittnavmeny from './mobil-innhold/dittnavmeny/Dittnavmeny';
 import { InnloggingsstatusState } from 'store/reducers/innloggingsstatus-duck';
-import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
-import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
 import './MobilVisningsmeny.less';
 
-interface DispatchProps {
-    toggleVarsel: () => void;
-}
+export const mobilSokInputId = `mobil-sok-input`;
 
 interface StateProps {
     arbeidsflate: MenuValue;
-    visvarsel: boolean;
     innloggingsstatus: InnloggingsstatusState;
 }
 
@@ -48,18 +41,9 @@ interface State {
     lenker: MenyNode;
 }
 
-type Props = VisningsmenyProps & StateProps & DispatchProps;
+type Props = VisningsmenyProps & StateProps;
 
 class MobilVisningsmeny extends React.Component<Props, State> {
-    private visningslenker = this.props.menyLenker.children.map(() =>
-        React.createRef<HTMLAnchorElement>()
-    );
-    private minsidelenkerRef = this.props.minsideLenker.children.map(() =>
-        React.createRef<HTMLAnchorElement>()
-    );
-
-    private node: any;
-
     constructor(props: Props) {
         super(props);
 
@@ -69,32 +53,13 @@ class MobilVisningsmeny extends React.Component<Props, State> {
         };
     }
 
-    hovedseksjonTabIndex = (): boolean => {
-        return (
-            this.props.menuIsOpen &&
-            this.props.underMenuIsOpen &&
-            !this.props.varslerIsOpen
-        );
-    };
-
-    setSubmenu = (meny: MenyNode, pointer: any) => {
-        this.node = pointer;
-        this.setState({ lenker: meny });
-    };
-
     setMenyliste = (
         event: React.MouseEvent<HTMLAnchorElement>,
-        meny: MenyNode,
-        pointer: any
+        meny: MenyNode
     ) => {
         event.preventDefault();
         this.props.togglemenu();
-        this.node = pointer;
         this.setState({ lenker: meny });
-    };
-
-    focusNode = () => {
-        this.node.focus();
     };
 
     render(): React.ReactNode {
@@ -102,7 +67,6 @@ class MobilVisningsmeny extends React.Component<Props, State> {
             classname,
             menyLenker,
             menuIsOpen,
-            visvarsel,
             arbeidsflate,
             lang,
             underMenuIsOpen,
@@ -110,7 +74,7 @@ class MobilVisningsmeny extends React.Component<Props, State> {
         } = this.props;
         const menyClass = BEMHelper(classname);
         return (
-            <>
+            <div className={menyClass.className}>
                 <section
                     className={menyClass.element(
                         'startmeny',
@@ -118,19 +82,17 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                     )}
                 >
                     <Sok
-                        tabindex={this.hovedseksjonTabIndex()}
                         isOpen={menuIsOpen}
                         dropdownTransitionMs={400}
                         id={mobilSokInputId}
                     />
-                    <InnloggetBruker tabIndex={this.hovedseksjonTabIndex()} />
+                    <InnloggetBruker />
 
                     <ForsideLenke
                         arbeidsflate={arbeidsflate}
                         erInnlogget={
                             this.props.innloggingsstatus.data.authenticated
                         }
-                        tabindex={this.hovedseksjonTabIndex()}
                     />
                     {this.props.innloggingsstatus.data.authenticated &&
                         arbeidsflate === MenuValue.PRIVATPERSON && (
@@ -139,82 +101,59 @@ class MobilVisningsmeny extends React.Component<Props, State> {
                             >
                                 <Dittnavmeny
                                     minsideLenker={minsideLenker}
-                                    tabIndex={this.hovedseksjonTabIndex()}
                                     className={menyClass.className}
                                     openMeny={this.setMenyliste}
-                                    test={this.minsidelenkerRef}
                                 />
                             </div>
                         )}
                     <MenyIngress
                         className={menyClass.element('meny', 'ingress')}
                         inputext={arbeidsflate}
-                        tabindex={this.hovedseksjonTabIndex()}
                     />
                     <ul className={menyClass.element('meny', 'mainlist')}>
                         {menyLenker.children.map(
                             (menyElement: MenyNode, index: number) => {
                                 return (
-                                    <a
-                                        className="lenke"
-                                        ref={this.visningslenker[index]}
+                                    <Listelement
+                                        className={menyClass.className}
+                                        classElement="text-element"
                                         key={index}
-                                        href="https://nav.no"
-                                        onClick={(event) =>
-                                            this.setMenyliste(
-                                                event,
-                                                menyElement,
-                                                this.visningslenker[index]
-                                                    .current
-                                            )
-                                        }
-                                        tabIndex={
-                                            this.hovedseksjonTabIndex() ? 0 : -1
-                                        }
                                     >
-                                        <Listelement
-                                            className={menyClass.className}
-                                            classElement="text-element"
+                                        <a
+                                            className="lenke"
+                                            href="https://nav.no"
+                                            onClick={(event) =>
+                                                this.setMenyliste(
+                                                    event,
+                                                    menyElement
+                                                )
+                                            }
                                         >
                                             {menyElement.displayName}
                                             <HoyreChevron />
-                                        </Listelement>
-                                    </a>
+                                        </a>
+                                    </Listelement>
                                 );
                             }
                         )}
                     </ul>
                     {lang === Language.NORSK && (
-                        <MobilarbeidsflateValg
-                            tabindex={this.hovedseksjonTabIndex()}
-                            lang={lang}
-                        />
+                        <MobilarbeidsflateValg lang={lang} />
                     )}
                 </section>
                 <Undermeny
                     className={menyClass.className}
-                    undermenyIsOpen={menuIsOpen}
-                    setFocusNode={this.focusNode}
-                    tabindex={underMenuIsOpen && !menuIsOpen}
+                    undermenyIsOpen={underMenuIsOpen}
                     lenker={this.state.lenker}
                 />
-                <VarselvisningMobil
-                    visvarsel={visvarsel}
-                    visningmenyClassname={menyClass.className}
-                />
-            </>
+            </div>
         );
     }
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
     arbeidsflate: state.arbeidsflate.status,
-    visvarsel: state.dropdownToggles.varsler,
     innloggingsstatus: state.innloggingsstatus,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    toggleVarsel: () => dispatch(toggleVarsler()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MobilVisningsmeny);
+export default connect(mapStateToProps)(MobilVisningsmeny);

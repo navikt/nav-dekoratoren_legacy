@@ -23,7 +23,6 @@ interface StateProps {
 }
 
 interface Props {
-    tabindex?: boolean;
     id?: string;
     isOpen: boolean;
     dropdownTransitionMs?: number;
@@ -305,7 +304,6 @@ class Sok extends React.Component<StateProps & Props, InputState> {
                                             className={klassenavn}
                                             getInputProps={getInputProps}
                                             language={language}
-                                            tabIndex={this.props.tabindex}
                                             writtenInput={writtenInput}
                                             onReset={() => {
                                                 setState({ isOpen: false });

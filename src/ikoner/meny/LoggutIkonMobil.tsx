@@ -9,7 +9,6 @@ const LoggutIkonMobil = () => {
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
-            tabIndex={-1}
         >
             <title>logg ut ikon</title>
             <desc>logg ut knapp mobilvisning</desc>

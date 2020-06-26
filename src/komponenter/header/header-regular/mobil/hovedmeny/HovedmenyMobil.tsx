@@ -10,7 +10,10 @@ import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { dataInitState } from 'store/reducers/menu-duck';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
-import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/knapper/hovedmeny-knapp/HovedmenyKnapp';
+import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapp/hovedmeny-knapp/HovedmenyKnapp';
+
+export const mobilmenyKnappId = 'mobilmeny-knapp-id';
+const classname = 'mobilmeny';
 
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
@@ -21,11 +24,7 @@ const stateSelector = (state: AppState) => ({
     varselIsOpen: state.dropdownToggles.varsler,
 });
 
-const classname = 'mobilmeny';
-export const mobilHovedmenyKnappId = `${classname}-knapp-id`;
-export const mobilSokInputId = `${classname}-sok-input`;
-
-const HovedmenyMobil = () => {
+export const HovedmenyMobil = () => {
     const dispatch = useDispatch();
     const {
         meny,
@@ -35,6 +34,12 @@ const HovedmenyMobil = () => {
         hovedIsOpen,
         varselIsOpen,
     } = useSelector(stateSelector);
+
+    const hovedmenyPunkter = getHovedmenyNode(
+        meny.data,
+        language,
+        arbeidsflate
+    );
 
     const menutoggle = () => {
         gaEvent({
@@ -55,23 +60,11 @@ const HovedmenyMobil = () => {
 
     const isOpen = hovedIsOpen || underIsOpen || varselIsOpen;
 
-    const menyKnapp = (
-        <HovedmenyKnapp
-            isOpen={hovedIsOpen}
-            onClick={hovedmenutoggle}
-            hovedmenyClassname={classname}
-            id={mobilHovedmenyKnappId}
-        />
-    );
-
     const dropdownInnhold =
         meny.status === Status.OK ? (
             <MobilVisningsmeny
                 classname={classname}
-                menyLenker={
-                    getHovedmenyNode(meny.data, language, arbeidsflate) ||
-                    dataInitState
-                }
+                menyLenker={hovedmenyPunkter || dataInitState}
                 minsideLenker={
                     getMinsideMenyNode(meny.data, language) || dataInitState
                 }
@@ -90,17 +83,15 @@ const HovedmenyMobil = () => {
         );
 
     return (
-        <>
+        <div className={'media-sm-mobil'}>
+            <HovedmenyKnapp id={mobilmenyKnappId} />
             <EkspanderbarMeny
+                isOpen={hovedIsOpen}
                 classname={classname}
-                isOpen={isOpen}
-                menyKnapp={menyKnapp}
                 id={classname}
             >
                 {dropdownInnhold}
             </EkspanderbarMeny>
-        </>
+        </div>
     );
 };
-
-export default HovedmenyMobil;
