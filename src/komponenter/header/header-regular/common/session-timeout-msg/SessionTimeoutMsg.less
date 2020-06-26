@@ -5,20 +5,22 @@
     overflow: hidden;
     width: 100%;
     visibility: hidden;
+    opacity: 0;
     max-width: @desktopMaxWidth;
     margin: 0.5rem auto;
     left: 0;
     right: 0;
     display: flex;
     justify-content: flex-end;
-    transform: translateY(-200px);
-    transition-property: visibility, transform;
-    transition-duration: 0.5s;
+    transform: translateY(-100px);
+    transition-property: visibility, transform, opacity;
+    transition-duration: 0.4s;
     transition-timing-function: ease-in;
 
     &--visible {
         visibility: visible;
         transform: none;
+        opacity: 1;
     }
 
     .alertstripe {
