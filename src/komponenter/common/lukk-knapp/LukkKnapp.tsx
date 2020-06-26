@@ -1,6 +1,6 @@
 import React from 'react';
-import './LukkKnapp.less';
 import BEMHelper from 'utils/bem';
+import './LukkKnapp.less';
 
 type Props = {
     onClick: () => void;

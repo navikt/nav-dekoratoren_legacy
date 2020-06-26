@@ -7,9 +7,9 @@ import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import Tekst from 'tekster/finn-tekst';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
-import './SessionTimeoutMsg.less';
 import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
 import BEMHelper from 'utils/bem';
+import './SessionTimeoutMsg.less';
 
 const cookieName = 'selvbetjening-idtoken';
 const warningThresholdSeconds = 3600;
