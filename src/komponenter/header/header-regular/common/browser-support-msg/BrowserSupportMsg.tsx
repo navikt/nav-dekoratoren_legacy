@@ -9,10 +9,10 @@ import { setStorageItem } from 'utils/sessionStorage';
 import { getStorageItem } from 'utils/sessionStorage';
 import { detect } from 'detect-browser';
 import { Undertekst } from 'nav-frontend-typografi';
+import { BrowserInfo } from 'detect-browser';
 import './BrowserSupportMsg.less';
 
 import ikon from 'nav-frontend-ikoner-assets/assets/advarsel-sirkel-fyll.svg';
-import { BrowserInfo } from 'detect-browser';
 
 const storageKey = 'browser-warning-closed';
 
@@ -38,8 +38,6 @@ const isBrowserSupported = (browser: BrowserInfo) => {
     };
 
     switch (browser.name) {
-        case 'chrome':
-            return false;
         case 'ie':
             return false;
         default:
@@ -53,8 +51,6 @@ const getBrowserSpecificMsg = (browser: BrowserInfo) => {
     }
 
     switch (browser.name) {
-        case 'chrome':
-            return `Google Chrome v.${browser.version} (kun for test, denne er ok!)`;
         case 'ie':
             return `Microsoft Internet Explorer v.${browser.version}`;
         default:

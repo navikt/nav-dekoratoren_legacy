@@ -15,6 +15,7 @@ import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
 import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/browser-support-msg/BrowserSupportMsg';
 import { verifyWindowObj } from 'utils/Environment';
+import { erNavDekoratoren } from 'utils/Environment';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -83,7 +84,11 @@ export const Header = () => {
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg
                 // TODO: fix før prod!
-                baseUrl={verifyWindowObj() ? document.location.origin : ''}
+                baseUrl={
+                    erNavDekoratoren()
+                        ? document.location.origin
+                        : 'https://www-q1.nav.no'
+                }
             />
             <header className="siteheader">
                 {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
