@@ -9,8 +9,10 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import './SessionTimeoutMsg.less';
 import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
+import BEMHelper from 'utils/bem';
 
 const cookieName = 'selvbetjening-idtoken';
+const warningThresholdSeconds = 3600;
 
 const secondsToMinSecString = (seconds: number) => {
     const secMod = Math.floor(seconds % 60);
@@ -25,16 +27,23 @@ type IdToken = {
 };
 
 export const SessionTimeoutMsg = () => {
-    const { innlogget } = useSelector((state: AppState) => ({
-        innlogget: state.innloggingsstatus.data.authenticated,
-    }));
+    const { authenticated } = useSelector(
+        (state: AppState) => state.innloggingsstatus.data
+    );
     const [secRemaining, setSecRemaining] = useState(0);
     const [isClosed, setIsClosed] = useState(false);
     const [cookies] = useCookies([cookieName]);
+    const cls = BEMHelper('session-timeout-msg');
+
     const idToken = cookies[cookieName];
+    const showWarning =
+        authenticated &&
+        !isClosed &&
+        secRemaining > 0 &&
+        secRemaining < warningThresholdSeconds;
 
     useEffect(() => {
-        if (!innlogget || !idToken) {
+        if (!authenticated || !idToken) {
             return;
         }
 
@@ -53,15 +62,23 @@ export const SessionTimeoutMsg = () => {
 
         const timer = setInterval(countdown, 1000);
         return () => clearInterval(timer);
-    }, [innlogget, idToken]);
+    }, [authenticated, idToken]);
 
-    return secRemaining > 0 && innlogget && !isClosed ? (
-        <div className={'session-timeout-msg-wrapper'}>
-            <AlertStripeInfo className={'session-timeout-msg'}>
-                <Tekst id={'session-timeout'} />
-                {secondsToMinSecString(secRemaining)}
-                <LukkKnapp onClick={() => setIsClosed(true)} />
+    return (
+        <div
+            className={`${cls.className}${
+                showWarning ? ` ${cls.modifier('visible')}` : ''
+            }`}
+        >
+            <AlertStripeInfo>
+                <div className={cls.element('content')}>
+                    <span>
+                        <Tekst id={'session-timeout'} />
+                        {secondsToMinSecString(secRemaining)}
+                    </span>
+                    <LukkKnapp onClick={() => setIsClosed(true)} />
+                </div>
             </AlertStripeInfo>
         </div>
-    ) : null;
+    );
 };

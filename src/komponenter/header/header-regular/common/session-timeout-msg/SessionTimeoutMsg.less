@@ -1,17 +1,43 @@
 @import (reference) '../../../../../styling-variabler.less';
 
-.session-timeout-msg-wrapper {
+.session-timeout-msg {
     position: absolute;
+    overflow: hidden;
     width: 100%;
+    visibility: hidden;
     max-width: @desktopMaxWidth;
     margin: 0.5rem auto;
     left: 0;
     right: 0;
     display: flex;
     justify-content: flex-end;
-}
+    transform: translateY(-200px);
+    transition-property: visibility, transform;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in;
 
-.session-timeout-msg {
-    width: 360px;
-    margin: 0 @margins-sides-desktop;
+    &--visible {
+        visibility: visible;
+        transform: none;
+    }
+
+    .alertstripe {
+        width: 375px;
+        margin: 0 @margins-sides-desktop;
+        align-items: center;
+
+        @media (max-width: @smallDesktopLimitWidth) {
+            margin: 0 @margins-sides-desktop-small;
+        }
+
+        @media (max-width: @mobilMaxWidth) {
+            margin: 0 @margins-sides-mobil;
+        }
+    }
+
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }

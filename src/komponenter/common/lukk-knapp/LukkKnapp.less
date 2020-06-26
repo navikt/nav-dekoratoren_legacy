@@ -2,17 +2,15 @@
 
 .lukk-knapp {
     @lukkIkonSize: 24px;
+    @padding: 4px;
 
-    position: absolute;
-    top: 0;
-    right: @margins-sides-desktop;
+    position: relative;
     background-color: transparent;
     box-shadow: none;
     border: none;
-    padding: 0 @lukkIkonSize / 2;
-    margin: 8px 0;
-    width: @lukkIkonSize * 2;
-    height: calc(100% - 16px);
+    padding: @padding;
+    width: @lukkIkonSize + @padding * 2;
+    height: @lukkIkonSize + @padding * 2;
     color: @navBla;
 
     .header-knapp-focus-mixin();
@@ -22,16 +20,13 @@
         outline: 1px @navBla solid;
     }
 
-    @media (max-width: @smallDesktopLimitWidth) {
-        right: @margins-sides-desktop-small;
-    }
-
     .line-rotated(@theta) {
         position: absolute;
         top: 50%;
         width: @lukkIkonSize;
         height: 2px;
         background-color: @navBla;
+        transform-origin: center;
         transform: rotateZ(@theta);
     }
 
