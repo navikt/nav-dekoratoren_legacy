@@ -1,0 +1,87 @@
+@import (reference) '../../../../../styling-variabler.less';
+
+.browser-utdatert {
+    @lukkIkonSize: 24px;
+
+    &__wrapper {
+        position: relative;
+        background-color: @navOransjeLighten60;
+        border-bottom: @header-separator-farge 2px solid;
+    }
+
+    &__innhold {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 1rem @margins-sides-desktop;
+        margin: 0 auto;
+        max-width: @desktopMaxWidth;
+
+        @media (max-width: @smallDesktopLimitWidth) {
+            padding: 0.5rem @margins-sides-desktop-small;
+            justify-content: flex-start;
+        }
+    }
+
+    &__tekst {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-right: calc(@lukkIkonSize * 2);
+    }
+
+    &__varsel-ikon {
+        margin-right: 1rem;
+        border-radius: 50%;
+        border: 2px black solid;
+
+        img {
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    &__lukk-knapp {
+        position: absolute;
+        top: 0;
+        right: @margins-sides-desktop;
+        background-color: transparent;
+        box-shadow: none;
+        border: none;
+        padding: 0 @lukkIkonSize / 2;
+        margin: 8px 0;
+        width: @lukkIkonSize * 2;
+        height: calc(100% - 16px);
+        color: @navBla;
+
+        .header-knapp-focus-mixin();
+
+        &:hover {
+            cursor: pointer;
+            outline: 1px @navBla solid;
+        }
+
+        @media (max-width: @smallDesktopLimitWidth) {
+            right: @margins-sides-desktop-small;
+        }
+    }
+
+    .line-rotated(@theta) {
+        position: absolute;
+        top: 50%;
+        width: @lukkIkonSize;
+        height: 2px;
+        background-color: @navBla;
+        transform: rotateZ(@theta);
+    }
+
+    &__lukk-ikon-1 {
+        .line-rotated(45deg);
+    }
+
+    &__lukk-ikon-2 {
+        .line-rotated(-45deg);
+    }
+}

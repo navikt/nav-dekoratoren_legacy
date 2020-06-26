@@ -12,6 +12,10 @@ import { Language, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
+import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
+import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/browser-support-msg/BrowserSupportMsg';
+import { verifyWindowObj } from 'utils/Environment';
+import { erNavDekoratoren } from 'utils/Environment';
 import { SessionTimeoutMsg } from 'komponenter/header/header-regular/common/session-timeout-msg/SessionTimeoutMsg';
 
 export const Header = () => {
@@ -79,6 +83,14 @@ export const Header = () => {
         <Fragment>
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
+            <BrowserSupportMsg
+                // TODO: fix før prod!
+                baseUrl={
+                    erNavDekoratoren()
+                        ? document.location.origin
+                        : 'https://www-q1.nav.no'
+                }
+            />
             <header className="siteheader">
                 {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
                     <HeaderSimple />

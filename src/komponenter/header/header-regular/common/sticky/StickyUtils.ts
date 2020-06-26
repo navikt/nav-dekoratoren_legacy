@@ -1,3 +1,7 @@
+const getElementOffsetFromPageTop = (element: HTMLElement) => {
+    return element?.getBoundingClientRect()?.top + window?.pageYOffset || 0;
+};
+
 export const setTop = (element: HTMLElement, top: number) =>
     (element.style.top = `${top}px`);
 
@@ -13,42 +17,43 @@ export const getLinkAnchorId = (element: HTMLElement | null): string | null => {
 
 export const stickyScrollHandler = (
     prevScrollOffset: React.MutableRefObject<number>,
-    baseOffset: React.MutableRefObject<number>,
-    element: HTMLElement
+    stickyElement: HTMLElement,
+    placeholderElement: HTMLElement
 ) => () => {
-    if (!element.offsetHeight) {
+    if (!stickyElement.offsetHeight) {
         return;
     }
 
     const scrollOffset = window.pageYOffset;
-    const elementOffset = element.offsetTop;
+    const elementOffset = stickyElement.offsetTop;
     const scrollChange = scrollOffset - prevScrollOffset.current;
+    const baseOffset = getElementOffsetFromPageTop(placeholderElement);
 
     const onScrollDown = () => {
-        if (element.style.position !== 'absolute') {
-            element.style.position = 'absolute';
+        if (stickyElement.style.position !== 'absolute') {
+            stickyElement.style.position = 'absolute';
             const absoluteOffsetFromFixed =
-                scrollOffset + Math.min(elementOffset, 0) - baseOffset.current;
-            setTop(element, absoluteOffsetFromFixed);
+                scrollOffset + Math.min(elementOffset, 0) - baseOffset;
+            setTop(stickyElement, absoluteOffsetFromFixed);
         }
     };
 
     const onScrollUp = () => {
-        if (element.style.position === 'fixed') {
-            setTop(element, Math.min(elementOffset - scrollChange, 0));
+        if (stickyElement.style.position === 'fixed') {
+            setTop(stickyElement, Math.min(elementOffset - scrollChange, 0));
         } else {
-            element.style.position = 'fixed';
+            stickyElement.style.position = 'fixed';
             const fixedOffsetFromAbsolute = Math.max(
-                elementOffset - scrollOffset + baseOffset.current,
-                scrollChange - element.scrollHeight
+                elementOffset - scrollOffset + baseOffset,
+                scrollChange - stickyElement.scrollHeight
             );
-            setTop(element, Math.min(fixedOffsetFromAbsolute, 0));
+            setTop(stickyElement, Math.min(fixedOffsetFromAbsolute, 0));
         }
     };
 
-    if (scrollOffset <= baseOffset.current) {
-        element.style.position = 'absolute';
-        setTop(element, 0);
+    if (scrollOffset <= baseOffset) {
+        stickyElement.style.position = 'absolute';
+        setTop(stickyElement, 0);
     } else {
         scrollChange >= 0 ? onScrollDown() : onScrollUp();
     }
