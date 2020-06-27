@@ -11,7 +11,6 @@ type IdToken = {
 export const useAuthExpireTimeSeconds = () => {
     const [cookies] = useCookies([cookieName]);
     const idToken = cookies[cookieName];
-    console.log('1: ', cookies);
 
     if (!idToken) {
         return null;

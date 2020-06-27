@@ -13,9 +13,8 @@ import './SessionTimeoutMsg.less';
 const warningThresholdSeconds = 3600;
 
 const secondsToMinSecString = (seconds: number) => {
-    const secMod = Math.floor(seconds % 60);
+    const secMod = seconds % 60;
     const mins = (seconds - secMod) / 60;
-
     return `${mins ? `${mins}m` : ''} ${secMod}s`;
 };
 
