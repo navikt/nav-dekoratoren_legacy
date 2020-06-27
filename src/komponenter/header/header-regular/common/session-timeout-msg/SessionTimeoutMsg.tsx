@@ -34,8 +34,6 @@ export const SessionTimeoutMsg = () => {
         secRemaining >= 0 &&
         secRemaining < warningThresholdSeconds;
 
-    console.log(expires, authenticated, secRemaining);
-
     useEffect(() => {
         if (!authenticated || !expires) {
             return;
