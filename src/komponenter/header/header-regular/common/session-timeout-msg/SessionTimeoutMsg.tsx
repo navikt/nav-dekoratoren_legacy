@@ -32,13 +32,15 @@ export const SessionTimeoutMsg = () => {
         secRemaining < warningThresholdSeconds;
 
     useEffect(() => {
-        if (!authenticated || !expireTime) {
+        if (!authenticated) {
             return;
         }
 
+        const expireTestVar = expireTime || Math.floor(Date.now() / 1000 + 120);
+
         const countdown = () => {
             const remaining = Math.floor(
-                Math.max(expireTime - Date.now() / 1000, 0)
+                Math.max(expireTestVar - Date.now() / 1000, 0)
             );
             setSecRemaining(remaining);
         };

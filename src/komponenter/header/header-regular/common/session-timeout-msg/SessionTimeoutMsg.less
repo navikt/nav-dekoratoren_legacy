@@ -7,7 +7,7 @@
     visibility: hidden;
     opacity: 0;
     max-width: @desktopMaxWidth;
-    margin: 0.5rem auto;
+    margin: 0 auto;
     left: 0;
     right: 0;
     display: flex;
@@ -27,6 +27,9 @@
         width: 375px;
         margin: 0 @margins-sides-desktop;
         align-items: center;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top: none;
 
         @media (max-width: @smallDesktopLimitWidth) {
             margin: 0 @margins-sides-desktop-small;
