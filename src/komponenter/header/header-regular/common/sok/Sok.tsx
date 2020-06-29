@@ -46,6 +46,7 @@ const Sok = (props: Props) => {
     }, [props.isOpen]);
 
     const onReset = () => {
+        setInput('');
         setLoading(false);
     };
 
