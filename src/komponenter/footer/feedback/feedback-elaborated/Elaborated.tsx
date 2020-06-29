@@ -1,30 +1,64 @@
-import React, { Fragment } from 'react';
-import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
+import React, { useState } from 'react';
 import { Textarea } from 'nav-frontend-skjema';
-import './Elaborated.less'
+import './Elaborated.less';
+import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
+import Alertstripe from 'nav-frontend-alertstriper';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 
 const Elaborated = () => {
+    const [errorTitle, setErrorTitle] = useState();
+    const [errorMessage, setErrorMessage] = useState(String);
 
-    const textareaDidChange = () => {
-        console.log('Endret');
-        
-    }
+    const submitFeedback = () => {
+        const report = {
+            title: errorTitle,
+            message: errorMessage,
+        };
+
+        console.log(report);
+    };
+
+    const ErrorTitleEntry = (props: any) => (
+        <Flatknapp
+            value={props.tittel}
+            onClick={(e) => setErrorTitle(e.target.value)}
+        >
+            {props.tittel}
+        </Flatknapp>
+    );
 
     return (
         <div className="elaborated-wrapper">
-            <CheckboxGruppe legend='Hva gikk galt?'>
-                <Checkbox label={'Jeg ble forvirret'} name='feil'/>
-                <Checkbox label={'For mye tekst'} name='feil'/>
-                <Checkbox label={'Annet. Gjerne spesifiser under'} name='feil' />
-            </CheckboxGruppe>
+            <Innholdstittel>Rapporter feil eller mangler</Innholdstittel>
 
-            <Textarea 
-                label='Din tilbakemelding'
-                inputMode='text'    
-                value=''
-                onChange={textareaDidChange}
-            >
-            </Textarea>
+            <form onSubmit={submitFeedback}>
+                <Ekspanderbartpanel tittel={'Velg type feil eller mangel'}>
+                    <div className={'errorTitlesContainer'}>
+                        <ErrorTitleEntry tittel={'Informasjon'} />
+                        <ErrorTitleEntry tittel={'Ytelse'} />
+                        <ErrorTitleEntry tittel={'Utseende'} />
+                        <ErrorTitleEntry tittel={'Bug'} />
+                        <ErrorTitleEntry tittel={'Annet'} />
+                    </div>
+                </Ekspanderbartpanel>
+
+                <Undertittel>Din tilbakemelding</Undertittel>
+
+                <Alertstripe type="advarsel">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Duis tincidunt leo vel nisl venenatis, nec porttitor ante
+                    faucibus. Donec at eros elementum, mollis ipsum vitae,
+                    feugiat orci. Sed suscipit mi ut varius rhoncus.
+                </Alertstripe>
+
+                <Textarea
+                    value={errorMessage}
+                    onChange={(e) => setErrorMessage(e.target.value)}
+                />
+
+                <Hovedknapp htmlType="submit">Send inn</Hovedknapp>
+            </form>
         </div>
     );
 };
