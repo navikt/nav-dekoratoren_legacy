@@ -10,6 +10,7 @@ import { getStorageItem } from 'utils/sessionStorage';
 import { detect } from 'detect-browser';
 import { Undertekst } from 'nav-frontend-typografi';
 import { BrowserInfo } from 'detect-browser';
+import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
 import './BrowserSupportMsg.less';
 
 import ikon from 'nav-frontend-ikoner-assets/assets/advarsel-sirkel-fyll.svg';
@@ -103,14 +104,10 @@ export const BrowserSupportMsg = ({ baseUrl }: Props) => {
                         </Undertekst>
                     )}
                 </div>
-                <button
-                    className={cls.element('lukk-knapp')}
+                <LukkKnapp
                     onClick={closeWarning}
-                    aria-label={'Lukk advarsel for nettleser'}
-                >
-                    <div className={cls.element('lukk-ikon-1')} />
-                    <div className={cls.element('lukk-ikon-2')} />
-                </button>
+                    ariaLabel={'Lukk advarsel for nettleser'}
+                />
             </div>
         </div>
     );
