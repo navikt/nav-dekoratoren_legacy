@@ -41,39 +41,41 @@ const Sok = (props: Props) => {
 
     useEffect(() => {
         if (!props.isOpen) {
-            setLoading(false);
-            setInput('');
+            onReset();
         }
     }, [props.isOpen]);
 
+    const onReset = () => {
+        setLoading(false);
+    };
+
     const onFocus = (e: FocusEvent<HTMLAnchorElement>) => {
-        const index = e.target?.id?.split('-')[1];
-        setFocusIndex(parseInt(index, 10) || -1);
+        const index = Number(e.target?.id?.split('-')[1]);
+        setFocusIndex(index >= 0 ? index : -1);
     };
 
     const onKeyDown = (e: any) => {
         let newIndex = focusIndex;
         switch (e.key) {
             case 'ArrowDown':
+                e.preventDefault();
                 if (focusIndex < numberOfResults) {
                     newIndex = focusIndex + 1;
                 }
-                e.preventDefault();
                 break;
             case 'ArrowUp':
+                e.preventDefault();
                 if (focusIndex > 0) {
                     newIndex = focusIndex - 1;
                 }
-                e.preventDefault();
                 break;
-
             default:
+                setFocusIndex(-1);
                 break;
         }
 
         if (newIndex !== focusIndex) {
             setFocusIndex(newIndex);
-            console.log(result[newIndex].displayName);
             setInput(result[newIndex].displayName);
             document.getElementById(`sokeresultat-${newIndex}`)?.focus();
         }
@@ -115,10 +117,7 @@ const Sok = (props: Props) => {
                         className={klassenavn}
                         language={language}
                         writtenInput={input}
-                        onReset={() => {
-                            setLoading(false);
-                            setInput('');
-                        }}
+                        onReset={onReset}
                         id={props.id}
                     />
                     {loading ? (
