@@ -23,8 +23,7 @@ export const Feedback = () => {
             <div className="knapp-container">
                 <JaKnapp/>
                 <DelvisKnapp/>
-                <NeiKnapp/>
-                
+                <NeiKnapp/>   
             </div>
             <RapporterKnapp/>
         </div>
