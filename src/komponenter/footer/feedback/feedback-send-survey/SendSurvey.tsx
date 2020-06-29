@@ -5,12 +5,15 @@ import { Input } from 'nav-frontend-skjema';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import './SendSurvey.less';
+import gatherInformation from 'utils/user-information';
 
 const SendSurvey = () => {
     const [email, setEmail] = useState({});
 
     const handleSubmit = () => {
         console.log(`${email}`);
+        
+        console.log(gatherInformation(navigator))
     };
 
     return (

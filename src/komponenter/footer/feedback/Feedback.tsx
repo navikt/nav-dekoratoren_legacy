@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Knapp } from 'nav-frontend-knapper';
 import { Element } from 'nav-frontend-typografi';
 import './Feedback.less';
+import Elaborated from './feedback-elaborated/Elaborated';
 
 export const Feedback = () => {
 
@@ -81,7 +82,7 @@ export const Feedback = () => {
 
     const TrykketRapporterKnapp = () => (
         <div id="trykketRapporterKnapp" className="svar-container">
-            RAPPORTER
+            <Elaborated />
         </div>
     )
 
