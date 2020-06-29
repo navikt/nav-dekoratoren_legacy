@@ -3,29 +3,22 @@ import Tekst from 'tekster/finn-tekst';
 import { finnTekst } from 'tekster/finn-tekst';
 import { Input } from 'nav-frontend-skjema';
 import SokKnapper from './SokKnapper';
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { Language } from 'store/reducers/language-duck';
 import './SokInput.less';
 
 type Props = {
     className: string;
-    getInputProps: any;
     language: Language;
     writtenInput: string;
+    onChange: (value: string) => void;
     onReset: () => void;
     id?: string;
 };
 
-const defaultKeys = ['Home', 'End'];
-
-export const SokInput = ({
-    language,
-    writtenInput,
-    onReset,
-    className,
-    getInputProps,
-    id,
-}: Props) => {
+export const SokInput = (props: Props) => {
+    const { onChange, onReset } = props;
+    const { language, writtenInput, className, id } = props;
     return (
         <>
             <div className={'sok-input__tittel'}>
@@ -35,15 +28,11 @@ export const SokInput = ({
             </div>
             <div className="sok-input-container">
                 <Input
-                    {...getInputProps({
-                        onKeyDown: (e: any) => {
-                            if (defaultKeys.includes(e.key)) {
-                                e.nativeEvent.preventDownshiftDefault = true;
-                                return;
-                            }
-                        },
-                    })}
+                    onChange={(e) => {
+                        onChange(e.target.value);
+                    }}
                     className={className}
+                    value={writtenInput}
                     placeholder={finnTekst('sok-input-placeholder', language)}
                     label={finnTekst('sok-input-label', language)}
                     aria-label={finnTekst('sok-input-label', language)}

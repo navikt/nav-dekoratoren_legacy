@@ -7,15 +7,15 @@ import { SokeresultatData } from '../sok-utils';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import Tekst from 'tekster/finn-tekst';
 import './SokResultater.less';
+import Lenke from 'nav-frontend-lenker';
 
 type Props = {
     writtenInput: string;
     items: SokeresultatData[];
-    predefinedlistview: number;
-    getMenuProps: any;
-    getItemProps: any;
+    numberOfResults: number;
+    selectedIndex: number;
     language: Language;
-    fetchError: boolean;
+    fetchError?: string | boolean;
 };
 
 const cssIndex = (index: number) => {
@@ -32,21 +32,16 @@ const removeDuplicates = (items: SokeresultatData[]) =>
             ) === index
     );
 
-export const SokResultater = ({
-    writtenInput,
-    items,
-    getMenuProps,
-    getItemProps,
-    predefinedlistview,
-    language,
-    fetchError,
-}: Props) => {
+export const SokResultater = (props: Props) => {
+    const { language, fetchError, selectedIndex } = props;
+    const { writtenInput, items, numberOfResults } = props;
+
     const itemsFiltered =
         items.length > 1 &&
-        removeDuplicates(items).slice(0, predefinedlistview + 1);
+        removeDuplicates(items).slice(0, numberOfResults + 1);
 
     return (
-        <ul {...getMenuProps()} className="sokeresultat-liste">
+        <ul className="sokeresultat-liste">
             {fetchError ? (
                 <div className={'sokeresultat-feil'}>
                     <AlertStripeFeil>
@@ -56,18 +51,20 @@ export const SokResultater = ({
             ) : itemsFiltered ? (
                 itemsFiltered.map((item, index) => (
                     <li
-                        {...getItemProps({
-                            key: index,
-                            index,
-                            item,
-                        })}
+                        key={index}
                         style={cssIndex(index)}
+                        aria-selected={selectedIndex === index}
                     >
-                        <SokeforslagIngress
-                            className="sok-resultat-listItem"
-                            displayName={item.displayName}
-                        />
-                        <Sokeforslagtext highlight={item.highlight} />
+                        <Lenke
+                            className={'sokeresultat-lenke'}
+                            href={item.href}
+                        >
+                            <SokeforslagIngress
+                                className="sok-resultat-listItem"
+                                displayName={item.displayName}
+                            />
+                            <Sokeforslagtext highlight={item.highlight} />
+                        </Lenke>
                     </li>
                 ))
             ) : (
