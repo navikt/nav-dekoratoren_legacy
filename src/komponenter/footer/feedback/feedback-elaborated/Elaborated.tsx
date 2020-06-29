@@ -10,7 +10,9 @@ const Elaborated = () => {
     const [errorTitle, setErrorTitle] = useState();
     const [errorMessage, setErrorMessage] = useState(String);
 
-    const submitFeedback = () => {
+    const submitFeedback = (evt: any) => {
+        evt.preventDefault();
+
         const report = {
             title: errorTitle,
             message: errorMessage,
