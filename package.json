@@ -1,6 +1,6 @@
 {
     "name": "nav-dekoratoren",
-    "version": "1.12.7-test",
+    "version": "1.12.10-test",
     "private": true,
     "scripts": {
         "start": "npm-run-all -p -r build-client-and-watch build-server-and-watch start-server-and-watch",
@@ -28,7 +28,6 @@
     "dependencies": {
         "@navikt/fnrvalidator": "^1.1.2",
         "@promster/express": "^4.1.11",
-        "@types/jwt-decode": "^2.2.1",
         "amplitude-js": "^6.2.0",
         "classnames": "^2.2.6",
         "compression": "^1.7.4",
@@ -40,7 +39,6 @@
         "express": "^4.17.1",
         "html-react-parser": "^0.13.0",
         "http-proxy-middleware": "^1.0.4",
-        "jwt-decode": "^2.2.0",
         "less-plugin-npm-import": "^2.1.0",
         "lodash.debounce": "^4.0.8",
         "lodash.throttle": "^4.1.1",

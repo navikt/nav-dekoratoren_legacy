@@ -5,17 +5,20 @@ import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from 'utils/bem';
-import { setStorageItem } from 'utils/sessionStorage';
-import { getStorageItem } from 'utils/sessionStorage';
 import { detect } from 'detect-browser';
 import { Undertekst } from 'nav-frontend-typografi';
 import { BrowserInfo } from 'detect-browser';
+import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
+import { useCookies } from 'react-cookie';
+import { erDev } from 'utils/Environment';
 import './BrowserSupportMsg.less';
 
 import ikon from 'nav-frontend-ikoner-assets/assets/advarsel-sirkel-fyll.svg';
 import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
 
-const storageKey = 'browser-warning-closed';
+const cookieKey = 'decorator-browser-warning-closed';
+const linkUrl =
+    'https://www.nav.no/no/nav-og-samfunn/kontakt-nav/teknisk-brukerstotte/hjelp-til-personbruker/elektronisk-innsending_kap';
 
 const isBrowserSupported = (browser: BrowserInfo) => {
     if (!browser?.name) {
@@ -65,12 +68,13 @@ type Props = {
 
 export const BrowserSupportMsg = ({ baseUrl }: Props) => {
     const [meldingLukket, setMeldingLukket] = useState(true);
+    const [cookies, setCookie] = useCookies([cookieKey]);
 
     const browser = detect() as BrowserInfo;
 
     useEffect(() => {
-        setMeldingLukket(getStorageItem(storageKey) === 'true');
-    }, []);
+        setMeldingLukket(cookies[cookieKey] === 'true');
+    }, [cookies]);
 
     if (isBrowserSupported(browser) || meldingLukket) {
         return null;
@@ -81,7 +85,7 @@ export const BrowserSupportMsg = ({ baseUrl }: Props) => {
 
     const closeWarning = () => {
         setMeldingLukket(true);
-        setStorageItem(storageKey, 'true');
+        setCookie(cookieKey, true, { domain: erDev ? undefined : 'nav.no' });
     };
 
     return (
@@ -93,7 +97,7 @@ export const BrowserSupportMsg = ({ baseUrl }: Props) => {
                 <div className={cls.element('tekst')}>
                     <Undertittel>
                         <Tekst id={'browser-utdatert-msg'} />{' '}
-                        <Lenke href={'#'}>
+                        <Lenke href={linkUrl}>
                             <Tekst id={'browser-utdatert-lenke'} />
                         </Lenke>
                     </Undertittel>
