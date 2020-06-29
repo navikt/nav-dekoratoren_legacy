@@ -1,10 +1,12 @@
 import SokeforslagIngress from './SokeforslagIngress';
 import Sokeforslagtext from './Sokeforslagtext';
 import { finnTekst } from 'tekster/finn-tekst';
-import React, { FocusEvent } from 'react';
+import React from 'react';
 import { Language } from 'store/reducers/language-duck';
 import { SokeresultatData } from '../sok-utils';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
+import { getKbId } from 'utils/keyboard-navigation/kb-navigation';
+import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import Tekst from 'tekster/finn-tekst';
 import './SokResultater.less';
 
@@ -12,9 +14,7 @@ type Props = {
     writtenInput: string;
     items: SokeresultatData[];
     numberOfResults: number;
-    focusIndex: number;
     language: Language;
-    onFocus: (e: FocusEvent<HTMLAnchorElement>) => void;
     fetchError?: string | boolean;
 };
 
@@ -29,7 +29,7 @@ const removeDuplicates = (items: SokeresultatData[]) =>
     );
 
 export const SokResultater = (props: Props) => {
-    const { language, fetchError, focusIndex, onFocus } = props;
+    const { language, fetchError } = props;
     const { writtenInput, items, numberOfResults } = props;
 
     const itemsFiltered =
@@ -49,8 +49,11 @@ export const SokResultater = (props: Props) => {
                     return (
                         <li key={index}>
                             <a
-                                onFocus={onFocus}
-                                id={`sokeresultat-${index}`}
+                                id={getKbId(KbNavGroup.Sok, {
+                                    col: 0,
+                                    row: 1,
+                                    sub: index,
+                                })}
                                 className={'sokeresultat-lenke'}
                                 href={item.href}
                             >
