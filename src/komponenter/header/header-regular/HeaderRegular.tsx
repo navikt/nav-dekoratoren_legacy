@@ -8,7 +8,6 @@ import { useEffect } from 'react';
 import Skiplinks from 'komponenter/header/header-regular/common/skiplinks/Skiplinks';
 import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
 import { HeaderMenylinje } from 'komponenter/header/header-regular/HeaderMenylinje';
-import { SessionTimeoutMsg } from 'komponenter/header/header-regular/common/session-timeout-msg/SessionTimeoutMsg';
 
 export const HeaderRegular = () => {
     const language = useSelector((state: AppState) => state.language.language);

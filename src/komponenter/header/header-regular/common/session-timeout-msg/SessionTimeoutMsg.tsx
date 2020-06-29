@@ -7,7 +7,6 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
 import BEMHelper from 'utils/bem';
-import { useAuthExpireTimeSeconds } from 'utils/authExpire';
 import './SessionTimeoutMsg.less';
 
 const warningThresholdSeconds = 3600;
@@ -19,12 +18,11 @@ const secondsToMinSecString = (seconds: number) => {
 };
 
 export const SessionTimeoutMsg = () => {
-    const { authenticated } = useSelector(
+    const { authenticated, expireTime } = useSelector(
         (state: AppState) => state.innloggingsstatus.data
     );
     const [secRemaining, setSecRemaining] = useState(-1);
     const [isClosed, setIsClosed] = useState(false);
-    const expires = useAuthExpireTimeSeconds();
 
     const cls = BEMHelper('session-timeout-msg');
     const showWarning =
@@ -34,20 +32,20 @@ export const SessionTimeoutMsg = () => {
         secRemaining < warningThresholdSeconds;
 
     useEffect(() => {
-        if (!authenticated || !expires) {
+        if (!authenticated || !expireTime) {
             return;
         }
 
         const countdown = () => {
             const remaining = Math.floor(
-                Math.max(expires - Date.now() / 1000, 0)
+                Math.max(expireTime - Date.now() / 1000, 0)
             );
             setSecRemaining(remaining);
         };
 
         const timer = setInterval(countdown, 1000);
         return () => clearInterval(timer);
-    }, [authenticated, expires]);
+    }, [authenticated, expireTime]);
 
     return (
         <div

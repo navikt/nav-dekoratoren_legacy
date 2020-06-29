@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
-import Lenke from 'nav-frontend-lenker';
 import BEMHelper from 'utils/bem';
 import { detect } from 'detect-browser';
 import { Undertekst } from 'nav-frontend-typografi';
@@ -11,10 +10,11 @@ import { BrowserInfo } from 'detect-browser';
 import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
 import { useCookies } from 'react-cookie';
 import { erDev } from 'utils/Environment';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import './BrowserSupportMsg.less';
 
 import ikon from 'nav-frontend-ikoner-assets/assets/advarsel-sirkel-fyll.svg';
-import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
+import { GACategory } from 'utils/google-analytics';
 
 const cookieKey = 'decorator-browser-warning-closed';
 const linkUrl =
@@ -97,9 +97,16 @@ export const BrowserSupportMsg = ({ baseUrl }: Props) => {
                 <div className={cls.element('tekst')}>
                     <Undertittel>
                         <Tekst id={'browser-utdatert-msg'} />{' '}
-                        <Lenke href={linkUrl}>
+                        <LenkeMedGA
+                            href={linkUrl}
+                            gaEventArgs={{
+                                category: GACategory.Header,
+                                action: 'outdated-browser-link',
+                                label: linkUrl,
+                            }}
+                        >
                             <Tekst id={'browser-utdatert-lenke'} />
-                        </Lenke>
+                        </LenkeMedGA>
                     </Undertittel>
                     {browserSpecificMsg && (
                         <Undertekst>

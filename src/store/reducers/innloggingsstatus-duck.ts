@@ -16,6 +16,7 @@ export interface Data {
     authenticated: boolean;
     name: string;
     securityLevel: string;
+    expireTime: number;
 }
 
 const initialState: InnloggingsstatusState = {
@@ -23,6 +24,7 @@ const initialState: InnloggingsstatusState = {
         authenticated: false,
         name: '',
         securityLevel: '',
+        expireTime: 0,
     },
     status: Status.IKKE_STARTET,
 };
