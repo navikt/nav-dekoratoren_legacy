@@ -1,6 +1,6 @@
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { defaultData, SokeresultatData, visAlleTreff } from './sok-utils';
 import debounce from 'lodash.debounce';
 import { GACategory, gaEvent } from 'utils/google-analytics';
@@ -38,6 +38,12 @@ const Sok = (props: Props) => {
     const klassenavn = cls('sok-input', {
         engelsk: language === Language.ENGELSK,
     });
+
+    useEffect(() => {
+        if (!props.isOpen) {
+            setInput('');
+        }
+    }, [props.isOpen]);
 
     const onKeyDown = (event: { key: string }) => {
         switch (event.key) {
@@ -87,18 +93,23 @@ const Sok = (props: Props) => {
                                     setError,
                                     setResult,
                                 });
+                            } else {
+                                setLoading(false);
                             }
                         }}
                         className={klassenavn}
                         language={language}
                         writtenInput={input}
-                        onReset={() => setInput('')}
+                        onReset={() => {
+                            setLoading(false);
+                            setInput('');
+                        }}
                         id={props.id}
                     />
                     {loading ? (
                         <Spinner tekstId={'spinner-sok'} />
                     ) : (
-                        input?.length > 2 && (
+                        input.length > 2 && (
                             <SokResultater
                                 writtenInput={input}
                                 items={result}
@@ -111,18 +122,21 @@ const Sok = (props: Props) => {
                     )}
                 </div>
             </div>
-            <div className="media-sm-mobil mobil-meny">
-                <div
-                    className={mobileCls.element(
-                        'bakgrunn',
-                        input?.length > 2 ? 'active' : ''
-                    )}
-                />
-            </div>
+            {props.isOpen && (
+                <div className="media-sm-mobil mobil-meny">
+                    <div
+                        className={mobileCls.element(
+                            'bakgrunn',
+                            input.length > 2 ? 'active' : ''
+                        )}
+                    />
+                </div>
+            )}
         </form>
     );
 };
 
+/* Abstraction for debounce */
 interface FetchResult {
     value: string;
     environment: EnvironmentState;
