@@ -1,25 +1,21 @@
 import SokeforslagIngress from './SokeforslagIngress';
 import Sokeforslagtext from './Sokeforslagtext';
 import { finnTekst } from 'tekster/finn-tekst';
-import React from 'react';
+import React, { FocusEvent } from 'react';
 import { Language } from 'store/reducers/language-duck';
 import { SokeresultatData } from '../sok-utils';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import Tekst from 'tekster/finn-tekst';
 import './SokResultater.less';
-import Lenke from 'nav-frontend-lenker';
 
 type Props = {
     writtenInput: string;
     items: SokeresultatData[];
     numberOfResults: number;
-    selectedIndex: number;
+    focusIndex: number;
     language: Language;
+    onFocus: (e: FocusEvent<HTMLAnchorElement>) => void;
     fetchError?: string | boolean;
-};
-
-const cssIndex = (index: number) => {
-    return { '--listmap': index } as React.CSSProperties;
 };
 
 const removeDuplicates = (items: SokeresultatData[]) =>
@@ -33,7 +29,7 @@ const removeDuplicates = (items: SokeresultatData[]) =>
     );
 
 export const SokResultater = (props: Props) => {
-    const { language, fetchError, selectedIndex } = props;
+    const { language, fetchError, focusIndex, onFocus } = props;
     const { writtenInput, items, numberOfResults } = props;
 
     const itemsFiltered =
@@ -49,24 +45,24 @@ export const SokResultater = (props: Props) => {
                     </AlertStripeFeil>
                 </div>
             ) : itemsFiltered ? (
-                itemsFiltered.map((item, index) => (
-                    <li
-                        key={index}
-                        style={cssIndex(index)}
-                        aria-selected={selectedIndex === index}
-                    >
-                        <Lenke
-                            className={'sokeresultat-lenke'}
-                            href={item.href}
-                        >
-                            <SokeforslagIngress
-                                className="sok-resultat-listItem"
-                                displayName={item.displayName}
-                            />
-                            <Sokeforslagtext highlight={item.highlight} />
-                        </Lenke>
-                    </li>
-                ))
+                itemsFiltered.map((item, index) => {
+                    return (
+                        <li key={index}>
+                            <a
+                                onFocus={onFocus}
+                                id={`sokeresultat-${index}`}
+                                className={'sokeresultat-lenke'}
+                                href={item.href}
+                            >
+                                <SokeforslagIngress
+                                    className="sok-resultat-listItem"
+                                    displayName={item.displayName}
+                                />
+                                <Sokeforslagtext highlight={item.highlight} />
+                            </a>
+                        </li>
+                    );
+                })
             ) : (
                 <div className={'sokeresultat-ingen-treff'}>
                     <SokeforslagIngress

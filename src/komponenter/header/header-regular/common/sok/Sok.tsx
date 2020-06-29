@@ -1,7 +1,7 @@
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
-import React, { useEffect, useState } from 'react';
-import { defaultData, SokeresultatData, visAlleTreff } from './sok-utils';
+import React, { useEffect, useState, FocusEvent } from 'react';
+import { defaultData, visAlleTreff } from './sok-utils';
 import debounce from 'lodash.debounce';
 import { GACategory, gaEvent } from 'utils/google-analytics';
 import { genererUrl } from 'utils/Environment';
@@ -31,7 +31,7 @@ const Sok = (props: Props) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [input, setInput] = useState<string>('');
     const [result, setResult] = useState([defaultData]);
-    const [selectedIndex, setSelectedIndex] = useState(-1);
+    const [focusIndex, setFocusIndex] = useState(-1);
     const [error, setError] = useState<string | undefined>();
 
     const numberOfResults: number = 5;
@@ -41,26 +41,41 @@ const Sok = (props: Props) => {
 
     useEffect(() => {
         if (!props.isOpen) {
+            setLoading(false);
             setInput('');
         }
     }, [props.isOpen]);
 
-    const onKeyDown = (event: { key: string }) => {
-        switch (event.key) {
+    const onFocus = (e: FocusEvent<HTMLAnchorElement>) => {
+        const index = e.target?.id?.split('-')[1];
+        setFocusIndex(parseInt(index, 10) || -1);
+    };
+
+    const onKeyDown = (e: any) => {
+        let newIndex = focusIndex;
+        switch (e.key) {
             case 'ArrowDown':
-                if (selectedIndex < numberOfResults) {
-                    setSelectedIndex(selectedIndex + 1);
-                    setInput(result[selectedIndex + 1].displayName);
+                if (focusIndex < numberOfResults) {
+                    newIndex = focusIndex + 1;
                 }
+                e.preventDefault();
                 break;
             case 'ArrowUp':
-                if (selectedIndex > 0) {
-                    setSelectedIndex(selectedIndex - 1);
-                    setInput(result[selectedIndex - 1].displayName);
+                if (focusIndex > 0) {
+                    newIndex = focusIndex - 1;
                 }
+                e.preventDefault();
                 break;
+
             default:
                 break;
+        }
+
+        if (newIndex !== focusIndex) {
+            setFocusIndex(newIndex);
+            console.log(result[newIndex].displayName);
+            setInput(result[newIndex].displayName);
+            document.getElementById(`sokeresultat-${newIndex}`)?.focus();
         }
     };
 
@@ -113,7 +128,8 @@ const Sok = (props: Props) => {
                             <SokResultater
                                 writtenInput={input}
                                 items={result}
-                                selectedIndex={selectedIndex}
+                                onFocus={onFocus}
+                                focusIndex={focusIndex}
                                 numberOfResults={numberOfResults}
                                 language={language}
                                 fetchError={error}
@@ -174,5 +190,4 @@ const fetchSearch = (props: FetchResult) => {
 };
 
 const fetchSearchDebounced = debounce(fetchSearch, 500);
-
 export default Sok;

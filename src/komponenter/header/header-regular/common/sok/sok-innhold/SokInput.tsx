@@ -28,15 +28,13 @@ export const SokInput = (props: Props) => {
             </div>
             <div className="sok-input-container">
                 <Input
-                    onChange={(e) => {
-                        onChange(e.target.value);
-                    }}
+                    id={id}
+                    onChange={(e) => onChange(e.target.value)}
                     className={className}
                     value={writtenInput}
                     placeholder={finnTekst('sok-input-placeholder', language)}
                     label={finnTekst('sok-input-label', language)}
                     aria-label={finnTekst('sok-input-label', language)}
-                    id={id}
                 />
                 <SokKnapper writtenInput={writtenInput} onReset={onReset} />
             </div>
