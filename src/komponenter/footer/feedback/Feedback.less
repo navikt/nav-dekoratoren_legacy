@@ -1,35 +1,53 @@
-.feedback-content {
+.feedback-container {
     display: inline-flex;
     justify-content: space-between;
     width: 100%;
     height: auto;
-    background-color: white;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tekst {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.knapp-container {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+}
+
+.knappen {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+}
+
+.rapporter-knappen {
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 0.5rem;  
+    padding-bottom: 1rem;
+}
+
+.svar-container {
+    display: inline-flex;
+    width: 100%;
+    height: auto;
+    background-color: blueviolet;
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-
-    .tekst {
-        width: 25%;
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        flex-direction: space-around;
-        padding: 1.2rem;
-    }
-
-    .knapper {
-        width: auto;
-        display: flex;
-        flex-direction: row;
-
-        .ja-knapp {
-            display: flex;
-            padding: 1rem;
-        }
-    
-        .nei-knapp {
-            display: flex;
-            padding: 1rem;
-        }
-    }
+    padding: 1rem;
 }
