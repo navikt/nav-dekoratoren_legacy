@@ -11,6 +11,8 @@ import { SokInput } from './sok-innhold/SokInput';
 import Spinner from '../spinner/Spinner';
 import SokResultater from './sok-innhold/SokResultater';
 import { EnvironmentState } from 'store/reducers/environment-duck';
+import BEMHelper from 'utils/bem';
+import './Sok.less';
 
 interface Props {
     id?: string;
@@ -18,6 +20,7 @@ interface Props {
     dropdownTransitionMs?: number;
 }
 
+const mobileCls = BEMHelper('sok');
 const stateSelector = (state: AppState) => ({
     environment: state.environment,
     language: state.language.language,
@@ -107,6 +110,14 @@ const Sok = (props: Props) => {
                         )
                     )}
                 </div>
+            </div>
+            <div className="media-sm-mobil mobil-meny">
+                <div
+                    className={mobileCls.element(
+                        'bakgrunn',
+                        input?.length > 2 ? 'active' : ''
+                    )}
+                />
             </div>
         </form>
     );
