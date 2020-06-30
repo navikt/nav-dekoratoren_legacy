@@ -10,14 +10,19 @@ import { Normaltekst } from 'nav-frontend-typografi';
 const SendSurvey = () => {
     const [email, setEmail] = useState(String);
     const [emailValid, setEmailValid] = useState(true);
+    const [inputErrorMessage, setInputErrorMessage] = useState('');
 
     const submitEmail = (evt: any) => {
         evt.preventDefault();
 
         console.log(`Email: ${email}`, validateEmailUsingRegEx(email));
 
-        validateEmailUsingRegEx(email) ? sendSurveyToUser() : setEmailValid(false);
-        
+        validateEmailUsingRegEx(email)
+            ? sendSurveyToUser()
+            : [
+                  setEmailValid(false),
+                  setInputErrorMessage('Epost er ikke gyldig'),
+              ];
     };
 
     const validateEmailUsingRegEx = (email: string) => {
@@ -26,10 +31,10 @@ const SendSurvey = () => {
     };
 
     const sendSurveyToUser = () => {
-        setEmailValid(true)
+        setEmailValid(true);
+        setInputErrorMessage('');
 
-        console.log("Survey was sent to user")
-
+        console.log('Survey was sent to user');
     };
 
     return (
@@ -43,18 +48,11 @@ const SendSurvey = () => {
             </Normaltekst>
 
             <form onSubmit={submitEmail}>
-                {emailValid ? (
-                    <Input
-                        label="Din e-postaddresse"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                ) : (
-                    <Input
-                        label="Din e-postaddresse"
-                        onChange={(e) => setEmail(e.target.value)}
-                        feil="Ikke gyldig e-postaddresse"
-                    />
-                )}
+                <Input
+                    label="Din e-postaddresse"
+                    onChange={(e) => setEmail(e.target.value)}
+                    feil={inputErrorMessage}
+                />
 
                 <Hovedknapp inputMode="text" htmlType="submit">
                     <Tekst id="send-undersokelse-knapp" />
