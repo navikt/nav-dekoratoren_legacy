@@ -12,14 +12,14 @@ import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { GACategory, gaEvent } from 'utils/google-analytics';
 import { erNavDekoratoren } from 'utils/Environment';
 import { Language } from 'store/reducers/language-duck';
-import './FooterArbeidsflatevalg.less';
+import './Arbeidsflatevalg.less';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
     language: state.language.language,
 });
 
-const FooterArbeidsflatevalg = () => {
+const Arbeidsflatevalg = () => {
     const dispatch = useDispatch();
     const [, setCookie] = useCookies(['decorator-context']);
     const { arbeidsflate, language } = useSelector(stateSelector);
@@ -101,4 +101,4 @@ const FooterArbeidsflatevalg = () => {
     );
 };
 
-export default FooterArbeidsflatevalg;
+export default Arbeidsflatevalg;

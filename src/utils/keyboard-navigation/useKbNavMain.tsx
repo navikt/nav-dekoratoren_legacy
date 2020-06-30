@@ -9,7 +9,6 @@ import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
 import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
 import KbNav from 'utils/keyboard-navigation/kb-navigation';
-import { disabledGroups } from './kb-navigation-setup';
 
 const stateSelector = (state: AppState) => ({
     language: state.language.language,
@@ -116,9 +115,7 @@ export const useKbNavMain = (): KbNavMain => {
             }
         };
 
-        if (!disabledGroups.includes(kbNavState.currentNode.group)) {
-            document.addEventListener('keydown', arrowkeysHandler);
-        }
+        document.addEventListener('keydown', arrowkeysHandler);
         document.addEventListener('keydown', escapeHandler);
         document.addEventListener('focusin', focusHandler);
 
@@ -128,6 +125,14 @@ export const useKbNavMain = (): KbNavMain => {
             document.removeEventListener('focusin', focusHandler);
         };
     }, [kbNavState, dropdownIsOpen]);
+
+    useEffect(() => {
+        const currentNodeInSubGraph =
+            kbNavState.subGraph?.nodeMap[kbNavState.currentNode.id];
+        if (currentNodeInSubGraph) {
+            setCurrentNode(currentNodeInSubGraph);
+        }
+    }, [kbNavState.subGraph]);
 
     return {
         mainNodeMap: kbNavState.mainGraph.nodeMap,
