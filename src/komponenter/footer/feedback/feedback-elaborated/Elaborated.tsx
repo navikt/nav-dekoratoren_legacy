@@ -15,9 +15,9 @@ const Elaborated = () => {
         evt.preventDefault();
 
         const report = {
-            title: errorTitle,
-            message: errorMessage,
-            userInformation: gatherUserInformation(navigator)
+            errorTitle: errorTitle,
+            errorMessage: errorMessage,
+            clientInformation: gatherUserInformation(navigator)
         };
 
         console.log(report);
