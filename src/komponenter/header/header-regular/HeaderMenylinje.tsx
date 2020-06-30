@@ -39,7 +39,7 @@ export const HeaderMenylinje = () => {
 
     return (
         // OBS: Id-en "Hovedmeny" benyttes til å bestemme høyden til menyen av andre team
-        <nav className={cls.className} id="Hovedmeny" aria-label={'Hovedmeny'}>
+        <nav className={cls.className} id="hovedmeny" aria-label={'Hovedmeny'}>
             <div className={cls.element('elementer')}>
                 <NavLogoLenke
                     gaEventArgs={{
