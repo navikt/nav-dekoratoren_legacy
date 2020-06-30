@@ -9,7 +9,7 @@ interface UserInformation {
     webDriver: boolean,
 }
 
-export default function gatherInformation(userNavigator: Navigator) {
+export default function gatherUserInformation(userNavigator: Navigator) {
     let userInformation: UserInformation = {
         coockiesEnabled: userNavigator.cookieEnabled,
         language: userNavigator.language,

@@ -5,6 +5,7 @@ import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
+import gatherUserInformation from 'utils/user-information';
 
 const Elaborated = () => {
     const [errorTitle, setErrorTitle] = useState();
@@ -16,6 +17,7 @@ const Elaborated = () => {
         const report = {
             title: errorTitle,
             message: errorMessage,
+            userInformation: gatherUserInformation(navigator)
         };
 
         console.log(report);
