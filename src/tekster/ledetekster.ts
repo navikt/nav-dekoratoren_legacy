@@ -209,4 +209,8 @@ export const ledetekster: { [key: string]: string } = {
     'spinner-sok': 'Laster forhåndsvisning...',
     'spinner-sok-en': 'Loading search preview...',
     'spinner-sok-se': 'Laster forhåndsvisning...',
+    'advarsel-om-personopplysninger': 'Dette er en advarsel',
+    'advarsel-om-personopplysninger-en': 'This is a warning',
+    'advarsel-om-personopplysninger-se': 'Dette er en advarsel',
+
 };

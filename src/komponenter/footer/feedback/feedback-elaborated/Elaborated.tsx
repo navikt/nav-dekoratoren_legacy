@@ -6,6 +6,7 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import gatherUserInformation from 'utils/user-information';
+import Tekst from 'tekster/finn-tekst';
 
 const Elaborated = () => {
     const [errorTitle, setErrorTitle] = useState();
@@ -50,10 +51,7 @@ const Elaborated = () => {
                 <Undertittel>Din tilbakemelding</Undertittel>
 
                 <Alertstripe type="advarsel">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Duis tincidunt leo vel nisl venenatis, nec porttitor ante
-                    faucibus. Donec at eros elementum, mollis ipsum vitae,
-                    feugiat orci. Sed suscipit mi ut varius rhoncus.
+                    <Tekst id="advarsel-om-personopplysninger" />
                 </Alertstripe>
 
                 <Textarea
