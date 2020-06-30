@@ -209,8 +209,16 @@ export const ledetekster: { [key: string]: string } = {
     'spinner-sok': 'Laster forhåndsvisning...',
     'spinner-sok-en': 'Loading search preview...',
     'spinner-sok-se': 'Laster forhåndsvisning...',
+    'rapporter-om-feil-mangler': 'Rapporter om feil eller mangler',
+    'rapporter-om-feil-mangler-en': '',
+    'rapporter-om-feil-mangler-se': 'Rapporter om feil eller mangler',
+    'din-tilbakemelding': 'Din tilbakemelding',
+    'din-tilbakemelding-en': 'Your feedback',
+    'din-tilbakemelding-se': 'Din tilbakemelding',
     'advarsel-om-personopplysninger': 'Dette er en advarsel',
     'advarsel-om-personopplysninger-en': 'This is a warning',
     'advarsel-om-personopplysninger-se': 'Dette er en advarsel',
-
+    'send-inn-feilrapport': 'Send inn',
+    'send-inn-feilrapport-en': 'Submit',
+    'send-inn-feilrapport-se': 'Send inn',
 };

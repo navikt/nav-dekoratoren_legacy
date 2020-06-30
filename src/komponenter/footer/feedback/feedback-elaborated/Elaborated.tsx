@@ -35,7 +35,9 @@ const Elaborated = () => {
 
     return (
         <div className="elaborated-wrapper">
-            <Innholdstittel>Rapporter feil eller mangler</Innholdstittel>
+            <Innholdstittel>
+                <Tekst id="rapporter-om-feil-mangler" />
+            </Innholdstittel>
 
             <form onSubmit={submitFeedback}>
                 <Ekspanderbartpanel tittel={'Velg type feil eller mangel'}>
@@ -48,7 +50,9 @@ const Elaborated = () => {
                     </div>
                 </Ekspanderbartpanel>
 
-                <Undertittel>Din tilbakemelding</Undertittel>
+                <Undertittel>
+                    <Tekst id="din-tilbakemelding" />
+                </Undertittel>
 
                 <Alertstripe type="advarsel">
                     <Tekst id="advarsel-om-personopplysninger" />
@@ -59,7 +63,9 @@ const Elaborated = () => {
                     onChange={(e) => setErrorMessage(e.target.value)}
                 />
 
-                <Hovedknapp htmlType="submit">Send inn</Hovedknapp>
+                <Hovedknapp htmlType="submit">
+                    <Tekst id="send-inn-feilrapport" />
+                </Hovedknapp>
             </form>
         </div>
     );
