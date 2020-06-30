@@ -16,11 +16,11 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
             {writtenInput && (
                 <button
                     type={'button'}
+                    id={id ? `${id}-reset` : undefined}
                     className={`${cls.element('knapp')} ${cls.element(
                         'knapp-avbryt'
                     )}`}
                     onClick={onReset}
-                    id={id ? `${id}-reset` : undefined}
                 >
                     <div className={cls.element('ikon-container')}>
                         <div className={cls.element('reset-line-x')} />
@@ -33,10 +33,10 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
             )}
             <button
                 type="submit"
+                id={id ? `${id}-submit` : undefined}
                 className={`${cls.element('knapp')} ${cls.element(
                     'knapp-submit'
                 )}`}
-                id={id ? `${id}-submit` : undefined}
             >
                 <div className={cls.element('ikon-container')}>
                     <div className={cls.element('sok-circle')} />

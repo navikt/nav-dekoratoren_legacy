@@ -2,13 +2,12 @@ import React from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 
-const SokeforslagIngress = ({
-    className,
-    displayName,
-}: {
+interface Props {
     className: string;
     displayName?: string;
-}) => {
+}
+const SokeforslagIngress = (props: Props) => {
+    const { className, displayName } = props;
     return (
         <>
             <div className="media-sm-mobil sokeforslag-ingress">

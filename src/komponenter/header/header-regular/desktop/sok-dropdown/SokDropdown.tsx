@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
+import { useState } from 'react';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
@@ -25,7 +26,13 @@ type Props = {
 
 export const SokDropdown = ({ kbNavMainState }: Props) => {
     const { isOpen } = useSelector(stateSelector);
-    useKbNavSub(configForNodeGroup[KbNavGroup.Sok], kbNavMainState, isOpen);
+    const [numResults, setNumResults] = useState(0);
+    useKbNavSub(
+        configForNodeGroup[KbNavGroup.Sok],
+        kbNavMainState,
+        isOpen,
+        numResults
+    );
 
     useEffect(() => {
         const dropdownElement = document.getElementById(
@@ -55,6 +62,7 @@ export const SokDropdown = ({ kbNavMainState }: Props) => {
                     isOpen={isOpen}
                     id={desktopSokInputId}
                     dropdownTransitionMs={dropdownTransitionMs}
+                    numResultsCallback={setNumResults}
                 />
             </EkspanderbarMeny>
         </div>
