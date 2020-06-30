@@ -221,4 +221,18 @@ export const ledetekster: { [key: string]: string } = {
     'send-inn-feilrapport': 'Send inn',
     'send-inn-feilrapport-en': 'Submit',
     'send-inn-feilrapport-se': 'Send inn',
+    'send-undersokelse-takk': 'Takk for din tilbakemelding',
+    'send-undersokelse-takk-en': 'Thank you for your feedback',
+    'send-undersokelse-takk-se': 'Takk for din tilbakemelding',
+    'send-undersokelse-sporsmaal':
+        'Dersom du har tid ønsker vi at du svarer på en undersøkelse om hva vi kan forbedre på våre sider. Undersøkelsen er anonym og tar kun noen minutter',
+    'send-undersokelse-sporsmaal-en': 
+        'If you have the time we could appreciate if you took the time to fill out a short survey about what we can improve with our site. The survey is anonymous and only takes a couple of minutes',
+    'send-undersokelse-sporsmaal-se': 
+        'Dersom du har tid ønsker vi at du svarer på en undersøkelse om hva vi kan forbedre på våre sider. Undersøkelsen er anonym og tar kun noen minutter',
+    'send-undersokelse-knapp': 'Send',
+    'send-undersokelse-knapp-en': 'Send',
+    'send-undersokelse-knapp-se': 'Send',
+
+
 };

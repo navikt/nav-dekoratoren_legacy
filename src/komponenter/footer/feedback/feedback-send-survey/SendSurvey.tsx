@@ -1,28 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 
-import Tekstomrade from 'nav-frontend-tekstomrade';
 import { Input } from 'nav-frontend-skjema';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import './SendSurvey.less';
-import gatherInformation from 'utils/user-information';
+import Tekst from 'tekster/finn-tekst';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 const SendSurvey = () => {
     const [email, setEmail] = useState({});
 
     const sendSurveyToUser = (evt: any) => {
-        evt.preventDefault()
+        evt.preventDefault();
 
         console.log(`Email: ${email}`);
     };
 
     return (
         <div className="send-survey-wrapper">
-            <Tekstomrade>
-                {`
-                Takk for din tilbakemelding\n\nDersom du har tid ønsker vi at du svarer på en undersøkelse om hva vi kan forbedre på våre sider. Undersøkelsen er anonym og tar kun noen minutter
-                `}
-            </Tekstomrade>
+            <Normaltekst>
+                <Tekst id="send-undersokelse-takk" />
+            </Normaltekst>
+
+            <Normaltekst>
+                <Tekst id="send-undersokelse-sporsmaal" />
+            </Normaltekst>
 
             <form onSubmit={sendSurveyToUser}>
                 <Input
@@ -31,7 +33,7 @@ const SendSurvey = () => {
                 />
 
                 <Hovedknapp inputMode="text" htmlType="submit">
-                    Send
+                    <Tekst id="send-undersokelse-knapp" />
                 </Hovedknapp>
             </form>
         </div>
