@@ -8,7 +8,7 @@ import Tekst from 'tekster/finn-tekst';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 const SendSurvey = () => {
-    const [email, setEmail] = useState({});
+    const [email, setEmail] = useState(String);
 
     const sendSurveyToUser = (evt: any) => {
         evt.preventDefault();
