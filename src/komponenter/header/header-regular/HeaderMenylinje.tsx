@@ -38,7 +38,8 @@ export const HeaderMenylinje = () => {
         innlogget && arbeidsflate === MenuValue.ARBEIDSGIVER;
 
     return (
-        <nav className={cls.className} aria-label={'Hovedmeny'}>
+        // ID-en "Hovedmeny" benyttes til å bestemme høyden til menyen av andre team
+        <nav className={cls.className} id="Hovedmeny" aria-label={'Hovedmeny'}>
             <div className={cls.element('elementer')}>
                 <NavLogoLenke
                     gaEventArgs={{
