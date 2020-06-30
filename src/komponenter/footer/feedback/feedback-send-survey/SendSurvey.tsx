@@ -10,10 +10,10 @@ import gatherInformation from 'utils/user-information';
 const SendSurvey = () => {
     const [email, setEmail] = useState({});
 
-    const handleSubmit = () => {
-        console.log(`${email}`);
-        
-        console.log(gatherInformation(navigator))
+    const sendSurveyToUser = (evt: any) => {
+        evt.preventDefault()
+
+        console.log(`Email: ${email}`);
     };
 
     return (
@@ -24,14 +24,16 @@ const SendSurvey = () => {
                 `}
             </Tekstomrade>
 
-            <Input
-                label="Din e-postaddresse"
-                onChange={(e) => setEmail(e.target.value)}
-            />
+            <form onSubmit={sendSurveyToUser}>
+                <Input
+                    label="Din e-postaddresse"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
 
-            <Hovedknapp inputMode="text" onClick={handleSubmit}>
-                Videre
-            </Hovedknapp>
+                <Hovedknapp inputMode="text" htmlType="submit">
+                    Send
+                </Hovedknapp>
+            </form>
         </div>
     );
 };
