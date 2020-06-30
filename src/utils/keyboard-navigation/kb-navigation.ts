@@ -119,6 +119,9 @@ const scrollIfNearViewBounds = (element: HTMLElement) => {
     }
 };
 
+const isInputField = (node: KbNavNode) =>
+    document.getElementById(node.id)?.tagName.toLowerCase() === 'input';
+
 export const selectNode = (
     node: KbNavNode,
     callback: NodeSetterCallback = () => null,
@@ -148,12 +151,18 @@ const arrowkeysHandler = (
     const key = ieKeyMap(event.key) || event.key;
     switch (key) {
         case 'ArrowLeft':
+            if (isInputField(currentNode)) {
+                return;
+            }
             selectNode(currentNode[NodeEdge.Left], setCurrentNode);
             break;
         case 'ArrowUp':
             selectNode(currentNode[NodeEdge.Top], setCurrentNode);
             break;
         case 'ArrowRight':
+            if (isInputField(currentNode)) {
+                return;
+            }
             selectNode(currentNode[NodeEdge.Right], setCurrentNode);
             break;
         case 'ArrowDown':
