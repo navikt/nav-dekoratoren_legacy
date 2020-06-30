@@ -10,7 +10,8 @@ import { KbNavMain } from './useKbNavMain';
 export const useKbNavSub = (
     config: KbNavConfig,
     kbNavMain: KbNavMain,
-    isEnabled: boolean
+    isEnabled: boolean,
+    forceUpdate?: any
 ) => {
     const {
         group,
@@ -54,5 +55,5 @@ export const useKbNavSub = (
             parentNode[parentNodeEdge] = graph.rootNode;
             graph.rootNode[NodeEdgeOpposite[parentNodeEdge]] = parentNode;
         }
-    }, [group, rootIndex, idMap, maxColsPerRow, isEnabled]);
+    }, [group, rootIndex, idMap, maxColsPerRow, isEnabled, forceUpdate]);
 };

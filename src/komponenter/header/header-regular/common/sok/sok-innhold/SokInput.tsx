@@ -3,7 +3,7 @@ import Tekst from 'tekster/finn-tekst';
 import { finnTekst } from 'tekster/finn-tekst';
 import { Input } from 'nav-frontend-skjema';
 import SokKnapper from './SokKnapper';
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { Language } from 'store/reducers/language-duck';
 import './SokInput.less';
 
@@ -36,7 +36,11 @@ export const SokInput = (props: Props) => {
                     label={finnTekst('sok-input-label', language)}
                     aria-label={finnTekst('sok-input-label', language)}
                 />
-                <SokKnapper writtenInput={writtenInput} onReset={onReset} />
+                <SokKnapper
+                    writtenInput={writtenInput}
+                    onReset={onReset}
+                    id={id}
+                />
             </div>
         </>
     );

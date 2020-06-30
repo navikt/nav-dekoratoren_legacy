@@ -1,6 +1,6 @@
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
-import React, { useEffect, useState, FocusEvent } from 'react';
+import React, { useEffect, useState } from 'react';
 import { defaultData, visAlleTreff } from './sok-utils';
 import debounce from 'lodash.debounce';
 import { GACategory, gaEvent } from 'utils/google-analytics';
@@ -18,6 +18,7 @@ interface Props {
     id?: string;
     isOpen: boolean;
     dropdownTransitionMs?: number;
+    numResultsCallback?: (numResults: number) => void;
 }
 
 const mobileCls = BEMHelper('sok');
@@ -31,10 +32,9 @@ const Sok = (props: Props) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [input, setInput] = useState<string>('');
     const [result, setResult] = useState([defaultData]);
-    const [focusIndex, setFocusIndex] = useState(-1);
     const [error, setError] = useState<string | undefined>();
 
-    const numberOfResults: number = 5;
+    const numberOfResults = 5;
     const klassenavn = cls('sok-input', {
         engelsk: language === Language.ENGELSK,
     });
@@ -45,41 +45,15 @@ const Sok = (props: Props) => {
         }
     }, [props.isOpen]);
 
+    useEffect(() => {
+        if (props.numResultsCallback) {
+            props.numResultsCallback(Math.min(result.length, numberOfResults));
+        }
+    }, [result]);
+
     const onReset = () => {
         setInput('');
         setLoading(false);
-    };
-
-    const onFocus = (e: FocusEvent<HTMLAnchorElement>) => {
-        const index = Number(e.target?.id?.split('-')[1]);
-        setFocusIndex(index >= 0 ? index : -1);
-    };
-
-    const onKeyDown = (e: any) => {
-        let newIndex = focusIndex;
-        switch (e.key) {
-            case 'ArrowDown':
-                e.preventDefault();
-                if (focusIndex < numberOfResults) {
-                    newIndex = focusIndex + 1;
-                }
-                break;
-            case 'ArrowUp':
-                e.preventDefault();
-                if (focusIndex > 0) {
-                    newIndex = focusIndex - 1;
-                }
-                break;
-            default:
-                setFocusIndex(-1);
-                break;
-        }
-
-        if (newIndex !== focusIndex) {
-            setFocusIndex(newIndex);
-            setInput(result[newIndex].displayName);
-            document.getElementById(`sokeresultat-${newIndex}`)?.focus();
-        }
     };
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -94,7 +68,6 @@ const Sok = (props: Props) => {
         <form
             role="search"
             id={`search-form${props.id ? `-${props.id}` : ''}`}
-            onKeyDown={onKeyDown}
             onSubmit={onSubmit}
         >
             <div className="sok-container">
@@ -128,8 +101,6 @@ const Sok = (props: Props) => {
                             <SokResultater
                                 writtenInput={input}
                                 items={result}
-                                onFocus={onFocus}
-                                focusIndex={focusIndex}
                                 numberOfResults={numberOfResults}
                                 language={language}
                                 fetchError={error}
