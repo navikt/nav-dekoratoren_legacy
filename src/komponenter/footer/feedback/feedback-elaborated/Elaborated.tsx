@@ -3,8 +3,7 @@ import { Textarea, RadioPanelGruppe } from 'nav-frontend-skjema';
 import './Elaborated.less';
 import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import gatherUserInformation from 'utils/user-information';
 import Tekst from 'tekster/finn-tekst';
 
