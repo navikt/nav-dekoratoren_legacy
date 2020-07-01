@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Textarea } from 'nav-frontend-skjema';
+import { Textarea, RadioPanelGruppe } from 'nav-frontend-skjema';
 import './Elaborated.less';
 import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
@@ -18,7 +18,7 @@ const Elaborated = () => {
         const report = {
             errorTitle: errorTitle,
             errorMessage: errorMessage,
-            clientInformation: gatherUserInformation(navigator)
+            clientInformation: gatherUserInformation(navigator),
         };
 
         console.log(report);
@@ -40,7 +40,7 @@ const Elaborated = () => {
             </Innholdstittel>
 
             <form onSubmit={submitFeedback}>
-                <Ekspanderbartpanel tittel={'Velg type feil eller mangel'}>
+                {/* <Ekspanderbartpanel tittel={'Velg type feil eller mangel'}>
                     <div className={'errorTitlesContainer'}>
                         <ErrorTitleEntry tittel={'Informasjon'} />
                         <ErrorTitleEntry tittel={'Ytelse'} />
@@ -48,7 +48,41 @@ const Elaborated = () => {
                         <ErrorTitleEntry tittel={'Bug'} />
                         <ErrorTitleEntry tittel={'Annet'} />
                     </div>
-                </Ekspanderbartpanel>
+                </Ekspanderbartpanel> */}
+
+                <RadioPanelGruppe
+                    name="errorTitle"
+                    legend="Type feil eller mangel"
+                    radios={[
+                        {
+                            label: 'Informasjon',
+                            value: 'informasjon',
+                            id: 'informasjon',
+                        },
+                        {
+                            label: 'Ytelse',
+                            value: 'ytelse',
+                            id: 'ytelse',
+                        },
+                        {
+                            label: 'Utseende',
+                            value: 'utseende',
+                            id: 'utseende',
+                        },
+                        {
+                            label: 'Bug',
+                            value: 'bug',
+                            id: 'bug',
+                        },
+                        {
+                            label: 'Annet',
+                            value: 'annet',
+                            id: 'annet',
+                        },
+                    ]}
+                    onChange={(e) => setErrorTitle(e.target.value)}
+                    checked={errorTitle}
+                />
 
                 <Undertittel>
                     <Tekst id="din-tilbakemelding" />
