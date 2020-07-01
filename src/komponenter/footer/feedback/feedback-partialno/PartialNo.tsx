@@ -7,6 +7,7 @@ import { Knapp } from 'nav-frontend-knapper';
 const PartialNo = (props: any) => {
 
     const [aarsaker, setAarsaker] = useState<string[]>([]);
+    const [negMessage, setNegMessage] = useState(String);
 
     useEffect(() => {
         setAarsaker(props.aarsaker);
@@ -14,7 +15,12 @@ const PartialNo = (props: any) => {
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
-        console.log(aarsaker)
+
+        const report = {
+            negMessage: negMessage,
+        };
+
+        console.log(negMessage, aarsaker)
     };
 
     return (
@@ -36,10 +42,10 @@ const PartialNo = (props: any) => {
 
             <Element> Noe annet? Spesifiser gjerne nedenfor. </Element> 
 
-            {/* <Textarea
+            <Textarea
                 value={negMessage}
                 onChange={(e) => setNegMessage(e.target.value)}
-            /> */}
+            />
 
             <Knapp htmlType="submit"> Send inn </Knapp>
         </form>
