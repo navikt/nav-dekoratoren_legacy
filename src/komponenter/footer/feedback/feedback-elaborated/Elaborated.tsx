@@ -9,19 +9,26 @@ import gatherUserInformation from 'utils/user-information';
 import Tekst from 'tekster/finn-tekst';
 
 const Elaborated = () => {
-    const [errorTitle, setErrorTitle] = useState();
+    const [errorTitle, setErrorTitle] = useState(String);
     const [errorMessage, setErrorMessage] = useState(String);
+    const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(String);
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        const report = {
-            errorTitle: errorTitle,
-            errorMessage: errorMessage,
-            clientInformation: gatherUserInformation(navigator),
-        };
+        if (!radiobuttonErrorMessage.length) {
+            setRadiobuttonErrorMessage('Du må velge et alternativ');
+        } else {
+            setRadiobuttonErrorMessage('');
 
-        console.log(report);
+            const report = {
+                errorTitle: errorTitle,
+                errorMessage: errorMessage,
+                clientInformation: gatherUserInformation(navigator),
+            };
+
+            console.log(report);
+        }
     };
 
     return (
@@ -34,6 +41,7 @@ const Elaborated = () => {
                 <RadioPanelGruppe
                     name="errorTitle"
                     legend="Type feil eller mangel"
+                    feil={radiobuttonErrorMessage}
                     radios={[
                         {
                             label: 'Informasjon',
