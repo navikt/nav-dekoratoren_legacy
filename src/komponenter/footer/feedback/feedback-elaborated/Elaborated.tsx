@@ -15,7 +15,7 @@ const Elaborated = () => {
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        if (!radiobuttonErrorMessage.length) {
+        if (!errorTitle.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
             setRadiobuttonErrorMessage('');
