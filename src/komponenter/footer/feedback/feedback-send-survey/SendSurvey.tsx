@@ -9,7 +9,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 const SendSurvey = () => {
     const [email, setEmail] = useState(String);
-    const [inputErrorMessage, setInputErrorMessage] = useState('');
+    const [inputFieldErrorMessage, setInputFieldErrorMessage] = useState('');
 
     const submitEmail = (evt: any) => {
         evt.preventDefault();
@@ -18,7 +18,7 @@ const SendSurvey = () => {
 
         validateEmailUsingRegEx(email)
             ? sendSurveyToUser()
-            : setInputErrorMessage('Epost er ikke gyldig');
+            : setInputFieldErrorMessage('Epost er ikke gyldig');
     };
 
     const validateEmailUsingRegEx = (email: string) => {
@@ -27,7 +27,7 @@ const SendSurvey = () => {
     };
 
     const sendSurveyToUser = () => {
-        setInputErrorMessage('');
+        setInputFieldErrorMessage('');
 
         console.log('Survey was sent to user');
     };
@@ -46,7 +46,7 @@ const SendSurvey = () => {
                 <Input
                     label="Din e-postaddresse"
                     onChange={(e) => setEmail(e.target.value)}
-                    feil={inputErrorMessage}
+                    feil={inputFieldErrorMessage}
                 />
 
                 <Hovedknapp inputMode="text" htmlType="submit">
