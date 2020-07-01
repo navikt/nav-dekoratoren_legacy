@@ -4,6 +4,9 @@ import { Undertittel } from 'nav-frontend-typografi';
 import './Feedback.less';
 import './hotjar'
 import loadSurvey from './hotjar';
+import { verifyWindowObj } from 'utils/Environment';
+const { logAmplitudeEvent } = verifyWindowObj() ? require("utils/amplitude") : () => null;
+
 
 export const Feedback = () => {
     const [trykketJaKnapp, setTrykketJaKnapp] = useState(false);
@@ -13,8 +16,10 @@ export const Feedback = () => {
     const userPressedNo = () => {
         setTrykketNeiKnapp(true);
         loadSurvey();
+        logAmplitudeEvent('tilbakemelding', {'svar': 'JA'})
+        
     }
-
+    
     const [trykketDelvisKnapp, setTrykketDelvisKnapp] = useState(false);
     const userPressedPartial = () => setTrykketDelvisKnapp(true);
 
