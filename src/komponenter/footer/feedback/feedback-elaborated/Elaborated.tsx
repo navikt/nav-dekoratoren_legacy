@@ -24,15 +24,6 @@ const Elaborated = () => {
         console.log(report);
     };
 
-    const ErrorTitleEntry = (props: any) => (
-        <Flatknapp
-            value={props.tittel}
-            onClick={(e) => setErrorTitle(e.target.value)}
-        >
-            {props.tittel}
-        </Flatknapp>
-    );
-
     return (
         <div className="elaborated-wrapper">
             <Innholdstittel>
@@ -40,16 +31,6 @@ const Elaborated = () => {
             </Innholdstittel>
 
             <form onSubmit={submitFeedback}>
-                {/* <Ekspanderbartpanel tittel={'Velg type feil eller mangel'}>
-                    <div className={'errorTitlesContainer'}>
-                        <ErrorTitleEntry tittel={'Informasjon'} />
-                        <ErrorTitleEntry tittel={'Ytelse'} />
-                        <ErrorTitleEntry tittel={'Utseende'} />
-                        <ErrorTitleEntry tittel={'Bug'} />
-                        <ErrorTitleEntry tittel={'Annet'} />
-                    </div>
-                </Ekspanderbartpanel> */}
-
                 <RadioPanelGruppe
                     name="errorTitle"
                     legend="Type feil eller mangel"
