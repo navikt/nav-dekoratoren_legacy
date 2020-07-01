@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Knapp } from 'nav-frontend-knapper';
-import { Element } from 'nav-frontend-typografi';
+import { Element, Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import './Feedback.less';
 import Elaborated from './feedback-elaborated/Elaborated';
+import PartialNo from './feedback-partialno/PartialNo';
+import SendSurvey from './feedback-send-survey/SendSurvey';
 
 export const Feedback = () => {
 
@@ -20,7 +22,7 @@ export const Feedback = () => {
 
     const TrykketIngenKnapper = () => (
         <div className="feedback-container">
-            <Element className="tekst" > Fant du det du lette etter? </Element>
+            <Undertittel className="feedback_tekst" > Fant du det du lette etter? </Undertittel>
             <div className="knapp-container">
                 <JaKnapp/>
                 <DelvisKnapp/>
@@ -40,7 +42,7 @@ export const Feedback = () => {
 
     const TrykketJaKnapp = () => (
         <div id="trykketJaKnapp" className="svar-container" >
-            JA
+            <SendSurvey/>
         </div>
     );
 
@@ -54,7 +56,7 @@ export const Feedback = () => {
 
     const TrykketDelvisKnapp = () => (
         <div id="trykketDelvisKnapp" className="svar-container">
-            DELVIS
+            <PartialNo/>
         </div>
     );
 
@@ -68,7 +70,7 @@ export const Feedback = () => {
 
     const TrykketNeiKnapp = () => (
         <div id="trykketNeiKnapp" className="svar-container" >
-            NEJ
+            <PartialNo/>
         </div>
     );
 
