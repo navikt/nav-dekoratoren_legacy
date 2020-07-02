@@ -1,90 +1,57 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
-import { Undertittel } from 'nav-frontend-typografi';
 import './Feedback.less';
-import loadHotjarSurvey from '../../../utils/hotjar-surveys';
+
 import { verifyWindowObj } from 'utils/Environment';
+import loadHotjarSurvey from 'utils/hotjar-surveys';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
 
-export const Feedback = () => {
-    const [trykketJaKnapp, setTrykketJaKnapp] = useState(false);
-    const userPressedYes = () => setTrykketJaKnapp(true);
+const Feedback = () => {
+    const [buttonsPressed, setButtonsPressed] = useState({
+        yes: false,
+        no: false,
+    });
 
-    const [trykketNeiKnapp, setTrykketNeiKnapp] = useState(false);
     const userPressedNo = () => {
-        setTrykketNeiKnapp(true);
-        loadHotjarSurvey('tps-undersokelse-nei');
-        logAmplitudeEvent('tilbakemelding', { svar: 'JA' });
+        setButtonsPressed({ yes: false, no: true });
+        loadHotjarSurvey('tps-test');
+        logAmplitudeEvent('tilbakemelding', { svar: 'nei' });
     };
 
-    const [trykketDelvisKnapp, setTrykketDelvisKnapp] = useState(false);
-    const userPressedPartial = () => setTrykketDelvisKnapp(true);
-
-    const [trykketRapporterKnapp, setTrykketRapporterKnapp] = useState(false);
-    const userPressedReport = () => setTrykketRapporterKnapp(true);
-
-    const TrykketIngenKnapper = () => (
-        <div className="feedback-container">
-            <Undertittel className="feedback_tekst">
-                {' '}
-                Fant du det du lette etter?{' '}
-            </Undertittel>
-            <div className="knapp-container">
-                <JaKnapp />
-                <DelvisKnapp />
-                <NeiKnapp />
-            </div>
-        </div>
-    );
-
-    const JaKnapp = () => (
-        <div className="knappen">
-            <Knapp onClick={userPressedYes}>Ja</Knapp>
-        </div>
-    );
-
-    const TrykketJaKnapp = () => (
-        <div id="trykketJaKnapp" className="svar-container"></div>
-    );
-
-    const DelvisKnapp = () => (
-        <div className="knappen">
-            <Knapp onClick={userPressedPartial}>Delvis</Knapp>
-        </div>
-    );
-
-    const TrykketDelvisKnapp = () => (
-        <div id="trykketDelvisKnapp" className="svar-container"></div>
-    );
-
-    const NeiKnapp = () => (
-        <div className="knappen">
-            <Knapp onClick={userPressedNo}>Nei</Knapp>
-        </div>
-    );
-
-    const TrykketNeiKnapp = () => (
-        <div id="trykketNeiKnapp" className="svar-container"></div>
-    );
-
-    const TrykketRapporterKnapp = () => (
-        <div id="trykketRapporterKnapp" className="svar-container"></div>
-    );
+    const userPressedYes = () => {
+        setButtonsPressed({ yes: true, no: false });
+        logAmplitudeEvent('tilbakemelding', { svar: 'ja' });
+    };
 
     return (
-        <div>
-            {!trykketJaKnapp &&
-            !trykketNeiKnapp &&
-            !trykketDelvisKnapp &&
-            !trykketRapporterKnapp ? (
-                <TrykketIngenKnapper />
+        <div className="feedback-container">
+            {!buttonsPressed.yes && !buttonsPressed.no ? (
+                <Fragment>
+                    <Undertittel>
+                        <Tekst id="fant-du-det-du-lette-etter" />
+                    </Undertittel>
+                    <div className="buttons-container">
+                        <Knapp className="knapp" onClick={userPressedYes}>Ja</Knapp>
+                        <Knapp className="knapp"onClick={userPressedNo}>Nei</Knapp>
+                    </div>
+                </Fragment>
             ) : null}
-            {trykketJaKnapp ? <TrykketJaKnapp /> : null}
-            {trykketNeiKnapp ? <TrykketNeiKnapp /> : null}
-            {trykketDelvisKnapp ? <TrykketDelvisKnapp /> : null}
-            {trykketRapporterKnapp ? <TrykketRapporterKnapp /> : null}
+
+            {buttonsPressed.yes ? (
+                <Undertittel> Takk for tilbakemeldingen </Undertittel>
+            ) : null}
+            {buttonsPressed.no ? (
+                <div className="feedback-container">
+                    <Undertittel> Takk for tilbakemeldingen. </Undertittel>
+                    <Normaltekst>
+                        <Tekst id='send-undersokelse-sporsmaal'/>
+                    </Normaltekst>
+                </div>
+            ) : null}
         </div>
     );
 };

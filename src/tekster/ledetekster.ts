@@ -233,6 +233,5 @@ export const ledetekster: { [key: string]: string } = {
     'send-undersokelse-knapp': 'Send',
     'send-undersokelse-knapp-en': 'Send',
     'send-undersokelse-knapp-se': 'Send',
-
-
+    'fant-du-det-du-lette-etter': 'Fant du det du lette etter?',
 };
