@@ -56,9 +56,6 @@ const Feedback = () => {
                         {' '}
                         <Tekst id="takk-for-tilbakemelding" />{' '}
                     </Undertittel>
-                    <Normaltekst>
-                        <Tekst id="send-undersokelse-sporsmaal" />
-                    </Normaltekst>
                 </div>
             ) : null}
         </div>
