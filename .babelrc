@@ -5,6 +5,7 @@
         "@babel/preset-react"
     ],
     "plugins": [
+        "@loadable/babel-plugin",
         "@babel/plugin-proposal-class-properties",
         "@babel/plugin-proposal-object-rest-spread",
         [

@@ -1,8 +1,6 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
-
-// Nødvendig for IE11-støtte i visse apper.
-import 'core-js/stable/regexp';
+import 'core-js/stable/regexp'; // Nødvendig for IE11-støtte i visse apper.
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -15,6 +13,7 @@ import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
 import Cookies from 'universal-cookie';
+import { loadableReady } from '@loadable/component';
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
@@ -26,12 +25,13 @@ if (erDev) {
 }
 
 const run = () => {
-    initGA();
-    initAmplitude();
-    fetchEnv()
-        .then((environment) => {
+    // initGA();
+    // initAmplitude();
+    fetchEnv().then((environment) =>
+        loadableReady(() => {
             const cookies = new Cookies();
             const store = createStore(environment, cookies);
+
             ReactDOM.render(
                 <ReduxProvider store={store}>
                     <CookiesProvider>
@@ -48,10 +48,10 @@ const run = () => {
                 </ReduxProvider>,
                 document.getElementById('decorator-footer')
             );
-        })
-        .catch((e) => {
+        }).catch((e) => {
             console.error(e);
-        });
+        })
+    );
 };
 
 if (verifyWindowObj()) {

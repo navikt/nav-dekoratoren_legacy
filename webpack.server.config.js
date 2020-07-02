@@ -5,6 +5,7 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const nodeExternals = require('webpack-node-externals');
 const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const browserConfig = {
     mode: process.env.NODE_ENV || 'development',
@@ -19,7 +20,7 @@ const browserConfig = {
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        publicPath: '/dekoratoren',
+        publicPath: '/dekoratoren/',
         filename: 'server.js',
         libraryTarget: 'commonjs2',
     },
@@ -149,7 +150,7 @@ const browserConfig = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: '/css/[name].css',
+            filename: 'css/[name].css',
         }),
 
         new webpack.DefinePlugin({
@@ -160,6 +161,8 @@ const browserConfig = {
         new SpriteLoaderPlugin({
             plainSprite: true,
         }),
+
+        new LoadablePlugin({ filename: 'loadable-server.json' }),
     ],
 };
 

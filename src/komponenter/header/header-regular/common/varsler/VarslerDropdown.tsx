@@ -2,13 +2,18 @@ import React from 'react';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
-import { Varselvisning } from './varselvisning/Varselvisning';
+// import { Varselvisning } from './varselvisning/Varselvisning';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { VarslerKnapp } from './varsler-knapp/VarslerKnapp';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import './VarslerDropdown.less';
+
+import loadable from '@loadable/component';
+const Varselvisning = loadable(() => import('./varselvisning/Varselvisning'));
 
 export const varslerDropdownClassname = 'varsler-dropdown';
 
@@ -23,6 +28,12 @@ type Props = {
 export const VarslerDropdown = ({ kbNavMainState }: Props) => {
     const { isOpen } = useSelector(stateSelector);
     useKbNavSub(configForNodeGroup[KbNavGroup.Varsler], kbNavMainState, isOpen);
+    const [renderContent, setRenderContent] = useState(false);
+
+    useEffect(() => {
+        const opened = renderContent || isOpen;
+        setRenderContent(opened);
+    }, [isOpen]);
 
     return (
         <>
@@ -32,8 +43,10 @@ export const VarslerDropdown = ({ kbNavMainState }: Props) => {
                 id={varslerDropdownClassname}
                 isOpen={isOpen}
             >
-                <Varselvisning setKbId={true} />
+                {renderContent && <Varselvisning setKbId={true} />}
             </EkspanderbarMeny>
         </>
     );
 };
+
+export default VarslerDropdown;

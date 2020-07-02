@@ -6,15 +6,28 @@ import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import { GACategory } from 'utils/google-analytics';
 import { SokDropdown } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
-import { MinsideMeny } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
-import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
-import { VarslerDropdown } from 'komponenter/header/header-regular/common/varsler/VarslerDropdown';
+// import { MinsideMeny } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
+// import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
+// import { VarslerDropdown } from 'komponenter/header/header-regular/common/varsler/VarslerDropdown';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { HovedmenyDesktop } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
 import { HovedmenyMobil } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
 import { Status } from 'api/api';
 import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
 import './HeaderMenylinje.less';
+import loadable from '@loadable/component';
+
+const VarslerDropdown = loadable(() =>
+    import('komponenter/header/header-regular/common/varsler/VarslerDropdown')
+);
+
+const MinsideMeny = loadable(() =>
+    import('komponenter/header/header-regular/desktop/minside-meny/MinsideMeny')
+);
+
+const LoggInnKnapp = loadable(() =>
+    import('komponenter/header/header-regular/common/logg-inn/LoggInnKnapp')
+);
 
 export const headerLogoId = 'header-logo-id';
 

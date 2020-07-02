@@ -12,6 +12,8 @@ import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 import { CookiesProvider } from 'react-cookie';
 import hash from 'object-hash';
+import { ChunkExtractor } from '@loadable/server';
+import path from 'path';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -20,8 +22,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Resources
 const fileEnv = `${process.env.APP_BASE_URL}/env`;
-const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
-const fileScript = `${process.env.APP_BASE_URL}/client.js`;
+
+// Loadable components stats files
+const statsServer = path.resolve('build/loadable-server.json');
+const statsClient = path.resolve('build/loadable-client.json');
 
 const cache = new NodeCache({
     stdTTL: fiveMinutesInSeconds,
@@ -57,23 +61,45 @@ export const template = (req: Request) => {
     const headerId = params.header ? `header` : `header-withmenu`;
     const footerId = params.footer ? `footer` : `footer-withmenu`;
 
+    // Chunks
+    const extractorServer = new ChunkExtractor({
+        statsFile: statsServer,
+        entrypoints: ['server'],
+    });
+
+    const extractorClient = new ChunkExtractor({
+        statsFile: statsClient,
+        entrypoints: ['client'],
+    });
+
+    const scriptTags = extractorClient.getScriptTags();
+    const linkTags = extractorClient.getLinkTags();
+    const styleTags = extractorClient.getStyleTags();
+
+    console.log(scriptTags);
+    console.log(linkTags);
+    console.log(styleTags);
+
     // Render SSR
     const HtmlHeader = ReactDOMServer.renderToString(
-        <ReduxProvider store={store}>
-            <MetaTagsContext extract={metaTags.extract}>
-                <CookiesProvider cookies={universalCookies}>
-                    <Header />
-                </CookiesProvider>
-            </MetaTagsContext>
-        </ReduxProvider>
+        extractorServer.collectChunks(
+            <ReduxProvider store={store}>
+                <MetaTagsContext extract={metaTags.extract}>
+                    <CookiesProvider cookies={universalCookies}>
+                        <Header />
+                    </CookiesProvider>
+                </MetaTagsContext>
+            </ReduxProvider>
+        )
     );
-
     const HtmlFooter = ReactDOMServer.renderToString(
-        <ReduxProvider store={store}>
-            <CookiesProvider>
-                <Footer />
-            </CookiesProvider>
-        </ReduxProvider>
+        extractorServer.collectChunks(
+            <ReduxProvider store={store}>
+                <CookiesProvider>
+                    <Footer />
+                </CookiesProvider>
+            </ReduxProvider>
+        )
     );
 
     const HtmlMetaTags = metaTags.renderToString();
@@ -89,6 +115,7 @@ export const template = (req: Request) => {
             />
             <meta name="theme-color" content="#000000" />
             <title>NAV Dekoratør</title>
+            ${linkTags}
             <!-- Decorator development styling -->
             <style>
             html, body {  height: 100%; }
@@ -110,7 +137,7 @@ export const template = (req: Request) => {
             <!-- Styling fetched by apps -->
             <div id="styles">
                 ${HtmlMetaTags}
-                <link href="${fileCss}" rel="stylesheet" />
+                ${styleTags}
             </div>
         </head>
         <body>
@@ -129,7 +156,7 @@ export const template = (req: Request) => {
             <!-- Scripts fetched by apps -->
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
-                <script type="text/javascript" src=${fileScript}></script>
+                ${scriptTags}
             </div>
             <div id="skiplinks"></div>
             <div id="megamenu-resources"></div>

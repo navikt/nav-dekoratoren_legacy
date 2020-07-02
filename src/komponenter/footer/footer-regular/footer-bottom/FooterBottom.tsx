@@ -10,10 +10,16 @@ import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import { MenyNode } from 'store/reducers/menu-duck';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import LenkeMedIkon from 'komponenter/footer/common/lenke-med-ikon/LenkeMedIkon';
-import DelSkjermModal from 'komponenter/footer/common/del-skjerm-modal/DelSkjermModal';
+// import DelSkjermModal from 'komponenter/footer/common/del-skjerm-modal/DelSkjermModal';
 import { LinkLoader } from '../../../common/content-loaders/LinkLoader';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import './FooterBottom.less';
+
+import loadable from '@loadable/component';
+
+const DelSkjermModal = loadable(() =>
+    import('komponenter/footer/common/del-skjerm-modal/DelSkjermModal')
+);
 
 const FooterBottom = () => {
     const cls = BEMHelper('footer-bottom-content');

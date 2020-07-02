@@ -6,6 +6,7 @@ import { gaEvent } from 'utils/google-analytics';
 import BEMHelper from 'utils/bem';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
 import { HoyreChevron } from 'nav-frontend-chevron';
+import './BunnseksjonLenke.less';
 
 interface Props {
     url: string;

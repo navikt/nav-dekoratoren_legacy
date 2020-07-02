@@ -41,14 +41,14 @@ export const gaEvent = (props: GAEventArgs) => {
     const { context, category, action, label } = props;
     const actionFinal = `${context ? context + '/' : ''}${action}`;
 
-    logAmplitudeEvent('navigere', {
-        destinasjon: label,
-        lenketekst: actionFinal,
-    });
-
-    ReactGA.event({
-        category: category,
-        action: actionFinal.toLowerCase(),
-        label: label || undefined,
-    });
+    // logAmplitudeEvent('navigere', {
+    //     destinasjon: label,
+    //     lenketekst: actionFinal,
+    // });
+    //
+    // ReactGA.event({
+    //     category: category,
+    //     action: actionFinal.toLowerCase(),
+    //     label: label || undefined,
+    // });
 };

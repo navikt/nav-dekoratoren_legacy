@@ -86,3 +86,5 @@ export const Varselvisning = ({ setKbId }: Props) => {
         </div>
     );
 };
+
+export default Varselvisning;

@@ -26,8 +26,12 @@
         "url": "https://github.com/navikt/nav-dekoratoren/issues"
     },
     "dependencies": {
+        "@loadable/component": "^5.13.1",
+        "@loadable/server": "^5.13.1",
         "@navikt/fnrvalidator": "^1.1.2",
         "@promster/express": "^4.1.11",
+        "@types/loadable__component": "^5.10.0",
+        "@types/loadable__server": "^5.12.2",
         "amplitude-js": "^7.1.0",
         "classnames": "^2.2.6",
         "compression": "^1.7.4",
@@ -105,6 +109,8 @@
         "@babel/polyfill": "^7.10.1",
         "@babel/preset-env": "^7.10.3",
         "@babel/preset-react": "^7.10.1",
+        "@loadable/babel-plugin": "^5.13.0",
+        "@loadable/webpack-plugin": "^5.13.0",
         "@types/amplitude-js": "^5.11.0",
         "@types/classnames": "^2.2.10",
         "@types/compression": "^1.7.0",
