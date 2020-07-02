@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel, Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
 import './Feedback.less';
@@ -31,14 +31,14 @@ const Feedback = () => {
         <div className="feedback-container">
             {!buttonsPressed.yes && !buttonsPressed.no ? (
                 <Fragment>
-                    <Undertittel>
+                    <Ingress>
                         <Tekst id="fant-du-det-du-lette-etter" />
-                    </Undertittel>
+                    </Ingress>
                     <div className="buttons-container">
-                        <Knapp className="knapp" onClick={userPressedYes}>
+                        <Knapp mini className="knapp" onClick={userPressedYes}>
                             Ja
                         </Knapp>
-                        <Knapp className="knapp" onClick={userPressedNo}>
+                        <Knapp mini className="knapp" onClick={userPressedNo}>
                             Nei
                         </Knapp>
                     </div>
@@ -46,16 +46,16 @@ const Feedback = () => {
             ) : null}
 
             {buttonsPressed.yes ? (
-                <Undertittel>
-                    <Tekst id="takk-for-tilbakemelding" />
-                </Undertittel>
+                <Ingress>
+                    <Tekst id="send-undersokelse-takk" />
+                </Ingress>
             ) : null}
             {buttonsPressed.no ? (
                 <div className="feedback-container">
-                    <Undertittel>
+                    <Ingress>
                         {' '}
-                        <Tekst id="takk-for-tilbakemelding" />{' '}
-                    </Undertittel>
+                        <Tekst id="send-undersokelse-takk" />{' '}
+                    </Ingress>
                 </div>
             ) : null}
         </div>
