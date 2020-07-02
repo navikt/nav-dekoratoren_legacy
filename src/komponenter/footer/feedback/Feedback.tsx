@@ -35,20 +35,29 @@ const Feedback = () => {
                         <Tekst id="fant-du-det-du-lette-etter" />
                     </Undertittel>
                     <div className="buttons-container">
-                        <Knapp className="knapp" onClick={userPressedYes}>Ja</Knapp>
-                        <Knapp className="knapp"onClick={userPressedNo}>Nei</Knapp>
+                        <Knapp className="knapp" onClick={userPressedYes}>
+                            Ja
+                        </Knapp>
+                        <Knapp className="knapp" onClick={userPressedNo}>
+                            Nei
+                        </Knapp>
                     </div>
                 </Fragment>
             ) : null}
 
             {buttonsPressed.yes ? (
-                <Undertittel> Takk for tilbakemeldingen </Undertittel>
+                <Undertittel>
+                    <Tekst id="takk-for-tilbakemelding" />
+                </Undertittel>
             ) : null}
             {buttonsPressed.no ? (
                 <div className="feedback-container">
-                    <Undertittel> Takk for tilbakemeldingen. </Undertittel>
+                    <Undertittel>
+                        {' '}
+                        <Tekst id="takk-for-tilbakemelding" />{' '}
+                    </Undertittel>
                     <Normaltekst>
-                        <Tekst id='send-undersokelse-sporsmaal'/>
+                        <Tekst id="send-undersokelse-sporsmaal" />
                     </Normaltekst>
                 </div>
             ) : null}
