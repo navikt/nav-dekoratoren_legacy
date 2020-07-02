@@ -3,7 +3,6 @@ import { Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
 import './Feedback.less';
-
 import { verifyWindowObj } from 'utils/Environment';
 import loadHotjarSurvey from 'utils/hotjar-surveys';
 const { logAmplitudeEvent } = verifyWindowObj()
@@ -12,24 +11,24 @@ const { logAmplitudeEvent } = verifyWindowObj()
 
 const Feedback = () => {
     const [buttonsPressed, setButtonsPressed] = useState({
-        yes: false,
-        no: false,
+        yesButton: false,
+        noButton: false,
     });
 
     const userPressedNo = () => {
-        setButtonsPressed({ yes: false, no: true });
+        setButtonsPressed({ yesButton: false, noButton: true });
         loadHotjarSurvey('tps-test');
         logAmplitudeEvent('tilbakemelding', { svar: 'nei' });
     };
 
     const userPressedYes = () => {
-        setButtonsPressed({ yes: true, no: false });
+        setButtonsPressed({ yesButton: true, noButton: false });
         logAmplitudeEvent('tilbakemelding', { svar: 'ja' });
     };
 
     return (
         <div className="feedback-container">
-            {!buttonsPressed.yes && !buttonsPressed.no ? (
+            {!buttonsPressed.yesButton && !buttonsPressed.noButton ? (
                 <Fragment>
                     <Ingress>
                         <Tekst id="fant-du-det-du-lette-etter" />
@@ -45,12 +44,7 @@ const Feedback = () => {
                 </Fragment>
             ) : null}
 
-            {buttonsPressed.yes ? (
-                <Ingress>
-                    <Tekst id="send-undersokelse-takk" />
-                </Ingress>
-            ) : null}
-            {buttonsPressed.no ? (
+            {buttonsPressed.yesButton || buttonsPressed.noButton ? (
                 <Ingress>
                     <Tekst id="send-undersokelse-takk" />
                 </Ingress>
