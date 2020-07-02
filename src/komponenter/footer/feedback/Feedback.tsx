@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Knapp } from 'nav-frontend-knapper';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Element, Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import './Feedback.less';
 import Elaborated from './feedback-elaborated/Elaborated';
 import PartialNo from './feedback-partialno/PartialNo';

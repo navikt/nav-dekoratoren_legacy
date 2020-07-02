@@ -3,11 +3,15 @@ import {CheckboksPanelGruppe, Textarea} from "nav-frontend-skjema";
 import './PartialNo.less'; 
 import { Innholdstittel, Element } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
+import Alertstripe from 'nav-frontend-alertstriper';
+import Tekst from 'tekster/finn-tekst';
+
 
 const PartialNo = (props: any) => {
 
     const [aarsaker, setAarsaker] = useState<string[]>([]);
     const [negMessage, setNegMessage] = useState(String);
+ //   const [checkboxError, setCheckboxError] = useState(String);
 
     useEffect(() => {
         setAarsaker(props.aarsaker);
@@ -16,11 +20,14 @@ const PartialNo = (props: any) => {
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
+//        {!checkboxError.length ? setCheckboxError('upsi') : setCheckboxError('')}
+
         const report = {
             negMessage: negMessage,
+  //          aarsaker: aarsaker,
         };
 
-        console.log(negMessage, aarsaker)
+        console.log(report) 
     };
 
     return (
@@ -31,6 +38,7 @@ const PartialNo = (props: any) => {
             <CheckboksPanelGruppe 
             legend={'Hva var galt?'} 
             className="partialno_tekst"
+//            feil={checkboxError}
             checkboxes={[
                 { label: 'Lite oversiktlig', value: 'neg1', id: 'neg1id' },
                 { label: 'Lite forståelig', value: 'neg2', id: 'neg2id' },
