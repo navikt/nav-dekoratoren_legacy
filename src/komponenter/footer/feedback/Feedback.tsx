@@ -35,10 +35,10 @@ const Feedback = () => {
                         <Tekst id="fant-du-det-du-lette-etter" />
                     </Ingress>
                     <div className="buttons-container">
-                        <Knapp mini className="knapp" onClick={userPressedYes}>
+                        <Knapp className="knapp" onClick={userPressedYes}>
                             Ja
                         </Knapp>
-                        <Knapp mini className="knapp" onClick={userPressedNo}>
+                        <Knapp className="knapp" onClick={userPressedNo}>
                             Nei
                         </Knapp>
                     </div>
@@ -51,12 +51,9 @@ const Feedback = () => {
                 </Ingress>
             ) : null}
             {buttonsPressed.no ? (
-                <div className="feedback-container">
-                    <Ingress>
-                        {' '}
-                        <Tekst id="send-undersokelse-takk" />{' '}
-                    </Ingress>
-                </div>
+                <Ingress>
+                    <Tekst id="send-undersokelse-takk" />
+                </Ingress>
             ) : null}
         </div>
     );
