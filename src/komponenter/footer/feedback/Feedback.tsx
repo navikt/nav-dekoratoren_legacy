@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Normaltekst, Undertittel, Ingress } from 'nav-frontend-typografi';
+import { Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
 import './Feedback.less';
