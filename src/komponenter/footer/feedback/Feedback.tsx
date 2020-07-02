@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 import './Feedback.less';
-import '../../../utils/hotjar-surveys'
 import loadHotjarSurvey from '../../../utils/hotjar-surveys';
 import { verifyWindowObj } from 'utils/Environment';
-const { logAmplitudeEvent } = verifyWindowObj() ? require("utils/amplitude") : () => null;
+const { logAmplitudeEvent } = verifyWindowObj()
+    ? require('utils/amplitude')
+    : () => null;
 
 export const Feedback = () => {
     const [trykketJaKnapp, setTrykketJaKnapp] = useState(false);
@@ -15,16 +16,15 @@ export const Feedback = () => {
     const userPressedNo = () => {
         setTrykketNeiKnapp(true);
         loadHotjarSurvey('tps-undersokelse-nei');
-        logAmplitudeEvent('tilbakemelding', {'svar': 'JA'})
-        
-    }
-    
+        logAmplitudeEvent('tilbakemelding', { svar: 'JA' });
+    };
+
     const [trykketDelvisKnapp, setTrykketDelvisKnapp] = useState(false);
     const userPressedPartial = () => setTrykketDelvisKnapp(true);
 
     const [trykketRapporterKnapp, setTrykketRapporterKnapp] = useState(false);
     const userPressedReport = () => setTrykketRapporterKnapp(true);
-    
+
     const TrykketIngenKnapper = () => (
         <div className="feedback-container">
             <Undertittel className="feedback_tekst">
@@ -36,7 +36,6 @@ export const Feedback = () => {
                 <DelvisKnapp />
                 <NeiKnapp />
             </div>
-            
         </div>
     );
 
