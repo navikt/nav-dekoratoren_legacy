@@ -76,10 +76,6 @@ export const template = (req: Request) => {
     const linkTags = extractorClient.getLinkTags();
     const styleTags = extractorClient.getStyleTags();
 
-    console.log(scriptTags);
-    console.log(linkTags);
-    console.log(styleTags);
-
     // Render SSR
     const HtmlHeader = ReactDOMServer.renderToString(
         extractorServer.collectChunks(
