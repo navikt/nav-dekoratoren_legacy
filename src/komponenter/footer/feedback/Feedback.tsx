@@ -3,7 +3,7 @@ import { Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 import './Feedback.less';
 import './hotjar-surveys'
-import loadSurvey from './hotjar-surveys';
+import loadHotjarSurvey from './hotjar-surveys';
 import { verifyWindowObj } from 'utils/Environment';
 const { logAmplitudeEvent } = verifyWindowObj() ? require("utils/amplitude") : () => null;
 
@@ -15,7 +15,7 @@ export const Feedback = () => {
     const [trykketNeiKnapp, setTrykketNeiKnapp] = useState(false);
     const userPressedNo = () => {
         setTrykketNeiKnapp(true);
-        loadSurvey();
+        loadHotjarSurvey('tps-undersokelse-nei');
         logAmplitudeEvent('tilbakemelding', {'svar': 'JA'})
         
     }
