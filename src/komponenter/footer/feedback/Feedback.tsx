@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 import './Feedback.less';
-import './hotjar'
-import loadSurvey from './hotjar';
+import './hotjar-surveys'
+import loadSurvey from './hotjar-surveys';
 import { verifyWindowObj } from 'utils/Environment';
 const { logAmplitudeEvent } = verifyWindowObj() ? require("utils/amplitude") : () => null;
 
