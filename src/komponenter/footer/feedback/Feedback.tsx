@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 import './Feedback.less';
-import './hotjar-surveys'
-import loadHotjarSurvey from './hotjar-surveys';
+import '../../../utils/hotjar-surveys'
+import loadHotjarSurvey from '../../../utils/hotjar-surveys';
 import { verifyWindowObj } from 'utils/Environment';
 const { logAmplitudeEvent } = verifyWindowObj() ? require("utils/amplitude") : () => null;
-
 
 export const Feedback = () => {
     const [trykketJaKnapp, setTrykketJaKnapp] = useState(false);
