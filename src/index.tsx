@@ -101,7 +101,7 @@ const run = () => {
             checkUrlForLanguage();
             window.addEventListener('popstate', checkUrlForLanguage);
 
-            ReactDOM.hydrate(
+            ReactDOM.render(
                 <ReduxProvider store={store}>
                     <CookiesProvider>
                         <Header />
@@ -109,7 +109,7 @@ const run = () => {
                 </ReduxProvider>,
                 document.getElementById('decorator-header')
             );
-            ReactDOM.hydrate(
+            ReactDOM.render(
                 <ReduxProvider store={store}>
                     <CookiesProvider>
                         <Footer />
