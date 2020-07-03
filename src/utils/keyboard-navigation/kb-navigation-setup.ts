@@ -31,8 +31,6 @@ export type KbNavConfig = {
     idMap?: KbIdMap;
 };
 
-export const disabledGroups = [KbNavGroup.Sok];
-
 export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
     [KbNavGroup.HeaderMenylinje]: {
         group: KbNavGroup.HeaderMenylinje,
@@ -51,7 +49,7 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
     [KbNavGroup.Sok]: {
         group: KbNavGroup.Sok,
         rootIndex: { col: 0, row: 0, sub: 0 },
-        maxColsPerRow: [3],
+        maxColsPerRow: [3, 1],
         parentNodeId: desktopSokKnappId,
         parentNodeEdge: NodeEdge.Bottom,
         idMap: {
