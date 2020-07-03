@@ -9,9 +9,8 @@ import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
-import { sokDropdownClassname } from '../SokDropdown';
-
-export const desktopSokKnappId = 'desktop-sok-knapp';
+import { sokDropdownClassname } from 'utils/id-repo';
+import { desktopSokKnappId } from 'utils/id-repo';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.sok,

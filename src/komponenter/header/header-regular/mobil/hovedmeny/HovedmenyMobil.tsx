@@ -3,7 +3,6 @@ import { AppState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { Status } from 'api/api';
 import { getHovedmenyNode, getMinsideMenyNode } from 'utils/meny-storage-utils';
-// import MobilVisningsmeny from './meny-dropdown/MobilVisningsmeny';
 import { GACategory, gaEvent } from 'utils/google-analytics';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
@@ -14,12 +13,12 @@ import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-kn
 import loadable from '@loadable/component';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { mobilmenyKnappId } from 'utils/id-repo';
 
 const MobilVisningsmeny = loadable(() =>
     import('./meny-dropdown/MobilVisningsmeny')
 );
 
-export const mobilmenyKnappId = 'mobilmeny-knapp-id';
 const classname = 'mobilmeny';
 
 const stateSelector = (state: AppState) => ({

@@ -10,6 +10,7 @@ import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapp/hovedmeny-knapp/HovedmenyKnapp';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { desktopHovedmenyKnappId } from 'utils/id-repo';
 
 const HovedmenyDesktopInnhold = loadable(() =>
     import(
@@ -18,7 +19,6 @@ const HovedmenyDesktopInnhold = loadable(() =>
 );
 
 const classname = 'desktop-hovedmeny';
-export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,

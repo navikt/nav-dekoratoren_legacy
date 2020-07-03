@@ -9,7 +9,6 @@ import { erDev, verifyWindowObj } from './utils/Environment';
 import { fetchEnv } from './utils/Environment';
 import { initGA } from './utils/google-analytics';
 import { initAmplitude } from './utils/amplitude';
-import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
 import Cookies from 'universal-cookie';
@@ -23,6 +22,8 @@ import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { Language } from 'store/reducers/language-duck';
 import { languageDuck } from 'store/reducers/language-duck';
+import { EnvironmentState } from 'store/reducers/environment-duck';
+import Footer from 'komponenter/footer/Footer';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
@@ -42,6 +43,59 @@ const getLanguageFromUrl = (): Language => {
     return Language.NORSK;
 };
 
+const footerIsNearView = () => {
+    const footerElement = document.getElementById('decorator-footer');
+    return (
+        footerElement &&
+        footerElement.getBoundingClientRect().top <
+            window.pageYOffset + window.innerHeight * 1.5
+    );
+};
+
+const getAppState = (environment: EnvironmentState) => {
+    const cookies = new Cookies();
+    const store = createStore(environment, cookies);
+    const dispatch = store.dispatch;
+    const { APP_BASE_URL, PARAMS } = environment;
+    hentInnloggingsstatus(APP_BASE_URL)(dispatch);
+    fetchMenypunkter(APP_BASE_URL)(dispatch);
+
+    const defaultToPerson = () => {
+        dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
+        cookies.set('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
+    };
+
+    if (PARAMS.CONTEXT !== MenuValue.IKKEBESTEMT) {
+        store.dispatch(settArbeidsflate(PARAMS.CONTEXT));
+        cookies.set('decorator-context', PARAMS.CONTEXT, cookieOptions);
+    } else {
+        const context = cookies.get('decorator-context');
+        context ? dispatch(settArbeidsflate(context)) : defaultToPerson();
+    }
+
+    // Change language
+    const checkUrlForLanguage = () => {
+        if (PARAMS.LANGUAGE !== Language.IKKEBESTEMT) {
+            dispatch(
+                languageDuck.actionCreator({
+                    language: PARAMS.LANGUAGE,
+                })
+            );
+            cookies.set('decorator-language', PARAMS.LANGUAGE, cookieOptions);
+        } else {
+            // Fetch state from cookie OR default to norsk
+            const language = getLanguageFromUrl();
+            dispatch(languageDuck.actionCreator({ language }));
+            cookies.set('decorator-language', language, cookieOptions);
+        }
+    };
+
+    checkUrlForLanguage();
+    window.addEventListener('popstate', checkUrlForLanguage);
+
+    return store;
+};
+
 const run = () => {
     window.addEventListener('load', () => {
         initGA();
@@ -49,78 +103,46 @@ const run = () => {
         setTimeout(initGTM, 2000);
     });
 
-    fetchEnv().then((environment) =>
-        loadableReady(() => {
-            const cookies = new Cookies();
-            const store = createStore(environment, cookies);
-            const dispatch = store.dispatch;
-            const { APP_BASE_URL, PARAMS } = environment;
-            hentInnloggingsstatus(APP_BASE_URL)(dispatch);
-            fetchMenypunkter(APP_BASE_URL)(dispatch);
+    fetchEnv()
+        .then((environment) => {
+            const store = getAppState(environment);
 
-            const defaultToPerson = () => {
-                dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
-                cookies.set(
-                    'decorator-context',
-                    MenuValue.PRIVATPERSON,
-                    cookieOptions
+            return loadableReady(() => {
+                ReactDOM.render(
+                    <ReduxProvider store={store}>
+                        <CookiesProvider>
+                            <Header />
+                        </CookiesProvider>
+                    </ReduxProvider>,
+                    document.getElementById('decorator-header')
                 );
-            };
 
-            if (PARAMS.CONTEXT !== MenuValue.IKKEBESTEMT) {
-                store.dispatch(settArbeidsflate(PARAMS.CONTEXT));
-                cookies.set('decorator-context', PARAMS.CONTEXT, cookieOptions);
-            } else {
-                const context = cookies.get('decorator-context');
-                context
-                    ? dispatch(settArbeidsflate(context))
-                    : defaultToPerson();
-            }
+                const renderFooter = () => {
+                    if (footerIsNearView()) {
+                        window.removeEventListener('scroll', renderFooter);
+                        window.removeEventListener('resize', renderFooter);
+                        ReactDOM.render(
+                            <ReduxProvider store={store}>
+                                <CookiesProvider>
+                                    <Footer />
+                                </CookiesProvider>
+                            </ReduxProvider>,
+                            document.getElementById('decorator-footer')
+                        );
+                    }
+                };
 
-            // Change language
-            const checkUrlForLanguage = () => {
-                if (PARAMS.LANGUAGE !== Language.IKKEBESTEMT) {
-                    dispatch(
-                        languageDuck.actionCreator({
-                            language: PARAMS.LANGUAGE,
-                        })
-                    );
-                    cookies.set(
-                        'decorator-language',
-                        PARAMS.LANGUAGE,
-                        cookieOptions
-                    );
+                if (footerIsNearView()) {
+                    renderFooter();
                 } else {
-                    // Fetch state from cookie OR default to norsk
-                    const language = getLanguageFromUrl();
-                    dispatch(languageDuck.actionCreator({ language }));
-                    cookies.set('decorator-language', language, cookieOptions);
+                    window.addEventListener('scroll', renderFooter);
+                    window.addEventListener('resize', renderFooter);
                 }
-            };
-
-            checkUrlForLanguage();
-            window.addEventListener('popstate', checkUrlForLanguage);
-
-            ReactDOM.render(
-                <ReduxProvider store={store}>
-                    <CookiesProvider>
-                        <Header />
-                    </CookiesProvider>
-                </ReduxProvider>,
-                document.getElementById('decorator-header')
-            );
-            ReactDOM.render(
-                <ReduxProvider store={store}>
-                    <CookiesProvider>
-                        <Footer />
-                    </CookiesProvider>
-                </ReduxProvider>,
-                document.getElementById('decorator-footer')
-            );
-        }).catch((e) => {
-            console.error(e);
+            });
         })
-    );
+        .catch((e) => {
+            console.error(e);
+        });
 };
 
 if (verifyWindowObj()) {

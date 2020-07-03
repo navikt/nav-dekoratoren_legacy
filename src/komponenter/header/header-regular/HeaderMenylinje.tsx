@@ -14,9 +14,8 @@ import { HovedmenyDesktop } from 'komponenter/header/header-regular/desktop/hove
 import { HovedmenyMobil } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
 import { Status } from 'api/api';
 import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
+import { headerLogoId } from 'utils/id-repo';
 import './HeaderMenylinje.less';
-
-export const headerLogoId = 'header-logo-id';
 
 const stateSelector = (state: AppState) => ({
     innlogget: state.innloggingsstatus.data.authenticated,

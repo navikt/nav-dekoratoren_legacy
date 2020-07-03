@@ -3,12 +3,10 @@ import { useEffect, useState } from 'react';
 import { createHeaderMainGraph } from './kb-navigation-setup';
 import { KbNavGraph, KbNavNode } from './kb-navigation';
 import { KbNavNodeMap } from './kb-navigation';
-import { createKbNavNode } from './kb-navigation';
-import { KbNavGroup } from './kb-navigation';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
-import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
 import KbNav from 'utils/keyboard-navigation/kb-navigation';
+import { kbMasterNode } from './kb-navigation-setup';
 
 const stateSelector = (state: AppState) => ({
     language: state.language.language,
@@ -31,12 +29,6 @@ type KeyboardNavState = {
     mainGraph: KbNavGraph;
     subGraph?: KbNavGraph;
 };
-
-export const kbMasterNode = createKbNavNode(
-    headerLogoId,
-    { col: 0, row: 1, sub: 0 },
-    KbNavGroup.HeaderMenylinje
-);
 
 export const kbNavInitialState: KeyboardNavState = {
     currentNode: kbMasterNode,

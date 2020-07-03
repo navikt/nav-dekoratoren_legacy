@@ -6,9 +6,8 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { MenuValue } from 'utils/meny-storage-utils';
 import KnappBase from 'nav-frontend-knapper';
+import { loginKnappId } from 'utils/id-repo';
 import './LoggInnKnapp.less';
-
-export const loginKnappId = 'login-knapp-id';
 
 const stateSelector = (state: AppState) => ({
     authenticated: state.innloggingsstatus.data.authenticated,

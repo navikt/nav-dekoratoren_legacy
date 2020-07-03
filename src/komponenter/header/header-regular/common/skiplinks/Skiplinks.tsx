@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { mobilmenyKnappId } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
-import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
 import { useDispatch } from 'react-redux';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
 import { SkipLinkElement } from './SkiplinkElement';
@@ -8,8 +6,10 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
-import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/hovedmeny/meny-dropdown/MobilVisningsmeny';
-import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
+import { mobilSokInputId } from 'utils/id-repo';
+import { desktopSokInputId } from 'utils/id-repo';
+import { mobilmenyKnappId } from 'utils/id-repo';
+import { desktopHovedmenyKnappId } from 'utils/id-repo';
 import './Skiplinks.less';
 
 export type SkipLink = {

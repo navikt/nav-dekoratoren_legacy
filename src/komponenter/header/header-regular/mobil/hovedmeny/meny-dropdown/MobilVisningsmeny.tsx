@@ -14,6 +14,7 @@ import InnloggetBruker from './mobil-innhold/innloggetbruker/InnloggetBruker';
 import ForsideLenke from './mobil-innhold/ForsideLenke';
 import Dittnavmeny from './mobil-innhold/dittnavmeny/Dittnavmeny';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
+import { mobilSokInputId } from 'utils/id-repo';
 import './MobilVisningsmeny.less';
 
 interface Props {
@@ -28,7 +29,6 @@ interface Props {
     lang: Language;
 }
 
-export const mobilSokInputId = `mobil-sok-input`;
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
     innloggingsstatus: state.innloggingsstatus,

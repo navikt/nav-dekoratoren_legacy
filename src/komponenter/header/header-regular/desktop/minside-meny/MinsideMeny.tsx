@@ -1,11 +1,11 @@
 import React from 'react';
+import loadable from '@loadable/component';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { getMinsideMenyNode } from 'utils/meny-storage-utils';
 import { Status } from 'api/api';
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
-// import MinsideMenyInnhold from './MinsideMenyInnhold';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
@@ -13,9 +13,10 @@ import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { MinsidePersonKnapp } from './minside-knapper/MinsidePersonKnapp';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { minsideMenyClassname } from 'utils/id-repo';
+import { minsideKnappId } from 'utils/id-repo';
 import './MinsideMeny.less';
 
-import loadable from '@loadable/component';
 const MinsideMenyInnhold = loadable(() => import('./MinsideMenyInnhold'));
 
 const stateSelector = (state: AppState) => ({
@@ -25,9 +26,6 @@ const stateSelector = (state: AppState) => ({
     menyPunkter: state.menypunkt,
     arbeidsflate: state.arbeidsflate.status,
 });
-
-export const minsideMenyClassname = 'desktop-minside-meny';
-export const minsideKnappId = 'desktop-minside-knapp-id';
 
 type Props = {
     kbNavMainState: KbNavMain;

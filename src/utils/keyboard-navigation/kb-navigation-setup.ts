@@ -9,18 +9,14 @@ import KbNav, {
 import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from 'api/api';
-import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
-import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
-import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
-import { desktopSokKnappId } from 'komponenter/header/header-regular/desktop/sok-dropdown/sok-knapp/SokKnapp';
-import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
-import { varslerKnappId } from 'komponenter/header/header-regular/common/varsler/varsler-knapp/VarslerKnapp';
-import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
-import { loginKnappId } from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
-
-// TODO: Finn ut hvorfor akkurat denne noen ganger blir undefined :|
-const hovedmenyKnappId =
-    desktopHovedmenyKnappId || 'desktop-hovedmeny-knapp-id';
+import { headerLogoId } from 'utils/id-repo';
+import { desktopSokKnappId } from 'utils/id-repo';
+import { desktopSokInputId } from 'utils/id-repo';
+import { varslerKnappId } from 'utils/id-repo';
+import { minsideKnappId } from 'utils/id-repo';
+import { loginKnappId } from 'utils/id-repo';
+import { desktopHovedmenyKnappId } from 'utils/id-repo';
+import { createKbNavNode } from './kb-navigation';
 
 export type KbNavConfig = {
     group: KbNavGroup;
@@ -30,6 +26,12 @@ export type KbNavConfig = {
     parentNodeEdge: NodeEdge;
     idMap?: KbIdMap;
 };
+
+export const kbMasterNode = createKbNavNode(
+    headerLogoId,
+    { col: 0, row: 1, sub: 0 },
+    KbNavGroup.HeaderMenylinje
+);
 
 export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
     [KbNavGroup.HeaderMenylinje]: {
@@ -43,7 +45,7 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
         group: KbNavGroup.Hovedmeny,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 4, 3],
-        parentNodeId: hovedmenyKnappId,
+        parentNodeId: desktopHovedmenyKnappId,
         parentNodeEdge: NodeEdge.Bottom,
     },
     [KbNavGroup.Sok]: {
@@ -116,7 +118,7 @@ export const createHeaderMainGraph = (
     if (hovedmenyEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = hovedmenyKnappId;
+        ] = desktopHovedmenyKnappId;
     }
 
     idMap[
