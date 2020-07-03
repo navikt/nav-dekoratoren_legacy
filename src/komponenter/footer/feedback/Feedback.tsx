@@ -35,10 +35,10 @@ const Feedback = () => {
                     </Ingress>
                     <div className="buttons-container">
                         <Knapp className="knapp" onClick={userPressedYes}>
-                            Ja
+                            <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
                         </Knapp>
                         <Knapp className="knapp" onClick={userPressedNo}>
-                            Nei
+                            <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
                         </Knapp>
                     </div>
                 </Fragment>
