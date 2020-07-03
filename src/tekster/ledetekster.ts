@@ -237,4 +237,12 @@ export const ledetekster: { [key: string]: string } = {
     'send-undersokelse-knapp-en': 'Send',
     'send-undersokelse-knapp-se': 'Send',
     'fant-du-det-du-lette-etter': 'Fant du det du lette etter?',
+    'fant-du-det-du-lette-etter-en': 'Did you find what you were looking for?',
+    'fant-du-det-du-lette-etter-se': 'Fant du det du lette etter?',
+    'fant-det-du-lette-etter-svarknapp-ja': 'Ja',
+    'fant-det-du-lette-etter-svarknapp-ja-en': 'Yes',
+    'fant-det-du-lette-etter-svarknapp-ja-se': 'Ja',
+    'fant-det-du-lette-etter-svarknapp-nei': 'Nei',
+    'fant-det-du-lette-etter-svarknapp-nei-en': 'No',
+    'fant-det-du-lette-etter-svarknapp-nei-se': 'Nei',
 };
