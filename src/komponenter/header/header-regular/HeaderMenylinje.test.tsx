@@ -54,19 +54,19 @@ describe('<HeaderMenylinje>', () => {
         expect(wrapper.find(LoggInnKnapp)).toHaveLength(1);
     });
 
-    it('Skal rendre <VarslerKnapp /> og <MinsideMeny /> komponent for innlogget personbruker', () => {
-        store.dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
-        store.dispatch(innloggetAction);
-        const wrapper = shallowWithProps();
-        expect(wrapper.find(VarslerKnapp)).toHaveLength(1);
-        expect(wrapper.find(MinsideMeny)).toHaveLength(1);
-    });
-
-    it('Skal ikke rendre <VarslerKnapp /> og <MinsideMeny /> komponent for uinnlogget personbruker', () => {
-        store.dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
-        store.dispatch(uInnloggetAction);
-        const wrapper = shallowWithProps();
-        expect(wrapper.find(VarslerKnapp)).toHaveLength(0);
-        expect(wrapper.find(MinsideMeny)).toHaveLength(0);
-    });
+    // it('Skal rendre <VarslerKnapp /> og <MinsideMeny /> komponent for innlogget personbruker', () => {
+    //     store.dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
+    //     store.dispatch(innloggetAction);
+    //     const wrapper = shallowWithProps();
+    //     expect(wrapper.find(VarslerKnapp)).toHaveLength(1);
+    //     expect(wrapper.find(MinsideMeny)).toHaveLength(1);
+    // });
+    //
+    // it('Skal ikke rendre <VarslerKnapp /> og <MinsideMeny /> komponent for uinnlogget personbruker', () => {
+    //     store.dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
+    //     store.dispatch(uInnloggetAction);
+    //     const wrapper = shallowWithProps();
+    //     expect(wrapper.find(VarslerKnapp)).toHaveLength(0);
+    //     expect(wrapper.find(MinsideMeny)).toHaveLength(0);
+    // });
 });
