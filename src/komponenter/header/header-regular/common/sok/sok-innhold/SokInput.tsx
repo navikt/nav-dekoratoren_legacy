@@ -9,25 +9,16 @@ import './SokInput.less';
 
 type Props = {
     className: string;
-    getInputProps: any;
     language: Language;
-    tabIndex: boolean | undefined;
     writtenInput: string;
+    onChange: (value: string) => void;
     onReset: () => void;
     id?: string;
 };
 
-const defaultKeys = ['Home', 'End'];
-
-export const SokInput = ({
-    language,
-    writtenInput,
-    onReset,
-    className,
-    getInputProps,
-    tabIndex,
-    id,
-}: Props) => {
+export const SokInput = (props: Props) => {
+    const { onChange, onReset } = props;
+    const { language, writtenInput, className, id } = props;
     return (
         <>
             <div className={'sok-input__tittel'}>
@@ -37,22 +28,19 @@ export const SokInput = ({
             </div>
             <div className="sok-input-container">
                 <Input
-                    {...getInputProps({
-                        onKeyDown: (e: any) => {
-                            if (defaultKeys.includes(e.key)) {
-                                e.nativeEvent.preventDownshiftDefault = true;
-                                return;
-                            }
-                        },
-                    })}
+                    id={id}
+                    onChange={(e) => onChange(e.target.value)}
                     className={className}
+                    value={writtenInput}
                     placeholder={finnTekst('sok-input-placeholder', language)}
                     label={finnTekst('sok-input-label', language)}
                     aria-label={finnTekst('sok-input-label', language)}
-                    tabIndex={tabIndex ? 0 : -1}
+                />
+                <SokKnapper
+                    writtenInput={writtenInput}
+                    onReset={onReset}
                     id={id}
                 />
-                <SokKnapper writtenInput={writtenInput} onReset={onReset} />
             </div>
         </>
     );

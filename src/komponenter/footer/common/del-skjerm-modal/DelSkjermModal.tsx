@@ -30,8 +30,7 @@ const DelSkjermModal = (props: Props) => {
     const [code, setCode] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-    const [error, setError] = useState(feilmelding);
-    const feil = submitted && error ? { feilmelding: error } : undefined;
+    const [error, setError] = useState<string | undefined>();
 
     // Vergic config
     const w = window as any;
@@ -137,7 +136,7 @@ const DelSkjermModal = (props: Props) => {
                         <Input
                             name={'code'}
                             label={label}
-                            feil={feil}
+                            feil={submitted && error}
                             value={code}
                             onChange={onChange}
                             maxLength={5}

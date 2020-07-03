@@ -7,9 +7,8 @@ import { createKbNavNode } from './kb-navigation';
 import { KbNavGroup } from './kb-navigation';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
-import { desktopHeaderLogoId } from 'komponenter/header/header-regular/desktop/DesktopMenylinje';
+import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
 import KbNav from 'utils/keyboard-navigation/kb-navigation';
-import { disabledGroups } from './kb-navigation-setup';
 
 const stateSelector = (state: AppState) => ({
     language: state.language.language,
@@ -34,7 +33,7 @@ type KeyboardNavState = {
 };
 
 export const kbMasterNode = createKbNavNode(
-    desktopHeaderLogoId,
+    headerLogoId,
     { col: 0, row: 1, sub: 0 },
     KbNavGroup.HeaderMenylinje
 );
@@ -116,9 +115,7 @@ export const useKbNavMain = (): KbNavMain => {
             }
         };
 
-        if (!disabledGroups.includes(kbNavState.currentNode.group)) {
-            document.addEventListener('keydown', arrowkeysHandler);
-        }
+        document.addEventListener('keydown', arrowkeysHandler);
         document.addEventListener('keydown', escapeHandler);
         document.addEventListener('focusin', focusHandler);
 
@@ -128,6 +125,14 @@ export const useKbNavMain = (): KbNavMain => {
             document.removeEventListener('focusin', focusHandler);
         };
     }, [kbNavState, dropdownIsOpen]);
+
+    useEffect(() => {
+        const currentNodeInSubGraph =
+            kbNavState.subGraph?.nodeMap[kbNavState.currentNode.id];
+        if (currentNodeInSubGraph) {
+            setCurrentNode(currentNodeInSubGraph);
+        }
+    }, [kbNavState.subGraph]);
 
     return {
         mainNodeMap: kbNavState.mainGraph.nodeMap,

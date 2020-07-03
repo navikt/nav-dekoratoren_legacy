@@ -6,17 +6,21 @@ import KbNav, {
     KbNavGroup,
     NodeIndex,
 } from './kb-navigation';
-import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
-import { desktopHeaderLogoId } from 'komponenter/header/header-regular/desktop/DesktopMenylinje';
-import { desktopSokKnappId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
-import { desktopVarslerKnappId } from 'komponenter/header/header-regular/desktop/varsler/VarslerDropdown';
-import { desktopMinsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
 import { Language } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from 'api/api';
 import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
-import { desktopLoginKnappId } from 'komponenter/header/header-regular/desktop/DesktopMenylinje';
-import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok/SokDropdown';
+import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
+import { desktopSokKnappId } from 'komponenter/header/header-regular/desktop/sok-dropdown/sok-knapp/SokKnapp';
+import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
+import { varslerKnappId } from 'komponenter/header/header-regular/common/varsler/varsler-knapp/VarslerKnapp';
+import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
+import { loginKnappId } from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
+
+// TODO: Finn ut hvorfor akkurat denne noen ganger blir undefined :|
+const hovedmenyKnappId =
+    desktopHovedmenyKnappId || 'desktop-hovedmeny-knapp-id';
 
 export type KbNavConfig = {
     group: KbNavGroup;
@@ -27,18 +31,12 @@ export type KbNavConfig = {
     idMap?: KbIdMap;
 };
 
-export const disabledGroups = [KbNavGroup.Sok];
-
-// TODO: Hvorfor blir desktopHovedmenyKnappId noen ganger undefined?!
-const hovedmenyKnappId =
-    desktopHovedmenyKnappId || 'desktop-hovedmeny-knapp-id';
-
 export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
     [KbNavGroup.HeaderMenylinje]: {
         group: KbNavGroup.HeaderMenylinje,
         rootIndex: kbMasterNode.index,
         maxColsPerRow: [3, 6],
-        parentNodeId: desktopHeaderLogoId,
+        parentNodeId: headerLogoId,
         parentNodeEdge: NodeEdge.Right,
     },
     [KbNavGroup.Hovedmeny]: {
@@ -51,7 +49,7 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
     [KbNavGroup.Sok]: {
         group: KbNavGroup.Sok,
         rootIndex: { col: 0, row: 0, sub: 0 },
-        maxColsPerRow: [3],
+        maxColsPerRow: [3, 1],
         parentNodeId: desktopSokKnappId,
         parentNodeEdge: NodeEdge.Bottom,
         idMap: {
@@ -76,14 +74,14 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
         group: KbNavGroup.Varsler,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 1, 1],
-        parentNodeId: desktopVarslerKnappId,
+        parentNodeId: varslerKnappId,
         parentNodeEdge: NodeEdge.Bottom,
     },
     [KbNavGroup.MinsideMeny]: {
         group: KbNavGroup.MinsideMeny,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 3],
-        parentNodeId: desktopMinsideKnappId,
+        parentNodeId: minsideKnappId,
         parentNodeEdge: NodeEdge.Bottom,
     },
 };
@@ -113,7 +111,7 @@ export const createHeaderMainGraph = (
 
     idMap[
         KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-    ] = desktopHeaderLogoId;
+    ] = headerLogoId;
 
     if (hovedmenyEnabled) {
         idMap[
@@ -128,18 +126,18 @@ export const createHeaderMainGraph = (
     if (varslerEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = desktopVarslerKnappId;
+        ] = varslerKnappId;
     }
 
     if (minsideMenyEnabled) {
         idMap[
             KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-        ] = desktopMinsideKnappId;
+        ] = minsideKnappId;
     }
 
     idMap[
         KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })
-    ] = desktopLoginKnappId;
+    ] = loginKnappId;
 
     const maxColsPerRow = arbeidsflatemenyEnabled ? [3, colIndex] : [colIndex];
 
