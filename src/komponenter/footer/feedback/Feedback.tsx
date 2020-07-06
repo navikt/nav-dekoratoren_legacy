@@ -1,102 +1,57 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
+import { Ingress } from 'nav-frontend-typografi';
+import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
 import { Element, Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import './Feedback.less';
-import Elaborated from './feedback-elaborated/Elaborated';
-import PartialNo from './feedback-partialno/PartialNo';
-import SendSurvey from './feedback-send-survey/SendSurvey';
+import { verifyWindowObj } from 'utils/Environment';
+import loadHotjarSurvey from 'utils/hotjar-surveys';
+const { logAmplitudeEvent } = verifyWindowObj()
+    ? require('utils/amplitude')
+    : () => null;
 
-export const Feedback = () => {
+const Feedback = () => {
+    const [buttonsPressed, setButtonsPressed] = useState({
+        yesButton: false,
+        noButton: false,
+    });
 
-    const [trykketJaKnapp, setTrykketJaKnapp] = useState(false);
-    const userPressedYes = () => setTrykketJaKnapp(true);
+    const userPressedNo = () => {
+        setButtonsPressed({ yesButton: false, noButton: true });
+        loadHotjarSurvey('tps-test');
+        logAmplitudeEvent('tilbakemelding', { svar: 'nei' });
+    };
 
-    const [trykketNeiKnapp, setTrykketNeiKnapp] = useState(false);
-    const userPressedNo = () => setTrykketNeiKnapp(true);
-
-    const [trykketDelvisKnapp, setTrykketDelvisKnapp] = useState(false);
-    const userPressedPartial = () => setTrykketDelvisKnapp(true);
-
-    const [trykketRapporterKnapp, setTrykketRapporterKnapp] = useState(false);
-    const userPressedReport = () => setTrykketRapporterKnapp(true);
-
-    const TrykketIngenKnapper = () => (
-        <div className="feedback-container">
-            <Undertittel className="feedback_tekst" > Fant du det du lette etter? </Undertittel>
-            <div className="knapp-container">
-                <JaKnapp/>
-                <DelvisKnapp/>
-                <NeiKnapp/>   
-            </div>
-            <RapporterKnapp/>
-        </div>
-    )
-
-    const JaKnapp = () => (
-        <div className="knappen">
-        <Knapp onClick={userPressedYes}>
-            Ja
-        </Knapp>    
-        </div>
-    );
-
-    const TrykketJaKnapp = () => (
-        <div id="trykketJaKnapp" className="svar-container" >
-            <SendSurvey/>
-        </div>
-    );
-
-    const DelvisKnapp = () => (
-        <div className="knappen">
-        <Knapp onClick={userPressedPartial}>
-            Delvis
-        </Knapp>
-        </div>
-    );
-
-    const TrykketDelvisKnapp = () => (
-        <div id="trykketDelvisKnapp" className="svar-container">
-            <PartialNo/>
-        </div>
-    );
-
-    const NeiKnapp = () => (
-        <div className="knappen">
-        <Knapp onClick={userPressedNo}>
-            Nei
-        </Knapp>    
-        </div> 
-    );
-
-    const TrykketNeiKnapp = () => (
-        <div id="trykketNeiKnapp" className="svar-container" >
-            <PartialNo/>
-        </div>
-    );
-
-    const RapporterKnapp = () => (
-        <div className="rapporter-knappen">
-            <Knapp onClick={userPressedReport}>
-                Rapporter feil eller mangler
-            </Knapp>
-        </div>
-    );
-
-    const TrykketRapporterKnapp = () => (
-        <div id="trykketRapporterKnapp" className="svar-container">
-            <Elaborated />
-        </div>
-    )
+    const userPressedYes = () => {
+        setButtonsPressed({ yesButton: true, noButton: false });
+        logAmplitudeEvent('tilbakemelding', { svar: 'ja' });
+    };
 
     return (
-        <div>
-            { !trykketJaKnapp && !trykketNeiKnapp && !trykketDelvisKnapp && !trykketRapporterKnapp ? <TrykketIngenKnapper/> : null}
-            { trykketJaKnapp ? <TrykketJaKnapp /> : null } 
-            { trykketNeiKnapp ? <TrykketNeiKnapp /> : null }
-            { trykketDelvisKnapp ? <TrykketDelvisKnapp /> : null }
-            { trykketRapporterKnapp ? <TrykketRapporterKnapp /> : null }
+        <div className="feedback-container">
+            {!buttonsPressed.yesButton && !buttonsPressed.noButton ? (
+                <Fragment>
+                    <Ingress>
+                        <Tekst id="fant-du-det-du-lette-etter" />
+                    </Ingress>
+                    <div className="buttons-container">
+                        <Knapp className="knapp" onClick={userPressedYes}>
+                            <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
+                        </Knapp>
+                        <Knapp className="knapp" onClick={userPressedNo}>
+                            <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
+                        </Knapp>
+                    </div>
+                </Fragment>
+            ) : null}
+
+            {buttonsPressed.yesButton || buttonsPressed.noButton ? (
+                <Ingress>
+                    <Tekst id="send-undersokelse-takk" />
+                </Ingress>
+            ) : null}
         </div>
-    )
-}
+    );
+};
 
 export default Feedback;

@@ -1,7 +1,6 @@
 @import (reference) '../../../../../styling-variabler.less';
 
-.desktopmeny,
-.mobilmeny__startmeny {
+.header-linje {
     .sok-container {
         position: relative;
         width: 100%;
@@ -40,6 +39,20 @@
             &--active {
                 visibility: visible;
             }
+        }
+    }
+}
+
+.mobilmeny {
+    @media (max-width: @mobilMaxWidth) {
+        .spinner-container {
+            position: absolute;
+            z-index: 1020;
+            margin: 0.25rem 0 0 0;
+            background-color: white;
+            height: calc(100% - 5.5rem);
+            width: 100%;
+            left: 0;
         }
     }
 }

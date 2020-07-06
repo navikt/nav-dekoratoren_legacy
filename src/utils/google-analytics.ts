@@ -1,6 +1,12 @@
 import ReactGA from 'react-ga';
 import TagManager from 'react-gtm-module';
 import { MenuValue } from './meny-storage-utils';
+import { verifyWindowObj } from 'utils/Environment';
+
+// Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
+const { logAmplitudeEvent } = verifyWindowObj()
+    ? require('utils/amplitude')
+    : () => null;
 
 const trackingId = 'UA-9127381-16';
 
@@ -34,6 +40,11 @@ export const initGA = () => {
 export const gaEvent = (props: GAEventArgs) => {
     const { context, category, action, label } = props;
     const actionFinal = `${context ? context + '/' : ''}${action}`;
+
+    logAmplitudeEvent('navigere', {
+        destinasjon: label,
+        lenketekst: actionFinal,
+    });
 
     ReactGA.event({
         category: category,

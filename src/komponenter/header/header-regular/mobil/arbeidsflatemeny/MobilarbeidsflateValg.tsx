@@ -12,12 +12,11 @@ import { finnTekst } from 'tekster/finn-tekst';
 import { Language } from 'store/reducers/language-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
-import './MobilarbeidsflateValg.less';
-import { bunnLenker } from 'komponenter/header/header-regular/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
 import Tekst from 'tekster/finn-tekst';
+import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
+import './MobilarbeidsflateValg.less';
 
 interface Props {
-    tabindex: boolean;
     lang: Language;
 }
 
@@ -26,7 +25,7 @@ const stateProps = (state: AppState) => ({
     environment: state.environment,
 });
 
-const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
+const MobilarbeidsflateValg = ({ lang }: Props) => {
     const dispatch = useDispatch();
     const [, setCookie] = useCookies(['decorator-context']);
     const { arbeidsflate, environment } = useSelector(stateProps);
@@ -52,7 +51,6 @@ const MobilarbeidsflateValg = ({ tabindex, lang }: Props) => {
                                 window.location.href = lenke.url;
                             }
                         }}
-                        tabIndex={tabindex ? 0 : -1}
                         gaEventArgs={{
                             context: arbeidsflate,
                             category: GACategory.Header,
