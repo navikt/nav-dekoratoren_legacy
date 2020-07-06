@@ -12,9 +12,9 @@ const FooterRegular = () => {
 
     useEffect(() => {
         if (checkIfContainsUrl(clientUrl)) {
-            setShowFeedback(false);
-        } else {
             setShowFeedback(true);
+        } else {
+            setShowFeedback(false);
         }
     }, [clientUrl]);
 
