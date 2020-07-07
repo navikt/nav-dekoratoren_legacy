@@ -224,4 +224,22 @@ export const ledetekster: { [key: string]: string } = {
     'fant-det-du-lette-etter-svarknapp-nei': 'Nei',
     'fant-det-du-lette-etter-svarknapp-nei-en': 'No',
     'fant-det-du-lette-etter-svarknapp-nei-se': 'Nei',
+    'rapporter-om-feil-mangler': 'Rapporter om feil eller mangler',
+    'rapporter-om-feil-mangler-en': '',
+    'rapporter-om-feil-mangler-se': 'Rapporter om feil eller mangler',
+    'din-tilbakemelding': 'Din tilbakemelding',
+    'din-tilbakemelding-en': 'Your feedback',
+    'din-tilbakemelding-se': 'Din tilbakemelding',
+    'advarsel-om-personopplysninger': 'Dette er en advarsel',
+    'advarsel-om-personopplysninger-en': 'This is a warning',
+    'advarsel-om-personopplysninger-se': 'Dette er en advarsel',
+    'send-inn-feilrapport': 'Send inn',
+    'send-inn-feilrapport-en': 'Submit',
+    'send-inn-feilrapport-se': 'Send inn',
+    'send-undersokelse-sporsmaal':
+        'Dersom du har tid ønsker vi at du svarer på en undersøkelse om hva vi kan forbedre på våre sider. Undersøkelsen er anonym og tar kun noen minutter',
+    'send-undersokelse-sporsmaal-en': 
+        'If you have the time we could appreciate if you took the time to fill out a short survey about what we can improve with our site. The survey is anonymous and only takes a couple of minutes',
+    'send-undersokelse-sporsmaal-se': 
+        'Dersom du har tid ønsker vi at du svarer på en undersøkelse om hva vi kan forbedre på våre sider. Undersøkelsen er anonym og tar kun noen minutter',
 };
