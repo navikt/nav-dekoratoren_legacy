@@ -17,7 +17,7 @@ const Feedback = () => {
 
     const userPressedNo = () => {
         setButtonsPressed({ yesButton: false, noButton: true });
-        loadHotjarSurvey('tps-test');
+        loadHotjarSurvey('feedback-version-1');
         logAmplitudeEvent('tilbakemelding', { svar: 'nei' });
     };
 
