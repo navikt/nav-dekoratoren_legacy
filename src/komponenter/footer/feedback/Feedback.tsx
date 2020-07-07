@@ -34,21 +34,27 @@ const Feedback = () => {
                         <Tekst id="fant-du-det-du-lette-etter" />
                     </Ingress>
                     <div className="buttons-container">
-                        <Knapp className="feedback-input-button" onClick={userPressedYes}>
+                        <Knapp
+                            className="feedback-input-button"
+                            onClick={userPressedYes}
+                        >
                             <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
                         </Knapp>
-                        <Knapp className="feedback-input-button" onClick={userPressedNo}>
+                        <Knapp
+                            className="feedback-input-button"
+                            onClick={userPressedNo}
+                        >
                             <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
                         </Knapp>
                     </div>
                 </Fragment>
             ) : null}
 
-            {buttonsPressed.yesButton || buttonsPressed.noButton ? (
+            {(buttonsPressed.yesButton || buttonsPressed.noButton) && (
                 <Ingress>
                     <Tekst id="send-undersokelse-takk" />
                 </Ingress>
-            ) : null}
+            )}
         </div>
     );
 };

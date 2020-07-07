@@ -20,7 +20,7 @@ const FooterRegular = () => {
 
     return (
         <Fragment>
-            {showFeedback ? <Feedback /> : null}
+            {showFeedback && <Feedback />}
             <FooterTopp />
             <FooterBottom />
         </Fragment>
