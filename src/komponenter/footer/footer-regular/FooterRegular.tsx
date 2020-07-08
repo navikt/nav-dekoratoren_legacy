@@ -28,7 +28,6 @@ const FooterRegular = () => {
     const path = verifyWindowObj() ? useReactPath() : '';
 
     useEffect(() => {
-        console.log(path);
         if (checkIfContainsUrl(path)) {
             setShowFeedback(true);
         } else {
