@@ -8,15 +8,33 @@ import Feedback from '../feedback/Feedback';
 const FooterRegular = () => {
     const [showFeedback, setShowFeedback] = useState(false);
 
-    const clientUrl = verifyWindowObj() ? window.location.href : '';
+    const useReactPath = () => {
+        const [path, setPath] = useState(window.location.pathname);
+
+        const listenToPopstate = () => {
+            const winPath = window.location.pathname;
+            setPath(winPath);
+        };
+
+        useEffect(() => {
+            window.addEventListener('popstate', listenToPopstate);
+            return () => {
+                window.removeEventListener('popstate', listenToPopstate);
+            };
+        }, []);
+        return path;
+    };
+
+    const path = verifyWindowObj() ? useReactPath() : '';
 
     useEffect(() => {
-        if (checkIfContainsUrl(clientUrl)) {
+        console.log(path);
+        if (checkIfContainsUrl(path)) {
             setShowFeedback(true);
         } else {
             setShowFeedback(false);
         }
-    }, [clientUrl]);
+    }, [path]);
 
     return (
         <Fragment>
