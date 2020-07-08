@@ -1,6 +1,6 @@
 {
-    "allowed_urls": [
-        "/dekoratoren",
+    "allowed_paths": [
+        "/dekoratren",
         "/person/kontakt-oss/en/",
         "/person/kontakt-oss/nb/"
     ]

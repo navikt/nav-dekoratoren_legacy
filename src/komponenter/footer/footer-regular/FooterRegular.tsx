@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import FooterTopp from './footer-topp/FooterTopp';
 import FooterBottom from './footer-bottom/FooterBottom';
 import { verifyWindowObj } from 'utils/Environment';
-import checkIfContainsUrl from 'utils/url-filter/url-filter';
+import checkIfContainsPath from 'utils/url-filter/url-filter';
 import Feedback from '../feedback/Feedback';
 
 const FooterRegular = () => {
@@ -28,7 +28,7 @@ const FooterRegular = () => {
     const path = verifyWindowObj() ? useReactPath() : '';
 
     useEffect(() => {
-        if (checkIfContainsUrl(path)) {
+        if (checkIfContainsPath(path)) {
             setShowFeedback(true);
         } else {
             setShowFeedback(false);
