@@ -1,7 +1,0 @@
-{
-    "allowed_urls": [
-        "http://localhost:8088/dekoratoren",
-        "https://www.nav.no/person/kontakt-oss/nb/",
-        "https://www.nav.no/person/kontakt-oss/en/"
-    ]
-}
