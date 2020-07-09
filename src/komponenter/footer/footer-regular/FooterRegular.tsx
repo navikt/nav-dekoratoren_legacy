@@ -22,6 +22,7 @@ const FooterRegular = () => {
                 window.removeEventListener('popstate', listenToPopstate);
             };
         }, []);
+        console.log("Path i hook", path)
         return path;
     };
 
@@ -29,6 +30,7 @@ const FooterRegular = () => {
 
     useEffect(() => {
         if (checkIfContainsPath(path)) {
+            console.log("Path i useEffect", path, checkIfContainsPath(path));
             setShowFeedback(true);
         } else {
             setShowFeedback(false);
