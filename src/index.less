@@ -5,8 +5,9 @@ body {
 }
 
 body.no-scroll-mobil {
-    @media (max-width: @mobilMaxWidth) {
-        overflow-y: hidden;
+    overflow-y: hidden;
+    @media (min-width: @mobilMaxWidth) {
+        overflow-y: scroll;
     }
 }
 

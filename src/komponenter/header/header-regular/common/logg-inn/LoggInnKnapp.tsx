@@ -51,7 +51,7 @@ export const LoggInnKnapp = () => {
     );
 
     return (
-        <div className={'media-tablet-desktop login-knapp-container'}>
+        <div className={'login-knapp-container'}>
             <KnappBase
                 className={`login-knapp${authenticated ? ' logout-knapp' : ''}`}
                 onClick={handleButtonClick}

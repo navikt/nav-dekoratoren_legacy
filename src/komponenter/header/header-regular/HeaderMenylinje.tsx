@@ -59,7 +59,9 @@ export const HeaderMenylinje = () => {
                     </>
                 )}
                 {innloggetArbgiver && <MinsideArbgiverKnapp />}
-                {innloggingsstatus === Status.OK && <LoggInnKnapp />}
+                <div className={'media-tablet-desktop'}>
+                    {innloggingsstatus === Status.OK && <LoggInnKnapp />}
+                </div>
                 <HovedmenyMobil />
             </div>
         </nav>
