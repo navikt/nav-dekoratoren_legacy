@@ -68,7 +68,7 @@
         }
     }
 
-    @media (max-width: @mobilMaxWidth) {
+    @media not all and (min-width: @desktopMinWidth) {
         &__innhold-wrapper {
             position: fixed;
             top: @header-height-mobil;
