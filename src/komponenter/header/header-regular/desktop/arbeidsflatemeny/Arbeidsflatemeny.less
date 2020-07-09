@@ -3,6 +3,11 @@
 .siteheader .arbeidsflate {
     @separator-height: 1px;
 
+    display: none;
+    @media (min-width: @mobilMaxWidth) {
+        display: flex;
+    }
+
     width: 100%;
     background-color: white;
     height: 2.75rem;
