@@ -2,6 +2,10 @@
     "allowed_paths": [
         "/dekoratoren",
         "/person/kontakt-oss/en/",
-        "/person/kontakt-oss/nb/"
-    ]
+        "/person/kontakt-oss/nb/",
+        "/no/person/pensjon/alderspensjon/nyheter/leveattester-2020",
+        "/no/person/hva-er-din-situasjon",
+        "/no/person/innhold-til-person-forside/nyheter/test/",
+        "/no/nav-og-samfunn/kontakt-nav/utbetalinger"
+    ]   
 }
