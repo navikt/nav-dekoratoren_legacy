@@ -1,6 +1,6 @@
 let urlWhitelist = require('./path-whitelist.json')
 
-function checkIfContainsPath(clientUrl: any): boolean {
+function checkIfContainsPath(clientUrl: string): boolean {
     return urlWhitelist["allowed_paths"].includes(clientUrl)
 
 }
