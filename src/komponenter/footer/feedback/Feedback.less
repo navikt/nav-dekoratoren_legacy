@@ -1,19 +1,31 @@
 .feedback-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    height: auto;
+    margin: 1.25em;
+    flex-wrap: wrap;
 
-    .buttons-container {
+    .qa-container {
         display: flex;
         flex-direction: row;
-        width: auto;
         justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .buttons-container {
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+
+        .knapp {
+            margin: 0.25em;
+            flex-wrap: nowrap;
+        }
     }
 
-    .knapp {
-        margin-right: 1em;
-        margin-left: 1em;
+    .underline {
+        text-decoration: underline;
+        padding: 0.5em;
     }
 }

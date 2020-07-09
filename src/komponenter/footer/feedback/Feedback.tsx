@@ -2,7 +2,6 @@ import React, { Fragment, useState } from 'react';
 import { Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
-import { Element, Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import './Feedback.less';
 import { verifyWindowObj } from 'utils/Environment';
 import loadHotjarSurvey from 'utils/hotjar-surveys';
@@ -50,22 +49,28 @@ const Feedback = () => {
 
     return (
         <div className="feedback-container">
-            {!buttonsPressed.yesButton && !buttonsPressed.noButton && !buttonsPressed.reportButton ? (
+            {!buttonsPressed.yesButton &&
+            !buttonsPressed.noButton &&
+            !buttonsPressed.reportButton ? (
                 <Fragment>
-                    <Ingress>
-                        <Tekst id="fant-du-det-du-lette-etter" />
-                    </Ingress>
-                    <div className="buttons-container">
-                        <Knapp className="knapp" onClick={userPressedYes}>
-                            <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
-                        </Knapp>
-                        <Knapp className="knapp" onClick={userPressedNo}>
-                            <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
-                        </Knapp>
+                    <div className="qa-container">
+                        <Ingress>
+                            <Tekst id="fant-du-det-du-lette-etter" />
+                        </Ingress>
+                        <div className="buttons-container">
+                            <Knapp className="knapp" onClick={userPressedYes}>
+                                <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
+                            </Knapp>
+                            <Knapp className="knapp" onClick={userPressedNo}>
+                                <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
+                            </Knapp>
+                        </div>
                     </div>
-                    <Knapp onClick={userPressedReport}>
+                    <Ingress
+                        className="underline"
+                        onClick={userPressedReport}>
                         Rapporter feil eller mangler
-                    </Knapp>
+                    </Ingress>
                 </Fragment>
             ) : null}
 
