@@ -149,7 +149,7 @@
         "prettier": "^2.0.5",
         "react-dev-utils": "^10.2.1",
         "svg-sprite-loader": "^5.0.0",
-        "ts-loader": "^7.0.5",
+        "ts-loader": "^8.0.0",
         "tslint": "^6.1.2",
         "typescript": "^3.9.6",
         "webpack": "^4.43.0",
