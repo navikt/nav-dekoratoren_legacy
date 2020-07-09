@@ -26,7 +26,6 @@ const Feedback = () => {
             noButton: true,
             reportButton: false,
         });
-        loadHotjarSurvey('tps-test');
         logAmplitudeEvent('tilbakemelding', { svar: 'nei' });
     };
 
