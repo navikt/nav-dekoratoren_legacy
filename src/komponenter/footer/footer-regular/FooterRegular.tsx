@@ -4,11 +4,17 @@ import FooterBottom from './footer-bottom/FooterBottom';
 import { verifyWindowObj } from 'utils/Environment';
 import checkIfContainsUrl from 'utils/url-filter/url-filter';
 import Feedback from '../feedback/Feedback';
+import { useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
 
 const FooterRegular = () => {
     const [showFeedback, setShowFeedback] = useState(false);
 
     const clientUrl = verifyWindowObj() ? window.location.href : '';
+
+    const { PARAMS, APP_BASE_URL } = useSelector(
+        (state: AppState) => state.environment
+    );
 
     useEffect(() => {
         if (checkIfContainsUrl(clientUrl)) {
@@ -20,7 +26,7 @@ const FooterRegular = () => {
 
     return (
         <Fragment>
-            {showFeedback && <Feedback />}
+            { PARAMS.FEEDBACK ? <Feedback /> : null }
             <FooterTopp />
             <FooterBottom />
         </Fragment>
