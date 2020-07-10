@@ -12,7 +12,7 @@ const FooterRegular = () => {
 
     const clientUrl = verifyWindowObj() ? window.location.href : '';
 
-    const { PARAMS, APP_BASE_URL } = useSelector(
+    const { PARAMS } = useSelector(
         (state: AppState) => state.environment
     );
 
@@ -22,11 +22,12 @@ const FooterRegular = () => {
         } else {
             setShowFeedback(false);
         }
+        console.log('Param Feedback: ', PARAMS.FEEDBACK);
     }, [clientUrl]);
 
     return (
         <Fragment>
-            { PARAMS.FEEDBACK ? <Feedback /> : null }
+            {PARAMS.FEEDBACK && <Feedback />}
             <FooterTopp />
             <FooterBottom />
         </Fragment>

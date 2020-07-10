@@ -39,7 +39,7 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
                 SIMPLE_FOOTER: !!req.query.footer,
                 REDIRECT_TO_APP: !!req.query.redirectToApp,
                 LEVEL: (req.query.level || 'Level3') as string,
-                FEEDBACK: req.query.feedback === 'false',
+                FEEDBACK: !(req.query.feedback === 'false'),
             },
         }),
         ...(cookies && {

@@ -47,7 +47,7 @@ export const initialState: EnvironmentState = {
         SIMPLE_FOOTER: false,
         REDIRECT_TO_APP: false,
         LEVEL: 'string',
-        FEEDBACK: true,
+        FEEDBACK: false,
     },
 
     // Cookies
