@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { CheckboksPanelGruppe, Textarea } from 'nav-frontend-skjema';
+import React, { useState } from 'react';
+import { Textarea } from 'nav-frontend-skjema';
 import './PartialNo.less';
-import { Element, Ingress } from 'nav-frontend-typografi';
-import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
+import { Element, Ingress, Normaltekst } from 'nav-frontend-typografi';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
 import { verifyWindowObj } from 'utils/Environment';
 import Alertstripe from 'nav-frontend-alertstriper';
+import { Filter } from 'utils/text-filter/Filter';
+import sendFeedback from './send-feedback';
 
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
@@ -15,25 +17,44 @@ const { logAmplitudeEvent } = verifyWindowObj()
 const PartialNo = (props: any) => {
     const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
     const [feedbackMessage, setFeedbackMessage] = useState(String);
+
+    const [
+        textViolationsErrorMessage,
+        setTextViolationsErrorMessage,
+    ] = useState(false);
+    const [voliations, setViolations] = useState<string[]>([]);
+
     let feedbackTitles = [...feedbackTitle];
 
     const onClickAarsak = (evt: any) => {
         feedbackTitles.includes(evt.target.value)
-            ? (feedbackTitles = feedbackTitles.filter((e) => e !== evt.target.value))
+            ? (feedbackTitles = feedbackTitles.filter(
+                  (e) => e !== evt.target.value
+              ))
             : feedbackTitles.push(evt.target.value);
 
         setFeedbackTitle(feedbackTitles);
     };
 
+    const getTextVolations = () => {
+        const filter = new Filter([]);
+
+        filter.checkForViolations(feedbackMessage);
+
+        return filter.getViolations();
+    };
+
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        const report = {
-            feedbackMessage: feedbackMessage,
-            feedbackTitles: feedbackTitles,
-        };
+        const violations = getTextVolations();
 
-        console.log(report);
+        violations.length
+            ? [setTextViolationsErrorMessage(true), setViolations(violations)]
+            : [
+                  setTextViolationsErrorMessage(false),
+                  sendFeedback(feedbackTitles, feedbackMessage),
+              ];
     };
 
     return (
@@ -76,6 +97,16 @@ const PartialNo = (props: any) => {
                         value={feedbackMessage}
                         onChange={(e) => setFeedbackMessage(e.target.value)}
                     />
+
+                    {textViolationsErrorMessage ? (
+                        <Alertstripe form="inline" type="feil">
+                            <Normaltekst>
+                                Vi mistenker at du har skrevet inn {voliations}.
+                                Dersom du likevel mener dette er riktig kan du
+                                trykke 'Send inn'
+                            </Normaltekst>
+                        </Alertstripe>
+                    ) : null}
 
                     <div className="submit-knapp">
                         <Hovedknapp htmlType="submit">Send inn</Hovedknapp>
