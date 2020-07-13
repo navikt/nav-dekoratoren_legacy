@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { Textarea, RadioPanelGruppe, Select } from 'nav-frontend-skjema';
-import { Element, Undertittel, Ingress } from 'nav-frontend-typografi';
+import { Textarea, RadioGruppe, Radio } from 'nav-frontend-skjema';
+import { Element, Ingress } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import gatherUserInformation from 'utils/user-information';
 import Tekst from 'tekster/finn-tekst';
 import './Elaborated.less';
-import { RadioGruppe, Radio } from 'nav-frontend-skjema';
+import { verifyWindowObj } from 'utils/Environment';
+
+const { logAmplitudeEvent } = verifyWindowObj()
+    ? require('utils/amplitude')
+    : () => null;
 
 const Elaborated = () => {
     const [errorTitle, setErrorTitle] = useState(String);
     const [errorMessage, setErrorMessage] = useState(String);
-    const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
-        String
-    );
+    const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(String);
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
+        logAmplitudeEvent('tilbakemelding', {svar: errorTitle});
 
         if (!errorTitle.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
@@ -25,10 +27,8 @@ const Elaborated = () => {
 
             const report = {
                 errorTitle: errorTitle,
-                errorMessage: errorMessage,
-                clientInformation: gatherUserInformation(navigator),
+                errorMessage: errorMessage,               
             };
-
             console.log(report);
         }
     };
@@ -44,14 +44,15 @@ const Elaborated = () => {
 
                 <RadioGruppe
                     feil={radiobuttonErrorMessage}
+                    // @ts-ignore
                     onChange={(e) => setErrorTitle(e.target.value)}
                     checked={errorTitle}
                 >
-                    <Radio label={'Informasjon'} name="informasjon" />
-                    <Radio label={'Ytelse'} name="ytelse" />
-                    <Radio label={'Utseende'} name="utseende" />
-                    <Radio label={'Bug'} name="bug" />
-                    <Radio label={'Annet'} name="annet" />
+                    <Radio label={'Informasjon'} name="feil" value="informasjon"/>
+                    <Radio label={'Ytelse'} name="feil" value="ytelse"/>
+                    <Radio label={'Utseende'} name="feil" value="utseende"/>
+                    <Radio label={'Bug'} name="feil" value="bug"/>
+                    <Radio label={'Annet'} name="feil" value="annet"/>
                 </RadioGruppe>
 
                 <div>
