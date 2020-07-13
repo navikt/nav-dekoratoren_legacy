@@ -6,7 +6,7 @@ import './Feedback.less';
 import { verifyWindowObj } from 'utils/Environment';
 import loadHotjarSurvey from 'utils/hotjar-surveys';
 import PartialNo from './feedback-partialno/PartialNo';
-import SendSurvey from './feedback-send-survey/SendSurvey';
+import ThankYou from './feedback-thank-you/ThankYou';
 import Elaborated from './feedback-elaborated/Elaborated';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
@@ -74,7 +74,7 @@ const Feedback = () => {
                 </Fragment>
             ) : null}
 
-            {buttonsPressed.yesButton ? <SendSurvey /> : null}
+            {buttonsPressed.yesButton ? <ThankYou /> : null}
             {buttonsPressed.noButton ? <PartialNo /> : null}
             {buttonsPressed.reportButton ? <Elaborated /> : null}
         </div>
