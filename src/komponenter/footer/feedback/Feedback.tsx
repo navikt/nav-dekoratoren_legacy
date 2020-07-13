@@ -4,7 +4,6 @@ import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
 import './Feedback.less';
 import { verifyWindowObj } from 'utils/Environment';
-import loadHotjarSurvey from 'utils/hotjar-surveys';
 import PartialNo from './feedback-partialno/PartialNo';
 import ThankYou from './feedback-thank-you/ThankYou';
 import Elaborated from './feedback-elaborated/Elaborated';
