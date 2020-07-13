@@ -13,24 +13,24 @@ const { logAmplitudeEvent } = verifyWindowObj()
     : () => null;
 
 const PartialNo = (props: any) => {
-    const [aarsak, setAarsak] = useState<string[]>([]);
-    const [negMessage, setNegMessage] = useState(String);
-    let aarsaker = [...aarsak];
+    const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
+    const [feedbackMessage, setFeedbackMessage] = useState(String);
+    let feedbackTitles = [...feedbackTitle];
 
     const onClickAarsak = (evt: any) => {
-        aarsaker.includes(evt.target.value)
-            ? (aarsaker = aarsaker.filter((e) => e !== evt.target.value))
-            : aarsaker.push(evt.target.value);
+        feedbackTitles.includes(evt.target.value)
+            ? (feedbackTitles = feedbackTitles.filter((e) => e !== evt.target.value))
+            : feedbackTitles.push(evt.target.value);
 
-        setAarsak(aarsaker);
+        setFeedbackTitle(feedbackTitles);
     };
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
         const report = {
-            negMessage: negMessage,
-            aarsaker: aarsaker,
+            feedbackMessage: feedbackMessage,
+            feedbackTitles: feedbackTitles,
         };
 
         console.log(report);
@@ -48,21 +48,33 @@ const PartialNo = (props: any) => {
                     onChange={(e) => onClickAarsak(e)}
                     legend="Gi din vurdering av informasjonen på siden"
                 >
-                    <Checkbox label={'Lite oversiktlig'} value="neg1" />
-                    <Checkbox label={'Lite forståelig'} value="neg2" />
+                    <Checkbox
+                        label={'Lite oversiktlig'}
+                        value="lite-oversiktlig"
+                    />
+                    <Checkbox
+                        label={'Lite forståelig'}
+                        value="lite-forstaaelig"
+                    />
                     <Checkbox
                         label={'Lite relevant informasjon'}
-                        value="neg3"
+                        value="lite-relevant"
                     />
-                    <Checkbox label={'Villedende'} value="neg4" />
+                    <Checkbox label={'Villedende'} value="villedende" />
                 </CheckboxGruppe>
 
                 <div className="content">
                     <Element>Noe annet? Spesifiser gjerne nedenfor.</Element>
 
+                    <div className="advarsel">
+                        <Alertstripe type="advarsel">
+                            <Tekst id="advarsel-om-personopplysninger" />
+                        </Alertstripe>
+                    </div>
+
                     <Textarea
-                        value={negMessage}
-                        onChange={(e) => setNegMessage(e.target.value)}
+                        value={feedbackMessage}
+                        onChange={(e) => setFeedbackMessage(e.target.value)}
                     />
 
                     <div className="submit-knapp">
