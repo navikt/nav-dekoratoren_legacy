@@ -25,6 +25,10 @@ const Undermeny = (props: Props) => {
     const { className, undermenyIsOpen } = props;
     const menyClass = BEMHelper(className);
 
+    if (!lenker?.children) {
+        return null;
+    }
+
     const hasLevel4Elements =
         auth.securityLevel !== '4' &&
         lenker.children.filter((lenke) => lenke.displayLock).length;
