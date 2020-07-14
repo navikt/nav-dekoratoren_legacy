@@ -22,7 +22,7 @@ const PartialNo = (props: any) => {
         textViolationsErrorMessage,
         setTextViolationsErrorMessage,
     ] = useState(false);
-    const [violations, setViolations] = useState<string[]>([]);
+    const [violations, setViolations] = useState(String);
 
     let feedbackTitles = [...feedbackTitle];
 
@@ -36,18 +36,18 @@ const PartialNo = (props: any) => {
         setFeedbackTitle(feedbackTitles);
     };
 
-    const getTextVolations = () => {
+    const getViolationsFormatted = () => {
         const filter = new Filter([]);
 
         filter.checkForViolations(feedbackMessage);
 
-        return filter.getViolations();
+        return filter.getViolationsFormatted();
     };
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        const violations = getTextVolations();
+        const violations = getViolationsFormatted();        
 
         violations.length
             ? [setTextViolationsErrorMessage(true), setViolations(violations)]
