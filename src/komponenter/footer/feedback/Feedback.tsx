@@ -7,6 +7,7 @@ import { verifyWindowObj } from 'utils/Environment';
 import PartialNo from './feedback-partialno/PartialNo';
 import ThankYou from './feedback-thank-you/ThankYou';
 import Elaborated from './feedback-elaborated/Elaborated';
+import FeedbackMessage from './common/FeedbackMessage';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
@@ -46,36 +47,46 @@ const Feedback = () => {
     };
 
     return (
-        <div className="feedback-container">
-            {!buttonsPressed.yesButton &&
-            !buttonsPressed.noButton &&
-            !buttonsPressed.reportButton ? (
-                <Fragment>
-                    <div className="qa-container">
-                        <Ingress>
-                            <Tekst id="fant-du-det-du-lette-etter" />
-                        </Ingress>
-                        <div className="buttons-container">
-                            <Knapp className="knapp" onClick={userPressedYes}>
-                                <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
-                            </Knapp>
-                            <Knapp className="knapp" onClick={userPressedNo}>
-                                <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
-                            </Knapp>
+        <Fragment>
+            <FeedbackMessage />
+            {/* <div className="feedback-container">
+                {!buttonsPressed.yesButton &&
+                !buttonsPressed.noButton &&
+                !buttonsPressed.reportButton ? (
+                    <Fragment>
+                        <div className="qa-container">
+                            <Ingress>
+                                <Tekst id="fant-du-det-du-lette-etter" />
+                            </Ingress>
+                            <div className="buttons-container">
+                                <Knapp
+                                    className="knapp"
+                                    onClick={userPressedYes}
+                                >
+                                    <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
+                                </Knapp>
+                                <Knapp
+                                    className="knapp"
+                                    onClick={userPressedNo}
+                                >
+                                    <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
+                                </Knapp>
+                            </div>
                         </div>
-                    </div>
-                    <Ingress
-                        className="underline"
-                        onClick={userPressedReport}>
-                        Rapporter feil eller mangler
-                    </Ingress>
-                </Fragment>
-            ) : null}
+                        <Ingress
+                            className="underline"
+                            onClick={userPressedReport}
+                        >
+                            Rapporter feil eller mangler
+                        </Ingress>
+                    </Fragment>
+                ) : null}
 
-            {buttonsPressed.yesButton ? <ThankYou /> : null}
-            {buttonsPressed.noButton ? <PartialNo /> : null}
-            {buttonsPressed.reportButton ? <Elaborated /> : null}
-        </div>
+                {buttonsPressed.yesButton ? <ThankYou /> : null}
+                {buttonsPressed.noButton ? <PartialNo /> : null}
+                {buttonsPressed.reportButton ? <Elaborated /> : null}
+            </div> */}
+        </Fragment>
     );
 };
 
