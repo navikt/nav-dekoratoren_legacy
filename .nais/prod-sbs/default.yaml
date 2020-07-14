@@ -9,6 +9,8 @@ metadata:
 spec:
     image: {{image}}:{{version}}
     port: 8088
+    vault:
+        enabled: true
     liveness:
         path: /dekoratoren/isAlive
         initialDelay: 10
@@ -46,6 +48,8 @@ spec:
           value: https://loginservice.nav.no
         - name: LOGOUT_URL
           value: https://loginservice.nav.no/slo
+        - name: NODE_EXTRA_CA_CERTS
+          value: "/etc/ssl/ca-bundle.pem"
     resources:
         limits:
             cpu: '3'

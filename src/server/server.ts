@@ -4,12 +4,8 @@ import fetch from 'node-fetch';
 import express, { Request, Response } from 'express';
 import { createMiddleware } from '@promster/express';
 import { getSummary, getContentType } from '@promster/express';
-import {
-    clientEnv,
-    fiveMinutesInSeconds,
-    oneMinuteInSeconds,
-    tenSeconds,
-} from './utils';
+import { clientEnv } from './utils';
+import { fiveMinutesInSeconds, oneMinuteInSeconds, tenSeconds } from './utils';
 import cookiesMiddleware from 'universal-cookie-express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
@@ -18,9 +14,11 @@ import dotenv from 'dotenv';
 import mockMenu from './mock/menu.json';
 
 // Local environment - import .env
-if (process.env.NODE_ENV !== 'production') {
-    dotenv.config();
-}
+const LOCAL_PATH = '.env';
+const VAULT_PATH = '/var/run/secrets/nais.io/vault/environment.env';
+dotenv.config({
+    path: process.env.NODE_ENV === 'production' ? VAULT_PATH : LOCAL_PATH,
+});
 
 // Config
 const appBasePath = '/dekoratoren';
