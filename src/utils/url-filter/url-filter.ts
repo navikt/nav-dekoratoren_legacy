@@ -1,8 +1,8 @@
-let urlBlacklist = require('./url-blacklist.json')
+let urlWhitelist = require('./path-whitelist.json')
 
-function checkIfContainsUrl(clientUrl: string) {
-    return urlBlacklist["blocked_urls"].includes(clientUrl)
+function checkIfContainsPath(clientUrl: any): boolean {
+    return urlWhitelist["allowed_paths"].includes(clientUrl)
 
 }
 
-export default checkIfContainsUrl;
+export default checkIfContainsPath;

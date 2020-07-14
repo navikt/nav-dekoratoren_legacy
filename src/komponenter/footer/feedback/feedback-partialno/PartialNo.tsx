@@ -22,7 +22,7 @@ const PartialNo = (props: any) => {
         textViolationsErrorMessage,
         setTextViolationsErrorMessage,
     ] = useState(false);
-    const [voliations, setViolations] = useState<string[]>([]);
+    const [violations, setViolations] = useState(String);
 
     let feedbackTitles = [...feedbackTitle];
 
@@ -36,18 +36,18 @@ const PartialNo = (props: any) => {
         setFeedbackTitle(feedbackTitles);
     };
 
-    const getTextVolations = () => {
+    const getViolationsFormatted = () => {
         const filter = new Filter([]);
 
         filter.checkForViolations(feedbackMessage);
 
-        return filter.getViolations();
+        return filter.getViolationsFormatted();
     };
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        const violations = getTextVolations();
+        const violations = getViolationsFormatted();        
 
         violations.length
             ? [setTextViolationsErrorMessage(true), setViolations(violations)]
@@ -106,9 +106,9 @@ const PartialNo = (props: any) => {
                     {textViolationsErrorMessage ? (
                         <Alertstripe form="inline" type="feil">
                             <Normaltekst>
-                                Vi mistenker at du har skrevet inn {voliations}.
-                                Dersom du likevel mener dette er riktig kan du
-                                trykke 'Send inn'
+                                Vi mistenker at du har skrevet inn
+                                {violations}. Dersom du likevel mener dette er
+                                riktig kan du trykke 'Send inn'
                             </Normaltekst>
                         </Alertstripe>
                     ) : null}

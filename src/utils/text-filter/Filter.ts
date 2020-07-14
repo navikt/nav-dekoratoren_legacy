@@ -1,7 +1,7 @@
 import { EmailValidator } from './valdiators/EmailValidator';
 import { FodselsnummerValidator } from './valdiators/FodselsnummerValidator';
 
-const sampleText = "Hei jeg heter Andreas Amundsen og min epostaddresse er andreas.amundsen123@gmail.com 12345678901"
+const sampleText = "Hei jeg heter Andreas Amundsen og min epostaddresse er andreas@gmail.com 12345678901"
 
 export class Filter {
 
@@ -15,15 +15,27 @@ export class Filter {
         this.fodselsnummerValidator = new FodselsnummerValidator();
     }
 
-    addViolation(violation: string) {
+    addViolation(violation: string):void {
         !this.violations.includes(violation) && this.violations.push(violation);
     };
 
-    getViolations() {
+    getViolations():string[] {
         return this.violations;
     }
 
-    checkForViolations(text: string) {
+    /*
+    Return violations on either the form "e-postaddresse og fødselsnummer" or "e-postaddresse"/"fødeselsnummer", depending on the numer
+    of violations
+    */
+    getViolationsFormatted():string {
+        if (!this.violations.length) {
+            return "";
+        }
+
+        return this.violations.length == 2 ? " " + this.violations[0] + " og " + this.violations[1] : " " + this.violations[0]
+    }
+
+    checkForViolations(text: string):void {
         const textSplitted = text.split(" ")
 
         for (let index in textSplitted) {
@@ -32,7 +44,3 @@ export class Filter {
         }
     }
 }
-
-const filter = new Filter([]);
-filter.checkForViolations(sampleText);
-console.log(filter.getViolations())
