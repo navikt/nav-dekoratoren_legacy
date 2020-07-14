@@ -36,7 +36,9 @@ export class Filter {
     }
 
     checkForViolations(text: string):void {
-        const textSplitted = text.split(" ")
+        let textSplitted = text.split(" ");
+        textSplitted = text.split("\n");
+        console.log(textSplitted)
 
         for (let index in textSplitted) {
             this.emailValidator.isNotAcceptable(textSplitted[index]) && this.addViolation("e-postadresse")
