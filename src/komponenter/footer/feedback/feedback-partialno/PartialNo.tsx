@@ -22,7 +22,7 @@ const PartialNo = (props: any) => {
         textViolationsErrorMessage,
         setTextViolationsErrorMessage,
     ] = useState(false);
-    const [voliations, setViolations] = useState<string[]>([]);
+    const [violations, setViolations] = useState<string[]>([]);
 
     let feedbackTitles = [...feedbackTitle];
 
@@ -101,9 +101,9 @@ const PartialNo = (props: any) => {
                     {textViolationsErrorMessage ? (
                         <Alertstripe form="inline" type="feil">
                             <Normaltekst>
-                                Vi mistenker at du har skrevet inn {voliations}.
-                                Dersom du likevel mener dette er riktig kan du
-                                trykke 'Send inn'
+                                Vi mistenker at du har skrevet inn
+                                {violations}. Dersom du likevel mener dette er
+                                riktig kan du trykke 'Send inn'
                             </Normaltekst>
                         </Alertstripe>
                     ) : null}
