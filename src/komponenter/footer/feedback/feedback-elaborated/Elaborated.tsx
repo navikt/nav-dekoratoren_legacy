@@ -18,7 +18,7 @@ const Elaborated = () => {
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
-        logAmplitudeEvent('tilbakemelding', {svar: errorTitle});
+        logAmplitudeEvent('tilbakemelding_mangler', {svar: errorTitle});
 
         if (!errorTitle.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
