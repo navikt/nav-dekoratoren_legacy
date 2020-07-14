@@ -57,6 +57,8 @@ const PartialNo = (props: any) => {
               ];
     };
 
+    // console.log(feedbackTitles, feedbackMessage);
+
     return (
         <div className="partialno-container">
             <Ingress>
@@ -71,17 +73,20 @@ const PartialNo = (props: any) => {
                 >
                     <Checkbox
                         label={'Lite oversiktlig'}
-                        value="lite-oversiktlig"
+                        value="Lite oversiktlig"
                     />
                     <Checkbox
                         label={'Lite forståelig'}
-                        value="lite-forstaaelig"
+                        value="Lite forståelig"
                     />
                     <Checkbox
                         label={'Lite relevant informasjon'}
-                        value="lite-relevant"
+                        value="Lite relevant informasjon"
                     />
-                    <Checkbox label={'Villedende'} value="villedende" />
+                    <Checkbox 
+                        label={'Villedende'} 
+                        value="Villedende" 
+                    />
                 </CheckboxGruppe>
 
                 <div className="content">
