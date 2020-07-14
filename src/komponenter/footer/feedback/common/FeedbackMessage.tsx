@@ -22,9 +22,7 @@ const FeedbackMessage = () => {
 
         const violations = getViolationsFormatted();
 
-        violations.length
-            ? setViolations(violations)
-            : setViolations("")
+        violations.length ? setViolations(violations) : setViolations('');
     };
 
     return (
@@ -35,20 +33,20 @@ const FeedbackMessage = () => {
                     onChange={(e) => setFeedbackMessage(e.target.value)}
                 />
 
+                {violations.length ? (
+                    <Alertstripe form="inline" type="feil">
+                        <Normaltekst>
+                            Vi mistenker at du har skrevet inn
+                            {violations}. Dersom du likevel mener dette er
+                            riktig kan du trykke 'Send inn'
+                        </Normaltekst>
+                    </Alertstripe>
+                ) : null}
+
                 <div className="">
                     <Hovedknapp htmlType="submit">Send inn</Hovedknapp>
                 </div>
             </form>
-
-            {violations.length ? (
-                <Alertstripe form="inline" type="feil">
-                    <Normaltekst>
-                        Vi mistenker at du har skrevet inn
-                        {violations}. Dersom du likevel mener dette er riktig
-                        kan du trykke 'Send inn'
-                    </Normaltekst>
-                </Alertstripe>
-            ) : null}
         </Fragment>
     );
 };

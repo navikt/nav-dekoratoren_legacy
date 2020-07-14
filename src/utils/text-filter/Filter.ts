@@ -37,7 +37,7 @@ export class Filter {
 
     checkForViolations(text: string):void {
         let textSplitted = text.split(" ");
-        textSplitted = text.split("\n");
+
         console.log(textSplitted)
 
         for (let index in textSplitted) {
