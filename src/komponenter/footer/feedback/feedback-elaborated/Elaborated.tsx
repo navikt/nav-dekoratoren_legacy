@@ -29,7 +29,7 @@ const Elaborated = () => {
                 errorTitle: errorTitle,
                 errorMessage: errorMessage,               
             };
-            console.log(report);
+
         }
     };
 

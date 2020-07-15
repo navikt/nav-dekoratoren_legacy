@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import { Textarea } from 'nav-frontend-skjema';
 import './PartialNo.less';
-import { Element, Ingress, Normaltekst } from 'nav-frontend-typografi';
+import { Element, Ingress, } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
 import { verifyWindowObj } from 'utils/Environment';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { Filter } from 'utils/text-filter/Filter';
-import sendFeedback from './send-feedback';
+import FeedbackMessage from '../common/FeedbackMessage';
 
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
@@ -16,13 +14,7 @@ const { logAmplitudeEvent } = verifyWindowObj()
 
 const PartialNo = (props: any) => {
     const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
-    const [feedbackMessage, setFeedbackMessage] = useState(String);
-
-    const [
-        textViolationsErrorMessage,
-        setTextViolationsErrorMessage,
-    ] = useState(false);
-    const [violations, setViolations] = useState(String);
+    const [feedbackMessage, setFeedbackMessage] = useState('');
 
     let feedbackTitles = [...feedbackTitle];
 
@@ -36,28 +28,11 @@ const PartialNo = (props: any) => {
         setFeedbackTitle(feedbackTitles);
     };
 
-    const getViolationsFormatted = () => {
-        const filter = new Filter([]);
-
-        filter.checkForViolations(feedbackMessage);
-
-        return filter.getViolationsFormatted();
-    };
-
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        const violations = getViolationsFormatted();        
-
-        violations.length
-            ? [setTextViolationsErrorMessage(true), setViolations(violations)]
-            : [
-                  setTextViolationsErrorMessage(false),
-                  sendFeedback(feedbackTitles, feedbackMessage),
-              ];
+        //sendFeedback();
     };
-
-    // console.log(feedbackTitles, feedbackMessage);
 
     return (
         <div className="partialno-container">
@@ -83,10 +58,7 @@ const PartialNo = (props: any) => {
                         label={'Lite relevant informasjon'}
                         value="Lite relevant informasjon"
                     />
-                    <Checkbox 
-                        label={'Villedende'} 
-                        value="Villedende" 
-                    />
+                    <Checkbox label={'Villedende'} value="Villedende" />
                 </CheckboxGruppe>
 
                 <div className="content">
@@ -98,20 +70,10 @@ const PartialNo = (props: any) => {
                         </Alertstripe>
                     </div>
 
-                    <Textarea
-                        value={feedbackMessage}
-                        onChange={(e) => setFeedbackMessage(e.target.value)}
+                    <FeedbackMessage
+                        feedbackMessage={feedbackMessage}
+                        setFeedbackMessage={setFeedbackMessage}
                     />
-
-                    {textViolationsErrorMessage ? (
-                        <Alertstripe form="inline" type="feil">
-                            <Normaltekst>
-                                Vi mistenker at du har skrevet inn
-                                {violations}. Dersom du likevel mener dette er
-                                riktig kan du trykke 'Send inn'
-                            </Normaltekst>
-                        </Alertstripe>
-                    ) : null}
 
                     <div className="submit-knapp">
                         <Hovedknapp htmlType="submit">Send inn</Hovedknapp>
