@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import './PartialNo.less';
-import { Element, Ingress, } from 'nav-frontend-typografi';
+import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
 import { verifyWindowObj } from 'utils/Environment';
 import Alertstripe from 'nav-frontend-alertstriper';
 import FeedbackMessage from '../common/FeedbackMessage';
+import sendFeedbackNo from './send-feedback-no';
 
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
@@ -31,7 +32,7 @@ const PartialNo = (props: any) => {
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        //sendFeedback();
+        sendFeedbackNo(feedbackTitle, feedbackMessage);
     };
 
     return (

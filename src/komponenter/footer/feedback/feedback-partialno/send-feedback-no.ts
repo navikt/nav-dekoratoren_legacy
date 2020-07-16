@@ -1,18 +1,21 @@
 import { verifyWindowObj } from 'utils/Environment';
 
-function sendFeedbackNo(category: string, message: string): void {
+function sendFeedbackNo(categories: string[], message: string): void {
     // Log to Amplitude
     const { logAmplitudeEvent } = verifyWindowObj()
         ? require('utils/amplitude')
         : () => null;
 
     const feedbackReport = {
-        category: category.toLocaleUpperCase(),
+        forstaaelig: categories.includes("Lite forståelig"),
+        villedende: categories.includes("Villedende"),
+        relevant: categories.includes("Lite relevant informasjon"),
+        oversiktlig: categories.includes("Lite oversiktlig"),
         message: message,
         urlPath: window.location.pathname,
         urlHost: window.location.hostname,
         browser: window.navigator.appCodeName,
-        languageCode: "nb",
+        languageCode: "nb"
     };
 
     const requestOptions = {
@@ -21,7 +24,7 @@ function sendFeedbackNo(category: string, message: string): void {
         body: JSON.stringify(feedbackReport)
     };
 
-    fetch('http://localhost:8080/feedback/report', requestOptions)
+    fetch('http://localhost:8080/feedback/no', requestOptions)
         .then(response => response)
         .then(data => data)
 
