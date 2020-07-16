@@ -1,14 +1,12 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
-import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
+import { Knapp } from 'nav-frontend-knapper';
 import './Feedback.less';
 import { verifyWindowObj } from 'utils/Environment';
 import PartialNo from './feedback-partialno/PartialNo';
 import ThankYou from './feedback-thank-you/ThankYou';
 import Elaborated from './feedback-elaborated/Elaborated';
-import FeedbackMessage from './common/FeedbackMessage';
-import { response } from 'express';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;

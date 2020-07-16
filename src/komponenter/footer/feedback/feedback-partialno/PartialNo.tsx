@@ -10,7 +10,6 @@ import FeedbackMessage from '../common/FeedbackMessage';
 import sendFeedbackNo from './send-feedback-no';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { set } from 'react-ga';
 import Thankyou from '../feedback-thank-you/ThankYou';
 
 const { logAmplitudeEvent } = verifyWindowObj()

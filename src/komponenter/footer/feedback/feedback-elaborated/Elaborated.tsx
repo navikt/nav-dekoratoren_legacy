@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { Textarea, RadioGruppe, Radio } from 'nav-frontend-skjema';
+import { RadioGruppe, Radio } from 'nav-frontend-skjema';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
