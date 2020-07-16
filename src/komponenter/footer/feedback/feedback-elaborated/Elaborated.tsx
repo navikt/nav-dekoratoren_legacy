@@ -7,27 +7,27 @@ import Tekst from 'tekster/finn-tekst';
 import './Elaborated.less';
 import { verifyWindowObj } from 'utils/Environment';
 import FeedbackMessage from '../common/FeedbackMessage';
-import sendFeedbackNo from './send-feedback-no';
+import sendFeedbackReport from './send-feedback-report';
 
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
 
 const Elaborated = () => {
-    const [errorTitle, setErrorTitle] = useState(String);
+    const [category, setCategory] = useState(String);
     const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(String);
 
     const [feedbackMessage, setFeedbackMessage] = useState('');
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
-        logAmplitudeEvent('tilbakemelding_mangler', {svar: errorTitle});
+        logAmplitudeEvent('tilbakemelding_mangler', {svar: category});
 
-        if (!errorTitle.length) {
+        if (!category.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
             setRadiobuttonErrorMessage('');
-            sendFeedbackNo(errorTitle, feedbackMessage);
+            sendFeedbackReport(category, feedbackMessage);
         }
     };
 
@@ -43,8 +43,8 @@ const Elaborated = () => {
                 <RadioGruppe
                     feil={radiobuttonErrorMessage}
                     // @ts-ignore
-                    onChange={(e) => setErrorTitle(e.target.value)}
-                    checked={errorTitle}
+                    onChange={(e) => setCategory(e.target.value)}
+                    checked={category}
                 >
                     <Radio label={'Informasjon'} name="feil" value="informasjon"/>
                     <Radio label={'Ytelse'} name="feil" value="ytelse"/>
