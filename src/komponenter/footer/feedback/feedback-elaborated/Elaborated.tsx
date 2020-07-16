@@ -29,8 +29,6 @@ const Elaborated = () => {
     const { language } = useSelector((state: AppState) => state.language);
 
     const submitFeedback = (evt: any) => {
-        console.log(thankYouMessage)
-
         evt.preventDefault();
         logAmplitudeEvent('tilbakemelding_mangler', { svar: category });
 
