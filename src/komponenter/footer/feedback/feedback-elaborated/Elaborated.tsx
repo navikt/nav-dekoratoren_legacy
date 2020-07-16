@@ -15,13 +15,15 @@ const { logAmplitudeEvent } = verifyWindowObj()
 
 const Elaborated = () => {
     const [category, setCategory] = useState(String);
-    const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(String);
-
     const [feedbackMessage, setFeedbackMessage] = useState('');
+
+    const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
+        String
+    );
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
-        logAmplitudeEvent('tilbakemelding_mangler', {svar: category});
+        logAmplitudeEvent('tilbakemelding_mangler', { svar: category });
 
         if (!category.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
@@ -46,11 +48,15 @@ const Elaborated = () => {
                     onChange={(e) => setCategory(e.target.value)}
                     checked={category}
                 >
-                    <Radio label={'Informasjon'} name="feil" value="informasjon"/>
-                    <Radio label={'Ytelse'} name="feil" value="ytelse"/>
-                    <Radio label={'Utseende'} name="feil" value="utseende"/>
-                    <Radio label={'Bug'} name="feil" value="bug"/>
-                    <Radio label={'Annet'} name="feil" value="annet"/>
+                    <Radio
+                        label={'Informasjon'}
+                        name="feil"
+                        value="informasjon"
+                    />
+                    <Radio label={'Ytelse'} name="feil" value="ytelse" />
+                    <Radio label={'Utseende'} name="feil" value="utseende" />
+                    <Radio label={'Bug'} name="feil" value="bug" />
+                    <Radio label={'Annet'} name="feil" value="annet" />
                 </RadioGruppe>
 
                 <div>
