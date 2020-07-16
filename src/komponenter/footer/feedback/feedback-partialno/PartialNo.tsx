@@ -1,40 +1,24 @@
-import React, { useState, Fragment } from 'react';
-import { Textarea } from 'nav-frontend-skjema';
+import React, { useState } from 'react';
 import './PartialNo.less';
-import { Element, Ingress, Normaltekst } from 'nav-frontend-typografi';
+import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
 import { verifyWindowObj } from 'utils/Environment';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { Filter } from 'utils/text-filter/Filter';
-import sendFeedback from './send-feedback';
-import ThankYou from '../feedback-thank-you/ThankYou';
+import FeedbackMessage from '../common/FeedbackMessage';
+import sendFeedbackNo from './send-feedback-no';
+import { useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
+
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
 
 const PartialNo = (props: any) => {
     const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
-    const [feedbackMessage, setFeedbackMessage] = useState(String);
-    const [checkboxErrorMessage, setCheckboxErrorMessage] = useState(String);
-
-    const [buttonPressed, setButtonPressed] = useState({
-        submitButton: false,
-    });
-
-    const userPressedSubmit = () => {
-        setButtonPressed({
-            submitButton: true,
-        });
-        // logAmplitudeEvent('avgitt_svar', {})
-    };
-
-    const [
-        textViolationsErrorMessage,
-        setTextViolationsErrorMessage,
-    ] = useState(false);
-    const [violations, setViolations] = useState(String);
+    const [feedbackMessage, setFeedbackMessage] = useState('');
+    const { language } = (useSelector((state: AppState) => state.language));
 
     let feedbackTitles = [...feedbackTitle];
 
@@ -46,14 +30,6 @@ const PartialNo = (props: any) => {
             : feedbackTitles.push(evt.target.value);
 
         setFeedbackTitle(feedbackTitles);
-    };
-
-    const getViolationsFormatted = () => {
-        const filter = new Filter([]);
-
-        filter.checkForViolations(feedbackMessage);
-
-        return filter.getViolationsFormatted();
     };
 
     const submitFeedback = (evt: any) => {
@@ -71,82 +47,55 @@ const PartialNo = (props: any) => {
         !feedbackTitle.length
             ? setCheckboxErrorMessage('Du må velge et alternativ')
             : null;
+        sendFeedbackNo(feedbackTitle, feedbackMessage, language.toLowerCase());
     };
-
-    // console.log(feedbackTitles, feedbackMessage);
 
     return (
         <div className="partialno-container">
-             {!buttonPressed.submitButton ? (
-                <Fragment>
-                    <Ingress>
-                        <Tekst id="send-undersokelse-takk" />
-                    </Ingress>
+            <Ingress>
+                <Tekst id="send-undersokelse-takk" />
+            </Ingress>
 
-                    <form onSubmit={submitFeedback} className="content">
-                        <CheckboxGruppe
-                            feil={checkboxErrorMessage}
-                            // @ts-ignore
-                            onChange={(e) => onClickAarsak(e)}
-                            legend="Gi din vurdering av informasjonen på siden"
-                        >
-                            <Checkbox
-                                label={'Lite oversiktlig'}
-                                value="Lite oversiktlig"
-                            />
-                            <Checkbox
-                                label={'Lite forståelig'}
-                                value="Lite forståelig"
-                            />
-                            <Checkbox
-                                label={'Lite relevant informasjon'}
-                                value="Lite relevant informasjon"
-                            />
-                            <Checkbox label={'Villedende'} value="Villedende" />
-                        </CheckboxGruppe>
+            <form onSubmit={submitFeedback} className="content">
+                <CheckboxGruppe
+                    // @ts-ignore
+                    onChange={(e) => onClickAarsak(e)}
+                    legend="Gi din vurdering av informasjonen på siden"
+                >
+                    <Checkbox
+                        label={'Lite oversiktlig'}
+                        value="Lite oversiktlig"
+                    />
+                    <Checkbox
+                        label={'Lite forståelig'}
+                        value="Lite forståelig"
+                    />
+                    <Checkbox
+                        label={'Lite relevant informasjon'}
+                        value="Lite relevant informasjon"
+                    />
+                    <Checkbox label={'Villedende'} value="Villedende" />
+                </CheckboxGruppe>
 
-                        <div className="content">
-                            <Element>
-                                Noe annet? Spesifiser gjerne nedenfor.
-                            </Element>
+                <div className="content">
+                    <Element>Noe annet? Spesifiser gjerne nedenfor.</Element>
 
-                            <div className="advarsel">
-                                <Alertstripe type="advarsel">
-                                    <Tekst id="advarsel-om-personopplysninger" />
-                                </Alertstripe>
-                            </div>
+                    <div className="advarsel">
+                        <Alertstripe type="advarsel">
+                            <Tekst id="advarsel-om-personopplysninger" />
+                        </Alertstripe>
+                    </div>
 
-                            <Textarea
-                                value={feedbackMessage}
-                                onChange={(e) =>
-                                    setFeedbackMessage(e.target.value)
-                                }
-                            />
+                    <FeedbackMessage
+                        feedbackMessage={feedbackMessage}
+                        setFeedbackMessage={setFeedbackMessage}
+                    />
 
-                            {textViolationsErrorMessage ? (
-                                <Alertstripe form="inline" type="feil">
-                                    <Normaltekst>
-                                        Vi mistenker at du har skrevet inn
-                                        {violations}. Dersom du likevel mener
-                                        dette er riktig kan du trykke 'Send inn'
-                                    </Normaltekst>
-                                </Alertstripe>
-                            ) : null}
-
-                            <div className="submit-knapp">
-                                <Hovedknapp
-                                    htmlType="submit"
-                                    onClick={userPressedSubmit}
-                                >
-                                    Send inn
-                                </Hovedknapp>
-                            </div>
-                        </div>
-                    </form>
-                 </Fragment>
-            ) : null}
-
-            {buttonPressed.submitButton ? <ThankYou /> : null}
+                    <div className="submit-knapp">
+                        <Hovedknapp htmlType="submit">Send inn</Hovedknapp>
+                    </div>
+                </div>
+            </form>
         </div>
     );
 };

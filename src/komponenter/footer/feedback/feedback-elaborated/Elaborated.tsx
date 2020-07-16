@@ -5,44 +5,34 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { verifyWindowObj } from 'utils/Environment';
-import ThankYou from '../feedback-thank-you/ThankYou';
-import './Elaborated.less';
+import FeedbackMessage from '../common/FeedbackMessage';
+import sendFeedbackReport from './send-feedback-report';
+import { useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
 
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
 
 const Elaborated = () => {
-    const [errorTitle, setErrorTitle] = useState(String);
-    const [errorMessage, setErrorMessage] = useState(String);
+    const [category, setCategory] = useState(String);
+    const [feedbackMessage, setFeedbackMessage] = useState('');
+
     const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
         String
     );
-/*     const [buttonPressed, setButtonPressed] = useState({
-        submitButton: false,
-    });
 
-    const userPressedSubmit = (evt:any) => {
-        setButtonPressed({
-            submitButton: true,
-        });
-        // logAmplitudeEvent('avgitt_svar', {})
-    }; */
+    const { language } = useSelector((state: AppState) => state.language);
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
-        logAmplitudeEvent('tilbakemelding_mangler', { svar: errorTitle });
+        logAmplitudeEvent('tilbakemelding_mangler', { svar: category });
 
-        if (!errorTitle.length) {
+        if (!category.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
             setRadiobuttonErrorMessage('');
-
-            const report = {
-                errorTitle: errorTitle,
-                errorMessage: errorMessage,
-            };
-            console.log(report);
+            sendFeedbackReport(category, feedbackMessage, language.toLowerCase());
         }
     };
 
@@ -86,10 +76,22 @@ const Elaborated = () => {
                             <Radio label={'Annet'} name="feil" value="annet" />
                         </RadioGruppe>
 
-                        <div>
-                            <Element className="tekst">
-                                <Tekst id="din-tilbakemelding" />
-                            </Element>
+                <RadioGruppe
+                    feil={radiobuttonErrorMessage}
+                    // @ts-ignore
+                    onChange={(e) => setCategory(e.target.value)}
+                    checked={category}
+                >
+                    <Radio
+                        label={'Informasjon'}
+                        name="feil"
+                        value="informasjon"
+                    />
+                    <Radio label={'Ytelse'} name="feil" value="ytelse" />
+                    <Radio label={'Utseende'} name="feil" value="utseende" />
+                    <Radio label={'Bug'} name="feil" value="bug" />
+                    <Radio label={'Annet'} name="feil" value="annet" />
+                </RadioGruppe>
 
                             <div className="advarsel">
                                 <Alertstripe type="advarsel">
@@ -116,9 +118,18 @@ const Elaborated = () => {
 {/*                 </Fragment>
              ) : null}
 
-            {buttonPressed.submitButton && errorMessage.length && errorTitle.length ? (
-                <ThankYou />
-            ) : null} */}
+                    <FeedbackMessage
+                        feedbackMessage={feedbackMessage}
+                        setFeedbackMessage={setFeedbackMessage}
+                    />
+
+                    <div className="submit-knapp">
+                        <Hovedknapp htmlType="submit">
+                            <Tekst id="send-inn-feilrapport" />
+                        </Hovedknapp>
+                    </div>
+                </div>
+            </form>
         </div>
     );
 };
