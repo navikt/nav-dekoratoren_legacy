@@ -8,6 +8,8 @@ import { verifyWindowObj } from 'utils/Environment';
 import Alertstripe from 'nav-frontend-alertstriper';
 import FeedbackMessage from '../common/FeedbackMessage';
 import sendFeedbackNo from './send-feedback-no';
+import { useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
 
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
@@ -16,6 +18,7 @@ const { logAmplitudeEvent } = verifyWindowObj()
 const PartialNo = (props: any) => {
     const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
     const [feedbackMessage, setFeedbackMessage] = useState('');
+    const { language } = (useSelector((state: AppState) => state.language));
 
     let feedbackTitles = [...feedbackTitle];
 
@@ -32,7 +35,7 @@ const PartialNo = (props: any) => {
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        sendFeedbackNo(feedbackTitle, feedbackMessage);
+        sendFeedbackNo(feedbackTitle, feedbackMessage, language.toLowerCase());
     };
 
     return (

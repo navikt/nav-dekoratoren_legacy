@@ -8,6 +8,8 @@ import './Elaborated.less';
 import { verifyWindowObj } from 'utils/Environment';
 import FeedbackMessage from '../common/FeedbackMessage';
 import sendFeedbackReport from './send-feedback-report';
+import { useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
 
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
@@ -21,6 +23,8 @@ const Elaborated = () => {
         String
     );
 
+    const { language } = useSelector((state: AppState) => state.language);
+
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
         logAmplitudeEvent('tilbakemelding_mangler', { svar: category });
@@ -29,7 +33,7 @@ const Elaborated = () => {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
             setRadiobuttonErrorMessage('');
-            sendFeedbackReport(category, feedbackMessage);
+            sendFeedbackReport(category, feedbackMessage, language.toLowerCase());
         }
     };
 

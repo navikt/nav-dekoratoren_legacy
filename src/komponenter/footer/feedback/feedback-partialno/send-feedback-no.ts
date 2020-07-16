@@ -1,6 +1,6 @@
 import { verifyWindowObj } from 'utils/Environment';
 
-function sendFeedbackNo(categories: string[], message: string): void {
+function sendFeedbackNo(categories: string[], message: string, language: string): void {
     // Log to Amplitude
     const { logAmplitudeEvent } = verifyWindowObj()
         ? require('utils/amplitude')
@@ -15,7 +15,7 @@ function sendFeedbackNo(categories: string[], message: string): void {
         urlPath: window.location.pathname,
         urlHost: window.location.hostname,
         browser: window.navigator.appCodeName,
-        languageCode: "nb"
+        languageCode: language
     };
 
     const requestOptions = {
