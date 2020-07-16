@@ -23,6 +23,10 @@ const PartialNo = (props: any) => {
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
 
+    const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
+        String
+    );
+
     let feedbackTitles = [...feedbackTitle];
 
     const onClickAarsak = (evt: any) => {
@@ -38,8 +42,17 @@ const PartialNo = (props: any) => {
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        sendFeedbackNo(feedbackTitle, feedbackMessage, language.toLowerCase());
-        setThankYouMessage(true);
+        if (!feedbackTitles.length) {
+            setRadiobuttonErrorMessage('Du må velge et alternativ');
+        } else {
+            setRadiobuttonErrorMessage('');
+            sendFeedbackNo(
+                feedbackTitle,
+                feedbackMessage,
+                language.toLowerCase()
+            );
+            setThankYouMessage(true);
+        }
     };
 
     return (
@@ -95,7 +108,9 @@ const PartialNo = (props: any) => {
                         </div>
                     </form>
                 </div>
-            ) : <Thankyou />}
+            ) : (
+                <Thankyou />
+            )}
         </div>
     );
 };
