@@ -11,13 +11,11 @@ function sendFeedback(titles: string[], message: string):void {
         ? require('utils/amplitude')
         : () => null;
         
-    console.log(titles)
+    // console.log(titles)
 
     for (let title of titles) {
         logAmplitudeEvent('tilbakemelding', {svar: title})
-        console.log(title)
     }
-
 
     // Save to DB
     console.log(report);

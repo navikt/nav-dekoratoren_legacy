@@ -11,7 +11,7 @@ const Thankyou = () => {
             </Ingress>
 
             <Normaltekst>
-                <Tekst id="bla bla bla" />
+                <Tekst id="hensikt-med-tilbakelding" />
             </Normaltekst>
         </div>
     );

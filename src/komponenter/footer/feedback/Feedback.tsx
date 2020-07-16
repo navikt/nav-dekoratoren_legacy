@@ -48,8 +48,7 @@ const Feedback = () => {
 
     return (
         <Fragment>
-            <FeedbackMessage />
-            {/* <div className="feedback-container">
+         <div className="feedback-container">
                 {!buttonsPressed.yesButton &&
                 !buttonsPressed.noButton &&
                 !buttonsPressed.reportButton ? (
@@ -85,7 +84,7 @@ const Feedback = () => {
                 {buttonsPressed.yesButton ? <ThankYou /> : null}
                 {buttonsPressed.noButton ? <PartialNo /> : null}
                 {buttonsPressed.reportButton ? <Elaborated /> : null}
-            </div> */}
+            </div>
         </Fragment>
     );
 };
