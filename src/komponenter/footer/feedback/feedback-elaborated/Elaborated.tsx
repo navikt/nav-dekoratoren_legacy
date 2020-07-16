@@ -10,6 +10,7 @@ import sendFeedbackReport from './send-feedback-report';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Thankyou from '../feedback-thank-you/ThankYou';
+import './Elaborated.less'
 
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
