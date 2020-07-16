@@ -27,8 +27,7 @@ const FeedbackMessage: React.FC<Props> = ({
         const violations = getViolationsFormatted();
 
         violations.length ? setViolations(violations) : setViolations('');
-
-    }, [feedbackMessage])
+    }, [feedbackMessage]);
 
     return (
         <Fragment>

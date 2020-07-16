@@ -6,6 +6,8 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import './Elaborated.less';
 import { verifyWindowObj } from 'utils/Environment';
+import FeedbackMessage from '../common/FeedbackMessage';
+import sendFeedbackNo from './send-feedback-no';
 
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
@@ -16,6 +18,8 @@ const Elaborated = () => {
     const [errorMessage, setErrorMessage] = useState(String);
     const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(String);
 
+    const [feedbackMessage, setFeedbackMessage] = useState('');
+
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
         logAmplitudeEvent('tilbakemelding_mangler', {svar: errorTitle});
@@ -24,12 +28,7 @@ const Elaborated = () => {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
             setRadiobuttonErrorMessage('');
-
-            const report = {
-                errorTitle: errorTitle,
-                errorMessage: errorMessage,               
-            };
-
+            sendFeedbackNo(errorTitle, feedbackMessage);
         }
     };
 
@@ -66,10 +65,11 @@ const Elaborated = () => {
                         </Alertstripe>
                     </div>
 
-                    <Textarea
-                        value={errorMessage}
-                        onChange={(e) => setErrorMessage(e.target.value)}
+                    <FeedbackMessage
+                        feedbackMessage={feedbackMessage}
+                        setFeedbackMessage={setFeedbackMessage}
                     />
+
                     <div className="submit-knapp">
                         <Hovedknapp htmlType="submit">
                             <Tekst id="send-inn-feilrapport" />
