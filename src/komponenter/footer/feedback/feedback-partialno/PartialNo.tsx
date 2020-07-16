@@ -68,6 +68,7 @@ const PartialNo = (props: any) => {
                             // @ts-ignore
                             onChange={(e) => onClickAarsak(e)}
                             legend="Gi din vurdering av informasjonen på siden"
+                            feil={radiobuttonErrorMessage}
                         >
                             <Checkbox
                                 label={'Lite oversiktlig'}
