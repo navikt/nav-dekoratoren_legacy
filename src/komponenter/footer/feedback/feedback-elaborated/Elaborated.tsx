@@ -32,49 +32,22 @@ const Elaborated = () => {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
             setRadiobuttonErrorMessage('');
-            sendFeedbackReport(category, feedbackMessage, language.toLowerCase());
+            sendFeedbackReport(
+                category,
+                feedbackMessage,
+                language.toLowerCase()
+            );
         }
     };
 
     return (
         <div className="eloborated-container">
-{/*              {!buttonPressed.submitButton 
-             ? (
-                <Fragment> */}
-                    <Ingress>
-                        <Tekst id="rapporter-om-feil-mangler" />
-                    </Ingress>
+            <Ingress>
+                <Tekst id="rapporter-om-feil-mangler" />
+            </Ingress>
 
-                    <form onSubmit={submitFeedback} className="content">
-                        <Element className="tekst">
-                            {' '}
-                            Type feil eller mangel{' '}
-                        </Element>
-
-                        <RadioGruppe
-                            feil={radiobuttonErrorMessage}
-                            // @ts-ignore
-                            onChange={(e) => setErrorTitle(e.target.value)}
-                            checked={errorTitle}
-                        >
-                            <Radio
-                                label={'Informasjon'}
-                                name="feil"
-                                value="informasjon"
-                            />
-                            <Radio
-                                label={'Ytelse'}
-                                name="feil"
-                                value="ytelse"
-                            />
-                            <Radio
-                                label={'Utseende'}
-                                name="feil"
-                                value="utseende"
-                            />
-                            <Radio label={'Bug'} name="feil" value="bug" />
-                            <Radio label={'Annet'} name="feil" value="annet" />
-                        </RadioGruppe>
+            <form onSubmit={submitFeedback} className="content">
+                <Element className="tekst"> Type feil eller mangel </Element>
 
                 <RadioGruppe
                     feil={radiobuttonErrorMessage}
@@ -93,30 +66,16 @@ const Elaborated = () => {
                     <Radio label={'Annet'} name="feil" value="annet" />
                 </RadioGruppe>
 
-                            <div className="advarsel">
-                                <Alertstripe type="advarsel">
-                                    <Tekst id="advarsel-om-personopplysninger" />
-                                </Alertstripe>
-                            </div>
+                <div>
+                    <Element className="tekst">
+                        <Tekst id="din-tilbakemelding" />
+                    </Element>
 
-                            <Textarea
-                                value={errorMessage}
-                                onChange={(e) =>
-                                    setErrorMessage(e.target.value)
-                                }
-                            />
-                            <div className="submit-knapp">
-                                <Hovedknapp
-                                    htmlType="submit"
-                                    /* onClick={userPressedSubmit} */
-                                >
-                                    <Tekst id="send-inn-feilrapport" />
-                                </Hovedknapp>
-                            </div>
-                        </div>
-                    </form>
-{/*                 </Fragment>
-             ) : null}
+                    <div className="advarsel">
+                        <Alertstripe type="advarsel">
+                            <Tekst id="advarsel-om-personopplysninger" />
+                        </Alertstripe>
+                    </div>
 
                     <FeedbackMessage
                         feedbackMessage={feedbackMessage}

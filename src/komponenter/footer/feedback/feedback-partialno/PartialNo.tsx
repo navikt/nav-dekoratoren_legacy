@@ -18,7 +18,7 @@ const { logAmplitudeEvent } = verifyWindowObj()
 const PartialNo = (props: any) => {
     const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
     const [feedbackMessage, setFeedbackMessage] = useState('');
-    const { language } = (useSelector((state: AppState) => state.language));
+    const { language } = useSelector((state: AppState) => state.language);
 
     let feedbackTitles = [...feedbackTitle];
 
@@ -35,18 +35,6 @@ const PartialNo = (props: any) => {
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        const violations = getViolationsFormatted();
-
-        violations.length
-            ? [setTextViolationsErrorMessage(true), setViolations(violations)]
-            : [
-                  setTextViolationsErrorMessage(false),
-                  sendFeedback(feedbackTitles, feedbackMessage),
-              ];
-
-        !feedbackTitle.length
-            ? setCheckboxErrorMessage('Du må velge et alternativ')
-            : null;
         sendFeedbackNo(feedbackTitle, feedbackMessage, language.toLowerCase());
     };
 
