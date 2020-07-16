@@ -7,7 +7,7 @@ function sendFeedbackReport(category: string, message: string): void {
         : () => null;
 
     const feedbackReport = {
-        category: category.toLocaleUpperCase(),
+        category: category.toUpperCase(),
         message: message,
         urlPath: window.location.pathname,
         urlHost: window.location.hostname,
