@@ -87,7 +87,7 @@ const PartialNo = (props: any) => {
 
                         <div className="content">
                             <Element>
-                                Noe annet? Spesifiser gjerne nedenfor.
+                                <Tekst id="hva-lette-du-etter-spørsmål" />
                             </Element>
 
                             <div className="advarsel">

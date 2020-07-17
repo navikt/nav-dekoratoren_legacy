@@ -55,8 +55,7 @@ const Elaborated = () => {
 
                     <form onSubmit={submitFeedback} className="content">
                         <Element className="tekst">
-                            {' '}
-                            Type feil eller mangel{' '}
+                            <Tekst id="velg-type-feil-mangler" />
                         </Element>
 
                         <RadioGruppe
