@@ -47,7 +47,6 @@ const browserConfig = {
                 oneOf: [
                     {
                         test: [
-                            /\.svg$/,
                             /\.gif$/,
                             /\.jpe?g$/,
                             /\.png$/,
@@ -59,6 +58,32 @@ const browserConfig = {
                             name: '/media/[name].[ext]',
                             emit: false,
                         },
+                    },
+                    {
+                        test: /\.svg$/,
+                        use: [
+                            {
+                                loader: 'file-loader',
+                                options: {
+                                    esModule: false,
+                                    name: '/media/[name].[ext]',
+                                    emit: false,
+                                },
+                            },
+                            {
+                                loader: 'svgo-loader',
+                                options: {
+                                    plugins: [
+                                        {removeTitle: false},
+                                        {
+                                            cleanupIDs: {
+                                                prefix: "dekoratoren-"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
                     },
                     {
                         test: /\.(js|jsx|ts|tsx)$/,
