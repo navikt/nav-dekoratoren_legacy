@@ -24,7 +24,7 @@ function sendFeedbackNo(categories: string[], message: string, language: string)
         body: JSON.stringify(feedbackReport)
     };
 
-    fetch('http://localhost:8080/feedback/no', requestOptions)
+    fetch('https://dekoratoren-feedback-api-q6.dev-sbs.nais.io/feedback/no', requestOptions)
         .then(response => response)
         .then(data => data)
 
