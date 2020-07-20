@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { CloseFeedbackContext } from './CloseFeedbackContext';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import Lukknapp from 'nav-frontend-lukknapp';
 
 const CloseFeedbackHandler = () => {
     const closeFeedbackContext = () => useContext(CloseFeedbackContext)!;
@@ -14,7 +14,7 @@ const CloseFeedbackHandler = () => {
 
     return (
         <div>
-            <Hovedknapp onClick={userClosedFeedback}>Lukk</Hovedknapp>
+            <Lukknapp onClick={userClosedFeedback}>Lukk</Lukknapp>
         </div>
     );
 };
