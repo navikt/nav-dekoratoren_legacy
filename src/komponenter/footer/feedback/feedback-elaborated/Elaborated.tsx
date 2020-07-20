@@ -58,7 +58,7 @@ const Elaborated = () => {
                         </Ingress>
 
                         <div className="kryssut-knapp">
-                            <CloseFeedbackHandler />
+                            <CloseFeedbackHandler context="elaborated"/>
                         </div>
                     </div>
 

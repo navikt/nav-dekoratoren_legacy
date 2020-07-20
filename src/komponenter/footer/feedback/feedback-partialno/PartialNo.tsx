@@ -66,7 +66,7 @@ const PartialNo = (props: any) => {
                         </Ingress>
 
                         <div className="kryssut-knapp">
-                            <CloseFeedbackHandler />
+                            <CloseFeedbackHandler context="partialno"/>
                         </div>
                     </div>
 

@@ -20,8 +20,8 @@ const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
 
         if (context === 'elaborated') {
             logAmplitudeEvent('tilbakemelding-rapport', { svar: 'Avbrutt' })
-        } else if (context === 'no') {
-            logAmplitudeEvent('tilbakemelding-rapport', { svar: 'Avbrutt' })
+        } else if (context === 'partialno') {
+            logAmplitudeEvent('tilbakemelding-nei', { svar: 'Avbrutt' })
 
         }
 
