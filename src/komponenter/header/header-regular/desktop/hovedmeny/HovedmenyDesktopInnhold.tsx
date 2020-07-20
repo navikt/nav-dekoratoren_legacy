@@ -7,7 +7,6 @@ import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setu
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { matchMedia } from 'utils/match-media-polyfill';
-import { getHovedmenyMaxColsPerRow } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Language } from 'store/reducers/language-duck';
 import { MenyNode } from 'store/reducers/menu-duck';
@@ -18,7 +17,10 @@ import { Bunnseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny
 const classname = 'desktop-hovedmeny';
 
 const nodeGroup = KbNavGroup.Hovedmeny;
-const mqlScreenWidth = matchMedia('(min-width: 1024px)');
+
+const mqlScreenWidthBreakpoint = matchMedia('(min-width: 1024px)');
+const numColsSmallScreen = 3;
+const numColsLargeScreen = 4;
 
 type Props = {
     arbeidsflate: MenuValue;
@@ -37,24 +39,28 @@ export const HovedmenyDesktopInnhold = ({
 }: Props) => {
     const kbConfig = configForNodeGroup[nodeGroup];
     const [kbNavConfig, setKbNavConfig] = useState<KbNavConfig>(kbConfig);
+    const [menuNumCols, setMenuNumCols] = useState(numColsLargeScreen);
     useKbNavSub(kbNavConfig, kbNavMainState, isOpen);
 
-    const updateMaxCols = () =>
-        setKbNavConfig({
-            ...kbNavConfig,
-            maxColsPerRow: getHovedmenyMaxColsPerRow(classname),
-        });
-
     useEffect(() => {
-        mqlScreenWidth.addEventListener('change', updateMaxCols);
+        const updateMaxCols = (e: MediaQueryListEvent) => {
+            setMenuNumCols(e.matches ? numColsLargeScreen : numColsSmallScreen);
+        };
+        mqlScreenWidthBreakpoint.addEventListener('change', updateMaxCols);
         return () => {
-            mqlScreenWidth.removeEventListener('change', updateMaxCols);
+            mqlScreenWidthBreakpoint.removeEventListener(
+                'change',
+                updateMaxCols
+            );
         };
     }, []);
 
     useEffect(() => {
-        updateMaxCols();
-    }, [menyPunkter, arbeidsflate]);
+        setKbNavConfig({
+            ...kbNavConfig,
+            maxColsPerRow: [1, menuNumCols, 3],
+        });
+    }, [menuNumCols, menyPunkter, arbeidsflate]);
 
     if (!menyPunkter) {
         return null;
@@ -63,7 +69,11 @@ export const HovedmenyDesktopInnhold = ({
     return (
         <div className={classname}>
             <Toppseksjon classname={classname} />
-            <Hovedseksjon menyLenker={menyPunkter} classname={classname} />
+            <Hovedseksjon
+                menyLenker={menyPunkter}
+                classname={classname}
+                numCols={menuNumCols}
+            />
             <Bunnseksjon
                 classname={classname}
                 language={language}

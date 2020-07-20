@@ -3,29 +3,21 @@ import { MenyNode } from 'store/reducers/menu-duck';
 import { MenyLenkeSeksjon } from 'komponenter/header/header-regular/common/meny-lenker/MenyLenkeSeksjon';
 import BEMHelper from 'utils/bem';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { MosaicMeny } from 'komponenter/header/header-regular/common/mosaic-meny/MosaicMeny';
 import './Hovedseksjon.less';
 
 interface Props {
     menyLenker: MenyNode;
     classname: string;
+    numCols: number;
 }
 
-const maxCols = 4;
-
-const isIE = () =>
-    window.navigator.userAgent &&
-    /(Trident|MSIE)/.test(window.navigator.userAgent);
-
-export const Hovedseksjon = ({ menyLenker, classname }: Props) => {
+export const Hovedseksjon = ({ menyLenker, classname, numCols }: Props) => {
     const cls = BEMHelper(classname);
 
     return (
-        <div className={cls.element('hoved-seksjon-wrapper')}>
-            <div
-                className={`${cls.element('hoved-seksjon')}${
-                    isIE() ? ' is-ie' : ''
-                }`}
-            >
+        <div className={cls.element('hoved-seksjon')}>
+            <MosaicMeny numCols={numCols}>
                 {menyLenker &&
                     menyLenker.children.map((menygruppe, index) => (
                         <MenyLenkeSeksjon
@@ -36,10 +28,7 @@ export const Hovedseksjon = ({ menyLenker, classname }: Props) => {
                             key={menygruppe.displayName}
                         />
                     ))}
-                {[...Array(maxCols)].map((_, index) => (
-                    <div className={'col-breaker'} key={index} />
-                ))}
-            </div>
+            </MosaicMeny>
         </div>
     );
 };
