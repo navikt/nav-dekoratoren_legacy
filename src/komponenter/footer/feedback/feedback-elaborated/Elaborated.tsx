@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useContext } from 'react';
 import { RadioGruppe, Radio } from 'nav-frontend-skjema';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
@@ -11,6 +11,8 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import './Elaborated.less'
+import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
+import { CloseFeedbackContext } from '../common/CloseFeedbackContext';
 
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
@@ -19,6 +21,7 @@ const { logAmplitudeEvent } = verifyWindowObj()
 const Elaborated = () => {
     const [category, setCategory] = useState(String);
     const [feedbackMessage, setFeedbackMessage] = useState('');
+    const closeFeedback = useContext(CloseFeedbackContext);
 
     const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
         String
@@ -29,8 +32,6 @@ const Elaborated = () => {
     const { language } = useSelector((state: AppState) => state.language);
 
     const submitFeedback = (evt: any) => {
-        console.log(thankYouMessage)
-
         evt.preventDefault();
         logAmplitudeEvent('tilbakemelding_mangler', { svar: category });
 
@@ -54,11 +55,10 @@ const Elaborated = () => {
                     <Ingress>
                         <Tekst id="rapporter-om-feil-mangler" />
                     </Ingress>
-
+                    <CloseFeedbackHandler />
                     <form onSubmit={submitFeedback} className="content">
                         <Element className="tekst">
-                            {' '}
-                            Type feil eller mangel{' '}
+                            <Tekst id="velg-type-feil-mangler" />
                         </Element>
 
                         <RadioGruppe

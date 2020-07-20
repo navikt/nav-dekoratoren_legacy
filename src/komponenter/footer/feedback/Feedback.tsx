@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
@@ -7,16 +7,21 @@ import { verifyWindowObj } from 'utils/Environment';
 import PartialNo from './feedback-partialno/PartialNo';
 import ThankYou from './feedback-thank-you/ThankYou';
 import Elaborated from './feedback-elaborated/Elaborated';
+import { CloseFeedbackContext } from './common/CloseFeedbackContext';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
 
 const Feedback = () => {
+    const [closeFeedback, setCloseFeedback] = useState(false);
+
     const [buttonsPressed, setButtonsPressed] = useState({
         yesButton: false,
         noButton: false,
         reportButton: false,
     });
+
+    console.log(closeFeedback);
 
     const userPressedNo = () => {
         setButtonsPressed({
@@ -45,46 +50,59 @@ const Feedback = () => {
         //logToAmplitude
     };
 
-    return (
-        <Fragment>
-            <div className="feedback-container">
-                {!buttonsPressed.yesButton &&
-                !buttonsPressed.noButton &&
-                !buttonsPressed.reportButton ? (
-                    <Fragment>
-                        <div className="qa-container">
-                            <Ingress>
-                                <Tekst id="fant-du-det-du-lette-etter" />
-                            </Ingress>
-                            <div className="buttons-container">
-                                <Knapp
-                                    className="knapp"
-                                    onClick={userPressedYes}
-                                >
-                                    <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
-                                </Knapp>
-                                <Knapp
-                                    className="knapp"
-                                    onClick={userPressedNo}
-                                >
-                                    <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
-                                </Knapp>
-                            </div>
-                        </div>
-                        <Ingress
-                            className="underline"
-                            onClick={userPressedReport}
-                        >
-                            Rapporter feil eller mangler
-                        </Ingress>
-                    </Fragment>
-                ) : null}
+    useEffect(() => {
+        setCloseFeedback ? setButtonsPressed({
+            yesButton: false,
+            noButton: false,
+            reportButton: false,
+        }) : null;
+        
+        setCloseFeedback(false);
 
-                {buttonsPressed.yesButton ? <ThankYou /> : null}
-                {buttonsPressed.noButton ? <PartialNo /> : null}
-                {buttonsPressed.reportButton ? <Elaborated /> : null}
-            </div>
-        </Fragment>
+    }, [closeFeedback])
+
+    return (
+        <CloseFeedbackContext.Provider value={{closeFeedback, setCloseFeedback}}>
+            <Fragment>
+                <div className="feedback-container">
+                    {!buttonsPressed.yesButton &&
+                    !buttonsPressed.noButton &&
+                    !buttonsPressed.reportButton ? (
+                        <Fragment>
+                            <div className="qa-container">
+                                <Ingress>
+                                    <Tekst id="fant-du-det-du-lette-etter" />
+                                </Ingress>
+                                <div className="buttons-container">
+                                    <Knapp
+                                        className="knapp"
+                                        onClick={userPressedYes}
+                                    >
+                                        <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
+                                    </Knapp>
+                                    <Knapp
+                                        className="knapp"
+                                        onClick={userPressedNo}
+                                    >
+                                        <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
+                                    </Knapp>
+                                </div>
+                            </div>
+                            <Ingress
+                                className="underline"
+                                onClick={userPressedReport}
+                            >
+                                Rapporter feil eller mangler
+                            </Ingress>
+                        </Fragment>
+                    ) : null}
+
+                    {buttonsPressed.yesButton ? <ThankYou /> : null}
+                    {buttonsPressed.noButton ? <PartialNo /> : null}
+                    {buttonsPressed.reportButton ? <Elaborated /> : null}
+                </div>
+            </Fragment>
+        </CloseFeedbackContext.Provider>
     );
 };
 

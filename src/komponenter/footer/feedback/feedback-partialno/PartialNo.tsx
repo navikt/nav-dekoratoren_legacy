@@ -24,6 +24,10 @@ const PartialNo = (props: any) => {
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
 
+    const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
+        String
+    );
+
     let feedbackTitles = [...feedbackTitle];
 
     const onClickAarsak = (evt: any) => {
@@ -39,8 +43,17 @@ const PartialNo = (props: any) => {
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        sendFeedbackNo(feedbackTitle, feedbackMessage, language.toLowerCase());
-        setThankYouMessage(true);
+        if (!feedbackTitles.length) {
+            setRadiobuttonErrorMessage('Du må velge et alternativ');
+        } else {
+            setRadiobuttonErrorMessage('');
+            sendFeedbackNo(
+                feedbackTitle,
+                feedbackMessage,
+                language.toLowerCase()
+            );
+            setThankYouMessage(true);
+        }
     };
 
     return (
@@ -63,6 +76,7 @@ const PartialNo = (props: any) => {
                             // @ts-ignore
                             onChange={(e) => onClickAarsak(e)}
                             legend="Gi din vurdering av informasjonen på siden"
+                            feil={radiobuttonErrorMessage}
                         >
                             <Checkbox
                                 label={'Lite oversiktlig'}
@@ -81,7 +95,7 @@ const PartialNo = (props: any) => {
 
                         <div className="content">
                             <Element>
-                                Noe annet? Spesifiser gjerne nedenfor.
+                                <Tekst id="hva-lette-du-etter-spørsmål" />
                             </Element>
 
                             <div className="advarsel">
@@ -103,7 +117,9 @@ const PartialNo = (props: any) => {
                         </div>
                     </form>
                 </div>
-            ) : <Thankyou />}
+            ) : (
+                <Thankyou />
+            )}
         </div>
     );
 };
