@@ -8,6 +8,7 @@ import PartialNo from './feedback-partialno/PartialNo';
 import ThankYou from './feedback-thank-you/ThankYou';
 import Elaborated from './feedback-elaborated/Elaborated';
 import { CloseFeedbackContext } from './common/CloseFeedbackContext';
+import { AmplitudeEvents } from 'utils/amplitude';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
@@ -47,7 +48,7 @@ const Feedback = () => {
             noButton: false,
             reportButton: true,
         });
-        //logToAmplitude
+        logAmplitudeEvent('tilbakemelding', { svar: 'feil eller mangel' });
     };
 
     useEffect(() => {

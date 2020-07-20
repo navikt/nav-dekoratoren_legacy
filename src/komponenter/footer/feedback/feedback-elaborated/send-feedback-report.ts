@@ -1,4 +1,5 @@
 import { verifyWindowObj } from 'utils/Environment';
+import { AmplitudeEvents } from 'utils/amplitude';
 
 function sendFeedbackReport(category: string, message: string, language: string): void {
     // Log to Amplitude
