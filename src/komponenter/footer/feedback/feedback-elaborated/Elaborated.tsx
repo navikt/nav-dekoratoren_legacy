@@ -20,7 +20,6 @@ const { logAmplitudeEvent } = verifyWindowObj()
 const Elaborated = () => {
     const [category, setCategory] = useState(String);
     const [feedbackMessage, setFeedbackMessage] = useState('');
-    const closeFeedback = useContext(CloseFeedbackContext);
 
     const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
         String
