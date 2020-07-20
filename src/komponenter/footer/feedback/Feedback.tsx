@@ -8,6 +8,7 @@ import PartialNo from './feedback-partialno/PartialNo';
 import ThankYou from './feedback-thank-you/ThankYou';
 import Elaborated from './feedback-elaborated/Elaborated';
 import { CloseFeedbackContext } from './common/CloseFeedbackContext';
+import { AmplitudeEvents } from 'utils/amplitude';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
@@ -29,7 +30,7 @@ const Feedback = () => {
             noButton: true,
             reportButton: false,
         });
-        logAmplitudeEvent('tilbakemelding', { svar: 'nei' });
+        logAmplitudeEvent(AmplitudeEvents.tilbakemeldingGenerell, { svar: 'nei' });
     };
 
     const userPressedYes = () => {
@@ -38,7 +39,7 @@ const Feedback = () => {
             noButton: false,
             reportButton: false,
         });
-        logAmplitudeEvent('tilbakemelding', { svar: 'ja' });
+        logAmplitudeEvent(AmplitudeEvents.tilbakemeldingGenerell, { svar: 'ja' });
     };
 
     const userPressedReport = () => {
@@ -47,7 +48,7 @@ const Feedback = () => {
             noButton: false,
             reportButton: true,
         });
-        //logToAmplitude
+        logAmplitudeEvent(AmplitudeEvents.tilbakemeldingGenerell, { svar: 'feil eller mangel' });
     };
 
     useEffect(() => {

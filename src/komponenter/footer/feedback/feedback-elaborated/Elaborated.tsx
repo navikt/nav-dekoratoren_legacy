@@ -33,7 +33,7 @@ const Elaborated = () => {
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
-        logAmplitudeEvent('tilbakemelding_mangler', { svar: category });
+        //logAmplitudeEvent('tilbakemelding_mangler', { svar: category });
 
         if (!category.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');

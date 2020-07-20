@@ -1,11 +1,10 @@
 import { verifyWindowObj } from 'utils/Environment';
+import { AmplitudeEvents } from 'utils/amplitude';
+const { logAmplitudeEvent } = verifyWindowObj()
+    ? require('utils/amplitude')
+    : () => null;
 
 function sendFeedbackNo(categories: string[], message: string, language: string): void {
-    // Log to Amplitude
-    const { logAmplitudeEvent } = verifyWindowObj()
-        ? require('utils/amplitude')
-        : () => null;
-
     const feedbackReport = {
         forstaaelig: categories.includes("Lite forståelig"),
         villedende: categories.includes("Villedende"),
@@ -30,7 +29,7 @@ function sendFeedbackNo(categories: string[], message: string, language: string)
 
 
     for (let category of categories) {
-        logAmplitudeEvent('tilbakemelding-nei', { svar: category })
+        logAmplitudeEvent(AmplitudeEvents.tilbakemeldingNeiKnapp, { svar: category })
     }
 
 };

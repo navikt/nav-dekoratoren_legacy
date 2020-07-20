@@ -1,4 +1,5 @@
 import { verifyWindowObj } from 'utils/Environment';
+import { AmplitudeEvents } from 'utils/amplitude';
 
 function sendFeedbackReport(category: string, message: string, language: string): void {
     // Log to Amplitude
@@ -25,7 +26,7 @@ function sendFeedbackReport(category: string, message: string, language: string)
         .then(response => response)
         .then(data => data)
 
-    logAmplitudeEvent('tilbakemelding-rapport', { svar: category })
+    logAmplitudeEvent(AmplitudeEvents.tilbakemeldingRapporterKnapp, { svar: category })
 
 };
 
