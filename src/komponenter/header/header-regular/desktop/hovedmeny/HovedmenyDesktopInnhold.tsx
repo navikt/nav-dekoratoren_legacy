@@ -18,7 +18,8 @@ const classname = 'desktop-hovedmeny';
 
 const nodeGroup = KbNavGroup.Hovedmeny;
 
-const mqlScreenWidthBreakpoint = matchMedia('(min-width: 1024px)');
+const widthBreakpoint = 1024;
+const mqlWidthBreakpoint = matchMedia(`(min-width: ${widthBreakpoint}px)`);
 const numColsSmallScreen = 3;
 const numColsLargeScreen = 4;
 
@@ -39,19 +40,20 @@ export const HovedmenyDesktopInnhold = ({
 }: Props) => {
     const kbConfig = configForNodeGroup[nodeGroup];
     const [kbNavConfig, setKbNavConfig] = useState<KbNavConfig>(kbConfig);
-    const [menuNumCols, setMenuNumCols] = useState(numColsLargeScreen);
+    const [menuNumCols, setMenuNumCols] = useState(
+        window.innerWidth >= widthBreakpoint
+            ? numColsLargeScreen
+            : numColsSmallScreen
+    );
     useKbNavSub(kbNavConfig, kbNavMainState, isOpen);
 
     useEffect(() => {
         const updateMaxCols = (e: MediaQueryListEvent) => {
             setMenuNumCols(e.matches ? numColsLargeScreen : numColsSmallScreen);
         };
-        mqlScreenWidthBreakpoint.addEventListener('change', updateMaxCols);
+        mqlWidthBreakpoint.addEventListener('change', updateMaxCols);
         return () => {
-            mqlScreenWidthBreakpoint.removeEventListener(
-                'change',
-                updateMaxCols
-            );
+            mqlWidthBreakpoint.removeEventListener('change', updateMaxCols);
         };
     }, []);
 

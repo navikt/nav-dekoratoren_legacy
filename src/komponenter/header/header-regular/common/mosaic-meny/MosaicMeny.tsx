@@ -10,7 +10,7 @@ export const MosaicMeny = ({ numCols, children }: Props) => {
     return (
         <div className={'mosaic-meny'}>
             {[...Array(numCols)].map((_, colIndex) => (
-                <div className={'mosaic-meny__column'}>
+                <div className={'mosaic-meny__column'} key={colIndex}>
                     {children.filter(
                         (child, index) => index % numCols === colIndex
                     )}
