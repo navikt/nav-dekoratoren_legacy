@@ -51,7 +51,7 @@ const Feedback = () => {
     };
 
     useEffect(() => {
-        setCloseFeedback ? setButtonsPressed({
+        closeFeedback ? setButtonsPressed({
             yesButton: false,
             noButton: false,
             reportButton: false,
