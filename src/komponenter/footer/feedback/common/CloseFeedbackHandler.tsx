@@ -5,6 +5,7 @@ import { verifyWindowObj } from 'utils/Environment';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
+import Lukknapp from 'nav-frontend-lukknapp';
 
 interface Props {
     context: string;
@@ -29,7 +30,7 @@ const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
 
     return (
         <div>
-            <Hovedknapp onClick={userClosedFeedback}>Lukk</Hovedknapp>
+            <Lukknapp onClick={userClosedFeedback}>Lukk</Lukknapp>
         </div>
     );
 };

@@ -10,7 +10,7 @@ import sendFeedbackReport from './send-feedback-report';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Thankyou from '../feedback-thank-you/ThankYou';
-import './Elaborated.less'
+import './Elaborated.less';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import { CloseFeedbackContext } from '../common/CloseFeedbackContext';
 
@@ -51,11 +51,17 @@ const Elaborated = () => {
     return (
         <Fragment>
             {!thankYouMessage ? (
-                <div className="eloborated-container">
-                    <Ingress>
-                        <Tekst id="rapporter-om-feil-mangler" />
-                    </Ingress>
-                    <CloseFeedbackHandler />
+                <div className="elaborated-container">
+                    <div className="overskrift-container">
+                        <Ingress>
+                            <Tekst id="rapporter-om-feil-mangler" />
+                        </Ingress>
+
+                        <div className="kryssut-knapp">
+                            <CloseFeedbackHandler />
+                        </div>
+                    </div>
+
                     <form onSubmit={submitFeedback} className="content">
                         <Element className="tekst">
                             <Tekst id="velg-type-feil-mangler" />
