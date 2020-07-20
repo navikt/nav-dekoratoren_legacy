@@ -14,7 +14,9 @@ const CloseFeedbackHandler = () => {
 
     return (
         <div>
-            <Lukknapp onClick={userClosedFeedback}>Lukk</Lukknapp>
+            <Lukknapp 
+            bla={true}
+            onClick={userClosedFeedback}>Lukk</Lukknapp>
         </div>
     );
 };

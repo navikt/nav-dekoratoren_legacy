@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './PartialNo.less';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
@@ -12,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
+import './PartialNo.less';
 
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
@@ -70,7 +70,7 @@ const PartialNo = (props: any) => {
                         </div>
                     </div>
 
-                    <form onSubmit={submitFeedback} className="content">
+                    <form onSubmit={submitFeedback} className="no-content">
                         <CheckboxGruppe
                             // @ts-ignore
                             onChange={(e) => onClickAarsak(e)}
@@ -92,7 +92,7 @@ const PartialNo = (props: any) => {
                             <Checkbox label={'Villedende'} value="Villedende" />
                         </CheckboxGruppe>
 
-                        <div className="content">
+                        <div className="no-content">
                             <Element>
                                 <Tekst id="hva-lette-du-etter-spørsmål" />
                             </Element>
@@ -107,14 +107,11 @@ const PartialNo = (props: any) => {
                                 feedbackMessage={feedbackMessage}
                                 setFeedbackMessage={setFeedbackMessage}
                             />
-
-                            <div className="submit-knapp">
-                                <Hovedknapp htmlType="submit">
-                                    Send inn
-                                </Hovedknapp>
-                            </div>
                         </div>
                     </form>
+                    <div className="submit-knapp">
+                        <Hovedknapp htmlType="submit">Send inn</Hovedknapp>
+                    </div>
                 </div>
             ) : (
                 <Thankyou />

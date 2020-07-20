@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Ingress } from 'nav-frontend-typografi';
+import { Ingress, Element, Normaltekst } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
 import './Feedback.less';
@@ -76,27 +76,23 @@ const Feedback = () => {
                                 <div className="buttons-container">
                                     <Knapp
                                         className="knapp"
-                                        onClick={userPressedYes}
-                                    >
+                                        onClick={userPressedYes}>
                                         <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
                                     </Knapp>
                                     <Knapp
                                         className="knapp"
-                                        onClick={userPressedNo}
-                                    >
+                                        onClick={userPressedNo}>
                                         <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
                                     </Knapp>
                                 </div>
                             </div>
-                            <Ingress
+                            <Element
                                 className="underline"
-                                onClick={userPressedReport}
-                            >
+                                onClick={userPressedReport}>
                                 Rapporter feil eller mangler
-                            </Ingress>
+                            </Element>
                         </Fragment>
                     ) : null}
-
                     {buttonsPressed.yesButton ? <ThankYou /> : null}
                     {buttonsPressed.noButton ? <PartialNo /> : null}
                     {buttonsPressed.reportButton ? <Elaborated /> : null}

@@ -10,9 +10,9 @@ import sendFeedbackReport from './send-feedback-report';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Thankyou from '../feedback-thank-you/ThankYou';
-import './Elaborated.less';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import { CloseFeedbackContext } from '../common/CloseFeedbackContext';
+import './Elaborated.less';
 
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
@@ -62,7 +62,10 @@ const Elaborated = () => {
                         </div>
                     </div>
 
-                    <form onSubmit={submitFeedback} className="content">
+                    <form
+                        onSubmit={submitFeedback}
+                        className="elaborated-content"
+                    >
                         <Element className="tekst">
                             <Tekst id="velg-type-feil-mangler" />
                         </Element>
@@ -92,7 +95,7 @@ const Elaborated = () => {
                             <Radio label={'Annet'} name="feil" value="annet" />
                         </RadioGruppe>
 
-                        <div>
+                        <div className="elaborated-content">
                             <Element className="tekst">
                                 <Tekst id="din-tilbakemelding" />
                             </Element>
@@ -107,14 +110,13 @@ const Elaborated = () => {
                                 feedbackMessage={feedbackMessage}
                                 setFeedbackMessage={setFeedbackMessage}
                             />
-
-                            <div className="submit-knapp">
-                                <Hovedknapp htmlType="submit">
-                                    <Tekst id="send-inn-feilrapport" />
-                                </Hovedknapp>
-                            </div>
                         </div>
                     </form>
+                    <div className="submit-knapp">
+                        <Hovedknapp htmlType="submit">
+                            <Tekst id="send-inn-feilrapport" />
+                        </Hovedknapp>
+                    </div>
                 </div>
             ) : (
                 <Thankyou />
