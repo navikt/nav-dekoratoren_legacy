@@ -58,7 +58,7 @@ const Elaborated = () => {
                         </Ingress>
 
                         <div className="kryssut-knapp">
-                            <CloseFeedbackHandler context="elaborated"/>
+                            <CloseFeedbackHandler context="elaborated" />
                         </div>
                     </div>
 
@@ -111,12 +111,13 @@ const Elaborated = () => {
                                 setFeedbackMessage={setFeedbackMessage}
                             />
                         </div>
+
+                        <div className="submit-knapp">
+                            <Hovedknapp htmlType="submit">
+                                <Tekst id="send-inn-feilrapport" />
+                            </Hovedknapp>
+                        </div>
                     </form>
-                    <div className="submit-knapp">
-                        <Hovedknapp htmlType="submit">
-                            <Tekst id="send-inn-feilrapport" />
-                        </Hovedknapp>
-                    </div>
                 </div>
             ) : (
                 <Thankyou />

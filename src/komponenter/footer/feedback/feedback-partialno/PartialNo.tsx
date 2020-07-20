@@ -43,6 +43,10 @@ const PartialNo = (props: any) => {
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
+        console.log('Hei');
+
+        console.log(feedbackTitles.length);
+
         if (!feedbackTitles.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
@@ -66,11 +70,14 @@ const PartialNo = (props: any) => {
                         </Ingress>
 
                         <div className="kryssut-knapp">
-                            <CloseFeedbackHandler context="partialno"/>
+                            <CloseFeedbackHandler context="partialno" />
                         </div>
                     </div>
 
-                    <form onSubmit={submitFeedback} className="no-content">
+                    <form
+                        onSubmit={submitFeedback}
+                        className="no-content"
+                    >
                         <CheckboxGruppe
                             // @ts-ignore
                             onChange={(e) => onClickAarsak(e)}
@@ -108,10 +115,11 @@ const PartialNo = (props: any) => {
                                 setFeedbackMessage={setFeedbackMessage}
                             />
                         </div>
+
+                        <div className="submit-knapp">
+                            <Hovedknapp htmlType="submit">Send inn</Hovedknapp>
+                        </div>
                     </form>
-                    <div className="submit-knapp">
-                        <Hovedknapp htmlType="submit">Send inn</Hovedknapp>
-                    </div>
                 </div>
             ) : (
                 <Thankyou />
