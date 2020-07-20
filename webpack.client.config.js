@@ -68,11 +68,7 @@ const browserConfig = {
                                 options: {
                                     plugins: [
                                         {removeTitle: false},
-                                        {
-                                            cleanupIDs: {
-                                                prefix: "dekoratoren-"
-                                            }
-                                        }
+                                        {prefixIds: true}
                                     ]
                                 }
                             }
