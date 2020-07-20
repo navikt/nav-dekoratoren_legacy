@@ -25,11 +25,7 @@ function sendFeedbackReport(category: string, message: string, language: string)
         .then(response => response)
         .then(data => data)
 
-
-    /* for (let title of titles) {
-        logAmplitudeEvent('tilbakemelding', { svar: title })
-        console.log(title)
-    } */
+    logAmplitudeEvent('tilbakemelding-rapport', { svar: category })
 
 };
 
