@@ -11,6 +11,7 @@ import sendFeedbackNo from './send-feedback-no';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Thankyou from '../feedback-thank-you/ThankYou';
+import Lukknapp from 'nav-frontend-lukknapp';
 
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
@@ -46,9 +47,16 @@ const PartialNo = (props: any) => {
         <div>
             {!thankYouMessage ? (
                 <div className="partialno-container">
+                    <div className="overskrift-container"> 
+
                     <Ingress>
                         <Tekst id="send-undersokelse-takk" />
                     </Ingress>
+
+                    <Lukknapp 
+                    className="kryssut-knapp"
+                    bla={true}>Lukk</Lukknapp>
+                    </div>
 
                     <form onSubmit={submitFeedback} className="content">
                         <CheckboxGruppe
