@@ -30,7 +30,7 @@ const Feedback = () => {
             noButton: true,
             reportButton: false,
         });
-        logAmplitudeEvent(AmplitudeEvents.tilbakemeldingGenerell, { svar: 'nei' });
+        logAmplitudeEvent('tilbakemelding', { svar: 'nei' });
     };
 
     const userPressedYes = () => {
@@ -39,7 +39,7 @@ const Feedback = () => {
             noButton: false,
             reportButton: false,
         });
-        logAmplitudeEvent(AmplitudeEvents.tilbakemeldingGenerell, { svar: 'ja' });
+        logAmplitudeEvent('tilbakemelding', { svar: 'ja' });
     };
 
     const userPressedReport = () => {
@@ -48,7 +48,7 @@ const Feedback = () => {
             noButton: false,
             reportButton: true,
         });
-        logAmplitudeEvent(AmplitudeEvents.tilbakemeldingGenerell, { svar: 'feil eller mangel' });
+        logAmplitudeEvent('tilbakemelding', { svar: 'feil eller mangel' });
     };
 
     useEffect(() => {

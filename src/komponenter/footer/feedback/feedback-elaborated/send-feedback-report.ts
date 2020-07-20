@@ -26,7 +26,7 @@ function sendFeedbackReport(category: string, message: string, language: string)
         .then(response => response)
         .then(data => data)
 
-    logAmplitudeEvent(AmplitudeEvents.tilbakemeldingRapporterKnapp, { svar: category })
+    logAmplitudeEvent('tilbakemelding-rapport', { svar: category })
 
 };
 

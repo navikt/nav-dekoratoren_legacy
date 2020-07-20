@@ -27,13 +27,3 @@ export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
         }
     });
 }
-
-export enum AmplitudeEvents {
-    // Brukes for logging av 'Ja', 'Nei' og 'Rapporter feil og mangler' klikk
-    tilbakemeldingGenerell = 'tilbakemelding',
-    // Brukes for logging av kategori på feil eller mangel, under 'Rapporter feil og mangler' (Elaborated.tsx)
-    tilbakemeldingRapporterKnapp = 'tilbakemelding-rapport',
-    // Brukes for logging av kategorier under 'Fant du det du lette etter?' -> 'Nei' (PartialNo.tsx)
-    tilbakemeldingNeiKnapp = 'tilbakemelding-nei'
-
-}

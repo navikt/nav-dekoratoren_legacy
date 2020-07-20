@@ -29,7 +29,7 @@ function sendFeedbackNo(categories: string[], message: string, language: string)
 
 
     for (let category of categories) {
-        logAmplitudeEvent(AmplitudeEvents.tilbakemeldingNeiKnapp, { svar: category })
+        logAmplitudeEvent('tilbakemelding-nei', { svar: category })
     }
 
 };

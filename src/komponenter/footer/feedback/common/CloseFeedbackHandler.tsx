@@ -19,9 +19,9 @@ const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
     const userClosedFeedback = () => {
 
         if (context === 'elaborated') {
-            logAmplitudeEvent(AmplitudeEvents.tilbakemeldingRapporterKnapp, { svar: 'Avbrutt' })
+            logAmplitudeEvent('tilbakemelding-rapport', { svar: 'Avbrutt' })
         } else if (context === 'partialno') {
-            logAmplitudeEvent(AmplitudeEvents.tilbakemeldingNeiKnapp, { svar: 'Avbrutt' })
+            logAmplitudeEvent('tilbakemelding-nei', { svar: 'Avbrutt' })
 
         }
 
