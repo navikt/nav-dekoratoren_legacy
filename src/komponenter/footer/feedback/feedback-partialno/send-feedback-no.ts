@@ -29,10 +29,9 @@ function sendFeedbackNo(categories: string[], message: string, language: string)
         .then(data => data)
 
 
-    /* for (let title of titles) {
-        logAmplitudeEvent('tilbakemelding', { svar: title })
-        console.log(title)
-    } */
+    for (let category of categories) {
+        logAmplitudeEvent('tilbakemelding-nei', { svar: category })
+    }
 
 };
 
