@@ -13,7 +13,6 @@ import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import { CloseFeedbackContext } from '../common/CloseFeedbackContext';
 import './Elaborated.less';
-
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
@@ -21,7 +20,6 @@ const { logAmplitudeEvent } = verifyWindowObj()
 const Elaborated = () => {
     const [category, setCategory] = useState(String);
     const [feedbackMessage, setFeedbackMessage] = useState('');
-    const closeFeedback = useContext(CloseFeedbackContext);
 
     const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
         String

@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import { CloseFeedbackContext } from './CloseFeedbackContext';
 import { verifyWindowObj } from 'utils/Environment';
+import Lukknapp from 'nav-frontend-lukknapp';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
-import Lukknapp from 'nav-frontend-lukknapp';
-import { AmplitudeEvents } from 'utils/amplitude';
 
 interface Props {
     context: string;
@@ -17,12 +16,10 @@ const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
     const { setCloseFeedback } = closeFeedbackContext();
 
     const userClosedFeedback = () => {
-
         if (context === 'elaborated') {
-            logAmplitudeEvent('tilbakemelding-rapport', { svar: 'Avbrutt' })
+            logAmplitudeEvent('tilbakemelding-rapport', { svar: 'Avbrutt' });
         } else if (context === 'partialno') {
-            logAmplitudeEvent('tilbakemelding-nei', { svar: 'Avbrutt' })
-
+            logAmplitudeEvent('tilbakemelding-nei', { svar: 'Avbrutt' });
         }
 
         setCloseFeedback(true);
@@ -30,9 +27,9 @@ const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
 
     return (
         <div>
-            <Lukknapp 
-            bla={true}
-            onClick={userClosedFeedback}>Lukk</Lukknapp>
+            <Lukknapp bla={true} onClick={userClosedFeedback}>
+                Lukk
+            </Lukknapp>
         </div>
     );
 };

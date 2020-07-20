@@ -13,10 +13,6 @@ import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import './PartialNo.less';
 
-const { logAmplitudeEvent } = verifyWindowObj()
-    ? require('utils/amplitude')
-    : () => null;
-
 const PartialNo = (props: any) => {
     const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
     const [feedbackMessage, setFeedbackMessage] = useState('');
@@ -42,10 +38,6 @@ const PartialNo = (props: any) => {
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
-
-        console.log('Hei');
-
-        console.log(feedbackTitles.length);
 
         if (!feedbackTitles.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
@@ -74,10 +66,7 @@ const PartialNo = (props: any) => {
                         </div>
                     </div>
 
-                    <form
-                        onSubmit={submitFeedback}
-                        className="no-content"
-                    >
+                    <form onSubmit={submitFeedback} className="no-content">
                         <CheckboxGruppe
                             // @ts-ignore
                             onChange={(e) => onClickAarsak(e)}
@@ -117,7 +106,9 @@ const PartialNo = (props: any) => {
                         </div>
 
                         <div className="submit-knapp">
-                            <Hovedknapp htmlType="submit">Send inn</Hovedknapp>
+                            <Hovedknapp htmlType="submit">
+                                <Tekst id="send-inn-feilrapport" />
+                            </Hovedknapp>
                         </div>
                     </form>
                 </div>
