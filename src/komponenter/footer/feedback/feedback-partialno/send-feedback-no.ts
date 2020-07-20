@@ -1,5 +1,4 @@
 import { verifyWindowObj } from 'utils/Environment';
-import { AmplitudeEvents } from 'utils/amplitude';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;

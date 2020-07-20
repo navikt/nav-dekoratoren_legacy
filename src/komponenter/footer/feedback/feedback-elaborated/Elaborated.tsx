@@ -13,7 +13,6 @@ import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import { CloseFeedbackContext } from '../common/CloseFeedbackContext';
 import './Elaborated.less';
-
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;

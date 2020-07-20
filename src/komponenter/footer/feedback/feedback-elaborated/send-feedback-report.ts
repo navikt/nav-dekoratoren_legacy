@@ -1,12 +1,9 @@
 import { verifyWindowObj } from 'utils/Environment';
-import { AmplitudeEvents } from 'utils/amplitude';
+const { logAmplitudeEvent } = verifyWindowObj()
+    ? require('utils/amplitude')
+    : () => null;
 
 function sendFeedbackReport(category: string, message: string, language: string): void {
-    // Log to Amplitude
-    const { logAmplitudeEvent } = verifyWindowObj()
-        ? require('utils/amplitude')
-        : () => null;
-
     const feedbackReport = {
         category: category.toUpperCase(),
         message: message,

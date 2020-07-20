@@ -74,10 +74,7 @@ const PartialNo = (props: any) => {
                         </div>
                     </div>
 
-                    <form
-                        onSubmit={submitFeedback}
-                        className="no-content"
-                    >
+                    <form onSubmit={submitFeedback} className="no-content">
                         <CheckboxGruppe
                             // @ts-ignore
                             onChange={(e) => onClickAarsak(e)}
