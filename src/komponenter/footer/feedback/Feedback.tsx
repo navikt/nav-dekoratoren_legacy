@@ -7,7 +7,7 @@ import { verifyWindowObj } from 'utils/Environment';
 import PartialNo from './feedback-partialno/PartialNo';
 import ThankYou from './feedback-thank-you/ThankYou';
 import Elaborated from './feedback-elaborated/Elaborated';
-import { CloseFeedbackContext } from './common/CloseFeedbackContext';
+import { CloseFeedbackContext } from './common/CloseFeedbackContext';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
