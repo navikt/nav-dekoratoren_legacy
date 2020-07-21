@@ -46,12 +46,7 @@ const browserConfig = {
             {
                 oneOf: [
                     {
-                        test: [
-                            /\.gif$/,
-                            /\.jpe?g$/,
-                            /\.png$/,
-                            /\.ico$/,
-                        ],
+                        test: [/\.gif$/, /\.jpe?g$/, /\.png$/, /\.ico$/],
                         loader: 'file-loader',
                         options: {
                             esModule: false,
@@ -74,12 +69,12 @@ const browserConfig = {
                                 loader: 'svgo-loader',
                                 options: {
                                     plugins: [
-                                        {removeTitle: false},
-                                        {prefixIds: true}
-                                    ]
-                                }
-                            }
-                        ]
+                                        { removeTitle: false },
+                                        { prefixIds: true },
+                                    ],
+                                },
+                            },
+                        ],
                     },
                     {
                         test: /\.(js|jsx|ts|tsx)$/,

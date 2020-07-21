@@ -15,7 +15,7 @@ import { HovedmenyMobil } from 'komponenter/header/header-regular/mobil/hovedmen
 import { Status } from 'api/api';
 import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
 import './HeaderMenylinje.less';
-import Logo from 'ikoner/meny/nav-logo-red.svg'
+import Logo from 'ikoner/meny/nav-logo-red.svg';
 
 export const headerLogoId = 'header-logo-id';
 
