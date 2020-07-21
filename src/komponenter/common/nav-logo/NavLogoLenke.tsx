@@ -9,12 +9,12 @@ import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import { GAEventArgs } from 'utils/google-analytics';
-import { NavLogo } from 'ikoner/meny/NavLogo';
 import './NavLogoLenke.less';
 
 type Props = {
     gaEventArgs: GAEventArgs;
     id?: string;
+    ikon: string;
 };
 
 export const NavLogoLenke = (props: Props) => {
@@ -39,7 +39,10 @@ export const NavLogoLenke = (props: Props) => {
             }}
             id={props.id}
         >
-            <NavLogo altText={'Til forsiden'} />
+            <img
+                alt="Til forsiden"
+                src={`${XP_BASE_URL}${props.ikon}`}
+            />
         </LenkeMedGA>
     );
 };
