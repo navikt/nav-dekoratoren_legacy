@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, Fragment, useEffect, useMemo } from 'react';
 import { Textarea } from 'nav-frontend-skjema';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
@@ -13,8 +13,6 @@ const FeedbackMessage: React.FC<Props> = ({
     feedbackMessage,
     setFeedbackMessage,
 }) => {
-    const [violations, setViolations] = useState(String);
-
     const getViolationsFormatted = () => {
         const filter = new Filter([]);
 
@@ -23,11 +21,9 @@ const FeedbackMessage: React.FC<Props> = ({
         return filter.getViolationsFormatted();
     };
 
-    useEffect(() => {
-        const violations = getViolationsFormatted();
-
-        violations.length ? setViolations(violations) : setViolations('');
-    }, [feedbackMessage]);
+    const violationsMemoized = useMemo(() => getViolationsFormatted(), [
+        feedbackMessage,
+    ]);
 
     return (
         <Fragment>
@@ -36,11 +32,11 @@ const FeedbackMessage: React.FC<Props> = ({
                 onChange={(e) => setFeedbackMessage(e.target.value)}
             />
 
-            {violations.length ? (
+            {violationsMemoized.length ? (
                 <Alertstripe form="inline" type="feil">
                     <Normaltekst>
                         Vi mistenker at du har skrevet inn
-                        {violations}. Dersom du likevel mener dette er riktig
+                        {violationsMemoized}. Dersom du likevel mener dette er riktig
                         kan du trykke 'Send inn'
                     </Normaltekst>
                 </Alertstripe>
