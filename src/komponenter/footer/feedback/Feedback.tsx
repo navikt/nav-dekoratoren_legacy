@@ -64,6 +64,7 @@ const Feedback = () => {
     return (
         <CloseFeedbackContext.Provider value={{closeFeedback, setCloseFeedback}}>
             <Fragment>
+                <div className="footer-linje"/>
                 <div className="feedback-container">
                     {!buttonsPressed.yesButton &&
                     !buttonsPressed.noButton &&
