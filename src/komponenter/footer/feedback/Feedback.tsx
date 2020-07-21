@@ -21,8 +21,6 @@ const Feedback = () => {
         reportButton: false,
     });
 
-    console.log(closeFeedback);
-
     const userPressedNo = () => {
         setButtonsPressed({
             yesButton: false,
