@@ -5,7 +5,7 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { verifyWindowObj } from 'utils/Environment';
-import FeedbackMessage from '../common/FeedbackMessage';
+import FeedbackMessage from '../common/feedback-message/FeedbackMessage';
 import sendFeedbackReport from './send-feedback-report';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
