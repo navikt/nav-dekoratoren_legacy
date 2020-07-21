@@ -9,7 +9,7 @@ const Thankyou = () => {
             <Ingress>
                 <Tekst id="send-undersokelse-takk" />
             </Ingress>
-
+            <div className="mellomrom"/>
             <Normaltekst>
                 <Tekst id="hensikt-med-tilbakelding" />
             </Normaltekst>
