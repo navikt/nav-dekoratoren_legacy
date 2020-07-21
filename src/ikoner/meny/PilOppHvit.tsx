@@ -6,7 +6,7 @@ const PilOppHvit = (props: SVGProps<SVGSVGElement>) => {
             width="18px"
             height="18px"
             xmlnsXlink="http://www.w3.org/1999/xlink"
-            id="Filled_Version"
+            id="dekoratoren-Filled_Version"
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
