@@ -39,10 +39,7 @@ export const NavLogoLenke = (props: Props) => {
             }}
             id={props.id}
         >
-            <img
-                alt="Til forsiden"
-                src={`${XP_BASE_URL}${props.ikon}`}
-            />
+            <img alt="Til forsiden" src={`${XP_BASE_URL}${props.ikon}`} />
         </LenkeMedGA>
     );
 };
