@@ -93,12 +93,6 @@ const PartialNo = (props: any) => {
                                 <Tekst id="hva-lette-du-etter-spørsmål" />
                             </Element>
 
-                            <div className="advarsel">
-                                <Alertstripe type="advarsel">
-                                    <Tekst id="advarsel-om-personopplysninger" />
-                                </Alertstripe>
-                            </div>
-
                             <FeedbackMessage
                                 feedbackMessage={feedbackMessage}
                                 setFeedbackMessage={setFeedbackMessage}

@@ -98,12 +98,6 @@ const Elaborated = () => {
                                 <Tekst id="din-tilbakemelding" />
                             </Element>
 
-                            <div className="advarsel">
-                                <Alertstripe type="advarsel">
-                                    <Tekst id="advarsel-om-personopplysninger" />
-                                </Alertstripe>
-                            </div>
-
                             <FeedbackMessage
                                 feedbackMessage={feedbackMessage}
                                 setFeedbackMessage={setFeedbackMessage}
