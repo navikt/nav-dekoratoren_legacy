@@ -23,6 +23,11 @@ const mqlWidthBreakpoint = matchMedia(`(min-width: ${widthBreakpoint}px)`);
 const numColsSmallScreen = 3;
 const numColsLargeScreen = 4;
 
+const getColsFromScreenWidth = () =>
+    window.innerWidth >= widthBreakpoint
+        ? numColsLargeScreen
+        : numColsSmallScreen;
+
 type Props = {
     arbeidsflate: MenuValue;
     menyPunkter?: MenyNode;
@@ -40,16 +45,12 @@ export const HovedmenyDesktopInnhold = ({
 }: Props) => {
     const kbConfig = configForNodeGroup[nodeGroup];
     const [kbNavConfig, setKbNavConfig] = useState<KbNavConfig>(kbConfig);
-    const [menuNumCols, setMenuNumCols] = useState(
-        window.innerWidth >= widthBreakpoint
-            ? numColsLargeScreen
-            : numColsSmallScreen
-    );
+    const [menuNumCols, setMenuNumCols] = useState(getColsFromScreenWidth());
     useKbNavSub(kbNavConfig, kbNavMainState, isOpen);
 
     useEffect(() => {
-        const updateMaxCols = (e: MediaQueryListEvent) => {
-            setMenuNumCols(e.matches ? numColsLargeScreen : numColsSmallScreen);
+        const updateMaxCols = () => {
+            setMenuNumCols(getColsFromScreenWidth());
         };
         mqlWidthBreakpoint.addEventListener('change', updateMaxCols);
         return () => {
