@@ -1,8 +1,10 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, Fragment, useEffect, useMemo } from 'react';
 import { Textarea } from 'nav-frontend-skjema';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Filter } from 'utils/text-filter/Filter';
+import Tekst from 'tekster/finn-tekst';
+import './FeedbackMessage.less';
 
 interface Props {
     feedbackMessage: string;
@@ -13,8 +15,6 @@ const FeedbackMessage: React.FC<Props> = ({
     feedbackMessage,
     setFeedbackMessage,
 }) => {
-    const [violations, setViolations] = useState(String);
-
     const getViolationsFormatted = () => {
         const filter = new Filter([]);
 
@@ -23,25 +23,29 @@ const FeedbackMessage: React.FC<Props> = ({
         return filter.getViolationsFormatted();
     };
 
-    useEffect(() => {
-        const violations = getViolationsFormatted();
-
-        violations.length ? setViolations(violations) : setViolations('');
-    }, [feedbackMessage]);
+    const violationsMemoized = useMemo(() => getViolationsFormatted(), [
+        feedbackMessage,
+    ]);
 
     return (
         <Fragment>
+            <div className="advarsel">
+                <Alertstripe type="advarsel">
+                    <Tekst id="advarsel-om-personopplysninger" />
+                </Alertstripe>
+            </div>
+
             <Textarea
                 value={feedbackMessage}
                 onChange={(e) => setFeedbackMessage(e.target.value)}
             />
 
-            {violations.length ? (
-                <Alertstripe form="inline" type="feil">
+            {violationsMemoized.length ? (
+                <Alertstripe className="personvernAdvarsel" form="inline" type="feil">
                     <Normaltekst>
                         Vi mistenker at du har skrevet inn
-                        {violations}. Dersom du likevel mener dette er riktig
-                        kan du trykke 'Send inn'
+                        {violationsMemoized}. Dersom du likevel mener dette er
+                        riktig kan du trykke 'Send inn'
                     </Normaltekst>
                 </Alertstripe>
             ) : null}

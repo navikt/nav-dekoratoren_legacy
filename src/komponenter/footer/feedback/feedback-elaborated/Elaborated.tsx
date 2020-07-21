@@ -5,7 +5,7 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { verifyWindowObj } from 'utils/Environment';
-import FeedbackMessage from '../common/FeedbackMessage';
+import FeedbackMessage from '../common/feedback-message/FeedbackMessage';
 import sendFeedbackReport from './send-feedback-report';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
@@ -13,9 +13,6 @@ import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import { CloseFeedbackContext } from '../common/CloseFeedbackContext';
 import './Elaborated.less';
-const { logAmplitudeEvent } = verifyWindowObj()
-    ? require('utils/amplitude')
-    : () => null;
 
 const Elaborated = () => {
     const [category, setCategory] = useState(String);
@@ -31,7 +28,6 @@ const Elaborated = () => {
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
-        //logAmplitudeEvent('tilbakemelding_mangler', { svar: category });
 
         if (!category.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
@@ -97,12 +93,6 @@ const Elaborated = () => {
                             <Element className="tekst">
                                 <Tekst id="din-tilbakemelding" />
                             </Element>
-
-                            <div className="advarsel">
-                                <Alertstripe type="advarsel">
-                                    <Tekst id="advarsel-om-personopplysninger" />
-                                </Alertstripe>
-                            </div>
 
                             <FeedbackMessage
                                 feedbackMessage={feedbackMessage}

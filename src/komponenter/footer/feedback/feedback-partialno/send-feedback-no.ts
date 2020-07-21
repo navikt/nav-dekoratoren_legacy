@@ -1,4 +1,5 @@
 import { verifyWindowObj } from 'utils/Environment';
+import amplitudeTriggers from 'utils/amplitude-triggers';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
@@ -28,7 +29,7 @@ function sendFeedbackNo(categories: string[], message: string, language: string)
 
 
     for (let category of categories) {
-        logAmplitudeEvent('tilbakemelding-nei', { svar: category })
+        logAmplitudeEvent(amplitudeTriggers.neiKnapp, { svar: category })
     }
 
 };

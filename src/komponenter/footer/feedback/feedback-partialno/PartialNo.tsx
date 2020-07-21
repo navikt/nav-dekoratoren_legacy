@@ -5,7 +5,7 @@ import Tekst from 'tekster/finn-tekst';
 import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
 import { verifyWindowObj } from 'utils/Environment';
 import Alertstripe from 'nav-frontend-alertstriper';
-import FeedbackMessage from '../common/FeedbackMessage';
+import FeedbackMessage from '../common/feedback-message/FeedbackMessage';
 import sendFeedbackNo from './send-feedback-no';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
@@ -92,12 +92,6 @@ const PartialNo = (props: any) => {
                             <Element>
                                 <Tekst id="hva-lette-du-etter-spørsmål" />
                             </Element>
-
-                            <div className="advarsel">
-                                <Alertstripe type="advarsel">
-                                    <Tekst id="advarsel-om-personopplysninger" />
-                                </Alertstripe>
-                            </div>
 
                             <FeedbackMessage
                                 feedbackMessage={feedbackMessage}
