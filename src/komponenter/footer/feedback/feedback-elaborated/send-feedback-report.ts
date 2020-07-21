@@ -1,4 +1,5 @@
 import { verifyWindowObj } from 'utils/Environment';
+import amplitudeTriggers from 'utils/amplitude-triggers';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
@@ -23,7 +24,7 @@ function sendFeedbackReport(category: string, message: string, language: string)
         .then(response => response)
         .then(data => data)
 
-    logAmplitudeEvent('tilbakemelding-rapport', { svar: category })
+    logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, { svar: category })
 
 };
 

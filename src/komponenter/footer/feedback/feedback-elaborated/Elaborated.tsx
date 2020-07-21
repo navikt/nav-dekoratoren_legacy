@@ -13,9 +13,6 @@ import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import { CloseFeedbackContext } from '../common/CloseFeedbackContext';
 import './Elaborated.less';
-const { logAmplitudeEvent } = verifyWindowObj()
-    ? require('utils/amplitude')
-    : () => null;
 
 const Elaborated = () => {
     const [category, setCategory] = useState(String);
@@ -31,7 +28,6 @@ const Elaborated = () => {
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
-        //logAmplitudeEvent('tilbakemelding_mangler', { svar: category });
 
         if (!category.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { CloseFeedbackContext } from './CloseFeedbackContext';
 import { verifyWindowObj } from 'utils/Environment';
 import Lukknapp from 'nav-frontend-lukknapp';
+import amplitudeTriggers from 'utils/amplitude-triggers';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
@@ -17,9 +18,9 @@ const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
 
     const userClosedFeedback = () => {
         if (context === 'elaborated') {
-            logAmplitudeEvent('tilbakemelding-rapport', { svar: 'Avbrutt' });
+            logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, { svar: 'Avbrutt' });
         } else if (context === 'partialno') {
-            logAmplitudeEvent('tilbakemelding-nei', { svar: 'Avbrutt' });
+            logAmplitudeEvent(amplitudeTriggers.neiKnapp, { svar: 'Avbrutt' });
         }
 
         setCloseFeedback(true);
