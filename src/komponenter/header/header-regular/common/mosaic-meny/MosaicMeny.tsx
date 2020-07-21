@@ -12,7 +12,7 @@ export const MosaicMeny = ({ numCols, children }: Props) => {
             {[...Array(numCols)].map((_, colIndex) => (
                 <div className={'mosaic-meny__column'} key={colIndex}>
                     {children.filter(
-                        (child, index) => index % numCols === colIndex
+                        (_, index) => index % numCols === colIndex
                     )}
                 </div>
             ))}
