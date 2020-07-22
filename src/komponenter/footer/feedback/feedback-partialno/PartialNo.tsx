@@ -3,8 +3,6 @@ import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
-import { verifyWindowObj } from 'utils/Environment';
-import Alertstripe from 'nav-frontend-alertstriper';
 import FeedbackMessage from '../common/feedback-message/FeedbackMessage';
 import sendFeedbackNo from './send-feedback-no';
 import { useSelector } from 'react-redux';

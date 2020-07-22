@@ -1,17 +1,14 @@
-import React, { useState, Fragment, useContext } from 'react';
+import React, { useState, Fragment } from 'react';
 import { RadioGruppe, Radio } from 'nav-frontend-skjema';
 import { Element, Ingress } from 'nav-frontend-typografi';
-import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
-import { verifyWindowObj } from 'utils/Environment';
 import FeedbackMessage from '../common/feedback-message/FeedbackMessage';
 import sendFeedbackReport from './send-feedback-report';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
-import { CloseFeedbackContext } from '../common/CloseFeedbackContext';
 import './Elaborated.less';
 
 const Elaborated = () => {
