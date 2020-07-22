@@ -58,21 +58,22 @@ const Elaborated = () => {
                             checked={category}
                         >
                             <Radio
-                                label={'Informasjon'}
+                                label={'Teknisk feil'}
+                                name="feil"
+                                value="bug"
+                            />
+                            <Radio
+                                label={'Feil informasjon'}
                                 name="feil"
                                 value="informasjon"
                             />
                             <Radio
-                                label={'Ytelse'}
+                                label={
+                                    'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel'
+                                }
                                 name="feil"
-                                value="ytelse"
+                                value="skjermleser"
                             />
-                            <Radio
-                                label={'Utseende'}
-                                name="feil"
-                                value="utseende"
-                            />
-                            <Radio label={'Bug'} name="feil" value="bug" />
                             <Radio label={'Annet'} name="feil" value="annet" />
                         </RadioGruppe>
 
