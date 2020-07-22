@@ -1,4 +1,5 @@
-@import (reference) '../../../../styling-variabler.less';
+@import (reference) '../../../../styling-variabler';
+@import (reference) '../../chatbot/ChatbotWrapper';
 
 .menylinje-bottom {
     display: flex;
@@ -16,17 +17,20 @@
     width: 100%;
     max-width: 1344px;
 
-    .nav-logo-lenke {
-        width: 68px;
-        padding: 0.25rem;
-        margin-bottom: 0.25rem;
-    }
-
-    &__logo-rad {
+    .top-row {
         display: flex;
-        align-items: center;
-        * > {
-            margin-right: 0.5rem;
+        justify-content: space-between;
+
+        .nav-logo-lenke {
+            width: 68px;
+            padding: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        #chatbot-dock {
+            display: flex;
+            justify-content: flex-end;
+            min-height: @chatbot-icon-size;
         }
     }
 

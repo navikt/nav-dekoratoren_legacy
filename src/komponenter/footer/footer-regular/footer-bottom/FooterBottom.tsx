@@ -54,14 +54,17 @@ const FooterBottom = () => {
     return (
         <section className="menylinje-bottom">
             <div className={cls.className}>
-                <NavLogoLenke
-                    gaEventArgs={{
-                        context: arbeidsflate,
-                        category: GACategory.Footer,
-                        action: 'navlogo',
-                    }}
-                    ikon={Logo}
-                />
+                <div className={'top-row'}>
+                    <NavLogoLenke
+                        gaEventArgs={{
+                            context: arbeidsflate,
+                            category: GACategory.Footer,
+                            action: 'navlogo',
+                        }}
+                        ikon={Logo}
+                    />
+                    <div id={'chatbot-dock'} />
+                </div>
                 <div className={cls.element('bottom-lenker')}>
                     <div>
                         <Normaltekst className="bottom-tekst">

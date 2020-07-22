@@ -20,6 +20,7 @@ export interface EnvironmentState {
         SIMPLE_FOOTER: boolean;
         REDIRECT_TO_APP: boolean;
         LEVEL: string;
+        CHATBOT: boolean;
     };
 
     COOKIES: {
@@ -46,6 +47,7 @@ export const initialState: EnvironmentState = {
         SIMPLE_FOOTER: false,
         REDIRECT_TO_APP: false,
         LEVEL: 'string',
+        CHATBOT: false,
     },
 
     // Cookies

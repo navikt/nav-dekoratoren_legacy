@@ -14,7 +14,6 @@ import LenkeMedIkon from '../common/lenke-med-ikon/LenkeMedIkon';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 
 import './FooterSimple.less';
-import { Normaltekst } from 'nav-frontend-typografi';
 
 const cls = BEMHelper('simple-footer');
 
@@ -54,16 +53,19 @@ const FooterSimple = () => {
                     <ul className={cls.element('personvern-lenker')}>
                         <FooterLenker node={personvernNode} />
                     </ul>
-                    <LenkeMedIkon
-                        className={cls.element('del-skjerm')}
-                        onClick={openModal}
-                        tekst={<Tekst id="footer-del-skjerm" />}
-                        ikon={
-                            <DelSkjerm
-                                style={{ height: '24px', width: '24px' }}
-                            />
-                        }
-                    />
+                    <div className={cls.element('right-col')}>
+                        <LenkeMedIkon
+                            className={cls.element('del-skjerm')}
+                            onClick={openModal}
+                            tekst={<Tekst id="footer-del-skjerm" />}
+                            ikon={
+                                <DelSkjerm
+                                    style={{ height: '24px', width: '24px' }}
+                                />
+                            }
+                        />
+                        <div id={'chatbot-dock'} />
+                    </div>
                     {isOpen && (
                         <DelSkjermModal isOpen={isOpen} onClose={closeModal} />
                     )}
