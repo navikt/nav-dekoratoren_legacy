@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { RadioGruppe, Radio } from 'nav-frontend-skjema';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -29,6 +29,11 @@ const Elaborated = () => {
         }
     };
 
+    useEffect(() => {
+        console.log(category)
+
+    }, [category])
+
     return (
         <Fragment>
             {!thankYouMessage ? (
@@ -53,19 +58,18 @@ const Elaborated = () => {
 
                         <RadioGruppe
                             feil={radiobuttonErrorMessage}
-                            // @ts-ignore
-                            onChange={(e) => setCategory(e.target.value)}
-                            checked={category}
                         >
                             <Radio
                                 label={'Teknisk feil'}
                                 name="feil"
-                                value="bug"
+                                value="teknisk feil"
+                                onChange={(e) => setCategory(e.target.value)}
                             />
                             <Radio
                                 label={'Feil informasjon'}
                                 name="feil"
-                                value="informasjon"
+                                value="feil informasjon"
+                                onChange={(e) => setCategory(e.target.value)}
                             />
                             <Radio
                                 label={
@@ -73,8 +77,14 @@ const Elaborated = () => {
                                 }
                                 name="feil"
                                 value="skjermleser"
+                                onChange={(e) => setCategory(e.target.value)}
                             />
-                            <Radio label={'Annet'} name="feil" value="annet" />
+                            <Radio
+                                label={'Annet'}
+                                name="feil"
+                                value="annet"
+                                onChange={(e) => setCategory(e.target.value)}
+                            />
                         </RadioGruppe>
 
                         <div className="submit-knapp">
