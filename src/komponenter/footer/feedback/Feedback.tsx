@@ -24,41 +24,39 @@ const Feedback = () => {
 
     const userPressedNo = () => {
         setButtonsPressed({
-            yesButton: false,
+            ...buttonsPressed,
             noButton: true,
-            reportButton: false,
         });
         logAmplitudeEvent(amplitudeTriggers.felles, { svar: 'nei' });
     };
 
     const userPressedYes = () => {
         setButtonsPressed({
+            ...buttonsPressed,
             yesButton: true,
-            noButton: false,
-            reportButton: false,
         });
         logAmplitudeEvent(amplitudeTriggers.felles, { svar: 'ja' });
     };
 
     const userPressedReport = () => {
         setButtonsPressed({
-            yesButton: false,
-            noButton: false,
+            ...buttonsPressed,
             reportButton: true,
         });
         logAmplitudeEvent(amplitudeTriggers.felles, { svar: 'feil eller mangel' });
     };
 
     useEffect(() => {
-        closeFeedback ? setButtonsPressed({
-            yesButton: false,
-            noButton: false,
-            reportButton: false,
-        }) : null;
+        if (closeFeedback) {
+            setButtonsPressed({
+                yesButton: false,
+                noButton: false,
+                reportButton: false,
+            });
         
-        setCloseFeedback(false);
-
-    }, [closeFeedback])
+            setCloseFeedback(false);
+        }
+    }, [closeFeedback]);
 
     return (
         <CloseFeedbackContext.Provider value={{closeFeedback, setCloseFeedback}}>
@@ -95,9 +93,9 @@ const Feedback = () => {
                             </button>
                         </Fragment>
                     ) : null}
-                    {buttonsPressed.yesButton ? <ThankYou /> : null}
-                    {buttonsPressed.noButton ? <PartialNo /> : null}
-                    {buttonsPressed.reportButton ? <Elaborated /> : null}
+                    {buttonsPressed.yesButton && <ThankYou />}
+                    {buttonsPressed.noButton && <PartialNo />}
+                    {buttonsPressed.reportButton && <Elaborated />}
                 </div>
             </Fragment>
         </CloseFeedbackContext.Provider>
