@@ -24,26 +24,23 @@ const Feedback = () => {
 
     const userPressedNo = () => {
         setButtonsPressed({
-            yesButton: false,
+            ...buttonsPressed,
             noButton: true,
-            reportButton: false,
         });
         logAmplitudeEvent(amplitudeTriggers.felles, { svar: 'nei' });
     };
 
     const userPressedYes = () => {
         setButtonsPressed({
+            ...buttonsPressed,
             yesButton: true,
-            noButton: false,
-            reportButton: false,
         });
         logAmplitudeEvent(amplitudeTriggers.felles, { svar: 'ja' });
     };
 
     const userPressedReport = () => {
         setButtonsPressed({
-            yesButton: false,
-            noButton: false,
+            ...buttonsPressed,
             reportButton: true,
         });
         logAmplitudeEvent(amplitudeTriggers.felles, {
