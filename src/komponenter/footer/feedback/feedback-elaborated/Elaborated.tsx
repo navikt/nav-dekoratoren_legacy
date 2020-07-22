@@ -47,7 +47,7 @@ const Elaborated = () => {
                         onSubmit={submitFeedback}
                         className="elaborated-content"
                     >
-                        <Element className="tekst">
+                        <Element className="radioknapp-gruppe-overskrift">
                             <Tekst id="velg-type-feil-mangler" />
                         </Element>
 

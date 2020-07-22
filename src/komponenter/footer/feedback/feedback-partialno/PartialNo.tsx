@@ -55,7 +55,7 @@ const PartialNo = (props: any) => {
                         </div>
                     </div>
 
-                    <Element className="tekst">
+                    <Element className="checkbox-gruppe-overskrift">
                         <Tekst id="gi-din-vurdering-av-informasjon" />
                     </Element>
 
