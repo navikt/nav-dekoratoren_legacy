@@ -46,24 +46,29 @@ const Feedback = () => {
             noButton: false,
             reportButton: true,
         });
-        logAmplitudeEvent(amplitudeTriggers.felles, { svar: 'feil eller mangel' });
+        logAmplitudeEvent(amplitudeTriggers.felles, {
+            svar: 'feil eller mangel',
+        });
     };
 
     useEffect(() => {
-        closeFeedback ? setButtonsPressed({
-            yesButton: false,
-            noButton: false,
-            reportButton: false,
-        }) : null;
-        
-        setCloseFeedback(false);
+        if (closeFeedback) {
+            setButtonsPressed({
+                yesButton: false,
+                noButton: false,
+                reportButton: false,
+            });
 
-    }, [closeFeedback])
+            setCloseFeedback(false);
+        }
+    }, [closeFeedback]);
 
     return (
-        <CloseFeedbackContext.Provider value={{closeFeedback, setCloseFeedback}}>
+        <CloseFeedbackContext.Provider
+            value={{ closeFeedback, setCloseFeedback }}
+        >
             <Fragment>
-                <div className="footer-linje"/>
+                <div className="footer-linje" />
                 <div className="feedback-container">
                     {!buttonsPressed.yesButton &&
                     !buttonsPressed.noButton &&
@@ -76,19 +81,22 @@ const Feedback = () => {
                                 <div className="buttons-container">
                                     <Knapp
                                         className="knapp"
-                                        onClick={userPressedYes}>
+                                        onClick={userPressedYes}
+                                    >
                                         <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
                                     </Knapp>
                                     <Knapp
                                         className="knapp"
-                                        onClick={userPressedNo}>
+                                        onClick={userPressedNo}
+                                    >
                                         <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
                                     </Knapp>
                                 </div>
                             </div>
                             <Element
                                 className="underline"
-                                onClick={userPressedReport}>
+                                onClick={userPressedReport}
+                            >
                                 Rapporter feil eller mangler
                             </Element>
                         </Fragment>
