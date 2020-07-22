@@ -1,5 +1,7 @@
 import { verifyWindowObj } from 'utils/Environment';
 import amplitudeTriggers from 'utils/amplitude-triggers';
+import fetchFeedback from '../common/api/fetch-feedback';
+import remotes from '../common/api/remotes';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
@@ -14,15 +16,7 @@ function sendFeedbackReport(category: string, message: string, language: string)
         languageCode: language,
     };
 
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(feedbackReport)
-    };
-
-    fetch('https://dekoratoren-feedback-api-q6.dev-sbs.nais.io/feedback/report', requestOptions)
-        .then(response => response)
-        .then(data => data)
+    fetchFeedback(feedbackReport, remotes.dev)
 
     logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, { svar: category })
 
