@@ -43,7 +43,9 @@ const Feedback = () => {
             ...buttonsPressed,
             reportButton: true,
         });
-        logAmplitudeEvent(amplitudeTriggers.felles, { svar: 'feil eller mangel' });
+        logAmplitudeEvent(amplitudeTriggers.felles, {
+            svar: 'feil eller mangel',
+        });
     };
 
     useEffect(() => {
@@ -53,15 +55,17 @@ const Feedback = () => {
                 noButton: false,
                 reportButton: false,
             });
-        
+
             setCloseFeedback(false);
         }
     }, [closeFeedback]);
 
     return (
-        <CloseFeedbackContext.Provider value={{closeFeedback, setCloseFeedback}}>
+        <CloseFeedbackContext.Provider
+            value={{ closeFeedback, setCloseFeedback }}
+        >
             <Fragment>
-                <div className="footer-linje"/>
+                <div className="footer-linje" />
                 <div className="feedback-container">
                     {!buttonsPressed.yesButton &&
                     !buttonsPressed.noButton &&
@@ -74,22 +78,23 @@ const Feedback = () => {
                                 <div className="buttons-container">
                                     <Knapp
                                         className="knapp"
-                                        onClick={userPressedYes}>
+                                        onClick={userPressedYes}
+                                    >
                                         <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
                                     </Knapp>
                                     <Knapp
                                         className="knapp"
-                                        onClick={userPressedNo}>
+                                        onClick={userPressedNo}
+                                    >
                                         <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
                                     </Knapp>
                                 </div>
                             </div>
-                            <button className="restyle-knapp">
-                            <Element
+                            <button
                                 className="lenke"
-                                onClick={userPressedReport}>
+                                onClick={userPressedReport}
+                            >
                                 Rapporter feil eller mangler
-                            </Element>
                             </button>
                         </Fragment>
                     ) : null}
