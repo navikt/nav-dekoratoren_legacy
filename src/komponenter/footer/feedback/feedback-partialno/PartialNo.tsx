@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Element, Ingress } from 'nav-frontend-typografi';
+import { Ingress, Element } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
@@ -55,11 +55,14 @@ const PartialNo = (props: any) => {
                         </div>
                     </div>
 
+                    <Element className="tekst">
+                        <Tekst id="gi-din-vurdering-av-informasjon" />
+                    </Element>
+
                     <form onSubmit={submitFeedback} className="no-content">
                         <CheckboxGruppe
                             // @ts-ignore
                             onChange={(e) => onClickAarsak(e)}
-                            legend="Gi din vurdering av informasjonen på siden"
                             feil={radiobuttonErrorMessage}
                         >
                             <Checkbox
