@@ -101,9 +101,9 @@ const Feedback = () => {
                             </Element>
                         </Fragment>
                     ) : null}
-                    {buttonsPressed.yesButton ? <ThankYou /> : null}
-                    {buttonsPressed.noButton ? <PartialNo /> : null}
-                    {buttonsPressed.reportButton ? <Elaborated /> : null}
+                    {buttonsPressed.yesButton && <ThankYou />}
+                    {buttonsPressed.noButton && <PartialNo />}
+                    {buttonsPressed.reportButton && <Elaborated />}
                 </div>
             </Fragment>
         </CloseFeedbackContext.Provider>
