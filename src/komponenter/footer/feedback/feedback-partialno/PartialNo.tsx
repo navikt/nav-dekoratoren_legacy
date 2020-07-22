@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Ingress, Element } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
@@ -8,7 +8,7 @@ import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import './PartialNo.less';
 
-const PartialNo = (props: any) => {
+const PartialNo = () => {
     const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
@@ -19,7 +19,7 @@ const PartialNo = (props: any) => {
 
     let feedbackTitles = [...feedbackTitle];
 
-    const onClickAarsak = (evt: any) => {
+    const onClickAarsak = (evt: ChangeEvent<HTMLInputElement>) => {
         feedbackTitles.includes(evt.target.value)
             ? (feedbackTitles = feedbackTitles.filter(
                   (e) => e !== evt.target.value
@@ -41,10 +41,14 @@ const PartialNo = (props: any) => {
         }
     };
 
+    useEffect(() => {
+        console.log(feedbackTitles)
+    }, [feedbackTitles]);
+
     return (
         <div className="partialno-container">
             {!thankYouMessage ? (
-                <div >
+                <div>
                     <div className="overskrift-container">
                         <Ingress>
                             <Tekst id="send-undersokelse-takk" />
@@ -61,23 +65,28 @@ const PartialNo = (props: any) => {
 
                     <form onSubmit={submitFeedback} className="no-content">
                         <CheckboxGruppe
-                            // @ts-ignore
-                            onChange={(e) => onClickAarsak(e)}
                             feil={radiobuttonErrorMessage}
                         >
                             <Checkbox
                                 label={'Lite oversiktlig'}
                                 value="Lite oversiktlig"
+                                onChange={(e) => onClickAarsak(e)}
                             />
                             <Checkbox
                                 label={'Lite forståelig'}
                                 value="Lite forståelig"
+                                onChange={(e) => onClickAarsak(e)}
                             />
                             <Checkbox
                                 label={'Lite relevant informasjon'}
                                 value="Lite relevant informasjon"
+                                onChange={(e) => onClickAarsak(e)}
                             />
-                            <Checkbox label={'Villedende'} value="Villedende" />
+                            <Checkbox
+                                label={'Villedende'}
+                                value="Villedende"
+                                onChange={(e) => onClickAarsak(e)}
+                            />
                         </CheckboxGruppe>
 
                         <div className="submit-knapp">
