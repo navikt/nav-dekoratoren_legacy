@@ -84,11 +84,13 @@ const Feedback = () => {
                                     </Knapp>
                                 </div>
                             </div>
+                            <button className="restyle-knapp">
                             <Element
-                                className="underline"
+                                className="lenke"
                                 onClick={userPressedReport}>
                                 Rapporter feil eller mangler
                             </Element>
+                            </button>
                         </Fragment>
                     ) : null}
                     {buttonsPressed.yesButton && <ThankYou />}
