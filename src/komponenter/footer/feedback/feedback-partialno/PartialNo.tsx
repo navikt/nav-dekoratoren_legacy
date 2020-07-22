@@ -3,18 +3,13 @@ import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
-import FeedbackMessage from '../common/feedback-message/FeedbackMessage';
 import sendFeedbackNo from './send-feedback-no';
-import { useSelector } from 'react-redux';
-import { AppState } from 'store/reducers';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import './PartialNo.less';
 
 const PartialNo = (props: any) => {
     const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
-    const [feedbackMessage, setFeedbackMessage] = useState('');
-    const { language } = useSelector((state: AppState) => state.language);
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
 
@@ -41,11 +36,7 @@ const PartialNo = (props: any) => {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
             setRadiobuttonErrorMessage('');
-            sendFeedbackNo(
-                feedbackTitle,
-                feedbackMessage,
-                language.toLowerCase()
-            );
+            sendFeedbackNo(feedbackTitle);
             setThankYouMessage(true);
         }
     };
@@ -90,11 +81,6 @@ const PartialNo = (props: any) => {
                             <Element>
                                 <Tekst id="hva-lette-du-etter-spørsmål" />
                             </Element>
-
-                            <FeedbackMessage
-                                feedbackMessage={feedbackMessage}
-                                setFeedbackMessage={setFeedbackMessage}
-                            />
                         </div>
 
                         <div className="submit-knapp">

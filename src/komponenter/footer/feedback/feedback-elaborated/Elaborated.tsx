@@ -3,25 +3,19 @@ import { RadioGruppe, Radio } from 'nav-frontend-skjema';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
-import FeedbackMessage from '../common/feedback-message/FeedbackMessage';
 import sendFeedbackReport from './send-feedback-report';
-import { useSelector } from 'react-redux';
-import { AppState } from 'store/reducers';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import './Elaborated.less';
 
 const Elaborated = () => {
     const [category, setCategory] = useState(String);
-    const [feedbackMessage, setFeedbackMessage] = useState('');
 
     const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
         String
     );
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
-
-    const { language } = useSelector((state: AppState) => state.language);
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
@@ -30,11 +24,7 @@ const Elaborated = () => {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
             setRadiobuttonErrorMessage('');
-            sendFeedbackReport(
-                category,
-                feedbackMessage,
-                language.toLowerCase()
-            );
+            sendFeedbackReport(category);
             setThankYouMessage(true);
         }
     };
@@ -90,11 +80,6 @@ const Elaborated = () => {
                             <Element className="tekst">
                                 <Tekst id="din-tilbakemelding" />
                             </Element>
-
-                            <FeedbackMessage
-                                feedbackMessage={feedbackMessage}
-                                setFeedbackMessage={setFeedbackMessage}
-                            />
                         </div>
 
                         <div className="submit-knapp">
