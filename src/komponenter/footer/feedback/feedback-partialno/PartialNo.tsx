@@ -77,12 +77,6 @@ const PartialNo = (props: any) => {
                             <Checkbox label={'Villedende'} value="Villedende" />
                         </CheckboxGruppe>
 
-                        <div className="no-content">
-                            <Element>
-                                <Tekst id="hva-lette-du-etter-spørsmål" />
-                            </Element>
-                        </div>
-
                         <div className="submit-knapp">
                             <Hovedknapp htmlType="submit">
                                 <Tekst id="send-inn-feilrapport" />

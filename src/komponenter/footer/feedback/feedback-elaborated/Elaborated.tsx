@@ -77,12 +77,6 @@ const Elaborated = () => {
                             <Radio label={'Annet'} name="feil" value="annet" />
                         </RadioGruppe>
 
-                        <div className="elaborated-content">
-                            <Element className="tekst">
-                                <Tekst id="din-tilbakemelding" />
-                            </Element>
-                        </div>
-
                         <div className="submit-knapp">
                             <Hovedknapp htmlType="submit">
                                 <Tekst id="send-inn-feilrapport" />
