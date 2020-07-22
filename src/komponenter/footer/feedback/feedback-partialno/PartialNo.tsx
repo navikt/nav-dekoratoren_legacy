@@ -42,9 +42,9 @@ const PartialNo = (props: any) => {
     };
 
     return (
-        <div>
+        <div className="partialno-container">
             {!thankYouMessage ? (
-                <div className="partialno-container">
+                <div >
                     <div className="overskrift-container">
                         <Ingress>
                             <Tekst id="send-undersokelse-takk" />
