@@ -43,7 +43,7 @@ const FooterRegular = () => {
 
     return (
         <Fragment>
-            {PARAMS.FEEDBACK && <Feedback />}
+            {PARAMS.FEEDBACK && showFeedback && <Feedback />}
             <FooterTopp />
             <FooterBottom />
         </Fragment>
