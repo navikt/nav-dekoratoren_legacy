@@ -5,7 +5,7 @@ body {
 }
 
 body.no-scroll-mobil {
-    @media (max-width: @mobilMaxWidth) {
+    @media not all and (min-width: @desktopMinWidth) {
         overflow-y: hidden;
     }
 }
@@ -35,7 +35,7 @@ body.no-scroll-mobil {
 }
 
 .arbeidsflate {
-    @media (max-width: @mobilMaxWidth) {
+    @media not all and (min-width: @desktopMinWidth) {
         display: none;
     }
 }

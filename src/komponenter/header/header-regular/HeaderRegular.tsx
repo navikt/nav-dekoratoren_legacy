@@ -27,7 +27,7 @@ export const HeaderRegular = () => {
             <Skiplinks />
             <div className="header-z-wrapper">
                 {language === Language.NORSK && <Arbeidsflatemeny />}
-                <Sticky mobilFixed={mobilMenyIsOpen}>
+                <Sticky>
                     <HeaderMenylinje />
                 </Sticky>
             </div>

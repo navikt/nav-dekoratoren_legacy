@@ -14,6 +14,7 @@ import DelSkjermModal from 'komponenter/footer/common/del-skjerm-modal/DelSkjerm
 import { LinkLoader } from '../../../common/content-loaders/LinkLoader';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import './FooterBottom.less';
+import Logo from 'ikoner/meny/nav-logo-black.svg';
 
 const FooterBottom = () => {
     const cls = BEMHelper('footer-bottom-content');
@@ -59,6 +60,7 @@ const FooterBottom = () => {
                         category: GACategory.Footer,
                         action: 'navlogo',
                     }}
+                    ikon={Logo}
                 />
                 <div className={cls.element('bottom-lenker')}>
                     <div>
