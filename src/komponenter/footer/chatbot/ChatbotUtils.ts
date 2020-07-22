@@ -28,8 +28,9 @@ export const openChatbot = async (callback: (isOpen: boolean) => void) => {
         return;
     }
 
-    await openFunc();
-    callback(true);
+    await new Promise(() => openFunc())
+        .then(() => callback(true))
+        .catch(() => callback(false));
 };
 
 export const setCallbackOnChatbotOpen = (callback: () => void) => {
