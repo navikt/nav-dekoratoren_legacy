@@ -50,15 +50,16 @@ const Feedback = () => {
     };
 
     useEffect(() => {
-        closeFeedback ? setButtonsPressed({
-            yesButton: false,
-            noButton: false,
-            reportButton: false,
-        }) : null;
+        if (closeFeedback) {
+            setButtonsPressed({
+                yesButton: false,
+                noButton: false,
+                reportButton: false,
+            });
         
-        setCloseFeedback(false);
-
-    }, [closeFeedback])
+            setCloseFeedback(false);
+        }
+    }, [closeFeedback]);
 
     return (
         <CloseFeedbackContext.Provider value={{closeFeedback, setCloseFeedback}}>
