@@ -4,6 +4,8 @@ import FooterBottom from './footer-bottom/FooterBottom';
 import { verifyWindowObj } from 'utils/Environment';
 import checkIfContainsPath from 'utils/url-filter/url-filter';
 import Feedback from '../feedback/Feedback';
+import { useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
 
 const FooterRegular = () => {
     const [showFeedback, setShowFeedback] = useState(false);
@@ -27,6 +29,10 @@ const FooterRegular = () => {
 
     const path = verifyWindowObj() ? useReactPath() : '';
 
+    const { PARAMS } = useSelector(
+        (state: AppState) => state.environment
+    );
+
     useEffect(() => {
         if (checkIfContainsPath(path)) {
             setShowFeedback(true);
@@ -37,7 +43,7 @@ const FooterRegular = () => {
 
     return (
         <Fragment>
-            {showFeedback && <Feedback />}
+            {PARAMS.FEEDBACK && <Feedback />}
             <FooterTopp />
             <FooterBottom />
         </Fragment>
