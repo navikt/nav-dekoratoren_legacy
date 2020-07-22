@@ -1,7 +1,7 @@
 import { verifyWindowObj } from 'utils/Environment';
 import amplitudeTriggers from 'utils/amplitude-triggers';
 import fetchFeedback from '../common/api/fetch-feedback';
-import remotes from '../common/api/remotes';
+import { remotes_no } from '../common/api/remotes';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
@@ -19,7 +19,7 @@ function sendFeedbackNo(categories: string[], message: string, language: string)
         languageCode: language
     };
 
-    fetchFeedback(feedbackReport, remotes.dev)
+    fetchFeedback(feedbackReport, remotes_no.dev)
 
     for (let category of categories) {
         logAmplitudeEvent(amplitudeTriggers.neiKnapp, { svar: category })

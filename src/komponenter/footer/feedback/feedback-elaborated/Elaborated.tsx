@@ -73,21 +73,21 @@ const Elaborated = () => {
                             <Radio
                                 label={'Teknisk feil'}
                                 name="feil"
-                                value="bug"
+                                value="TEKNISK_FEIL"
                             />
                             <Radio
                                 label={'Feil informasjon'}
                                 name="feil"
-                                value="informasjon"
+                                value="INFORMASJON"
                             />
                             <Radio
                                 label={
                                     'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel'
                                 }
                                 name="feil"
-                                value="skjermleser"
+                                value="HJELPEMIDDEL"
                             />
-                            <Radio label={'Annet'} name="feil" value="annet" />
+                            <Radio label={'Annet'} name="feil" value="ANNET" />
                         </RadioGruppe>
 
                         <div className="elaborated-content">
