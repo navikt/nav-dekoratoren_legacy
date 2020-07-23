@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, Fragment } from 'react';
 import { Ingress, Element } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
@@ -42,64 +42,65 @@ const PartialNo = () => {
     };
 
     useEffect(() => {
-        console.log(feedbackTitles)
+        console.log(feedbackTitles);
     }, [feedbackTitles]);
 
     return (
-        <div className="partialno-container">
+        <Fragment>
             {!thankYouMessage ? (
-                <div>
+                <div className="partialno-wrapper">
                     <div className="overskrift-container">
                         <Ingress>
                             <Tekst id="send-undersokelse-takk" />
                         </Ingress>
-
-                        <div className="kryssut-knapp">
-                            <CloseFeedbackHandler context="partialno" />
-                        </div>
                     </div>
 
-                    <Element className="checkbox-gruppe-overskrift">
-                        <Tekst id="gi-din-vurdering-av-informasjon" />
-                    </Element>
+                    <div className="partialno-container">
+                        <form onSubmit={submitFeedback}>
+                            <Element className="sub-overskrift">
+                                <Tekst id="gi-din-vurdering-av-informasjon" />
+                            </Element>
 
-                    <form onSubmit={submitFeedback} className="no-content">
-                        <CheckboxGruppe
-                            feil={radiobuttonErrorMessage}
-                        >
-                            <Checkbox
-                                label={'Lite oversiktlig'}
-                                value="Lite oversiktlig"
-                                onChange={(e) => onClickAarsak(e)}
-                            />
-                            <Checkbox
-                                label={'Lite forståelig'}
-                                value="Lite forståelig"
-                                onChange={(e) => onClickAarsak(e)}
-                            />
-                            <Checkbox
-                                label={'Lite relevant informasjon'}
-                                value="Lite relevant informasjon"
-                                onChange={(e) => onClickAarsak(e)}
-                            />
-                            <Checkbox
-                                label={'Villedende'}
-                                value="Villedende"
-                                onChange={(e) => onClickAarsak(e)}
-                            />
-                        </CheckboxGruppe>
+                            <CheckboxGruppe feil={radiobuttonErrorMessage}>
+                                <Checkbox
+                                    label={'Lite oversiktlig'}
+                                    value="Lite oversiktlig"
+                                    onChange={(e) => onClickAarsak(e)}
+                                />
+                                <Checkbox
+                                    label={'Lite forståelig'}
+                                    value="Lite forståelig"
+                                    onChange={(e) => onClickAarsak(e)}
+                                />
+                                <Checkbox
+                                    label={'Lite relevant informasjon'}
+                                    value="Lite relevant informasjon"
+                                    onChange={(e) => onClickAarsak(e)}
+                                />
+                                <Checkbox
+                                    label={'Villedende'}
+                                    value="Villedende"
+                                    onChange={(e) => onClickAarsak(e)}
+                                />
+                            </CheckboxGruppe>
 
-                        <div className="submit-knapp">
-                            <Hovedknapp htmlType="submit">
-                                <Tekst id="send-inn-feilrapport" />
-                            </Hovedknapp>
-                        </div>
-                    </form>
+                            <div className="knapper">
+                                <div className="send-inn">
+                                    <Hovedknapp
+                                        htmlType="submit"
+                                        className="reset-knapp">
+                                        <Tekst id="send-inn-feilrapport" />
+                                    </Hovedknapp>
+                                </div>
+                                <CloseFeedbackHandler context="partialno" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
             ) : (
                 <Thankyou />
             )}
-        </div>
+        </Fragment>
     );
 };
 

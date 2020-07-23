@@ -3,6 +3,7 @@ import { CloseFeedbackContext } from './CloseFeedbackContext';
 import { verifyWindowObj } from 'utils/Environment';
 import Lukknapp from 'nav-frontend-lukknapp';
 import amplitudeTriggers from 'utils/amplitude-triggers';
+import { Knapp } from 'nav-frontend-knapper';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
@@ -28,9 +29,9 @@ const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
 
     return (
         <div>
-            <Lukknapp bla={true} onClick={userClosedFeedback}>
-                Lukk
-            </Lukknapp>
+            <Knapp onClick={userClosedFeedback}>
+                Avbryt
+            </Knapp>
         </div>
     );
 };

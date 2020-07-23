@@ -11,11 +11,11 @@ import './Elaborated.less';
 const Elaborated = () => {
     const [category, setCategory] = useState(String);
 
+    const [thankYouMessage, setThankYouMessage] = useState(false);
+
     const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
         String
     );
-
-    const [thankYouMessage, setThankYouMessage] = useState(false);
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
@@ -30,69 +30,74 @@ const Elaborated = () => {
     };
 
     useEffect(() => {
-        console.log(category)
-
-    }, [category])
+        console.log(category);
+    }, [category]);
 
     return (
         <Fragment>
             {!thankYouMessage ? (
-                <div className="elaborated-container">
+                <div className="elaborated-wrapper">
                     <div className="overskrift-container">
                         <Ingress>
                             <Tekst id="rapporter-om-feil-mangler" />
                         </Ingress>
-
-                        <div className="kryssut-knapp">
-                            <CloseFeedbackHandler context="elaborated" />
-                        </div>
                     </div>
 
-                    <form
-                        onSubmit={submitFeedback}
-                        className="elaborated-content"
-                    >
-                        <Element className="radioknapp-gruppe-overskrift">
-                            <Tekst id="velg-type-feil-mangler" />
-                        </Element>
+                    <div className="elaborated-container">
+                        <form onSubmit={submitFeedback}>
+                            <Element className="sub-overskrift">
+                                <Tekst id="velg-type-feil-mangler" />
+                            </Element>
 
-                        <RadioGruppe
-                            feil={radiobuttonErrorMessage}
-                        >
-                            <Radio
-                                label={'Teknisk feil'}
-                                name="feil"
-                                value="teknisk feil"
-                                onChange={(e) => setCategory(e.target.value)}
-                            />
-                            <Radio
-                                label={'Feil informasjon'}
-                                name="feil"
-                                value="feil informasjon"
-                                onChange={(e) => setCategory(e.target.value)}
-                            />
-                            <Radio
-                                label={
-                                    'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel'
-                                }
-                                name="feil"
-                                value="skjermleser"
-                                onChange={(e) => setCategory(e.target.value)}
-                            />
-                            <Radio
-                                label={'Annet'}
-                                name="feil"
-                                value="annet"
-                                onChange={(e) => setCategory(e.target.value)}
-                            />
-                        </RadioGruppe>
+                            <RadioGruppe feil={radiobuttonErrorMessage}>
+                                <Radio
+                                    label={'Teknisk feil'}
+                                    name="feil"
+                                    value="teknisk feil"
+                                    onChange={(e) =>
+                                        setCategory(e.target.value)
+                                    }
+                                />
+                                <Radio
+                                    label={'Feil informasjon'}
+                                    name="feil"
+                                    value="feil informasjon"
+                                    onChange={(e) =>
+                                        setCategory(e.target.value)
+                                    }
+                                />
+                                <Radio
+                                    label={
+                                        'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel'
+                                    }
+                                    name="feil"
+                                    value="skjermleser"
+                                    onChange={(e) =>
+                                        setCategory(e.target.value)
+                                    }
+                                />
+                                <Radio
+                                    label={'Annet'}
+                                    name="feil"
+                                    value="annet"
+                                    onChange={(e) =>
+                                        setCategory(e.target.value)
+                                    }
+                                />
+                            </RadioGruppe>
 
-                        <div className="submit-knapp">
-                            <Hovedknapp htmlType="submit">
-                                <Tekst id="send-inn-feilrapport" />
-                            </Hovedknapp>
-                        </div>
-                    </form>
+                            <div className="knapper">
+                                <div className="send-inn">
+                                    <Hovedknapp
+                                        htmlType="submit"
+                                        className="reset-knapp">
+                                        <Tekst id="send-inn-feilrapport" />
+                                    </Hovedknapp>
+                                </div>
+                                <CloseFeedbackHandler context="elaborated" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
             ) : (
                 <Thankyou />
