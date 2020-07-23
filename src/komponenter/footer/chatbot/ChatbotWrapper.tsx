@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import NavChatbot from '@navikt/nav-chatbot';
 import { openChatbot, setCallbackOnChatbotOpen } from './ChatbotUtils';
 import { Normaltekst } from 'nav-frontend-typografi';
+import Chat from '../../chatbot';
 import './ChatbotWrapper.less';
 
 const cssPrefix = 'chatbot-wrapper';
@@ -91,7 +91,7 @@ export const ChatbotWrapper = ({
                         {'Chatbot Frida'}
                     </Normaltekst>
                 </div>
-                <NavChatbot
+                <Chat
                     customerKey={customerKey}
                     queueKey={queueKey}
                     configId={configId}

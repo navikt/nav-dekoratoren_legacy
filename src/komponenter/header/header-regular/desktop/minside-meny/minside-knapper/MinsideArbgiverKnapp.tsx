@@ -9,6 +9,7 @@ import { AppState } from 'store/reducers';
 import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
 import { minsideMenyClassname } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
 import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
+import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './MinsideKnapp.less';
 
 import briefcaseIkon from 'ikoner/meny/Briefcase_icon_nav.svg';
@@ -34,10 +35,7 @@ export const MinsideArbgiverKnapp = () => {
                     'knapp-visning'
                 )}`}
             >
-                <img
-                    src={`${environment.XP_BASE_URL}${briefcaseIkon}`}
-                    alt=""
-                />
+                <Bilde src={briefcaseIkon} alt="" />
                 <div className={cls.element('knapp-tekst')}>
                     <Normaltekst className={cls.element('knapp-tekst-topp')}>
                         <Tekst id={'ga-til-min-side-arbeidsgiver'} />
