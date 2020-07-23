@@ -4,6 +4,7 @@ import { openChatbot, setCallbackOnChatbotOpen } from './ChatbotUtils';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Chatbot from '../../chatbot';
 import './ChatbotWrapper.less';
+import { useCookies } from 'react-cookie';
 
 const cssPrefix = 'chatbot-wrapper';
 
@@ -19,7 +20,8 @@ export const ChatbotWrapper = ({
     queueKey = 'Q_CHAT_BOT',
     configId = '599f9e7c-7f6b-4569-81a1-27202c419953',
 }: Props) => {
-    const isOpenFromStorage = sessionStorage.getItem('chatbot-frida_apen');
+    const [cookies] = useCookies();
+    const isOpenFromStorage = cookies['chatbot-frida_apen'];
     const [chatbotOpened, setChatbotOpened] = useState(
         isOpenFromStorage === 'true'
     );

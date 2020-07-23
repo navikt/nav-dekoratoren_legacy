@@ -8,6 +8,7 @@ import FooterRegular from './footer-regular/FooterRegular';
 import { verifyWindowObj } from 'utils/Environment';
 import { chatbotClassname } from 'komponenter/footer/chatbot/ChatbotUtils';
 import './Footer.less';
+import { useCookies } from 'react-cookie';
 
 // Skal ikke lastes server-side
 const { ChatbotWrapper } = verifyWindowObj()
@@ -17,11 +18,10 @@ const { ChatbotWrapper } = verifyWindowObj()
 const Footer = () => {
     const { PARAMS } = useSelector((state: AppState) => state.environment);
     const [mountChatbot, setMountChatbot] = useState(false);
+    const [cookies] = useCookies();
 
     useEffect(() => {
-        const chatbotSessionActive = !!sessionStorage.getItem(
-            'chatbot-frida_config'
-        );
+        const chatbotSessionActive = !!cookies['chatbot-frida_config'];
         const chatbotComponentAlreadyMounted =
             document.getElementsByClassName(chatbotClassname).length > 0;
         setMountChatbot(
