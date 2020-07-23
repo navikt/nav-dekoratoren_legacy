@@ -29,10 +29,6 @@ const Elaborated = () => {
         }
     };
 
-    useEffect(() => {
-        console.log(category);
-    }, [category]);
-
     return (
         <Fragment>
             {!thankYouMessage ? (

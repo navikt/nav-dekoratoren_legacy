@@ -41,10 +41,6 @@ const PartialNo = () => {
         }
     };
 
-    useEffect(() => {
-        console.log(feedbackTitles);
-    }, [feedbackTitles]);
-
     return (
         <Fragment>
             {!thankYouMessage ? (

@@ -231,13 +231,13 @@ export const ledetekster: { [key: string]: string } = {
     'hva-lette-du-etter-spørsmål-en': 'What were you looking for?',
     'hva-lette-du-etter-spørsmål-se': 'Hva lette du etter?',
     'rapporter-om-feil-mangler': 'Rapporter om feil eller mangler',
-    'rapporter-om-feil-mangler-en': '',
+    'rapporter-om-feil-mangler-en': 'Is there anything wrong with this page?',
     'rapporter-om-feil-mangler-se': 'Rapporter om feil eller mangler',
     'velg-type-feil-mangler': 'Hva slags feil opplevde du?',
     'velg-type-feil-mangler-en': 'What kind of error did you experience?',
     'velg-type-feil-mangler-se': 'Hva slags feil opplevde du?',
     'din-tilbakemelding': 'Beskriv feilen, mangelen eller hva som skjedde',
-    'din-tilbakemelding-en': 'Describe the error, the missing part or what happend',
+    'din-tilbakemelding-en': 'Describe the error, the missing part or what happened',
     'din-tilbakemelding-se': 'Beskriv feilen, mangelen eller hva som skjedde',
     'advarsel-om-personopplysninger': 'Unngå sensitive personopplysninger, som for eksempel opplysninger om helseforhold eller diagnoser. Du kan ikke spørre om status i saken din, da må du logge inn og sjekke på Ditt NAV under Dine saker.',
     'advarsel-om-personopplysninger-en': 'This is a warning',
@@ -245,11 +245,5 @@ export const ledetekster: { [key: string]: string } = {
     'send-inn-feilrapport': 'Send inn',
     'send-inn-feilrapport-en': 'Submit',
     'send-inn-feilrapport-se': 'Send inn',
-    'send-undersokelse-sporsmaal':
-        'Dersom du har tid ønsker vi at du svarer på en undersøkelse om hva vi kan forbedre på våre sider. Undersøkelsen er anonym og tar kun noen minutter',
-    'send-undersokelse-sporsmaal-en': 
-        'If you have the time we could appreciate if you took the time to fill out a short survey about what we can improve with our site. The survey is anonymous and only takes a couple of minutes',
-    'send-undersokelse-sporsmaal-se': 
-        'Dersom du har tid ønsker vi at du svarer på en undersøkelse om hva vi kan forbedre på våre sider. Undersøkelsen er anonym og tar kun noen minutter',
     'hensikt-med-tilbakelding': 'Vi vil bruke ditt svar til å forbedre innholdet på siden vår'
 };
