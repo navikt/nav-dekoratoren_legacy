@@ -2,11 +2,6 @@ import styled from 'styled-components';
 import tema from 'komponenter/chatbot/tema/tema';
 import { AlertstripeProps } from 'komponenter/chatbot/components/Alertstripe/index';
 
-import informasjon from 'komponenter/chatbot/assets/informasjon.svg';
-import advarsel from 'komponenter/chatbot/assets/advarsel.svg';
-import feil from 'komponenter/chatbot/assets/feil.svg';
-import suksess from 'komponenter/chatbot/assets/suksess.svg';
-
 export const Container = styled.div`
     padding: 15px;
     display: flex;
@@ -22,31 +17,13 @@ export const Container = styled.div`
     min-height: 0;
 `;
 
-const ikon = (type: 'info' | 'suksess' | 'advarsel' | 'feil') => {
-    switch (type) {
-        case 'advarsel':
-            return advarsel;
-        case 'feil':
-            return feil;
-        case 'info':
-            return informasjon;
-        case 'suksess':
-            return suksess;
-        default:
-            return informasjon;
-    }
-};
-
 export const Ikon = styled.div`
     flex: 0 0 25px;
     height: 25px;
     width: 25px;
     background: red;
     margin-right: 20px;
-    background: ${(props: AlertstripeProps) =>
-        `transparent url('data:image/svg+xml;base64,${window.btoa(
-            ikon(props.type)
-        )}') no-repeat center center`};
+    background: transparent;
     align-self: flex-start;
 `;
 

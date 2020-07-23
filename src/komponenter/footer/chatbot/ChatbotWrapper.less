@@ -4,8 +4,8 @@
 
 .chatbot-wrapper {
     // Obs: Dette classname'et genereres av styledcomponents i chatbot'en
-    // Denne er gyldig for chatbot v.1.2.2
-    @chatbot-classname: jMySyT;
+    // Denne er gyldig for chatbot v.1.2.3-beta
+    @chatbot-classname: gxPaZj;
 
     @offset-desktop: 50px;
     @offset-mobil: 20px;
@@ -51,8 +51,10 @@
         position: absolute;
         bottom: 0;
         right: 0;
-        width: @chatbot-icon-size;
-        height: @chatbot-icon-size;
+        img {
+            width: @chatbot-icon-size;
+            height: @chatbot-icon-size;
+        }
     }
 
     &__text-panel {

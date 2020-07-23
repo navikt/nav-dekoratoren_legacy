@@ -18,6 +18,7 @@ import Skriveindikator from 'komponenter/chatbot/components/Skriveindikator';
 import { MessageWithIndicator } from 'komponenter/chatbot/components/ChatContainer';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import htmlReactParser from 'html-react-parser';
+import fridaIkon from 'komponenter/chatbot/assets/frida.svg';
 
 export type KommunikasjonProps = {
     beskjed: MessageWithIndicator;
@@ -100,6 +101,10 @@ export default class Kommunikasjon extends Component<
                 escape(content.optionChoice ? content.optionChoice : content)
             );
         }
+
+        const brukerBilde = this.hentBrukerbilde(userId);
+        console.log(brukerBilde);
+
         return (
             <Container>
                 {this.state.visBilde && (
@@ -113,10 +118,9 @@ export default class Kommunikasjon extends Component<
                     {this.state.side === 'VENSTRE' && (
                         <Venstre>
                             {this.state.visBilde && (
-                                <Brukerbilde
-                                    aria-hidden="true"
-                                    brukerBilde={this.hentBrukerbilde(userId)}
-                                />
+                                <Brukerbilde aria-hidden="true">
+                                    <Bilde src={brukerBilde || fridaIkon} />
+                                </Brukerbilde>
                             )}
                         </Venstre>
                     )}
@@ -178,8 +182,8 @@ export default class Kommunikasjon extends Component<
             const bruker = this.props.brukere.find(
                 (bruker: Bruker) => bruker.userId === brukerId
             );
-            if (bruker) {
-                return bruker.avatarUrl;
+            if (bruker && bruker.avatarUrl !== '') {
+                return bruker.avatarUrl.trim();
             } else {
                 return undefined;
             }

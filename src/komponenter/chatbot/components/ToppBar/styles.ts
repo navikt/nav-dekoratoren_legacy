@@ -35,7 +35,7 @@ export const Knapp = styled.button`
     background: none;
     border: none;
 
-    svg {
+    img {
         width: 20px;
         height: 20px;
 

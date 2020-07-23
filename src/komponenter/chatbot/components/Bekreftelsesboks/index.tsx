@@ -7,8 +7,9 @@ import {
     Tekst,
     Undertekst,
 } from 'komponenter/chatbot/components/Bekreftelsesboks/styles';
-import avsluttIkon from 'komponenter/chatbot/assets/avslutt.svg';
+import avsluttIkon from 'komponenter/chatbot/assets/avslutt-red.svg';
 import checkIkon from 'komponenter/chatbot/assets/check.svg';
+import advarselIkon from 'komponenter/chatbot/assets/advarsel.svg';
 import { Ikon } from 'komponenter/chatbot/components/Alertstripe/styles';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 
@@ -31,7 +32,9 @@ export default class Bekreftelsesboks extends Component<
     render() {
         return (
             <Boks type="advarsel" tabIndex={0}>
-                <Ikon type="advarsel" tabIndex={-1} aria-hidden={true} />
+                <Ikon tabIndex={-1} aria-hidden={true}>
+                    <Bilde src={advarselIkon} />
+                </Ikon>
                 <Tekst>
                     {this.props.tekst}
                     {this.props.undertekst && (

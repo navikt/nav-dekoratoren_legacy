@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import tema from 'komponenter/chatbot/tema/tema';
-import valgtIkon from 'komponenter/chatbot/assets/valgt.svg';
 import { ValgProps } from 'komponenter/chatbot/components/Flervalg/index';
 
 export const ValgContainer = styled.ul`
@@ -28,7 +27,7 @@ export const Valg = styled.li`
         width: 100%;
         text-align: left;
 
-        &:before {
+        .radio-button {
             content: '';
             position: absolute;
             height: 20px;
@@ -38,6 +37,9 @@ export const Valg = styled.li`
             top: 50%;
             transform: translateY(-50%);
             border-radius: 50%;
+            img {
+                transform: translateY(-2px);
+            }
         }
 
         &:hover {
@@ -78,31 +80,27 @@ export const Valg = styled.li`
         ${(props: ValgProps) =>
             props.valgt &&
             css`
-            border-color: ${tema.farger.valgtInteraksjon};
-            background: ${tema.farger.valgtInteraksjon};
-            color: #000;
-    
-            &:before {
-                border-color: ${tema.farger.interaksjon};
-                background: transparent url('data:image/svg+xml;base64, ${window.btoa(
-                    valgtIkon
-                )}') no-repeat center center;
-            }
-            
-            &:hover {
-                box-shadow: none;
-                color: #000;
-                cursor: auto;
                 border-color: ${tema.farger.valgtInteraksjon};
-                
-                &:before{
-                  border-color: ${tema.farger.interaksjon};
-                  background: transparent url('data:image/svg+xml;base64, ${window.btoa(
-                      valgtIkon
-                  )}') no-repeat center center;
+                background: ${tema.farger.valgtInteraksjon};
+                color: #000;
+
+                &:before {
+                    border-color: ${tema.farger.interaksjon};
+                    background: transparent;
                 }
-            }
-        `}
+
+                &:hover {
+                    box-shadow: none;
+                    color: #000;
+                    cursor: auto;
+                    border-color: ${tema.farger.valgtInteraksjon};
+
+                    &:before {
+                        border-color: ${tema.farger.interaksjon};
+                        background: transparent;
+                    }
+                }
+            `}
     }
 `;
 

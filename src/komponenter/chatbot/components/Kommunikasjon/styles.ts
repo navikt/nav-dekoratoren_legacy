@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import fridaIkon from 'komponenter/chatbot/assets/frida.svg';
 import tema from 'komponenter/chatbot/tema/tema';
 import { KommunikasjonState } from 'komponenter/chatbot/components/Kommunikasjon/index';
 
@@ -28,12 +27,7 @@ export const Hoyre = styled.div`
 export const Brukerbilde = styled.div`
     width: 50px;
     height: 50px;
-    ${(props: { brukerBilde: string | undefined }) =>
-        props.brukerBilde
-            ? `background: transparent url('${props.brukerBilde.trim()}') no-repeat center center`
-            : `background: transparent url('data:image/svg+xml;base64, ${window.btoa(
-                  fridaIkon
-              )}') no-repeat center center`};
+    background: transparent;
 `;
 
 export const Snakkeboble = styled.div`

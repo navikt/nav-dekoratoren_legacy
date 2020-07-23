@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { openChatbot, setCallbackOnChatbotOpen } from './ChatbotUtils';
 import { Normaltekst } from 'nav-frontend-typografi';
-import Chat from '../../chatbot';
+import Chatbot from '../../chatbot';
 import './ChatbotWrapper.less';
 
 const cssPrefix = 'chatbot-wrapper';
@@ -13,6 +13,7 @@ type Props = {
     configId?: string;
 };
 
+// TODO: legg all funksjonaliteten inn i chatbot-koden
 export const ChatbotWrapper = ({
     customerKey = '41155',
     queueKey = 'Q_CHAT_BOT',
@@ -91,7 +92,7 @@ export const ChatbotWrapper = ({
                         {'Chatbot Frida'}
                     </Normaltekst>
                 </div>
-                <Chat
+                <Chatbot
                     customerKey={customerKey}
                     queueKey={queueKey}
                     configId={configId}

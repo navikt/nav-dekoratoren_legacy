@@ -23,6 +23,9 @@ import {
     SessionCreateResponse,
 } from 'komponenter/chatbot/api/Sessions';
 import moment from 'moment';
+import fridaIkon from 'komponenter/chatbot/assets/frida.svg';
+import defaultIkon from 'komponenter/chatbot/assets/default.svg';
+import { Bilde } from 'komponenter/common/bilde/Bilde';
 
 export type ChatContainerState = {
     erApen: boolean;
@@ -181,7 +184,15 @@ export default class ChatContainer extends Component<
                                 : `Samtalevindu: ${this.state.navn}`
                         }
                         lang={this.state.erApen ? undefined : 'no'}
-                    />
+                    >
+                        <Bilde
+                            src={
+                                this.props.queueKey === 'Q_CHAT_BOT'
+                                    ? fridaIkon
+                                    : defaultIkon
+                            }
+                        />
+                    </FridaKnapp>
                 )}
                 {this.state.erApen && (
                     <ToppBar

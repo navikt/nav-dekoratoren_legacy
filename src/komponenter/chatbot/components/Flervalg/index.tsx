@@ -6,6 +6,8 @@ import {
     ValgContainer,
 } from 'komponenter/chatbot/components/Flervalg/styles';
 import { Message } from 'komponenter/chatbot/api/Sessions';
+import valgtIkon from 'komponenter/chatbot/assets/valgt.svg';
+import { Bilde } from 'komponenter/common/bilde/Bilde';
 
 type FlervalgProps = {
     beskjed: Message;
@@ -62,6 +64,9 @@ export default class Flervalg extends Component<FlervalgProps, FlervalgState> {
                         }}
                         tabIndex={0}
                     >
+                        <span className={'radio-button'}>
+                            {_h.valgt && <Bilde src={valgtIkon} />}
+                        </span>
                         {_h.tekst}
                     </button>
                 </Valg>

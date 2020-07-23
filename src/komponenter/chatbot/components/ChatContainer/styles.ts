@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components';
 import tema from 'komponenter/chatbot/tema/tema';
-import fridaIkon from 'komponenter/chatbot/assets/frida.svg';
-import defaultIkon from 'komponenter/chatbot/assets/default.svg';
 import { liten } from 'komponenter/chatbot/tema/mediaqueries';
 
 interface Props {
@@ -16,16 +14,7 @@ export const Container = styled.div`
     position: fixed;
     bottom: 50px;
     right: 50px;
-    background: ${(props: Props) =>
-        props.erApen
-            ? '#fff'
-            : props.queueKey === 'Q_CHAT_BOT'
-            ? `transparent url('data:image/svg+xml;base64,${window.btoa(
-                  fridaIkon
-              )}') no-repeat center center`
-            : `transparent url('data:image/svg+xml;base64,${window.btoa(
-                  defaultIkon
-              )}') no-repeat center center`};
+    background: ${(props: Props) => (props.erApen ? '#fff' : 'transparent')};
     background-size: 100%;
     transition: all 300ms cubic-bezier(0.86, 0, 0.07, 1);
     display: flex;

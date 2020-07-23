@@ -1,7 +1,7 @@
 // Obs: Dette classname'et genereres av styledcomponents i chatbot'en
-// Denne er gyldig for chatbot v.1.2.2
-const openButtonClassname = 'sc-eqIVtm';
-export const chatbotClassname = 'gxKraP';
+// Denne er gyldig for chatbot v.1.2.3-beta
+const openButtonClassname = 'gcXwBG';
+export const chatbotClassname = 'bLeUHh';
 
 const getButtonFromClassname = (className: string, index = 0) => {
     const buttons = document.getElementsByClassName(className);
