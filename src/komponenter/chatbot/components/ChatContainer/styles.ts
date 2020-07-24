@@ -17,7 +17,6 @@ export const Container = styled.div`
     width: ${(props: Props) => (props.erApen ? tema.bredde : '100%')};
     height: ${(props: Props) => (props.erApen ? tema.hoyde : '100%')};
     border-radius: ${(props: Props) => (props.erApen ? '0' : '50%')};
-    position: relative;
     background: ${(props: Props) => (props.erApen ? '#fff' : 'transparent')};
     display: flex;
     flex-direction: column;

@@ -133,7 +133,6 @@ export default class ChatContainer extends Component<
                     .reverse()
                     .find((_historie: any) => _historie.role === 1)?.id || 0,
         };
-        console.log(this.state);
 
         this.start = this.start.bind(this);
         this.apne = this.apne.bind(this);
@@ -171,7 +170,7 @@ export default class ChatContainer extends Component<
                 feil: true,
             });
         } else if (this.state.erApen) {
-            this.start();
+            this.start(false, true);
         }
     }
 
@@ -300,7 +299,7 @@ export default class ChatContainer extends Component<
                         });
                     }
                 } else {
-                    // Har hentet historie fra cookies
+                    // Har hentet historie fra cache
                     for (const historie of this.state.historie) {
                         this.handterMelding({
                             ...historie,
