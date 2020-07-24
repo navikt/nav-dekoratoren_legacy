@@ -133,6 +133,7 @@ export default class ChatContainer extends Component<
                     .reverse()
                     .find((_historie: any) => _historie.role === 1)?.id || 0,
         };
+        console.log(this.state);
 
         this.start = this.start.bind(this);
         this.apne = this.apne.bind(this);
