@@ -30,7 +30,7 @@ const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
 
     return (
         <div>
-            <Knapp onClick={userClosedFeedback}>
+            <Knapp onClick={userClosedFeedback} htmlType="button">
                 <Tekst id="avbryt"/>
             </Knapp>
         </div>
