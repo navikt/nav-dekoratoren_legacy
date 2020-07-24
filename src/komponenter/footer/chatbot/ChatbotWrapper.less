@@ -1,94 +1,17 @@
 @import (reference) '../../../styling-variabler.less';
 
-@chatbot-icon-size: 68px;
+.chatbot-dock {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 68px;
+}
 
-.chatbot-wrapper {
-    // Obs: Dette classname'et genereres av styledcomponents i chatbot'en
-    // Denne er gyldig for chatbot v.1.2.3-beta
-    @chatbot-classname: gxPaZj;
-
-    @offset-desktop: 50px;
-    @offset-mobil: 20px;
-    @text-width: 126px;
-    @text-height: 48px;
-    @text-offset: (@chatbot-icon-size - @text-height) / 2;
-
+.chatbot-container {
     position: fixed;
-    bottom: @offset-desktop;
-    z-index: 9998;
-    height: @chatbot-icon-size;
-    pointer-events: none;
-    box-sizing: content-box;
+    bottom: 50px;
 
     @media (max-width: @mobilMaxWidth) {
-        bottom: @offset-mobil;
-    }
-
-    &__visual {
-        position: relative;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        height: @chatbot-icon-size;
-        pointer-events: auto;
-
-        &:hover {
-            .chatbot-wrapper__text-panel {
-                background-color: @navDypBla;
-            }
-
-            .chatbot-wrapper__text {
-                color: @white;
-            }
-
-            .@{chatbot-classname} {
-                transform: scale(1.25);
-            }
-        }
-    }
-
-    .@{chatbot-classname} {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        img {
-            width: @chatbot-icon-size;
-            height: @chatbot-icon-size;
-        }
-    }
-
-    &__text-panel {
-        position: relative;
-
-        width: @chatbot-icon-size + @text-width;
-        height: @text-height;
-
-        border-radius: @text-height / 2;
-
-        overflow: hidden;
-        box-sizing: border-box;
-
-        display: flex;
-        align-items: center;
-        padding-left: 20px;
-
-        background-color: white;
-        box-shadow: inset 0 0 0 2px @navGra20;
-
-        transition-property: width, padding, box-shadow;
-        transition-duration: 0.5s;
-        transition-timing-function: ease-in;
-
-        &--open {
-            width: 0;
-            padding: 0;
-            box-shadow: none;
-            z-index: auto;
-        }
-    }
-
-    &__text {
-        color: @navDypBla;
-        white-space: nowrap;
+        bottom: 20px;
     }
 }

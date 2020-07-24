@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { openChatbot, setCallbackOnChatbotOpen } from './ChatbotUtils';
-import { Normaltekst } from 'nav-frontend-typografi';
-import Chatbot from '../../chatbot';
-import './ChatbotWrapper.less';
+import React, { useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { useCookies } from 'react-cookie';
-
-const cssPrefix = 'chatbot-wrapper';
+import { useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
+import Chat from 'komponenter/chatbot';
+import { chatCookieKeys } from 'komponenter/chatbot/components/ChatContainer';
+import './ChatbotWrapper.less';
 
 type Props = {
     customerKey?: string;
@@ -14,29 +13,28 @@ type Props = {
     configId?: string;
 };
 
-// TODO: legg all funksjonaliteten inn i chatbot-koden
 export const ChatbotWrapper = ({
     customerKey = '41155',
     queueKey = 'Q_CHAT_BOT',
     configId = '599f9e7c-7f6b-4569-81a1-27202c419953',
 }: Props) => {
+    const { PARAMS } = useSelector((state: AppState) => state.environment);
     const [cookies] = useCookies();
-    const isOpenFromStorage = cookies['chatbot-frida_apen'];
-    const [chatbotOpened, setChatbotOpened] = useState(
-        isOpenFromStorage === 'true'
-    );
-    const chatbotRef = useRef<HTMLDivElement>(null);
-    const chatbotDock = document.getElementById('chatbot-dock');
+    const [mountChatbot, setMountChatbot] = useState(false);
+
+    const containerRef = useRef<HTMLDivElement>(null);
+    const dockRef = useRef<HTMLDivElement>(null);
 
     const dockIfNearBottom = (chatbotFixedOffset: number) => () => {
-        const chatbotElement = chatbotRef.current;
-        if (!chatbotElement || !chatbotDock) {
+        const chatbotElement = containerRef.current;
+        const dockElement = dockRef.current;
+        if (!chatbotElement || !dockElement) {
             return;
         }
 
         const scrollOffsetBottom = window.pageYOffset + window.innerHeight;
         const dockOffset =
-            chatbotDock.getBoundingClientRect().top + window.pageYOffset;
+            dockElement.getBoundingClientRect().top + window.pageYOffset;
 
         if (
             scrollOffsetBottom - chatbotElement.scrollHeight >
@@ -49,14 +47,12 @@ export const ChatbotWrapper = ({
     };
 
     useEffect(() => {
-        if (!chatbotOpened) {
-            setCallbackOnChatbotOpen(() => setChatbotOpened(true));
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [chatbotOpened]);
+        const chatbotSessionActive = !!cookies[chatCookieKeys.CONFIG];
+        setMountChatbot(chatbotSessionActive || PARAMS.CHATBOT);
+    }, []);
 
     useEffect(() => {
-        const chatbotElement = chatbotRef.current;
+        const chatbotElement = containerRef.current;
         if (!chatbotElement) {
             return;
         }
@@ -73,34 +69,17 @@ export const ChatbotWrapper = ({
             window.removeEventListener('scroll', handler);
             window.removeEventListener('resize', handler);
         };
-    }, []);
+    }, [mountChatbot]);
 
-    if (!chatbotDock) {
-        return null;
-    }
-
-    return createPortal(
-        <div className={cssPrefix} ref={chatbotRef}>
-            <div
-                className={`${cssPrefix}__visual`}
-                onClick={() => openChatbot(setChatbotOpened)}
-            >
-                <div
-                    className={`${cssPrefix}__text-panel ${
-                        chatbotOpened ? `${cssPrefix}__text-panel--open` : ''
-                    }`}
-                >
-                    <Normaltekst className={`${cssPrefix}__text`}>
-                        {'Chatbot Frida'}
-                    </Normaltekst>
-                </div>
-                <Chatbot
+    return mountChatbot ? (
+        <div className={'chatbot-dock'} ref={dockRef}>
+            <div className={'chatbot-container'} ref={containerRef}>
+                <Chat
                     customerKey={customerKey}
                     queueKey={queueKey}
                     configId={configId}
                 />
             </div>
-        </div>,
-        chatbotDock
-    );
+        </div>
+    ) : null;
 };

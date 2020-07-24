@@ -10,7 +10,7 @@ import rating3 from 'komponenter/chatbot/assets/rating-3.svg';
 import rating4 from 'komponenter/chatbot/assets/rating-4.svg';
 import rating5 from 'komponenter/chatbot/assets/rating-5.svg';
 import { loadJSON } from 'komponenter/chatbot/services/cookiesService';
-import { cookieKeys } from 'komponenter/chatbot/components/ChatContainer';
+import { chatCookieKeys } from 'komponenter/chatbot/components/ChatContainer';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 
 type EvalueringProps = {
@@ -25,6 +25,7 @@ export type EvalueringState = {
     valgt: boolean;
     valgtSvar: number;
 };
+
 export default class Evaluering extends Component<
     EvalueringProps,
     EvalueringState
@@ -34,8 +35,8 @@ export default class Evaluering extends Component<
     constructor(props: EvalueringProps) {
         super(props);
         this.state = {
-            valgt: !!loadJSON(cookieKeys.EVAL),
-            valgtSvar: loadJSON(cookieKeys.EVAL),
+            valgt: !!loadJSON(chatCookieKeys.EVAL),
+            valgtSvar: loadJSON(chatCookieKeys.EVAL),
         };
     }
 
@@ -43,8 +44,8 @@ export default class Evaluering extends Component<
         this.checkLoop = setInterval(() => {
             if (!this.state.valgt && !this.state.valgtSvar) {
                 this.setState({
-                    valgt: !!loadJSON(cookieKeys.EVAL),
-                    valgtSvar: loadJSON(cookieKeys.EVAL),
+                    valgt: !!loadJSON(chatCookieKeys.EVAL),
+                    valgtSvar: loadJSON(chatCookieKeys.EVAL),
                 });
             }
         }, 100);

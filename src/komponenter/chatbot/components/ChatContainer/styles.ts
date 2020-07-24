@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import tema from 'komponenter/chatbot/tema/tema';
 import { liten } from 'komponenter/chatbot/tema/mediaqueries';
 
@@ -7,16 +7,18 @@ interface Props {
     queueKey: string;
 }
 
+const ikonSize = 68;
+const ikonSizePx = `${ikonSize}px`;
+const tekstHeightPx = `${Math.floor(ikonSize * 0.67)}px`;
+const navGra20 = '#c6c2bf';
+const navDypBla = '#005B82';
+
 export const Container = styled.div`
-    width: ${(props: Props) => (props.erApen ? tema.bredde : '68px')};
-    height: ${(props: Props) => (props.erApen ? tema.hoyde : '68px')};
+    width: ${(props: Props) => (props.erApen ? tema.bredde : '100%')};
+    height: ${(props: Props) => (props.erApen ? tema.hoyde : '100%')};
     border-radius: ${(props: Props) => (props.erApen ? '0' : '50%')};
-    position: fixed;
-    bottom: 50px;
-    right: 50px;
+    position: relative;
     background: ${(props: Props) => (props.erApen ? '#fff' : 'transparent')};
-    background-size: 100%;
-    transition: all 300ms cubic-bezier(0.86, 0, 0.07, 1);
     display: flex;
     flex-direction: column;
     border: 1px solid
@@ -25,19 +27,9 @@ export const Container = styled.div`
         rgba(0, 0, 0, ${(props: Props) => (props.erApen ? '.16' : '0')});
     z-index: 9999;
 
-    ${(props: Props) =>
-        !props.erApen &&
-        css`
-            transform: translatey(0);
-
-            &:hover {
-                transform: translatey(-10px);
-            }
-        `}
-
     ${liten} {
-        width: ${(props: Props) => (props.erApen ? 'auto' : '68px')};
-        height: ${(props: Props) => (props.erApen ? 'auto' : '68px')};
+        width: ${(props: Props) => (props.erApen ? 'auto' : ikonSizePx)};
+        height: ${(props: Props) => (props.erApen ? 'auto' : ikonSizePx)};
         border-radius: ${(props: Props) => (props.erApen ? '0' : '50%')};
         top: ${(props: Props) => (props.erApen ? '0' : undefined)};
         right: ${(props: Props) => (props.erApen ? '0' : '20px')};
@@ -48,10 +40,54 @@ export const Container = styled.div`
     }
 `;
 
-export const FridaKnapp = styled.button`
+export const FridaTekst = styled.span`
+    padding-left: calc(${tekstHeightPx} * 0.4);
+    padding-right: 10px;
     width: 100%;
-    height: 100%;
+
+    color: ${navDypBla};
+    white-space: nowrap;
+`;
+
+export const FridaIkon = styled.span`
+    border-radius: ${ikonSizePx};
+    transition: transform 100ms ease-out;
+
+    img {
+        width: ${ikonSizePx};
+        height: ${ikonSizePx};
+    }
+`;
+
+export const FridaKnapp = styled.button`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: ${tekstHeightPx};
     cursor: pointer;
-    background: none;
+    background-color: white;
     border: none;
+    box-shadow: inset 0 0 0 2px ${navGra20};
+    border-radius: ${tekstHeightPx};
+    padding: 0;
+
+    &:hover {
+        background-color: ${navDypBla};
+
+        ${FridaTekst} {
+            color: white;
+        }
+
+        ${FridaIkon} {
+            transform: scale(1.1);
+        }
+    }
+
+    &:focus {
+        box-shadow: inset 0 0 0 3px ${navDypBla} !important;
+
+        ${FridaIkon} {
+            box-shadow: 0 0 0 3px ${navDypBla};
+        }
+    }
 `;

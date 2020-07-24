@@ -103,7 +103,6 @@ export default class Kommunikasjon extends Component<
         }
 
         const brukerBilde = this.hentBrukerbilde(userId);
-        console.log(brukerBilde);
 
         return (
             <Container>

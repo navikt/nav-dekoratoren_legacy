@@ -1,5 +1,4 @@
 @import (reference) '../../../../styling-variabler';
-@import (reference) '../../chatbot/ChatbotWrapper';
 
 .menylinje-bottom {
     display: flex;
@@ -18,19 +17,15 @@
     max-width: 1344px;
 
     .top-row {
+        position: relative;
         display: flex;
         justify-content: space-between;
+        align-items: flex-start;
 
         .nav-logo-lenke {
             width: 68px;
             padding: 0.25rem;
             margin-bottom: 0.25rem;
-        }
-
-        #chatbot-dock {
-            display: flex;
-            justify-content: flex-end;
-            min-height: @chatbot-icon-size;
         }
     }
 

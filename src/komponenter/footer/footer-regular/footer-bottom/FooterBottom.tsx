@@ -15,6 +15,7 @@ import { LinkLoader } from '../../../common/content-loaders/LinkLoader';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import './FooterBottom.less';
 import Logo from 'ikoner/meny/nav-logo-black.svg';
+import { ChatbotWrapper } from 'komponenter/footer/chatbot/ChatbotWrapper';
 
 const FooterBottom = () => {
     const cls = BEMHelper('footer-bottom-content');
@@ -63,7 +64,7 @@ const FooterBottom = () => {
                         }}
                         ikon={Logo}
                     />
-                    <div id={'chatbot-dock'} />
+                    <ChatbotWrapper />
                 </div>
                 <div className={cls.element('bottom-lenker')}>
                     <div>

@@ -26,6 +26,9 @@ import moment from 'moment';
 import fridaIkon from 'komponenter/chatbot/assets/frida.svg';
 import defaultIkon from 'komponenter/chatbot/assets/default.svg';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
+import { Normaltekst } from 'nav-frontend-typografi';
+import { FridaTekst } from 'komponenter/chatbot/components/ChatContainer/styles';
+import { FridaIkon } from 'komponenter/chatbot/components/ChatContainer/styles';
 
 export type ChatContainerState = {
     erApen: boolean;
@@ -69,7 +72,7 @@ export interface ShowIndicator {
 
 export interface MessageWithIndicator extends Message, ShowIndicator {}
 
-export const cookieKeys = {
+export const chatCookieKeys = {
     CONFIG: 'chatbot-frida_config',
     HISTORIE: 'chatbot-frida_historie',
     APEN: 'chatbot-frida_apen',
@@ -78,7 +81,7 @@ export const cookieKeys = {
 };
 
 const clearCookies = () => {
-    Object.values(cookieKeys).forEach(deleteJSON);
+    Object.values(chatCookieKeys).forEach(deleteJSON);
 };
 
 export default class ChatContainer extends Component<
@@ -97,15 +100,15 @@ export default class ChatContainer extends Component<
         super(props);
         this.state = {
             ...defaultState,
-            erApen: loadJSON(cookieKeys.APEN) || false,
-            historie: loadJSON(cookieKeys.HISTORIE) || [],
-            config: loadJSON(cookieKeys.CONFIG),
-            sisteMeldingId: loadJSON(cookieKeys.HISTORIE)
-                ? loadJSON(cookieKeys.HISTORIE)
+            erApen: loadJSON(chatCookieKeys.APEN) || false,
+            historie: loadJSON(chatCookieKeys.HISTORIE) || [],
+            config: loadJSON(chatCookieKeys.CONFIG),
+            sisteMeldingId: loadJSON(chatCookieKeys.HISTORIE)
+                ? loadJSON(chatCookieKeys.HISTORIE)
                       .slice()
                       .reverse()
                       .find((_historie: any) => _historie.role === 1)
-                    ? loadJSON(cookieKeys.HISTORIE)
+                    ? loadJSON(chatCookieKeys.HISTORIE)
                           .slice()
                           .reverse()
                           .find((_historie: any) => _historie.role === 1).id
@@ -177,21 +180,22 @@ export default class ChatContainer extends Component<
                 {!this.state.erApen && (
                     <FridaKnapp
                         onClick={this.apne}
-                        tabIndex={this.state.erApen ? -1 : 0}
-                        aria-label={
-                            this.state.erApen
-                                ? undefined
-                                : `Samtalevindu: ${this.state.navn}`
-                        }
-                        lang={this.state.erApen ? undefined : 'no'}
+                        tabIndex={0}
+                        aria-label={`Samtalevindu: ${this.state.navn}`}
+                        lang={'no'}
                     >
-                        <Bilde
-                            src={
-                                this.props.queueKey === 'Q_CHAT_BOT'
-                                    ? fridaIkon
-                                    : defaultIkon
-                            }
-                        />
+                        <FridaTekst>
+                            <Normaltekst>{'Chatbot Frida'}</Normaltekst>
+                        </FridaTekst>
+                        <FridaIkon>
+                            <Bilde
+                                src={
+                                    this.props.queueKey === 'Q_CHAT_BOT'
+                                        ? fridaIkon
+                                        : defaultIkon
+                                }
+                            />
+                        </FridaIkon>
                     </FridaKnapp>
                 )}
                 {this.state.erApen && (
@@ -247,8 +251,8 @@ export default class ChatContainer extends Component<
                 await this.setState({
                     ...defaultState,
                     erApen: beholdApen,
-                    historie: loadJSON(cookieKeys.HISTORIE) || [],
-                    config: loadJSON(cookieKeys.CONFIG),
+                    historie: loadJSON(chatCookieKeys.HISTORIE) || [],
+                    config: loadJSON(chatCookieKeys.CONFIG),
                 });
             }
 
@@ -311,7 +315,7 @@ export default class ChatContainer extends Component<
     }
 
     async apne() {
-        saveJSON(cookieKeys.APEN, true);
+        saveJSON(chatCookieKeys.APEN, true);
         await this.setState({
             erApen: true,
         });
@@ -320,7 +324,7 @@ export default class ChatContainer extends Component<
 
     async lukk() {
         await this.setState({ erApen: false });
-        saveJSON(cookieKeys.APEN, false);
+        saveJSON(chatCookieKeys.APEN, false);
     }
 
     omstart() {
@@ -336,9 +340,9 @@ export default class ChatContainer extends Component<
         clearInterval(this.hentHistorieIntervall);
         clearInterval(this.lesIkkeLastethistorieIntervall);
         clearInterval(this.leggTilLenkeHandlerIntervall);
-        const apen = loadJSON(cookieKeys.APEN) === true;
+        const apen = loadJSON(chatCookieKeys.APEN) === true;
         clearCookies();
-        saveJSON(cookieKeys.APEN, apen);
+        saveJSON(chatCookieKeys.APEN, apen);
         this.start(true, apen);
     }
 
@@ -376,8 +380,11 @@ export default class ChatContainer extends Component<
                 this.state.config!.requestId
             }`
         );
-        if (!loadJSON(cookieKeys.MAILTIMEOUT)) {
-            saveJSON(cookieKeys.MAILTIMEOUT, moment().add(4.5, 'm').valueOf());
+        if (!loadJSON(chatCookieKeys.MAILTIMEOUT)) {
+            saveJSON(
+                chatCookieKeys.MAILTIMEOUT,
+                moment().add(4.5, 'm').valueOf()
+            );
         }
         this.confirmCancel();
     }
@@ -416,7 +423,7 @@ export default class ChatContainer extends Component<
             alive: moment(new Date()).add(2, 'hours').valueOf(),
         };
 
-        saveJSON(cookieKeys.CONFIG, data);
+        saveJSON(chatCookieKeys.CONFIG, data);
         this.setState({
             config: data,
         });
@@ -592,7 +599,7 @@ export default class ChatContainer extends Component<
             });
         }
 
-        saveJSON(cookieKeys.HISTORIE, this.state.historie);
+        saveJSON(chatCookieKeys.HISTORIE, this.state.historie);
     }
 
     lesIkkeLastethistorie() {
@@ -671,7 +678,7 @@ export default class ChatContainer extends Component<
                 }
             },
             () => {
-                saveJSON(cookieKeys.HISTORIE, this.state.historie);
+                saveJSON(chatCookieKeys.HISTORIE, this.state.historie);
             }
         );
     }

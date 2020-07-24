@@ -14,6 +14,7 @@ import LenkeMedIkon from '../common/lenke-med-ikon/LenkeMedIkon';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 
 import './FooterSimple.less';
+import { ChatbotWrapper } from 'komponenter/footer/chatbot/ChatbotWrapper';
 
 const cls = BEMHelper('simple-footer');
 
@@ -46,6 +47,7 @@ const FooterSimple = () => {
         setIsOpen(false);
     };
 
+    // TODO: tilpass Chatbot plassering for simpleheader
     return (
         <Fragment>
             <div className={cls.element('container')}>
@@ -64,7 +66,7 @@ const FooterSimple = () => {
                                 />
                             }
                         />
-                        <div id={'chatbot-dock'} />
+                        <ChatbotWrapper />
                     </div>
                     {isOpen && (
                         <DelSkjermModal isOpen={isOpen} onClose={closeModal} />

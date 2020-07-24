@@ -26,7 +26,7 @@ import {
 import { Message, SurveySend } from 'komponenter/chatbot/api/Sessions';
 import {
     MessageWithIndicator,
-    cookieKeys,
+    chatCookieKeys,
 } from 'komponenter/chatbot/components/ChatContainer';
 import EmailFeedback from 'komponenter/chatbot/components/EmailFeedback';
 import moment from 'moment';
@@ -120,12 +120,12 @@ export default class Interaksjonsvindu extends Component<
                     {
                         tidIgjen: {
                             formatert: moment().to(
-                                loadJSON(cookieKeys.MAILTIMEOUT),
+                                loadJSON(chatCookieKeys.MAILTIMEOUT),
                                 true
                             ),
-                            tid: moment(loadJSON(cookieKeys.MAILTIMEOUT)).diff(
-                                moment()
-                            ),
+                            tid: moment(
+                                loadJSON(chatCookieKeys.MAILTIMEOUT)
+                            ).diff(moment()),
                         },
                     },
                     () => {
@@ -133,7 +133,7 @@ export default class Interaksjonsvindu extends Component<
                             this.state.tidIgjen &&
                             this.state.tidIgjen.tid <= 0
                         ) {
-                            saveJSON(cookieKeys.APEN, false);
+                            saveJSON(chatCookieKeys.APEN, false);
                             this.props.lukkOgAvslutt();
                         }
                     }
@@ -274,7 +274,7 @@ export default class Interaksjonsvindu extends Component<
                                         Tilbakemelding
                                     </AlertstripeHeader>
                                     <AlertstripeForklarendeTekst>
-                                        {loadJSON(cookieKeys.EVAL)
+                                        {loadJSON(chatCookieKeys.EVAL)
                                             ? 'Takk for din tilbakemelding!'
                                             : this.props.evaluationMessage
                                             ? this.props.evaluationMessage
@@ -504,7 +504,7 @@ export default class Interaksjonsvindu extends Component<
     }
 
     async opprettEvaluering() {
-        if (!loadJSON(cookieKeys.EVAL)) {
+        if (!loadJSON(chatCookieKeys.EVAL)) {
             const evaluering = await axios.post(
                 `${this.props.baseUrl}/sessions/${this.props.config.sessionId}/survey`,
                 {
@@ -524,7 +524,7 @@ export default class Interaksjonsvindu extends Component<
     }
 
     async evaluer(evaluering: number) {
-        if (!loadJSON(cookieKeys.EVAL)) {
+        if (!loadJSON(chatCookieKeys.EVAL)) {
             try {
                 await axios.post(
                     `${this.props.baseUrl}/sessions/${this.props.config.sessionId}/survey`,
@@ -545,7 +545,7 @@ export default class Interaksjonsvindu extends Component<
                     feil: true,
                 });
             }
-            saveJSON(cookieKeys.EVAL, evaluering);
+            saveJSON(chatCookieKeys.EVAL, evaluering);
             const max = Number.MAX_SAFE_INTEGER - 1000;
             const min = Number.MAX_SAFE_INTEGER - 100000;
             this.props.handterMelding(
