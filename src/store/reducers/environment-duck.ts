@@ -20,6 +20,7 @@ export interface EnvironmentState {
         SIMPLE_FOOTER: boolean;
         REDIRECT_TO_APP: boolean;
         LEVEL: string;
+        FEEDBACK: boolean;
         CHATBOT: boolean;
     };
 
@@ -47,6 +48,7 @@ export const initialState: EnvironmentState = {
         SIMPLE_FOOTER: false,
         REDIRECT_TO_APP: false,
         LEVEL: 'string',
+        FEEDBACK: false,
         CHATBOT: false,
     },
 
