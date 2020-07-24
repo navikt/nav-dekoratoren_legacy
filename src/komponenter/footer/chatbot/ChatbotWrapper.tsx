@@ -7,6 +7,9 @@ import Chat from 'komponenter/chatbot';
 import { chatStateKeys } from 'komponenter/chatbot/components/ChatContainer';
 import './ChatbotWrapper.less';
 
+const oldChatbotAlreadyMounted = () =>
+    document.getElementsByClassName('gxKraP').length > 0;
+
 type Props = {
     customerKey?: string;
     queueKey?: string;
@@ -48,10 +51,16 @@ export const ChatbotWrapper = ({
 
     useEffect(() => {
         const chatbotSessionActive = !!cookies[chatStateKeys.CONFIG];
-        setMountChatbot(chatbotSessionActive || PARAMS.CHATBOT);
+        setMountChatbot(
+            !oldChatbotAlreadyMounted() &&
+                (chatbotSessionActive || PARAMS.CHATBOT)
+        );
     }, []);
 
     useEffect(() => {
+        if (!mountChatbot) {
+            return;
+        }
         const chatbotElement = containerRef.current;
         if (!chatbotElement) {
             return;
