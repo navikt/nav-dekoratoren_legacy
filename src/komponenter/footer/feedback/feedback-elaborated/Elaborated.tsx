@@ -47,7 +47,7 @@ const Elaborated = () => {
 
                             <RadioGruppe feil={radiobuttonErrorMessage}>
                                 <Radio
-                                    label={'Teknisk feil'}
+                                    label={<Tekst id="teknisk-feil"/>}
                                     name="feil"
                                     value="teknisk feil"
                                     onChange={(e) =>
@@ -55,7 +55,7 @@ const Elaborated = () => {
                                     }
                                 />
                                 <Radio
-                                    label={'Feil informasjon'}
+                                    label={<Tekst id="feil-informasjon"/>}
                                     name="feil"
                                     value="feil informasjon"
                                     onChange={(e) =>
@@ -63,9 +63,7 @@ const Elaborated = () => {
                                     }
                                 />
                                 <Radio
-                                    label={
-                                        'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel'
-                                    }
+                                    label={<Tekst id="skjermleser"/>}
                                     name="feil"
                                     value="skjermleser"
                                     onChange={(e) =>
@@ -73,7 +71,7 @@ const Elaborated = () => {
                                     }
                                 />
                                 <Radio
-                                    label={'Annet'}
+                                    label={<Tekst id="annet"/>}
                                     name="feil"
                                     value="annet"
                                     onChange={(e) =>

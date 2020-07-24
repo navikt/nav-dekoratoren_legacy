@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent, Fragment } from 'react';
+import React, { useState, ChangeEvent, Fragment } from 'react';
 import { Ingress, Element } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
@@ -59,22 +59,22 @@ const PartialNo = () => {
 
                             <CheckboxGruppe feil={radiobuttonErrorMessage}>
                                 <Checkbox
-                                    label={'Lite oversiktlig'}
+                                    label={<Tekst id="lite-oversiktlig"/>}
                                     value="Lite oversiktlig"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                                 <Checkbox
-                                    label={'Lite forståelig'}
+                                    label={<Tekst id="lite-forstaelig"/>}
                                     value="Lite forståelig"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                                 <Checkbox
-                                    label={'Lite relevant informasjon'}
+                                    label={<Tekst id="lite-relevant-info"/>}
                                     value="Lite relevant informasjon"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                                 <Checkbox
-                                    label={'Villedende'}
+                                    label={<Tekst id="villedende"/>}
                                     value="Villedende"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
