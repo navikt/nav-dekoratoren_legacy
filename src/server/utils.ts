@@ -40,7 +40,7 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
                 REDIRECT_TO_APP: !!req.query.redirectToApp,
                 LEVEL: (req.query.level || 'Level3') as string,
                 FEEDBACK: !(req.query.feedback === 'false'),
-                CHATBOT: req.query.chatbot === 'true'
+                CHATBOT: req.query.chatbot === 'true',
             },
         }),
         ...(cookies && {

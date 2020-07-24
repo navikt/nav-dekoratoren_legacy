@@ -5,8 +5,7 @@ const { logAmplitudeEvent } = verifyWindowObj()
     : () => null;
 
 function sendFeedbackReport(category: string): void {
-    logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, { svar: category })
-
-};
+    logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, { svar: category });
+}
 
 export default sendFeedbackReport;
