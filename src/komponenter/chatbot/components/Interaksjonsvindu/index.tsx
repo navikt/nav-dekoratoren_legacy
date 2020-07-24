@@ -20,13 +20,13 @@ import Alertstripe from 'komponenter/chatbot/components/Alertstripe';
 import { ConnectionConfig } from 'komponenter/chatbot/index';
 import Evaluering from 'komponenter/chatbot/components/Evaluering';
 import {
-    loadJSON,
-    saveJSON,
+    getCookie,
+    setCookie,
 } from 'komponenter/chatbot/services/cookiesService';
 import { Message, SurveySend } from 'komponenter/chatbot/api/Sessions';
 import {
     MessageWithIndicator,
-    chatCookieKeys,
+    chatStateKeys,
 } from 'komponenter/chatbot/components/ChatContainer';
 import EmailFeedback from 'komponenter/chatbot/components/EmailFeedback';
 import moment from 'moment';
@@ -120,11 +120,11 @@ export default class Interaksjonsvindu extends Component<
                     {
                         tidIgjen: {
                             formatert: moment().to(
-                                loadJSON(chatCookieKeys.MAILTIMEOUT),
+                                getCookie(chatStateKeys.MAILTIMEOUT),
                                 true
                             ),
                             tid: moment(
-                                loadJSON(chatCookieKeys.MAILTIMEOUT)
+                                getCookie(chatStateKeys.MAILTIMEOUT)
                             ).diff(moment()),
                         },
                     },
@@ -133,7 +133,7 @@ export default class Interaksjonsvindu extends Component<
                             this.state.tidIgjen &&
                             this.state.tidIgjen.tid <= 0
                         ) {
-                            saveJSON(chatCookieKeys.APEN, false);
+                            setCookie(chatStateKeys.APEN, false);
                             this.props.lukkOgAvslutt();
                         }
                     }
@@ -274,7 +274,7 @@ export default class Interaksjonsvindu extends Component<
                                         Tilbakemelding
                                     </AlertstripeHeader>
                                     <AlertstripeForklarendeTekst>
-                                        {loadJSON(chatCookieKeys.EVAL)
+                                        {getCookie(chatStateKeys.EVAL)
                                             ? 'Takk for din tilbakemelding!'
                                             : this.props.evaluationMessage
                                             ? this.props.evaluationMessage
@@ -504,7 +504,7 @@ export default class Interaksjonsvindu extends Component<
     }
 
     async opprettEvaluering() {
-        if (!loadJSON(chatCookieKeys.EVAL)) {
+        if (!getCookie(chatStateKeys.EVAL)) {
             const evaluering = await axios.post(
                 `${this.props.baseUrl}/sessions/${this.props.config.sessionId}/survey`,
                 {
@@ -524,7 +524,7 @@ export default class Interaksjonsvindu extends Component<
     }
 
     async evaluer(evaluering: number) {
-        if (!loadJSON(chatCookieKeys.EVAL)) {
+        if (!getCookie(chatStateKeys.EVAL)) {
             try {
                 await axios.post(
                     `${this.props.baseUrl}/sessions/${this.props.config.sessionId}/survey`,
@@ -545,7 +545,7 @@ export default class Interaksjonsvindu extends Component<
                     feil: true,
                 });
             }
-            saveJSON(chatCookieKeys.EVAL, evaluering);
+            setCookie(chatStateKeys.EVAL, evaluering);
             const max = Number.MAX_SAFE_INTEGER - 1000;
             const min = Number.MAX_SAFE_INTEGER - 100000;
             this.props.handterMelding(

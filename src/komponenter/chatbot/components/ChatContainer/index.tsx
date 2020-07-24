@@ -12,9 +12,9 @@ import {
 import { ConnectionConfig } from 'komponenter/chatbot/index';
 import axios, { AxiosResponse } from 'axios';
 import {
-    deleteJSON,
-    loadJSON,
-    saveJSON,
+    deleteCookie,
+    getCookie,
+    setCookie,
 } from 'komponenter/chatbot/services/cookiesService';
 import {
     ConfigurationResponse,
@@ -29,6 +29,10 @@ import { Bilde } from 'komponenter/common/bilde/Bilde';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FridaTekst } from 'komponenter/chatbot/components/ChatContainer/styles';
 import { FridaIkon } from 'komponenter/chatbot/components/ChatContainer/styles';
+import hash from 'object-hash';
+import { getStorageItem } from 'komponenter/chatbot/services/sessionStorage';
+import { setStorageItem } from 'komponenter/chatbot/services/sessionStorage';
+import { removeStorageItem } from 'komponenter/chatbot/services/sessionStorage';
 
 export type ChatContainerState = {
     erApen: boolean;
@@ -72,7 +76,7 @@ export interface ShowIndicator {
 
 export interface MessageWithIndicator extends Message, ShowIndicator {}
 
-export const chatCookieKeys = {
+export const chatStateKeys = {
     CONFIG: 'chatbot-frida_config',
     HISTORIE: 'chatbot-frida_historie',
     APEN: 'chatbot-frida_apen',
@@ -80,8 +84,27 @@ export const chatCookieKeys = {
     MAILTIMEOUT: 'chatbot-frida_mail-timeout',
 };
 
-const clearCookies = () => {
-    Object.values(chatCookieKeys).forEach(deleteJSON);
+const clearState = () => {
+    Object.values(chatStateKeys).forEach(deleteCookie);
+    removeStorageItem(chatStateKeys.HISTORIE);
+};
+
+const setHistoryCache = (historie: MessageWithIndicator[]) => {
+    setStorageItem(chatStateKeys.HISTORIE, JSON.stringify(historie));
+    setCookie(chatStateKeys.HISTORIE, hash(historie));
+};
+
+const loadHistoryCache = () => {
+    const historie = getStorageItem(chatStateKeys.HISTORIE);
+    if (!historie) {
+        return null;
+    }
+    const historieParsed = JSON.parse(historie);
+    const historieHash = hash(historieParsed);
+    if (historieHash !== getCookie(chatStateKeys.HISTORIE)) {
+        return null;
+    }
+    return JSON.parse(historie);
 };
 
 export default class ChatContainer extends Component<
@@ -98,22 +121,17 @@ export default class ChatContainer extends Component<
 
     constructor(props: ConnectionConfig) {
         super(props);
+        const historie = loadHistoryCache() || [];
         this.state = {
             ...defaultState,
-            erApen: loadJSON(chatCookieKeys.APEN) || false,
-            historie: loadJSON(chatCookieKeys.HISTORIE) || [],
-            config: loadJSON(chatCookieKeys.CONFIG),
-            sisteMeldingId: loadJSON(chatCookieKeys.HISTORIE)
-                ? loadJSON(chatCookieKeys.HISTORIE)
-                      .slice()
-                      .reverse()
-                      .find((_historie: any) => _historie.role === 1)
-                    ? loadJSON(chatCookieKeys.HISTORIE)
-                          .slice()
-                          .reverse()
-                          .find((_historie: any) => _historie.role === 1).id
-                    : 0
-                : 0,
+            erApen: getCookie(chatStateKeys.APEN) || false,
+            historie: historie,
+            config: getCookie(chatStateKeys.CONFIG),
+            sisteMeldingId:
+                historie
+                    .slice()
+                    .reverse()
+                    .find((_historie: any) => _historie.role === 1)?.id || 0,
         };
 
         this.start = this.start.bind(this);
@@ -251,8 +269,8 @@ export default class ChatContainer extends Component<
                 await this.setState({
                     ...defaultState,
                     erApen: beholdApen,
-                    historie: loadJSON(chatCookieKeys.HISTORIE) || [],
-                    config: loadJSON(chatCookieKeys.CONFIG),
+                    historie: loadHistoryCache() || [],
+                    config: getCookie(chatStateKeys.CONFIG),
                 });
             }
 
@@ -315,7 +333,7 @@ export default class ChatContainer extends Component<
     }
 
     async apne() {
-        saveJSON(chatCookieKeys.APEN, true);
+        setCookie(chatStateKeys.APEN, true);
         await this.setState({
             erApen: true,
         });
@@ -324,7 +342,7 @@ export default class ChatContainer extends Component<
 
     async lukk() {
         await this.setState({ erApen: false });
-        saveJSON(chatCookieKeys.APEN, false);
+        setCookie(chatStateKeys.APEN, false);
     }
 
     omstart() {
@@ -340,9 +358,9 @@ export default class ChatContainer extends Component<
         clearInterval(this.hentHistorieIntervall);
         clearInterval(this.lesIkkeLastethistorieIntervall);
         clearInterval(this.leggTilLenkeHandlerIntervall);
-        const apen = loadJSON(chatCookieKeys.APEN) === true;
-        clearCookies();
-        saveJSON(chatCookieKeys.APEN, apen);
+        const apen = getCookie(chatStateKeys.APEN) === true;
+        clearState();
+        setCookie(chatStateKeys.APEN, apen);
         this.start(true, apen);
     }
 
@@ -380,9 +398,9 @@ export default class ChatContainer extends Component<
                 this.state.config!.requestId
             }`
         );
-        if (!loadJSON(chatCookieKeys.MAILTIMEOUT)) {
-            saveJSON(
-                chatCookieKeys.MAILTIMEOUT,
+        if (!getCookie(chatStateKeys.MAILTIMEOUT)) {
+            setCookie(
+                chatStateKeys.MAILTIMEOUT,
                 moment().add(4.5, 'm').valueOf()
             );
         }
@@ -396,7 +414,7 @@ export default class ChatContainer extends Component<
     }
 
     lukkOgAvslutt() {
-        clearCookies();
+        clearState();
         this.setState({
             ...defaultState,
             erApen: false,
@@ -423,7 +441,7 @@ export default class ChatContainer extends Component<
             alive: moment(new Date()).add(2, 'hours').valueOf(),
         };
 
-        saveJSON(chatCookieKeys.CONFIG, data);
+        setCookie(chatStateKeys.CONFIG, data);
         this.setState({
             config: data,
         });
@@ -599,9 +617,8 @@ export default class ChatContainer extends Component<
             });
         }
 
-        saveJSON(chatCookieKeys.HISTORIE, this.state.historie);
+        setHistoryCache(this.state.historie);
     }
-
     lesIkkeLastethistorie() {
         const now = moment().valueOf();
         if (this.state.erApen && this.state.ikkeLastethistorie.length > 0) {
@@ -671,6 +688,7 @@ export default class ChatContainer extends Component<
                     state.historie[index] = historie;
                     historie.showIndicator = false;
                     return {
+                        ...state,
                         historie: historier,
                     };
                 } else {
@@ -678,7 +696,7 @@ export default class ChatContainer extends Component<
                 }
             },
             () => {
-                saveJSON(chatCookieKeys.HISTORIE, this.state.historie);
+                setHistoryCache(this.state.historie);
             }
         );
     }

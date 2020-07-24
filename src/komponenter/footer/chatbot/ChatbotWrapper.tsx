@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Chat from 'komponenter/chatbot';
-import { chatCookieKeys } from 'komponenter/chatbot/components/ChatContainer';
+import { chatStateKeys } from 'komponenter/chatbot/components/ChatContainer';
 import './ChatbotWrapper.less';
 
 type Props = {
@@ -47,7 +47,7 @@ export const ChatbotWrapper = ({
     };
 
     useEffect(() => {
-        const chatbotSessionActive = !!cookies[chatCookieKeys.CONFIG];
+        const chatbotSessionActive = !!cookies[chatStateKeys.CONFIG];
         setMountChatbot(chatbotSessionActive || PARAMS.CHATBOT);
     }, []);
 
