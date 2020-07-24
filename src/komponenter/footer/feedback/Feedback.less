@@ -1,17 +1,42 @@
+@import (reference) '../../../styling-variabler.less';
+
+.footer-linje {
+    border-top: @footer-seperator-farge @footer-seperator-height solid;
+}
+
 .feedback-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    height: 7rem;
+    margin: 1.25em;
+    flex-wrap: wrap;
 
-    .buttons-container {
+    .qa-container {
         display: flex;
         flex-direction: row;
-        width: auto;
         justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .buttons-container {
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+
+        .knapp {
+            margin: 0.25em;
+            flex-wrap: nowrap;
+        }
     }
 
+    .lenke {
+        padding: 0.5em;
+        color: black;
+        background-color: white;
+        outline-style: none;
+        border: none;
+    }
     .feedback-input-button {
         margin-right: 1em;
         margin-left: 1em;
