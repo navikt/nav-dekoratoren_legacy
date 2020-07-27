@@ -2,6 +2,7 @@ import { fetchToJson } from './api-utils';
 import { Data as innloggingsstatusData } from '../store/reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from '../store/reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
+import { DriftsmeldingData } from '../store/reducers/driftsmelding-duck';
 
 export enum Status {
     OK = 'OK',
@@ -46,3 +47,8 @@ export const lagreVarslerLestFetch = (
         body: JSON.stringify(nyesteId),
         credentials: 'include',
     });
+
+
+export const hentDriftsmelding = (
+    APP_BASE_URL: string
+): Promise<DriftsmeldingData> => fetchToJson(`${APP_BASE_URL}/api/driftsmelding`);

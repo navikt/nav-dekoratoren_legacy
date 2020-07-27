@@ -4,6 +4,7 @@ import { fetchMenypunkter } from 'store/reducers/menu-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { HeaderSimple } from 'komponenter/header/header-simple/HeaderSimple';
 import { HeaderRegular } from 'komponenter/header/header-regular/HeaderRegular';
+import Driftsmelding from './driftsmeldinger/Driftsmelding';
 import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
@@ -12,6 +13,7 @@ import { Language, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
+import { fetchDriftsmelding } from 'store/reducers/driftsmelding-duck';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -31,6 +33,12 @@ export const Header = () => {
     useEffect(() => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
     }, []);
+
+
+    useEffect(() => {
+        fetchDriftsmelding(APP_BASE_URL)(dispatch);
+    }, []);
+
 
     // Change context
     useEffect(() => {
@@ -85,6 +93,7 @@ export const Header = () => {
                     <HeaderRegular />
                 )}
             </header>
+            <Driftsmelding />
         </Fragment>
     );
 };
