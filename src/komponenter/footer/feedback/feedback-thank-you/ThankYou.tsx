@@ -11,7 +11,7 @@ const Thankyou = () => {
             </Ingress>
             <div className="mellomrom"/>
             <Normaltekst>
-                <Tekst id="hensikt-med-tilbakelding" />
+                <Tekst id="hensikt-med-tilbakemelding" />
             </Normaltekst>
         </div>
     );

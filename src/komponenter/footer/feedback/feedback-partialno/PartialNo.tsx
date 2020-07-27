@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
-import { verifyWindowObj } from 'utils/Environment';
-import Alertstripe from 'nav-frontend-alertstriper';
+
 import FeedbackMessage from '../common/feedback-message/FeedbackMessage';
 import sendFeedbackNo from './send-feedback-no';
 import { useSelector } from 'react-redux';
@@ -53,63 +52,73 @@ const PartialNo = (props: any) => {
     };
 
     return (
-        <div>
+        <Fragment>
             {!thankYouMessage ? (
-                <div className="partialno-container">
+                <div className="partialno-wrapper">
                     <div className="overskrift-container">
                         <Ingress>
                             <Tekst id="send-undersokelse-takk" />
                         </Ingress>
-
-                        <div className="kryssut-knapp">
-                            <CloseFeedbackHandler context="partialno" />
-                        </div>
                     </div>
 
-                    <form onSubmit={submitFeedback} className="no-content">
-                        <CheckboxGruppe
-                            // @ts-ignore
-                            onChange={(e) => onClickAarsak(e)}
-                            legend="Gi din vurdering av informasjonen på siden"
-                            feil={radiobuttonErrorMessage}
-                        >
-                            <Checkbox
-                                label={'Lite oversiktlig'}
-                                value="Lite oversiktlig"
-                            />
-                            <Checkbox
-                                label={'Lite forståelig'}
-                                value="Lite forståelig"
-                            />
-                            <Checkbox
-                                label={'Lite relevant informasjon'}
-                                value="Lite relevant informasjon"
-                            />
-                            <Checkbox label={'Villedende'} value="Villedende" />
-                        </CheckboxGruppe>
-
-                        <div className="no-content">
-                            <Element>
-                                <Tekst id="hva-lette-du-etter-spørsmål" />
+                    <div className="partialno-container">
+                        <form onSubmit={submitFeedback}>
+                            <Element className="sub-overskrift">
+                                <Tekst id="gi-din-vurdering-av-informasjon" />
                             </Element>
 
-                            <FeedbackMessage
-                                feedbackMessage={feedbackMessage}
-                                setFeedbackMessage={setFeedbackMessage}
-                            />
-                        </div>
+                            <CheckboxGruppe feil={radiobuttonErrorMessage}>
+                                <Checkbox
+                                    label={<Tekst id="lite-oversiktlig" />}
+                                    value="Lite oversiktlig"
+                                    onChange={(e) => onClickAarsak(e)}
+                                />
+                                <Checkbox
+                                    label={<Tekst id="lite-forstaelig" />}
+                                    value="Lite forståelig"
+                                    onChange={(e) => onClickAarsak(e)}
+                                />
+                                <Checkbox
+                                    label={<Tekst id="lite-relevant-info" />}
+                                    value="Lite relevant informasjon"
+                                    onChange={(e) => onClickAarsak(e)}
+                                />
+                                <Checkbox
+                                    label={<Tekst id="villedende" />}
+                                    value="Villedende"
+                                    onChange={(e) => onClickAarsak(e)}
+                                />
+                            </CheckboxGruppe>
 
-                        <div className="submit-knapp">
-                            <Hovedknapp htmlType="submit">
-                                <Tekst id="send-inn-feilrapport" />
-                            </Hovedknapp>
-                        </div>
-                    </form>
+                            <div className="no-content">
+                                <Element>
+                                    <Tekst id="hva-lette-du-etter-spørsmål" />
+                                </Element>
+
+                                <FeedbackMessage
+                                    feedbackMessage={feedbackMessage}
+                                    setFeedbackMessage={setFeedbackMessage}
+                                />
+                            </div>
+
+                            <div className="knapper">
+                                <div className="send-inn">
+                                    <Hovedknapp
+                                        htmlType="submit"
+                                        className="reset-knapp"
+                                    >
+                                        <Tekst id="send-inn-feilrapport" />
+                                    </Hovedknapp>
+                                </div>
+                                <CloseFeedbackHandler context="partialno" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
             ) : (
                 <Thankyou />
             )}
-        </div>
+        </Fragment>
     );
 };
 
