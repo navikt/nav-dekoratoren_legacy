@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect, useMemo } from 'react';
+import React, { Fragment, useMemo } from 'react';
 import { Textarea } from 'nav-frontend-skjema';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';

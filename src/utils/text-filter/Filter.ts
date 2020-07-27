@@ -1,5 +1,5 @@
-import { EmailValidator } from './valdiators/EmailValidator';
-import { FodselsnummerValidator } from './valdiators/FodselsnummerValidator';
+import { EmailValidator } from './validators/EmailValidator';
+import { FodselsnummerValidator} from './validators/FodselsnummerValidator';
 
 const sampleText = "Hei jeg heter Andreas Amundsen og min epostaddresse er andreas@gmail.com 12345678901"
 
