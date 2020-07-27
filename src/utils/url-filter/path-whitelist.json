@@ -1,9 +1,13 @@
 {
     "allowed_paths": [
         "/dekoratoren",
+        "/no/person/hva-er-din-situasjon/",
+        "/no/person/hva-er-din-situasjon",
         "/person/kontakt-oss/en/",
         "/person/kontakt-oss/nb/",
         "/person/kontakt-oss/en",
-        "/person/kontakt-oss/nb"
+        "/person/kontakt-oss/nb",
+        "/sok",
+        "/sok/"
     ]
 }
