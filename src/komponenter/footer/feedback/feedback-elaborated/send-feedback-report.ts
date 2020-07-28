@@ -14,6 +14,7 @@ function sendFeedbackReport(category: string, message: string, language: string)
         urlPath: window.location.pathname,
         urlHost: window.location.hostname,
         browser: window.navigator.userAgent,
+        browser_language: window.navigator.language,
         languageCode: language,
     };
 
