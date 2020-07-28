@@ -89,7 +89,7 @@ const PartialNo = () => {
                     </div>
                 </div>
             ) : (
-                <Thankyou />
+                <Thankyou showFeedbackUsage={true} />
             )}
         </Fragment>
     );

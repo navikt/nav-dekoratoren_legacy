@@ -87,7 +87,7 @@ const Elaborated = () => {
                     </div>
                 </div>
             ) : (
-                <Thankyou />
+                <Thankyou showFeedbackUsage={true}/>
             )}
         </Fragment>
     );
