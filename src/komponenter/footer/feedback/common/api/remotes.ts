@@ -1,9 +1,10 @@
-export enum remotes_no {
-    dev = "http://localhost:8080/feedback/no",
-    preprod = "https://dekoratoren-feedback-api-q6.dev-sbs.nais.io/feedback/no",
+export enum localhost {
+    feedback_no = "http://localhost:8080/feedback/no",
+    feedback_report = "http://localhost:8080/feedback/report"
 }
 
-export enum remotes_report {
-    dev = "http://localhost:8080/feedback/report",
-    preprod = "https://dekoratoren-feedback-api-q6.dev-sbs.nais.io/feedback/report",
+export enum preprod {
+    feedback_no = "https://dekoratoren-feedback-api-q6.dev-sbs.nais.io/feedback/no",
+    feedback_report = "https://dekoratoren-feedback-api-q6.dev-sbs.nais.io/feedback/report",
+
 }

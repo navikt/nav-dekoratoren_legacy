@@ -1,7 +1,7 @@
 import { verifyWindowObj } from 'utils/Environment';
 import amplitudeTriggers from 'utils/amplitude-triggers';
 import fetchFeedback from '../common/api/fetch-feedback';
-import { remotes_no } from '../common/api/remotes';
+import { chooseFeedbackNoRemote } from '../common/api/remotes-handler';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
@@ -19,12 +19,17 @@ function sendFeedbackNo(categories: string[], message: string, language: string)
         languageCode: language
     };
 
-    fetchFeedback(feedbackReport, remotes_no.dev)
+    if (verifyWindowObj()) {
+        const remote = chooseFeedbackNoRemote(window.location.href)
 
-    for (let category of categories) {
-        logAmplitudeEvent(amplitudeTriggers.neiKnapp, { svar: category })
+        console.log(remote)
+
+        fetchFeedback(feedbackReport, remote)
+
+        for (let category of categories) {
+            logAmplitudeEvent(amplitudeTriggers.neiKnapp, { svar: category })
+        }
     }
-
 };
 
 export default sendFeedbackNo;
