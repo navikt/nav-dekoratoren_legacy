@@ -15,7 +15,7 @@ function sendFeedbackNo(categories: string[], message: string, language: string)
         urlPath: window.location.pathname,
         urlHost: window.location.hostname,
         browser: window.navigator.userAgent,
-        browser_language: window.navigator.language,
+        browserLanguage: window.navigator.language,
         languageCode: language
     };
 
