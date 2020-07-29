@@ -48,7 +48,6 @@ export const lagreVarslerLestFetch = (
         credentials: 'include',
     });
 
-
 export const hentDriftsmelding = (
     APP_BASE_URL: string
-): Promise<DriftsmeldingData> => fetchToJson(`${APP_BASE_URL}/api/driftsmelding`);
+): Promise<DriftsmeldingData[]> => fetchToJson(`${APP_BASE_URL}/api/driftsmelding`);

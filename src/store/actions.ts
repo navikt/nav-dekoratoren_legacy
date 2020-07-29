@@ -66,7 +66,7 @@ export interface HentMenyLenkerFAILED {
 
 export interface HentDriftsmeldingSUCCESS {
     type: ActionType.HENT_DRIFTSMELDING_OK;
-    data: DriftsmeldingData;
+    data: DriftsmeldingData[];
 }
 
 export interface HentDriftsmeldingPENDING {

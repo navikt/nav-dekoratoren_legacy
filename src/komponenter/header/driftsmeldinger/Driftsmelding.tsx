@@ -5,29 +5,27 @@ import { LenkeMedGA } from '../../common/lenke-med-ga/LenkeMedGA';
 import { GACategory } from '../../../utils/google-analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../store/reducers';
+import { DriftsmeldingData } from '../../../store/reducers/driftsmelding-duck';
 
 
-interface DriftsmeldingProps {
-    heading: string,
-    url: string,
-    icon: React.ReactElement,
-}
 
 export const Driftsmelding = () => {
     // const driftsmelding = useSelector((state: AppState) => state.driftsmelding);
 
     // Mock intil vi får endepunkt
-    const driftsmelding: DriftsmeldingProps = {
+    const driftsmeldinger: DriftsmeldingData[] = [{
         heading: 'Flere selvbetjeningstjenester er ustabile i dag 24. juli',
         url: 'https://www.nav.no/no/driftsmeldinger/flere-selvbetjeningstjenester-er-ustabile-i-dag-24.juli',
         icon: InfoSvg(),
-    }
+    }]
 
     return (
-        <section className="driftsmeldinger ">
-            <div className="">
+        <section className="driftsmeldinger">
+            <div>
+                {driftsmeldinger.map( (melding) =>
                     <LenkeMedGA
-                        href={driftsmelding.url}
+                        key={melding.heading}
+                        href={melding.url}
                         classNameOverride="message"
                         gaEventArgs={{
                             category: GACategory.Header,
@@ -35,12 +33,13 @@ export const Driftsmelding = () => {
                         }}
                     >
                         <span className="message-icon">
-                            {driftsmelding.icon}
+                            {melding.icon}
                         </span>
                         <Normaltekst className="message-text">
-                            {driftsmelding.heading}
+                            {melding.heading}
                         </Normaltekst>
                     </LenkeMedGA>
+                )}
             </div>
         </section>
     )

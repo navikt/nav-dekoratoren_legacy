@@ -9,7 +9,7 @@ import { fetchThenDispatch } from 'api/api-utils';
 import { hentDriftsmelding, DataElement, Status } from 'api/api';
 
 export interface DriftsmeldingState extends DataElement {
-    data: DriftsmeldingData;
+    data: DriftsmeldingData[];
 }
 
 export interface DriftsmeldingData {
@@ -18,7 +18,6 @@ export interface DriftsmeldingData {
     icon?: ReactElement,
 }
 
-
 export const dataInitState: DriftsmeldingData = {
     heading: '',
     url: '',
@@ -26,7 +25,7 @@ export const dataInitState: DriftsmeldingData = {
 };
 
 const initalState: DriftsmeldingState = {
-    data: dataInitState,
+    data: [dataInitState],
     status: Status.IKKE_STARTET,
 };
 
@@ -36,7 +35,6 @@ export default function reducer(
 ): DriftsmeldingState {
     switch (action.type) {
         case ActionType.HENT_DRIFTSMELDING_OK: {
-            console.log('menydata', action.data)
             return { ...state, status: Status.OK, data: action.data };
         }
         case ActionType.HENT_DRIFTSMELDING_PENDING:
@@ -55,14 +53,14 @@ export default function reducer(
 export function fetchDriftsmelding(
     APP_BASE_URL: string
 ) {
-    return fetchThenDispatch<DriftsmeldingData>(() => hentDriftsmelding(APP_BASE_URL), {
+    return fetchThenDispatch<DriftsmeldingData[]>(() => hentDriftsmelding(APP_BASE_URL), {
         ok: driftsmeldingSuksess,
         feilet: driftsmeldingFeilet,
         pending: driftsmeldingPending,
     });
 }
 
-function driftsmeldingSuksess(data: DriftsmeldingData): HentDriftsmeldingSUCCESS {
+function driftsmeldingSuksess(data: DriftsmeldingData[]): HentDriftsmeldingSUCCESS {
     return {
         type: ActionType.HENT_DRIFTSMELDING_OK,
         data: data,
