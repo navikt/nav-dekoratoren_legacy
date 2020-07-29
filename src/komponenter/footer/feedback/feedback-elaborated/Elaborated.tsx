@@ -59,15 +59,7 @@ const Elaborated = () => {
                                 <Radio
                                     label={<Tekst id="teknisk-feil" />}
                                     name="feil"
-                                    value="teknisk_feil"
-                                    onChange={(e) =>
-                                        setCategory(e.target.value)
-                                    }
-                                />
-                                <Radio
-                                    label={<Tekst id="feil-informasjon" />}
-                                    name="feil"
-                                    value="informasjon"
+                                    value="teknisk feil"
                                     onChange={(e) =>
                                         setCategory(e.target.value)
                                     }
@@ -75,7 +67,7 @@ const Elaborated = () => {
                                 <Radio
                                     label={<Tekst id="skjermleser" />}
                                     name="feil"
-                                    value="hjelpemiddel"
+                                    value="skjermleser"
                                     onChange={(e) =>
                                         setCategory(e.target.value)
                                     }

@@ -68,23 +68,18 @@ const PartialNo = (props: any) => {
 
                             <CheckboxGruppe feil={radiobuttonErrorMessage}>
                                 <Checkbox
-                                    label={<Tekst id="lite-oversiktlig" />}
-                                    value="Lite oversiktlig"
-                                    onChange={(e) => onClickAarsak(e)}
-                                />
-                                <Checkbox
-                                    label={<Tekst id="lite-forstaelig" />}
-                                    value="Lite forståelig"
-                                    onChange={(e) => onClickAarsak(e)}
-                                />
-                                <Checkbox
                                     label={<Tekst id="lite-relevant-info" />}
-                                    value="Lite relevant informasjon"
+                                    value="relevant"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                                 <Checkbox
-                                    label={<Tekst id="villedende" />}
-                                    value="Villedende"
+                                    label={<Tekst id="lite-forstaaelig" />}
+                                    value="forstaaelig"
+                                    onChange={(e) => onClickAarsak(e)}
+                                />
+                                <Checkbox
+                                    label={<Tekst id="lite-oversiktlig" />}
+                                    value="oversiktlig"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                             </CheckboxGruppe>

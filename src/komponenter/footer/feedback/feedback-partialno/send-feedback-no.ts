@@ -8,10 +8,9 @@ const { logAmplitudeEvent } = verifyWindowObj()
 
 function sendFeedbackNo(categories: string[], message: string, language: string): void {
     const feedbackReport = {
-        forstaaelig: categories.includes("Lite forståelig"),
-        villedende: categories.includes("Villedende"),
-        relevant: categories.includes("Lite relevant informasjon"),
-        oversiktlig: categories.includes("Lite oversiktlig"),
+        relevant: categories.includes("relevant"),
+        forstaaelig: categories.includes("forstaaelig"),
+        oversiktlig: categories.includes("oversiktlig"),
         message: message,
         urlPath: window.location.pathname,
         urlHost: window.location.hostname,
