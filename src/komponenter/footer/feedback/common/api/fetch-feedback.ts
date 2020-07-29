@@ -1,4 +1,3 @@
-
 function fetchFeedback(data: Object, url: RequestInfo) {
     const requestOptions = {
         method: 'POST',
