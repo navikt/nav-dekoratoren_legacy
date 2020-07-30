@@ -41,7 +41,11 @@ const FeedbackMessage: React.FC<Props> = ({
             />
 
             {violationsMemoized.length ? (
-                <Alertstripe className="personvernAdvarsel" form="inline" type="feil">
+                <Alertstripe
+                    className="personvernAdvarsel"
+                    form="inline"
+                    type="feil"
+                >
                     <Normaltekst>
                         Vi mistenker at du har skrevet inn
                         {violationsMemoized}. Dersom du likevel mener dette er

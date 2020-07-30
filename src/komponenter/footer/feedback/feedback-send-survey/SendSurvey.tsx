@@ -32,28 +32,25 @@ const SendSurvey = () => {
 
     return (
         <div className="send-survey-wrapper">
-                    <Normaltekst>
-                        <Tekst id="send-undersokelse-takk" />
-                    </Normaltekst>
+            <Normaltekst>
+                <Tekst id="send-undersokelse-takk" />
+            </Normaltekst>
 
-                    <Normaltekst>
-                        <Tekst id="send-undersokelse-sporsmaal" />
-                    </Normaltekst>
+            <Normaltekst>
+                <Tekst id="send-undersokelse-sporsmaal" />
+            </Normaltekst>
 
-                    <form onSubmit={submitEmail}>
-                        <Input
-                            label="Din e-postaddresse"
-                            onChange={(e) => setEmail(e.target.value)}
-                            feil={inputFieldErrorMessage}
-                        />
+            <form onSubmit={submitEmail}>
+                <Input
+                    label="Din e-postaddresse"
+                    onChange={(e) => setEmail(e.target.value)}
+                    feil={inputFieldErrorMessage}
+                />
 
-                        <Hovedknapp
-                            inputMode="text"
-                            htmlType="submit"
-                        >
-                            <Tekst id="send-undersokelse-knapp" />
-                        </Hovedknapp>
-                    </form>
+                <Hovedknapp inputMode="text" htmlType="submit">
+                    <Tekst id="send-undersokelse-knapp" />
+                </Hovedknapp>
+            </form>
         </div>
     );
 };
