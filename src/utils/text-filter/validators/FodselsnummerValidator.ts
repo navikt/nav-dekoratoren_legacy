@@ -12,6 +12,6 @@ export class FodselsnummerValidator implements TextValidator {
         const fnr = this.validator.fnr(s)
         const dnr = this.validator.dnr(s)
 
-        return (fnr["status"] || dnr["status"]) === "valid"
+        return (fnr["status"] === "valid") || (dnr["status"] === "valid") 
     }
 }
