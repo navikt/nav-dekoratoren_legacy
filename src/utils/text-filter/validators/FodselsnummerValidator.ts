@@ -1,11 +1,17 @@
 import { TextValidator } from './TextValidator';
 
 export class FodselsnummerValidator implements TextValidator {
-    lengthIsValid(s: string) {
-        return s.length == 11;
+    validator: any;
+
+    constructor() {
+        this.validator = require('@navikt/fnrvalidator');
+        
     }
 
     isNotAcceptable(s: string) {
-        return this.lengthIsValid(s) && !isNaN(parseInt(s));
+        const fnr = this.validator.fnr(s)
+        const dnr = this.validator.dnr(s)
+
+        return fnr["status"] || dnr["status"] === "valid"
     }
 }
