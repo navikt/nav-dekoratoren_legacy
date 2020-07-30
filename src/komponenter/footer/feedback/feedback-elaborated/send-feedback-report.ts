@@ -1,8 +1,7 @@
 import { verifyWindowObj } from 'utils/Environment';
 import amplitudeTriggers from 'utils/amplitude-triggers';
 import fetchFeedback from '../common/api/fetch-feedback';
-import { localhost } from '../common/api/remotes';
-import { chooseFeedbackNoRemote, chooseFeedbackReportRemote } from '../common/api/remotes-handler';
+import { chooseFeedbackReportRemote } from '../common/api/remotes-handler';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
