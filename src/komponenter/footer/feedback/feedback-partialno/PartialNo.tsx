@@ -84,7 +84,7 @@ const PartialNo = (props: any) => {
                                 />
                             </CheckboxGruppe>
 
-                            <div className="no-content">
+                            <div>
                                 <Element>
                                     <Tekst id="hva-lette-du-etter-spørsmål" />
                                 </Element>

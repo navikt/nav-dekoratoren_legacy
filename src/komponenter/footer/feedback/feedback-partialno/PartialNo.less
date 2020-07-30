@@ -10,10 +10,6 @@
         flex-direction: row;
         padding-bottom: 0.5em;
         align-items: center;
-
-        .kryssut-knapp {
-            margin-left: auto;
-        }
     }
 
     .partialno-container {
@@ -24,25 +20,11 @@
             padding-bottom: 0.5em;
         }
 
-        .content-no {
-            padding: 0;
-        }
-
         .knapper {
             display: flex;
             margin-top: 0.5em;
-
-            @media (min-width: @desktopMinWidth) {
-                flex-wrap: none;
-                flex-direction: row;
-            }
-
-            @media (max-width: @mobilMaxWidth) {
-                flex-wrap: wrap;
-                flex-direction: column;
-                justify-content: space-between;
-            }
-
+            flex-wrap: wrap;
+            
             .send-inn {
                 padding-right: 0.25em;
 
