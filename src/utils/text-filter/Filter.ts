@@ -1,7 +1,7 @@
 import { EmailValidator } from './validators/EmailValidator';
-import { FodselsnummerValidator} from './validators/FodselsnummerValidator';
+import { FodselsnummerValidator } from './validators/FodselsnummerValidator';
 
-const sampleText = "Hei jeg heter Andreas Amundsen og min epostaddresse er andreas@gmail.com 12345678901"
+const sampleText = 'Hei jeg heter Andreas Amundsen og min epostaddresse er andreas@gmail.com 12345678901'
 
 export class Filter {
 
@@ -15,11 +15,11 @@ export class Filter {
         this.fodselsnummerValidator = new FodselsnummerValidator();
     }
 
-    addViolation(violation: string):void {
+    addViolation(violation: string) {
         !this.violations.includes(violation) && this.violations.push(violation);
-    };
+    }
 
-    getViolations():string[] {
+    getViolations(): string[] {
         return this.violations;
     }
 
@@ -27,20 +27,24 @@ export class Filter {
     Return violations on either the form "e-postaddresse og fødselsnummer" or "e-postaddresse"/"fødeselsnummer", depending on the numer
     of violations
     */
-    getViolationsFormatted():string {
+    getViolationsFormatted(): string {
         if (!this.violations.length) {
-            return "";
+            return '';
         }
 
-        return this.violations.length == 2 ? " " + this.violations[0] + " og " + this.violations[1] : " " + this.violations[0]
+        return this.violations.length === 2 ? '' + this.violations[0] + ' og ' + this.violations[1] : ' ' + this.violations[0]
     }
 
-    checkForViolations(text: string):void {
-        let textSplitted = text.split(" ");
+    checkForViolations(text: string): void {
+        const textSplitted = text.split(' ');
 
-        for (let index in textSplitted) {
-            this.emailValidator.isNotAcceptable(textSplitted[index]) && this.addViolation("e-postadresse")
-            this.fodselsnummerValidator.isNotAcceptable(textSplitted[index]) && this.addViolation("fødselsnummer")
+        for (const index in textSplitted) {
+            if (this.emailValidator.isNotAcceptable(textSplitted[index])) {
+                this.addViolation('e-postadresse')
+
+            } else if (this.fodselsnummerValidator.isNotAcceptable(textSplitted[index])) {
+                this.addViolation('fødselsnummer')
+            }
         }
     }
 }
