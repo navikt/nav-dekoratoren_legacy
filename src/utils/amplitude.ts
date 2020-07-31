@@ -1,8 +1,8 @@
 import { contentEngaged } from './content-engaged';
-import amplitude from "amplitude-js";
+import amplitude from 'amplitude-js';
 
 export const initAmplitude = () => {
-    if(amplitude){
+    if (amplitude) {
         amplitude.getInstance().init('default', '', {
             apiEndpoint: 'amplitude.nav.no/collect-auto',
             saveEvents: false,
@@ -22,7 +22,7 @@ export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
         eventData.origin = 'dekoratøren';
         eventData.originVersion = 'unknown';
 
-        if(amplitude){
+        if (amplitude) {
             amplitude.getInstance().logEvent(eventName, eventData, resolve);
         }
     });
