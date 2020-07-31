@@ -20,7 +20,7 @@ function sendFeedbackNo(categories: string[], message: string, language: string)
     };
 
     if (verifyWindowObj()) {
-        const remote = chooseFeedbackNoRemote(window.location.href)
+        const remote = chooseFeedbackNoRemote()
 
         console.log(remote)
 

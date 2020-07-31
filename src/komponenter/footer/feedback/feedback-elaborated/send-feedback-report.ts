@@ -18,7 +18,7 @@ function sendFeedbackReport(category: string, message: string, language: string)
     };
 
     if (verifyWindowObj()) {
-        const remote = chooseFeedbackReportRemote(window.location.href)
+        const remote = chooseFeedbackReportRemote()
 
         console.log(remote)
         
