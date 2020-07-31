@@ -8,6 +8,7 @@ export function chooseFeedbackNoRemote(environment: EnvironmentState): string {
         remote = FEEDBACK_NO_LOCALHOST
     } else {
         const { FEEDBACK_NO_PREPROD } = environment
+        console.log("CFNR", FEEDBACK_NO_PREPROD)
         remote = FEEDBACK_NO_PREPROD
     }
 
