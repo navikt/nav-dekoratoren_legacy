@@ -1,13 +1,29 @@
-import { localhost, preprod } from './remotes'
+import { EnvironmentState } from 'store/reducers/environment-duck'
 
-export function chooseFeedbackNoRemote(hostName: string): string {
-    return process.env.NODE_ENV === 'development'
-        ? localhost.feedback_no
-        : preprod.feedback_no
+export function chooseFeedbackNoRemote(environment: EnvironmentState): string {
+    let remote: string = ''
+
+    if (process.env.NODE_ENV === 'development') {
+        const { FEEDBACK_NO_LOCALHOST } = environment
+        remote = FEEDBACK_NO_LOCALHOST
+    } else {
+        const { FEEDBACK_NO_PREPROD } = environment
+        remote = FEEDBACK_NO_PREPROD
+    }
+
+    return remote;
 }
 
-export function chooseFeedbackReportRemote(hostName: string): string {
-    return process.env.NODE_ENV === 'development'
-        ? localhost.feedback_report
-        : preprod.feedback_report
-} 
+export function chooseFeedbackReportRemote(environment: EnvironmentState): string {
+    let remote: string = ''
+
+    if (process.env.NODE_ENV === 'development') {
+        const { FEEDBACK_REPORT_LOCALHOST } = environment
+        remote = FEEDBACK_REPORT_LOCALHOST
+    } else {
+        const { FEEDBACK_REPORT_PREPROD } = environment
+        remote = FEEDBACK_REPORT_PREPROD
+    }
+
+    return remote;
+}

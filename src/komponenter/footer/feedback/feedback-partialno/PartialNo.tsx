@@ -10,6 +10,12 @@ import { AppState } from 'store/reducers';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import './PartialNo.less';
+import { verifyWindowObj } from 'utils/Environment';
+import { chooseFeedbackNoRemote } from '../common/api/remotes-handler';
+
+const stateSelector = (state: AppState) => ({
+    environment: state.environment,
+});
 
 const PartialNo = (props: any) => {
     const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
@@ -34,19 +40,27 @@ const PartialNo = (props: any) => {
         setFeedbackTitle(feedbackTitles);
     };
 
+    const { environment } = useSelector(stateSelector);
+
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        if (!feedbackTitles.length) {
-            setRadiobuttonErrorMessage('Du må velge et alternativ');
-        } else {
-            setRadiobuttonErrorMessage('');
-            sendFeedbackNo(
-                feedbackTitle,
-                feedbackMessage,
-                language.toLowerCase()
-            );
-            setThankYouMessage(true);
+        if (verifyWindowObj()) {
+            const remote = chooseFeedbackNoRemote(environment)
+            console.log("No remote:", remote)
+
+            if (!feedbackTitles.length) {
+                setRadiobuttonErrorMessage('Du må velge et alternativ');
+            } else {
+                setRadiobuttonErrorMessage('');
+                sendFeedbackNo(
+                    feedbackTitle,
+                    feedbackMessage,
+                    language.toLowerCase(),
+                    remote
+                );
+                setThankYouMessage(true);
+            }
         }
     };
 

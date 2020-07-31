@@ -6,7 +6,7 @@ const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
 
-function sendFeedbackReport(category: string, message: string, language: string): void {
+function sendFeedbackReport(category: string, message: string, language: string, remote: string): void {
     const feedbackReport = {
         category: category.toUpperCase(),
         message: message,
@@ -17,16 +17,9 @@ function sendFeedbackReport(category: string, message: string, language: string)
         languageCode: language,
     };
 
-    if (verifyWindowObj()) {
-        const remote = chooseFeedbackReportRemote(window.location.href)
+    fetchFeedback(feedbackReport, remote)
 
-        console.log(remote)
-        
-        fetchFeedback(feedbackReport, remote)
-
-        logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, { svar: category })
-
-    }
+    logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, { svar: category })
 };
 
 export default sendFeedbackReport;

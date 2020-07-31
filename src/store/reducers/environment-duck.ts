@@ -9,6 +9,10 @@ export interface EnvironmentState {
     MINSIDE_ARBEIDSGIVER_URL: string;
     DITT_NAV_URL: string;
     LOGIN_URL: string;
+    FEEDBACK_NO_LOCALHOST: string,
+    FEEDBACK_NO_PREPROD: string,
+    FEEDBACK_REPORT_LOCALHOST: string,
+    FEEDBACK_REPORT_PREPROD: string,
     LOGOUT_URL: string;
 
     // Parameters
@@ -36,6 +40,10 @@ export const initialState: EnvironmentState = {
     MINSIDE_ARBEIDSGIVER_URL: '',
     DITT_NAV_URL: 'string',
     LOGIN_URL: 'string',
+    FEEDBACK_NO_LOCALHOST: 'string',
+    FEEDBACK_NO_PREPROD: 'string',
+    FEEDBACK_REPORT_LOCALHOST: 'string',
+    FEEDBACK_REPORT_PREPROD: 'string',
     LOGOUT_URL: 'string',
 
     // Parameters

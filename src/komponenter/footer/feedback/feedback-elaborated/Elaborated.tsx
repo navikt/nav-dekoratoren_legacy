@@ -10,6 +10,11 @@ import { AppState } from 'store/reducers';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import './Elaborated.less';
+import { chooseFeedbackReportRemote } from '../common/api/remotes-handler';
+
+const stateSelector = (state: AppState) => ({
+    environment: state.environment,
+});
 
 const Elaborated = () => {
     const [category, setCategory] = useState(String);
@@ -23,8 +28,13 @@ const Elaborated = () => {
 
     const { language } = useSelector((state: AppState) => state.language);
 
+    const { environment } = useSelector(stateSelector);
+
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
+
+        const remote = chooseFeedbackReportRemote(environment)
+        console.log("Report remote: ", remote)
 
         if (!category.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
@@ -33,7 +43,8 @@ const Elaborated = () => {
             sendFeedbackReport(
                 category,
                 feedbackMessage,
-                language.toLowerCase()
+                language.toLowerCase(),
+                remote
             );
             setThankYouMessage(true);
         }

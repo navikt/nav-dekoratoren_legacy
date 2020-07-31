@@ -29,6 +29,10 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
             .MINSIDE_ARBEIDSGIVER_URL as string,
         DITT_NAV_URL: process.env.DITT_NAV_URL as string,
         LOGIN_URL: process.env.LOGIN_URL as string,
+        FEEDBACK_NO_LOCALHOST: process.env.FEEDBACK_NO_LOCALHOST as string,
+        FEEDBACK_NO_PREPROD: process.env.FEEDBACK_NO_PREPROD as string,
+        FEEDBACK_REPORT_LOCALHOST: process.env.FEEDBACK_REPORT_LOCALHOST as string,
+        FEEDBACK_REPORT_PREPROD: process.env.FEEDBACK_REPORT_PREPROD as string,
         LOGOUT_URL: process.env.LOGOUT_URL as string,
         ...(req.query && {
             PARAMS: {
