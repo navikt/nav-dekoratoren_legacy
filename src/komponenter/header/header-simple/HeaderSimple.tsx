@@ -5,6 +5,7 @@ import Navn from './navn/Navn';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
 import { Sticky } from 'komponenter/header/header-regular/common/sticky/Sticky';
 import { GACategory } from 'utils/google-analytics';
+import Logo from 'ikoner/meny/nav-logo-black.svg';
 import './HeaderSimple.less';
 
 export const HeaderSimple = () => {
@@ -19,6 +20,7 @@ export const HeaderSimple = () => {
                             category: GACategory.Header,
                             action: 'navlogo-mobilmeny',
                         }}
+                        ikon={Logo}
                     />
                     <div className={cls.element('right')}>
                         <Navn />

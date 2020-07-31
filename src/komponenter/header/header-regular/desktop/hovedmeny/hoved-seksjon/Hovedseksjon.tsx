@@ -1,31 +1,54 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { MenyLenkeSeksjon } from 'komponenter/header/header-regular/common/meny-lenker/MenyLenkeSeksjon';
 import BEMHelper from 'utils/bem';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import './Hovedseksjon.less';
+import { MenySeksjoner } from 'komponenter/header/header-regular/common/meny-seksjoner/MenySeksjoner';
+import { MenyLayout } from 'komponenter/header/header-regular/common/meny-seksjoner/MenySeksjoner';
+import { matchMedia } from 'utils/match-media-polyfill';
+
+const layoutWidthBreakpoint = 1440;
+const mqlWidthBreakpoint = matchMedia(
+    `(min-width: ${layoutWidthBreakpoint}px)`
+);
+const layoutHeightBreakpoint = 960;
+const mqlHeightBreakpoint = matchMedia(
+    `(min-height: ${layoutHeightBreakpoint}px)`
+);
+
+const getLayoutFromWindowSize = () =>
+    window.innerWidth >= layoutWidthBreakpoint &&
+    window.innerHeight >= layoutHeightBreakpoint
+        ? 'grid'
+        : 'mosaic';
 
 interface Props {
     menyLenker: MenyNode;
     classname: string;
+    numCols: number;
 }
 
-const maxCols = 4;
-
-const isIE = () =>
-    window.navigator.userAgent &&
-    /(Trident|MSIE)/.test(window.navigator.userAgent);
-
-export const Hovedseksjon = ({ menyLenker, classname }: Props) => {
+export const Hovedseksjon = ({ menyLenker, classname, numCols }: Props) => {
     const cls = BEMHelper(classname);
+    const [layout, setLayout] = useState<MenyLayout>(getLayoutFromWindowSize());
+
+    useEffect(() => {
+        const updateLayout = () => {
+            setLayout(getLayoutFromWindowSize());
+        };
+        mqlWidthBreakpoint.addEventListener('change', updateLayout);
+        mqlHeightBreakpoint.addEventListener('change', updateLayout);
+        return () => {
+            mqlWidthBreakpoint.removeEventListener('change', updateLayout);
+            mqlHeightBreakpoint.removeEventListener('change', updateLayout);
+        };
+    }, []);
 
     return (
-        <div className={cls.element('hoved-seksjon-wrapper')}>
-            <div
-                className={`${cls.element('hoved-seksjon')}${
-                    isIE() ? ' is-ie' : ''
-                }`}
-            >
+        <div className={cls.element('hoved-seksjon')}>
+            <MenySeksjoner numCols={numCols} layout={layout}>
                 {menyLenker &&
                     menyLenker.children.map((menygruppe, index) => (
                         <MenyLenkeSeksjon
@@ -36,10 +59,7 @@ export const Hovedseksjon = ({ menyLenker, classname }: Props) => {
                             key={menygruppe.displayName}
                         />
                     ))}
-                {[...Array(maxCols)].map((_, index) => (
-                    <div className={'col-breaker'} key={index} />
-                ))}
-            </div>
+            </MenySeksjoner>
         </div>
     );
 };

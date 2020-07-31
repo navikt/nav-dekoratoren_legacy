@@ -10,7 +10,7 @@ export const initAmplitude = () => {
             includeReferrer: true,
             platform: window.location.toString(),
         });
-    } 
+    }
     contentEngaged(1, () => {
         logAmplitudeEvent('sidevisning');
     });
