@@ -8,15 +8,20 @@ import sendFeedbackReport from './send-feedback-report';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import './Elaborated.less';
+import { useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
 
 const Elaborated = () => {
     const [category, setCategory] = useState(String);
+    const [feedbackMessage, setFeedbackMessage] = useState('');
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
 
     const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
         String
     );
+
+    const { language } = useSelector((state: AppState) => state.language);
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
@@ -25,7 +30,11 @@ const Elaborated = () => {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
             setRadiobuttonErrorMessage('');
-            sendFeedbackReport(category);
+            sendFeedbackReport(
+                category,
+                feedbackMessage,
+                language.toLowerCase()
+            );
             setThankYouMessage(true);
         }
     };

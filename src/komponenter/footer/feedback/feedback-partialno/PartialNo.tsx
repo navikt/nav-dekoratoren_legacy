@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, ChangeEvent } from 'react';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
@@ -8,9 +8,13 @@ import sendFeedbackNo from './send-feedback-no';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import './PartialNo.less';
+import { useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
 
 const PartialNo = () => {
     const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
+    const [feedbackMessage, setFeedbackMessage] = useState('');
+    const { language } = useSelector((state: AppState) => state.language);
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
 
@@ -37,7 +41,11 @@ const PartialNo = () => {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
             setRadiobuttonErrorMessage('');
-            sendFeedbackNo(feedbackTitle);
+            sendFeedbackNo(
+                feedbackTitle,
+                feedbackMessage,
+                language.toLowerCase()
+            );
             setThankYouMessage(true);
         }
     };
