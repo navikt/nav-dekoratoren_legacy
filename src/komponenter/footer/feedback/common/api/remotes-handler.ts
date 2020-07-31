@@ -1,12 +1,14 @@
 import { EnvironmentState } from 'store/reducers/environment-duck'
+import { erDev } from 'utils/Environment'
 
 export function chooseFeedbackNoRemote(environment: EnvironmentState): string {
     let remote: string = ''
 
-    if (process.env.NODE_ENV === 'development') {
+    if (erDev) {
         const { FEEDBACK_NO_LOCALHOST } = environment
         remote = FEEDBACK_NO_LOCALHOST
     } else {
+        console.log("Else")
         const { FEEDBACK_NO_PREPROD } = environment
         console.log("CFNR", FEEDBACK_NO_PREPROD)
         remote = FEEDBACK_NO_PREPROD
