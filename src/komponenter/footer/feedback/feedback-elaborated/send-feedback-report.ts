@@ -17,16 +17,11 @@ function sendFeedbackReport(category: string, message: string, language: string)
         languageCode: language,
     };
 
-    if (verifyWindowObj()) {
-        const remote = chooseFeedbackReportRemote()
+    const remote = chooseFeedbackReportRemote()
 
-        console.log(remote)
-        
-        fetchFeedback(feedbackReport, remote)
+    fetchFeedback(feedbackReport, remote)
 
-        logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, { svar: category })
-
-    }
+    logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, { svar: category })
 };
 
 export default sendFeedbackReport;
