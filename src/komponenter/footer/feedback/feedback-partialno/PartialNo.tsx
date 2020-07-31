@@ -40,13 +40,15 @@ const PartialNo = () => {
         if (!feedbackTitles.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
-            setRadiobuttonErrorMessage('');
-            sendFeedbackNo(
-                feedbackTitle,
-                feedbackMessage,
-                language.toLowerCase()
-            );
-            setThankYouMessage(true);
+            if (feedbackMessage.length <= 2000) {
+                setRadiobuttonErrorMessage('');
+                sendFeedbackNo(
+                    feedbackTitle,
+                    feedbackMessage,
+                    language.toLowerCase()
+                );
+                setThankYouMessage(true);
+            }
         }
     };
 

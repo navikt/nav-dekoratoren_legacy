@@ -29,13 +29,15 @@ const Elaborated = () => {
         if (!category.length) {
             setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
-            setRadiobuttonErrorMessage('');
-            sendFeedbackReport(
-                category,
-                feedbackMessage,
-                language.toLowerCase()
-            );
-            setThankYouMessage(true);
+            if (feedbackMessage.length <= 2000) {
+                setRadiobuttonErrorMessage('');
+                sendFeedbackReport(
+                    category,
+                    feedbackMessage,
+                    language.toLowerCase()
+                );
+                setThankYouMessage(true);
+            }
         }
     };
 
