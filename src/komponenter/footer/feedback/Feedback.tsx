@@ -91,7 +91,7 @@ const Feedback = () => {
                                 </div>
                             </div>
                             <Element
-                                className="underline"
+                                className="lenke"
                                 onClick={userPressedReport}
                             >
                                 Rapporter feil eller mangler
