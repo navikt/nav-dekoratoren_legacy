@@ -59,22 +59,22 @@ const PartialNo = () => {
 
                             <CheckboxGruppe feil={radiobuttonErrorMessage}>
                                 <Checkbox
-                                    label={<Tekst id="lite-oversiktlig"/>}
+                                    label={<Tekst id="lite-oversiktlig" />}
                                     value="Lite oversiktlig"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                                 <Checkbox
-                                    label={<Tekst id="lite-forstaelig"/>}
+                                    label={<Tekst id="lite-forstaelig" />}
                                     value="Lite forståelig"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                                 <Checkbox
-                                    label={<Tekst id="lite-relevant-info"/>}
+                                    label={<Tekst id="lite-relevant-info" />}
                                     value="Lite relevant informasjon"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                                 <Checkbox
-                                    label={<Tekst id="villedende"/>}
+                                    label={<Tekst id="villedende" />}
                                     value="Villedende"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
@@ -84,7 +84,8 @@ const PartialNo = () => {
                                 <div className="send-inn">
                                     <Hovedknapp
                                         htmlType="submit"
-                                        className="reset-knapp">
+                                        className="reset-knapp"
+                                    >
                                         <Tekst id="send-inn-feilrapport" />
                                     </Hovedknapp>
                                 </div>

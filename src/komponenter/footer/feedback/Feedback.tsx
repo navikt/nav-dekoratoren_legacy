@@ -92,8 +92,9 @@ const Feedback = () => {
                             </div>
                             <button
                                 className="lenke"
-                                onClick={userPressedReport}>
-                                <Tekst id="rapporter-om-feil-mangler"/>
+                                onClick={userPressedReport}
+                            >
+                                <Tekst id="rapporter-om-feil-mangler" />
                             </button>
                         </Fragment>
                     ) : null}

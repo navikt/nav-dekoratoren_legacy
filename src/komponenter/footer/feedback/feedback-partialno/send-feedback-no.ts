@@ -6,9 +6,8 @@ const { logAmplitudeEvent } = verifyWindowObj()
 
 function sendFeedbackNo(categories: string[]): void {
     for (let category of categories) {
-        logAmplitudeEvent(amplitudeTriggers.neiKnapp, { svar: category })
+        logAmplitudeEvent(amplitudeTriggers.neiKnapp, { svar: category });
     }
-
-};
+}
 
 export default sendFeedbackNo;

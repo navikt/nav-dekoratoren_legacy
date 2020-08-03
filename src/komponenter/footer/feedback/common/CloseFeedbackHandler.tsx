@@ -20,7 +20,9 @@ const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
 
     const userClosedFeedback = () => {
         if (context === 'elaborated') {
-            logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, { svar: 'Avbrutt' });
+            logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, {
+                svar: 'Avbrutt',
+            });
         } else if (context === 'partialno') {
             logAmplitudeEvent(amplitudeTriggers.neiKnapp, { svar: 'Avbrutt' });
         }
@@ -31,7 +33,7 @@ const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
     return (
         <div>
             <Knapp onClick={userClosedFeedback} htmlType="button">
-                <Tekst id="avbryt"/>
+                <Tekst id="avbryt" />
             </Knapp>
         </div>
     );
