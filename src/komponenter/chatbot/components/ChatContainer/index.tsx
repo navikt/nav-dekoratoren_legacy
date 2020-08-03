@@ -23,8 +23,6 @@ import {
     SessionCreateResponse,
 } from 'komponenter/chatbot/api/Sessions';
 import moment from 'moment';
-import fridaIkon from 'komponenter/chatbot/assets/frida.svg';
-import defaultIkon from 'komponenter/chatbot/assets/default.svg';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FridaTekst } from 'komponenter/chatbot/components/ChatContainer/styles';
@@ -33,6 +31,9 @@ import hash from 'object-hash';
 import { getStorageItem } from 'komponenter/chatbot/services/sessionStorage';
 import { setStorageItem } from 'komponenter/chatbot/services/sessionStorage';
 import { removeStorageItem } from 'komponenter/chatbot/services/sessionStorage';
+
+import fridaIkon from 'komponenter/chatbot/assets/frida.svg';
+import defaultIkon from 'komponenter/chatbot/assets/default.svg';
 
 export type ChatContainerState = {
     erApen: boolean;
