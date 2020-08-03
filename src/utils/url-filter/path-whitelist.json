@@ -1,9 +1,29 @@
 {
     "allowed_paths": [
         "/dekoratoren",
+        
+        "/no/person/hva-er-din-situasjon/",
+        "/no/person/hva-er-din-situasjon",
+
         "/person/kontakt-oss/en/",
         "/person/kontakt-oss/nb/",
         "/person/kontakt-oss/en",
-        "/person/kontakt-oss/nb"
+        "/person/kontakt-oss/nb",
+
+        "/sok",
+        "/sok/",
+
+        "/no/person/",
+        "/no/person",
+        "/no/bedrift",
+        "/no/bedrift/",
+        "/no/samarbeidspartner",
+        "/no/samarbeidspartner",
+
+        "/en/home/",
+        "/en/home",
+
+        "/se/samegiella",
+        "/se/samegiella/"
     ]
 }

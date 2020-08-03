@@ -30,7 +30,7 @@ const DelSkjermModal = (props: Props) => {
     const [code, setCode] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-    const [error, setError] = useState<string | undefined>();
+    const [error, setError] = useState(feilmelding);
 
     // Vergic config
     const w = window as any;
