@@ -29,9 +29,7 @@ const FooterRegular = () => {
 
     const path = verifyWindowObj() ? useReactPath() : '';
 
-    const { PARAMS } = useSelector(
-        (state: AppState) => state.environment
-    );
+    const { PARAMS } = useSelector((state: AppState) => state.environment);
 
     useEffect(() => {
         if (checkIfContainsPath(path)) {

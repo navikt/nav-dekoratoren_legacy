@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, Fragment } from 'react';
 import { RadioGruppe, Radio } from 'nav-frontend-skjema';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -47,7 +47,7 @@ const Elaborated = () => {
 
                             <RadioGruppe feil={radiobuttonErrorMessage}>
                                 <Radio
-                                    label={<Tekst id="teknisk-feil"/>}
+                                    label={<Tekst id="teknisk-feil" />}
                                     name="feil"
                                     value="teknisk feil"
                                     onChange={(e) =>
@@ -55,7 +55,7 @@ const Elaborated = () => {
                                     }
                                 />
                                 <Radio
-                                    label={<Tekst id="feil-informasjon"/>}
+                                    label={<Tekst id="feil-informasjon" />}
                                     name="feil"
                                     value="feil informasjon"
                                     onChange={(e) =>
@@ -63,7 +63,7 @@ const Elaborated = () => {
                                     }
                                 />
                                 <Radio
-                                    label={<Tekst id="skjermleser"/>}
+                                    label={<Tekst id="skjermleser" />}
                                     name="feil"
                                     value="skjermleser"
                                     onChange={(e) =>
@@ -71,7 +71,7 @@ const Elaborated = () => {
                                     }
                                 />
                                 <Radio
-                                    label={<Tekst id="annet"/>}
+                                    label={<Tekst id="annet" />}
                                     name="feil"
                                     value="annet"
                                     onChange={(e) =>
@@ -84,7 +84,8 @@ const Elaborated = () => {
                                 <div className="send-inn">
                                     <Hovedknapp
                                         htmlType="submit"
-                                        className="reset-knapp">
+                                        className="reset-knapp"
+                                    >
                                         <Tekst id="send-inn-feilrapport" />
                                     </Hovedknapp>
                                 </div>
