@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { CloseFeedbackContext } from './CloseFeedbackContext';
 import { verifyWindowObj } from 'utils/Environment';
-import Lukknapp from 'nav-frontend-lukknapp';
 import amplitudeTriggers from 'utils/amplitude-triggers';
 import { Knapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';

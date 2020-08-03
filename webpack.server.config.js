@@ -11,7 +11,7 @@ const browserConfig = {
     target: 'node',
     externals: [
         nodeExternals({
-            whitelist: [/^nav-frontend-.*$/, /\.(?!(?:jsx?|json)$).{1,5}$/i],
+            allowlist: [/^nav-frontend-.*$/, /\.(?!(?:jsx?|json)$).{1,5}$/i],
         }),
     ],
     entry: {
