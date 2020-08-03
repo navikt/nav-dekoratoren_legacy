@@ -1,7 +1,7 @@
 import { Request } from 'express';
-import { EnvironmentState } from '../store/reducers/environment-duck';
-import { MenuValue } from '../utils/meny-storage-utils';
-import { Language } from '../store/reducers/language-duck';
+import { EnvironmentState } from 'store/reducers/environment-duck';
+import { MenuValue } from 'utils/meny-storage-utils';
+import { Language } from 'store/reducers/language-duck';
 
 interface Cookies {
     [key: string]: MenuValue | Language | string;
