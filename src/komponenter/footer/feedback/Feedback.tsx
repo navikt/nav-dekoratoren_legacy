@@ -90,12 +90,12 @@ const Feedback = () => {
                                     </Knapp>
                                 </div>
                             </div>
-                            <Element
+                            <button
                                 className="lenke"
                                 onClick={userPressedReport}
                             >
                                 Rapporter feil eller mangler
-                            </Element>
+                            </button>
                         </Fragment>
                     ) : null}
                     {buttonsPressed.yesButton && <ThankYou />}
