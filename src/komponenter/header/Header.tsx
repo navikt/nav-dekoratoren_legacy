@@ -32,8 +32,6 @@ export const Header = () => {
         setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
     };
 
-    console.log(featureToggles);
-
     // External data
     useEffect(() => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);

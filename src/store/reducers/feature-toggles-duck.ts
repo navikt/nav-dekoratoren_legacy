@@ -5,10 +5,13 @@ export interface FeatureToggles {
     [key: string]: boolean;
 }
 
-export const initialState: FeatureToggles = {
-    'personopplysninger.pdl': false,
-    'personopplysninger.dsop': false,
-};
+// Define required feature-toggles, e.g:
+// {
+//   dekoratoren.example': false,
+//   ...
+// }
+export const initialState: FeatureToggles = {};
+// Toggles will be fetched on runtime
 
 export const reducer = (
     state: FeatureToggles = initialState,
