@@ -33,16 +33,19 @@ export const Header = () => {
     };
 
     console.log(featureToggles);
+
     // External data
     useEffect(() => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
-        fetchFeatureToggles(API_UNLEASH_PROXY_URL, featureToggles).then(
-            (featureToggles) =>
-                dispatch({
-                    type: ActionType.SETT_FEATURE_TOGGLES,
-                    data: featureToggles,
-                })
-        );
+        if (Object.keys(featureToggles).length) {
+            fetchFeatureToggles(API_UNLEASH_PROXY_URL, featureToggles).then(
+                (featureToggles) =>
+                    dispatch({
+                        type: ActionType.SETT_FEATURE_TOGGLES,
+                        data: featureToggles,
+                    })
+            );
+        }
     }, []);
 
     // Change context

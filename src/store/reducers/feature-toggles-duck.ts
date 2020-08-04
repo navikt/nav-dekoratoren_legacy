@@ -6,7 +6,8 @@ export interface FeatureToggles {
 }
 
 export const initialState: FeatureToggles = {
-    'feature-test': false,
+    'personopplysninger.pdl': false,
+    'personopplysninger.dsop': false,
 };
 
 export const reducer = (
