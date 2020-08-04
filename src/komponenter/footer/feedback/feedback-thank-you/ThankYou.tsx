@@ -7,7 +7,7 @@ interface Props {
     showFeedbackUsage: boolean;
 }
 
-const Thankyou: React.FC<Props> = ({ showFeedbackUsage }) => {
+const Thankyou = ({ showFeedbackUsage }: Props) => {
     return (
         <div className="thankyou-container">
             <Ingress>
