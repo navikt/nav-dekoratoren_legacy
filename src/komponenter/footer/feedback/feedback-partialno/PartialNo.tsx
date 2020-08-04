@@ -1,8 +1,18 @@
-import React, { useState, Fragment, ChangeEvent } from 'react';
+import React, {
+    useState,
+    Fragment,
+    ChangeEvent,
+    useEffect,
+    useRef,
+} from 'react';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
-import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
+import {
+    CheckboxGruppe,
+    Checkbox,
+    Feiloppsummering,
+} from 'nav-frontend-skjema';
 import FeedbackMessage from '../common/feedback-message/FeedbackMessage';
 import sendFeedbackNo from './send-feedback-no';
 import Thankyou from '../feedback-thank-you/ThankYou';
@@ -18,9 +28,13 @@ const PartialNo = () => {
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
 
-    const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
-        String
-    );
+    const [errors, setErrors] = useState({
+        checkboxErrorMessage: '',
+        textFieldInvalidInputs: '',
+        errorHasOccured: false,
+    });
+
+    const feiloppsumeringsBox = useRef<HTMLDivElement | null>(null);
 
     let feedbackTitles = [...feedbackTitle];
 
@@ -35,13 +49,22 @@ const PartialNo = () => {
     };
 
     const submitFeedback = (evt: any) => {
-        evt.preventDefault();
-
         if (!feedbackTitles.length) {
-            setRadiobuttonErrorMessage('Du må velge et alternativ');
+            if (feiloppsumeringsBox.current) {
+                feiloppsumeringsBox.current.focus();
+            }
+
+            setErrors({
+                ...errors,
+                checkboxErrorMessage: 'Du må velge et av alternativene',
+                errorHasOccured: true,
+            });
         } else {
             if (feedbackMessage.length <= 2000) {
-                setRadiobuttonErrorMessage('');
+                setErrors({
+                    ...errors,
+                    checkboxErrorMessage: '',
+                });
                 sendFeedbackNo(
                     feedbackTitle,
                     feedbackMessage,
@@ -51,6 +74,18 @@ const PartialNo = () => {
             }
         }
     };
+
+    useEffect(() => {
+        if (errors.errorHasOccured) {
+            if (feedbackTitles.length) {
+                setErrors({
+                    ...errors,
+                    checkboxErrorMessage: '',
+                    errorHasOccured: true,
+                });
+            }
+        }
+    }, [feedbackTitle]);
 
     return (
         <Fragment>
@@ -68,7 +103,10 @@ const PartialNo = () => {
                                 <Tekst id="gi-din-vurdering-av-informasjon" />
                             </Element>
 
-                            <CheckboxGruppe feil={radiobuttonErrorMessage}>
+                            <CheckboxGruppe
+                                feil={errors.checkboxErrorMessage}
+                                id="category"
+                            >
                                 <Checkbox
                                     label={<Tekst id="lite-relevant-info" />}
                                     value="relevant"
@@ -94,7 +132,25 @@ const PartialNo = () => {
                                 <FeedbackMessage
                                     feedbackMessage={feedbackMessage}
                                     setFeedbackMessage={setFeedbackMessage}
+                                    errors={errors}
+                                    setErrors={setErrors}
                                 />
+                            </div>
+
+                            <div
+                                ref={(el) => (feiloppsumeringsBox.current = el)}
+                            >
+                                {errors.checkboxErrorMessage.length ? (
+                                    <Feiloppsummering
+                                        tittel="For å gå videre må du rette opp følgende:"
+                                        feil={[
+                                            {
+                                                skjemaelementId: 'category',
+                                                feilmelding: errors.checkboxErrorMessage.toString(),
+                                            },
+                                        ]}
+                                    />
+                                ) : null}
                             </div>
 
                             <div className="knapper">

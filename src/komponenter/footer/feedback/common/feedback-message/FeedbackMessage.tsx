@@ -1,4 +1,4 @@
-import React, { Fragment, useMemo } from 'react';
+import React, { Fragment, useMemo, useEffect } from 'react';
 import { Textarea } from 'nav-frontend-skjema';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
@@ -9,11 +9,15 @@ import './FeedbackMessage.less';
 interface Props {
     feedbackMessage: string;
     setFeedbackMessage: any;
+    errors: object;
+    setErrors: any; 
 }
 
 const FeedbackMessage: React.FC<Props> = ({
     feedbackMessage,
     setFeedbackMessage,
+    errors,
+    setErrors
 }) => {
     const getViolationsFormatted = () => {
         const filter = new Filter([]);
@@ -26,6 +30,10 @@ const FeedbackMessage: React.FC<Props> = ({
     const violationsMemoized = useMemo(() => getViolationsFormatted(), [
         feedbackMessage,
     ]);
+
+    useEffect(() => {
+        setErrors({...errors, textFieldValidInputs: violationsMemoized })
+    }, [violationsMemoized])
 
     return (
         <Fragment>
@@ -40,7 +48,7 @@ const FeedbackMessage: React.FC<Props> = ({
                 onChange={(e) => setFeedbackMessage(e.target.value)}
             />
 
-            {violationsMemoized.length ? (
+            {/* {violationsMemoized.length ? (
                 <Alertstripe
                     className="personvernAdvarsel"
                     form="inline"
@@ -52,7 +60,7 @@ const FeedbackMessage: React.FC<Props> = ({
                         riktig kan du trykke 'Send inn'
                     </Normaltekst>
                 </Alertstripe>
-            ) : null}
+            ) : null} */}
         </Fragment>
     );
 };

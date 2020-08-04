@@ -1,5 +1,5 @@
-import React, { useState, Fragment } from 'react';
-import { RadioGruppe, Radio } from 'nav-frontend-skjema';
+import React, { useState, Fragment, useEffect, useRef, createRef } from 'react';
+import { RadioGruppe, Radio, Feiloppsummering } from 'nav-frontend-skjema';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
@@ -17,20 +17,34 @@ const Elaborated = () => {
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
 
-    const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
-        String
-    );
+    const [errors, setErrors] = useState({
+        radiobuttonErrorMessage: '',
+        textFieldInvalidInputs: '',
+        errorHasOccured: false,
+    });
 
     const { language } = useSelector((state: AppState) => state.language);
 
-    const submitFeedback = (evt: any) => {
-        evt.preventDefault();
+    const feiloppsumeringsBox = useRef<HTMLDivElement | null>(null);
 
+    const submitFeedback = (evt: any) => {
+        // Sett feilmelding dersom kategori ikke er valgt
         if (!category.length) {
-            setRadiobuttonErrorMessage('Du må velge et alternativ');
+            if (feiloppsumeringsBox.current) {
+                feiloppsumeringsBox.current.focus();
+            }
+
+            setErrors({
+                ...errors,
+                radiobuttonErrorMessage: 'Du må velge et av alternativene',
+                errorHasOccured: true,
+            });
         } else {
             if (feedbackMessage.length <= 2000) {
-                setRadiobuttonErrorMessage('');
+                setErrors({
+                    ...errors,
+                    radiobuttonErrorMessage: '',
+                });
                 sendFeedbackReport(
                     category,
                     feedbackMessage,
@@ -40,6 +54,21 @@ const Elaborated = () => {
             }
         }
     };
+
+    // Hvis feil tidligere har forekommet, begynn å sjekke feil etter onChange
+    useEffect(() => {
+        if (errors.errorHasOccured) {
+            if (category.length) {
+                setErrors({
+                    ...errors,
+                    radiobuttonErrorMessage: '',
+                    errorHasOccured: true,
+                });
+            }
+        }
+    }, [category]);
+
+    console.log(errors)
 
     return (
         <Fragment>
@@ -57,7 +86,10 @@ const Elaborated = () => {
                                 <Tekst id="velg-type-feil-mangler" />
                             </Element>
 
-                            <RadioGruppe feil={radiobuttonErrorMessage}>
+                            <RadioGruppe
+                                feil={errors.radiobuttonErrorMessage}
+                                id="category"
+                            >
                                 <Radio
                                     label={<Tekst id="teknisk-feil" />}
                                     name="feil"
@@ -92,8 +124,28 @@ const Elaborated = () => {
                                 <FeedbackMessage
                                     feedbackMessage={feedbackMessage}
                                     setFeedbackMessage={setFeedbackMessage}
+                                    errors={errors}
+                                    setErrors={setErrors}
                                 />
                             </div>
+
+                            {errors.radiobuttonErrorMessage.length ? (
+                                <div
+                                    ref={(el) =>
+                                        (feiloppsumeringsBox.current = el)
+                                    }
+                                >
+                                    <Feiloppsummering
+                                        tittel="For å gå videre må du rette opp følgende:"
+                                        feil={[
+                                            {
+                                                skjemaelementId: 'category',
+                                                feilmelding: errors.radiobuttonErrorMessage.toString(),
+                                            },
+                                        ]}
+                                    />
+                                </div>
+                            ) : null}
 
                             <div className="knapper">
                                 <div className="send-inn">
