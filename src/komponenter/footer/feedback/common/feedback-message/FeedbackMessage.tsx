@@ -13,12 +13,12 @@ interface Props {
     setErrors: any; 
 }
 
-const FeedbackMessage: React.FC<Props> = ({
+const FeedbackMessage = ({
     feedbackMessage,
     setFeedbackMessage,
     errors,
     setErrors
-}) => {
+}: Props) => {
     const getViolationsFormatted = () => {
         const filter = new Filter([]);
 
