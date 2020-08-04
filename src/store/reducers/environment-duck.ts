@@ -1,4 +1,4 @@
-import { MenuValue } from '../../utils/meny-storage-utils';
+import { MenuValue } from 'utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
 import { Language } from './language-duck';
 
@@ -20,6 +20,7 @@ export interface EnvironmentState {
         SIMPLE_FOOTER: boolean;
         REDIRECT_TO_APP: boolean;
         LEVEL: string;
+        FEEDBACK: boolean;
     };
 
     COOKIES: {
@@ -46,6 +47,7 @@ export const initialState: EnvironmentState = {
         SIMPLE_FOOTER: false,
         REDIRECT_TO_APP: false,
         LEVEL: 'string',
+        FEEDBACK: false,
     },
 
     // Cookies

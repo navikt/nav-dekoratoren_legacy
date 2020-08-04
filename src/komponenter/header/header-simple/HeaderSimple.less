@@ -10,7 +10,7 @@
     &__right {
         display: flex;
         align-items: center;
-        & > :first-child {
+        & > :first-child:nth-last-child(2) {
             margin: 0 1rem;
             @media (max-width: @screen-sm) {
                 display: none;
@@ -40,10 +40,6 @@
     .nav-logo-lenke {
         width: 78px;
         padding: 0.25rem;
-
-        .nav-logo-fill {
-            fill: black;
-        }
 
         @media (max-width: @mobilMaxWidth) {
             width: 74px;

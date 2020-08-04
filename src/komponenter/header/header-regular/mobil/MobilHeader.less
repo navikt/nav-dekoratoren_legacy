@@ -17,9 +17,18 @@
     .login-knapp-container,
     .varselbjelle__knapp {
         margin-right: 0.5rem;
+
+        @media (max-width: @smallMobileMaxWidth) {
+            margin-left: 0.2rem;
+            margin-right: 0.3rem;
+        }
     }
 
     #mobilmeny-knapp-id {
         margin-right: @margins-sides-mobil;
+
+        @media (max-width: @smallMobileMaxWidth) {
+            margin-right: 0.5rem;
+        }
     }
 }
