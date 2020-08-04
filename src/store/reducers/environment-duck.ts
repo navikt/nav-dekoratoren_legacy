@@ -1,4 +1,4 @@
-import { MenuValue } from '../../utils/meny-storage-utils';
+import { MenuValue } from 'utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
 import { Language } from './language-duck';
 

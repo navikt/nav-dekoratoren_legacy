@@ -224,9 +224,12 @@ export const ledetekster: { [key: string]: string } = {
     'fant-det-du-lette-etter-svarknapp-nei': 'Nei',
     'fant-det-du-lette-etter-svarknapp-nei-en': 'No',
     'fant-det-du-lette-etter-svarknapp-nei-se': 'Nei',
-    'gi-din-vurdering-av-informasjon': 'Gi din vurdering av informasjonen på siden',
-    'gi-din-vurdering-av-informasjon-en': 'Give your evaluation of the information on this page',
-    'gi-din-vurdering-av-informasjon-se': 'Gi din vurdering av informasjonen på siden',
+    'gi-din-vurdering-av-informasjon':
+        'Gi din vurdering av informasjonen på siden',
+    'gi-din-vurdering-av-informasjon-en':
+        'Give your evaluation of the information on this page',
+    'gi-din-vurdering-av-informasjon-se':
+        'Gi din vurdering av informasjonen på siden',
     'hva-lette-du-etter-spørsmål': 'Hva lette du etter?',
     'hva-lette-du-etter-spørsmål-en': 'What were you looking for?',
     'hva-lette-du-etter-spørsmål-se': 'Hva lette du etter?',
@@ -239,32 +242,39 @@ export const ledetekster: { [key: string]: string } = {
     'din-tilbakemelding': 'Hva gikk galt?',
     'din-tilbakemelding-en': 'What went wrong?',
     'din-tilbakemelding-se': 'Hva som gikk galt?',
-    'advarsel-om-personopplysninger': 'Unngå sensitive personopplysninger, som for eksempel opplysninger om helseforhold eller diagnoser. Du kan ikke spørre om status i saken din, da må du logge inn og sjekke på Ditt NAV under Dine saker.',
+    'advarsel-om-personopplysninger':
+        'Unngå sensitive personopplysninger, som for eksempel opplysninger om helseforhold eller diagnoser. Du kan ikke spørre om status i saken din, da må du logge inn og sjekke på Ditt NAV under Dine saker.',
     'advarsel-om-personopplysninger-en': 'This is a warning',
     'advarsel-om-personopplysninger-se': 'Dette er en advarsel',
     'send-inn-feilrapport': 'Send inn',
     'send-inn-feilrapport-en': 'Submit',
     'send-inn-feilrapport-se': 'Send inn',
-    'avbryt': 'Avbryt',
+    avbryt: 'Avbryt',
     'avbryt-en': 'Cancel',
     'avbryt-se': 'Avbryt',
-    'hensikt-med-tilbakemelding': 'Vi vil bruke svaret ditt til å forbedre nettsidene våre',
-    'hensikt-med-tilbakemelding-en': 'We will use your answer to improve our website',
-    'hensikt-med-tilbakemelding-se': 'Vi vil bruke svaret ditt til å forbedre nettsidene våre',
+    'hensikt-med-tilbakemelding':
+        'Vi vil bruke svaret ditt til å forbedre nettsidene våre',
+    'hensikt-med-tilbakemelding-en':
+        'We will use your answer to improve our website',
+    'hensikt-med-tilbakemelding-se':
+        'Vi vil bruke svaret ditt til å forbedre nettsidene våre',
     'teknisk-feil': 'Teknisk feil',
     'teknisk-feil-en': 'Technical error',
     'teknisk-feil-se': 'Teknisk feil',
     'feil-informasjon': 'Feil informasjon',
     'feil-informasjon-en': 'Wrong information',
     'feil-informasjon-se': 'Feil informasjon',
-    'skjermleser': 'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel',
-    'skjermleser-en': 'Error when using screen readers or other accessibility devices',
+    skjermleser:
+        'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel',
+    'skjermleser-en':
+        'Error when using screen readers or other accessibility devices',
     'skjermleser-se': 'Skjermleser',
-    'annet': 'Annet',
+    annet: 'Annet',
     'annet-en': 'Other',
     'annet-se': 'Annet',
     'lite-oversiktlig': 'Innholdet var lite oversiktlig',
-    'lite-oversiktlig-en': 'It was difficult to get a good overview of the content',
+    'lite-oversiktlig-en':
+        'It was difficult to get a good overview of the content',
     'lite-oversiktlig-se': 'Innholdet var lite oversiktlig',
     'lite-forstaelig': 'Jeg forstod ikke innholdet',
     'lite-forstaelig-en': 'I did not understand the information',
@@ -272,7 +282,7 @@ export const ledetekster: { [key: string]: string } = {
     'lite-relevant-info': 'Innholdet var ikke relevant for meg',
     'lite-relevant-info-en': 'The content was not relevant for me',
     'lite-relevant-info-se': 'Innholdet var ikke relevant for meg',
-    'villedende': 'Innholdet var villedende',
+    villedende: 'Innholdet var villedende',
     'villedende-en': 'The content was misleading',
     'villedende-se': 'Innholdet var villedende',
 };
