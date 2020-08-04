@@ -21,7 +21,7 @@ export const Header = () => {
     const erInnlogget = useSelector(
         (state: AppState) => state.innloggingsstatus.data.authenticated
     );
-    const featureToggles = useSelector(
+    const initialFeatureToggles = useSelector(
         (state: AppState) => state.featureToggles
     );
     const { PARAMS, APP_BASE_URL, API_UNLEASH_PROXY_URL } = useSelector(
@@ -35,12 +35,12 @@ export const Header = () => {
     // External data
     useEffect(() => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
-        if (Object.keys(featureToggles).length) {
-            fetchFeatureToggles(API_UNLEASH_PROXY_URL, featureToggles)
-                .then((featureToggles) =>
+        if (Object.keys(initialFeatureToggles).length) {
+            fetchFeatureToggles(API_UNLEASH_PROXY_URL, initialFeatureToggles)
+                .then((actualFeatureToggles) =>
                     dispatch({
                         type: ActionType.SETT_FEATURE_TOGGLES,
-                        data: featureToggles,
+                        data: actualFeatureToggles,
                     })
                 )
                 .catch((error) =>
