@@ -2,6 +2,7 @@ import { fetchToJson } from './api-utils';
 import { Data as innloggingsstatusData } from '../store/reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from '../store/reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
+import { FeatureToggles } from '../store/reducers/feature-toggles-duck';
 
 export enum Status {
     OK = 'OK',
@@ -46,3 +47,17 @@ export const lagreVarslerLestFetch = (
         body: JSON.stringify(nyesteId),
         credentials: 'include',
     });
+
+export const fetchFeatureToggles = (featureToggles: FeatureToggles) =>
+    fetchToJson(
+        `https://www.nav.no/person/personopplysninger-api/feature-toggles${getFeatureToggleUrl(
+            featureToggles
+        )}`
+    );
+
+export const getFeatureToggleUrl = (featureToggles: FeatureToggles) =>
+    Object.keys(featureToggles)
+        .map(
+            (feature: string, i: number) => `${!i ? `?` : ``}feature=${feature}`
+        )
+        .join('&');

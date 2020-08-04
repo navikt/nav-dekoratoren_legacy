@@ -12,12 +12,17 @@ import { Language, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
+import { fetchFeatureToggles } from '../../api/api';
+import { ActionType } from '../../store/actions';
 
 export const Header = () => {
     const dispatch = useDispatch();
     const [cookies, setCookie] = useCookies(['decorator-context']);
     const erInnlogget = useSelector(
         (state: AppState) => state.innloggingsstatus.data.authenticated
+    );
+    const featureToggles = useSelector(
+        (state: AppState) => state.featureToggles
     );
     const { PARAMS, APP_BASE_URL } = useSelector(
         (state: AppState) => state.environment
@@ -30,6 +35,12 @@ export const Header = () => {
     // External data
     useEffect(() => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
+        fetchFeatureToggles(featureToggles).then((featureToggles) =>
+            dispatch({
+                type: ActionType.SETT_FEATURE_TOGGLES,
+                data: featureToggles,
+            })
+        );
     }, []);
 
     // Change context
