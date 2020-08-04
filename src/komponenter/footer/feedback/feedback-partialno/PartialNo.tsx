@@ -98,7 +98,7 @@ const PartialNo = () => {
                     </div>
 
                     <div className="partialno-container">
-                        <form onSubmit={submitFeedback}>
+                        <form onSubmit="return false">
                             <Element className="sub-overskrift">
                                 <Tekst id="gi-din-vurdering-av-informasjon" />
                             </Element>
@@ -158,6 +158,7 @@ const PartialNo = () => {
                                     <Hovedknapp
                                         htmlType="submit"
                                         className="reset-knapp"
+                                        onClick={submitFeedback}
                                     >
                                         <Tekst id="send-inn-feilrapport" />
                                     </Hovedknapp>

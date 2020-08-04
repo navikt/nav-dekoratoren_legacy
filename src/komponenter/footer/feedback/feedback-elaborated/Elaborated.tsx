@@ -53,6 +53,8 @@ const Elaborated = () => {
                 setThankYouMessage(true);
             }
         }
+
+        return false;
     };
 
     // Hvis feil tidligere har forekommet, begynn å sjekke feil etter onChange
@@ -79,7 +81,7 @@ const Elaborated = () => {
                     </div>
 
                     <div className="elaborated-container">
-                        <form onSubmit={submitFeedback}>
+                        <form onSubmit="return false" action="">
                             <Element className="sub-overskrift">
                                 <Tekst id="velg-type-feil-mangler" />
                             </Element>
@@ -150,6 +152,7 @@ const Elaborated = () => {
                                     <Hovedknapp
                                         htmlType="submit"
                                         className="reset-knapp"
+                                        onClick={submitFeedback}
                                     >
                                         <Tekst id="send-inn-feilrapport" />
                                     </Hovedknapp>
