@@ -27,13 +27,17 @@ const Elaborated = () => {
 
     const feiloppsumeringsBox = useRef<HTMLDivElement | null>(null);
 
+    /* const focus = () => {
+        if (feiloppsumeringsBox.current) {
+            feiloppsumeringsBox.current.focus();
+        }
+    }; */
+
     const submitFeedback = (evt: any) => {
+        evt.preventDefault();
+
         // Sett feilmelding dersom kategori ikke er valgt
         if (!category.length) {
-            if (feiloppsumeringsBox.current) {
-                feiloppsumeringsBox.current.focus();
-            }
-
             setErrors({
                 ...errors,
                 radiobuttonErrorMessage: 'Du må velge et av alternativene',
@@ -129,12 +133,8 @@ const Elaborated = () => {
                                 />
                             </div>
 
-                            {errors.radiobuttonErrorMessage.length ? (
-                                <div
-                                    ref={(el) =>
-                                        (feiloppsumeringsBox.current = el)
-                                    }
-                                >
+                            <div ref={feiloppsumeringsBox}>
+                                {errors.radiobuttonErrorMessage.length ? (
                                     <Feiloppsummering
                                         tittel="For å gå videre må du rette opp følgende:"
                                         feil={[
@@ -144,14 +144,15 @@ const Elaborated = () => {
                                             },
                                         ]}
                                     />
-                                </div>
-                            ) : null}
+                                ) : null}
+                            </div>
 
                             <div className="knapper">
                                 <div className="send-inn">
                                     <Hovedknapp
                                         htmlType="submit"
                                         className="reset-knapp"
+                                        onClick={focus}
                                     >
                                         <Tekst id="send-inn-feilrapport" />
                                     </Hovedknapp>

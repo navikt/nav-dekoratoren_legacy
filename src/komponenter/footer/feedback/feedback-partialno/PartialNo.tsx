@@ -38,6 +38,12 @@ const PartialNo = () => {
 
     let feedbackTitles = [...feedbackTitle];
 
+    /* const focus = () => {
+        if (feiloppsumeringsBox.current) {
+            feiloppsumeringsBox.current.focus();
+        }
+    }; */
+
     const onClickAarsak = (evt: ChangeEvent<HTMLInputElement>) => {
         feedbackTitles.includes(evt.target.value)
             ? (feedbackTitles = feedbackTitles.filter(
@@ -49,11 +55,9 @@ const PartialNo = () => {
     };
 
     const submitFeedback = (evt: any) => {
-        if (!feedbackTitles.length) {
-            if (feiloppsumeringsBox.current) {
-                feiloppsumeringsBox.current.focus();
-            }
+        evt.preventDefault();
 
+        if (!feedbackTitles.length) {
             setErrors({
                 ...errors,
                 checkboxErrorMessage: 'Du må velge et av alternativene',
