@@ -24,7 +24,7 @@ export const Header = () => {
     const featureToggles = useSelector(
         (state: AppState) => state.featureToggles
     );
-    const { PARAMS, APP_BASE_URL } = useSelector(
+    const { PARAMS, APP_BASE_URL, API_UNLEASH_PROXY_URL } = useSelector(
         (state: AppState) => state.environment
     );
     const defaultToPerson = () => {
@@ -36,11 +36,12 @@ export const Header = () => {
     // External data
     useEffect(() => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
-        fetchFeatureToggles(featureToggles).then((featureToggles) =>
-            dispatch({
-                type: ActionType.SETT_FEATURE_TOGGLES,
-                data: featureToggles,
-            })
+        fetchFeatureToggles(API_UNLEASH_PROXY_URL, featureToggles).then(
+            (featureToggles) =>
+                dispatch({
+                    type: ActionType.SETT_FEATURE_TOGGLES,
+                    data: featureToggles,
+                })
         );
     }, []);
 

@@ -48,9 +48,12 @@ export const lagreVarslerLestFetch = (
         credentials: 'include',
     });
 
-export const fetchFeatureToggles = (featureToggles: FeatureToggles) =>
+export const fetchFeatureToggles = (
+    API_UNLEASH_PROXY_URL: string,
+    featureToggles: FeatureToggles
+) =>
     fetchToJson(
-        `https://www.nav.no/person/personopplysninger-api/feature-toggles${getFeatureToggleUrl(
+        `${API_UNLEASH_PROXY_URL}/feature-toggles${getFeatureToggleUrl(
             featureToggles
         )}`,
         { credentials: 'include' }
