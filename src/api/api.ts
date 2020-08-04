@@ -52,7 +52,8 @@ export const fetchFeatureToggles = (featureToggles: FeatureToggles) =>
     fetchToJson(
         `https://www.nav.no/person/personopplysninger-api/feature-toggles${getFeatureToggleUrl(
             featureToggles
-        )}`
+        )}`,
+        { credentials: 'include' }
     );
 
 export const getFeatureToggleUrl = (featureToggles: FeatureToggles) =>
