@@ -68,8 +68,6 @@ const Elaborated = () => {
         }
     }, [category]);
 
-    console.log(errors)
-
     return (
         <Fragment>
             {!thankYouMessage ? (
