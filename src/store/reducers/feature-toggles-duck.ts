@@ -5,13 +5,13 @@ export interface FeatureToggles {
     [key: string]: boolean;
 }
 
-// Define required feature-toggles, e.g:
+// Define feature-toggles and initial value, e.g:
 // {
 //   dekoratoren.example': false,
 //   ...
 // }
 export const initialState: FeatureToggles = {};
-// Toggles will be fetched on runtime
+// Defined toggles will be fetched from unleash on runtime
 
 export const reducer = (
     state: FeatureToggles = initialState,
