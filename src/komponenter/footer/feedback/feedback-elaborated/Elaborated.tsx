@@ -55,14 +55,6 @@ const Elaborated = () => {
                                     }
                                 />
                                 <Radio
-                                    label={<Tekst id="feil-informasjon" />}
-                                    name="feil"
-                                    value="feil informasjon"
-                                    onChange={(e) =>
-                                        setCategory(e.target.value)
-                                    }
-                                />
-                                <Radio
                                     label={<Tekst id="skjermleser" />}
                                     name="feil"
                                     value="skjermleser"
@@ -95,7 +87,7 @@ const Elaborated = () => {
                     </div>
                 </div>
             ) : (
-                <Thankyou />
+                <Thankyou showFeedbackUsage={true}/>
             )}
         </Fragment>
     );
