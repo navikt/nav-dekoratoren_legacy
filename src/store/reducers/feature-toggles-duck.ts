@@ -10,7 +10,9 @@ export interface FeatureToggles {
 //   dekoratoren.example': false,
 //   ...
 // }
-export const initialState: FeatureToggles = {};
+export const initialState: FeatureToggles = {
+    'dekoratoren.skjermdeling': false,
+};
 // Defined toggles will be fetched from unleash on runtime
 
 export const reducer = (

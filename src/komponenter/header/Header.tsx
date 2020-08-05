@@ -14,6 +14,7 @@ import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 import { fetchFeatureToggles } from '../../api/api';
 import { ActionType } from '../../store/actions';
+import { loadVergic } from '../../utils/scripts';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export const Header = () => {
     const erInnlogget = useSelector(
         (state: AppState) => state.innloggingsstatus.data.authenticated
     );
-    const initialFeatureToggles = useSelector(
+    const currentFeatureToggles = useSelector(
         (state: AppState) => state.featureToggles
     );
     const { PARAMS, APP_BASE_URL, API_UNLEASH_PROXY_URL } = useSelector(
@@ -32,15 +33,22 @@ export const Header = () => {
         setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
     };
 
+    // Feature toggles
+    useEffect(() => {
+        if (currentFeatureToggles['dekoratoren.skjermdeling']) {
+            loadVergic();
+        }
+    }, [currentFeatureToggles]);
+
     // External data
     useEffect(() => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
-        if (Object.keys(initialFeatureToggles).length) {
-            fetchFeatureToggles(API_UNLEASH_PROXY_URL, initialFeatureToggles)
-                .then((actualFeatureToggles) =>
+        if (Object.keys(currentFeatureToggles).length) {
+            fetchFeatureToggles(API_UNLEASH_PROXY_URL, currentFeatureToggles)
+                .then((updatedFeatureToggles) =>
                     dispatch({
                         type: ActionType.SETT_FEATURE_TOGGLES,
-                        data: actualFeatureToggles,
+                        data: updatedFeatureToggles,
                     })
                 )
                 .catch((error) =>
