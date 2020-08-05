@@ -27,7 +27,7 @@
     },
     "dependencies": {
         "@navikt/fnrvalidator": "^1.1.3",
-        "@anders-nom/nav-chatbot": "^1.2.3-test01",
+        "@anders-nom/nav-chatbot": "1.2.3-9",
         "@promster/express": "^4.1.11",
         "amplitude-js": "^7.1.0",
         "classnames": "^2.2.6",
