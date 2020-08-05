@@ -249,7 +249,7 @@ export const ledetekster: { [key: string]: string } = {
     'send-inn-feilrapport': 'Send inn',
     'send-inn-feilrapport-en': 'Submit',
     'send-inn-feilrapport-se': 'Send inn',
-    avbryt: 'Avbryt',
+    'avbryt': 'Avbryt',
     'avbryt-en': 'Cancel',
     'avbryt-se': 'Avbryt',
     'hensikt-med-tilbakemelding':
@@ -264,12 +264,12 @@ export const ledetekster: { [key: string]: string } = {
     'feil-informasjon': 'Feil informasjon',
     'feil-informasjon-en': 'Wrong information',
     'feil-informasjon-se': 'Feil informasjon',
-    skjermleser:
+    'skjermleser':
         'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel',
     'skjermleser-en':
         'Error when using screen readers or other accessibility devices',
     'skjermleser-se': 'Skjermleser',
-    annet: 'Annet',
+    'annet': 'Annet',
     'annet-en': 'Other',
     'annet-se': 'Annet',
     'lite-oversiktlig': 'Innholdet var lite oversiktlig',
@@ -282,7 +282,7 @@ export const ledetekster: { [key: string]: string } = {
     'lite-relevant-info': 'Innholdet var ikke relevant for meg',
     'lite-relevant-info-en': 'The content was not relevant for me',
     'lite-relevant-info-se': 'Innholdet var ikke relevant for meg',
-    villedende: 'Innholdet var villedende',
+    'villedende': 'Innholdet var villedende',
     'villedende-en': 'The content was misleading',
     'villedende-se': 'Innholdet var villedende',
 };
