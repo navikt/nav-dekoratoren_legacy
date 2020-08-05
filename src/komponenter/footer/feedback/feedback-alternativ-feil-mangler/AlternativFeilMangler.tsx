@@ -6,9 +6,9 @@ import Tekst from 'tekster/finn-tekst';
 import sendFeedbackReport from './send-feedback-report';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
-import './Elaborated.less';
+import './AlternativFeilMangler.less';
 
-const Elaborated = () => {
+const AlternativFeilMangler = () => {
     const [category, setCategory] = useState(String);
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
@@ -32,14 +32,14 @@ const Elaborated = () => {
     return (
         <Fragment>
             {!thankYouMessage ? (
-                <div className="elaborated-wrapper">
+                <div className="rapporter-om-feil-wrapper">
                     <div className="overskrift-container">
                         <Ingress>
                             <Tekst id="rapporter-om-feil-mangler" />
                         </Ingress>
                     </div>
 
-                    <div className="elaborated-container">
+                    <div className="alternativ-feil-mangler-container">
                         <form onSubmit={submitFeedback}>
                             <Element className="sub-overskrift">
                                 <Tekst id="velg-type-feil-mangler" />
@@ -81,7 +81,7 @@ const Elaborated = () => {
                                         <Tekst id="send-inn-feilrapport" />
                                     </Hovedknapp>
                                 </div>
-                                <CloseFeedbackHandler context="elaborated" />
+                                <CloseFeedbackHandler context="alternativ-feil-mangler" />
                             </div>
                         </form>
                     </div>
@@ -93,4 +93,4 @@ const Elaborated = () => {
     );
 };
 
-export default Elaborated;
+export default AlternativFeilMangler;

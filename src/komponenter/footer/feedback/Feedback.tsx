@@ -4,9 +4,9 @@ import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
 import './Feedback.less';
 import { verifyWindowObj } from 'utils/Environment';
-import PartialNo from './feedback-partialno/PartialNo';
+import AlternativNei from './feedback-alternativ-nei/AlternativNei';
 import ThankYou from './feedback-thank-you/ThankYou';
-import Elaborated from './feedback-elaborated/Elaborated';
+import AlternativFeilMangler from './feedback-alternativ-feil-mangler/AlternativFeilMangler';
 import { CloseFeedbackContext } from './common/CloseFeedbackContext';
 import amplitudeTriggers from 'utils/amplitude-triggers';
 const { logAmplitudeEvent } = verifyWindowObj()
@@ -99,8 +99,8 @@ const Feedback = () => {
                         </Fragment>
                     ) : null}
                     {buttonsPressed.yesButton && <ThankYou showFeedbackUsage={false} />}
-                    {buttonsPressed.noButton && <PartialNo />}
-                    {buttonsPressed.reportButton && <Elaborated />}
+                    {buttonsPressed.noButton && <AlternativNei />}
+                    {buttonsPressed.reportButton && <AlternativFeilMangler />}
                 </div>
             </Fragment>
         </CloseFeedbackContext.Provider>

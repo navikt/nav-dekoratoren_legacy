@@ -6,9 +6,9 @@ import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
 import sendFeedbackNo from './send-feedback-no';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
-import './PartialNo.less';
+import './AlternativNei.less';
 
-const PartialNo = () => {
+const AlternativNei = () => {
     const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
@@ -44,14 +44,14 @@ const PartialNo = () => {
     return (
         <Fragment>
             {!thankYouMessage ? (
-                <div className="partialno-wrapper">
+                <div className="alternativ-nei-wrapper">
                     <div className="overskrift-container">
                         <Ingress>
                             <Tekst id="send-undersokelse-takk" />
                         </Ingress>
                     </div>
 
-                    <div className="partialno-container">
+                    <div className="alternativ-nei-container">
                         <form onSubmit={submitFeedback}>
                             <Element className="sub-overskrift">
                                 <Tekst id="gi-din-vurdering-av-informasjon" />
@@ -83,7 +83,7 @@ const PartialNo = () => {
                                         <Tekst id="send-inn-feilrapport" />
                                     </Hovedknapp>
                                 </div>
-                                <CloseFeedbackHandler context="partialno" />
+                                <CloseFeedbackHandler context="alternativ-nei" />
                             </div>
                         </form>
                     </div>
@@ -95,4 +95,4 @@ const PartialNo = () => {
     );
 };
 
-export default PartialNo;
+export default AlternativNei;
