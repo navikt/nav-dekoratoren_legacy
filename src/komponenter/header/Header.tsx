@@ -33,7 +33,7 @@ export const Header = () => {
         setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
     };
 
-    // Feature toggles
+    // Handle feature toggles
     useEffect(() => {
         if (currentFeatureToggles['dekoratoren.skjermdeling']) {
             loadVergic();
@@ -42,6 +42,7 @@ export const Header = () => {
 
     // External data
     useEffect(() => {
+        hentInnloggingsstatus(APP_BASE_URL)(dispatch);
         fetchMenypunkter(APP_BASE_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
             fetchFeatureToggles(API_UNLEASH_PROXY_URL, currentFeatureToggles)
@@ -71,6 +72,13 @@ export const Header = () => {
         }
     }, []);
 
+    // Fetch notifications
+    useEffect(() => {
+        if (erInnlogget) {
+            hentVarsler(APP_BASE_URL)(dispatch);
+        }
+    }, [erInnlogget]);
+
     // Change language
     const checkUrlForLanguage = () => {
         if (PARAMS.LANGUAGE !== Language.IKKEBESTEMT) {
@@ -88,16 +96,6 @@ export const Header = () => {
         window.addEventListener('popstate', checkUrlForLanguage);
         checkUrlForLanguage();
     }, []);
-
-    useEffect(() => {
-        hentInnloggingsstatus(APP_BASE_URL)(dispatch);
-    }, []);
-
-    useEffect(() => {
-        if (erInnlogget) {
-            hentVarsler(APP_BASE_URL)(dispatch);
-        }
-    }, [erInnlogget]);
 
     return (
         <Fragment>
