@@ -1,31 +1,42 @@
-import React, { useState, Fragment, useEffect, useRef, createRef } from 'react';
-import { RadioGruppe, Radio, Feiloppsummering } from 'nav-frontend-skjema';
+import React, {
+    useState,
+    Fragment,
+    ChangeEvent,
+    useEffect,
+    useRef,
+} from 'react';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
+import {
+    CheckboxGruppe,
+    Checkbox,
+    Feiloppsummering,
+} from 'nav-frontend-skjema';
 import FeedbackMessage from '../common/feedback-message/FeedbackMessage';
-import sendFeedbackReport from './send-feedback-report';
+import sendFeedbackNo from './send-feedback-no';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
-import './Elaborated.less';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import './AlternativNei.less';
 
-const Elaborated = () => {
-    const [category, setCategory] = useState(String);
+const AlternativNei = () => {
+    const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
     const [feedbackMessage, setFeedbackMessage] = useState('');
+    const { language } = useSelector((state: AppState) => state.language);
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
 
     const [errors, setErrors] = useState({
-        radiobuttonErrorMessage: '',
+        checkboxErrorMessage: '',
         textFieldInvalidInputs: '',
         errorHasOccured: false,
     });
 
-    const { language } = useSelector((state: AppState) => state.language);
-
     const feiloppsumeringsBox = useRef<HTMLDivElement | null>(null);
+
+    let feedbackTitles = [...feedbackTitle];
 
     /* const focus = () => {
         if (feiloppsumeringsBox.current) {
@@ -33,96 +44,93 @@ const Elaborated = () => {
         }
     }; */
 
+    const onClickAarsak = (evt: ChangeEvent<HTMLInputElement>) => {
+        feedbackTitles.includes(evt.target.value)
+            ? (feedbackTitles = feedbackTitles.filter(
+                  (e) => e !== evt.target.value
+              ))
+            : feedbackTitles.push(evt.target.value);
+
+        setFeedbackTitle(feedbackTitles);
+    };
+
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        // Sett feilmelding dersom kategori ikke er valgt
-        if (!category.length) {
+        if (!feedbackTitles.length) {
             setErrors({
                 ...errors,
-                radiobuttonErrorMessage: 'Du må velge et av alternativene',
+                checkboxErrorMessage: 'Du må velge et av alternativene',
                 errorHasOccured: true,
             });
         } else {
             if (feedbackMessage.length <= 2000) {
                 setErrors({
                     ...errors,
-                    radiobuttonErrorMessage: '',
+                    checkboxErrorMessage: '',
                 });
-                sendFeedbackReport(
-                    category,
+                sendFeedbackNo(
+                    feedbackTitle,
                     feedbackMessage,
                     language.toLowerCase()
                 );
                 setThankYouMessage(true);
             }
         }
-
-        return false;
     };
 
-    // Hvis feil tidligere har forekommet, begynn å sjekke feil etter onChange
     useEffect(() => {
         if (errors.errorHasOccured) {
-            if (category.length) {
+            if (feedbackTitles.length) {
                 setErrors({
                     ...errors,
-                    radiobuttonErrorMessage: '',
+                    checkboxErrorMessage: '',
                     errorHasOccured: true,
                 });
             }
         }
-    }, [category]);
+    }, [feedbackTitle]);
 
     return (
         <Fragment>
             {!thankYouMessage ? (
-                <div className="elaborated-wrapper">
+                <div className="alternativ-nei-wrapper">
                     <div className="overskrift-container">
                         <Ingress>
-                            <Tekst id="rapporter-om-feil-mangler" />
+                            <Tekst id="send-undersokelse-takk" />
                         </Ingress>
                     </div>
 
-                    <div className="elaborated-container">
-                        <form onSubmit={submitFeedback} action="">
+                    <div className="alternativ-nei-container">
+                        <form onSubmit={submitFeedback}>
                             <Element className="sub-overskrift">
-                                <Tekst id="velg-type-feil-mangler" />
+                                <Tekst id="gi-din-vurdering-av-informasjon" />
                             </Element>
 
-                            <RadioGruppe
-                                feil={errors.radiobuttonErrorMessage}
+                            <CheckboxGruppe
+                                feil={errors.checkboxErrorMessage}
                                 id="category"
                             >
-                                <Radio
-                                    label={<Tekst id="teknisk-feil" />}
-                                    name="feil"
-                                    value="teknisk_feil"
-                                    onChange={(e) =>
-                                        setCategory(e.target.value)
-                                    }
+                                <Checkbox
+                                    label={<Tekst id="lite-relevant-info" />}
+                                    value="relevant"
+                                    onChange={(e) => onClickAarsak(e)}
                                 />
-                                <Radio
-                                    label={<Tekst id="skjermleser" />}
-                                    name="feil"
-                                    value="skjermleser"
-                                    onChange={(e) =>
-                                        setCategory(e.target.value)
-                                    }
+                                <Checkbox
+                                    label={<Tekst id="lite-forstaaelig" />}
+                                    value="forstaaelig"
+                                    onChange={(e) => onClickAarsak(e)}
                                 />
-                                <Radio
-                                    label={<Tekst id="annet" />}
-                                    name="feil"
-                                    value="annet"
-                                    onChange={(e) =>
-                                        setCategory(e.target.value)
-                                    }
+                                <Checkbox
+                                    label={<Tekst id="lite-oversiktlig" />}
+                                    value="oversiktlig"
+                                    onChange={(e) => onClickAarsak(e)}
                                 />
-                            </RadioGruppe>
+                            </CheckboxGruppe>
 
                             <div>
                                 <Element>
-                                    <Tekst id="din-tilbakemelding" />
+                                    <Tekst id="hva-lette-du-etter-spørsmål" />
                                 </Element>
 
                                 <FeedbackMessage
@@ -133,14 +141,16 @@ const Elaborated = () => {
                                 />
                             </div>
 
-                            <div ref={feiloppsumeringsBox}>
-                                {errors.radiobuttonErrorMessage.length ? (
+                            <div
+                                ref={(el) => (feiloppsumeringsBox.current = el)}
+                            >
+                                {errors.checkboxErrorMessage.length ? (
                                     <Feiloppsummering
                                         tittel="For å gå videre må du rette opp følgende:"
                                         feil={[
                                             {
                                                 skjemaelementId: 'category',
-                                                feilmelding: errors.radiobuttonErrorMessage.toString(),
+                                                feilmelding: errors.checkboxErrorMessage.toString(),
                                             },
                                         ]}
                                     />
@@ -156,16 +166,16 @@ const Elaborated = () => {
                                         <Tekst id="send-inn-feilrapport" />
                                     </Hovedknapp>
                                 </div>
-                                <CloseFeedbackHandler context="elaborated" />
+                                <CloseFeedbackHandler context="alternativ-nei" />
                             </div>
                         </form>
                     </div>
                 </div>
             ) : (
-                <Thankyou showFeedbackUsage={true}/>
+                <Thankyou showFeedbackUsage={true} />
             )}
         </Fragment>
     );
 };
 
-export default Elaborated;
+export default AlternativNei;

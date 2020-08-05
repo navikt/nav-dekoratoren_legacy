@@ -18,11 +18,11 @@ const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
     const { setCloseFeedback } = closeFeedbackContext();
 
     const userClosedFeedback = () => {
-        if (context === 'elaborated') {
+        if (context === 'alternativ-feil-mangler') {
             logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, {
                 svar: 'Avbrutt',
             });
-        } else if (context === 'partialno') {
+        } else if (context === 'alternativ-nei') {
             logAmplitudeEvent(amplitudeTriggers.neiKnapp, { svar: 'Avbrutt' });
         }
 

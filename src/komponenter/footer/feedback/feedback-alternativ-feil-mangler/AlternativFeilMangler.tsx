@@ -1,42 +1,31 @@
-import React, {
-    useState,
-    Fragment,
-    ChangeEvent,
-    useEffect,
-    useRef,
-} from 'react';
+import React, { useState, Fragment, useEffect, useRef, createRef } from 'react';
+import { RadioGruppe, Radio, Feiloppsummering } from 'nav-frontend-skjema';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
-import {
-    CheckboxGruppe,
-    Checkbox,
-    Feiloppsummering,
-} from 'nav-frontend-skjema';
 import FeedbackMessage from '../common/feedback-message/FeedbackMessage';
-import sendFeedbackNo from './send-feedback-no';
+import sendFeedbackReport from './send-feedback-report';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
-import './PartialNo.less';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import './AlternativFeilMangler.less';
 
-const PartialNo = () => {
-    const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
+const AlternativFeilMangler = () => {
+    const [category, setCategory] = useState(String);
     const [feedbackMessage, setFeedbackMessage] = useState('');
-    const { language } = useSelector((state: AppState) => state.language);
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
 
     const [errors, setErrors] = useState({
-        checkboxErrorMessage: '',
+        radiobuttonErrorMessage: '',
         textFieldInvalidInputs: '',
         errorHasOccured: false,
     });
 
-    const feiloppsumeringsBox = useRef<HTMLDivElement | null>(null);
+    const { language } = useSelector((state: AppState) => state.language);
 
-    let feedbackTitles = [...feedbackTitle];
+    const feiloppsumeringsBox = useRef<HTMLDivElement | null>(null);
 
     /* const focus = () => {
         if (feiloppsumeringsBox.current) {
@@ -44,93 +33,96 @@ const PartialNo = () => {
         }
     }; */
 
-    const onClickAarsak = (evt: ChangeEvent<HTMLInputElement>) => {
-        feedbackTitles.includes(evt.target.value)
-            ? (feedbackTitles = feedbackTitles.filter(
-                  (e) => e !== evt.target.value
-              ))
-            : feedbackTitles.push(evt.target.value);
-
-        setFeedbackTitle(feedbackTitles);
-    };
-
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        if (!feedbackTitles.length) {
+        // Sett feilmelding dersom kategori ikke er valgt
+        if (!category.length) {
             setErrors({
                 ...errors,
-                checkboxErrorMessage: 'Du må velge et av alternativene',
+                radiobuttonErrorMessage: 'Du må velge et av alternativene',
                 errorHasOccured: true,
             });
         } else {
             if (feedbackMessage.length <= 2000) {
                 setErrors({
                     ...errors,
-                    checkboxErrorMessage: '',
+                    radiobuttonErrorMessage: '',
                 });
-                sendFeedbackNo(
-                    feedbackTitle,
+                sendFeedbackReport(
+                    category,
                     feedbackMessage,
                     language.toLowerCase()
                 );
                 setThankYouMessage(true);
             }
         }
+
+        return false;
     };
 
+    // Hvis feil tidligere har forekommet, begynn å sjekke feil etter onChange
     useEffect(() => {
         if (errors.errorHasOccured) {
-            if (feedbackTitles.length) {
+            if (category.length) {
                 setErrors({
                     ...errors,
-                    checkboxErrorMessage: '',
+                    radiobuttonErrorMessage: '',
                     errorHasOccured: true,
                 });
             }
         }
-    }, [feedbackTitle]);
+    }, [category]);
 
     return (
         <Fragment>
             {!thankYouMessage ? (
-                <div className="partialno-wrapper">
+                <div className="rapporter-om-feil-wrapper">
                     <div className="overskrift-container">
                         <Ingress>
-                            <Tekst id="send-undersokelse-takk" />
+                            <Tekst id="rapporter-om-feil-mangler" />
                         </Ingress>
                     </div>
 
-                    <div className="partialno-container">
+                    <div className="alternativ-feil-mangler-container">
                         <form onSubmit={submitFeedback}>
                             <Element className="sub-overskrift">
-                                <Tekst id="gi-din-vurdering-av-informasjon" />
+                                <Tekst id="velg-type-feil-mangler" />
                             </Element>
 
-                            <CheckboxGruppe
-                                feil={errors.checkboxErrorMessage}
+                            <RadioGruppe
+                                feil={errors.radiobuttonErrorMessage}
                                 id="category"
                             >
-                                <Checkbox
-                                    label={<Tekst id="lite-relevant-info" />}
-                                    value="relevant"
-                                    onChange={(e) => onClickAarsak(e)}
+                                <Radio
+                                    label={<Tekst id="teknisk-feil" />}
+                                    name="feil"
+                                    value="teknisk_feil"
+                                    onChange={(e) =>
+                                        setCategory(e.target.value)
+                                    }
                                 />
-                                <Checkbox
-                                    label={<Tekst id="lite-forstaaelig" />}
-                                    value="forstaaelig"
-                                    onChange={(e) => onClickAarsak(e)}
+                                <Radio
+                                    label={<Tekst id="skjermleser" />}
+                                    name="feil"
+                                    value="skjermleser"
+                                    onChange={(e) =>
+                                        setCategory(e.target.value)
+                                    }
                                 />
-                                <Checkbox
-                                    label={<Tekst id="lite-oversiktlig" />}
-                                    value="oversiktlig"
-                                    onChange={(e) => onClickAarsak(e)}
+                                <Radio
+                                    label={<Tekst id="annet" />}
+                                    name="feil"
+                                    value="annet"
+                                    onChange={(e) =>
+                                        setCategory(e.target.value)
+                                    }
                                 />
-                            </CheckboxGruppe>
+                            </RadioGruppe>
 
                             <div>
                                 <Element>
-                                    <Tekst id="hva-lette-du-etter-spørsmål" />
+                                    <Tekst id="din-tilbakemelding" />
                                 </Element>
 
                                 <FeedbackMessage
@@ -141,16 +133,14 @@ const PartialNo = () => {
                                 />
                             </div>
 
-                            <div
-                                ref={(el) => (feiloppsumeringsBox.current = el)}
-                            >
-                                {errors.checkboxErrorMessage.length ? (
+                            <div ref={feiloppsumeringsBox}>
+                                {errors.radiobuttonErrorMessage.length ? (
                                     <Feiloppsummering
                                         tittel="For å gå videre må du rette opp følgende:"
                                         feil={[
                                             {
                                                 skjemaelementId: 'category',
-                                                feilmelding: errors.checkboxErrorMessage.toString(),
+                                                feilmelding: errors.radiobuttonErrorMessage.toString(),
                                             },
                                         ]}
                                     />
@@ -166,16 +156,16 @@ const PartialNo = () => {
                                         <Tekst id="send-inn-feilrapport" />
                                     </Hovedknapp>
                                 </div>
-                                <CloseFeedbackHandler context="partialno" />
+                                <CloseFeedbackHandler context="alternativ-feil-mangler" />
                             </div>
                         </form>
                     </div>
                 </div>
             ) : (
-                <Thankyou showFeedbackUsage={true} />
+                <Thankyou showFeedbackUsage={true}/>
             )}
         </Fragment>
     );
 };
 
-export default PartialNo;
+export default AlternativFeilMangler;
