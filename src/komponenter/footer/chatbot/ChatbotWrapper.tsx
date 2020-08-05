@@ -3,8 +3,10 @@ import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import Chat from 'komponenter/chatbot';
-import { chatStateKeys } from 'komponenter/chatbot/components/ChatContainer';
+import { verifyWindowObj } from 'utils/Environment';
+const Chat = verifyWindowObj()
+    ? require('@anders-nom/nav-chatbot')
+    : () => null;
 import './ChatbotWrapper.less';
 
 type Props = {
@@ -47,7 +49,7 @@ export const ChatbotWrapper = ({
     };
 
     useEffect(() => {
-        const chatbotSessionActive = !!cookies[chatStateKeys.CONFIG];
+        const chatbotSessionActive = !!cookies['chatbot-frida_config'];
         const oldChatbotIsMounted =
             document.getElementsByClassName('gxKraP').length > 0;
         setMountChatbot(
