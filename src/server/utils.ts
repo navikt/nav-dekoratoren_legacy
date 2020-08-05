@@ -1,7 +1,7 @@
 import { Request } from 'express';
-import { EnvironmentState } from '../store/reducers/environment-duck';
-import { MenuValue } from '../utils/meny-storage-utils';
-import { Language } from '../store/reducers/language-duck';
+import { EnvironmentState } from 'store/reducers/environment-duck';
+import { MenuValue } from 'utils/meny-storage-utils';
+import { Language } from 'store/reducers/language-duck';
 
 interface Cookies {
     [key: string]: MenuValue | Language | string;
@@ -25,6 +25,7 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
         XP_BASE_URL: process.env.XP_BASE_URL as string,
         APP_BASE_URL: process.env.APP_BASE_URL as string,
         API_VARSELINNBOKS_URL: process.env.API_VARSELINNBOKS_URL as string,
+        API_UNLEASH_PROXY_URL: process.env.API_UNLEASH_PROXY_URL as string,
         MINSIDE_ARBEIDSGIVER_URL: process.env
             .MINSIDE_ARBEIDSGIVER_URL as string,
         DITT_NAV_URL: process.env.DITT_NAV_URL as string,

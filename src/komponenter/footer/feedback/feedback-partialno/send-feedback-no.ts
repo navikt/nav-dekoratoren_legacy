@@ -26,7 +26,6 @@ function sendFeedbackNo(categories: string[], message: string, language: string)
     for (const category of categories) {
         logAmplitudeEvent(amplitudeTriggers.neiKnapp, { svar: category })
     }
-
-};
+}
 
 export default sendFeedbackNo;

@@ -12,6 +12,9 @@ import { Language, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
+import { fetchFeatureToggles } from '../../api/api';
+import { ActionType } from '../../store/actions';
+import { loadVergic } from '../../utils/scripts';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -19,7 +22,10 @@ export const Header = () => {
     const erInnlogget = useSelector(
         (state: AppState) => state.innloggingsstatus.data.authenticated
     );
-    const { PARAMS, APP_BASE_URL } = useSelector(
+    const currentFeatureToggles = useSelector(
+        (state: AppState) => state.featureToggles
+    );
+    const { PARAMS, APP_BASE_URL, API_UNLEASH_PROXY_URL } = useSelector(
         (state: AppState) => state.environment
     );
     const defaultToPerson = () => {
@@ -27,9 +33,29 @@ export const Header = () => {
         setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
     };
 
+    // Handle feature toggles
+    useEffect(() => {
+        if (currentFeatureToggles['dekoratoren.skjermdeling']) {
+            loadVergic();
+        }
+    }, [currentFeatureToggles]);
+
     // External data
     useEffect(() => {
+        hentInnloggingsstatus(APP_BASE_URL)(dispatch);
         fetchMenypunkter(APP_BASE_URL)(dispatch);
+        if (Object.keys(currentFeatureToggles).length) {
+            fetchFeatureToggles(API_UNLEASH_PROXY_URL, currentFeatureToggles)
+                .then((updatedFeatureToggles) =>
+                    dispatch({
+                        type: ActionType.SETT_FEATURE_TOGGLES,
+                        data: updatedFeatureToggles,
+                    })
+                )
+                .catch((error) =>
+                    console.error(`Failed to fetch feature-toggles: ${error}`)
+                );
+        }
     }, []);
 
     // Change context
@@ -45,6 +71,13 @@ export const Header = () => {
             context ? dispatch(settArbeidsflate(context)) : defaultToPerson();
         }
     }, []);
+
+    // Fetch notifications
+    useEffect(() => {
+        if (erInnlogget) {
+            hentVarsler(APP_BASE_URL)(dispatch);
+        }
+    }, [erInnlogget]);
 
     // Change language
     const checkUrlForLanguage = () => {
@@ -63,16 +96,6 @@ export const Header = () => {
         window.addEventListener('popstate', checkUrlForLanguage);
         checkUrlForLanguage();
     }, []);
-
-    useEffect(() => {
-        hentInnloggingsstatus(APP_BASE_URL)(dispatch);
-    }, []);
-
-    useEffect(() => {
-        if (erInnlogget) {
-            hentVarsler(APP_BASE_URL)(dispatch);
-        }
-    }, [erInnlogget]);
 
     return (
         <Fragment>

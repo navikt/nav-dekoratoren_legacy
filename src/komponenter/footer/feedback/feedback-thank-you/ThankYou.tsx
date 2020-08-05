@@ -3,16 +3,22 @@ import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import './ThankYou.less';
 
-const Thankyou = () => {
+interface Props {
+    showFeedbackUsage: boolean;
+}
+
+const Thankyou = ({ showFeedbackUsage }: Props) => {
     return (
         <div className="thankyou-container">
             <Ingress>
                 <Tekst id="send-undersokelse-takk" />
             </Ingress>
-            <div className="mellomrom"/>
-            <Normaltekst>
-                <Tekst id="hensikt-med-tilbakemelding" />
-            </Normaltekst>
+            <div className="mellomrom" />
+            {showFeedbackUsage && (
+                <Normaltekst>
+                    <Tekst id="hensikt-med-tilbakemelding" />
+                </Normaltekst>
+            )}
         </div>
     );
 };

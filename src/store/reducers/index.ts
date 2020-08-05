@@ -9,6 +9,8 @@ import varselLestReducer from './varsel-lest-duck';
 import { languageDuck, LanguageState } from './language-duck';
 import dropdownTogglesReducer, { DropdownState } from './dropdown-toggle-duck';
 import environmentReducer, { EnvironmentState } from './environment-duck';
+import featureToggleReducer from './feature-toggles-duck';
+import { FeatureToggles } from './feature-toggles-duck';
 
 export interface AppState {
     environment: EnvironmentState;
@@ -19,6 +21,7 @@ export interface AppState {
     language: LanguageState;
     arbeidsflate: Arbeidsflate;
     dropdownToggles: DropdownState;
+    featureToggles: FeatureToggles;
 }
 
 export const reducers = combineReducers<AppState>({
@@ -30,6 +33,7 @@ export const reducers = combineReducers<AppState>({
     language: languageDuck.reducer,
     arbeidsflate: arbeidsflateReducer,
     dropdownToggles: dropdownTogglesReducer,
+    featureToggles: featureToggleReducer,
 });
 
 export default reducers;

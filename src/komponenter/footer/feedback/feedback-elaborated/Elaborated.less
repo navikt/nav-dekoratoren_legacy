@@ -25,6 +25,18 @@
             display: flex;
             padding-top: 0.5em;
             flex-wrap: wrap;
+            margin-top: 0.5em;
+
+            @media (min-width: @desktopMinWidth) {
+                flex-wrap: nowrap;
+                flex-direction: row;
+            }
+
+            @media (max-width: @mobilMaxWidth) {
+                flex-wrap: wrap;
+                flex-direction: column;
+                justify-content: space-between;
+            }
 
             .send-inn {
                 padding-right: 0.25em;

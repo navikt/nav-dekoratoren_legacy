@@ -152,7 +152,6 @@ const Elaborated = () => {
                                     <Hovedknapp
                                         htmlType="submit"
                                         className="reset-knapp"
-                                        onClick={focus}
                                     >
                                         <Tekst id="send-inn-feilrapport" />
                                     </Hovedknapp>
@@ -163,7 +162,7 @@ const Elaborated = () => {
                     </div>
                 </div>
             ) : (
-                <Thankyou />
+                <Thankyou showFeedbackUsage={true}/>
             )}
         </Fragment>
     );
