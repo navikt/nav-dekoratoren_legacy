@@ -38,6 +38,7 @@
         "express": "^4.17.1",
         "html-react-parser": "^0.13.0",
         "http-proxy-middleware": "^1.0.5",
+        "js-cookie": "^2.2.1",
         "less-plugin-npm-import": "^2.1.0",
         "lodash.debounce": "^4.0.8",
         "lodash.throttle": "^4.1.1",
