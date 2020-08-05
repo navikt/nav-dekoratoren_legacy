@@ -48,8 +48,6 @@ const AlternativFeilMangler = () => {
                 setThankYouMessage(true);
             }
         }
-
-        return false;
     };
 
     /*
