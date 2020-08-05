@@ -48,6 +48,11 @@ const Feedback = () => {
         });
     };
 
+    /* 
+    
+    Resetter komponentet til utgangspunktet dersom avbryt i et komponent lenger ned i treet klikkes
+
+    */
     useEffect(() => {
         if (closeFeedback) {
             setButtonsPressed({

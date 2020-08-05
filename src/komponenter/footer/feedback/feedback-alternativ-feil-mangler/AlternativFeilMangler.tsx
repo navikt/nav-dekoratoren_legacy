@@ -28,7 +28,6 @@ const AlternativFeilMangler = () => {
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
-        // Sett feilmelding dersom kategori ikke er valgt
         if (!category.length) {
             setErrors({
                 ...errors,
@@ -53,7 +52,11 @@ const AlternativFeilMangler = () => {
         return false;
     };
 
-    // Hvis feil tidligere har forekommet, begynn å sjekke feil etter onChange
+    /*
+
+    Sørger for at feil blir sjekket på onChange, etter at 'Send inn' er trykket, iht skjemavalideringskrav
+   
+    */
     useEffect(() => {
         if (errors.errorHasOccured) {
             if (category.length) {

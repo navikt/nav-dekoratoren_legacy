@@ -36,6 +36,11 @@ const AlternativNei = () => {
 
     let feedbackTitles = [...feedbackTitle];
 
+    /*
+
+    Sørger for korrekt state når flere bokser hukes av
+
+    */
     const onClickAarsak = (evt: ChangeEvent<HTMLInputElement>) => {
         feedbackTitles.includes(evt.target.value)
             ? (feedbackTitles = feedbackTitles.filter(
@@ -71,6 +76,11 @@ const AlternativNei = () => {
         }
     };
 
+    /*
+
+    Sørger for at feil blir sjekket på onChange, etter at 'Send inn' er trykket, iht skjemavalideringskrav
+
+    */
     useEffect(() => {
         if (errors.errorHasOccured) {
             if (feedbackTitles.length) {
