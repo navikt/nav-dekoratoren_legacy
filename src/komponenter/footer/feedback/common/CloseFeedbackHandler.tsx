@@ -12,7 +12,7 @@ interface Props {
     context: string;
 }
 
-const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
+const CloseFeedbackHandler = ({ context }: Props) => {
     const closeFeedbackContext = () => useContext(CloseFeedbackContext)!;
 
     const { setCloseFeedback } = closeFeedbackContext();
