@@ -5,7 +5,6 @@ import { GACategory } from 'utils/google-analytics';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { Bilde } from 'komponenter/common/bilde/Bilde';
 
 import alarmIkon from 'ikoner/varsler/alarm.svg';
 import kalenderIkon from 'ikoner/varsler/calendar-3.svg';
@@ -30,12 +29,13 @@ type Props = {
 
 const parseIkon = (ikonStr: string) => {
     const ikon = ikoner[ikonStr] || alarmIkon;
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     return (
         <div className={`varsel-ikon-row`}>
             <div className={`varsel-ikon-container ${ikonStr}`}>
-                <Bilde
+                <img
                     alt={'varsel-ikon'}
-                    src={ikon}
+                    src={`${XP_BASE_URL}${ikon}`}
                     className={`varsel-ikon`}
                 />
             </div>

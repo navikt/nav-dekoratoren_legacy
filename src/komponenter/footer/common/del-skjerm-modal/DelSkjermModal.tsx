@@ -7,9 +7,8 @@ import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
-import { AlertStripeFeil } from 'nav-frontend-alertstriper';
-import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './DelSkjermModal.less';
+import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 
 const Veileder = require('ikoner/del-skjerm/Veileder.svg');
 
@@ -22,6 +21,7 @@ const DelSkjermModal = (props: Props) => {
     const classname = 'delskjerm__modal';
 
     // Language
+    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const language = useSelector((state: AppState) => state.language).language;
     const feilmelding = finnTekst('delskjerm-modal-feilmelding', language);
     const label = finnTekst('delskjerm-modal-label', language);
@@ -93,9 +93,9 @@ const DelSkjermModal = (props: Props) => {
             onRequestClose={props.onClose}
         >
             <div className={'delskjerm__header'}>
-                <Bilde
+                <img
                     className={'delskjerm__veileder'}
-                    src={Veileder}
+                    src={`${XP_BASE_URL}${Veileder}`}
                     alt={''}
                 />
             </div>
