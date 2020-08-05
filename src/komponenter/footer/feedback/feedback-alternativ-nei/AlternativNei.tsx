@@ -34,15 +34,7 @@ const AlternativNei = () => {
         errorHasOccured: false,
     });
 
-    const feiloppsumeringsBox = useRef<HTMLDivElement | null>(null);
-
     let feedbackTitles = [...feedbackTitle];
-
-    /* const focus = () => {
-        if (feiloppsumeringsBox.current) {
-            feiloppsumeringsBox.current.focus();
-        }
-    }; */
 
     const onClickAarsak = (evt: ChangeEvent<HTMLInputElement>) => {
         feedbackTitles.includes(evt.target.value)
@@ -141,21 +133,17 @@ const AlternativNei = () => {
                                 />
                             </div>
 
-                            <div
-                                ref={(el) => (feiloppsumeringsBox.current = el)}
-                            >
-                                {errors.checkboxErrorMessage.length ? (
-                                    <Feiloppsummering
-                                        tittel="For å gå videre må du rette opp følgende:"
-                                        feil={[
-                                            {
-                                                skjemaelementId: 'category',
-                                                feilmelding: errors.checkboxErrorMessage.toString(),
-                                            },
-                                        ]}
-                                    />
-                                ) : null}
-                            </div>
+                            {errors.checkboxErrorMessage.length ? (
+                                <Feiloppsummering
+                                    tittel="For å gå videre må du rette opp følgende:"
+                                    feil={[
+                                        {
+                                            skjemaelementId: 'category',
+                                            feilmelding: errors.checkboxErrorMessage.toString(),
+                                        },
+                                    ]}
+                                />
+                            ) : null}
 
                             <div className="knapper">
                                 <div className="send-inn">

@@ -25,14 +25,6 @@ const AlternativFeilMangler = () => {
 
     const { language } = useSelector((state: AppState) => state.language);
 
-    const feiloppsumeringsBox = useRef<HTMLDivElement | null>(null);
-
-    /* const focus = () => {
-        if (feiloppsumeringsBox.current) {
-            feiloppsumeringsBox.current.focus();
-        }
-    }; */
-
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
@@ -133,19 +125,17 @@ const AlternativFeilMangler = () => {
                                 />
                             </div>
 
-                            <div ref={feiloppsumeringsBox}>
-                                {errors.radiobuttonErrorMessage.length ? (
-                                    <Feiloppsummering
-                                        tittel="For å gå videre må du rette opp følgende:"
-                                        feil={[
-                                            {
-                                                skjemaelementId: 'category',
-                                                feilmelding: errors.radiobuttonErrorMessage.toString(),
-                                            },
-                                        ]}
-                                    />
-                                ) : null}
-                            </div>
+                            {errors.radiobuttonErrorMessage.length ? (
+                                <Feiloppsummering
+                                    tittel="For å gå videre må du rette opp følgende:"
+                                    feil={[
+                                        {
+                                            skjemaelementId: 'category',
+                                            feilmelding: errors.radiobuttonErrorMessage.toString(),
+                                        },
+                                    ]}
+                                />
+                            ) : null}
 
                             <div className="knapper">
                                 <div className="send-inn">
@@ -162,7 +152,7 @@ const AlternativFeilMangler = () => {
                     </div>
                 </div>
             ) : (
-                <Thankyou showFeedbackUsage={true}/>
+                <Thankyou showFeedbackUsage={true} />
             )}
         </Fragment>
     );
