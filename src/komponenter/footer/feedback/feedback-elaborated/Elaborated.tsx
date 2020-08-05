@@ -120,8 +120,8 @@ const Elaborated = () => {
                                 />
                             </RadioGruppe>
 
-                            <div className="elaborated-content">
-                                <Element className="tekst">
+                            <div>
+                                <Element>
                                     <Tekst id="din-tilbakemelding" />
                                 </Element>
 
