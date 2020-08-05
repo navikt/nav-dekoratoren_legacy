@@ -38,6 +38,8 @@ spec:
           value: https://www.nav.no/person/varselinnboks
         - name: API_INNLOGGINGSLINJE_URL
           value: https://www.nav.no/innloggingslinje-api/auth
+        - name: API_UNLEASH_PROXY_URL
+          value: https://www.nav.no/person/pb-unleash-proxy
         - name: MINSIDE_ARBEIDSGIVER_URL
           value: https://arbeidsgiver.nav.no/min-side-arbeidsgiver/
         - name: DITT_NAV_URL
