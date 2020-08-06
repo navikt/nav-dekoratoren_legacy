@@ -4,17 +4,17 @@ import BEMHelper from 'utils/bem';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Language } from 'store/reducers/language-duck';
-import MenyIngress from './mobil-innhold/MenyIngress';
-import Undermeny from './mobil-innhold/Undermeny';
-import Listelement from './mobil-innhold/Listelement';
+import MenyIngress from './elementer/MenyIngress';
+import Undermeny from './elementer/Undermeny';
+import Listelement from './elementer/Listelement';
 import MobilarbeidsflateValg from '../../arbeidsflatemeny/MobilarbeidsflateValg';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
-import InnloggetBruker from './mobil-innhold/innloggetbruker/InnloggetBruker';
-import ForsideLenke from './mobil-innhold/ForsideLenke';
-import Dittnavmeny from './mobil-innhold/dittnavmeny/Dittnavmeny';
+import InnloggetBruker from './elementer/innloggetbruker/InnloggetBruker';
+import ForsideLenke from './elementer/ForsideLenke';
+import Dittnavmeny from './elementer/dittnavmeny/Dittnavmeny';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
-import './MobilVisningsmeny.less';
+import './Innhold.less';
 
 interface Props {
     classname: string;
@@ -34,7 +34,7 @@ const stateSelector = (state: AppState) => ({
     innloggingsstatus: state.innloggingsstatus,
 });
 
-const MobilVisningsmeny = (props: Props) => {
+const Innhold = (props: Props) => {
     const { arbeidsflate, innloggingsstatus } = useSelector(stateSelector);
     const [lenker, settLenker] = useState(props.menyLenker.children[0]);
     const { lang, underMenuIsOpen, minsideLenker } = props;
@@ -117,4 +117,4 @@ const MobilVisningsmeny = (props: Props) => {
     );
 };
 
-export default MobilVisningsmeny;
+export default Innhold;

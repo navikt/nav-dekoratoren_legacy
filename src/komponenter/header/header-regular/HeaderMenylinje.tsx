@@ -14,8 +14,9 @@ import { HovedmenyDesktop } from 'komponenter/header/header-regular/desktop/hove
 import { HovedmenyMobil } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
 import { Status } from 'api/api';
 import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
-import './HeaderMenylinje.less';
 import Logo from 'ikoner/meny/nav-logo-red.svg';
+import SlideToClose from './mobil/hovedmeny/SlideToClose';
+import './HeaderMenylinje.less';
 
 export const headerLogoId = 'header-logo-id';
 
@@ -62,7 +63,9 @@ export const HeaderMenylinje = () => {
                 )}
                 {innloggetArbgiver && <MinsideArbgiverKnapp />}
                 {innloggingsstatus === Status.OK && <LoggInnKnapp />}
-                <HovedmenyMobil />
+                <SlideToClose>
+                    <HovedmenyMobil />
+                </SlideToClose>
             </div>
         </nav>
     );
