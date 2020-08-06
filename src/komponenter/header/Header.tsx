@@ -63,11 +63,11 @@ export const Header = () => {
                             type: ActionType.SETT_FEATURE_TOGGLES,
                             data: updatedFeatureToggles,
                         });
-                        setCookie(
-                            unleashCacheCookie,
-                            JSON.stringify(updatedFeatureToggles),
-                            { maxAge: 60, domain: '.nav.no' }
-                        );
+                        setCookie(unleashCacheCookie, updatedFeatureToggles, {
+                            maxAge: 60,
+                            domain: '.nav.no',
+                            path: '/',
+                        });
                     })
                     .catch((error) => {
                         console.error(
