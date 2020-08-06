@@ -1,10 +1,4 @@
-import React, {
-    useState,
-    Fragment,
-    ChangeEvent,
-    useEffect,
-    useRef,
-} from 'react';
+import React, { useState, Fragment, ChangeEvent, useEffect } from 'react';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';

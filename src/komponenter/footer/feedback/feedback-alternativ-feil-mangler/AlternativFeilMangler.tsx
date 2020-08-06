@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect, useRef, createRef } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { RadioGruppe, Radio, Feiloppsummering } from 'nav-frontend-skjema';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -53,7 +53,7 @@ const AlternativFeilMangler = () => {
     /*
 
     Sørger for at feil blir sjekket på onChange, etter at 'Send inn' er trykket, iht skjemavalideringskrav
-   
+    
     */
     useEffect(() => {
         if (errors.errorHasOccured) {
