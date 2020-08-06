@@ -6,10 +6,11 @@ import { getLinkAnchorId } from 'komponenter/header/header-regular/common/sticky
 import './Sticky.less';
 
 type Props = {
+    mobilFixed?: boolean;
     children: JSX.Element;
 };
 
-export const Sticky = ({ children }: Props) => {
+export const Sticky = ({ mobilFixed, children }: Props) => {
     const prevScrollOffset = useRef(0);
     const baseOffset = useRef(0);
 
@@ -75,7 +76,12 @@ export const Sticky = ({ children }: Props) => {
 
     return (
         <div className={'sticky-placeholder'} ref={placeholderRef}>
-            <div className={`sticky-container`} ref={stickyRef}>
+            <div
+                className={`sticky-container ${
+                    mobilFixed ? 'sticky-container--mobil-fixed' : ''
+                }`}
+                ref={stickyRef}
+            >
                 {children}
             </div>
         </div>
