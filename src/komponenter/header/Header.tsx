@@ -20,7 +20,10 @@ const unleashCacheCookie = 'decorator-unleash-cache';
 
 export const Header = () => {
     const dispatch = useDispatch();
-    const [cookies, setCookie] = useCookies(['decorator-context']);
+    const [cookies, setCookie] = useCookies([
+        'decorator-context',
+        unleashCacheCookie,
+    ]);
     const erInnlogget = useSelector(
         (state: AppState) => state.innloggingsstatus.data.authenticated
     );
