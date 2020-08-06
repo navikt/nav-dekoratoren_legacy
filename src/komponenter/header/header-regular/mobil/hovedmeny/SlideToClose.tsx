@@ -9,19 +9,25 @@ interface Props {
 
 export const SlideToClose = ({ children, className }: Props) => {
     const [startX, setStartX] = useState(0);
+    const [startY, setStartY] = useState(0);
     const [dx, setDx] = useState(0);
-    const style = dx ? { left: -dx } : undefined;
+    const style = dx ? { left: -dx, transition: 'none' } : undefined;
     const dispatch = useDispatch();
 
     const onTouchMove = (event: TouchEvent<HTMLElement>) => {
         const dx = startX - event.touches[0].clientX;
-        if (dx > 0) {
+        const dy = startY - event.touches[0].clientY;
+        if (Math.abs(dy) > 20) {
+            g;
+            setDx(0);
+        } else if (dx > 0) {
             setDx(dx);
         }
     };
 
     const onTouchStart = (event: TouchEvent<HTMLElement>) => {
         setStartX(event.touches[0].clientX);
+        setStartY(event.touches[0].clientY);
     };
 
     const onTouchEnd = (event: TouchEvent<HTMLElement>) => {
