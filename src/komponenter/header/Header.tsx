@@ -67,7 +67,7 @@ export const Header = () => {
                         setCookie(
                             unleashCacheCookie,
                             JSON.stringify(updatedFeatureToggles),
-                            { maxAge: 60000 }
+                            { maxAge: 60 }
                         );
                     })
                     .catch((error) =>
