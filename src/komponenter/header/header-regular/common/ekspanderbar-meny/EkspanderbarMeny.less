@@ -10,8 +10,6 @@
         z-index: 1;
         width: 100%;
         visibility: hidden;
-        background-color: white;
-
         transition-timing-function: ease-in;
 
         &--active {
@@ -39,7 +37,7 @@
             opacity: 0;
             border-bottom-left-radius: @border-radius-base;
             border-bottom-right-radius: @border-radius-base;
-
+            background-color: white;
             transition-duration: 0.4s;
             transition-property: max-height, visibility, opacity;
 
@@ -71,9 +69,9 @@
     @media not all and (min-width: @desktopMinWidth) {
         &__innhold-wrapper {
             position: fixed;
-            top: @header-height-mobil;
             left: -100%;
-            height: calc(100vh - @header-height-mobil);
+            height: calc(100vh);
+            padding-top: @header-height-mobil;
             transition-property: left, visibility;
             transition-duration: 0.25s;
 

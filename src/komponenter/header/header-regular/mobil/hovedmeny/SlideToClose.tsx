@@ -4,20 +4,29 @@ import { useDispatch } from 'react-redux';
 
 interface Props {
     children: ReactNode;
-    className: string;
+    className?: string;
 }
 
 export const SlideToClose = ({ children, className }: Props) => {
     const [startX, setStartX] = useState(0);
+    const [dx, setDx] = useState(0);
+    const style = dx ? { left: -dx } : undefined;
     const dispatch = useDispatch();
+
+    const onTouchMove = (event: TouchEvent<HTMLElement>) => {
+        const dx = startX - event.touches[0].clientX;
+        if (dx > 0) {
+            setDx(dx);
+        }
+    };
 
     const onTouchStart = (event: TouchEvent<HTMLElement>) => {
         setStartX(event.touches[0].clientX);
     };
 
     const onTouchEnd = (event: TouchEvent<HTMLElement>) => {
-        const vx = startX - event.changedTouches[0].clientX;
-        if (vx > 50) {
+        setDx(0);
+        if (dx > 50) {
             dispatch(toggleHovedmeny());
         }
     };
@@ -26,8 +35,10 @@ export const SlideToClose = ({ children, className }: Props) => {
         <section
             id={'slide-to-close'}
             onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
             className={className}
+            style={style}
         >
             {children}
         </section>
