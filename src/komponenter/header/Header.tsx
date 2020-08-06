@@ -16,9 +16,14 @@ import { fetchFeatureToggles } from '../../api/api';
 import { ActionType } from '../../store/actions';
 import { loadVergic } from '../../utils/scripts';
 
+const unleashCacheCookie = 'decorator-unleash-cache';
+
 export const Header = () => {
     const dispatch = useDispatch();
-    const [cookies, setCookie] = useCookies(['decorator-context']);
+    const [cookies, setCookie] = useCookies([
+        'decorator-context',
+        unleashCacheCookie,
+    ]);
     const erInnlogget = useSelector(
         (state: AppState) => state.innloggingsstatus.data.authenticated
     );
@@ -45,16 +50,34 @@ export const Header = () => {
         hentInnloggingsstatus(APP_BASE_URL)(dispatch);
         fetchMenypunkter(APP_BASE_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
-            fetchFeatureToggles(API_UNLEASH_PROXY_URL, currentFeatureToggles)
-                .then((updatedFeatureToggles) =>
-                    dispatch({
-                        type: ActionType.SETT_FEATURE_TOGGLES,
-                        data: updatedFeatureToggles,
-                    })
+            const togglesFromCookie = cookies[unleashCacheCookie];
+            if (togglesFromCookie) {
+                dispatch({
+                    type: ActionType.SETT_FEATURE_TOGGLES,
+                    data: togglesFromCookie,
+                });
+            } else {
+                fetchFeatureToggles(
+                    API_UNLEASH_PROXY_URL,
+                    currentFeatureToggles
                 )
-                .catch((error) =>
-                    console.error(`Failed to fetch feature-toggles: ${error}`)
-                );
+                    .then((updatedFeatureToggles) => {
+                        dispatch({
+                            type: ActionType.SETT_FEATURE_TOGGLES,
+                            data: updatedFeatureToggles,
+                        });
+                        setCookie(unleashCacheCookie, updatedFeatureToggles, {
+                            maxAge: 100,
+                            domain: '.nav.no',
+                            path: '/',
+                        });
+                    })
+                    .catch((error) => {
+                        console.error(
+                            `Failed to fetch feature-toggles: ${error}`
+                        );
+                    });
+            }
         }
     }, []);
 
