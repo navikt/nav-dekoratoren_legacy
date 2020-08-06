@@ -15,6 +15,7 @@ import ForsideLenke from './elementer/ForsideLenke';
 import Dittnavmeny from './elementer/dittnavmeny/Dittnavmeny';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
 import './Innhold.less';
+import SlideToClose from '../SlideToClose';
 
 interface Props {
     classname: string;
@@ -50,14 +51,14 @@ const Innhold = (props: Props) => {
         settLenker(meny);
     };
 
+    const containerClassName = menyClass.element(
+        'startmeny',
+        menuIsOpen && !underMenuIsOpen ? 'active' : ''
+    );
+
     return (
         <div className={menyClass.className}>
-            <section
-                className={menyClass.element(
-                    'startmeny',
-                    menuIsOpen && !underMenuIsOpen ? 'active' : ''
-                )}
-            >
+            <SlideToClose className={containerClassName}>
                 <Sok
                     isOpen={menuIsOpen}
                     dropdownTransitionMs={400}
@@ -107,7 +108,7 @@ const Innhold = (props: Props) => {
                 {lang === Language.NORSK && (
                     <MobilarbeidsflateValg lang={lang} />
                 )}
-            </section>
+            </SlideToClose>
             <Undermeny
                 className={menyClass.className}
                 undermenyIsOpen={underMenuIsOpen}

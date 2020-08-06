@@ -15,7 +15,6 @@ import { HovedmenyMobil } from 'komponenter/header/header-regular/mobil/hovedmen
 import { Status } from 'api/api';
 import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
 import Logo from 'ikoner/meny/nav-logo-red.svg';
-import SlideToClose from './mobil/hovedmeny/SlideToClose';
 import './HeaderMenylinje.less';
 
 export const headerLogoId = 'header-logo-id';
@@ -63,9 +62,7 @@ export const HeaderMenylinje = () => {
                 )}
                 {innloggetArbgiver && <MinsideArbgiverKnapp />}
                 {innloggingsstatus === Status.OK && <LoggInnKnapp />}
-                <SlideToClose>
-                    <HovedmenyMobil />
-                </SlideToClose>
+                <HovedmenyMobil />
             </div>
         </nav>
     );
