@@ -16,7 +16,7 @@ import { fetchFeatureToggles } from '../../api/api';
 import { ActionType } from '../../store/actions';
 import { loadVergic } from '../../utils/scripts';
 
-const unleashCacheCookie = 'dekorator-unleash-cache';
+const unleashCacheCookie = 'decorator-unleash-cache';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -48,11 +48,10 @@ export const Header = () => {
         fetchMenypunkter(APP_BASE_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
             const togglesFromCookie = cookies[unleashCacheCookie];
-            console.log(togglesFromCookie);
             if (togglesFromCookie) {
                 dispatch({
                     type: ActionType.SETT_FEATURE_TOGGLES,
-                    data: JSON.parse(togglesFromCookie),
+                    data: togglesFromCookie,
                 });
             } else {
                 fetchFeatureToggles(
@@ -67,14 +66,14 @@ export const Header = () => {
                         setCookie(
                             unleashCacheCookie,
                             JSON.stringify(updatedFeatureToggles),
-                            { maxAge: 60 }
+                            { maxAge: 60, domain: '.nav.no' }
                         );
                     })
-                    .catch((error) =>
+                    .catch((error) => {
                         console.error(
                             `Failed to fetch feature-toggles: ${error}`
-                        )
-                    );
+                        );
+                    });
             }
         }
     }, []);
