@@ -67,7 +67,7 @@ export const Header = () => {
                             data: updatedFeatureToggles,
                         });
                         setCookie(unleashCacheCookie, updatedFeatureToggles, {
-                            maxAge: 60,
+                            maxAge: 100,
                             domain: '.nav.no',
                             path: '/',
                         });
