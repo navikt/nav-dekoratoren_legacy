@@ -16,6 +16,8 @@ import { fetchFeatureToggles } from '../../api/api';
 import { ActionType } from '../../store/actions';
 import { loadVergic } from '../../utils/scripts';
 
+const unleashCacheCookie = 'dekorator-unleash-cache';
+
 export const Header = () => {
     const dispatch = useDispatch();
     const [cookies, setCookie] = useCookies(['decorator-context']);
@@ -45,16 +47,35 @@ export const Header = () => {
         hentInnloggingsstatus(APP_BASE_URL)(dispatch);
         fetchMenypunkter(APP_BASE_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
-            fetchFeatureToggles(API_UNLEASH_PROXY_URL, currentFeatureToggles)
-                .then((updatedFeatureToggles) =>
-                    dispatch({
-                        type: ActionType.SETT_FEATURE_TOGGLES,
-                        data: updatedFeatureToggles,
-                    })
+            const togglesFromCookie = cookies[unleashCacheCookie];
+            console.log(togglesFromCookie);
+            if (togglesFromCookie) {
+                dispatch({
+                    type: ActionType.SETT_FEATURE_TOGGLES,
+                    data: JSON.parse(togglesFromCookie),
+                });
+            } else {
+                fetchFeatureToggles(
+                    API_UNLEASH_PROXY_URL,
+                    currentFeatureToggles
                 )
-                .catch((error) =>
-                    console.error(`Failed to fetch feature-toggles: ${error}`)
-                );
+                    .then((updatedFeatureToggles) => {
+                        dispatch({
+                            type: ActionType.SETT_FEATURE_TOGGLES,
+                            data: updatedFeatureToggles,
+                        });
+                        setCookie(
+                            unleashCacheCookie,
+                            JSON.stringify(updatedFeatureToggles),
+                            { maxAge: 60000 }
+                        );
+                    })
+                    .catch((error) =>
+                        console.error(
+                            `Failed to fetch feature-toggles: ${error}`
+                        )
+                    );
+            }
         }
     }, []);
 
