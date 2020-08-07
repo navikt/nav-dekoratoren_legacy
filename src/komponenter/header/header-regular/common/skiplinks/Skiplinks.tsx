@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { mobilmenyKnappId } from 'komponenter/header/header-regular/mobil/MobilHeader';
+import { mobilmenyKnappId } from 'komponenter/header/header-regular/mobil/MenyKnapp';
 import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/Hovedmeny';
 import { useDispatch } from 'react-redux';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
