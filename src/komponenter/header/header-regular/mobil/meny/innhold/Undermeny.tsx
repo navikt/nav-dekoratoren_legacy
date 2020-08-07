@@ -3,26 +3,31 @@ import Lenke from 'nav-frontend-lenker';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import { MenyNode } from 'store/reducers/menu-duck';
 import BEMHelper from 'utils/bem';
-import Lukkundermeny from './Lukkundermeny';
-import Listelement from './Listelement';
+import Lukkundermeny from './elementer/Lukkundermeny';
+import Listelement from './elementer/Listelement';
 import { genererUrl } from 'utils/Environment';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { useSelector } from 'react-redux';
 import Lock from 'ikoner/meny/Lock';
 import { AppState } from 'store/reducers';
 import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
+import SlideToClose from './utils/SlideToClose';
 
 interface Props {
     className: string;
-    undermenyIsOpen: boolean;
     lenker: MenyNode;
 }
 
+const stateSelector = (state: AppState) => ({
+    underMenuIsOpen: state.dropdownToggles.undermeny,
+});
+
 const Undermeny = (props: Props) => {
     const { lenker } = props;
+    const { underMenuIsOpen } = useSelector(stateSelector);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const auth = useSelector((state: AppState) => state.innloggingsstatus.data);
-    const { className, undermenyIsOpen } = props;
+    const { className } = props;
     const menyClass = BEMHelper(className);
 
     if (!lenker?.children) {
@@ -43,13 +48,13 @@ const Undermeny = (props: Props) => {
         left: '-20px',
     } as CSSProperties;
 
+    const containerClass = menyClass.element(
+        'undermeny-innhold',
+        underMenuIsOpen ? 'active' : ''
+    );
+
     return (
-        <section
-            className={menyClass.element(
-                'undermeny-innhold',
-                undermenyIsOpen ? 'active' : ''
-            )}
-        >
+        <SlideToClose className={containerClass}>
             <Lukkundermeny className={menyClass.className} />
             <Systemtittel
                 className={menyClass.element('undermeny-arbeidsflate')}
@@ -89,7 +94,7 @@ const Undermeny = (props: Props) => {
             <div className={menyClass.element('blokk-divider')}>
                 <Lukkundermeny className={menyClass.className} />
             </div>
-        </section>
+        </SlideToClose>
     );
 };
 

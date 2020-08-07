@@ -24,7 +24,7 @@ type Props = {
     kbNavMainState: KbNavMain;
 };
 
-export const SokDropdown = ({ kbNavMainState }: Props) => {
+export const SokKnappDesktop = ({ kbNavMainState }: Props) => {
     const { isOpen } = useSelector(stateSelector);
     const [numResults, setNumResults] = useState(0);
     useKbNavSub(
@@ -68,3 +68,5 @@ export const SokDropdown = ({ kbNavMainState }: Props) => {
         </div>
     );
 };
+
+export default SokKnappDesktop;

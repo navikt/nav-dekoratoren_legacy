@@ -2,7 +2,7 @@ import React from 'react';
 import BEMHelper from 'utils/bem';
 import { gaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';
-import { toggleMinsideMeny } from 'store/reducers/dropdown-toggle-duck';
+import { toggleMinsidemeny } from 'store/reducers/dropdown-toggle-duck';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
 import MinsideIkon from './minside-ikon/MinsideIkon';
 import Tekst from 'tekster/finn-tekst';
@@ -34,7 +34,7 @@ export const MinsidePersonKnapp = ({ classname, id }: Props) => {
             category: GACategory.Header,
             action: `minside-meny-${isOpen ? 'close' : 'open'}`,
         });
-        dispatch(toggleMinsideMeny());
+        dispatch(toggleMinsidemeny());
     };
 
     return (
