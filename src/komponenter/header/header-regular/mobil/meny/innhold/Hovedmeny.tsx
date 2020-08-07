@@ -3,7 +3,7 @@ import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import BEMHelper from 'utils/bem';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { getHovedmenyNode } from 'utils/meny-storage-utils';
-import { getMinsideMenyNode, MenuValue } from 'utils/meny-storage-utils';
+import { getMinsidemenyNode, MenuValue } from 'utils/meny-storage-utils';
 import { Language } from 'store/reducers/language-duck';
 import MenyIngress from './elementer/MenyIngress';
 import Listelement from './elementer/Listelement';
@@ -44,7 +44,7 @@ const Hovedmeny = (props: Props) => {
     const { underMenuIsOpen, hovedMenuIsOpen } = useSelector(stateSelector);
 
     const minsideLenker =
-        getMinsideMenyNode(meny.data, language) || dataInitState;
+        getMinsidemenyNode(meny.data, language) || dataInitState;
 
     const hovedmenyLenker =
         getHovedmenyNode(meny.data, language, arbeidsflate) || dataInitState;

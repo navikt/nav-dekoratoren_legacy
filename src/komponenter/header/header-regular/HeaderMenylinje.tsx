@@ -6,7 +6,7 @@ import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import { GACategory } from 'utils/google-analytics';
 import DesktopSokKnapp from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
-import DesktopMinsideMenyKnapp from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
+import DesktopMinsidemenyKnapp from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
 import VarslerKnapp from 'komponenter/header/header-regular/common/varsler/Varsler';
 import { MenuValue } from 'utils/meny-storage-utils';
@@ -62,7 +62,7 @@ export const HeaderMenylinje = () => {
                     <VarslerKnapp kbNavMainState={kbNavMainState} />
                 )}
                 {innloggetPrivatperson && (
-                    <DesktopMinsideMenyKnapp kbNavMainState={kbNavMainState} />
+                    <DesktopMinsidemenyKnapp kbNavMainState={kbNavMainState} />
                 )}
                 {innloggetArbeidsgiver && <MinsideArbgiverKnapp />}
                 {innloggingsstatus === Status.OK && <LoggInnKnapp />}

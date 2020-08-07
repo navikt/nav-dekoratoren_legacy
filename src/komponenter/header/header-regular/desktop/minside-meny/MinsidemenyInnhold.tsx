@@ -11,7 +11,7 @@ import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-loc
 import { Normaltekst } from 'nav-frontend-typografi';
 import { UndertekstBold } from 'nav-frontend-typografi';
 
-const nodeGroup = KbNavGroup.MinsideMeny;
+const nodeGroup = KbNavGroup.Minsidemeny;
 
 type Props = {
     classname: string;

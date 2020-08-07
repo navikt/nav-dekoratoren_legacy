@@ -15,7 +15,7 @@ import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje'
 import { desktopSokKnappId } from 'komponenter/header/header-regular/desktop/sok-dropdown/sok-knapp/SokKnapp';
 import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 import { varslerKnappId } from 'komponenter/header/header-regular/common/varsler/varsler-knapp/VarslerKnapp';
-import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
+import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
 import { loginKnappId } from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
 
 // TODO: Finn ut hvorfor akkurat denne noen ganger blir undefined :|
@@ -77,8 +77,8 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
         parentNodeId: varslerKnappId,
         parentNodeEdge: NodeEdge.Bottom,
     },
-    [KbNavGroup.MinsideMeny]: {
-        group: KbNavGroup.MinsideMeny,
+    [KbNavGroup.Minsidemeny]: {
+        group: KbNavGroup.Minsidemeny,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 3],
         parentNodeId: minsideKnappId,
