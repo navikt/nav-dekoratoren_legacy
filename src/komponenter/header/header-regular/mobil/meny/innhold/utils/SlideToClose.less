@@ -1,0 +1,18 @@
+@import (reference) '../../../../../../../styling-variabler.less';
+
+.slideToClose {
+    &__wrapper {
+        position: relative;
+    }
+    &__message {
+        top: 0;
+        position: absolute;
+        height: calc(100vh - @header-height-mobil);
+        width: 100px;
+        color: white;
+        z-index: 1004;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

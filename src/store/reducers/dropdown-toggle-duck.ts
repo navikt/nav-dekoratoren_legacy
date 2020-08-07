@@ -24,7 +24,7 @@ export const toggleHovedmeny = () => ({
     type: ActionType.TOGGLE_HOVEDMENY,
 });
 
-export const toggleMinsideMeny = () => ({
+export const toggleMinsidemeny = () => ({
     type: ActionType.TOGGLE_MINSIDE_MENY,
 });
 
