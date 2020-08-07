@@ -11,8 +11,15 @@ interface Props {
     className?: string;
 }
 
+const slideMaxAngle = (25 / 180) * Math.PI;
+const slideMinDx = 35;
+const slideMaxDx = 100;
+
 export const SlideToClose = ({ children, className }: Props) => {
+    const [isSliding, setIsSliding] = useState(false);
+    const [disableSliding, setDisableSliding] = useState(false);
     const [startX, setStartX] = useState(0);
+    const [startY, setStartY] = useState(0);
     const cls = BEMHelper('slideToClose');
     const [dx, setDx] = useState(0);
     const dispatch = useDispatch();
@@ -24,18 +31,31 @@ export const SlideToClose = ({ children, className }: Props) => {
     };
 
     const onTouchMove = (event: TouchEvent<HTMLElement>) => {
-        const newDx = startX - event.touches[0].clientX;
-        if (dx === 0 && newDx >= 25 && newDx <= 100) {
-            // Touch breakpoint
+        if (disableSliding) {
+            return;
+        }
+
+        const newDx = Math.max(
+            Math.min(startX - event.touches[0].clientX, slideMaxDx),
+            0
+        );
+
+        if (isSliding) {
             setDx(newDx);
-        } else if (dx !== 0 && newDx >= 0 && newDx <= 100) {
-            // After touch start
-            setDx(newDx);
+        } else if (newDx >= slideMinDx) {
+            const dy = startY - event.touches[0].clientY;
+            if (Math.abs(Math.atan2(dy, newDx)) < slideMaxAngle) {
+                setIsSliding(true);
+                setDx(newDx);
+            } else {
+                setDisableSliding(true);
+            }
         }
     };
 
     const onTouchStart = (event: TouchEvent<HTMLElement>) => {
         setStartX(event.touches[0].clientX);
+        setStartY(event.touches[0].clientY);
     };
 
     const onTouchEnd = () => {
@@ -43,6 +63,8 @@ export const SlideToClose = ({ children, className }: Props) => {
             dispatch(toggleHovedmeny());
         }
         setDx(0);
+        setIsSliding(false);
+        setDisableSliding(false);
     };
 
     return (
