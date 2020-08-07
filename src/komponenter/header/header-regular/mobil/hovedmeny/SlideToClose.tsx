@@ -1,6 +1,9 @@
 import React, { ReactNode, useState, TouchEvent } from 'react';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
+import './SlideToClose.less';
+import Tekst from '../../../../../tekster/finn-tekst';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 interface Props {
     children: ReactNode;
@@ -11,17 +14,26 @@ export const SlideToClose = ({ children, className }: Props) => {
     const [startX, setStartX] = useState(0);
     const [startY, setStartY] = useState(0);
     const [dx, setDx] = useState(0);
-    const style = dx ? { left: -dx, transition: 'none' } : undefined;
     const dispatch = useDispatch();
 
+    const styleContainer = dx ? { left: -dx, transition: 'none' } : undefined;
+    const styleMessage = {
+        left: screen.width - dx,
+        display: dx ? 'flex' : 'none',
+    };
+
     const onTouchMove = (event: TouchEvent<HTMLElement>) => {
-        const dx = startX - event.touches[0].clientX;
-        const dy = startY - event.touches[0].clientY;
-        if (Math.abs(dy) > 20) {
-            g;
+        const newDx = startX - event.touches[0].clientX;
+        const newDy = startY - event.touches[0].clientY;
+        if (newDx > 25 && Math.abs(newDy) > 50) {
+            // Reset if user slides vertically
             setDx(0);
-        } else if (dx > 0) {
-            setDx(dx);
+        } else if (dx === 0 && newDx > 25 && newDy < 100) {
+            // Touch breakpoint
+            setDx(newDx);
+        } else if (dx !== 0 && newDx > 0 && newDy < 100) {
+            // After touch start
+            setDx(newDx);
         }
     };
 
@@ -30,24 +42,31 @@ export const SlideToClose = ({ children, className }: Props) => {
         setStartY(event.touches[0].clientY);
     };
 
-    const onTouchEnd = (event: TouchEvent<HTMLElement>) => {
-        setDx(0);
+    const onTouchEnd = () => {
         if (dx > 50) {
             dispatch(toggleHovedmeny());
         }
+        setDx(0);
     };
 
     return (
-        <section
-            id={'slide-to-close'}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
-            className={className}
-            style={style}
-        >
-            {children}
-        </section>
+        <div className={'slideToClose__wrapper'}>
+            <section
+                id={'slide-to-close'}
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
+                className={className}
+                style={styleContainer}
+            >
+                {children}
+            </section>
+            <div className={'slideToClose__message'} style={styleMessage}>
+                <Normaltekst>
+                    <Tekst id="lukk" />
+                </Normaltekst>
+            </div>
+        </div>
     );
 };
 
