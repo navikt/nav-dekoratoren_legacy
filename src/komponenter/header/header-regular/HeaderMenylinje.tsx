@@ -11,7 +11,7 @@ import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/Logg
 import { VarslerDropdown } from 'komponenter/header/header-regular/common/varsler/VarslerDropdown';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { HovedmenyDesktop } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
-import { HovedmenyMobil } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
+import { MobilHeader } from 'komponenter/header/header-regular/mobil/MobilHeader';
 import { Status } from 'api/api';
 import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
 import Logo from 'ikoner/meny/nav-logo-red.svg';
@@ -62,7 +62,7 @@ export const HeaderMenylinje = () => {
                 )}
                 {innloggetArbgiver && <MinsideArbgiverKnapp />}
                 {innloggingsstatus === Status.OK && <LoggInnKnapp />}
-                <HovedmenyMobil />
+                <MobilHeader />
             </div>
         </nav>
     );

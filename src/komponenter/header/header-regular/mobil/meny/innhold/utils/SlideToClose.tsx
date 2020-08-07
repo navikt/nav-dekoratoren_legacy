@@ -1,10 +1,10 @@
 import React, { ReactNode, useState, TouchEvent } from 'react';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
-import './SlideToClose.less';
-import Tekst from '../../../../../tekster/finn-tekst';
+import Tekst from 'tekster/finn-tekst';
 import { Normaltekst } from 'nav-frontend-typografi';
-import BEMHelper from '../../../../../utils/bem';
+import BEMHelper from 'utils/bem';
+import './SlideToClose.less';
 
 interface Props {
     children: ReactNode;

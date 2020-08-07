@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { mobilmenyKnappId } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
+import { mobilmenyKnappId } from 'komponenter/header/header-regular/mobil/MobilHeader';
 import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
 import { useDispatch } from 'react-redux';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
@@ -8,7 +8,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
-import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/hovedmeny/innhold/Innhold';
+import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/meny/innhold/Hovedmeny';
 import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 import './Skiplinks.less';
 
