@@ -126,7 +126,7 @@ export interface ToggleHovedmeny {
     type: ActionType.TOGGLE_HOVEDMENY;
 }
 
-export interface ToggleMinsideMeny {
+export interface ToggleMinsidemeny {
     type: ActionType.TOGGLE_MINSIDE_MENY;
 }
 
@@ -176,7 +176,7 @@ export type Handling =
     | SettArbeidsflateIkkeBestemt
     | SettFeatureToggles
     | ToggleHovedmeny
-    | ToggleMinsideMeny
+    | ToggleMinsidemeny
     | ToggleSok
     | ToggleVarsel
     | ToggleUnderMeny

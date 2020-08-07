@@ -5,13 +5,13 @@ import { useSelector } from 'react-redux';
 import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import { GACategory } from 'utils/google-analytics';
-import { SokDropdown } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
-import { MinsideMeny } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
+import DesktopSokKnapp from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
+import DesktopMinsidemenyKnapp from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
-import { VarslerDropdown } from 'komponenter/header/header-regular/common/varsler/VarslerDropdown';
+import VarslerKnapp from 'komponenter/header/header-regular/common/varsler/Varsler';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { HovedmenyDesktop } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
-import { HovedmenyMobil } from 'komponenter/header/header-regular/mobil/hovedmeny/HovedmenyMobil';
+import DesktopHovedmenyKnapp from 'komponenter/header/header-regular/desktop/hovedmeny/Hovedmeny';
+import MobilMenyKnapp from 'komponenter/header/header-regular/mobil/MenyKnapp';
 import { Status } from 'api/api';
 import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
 import Logo from 'ikoner/meny/nav-logo-red.svg';
@@ -35,34 +35,38 @@ export const HeaderMenylinje = () => {
     const innloggetPrivatperson =
         innlogget && arbeidsflate === MenuValue.PRIVATPERSON;
 
-    const innloggetArbgiver =
+    const innloggetArbeidsgiver =
         innlogget && arbeidsflate === MenuValue.ARBEIDSGIVER;
+
+    const NavLogo = () => (
+        <NavLogoLenke
+            gaEventArgs={{
+                context: arbeidsflate,
+                category: GACategory.Header,
+                action: 'navlogo',
+            }}
+            id={headerLogoId}
+            ikon={Logo}
+        />
+    );
 
     return (
         // OBS: Id-en "Hovedmeny" benyttes til å bestemme høyden til menyen av andre team
         <nav className={cls.className} id="hovedmeny" aria-label={'Hovedmeny'}>
             <div className={cls.element('elementer')}>
-                <NavLogoLenke
-                    gaEventArgs={{
-                        context: arbeidsflate,
-                        category: GACategory.Header,
-                        action: 'navlogo',
-                    }}
-                    id={headerLogoId}
-                    ikon={Logo}
-                />
-                <HovedmenyDesktop kbNavMainState={kbNavMainState} />
-                <SokDropdown kbNavMainState={kbNavMainState} />
+                <NavLogo />
+                <DesktopHovedmenyKnapp kbNavMainState={kbNavMainState} />
+                <DesktopSokKnapp kbNavMainState={kbNavMainState} />
                 <span className={cls.element('spacer')} />
                 {innloggetPrivatperson && (
-                    <>
-                        <VarslerDropdown kbNavMainState={kbNavMainState} />
-                        <MinsideMeny kbNavMainState={kbNavMainState} />
-                    </>
+                    <VarslerKnapp kbNavMainState={kbNavMainState} />
                 )}
-                {innloggetArbgiver && <MinsideArbgiverKnapp />}
+                {innloggetPrivatperson && (
+                    <DesktopMinsidemenyKnapp kbNavMainState={kbNavMainState} />
+                )}
+                {innloggetArbeidsgiver && <MinsideArbgiverKnapp />}
                 {innloggingsstatus === Status.OK && <LoggInnKnapp />}
-                <HovedmenyMobil />
+                <MobilMenyKnapp />
             </div>
         </nav>
     );
