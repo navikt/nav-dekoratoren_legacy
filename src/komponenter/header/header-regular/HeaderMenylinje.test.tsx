@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SokDropdown } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
+import SokKnappDesktop from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { reducers } from 'store/reducers';
@@ -37,9 +37,9 @@ describe('<HeaderMenylinje>', () => {
         expect(wrapper.find(HovedmenyKnapp)).toHaveLength(2);
     });
 
-    it('Skal rendre <SokDropdown> komponent', () => {
+    it('Skal rendre <SokKnappDesktop> komponent', () => {
         const wrapper = shallowWithProps();
-        expect(wrapper.find(SokDropdown)).toHaveLength(1);
+        expect(wrapper.find(SokKnappDesktop)).toHaveLength(1);
     });
 
     it('Skal rendre <LoggInnKnapp/> komponent', () => {
