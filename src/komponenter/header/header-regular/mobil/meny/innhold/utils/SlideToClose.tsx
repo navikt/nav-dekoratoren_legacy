@@ -12,7 +12,7 @@ interface Props {
 }
 
 const slideMaxAngle = (25 / 180) * Math.PI;
-const slideMinDx = 35;
+const slideMinDx = 25;
 const slideMaxDx = 100;
 
 export const SlideToClose = ({ children, className }: Props) => {
