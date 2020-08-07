@@ -11,7 +11,6 @@ import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspander
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapp/hovedmeny-knapp/HovedmenyKnapp';
 import Innhold from './innhold/Innhold';
-import SlideToClose from './SlideToClose';
 
 export const mobilmenyKnappId = 'mobilmeny-knapp-id';
 const classname = 'mobilmeny';
