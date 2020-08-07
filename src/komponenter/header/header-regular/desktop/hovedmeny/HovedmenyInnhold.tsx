@@ -36,7 +36,7 @@ type Props = {
     kbNavMainState: KbNavMain;
 };
 
-export const HovedmenyDesktopInnhold = ({
+export const HovedmenyInnhold = ({
     kbNavMainState,
     arbeidsflate,
     menyPunkter,
@@ -86,4 +86,4 @@ export const HovedmenyDesktopInnhold = ({
     );
 };
 
-export default HovedmenyDesktopInnhold;
+export default HovedmenyInnhold;

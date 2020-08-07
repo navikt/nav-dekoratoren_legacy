@@ -7,7 +7,7 @@ import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspander
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapp/hovedmeny-knapp/HovedmenyKnapp';
-import HovedmenyDesktopInnhold from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktopInnhold';
+import HovedmenyInnhold from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyInnhold';
 
 const classname = 'desktop-hovedmeny';
 export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';
@@ -23,7 +23,7 @@ type Props = {
     kbNavMainState: KbNavMain;
 };
 
-export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
+export const Hovedmeny = ({ kbNavMainState }: Props) => {
     const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(
         stateSelector
     );
@@ -48,7 +48,7 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
                 id={classname}
             >
                 {menyPunkter.status === Status.OK ? (
-                    <HovedmenyDesktopInnhold
+                    <HovedmenyInnhold
                         arbeidsflate={arbeidsflate}
                         isOpen={isOpen}
                         language={language}
@@ -65,3 +65,5 @@ export const HovedmenyDesktop = ({ kbNavMainState }: Props) => {
         </div>
     );
 };
+
+export default Hovedmeny;

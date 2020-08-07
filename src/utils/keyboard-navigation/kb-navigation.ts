@@ -5,7 +5,7 @@ export enum KbNavGroup {
     Hovedmeny = 'desktop-hovedmeny',
     Sok = 'desktop-sok',
     Varsler = 'desktop-varsler',
-    MinsideMeny = 'desktop-minside',
+    Minsidemeny = 'desktop-minside',
 }
 
 export enum NodeEdge {
