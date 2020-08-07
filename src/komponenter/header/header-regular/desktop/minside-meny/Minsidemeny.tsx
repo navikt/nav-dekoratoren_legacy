@@ -5,7 +5,7 @@ import { getMinsideMenyNode } from 'utils/meny-storage-utils';
 import { Status } from 'api/api';
 import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
-import MinsideMenyInnhold from './MinsideMenyInnhold';
+import MinsidemenyInnhold from './MinsideMenyInnhold';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
@@ -57,7 +57,7 @@ export const MinsideMeny = ({ kbNavMainState }: Props) => {
                 id={minsideMenyClassname}
             >
                 {menyPunkter.status === Status.OK ? (
-                    <MinsideMenyInnhold
+                    <MinsidemenyInnhold
                         classname={minsideMenyClassname}
                         menyLenker={minsideMenyPunkter}
                         dittNavUrl={environment.DITT_NAV_URL}

@@ -21,7 +21,7 @@ type Props = {
     authLevel: string;
 };
 
-export const MinsideMenyInnhold = (props: Props) => {
+export const MinsidemenyInnhold = (props: Props) => {
     const { classname, menyLenker, dittNavUrl, brukernavn, authLevel } = props;
 
     if (!menyLenker) {
@@ -80,4 +80,4 @@ export const MinsideMenyInnhold = (props: Props) => {
     );
 };
 
-export default MinsideMenyInnhold;
+export default MinsidemenyInnhold;

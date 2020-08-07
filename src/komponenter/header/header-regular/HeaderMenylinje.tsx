@@ -10,8 +10,8 @@ import { MinsideMeny } from 'komponenter/header/header-regular/desktop/minside-m
 import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
 import { VarslerDropdown } from 'komponenter/header/header-regular/common/varsler/VarslerDropdown';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { HovedmenyDesktop } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
-import { MobilHeader } from 'komponenter/header/header-regular/mobil/MobilHeader';
+import HovedmenyDesktop from 'komponenter/header/header-regular/desktop/hovedmeny/Hovedmeny';
+import HovedmenyMobil from 'komponenter/header/header-regular/mobil/MobilHeader';
 import { Status } from 'api/api';
 import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
 import Logo from 'ikoner/meny/nav-logo-red.svg';
@@ -62,7 +62,7 @@ export const HeaderMenylinje = () => {
                 )}
                 {innloggetArbgiver && <MinsideArbgiverKnapp />}
                 {innloggingsstatus === Status.OK && <LoggInnKnapp />}
-                <MobilHeader />
+                <HovedmenyMobil />
             </div>
         </nav>
     );

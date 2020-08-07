@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { mobilmenyKnappId } from 'komponenter/header/header-regular/mobil/MobilHeader';
-import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/Hovedmeny';
 import { useDispatch } from 'react-redux';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
 import { SkipLinkElement } from './SkiplinkElement';

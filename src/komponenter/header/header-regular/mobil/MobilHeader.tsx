@@ -19,7 +19,7 @@ const stateSelector = (state: AppState) => ({
     varselIsOpen: state.dropdownToggles.varsler,
 });
 
-export const MobilHeader = () => {
+export const HovedmenyMobil = () => {
     const { meny, underIsOpen, hovedIsOpen, varselIsOpen } = useSelector(
         stateSelector
     );
@@ -49,4 +49,4 @@ export const MobilHeader = () => {
     );
 };
 
-export default MobilHeader;
+export default HovedmenyMobil;
