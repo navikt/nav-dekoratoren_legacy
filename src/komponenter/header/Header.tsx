@@ -127,11 +127,8 @@ export const Header = () => {
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg
-                // TODO: fix før prod!
                 baseUrl={
-                    erNavDekoratoren()
-                        ? document.location.origin
-                        : 'https://www-q1.nav.no'
+                    erNavDekoratoren() ? document.location.origin : APP_BASE_URL
                 }
             />
             <header className="siteheader">
