@@ -11,6 +11,7 @@ import kalenderIkon from 'ikoner/varsler/calendar-3.svg';
 import chatIkon from 'ikoner/varsler/bubble-chat-2.svg';
 import dokumentIkon from 'ikoner/varsler/file-new-1.svg';
 import plasterIkon from 'ikoner/varsler/first-aid-plaster.svg';
+import { Bilde } from 'komponenter/common/bilde/Bilde';
 
 const ikonDefault = 'alarm-ikon';
 
@@ -29,13 +30,12 @@ type Props = {
 
 const parseIkon = (ikonStr: string) => {
     const ikon = ikoner[ikonStr] || alarmIkon;
-    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     return (
         <div className={`varsel-ikon-row`}>
             <div className={`varsel-ikon-container ${ikonStr}`}>
-                <img
-                    alt={'varsel-ikon'}
-                    src={`${XP_BASE_URL}${ikon}`}
+                <Bilde
+                    asset={ikon}
+                    altText={'varsel-ikon'}
                     className={`varsel-ikon`}
                 />
             </div>

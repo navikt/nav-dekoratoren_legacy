@@ -9,6 +9,7 @@ import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import { GAEventArgs } from 'utils/google-analytics';
+import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './NavLogoLenke.less';
 
 type Props = {
@@ -39,7 +40,7 @@ export const NavLogoLenke = (props: Props) => {
             }}
             id={props.id}
         >
-            <img alt="Til forsiden" src={`${XP_BASE_URL}${props.ikon}`} />
+            <Bilde altText="Til forsiden" asset={props.ikon} />
         </LenkeMedGA>
     );
 };
