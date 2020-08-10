@@ -25,6 +25,18 @@ const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
 });
 
+const NavLogo = ({ arbeidsflate }: { arbeidsflate: MenuValue }) => (
+    <NavLogoLenke
+        gaEventArgs={{
+            context: arbeidsflate,
+            category: GACategory.Header,
+            action: 'navlogo',
+        }}
+        id={headerLogoId}
+        ikon={Logo}
+    />
+);
+
 export const HeaderMenylinje = () => {
     const cls = BEMHelper('header-linje');
     const { innlogget, innloggingsstatus, arbeidsflate } = useSelector(
@@ -38,23 +50,11 @@ export const HeaderMenylinje = () => {
     const innloggetArbeidsgiver =
         innlogget && arbeidsflate === MenuValue.ARBEIDSGIVER;
 
-    const NavLogo = () => (
-        <NavLogoLenke
-            gaEventArgs={{
-                context: arbeidsflate,
-                category: GACategory.Header,
-                action: 'navlogo',
-            }}
-            id={headerLogoId}
-            ikon={Logo}
-        />
-    );
-
     return (
         // OBS: Id-en "Hovedmeny" benyttes til å bestemme høyden til menyen av andre team
         <nav className={cls.className} id="hovedmeny" aria-label={'Hovedmeny'}>
             <div className={cls.element('elementer')}>
-                <NavLogo />
+                <NavLogo arbeidsflate={arbeidsflate} />
                 <DesktopHovedmenyKnapp kbNavMainState={kbNavMainState} />
                 <DesktopSokKnapp kbNavMainState={kbNavMainState} />
                 <span className={cls.element('spacer')} />
