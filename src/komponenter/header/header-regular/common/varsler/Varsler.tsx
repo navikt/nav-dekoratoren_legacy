@@ -34,7 +34,7 @@ export const Varsler = ({ kbNavMainState }: Props) => {
                 isOpen={isOpen}
             >
                 <VarselvisningDesktop setKbId={true} />
-                <VarselvisningMobil setKbId={true} />
+                <VarselvisningMobil setKbId={false} />
             </EkspanderbarMeny>
         </>
     );
