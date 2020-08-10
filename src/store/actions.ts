@@ -1,7 +1,7 @@
 import { Data as innloggingsstatusData } from './reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from './reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from './reducers/menu-duck';
-import { DriftsmeldingData } from './reducers/driftsmeldinger-duck';
+import { DriftsmeldingerData } from './reducers/driftsmeldinger-duck';
 import { EnvironmentState } from './reducers/environment-duck';
 import { FeatureToggles } from './reducers/feature-toggles-duck';
 
@@ -68,7 +68,7 @@ export interface HentMenyLenkerFAILED {
 
 export interface HentDriftsmeldingSUCCESS {
     type: ActionType.HENT_DRIFTSMELDING_OK;
-    data: DriftsmeldingData[];
+    data: DriftsmeldingerData[];
 }
 
 export interface HentDriftsmeldingPENDING {
