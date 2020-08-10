@@ -1,5 +1,5 @@
 import React, { ReactNode, useState, TouchEvent } from 'react';
-import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
+import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import Tekst from 'tekster/finn-tekst';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -60,7 +60,7 @@ export const SlideToClose = ({ children, className }: Props) => {
 
     const onTouchEnd = () => {
         if (dx > 75) {
-            dispatch(toggleHovedmeny());
+            dispatch(lukkAlleDropdowns());
         }
         setDx(0);
         setIsSliding(false);
