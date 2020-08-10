@@ -1,7 +1,7 @@
 import { Data as innloggingsstatusData } from './reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from './reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from './reducers/menu-duck';
-import { DriftsmeldingData } from './reducers/driftsmelding-duck';
+import { DriftsmeldingData } from './reducers/driftsmeldinger-duck';
 import { EnvironmentState } from './reducers/environment-duck';
 import { FeatureToggles } from './reducers/feature-toggles-duck';
 

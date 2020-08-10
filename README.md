@@ -94,7 +94,7 @@ dekoratoren:
     environment:
       XP_BASE_URL: 'https://www-q1.nav.no'
       APP_BASE_URL: "http://localhost:8100/dekoratoren"
-      API_XP_MENY_URL: 'https://www-q1.nav.no/_/service/no.nav.navno/menu'
+      API_XP_SERVICES_URL: 'https://www-q1.nav.no/_/service/no.nav.navno/menu'
       API_XP_SOK_URL: 'https://www-q1.nav.no/_/service/navno.nav.no.search/search2/sok'
       API_INNLOGGINGSLINJE_URL: 'http://mocks:8080/innloggingslinje-api/auth'
       API_VARSELINNBOKS_URL: 'http://mocks:8080/person/varselinnboks'

@@ -6,33 +6,33 @@ import { HentDriftsmeldingSUCCESS } from 'store/actions';
 import { HentDriftsmeldingPENDING } from 'store/actions';
 import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
-import { hentDriftsmelding, DataElement, Status } from 'api/api';
+import { hentDriftsmeldinger, DataElement, Status } from 'api/api';
 
-export interface DriftsmeldingState extends DataElement {
-    data: DriftsmeldingData[];
+export interface DriftsmeldingerState extends DataElement {
+    data: DriftsmeldingerData[];
 }
 
-export interface DriftsmeldingData {
-    heading: string,
-    url: string,
-    icon?: ReactElement,
+export interface DriftsmeldingerData {
+    heading: string;
+    url: string;
+    icon?: ReactElement;
 }
 
-export const dataInitState: DriftsmeldingData = {
+export const dataInitState: DriftsmeldingerData = {
     heading: '',
     url: '',
     icon: undefined,
 };
 
-const initalState: DriftsmeldingState = {
+const initalState: DriftsmeldingerState = {
     data: [dataInitState],
     status: Status.IKKE_STARTET,
 };
 
 export default function reducer(
-    state: DriftsmeldingState = initalState,
+    state: DriftsmeldingerState = initalState,
     action: Handling
-): DriftsmeldingState {
+): DriftsmeldingerState {
     switch (action.type) {
         case ActionType.HENT_DRIFTSMELDING_OK: {
             return { ...state, status: Status.OK, data: action.data };
@@ -50,17 +50,22 @@ export default function reducer(
     }
 }
 
-export function fetchDriftsmelding(
+export function fetchDriftsmeldinger(
     APP_BASE_URL: string
-) {
-    return fetchThenDispatch<DriftsmeldingData[]>(() => hentDriftsmelding(APP_BASE_URL), {
-        ok: driftsmeldingSuksess,
-        feilet: driftsmeldingFeilet,
-        pending: driftsmeldingPending,
-    });
+): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<DriftsmeldingerData[]>(
+        () => hentDriftsmeldinger(APP_BASE_URL),
+        {
+            ok: driftsmeldingSuksess,
+            feilet: driftsmeldingFeilet,
+            pending: driftsmeldingPending,
+        }
+    );
 }
 
-function driftsmeldingSuksess(data: DriftsmeldingData[]): HentDriftsmeldingSUCCESS {
+function driftsmeldingSuksess(
+    data: DriftsmeldingerData[]
+): HentDriftsmeldingSUCCESS {
     return {
         type: ActionType.HENT_DRIFTSMELDING_OK,
         data: data,

@@ -4,7 +4,8 @@ import innloggingsstatusReducer from './innloggingsstatus-duck';
 import { InnloggingsstatusState } from './innloggingsstatus-duck';
 import menypunktReducer, { MenyPunkter } from './menu-duck';
 import varselinnboksReducer, { VarselinnboksState } from './varselinnboks-duck';
-import drifsmeldingReducer, { DriftsmeldingState } from './driftsmelding-duck';
+import drifsmeldingReducer from './driftsmeldinger-duck';
+import { DriftsmeldingerState } from './driftsmeldinger-duck';
 import { DataElement } from 'api/api';
 import varselLestReducer from './varsel-lest-duck';
 import { languageDuck, LanguageState } from './language-duck';
@@ -22,7 +23,7 @@ export interface AppState {
     language: LanguageState;
     arbeidsflate: Arbeidsflate;
     dropdownToggles: DropdownState;
-    driftsmelding: DriftsmeldingState;
+    driftsmelding: DriftsmeldingerState;
     featureToggles: FeatureToggles;
 }
 

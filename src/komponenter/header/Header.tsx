@@ -4,7 +4,7 @@ import { fetchMenypunkter } from 'store/reducers/menu-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { HeaderSimple } from 'komponenter/header/header-simple/HeaderSimple';
 import { HeaderRegular } from 'komponenter/header/header-regular/HeaderRegular';
-import Driftsmelding from './driftsmeldinger/Driftsmelding';
+import Driftsmeldinger from './driftsmeldinger/Driftsmeldinger';
 import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
@@ -13,7 +13,7 @@ import { Language, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
-import { fetchDriftsmelding } from 'store/reducers/driftsmelding-duck';
+import { fetchDriftsmeldinger } from 'store/reducers/driftsmeldinger-duck';
 import { fetchFeatureToggles } from 'api/api';
 import { ActionType } from 'store/actions';
 import { loadVergic } from 'utils/scripts';
@@ -54,7 +54,7 @@ export const Header = () => {
 
     // External data
     useEffect(() => {
-        fetchDriftsmelding(APP_BASE_URL)(dispatch);
+        fetchDriftsmeldinger(APP_BASE_URL)(dispatch);
         hentInnloggingsstatus(APP_BASE_URL)(dispatch);
         fetchMenypunkter(APP_BASE_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
@@ -144,7 +144,7 @@ export const Header = () => {
                     <HeaderRegular />
                 )}
             </header>
-            <Driftsmelding />
+            <Driftsmeldinger />
         </Fragment>
     );
 };
