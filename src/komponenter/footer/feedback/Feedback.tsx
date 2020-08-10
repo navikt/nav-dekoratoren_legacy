@@ -98,7 +98,9 @@ const Feedback = () => {
                             </button>
                         </Fragment>
                     ) : null}
-                    {buttonsPressed.yesButton && <ThankYou />}
+                    {buttonsPressed.yesButton && (
+                        <ThankYou showFeedbackUsage={false} />
+                    )}
                     {buttonsPressed.noButton && <PartialNo />}
                     {buttonsPressed.reportButton && <Elaborated />}
                 </div>

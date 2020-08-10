@@ -12,7 +12,7 @@ export enum MenuValue {
 
 enum MenuName {
     Hovedmeny = 'Main menu',
-    MinsideMeny = 'My page menu',
+    Minsidemeny = 'My page menu',
 }
 
 export const getHovedmenyNode = (
@@ -28,13 +28,13 @@ export const getHovedmenyNode = (
         : undefined;
 };
 
-export const getMinsideMenyNode = (
+export const getMinsidemenyNode = (
     menypunkter: MenyNode[],
     language: Language
 ): MenyNode | undefined => {
     const languageNode = getLanguageNode(language, menypunkter);
     return languageNode
-        ? findNode(languageNode, MenuName.MinsideMeny)
+        ? findNode(languageNode, MenuName.Minsidemeny)
         : undefined;
 };
 

@@ -59,8 +59,8 @@ const PartialNo = () => {
 
                             <CheckboxGruppe feil={radiobuttonErrorMessage}>
                                 <Checkbox
-                                    label={<Tekst id="lite-oversiktlig" />}
-                                    value="Lite oversiktlig"
+                                    label={<Tekst id="lite-relevant-info" />}
+                                    value="Lite relevant informasjon"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                                 <Checkbox
@@ -69,17 +69,11 @@ const PartialNo = () => {
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                                 <Checkbox
-                                    label={<Tekst id="lite-relevant-info" />}
-                                    value="Lite relevant informasjon"
-                                    onChange={(e) => onClickAarsak(e)}
-                                />
-                                <Checkbox
-                                    label={<Tekst id="villedende" />}
-                                    value="Villedende"
+                                    label={<Tekst id="lite-oversiktlig" />}
+                                    value="Lite oversiktlig"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                             </CheckboxGruppe>
-
                             <div className="knapper">
                                 <div className="send-inn">
                                     <Hovedknapp
@@ -95,7 +89,7 @@ const PartialNo = () => {
                     </div>
                 </div>
             ) : (
-                <Thankyou />
+                <Thankyou showFeedbackUsage={true} />
             )}
         </Fragment>
     );

@@ -11,7 +11,7 @@ import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-loc
 import { Normaltekst } from 'nav-frontend-typografi';
 import { UndertekstBold } from 'nav-frontend-typografi';
 
-const nodeGroup = KbNavGroup.MinsideMeny;
+const nodeGroup = KbNavGroup.Minsidemeny;
 
 type Props = {
     classname: string;
@@ -21,7 +21,7 @@ type Props = {
     authLevel: string;
 };
 
-export const MinsideMenyInnhold = (props: Props) => {
+export const MinsidemenyInnhold = (props: Props) => {
     const { classname, menyLenker, dittNavUrl, brukernavn, authLevel } = props;
 
     if (!menyLenker) {
@@ -80,4 +80,4 @@ export const MinsideMenyInnhold = (props: Props) => {
     );
 };
 
-export default MinsideMenyInnhold;
+export default MinsidemenyInnhold;

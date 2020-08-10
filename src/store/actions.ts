@@ -2,6 +2,7 @@ import { Data as innloggingsstatusData } from './reducers/innloggingsstatus-duck
 import { VarslerData as varselinnboksData } from './reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from './reducers/menu-duck';
 import { EnvironmentState } from './reducers/environment-duck';
+import { FeatureToggles } from './reducers/feature-toggles-duck';
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',
@@ -20,6 +21,7 @@ export enum ActionType {
     SETT_VARSLER_LEST = 'SETT_VARSLER_LEST',
     SETT_LANGUAGE = 'SETT_LANGUAGE',
     SETT_ENVIRONMENT = 'SETT_ENVIRONMENT',
+    SETT_FEATURE_TOGGLES = 'SETT_FEATURE_TOGGLES',
     PRIVATPERSON = 'PRIVATPERSON',
     ARBEIDSGIVER = 'ARBEIDSGIVER',
     SAMARBEIDSPARTNER = 'SAMARBEIDSPARTNER',
@@ -73,6 +75,11 @@ export interface HentVarslerFEILETAction {
     type: ActionType.HENT_VARSLER_FEILET;
 }
 
+export interface SettFeatureToggles {
+    type: ActionType.SETT_FEATURE_TOGGLES;
+    data: FeatureToggles;
+}
+
 export interface SettEnviroment {
     type: ActionType.SETT_ENVIRONMENT;
     data: EnvironmentState;
@@ -119,7 +126,7 @@ export interface ToggleHovedmeny {
     type: ActionType.TOGGLE_HOVEDMENY;
 }
 
-export interface ToggleMinsideMeny {
+export interface ToggleMinsidemeny {
     type: ActionType.TOGGLE_MINSIDE_MENY;
 }
 
@@ -167,8 +174,9 @@ export type Handling =
     | SettArbeidsgiverAction
     | SettSamarbeidspartnerAction
     | SettArbeidsflateIkkeBestemt
+    | SettFeatureToggles
     | ToggleHovedmeny
-    | ToggleMinsideMeny
+    | ToggleMinsidemeny
     | ToggleSok
     | ToggleVarsel
     | ToggleUnderMeny
