@@ -8,7 +8,7 @@ import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { VarslerKnapp } from './varsler-knapp/VarslerKnapp';
-import './VarslerDropdown.less';
+import './Varsler.less';
 
 export const varslerDropdownClassname = 'varsler-dropdown';
 
@@ -20,7 +20,7 @@ type Props = {
     kbNavMainState: KbNavMain;
 };
 
-export const VarslerDropdown = ({ kbNavMainState }: Props) => {
+export const Varsler = ({ kbNavMainState }: Props) => {
     const { isOpen } = useSelector(stateSelector);
     useKbNavSub(configForNodeGroup[KbNavGroup.Varsler], kbNavMainState, isOpen);
 
@@ -37,3 +37,5 @@ export const VarslerDropdown = ({ kbNavMainState }: Props) => {
         </>
     );
 };
+
+export default Varsler;

@@ -3,6 +3,7 @@ import { Data as innloggingsstatusData } from '../store/reducers/innloggingsstat
 import { VarslerData as varselinnboksData } from '../store/reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
 import { DriftsmeldingData } from '../store/reducers/driftsmelding-duck';
+import { FeatureToggles } from 'store/reducers/feature-toggles-duck';
 
 export enum Status {
     OK = 'OK',
@@ -47,6 +48,24 @@ export const lagreVarslerLestFetch = (
         body: JSON.stringify(nyesteId),
         credentials: 'include',
     });
+
+export const fetchFeatureToggles = (
+    API_UNLEASH_PROXY_URL: string,
+    featureToggles: FeatureToggles
+) =>
+    fetchToJson(
+        `${API_UNLEASH_PROXY_URL}/feature-toggles${getFeatureToggleUrl(
+            featureToggles
+        )}`,
+        { credentials: 'include' }
+    );
+
+export const getFeatureToggleUrl = (featureToggles: FeatureToggles) =>
+    Object.keys(featureToggles)
+        .map(
+            (feature: string, i: number) => `${!i ? `?` : ``}feature=${feature}`
+        )
+        .join('&');
 
 export const hentDriftsmelding = (
     APP_BASE_URL: string

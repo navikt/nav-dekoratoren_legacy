@@ -10,8 +10,6 @@
         z-index: 1;
         width: 100%;
         visibility: hidden;
-        background-color: white;
-
         transition-timing-function: ease-in;
 
         &--active {
@@ -39,7 +37,7 @@
             opacity: 0;
             border-bottom-left-radius: @border-radius-base;
             border-bottom-right-radius: @border-radius-base;
-
+            background-color: white;
             transition-duration: 0.4s;
             transition-property: max-height, visibility, opacity;
 
@@ -83,10 +81,6 @@
                 overflow: auto;
                 transition-duration: 0.4s;
             }
-        }
-
-        &__innhold {
-            padding: 1rem @margins-sides-mobil;
         }
     }
 }

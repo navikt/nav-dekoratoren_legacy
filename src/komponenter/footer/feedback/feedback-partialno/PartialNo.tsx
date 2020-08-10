@@ -59,32 +59,27 @@ const PartialNo = () => {
 
                             <CheckboxGruppe feil={radiobuttonErrorMessage}>
                                 <Checkbox
-                                    label={<Tekst id="lite-oversiktlig"/>}
-                                    value="Lite oversiktlig"
-                                    onChange={(e) => onClickAarsak(e)}
-                                />
-                                <Checkbox
-                                    label={<Tekst id="lite-forstaelig"/>}
-                                    value="Lite forståelig"
-                                    onChange={(e) => onClickAarsak(e)}
-                                />
-                                <Checkbox
-                                    label={<Tekst id="lite-relevant-info"/>}
+                                    label={<Tekst id="lite-relevant-info" />}
                                     value="Lite relevant informasjon"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                                 <Checkbox
-                                    label={<Tekst id="villedende"/>}
-                                    value="Villedende"
+                                    label={<Tekst id="lite-forstaelig" />}
+                                    value="Lite forståelig"
+                                    onChange={(e) => onClickAarsak(e)}
+                                />
+                                <Checkbox
+                                    label={<Tekst id="lite-oversiktlig" />}
+                                    value="Lite oversiktlig"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                             </CheckboxGruppe>
-
                             <div className="knapper">
                                 <div className="send-inn">
                                     <Hovedknapp
                                         htmlType="submit"
-                                        className="reset-knapp">
+                                        className="reset-knapp"
+                                    >
                                         <Tekst id="send-inn-feilrapport" />
                                     </Hovedknapp>
                                 </div>
@@ -94,7 +89,7 @@ const PartialNo = () => {
                     </div>
                 </div>
             ) : (
-                <Thankyou />
+                <Thankyou showFeedbackUsage={true} />
             )}
         </Fragment>
     );
