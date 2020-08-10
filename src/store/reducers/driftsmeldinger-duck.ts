@@ -15,13 +15,13 @@ export interface DriftsmeldingerState extends DataElement {
 export interface DriftsmeldingerData {
     heading: string;
     url: string;
-    icon?: ReactElement;
+    type: string;
 }
 
 export const dataInitState: DriftsmeldingerData = {
     heading: '',
     url: '',
-    icon: undefined,
+    type: '',
 };
 
 const initalState: DriftsmeldingerState = {

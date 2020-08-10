@@ -15,28 +15,42 @@ export const Driftsmeldinger = () => {
     return driftsmeldinger.status === 'OK' ? (
         <section className="driftsmeldinger">
             <div>
-                {driftsmeldinger.data.map((melding: DriftsmeldingerData) => (
-                    <LenkeMedGA
-                        key={melding.heading}
-                        href={melding.url}
-                        classNameOverride="message"
-                        gaEventArgs={{
-                            category: GACategory.Header,
-                            action: 'driftsmeldinger',
-                        }}
-                    >
-                        <span className="message-icon">{melding.icon}</span>
-                        <Normaltekst className="message-text">
-                            {melding.heading}
-                        </Normaltekst>
-                    </LenkeMedGA>
-                ))}
+                {driftsmeldinger.data.map((melding: DriftsmeldingerData) => {
+                    return (
+                        <LenkeMedGA
+                            key={melding.heading}
+                            href={melding.url}
+                            classNameOverride="message"
+                            gaEventArgs={{
+                                category: GACategory.Header,
+                                action: 'driftsmeldinger',
+                            }}
+                        >
+                            <span className="message-icon">
+                                {melding.type && <Icon type={melding.type} />}
+                            </span>
+                            <Normaltekst className="message-text">
+                                {melding.heading}
+                            </Normaltekst>
+                        </LenkeMedGA>
+                    );
+                })}
             </div>
         </section>
     ) : null;
 };
 
-// Usikker om disse kommer fra XP eller skal definieres her
+interface IconProps {
+    type: string;
+}
+
+const Icon = (props: IconProps) => (
+    <>
+        {props.type === 'prodstatus' && <StatusSvg />}
+        {props.type === 'infostatus' && <InfoSvg />}
+    </>
+);
+
 const InfoSvg = () => (
     <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
