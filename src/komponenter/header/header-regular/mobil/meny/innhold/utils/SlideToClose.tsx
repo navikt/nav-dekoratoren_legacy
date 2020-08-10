@@ -75,8 +75,8 @@ export const SlideToClose = ({ children }: Props) => {
         <div className={cls.element('wrapper')}>
             <div
                 onTouchStart={onTouchStart}
-                onTouchMove={onTouchMove}
-                onTouchEnd={disableSliding ? undefined : onTouchEnd}
+                onTouchMove={disableSliding ? undefined : onTouchMove}
+                onTouchEnd={onTouchEnd}
                 style={styleContainer}
                 className={cls.element('content')}
             >
