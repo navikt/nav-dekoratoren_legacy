@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import Tekst from 'tekster/finn-tekst';
 import { Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
-import { AppState } from 'store/reducers';
 import './SlideToClose.less';
 
 interface Props {
@@ -15,12 +14,6 @@ interface Props {
 const slideMaxAngle = (25 / 180) * Math.PI;
 const slideMinDx = 25;
 const slideMaxDx = 100;
-
-const stateSelector = (state: AppState) => ({
-    hovedmenyIsOpen: state.dropdownToggles.hovedmeny,
-    undermenyIsOpen: state.dropdownToggles.undermeny,
-    varslerIsOpen: state.dropdownToggles.undermeny,
-});
 
 export const SlideToClose = ({ children, className }: Props) => {
     const [isSliding, setIsSliding] = useState(false);
