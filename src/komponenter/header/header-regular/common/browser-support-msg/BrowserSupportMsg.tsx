@@ -14,6 +14,7 @@ import { erDev } from 'utils/Environment';
 import './BrowserSupportMsg.less';
 
 import ikon from 'ikoner/advarsel-sirkel-fyll.svg';
+import { Bilde } from 'komponenter/common/bilde/Bilde';
 
 const cookieKey = 'decorator-browser-warning-closed';
 const linkUrl =
@@ -61,11 +62,7 @@ const getBrowserSpecificMsg = (browser: BrowserInfo) => {
     }
 };
 
-type Props = {
-    baseUrl: string;
-};
-
-export const BrowserSupportMsg = ({ baseUrl }: Props) => {
+export const BrowserSupportMsg = () => {
     const [meldingLukket, setMeldingLukket] = useState(true);
     const [cookies, setCookie] = useCookies([cookieKey]);
 
@@ -91,7 +88,7 @@ export const BrowserSupportMsg = ({ baseUrl }: Props) => {
         <div className={cls.element('wrapper')}>
             <div className={cls.element('innhold')}>
                 <div className={cls.element('varsel-ikon')}>
-                    <img alt={''} src={`${baseUrl}${ikon}`} />
+                    <Bilde altText={''} asset={ikon} />
                 </div>
                 <div className={cls.element('tekst')}>
                     <Undertittel>
