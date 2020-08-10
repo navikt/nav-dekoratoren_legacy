@@ -5,13 +5,13 @@ import { GACategory } from 'utils/google-analytics';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { Bilde } from 'komponenter/common/bilde/Bilde';
 
 import alarmIkon from 'ikoner/varsler/alarm.svg';
 import kalenderIkon from 'ikoner/varsler/calendar-3.svg';
 import chatIkon from 'ikoner/varsler/bubble-chat-2.svg';
 import dokumentIkon from 'ikoner/varsler/file-new-1.svg';
 import plasterIkon from 'ikoner/varsler/first-aid-plaster.svg';
-import { Bilde } from 'komponenter/common/bilde/Bilde';
 
 const ikonDefault = 'alarm-ikon';
 

@@ -9,10 +9,10 @@ import { AppState } from 'store/reducers';
 import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
 import { minsideMenyClassname } from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
 import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
+import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './MinsideKnapp.less';
 
 import briefcaseIkon from 'ikoner/meny/Briefcase_icon_nav.svg';
-import { Bilde } from 'komponenter/common/bilde/Bilde';
 
 export const MinsideArbgiverKnapp = () => {
     const { environment } = useSelector((state: AppState) => state);

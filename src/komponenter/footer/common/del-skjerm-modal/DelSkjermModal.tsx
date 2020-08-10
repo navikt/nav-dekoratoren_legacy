@@ -7,9 +7,9 @@ import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
-import './DelSkjermModal.less';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
+import './DelSkjermModal.less';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 
