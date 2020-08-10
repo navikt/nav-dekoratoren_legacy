@@ -18,14 +18,8 @@ export interface DriftsmeldingerData {
     type: string;
 }
 
-export const dataInitState: DriftsmeldingerData = {
-    heading: '',
-    url: '',
-    type: '',
-};
-
 const initalState: DriftsmeldingerState = {
-    data: [dataInitState],
+    data: [],
     status: Status.IKKE_STARTET,
 };
 
