@@ -11,7 +11,6 @@ import { useSelector } from 'react-redux';
 import Lock from 'ikoner/meny/Lock';
 import { AppState } from 'store/reducers';
 import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
-import SlideToClose from './utils/SlideToClose';
 
 interface Props {
     className: string;
@@ -50,11 +49,11 @@ const Undermeny = (props: Props) => {
 
     const containerClass = menyClass.element(
         'undermeny-innhold',
-        underMenuIsOpen ? 'active' : ''
+        underMenuIsOpen ? '' : 'hidden'
     );
 
     return (
-        <SlideToClose className={containerClass}>
+        <div className={containerClass}>
             <Lukkundermeny className={menyClass.className} />
             <Systemtittel
                 className={menyClass.element('undermeny-arbeidsflate')}
@@ -94,7 +93,7 @@ const Undermeny = (props: Props) => {
             <div className={menyClass.element('blokk-divider')}>
                 <Lukkundermeny className={menyClass.className} />
             </div>
-        </SlideToClose>
+        </div>
     );
 };
 

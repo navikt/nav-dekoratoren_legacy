@@ -2,11 +2,16 @@
 
 .slideToClose {
     &__wrapper {
-        position: relative;
     }
+
+    &__content {
+        position: relative;
+        transition: left 0.25s ease-in-out;
+    }
+
     &__message {
-        top: 0;
         position: absolute;
+        top: 0;
         height: calc(100vh - @header-height-mobil);
         width: 100px;
         color: white;
@@ -14,5 +19,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @media (min-width: @desktopMinWidth) {
+            display: none;
+        }
     }
 }
