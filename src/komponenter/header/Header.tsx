@@ -32,9 +32,12 @@ export const Header = () => {
     const currentFeatureToggles = useSelector(
         (state: AppState) => state.featureToggles
     );
-    const { PARAMS, APP_BASE_URL, API_UNLEASH_PROXY_URL } = useSelector(
-        (state: AppState) => state.environment
-    );
+    const {
+        PARAMS,
+        APP_BASE_URL,
+        API_UNLEASH_PROXY_URL,
+        XP_BASE_URL,
+    } = useSelector((state: AppState) => state.environment);
     const defaultToPerson = () => {
         dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
         setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
@@ -128,7 +131,7 @@ export const Header = () => {
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg
                 baseUrl={
-                    erNavDekoratoren() ? document.location.origin : APP_BASE_URL
+                    erNavDekoratoren() ? document.location.origin : XP_BASE_URL
                 }
             />
             <header className="siteheader">
