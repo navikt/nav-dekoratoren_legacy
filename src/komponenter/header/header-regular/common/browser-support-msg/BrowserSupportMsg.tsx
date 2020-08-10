@@ -13,7 +13,7 @@ import { useCookies } from 'react-cookie';
 import { erDev } from 'utils/Environment';
 import './BrowserSupportMsg.less';
 
-import ikon from 'nav-frontend-ikoner-assets/assets/advarsel-sirkel-fyll.svg';
+import ikon from 'ikoner/advarsel-sirkel-fyll.svg';
 
 const cookieKey = 'decorator-browser-warning-closed';
 const linkUrl =
