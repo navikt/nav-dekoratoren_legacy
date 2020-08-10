@@ -174,6 +174,7 @@ app.use(
     })
 );
 
+/*
 app.use(
     proxiedDriftsmeldingerUrl,
     createProxyMiddleware(proxiedDriftsmeldingerUrl, {
@@ -182,6 +183,16 @@ app.use(
         changeOrigin: true,
     })
 );
+ */
+app.use(proxiedDriftsmeldingerUrl, (req, res) => {
+    res.send([
+        {
+            heading: 'Ingen telefoner virker',
+            url: '/no/driftsmeldinger/ingen-telefoner-virker',
+            type: 'prodstatus',
+        },
+    ]);
+});
 
 app.use(`${appBasePath}/metrics`, (req, res) => {
     req.statusCode = 200;

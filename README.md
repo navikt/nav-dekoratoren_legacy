@@ -92,13 +92,13 @@ dekoratoren:
     ports:
       - "8100:8088"
     environment:
-      XP_BASE_URL: 'https://www-q1.nav.no'
+      XP_BASE_URL: 'https://www.nav.no'
       APP_BASE_URL: "http://localhost:8100/dekoratoren"
-      API_XP_SERVICES_URL: 'https://www-q1.nav.no/_/service/no.nav.navno/menu'
-      API_XP_SOK_URL: 'https://www-q1.nav.no/_/service/navno.nav.no.search/search2/sok'
+      API_XP_SERVICES_URL: 'https://www.nav.no/_/service'
+      API_UNLEASH_PROXY_URL=https://www.nav.no/person/pb-unleash-proxy
       API_INNLOGGINGSLINJE_URL: 'http://mocks:8080/innloggingslinje-api/auth'
       API_VARSELINNBOKS_URL: 'http://mocks:8080/person/varselinnboks'
-      MINSIDE_ARBEIDSGIVER_URL: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/'
+      MINSIDE_ARBEIDSGIVER_URL: 'https://arbeidsgiver.nav.no/min-side-arbeidsgiver/'
       DITT_NAV_URL: 'https:/www.nav.no/person/dittnav/'
       LOGIN_URL: 'http://localhost:5000'
       LOGOUT_URL: 'http://localhost:5000/?logout'
