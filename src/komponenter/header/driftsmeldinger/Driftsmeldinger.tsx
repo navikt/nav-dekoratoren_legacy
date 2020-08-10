@@ -47,7 +47,7 @@ interface IconProps {
 const Icon = (props: IconProps) => (
     <>
         {props.type === 'prodstatus' && <StatusSvg />}
-        {props.type === 'infostatus' && <InfoSvg />}
+        {props.type === 'info' && <InfoSvg />}
     </>
 );
 
