@@ -58,13 +58,12 @@ export const Varselvisning = ({ setKbId }: Props) => {
 
 export const VarselvisningMobil = (props: Props) => {
     const { varslerIsOpen } = useSelector(stateSelector);
-
-    // Mobile
     const menyClass = BEMHelper('mobilmeny');
     const containerClassName = menyClass.element(
         'startmeny',
         varslerIsOpen ? 'active' : ''
     );
+
     return (
         <div className={'media-sm-mobil'}>
             <SlideToClose className={containerClassName}>
