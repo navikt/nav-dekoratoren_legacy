@@ -92,13 +92,11 @@ export const createHeaderMainGraph = (
     menyStatus: Status,
     erInnlogget: boolean
 ) => {
-    const hovedmenyEnabled =
-        language !== Language.SAMISK && menyStatus === Status.OK;
+    const hovedmenyEnabled = language !== Language.SAMISK;
     const varslerEnabled =
         arbeidsflate === MenuValue.PRIVATPERSON && erInnlogget;
     const minsideMenyEnabled =
         language === Language.NORSK &&
-        menyStatus === Status.OK &&
         erInnlogget &&
         arbeidsflate !== MenuValue.SAMARBEIDSPARTNER;
     const arbeidsflatemenyEnabled = Language.NORSK;
