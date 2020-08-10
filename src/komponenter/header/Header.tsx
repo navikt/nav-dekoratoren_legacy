@@ -12,9 +12,9 @@ import { Language, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
-import { fetchFeatureToggles } from '../../api/api';
-import { ActionType } from '../../store/actions';
-import { loadVergic } from '../../utils/scripts';
+import { fetchFeatureToggles } from 'api/api';
+import { ActionType } from 'store/actions';
+import { loadVergic } from 'utils/scripts';
 import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/browser-support-msg/BrowserSupportMsg';
 import { erNavDekoratoren } from 'utils/Environment';
 

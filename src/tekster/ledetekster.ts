@@ -233,9 +233,6 @@ export const ledetekster: { [key: string]: string } = {
         'Give your evaluation of the information on this page',
     'gi-din-vurdering-av-informasjon-se':
         'Gi din vurdering av informasjonen på siden',
-    'hva-lette-du-etter-spørsmål': 'Hva lette du etter?',
-    'hva-lette-du-etter-spørsmål-en': 'What were you looking for?',
-    'hva-lette-du-etter-spørsmål-se': 'Hva lette du etter?',
     'rapporter-om-feil-mangler': 'Meld om feil og mangler',
     'rapporter-om-feil-mangler-en': 'Report errors and omissions',
     'rapporter-om-feil-mangler-se': 'Meld om feil og mangler',
