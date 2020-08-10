@@ -12,7 +12,10 @@ export const Driftsmeldinger = () => {
         (state: AppState) => state.driftsmelding
     );
 
-    return driftsmeldinger.status === 'OK' ? (
+    const visDriftsmeldinger =
+        driftsmeldinger.status === 'OK' && driftsmeldinger.data.length > 0;
+
+    return visDriftsmeldinger ? (
         <section className="driftsmeldinger">
             <div>
                 {driftsmeldinger.data.map((melding: DriftsmeldingerData) => {
