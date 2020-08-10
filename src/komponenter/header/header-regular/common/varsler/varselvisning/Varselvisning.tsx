@@ -60,7 +60,7 @@ export const VarselvisningMobil = (props: Props) => {
     const { varslerIsOpen } = useSelector(stateSelector);
     const menyClass = BEMHelper('mobilmeny');
     const containerClassName = menyClass.element(
-        'startmeny',
+        'varsel-innhold',
         varslerIsOpen ? 'active' : ''
     );
 
