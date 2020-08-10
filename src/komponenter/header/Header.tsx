@@ -18,7 +18,6 @@ import { fetchFeatureToggles } from 'api/api';
 import { ActionType } from 'store/actions';
 import { loadVergic } from 'utils/scripts';
 import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/browser-support-msg/BrowserSupportMsg';
-import { erNavDekoratoren } from 'utils/Environment';
 
 const unleashCacheCookie = 'decorator-unleash-cache';
 
@@ -34,12 +33,9 @@ export const Header = () => {
     const currentFeatureToggles = useSelector(
         (state: AppState) => state.featureToggles
     );
-    const {
-        PARAMS,
-        APP_BASE_URL,
-        API_UNLEASH_PROXY_URL,
-        XP_BASE_URL,
-    } = useSelector((state: AppState) => state.environment);
+    const { PARAMS, APP_BASE_URL, API_UNLEASH_PROXY_URL } = useSelector(
+        (state: AppState) => state.environment
+    );
     const defaultToPerson = () => {
         dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
         setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
@@ -132,11 +128,7 @@ export const Header = () => {
         <Fragment>
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
-            <BrowserSupportMsg
-                baseUrl={
-                    erNavDekoratoren() ? document.location.origin : XP_BASE_URL
-                }
-            />
+            <BrowserSupportMsg />
             <header className="siteheader">
                 {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
                     <HeaderSimple />
