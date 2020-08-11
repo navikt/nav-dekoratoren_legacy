@@ -1,46 +1,43 @@
 @import (reference) '../../../../../styling-variabler.less';
 
 .mobilmeny {
+    @transition-duration: 0.4s;
+
     &__startmeny,
-    &__varsel-innhold,
     &__undermeny-innhold {
+        position: absolute;
+        visibility: visible;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        padding: 0.75rem @margins-sides-mobil 1rem @margins-sides-mobil;
+        height: @menu-height-mobil;
         overflow-y: scroll;
         overflow-x: hidden;
-        position: fixed;
-        visibility: hidden;
-        left: -100%;
-        padding: 0.75rem 1rem 1rem 1rem;
-        background-color: white;
-        width: 100%;
-        height: calc(100% - @header-height-mobil);
-        transition: all 0.4s ease-in-out;
 
-        &--active {
-            visibility: visible;
-            left: 0;
+        &--hidden {
+            visibility: hidden;
         }
-    }
-
-    &__undermeny-innhold,
-    &__varsel-innhold {
-        z-index: 1002;
     }
 
     &__startmeny {
         z-index: 1003;
-    }
+        transition: all @transition-duration ease-in-out;
 
-    &__undermeny-arbeidsflate {
-        padding: 0.25rem 0 0.75rem 0;
+        &--hidden {
+            left: -100%;
+        }
     }
 
     &__undermeny-innhold {
-        padding-left: 1.5rem;
-        transition: all;
-        transition-delay: 0.4s;
-        &--active {
-            transition: none;
+        z-index: 1002;
+        transition-property: visibility;
+        transition-delay: 0s;
+
+        &--hidden {
+            transition-delay: @transition-duration;
         }
+
         .mobilmeny {
             &__meny {
                 &--list {
@@ -49,6 +46,10 @@
                 }
             }
         }
+    }
+
+    &__undermeny-arbeidsflate {
+        padding: 0.25rem 0 0.75rem 0;
     }
 
     &__meny {
@@ -143,10 +144,6 @@
             margin-bottom: 2rem;
             i {
                 margin-right: 0.5rem;
-            }
-
-            &:active {
-                color: @navDypBla;
             }
         }
     }

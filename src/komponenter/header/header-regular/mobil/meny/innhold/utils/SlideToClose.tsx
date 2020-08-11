@@ -8,33 +8,30 @@ import './SlideToClose.less';
 
 interface Props {
     children: ReactNode;
-    className?: string;
 }
 
-const slideMaxAngle = (25 / 180) * Math.PI;
+const slideMaxAngle = Math.PI / 6;
 const slideMinDx = 25;
 const slideMaxDx = 100;
+const maxScreenWidth = 768;
 
-export const SlideToClose = ({ children, className }: Props) => {
+export const SlideToClose = ({ children }: Props) => {
     const [isSliding, setIsSliding] = useState(false);
     const [disableSliding, setDisableSliding] = useState(false);
     const [startX, setStartX] = useState(0);
     const [startY, setStartY] = useState(0);
-    const cls = BEMHelper('slideToClose');
     const [dx, setDx] = useState(0);
+    const [screenWidth, setScreenWidth] = useState(0);
     const dispatch = useDispatch();
+    const cls = BEMHelper('slideToClose');
 
-    const styleContainer = dx ? { left: -dx, transition: 'none' } : undefined;
+    const styleContainer = { left: -dx, transition: dx ? 'none' : undefined };
     const styleMessage = {
-        left: screen.width - dx,
+        left: screenWidth - dx,
         display: dx ? 'flex' : 'none',
     };
 
     const onTouchMove = (event: TouchEvent<HTMLElement>) => {
-        if (disableSliding) {
-            return;
-        }
-
         const newDx = Math.max(
             Math.min(startX - event.touches[0].clientX, slideMaxDx),
             0
@@ -54,8 +51,14 @@ export const SlideToClose = ({ children, className }: Props) => {
     };
 
     const onTouchStart = (event: TouchEvent<HTMLElement>) => {
-        setStartX(event.touches[0].clientX);
-        setStartY(event.touches[0].clientY);
+        const width = window.screen.width;
+        if (width < maxScreenWidth) {
+            setScreenWidth(width);
+            setStartX(event.touches[0].clientX);
+            setStartY(event.touches[0].clientY);
+        } else {
+            setDisableSliding(true);
+        }
     };
 
     const onTouchEnd = () => {
@@ -68,23 +71,22 @@ export const SlideToClose = ({ children, className }: Props) => {
     };
 
     return (
-        <div className={cls.element('wrapper')}>
-            <section
-                id={'slide-to-close'}
+        <>
+            <div
                 onTouchStart={onTouchStart}
-                onTouchMove={onTouchMove}
+                onTouchMove={disableSliding ? undefined : onTouchMove}
                 onTouchEnd={onTouchEnd}
-                className={className}
                 style={styleContainer}
+                className={cls.element('content')}
             >
                 {children}
-            </section>
+            </div>
             <div className={cls.element('message')} style={styleMessage}>
                 <Element>
                     <Tekst id="lukk" />
                 </Element>
             </div>
-        </div>
+        </>
     );
 };
 
