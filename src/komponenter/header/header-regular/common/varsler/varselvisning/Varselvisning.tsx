@@ -40,10 +40,16 @@ export const Varselvisning = ({ setKbId }: Props) => {
             <Systemtittel className={cls.element('tittel')}>
                 <Tekst id={'varsler-tittel'} />
             </Systemtittel>
-            <VarslerParsed
-                varsler={varsler}
-                rowIndex={setKbId ? 0 : undefined}
-            />
+            {varslerAntall === 0 ? (
+                <div className={cls.element('tom-liste')}>
+                    <Tekst id={'varsler-tom-liste'} />
+                </div>
+            ) : (
+                <VarslerParsed
+                    varsler={varsler}
+                    rowIndex={setKbId ? 0 : undefined}
+                />
+            )}
             {visAlleVarslerLenke && (
                 <AlleVarslerLenke
                     nyeVarslerMsg={nyeVarslerMsg}
