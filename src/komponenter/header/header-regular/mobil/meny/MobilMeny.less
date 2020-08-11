@@ -2,7 +2,6 @@
 
 .mobilmeny {
     @transition-duration: 0.4s;
-    @height: calc(100vh - @header-height-mobil);
 
     &__startmeny,
     &__undermeny-innhold {
@@ -12,13 +11,13 @@
         width: 100%;
         background-color: white;
         padding: 0.75rem @margins-sides-mobil 1rem @margins-sides-mobil;
-        min-height: @height;
+        min-height: @menu-height-mobil;
         overflow-y: scroll;
         overflow-x: hidden;
 
         &--hidden {
             visibility: hidden;
-            max-height: @height;
+            max-height: @menu-height-mobil;
         }
     }
 

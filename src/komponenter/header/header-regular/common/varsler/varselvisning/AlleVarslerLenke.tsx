@@ -1,5 +1,5 @@
 import React from 'react';
-import { LenkeMedGA } from '../../../../../common/lenke-med-ga/LenkeMedGA';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { GACategory } from 'utils/google-analytics';
