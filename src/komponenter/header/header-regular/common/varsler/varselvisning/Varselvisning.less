@@ -5,8 +5,14 @@
         padding: 0;
     }
 
-    &__tittel {
-        @media (max-width: @mobilMaxWidth) {
+    @media (max-width: @mobilMaxWidth) {
+        padding: 1rem @margins-sides-mobil;
+        background-color: white;
+        min-height: @menu-height-mobil;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        &__tittel {
             .typo-innholdstittel;
         }
     }

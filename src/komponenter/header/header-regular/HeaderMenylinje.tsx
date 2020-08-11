@@ -11,7 +11,7 @@ import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/Logg
 import VarslerKnapp from 'komponenter/header/header-regular/common/varsler/Varsler';
 import { MenuValue } from 'utils/meny-storage-utils';
 import DesktopHovedmenyKnapp from 'komponenter/header/header-regular/desktop/hovedmeny/Hovedmeny';
-import MobilMenyKnapp from 'komponenter/header/header-regular/mobil/MenyKnapp';
+import MobilMenyKnapp from 'komponenter/header/header-regular/mobil/HovedmenyMobil';
 import { Status } from 'api/api';
 import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
 import Logo from 'ikoner/meny/nav-logo-red.svg';

@@ -15,7 +15,6 @@ import ForsideLenke from './elementer/ForsideLenke';
 import Dittnavmeny from './elementer/dittnavmeny/Dittnavmeny';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
 import { dataInitState } from 'store/reducers/menu-duck';
-import SlideToClose from './utils/SlideToClose';
 import { GACategory, gaEvent } from 'utils/google-analytics';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 
@@ -68,11 +67,11 @@ const Hovedmeny = (props: Props) => {
 
     const containerClassName = menyClass.element(
         'startmeny',
-        hovedMenuIsOpen && !underMenuIsOpen ? 'active' : ''
+        underMenuIsOpen ? 'hidden' : ''
     );
 
     return (
-        <SlideToClose className={containerClassName}>
+        <div className={containerClassName}>
             <Sok
                 isOpen={hovedMenuIsOpen}
                 dropdownTransitionMs={400}
@@ -120,7 +119,7 @@ const Hovedmeny = (props: Props) => {
             {language === Language.NORSK && (
                 <MobilarbeidsflateValg lang={language} />
             )}
-        </SlideToClose>
+        </div>
     );
 };
 

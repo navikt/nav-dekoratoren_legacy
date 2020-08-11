@@ -71,14 +71,14 @@
             position: fixed;
             top: @header-height-mobil;
             left: -100%;
-            height: calc(100vh - @header-height-mobil);
+            height: @menu-height-mobil;
             transition-property: left, visibility;
             transition-duration: 0.25s;
+            overflow: auto;
 
             &--active {
                 left: 0;
                 z-index: 1001;
-                overflow: auto;
                 transition-duration: 0.4s;
             }
         }
