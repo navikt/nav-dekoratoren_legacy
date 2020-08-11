@@ -13,6 +13,7 @@ interface Props {
 const slideMaxAngle = Math.PI / 6;
 const slideMinDx = 25;
 const slideMaxDx = 100;
+const maxScreenWidth = 768;
 
 export const SlideToClose = ({ children }: Props) => {
     const [isSliding, setIsSliding] = useState(false);
@@ -51,7 +52,7 @@ export const SlideToClose = ({ children }: Props) => {
 
     const onTouchStart = (event: TouchEvent<HTMLElement>) => {
         const screenWidth = window.screen.width;
-        if (screenWidth < 768) {
+        if (screenWidth < maxScreenWidth) {
             setScreenWidth(screenWidth);
             setStartX(event.touches[0].clientX);
             setStartY(event.touches[0].clientY);
