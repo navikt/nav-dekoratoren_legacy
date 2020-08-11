@@ -36,9 +36,9 @@ export const initialState: EnvironmentState = {
     API_VARSELINNBOKS_URL: '',
     API_UNLEASH_PROXY_URL: '',
     MINSIDE_ARBEIDSGIVER_URL: '',
-    DITT_NAV_URL: 'string',
-    LOGIN_URL: 'string',
-    LOGOUT_URL: 'string',
+    DITT_NAV_URL: '',
+    LOGIN_URL: '',
+    LOGOUT_URL: '',
 
     // Parameters
     PARAMS: {
@@ -48,7 +48,7 @@ export const initialState: EnvironmentState = {
         SIMPLE_HEADER: false,
         SIMPLE_FOOTER: false,
         REDIRECT_TO_APP: false,
-        LEVEL: 'string',
+        LEVEL: '',
         FEEDBACK: false,
     },
 
