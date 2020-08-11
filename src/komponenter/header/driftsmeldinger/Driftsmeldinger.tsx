@@ -8,10 +8,11 @@ import { AppState } from 'store/reducers';
 import './Driftsmeldinger.less';
 
 export const Driftsmeldinger = () => {
-    const driftsmeldinger = useSelector(
-        (state: AppState) => state.driftsmelding
+    const { driftsmeldinger, environment } = useSelector(
+        (state: AppState) => state
     );
 
+    const { XP_BASE_URL } = environment;
     const visDriftsmeldinger =
         driftsmeldinger.status === 'OK' && driftsmeldinger.data.length > 0;
 
@@ -22,7 +23,7 @@ export const Driftsmeldinger = () => {
                     return (
                         <LenkeMedGA
                             key={melding.heading}
-                            href={melding.url}
+                            href={`${XP_BASE_URL}${melding.url}`}
                             classNameOverride="message"
                             gaEventArgs={{
                                 category: GACategory.Header,

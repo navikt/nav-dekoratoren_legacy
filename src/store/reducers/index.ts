@@ -4,7 +4,7 @@ import innloggingsstatusReducer from './innloggingsstatus-duck';
 import { InnloggingsstatusState } from './innloggingsstatus-duck';
 import menypunktReducer, { MenyPunkter } from './menu-duck';
 import varselinnboksReducer, { VarselinnboksState } from './varselinnboks-duck';
-import drifsmeldingReducer from './driftsmeldinger-duck';
+import driftsmeldingReducer from './driftsmeldinger-duck';
 import { DriftsmeldingerState } from './driftsmeldinger-duck';
 import { DataElement } from 'api/api';
 import varselLestReducer from './varsel-lest-duck';
@@ -23,7 +23,7 @@ export interface AppState {
     language: LanguageState;
     arbeidsflate: Arbeidsflate;
     dropdownToggles: DropdownState;
-    driftsmelding: DriftsmeldingerState;
+    driftsmeldinger: DriftsmeldingerState;
     featureToggles: FeatureToggles;
 }
 
@@ -36,7 +36,7 @@ export const reducers = combineReducers<AppState>({
     language: languageDuck.reducer,
     arbeidsflate: arbeidsflateReducer,
     dropdownToggles: dropdownTogglesReducer,
-    driftsmelding: drifsmeldingReducer,
+    driftsmeldinger: driftsmeldingReducer,
     featureToggles: featureToggleReducer,
 });
 
