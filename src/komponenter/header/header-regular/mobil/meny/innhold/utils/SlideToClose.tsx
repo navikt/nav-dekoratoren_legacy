@@ -1,8 +1,8 @@
 import React, { ReactNode, useState, TouchEvent } from 'react';
-import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
+import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import Tekst from 'tekster/finn-tekst';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
 import './SlideToClose.less';
 
@@ -60,7 +60,7 @@ export const SlideToClose = ({ children, className }: Props) => {
 
     const onTouchEnd = () => {
         if (dx > 75) {
-            dispatch(toggleHovedmeny());
+            dispatch(lukkAlleDropdowns());
         }
         setDx(0);
         setIsSliding(false);
@@ -80,9 +80,9 @@ export const SlideToClose = ({ children, className }: Props) => {
                 {children}
             </section>
             <div className={cls.element('message')} style={styleMessage}>
-                <Normaltekst>
+                <Element>
                     <Tekst id="lukk" />
-                </Normaltekst>
+                </Element>
             </div>
         </div>
     );
