@@ -27,13 +27,13 @@ const MobilMeny = (props: Props) => {
     const menyClass = BEMHelper(classname);
 
     return (
-        <div className={menyClass.className}>
+        <>
             <Hovedmeny
                 className={menyClass.className}
                 settLenker={settLenker}
             />
             <Undermeny className={menyClass.className} lenker={lenker} />
-        </div>
+        </>
     );
 };
 
