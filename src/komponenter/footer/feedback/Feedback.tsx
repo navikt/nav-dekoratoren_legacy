@@ -6,20 +6,27 @@ import './Feedback.less';
 import { verifyWindowObj } from 'utils/Environment';
 import PartialNo from './feedback-partialno/PartialNo';
 import ThankYou from './feedback-thank-you/ThankYou';
-import Elaborated from './feedback-elaborated/Elaborated';
 import { CloseFeedbackContext } from './common/CloseFeedbackContext';
 import amplitudeTriggers from 'utils/amplitude-triggers';
+import { LenkeMedGA } from '../../common/lenke-med-ga/LenkeMedGA';
+import { AppState } from '../../../store/reducers';
+import { useSelector } from 'react-redux';
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
 
+const stateSelector = (state: AppState) => ({
+    environment: state.environment,
+});
+
 const Feedback = () => {
+    const { environment } = useSelector(stateSelector);
+    const { XP_BASE_URL } = environment;
     const [closeFeedback, setCloseFeedback] = useState(false);
 
     const [buttonsPressed, setButtonsPressed] = useState({
         yesButton: false,
         noButton: false,
-        reportButton: false,
     });
 
     const userPressedNo = () => {
@@ -38,22 +45,11 @@ const Feedback = () => {
         logAmplitudeEvent(amplitudeTriggers.felles, { svar: 'ja' });
     };
 
-    const userPressedReport = () => {
-        setButtonsPressed({
-            ...buttonsPressed,
-            reportButton: true,
-        });
-        logAmplitudeEvent(amplitudeTriggers.felles, {
-            svar: 'feil eller mangel',
-        });
-    };
-
     useEffect(() => {
         if (closeFeedback) {
             setButtonsPressed({
                 yesButton: false,
                 noButton: false,
-                reportButton: false,
             });
 
             setCloseFeedback(false);
@@ -67,9 +63,7 @@ const Feedback = () => {
             <Fragment>
                 <div className="footer-linje" />
                 <div className="feedback-container">
-                    {!buttonsPressed.yesButton &&
-                    !buttonsPressed.noButton &&
-                    !buttonsPressed.reportButton ? (
+                    {!buttonsPressed.yesButton && !buttonsPressed.noButton ? (
                         <Fragment>
                             <div className="qa-container">
                                 <Ingress>
@@ -90,19 +84,17 @@ const Feedback = () => {
                                     </Knapp>
                                 </div>
                             </div>
-                            <button
-                                className="lenke"
-                                onClick={userPressedReport}
+                            <LenkeMedGA
+                                href={`${XP_BASE_URL}/person/kontakt-oss/nb/tilbakemeldinger/feil-og-mangler`}
                             >
                                 <Tekst id="rapporter-om-feil-mangler" />
-                            </button>
+                            </LenkeMedGA>
                         </Fragment>
                     ) : null}
                     {buttonsPressed.yesButton && (
                         <ThankYou showFeedbackUsage={false} />
                     )}
                     {buttonsPressed.noButton && <PartialNo />}
-                    {buttonsPressed.reportButton && <Elaborated />}
                 </div>
             </Fragment>
         </CloseFeedbackContext.Provider>
