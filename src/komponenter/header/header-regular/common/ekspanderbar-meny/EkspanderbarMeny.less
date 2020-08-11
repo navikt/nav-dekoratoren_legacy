@@ -74,19 +74,13 @@
             height: @menu-height-mobil;
             transition-property: left, visibility;
             transition-duration: 0.25s;
+            overflow: auto;
 
             &--active {
                 left: 0;
                 z-index: 1001;
-                overflow: auto;
                 transition-duration: 0.4s;
             }
-        }
-
-        &__innhold {
-            overflow-y: scroll;
-            overflow-x: hidden;
-            height: 100%;
         }
     }
 }
