@@ -1,9 +1,9 @@
 import React, { ReactNode, useState, TouchEvent } from 'react';
+import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import Tekst from 'tekster/finn-tekst';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
-import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import './SlideToClose.less';
 
 interface Props {
@@ -81,9 +81,9 @@ export const SlideToClose = ({ children }: Props) => {
                 {children}
             </div>
             <div className={cls.element('message')} style={styleMessage}>
-                <Normaltekst>
+                <Element>
                     <Tekst id="lukk" />
-                </Normaltekst>
+                </Element>
             </div>
         </>
     );
