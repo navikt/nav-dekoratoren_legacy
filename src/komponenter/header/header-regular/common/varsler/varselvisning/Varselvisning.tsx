@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
 import { Systemtittel } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
-import SlideToClose from '../../../mobil/meny/innhold/utils/SlideToClose';
 import AlleVarslerLenke from './AlleVarslerLenke';
 import './Varselvisning.less';
 
@@ -55,26 +54,3 @@ export const Varselvisning = ({ setKbId }: Props) => {
         </div>
     );
 };
-
-export const VarselvisningMobil = (props: Props) => {
-    const { varslerIsOpen } = useSelector(stateSelector);
-    const menyClass = BEMHelper('mobilmeny');
-    const containerClassName = menyClass.element(
-        'varsel-innhold',
-        varslerIsOpen ? 'active' : ''
-    );
-
-    return (
-        <div className={'media-sm-mobil'}>
-            <SlideToClose className={containerClassName}>
-                <Varselvisning {...props} />
-            </SlideToClose>
-        </div>
-    );
-};
-
-export const VarselvisningDesktop = (props: Props) => (
-    <div className={'media-tablet-desktop'}>
-        <Varselvisning {...props} />
-    </div>
-);

@@ -1,6 +1,4 @@
-import React, { CSSProperties } from 'react';
-import Lenke from 'nav-frontend-lenker';
-import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
+import React from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import BEMHelper from 'utils/bem';
 import Lukkundermeny from './elementer/Lukkundermeny';
@@ -8,10 +6,9 @@ import Listelement from './elementer/Listelement';
 import { genererUrl } from 'utils/Environment';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { useSelector } from 'react-redux';
-import Lock from 'ikoner/meny/Lock';
 import { AppState } from 'store/reducers';
 import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
-import SlideToClose from './utils/SlideToClose';
+import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 
 interface Props {
     className: string;
@@ -43,18 +40,13 @@ const Undermeny = (props: Props) => {
         .toUpperCase()
         .concat(lenker.displayName.slice(1).toLowerCase());
 
-    const lockStyle = {
-        position: 'absolute',
-        left: '-20px',
-    } as CSSProperties;
-
     const containerClass = menyClass.element(
         'undermeny-innhold',
-        underMenuIsOpen ? 'active' : ''
+        underMenuIsOpen ? '' : 'hidden'
     );
 
     return (
-        <SlideToClose className={containerClass}>
+        <div className={containerClass}>
             <Lukkundermeny className={menyClass.className} />
             <Systemtittel
                 className={menyClass.element('undermeny-arbeidsflate')}
@@ -72,21 +64,13 @@ const Undermeny = (props: Props) => {
                             className={menyClass.className}
                             classElement="text-element-undermeny"
                         >
-                            <Lenke href={genererUrl(XP_BASE_URL, lenke.path)}>
-                                {displayLock && (
-                                    <div style={lockStyle}>
-                                        <Lock height={'18px'} width={'18px'} />
-                                    </div>
-                                )}
-                                <div
-                                    className={menyClass.element(
-                                        'undermeny-chevron'
-                                    )}
-                                >
-                                    <HoyreChevron />
-                                </div>
+                            <LenkeMedGA
+                                href={genererUrl(XP_BASE_URL, lenke.path)}
+                                withChevron={true}
+                                withLock={displayLock}
+                            >
                                 {lenke.displayName}
-                            </Lenke>
+                            </LenkeMedGA>
                         </Listelement>
                     );
                 })}
@@ -94,7 +78,7 @@ const Undermeny = (props: Props) => {
             <div className={menyClass.element('blokk-divider')}>
                 <Lukkundermeny className={menyClass.className} />
             </div>
-        </SlideToClose>
+        </div>
     );
 };
 
