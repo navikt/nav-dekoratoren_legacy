@@ -25,7 +25,7 @@ export const initialState: VarselinnboksState = {
         uleste: 0,
         antall: 0,
         nyesteId: 0,
-        varsler: `<div class="varsel-liste">Du har ingen varsler å vise.</div>`,
+        varsler: ``,
     },
     status: Status.IKKE_STARTET,
 };
