@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import BEMHelper from 'utils/bem';
 import './EkspanderbarMeny.less';
-import SlideToClose from 'komponenter/header/header-regular/mobil/meny/innhold/utils/SlideToClose';
 
 type Props = {
     isOpen: boolean;
@@ -23,9 +22,7 @@ const EkspanderbarMeny = (props: Props) => {
                 )}
                 id={id}
             >
-                <div className={cls.element('innhold')}>
-                    <SlideToClose>{children}</SlideToClose>
-                </div>
+                <div className={cls.element('innhold')}>{children}</div>
             </div>
         </div>
     );

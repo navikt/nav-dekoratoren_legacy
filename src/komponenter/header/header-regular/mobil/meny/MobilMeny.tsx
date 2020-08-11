@@ -6,6 +6,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { getHovedmenyNode } from 'utils/meny-storage-utils';
 import { dataInitState } from 'store/reducers/menu-duck';
+import SlideToClose from 'komponenter/header/header-regular/mobil/meny/innhold/utils/SlideToClose';
 import './MobilMeny.less';
 
 interface Props {
@@ -27,13 +28,13 @@ const MobilMeny = (props: Props) => {
     const menyClass = BEMHelper(classname);
 
     return (
-        <>
+        <SlideToClose>
             <Hovedmeny
                 className={menyClass.className}
                 settLenker={settLenker}
             />
             <Undermeny className={menyClass.className} lenker={lenker} />
-        </>
+        </SlideToClose>
     );
 };
 

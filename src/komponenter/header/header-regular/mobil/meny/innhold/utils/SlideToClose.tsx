@@ -63,16 +63,14 @@ export const SlideToClose = ({ children }: Props) => {
     const onTouchEnd = () => {
         if (dx > 75) {
             dispatch(lukkAlleDropdowns());
-            setTimeout(() => setDx(0), 400);
-        } else {
-            setDx(0);
         }
+        setDx(0);
         setIsSliding(false);
         setDisableSliding(false);
     };
 
     return (
-        <div className={cls.element('wrapper')}>
+        <>
             <div
                 onTouchStart={onTouchStart}
                 onTouchMove={disableSliding ? undefined : onTouchMove}
@@ -87,7 +85,7 @@ export const SlideToClose = ({ children }: Props) => {
                     <Tekst id="lukk" />
                 </Normaltekst>
             </div>
-        </div>
+        </>
     );
 };
 
