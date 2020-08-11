@@ -51,9 +51,9 @@ export const SlideToClose = ({ children }: Props) => {
     };
 
     const onTouchStart = (event: TouchEvent<HTMLElement>) => {
-        const screenWidth = window.screen.width;
-        if (screenWidth < maxScreenWidth) {
-            setScreenWidth(screenWidth);
+        const width = window.screen.width;
+        if (width < maxScreenWidth) {
+            setScreenWidth(width);
             setStartX(event.touches[0].clientX);
             setStartY(event.touches[0].clientY);
         } else {
