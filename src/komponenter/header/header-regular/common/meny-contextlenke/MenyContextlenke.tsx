@@ -6,6 +6,7 @@ import { gaEvent } from 'utils/google-analytics';
 import BEMHelper from 'utils/bem';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
 import { HoyreChevron } from 'nav-frontend-chevron';
+import './MenyContextlenke.less';
 
 interface Props {
     url: string;
@@ -20,16 +21,15 @@ const BunnseksjonLenke = ({
     url,
     lenkeTekstId,
     stikkord,
-    className,
     id,
     onClick,
 }: Props) => {
-    const cls = BEMHelper(className);
+    const cls = BEMHelper('meny-contextlenke');
 
     return (
         <LenkepanelBase
             href={url}
-            className={cls.element('bunn-lenke')}
+            className={cls.element('lenke')}
             id={id}
             onClick={(event) => {
                 if (onClick) {
@@ -43,7 +43,7 @@ const BunnseksjonLenke = ({
             }}
             border={true}
         >
-            <div className={cls.element('bunn-lenke-visning')}>
+            <div className={cls.element('visning')}>
                 <Undertittel className={'lenkepanel__heading'}>
                     <HoyreChevron
                         className={cls.element('bunn-lenke-chevron')}

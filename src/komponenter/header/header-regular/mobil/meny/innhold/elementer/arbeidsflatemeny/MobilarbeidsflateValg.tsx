@@ -15,6 +15,10 @@ import { useCookies } from 'react-cookie';
 import Tekst from 'tekster/finn-tekst';
 import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
 import './MobilarbeidsflateValg.less';
+import BunnseksjonLenke from 'komponenter/header/header-regular/desktop/hovedmeny/bunn-seksjon/BunnseksjonLenke';
+import KbNav from 'utils/keyboard-navigation/kb-navigation';
+import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 
 interface Props {
     lang: Language;
@@ -36,44 +40,27 @@ const MobilarbeidsflateValg = ({ lang }: Props) => {
         <ul className={cls.className}>
             {lenker.map((lenke, i) => (
                 <li key={i} className={cls.element('liste-element')}>
-                    <LenkeMedGA
-                        href={lenke.url}
+                    <BunnseksjonLenke
+                        url={lenke.url}
+                        lenkeTekstId={lenke.lenkeTekstId}
+                        stikkord={finnTekst(lenke.stikkordId, lang)}
+                        className={cls.className}
                         onClick={(event) => {
                             event.preventDefault();
+                            const context = lenke as ArbeidsflateLenke;
                             setCookie(
                                 'decorator-context',
-                                lenke.key,
+                                context.key,
                                 cookieOptions
                             );
-                            if (erNavDekoratoren() && lenke.key) {
-                                dispatch(settArbeidsflate(lenke.key));
+                            if (erNavDekoratoren()) {
+                                dispatch(settArbeidsflate(context.key));
                             } else {
-                                window.location.href = lenke.url;
+                                window.location.href = context.url;
                             }
                         }}
-                        gaEventArgs={{
-                            context: arbeidsflate,
-                            category: GACategory.Header,
-                            action: 'arbeidsflate-valg',
-                        }}
-                    >
-                        <Undertittel>
-                            <span className={cls.element('lenke-tittel')}>
-                                <Tekst id={lenke.lenkeTekstId} />
-                            </span>{' '}
-                        </Undertittel>
-                        <Normaltekst>
-                            {finnTekst(lenke.stikkordId, lang)
-                                .split('|')
-                                .map((ord) => {
-                                    return (
-                                        <span className="bullet" key={ord}>
-                                            {ord}
-                                        </span>
-                                    );
-                                })}
-                        </Normaltekst>
-                    </LenkeMedGA>
+                        key={lenke.lenkeTekstId}
+                    />
                 </li>
             ))}
         </ul>
