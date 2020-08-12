@@ -1,19 +1,11 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import BEMHelper from 'utils/bem';
-import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
-import { GACategory } from 'utils/google-analytics';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
-import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
-import { finnTekst } from 'tekster/finn-tekst';
 import { Language } from 'store/reducers/language-duck';
-import { erNavDekoratoren } from 'utils/Environment';
-import { useCookies } from 'react-cookie';
-import Tekst from 'tekster/finn-tekst';
 import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
+import ArbeidsflateLenkepanel from 'komponenter/header/header-regular/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
+import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import './MobilarbeidsflateValg.less';
 
 interface Props {
@@ -26,54 +18,15 @@ const stateProps = (state: AppState) => ({
 });
 
 const MobilarbeidsflateValg = ({ lang }: Props) => {
-    const dispatch = useDispatch();
-    const [, setCookie] = useCookies(['decorator-context']);
     const { arbeidsflate, environment } = useSelector(stateProps);
     const cls = BEMHelper('mobil-arbeidsflate-valg');
-    const lenker = bunnLenker(environment)[arbeidsflate];
+    const lenker = bunnLenker(environment)[arbeidsflate] as ArbeidsflateLenke[];
 
     return (
         <ul className={cls.className}>
             {lenker.map((lenke, i) => (
                 <li key={i} className={cls.element('liste-element')}>
-                    <LenkeMedGA
-                        href={lenke.url}
-                        onClick={(event) => {
-                            event.preventDefault();
-                            setCookie(
-                                'decorator-context',
-                                lenke.key,
-                                cookieOptions
-                            );
-                            if (erNavDekoratoren() && lenke.key) {
-                                dispatch(settArbeidsflate(lenke.key));
-                            } else {
-                                window.location.href = lenke.url;
-                            }
-                        }}
-                        gaEventArgs={{
-                            context: arbeidsflate,
-                            category: GACategory.Header,
-                            action: 'arbeidsflate-valg',
-                        }}
-                    >
-                        <Undertittel>
-                            <span className={cls.element('lenke-tittel')}>
-                                <Tekst id={lenke.lenkeTekstId} />
-                            </span>{' '}
-                        </Undertittel>
-                        <Normaltekst>
-                            {finnTekst(lenke.stikkordId, lang)
-                                .split('|')
-                                .map((ord) => {
-                                    return (
-                                        <span className="bullet" key={ord}>
-                                            {ord}
-                                        </span>
-                                    );
-                                })}
-                        </Normaltekst>
-                    </LenkeMedGA>
+                    <ArbeidsflateLenkepanel lenke={lenke} language={lang} />
                 </li>
             ))}
         </ul>
