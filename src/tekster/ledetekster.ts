@@ -144,6 +144,9 @@ export const ledetekster: { [key: string]: string } = {
     'varsler-mobil-lukk': 'Lukk',
     'varsler-mobil-lukk-en': 'Close',
     'varsler-mobil-lukk-se': 'Lukk',
+    'varsler-tom-liste': 'Du har ingen varsler',
+    'varsler-tom-liste-en': `You have no notifications`,
+    'varsler-tom-liste-se': `You have no notifications`,
     'til-forside': 'Til forsiden',
     'til-forside-en': 'Til forsiden',
     'til-forside-se': 'Til forsiden',
@@ -233,9 +236,6 @@ export const ledetekster: { [key: string]: string } = {
         'Give your evaluation of the information on this page',
     'gi-din-vurdering-av-informasjon-se':
         'Gi din vurdering av informasjonen på siden',
-    'hva-lette-du-etter-spørsmål': 'Hva lette du etter?',
-    'hva-lette-du-etter-spørsmål-en': 'What were you looking for?',
-    'hva-lette-du-etter-spørsmål-se': 'Hva lette du etter?',
     'rapporter-om-feil-mangler': 'Meld om feil og mangler',
     'rapporter-om-feil-mangler-en': 'Report errors and omissions',
     'rapporter-om-feil-mangler-se': 'Meld om feil og mangler',
@@ -288,4 +288,15 @@ export const ledetekster: { [key: string]: string } = {
     villedende: 'Innholdet var villedende',
     'villedende-en': 'The content was misleading',
     'villedende-se': 'Innholdet var villedende',
+    'browser-utdatert-msg': 'Du bruker en nettleser som nav.no ikke støtter. ',
+    'browser-utdatert-msg-en':
+        'You are using a web browser which is not supported on nav.no. ',
+    'browser-utdatert-msg-se':
+        'Du bruker en nettleser som nav.no ikke støtter. ',
+    'browser-utdatert-lenke': 'Se mer informasjon',
+    'browser-utdatert-lenke-en': 'More information',
+    'browser-utdatert-lenke-se': 'Se mer informasjon',
+    'browser-utdatert-din-nettleser': 'Din nettleser: ',
+    'browser-utdatert-din-nettleser-en': 'Your web browser: ',
+    'browser-utdatert-din-nettleser-se': 'Din nettleser: ',
 };

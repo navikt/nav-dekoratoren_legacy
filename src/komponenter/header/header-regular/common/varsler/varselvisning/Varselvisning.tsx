@@ -1,13 +1,11 @@
 import React from 'react';
 import { AppState } from 'store/reducers';
-import { GACategory } from 'utils/google-analytics';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
 import { useSelector } from 'react-redux';
 import { VarslerParsed } from './VarslerParsed';
-import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { Systemtittel } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
+import AlleVarslerLenke from './AlleVarslerLenke';
 import './Varselvisning.less';
 
 const stateSelector = (state: AppState) => ({
@@ -16,49 +14,18 @@ const stateSelector = (state: AppState) => ({
     varslerUleste: state.varsler.data.uleste,
     language: state.language.language,
     varselInnboksUrl: state.environment.API_VARSELINNBOKS_URL,
+    varslerIsOpen: state.dropdownToggles.varsler,
 });
 
-const alleVarslerLenke = (
-    nyeVarslerMsg: string,
-    varselInnboksUrl: string,
-    rowIndex?: number
-) => {
-    return (
-        <div className="dekorator-vis-alle-lenke">
-            <LenkeMedGA
-                href={varselInnboksUrl}
-                id={
-                    rowIndex !== undefined
-                        ? getKbId(KbNavGroup.Varsler, {
-                              col: 0,
-                              row: rowIndex,
-                              sub: 0,
-                          })
-                        : undefined
-                }
-                gaEventArgs={{
-                    category: GACategory.Header,
-                    action: 'varsler/visalle',
-                    label: varselInnboksUrl,
-                }}
-            >
-                <Tekst id={'varsler-visalle'} />
-                {nyeVarslerMsg}
-            </LenkeMedGA>
-        </div>
-    );
+type Props = {
+    setKbId?: boolean;
 };
 
-type Props = { setKbId?: boolean };
-
 export const Varselvisning = ({ setKbId }: Props) => {
-    const {
-        varsler,
-        varslerAntall,
-        varslerUleste,
-        language,
-        varselInnboksUrl,
-    } = useSelector(stateSelector);
+    const { language, varselInnboksUrl } = useSelector(stateSelector);
+    const { varsler, varslerAntall, varslerUleste } = useSelector(
+        stateSelector
+    );
 
     const cls = BEMHelper('varsler-visning');
 
@@ -73,16 +40,23 @@ export const Varselvisning = ({ setKbId }: Props) => {
             <Systemtittel className={cls.element('tittel')}>
                 <Tekst id={'varsler-tittel'} />
             </Systemtittel>
-            <VarslerParsed
-                varsler={varsler}
-                rowIndex={setKbId ? 0 : undefined}
-            />
-            {visAlleVarslerLenke &&
-                alleVarslerLenke(
-                    nyeVarslerMsg,
-                    varselInnboksUrl,
-                    setKbId ? 1 : undefined
-                )}
+            {varslerAntall === 0 ? (
+                <div className={cls.element('tom-liste')}>
+                    <Tekst id={'varsler-tom-liste'} />
+                </div>
+            ) : (
+                <VarslerParsed
+                    varsler={varsler}
+                    rowIndex={setKbId ? 0 : undefined}
+                />
+            )}
+            {visAlleVarslerLenke && (
+                <AlleVarslerLenke
+                    nyeVarslerMsg={nyeVarslerMsg}
+                    varselInnboksUrl={varselInnboksUrl}
+                    rowIndex={setKbId ? 1 : undefined}
+                />
+            )}
         </div>
     );
 };
