@@ -14,7 +14,7 @@ import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { finnTekst } from 'tekster/finn-tekst';
-import './ContextLenkepanel.less';
+import './ArbeidsflateLenkepanel.less';
 
 interface Props {
     lenke: ArbeidsflateLenke;
@@ -22,7 +22,7 @@ interface Props {
     id?: string;
 }
 
-const ContextLenkepanel = ({ lenke, language, id }: Props) => {
+const ArbeidsflateLenkepanel = ({ lenke, language, id }: Props) => {
     const cls = BEMHelper('meny-contextlenke');
     const dispatch = useDispatch();
     const [, setCookie] = useCookies();
@@ -59,4 +59,4 @@ const ContextLenkepanel = ({ lenke, language, id }: Props) => {
     );
 };
 
-export default ContextLenkepanel;
+export default ArbeidsflateLenkepanel;

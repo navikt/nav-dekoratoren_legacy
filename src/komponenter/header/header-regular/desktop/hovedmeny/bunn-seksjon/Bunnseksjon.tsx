@@ -7,7 +7,7 @@ import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arb
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import ContextLenkepanel from 'komponenter/header/header-regular/common/context-lenkepanel/ContextLenkepanel';
+import ArbeidsflateLenkepanel from 'komponenter/header/header-regular/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
 import './Bunnseksjon.less';
 
 interface Props {
@@ -28,7 +28,7 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                     language !== Language.NORSK ? !lenke.key : true
                 )
                 .map((lenke, index) => (
-                    <ContextLenkepanel
+                    <ArbeidsflateLenkepanel
                         lenke={lenke}
                         language={language}
                         id={KbNav.getKbId(KbNavGroup.Hovedmeny, {
