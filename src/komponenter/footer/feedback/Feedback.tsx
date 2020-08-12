@@ -2,24 +2,22 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
-import './Feedback.less';
 import { verifyWindowObj } from 'utils/Environment';
 import AlternativNei from './feedback-alternativ-nei/AlternativNei';
 import ThankYou from './feedback-thank-you/ThankYou';
-import AlternativFeilMangler from './feedback-alternativ-feil-mangler/AlternativFeilMangler';
 import { CloseFeedbackContext } from './common/CloseFeedbackContext';
 import amplitudeTriggers from 'utils/amplitude-triggers';
+import './Feedback.less';
+
 const { logAmplitudeEvent } = verifyWindowObj()
     ? require('utils/amplitude')
     : () => null;
 
 const Feedback = () => {
     const [closeFeedback, setCloseFeedback] = useState(false);
-
     const [buttonsPressed, setButtonsPressed] = useState({
         yesButton: false,
         noButton: false,
-        reportButton: false,
     });
 
     const userPressedNo = () => {
@@ -38,22 +36,11 @@ const Feedback = () => {
         logAmplitudeEvent(amplitudeTriggers.felles, { svar: 'ja' });
     };
 
-    const userPressedReport = () => {
-        setButtonsPressed({
-            ...buttonsPressed,
-            reportButton: true,
-        });
-        logAmplitudeEvent(amplitudeTriggers.felles, {
-            svar: 'feil eller mangel',
-        });
-    };
-
     useEffect(() => {
         if (closeFeedback) {
             setButtonsPressed({
                 yesButton: false,
                 noButton: false,
-                reportButton: false,
             });
 
             setCloseFeedback(false);
@@ -67,9 +54,7 @@ const Feedback = () => {
             <Fragment>
                 <div className="footer-linje" />
                 <div className="feedback-container">
-                    {!buttonsPressed.yesButton &&
-                    !buttonsPressed.noButton &&
-                    !buttonsPressed.reportButton ? (
+                    {!buttonsPressed.yesButton && !buttonsPressed.noButton ? (
                         <Fragment>
                             <div className="qa-container">
                                 <Ingress>
@@ -90,19 +75,12 @@ const Feedback = () => {
                                     </Knapp>
                                 </div>
                             </div>
-                            <button
-                                className="lenke"
-                                onClick={userPressedReport}
-                            >
-                                <Tekst id="rapporter-om-feil-mangler" />
-                            </button>
                         </Fragment>
                     ) : null}
                     {buttonsPressed.yesButton && (
                         <ThankYou showFeedbackUsage={false} />
                     )}
                     {buttonsPressed.noButton && <AlternativNei />}
-                    {buttonsPressed.reportButton && <AlternativFeilMangler />}
                 </div>
             </Fragment>
         </CloseFeedbackContext.Provider>

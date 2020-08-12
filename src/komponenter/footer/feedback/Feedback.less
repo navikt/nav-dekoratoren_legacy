@@ -7,13 +7,16 @@
 .feedback-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     align-content: center;
-    padding: 1.25em;
     flex-wrap: wrap;
     max-width: 1344px;
     margin: 0 auto;
     width: 100%;
+
+    padding: 1rem 2rem;
+    @media (min-width: @desktopMaxWidth) {
+        padding: 1rem 0;
+    }
 
     .qa-container {
         display: flex;
