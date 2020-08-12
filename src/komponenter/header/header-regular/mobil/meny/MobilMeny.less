@@ -3,6 +3,15 @@
 .mobilmeny {
     @transition-duration: 0.4s;
 
+    .spinner-container {
+        position: absolute;
+        z-index: 1020;
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        left: 0;
+    }
+
     &__startmeny,
     &__undermeny-innhold {
         position: absolute;
@@ -11,9 +20,9 @@
         width: 100%;
         background-color: white;
         padding: 0.75rem @margins-sides-mobil 1rem @margins-sides-mobil;
+        height: 100%;
         overflow-y: scroll;
         overflow-x: hidden;
-        .set-mobil-menu-height();
 
         &--hidden {
             visibility: hidden;
