@@ -87,7 +87,7 @@ const AlternativFeilMangler = () => {
                     </div>
                 </div>
             ) : (
-                <Thankyou showFeedbackUsage={true}/>
+                <Thankyou showFeedbackUsage={true} />
             )}
         </Fragment>
     );

@@ -2,11 +2,13 @@
 
 body {
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 body.no-scroll-mobil {
     @media not all and (min-width: @desktopMinWidth) {
         overflow-y: hidden;
+        overflow-x: hidden;
     }
 }
 

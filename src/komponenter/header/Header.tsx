@@ -4,6 +4,7 @@ import { fetchMenypunkter } from 'store/reducers/menu-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { HeaderSimple } from 'komponenter/header/header-simple/HeaderSimple';
 import { HeaderRegular } from 'komponenter/header/header-regular/HeaderRegular';
+import Driftsmeldinger from './driftsmeldinger/Driftsmeldinger';
 import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
@@ -12,13 +13,20 @@ import { Language, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
-import { fetchFeatureToggles } from '../../api/api';
-import { ActionType } from '../../store/actions';
-import { loadVergic } from '../../utils/scripts';
+import { fetchDriftsmeldinger } from 'store/reducers/driftsmeldinger-duck';
+import { fetchFeatureToggles } from 'api/api';
+import { ActionType } from 'store/actions';
+import { loadVergic } from 'utils/scripts';
+import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/browser-support-msg/BrowserSupportMsg';
+
+const unleashCacheCookie = 'decorator-unleash-cache';
 
 export const Header = () => {
     const dispatch = useDispatch();
-    const [cookies, setCookie] = useCookies(['decorator-context']);
+    const [cookies, setCookie] = useCookies([
+        'decorator-context',
+        unleashCacheCookie,
+    ]);
     const erInnlogget = useSelector(
         (state: AppState) => state.innloggingsstatus.data.authenticated
     );
@@ -42,19 +50,38 @@ export const Header = () => {
 
     // External data
     useEffect(() => {
+        fetchDriftsmeldinger(APP_BASE_URL)(dispatch);
         hentInnloggingsstatus(APP_BASE_URL)(dispatch);
         fetchMenypunkter(APP_BASE_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
-            fetchFeatureToggles(API_UNLEASH_PROXY_URL, currentFeatureToggles)
-                .then((updatedFeatureToggles) =>
-                    dispatch({
-                        type: ActionType.SETT_FEATURE_TOGGLES,
-                        data: updatedFeatureToggles,
-                    })
+            const togglesFromCookie = cookies[unleashCacheCookie];
+            if (togglesFromCookie) {
+                dispatch({
+                    type: ActionType.SETT_FEATURE_TOGGLES,
+                    data: togglesFromCookie,
+                });
+            } else {
+                fetchFeatureToggles(
+                    API_UNLEASH_PROXY_URL,
+                    currentFeatureToggles
                 )
-                .catch((error) =>
-                    console.error(`Failed to fetch feature-toggles: ${error}`)
-                );
+                    .then((updatedFeatureToggles) => {
+                        dispatch({
+                            type: ActionType.SETT_FEATURE_TOGGLES,
+                            data: updatedFeatureToggles,
+                        });
+                        setCookie(unleashCacheCookie, updatedFeatureToggles, {
+                            maxAge: 100,
+                            domain: '.nav.no',
+                            path: '/',
+                        });
+                    })
+                    .catch((error) => {
+                        console.error(
+                            `Failed to fetch feature-toggles: ${error}`
+                        );
+                    });
+            }
         }
     }, []);
 
@@ -101,6 +128,7 @@ export const Header = () => {
         <Fragment>
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
+            <BrowserSupportMsg />
             <header className="siteheader">
                 {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
                     <HeaderSimple />
@@ -108,6 +136,7 @@ export const Header = () => {
                     <HeaderRegular />
                 )}
             </header>
+            <Driftsmeldinger />
         </Fragment>
     );
 };

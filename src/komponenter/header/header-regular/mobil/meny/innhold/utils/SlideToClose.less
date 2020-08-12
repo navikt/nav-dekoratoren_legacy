@@ -1,0 +1,24 @@
+@import (reference) '../../../../../../../styling-variabler.less';
+
+.slideToClose {
+    &__content {
+        position: relative;
+        transition: left 0.25s ease-in-out;
+    }
+
+    &__message {
+        top: 0;
+        position: absolute;
+        height: @menu-height-mobil;
+        width: 100px;
+        color: white;
+        z-index: 1004;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media (min-width: @desktopMinWidth) {
+            display: none;
+        }
+    }
+}

@@ -1,6 +1,7 @@
 import { Data as innloggingsstatusData } from './reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from './reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from './reducers/menu-duck';
+import { DriftsmeldingerData } from './reducers/driftsmeldinger-duck';
 import { EnvironmentState } from './reducers/environment-duck';
 import { FeatureToggles } from './reducers/feature-toggles-duck';
 
@@ -11,6 +12,9 @@ export enum ActionType {
     HENT_MENY_OK = 'HENT_MENY_OK',
     HENT_MENY_FEILET = 'HENT_MENY_FEILET',
     HENT_MENY_PENDING = 'HENT_MENY_PENDING',
+    HENT_DRIFTSMELDING_OK = 'HENT_DRIFTSMELDING_OK',
+    HENT_DRIFTSMELDING_FEILET = 'HENT_DRIFTSMELDING_FEILET',
+    HENT_DRIFTSMELDING_PENDING = 'HENT_DRIFTSMELDING_PENDING',
     HENT_VARSLER_OK = 'HENT_VARSLER_OK',
     HENT_VARSLER_FEILET = 'HENT_VARSLER_FEILET',
     HENT_VARSLER_PENDING = 'HENT_VARSLER_PENDING',
@@ -60,6 +64,19 @@ export interface HentMenyLenkerPENDING {
 
 export interface HentMenyLenkerFAILED {
     type: ActionType.HENT_MENY_FEILET;
+}
+
+export interface HentDriftsmeldingSUCCESS {
+    type: ActionType.HENT_DRIFTSMELDING_OK;
+    data: DriftsmeldingerData[];
+}
+
+export interface HentDriftsmeldingPENDING {
+    type: ActionType.HENT_DRIFTSMELDING_PENDING;
+}
+
+export interface HentDriftsmeldingFAILED {
+    type: ActionType.HENT_DRIFTSMELDING_FEILET;
 }
 
 export interface HentVarslerOKAction {
@@ -126,7 +143,7 @@ export interface ToggleHovedmeny {
     type: ActionType.TOGGLE_HOVEDMENY;
 }
 
-export interface ToggleMinsideMeny {
+export interface ToggleMinsidemeny {
     type: ActionType.TOGGLE_MINSIDE_MENY;
 }
 
@@ -161,6 +178,9 @@ export type Handling =
     | HentMenyLenkerSUCCESS
     | HentMenyLenkerFAILED
     | HentMenyLenkerPENDING
+    | HentDriftsmeldingSUCCESS
+    | HentDriftsmeldingFAILED
+    | HentDriftsmeldingPENDING
     | HentVarslerOKAction
     | HentVarslerFEILETAction
     | HentVarslerPENDINGAction
@@ -176,7 +196,7 @@ export type Handling =
     | SettArbeidsflateIkkeBestemt
     | SettFeatureToggles
     | ToggleHovedmeny
-    | ToggleMinsideMeny
+    | ToggleMinsidemeny
     | ToggleSok
     | ToggleVarsel
     | ToggleUnderMeny

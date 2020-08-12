@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SokDropdown } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
+import SokKnappDesktop from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { reducers } from 'store/reducers';
@@ -13,7 +13,7 @@ import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/Logg
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { VarslerKnapp } from 'komponenter/header/header-regular/common/varsler/varsler-knapp/VarslerKnapp';
-import MinsideMeny from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
+import Minsidemeny from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
 import { innloggetAction } from 'utils/jest/testObjects';
 import { uInnloggetAction } from 'utils/jest/testObjects';
 
@@ -37,9 +37,9 @@ describe('<HeaderMenylinje>', () => {
         expect(wrapper.find(HovedmenyKnapp)).toHaveLength(2);
     });
 
-    it('Skal rendre <SokDropdown> komponent', () => {
+    it('Skal rendre <SokKnappDesktop> komponent', () => {
         const wrapper = shallowWithProps();
-        expect(wrapper.find(SokDropdown)).toHaveLength(1);
+        expect(wrapper.find(SokKnappDesktop)).toHaveLength(1);
     });
 
     it('Skal rendre <LoggInnKnapp/> komponent', () => {
@@ -54,19 +54,19 @@ describe('<HeaderMenylinje>', () => {
         expect(wrapper.find(LoggInnKnapp)).toHaveLength(1);
     });
 
-    it('Skal rendre <VarslerKnapp /> og <MinsideMeny /> komponent for innlogget personbruker', () => {
+    it('Skal rendre <VarslerKnapp /> og <Minsidemeny /> komponent for innlogget personbruker', () => {
         store.dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
         store.dispatch(innloggetAction);
         const wrapper = shallowWithProps();
         expect(wrapper.find(VarslerKnapp)).toHaveLength(1);
-        expect(wrapper.find(MinsideMeny)).toHaveLength(1);
+        expect(wrapper.find(Minsidemeny)).toHaveLength(1);
     });
 
-    it('Skal ikke rendre <VarslerKnapp /> og <MinsideMeny /> komponent for uinnlogget personbruker', () => {
+    it('Skal ikke rendre <VarslerKnapp /> og <Minsidemeny /> komponent for uinnlogget personbruker', () => {
         store.dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
         store.dispatch(uInnloggetAction);
         const wrapper = shallowWithProps();
         expect(wrapper.find(VarslerKnapp)).toHaveLength(0);
-        expect(wrapper.find(MinsideMeny)).toHaveLength(0);
+        expect(wrapper.find(Minsidemeny)).toHaveLength(0);
     });
 });
