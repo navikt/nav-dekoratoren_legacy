@@ -1,0 +1,67 @@
+@import (reference) '../../../../../styling-variabler.less';
+
+.meny-contextlenke {
+    border: 2px @navBla solid;
+    margin-bottom: 0;
+
+    &:hover {
+        border: 2px @navBla solid;
+        background-color: @navBla;
+
+        .lenkepanel__indikator,
+        .lenkepanel__heading,
+        .meny-contextlenke__stikkord {
+            color: white;
+        }
+
+        .meny-contextlenke__chevron {
+            left: 6px;
+        }
+    }
+
+    &__innhold {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100%;
+        height: 100%;
+    }
+
+    .lenkepanel__indikator,
+    .lenkepanel__heading {
+        color: @navBla;
+    }
+
+    &__chevron {
+        display: none;
+    }
+
+    @media (max-height: @smallDesktopLimitHeight),
+        (max-width: @desktopMaxWidth) {
+        padding: 0.5rem 0.75rem;
+        margin-bottom: 0.25rem;
+
+        &__chevron {
+            display: inline-block;
+            align-self: center;
+            margin-right: 8px;
+            margin-left: -4px;
+            left: 0;
+            transition: left 0.25s;
+        }
+
+        .lenkepanel__indikator {
+            display: none;
+        }
+
+        .lenkepanel__heading {
+            &::after {
+                content: ' ';
+                margin-right: 0.4rem;
+            }
+        }
+    }
+
+    @media (max-width: @mobilMaxWidth) {
+        padding: 0.75rem 1rem;
+    }
+}
