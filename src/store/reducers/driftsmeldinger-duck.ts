@@ -1,4 +1,3 @@
-import { ReactElement } from 'react';
 import { ActionType } from 'store/actions';
 import { Handling } from 'store/actions';
 import { HentDriftsmeldingFAILED } from 'store/actions';
