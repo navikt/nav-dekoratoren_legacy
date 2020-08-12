@@ -24,8 +24,6 @@
 @header-height-desktop: 106px;
 @header-height-mobil: 88px;
 
-@menu-height-mobil: calc(100vh - @header-height-mobil);
-
 @header-separator-farge: @navGra20;
 @header-separator-height: 2px;
 
@@ -52,4 +50,10 @@
         border-radius: 4px;
         border-color: transparent;
     }
+}
+
+.set-mobil-menu-height {
+    // fallback for browsers without var support
+    height: calc(100vh - @header-height-mobil);
+    height: calc(var(--view-height, 100vh) - @header-height-mobil);
 }

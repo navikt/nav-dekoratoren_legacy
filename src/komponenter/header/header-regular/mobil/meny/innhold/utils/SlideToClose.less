@@ -9,13 +9,13 @@
     &__message {
         top: 0;
         position: absolute;
-        height: @menu-height-mobil;
         width: 100px;
         color: white;
         z-index: 1004;
         display: flex;
         justify-content: center;
         align-items: center;
+        .set-mobil-menu-height();
 
         @media (min-width: @desktopMinWidth) {
             display: none;

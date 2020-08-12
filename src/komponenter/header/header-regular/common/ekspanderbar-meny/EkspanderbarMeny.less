@@ -71,10 +71,10 @@
             position: fixed;
             top: @header-height-mobil;
             left: -100%;
-            height: @menu-height-mobil;
             transition-property: left, visibility;
             transition-duration: 0.25s;
             overflow: auto;
+            .set-mobil-menu-height();
 
             &--active {
                 left: 0;

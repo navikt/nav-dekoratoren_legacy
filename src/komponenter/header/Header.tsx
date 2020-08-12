@@ -124,6 +124,20 @@ export const Header = () => {
         checkUrlForLanguage();
     }, []);
 
+    // Handle CSS viewport height for browsers with broken vh implementation
+    useEffect(() => {
+        const setCssViewHeight = () => {
+            const viewHeight = Math.floor(window.innerHeight + 0.5);
+            document.documentElement.style.setProperty(
+                '--view-height',
+                `${viewHeight}px`
+            );
+        };
+        setCssViewHeight();
+        window.addEventListener('resize', setCssViewHeight);
+        return () => window.removeEventListener('resize', setCssViewHeight);
+    }, []);
+
     return (
         <Fragment>
             <HeadElements />
