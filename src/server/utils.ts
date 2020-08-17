@@ -2,6 +2,7 @@ import { Request } from 'express';
 import { EnvironmentState } from 'store/reducers/environment-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Language } from 'store/reducers/language-duck';
+import moment from 'moment';
 
 interface Cookies {
     [key: string]: MenuValue | Language | string;
@@ -31,7 +32,7 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
         DITT_NAV_URL: process.env.DITT_NAV_URL as string,
         LOGIN_URL: process.env.LOGIN_URL as string,
         LOGOUT_URL: process.env.LOGOUT_URL as string,
-        SERVER_TIME: Date.now(),
+        SERVER_TIME: moment().valueOf(),
         ...(req.query && {
             PARAMS: {
                 LANGUAGE: chosenLanguage,

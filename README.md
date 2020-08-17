@@ -123,7 +123,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 Eksempel:<br>
 [https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3](https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3)
 
-[1] Dersom en chat-sesjon er startet fra en annen app, så vil denne holdes aktiv uavhengig av dette parameteret.
+[1] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
 
 ## Miljø på NAIS
 

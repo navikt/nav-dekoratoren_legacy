@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { verifyWindowObj } from 'utils/Environment';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { finnTekst } from 'tekster/finn-tekst';
 import './ChatbotWrapper.less';
 
@@ -12,12 +12,12 @@ import './ChatbotWrapper.less';
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
 const humanChatIsOpen = (serverTime: number) => {
-    const now = moment(serverTime);
+    const now = moment(serverTime).tz('Europe/Oslo');
     if (now.isoWeekday() > 5) {
         return false;
     }
-    const opening = moment(serverTime).hours(9).minutes(0);
-    const closing = moment(serverTime).hours(14).minutes(30);
+    const opening = moment(now).hours(9).minutes(0);
+    const closing = moment(now).hours(14).minutes(30);
     return now.isBetween(opening, closing, 'minutes', '[)');
 };
 
@@ -34,7 +34,7 @@ const dockIfNearBottom = (
     if (chatbotFixedPosition > chatbotDockedPosition) {
         chatbotElement.style.position = 'static';
     } else {
-        chatbotElement.removeAttribute('style');
+        chatbotElement.style.removeProperty('position');
     }
 };
 

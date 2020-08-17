@@ -1,3 +1,4 @@
+const moment = require('moment');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpack = require('webpack');
@@ -6,6 +7,7 @@ const nodeExternals = require('webpack-node-externals');
 const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 
 const browserConfig = {
     mode: process.env.NODE_ENV || 'development',
@@ -179,6 +181,12 @@ const browserConfig = {
         }),
 
         new MomentLocalesPlugin({ localesToKeep: ['nb', 'nn', 'en'] }),
+
+        new MomentTimezoneDataPlugin({
+            startYear: moment().year() - 1,
+            endYear: moment().year() + 1,
+            matchZones: 'Europe/Oslo',
+        }),
     ],
 };
 
