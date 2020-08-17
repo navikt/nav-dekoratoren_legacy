@@ -8,11 +8,16 @@ import moment from 'moment';
 import { finnTekst } from 'tekster/finn-tekst';
 import './ChatbotWrapper.less';
 
-// Chatbot-pakka crasher ved import server-side
+// Prevents nodejs renderer crash
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
-const chatErIApningstid = () =>
+const humanChatIsOpen = () =>
     moment().isBetween(moment().hours(9), moment().hours(15), 'hours', '[]');
+
+const stateSelector = (state: AppState) => ({
+    paramChatbot: state.environment.PARAMS.CHATBOT,
+    language: state.language.language,
+});
 
 type Props = {
     customerKey?: string;
@@ -25,8 +30,7 @@ export const ChatbotWrapper = ({
     queueKey = 'Q_CHAT_BOT',
     configId = '599f9e7c-7f6b-4569-81a1-27202c419953',
 }: Props) => {
-    const { PARAMS } = useSelector((state: AppState) => state.environment);
-    const { language } = useSelector((state: AppState) => state.language);
+    const { paramChatbot, language } = useSelector(stateSelector);
     const [cookies] = useCookies();
     const [mountChatbot, setMountChatbot] = useState(false);
 
@@ -34,7 +38,7 @@ export const ChatbotWrapper = ({
     const dockRef = useRef<HTMLDivElement>(null);
 
     const labelText = finnTekst(
-        chatErIApningstid() ? 'chat-chat-med-nav' : 'chat-chatbot',
+        humanChatIsOpen() ? 'chat-veileder' : 'chat-chatbot',
         language
     );
 
@@ -45,14 +49,12 @@ export const ChatbotWrapper = ({
             return;
         }
 
-        const scrollOffsetBottom = window.pageYOffset + window.innerHeight;
-        const dockOffset =
-            dockElement.getBoundingClientRect().top + window.pageYOffset;
+        const chatbotFixedPosition =
+            window.innerHeight - chatbotElement.scrollHeight;
+        const chatbotDockedPosition =
+            dockElement.getBoundingClientRect().top + chatbotFixedOffset;
 
-        if (
-            scrollOffsetBottom - chatbotElement.scrollHeight >
-            dockOffset + chatbotFixedOffset
-        ) {
+        if (chatbotFixedPosition > chatbotDockedPosition) {
             chatbotElement.style.position = 'static';
         } else {
             chatbotElement.removeAttribute('style');
@@ -61,10 +63,11 @@ export const ChatbotWrapper = ({
 
     useEffect(() => {
         const chatbotSessionActive = !!cookies['chatbot-frida_config'];
-        const oldChatbotIsMounted =
+        const chatbotVersion122IsMounted =
             document.getElementsByClassName('gxKraP').length > 0;
         setMountChatbot(
-            !oldChatbotIsMounted && (chatbotSessionActive || PARAMS.CHATBOT)
+            !chatbotVersion122IsMounted &&
+                (chatbotSessionActive || paramChatbot)
         );
     }, []);
 
@@ -77,17 +80,17 @@ export const ChatbotWrapper = ({
             return;
         }
 
-        const chatbotFixedOffset =
+        const bottomOffset =
             window.innerHeight - chatbotElement.getBoundingClientRect().bottom;
-        const handler = dockIfNearBottom(chatbotFixedOffset);
+        const viewportChangeHandler = dockIfNearBottom(bottomOffset);
 
-        handler();
+        viewportChangeHandler();
 
-        window.addEventListener('scroll', handler);
-        window.addEventListener('resize', handler);
+        window.addEventListener('scroll', viewportChangeHandler);
+        window.addEventListener('resize', viewportChangeHandler);
         return () => {
-            window.removeEventListener('scroll', handler);
-            window.removeEventListener('resize', handler);
+            window.removeEventListener('scroll', viewportChangeHandler);
+            window.removeEventListener('resize', viewportChangeHandler);
         };
     }, [mountChatbot]);
 

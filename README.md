@@ -117,10 +117,13 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Redirecter brukeren til app etter innlogging fra dekoratøren.       |
 | level             | Level3 \| Level4                                        | Level3               | Krever innlogging basert på definert sikkerhetsnivå                 |
 | language          | norsk \| engelsk \| samisk                              | norsk                | Setter språket til dekoratøren                                      |
-| feedback          | boolean                                                 | true                 | Skjuler eller viser tilbakemeldingskomponentet  
+| feedback          | boolean                                                 | true                 | Skjuler eller viser tilbakemeldingskomponentet                      |
+| chatbot           | boolean                                                 | false                | Skjuler eller viser Chatbot Frida [1]    
 
 Eksempel:<br>
 [https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3](https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3)
+
+[1] Dersom en chat-sesjon er startet fra en annen app, så vil denne holdes aktiv uavhengig av dette parameteret.
 
 ## Miljø på NAIS
 

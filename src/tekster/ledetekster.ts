@@ -302,7 +302,7 @@ export const ledetekster: { [key: string]: string } = {
     'chat-chatbot': 'Chatbot Bob',
     'chat-chatbot-en': 'Chatbot Frida',
     'chat-chatbot-se': 'Chatbot Frida',
-    'chat-chat-med-nav': 'Chat med NAV',
-    'chat-chat-med-nav-en': 'Chat with NAV',
-    'chat-chat-med-nav-se': 'Chat med NAV',
+    'chat-veileder': 'Chat med NAV',
+    'chat-veileder-en': 'Chat with NAV',
+    'chat-veileder-se': 'Chat med NAV',
 };
