@@ -11,12 +11,18 @@ import './ChatbotWrapper.less';
 // Prevents nodejs renderer crash
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
-const humanChatIsOpen = () =>
-    moment().isBetween(moment().hours(9), moment().hours(15), 'hours', '[]');
+const humanChatIsOpen = (serverTime: number) =>
+    moment(serverTime).isBetween(
+        moment().hours(9).minutes(0),
+        moment().hours(14).minutes(30),
+        'minutes',
+        '[]'
+    );
 
 const stateSelector = (state: AppState) => ({
     paramChatbot: state.environment.PARAMS.CHATBOT,
     language: state.language.language,
+    serverTime: state.environment.SERVER_TIME,
 });
 
 type Props = {
@@ -30,7 +36,7 @@ export const ChatbotWrapper = ({
     queueKey = 'Q_CHAT_BOT',
     configId = '599f9e7c-7f6b-4569-81a1-27202c419953',
 }: Props) => {
-    const { paramChatbot, language } = useSelector(stateSelector);
+    const { paramChatbot, language, serverTime } = useSelector(stateSelector);
     const [cookies] = useCookies();
     const [mountChatbot, setMountChatbot] = useState(false);
 
@@ -38,9 +44,11 @@ export const ChatbotWrapper = ({
     const dockRef = useRef<HTMLDivElement>(null);
 
     const labelText = finnTekst(
-        humanChatIsOpen() ? 'chat-veileder' : 'chat-chatbot',
+        humanChatIsOpen(serverTime) ? 'chat-veileder' : 'chat-chatbot',
         language
     );
+
+    console.log(serverTime - Date.now());
 
     const dockIfNearBottom = (chatbotBottomOffset: number) => () => {
         const chatbotElement = containerRef.current;

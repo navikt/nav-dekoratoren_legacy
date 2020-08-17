@@ -31,6 +31,7 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
         DITT_NAV_URL: process.env.DITT_NAV_URL as string,
         LOGIN_URL: process.env.LOGIN_URL as string,
         LOGOUT_URL: process.env.LOGOUT_URL as string,
+        SERVER_TIME: Date.now(),
         ...(req.query && {
             PARAMS: {
                 LANGUAGE: chosenLanguage,

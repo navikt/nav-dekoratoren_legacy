@@ -11,6 +11,7 @@ export interface EnvironmentState {
     DITT_NAV_URL: string;
     LOGIN_URL: string;
     LOGOUT_URL: string;
+    SERVER_TIME: number;
 
     // Parameters
     PARAMS: {
@@ -40,6 +41,7 @@ export const initialState: EnvironmentState = {
     DITT_NAV_URL: '',
     LOGIN_URL: '',
     LOGOUT_URL: '',
+    SERVER_TIME: 0,
 
     // Parameters
     PARAMS: {
