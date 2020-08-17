@@ -1,10 +1,8 @@
 @import (reference) '../../../styling-variabler.less';
 
 .simple-footer {
-    @height: 5rem;
-
     &__container {
-        min-height: @height;
+        min-height: 5rem;
         display: flex;
         padding: 0.5rem 0;
         border-top: 2px solid #0067c5;
@@ -47,6 +45,12 @@
         position: relative;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+
+        .chatbot-container {
+            padding-left: 1rem;
+            bottom: 8px;
+        }
     }
 
     &__del-skjerm {

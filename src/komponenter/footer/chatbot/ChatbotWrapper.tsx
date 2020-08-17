@@ -76,9 +76,12 @@ export const ChatbotWrapper = ({
             return;
         }
         const chatbotElement = containerRef.current;
-        if (!chatbotElement) {
+        const dockElement = dockRef.current;
+        if (!chatbotElement || !dockElement) {
             return;
         }
+
+        dockElement.style.width = `${chatbotElement.scrollWidth}px`;
 
         const bottomOffset =
             window.innerHeight - chatbotElement.getBoundingClientRect().bottom;
