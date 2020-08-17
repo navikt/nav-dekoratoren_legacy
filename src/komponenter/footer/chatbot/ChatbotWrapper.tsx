@@ -11,13 +11,32 @@ import './ChatbotWrapper.less';
 // Prevents nodejs renderer crash
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
-const humanChatIsOpen = (serverTime: number) =>
-    moment(serverTime).isBetween(
-        moment().hours(9).minutes(0),
-        moment().hours(14).minutes(30),
-        'minutes',
-        '[]'
-    );
+const humanChatIsOpen = (serverTime: number) => {
+    const now = moment(serverTime);
+    if (now.isoWeekday() > 5) {
+        return false;
+    }
+    const opening = moment(serverTime).hours(9).minutes(0);
+    const closing = moment(serverTime).hours(14).minutes(30);
+    return now.isBetween(opening, closing, 'minutes', '[)');
+};
+
+const dockIfNearBottom = (
+    chatbotElement: HTMLElement,
+    dockElement: HTMLElement,
+    chatbotBottomOffset: number
+) => () => {
+    const chatbotFixedPosition =
+        window.innerHeight - chatbotElement.scrollHeight;
+    const chatbotDockedPosition =
+        dockElement.getBoundingClientRect().top + chatbotBottomOffset;
+
+    if (chatbotFixedPosition > chatbotDockedPosition) {
+        chatbotElement.style.position = 'static';
+    } else {
+        chatbotElement.removeAttribute('style');
+    }
+};
 
 const stateSelector = (state: AppState) => ({
     paramChatbot: state.environment.PARAMS.CHATBOT,
@@ -48,25 +67,6 @@ export const ChatbotWrapper = ({
         language
     );
 
-    const dockIfNearBottom = (chatbotBottomOffset: number) => () => {
-        const chatbotElement = containerRef.current;
-        const dockElement = dockRef.current;
-        if (!chatbotElement || !dockElement) {
-            return;
-        }
-
-        const chatbotFixedPosition =
-            window.innerHeight - chatbotElement.scrollHeight;
-        const chatbotDockedPosition =
-            dockElement.getBoundingClientRect().top + chatbotBottomOffset;
-
-        if (chatbotFixedPosition > chatbotDockedPosition) {
-            chatbotElement.style.position = 'static';
-        } else {
-            chatbotElement.removeAttribute('style');
-        }
-    };
-
     useEffect(() => {
         const chatbotSessionActive = !!cookies['chatbot-frida_config'];
         const chatbotVersion122IsMounted =
@@ -82,13 +82,18 @@ export const ChatbotWrapper = ({
             return;
         }
         const chatbotElement = containerRef.current;
-        if (!chatbotElement) {
+        const dockElement = dockRef.current;
+        if (!chatbotElement || !dockElement) {
             return;
         }
 
         const chatbotBottomOffset =
             window.innerHeight - chatbotElement.getBoundingClientRect().bottom;
-        const viewportChangeHandler = dockIfNearBottom(chatbotBottomOffset);
+        const viewportChangeHandler = dockIfNearBottom(
+            chatbotElement,
+            dockElement,
+            chatbotBottomOffset
+        );
 
         viewportChangeHandler();
 
