@@ -5,11 +5,11 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { verifyWindowObj } from 'utils/Environment';
 import moment from 'moment';
-const Chat = verifyWindowObj()
-    ? require('@anders-nom/nav-chatbot')
-    : () => null;
-import './ChatbotWrapper.less';
 import { finnTekst } from 'tekster/finn-tekst';
+import './ChatbotWrapper.less';
+
+// Chatbot-pakka crasher ved import server-side
+const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
 const chatErIApningstid = () =>
     moment().isBetween(moment().hours(9), moment().hours(15), 'hours', '[]');
