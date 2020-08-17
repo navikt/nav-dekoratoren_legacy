@@ -42,7 +42,7 @@ export const ChatbotWrapper = ({
         language
     );
 
-    const dockIfNearBottom = (chatbotFixedOffset: number) => () => {
+    const dockIfNearBottom = (chatbotBottomOffset: number) => () => {
         const chatbotElement = containerRef.current;
         const dockElement = dockRef.current;
         if (!chatbotElement || !dockElement) {
@@ -52,7 +52,7 @@ export const ChatbotWrapper = ({
         const chatbotFixedPosition =
             window.innerHeight - chatbotElement.scrollHeight;
         const chatbotDockedPosition =
-            dockElement.getBoundingClientRect().top + chatbotFixedOffset;
+            dockElement.getBoundingClientRect().top + chatbotBottomOffset;
 
         if (chatbotFixedPosition > chatbotDockedPosition) {
             chatbotElement.style.position = 'static';
@@ -76,16 +76,13 @@ export const ChatbotWrapper = ({
             return;
         }
         const chatbotElement = containerRef.current;
-        const dockElement = dockRef.current;
-        if (!chatbotElement || !dockElement) {
+        if (!chatbotElement) {
             return;
         }
 
-        dockElement.style.width = `${chatbotElement.scrollWidth}px`;
-
-        const bottomOffset =
+        const chatbotBottomOffset =
             window.innerHeight - chatbotElement.getBoundingClientRect().bottom;
-        const viewportChangeHandler = dockIfNearBottom(bottomOffset);
+        const viewportChangeHandler = dockIfNearBottom(chatbotBottomOffset);
 
         viewportChangeHandler();
 
