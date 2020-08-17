@@ -48,8 +48,6 @@ export const ChatbotWrapper = ({
         language
     );
 
-    console.log(serverTime - Date.now());
-
     const dockIfNearBottom = (chatbotBottomOffset: number) => () => {
         const chatbotElement = containerRef.current;
         const dockElement = dockRef.current;
