@@ -4,10 +4,15 @@ import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { verifyWindowObj } from 'utils/Environment';
+import moment from 'moment';
 const Chat = verifyWindowObj()
     ? require('@anders-nom/nav-chatbot')
     : () => null;
 import './ChatbotWrapper.less';
+import { finnTekst } from 'tekster/finn-tekst';
+
+const chatErIApningstid = () =>
+    moment().isBetween(moment().hours(9), moment().hours(15), 'hours', '[]');
 
 type Props = {
     customerKey?: string;
@@ -21,11 +26,17 @@ export const ChatbotWrapper = ({
     configId = '599f9e7c-7f6b-4569-81a1-27202c419953',
 }: Props) => {
     const { PARAMS } = useSelector((state: AppState) => state.environment);
+    const { language } = useSelector((state: AppState) => state.language);
     const [cookies] = useCookies();
     const [mountChatbot, setMountChatbot] = useState(false);
 
     const containerRef = useRef<HTMLDivElement>(null);
     const dockRef = useRef<HTMLDivElement>(null);
+
+    const labelText = finnTekst(
+        chatErIApningstid() ? 'chat-chat-med-nav' : 'chat-chatbot',
+        language
+    );
 
     const dockIfNearBottom = (chatbotFixedOffset: number) => () => {
         const chatbotElement = containerRef.current;
@@ -87,6 +98,7 @@ export const ChatbotWrapper = ({
                     customerKey={customerKey}
                     queueKey={queueKey}
                     configId={configId}
+                    label={labelText}
                 />
             </div>
         </div>

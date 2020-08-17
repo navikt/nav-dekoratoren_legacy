@@ -299,4 +299,10 @@ export const ledetekster: { [key: string]: string } = {
     'browser-utdatert-din-nettleser': 'Din nettleser: ',
     'browser-utdatert-din-nettleser-en': 'Your web browser: ',
     'browser-utdatert-din-nettleser-se': 'Din nettleser: ',
+    'chat-chatbot': 'Chatbot Bob',
+    'chat-chatbot-en': 'Chatbot Frida',
+    'chat-chatbot-se': 'Chatbot Frida',
+    'chat-chat-med-nav': 'Chat med NAV',
+    'chat-chat-med-nav-en': 'Chat with NAV',
+    'chat-chat-med-nav-se': 'Chat med NAV',
 };

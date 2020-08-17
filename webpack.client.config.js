@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 const browserConfig = {
     mode: process.env.NODE_ENV || 'development',
@@ -169,6 +170,8 @@ const browserConfig = {
         new SpriteLoaderPlugin({
             plainSprite: true,
         }),
+
+        new MomentLocalesPlugin({ localesToKeep: ['nb', 'nn', 'en'] }),
     ],
 };
 
