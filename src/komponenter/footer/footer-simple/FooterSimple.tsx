@@ -47,7 +47,6 @@ const FooterSimple = () => {
         setIsOpen(false);
     };
 
-    // TODO: tilpass Chatbot plassering for simpleheader
     return (
         <Fragment>
             <div className={cls.element('container')}>
