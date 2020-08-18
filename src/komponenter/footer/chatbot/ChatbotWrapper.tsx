@@ -42,6 +42,11 @@ const stateSelector = (state: AppState) => ({
     paramChatbot: state.environment.PARAMS.CHATBOT,
     language: state.language.language,
     serverTime: state.environment.SERVER_TIME,
+    menuIsActive:
+        state.dropdownToggles.hovedmeny ||
+        state.dropdownToggles.minside ||
+        state.dropdownToggles.sok ||
+        state.dropdownToggles.varsler,
 });
 
 type Props = {
@@ -55,7 +60,9 @@ export const ChatbotWrapper = ({
     queueKey = 'Q_CHAT_BOT',
     configId = '599f9e7c-7f6b-4569-81a1-27202c419953',
 }: Props) => {
-    const { paramChatbot, language, serverTime } = useSelector(stateSelector);
+    const { paramChatbot, language, serverTime, menuIsActive } = useSelector(
+        stateSelector
+    );
     const [cookies] = useCookies();
     const [mountChatbot, setMountChatbot] = useState(false);
 
@@ -107,7 +114,12 @@ export const ChatbotWrapper = ({
 
     return mountChatbot ? (
         <div className={'chatbot-dock'} ref={dockRef}>
-            <div className={'chatbot-container'} ref={containerRef}>
+            <div
+                className={`chatbot-container${
+                    menuIsActive ? ' chatbot-container__menu-active' : ''
+                }`}
+                ref={containerRef}
+            >
                 <Chat
                     customerKey={customerKey}
                     queueKey={queueKey}
