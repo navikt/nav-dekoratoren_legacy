@@ -1,0 +1,19 @@
+@import (reference) '../../../styling-variabler.less';
+
+.chatbot-dock {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 68px;
+}
+
+.chatbot-container {
+    position: fixed;
+    bottom: 50px;
+    z-index: 998;
+
+    @media (max-width: @mobilMaxWidth) {
+        bottom: 20px;
+        z-index: 9999;
+    }
+}

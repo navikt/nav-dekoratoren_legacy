@@ -13,7 +13,9 @@ import LenkeMedIkon from 'komponenter/footer/common/lenke-med-ikon/LenkeMedIkon'
 import DelSkjermModal from 'komponenter/footer/common/del-skjerm-modal/DelSkjermModal';
 import { LinkLoader } from '../../../common/content-loaders/LinkLoader';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
+import { ChatbotWrapper } from 'komponenter/footer/chatbot/ChatbotWrapper';
 import './FooterBottom.less';
+
 import Logo from 'ikoner/meny/nav-logo-black.svg';
 
 const FooterBottom = () => {
@@ -54,14 +56,17 @@ const FooterBottom = () => {
     return (
         <section className="menylinje-bottom">
             <div className={cls.className}>
-                <NavLogoLenke
-                    gaEventArgs={{
-                        context: arbeidsflate,
-                        category: GACategory.Footer,
-                        action: 'navlogo',
-                    }}
-                    ikon={Logo}
-                />
+                <div className={'top-row'}>
+                    <NavLogoLenke
+                        gaEventArgs={{
+                            context: arbeidsflate,
+                            category: GACategory.Footer,
+                            action: 'navlogo',
+                        }}
+                        ikon={Logo}
+                    />
+                    <ChatbotWrapper />
+                </div>
                 <div className={cls.element('bottom-lenker')}>
                     <div>
                         <Normaltekst className="bottom-tekst">

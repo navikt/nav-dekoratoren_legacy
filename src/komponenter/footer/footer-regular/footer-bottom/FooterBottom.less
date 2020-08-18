@@ -1,4 +1,4 @@
-@import (reference) '../../../../styling-variabler.less';
+@import (reference) '../../../../styling-variabler';
 
 .menylinje-bottom {
     display: flex;
@@ -16,17 +16,16 @@
     width: 100%;
     max-width: 1344px;
 
-    .nav-logo-lenke {
-        width: 68px;
-        padding: 0.25rem;
-        margin-bottom: 0.25rem;
-    }
-
-    &__logo-rad {
+    .top-row {
+        position: relative;
         display: flex;
-        align-items: center;
-        * > {
-            margin-right: 0.5rem;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .nav-logo-lenke {
+            width: 68px;
+            padding: 0.25rem;
+            margin-bottom: 0.25rem;
         }
     }
 

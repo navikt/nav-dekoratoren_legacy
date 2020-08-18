@@ -11,6 +11,7 @@ export interface EnvironmentState {
     DITT_NAV_URL: string;
     LOGIN_URL: string;
     LOGOUT_URL: string;
+    SERVER_TIME: number;
 
     // Parameters
     PARAMS: {
@@ -22,6 +23,7 @@ export interface EnvironmentState {
         REDIRECT_TO_APP: boolean;
         LEVEL: string;
         FEEDBACK: boolean;
+        CHATBOT: boolean;
     };
 
     COOKIES: {
@@ -39,6 +41,7 @@ export const initialState: EnvironmentState = {
     DITT_NAV_URL: '',
     LOGIN_URL: '',
     LOGOUT_URL: '',
+    SERVER_TIME: 0,
 
     // Parameters
     PARAMS: {
@@ -50,6 +53,7 @@ export const initialState: EnvironmentState = {
         REDIRECT_TO_APP: false,
         LEVEL: '',
         FEEDBACK: false,
+        CHATBOT: false,
     },
 
     // Cookies
