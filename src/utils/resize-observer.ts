@@ -19,10 +19,6 @@ export const getBodyResizeObserver = (callback: () => void) =>
     // @ts-ignore
     window.ResizeObserver
         ? new ResizeObserver((entries) => {
-              entries.forEach(
-                  (entry) =>
-                      (entry?.contentRect || entry?.contentBoxSize) &&
-                      callback()
-              );
+              entries?.forEach(() => callback());
           })
         : fallbackToResizeEvents(callback);
