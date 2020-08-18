@@ -12,14 +12,11 @@
     bottom: 50px;
     z-index: 1001;
 
-    @media (max-width: @mobilMaxWidth) {
-        bottom: 20px;
-        z-index: 9999;
+    &__menu-active {
+        z-index: 998;
     }
 
-    @media (min-width: @desktopMinWidth) {
-        &__menu-active {
-            z-index: 998;
-        }
+    @media (max-width: @mobilMaxWidth) {
+        bottom: 20px;
     }
 }
