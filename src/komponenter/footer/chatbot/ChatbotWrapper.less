@@ -10,21 +10,12 @@
 .chatbot-container {
     position: fixed;
     bottom: 50px;
-    right: 50px;
     z-index: 1001;
 
     @media (min-width: @desktopMinWidth) {
         &__menu-active {
             z-index: 998;
         }
-    }
-
-    @media (max-width: @desktopMaxWidth) {
-        right: 2rem;
-    }
-
-    @media (max-width: @smallDesktopLimitWidth) {
-        right: 1rem;
     }
 
     @media (max-width: @mobilMaxWidth) {

@@ -98,21 +98,34 @@ export const ChatbotWrapper = ({
 
         const chatbotBottomOffset =
             window.innerHeight - chatbotElement.getBoundingClientRect().bottom;
-        const viewportChangeHandler = dockIfNearBottom(
+        const scrollHandler = dockIfNearBottom(
             chatbotElement,
             dockElement,
             chatbotBottomOffset
         );
-        viewportChangeHandler();
+
+        const setHorizontalFixedOffset = () => {
+            chatbotElement.style.left = `${
+                dockElement.getBoundingClientRect().right -
+                chatbotElement.getBoundingClientRect().width
+            }px`;
+        };
+
+        const bodyResizeHandler = () => {
+            scrollHandler();
+            setHorizontalFixedOffset();
+        };
 
         const bodyResizeObserver = getBodyResizeObserver(
-            debounce(viewportChangeHandler, 100)
+            debounce(bodyResizeHandler, 100)
         );
 
-        window.addEventListener('scroll', viewportChangeHandler);
+        bodyResizeHandler();
+
+        window.addEventListener('scroll', scrollHandler);
         bodyResizeObserver.observe(document.body);
         return () => {
-            window.removeEventListener('scroll', viewportChangeHandler);
+            window.removeEventListener('scroll', scrollHandler);
             bodyResizeObserver.unobserve(document.body);
         };
     }, [mountChatbot]);
