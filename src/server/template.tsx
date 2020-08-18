@@ -96,7 +96,7 @@ export const template = (req: Request) => {
                 display:flex;
                 flex-direction: column;
                 justify-content: space-between;
-                height: 200%;
+                height: 100%;
             }
             .decorator-dummy-app {
                 background: #8888;
