@@ -6,6 +6,8 @@ import { AppState } from 'store/reducers';
 import { verifyWindowObj } from 'utils/Environment';
 import moment from 'moment-timezone';
 import { finnTekst } from 'tekster/finn-tekst';
+import { getBodyResizeObserver } from 'utils/resize-observer';
+import debounce from 'lodash.debounce';
 import './ChatbotWrapper.less';
 
 // Prevents nodejs renderer crash
@@ -101,14 +103,17 @@ export const ChatbotWrapper = ({
             dockElement,
             chatbotBottomOffset
         );
-
         viewportChangeHandler();
 
+        const bodyResizeObserver = getBodyResizeObserver(
+            debounce(viewportChangeHandler, 100)
+        );
+
         window.addEventListener('scroll', viewportChangeHandler);
-        window.addEventListener('resize', viewportChangeHandler);
+        bodyResizeObserver.observe(document.body);
         return () => {
             window.removeEventListener('scroll', viewportChangeHandler);
-            window.removeEventListener('resize', viewportChangeHandler);
+            bodyResizeObserver.unobserve(document.body);
         };
     }, [mountChatbot]);
 
