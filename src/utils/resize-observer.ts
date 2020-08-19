@@ -15,10 +15,10 @@ const fallbackToResizeEvents = (callback: () => void) => ({
     unobserve: () => window.removeEventListener('resize', callback),
 });
 
-export const getBodyResizeObserver = (callback: () => void) =>
+export const getResizeObserver = (
+    callback: (entries?: ResizeObserverEntry[]) => void
+) =>
     // @ts-ignore
     window.ResizeObserver
-        ? new ResizeObserver((entries) => {
-              entries?.forEach(() => callback());
-          })
+        ? new ResizeObserver(callback)
         : fallbackToResizeEvents(callback);

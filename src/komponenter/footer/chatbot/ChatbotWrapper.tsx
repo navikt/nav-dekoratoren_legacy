@@ -6,7 +6,7 @@ import { AppState } from 'store/reducers';
 import { verifyWindowObj } from 'utils/Environment';
 import moment from 'moment-timezone';
 import { finnTekst } from 'tekster/finn-tekst';
-import { getBodyResizeObserver } from 'utils/resize-observer';
+import { getResizeObserver } from 'utils/resize-observer';
 import debounce from 'lodash.debounce';
 import './ChatbotWrapper.less';
 
@@ -104,7 +104,7 @@ export const ChatbotWrapper = ({
             chatbotBottomOffset
         );
 
-        const bodyResizeObserver = getBodyResizeObserver(
+        const bodyResizeObserver = getResizeObserver(
             debounce(repositionHandler, 100)
         );
 
