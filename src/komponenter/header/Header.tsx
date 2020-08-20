@@ -54,7 +54,7 @@ export const Header = () => {
     // External data
     useEffect(() => {
         fetchDriftsmeldinger(APP_URL)(dispatch);
-        hentInnloggingsstatus(APP_URL)(dispatch);
+        hentInnloggingsstatus(API_INNLOGGINGSLINJE_URL)(dispatch);
         fetchMenypunkter(APP_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
             const togglesFromCookie = cookies[unleashCacheCookie];
