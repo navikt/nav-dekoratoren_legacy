@@ -1,11 +1,9 @@
-name: Deploy-to-dev
+name: Deploy-to-q6
 on:
   push:
     tags:
-      - "v*-gcp"
-      - "!v*-prod"
-      - "!v*-test"
-      - "!v*-dev"
+      - "v*-test"
+      - "v*-dev"
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -16,7 +14,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo ::set-env name=CI::true
-          echo ::set-env name=GCP::true
+          echo ::set-env name=APP_BASE_PATH::/dekoratoren
           echo ::set-env name=IMAGE_REGISTRY::docker.pkg.github.com/$(echo ${GITHUB_REPOSITORY})
           echo ::set-env name=IMAGE_NAME::$(echo ${GITHUB_REPOSITORY##*/})
           echo ::set-env name=IMAGE_VERSION::$(echo ${GITHUB_WORKFLOW})-$(echo ${GITHUB_SHA})
@@ -38,13 +36,13 @@ jobs:
       - name: Generate nais variables
         run: |
           cat > .nais/vars.yaml <<EOF
-          namespace: personbruker
+          namespace: q6
           image: $IMAGE_REGISTRY/$IMAGE_NAME
           version: $IMAGE_VERSION
           EOF
       - uses: nais/deploy/actions/deploy@master
         env:
-          CLUSTER: dev-gcp
+          CLUSTER: dev-sbs
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          RESOURCE: .nais/dev-gcp/personbruker.yaml
+          RESOURCE: .nais/dev-sbs/q6.yaml
           VARS: .nais/vars.yaml

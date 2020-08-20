@@ -18,10 +18,13 @@ if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
 
+// Merge url and path
+const appUrl = `${process.env.APP_BASE_URL}${process.env.APP_BASE_PATH || ``}`;
+
 // Resources
-const fileEnv = `${process.env.APP_BASE_URL}/env`;
-const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
-const fileScript = `${process.env.APP_BASE_URL}/client.js`;
+const fileEnv = `${appUrl}/env`;
+const fileCss = `${appUrl}/css/client.css`;
+const fileScript = `${appUrl}/client.js`;
 
 const cache = new NodeCache({
     stdTTL: fiveMinutesInSeconds,

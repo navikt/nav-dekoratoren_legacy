@@ -22,8 +22,8 @@ const browserConfig = {
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        ...(!process.env.GCP && {
-            publicPath: '/dekoratoren',
+        ...(process.env.APP_BASE_PATH && {
+            publicPath: process.env.APP_BASE_PATH,
         }),
         filename: 'server.js',
         libraryTarget: 'commonjs2',

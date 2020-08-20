@@ -1,8 +1,9 @@
-name: Deploy-to-prod
+name: Deploy-to-dev
 on:
   push:
     tags:
-      - "v*-prod"
+      - "v*-gcp"
+      - "!v*-prod"
       - "!v*-test"
       - "!v*-dev"
 jobs:
@@ -36,13 +37,13 @@ jobs:
       - name: Generate nais variables
         run: |
           cat > .nais/vars.yaml <<EOF
-          namespace: default
+          namespace: personbruker
           image: $IMAGE_REGISTRY/$IMAGE_NAME
           version: $IMAGE_VERSION
           EOF
       - uses: nais/deploy/actions/deploy@master
         env:
-          CLUSTER: prod-sbs
+          CLUSTER: dev-gcp
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          RESOURCE: .nais/prod-sbs/default.yaml
+          RESOURCE: .nais/dev-gcp/personbruker.yaml
           VARS: .nais/vars.yaml

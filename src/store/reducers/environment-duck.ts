@@ -4,7 +4,7 @@ import { Language } from './language-duck';
 
 export interface EnvironmentState {
     XP_BASE_URL: string;
-    APP_BASE_URL: string;
+    APP_URL: string;
     API_VARSELINNBOKS_URL: string;
     API_UNLEASH_PROXY_URL: string;
     MINSIDE_ARBEIDSGIVER_URL: string;
@@ -34,7 +34,7 @@ export interface EnvironmentState {
 
 export const initialState: EnvironmentState = {
     XP_BASE_URL: '',
-    APP_BASE_URL: '',
+    APP_URL: '',
     API_VARSELINNBOKS_URL: '',
     API_UNLEASH_PROXY_URL: '',
     MINSIDE_ARBEIDSGIVER_URL: '',

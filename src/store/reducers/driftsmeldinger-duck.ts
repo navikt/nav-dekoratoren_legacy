@@ -44,10 +44,10 @@ export default function reducer(
 }
 
 export function fetchDriftsmeldinger(
-    APP_BASE_URL: string
+    APP_URL: string
 ): (dispatch: Dispatch) => Promise<void> {
     return fetchThenDispatch<DriftsmeldingerData[]>(
-        () => hentDriftsmeldinger(APP_BASE_URL),
+        () => hentDriftsmeldinger(APP_URL),
         {
             ok: driftsmeldingSuksess,
             feilet: driftsmeldingFeilet,

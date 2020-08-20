@@ -1,8 +1,10 @@
-name: Deploy-to-q1
+name: Deploy-to-prod
 on:
   push:
     tags:
-      - "v*-test"
+      - "v*-prod"
+      - "!v*-test"
+      - "!v*-dev"
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,6 +15,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo ::set-env name=CI::true
+          echo ::set-env name=APP_BASE_PATH::/dekoratoren
           echo ::set-env name=IMAGE_REGISTRY::docker.pkg.github.com/$(echo ${GITHUB_REPOSITORY})
           echo ::set-env name=IMAGE_NAME::$(echo ${GITHUB_REPOSITORY##*/})
           echo ::set-env name=IMAGE_VERSION::$(echo ${GITHUB_WORKFLOW})-$(echo ${GITHUB_SHA})
@@ -34,13 +37,13 @@ jobs:
       - name: Generate nais variables
         run: |
           cat > .nais/vars.yaml <<EOF
-          namespace: q1
+          namespace: default
           image: $IMAGE_REGISTRY/$IMAGE_NAME
           version: $IMAGE_VERSION
           EOF
       - uses: nais/deploy/actions/deploy@master
         env:
-          CLUSTER: dev-sbs
+          CLUSTER: prod-sbs
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          RESOURCE: .nais/dev-sbs/q1.yaml
+          RESOURCE: .nais/prod-sbs/default.yaml
           VARS: .nais/vars.yaml

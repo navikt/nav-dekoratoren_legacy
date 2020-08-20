@@ -56,10 +56,10 @@ export default function reducer(
 }
 
 export function hentVarsler(
-    APP_BASE_URL: string
+    APP_URL: string
 ): (dispatch: Dispatch) => Promise<void> {
     return fetchThenDispatch<VarslerData>(
-        () => hentVarslerFetch(APP_BASE_URL),
+        () => hentVarslerFetch(APP_URL),
         {
             ok: hentVarslerOk,
             feilet: hentVarslerFeilet,
