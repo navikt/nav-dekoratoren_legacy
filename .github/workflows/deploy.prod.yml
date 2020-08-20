@@ -19,7 +19,6 @@ jobs:
           echo ::set-env name=IMAGE_NAME::$(echo ${GITHUB_REPOSITORY##*/})
           echo ::set-env name=IMAGE_VERSION::$(echo ${GITHUB_WORKFLOW})-$(echo ${GITHUB_SHA})
           echo ::set-env name=GITHUB_TOKEN::$(echo ${GITHUB_TOKEN})
-          echo ::set-env name=APP_BASE_PATH::/dekoratoren
       - uses: actions/cache@v1
         with:
           path: ~/.npm

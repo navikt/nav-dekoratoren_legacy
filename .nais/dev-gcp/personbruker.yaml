@@ -23,6 +23,11 @@ spec:
         max: 4
     ingresses:
         - https://dekoratoren.dev.nav.no
+    accessPolicy:
+          outbound:
+              rules:
+                - application: innloggingslinje-api
+                  namespace: personbruker
     env:
         - name: XP_BASE_URL
           value: https://www-q1.nav.no
