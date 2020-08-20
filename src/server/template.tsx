@@ -18,14 +18,6 @@ if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
 
-// Merge url and path
-const appUrl = `${process.env.APP_BASE_URL}${process.env.APP_BASE_PATH || ``}`;
-
-// Resources
-const fileEnv = `${appUrl}/env`;
-const fileCss = `${appUrl}/css/client.css`;
-const fileScript = `${appUrl}/client.js`;
-
 const cache = new NodeCache({
     stdTTL: fiveMinutesInSeconds,
     checkperiod: oneMinuteInSeconds,
@@ -37,10 +29,15 @@ export const template = (req: Request) => {
     const cookies = universalCookies.cookies;
     const env = clientEnv({ req, cookies });
 
+    // Resources
+    const fileEnv = `${env.APP_URL}/env`;
+    const fileCss = `${env.APP_URL}/css/client.css`;
+    const fileScript = `${env.APP_URL}/client.js`;
+
+    // Retreive from cache
     const envHash = hash({ env });
     const cachedHtml = cache.get(envHash);
 
-    // Retreive from cache
     if (cachedHtml) {
         return cachedHtml;
     }
