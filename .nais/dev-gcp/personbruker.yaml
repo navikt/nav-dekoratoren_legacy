@@ -24,10 +24,10 @@ spec:
     ingresses:
         - https://dekoratoren.dev.nav.no
     accessPolicy:
-          outbound:
-              rules:
-                - application: innloggingslinje-api
-                  namespace: personbruker
+        outbound:
+            external:
+                - host: innloggingslinje-api.dev.nav.no
+                - host: www-q1.nav.no
     env:
         - name: XP_BASE_URL
           value: https://www-q1.nav.no
