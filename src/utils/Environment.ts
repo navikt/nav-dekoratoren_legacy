@@ -24,7 +24,7 @@ export const verifyWindowObj = () => {
 };
 
 export const erNavDekoratoren = (): boolean => {
-    return verifyWindowObj() && window.location.href.includes('/dekoratoren');
+    return verifyWindowObj() && window.location.href.includes('dekoratoren');
 };
 
 export const genererUrl = (XP_BASE_URL: string, lenke: string): string => {
