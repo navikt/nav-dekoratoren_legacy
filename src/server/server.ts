@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Config
-const appBasePath = '/dekoratoren';
+const appBasePath = process.env.APP_BASE_PATH || ``;
 const oldBasePath = '/common-html/v4/navno';
 const buildPath = `${process.cwd()}/build`;
 const app = express();

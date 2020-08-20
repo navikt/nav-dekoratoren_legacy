@@ -16,7 +16,6 @@ const browserConfig = {
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        publicPath: '/dekoratoren',
         filename: '[name].js',
     },
     devtool:

@@ -22,7 +22,6 @@ const browserConfig = {
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        publicPath: '/dekoratoren',
         filename: 'server.js',
         libraryTarget: 'commonjs2',
     },

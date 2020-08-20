@@ -135,8 +135,8 @@ interface FetchResult {
 const fetchSearch = (props: FetchResult) => {
     const { environment, value } = props;
     const { setLoading, setError, setResult } = props;
-    const { APP_BASE_URL, XP_BASE_URL } = environment;
-    const url = `${APP_BASE_URL}/api/sok`;
+    const { APP_URL, XP_BASE_URL } = environment;
+    const url = `${APP_URL}/api/sok`;
 
     fetch(`${url}?ord=${value}`)
         .then((response) => {
