@@ -21,9 +21,9 @@ export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> =>
     fetchToJson(`${APP_URL}/api/meny`);
 
 export const hentInnloggingsstatusFetch = (
-    APP_URL: string
+    API_INNLOGGINGSLINJE_URL: string
 ): Promise<innloggingsstatusData> =>
-    fetchToJson(`${APP_URL}/api/auth`, {
+    fetchToJson(`${API_INNLOGGINGSLINJE_URL}/api/auth`, {
         credentials: 'include',
     });
 

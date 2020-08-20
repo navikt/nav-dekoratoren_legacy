@@ -36,6 +36,9 @@ export const Header = () => {
     const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = useSelector(
         (state: AppState) => state.environment
     );
+    const { API_INNLOGGINGSLINJE_URL } = useSelector(
+        (state: AppState) => state.environment
+    );
     const defaultToPerson = () => {
         dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
         setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
