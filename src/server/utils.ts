@@ -29,6 +29,8 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
     return {
         XP_BASE_URL: process.env.XP_BASE_URL as string,
         APP_URL: `${appUrl}` as string,
+        APP_BASE_URL: `${process.env.APP_BASE_URL}` as string,
+        APP_BASE_PATH: `${process.env.APP_BASE_PATH}` as string,
         API_VARSELINNBOKS_URL: process.env.API_VARSELINNBOKS_URL as string,
         API_UNLEASH_PROXY_URL: process.env.API_UNLEASH_PROXY_URL as string,
         MINSIDE_ARBEIDSGIVER_URL: process.env
