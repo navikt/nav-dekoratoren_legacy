@@ -36,28 +36,27 @@ accessPolicy:
 :warning: &nbsp; Det er en del av it-strategien til NAV å flytte bort fra fra egne datasentre. Som følger vil **dev-sbs og prod-sbs skrus av på et tidspunkt** og det anbefales å deployere nye applikasjoner til Google Cloud (gcp).
 
 ## Implementasjon
-Dekoratøren kan implementeres på flere måter:
+Dekoratøren kan implementeres på flere ulike måter, både server-side og client-side.
 
 ### Eksempel 1
 Hent dekoratøren server-side og send HTML til brukeren som inkluderer dekoratøren
 ```
-const url = 'http://<test-mijø | prod-adr>/dekoratoren?{DINE_PARAMETERE}';
+const url = `{DECORATOR_URL}/?{DINE_PARAMETERE}`;
 const getDecorator = () =>x
     request(url, (error, response, body) => {
         // Inject fragmenter av dekoratøren med id-selectors, enten manuelt eller ved bruk av template engine
     });
 ```
 Vis [implementasjon](https://github.com/navikt/personopplysninger/blob/master/server/dekorator.js) i Personopplysninger.<br>
-**Obs:** Cache anbefales
+**Obs:** Cache anbefales.
 
 ### Eksempel 2
-:warning: &nbsp; **Benytter CSR (Client-Side-Rendering) av dekoratøren, noe som kan påvirke ytelsen.**
 
-Sett inn 5 linjer HTML: <br>
+Sett inn noen linjer html og last inn dekoratøren client-side.
 ```
 <html>
   <head>
-      <link href=http://<miljø adresse>/dekoratoren/css/client.css rel="stylesheet" /> 
+      <link href="{DECORATOR_URL}/css/client.css" rel="stylesheet" /> 
   </head>
   <body>
     <section id="decorator-header" class="navno-dekorator" role="main"></section>
@@ -65,32 +64,17 @@ Sett inn 5 linjer HTML: <br>
       DIN_APP
     }
     <section id="decorator-footer" class="navno-dekorator" role="main"></section>
-    <div id="decorator-env" data-src="<miljø adresse>/dekoratoren/env?{DINE_PARAMETERE}"></div>
-    <script type="text/javascript" src="<miljø adresse>/dekoratoren/client.js"></script>
+    <div id="decorator-env" data-src="{DECORATOR_URL}/env?{DINE_PARAMETERE}"></div>
+    <script type="text/javascript" src="{DECORATOR_URL}/client.js"></script>
   </body>
 </html>
 ```
 
+:warning: &nbsp; CSR (Client-Side-Rendering) av dekoratøren **kan påvirke ytelsen**.
+
 ### Eksempel 3
-Bruk av pus-decorator:<br>
-I app-config.yaml, bytt ut fasitResources til å peke på ny dekoratør
+Bruk pus-decorator, les [readme](https://github.com/navikt/pus-decorator).
 
-Fra:
-```
-fasitResources:
-  used:
-  - alias: appres.cms
-    resourceType: baseUrl
-```
-
-Til:
-```
-fasitResources:
-  used:
-  - alias: nav.dekoratoren (denne peker på https://www{-miljø adresse}.nav.no, pus-decorator legger på path /dekoratoren)
-    resourceType: baseUrl
-```
-For ytterligere dokumentasjon, se https://github.com/navikt/pus-decorator
 
 ## Parametere
 Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
