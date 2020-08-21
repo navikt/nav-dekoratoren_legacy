@@ -30,12 +30,13 @@ accessPolicy:
       - host: dekoratoren.dev.nav.no
 ```
 **Dev (dev-sbs)**
-- [https://www-{q0,q1,q6}.nav.no/dekoratoren/](https://www.nav.no/dekoratoren/) (deprecated)
+- [https://www-{q0,q1,q6}.nav.no/dekoratoren/](https://www-q1.nav.no/dekoratoren/) (deprecated)
 - [https://appres-{q0,q1,q6}.nav.no/common-html/v4/navno](https://appres-q1.nav.no/common-html/v4/navno) (deprecated)
 
-:warning: &nbsp; Deprecated: nye apper burde deployeres til gcp
+:warning: &nbsp; Deprecated: Det er en del av it-strategien til NAV å flytte bort fra fra egne datasentre. Som følger vil dev-sbs og prod-sbs skrus av på et tidspunkt og det anbefales å deployere nye applikasjoner til Google Cloud (gcp).
 
-Nye applikasjoner kan implementere menyen som følger: 
+## Implementasjon
+Dekoratøren kan implementeres på flere måter:
 
 ### Eksempel 1
 Hent dekoratøren server-side og send HTML til brukeren som inkluderer dekoratøren
@@ -89,14 +90,25 @@ fasitResources:
   - alias: nav.dekoratoren (denne peker på https://www{-miljø adresse}.nav.no, pus-decorator legger på path /dekoratoren)
     resourceType: baseUrl
 ```
-For komplett oppsett se: https://github.com/navikt/pus-decorator
+For ytterligere dokumentasjon, se https://github.com/navikt/pus-decorator
 
-Appen blir serverside-rendret. Derfor anbefales det å bruke en .js fil til å fetche innholdet fra 'http://<test-mijø | prod-adr>/dekoratoren', deretter selektere innholdet i id'ene. Selektors som benyttes i dag:
-   
-      styles            (inneholder css og favicons)
-      header-withmenu   (header mounting point)
-      footer-withmenu   (footer mounting point)
-      scripts           (inneholder javascript)
+## Parametere
+Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
+
+| Parameter         | Type                                                    | Default              | Forklaring                                                          |
+| ----------------- |---------------------------------------------------------|----------------------| --------------------------------------------------------------------|
+| context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til valgt context                                     |
+| simple            | boolean                                                 | false                | Forenklet header og footer                                          |
+| redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Redirecter brukeren til app etter innlogging fra dekoratøren.       |
+| level             | Level3 \| Level4                                        | Level3               | Krever innlogging basert på definert sikkerhetsnivå                 |
+| language          | norsk \| engelsk \| samisk                              | norsk                | Setter språket til dekoratøren                                      |
+| feedback          | boolean                                                 | true                 | Skjuler eller viser tilbakemeldingskomponentet                      |
+| chatbot           | boolean                                                 | false                | Skjuler eller viser Chatbot Frida [1]    
+
+Eksempel:<br>
+https://www.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3
+
+[1] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
 
 ## Oppstart via docker-compose
 
@@ -122,28 +134,6 @@ dekoratoren:
       - mocks
 ```
 [Eksempel i Enonic XP](https://github.com/navikt/nav-enonicxp/blob/IV-843-decorator/docker-compose.yml).
-
-## Parametere
-Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
-
-| Parameter         | Type                                                    | Default              | Forklaring                                                          |
-| ----------------- |---------------------------------------------------------|----------------------| --------------------------------------------------------------------|
-| context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til valgt context                                     |
-| simple            | boolean                                                 | false                | Forenklet header og footer                                          |
-| redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Redirecter brukeren til app etter innlogging fra dekoratøren.       |
-| level             | Level3 \| Level4                                        | Level3               | Krever innlogging basert på definert sikkerhetsnivå                 |
-| language          | norsk \| engelsk \| samisk                              | norsk                | Setter språket til dekoratøren                                      |
-| feedback          | boolean                                                 | true                 | Skjuler eller viser tilbakemeldingskomponentet                      |
-| chatbot           | boolean                                                 | false                | Skjuler eller viser Chatbot Frida [1]    
-
-Eksempel:<br>
-[https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3](https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3)
-
-[1] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
-
-## Miljø på NAIS
-
-Dekoratøren ligger i  [Q6](https://www-q6.nav.no/dekoratoren/), [Q1](https://www-q1.nav.no/dekoratoren/), [Q0](https://www-q0.nav.no/dekoratoren/) og [Prod](https://www.nav.no/dekoratoren/).<br>
 
 ## Utvikling - Kom i gang
 Hent repoet fra github
