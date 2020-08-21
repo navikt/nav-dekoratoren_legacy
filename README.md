@@ -43,11 +43,11 @@ Sett inn 5 linjer HTML: <br>
       <link href=http://<miljø adresse>/dekoratoren/css/client.css rel="stylesheet" /> 
   </head>
   <body>
-    <section id="decorator-header" class="navno-dekorator" role="main"></section>
+    <section id="decorator-header" class="navno-dekorator"></section>
     {
       DIN_APP
     }
-    <section id="decorator-footer" class="navno-dekorator" role="main"></section>
+    <section id="decorator-footer" class="navno-dekorator"></section>
     <div id="decorator-env" data-src="<miljø adresse>/dekoratoren/env?{DINE_PARAMETERE}"></div>
     <script type="text/javascript" src="<miljø adresse>/dekoratoren/client.js"></script>
   </body>
