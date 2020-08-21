@@ -15,11 +15,11 @@ Appen kjører på NAIS i en docker-container.
 
 Den nye dekoratøren serveres på følgende ingresser:
 
-**Prod (prod-sbs):**
+**Prod (prod-sbs)**
 - https://www.nav.no/dekoratoren/ 
 - https://appres.nav.no/common-html/v4/navno (deprecated)
 
-**Dev (dev-gcp):**
+**Dev (dev-gcp)**
 - https://dekoratoren.dev.nav.no/
 
 Krever følgende access policy i nais.yaml:
@@ -29,7 +29,7 @@ accessPolicy:
     external:
       - host: dekoratoren.dev.nav.no
 ```
-**Dev (dev-sbs): <br>**
+**Dev (dev-sbs)**
 - [https://www-{q0,q1,q6}.nav.no/dekoratoren/](https://www.nav.no/dekoratoren/) (deprecated)
 - [https://appres-{q0,q1,q6}.nav.no/common-html/v4/navno](https://appres-q1.nav.no/common-html/v4/navno) (deprecated)
 
