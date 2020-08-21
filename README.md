@@ -33,7 +33,7 @@ accessPolicy:
 - [https://www-{q0,q1,q6}.nav.no/dekoratoren/](https://www-q1.nav.no/dekoratoren/) (deprecated)
 - [https://appres-{q0,q1,q6}.nav.no/common-html/v4/navno](https://appres-q1.nav.no/common-html/v4/navno) (deprecated)
 
-:warning: &nbsp; Deprecated: Det er en del av it-strategien til NAV å flytte bort fra fra egne datasentre. Som følger vil dev-sbs og prod-sbs skrus av på et tidspunkt og det anbefales å deployere nye applikasjoner til Google Cloud (gcp).
+:warning: &nbsp; Det er en del av it-strategien til NAV å flytte bort fra fra egne datasentre. Som følger vil dev-sbs og prod-sbs skrus av på et tidspunkt og det anbefales å deployere nye applikasjoner til Google Cloud (gcp).
 
 ## Implementasjon
 Dekoratøren kan implementeres på flere måter:
