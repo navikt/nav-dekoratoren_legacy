@@ -39,7 +39,7 @@ accessPolicy:
 Dekoratøren kan implementeres på flere ulike måter, både server-side og client-side.
 
 ### Eksempel 1
-Hent dekoratøren server-side og send HTML til brukeren som inkluderer dekoratøren
+Hent dekoratøren server-side og send html til brukeren som inkluderer dekoratøren
 ```
 const url = `{DECORATOR_URL}/?{DINE_PARAMETERE}`;
 const getDecorator = () =>x
@@ -77,7 +77,6 @@ Sett inn noen linjer html og last inn dekoratøren client-side.
 
 ### Eksempel 3
 Bruk pus-decorator, les [readme](https://github.com/navikt/pus-decorator).
-
 
 ## Parametere
 Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
