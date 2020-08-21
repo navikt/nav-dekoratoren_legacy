@@ -117,13 +117,13 @@ export const template = (req: Request) => {
             <div class="decorator-dev-container">
                 <!-- Header fetched by apps -->
                 <div id="${headerId}">
-                    <section id="decorator-header" class="navno-dekorator" role="main">${HtmlHeader}</section>
+                    <section id="decorator-header" class="navno-dekorator">${HtmlHeader}</section>
                 </div>
                 <div class="decorator-dummy-app">
                 </div>
                 <!-- Footer fetched by apps -->
                 <div id="${footerId}">
-                    <section id="decorator-footer" class="navno-dekorator" role="main">${HtmlFooter}</section>
+                    <section id="decorator-footer" class="navno-dekorator">${HtmlFooter}</section>
                 </div>
             </div>
             <!-- Scripts fetched by apps -->
