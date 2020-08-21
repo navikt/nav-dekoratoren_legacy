@@ -11,13 +11,29 @@ Appen kjører på NAIS i en docker-container.
 
 ## Bruk av dekoratøren
 
-:information_source: Dekoratøren er bakoverkompatibel; med andre ord vil eksisterende applikasjoner som benytter dekoratør:v4 (https://appres.nav.no/common-html/v4/navno) automatisk få ny dekoratør. 
+:information_source: &nbsp; Dekoratøren er bakoverkompatibel; med andre ord vil eksisterende applikasjoner som benytter dekoratør:v4 (https://appres.nav.no/common-html/v4/navno) automatisk få ny dekoratør. 
 
-Den nye dekoratøren vil serveres på følgende ingresser etter prodsetting 13. mai:
-- https://appres.nav.no/common-html/v4/navno
+Den nye dekoratøren serveres på følgende ingresser:
+
+**Prod (prod-sbs):**
 - https://www.nav.no/dekoratoren/ 
+- https://appres.nav.no/common-html/v4/navno (deprecated)
 
-Vi oppfordrer å gå over til nytt endepunkt (https://www.nav.no/dekoratoren/) etter prodsetting ettersom https://appres.nav.no vil bli deprecated på et senere tidspunkt.
+**Dev (dev-gcp):**
+- https://dekoratoren.dev.nav.no/
+
+Krever følgende access policy i nais.yaml:
+```
+accessPolicy:
+  outbound:
+    external:
+      - host: dekoratoren.dev.nav.no
+```
+**Dev (dev-sbs): <br>**
+- [https://www-{q0,q1,q6}.nav.no/dekoratoren/](https://www.nav.no/dekoratoren/) (deprecated)
+- [https://appres-{q0,q1,q6}.nav.no/common-html/v4/navno](https://appres-q1.nav.no/common-html/v4/navno) (deprecated)
+
+:warning: &nbsp; Deprecated: nye apper burde deployeres til gcp
 
 Nye applikasjoner kan implementere menyen som følger: 
 
@@ -34,7 +50,7 @@ Vis [implementasjon](https://github.com/navikt/personopplysninger/blob/master/se
 **Obs:** Cache anbefales
 
 ### Eksempel 2
-:warning: **Benytter CSR (Client-Side-Rendering) av dekoratøren, noe som kan påvirke ytelsen.**
+:warning: &nbsp; **Benytter CSR (Client-Side-Rendering) av dekoratøren, noe som kan påvirke ytelsen.**
 
 Sett inn 5 linjer HTML: <br>
 ```
