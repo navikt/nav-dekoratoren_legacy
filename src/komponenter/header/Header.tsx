@@ -125,7 +125,7 @@ export const Header = () => {
     }, []);
 
     return (
-        <div className={'nav-dekoratoren'}>
+        <div className={'decorator-wrapper'}>
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
