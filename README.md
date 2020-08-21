@@ -41,7 +41,7 @@ Dekoratøren kan implementeres på flere ulike måter, både server-side og clie
 ### Eksempel 1
 Hent dekoratøren server-side og send html til brukeren som inkluderer dekoratøren:
 ```
-const url = `{DECORATOR_URL}/?{DINE_PARAMETERE}`;
+const url = `{MILJO_URL}/?{DINE_PARAMETERE}`;
 const getDecorator = () =>x
     request(url, (error, response, body) => {
         // Inject fragmenter av dekoratøren med id-selectors, enten manuelt eller ved bruk av template engine
@@ -56,7 +56,7 @@ Sett inn noen linjer html og last inn dekoratøren client-side:
 ```
 <html>
   <head>
-      <link href="{DECORATOR_URL}/css/client.css" rel="stylesheet" /> 
+      <link href="{MILJO_URL}/css/client.css" rel="stylesheet" /> 
   </head>
   <body>
     <section id="decorator-header" class="navno-dekorator"></section>
@@ -64,8 +64,8 @@ Sett inn noen linjer html og last inn dekoratøren client-side:
       DIN_APP
     }
     <section id="decorator-footer" class="navno-dekorator"></section>
-    <div id="decorator-env" data-src="{DECORATOR_URL}/env?{DINE_PARAMETERE}"></div>
-    <script type="text/javascript" src="{DECORATOR_URL}/client.js"></script>
+    <div id="decorator-env" data-src="{MILJO_URL}/env?{DINE_PARAMETERE}"></div>
+    <script type="text/javascript" src="{MILJO_URL}/client.js"></script>
   </body>
 </html>
 ```
