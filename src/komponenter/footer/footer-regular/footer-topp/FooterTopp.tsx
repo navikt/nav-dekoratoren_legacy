@@ -73,13 +73,10 @@ const FooterTopp = () => {
                                   !i ? 'venstre' : i === 2 ? 'hoyre' : 'midt'
                               }`}
                           >
-                              <Undertittel
-                                  className="menylenker-overskrift"
-                                  id="venstrelenker-overskrift"
-                              >
+                              <Undertittel className="menylenker-overskrift">
                                   {columnNode.displayName}
                               </Undertittel>
-                              <ul aria-labelledby="venstrelenker-overskrift">
+                              <ul>
                                   <FooterLenker node={columnNode} />
                               </ul>
                           </div>
@@ -95,9 +92,7 @@ const FooterTopp = () => {
                               }`}
                               key={index}
                           >
-                              <ul aria-labelledby="hoyrelenker-overskrift">
-                                  <LinksLoader id="kontakt-loader" />
-                              </ul>
+                              <LinksLoader id={`footer-link-loader-${index}`} />
                           </div>
                       ))}
                 <Arbeidsflatevalg />
