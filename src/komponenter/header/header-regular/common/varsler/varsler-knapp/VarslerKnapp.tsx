@@ -18,16 +18,16 @@ export const varslerKnappId = 'varsler-knapp-id';
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.varsler,
     varsler: state.varsler.data,
-    appBaseUrl: state.environment.APP_BASE_URL,
+    appUrl: state.environment.APP_URL,
 });
 
 export const VarslerKnapp = () => {
     const dispatch = useDispatch();
-    const { isOpen, varsler, appBaseUrl } = useSelector(stateSelector);
+    const { isOpen, varsler, appUrl } = useSelector(stateSelector);
 
     const toggleVarslerDropdown = () => {
         if (!isOpen && varsler.uleste > 0) {
-            settVarslerSomLest(appBaseUrl, varsler.nyesteId, dispatch);
+            settVarslerSomLest(appUrl, varsler.nyesteId, dispatch);
         }
         gaEvent({
             category: GACategory.Header,

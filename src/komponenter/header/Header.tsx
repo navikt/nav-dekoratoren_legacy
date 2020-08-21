@@ -33,7 +33,7 @@ export const Header = () => {
     const currentFeatureToggles = useSelector(
         (state: AppState) => state.featureToggles
     );
-    const { PARAMS, APP_BASE_URL, API_UNLEASH_PROXY_URL } = useSelector(
+    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = useSelector(
         (state: AppState) => state.environment
     );
     const defaultToPerson = () => {
@@ -50,9 +50,9 @@ export const Header = () => {
 
     // External data
     useEffect(() => {
-        fetchDriftsmeldinger(APP_BASE_URL)(dispatch);
-        hentInnloggingsstatus(APP_BASE_URL)(dispatch);
-        fetchMenypunkter(APP_BASE_URL)(dispatch);
+        fetchDriftsmeldinger(APP_URL)(dispatch);
+        hentInnloggingsstatus(APP_URL)(dispatch);
+        fetchMenypunkter(APP_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
             const togglesFromCookie = cookies[unleashCacheCookie];
             if (togglesFromCookie) {
@@ -102,7 +102,7 @@ export const Header = () => {
     // Fetch notifications
     useEffect(() => {
         if (erInnlogget) {
-            hentVarsler(APP_BASE_URL)(dispatch);
+            hentVarsler(APP_URL)(dispatch);
         }
     }, [erInnlogget]);
 

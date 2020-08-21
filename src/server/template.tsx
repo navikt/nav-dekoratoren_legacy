@@ -18,11 +18,6 @@ if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
 
-// Resources
-const fileEnv = `${process.env.APP_BASE_URL}/env`;
-const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
-const fileScript = `${process.env.APP_BASE_URL}/client.js`;
-
 const cache = new NodeCache({
     stdTTL: fiveMinutesInSeconds,
     checkperiod: oneMinuteInSeconds,
@@ -34,10 +29,15 @@ export const template = (req: Request) => {
     const cookies = universalCookies.cookies;
     const env = clientEnv({ req, cookies });
 
+    // Resources
+    const fileEnv = `${env.APP_URL}/env`;
+    const fileCss = `${env.APP_URL}/css/client.css`;
+    const fileScript = `${env.APP_URL}/client.js`;
+
+    // Retreive from cache
     const envHash = hash({ env });
     const cachedHtml = cache.get(envHash);
 
-    // Retreive from cache
     if (cachedHtml) {
         return cachedHtml;
     }
