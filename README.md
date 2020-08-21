@@ -39,7 +39,7 @@ accessPolicy:
 Dekoratøren kan implementeres på flere ulike måter, både server-side og client-side.
 
 ### Eksempel 1
-Hent dekoratøren server-side og send html til brukeren som inkluderer dekoratøren
+Hent dekoratøren server-side og send html til brukeren som inkluderer dekoratøren:
 ```
 const url = `{DECORATOR_URL}/?{DINE_PARAMETERE}`;
 const getDecorator = () =>x
@@ -48,11 +48,11 @@ const getDecorator = () =>x
     });
 ```
 Vis [implementasjon](https://github.com/navikt/personopplysninger/blob/master/server/dekorator.js) i Personopplysninger.<br>
-**Obs:** Cache anbefales.
+:warning: &nbsp; Cache anbefales.
 
 ### Eksempel 2
 
-Sett inn noen linjer html og last inn dekoratøren client-side.
+Sett inn noen linjer html og last inn dekoratøren client-side:
 ```
 <html>
   <head>
