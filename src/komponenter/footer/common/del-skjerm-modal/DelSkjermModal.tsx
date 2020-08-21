@@ -88,7 +88,7 @@ const DelSkjermModal = (props: Props) => {
         <Modal
             onAfterOpen={setOverlayCss}
             isOpen={props.isOpen}
-            className={`navno-dekorator ${classname}`}
+            className={`nav-dekoratoren ${classname}`}
             contentLabel={'Skjermdeling'}
             onRequestClose={props.onClose}
         >
