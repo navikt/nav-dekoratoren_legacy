@@ -64,9 +64,6 @@ Sett inn noen linjer html og last inn dekoratøren client-side:
       DIN_APP
     }
     <section id="decorator-footer" class="navno-dekorator"></section>
-    <div id="decorator-env" data-src="<miljø adresse>/dekoratoren/env?{DINE_PARAMETERE}"></div>
-    <script type="text/javascript" src="<miljø adresse>/dekoratoren/client.js"></script>
-    <section id="decorator-footer" class="navno-dekorator" role="main"></section>
     <div id="decorator-env" data-src="{DECORATOR_URL}/env?{DINE_PARAMETERE}"></div>
     <script type="text/javascript" src="{DECORATOR_URL}/client.js"></script>
   </body>
