@@ -125,7 +125,7 @@ export const Header = () => {
     }, []);
 
     return (
-        <Fragment>
+        <div className={'decorator-wrapper'}>
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
@@ -137,7 +137,7 @@ export const Header = () => {
                 )}
             </header>
             <Driftsmeldinger />
-        </Fragment>
+        </div>
     );
 };
 

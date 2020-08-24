@@ -2,10 +2,7 @@ name: Deploy-to-dev
 on:
   push:
     tags:
-      - "v*-gcp"
-      - "!v*-prod"
-      - "!v*-test"
-      - "!v*-dev"
+      - "v*-test"
 jobs:
   deploy:
     runs-on: ubuntu-latest
