@@ -117,7 +117,7 @@ dekoratoren:
     depends_on:
       - mocks
 ```
-[Eksempel i Enonic XP](https://github.com/navikt/nav-enonicxp/blob/IV-843-decorator/docker-compose.yml).
+[Eksempel i Enonic XP](https://github.com/navikt/nav-enonicxp/blob/master/docker-compose.yml).
 
 ## Utvikling - Kom i gang
 Hent repoet fra github
