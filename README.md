@@ -78,15 +78,15 @@ Bruk pus-decorator, les [readme](https://github.com/navikt/pus-decorator).
 ## Parametere
 Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
 
-| Parameter         | Type                                                    | Default              | Forklaring                                                          |
-| ----------------- |---------------------------------------------------------|----------------------| --------------------------------------------------------------------|
-| context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til valgt context                                     |
-| simple            | boolean                                                 | false                | Forenklet header og footer                                          |
-| redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Redirecter brukeren til app etter innlogging fra dekoratøren.       |
-| level             | Level3 \| Level4                                        | Level3               | Krever innlogging basert på definert sikkerhetsnivå                 |
-| language          | norsk \| engelsk \| samisk                              | norsk                | Setter språket til dekoratøren                                      |
-| feedback          | boolean                                                 | true                 | Skjuler eller viser tilbakemeldingskomponentet                      |
-| chatbot           | boolean                                                 | false                | Skjuler eller viser Chatbot Frida [1]    
+| Parameter         | Type                                                    | Default              | Forklaring                                                                          |
+| ----------------- |-------------------------------------------------------- |--------------------- | ----------------------------------------------------------------------------------- |
+| context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til valgt context                                                     |
+| simple            | boolean                                                 | false                | Forenklet header og footer                                                          |
+| redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren          |
+| level             | Level3 \| Level4                                        | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå                      |            
+| language          | norsk \| engelsk \| samisk                              | norsk                | Setter språket til dekoratøren                                                      |
+| feedback          | boolean                                                 | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
+| chatbot           | boolean                                                 | false                | Skjuler eller viser Chatbot Frida [1]                                               |
 
 Eksempel:<br>
 https://www.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3
