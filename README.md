@@ -47,7 +47,7 @@ const getDecorator = () =>x
         // Inject fragmenter av dekoratøren med id-selectors, enten manuelt eller ved bruk av template engine
     });
 ```
-Vis [implementasjon](https://github.com/navikt/personopplysninger/blob/master/server/dekorator.js) i Personopplysninger.<br>
+[Eksempel i Personopplysninger](https://github.com/navikt/personopplysninger/blob/master/server/dekorator.js). <br>
 :warning: &nbsp; Cache anbefales.
 
 ### Eksempel 2
