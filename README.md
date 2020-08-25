@@ -84,14 +84,15 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | simple            | boolean                                                 | false                | Viser en forenklet header og footer                                                          |
 | redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren          |
 | level             | Level3 \| Level4                                        | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå                      |            
-| language          | norsk \| engelsk \| samisk                              | norsk                | Setter språket til dekoratøren                                                      |
+| language          | norsk \| engelsk \| samisk                              | norsk                | Setter språket til dekoratøren [1]                                                  |
 | feedback          | boolean                                                 | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
-| chatbot           | boolean                                                 | false                | Skjuler eller viser Chatbot Frida [1]                                               |
+| chatbot           | boolean                                                 | false                | Skjuler eller viser Chatbot Frida [2]                                               |
 
 Eksempel:<br>
 https://www.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3
 
-[1] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
+[1] Språk vil automatisk settes client-side dersom nåværende url inneholder **/no/ (norsk)**, **/en/ (engelsk)** eller **/se/ (samisk)**. <br>
+[2] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
 
 ## Oppstart via docker-compose
 
