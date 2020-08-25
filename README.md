@@ -104,7 +104,8 @@ dekoratoren:
       - "8100:8088"
     environment:
       XP_BASE_URL: 'https://www.nav.no'
-      APP_BASE_URL: "http://localhost:8100/dekoratoren"
+      APP_BASE_URL: 'http://localhost:8088'
+      APP_BASE_PATH: '/dekoratoren'
       API_XP_SERVICES_URL: 'https://www.nav.no/_/service'
       API_UNLEASH_PROXY_URL=https://www.nav.no/person/pb-unleash-proxy
       API_INNLOGGINGSLINJE_URL: 'http://mocks:8080/innloggingslinje-api/auth'
