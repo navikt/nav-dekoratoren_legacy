@@ -104,7 +104,8 @@ dekoratoren:
       - "8100:8088"
     environment:
       XP_BASE_URL: 'https://www.nav.no'
-      APP_BASE_URL: "http://localhost:8100/dekoratoren"
+      APP_BASE_URL: 'http://localhost:8100'
+      APP_BASE_PATH: '/dekoratoren'
       API_XP_SERVICES_URL: 'https://www.nav.no/_/service'
       API_UNLEASH_PROXY_URL=https://www.nav.no/person/pb-unleash-proxy
       API_INNLOGGINGSLINJE_URL: 'http://mocks:8080/innloggingslinje-api/auth'
@@ -116,7 +117,7 @@ dekoratoren:
     depends_on:
       - mocks
 ```
-[Eksempel i Enonic XP](https://github.com/navikt/nav-enonicxp/blob/IV-843-decorator/docker-compose.yml).
+[Eksempel i Enonic XP](https://github.com/navikt/nav-enonicxp/blob/master/docker-compose.yml).
 
 ## Utvikling - Kom i gang
 Hent repoet fra github
