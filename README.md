@@ -91,7 +91,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 Eksempel:<br>
 https://www.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3
 
-[1] Språk vil automatisk settes client-side dersom nåværende url inneholder **/no/ (norsk)**, **/en/ (engelsk)** eller **/se/ (samisk)**. <br>
+[1] Språk vil automatisk settes client-side dersom nåværende url inneholder **/no/ (norsk)**, **/en/ (engelsk)** eller **/se/ (samisk)**, uavhengig av dette parameteret. <br>
 [2] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
 
 ## Oppstart via docker-compose
