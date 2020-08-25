@@ -99,7 +99,7 @@ Start **navikt/nav-dekoratoren**, **navikt/pb-nav-mocked**, **navikt/stub-oidc-p
 ```
 dekoratoren:
     container_name: dekoratoren
-    image: "navikt/nav-dekoratoren:latest"
+    image: 'docker.pkg.github.com/navikt/nav-dekoratoren/nav-dekoratoren:latest'
     ports:
       - "8100:8088"
     environment:
@@ -117,7 +117,12 @@ dekoratoren:
     depends_on:
       - mocks
 ```
-[Eksempel i Enonic XP](https://github.com/navikt/nav-enonicxp/blob/master/docker-compose.yml).
+[Eksempel i Enonic XP](https://github.com/navikt/nav-enonicxp/blob/master/docker-compose.yml). <br>
+:information_source: &nbsp; Foreløpig krever GitHub Packages (docker.pkg.github.com) innlogging:
+``` 
+docker login docker.pkg.github.com -u GITHUB_USERNAME -p GITHUB_PERSONAL_ACCESS_TOKEN
+```
+
 
 ## Utvikling - Kom i gang
 Hent repoet fra github
