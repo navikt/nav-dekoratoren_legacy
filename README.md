@@ -80,8 +80,8 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 
 | Parameter         | Type                                                    | Default              | Forklaring                                                                          |
 | ----------------- |-------------------------------------------------------- |--------------------- | ----------------------------------------------------------------------------------- |
-| context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til valgt context                                                     |
-| simple            | boolean                                                 | false                | Forenklet header og footer                                                          |
+| context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til valgt kontekst                                                     |
+| simple            | boolean                                                 | false                | Viser en forenklet header og footer                                                          |
 | redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren          |
 | level             | Level3 \| Level4                                        | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå                      |            
 | language          | norsk \| engelsk \| samisk                              | norsk                | Setter språket til dekoratøren                                                      |
