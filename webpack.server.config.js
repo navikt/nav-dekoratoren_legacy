@@ -141,7 +141,7 @@ const browserConfig = {
                                     ident: 'postcss',
                                     plugins: [
                                         prefixer({
-                                            prefix: '.navno-dekorator',
+                                            prefix: '.decorator-wrapper',
                                             exclude: [
                                                 /\b(\w*(M|m)odal\w*)\b/,
                                                 'body',
