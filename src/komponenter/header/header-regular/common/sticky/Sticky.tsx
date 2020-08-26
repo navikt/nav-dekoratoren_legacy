@@ -46,7 +46,7 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
                 const anchorElement = document.getElementById(anchorId);
                 if (
                     !anchorElement ||
-                    anchorElement.getBoundingClientRect().top < 5 ||
+                    anchorElement.getBoundingClientRect().top <= 2 ||
                     Date.now() - startTime > 1000
                 ) {
                     setTimeout(() => {
@@ -55,7 +55,7 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
                             deferredScrollHandler
                         );
                         window.addEventListener('scroll', setStickyOffset);
-                    }, 100);
+                    }, 200);
                 }
             };
 
