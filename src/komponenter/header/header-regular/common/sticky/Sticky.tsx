@@ -46,7 +46,7 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
                 const anchorElement = document.getElementById(anchorId);
                 if (
                     !anchorElement ||
-                    anchorElement.getBoundingClientRect().top <= 2 ||
+                    anchorElement.getBoundingClientRect().top >= 0 ||
                     Date.now() - startTime > 1000
                 ) {
                     setTimeout(() => {
