@@ -36,16 +36,22 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
             placeholderElement
         );
 
-        const deferredScrollHandler = debounce(() => {
-            window.removeEventListener('scroll', deferredScrollHandler);
-            window.addEventListener('scroll', setStickyOffset);
-        }, 100);
-
         const deferStickyOnAnchorLink = (e: MouseEvent) => {
             const anchorId = getLinkAnchorId(e.target as HTMLElement);
             if (!anchorId) {
                 return;
             }
+
+            const deferredScrollHandler = () => {
+                const anchorElement = document.getElementById(anchorId);
+                if (
+                    !anchorElement ||
+                    anchorElement.getBoundingClientRect().top < 2
+                ) {
+                    window.removeEventListener('scroll', deferredScrollHandler);
+                    window.addEventListener('scroll', setStickyOffset);
+                }
+            };
 
             stickyElement.style.position = 'absolute';
             prevScrollOffset.current = 0;
