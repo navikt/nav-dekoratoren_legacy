@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import debounce from 'lodash.debounce';
 import { stickyScrollHandler } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
 import { setTop } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
 import { getLinkAnchorId } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
@@ -42,14 +41,21 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
                 return;
             }
 
+            const startTime = Date.now();
             const deferredScrollHandler = () => {
                 const anchorElement = document.getElementById(anchorId);
                 if (
                     !anchorElement ||
-                    anchorElement.getBoundingClientRect().top < 2
+                    anchorElement.getBoundingClientRect().top < 5 ||
+                    Date.now() - startTime > 1000
                 ) {
-                    window.removeEventListener('scroll', deferredScrollHandler);
-                    window.addEventListener('scroll', setStickyOffset);
+                    setTimeout(() => {
+                        window.removeEventListener(
+                            'scroll',
+                            deferredScrollHandler
+                        );
+                        window.addEventListener('scroll', setStickyOffset);
+                    }, 100);
                 }
             };
 

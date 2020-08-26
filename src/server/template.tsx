@@ -96,7 +96,7 @@ export const template = (req: Request) => {
                 display:flex;
                 flex-direction: column;
                 justify-content: space-between;
-                height: 200%;
+                height: 100%;
             }
             .decorator-dummy-app {
                 background: #8888;
@@ -120,7 +120,6 @@ export const template = (req: Request) => {
                     <section id="decorator-header">${HtmlHeader}</section>
                 </div>
                 <div class="decorator-dummy-app">
-                <div id="testid">Dette er en test!</div>
                 </div>
                 <!-- Footer fetched by apps -->
                 <div id="${footerId}">
