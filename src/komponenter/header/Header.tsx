@@ -59,7 +59,6 @@ export const Header = () => {
                 PARAMS.LEVEL === 'Level4' && securityLevel === '3';
 
             if (!authenticated || insufficientPrivileges) {
-                console.log(getLoginUrl(environment, arbeidsflate));
                 window.location.href = getLoginUrl(environment, arbeidsflate);
             }
         }
