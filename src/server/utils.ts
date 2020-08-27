@@ -46,6 +46,7 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
                 SIMPLE: req.query.simple === 'true',
                 SIMPLE_HEADER: !!req.query.header,
                 SIMPLE_FOOTER: !!req.query.footer,
+                ENFORCE_LOGIN: !!req.query.enforceLogin,
                 REDIRECT_TO_APP: !!req.query.redirectToApp,
                 LEVEL: (req.query.level || 'Level3') as string,
                 FEEDBACK: !(req.query.feedback === 'false'),

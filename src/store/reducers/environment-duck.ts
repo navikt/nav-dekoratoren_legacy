@@ -22,6 +22,7 @@ export interface EnvironmentState {
         SIMPLE: boolean;
         SIMPLE_HEADER: boolean;
         SIMPLE_FOOTER: boolean;
+        ENFORCE_LOGIN: boolean;
         REDIRECT_TO_APP: boolean;
         LEVEL: string;
         FEEDBACK: boolean;
@@ -54,6 +55,7 @@ export const initialState: EnvironmentState = {
         SIMPLE: false,
         SIMPLE_HEADER: false,
         SIMPLE_FOOTER: false,
+        ENFORCE_LOGIN: false,
         REDIRECT_TO_APP: false,
         LEVEL: '',
         FEEDBACK: false,
