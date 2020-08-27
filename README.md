@@ -80,19 +80,21 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 
 | Parameter         | Type                                                    | Default              | Forklaring                                                                          |
 | ----------------- |-------------------------------------------------------- |--------------------- | ----------------------------------------------------------------------------------- |
-| context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til definert kontekst                                                     |
-| simple            | boolean                                                 | false                | Viser en forenklet header og footer                                                          |
-| redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren          |
-| level             | Level3 \| Level4                                        | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå                      |            
-| language          | norsk \| engelsk \| samisk                              | norsk                | Setter språket til dekoratøren [1]                                                  |
+| context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til definert kontekst                                                 |
+| simple            | boolean                                                 | false                | Viser en forenklet header og footer                                                 |
+| enforceLogin      | boolean                                                 | false                | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level)              |
+| redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [1]      |
+| level             | Level3 \| Level4                                        | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [1]                  |            
+| language          | norsk \| engelsk \| samisk                              | norsk                | Setter språket til dekoratøren [2]                                                  |
 | feedback          | boolean                                                 | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
-| chatbot           | boolean                                                 | false                | Skjuler eller viser Chatbot Frida [2]                                               |
-
+| chatbot           | boolean                                                 | false                | Skjuler eller viser Chatbot Frida [3]                                               |
+ 
 Eksempel:<br>
 https://www.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3
 
-[1] Språk vil automatisk settes client-side dersom nåværende url inneholder **/no/ (norsk)**, **/en/ (engelsk)** eller **/se/ (samisk)**, uavhengig av dette parameteret. <br>
-[2] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
+[1] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen <br>
+[2] Språk vil automatisk settes client-side dersom nåværende url inneholder **/no/ (norsk)**, **/en/ (engelsk)** eller **/se/ (samisk)**, uavhengig av dette parameteret. <br>
+[3] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
 
 ## Oppstart via docker-compose
 
