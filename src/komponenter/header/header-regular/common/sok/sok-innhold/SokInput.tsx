@@ -33,8 +33,7 @@ export const SokInput = (props: Props) => {
                     className={className}
                     value={writtenInput}
                     placeholder={finnTekst('sok-input-placeholder', language)}
-                    label={finnTekst('sok-input-label', language)}
-                    aria-label={finnTekst('sok-input-label', language)}
+                    aria-label={finnTekst('sok-input-placeholder', language)}
                 />
                 <SokKnapper
                     writtenInput={writtenInput}

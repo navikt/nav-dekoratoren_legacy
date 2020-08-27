@@ -32,6 +32,7 @@ export const Toppseksjon = ({ classname }: Props) => {
         <div className={cls.element('topp-seksjon')}>
             <Systemtittel className={cls.element('topp-seksjon-tittel')}>
                 <Tekst id={`rolle-${arbeidsflate.toLowerCase()}`} />
+                <span className={cls.element('topp-seksjon-tittel-decoration')} aria-hidden={true}>//</span>
             </Systemtittel>
             <LenkeMedGA
                 href={context.url}

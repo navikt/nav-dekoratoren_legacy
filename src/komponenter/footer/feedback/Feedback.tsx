@@ -55,27 +55,25 @@ const Feedback = () => {
                 <div className="footer-linje" />
                 <div className="feedback-container">
                     {!buttonsPressed.yesButton && !buttonsPressed.noButton ? (
-                        <Fragment>
-                            <div className="qa-container">
-                                <Ingress>
-                                    <Tekst id="fant-du-det-du-lette-etter" />
-                                </Ingress>
-                                <div className="buttons-container">
-                                    <Knapp
-                                        className="knapp"
-                                        onClick={userPressedYes}
-                                    >
-                                        <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
-                                    </Knapp>
-                                    <Knapp
-                                        className="knapp"
-                                        onClick={userPressedNo}
-                                    >
-                                        <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
-                                    </Knapp>
-                                </div>
+                        <div className="qa-container" role="group" aria-labelledby="feedback-text">
+                            <label id="feedback-text">
+                                <Ingress><Tekst id="fant-du-det-du-lette-etter" /></Ingress>
+                            </label>
+                            <div className="buttons-container">
+                                <Knapp
+                                    className="knapp"
+                                    onClick={userPressedYes}
+                                >
+                                    <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
+                                </Knapp>
+                                <Knapp
+                                    className="knapp"
+                                    onClick={userPressedNo}
+                                >
+                                    <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
+                                </Knapp>
                             </div>
-                        </Fragment>
+                        </div>
                     ) : null}
                     {buttonsPressed.yesButton && (
                         <ThankYou showFeedbackUsage={false} />

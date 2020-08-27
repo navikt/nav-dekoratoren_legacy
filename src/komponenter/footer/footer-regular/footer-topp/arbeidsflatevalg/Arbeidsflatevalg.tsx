@@ -42,7 +42,6 @@ const Arbeidsflatevalg = () => {
                     <div className="arbeidsflatevalg-innhold">
                         <ul
                             className="arbeidsflatevalg"
-                            aria-label="Gå til innhold for privatperson, arbeidsgiver eller samarbeidspartner"
                         >
                             {lenker.map((lenke: ArbeidsflateLenke) => (
                                 <li key={lenke.key}>
