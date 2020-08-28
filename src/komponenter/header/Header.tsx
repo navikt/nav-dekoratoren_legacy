@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenypunkter } from 'store/reducers/menu-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
@@ -15,10 +15,11 @@ import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 import { fetchDriftsmeldinger } from 'store/reducers/driftsmeldinger-duck';
 import { fetchFeatureToggles, Status } from 'api/api';
 import { ActionType } from 'store/actions';
-import { loadVergic } from 'utils/scripts';
+import { loadVergic } from 'utils/external-scripts';
 import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/browser-support-msg/BrowserSupportMsg';
 import { getLoginUrl } from 'utils/login';
 import Driftsmeldinger from './driftsmeldinger/Driftsmeldinger';
+import { postMessageToApp } from '../../utils/messages';
 
 const unleashCacheCookie = 'decorator-unleash-cache';
 const decoratorContextCookie = 'decorator-context';
@@ -32,6 +33,7 @@ const stateSelector = (state: AppState) => ({
 
 export const Header = () => {
     const dispatch = useDispatch();
+    const [sentAuthToApp, setSentAuthToApp] = useState(false);
     const { environment } = useSelector(stateSelector);
     const { arbeidsflate } = useSelector(stateSelector);
     const { innloggingsstatus } = useSelector(stateSelector);
@@ -60,6 +62,9 @@ export const Header = () => {
 
             if (!authenticated || insufficientPrivileges) {
                 window.location.href = getLoginUrl(environment, arbeidsflate);
+            } else if (!sentAuthToApp) {
+                postMessageToApp('auth', data);
+                setSentAuthToApp(true);
             }
         }
     }, [PARAMS.ENFORCE_LOGIN, PARAMS.LEVEL, innloggingsstatus]);
