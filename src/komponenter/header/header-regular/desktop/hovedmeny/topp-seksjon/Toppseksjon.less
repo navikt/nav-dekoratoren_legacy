@@ -8,6 +8,10 @@
         margin: 0 -@margins-sides-desktop 1.5rem -@margins-sides-desktop;
         padding: 0 @margins-sides-desktop;
 
+        &-tittel-decoration {
+            display: none;
+        }
+
         @media (max-height: @smallDesktopLimitHeight),
             (max-width: @smallDesktopLimitWidth) {
             flex-direction: row;
@@ -15,6 +19,7 @@
             margin-bottom: 0.75rem;
 
             &-tittel-decoration {
+                display: inline;
                 .typo-normal;
                 font-weight: bold;
                 margin: 0 0.5rem;
