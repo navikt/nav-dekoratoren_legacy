@@ -55,9 +55,15 @@ const Feedback = () => {
                 <div className="footer-linje" />
                 <div className="feedback-container">
                     {!buttonsPressed.yesButton && !buttonsPressed.noButton ? (
-                        <div className="qa-container" role="group" aria-labelledby="feedback-text">
+                        <div
+                            className="qa-container"
+                            role="group"
+                            aria-labelledby="feedback-text"
+                        >
                             <label id="feedback-text">
-                                <Ingress><Tekst id="fant-du-det-du-lette-etter" /></Ingress>
+                                <Ingress>
+                                    <Tekst id="fant-du-det-du-lette-etter" />
+                                </Ingress>
                             </label>
                             <div className="buttons-container">
                                 <Knapp

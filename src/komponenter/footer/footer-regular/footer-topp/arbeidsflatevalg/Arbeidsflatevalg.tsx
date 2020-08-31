@@ -40,9 +40,7 @@ const Arbeidsflatevalg = () => {
             {language === Language.NORSK && (
                 <div className="menylenker-seksjon arbeidsflate">
                     <div className="arbeidsflatevalg-innhold">
-                        <ul
-                            className="arbeidsflatevalg"
-                        >
+                        <ul className="arbeidsflatevalg">
                             {lenker.map((lenke: ArbeidsflateLenke) => (
                                 <li key={lenke.key}>
                                     <Lenkepanel
