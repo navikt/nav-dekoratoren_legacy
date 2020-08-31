@@ -76,7 +76,9 @@ const FooterBottom = () => {
                             {personvernNode ? (
                                 <FooterLenker node={personvernNode} />
                             ) : (
-                                <LinkLoader id={'personvern-loader'} />
+                                <li>
+                                    <LinkLoader id={'personvern-loader'} />
+                                </li>
                             )}
                         </ul>
                     </div>

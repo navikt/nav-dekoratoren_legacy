@@ -1,8 +1,6 @@
 import React from 'react';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
 import HamburgerIkon from 'komponenter/header/header-regular/common/meny-knapp/hamburger-ikon/HamburgerIkon';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import Tekst from 'tekster/finn-tekst';
 import { gaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
@@ -36,6 +34,7 @@ export const HovedmenyKnapp = ({ id }: Props) => {
 
     return (
         <MenylinjeKnapp
+            tekstId={'meny-knapp'}
             isOpen={isOpen}
             classname={classname}
             onClick={toggleMenu}
@@ -43,9 +42,6 @@ export const HovedmenyKnapp = ({ id }: Props) => {
             id={id}
         >
             <HamburgerIkon isOpen={isOpen} />
-            <Undertittel>
-                <Tekst id="meny-knapp" />
-            </Undertittel>
         </MenylinjeKnapp>
     );
 };

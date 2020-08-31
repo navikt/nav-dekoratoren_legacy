@@ -21,7 +21,7 @@ export const MinsideArbgiverKnapp = () => {
 
     return (
         <LenkeMedGA
-            classNameOverride={`menylinje-knapp ${cls.element('knapp')}`}
+            classNameOverride={`${cls.element('knapp')}`}
             id={minsideKnappId}
             href={href}
             gaEventArgs={{
@@ -30,20 +30,14 @@ export const MinsideArbgiverKnapp = () => {
                 label: href,
             }}
         >
-            <div
-                className={`menylinje-knapp-visning ${cls.element(
-                    'knapp-visning'
-                )}`}
-            >
-                <Bilde asset={briefcaseIkon} altText="" />
-                <div className={cls.element('knapp-tekst')}>
-                    <Normaltekst className={cls.element('knapp-tekst-topp')}>
-                        <Tekst id={'ga-til-min-side-arbeidsgiver'} />
-                    </Normaltekst>
-                    <Undertekst className={cls.element('knapp-tekst-bunn')}>
-                        <Tekst id={'rolle-arbeidsgiver'} />
-                    </Undertekst>
-                </div>
+            <Bilde asset={briefcaseIkon} altText="" />
+            <div className={cls.element('knapp-tekst')}>
+                <Normaltekst className={cls.element('knapp-tekst-topp')}>
+                    <Tekst id={'ga-til-min-side-arbeidsgiver'} />
+                </Normaltekst>
+                <Undertekst className={cls.element('knapp-tekst-bunn')}>
+                    <Tekst id={'rolle-arbeidsgiver'} />
+                </Undertekst>
             </div>
         </LenkeMedGA>
     );

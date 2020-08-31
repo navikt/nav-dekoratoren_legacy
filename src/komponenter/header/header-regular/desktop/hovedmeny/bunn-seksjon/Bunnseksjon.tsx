@@ -7,7 +7,8 @@ import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arb
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import ArbeidsflateLenkepanel from 'komponenter/header/header-regular/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
+import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
+import { GACategory } from 'utils/google-analytics';
 import './Bunnseksjon.less';
 
 interface Props {
@@ -36,6 +37,12 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                             row: 2,
                             sub: 0,
                         })}
+                        gaEventArgs={{
+                            category: GACategory.Meny,
+                            action: `hovedmeny/arbeidsflatelenke`,
+                            label: lenke.url,
+                        }}
+                        enableCompactView={true}
                         key={lenke.lenkeTekstId}
                     />
                 ))}

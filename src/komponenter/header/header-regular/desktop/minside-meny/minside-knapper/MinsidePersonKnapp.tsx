@@ -46,22 +46,22 @@ export const MinsidePersonKnapp = ({ classname, id }: Props) => {
             id={id}
         >
             <MinsideIkon isOpen={isOpen} hasMenu={true} />
-            <div className={cls.element('knapp-tekst')}>
-                <div
+            <span className={cls.element('knapp-tekst')}>
+                <span
                     className={`${cls.element('knapp-tekst-topp')} ${
                         isOpen ? cls.element('knapp-tekst-topp', 'open') : ''
                     }`}
                 >
                     <Tekst id={'person-minside-lenke'} />
-                </div>
-                <div
+                </span>
+                <span
                     className={`${cls.element('knapp-tekst-bunn')} ${
                         isOpen ? cls.element('knapp-tekst-bunn', 'open') : ''
                     }`}
                 >
                     {brukernavn?.toLowerCase() || ''}
-                </div>
-            </div>
+                </span>
+            </span>
         </MenylinjeKnapp>
     );
 };

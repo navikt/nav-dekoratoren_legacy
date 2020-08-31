@@ -1,8 +1,6 @@
 import React from 'react';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
 import { VarselIkon } from './varsel-ikon/VarselIkon';
-import Tekst from 'tekster/finn-tekst';
-import { Undertittel } from 'nav-frontend-typografi';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { settVarslerSomLest } from 'store/reducers/varsel-lest-duck';
@@ -42,6 +40,7 @@ export const VarslerKnapp = () => {
 
     return (
         <MenylinjeKnapp
+            tekstId={'varsler-tittel'}
             onClick={toggleVarslerDropdown}
             isOpen={isOpen}
             classname={'varselbjelle'}
@@ -50,9 +49,6 @@ export const VarslerKnapp = () => {
             ariaLabel={ariaLabel}
         >
             <VarselIkon isOpen={isOpen} antallUleste={varsler.uleste} />
-            <Undertittel className={'varselbjelle__tekst'}>
-                <Tekst id={'varsler-tittel'} />
-            </Undertittel>
         </MenylinjeKnapp>
     );
 };

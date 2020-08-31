@@ -6,7 +6,6 @@ const DelSkjerm = (props: SVGProps<SVGSVGElement>) => (
         viewBox="0 0 24 24"
         preserveAspectRatio="xMidYMid meet"
         xmlns="http://www.w3.org/2000/svg"
-        version="1.0"
         {...props}
     >
         <g fill="none" strokeMiterlimit="10" strokeLinejoin="round">

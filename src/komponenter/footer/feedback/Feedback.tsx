@@ -60,11 +60,11 @@ const Feedback = () => {
                             role="group"
                             aria-labelledby="feedback-text"
                         >
-                            <label id="feedback-text">
-                                <Ingress>
+                            <Ingress>
+                                <label id="feedback-text">
                                     <Tekst id="fant-du-det-du-lette-etter" />
-                                </Ingress>
-                            </label>
+                                </label>
+                            </Ingress>
                             <div className="buttons-container">
                                 <Knapp
                                     className="knapp"

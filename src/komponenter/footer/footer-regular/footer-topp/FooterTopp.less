@@ -13,12 +13,10 @@
     .topp-kolonner {
         .menylenker-seksjon .menylenker-overskrift {
             font-weight: bolder;
-            margin-bottom: 1.2rem;
         }
 
         .menylenker-seksjon.til-toppen {
             margin: 1rem 0;
-            padding-left: 0;
 
             .til-toppen-innhold {
                 display: flex;
@@ -44,12 +42,6 @@
                 }
             }
         }
-
-        .menylenker-seksjon.venstre,
-        .menylenker-seksjon.midt,
-        .menylenker-seksjon.hoyre {
-            padding-left: 0;
-        }
     }
 
     ul {
@@ -57,12 +49,9 @@
         margin-bottom: 2.5rem;
     }
 
-    li {
-        margin-bottom: 1.3rem;
-    }
-
     .lenke {
         color: white;
+        padding: 0.625rem 0;
     }
 
     @media (min-width: @desktopMinWidth) {
@@ -76,12 +65,10 @@
             .menylenker-seksjon.til-toppen {
                 width: 100%;
                 margin: 1rem 0 2rem 0;
-                padding-left: 0;
             }
 
             .menylenker-seksjon.venstre {
                 width: 31%;
-                padding-left: 0;
             }
             .menylenker-seksjon.midt,
             .menylenker-seksjon.hoyre {
@@ -100,7 +87,6 @@
 
         .topp-kolonner {
             .menylenker-seksjon.til-toppen {
-                padding-left: 0;
                 margin: 0 0 2rem 0;
                 width: 100%;
             }
@@ -112,7 +98,6 @@
             .menylenker-seksjon.midt,
             .menylenker-seksjon.hoyre {
                 width: 23%;
-                padding-left: 0;
             }
 
             .menylenker-seksjon.arbeidsflate {
@@ -120,19 +105,17 @@
                 margin-top: 0;
             }
 
-            .arbeidsflatevalg-innhold {
-                .arbeidsflatevalg {
-                    flex-direction: column;
+            .arbeidsflatevalg {
+                flex-direction: column;
 
-                    li {
-                        width: auto;
-                    }
+                li {
+                    width: auto;
                 }
             }
         }
     }
 
-    @media (min-width: 1300px) {
+    @media (min-width: @desktopMaxWidth) {
         padding: 1.5rem 2rem;
 
         .topp-kolonner {
@@ -152,17 +135,13 @@
                 margin-top: 0;
             }
 
-            .arbeidsflatevalg-innhold {
-                margin-bottom: 0;
+            .arbeidsflatevalg {
+                margin: 0;
+                flex-direction: column;
+                justify-content: left;
 
-                .arbeidsflatevalg {
-                    margin: 0;
-                    flex-direction: column;
-                    justify-content: left;
-
-                    li {
-                        width: auto;
-                    }
+                li {
+                    width: auto;
                 }
             }
         }
