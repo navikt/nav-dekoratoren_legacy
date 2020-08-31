@@ -1,8 +1,8 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
-import './SokKnapper.less';
 import SokIkon from 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon';
+import './SokKnapper.less';
 
 interface Props {
     writtenInput?: string;
