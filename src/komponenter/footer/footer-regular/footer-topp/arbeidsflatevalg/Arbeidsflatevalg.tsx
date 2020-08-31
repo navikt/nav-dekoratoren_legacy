@@ -40,7 +40,6 @@ const Arbeidsflatevalg = () => {
                                 category: GACategory.Header,
                                 action: 'arbeidsflate-valg',
                             }}
-                            key={lenke.key}
                         />
                     </li>
                 ))}
