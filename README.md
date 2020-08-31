@@ -92,8 +92,8 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 Eksempel:<br>
 https://www.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3
 
-[1] Kombineres med parameteret **level**, **redirectToApp** og eventuelt react-komponenten ``<EnforceLoginLoader />`` fra https://github.com/navikt/nav-dekoratoren-moduler#readme <br>
-[2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen <br>
+[1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
+[2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
 [3] Språk vil automatisk settes client-side dersom nåværende url inneholder **/no/ (norsk)**, **/en/ (engelsk)** eller **/se/ (samisk)**, uavhengig av dette parameteret. <br>
 [4] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
 
