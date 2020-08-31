@@ -1,6 +1,6 @@
 import React from 'react';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
-import SokMenyIkon from 'komponenter/header/header-regular/desktop/sok-dropdown/sok-knapp/SokMenyIkon';
+import SokIkon from 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon';
 import { gaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
@@ -36,7 +36,7 @@ export const SokKnapp = () => {
             ariaControls={sokDropdownClassname}
             id={desktopSokKnappId}
         >
-            <SokMenyIkon isOpen={isOpen} />
+            <SokIkon isOpen={isOpen} />
         </MenylinjeKnapp>
     );
 };

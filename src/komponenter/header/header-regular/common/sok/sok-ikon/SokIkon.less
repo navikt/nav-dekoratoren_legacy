@@ -1,6 +1,6 @@
 @import (reference) '../../../../../../styling-variabler.less';
 
-.sok-meny-ikon {
+.sok-ikon {
     @width: 32px;
     @height: 24px;
     @circleRadius: 10px;
@@ -13,16 +13,8 @@
     height: @height;
     padding: 0;
     position: relative;
-    margin-right: 0.5em;
-
-    .line() {
-        position: absolute;
-        width: @width;
-        height: @stroke-width;
-        border: 0;
-        border-radius: 0;
-        background-color: @color;
-    }
+    display: block;
+    margin-right: 0.25rem;
 
     &__circle {
         border-radius: 50%;
@@ -32,6 +24,7 @@
         position: absolute;
         transform-origin: center;
         transition: 0.35s all ease-out;
+        display: block;
 
         &--open {
             opacity: 0;
@@ -47,19 +40,30 @@
     &__line-x {
         transform-origin: top left;
         transform: translate(
-                @circleRadius * (1 + cos(@handleAngle)),
-                @circleRadius * (1 + sin(@handleAngle))
+                (@circleRadius - 1px) * (1 + cos(@handleAngle)),
+                (@circleRadius - 1px) * (1 + sin(@handleAngle))
             )
             rotate(@handleAngle);
-        height: @stroke-width;
-        width: @circleRadius;
+        width: @circleRadius + 1px;
+        height: 0;
+        border: @stroke-width / 2 @color solid;
         background-color: @color;
         position: absolute;
         transition: 0.35s all ease-out;
+        border-radius: 1px;
+        display: block;
 
         &--open {
-            .line();
+            width: @width;
             transform-origin: center;
+        }
+    }
+
+    &__line-x {
+        visibility: hidden;
+
+        &--open {
+            visibility: visible;
         }
     }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import './SokKnapper.less';
+import SokIkon from 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon';
 
 interface Props {
     writtenInput?: string;
@@ -22,13 +23,13 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
                     )}`}
                     onClick={onReset}
                 >
-                    <div className={cls.element('ikon-container')}>
-                        <div className={cls.element('reset-line-x')} />
-                        <div className={cls.element('reset-line-y')} />
-                    </div>
-                    <div className={cls.element('knapp-tekst')}>
+                    <span className={cls.element('ikon-container')}>
+                        <span className={cls.element('reset-line-x')} />
+                        <span className={cls.element('reset-line-y')} />
+                    </span>
+                    <span className={cls.element('knapp-tekst')}>
                         <Tekst id="sok-reset" />
-                    </div>
+                    </span>
                 </button>
             )}
             <button
@@ -38,13 +39,14 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
                     'knapp-submit'
                 )}`}
             >
-                <div className={cls.element('ikon-container')}>
-                    <div className={cls.element('sok-circle')} />
-                    <div className={cls.element('sok-line')} />
-                </div>
-                <div className={cls.element('knapp-tekst')}>
+                <span className={cls.element('ikon-container')}>
+                    <SokIkon isOpen={false} />
+                    {/*<span className={cls.element('sok-circle')} />*/}
+                    {/*<span className={cls.element('sok-line')} />*/}
+                </span>
+                <span className={cls.element('knapp-tekst')}>
                     <Tekst id="sok-knapp" />
-                </div>
+                </span>
             </button>
         </div>
     );

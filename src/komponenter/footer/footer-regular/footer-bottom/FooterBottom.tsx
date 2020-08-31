@@ -54,7 +54,7 @@ const FooterBottom = () => {
     };
 
     return (
-        <section className="menylinje-bottom">
+        <div className="menylinje-bottom">
             <div className={cls.className}>
                 <div className={'top-row'}>
                     <NavLogoLenke
@@ -101,7 +101,7 @@ const FooterBottom = () => {
                     />
                 )}
             </div>
-        </section>
+        </div>
     );
 };
 

@@ -58,15 +58,18 @@
         height: 24px;
         padding: 0;
         position: relative;
+        display: block;
     }
 
     &__sok-line,
     &__sok-circle {
         position: absolute;
+        display: block;
     }
 
     &__reset-line-x,
     &__reset-line-y {
+        display: block;
         width: 28px;
         height: @stroke-width;
         background-color: @navBla;
@@ -99,6 +102,15 @@
             border-radius: 0 5px 5px 0;
             color: white;
             background-color: @navBla;
+
+            .sok-ikon {
+                &__line {
+                    background-color: @white;
+                }
+                & > * {
+                    border-color: @white;
+                }
+            }
 
             &:active,
             &:hover {

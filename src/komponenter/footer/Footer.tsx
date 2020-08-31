@@ -9,7 +9,7 @@ const Footer = () => {
     const { PARAMS } = useSelector((state: AppState) => state.environment);
     return (
         <div className={'decorator-wrapper'}>
-            <footer className="sitefooter" role="contentinfo">
+            <footer className="sitefooter">
                 {PARAMS.SIMPLE || PARAMS.SIMPLE_FOOTER ? (
                     <SimpleFooter />
                 ) : (
