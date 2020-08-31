@@ -59,19 +59,16 @@
         }
     }
 
+    &__line--open {
+        transform: translate(-4px, @middle) rotate(-225deg) scale(0.8);
+    }
+
     &__line-x {
         visibility: hidden;
 
         &--open {
             visibility: visible;
+            transform: translate(-4px, @middle) rotate(-315deg) scale(0.8);
         }
-    }
-
-    &__line--open {
-        transform: translate(-4px, @middle) rotate(-225deg) scale(0.8);
-    }
-
-    &__line-x--open {
-        transform: translate(-4px, @middle) rotate(-315deg) scale(0.8);
     }
 }
