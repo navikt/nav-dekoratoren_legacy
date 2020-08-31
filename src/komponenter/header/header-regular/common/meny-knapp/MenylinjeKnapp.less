@@ -25,17 +25,10 @@
 
     &:hover {
         outline: 1px black solid;
-        outline-offset: -10px -20px;
         cursor: pointer;
     }
 
-    @media (min-width: @desktopMinWidth) {
-        &-visning {
-            height: @height - @padding-y * 2;
-        }
-    }
-
-    &-tekst {
+    &__tekst {
         .typo-undertittel;
     }
 }

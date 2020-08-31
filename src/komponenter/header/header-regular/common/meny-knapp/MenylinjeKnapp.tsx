@@ -29,7 +29,7 @@ const MenylinjeKnapp = (props: Props) => {
             {props.children}
             {props.tekstId && (
                 <span
-                    className={`menylinje-knapp-tekst ${cls.element(
+                    className={`menylinje-knapp__tekst ${cls.element(
                         'knapp-tekst'
                     )}`}
                 >
