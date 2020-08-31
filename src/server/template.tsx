@@ -129,7 +129,7 @@ export const template = (req: Request) => {
             <!-- Scripts fetched by apps -->
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
-                <script type="text/javascript" src=${fileScript}></script>
+                <script src=${fileScript}></script>
             </div>
             <div id="skiplinks"></div>
             <div id="megamenu-resources"></div>
