@@ -10,10 +10,14 @@ export const initAmplitude = () => {
             includeReferrer: true,
             platform: window.location.toString(),
         });
+        logAmplitudeEvent('sidevisning');
     }
-    contentEngaged(1, () => {
+    
+    /*
+    contentEngaged(0, () => {
         logAmplitudeEvent('sidevisning');
     });
+    */
 };
 
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {

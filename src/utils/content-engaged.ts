@@ -50,9 +50,11 @@ const addEventListeners = function (w: any, pulseSec: number) {
 
 export function contentEngaged(seconds: number, callback: () => void) {
     const pulseSec = 3;
+    console.log("Setting event listeners");
     addEventListeners(window, pulseSec);
     const intervalID = window.setInterval(() => {
         if (getTimeEngaged() > seconds * 1000) {
+            console.log("Running callback");
             clearInterval(intervalID);
             callback();
         }
