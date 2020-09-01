@@ -12,12 +12,6 @@ export const initAmplitude = () => {
         });
         logAmplitudeEvent('sidevisning');
     }
-    
-    /*
-    contentEngaged(0, () => {
-        logAmplitudeEvent('sidevisning');
-    });
-    */
 };
 
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
