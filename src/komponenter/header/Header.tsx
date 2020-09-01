@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenypunkter } from 'store/reducers/menu-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { HeaderSimple } from 'komponenter/header/header-simple/HeaderSimple';
 import { HeaderRegular } from 'komponenter/header/header-regular/HeaderRegular';
-import Driftsmeldinger from './driftsmeldinger/Driftsmeldinger';
 import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
@@ -14,32 +13,37 @@ import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 import { fetchDriftsmeldinger } from 'store/reducers/driftsmeldinger-duck';
-import { fetchFeatureToggles } from 'api/api';
+import { fetchFeatureToggles, Status } from 'api/api';
 import { ActionType } from 'store/actions';
-import { loadVergic } from 'utils/scripts';
+import { loadVergic } from 'utils/external-scripts';
 import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/browser-support-msg/BrowserSupportMsg';
+import { getLoginUrl } from 'utils/login';
+import Driftsmeldinger from './driftsmeldinger/Driftsmeldinger';
+import { postMessageToApp } from '../../utils/messages';
 
 const unleashCacheCookie = 'decorator-unleash-cache';
+const decoratorContextCookie = 'decorator-context';
+const stateSelector = (state: AppState) => ({
+    innloggingsstatus: state.innloggingsstatus,
+    arbeidsflate: state.arbeidsflate.status,
+    language: state.language.language,
+    featureToggles: state.featureToggles,
+    environment: state.environment,
+});
 
 export const Header = () => {
     const dispatch = useDispatch();
+    const [sentAuthToApp, setSentAuthToApp] = useState(false);
+    const { environment } = useSelector(stateSelector);
+    const { arbeidsflate } = useSelector(stateSelector);
+    const { innloggingsstatus } = useSelector(stateSelector);
+    const { authenticated } = innloggingsstatus.data;
+    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = environment;
+    const currentFeatureToggles = useSelector(stateSelector).featureToggles;
     const [cookies, setCookie] = useCookies([
-        'decorator-context',
+        decoratorContextCookie,
         unleashCacheCookie,
     ]);
-    const erInnlogget = useSelector(
-        (state: AppState) => state.innloggingsstatus.data.authenticated
-    );
-    const currentFeatureToggles = useSelector(
-        (state: AppState) => state.featureToggles
-    );
-    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = useSelector(
-        (state: AppState) => state.environment
-    );
-    const defaultToPerson = () => {
-        dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
-        setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
-    };
 
     // Handle feature toggles
     useEffect(() => {
@@ -48,7 +52,24 @@ export const Header = () => {
         }
     }, [currentFeatureToggles]);
 
-    // External data
+    // Handle enforced login
+    useEffect(() => {
+        const { status, data } = innloggingsstatus;
+        if (PARAMS.ENFORCE_LOGIN && status === Status.OK) {
+            const { authenticated, securityLevel } = data;
+            const insufficientPrivileges =
+                PARAMS.LEVEL === 'Level4' && securityLevel === '3';
+
+            if (!authenticated || insufficientPrivileges) {
+                window.location.href = getLoginUrl(environment, arbeidsflate);
+            } else if (!sentAuthToApp) {
+                postMessageToApp('auth', data);
+                setSentAuthToApp(true);
+            }
+        }
+    }, [PARAMS.ENFORCE_LOGIN, PARAMS.LEVEL, innloggingsstatus]);
+
+    // Handle external data
     useEffect(() => {
         fetchDriftsmeldinger(APP_URL)(dispatch);
         hentInnloggingsstatus(APP_URL)(dispatch);
@@ -99,12 +120,18 @@ export const Header = () => {
         }
     }, []);
 
+    // Context utils
+    const defaultToPerson = () => {
+        dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
+        setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
+    };
+
     // Fetch notifications
     useEffect(() => {
-        if (erInnlogget) {
+        if (authenticated) {
             hentVarsler(APP_URL)(dispatch);
         }
-    }, [erInnlogget]);
+    }, [authenticated]);
 
     // Change language
     const checkUrlForLanguage = () => {
