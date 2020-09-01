@@ -9,9 +9,13 @@ import { finnTekst } from 'tekster/finn-tekst';
 import { getResizeObserver } from 'utils/resize-observer';
 import debounce from 'lodash.debounce';
 import './ChatbotWrapper.less';
+import { gradualRolloutFeatureToggle } from 'utils/gradual-rollout-feature-toggle';
 
 // Prevents nodejs renderer crash
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
+
+export const isEnonicPage = () =>
+    /(nav.no|^)(\/no|\/en|\/se)/.test(document.location.origin);
 
 const humanChatIsOpen = (serverTime: number) => {
     const now = moment(serverTime).tz('Europe/Oslo');
@@ -80,9 +84,18 @@ export const ChatbotWrapper = ({
         const chatbotSessionActive = !!cookies['chatbot-frida_config'];
         const chatbotVersion122IsMounted =
             document.getElementsByClassName('gxKraP').length > 0;
+
+        const enonicFeatureToggle =
+            isEnonicPage() &&
+            gradualRolloutFeatureToggle(
+                'enonic-chatbot',
+                79,
+                moment('2020-09-10')
+            );
+
         setMountChatbot(
             !chatbotVersion122IsMounted &&
-                (chatbotSessionActive || paramChatbot)
+                (chatbotSessionActive || paramChatbot || enonicFeatureToggle)
         );
     }, []);
 
