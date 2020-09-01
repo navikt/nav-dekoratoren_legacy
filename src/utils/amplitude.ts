@@ -1,4 +1,3 @@
-import { contentEngaged } from './content-engaged';
 import amplitude from 'amplitude-js';
 
 export const initAmplitude = () => {
