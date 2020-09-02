@@ -89,8 +89,8 @@ export const ChatbotWrapper = ({
             isEnonicPage() &&
             gradualRolloutFeatureToggle(
                 'enonic-chatbot',
-                79,
-                moment('2020-09-10')
+                50,
+                moment('2020-10-01')
             );
 
         setMountChatbot(
