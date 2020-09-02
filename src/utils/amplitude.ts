@@ -1,4 +1,3 @@
-import { contentEngaged } from './content-engaged';
 import amplitude from 'amplitude-js';
 
 export const initAmplitude = () => {
@@ -10,10 +9,8 @@ export const initAmplitude = () => {
             includeReferrer: true,
             platform: window.location.toString(),
         });
-    }
-    contentEngaged(1, () => {
         logAmplitudeEvent('sidevisning');
-    });
+    }
 };
 
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
