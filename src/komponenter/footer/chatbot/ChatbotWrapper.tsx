@@ -15,7 +15,7 @@ import { gradualRolloutFeatureToggle } from 'utils/gradual-rollout-feature-toggl
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
 export const isEnonicPage = () =>
-    /(nav.no|^)(\/no|\/en|\/se)/.test(document.location.origin);
+    /(nav.no|^)(\/no|\/en|\/se)/.test(document.location.href);
 
 const humanChatIsOpen = (serverTime: number) => {
     const now = moment(serverTime).tz('Europe/Oslo');
