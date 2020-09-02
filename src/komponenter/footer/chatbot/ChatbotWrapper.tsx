@@ -89,7 +89,7 @@ export const ChatbotWrapper = ({
             isEnonicPage() &&
             gradualRolloutFeatureToggle(
                 'enonic-chatbot',
-                50,
+                100,
                 moment('2020-10-01')
             );
 
