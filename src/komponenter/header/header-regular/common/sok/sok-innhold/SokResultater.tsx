@@ -47,7 +47,10 @@ export const SokResultater = (props: Props) => {
             ) : itemsFiltered ? (
                 itemsFiltered.map((item, index) => {
                     return (
-                        <li key={index}>
+                        <li
+                            key={index}
+                            style={{ '--index': index } as React.CSSProperties}
+                        >
                             <a
                                 id={getKbId(KbNavGroup.Sok, {
                                     col: 0,

@@ -107,29 +107,29 @@ export const template = (req: Request) => {
                 align-items: center;
             }
             </style>
+        </head>
+        <body>
             <!-- Styling fetched by apps -->
             <div id="styles">
                 ${HtmlMetaTags}
                 <link href="${fileCss}" rel="stylesheet" />
             </div>
-        </head>
-        <body>
             <div class="decorator-dev-container">
                 <!-- Header fetched by apps -->
                 <div id="${headerId}">
-                    <section id="decorator-header">${HtmlHeader}</section>
+                    <div id="decorator-header">${HtmlHeader}</div>
                 </div>
                 <div class="decorator-dummy-app">
                 </div>
                 <!-- Footer fetched by apps -->
                 <div id="${footerId}">
-                    <section id="decorator-footer">${HtmlFooter}</section>
+                    <div id="decorator-footer">${HtmlFooter}</div>
                 </div>
             </div>
             <!-- Scripts fetched by apps -->
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
-                <script type="text/javascript" src=${fileScript}></script>
+                <script src=${fileScript}></script>
             </div>
             <div id="skiplinks"></div>
             <div id="megamenu-resources"></div>

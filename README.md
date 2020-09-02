@@ -59,13 +59,13 @@ Sett inn noen linjer html og last inn dekoratøren client-side:
       <link href="{MILJO_URL}/css/client.css" rel="stylesheet" /> 
   </head>
   <body>
-    <section id="decorator-header"></section>
+    <div id="decorator-header"></div>
     {
       DIN_APP
     }
-    <section id="decorator-footer"></section>
+    <div id="decorator-footer"></div>
     <div id="decorator-env" data-src="{MILJO_URL}/env?{DINE_PARAMETERE}"></div>
-    <script type="text/javascript" src="{MILJO_URL}/client.js"></script>
+    <script src="{MILJO_URL}/client.js"></script>
   </body>
 </html>
 ```

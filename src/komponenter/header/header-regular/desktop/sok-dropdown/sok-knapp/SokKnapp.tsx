@@ -1,8 +1,6 @@
 import React from 'react';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
-import SokMenyIkon from 'komponenter/header/header-regular/desktop/sok-dropdown/sok-knapp/SokMenyIkon';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import Tekst from 'tekster/finn-tekst';
+import SokIkon from 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon';
 import { gaEvent } from 'utils/google-analytics';
 import { GACategory } from 'utils/google-analytics';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
@@ -31,16 +29,14 @@ export const SokKnapp = () => {
 
     return (
         <MenylinjeKnapp
+            tekstId={'sok-knapp'}
             onClick={toggleMenu}
             isOpen={isOpen}
             classname={sokDropdownClassname}
             ariaControls={sokDropdownClassname}
             id={desktopSokKnappId}
         >
-            <SokMenyIkon isOpen={isOpen} />
-            <Undertittel>
-                <Tekst id={'sok-knapp'} />
-            </Undertittel>
+            <SokIkon isOpen={isOpen} />
         </MenylinjeKnapp>
     );
 };
