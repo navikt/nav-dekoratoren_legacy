@@ -4,80 +4,73 @@
     width: 100%;
 }
 
-.arbeidsflatevalg-innhold {
-    margin-bottom: 0;
+.arbeidsflatevalg {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
 
-    .arbeidsflatevalg {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin: 0;
-
-        li {
-            width: auto;
-            margin-bottom: 0;
-        }
+    li {
+        margin-bottom: 0;
     }
 
-    .lenkepanel {
+    .arbeidsflate-lenkepanel {
+        border-color: @white;
         background-color: @navBlaDarken40;
-        color: white;
-        border: 1px solid white;
         border-radius: 8px;
-        text-decoration: none;
 
-        &:hover:not(:focus) .lenkepanel__heading,
-        &--hover:not(:focus) .lenkepanel__heading {
-            color: white;
+        .lenkepanel__heading {
+            margin-bottom: 0.5rem;
         }
 
-        &__heading {
-            min-height: 101px;
+        .lenkepanel__indikator,
+        .lenkepanel__heading,
+        .arbeidsflate-lenkepanel__stikkord {
+            color: @white;
         }
 
-        .typo-undertittel {
-            margin-bottom: 0.6rem;
+        &__innhold {
+            min-height: 74px;
         }
-    }
 
-    .lenkepanel:focus {
-        color: @navBla;
-        background-color: white;
+        &:hover {
+            border-color: @white;
+            background-color: transparent;
+
+            .lenkepanel__indikator,
+            .lenkepanel__heading,
+            .arbeidsflate-lenkepanel__stikkord {
+                color: @white;
+            }
+        }
+
+        &:focus {
+            border-color: @white;
+            background-color: @white;
+
+            .lenkepanel__indikator,
+            .lenkepanel__heading,
+            .arbeidsflate-lenkepanel__stikkord {
+                color: @navBla;
+            }
+        }
     }
 
     @media (min-width: @desktopMinWidth) {
-        .arbeidsflatevalg {
-            flex-direction: row;
-            justify-content: space-between;
-            margin: 0;
-
-            li {
-                width: 48%;
-                margin-bottom: 0;
-            }
+        li {
+            width: 48%;
         }
     }
 
     @media (min-width: @smallDesktopLimitWidth) {
-        .arbeidsflatevalg {
-            flex-direction: column;
+        flex-direction: column;
 
-            li {
-                width: auto;
-            }
+        li {
+            margin-bottom: 1rem;
+            width: auto;
         }
     }
 
-    @media (min-width: 1300px) {
-        margin-bottom: 0;
-
-        .arbeidsflatevalg {
-            flex-direction: column;
-            justify-content: left;
-
-            li {
-                width: auto;
-            }
-        }
+    @media (min-width: @desktopMaxWidth) {
+        justify-content: left;
     }
 }

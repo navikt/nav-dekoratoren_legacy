@@ -5,64 +5,57 @@
     padding: 1rem 1rem;
     background-color: @navBlaDarken40;
 
+    .lenke {
+        color: white;
+        padding: 0.625rem 0;
+    }
+
     .lenke:focus {
         color: @navBla;
         background-color: white;
     }
 
+    ul {
+        margin: 0;
+    }
+
     .topp-kolonner {
-        .menylenker-seksjon .menylenker-overskrift {
-            font-weight: bolder;
-            margin-bottom: 1.2rem;
+        .menylenker-seksjon {
+            margin-bottom: 2rem;
         }
 
-        .menylenker-seksjon.til-toppen {
-            margin: 1rem 0;
-            padding-left: 0;
+        .menylenker-overskrift {
+            font-weight: bolder;
+            margin-bottom: 0.5rem;
+        }
 
-            .til-toppen-innhold {
-                display: flex;
-                justify-content: start;
-                .lenke-med-ikon {
-                    width: 100%;
-                    padding: 1rem 0;
-                    margin-top: -1rem;
-                    text-decoration: none;
+        .til-toppen {
+            margin: 1rem 0;
+        }
+
+        .til-toppen-innhold {
+            display: flex;
+            justify-content: start;
+            .lenke-med-ikon {
+                width: 100%;
+                padding: 1rem 0;
+                margin-top: -1rem;
+                text-decoration: none;
+                svg {
+                    fill: white;
+                    stroke: white;
+                }
+                &:hover {
+                    text-decoration: underline;
+                }
+                &:focus {
                     svg {
-                        fill: white;
-                        stroke: white;
-                    }
-                    &:hover {
-                        text-decoration: underline;
-                    }
-                    &:focus {
-                        svg {
-                            fill: @navBla;
-                            stroke: @navBla;
-                        }
+                        fill: @navBla;
+                        stroke: @navBla;
                     }
                 }
             }
         }
-
-        .menylenker-seksjon.venstre,
-        .menylenker-seksjon.midt,
-        .menylenker-seksjon.hoyre {
-            padding-left: 0;
-        }
-    }
-
-    ul {
-        margin-top: 0.8rem;
-        margin-bottom: 2.5rem;
-    }
-
-    li {
-        margin-bottom: 1.3rem;
-    }
-
-    .lenke {
-        color: white;
     }
 
     @media (min-width: @desktopMinWidth) {
@@ -76,21 +69,21 @@
             .menylenker-seksjon.til-toppen {
                 width: 100%;
                 margin: 1rem 0 2rem 0;
-                padding-left: 0;
             }
 
-            .menylenker-seksjon.venstre {
-                width: 31%;
-                padding-left: 0;
-            }
+            .menylenker-seksjon.venstre,
             .menylenker-seksjon.midt,
             .menylenker-seksjon.hoyre {
                 width: 31%;
-                padding-left: 2rem;
             }
 
-            .menylenker-seksjon.arbeidsflate {
-                margin-top: 0;
+            .menylenker-seksjon.midt,
+            .menylenker-seksjon.hoyre {
+                padding-left: 1rem;
+            }
+
+            .arbeidsflate {
+                margin-bottom: 1rem;
             }
         }
     }
@@ -100,7 +93,6 @@
 
         .topp-kolonner {
             .menylenker-seksjon.til-toppen {
-                padding-left: 0;
                 margin: 0 0 2rem 0;
                 width: 100%;
             }
@@ -112,29 +104,20 @@
             .menylenker-seksjon.midt,
             .menylenker-seksjon.hoyre {
                 width: 23%;
-                padding-left: 0;
             }
 
             .menylenker-seksjon.arbeidsflate {
                 width: 29%;
-                margin-top: 0;
             }
 
-            .arbeidsflatevalg-innhold {
-                .arbeidsflatevalg {
-                    flex-direction: column;
-
-                    li {
-                        width: auto;
-                    }
-                }
+            .arbeidsflatevalg {
+                flex-direction: column;
+                padding-left: 1rem;
             }
         }
     }
 
-    @media (min-width: 1300px) {
-        padding: 1.5rem 2rem;
-
+    @media (min-width: @desktopMaxWidth) {
         .topp-kolonner {
             .menylenker-seksjon.til-toppen {
                 width: 15%;
@@ -149,21 +132,10 @@
 
             .menylenker-seksjon.arbeidsflate {
                 width: 24%;
-                margin-top: 0;
             }
 
-            .arbeidsflatevalg-innhold {
-                margin-bottom: 0;
-
-                .arbeidsflatevalg {
-                    margin: 0;
-                    flex-direction: column;
-                    justify-content: left;
-
-                    li {
-                        width: auto;
-                    }
-                }
+            .arbeidsflatevalg {
+                justify-content: left;
             }
         }
     }

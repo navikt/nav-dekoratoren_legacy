@@ -9,33 +9,26 @@
     border: none;
     box-shadow: none;
     text-decoration: none;
-    padding: 0;
-    border-radius: 0.125em;
+    border-radius: 2px;
+
+    height: 45px;
+    display: flex;
+    align-items: center;
+    color: @navBla;
+    padding: @padding-y @padding-x;
 
     .header-knapp-focus-mixin();
 
-    &-visning {
-        height: 45px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        color: @navBla;
-        padding: @padding-y @padding-x;
-
-        @media (max-width: @smallMobileMaxWidth) {
-            padding: 4px;
-        }
+    @media (max-width: @smallMobileMaxWidth) {
+        padding: 4px;
     }
 
     &:hover {
         outline: 1px black solid;
-        outline-offset: -10px -20px;
         cursor: pointer;
     }
 
-    @media (min-width: @desktopMinWidth) {
-        &-visning {
-            height: @height - @padding-y * 2;
-        }
+    &__tekst {
+        .typo-undertittel;
     }
 }
