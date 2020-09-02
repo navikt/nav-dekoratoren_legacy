@@ -8,8 +8,8 @@ import moment from 'moment-timezone';
 import { finnTekst } from 'tekster/finn-tekst';
 import { getResizeObserver } from 'utils/resize-observer';
 import debounce from 'lodash.debounce';
-import './ChatbotWrapper.less';
 import { gradualRolloutFeatureToggle } from 'utils/gradual-rollout-feature-toggle';
+import './ChatbotWrapper.less';
 
 // Prevents nodejs renderer crash
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
