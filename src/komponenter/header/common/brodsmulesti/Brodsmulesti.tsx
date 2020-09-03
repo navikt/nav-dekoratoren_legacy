@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from 'utils/bem';
 import { Bilde } from '../../../common/bilde/Bilde';
 import HomeIcon from 'ikoner/home.svg';
-import './Brodsmulesti.less';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { HoyreChevron } from 'nav-frontend-chevron';
+import './Brodsmulesti.less';
 
 export interface Breadcrumb {
     url: string;
@@ -16,27 +16,44 @@ export interface Breadcrumb {
 
 export const Brodsmulesti = () => {
     const { environment } = useSelector((state: AppState) => state);
+    const [breadcrumbs, setBreadcrumbs] = useState(
+        environment.PARAMS.BREADCRUMBS
+    );
     const { XP_BASE_URL } = environment;
-    const { BREADCRUMBS } = environment.PARAMS;
     const cls = BEMHelper('brodsmulesti');
 
-    return BREADCRUMBS ? (
+    useEffect(() => {
+        const receiveMessage = ({ data }: MessageEvent) => {
+            const { source, event, payload } = data;
+            if (source === 'decorator' && event === 'breadcrumbs') {
+                setBreadcrumbs(payload);
+            }
+        };
+        window.addEventListener('message', receiveMessage, false);
+        return () => {
+            window.removeEventListener('message', receiveMessage, false);
+        };
+    }, []);
+
+    return breadcrumbs ? (
         <div className={cls.element('container')}>
             <Bilde asset={HomeIcon} />
             <Lenke href={XP_BASE_URL}>
                 <Normaltekst>nav.no</Normaltekst>
             </Lenke>
             <HoyreChevron />
-            {BREADCRUMBS.map((breadcrumb, i) => {
-                return (
-                    <>
+            {breadcrumbs.map((breadcrumb, i) => (
+                <>
+                    {i + 1 !== breadcrumbs.length ? (
                         <Lenke key={i} href={breadcrumb.url}>
                             {breadcrumb.name}
                         </Lenke>
-                        <HoyreChevron />
-                    </>
-                );
-            })}
+                    ) : (
+                        <Normaltekst>{breadcrumb.name}</Normaltekst>
+                    )}
+                    {i + 1 !== breadcrumbs.length && <HoyreChevron />}
+                </>
+            ))}
         </div>
     ) : null;
 };
