@@ -4,12 +4,16 @@
     &__container {
         display: flex;
         flex-direction: row;
-        align-content: center;
+        align-items: center;
         flex-wrap: wrap;
         max-width: 1344px;
         margin: 0 auto;
         width: 100%;
         padding: 1rem 1rem;
+
+        & > * {
+            margin: 0 0.25rem;
+        }
 
         @media (min-width: @desktopMinWidth) {
             padding: 1rem 1rem;
@@ -19,6 +23,12 @@
         }
         @media (min-width: @desktopMaxWidth) {
             padding: 1.5rem 0;
+        }
+
+        .chevron--hoyre {
+            color: #78706a;
+            display: inline-block;
+            margin: 0 0.5em;
         }
     }
 }
