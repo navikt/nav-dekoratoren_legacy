@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Lenke from 'nav-frontend-lenker';
@@ -43,7 +43,7 @@ export const Brodsmulesti = () => {
             </Lenke>
             <HoyreChevron />
             {breadcrumbs.map((breadcrumb, i) => (
-                <>
+                <Fragment key={i}>
                     {i + 1 !== breadcrumbs.length ? (
                         <Lenke key={i} href={breadcrumb.url}>
                             {breadcrumb.name}
@@ -52,7 +52,7 @@ export const Brodsmulesti = () => {
                         <Normaltekst>{breadcrumb.name}</Normaltekst>
                     )}
                     {i + 1 !== breadcrumbs.length && <HoyreChevron />}
-                </>
+                </Fragment>
             ))}
         </div>
     ) : null;
