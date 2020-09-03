@@ -1,6 +1,7 @@
 import { MenuValue } from 'utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
 import { Language } from './language-duck';
+import { Breadcrumb } from '../../komponenter/header/common/brodsmulesti/Brodsmulesti';
 
 export interface EnvironmentState {
     XP_BASE_URL: string;
@@ -27,6 +28,7 @@ export interface EnvironmentState {
         LEVEL: string;
         FEEDBACK: boolean;
         CHATBOT: boolean;
+        BREADCRUMBS?: Breadcrumb[];
     };
 
     COOKIES: {

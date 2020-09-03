@@ -51,6 +51,9 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
                 LEVEL: (req.query.level || 'Level3') as string,
                 FEEDBACK: !(req.query.feedback === 'false'),
                 CHATBOT: req.query.chatbot === 'true',
+                ...(req.query.breadcrumbs && {
+                    BREADCRUMBS: JSON.parse(req.query.breadcrumbs as string),
+                }),
             },
         }),
         ...(cookies && {

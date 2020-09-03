@@ -18,7 +18,8 @@ import { ActionType } from 'store/actions';
 import { loadVergic } from 'utils/external-scripts';
 import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/browser-support-msg/BrowserSupportMsg';
 import { getLoginUrl } from 'utils/login';
-import Driftsmeldinger from './driftsmeldinger/Driftsmeldinger';
+import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
+import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
 import { postMessageToApp } from '../../utils/messages';
 
 const unleashCacheCookie = 'decorator-unleash-cache';
@@ -164,6 +165,7 @@ export const Header = () => {
                 )}
             </header>
             <Driftsmeldinger />
+            <Brodsmulesti />
         </div>
     );
 };

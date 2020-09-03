@@ -1,0 +1,24 @@
+@import (reference) '../../../../styling-variabler.less';
+
+.brodsmulesti {
+    &__container {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        flex-wrap: wrap;
+        max-width: 1344px;
+        margin: 0 auto;
+        width: 100%;
+        padding: 1rem 1rem;
+
+        @media (min-width: @desktopMinWidth) {
+            padding: 1rem 1rem;
+        }
+        @media (min-width: @smallDesktopLimitWidth) {
+            padding: 1.5rem 2rem;
+        }
+        @media (min-width: @desktopMaxWidth) {
+            padding: 1.5rem 0;
+        }
+    }
+}

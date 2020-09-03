@@ -1,6 +1,6 @@
 import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { LenkeMedGA } from '../../common/lenke-med-ga/LenkeMedGA';
+import { LenkeMedGA } from '../../../common/lenke-med-ga/LenkeMedGA';
 import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { GACategory } from 'utils/google-analytics';
 import { useSelector } from 'react-redux';
