@@ -52,7 +52,7 @@ export const SprakVelger = () => {
     const { language } = useSelector((state: AppState) => state.language);
     const { PARAMS } = useSelector((state: AppState) => state.environment);
     const avilableLanguages = PARAMS.AVAILABLE_LANGUAGES;
-    const [cookies, setCookie] = useCookies([
+    const [, setCookie] = useCookies([
         decoratorLanguageCookie,
         decoratorContextCookie,
         unleashCacheCookie,
