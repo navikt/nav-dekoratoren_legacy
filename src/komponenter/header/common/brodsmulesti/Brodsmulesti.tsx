@@ -37,23 +37,25 @@ export const Brodsmulesti = () => {
 
     return breadcrumbs ? (
         <div className={cls.element('container')}>
-            <Bilde asset={HomeIcon} />
-            <Lenke href={XP_BASE_URL}>
-                <Normaltekst>nav.no</Normaltekst>
-            </Lenke>
-            <HoyreChevron />
-            {breadcrumbs.map((breadcrumb, i) => (
-                <Fragment key={i}>
-                    {i + 1 !== breadcrumbs.length ? (
-                        <Lenke key={i} href={breadcrumb.url}>
-                            {breadcrumb.name}
-                        </Lenke>
-                    ) : (
-                        <Normaltekst>{breadcrumb.name}</Normaltekst>
-                    )}
-                    {i + 1 !== breadcrumbs.length && <HoyreChevron />}
-                </Fragment>
-            ))}
+            <div className={cls.element('content')}>
+                <Bilde asset={HomeIcon} />
+                <Lenke href={XP_BASE_URL}>
+                    <Normaltekst>nav.no</Normaltekst>
+                </Lenke>
+                <HoyreChevron />
+                {breadcrumbs.map((breadcrumb, i) => (
+                    <Fragment key={i}>
+                        {i + 1 !== breadcrumbs.length ? (
+                            <Lenke key={i} href={breadcrumb.url}>
+                                {breadcrumb.name}
+                                <HoyreChevron />
+                            </Lenke>
+                        ) : (
+                            <Normaltekst>{breadcrumb.name}</Normaltekst>
+                        )}
+                    </Fragment>
+                ))}
+            </div>
         </div>
     ) : null;
 };
