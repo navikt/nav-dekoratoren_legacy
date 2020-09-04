@@ -51,7 +51,7 @@ export const SprakVelger = () => {
     const store = useStore();
     const { language } = useSelector((state: AppState) => state.language);
     const { PARAMS } = useSelector((state: AppState) => state.environment);
-    const avilableLanguages = PARAMS.AVAILABLE_LANGUAGES;
+    const availableLanguages = PARAMS.AVAILABLE_LANGUAGES;
     const [, setCookie] = useCookies([
         decoratorLanguageCookie,
         decoratorContextCookie,
@@ -59,7 +59,7 @@ export const SprakVelger = () => {
     ]);
 
     const options: LocaleOption[] =
-        avilableLanguages?.map((language) => ({
+        availableLanguages?.map((language) => ({
             label: option(
                 finnTekst(
                     `sprak`,
