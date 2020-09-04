@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // @ts-ignore
 import Globe from 'ikoner/globe.svg';
+import Check from 'ikoner/check.svg';
 import Select from 'react-select';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { HoyreChevron } from 'nav-frontend-chevron';
@@ -15,8 +16,9 @@ import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { unleashCacheCookie } from 'komponenter/header/Header';
 import { decoratorLanguageCookie } from 'komponenter/header/Header';
 import { decoratorContextCookie } from 'komponenter/header/Header';
-import { Bilde } from '../../../common/bilde/Bilde';
 import { useCookies } from 'react-cookie';
+import PilOppHvit from 'ikoner/meny/PilOppHvit';
+import { Bilde } from '../../../common/bilde/Bilde';
 import './SprakVelger.less';
 
 const cssPrefix = 'sprakvelger';
@@ -33,11 +35,16 @@ type LocaleOption = {
     label: JSX.Element;
 };
 
-const option = (text: string) => (
-    <Normaltekst>
-        <HoyreChevron className={`${cssPrefix}__chevron`} />
-        {text}
-    </Normaltekst>
+const option = (text: string, selected: boolean) => (
+    <div className={'sprakvelger__option'}>
+        <Normaltekst>
+            <HoyreChevron className={`${cssPrefix}__chevron`} />
+            <span>{text}</span>
+        </Normaltekst>
+        {selected && (
+            <Bilde asset={Check} className={'sprakvelger__option-icon'} />
+        )}
+    </div>
 );
 
 const mapLocaleToLanguage: { [key: string]: Language } = {
@@ -59,7 +66,7 @@ export const SprakVelger = () => {
     ]);
 
     const [options, setOptions] = useState(
-        transformOptions(availableLanguages || [])
+        transformOptions(availableLanguages || [], language)
     );
 
     // Receive available languages from frontend-apps
@@ -67,7 +74,7 @@ export const SprakVelger = () => {
         const receiveMessage = ({ data }: MessageEvent) => {
             const { source, event, payload } = data;
             if (source === 'decorator' && event === 'availableLanguages') {
-                setOptions(transformOptions(payload));
+                setOptions(transformOptions(payload, language));
             }
         };
         window.addEventListener('message', receiveMessage, false);
@@ -140,10 +147,15 @@ export const SprakVelger = () => {
 };
 
 // Utils
-const transformOptions = (language: LanguageParam[]) =>
-    language.map((language) => {
+const transformOptions = (
+    languages: LanguageParam[],
+    selectedLanguage: Language
+) =>
+    languages.map((language) => {
+        const mappedLanguage = mapLocaleToLanguage[language.locale];
         const defaultLabel = option(
-            finnTekst(`sprak`, mapLocaleToLanguage[language.locale]) as string
+            finnTekst(`sprak`, mappedLanguage) as string,
+            mappedLanguage === selectedLanguage
         );
 
         return {
