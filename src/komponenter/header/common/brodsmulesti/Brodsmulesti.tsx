@@ -40,14 +40,14 @@ export const Brodsmulesti = () => {
             <div className={cls.element('content')}>
                 <Bilde asset={HomeIcon} />
                 <Lenke href={XP_BASE_URL}>
-                    <Normaltekst>nav.no</Normaltekst>
+                    <span>nav.no</span>
+                    <HoyreChevron />
                 </Lenke>
-                <HoyreChevron />
                 {breadcrumbs.map((breadcrumb, i) => (
                     <Fragment key={i}>
                         {i + 1 !== breadcrumbs.length ? (
                             <Lenke key={i} href={breadcrumb.url}>
-                                {breadcrumb.name}
+                                <span>{breadcrumb.name}</span>
                                 <HoyreChevron />
                             </Lenke>
                         ) : (
