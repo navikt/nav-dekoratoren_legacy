@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // @ts-ignore
 import Globe from 'ikoner/globe.svg';
 import Select from 'react-select';
@@ -9,7 +9,7 @@ import { ValueType } from 'react-select/src/types';
 import { finnTekst } from 'tekster/finn-tekst';
 import { useSelector, useStore } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { languageDuck } from 'store/reducers/language-duck';
+import { languageDuck, LanguageParam } from 'store/reducers/language-duck';
 import { Language } from 'store/reducers/language-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { unleashCacheCookie } from 'komponenter/header/Header';
@@ -58,17 +58,27 @@ export const SprakVelger = () => {
         unleashCacheCookie,
     ]);
 
-    const options: LocaleOption[] =
-        availableLanguages?.map((language) => ({
-            label: option(
-                finnTekst(
-                    `sprak`,
-                    mapLocaleToLanguage[language.locale]
-                ) as string
-            ),
-            language: language.locale,
-            value: language.url,
-        })) || [];
+    const [options, setOptions] = useState(
+        transformOptions(availableLanguages || [])
+    );
+
+    // Receive available languages from frontend-apps
+    useEffect(() => {
+        const receiveMessage = ({ data }: MessageEvent) => {
+            const { source, event, payload } = data;
+            if (source === 'decorator' && event === 'availableLanguages') {
+                setOptions(transformOptions(payload));
+            }
+        };
+        window.addEventListener('message', receiveMessage, false);
+        return () => {
+            window.removeEventListener('message', receiveMessage, false);
+        };
+    }, []);
+
+    if (!options) {
+        return null;
+    }
 
     const placeholder = (
         <span className={`${cssPrefix}__placeholder`}>
@@ -128,3 +138,17 @@ export const SprakVelger = () => {
         </div>
     );
 };
+
+// Utils
+const transformOptions = (language: LanguageParam[]) =>
+    language.map((language) => {
+        const defaultLabel = option(
+            finnTekst(`sprak`, mapLocaleToLanguage[language.locale]) as string
+        );
+
+        return {
+            label: defaultLabel,
+            language: language.locale,
+            value: language.url,
+        };
+    });

@@ -155,6 +155,23 @@ export const Header = () => {
         checkUrlForLanguage();
     }, []);
 
+    // Send ready message to applications
+    useEffect(() => {
+        const receiveMessage = ({ data }: MessageEvent) => {
+            const { source, event } = data;
+            if (source === 'app' && event === 'ready') {
+                window.postMessage(
+                    { source: 'decorator', event: 'ready' },
+                    window.location.origin
+                );
+            }
+        };
+        window.addEventListener('message', receiveMessage, false);
+        return () => {
+            window.removeEventListener('message', receiveMessage, false);
+        };
+    }, []);
+
     return (
         <div className={'decorator-wrapper'}>
             <HeadElements />
