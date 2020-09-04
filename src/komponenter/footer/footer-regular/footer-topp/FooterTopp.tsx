@@ -13,6 +13,7 @@ import { LinksLoader } from '../../../common/content-loaders/LinkLoader';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import { Language } from 'store/reducers/language-duck';
 import './FooterTopp.less';
+import { SprakVelger } from '../../common/sprakvelger/SprakVelger';
 
 const FooterTopp = () => {
     const cls = BEMHelper('menylinje-topp');
@@ -77,7 +78,11 @@ const FooterTopp = () => {
                                   {columnNode.displayName}
                               </Undertittel>
                               <ul>
-                                  <FooterLenker node={columnNode} />
+                                  {i === 1 ? (
+                                      <SprakVelger />
+                                  ) : (
+                                      <FooterLenker node={columnNode} />
+                                  )}
                               </ul>
                           </div>
                       ))

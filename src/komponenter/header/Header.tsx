@@ -22,8 +22,10 @@ import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
 import { postMessageToApp } from '../../utils/messages';
 
-const unleashCacheCookie = 'decorator-unleash-cache';
-const decoratorContextCookie = 'decorator-context';
+export const unleashCacheCookie = 'decorator-unleash-cache';
+export const decoratorContextCookie = 'decorator-context';
+export const decoratorLanguageCookie = 'decorator-language';
+
 const stateSelector = (state: AppState) => ({
     innloggingsstatus: state.innloggingsstatus,
     arbeidsflate: state.arbeidsflate.status,
@@ -42,6 +44,7 @@ export const Header = () => {
     const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
     const [cookies, setCookie] = useCookies([
+        decoratorLanguageCookie,
         decoratorContextCookie,
         unleashCacheCookie,
     ]);
@@ -138,12 +141,12 @@ export const Header = () => {
     const checkUrlForLanguage = () => {
         if (PARAMS.LANGUAGE !== Language.IKKEBESTEMT) {
             dispatch(languageDuck.actionCreator({ language: PARAMS.LANGUAGE }));
-            setCookie('decorator-language', PARAMS.LANGUAGE, cookieOptions);
+            setCookie(decoratorLanguageCookie, PARAMS.LANGUAGE, cookieOptions);
         } else {
             // Fetch state from cookie OR default to norsk
             const language = getLanguageFromUrl();
             dispatch(languageDuck.actionCreator({ language }));
-            setCookie('decorator-language', language, cookieOptions);
+            setCookie(decoratorLanguageCookie, language, cookieOptions);
         }
     };
 
