@@ -10,6 +10,7 @@ import { getResizeObserver } from 'utils/resize-observer';
 import debounce from 'lodash.debounce';
 import { gradualRolloutFeatureToggle } from 'utils/gradual-rollout-feature-toggle';
 import './ChatbotWrapper.less';
+import { fetchXpToggles } from 'api/api';
 
 // Prevents nodejs renderer crash
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
@@ -53,6 +54,7 @@ const stateSelector = (state: AppState) => ({
         state.dropdownToggles.minside ||
         state.dropdownToggles.sok ||
         state.dropdownToggles.varsler,
+    APP_URL: state.environment.APP_BASE_URL,
 });
 
 type Props = {
@@ -66,11 +68,16 @@ export const ChatbotWrapper = ({
     queueKey = 'Q_CHAT_BOT',
     configId = '599f9e7c-7f6b-4569-81a1-27202c419953',
 }: Props) => {
-    const { paramChatbot, language, serverTime, menuIsActive } = useSelector(
-        stateSelector
-    );
+    const {
+        paramChatbot,
+        language,
+        serverTime,
+        menuIsActive,
+        APP_URL,
+    } = useSelector(stateSelector);
     const [cookies] = useCookies();
     const [mountChatbot, setMountChatbot] = useState(false);
+    const [enonicFeatureToggle, setEnonicFeatureToggle] = useState(false);
 
     const containerRef = useRef<HTMLDivElement>(null);
     const dockRef = useRef<HTMLDivElement>(null);
@@ -85,19 +92,30 @@ export const ChatbotWrapper = ({
         const chatbotVersion122IsMounted =
             document.getElementsByClassName('gxKraP').length > 0;
 
-        const enonicFeatureToggle =
-            isEnonicPage() &&
-            gradualRolloutFeatureToggle(
-                'enonic-chatbot',
-                100,
-                moment('2020-10-01')
-            );
+        if (isEnonicPage()) {
+            fetchXpToggles(APP_URL).then((toggles) => {
+                const chatbotToggle = toggles['chatbot-frida'];
+                if (chatbotToggle?.toggle) {
+                    setEnonicFeatureToggle(
+                        gradualRolloutFeatureToggle(
+                            'chatbot-frida',
+                            chatbotToggle.percentage,
+                            moment('2020-10-01')
+                        )
+                    );
+                }
+            });
+        }
 
         setMountChatbot(
             !chatbotVersion122IsMounted &&
-                (chatbotSessionActive || paramChatbot || enonicFeatureToggle)
+                (chatbotSessionActive || paramChatbot)
         );
     }, []);
+
+    useEffect(() => {
+        setMountChatbot(mountChatbot || enonicFeatureToggle);
+    }, [enonicFeatureToggle]);
 
     useEffect(() => {
         if (!mountChatbot) {

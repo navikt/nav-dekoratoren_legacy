@@ -1,6 +1,10 @@
 import Cookies from 'js-cookie';
 import moment, { Moment } from 'moment';
 
+export type XpToggles = {
+    [toggleName: string]: { toggle: boolean; percentage: number };
+};
+
 const cookieName = (featureName: string) => `decorator-rollout-${featureName}`;
 
 const setCookie = (featureName: string, idValue: number, expires: Moment) =>
