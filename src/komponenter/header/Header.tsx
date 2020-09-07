@@ -162,7 +162,7 @@ export const Header = () => {
             const isSafe = msgSafetyCheck(msg);
             const { source, event } = data;
             if (isSafe) {
-                if (source === 'app' && event === 'ready') {
+                if (source === 'decoratorClient' && event === 'ready') {
                     window.postMessage(
                         { source: 'decorator', event: 'ready' },
                         window.location.origin

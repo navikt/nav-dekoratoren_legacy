@@ -77,8 +77,10 @@ export const SprakVelger = () => {
             const isSafe = msgSafetyCheck(msg);
             const { source, event, payload } = data;
             if (isSafe) {
-                if (source === 'decorator' && event === 'availableLanguages') {
-                    setOptions(transformOptions(payload, language));
+                if (source === 'decoratorClient') {
+                    if (event === 'availableLanguages') {
+                        setOptions(transformOptions(payload, language));
+                    }
                 }
             }
         };

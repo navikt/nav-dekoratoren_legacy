@@ -29,7 +29,7 @@ export const Brodsmulesti = () => {
             const isSafe = msgSafetyCheck(msg);
             const { source, event, payload } = data;
             if (isSafe) {
-                if (source === 'decorator' && event === 'breadcrumbs') {
+                if (source === 'decoratorClient' && event === 'breadcrumbs') {
                     setBreadcrumbs(payload);
                 }
             }
