@@ -12,8 +12,9 @@ import Arbeidsflatevalg from './arbeidsflatevalg/Arbeidsflatevalg';
 import { LinksLoader } from '../../../common/content-loaders/LinkLoader';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import { Language } from 'store/reducers/language-duck';
-import './FooterTopp.less';
 import { SprakVelger } from '../../common/sprakvelger/SprakVelger';
+import { msgSafetyCheck } from 'utils/messages';
+import './FooterTopp.less';
 
 const FooterTopp = () => {
     const cls = BEMHelper('menylinje-topp');
@@ -21,7 +22,29 @@ const FooterTopp = () => {
     const context = useSelector((state: AppState) => state.arbeidsflate.status);
     const { data } = useSelector((state: AppState) => state.menypunkt);
     const { PARAMS } = useSelector((state: AppState) => state.environment);
-    const availableLanguages = PARAMS.AVAILABLE_LANGUAGES;
+    const [availableLanguages, setAvailableLanguages] = useState(
+        PARAMS.AVAILABLE_LANGUAGES || []
+    );
+
+    // Receive available languages from frontend-apps
+    useEffect(() => {
+        const receiveMessage = (msg: MessageEvent) => {
+            const { data } = msg;
+            const isSafe = msgSafetyCheck(msg);
+            const { source, event, payload } = data;
+            if (isSafe) {
+                if (source === 'decoratorClient') {
+                    if (event === 'availableLanguages') {
+                        setAvailableLanguages(payload);
+                    }
+                }
+            }
+        };
+        window.addEventListener('message', receiveMessage, false);
+        return () => {
+            window.removeEventListener('message', receiveMessage, false);
+        };
+    }, []);
 
     const [columnsNode, settColumnsNode] = useState<MenyNode>();
     useEffect(() => {
@@ -80,8 +103,12 @@ const FooterTopp = () => {
                                   {columnNode.displayName}
                               </Undertittel>
                               <ul>
-                                  {i === 1 && availableLanguages ? (
-                                      <SprakVelger />
+                                  {i === 1 && availableLanguages.length ? (
+                                      <SprakVelger
+                                          availableLanguages={
+                                              availableLanguages
+                                          }
+                                      />
                                   ) : (
                                       <FooterLenker node={columnNode} />
                                   )}

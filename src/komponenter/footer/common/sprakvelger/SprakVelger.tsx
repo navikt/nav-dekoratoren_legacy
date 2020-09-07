@@ -54,44 +54,19 @@ const mapLocaleToLanguage: { [key: string]: Language } = {
     se: Language.SAMISK,
 };
 
-export const SprakVelger = () => {
+interface Props {
+    availableLanguages: LanguageParam[];
+}
+
+export const SprakVelger = (props: Props) => {
     const store = useStore();
     const { language } = useSelector((state: AppState) => state.language);
-    const { PARAMS } = useSelector((state: AppState) => state.environment);
-    const availableLanguages = PARAMS.AVAILABLE_LANGUAGES;
+    const options = transformOptions(props.availableLanguages, language);
     const [, setCookie] = useCookies([
         decoratorLanguageCookie,
         decoratorContextCookie,
         unleashCacheCookie,
     ]);
-
-    const [options, setOptions] = useState(
-        transformOptions(availableLanguages || [], language)
-    );
-
-    // Receive available languages from frontend-apps
-    useEffect(() => {
-        const receiveMessage = (msg: MessageEvent) => {
-            const { data } = msg;
-            const isSafe = msgSafetyCheck(msg);
-            const { source, event, payload } = data;
-            if (isSafe) {
-                if (source === 'decoratorClient') {
-                    if (event === 'availableLanguages') {
-                        setOptions(transformOptions(payload, language));
-                    }
-                }
-            }
-        };
-        window.addEventListener('message', receiveMessage, false);
-        return () => {
-            window.removeEventListener('message', receiveMessage, false);
-        };
-    }, []);
-
-    if (!options || !options.length) {
-        return null;
-    }
 
     const placeholder = (
         <span className={`${cssPrefix}__placeholder`}>
