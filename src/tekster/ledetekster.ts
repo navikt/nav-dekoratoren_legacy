@@ -305,4 +305,13 @@ export const ledetekster: { [key: string]: string } = {
     'chat-veileder': 'Chat med oss',
     'chat-veileder-en': 'Chat with us',
     'chat-veileder-se': 'Chat med oss',
+    //
+    // Språk
+    //
+    'sprak-velg': 'Språk/language',
+    'sprak-velg-en': 'Språk/language',
+    'sprak-velg-se': 'Språk/language',
+    sprak: 'Norsk',
+    'sprak-en': 'English',
+    'sprak-se': 'Sámegiel',
 };

@@ -1,0 +1,35 @@
+.sprakvelger {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+
+    &__select {
+        width: 195px;
+    }
+
+    &__option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &-icon {
+            height: 1.25rem;
+        }
+    }
+
+    &__placeholder {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    &__chevron {
+        margin-right: 0.5rem;
+    }
+
+    &__ikon {
+        width: 20px;
+        height: 20px;
+        filter: invert(50%);
+        margin-right: 0.5em;
+    }
+}

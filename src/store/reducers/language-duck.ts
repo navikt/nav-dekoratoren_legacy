@@ -8,6 +8,12 @@ export enum Language {
     SAMISK = 'SAMISK',
 }
 
+export interface LanguageParam {
+    url: string;
+    locale: 'nb' | 'nn' | 'en' | 'se';
+    handleInApp?: boolean;
+}
+
 export interface LanguageState {
     language: Language;
 }
