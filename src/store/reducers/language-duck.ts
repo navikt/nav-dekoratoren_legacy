@@ -9,8 +9,9 @@ export enum Language {
 }
 
 export interface LanguageParam {
-    locale: 'nb' | 'nn' | 'en' | 'se';
     url: string;
+    locale: 'nb' | 'nn' | 'en' | 'se';
+    handleInApp?: boolean;
 }
 
 export interface LanguageState {

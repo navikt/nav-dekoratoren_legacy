@@ -7,12 +7,13 @@ import { Bilde } from '../../../common/bilde/Bilde';
 import HomeIcon from 'ikoner/home.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { HoyreChevron } from 'nav-frontend-chevron';
-import { msgSafetyCheck } from 'utils/messages';
+import { msgSafetyCheck, postMessageToApp } from 'utils/messages';
 import './Brodsmulesti.less';
 
 export interface Breadcrumb {
     url: string;
-    name: string;
+    title: string;
+    handleInApp?: boolean;
 }
 
 export const Brodsmulesti = () => {
@@ -51,12 +52,27 @@ export const Brodsmulesti = () => {
                 {breadcrumbs.map((breadcrumb, i) => (
                     <Fragment key={i}>
                         {i + 1 !== breadcrumbs.length ? (
-                            <Lenke key={i} href={breadcrumb.url}>
-                                <span>{breadcrumb.name}</span>
-                                <HoyreChevron />
-                            </Lenke>
+                            breadcrumb.handleInApp ? (
+                                <a
+                                    className={'lenke'}
+                                    onClick={() =>
+                                        postMessageToApp(
+                                            'breadcrumbClick',
+                                            breadcrumb
+                                        )
+                                    }
+                                >
+                                    <span>{breadcrumb.title}</span>
+                                    <HoyreChevron />
+                                </a>
+                            ) : (
+                                <Lenke key={i} href={breadcrumb.url}>
+                                    <span>{breadcrumb.title}</span>
+                                    <HoyreChevron />
+                                </Lenke>
+                            )
                         ) : (
-                            <Normaltekst>{breadcrumb.name}</Normaltekst>
+                            <Normaltekst>{breadcrumb.title}</Normaltekst>
                         )}
                     </Fragment>
                 ))}

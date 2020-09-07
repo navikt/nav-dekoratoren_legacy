@@ -18,8 +18,8 @@ import { decoratorLanguageCookie } from 'komponenter/header/Header';
 import { decoratorContextCookie } from 'komponenter/header/Header';
 import { useCookies } from 'react-cookie';
 import { Bilde } from '../../../common/bilde/Bilde';
-import { msgSafetyCheck } from 'utils/messages';
 import './SprakVelger.less';
+import { postMessageToApp } from '../../../../utils/messages';
 
 const cssPrefix = 'sprakvelger';
 
@@ -32,6 +32,7 @@ const farger = {
 type LocaleOption = {
     value: string;
     language: string;
+    handleInApp?: boolean;
     label: JSX.Element;
 };
 
@@ -103,14 +104,23 @@ export const SprakVelger = (props: Props) => {
     };
 
     const onChange = (selected: ValueType<LocaleOption>) => {
-        const { language, value } = selected as LocaleOption;
+        const { language, value, handleInApp } = selected as LocaleOption;
+        setCookie(decoratorLanguageCookie, language, cookieOptions);
         store.dispatch(
             languageDuck.actionCreator({
                 language: mapLocaleToLanguage[language],
             })
         );
-        setCookie(decoratorLanguageCookie, language, cookieOptions);
-        window.location.assign(value);
+
+        if (handleInApp) {
+            postMessageToApp('languageSelect', {
+                url: value,
+                locale: language,
+                handleInApp,
+            });
+        } else {
+            window.location.assign(value);
+        }
     };
 
     return (
@@ -119,6 +129,8 @@ export const SprakVelger = (props: Props) => {
                 onChange={onChange}
                 className={`${cssPrefix}__select`}
                 options={options}
+                value
+                {...null}
                 isSearchable={false}
                 placeholder={placeholder}
                 styles={styles}
@@ -142,6 +154,8 @@ const transformOptions = (
         return {
             label: defaultLabel,
             language: language.locale,
+            handleInApp: language.handleInApp,
+            isDisabled: mappedLanguage === selectedLanguage,
             value: language.url,
         };
     });
