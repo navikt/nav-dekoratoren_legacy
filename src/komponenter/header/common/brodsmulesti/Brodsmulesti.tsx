@@ -7,6 +7,7 @@ import { Bilde } from '../../../common/bilde/Bilde';
 import HomeIcon from 'ikoner/home.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { HoyreChevron } from 'nav-frontend-chevron';
+import { msgSafetyCheck } from 'utils/messages';
 import './Brodsmulesti.less';
 
 export interface Breadcrumb {
@@ -23,10 +24,14 @@ export const Brodsmulesti = () => {
     const cls = BEMHelper('brodsmulesti');
 
     useEffect(() => {
-        const receiveMessage = ({ data }: MessageEvent) => {
+        const receiveMessage = (msg: MessageEvent) => {
+            const { data } = msg;
+            const isSafe = msgSafetyCheck(msg);
             const { source, event, payload } = data;
-            if (source === 'decorator' && event === 'breadcrumbs') {
-                setBreadcrumbs(payload);
+            if (isSafe) {
+                if (source === 'decorator' && event === 'breadcrumbs') {
+                    setBreadcrumbs(payload);
+                }
             }
         };
         window.addEventListener('message', receiveMessage, false);

@@ -20,6 +20,7 @@ import { useCookies } from 'react-cookie';
 import PilOppHvit from 'ikoner/meny/PilOppHvit';
 import { Bilde } from '../../../common/bilde/Bilde';
 import './SprakVelger.less';
+import { msgSafetyCheck } from '../../../../utils/messages';
 
 const cssPrefix = 'sprakvelger';
 
@@ -71,10 +72,14 @@ export const SprakVelger = () => {
 
     // Receive available languages from frontend-apps
     useEffect(() => {
-        const receiveMessage = ({ data }: MessageEvent) => {
+        const receiveMessage = (msg: MessageEvent) => {
+            const { data } = msg;
+            const isSafe = msgSafetyCheck(msg);
             const { source, event, payload } = data;
-            if (source === 'decorator' && event === 'availableLanguages') {
-                setOptions(transformOptions(payload, language));
+            if (isSafe) {
+                if (source === 'decorator' && event === 'availableLanguages') {
+                    setOptions(transformOptions(payload, language));
+                }
             }
         };
         window.addEventListener('message', receiveMessage, false);

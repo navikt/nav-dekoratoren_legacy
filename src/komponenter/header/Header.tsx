@@ -20,7 +20,7 @@ import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/brow
 import { getLoginUrl } from 'utils/login';
 import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
-import { postMessageToApp } from '../../utils/messages';
+import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
 export const decoratorContextCookie = 'decorator-context';
@@ -157,13 +157,17 @@ export const Header = () => {
 
     // Send ready message to applications
     useEffect(() => {
-        const receiveMessage = ({ data }: MessageEvent) => {
+        const receiveMessage = (msg: MessageEvent) => {
+            const { data } = msg;
+            const isSafe = msgSafetyCheck(msg);
             const { source, event } = data;
-            if (source === 'app' && event === 'ready') {
-                window.postMessage(
-                    { source: 'decorator', event: 'ready' },
-                    window.location.origin
-                );
+            if (isSafe) {
+                if (source === 'app' && event === 'ready') {
+                    window.postMessage(
+                        { source: 'decorator', event: 'ready' },
+                        window.location.origin
+                    );
+                }
             }
         };
         window.addEventListener('message', receiveMessage, false);
