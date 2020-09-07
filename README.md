@@ -78,18 +78,18 @@ Bruk pus-decorator, les [readme](https://github.com/navikt/pus-decorator).
 ## Parametere
 Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
 
-| Parameter           | Type                                                        | Default              | Forklaring                                                                          |
-| ------------------- |------------------------------------------------------------ |--------------------- | ----------------------------------------------------------------------------------- |
-| context             | privatperson \| arbeidsgiver \| samarbeidspartner           | privatperson         | Setter menyen til definert kontekst                                                 |
-| simple              | boolean                                                     | false                | Viser en forenklet header og footer                                                 |
-| enforceLogin (beta) | boolean                                                     | false                | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]          |
-| redirectToApp       | boolean                                                     | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2]      |
-| level               | Level3 \| Level4                                            | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]                  |            
-| language            | norsk \| engelsk \| samisk                                  | norsk                | Setter språket til dekoratøren [3]                                                  |
-| availableLanguages  | [{locale: string, url: string, handleInnApp?: boolean}] | [ ]                  | Setter alternativene til språkvelgeren server-side [4]                               |
-| breadcrumbs         | [{title: string, url: string, handleInnApp?: boolean}]  | [ ]                  | Setter brødsmulestien server-side [5]                                                |
-| feedback            | boolean                                                     | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
-| chatbot             | boolean                                                     | false                | Skjuler eller viser Chatbot Frida [5]                                               |
+| Parameter                 | Type                                                        | Default              | Forklaring                                                                          |
+| ------------------------- |------------------------------------------------------------ |--------------------- | ----------------------------------------------------------------------------------- |
+| context                   | privatperson \| arbeidsgiver \| samarbeidspartner           | privatperson         | Setter menyen til definert kontekst                                                 |
+| simple                    | boolean                                                     | false                | Viser en forenklet header og footer                                                 |
+| enforceLogin (beta)       | boolean                                                     | false                | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]          |
+| redirectToApp             | boolean                                                     | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2]      |
+| level                     | Level3 \| Level4                                            | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]                  |            
+| language                  | norsk \| engelsk \| samisk                                  | norsk                | Setter språket til dekoratøren [3]                                                  |
+| availableLanguages (beta) | [{locale: string, url: string, handleInnApp?: boolean}] | [ ]                  | Setter alternativene til språkvelgeren server-side [4]                               |
+| breadcrumbs (beta)        | [{title: string, url: string, handleInnApp?: boolean}]  | [ ]                  | Setter brødsmulestien server-side [5]                                                |
+| feedback                  | boolean                                                     | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
+| chatbot                   | boolean                                                     | false                | Skjuler eller viser Chatbot Frida [5]                                               |
  
 Eksempel:<br>
 https://www.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3
