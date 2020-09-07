@@ -1,11 +1,11 @@
 import { Request } from 'express';
 import { EnvironmentState } from 'store/reducers/environment-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import moment from 'moment';
 
 interface Cookies {
-    [key: string]: MenuValue | Language | string;
+    [key: string]: MenuValue | Locale | string;
 }
 
 interface Props {
@@ -17,7 +17,7 @@ interface Props {
 // Obs! Don't expose secrets
 export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
     const chosenLanguage = (req.query.language?.toString().toUpperCase() ||
-        Language.IKKEBESTEMT) as Language;
+        Locale.IKKEBESTEMT) as Locale;
 
     const chosenContext = (req.query.context?.toString().toUpperCase() ||
         MenuValue.IKKEBESTEMT) as MenuValue;
@@ -64,7 +64,7 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
         ...(cookies && {
             COOKIES: {
                 CONTEXT: cookies['decorator-context'] as MenuValue,
-                LANGUAGE: cookies['decorator-language'] as Language,
+                LANGUAGE: cookies['decorator-language'] as Locale,
             },
         }),
     };

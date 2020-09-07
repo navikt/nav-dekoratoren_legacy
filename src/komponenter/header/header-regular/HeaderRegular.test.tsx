@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { Language, languageDuck } from 'store/reducers/language-duck';
+import { Locale, languageDuck } from 'store/reducers/language-duck';
 import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
 import { createStore, Store } from 'redux';
 import { Provider } from 'react-redux';
@@ -19,21 +19,21 @@ const store = createStore(reducers);
 describe('<RegularHeader>', () => {
     it('Skal rendre <Arbeidsflatemeny> komponent hvis språk er norsk', () => {
         store.dispatch(
-            languageDuck.actionCreator({ language: Language.NORSK })
+            languageDuck.actionCreator({ language: Locale.BOKMAL })
         );
         expect(mountWithRedux(store).find(Arbeidsflatemeny)).toHaveLength(1);
     });
 
     it('Skal ikke rendre <Arbeidsflatemeny> komponent hvis språk er engelsk', () => {
         store.dispatch(
-            languageDuck.actionCreator({ language: Language.ENGELSK })
+            languageDuck.actionCreator({ language: Locale.ENGELSK })
         );
         expect(mountWithRedux(store).find(Arbeidsflatemeny)).toHaveLength(0);
     });
 
     it('Skal ikke rendre <Arbeidsflatemeny> komponent hvis språk er samisk', () => {
         store.dispatch(
-            languageDuck.actionCreator({ language: Language.SAMISK })
+            languageDuck.actionCreator({ language: Locale.SAMISK })
         );
         expect(mountWithRedux(store).find(Arbeidsflatemeny)).toHaveLength(0);
     });

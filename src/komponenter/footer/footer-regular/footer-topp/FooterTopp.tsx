@@ -11,7 +11,7 @@ import BEMHelper from 'utils/bem';
 import Arbeidsflatevalg from './arbeidsflatevalg/Arbeidsflatevalg';
 import { LinksLoader } from '../../../common/content-loaders/LinkLoader';
 import FooterLenker from 'komponenter/footer/common/Lenker';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import { SprakVelger } from '../../common/sprakvelger/SprakVelger';
 import { msgSafetyCheck } from 'utils/messages';
 import './FooterTopp.less';
@@ -54,7 +54,7 @@ const FooterTopp = () => {
             if (footerNode) {
                 const columnsNode = findNode(footerNode, 'Columns');
                 if (columnsNode) {
-                    if (language === Language.NORSK) {
+                    if (language === Locale.BOKMAL || language === Locale.NYNORSK) {
                         settColumnsNode(findNode(columnsNode, context));
                     } else {
                         settColumnsNode(columnsNode);

@@ -10,16 +10,16 @@ import { ValueType } from 'react-select/src/types';
 import { finnTekst } from 'tekster/finn-tekst';
 import { useSelector, useStore } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { languageDuck, LanguageParam } from 'store/reducers/language-duck';
-import { Language } from 'store/reducers/language-duck';
+import { languageDuck, AvailableLanguage } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { unleashCacheCookie } from 'komponenter/header/Header';
 import { decoratorLanguageCookie } from 'komponenter/header/Header';
 import { decoratorContextCookie } from 'komponenter/header/Header';
 import { useCookies } from 'react-cookie';
 import { Bilde } from '../../../common/bilde/Bilde';
+import { postMessageToApp } from 'utils/messages';
 import './SprakVelger.less';
-import { postMessageToApp } from '../../../../utils/messages';
 
 const cssPrefix = 'sprakvelger';
 
@@ -31,7 +31,7 @@ const farger = {
 
 type LocaleOption = {
     value: string;
-    language: string;
+    locale: string;
     handleInApp?: boolean;
     label: JSX.Element;
 };
@@ -48,15 +48,15 @@ const option = (text: string, selected: boolean) => (
     </div>
 );
 
-const mapLocaleToLanguage: { [key: string]: Language } = {
-    no: Language.NORSK,
-    nb: Language.NORSK,
-    en: Language.ENGELSK,
-    se: Language.SAMISK,
+const mapLocaleToLanguage: { [key: string]: Locale } = {
+    nb: Locale.BOKMAL,
+    nn: Locale.NYNORSK,
+    en: Locale.ENGELSK,
+    se: Locale.SAMISK,
 };
 
 interface Props {
-    availableLanguages: LanguageParam[];
+    availableLanguages: AvailableLanguage[];
 }
 
 export const SprakVelger = (props: Props) => {
@@ -104,19 +104,16 @@ export const SprakVelger = (props: Props) => {
     };
 
     const onChange = (selected: ValueType<LocaleOption>) => {
-        const { language, value, handleInApp } = selected as LocaleOption;
+        const { locale, value, handleInApp } = selected as LocaleOption;
+        const language = mapLocaleToLanguage[locale];
         setCookie(decoratorLanguageCookie, language, cookieOptions);
-        store.dispatch(
-            languageDuck.actionCreator({
-                language: mapLocaleToLanguage[language],
-            })
-        );
+        store.dispatch(languageDuck.actionCreator({ language: language }));
 
         if (handleInApp) {
             postMessageToApp('languageSelect', {
                 url: value,
-                locale: language,
-                handleInApp,
+                locale: locale,
+                handleInApp: handleInApp,
             });
         } else {
             window.location.assign(value);
@@ -141,21 +138,21 @@ export const SprakVelger = (props: Props) => {
 
 // Utils
 const transformOptions = (
-    languages: LanguageParam[],
-    selectedLanguage: Language
+    languages: AvailableLanguage[],
+    selectedLanguage: Locale
 ) =>
-    languages.map((language) => {
-        const mappedLanguage = mapLocaleToLanguage[language.locale];
+    languages.map((languageParam) => {
+        const language = mapLocaleToLanguage[languageParam.locale];
         const defaultLabel = option(
-            finnTekst(`sprak`, mappedLanguage) as string,
-            mappedLanguage === selectedLanguage
+            finnTekst(`sprak`, language) as string,
+            language === selectedLanguage
         );
 
         return {
             label: defaultLabel,
-            language: language.locale,
-            handleInApp: language.handleInApp,
-            isDisabled: mappedLanguage === selectedLanguage,
-            value: language.url,
+            locale: languageParam.locale,
+            handleInApp: languageParam.handleInApp,
+            isDisabled: language === selectedLanguage,
+            value: languageParam.url,
         };
     });

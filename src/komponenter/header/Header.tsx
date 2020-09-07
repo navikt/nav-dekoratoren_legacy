@@ -8,7 +8,7 @@ import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
-import { Language, languageDuck } from 'store/reducers/language-duck';
+import { Locale, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
@@ -117,9 +117,8 @@ export const Header = () => {
             dispatch(settArbeidsflate(PARAMS.CONTEXT));
             setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
         } else {
-            const context = cookies['decorator-context'];
-
             // Fetch state from cookie OR default to private-person
+            const context = cookies['decorator-context'];
             context ? dispatch(settArbeidsflate(context)) : defaultToPerson();
         }
     }, []);
@@ -139,7 +138,7 @@ export const Header = () => {
 
     // Change language
     const checkUrlForLanguage = () => {
-        if (PARAMS.LANGUAGE !== Language.IKKEBESTEMT) {
+        if (PARAMS.LANGUAGE !== Locale.IKKEBESTEMT) {
             dispatch(languageDuck.actionCreator({ language: PARAMS.LANGUAGE }));
             setCookie(decoratorLanguageCookie, PARAMS.LANGUAGE, cookieOptions);
         } else {
@@ -194,14 +193,21 @@ export const Header = () => {
     );
 };
 
-const getLanguageFromUrl = (): Language => {
+const getLanguageFromUrl = (): Locale => {
     const locationPath = window.location.pathname;
-    if (locationPath.includes('/en/')) {
-        return Language.ENGELSK;
-    } else if (locationPath.includes('/se/')) {
-        return Language.SAMISK;
+    if (locationPath.includes('/nb/')) {
+        return Locale.NYNORSK;
     }
-    return Language.NORSK;
+    if (locationPath.includes('/nn/')) {
+        return Locale.NYNORSK;
+    }
+    if (locationPath.includes('/en/')) {
+        return Locale.ENGELSK;
+    }
+    if (locationPath.includes('/se/')) {
+        return Locale.SAMISK;
+    }
+    return Locale.BOKMAL;
 };
 
 export default Header;

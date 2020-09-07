@@ -2,7 +2,7 @@ import { compose, createStore as createReduxStore } from 'redux';
 import { EnvironmentState } from './reducers/environment-duck';
 import reducers from './reducers';
 import Cookies from 'universal-cookie';
-import { Language } from './reducers/language-duck';
+import { Locale } from './reducers/language-duck';
 import { MenuValue } from '../utils/meny-storage-utils';
 
 export const createStore = (env?: EnvironmentState, cookies?: Cookies) => {
@@ -13,7 +13,7 @@ export const createStore = (env?: EnvironmentState, cookies?: Cookies) => {
     )();
 
     const paramLanguage =
-        env?.PARAMS.LANGUAGE !== Language.IKKEBESTEMT && env?.PARAMS.LANGUAGE;
+        env?.PARAMS.LANGUAGE !== Locale.IKKEBESTEMT && env?.PARAMS.LANGUAGE;
     const paramContext =
         env?.PARAMS.CONTEXT !== MenuValue.IKKEBESTEMT && env?.PARAMS.CONTEXT;
 
