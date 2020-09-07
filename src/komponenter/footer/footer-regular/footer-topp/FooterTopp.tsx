@@ -20,6 +20,8 @@ const FooterTopp = () => {
     const { language } = useSelector((state: AppState) => state.language);
     const context = useSelector((state: AppState) => state.arbeidsflate.status);
     const { data } = useSelector((state: AppState) => state.menypunkt);
+    const { PARAMS } = useSelector((state: AppState) => state.environment);
+    const availableLanguages = PARAMS.AVAILABLE_LANGUAGES;
 
     const [columnsNode, settColumnsNode] = useState<MenyNode>();
     useEffect(() => {
@@ -78,7 +80,7 @@ const FooterTopp = () => {
                                   {columnNode.displayName}
                               </Undertittel>
                               <ul>
-                                  {i === 1 ? (
+                                  {i === 1 && availableLanguages ? (
                                       <SprakVelger />
                                   ) : (
                                       <FooterLenker node={columnNode} />

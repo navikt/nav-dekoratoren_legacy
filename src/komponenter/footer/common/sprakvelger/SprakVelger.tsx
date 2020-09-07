@@ -17,10 +17,9 @@ import { unleashCacheCookie } from 'komponenter/header/Header';
 import { decoratorLanguageCookie } from 'komponenter/header/Header';
 import { decoratorContextCookie } from 'komponenter/header/Header';
 import { useCookies } from 'react-cookie';
-import PilOppHvit from 'ikoner/meny/PilOppHvit';
 import { Bilde } from '../../../common/bilde/Bilde';
+import { msgSafetyCheck } from 'utils/messages';
 import './SprakVelger.less';
-import { msgSafetyCheck } from '../../../../utils/messages';
 
 const cssPrefix = 'sprakvelger';
 
@@ -90,7 +89,7 @@ export const SprakVelger = () => {
         };
     }, []);
 
-    if (!options) {
+    if (!options || !options.length) {
         return null;
     }
 
