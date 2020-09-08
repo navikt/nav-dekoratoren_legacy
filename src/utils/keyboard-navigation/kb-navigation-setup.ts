@@ -107,6 +107,10 @@ export const createHeaderMainGraph = (
     const rootIndex = configForNodeGroup[group].rootIndex;
     const idMap: KbIdMap = {};
 
+    if (arbeidsflatemenyEnabled) {
+        rootIndex.row = 1;
+    }
+
     let colIndex = rootIndex.col;
 
     idMap[
