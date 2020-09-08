@@ -99,11 +99,15 @@ export const createHeaderMainGraph = (
         language === Language.NORSK &&
         erInnlogget &&
         arbeidsflate !== MenuValue.SAMARBEIDSPARTNER;
-    const arbeidsflatemenyEnabled = Language.NORSK;
+    const arbeidsflatemenyEnabled = language === Language.NORSK;
 
     const group = KbNavGroup.HeaderMenylinje;
     const rootIndex = configForNodeGroup[group].rootIndex;
     const idMap: KbIdMap = {};
+
+    if (arbeidsflatemenyEnabled) {
+        rootIndex.row = 1;
+    }
 
     let colIndex = rootIndex.col;
 
