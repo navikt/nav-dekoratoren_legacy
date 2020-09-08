@@ -9,9 +9,15 @@ import { finnTekst } from 'tekster/finn-tekst';
 import { getResizeObserver } from 'utils/resize-observer';
 import debounce from 'lodash.debounce';
 import { gradualRolloutFeatureToggle } from 'utils/gradual-rollout-feature-toggle';
+// @ts-ignore
+import { SurveyQuestion } from '@navikt/nav-chatbot';
 import './ChatbotWrapper.less';
+import { hentChatbotConfig } from '../../../api/api';
 
 // Prevents nodejs renderer crash
+const { logAmplitudeEvent } = verifyWindowObj()
+    ? require('utils/amplitude')
+    : () => null;
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
 export const isEnonicPage = () =>
@@ -44,10 +50,17 @@ const dockIfNearBottom = (
     }
 };
 
+export type ChatConfig = {
+    percentage?: number;
+    toggle?: boolean;
+    analytics?: SurveyQuestion[];
+};
+
 const stateSelector = (state: AppState) => ({
     paramChatbot: state.environment.PARAMS.CHATBOT,
     language: state.language.language,
     serverTime: state.environment.SERVER_TIME,
+    appUrl: state.environment.APP_URL,
     menuIsActive:
         state.dropdownToggles.hovedmeny ||
         state.dropdownToggles.minside ||
@@ -66,11 +79,16 @@ export const ChatbotWrapper = ({
     queueKey = 'Q_CHAT_BOT',
     configId = '599f9e7c-7f6b-4569-81a1-27202c419953',
 }: Props) => {
-    const { paramChatbot, language, serverTime, menuIsActive } = useSelector(
-        stateSelector
-    );
+    const {
+        paramChatbot,
+        language,
+        serverTime,
+        appUrl,
+        menuIsActive,
+    } = useSelector(stateSelector);
     const [cookies] = useCookies();
     const [mountChatbot, setMountChatbot] = useState(false);
+    const [chatConfig, setChatConfig] = useState<ChatConfig>();
 
     const containerRef = useRef<HTMLDivElement>(null);
     const dockRef = useRef<HTMLDivElement>(null);
@@ -85,19 +103,30 @@ export const ChatbotWrapper = ({
         const chatbotVersion122IsMounted =
             document.getElementsByClassName('gxKraP').length > 0;
 
-        const enonicFeatureToggle =
-            isEnonicPage() &&
-            gradualRolloutFeatureToggle(
-                'enonic-chatbot',
-                100,
-                moment('2020-10-01')
-            );
+        hentChatbotConfig(appUrl).then(setChatConfig).catch(console.error);
 
         setMountChatbot(
             !chatbotVersion122IsMounted &&
-                (chatbotSessionActive || paramChatbot || enonicFeatureToggle)
+                (chatbotSessionActive || paramChatbot)
         );
     }, []);
+
+    useEffect(() => {
+        if (!chatConfig) {
+            return;
+        }
+
+        console.log(chatConfig);
+
+        const enonicFeatureToggle =
+            isEnonicPage() &&
+            chatConfig.toggle &&
+            gradualRolloutFeatureToggle(
+                'enonic-chatbot',
+                chatConfig.percentage || 100,
+                moment().add(30, 'days')
+            );
+    }, [chatConfig]);
 
     useEffect(() => {
         if (!mountChatbot) {
@@ -144,6 +173,8 @@ export const ChatbotWrapper = ({
                     queueKey={queueKey}
                     configId={configId}
                     label={labelText}
+                    analyticsCallback={logAmplitudeEvent}
+                    analyticsSurvey={chatConfig?.analytics}
                 />
             </div>
         </div>
