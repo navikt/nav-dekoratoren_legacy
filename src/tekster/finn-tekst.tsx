@@ -8,11 +8,9 @@ export function finnTekst(id: string, language: Locale): string {
     // Correct language
     let ledetekst: string;
     switch (language) {
+        default:
         case Locale.BOKMAL:
-            ledetekst = ledetekster[id];
-            break;
         case Locale.NYNORSK:
-            id += '-nn';
             ledetekst = ledetekster[id];
             break;
         case Locale.ENGELSK:
@@ -21,9 +19,6 @@ export function finnTekst(id: string, language: Locale): string {
             break;
         case Locale.SAMISK:
             id += '-se';
-            ledetekst = ledetekster[id];
-            break;
-        default:
             ledetekst = ledetekster[id];
             break;
     }

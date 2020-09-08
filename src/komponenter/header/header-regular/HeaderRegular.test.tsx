@@ -18,9 +18,7 @@ const store = createStore(reducers);
 
 describe('<RegularHeader>', () => {
     it('Skal rendre <Arbeidsflatemeny> komponent hvis språk er norsk', () => {
-        store.dispatch(
-            languageDuck.actionCreator({ language: Locale.BOKMAL })
-        );
+        store.dispatch(languageDuck.actionCreator({ language: Locale.BOKMAL }));
         expect(mountWithRedux(store).find(Arbeidsflatemeny)).toHaveLength(1);
     });
 
@@ -32,9 +30,7 @@ describe('<RegularHeader>', () => {
     });
 
     it('Skal ikke rendre <Arbeidsflatemeny> komponent hvis språk er samisk', () => {
-        store.dispatch(
-            languageDuck.actionCreator({ language: Locale.SAMISK })
-        );
+        store.dispatch(languageDuck.actionCreator({ language: Locale.SAMISK }));
         expect(mountWithRedux(store).find(Arbeidsflatemeny)).toHaveLength(0);
     });
 });

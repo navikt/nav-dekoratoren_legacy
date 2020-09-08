@@ -308,9 +308,9 @@ export const ledetekster: { [key: string]: string } = {
     //
     // Språk
     //
-    'sprak-velg': 'Språk/language',
-    'sprak-velg-en': 'Språk/language',
-    'sprak-velg-se': 'Språk/language',
+    'sprak-velg': 'Språk/Language',
+    'sprak-velg-en': 'Språk/Language',
+    'sprak-velg-se': 'Språk/Language',
     sprak: 'Norsk',
     'sprak-en': 'English',
     'sprak-se': 'Sámegiel',

@@ -21,6 +21,7 @@ import { getLoginUrl } from 'utils/login';
 import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
 import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
+import { SprakVelger } from '../footer/common/sprakvelger/SprakVelger';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
 export const decoratorContextCookie = 'decorator-context';
@@ -43,6 +44,9 @@ export const Header = () => {
     const { authenticated } = innloggingsstatus.data;
     const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
+    const [availableLanguages, setAvailableLanguages] = useState(
+        PARAMS.AVAILABLE_LANGUAGES || []
+    );
     const [cookies, setCookie] = useCookies([
         decoratorLanguageCookie,
         decoratorContextCookie,
@@ -175,6 +179,26 @@ export const Header = () => {
         };
     }, []);
 
+    // Receive available languages from frontend-apps
+    useEffect(() => {
+        const receiveMessage = (msg: MessageEvent) => {
+            const { data } = msg;
+            const isSafe = msgSafetyCheck(msg);
+            const { source, event, payload } = data;
+            if (isSafe) {
+                if (source === 'decoratorClient') {
+                    if (event === 'availableLanguages') {
+                        setAvailableLanguages(payload);
+                    }
+                }
+            }
+        };
+        window.addEventListener('message', receiveMessage, false);
+        return () => {
+            window.removeEventListener('message', receiveMessage, false);
+        };
+    }, []);
+
     return (
         <div className={'decorator-wrapper'}>
             <HeadElements />
@@ -189,6 +213,7 @@ export const Header = () => {
             </header>
             <Driftsmeldinger />
             <Brodsmulesti />
+            <SprakVelger availableLanguages={availableLanguages} />
         </div>
     );
 };
