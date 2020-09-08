@@ -116,8 +116,6 @@ export const ChatbotWrapper = ({
             return;
         }
 
-        console.log(chatConfig);
-
         const enonicFeatureToggle =
             isEnonicPage() &&
             chatConfig.toggle &&
@@ -126,6 +124,10 @@ export const ChatbotWrapper = ({
                 chatConfig.percentage || 100,
                 moment().add(30, 'days')
             );
+
+        if (enonicFeatureToggle) {
+            setMountChatbot(true);
+        }
     }, [chatConfig]);
 
     useEffect(() => {
