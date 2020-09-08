@@ -196,7 +196,7 @@ export const Header = () => {
 const getLanguageFromUrl = (): Locale => {
     const locationPath = window.location.pathname;
     if (locationPath.includes('/nb/')) {
-        return Locale.NYNORSK;
+        return Locale.BOKMAL;
     }
     if (locationPath.includes('/nn/')) {
         return Locale.NYNORSK;
