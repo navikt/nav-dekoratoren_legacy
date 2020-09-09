@@ -1,7 +1,8 @@
 import { Request } from 'express';
 import { EnvironmentState } from 'store/reducers/environment-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { Locale } from 'store/reducers/language-duck';
+import { AvailableLanguage, Locale } from 'store/reducers/language-duck';
+import { Breadcrumb } from '../komponenter/header/common/brodsmulesti/Brodsmulesti';
 import moment from 'moment';
 
 interface Cookies {
@@ -16,7 +17,6 @@ interface Props {
 // Client environment
 // Obs! Don't expose secrets
 export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
-
     // Throw errors if parameters are invalid
     validateClientEnv(req);
 
@@ -76,8 +76,8 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
 
 // Validation utils
 export const validateClientEnv = (req: Request) => {
-    const {level, language, context} = req.query;
-    const { availableLanguages, breadcrumbs} = req.query;
+    const { level, language, context } = req.query;
+    const { availableLanguages, breadcrumbs } = req.query;
     if (context) {
         validateContext(context as string);
     }
@@ -93,7 +93,7 @@ export const validateClientEnv = (req: Request) => {
     if (breadcrumbs) {
         validateBreadcrumbs(JSON.parse(breadcrumbs as string));
     }
-}
+};
 
 export const validateContext = (context: string) => {
     switch (context) {
@@ -102,10 +102,11 @@ export const validateContext = (context: string) => {
         case 'samarbeidspartner':
             break;
         default:
-            const error = 'context supports privatperson | arbeidsgiver | samarbeidspartner';
-            throw(Error(error));
+            const error =
+                'context supports privatperson | arbeidsgiver | samarbeidspartner';
+            throw Error(error);
     }
-}
+};
 
 export const validateLevel = (level: string) => {
     switch (level) {
@@ -114,9 +115,9 @@ export const validateLevel = (level: string) => {
             break;
         default:
             const error = 'level supports Level3 | Level4';
-            throw(Error(error));
+            throw Error(error);
     }
-}
+};
 
 export const validateLanguage = (language: string) => {
     switch (language) {
@@ -127,15 +128,15 @@ export const validateLanguage = (language: string) => {
             break;
         default:
             const error = 'language supports nb | nn | en | se';
-            throw(Error(error));
+            throw Error(error);
     }
-}
+};
 
-export const validateAvailableLanguages = (availableLanguages: [{locale: string, url: string}]) => {
-    availableLanguages.map((language: {locale: string, url: string}) => {
+export const validateAvailableLanguages = (languages: AvailableLanguage[]) => {
+    languages.map((language) => {
         if (!language.url) {
             const error = 'availableLanguages.url supports string';
-            throw(Error(error));
+            throw Error(error);
         }
         switch (language.locale) {
             case 'nb':
@@ -144,24 +145,25 @@ export const validateAvailableLanguages = (availableLanguages: [{locale: string,
             case 'se':
                 break;
             default:
-                const error = 'availableLanguages.locale supports nb | nn | en | se';
-                throw(Error(error));
+                const error =
+                    'availableLanguages.locale supports nb | nn | en | se';
+                throw Error(error);
         }
     });
-}
+};
 
-export const validateBreadcrumbs = (breadcrumbs: [{title: string, url: string}]) => {
-    breadcrumbs.map((breadcrumb: {title: string, url: string}) => {
+export const validateBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
+    breadcrumbs.map((breadcrumb) => {
         if (!breadcrumb.title) {
             const error = 'breadcrumbs.title supports string';
-            throw(Error(error));
+            throw Error(error);
         }
         if (!breadcrumb.url) {
             const error = 'breadcrumbs.url supports string';
-            throw(Error(error));
+            throw Error(error);
         }
     });
-}
+};
 
 // Time utils
 export const fiveMinutesInSeconds = 5 * 60;

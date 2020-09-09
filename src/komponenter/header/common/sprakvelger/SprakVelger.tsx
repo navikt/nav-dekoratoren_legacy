@@ -5,7 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { NedChevron } from 'nav-frontend-chevron';
 import { ValueType } from 'react-select/src/types';
 import { useSelect } from 'downshift';
-import { decoratorLanguageCookie } from '../../../header/Header';
+import { decoratorLanguageCookie } from '../../Header';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { AvailableLanguage } from 'store/reducers/language-duck';
 import { languageDuck, Locale } from 'store/reducers/language-duck';
@@ -85,74 +85,81 @@ export const SprakVelger = (props: Props) => {
     });
 
     return (
-        <div className={cssPrefix}>
-            <label {...getLabelProps()} className="sr-only">
-                <Tekst id={'sprak-velg'} />
-            </label>
-            <button
-                {...getToggleButtonProps()}
-                className={`${cssPrefix}__knapp skjemaelement__input`}
-                type="button"
-            >
-                {knappeInnhold}
-                <NedChevron />
-            </button>
+        <div className={`${cssPrefix}__container`}>
+            <div className={cssPrefix}>
+                <label {...getLabelProps()} className="sr-only">
+                    <Tekst id={'sprak-velg'} />
+                </label>
+                <button
+                    {...getToggleButtonProps()}
+                    className={`${cssPrefix}__knapp skjemaelement__input`}
+                    type="button"
+                >
+                    {knappeInnhold}
+                    <NedChevron />
+                </button>
 
-            <ul
-                {...getMenuProps()}
-                className={`${cssPrefix}__menu`}
-                style={
-                    isOpen
-                        ? {
-                              boxShadow:
-                                  '0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08)',
-                              border: '1px solid',
-                              borderRadius: '0 0 4px 4px',
-                              outline: 'none',
-                              borderColor: farger.navGra20,
-                              borderTop: 'none',
-                          }
-                        : { border: 'none' }
-                }
-            >
-                {isOpen &&
-                    options.map((item, index) => (
-                        <li
-                            {...getItemProps({ item, index })}
-                            style={
-                                highlightedIndex === index
-                                    ? {
-                                          backgroundColor: farger.navBla,
-                                          color: 'white',
-                                      }
-                                    : {
-                                          backgroundColor: 'white',
-                                          color: 'black',
-                                      }
-                            }
-                            className="menuList"
-                            key={`${item.value}${index}`}
-                        >
-                            {selectedItem?.locale === item.locale ? (
-                                <div className={`${cssPrefix}__option`}>
-                                    <Bilde asset={Cicle} />
-                                    <Normaltekst>
-                                        {item.label}{' '}
-                                        <span className="sr-only">
-                                            {finnTekst('sprak-valgt', language)}
+                <ul
+                    {...getMenuProps()}
+                    className={`${cssPrefix}__menu`}
+                    style={
+                        isOpen
+                            ? {
+                                  boxShadow:
+                                      '0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08)',
+                                  border: '1px solid',
+                                  borderRadius: '0 0 4px 4px',
+                                  outline: 'none',
+                                  borderColor: farger.navGra20,
+                                  borderTop: 'none',
+                              }
+                            : { border: 'none' }
+                    }
+                >
+                    {isOpen &&
+                        options.map((item, index) => (
+                            <li
+                                {...getItemProps({ item, index })}
+                                style={
+                                    highlightedIndex === index
+                                        ? {
+                                              backgroundColor: farger.navBla,
+                                              color: 'white',
+                                          }
+                                        : {
+                                              backgroundColor: 'white',
+                                              color: 'black',
+                                          }
+                                }
+                                className="menuList"
+                                key={`${item.value}${index}`}
+                            >
+                                {selectedItem?.locale === item.locale ? (
+                                    <div className={`${cssPrefix}__option`}>
+                                        <Bilde asset={Cicle} />
+                                        <Normaltekst>
+                                            {item.label}{' '}
+                                            <span className="sr-only">
+                                                {finnTekst(
+                                                    'sprak-valgt',
+                                                    language
+                                                )}
+                                            </span>
+                                        </Normaltekst>
+                                    </div>
+                                ) : (
+                                    <Normaltekst
+                                        className={`${cssPrefix}__option`}
+                                    >
+                                        <span className="not-selected">
+                                            {item.label}
                                         </span>
                                     </Normaltekst>
-                                </div>
-                            ) : (
-                                <Normaltekst className={`${cssPrefix}__option`}>
-                                    <span className="not-selected">
-                                        {item.label}
-                                    </span>
-                                </Normaltekst>
-                            )}
-                        </li>
-                    ))}
-            </ul>
+                                )}
+                            </li>
+                        ))}
+                </ul>
+            </div>
         </div>
     );
 };

@@ -1,71 +1,73 @@
-@import (reference) "node_modules/nav-frontend-core/less/_variabler";
+@import (reference) '../../../../styling-variabler.less';
 
 .sprakvelger {
-  width: 200px;
-  position: relative;
+    width: 200px;
+    position: relative;
+    margin: 0.25rem 0.25rem;
 
-  @media (max-width: @screen-tablet) {
-    margin-top: 1rem;
-  }
-
-  &__knapp {
-    padding: 0.5rem 0.5rem;
-    width: 100%;
-    display: flex;
-    flex-direction:row;
-    justify-content: space-between;
-
-    .chevron--ned {
-      align-self: center;
-    }
-  }
-
-  &__knapp-tekst{
-    display: flex;
-    flex-direction:row;
-    flex-wrap: nowrap;
-  }
-
-  &__ikon {
-    width: 20px;
-    height: 20px;
-    filter: invert(50%);
-    margin-right: 0.5em;
-  }
-
-  &__option {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    svg {
-      margin-right: 0.1rem;
+    &__container:only-child {
+        width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
     }
 
-    .not-selected {
-      margin-left: 1.1rem;
+    &__knapp {
+        padding: 0.5rem 0.5rem;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .chevron--ned {
+            align-self: center;
+        }
     }
-  }
 
-
-  &__menu {
-    margin: 1px 0 0;
-    padding: 0;
-    z-index: 100;
-    max-height: 10rem;
-    position: absolute;
-    overflow-y:auto;
-    overflow-x: hidden;
-    width: 100%;
-    box-sizing: border-box;
-
-    li.menuList {
-      padding: 0.5rem;
-      cursor: pointer;
-      border: 1px solid @navLysGra;
-      box-sizing: border-box;
-      &:not(:last-child) {
-        border-bottom: 0;
-      }
+    &__knapp-tekst {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
     }
-  }
+
+    &__ikon {
+        width: 20px;
+        height: 20px;
+        filter: invert(50%);
+        margin-right: 0.5em;
+    }
+
+    &__option {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        svg {
+            margin-right: 0.1rem;
+        }
+
+        .not-selected {
+            margin-left: 1.1rem;
+        }
+    }
+
+    &__menu {
+        margin: 1px 0 0;
+        padding: 0;
+        z-index: 100;
+        max-height: 10rem;
+        position: absolute;
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: 100%;
+        box-sizing: border-box;
+
+        li.menuList {
+            padding: 0.5rem;
+            cursor: pointer;
+            border: 1px solid @navLysGra;
+            box-sizing: border-box;
+            &:not(:last-child) {
+                border-bottom: 0;
+            }
+        }
+    }
 }

@@ -1,14 +1,13 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Lenke from 'nav-frontend-lenker';
-import BEMHelper from 'utils/bem';
 import { Bilde } from '../../../common/bilde/Bilde';
 import HomeIcon from 'ikoner/home.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { HoyreChevron } from 'nav-frontend-chevron';
-import { msgSafetyCheck, postMessageToApp } from 'utils/messages';
-import { validateBreadcrumbs } from '../../../../server/utils';
+import { postMessageToApp } from 'utils/messages';
+import BEMHelper from 'utils/bem';
 import './Brodsmulesti.less';
 
 export interface Breadcrumb {
@@ -17,33 +16,16 @@ export interface Breadcrumb {
     handleInApp?: boolean;
 }
 
-export const Brodsmulesti = () => {
+interface Props {
+    breadcrumbs: Breadcrumb[];
+}
+
+export const Brodsmulesti = (props: Props) => {
     const { environment } = useSelector((state: AppState) => state);
-    const [breadcrumbs, setBreadcrumbs] = useState(
-        environment.PARAMS.BREADCRUMBS
-    );
     const { XP_BASE_URL } = environment;
     const cls = BEMHelper('brodsmulesti');
 
-    useEffect(() => {
-        const receiveMessage = (msg: MessageEvent) => {
-            const { data } = msg;
-            const isSafe = msgSafetyCheck(msg);
-            const { source, event, payload } = data;
-            if (isSafe) {
-                if (source === 'decoratorClient' && event === 'breadcrumbs') {
-                    validateBreadcrumbs(payload);
-                    setBreadcrumbs(payload);
-                }
-            }
-        };
-        window.addEventListener('message', receiveMessage, false);
-        return () => {
-            window.removeEventListener('message', receiveMessage, false);
-        };
-    }, []);
-
-    return breadcrumbs ? (
+    return (
         <div className={cls.element('container')}>
             <div className={cls.element('content')}>
                 <Bilde asset={HomeIcon} />
@@ -51,9 +33,9 @@ export const Brodsmulesti = () => {
                     <span>nav.no</span>
                     <HoyreChevron />
                 </Lenke>
-                {breadcrumbs.map((breadcrumb, i) => (
+                {props.breadcrumbs.map((breadcrumb, i) => (
                     <Fragment key={i}>
-                        {i + 1 !== breadcrumbs.length ? (
+                        {i + 1 !== props.breadcrumbs.length ? (
                             breadcrumb.handleInApp ? (
                                 <a
                                     className={'lenke'}
@@ -80,7 +62,7 @@ export const Brodsmulesti = () => {
                 ))}
             </div>
         </div>
-    ) : null;
+    );
 };
 
 export default Brodsmulesti;

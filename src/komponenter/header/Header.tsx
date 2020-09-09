@@ -21,8 +21,11 @@ import { getLoginUrl } from 'utils/login';
 import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
 import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
-import { SprakVelger } from '../footer/common/sprakvelger/SprakVelger';
+import { SprakVelger } from './common/sprakvelger/SprakVelger';
+import { validateBreadcrumbs } from '../../server/utils';
 import { validateAvailableLanguages } from '../../server/utils';
+import BEMHelper from '../../utils/bem';
+import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
 export const decoratorContextCookie = 'decorator-context';
@@ -45,9 +48,16 @@ export const Header = () => {
     const { authenticated } = innloggingsstatus.data;
     const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
+    const cls = BEMHelper('header');
+
     const [availableLanguages, setAvailableLanguages] = useState(
-        PARAMS.AVAILABLE_LANGUAGES || []
+        PARAMS.AVAILABLE_LANGUAGES
     );
+
+    const [breadcrumbs, setBreadcrumbs] = useState(
+        environment.PARAMS.BREADCRUMBS
+    );
+
     const [cookies, setCookie] = useCookies([
         decoratorLanguageCookie,
         decoratorContextCookie,
@@ -200,6 +210,25 @@ export const Header = () => {
         };
     }, []);
 
+    // Receive breadcrumbs from frontend-apps
+    useEffect(() => {
+        const receiveMessage = (msg: MessageEvent) => {
+            const { data } = msg;
+            const isSafe = msgSafetyCheck(msg);
+            const { source, event, payload } = data;
+            if (isSafe) {
+                if (source === 'decoratorClient' && event === 'breadcrumbs') {
+                    validateBreadcrumbs(payload);
+                    setBreadcrumbs(payload);
+                }
+            }
+        };
+        window.addEventListener('message', receiveMessage, false);
+        return () => {
+            window.removeEventListener('message', receiveMessage, false);
+        };
+    }, []);
+
     return (
         <div className={'decorator-wrapper'}>
             <HeadElements />
@@ -213,8 +242,20 @@ export const Header = () => {
                 )}
             </header>
             <Driftsmeldinger />
-            <Brodsmulesti />
-            <SprakVelger availableLanguages={availableLanguages} />
+            {(breadcrumbs || availableLanguages) && (
+                <div className={cls.element('utils-container')}>
+                    <div className={cls.element('utils-content')}>
+                        {breadcrumbs && (
+                            <Brodsmulesti breadcrumbs={breadcrumbs} />
+                        )}
+                        {availableLanguages && (
+                            <SprakVelger
+                                availableLanguages={availableLanguages}
+                            />
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

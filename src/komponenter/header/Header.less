@@ -1,0 +1,34 @@
+@import (reference) '../../styling-variabler.less';
+
+.header {
+    &__utils {
+        &-container {
+            display: flex;
+            align-items: center;
+            justify-items: center;
+        }
+        &-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            max-width: 1344px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0.5rem 1rem;
+
+            & > * {
+                margin: 0.25rem 0.25rem;
+            }
+
+            @media (max-width: @screen-sm) {
+                flex-wrap: wrap;
+            }
+            @media (min-width: @smallDesktopLimitWidth) {
+                padding: 0.5rem 2rem;
+            }
+            @media (min-width: @desktopMaxWidth) {
+                padding: 0.5rem 0;
+            }
+        }
+    }
+}
