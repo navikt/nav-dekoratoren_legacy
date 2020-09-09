@@ -59,9 +59,14 @@ const stateSelector = (state: AppState) => ({
 });
 
 export type ChatConfig = {
-    percentage?: number;
-    toggle?: boolean;
+    percentage: number;
+    toggle: boolean;
     analytics?: any;
+};
+
+const defaultConfig: ChatConfig = {
+    toggle: true,
+    percentage: 25,
 };
 
 type Props = {
@@ -99,11 +104,13 @@ export const ChatbotWrapper = ({
         const chatbotVersion122IsMounted =
             document.getElementsByClassName('gxKraP').length > 0;
 
-        hentChatbotConfig(appUrl).then(setChatConfig).catch(console.error);
+        hentChatbotConfig(appUrl)
+            .then(setChatConfig)
+            .catch(() => setChatConfig(defaultConfig));
 
         setMountChatbot(
             !chatbotVersion122IsMounted &&
-                (chatbotSessionActive || paramChatbot || isEnonicPage()) // TODO: fjern før prod
+                (chatbotSessionActive || paramChatbot)
         );
     }, []);
 
@@ -117,7 +124,7 @@ export const ChatbotWrapper = ({
             chatConfig.toggle &&
             gradualRolloutFeatureToggle(
                 'enonic-chatbot',
-                chatConfig.percentage || 100,
+                chatConfig.percentage,
                 moment().add(30, 'days')
             );
 
