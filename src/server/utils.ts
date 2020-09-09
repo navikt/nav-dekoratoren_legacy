@@ -102,8 +102,7 @@ export const validateContext = (context: string) => {
         case 'samarbeidspartner':
             break;
         default:
-            const error =
-                'context supports privatperson | arbeidsgiver | samarbeidspartner';
+            const error = `context supports privatperson | arbeidsgiver | samarbeidspartner`;
             throw Error(error);
     }
 };
@@ -145,8 +144,7 @@ export const validateAvailableLanguages = (languages: AvailableLanguage[]) => {
             case 'se':
                 break;
             default:
-                const error =
-                    'availableLanguages.locale supports nb | nn | en | se';
+                const error = `availableLanguages.locale supports nb | nn | en | se`;
                 throw Error(error);
         }
     });
