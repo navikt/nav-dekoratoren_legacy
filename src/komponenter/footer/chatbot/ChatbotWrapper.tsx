@@ -11,6 +11,7 @@ import debounce from 'lodash.debounce';
 import { gradualRolloutFeatureToggle } from 'utils/gradual-rollout-feature-toggle';
 import { hentChatbotConfig } from 'api/api';
 import { logAmplitudeEvent } from 'utils/amplitude';
+import { defaultSurvey } from 'komponenter/footer/chatbot/chatbotAnalytics';
 import './ChatbotWrapper.less';
 
 // Prevents nodejs renderer crash
@@ -179,7 +180,7 @@ export const ChatbotWrapper = ({
                     configId={configId}
                     label={labelText}
                     analyticsCallback={logAmplitudeEvent}
-                    analyticsSurvey={chatConfig?.analytics}
+                    analyticsSurvey={chatConfig?.analytics || defaultSurvey}
                 />
             </div>
         </div>
