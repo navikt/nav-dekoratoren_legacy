@@ -76,7 +76,8 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
 
 // Validation utils
 export const validateClientEnv = (req: Request) => {
-    const {level, language, context, availableLanguages} = req.query;
+    const {level, language, context} = req.query;
+    const { availableLanguages, breadcrumbs} = req.query;
     if (context) {
         validateContext(context as string);
     }
@@ -88,6 +89,9 @@ export const validateClientEnv = (req: Request) => {
     }
     if (availableLanguages) {
         validateAvailableLanguages(availableLanguages as string);
+    }
+    if (breadcrumbs) {
+        validateBreadcrumbs(breadcrumbs as string);
     }
 }
 
@@ -130,6 +134,10 @@ export const validateLanguage = (language: string) => {
 export const validateAvailableLanguages = (availableLanguages: string) => {
     const languages = JSON.parse(availableLanguages as string);
     languages.map((language: {locale: string, url: string}) => {
+        if (!language.url) {
+            const error = 'availableLanguages.url supports string';
+            throw(Error(error));
+        }
         switch (language.locale) {
             case 'nb':
             case 'nn':
@@ -141,7 +149,19 @@ export const validateAvailableLanguages = (availableLanguages: string) => {
                 throw(Error(error));
         }
     });
+}
 
+export const validateBreadcrumbs = (breadcrumbs: string) => {
+    JSON.parse(breadcrumbs as string).map((breadcrumb: {title: string, url: string}) => {
+        if (!breadcrumb.title) {
+            const error = 'breadcrumbs.title supports string';
+            throw(Error(error));
+        }
+        if (!breadcrumb.url) {
+            const error = 'breadcrumbs.url supports string';
+            throw(Error(error));
+        }
+    });
 }
 
 // Time utils
