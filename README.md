@@ -86,7 +86,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | redirectToApp             | boolean                                                     | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2]      |
 | level                     | Level3 \| Level4                                            | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]                  |            
 | language                  | nb \| nn \| en \| se                                        | norsk                | Setter språket til dekoratøren [3]                                                  |
-| availableLanguages (beta) | [{ locale: string, url: string }]                           | [ ]                  | Setter alternativene til språkvelgeren server-side [4]                              |
+| availableLanguages (beta) | [{ locale: nb \| nn \| en \| se, url: string }]             | [ ]                  | Setter alternativene til språkvelgeren server-side [4]                              |
 | breadcrumbs (beta)        | [{ title: string, url: string }]                            | [ ]                  | Setter brødsmulestien server-side [5]                                               |
 | feedback                  | boolean                                                     | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
 | chatbot                   | boolean                                                     | false                | Skjuler eller viser Chatbot Frida [5]                                               |
