@@ -48,7 +48,6 @@ export const Header = () => {
     const { authenticated } = innloggingsstatus.data;
     const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
-    const cls = BEMHelper('header');
 
     const [availableLanguages, setAvailableLanguages] = useState(
         PARAMS.AVAILABLE_LANGUAGES
@@ -243,8 +242,9 @@ export const Header = () => {
             </header>
             <Driftsmeldinger />
             {(breadcrumbs || availableLanguages) && (
-                <div className={cls.element('utils-container')}>
-                    <div className={cls.element('utils-content')}>
+                // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
+                <div className={'decorator-utils-container'}>
+                    <div className={'decorator-utils-content'}>
                         {breadcrumbs && (
                             <Brodsmulesti breadcrumbs={breadcrumbs} />
                         )}
