@@ -65,7 +65,6 @@ export const SprakVelger = (props: Props) => {
         </span>
     );
 
-    // @ts-ignore
     const {
         isOpen,
         selectedItem,

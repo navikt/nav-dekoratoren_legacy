@@ -2,9 +2,9 @@ import { MenyNode } from 'store/reducers/menu-duck';
 import { Locale } from 'store/reducers/language-duck';
 
 export enum MenuValue {
-    PRIVATPERSON = 'PRIVATPERSON',
-    ARBEIDSGIVER = 'ARBEIDSGIVER',
-    SAMARBEIDSPARTNER = 'SAMARBEIDSPARTNER',
+    PRIVATPERSON = 'privatperson',
+    ARBEIDSGIVER = 'arbeidsgiver',
+    SAMARBEIDSPARTNER = 'samarbeidspartner',
     IKKEBESTEMT = 'IKKEBESTEMT',
 }
 

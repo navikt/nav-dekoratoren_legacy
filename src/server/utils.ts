@@ -20,10 +20,10 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
     // Throw errors if parameters are invalid
     validateClientEnv(req);
 
-    const chosenLanguage = (req.query.language?.toString().toUpperCase() ||
+    const chosenLanguage = (req.query.language?.toString().toLowerCase() ||
         Locale.IKKEBESTEMT) as Locale;
 
-    const chosenContext = (req.query.context?.toString().toUpperCase() ||
+    const chosenContext = (req.query.context?.toString().toLowerCase() ||
         MenuValue.IKKEBESTEMT) as MenuValue;
 
     const appUrl = `${process.env.APP_BASE_URL || ``}${
@@ -103,7 +103,7 @@ export const validateContext = (context: string) => {
             break;
         default:
             const error =
-                'context supports privatperson | arbeidsgiver | samarbeidspartner';
+                'context supports privatperson | arbeidsgiver | samarbeidspartner';
             throw Error(error);
     }
 };
@@ -114,7 +114,7 @@ export const validateLevel = (level: string) => {
         case 'Level4':
             break;
         default:
-            const error = 'level supports Level3 | Level4';
+            const error = 'level supports Level3 | Level4';
             throw Error(error);
     }
 };
@@ -127,7 +127,7 @@ export const validateLanguage = (language: string) => {
         case 'se':
             break;
         default:
-            const error = 'language supports nb | nn | en | se';
+            const error = 'language supports nb | nn | en | se';
             throw Error(error);
     }
 };
@@ -146,7 +146,7 @@ export const validateAvailableLanguages = (languages: AvailableLanguage[]) => {
                 break;
             default:
                 const error =
-                    'availableLanguages.locale supports nb | nn | en | se';
+                    'availableLanguages.locale supports nb | nn | en | se';
                 throw Error(error);
         }
     });
