@@ -18,7 +18,6 @@ interface Props {
 }
 
 const Item = (props: Props) => {
-    const { language } = useSelector((state: AppState) => state.language);
     const { selectedItem, highlightedIndex, index } = props;
     const { item, itemProps, cls } = props;
 
@@ -38,12 +37,7 @@ const Item = (props: Props) => {
             {selectedItem?.locale === item.locale ? (
                 <div className={cls.element('option')}>
                     <Bilde asset={Cicle} className={cls.element('sirkel')} />
-                    <Normaltekst>
-                        {item.label}{' '}
-                        <span className="sr-only">
-                            {finnTekst('sprak-valgt', language)}
-                        </span>
-                    </Normaltekst>
+                    <Normaltekst>{item.label} </Normaltekst>
                 </div>
             ) : (
                 <Normaltekst className={cls.element('option')}>

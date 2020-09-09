@@ -112,6 +112,7 @@ export const SprakVelger = (props: Props) => {
                         <>
                             {options.map((item, index) => (
                                 <Item
+                                    key={index}
                                     cls={cls}
                                     item={item}
                                     index={index}
