@@ -88,10 +88,10 @@ export const validateClientEnv = (req: Request) => {
         validateLanguage(language as string);
     }
     if (availableLanguages) {
-        validateAvailableLanguages(availableLanguages as string);
+        validateAvailableLanguages(JSON.parse(availableLanguages as string));
     }
     if (breadcrumbs) {
-        validateBreadcrumbs(breadcrumbs as string);
+        validateBreadcrumbs(JSON.parse(breadcrumbs as string));
     }
 }
 
@@ -131,9 +131,8 @@ export const validateLanguage = (language: string) => {
     }
 }
 
-export const validateAvailableLanguages = (availableLanguages: string) => {
-    const languages = JSON.parse(availableLanguages as string);
-    languages.map((language: {locale: string, url: string}) => {
+export const validateAvailableLanguages = (availableLanguages: [{locale: string, url: string}]) => {
+    availableLanguages.map((language: {locale: string, url: string}) => {
         if (!language.url) {
             const error = 'availableLanguages.url supports string';
             throw(Error(error));
@@ -151,8 +150,8 @@ export const validateAvailableLanguages = (availableLanguages: string) => {
     });
 }
 
-export const validateBreadcrumbs = (breadcrumbs: string) => {
-    JSON.parse(breadcrumbs as string).map((breadcrumb: {title: string, url: string}) => {
+export const validateBreadcrumbs = (breadcrumbs: [{title: string, url: string}]) => {
+    breadcrumbs.map((breadcrumb: {title: string, url: string}) => {
         if (!breadcrumb.title) {
             const error = 'breadcrumbs.title supports string';
             throw(Error(error));
