@@ -8,17 +8,16 @@ import moment from 'moment-timezone';
 import { finnTekst } from 'tekster/finn-tekst';
 import { getResizeObserver } from 'utils/resize-observer';
 import debounce from 'lodash.debounce';
-import { gradualRolloutFeatureToggle } from 'utils/gradual-rollout-feature-toggle';
 import { hentChatbotConfig } from 'api/api';
 import { logAmplitudeEvent } from 'utils/amplitude';
 import { defaultSurvey } from 'komponenter/footer/chatbot/chatbotAnalytics';
+import { enonicFeatureToggle } from 'komponenter/footer/chatbot/chatbotEnonicConfig';
+import { EnonicChatConfig } from 'komponenter/footer/chatbot/chatbotEnonicConfig';
+import { defaultEnonicConfig } from 'komponenter/footer/chatbot/chatbotEnonicConfig';
 import './ChatbotWrapper.less';
 
 // Prevents nodejs renderer crash
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
-
-export const isEnonicPage = () =>
-    /(nav.no|^)(\/no|\/en|\/se)/.test(document.location.href);
 
 const humanChatIsOpen = (serverTime: number) => {
     const now = moment(serverTime).tz('Europe/Oslo');
@@ -59,17 +58,6 @@ const stateSelector = (state: AppState) => ({
         state.dropdownToggles.varsler,
 });
 
-export type ChatConfig = {
-    percentage: number;
-    toggle: boolean;
-    analytics?: any;
-};
-
-const defaultConfig: ChatConfig = {
-    toggle: true,
-    percentage: 25,
-};
-
 type Props = {
     customerKey?: string;
     queueKey?: string;
@@ -90,7 +78,7 @@ export const ChatbotWrapper = ({
     } = useSelector(stateSelector);
     const [cookies] = useCookies();
     const [mountChatbot, setMountChatbot] = useState(false);
-    const [chatConfig, setChatConfig] = useState<ChatConfig>();
+    const [chatConfig, setChatConfig] = useState<EnonicChatConfig>();
 
     const containerRef = useRef<HTMLDivElement>(null);
     const dockRef = useRef<HTMLDivElement>(null);
@@ -107,7 +95,7 @@ export const ChatbotWrapper = ({
 
         hentChatbotConfig(appUrl)
             .then(setChatConfig)
-            .catch(() => setChatConfig(defaultConfig));
+            .catch(() => setChatConfig(defaultEnonicConfig));
 
         setMountChatbot(
             !chatbotVersion122IsMounted &&
@@ -120,16 +108,7 @@ export const ChatbotWrapper = ({
             return;
         }
 
-        const enonicFeatureToggle =
-            isEnonicPage() &&
-            chatConfig.toggle &&
-            gradualRolloutFeatureToggle(
-                'enonic-chatbot',
-                chatConfig.percentage,
-                moment().add(30, 'days')
-            );
-
-        if (enonicFeatureToggle) {
+        if (enonicFeatureToggle(chatConfig)) {
             setMountChatbot(true);
         }
     }, [chatConfig]);
