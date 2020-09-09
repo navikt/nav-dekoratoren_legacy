@@ -1,9 +1,7 @@
 import React from 'react';
 import Globe from 'ikoner/globe.svg';
-import Cicle from 'ikoner/circle.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { NedChevron } from 'nav-frontend-chevron';
-import { ValueType } from 'react-select/src/types';
 import { useSelect } from 'downshift';
 import { decoratorLanguageCookie } from '../../Header';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
@@ -15,20 +13,20 @@ import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { useSelector, useStore } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Bilde } from '../../../common/bilde/Bilde';
+import BEMHelper from 'utils/bem';
+import Item from './Item';
 import './SprakVelger.less';
 
-const cssPrefix = 'sprakvelger';
-
-const farger = {
+export const farger = {
     navGra20: '#C6C2BF',
     navBla: '#0067C5',
 };
 
-type LocaleOption = {
+export type LocaleOption = {
     value: string;
     locale: string;
     handleInApp?: boolean;
-    label: JSX.Element;
+    label: string;
 };
 
 interface Props {
@@ -37,16 +35,15 @@ interface Props {
 
 export const SprakVelger = (props: Props) => {
     const store = useStore();
+    const cls = BEMHelper('sprakvelger');
     const { language } = useSelector((state: AppState) => state.language);
     const [, setCookie] = useCookies([decoratorLanguageCookie]);
     const options = transformOptions(props.availableLanguages);
 
-    const onChange = (selected: ValueType<LocaleOption>) => {
+    const onChange = (selected: LocaleOption) => {
         const { locale, value, handleInApp } = selected as LocaleOption;
-        console.log('set cookie' + locale);
         setCookie(decoratorLanguageCookie, locale, cookieOptions);
         store.dispatch(languageDuck.actionCreator({ language: locale }));
-
         if (handleInApp) {
             postMessageToApp('languageSelect', {
                 url: value,
@@ -58,13 +55,6 @@ export const SprakVelger = (props: Props) => {
         }
     };
 
-    const knappeInnhold = (
-        <span className={`${cssPrefix}__knapp-tekst`}>
-            <Bilde asset={Globe} className={`${cssPrefix}__ikon`} />
-            <Normaltekst>{finnTekst('sprak-velg', language)}</Normaltekst>
-        </span>
-    );
-
     const {
         isOpen,
         selectedItem,
@@ -75,88 +65,63 @@ export const SprakVelger = (props: Props) => {
         getItemProps,
     } = useSelect({
         items: options,
-        itemToString: (item) => (item ? item.value : ''),
-        onSelectedItemChange: (changes) =>
-            onChange(changes.selectedItem as ValueType<LocaleOption>),
+        itemToString: (item) => item?.value || '',
+        onSelectedItemChange: ({ selectedItem }) =>
+            onChange(selectedItem as LocaleOption),
         defaultSelectedItem: options.find(
             (option) => option.locale === language
         ),
     });
 
+    const ulStyle = isOpen
+        ? {
+              boxShadow: '0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08)',
+              border: '1px solid',
+              borderRadius: '0 0 4px 4px',
+              outline: 'none',
+              borderColor: farger.navGra20,
+              borderTop: 'none',
+          }
+        : { border: 'none' };
+
     return (
-        <div className={`${cssPrefix}__container`}>
-            <div className={cssPrefix}>
+        <div className={cls.element('container')}>
+            <div className={cls.className}>
                 <label {...getLabelProps()} className="sr-only">
                     <Tekst id={'sprak-velg'} />
                 </label>
                 <button
                     {...getToggleButtonProps()}
-                    className={`${cssPrefix}__knapp skjemaelement__input`}
+                    className={`${cls.element('knapp')} skjemaelement__input`}
                     type="button"
                 >
-                    {knappeInnhold}
+                    <span className={cls.element('knapp-tekst')}>
+                        <Bilde asset={Globe} className={cls.element('ikon')} />
+                        <Normaltekst>
+                            {finnTekst('sprak-velg', language)}
+                        </Normaltekst>
+                    </span>
                     <NedChevron />
                 </button>
-
                 <ul
                     {...getMenuProps()}
-                    className={`${cssPrefix}__menu`}
-                    style={
-                        isOpen
-                            ? {
-                                  boxShadow:
-                                      '0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08)',
-                                  border: '1px solid',
-                                  borderRadius: '0 0 4px 4px',
-                                  outline: 'none',
-                                  borderColor: farger.navGra20,
-                                  borderTop: 'none',
-                              }
-                            : { border: 'none' }
-                    }
+                    className={cls.element('menu')}
+                    style={ulStyle}
                 >
-                    {isOpen &&
-                        options.map((item, index) => (
-                            <li
-                                {...getItemProps({ item, index })}
-                                style={
-                                    highlightedIndex === index
-                                        ? {
-                                              backgroundColor: farger.navBla,
-                                              color: 'white',
-                                          }
-                                        : {
-                                              backgroundColor: 'white',
-                                              color: 'black',
-                                          }
-                                }
-                                className="menuList"
-                                key={`${item.value}${index}`}
-                            >
-                                {selectedItem?.locale === item.locale ? (
-                                    <div className={`${cssPrefix}__option`}>
-                                        <Bilde asset={Cicle} />
-                                        <Normaltekst>
-                                            {item.label}{' '}
-                                            <span className="sr-only">
-                                                {finnTekst(
-                                                    'sprak-valgt',
-                                                    language
-                                                )}
-                                            </span>
-                                        </Normaltekst>
-                                    </div>
-                                ) : (
-                                    <Normaltekst
-                                        className={`${cssPrefix}__option`}
-                                    >
-                                        <span className="not-selected">
-                                            {item.label}
-                                        </span>
-                                    </Normaltekst>
-                                )}
-                            </li>
-                        ))}
+                    {isOpen && (
+                        <>
+                            {options.map((item, index) => (
+                                <Item
+                                    cls={cls}
+                                    item={item}
+                                    index={index}
+                                    highlightedIndex={highlightedIndex}
+                                    itemProps={getItemProps({ item, index })}
+                                    selectedItem={selectedItem}
+                                />
+                            ))}
+                        </>
+                    )}
                 </ul>
             </div>
         </div>
