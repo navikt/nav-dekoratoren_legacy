@@ -9,10 +9,15 @@ import { finnTekst } from 'tekster/finn-tekst';
 import { getResizeObserver } from 'utils/resize-observer';
 import debounce from 'lodash.debounce';
 import { gradualRolloutFeatureToggle } from 'utils/gradual-rollout-feature-toggle';
+// @ts-ignore
+import { SurveyQuestion } from '@navikt/nav-chatbot';
 import './ChatbotWrapper.less';
-import { fetchXpToggles } from 'api/api';
+import { hentChatbotConfig } from 'api/api';
 
 // Prevents nodejs renderer crash
+const { logAmplitudeEvent } = verifyWindowObj()
+    ? require('utils/amplitude')
+    : () => null;
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
 export const isEnonicPage = () =>
@@ -45,16 +50,22 @@ const dockIfNearBottom = (
     }
 };
 
+export type ChatConfig = {
+    percentage?: number;
+    toggle?: boolean;
+    analytics?: SurveyQuestion[];
+};
+
 const stateSelector = (state: AppState) => ({
     paramChatbot: state.environment.PARAMS.CHATBOT,
     language: state.language.language,
     serverTime: state.environment.SERVER_TIME,
+    appUrl: state.environment.APP_URL,
     menuIsActive:
         state.dropdownToggles.hovedmeny ||
         state.dropdownToggles.minside ||
         state.dropdownToggles.sok ||
         state.dropdownToggles.varsler,
-    APP_URL: state.environment.APP_BASE_URL,
 });
 
 type Props = {
@@ -72,12 +83,12 @@ export const ChatbotWrapper = ({
         paramChatbot,
         language,
         serverTime,
+        appUrl,
         menuIsActive,
-        APP_URL,
     } = useSelector(stateSelector);
     const [cookies] = useCookies();
     const [mountChatbot, setMountChatbot] = useState(false);
-    const [enonicFeatureToggle, setEnonicFeatureToggle] = useState(false);
+    const [chatConfig, setChatConfig] = useState<ChatConfig>();
 
     const containerRef = useRef<HTMLDivElement>(null);
     const dockRef = useRef<HTMLDivElement>(null);
@@ -92,20 +103,7 @@ export const ChatbotWrapper = ({
         const chatbotVersion122IsMounted =
             document.getElementsByClassName('gxKraP').length > 0;
 
-        if (isEnonicPage()) {
-            fetchXpToggles(APP_URL).then((toggles) => {
-                const chatbotToggle = toggles['chatbot-frida'];
-                if (chatbotToggle?.toggle) {
-                    setEnonicFeatureToggle(
-                        gradualRolloutFeatureToggle(
-                            'chatbot-frida',
-                            chatbotToggle.percentage,
-                            moment('2020-10-01')
-                        )
-                    );
-                }
-            });
-        }
+        hentChatbotConfig(appUrl).then(setChatConfig).catch(console.error);
 
         setMountChatbot(
             !chatbotVersion122IsMounted &&
@@ -114,8 +112,23 @@ export const ChatbotWrapper = ({
     }, []);
 
     useEffect(() => {
-        setMountChatbot(mountChatbot || enonicFeatureToggle);
-    }, [enonicFeatureToggle]);
+        if (!chatConfig) {
+            return;
+        }
+
+        const enonicFeatureToggle =
+            isEnonicPage() &&
+            chatConfig.toggle &&
+            gradualRolloutFeatureToggle(
+                'enonic-chatbot',
+                chatConfig.percentage || 100,
+                moment().add(30, 'days')
+            );
+
+        if (enonicFeatureToggle) {
+            setMountChatbot(true);
+        }
+    }, [chatConfig]);
 
     useEffect(() => {
         if (!mountChatbot) {
@@ -162,6 +175,8 @@ export const ChatbotWrapper = ({
                     queueKey={queueKey}
                     configId={configId}
                     label={labelText}
+                    analyticsCallback={logAmplitudeEvent}
+                    analyticsSurvey={chatConfig?.analytics}
                 />
             </div>
         </div>

@@ -2,9 +2,9 @@ import { fetchToJson } from './api-utils';
 import { Data as innloggingsstatusData } from '../store/reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from '../store/reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
-import { DriftsmeldingerData } from '../store/reducers/driftsmeldinger-duck';
+import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { FeatureToggles } from 'store/reducers/feature-toggles-duck';
-import { XpToggles } from 'utils/gradual-rollout-feature-toggle';
+import { ChatConfig } from 'komponenter/footer/chatbot/ChatbotWrapper';
 
 export enum Status {
     OK = 'OK',
@@ -60,9 +60,6 @@ export const fetchFeatureToggles = (
         { credentials: 'include' }
     );
 
-export const fetchXpToggles = (APP_URL: string): Promise<XpToggles> =>
-    fetchToJson(`${APP_URL}/api/xpToggles`);
-
 export const getFeatureToggleUrl = (featureToggles: FeatureToggles) =>
     Object.keys(featureToggles)
         .map(
@@ -74,3 +71,6 @@ export const hentDriftsmeldinger = (
     APP_URL: string
 ): Promise<DriftsmeldingerData[]> =>
     fetchToJson(`${APP_URL}/api/driftsmeldinger`);
+
+export const hentChatbotConfig = (APP_URL: string): Promise<ChatConfig> =>
+    fetchToJson(`${APP_URL}/api/chatConfig`);
