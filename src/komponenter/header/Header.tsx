@@ -146,7 +146,6 @@ export const Header = () => {
             dispatch(languageDuck.actionCreator({ language: PARAMS.LANGUAGE }));
             setCookie(decoratorLanguageCookie, PARAMS.LANGUAGE, cookieOptions);
         } else {
-            // Fetch state from cookie OR default to norsk
             const language = getLanguageFromUrl();
             dispatch(languageDuck.actionCreator({ language }));
             setCookie(decoratorLanguageCookie, language, cookieOptions);
