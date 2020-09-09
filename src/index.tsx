@@ -6,11 +6,10 @@ import 'core-js/stable/regexp';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
-import { createStore } from './store';
-import { erDev, verifyWindowObj } from './utils/Environment';
-import { fetchEnv } from './utils/Environment';
-import { initGA } from './utils/google-analytics';
-import { initAmplitude } from './utils/amplitude';
+import { createStore } from 'store';
+import { erDev, verifyWindowObj } from 'utils/Environment';
+import { fetchEnv } from 'utils/Environment';
+import { initAnalytics } from 'utils/analytics';
 import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
@@ -26,8 +25,7 @@ if (erDev) {
 }
 
 const run = () => {
-    initGA();
-    initAmplitude();
+    initAnalytics();
     fetchEnv()
         .then((environment) => {
             const cookies = new Cookies();

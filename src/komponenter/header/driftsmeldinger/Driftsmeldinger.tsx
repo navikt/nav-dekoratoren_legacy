@@ -1,8 +1,8 @@
 import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { LenkeMedGA } from '../../common/lenke-med-ga/LenkeMedGA';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
-import { GACategory } from 'utils/google-analytics';
+import { AnalyticsCategory } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import './Driftsmeldinger.less';
@@ -21,12 +21,12 @@ export const Driftsmeldinger = () => {
             <div>
                 {driftsmeldinger.data.map((melding: DriftsmeldingerData) => {
                     return (
-                        <LenkeMedGA
+                        <LenkeMedSporing
                             key={melding.heading}
                             href={`${XP_BASE_URL}${melding.url}`}
                             classNameOverride="message"
-                            gaEventArgs={{
-                                category: GACategory.Header,
+                            analyticsEventArgs={{
+                                category: AnalyticsCategory.Header,
                                 action: 'driftsmeldinger',
                             }}
                         >
@@ -36,7 +36,7 @@ export const Driftsmeldinger = () => {
                             <Normaltekst className="message-text">
                                 {melding.heading}
                             </Normaltekst>
-                        </LenkeMedGA>
+                        </LenkeMedSporing>
                     );
                 })}
             </div>

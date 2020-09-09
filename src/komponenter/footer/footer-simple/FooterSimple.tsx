@@ -5,7 +5,7 @@ import { MenyNode } from 'store/reducers/menu-duck';
 import { AppState } from 'store/reducers';
 import Tekst from 'tekster/finn-tekst';
 import DelSkjerm from 'ikoner/del-skjerm/DelSkjerm';
-import { GACategory, gaEvent } from 'utils/google-analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import BEMHelper from 'utils/bem';
 
@@ -32,16 +32,16 @@ const FooterSimple = () => {
     }, [data, personvernNode]);
 
     const openModal = () => {
-        gaEvent({
-            category: GACategory.Footer,
+        analyticsEvent({
+            category: AnalyticsCategory.Footer,
             action: `kontakt/del-skjerm-open`,
         });
         setIsOpen(true);
     };
 
     const closeModal = () => {
-        gaEvent({
-            category: GACategory.Footer,
+        analyticsEvent({
+            category: AnalyticsCategory.Footer,
             action: `kontakt/del-skjerm-close`,
         });
         setIsOpen(false);

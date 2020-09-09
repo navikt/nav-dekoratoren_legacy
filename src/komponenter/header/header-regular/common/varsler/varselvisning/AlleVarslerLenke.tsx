@@ -1,8 +1,8 @@
 import React from 'react';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { GACategory } from 'utils/google-analytics';
+import { AnalyticsCategory } from 'utils/analytics';
 import Tekst from 'tekster/finn-tekst';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 const AlleVarslerLenke = (props: Props) => {
     return (
         <div className="dekorator-vis-alle-lenke">
-            <LenkeMedGA
+            <LenkeMedSporing
                 href={props.varselInnboksUrl}
                 id={
                     props.rowIndex !== undefined
@@ -25,15 +25,15 @@ const AlleVarslerLenke = (props: Props) => {
                           })
                         : undefined
                 }
-                gaEventArgs={{
-                    category: GACategory.Header,
+                analyticsEventArgs={{
+                    category: AnalyticsCategory.Header,
                     action: 'varsler/visalle',
                     label: props.varselInnboksUrl,
                 }}
             >
                 <Tekst id={'varsler-visalle'} />
                 {props.nyeVarslerMsg}
-            </LenkeMedGA>
+            </LenkeMedSporing>
         </div>
     );
 };

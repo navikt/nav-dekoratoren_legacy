@@ -1,7 +1,7 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import { gaEvent } from 'utils/google-analytics';
-import { GACategory } from 'utils/google-analytics';
+import { analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics';
 import { toggleMinsidemeny } from 'store/reducers/dropdown-toggle-duck';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
 import MinsideIkon from './minside-ikon/MinsideIkon';
@@ -29,9 +29,9 @@ export const MinsidePersonKnapp = ({ classname, id }: Props) => {
     const cls = BEMHelper(classname);
 
     const toggleMinSideDropdown = () => {
-        gaEvent({
+        analyticsEvent({
             context: MenuValue.PRIVATPERSON,
-            category: GACategory.Header,
+            category: AnalyticsCategory.Header,
             action: `minside-meny-${isOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleMinsidemeny());

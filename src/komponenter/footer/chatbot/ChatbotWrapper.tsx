@@ -9,15 +9,11 @@ import { finnTekst } from 'tekster/finn-tekst';
 import { getResizeObserver } from 'utils/resize-observer';
 import debounce from 'lodash.debounce';
 import { gradualRolloutFeatureToggle } from 'utils/gradual-rollout-feature-toggle';
-// @ts-ignore
-import { SurveyQuestion } from '@navikt/nav-chatbot';
-import './ChatbotWrapper.less';
 import { hentChatbotConfig } from 'api/api';
+import { logAmplitudeEvent } from 'utils/amplitude';
+import './ChatbotWrapper.less';
 
 // Prevents nodejs renderer crash
-const { logAmplitudeEvent } = verifyWindowObj()
-    ? require('utils/amplitude')
-    : () => null;
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
 export const isEnonicPage = () =>
@@ -50,12 +46,6 @@ const dockIfNearBottom = (
     }
 };
 
-export type ChatConfig = {
-    percentage?: number;
-    toggle?: boolean;
-    analytics?: SurveyQuestion[];
-};
-
 const stateSelector = (state: AppState) => ({
     paramChatbot: state.environment.PARAMS.CHATBOT,
     language: state.language.language,
@@ -67,6 +57,12 @@ const stateSelector = (state: AppState) => ({
         state.dropdownToggles.sok ||
         state.dropdownToggles.varsler,
 });
+
+export type ChatConfig = {
+    percentage?: number;
+    toggle?: boolean;
+    analytics?: any;
+};
 
 type Props = {
     customerKey?: string;
@@ -112,7 +108,7 @@ export const ChatbotWrapper = ({
     }, []);
 
     useEffect(() => {
-        if (!chatConfig) {
+        if (!chatConfig || mountChatbot) {
             return;
         }
 
