@@ -8,6 +8,7 @@ import HomeIcon from 'ikoner/home.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import { msgSafetyCheck, postMessageToApp } from 'utils/messages';
+import { validateBreadcrumbs } from '../../../../server/utils';
 import './Brodsmulesti.less';
 
 export interface Breadcrumb {
@@ -31,6 +32,7 @@ export const Brodsmulesti = () => {
             const { source, event, payload } = data;
             if (isSafe) {
                 if (source === 'decoratorClient' && event === 'breadcrumbs') {
+                    validateBreadcrumbs(payload);
                     setBreadcrumbs(payload);
                 }
             }

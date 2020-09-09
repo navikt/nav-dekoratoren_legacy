@@ -22,6 +22,7 @@ import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
 import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
 import { SprakVelger } from '../footer/common/sprakvelger/SprakVelger';
+import { validateAvailableLanguages } from '../../server/utils';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
 export const decoratorContextCookie = 'decorator-context';
@@ -187,6 +188,7 @@ export const Header = () => {
             if (isSafe) {
                 if (source === 'decoratorClient') {
                     if (event === 'availableLanguages') {
+                        validateAvailableLanguages(payload);
                         setAvailableLanguages(payload);
                     }
                 }
