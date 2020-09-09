@@ -2,7 +2,7 @@ import React from 'react';
 import { AnalyticsEventArgs, analyticsEvent } from 'utils/analytics';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import Lock from 'ikoner/meny/Lock';
-import 'komponenter/common/lenke-med-sporing/LenkeMedSporing.less';
+import './LenkeMedSporing.less';
 
 type Props = {
     href: string;
