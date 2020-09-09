@@ -67,7 +67,7 @@ const Hovedmeny = (props: Props) => {
 
     const containerClassName = menyClass.element(
         'startmeny',
-        underMenuIsOpen ? 'hidden' : ''
+        underMenuIsOpen || !hovedMenuIsOpen ? 'hidden' : ''
     );
 
     return (
