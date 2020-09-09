@@ -16,7 +16,7 @@ import { EnonicChatConfig } from 'komponenter/footer/chatbot/chatbotEnonicConfig
 import { defaultEnonicConfig } from 'komponenter/footer/chatbot/chatbotEnonicConfig';
 import './ChatbotWrapper.less';
 
-// Prevents nodejs renderer crash
+// Prevents SSR crash
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
 const humanChatIsOpen = (serverTime: number) => {

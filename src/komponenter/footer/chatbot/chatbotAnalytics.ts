@@ -2,6 +2,7 @@ export type SurveyQuestion = {
     label: string;
     options: string[];
     type: 'radio' | 'checkbox';
+    required?: boolean;
 };
 
 export const defaultSurvey: SurveyQuestion[] = [
@@ -9,6 +10,7 @@ export const defaultSurvey: SurveyQuestion[] = [
         label: 'Fikk du svar på det du lurte på?',
         options: ['Ja', 'Nei', 'Delvis'],
         type: 'radio',
+        required: true,
     },
     {
         label: 'Hva kom du hit for å gjøre?',
@@ -29,6 +31,7 @@ export const defaultSurvey: SurveyQuestion[] = [
             'Annet',
         ],
         type: 'checkbox',
+        required: true,
     },
     {
         label: 'Er du fornøyd med hjelpen du fikk?',
@@ -39,5 +42,6 @@ export const defaultSurvey: SurveyQuestion[] = [
             'Jeg er veldig misfornøyd',
         ],
         type: 'radio',
+        required: true,
     },
 ];
