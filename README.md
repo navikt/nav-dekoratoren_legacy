@@ -85,7 +85,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | enforceLogin (beta)       | boolean                                                     | false                | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]          |
 | redirectToApp             | boolean                                                     | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2]      |
 | level                     | Level3 \| Level4                                            | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]                  |            
-| language                  | nb \| nn \| en \| se                                        | norsk                | Setter språket til dekoratøren [3]                                                  |
+| language                  | nb \| nn \| en \| se                                        | nb                   | Setter språket til dekoratøren server-side [3]                                      |
 | availableLanguages (beta) | [{ locale: nb \| nn \| en \| se, url: string }]             | [ ]                  | Setter alternativene til språkvelgeren server-side [4]                              |
 | breadcrumbs (beta)        | [{ title: string, url: string }]                            | [ ]                  | Setter brødsmulestien server-side [5]                                               |
 | feedback                  | boolean                                                     | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
@@ -96,7 +96,7 @@ https://www.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Le
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
-[3] Språk vil automatisk settes client-side dersom nåværende url inneholder **/no/ (norsk)**, **/en/ (engelsk)** eller **/se/ (samisk)**, uavhengig av dette parameteret. <br>
+[3] Språk settes automatisk client-side dersom nåværende url inneholder **/nb/**,*/nn/**,**/en/**, **/se/** eller **/no/**(deprecated), uavhengig av dette parameteret. <br>
 [4] Settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [5] Settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [6] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
