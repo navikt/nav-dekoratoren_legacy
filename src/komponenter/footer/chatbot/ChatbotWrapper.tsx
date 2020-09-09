@@ -103,7 +103,7 @@ export const ChatbotWrapper = ({
 
         setMountChatbot(
             !chatbotVersion122IsMounted &&
-                (chatbotSessionActive || paramChatbot)
+                (chatbotSessionActive || paramChatbot || isEnonicPage()) // TODO: fjern før prod
         );
     }, []);
 
