@@ -70,12 +70,13 @@
             }
 
             &:focus {
-                .sok-knapper__sok-circle {
-                    border-color: @navBla;
-                }
-
-                .sok-knapper__sok-line {
-                    background-color: @navBla;
+                .sok-ikon {
+                    &__line {
+                        background-color: @navBla;
+                    }
+                    & > * {
+                        border-color: @navBla;
+                    }
                 }
             }
         }
