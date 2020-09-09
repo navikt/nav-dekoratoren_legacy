@@ -1,6 +1,6 @@
 import { MenuValue } from 'utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
-import { Language, LanguageParam } from './language-duck';
+import { Locale, LanguageParam } from './language-duck';
 import { Breadcrumb } from '../../komponenter/header/common/brodsmulesti/Brodsmulesti';
 
 export interface EnvironmentState {
@@ -25,7 +25,7 @@ export interface EnvironmentState {
         ENFORCE_LOGIN: boolean;
         REDIRECT_TO_APP: boolean;
         LEVEL: string;
-        LANGUAGE: Language;
+        LANGUAGE: Locale;
         AVAILABLE_LANGUAGES?: LanguageParam[];
         BREADCRUMBS?: Breadcrumb[];
         FEEDBACK: boolean;
@@ -34,7 +34,7 @@ export interface EnvironmentState {
 
     COOKIES: {
         CONTEXT: MenuValue;
-        LANGUAGE: Language;
+        LANGUAGE: Locale;
     };
 }
 
@@ -60,7 +60,7 @@ export const initialState: EnvironmentState = {
         ENFORCE_LOGIN: false,
         REDIRECT_TO_APP: false,
         LEVEL: '',
-        LANGUAGE: Language.IKKEBESTEMT,
+        LANGUAGE: Locale.IKKEBESTEMT,
         AVAILABLE_LANGUAGES: undefined,
         FEEDBACK: false,
         CHATBOT: false,
@@ -68,7 +68,7 @@ export const initialState: EnvironmentState = {
 
     // Cookies
     COOKIES: {
-        LANGUAGE: Language.IKKEBESTEMT,
+        LANGUAGE: Locale.IKKEBESTEMT,
         CONTEXT: MenuValue.IKKEBESTEMT,
     },
 };

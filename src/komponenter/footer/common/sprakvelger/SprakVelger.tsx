@@ -1,161 +1,171 @@
-import React, { useEffect, useState } from 'react';
-// @ts-ignore
+import React from 'react';
 import Globe from 'ikoner/globe.svg';
-import Check from 'ikoner/check.svg';
-import Select from 'react-select';
+import Cicle from 'ikoner/circle.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { HoyreChevron } from 'nav-frontend-chevron';
-import { Styles } from 'react-select/src/styles';
+import { NedChevron } from 'nav-frontend-chevron';
 import { ValueType } from 'react-select/src/types';
-import { finnTekst } from 'tekster/finn-tekst';
+import { useSelect } from 'downshift';
+import { decoratorLanguageCookie } from '../../../header/Header';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import { AvailableLanguage } from 'store/reducers/language-duck';
+import { languageDuck, Locale } from 'store/reducers/language-duck';
+import { postMessageToApp } from 'utils/messages';
+import { useCookies } from 'react-cookie';
+import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { useSelector, useStore } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { languageDuck, LanguageParam } from 'store/reducers/language-duck';
-import { Language } from 'store/reducers/language-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
-import { unleashCacheCookie } from 'komponenter/header/Header';
-import { decoratorLanguageCookie } from 'komponenter/header/Header';
-import { decoratorContextCookie } from 'komponenter/header/Header';
-import { useCookies } from 'react-cookie';
 import { Bilde } from '../../../common/bilde/Bilde';
 import './SprakVelger.less';
-import { postMessageToApp } from '../../../../utils/messages';
 
 const cssPrefix = 'sprakvelger';
 
 const farger = {
-    navGra60: '#78706A',
+    navGra20: '#C6C2BF',
     navBla: '#0067C5',
-    navBlaDarken60: '#254b6d',
 };
 
 type LocaleOption = {
     value: string;
-    language: string;
+    locale: string;
     handleInApp?: boolean;
     label: JSX.Element;
 };
 
-const option = (text: string, selected: boolean) => (
-    <div className={'sprakvelger__option'}>
-        <Normaltekst>
-            <HoyreChevron className={`${cssPrefix}__chevron`} />
-            <span>{text}</span>
-        </Normaltekst>
-        {selected && (
-            <Bilde asset={Check} className={'sprakvelger__option-icon'} />
-        )}
-    </div>
-);
-
-const mapLocaleToLanguage: { [key: string]: Language } = {
-    no: Language.NORSK,
-    nb: Language.NORSK,
-    en: Language.ENGELSK,
-    se: Language.SAMISK,
-};
-
 interface Props {
-    availableLanguages: LanguageParam[];
+    availableLanguages: AvailableLanguage[];
 }
 
 export const SprakVelger = (props: Props) => {
     const store = useStore();
     const { language } = useSelector((state: AppState) => state.language);
-    const options = transformOptions(props.availableLanguages, language);
-    const [, setCookie] = useCookies([
-        decoratorLanguageCookie,
-        decoratorContextCookie,
-        unleashCacheCookie,
-    ]);
-
-    const placeholder = (
-        <span className={`${cssPrefix}__placeholder`}>
-            <Bilde asset={Globe} className={`${cssPrefix}__ikon`} />
-            <Normaltekst>{finnTekst('sprak-velg', language)}</Normaltekst>
-        </span>
-    );
-
-    const styles: Styles = {
-        option: (provided, state) => ({
-            ...provided,
-            backgroundColor: state.isFocused ? farger.navBla : 'white',
-            color: state.isFocused ? 'white' : 'black',
-        }),
-        control: (provided, state) => ({
-            ...provided,
-            boxShadow: state.isFocused
-                ? `0 0 0 3px ${farger.navBlaDarken60}`
-                : provided.boxShadow,
-            borderColor: farger.navGra60,
-            '&:hover': { borderColor: farger.navBla },
-        }),
-        menu: (provided) => ({
-            ...provided,
-            marginTop: '3px',
-            paddingTop: '1px',
-            borderTopLeftRadius: '0',
-            borderTopRightRadius: '0',
-        }),
-        placeholder: (provided) => ({
-            ...provided,
-            color: 'black',
-        }),
-    };
+    const [, setCookie] = useCookies([decoratorLanguageCookie]);
+    const options = transformOptions(props.availableLanguages);
 
     const onChange = (selected: ValueType<LocaleOption>) => {
-        const { language, value, handleInApp } = selected as LocaleOption;
-        setCookie(decoratorLanguageCookie, language, cookieOptions);
-        store.dispatch(
-            languageDuck.actionCreator({
-                language: mapLocaleToLanguage[language],
-            })
-        );
+        const { locale, value, handleInApp } = selected as LocaleOption;
+        console.log('set cookie' + locale);
+        setCookie(decoratorLanguageCookie, locale, cookieOptions);
+        store.dispatch(languageDuck.actionCreator({ language: locale }));
 
         if (handleInApp) {
             postMessageToApp('languageSelect', {
                 url: value,
-                locale: language,
-                handleInApp,
+                locale: locale,
+                handleInApp: handleInApp,
             });
         } else {
             window.location.assign(value);
         }
     };
 
+    const knappeInnhold = (
+        <span className={`${cssPrefix}__knapp-tekst`}>
+            <Bilde asset={Globe} className={`${cssPrefix}__ikon`} />
+            <Normaltekst>{finnTekst('sprak-velg', language)}</Normaltekst>
+        </span>
+    );
+
+    // @ts-ignore
+    const {
+        isOpen,
+        selectedItem,
+        getToggleButtonProps,
+        getLabelProps,
+        getMenuProps,
+        highlightedIndex,
+        getItemProps,
+    } = useSelect({
+        items: options,
+        itemToString: (item) => (item ? item.value : ''),
+        onSelectedItemChange: (changes) =>
+            onChange(changes.selectedItem as ValueType<LocaleOption>),
+        defaultSelectedItem: options.find(
+            (option) => option.locale === language
+        ),
+    });
+
     return (
         <div className={cssPrefix}>
-            <Select
-                onChange={onChange}
-                className={`${cssPrefix}__select`}
-                options={options}
-                value
-                {...null}
-                isSearchable={false}
-                placeholder={placeholder}
-                styles={styles}
-            />
+            <label {...getLabelProps()} className="sr-only">
+                <Tekst id={'sprak-velg'} />
+            </label>
+            <button
+                {...getToggleButtonProps()}
+                className={`${cssPrefix}__knapp skjemaelement__input`}
+                type="button"
+            >
+                {knappeInnhold}
+                <NedChevron />
+            </button>
+
+            <ul
+                {...getMenuProps()}
+                className={`${cssPrefix}__menu`}
+                style={
+                    isOpen
+                        ? {
+                              boxShadow:
+                                  '0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08)',
+                              border: '1px solid',
+                              borderRadius: '0 0 4px 4px',
+                              outline: 'none',
+                              borderColor: farger.navGra20,
+                              borderTop: 'none',
+                          }
+                        : { border: 'none' }
+                }
+            >
+                {isOpen &&
+                    options.map((item, index) => (
+                        <li
+                            {...getItemProps({ item, index })}
+                            style={
+                                highlightedIndex === index
+                                    ? {
+                                          backgroundColor: farger.navBla,
+                                          color: 'white',
+                                      }
+                                    : {
+                                          backgroundColor: 'white',
+                                          color: 'black',
+                                      }
+                            }
+                            className="menuList"
+                            key={`${item.value}${index}`}
+                        >
+                            {selectedItem?.locale === item.locale ? (
+                                <div className={`${cssPrefix}__option`}>
+                                    <Bilde asset={Cicle} />
+                                    <Normaltekst>
+                                        {item.label}{' '}
+                                        <span className="sr-only">
+                                            {finnTekst('sprak-valgt', language)}
+                                        </span>
+                                    </Normaltekst>
+                                </div>
+                            ) : (
+                                <Normaltekst className={`${cssPrefix}__option`}>
+                                    <span className="not-selected">
+                                        {item.label}
+                                    </span>
+                                </Normaltekst>
+                            )}
+                        </li>
+                    ))}
+            </ul>
         </div>
     );
 };
 
 // Utils
-const transformOptions = (
-    languages: LanguageParam[],
-    selectedLanguage: Language
-) =>
-    languages.map((language) => {
-        const mappedLanguage = mapLocaleToLanguage[language.locale];
-        const defaultLabel = option(
-            finnTekst(`sprak`, mappedLanguage) as string,
-            mappedLanguage === selectedLanguage
-        );
-
+const transformOptions = (languages: AvailableLanguage[]) =>
+    languages.map((languageParam) => {
+        const locale = languageParam.locale;
+        const label = finnTekst(`sprak`, locale);
         return {
-            label: defaultLabel,
-            language: language.locale,
-            handleInApp: language.handleInApp,
-            isDisabled: mappedLanguage === selectedLanguage,
-            value: language.url,
+            label: label,
+            locale: languageParam.locale,
+            handleInApp: languageParam.handleInApp,
+            value: languageParam.url,
         };
     });

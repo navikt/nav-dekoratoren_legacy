@@ -11,9 +11,7 @@ import BEMHelper from 'utils/bem';
 import Arbeidsflatevalg from './arbeidsflatevalg/Arbeidsflatevalg';
 import { LinksLoader } from '../../../common/content-loaders/LinkLoader';
 import FooterLenker from 'komponenter/footer/common/Lenker';
-import { Language } from 'store/reducers/language-duck';
-import { SprakVelger } from '../../common/sprakvelger/SprakVelger';
-import { msgSafetyCheck } from 'utils/messages';
+import { Locale } from 'store/reducers/language-duck';
 import './FooterTopp.less';
 
 const FooterTopp = () => {
@@ -21,30 +19,6 @@ const FooterTopp = () => {
     const { language } = useSelector((state: AppState) => state.language);
     const context = useSelector((state: AppState) => state.arbeidsflate.status);
     const { data } = useSelector((state: AppState) => state.menypunkt);
-    const { PARAMS } = useSelector((state: AppState) => state.environment);
-    const [availableLanguages, setAvailableLanguages] = useState(
-        PARAMS.AVAILABLE_LANGUAGES || []
-    );
-
-    // Receive available languages from frontend-apps
-    useEffect(() => {
-        const receiveMessage = (msg: MessageEvent) => {
-            const { data } = msg;
-            const isSafe = msgSafetyCheck(msg);
-            const { source, event, payload } = data;
-            if (isSafe) {
-                if (source === 'decoratorClient') {
-                    if (event === 'availableLanguages') {
-                        setAvailableLanguages(payload);
-                    }
-                }
-            }
-        };
-        window.addEventListener('message', receiveMessage, false);
-        return () => {
-            window.removeEventListener('message', receiveMessage, false);
-        };
-    }, []);
 
     const [columnsNode, settColumnsNode] = useState<MenyNode>();
     useEffect(() => {
@@ -54,7 +28,10 @@ const FooterTopp = () => {
             if (footerNode) {
                 const columnsNode = findNode(footerNode, 'Columns');
                 if (columnsNode) {
-                    if (language === Language.NORSK) {
+                    if (
+                        language === Locale.BOKMAL ||
+                        language === Locale.NYNORSK
+                    ) {
                         settColumnsNode(findNode(columnsNode, context));
                     } else {
                         settColumnsNode(columnsNode);
@@ -103,15 +80,7 @@ const FooterTopp = () => {
                                   {columnNode.displayName}
                               </Undertittel>
                               <ul>
-                                  {i === 1 && availableLanguages.length ? (
-                                      <SprakVelger
-                                          availableLanguages={
-                                              availableLanguages
-                                          }
-                                      />
-                                  ) : (
-                                      <FooterLenker node={columnNode} />
-                                  )}
+                                  <FooterLenker node={columnNode} />
                               </ul>
                           </div>
                       ))

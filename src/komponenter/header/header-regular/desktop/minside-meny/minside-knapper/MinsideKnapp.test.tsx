@@ -10,7 +10,7 @@ import { ActionType } from 'store/actions';
 import { Status } from 'api/api';
 import mockMenu from 'server/mock/menu.json';
 import { languageDuck } from 'store/reducers/language-duck';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import { MinsidePersonKnapp } from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsidePersonKnapp';
 import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
 import { innloggetAction } from 'utils/jest/testObjects';
@@ -23,7 +23,7 @@ const menuAction = {
 };
 
 const languageAction = languageDuck.actionCreator({
-    language: Language.NORSK,
+    language: Locale.BOKMAL,
 });
 
 const mountWithRedux = (store: Store) => {

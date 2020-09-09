@@ -6,7 +6,7 @@ import debounce from 'lodash.debounce';
 import { GACategory, gaEvent } from 'utils/google-analytics';
 import { genererUrl } from 'utils/Environment';
 import cls from 'classnames';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import { SokInput } from './sok-innhold/SokInput';
 import Spinner from '../spinner/Spinner';
 import SokResultater from './sok-innhold/SokResultater';
@@ -36,7 +36,7 @@ const Sok = (props: Props) => {
 
     const numberOfResults = 5;
     const klassenavn = cls('sok-input', {
-        engelsk: language === Language.ENGELSK,
+        engelsk: language === Locale.ENGELSK,
     });
 
     useEffect(() => {

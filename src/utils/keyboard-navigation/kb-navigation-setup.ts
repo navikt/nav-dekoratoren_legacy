@@ -6,7 +6,7 @@ import KbNav, {
     KbNavGroup,
     NodeIndex,
 } from './kb-navigation';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from 'api/api';
 import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
@@ -87,19 +87,21 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
 };
 
 export const createHeaderMainGraph = (
-    language: Language,
+    language: Locale,
     arbeidsflate: MenuValue,
     menyStatus: Status,
     erInnlogget: boolean
 ) => {
-    const hovedmenyEnabled = language !== Language.SAMISK;
+    const hovedmenyEnabled = language !== Locale.SAMISK;
+    const isLanguageNorwegian =
+        language === Locale.BOKMAL || language === Locale.NYNORSK;
     const varslerEnabled =
         arbeidsflate === MenuValue.PRIVATPERSON && erInnlogget;
     const minsideMenyEnabled =
-        language === Language.NORSK &&
+        isLanguageNorwegian &&
         erInnlogget &&
         arbeidsflate !== MenuValue.SAMARBEIDSPARTNER;
-    const arbeidsflatemenyEnabled = language === Language.NORSK;
+    const arbeidsflatemenyEnabled = isLanguageNorwegian;
 
     const group = KbNavGroup.HeaderMenylinje;
     const rootIndex = configForNodeGroup[group].rootIndex;

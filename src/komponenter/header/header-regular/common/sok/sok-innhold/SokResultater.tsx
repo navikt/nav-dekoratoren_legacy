@@ -2,7 +2,7 @@ import SokeforslagIngress from './SokeforslagIngress';
 import Sokeforslagtext from './Sokeforslagtext';
 import { finnTekst } from 'tekster/finn-tekst';
 import React from 'react';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import { SokeresultatData } from '../sok-utils';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import { getKbId } from 'utils/keyboard-navigation/kb-navigation';
@@ -14,7 +14,7 @@ type Props = {
     writtenInput: string;
     items: SokeresultatData[];
     numberOfResults: number;
-    language: Language;
+    language: Locale;
     fetchError?: string | boolean;
 };
 

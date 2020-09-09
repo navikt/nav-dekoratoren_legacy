@@ -4,7 +4,7 @@ import BEMHelper from 'utils/bem';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { getHovedmenyNode } from 'utils/meny-storage-utils';
 import { getMinsidemenyNode, MenuValue } from 'utils/meny-storage-utils';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import MenyIngress from './elementer/MenyIngress';
 import Listelement from './elementer/Listelement';
 import MobilarbeidsflateValg from './elementer/arbeidsflatemeny/MobilarbeidsflateValg';
@@ -41,6 +41,8 @@ const Hovedmeny = (props: Props) => {
     const { language, meny } = useSelector(stateSelector);
     const { arbeidsflate, innloggingsstatus } = useSelector(stateSelector);
     const { underMenuIsOpen, hovedMenuIsOpen } = useSelector(stateSelector);
+    const isLanguageNorwegian =
+        language === Locale.BOKMAL || language === Locale.NYNORSK;
 
     const minsideLenker =
         getMinsidemenyNode(meny.data, language) || dataInitState;
@@ -116,7 +118,7 @@ const Hovedmeny = (props: Props) => {
                     )
                 )}
             </ul>
-            {language === Language.NORSK && (
+            {isLanguageNorwegian && (
                 <MobilarbeidsflateValg lang={language} />
             )}
         </div>

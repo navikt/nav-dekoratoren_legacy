@@ -8,7 +8,7 @@ import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { matchMedia } from 'utils/match-media-polyfill';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { Toppseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/topp-seksjon/Toppseksjon';
 import { Hovedseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/hoved-seksjon/Hovedseksjon';
@@ -31,7 +31,7 @@ const getColsFromScreenWidth = () =>
 type Props = {
     arbeidsflate: MenuValue;
     menyPunkter?: MenyNode;
-    language: Language;
+    language: Locale;
     isOpen: boolean;
     kbNavMainState: KbNavMain;
 };
