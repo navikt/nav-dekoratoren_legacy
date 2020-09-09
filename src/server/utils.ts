@@ -133,7 +133,7 @@ export const validateLanguage = (language: string) => {
 };
 
 export const validateAvailableLanguages = (languages: AvailableLanguage[]) => {
-    languages.map((language) => {
+    languages.forEach((language) => {
         if (!language.url) {
             const error = 'availableLanguages.url supports string';
             throw Error(error);
@@ -153,7 +153,7 @@ export const validateAvailableLanguages = (languages: AvailableLanguage[]) => {
 };
 
 export const validateBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
-    breadcrumbs.map((breadcrumb) => {
+    breadcrumbs.forEach((breadcrumb) => {
         if (!breadcrumb.title) {
             const error = 'breadcrumbs.title supports string';
             throw Error(error);
