@@ -49,11 +49,6 @@ export const getLanguageNode = (
         nn: nodeMenu.find((n) => n.path === '/no'),
         en: nodeMenu.find((n) => n.path === '/en'),
         se: nodeMenu.find((n) => n.path === '/se'),
-
-        // Deprecated
-        norsk: nodeMenu.find((n) => n.path === '/no'),
-        engelsk: nodeMenu.find((n) => n.path === '/en'),
-        samisk: nodeMenu.find((n) => n.path === '/se'),
     }[lang]);
 
 export const findNode = (

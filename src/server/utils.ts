@@ -20,7 +20,9 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
     // Throw errors if parameters are invalid
     validateClientEnv(req);
 
-    const chosenLanguage = (req.query.language?.toString().toLowerCase() ||
+    // Deprecated map
+    const language = mapToLocale(req.query.language as string);
+    const chosenLanguage = (language?.toString().toLowerCase() ||
         Locale.IKKEBESTEMT) as Locale;
 
     const chosenContext = (req.query.context?.toString().toLowerCase() ||
@@ -76,7 +78,7 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
 
 // Validation utils
 export const validateClientEnv = (req: Request) => {
-    const { level, language, context } = req.query;
+    const { level, context } = req.query;
     const { availableLanguages, breadcrumbs } = req.query;
     if (context) {
         validateContext(context as string);
@@ -84,8 +86,9 @@ export const validateClientEnv = (req: Request) => {
     if (level) {
         validateLevel(level as string);
     }
+    const language = mapToLocale(req.query.language as string);
     if (language) {
-        validateLanguage(language as string);
+        validateLanguage(language);
     }
     if (availableLanguages) {
         validateAvailableLanguages(JSON.parse(availableLanguages as string));
@@ -161,6 +164,22 @@ export const validateBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
             throw Error(error);
         }
     });
+};
+
+const mapToLocale = (language?: string) => {
+    if (!language) {
+        return undefined;
+    }
+    const map: { [key: string]: string } = {
+        nb: 'nb',
+        nn: 'nn',
+        en: 'en',
+        se: 'se',
+        norsk: 'nb',
+        engelsk: 'en',
+        samisk: 'se',
+    };
+    return map[language];
 };
 
 // Time utils
