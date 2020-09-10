@@ -37,9 +37,8 @@ export const Brodsmulesti = (props: Props) => {
                     <Fragment key={i}>
                         {i + 1 !== props.breadcrumbs.length ? (
                             breadcrumb.handleInApp ? (
-                                <a
+                                <Lenke
                                     href={breadcrumb.url}
-                                    className={'lenke'}
                                     onClick={(e) => {
                                         e.preventDefault();
                                         postMessageToApp(
@@ -50,7 +49,7 @@ export const Brodsmulesti = (props: Props) => {
                                 >
                                     <span>{breadcrumb.title}</span>
                                     <HoyreChevron />
-                                </a>
+                                </Lenke>
                             ) : (
                                 <Lenke href={breadcrumb.url}>
                                     <span>{breadcrumb.title}</span>
