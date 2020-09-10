@@ -61,7 +61,6 @@ export const initialState: EnvironmentState = {
         REDIRECT_TO_APP: false,
         LEVEL: '',
         LANGUAGE: Locale.IKKEBESTEMT,
-        AVAILABLE_LANGUAGES: undefined,
         FEEDBACK: false,
         CHATBOT: false,
     },
