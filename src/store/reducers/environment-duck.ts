@@ -1,6 +1,6 @@
 import { MenuValue } from 'utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
-import { Locale, LanguageParam } from './language-duck';
+import { Locale, AvailableLanguage } from './language-duck';
 import { Breadcrumb } from '../../komponenter/header/common/brodsmulesti/Brodsmulesti';
 
 export interface EnvironmentState {
@@ -26,7 +26,7 @@ export interface EnvironmentState {
         REDIRECT_TO_APP: boolean;
         LEVEL: string;
         LANGUAGE: Locale;
-        AVAILABLE_LANGUAGES?: LanguageParam[];
+        AVAILABLE_LANGUAGES?: AvailableLanguage[];
         BREADCRUMBS?: Breadcrumb[];
         FEEDBACK: boolean;
         CHATBOT: boolean;

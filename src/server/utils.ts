@@ -48,11 +48,11 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
         ...(req.query && {
             PARAMS: {
                 CONTEXT: chosenContext,
-                SIMPLE: !!req.query.simple,
-                SIMPLE_HEADER: !!req.query.header,
-                SIMPLE_FOOTER: !!req.query.footer,
-                ENFORCE_LOGIN: !!req.query.enforceLogin,
-                REDIRECT_TO_APP: !!req.query.redirectToApp,
+                SIMPLE: req.query.simple === 'true',
+                SIMPLE_HEADER: req.query.header === 'true',
+                SIMPLE_FOOTER: req.query.footer === 'true',
+                ENFORCE_LOGIN: req.query.enforceLogin === 'true',
+                REDIRECT_TO_APP: req.query.redirectToApp === 'true',
                 LEVEL: (req.query.level || 'Level3') as string,
                 LANGUAGE: chosenLanguage,
                 ...(req.query.availableLanguages && {
@@ -63,8 +63,8 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
                 ...(req.query.breadcrumbs && {
                     BREADCRUMBS: JSON.parse(req.query.breadcrumbs as string),
                 }),
-                FEEDBACK: !!req.query.feedback,
-                CHATBOT: !!req.query.chatbot,
+                FEEDBACK: req.query.feedback === 'true',
+                CHATBOT: req.query.chatbot === 'true',
             },
         }),
         ...(cookies && {
