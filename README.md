@@ -78,24 +78,30 @@ Bruk pus-decorator, les [readme](https://github.com/navikt/pus-decorator).
 ## Parametere
 Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
 
-| Parameter           | Type                                                    | Default              | Forklaring                                                                          |
-| ------------------- |-------------------------------------------------------- |--------------------- | ----------------------------------------------------------------------------------- |
-| context             | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til definert kontekst                                                 |
-| simple              | boolean                                                 | false                | Viser en forenklet header og footer                                                 |
-| enforceLogin (beta) | boolean                                                 | false                | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]          |
-| redirectToApp       | boolean                                                 | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2]      |
-| level               | Level3 \| Level4                                        | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]                  |            
-| language            | norsk \| engelsk \| samisk                              | norsk                | Setter språket til dekoratøren [3]                                                  |
-| feedback            | boolean                                                 | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
-| chatbot             | boolean                                                 | false                | Skjuler eller viser Chatbot Frida [4]                                               |
+| Parameter                 | Type                                                        | Default              | Forklaring                                                                          |
+| ------------------------- |------------------------------------------------------------ |--------------------- | ----------------------------------------------------------------------------------- |
+| context                   | privatperson \| arbeidsgiver \| samarbeidspartner           | privatperson         | Setter menyen til definert kontekst                                                 |
+| simple                    | boolean                                                     | false                | Viser en forenklet header og footer                                                 |
+| enforceLogin (beta)       | boolean                                                     | false                | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]          |
+| redirectToApp             | boolean                                                     | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2]      |
+| level                     | Level3 \| Level4                                            | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]                  |            
+| language                  | nb \| nn \| en \| se                                        | nb                   | Setter språket til dekoratøren for server side rendering [3]                        |
+| availableLanguages (beta) | [{ locale: nb \| nn \| en \| se, url: string }]             | [ ]                  | Setter alternativene til språkvelgeren for server side rendering [4]                |
+| breadcrumbs (beta)        | [{ title: string, url: string }]                            | [ ]                  | Setter brødsmulestien for server side rendering [5]                     |
+| feedback                  | boolean                                                     | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
+| chatbot                   | boolean                                                     | false                | Skjuler eller viser Chatbot Frida [6]                                               |
  
 Eksempel:<br>
 https://www.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3
 
+:warning: &nbsp; Ta kontakt med [Team Personbruker](https://github.com/orgs/navikt/teams/team-personbruker) før **beta** parametere benyttes
+
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
-[3] Språk vil automatisk settes client-side dersom nåværende url inneholder **/no/ (norsk)**, **/en/ (engelsk)** eller **/se/ (samisk)**, uavhengig av dette parameteret. <br>
-[4] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
+[3] Språk settes automatisk client-side dersom nåværende url inneholder **/nb/**, **/nn/**, **/en/**, **/se/**, uavhengig av dette parameteret. <br>
+[4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
+[5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
+[6] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
 
 ## Oppstart via docker-compose
 
@@ -127,7 +133,7 @@ dekoratoren:
 docker login docker.pkg.github.com -u GITHUB_USERNAME -p GITHUB_PERSONAL_ACCESS_TOKEN
 ```
 
-
+ 
 ## Utvikling - Kom i gang
 Hent repoet fra github
 ```

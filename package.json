@@ -1,6 +1,6 @@
 {
     "name": "nav-dekoratoren",
-    "version": "1.22.0-prod",
+    "version": "1.21.43-test",
     "private": true,
     "scripts": {
         "start": "npm-run-all -p -r build-client-and-watch build-server-and-watch start-server-and-watch",
@@ -36,6 +36,7 @@
         "core-js": "3.6.5",
         "detect-browser": "^5.1.1",
         "dotenv": "^8.2.0",
+        "downshift": "^6.0.6",
         "express": "^4.17.1",
         "html-react-parser": "^0.13.0",
         "http-proxy-middleware": "^1.0.5",

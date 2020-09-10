@@ -1,0 +1,25 @@
+@import (reference) '../../../../styling-variabler.less';
+
+.brodsmulesti {
+    &__container {
+        display: flex;
+        align-items: center;
+        @media (max-width: @screen-sm) {
+            width: 100%;
+        }
+    }
+    &__content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        & > * {
+            margin: 0.25rem 0.25rem;
+        }
+        .chevron--hoyre {
+            color: #78706a;
+            display: inline-block;
+            margin: 0 0.5em;
+        }
+    }
+}

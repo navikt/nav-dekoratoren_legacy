@@ -25,6 +25,12 @@
         flex-shrink: 0;
     }
 
+    @media (max-width: @smallMobileMaxWidth) {
+        .hovedmeny__knapp-tekst {
+            display: none;
+        }
+    }
+
     @media not all and (min-width: @desktopMinWidth) {
         .mobil-header();
     }

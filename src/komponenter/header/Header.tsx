@@ -8,7 +8,7 @@ import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
-import { Language, languageDuck } from 'store/reducers/language-duck';
+import { Locale, languageDuck } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
@@ -18,11 +18,18 @@ import { ActionType } from 'store/actions';
 import { loadVergic } from 'utils/external-scripts';
 import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/browser-support-msg/BrowserSupportMsg';
 import { getLoginUrl } from 'utils/login';
-import Driftsmeldinger from './driftsmeldinger/Driftsmeldinger';
-import { postMessageToApp } from '../../utils/messages';
+import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
+import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
+import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
+import { SprakVelger } from './common/sprakvelger/SprakVelger';
+import { validateBreadcrumbs } from '../../server/utils';
+import { validateAvailableLanguages } from '../../server/utils';
+import './Header.less';
 
-const unleashCacheCookie = 'decorator-unleash-cache';
-const decoratorContextCookie = 'decorator-context';
+export const unleashCacheCookie = 'decorator-unleash-cache';
+export const decoratorContextCookie = 'decorator-context';
+export const decoratorLanguageCookie = 'decorator-language';
+
 const stateSelector = (state: AppState) => ({
     innloggingsstatus: state.innloggingsstatus,
     arbeidsflate: state.arbeidsflate.status,
@@ -40,7 +47,17 @@ export const Header = () => {
     const { authenticated } = innloggingsstatus.data;
     const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
+
+    const [availableLanguages, setAvailableLanguages] = useState(
+        PARAMS.AVAILABLE_LANGUAGES
+    );
+
+    const [breadcrumbs, setBreadcrumbs] = useState(
+        environment.PARAMS.BREADCRUMBS
+    );
+
     const [cookies, setCookie] = useCookies([
+        decoratorLanguageCookie,
         decoratorContextCookie,
         unleashCacheCookie,
     ]);
@@ -113,9 +130,8 @@ export const Header = () => {
             dispatch(settArbeidsflate(PARAMS.CONTEXT));
             setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
         } else {
-            const context = cookies['decorator-context'];
-
             // Fetch state from cookie OR default to private-person
+            const context = cookies['decorator-context'];
             context ? dispatch(settArbeidsflate(context)) : defaultToPerson();
         }
     }, []);
@@ -135,20 +151,80 @@ export const Header = () => {
 
     // Change language
     const checkUrlForLanguage = () => {
-        if (PARAMS.LANGUAGE !== Language.IKKEBESTEMT) {
+        if (PARAMS.LANGUAGE !== Locale.IKKEBESTEMT) {
             dispatch(languageDuck.actionCreator({ language: PARAMS.LANGUAGE }));
-            setCookie('decorator-language', PARAMS.LANGUAGE, cookieOptions);
+            setCookie(decoratorLanguageCookie, PARAMS.LANGUAGE, cookieOptions);
         } else {
-            // Fetch state from cookie OR default to norsk
             const language = getLanguageFromUrl();
             dispatch(languageDuck.actionCreator({ language }));
-            setCookie('decorator-language', language, cookieOptions);
+            setCookie(decoratorLanguageCookie, language, cookieOptions);
         }
     };
 
     useEffect(() => {
         window.addEventListener('popstate', checkUrlForLanguage);
         checkUrlForLanguage();
+    }, []);
+
+    // Send ready message to applications
+    useEffect(() => {
+        const receiveMessage = (msg: MessageEvent) => {
+            const { data } = msg;
+            const isSafe = msgSafetyCheck(msg);
+            const { source, event } = data;
+            if (isSafe) {
+                if (source === 'decoratorClient' && event === 'ready') {
+                    window.postMessage(
+                        { source: 'decorator', event: 'ready' },
+                        window.location.origin
+                    );
+                }
+            }
+        };
+        window.addEventListener('message', receiveMessage, false);
+        return () => {
+            window.removeEventListener('message', receiveMessage, false);
+        };
+    }, []);
+
+    // Receive available languages from frontend-apps
+    useEffect(() => {
+        const receiveMessage = (msg: MessageEvent) => {
+            const { data } = msg;
+            const isSafe = msgSafetyCheck(msg);
+            const { source, event, payload } = data;
+            if (isSafe) {
+                if (source === 'decoratorClient') {
+                    if (event === 'availableLanguages') {
+                        validateAvailableLanguages(payload);
+                        setAvailableLanguages(payload);
+                    }
+                }
+            }
+        };
+        window.addEventListener('message', receiveMessage, false);
+        return () => {
+            window.removeEventListener('message', receiveMessage, false);
+        };
+    }, []);
+
+    // Receive breadcrumbs from frontend-apps
+    useEffect(() => {
+        const receiveMessage = (msg: MessageEvent) => {
+            const { data } = msg;
+            const isSafe = msgSafetyCheck(msg);
+            const { source, event, payload } = data;
+            if (isSafe) {
+                if (source === 'decoratorClient' && event === 'breadcrumbs') {
+                    validateBreadcrumbs(payload);
+                    setBreadcrumbs(payload);
+                }
+            }
+        };
+        window.addEventListener('message', receiveMessage, false);
+        return () => {
+            window.removeEventListener('message', receiveMessage, false);
+        };
     }, []);
 
     return (
@@ -164,18 +240,40 @@ export const Header = () => {
                 )}
             </header>
             <Driftsmeldinger />
+            {(breadcrumbs || availableLanguages) && (
+                // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
+                <div className={'decorator-utils-container'}>
+                    <div className={'decorator-utils-content'}>
+                        {breadcrumbs && (
+                            <Brodsmulesti breadcrumbs={breadcrumbs} />
+                        )}
+                        {availableLanguages && (
+                            <SprakVelger
+                                availableLanguages={availableLanguages}
+                            />
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
-const getLanguageFromUrl = (): Language => {
+const getLanguageFromUrl = (): Locale => {
     const locationPath = window.location.pathname;
-    if (locationPath.includes('/en/')) {
-        return Language.ENGELSK;
-    } else if (locationPath.includes('/se/')) {
-        return Language.SAMISK;
+    if (locationPath.includes('/nb/')) {
+        return Locale.BOKMAL;
     }
-    return Language.NORSK;
+    if (locationPath.includes('/nn/')) {
+        return Locale.NYNORSK;
+    }
+    if (locationPath.includes('/en/')) {
+        return Locale.ENGELSK;
+    }
+    if (locationPath.includes('/se/')) {
+        return Locale.SAMISK;
+    }
+    return Locale.BOKMAL;
 };
 
 export default Header;

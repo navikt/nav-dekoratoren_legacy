@@ -18,7 +18,10 @@ const MenyIngress = ({
     );
 
     const textToLowercase = inputext
-        ? inputext.charAt(0).concat(inputext.slice(1).toLowerCase())
+        ? inputext
+              .toUpperCase()
+              .charAt(0)
+              .concat(inputext.slice(1).toLowerCase())
         : '';
 
     if (!lenke.length) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import BEMHelper from 'utils/bem';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
 import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
@@ -10,7 +10,7 @@ import { AnalyticsCategory } from 'utils/analytics';
 import './MobilarbeidsflateValg.less';
 
 interface Props {
-    lang: Language;
+    lang: Locale;
 }
 
 const stateProps = (state: AppState) => ({
