@@ -4,7 +4,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
-import { GACategory } from 'utils/google-analytics';
+import { AnalyticsCategory } from 'utils/analytics';
 import DesktopSokKnapp from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 import DesktopMinsidemenyKnapp from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
@@ -27,9 +27,9 @@ const stateSelector = (state: AppState) => ({
 
 const NavLogo = ({ arbeidsflate }: { arbeidsflate: MenuValue }) => (
     <NavLogoLenke
-        gaEventArgs={{
+        analyticsEventArgs={{
             context: arbeidsflate,
-            category: GACategory.Header,
+            category: AnalyticsCategory.Header,
             action: 'navlogo',
         }}
         id={headerLogoId}

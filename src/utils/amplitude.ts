@@ -1,4 +1,7 @@
-import amplitude from 'amplitude-js';
+import { verifyWindowObj } from 'utils/Environment';
+
+// Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
+const amplitude = verifyWindowObj() ? require('amplitude-js') : () => null;
 
 export const initAmplitude = () => {
     if (amplitude) {

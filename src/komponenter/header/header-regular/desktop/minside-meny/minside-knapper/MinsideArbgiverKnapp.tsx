@@ -2,8 +2,8 @@ import React from 'react';
 import BEMHelper from 'utils/bem';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
-import { GACategory } from 'utils/google-analytics';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
+import { AnalyticsCategory } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
@@ -20,12 +20,12 @@ export const MinsideArbgiverKnapp = () => {
     const cls = BEMHelper(minsideMenyClassname);
 
     return (
-        <LenkeMedGA
+        <LenkeMedSporing
             classNameOverride={`${cls.element('knapp')}`}
             id={minsideKnappId}
             href={href}
-            gaEventArgs={{
-                category: GACategory.Header,
+            analyticsEventArgs={{
+                category: AnalyticsCategory.Header,
                 action: 'minside-arbeidsgiver',
                 label: href,
             }}
@@ -39,7 +39,7 @@ export const MinsideArbgiverKnapp = () => {
                     <Tekst id={'rolle-arbeidsgiver'} />
                 </Undertekst>
             </div>
-        </LenkeMedGA>
+        </LenkeMedSporing>
     );
 };
 

@@ -4,8 +4,8 @@ import { VarselIkon } from './varsel-ikon/VarselIkon';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { settVarslerSomLest } from 'store/reducers/varsel-lest-duck';
-import { gaEvent } from 'utils/google-analytics';
-import { GACategory } from 'utils/google-analytics';
+import { analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
 import { varslerDropdownClassname } from 'komponenter/header/header-regular/common/varsler/Varsler';
@@ -27,8 +27,8 @@ export const VarslerKnapp = () => {
         if (!isOpen && varsler.uleste > 0) {
             settVarslerSomLest(appUrl, varsler.nyesteId, dispatch);
         }
-        gaEvent({
-            category: GACategory.Header,
+        analyticsEvent({
+            category: AnalyticsCategory.Header,
             action: `varsler-${isOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleVarsler());

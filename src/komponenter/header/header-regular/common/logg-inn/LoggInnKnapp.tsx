@@ -1,6 +1,6 @@
 import React from 'react';
 import { finnTekst } from 'tekster/finn-tekst';
-import { GACategory, gaEvent } from 'utils/google-analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import KnappBase from 'nav-frontend-knapper';
@@ -25,9 +25,9 @@ export const LoggInnKnapp = () => {
         const { LOGOUT_URL } = environment;
         const loginUrl = getLoginUrl(environment, arbeidsflate);
 
-        gaEvent({
+        analyticsEvent({
             context: arbeidsflate,
-            category: GACategory.Header,
+            category: AnalyticsCategory.Header,
             action: authenticated ? 'logg-ut' : 'logg-inn',
         });
 

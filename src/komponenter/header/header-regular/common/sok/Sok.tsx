@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { defaultData, visAlleTreff } from './sok-utils';
 import debounce from 'lodash.debounce';
-import { GACategory, gaEvent } from 'utils/google-analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import { genererUrl } from 'utils/Environment';
 import cls from 'classnames';
 import { Locale } from 'store/reducers/language-duck';
@@ -58,7 +58,11 @@ const Sok = (props: Props) => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        gaEvent({ category: GACategory.Header, label: input, action: 'søk' });
+        analyticsEvent({
+            category: AnalyticsCategory.Header,
+            label: input,
+            action: 'søk',
+        });
         const { XP_BASE_URL } = environment;
         const url = `${XP_BASE_URL}/sok?ord=${input}`;
         window.location.href = genererUrl(XP_BASE_URL, url);

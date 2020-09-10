@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ArbeidsflateLenke, arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { AppState } from 'store/reducers';
-import { GACategory } from 'utils/google-analytics';
-import { Locale } from 'store/reducers/language-duck';
+import { AnalyticsCategory } from 'utils/analytics';
+import { Language } from 'store/reducers/language-duck';
 import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
 import './Arbeidsflatevalg.less';
 
@@ -26,7 +27,7 @@ const Arbeidsflatevalg = () => {
         setLenker(getLenker());
     }, [arbeidsflate]);
 
-    return language === Locale.BOKMAL || language === Locale.NYNORSK ? (
+    return language === Language.NORSK ? (
         <div className="menylenker-seksjon arbeidsflate">
             <ul className="arbeidsflatevalg">
                 {lenker.map((lenke: ArbeidsflateLenke) => (
@@ -34,9 +35,9 @@ const Arbeidsflatevalg = () => {
                         <ArbeidsflateLenkepanel
                             lenke={lenke}
                             language={language}
-                            gaEventArgs={{
+                            analyticsEventArgs={{
                                 context: arbeidsflate,
-                                category: GACategory.Header,
+                                category: AnalyticsCategory.Header,
                                 action: 'arbeidsflate-valg',
                             }}
                         />

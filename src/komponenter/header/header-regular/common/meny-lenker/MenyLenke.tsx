@@ -1,8 +1,8 @@
 import React from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { genererUrl } from 'utils/Environment';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
-import { GACategory } from 'utils/google-analytics';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
+import { AnalyticsCategory } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 
@@ -22,11 +22,11 @@ export const MenyLenke = (props: Props) => {
 
     return (
         <li>
-            <LenkeMedGA
+            <LenkeMedSporing
                 href={href}
                 id={props.id}
-                gaEventArgs={{
-                    category: GACategory.Meny,
+                analyticsEventArgs={{
+                    category: AnalyticsCategory.Meny,
                     action: `${menyGruppeNavn}/${lenke.displayName}`,
                     label: href,
                 }}
@@ -34,7 +34,7 @@ export const MenyLenke = (props: Props) => {
                 withLock={displayLock}
             >
                 {lenke.displayName}
-            </LenkeMedGA>
+            </LenkeMedSporing>
         </li>
     );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import htmlReactParser, { DomElement, domToReact } from 'html-react-parser';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
-import { GACategory } from 'utils/google-analytics';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
+import { AnalyticsCategory } from 'utils/analytics';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
@@ -53,7 +53,7 @@ const parseLenke = (
         (state: AppState) => state.arbeidsflate.status
     );
     return (
-        <LenkeMedGA
+        <LenkeMedSporing
             href={href || ''}
             id={
                 rowIndex !== undefined && subIndex !== undefined
@@ -64,15 +64,15 @@ const parseLenke = (
                       })
                     : undefined
             }
-            gaEventArgs={{
+            analyticsEventArgs={{
                 context: arbeidsflate,
-                category: GACategory.Header,
+                category: AnalyticsCategory.Header,
                 action: 'varsel-lenke',
                 label: href,
             }}
         >
             {children ? domToReact(children) : 'Lenke'}
-        </LenkeMedGA>
+        </LenkeMedSporing>
     );
 };
 

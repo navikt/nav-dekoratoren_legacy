@@ -1,13 +1,13 @@
 import React from 'react';
-import { GAEventArgs, gaEvent } from 'utils/google-analytics';
+import { AnalyticsEventArgs, analyticsEvent } from 'utils/analytics';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import Lock from 'ikoner/meny/Lock';
-import './LenkeMedGA.less';
+import './LenkeMedSporing.less';
 
 type Props = {
     href: string;
     children: React.ReactNode;
-    gaEventArgs?: GAEventArgs;
+    analyticsEventArgs?: AnalyticsEventArgs;
     className?: string;
     classNameOverride?: string;
     id?: string;
@@ -17,10 +17,10 @@ type Props = {
     withLock?: boolean;
 };
 
-export const LenkeMedGA = ({
+export const LenkeMedSporing = ({
     href,
     children,
-    gaEventArgs,
+    analyticsEventArgs,
     className,
     classNameOverride,
     id,
@@ -40,17 +40,17 @@ export const LenkeMedGA = ({
             id={id}
             tabIndex={tabIndex}
             onAuxClick={(event: React.MouseEvent) =>
-                gaEventArgs &&
+                analyticsEventArgs &&
                 event.button &&
                 event.button === 1 &&
-                gaEvent(gaEventArgs)
+                analyticsEvent(analyticsEventArgs)
             }
             onClick={(event: React.MouseEvent) => {
                 if (onClick) {
                     onClick(event);
                 }
-                if (gaEventArgs) {
-                    gaEvent(gaEventArgs);
+                if (analyticsEventArgs) {
+                    analyticsEvent(analyticsEventArgs);
                 }
             }}
         >

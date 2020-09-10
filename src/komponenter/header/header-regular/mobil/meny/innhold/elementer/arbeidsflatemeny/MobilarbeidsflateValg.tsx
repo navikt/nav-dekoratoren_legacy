@@ -6,7 +6,7 @@ import { Locale } from 'store/reducers/language-duck';
 import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
 import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
-import { GACategory } from 'utils/google-analytics';
+import { AnalyticsCategory } from 'utils/analytics';
 import './MobilarbeidsflateValg.less';
 
 interface Props {
@@ -30,8 +30,8 @@ const MobilarbeidsflateValg = ({ lang }: Props) => {
                     <ArbeidsflateLenkepanel
                         lenke={lenke}
                         language={lang}
-                        gaEventArgs={{
-                            category: GACategory.Meny,
+                        analyticsEventArgs={{
+                            category: AnalyticsCategory.Meny,
                             action: `hovedmeny/arbeidsflatelenke`,
                             label: lenke.url,
                         }}

@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
-import { GACategory } from 'utils/google-analytics';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
+import { AnalyticsCategory } from 'utils/analytics';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { useCookies } from 'react-cookie';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
@@ -38,7 +38,7 @@ const Arbeidsflatemeny = () => {
                             className={cls.element('liste-element')}
                             key={lenke.key}
                         >
-                            <LenkeMedGA
+                            <LenkeMedSporing
                                 classNameOverride={cls.element('lenke')}
                                 id={getKbId(KbNavGroup.HeaderMenylinje, {
                                     col: index,
@@ -59,9 +59,9 @@ const Arbeidsflatemeny = () => {
                                         window.location.href = lenke.url;
                                     }
                                 }}
-                                gaEventArgs={{
+                                analyticsEventArgs={{
                                     context: arbeidsflate,
-                                    category: GACategory.Header,
+                                    category: AnalyticsCategory.Header,
                                     action: 'arbeidsflate-valg',
                                 }}
                             >
@@ -77,7 +77,7 @@ const Arbeidsflatemeny = () => {
                                         <Tekst id={lenke.lenkeTekstId} />
                                     </Normaltekst>
                                 </div>
-                            </LenkeMedGA>
+                            </LenkeMedSporing>
                         </li>
                     );
                 })}

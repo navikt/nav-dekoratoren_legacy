@@ -9,7 +9,7 @@
     @handleAngle: 40deg;
     @handleLength: 12px;
     @middle: (@height - @stroke-width) / 2;
-    @transition-props: 0.3s all ease-out;
+    @transition-props: 0.25s all ease-out;
 
     width: @width;
     height: @height;
@@ -62,7 +62,7 @@
     }
 
     &__line--open {
-        transform: translate(-3px, @middle) rotate(-135deg) scale(0.8);
+        transform: translate(-4px, @middle) rotate(-45deg) scale(0.8);
     }
 
     &__line-x {
@@ -70,7 +70,7 @@
 
         &--open {
             visibility: visible;
-            transform: translate(-3px, @middle) rotate(-225deg) scale(0.8);
+            transform: translate(-4px, @middle) rotate(225deg) scale(0.8);
         }
     }
 }
