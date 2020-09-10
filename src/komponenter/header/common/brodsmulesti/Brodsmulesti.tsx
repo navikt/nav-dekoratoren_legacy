@@ -29,36 +29,40 @@ export const Brodsmulesti = (props: Props) => {
         <div className={cls.element('container')}>
             <div className={cls.element('content')}>
                 <Bilde asset={HomeIcon} />
-                <Lenke href={XP_BASE_URL}>
-                    <span>nav.no</span>
-                    <HoyreChevron />
-                </Lenke>
+                <Normaltekst>
+                    <Lenke href={XP_BASE_URL}>
+                        <span>nav.no</span>
+                        <HoyreChevron />
+                    </Lenke>
+                </Normaltekst>
                 {props.breadcrumbs.map((breadcrumb, i) => (
                     <Fragment key={i}>
-                        {i + 1 !== props.breadcrumbs.length ? (
-                            breadcrumb.handleInApp ? (
-                                <Lenke
-                                    href={breadcrumb.url}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        postMessageToApp(
-                                            'breadcrumbClick',
-                                            breadcrumb
-                                        );
-                                    }}
-                                >
-                                    <span>{breadcrumb.title}</span>
-                                    <HoyreChevron />
-                                </Lenke>
+                        <Normaltekst>
+                            {i + 1 !== props.breadcrumbs.length ? (
+                                breadcrumb.handleInApp ? (
+                                    <Lenke
+                                        href={breadcrumb.url}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            postMessageToApp(
+                                                'breadcrumbClick',
+                                                breadcrumb
+                                            );
+                                        }}
+                                    >
+                                        <span>{breadcrumb.title}</span>
+                                        <HoyreChevron />
+                                    </Lenke>
+                                ) : (
+                                    <Lenke href={breadcrumb.url}>
+                                        <span>{breadcrumb.title}</span>
+                                        <HoyreChevron />
+                                    </Lenke>
+                                )
                             ) : (
-                                <Lenke href={breadcrumb.url}>
-                                    <span>{breadcrumb.title}</span>
-                                    <HoyreChevron />
-                                </Lenke>
-                            )
-                        ) : (
-                            <Normaltekst>{breadcrumb.title}</Normaltekst>
-                        )}
+                                breadcrumb.title
+                            )}
+                        </Normaltekst>
                     </Fragment>
                 ))}
             </div>

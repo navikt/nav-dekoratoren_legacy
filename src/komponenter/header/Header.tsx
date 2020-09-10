@@ -24,7 +24,6 @@ import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
 import { SprakVelger } from './common/sprakvelger/SprakVelger';
 import { validateBreadcrumbs } from '../../server/utils';
 import { validateAvailableLanguages } from '../../server/utils';
-import BEMHelper from '../../utils/bem';
 import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
