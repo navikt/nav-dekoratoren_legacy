@@ -166,6 +166,7 @@ export const validateBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
     });
 };
 
+// Deprecated map to support norsk | engelsk | samisk
 const mapToLocale = (language?: string) => {
     if (!language) {
         return undefined;
