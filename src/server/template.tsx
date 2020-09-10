@@ -54,8 +54,8 @@ export const template = (req: Request) => {
 
     // Backward compatibility
     // for simple header and footer
-    const headerId = params.header ? `header` : `header-withmenu`;
-    const footerId = params.footer ? `footer` : `footer-withmenu`;
+    const headerId = params.header === 'true' ? `header` : `header-withmenu`;
+    const footerId = params.footer === 'true' ? `footer` : `footer-withmenu`;
 
     // Render SSR
     const HtmlHeader = ReactDOMServer.renderToString(
