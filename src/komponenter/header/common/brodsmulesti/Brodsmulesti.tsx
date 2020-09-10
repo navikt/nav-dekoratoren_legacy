@@ -38,19 +38,21 @@ export const Brodsmulesti = (props: Props) => {
                         {i + 1 !== props.breadcrumbs.length ? (
                             breadcrumb.handleInApp ? (
                                 <a
+                                    href={breadcrumb.url}
                                     className={'lenke'}
-                                    onClick={() =>
+                                    onClick={(e) => {
+                                        e.preventDefault();
                                         postMessageToApp(
                                             'breadcrumbClick',
                                             breadcrumb
-                                        )
-                                    }
+                                        );
+                                    }}
                                 >
                                     <span>{breadcrumb.title}</span>
                                     <HoyreChevron />
                                 </a>
                             ) : (
-                                <Lenke key={i} href={breadcrumb.url}>
+                                <Lenke href={breadcrumb.url}>
                                     <span>{breadcrumb.title}</span>
                                     <HoyreChevron />
                                 </Lenke>
