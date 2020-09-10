@@ -8,11 +8,9 @@ import moment from 'moment-timezone';
 import { finnTekst } from 'tekster/finn-tekst';
 import { getResizeObserver } from 'utils/resize-observer';
 import debounce from 'lodash.debounce';
-import { hentChatbotConfig } from 'api/api';
 import { logAmplitudeEvent } from 'utils/amplitude';
 import { defaultSurvey } from 'komponenter/footer/chatbot/chatbotAnalytics';
 import { enonicFeatureToggle } from 'komponenter/footer/chatbot/chatbotEnonicConfig';
-import { EnonicChatConfig } from 'komponenter/footer/chatbot/chatbotEnonicConfig';
 import { defaultEnonicConfig } from 'komponenter/footer/chatbot/chatbotEnonicConfig';
 import './ChatbotWrapper.less';
 
@@ -50,7 +48,6 @@ const stateSelector = (state: AppState) => ({
     paramChatbot: state.environment.PARAMS.CHATBOT,
     language: state.language.language,
     serverTime: state.environment.SERVER_TIME,
-    appUrl: state.environment.APP_URL,
     menuIsActive:
         state.dropdownToggles.hovedmeny ||
         state.dropdownToggles.minside ||
@@ -69,16 +66,12 @@ export const ChatbotWrapper = ({
     queueKey = 'Q_CHAT_BOT',
     configId = '599f9e7c-7f6b-4569-81a1-27202c419953',
 }: Props) => {
-    const {
-        paramChatbot,
-        language,
-        serverTime,
-        appUrl,
-        menuIsActive,
-    } = useSelector(stateSelector);
+    const { paramChatbot, language, serverTime, menuIsActive } = useSelector(
+        stateSelector
+    );
     const [cookies] = useCookies();
     const [mountChatbot, setMountChatbot] = useState(false);
-    const [chatConfig, setChatConfig] = useState<EnonicChatConfig>();
+    const chatConfig = defaultEnonicConfig;
 
     const containerRef = useRef<HTMLDivElement>(null);
     const dockRef = useRef<HTMLDivElement>(null);
@@ -93,25 +86,13 @@ export const ChatbotWrapper = ({
         const chatbotVersion122IsMounted =
             document.getElementsByClassName('gxKraP').length > 0;
 
-        hentChatbotConfig(appUrl)
-            .then(setChatConfig)
-            .catch(() => setChatConfig(defaultEnonicConfig));
-
         setMountChatbot(
             !chatbotVersion122IsMounted &&
-                (chatbotSessionActive || paramChatbot)
+                (chatbotSessionActive ||
+                    paramChatbot ||
+                    enonicFeatureToggle(chatConfig))
         );
     }, []);
-
-    useEffect(() => {
-        if (!chatConfig || mountChatbot) {
-            return;
-        }
-
-        if (enonicFeatureToggle(chatConfig)) {
-            setMountChatbot(true);
-        }
-    }, [chatConfig]);
 
     useEffect(() => {
         if (!mountChatbot) {
