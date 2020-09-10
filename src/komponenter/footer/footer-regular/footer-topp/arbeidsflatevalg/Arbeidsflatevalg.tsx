@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import {
-    ArbeidsflateLenke,
-    arbeidsflateLenker,
-} from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { AppState } from 'store/reducers';
 import { AnalyticsCategory } from 'utils/analytics';
 import { Locale } from 'store/reducers/language-duck';
