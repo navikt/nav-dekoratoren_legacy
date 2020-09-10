@@ -12,7 +12,7 @@ export type EnonicChatConfig = {
 
 export const defaultEnonicConfig: EnonicChatConfig = {
     toggle: true,
-    percentage: 25,
+    percentage: 50,
 };
 
 export const enonicFeatureToggle = (chatConfig: EnonicChatConfig) =>
