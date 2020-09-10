@@ -87,7 +87,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | level                     | Level3 \| Level4                                            | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]                  |            
 | language                  | nb \| nn \| en \| se                                        | nb                   | Setter språket til dekoratøren for server side rendering [3]                        |
 | availableLanguages (beta) | [{ locale: nb \| nn \| en \| se, url: string }]             | [ ]                  | Setter alternativene til språkvelgeren for server side rendering [4]                |
-| breadcrumbs (beta)        | [{ title: string, url: string }]                            | [ ]                  | Setter brødsmulestien server-side for server side rendering [5]                     |
+| breadcrumbs (beta)        | [{ title: string, url: string }]                            | [ ]                  | Setter brødsmulestien for server side rendering [5]                     |
 | feedback                  | boolean                                                     | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
 | chatbot                   | boolean                                                     | false                | Skjuler eller viser Chatbot Frida [6]                                               |
  
