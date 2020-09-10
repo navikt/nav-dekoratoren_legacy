@@ -89,7 +89,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | availableLanguages (beta) | [{ locale: nb \| nn \| en \| se, url: string }]             | [ ]                  | Setter alternativene til språkvelgeren for server side rendering [4]                |
 | breadcrumbs (beta)        | [{ title: string, url: string }]                            | [ ]                  | Setter brødsmulestien server-side for server side rendering [5]                     |
 | feedback                  | boolean                                                     | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
-| chatbot                   | boolean                                                     | false                | Skjuler eller viser Chatbot Frida [5]                                               |
+| chatbot                   | boolean                                                     | false                | Skjuler eller viser Chatbot Frida [6]                                               |
  
 Eksempel:<br>
 https://www.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3
