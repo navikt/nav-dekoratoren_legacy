@@ -1,12 +1,8 @@
 import ReactGA from 'react-ga';
 import TagManager from 'react-gtm-module';
 import { MenuValue } from './meny-storage-utils';
-import { verifyWindowObj } from 'utils/Environment';
-
-// Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
-const { logAmplitudeEvent } = verifyWindowObj()
-    ? require('utils/amplitude')
-    : () => null;
+import { initAmplitude } from 'utils/amplitude';
+import { logAmplitudeEvent } from 'utils/amplitude';
 
 const trackingId = 'UA-9127381-16';
 
@@ -15,29 +11,29 @@ const tagManagerArgs = {
     dataLayerName: 'dataLayer',
 };
 
-export enum GACategory {
+export enum AnalyticsCategory {
     Header = 'dekorator-header',
     Footer = 'dekorator-footer',
     Meny = 'dekorator-meny',
 }
 
-export type GAEventArgs = {
-    category: GACategory;
+export type AnalyticsEventArgs = {
+    category: AnalyticsCategory;
     action: string;
     context?: MenuValue;
     label?: string;
 };
 
-export const initGA = () => {
+export const initAnalytics = () => {
     TagManager.initialize(tagManagerArgs);
-
+    initAmplitude();
     ReactGA.initialize(trackingId, {
         titleCase: false,
         debug: false,
     });
 };
 
-export const gaEvent = (props: GAEventArgs) => {
+export const analyticsEvent = (props: AnalyticsEventArgs) => {
     const { context, category, action, label } = props;
     const actionFinal = `${context ? context + '/' : ''}${action}`;
 

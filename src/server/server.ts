@@ -148,6 +148,7 @@ const proxiedAuthUrl = `${appBasePath}/api/auth`;
 const proxiedVarslerUrl = `${appBasePath}/api/varsler`;
 const proxiedDriftsmeldingerUrl = `${appBasePath}/api/driftsmeldinger`;
 const proxiedSokUrl = `${appBasePath}/api/sok`;
+const proxiedChatConfigUrl = `${appBasePath}/api/chatConfig`;
 
 app.use(
     proxiedAuthUrl,
@@ -181,6 +182,15 @@ app.use(
     createProxyMiddleware(proxiedDriftsmeldingerUrl, {
         target: `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`,
         pathRewrite: { [`^${proxiedDriftsmeldingerUrl}`]: '' },
+        changeOrigin: true,
+    })
+);
+
+app.use(
+    proxiedChatConfigUrl,
+    createProxyMiddleware(proxiedChatConfigUrl, {
+        target: `${process.env.API_XP_SERVICES_URL}/no.nav.navno/chatConfig`,
+        pathRewrite: { [`^${proxiedChatConfigUrl}`]: '' },
         changeOrigin: true,
     })
 );

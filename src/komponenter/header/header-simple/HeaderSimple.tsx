@@ -4,7 +4,7 @@ import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import Navn from './navn/Navn';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
 import { Sticky } from 'komponenter/header/header-regular/common/sticky/Sticky';
-import { GACategory } from 'utils/google-analytics';
+import { AnalyticsCategory } from 'utils/analytics';
 import Logo from 'ikoner/meny/nav-logo-black.svg';
 import './HeaderSimple.less';
 
@@ -16,8 +16,8 @@ export const HeaderSimple = () => {
             <div className={cls.className}>
                 <div className={cls.element('content')}>
                     <NavLogoLenke
-                        gaEventArgs={{
-                            category: GACategory.Header,
+                        analyticsEventArgs={{
+                            category: AnalyticsCategory.Header,
                             action: 'navlogo-mobilmeny',
                         }}
                         ikon={Logo}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { getArbeidsflateContext } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,12 +8,12 @@ import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
-import { GAEventArgs } from 'utils/google-analytics';
+import { AnalyticsEventArgs } from 'utils/analytics';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './NavLogoLenke.less';
 
 type Props = {
-    gaEventArgs: GAEventArgs;
+    analyticsEventArgs: AnalyticsEventArgs;
     id?: string;
     ikon: string;
 };
@@ -25,10 +25,10 @@ export const NavLogoLenke = (props: Props) => {
     const context = getArbeidsflateContext(XP_BASE_URL, MenuValue.PRIVATPERSON);
 
     return (
-        <LenkeMedGA
+        <LenkeMedSporing
             classNameOverride={'nav-logo-lenke'}
             href={context.url}
-            gaEventArgs={props.gaEventArgs}
+            analyticsEventArgs={props.analyticsEventArgs}
             onClick={(event) => {
                 event.preventDefault();
                 setCookie('decorator-context', context.key, cookieOptions);
@@ -41,7 +41,7 @@ export const NavLogoLenke = (props: Props) => {
             id={props.id}
         >
             <Bilde altText="Til forsiden" asset={props.ikon} />
-        </LenkeMedGA>
+        </LenkeMedSporing>
     );
 };
 

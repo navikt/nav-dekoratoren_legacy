@@ -2,16 +2,12 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
-import { verifyWindowObj } from 'utils/Environment';
 import AlternativNei from './feedback-alternativ-nei/AlternativNei';
 import ThankYou from './feedback-thank-you/ThankYou';
 import { CloseFeedbackContext } from './common/CloseFeedbackContext';
 import amplitudeTriggers from 'utils/amplitude-triggers';
+import { logAmplitudeEvent } from 'utils/amplitude';
 import './Feedback.less';
-
-const { logAmplitudeEvent } = verifyWindowObj()
-    ? require('utils/amplitude')
-    : () => null;
 
 const Feedback = () => {
     const [closeFeedback, setCloseFeedback] = useState(false);

@@ -1,8 +1,8 @@
 import React from 'react';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
 import SokIkon from 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon';
-import { gaEvent } from 'utils/google-analytics';
-import { GACategory } from 'utils/google-analytics';
+import { analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import { AppState } from 'store/reducers';
@@ -20,8 +20,8 @@ export const SokKnapp = () => {
     const { isOpen } = useSelector(stateSelector);
 
     const toggleMenu = () => {
-        gaEvent({
-            category: GACategory.Header,
+        analyticsEvent({
+            category: AnalyticsCategory.Header,
             action: `sok-${isOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleSok());

@@ -15,7 +15,7 @@ import ForsideLenke from './elementer/ForsideLenke';
 import Dittnavmeny from './elementer/dittnavmeny/Dittnavmeny';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
 import { dataInitState } from 'store/reducers/menu-duck';
-import { GACategory, gaEvent } from 'utils/google-analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 
 interface Props {
@@ -49,8 +49,8 @@ const Hovedmeny = (props: Props) => {
         getHovedmenyNode(meny.data, language, arbeidsflate) || dataInitState;
 
     const menutoggle = () => {
-        gaEvent({
-            category: GACategory.Header,
+        analyticsEvent({
+            category: AnalyticsCategory.Header,
             action: `meny-${underMenuIsOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleUndermenyVisning());

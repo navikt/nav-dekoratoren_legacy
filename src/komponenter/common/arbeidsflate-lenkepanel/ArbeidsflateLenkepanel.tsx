@@ -1,7 +1,7 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
-import { gaEvent } from 'utils/google-analytics';
+import { analyticsEvent } from 'utils/analytics';
 import BEMHelper from 'utils/bem';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
 import { HoyreChevron } from 'nav-frontend-chevron';
@@ -13,13 +13,13 @@ import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { finnTekst } from 'tekster/finn-tekst';
-import { GAEventArgs } from 'utils/google-analytics';
+import { AnalyticsEventArgs } from 'utils/analytics';
 import './ArbeidsflateLenkepanel.less';
 
 interface Props {
     lenke: ArbeidsflateLenke;
     language: Language;
-    gaEventArgs: GAEventArgs;
+    analyticsEventArgs: AnalyticsEventArgs;
     enableCompactView?: boolean;
     id?: string;
 }
@@ -27,7 +27,7 @@ interface Props {
 const ArbeidsflateLenkepanel = ({
     lenke,
     language,
-    gaEventArgs,
+    analyticsEventArgs,
     enableCompactView,
     id,
 }: Props) => {
@@ -48,7 +48,7 @@ const ArbeidsflateLenkepanel = ({
                     event.preventDefault();
                     dispatch(settArbeidsflate(lenke.key));
                 }
-                gaEvent(gaEventArgs);
+                analyticsEvent(analyticsEventArgs);
             }}
             border={true}
         >

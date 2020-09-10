@@ -1,8 +1,5 @@
-import { verifyWindowObj } from 'utils/Environment';
 import amplitudeTriggers from 'utils/amplitude-triggers';
-const { logAmplitudeEvent } = verifyWindowObj()
-    ? require('utils/amplitude')
-    : () => null;
+import { logAmplitudeEvent } from 'utils/amplitude';
 
 function sendFeedbackNo(categories: string[]): void {
     for (const category of categories) {
