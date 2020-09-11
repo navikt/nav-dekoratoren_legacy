@@ -81,16 +81,23 @@ const pathsForTemplate = [
 ];
 
 app.get(pathsForTemplate, (req, res) => {
-    res.send(template(req));
+    try {
+        res.send(template(req));
+    } catch (e) {
+        console.error(e);
+        res.status(500);
+        res.send({ error: e.message });
+    }
 });
 
-app.get(`${appBasePath}/env`, (req, res, next) => {
+app.get(`${appBasePath}/env`, (req, res) => {
     try {
         const cookies = (req as any).universalCookies.cookies;
-        const env = clientEnv({ req, cookies });
-        res.send(env);
-    } catch (error) {
-        next(error);
+        res.send(clientEnv({ req, cookies }));
+    } catch (e) {
+        console.error(e);
+        res.status(500);
+        res.send({ error: e.message });
     }
 });
 
