@@ -102,7 +102,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 
 :information_source: &nbsp; Bakgrunnsfarge på brødsmulesti og språkvelger kan overstyres:
 ```
-.decorator-utils-container{
+.decorator-utils-container {
     background: #f1f1f1;
 }
 ```
