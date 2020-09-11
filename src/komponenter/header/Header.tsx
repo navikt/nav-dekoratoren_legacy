@@ -197,7 +197,9 @@ export const Header = () => {
                 if (source === 'decoratorClient') {
                     if (event === 'availableLanguages') {
                         validateAvailableLanguages(payload);
-                        setAvailableLanguages(payload);
+                        setAvailableLanguages(
+                            payload.length > 0 ? payload : undefined
+                        );
                     }
                 }
             }
@@ -217,7 +219,7 @@ export const Header = () => {
             if (isSafe) {
                 if (source === 'decoratorClient' && event === 'breadcrumbs') {
                     validateBreadcrumbs(payload);
-                    setBreadcrumbs(payload);
+                    setBreadcrumbs(payload.length > 0 ? payload : undefined);
                 }
             }
         };
