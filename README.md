@@ -108,10 +108,10 @@ Eksempel 2 - Håndhev innlogging **(beta)**:<br>
 https://www.nav.no/dekoratoren/?enforceLogin=true&level=Level4&redirectToApp=true
 
 Eksempel 3 - Språkvelger **(beta)**:<br>
-[https://www.nav.no/dekoratoren/?availableLanguages=\[{"locale":"nb","url":"https://www.nav.no/dekoratoren"},{"locale":"en","url":"http://localhost:8088/dekoratoren/en/"}\] ](https://www.nav.no/dekoratoren/?availableLanguages=[{"locale":"nb","url":"https://www.nav.no/dekoratoren"},{"locale":"en","url":"http://localhost:8088/dekoratoren/en/"}])
+[https://www.nav.no/dekoratoren/?availableLanguages=\[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}\] ](https://www.nav.no/dekoratoren/?availableLanguages=[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}])
 
 Eksempel 4 - Brødsmulesti **(beta)**:<br>
-[https://www.nav.no/dekoratoren/?breadcrumbs=\[{"url":"https://www.nav.no/person/dittnav","title":"Ditt NAV"},{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt oss"}\] ](https://www.nav.no/dekoratoren/?breadcrumbs=[{"url":"https://www.nav.no/person/dittnav","title":"Ditt%20NAV"},%20{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt%20oss"}])
+[https://www.nav.no/dekoratoren/?breadcrumbs=\[{"url":"https://www.nav.no/person/dittnav","title":"Ditt NAV"},{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt oss"}\] ](https://www.nav.no/dekoratoren/?breadcrumbs=[{"url":"https://www.nav.no/person/dittnav","title":"Ditt%20NAV"},{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt%20oss"}])
 
 ## Oppstart via docker-compose
 
