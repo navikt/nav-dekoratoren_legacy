@@ -1,7 +1,7 @@
 require('console-stamp')(console, '[HH:MM:ss.l]');
 import NodeCache from 'node-cache';
 import fetch from 'node-fetch';
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { createMiddleware } from '@promster/express';
 import { getSummary, getContentType } from '@promster/express';
 import { oneMinuteInSeconds, tenSeconds } from './utils';
@@ -80,24 +80,20 @@ const pathsForTemplate = [
     `${oldBasePath}`,
 ];
 
-app.get(pathsForTemplate, (req, res) => {
+app.get(pathsForTemplate, (req, res, next) => {
     try {
         res.send(template(req));
     } catch (e) {
-        console.error(e);
-        res.status(500);
-        res.send({ error: e.message });
+        next(e);
     }
 });
 
-app.get(`${appBasePath}/env`, (req, res) => {
+app.get(`${appBasePath}/env`, (req, res, next) => {
     try {
         const cookies = (req as any).universalCookies.cookies;
         res.send(clientEnv({ req, cookies }));
     } catch (e) {
-        console.error(e);
-        res.status(500);
-        res.send({ error: e.message });
+        next(e);
     }
 });
 
@@ -217,6 +213,19 @@ app.use(
         },
     })
 );
+
+// Error handler middleware
+app.use((e: Error, req: Request, res: Response, next: NextFunction) => {
+    const origin = req.get('origin');
+    const host = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+    const url = origin || host;
+    console.error(`${url}: ${e.message}`);
+    console.error(e.stack);
+    res.status(405);
+    res.send({
+        error: { status: 405, message: e.message },
+    });
+});
 
 const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)
