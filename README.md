@@ -100,6 +100,13 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [6] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
 
+:information_source: &nbsp; Bakgrunnsfarge på brødsmulesti og språkvelger kan overstyres:
+```
+.decorator-utils-container{
+    background: #f1f1f1;
+}
+```
+
 ### Eksempler
 Eksempel 1 - Endre context:<br>
 https://www.nav.no/dekoratoren/?context=arbeidsgiver
