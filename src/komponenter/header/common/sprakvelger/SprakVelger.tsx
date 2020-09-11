@@ -84,11 +84,12 @@ export const SprakVelger = (props: Props) => {
           }
         : { border: 'none' };
 
+    const label = 'Språk/Language';
     return (
         <div className={cls.element('container')}>
             <div className={cls.className}>
                 <label {...getLabelProps()} className="sr-only">
-                    <Tekst id={'sprak-velg'} />
+                    <Normaltekst>{label}</Normaltekst>
                 </label>
                 <button
                     {...getToggleButtonProps()}
@@ -97,9 +98,7 @@ export const SprakVelger = (props: Props) => {
                 >
                     <span className={cls.element('knapp-tekst')}>
                         <Bilde asset={Globe} className={cls.element('ikon')} />
-                        <Normaltekst>
-                            {finnTekst('sprak-velg', language)}
-                        </Normaltekst>
+                        <Normaltekst>{label}</Normaltekst>
                     </span>
                     <NedChevron />
                 </button>
@@ -133,9 +132,15 @@ export const SprakVelger = (props: Props) => {
 const transformOptions = (languages: AvailableLanguage[]) =>
     languages.map((languageParam) => {
         const locale = languageParam.locale;
-        const label = finnTekst(`sprak`, locale);
+        const labels: { [key: string]: string } = {
+            nb: 'Norsk (bokmål)',
+            nn: 'Norsk (nynorsk)',
+            en: 'English',
+            se: 'Sámegiel',
+        };
+
         return {
-            label: label,
+            label: labels[locale],
             locale: languageParam.locale,
             handleInApp: languageParam.handleInApp,
             value: languageParam.url,
