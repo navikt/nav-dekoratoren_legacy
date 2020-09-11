@@ -90,6 +90,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | breadcrumbs **(beta)**        | [{ title: string, url: string }]                            | [ ]                  | Setter brødsmulestien for server side rendering [5]                     |
 | feedback                      | boolean                                                     | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
 | chatbot                       | boolean                                                     | false                | Skjuler eller viser Chatbot Frida [6]                                               |
+ gi
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
@@ -97,8 +98,6 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 [4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [6] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
-
-:warning: &nbsp; Ta kontakt med [Team Personbruker](https://github.com/orgs/navikt/teams/team-personbruker) før beta parametere benyttes
 
 ### Eksempler
 Eksempel 1 - Endre context:<br>
