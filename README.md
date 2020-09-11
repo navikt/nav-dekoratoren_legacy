@@ -91,8 +91,17 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | feedback                  | boolean                                                     | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
 | chatbot                   | boolean                                                     | false                | Skjuler eller viser Chatbot Frida [6]                                               |
  
-Eksempel:<br>
-https://www.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3
+Eksempel 1 - Endre context:<br>
+https://www.nav.no/dekoratoren/?context=arbeidsgiver
+
+Eksempel 2 - Håndhev innlogging<br>
+https://www.nav.no/dekoratoren/?enforceLogin=true&level=Level4&redirectToApp=true
+
+Eksempel 3 - Språkvelger (beta):<br>
+[https://www.nav.no/dekoratoren/?availableLanguages=\[{"locale":"nb","url":"https://www.nav.no/dekoratoren/nb/"},{"locale":"en","url":"http://localhost:8088/dekoratoren/en/"} \] ](https://www.nav.no/dekoratoren/?availableLanguages=[{"locale":"nb","url":"https://www.nav.no/dekoratoren/nb/"},{"locale":"en","url":"http://localhost:8088/dekoratoren/en/"}])
+
+Eksempel 4 - Brødsmulesti (beta): <br>
+[ https://www.nav.no/dekoratoren/?breadcrumbs=\[{"title":"Ditt NAV", "url":"https://www.nav.no/person/dittnav"},{"title":"Kontakt oss", "url":"https://www.nav.no/person/kontakt-oss/nb/"} \] ](https://www.nav.no/dekoratoren/?breadcrumbs=[{"url":"https://www.nav.no/person/dittnav","title":"Ditt NAV"},{"url":"https://www.nav.no/person/kontakt-oss/nb/","title":"Kontakt oss"}])
 
 :warning: &nbsp; Ta kontakt med [Team Personbruker](https://github.com/orgs/navikt/teams/team-personbruker) før beta parametere benyttes
 
