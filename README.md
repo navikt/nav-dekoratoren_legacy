@@ -90,7 +90,8 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | breadcrumbs **(beta)**        | [{ title: string, url: string }]                            | [ ]                  | Setter brødsmulestien for server side rendering [5]                     |
 | feedback                      | boolean                                                     | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
 | chatbot                       | boolean                                                     | false                | Skjuler eller viser Chatbot Frida [6]                                               |
- gi
+ 
+:warning: &nbsp; Ta kontakt med [Team Personbruker](https://github.com/orgs/navikt/teams/team-personbruker) før beta parametere benyttes
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
