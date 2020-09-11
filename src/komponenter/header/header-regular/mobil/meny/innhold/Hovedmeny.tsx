@@ -118,9 +118,7 @@ const Hovedmeny = (props: Props) => {
                     )
                 )}
             </ul>
-            {isLanguageNorwegian && (
-                <MobilarbeidsflateValg lang={language} />
-            )}
+            {isLanguageNorwegian && <MobilarbeidsflateValg lang={language} />}
         </div>
     );
 };
