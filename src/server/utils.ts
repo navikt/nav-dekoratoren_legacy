@@ -180,7 +180,7 @@ const mapToLocale = (language?: string) => {
         engelsk: 'en',
         samisk: 'se',
     };
-    return map[language];
+    return map[language] || 'ukjent-verdi';
 };
 
 // Time utils
