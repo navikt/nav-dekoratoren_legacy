@@ -84,9 +84,14 @@ app.get(pathsForTemplate, (req, res) => {
     res.send(template(req));
 });
 
-app.get(`${appBasePath}/env`, (req, res) => {
-    const cookies = (req as any).universalCookies.cookies;
-    res.send(clientEnv({ req, cookies }));
+app.get(`${appBasePath}/env`, (req, res, next) => {
+    try {
+        const cookies = (req as any).universalCookies.cookies;
+        const env = clientEnv({ req, cookies });
+        res.send(env);
+    } catch (error) {
+        next(error);
+    }
 });
 
 app.get(`${appBasePath}/api/meny`, (req, res) => {
