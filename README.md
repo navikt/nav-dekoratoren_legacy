@@ -101,7 +101,7 @@ Eksempel 3 - Språkvelger (beta):<br>
 [https://www.nav.no/dekoratoren/?availableLanguages=\[{"locale":"nb","url":"https://www.nav.no/dekoratoren/nb/"},{"locale":"en","url":"http://localhost:8088/dekoratoren/en/"} \] ](https://www.nav.no/dekoratoren/?availableLanguages=[{"locale":"nb","url":"https://www.nav.no/dekoratoren/nb/"},{"locale":"en","url":"http://localhost:8088/dekoratoren/en/"}])
 
 Eksempel 4 - Brødsmulesti (beta): <br>
-[https://www.nav.no/dekoratoren/?breadcrumbs=\[{url:https://www.nav.no/person/dittnav,title:Ditt NAV},{url:https://www.nav.no/person/kontakt-oss/nb/,title:Kontakt oss}\] ](https://www.nav.no/dekoratoren/?breadcrumbs=[{"url":"https://www.nav.no/person/dittnav","title":"Ditt%20NAV"},%20{"url":"https://www.nav.no/person/kontakt-oss/nb/","title":"Kontakt%20oss"}])
+[https://www.nav.no/dekoratoren/?breadcrumbs=\[{"url":"https://www.nav.no/person/dittnav","title":"Ditt NAV"},{"url":"https://www.nav.no/person/kontakt-oss/nb/","title":"Kontakt oss"}\] ](https://www.nav.no/dekoratoren/?breadcrumbs=[{"url":"https://www.nav.no/person/dittnav","title":"Ditt%20NAV"},%20{"url":"https://www.nav.no/person/kontakt-oss/nb/","title":"Kontakt%20oss"}])
 
 :warning: &nbsp; Ta kontakt med [Team Personbruker](https://github.com/orgs/navikt/teams/team-personbruker) før beta parametere benyttes
 
