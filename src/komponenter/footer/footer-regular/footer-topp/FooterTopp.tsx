@@ -23,15 +23,15 @@ const FooterTopp = () => {
     const [columnsNode, settColumnsNode] = useState<MenyNode>();
     useEffect(() => {
         const languageNode = getLanguageNode(language, data);
+        const isLanguageNorwegian =
+            language === Locale.BOKMAL || language === Locale.NYNORSK;
+
         if (languageNode) {
             const footerNode = findNode(languageNode, 'Footer');
             if (footerNode) {
                 const columnsNode = findNode(footerNode, 'Columns');
                 if (columnsNode) {
-                    if (
-                        language === Locale.BOKMAL ||
-                        language === Locale.NYNORSK
-                    ) {
+                    if (isLanguageNorwegian) {
                         settColumnsNode(findNode(columnsNode, context));
                     } else {
                         settColumnsNode(columnsNode);
@@ -39,7 +39,7 @@ const FooterTopp = () => {
                 }
             }
         }
-    }, [context, data, settColumnsNode]);
+    }, [language, context, data, settColumnsNode]);
 
     const scrollToTop = (event: React.MouseEvent) => {
         event.preventDefault();
