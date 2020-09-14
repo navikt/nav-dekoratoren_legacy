@@ -4,16 +4,13 @@ import { getArbeidsflateContext } from 'komponenter/common/arbeidsflate-lenker/a
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import {
-    cookieOptions,
-    settArbeidsflate,
-} from 'store/reducers/arbeidsflate-duck';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import { AnalyticsEventArgs } from 'utils/analytics';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './NavLogoLenke.less';
-import { Locale } from '../../../store/reducers/language-duck';
 
 type Props = {
     analyticsEventArgs: AnalyticsEventArgs;
