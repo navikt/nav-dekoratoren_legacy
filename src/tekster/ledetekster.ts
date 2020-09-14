@@ -18,7 +18,7 @@ export const ledetekster: { [key: string]: string } = {
     'footer-til-toppen-en': 'To the top',
     'footer-til-toppen-se': 'Til toppen',
     'til-forsiden': 'Til forsiden',
-    'til-forsiden-en': 'Til forsiden',
+    'til-forsiden-en': 'To the frontpage',
     'til-forsiden-se': 'Til forsiden',
     'min-side-arbeidsgiver': 'Min side arbeidsgiver',
     'min-side-arbeidsgiver-en': 'Min side arbeidsgiver',
