@@ -62,7 +62,7 @@ export const Toppseksjon = ({ classname }: Props) => {
                     label: XP_BASE_URL,
                 }}
             >
-                <Tekst id={'til-forside'} />
+                <Tekst id={'til-forsiden'} />
             </LenkeMedSporing>
         </div>
     );

@@ -52,7 +52,7 @@ export const MinsidemenyInnhold = (props: Props) => {
                             label: dittNavUrl,
                         }}
                     >
-                        <Tekst id={'til-forside'} />
+                        <Tekst id={'til-forsiden'} />
                     </LenkeMedSporing>
                 </div>
                 <div className={cls.element('topp-seksjon-right')}>
