@@ -208,11 +208,11 @@ export const ledetekster: { [key: string]: string } = {
     'arbeidsflate-stikkord-om-samarbeidspartner-se':
         'Helsepersonell, tiltaksarrangører, fylker og kommuner',
     'lock-msg-infotekst':
-        'Menypunkter med hengelås sender deg til ny innlogging. Disse tjenestene krever BankID, Buypass eller Commfides.',
+        'Menypunkt med hengelås sender deg til ny innlogging. Disse tjenestene krever BankID, Buypass eller Commfides.',
     'lock-msg-infotekst-en':
         'Menu items with padlock sends you to a new login. These services require BankID, Buypass or Commfides.',
     'lock-msg-infotekst-se':
-        'Menypunkter med hengelås sender deg til ny innlogging. Disse tjenestene krever BankID, Buypass eller Commfides.',
+        'Menypunkt med hengelås sender deg til ny innlogging. Disse tjenestene krever BankID, Buypass eller Commfides.',
     'feil-sok-fetch': 'Feil mot søketjeneste.',
     'feil-sok-fetch-en': 'Search system malfunction.',
     'feil-sok-fetch-se': 'Feil mot søketjeneste.',
