@@ -37,7 +37,7 @@ export const SokResultater = (props: Props) => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
     const itemsFiltered =
-        removeDuplicates(items).slice(0, numberOfResults + 1) || items;
+        removeDuplicates(items).slice(0, numberOfResults) || items;
 
     return (
         <div className="sokeresultat-container">
