@@ -13,7 +13,7 @@
     &__elementer {
         position: relative;
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
         width: 100%;
@@ -26,7 +26,8 @@
     }
 
     @media (max-width: @smallMobileMaxWidth) {
-        .hovedmeny__knapp-tekst {
+        .hovedmeny__knapp-tekst,
+        .varselbjelle__knapp-tekst {
             display: none;
         }
     }
