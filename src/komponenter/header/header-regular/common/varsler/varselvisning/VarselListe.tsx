@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { NyesteVarslerData } from 'store/reducers/varselinnboks-duck';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
-import varselConfig from './config.json';
+import varselConfig from './config.json'; // Kopiert fra: https://github.com/navikt/varselinnboks/blob/master/src/main/resources/config.json
 
 import alarmIkon from 'ikoner/varsler/alarm.svg';
 import kalenderIkon from 'ikoner/varsler/calendar-3.svg';
