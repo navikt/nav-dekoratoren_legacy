@@ -92,7 +92,7 @@ export const ChatbotWrapper = ({
                     paramChatbot ||
                     enonicFeatureToggle(chatConfig))
         );
-    }, []);
+    }, [paramChatbot]);
 
     useEffect(() => {
         if (!mountChatbot) {

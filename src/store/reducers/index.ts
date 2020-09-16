@@ -10,12 +10,12 @@ import { DataElement } from 'api/api';
 import varselLestReducer from './varsel-lest-duck';
 import { languageDuck, LanguageState } from './language-duck';
 import dropdownTogglesReducer, { DropdownState } from './dropdown-toggle-duck';
-import environmentReducer, { EnvironmentState } from './environment-duck';
+import environmentReducer, { Environment } from './environment-duck';
 import featureToggleReducer from './feature-toggles-duck';
 import { FeatureToggles } from './feature-toggles-duck';
 
 export interface AppState {
-    environment: EnvironmentState;
+    environment: Environment;
     innloggingsstatus: InnloggingsstatusState;
     menypunkt: MenyPunkter;
     varsler: VarselinnboksState;
