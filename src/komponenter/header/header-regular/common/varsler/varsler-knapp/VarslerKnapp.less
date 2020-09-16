@@ -1,9 +1,11 @@
 @import (reference) '../../../../../../styling-variabler.less';
 
 .varselbjelle {
-    &__knapp-tekst {
-        .typo-normal;
-        font-weight: bold;
-        margin-left: 0.25rem;
+    @media @screen-desktop {
+        &__knapp-tekst {
+            .typo-normal;
+            font-weight: bold;
+            margin-left: 0.25rem;
+        }
     }
 }

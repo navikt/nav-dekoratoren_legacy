@@ -32,8 +32,7 @@
     }
 
     &__compact {
-        @media (max-height: @smallDesktopLimitHeight),
-            (max-width: @desktopMaxWidth) {
+        @media @screen-desktop-small-down {
             padding: 0.5rem 0.75rem;
             margin-bottom: 0.25rem;
 
@@ -65,7 +64,7 @@
         }
     }
 
-    @media (max-width: @mobilMaxWidth) {
+    @media @screen-mobile {
         padding: 0.75rem 1rem;
     }
 }

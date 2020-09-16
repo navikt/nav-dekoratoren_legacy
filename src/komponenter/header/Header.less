@@ -20,10 +20,10 @@
             @media (max-width: @screen-sm) {
                 flex-wrap: wrap;
             }
-            @media (min-width: @smallDesktopLimitWidth) {
+            @media @screen-desktop-small-width-down {
                 padding: 0.5rem 2rem;
             }
-            @media (min-width: @desktopMaxWidth) {
+            @media @screen-desktop-large-up {
                 padding: 0.5rem 0;
             }
         }

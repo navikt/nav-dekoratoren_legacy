@@ -4,18 +4,22 @@
 @import (reference) '~nav-frontend-typografi-style/src/index';
 @import (reference) '~nav-frontend-knapper-style/src/index';
 
-//width breakpoints
+// screen size breakpoints
 @desktopMaxWidth: 1440px;
+@smallDesktopMaxWidth: 1024px;
 @desktopMinWidth: 768px;
-@mobilMaxWidth: 767.99px;
-
-@smallDesktopLimitWidth: 1024px;
-@smallDesktopLimitHeight: 880px;
-
 @smallMobileMaxWidth: 340px;
 
-//minimun mobile support-width (used to remove padding etc on screen-size below)
-@minimumMobilWidth: 330px;
+@smallDesktopMaxHeight: 880px;
+
+// screen size media queries
+@screen-desktop: ~'(min-width: @{desktopMinWidth})';
+@screen-desktop-small-down: ~'(max-height: @{smallDesktopMaxHeight}), (max-width: @{smallDesktopMaxWidth})';
+@screen-desktop-small-width-down: ~'(max-width: @{smallDesktopMaxWidth})';
+@screen-desktop-medium-down: ~'(max-width: @{desktopMaxWidth})';
+@screen-desktop-large-up: ~'(min-width: @{desktopMaxWidth})';
+@screen-mobile: ~'not all and (min-width: @{desktopMinWidth})';
+@screen-mobile-small-down: ~'(max-width: @{smallMobileMaxWidth})';
 
 @margins-sides-desktop: 3rem;
 @margins-sides-desktop-small: 1rem;
@@ -31,8 +35,6 @@
 
 @footer-seperator-farge: @navGra20;
 @footer-seperator-height: 2px;
-
-@nav-logo-rod: #c30000;
 
 .flex-col-width-mixin(@cols, @margins) {
     max-width: calc(percentage(1 / @cols) - (@margins - @margins / @cols));
