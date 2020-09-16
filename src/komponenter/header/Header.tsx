@@ -50,12 +50,6 @@ export const Header = () => {
     const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
 
-    const [availableLanguages, setAvailableLanguages] = useState(
-        PARAMS.AVAILABLE_LANGUAGES
-    );
-
-    const [breadcrumbs, setBreadcrumbs] = useState(PARAMS.BREADCRUMBS);
-
     const [cookies, setCookie] = useCookies([
         decoratorLanguageCookie,
         decoratorContextCookie,
@@ -187,48 +181,6 @@ export const Header = () => {
         };
     }, []);
 
-    // Receive available languages from frontend-apps
-    useEffect(() => {
-        const receiveMessage = (msg: MessageEvent) => {
-            const { data } = msg;
-            const isSafe = msgSafetyCheck(msg);
-            const { source, event, payload } = data;
-            if (isSafe) {
-                if (source === 'decoratorClient') {
-                    if (event === 'availableLanguages') {
-                        validateAvailableLanguages(payload);
-                        setAvailableLanguages(
-                            payload.length > 0 ? payload : undefined
-                        );
-                    }
-                }
-            }
-        };
-        window.addEventListener('message', receiveMessage, false);
-        return () => {
-            window.removeEventListener('message', receiveMessage, false);
-        };
-    }, []);
-
-    // Receive breadcrumbs from frontend-apps
-    useEffect(() => {
-        const receiveMessage = (msg: MessageEvent) => {
-            const { data } = msg;
-            const isSafe = msgSafetyCheck(msg);
-            const { source, event, payload } = data;
-            if (isSafe) {
-                if (source === 'decoratorClient' && event === 'breadcrumbs') {
-                    validateBreadcrumbs(payload);
-                    setBreadcrumbs(payload.length > 0 ? payload : undefined);
-                }
-            }
-        };
-        window.addEventListener('message', receiveMessage, false);
-        return () => {
-            window.removeEventListener('message', receiveMessage, false);
-        };
-    }, []);
-
     // Receive params from frontend-apps
     useEffect(() => {
         const receiveMessage = (msg: MessageEvent) => {
@@ -252,11 +204,9 @@ export const Header = () => {
                     }
                     if (availableLanguages) {
                         validateAvailableLanguages(availableLanguages);
-                        setAvailableLanguages(availableLanguages);
                     }
                     if (breadcrumbs) {
                         validateBreadcrumbs(breadcrumbs);
-                        setBreadcrumbs(breadcrumbs);
                     }
                     const params = {
                         ...(context && {
@@ -313,19 +263,19 @@ export const Header = () => {
                 )}
             </header>
             <Driftsmeldinger />
-            {(breadcrumbs || availableLanguages) && (
+            {(PARAMS.BREADCRUMBS || PARAMS.AVAILABLE_LANGUAGES) && (
                 // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
                 <div className={'decorator-utils-container'}>
                     <div className={'decorator-utils-content'}>
-                        {breadcrumbs && (
+                        {PARAMS.BREADCRUMBS && (
                             <Brodsmulesti
                                 language={PARAMS.LANGUAGE}
-                                breadcrumbs={breadcrumbs}
+                                breadcrumbs={PARAMS.BREADCRUMBS}
                             />
                         )}
-                        {availableLanguages && (
+                        {PARAMS.AVAILABLE_LANGUAGES && (
                             <SprakVelger
-                                availableLanguages={availableLanguages}
+                                availableLanguages={PARAMS.AVAILABLE_LANGUAGES}
                             />
                         )}
                     </div>
