@@ -49,6 +49,9 @@ const getVarselTypeConfig = (varselType: string) => {
 
 const formatDato = (datoString: string) => {
     const datoObjekt = new Date(parseInt(datoString, 10));
+    if (isNaN(datoObjekt.valueOf())) {
+        return '';
+    }
 
     const datoOptions = {day: '2-digit', month: 'long', year: 'numeric' };
     const datoFormattert = new Intl.DateTimeFormat('nb', datoOptions).format(datoObjekt)

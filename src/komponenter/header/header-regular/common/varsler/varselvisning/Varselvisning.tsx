@@ -34,7 +34,7 @@ export const Varselvisning = ({ setKbId }: Props) => {
         varslerUleste > 0
             ? ` (${varslerUleste} ${finnTekst('varsler-nye', language)})`
             : '';
-    const visAlleVarslerLenke = varslerAntall >= 5;
+    const visAlleVarslerLenke = varslerAntall > 5;
 
     return (
         <div className={cls.className}>
@@ -47,7 +47,7 @@ export const Varselvisning = ({ setKbId }: Props) => {
                 </div>
             ) : (
                 <VarselListe
-                    varsler={varsler.nyesteVarsler}
+                    varsler={varsler.nyesteVarsler.slice(0, 5)}
                     rowIndex={setKbId ? 0 : undefined}
                 />
             )}
