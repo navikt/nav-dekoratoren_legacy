@@ -4,20 +4,22 @@
 @import (reference) '~nav-frontend-typografi-style/src/index';
 @import (reference) '~nav-frontend-knapper-style/src/index';
 
-// width breakpoints
+// screen size breakpoints
 @desktopMaxWidth: 1440px;
-@desktopMinWidth: 768px;
 @smallDesktopMaxWidth: 1024px;
-@smallDesktopMaxHeight: 880px;
+@desktopMinWidth: 768px;
 @smallMobileMaxWidth: 340px;
 
+@smallDesktopMaxHeight: 880px;
+
 // screen size media queries
-@media-query-desktop: ~'(min-width: @{desktopMinWidth})';
-@media-query-desktop-small-down: ~'(max-height: @{smallDesktopMaxHeight}), (max-width: @{smallDesktopMaxWidth})';
-@media-query-desktop-medium-down: ~'not all and (min-width: @{desktopMaxWidth})';
-@media-query-desktop-large-up: ~'(min-width: @{desktopMaxWidth})';
-@media-query-mobile: ~'not all and (min-width: @{desktopMinWidth})';
-@media-query-mobile-small-down: ~'(max-width: @{smallMobileMaxWidth})';
+@screen-desktop: ~'(min-width: @{desktopMinWidth})';
+@screen-desktop-small-down: ~'(max-height: @{smallDesktopMaxHeight}), (max-width: @{smallDesktopMaxWidth})';
+@screen-desktop-small-width-down: ~'(max-width: @{smallDesktopMaxWidth})';
+@screen-desktop-medium-down: ~'(max-width: @{desktopMaxWidth})';
+@screen-desktop-large-up: ~'(min-width: @{desktopMaxWidth})';
+@screen-mobile: ~'not all and (min-width: @{desktopMinWidth})';
+@screen-mobile-small-down: ~'(max-width: @{smallMobileMaxWidth})';
 
 @margins-sides-desktop: 3rem;
 @margins-sides-desktop-small: 1rem;

@@ -55,13 +55,13 @@
         }
     }
 
-    @media @media-query-desktop {
+    @media @screen-desktop {
         li {
             width: 48%;
         }
     }
 
-    @media (min-width: @smallDesktopMaxWidth) {
+    @media @screen-desktop-small-width-down {
         flex-direction: column;
 
         li {
@@ -70,7 +70,7 @@
         }
     }
 
-    @media @media-query-desktop-large-up {
+    @media @screen-desktop-large-up {
         justify-content: left;
     }
 }
