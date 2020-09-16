@@ -25,7 +25,6 @@ export const Brodsmulesti = (props: Props) => {
     const { XP_BASE_URL } = environment;
     const cls = BEMHelper('brodsmulesti');
 
-    console.log(props.breadcrumbs);
     return (
         <div className={cls.element('container')}>
             <div className={cls.element('content')}>
