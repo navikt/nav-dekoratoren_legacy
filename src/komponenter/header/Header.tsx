@@ -209,7 +209,6 @@ export const Header = () => {
                         validateBreadcrumbs(breadcrumbs);
                     }
                     const params = {
-                        ...PARAMS,
                         ...(context && {
                             CONTEXT: context,
                         }),
