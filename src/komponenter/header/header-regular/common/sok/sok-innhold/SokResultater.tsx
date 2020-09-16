@@ -3,25 +3,25 @@ import Sokeforslagtext from './Sokeforslagtext';
 import { finnTekst } from 'tekster/finn-tekst';
 import React from 'react';
 import { Locale } from 'store/reducers/language-duck';
-import { SokeresultatData } from '../sok-utils';
+import { Sokeresultat, Soketreff } from '../utils';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import { getKbId } from 'utils/keyboard-navigation/kb-navigation';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import Tekst from 'tekster/finn-tekst';
-import './SokResultater.less';
 import Lenke from 'nav-frontend-lenker';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../../../../store/reducers';
+import { AppState } from 'store/reducers';
+import './SokResultater.less';
 
 type Props = {
     writtenInput: string;
-    items: SokeresultatData[];
+    result: Sokeresultat;
     numberOfResults: number;
     language: Locale;
     fetchError?: string | boolean;
 };
 
-const removeDuplicates = (items: SokeresultatData[]) =>
+const removeDuplicates = (items: Soketreff[]) =>
     items.filter(
         (itemA, index) =>
             items.findIndex(
@@ -33,11 +33,10 @@ const removeDuplicates = (items: SokeresultatData[]) =>
 
 export const SokResultater = (props: Props) => {
     const { language, fetchError } = props;
-    const { writtenInput, items, numberOfResults } = props;
+    const { writtenInput, result, numberOfResults } = props;
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
-
-    const itemsFiltered =
-        removeDuplicates(items).slice(0, numberOfResults) || items;
+    const itemsFiltered = removeDuplicates(result.hits) || result.hits;
+    const itemsSpliced = itemsFiltered.slice(0, numberOfResults);
 
     return (
         <div className="sokeresultat-container">
@@ -48,47 +47,57 @@ export const SokResultater = (props: Props) => {
                     </AlertStripeFeil>
                 </div>
             )}
-
             {!fetchError && itemsFiltered.length ? (
                 <ul className="sokeresultat-liste">
-                    {itemsFiltered.map((item, index) => {
-                        const style = {
-                            '--index': index,
-                        } as React.CSSProperties;
-                        const id = getKbId(KbNavGroup.Sok, {
-                            col: 0,
-                            row: 1,
-                            sub: index,
-                        });
-                        return (
-                            <li key={index} style={style}>
-                                <a
-                                    id={id}
-                                    className={'sokeresultat-lenke'}
-                                    href={item.href}
-                                >
-                                    <SokeforslagIngress
-                                        className="sok-resultat-listItem"
-                                        displayName={item.displayName}
-                                    />
-                                    <Sokeforslagtext
-                                        highlight={item.highlight}
-                                    />
-                                </a>
-                            </li>
-                        );
-                    })}
+                    {itemsFiltered
+                        .slice(0, numberOfResults)
+                        .map((item, index) => {
+                            const style = {
+                                '--index': index,
+                            } as React.CSSProperties;
+                            const id = getKbId(KbNavGroup.Sok, {
+                                col: 0,
+                                row: 1,
+                                sub: index,
+                            });
+                            return (
+                                <li key={index} style={style}>
+                                    <a
+                                        id={id}
+                                        className={'sokeresultat-lenke'}
+                                        href={item.href}
+                                    >
+                                        <SokeforslagIngress
+                                            className="sok-resultat-listItem"
+                                            displayName={item.displayName}
+                                        />
+                                        <Sokeforslagtext
+                                            highlight={item.highlight}
+                                        />
+                                    </a>
+                                </li>
+                            );
+                        })}
                 </ul>
             ) : null}
 
             {!fetchError && itemsFiltered.length ? (
-                <Lenke
-                    className={'sokeresultat-alle-treff typo-element'}
-                    href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}
-                >{`${finnTekst(
-                    'se-alle-treff',
-                    language
-                )} ("${writtenInput}")`}</Lenke>
+                <div className={'sokeresultat-alle-treff'}>
+                    <div>
+                        {finnTekst('sok-viser', language)} {itemsSpliced.length}{' '}
+                        {finnTekst('sok-av', language)} {result.total}{' '}
+                        {finnTekst('sok-resulater', language)}
+                    </div>
+                    {result.total > itemsFiltered.length && (
+                        <Lenke
+                            className={'typo-element'}
+                            href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}
+                        >{`${finnTekst(
+                            'se-alle-treff',
+                            language
+                        )} ("${writtenInput}")`}</Lenke>
+                    )}
+                </div>
             ) : null}
 
             {!fetchError && !itemsFiltered.length && (
