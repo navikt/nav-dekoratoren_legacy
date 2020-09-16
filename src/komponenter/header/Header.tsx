@@ -268,7 +268,10 @@ export const Header = () => {
                 <div className={'decorator-utils-container'}>
                     <div className={'decorator-utils-content'}>
                         {PARAMS.BREADCRUMBS && (
-                            <Brodsmulesti breadcrumbs={PARAMS.BREADCRUMBS} />
+                            <Brodsmulesti
+                                language={PARAMS.LANGUAGE}
+                                breadcrumbs={PARAMS.BREADCRUMBS}
+                            />
                         )}
                         {PARAMS.AVAILABLE_LANGUAGES && (
                             <SprakVelger
