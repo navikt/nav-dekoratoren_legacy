@@ -1,9 +1,9 @@
 import { erNavDekoratoren } from './Environment';
 import { MenuValue } from './meny-storage-utils';
-import { EnvironmentState } from '../store/reducers/environment-duck';
+import { Environment } from '../store/reducers/environment-duck';
 
 export const getLoginUrl = (
-    environment: EnvironmentState,
+    environment: Environment,
     arbeidsflate: MenuValue
 ) => {
     const { LOGIN_URL, DITT_NAV_URL } = environment;
