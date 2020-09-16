@@ -54,9 +54,7 @@ export const Header = () => {
         PARAMS.AVAILABLE_LANGUAGES
     );
 
-    const [breadcrumbs, setBreadcrumbs] = useState(
-        environment.PARAMS.BREADCRUMBS
-    );
+    const [breadcrumbs, setBreadcrumbs] = useState(PARAMS.BREADCRUMBS);
 
     const [cookies, setCookie] = useCookies([
         decoratorLanguageCookie,
@@ -254,9 +252,11 @@ export const Header = () => {
                     }
                     if (availableLanguages) {
                         validateAvailableLanguages(availableLanguages);
+                        setAvailableLanguages(availableLanguages);
                     }
                     if (breadcrumbs) {
                         validateBreadcrumbs(breadcrumbs);
+                        setBreadcrumbs(breadcrumbs);
                     }
                     const params = {
                         ...PARAMS,
