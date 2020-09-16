@@ -30,7 +30,11 @@ export const Brodsmulesti = (props: Props) => {
 
     return (
         <div className={cls.element('container')}>
-            <nav className={cls.element('content')} itemProp="breadcrumb" aria-label={finnTekst('brodsmulesti', props.language)}>
+            <nav
+                className={cls.element('content')}
+                itemProp="breadcrumb"
+                aria-label={finnTekst('brodsmulesti', props.language)}
+            >
                 <Bilde asset={HomeIcon} />
                 <Normaltekst>
                     <Lenke href={XP_BASE_URL}>
