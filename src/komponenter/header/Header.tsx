@@ -22,8 +22,10 @@ import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
 import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
 import { SprakVelger } from './common/sprakvelger/SprakVelger';
-import { validateBreadcrumbs } from '../../server/utils';
+import { validateLanguage, validateLevel } from '../../server/utils';
+import { validateBreadcrumbs, validateContext } from '../../server/utils';
 import { validateAvailableLanguages } from '../../server/utils';
+import { Params, setParams } from '../../store/reducers/environment-duck';
 import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
@@ -52,9 +54,7 @@ export const Header = () => {
         PARAMS.AVAILABLE_LANGUAGES
     );
 
-    const [breadcrumbs, setBreadcrumbs] = useState(
-        environment.PARAMS.BREADCRUMBS
-    );
+    const [breadcrumbs, setBreadcrumbs] = useState(PARAMS.BREADCRUMBS);
 
     const [cookies, setCookie] = useCookies([
         decoratorLanguageCookie,
@@ -229,6 +229,77 @@ export const Header = () => {
         };
     }, []);
 
+    // Receive params from frontend-apps
+    useEffect(() => {
+        const receiveMessage = (msg: MessageEvent) => {
+            const { data } = msg;
+            const isSafe = msgSafetyCheck(msg);
+            const { source, event, payload } = data;
+            if (isSafe) {
+                if (source === 'decoratorClient' && event === 'params') {
+                    const { simple, context, level, language } = payload;
+                    const { availableLanguages, breadcrumbs } = payload;
+                    const { enforceLogin, redirectToApp } = payload;
+                    const { feedback, chatbot } = payload;
+                    if (context) {
+                        validateContext(context);
+                    }
+                    if (level) {
+                        validateLevel(level);
+                    }
+                    if (language) {
+                        validateLanguage(language);
+                    }
+                    if (availableLanguages) {
+                        validateAvailableLanguages(availableLanguages);
+                        setAvailableLanguages(availableLanguages);
+                    }
+                    if (breadcrumbs) {
+                        validateBreadcrumbs(breadcrumbs);
+                        setBreadcrumbs(breadcrumbs);
+                    }
+                    const params = {
+                        ...(context && {
+                            CONTEXT: context,
+                        }),
+                        ...(simple !== undefined && {
+                            SIMPLE: simple === true,
+                        }),
+                        ...(enforceLogin !== undefined && {
+                            ENFORCE_LOGIN: enforceLogin === true,
+                        }),
+                        ...(redirectToApp !== undefined && {
+                            REDIRECT_TO_APP: redirectToApp === true,
+                        }),
+                        ...(level && {
+                            LEVEL: level,
+                        }),
+                        ...(language && {
+                            LANGUAGE: language,
+                        }),
+                        ...(availableLanguages && {
+                            AVAILABLE_LANGUAGES: availableLanguages,
+                        }),
+                        ...(breadcrumbs && {
+                            BREADCRUMBS: breadcrumbs,
+                        }),
+                        ...(feedback !== undefined && {
+                            FEEDBACK: feedback !== false,
+                        }),
+                        ...(chatbot !== undefined && {
+                            CHATBOT: chatbot === true,
+                        }),
+                    };
+                    dispatch(setParams(params));
+                }
+            }
+        };
+        window.addEventListener('message', receiveMessage, false);
+        return () => {
+            window.removeEventListener('message', receiveMessage, false);
+        };
+    }, []);
+
     return (
         <div className={'decorator-wrapper'}>
             <HeadElements />
@@ -247,7 +318,10 @@ export const Header = () => {
                 <div className={'decorator-utils-container'}>
                     <div className={'decorator-utils-content'}>
                         {breadcrumbs && (
-                            <Brodsmulesti breadcrumbs={breadcrumbs} />
+                            <Brodsmulesti
+                                language={PARAMS.LANGUAGE}
+                                breadcrumbs={breadcrumbs}
+                            />
                         )}
                         {availableLanguages && (
                             <SprakVelger

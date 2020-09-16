@@ -86,6 +86,9 @@ export const ledetekster: { [key: string]: string } = {
     'sok-ingen-treff': 'Ingen treff for',
     'sok-ingen-treff-en': 'No hits for',
     'sok-ingen-treff-se': 'No hits for',
+    'se-alle-treff': 'Se alle treff',
+    'se-alle-treff-en': 'See all hits',
+    'se-alle-treff-se': 'Se alle treff',
     'tilbake-til-overskrift': 'Tilbake til oversikt',
     'tilbake-til-overskrift-en': 'Back to menu',
     'tilbake-til-overskrift-se': 'Meny vises ikke pa samisk',
@@ -306,4 +309,7 @@ export const ledetekster: { [key: string]: string } = {
     'chat-veileder': 'Chat med oss',
     'chat-veileder-en': 'Chat with us',
     'chat-veileder-se': 'Chat med oss',
+    brodsmulesti: 'Brødsmulesti',
+    'brodsmulesti-en': 'Breadcrumbs',
+    'brodsmulesti-se': 'Brødsmulesti',
 };

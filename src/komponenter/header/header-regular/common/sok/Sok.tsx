@@ -1,7 +1,7 @@
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import { defaultData, visAlleTreff } from './sok-utils';
+import { defaultData } from './sok-utils';
 import debounce from 'lodash.debounce';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import { genererUrl } from 'utils/Environment';
@@ -10,7 +10,7 @@ import { Locale } from 'store/reducers/language-duck';
 import { SokInput } from './sok-innhold/SokInput';
 import Spinner from '../spinner/Spinner';
 import SokResultater from './sok-innhold/SokResultater';
-import { EnvironmentState } from 'store/reducers/environment-duck';
+import { Environment } from 'store/reducers/environment-duck';
 import BEMHelper from 'utils/bem';
 import './Sok.less';
 
@@ -130,7 +130,7 @@ const Sok = (props: Props) => {
 /* Abstraction for debounce */
 interface FetchResult {
     value: string;
-    environment: EnvironmentState;
+    environment: Environment;
     setLoading: (value: boolean) => void;
     setError: (value?: string) => void;
     setResult: (value?: any) => void;
@@ -153,7 +153,6 @@ const fetchSearch = (props: FetchResult) => {
         .then((response) => response.json())
         .then((json) => {
             const tmp = [...json.hits];
-            tmp.unshift(visAlleTreff(XP_BASE_URL, value));
             setLoading(false);
             setError(undefined);
             setResult(tmp);
