@@ -18,7 +18,7 @@ export const ledetekster: { [key: string]: string } = {
     'footer-til-toppen-en': 'To the top',
     'footer-til-toppen-se': 'Til toppen',
     'til-forsiden': 'Til forsiden',
-    'til-forsiden-en': 'Til forsiden',
+    'til-forsiden-en': 'To the frontpage',
     'til-forsiden-se': 'Til forsiden',
     'min-side-arbeidsgiver': 'Min side arbeidsgiver',
     'min-side-arbeidsgiver-en': 'Min side arbeidsgiver',
@@ -36,7 +36,7 @@ export const ledetekster: { [key: string]: string } = {
     'logo-title-en': 'Hjem',
     'logo-title-se': 'Hjem',
     'logget-inn-som': 'Logget inn:',
-    'logget-inn-som-en': 'Signed inn:',
+    'logget-inn-som-en': 'Signed in:',
     'logget-inn-som-se': 'Logget inn:',
     lukk: 'Lukk',
     'lukk-en': 'Close',
@@ -147,9 +147,6 @@ export const ledetekster: { [key: string]: string } = {
     'varsler-tom-liste': 'Du har ingen varsler',
     'varsler-tom-liste-en': `You have no notifications`,
     'varsler-tom-liste-se': `You have no notifications`,
-    'til-forside': 'Til forsiden',
-    'til-forside-en': 'Til forsiden',
-    'til-forside-se': 'Til forsiden',
     'rolle-privatperson': 'Privatperson',
     'rolle-privatperson-en': 'Privatperson',
     'rolle-privatperson-se': 'Privatperson',
@@ -208,6 +205,10 @@ export const ledetekster: { [key: string]: string } = {
     'arbeidsflate-stikkord-om-samarbeidspartner-se':
         'Helsepersonell, tiltaksarrangører, fylker og kommuner',
     'lock-msg-infotekst':
+        'Menypunkt med hengelås sender deg til ny innlogging. Disse tjenestene krever BankID, Buypass eller Commfides.',
+    'lock-msg-infotekst-en':
+        'Menu items with padlock sends you to a new login. These services require BankID, Buypass or Commfides.',
+    'lock-msg-infotekst-se':
         'Menypunkt med hengelås sender deg til ny innlogging. Disse tjenestene krever BankID, Buypass eller Commfides.',
     'feil-sok-fetch': 'Feil mot søketjeneste.',
     'feil-sok-fetch-en': 'Search system malfunction.',

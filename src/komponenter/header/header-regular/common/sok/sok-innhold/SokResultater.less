@@ -76,13 +76,12 @@
         word-break: break-word;
     }
 
-    @media (max-width: @mobilMaxWidth) {
+    @media not all and (min-width: @desktopMinWidth) {
         .sokeresultat-liste {
             list-style: none;
             padding: 0;
             z-index: 1020;
             position: absolute;
-            background-color: white;
             width: 100%;
             overflow: hidden;
             margin: 0.25rem 0 0 0;

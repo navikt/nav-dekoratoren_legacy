@@ -6,7 +6,10 @@
         display: flex;
     }
 
-    // Desktop
+    .sok-input {
+        margin: 0;
+    }
+
     @media (min-width: @desktopMinWidth) {
         .sok-input {
             width: 100%;
@@ -42,14 +45,12 @@
         }
     }
 
-    // Mobil
-    @media (max-width: @mobilMaxWidth) {
+    @media not all and (min-width: @desktopMinWidth) {
         .sok-input__tittel {
             display: none;
         }
 
         .sok-input {
-            margin-bottom: 0;
             width: 100%;
 
             input {

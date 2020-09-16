@@ -63,7 +63,7 @@ export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
                 ...(req.query.breadcrumbs && {
                     BREADCRUMBS: JSON.parse(req.query.breadcrumbs as string),
                 }),
-                FEEDBACK: req.query.feedback === 'true',
+                FEEDBACK: req.query.feedback !== 'false',
                 CHATBOT: req.query.chatbot === 'true',
             },
         }),
