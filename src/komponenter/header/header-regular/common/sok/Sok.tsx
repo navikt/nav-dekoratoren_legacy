@@ -1,7 +1,6 @@
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import { defaultData, visAlleTreff } from './sok-utils';
 import debounce from 'lodash.debounce';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import { genererUrl } from 'utils/Environment';
@@ -9,6 +8,7 @@ import cls from 'classnames';
 import { Locale } from 'store/reducers/language-duck';
 import { SokInput } from './sok-innhold/SokInput';
 import Spinner from '../spinner/Spinner';
+import { Sokeresultat } from './utils';
 import SokResultater from './sok-innhold/SokResultater';
 import { Environment } from 'store/reducers/environment-duck';
 import BEMHelper from 'utils/bem';
@@ -31,7 +31,7 @@ const Sok = (props: Props) => {
     const { environment, language } = useSelector(stateSelector);
     const [loading, setLoading] = useState<boolean>(false);
     const [input, setInput] = useState<string>('');
-    const [result, setResult] = useState([defaultData]);
+    const [result, setResult] = useState<Sokeresultat | undefined>();
     const [error, setError] = useState<string | undefined>();
 
     const numberOfResults = 5;
@@ -46,8 +46,10 @@ const Sok = (props: Props) => {
     }, [props.isOpen]);
 
     useEffect(() => {
-        if (props.numResultsCallback) {
-            props.numResultsCallback(Math.min(result.length, numberOfResults));
+        if (result && props.numResultsCallback) {
+            props.numResultsCallback(
+                Math.min(result.hits.length, numberOfResults)
+            );
         }
     }, [result]);
 
@@ -101,10 +103,11 @@ const Sok = (props: Props) => {
                     {loading ? (
                         <Spinner tekstId={'spinner-sok'} />
                     ) : (
+                        result &&
                         input.length > 2 && (
                             <SokResultater
                                 writtenInput={input}
-                                items={result}
+                                result={result}
                                 numberOfResults={numberOfResults}
                                 language={language}
                                 fetchError={error}
@@ -152,11 +155,9 @@ const fetchSearch = (props: FetchResult) => {
         })
         .then((response) => response.json())
         .then((json) => {
-            const tmp = [...json.hits];
-            tmp.unshift(visAlleTreff(XP_BASE_URL, value));
             setLoading(false);
             setError(undefined);
-            setResult(tmp);
+            setResult(json);
         })
         .catch((err) => {
             setLoading(false);
