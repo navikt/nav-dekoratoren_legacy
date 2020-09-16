@@ -16,14 +16,14 @@
     // Hindrer overstyring av styling på knapper fra appene
     all: unset;
 
-    @media (min-width: @desktopMinWidth) {
+    @media @media-query-desktop {
         .knapp;
         .login-knapp-mixin();
         .safari-text-color-fix-mixin(@navBla, @white, @white, @navBla);
         padding: 0.625rem 1rem;
     }
 
-    @media (max-width: @mobilMaxWidth) {
+    @media @media-query-mobile {
         .knapp--flat;
         .login-knapp-mixin();
         .safari-text-color-fix-mixin(@navBla, @navBla, @navBla, @navBla);

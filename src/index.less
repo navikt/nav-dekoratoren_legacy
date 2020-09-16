@@ -6,7 +6,7 @@ body {
 }
 
 body.no-scroll-mobil {
-    @media not all and (min-width: @desktopMinWidth) {
+    @media @media-query-mobile {
         overflow-y: hidden;
         overflow-x: hidden;
     }
@@ -37,7 +37,7 @@ body.no-scroll-mobil {
 }
 
 .arbeidsflate {
-    @media not all and (min-width: @desktopMinWidth) {
+    @media @media-query-mobile {
         display: none;
     }
 }
@@ -60,7 +60,7 @@ body.no-scroll-mobil {
 }
 
 .sideheader .header-linje ul {
-    @media (min-width: @desktopMinWidth) {
+    @media @media-query-desktop {
         padding: 0;
     }
 }
@@ -73,7 +73,7 @@ body.no-scroll-mobil {
     display: none !important;
 }
 
-@media (min-width: @desktopMinWidth) {
+@media @media-query-desktop {
     .media-sm-mobil {
         display: none !important;
     }

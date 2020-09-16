@@ -25,18 +25,18 @@
         flex-shrink: 0;
     }
 
-    @media (max-width: @smallMobileMaxWidth) {
+    @media @media-query-mobile-small {
         .hovedmeny__knapp-tekst,
         .varselbjelle__knapp-tekst {
             display: none;
         }
     }
 
-    @media not all and (min-width: @desktopMinWidth) {
+    @media @media-query-mobile {
         .mobil-header();
     }
 
-    @media (min-width: @desktopMinWidth) {
+    @media @media-query-desktop {
         .desktop-header();
     }
 }

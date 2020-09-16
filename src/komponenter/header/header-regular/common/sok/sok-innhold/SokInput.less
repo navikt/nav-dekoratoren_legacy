@@ -10,7 +10,7 @@
         margin: 0;
     }
 
-    @media (min-width: @desktopMinWidth) {
+    @media @media-query-desktop {
         .sok-input {
             width: 100%;
 
@@ -45,7 +45,7 @@
         }
     }
 
-    @media not all and (min-width: @desktopMinWidth) {
+    @media @media-query-mobile {
         .sok-input__tittel {
             display: none;
         }

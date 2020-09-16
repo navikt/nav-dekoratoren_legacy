@@ -34,6 +34,10 @@
 
 @nav-logo-rod: #c30000;
 
+@media-query-desktop: ~'(min-width: @{desktopMinWidth})';
+@media-query-mobile: ~'not all and (min-width: @{desktopMinWidth})';
+@media-query-mobile-small: ~'(max-width: @{smallMobileMaxWidth})';
+
 .flex-col-width-mixin(@cols, @margins) {
     max-width: calc(percentage(1 / @cols) - (@margins - @margins / @cols));
     flex-basis: 100%;
