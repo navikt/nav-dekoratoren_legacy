@@ -306,4 +306,7 @@ export const ledetekster: { [key: string]: string } = {
     'chat-veileder': 'Chat med oss',
     'chat-veileder-en': 'Chat with us',
     'chat-veileder-se': 'Chat med oss',
+    'brodsmulesti': 'Brødsmulesti',
+    'brodsmulesti-en': 'Breadcrumbs',
+    'brodsmulesti-se': 'Brødsmulesti',
 };

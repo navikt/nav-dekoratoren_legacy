@@ -100,6 +100,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [6] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
 
+:information_source: &nbsp; Samtlige parameter kan settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 :information_source: &nbsp; Bakgrunnsfarge på brødsmulesti og språkvelger kan overstyres:
 ```
 .decorator-utils-container {
@@ -134,7 +135,7 @@ dekoratoren:
       APP_BASE_URL: 'http://localhost:8100'
       APP_BASE_PATH: '/dekoratoren'
       API_XP_SERVICES_URL: 'https://www.nav.no/_/service'
-      API_UNLEASH_PROXY_URL=https://www.nav.no/person/pb-unleash-proxy
+      API_UNLEASH_PROXY_URL: 'https://www.nav.no/person/pb-unleash-proxy'
       API_INNLOGGINGSLINJE_URL: 'http://mocks:8080/innloggingslinje-api/auth'
       API_VARSELINNBOKS_URL: 'http://mocks:8080/person/varselinnboks'
       MINSIDE_ARBEIDSGIVER_URL: 'https://arbeidsgiver.nav.no/min-side-arbeidsgiver/'

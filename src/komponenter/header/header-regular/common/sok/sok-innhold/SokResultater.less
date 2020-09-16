@@ -87,8 +87,8 @@
         padding: 0;
     }
 
-    @media (max-width: @mobilMaxWidth) {
-        .sokeresultat-container {
+    @media not all and (min-width: @desktopMinWidth) {
+        .sokeresultat-liste {
             list-style: none;
             padding: 0;
             z-index: 1020;

@@ -10,7 +10,7 @@ import { Locale } from 'store/reducers/language-duck';
 import { SokInput } from './sok-innhold/SokInput';
 import Spinner from '../spinner/Spinner';
 import SokResultater from './sok-innhold/SokResultater';
-import { EnvironmentState } from 'store/reducers/environment-duck';
+import { Environment } from 'store/reducers/environment-duck';
 import BEMHelper from 'utils/bem';
 import './Sok.less';
 
@@ -130,7 +130,7 @@ const Sok = (props: Props) => {
 /* Abstraction for debounce */
 interface FetchResult {
     value: string;
-    environment: EnvironmentState;
+    environment: Environment;
     setLoading: (value: boolean) => void;
     setError: (value?: string) => void;
     setResult: (value?: any) => void;

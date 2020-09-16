@@ -1,6 +1,6 @@
-import { EnvironmentState } from 'store/reducers/environment-duck';
+import { Environment } from 'store/reducers/environment-duck';
 
-export const fetchEnv = (): Promise<EnvironmentState> => {
+export const fetchEnv = (): Promise<Environment> => {
     return new Promise((resolve) => {
         const envDom = document.getElementById('decorator-env');
         if (envDom) {

@@ -5,6 +5,8 @@ import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSp
 import { AnalyticsCategory } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { useDispatch } from 'react-redux';
+import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 
 interface Props {
     lenke: MenyNode;
@@ -16,6 +18,8 @@ interface Props {
 export const MenyLenke = (props: Props) => {
     const auth = useSelector((state: AppState) => state.innloggingsstatus.data);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
+    const dispatch = useDispatch();
+
     const displayLock = props.displayLock && auth.securityLevel !== '4';
     const { lenke, menyGruppeNavn } = props;
     const href = genererUrl(XP_BASE_URL, lenke.path);
@@ -32,6 +36,7 @@ export const MenyLenke = (props: Props) => {
                 }}
                 withChevron={true}
                 withLock={displayLock}
+                onClick={() => dispatch(lukkAlleDropdowns())}
             >
                 {lenke.displayName}
             </LenkeMedSporing>
