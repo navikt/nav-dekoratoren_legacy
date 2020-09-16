@@ -83,9 +83,12 @@ export const SokResultater = (props: Props) => {
 
             {!fetchError && itemsFiltered.length ? (
                 <Lenke
-                    className={'sokeresultat-alle-treff'}
+                    className={'sokeresultat-alle-treff typo-element'}
                     href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}
-                >{`Se alle treff ("${writtenInput}")`}</Lenke>
+                >{`${finnTekst(
+                    'se-alle-treff',
+                    language
+                )} ("${writtenInput}")`}</Lenke>
             ) : null}
 
             {!fetchError && !itemsFiltered.length && (
