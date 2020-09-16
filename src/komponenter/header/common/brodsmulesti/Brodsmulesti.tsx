@@ -7,6 +7,8 @@ import HomeIcon from 'ikoner/home.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import { postMessageToApp } from 'utils/messages';
+import { Locale } from 'store/reducers/language-duck';
+import { finnTekst } from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import './Brodsmulesti.less';
 
@@ -17,6 +19,7 @@ export interface Breadcrumb {
 }
 
 interface Props {
+    language: Locale;
     breadcrumbs: Breadcrumb[];
 }
 
@@ -27,7 +30,7 @@ export const Brodsmulesti = (props: Props) => {
 
     return (
         <div className={cls.element('container')}>
-            <div className={cls.element('content')}>
+            <nav className={cls.element('content')} itemProp="breadcrumb" aria-label={finnTekst('brodsmulesti', props.language)}>
                 <Bilde asset={HomeIcon} />
                 <Normaltekst>
                     <Lenke href={XP_BASE_URL}>
@@ -65,7 +68,7 @@ export const Brodsmulesti = (props: Props) => {
                         </Normaltekst>
                     </Fragment>
                 ))}
-            </div>
+            </nav>
         </div>
     );
 };
