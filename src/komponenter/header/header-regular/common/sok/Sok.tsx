@@ -1,7 +1,7 @@
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import { defaultData, visAlleTreff } from './sok-utils';
+import { defaultData } from './sok-utils';
 import debounce from 'lodash.debounce';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import { genererUrl } from 'utils/Environment';
@@ -153,7 +153,6 @@ const fetchSearch = (props: FetchResult) => {
         .then((response) => response.json())
         .then((json) => {
             const tmp = [...json.hits];
-            tmp.unshift(visAlleTreff(XP_BASE_URL, value));
             setLoading(false);
             setError(undefined);
             setResult(tmp);
