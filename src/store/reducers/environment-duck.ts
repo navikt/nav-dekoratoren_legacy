@@ -87,6 +87,7 @@ export const reducer = (
             return {
                 ...state,
                 PARAMS: {
+                    ...state.PARAMS,
                     ...action.data,
                 },
             };
@@ -96,7 +97,7 @@ export const reducer = (
     }
 };
 
-export const setParams = (params: Params) => ({
+export const setParams = (params: Partial<Params>) => ({
     type: ActionType.SETT_PARAMS,
     data: params,
 });

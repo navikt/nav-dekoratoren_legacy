@@ -259,7 +259,6 @@ export const Header = () => {
                         setBreadcrumbs(breadcrumbs);
                     }
                     const params = {
-                        ...PARAMS,
                         ...(context && {
                             CONTEXT: context,
                         }),
