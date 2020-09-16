@@ -36,6 +36,7 @@ export const SokResultater = (props: Props) => {
     const { writtenInput, result, numberOfResults } = props;
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const itemsFiltered = removeDuplicates(result.hits) || result.hits;
+    const itemsSpliced = itemsFiltered.slice(0, numberOfResults);
 
     return (
         <div className="sokeresultat-container">
@@ -83,7 +84,7 @@ export const SokResultater = (props: Props) => {
             {!fetchError && itemsFiltered.length ? (
                 <div className={'sokeresultat-alle-treff'}>
                     <div>
-                        {finnTekst('sok-viser', language)} {numberOfResults}{' '}
+                        {finnTekst('sok-viser', language)} {itemsSpliced.length}{' '}
                         {finnTekst('sok-av', language)} {result.total}{' '}
                         {finnTekst('sok-resulater', language)}
                     </div>
