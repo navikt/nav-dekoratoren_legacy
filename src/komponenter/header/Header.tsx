@@ -291,7 +291,6 @@ export const Header = () => {
                             CHATBOT: chatbot === true,
                         }),
                     };
-                    console.log(params);
                     dispatch(setParams(params));
                 }
             }
