@@ -53,13 +53,12 @@
             padding: 0.5rem @margins-sides-desktop 2rem @margins-sides-desktop;
             overflow: hidden;
 
-            @media (max-width: @smallDesktopLimitWidth) {
+            @media (max-width: @smallDesktopMaxWidth) {
                 padding-left: @margins-sides-desktop-small;
                 padding-right: @margins-sides-desktop-small;
             }
 
-            @media (max-height: @smallDesktopLimitHeight),
-                (max-width: @smallDesktopLimitWidth) {
+            @media @media-query-desktop-small-down {
                 padding-top: 0;
                 padding-bottom: 1rem;
             }

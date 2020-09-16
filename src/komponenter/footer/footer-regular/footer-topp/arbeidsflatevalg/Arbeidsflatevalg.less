@@ -61,7 +61,7 @@
         }
     }
 
-    @media (min-width: @smallDesktopLimitWidth) {
+    @media (min-width: @smallDesktopMaxWidth) {
         flex-direction: column;
 
         li {
@@ -70,7 +70,7 @@
         }
     }
 
-    @media (min-width: @desktopMaxWidth) {
+    @media @media-query-desktop-large-up {
         justify-content: left;
     }
 }

@@ -7,12 +7,17 @@
 // width breakpoints
 @desktopMaxWidth: 1440px;
 @desktopMinWidth: 768px;
-
-@smallDesktopLimitWidth: 1024px;
-@smallDesktopLimitHeight: 880px;
-
-// minimun mobile support-width (used to remove padding etc on screen-size below)
+@smallDesktopMaxWidth: 1024px;
+@smallDesktopMaxHeight: 880px;
 @smallMobileMaxWidth: 340px;
+
+// screen size media queries
+@media-query-desktop: ~'(min-width: @{desktopMinWidth})';
+@media-query-desktop-small-down: ~'(max-height: @{smallDesktopMaxHeight}), (max-width: @{smallDesktopMaxWidth})';
+@media-query-desktop-medium-down: ~'not all and (min-width: @{desktopMaxWidth})';
+@media-query-desktop-large-up: ~'(min-width: @{desktopMaxWidth})';
+@media-query-mobile: ~'not all and (min-width: @{desktopMinWidth})';
+@media-query-mobile-small-down: ~'(max-width: @{smallMobileMaxWidth})';
 
 @margins-sides-desktop: 3rem;
 @margins-sides-desktop-small: 1rem;
@@ -28,12 +33,6 @@
 
 @footer-seperator-farge: @navGra20;
 @footer-seperator-height: 2px;
-
-@media-query-desktop: ~'(min-width: @{desktopMinWidth})';
-@media-query-desktop-medium: ~'(min-width: @{smallDesktopLimitWidth})';
-@media-query-desktop-large: ~'(min-width: @{desktopMaxWidth})';
-@media-query-mobile: ~'not all and (min-width: @{desktopMinWidth})';
-@media-query-mobile-small: ~'(max-width: @{smallMobileMaxWidth})';
 
 .flex-col-width-mixin(@cols, @margins) {
     max-width: calc(percentage(1 / @cols) - (@margins - @margins / @cols));

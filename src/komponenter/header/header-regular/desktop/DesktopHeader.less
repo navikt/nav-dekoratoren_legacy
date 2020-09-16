@@ -14,7 +14,7 @@
     .hovedmeny__knapp,
     .desktop-sok-dropdown__knapp {
         margin-left: @margin-mellom;
-        @media (max-width: @smallDesktopLimitWidth) {
+        @media (max-width: @smallDesktopMaxWidth) {
             margin-left: @margin-mellom-sm;
         }
     }
@@ -23,7 +23,7 @@
     .desktop-minside-meny__knapp,
     .login-knapp-container {
         margin-right: @margin-mellom;
-        @media (max-width: @smallDesktopLimitWidth) {
+        @media (max-width: @smallDesktopMaxWidth) {
             margin-right: @margin-mellom-sm;
         }
     }
@@ -36,14 +36,14 @@
         margin-left: calc(@margins-sides-desktop - @padding);
         margin-right: -@padding;
 
-        @media (max-width: @smallDesktopLimitWidth) {
+        @media (max-width: @smallDesktopMaxWidth) {
             margin-left: calc(@margins-sides-desktop-small - @padding);
         }
     }
 
     .login-knapp-container {
         margin-right: @margins-sides-desktop;
-        @media (max-width: @smallDesktopLimitWidth) {
+        @media (max-width: @smallDesktopMaxWidth) {
             margin-right: @margins-sides-desktop-small;
         }
     }
