@@ -11,7 +11,6 @@ import Spinner from '../spinner/Spinner';
 import { Sokeresultat } from './utils';
 import SokResultater from './sok-innhold/SokResultater';
 import { Environment } from 'store/reducers/environment-duck';
-import BEMHelper from 'utils/bem';
 import './Sok.less';
 
 interface Props {
@@ -19,9 +18,10 @@ interface Props {
     isOpen: boolean;
     dropdownTransitionMs?: number;
     numResultsCallback?: (numResults: number) => void;
+    searchInput: string;
+    setSearchInput: (searchInput: string) => void;
 }
 
-const mobileCls = BEMHelper('sok');
 const stateSelector = (state: AppState) => ({
     environment: state.environment,
     language: state.language.language,
@@ -30,9 +30,9 @@ const stateSelector = (state: AppState) => ({
 const Sok = (props: Props) => {
     const { environment, language } = useSelector(stateSelector);
     const [loading, setLoading] = useState<boolean>(false);
-    const [input, setInput] = useState<string>('');
     const [result, setResult] = useState<Sokeresultat | undefined>();
     const [error, setError] = useState<string | undefined>();
+    const { searchInput, setSearchInput } = props;
 
     const numberOfResults = 5;
     const klassenavn = cls('sok-input', {
@@ -54,7 +54,7 @@ const Sok = (props: Props) => {
     }, [result]);
 
     const onReset = () => {
-        setInput('');
+        setSearchInput('');
         setLoading(false);
     };
 
@@ -62,11 +62,11 @@ const Sok = (props: Props) => {
         e.preventDefault();
         analyticsEvent({
             category: AnalyticsCategory.Header,
-            label: input,
+            label: searchInput,
             action: 'søk',
         });
         const { XP_BASE_URL } = environment;
-        const url = `${XP_BASE_URL}/sok?ord=${input}`;
+        const url = `${XP_BASE_URL}/sok?ord=${searchInput}`;
         window.location.href = genererUrl(XP_BASE_URL, url);
     };
 
@@ -80,7 +80,7 @@ const Sok = (props: Props) => {
                 <div className="sok-input-resultat">
                     <SokInput
                         onChange={(value: string) => {
-                            setInput(value);
+                            setSearchInput(value);
                             if (value.length > 2) {
                                 setLoading(true);
                                 fetchSearchDebounced({
@@ -96,7 +96,7 @@ const Sok = (props: Props) => {
                         }}
                         className={klassenavn}
                         language={language}
-                        writtenInput={input}
+                        writtenInput={searchInput}
                         onReset={onReset}
                         id={props.id}
                     />
@@ -104,9 +104,9 @@ const Sok = (props: Props) => {
                         <Spinner tekstId={'spinner-sok'} />
                     ) : (
                         result &&
-                        input.length > 2 && (
+                        searchInput.length > 2 && (
                             <SokResultater
-                                writtenInput={input}
+                                writtenInput={searchInput}
                                 result={result}
                                 numberOfResults={numberOfResults}
                                 language={language}
@@ -116,16 +116,6 @@ const Sok = (props: Props) => {
                     )}
                 </div>
             </div>
-            {props.isOpen && (
-                <div className="media-sm-mobil mobil-meny">
-                    <div
-                        className={mobileCls.element(
-                            'bakgrunn',
-                            input.length > 2 ? 'active' : ''
-                        )}
-                    />
-                </div>
-            )}
         </form>
     );
 };
@@ -142,7 +132,7 @@ interface FetchResult {
 const fetchSearch = (props: FetchResult) => {
     const { environment, value } = props;
     const { setLoading, setError, setResult } = props;
-    const { APP_URL, XP_BASE_URL } = environment;
+    const { APP_URL } = environment;
     const url = `${APP_URL}/api/sok`;
 
     fetch(`${url}?ord=${value}`)
