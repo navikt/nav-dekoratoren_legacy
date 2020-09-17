@@ -55,13 +55,13 @@
         }
     }
 
-    @media (min-width: @desktopMinWidth) {
+    @media @screen-desktop {
         li {
             width: 48%;
         }
     }
 
-    @media (min-width: @smallDesktopLimitWidth) {
+    @media @screen-desktop-medium-up {
         flex-direction: column;
 
         li {
@@ -70,7 +70,7 @@
         }
     }
 
-    @media (min-width: @desktopMaxWidth) {
+    @media @screen-desktop-large-up {
         justify-content: left;
     }
 }

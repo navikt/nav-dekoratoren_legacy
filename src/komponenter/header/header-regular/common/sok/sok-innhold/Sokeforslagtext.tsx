@@ -9,7 +9,13 @@ const Sokeforslagtext = ({ highlight }: { highlight?: string }) => {
 
     return (
         <div className="sok-resultat-listItem-text">
-            <Normaltekst>{highlightFiltered || ''}</Normaltekst>
+            <Normaltekst>
+                <span
+                    dangerouslySetInnerHTML={{
+                        __html: highlightFiltered || '',
+                    }}
+                />
+            </Normaltekst>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { EnvironmentState } from 'store/reducers/environment-duck';
+import { Environment } from 'store/reducers/environment-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { AvailableLanguage, Locale } from 'store/reducers/language-duck';
 import { Breadcrumb } from '../komponenter/header/common/brodsmulesti/Brodsmulesti';
@@ -16,7 +16,7 @@ interface Props {
 
 // Client environment
 // Obs! Don't expose secrets
-export const clientEnv = ({ req, cookies }: Props): EnvironmentState => {
+export const clientEnv = ({ req, cookies }: Props): Environment => {
     // Throw errors if parameters are invalid
     validateClientEnv(req);
 

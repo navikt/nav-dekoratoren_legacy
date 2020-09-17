@@ -2,7 +2,7 @@ import { Data as innloggingsstatusData } from './reducers/innloggingsstatus-duck
 import { VarslerData as varselinnboksData } from './reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from './reducers/menu-duck';
 import { DriftsmeldingerData } from './reducers/driftsmeldinger-duck';
-import { EnvironmentState } from './reducers/environment-duck';
+import { Environment, Params } from './reducers/environment-duck';
 import { FeatureToggles } from './reducers/feature-toggles-duck';
 
 export enum ActionType {
@@ -25,6 +25,7 @@ export enum ActionType {
     SETT_VARSLER_LEST = 'SETT_VARSLER_LEST',
     SETT_LANGUAGE = 'SETT_LANGUAGE',
     SETT_ENVIRONMENT = 'SETT_ENVIRONMENT',
+    SETT_PARAMS = 'SETT_PARAMS',
     SETT_FEATURE_TOGGLES = 'SETT_FEATURE_TOGGLES',
     PRIVATPERSON = 'PRIVATPERSON',
     ARBEIDSGIVER = 'ARBEIDSGIVER',
@@ -99,7 +100,12 @@ export interface SettFeatureToggles {
 
 export interface SettEnviroment {
     type: ActionType.SETT_ENVIRONMENT;
-    data: EnvironmentState;
+    data: Environment;
+}
+
+export interface SettParams {
+    type: ActionType.SETT_PARAMS;
+    data: Params;
 }
 
 export interface SettVarslerOKAction {
@@ -185,6 +191,7 @@ export type Handling =
     | HentVarslerFEILETAction
     | HentVarslerPENDINGAction
     | SettEnviroment
+    | SettParams
     | SettVarslerOKAction
     | SettVarslerLestOKAction
     | SettVarslerLestFEILETAction

@@ -58,7 +58,7 @@
         }
     }
 
-    @media (min-width: @desktopMinWidth) {
+    @media @screen-desktop {
         padding: 1rem 1rem;
 
         .topp-kolonner {
@@ -88,7 +88,7 @@
         }
     }
 
-    @media (min-width: @smallDesktopLimitWidth) {
+    @media @screen-desktop-medium-up {
         padding: 1.5rem 2rem;
 
         .topp-kolonner {
@@ -117,8 +117,13 @@
         }
     }
 
-    @media (min-width: @desktopMaxWidth) {
+    @media @screen-desktop-large-up {
+        padding: 1.5rem 0;
+
         .topp-kolonner {
+            width: 1344px;
+            margin: 0 auto;
+
             .menylenker-seksjon.til-toppen {
                 width: 15%;
                 margin: 0;
@@ -137,15 +142,6 @@
             .arbeidsflatevalg {
                 justify-content: left;
             }
-        }
-    }
-
-    @media (min-width: @desktopMaxWidth) {
-        padding: 1.5rem 0;
-
-        .topp-kolonner {
-            width: 1344px;
-            margin: 0 auto;
         }
     }
 }

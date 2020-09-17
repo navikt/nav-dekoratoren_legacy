@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import BEMHelper from 'utils/bem';
 import { MenyNode } from 'store/reducers/menu-duck';
@@ -41,6 +41,7 @@ const Hovedmeny = (props: Props) => {
     const { language, meny } = useSelector(stateSelector);
     const { arbeidsflate, innloggingsstatus } = useSelector(stateSelector);
     const { underMenuIsOpen, hovedMenuIsOpen } = useSelector(stateSelector);
+    const [searchInput, setSearchInput] = useState<string>('');
     const isLanguageNorwegian =
         language === Locale.BOKMAL || language === Locale.NYNORSK;
 
@@ -75,50 +76,62 @@ const Hovedmeny = (props: Props) => {
     return (
         <div className={containerClassName}>
             <Sok
+                id={mobilSokInputId}
                 isOpen={hovedMenuIsOpen}
                 dropdownTransitionMs={400}
-                id={mobilSokInputId}
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
             />
-            <InnloggetBruker />
-            <ForsideLenke
-                arbeidsflate={arbeidsflate}
-                erInnlogget={innloggingsstatus.data.authenticated}
-            />
-            {innloggingsstatus.data.authenticated &&
-                arbeidsflate === MenuValue.PRIVATPERSON && (
-                    <div className={menyClass.element('submeny', 'wrap')}>
-                        <Dittnavmeny
-                            minsideLenker={minsideLenker}
-                            className={menyClass.className}
-                            openMeny={setMenyliste}
-                        />
-                    </div>
-                )}
-            <MenyIngress
-                className={menyClass.element('meny', 'ingress')}
-                inputext={arbeidsflate}
-            />
-            <ul className={menyClass.element('meny', 'mainlist')}>
-                {hovedmenyLenker.children.map(
-                    (menyElement: MenyNode, index: number) => (
-                        <Listelement
-                            key={index}
-                            className={menyClass.className}
-                            classElement="text-element"
-                        >
-                            <a
-                                className="lenke"
-                                href="https://nav.no"
-                                onClick={(e) => setMenyliste(e, menyElement)}
+            {!searchInput && (
+                <>
+                    <InnloggetBruker />
+                    <ForsideLenke
+                        arbeidsflate={arbeidsflate}
+                        erInnlogget={innloggingsstatus.data.authenticated}
+                    />
+                    {innloggingsstatus.data.authenticated &&
+                        arbeidsflate === MenuValue.PRIVATPERSON && (
+                            <div
+                                className={menyClass.element('submeny', 'wrap')}
                             >
-                                {menyElement.displayName}
-                                <HoyreChevron />
-                            </a>
-                        </Listelement>
-                    )
-                )}
-            </ul>
-            {isLanguageNorwegian && <MobilarbeidsflateValg lang={language} />}
+                                <Dittnavmeny
+                                    minsideLenker={minsideLenker}
+                                    className={menyClass.className}
+                                    openMeny={setMenyliste}
+                                />
+                            </div>
+                        )}
+                    <MenyIngress
+                        className={menyClass.element('meny', 'ingress')}
+                        inputext={arbeidsflate}
+                    />
+                    <ul className={menyClass.element('meny', 'mainlist')}>
+                        {hovedmenyLenker.children.map(
+                            (menyElement: MenyNode, index: number) => (
+                                <Listelement
+                                    key={index}
+                                    className={menyClass.className}
+                                    classElement="text-element"
+                                >
+                                    <a
+                                        className="lenke"
+                                        href="https://nav.no"
+                                        onClick={(e) =>
+                                            setMenyliste(e, menyElement)
+                                        }
+                                    >
+                                        {menyElement.displayName}
+                                        <HoyreChevron />
+                                    </a>
+                                </Listelement>
+                            )
+                        )}
+                    </ul>
+                    {isLanguageNorwegian && (
+                        <MobilarbeidsflateValg lang={language} />
+                    )}
+                </>
+            )}
         </div>
     );
 };

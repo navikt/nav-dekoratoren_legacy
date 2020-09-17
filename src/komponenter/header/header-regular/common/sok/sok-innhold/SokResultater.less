@@ -13,7 +13,7 @@
 
 .sok-input-resultat {
     .sokeresultat-feil {
-        margin: 1rem 0;
+        margin-top: 1rem;
     }
 
     .sokeresultat-lenke {
@@ -34,12 +34,12 @@
         }
     }
 
-    .sokeresultat-liste {
+    .sokeresultat-container {
         list-style: none;
-        position: relative;
+        flex-direction: column;
+        display: flex;
         margin: 0;
-        padding: 1rem 0;
-        left: 0;
+        padding: 1rem 0 0 0;
 
         li {
             display: flex;
@@ -55,10 +55,6 @@
                 background-color: lightgray;
                 font-weight: bold;
             }
-
-            &:last-child {
-                border-bottom: none;
-            }
         }
 
         li[aria-selected='true'] {
@@ -72,20 +68,29 @@
     }
 
     .sokeresultat-ingen-treff {
-        margin: 1rem 1rem 1.5rem 1rem;
+        margin: 1rem 1rem 0 1rem;
         word-break: break-word;
     }
 
-    @media not all and (min-width: @desktopMinWidth) {
+    .sokeresultat-alle-treff {
+        padding: 1rem;
+    }
+
+    .sokeresultat-liste {
+        margin: 0.25rem 0 0 0;
+        padding: 0;
+    }
+
+    @media @screen-mobile {
         .sokeresultat-liste {
             list-style: none;
             padding: 0;
             z-index: 1020;
-            position: absolute;
+            flex-direction: column;
+            display: flex;
             width: 100%;
             overflow: hidden;
             margin: 0.25rem 0 0 0;
-            left: 0;
 
             li {
                 display: flex;

@@ -1,9 +1,9 @@
 import { MenuValue } from 'utils/meny-storage-utils';
-import { ActionType, Handling } from '../actions';
+import { ActionType, Handling, HentDriftsmeldingSUCCESS } from '../actions';
 import { Locale, AvailableLanguage } from './language-duck';
 import { Breadcrumb } from '../../komponenter/header/common/brodsmulesti/Brodsmulesti';
 
-export interface EnvironmentState {
+export interface Environment {
     XP_BASE_URL: string;
     APP_URL: string;
     APP_BASE_URL: string;
@@ -17,28 +17,31 @@ export interface EnvironmentState {
     SERVER_TIME: number;
 
     // Parameters
-    PARAMS: {
-        CONTEXT: MenuValue;
-        SIMPLE: boolean;
-        SIMPLE_HEADER: boolean;
-        SIMPLE_FOOTER: boolean;
-        ENFORCE_LOGIN: boolean;
-        REDIRECT_TO_APP: boolean;
-        LEVEL: string;
-        LANGUAGE: Locale;
-        AVAILABLE_LANGUAGES?: AvailableLanguage[];
-        BREADCRUMBS?: Breadcrumb[];
-        FEEDBACK: boolean;
-        CHATBOT: boolean;
-    };
-
-    COOKIES: {
-        CONTEXT: MenuValue;
-        LANGUAGE: Locale;
-    };
+    PARAMS: Params;
+    COOKIES: Cookies;
 }
 
-export const initialState: EnvironmentState = {
+export interface Params {
+    CONTEXT: MenuValue;
+    SIMPLE: boolean;
+    SIMPLE_HEADER: boolean;
+    SIMPLE_FOOTER: boolean;
+    ENFORCE_LOGIN: boolean;
+    REDIRECT_TO_APP: boolean;
+    LEVEL: string;
+    LANGUAGE: Locale;
+    AVAILABLE_LANGUAGES?: AvailableLanguage[];
+    BREADCRUMBS?: Breadcrumb[];
+    FEEDBACK: boolean;
+    CHATBOT: boolean;
+}
+
+export interface Cookies {
+    CONTEXT: MenuValue;
+    LANGUAGE: Locale;
+}
+
+export const initialState: Environment = {
     XP_BASE_URL: '',
     APP_URL: '',
     APP_BASE_URL: '',
@@ -73,16 +76,30 @@ export const initialState: EnvironmentState = {
 };
 
 export const reducer = (
-    state: EnvironmentState = initialState,
+    state: Environment = initialState,
     action: Handling
-): EnvironmentState => {
+): Environment => {
     switch (action.type) {
         case ActionType.SETT_ENVIRONMENT: {
             return { ...state, ...action.data };
+        }
+        case ActionType.SETT_PARAMS: {
+            return {
+                ...state,
+                PARAMS: {
+                    ...state.PARAMS,
+                    ...action.data,
+                },
+            };
         }
         default:
             return state;
     }
 };
+
+export const setParams = (params: Partial<Params>) => ({
+    type: ActionType.SETT_PARAMS,
+    data: params,
+});
 
 export default reducer;
