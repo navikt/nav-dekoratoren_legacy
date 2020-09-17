@@ -12,6 +12,7 @@ import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import './Brodsmulesti.less';
 import { getArbeidsflateContext } from '../../../common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { MenuValue } from '../../../../utils/meny-storage-utils';
 
 export interface Breadcrumb {
     url: string;
@@ -31,11 +32,20 @@ export const Brodsmulesti = (props: Props) => {
     const cls = BEMHelper('brodsmulesti');
     const [showAll, setShowAll] = useState(false);
     const { status } = useSelector((state: AppState) => state.arbeidsflate);
-    const arbeidsflate = getArbeidsflateContext(XP_BASE_URL, status);
+    const context = getArbeidsflateContext(XP_BASE_URL, status);
+    const isLanguageNorwegian =
+        language === Locale.NYNORSK || language === Locale.BOKMAL;
 
     const slicedBreadcrumbs = showAll
         ? breadcrumbs
         : breadcrumbs.slice(breadcrumbs.length - 2);
+
+    const homeUrlMap: { [key: string]: string } = {
+        nb: context.url,
+        nn: context.url,
+        en: `${XP_BASE_URL}/en/home`,
+        se: `${XP_BASE_URL}/se/samegiella`,
+    };
 
     return (
         <div className={cls.element('container')}>
@@ -45,7 +55,10 @@ export const Brodsmulesti = (props: Props) => {
                 aria-label={finnTekst('brodsmulesti', language)}
             >
                 <Normaltekst>
-                    <Lenke href={XP_BASE_URL} className={cls.element('home')}>
+                    <Lenke
+                        href={homeUrlMap[language]}
+                        className={cls.element('home')}
+                    >
                         <Bilde
                             asset={HomeIcon}
                             className={cls.element('icon')}
@@ -54,14 +67,16 @@ export const Brodsmulesti = (props: Props) => {
                         <HoyreChevron />
                     </Lenke>
                 </Normaltekst>
-                <Normaltekst>
-                    <Lenke href={arbeidsflate.url}>
-                        <span>
-                            <Tekst id={arbeidsflate.lenkeTekstId} />
-                        </span>
-                        <HoyreChevron />
-                    </Lenke>
-                </Normaltekst>
+                {isLanguageNorwegian && (
+                    <Normaltekst>
+                        <Lenke href={context.url}>
+                            <span>
+                                <Tekst id={context.lenkeTekstId} />
+                            </span>
+                            <HoyreChevron />
+                        </Lenke>
+                    </Normaltekst>
+                )}
                 {!showAll && breadcrumbs.length > 2 && (
                     <button
                         aria-label={finnTekst('brodsmulesti-se-alle', language)}
