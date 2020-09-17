@@ -8,9 +8,10 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import { postMessageToApp } from 'utils/messages';
 import { Locale } from 'store/reducers/language-duck';
-import { finnTekst } from 'tekster/finn-tekst';
+import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import './Brodsmulesti.less';
+import { getArbeidsflateContext } from '../../../common/arbeidsflate-lenker/arbeidsflate-lenker';
 
 export interface Breadcrumb {
     url: string;
@@ -27,18 +28,33 @@ export const Brodsmulesti = (props: Props) => {
     const { environment } = useSelector((state: AppState) => state);
     const { XP_BASE_URL } = environment;
     const cls = BEMHelper('brodsmulesti');
+    const { status } = useSelector((state: AppState) => state.arbeidsflate);
+    const arbeidsflate = getArbeidsflateContext(XP_BASE_URL, status);
 
     return (
         <div className={cls.element('container')}>
             <nav
-                className={cls.element('content')}
                 itemProp="breadcrumb"
+                className={cls.element('content')}
                 aria-label={finnTekst('brodsmulesti', props.language)}
             >
-                <Bilde asset={HomeIcon} />
                 <Normaltekst>
-                    <Lenke href={XP_BASE_URL}>
-                        <span>nav.no</span>
+                    <Lenke href={XP_BASE_URL} className={cls.element('home')}>
+                        <Bilde
+                            asset={HomeIcon}
+                            className={cls.element('icon')}
+                        />
+                        <span>
+                            <Tekst id={'forsiden'} />
+                        </span>
+                        <HoyreChevron />
+                    </Lenke>
+                </Normaltekst>
+                <Normaltekst>
+                    <Lenke href={arbeidsflate.url}>
+                        <span>
+                            <Tekst id={arbeidsflate.lenkeTekstId} />
+                        </span>
                         <HoyreChevron />
                     </Lenke>
                 </Normaltekst>
