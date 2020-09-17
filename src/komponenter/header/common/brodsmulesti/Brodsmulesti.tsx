@@ -27,7 +27,7 @@ interface Props {
 export const Brodsmulesti = (props: Props) => {
     const { environment } = useSelector((state: AppState) => state);
     const { XP_BASE_URL } = environment;
-    const { breadcrumbs } = props;
+    const { breadcrumbs, language } = props;
     const cls = BEMHelper('brodsmulesti');
     const [showAll, setShowAll] = useState(false);
     const { status } = useSelector((state: AppState) => state.arbeidsflate);
@@ -42,7 +42,7 @@ export const Brodsmulesti = (props: Props) => {
             <nav
                 itemProp="breadcrumb"
                 className={cls.element('content')}
-                aria-label={finnTekst('brodsmulesti', props.language)}
+                aria-label={finnTekst('brodsmulesti', language)}
             >
                 <Normaltekst>
                     <Lenke href={XP_BASE_URL} className={cls.element('home')}>
@@ -63,10 +63,17 @@ export const Brodsmulesti = (props: Props) => {
                     </Lenke>
                 </Normaltekst>
                 {!showAll && breadcrumbs.length > 2 && (
-                    <Lenke href={'#'} onClick={() => setShowAll(true)}>
+                    <button
+                        aria-label={finnTekst('brodsmulesti-se-alle', language)}
+                        className={`${cls.element('view-all')} lenke`}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setShowAll(true);
+                        }}
+                    >
                         <span>...</span>
                         <HoyreChevron />
-                    </Lenke>
+                    </button>
                 )}
                 {slicedBreadcrumbs.map((breadcrumb, i) => (
                     <Fragment key={i}>

@@ -321,4 +321,7 @@ export const ledetekster: { [key: string]: string } = {
     brodsmulesti: 'Brødsmulesti',
     'brodsmulesti-en': 'Breadcrumbs',
     'brodsmulesti-se': 'Brødsmulesti',
+    'brodsmulesti-se-alle': 'Se hele brødsmulestien',
+    'brodsmulesti-se-alle-en': 'View all breadcrumbs',
+    'brodsmulesti-se-alle-se': 'Se hele brødsmulestien',
 };
