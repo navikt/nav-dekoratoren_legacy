@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Lenke from 'nav-frontend-lenker';
@@ -27,9 +27,15 @@ interface Props {
 export const Brodsmulesti = (props: Props) => {
     const { environment } = useSelector((state: AppState) => state);
     const { XP_BASE_URL } = environment;
+    const { breadcrumbs } = props;
     const cls = BEMHelper('brodsmulesti');
+    const [showAll, setShowAll] = useState(false);
     const { status } = useSelector((state: AppState) => state.arbeidsflate);
     const arbeidsflate = getArbeidsflateContext(XP_BASE_URL, status);
+
+    const slicedBreadcrumbs = showAll
+        ? breadcrumbs
+        : breadcrumbs.slice(breadcrumbs.length - 2);
 
     return (
         <div className={cls.element('container')}>
@@ -44,9 +50,7 @@ export const Brodsmulesti = (props: Props) => {
                             asset={HomeIcon}
                             className={cls.element('icon')}
                         />
-                        <span>
-                            <Tekst id={'forsiden'} />
-                        </span>
+                        <span>nav.no</span>
                         <HoyreChevron />
                     </Lenke>
                 </Normaltekst>
@@ -58,10 +62,16 @@ export const Brodsmulesti = (props: Props) => {
                         <HoyreChevron />
                     </Lenke>
                 </Normaltekst>
-                {props.breadcrumbs.map((breadcrumb, i) => (
+                {!showAll && breadcrumbs.length > 2 && (
+                    <Lenke href={'#'} onClick={() => setShowAll(true)}>
+                        <span>...</span>
+                        <HoyreChevron />
+                    </Lenke>
+                )}
+                {slicedBreadcrumbs.map((breadcrumb, i) => (
                     <Fragment key={i}>
                         <Normaltekst>
-                            {i + 1 !== props.breadcrumbs.length ? (
+                            {i + 1 !== slicedBreadcrumbs.length ? (
                                 breadcrumb.handleInApp ? (
                                     <Lenke
                                         href={breadcrumb.url}
