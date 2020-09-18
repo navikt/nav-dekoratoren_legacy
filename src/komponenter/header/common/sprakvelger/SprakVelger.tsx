@@ -69,9 +69,7 @@ export const SprakVelger = (props: Props) => {
         itemToString: (item) => item?.value || '',
         onSelectedItemChange: ({ selectedItem }) =>
             onChange(selectedItem as LocaleOption),
-        defaultSelectedItem: options.find(
-            (option) => option.locale === language
-        ),
+        selectedItem: options.find((option) => option.locale === language),
     });
 
     const ulStyle = isOpen
