@@ -278,7 +278,6 @@ export const Header = () => {
                         <div className={'decorator-utils-header'}>
                             {PARAMS.BREADCRUMBS && (
                                 <Brodsmulesti
-                                    language={PARAMS.LANGUAGE}
                                     breadcrumbs={PARAMS.BREADCRUMBS}
                                 />
                             )}
