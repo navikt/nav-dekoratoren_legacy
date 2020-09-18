@@ -93,7 +93,7 @@ export const Brodsmulesti = (props: Props) => {
                 )}
                 {slicedBreadcrumbs.map((breadcrumb, i) => (
                     <Fragment key={i}>
-                        <Normaltekst>
+                        <Normaltekst className={cls.element('link')}>
                             {i + 1 !== slicedBreadcrumbs.length ? (
                                 breadcrumb.handleInApp ? (
                                     <Lenke
