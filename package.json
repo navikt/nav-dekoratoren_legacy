@@ -1,6 +1,6 @@
 {
     "name": "nav-dekoratoren",
-    "version": "1.23.9-dev",
+    "version": "1.23.13-dev",
     "private": true,
     "scripts": {
         "start": "npm-run-all -p -r build-client-and-watch build-server-and-watch start-server-and-watch",
