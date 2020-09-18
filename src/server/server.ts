@@ -1,15 +1,11 @@
 require('console-stamp')(console, '[HH:MM:ss.l]');
 import NodeCache from 'node-cache';
 import fetch from 'node-fetch';
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { createMiddleware } from '@promster/express';
 import { getSummary, getContentType } from '@promster/express';
-import {
-    clientEnv,
-    fiveMinutesInSeconds,
-    oneMinuteInSeconds,
-    tenSeconds,
-} from './utils';
+import { oneMinuteInSeconds, tenSeconds } from './utils';
+import { clientEnv, fiveMinutesInSeconds } from './utils';
 import cookiesMiddleware from 'universal-cookie-express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
@@ -23,7 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Config
-const appBasePath = '/dekoratoren';
+const appBasePath = process.env.APP_BASE_PATH || ``;
 const oldBasePath = '/common-html/v4/navno';
 const buildPath = `${process.cwd()}/build`;
 const app = express();
@@ -84,13 +80,21 @@ const pathsForTemplate = [
     `${oldBasePath}`,
 ];
 
-app.get(pathsForTemplate, (req, res) => {
-    res.send(template(req));
+app.get(pathsForTemplate, (req, res, next) => {
+    try {
+        res.send(template(req));
+    } catch (e) {
+        next(e);
+    }
 });
 
-app.get(`${appBasePath}/env`, (req, res) => {
-    const cookies = (req as any).universalCookies.cookies;
-    res.send(clientEnv({ req, cookies }));
+app.get(`${appBasePath}/env`, (req, res, next) => {
+    try {
+        const cookies = (req as any).universalCookies.cookies;
+        res.send(clientEnv({ req, cookies }));
+    } catch (e) {
+        next(e);
+    }
 });
 
 app.get(`${appBasePath}/api/meny`, (req, res) => {
@@ -99,7 +103,9 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
         res.send(mainCacheContent);
     } else {
         // Fetch fom XP
-        fetch(`${process.env.API_XP_MENY_URL}`, { method: 'GET' })
+        fetch(`${process.env.API_XP_SERVICES_URL}/no.nav.navno/menu`, {
+            method: 'GET',
+        })
             .then((xpRes) => xpRes.json())
             .then((xpData) => {
                 mainCache.set(mainCacheKey, xpData);
@@ -148,6 +154,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
 // Proxied requests
 const proxiedAuthUrl = `${appBasePath}/api/auth`;
 const proxiedVarslerUrl = `${appBasePath}/api/varsler`;
+const proxiedDriftsmeldingerUrl = `${appBasePath}/api/driftsmeldinger`;
 const proxiedSokUrl = `${appBasePath}/api/sok`;
 
 app.use(
@@ -155,6 +162,7 @@ app.use(
     createProxyMiddleware(proxiedAuthUrl, {
         target: `${process.env.API_INNLOGGINGSLINJE_URL}`,
         pathRewrite: { [`^${proxiedAuthUrl}`]: '' },
+        changeOrigin: true,
     })
 );
 
@@ -163,14 +171,24 @@ app.use(
     createProxyMiddleware(proxiedVarslerUrl, {
         target: `${process.env.API_VARSELINNBOKS_URL}`,
         pathRewrite: { [`^${proxiedVarslerUrl}`]: '' },
+        changeOrigin: true,
     })
 );
 
 app.use(
     proxiedSokUrl,
     createProxyMiddleware(proxiedSokUrl, {
-        target: `${process.env.API_XP_SOK_URL}`,
+        target: `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`,
         pathRewrite: { [`^${proxiedSokUrl}`]: '' },
+        changeOrigin: true,
+    })
+);
+
+app.use(
+    proxiedDriftsmeldingerUrl,
+    createProxyMiddleware(proxiedDriftsmeldingerUrl, {
+        target: `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`,
+        pathRewrite: { [`^${proxiedDriftsmeldingerUrl}`]: '' },
         changeOrigin: true,
     })
 );
@@ -195,6 +213,19 @@ app.use(
         },
     })
 );
+
+// Error handler middleware
+app.use((e: Error, req: Request, res: Response, next: NextFunction) => {
+    const origin = req.get('origin');
+    const host = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+    const url = origin || host;
+    console.error(`${url}: ${e.message}`);
+    console.error(e.stack);
+    res.status(405);
+    res.send({
+        error: { status: 405, message: e.message },
+    });
+});
 
 const server = app.listen(PORT, () =>
     console.log(`App listening on port: ${PORT}`)

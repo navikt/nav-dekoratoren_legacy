@@ -18,11 +18,6 @@ if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
 
-// Resources
-const fileEnv = `${process.env.APP_BASE_URL}/env`;
-const fileCss = `${process.env.APP_BASE_URL}/css/client.css`;
-const fileScript = `${process.env.APP_BASE_URL}/client.js`;
-
 const cache = new NodeCache({
     stdTTL: fiveMinutesInSeconds,
     checkperiod: oneMinuteInSeconds,
@@ -34,10 +29,15 @@ export const template = (req: Request) => {
     const cookies = universalCookies.cookies;
     const env = clientEnv({ req, cookies });
 
+    // Resources
+    const fileEnv = `${env.APP_URL}/env`;
+    const fileCss = `${env.APP_URL}/css/client.css`;
+    const fileScript = `${env.APP_URL}/client.js`;
+
+    // Retreive from cache
     const envHash = hash({ env });
     const cachedHtml = cache.get(envHash);
 
-    // Retreive from cache
     if (cachedHtml) {
         return cachedHtml;
     }
@@ -54,8 +54,8 @@ export const template = (req: Request) => {
 
     // Backward compatibility
     // for simple header and footer
-    const headerId = params.header ? `header` : `header-withmenu`;
-    const footerId = params.footer ? `footer` : `footer-withmenu`;
+    const headerId = params.header === 'true' ? `header` : `header-withmenu`;
+    const footerId = params.footer === 'true' ? `footer` : `footer-withmenu`;
 
     // Render SSR
     const HtmlHeader = ReactDOMServer.renderToString(
@@ -99,37 +99,40 @@ export const template = (req: Request) => {
                 height: 100%;
             }
             .decorator-dummy-app {
-                background: #8888;
+                background: #f1f1f1;
                 height: 100%;
                 min-height: 55rem;
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
+            .decorator-utils-container{
+                background: #f1f1f1;
+            }
             </style>
+        </head>
+        <body>
             <!-- Styling fetched by apps -->
             <div id="styles">
                 ${HtmlMetaTags}
                 <link href="${fileCss}" rel="stylesheet" />
             </div>
-        </head>
-        <body>
             <div class="decorator-dev-container">
                 <!-- Header fetched by apps -->
                 <div id="${headerId}">
-                    <section id="decorator-header" class="navno-dekorator" role="main">${HtmlHeader}</section>
+                    <div id="decorator-header">${HtmlHeader}</div>
                 </div>
                 <div class="decorator-dummy-app">
                 </div>
                 <!-- Footer fetched by apps -->
                 <div id="${footerId}">
-                    <section id="decorator-footer" class="navno-dekorator" role="main">${HtmlFooter}</section>
+                    <div id="decorator-footer">${HtmlFooter}</div>
                 </div>
             </div>
             <!-- Scripts fetched by apps -->
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
-                <script type="text/javascript" src=${fileScript}></script>
+                <script src=${fileScript}></script>
             </div>
             <div id="skiplinks"></div>
             <div id="megamenu-resources"></div>

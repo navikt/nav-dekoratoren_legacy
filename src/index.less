@@ -2,11 +2,13 @@
 
 body {
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 body.no-scroll-mobil {
-    @media not all and (min-width: @desktopMinWidth) {
+    @media @screen-mobile {
         overflow-y: hidden;
+        overflow-x: hidden;
     }
 }
 
@@ -35,7 +37,7 @@ body.no-scroll-mobil {
 }
 
 .arbeidsflate {
-    @media not all and (min-width: @desktopMinWidth) {
+    @media @screen-mobile {
         display: none;
     }
 }
@@ -58,7 +60,7 @@ body.no-scroll-mobil {
 }
 
 .sideheader .header-linje ul {
-    @media (min-width: @desktopMinWidth) {
+    @media @screen-desktop {
         padding: 0;
     }
 }
@@ -71,7 +73,7 @@ body.no-scroll-mobil {
     display: none !important;
 }
 
-@media (min-width: @desktopMinWidth) {
+@media @screen-desktop {
     .media-sm-mobil {
         display: none !important;
     }

@@ -1,7 +1,8 @@
 import { Data as innloggingsstatusData } from './reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from './reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from './reducers/menu-duck';
-import { EnvironmentState } from './reducers/environment-duck';
+import { DriftsmeldingerData } from './reducers/driftsmeldinger-duck';
+import { Environment, Params } from './reducers/environment-duck';
 import { FeatureToggles } from './reducers/feature-toggles-duck';
 
 export enum ActionType {
@@ -11,6 +12,9 @@ export enum ActionType {
     HENT_MENY_OK = 'HENT_MENY_OK',
     HENT_MENY_FEILET = 'HENT_MENY_FEILET',
     HENT_MENY_PENDING = 'HENT_MENY_PENDING',
+    HENT_DRIFTSMELDING_OK = 'HENT_DRIFTSMELDING_OK',
+    HENT_DRIFTSMELDING_FEILET = 'HENT_DRIFTSMELDING_FEILET',
+    HENT_DRIFTSMELDING_PENDING = 'HENT_DRIFTSMELDING_PENDING',
     HENT_VARSLER_OK = 'HENT_VARSLER_OK',
     HENT_VARSLER_FEILET = 'HENT_VARSLER_FEILET',
     HENT_VARSLER_PENDING = 'HENT_VARSLER_PENDING',
@@ -21,6 +25,7 @@ export enum ActionType {
     SETT_VARSLER_LEST = 'SETT_VARSLER_LEST',
     SETT_LANGUAGE = 'SETT_LANGUAGE',
     SETT_ENVIRONMENT = 'SETT_ENVIRONMENT',
+    SETT_PARAMS = 'SETT_PARAMS',
     SETT_FEATURE_TOGGLES = 'SETT_FEATURE_TOGGLES',
     PRIVATPERSON = 'PRIVATPERSON',
     ARBEIDSGIVER = 'ARBEIDSGIVER',
@@ -62,6 +67,19 @@ export interface HentMenyLenkerFAILED {
     type: ActionType.HENT_MENY_FEILET;
 }
 
+export interface HentDriftsmeldingSUCCESS {
+    type: ActionType.HENT_DRIFTSMELDING_OK;
+    data: DriftsmeldingerData[];
+}
+
+export interface HentDriftsmeldingPENDING {
+    type: ActionType.HENT_DRIFTSMELDING_PENDING;
+}
+
+export interface HentDriftsmeldingFAILED {
+    type: ActionType.HENT_DRIFTSMELDING_FEILET;
+}
+
 export interface HentVarslerOKAction {
     type: ActionType.HENT_VARSLER_OK;
     data: varselinnboksData;
@@ -82,7 +100,12 @@ export interface SettFeatureToggles {
 
 export interface SettEnviroment {
     type: ActionType.SETT_ENVIRONMENT;
-    data: EnvironmentState;
+    data: Environment;
+}
+
+export interface SettParams {
+    type: ActionType.SETT_PARAMS;
+    data: Params;
 }
 
 export interface SettVarslerOKAction {
@@ -126,7 +149,7 @@ export interface ToggleHovedmeny {
     type: ActionType.TOGGLE_HOVEDMENY;
 }
 
-export interface ToggleMinsideMeny {
+export interface ToggleMinsidemeny {
     type: ActionType.TOGGLE_MINSIDE_MENY;
 }
 
@@ -161,10 +184,14 @@ export type Handling =
     | HentMenyLenkerSUCCESS
     | HentMenyLenkerFAILED
     | HentMenyLenkerPENDING
+    | HentDriftsmeldingSUCCESS
+    | HentDriftsmeldingFAILED
+    | HentDriftsmeldingPENDING
     | HentVarslerOKAction
     | HentVarslerFEILETAction
     | HentVarslerPENDINGAction
     | SettEnviroment
+    | SettParams
     | SettVarslerOKAction
     | SettVarslerLestOKAction
     | SettVarslerLestFEILETAction
@@ -176,7 +203,7 @@ export type Handling =
     | SettArbeidsflateIkkeBestemt
     | SettFeatureToggles
     | ToggleHovedmeny
-    | ToggleMinsideMeny
+    | ToggleMinsidemeny
     | ToggleSok
     | ToggleVarsel
     | ToggleUnderMeny

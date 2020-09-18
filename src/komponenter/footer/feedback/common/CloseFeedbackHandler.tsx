@@ -1,12 +1,9 @@
 import React, { useContext } from 'react';
 import { CloseFeedbackContext } from './CloseFeedbackContext';
-import { verifyWindowObj } from 'utils/Environment';
 import amplitudeTriggers from 'utils/amplitude-triggers';
 import { Knapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
-const { logAmplitudeEvent } = verifyWindowObj()
-    ? require('utils/amplitude')
-    : () => null;
+import { logAmplitudeEvent } from 'utils/amplitude';
 
 interface Props {
     context: string;

@@ -2,24 +2,23 @@ import React from 'react';
 import { ledetekster } from './ledetekster';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 
-export function finnTekst(id: string, language: Language): string {
+export function finnTekst(id: string, language: Locale): string {
     // Correct language
     let ledetekst: string;
     switch (language) {
-        case Language.NORSK:
+        default:
+        case Locale.BOKMAL:
+        case Locale.NYNORSK:
             ledetekst = ledetekster[id];
             break;
-        case Language.ENGELSK:
+        case Locale.ENGELSK:
             id += '-en';
             ledetekst = ledetekster[id];
             break;
-        case Language.SAMISK:
+        case Locale.SAMISK:
             id += '-se';
-            ledetekst = ledetekster[id];
-            break;
-        default:
             ledetekst = ledetekster[id];
             break;
     }

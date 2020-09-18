@@ -49,16 +49,13 @@ export default function reducer(
 }
 
 export function hentInnloggingsstatus(
-    APP_BASE_URL: string
+    APP_URL: string
 ): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Data>(
-        () => hentInnloggingsstatusFetch(APP_BASE_URL),
-        {
-            ok: hentInnloggingsstatusOk,
-            feilet: hentnnloggingsstatusFeilet,
-            pending: hentnnloggingsstatusPending,
-        }
-    );
+    return fetchThenDispatch<Data>(() => hentInnloggingsstatusFetch(APP_URL), {
+        ok: hentInnloggingsstatusOk,
+        feilet: hentnnloggingsstatusFeilet,
+        pending: hentnnloggingsstatusPending,
+    });
 }
 
 export function hentInnloggingsstatusOk(

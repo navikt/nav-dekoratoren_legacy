@@ -7,10 +7,11 @@ import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
-import './DelSkjermModal.less';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
+import { Bilde } from 'komponenter/common/bilde/Bilde';
+import './DelSkjermModal.less';
 
-const Veileder = require('ikoner/del-skjerm/Veileder.svg');
+const veileder = require('ikoner/del-skjerm/Veileder.svg');
 
 interface Props {
     isOpen: boolean;
@@ -21,7 +22,6 @@ const DelSkjermModal = (props: Props) => {
     const classname = 'delskjerm__modal';
 
     // Language
-    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const language = useSelector((state: AppState) => state.language).language;
     const feilmelding = finnTekst('delskjerm-modal-feilmelding', language);
     const label = finnTekst('delskjerm-modal-label', language);
@@ -88,15 +88,15 @@ const DelSkjermModal = (props: Props) => {
         <Modal
             onAfterOpen={setOverlayCss}
             isOpen={props.isOpen}
-            className={`navno-dekorator ${classname}`}
+            className={`decorator-wrapper ${classname}`}
             contentLabel={'Skjermdeling'}
             onRequestClose={props.onClose}
         >
             <div className={'delskjerm__header'}>
-                <img
+                <Bilde
                     className={'delskjerm__veileder'}
-                    src={`${XP_BASE_URL}${Veileder}`}
-                    alt={''}
+                    asset={veileder}
+                    altText={''}
                 />
             </div>
             <div className={'delskjerm__content'}>

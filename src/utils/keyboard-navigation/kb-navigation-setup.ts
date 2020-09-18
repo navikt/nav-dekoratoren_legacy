@@ -6,16 +6,16 @@ import KbNav, {
     KbNavGroup,
     NodeIndex,
 } from './kb-navigation';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from 'api/api';
 import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
-import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyDesktop';
+import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/Hovedmeny';
 import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
 import { desktopSokKnappId } from 'komponenter/header/header-regular/desktop/sok-dropdown/sok-knapp/SokKnapp';
 import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 import { varslerKnappId } from 'komponenter/header/header-regular/common/varsler/varsler-knapp/VarslerKnapp';
-import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/MinsideMeny';
+import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
 import { loginKnappId } from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
 
 // TODO: Finn ut hvorfor akkurat denne noen ganger blir undefined :|
@@ -77,8 +77,8 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
         parentNodeId: varslerKnappId,
         parentNodeEdge: NodeEdge.Bottom,
     },
-    [KbNavGroup.MinsideMeny]: {
-        group: KbNavGroup.MinsideMeny,
+    [KbNavGroup.Minsidemeny]: {
+        group: KbNavGroup.Minsidemeny,
         rootIndex: { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [1, 3],
         parentNodeId: minsideKnappId,
@@ -87,25 +87,27 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
 };
 
 export const createHeaderMainGraph = (
-    language: Language,
+    language: Locale,
     arbeidsflate: MenuValue,
     menyStatus: Status,
     erInnlogget: boolean
 ) => {
-    const hovedmenyEnabled =
-        language !== Language.SAMISK && menyStatus === Status.OK;
+    const hovedmenyEnabled = language !== Locale.SAMISK;
+    const isLanguageNorwegian =
+        language === Locale.BOKMAL || language === Locale.NYNORSK;
     const varslerEnabled =
         arbeidsflate === MenuValue.PRIVATPERSON && erInnlogget;
     const minsideMenyEnabled =
-        language === Language.NORSK &&
-        menyStatus === Status.OK &&
+        isLanguageNorwegian &&
         erInnlogget &&
         arbeidsflate !== MenuValue.SAMARBEIDSPARTNER;
-    const arbeidsflatemenyEnabled = Language.NORSK;
+    const arbeidsflatemenyEnabled = isLanguageNorwegian;
 
     const group = KbNavGroup.HeaderMenylinje;
     const rootIndex = configForNodeGroup[group].rootIndex;
     const idMap: KbIdMap = {};
+
+    rootIndex.row = arbeidsflatemenyEnabled ? 1 : 0;
 
     let colIndex = rootIndex.col;
 

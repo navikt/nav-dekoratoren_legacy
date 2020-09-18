@@ -1,3 +1,4 @@
+const moment = require('moment');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpack = require('webpack');
@@ -5,6 +6,8 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const nodeExternals = require('webpack-node-externals');
 const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 
 const browserConfig = {
     mode: process.env.NODE_ENV || 'development',
@@ -19,7 +22,6 @@ const browserConfig = {
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        publicPath: '/dekoratoren',
         filename: 'server.js',
         libraryTarget: 'commonjs2',
     },
@@ -136,24 +138,26 @@ const browserConfig = {
                             {
                                 loader: 'postcss-loader',
                                 options: {
-                                    ident: 'postcss',
-                                    plugins: [
-                                        prefixer({
-                                            prefix: '.navno-dekorator',
-                                            exclude: [
-                                                /\b(\w*(M|m)odal\w*)\b/,
-                                                'body',
-                                                'body.no-scroll-mobil',
-                                                '.siteheader',
-                                                '.sitefooter',
-                                                /\b(\w*lukk-container\w*)\b/,
-                                                /\b(\w*close\w*)\b/,
-                                                /\b(\w*decorator-dummy-app\w*)\b/,
-                                                '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
-                                            ],
-                                        }),
-                                        autoprefixer({}),
-                                    ],
+                                    postcssOptions: {
+                                        ident: 'postcss',
+                                        plugins: [
+                                            prefixer({
+                                                prefix: '.decorator-wrapper',
+                                                exclude: [
+                                                    /\b(\w*(M|m)odal\w*)\b/,
+                                                    'body',
+                                                    'body.no-scroll-mobil',
+                                                    '.siteheader',
+                                                    '.sitefooter',
+                                                    /\b(\w*lukk-container\w*)\b/,
+                                                    /\b(\w*close\w*)\b/,
+                                                    /\b(\w*decorator-dummy-app\w*)\b/,
+                                                    '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
+                                                ],
+                                            }),
+                                            autoprefixer({}),
+                                        ],
+                                    },
                                 },
                             },
                             { loader: 'less-loader', options: {} },
@@ -175,6 +179,14 @@ const browserConfig = {
 
         new SpriteLoaderPlugin({
             plainSprite: true,
+        }),
+
+        new MomentLocalesPlugin({ localesToKeep: ['nb', 'nn', 'en'] }),
+
+        new MomentTimezoneDataPlugin({
+            startYear: moment().year() - 1,
+            endYear: moment().year() + 1,
+            matchZones: 'Europe/Oslo',
         }),
     ],
 };

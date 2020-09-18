@@ -25,8 +25,7 @@ export const initialState: VarselinnboksState = {
         uleste: 0,
         antall: 0,
         nyesteId: 0,
-        varsler:
-            '<div class="panel nav-varsler">\n    <p class="text-center">Du har ingen varsler å vise.</p>\n</div>',
+        varsler: ``,
     },
     status: Status.IKKE_STARTET,
 };
@@ -57,16 +56,13 @@ export default function reducer(
 }
 
 export function hentVarsler(
-    APP_BASE_URL: string
+    APP_URL: string
 ): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<VarslerData>(
-        () => hentVarslerFetch(APP_BASE_URL),
-        {
-            ok: hentVarslerOk,
-            feilet: hentVarslerFeilet,
-            pending: hentVarslerPending,
-        }
-    );
+    return fetchThenDispatch<VarslerData>(() => hentVarslerFetch(APP_URL), {
+        ok: hentVarslerOk,
+        feilet: hentVarslerFeilet,
+        pending: hentVarslerPending,
+    });
 }
 
 function hentVarslerOk(data: VarslerData): HentVarslerOKAction {

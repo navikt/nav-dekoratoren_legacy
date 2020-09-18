@@ -4,80 +4,73 @@
     width: 100%;
 }
 
-.arbeidsflatevalg-innhold {
-    margin-bottom: 0;
+.arbeidsflatevalg {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
 
-    .arbeidsflatevalg {
-        display: flex;
+    li {
+        margin-bottom: 0;
+    }
+
+    .arbeidsflate-lenkepanel {
+        border-color: @white;
+        background-color: @navBlaDarken40;
+        border-radius: 8px;
+
+        .lenkepanel__heading {
+            margin-bottom: 0.5rem;
+        }
+
+        .lenkepanel__indikator,
+        .lenkepanel__heading,
+        .arbeidsflate-lenkepanel__stikkord {
+            color: @white;
+        }
+
+        &__innhold {
+            min-height: 74px;
+        }
+
+        &:hover {
+            border-color: @white;
+            background-color: transparent;
+
+            .lenkepanel__indikator,
+            .lenkepanel__heading,
+            .arbeidsflate-lenkepanel__stikkord {
+                color: @white;
+            }
+        }
+
+        &:focus {
+            border-color: @white;
+            background-color: @white;
+
+            .lenkepanel__indikator,
+            .lenkepanel__heading,
+            .arbeidsflate-lenkepanel__stikkord {
+                color: @navBla;
+            }
+        }
+    }
+
+    @media @screen-desktop {
+        li {
+            width: 48%;
+        }
+    }
+
+    @media @screen-desktop-medium-up {
         flex-direction: column;
-        justify-content: space-between;
-        margin: 0;
 
         li {
+            margin-bottom: 1rem;
             width: auto;
-            margin-bottom: 0;
         }
     }
 
-    .lenkepanel {
-        background-color: @navBlaDarken40;
-        color: white;
-        border: 1px solid white;
-        border-radius: 8px;
-        text-decoration: none;
-
-        &:hover:not(:focus) .lenkepanel__heading,
-        &--hover:not(:focus) .lenkepanel__heading {
-            color: white;
-        }
-
-        &__heading {
-            min-height: 101px;
-        }
-
-        .typo-undertittel {
-            margin-bottom: 0.6rem;
-        }
-    }
-
-    .lenkepanel:focus {
-        color: @navBla;
-        background-color: white;
-    }
-
-    @media (min-width: @desktopMinWidth) {
-        .arbeidsflatevalg {
-            flex-direction: row;
-            justify-content: space-between;
-            margin: 0;
-
-            li {
-                width: 48%;
-                margin-bottom: 0;
-            }
-        }
-    }
-
-    @media (min-width: @smallDesktopLimitWidth) {
-        .arbeidsflatevalg {
-            flex-direction: column;
-
-            li {
-                width: auto;
-            }
-        }
-    }
-
-    @media (min-width: 1300px) {
-        margin-bottom: 0;
-
-        .arbeidsflatevalg {
-            flex-direction: column;
-            justify-content: left;
-
-            li {
-                width: auto;
-            }
-        }
+    @media @screen-desktop-large-up {
+        justify-content: left;
     }
 }

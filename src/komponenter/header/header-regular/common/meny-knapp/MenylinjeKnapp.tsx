@@ -1,8 +1,10 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
+import Tekst from 'tekster/finn-tekst';
 import './MenylinjeKnapp.less';
 
 interface Props {
+    tekstId?: string;
     onClick: () => void;
     isOpen: boolean;
     classname: string;
@@ -24,13 +26,16 @@ const MenylinjeKnapp = (props: Props) => {
             aria-controls={props.ariaControls}
             aria-expanded={props.isOpen}
         >
-            <div
-                className={`menylinje-knapp-visning ${cls.element(
-                    'knapp-visning'
-                )}`}
-            >
-                {props.children}
-            </div>
+            {props.children}
+            {props.tekstId && (
+                <span
+                    className={`menylinje-knapp__tekst ${cls.element(
+                        'knapp-tekst'
+                    )}`}
+                >
+                    <Tekst id={props.tekstId} />
+                </span>
+            )}
         </button>
     );
 };

@@ -1,22 +1,5 @@
 @import (reference) '../../../../../styling-variabler.less';
 
-// Safari fix
-.set-text-color(@mainColor, @activeColor, @hoverColor, @focusColor) {
-    -webkit-text-fill-color: @mainColor;
-    &:hover,
-    &:hover:focus {
-        -webkit-text-fill-color: @hoverColor;
-    }
-    &:active,
-    &:active:hover,
-    &:active:focus {
-        -webkit-text-fill-color: @activeColor;
-    }
-    &:focus {
-        -webkit-text-fill-color: @focusColor;
-    }
-}
-
 .login-knapp-mixin() {
     box-sizing: border-box;
     text-transform: none;
@@ -33,21 +16,21 @@
     // Hindrer overstyring av styling på knapper fra appene
     all: unset;
 
-    @media (min-width: @desktopMinWidth) {
+    @media @screen-desktop {
         .knapp;
         .login-knapp-mixin();
-        .set-text-color(@navBla, @white, @white, @navBla);
+        .safari-text-color-fix-mixin(@navBla, @white, @white, @navBla);
         padding: 0.625rem 1rem;
     }
 
-    @media (max-width: @mobilMaxWidth) {
+    @media @screen-mobile {
         .knapp--flat;
         .login-knapp-mixin();
-        .set-text-color(@navBla, @navBla, @navBla, @navBla);
+        .safari-text-color-fix-mixin(@navBla, @navBla, @navBla, @navBla);
         padding: 0.5rem 1rem;
     }
 
-    @media (max-width: @minimumMobilWidth) {
+    @media @screen-mobile-small-down {
         padding: 0.5rem 0.5rem;
     }
 }

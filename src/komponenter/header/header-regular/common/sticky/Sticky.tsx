@@ -1,17 +1,16 @@
 import React, { useEffect, useRef } from 'react';
-import debounce from 'lodash.debounce';
 import { stickyScrollHandler } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
 import { setTop } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
 import { getLinkAnchorId } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
 import './Sticky.less';
 
 type Props = {
+    mobilFixed?: boolean;
     children: JSX.Element;
 };
 
-export const Sticky = ({ children }: Props) => {
+export const Sticky = ({ mobilFixed, children }: Props) => {
     const prevScrollOffset = useRef(0);
-    const baseOffset = useRef(0);
 
     const placeholderRef = useRef<HTMLDivElement>(null);
     const stickyRef = useRef<HTMLDivElement>(null);
@@ -32,20 +31,33 @@ export const Sticky = ({ children }: Props) => {
 
         const setStickyOffset = stickyScrollHandler(
             prevScrollOffset,
-            baseOffset,
-            stickyElement
+            stickyElement,
+            placeholderElement
         );
-
-        const deferredScrollHandler = debounce(() => {
-            window.removeEventListener('scroll', deferredScrollHandler);
-            window.addEventListener('scroll', setStickyOffset);
-        }, 100);
 
         const deferStickyOnAnchorLink = (e: MouseEvent) => {
             const anchorId = getLinkAnchorId(e.target as HTMLElement);
             if (!anchorId) {
                 return;
             }
+
+            const startTime = Date.now();
+            const deferredScrollHandler = () => {
+                const anchorElement = document.getElementById(anchorId);
+                if (
+                    !anchorElement ||
+                    anchorElement.getBoundingClientRect().top >= 0 ||
+                    Date.now() - startTime > 1000
+                ) {
+                    setTimeout(() => {
+                        window.removeEventListener(
+                            'scroll',
+                            deferredScrollHandler
+                        );
+                        window.addEventListener('scroll', setStickyOffset);
+                    }, 200);
+                }
+            };
 
             stickyElement.style.position = 'absolute';
             prevScrollOffset.current = 0;
@@ -57,7 +69,6 @@ export const Sticky = ({ children }: Props) => {
 
         const setElementSizeAndBaseOffset = () => {
             placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
-            baseOffset.current = placeholderElement.offsetTop;
             setStickyOffset();
         };
 
@@ -75,7 +86,12 @@ export const Sticky = ({ children }: Props) => {
 
     return (
         <div className={'sticky-placeholder'} ref={placeholderRef}>
-            <div className={`sticky-container`} ref={stickyRef}>
+            <div
+                className={`sticky-container ${
+                    mobilFixed ? 'sticky-container--mobil-fixed' : ''
+                }`}
+                ref={stickyRef}
+            >
                 {children}
             </div>
         </div>

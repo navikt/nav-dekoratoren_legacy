@@ -3,8 +3,8 @@ import { Systemtittel } from 'nav-frontend-typografi';
 import React from 'react';
 import BEMHelper from 'utils/bem';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { GACategory } from 'utils/google-analytics';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
+import { AnalyticsCategory } from 'utils/analytics';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { getArbeidsflateContext } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
@@ -32,8 +32,14 @@ export const Toppseksjon = ({ classname }: Props) => {
         <div className={cls.element('topp-seksjon')}>
             <Systemtittel className={cls.element('topp-seksjon-tittel')}>
                 <Tekst id={`rolle-${arbeidsflate.toLowerCase()}`} />
+                <span
+                    className={cls.element('topp-seksjon-tittel-decoration')}
+                    aria-hidden={true}
+                >
+                    //
+                </span>
             </Systemtittel>
-            <LenkeMedGA
+            <LenkeMedSporing
                 href={context.url}
                 onClick={(event) => {
                     event.preventDefault();
@@ -49,15 +55,15 @@ export const Toppseksjon = ({ classname }: Props) => {
                     row: 0,
                     sub: 0,
                 })}
-                gaEventArgs={{
+                analyticsEventArgs={{
                     context: arbeidsflate,
-                    category: GACategory.Meny,
+                    category: AnalyticsCategory.Meny,
                     action: `hovedmeny/forsidelenke`,
                     label: XP_BASE_URL,
                 }}
             >
-                <Tekst id={'til-forside'} />
-            </LenkeMedGA>
+                <Tekst id={'til-forsiden'} />
+            </LenkeMedSporing>
         </div>
     );
 };

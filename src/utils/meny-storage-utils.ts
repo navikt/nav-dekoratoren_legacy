@@ -1,52 +1,54 @@
-import { MenyNode } from '../store/reducers/menu-duck';
-import { Language } from '../store/reducers/language-duck';
-
-export const NAVHEADER = 'NAVHEADER';
+import { MenyNode } from 'store/reducers/menu-duck';
+import { Locale } from 'store/reducers/language-duck';
 
 export enum MenuValue {
-    PRIVATPERSON = 'PRIVATPERSON',
-    ARBEIDSGIVER = 'ARBEIDSGIVER',
-    SAMARBEIDSPARTNER = 'SAMARBEIDSPARTNER',
+    PRIVATPERSON = 'privatperson',
+    ARBEIDSGIVER = 'arbeidsgiver',
+    SAMARBEIDSPARTNER = 'samarbeidspartner',
     IKKEBESTEMT = 'IKKEBESTEMT',
 }
 
 enum MenuName {
     Hovedmeny = 'Main menu',
-    MinsideMeny = 'My page menu',
+    Minsidemeny = 'My page menu',
 }
 
 export const getHovedmenyNode = (
     menypunkter: MenyNode[],
-    language: Language,
+    language: Locale,
     arbeidsflate: MenuValue
 ): MenyNode | undefined => {
     const languageNode = getLanguageNode(language, menypunkter);
+    const isLanguageNorwegian =
+        language === Locale.BOKMAL || language === Locale.NYNORSK;
+
     return languageNode
-        ? language === Language.NORSK
+        ? isLanguageNorwegian
             ? findNode(languageNode, arbeidsflate)
             : findNode(languageNode, MenuName.Hovedmeny)
         : undefined;
 };
 
-export const getMinsideMenyNode = (
+export const getMinsidemenyNode = (
     menypunkter: MenyNode[],
-    language: Language
+    language: Locale
 ): MenyNode | undefined => {
     const languageNode = getLanguageNode(language, menypunkter);
     return languageNode
-        ? findNode(languageNode, MenuName.MinsideMeny)
+        ? findNode(languageNode, MenuName.Minsidemeny)
         : undefined;
 };
 
 export const getLanguageNode = (
-    lang: Language,
+    lang: Locale,
     nodeMenu: MenyNode[]
 ): MenyNode | undefined =>
     ({
         IKKEBESTEMT: undefined,
-        NORSK: nodeMenu.find((n) => n.path === '/no'),
-        ENGELSK: nodeMenu.find((n) => n.path === '/en'),
-        SAMISK: nodeMenu.find((n) => n.path === '/se'),
+        nb: nodeMenu.find((n) => n.path === '/no'),
+        nn: nodeMenu.find((n) => n.path === '/no'),
+        en: nodeMenu.find((n) => n.path === '/en'),
+        se: nodeMenu.find((n) => n.path === '/se'),
     }[lang]);
 
 export const findNode = (

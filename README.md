@@ -11,76 +11,115 @@ Appen kjører på NAIS i en docker-container.
 
 ## Bruk av dekoratøren
 
-:information_source: Dekoratøren er bakoverkompatibel; med andre ord vil eksisterende applikasjoner som benytter dekoratør:v4 (https://appres.nav.no/common-html/v4/navno) automatisk få ny dekoratør. 
+:information_source: &nbsp; Dekoratøren er bakoverkompatibel; med andre ord vil eksisterende applikasjoner som benytter dekoratør:v4 (https://appres.nav.no/common-html/v4/navno) automatisk få ny dekoratør. 
 
-Den nye dekoratøren vil serveres på følgende ingresser etter prodsetting 13. mai:
-- https://appres.nav.no/common-html/v4/navno
+Den nye dekoratøren serveres på følgende ingresser:
+
+**Prod (prod-sbs)**
 - https://www.nav.no/dekoratoren/ 
+- https://appres.nav.no/common-html/v4/navno (deprecated)
 
-Vi oppfordrer å gå over til nytt endepunkt (https://www.nav.no/dekoratoren/) etter prodsetting ettersom https://appres.nav.no vil bli deprecated på et senere tidspunkt.
+**Dev (dev-gcp)**
+- https://dekoratoren.dev.nav.no/
 
-Nye applikasjoner kan implementere menyen som følger: 
+Krever følgende access policy i nais.yaml:
+```
+accessPolicy:
+  outbound:
+    external:
+      - host: dekoratoren.dev.nav.no
+```
+**Dev (dev-sbs)**
+- [https://www-{q0,q1,q6}.nav.no/dekoratoren/](https://www-q1.nav.no/dekoratoren/) (deprecated)
+- [https://appres-{q0,q1,q6}.nav.no/common-html/v4/navno](https://appres-q1.nav.no/common-html/v4/navno) (deprecated)
+
+:warning: &nbsp; Det er en del av it-strategien til NAV å flytte bort fra fra egne datasentre. Som følger vil **dev-sbs og prod-sbs skrus av på et tidspunkt** og det anbefales å deployere nye applikasjoner til Google Cloud (gcp).
+
+## Implementasjon
+Dekoratøren kan implementeres på flere ulike måter, både server-side og client-side.
 
 ### Eksempel 1
-Hent dekoratøren server-side og send HTML til brukeren som inkluderer dekoratøren
+Hent dekoratøren server-side og send html til brukeren som inkluderer dekoratøren:
 ```
-const url = 'http://<test-mijø | prod-adr>/dekoratoren?{DINE_PARAMETERE}';
+const url = `{MILJO_URL}/?{DINE_PARAMETERE}`;
 const getDecorator = () =>x
     request(url, (error, response, body) => {
         // Inject fragmenter av dekoratøren med id-selectors, enten manuelt eller ved bruk av template engine
     });
 ```
-Vis [implementasjon](https://github.com/navikt/personopplysninger/blob/master/server/dekorator.js) i Personopplysninger.<br>
-**Obs:** Cache anbefales
+[Eksempel i Personopplysninger](https://github.com/navikt/personopplysninger/blob/master/server/dekorator.js). <br>
+:warning: &nbsp; Cache anbefales.
 
 ### Eksempel 2
-:warning: **Benytter CSR (Client-Side-Rendering) av dekoratøren, noe som kan påvirke ytelsen.**
 
-Sett inn 5 linjer HTML: <br>
+Sett inn noen linjer html og last inn dekoratøren client-side:
 ```
 <html>
   <head>
-      <link href=http://<miljø adresse>/dekoratoren/css/client.css rel="stylesheet" /> 
+      <link href="{MILJO_URL}/css/client.css" rel="stylesheet" /> 
   </head>
   <body>
-    <section id="decorator-header" class="navno-dekorator" role="main"></section>
+    <div id="decorator-header"></div>
     {
       DIN_APP
     }
-    <section id="decorator-footer" class="navno-dekorator" role="main"></section>
-    <div id="decorator-env" data-src="<miljø adresse>/dekoratoren/env?{DINE_PARAMETERE}"></div>
-    <script type="text/javascript" src="<miljø adresse>/dekoratoren/client.js"></script>
+    <div id="decorator-footer"></div>
+    <div id="decorator-env" data-src="{MILJO_URL}/env?{DINE_PARAMETERE}"></div>
+    <script src="{MILJO_URL}/client.js"></script>
   </body>
 </html>
 ```
 
+:warning: &nbsp; CSR (Client-Side-Rendering) av dekoratøren **kan påvirke ytelsen**.
+
 ### Eksempel 3
-Bruk av pus-decorator:<br>
-I app-config.yaml, bytt ut fasitResources til å peke på ny dekoratør
+Bruk pus-decorator, les [readme](https://github.com/navikt/pus-decorator).
 
-Fra:
+## Parametere
+Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
+
+| Parameter                     | Type                                                        | Default              | Forklaring                                                                          |
+| ----------------------------- |------------------------------------------------------------ |--------------------- | ----------------------------------------------------------------------------------- |
+| context                       | privatperson \| arbeidsgiver \| samarbeidspartner           | privatperson         | Setter menyen til definert kontekst                                                 |
+| simple                        | boolean                                                     | false                | Viser en forenklet header og footer                                                 |
+| enforceLogin **(beta)**       | boolean                                                     | false                | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]          |
+| redirectToApp                 | boolean                                                     | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2]      |
+| level                         | Level3 \| Level4                                            | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]                  |            
+| language                      | nb \| nn \| en \| se                                        | nb                   | Setter språket til dekoratøren ved server side rendering [3]                        |
+| availableLanguages **(beta)** | [{ locale: nb \| nn \| en \| se, url: string }]             | [ ]                  | Setter alternativene til språkvelgeren ved server side rendering [4]                |
+| breadcrumbs **(beta)**        | [{ title: string, url: string }]                            | [ ]                  | Setter brødsmulestien for server side rendering [5]                     |
+| feedback                      | boolean                                                     | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
+| chatbot                       | boolean                                                     | false                | Skjuler eller viser Chatbot Frida [6]                                               |
+ 
+:warning: &nbsp; Ta kontakt med [Team Personbruker](https://github.com/orgs/navikt/teams/team-personbruker) før beta parametere benyttes
+
+[1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
+[2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
+[3] Språk settes automatisk client-side dersom nåværende url inneholder **/nb/**, **/nn/**, **/en/**, **/se/**, uavhengig av dette parameteret. <br>
+[4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
+[5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
+[6] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
+
+:information_source: &nbsp; Samtlige parameter kan settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
+:information_source: &nbsp; Bakgrunnsfarge på brødsmulesti og språkvelger kan overstyres:
 ```
-fasitResources:
-  used:
-  - alias: appres.cms
-    resourceType: baseUrl
+.decorator-utils-container {
+    background: #f1f1f1;
+}
 ```
 
-Til:
-```
-fasitResources:
-  used:
-  - alias: nav.dekoratoren (denne peker på https://www{-miljø adresse}.nav.no, pus-decorator legger på path /dekoratoren)
-    resourceType: baseUrl
-```
-For komplett oppsett se: https://github.com/navikt/pus-decorator
+### Eksempler
+Eksempel 1 - Endre context:<br>
+https://www.nav.no/dekoratoren/?context=arbeidsgiver
 
-Appen blir serverside-rendret. Derfor anbefales det å bruke en .js fil til å fetche innholdet fra 'http://<test-mijø | prod-adr>/dekoratoren', deretter selektere innholdet i id'ene. Selektors som benyttes i dag:
-   
-      styles            (inneholder css og favicons)
-      header-withmenu   (header mounting point)
-      footer-withmenu   (footer mounting point)
-      scripts           (inneholder javascript)
+Eksempel 2 - Håndhev innlogging **(beta)**:<br>
+https://www.nav.no/dekoratoren/?enforceLogin=true&level=Level4&redirectToApp=true
+
+Eksempel 3 - Språkvelger **(beta)**:<br>
+[https://www.nav.no/dekoratoren/?availableLanguages=\[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}\] ](https://www.nav.no/dekoratoren/?availableLanguages=[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}])
+
+Eksempel 4 - Brødsmulesti **(beta)**:<br>
+[https://www.nav.no/dekoratoren/?breadcrumbs=\[{"url":"https://www.nav.no/person/dittnav","title":"Ditt NAV"},{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt oss"}\] ](https://www.nav.no/dekoratoren/?breadcrumbs=[{"url":"https://www.nav.no/person/dittnav","title":"Ditt%20NAV"},{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt%20oss"}])
 
 ## Oppstart via docker-compose
 
@@ -88,44 +127,31 @@ Start **navikt/nav-dekoratoren**, **navikt/pb-nav-mocked**, **navikt/stub-oidc-p
 ```
 dekoratoren:
     container_name: dekoratoren
-    image: "navikt/nav-dekoratoren:latest"
+    image: 'docker.pkg.github.com/navikt/nav-dekoratoren/nav-dekoratoren:latest'
     ports:
       - "8100:8088"
     environment:
-      XP_BASE_URL: 'https://www-q1.nav.no'
-      APP_BASE_URL: "http://localhost:8100/dekoratoren"
-      API_XP_MENY_URL: 'https://www-q1.nav.no/_/service/no.nav.navno/menu'
-      API_XP_SOK_URL: 'https://www-q1.nav.no/_/service/navno.nav.no.search/search2/sok'
+      XP_BASE_URL: 'https://www.nav.no'
+      APP_BASE_URL: 'http://localhost:8100'
+      APP_BASE_PATH: '/dekoratoren'
+      API_XP_SERVICES_URL: 'https://www.nav.no/_/service'
+      API_UNLEASH_PROXY_URL: 'https://www.nav.no/person/pb-unleash-proxy'
       API_INNLOGGINGSLINJE_URL: 'http://mocks:8080/innloggingslinje-api/auth'
       API_VARSELINNBOKS_URL: 'http://mocks:8080/person/varselinnboks'
-      MINSIDE_ARBEIDSGIVER_URL: 'https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/'
+      MINSIDE_ARBEIDSGIVER_URL: 'https://arbeidsgiver.nav.no/min-side-arbeidsgiver/'
       DITT_NAV_URL: 'https:/www.nav.no/person/dittnav/'
       LOGIN_URL: 'http://localhost:5000'
       LOGOUT_URL: 'http://localhost:5000/?logout'
     depends_on:
       - mocks
 ```
-[Eksempel i Enonic XP](https://github.com/navikt/nav-enonicxp/blob/IV-843-decorator/docker-compose.yml).
+[Eksempel i Enonic XP](https://github.com/navikt/nav-enonicxp/blob/master/docker-compose.yml). <br>
+:information_source: &nbsp; Foreløpig krever GitHub Packages (docker.pkg.github.com) innlogging:
+``` 
+docker login docker.pkg.github.com -u GITHUB_USERNAME -p GITHUB_PERSONAL_ACCESS_TOKEN
+```
 
-## Parametere
-Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
-
-| Parameter         | Type                                                    | Default              | Forklaring                                                          |
-| ----------------- |---------------------------------------------------------|----------------------| --------------------------------------------------------------------|
-| context           | privatperson \| arbeidsgiver \| samarbeidspartner       | privatperson         | Setter menyen til valgt context                                     |
-| simple            | boolean                                                 | false                | Forenklet header og footer                                          |
-| redirectToApp     | boolean                                                 | false <br>(ditt-nav) | Redirecter brukeren til app etter innlogging fra dekoratøren.       |
-| level             | Level3 \| Level4                                        | Level3               | Krever innlogging basert på definert sikkerhetsnivå                 |
-| language          | norsk \| engelsk \| samisk                              | norsk                | Setter språket til dekoratøren                                      |
-| feedback          | boolean                                                 | true                 | Skjuler eller viser tilbakemeldingskomponentet  
-
-Eksempel:<br>
-[https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3](https://www-q6.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level3)
-
-## Miljø på NAIS
-
-Dekoratøren ligger i  [Q6](https://www-q6.nav.no/dekoratoren/), [Q1](https://www-q1.nav.no/dekoratoren/), [Q0](https://www-q0.nav.no/dekoratoren/) og [Prod](https://www.nav.no/dekoratoren/).<br>
-
+ 
 ## Utvikling - Kom i gang
 Hent repoet fra github
 ```

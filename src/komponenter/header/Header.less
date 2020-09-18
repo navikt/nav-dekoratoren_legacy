@@ -1,0 +1,31 @@
+@import (reference) '../../styling-variabler.less';
+
+.decorator {
+    &-utils {
+        &-container {
+            display: flex;
+            align-items: center;
+            justify-items: center;
+        }
+        &-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            max-width: 1344px;
+            min-height: 72px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0.5rem 1rem;
+
+            @media (max-width: @screen-sm) {
+                flex-wrap: wrap;
+            }
+            @media @screen-desktop-medium-up {
+                padding: 0.5rem 2rem;
+            }
+            @media @screen-desktop-large-up {
+                padding: 0.5rem 0;
+            }
+        }
+    }
+}

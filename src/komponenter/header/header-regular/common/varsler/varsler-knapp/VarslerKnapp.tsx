@@ -1,16 +1,14 @@
 import React from 'react';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
 import { VarselIkon } from './varsel-ikon/VarselIkon';
-import Tekst from 'tekster/finn-tekst';
-import { Undertittel } from 'nav-frontend-typografi';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { settVarslerSomLest } from 'store/reducers/varsel-lest-duck';
-import { gaEvent } from 'utils/google-analytics';
-import { GACategory } from 'utils/google-analytics';
+import { analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
-import { varslerDropdownClassname } from 'komponenter/header/header-regular/common/varsler/VarslerDropdown';
+import { varslerDropdownClassname } from 'komponenter/header/header-regular/common/varsler/Varsler';
 import './VarslerKnapp.less';
 
 export const varslerKnappId = 'varsler-knapp-id';
@@ -18,19 +16,19 @@ export const varslerKnappId = 'varsler-knapp-id';
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.varsler,
     varsler: state.varsler.data,
-    appBaseUrl: state.environment.APP_BASE_URL,
+    appUrl: state.environment.APP_URL,
 });
 
 export const VarslerKnapp = () => {
     const dispatch = useDispatch();
-    const { isOpen, varsler, appBaseUrl } = useSelector(stateSelector);
+    const { isOpen, varsler, appUrl } = useSelector(stateSelector);
 
     const toggleVarslerDropdown = () => {
         if (!isOpen && varsler.uleste > 0) {
-            settVarslerSomLest(appBaseUrl, varsler.nyesteId, dispatch);
+            settVarslerSomLest(appUrl, varsler.nyesteId, dispatch);
         }
-        gaEvent({
-            category: GACategory.Header,
+        analyticsEvent({
+            category: AnalyticsCategory.Header,
             action: `varsler-${isOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleVarsler());
@@ -42,6 +40,7 @@ export const VarslerKnapp = () => {
 
     return (
         <MenylinjeKnapp
+            tekstId={'varsler-tittel'}
             onClick={toggleVarslerDropdown}
             isOpen={isOpen}
             classname={'varselbjelle'}
@@ -50,9 +49,6 @@ export const VarslerKnapp = () => {
             ariaLabel={ariaLabel}
         >
             <VarselIkon isOpen={isOpen} antallUleste={varsler.uleste} />
-            <Undertittel className={'varselbjelle__tekst'}>
-                <Tekst id={'varsler-tittel'} />
-            </Undertittel>
         </MenylinjeKnapp>
     );
 };

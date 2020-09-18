@@ -1,40 +1,24 @@
-import React, { useState, Fragment, ChangeEvent, useEffect } from 'react';
-import { Element, Ingress } from 'nav-frontend-typografi';
+import React, { useState, ChangeEvent, Fragment } from 'react';
+import { Ingress, Element } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
-import {
-    CheckboxGruppe,
-    Checkbox,
-    Feiloppsummering,
-} from 'nav-frontend-skjema';
-import FeedbackMessage from '../common/feedback-message/FeedbackMessage';
+import { CheckboxGruppe, Checkbox } from 'nav-frontend-skjema';
 import sendFeedbackNo from './send-feedback-no';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
-import { useSelector } from 'react-redux';
-import { AppState } from 'store/reducers';
 import './AlternativNei.less';
 
 const AlternativNei = () => {
     const [feedbackTitle, setFeedbackTitle] = useState<string[]>([]);
-    const [feedbackMessage, setFeedbackMessage] = useState('');
-    const { language } = useSelector((state: AppState) => state.language);
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
 
-    const [errors, setErrors] = useState({
-        checkboxErrorMessage: '',
-        textFieldInvalidInputs: '',
-        errorHasOccured: false,
-    });
+    const [radiobuttonErrorMessage, setRadiobuttonErrorMessage] = useState(
+        String
+    );
 
     let feedbackTitles = [...feedbackTitle];
 
-    /*
-
-    Sørger for korrekt state når flere bokser hukes av
-
-    */
     const onClickAarsak = (evt: ChangeEvent<HTMLInputElement>) => {
         feedbackTitles.includes(evt.target.value)
             ? (feedbackTitles = feedbackTitles.filter(
@@ -49,43 +33,13 @@ const AlternativNei = () => {
         evt.preventDefault();
 
         if (!feedbackTitles.length) {
-            setErrors({
-                ...errors,
-                checkboxErrorMessage: 'Du må velge et av alternativene',
-                errorHasOccured: true,
-            });
+            setRadiobuttonErrorMessage('Du må velge et alternativ');
         } else {
-            if (feedbackMessage.length <= 2000) {
-                setErrors({
-                    ...errors,
-                    checkboxErrorMessage: '',
-                });
-                sendFeedbackNo(
-                    feedbackTitle,
-                    feedbackMessage,
-                    language.toLowerCase()
-                );
-                setThankYouMessage(true);
-            }
+            setRadiobuttonErrorMessage('');
+            sendFeedbackNo(feedbackTitle);
+            setThankYouMessage(true);
         }
     };
-
-    /*
-
-    Sørger for at feil blir sjekket på onChange, etter at 'Send inn' er trykket, iht skjemavalideringskrav
-
-    */
-    useEffect(() => {
-        if (errors.errorHasOccured) {
-            if (feedbackTitles.length) {
-                setErrors({
-                    ...errors,
-                    checkboxErrorMessage: '',
-                    errorHasOccured: true,
-                });
-            }
-        }
-    }, [feedbackTitle]);
 
     return (
         <Fragment>
@@ -103,52 +57,23 @@ const AlternativNei = () => {
                                 <Tekst id="gi-din-vurdering-av-informasjon" />
                             </Element>
 
-                            <CheckboxGruppe
-                                feil={errors.checkboxErrorMessage}
-                                id="category"
-                            >
+                            <CheckboxGruppe feil={radiobuttonErrorMessage}>
                                 <Checkbox
                                     label={<Tekst id="lite-relevant-info" />}
-                                    value="relevant"
+                                    value="Lite relevant informasjon"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                                 <Checkbox
-                                    label={<Tekst id="lite-forstaaelig" />}
-                                    value="forstaaelig"
+                                    label={<Tekst id="lite-forstaelig" />}
+                                    value="Lite forståelig"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                                 <Checkbox
                                     label={<Tekst id="lite-oversiktlig" />}
-                                    value="oversiktlig"
+                                    value="Lite oversiktlig"
                                     onChange={(e) => onClickAarsak(e)}
                                 />
                             </CheckboxGruppe>
-
-                            <div>
-                                <Element>
-                                    <Tekst id="hva-lette-du-etter-spørsmål" />
-                                </Element>
-
-                                <FeedbackMessage
-                                    feedbackMessage={feedbackMessage}
-                                    setFeedbackMessage={setFeedbackMessage}
-                                    errors={errors}
-                                    setErrors={setErrors}
-                                />
-                            </div>
-
-                            {errors.checkboxErrorMessage.length ? (
-                                <Feiloppsummering
-                                    tittel="For å gå videre må du rette opp følgende:"
-                                    feil={[
-                                        {
-                                            skjemaelementId: 'category',
-                                            feilmelding: errors.checkboxErrorMessage.toString(),
-                                        },
-                                    ]}
-                                />
-                            ) : null}
-
                             <div className="knapper">
                                 <div className="send-inn">
                                     <Hovedknapp

@@ -36,13 +36,13 @@
         }
 
         &__mobil {
-            @media (min-width: @desktopMinWidth) {
+            @media @screen-desktop {
                 display: none;
             }
         }
 
         &__desktop {
-            @media (max-width: @mobilMaxWidth) {
+            @media @screen-mobile {
                 display: none;
             }
         }

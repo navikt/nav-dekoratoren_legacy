@@ -1,17 +1,16 @@
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import { defaultData, visAlleTreff } from './sok-utils';
 import debounce from 'lodash.debounce';
-import { GACategory, gaEvent } from 'utils/google-analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import { genererUrl } from 'utils/Environment';
 import cls from 'classnames';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import { SokInput } from './sok-innhold/SokInput';
 import Spinner from '../spinner/Spinner';
+import { Sokeresultat } from './utils';
 import SokResultater from './sok-innhold/SokResultater';
-import { EnvironmentState } from 'store/reducers/environment-duck';
-import BEMHelper from 'utils/bem';
+import { Environment } from 'store/reducers/environment-duck';
 import './Sok.less';
 
 interface Props {
@@ -19,9 +18,10 @@ interface Props {
     isOpen: boolean;
     dropdownTransitionMs?: number;
     numResultsCallback?: (numResults: number) => void;
+    searchInput: string;
+    setSearchInput: (searchInput: string) => void;
 }
 
-const mobileCls = BEMHelper('sok');
 const stateSelector = (state: AppState) => ({
     environment: state.environment,
     language: state.language.language,
@@ -30,13 +30,13 @@ const stateSelector = (state: AppState) => ({
 const Sok = (props: Props) => {
     const { environment, language } = useSelector(stateSelector);
     const [loading, setLoading] = useState<boolean>(false);
-    const [input, setInput] = useState<string>('');
-    const [result, setResult] = useState([defaultData]);
+    const [result, setResult] = useState<Sokeresultat | undefined>();
     const [error, setError] = useState<string | undefined>();
+    const { searchInput, setSearchInput } = props;
 
     const numberOfResults = 5;
     const klassenavn = cls('sok-input', {
-        engelsk: language === Language.ENGELSK,
+        engelsk: language === Locale.ENGELSK,
     });
 
     useEffect(() => {
@@ -46,21 +46,27 @@ const Sok = (props: Props) => {
     }, [props.isOpen]);
 
     useEffect(() => {
-        if (props.numResultsCallback) {
-            props.numResultsCallback(Math.min(result.length, numberOfResults));
+        if (result && props.numResultsCallback) {
+            props.numResultsCallback(
+                Math.min(result.hits.length, numberOfResults)
+            );
         }
     }, [result]);
 
     const onReset = () => {
-        setInput('');
+        setSearchInput('');
         setLoading(false);
     };
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        gaEvent({ category: GACategory.Header, label: input, action: 'søk' });
+        analyticsEvent({
+            category: AnalyticsCategory.Header,
+            label: searchInput,
+            action: 'søk',
+        });
         const { XP_BASE_URL } = environment;
-        const url = `${XP_BASE_URL}/sok?ord=${input}`;
+        const url = `${XP_BASE_URL}/sok?ord=${searchInput}`;
         window.location.href = genererUrl(XP_BASE_URL, url);
     };
 
@@ -74,7 +80,7 @@ const Sok = (props: Props) => {
                 <div className="sok-input-resultat">
                     <SokInput
                         onChange={(value: string) => {
-                            setInput(value);
+                            setSearchInput(value);
                             if (value.length > 2) {
                                 setLoading(true);
                                 fetchSearchDebounced({
@@ -90,17 +96,18 @@ const Sok = (props: Props) => {
                         }}
                         className={klassenavn}
                         language={language}
-                        writtenInput={input}
+                        writtenInput={searchInput}
                         onReset={onReset}
                         id={props.id}
                     />
                     {loading ? (
                         <Spinner tekstId={'spinner-sok'} />
                     ) : (
-                        input.length > 2 && (
+                        result &&
+                        searchInput.length > 2 && (
                             <SokResultater
-                                writtenInput={input}
-                                items={result}
+                                writtenInput={searchInput}
+                                result={result}
                                 numberOfResults={numberOfResults}
                                 language={language}
                                 fetchError={error}
@@ -109,16 +116,6 @@ const Sok = (props: Props) => {
                     )}
                 </div>
             </div>
-            {props.isOpen && (
-                <div className="media-sm-mobil mobil-meny">
-                    <div
-                        className={mobileCls.element(
-                            'bakgrunn',
-                            input.length > 2 ? 'active' : ''
-                        )}
-                    />
-                </div>
-            )}
         </form>
     );
 };
@@ -126,7 +123,7 @@ const Sok = (props: Props) => {
 /* Abstraction for debounce */
 interface FetchResult {
     value: string;
-    environment: EnvironmentState;
+    environment: Environment;
     setLoading: (value: boolean) => void;
     setError: (value?: string) => void;
     setResult: (value?: any) => void;
@@ -135,8 +132,8 @@ interface FetchResult {
 const fetchSearch = (props: FetchResult) => {
     const { environment, value } = props;
     const { setLoading, setError, setResult } = props;
-    const { APP_BASE_URL, XP_BASE_URL } = environment;
-    const url = `${APP_BASE_URL}/api/sok`;
+    const { APP_URL } = environment;
+    const url = `${APP_URL}/api/sok`;
 
     fetch(`${url}?ord=${value}`)
         .then((response) => {
@@ -148,11 +145,9 @@ const fetchSearch = (props: FetchResult) => {
         })
         .then((response) => response.json())
         .then((json) => {
-            const tmp = [...json.hits];
-            tmp.unshift(visAlleTreff(XP_BASE_URL, value));
             setLoading(false);
             setError(undefined);
-            setResult(tmp);
+            setResult(json);
         })
         .catch((err) => {
             setLoading(false);

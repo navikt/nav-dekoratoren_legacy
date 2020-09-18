@@ -1,8 +1,8 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import { gaEvent } from 'utils/google-analytics';
-import { GACategory } from 'utils/google-analytics';
-import { toggleMinsideMeny } from 'store/reducers/dropdown-toggle-duck';
+import { analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics';
+import { toggleMinsidemeny } from 'store/reducers/dropdown-toggle-duck';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
 import MinsideIkon from './minside-ikon/MinsideIkon';
 import Tekst from 'tekster/finn-tekst';
@@ -29,12 +29,12 @@ export const MinsidePersonKnapp = ({ classname, id }: Props) => {
     const cls = BEMHelper(classname);
 
     const toggleMinSideDropdown = () => {
-        gaEvent({
+        analyticsEvent({
             context: MenuValue.PRIVATPERSON,
-            category: GACategory.Header,
+            category: AnalyticsCategory.Header,
             action: `minside-meny-${isOpen ? 'close' : 'open'}`,
         });
-        dispatch(toggleMinsideMeny());
+        dispatch(toggleMinsidemeny());
     };
 
     return (
@@ -46,22 +46,22 @@ export const MinsidePersonKnapp = ({ classname, id }: Props) => {
             id={id}
         >
             <MinsideIkon isOpen={isOpen} hasMenu={true} />
-            <div className={cls.element('knapp-tekst')}>
-                <div
+            <span className={cls.element('knapp-tekst')}>
+                <span
                     className={`${cls.element('knapp-tekst-topp')} ${
                         isOpen ? cls.element('knapp-tekst-topp', 'open') : ''
                     }`}
                 >
                     <Tekst id={'person-minside-lenke'} />
-                </div>
-                <div
+                </span>
+                <span
                     className={`${cls.element('knapp-tekst-bunn')} ${
                         isOpen ? cls.element('knapp-tekst-bunn', 'open') : ''
                     }`}
                 >
                     {brukernavn?.toLowerCase() || ''}
-                </div>
-            </div>
+                </span>
+            </span>
         </MenylinjeKnapp>
     );
 };

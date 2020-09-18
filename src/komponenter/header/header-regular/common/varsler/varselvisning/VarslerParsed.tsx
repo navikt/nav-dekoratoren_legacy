@@ -1,10 +1,11 @@
 import React from 'react';
 import htmlReactParser, { DomElement, domToReact } from 'html-react-parser';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
-import { GACategory } from 'utils/google-analytics';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
+import { AnalyticsCategory } from 'utils/analytics';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { Bilde } from 'komponenter/common/bilde/Bilde';
 
 import alarmIkon from 'ikoner/varsler/alarm.svg';
 import kalenderIkon from 'ikoner/varsler/calendar-3.svg';
@@ -29,13 +30,12 @@ type Props = {
 
 const parseIkon = (ikonStr: string) => {
     const ikon = ikoner[ikonStr] || alarmIkon;
-    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     return (
         <div className={`varsel-ikon-row`}>
             <div className={`varsel-ikon-container ${ikonStr}`}>
-                <img
-                    alt={'varsel-ikon'}
-                    src={`${XP_BASE_URL}${ikon}`}
+                <Bilde
+                    asset={ikon}
+                    altText={'varsel-ikon'}
                     className={`varsel-ikon`}
                 />
             </div>
@@ -53,7 +53,7 @@ const parseLenke = (
         (state: AppState) => state.arbeidsflate.status
     );
     return (
-        <LenkeMedGA
+        <LenkeMedSporing
             href={href || ''}
             id={
                 rowIndex !== undefined && subIndex !== undefined
@@ -64,15 +64,15 @@ const parseLenke = (
                       })
                     : undefined
             }
-            gaEventArgs={{
+            analyticsEventArgs={{
                 context: arbeidsflate,
-                category: GACategory.Header,
+                category: AnalyticsCategory.Header,
                 action: 'varsel-lenke',
                 label: href,
             }}
         >
             {children ? domToReact(children) : 'Lenke'}
-        </LenkeMedGA>
+        </LenkeMedSporing>
     );
 };
 

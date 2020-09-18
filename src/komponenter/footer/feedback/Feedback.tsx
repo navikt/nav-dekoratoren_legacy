@@ -2,20 +2,16 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
-import './Feedback.less';
-import { verifyWindowObj } from 'utils/Environment';
 import AlternativNei from './feedback-alternativ-nei/AlternativNei';
 import ThankYou from './feedback-thank-you/ThankYou';
 import AlternativFeilMangler from './feedback-alternativ-feil-mangler/AlternativFeilMangler';
 import { CloseFeedbackContext } from './common/CloseFeedbackContext';
 import amplitudeTriggers from 'utils/amplitude-triggers';
-const { logAmplitudeEvent } = verifyWindowObj()
-    ? require('utils/amplitude')
-    : () => null;
+import { logAmplitudeEvent } from 'utils/amplitude';
+import './Feedback.less';
 
 const Feedback = () => {
     const [closeFeedback, setCloseFeedback] = useState(false);
-
     const [buttonsPressed, setButtonsPressed] = useState({
         yesButton: false,
         noButton: false,
@@ -48,10 +44,8 @@ const Feedback = () => {
         });
     };
 
-    /* 
-    
+    /*
     Resetter komponentet til utgangspunktet dersom avbryt i et komponent lenger ned i treet klikkes
-
     */
     useEffect(() => {
         if (closeFeedback) {
@@ -75,25 +69,29 @@ const Feedback = () => {
                     {!buttonsPressed.yesButton &&
                     !buttonsPressed.noButton &&
                     !buttonsPressed.reportButton ? (
-                        <Fragment>
-                            <div className="qa-container">
-                                <Ingress>
+                        <div
+                            className="qa-container"
+                            role="group"
+                            aria-labelledby="feedback-text"
+                        >
+                            <Ingress>
+                                <label id="feedback-text">
                                     <Tekst id="fant-du-det-du-lette-etter" />
-                                </Ingress>
-                                <div className="buttons-container">
-                                    <Knapp
-                                        className="knapp"
-                                        onClick={userPressedYes}
-                                    >
-                                        <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
-                                    </Knapp>
-                                    <Knapp
-                                        className="knapp"
-                                        onClick={userPressedNo}
-                                    >
-                                        <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
-                                    </Knapp>
-                                </div>
+                                </label>
+                            </Ingress>
+                            <div className="buttons-container">
+                                <Knapp
+                                    className="knapp"
+                                    onClick={userPressedYes}
+                                >
+                                    <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
+                                </Knapp>
+                                <Knapp
+                                    className="knapp"
+                                    onClick={userPressedNo}
+                                >
+                                    <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
+                                </Knapp>
                             </div>
                             <button
                                 className="lenke"
@@ -101,7 +99,7 @@ const Feedback = () => {
                             >
                                 <Tekst id="rapporter-om-feil-mangler" />
                             </button>
-                        </Fragment>
+                        </div>
                     ) : null}
                     {buttonsPressed.yesButton && (
                         <ThankYou showFeedbackUsage={false} />

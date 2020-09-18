@@ -11,7 +11,7 @@ import BEMHelper from 'utils/bem';
 import Arbeidsflatevalg from './arbeidsflatevalg/Arbeidsflatevalg';
 import { LinksLoader } from '../../../common/content-loaders/LinkLoader';
 import FooterLenker from 'komponenter/footer/common/Lenker';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import './FooterTopp.less';
 
 const FooterTopp = () => {
@@ -23,12 +23,15 @@ const FooterTopp = () => {
     const [columnsNode, settColumnsNode] = useState<MenyNode>();
     useEffect(() => {
         const languageNode = getLanguageNode(language, data);
+        const isLanguageNorwegian =
+            language === Locale.BOKMAL || language === Locale.NYNORSK;
+
         if (languageNode) {
             const footerNode = findNode(languageNode, 'Footer');
             if (footerNode) {
                 const columnsNode = findNode(footerNode, 'Columns');
                 if (columnsNode) {
-                    if (language === Language.NORSK) {
+                    if (isLanguageNorwegian) {
                         settColumnsNode(findNode(columnsNode, context));
                     } else {
                         settColumnsNode(columnsNode);
@@ -36,7 +39,7 @@ const FooterTopp = () => {
                 }
             }
         }
-    }, [context, data, settColumnsNode]);
+    }, [language, context, data, settColumnsNode]);
 
     const scrollToTop = (event: React.MouseEvent) => {
         event.preventDefault();
@@ -73,13 +76,10 @@ const FooterTopp = () => {
                                   !i ? 'venstre' : i === 2 ? 'hoyre' : 'midt'
                               }`}
                           >
-                              <Undertittel
-                                  className="menylenker-overskrift"
-                                  id="venstrelenker-overskrift"
-                              >
+                              <Undertittel className="menylenker-overskrift">
                                   {columnNode.displayName}
                               </Undertittel>
-                              <ul aria-labelledby="venstrelenker-overskrift">
+                              <ul>
                                   <FooterLenker node={columnNode} />
                               </ul>
                           </div>
@@ -95,9 +95,7 @@ const FooterTopp = () => {
                               }`}
                               key={index}
                           >
-                              <ul aria-labelledby="hoyrelenker-overskrift">
-                                  <LinksLoader id="kontakt-loader" />
-                              </ul>
+                              <LinksLoader id={`footer-link-loader-${index}`} />
                           </div>
                       ))}
                 <Arbeidsflatevalg />

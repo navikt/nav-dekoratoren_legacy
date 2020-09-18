@@ -1,30 +1,9 @@
-import { verifyWindowObj } from 'utils/Environment';
 import amplitudeTriggers from 'utils/amplitude-triggers';
-import fetchFeedback from '../common/api/fetch-feedback';
-import { chooseFeedbackNoRemote } from '../common/api/remotes-handler';
-const { logAmplitudeEvent } = verifyWindowObj()
-    ? require('utils/amplitude')
-    : () => null;
+import { logAmplitudeEvent } from 'utils/amplitude';
 
-function sendFeedbackNo(categories: string[], message: string, language: string): void {
-    const feedbackReport = {
-        relevant: categories.includes('relevant'),
-        forstaaelig: categories.includes('forstaaelig'),
-        oversiktlig: categories.includes('oversiktlig'),
-        message: message,
-        urlPath: window.location.pathname,
-        urlHost: window.location.hostname,
-        browser: window.navigator.userAgent,
-        browserLanguage: window.navigator.language,
-        languageCode: language
-    };
-
-    const remote = chooseFeedbackNoRemote()
-
-    fetchFeedback(feedbackReport, remote)
-
+function sendFeedbackNo(categories: string[]): void {
     for (const category of categories) {
-        logAmplitudeEvent(amplitudeTriggers.neiKnapp, { svar: category })
+        logAmplitudeEvent(amplitudeTriggers.neiKnapp, { svar: category });
     }
 }
 

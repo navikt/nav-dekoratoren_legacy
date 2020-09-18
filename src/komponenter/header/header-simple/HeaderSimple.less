@@ -26,13 +26,13 @@
         justify-content: space-between;
         align-items: center;
 
-        @media (min-width: @smallDesktopLimitWidth) {
+        @media @screen-desktop-medium-up {
             padding: 0 3rem;
         }
-        @media (max-width: @smallDesktopLimitWidth) {
+        @media @screen-desktop-small-width-down {
             padding: 0 1rem;
         }
-        @media (max-width: @mobilMaxWidth) {
+        @media @screen-mobile {
             height: 66px;
         }
     }
@@ -41,7 +41,7 @@
         width: 78px;
         padding: 0.25rem;
 
-        @media (max-width: @mobilMaxWidth) {
+        @media @screen-mobile {
             width: 74px;
         }
     }

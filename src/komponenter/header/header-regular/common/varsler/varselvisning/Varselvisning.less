@@ -5,10 +5,20 @@
         padding: 0;
     }
 
-    &__tittel {
-        @media (max-width: @mobilMaxWidth) {
+    @media @screen-mobile {
+        padding: 1rem @margins-sides-mobil;
+        background-color: white;
+        height: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        &__tittel {
             .typo-innholdstittel;
         }
+    }
+
+    &__tom-liste {
+        margin-top: 1rem;
     }
 
     .dekorator-varsel-container {
