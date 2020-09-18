@@ -25,7 +25,7 @@ import { SprakVelger } from './common/sprakvelger/SprakVelger';
 import { validateLanguage, validateLevel } from '../../server/utils';
 import { validateBreadcrumbs, validateContext } from '../../server/utils';
 import { validateAvailableLanguages } from '../../server/utils';
-import { Params, setParams } from '../../store/reducers/environment-duck';
+import { setParams } from '../../store/reducers/environment-duck';
 import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
@@ -125,7 +125,7 @@ export const Header = () => {
             setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
         } else {
             // Fetch state from cookie OR default to private-person
-            const context = cookies['decorator-context'];
+            const context = cookies[decoratorContextCookie];
             context ? dispatch(settArbeidsflate(context)) : defaultToPerson();
         }
     }, []);
@@ -133,7 +133,11 @@ export const Header = () => {
     // Context utils
     const defaultToPerson = () => {
         dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
-        setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
+        setCookie(
+            decoratorContextCookie,
+            MenuValue.PRIVATPERSON,
+            cookieOptions
+        );
     };
 
     // Fetch notifications
@@ -147,11 +151,14 @@ export const Header = () => {
     const checkUrlForLanguage = () => {
         if (PARAMS.LANGUAGE !== Locale.IKKEBESTEMT) {
             dispatch(languageDuck.actionCreator({ language: PARAMS.LANGUAGE }));
-            setCookie(decoratorLanguageCookie, PARAMS.LANGUAGE, cookieOptions);
         } else {
-            const language = getLanguageFromUrl();
-            dispatch(languageDuck.actionCreator({ language }));
-            setCookie(decoratorLanguageCookie, language, cookieOptions);
+            const cookieLanguage = cookies[decoratorLanguageCookie];
+            if (cookieLanguage) {
+                dispatch(languageDuck.actionCreator({ cookieLanguage }));
+            } else {
+                const language = getLanguageFromUrl();
+                dispatch(languageDuck.actionCreator({ language }));
+            }
         }
     };
 
