@@ -25,9 +25,8 @@ import { SprakVelger } from './common/sprakvelger/SprakVelger';
 import { validateLanguage, validateLevel } from '../../server/utils';
 import { validateBreadcrumbs, validateContext } from '../../server/utils';
 import { validateAvailableLanguages } from '../../server/utils';
-import { Params, setParams } from '../../store/reducers/environment-duck';
+import { setParams } from '../../store/reducers/environment-duck';
 import './Header.less';
-import Sprakvarsel from './common/sprakvarsel/Sprakvarsel';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
 export const decoratorContextCookie = 'decorator-context';
@@ -289,9 +288,6 @@ export const Header = () => {
                     </div>
                 </div>
             )}
-            {!PARAMS.AVAILABLE_LANGUAGES?.filter(
-                (language) => language.locale === PARAMS.LANGUAGE
-            ).length && <Sprakvarsel />}
         </div>
     );
 };
