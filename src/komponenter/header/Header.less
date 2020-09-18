@@ -21,16 +21,17 @@
             flex-direction: row;
             justify-content: space-between;
             min-height: 64px;
-            padding: 0.5rem 1rem;
+            margin: 0 auto;
+            padding: 0.75rem 1rem;
 
-            @media (max-width: @screen-sm) {
-                flex-wrap: wrap;
+            @media @screen-mobile {
+              flex-wrap: wrap;
             }
             @media @screen-desktop-medium-up {
-                padding: 0.5rem 2rem;
+              padding: 0.75rem 3rem;
             }
             @media @screen-desktop-large-up {
-                padding: 0.5rem 0;
+              padding: 0.75rem 0;
             }
         }
         &-footer {
