@@ -26,6 +26,7 @@ import { validateLanguage, validateLevel } from '../../server/utils';
 import { validateBreadcrumbs, validateContext } from '../../server/utils';
 import { validateAvailableLanguages } from '../../server/utils';
 import { setParams } from '../../store/reducers/environment-duck';
+import Sprakvarsel from './common/sprakvarsel/Sprakvarsel';
 import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
@@ -274,17 +275,24 @@ export const Header = () => {
                 // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
                 <div className={'decorator-utils-container'}>
                     <div className={'decorator-utils-content'}>
-                        {PARAMS.BREADCRUMBS && (
-                            <Brodsmulesti
-                                language={PARAMS.LANGUAGE}
-                                breadcrumbs={PARAMS.BREADCRUMBS}
-                            />
-                        )}
-                        {PARAMS.AVAILABLE_LANGUAGES && (
-                            <SprakVelger
-                                availableLanguages={PARAMS.AVAILABLE_LANGUAGES}
-                            />
-                        )}
+                        <div className={'decorator-utils-header'}>
+                            {PARAMS.BREADCRUMBS && (
+                                <Brodsmulesti
+                                    language={PARAMS.LANGUAGE}
+                                    breadcrumbs={PARAMS.BREADCRUMBS}
+                                />
+                            )}
+                            {PARAMS.AVAILABLE_LANGUAGES && (
+                                <SprakVelger
+                                    availableLanguages={
+                                        PARAMS.AVAILABLE_LANGUAGES
+                                    }
+                                />
+                            )}
+                        </div>
+                        <div className={'decorator-utils-footer'}>
+                            <Sprakvarsel />
+                        </div>
                     </div>
                 </div>
             )}
