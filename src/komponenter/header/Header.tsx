@@ -274,17 +274,20 @@ export const Header = () => {
                 // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
                 <div className={'decorator-utils-container'}>
                     <div className={'decorator-utils-content'}>
-                        {PARAMS.BREADCRUMBS && (
-                            <Brodsmulesti
-                                language={PARAMS.LANGUAGE}
-                                breadcrumbs={PARAMS.BREADCRUMBS}
-                            />
-                        )}
-                        {PARAMS.AVAILABLE_LANGUAGES && (
-                            <SprakVelger
-                                availableLanguages={PARAMS.AVAILABLE_LANGUAGES}
-                            />
-                        )}
+                        <div className={'decorator-utils-header'}>
+                            {PARAMS.BREADCRUMBS && (
+                                <Brodsmulesti
+                                    breadcrumbs={PARAMS.BREADCRUMBS}
+                                />
+                            )}
+                            {PARAMS.AVAILABLE_LANGUAGES && (
+                                <SprakVelger
+                                    availableLanguages={
+                                        PARAMS.AVAILABLE_LANGUAGES
+                                    }
+                                />
+                            )}
+                        </div>
                     </div>
                 </div>
             )}

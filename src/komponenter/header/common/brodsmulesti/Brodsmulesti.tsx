@@ -21,18 +21,19 @@ export interface Breadcrumb {
 }
 
 interface Props {
-    language: Locale;
     breadcrumbs: Breadcrumb[];
 }
 
 export const Brodsmulesti = (props: Props) => {
     const { environment } = useSelector((state: AppState) => state);
     const { XP_BASE_URL } = environment;
-    const { breadcrumbs, language } = props;
     const cls = BEMHelper('brodsmulesti');
     const [showAll, setShowAll] = useState(false);
     const { status } = useSelector((state: AppState) => state.arbeidsflate);
+    const { language } = useSelector((state: AppState) => state.language);
     const context = getArbeidsflateContext(XP_BASE_URL, status);
+    const { breadcrumbs } = props;
+
     const isLanguageNorwegian =
         language === Locale.NYNORSK || language === Locale.BOKMAL;
 
@@ -41,8 +42,8 @@ export const Brodsmulesti = (props: Props) => {
         : breadcrumbs.slice(breadcrumbs.length - 2);
 
     const homeUrlMap: { [key: string]: string } = {
-        nb: context.url,
-        nn: context.url,
+        nb: `${XP_BASE_URL}`,
+        nn: `${XP_BASE_URL}`,
         en: `${XP_BASE_URL}/en/home`,
         se: `${XP_BASE_URL}/se/samegiella`,
     };
