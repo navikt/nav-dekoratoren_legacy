@@ -289,9 +289,6 @@ export const Header = () => {
                     </div>
                 </div>
             )}
-            {!PARAMS.AVAILABLE_LANGUAGES?.filter(
-                (language) => language.locale === PARAMS.LANGUAGE
-            ).length && <Sprakvarsel />}
         </div>
     );
 };
