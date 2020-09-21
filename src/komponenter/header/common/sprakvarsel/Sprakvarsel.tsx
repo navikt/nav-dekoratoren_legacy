@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import BEMHelper from 'utils/bem';
 import { useCookies } from 'react-cookie';
-import './Sprakvarsel.less';
 import { decoratorLanguageCookie } from '../../Header';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Locale } from 'store/reducers/language-duck';
+import './Sprakvarsel.less';
 
 const Sprakvarsel = () => {
     const cls = BEMHelper('sprakvarsel');
