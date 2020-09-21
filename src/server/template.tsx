@@ -28,6 +28,7 @@ export const template = (req: Request) => {
     const universalCookies = (req as any).universalCookies;
     const cookies = universalCookies.cookies;
     const env = clientEnv({ req, cookies });
+    const { SERVER_TIME, ...cachedEnv } = env;
 
     // Resources
     const fileEnv = `${env.APP_URL}/env`;
@@ -35,8 +36,8 @@ export const template = (req: Request) => {
     const fileScript = `${env.APP_URL}/client.js`;
 
     // Retreive from cache
-    const envHash = hash({ env });
-    const cachedHtml = cache.get(envHash);
+    const cachedEnvHash = hash({ cachedEnv });
+    const cachedHtml = cache.get(cachedEnvHash);
 
     if (cachedHtml) {
         return cachedHtml;
@@ -140,6 +141,6 @@ export const template = (req: Request) => {
         </body>
     </html>`;
 
-    cache.set(envHash, html);
+    cache.set(cachedEnvHash, html);
     return html;
 };

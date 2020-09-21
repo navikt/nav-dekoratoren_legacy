@@ -136,6 +136,7 @@ const transformOptions = (languages: AvailableLanguage[]) =>
             nn: 'Norsk (nynorsk)',
             en: 'English',
             se: 'Sámegiel',
+            pl: 'Polski',
         };
 
         return {

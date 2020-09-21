@@ -88,7 +88,7 @@ export const validateClientEnv = (req: Request) => {
     }
     const language = mapToLocale(req.query.language as string);
     if (language) {
-        validateLanguage(language);
+        validateLanguage(language as Locale);
     }
     if (availableLanguages) {
         validateAvailableLanguages(JSON.parse(availableLanguages as string));
@@ -121,15 +121,16 @@ export const validateLevel = (level: string) => {
     }
 };
 
-export const validateLanguage = (language: string) => {
+export const validateLanguage = (language: Locale) => {
     switch (language) {
         case 'nb':
         case 'nn':
         case 'en':
         case 'se':
+        case 'pl':
             break;
         default:
-            const error = 'language supports nb | nn | en | se';
+            const error = 'language supports nb | nn | en | se | pl';
             throw Error(error);
     }
 };
@@ -145,9 +146,10 @@ export const validateAvailableLanguages = (languages: AvailableLanguage[]) => {
             case 'nn':
             case 'en':
             case 'se':
+            case 'pl':
                 break;
             default:
-                const error = `availableLanguages.locale supports nb | nn | en | se`;
+                const error = `availableLanguages.locale supports nb | nn | en | se | pl`;
                 throw Error(error);
         }
     });
@@ -176,6 +178,9 @@ const mapToLocale = (language?: string) => {
         nn: 'nn',
         en: 'en',
         se: 'se',
+        pl: 'pl',
+
+        // deprecated
         norsk: 'nb',
         engelsk: 'en',
         samisk: 'se',

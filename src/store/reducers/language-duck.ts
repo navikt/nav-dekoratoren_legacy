@@ -7,6 +7,7 @@ export enum Locale {
     NYNORSK = 'nn',
     ENGELSK = 'en',
     SAMISK = 'se',
+    POLSK = 'pl',
 }
 
 export interface AvailableLanguage {
