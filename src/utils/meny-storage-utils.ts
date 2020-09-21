@@ -48,6 +48,7 @@ export const getLanguageNode = (
         nb: nodeMenu.find((n) => n.path === '/no'),
         nn: nodeMenu.find((n) => n.path === '/no'),
         en: nodeMenu.find((n) => n.path === '/en'),
+        pl: nodeMenu.find((n) => n.path === '/en'),
         se: nodeMenu.find((n) => n.path === '/se'),
     }[lang]);
 

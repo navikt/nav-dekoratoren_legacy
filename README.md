@@ -85,8 +85,8 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | enforceLogin **(beta)**       | boolean                                                     | false                | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]          |
 | redirectToApp                 | boolean                                                     | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2]      |
 | level                         | Level3 \| Level4                                            | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]                  |            
-| language                      | nb \| nn \| en \| se                                        | nb                   | Setter språket til dekoratøren ved server side rendering [3]                        |
-| availableLanguages **(beta)** | [{ locale: nb \| nn \| en \| se, url: string }]             | [ ]                  | Setter alternativene til språkvelgeren ved server side rendering [4]                |
+| language                      | nb \| nn \| en \| se \| pl                                  | nb                   | Setter språket til dekoratøren ved server side rendering [3]                        |
+| availableLanguages **(beta)** | [{ locale: nb \| nn \| en \| se \| pl, url: string }]       | [ ]                  | Setter alternativene til språkvelgeren ved server side rendering [4]                |
 | breadcrumbs **(beta)**        | [{ title: string, url: string }]                            | [ ]                  | Setter brødsmulestien for server side rendering [5]                     |
 | feedback                      | boolean                                                     | true                 | Skjuler eller viser tilbakemeldingskomponentet                                      |
 | chatbot                       | boolean                                                     | false                | Skjuler eller viser Chatbot Frida [6]                                               |
