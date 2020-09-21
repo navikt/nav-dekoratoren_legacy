@@ -37,6 +37,7 @@ const Sprakvarsel = () => {
         nn: 'Denne siden er ikke tilgjengelig på nynorsk',
         en: 'This page is not available in english',
         se: 'Denne siden er ikke tilgjengelig på samisk',
+        pl: 'Ta strona nie jest dostępna w języku polskim',
     };
 
     return showMessage ? (
