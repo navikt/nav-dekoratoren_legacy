@@ -4,10 +4,9 @@ import { useCookies } from 'react-cookie';
 import './Sprakvarsel.less';
 import { decoratorLanguageCookie } from '../../Header';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../../store/reducers';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
-import { Locale } from '../../../../store/reducers/language-duck';
-import Tekst from '../../../../tekster/finn-tekst';
+import { AppState } from 'store/reducers';
+import AlertStripe from 'nav-frontend-alertstriper';
+import { Locale } from 'store/reducers/language-duck';
 
 const Sprakvarsel = () => {
     const cls = BEMHelper('sprakvarsel');
@@ -43,7 +42,9 @@ const Sprakvarsel = () => {
     return showMessage ? (
         <div className={cls.element('container')}>
             <div className={cls.element('content')}>
-                <AlertStripeInfo>{message[cookieLanguage]}</AlertStripeInfo>
+                <AlertStripe type={'info'} form="inline">
+                    {message[cookieLanguage]}
+                </AlertStripe>
             </div>
         </div>
     ) : null;
