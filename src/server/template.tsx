@@ -36,8 +36,8 @@ export const template = (req: Request) => {
     const fileScript = `${env.APP_URL}/client.js`;
 
     // Retreive from cache
-    const envHash = hash({ cachedEnv });
-    const cachedHtml = cache.get(envHash);
+    const cachedEnvHash = hash({ cachedEnv });
+    const cachedHtml = cache.get(cachedEnvHash);
 
     if (cachedHtml) {
         return cachedHtml;
@@ -141,6 +141,6 @@ export const template = (req: Request) => {
         </body>
     </html>`;
 
-    cache.set(envHash, html);
+    cache.set(cachedEnvHash, html);
     return html;
 };
