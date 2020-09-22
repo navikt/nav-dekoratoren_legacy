@@ -98,37 +98,35 @@ export const Brodsmulesti = (props: Props) => {
                 {slicedBreadcrumbs.map((breadcrumb, i) => (
                     <li
                         key={i}
-                        className="typo-normal"
+                        className={`${cls.element('link')} typo-normal`}
                         aria-current={
                             i + 1 === slicedBreadcrumbs.length && `page`
                         }
                     >
-                        <Normaltekst className={cls.element('link')}>
-                            {i + 1 !== slicedBreadcrumbs.length ? (
-                                breadcrumb.handleInApp ? (
-                                    <Lenke
-                                        href={breadcrumb.url}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            postMessageToApp(
-                                                'breadcrumbClick',
-                                                breadcrumb
-                                            );
-                                        }}
-                                    >
-                                        <span>{breadcrumb.title}</span>
-                                        <HoyreChevron />
-                                    </Lenke>
-                                ) : (
-                                    <Lenke href={breadcrumb.url}>
-                                        <span>{breadcrumb.title}</span>
-                                        <HoyreChevron />
-                                    </Lenke>
-                                )
+                        {i + 1 !== slicedBreadcrumbs.length ? (
+                            breadcrumb.handleInApp ? (
+                                <Lenke
+                                    href={breadcrumb.url}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        postMessageToApp(
+                                            'breadcrumbClick',
+                                            breadcrumb
+                                        );
+                                    }}
+                                >
+                                    <span>{breadcrumb.title}</span>
+                                    <HoyreChevron />
+                                </Lenke>
                             ) : (
-                                breadcrumb.title
-                            )}
-                        </Normaltekst>
+                                <Lenke href={breadcrumb.url}>
+                                    <span>{breadcrumb.title}</span>
+                                    <HoyreChevron />
+                                </Lenke>
+                            )
+                        ) : (
+                            <Normaltekst>{breadcrumb.title}</Normaltekst>
+                        )}
                     </li>
                 ))}
             </ol>
