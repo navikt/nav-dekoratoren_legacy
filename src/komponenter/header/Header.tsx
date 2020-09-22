@@ -151,14 +151,11 @@ export const Header = () => {
     const checkUrlForLanguage = () => {
         if (PARAMS.LANGUAGE !== Locale.IKKEBESTEMT) {
             dispatch(languageDuck.actionCreator({ language: PARAMS.LANGUAGE }));
+            setCookie(decoratorLanguageCookie, PARAMS.LANGUAGE, cookieOptions);
         } else {
-            const cookieLanguage = cookies[decoratorLanguageCookie];
-            if (cookieLanguage) {
-                dispatch(languageDuck.actionCreator({ cookieLanguage }));
-            } else {
-                const language = getLanguageFromUrl();
-                dispatch(languageDuck.actionCreator({ language }));
-            }
+            const language = getLanguageFromUrl();
+            dispatch(languageDuck.actionCreator({ language }));
+            setCookie(decoratorLanguageCookie, language, cookieOptions);
         }
     };
 
