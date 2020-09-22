@@ -5,10 +5,8 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { HeaderSimple } from 'komponenter/header/header-simple/HeaderSimple';
 import { HeaderRegular } from 'komponenter/header/header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
-import {
-    cookieOptions,
-    settArbeidsflate,
-} from 'store/reducers/arbeidsflate-duck';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
 import { languageDuck, Locale } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
@@ -24,13 +22,10 @@ import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
 import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
 import { SprakVelger } from './common/sprakvelger/SprakVelger';
-import {
-    validateAvailableLanguages,
-    validateBreadcrumbs,
-    validateContext,
-    validateLanguage,
-    validateLevel,
-} from '../../server/utils';
+import { validateAvailableLanguages } from '../../server/utils';
+import { validateBreadcrumbs } from '../../server/utils';
+import { validateContext } from '../../server/utils';
+import { validateLanguage, validateLevel } from '../../server/utils';
 import { setParams } from '../../store/reducers/environment-duck';
 import './Header.less';
 
@@ -310,6 +305,9 @@ export const Header = () => {
 
 const getLanguageFromUrl = (): Locale => {
     const locationPath = window.location.pathname;
+    if (locationPath.includes('/no/')) {
+        return Locale.BOKMAL;
+    }
     if (locationPath.includes('/nb/')) {
         return Locale.BOKMAL;
     }
