@@ -5,10 +5,12 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { HeaderSimple } from 'komponenter/header/header-simple/HeaderSimple';
 import { HeaderRegular } from 'komponenter/header/header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
-import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import {
+    cookieOptions,
+    settArbeidsflate,
+} from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
-import { Locale, languageDuck } from 'store/reducers/language-duck';
+import { languageDuck, Locale } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
@@ -22,9 +24,13 @@ import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
 import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
 import { SprakVelger } from './common/sprakvelger/SprakVelger';
-import { validateLanguage, validateLevel } from '../../server/utils';
-import { validateBreadcrumbs, validateContext } from '../../server/utils';
-import { validateAvailableLanguages } from '../../server/utils';
+import {
+    validateAvailableLanguages,
+    validateBreadcrumbs,
+    validateContext,
+    validateLanguage,
+    validateLevel,
+} from '../../server/utils';
 import { setParams } from '../../store/reducers/environment-duck';
 import './Header.less';
 
@@ -149,13 +155,24 @@ export const Header = () => {
 
     // Change language
     const checkUrlForLanguage = () => {
-        if (PARAMS.LANGUAGE !== Locale.IKKEBESTEMT) {
-            dispatch(languageDuck.actionCreator({ language: PARAMS.LANGUAGE }));
-            setCookie(decoratorLanguageCookie, PARAMS.LANGUAGE, cookieOptions);
+        const fromParam = PARAMS.LANGUAGE;
+        const fromUrl = getLanguageFromUrl();
+        const fromCookie = cookies[decoratorLanguageCookie];
+        const fromDefault = Locale.BOKMAL;
+
+        // Priority: Parameter -> url -> cookie -> default
+        if (fromParam !== Locale.IKKEBESTEMT) {
+            setCookie(decoratorLanguageCookie, fromParam, cookieOptions);
+            dispatch(languageDuck.actionCreator({ language: fromParam }));
+        } else if (fromUrl !== Locale.IKKEBESTEMT) {
+            setCookie(decoratorLanguageCookie, fromUrl, cookieOptions);
+            dispatch(languageDuck.actionCreator({ language: fromUrl }));
+        } else if (fromCookie) {
+            setCookie(decoratorLanguageCookie, fromCookie, cookieOptions);
+            dispatch(languageDuck.actionCreator({ language: fromCookie }));
         } else {
-            const language = getLanguageFromUrl();
-            dispatch(languageDuck.actionCreator({ language }));
-            setCookie(decoratorLanguageCookie, language, cookieOptions);
+            setCookie(decoratorLanguageCookie, fromDefault, cookieOptions);
+            dispatch(languageDuck.actionCreator({ language: fromDefault }));
         }
     };
 
@@ -300,7 +317,10 @@ const getLanguageFromUrl = (): Locale => {
     if (locationPath.includes('/se/')) {
         return Locale.SAMISK;
     }
-    return Locale.BOKMAL;
+    if (locationPath.includes('/pl/')) {
+        return Locale.POLSK;
+    }
+    return Locale.IKKEBESTEMT;
 };
 
 export default Header;
