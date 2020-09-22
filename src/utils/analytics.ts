@@ -40,6 +40,7 @@ export const analyticsEvent = (props: AnalyticsEventArgs) => {
     logAmplitudeEvent('navigere', {
         destinasjon: label,
         lenketekst: actionFinal,
+        kategori: category,
     });
 
     ReactGA.event({
