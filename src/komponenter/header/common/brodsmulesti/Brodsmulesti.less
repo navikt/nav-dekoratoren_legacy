@@ -1,25 +1,19 @@
 @import (reference) '../../../../styling-variabler.less';
 
 .brodsmulesti {
-    &__home {
+    display: flex;
+    @media @screen-mobile {
+        width: 100%;
+    }
+    ol {
+        margin: 0;
+        padding: 0;
         display: flex;
-        justify-content: center;
+        flex-wrap: wrap;
         align-items: center;
+        list-style: none;
     }
-    &__icon {
-        margin-right: 1rem;
-    }
-    &__container {
-        display: flex;
-        align-items: center;
-        @media @screen-mobile {
-            width: 100%;
-        }
-    }
-    &__view-all {
-        border: 0;
-    }
-    &__content {
+    li {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -33,6 +27,20 @@
             margin: 0 0.5em;
         }
     }
+
+    &__home {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__icon {
+        margin-right: 1rem;
+    }
+
+    &__view-all {
+        border: 0;
+    }
+
     &__link {
         text-transform: lowercase;
         &:first-letter {
