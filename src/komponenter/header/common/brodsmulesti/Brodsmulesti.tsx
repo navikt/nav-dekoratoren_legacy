@@ -125,7 +125,7 @@ export const Brodsmulesti = (props: Props) => {
                                 </Lenke>
                             )
                         ) : (
-                            <Normaltekst>{breadcrumb.title}</Normaltekst>
+                            <span>{breadcrumb.title}</span>
                         )}
                     </li>
                 ))}
