@@ -98,7 +98,7 @@ export const Brodsmulesti = (props: Props) => {
                 {slicedBreadcrumbs.map((breadcrumb, i) => (
                     <li
                         key={i}
-                        className={` typo-normal`}
+                        className="typo-normal"
                         aria-current={
                             i + 1 === slicedBreadcrumbs.length && `page`
                         }
