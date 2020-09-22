@@ -125,14 +125,19 @@ export const Header = () => {
 
     // Change context
     useEffect(() => {
-        if (PARAMS.CONTEXT !== MenuValue.IKKEBESTEMT) {
-            // Use params if defined
-            dispatch(settArbeidsflate(PARAMS.CONTEXT));
-            setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
+        const fromParam = PARAMS.CONTEXT;
+        const fromCookie = cookies[decoratorContextCookie];
+        const fromDefault = MenuValue.PRIVATPERSON;
+
+        if (fromParam !== MenuValue.IKKEBESTEMT) {
+            dispatch(settArbeidsflate(fromParam));
+            setCookie(decoratorContextCookie, fromParam, cookieOptions);
+        } else if (fromCookie) {
+            dispatch(settArbeidsflate(fromCookie));
+            setCookie(decoratorContextCookie, fromCookie, cookieOptions);
         } else {
-            // Fetch state from cookie OR default to private-person
-            const context = cookies[decoratorContextCookie];
-            context ? dispatch(settArbeidsflate(context)) : defaultToPerson();
+            dispatch(settArbeidsflate(fromDefault));
+            setCookie(decoratorContextCookie, fromDefault, cookieOptions);
         }
     }, []);
 
@@ -154,7 +159,7 @@ export const Header = () => {
     }, [authenticated]);
 
     // Change language
-    const checkUrlForLanguage = () => {
+    const setLanguage = () => {
         const fromParam = PARAMS.LANGUAGE;
         const fromUrl = getLanguageFromUrl();
         const fromCookie = cookies[decoratorLanguageCookie];
@@ -162,23 +167,23 @@ export const Header = () => {
 
         // Priority: Parameter -> url -> cookie -> default
         if (fromParam !== Locale.IKKEBESTEMT) {
-            setCookie(decoratorLanguageCookie, fromParam, cookieOptions);
             dispatch(languageDuck.actionCreator({ language: fromParam }));
+            setCookie(decoratorLanguageCookie, fromParam, cookieOptions);
         } else if (fromUrl !== Locale.IKKEBESTEMT) {
-            setCookie(decoratorLanguageCookie, fromUrl, cookieOptions);
             dispatch(languageDuck.actionCreator({ language: fromUrl }));
+            setCookie(decoratorLanguageCookie, fromUrl, cookieOptions);
         } else if (fromCookie) {
-            setCookie(decoratorLanguageCookie, fromCookie, cookieOptions);
             dispatch(languageDuck.actionCreator({ language: fromCookie }));
+            setCookie(decoratorLanguageCookie, fromCookie, cookieOptions);
         } else {
-            setCookie(decoratorLanguageCookie, fromDefault, cookieOptions);
             dispatch(languageDuck.actionCreator({ language: fromDefault }));
+            setCookie(decoratorLanguageCookie, fromDefault, cookieOptions);
         }
     };
 
     useEffect(() => {
-        window.addEventListener('popstate', checkUrlForLanguage);
-        checkUrlForLanguage();
+        window.addEventListener('popstate', setLanguage);
+        setLanguage();
     }, []);
 
     // Send ready message to applications
