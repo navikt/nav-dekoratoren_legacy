@@ -98,7 +98,7 @@ export const Brodsmulesti = (props: Props) => {
                 {slicedBreadcrumbs.map((breadcrumb, i) => (
                     <li
                         key={i}
-                        className={`${cls.element('link')} typo-normal`}
+                        className={` typo-normal`}
                         aria-current={
                             i + 1 === slicedBreadcrumbs.length && `page`
                         }
@@ -107,6 +107,7 @@ export const Brodsmulesti = (props: Props) => {
                             breadcrumb.handleInApp ? (
                                 <Lenke
                                     href={breadcrumb.url}
+                                    className={cls.element('transform')}
                                     onClick={(e) => {
                                         e.preventDefault();
                                         postMessageToApp(
@@ -119,13 +120,18 @@ export const Brodsmulesti = (props: Props) => {
                                     <HoyreChevron />
                                 </Lenke>
                             ) : (
-                                <Lenke href={breadcrumb.url}>
+                                <Lenke
+                                    href={breadcrumb.url}
+                                    className={cls.element('transform')}
+                                >
                                     <span>{breadcrumb.title}</span>
                                     <HoyreChevron />
                                 </Lenke>
                             )
                         ) : (
-                            <span>{breadcrumb.title}</span>
+                            <span className={cls.element('transform')}>
+                                {breadcrumb.title}
+                            </span>
                         )}
                     </li>
                 ))}
