@@ -39,6 +39,7 @@ const Arbeidsflatevalg = () => {
                                 context: arbeidsflate,
                                 category: AnalyticsCategory.Footer,
                                 action: 'arbeidsflate-valg',
+                                label: lenke.key,
                             }}
                         />
                     </li>

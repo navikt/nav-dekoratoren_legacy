@@ -31,9 +31,10 @@ const MobilarbeidsflateValg = ({ lang }: Props) => {
                         lenke={lenke}
                         language={lang}
                         analyticsEventArgs={{
+                            context: arbeidsflate,
                             category: AnalyticsCategory.Meny,
                             action: 'arbeidsflate-valg',
-                            label: lenke.url,
+                            label: lenke.key,
                         }}
                     />
                 </li>
