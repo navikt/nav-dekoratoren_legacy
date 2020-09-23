@@ -14,29 +14,18 @@ export interface VarselinnboksState extends DataElement {
 }
 
 export interface VarslerData {
-    varsler: {
-        nyesteVarsler: NyesteVarslerData[],
-        totaltAntallUleste: number
-    }
-}
-
-export interface NyesteVarslerData {
-    aktoerID: string,
-    url: string
-    varseltekst: string
-    varselId: string
-    id: number,
-    meldingsType: string,
-    datoOpprettet: string,
-    datoLest: string
+    uleste: number;
+    antall: number;
+    nyesteId: number;
+    varsler: string;
 }
 
 export const initialState: VarselinnboksState = {
     data: {
-        varsler: {
-            nyesteVarsler: [],
-            totaltAntallUleste: 0
-        }
+        uleste: 0,
+        antall: 0,
+        nyesteId: 0,
+        varsler: ``,
     },
     status: Status.IKKE_STARTET,
 };
@@ -60,7 +49,7 @@ export default function reducer(
         case ActionType.SETT_VARSLER_OK:
             return { ...state, status: Status.OK };
         case ActionType.SETT_VARSLER_LEST:
-            return { ...state, data: { ...state.data, varsler: {...state.data.varsler, totaltAntallUleste: 0 }} };
+            return { ...state, data: { ...state.data, uleste: 0 } };
         default:
             return state;
     }
