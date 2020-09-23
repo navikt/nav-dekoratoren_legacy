@@ -86,7 +86,7 @@ export const SokResultater = (props: Props) => {
                     <div>
                         {finnTekst('sok-viser', language)} {itemsSpliced.length}{' '}
                         {finnTekst('sok-av', language)} {result.total}{' '}
-                        {finnTekst('sok-resulater', language)}
+                        {finnTekst('sok-resultater', language)}
                     </div>
                     {result.total > itemsFiltered.length && (
                         <Lenke

@@ -10,9 +10,8 @@ import { postMessageToApp } from 'utils/messages';
 import { Locale } from 'store/reducers/language-duck';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
-import './Brodsmulesti.less';
 import { getArbeidsflateContext } from '../../../common/arbeidsflate-lenker/arbeidsflate-lenker';
-import { MenuValue } from '../../../../utils/meny-storage-utils';
+import './Brodsmulesti.less';
 
 export interface Breadcrumb {
     url: string;
@@ -25,9 +24,9 @@ interface Props {
 }
 
 export const Brodsmulesti = (props: Props) => {
+    const cls = BEMHelper('brodsmulesti');
     const { environment } = useSelector((state: AppState) => state);
     const { XP_BASE_URL } = environment;
-    const cls = BEMHelper('brodsmulesti');
     const [showAll, setShowAll] = useState(false);
     const { status } = useSelector((state: AppState) => state.arbeidsflate);
     const { language } = useSelector((state: AppState) => state.language);
@@ -49,13 +48,13 @@ export const Brodsmulesti = (props: Props) => {
     };
 
     return (
-        <div className={cls.element('container')}>
-            <nav
-                itemProp="breadcrumb"
-                className={cls.element('content')}
-                aria-label={finnTekst('brodsmulesti', language)}
-            >
-                <Normaltekst>
+        <nav
+            className={cls.className}
+            aria-label={finnTekst('brodsmulesti', language)}
+            itemProp="breadcrumb"
+        >
+            <ol>
+                <li className="typo-normal">
                     <Lenke
                         href={homeUrlMap[language]}
                         className={cls.element('home')}
@@ -67,62 +66,77 @@ export const Brodsmulesti = (props: Props) => {
                         <span>nav.no</span>
                         <HoyreChevron />
                     </Lenke>
-                </Normaltekst>
+                </li>
                 {isLanguageNorwegian && (
-                    <Normaltekst>
+                    <li className="typo-normal">
                         <Lenke href={context.url}>
                             <span>
                                 <Tekst id={context.lenkeTekstId} />
                             </span>
                             <HoyreChevron />
                         </Lenke>
-                    </Normaltekst>
+                    </li>
                 )}
                 {!showAll && breadcrumbs.length > 2 && (
-                    <button
-                        aria-label={finnTekst('brodsmulesti-se-alle', language)}
-                        className={`${cls.element('view-all')} lenke`}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setShowAll(true);
-                        }}
-                    >
-                        <span>...</span>
-                        <HoyreChevron />
-                    </button>
+                    <li className="typo-normal">
+                        <button
+                            aria-label={finnTekst(
+                                'brodsmulesti-se-alle',
+                                language
+                            )}
+                            className={`${cls.element('view-all')} lenke`}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setShowAll(true);
+                            }}
+                        >
+                            <span>...</span>
+                            <HoyreChevron />
+                        </button>
+                    </li>
                 )}
                 {slicedBreadcrumbs.map((breadcrumb, i) => (
-                    <Fragment key={i}>
-                        <Normaltekst>
-                            {i + 1 !== slicedBreadcrumbs.length ? (
-                                breadcrumb.handleInApp ? (
-                                    <Lenke
-                                        href={breadcrumb.url}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            postMessageToApp(
-                                                'breadcrumbClick',
-                                                breadcrumb
-                                            );
-                                        }}
-                                    >
-                                        <span>{breadcrumb.title}</span>
-                                        <HoyreChevron />
-                                    </Lenke>
-                                ) : (
-                                    <Lenke href={breadcrumb.url}>
-                                        <span>{breadcrumb.title}</span>
-                                        <HoyreChevron />
-                                    </Lenke>
-                                )
+                    <li
+                        key={i}
+                        className="typo-normal"
+                        aria-current={
+                            i + 1 === slicedBreadcrumbs.length && `page`
+                        }
+                    >
+                        {i + 1 !== slicedBreadcrumbs.length ? (
+                            breadcrumb.handleInApp ? (
+                                <Lenke
+                                    href={breadcrumb.url}
+                                    className={cls.element('transform')}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        postMessageToApp(
+                                            'breadcrumbClick',
+                                            breadcrumb
+                                        );
+                                    }}
+                                >
+                                    <span>{breadcrumb.title}</span>
+                                    <HoyreChevron />
+                                </Lenke>
                             ) : (
-                                breadcrumb.title
-                            )}
-                        </Normaltekst>
-                    </Fragment>
+                                <Lenke
+                                    href={breadcrumb.url}
+                                    className={cls.element('transform')}
+                                >
+                                    <span>{breadcrumb.title}</span>
+                                    <HoyreChevron />
+                                </Lenke>
+                            )
+                        ) : (
+                            <span className={cls.element('transform')}>
+                                {breadcrumb.title}
+                            </span>
+                        )}
+                    </li>
                 ))}
-            </nav>
-        </div>
+            </ol>
+        </nav>
     );
 };
 

@@ -40,9 +40,10 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                             sub: 0,
                         })}
                         analyticsEventArgs={{
+                            context: arbeidsflate,
                             category: AnalyticsCategory.Meny,
-                            action: `hovedmeny/arbeidsflatelenke`,
-                            label: lenke.url,
+                            action: 'arbeidsflate-valg',
+                            label: lenke.key,
                         }}
                         enableCompactView={true}
                         key={lenke.lenkeTekstId}
