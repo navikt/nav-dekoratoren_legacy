@@ -33,7 +33,7 @@ export const hentVarslerFetch = (
 ): Promise<varselinnboksData> => {
     const tidspunkt = new Date().getTime();
     return fetchToJson(
-        `${APP_URL}/api/varsler/rest/varsel/hentsiste?noCache=${tidspunkt}`,
+        `${APP_URL}/api/varsler/varsler?noCache=${tidspunkt}&limit=5`,
         { credentials: 'include' }
     );
 };
