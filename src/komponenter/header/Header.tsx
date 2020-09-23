@@ -8,7 +8,7 @@ import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
-import { Locale, languageDuck } from 'store/reducers/language-duck';
+import { languageDuck, Locale } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
@@ -22,10 +22,11 @@ import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
 import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
 import { SprakVelger } from './common/sprakvelger/SprakVelger';
-import { validateLanguage, validateLevel } from '../../server/utils';
-import { validateBreadcrumbs, validateContext } from '../../server/utils';
 import { validateAvailableLanguages } from '../../server/utils';
-import { Params, setParams } from '../../store/reducers/environment-duck';
+import { validateBreadcrumbs } from '../../server/utils';
+import { validateContext } from '../../server/utils';
+import { validateLanguage, validateLevel } from '../../server/utils';
+import { setParams } from '../../store/reducers/environment-duck';
 import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
@@ -119,21 +120,30 @@ export const Header = () => {
 
     // Change context
     useEffect(() => {
-        if (PARAMS.CONTEXT !== MenuValue.IKKEBESTEMT) {
-            // Use params if defined
-            dispatch(settArbeidsflate(PARAMS.CONTEXT));
-            setCookie('decorator-context', PARAMS.CONTEXT, cookieOptions);
+        const fromParam = PARAMS.CONTEXT;
+        const fromCookie = cookies[decoratorContextCookie];
+        const fromDefault = MenuValue.PRIVATPERSON;
+
+        if (fromParam !== MenuValue.IKKEBESTEMT) {
+            dispatch(settArbeidsflate(fromParam));
+            setCookie(decoratorContextCookie, fromParam, cookieOptions);
+        } else if (fromCookie) {
+            dispatch(settArbeidsflate(fromCookie));
+            setCookie(decoratorContextCookie, fromCookie, cookieOptions);
         } else {
-            // Fetch state from cookie OR default to private-person
-            const context = cookies['decorator-context'];
-            context ? dispatch(settArbeidsflate(context)) : defaultToPerson();
+            dispatch(settArbeidsflate(fromDefault));
+            setCookie(decoratorContextCookie, fromDefault, cookieOptions);
         }
     }, []);
 
     // Context utils
     const defaultToPerson = () => {
         dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
-        setCookie('decorator-context', MenuValue.PRIVATPERSON, cookieOptions);
+        setCookie(
+            decoratorContextCookie,
+            MenuValue.PRIVATPERSON,
+            cookieOptions
+        );
     };
 
     // Fetch notifications
@@ -144,20 +154,31 @@ export const Header = () => {
     }, [authenticated]);
 
     // Change language
-    const checkUrlForLanguage = () => {
-        if (PARAMS.LANGUAGE !== Locale.IKKEBESTEMT) {
-            dispatch(languageDuck.actionCreator({ language: PARAMS.LANGUAGE }));
-            setCookie(decoratorLanguageCookie, PARAMS.LANGUAGE, cookieOptions);
+    const setLanguage = () => {
+        const fromParam = PARAMS.LANGUAGE;
+        const fromUrl = getLanguageFromUrl();
+        const fromCookie = cookies[decoratorLanguageCookie];
+        const fromDefault = Locale.BOKMAL;
+
+        // Priority: Parameter -> url -> cookie -> default
+        if (fromParam !== Locale.IKKEBESTEMT) {
+            dispatch(languageDuck.actionCreator({ language: fromParam }));
+            setCookie(decoratorLanguageCookie, fromParam, cookieOptions);
+        } else if (fromUrl !== Locale.IKKEBESTEMT) {
+            dispatch(languageDuck.actionCreator({ language: fromUrl }));
+            setCookie(decoratorLanguageCookie, fromUrl, cookieOptions);
+        } else if (fromCookie) {
+            dispatch(languageDuck.actionCreator({ language: fromCookie }));
+            setCookie(decoratorLanguageCookie, fromCookie, cookieOptions);
         } else {
-            const language = getLanguageFromUrl();
-            dispatch(languageDuck.actionCreator({ language }));
-            setCookie(decoratorLanguageCookie, language, cookieOptions);
+            dispatch(languageDuck.actionCreator({ language: fromDefault }));
+            setCookie(decoratorLanguageCookie, fromDefault, cookieOptions);
         }
     };
 
     useEffect(() => {
-        window.addEventListener('popstate', checkUrlForLanguage);
-        checkUrlForLanguage();
+        window.addEventListener('popstate', setLanguage);
+        setLanguage();
     }, []);
 
     // Send ready message to applications
@@ -268,10 +289,7 @@ export const Header = () => {
                 <div className={'decorator-utils-container'}>
                     <div className={'decorator-utils-content'}>
                         {PARAMS.BREADCRUMBS && (
-                            <Brodsmulesti
-                                language={PARAMS.LANGUAGE}
-                                breadcrumbs={PARAMS.BREADCRUMBS}
-                            />
+                            <Brodsmulesti breadcrumbs={PARAMS.BREADCRUMBS} />
                         )}
                         {PARAMS.AVAILABLE_LANGUAGES && (
                             <SprakVelger
@@ -287,6 +305,9 @@ export const Header = () => {
 
 const getLanguageFromUrl = (): Locale => {
     const locationPath = window.location.pathname;
+    if (locationPath.includes('/no/')) {
+        return Locale.BOKMAL;
+    }
     if (locationPath.includes('/nb/')) {
         return Locale.BOKMAL;
     }
@@ -299,7 +320,10 @@ const getLanguageFromUrl = (): Locale => {
     if (locationPath.includes('/se/')) {
         return Locale.SAMISK;
     }
-    return Locale.BOKMAL;
+    if (locationPath.includes('/pl/')) {
+        return Locale.POLSK;
+    }
+    return Locale.IKKEBESTEMT;
 };
 
 export default Header;

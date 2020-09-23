@@ -6,10 +6,9 @@ import { useSelect } from 'downshift';
 import { decoratorLanguageCookie } from '../../Header';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { AvailableLanguage } from 'store/reducers/language-duck';
-import { languageDuck, Locale } from 'store/reducers/language-duck';
+import { languageDuck } from 'store/reducers/language-duck';
 import { postMessageToApp } from 'utils/messages';
 import { useCookies } from 'react-cookie';
-import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { useSelector, useStore } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Bilde } from '../../../common/bilde/Bilde';
@@ -38,7 +37,9 @@ export const SprakVelger = (props: Props) => {
     const cls = BEMHelper('sprakvelger');
     const { language } = useSelector((state: AppState) => state.language);
     const [, setCookie] = useCookies([decoratorLanguageCookie]);
-    const options = transformOptions(props.availableLanguages);
+    const options = transformOptions(props.availableLanguages).sort((a, b) =>
+        a.label > b.label ? -1 : 1
+    );
 
     const onChange = (selected: LocaleOption) => {
         const { locale, value, handleInApp } = selected as LocaleOption;
@@ -137,6 +138,7 @@ const transformOptions = (languages: AvailableLanguage[]) =>
             nn: 'Norsk (nynorsk)',
             en: 'English',
             se: 'Sámegiel',
+            pl: 'Polski',
         };
 
         return {

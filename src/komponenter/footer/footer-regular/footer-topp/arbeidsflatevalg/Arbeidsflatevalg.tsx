@@ -37,8 +37,9 @@ const Arbeidsflatevalg = () => {
                             language={language}
                             analyticsEventArgs={{
                                 context: arbeidsflate,
-                                category: AnalyticsCategory.Header,
+                                category: AnalyticsCategory.Footer,
                                 action: 'arbeidsflate-valg',
+                                label: lenke.key,
                             }}
                         />
                     </li>

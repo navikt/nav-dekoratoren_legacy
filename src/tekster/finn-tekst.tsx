@@ -13,6 +13,7 @@ export function finnTekst(id: string, language: Locale): string {
         case Locale.NYNORSK:
             ledetekst = ledetekster[id];
             break;
+        case Locale.POLSK:
         case Locale.ENGELSK:
             id += '-en';
             ledetekst = ledetekster[id];

@@ -63,6 +63,7 @@ const Arbeidsflatemeny = () => {
                                     context: arbeidsflate,
                                     category: AnalyticsCategory.Header,
                                     action: 'arbeidsflate-valg',
+                                    label: lenke.key,
                                 }}
                             >
                                 <div
