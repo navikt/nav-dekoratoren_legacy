@@ -30,10 +30,6 @@ export const Varselvisning = ({ setKbId }: Props) => {
 
     const cls = BEMHelper('varsler-visning');
 
-    const nyeVarslerMsg =
-        varslerUleste > 0
-            ? ` (${varslerUleste} ${finnTekst('varsler-nye', language)})`
-            : '';
     const visAlleVarslerLenke = varslerAntall > 5;
 
     return (
@@ -53,7 +49,6 @@ export const Varselvisning = ({ setKbId }: Props) => {
             )}
             {visAlleVarslerLenke && (
                 <AlleVarslerLenke
-                    nyeVarslerMsg={nyeVarslerMsg}
                     varselInnboksUrl={varselInnboksUrl}
                     rowIndex={setKbId ? 1 : undefined}
                 />

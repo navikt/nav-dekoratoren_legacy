@@ -6,7 +6,6 @@ import { AnalyticsCategory } from 'utils/analytics';
 import Tekst from 'tekster/finn-tekst';
 
 interface Props {
-    nyeVarslerMsg: string;
     varselInnboksUrl: string;
     rowIndex?: number;
 }
@@ -32,7 +31,6 @@ const AlleVarslerLenke = (props: Props) => {
                 }}
             >
                 <Tekst id={'varsler-visalle'} />
-                {props.nyeVarslerMsg}
             </LenkeMedSporing>
         </div>
     );
