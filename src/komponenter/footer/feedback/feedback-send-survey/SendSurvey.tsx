@@ -3,7 +3,6 @@ import { Input } from 'nav-frontend-skjema';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { Normaltekst } from 'nav-frontend-typografi';
-import './SendSurvey.less';
 
 const SendSurvey = () => {
     const [email, setEmail] = useState(String);
