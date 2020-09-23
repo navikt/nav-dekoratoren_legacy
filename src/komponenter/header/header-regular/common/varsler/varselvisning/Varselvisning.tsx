@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppState } from 'store/reducers';
-import Tekst, { finnTekst } from 'tekster/finn-tekst';
+import Tekst from 'tekster/finn-tekst';
 import { useSelector } from 'react-redux';
 import { Systemtittel } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
@@ -21,8 +21,8 @@ type Props = {
 };
 
 export const Varselvisning = ({ setKbId }: Props) => {
-    const { language, varselInnboksUrl } = useSelector(stateSelector);
-    const { varsler, varslerUleste } = useSelector(
+    const { varselInnboksUrl } = useSelector(stateSelector);
+    const { varsler } = useSelector(
         stateSelector
     );
 
@@ -30,10 +30,6 @@ export const Varselvisning = ({ setKbId }: Props) => {
 
     const cls = BEMHelper('varsler-visning');
 
-    const nyeVarslerMsg =
-        varslerUleste > 0
-            ? ` (${varslerUleste} ${finnTekst('varsler-nye', language)})`
-            : '';
     const visAlleVarslerLenke = varslerAntall > 5;
 
     return (
@@ -53,7 +49,6 @@ export const Varselvisning = ({ setKbId }: Props) => {
             )}
             {visAlleVarslerLenke && (
                 <AlleVarslerLenke
-                    nyeVarslerMsg={nyeVarslerMsg}
                     varselInnboksUrl={varselInnboksUrl}
                     rowIndex={setKbId ? 1 : undefined}
                 />
