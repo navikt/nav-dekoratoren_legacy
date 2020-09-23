@@ -2,16 +2,15 @@ import React from 'react';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { useSelector } from 'react-redux';
-import { VarslerParsed } from './VarslerParsed';
 import { Systemtittel } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
 import AlleVarslerLenke from './AlleVarslerLenke';
 import './Varselvisning.less';
+import { VarselListe } from './VarselListe';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
-    varslerAntall: state.varsler.data.antall,
-    varslerUleste: state.varsler.data.uleste,
+    varslerUleste: state.varsler.data.varsler.totaltAntallUleste,
     language: state.language.language,
     varselInnboksUrl: state.environment.API_VARSELINNBOKS_URL,
     varslerIsOpen: state.dropdownToggles.varsler,
@@ -23,9 +22,11 @@ type Props = {
 
 export const Varselvisning = ({ setKbId }: Props) => {
     const { language, varselInnboksUrl } = useSelector(stateSelector);
-    const { varsler, varslerAntall, varslerUleste } = useSelector(
+    const { varsler, varslerUleste } = useSelector(
         stateSelector
     );
+
+    const varslerAntall = varsler.nyesteVarsler?.length;
 
     const cls = BEMHelper('varsler-visning');
 
@@ -45,8 +46,8 @@ export const Varselvisning = ({ setKbId }: Props) => {
                     <Tekst id={'varsler-tom-liste'} />
                 </div>
             ) : (
-                <VarslerParsed
-                    varsler={varsler}
+                <VarselListe
+                    varsler={varsler.nyesteVarsler.slice(0, 5)}
                     rowIndex={setKbId ? 0 : undefined}
                 />
             )}
