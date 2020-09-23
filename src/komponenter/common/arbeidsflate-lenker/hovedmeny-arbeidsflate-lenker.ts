@@ -21,7 +21,7 @@ export const valgtbedrift = () => {
 const privatpersonLenker = (env: Environment): LenkeData[] => [
     {
         url: env.DITT_NAV_URL,
-        lenkeTekstId: 'person-minside-lenke',
+        lenkeTekstId: 'min-side',
         stikkordId: 'meny-bunnlenke-minside-stikkord',
     },
     arbeidsgiverContextLenke(env.XP_BASE_URL),

@@ -52,7 +52,7 @@ export const MinsidePersonKnapp = ({ classname, id }: Props) => {
                         isOpen ? cls.element('knapp-tekst-topp', 'open') : ''
                     }`}
                 >
-                    <Tekst id={'person-minside-lenke'} />
+                    <Tekst id={'min-side'} />
                 </span>
                 <span
                     className={`${cls.element('knapp-tekst-bunn')} ${
