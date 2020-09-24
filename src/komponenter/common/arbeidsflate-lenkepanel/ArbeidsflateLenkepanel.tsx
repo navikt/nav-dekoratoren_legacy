@@ -7,7 +7,7 @@ import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import { useDispatch } from 'react-redux';
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import { useCookies } from 'react-cookie';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
@@ -18,7 +18,7 @@ import './ArbeidsflateLenkepanel.less';
 
 interface Props {
     lenke: ArbeidsflateLenke;
-    language: Language;
+    language: Locale;
     analyticsEventArgs: AnalyticsEventArgs;
     enableCompactView?: boolean;
     id?: string;
