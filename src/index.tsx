@@ -29,7 +29,7 @@ const run = () => {
     fetchEnv()
         .then((environment) => {
             const cookies = new Cookies();
-            const store = createStore({ env: environment, cookies: cookies });
+            const store = createStore(environment, cookies);
             ReactDOM.render(
                 <ReduxProvider store={store}>
                     <CookiesProvider>

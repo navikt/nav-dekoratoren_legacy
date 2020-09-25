@@ -12,7 +12,6 @@ import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 import { CookiesProvider } from 'react-cookie';
 import hash from 'object-hash';
-import fetch from 'node-fetch';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -46,10 +45,7 @@ export const template = async (req: Request) => {
 
     // Create store based on request params
     const metaTags = MetaTagsServer();
-    const store = createStore({
-        env: env,
-        cookies: universalCookies,
-    });
+    const store = createStore(env, universalCookies);
 
     // Fetch params and forward to client
     const params = req.query;
