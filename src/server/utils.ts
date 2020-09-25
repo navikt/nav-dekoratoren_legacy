@@ -4,6 +4,7 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { AvailableLanguage, Locale } from 'store/reducers/language-duck';
 import { Breadcrumb } from '../komponenter/header/common/brodsmulesti/Brodsmulesti';
 import moment from 'moment';
+import fetch from 'node-fetch';
 
 interface Cookies {
     [key: string]: MenuValue | Locale | string;
@@ -16,9 +17,15 @@ interface Props {
 
 // Client environment
 // Obs! Don't expose secrets
-export const clientEnv = ({ req, cookies }: Props): Environment => {
+type PromiseEnv = Promise<Environment>;
+export const clientEnv = async ({ req, cookies }: Props): PromiseEnv => {
     // Throw errors if parameters are invalid
     validateClientEnv(req);
+
+    // Prefetch content
+    const alerts = await fetch(
+        `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`
+    ).then((res) => res.json());
 
     // Deprecated map
     const language = mapToLocale(req.query.language as string);
@@ -73,6 +80,8 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 LANGUAGE: cookies['decorator-language'] as Locale,
             },
         }),
+
+        ALERTS: alerts || [],
     };
 };
 

@@ -5,7 +5,14 @@ import Cookies from 'universal-cookie';
 import { Locale } from './reducers/language-duck';
 import { MenuValue } from '../utils/meny-storage-utils';
 
-export const createStore = (env?: Environment, cookies?: Cookies) => {
+interface Props {
+    env?: Environment;
+    cookies?: Cookies;
+}
+
+export const createStore = (props: Props) => {
+    const { env, cookies } = props;
+
     const composeEnhancers = (
         (typeof window !== 'undefined' &&
             (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||

@@ -12,6 +12,7 @@ import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 import { CookiesProvider } from 'react-cookie';
 import hash from 'object-hash';
+import fetch from 'node-fetch';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -23,11 +24,11 @@ const cache = new NodeCache({
     checkperiod: oneMinuteInSeconds,
 });
 
-export const template = (req: Request) => {
+export const template = async (req: Request) => {
     // Set environment based on request params
     const universalCookies = (req as any).universalCookies;
     const cookies = universalCookies.cookies;
-    const env = clientEnv({ req, cookies });
+    const env = await clientEnv({ req, cookies });
     const { SERVER_TIME, ...cachedEnv } = env;
 
     // Resources
@@ -45,7 +46,10 @@ export const template = (req: Request) => {
 
     // Create store based on request params
     const metaTags = MetaTagsServer();
-    const store = createStore(env, universalCookies);
+    const store = createStore({
+        env: env,
+        cookies: universalCookies,
+    });
 
     // Fetch params and forward to client
     const params = req.query;
