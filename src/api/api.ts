@@ -74,3 +74,14 @@ export const hentDriftsmeldinger = (
 
 export const hentChatbotConfig = (APP_URL: string): Promise<ChatConfig> =>
     fetchToJson(`${APP_URL}/api/chatConfig`);
+
+export const lagreTilbakemeldingFetch = (
+    FEEDBACK_API_URL: string,
+    feedback: Object,
+): Promise<number> =>
+    fetchToJson(`${FEEDBACK_API_URL}/feedback/report/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(feedback),
+        credentials: 'same-origin',
+    });

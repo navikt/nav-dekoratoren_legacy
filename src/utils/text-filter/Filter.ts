@@ -28,11 +28,7 @@ export class Filter {
         this.fodselsnummerValidator = new FodselsnummerValidator();
     }
 
-    /*
-
-    Legg til en overtredelse hvis den ikke finnes fra før
-
-    */
+    /* Legg til en overtredelse hvis den ikke finnes fra før*/
     addViolation(violation: string) {
         if (!this.violations.includes(violation)) {
             this.violations.push(violation)

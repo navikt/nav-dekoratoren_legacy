@@ -1,9 +1,9 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RadioGruppe, Radio, Feiloppsummering } from 'nav-frontend-skjema';
 import { Element, Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
-import FeedbackMessage from '../common/feedback-message/FeedbackMessage';
+import FeedbackMessage from '../feedback-message/FeedbackMessage';
 import sendFeedbackReport from './send-feedback-report';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
@@ -11,9 +11,14 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import './AlternativFeilMangler.less';
 
+const stateSelector = (state: AppState) => ({
+    feebackUrl: state.environment.FEEDBACK_API_URL
+});
+
 const AlternativFeilMangler = () => {
     const [category, setCategory] = useState(String);
     const [feedbackMessage, setFeedbackMessage] = useState('');
+    const { feebackUrl } = useSelector(stateSelector);
 
     const [thankYouMessage, setThankYouMessage] = useState(false);
 
@@ -43,6 +48,7 @@ const AlternativFeilMangler = () => {
                 sendFeedbackReport(
                     category,
                     feedbackMessage,
+                    feebackUrl,
                     language.toLowerCase()
                 );
                 setThankYouMessage(true);
@@ -68,7 +74,7 @@ const AlternativFeilMangler = () => {
     }, [category]);
 
     return (
-        <Fragment>
+        <>
             {!thankYouMessage ? (
                 <div className="rapporter-om-feil-wrapper">
                     <div className="overskrift-container">
@@ -84,8 +90,8 @@ const AlternativFeilMangler = () => {
                             </Element>
 
                             <RadioGruppe
+                                className=""
                                 feil={errors.radiobuttonErrorMessage}
-                                id="category"
                             >
                                 <Radio
                                     label={<Tekst id="teknisk-feil" />}
@@ -112,31 +118,30 @@ const AlternativFeilMangler = () => {
                                     }
                                 />
                             </RadioGruppe>
-
-                            <div>
+                            <>
                                 <Element>
-                                    <Tekst id="din-tilbakemelding" />
+                                    <Tekst id="din-tilbakemelding-label" />
                                 </Element>
-
                                 <FeedbackMessage
                                     feedbackMessage={feedbackMessage}
                                     setFeedbackMessage={setFeedbackMessage}
                                     errors={errors}
                                     setErrors={setErrors}
                                 />
-                            </div>
+                            </>
 
-                            {errors.radiobuttonErrorMessage.length ? (
+                            {/*errors.radiobuttonErrorMessage.length ? (
                                 <Feiloppsummering
                                     tittel="For å gå videre må du rette opp følgende:"
                                     feil={[
                                         {
-                                            skjemaelementId: 'category',
+                                            skjemaelementId: 'teknisk-feil',
                                             feilmelding: errors.radiobuttonErrorMessage.toString(),
                                         },
                                     ]}
                                 />
-                            ) : null}
+                            ) : null
+                            */}
 
                             <div className="knapper">
                                 <div className="send-inn">
@@ -155,7 +160,7 @@ const AlternativFeilMangler = () => {
             ) : (
                 <Thankyou showFeedbackUsage={true} />
             )}
-        </Fragment>
+        </>
     );
 };
 

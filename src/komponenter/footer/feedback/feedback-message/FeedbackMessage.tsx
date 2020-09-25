@@ -19,24 +19,23 @@ const FeedbackMessage = ({
     errors,
     setErrors
 }: Props) => {
-    const getViolationsFormatted = () => {
-        const filter = new Filter([]);
 
-        filter.checkForViolations(feedbackMessage);
+    const violationsMemoized = useMemo(
+        () => {
+            const filter = new Filter([]);
+            filter.checkForViolations(feedbackMessage);
+            return filter.getViolationsFormatted();
+        }
 
-        return filter.getViolationsFormatted();
-    };
-
-    const violationsMemoized = useMemo(() => getViolationsFormatted(), [
-        feedbackMessage,
-    ]);
+        , [feedbackMessage]
+    );
 
     useEffect(() => {
         setErrors({...errors, textFieldValidInputs: violationsMemoized })
     }, [violationsMemoized])
 
     return (
-        <Fragment>
+        <>
             <div className="advarsel">
                 <Alertstripe type="advarsel">
                     <Tekst id="advarsel-om-personopplysninger" />
@@ -48,7 +47,7 @@ const FeedbackMessage = ({
                 onChange={(e) => setFeedbackMessage(e.target.value)}
             />
 
-            {/* {violationsMemoized.length ? (
+            { violationsMemoized.length ? (
                 <Alertstripe
                     className="personvernAdvarsel"
                     form="inline"
@@ -60,8 +59,8 @@ const FeedbackMessage = ({
                         riktig kan du trykke 'Send inn'
                     </Normaltekst>
                 </Alertstripe>
-            ) : null} */}
-        </Fragment>
+            ) : null }
+        </>
     );
 };
 

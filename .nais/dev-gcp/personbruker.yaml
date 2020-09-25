@@ -49,6 +49,8 @@ spec:
           value: https://loginservice.dev.nav.no
         - name: LOGOUT_URL
           value: https://loginservice.dev.nav.no/slo
+        - name: FEEDBACK_API_URL
+          value: https://dekoratoren-feedback-api.dev.nav.no
     resources:
         limits:
             cpu: '3'

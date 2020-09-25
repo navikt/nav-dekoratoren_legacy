@@ -1,9 +1,8 @@
 import amplitudeTriggers from 'utils/amplitude-triggers';
-import fetchFeedback from '../common/api/fetch-feedback';
-import { chooseFeedbackReportRemote } from '../common/api/remotes-handler';
 import { logAmplitudeEvent } from 'utils/amplitude';
+import { lagreTilbakemelding } from '../../../../store/reducers/tilbakemelding-duck';
 
-function sendFeedbackReport(category: string, message: string, language: string): void {
+const sendFeedbackReport = (category: string, message: string, url: string, language: string) => {
     const feedbackReport = {
         category: category.toUpperCase(),
         message: message,
@@ -14,10 +13,7 @@ function sendFeedbackReport(category: string, message: string, language: string)
         languageCode: language,
     };
 
-    const remote = chooseFeedbackReportRemote()
-
-    fetchFeedback(feedbackReport, remote)
-
+    lagreTilbakemelding(feedbackReport, url);
     logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, { svar: category })
 };
 

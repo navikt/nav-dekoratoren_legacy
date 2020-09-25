@@ -255,9 +255,9 @@ export const ledetekster: { [key: string]: string } = {
     'velg-type-feil-mangler': 'Hva slags feil eller mangel fant du?',
     'velg-type-feil-mangler-en': 'What kind of error did you find?',
     'velg-type-feil-mangler-se': 'Hva slags feil eller mangel fant du?',
-    'din-tilbakemelding': 'Hva gikk galt?',
-    'din-tilbakemelding-en': 'What went wrong?',
-    'din-tilbakemelding-se': 'Hva som gikk galt?',
+    'din-tilbakemelding-label': 'Hva gikk galt?',
+    'din-tilbakemelding-label-en': 'What went wrong?',
+    'din-tilbakemelding-label-se': 'Hva som gikk galt?',
     'advarsel-om-personopplysninger':
         'Unngå sensitive personopplysninger, som for eksempel opplysninger om helseforhold eller diagnoser. Du kan ikke spørre om status i saken din, da må du logge inn og sjekke på Ditt NAV under Dine saker.',
     'advarsel-om-personopplysninger-en': 'This is a warning',
