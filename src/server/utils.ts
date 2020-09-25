@@ -1,10 +1,11 @@
 import { Request } from 'express';
-import { Environment } from 'store/reducers/environment-duck';
+import { Driftsmelding, Environment } from 'store/reducers/environment-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { AvailableLanguage, Locale } from 'store/reducers/language-duck';
 import { Breadcrumb } from '../komponenter/header/common/brodsmulesti/Brodsmulesti';
 import moment from 'moment';
 import fetch from 'node-fetch';
+import NodeCache from 'node-cache';
 
 interface Cookies {
     [key: string]: MenuValue | Locale | string;
@@ -15,17 +16,14 @@ interface Props {
     cookies: Cookies;
 }
 
+const alertCache = 'alerts';
+
 // Client environment
 // Obs! Don't expose secrets
 type PromiseEnv = Promise<Environment>;
 export const clientEnv = async ({ req, cookies }: Props): PromiseEnv => {
     // Throw errors if parameters are invalid
     validateClientEnv(req);
-
-    // Prefetch content
-    const alerts = await fetch(
-        `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`
-    ).then((res) => res.json());
 
     // Deprecated map
     const language = mapToLocale(req.query.language as string);
@@ -38,6 +36,15 @@ export const clientEnv = async ({ req, cookies }: Props): PromiseEnv => {
     const appUrl = `${process.env.APP_BASE_URL || ``}${
         process.env.APP_BASE_PATH || ``
     }` as string;
+
+    // Prefetch content
+    let alerts = cache.get(alertCache) as Driftsmelding[];
+    if (!alerts) {
+        alerts = await fetch(
+            `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`
+        ).then((res) => res.json());
+        cache.set(alertCache, alerts);
+    }
 
     return {
         XP_BASE_URL: process.env.XP_BASE_URL as string,
@@ -201,3 +208,8 @@ const mapToLocale = (language?: string) => {
 export const fiveMinutesInSeconds = 5 * 60;
 export const oneMinuteInSeconds = 60;
 export const tenSeconds = 10;
+
+const cache = new NodeCache({
+    stdTTL: fiveMinutesInSeconds,
+    checkperiod: oneMinuteInSeconds,
+});
