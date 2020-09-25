@@ -7,7 +7,7 @@ import FeedbackMessage from '../feedback-message/FeedbackMessage';
 import sendFeedbackReport from './send-feedback-report';
 import Thankyou from '../feedback-thank-you/ThankYou';
 import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import './AlternativFeilMangler.less';
 
@@ -19,7 +19,7 @@ const AlternativFeilMangler = () => {
     const [category, setCategory] = useState(String);
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const { feebackUrl } = useSelector(stateSelector);
-
+    const dispatch = useDispatch();
     const [thankYouMessage, setThankYouMessage] = useState(false);
 
     const [errors, setErrors] = useState({
@@ -49,7 +49,8 @@ const AlternativFeilMangler = () => {
                     category,
                     feedbackMessage,
                     feebackUrl,
-                    language.toLowerCase()
+                    language.toLowerCase(),
+                    dispatch
                 );
                 setThankYouMessage(true);
             }

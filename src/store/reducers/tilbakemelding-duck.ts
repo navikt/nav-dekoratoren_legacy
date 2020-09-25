@@ -2,30 +2,17 @@ import { ActionType } from 'store/actions';
 import { Handling } from 'store/actions';
 import { SettTilbakemeldingFEILETAction } from 'store/actions';
 import { SettTilbakemeldingPENDINGAction } from 'store/actions';
-//  Reducer
-export function lagreTilbakemelding(
-    feedback: Object,
-    FEEDBACK_API_URL: string
-) {
-    fetchThenDispatch<number>(() => lagreTilbakemeldingFetch(FEEDBACK_API_URL, feedback), {
-        ok: settTilbakemeldingOk,
-        feilet: settTilbakemeldingFeilet,
-        pending: settTilbakemeldingPending,
-    });
-}
 import { SettTilbakemeldingOKAction } from 'store/actions';
-import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
 import { lagreTilbakemeldingFetch } from 'api/api';
-
 import { DataElement, Status } from 'api/api';
 
-export const initialLestMeldingState: DataElement = {
+export const initalState: DataElement = {
     status: Status.IKKE_STARTET,
 };
 
 export default function reducer(
-    state: DataElement = initialLestMeldingState,
+    state: DataElement = initalState,
     action: Handling
 ): DataElement {
     switch (action.type) {
@@ -38,6 +25,17 @@ export default function reducer(
         default:
             return state;
     }
+}
+
+export function lagreTilbakemelding(
+    feedback: Object,
+    FEEDBACK_API_URL: string
+) {
+    return fetchThenDispatch<number>(() => lagreTilbakemeldingFetch(feedback, FEEDBACK_API_URL), {
+        ok: settTilbakemeldingOk,
+        feilet: settTilbakemeldingFeilet,
+        pending: settTilbakemeldingPending,
+    });
 }
 
 function settTilbakemeldingOk(): SettTilbakemeldingOKAction {
