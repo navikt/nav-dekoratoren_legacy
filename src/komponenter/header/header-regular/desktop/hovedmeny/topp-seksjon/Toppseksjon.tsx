@@ -43,8 +43,8 @@ export const Toppseksjon = ({ classname }: Props) => {
                 href={context.url}
                 onClick={(event) => {
                     setCookie('decorator-context', context.key, cookieOptions);
+                    dispatch(settArbeidsflate(context.key));
                     if (erNavDekoratoren()) {
-                        dispatch(settArbeidsflate(context.key));
                         event.preventDefault();
                     }
                 }}

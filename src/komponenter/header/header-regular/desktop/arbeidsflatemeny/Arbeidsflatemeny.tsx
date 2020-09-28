@@ -52,8 +52,8 @@ const Arbeidsflatemeny = () => {
                                         lenke.key,
                                         cookieOptions
                                     );
+                                    dispatch(settArbeidsflate(lenke.key));
                                     if (erNavDekoratoren()) {
-                                        dispatch(settArbeidsflate(lenke.key));
                                         event.preventDefault();
                                     }
                                 }}
