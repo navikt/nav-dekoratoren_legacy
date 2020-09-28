@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import express, { NextFunction, Request, Response } from 'express';
 import { createMiddleware } from '@promster/express';
 import { getSummary, getContentType } from '@promster/express';
-import { oneMinuteInSeconds, tenSeconds } from './utils';
+import { oneMinuteInSeconds, thirtySeconds } from './utils';
 import { clientEnv, fiveMinutesInSeconds } from './utils';
 import cookiesMiddleware from 'universal-cookie-express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
@@ -29,8 +29,8 @@ const PORT = 8088;
 const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
 const mainCache = new NodeCache({
-    stdTTL: tenSeconds,
-    checkperiod: oneMinuteInSeconds,
+    stdTTL: oneMinuteInSeconds,
+    checkperiod: thirtySeconds,
 });
 const backupCache = new NodeCache({
     stdTTL: 0,

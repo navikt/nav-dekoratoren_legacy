@@ -207,9 +207,9 @@ const mapToLocale = (language?: string) => {
 // Time utils
 export const fiveMinutesInSeconds = 5 * 60;
 export const oneMinuteInSeconds = 60;
-export const tenSeconds = 10;
+export const thirtySeconds = 10;
 
 const cache = new NodeCache({
-    stdTTL: fiveMinutesInSeconds,
-    checkperiod: oneMinuteInSeconds,
+    stdTTL: oneMinuteInSeconds,
+    checkperiod: thirtySeconds,
 });
