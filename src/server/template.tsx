@@ -23,11 +23,11 @@ const cache = new NodeCache({
     checkperiod: oneMinuteInSeconds,
 });
 
-export const template = async (req: Request) => {
+export const template = (req: Request) => {
     // Set environment based on request params
     const universalCookies = (req as any).universalCookies;
     const cookies = universalCookies.cookies;
-    const env = await clientEnv({ req, cookies });
+    const env = clientEnv({ req, cookies });
     const { SERVER_TIME, ...cachedEnv } = env;
 
     // Resources

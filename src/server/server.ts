@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import express, { NextFunction, Request, Response } from 'express';
 import { createMiddleware } from '@promster/express';
 import { getSummary, getContentType } from '@promster/express';
-import { oneMinuteInSeconds, thirtySeconds } from './utils';
+import { oneMinuteInSeconds, tenSeconds } from './utils';
 import { clientEnv, fiveMinutesInSeconds } from './utils';
 import cookiesMiddleware from 'universal-cookie-express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
@@ -29,8 +29,8 @@ const PORT = 8088;
 const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
 const mainCache = new NodeCache({
-    stdTTL: oneMinuteInSeconds,
-    checkperiod: thirtySeconds,
+    stdTTL: tenSeconds,
+    checkperiod: oneMinuteInSeconds,
 });
 const backupCache = new NodeCache({
     stdTTL: 0,
@@ -80,18 +80,18 @@ const pathsForTemplate = [
     `${oldBasePath}`,
 ];
 
-app.get(pathsForTemplate, async (req, res, next) => {
+app.get(pathsForTemplate, (req, res, next) => {
     try {
-        res.send(await template(req));
+        res.send(template(req));
     } catch (e) {
         next(e);
     }
 });
 
-app.get(`${appBasePath}/env`, async (req, res, next) => {
+app.get(`${appBasePath}/env`, (req, res, next) => {
     try {
         const cookies = (req as any).universalCookies.cookies;
-        res.send(await clientEnv({ req, cookies }));
+        res.send(clientEnv({ req, cookies }));
     } catch (e) {
         next(e);
     }
@@ -154,6 +154,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
 // Proxied requests
 const proxiedAuthUrl = `${appBasePath}/api/auth`;
 const proxiedVarslerUrl = `${appBasePath}/api/varsler`;
+const proxiedDriftsmeldingerUrl = `${appBasePath}/api/driftsmeldinger`;
 const proxiedSokUrl = `${appBasePath}/api/sok`;
 
 app.use(
@@ -179,6 +180,15 @@ app.use(
     createProxyMiddleware(proxiedSokUrl, {
         target: `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`,
         pathRewrite: { [`^${proxiedSokUrl}`]: '' },
+        changeOrigin: true,
+    })
+);
+
+app.use(
+    proxiedDriftsmeldingerUrl,
+    createProxyMiddleware(proxiedDriftsmeldingerUrl, {
+        target: `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`,
+        pathRewrite: { [`^${proxiedDriftsmeldingerUrl}`]: '' },
         changeOrigin: true,
     })
 );

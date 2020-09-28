@@ -12,6 +12,7 @@ import { languageDuck, Locale } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
+import { fetchDriftsmeldinger } from 'store/reducers/driftsmeldinger-duck';
 import { fetchFeatureToggles, Status } from 'api/api';
 import { ActionType } from 'store/actions';
 import { loadVergic } from 'utils/external-scripts';
@@ -82,6 +83,7 @@ export const Header = () => {
 
     // Handle external data
     useEffect(() => {
+        fetchDriftsmeldinger(APP_URL)(dispatch);
         hentInnloggingsstatus(APP_URL)(dispatch);
         fetchMenypunkter(APP_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
@@ -94,7 +96,7 @@ export const Header = () => {
             } else {
                 fetchFeatureToggles(
                     API_UNLEASH_PROXY_URL,
-                    currentFeatureToggles
+                    currentFeatureToggles,
                 )
                     .then((updatedFeatureToggles) => {
                         dispatch({
@@ -109,7 +111,7 @@ export const Header = () => {
                     })
                     .catch((error) => {
                         console.error(
-                            `Failed to fetch feature-toggles: ${error}`
+                            `Failed to fetch feature-toggles: ${error}`,
                         );
                     });
             }
@@ -140,7 +142,7 @@ export const Header = () => {
         setCookie(
             decoratorContextCookie,
             MenuValue.PRIVATPERSON,
-            cookieOptions
+            cookieOptions,
         );
     };
 
@@ -189,7 +191,7 @@ export const Header = () => {
                 if (source === 'decoratorClient' && event === 'ready') {
                     window.postMessage(
                         { source: 'decorator', event: 'ready' },
-                        window.location.origin
+                        window.location.origin,
                     );
                 }
             }

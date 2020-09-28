@@ -1,20 +1,25 @@
 import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
+import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { AnalyticsCategory } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import './Driftsmeldinger.less';
 
 export const Driftsmeldinger = () => {
-    const { environment } = useSelector((state: AppState) => state);
-    const { XP_BASE_URL } = environment;
-    const driftsmeldinger = environment.ALERTS;
+    const { driftsmeldinger, environment } = useSelector(
+        (state: AppState) => state
+    );
 
-    return driftsmeldinger.length ? (
+    const { XP_BASE_URL } = environment;
+    const visDriftsmeldinger =
+        driftsmeldinger.status === 'OK' && driftsmeldinger.data.length > 0;
+
+    return visDriftsmeldinger ? (
         <section className="driftsmeldinger">
             <div>
-                {driftsmeldinger.map((melding) => {
+                {driftsmeldinger.data.map((melding: DriftsmeldingerData) => {
                     return (
                         <LenkeMedSporing
                             key={melding.heading}
