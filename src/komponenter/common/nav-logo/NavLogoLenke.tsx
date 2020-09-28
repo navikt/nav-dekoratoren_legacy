@@ -38,12 +38,10 @@ export const NavLogoLenke = (props: Props) => {
             href={url}
             analyticsEventArgs={props.analyticsEventArgs}
             onClick={(event) => {
-                event.preventDefault();
                 setCookie('decorator-context', context.key, cookieOptions);
                 if (erNavDekoratoren()) {
                     dispatch(settArbeidsflate(context.key));
-                } else {
-                    window.location.href = url;
+                    event.preventDefault();
                 }
             }}
             id={props.id}
