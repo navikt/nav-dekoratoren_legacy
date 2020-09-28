@@ -1,7 +1,6 @@
 import { Data as innloggingsstatusData } from './reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from './reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from './reducers/menu-duck';
-import { DriftsmeldingerData } from './reducers/driftsmeldinger-duck';
 import { Environment, Params } from './reducers/environment-duck';
 import { FeatureToggles } from './reducers/feature-toggles-duck';
 
@@ -65,19 +64,6 @@ export interface HentMenyLenkerPENDING {
 
 export interface HentMenyLenkerFAILED {
     type: ActionType.HENT_MENY_FEILET;
-}
-
-export interface HentDriftsmeldingSUCCESS {
-    type: ActionType.HENT_DRIFTSMELDING_OK;
-    data: DriftsmeldingerData[];
-}
-
-export interface HentDriftsmeldingPENDING {
-    type: ActionType.HENT_DRIFTSMELDING_PENDING;
-}
-
-export interface HentDriftsmeldingFAILED {
-    type: ActionType.HENT_DRIFTSMELDING_FEILET;
 }
 
 export interface HentVarslerOKAction {
@@ -184,9 +170,6 @@ export type Handling =
     | HentMenyLenkerSUCCESS
     | HentMenyLenkerFAILED
     | HentMenyLenkerPENDING
-    | HentDriftsmeldingSUCCESS
-    | HentDriftsmeldingFAILED
-    | HentDriftsmeldingPENDING
     | HentVarslerOKAction
     | HentVarslerFEILETAction
     | HentVarslerPENDINGAction

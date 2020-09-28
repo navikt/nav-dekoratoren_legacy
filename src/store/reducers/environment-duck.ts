@@ -1,5 +1,5 @@
 import { MenuValue } from 'utils/meny-storage-utils';
-import { ActionType, Handling, HentDriftsmeldingSUCCESS } from '../actions';
+import { ActionType, Handling } from '../actions';
 import { Locale, AvailableLanguage } from './language-duck';
 import { Breadcrumb } from '../../komponenter/header/common/brodsmulesti/Brodsmulesti';
 
@@ -19,6 +19,9 @@ export interface Environment {
     // Parameters
     PARAMS: Params;
     COOKIES: Cookies;
+
+    // CONTENT
+    ALERTS: Driftsmelding[];
 }
 
 export interface Params {
@@ -73,7 +76,16 @@ export const initialState: Environment = {
         LANGUAGE: Locale.IKKEBESTEMT,
         CONTEXT: MenuValue.IKKEBESTEMT,
     },
+
+    // Content
+    ALERTS: [],
 };
+
+export interface Driftsmelding {
+    heading: string;
+    url: string;
+    type: string;
+}
 
 export const reducer = (
     state: Environment = initialState,
