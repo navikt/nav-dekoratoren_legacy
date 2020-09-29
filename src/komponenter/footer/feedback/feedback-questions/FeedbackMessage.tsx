@@ -1,4 +1,4 @@
-import React, { Fragment, useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { Textarea } from 'nav-frontend-skjema';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
@@ -6,19 +6,26 @@ import { Filter } from 'utils/text-filter/Filter';
 import Tekst from 'tekster/finn-tekst';
 import './FeedbackMessage.less';
 
+
+export const MAX_LENGTH = 1000;
 interface Props {
     feedbackMessage: string;
     setFeedbackMessage: any;
     errors: object;
-    setErrors: any; 
+    setErrors: any;
+    label?: React.ReactNode;
+    description?: React.ReactNode;
 }
 
 const FeedbackMessage = ({
     feedbackMessage,
     setFeedbackMessage,
     errors,
-    setErrors
+    setErrors,
+    label,
+    description
 }: Props) => {
+
 
     const violationsMemoized = useMemo(
         () => {
@@ -34,19 +41,18 @@ const FeedbackMessage = ({
         setErrors({...errors, textFieldValidInputs: violationsMemoized })
     }, [violationsMemoized])
 
+
+
     return (
         <>
-            <div className="advarsel">
-                <Alertstripe type="advarsel">
-                    <Tekst id="advarsel-om-personopplysninger" />
-                </Alertstripe>
-            </div>
-
             <Textarea
                 value={feedbackMessage}
                 onChange={(e) => setFeedbackMessage(e.target.value)}
+                description={description}
+                label={label}
+                placeholder="Skriv din tilbakemelding her"
+                maxLength={MAX_LENGTH}
             />
-
             { violationsMemoized.length ? (
                 <Alertstripe
                     className="personvernAdvarsel"

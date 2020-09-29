@@ -1,0 +1,34 @@
+@import (reference) '../../../../styling-variabler.less';
+
+.alternativ-wrapper {
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-evenly;
+
+    .alternativ-overskrift {
+        margin-bottom: 1em;
+    }
+
+    .alternativ-notis {
+        margin: 2em 0 2em;
+    }
+
+    .knapper {
+        display: flex;
+        margin-top: 0.5em;
+        flex-wrap: wrap;
+
+        .send-inn {
+            margin-right: 0.25em;
+            transform: none;
+            box-shadow: none;
+
+            @media @screen-mobile {
+                padding-bottom: 0.25em;
+            }
+
+        }
+    }
+
+}
+

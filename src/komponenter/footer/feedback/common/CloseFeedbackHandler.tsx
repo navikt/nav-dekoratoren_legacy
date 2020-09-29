@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { CloseFeedbackContext } from './CloseFeedbackContext';
 import amplitudeTriggers from 'utils/amplitude-triggers';
-import { Knapp } from 'nav-frontend-knapper';
+import { Flatknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { logAmplitudeEvent } from 'utils/amplitude';
 
@@ -27,11 +27,9 @@ const CloseFeedbackHandler = ({ context }: Props) => {
     };
 
     return (
-        <div>
-            <Knapp onClick={userClosedFeedback} htmlType="button">
-                <Tekst id="avbryt" />
-            </Knapp>
-        </div>
+        <Flatknapp mini onClick={userClosedFeedback} htmlType="button">
+            <Tekst id="avbryt" />
+        </Flatknapp>
     );
 };
 
