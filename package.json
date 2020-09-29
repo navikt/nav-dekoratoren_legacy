@@ -83,7 +83,7 @@
         "node-fetch": "^2.6.1",
         "object-hash": "^2.0.3",
         "prom-client": "^12.0.0",
-        "query-string": "6.13.1",
+        "query-string": "6.13.4",
         "react": "^16.13.1",
         "react-app-polyfill": "^1.0.6",
         "react-collapse": "^5.0.1",
