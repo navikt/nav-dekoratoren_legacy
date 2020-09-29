@@ -2,7 +2,9 @@ import { gradualRolloutFeatureToggle } from 'utils/gradual-rollout-feature-toggl
 import moment from 'moment-timezone';
 
 export const isEnonicPage = () =>
-    /(nav.no|^)(\/no|\/en|\/se)/.test(document.location.href);
+    /(www.*.nav.no|^nav.no|^)($|\/$|\/no|\/en|\/se|\/nav.no|\/sok($|\/|\?))/.test(
+        document.location.href
+    );
 
 const pathsAlwaysEnabled = [
     '/no/person/innhold-til-person-forside/nyttig-a-vite/kampanje-korona/tilbakebetaling-og-trekk-av-forskudd-pa-dagpenger',
@@ -16,7 +18,7 @@ export type EnonicChatConfig = {
 
 export const defaultEnonicConfig: EnonicChatConfig = {
     toggle: true,
-    percentage: 50,
+    percentage: 100,
 };
 
 export const enonicFeatureToggle = (chatConfig: EnonicChatConfig) => {
