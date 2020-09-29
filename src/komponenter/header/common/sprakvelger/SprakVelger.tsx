@@ -29,15 +29,16 @@ export type LocaleOption = {
 };
 
 interface Props {
-    availableLanguages: AvailableLanguage[];
+    languages: AvailableLanguage[];
 }
 
 export const SprakVelger = (props: Props) => {
     const store = useStore();
     const cls = BEMHelper('sprakvelger');
+    const availableLanguages = props.languages;
     const { language } = useSelector((state: AppState) => state.language);
     const [, setCookie] = useCookies([decoratorLanguageCookie]);
-    const options = transformOptions(props.availableLanguages).sort((a, b) =>
+    const options = transformOptions(availableLanguages).sort((a, b) =>
         a.label > b.label ? -1 : 1
     );
 
