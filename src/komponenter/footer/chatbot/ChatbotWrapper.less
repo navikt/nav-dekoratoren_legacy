@@ -1,32 +1,44 @@
 @import (reference) '../../../styling-variabler.less';
 
 .chatbot-dock {
+    position: absolute;
+    width: 100%;
+}
+
+.chatbot-fixed-container {
+    position: fixed;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 68px;
-}
-
-.chatbot-container {
-    position: fixed;
-    bottom: 50px;
-    right: 50px;
-    z-index: 1001;
-
-    &__menu-active {
-        z-index: 998;
-    }
+    width: calc(@desktopMaxWidth - @margins-sides-desktop * 2);
+    bottom: 2rem;
 
     @media @screen-desktop-medium-down {
-        right: 2rem;
+        width: calc(100% - @margins-sides-desktop-footer * 2);
     }
 
     @media @screen-desktop-small-width-down {
-        right: 1rem;
+        width: calc(100% - @margins-sides-desktop-small * 2);
     }
 
     @media @screen-mobile {
-        bottom: 20px;
-        right: 20px;
+        width: calc(100% - @margins-sides-mobil * 2);
+        bottom: 1rem;
+    }
+
+    &__docked {
+        position: relative;
+        width: 100%;
+        bottom: 0;
+    }
+}
+
+.chatbot-inner-container {
+    position: relative;
+    z-index: 1001;
+    height: 68px;
+
+    &__menu-active {
+        z-index: 998;
     }
 }

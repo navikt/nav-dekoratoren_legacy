@@ -1,12 +1,30 @@
 @import (reference) '../../../styling-variabler.less';
 
 .simple-footer {
+    @min-height: 5.5rem;
+
     &__container {
-        min-height: 5.5rem;
+        min-height: @min-height;
         display: flex;
         padding: 0.5rem 0;
         border-top: 2px solid #0067c5;
         justify-content: center;
+
+        .chatbot-fixed-container {
+            bottom: @min-height;
+            right: 2rem;
+            width: 100%;
+
+            @media @screen-desktop-small-width-down {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+
+        .chatbot-dock {
+            @media @screen-desktop-small-width-down {
+            }
+        }
     }
 
     &__content {
@@ -17,11 +35,9 @@
         @media @screen-desktop-medium-up {
             justify-content: space-between;
             align-items: center;
-            padding: 0 3rem;
         }
         @media @screen-desktop-small-width-down {
             flex-direction: column;
-            padding: 1rem 1rem;
         }
     }
 
@@ -44,13 +60,9 @@
     &__right-col {
         position: relative;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
-
-        .chatbot-container {
-            padding-left: 1rem;
-            bottom: 4px;
-        }
+        width: 100%;
     }
 
     &__del-skjerm {

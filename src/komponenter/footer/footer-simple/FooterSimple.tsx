@@ -50,6 +50,7 @@ const FooterSimple = () => {
     return (
         <Fragment>
             <div className={cls.element('container')}>
+                <ChatbotWrapper />
                 <div className={cls.element('content')}>
                     <ul className={cls.element('personvern-lenker')}>
                         <FooterLenker node={personvernNode} />
@@ -65,7 +66,6 @@ const FooterSimple = () => {
                                 />
                             }
                         />
-                        <ChatbotWrapper />
                     </div>
                     {isOpen && (
                         <DelSkjermModal isOpen={isOpen} onClose={closeModal} />
