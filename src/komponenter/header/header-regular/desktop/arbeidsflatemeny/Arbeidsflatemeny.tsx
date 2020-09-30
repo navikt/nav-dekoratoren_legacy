@@ -47,16 +47,14 @@ const Arbeidsflatemeny = () => {
                                 })}
                                 href={lenke.url}
                                 onClick={(event) => {
-                                    event.preventDefault();
                                     setCookie(
                                         'decorator-context',
                                         lenke.key,
                                         cookieOptions
                                     );
+                                    dispatch(settArbeidsflate(lenke.key));
                                     if (erNavDekoratoren()) {
-                                        dispatch(settArbeidsflate(lenke.key));
-                                    } else {
-                                        window.location.href = lenke.url;
+                                        event.preventDefault();
                                     }
                                 }}
                                 analyticsEventArgs={{

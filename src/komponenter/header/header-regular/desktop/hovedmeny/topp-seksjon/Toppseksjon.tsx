@@ -42,12 +42,10 @@ export const Toppseksjon = ({ classname }: Props) => {
             <LenkeMedSporing
                 href={context.url}
                 onClick={(event) => {
-                    event.preventDefault();
                     setCookie('decorator-context', context.key, cookieOptions);
+                    dispatch(settArbeidsflate(context.key));
                     if (erNavDekoratoren()) {
-                        dispatch(settArbeidsflate(context.key));
-                    } else {
-                        window.location.href = context.url;
+                        event.preventDefault();
                     }
                 }}
                 id={KbNav.getKbId(KbNavGroup.Hovedmeny, {
