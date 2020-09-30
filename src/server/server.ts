@@ -61,6 +61,7 @@ app.use((req, res, next) => {
 // Metrics
 app.use(
     createMiddleware({
+        // @ts-ignore
         app,
         options: {
             labels: ['app', 'namespace', 'cluster'],
