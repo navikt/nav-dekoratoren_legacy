@@ -2,15 +2,19 @@
 
 .chatbot-dock {
     position: absolute;
+    display: flex;
+    justify-content: center;
     width: 100%;
 }
 
-.chatbot-fixed-container {
+.chatbot-container {
     position: fixed;
+    z-index: 1001;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     width: calc(@desktopMaxWidth - @margins-sides-desktop * 2);
+    height: 68px;
     bottom: 2rem;
 
     @media @screen-desktop-medium-down {
@@ -31,12 +35,6 @@
         width: 100%;
         bottom: 0;
     }
-}
-
-.chatbot-inner-container {
-    position: relative;
-    z-index: 1001;
-    height: 68px;
 
     &__menu-active {
         z-index: 998;

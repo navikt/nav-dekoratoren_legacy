@@ -6,24 +6,16 @@
     &__container {
         min-height: @min-height;
         display: flex;
-        padding: 0.5rem 0;
+        padding: 0.5rem @margins-sides-desktop-footer;
         border-top: 2px solid #0067c5;
         justify-content: center;
 
-        .chatbot-fixed-container {
-            bottom: @min-height;
-            right: 2rem;
-            width: 100%;
-
-            @media @screen-desktop-small-width-down {
-                bottom: 1rem;
-                right: 1rem;
-            }
+        .chatbot-container {
+            bottom: 0.75rem;
         }
 
-        .chatbot-dock {
-            @media @screen-desktop-small-width-down {
-            }
+        @media @screen-desktop-small-width-down {
+            padding: 0.5rem @margins-sides-desktop-small;
         }
     }
 
@@ -33,7 +25,7 @@
         display: flex;
 
         @media @screen-desktop-medium-up {
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
         }
         @media @screen-desktop-small-width-down {
@@ -55,14 +47,6 @@
                 padding: 0.375rem 0 0.375rem 0;
             }
         }
-    }
-
-    &__right-col {
-        position: relative;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        width: 100%;
     }
 
     &__del-skjerm {

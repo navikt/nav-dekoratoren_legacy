@@ -117,27 +117,19 @@ export const ChatbotWrapper = ({
     return mountChatbot ? (
         <div className={'chatbot-dock'} ref={dockRef}>
             <div
-                className={`chatbot-fixed-container${
-                    isDocked ? ' chatbot-fixed-container__docked' : ''
-                }`}
+                className={`chatbot-container${
+                    isDocked ? ' chatbot-container__docked' : ''
+                }${menuIsActive ? ' chatbot-container__menu-active' : ''}`}
                 ref={containerRef}
             >
-                <div
-                    className={`chatbot-inner-container${
-                        menuIsActive
-                            ? ' chatbot-inner-container__menu-active'
-                            : ''
-                    }`}
-                >
-                    <Chat
-                        customerKey={customerKey}
-                        queueKey={queueKey}
-                        configId={configId}
-                        label={labelText}
-                        analyticsCallback={logAmplitudeEvent}
-                        analyticsSurvey={chatConfig?.analytics || defaultSurvey}
-                    />
-                </div>
+                <Chat
+                    customerKey={customerKey}
+                    queueKey={queueKey}
+                    configId={configId}
+                    label={labelText}
+                    analyticsCallback={logAmplitudeEvent}
+                    analyticsSurvey={chatConfig?.analytics || defaultSurvey}
+                />
             </div>
         </div>
     ) : null;
