@@ -1,24 +1,29 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import { Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { RadioGruppe, Radio, SkjemaGruppe } from 'nav-frontend-skjema';
 import { sendFeedbackNo } from './send-feedback';
-import Thankyou from '../feedback-thank-you/ThankYou';
-import CloseFeedbackHandler from '../common/CloseFeedbackHandler';
 import FeedbackMessage, { MAX_LENGTH } from './FeedbackMessage';
 import { andreSider, personvernAdvarsel } from './AlternativCommon';
 import './Alternativ.less';
 import { AppState } from '../../../../store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
+import AvbrytKnapp from './AvbrytKnapp';
+import { FeedbackState } from '../Feedback';
 
 const stateSelector = (state: AppState) => ({
     environment: state.environment,
     language: state.language.language
 });
 
-const AlternativNei = () => {
-    const [hasSubmitted, setHasSubmitted] = useState(false);
+interface Props {
+    avbryt: () => void,
+    settBesvart: () => void,
+    state: FeedbackState
+}
+
+const AlternativNei = (props: Props) => {
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [reason, setReason] = useState<string>();
     const { environment, language } = useSelector(stateSelector);
@@ -29,7 +34,6 @@ const AlternativNei = () => {
         textFieldInvalidInputs: '',
         errorHasOccured: false,
     });
-
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
@@ -59,7 +63,7 @@ const AlternativNei = () => {
                 language.toLowerCase(),
                 dispatch);
 
-            setHasSubmitted(true);
+            props.settBesvart();
         }
     };
 
@@ -103,48 +107,40 @@ const AlternativNei = () => {
         </RadioGruppe>
     );
 
-    const lenkeKomponent = useMemo( () => andreSider(environment), [environment]);
+    const lenkeKomponent = useMemo(() => andreSider(environment), [environment]);
 
     return (
-        <>
-            {!hasSubmitted ? (
-                <div className="alternativ-wrapper">
-                    <form onSubmit={submitFeedback}>
-                            <SkjemaGruppe
-                                legend={
-                                    <Ingress>
-                                 <Tekst id="hva-fant-du-ikke"
-                                 />
-                                </Ingress>}
-                                description={personvernAdvarsel}
-                            >
-                                {choices}
-                                <FeedbackMessage
-                                    feedbackMessage={feedbackMessage}
-                                    setFeedbackMessage={setFeedbackMessage}
-                                    errors={errors}
-                                    setErrors={setErrors}
-                                />
+        <div className="alternativ-wrapper">
+            <form onSubmit={submitFeedback}>
+                <SkjemaGruppe
+                    legend={
+                        <Ingress>
+                            <Tekst id="hva-fant-du-ikke"
+                            />
+                        </Ingress>}
+                    description={personvernAdvarsel}
+                >
+                    {choices}
+                    <FeedbackMessage
+                        feedbackMessage={feedbackMessage}
+                        setFeedbackMessage={setFeedbackMessage}
+                        errors={errors}
+                        setErrors={setErrors}
+                    />
 
-                            </SkjemaGruppe>
-
-
-                            {lenkeKomponent }
-                            <div className="knapper">
-                                <Hovedknapp
-                                    htmlType="submit"
-                                    className="send-inn"
-                                >
-                                    <Tekst id="send-inn-tilbakemelding" />
-                                </Hovedknapp>
-                                <CloseFeedbackHandler context="alternativ-nei" />
-                            </div>
-                        </form>
+                </SkjemaGruppe>
+                {lenkeKomponent}
+                <div className="knapper">
+                    <Hovedknapp
+                        htmlType="submit"
+                        className="send-inn"
+                    >
+                        <Tekst id="send-inn-tilbakemelding" />
+                    </Hovedknapp>
+                    <AvbrytKnapp avbryt={props.avbryt} state={props.state} />
                 </div>
-            ) : (
-                <Thankyou showFeedbackUsage={true} />
-            )}
-        </>
+            </form>
+        </div>
     );
 };
 

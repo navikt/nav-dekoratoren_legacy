@@ -17,7 +17,6 @@ Flere validatorer kan legges til ved å implementere TextValidator interface
 
 
 export class Filter {
-
     violations: string[]
     emailValidator: EmailValidator;
     fodselsnummerValidator: FodselsnummerValidator;
@@ -28,7 +27,7 @@ export class Filter {
         this.fodselsnummerValidator = new FodselsnummerValidator();
     }
 
-    /* Legg til en overtredelse hvis den ikke finnes fra før*/
+    /* Legg til en overtredelse hvis den ikke finnes fra før */
     addViolation(violation: string) {
         if (!this.violations.includes(violation)) {
             this.violations.push(violation)
@@ -50,10 +49,8 @@ export class Filter {
     }
 
     /*
-
-    Splitter tekst på mellomrom og kjører sjekk (e-postaddresse/fødselsnummer) for hvert element i listen. 
+    Splitter tekst på mellomrom og kjører sjekk (e-postaddresse/fødselsnummer) for hvert element i listen.
     Dersom overtredelser blir oppdaget blir dette lagt til i violations
-
     */
     checkForViolations(text: string): void {
         const textSplitted = text.split(' ');

@@ -5,6 +5,8 @@ export enum amplitudeTriggers {
     // Brukes for logging av kategorier under 'Fant du det du lette etter?' -> 'Nei' (AlternativNei.tsx)
     neiKnapp = 'tilbakemelding-nei',
 
+    jaKnapp = 'tilbakemelding-ja',
+
     // Brukes for logging av 'Ja', 'Nei' og 'Rapporter feil og mangler' klikk
     felles = 'tilbakemelding',
 }

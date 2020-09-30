@@ -2,12 +2,11 @@ import React, { useMemo, useEffect } from 'react';
 import { Textarea } from 'nav-frontend-skjema';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { Filter } from 'utils/text-filter/Filter';
-import Tekst from 'tekster/finn-tekst';
+import { Filter } from '../text-filter/Filter';
 import './FeedbackMessage.less';
 
-
 export const MAX_LENGTH = 1000;
+
 interface Props {
     feedbackMessage: string;
     setFeedbackMessage: any;
@@ -17,30 +16,27 @@ interface Props {
     description?: React.ReactNode;
 }
 
-const FeedbackMessage = ({
-    feedbackMessage,
-    setFeedbackMessage,
-    errors,
-    setErrors,
-    label,
-    description
-}: Props) => {
-
+const FeedbackMessage = (props: Props) => {
+    const {
+        feedbackMessage,
+        setFeedbackMessage,
+        errors,
+        setErrors,
+        label,
+        description
+    } = props;
 
     const violationsMemoized = useMemo(
         () => {
             const filter = new Filter([]);
             filter.checkForViolations(feedbackMessage);
             return filter.getViolationsFormatted();
-        }
-
-        , [feedbackMessage]
+        }, [feedbackMessage]
     );
 
     useEffect(() => {
         setErrors({...errors, textFieldValidInputs: violationsMemoized })
     }, [violationsMemoized])
-
 
 
     return (
