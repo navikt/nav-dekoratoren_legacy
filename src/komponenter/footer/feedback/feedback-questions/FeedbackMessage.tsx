@@ -48,20 +48,23 @@ const FeedbackMessage = (props: Props) => {
                 label={label}
                 placeholder="Skriv din tilbakemelding her"
                 maxLength={MAX_LENGTH}
+                feil={ violationsMemoized.length || feedbackMessage.length > MAX_LENGTH ? (
+                        <>
+                            {violationsMemoized.length > 0 &&
+                                <>
+                                    Det ser ut som du har skrevet inn
+                                    {violationsMemoized}. Dette må fjernes før du kan gå videre.
+                                </>
+                            }
+                            { feedbackMessage.length > MAX_LENGTH &&
+                                <> {`Du kan ikke skrive mer enn ${MAX_LENGTH} tegn`}</>
+                            }
+                        </>
+
+                    ) : null}
+
             />
-            { violationsMemoized.length ? (
-                <Alertstripe
-                    className="personvernAdvarsel"
-                    form="inline"
-                    type="feil"
-                >
-                    <Normaltekst>
-                        Vi mistenker at du har skrevet inn
-                        {violationsMemoized}. Dersom du likevel mener dette er
-                        riktig kan du trykke 'Send inn'
-                    </Normaltekst>
-                </Alertstripe>
-            ) : null }
+
         </>
     );
 };

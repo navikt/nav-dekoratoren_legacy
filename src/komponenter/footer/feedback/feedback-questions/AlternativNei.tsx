@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext } from 'react';
+import React, { useState, useMemo, useContext, useEffect } from 'react';
 import { Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
@@ -34,6 +34,14 @@ const AlternativNei = (props: Props) => {
         textFieldInvalidInputs: '',
         errorHasOccured: false,
     });
+
+    const reasonClicked = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setReason(e.target.value)
+        setErrors({
+            ...errors,
+            radiobuttonErrorMessage: ''
+        });
+    }
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
@@ -76,33 +84,25 @@ const AlternativNei = (props: Props) => {
                 label={<Tekst id="spørsmål-ikke-besvart" />}
                 name="fant-ikke"
                 value="fant-ikke-1"
-                onChange={(e) =>
-                    setReason(e.target.value)
-                }
+                onChange={reasonClicked}
             />
             <Radio
                 label={<Tekst id="forstod-ikke" />}
                 name="fant-ikke"
                 value="fant-ikke-2"
-                onChange={(e) =>
-                    setReason(e.target.value)
-                }
+                onChange={reasonClicked}
             />
             <Radio
                 label={<Tekst id="hjelpemiddel-feil" />}
                 name="fant-ikke"
                 value="fant-ikke-3"
-                onChange={(e) =>
-                    setReason(e.target.value)
-                }
+                onChange={reasonClicked}
             />
             <Radio
                 label={<Tekst id="annet" />}
                 name="fant-ikke"
                 value="fant-ikke-annet"
-                onChange={(e) =>
-                    setReason(e.target.value)
-                }
+                onChange={reasonClicked}
             />
         </RadioGruppe>
     );

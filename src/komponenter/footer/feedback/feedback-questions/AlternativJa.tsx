@@ -35,8 +35,6 @@ const AlternativJa = (props: Props) => {
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
-
-
         if (feedbackMessage.length > MAX_LENGTH) {
             setErrors({
                 ...errors,
