@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Ingress, Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { sendFeedbackYes } from './send-feedback';
-import FeedbackMessage, { MAX_LENGTH } from './FeedbackMessage';
+import FritekstFelt, { FritekstFeil, MAX_LENGTH } from './FritekstFelt';
 import { AppState } from '../../../../store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import Lenke from 'nav-frontend-lenker';
@@ -27,25 +27,29 @@ const AlternativJa = (props: Props) => {
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const { environment, language } = useSelector(stateSelector);
     const dispatch = useDispatch();
+    const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+    const [fritekstFeil, setFritekstFeil] = useState<FritekstFeil>({ });
 
-    const [errors, setErrors] = useState({
-        textFieldInvalidInputs: '',
-        errorHasOccured: false,
-    });
+    useEffect(() => {
+        if (fritekstFeil.maxLength) {
+            setFritekstFeil({ ...fritekstFeil, maxLength: undefined})
+        }
+    }, [feedbackMessage])
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
+
         if (feedbackMessage.length > MAX_LENGTH) {
-            setErrors({
-                ...errors,
-                textFieldInvalidInputs: `Du kan ikke skrive mer enn ${MAX_LENGTH} tegn`
+            setFritekstFeil({
+                ...fritekstFeil,
+                maxLength: `Du kan ikke skrive mer enn ${MAX_LENGTH} tegn`,
             });
+
+            textareaRef.current?.focus();
+        } else if (fritekstFeil.invalidInput)  {
+            textareaRef.current?.focus();
         } else {
-            setErrors({
-                ...errors,
-                textFieldInvalidInputs: '',
-                errorHasOccured: false
-            });
+            setFritekstFeil({});
             sendFeedbackYes(
                 feedbackMessage,
                 environment.FEEDBACK_API_URL,
@@ -59,17 +63,18 @@ const AlternativJa = (props: Props) => {
     return (
         <div className="alternativ-wrapper">
             <form onSubmit={submitFeedback}>
-                <FeedbackMessage
+                <FritekstFelt
                     feedbackMessage={feedbackMessage}
                     setFeedbackMessage={setFeedbackMessage}
-                    errors={errors}
-                    setErrors={setErrors}
+                    errors={fritekstFeil}
+                    setErrors={setFritekstFeil}
                     description={personvernAdvarsel}
                     label={
                         <Ingress>
                             <Tekst id="hva-lette-du-etter" />
                         </Ingress>
                     }
+                    textareaRef={ inputRef => (textareaRef.current = inputRef)}
                 />
                 <Normaltekst className="alternativ-notis">
                     Ønsker du informasjon om saken din? <Lenke href={environment.DITT_NAV_URL}>Logg inn på Ditt NAV.</Lenke> <br/>

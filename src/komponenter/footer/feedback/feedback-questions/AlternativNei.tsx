@@ -1,16 +1,17 @@
-import React, { useState, useMemo, useContext, useEffect } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { RadioGruppe, Radio, SkjemaGruppe } from 'nav-frontend-skjema';
 import { sendFeedbackNo } from './send-feedback';
-import FeedbackMessage, { MAX_LENGTH } from './FeedbackMessage';
+import FritekstFelt, { MAX_LENGTH } from './FritekstFelt';
 import { andreSider, personvernAdvarsel } from './AlternativCommon';
 import './Alternativ.less';
 import { AppState } from '../../../../store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import AvbrytKnapp from './AvbrytKnapp';
 import { FeedbackState } from '../Feedback';
+import { FritekstFeil } from './FritekstFelt';
 
 const stateSelector = (state: AppState) => ({
     environment: state.environment,
@@ -23,61 +24,66 @@ interface Props {
     state: FeedbackState
 }
 
+
 const AlternativNei = (props: Props) => {
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [reason, setReason] = useState<string>();
     const { environment, language } = useSelector(stateSelector);
     const dispatch = useDispatch();
+    const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+    const radioRef = useRef<HTMLInputElement | null>(null);
+    const [reasonFeil, setReasonFeil] = useState('');
+    const [fritekstFeil, setFritekstFeil] = useState<FritekstFeil>({ });
 
-    const [errors, setErrors] = useState({
-        radiobuttonErrorMessage: '',
-        textFieldInvalidInputs: '',
-        errorHasOccured: false,
-    });
+
+    useEffect(() => {
+        if (fritekstFeil.maxLength) {
+            setFritekstFeil({ ...fritekstFeil, maxLength: undefined})
+        }
+    }, [feedbackMessage])
+
 
     const reasonClicked = (e: React.ChangeEvent<HTMLInputElement>) => {
         setReason(e.target.value)
-        setErrors({
-            ...errors,
-            radiobuttonErrorMessage: ''
-        });
+        setReasonFeil('');
     }
+
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
         if (!reason) {
-            setErrors({
-                ...errors,
-                radiobuttonErrorMessage: 'Du må velge et alternativ',
-                errorHasOccured: true,
-            });
-        } else if (feedbackMessage.length > MAX_LENGTH) {
-            setErrors({
-                ...errors,
-                textFieldInvalidInputs: `Du kan ikke skrive mer enn ${MAX_LENGTH} tegn`
-            });
-        } else {
-            setErrors({
-                ...errors,
-                radiobuttonErrorMessage: '',
-                textFieldInvalidInputs: '',
-                errorHasOccured: false
-            });
-            sendFeedbackNo(
-                reason,
-                feedbackMessage,
-                environment.FEEDBACK_API_URL,
-                language.toLowerCase(),
-                dispatch);
-
-            props.settBesvart();
+            setReasonFeil( 'Du må velge et alternativ');
+            radioRef.current?.focus();
+            return;
         }
+
+        if (feedbackMessage.length > MAX_LENGTH) {
+            setFritekstFeil({ ...fritekstFeil, maxLength: `Du kan ikke skrive mer enn ${MAX_LENGTH} tegn`  })
+            textareaRef.current?.focus();
+            return;
+        }
+
+        if (fritekstFeil.invalidInput)  {
+            textareaRef.current?.focus();
+            return;
+        }
+
+        setFritekstFeil({  });
+        setReasonFeil('');
+        sendFeedbackNo(
+            reason,
+            feedbackMessage,
+            environment.FEEDBACK_API_URL,
+            language.toLowerCase(),
+            dispatch);
+
+        props.settBesvart();
     };
 
     const choices = (
         <RadioGruppe
-            feil={errors.radiobuttonErrorMessage}
+            feil={reasonFeil}
             tag="div"
         >
             <Radio
@@ -85,6 +91,7 @@ const AlternativNei = (props: Props) => {
                 name="fant-ikke"
                 value="fant-ikke-1"
                 onChange={reasonClicked}
+                radioRef={ (inputRef: any) => (radioRef.current = inputRef)}
             />
             <Radio
                 label={<Tekst id="forstod-ikke" />}
@@ -121,13 +128,13 @@ const AlternativNei = (props: Props) => {
                     description={personvernAdvarsel}
                 >
                     {choices}
-                    <FeedbackMessage
+                    <FritekstFelt
                         feedbackMessage={feedbackMessage}
                         setFeedbackMessage={setFeedbackMessage}
-                        errors={errors}
-                        setErrors={setErrors}
-                    />
-
+                        errors={fritekstFeil}
+                        setErrors={setFritekstFeil}
+                        textareaRef={ inputRef => (textareaRef.current = inputRef)}
+                     />
                 </SkjemaGruppe>
                 {lenkeKomponent}
                 <div className="knapper">

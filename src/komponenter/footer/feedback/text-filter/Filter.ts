@@ -1,21 +1,10 @@
 import { EmailValidator } from './validators/EmailValidator';
 import { FodselsnummerValidator } from './validators/FodselsnummerValidator';
+import { finnTelefonNummer } from './validators/TelefonValidator';
 
 /*
-
-Tar inn fritekst og finner ut om den inneholder enten en e-postadresse eller fødselsnummer
-
-Foreslåtte bruksområder:
-- Koble mot et onChange event på tekstfelt, slik at brukeren får varsel når enten e-postadresse eller fødselsnummer er skrevet inn
-- Koble opp mot 'Send inn'-knapp i Elaborated og ParitalNo
-
-Dersom brukeren skriver inn enten e-postaddresse eller fødselsnummer bør dette bli varslet om i feiloppsummeringsboksen
-
-Flere validatorer kan legges til ved å implementere TextValidator interface
-
+Tar inn fritekst og finner ut om den inneholder enten en e-postadresse/fødselsnummer/telefonnummer
 */
-
-
 export class Filter {
     violations: string[]
     emailValidator: EmailValidator;
@@ -34,34 +23,39 @@ export class Filter {
         }
     }
 
-    getViolations(): string[] {
-        return this.violations;
-    }
-
     getViolationsFormatted(): string {
         if (!this.violations.length) {
             return '';
         }
+        if (this.violations.length === 1) {
+            return this.violations[0];
+        }
 
-        return this.violations.length === 2 
-            ? '' + this.violations[0] + ' og ' + this.violations[1] 
-            : ' ' + this.violations[0]
+        const commaSeparated =  this.violations.join(', ');
+        const index = commaSeparated.lastIndexOf(',')
+        return commaSeparated.substring(0, index) + ' og ' + commaSeparated.substring(index + 1);
     }
 
-    /*
-    Splitter tekst på mellomrom og kjører sjekk (e-postaddresse/fødselsnummer) for hvert element i listen.
-    Dersom overtredelser blir oppdaget blir dette lagt til i violations
-    */
     checkForViolations(text: string): void {
-        const textSplitted = text.split(' ');
 
-        for (const index in textSplitted) {
-            if (this.emailValidator.isNotAcceptable(textSplitted[index])) {
-                this.addViolation('e-postadresse')
+        // 11 digits, possible whitespace after first 6 digits.
+        const foedselsnummer = text.match(/[\d]{6}\s*[\d]{5}/g)
+        const strings = text.match(/[.\S]+/g); // any character except whitespace
 
-            } else if (this.fodselsnummerValidator.isNotAcceptable(textSplitted[index])) {
-                this.addViolation('fødselsnummer')
-            }
+        const email = strings?.find( (item) => this.emailValidator.isNotAcceptable(item))
+        if (email) {
+            this.addViolation(`en e-postadresse ( ${email} )`)
+        }
+
+        const fnr = foedselsnummer?.find( (item) => this.fodselsnummerValidator.isNotAcceptable(item));
+        if (fnr) {
+            this.addViolation(`et fødselsnummer ( ${fnr} )`)
+        }
+
+        const tlf = finnTelefonNummer(text);
+        if (tlf && tlf !== fnr) {
+            this.addViolation(`et telefonnummer ( ${tlf} )`)
         }
     }
+
 }

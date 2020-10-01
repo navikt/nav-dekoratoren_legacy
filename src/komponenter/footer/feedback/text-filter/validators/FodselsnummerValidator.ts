@@ -1,11 +1,8 @@
-import { TextValidator } from './TextValidator';
-
-export class FodselsnummerValidator implements TextValidator {
+export class FodselsnummerValidator {
     validator: any;
 
     constructor() {
         this.validator = require('@navikt/fnrvalidator');
-        
     }
 
     isNotAcceptable(s: string) {
