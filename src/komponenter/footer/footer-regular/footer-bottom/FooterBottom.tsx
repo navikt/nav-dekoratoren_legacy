@@ -57,6 +57,7 @@ const FooterBottom = () => {
         <div className="menylinje-bottom">
             <div className={cls.className}>
                 <div className={'top-row'}>
+                    <ChatbotWrapper />
                     <NavLogoLenke
                         analyticsEventArgs={{
                             context: arbeidsflate,
@@ -65,7 +66,6 @@ const FooterBottom = () => {
                         }}
                         ikon={Logo}
                     />
-                    <ChatbotWrapper />
                 </div>
                 <div className={cls.element('bottom-lenker')}>
                     <div>

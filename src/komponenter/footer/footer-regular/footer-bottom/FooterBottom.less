@@ -5,12 +5,11 @@
     padding: 2rem 1rem;
     justify-content: center;
     @media @screen-desktop {
-        padding: 1rem @margins-sides-desktop-footer
-            @margins-sides-desktop-footer;
+        padding: 1rem @margins-sides-footer @margins-sides-footer;
     }
 
     @media @screen-desktop-small-width-down {
-        padding: 1rem @margins-sides-desktop-small;
+        padding: 1rem @margins-sides-footer-small;
     }
 }
 
@@ -24,6 +23,7 @@
     .top-row {
         position: relative;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
 

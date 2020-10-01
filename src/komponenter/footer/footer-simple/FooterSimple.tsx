@@ -50,8 +50,8 @@ const FooterSimple = () => {
     return (
         <Fragment>
             <div className={cls.element('container')}>
-                <ChatbotWrapper />
                 <div className={cls.element('content')}>
+                    <ChatbotWrapper />
                     <ul className={cls.element('personvern-lenker')}>
                         <FooterLenker node={personvernNode} />
                     </ul>
