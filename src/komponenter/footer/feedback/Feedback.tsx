@@ -8,6 +8,8 @@ import amplitudeTriggers from './amplitude-triggers';
 import { logAmplitudeEvent } from 'utils/amplitude';
 import './Feedback.less';
 import Thankyou from './feedback-thank-you/ThankYou';
+import FeedbackQuestions, { Ja, Nei } from './feedback-questions/FeedbackQuestions';
+import FeedbackWrapper from './feedback-questions/FeedbackQuestions';
 
 export type FeedbackState = 'lukket' | 'ja' | 'nei' | 'besvart';
 
@@ -60,6 +62,9 @@ const Feedback = () => {
                         state={state}
                         avbryt={() => setState('lukket')}
                         settBesvart={() => setState('besvart')} />
+                }
+                {
+
                 }
                 {state === 'nei' &&
                     <AlternativNei

@@ -1,33 +1,18 @@
-import React, { useState, useMemo, useRef, useEffect, useReducer } from 'react';
+import React, { useState, useRef, useEffect, useReducer } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Ingress } from 'nav-frontend-typografi';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { RadioGruppe, Radio, SkjemaGruppe } from 'nav-frontend-skjema';
 import { sendFeedbackNo } from '../send-feedback';
 import FritekstFelt, { fritekstFeilReducer, initialFritekstFeil, MAX_LENGTH } from './fritekst/FritekstFelt';
-import { andreSider, personvernAdvarsel } from './AlternativCommon';
+import { KontaktLenker, personvernAdvarsel, QuestionProps, questionStateSelector } from './AlternativCommon';
+import KnappeRekke from './KnappeRekke';
 import './Alternativ.less';
-import { AppState } from '../../../../store/reducers';
-import { useDispatch, useSelector } from 'react-redux';
-import AvbrytKnapp from './AvbrytKnapp';
-import { FeedbackState } from '../Feedback';
 
-const stateSelector = (state: AppState) => ({
-    environment: state.environment,
-    language: state.language.language
-});
-
-interface Props {
-    avbryt: () => void,
-    settBesvart: () => void,
-    state: FeedbackState
-}
-
-
-const AlternativNei = (props: Props) => {
+const AlternativNei = (props: QuestionProps) => {
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [reason, setReason] = useState<string>('');
-    const { environment, language } = useSelector(stateSelector);
+    const { environment, language } = useSelector(questionStateSelector);
     const reduxDispatch = useDispatch();
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const radioRef = useRef<HTMLInputElement | null>(null);
@@ -81,73 +66,58 @@ const AlternativNei = (props: Props) => {
         }
     };
 
-    const choices = (
-        <RadioGruppe
-            feil={reasonFeil}
-            tag="div"
-        >
-            <Radio
-                label={<Tekst id="spørsmål-ikke-besvart" />}
-                name="fant-ikke"
-                value="fant-ikke-1"
-                onChange={reasonClicked}
-                radioRef={ (inputRef: any) => (radioRef.current = inputRef)}
-            />
-            <Radio
-                label={<Tekst id="forstod-ikke" />}
-                name="fant-ikke"
-                value="fant-ikke-2"
-                onChange={reasonClicked}
-            />
-            <Radio
-                label={<Tekst id="hjelpemiddel-feil" />}
-                name="fant-ikke"
-                value="fant-ikke-3"
-                onChange={reasonClicked}
-            />
-            <Radio
-                label={<Tekst id="annet" />}
-                name="fant-ikke"
-                value="fant-ikke-annet"
-                onChange={reasonClicked}
-            />
-        </RadioGruppe>
-    );
-
-    const lenkeKomponent = useMemo(() => andreSider(environment), [environment]);
-
     return (
-        <div className="alternativ-wrapper">
-            <form onSubmit={submitFeedback}>
-                <SkjemaGruppe
-                    legend={
-                        <Ingress>
-                            <Tekst id="hva-fant-du-ikke"
-                            />
-                        </Ingress>}
-                    description={personvernAdvarsel}
+        <form className="alternativ-wrapper"
+            onSubmit={submitFeedback}>
+            <SkjemaGruppe
+                legend={
+                    <Ingress>
+                        <Tekst id="hva-fant-du-ikke"
+                        />
+                    </Ingress>}
+                description={personvernAdvarsel}
+            >
+                <RadioGruppe
+                    feil={reasonFeil}
+                    tag="div"
                 >
-                    {choices}
-                    <FritekstFelt
-                        feedbackMessage={feedbackMessage}
-                        setFeedbackMessage={setFeedbackMessage}
-                        errors={fritekstFeil}
-                        setErrors={dispatchFritekstFeil}
-                        textareaRef={ inputRef => (textareaRef.current = inputRef)}
-                     />
-                </SkjemaGruppe>
-                {lenkeKomponent}
-                <div className="knapper">
-                    <Hovedknapp
-                        htmlType="submit"
-                        className="send-inn"
-                    >
-                        <Tekst id="send-inn-tilbakemelding" />
-                    </Hovedknapp>
-                    <AvbrytKnapp avbryt={props.avbryt} state={props.state} />
-                </div>
-            </form>
-        </div>
+                    <Radio
+                        label={<Tekst id="spørsmål-ikke-besvart" />}
+                        name="fant-ikke"
+                        value="fant-ikke-1"
+                        onChange={reasonClicked}
+                        radioRef={ (inputRef: any) => (radioRef.current = inputRef)}
+                    />
+                    <Radio
+                        label={<Tekst id="forstod-ikke" />}
+                        name="fant-ikke"
+                        value="fant-ikke-2"
+                        onChange={reasonClicked}
+                    />
+                    <Radio
+                        label={<Tekst id="hjelpemiddel-feil" />}
+                        name="fant-ikke"
+                        value="fant-ikke-3"
+                        onChange={reasonClicked}
+                    />
+                    <Radio
+                        label={<Tekst id="annet" />}
+                        name="fant-ikke"
+                        value="fant-ikke-annet"
+                        onChange={reasonClicked}
+                    />
+                </RadioGruppe>
+                <FritekstFelt
+                    feedbackMessage={feedbackMessage}
+                    setFeedbackMessage={setFeedbackMessage}
+                    errors={fritekstFeil}
+                    setErrors={dispatchFritekstFeil}
+                    textareaRef={ inputRef => (textareaRef.current = inputRef)}
+                 />
+            </SkjemaGruppe>
+            <KontaktLenker environment={environment}/>
+            <KnappeRekke avbryt={props.avbryt} state={props.state} />
+        </form>
     );
 };
 
