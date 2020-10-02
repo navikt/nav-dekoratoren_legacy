@@ -4,7 +4,6 @@ import { VarslerData as varselinnboksData } from '../store/reducers/varselinnbok
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
 import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { FeatureToggles } from 'store/reducers/feature-toggles-duck';
-import { ChatConfig } from 'komponenter/footer/chatbot/ChatbotWrapper';
 
 export enum Status {
     OK = 'OK',
@@ -33,7 +32,7 @@ export const hentVarslerFetch = (
 ): Promise<varselinnboksData> => {
     const tidspunkt = new Date().getTime();
     return fetchToJson(
-        `${APP_URL}/api/varsler/rest/varsel/hentsiste?noCache=${tidspunkt}`,
+        `${APP_URL}/api/varsler/varsler?noCache=${tidspunkt}&limit=5`,
         { credentials: 'include' }
     );
 };
@@ -71,9 +70,6 @@ export const hentDriftsmeldinger = (
     APP_URL: string
 ): Promise<DriftsmeldingerData[]> =>
     fetchToJson(`${APP_URL}/api/driftsmeldinger`);
-
-export const hentChatbotConfig = (APP_URL: string): Promise<ChatConfig> =>
-    fetchToJson(`${APP_URL}/api/chatConfig`);
 
 export const lagreTilbakemeldingFetch = (
     feedback: Object,

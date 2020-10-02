@@ -50,6 +50,8 @@ export const Header = () => {
     const { authenticated } = innloggingsstatus.data;
     const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
+    const breadcrumbs = PARAMS.BREADCRUMBS || [];
+    const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
 
     const [cookies, setCookie] = useCookies([
         decoratorLanguageCookie,
@@ -284,17 +286,15 @@ export const Header = () => {
                 )}
             </header>
             <Driftsmeldinger />
-            {(PARAMS.BREADCRUMBS || PARAMS.AVAILABLE_LANGUAGES) && (
+            {(breadcrumbs.length > 0 || availableLanguages.length > 0) && (
                 // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
                 <div className={'decorator-utils-container'}>
                     <div className={'decorator-utils-content'}>
-                        {PARAMS.BREADCRUMBS && (
-                            <Brodsmulesti breadcrumbs={PARAMS.BREADCRUMBS} />
+                        {breadcrumbs.length > 0 && (
+                            <Brodsmulesti breadcrumbs={breadcrumbs} />
                         )}
-                        {PARAMS.AVAILABLE_LANGUAGES && (
-                            <SprakVelger
-                                availableLanguages={PARAMS.AVAILABLE_LANGUAGES}
-                            />
+                        {availableLanguages.length > 0 && (
+                            <SprakVelger languages={availableLanguages} />
                         )}
                     </div>
                 </div>

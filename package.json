@@ -1,9 +1,9 @@
 {
     "name": "nav-dekoratoren",
-    "version": "1.24.26-dev",
+    "version": "1.25.10-prod",
     "private": true,
     "scripts": {
-        "start": "npm-run-all -p -r build-client-and-watch build-server-and-watch start-server-and-watch",
+        "start": "npm-run-all -p -r build-client-and-watch build-server-and-watch start-server-and-watch typecheck-watch",
         "start-server-and-watch": "nodemon build/server.js",
         "build": "npm-run-all -p -r build-client && npm run build-server",
         "build-client": "cross-env NODE_ENV=production webpack -p --display-error-details --config webpack.client.config.js",
@@ -11,6 +11,8 @@
         "build-client-and-watch": "cross-env NODE_ENV=development webpack --display-error-details --config webpack.client.config.js --watch",
         "build-server-and-watch": "cross-env NODE_ENV=development webpack --display-error-details --config webpack.server.config.js --watch",
         "test": "jest",
+        "typecheck": "tsc",
+        "typecheck-watch": "tsc -watch",
         "test-dev": "jest --watch",
         "lint": "tslint ./src/**/*.ts*",
         "lint:fix": "tslint ./src/**/*.ts* --fix",
