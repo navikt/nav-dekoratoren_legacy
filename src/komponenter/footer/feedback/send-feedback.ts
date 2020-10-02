@@ -1,7 +1,7 @@
-import amplitudeTriggers from '../amplitude-triggers';
+import amplitudeTriggers from './amplitude-triggers';
 import { logAmplitudeEvent } from 'utils/amplitude';
-import { lagreTilbakemelding } from '../../../../store/reducers/tilbakemelding-duck';
-import { Dispatch } from '../../../../store/dispatch-type';
+import { lagreTilbakemelding } from '../../../store/reducers/tilbakemelding-duck';
+import { Dispatch } from '../../../store/dispatch-type';
 
 
 

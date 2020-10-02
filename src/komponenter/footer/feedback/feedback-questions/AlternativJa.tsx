@@ -2,15 +2,15 @@ import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { Ingress, Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
-import { sendFeedbackYes } from './send-feedback';
-import FritekstFelt, { FritekstFeil, fritekstFeilReducer, initialFritekstFeil, MAX_LENGTH } from './FritekstFelt';
+import { sendFeedbackYes } from '../send-feedback';
+import FritekstFelt, { fritekstFeilReducer, initialFritekstFeil, MAX_LENGTH } from './fritekst/FritekstFelt';
 import { AppState } from '../../../../store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import Lenke from 'nav-frontend-lenker';
-import './Alternativ.less';
 import { personvernAdvarsel } from './AlternativCommon';
 import { FeedbackState } from '../Feedback';
 import AvbrytKnapp from './AvbrytKnapp';
+import './Alternativ.less';
 
 const stateSelector = (state: AppState) => ({
     environment: state.environment,

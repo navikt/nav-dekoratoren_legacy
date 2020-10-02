@@ -1,6 +1,7 @@
-import React, { useMemo, useEffect, Dispatch, ReducerAction } from 'react';
+import React, { useEffect, Dispatch } from 'react';
 import { Textarea, TextareaProps } from 'nav-frontend-skjema';
-import { Filter } from '../text-filter/Filter';
+import { checkForViolations, getViolationsFormatted } from './Sanitizer';
+import { useDebounce } from '../../../../../utils/hooks/useDebounce';
 import './FritekstFelt.less';
 
 export const MAX_LENGTH = 1000;
@@ -50,49 +51,38 @@ interface Props extends Partial<TextareaProps> {
 }
 
 const FritekstFelt = (props: Props) => {
-    const {
-        feedbackMessage,
-        setFeedbackMessage,
-        errors,
-        setErrors,
-        label,
-        description,
-        textareaRef
-    } = props;
 
-    const violationsMemoized = useMemo(
-        () => {
-            const filter = new Filter([]);
-            filter.checkForViolations(feedbackMessage);
-            return filter.getViolationsFormatted();
-        }, [feedbackMessage]
-    );
+    const debouncedInputVerdier = useDebounce(props.feedbackMessage, 500);
 
     useEffect(() => {
-        if (violationsMemoized.length > 0) {
-            setErrors({ type: 'invalid', message:  `Det ser ut som du har skrevet inn
-                ${violationsMemoized}. Dette må fjernes før du kan gå videre.` });
+        const violations = checkForViolations(debouncedInputVerdier);
+        const formatted = getViolationsFormatted(violations);
+
+        if (violations.length > 0) {
+            props.setErrors({ type: 'invalid', message:  `Det ser ut som du har skrevet inn
+                ${formatted}. Dette må fjernes før du kan gå videre.` });
         } else {
-            setErrors({ type: 'invalid', message: undefined});
+            props.setErrors({ type: 'invalid', message: undefined});
         }
-    }, [violationsMemoized])
+    }, [debouncedInputVerdier])
+
 
     return (
         <Textarea
-            value={feedbackMessage}
-            onChange={(e) => setFeedbackMessage(e.target.value)}
-            description={description}
-            label={label}
+            value={props.feedbackMessage}
+            onChange={(e) => props.setFeedbackMessage(e.target.value)}
+            description={props.description}
+            label={props.label}
             placeholder="Skriv din tilbakemelding her"
             maxLength={MAX_LENGTH}
-            textareaRef={textareaRef}
-            feil={ (errors.invalidInput || errors.maxLength) ? (
+            textareaRef={props.textareaRef}
+            feil={ (props.errors.invalidInput || props.errors.maxLength) ? (
                     <>
-                        { errors.invalidInput &&
-                            <span> {errors.invalidInput}</span>
+                        { props.errors.invalidInput &&
+                            <span> {props.errors.invalidInput}</span>
                         }
-                        { errors.maxLength &&
-                            <span> {errors.maxLength}</span>
+                        { props.errors.maxLength &&
+                            <span> {props.errors.maxLength}</span>
                         }
                     </>
                 ) : null

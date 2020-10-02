@@ -5,23 +5,16 @@ export const finnTelefonNummer = (text: string): string | undefined => {
 }
 
 const erTelefonnummer = (value: string): boolean => {
-    const regExp = /^[\+]?(?:[0-9] *){7,14}[0-9]$/;
-
-
     if (value.length < 8) {
-        // Tlfnr er ikke mindre enn 8, eller større enn 15
         return false;
     }
 
     if (value.length === 8 && /^[0-9]{8}$/i.test(value)) {
-        // 8 tall
+        // akkurat 8 tall
         return true;
     }
 
-    if (regExp.test(value)) {
-        // minst 8 tall og landskode
-        return true;
-    }
-
-    return false;
+    // Ellers test for + tegn og flere tall med mellomrom.
+    const regExp = /^[\+]?(?:[0-9] *){7,14}[0-9]$/;
+    return (regExp.test(value))
 }
