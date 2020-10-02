@@ -1,17 +1,16 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useRef, useEffect, useReducer } from 'react';
 import { Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { RadioGruppe, Radio, SkjemaGruppe } from 'nav-frontend-skjema';
 import { sendFeedbackNo } from './send-feedback';
-import FritekstFelt, { MAX_LENGTH } from './FritekstFelt';
+import FritekstFelt, { fritekstFeilReducer, initialFritekstFeil, MAX_LENGTH } from './FritekstFelt';
 import { andreSider, personvernAdvarsel } from './AlternativCommon';
 import './Alternativ.less';
 import { AppState } from '../../../../store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import AvbrytKnapp from './AvbrytKnapp';
 import { FeedbackState } from '../Feedback';
-import { FritekstFeil } from './FritekstFelt';
 
 const stateSelector = (state: AppState) => ({
     environment: state.environment,
@@ -27,58 +26,59 @@ interface Props {
 
 const AlternativNei = (props: Props) => {
     const [feedbackMessage, setFeedbackMessage] = useState('');
-    const [reason, setReason] = useState<string>();
+    const [reason, setReason] = useState<string>('');
     const { environment, language } = useSelector(stateSelector);
-    const dispatch = useDispatch();
+    const reduxDispatch = useDispatch();
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const radioRef = useRef<HTMLInputElement | null>(null);
-    const [reasonFeil, setReasonFeil] = useState('');
-    const [fritekstFeil, setFritekstFeil] = useState<FritekstFeil>({ });
-
+    const [reasonFeil, setReasonFeil] = useState<string | undefined>(undefined);
+    const [fritekstFeil, dispatchFritekstFeil] = useReducer(fritekstFeilReducer, initialFritekstFeil);
 
     useEffect(() => {
         if (fritekstFeil.maxLength) {
-            setFritekstFeil({ ...fritekstFeil, maxLength: undefined})
+            dispatchFritekstFeil({ type: 'maxLength', message: undefined });
         }
     }, [feedbackMessage])
 
 
     const reasonClicked = (e: React.ChangeEvent<HTMLInputElement>) => {
         setReason(e.target.value)
-        setReasonFeil('');
+        setReasonFeil(undefined);
     }
 
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
-
+        let error = false;
         if (!reason) {
             setReasonFeil( 'Du må velge et alternativ');
             radioRef.current?.focus();
-            return;
+            error = true;
         }
 
         if (feedbackMessage.length > MAX_LENGTH) {
-            setFritekstFeil({ ...fritekstFeil, maxLength: `Du kan ikke skrive mer enn ${MAX_LENGTH} tegn`  })
+            dispatchFritekstFeil({ type: 'maxLength', message: `Du kan ikke skrive mer enn ${MAX_LENGTH} tegn` });
             textareaRef.current?.focus();
-            return;
+            error = true;
         }
 
         if (fritekstFeil.invalidInput)  {
             textareaRef.current?.focus();
-            return;
+            error = true;
         }
 
-        setFritekstFeil({  });
-        setReasonFeil('');
-        sendFeedbackNo(
-            reason,
-            feedbackMessage,
-            environment.FEEDBACK_API_URL,
-            language.toLowerCase(),
-            dispatch);
+        if (!error ) {
+            dispatchFritekstFeil({ type: 'reset'});
+            setReasonFeil(undefined);
+            sendFeedbackNo(
+                reason,
+                feedbackMessage,
+                environment.FEEDBACK_API_URL,
+                language.toLowerCase(),
+                reduxDispatch);
 
-        props.settBesvart();
+            props.settBesvart();
+        }
     };
 
     const choices = (
@@ -132,7 +132,7 @@ const AlternativNei = (props: Props) => {
                         feedbackMessage={feedbackMessage}
                         setFeedbackMessage={setFeedbackMessage}
                         errors={fritekstFeil}
-                        setErrors={setFritekstFeil}
+                        setErrors={dispatchFritekstFeil}
                         textareaRef={ inputRef => (textareaRef.current = inputRef)}
                      />
                 </SkjemaGruppe>

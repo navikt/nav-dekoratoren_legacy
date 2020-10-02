@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { Ingress, Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { sendFeedbackYes } from './send-feedback';
-import FritekstFelt, { FritekstFeil, MAX_LENGTH } from './FritekstFelt';
+import FritekstFelt, { FritekstFeil, fritekstFeilReducer, initialFritekstFeil, MAX_LENGTH } from './FritekstFelt';
 import { AppState } from '../../../../store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import Lenke from 'nav-frontend-lenker';
@@ -28,28 +28,29 @@ const AlternativJa = (props: Props) => {
     const { environment, language } = useSelector(stateSelector);
     const dispatch = useDispatch();
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-    const [fritekstFeil, setFritekstFeil] = useState<FritekstFeil>({ });
+    const [fritekstFeil, dispatchFritekstFeil] = useReducer(fritekstFeilReducer, initialFritekstFeil);
 
     useEffect(() => {
         if (fritekstFeil.maxLength) {
-            setFritekstFeil({ ...fritekstFeil, maxLength: undefined})
+            dispatchFritekstFeil({ type: 'maxLength', message: undefined})
         }
     }, [feedbackMessage])
+
+
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
         if (feedbackMessage.length > MAX_LENGTH) {
-            setFritekstFeil({
-                ...fritekstFeil,
-                maxLength: `Du kan ikke skrive mer enn ${MAX_LENGTH} tegn`,
+            dispatchFritekstFeil({
+                type: 'maxLength', message: `Du kan ikke skrive mer enn ${MAX_LENGTH} tegn`,
             });
 
             textareaRef.current?.focus();
         } else if (fritekstFeil.invalidInput)  {
             textareaRef.current?.focus();
         } else {
-            setFritekstFeil({});
+            dispatchFritekstFeil({ type: 'reset'});
             sendFeedbackYes(
                 feedbackMessage,
                 environment.FEEDBACK_API_URL,
@@ -67,7 +68,7 @@ const AlternativJa = (props: Props) => {
                     feedbackMessage={feedbackMessage}
                     setFeedbackMessage={setFeedbackMessage}
                     errors={fritekstFeil}
-                    setErrors={setFritekstFeil}
+                    setErrors={dispatchFritekstFeil}
                     description={personvernAdvarsel}
                     label={
                         <Ingress>
