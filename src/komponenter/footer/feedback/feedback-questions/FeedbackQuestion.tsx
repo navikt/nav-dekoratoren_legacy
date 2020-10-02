@@ -4,7 +4,14 @@ import './Alternativ.less';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import { Environment } from '../../../../store/reducers/environment-duck';
+import { FeedbackState } from '../Feedback';
 
+
+export interface QuestionProps {
+    avbryt: () => void,
+    settBesvart: () => void,
+    state: FeedbackState
+}
 
 export const personvernAdvarsel = (
     <Normaltekst>
