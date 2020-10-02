@@ -44,9 +44,9 @@ const ArbeidsflateLenkepanel = ({
             id={id}
             onClick={(event) => {
                 setCookie('decorator-context', lenke.key, cookieOptions);
-                dispatch(settArbeidsflate(lenke.key));
                 if (erNavDekoratoren()) {
                     event.preventDefault();
+                    dispatch(settArbeidsflate(lenke.key));
                 }
                 analyticsEvent(analyticsEventArgs);
             }}
