@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
@@ -6,10 +6,8 @@ import AlternativJa from './feedback-questions/AlternativJa';
 import AlternativNei from './feedback-questions/AlternativNei';
 import amplitudeTriggers from './amplitude-triggers';
 import { logAmplitudeEvent } from 'utils/amplitude';
-import './Feedback.less';
 import Thankyou from './feedback-thank-you/ThankYou';
-import FeedbackQuestions, { Ja, Nei } from './feedback-questions/FeedbackQuestions';
-import FeedbackWrapper from './feedback-questions/FeedbackQuestions';
+import './Feedback.less';
 
 export type FeedbackState = 'lukket' | 'ja' | 'nei' | 'besvart';
 
@@ -61,7 +59,8 @@ const Feedback = () => {
                     <AlternativJa
                         state={state}
                         avbryt={() => setState('lukket')}
-                        settBesvart={() => setState('besvart')} />
+                        settBesvart={() => setState('besvart')}
+                    />
                 }
                 {
 
