@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useReducer } from 'react';
+import React, { useState, useRef, useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
@@ -11,6 +11,7 @@ import './Alternativ.less';
 
 const AlternativNei = (props: QuestionProps) => {
     const [feedbackMessage, setFeedbackMessage] = useState('');
+    const [harTrykketSubmit, setHarTrykketSubmit] = useState(false);
     const [reason, setReason] = useState<string>('');
     const { environment, language } = useSelector(questionStateSelector);
     const reduxDispatch = useDispatch();
@@ -19,18 +20,10 @@ const AlternativNei = (props: QuestionProps) => {
     const [reasonFeil, setReasonFeil] = useState<string | undefined>(undefined);
     const [fritekstFeil, dispatchFritekstFeil] = useReducer(fritekstFeilReducer, initialFritekstFeil);
 
-    useEffect(() => {
-        if (fritekstFeil.maxLength) {
-            dispatchFritekstFeil({ type: 'maxLength', message: undefined });
-        }
-    }, [feedbackMessage])
-
-
     const reasonClicked = (e: React.ChangeEvent<HTMLInputElement>) => {
         setReason(e.target.value)
         setReasonFeil(undefined);
     }
-
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
@@ -51,6 +44,7 @@ const AlternativNei = (props: QuestionProps) => {
             textareaRef.current?.focus();
             error = true;
         }
+        setHarTrykketSubmit(true);
 
         if (!error ) {
             dispatchFritekstFeil({ type: 'reset'});
@@ -113,6 +107,7 @@ const AlternativNei = (props: QuestionProps) => {
                     errors={fritekstFeil}
                     setErrors={dispatchFritekstFeil}
                     textareaRef={ inputRef => (textareaRef.current = inputRef)}
+                    harTrykketSubmit={harTrykketSubmit}
                  />
             </SkjemaGruppe>
             <KontaktLenker environment={environment}/>

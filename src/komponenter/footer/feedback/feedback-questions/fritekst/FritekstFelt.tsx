@@ -48,29 +48,40 @@ interface Props extends Partial<TextareaProps> {
     errors: FritekstFeil;
     setErrors: Dispatch<FritekstFeilAction>;
     textareaRef?: (textarea: HTMLTextAreaElement | null) => any;
+    harTrykketSubmit: boolean
 }
 
 const FritekstFelt = (props: Props) => {
 
     const debouncedInputVerdier = useDebounce(props.feedbackMessage, 500);
+    const {feedbackMessage, setErrors, harTrykketSubmit} = props;
 
     useEffect(() => {
         const violations = checkForViolations(debouncedInputVerdier);
         const formatted = getViolationsFormatted(violations);
 
         if (violations.length > 0) {
-            props.setErrors({ type: 'invalid', message:  `Det ser ut som du har skrevet inn
+            setErrors({ type: 'invalid', message:  `Det ser ut som du har skrevet inn
                 ${formatted}. Dette må fjernes før du kan gå videre.` });
         } else {
-            props.setErrors({ type: 'invalid', message: undefined});
+            setErrors({ type: 'invalid', message: undefined});
         }
-    }, [debouncedInputVerdier])
+    }, [debouncedInputVerdier,setErrors])
+
+
+    const fritekstChanged = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        props.setFeedbackMessage(e.target.value)
+        // Fjern feilmelding når bruker begynner å skrive etter en submit
+        if (harTrykketSubmit && (feedbackMessage.length > MAX_LENGTH)) {
+            setErrors({ type: 'maxLength', message: undefined})
+        }
+    }
 
 
     return (
         <Textarea
             value={props.feedbackMessage}
-            onChange={(e) => props.setFeedbackMessage(e.target.value)}
+            onChange={fritekstChanged}
             description={props.description}
             label={props.label}
             placeholder="Skriv din tilbakemelding her"

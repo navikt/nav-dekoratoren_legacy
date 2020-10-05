@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import React, { useReducer, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
@@ -10,26 +10,21 @@ import './Alternativ.less';
 
 const AlternativJa = (props: QuestionProps) => {
     const [feedbackMessage, setFeedbackMessage] = useState('');
+    const [harTrykketSubmit, setHarTrykketSubmit] = useState(false);
     const { environment, language } = useSelector(questionStateSelector);
     const reduxDispatch = useDispatch();
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const [fritekstFeil, dispatchFritekstFeil] = useReducer(fritekstFeilReducer, initialFritekstFeil);
 
-    useEffect(() => {
-        if (fritekstFeil.maxLength) {
-            dispatchFritekstFeil({ type: 'maxLength', message: undefined})
-        }
-    }, [feedbackMessage])
-
-
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
 
+        setHarTrykketSubmit(true);
+
         if (feedbackMessage.length > MAX_LENGTH) {
             dispatchFritekstFeil({
-                type: 'maxLength', message: `Du kan ikke skrive mer enn ${MAX_LENGTH} tegn`,
+                type: 'maxLength', message: `Du kan ikke skrive mer enn ${MAX_LENGTH} tegn`
             });
-
             textareaRef.current?.focus();
         } else if (fritekstFeil.invalidInput)  {
             textareaRef.current?.focus();
@@ -62,6 +57,8 @@ const AlternativJa = (props: QuestionProps) => {
                     </Ingress>
                 }
                 textareaRef={ inputRef => (textareaRef.current = inputRef)}
+                harTrykketSubmit={harTrykketSubmit}
+
             />
             <KontaktLenker environment={environment}/>
             <KnappeRekke avbryt={props.avbryt} state={props.state} />
