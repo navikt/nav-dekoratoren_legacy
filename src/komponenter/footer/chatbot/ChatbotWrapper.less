@@ -1,35 +1,24 @@
 @import (reference) '../../../styling-variabler.less';
 
 .chatbot-dock {
-    position: absolute;
+    position: relative;
     width: 100%;
+    height: 0;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .chatbot-container {
     position: fixed;
     z-index: 1001;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: calc(@desktopMaxWidth - @margins-sides-desktop * 2);
     bottom: 1.5rem;
 
-    @media @screen-desktop-medium-down {
-        width: calc(100% - @margins-sides-footer * 2);
-    }
-
-    @media @screen-desktop-small-width-down {
-        width: calc(100% - @margins-sides-desktop-small * 2);
-    }
-
     @media @screen-mobile {
-        width: calc(100% - @margins-sides-mobil * 2);
         bottom: 1rem;
     }
 
     &__docked {
         position: relative;
-        width: 100%;
         bottom: 0;
     }
 
