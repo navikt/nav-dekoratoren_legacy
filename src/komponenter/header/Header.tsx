@@ -138,16 +138,6 @@ export const Header = () => {
         }
     }, []);
 
-    // Context utils
-    const defaultToPerson = () => {
-        dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
-        setCookie(
-            decoratorContextCookie,
-            MenuValue.PRIVATPERSON,
-            cookieOptions
-        );
-    };
-
     // Fetch notifications
     useEffect(() => {
         if (authenticated) {
@@ -161,18 +151,23 @@ export const Header = () => {
         const fromUrl = getLanguageFromUrl();
         const fromCookie = cookies[decoratorLanguageCookie];
         const fromDefault = Locale.BOKMAL;
+        console.log('set language');
 
         // Priority: Parameter -> url -> cookie -> default
         if (fromParam !== Locale.IKKEBESTEMT) {
+            console.log('param');
             dispatch(languageDuck.actionCreator({ language: fromParam }));
             setCookie(decoratorLanguageCookie, fromParam, cookieOptions);
         } else if (fromUrl !== Locale.IKKEBESTEMT) {
+            console.log('url');
             dispatch(languageDuck.actionCreator({ language: fromUrl }));
             setCookie(decoratorLanguageCookie, fromUrl, cookieOptions);
         } else if (fromCookie) {
+            console.log('cookie');
             dispatch(languageDuck.actionCreator({ language: fromCookie }));
             setCookie(decoratorLanguageCookie, fromCookie, cookieOptions);
         } else {
+            console.log('default');
             dispatch(languageDuck.actionCreator({ language: fromDefault }));
             setCookie(decoratorLanguageCookie, fromDefault, cookieOptions);
         }
@@ -281,6 +276,8 @@ export const Header = () => {
                             CHATBOT: chatbot === true,
                         }),
                     };
+
+                    console.log(params);
                     dispatch(setParams(params));
                 }
             }
