@@ -217,6 +217,8 @@ export const Header = () => {
                     const { enforceLogin, redirectToApp } = payload;
                     const { feedback, chatbot } = payload;
 
+                    console.log(payload);
+
                     if (context) {
                         validateContext(context);
                         setCookie(
