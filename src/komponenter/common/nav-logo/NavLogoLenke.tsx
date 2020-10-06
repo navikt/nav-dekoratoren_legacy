@@ -4,12 +4,12 @@ import { getArbeidsflateContext } from 'komponenter/common/arbeidsflate-lenker/a
 import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import { AnalyticsEventArgs } from 'utils/analytics';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
+import { setParams } from '../../../store/reducers/environment-duck';
+import { cookieOptions } from '../../header/Header';
 import './NavLogoLenke.less';
 
 type Props = {
@@ -39,7 +39,7 @@ export const NavLogoLenke = (props: Props) => {
             analyticsEventArgs={props.analyticsEventArgs}
             onClick={(event) => {
                 setCookie('decorator-context', context.key, cookieOptions);
-                dispatch(settArbeidsflate(context.key));
+                dispatch(setParams({ CONTEXT: context.key }));
                 if (erNavDekoratoren()) {
                     event.preventDefault();
                 }

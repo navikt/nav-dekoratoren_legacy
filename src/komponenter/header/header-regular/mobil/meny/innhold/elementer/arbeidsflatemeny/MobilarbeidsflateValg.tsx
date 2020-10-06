@@ -14,7 +14,7 @@ interface Props {
 }
 
 const stateProps = (state: AppState) => ({
-    arbeidsflate: state.arbeidsflate.status,
+    arbeidsflate: state.environment.PARAMS.CONTEXT,
     environment: state.environment,
 });
 

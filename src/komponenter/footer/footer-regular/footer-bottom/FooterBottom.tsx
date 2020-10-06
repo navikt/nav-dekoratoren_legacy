@@ -25,7 +25,7 @@ const FooterBottom = () => {
     const { data } = useSelector((state: AppState) => state.menypunkt);
     const [personvernNode, settPersonvernNode] = useState<MenyNode>();
     const arbeidsflate = useSelector(
-        (state: AppState) => state.arbeidsflate.status
+        (state: AppState) => state.environment.PARAMS.CONTEXT
     );
 
     useEffect(() => {

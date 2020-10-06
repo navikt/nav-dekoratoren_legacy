@@ -27,7 +27,7 @@ export const mobilSokInputId = `mobil-sok-input`;
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
     language: state.language.language,
-    arbeidsflate: state.arbeidsflate.status,
+    arbeidsflate: state.environment.PARAMS.CONTEXT,
     innloggingsstatus: state.innloggingsstatus,
     hovedMenuIsOpen: state.dropdownToggles.hovedmeny,
     underMenuIsOpen: state.dropdownToggles.undermeny,

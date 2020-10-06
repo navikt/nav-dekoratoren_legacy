@@ -17,8 +17,10 @@ import './FooterTopp.less';
 const FooterTopp = () => {
     const cls = BEMHelper('menylinje-topp');
     const { language } = useSelector((state: AppState) => state.language);
-    const context = useSelector((state: AppState) => state.arbeidsflate.status);
     const { data } = useSelector((state: AppState) => state.menypunkt);
+    const context = useSelector(
+        (state: AppState) => state.environment.PARAMS.CONTEXT
+    );
 
     const [columnsNode, settColumnsNode] = useState<MenyNode>();
     useEffect(() => {

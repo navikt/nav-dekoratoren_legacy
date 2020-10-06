@@ -9,11 +9,11 @@ import { useDispatch } from 'react-redux';
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { Locale } from 'store/reducers/language-duck';
 import { useCookies } from 'react-cookie';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
-import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { finnTekst } from 'tekster/finn-tekst';
 import { AnalyticsEventArgs } from 'utils/analytics';
+import { cookieOptions } from '../../header/Header';
+import { setParams } from 'store/reducers/environment-duck';
 import './ArbeidsflateLenkepanel.less';
 
 interface Props {
@@ -46,7 +46,7 @@ const ArbeidsflateLenkepanel = ({
                 setCookie('decorator-context', lenke.key, cookieOptions);
                 if (erNavDekoratoren()) {
                     event.preventDefault();
-                    dispatch(settArbeidsflate(lenke.key));
+                    dispatch(setParams({ CONTEXT: lenke.key }));
                 }
                 analyticsEvent(analyticsEventArgs);
             }}

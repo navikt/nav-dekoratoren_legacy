@@ -11,7 +11,7 @@ export const loginKnappId = 'login-knapp-id';
 
 const stateSelector = (state: AppState) => ({
     authenticated: state.innloggingsstatus.data.authenticated,
-    arbeidsflate: state.arbeidsflate.status,
+    arbeidsflate: state.environment.PARAMS.CONTEXT,
     language: state.language.language,
     environment: state.environment,
 });

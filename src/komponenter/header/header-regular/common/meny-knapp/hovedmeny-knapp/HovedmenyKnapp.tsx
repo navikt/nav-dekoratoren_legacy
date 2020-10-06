@@ -9,7 +9,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 
 const stateSelector = (state: AppState) => ({
-    arbeidsflate: state.arbeidsflate.status,
+    arbeidsflate: state.environment.PARAMS.CONTEXT,
     isOpen: state.dropdownToggles.hovedmeny,
 });
 

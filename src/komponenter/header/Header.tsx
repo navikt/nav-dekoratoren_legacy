@@ -5,8 +5,6 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { HeaderSimple } from 'komponenter/header/header-simple/HeaderSimple';
 import { HeaderRegular } from 'komponenter/header/header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
-import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
 import { languageDuck, Locale } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
@@ -26,7 +24,7 @@ import { validateAvailableLanguages } from '../../server/utils';
 import { validateBreadcrumbs } from '../../server/utils';
 import { validateContext } from '../../server/utils';
 import { validateLanguage, validateLevel } from '../../server/utils';
-import { setParams } from '../../store/reducers/environment-duck';
+import { setParams } from 'store/reducers/environment-duck';
 import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
@@ -35,7 +33,6 @@ export const decoratorLanguageCookie = 'decorator-language';
 
 const stateSelector = (state: AppState) => ({
     innloggingsstatus: state.innloggingsstatus,
-    arbeidsflate: state.arbeidsflate.status,
     language: state.language.language,
     featureToggles: state.featureToggles,
     environment: state.environment,
@@ -45,7 +42,6 @@ export const Header = () => {
     const dispatch = useDispatch();
     const [sentAuthToApp, setSentAuthToApp] = useState(false);
     const { environment } = useSelector(stateSelector);
-    const { arbeidsflate } = useSelector(stateSelector);
     const { innloggingsstatus } = useSelector(stateSelector);
     const { authenticated } = innloggingsstatus.data;
     const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = environment;
@@ -75,7 +71,7 @@ export const Header = () => {
                 PARAMS.LEVEL === 'Level4' && securityLevel === '3';
 
             if (!authenticated || insufficientPrivileges) {
-                window.location.href = getLoginUrl(environment, arbeidsflate);
+                window.location.href = getLoginUrl(environment, PARAMS.CONTEXT);
             } else if (!sentAuthToApp) {
                 postMessageToApp('auth', data);
                 setSentAuthToApp(true);
@@ -127,13 +123,13 @@ export const Header = () => {
         const fromDefault = MenuValue.PRIVATPERSON;
 
         if (fromParam !== MenuValue.IKKEBESTEMT) {
-            dispatch(settArbeidsflate(fromParam));
+            dispatch(setParams({ CONTEXT: fromParam }));
             setCookie(decoratorContextCookie, fromParam, cookieOptions);
         } else if (fromCookie) {
-            dispatch(settArbeidsflate(fromCookie));
+            dispatch(setParams({ CONTEXT: fromCookie }));
             setCookie(decoratorContextCookie, fromCookie, cookieOptions);
         } else {
-            dispatch(settArbeidsflate(fromDefault));
+            dispatch(setParams({ CONTEXT: fromDefault }));
             setCookie(decoratorContextCookie, fromDefault, cookieOptions);
         }
     }, []);
@@ -338,6 +334,11 @@ const getLanguageFromUrl = (): Locale => {
         return Locale.POLSK;
     }
     return Locale.IKKEBESTEMT;
+};
+
+export const cookieOptions = {
+    path: '/',
+    domain: process.env.NODE_ENV === 'development' ? 'localhost' : '.nav.no',
 };
 
 export default Header;

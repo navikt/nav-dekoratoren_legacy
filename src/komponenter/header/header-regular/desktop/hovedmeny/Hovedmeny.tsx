@@ -13,7 +13,7 @@ const classname = 'desktop-hovedmeny';
 export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';
 
 const stateSelector = (state: AppState) => ({
-    arbeidsflate: state.arbeidsflate.status,
+    arbeidsflate: state.environment.PARAMS.CONTEXT,
     menyPunkter: state.menypunkt,
     language: state.language.language,
     isOpen: state.dropdownToggles.hovedmeny,

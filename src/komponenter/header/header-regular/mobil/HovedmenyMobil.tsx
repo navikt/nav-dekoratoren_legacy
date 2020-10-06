@@ -14,7 +14,7 @@ const classname = 'mobilmeny';
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
     language: state.language.language,
-    arbeidsflate: state.arbeidsflate.status,
+    arbeidsflate: state.environment.PARAMS.CONTEXT,
     hovedIsOpen: state.dropdownToggles.hovedmeny,
     underIsOpen: state.dropdownToggles.undermeny,
     varselIsOpen: state.dropdownToggles.varsler,

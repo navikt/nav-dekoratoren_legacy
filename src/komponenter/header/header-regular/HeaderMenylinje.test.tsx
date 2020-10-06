@@ -10,12 +10,12 @@ import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-kn
 import { ActionType } from 'store/actions';
 import { Status } from 'api/api';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
-import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { VarslerKnapp } from 'komponenter/header/header-regular/common/varsler/varsler-knapp/VarslerKnapp';
 import Minsidemeny from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
 import { innloggetAction } from 'utils/jest/testObjects';
 import { uInnloggetAction } from 'utils/jest/testObjects';
+import { setParams } from '../../../store/reducers/environment-duck';
 
 const store = createStore(reducers);
 
@@ -55,7 +55,7 @@ describe('<HeaderMenylinje>', () => {
     });
 
     it('Skal rendre <VarslerKnapp /> og <Minsidemeny /> komponent for innlogget personbruker', () => {
-        store.dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
+        store.dispatch(setParams({ CONTEXT: MenuValue.PRIVATPERSON }));
         store.dispatch(innloggetAction);
         const wrapper = shallowWithProps();
         expect(wrapper.find(VarslerKnapp)).toHaveLength(1);
@@ -63,7 +63,7 @@ describe('<HeaderMenylinje>', () => {
     });
 
     it('Skal ikke rendre <VarslerKnapp /> og <Minsidemeny /> komponent for uinnlogget personbruker', () => {
-        store.dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
+        store.dispatch(setParams({ CONTEXT: MenuValue.PRIVATPERSON }));
         store.dispatch(uInnloggetAction);
         const wrapper = shallowWithProps();
         expect(wrapper.find(VarslerKnapp)).toHaveLength(0);

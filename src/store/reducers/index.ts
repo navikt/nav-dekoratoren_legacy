@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import arbeidsflateReducer, { Arbeidsflate } from './arbeidsflate-duck';
 import innloggingsstatusReducer from './innloggingsstatus-duck';
 import { InnloggingsstatusState } from './innloggingsstatus-duck';
 import menypunktReducer, { MenyPunkter } from './menu-duck';
@@ -21,7 +20,6 @@ export interface AppState {
     varsler: VarselinnboksState;
     varslerLest: DataElement;
     language: LanguageState;
-    arbeidsflate: Arbeidsflate;
     dropdownToggles: DropdownState;
     driftsmeldinger: DriftsmeldingerState;
     featureToggles: FeatureToggles;
@@ -34,7 +32,6 @@ export const reducers = combineReducers<AppState>({
     varsler: varselinnboksReducer,
     varslerLest: varselLestReducer,
     language: languageDuck.reducer,
-    arbeidsflate: arbeidsflateReducer,
     dropdownToggles: dropdownTogglesReducer,
     driftsmeldinger: driftsmeldingReducer,
     featureToggles: featureToggleReducer,

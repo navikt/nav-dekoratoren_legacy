@@ -15,7 +15,7 @@ interface Props {
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
     language: state.language.language,
-    arbeidsflate: state.arbeidsflate.status,
+    arbeidsflate: state.environment.PARAMS.CONTEXT,
 });
 
 const MobilMeny = (props: Props) => {

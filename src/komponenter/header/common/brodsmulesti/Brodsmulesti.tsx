@@ -1,10 +1,9 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Lenke from 'nav-frontend-lenker';
 import { Bilde } from '../../../common/bilde/Bilde';
 import HomeIcon from 'ikoner/home.svg';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import { postMessageToApp } from 'utils/messages';
 import { Locale } from 'store/reducers/language-duck';
@@ -28,9 +27,11 @@ export const Brodsmulesti = (props: Props) => {
     const { environment } = useSelector((state: AppState) => state);
     const { XP_BASE_URL } = environment;
     const [showAll, setShowAll] = useState(false);
-    const { status } = useSelector((state: AppState) => state.arbeidsflate);
     const { language } = useSelector((state: AppState) => state.language);
-    const context = getArbeidsflateContext(XP_BASE_URL, status);
+    const arbeidsflate = useSelector(
+        (state: AppState) => state.environment.PARAMS.CONTEXT
+    );
+    const context = getArbeidsflateContext(XP_BASE_URL, arbeidsflate);
     const { breadcrumbs } = props;
 
     const isLanguageNorwegian =

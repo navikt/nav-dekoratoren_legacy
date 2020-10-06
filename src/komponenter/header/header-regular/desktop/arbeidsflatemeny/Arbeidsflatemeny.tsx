@@ -6,21 +6,21 @@ import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbei
 import { AnalyticsCategory } from 'utils/analytics';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { useCookies } from 'react-cookie';
-import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { erNavDekoratoren } from 'utils/Environment';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { cookieOptions, decoratorContextCookie } from '../../../Header';
+import { setParams } from 'store/reducers/environment-duck';
 import './Arbeidsflatemeny.less';
 
 const Arbeidsflatemeny = () => {
     const cls = BEMHelper('arbeidsflate');
     const dispatch = useDispatch();
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
-    const [, setCookie] = useCookies(['decorator-context']);
+    const [, setCookie] = useCookies([decoratorContextCookie]);
     const arbeidsflate = useSelector(
-        (state: AppState) => state.arbeidsflate.status
+        (state: AppState) => state.environment.PARAMS.CONTEXT
     );
 
     return (
@@ -48,11 +48,11 @@ const Arbeidsflatemeny = () => {
                                 href={lenke.url}
                                 onClick={(event) => {
                                     setCookie(
-                                        'decorator-context',
+                                        decoratorContextCookie,
                                         lenke.key,
                                         cookieOptions
                                     );
-                                    dispatch(settArbeidsflate(lenke.key));
+                                    dispatch(setParams({ CONTEXT: lenke.key }));
                                     if (erNavDekoratoren()) {
                                         event.preventDefault();
                                     }

@@ -22,7 +22,7 @@ export const headerLogoId = 'header-logo-id';
 const stateSelector = (state: AppState) => ({
     innlogget: state.innloggingsstatus.data.authenticated,
     innloggingsstatus: state.innloggingsstatus.status,
-    arbeidsflate: state.arbeidsflate.status,
+    environment: state.environment,
 });
 
 const NavLogo = ({ arbeidsflate }: { arbeidsflate: MenuValue }) => (
@@ -39,10 +39,10 @@ const NavLogo = ({ arbeidsflate }: { arbeidsflate: MenuValue }) => (
 
 export const HeaderMenylinje = () => {
     const cls = BEMHelper('header-linje');
-    const { innlogget, innloggingsstatus, arbeidsflate } = useSelector(
-        stateSelector
-    );
+    const { environment } = useSelector(stateSelector);
+    const { innlogget, innloggingsstatus } = useSelector(stateSelector);
     const kbNavMainState = useKbNavMain();
+    const arbeidsflate = environment.PARAMS.CONTEXT;
 
     const innloggetPrivatperson =
         innlogget && arbeidsflate === MenuValue.PRIVATPERSON;

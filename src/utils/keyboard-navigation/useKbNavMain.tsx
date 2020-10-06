@@ -12,7 +12,7 @@ import KbNav from 'utils/keyboard-navigation/kb-navigation';
 
 const stateSelector = (state: AppState) => ({
     language: state.language.language,
-    arbeidsflate: state.arbeidsflate.status,
+    environment: state.environment,
     menyStatus: state.menypunkt.status,
     innloggingsStatus: state.innloggingsstatus.data,
     dropdownToggles: state.dropdownToggles,
@@ -48,13 +48,10 @@ export const kbNavInitialState: KeyboardNavState = {
 };
 
 export const useKbNavMain = (): KbNavMain => {
-    const {
-        language,
-        arbeidsflate,
-        menyStatus,
-        innloggingsStatus,
-        dropdownToggles,
-    } = useSelector(stateSelector);
+    const { environment } = useSelector(stateSelector);
+    const { language, menyStatus } = useSelector(stateSelector);
+    const { innloggingsStatus, dropdownToggles } = useSelector(stateSelector);
+    const arbeidsflate = environment.PARAMS.CONTEXT;
     const dispatch = useDispatch();
 
     const [kbNavState, setKbNavState] = useState<KeyboardNavState>(

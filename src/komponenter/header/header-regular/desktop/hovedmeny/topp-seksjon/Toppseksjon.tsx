@@ -8,11 +8,11 @@ import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSp
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { getArbeidsflateContext } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
-import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
-import './Toppseksjon.less';
 import { useCookies } from 'react-cookie';
+import { cookieOptions } from '../../../../Header';
+import { setParams } from '../../../../../../store/reducers/environment-duck';
+import './Toppseksjon.less';
 
 interface Props {
     classname: string;
@@ -22,10 +22,10 @@ export const Toppseksjon = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
     const dispatch = useDispatch();
     const [, setCookie] = useCookies(['decorator-context']);
-    const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
-    const arbeidsflate = useSelector(
-        (state: AppState) => state.arbeidsflate.status
+    const { XP_BASE_URL, PARAMS } = useSelector(
+        (state: AppState) => state.environment
     );
+    const arbeidsflate = PARAMS.CONTEXT;
     const context = getArbeidsflateContext(XP_BASE_URL, arbeidsflate);
 
     return (
@@ -43,7 +43,7 @@ export const Toppseksjon = ({ classname }: Props) => {
                 href={context.url}
                 onClick={(event) => {
                     setCookie('decorator-context', context.key, cookieOptions);
-                    dispatch(settArbeidsflate(context.key));
+                    dispatch(setParams({ CONTEXT: context.key }));
                     if (erNavDekoratoren()) {
                         event.preventDefault();
                     }

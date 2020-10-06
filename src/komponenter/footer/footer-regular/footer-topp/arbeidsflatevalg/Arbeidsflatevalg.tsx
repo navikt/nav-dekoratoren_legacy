@@ -9,7 +9,7 @@ import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/A
 import './Arbeidsflatevalg.less';
 
 const stateSelector = (state: AppState) => ({
-    arbeidsflate: state.arbeidsflate.status,
+    arbeidsflate: state.environment.PARAMS.CONTEXT,
     language: state.language.language,
 });
 

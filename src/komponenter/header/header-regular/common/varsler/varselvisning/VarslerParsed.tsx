@@ -50,7 +50,7 @@ const parseLenke = (
     subIndex?: number
 ) => {
     const arbeidsflate = useSelector(
-        (state: AppState) => state.arbeidsflate.status
+        (state: AppState) => state.environment.PARAMS.CONTEXT
     );
     return (
         <LenkeMedSporing

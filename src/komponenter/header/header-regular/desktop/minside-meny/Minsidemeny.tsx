@@ -18,7 +18,7 @@ const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.minside,
     language: state.language.language,
     menyPunkter: state.menypunkt,
-    arbeidsflate: state.arbeidsflate.status,
+    arbeidsflate: state.environment.PARAMS.CONTEXT,
 });
 
 export const minsideMenyClassname = 'desktop-minside-meny';
