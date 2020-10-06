@@ -151,23 +151,23 @@ export const Header = () => {
         const fromUrl = getLanguageFromUrl();
         const fromCookie = cookies[decoratorLanguageCookie];
         const fromDefault = Locale.BOKMAL;
-        console.log('set language');
+        console.log('Dekoratoren tmp debug: Set language');
 
         // Priority: Parameter -> url -> cookie -> default
         if (fromParam !== Locale.IKKEBESTEMT) {
-            console.log('param');
+            console.log('Dekoratoren tmp debug: Param');
             dispatch(languageDuck.actionCreator({ language: fromParam }));
             setCookie(decoratorLanguageCookie, fromParam, cookieOptions);
         } else if (fromUrl !== Locale.IKKEBESTEMT) {
-            console.log('url');
+            console.log('Dekoratoren tmp debug: URL');
             dispatch(languageDuck.actionCreator({ language: fromUrl }));
             setCookie(decoratorLanguageCookie, fromUrl, cookieOptions);
         } else if (fromCookie) {
-            console.log('cookie');
+            console.log('Dekoratoren tmp debug: Cookie');
             dispatch(languageDuck.actionCreator({ language: fromCookie }));
             setCookie(decoratorLanguageCookie, fromCookie, cookieOptions);
         } else {
-            console.log('default');
+            console.log('Dekoratoren tmp debug: Default');
             dispatch(languageDuck.actionCreator({ language: fromDefault }));
             setCookie(decoratorLanguageCookie, fromDefault, cookieOptions);
         }
@@ -211,8 +211,6 @@ export const Header = () => {
                     const { availableLanguages, breadcrumbs } = payload;
                     const { enforceLogin, redirectToApp } = payload;
                     const { feedback, chatbot } = payload;
-
-                    console.log(payload);
 
                     if (context) {
                         validateContext(context);
@@ -277,6 +275,7 @@ export const Header = () => {
                         }),
                     };
 
+                    console.log('Dekoratoren tmp debug: Set params');
                     console.log(params);
                     dispatch(setParams(params));
                 }
