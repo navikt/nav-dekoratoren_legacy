@@ -216,21 +216,37 @@ export const Header = () => {
                     const { availableLanguages, breadcrumbs } = payload;
                     const { enforceLogin, redirectToApp } = payload;
                     const { feedback, chatbot } = payload;
+
                     if (context) {
                         validateContext(context);
+                        setCookie(
+                            decoratorContextCookie,
+                            context,
+                            cookieOptions
+                        );
                     }
+
+                    if (language) {
+                        validateLanguage(language);
+                        setCookie(
+                            decoratorLanguageCookie,
+                            language,
+                            cookieOptions
+                        );
+                    }
+
                     if (level) {
                         validateLevel(level);
                     }
-                    if (language) {
-                        validateLanguage(language);
-                    }
+
                     if (availableLanguages) {
                         validateAvailableLanguages(availableLanguages);
                     }
+
                     if (breadcrumbs) {
                         validateBreadcrumbs(breadcrumbs);
                     }
+
                     const params = {
                         ...(context && {
                             CONTEXT: context,
