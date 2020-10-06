@@ -4,7 +4,7 @@ import { Ingress } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { sendFeedbackYes } from '../send-feedback';
 import FritekstFelt, { fritekstFeilReducer, initialFritekstFeil, MAX_LENGTH } from './fritekst/FritekstFelt';
-import { KontaktLenker, personvernAdvarsel, QuestionProps, questionStateSelector } from './AlternativCommon';
+import { FeedbackInformasjon, QuestionProps, questionStateSelector } from './AlternativCommon';
 import KnappeRekke from './KnappeRekke';
 import './Alternativ.less';
 
@@ -41,8 +41,7 @@ const AlternativJa = (props: QuestionProps) => {
     };
 
     return (
-        <form
-            className="alternativ-wrapper"
+        <form className="alternativ-wrapper"
             onSubmit={submitFeedback}
         >
             <FritekstFelt
@@ -50,7 +49,7 @@ const AlternativJa = (props: QuestionProps) => {
                 setFeedbackMessage={setFeedbackMessage}
                 errors={fritekstFeil}
                 setErrors={dispatchFritekstFeil}
-                description={personvernAdvarsel}
+                description={<FeedbackInformasjon environment={environment}/>}
                 label={
                     <Ingress>
                         <Tekst id="hva-lette-du-etter" />
@@ -60,7 +59,6 @@ const AlternativJa = (props: QuestionProps) => {
                 harTrykketSubmit={harTrykketSubmit}
 
             />
-            <KontaktLenker environment={environment}/>
             <KnappeRekke avbryt={props.avbryt} state={props.state} />
         </form>
     );

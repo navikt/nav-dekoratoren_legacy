@@ -77,7 +77,6 @@ const FritekstFelt = (props: Props) => {
         }
     }
 
-
     return (
         <Textarea
             value={props.feedbackMessage}

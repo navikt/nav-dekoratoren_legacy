@@ -18,19 +18,16 @@ export interface QuestionProps {
     state: FeedbackState
 }
 
-export const personvernAdvarsel = (
+export const FeedbackInformasjon = React.memo(( props: {environment: Environment} ) => (
     <Normaltekst>
         <Tekst id="advarsel-om-personopplysninger" />
         <br/>
         <Tekst id="advarsel-om-svar" />
+        <br/>
+        <Lenke href={`${props.environment.XP_BASE_URL}/person/kontakt-oss`}><Tekst id="kontakt-oss-1"/></Lenke>
+        <Tekst id="kontakt-oss-2" />
+        <br/>
+        <Tekst id="om-saken-din" />
+        <Lenke href={props.environment.DITT_NAV_URL}><Tekst id="logg-inn-ditt-nav"/></Lenke>
     </Normaltekst>
-)
-
-export const KontaktLenker =  React.memo(( props: {environment: Environment} ) => {
-    return (
-        <Normaltekst className="alternativ-notis">
-            Ønsker du informasjon om saken din? <Lenke href={props.environment.DITT_NAV_URL}>Logg inn på Ditt NAV.</Lenke> <br />
-            Du kan også <Lenke href={`${props.environment.XP_BASE_URL}/person/kontakt-oss`}>skrive eller ringe til NAV.</Lenke>
-        </Normaltekst>
-    );
-});
+));

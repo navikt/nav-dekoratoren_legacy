@@ -44,13 +44,13 @@ const Feedback = () => {
                                 className="knapp"
                                 onClick={handleJa}
                             >
-                                <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
+                                <Tekst id="svarknapp-ja" />
                             </Knapp>
                             <Knapp
                                 className="knapp"
                                 onClick={handleNei}
                             >
-                                <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
+                                <Tekst id="svarknapp-nei" />
                             </Knapp>
                         </div>
                     </div>

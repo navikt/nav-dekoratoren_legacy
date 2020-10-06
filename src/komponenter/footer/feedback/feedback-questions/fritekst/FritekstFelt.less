@@ -1,5 +1,10 @@
+@import (reference) '../../../../../styling-variabler.less';
+
 .textarea__container {
-    max-width: 25rem;
+    width: 60vw;
+    @media @screen-mobile {
+        width: auto;
+    }
 
     label {
         margin-bottom: 1em;

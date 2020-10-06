@@ -3,8 +3,6 @@ import { logAmplitudeEvent } from 'utils/amplitude';
 import { lagreTilbakemelding } from '../../../store/reducers/tilbakemelding-duck';
 import { Dispatch } from '../../../store/dispatch-type';
 
-
-
 export const sendFeedbackYes = (message: string, url: string, language: string, dispatch: Dispatch) => {
     const feedback = {
         answer: 'Yes',

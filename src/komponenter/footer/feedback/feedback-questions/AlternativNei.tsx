@@ -5,7 +5,7 @@ import Tekst from 'tekster/finn-tekst';
 import { RadioGruppe, Radio, SkjemaGruppe } from 'nav-frontend-skjema';
 import { sendFeedbackNo } from '../send-feedback';
 import FritekstFelt, { fritekstFeilReducer, initialFritekstFeil, MAX_LENGTH } from './fritekst/FritekstFelt';
-import { KontaktLenker, personvernAdvarsel, QuestionProps, questionStateSelector } from './AlternativCommon';
+import { FeedbackInformasjon, QuestionProps, questionStateSelector } from './AlternativCommon';
 import KnappeRekke from './KnappeRekke';
 import './Alternativ.less';
 
@@ -69,7 +69,7 @@ const AlternativNei = (props: QuestionProps) => {
                         <Tekst id="hva-fant-du-ikke"
                         />
                     </Ingress>}
-                description={personvernAdvarsel}
+                description={<FeedbackInformasjon environment={environment} />}
             >
                 <RadioGruppe
                     feil={reasonFeil}
@@ -110,7 +110,6 @@ const AlternativNei = (props: QuestionProps) => {
                     harTrykketSubmit={harTrykketSubmit}
                  />
             </SkjemaGruppe>
-            <KontaktLenker environment={environment}/>
             <KnappeRekke avbryt={props.avbryt} state={props.state} />
         </form>
     );
