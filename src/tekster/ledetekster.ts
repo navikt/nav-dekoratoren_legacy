@@ -1,4 +1,6 @@
-export const ledetekster: { [key: string]: string } = {
+export type stringOrFunction = string | ((input: string) => string);
+
+export const ledetekster: { [key: string]: stringOrFunction} = {
     'footer-arbeids-og-veldferdsetaten': 'Arbeids- og velferdsetaten',
     'footer-arbeids-og-veldferdsetaten-en': 'Arbeids- og velferdsetaten',
     'footer-arbeids-og-veldferdsetaten-se': 'Arbeids- og velferdsetaten',
@@ -245,9 +247,6 @@ export const ledetekster: { [key: string]: string } = {
     'hva-fant-du-ikke': 'Vil du fortelle oss hva du ikke fant?',
     'hva-fant-du-ikke-en': 'Do you want to tell us what you did not find?',
     'hva-fant-du-ikke-se': 'Vil du fortelle oss hva du ikke fant?',
-
-    'advarsel-om-personopplysninger': 'Ikke skriv personlige eller sensitive opplysninger.',
-    'advarsel-om-svar': 'Du får ikke svar på tilbakemeldingen din.',
     'kontakt-oss-1': 'Kontakt oss',
     'kontakt-oss-2': ' hvis du trenger hjelp.',
     'kontakt-oss-1-en': 'Contact us',
@@ -257,19 +256,30 @@ export const ledetekster: { [key: string]: string } = {
     'om-saken-din': 'Lurer du på hva som skjer i saken din? ',
     'logg-inn-ditt-nav': 'Logg inn på Ditt NAV.',
     'om-saken-din-en': 'Questions about your case? ',
-    'logg-inn-ditt-nav-en': 'Log in on My page',
+    'logg-inn-ditt-nav-en': 'Log in to My page.',
     'om-saken-din-se': 'Lurer du på hva som skjer i saken din? ',
     'logg-inn-ditt-nav-se': 'Logg inn på Ditt NAV.',
+    'advarsel-om-personopplysninger': 'Ikke skriv personlige eller sensitive opplysninger.',
+    'advarsel-om-svar': 'Du får ikke svar på tilbakemeldingen din.',
     'advarsel-om-personopplysninger-en': 'Do not write personal or sensitiv information.',
     'advarsel-om-svar-en': 'You will not get an answere on your feeback.',
     'advarsel-om-personopplysninger-se': 'Ikke skriv personlige eller sensitive opplysninger.',
     'advarsel-om-svar-se': 'Du får ikke svar på tilbakemeldingen din.',
+    'tilbakemelding-placeholder' : 'Skriv din tilbakemelding her',
+    'tilbakemelding-placeholder-en' : 'Write your feedback here',
+    'tilbakemelding-placeholder-se' : 'Skriv din tilbakemelding her',
+    'textarea-undermaks' : (input: string) => `Du har ${input} tegn igjen`,
+    'textarea-undermaks-en' : (input: string) => `You have ${input} remaining characters`,
+    'textarea-undermaks-se' : (input: string) => `Du har ${input} tegn igjen`,
+    'textarea-overmaks' : (input: string) => `Du har ${input} tegn for mye`,
+    'textarea-overmaks-en' : (input: string) => `You have ${input} characters too many`,
+    'textarea-overmaks-se' : (input: string) => `Du har ${input} tegn for mye`,
     'send-inn-tilbakemelding': 'Send svar',
     'send-inn-tilbakemelding-en': 'Submit',
     'send-inn-tilbakemelding-se': 'Send svar',
-    avbryt: 'Avbryt',
-    'avbryt-en': 'Cancel',
-    'avbryt-se': 'Avbryt',
+    'avbryt-tilbakemelding': 'Ingen kommentar',
+    'avbryt-tilbakemelding-en': 'No comment',
+    'avbryt-tilbakemelding-se': 'Ingen kommentar',
     'hensikt-med-tilbakemelding':
         'Vi bruker svaret ditt til å forbedre sidene.',
     'hensikt-med-tilbakemelding-en':
@@ -303,6 +313,7 @@ export const ledetekster: { [key: string]: string } = {
     villedende: 'Innholdet var villedende',
     'villedende-en': 'The content was misleading',
     'villedende-se': 'Innholdet var villedende',
+
     'browser-utdatert-msg': 'Du bruker en nettleser som nav.no ikke støtter. ',
     'browser-utdatert-msg-en':
         'You are using a web browser which is not supported on nav.no. ',

@@ -3,6 +3,9 @@ import { Textarea, TextareaProps } from 'nav-frontend-skjema';
 import { checkForViolations, getViolationsFormatted } from './Sanitizer';
 import { useDebounce } from '../../../../../utils/hooks/useDebounce';
 import './FritekstFelt.less';
+import Tekst, { finnTekst, finnTekstMedPayload } from '../../../../../tekster/finn-tekst';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../../../store/reducers';
 
 export const MAX_LENGTH = 1000;
 
@@ -52,7 +55,7 @@ interface Props extends Partial<TextareaProps> {
 }
 
 const FritekstFelt = (props: Props) => {
-
+    const { language } = useSelector((state: AppState) => state.language);
     const debouncedInputVerdier = useDebounce(props.feedbackMessage, 500);
     const {feedbackMessage, setErrors, harTrykketSubmit} = props;
 
@@ -77,15 +80,38 @@ const FritekstFelt = (props: Props) => {
         }
     }
 
+    const tellerTekst = (antallTegn: number, maxLength: number): React.ReactNode => {
+        let content = '';
+        let className= '';
+        const antallTegnIgjen = maxLength - antallTegn;
+        if (antallTegnIgjen < 0) {
+            content =  finnTekstMedPayload('textarea-overmaks', language, (Math.abs(antallTegnIgjen)).toString());
+            className =  'teller-tekst teller-tekst--overflow'
+        } else {
+            content = finnTekstMedPayload('textarea-undermaks', language, (antallTegnIgjen).toString());
+            className= 'teller-tekst'
+        }
+
+        return(
+            <span
+                className={className}
+                aria-live="polite"
+            >
+                {content }
+            </span>
+        );
+    }
+
     return (
         <Textarea
             value={props.feedbackMessage}
             onChange={fritekstChanged}
             description={props.description}
             label={props.label}
-            placeholder="Skriv din tilbakemelding her"
+            placeholder={finnTekst('tilbakemelding-placeholder', language)}
             maxLength={MAX_LENGTH}
             textareaRef={props.textareaRef}
+            tellerTekst={tellerTekst}
             feil={ (props.errors.invalidInput || props.errors.maxLength) ? (
                     <>
                         { props.errors.invalidInput &&

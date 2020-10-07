@@ -31,7 +31,7 @@ const KnappeRekke = ({ state, avbryt }: Props) => {
                 <Tekst id="send-inn-tilbakemelding" />
             </Hovedknapp>
             <Flatknapp mini onClick={userClosedFeedback} htmlType="button">
-                <Tekst id="avbryt" />
+                <Tekst id="avbryt-tilbakemelding" />
             </Flatknapp>
         </div>
     );

@@ -1,12 +1,16 @@
 import React from 'react';
-import { ledetekster } from './ledetekster';
+import { ledetekster, stringOrFunction } from './ledetekster';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { Locale } from 'store/reducers/language-duck';
 
-export function finnTekst(id: string, language: Locale): string {
+export function finnTekstMedPayload(id: string, language: Locale, payload: string): string{
+    return finnTekst(id, language, payload)
+};
+
+export function finnTekst(id: string, language: Locale, payload?:string): string {
     // Correct language
-    let ledetekst: string;
+    let ledetekst: stringOrFunction;
     switch (language) {
         default:
         case Locale.BOKMAL:
@@ -31,7 +35,17 @@ export function finnTekst(id: string, language: Locale): string {
         );
         return id;
     }
-    return ledetekst;
+    if (typeof ledetekst === 'string') {
+        return ledetekst;
+    }
+    if(!payload) {
+        console.warn(
+            `Kunne ikke finne input variabel til tekst med id: ${id}! 
+            Returnerer tekst med tom variabel.`
+        );
+        return ledetekst('');
+    }
+    return ledetekst(payload)
 }
 
 interface Props {
