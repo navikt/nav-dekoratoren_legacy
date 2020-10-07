@@ -9,7 +9,7 @@ export const Bilde = (props: Props) => {
     return (
         <img
             src={`${APP_URL}${props.asset}`}
-            alt={props.altText}
+            alt={props.altText || ''}
             className={props.className}
         />
     );

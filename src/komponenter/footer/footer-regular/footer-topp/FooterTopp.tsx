@@ -52,7 +52,7 @@ const FooterTopp = () => {
     };
 
     return (
-        <section className={cls.className}>
+        <div className={cls.className}>
             <div className="topp-kolonner">
                 <div className="menylenker-seksjon til-toppen">
                     <div className="til-toppen-innhold">
@@ -100,7 +100,7 @@ const FooterTopp = () => {
                       ))}
                 <Arbeidsflatevalg />
             </div>
-        </section>
+        </div>
     );
 };
 
