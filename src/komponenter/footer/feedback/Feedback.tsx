@@ -4,7 +4,6 @@ import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
 import AlternativJa from './feedback-questions/AlternativJa';
 import AlternativNei from './feedback-questions/AlternativNei';
-import amplitudeTriggers from './amplitude-triggers';
 import { logAmplitudeEvent } from 'utils/amplitude';
 import Thankyou from './feedback-thank-you/ThankYou';
 import './Feedback.less';
@@ -16,12 +15,12 @@ const Feedback = () => {
 
     const handleNei = () => {
         setState('nei');
-        logAmplitudeEvent(amplitudeTriggers.felles, { svar: 'nei' });
+        logAmplitudeEvent('tilbakemelding', { svar: 'nei' });
     };
 
     const handleJa = () => {
         setState('ja');
-        logAmplitudeEvent(amplitudeTriggers.felles, { svar: 'ja' });
+        logAmplitudeEvent('tilbakemelding', { svar: 'ja' });
     };
 
     return (

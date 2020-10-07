@@ -1,5 +1,4 @@
 import React from 'react';
-import amplitudeTriggers from '../amplitude-triggers';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { logAmplitudeEvent } from 'utils/amplitude';
@@ -15,11 +14,9 @@ const KnappeRekke = ({ state, avbryt }: Props) => {
 
     const userClosedFeedback = () => {
         if (state === 'ja') {
-            logAmplitudeEvent(amplitudeTriggers.jaKnapp, {
-                svar: 'Avbrutt',
-            });
+            logAmplitudeEvent('tilbakemelding-ja', { svar: 'Avbrutt', });
         } else if (state === 'nei') {
-            logAmplitudeEvent(amplitudeTriggers.neiKnapp, { svar: 'Avbrutt' });
+            logAmplitudeEvent('tilbakemelding-nei', { svar: 'Avbrutt' });
         }
 
         avbryt();
