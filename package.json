@@ -218,8 +218,7 @@
         }
     },
     "lint-staged": {
-        "*.{js,jsx,ts,tsx}": "eslint",
-        "*.{js,jsx,ts,tsx,json,less,css,md}": "prettier --write"
+        "*.{js,jsx,ts,tsx}": "eslint"
     },
     "prettier": {
         "printWidth": 160,

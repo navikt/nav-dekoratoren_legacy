@@ -44,28 +44,42 @@ const Feedback = () => {
     }, [closeFeedback]);
 
     return (
-        <CloseFeedbackContext.Provider value={{ closeFeedback, setCloseFeedback }}>
+        <CloseFeedbackContext.Provider
+            value={{ closeFeedback, setCloseFeedback }}
+        >
             <Fragment>
                 <div className="footer-linje" />
                 <div className="feedback-container">
                     {!buttonsPressed.yesButton && !buttonsPressed.noButton ? (
-                        <div className="qa-container" role="group" aria-labelledby="feedback-text">
+                        <div
+                            className="qa-container"
+                            role="group"
+                            aria-labelledby="feedback-text"
+                        >
                             <Ingress>
                                 <label id="feedback-text">
                                     <Tekst id="fant-du-det-du-lette-etter" />
                                 </label>
                             </Ingress>
                             <div className="buttons-container">
-                                <Knapp className="knapp" onClick={userPressedYes}>
+                                <Knapp
+                                    className="knapp"
+                                    onClick={userPressedYes}
+                                >
                                     <Tekst id="fant-det-du-lette-etter-svarknapp-ja" />
                                 </Knapp>
-                                <Knapp className="knapp" onClick={userPressedNo}>
+                                <Knapp
+                                    className="knapp"
+                                    onClick={userPressedNo}
+                                >
                                     <Tekst id="fant-det-du-lette-etter-svarknapp-nei" />
                                 </Knapp>
                             </div>
                         </div>
                     ) : null}
-                    {buttonsPressed.yesButton && <ThankYou showFeedbackUsage={false} />}
+                    {buttonsPressed.yesButton && (
+                        <ThankYou showFeedbackUsage={false} />
+                    )}
                     {buttonsPressed.noButton && <AlternativNei />}
                 </div>
             </Fragment>
