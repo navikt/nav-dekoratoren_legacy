@@ -14,7 +14,7 @@ export const fetchEnv = (): Promise<Environment> => {
                     });
             }
         } else {
-            throw 'Fant ikke data-src fra decorator-env i dom';
+            throw new Error('Fant ikke data-src fra decorator-env i dom');
         }
     });
 };

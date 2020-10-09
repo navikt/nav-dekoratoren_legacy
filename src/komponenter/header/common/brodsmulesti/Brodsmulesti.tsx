@@ -1,10 +1,9 @@
-import React, { Fragment, useState } from 'react';
+import React, {  useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Lenke from 'nav-frontend-lenker';
 import { Bilde } from '../../../common/bilde/Bilde';
 import HomeIcon from 'ikoner/home.svg';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import { postMessageToApp } from 'utils/messages';
 import { Locale } from 'store/reducers/language-duck';

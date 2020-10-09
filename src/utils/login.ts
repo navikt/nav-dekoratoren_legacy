@@ -8,7 +8,7 @@ export const getLoginUrl = (
 ) => {
     const { LOGIN_URL, DITT_NAV_URL } = environment;
     const { MINSIDE_ARBEIDSGIVER_URL, PARAMS } = environment;
-    const appUrl = location.origin + location.pathname;
+    const appUrl = window.location.origin + window.location.pathname;
     return `${
         PARAMS.REDIRECT_TO_APP || erNavDekoratoren()
             ? `${LOGIN_URL}/login?redirect=${appUrl}`

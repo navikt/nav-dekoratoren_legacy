@@ -1,11 +1,8 @@
 import React from 'react';
 import Cicle from 'ikoner/circle.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { finnTekst } from 'tekster/finn-tekst';
 import { farger, LocaleOption } from './SprakVelger';
-import { useSelector } from 'react-redux';
 import { BEMWrapper } from 'utils/bem';
-import { AppState } from 'store/reducers';
 import { Bilde } from '../../../common/bilde/Bilde';
 
 interface Props {

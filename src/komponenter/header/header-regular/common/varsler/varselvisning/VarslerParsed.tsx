@@ -43,7 +43,7 @@ const parseIkon = (ikonStr: string) => {
     );
 };
 
-const parseLenke = (
+const ParsedLenke = (
     href: string | undefined,
     children: DomElement[] | undefined,
     rowIndex?: number,
@@ -111,7 +111,7 @@ export const VarslerParsed = ({ varsler, rowIndex }: Props) => {
             }
 
             if (name?.toLowerCase() === 'a') {
-                return parseLenke(
+                return ParsedLenke(
                     attribs?.href,
                     children,
                     rowIndex,
