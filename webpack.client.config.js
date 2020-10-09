@@ -7,7 +7,6 @@ const prefixer = require("postcss-prefix-selector");
 const autoprefixer = require("autoprefixer");
 const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 const MomentTimezoneDataPlugin = require("moment-timezone-data-webpack-plugin");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 const browserConfig = {
   mode: process.env.NODE_ENV || "development",
@@ -164,7 +163,7 @@ const browserConfig = {
       startYear: moment().year() - 1,
       endYear: moment().year() + 1,
       matchZones: "Europe/Oslo",
-    })
+    }),
   ],
 };
 
