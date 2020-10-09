@@ -41,7 +41,7 @@ const Feedback = () => {
 
             setCloseFeedback(false);
         }
-    }, []);
+    }, [closeFeedback]);
 
     return (
         <CloseFeedbackContext.Provider value={{ closeFeedback, setCloseFeedback }}>

@@ -16,7 +16,6 @@ const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
   const closeFeedbackContext = () => useContext(CloseFeedbackContext)!;
 
   const { setCloseFeedback } = closeFeedbackContext();
-
   const userClosedFeedback = () => {
     if (context === "alternativ-feil-mangler") {
       logAmplitudeEvent(amplitudeTriggers.rapporterKnapp, {
