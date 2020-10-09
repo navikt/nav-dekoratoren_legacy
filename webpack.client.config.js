@@ -18,7 +18,8 @@ const browserConfig = {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].js',
     },
-    devtool: process.env.NODE_ENV === 'production' ? '' : 'cheap-module-source-map',
+    devtool:
+        process.env.NODE_ENV === 'production' ? '' : 'cheap-module-source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         alias: {
@@ -62,7 +63,10 @@ const browserConfig = {
                             {
                                 loader: 'svgo-loader',
                                 options: {
-                                    plugins: [{ removeTitle: false }, { prefixIds: true }],
+                                    plugins: [
+                                        { removeTitle: false },
+                                        { prefixIds: true },
+                                    ],
                                 },
                             },
                         ],
@@ -72,8 +76,15 @@ const browserConfig = {
                         include: path.resolve(__dirname, 'src'),
                         loader: 'babel-loader',
                         options: {
-                            customize: require.resolve('babel-preset-react-app/webpack-overrides'),
-                            presets: [['react-app', { flow: false, typescript: true }]],
+                            customize: require.resolve(
+                                'babel-preset-react-app/webpack-overrides'
+                            ),
+                            presets: [
+                                [
+                                    'react-app',
+                                    { flow: false, typescript: true },
+                                ],
+                            ],
 
                             plugins: [
                                 [
@@ -81,7 +92,8 @@ const browserConfig = {
                                     {
                                         loaderMap: {
                                             svg: {
-                                                ReactComponent: '@svgr/webpack?-svgo,+ref![path]',
+                                                ReactComponent:
+                                                    '@svgr/webpack?-svgo,+ref![path]',
                                             },
                                         },
                                     },
@@ -100,7 +112,12 @@ const browserConfig = {
                             babelrc: false,
                             configFile: false,
                             compact: false,
-                            presets: [['babel-preset-react-app/dependencies', { helpers: true }]],
+                            presets: [
+                                [
+                                    'babel-preset-react-app/dependencies',
+                                    { helpers: true },
+                                ],
+                            ],
                             cacheDirectory: true,
                             cacheCompression: !!process.env.NODE_ENV,
                             sourceMaps: false,
