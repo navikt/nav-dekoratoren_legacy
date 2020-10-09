@@ -5,12 +5,12 @@ import { Knapp } from "nav-frontend-knapper";
 import Tekst from "tekster/finn-tekst";
 import { logAmplitudeEvent } from "utils/amplitude";
 
+// Disable eslint siden denne fila snart blir fjernet
+/*eslint-disable*/
+
 interface Props {
   context: string;
 }
-
-// Disable eslint siden denne fila snart blir fjernet
-/*eslint-disable*/
 
 const CloseFeedbackHandler: React.FC<Props> = ({ context }) => {
   const closeFeedbackContext = () => useContext(CloseFeedbackContext)!;
