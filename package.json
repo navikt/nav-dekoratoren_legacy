@@ -120,7 +120,6 @@
     "@types/enzyme": "^3.10.6",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/express": "^4.17.8",
-    "@types/fork-ts-checker-webpack-plugin": "^0.4.5",
     "@types/jest": "^26.0.13",
     "@types/js-cookie": "^2.2.6",
     "@types/lodash.debounce": "^4.0.6",
@@ -159,7 +158,6 @@
     "eslint-plugin-react": "^7.21.3",
     "eslint-plugin-react-hooks": "^2.5.1",
     "file-loader": "^6.1.0",
-    "fork-ts-checker-webpack-plugin": "^5.2.0",
     "html-webpack-plugin": "^4.4.1",
     "husky": "^4.3.0",
     "jest": "^26.4.2",
@@ -222,7 +220,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint",
-    "*.{js,jsx,ts,tsx,json,less,css,md}": "prettier --write"
+    "*.{js,jsx,ts,tsx,json,less,css,md}": "prettier"
   },
   "prettier": {
     "printWidth": 160

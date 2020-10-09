@@ -164,12 +164,7 @@ const browserConfig = {
       startYear: moment().year() - 1,
       endYear: moment().year() + 1,
       matchZones: "Europe/Oslo",
-    }),
-    new ForkTsCheckerWebpackPlugin({
-      eslint: {
-        files: "./src/**/*.{js,ts,tsx}",
-      },
-    }),
+    })
   ],
 };
 
