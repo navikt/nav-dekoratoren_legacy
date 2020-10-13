@@ -1,5 +1,5 @@
 import { MenuValue } from 'utils/meny-storage-utils';
-import { ActionType, Handling, HentDriftsmeldingSUCCESS } from '../actions';
+import { ActionType, Handling } from '../actions';
 import { Locale, AvailableLanguage } from './language-duck';
 import { Breadcrumb } from '../../komponenter/header/common/brodsmulesti/Brodsmulesti';
 
@@ -75,10 +75,7 @@ export const initialState: Environment = {
     },
 };
 
-export const reducer = (
-    state: Environment = initialState,
-    action: Handling
-): Environment => {
+export const reducer = (state: Environment = initialState, action: Handling): Environment => {
     switch (action.type) {
         case ActionType.SETT_ENVIRONMENT: {
             return { ...state, ...action.data };

@@ -1,33 +1,11 @@
-import React, { useEffect } from 'react';
-import {
-    createKbNavGraph,
-    NodeEdgeOpposite,
-    selectNode,
-} from './kb-navigation';
+import { useEffect } from 'react';
+import { createKbNavGraph, NodeEdgeOpposite, selectNode } from './kb-navigation';
 import { KbNavConfig } from './kb-navigation-setup';
 import { KbNavMain } from './useKbNavMain';
 
-export const useKbNavSub = (
-    config: KbNavConfig,
-    kbNavMain: KbNavMain,
-    isEnabled: boolean,
-    forceUpdate?: any
-) => {
-    const {
-        group,
-        rootIndex,
-        maxColsPerRow,
-        parentNodeId,
-        parentNodeEdge,
-        idMap,
-    } = config;
-    const {
-        currentNode,
-        mainNodeMap,
-        subNodeMap,
-        setCurrentNode,
-        setSubGraph,
-    } = kbNavMain;
+export const useKbNavSub = (config: KbNavConfig, kbNavMain: KbNavMain, isEnabled: boolean, forceUpdate?: any) => {
+    const { group, rootIndex, maxColsPerRow, parentNodeId, parentNodeEdge, idMap } = config;
+    const { currentNode, mainNodeMap, subNodeMap, setCurrentNode, setSubGraph } = kbNavMain;
 
     useEffect(() => {
         const parentNode = mainNodeMap[parentNodeId];

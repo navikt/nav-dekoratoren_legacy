@@ -50,12 +50,10 @@ export const Header = () => {
     const { authenticated } = innloggingsstatus.data;
     const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
+    const breadcrumbs = PARAMS.BREADCRUMBS || [];
+    const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
 
-    const [cookies, setCookie] = useCookies([
-        decoratorLanguageCookie,
-        decoratorContextCookie,
-        unleashCacheCookie,
-    ]);
+    const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie, unleashCacheCookie]);
 
     // Handle feature toggles
     useEffect(() => {
@@ -69,8 +67,7 @@ export const Header = () => {
         const { status, data } = innloggingsstatus;
         if (PARAMS.ENFORCE_LOGIN && status === Status.OK) {
             const { authenticated, securityLevel } = data;
-            const insufficientPrivileges =
-                PARAMS.LEVEL === 'Level4' && securityLevel === '3';
+            const insufficientPrivileges = PARAMS.LEVEL === 'Level4' && securityLevel === '3';
 
             if (!authenticated || insufficientPrivileges) {
                 window.location.href = getLoginUrl(environment, arbeidsflate);
@@ -94,10 +91,7 @@ export const Header = () => {
                     data: togglesFromCookie,
                 });
             } else {
-                fetchFeatureToggles(
-                    API_UNLEASH_PROXY_URL,
-                    currentFeatureToggles
-                )
+                fetchFeatureToggles(API_UNLEASH_PROXY_URL, currentFeatureToggles)
                     .then((updatedFeatureToggles) => {
                         dispatch({
                             type: ActionType.SETT_FEATURE_TOGGLES,
@@ -110,9 +104,7 @@ export const Header = () => {
                         });
                     })
                     .catch((error) => {
-                        console.error(
-                            `Failed to fetch feature-toggles: ${error}`
-                        );
+                        console.error(`Failed to fetch feature-toggles: ${error}`);
                     });
             }
         }
@@ -125,25 +117,17 @@ export const Header = () => {
         const fromDefault = MenuValue.PRIVATPERSON;
 
         if (fromParam !== MenuValue.IKKEBESTEMT) {
-            dispatch(settArbeidsflate(fromParam));
-            setCookie(decoratorContextCookie, fromParam, cookieOptions);
+            setContext(fromParam);
         } else if (fromCookie) {
-            dispatch(settArbeidsflate(fromCookie));
-            setCookie(decoratorContextCookie, fromCookie, cookieOptions);
+            setContext(fromCookie);
         } else {
-            dispatch(settArbeidsflate(fromDefault));
-            setCookie(decoratorContextCookie, fromDefault, cookieOptions);
+            setContext(fromDefault);
         }
     }, []);
 
-    // Context utils
-    const defaultToPerson = () => {
-        dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
-        setCookie(
-            decoratorContextCookie,
-            MenuValue.PRIVATPERSON,
-            cookieOptions
-        );
+    const setContext = (context: MenuValue) => {
+        dispatch(settArbeidsflate(context));
+        setCookie(decoratorContextCookie, context, cookieOptions);
     };
 
     // Fetch notifications
@@ -154,7 +138,7 @@ export const Header = () => {
     }, [authenticated]);
 
     // Change language
-    const setLanguage = () => {
+    useEffect(() => {
         const fromParam = PARAMS.LANGUAGE;
         const fromUrl = getLanguageFromUrl();
         const fromCookie = cookies[decoratorLanguageCookie];
@@ -162,24 +146,20 @@ export const Header = () => {
 
         // Priority: Parameter -> url -> cookie -> default
         if (fromParam !== Locale.IKKEBESTEMT) {
-            dispatch(languageDuck.actionCreator({ language: fromParam }));
-            setCookie(decoratorLanguageCookie, fromParam, cookieOptions);
+            setLanguage(fromParam);
         } else if (fromUrl !== Locale.IKKEBESTEMT) {
-            dispatch(languageDuck.actionCreator({ language: fromUrl }));
-            setCookie(decoratorLanguageCookie, fromUrl, cookieOptions);
+            setLanguage(fromUrl);
         } else if (fromCookie) {
-            dispatch(languageDuck.actionCreator({ language: fromCookie }));
-            setCookie(decoratorLanguageCookie, fromCookie, cookieOptions);
+            setLanguage(fromCookie);
         } else {
-            dispatch(languageDuck.actionCreator({ language: fromDefault }));
-            setCookie(decoratorLanguageCookie, fromDefault, cookieOptions);
+            setLanguage(fromDefault);
         }
-    };
-
-    useEffect(() => {
-        window.addEventListener('popstate', setLanguage);
-        setLanguage();
     }, []);
+
+    const setLanguage = (locale: Locale) => {
+        dispatch(languageDuck.actionCreator({ language: locale }));
+        setCookie(decoratorLanguageCookie, locale, cookieOptions);
+    };
 
     // Send ready message to applications
     useEffect(() => {
@@ -189,10 +169,7 @@ export const Header = () => {
             const { source, event } = data;
             if (isSafe) {
                 if (source === 'decoratorClient' && event === 'ready') {
-                    window.postMessage(
-                        { source: 'decorator', event: 'ready' },
-                        window.location.origin
-                    );
+                    window.postMessage({ source: 'decorator', event: 'ready' }, window.location.origin);
                 }
             }
         };
@@ -216,12 +193,14 @@ export const Header = () => {
                     const { feedback, chatbot } = payload;
                     if (context) {
                         validateContext(context);
-                    }
-                    if (level) {
-                        validateLevel(level);
+                        setContext(context);
                     }
                     if (language) {
                         validateLanguage(language);
+                        setLanguage(language);
+                    }
+                    if (level) {
+                        validateLevel(level);
                     }
                     if (availableLanguages) {
                         validateAvailableLanguages(availableLanguages);
@@ -276,26 +255,14 @@ export const Header = () => {
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
-            <header className="siteheader">
-                {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
-                    <HeaderSimple />
-                ) : (
-                    <HeaderRegular />
-                )}
-            </header>
+            <header className="siteheader">{PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? <HeaderSimple /> : <HeaderRegular />}</header>
             <Driftsmeldinger />
-            {(PARAMS.BREADCRUMBS || PARAMS.AVAILABLE_LANGUAGES) && (
+            {(breadcrumbs.length > 0 || availableLanguages.length > 0) && (
                 // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
                 <div className={'decorator-utils-container'}>
                     <div className={'decorator-utils-content'}>
-                        {PARAMS.BREADCRUMBS && (
-                            <Brodsmulesti breadcrumbs={PARAMS.BREADCRUMBS} />
-                        )}
-                        {PARAMS.AVAILABLE_LANGUAGES && (
-                            <SprakVelger
-                                availableLanguages={PARAMS.AVAILABLE_LANGUAGES}
-                            />
-                        )}
+                        {breadcrumbs.length > 0 && <Brodsmulesti breadcrumbs={breadcrumbs} />}
+                        {availableLanguages.length > 0 && <SprakVelger languages={availableLanguages} />}
                     </div>
                 </div>
             )}

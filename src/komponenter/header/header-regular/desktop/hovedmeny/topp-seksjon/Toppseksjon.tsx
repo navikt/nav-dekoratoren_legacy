@@ -23,31 +23,24 @@ export const Toppseksjon = ({ classname }: Props) => {
     const dispatch = useDispatch();
     const [, setCookie] = useCookies(['decorator-context']);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
-    const arbeidsflate = useSelector(
-        (state: AppState) => state.arbeidsflate.status
-    );
+    const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
     const context = getArbeidsflateContext(XP_BASE_URL, arbeidsflate);
 
     return (
         <div className={cls.element('topp-seksjon')}>
             <Systemtittel className={cls.element('topp-seksjon-tittel')}>
                 <Tekst id={`rolle-${arbeidsflate.toLowerCase()}`} />
-                <span
-                    className={cls.element('topp-seksjon-tittel-decoration')}
-                    aria-hidden={true}
-                >
+                <span className={cls.element('topp-seksjon-tittel-decoration')} aria-hidden={true}>
                     //
                 </span>
             </Systemtittel>
             <LenkeMedSporing
                 href={context.url}
                 onClick={(event) => {
-                    event.preventDefault();
                     setCookie('decorator-context', context.key, cookieOptions);
+                    dispatch(settArbeidsflate(context.key));
                     if (erNavDekoratoren()) {
-                        dispatch(settArbeidsflate(context.key));
-                    } else {
-                        window.location.href = context.url;
+                        event.preventDefault();
                     }
                 }}
                 id={KbNav.getKbId(KbNavGroup.Hovedmeny, {
