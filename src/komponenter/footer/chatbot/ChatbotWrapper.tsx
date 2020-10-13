@@ -31,7 +31,11 @@ const stateSelector = (state: AppState) => ({
     paramChatbot: state.environment.PARAMS.CHATBOT,
     language: state.language.language,
     serverTime: state.environment.SERVER_TIME,
-    menuIsActive: state.dropdownToggles.hovedmeny || state.dropdownToggles.minside || state.dropdownToggles.sok || state.dropdownToggles.varsler,
+    menuIsActive:
+        state.dropdownToggles.hovedmeny ||
+        state.dropdownToggles.minside ||
+        state.dropdownToggles.sok ||
+        state.dropdownToggles.varsler,
 });
 
 type Props = {
@@ -40,7 +44,11 @@ type Props = {
     configId?: string;
 };
 
-export const ChatbotWrapper = ({ customerKey = '41155', queueKey = 'Q_CHAT_BOT', configId = '599f9e7c-7f6b-4569-81a1-27202c419953' }: Props) => {
+export const ChatbotWrapper = ({
+    customerKey = '41155',
+    queueKey = 'Q_CHAT_BOT',
+    configId = '599f9e7c-7f6b-4569-81a1-27202c419953',
+}: Props) => {
     const { paramChatbot, language, serverTime, menuIsActive } = useSelector(stateSelector);
     const [cookies] = useCookies();
     const [mountChatbot, setMountChatbot] = useState(false);
@@ -57,7 +65,9 @@ export const ChatbotWrapper = ({ customerKey = '41155', queueKey = 'Q_CHAT_BOT',
         const chatbotSessionActive = !!cookies['chatbot-frida_config'];
         const chatbotVersion122IsMounted = document.getElementsByClassName('gxKraP').length > 0;
 
-        setMountChatbot(!chatbotVersion122IsMounted && (chatbotSessionActive || paramChatbot || enonicFeatureToggle(chatConfig)));
+        setMountChatbot(
+            !chatbotVersion122IsMounted && (chatbotSessionActive || paramChatbot || enonicFeatureToggle(chatConfig))
+        );
     }, [paramChatbot]);
 
     useEffect(() => {
@@ -93,7 +103,9 @@ export const ChatbotWrapper = ({ customerKey = '41155', queueKey = 'Q_CHAT_BOT',
     return mountChatbot ? (
         <div className={'chatbot-dock'} ref={dockRef}>
             <div
-                className={`chatbot-container${isDocked ? ' chatbot-container__docked' : ''}${menuIsActive ? ' chatbot-container__menu-active' : ''}`}
+                className={`chatbot-container${isDocked ? ' chatbot-container__docked' : ''}${
+                    menuIsActive ? ' chatbot-container__menu-active' : ''
+                }`}
                 ref={containerRef}
             >
                 <Chat

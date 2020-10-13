@@ -222,7 +222,7 @@
         "*.{js,jsx,ts,tsx,json,less,css,md}": "prettier --write"
     },
     "prettier": {
-        "printWidth": 160,
+        "printWidth": 120,
         "tabWidth": 4,
         "singleQuote": true
     },
