@@ -1,5 +1,5 @@
 import { MenuValue } from 'utils/meny-storage-utils';
-import { ActionType, Handling, HentDriftsmeldingSUCCESS } from '../actions';
+import { ActionType, Handling } from '../actions';
 import { Locale, AvailableLanguage } from './language-duck';
 import { Breadcrumb } from '../../komponenter/header/common/brodsmulesti/Brodsmulesti';
 

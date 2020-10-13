@@ -1,4 +1,3 @@
-import React from 'react';
 import { Locale } from '../store/reducers/language-duck';
 import { finnTekst } from './finn-tekst';
 
