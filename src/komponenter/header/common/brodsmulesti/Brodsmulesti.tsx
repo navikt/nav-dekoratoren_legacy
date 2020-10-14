@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Lenke from 'nav-frontend-lenker';
@@ -32,12 +32,9 @@ export const Brodsmulesti = (props: Props) => {
     const context = getArbeidsflateContext(XP_BASE_URL, status);
     const { breadcrumbs } = props;
 
-    const isLanguageNorwegian =
-        language === Locale.NYNORSK || language === Locale.BOKMAL;
+    const isLanguageNorwegian = language === Locale.NYNORSK || language === Locale.BOKMAL;
 
-    const slicedBreadcrumbs = showAll
-        ? breadcrumbs
-        : breadcrumbs.slice(breadcrumbs.length - 2);
+    const slicedBreadcrumbs = showAll ? breadcrumbs : breadcrumbs.slice(breadcrumbs.length - 2);
 
     const homeUrlMap: { [key: string]: string } = {
         nb: `${XP_BASE_URL}`,
@@ -47,21 +44,11 @@ export const Brodsmulesti = (props: Props) => {
     };
 
     return (
-        <nav
-            className={cls.className}
-            aria-label={finnTekst('brodsmulesti', language)}
-            itemProp="breadcrumb"
-        >
+        <nav className={cls.className} aria-label={finnTekst('brodsmulesti', language)} itemProp="breadcrumb">
             <ol>
                 <li className="typo-normal">
-                    <Lenke
-                        href={homeUrlMap[language]}
-                        className={cls.element('home')}
-                    >
-                        <Bilde
-                            asset={HomeIcon}
-                            className={cls.element('icon')}
-                        />
+                    <Lenke href={homeUrlMap[language]} className={cls.element('home')}>
+                        <Bilde asset={HomeIcon} className={cls.element('icon')} />
                         <span>nav.no</span>
                         <HoyreChevron />
                     </Lenke>
@@ -79,10 +66,7 @@ export const Brodsmulesti = (props: Props) => {
                 {!showAll && breadcrumbs.length > 2 && (
                     <li className="typo-normal">
                         <button
-                            aria-label={finnTekst(
-                                'brodsmulesti-se-alle',
-                                language
-                            )}
+                            aria-label={finnTekst('brodsmulesti-se-alle', language)}
                             className={`${cls.element('view-all')} lenke`}
                             onClick={(e) => {
                                 e.preventDefault();
@@ -95,13 +79,7 @@ export const Brodsmulesti = (props: Props) => {
                     </li>
                 )}
                 {slicedBreadcrumbs.map((breadcrumb, i) => (
-                    <li
-                        key={i}
-                        className="typo-normal"
-                        aria-current={
-                            i + 1 === slicedBreadcrumbs.length && `page`
-                        }
-                    >
+                    <li key={i} className="typo-normal" aria-current={i + 1 === slicedBreadcrumbs.length && `page`}>
                         {i + 1 !== slicedBreadcrumbs.length ? (
                             breadcrumb.handleInApp ? (
                                 <Lenke
@@ -109,28 +87,20 @@ export const Brodsmulesti = (props: Props) => {
                                     className={cls.element('transform')}
                                     onClick={(e) => {
                                         e.preventDefault();
-                                        postMessageToApp(
-                                            'breadcrumbClick',
-                                            breadcrumb
-                                        );
+                                        postMessageToApp('breadcrumbClick', breadcrumb);
                                     }}
                                 >
                                     <span>{breadcrumb.title}</span>
                                     <HoyreChevron />
                                 </Lenke>
                             ) : (
-                                <Lenke
-                                    href={breadcrumb.url}
-                                    className={cls.element('transform')}
-                                >
+                                <Lenke href={breadcrumb.url} className={cls.element('transform')}>
                                     <span>{breadcrumb.title}</span>
                                     <HoyreChevron />
                                 </Lenke>
                             )
                         ) : (
-                            <span className={cls.element('transform')}>
-                                {breadcrumb.title}
-                            </span>
+                            <span className={cls.element('transform')}>{breadcrumb.title}</span>
                         )}
                     </li>
                 ))}

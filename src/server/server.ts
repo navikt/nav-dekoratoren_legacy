@@ -46,10 +46,7 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', req.get('origin'));
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
     res.header('Access-Control-Allow-Credentials', 'true');
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin,Content-Type,Accept,Authorization'
-    );
+    res.header('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
 
     // Cache control
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
@@ -75,11 +72,7 @@ app.use(
 );
 
 // Express config
-const pathsForTemplate = [
-    `${appBasePath}`,
-    `${appBasePath}/:locale(no|en|se)/*`,
-    `${oldBasePath}`,
-];
+const pathsForTemplate = [`${appBasePath}`, `${appBasePath}/:locale(no|en|se)/*`, `${oldBasePath}`];
 
 app.get(pathsForTemplate, (req, res, next) => {
     try {
@@ -228,9 +221,7 @@ app.use((e: Error, req: Request, res: Response, next: NextFunction) => {
     });
 });
 
-const server = app.listen(PORT, () =>
-    console.log(`App listening on port: ${PORT}`)
-);
+const server = app.listen(PORT, () => console.log(`App listening on port: ${PORT}`));
 
 const shutdown = () => {
     console.log('Retrived signal terminate , shutting down node service');

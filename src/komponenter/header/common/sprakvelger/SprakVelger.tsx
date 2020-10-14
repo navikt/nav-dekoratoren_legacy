@@ -38,9 +38,7 @@ export const SprakVelger = (props: Props) => {
     const availableLanguages = props.languages;
     const { language } = useSelector((state: AppState) => state.language);
     const [, setCookie] = useCookies([decoratorLanguageCookie]);
-    const options = transformOptions(availableLanguages).sort((a, b) =>
-        a.label > b.label ? -1 : 1
-    );
+    const options = transformOptions(availableLanguages).sort((a, b) => (a.label > b.label ? -1 : 1));
 
     const onChange = (selected: LocaleOption) => {
         const { locale, value, handleInApp } = selected as LocaleOption;
@@ -57,22 +55,11 @@ export const SprakVelger = (props: Props) => {
         }
     };
 
-    const {
-        isOpen,
-        selectedItem,
-        getToggleButtonProps,
-        getLabelProps,
-        getMenuProps,
-        highlightedIndex,
-        getItemProps,
-    } = useSelect({
+    const { isOpen, selectedItem, getToggleButtonProps, getLabelProps, getMenuProps, highlightedIndex, getItemProps } = useSelect({
         items: options,
         itemToString: (item) => item?.value || '',
-        onSelectedItemChange: ({ selectedItem }) =>
-            onChange(selectedItem as LocaleOption),
-        defaultSelectedItem: options.find(
-            (option) => option.locale === language
-        ),
+        onSelectedItemChange: ({ selectedItem }) => onChange(selectedItem as LocaleOption),
+        defaultSelectedItem: options.find((option) => option.locale === language),
     });
 
     const ulStyle = isOpen
@@ -93,22 +80,14 @@ export const SprakVelger = (props: Props) => {
                 <label {...getLabelProps()} className="sr-only">
                     <Normaltekst>{label}</Normaltekst>
                 </label>
-                <button
-                    {...getToggleButtonProps()}
-                    className={`${cls.element('knapp')} skjemaelement__input`}
-                    type="button"
-                >
+                <button {...getToggleButtonProps()} className={`${cls.element('knapp')} skjemaelement__input`} type="button">
                     <span className={cls.element('knapp-tekst')}>
                         <Bilde asset={Globe} className={cls.element('ikon')} />
                         <Normaltekst>{label}</Normaltekst>
                     </span>
                     <NedChevron />
                 </button>
-                <ul
-                    {...getMenuProps()}
-                    className={cls.element('menu')}
-                    style={ulStyle}
-                >
+                <ul {...getMenuProps()} className={cls.element('menu')} style={ulStyle}>
                     {isOpen && (
                         <>
                             {options.map((item, index) => (

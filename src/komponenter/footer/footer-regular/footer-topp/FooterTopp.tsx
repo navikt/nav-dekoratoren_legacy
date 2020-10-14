@@ -23,8 +23,7 @@ const FooterTopp = () => {
     const [columnsNode, settColumnsNode] = useState<MenyNode>();
     useEffect(() => {
         const languageNode = getLanguageNode(language, data);
-        const isLanguageNorwegian =
-            language === Locale.BOKMAL || language === Locale.NYNORSK;
+        const isLanguageNorwegian = language === Locale.BOKMAL || language === Locale.NYNORSK;
 
         if (languageNode) {
             const footerNode = findNode(languageNode, 'Footer');
@@ -59,42 +58,22 @@ const FooterTopp = () => {
                         <LenkeMedIkon
                             onClick={scrollToTop}
                             tekst={<Tekst id="footer-til-toppen" />}
-                            ikon={
-                                <PilOppHvit
-                                    style={{ height: '18px', width: '18px' }}
-                                />
-                            }
+                            ikon={<PilOppHvit style={{ height: '18px', width: '18px' }} />}
                             venstrestiltIkon={true}
                         />
                     </div>
                 </div>
                 {columnsNode
                     ? columnsNode.children.map((columnNode, i) => (
-                          <div
-                              key={i}
-                              className={`menylenker-seksjon ${
-                                  !i ? 'venstre' : i === 2 ? 'hoyre' : 'midt'
-                              }`}
-                          >
-                              <Undertittel className="menylenker-overskrift">
-                                  {columnNode.displayName}
-                              </Undertittel>
+                          <div key={i} className={`menylenker-seksjon ${!i ? 'venstre' : i === 2 ? 'hoyre' : 'midt'}`}>
+                              <Undertittel className="menylenker-overskrift">{columnNode.displayName}</Undertittel>
                               <ul>
                                   <FooterLenker node={columnNode} />
                               </ul>
                           </div>
                       ))
                     : [...Array(3)].map((_, index) => (
-                          <div
-                              className={`menylenker-seksjon ${
-                                  !index
-                                      ? 'venstre'
-                                      : index === 2
-                                      ? 'hoyre'
-                                      : 'midt'
-                              }`}
-                              key={index}
-                          >
+                          <div className={`menylenker-seksjon ${!index ? 'venstre' : index === 2 ? 'hoyre' : 'midt'}`} key={index}>
                               <LinksLoader id={`footer-link-loader-${index}`} />
                           </div>
                       ))}

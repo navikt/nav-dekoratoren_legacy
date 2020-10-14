@@ -75,10 +75,7 @@ export const initialState: Environment = {
     },
 };
 
-export const reducer = (
-    state: Environment = initialState,
-    action: Handling
-): Environment => {
+export const reducer = (state: Environment = initialState, action: Handling): Environment => {
     switch (action.type) {
         case ActionType.SETT_ENVIRONMENT: {
             return { ...state, ...action.data };

@@ -24,13 +24,7 @@ interface Props {
     id?: string;
 }
 
-const ArbeidsflateLenkepanel = ({
-    lenke,
-    language,
-    analyticsEventArgs,
-    enableCompactView,
-    id,
-}: Props) => {
+const ArbeidsflateLenkepanel = ({ lenke, language, analyticsEventArgs, enableCompactView, id }: Props) => {
     const cls = BEMHelper('arbeidsflate-lenkepanel');
     const dispatch = useDispatch();
     const [, setCookie] = useCookies();
@@ -38,9 +32,7 @@ const ArbeidsflateLenkepanel = ({
     return (
         <LenkepanelBase
             href={lenke.url}
-            className={`${cls.className} ${
-                enableCompactView ? cls.element('compact') : ''
-            }`}
+            className={`${cls.className} ${enableCompactView ? cls.element('compact') : ''}`}
             id={id}
             onClick={(event) => {
                 setCookie('decorator-context', lenke.key, cookieOptions);
@@ -54,16 +46,10 @@ const ArbeidsflateLenkepanel = ({
         >
             <div className={cls.element('innhold')}>
                 <Undertittel className={'lenkepanel__heading'}>
-                    {enableCompactView && (
-                        <HoyreChevron
-                            className={cls.element('compact-chevron')}
-                        />
-                    )}
+                    {enableCompactView && <HoyreChevron className={cls.element('compact-chevron')} />}
                     <Tekst id={lenke.lenkeTekstId} />
                 </Undertittel>
-                <Undertekst className={cls.element('stikkord')}>
-                    {finnTekst(lenke.stikkordId, language)}
-                </Undertekst>
+                <Undertekst className={cls.element('stikkord')}>{finnTekst(lenke.stikkordId, language)}</Undertekst>
             </div>
         </LenkepanelBase>
     );
