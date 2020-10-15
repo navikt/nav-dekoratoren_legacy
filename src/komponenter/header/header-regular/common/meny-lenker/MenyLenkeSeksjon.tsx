@@ -13,18 +13,13 @@ interface Props {
     kbNodeGroup: KbNavGroup;
 }
 
-export const MenyLenkeSeksjon = ({
-    menygruppe,
-    colIndex,
-    rowIndex,
-    kbNodeGroup,
-}: Props) => {
+export const MenyLenkeSeksjon = ({ menygruppe, colIndex, rowIndex, kbNodeGroup }: Props) => {
     const classname = 'lenkeseksjon';
     const cls = BEMHelper(classname);
 
     return (
-        <section className={classname}>
-            <Undertittel className={cls.element('tittel')}>
+        <section className={classname} aria-labelledby={`headerId_${menygruppe.id}`}>
+            <Undertittel id={`headerId_${menygruppe.id}`} className={cls.element('tittel')}>
                 {menygruppe.displayName}
             </Undertittel>
             <ul className={cls.element('lenker')}>

@@ -24,9 +24,7 @@ const FooterBottom = () => {
     const { language } = useSelector((state: AppState) => state.language);
     const { data } = useSelector((state: AppState) => state.menypunkt);
     const [personvernNode, settPersonvernNode] = useState<MenyNode>();
-    const arbeidsflate = useSelector(
-        (state: AppState) => state.arbeidsflate.status
-    );
+    const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
 
     useEffect(() => {
         const noder = getLanguageNode(language, data);
@@ -87,19 +85,10 @@ const FooterBottom = () => {
                         className={cls.element('del-skjerm')}
                         onClick={openModal}
                         tekst={<Tekst id="footer-del-skjerm" />}
-                        ikon={
-                            <DelSkjerm
-                                style={{ height: '24px', width: '24px' }}
-                            />
-                        }
+                        ikon={<DelSkjerm style={{ height: '24px', width: '24px' }} />}
                     />
                 </div>
-                {visDelSkjermModal && (
-                    <DelSkjermModal
-                        isOpen={visDelSkjermModal}
-                        onClose={closeModal}
-                    />
-                )}
+                {visDelSkjermModal && <DelSkjermModal isOpen={visDelSkjermModal} onClose={closeModal} />}
             </div>
         </div>
     );

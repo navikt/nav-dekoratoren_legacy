@@ -14,27 +14,35 @@ export interface VarselinnboksState extends DataElement {
 }
 
 export interface VarslerData {
-    uleste: number;
-    antall: number;
-    nyesteId: number;
-    varsler: string;
+    varsler: {
+        nyesteVarsler: NyesteVarslerData[];
+        totaltAntallUleste: number;
+    };
+}
+
+export interface NyesteVarslerData {
+    aktoerID: string;
+    url: string;
+    varseltekst: string;
+    varselId: string;
+    id: number;
+    meldingsType: string;
+    datoOpprettet: string;
+    datoLest: string;
 }
 
 export const initialState: VarselinnboksState = {
     data: {
-        uleste: 0,
-        antall: 0,
-        nyesteId: 0,
-        varsler: ``,
+        varsler: {
+            nyesteVarsler: [],
+            totaltAntallUleste: 0,
+        },
     },
     status: Status.IKKE_STARTET,
 };
 
 //  Reducer
-export default function reducer(
-    state: VarselinnboksState = initialState,
-    action: Handling
-): VarselinnboksState {
+export default function reducer(state: VarselinnboksState = initialState, action: Handling): VarselinnboksState {
     switch (action.type) {
         case ActionType.HENT_VARSLER_OK: {
             return { ...state, status: Status.OK, data: action.data };
@@ -49,15 +57,13 @@ export default function reducer(
         case ActionType.SETT_VARSLER_OK:
             return { ...state, status: Status.OK };
         case ActionType.SETT_VARSLER_LEST:
-            return { ...state, data: { ...state.data, uleste: 0 } };
+            return { ...state, data: { ...state.data, varsler: { ...state.data.varsler, totaltAntallUleste: 0 } } };
         default:
             return state;
     }
 }
 
-export function hentVarsler(
-    APP_URL: string
-): (dispatch: Dispatch) => Promise<void> {
+export function hentVarsler(APP_URL: string): (dispatch: Dispatch) => Promise<void> {
     return fetchThenDispatch<VarslerData>(() => hentVarslerFetch(APP_URL), {
         ok: hentVarslerOk,
         feilet: hentVarslerFeilet,

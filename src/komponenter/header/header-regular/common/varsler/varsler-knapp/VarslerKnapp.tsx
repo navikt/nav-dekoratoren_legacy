@@ -10,22 +10,24 @@ import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
 import { varslerDropdownClassname } from 'komponenter/header/header-regular/common/varsler/Varsler';
 import './VarslerKnapp.less';
+import { finnTekst } from '../../../../../../tekster/finn-tekst';
 
 export const varslerKnappId = 'varsler-knapp-id';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.varsler,
-    varsler: state.varsler.data,
+    varsler: state.varsler.data.varsler,
     appUrl: state.environment.APP_URL,
+    language: state.language.language,
 });
 
 export const VarslerKnapp = () => {
     const dispatch = useDispatch();
-    const { isOpen, varsler, appUrl } = useSelector(stateSelector);
+    const { isOpen, varsler, appUrl, language } = useSelector(stateSelector);
 
     const toggleVarslerDropdown = () => {
-        if (!isOpen && varsler.uleste > 0) {
-            settVarslerSomLest(appUrl, varsler.nyesteId, dispatch);
+        if (!isOpen && varsler.totaltAntallUleste > 0 && varsler.nyesteVarsler.length > 0) {
+            settVarslerSomLest(appUrl, varsler.nyesteVarsler[0].id, dispatch);
         }
         analyticsEvent({
             category: AnalyticsCategory.Header,
@@ -34,9 +36,14 @@ export const VarslerKnapp = () => {
         dispatch(toggleVarsler());
     };
 
-    const ariaLabel = `Varsler. Du har ${
-        varsler.antall > 0 ? varsler.antall : 'ingen'
-    } varsler.`;
+    const ariaLabel = () => {
+        if (varsler.nyesteVarsler.length > 5) {
+            return finnTekst('varsler-vis-5-siste', language);
+        } else if (varsler.nyesteVarsler.length > 0) {
+            return finnTekst('varsler-tittel', language) + `. Du har ${varsler.nyesteVarsler.length} varsler.`;
+        }
+        return finnTekst('varsler-tittel', language) + '. ' + finnTekst('varsler-tom-liste', language);
+    };
 
     return (
         <MenylinjeKnapp
@@ -46,9 +53,9 @@ export const VarslerKnapp = () => {
             classname={'varselbjelle'}
             id={varslerKnappId}
             ariaControls={varslerDropdownClassname}
-            ariaLabel={ariaLabel}
+            ariaLabel={ariaLabel()}
         >
-            <VarselIkon isOpen={isOpen} antallUleste={varsler.uleste} />
+            <VarselIkon isOpen={isOpen} antallUleste={varsler.totaltAntallUleste} />
         </MenylinjeKnapp>
     );
 };

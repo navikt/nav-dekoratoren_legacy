@@ -1,6 +1,6 @@
 export type stringOrFunction = string | ((input: string) => string);
 
-export const ledetekster: { [key: string]: stringOrFunction} = {
+export const ledetekster: { [key: string]: stringOrFunction } = {
     'footer-arbeids-og-veldferdsetaten': 'Arbeids- og velferdsetaten',
     'footer-arbeids-og-veldferdsetaten-en': 'Arbeids- og velferdsetaten',
     'footer-arbeids-og-veldferdsetaten-se': 'Arbeids- og velferdsetaten',
@@ -134,18 +134,12 @@ export const ledetekster: { [key: string]: stringOrFunction} = {
     'delskjerm-modal-avbryt': `Avbryt`,
     'delskjerm-modal-avbryt-en': `Cancel`,
     'delskjerm-modal-avbryt-se': `Avbryt`,
-    'delskjerm-modal-stengt':
-        'Skjermdeling er for øyeblikket stengt, prøv igjen senere',
-    'delskjerm-modal-stengt-en':
-        'Screen sharing is currently closed, please try again later',
-    'delskjerm-modal-stengt-se':
-        'Skjermdeling er for øyeblikket stengt, prøv igjen senere',
+    'delskjerm-modal-stengt': 'Skjermdeling er for øyeblikket stengt, prøv igjen senere',
+    'delskjerm-modal-stengt-en': 'Screen sharing is currently closed, please try again later',
+    'delskjerm-modal-stengt-se': 'Skjermdeling er for øyeblikket stengt, prøv igjen senere',
     'varsler-visalle': 'Vis alle dine varsler',
     'varsler-visalle-en': 'Show all your notifications',
     'varsler-visalle-se': 'Vis alle dine varsler',
-    'varsler-nye': 'nye',
-    'varsler-nye-en': 'new',
-    'varsler-nye-se': 'nye',
     'varsler-tittel': 'Varsler',
     'varsler-tittel-en': 'Notifications',
     'varsler-tittel-se': 'Varsler',
@@ -161,6 +155,9 @@ export const ledetekster: { [key: string]: stringOrFunction} = {
     'varsler-tom-liste': 'Du har ingen varsler',
     'varsler-tom-liste-en': `You have no notifications`,
     'varsler-tom-liste-se': `Du har ingen varsler`,
+    'varsler-vis-5-siste': 'Vis 5 siste varsel',
+    'varsler-vis-5-siste-en': `Show last 5 notifications`,
+    'varsler-vis-5-siste-se': `Vis 5 siste varsel`,
     'rolle-privatperson': 'Privatperson',
     'rolle-privatperson-en': 'Privatperson',
     'rolle-privatperson-se': 'Privatperson',
@@ -182,18 +179,12 @@ export const ledetekster: { [key: string]: stringOrFunction} = {
         'Dine saker, utbetalinger, meldinger, meldekort, aktivitetsplan, personopplysninger og flere tjenester',
     'meny-bunnlenke-minside-stikkord-se':
         'Dine saker, utbetalinger, meldinger, meldekort, aktivitetsplan, personopplysninger og flere tjenester',
-    'meny-bunnlenke-arbeidsgiver-stikkord':
-        'Dine sykmeldte, rekruttering, digitale skjemaer',
-    'meny-bunnlenke-arbeidsgiver-stikkord-en':
-        'Dine sykmeldte, rekruttering, digitale skjemaer',
-    'meny-bunnlenke-arbeidsgiver-stikkord-se':
-        'Dine sykmeldte, rekruttering, digitale skjemaer',
-    'meny-bunnlenke-samarbeidspartner-stikkord':
-        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
-    'meny-bunnlenke-samarbeidspartner-stikkord-en':
-        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
-    'meny-bunnlenke-samarbeidspartner-stikkord-se':
-        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
+    'meny-bunnlenke-arbeidsgiver-stikkord': 'Dine sykmeldte, rekruttering, digitale skjemaer',
+    'meny-bunnlenke-arbeidsgiver-stikkord-en': 'Dine sykmeldte, rekruttering, digitale skjemaer',
+    'meny-bunnlenke-arbeidsgiver-stikkord-se': 'Dine sykmeldte, rekruttering, digitale skjemaer',
+    'meny-bunnlenke-samarbeidspartner-stikkord': 'Helsepersonell, tiltaksarrangører, fylker og kommuner',
+    'meny-bunnlenke-samarbeidspartner-stikkord-en': 'Helsepersonell, tiltaksarrangører, fylker og kommuner',
+    'meny-bunnlenke-samarbeidspartner-stikkord-se': 'Helsepersonell, tiltaksarrangører, fylker og kommuner',
     'meny-loading': 'Laster innhold...',
     'meny-loading-en': 'Loading menu content...',
     'meny-loading-se': 'Laster innhold...',
@@ -209,12 +200,9 @@ export const ledetekster: { [key: string]: stringOrFunction} = {
         'Tjenester, skjemaer, rekruttere, inkludere, sykmeldte, selvstendig næringsdrivende',
     'arbeidsflate-stikkord-om-arbeidsgiver-se':
         'Tjenester, skjemaer, rekruttere, inkludere, sykmeldte, selvstendig næringsdrivende',
-    'arbeidsflate-stikkord-om-samarbeidspartner':
-        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
-    'arbeidsflate-stikkord-om-samarbeidspartner-en':
-        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
-    'arbeidsflate-stikkord-om-samarbeidspartner-se':
-        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
+    'arbeidsflate-stikkord-om-samarbeidspartner': 'Helsepersonell, tiltaksarrangører, fylker og kommuner',
+    'arbeidsflate-stikkord-om-samarbeidspartner-en': 'Helsepersonell, tiltaksarrangører, fylker og kommuner',
+    'arbeidsflate-stikkord-om-samarbeidspartner-se': 'Helsepersonell, tiltaksarrangører, fylker og kommuner',
     'lock-msg-infotekst':
         'Menypunkt med hengelås sender deg til ny innlogging. Disse tjenestene krever BankID, Buypass eller Commfides.',
     'lock-msg-infotekst-en':
@@ -265,39 +253,33 @@ export const ledetekster: { [key: string]: stringOrFunction} = {
     'advarsel-om-svar-en': 'You will not get an answere on your feeback.',
     'advarsel-om-personopplysninger-se': 'Ikke skriv personlige eller sensitive opplysninger.',
     'advarsel-om-svar-se': 'Du får ikke svar på tilbakemeldingen din.',
-    'tilbakemelding-placeholder' : 'Skriv din tilbakemelding her',
-    'tilbakemelding-placeholder-en' : 'Write your feedback here',
-    'tilbakemelding-placeholder-se' : 'Skriv din tilbakemelding her',
-    'textarea-undermaks' : (input: string) => `Du har ${input} tegn igjen`,
-    'textarea-undermaks-en' : (input: string) => `You have ${input} remaining characters`,
-    'textarea-undermaks-se' : (input: string) => `Du har ${input} tegn igjen`,
-    'textarea-overmaks' : (input: string) => `Du har ${input} tegn for mye`,
-    'textarea-overmaks-en' : (input: string) => `You have ${input} characters too many`,
-    'textarea-overmaks-se' : (input: string) => `Du har ${input} tegn for mye`,
+    'tilbakemelding-placeholder': 'Skriv din tilbakemelding her',
+    'tilbakemelding-placeholder-en': 'Write your feedback here',
+    'tilbakemelding-placeholder-se': 'Skriv din tilbakemelding her',
+    'textarea-undermaks': (input: string) => `Du har ${input} tegn igjen`,
+    'textarea-undermaks-en': (input: string) => `You have ${input} remaining characters`,
+    'textarea-undermaks-se': (input: string) => `Du har ${input} tegn igjen`,
+    'textarea-overmaks': (input: string) => `Du har ${input} tegn for mye`,
+    'textarea-overmaks-en': (input: string) => `You have ${input} characters too many`,
+    'textarea-overmaks-se': (input: string) => `Du har ${input} tegn for mye`,
     'send-inn-tilbakemelding': 'Send svar',
     'send-inn-tilbakemelding-en': 'Submit',
     'send-inn-tilbakemelding-se': 'Send svar',
     'avbryt-tilbakemelding': 'Ingen kommentar',
     'avbryt-tilbakemelding-en': 'No comment',
     'avbryt-tilbakemelding-se': 'Ingen kommentar',
-    'hensikt-med-tilbakemelding':
-        'Vi bruker svaret ditt til å forbedre sidene.',
-    'hensikt-med-tilbakemelding-en':
-        'We will use your answer to improve our website.',
-    'hensikt-med-tilbakemelding-se':
-        'Vi bruker svaret ditt til å forbedre sidene.',
+    'hensikt-med-tilbakemelding': 'Vi bruker svaret ditt til å forbedre sidene.',
+    'hensikt-med-tilbakemelding-en': 'We will use your answer to improve our website.',
+    'hensikt-med-tilbakemelding-se': 'Vi bruker svaret ditt til å forbedre sidene.',
     'teknisk-feil': 'Teknisk feil',
     'teknisk-feil-en': 'Technical error',
     'teknisk-feil-se': 'Teknisk feil',
     'feil-informasjon': 'Feil informasjon',
     'feil-informasjon-en': 'Wrong information',
     'feil-informasjon-se': 'Feil informasjon',
-    skjermleser:
-        'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel',
-    'skjermleser-en':
-        'Error when using screen readers or other accessibility devices',
-    'skjermleser-se':
-        'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel',
+    skjermleser: 'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel',
+    'skjermleser-en': 'Error when using screen readers or other accessibility devices',
+    'skjermleser-se': 'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel',
     annet: 'Annet',
     'annet-en': 'Other',
     'annet-se': 'Annet',
@@ -315,10 +297,8 @@ export const ledetekster: { [key: string]: stringOrFunction} = {
     'villedende-se': 'Innholdet var villedende',
 
     'browser-utdatert-msg': 'Du bruker en nettleser som nav.no ikke støtter. ',
-    'browser-utdatert-msg-en':
-        'You are using a web browser which is not supported on nav.no. ',
-    'browser-utdatert-msg-se':
-        'Du bruker en nettleser som nav.no ikke støtter. ',
+    'browser-utdatert-msg-en': 'You are using a web browser which is not supported on nav.no. ',
+    'browser-utdatert-msg-se': 'Du bruker en nettleser som nav.no ikke støtter. ',
     'browser-utdatert-lenke': 'Se mer informasjon',
     'browser-utdatert-lenke-en': 'More information',
     'browser-utdatert-lenke-se': 'Se mer informasjon',

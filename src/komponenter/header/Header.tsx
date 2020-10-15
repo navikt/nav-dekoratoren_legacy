@@ -53,11 +53,7 @@ export const Header = () => {
     const breadcrumbs = PARAMS.BREADCRUMBS || [];
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
 
-    const [cookies, setCookie] = useCookies([
-        decoratorLanguageCookie,
-        decoratorContextCookie,
-        unleashCacheCookie,
-    ]);
+    const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie, unleashCacheCookie]);
 
     // Handle feature toggles
     useEffect(() => {
@@ -71,8 +67,7 @@ export const Header = () => {
         const { status, data } = innloggingsstatus;
         if (PARAMS.ENFORCE_LOGIN && status === Status.OK) {
             const { authenticated, securityLevel } = data;
-            const insufficientPrivileges =
-                PARAMS.LEVEL === 'Level4' && securityLevel === '3';
+            const insufficientPrivileges = PARAMS.LEVEL === 'Level4' && securityLevel === '3';
 
             if (!authenticated || insufficientPrivileges) {
                 window.location.href = getLoginUrl(environment, arbeidsflate);
@@ -96,10 +91,7 @@ export const Header = () => {
                     data: togglesFromCookie,
                 });
             } else {
-                fetchFeatureToggles(
-                    API_UNLEASH_PROXY_URL,
-                    currentFeatureToggles
-                )
+                fetchFeatureToggles(API_UNLEASH_PROXY_URL, currentFeatureToggles)
                     .then((updatedFeatureToggles) => {
                         dispatch({
                             type: ActionType.SETT_FEATURE_TOGGLES,
@@ -112,9 +104,7 @@ export const Header = () => {
                         });
                     })
                     .catch((error) => {
-                        console.error(
-                            `Failed to fetch feature-toggles: ${error}`
-                        );
+                        console.error(`Failed to fetch feature-toggles: ${error}`);
                     });
             }
         }
@@ -179,10 +169,7 @@ export const Header = () => {
             const { source, event } = data;
             if (isSafe) {
                 if (source === 'decoratorClient' && event === 'ready') {
-                    window.postMessage(
-                        { source: 'decorator', event: 'ready' },
-                        window.location.origin
-                    );
+                    window.postMessage({ source: 'decorator', event: 'ready' }, window.location.origin);
                 }
             }
         };
@@ -269,23 +256,15 @@ export const Header = () => {
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
             <header className="siteheader">
-                {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? (
-                    <HeaderSimple />
-                ) : (
-                    <HeaderRegular />
-                )}
+                {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? <HeaderSimple /> : <HeaderRegular />}
             </header>
             <Driftsmeldinger />
             {(breadcrumbs.length > 0 || availableLanguages.length > 0) && (
                 // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
                 <div className={'decorator-utils-container'}>
                     <div className={'decorator-utils-content'}>
-                        {breadcrumbs.length > 0 && (
-                            <Brodsmulesti breadcrumbs={breadcrumbs} />
-                        )}
-                        {availableLanguages.length > 0 && (
-                            <SprakVelger languages={availableLanguages} />
-                        )}
+                        {breadcrumbs.length > 0 && <Brodsmulesti breadcrumbs={breadcrumbs} />}
+                        {availableLanguages.length > 0 && <SprakVelger languages={availableLanguages} />}
                     </div>
                 </div>
             )}
