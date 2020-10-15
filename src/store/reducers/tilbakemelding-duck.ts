@@ -12,12 +12,11 @@ export const initalState: DataElement = {
 };
 
 export interface TilbakemeldingType {
-    response: string;
+    response: 'Yes' | 'No';
     responseId: string;
     sessionId: string;
     message: string;
-    urlPath: string;
-    urlHost: string;
+    href: string;
     browser: string;
     os: string;
     platform: string;
