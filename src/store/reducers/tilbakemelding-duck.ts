@@ -11,10 +11,21 @@ export const initalState: DataElement = {
     status: Status.IKKE_STARTET,
 };
 
-export default function reducer(
-    state: DataElement = initalState,
-    action: Handling
-): DataElement {
+export interface TilbakemeldingType {
+    response: string;
+    responseId: string;
+    sessionId: string;
+    message: string;
+    urlPath: string;
+    urlHost: string;
+    browser: string;
+    os: string;
+    platform: string;
+    browserLanguage: string;
+    languageCode: string;
+}
+
+export default function reducer(state: DataElement = initalState, action: Handling): DataElement {
     switch (action.type) {
         case ActionType.SETT_TILBAKEMELDING_OK:
             return { ...state, status: Status.OK };
@@ -27,10 +38,7 @@ export default function reducer(
     }
 }
 
-export function lagreTilbakemelding(
-    feedback: Object,
-    FEEDBACK_API_URL: string
-) {
+export function lagreTilbakemelding(feedback: Object, FEEDBACK_API_URL: string) {
     return fetchThenDispatch<number>(() => lagreTilbakemeldingFetch(feedback, FEEDBACK_API_URL), {
         ok: settTilbakemeldingOk,
         feilet: settTilbakemeldingFeilet,
