@@ -1,5 +1,5 @@
 import { logAmplitudeEvent } from 'utils/amplitude';
-import { lagreTilbakemelding, TilbakemeldingType } from '../../../store/reducers/tilbakemelding-duck';
+import { lagreTilbakemelding, TilbakemeldingRespons } from '../../../store/reducers/tilbakemelding-duck';
 import { Dispatch } from '../../../store/dispatch-type';
 import { v4 as uuidv4 } from 'uuid';
 import Bowser from 'bowser';
@@ -10,7 +10,7 @@ const getFeedback = (
     language: string,
     dispatch: Dispatch,
     response: 'Yes' | 'No'
-): TilbakemeldingType => {
+): TilbakemeldingRespons => {
     const responseId = uuidv4();
     let sessionId = sessionStorage.getItem('sessionId');
     if (!sessionId) {
@@ -21,18 +21,21 @@ const getFeedback = (
     const browserParser = Bowser.getParser(window.navigator.userAgent);
 
     return {
-        response: response,
         responseId: responseId,
         sessionId: sessionId,
+        response: response,
+        responseReason: '',
         message: message,
         href: window.location.href,
         browser: browserParser.getBrowserName(),
         os: browserParser.getOSName(),
         platform: browserParser.getPlatformType(),
         browserLanguage: window.navigator.language,
-        languageCode: language,
+        appLocale: language,
     };
 };
+
+export const useSendFeedback = () => {};
 
 export const sendFeedbackYes = (message: string, url: string, language: string, dispatch: Dispatch) => {
     const feedback = getFeedback(message, url, language, dispatch, 'Yes');
@@ -47,7 +50,10 @@ export const sendFeedbackNo = (
     language: string,
     dispatch: Dispatch
 ) => {
-    const feedback = getFeedback(message, url, language, dispatch, 'No');
+    const feedback = {
+        ...getFeedback(message, url, language, dispatch, 'No'),
+        optionsAnswer: category,
+    };
 
     logAmplitudeEvent('tilbakemelding-nei', { svar: category });
     lagreTilbakemelding(feedback, url)(dispatch);

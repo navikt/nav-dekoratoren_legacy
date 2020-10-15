@@ -11,17 +11,18 @@ export const initalState: DataElement = {
     status: Status.IKKE_STARTET,
 };
 
-export interface TilbakemeldingType {
-    response: 'Yes' | 'No';
+export interface TilbakemeldingRespons {
     responseId: string;
     sessionId: string;
+    response: 'Yes' | 'No';
+    responseReason: string;
     message: string;
     href: string;
     browser: string;
     os: string;
     platform: string;
     browserLanguage: string;
-    languageCode: string;
+    appLocale: string;
 }
 
 export default function reducer(state: DataElement = initalState, action: Handling): DataElement {
@@ -37,7 +38,7 @@ export default function reducer(state: DataElement = initalState, action: Handli
     }
 }
 
-export function lagreTilbakemelding(feedback: Object, FEEDBACK_API_URL: string) {
+export function lagreTilbakemelding(feedback: TilbakemeldingRespons, FEEDBACK_API_URL: string) {
     return fetchThenDispatch<number>(() => lagreTilbakemeldingFetch(feedback, FEEDBACK_API_URL), {
         ok: settTilbakemeldingOk,
         feilet: settTilbakemeldingFeilet,

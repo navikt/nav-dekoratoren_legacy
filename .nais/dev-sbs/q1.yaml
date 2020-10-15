@@ -49,7 +49,7 @@ spec:
         - name: LOGOUT_URL
           value: https://loginservice-q.nav.no/slo
         - name: FEEDBACK_API_URL
-          value: https://dekoratoren-feedback-api.dev.nav.no
+          value: https://dekoratoren-api.dev-gcp.nais.io/event/
     resources:
         limits:
             cpu: '3'

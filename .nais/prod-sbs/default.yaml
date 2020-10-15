@@ -48,6 +48,8 @@ spec:
           value: https://loginservice.nav.no
         - name: LOGOUT_URL
           value: https://loginservice.nav.no/slo
+        - name: FEEDBACK_API_URL
+          value: https://dekoratoren-api.prod-gcp.nais.io/event/
     resources:
         limits:
             cpu: '3'

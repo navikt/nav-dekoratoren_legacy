@@ -4,6 +4,7 @@ import { VarslerData as varselinnboksData } from '../store/reducers/varselinnbok
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
 import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { FeatureToggles } from 'store/reducers/feature-toggles-duck';
+import { TilbakemeldingRespons } from '../store/reducers/tilbakemelding-duck';
 
 export enum Status {
     OK = 'OK',
@@ -50,10 +51,14 @@ export const getFeatureToggleUrl = (featureToggles: FeatureToggles) =>
 export const hentDriftsmeldinger = (APP_URL: string): Promise<DriftsmeldingerData[]> =>
     fetchToJson(`${APP_URL}/api/driftsmeldinger`);
 
-export const lagreTilbakemeldingFetch = (feedback: Object, FEEDBACK_API_URL: string): Promise<number> => {
-    return fetchToJson(`${FEEDBACK_API_URL}/feedback/report/`, {
+export const lagreTilbakemeldingFetch = (
+    feedback: TilbakemeldingRespons,
+    FEEDBACK_API_URL: string
+): Promise<number> => {
+    return fetchToJson(FEEDBACK_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(feedback),
+        body: JSON.stringify({ id: feedback.responseId, json: feedback }),
+        credentials: 'include',
     });
 };
