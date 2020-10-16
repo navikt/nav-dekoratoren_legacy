@@ -11,10 +11,12 @@ export const initalState: DataElement = {
     status: Status.IKKE_STARTET,
 };
 
+export type Response = 'Yes' | 'No';
+
 export interface TilbakemeldingRespons {
     responseId: string;
     sessionId: string;
-    response: 'Yes' | 'No';
+    response: Response;
     responseReason: string;
     message: string;
     href: string;

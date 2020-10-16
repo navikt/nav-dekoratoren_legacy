@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Ingress } from 'nav-frontend-typografi';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { RadioGruppe, Radio, SkjemaGruppe } from 'nav-frontend-skjema';
-import { sendFeedbackNo } from '../send-feedback';
+import { createFeedbackRespons } from '../createFeedbackRespons';
 import FritekstFelt, { fritekstFeilReducer, initialFritekstFeil, MAX_LENGTH } from './fritekst/FritekstFelt';
 import { FeedbackInformasjon, QuestionProps, questionStateSelector } from './AlternativCommon';
 import KnappeRekke from './KnappeRekke';
 import './Alternativ.less';
 import { Locale } from '../../../../store/reducers/language-duck';
+import { lagreTilbakemelding } from '../../../../store/reducers/tilbakemelding-duck';
+import { logAmplitudeEvent } from '../../../../utils/amplitude';
 
 const AlternativNei = (props: QuestionProps) => {
     const [feedbackMessage, setFeedbackMessage] = useState('');
@@ -50,14 +52,9 @@ const AlternativNei = (props: QuestionProps) => {
         if (!error) {
             dispatchFritekstFeil({ type: 'reset' });
             setReasonFeil(undefined);
-            sendFeedbackNo(
-                reason,
-                feedbackMessage,
-                environment.FEEDBACK_API_URL,
-                language.toLowerCase(),
-                reduxDispatch
-            );
-
+            const feedback = createFeedbackRespons(feedbackMessage, language, 'No', reason);
+            lagreTilbakemelding(feedback, environment.FEEDBACK_API_URL)(reduxDispatch);
+            logAmplitudeEvent('tilbakemelding-nei', { svar: reason });
             props.settBesvart();
         }
     };
@@ -70,7 +67,7 @@ const AlternativNei = (props: QuestionProps) => {
                         <Tekst id="hva-fant-du-ikke" />
                     </Ingress>
                 }
-                description={<FeedbackInformasjon environment={environment} />}
+                description={<FeedbackInformasjon />}
             >
                 <RadioGruppe feil={reasonFeil} tag="div">
                     <Radio
