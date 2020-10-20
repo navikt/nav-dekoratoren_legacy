@@ -48,7 +48,7 @@ export const Header = () => {
     const { arbeidsflate } = useSelector(stateSelector);
     const { innloggingsstatus } = useSelector(stateSelector);
     const { authenticated } = innloggingsstatus.data;
-    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = environment;
+    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL, API_INNLOGGINGSLINJE_URL } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
     const breadcrumbs = PARAMS.BREADCRUMBS || [];
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
@@ -255,7 +255,9 @@ export const Header = () => {
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
-            <header className="siteheader">{PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? <HeaderSimple /> : <HeaderRegular />}</header>
+            <header className="siteheader">
+                {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? <HeaderSimple /> : <HeaderRegular />}
+            </header>
             <Driftsmeldinger />
             {(breadcrumbs.length > 0 || availableLanguages.length > 0) && (
                 // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn

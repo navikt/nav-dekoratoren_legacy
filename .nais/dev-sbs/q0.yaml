@@ -37,7 +37,7 @@ spec:
         - name: API_VARSELINNBOKS_URL
           value: https://www-q0.nav.no/person/varselinnboks
         - name: API_INNLOGGINGSLINJE_URL
-          value: https://www-q0.nav.no/innloggingslinje-api
+          value: hhttps://innloggingsstatus.dev.nav.no/person/innloggingsstatus
         - name: API_UNLEASH_PROXY_URL
           value: https://www-q0.nav.no/person/pb-unleash-proxy
         - name: MINSIDE_ARBEIDSGIVER_URL
