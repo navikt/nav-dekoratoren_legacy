@@ -1,7 +1,6 @@
-require('console-stamp')(console, '[HH:MM:ss.l]');
 import NodeCache from 'node-cache';
 import fetch from 'node-fetch';
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { createMiddleware } from '@promster/express';
 import { getSummary, getContentType } from '@promster/express';
 import { oneMinuteInSeconds, tenSeconds } from './utils';
@@ -12,6 +11,7 @@ import { template } from './template';
 import compression from 'compression';
 import dotenv from 'dotenv';
 import mockMenu from './mock/menu.json';
+require('console-stamp')(console, '[HH:MM:ss.l]');
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -46,10 +46,7 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', req.get('origin'));
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
     res.header('Access-Control-Allow-Credentials', 'true');
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin,Content-Type,Accept,Authorization'
-    );
+    res.header('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
 
     // Cache control
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
@@ -61,6 +58,7 @@ app.use((req, res, next) => {
 // Metrics
 app.use(
     createMiddleware({
+        // @ts-ignore
         app,
         options: {
             labels: ['app', 'namespace', 'cluster'],
@@ -74,19 +72,23 @@ app.use(
 );
 
 // Express config
-const pathsForTemplate = [
-    `${appBasePath}`,
-    `${appBasePath}/:locale(no|en|se)/*`,
-    `${oldBasePath}`,
-];
+const pathsForTemplate = [`${appBasePath}`, `${appBasePath}/:locale(no|en|se)/*`, `${oldBasePath}`];
 
-app.get(pathsForTemplate, (req, res) => {
-    res.send(template(req));
+app.get(pathsForTemplate, (req, res, next) => {
+    try {
+        res.send(template(req));
+    } catch (e) {
+        next(e);
+    }
 });
 
-app.get(`${appBasePath}/env`, (req, res) => {
-    const cookies = (req as any).universalCookies.cookies;
-    res.send(clientEnv({ req, cookies }));
+app.get(`${appBasePath}/env`, (req, res, next) => {
+    try {
+        const cookies = (req as any).universalCookies.cookies;
+        res.send(clientEnv({ req, cookies }));
+    } catch (e) {
+        next(e);
+    }
 });
 
 app.get(`${appBasePath}/api/meny`, (req, res) => {
@@ -117,7 +119,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
                         mainCache.set(mainCacheKey, backupCacheData);
                         res.send(backupCacheData);
                     } else {
-                        throw 'Invalid cache';
+                        throw new Error('Invalid cache');
                     }
                 }
             })
@@ -133,7 +135,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
                         mainCache.set(mainCacheKey, mockMenu);
                         res.send(mockMenu);
                     } else {
-                        throw 'Mock is undefined';
+                        throw new Error('Mock is undefined');
                     }
                 }
             })
@@ -153,6 +155,7 @@ app.use(
     createProxyMiddleware(proxiedVarslerUrl, {
         target: `${process.env.API_VARSELINNBOKS_URL}`,
         pathRewrite: { [`^${proxiedVarslerUrl}`]: '' },
+        changeOrigin: true,
     })
 );
 
@@ -195,9 +198,20 @@ app.use(
     })
 );
 
-const server = app.listen(PORT, () =>
-    console.log(`App listening on port: ${PORT}`)
-);
+// Error handler middleware
+app.use((e: Error, req: Request, res: Response, next: NextFunction) => {
+    const origin = req.get('origin');
+    const host = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+    const url = origin || host;
+    console.error(`${url}: ${e.message}`);
+    console.error(e.stack);
+    res.status(405);
+    res.send({
+        error: { status: 405, message: e.message },
+    });
+});
+
+const server = app.listen(PORT, () => console.log(`App listening on port: ${PORT}`));
 
 const shutdown = () => {
     console.log('Retrived signal terminate , shutting down node service');

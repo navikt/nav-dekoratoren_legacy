@@ -1,19 +1,27 @@
 import { Action, Reducer } from 'redux';
 import { ActionType } from '../actions';
 
-export enum Language {
+export enum Locale {
     IKKEBESTEMT = 'IKKEBESTEMT',
-    NORSK = 'NORSK',
-    ENGELSK = 'ENGELSK',
-    SAMISK = 'SAMISK',
+    BOKMAL = 'nb',
+    NYNORSK = 'nn',
+    ENGELSK = 'en',
+    SAMISK = 'se',
+    POLSK = 'pl',
+}
+
+export interface AvailableLanguage {
+    url: string;
+    locale: Locale;
+    handleInApp?: boolean;
 }
 
 export interface LanguageState {
-    language: Language;
+    language: Locale;
 }
 
 const initialLanguageState: LanguageState = {
-    language: Language.NORSK,
+    language: Locale.BOKMAL,
 };
 
 export const languageDuck = genericDuck<

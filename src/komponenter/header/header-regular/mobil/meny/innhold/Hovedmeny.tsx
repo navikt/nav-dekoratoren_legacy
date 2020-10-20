@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
 import BEMHelper from 'utils/bem';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { getHovedmenyNode } from 'utils/meny-storage-utils';
 import { getMinsidemenyNode, MenuValue } from 'utils/meny-storage-utils';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import MenyIngress from './elementer/MenyIngress';
 import Listelement from './elementer/Listelement';
 import MobilarbeidsflateValg from './elementer/arbeidsflatemeny/MobilarbeidsflateValg';
@@ -15,7 +15,7 @@ import ForsideLenke from './elementer/ForsideLenke';
 import Dittnavmeny from './elementer/dittnavmeny/Dittnavmeny';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
 import { dataInitState } from 'store/reducers/menu-duck';
-import { GACategory, gaEvent } from 'utils/google-analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 
 interface Props {
@@ -41,6 +41,9 @@ const Hovedmeny = (props: Props) => {
     const { language, meny } = useSelector(stateSelector);
     const { arbeidsflate, innloggingsstatus } = useSelector(stateSelector);
     const { underMenuIsOpen, hovedMenuIsOpen } = useSelector(stateSelector);
+    const [searchInput, setSearchInput] = useState<string>('');
+    const isLanguageNorwegian =
+        language === Locale.BOKMAL || language === Locale.NYNORSK;
 
     const minsideLenker =
         getMinsidemenyNode(meny.data, language) || dataInitState;
@@ -49,8 +52,8 @@ const Hovedmeny = (props: Props) => {
         getHovedmenyNode(meny.data, language, arbeidsflate) || dataInitState;
 
     const menutoggle = () => {
-        gaEvent({
-            category: GACategory.Header,
+        analyticsEvent({
+            category: AnalyticsCategory.Header,
             action: `meny-${underMenuIsOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleUndermenyVisning());
@@ -67,57 +70,67 @@ const Hovedmeny = (props: Props) => {
 
     const containerClassName = menyClass.element(
         'startmeny',
-        underMenuIsOpen ? 'hidden' : ''
+        underMenuIsOpen || !hovedMenuIsOpen ? 'hidden' : ''
     );
 
     return (
         <div className={containerClassName}>
             <Sok
+                id={mobilSokInputId}
                 isOpen={hovedMenuIsOpen}
                 dropdownTransitionMs={400}
-                id={mobilSokInputId}
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
             />
-            <InnloggetBruker />
-            <ForsideLenke
-                arbeidsflate={arbeidsflate}
-                erInnlogget={innloggingsstatus.data.authenticated}
-            />
-            {innloggingsstatus.data.authenticated &&
-                arbeidsflate === MenuValue.PRIVATPERSON && (
-                    <div className={menyClass.element('submeny', 'wrap')}>
-                        <Dittnavmeny
-                            minsideLenker={minsideLenker}
-                            className={menyClass.className}
-                            openMeny={setMenyliste}
-                        />
-                    </div>
-                )}
-            <MenyIngress
-                className={menyClass.element('meny', 'ingress')}
-                inputext={arbeidsflate}
-            />
-            <ul className={menyClass.element('meny', 'mainlist')}>
-                {hovedmenyLenker.children.map(
-                    (menyElement: MenyNode, index: number) => (
-                        <Listelement
-                            key={index}
-                            className={menyClass.className}
-                            classElement="text-element"
-                        >
-                            <a
-                                className="lenke"
-                                href="https://nav.no"
-                                onClick={(e) => setMenyliste(e, menyElement)}
+            {!searchInput && (
+                <>
+                    <InnloggetBruker />
+                    <ForsideLenke
+                        arbeidsflate={arbeidsflate}
+                        erInnlogget={innloggingsstatus.data.authenticated}
+                    />
+                    {innloggingsstatus.data.authenticated &&
+                        arbeidsflate === MenuValue.PRIVATPERSON && (
+                            <div
+                                className={menyClass.element('submeny', 'wrap')}
                             >
-                                {menyElement.displayName}
-                                <HoyreChevron />
-                            </a>
-                        </Listelement>
-                    )
-                )}
-            </ul>
-            {language === Language.NORSK && (
-                <MobilarbeidsflateValg lang={language} />
+                                <Dittnavmeny
+                                    minsideLenker={minsideLenker}
+                                    className={menyClass.className}
+                                    openMeny={setMenyliste}
+                                />
+                            </div>
+                        )}
+                    <MenyIngress
+                        className={menyClass.element('meny', 'ingress')}
+                        inputext={arbeidsflate}
+                    />
+                    <ul className={menyClass.element('meny', 'mainlist')}>
+                        {hovedmenyLenker.children.map(
+                            (menyElement: MenyNode, index: number) => (
+                                <Listelement
+                                    key={index}
+                                    className={menyClass.className}
+                                    classElement="text-element"
+                                >
+                                    <a
+                                        className="lenke"
+                                        href="https://nav.no"
+                                        onClick={(e) =>
+                                            setMenyliste(e, menyElement)
+                                        }
+                                    >
+                                        {menyElement.displayName}
+                                        <HoyreChevron />
+                                    </a>
+                                </Listelement>
+                            )
+                        )}
+                    </ul>
+                    {isLanguageNorwegian && (
+                        <MobilarbeidsflateValg lang={language} />
+                    )}
+                </>
             )}
         </div>
     );

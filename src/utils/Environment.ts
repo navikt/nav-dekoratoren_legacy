@@ -1,6 +1,6 @@
-import { EnvironmentState } from 'store/reducers/environment-duck';
+import { Environment } from 'store/reducers/environment-duck';
 
-export const fetchEnv = (): Promise<EnvironmentState> => {
+export const fetchEnv = (): Promise<Environment> => {
     return new Promise((resolve) => {
         const envDom = document.getElementById('decorator-env');
         if (envDom) {
@@ -14,7 +14,7 @@ export const fetchEnv = (): Promise<EnvironmentState> => {
                     });
             }
         } else {
-            throw 'Fant ikke data-src fra decorator-env i dom';
+            throw new Error('Fant ikke data-src fra decorator-env i dom');
         }
     });
 };
@@ -31,7 +31,4 @@ export const genererUrl = (XP_BASE_URL: string, lenke: string): string => {
     return lenke.startsWith('/') ? XP_BASE_URL + lenke : lenke;
 };
 
-export const erDev =
-    verifyWindowObj() &&
-    process.env.NODE_ENV === 'development' &&
-    window.location.origin.toLowerCase().includes('localhost');
+export const erDev = verifyWindowObj() && process.env.NODE_ENV === 'development' && window.location.origin.toLowerCase().includes('localhost');

@@ -4,12 +4,12 @@ import { finnTekst } from 'tekster/finn-tekst';
 import { Input } from 'nav-frontend-skjema';
 import SokKnapper from './SokKnapper';
 import React from 'react';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import './SokInput.less';
 
 type Props = {
     className: string;
-    language: Language;
+    language: Locale;
     writtenInput: string;
     onChange: (value: string) => void;
     onReset: () => void;
@@ -33,8 +33,7 @@ export const SokInput = (props: Props) => {
                     className={className}
                     value={writtenInput}
                     placeholder={finnTekst('sok-input-placeholder', language)}
-                    label={finnTekst('sok-input-label', language)}
-                    aria-label={finnTekst('sok-input-label', language)}
+                    aria-label={finnTekst('sok-input-placeholder', language)}
                 />
                 <SokKnapper
                     writtenInput={writtenInput}

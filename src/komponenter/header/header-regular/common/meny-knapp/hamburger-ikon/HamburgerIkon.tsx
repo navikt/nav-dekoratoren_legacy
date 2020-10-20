@@ -18,7 +18,7 @@ const HamburgerIkon = ({ isOpen }: Props) => {
     const cls = BEMHelper('hamburger-ikon');
 
     return (
-        <div
+        <span
             className={`${cls.className}${
                 isOpen ? ` ${cls.className}--open` : ''
             }`}
@@ -26,7 +26,7 @@ const HamburgerIkon = ({ isOpen }: Props) => {
             <Linje className={cls.element('topp')} isOpen={isOpen} />
             <Linje className={cls.element('midt')} isOpen={isOpen} />
             <Linje className={cls.element('bunn')} isOpen={isOpen} />
-        </div>
+        </span>
     );
 };
 

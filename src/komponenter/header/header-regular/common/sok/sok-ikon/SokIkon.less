@@ -1,28 +1,22 @@
 @import (reference) '../../../../../../styling-variabler.less';
 
-.sok-meny-ikon {
+.sok-ikon {
     @width: 32px;
     @height: 24px;
     @circleRadius: 10px;
     @stroke-width: 3px;
     @color: @navBla;
     @handleAngle: 40deg;
+    @handleLength: 12px;
     @middle: (@height - @stroke-width) / 2;
+    @transition-props: 0.25s all ease-out;
 
     width: @width;
     height: @height;
     padding: 0;
     position: relative;
-    margin-right: 0.5em;
-
-    .line() {
-        position: absolute;
-        width: @width;
-        height: @stroke-width;
-        border: 0;
-        border-radius: 0;
-        background-color: @color;
-    }
+    display: block;
+    margin-right: 0.25rem;
 
     &__circle {
         border-radius: 50%;
@@ -31,7 +25,8 @@
         width: @circleRadius*2;
         position: absolute;
         transform-origin: center;
-        transition: 0.35s all ease-out;
+        transition: @transition-props;
+        display: block;
 
         &--open {
             opacity: 0;
@@ -45,29 +40,37 @@
 
     &__line,
     &__line-x {
-        transform-origin: top left;
+        transform-origin: left center;
         transform: translate(
-                @circleRadius * (1 + cos(@handleAngle)),
-                @circleRadius * (1 + sin(@handleAngle))
+                (@circleRadius) * (1 + cos(@handleAngle)),
+                (@circleRadius - @stroke-width / 2) * (1 + sin(@handleAngle))
             )
             rotate(@handleAngle);
+        width: @handleLength;
         height: @stroke-width;
-        width: @circleRadius;
+        border: 0;
         background-color: @color;
         position: absolute;
-        transition: 0.35s all ease-out;
+        transition: @transition-props;
+        border-radius: 1px;
+        display: block;
 
         &--open {
-            .line();
+            width: @width;
             transform-origin: center;
         }
     }
 
     &__line--open {
-        transform: translate(-4px, @middle) rotate(-225deg) scale(0.8);
+        transform: translate(-4px, @middle) rotate(-45deg) scale(0.8);
     }
 
-    &__line-x--open {
-        transform: translate(-4px, @middle) rotate(-315deg) scale(0.8);
+    &__line-x {
+        visibility: hidden;
+
+        &--open {
+            visibility: visible;
+            transform: translate(-4px, @middle) rotate(225deg) scale(0.8);
+        }
     }
 }

@@ -2,7 +2,7 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { arbeidsgiverContextLenke } from './arbeidsflate-lenker';
 import { personContextLenke } from './arbeidsflate-lenker';
 import { samarbeidspartnerContextLenke } from './arbeidsflate-lenker';
-import { EnvironmentState } from 'store/reducers/environment-duck';
+import { Environment } from 'store/reducers/environment-duck';
 
 type LenkeData = {
     url: string;
@@ -18,17 +18,17 @@ export const valgtbedrift = () => {
     return orgnummerFraUrl ? `?bedrift=${orgnummerFraUrl}` : '';
 };
 
-const privatpersonLenker = (env: EnvironmentState): LenkeData[] => [
+const privatpersonLenker = (env: Environment): LenkeData[] => [
     {
         url: env.DITT_NAV_URL,
-        lenkeTekstId: 'person-minside-lenke',
+        lenkeTekstId: 'min-side',
         stikkordId: 'meny-bunnlenke-minside-stikkord',
     },
     arbeidsgiverContextLenke(env.XP_BASE_URL),
     samarbeidspartnerContextLenke(env.XP_BASE_URL),
 ];
 
-const arbeidsgiverLenker = (env: EnvironmentState): LenkeData[] => [
+const arbeidsgiverLenker = (env: Environment): LenkeData[] => [
     {
         url: env.MINSIDE_ARBEIDSGIVER_URL + valgtbedrift(),
         lenkeTekstId: 'arbeidsgiver-minside-lenke',
@@ -38,14 +38,14 @@ const arbeidsgiverLenker = (env: EnvironmentState): LenkeData[] => [
     samarbeidspartnerContextLenke(env.XP_BASE_URL),
 ];
 
-const samarbeidspartnerLenker = (env: EnvironmentState): LenkeData[] => [
+const samarbeidspartnerLenker = (env: Environment): LenkeData[] => [
     personContextLenke(env.XP_BASE_URL),
     arbeidsgiverContextLenke(env.XP_BASE_URL),
 ];
 
 const IKKEBESTEMTLenker = (): LenkeData[] => [];
 
-export const bunnLenker = (env: EnvironmentState) => ({
+export const bunnLenker = (env: Environment) => ({
     [MenuValue.PRIVATPERSON]: privatpersonLenker(env),
     [MenuValue.ARBEIDSGIVER]: arbeidsgiverLenker(env),
     [MenuValue.SAMARBEIDSPARTNER]: samarbeidspartnerLenker(env),

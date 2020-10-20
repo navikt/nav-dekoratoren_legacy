@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
-import { GACategory } from 'utils/google-analytics';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
+import { AnalyticsCategory } from 'utils/analytics';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
@@ -23,16 +23,16 @@ export const FooterLenker = ({ node }: Props) => {
             {node.children.map((lenkeNode) => (
                 <li key={lenkeNode.id}>
                     <Normaltekst>
-                        <LenkeMedGA
+                        <LenkeMedSporing
                             href={genererUrl(XP_BASE_URL, lenkeNode.path)}
-                            gaEventArgs={{
-                                category: GACategory.Footer,
+                            analyticsEventArgs={{
+                                category: AnalyticsCategory.Footer,
                                 action: `kontakt/${lenkeNode.path}`,
                                 label: lenkeNode.displayName,
                             }}
                         >
                             {lenkeNode.displayName}
-                        </LenkeMedGA>
+                        </LenkeMedSporing>
                     </Normaltekst>
                 </li>
             ))}

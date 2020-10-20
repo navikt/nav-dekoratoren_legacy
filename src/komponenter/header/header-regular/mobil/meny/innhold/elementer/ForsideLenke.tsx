@@ -28,7 +28,7 @@ const ForsideLenke = (props: Props) => {
             {props.arbeidsflate === MenuValue.PRIVATPERSON && (
                 <div className={cls.className}>
                     <Undertittel className={cls.element('ingress')}>
-                        <Tekst id="person-minside-lenke" />
+                        <Tekst id="min-side" />
                     </Undertittel>
                     <Lenke href={DITT_NAV_URL} className={cls.element('lenke')}>
                         <Tekst id="til-forsiden" />

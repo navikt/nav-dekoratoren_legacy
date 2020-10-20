@@ -4,8 +4,12 @@
     display: flex;
     padding: 2rem 1rem;
     justify-content: center;
-    @media (min-width: @desktopMinWidth) {
-        padding: 1rem 2rem 2rem 2rem;
+    @media @screen-desktop {
+        padding: 1rem @margins-sides-footer @margins-sides-footer;
+    }
+
+    @media @screen-desktop-small-width-down {
+        padding: 1rem @margins-sides-footer-small;
     }
 }
 
@@ -19,6 +23,7 @@
     .top-row {
         position: relative;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
 
@@ -29,7 +34,7 @@
         }
     }
 
-    @media (max-width: @desktopMinWidth) {
+    @media @screen-mobile {
         &__personvern-lenker {
             li {
                 padding: 0.375rem 2rem 0.375rem 0;
@@ -37,7 +42,7 @@
         }
     }
 
-    @media (min-width: @desktopMinWidth) {
+    @media @screen-desktop {
         justify-content: space-between;
 
         &__bottom-lenker {

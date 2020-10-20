@@ -1,14 +1,16 @@
 @import (reference) '../../../../../../styling-variabler.less';
+@import (reference) '../../../common/meny-knapp/MenylinjeKnapp';
 
 .desktop-minside-meny {
     &__innhold {
         padding: 0 5rem 2rem 5rem;
     }
 
-    &__knapp-visning {
+    &__knapp {
+        .menylinje-knapp;
         overflow: hidden;
         max-width: 12rem;
-        @media (max-width: @smallDesktopLimitWidth) {
+        @media @screen-desktop-small-width-down {
             max-width: 10rem;
         }
 
@@ -19,11 +21,13 @@
     }
 
     &__knapp-tekst {
+        display: block;
         text-align: left;
         transition: all 0.35s ease-in-out;
     }
 
     &__knapp-tekst-topp {
+        display: block;
         .typo-normal;
         font-weight: bold;
         transition: all 0.35s ease-in-out;
@@ -34,6 +38,7 @@
     }
 
     &__knapp-tekst-bunn {
+        display: block;
         .typo-undertekst;
         position: relative;
         bottom: 0;
@@ -47,7 +52,7 @@
 
         transition: all 0.35s ease-in-out;
 
-        @media (max-width: @smallDesktopLimitWidth) {
+        @media @screen-desktop-small-width-down {
             max-width: 7rem;
         }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
+import SokIkon from 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon';
 import './SokKnapper.less';
 
 interface Props {
@@ -22,13 +23,12 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
                     )}`}
                     onClick={onReset}
                 >
-                    <div className={cls.element('ikon-container')}>
-                        <div className={cls.element('reset-line-x')} />
-                        <div className={cls.element('reset-line-y')} />
-                    </div>
-                    <div className={cls.element('knapp-tekst')}>
+                    <span className={cls.element('ikon-container')}>
+                        <SokIkon isOpen={true} />
+                    </span>
+                    <span className={cls.element('knapp-tekst')}>
                         <Tekst id="sok-reset" />
-                    </div>
+                    </span>
                 </button>
             )}
             <button
@@ -38,13 +38,12 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
                     'knapp-submit'
                 )}`}
             >
-                <div className={cls.element('ikon-container')}>
-                    <div className={cls.element('sok-circle')} />
-                    <div className={cls.element('sok-line')} />
-                </div>
-                <div className={cls.element('knapp-tekst')}>
+                <span className={cls.element('ikon-container')}>
+                    <SokIkon isOpen={false} />
+                </span>
+                <span className={cls.element('knapp-tekst')}>
                     <Tekst id="sok-knapp" />
-                </div>
+                </span>
             </button>
         </div>
     );

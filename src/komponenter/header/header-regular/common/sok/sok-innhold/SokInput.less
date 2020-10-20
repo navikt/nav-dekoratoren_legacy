@@ -6,8 +6,11 @@
         display: flex;
     }
 
-    // Desktop
-    @media (min-width: @desktopMinWidth) {
+    .sok-input {
+        margin: 0;
+    }
+
+    @media @screen-desktop {
         .sok-input {
             width: 100%;
 
@@ -21,10 +24,6 @@
                 &::-ms-clear {
                     display: none;
                 }
-            }
-
-            .skjemaelement__label {
-                display: none;
             }
 
             .skjemaelement__input {
@@ -46,14 +45,12 @@
         }
     }
 
-    // Mobil
-    @media (max-width: @mobilMaxWidth) {
+    @media @screen-mobile {
         .sok-input__tittel {
             display: none;
         }
 
         .sok-input {
-            margin-bottom: 0;
             width: 100%;
 
             input {
@@ -90,15 +87,6 @@
 
             input::placeholder {
                 color: @navBla;
-            }
-
-            .skjemaelement__label {
-                opacity: 0;
-                position: absolute;
-                line-height: 0;
-                height: 0;
-                width: 0;
-                color: transparent;
             }
 
             .skjemaelement__input {

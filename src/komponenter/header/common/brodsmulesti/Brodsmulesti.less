@@ -1,0 +1,50 @@
+@import (reference) '../../../../styling-variabler.less';
+
+.brodsmulesti {
+    display: flex;
+    @media @screen-mobile {
+        width: 100%;
+    }
+    ol {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        list-style: none;
+    }
+    li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        & > * {
+            margin: 0.25rem 0.25rem 0.25rem 0;
+        }
+        .chevron--hoyre {
+            color: #78706a;
+            display: inline-block;
+            margin: 0 0.5em;
+        }
+    }
+
+    &__home {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__icon {
+        margin-right: 1rem;
+    }
+
+    &__view-all {
+        border: 0;
+    }
+
+    &__transform {
+        text-transform: lowercase;
+        &:first-letter {
+            text-transform: uppercase;
+        }
+    }
+}

@@ -34,7 +34,7 @@ type KeyboardNavState = {
 
 export const kbMasterNode = createKbNavNode(
     headerLogoId,
-    { col: 0, row: 1, sub: 0 },
+    { col: 0, row: 0, sub: 0 },
     KbNavGroup.HeaderMenylinje
 );
 

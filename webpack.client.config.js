@@ -131,24 +131,26 @@ const browserConfig = {
                             {
                                 loader: 'postcss-loader',
                                 options: {
-                                    ident: 'postcss',
-                                    plugins: [
-                                        prefixer({
-                                            prefix: '.navno-dekorator',
-                                            exclude: [
-                                                /\b(\w*(M|m)odal\w*)\b/,
-                                                'body',
-                                                'body.no-scroll-mobil',
-                                                '.siteheader',
-                                                '.sitefooter',
-                                                /\b(\w*lukk-container\w*)\b/,
-                                                /\b(\w*close\w*)\b/,
-                                                /\b(\w*decorator-dummy-app\w*)\b/,
-                                                '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
-                                            ],
-                                        }),
-                                        autoprefixer({}),
-                                    ],
+                                    postcssOptions: {
+                                        ident: 'postcss',
+                                        plugins: [
+                                            prefixer({
+                                                prefix: '.decorator-wrapper',
+                                                exclude: [
+                                                    /\b(\w*(M|m)odal\w*)\b/,
+                                                    'body',
+                                                    'body.no-scroll-mobil',
+                                                    '.siteheader',
+                                                    '.sitefooter',
+                                                    /\b(\w*lukk-container\w*)\b/,
+                                                    /\b(\w*close\w*)\b/,
+                                                    /\b(\w*decorator-dummy-app\w*)\b/,
+                                                    '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
+                                                ],
+                                            }),
+                                            autoprefixer({}),
+                                        ],
+                                    },
                                 },
                             },
                             { loader: 'less-loader', options: {} },

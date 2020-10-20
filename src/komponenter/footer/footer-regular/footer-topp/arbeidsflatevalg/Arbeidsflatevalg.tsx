@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useCookies } from 'react-cookie';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import Lenkepanel from 'nav-frontend-lenkepanel/lib';
-import Tekst from 'tekster/finn-tekst';
+import { useSelector } from 'react-redux';
 import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { AppState } from 'store/reducers';
-import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
-import { GACategory, gaEvent } from 'utils/google-analytics';
-import { erNavDekoratoren } from 'utils/Environment';
-import { Language } from 'store/reducers/language-duck';
+import { AnalyticsCategory } from 'utils/analytics';
+import { Locale } from 'store/reducers/language-duck';
+import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
 import './Arbeidsflatevalg.less';
 
 const stateSelector = (state: AppState) => ({
@@ -20,8 +14,6 @@ const stateSelector = (state: AppState) => ({
 });
 
 const Arbeidsflatevalg = () => {
-    const dispatch = useDispatch();
-    const [, setCookie] = useCookies(['decorator-context']);
     const { arbeidsflate, language } = useSelector(stateSelector);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
@@ -35,70 +27,26 @@ const Arbeidsflatevalg = () => {
         setLenker(getLenker());
     }, [arbeidsflate]);
 
-    return (
-        <>
-            {language === Language.NORSK && (
-                <div className="menylenker-seksjon arbeidsflate">
-                    <div className="arbeidsflatevalg-innhold">
-                        <ul
-                            className="arbeidsflatevalg"
-                            aria-label="Gå til innhold for privatperson, arbeidsgiver eller samarbeidspartner"
-                        >
-                            {lenker.map((lenke: ArbeidsflateLenke) => (
-                                <li key={lenke.key}>
-                                    <Lenkepanel
-                                        href={lenke.url}
-                                        onClick={(event) => {
-                                            event.preventDefault();
-                                            gaEvent({
-                                                context: arbeidsflate,
-                                                category: GACategory.Header,
-                                                action: 'arbeidsflate-valg',
-                                            });
-                                            setCookie(
-                                                'decorator-context',
-                                                lenke.key,
-                                                cookieOptions
-                                            );
-                                            if (erNavDekoratoren()) {
-                                                dispatch(
-                                                    settArbeidsflate(lenke.key)
-                                                );
-                                            } else {
-                                                window.location.href =
-                                                    lenke.url;
-                                            }
-                                        }}
-                                        onAuxClick={(event) =>
-                                            event.button &&
-                                            event.button === 1 &&
-                                            gaEvent({
-                                                context: arbeidsflate,
-                                                category: GACategory.Header,
-                                                action: 'arbeidsflate-valg',
-                                            })
-                                        }
-                                        tittelProps="normaltekst"
-                                        key={lenke.key}
-                                        border
-                                    >
-                                        <div className="arbeidsflatevalg-tekst">
-                                            <Undertittel>
-                                                <Tekst
-                                                    id={lenke.lenkeTekstId}
-                                                />
-                                            </Undertittel>
-                                            <Tekst id={lenke.stikkordId} />
-                                        </div>
-                                    </Lenkepanel>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            )}
-        </>
-    );
+    return language === Locale.BOKMAL || language === Locale.NYNORSK ? (
+        <div className="menylenker-seksjon arbeidsflate">
+            <ul className="arbeidsflatevalg">
+                {lenker.map((lenke: ArbeidsflateLenke) => (
+                    <li key={lenke.key}>
+                        <ArbeidsflateLenkepanel
+                            lenke={lenke}
+                            language={language}
+                            analyticsEventArgs={{
+                                context: arbeidsflate,
+                                category: AnalyticsCategory.Footer,
+                                action: 'arbeidsflate-valg',
+                                label: lenke.key,
+                            }}
+                        />
+                    </li>
+                ))}
+            </ul>
+        </div>
+    ) : null;
 };
 
 export default Arbeidsflatevalg;

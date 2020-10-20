@@ -33,10 +33,10 @@
     }
 
     &__content {
-        @media (min-width: @desktopMinWidth) {
+        @media @screen-desktop {
             padding: 3rem 4rem 2rem 4rem;
         }
-        @media (max-width: @mobilMaxWidth) {
+        @media @screen-mobile {
             padding-top: 2rem;
         }
     }
@@ -70,7 +70,7 @@
     &__knapper {
         margin-top: 1rem;
         display: flex;
-        @media (max-width: @mobilMaxWidth) {
+        @media @screen-mobile {
             flex-direction: column;
         }
 

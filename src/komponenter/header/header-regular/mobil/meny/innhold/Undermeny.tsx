@@ -8,7 +8,7 @@ import { Systemtittel } from 'nav-frontend-typografi';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 
 interface Props {
     className: string;
@@ -64,13 +64,13 @@ const Undermeny = (props: Props) => {
                             className={menyClass.className}
                             classElement="text-element-undermeny"
                         >
-                            <LenkeMedGA
+                            <LenkeMedSporing
                                 href={genererUrl(XP_BASE_URL, lenke.path)}
                                 withChevron={true}
                                 withLock={displayLock}
                             >
                                 {lenke.displayName}
-                            </LenkeMedGA>
+                            </LenkeMedSporing>
                         </Listelement>
                     );
                 })}

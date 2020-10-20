@@ -1,10 +1,8 @@
 import React from 'react';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
-import SokMenyIkon from 'komponenter/header/header-regular/desktop/sok-dropdown/sok-knapp/SokMenyIkon';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import Tekst from 'tekster/finn-tekst';
-import { gaEvent } from 'utils/google-analytics';
-import { GACategory } from 'utils/google-analytics';
+import SokIkon from 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon';
+import { analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import { AppState } from 'store/reducers';
@@ -22,8 +20,8 @@ export const SokKnapp = () => {
     const { isOpen } = useSelector(stateSelector);
 
     const toggleMenu = () => {
-        gaEvent({
-            category: GACategory.Header,
+        analyticsEvent({
+            category: AnalyticsCategory.Header,
             action: `sok-${isOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleSok());
@@ -31,16 +29,14 @@ export const SokKnapp = () => {
 
     return (
         <MenylinjeKnapp
+            tekstId={'sok-knapp'}
             onClick={toggleMenu}
             isOpen={isOpen}
             classname={sokDropdownClassname}
             ariaControls={sokDropdownClassname}
             id={desktopSokKnappId}
         >
-            <SokMenyIkon isOpen={isOpen} />
-            <Undertittel>
-                <Tekst id={'sok-knapp'} />
-            </Undertittel>
+            <SokIkon isOpen={isOpen} />
         </MenylinjeKnapp>
     );
 };

@@ -5,7 +5,7 @@
         padding: 0;
     }
 
-    @media (max-width: @mobilMaxWidth) {
+    @media @screen-mobile {
         padding: 1rem @margins-sides-mobil;
         background-color: white;
         height: 100%;
@@ -39,14 +39,13 @@
         flex-wrap: nowrap;
         margin: 1.25rem 0;
 
-        .varsel-ikon-row {
-            padding-right: 1rem;
-        }
-
         .varsel-ikon-container {
             @ikonSize: 28px;
             padding: 0.75rem;
+            margin-right: 1rem;
             border-radius: 50%;
+            display: block;
+            align-self: flex-start;
 
             .varsel-ikon {
                 width: @ikonSize;

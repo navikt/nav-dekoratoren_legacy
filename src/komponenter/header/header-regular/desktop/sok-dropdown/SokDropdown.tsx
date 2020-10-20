@@ -26,6 +26,7 @@ type Props = {
 
 export const SokKnappDesktop = ({ kbNavMainState }: Props) => {
     const { isOpen } = useSelector(stateSelector);
+    const [searchInput, setSearchInput] = useState<string>('');
     const [numResults, setNumResults] = useState(0);
     useKbNavSub(
         configForNodeGroup[KbNavGroup.Sok],
@@ -63,6 +64,8 @@ export const SokKnappDesktop = ({ kbNavMainState }: Props) => {
                     id={desktopSokInputId}
                     dropdownTransitionMs={dropdownTransitionMs}
                     numResultsCallback={setNumResults}
+                    searchInput={searchInput}
+                    setSearchInput={setSearchInput}
                 />
             </EkspanderbarMeny>
         </div>

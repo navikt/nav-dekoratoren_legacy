@@ -2,18 +2,19 @@ import React from 'react';
 import BEMHelper from 'utils/bem';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { Language } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import ArbeidsflateLenkepanel from 'komponenter/header/header-regular/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
+import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
+import { AnalyticsCategory } from 'utils/analytics';
 import './Bunnseksjon.less';
 
 interface Props {
     classname: string;
     arbeidsflate: MenuValue;
-    language: Language;
+    language: Locale;
 }
 
 export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
@@ -25,7 +26,9 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
         <div className={cls.element('bunn-seksjon')}>
             {lenker
                 .filter((lenke) =>
-                    language !== Language.NORSK ? !lenke.key : true
+                    language !== Locale.BOKMAL && language !== Locale.NYNORSK
+                        ? !lenke.key
+                        : true
                 )
                 .map((lenke, index) => (
                     <ArbeidsflateLenkepanel
@@ -36,6 +39,13 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
                             row: 2,
                             sub: 0,
                         })}
+                        analyticsEventArgs={{
+                            context: arbeidsflate,
+                            category: AnalyticsCategory.Meny,
+                            action: 'arbeidsflate-valg',
+                            label: lenke.key,
+                        }}
+                        enableCompactView={true}
                         key={lenke.lenkeTekstId}
                     />
                 ))}

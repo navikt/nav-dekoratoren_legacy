@@ -8,9 +8,13 @@ import moment from 'moment-timezone';
 import { finnTekst } from 'tekster/finn-tekst';
 import { getResizeObserver } from 'utils/resize-observer';
 import debounce from 'lodash.debounce';
+import { logAmplitudeEvent } from 'utils/amplitude';
+import { defaultSurvey } from 'komponenter/footer/chatbot/chatbotAnalytics';
+import { enonicFeatureToggle } from 'komponenter/footer/chatbot/chatbotEnonicConfig';
+import { defaultEnonicConfig } from 'komponenter/footer/chatbot/chatbotEnonicConfig';
 import './ChatbotWrapper.less';
 
-// Prevents nodejs renderer crash
+// Prevents SSR crash
 const Chat = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
 const humanChatIsOpen = (serverTime: number) => {
@@ -21,23 +25,6 @@ const humanChatIsOpen = (serverTime: number) => {
     const opening = moment(now).hours(9).minutes(0);
     const closing = moment(now).hours(14).minutes(30);
     return now.isBetween(opening, closing, 'minutes', '[)');
-};
-
-const dockIfNearBottom = (
-    chatbotElement: HTMLElement,
-    dockElement: HTMLElement,
-    chatbotBottomOffset: number
-) => () => {
-    const chatbotFixedPosition =
-        window.innerHeight - chatbotElement.scrollHeight;
-    const chatbotDockedPosition =
-        dockElement.getBoundingClientRect().top + chatbotBottomOffset;
-
-    if (chatbotFixedPosition > chatbotDockedPosition) {
-        chatbotElement.style.position = 'static';
-    } else {
-        chatbotElement.style.removeProperty('position');
-    }
 };
 
 const stateSelector = (state: AppState) => ({
@@ -62,29 +49,26 @@ export const ChatbotWrapper = ({
     queueKey = 'Q_CHAT_BOT',
     configId = '599f9e7c-7f6b-4569-81a1-27202c419953',
 }: Props) => {
-    const { paramChatbot, language, serverTime, menuIsActive } = useSelector(
-        stateSelector
-    );
+    const { paramChatbot, language, serverTime, menuIsActive } = useSelector(stateSelector);
     const [cookies] = useCookies();
     const [mountChatbot, setMountChatbot] = useState(false);
+    const chatConfig = defaultEnonicConfig;
+
+    const [isDocked, setIsDocked] = useState(false);
 
     const containerRef = useRef<HTMLDivElement>(null);
     const dockRef = useRef<HTMLDivElement>(null);
 
-    const labelText = finnTekst(
-        humanChatIsOpen(serverTime) ? 'chat-veileder' : 'chat-chatbot',
-        language
-    );
+    const labelText = finnTekst(humanChatIsOpen(serverTime) ? 'chat-veileder' : 'chat-chatbot', language);
 
     useEffect(() => {
         const chatbotSessionActive = !!cookies['chatbot-frida_config'];
-        const chatbotVersion122IsMounted =
-            document.getElementsByClassName('gxKraP').length > 0;
+        const chatbotVersion122IsMounted = document.getElementsByClassName('gxKraP').length > 0;
+
         setMountChatbot(
-            !chatbotVersion122IsMounted &&
-                (chatbotSessionActive || paramChatbot)
+            !chatbotVersion122IsMounted && (chatbotSessionActive || paramChatbot || enonicFeatureToggle(chatConfig))
         );
-    }, []);
+    }, [paramChatbot]);
 
     useEffect(() => {
         if (!mountChatbot) {
@@ -96,24 +80,22 @@ export const ChatbotWrapper = ({
             return;
         }
 
-        const chatbotBottomOffset =
-            window.innerHeight - chatbotElement.getBoundingClientRect().bottom;
-        const repositionHandler = dockIfNearBottom(
-            chatbotElement,
-            dockElement,
-            chatbotBottomOffset
-        );
+        const chatbotBottomOffset = window.innerHeight - chatbotElement.getBoundingClientRect().bottom;
 
-        const bodyResizeObserver = getResizeObserver(
-            debounce(repositionHandler, 100)
-        );
+        const dockIfNearBottom = () => {
+            const chatbotFixedPosition = window.innerHeight - chatbotElement.scrollHeight;
+            const chatbotDockedPosition = dockElement.getBoundingClientRect().top + chatbotBottomOffset;
+            setIsDocked(chatbotFixedPosition > chatbotDockedPosition);
+        };
 
-        repositionHandler();
+        const bodyResizeObserver = getResizeObserver(debounce(dockIfNearBottom, 100));
 
-        window.addEventListener('scroll', repositionHandler);
+        dockIfNearBottom();
+
+        window.addEventListener('scroll', dockIfNearBottom);
         bodyResizeObserver.observe(document.body);
         return () => {
-            window.removeEventListener('scroll', repositionHandler);
+            window.removeEventListener('scroll', dockIfNearBottom);
             bodyResizeObserver.unobserve(document.body);
         };
     }, [mountChatbot]);
@@ -121,7 +103,7 @@ export const ChatbotWrapper = ({
     return mountChatbot ? (
         <div className={'chatbot-dock'} ref={dockRef}>
             <div
-                className={`chatbot-container${
+                className={`chatbot-container${isDocked ? ' chatbot-container__docked' : ''}${
                     menuIsActive ? ' chatbot-container__menu-active' : ''
                 }`}
                 ref={containerRef}
@@ -131,6 +113,8 @@ export const ChatbotWrapper = ({
                     queueKey={queueKey}
                     configId={configId}
                     label={labelText}
+                    analyticsCallback={logAmplitudeEvent}
+                    analyticsSurvey={chatConfig?.analytics || defaultSurvey}
                 />
             </div>
         </div>

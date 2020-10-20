@@ -1,5 +1,7 @@
-import { contentEngaged } from './content-engaged';
-import amplitude from 'amplitude-js';
+import { verifyWindowObj } from 'utils/Environment';
+
+// Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
+const amplitude = verifyWindowObj() ? require('amplitude-js') : () => null;
 
 export const initAmplitude = () => {
     if (amplitude) {
@@ -10,10 +12,8 @@ export const initAmplitude = () => {
             includeReferrer: true,
             platform: window.location.toString(),
         });
-    }
-    contentEngaged(1, () => {
         logAmplitudeEvent('sidevisning');
-    });
+    }
 };
 
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {

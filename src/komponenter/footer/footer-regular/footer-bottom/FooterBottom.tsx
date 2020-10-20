@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
-import { GACategory, gaEvent } from 'utils/google-analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import DelSkjerm from 'ikoner/del-skjerm/DelSkjerm';
 import { AppState } from 'store/reducers';
 import Tekst from 'tekster/finn-tekst';
@@ -24,9 +24,7 @@ const FooterBottom = () => {
     const { language } = useSelector((state: AppState) => state.language);
     const { data } = useSelector((state: AppState) => state.menypunkt);
     const [personvernNode, settPersonvernNode] = useState<MenyNode>();
-    const arbeidsflate = useSelector(
-        (state: AppState) => state.arbeidsflate.status
-    );
+    const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
 
     useEffect(() => {
         const noder = getLanguageNode(language, data);
@@ -36,36 +34,36 @@ const FooterBottom = () => {
     }, [data, personvernNode]);
 
     const openModal = () => {
-        gaEvent({
+        analyticsEvent({
             context: arbeidsflate,
-            category: GACategory.Footer,
+            category: AnalyticsCategory.Footer,
             action: `kontakt/del-skjerm-open`,
         });
         setVisDelSkjermModal(true);
     };
 
     const closeModal = () => {
-        gaEvent({
+        analyticsEvent({
             context: arbeidsflate,
-            category: GACategory.Footer,
+            category: AnalyticsCategory.Footer,
             action: `kontakt/del-skjerm-close`,
         });
         setVisDelSkjermModal(false);
     };
 
     return (
-        <section className="menylinje-bottom">
+        <div className="menylinje-bottom">
             <div className={cls.className}>
                 <div className={'top-row'}>
+                    <ChatbotWrapper />
                     <NavLogoLenke
-                        gaEventArgs={{
+                        analyticsEventArgs={{
                             context: arbeidsflate,
-                            category: GACategory.Footer,
+                            category: AnalyticsCategory.Footer,
                             action: 'navlogo',
                         }}
                         ikon={Logo}
                     />
-                    <ChatbotWrapper />
                 </div>
                 <div className={cls.element('bottom-lenker')}>
                     <div>
@@ -76,7 +74,9 @@ const FooterBottom = () => {
                             {personvernNode ? (
                                 <FooterLenker node={personvernNode} />
                             ) : (
-                                <LinkLoader id={'personvern-loader'} />
+                                <li>
+                                    <LinkLoader id={'personvern-loader'} />
+                                </li>
                             )}
                         </ul>
                     </div>
@@ -85,21 +85,12 @@ const FooterBottom = () => {
                         className={cls.element('del-skjerm')}
                         onClick={openModal}
                         tekst={<Tekst id="footer-del-skjerm" />}
-                        ikon={
-                            <DelSkjerm
-                                style={{ height: '24px', width: '24px' }}
-                            />
-                        }
+                        ikon={<DelSkjerm style={{ height: '24px', width: '24px' }} />}
                     />
                 </div>
-                {visDelSkjermModal && (
-                    <DelSkjermModal
-                        isOpen={visDelSkjermModal}
-                        onClose={closeModal}
-                    />
-                )}
+                {visDelSkjermModal && <DelSkjermModal isOpen={visDelSkjermModal} onClose={closeModal} />}
             </div>
-        </section>
+        </div>
     );
 };
 

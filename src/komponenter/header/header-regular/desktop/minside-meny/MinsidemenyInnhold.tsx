@@ -3,8 +3,8 @@ import BEMHelper from 'utils/bem';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { MenyLenkeSeksjon } from 'komponenter/header/header-regular/common/meny-lenker/MenyLenkeSeksjon';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { LenkeMedGA } from 'komponenter/common/lenke-med-ga/LenkeMedGA';
-import { GACategory } from 'utils/google-analytics';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
+import { AnalyticsCategory } from 'utils/analytics';
 import Tekst from 'tekster/finn-tekst';
 import { Systemtittel } from 'nav-frontend-typografi';
 import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
@@ -39,21 +39,21 @@ export const MinsidemenyInnhold = (props: Props) => {
                     >
                         <Tekst id={'min-side'} />
                     </Systemtittel>
-                    <LenkeMedGA
+                    <LenkeMedSporing
                         href={dittNavUrl}
                         id={KbNav.getKbId(nodeGroup, {
                             col: 0,
                             row: 0,
                             sub: 0,
                         })}
-                        gaEventArgs={{
-                            category: GACategory.Header,
+                        analyticsEventArgs={{
+                            category: AnalyticsCategory.Header,
                             action: 'dittnav',
                             label: dittNavUrl,
                         }}
                     >
-                        <Tekst id={'til-forside'} />
-                    </LenkeMedGA>
+                        <Tekst id={'til-forsiden'} />
+                    </LenkeMedSporing>
                 </div>
                 <div className={cls.element('topp-seksjon-right')}>
                     <UndertekstBold>

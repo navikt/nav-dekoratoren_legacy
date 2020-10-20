@@ -1,11 +1,10 @@
 import React from 'react';
-import { erNavDekoratoren } from 'utils/Environment';
 import { finnTekst } from 'tekster/finn-tekst';
-import { GACategory, gaEvent } from 'utils/google-analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { MenuValue } from 'utils/meny-storage-utils';
 import KnappBase from 'nav-frontend-knapper';
+import { getLoginUrl } from 'utils/login';
 import './LoggInnKnapp.less';
 
 export const loginKnappId = 'login-knapp-id';
@@ -23,20 +22,12 @@ export const LoggInnKnapp = () => {
     );
 
     const handleButtonClick = () => {
-        const { LOGIN_URL, DITT_NAV_URL, LOGOUT_URL } = environment;
-        const { MINSIDE_ARBEIDSGIVER_URL, PARAMS } = environment;
-        const appUrl = location.origin + location.pathname;
-        const loginUrl = `${
-            PARAMS.REDIRECT_TO_APP || erNavDekoratoren()
-                ? `${LOGIN_URL}/login?redirect=${appUrl}`
-                : arbeidsflate === MenuValue.ARBEIDSGIVER
-                ? `${LOGIN_URL}/login?redirect=${MINSIDE_ARBEIDSGIVER_URL}`
-                : `${LOGIN_URL}/login?redirect=${DITT_NAV_URL}`
-        }&level=${PARAMS.LEVEL}`;
+        const { LOGOUT_URL } = environment;
+        const loginUrl = getLoginUrl(environment, arbeidsflate);
 
-        gaEvent({
+        analyticsEvent({
             context: arbeidsflate,
-            category: GACategory.Header,
+            category: AnalyticsCategory.Header,
             action: authenticated ? 'logg-ut' : 'logg-inn',
         });
 

@@ -3,6 +3,7 @@ import React, { SVGProps } from 'react';
 const PilOppHvit = (props: SVGProps<SVGSVGElement>) => {
     return (
         <svg
+            focusable={false}
             width="18px"
             height="18px"
             xmlnsXlink="http://www.w3.org/1999/xlink"
