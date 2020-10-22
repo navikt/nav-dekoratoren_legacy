@@ -1,7 +1,7 @@
 import React, { useState, useRef, useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Ingress } from 'nav-frontend-typografi';
-import Tekst, { finnTekst } from 'tekster/finn-tekst';
+import Tekst, { finnTekst, finnTekstMedPayload } from 'tekster/finn-tekst';
 import { RadioGruppe, Radio, SkjemaGruppe } from 'nav-frontend-skjema';
 import { createFeedbackRespons } from '../createFeedbackRespons';
 import FritekstFelt, { fritekstFeilReducer, initialFritekstFeil, MAX_LENGTH } from './fritekst/FritekstFelt';
@@ -32,13 +32,14 @@ const AlternativNei = (props: QuestionProps) => {
         evt.preventDefault();
         let error = false;
         if (!reason) {
-            setReasonFeil('Du må velge et alternativ');
+            setReasonFeil(finnTekst('svar-mangler', language));
             radioRef.current?.focus();
             error = true;
         }
 
         if (feedbackMessage.length > MAX_LENGTH) {
-            dispatchFritekstFeil({ type: 'maxLength', message: `Du kan ikke skrive mer enn ${MAX_LENGTH} tegn` });
+            const errorMelding = finnTekstMedPayload('textarea-feilmelding', language, MAX_LENGTH.toString());
+            dispatchFritekstFeil({ type: 'maxLength', message: errorMelding });
             textareaRef.current?.focus();
             error = true;
         }

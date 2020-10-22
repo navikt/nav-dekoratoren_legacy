@@ -1,6 +1,6 @@
 import React, { useReducer, useRef, useState } from 'react';
 import { Ingress } from 'nav-frontend-typografi';
-import Tekst from 'tekster/finn-tekst';
+import Tekst, { finnTekstMedPayload } from 'tekster/finn-tekst';
 import { createFeedbackRespons } from '../createFeedbackRespons';
 import FritekstFelt, { fritekstFeilReducer, initialFritekstFeil, MAX_LENGTH } from './fritekst/FritekstFelt';
 import { FeedbackInformasjon, QuestionProps, questionStateSelector } from './AlternativCommon';
@@ -23,9 +23,10 @@ const AlternativJa = (props: QuestionProps) => {
         setHarTrykketSubmit(true);
 
         if (feedbackMessage.length > MAX_LENGTH) {
+            const errorMelding = finnTekstMedPayload('textarea-feilmelding', language, MAX_LENGTH.toString());
             dispatchFritekstFeil({
                 type: 'maxLength',
-                message: `Du kan ikke skrive mer enn ${MAX_LENGTH} tegn`,
+                message: errorMelding,
             });
             textareaRef.current?.focus();
         } else if (fritekstFeil.invalidInput) {
