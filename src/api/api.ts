@@ -57,7 +57,7 @@ export const lagreTilbakemeldingFetch = (
 ): Promise<number> => {
     return fetchToJson(FEEDBACK_API_URL, {
         method: 'POST',
-        body: JSON.stringify({ id: feedback.responseId, json: feedback }),
+        body: JSON.stringify(feedback),
         credentials: 'include',
     });
 };
