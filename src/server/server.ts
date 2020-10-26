@@ -44,7 +44,7 @@ app.use(cookiesMiddleware());
 app.use((req, res, next) => {
     // Allowed origins // cors
     const origin = req.get('origin');
-    if (origin === 'nav.no' || origin?.endsWith('.nav.no')) {
+    if (process.env.NODE_ENV !== 'production' || origin === 'nav.no' || origin?.endsWith('.nav.no')) {
         res.header('Access-Control-Allow-Origin', req.get('origin'));
         res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
         res.header('Access-Control-Allow-Credentials', 'true');
