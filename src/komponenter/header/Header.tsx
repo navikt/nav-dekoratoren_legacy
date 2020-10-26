@@ -255,7 +255,9 @@ export const Header = () => {
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
-            <header className="siteheader">{PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? <HeaderSimple /> : <HeaderRegular />}</header>
+            <header className="siteheader">
+                {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? <HeaderSimple /> : <HeaderRegular />}
+            </header>
             <Driftsmeldinger />
             {(breadcrumbs.length > 0 || availableLanguages.length > 0) && (
                 // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
