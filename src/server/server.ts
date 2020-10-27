@@ -42,12 +42,12 @@ app.disable('x-powered-by');
 app.use(compression());
 app.use(cookiesMiddleware());
 app.use((req, res, next) => {
-    // Allowed origins // cors
     const origin = req.get('origin');
     const whitelist = ['.nav.no', '.oera.no'];
     const isAllowedDomain = whitelist.some((domain) => origin?.endsWith(domain));
     const isLocalhost = origin?.startsWith('http://localhost:');
 
+    // Allowed origins // cors
     if (isAllowedDomain || isLocalhost) {
         res.header('Access-Control-Allow-Origin', req.get('origin'));
         res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
