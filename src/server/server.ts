@@ -44,7 +44,11 @@ app.use(cookiesMiddleware());
 app.use((req, res, next) => {
     // Allowed origins // cors
     const origin = req.get('origin');
-    if (origin?.endsWith('.nav.no') || origin?.startsWith('http://localhost:')) {
+    const whitelist = ['.nav.no', '.oera.no'];
+    const isAllowedDomain = whitelist.some((domain) => origin?.endsWith(domain));
+    const isLocalhost = origin?.startsWith('http://localhost:');
+
+    if (isAllowedDomain || isLocalhost) {
         res.header('Access-Control-Allow-Origin', req.get('origin'));
         res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
         res.header('Access-Control-Allow-Credentials', 'true');
