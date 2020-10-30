@@ -12,7 +12,9 @@ export const initAmplitude = () => {
             includeReferrer: true,
             platform: window.location.toString(),
         });
-        logAmplitudeEvent('sidevisning');
+        logAmplitudeEvent('sidevisning', {
+            sidetittel: document.title,
+        });
     }
 };
 
