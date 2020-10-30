@@ -43,7 +43,7 @@ app.use(compression());
 app.use(cookiesMiddleware());
 app.use((req, res, next) => {
     const origin = req.get('origin');
-    const whitelist = ['.nav.no', '.oera.no'];
+    const whitelist = ['.nav.no', '.oera.no', '.labs.nais.io'];
     const isAllowedDomain = whitelist.some((domain) => origin?.endsWith(domain));
     const isLocalhost = origin?.startsWith('http://localhost:');
 
