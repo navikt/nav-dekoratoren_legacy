@@ -110,8 +110,9 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
             .then((xpRes) => {
                 if (xpRes.ok && xpRes.status === 200) {
                     return xpRes;
+                } else {
+                    throw `Response ${xpRes.status}`;
                 }
-                throw `Response ${xpRes.status}`;
             })
             .then((xpRes) => xpRes.json())
             .then((xpData) => {
