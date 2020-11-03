@@ -31,10 +31,21 @@ export const Brodsmulesti = (props: Props) => {
     const { language } = useSelector((state: AppState) => state.language);
     const context = getArbeidsflateContext(XP_BASE_URL, status);
     const { breadcrumbs } = props;
-
     const isLanguageNorwegian = language === Locale.NYNORSK || language === Locale.BOKMAL;
 
-    const slicedBreadcrumbs = showAll ? breadcrumbs : breadcrumbs.slice(breadcrumbs.length - 2);
+    const breadcrumbsCaseExclude = ['NAV'];
+    const breadcrumbsCase = breadcrumbs.map((b) => ({
+        ...b,
+        title: b.title
+            .split(' ')
+            .map((title, i) => {
+                const lowercase = title.toLowerCase();
+                const camelcase = lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
+                return breadcrumbsCaseExclude.includes(title) ? `${title}` : !i ? `${camelcase}` : `${lowercase}`;
+            })
+            .join(' '),
+    }));
+    const breadcrumbsSliced = showAll ? breadcrumbsCase : breadcrumbsCase.slice(breadcrumbsCase.length - 2);
 
     const homeUrlMap: { [key: string]: string } = {
         nb: `${XP_BASE_URL}`,
@@ -78,9 +89,9 @@ export const Brodsmulesti = (props: Props) => {
                         </button>
                     </li>
                 )}
-                {slicedBreadcrumbs.map((breadcrumb, i) => (
-                    <li key={i} className="typo-normal" aria-current={i + 1 === slicedBreadcrumbs.length && `page`}>
-                        {i + 1 !== slicedBreadcrumbs.length ? (
+                {breadcrumbsSliced.map((breadcrumb, i) => (
+                    <li key={i} className="typo-normal" aria-current={i + 1 === breadcrumbsSliced.length && `page`}>
+                        {i + 1 !== breadcrumbsSliced.length ? (
                             breadcrumb.handleInApp ? (
                                 <Lenke
                                     href={breadcrumb.url}
