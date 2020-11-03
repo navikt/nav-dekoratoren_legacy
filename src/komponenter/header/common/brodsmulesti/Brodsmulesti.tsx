@@ -38,10 +38,10 @@ export const Brodsmulesti = (props: Props) => {
         title: b.title
             .split(' ')
             .map((title, i) => {
-                const exlude = ['NAV'];
+                const exclude = ['NAV'];
                 const lowercase = title.toLowerCase();
                 const camelcase = lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
-                return exlude.some((word) => title.includes(word)) ? `${title}` : !i ? `${camelcase}` : `${lowercase}`;
+                return exclude.some((word) => title.includes(word)) ? `${title}` : !i ? `${camelcase}` : `${lowercase}`;
             })
             .join(' '),
     }));
