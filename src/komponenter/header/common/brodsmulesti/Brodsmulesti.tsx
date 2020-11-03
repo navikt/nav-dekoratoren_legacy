@@ -33,15 +33,15 @@ export const Brodsmulesti = (props: Props) => {
     const { breadcrumbs } = props;
     const isLanguageNorwegian = language === Locale.NYNORSK || language === Locale.BOKMAL;
 
-    const breadcrumbsCaseExclude = ['NAV'];
     const breadcrumbsCase = breadcrumbs.map((b) => ({
         ...b,
         title: b.title
             .split(' ')
             .map((title, i) => {
+                const exlude = ['NAV'];
                 const lowercase = title.toLowerCase();
                 const camelcase = lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
-                return breadcrumbsCaseExclude.includes(title) ? `${title}` : !i ? `${camelcase}` : `${lowercase}`;
+                return exlude.some((word) => title.includes(word)) ? `${title}` : !i ? `${camelcase}` : `${lowercase}`;
             })
             .join(' '),
     }));
