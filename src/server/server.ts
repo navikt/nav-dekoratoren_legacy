@@ -107,6 +107,12 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
         fetch(`${process.env.API_XP_SERVICES_URL}/no.nav.navno/menu`, {
             method: 'GET',
         })
+            .then((xpRes) => {
+                if (xpRes.ok && xpRes.status === 200) {
+                    return xpRes;
+                }
+                throw `Response ${xpRes.status}`;
+            })
             .then((xpRes) => xpRes.json())
             .then((xpData) => {
                 mainCache.set(mainCacheKey, xpData);
