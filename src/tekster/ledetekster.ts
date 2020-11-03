@@ -132,12 +132,9 @@ export const ledetekster: { [key: string]: string } = {
     'delskjerm-modal-avbryt': `Avbryt`,
     'delskjerm-modal-avbryt-en': `Cancel`,
     'delskjerm-modal-avbryt-se': `Avbryt`,
-    'delskjerm-modal-stengt':
-        'Skjermdeling er for øyeblikket stengt, prøv igjen senere',
-    'delskjerm-modal-stengt-en':
-        'Screen sharing is currently closed, please try again later',
-    'delskjerm-modal-stengt-se':
-        'Skjermdeling er for øyeblikket stengt, prøv igjen senere',
+    'delskjerm-modal-stengt': 'Skjermdeling er for øyeblikket stengt, prøv igjen senere',
+    'delskjerm-modal-stengt-en': 'Screen sharing is currently closed, please try again later',
+    'delskjerm-modal-stengt-se': 'Skjermdeling er for øyeblikket stengt, prøv igjen senere',
     'varsler-visalle': 'Vis alle dine varsler',
     'varsler-visalle-en': 'Show all your notifications',
     'varsler-visalle-se': 'Vis alle dine varsler',
@@ -180,18 +177,12 @@ export const ledetekster: { [key: string]: string } = {
         'Dine saker, utbetalinger, meldinger, meldekort, aktivitetsplan, personopplysninger og flere tjenester',
     'meny-bunnlenke-minside-stikkord-se':
         'Dine saker, utbetalinger, meldinger, meldekort, aktivitetsplan, personopplysninger og flere tjenester',
-    'meny-bunnlenke-arbeidsgiver-stikkord':
-        'Dine sykmeldte, rekruttering, digitale skjemaer',
-    'meny-bunnlenke-arbeidsgiver-stikkord-en':
-        'Dine sykmeldte, rekruttering, digitale skjemaer',
-    'meny-bunnlenke-arbeidsgiver-stikkord-se':
-        'Dine sykmeldte, rekruttering, digitale skjemaer',
-    'meny-bunnlenke-samarbeidspartner-stikkord':
-        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
-    'meny-bunnlenke-samarbeidspartner-stikkord-en':
-        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
-    'meny-bunnlenke-samarbeidspartner-stikkord-se':
-        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
+    'meny-bunnlenke-arbeidsgiver-stikkord': 'Dine sykmeldte, rekruttering, digitale skjemaer',
+    'meny-bunnlenke-arbeidsgiver-stikkord-en': 'Dine sykmeldte, rekruttering, digitale skjemaer',
+    'meny-bunnlenke-arbeidsgiver-stikkord-se': 'Dine sykmeldte, rekruttering, digitale skjemaer',
+    'meny-bunnlenke-samarbeidspartner-stikkord': 'Helsepersonell, tiltaksarrangører, fylker og kommuner',
+    'meny-bunnlenke-samarbeidspartner-stikkord-en': 'Helsepersonell, tiltaksarrangører, fylker og kommuner',
+    'meny-bunnlenke-samarbeidspartner-stikkord-se': 'Helsepersonell, tiltaksarrangører, fylker og kommuner',
     'meny-loading': 'Laster innhold...',
     'meny-loading-en': 'Loading menu content...',
     'meny-loading-se': 'Laster innhold...',
@@ -207,12 +198,9 @@ export const ledetekster: { [key: string]: string } = {
         'Tjenester, skjemaer, rekruttere, inkludere, sykmeldte, selvstendig næringsdrivende',
     'arbeidsflate-stikkord-om-arbeidsgiver-se':
         'Tjenester, skjemaer, rekruttere, inkludere, sykmeldte, selvstendig næringsdrivende',
-    'arbeidsflate-stikkord-om-samarbeidspartner':
-        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
-    'arbeidsflate-stikkord-om-samarbeidspartner-en':
-        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
-    'arbeidsflate-stikkord-om-samarbeidspartner-se':
-        'Helsepersonell, tiltaksarrangører, fylker og kommuner',
+    'arbeidsflate-stikkord-om-samarbeidspartner': 'Helsepersonell, tiltaksarrangører, fylker og kommuner',
+    'arbeidsflate-stikkord-om-samarbeidspartner-en': 'Helsepersonell, tiltaksarrangører, fylker og kommuner',
+    'arbeidsflate-stikkord-om-samarbeidspartner-se': 'Helsepersonell, tiltaksarrangører, fylker og kommuner',
     'lock-msg-infotekst':
         'Menypunkt med hengelås sender deg til ny innlogging. Disse tjenestene krever BankID, Buypass eller Commfides.',
     'lock-msg-infotekst-en':
@@ -240,12 +228,9 @@ export const ledetekster: { [key: string]: string } = {
     'fant-det-du-lette-etter-svarknapp-nei': 'Nei',
     'fant-det-du-lette-etter-svarknapp-nei-en': 'No',
     'fant-det-du-lette-etter-svarknapp-nei-se': 'Nei',
-    'gi-din-vurdering-av-informasjon':
-        'Gi din vurdering av informasjonen på siden',
-    'gi-din-vurdering-av-informasjon-en':
-        'Give your evaluation of the information on this page',
-    'gi-din-vurdering-av-informasjon-se':
-        'Gi din vurdering av informasjonen på siden',
+    'gi-din-vurdering-av-informasjon': 'Gi din vurdering av informasjonen på siden',
+    'gi-din-vurdering-av-informasjon-en': 'Give your evaluation of the information on this page',
+    'gi-din-vurdering-av-informasjon-se': 'Gi din vurdering av informasjonen på siden',
     'rapporter-om-feil-mangler': 'Meld om feil og mangler',
     'rapporter-om-feil-mangler-en': 'Report errors and omissions',
     'rapporter-om-feil-mangler-se': 'Meld om feil og mangler',
@@ -265,30 +250,23 @@ export const ledetekster: { [key: string]: string } = {
     avbryt: 'Avbryt',
     'avbryt-en': 'Cancel',
     'avbryt-se': 'Avbryt',
-    'hensikt-med-tilbakemelding':
-        'Vi vil bruke svaret ditt til å forbedre nettsidene våre',
-    'hensikt-med-tilbakemelding-en':
-        'We will use your answer to improve our website',
-    'hensikt-med-tilbakemelding-se':
-        'Vi vil bruke svaret ditt til å forbedre nettsidene våre',
+    'hensikt-med-tilbakemelding': 'Vi vil bruke svaret ditt til å forbedre nettsidene våre',
+    'hensikt-med-tilbakemelding-en': 'We will use your answer to improve our website',
+    'hensikt-med-tilbakemelding-se': 'Vi vil bruke svaret ditt til å forbedre nettsidene våre',
     'teknisk-feil': 'Teknisk feil',
     'teknisk-feil-en': 'Technical error',
     'teknisk-feil-se': 'Teknisk feil',
     'feil-informasjon': 'Feil informasjon',
     'feil-informasjon-en': 'Wrong information',
     'feil-informasjon-se': 'Feil informasjon',
-    skjermleser:
-        'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel',
-    'skjermleser-en':
-        'Error when using screen readers or other accessibility devices',
-    'skjermleser-se':
-        'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel',
+    skjermleser: 'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel',
+    'skjermleser-en': 'Error when using screen readers or other accessibility devices',
+    'skjermleser-se': 'Feil på siden ved bruk av skjermleser eller annet hjelpemiddel',
     annet: 'Annet',
     'annet-en': 'Other',
     'annet-se': 'Annet',
     'lite-oversiktlig': 'Innholdet var lite oversiktlig',
-    'lite-oversiktlig-en':
-        'It was difficult to get a good overview of the content',
+    'lite-oversiktlig-en': 'It was difficult to get a good overview of the content',
     'lite-oversiktlig-se': 'Innholdet var lite oversiktlig',
     'lite-forstaelig': 'Jeg forstod ikke innholdet',
     'lite-forstaelig-en': 'I did not understand the information',
@@ -300,10 +278,8 @@ export const ledetekster: { [key: string]: string } = {
     'villedende-en': 'The content was misleading',
     'villedende-se': 'Innholdet var villedende',
     'browser-utdatert-msg': 'Du bruker en nettleser som nav.no ikke støtter. ',
-    'browser-utdatert-msg-en':
-        'You are using a web browser which is not supported on nav.no. ',
-    'browser-utdatert-msg-se':
-        'Du bruker en nettleser som nav.no ikke støtter. ',
+    'browser-utdatert-msg-en': 'You are using a web browser which is not supported on nav.no. ',
+    'browser-utdatert-msg-se': 'Du bruker en nettleser som nav.no ikke støtter. ',
     'browser-utdatert-lenke': 'Se mer informasjon',
     'browser-utdatert-lenke-en': 'More information',
     'browser-utdatert-lenke-se': 'Se mer informasjon',
