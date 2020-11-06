@@ -37,12 +37,7 @@ export const Brodsmulesti = (props: Props) => {
         ...b,
         title: b.title
             .split(' ')
-            .map((title, i) => {
-                const exclude = ['NAV'];
-                const lowercase = title.toLowerCase();
-                const camelcase = lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
-                return exclude.some((word) => title.includes(word)) ? `${title}` : !i ? `${camelcase}` : `${lowercase}`;
-            })
+            .map((title, i) => (!i ? `${title.charAt(0).toUpperCase() + title.slice(1)}` : `${title}`))
             .join(' '),
     }));
     const breadcrumbsSliced = showAll ? breadcrumbsCase : breadcrumbsCase.slice(breadcrumbsCase.length - 2);
