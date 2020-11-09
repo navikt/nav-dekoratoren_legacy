@@ -43,7 +43,7 @@ app.use(compression());
 app.use(cookiesMiddleware());
 app.use((req, res, next) => {
     const origin = req.get('origin');
-    const whitelist = ['.nav.no', '.oera.no'];
+    const whitelist = ['.nav.no', '.oera.no', '.nais.io', 'https://preview-sykdomifamilien.gtsb.io'];
     const isAllowedDomain = whitelist.some((domain) => origin?.endsWith(domain));
     const isLocalhost = origin?.startsWith('http://localhost:');
 
@@ -107,6 +107,13 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
         fetch(`${process.env.API_XP_SERVICES_URL}/no.nav.navno/menu`, {
             method: 'GET',
         })
+            .then((xpRes) => {
+                if (xpRes.ok && xpRes.status === 200) {
+                    return xpRes;
+                } else {
+                    throw `Response ${xpRes.status}`;
+                }
+            })
             .then((xpRes) => xpRes.json())
             .then((xpData) => {
                 mainCache.set(mainCacheKey, xpData);
