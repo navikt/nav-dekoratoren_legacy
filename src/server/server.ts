@@ -160,19 +160,9 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
 });
 
 // Proxied requests
-const proxiedAuthUrl = `${appBasePath}/api/auth`;
 const proxiedVarslerUrl = `${appBasePath}/api/varsler`;
 const proxiedDriftsmeldingerUrl = `${appBasePath}/api/driftsmeldinger`;
 const proxiedSokUrl = `${appBasePath}/api/sok`;
-
-app.use(
-    proxiedAuthUrl,
-    createProxyMiddleware(proxiedAuthUrl, {
-        target: `${process.env.API_INNLOGGINGSLINJE_URL}`,
-        pathRewrite: { [`^${proxiedAuthUrl}`]: '' },
-        changeOrigin: true,
-    })
-);
 
 app.use(
     proxiedVarslerUrl,

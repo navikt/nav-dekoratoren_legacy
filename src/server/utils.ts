@@ -38,6 +38,8 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
         APP_BASE_URL: process.env.APP_BASE_URL as string,
         APP_BASE_PATH: process.env.APP_BASE_PATH as string,
         API_VARSELINNBOKS_URL: process.env.API_VARSELINNBOKS_URL as string,
+        API_INNLOGGINGSLINJE_URL: process.env
+            .API_INNLOGGINGSLINJE_URL as string,
         API_UNLEASH_PROXY_URL: process.env.API_UNLEASH_PROXY_URL as string,
         MINSIDE_ARBEIDSGIVER_URL: process.env
             .MINSIDE_ARBEIDSGIVER_URL as string,
