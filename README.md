@@ -102,8 +102,6 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | feedback           | boolean                                               | true                 | Skjuler eller viser tilbakemeldingskomponentet                                 |
 | chatbot            | boolean                                               | false                | Skjuler eller viser Chatbot Frida [6]                                          |
 
-:warning: &nbsp; Ta kontakt med [Team Personbruker](https://github.com/orgs/navikt/teams/team-personbruker) før beta parametere benyttes
-
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
 [3] Språk settes automatisk client-side dersom nåværende url inneholder **/nb/**, **/nn/**, **/en/**, **/se/**, uavhengig av dette parameteret. <br>
@@ -125,13 +123,13 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 Eksempel 1 - Endre context:<br>
 https://www.nav.no/dekoratoren/?context=arbeidsgiver
 
-Eksempel 2 - Håndhev innlogging **(beta)**:<br>
+Eksempel 2 - Håndhev innlogging:<br>
 https://www.nav.no/dekoratoren/?enforceLogin=true&level=Level4&redirectToApp=true
 
-Eksempel 3 - Språkvelger **(beta)**:<br>
+Eksempel 3 - Språkvelger:<br>
 [https://www.nav.no/dekoratoren/?availableLanguages=\[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}\] ](https://www.nav.no/dekoratoren/?availableLanguages=[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}])
 
-Eksempel 4 - Brødsmulesti **(beta)**:<br>
+Eksempel 4 - Brødsmulesti:<br>
 [https://www.nav.no/dekoratoren/?breadcrumbs=\[{"url":"https://www.nav.no/person/dittnav","title":"Ditt NAV"},{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt oss"}\] ](https://www.nav.no/dekoratoren/?breadcrumbs=[{"url":"https://www.nav.no/person/dittnav","title":"Ditt%20NAV"},{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt%20oss"}])
 
 ## Oppstart via docker-compose
