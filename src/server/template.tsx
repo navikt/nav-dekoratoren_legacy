@@ -49,9 +49,7 @@ export const template = (req: Request) => {
 
     // Fetch params and forward to client
     const params = req.query;
-    const paramsAsString = Object.keys(req.query).length
-        ? `?${req.url.split('?')[1]}`
-        : ``;
+    const paramsAsString = Object.keys(req.query).length ? `?${req.url.split('?')[1]}` : ``;
 
     // Backward compatibility
     // for simple header and footer
@@ -92,7 +90,7 @@ export const template = (req: Request) => {
             <title>NAV Dekoratør</title>
             <!-- Decorator development styling -->
             <style>
-            html, body {  height: 100%; }
+            html {font-size: 100%; height: 100%}, body {  height: 100%; min-width: 320px}
             .decorator-dev-container {
                 display:flex;
                 flex-direction: column;

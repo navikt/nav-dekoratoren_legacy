@@ -49,7 +49,7 @@ const Icon = (props: IconProps) => (
 );
 
 const InfoSvg = () => (
-    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+    <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" version="1.1">
         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g transform="translate(-164.000000, -106.000000)" fill="currentColor">
                 <g transform="translate(164.000000, 106.000000)">
@@ -61,7 +61,7 @@ const InfoSvg = () => (
 );
 
 const StatusSvg = () => (
-    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+    <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" version="1.1">
         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g transform="translate(-222.000000, -106.000000)" fill="currentColor">
                 <g transform="translate(222.000000, 106.000000)">
