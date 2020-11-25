@@ -48,7 +48,7 @@ export const Header = () => {
     const { arbeidsflate } = useSelector(stateSelector);
     const { innloggingsstatus } = useSelector(stateSelector);
     const { authenticated } = innloggingsstatus.data;
-    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL } = environment;
+    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL, API_INNLOGGINGSLINJE_URL } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
     const breadcrumbs = PARAMS.BREADCRUMBS || [];
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
@@ -81,7 +81,7 @@ export const Header = () => {
     // Handle external data
     useEffect(() => {
         fetchDriftsmeldinger(APP_URL)(dispatch);
-        hentInnloggingsstatus(APP_URL)(dispatch);
+        hentInnloggingsstatus(API_INNLOGGINGSLINJE_URL)(dispatch);
         fetchMenypunkter(APP_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
             const togglesFromCookie = cookies[unleashCacheCookie];

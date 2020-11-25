@@ -20,8 +20,8 @@ export interface DataElement {
 
 export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => fetchToJson(`${APP_URL}/api/meny`);
 
-export const hentInnloggingsstatusFetch = (APP_URL: string): Promise<innloggingsstatusData> =>
-    fetchToJson(`${APP_URL}/api/auth`, {
+export const hentInnloggingsstatusFetch = (API_INNLOGGINGSLINJE_URL: string): Promise<innloggingsstatusData> =>
+    fetchToJson(`${API_INNLOGGINGSLINJE_URL}/auth`, {
         credentials: 'include',
     });
 

@@ -12,11 +12,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo ::set-env name=CI::true
-          echo ::set-env name=IMAGE_REGISTRY::docker.pkg.github.com/$(echo ${GITHUB_REPOSITORY})
-          echo ::set-env name=IMAGE_NAME::$(echo ${GITHUB_REPOSITORY##*/})
-          echo ::set-env name=IMAGE_VERSION::$(echo ${GITHUB_WORKFLOW})-$(echo ${GITHUB_SHA})
-          echo ::set-env name=GITHUB_TOKEN::$(echo ${GITHUB_TOKEN})
+          echo "CI=true" >> $GITHUB_ENV
+          echo "IMAGE_REGISTRY=docker.pkg.github.com/$(echo ${GITHUB_REPOSITORY})" >> $GITHUB_ENV
+          echo "IMAGE_NAME=$(echo ${GITHUB_REPOSITORY##*/})" >> $GITHUB_ENV
+          echo "IMAGE_VERSION=$(echo ${GITHUB_WORKFLOW})-$(echo ${GITHUB_SHA})" >> $GITHUB_ENV
+          echo "GITHUB_TOKEN=$(echo ${GITHUB_TOKEN})" >> $GITHUB_ENV
       - uses: actions/cache@v1
         with:
           path: ~/.npm

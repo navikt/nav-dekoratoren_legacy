@@ -42,11 +42,18 @@ app.disable('x-powered-by');
 app.use(compression());
 app.use(cookiesMiddleware());
 app.use((req, res, next) => {
-    // Allowed origins
-    res.header('Access-Control-Allow-Origin', req.get('origin'));
-    res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
+    const origin = req.get('origin');
+    const whitelist = ['.nav.no', '.oera.no', '.nais.io', 'https://preview-sykdomifamilien.gtsb.io'];
+    const isAllowedDomain = whitelist.some((domain) => origin?.endsWith(domain));
+    const isLocalhost = origin?.startsWith('http://localhost:');
+
+    // Allowed origins // cors
+    if (isAllowedDomain || isLocalhost) {
+        res.header('Access-Control-Allow-Origin', req.get('origin'));
+        res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+        res.header('Access-Control-Allow-Credentials', 'true');
+        res.header('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
+    }
 
     // Cache control
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
@@ -100,6 +107,13 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
         fetch(`${process.env.API_XP_SERVICES_URL}/no.nav.navno/menu`, {
             method: 'GET',
         })
+            .then((xpRes) => {
+                if (xpRes.ok && xpRes.status === 200) {
+                    return xpRes;
+                } else {
+                    throw `Response ${xpRes.status}`;
+                }
+            })
             .then((xpRes) => xpRes.json())
             .then((xpData) => {
                 mainCache.set(mainCacheKey, xpData);
@@ -146,19 +160,9 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
 });
 
 // Proxied requests
-const proxiedAuthUrl = `${appBasePath}/api/auth`;
 const proxiedVarslerUrl = `${appBasePath}/api/varsler`;
 const proxiedDriftsmeldingerUrl = `${appBasePath}/api/driftsmeldinger`;
 const proxiedSokUrl = `${appBasePath}/api/sok`;
-
-app.use(
-    proxiedAuthUrl,
-    createProxyMiddleware(proxiedAuthUrl, {
-        target: `${process.env.API_INNLOGGINGSLINJE_URL}`,
-        pathRewrite: { [`^${proxiedAuthUrl}`]: '' },
-        changeOrigin: true,
-    })
-);
 
 app.use(
     proxiedVarslerUrl,

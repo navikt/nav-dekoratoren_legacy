@@ -32,11 +32,7 @@ type KeyboardNavState = {
     subGraph?: KbNavGraph;
 };
 
-export const kbMasterNode = createKbNavNode(
-    headerLogoId,
-    { col: 0, row: 0, sub: 0 },
-    KbNavGroup.HeaderMenylinje
-);
+export const kbMasterNode = createKbNavNode(headerLogoId, { col: 0, row: 0, sub: 0 }, KbNavGroup.HeaderMenylinje);
 
 export const kbNavInitialState: KeyboardNavState = {
     currentNode: kbMasterNode,
@@ -48,18 +44,10 @@ export const kbNavInitialState: KeyboardNavState = {
 };
 
 export const useKbNavMain = (): KbNavMain => {
-    const {
-        language,
-        arbeidsflate,
-        menyStatus,
-        innloggingsStatus,
-        dropdownToggles,
-    } = useSelector(stateSelector);
+    const { language, arbeidsflate, menyStatus, innloggingsStatus, dropdownToggles } = useSelector(stateSelector);
     const dispatch = useDispatch();
 
-    const [kbNavState, setKbNavState] = useState<KeyboardNavState>(
-        kbNavInitialState
-    );
+    const [kbNavState, setKbNavState] = useState<KeyboardNavState>(kbNavInitialState);
     const setCurrentNode = (node: KbNavNode) => {
         setKbNavState({ ...kbNavState, currentNode: node });
     };
@@ -68,18 +56,10 @@ export const useKbNavMain = (): KbNavMain => {
     };
 
     const dropdownIsOpen =
-        dropdownToggles.hovedmeny ||
-        dropdownToggles.minside ||
-        dropdownToggles.sok ||
-        dropdownToggles.varsler;
+        dropdownToggles.hovedmeny || dropdownToggles.minside || dropdownToggles.sok || dropdownToggles.varsler;
 
     useEffect(() => {
-        const graph = createHeaderMainGraph(
-            language,
-            arbeidsflate,
-            menyStatus,
-            innloggingsStatus.authenticated
-        );
+        const graph = createHeaderMainGraph(language, arbeidsflate, menyStatus, innloggingsStatus.authenticated);
         if (graph) {
             setKbNavState({ ...kbNavState, mainGraph: graph });
         }
@@ -90,16 +70,8 @@ export const useKbNavMain = (): KbNavMain => {
             ...kbNavState.mainGraph.nodeMap,
             ...kbNavState.subGraph?.nodeMap,
         };
-        const arrowkeysHandler = KbNav.arrowkeysHandler(
-            kbNavState.currentNode,
-            setCurrentNode
-        );
-        const focusHandler = KbNav.focusHandler(
-            kbNavState.currentNode,
-            nodeMap,
-            setCurrentNode,
-            arrowkeysHandler
-        );
+        const arrowkeysHandler = KbNav.arrowkeysHandler(kbNavState.currentNode, setCurrentNode);
+        const focusHandler = KbNav.focusHandler(kbNavState.currentNode, nodeMap, setCurrentNode, arrowkeysHandler);
         const escapeHandler = (event: KeyboardEvent) => {
             if (event.key !== 'Escape') {
                 return;
@@ -127,8 +99,7 @@ export const useKbNavMain = (): KbNavMain => {
     }, [kbNavState, dropdownIsOpen]);
 
     useEffect(() => {
-        const currentNodeInSubGraph =
-            kbNavState.subGraph?.nodeMap[kbNavState.currentNode.id];
+        const currentNodeInSubGraph = kbNavState.subGraph?.nodeMap[kbNavState.currentNode.id];
         if (currentNodeInSubGraph) {
             setCurrentNode(currentNodeInSubGraph);
         }

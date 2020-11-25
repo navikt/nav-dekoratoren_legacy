@@ -9,6 +9,7 @@ export interface Environment {
     APP_BASE_URL: string;
     APP_BASE_PATH: string;
     API_VARSELINNBOKS_URL: string;
+    API_INNLOGGINGSLINJE_URL: string;
     API_UNLEASH_PROXY_URL: string;
     MINSIDE_ARBEIDSGIVER_URL: string;
     DITT_NAV_URL: string;
@@ -48,6 +49,7 @@ export const initialState: Environment = {
     APP_BASE_URL: '',
     APP_BASE_PATH: '',
     API_VARSELINNBOKS_URL: '',
+    API_INNLOGGINGSLINJE_URL: '',
     API_UNLEASH_PROXY_URL: '',
     MINSIDE_ARBEIDSGIVER_URL: '',
     DITT_NAV_URL: '',
