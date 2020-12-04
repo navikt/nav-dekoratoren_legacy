@@ -17,6 +17,6 @@ export const ChatbotWrapper = ({...properties}: any) => {
     }, []);
 
     return isMounted ? (
-        <Chatbot {...properties} analyticsCallback={properties.analyticsCallback ?? logAmplitudeEvent}/>
+        <Chatbot {...properties} boostApiUrlBase='https://nav.boost.ai/api/chat/v2' analyticsCallback={properties.analyticsCallback ?? logAmplitudeEvent}/>
     ) : null;
 };
