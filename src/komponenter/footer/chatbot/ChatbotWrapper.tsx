@@ -5,7 +5,7 @@ import { logAmplitudeEvent } from 'utils/amplitude';
 // Prevents SSR crash
 const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
-export const ChatbotWrapper = ({...properties}: Chatbot.ChatbotProperties) => {
+export const ChatbotWrapper = ({...properties}: any) => {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
