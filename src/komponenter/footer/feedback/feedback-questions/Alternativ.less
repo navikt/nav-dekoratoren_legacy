@@ -14,8 +14,13 @@
 
     .knapper {
         display: flex;
-        margin-top: 0.5em;
+        margin-top: 1.5rem;
         flex-wrap: wrap;
+        justify-content: center;
+
+        .knapp--flat {
+            min-height: 2.5rem;
+        }
 
         .send-inn {
             margin-right: 0.25em;
@@ -23,7 +28,7 @@
             box-shadow: none;
 
             @media @screen-mobile {
-                padding-bottom: 0.25em;
+                margin-bottom: 0.5rem;
             }
         }
     }

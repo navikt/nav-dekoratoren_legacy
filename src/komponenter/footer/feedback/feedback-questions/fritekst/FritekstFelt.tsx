@@ -6,6 +6,8 @@ import './FritekstFelt.less';
 import Tekst, { finnTekst, finnTekstMedPayload } from '../../../../../tekster/finn-tekst';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../../../store/reducers';
+import { KontaktOss } from '../AlternativCommon';
+import { Ingress } from 'nav-frontend-typografi';
 
 export const MAX_LENGTH = 1000;
 
@@ -54,12 +56,12 @@ interface Props extends Partial<TextareaProps> {
 
 const FritekstFelt = (props: Props) => {
     const { language } = useSelector((state: AppState) => state.language);
+    const { environment } = useSelector((state: AppState) => state);
     const debouncedInputVerdier = useDebounce(props.feedbackMessage, 500);
     const { feedbackMessage, setErrors, harTrykketSubmit } = props;
 
     useEffect(() => {
         const violations = checkForViolations(debouncedInputVerdier);
-
         if (violations.length > 0) {
             const errorMelding = getViolationErrorMessage(violations, language);
             setErrors({ type: 'invalid', message: errorMelding });
@@ -100,7 +102,11 @@ const FritekstFelt = (props: Props) => {
             value={props.feedbackMessage}
             onChange={fritekstChanged}
             description={props.description}
-            label={props.label}
+            label={
+                <Ingress>
+                    <Tekst id="hva-lette-du-etter" />
+                </Ingress>
+            }
             placeholder={finnTekst('tilbakemelding-placeholder', language)}
             maxLength={MAX_LENGTH}
             textareaRef={props.textareaRef}
@@ -108,7 +114,12 @@ const FritekstFelt = (props: Props) => {
             feil={
                 props.errors.invalidInput || props.errors.maxLength ? (
                     <>
-                        {props.errors.invalidInput && <span> {props.errors.invalidInput}</span>}
+                        {props.errors.invalidInput && (
+                            <>
+                                <>{props.errors.invalidInput}</>
+                                <KontaktOss href={`${environment.XP_BASE_URL}/person/kontakt-oss`} />
+                            </>
+                        )}
                         {props.errors.maxLength && <span> {props.errors.maxLength}</span>}
                     </>
                 ) : null

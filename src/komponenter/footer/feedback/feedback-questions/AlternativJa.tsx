@@ -47,15 +47,10 @@ const AlternativJa = (props: QuestionProps) => {
                 errors={fritekstFeil}
                 setErrors={dispatchFritekstFeil}
                 description={<FeedbackInformasjon />}
-                label={
-                    <Ingress>
-                        <Tekst id="hva-lette-du-etter" />
-                    </Ingress>
-                }
                 textareaRef={(inputRef) => (textareaRef.current = inputRef)}
                 harTrykketSubmit={harTrykketSubmit}
             />
-            <KnappeRekke avbryt={props.avbryt} state={props.state} />
+            <KnappeRekke avbryt={props.settBesvart} state={props.state} />
         </form>
     );
 };

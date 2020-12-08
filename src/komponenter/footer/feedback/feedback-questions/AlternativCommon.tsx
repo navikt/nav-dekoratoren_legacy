@@ -13,28 +13,31 @@ export const questionStateSelector = (state: AppState) => ({
 });
 
 export interface QuestionProps {
-    avbryt: () => void;
     settBesvart: () => void;
     state: FeedbackState;
 }
 
+export const KontaktOss = (props: { href: string }) => (
+    <>
+        <Tekst id="kontakt-oss-start" />
+        <Lenke href={props.href}>
+            <Tekst id="kontakt-oss-lenketekst" />
+        </Lenke>
+        <Tekst id="kontakt-oss-slutt" />
+    </>
+);
+
 export const FeedbackInformasjon = React.memo(() => {
     const { environment } = useSelector((state: AppState) => state);
+
     return (
-        <Normaltekst>
-            <Tekst id="advarsel-om-personopplysninger" />
-            <br />
-            <Tekst id="advarsel-om-svar" />
-            <br />
-            <Lenke href={`${environment.XP_BASE_URL}/person/kontakt-oss`}>
-                <Tekst id="kontakt-oss-1" />
-            </Lenke>
-            <Tekst id="kontakt-oss-2" />
-            <br />
-            <Tekst id="om-saken-din" />
-            <Lenke href={environment.DITT_NAV_URL}>
-                <Tekst id="logg-inn-ditt-nav" />
-            </Lenke>
-        </Normaltekst>
+        <>
+            <Normaltekst>
+                <Tekst id="advarsel-om-personopplysninger" />
+            </Normaltekst>
+            <Normaltekst>
+                <KontaktOss href={`${environment.XP_BASE_URL}/person/kontakt-oss`} />
+            </Normaltekst>
+        </>
     );
 });

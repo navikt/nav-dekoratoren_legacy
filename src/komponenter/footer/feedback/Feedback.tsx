@@ -28,48 +28,25 @@ const Feedback = () => {
             <div className="footer-linje" />
             <div className="feedback-container">
                 {state === 'lukket' && (
-                    <div
-                        className="feedback-content"
-                        role="group"
-                        aria-labelledby="feedback-text"
-                    >
+                    <div className="feedback-content" role="group" aria-labelledby="feedback-text">
                         <Ingress>
                             <label id="feedback-text">
                                 <Tekst id="fant-du-det-du-lette-etter" />
                             </label>
                         </Ingress>
                         <div className="buttons-container">
-                            <Knapp
-                                className="knapp"
-                                onClick={handleJa}
-                            >
+                            <Knapp className="knapp" onClick={handleJa}>
                                 <Tekst id="svarknapp-ja" />
                             </Knapp>
-                            <Knapp
-                                className="knapp"
-                                onClick={handleNei}
-                            >
+                            <Knapp className="knapp" onClick={handleNei}>
                                 <Tekst id="svarknapp-nei" />
                             </Knapp>
                         </div>
                     </div>
                 )}
-                {state === 'ja' &&
-                    <AlternativJa
-                        state={state}
-                        avbryt={() => setState('lukket')}
-                        settBesvart={() => setState('besvart')}
-                    />
-                }
-                {
-
-                }
-                {state === 'nei' &&
-                    <AlternativNei
-                        state={state}
-                        avbryt={() => setState('lukket')}
-                        settBesvart={() => setState('besvart')} />
-                }
+                {state === 'ja' && <AlternativJa state={state} settBesvart={() => setState('besvart')} />}
+                {}
+                {state === 'nei' && <AlternativNei state={state} settBesvart={() => setState('besvart')} />}
                 {state === 'besvart' && <Thankyou />}
             </div>
         </>
