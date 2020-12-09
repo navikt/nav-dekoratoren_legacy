@@ -39,7 +39,7 @@ const AlternativNei = (props: QuestionProps) => {
             dispatchFritekstFeil({ type: 'reset' });
             const feedback = createFeedbackRespons(feedbackMessage, language, 'No');
             lagreTilbakemelding(feedback, environment.FEEDBACK_API_URL)(reduxDispatch);
-            logAmplitudeEvent('tilbakemelding-nei');
+            logAmplitudeEvent('tilbakemelding', { fritekst: 'besvart' });
             props.settBesvart();
         }
     };
@@ -55,7 +55,7 @@ const AlternativNei = (props: QuestionProps) => {
                 harTrykketSubmit={harTrykketSubmit}
                 description={<FeedbackInformasjon />}
             />
-            <KnappeRekke avbryt={props.settBesvart} state={props.state} />
+            <KnappeRekke avbryt={props.settBesvart} />
         </form>
     );
 };
