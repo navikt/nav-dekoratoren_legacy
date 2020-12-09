@@ -16,7 +16,10 @@
         display: flex;
         margin-top: 1.5rem;
         flex-wrap: wrap;
-        justify-content: center;
+
+        @media @screen-mobile {
+            justify-content: center;
+        }
 
         .knapp--flat {
             min-height: 2.5rem;
