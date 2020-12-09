@@ -29,7 +29,7 @@
     },
     "dependencies": {
         "@navikt/fnrvalidator": "^1.1.3",
-        "@navikt/nav-chatbot": "^2.1.1",
+        "@navikt/nav-chatbot": "^2.1.2",
         "@promster/express": "^4.1.12",
         "amplitude-js": "^7.1.1",
         "classnames": "^2.2.6",
