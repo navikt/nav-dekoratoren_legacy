@@ -39,6 +39,7 @@ export const SprakVelger = (props: Props) => {
     const { language } = useSelector((state: AppState) => state.language);
     const [, setCookie] = useCookies([decoratorLanguageCookie]);
     const options = transformOptions(availableLanguages).sort((a, b) => (a.label > b.label ? -1 : 1));
+    const label = 'Språk/Language';
 
     const onChange = (selected: LocaleOption) => {
         const { locale, value, handleInApp } = selected as LocaleOption;
@@ -55,11 +56,19 @@ export const SprakVelger = (props: Props) => {
         }
     };
 
-    const { isOpen, selectedItem, getToggleButtonProps, getLabelProps, getMenuProps, highlightedIndex, getItemProps } = useSelect({
+    const {
+        isOpen,
+        selectedItem,
+        getToggleButtonProps,
+        getLabelProps,
+        getMenuProps,
+        highlightedIndex,
+        getItemProps,
+    } = useSelect({
         items: options,
         itemToString: (item) => item?.value || '',
         onSelectedItemChange: ({ selectedItem }) => onChange(selectedItem as LocaleOption),
-        defaultSelectedItem: options.find((option) => option.locale === language),
+        selectedItem: options.find((option) => option.locale === language),
     });
 
     const ulStyle = isOpen
@@ -73,14 +82,17 @@ export const SprakVelger = (props: Props) => {
           }
         : { border: 'none' };
 
-    const label = 'Språk/Language';
     return (
         <div className={cls.element('container')}>
             <div className={cls.className}>
                 <label {...getLabelProps()} className="sr-only">
                     <Normaltekst>{label}</Normaltekst>
                 </label>
-                <button {...getToggleButtonProps()} className={`${cls.element('knapp')} skjemaelement__input`} type="button">
+                <button
+                    {...getToggleButtonProps()}
+                    className={`${cls.element('knapp')} skjemaelement__input`}
+                    type="button"
+                >
                     <span className={cls.element('knapp-tekst')}>
                         <Bilde asset={Globe} className={cls.element('ikon')} />
                         <Normaltekst>{label}</Normaltekst>
