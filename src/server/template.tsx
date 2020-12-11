@@ -104,9 +104,13 @@ export const template = (req: Request) => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-            }
-            .decorator-utils-container{
+            }  
+            .decorator-utils-container {               
                 display: none !important;
+            }
+            .decorator-dev-container.local .decorator-utils-container { 
+                background: #f1f1f1;
+                display: flex !important;
             }
             </style>
         </head>
@@ -116,7 +120,7 @@ export const template = (req: Request) => {
                 ${HtmlMetaTags}
                 <link href="${fileCss}" rel="stylesheet" />
             </div>
-            <div class="decorator-dev-container">
+            <div class="decorator-dev-container${process.env.NODE_ENV !== 'production' ? ' local' : ''}">
                 <!-- Header fetched by apps -->
                 <div id="${headerId}">
                     <div id="decorator-header">${HtmlHeader}</div>
