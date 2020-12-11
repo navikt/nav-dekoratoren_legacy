@@ -135,6 +135,10 @@ export const validateAvailableLanguages = (languages: AvailableLanguage[]) => {
             const error = 'availableLanguages.url supports string';
             throw Error(error);
         }
+        if (!isNavUrl(language.url)) {
+            const error = 'breadcrumbs.url supports only nav.no urls';
+            throw Error(error);
+        }
         switch (language.locale) {
             case 'nb':
             case 'nn':
@@ -159,8 +163,15 @@ export const validateBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
             const error = 'breadcrumbs.url supports string';
             throw Error(error);
         }
+        if (!isNavUrl(breadcrumb.url)) {
+            const error = 'breadcrumbs.url supports only nav.no urls';
+            throw Error(error);
+        }
     });
 };
+
+// Validator utils
+export const isNavUrl = (url: string) => /^(\/.*|(https:\/\/([a-z0-9]+[.])*nav[.]no)).*/i.test(url);
 
 // Deprecated map to support norsk | engelsk | samisk
 const mapToLocale = (language?: string) => {
