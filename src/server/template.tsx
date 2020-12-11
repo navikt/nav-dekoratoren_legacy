@@ -105,12 +105,11 @@ export const template = (req: Request) => {
                 justify-content: center;
                 align-items: center;
             }  
-            .decorator-utils-container {               
-                display: none !important;
+            .decorator-utils-container {    
+                background: #f1f1f1;           
             }
-            .decorator-dev-container.test .decorator-utils-container { 
-                background: #f1f1f1;
-                display: flex !important;
+            .decorator-dev-container:not(.test) .decorator-utils-container { 
+                display: none !important;
             }
             </style>
         </head>
