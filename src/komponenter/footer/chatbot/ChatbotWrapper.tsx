@@ -8,11 +8,11 @@ import { logAmplitudeEvent } from 'utils/amplitude';
 const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
 const stateSelector = (state: AppState) => ({
-    isChatbotEnabled: state.environment.PARAMS.CHATBOT
+    isChatbotEnabled: state.environment.PARAMS.CHATBOT !== false,
 });
 
-export const ChatbotWrapper = ({...properties}: any) => {
-    const {isChatbotEnabled} = useSelector(stateSelector);
+export const ChatbotWrapper = ({ ...properties }: any) => {
+    const { isChatbotEnabled } = useSelector(stateSelector);
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -24,6 +24,10 @@ export const ChatbotWrapper = ({...properties}: any) => {
     }, []);
 
     return isMounted ? (
-        <Chatbot {...properties} boostApiUrlBase='https://nav.boost.ai/api/chat/v2' analyticsCallback={properties.analyticsCallback ?? logAmplitudeEvent}/>
+        <Chatbot
+            {...properties}
+            boostApiUrlBase="https://nav.boost.ai/api/chat/v2"
+            analyticsCallback={properties.analyticsCallback ?? logAmplitudeEvent}
+        />
     ) : null;
 };
