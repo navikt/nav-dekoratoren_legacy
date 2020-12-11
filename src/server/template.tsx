@@ -108,7 +108,7 @@ export const template = (req: Request) => {
             .decorator-utils-container {               
                 display: none !important;
             }
-            .decorator-dev-container.local .decorator-utils-container { 
+            .decorator-dev-container.test .decorator-utils-container { 
                 background: #f1f1f1;
                 display: flex !important;
             }
@@ -120,7 +120,7 @@ export const template = (req: Request) => {
                 ${HtmlMetaTags}
                 <link href="${fileCss}" rel="stylesheet" />
             </div>
-            <div class="decorator-dev-container${process.env.NODE_ENV !== 'production' ? ' local' : ''}">
+            <div class="decorator-dev-container${process.env.APP_BASE_URL !== 'https://www.nav.no' ? ' test' : ''}">
                 <!-- Header fetched by apps -->
                 <div id="${headerId}">
                     <div id="decorator-header">${HtmlHeader}</div>
