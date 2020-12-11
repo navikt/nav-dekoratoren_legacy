@@ -170,6 +170,7 @@ export const validateBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
     });
 };
 
+// Validator utils
 export const isNavUrl = (url: string) => /^(\/.*|(https:\/\/([a-z0-9]+[.])*nav[.]no)).*/i.test(url);
 
 // Deprecated map to support norsk | engelsk | samisk
