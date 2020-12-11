@@ -49,9 +49,7 @@ export const template = (req: Request) => {
 
     // Fetch params and forward to client
     const params = req.query;
-    const paramsAsString = Object.keys(req.query).length
-        ? `?${req.url.split('?')[1]}`
-        : ``;
+    const paramsAsString = Object.keys(req.query).length ? `?${req.url.split('?')[1]}` : ``;
 
     // Backward compatibility
     // for simple header and footer
@@ -108,7 +106,7 @@ export const template = (req: Request) => {
                 align-items: center;
             }
             .decorator-utils-container{
-                background: #f1f1f1;
+                display: none !important;
             }
             </style>
         </head>
