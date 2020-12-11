@@ -67,7 +67,7 @@ export const initialState: Environment = {
         LEVEL: '',
         LANGUAGE: Locale.IKKEBESTEMT,
         FEEDBACK: false,
-        CHATBOT: false,
+        CHATBOT: true,
     },
 
     // Cookies
