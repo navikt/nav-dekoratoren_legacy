@@ -8,7 +8,7 @@ import { logAmplitudeEvent } from 'utils/amplitude';
 const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
 const stateSelector = (state: AppState) => ({
-    isChatbotEnabled: state.environment.PARAMS.CHATBOT !== false,
+    isChatbotEnabled: state.environment.PARAMS.CHATBOT,
 });
 
 export const ChatbotWrapper = ({ ...properties }: any) => {
