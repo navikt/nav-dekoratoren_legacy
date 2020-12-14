@@ -22,15 +22,11 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
 
     // Deprecated map
     const language = mapToLocale(req.query.language as string);
-    const chosenLanguage = (language?.toString().toLowerCase() ||
-        Locale.IKKEBESTEMT) as Locale;
+    const chosenLanguage = (language?.toString().toLowerCase() || Locale.IKKEBESTEMT) as Locale;
 
-    const chosenContext = (req.query.context?.toString().toLowerCase() ||
-        MenuValue.IKKEBESTEMT) as MenuValue;
+    const chosenContext = (req.query.context?.toString().toLowerCase() || MenuValue.IKKEBESTEMT) as MenuValue;
 
-    const appUrl = `${process.env.APP_BASE_URL || ``}${
-        process.env.APP_BASE_PATH || ``
-    }` as string;
+    const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
 
     return {
         XP_BASE_URL: process.env.XP_BASE_URL as string,
@@ -38,11 +34,9 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
         APP_BASE_URL: process.env.APP_BASE_URL as string,
         APP_BASE_PATH: process.env.APP_BASE_PATH as string,
         API_VARSELINNBOKS_URL: process.env.API_VARSELINNBOKS_URL as string,
-        API_INNLOGGINGSLINJE_URL: process.env
-            .API_INNLOGGINGSLINJE_URL as string,
+        API_INNLOGGINGSLINJE_URL: process.env.API_INNLOGGINGSLINJE_URL as string,
         API_UNLEASH_PROXY_URL: process.env.API_UNLEASH_PROXY_URL as string,
-        MINSIDE_ARBEIDSGIVER_URL: process.env
-            .MINSIDE_ARBEIDSGIVER_URL as string,
+        MINSIDE_ARBEIDSGIVER_URL: process.env.MINSIDE_ARBEIDSGIVER_URL as string,
         DITT_NAV_URL: process.env.DITT_NAV_URL as string,
         LOGIN_URL: process.env.LOGIN_URL as string,
         LOGOUT_URL: process.env.LOGOUT_URL as string,
@@ -58,15 +52,13 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 LEVEL: (req.query.level || 'Level3') as string,
                 LANGUAGE: chosenLanguage,
                 ...(req.query.availableLanguages && {
-                    AVAILABLE_LANGUAGES: JSON.parse(
-                        req.query.availableLanguages as string
-                    ),
+                    AVAILABLE_LANGUAGES: JSON.parse(req.query.availableLanguages as string),
                 }),
                 ...(req.query.breadcrumbs && {
                     BREADCRUMBS: JSON.parse(req.query.breadcrumbs as string),
                 }),
                 FEEDBACK: req.query.feedback !== 'false',
-                CHATBOT: req.query.chatbot === 'true',
+                CHATBOT: req.query.chatbot !== 'false',
             },
         }),
         ...(cookies && {
@@ -143,6 +135,10 @@ export const validateAvailableLanguages = (languages: AvailableLanguage[]) => {
             const error = 'availableLanguages.url supports string';
             throw Error(error);
         }
+        if (!isNavUrl(language.url)) {
+            const error = 'breadcrumbs.url supports only nav.no urls';
+            throw Error(error);
+        }
         switch (language.locale) {
             case 'nb':
             case 'nn':
@@ -167,8 +163,15 @@ export const validateBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
             const error = 'breadcrumbs.url supports string';
             throw Error(error);
         }
+        if (!isNavUrl(breadcrumb.url)) {
+            const error = 'breadcrumbs.url supports only nav.no urls';
+            throw Error(error);
+        }
     });
 };
+
+// Validator utils
+export const isNavUrl = (url: string) => /^(\/.*|(https:\/\/([a-z0-9]+[.])*nav[.]no)).*/i.test(url);
 
 // Deprecated map to support norsk | engelsk | samisk
 const mapToLocale = (language?: string) => {
