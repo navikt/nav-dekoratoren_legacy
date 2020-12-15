@@ -13,6 +13,7 @@ import dropdownTogglesReducer, { DropdownState } from './dropdown-toggle-duck';
 import environmentReducer, { Environment } from './environment-duck';
 import featureToggleReducer from './feature-toggles-duck';
 import { FeatureToggles } from './feature-toggles-duck';
+import tilbakemeldingsReducer from './tilbakemelding-duck';
 
 export interface AppState {
     environment: Environment;
@@ -25,6 +26,7 @@ export interface AppState {
     dropdownToggles: DropdownState;
     driftsmeldinger: DriftsmeldingerState;
     featureToggles: FeatureToggles;
+    tilbakemeldinger: DataElement;
 }
 
 export const reducers = combineReducers<AppState>({
@@ -38,6 +40,7 @@ export const reducers = combineReducers<AppState>({
     dropdownToggles: dropdownTogglesReducer,
     driftsmeldinger: driftsmeldingReducer,
     featureToggles: featureToggleReducer,
+    tilbakemeldinger: tilbakemeldingsReducer,
 });
 
 export default reducers;

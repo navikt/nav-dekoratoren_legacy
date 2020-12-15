@@ -48,22 +48,15 @@ export default function reducer(
     }
 }
 
-export function hentInnloggingsstatus(
-    API_INNLOGGINGSLINJE_URL: string
-): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Data>(
-        () => hentInnloggingsstatusFetch(API_INNLOGGINGSLINJE_URL),
-        {
-            ok: hentInnloggingsstatusOk,
-            feilet: hentnnloggingsstatusFeilet,
-            pending: hentnnloggingsstatusPending,
-        }
-    );
+export function hentInnloggingsstatus(API_INNLOGGINGSLINJE_URL: string): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<Data>(() => hentInnloggingsstatusFetch(API_INNLOGGINGSLINJE_URL), {
+        ok: hentInnloggingsstatusOk,
+        feilet: hentnnloggingsstatusFeilet,
+        pending: hentnnloggingsstatusPending,
+    });
 }
 
-export function hentInnloggingsstatusOk(
-    data: Data
-): HentInnloggingsstatusOKAction {
+export function hentInnloggingsstatusOk(data: Data): HentInnloggingsstatusOKAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
         data: data,
