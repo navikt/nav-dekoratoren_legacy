@@ -1,6 +1,5 @@
 import React, { useReducer, useRef, useState } from 'react';
-import { Ingress } from 'nav-frontend-typografi';
-import Tekst, { finnTekstMedPayload } from 'tekster/finn-tekst';
+import { finnTekst } from 'tekster/finn-tekst';
 import { createFeedbackRespons } from '../createFeedbackRespons';
 import FritekstFelt, { fritekstFeilReducer, initialFritekstFeil, MAX_LENGTH } from './fritekst/FritekstFelt';
 import { FeedbackInformasjon, QuestionProps, questionStateSelector } from './AlternativCommon';
@@ -24,7 +23,7 @@ const AlternativJa = (props: QuestionProps) => {
         setHarTrykketSubmit(true);
 
         if (feedbackMessage.length > MAX_LENGTH) {
-            const errorMelding = finnTekstMedPayload('textarea-feilmelding', language, MAX_LENGTH.toString());
+            const errorMelding = finnTekst('textarea-feilmelding', language, MAX_LENGTH.toString());
             dispatchFritekstFeil({
                 type: 'maxLength',
                 message: errorMelding,

@@ -4,11 +4,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { Locale } from 'store/reducers/language-duck';
 
-export function finnTekstMedPayload(id: string, language: Locale, payload: string): string{
-    return finnTekst(id, language, payload)
-};
-
-export function finnTekst(id: string, language: Locale, payload?:string): string {
+export function finnTekst(id: string, language: Locale, payload?: string): string {
     // Correct language
     let ledetekst: stringOrFunction;
     switch (language) {
@@ -30,22 +26,20 @@ export function finnTekst(id: string, language: Locale, payload?:string): string
 
     // Check for errors
     if (!ledetekst) {
-        console.warn(
-            `Kunne ikke finne tekst med id: ${id}! Returnerer oppgitt id.`
-        );
+        console.warn(`Kunne ikke finne tekst med id: ${id}! Returnerer oppgitt id.`);
         return id;
     }
     if (typeof ledetekst === 'string') {
         return ledetekst;
     }
-    if(!payload) {
+    if (!payload) {
         console.warn(
             `Kunne ikke finne input variabel til tekst med id: ${id}! 
             Returnerer tekst med tom variabel.`
         );
         return ledetekst('');
     }
-    return ledetekst(payload)
+    return ledetekst(payload);
 }
 
 interface Props {

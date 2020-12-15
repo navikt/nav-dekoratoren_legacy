@@ -3,7 +3,7 @@ import { Textarea, TextareaProps } from 'nav-frontend-skjema';
 import { checkForViolations, getViolationErrorMessage } from './Sanitizer';
 import { useDebounce } from '../../../../../utils/hooks/useDebounce';
 import './FritekstFelt.less';
-import Tekst, { finnTekst, finnTekstMedPayload } from '../../../../../tekster/finn-tekst';
+import Tekst, { finnTekst } from '../../../../../tekster/finn-tekst';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../../../store/reducers';
 import { KontaktOss } from '../AlternativCommon';
@@ -83,10 +83,10 @@ const FritekstFelt = (props: Props) => {
         let className = '';
         const antallTegnIgjen = maxLength - antallTegn;
         if (antallTegnIgjen < 0) {
-            content = finnTekstMedPayload('textarea-overmaks', language, Math.abs(antallTegnIgjen).toString());
+            content = finnTekst('textarea-overmaks', language, Math.abs(antallTegnIgjen).toString());
             className = 'teller-tekst teller-tekst--overflow';
         } else {
-            content = finnTekstMedPayload('textarea-undermaks', language, antallTegnIgjen.toString());
+            content = finnTekst('textarea-undermaks', language, antallTegnIgjen.toString());
             className = 'teller-tekst';
         }
 

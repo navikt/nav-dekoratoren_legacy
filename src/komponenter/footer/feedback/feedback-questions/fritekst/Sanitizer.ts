@@ -2,7 +2,7 @@ import { finnEmail } from './validators/EmailValidator';
 import { finnFnr } from './validators/FodselsnummerValidator';
 import { finnTelefonNummer } from './validators/TelefonValidator';
 import { Locale } from '../../../../../store/reducers/language-duck';
-import { finnTekst, finnTekstMedPayload } from '../../../../../tekster/finn-tekst';
+import { finnTekst } from '../../../../../tekster/finn-tekst';
 
 export enum Violation {
     EMAIL = 'EMAIL',
@@ -55,8 +55,8 @@ export const getViolationErrorMessage = (violations: Violations[], language: Loc
     }
 
     const errorMessage =
-        finnTekstMedPayload('personvern-feilmelding', language, violationString) +
-        finnTekstMedPayload('personvern-feilmelding-2', language, pronomen);
+        finnTekst('personvern-feilmelding', language, violationString) +
+        finnTekst('personvern-feilmelding-2', language, pronomen);
 
     return errorMessage;
 };
