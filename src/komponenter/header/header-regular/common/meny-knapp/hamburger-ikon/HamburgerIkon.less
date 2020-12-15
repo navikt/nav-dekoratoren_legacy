@@ -1,11 +1,11 @@
 @import (reference) '../../../../../../styling-variabler.less';
 
 .hamburger-ikon {
-    @width: 28px;
-    @height: 24px;
-    @line-spacing: 8px;
-    @line-height: 3px;
-    @midtpunkt: floor(@height / 2 - @line-height / 2);
+    @width: 1.75rem;
+    @height: 1.5rem;
+    @line-spacing: 0.5rem;
+    @line-height: 0.1875rem;
+    @midtpunkt: (@height / 2 - @line-height / 2);
 
     width: @width;
     height: @height;
@@ -28,7 +28,7 @@
         top: @midtpunkt - @line-spacing;
 
         &--open {
-            width: 32px;
+            width: 2rem;
             transform: translateY(@line-spacing) rotateZ(-135deg) scale(0.8);
         }
     }
@@ -47,7 +47,7 @@
         top: @midtpunkt + @line-spacing;
 
         &--open {
-            width: 32px;
+            width: 2rem;
             transform: translateY(-@line-spacing) rotateZ(-225deg) scale(0.8);
         }
     }

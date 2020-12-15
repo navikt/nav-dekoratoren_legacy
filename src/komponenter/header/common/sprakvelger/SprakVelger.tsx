@@ -75,7 +75,7 @@ export const SprakVelger = (props: Props) => {
         ? {
               boxShadow: '0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08)',
               border: '1px solid',
-              borderRadius: '0 0 4px 4px',
+              borderRadius: '0 0 0.25rem 0.25rem',
               outline: 'none',
               borderColor: farger.navGra20,
               borderTop: 'none',

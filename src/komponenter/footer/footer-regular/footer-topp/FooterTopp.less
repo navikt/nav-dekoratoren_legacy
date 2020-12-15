@@ -22,6 +22,7 @@
     .topp-kolonner {
         .menylenker-seksjon {
             margin-bottom: 2rem;
+            flex-grow: 1;
         }
 
         .menylenker-overskrift {
@@ -30,7 +31,10 @@
         }
 
         .til-toppen {
-            margin: 1rem 0;
+            @media @screen-desktop-medium-down {
+                width: 100%;
+                margin: 1rem 0 2rem;
+            }
         }
 
         .til-toppen-innhold {
@@ -56,6 +60,31 @@
                 }
             }
         }
+
+        .venstre,
+        .midt,
+        .hoyre {
+            @media @screen-desktop-medium-down {
+                margin-right: 2rem;
+            }
+        }
+
+        .midt,
+        .hoyre {
+            @media @screen-desktop {
+                //padding-left: 1rem;
+            }
+        }
+
+        .arbeidsflate {
+            @media @screen-desktop-medium-up {
+                max-width: 17rem;
+            }
+
+            @media @screen-desktop {
+                margin-bottom: 1rem;
+            }
+        }
     }
 
     @media @screen-desktop {
@@ -65,83 +94,19 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-
-            .menylenker-seksjon.til-toppen {
-                width: 100%;
-                margin: 1rem 0 2rem 0;
-            }
-
-            .menylenker-seksjon.venstre,
-            .menylenker-seksjon.midt,
-            .menylenker-seksjon.hoyre {
-                width: 31%;
-            }
-
-            .menylenker-seksjon.midt,
-            .menylenker-seksjon.hoyre {
-                padding-left: 1rem;
-            }
-
-            .arbeidsflate {
-                margin-bottom: 1rem;
-            }
         }
     }
 
     @media @screen-desktop-medium-up {
         padding: 1.5rem 2rem;
-
-        .topp-kolonner {
-            .menylenker-seksjon.til-toppen {
-                margin: 0 0 2rem 0;
-                width: 100%;
-            }
-
-            .menylenker-seksjon.venstre {
-                width: 24%;
-            }
-
-            .menylenker-seksjon.midt,
-            .menylenker-seksjon.hoyre {
-                width: 23%;
-            }
-
-            .menylenker-seksjon.arbeidsflate {
-                width: 29%;
-            }
-
-            .arbeidsflatevalg {
-                flex-direction: column;
-                padding-left: 1rem;
-            }
-        }
     }
 
     @media @screen-desktop-large-up {
         padding: 1.5rem 0;
 
         .topp-kolonner {
-            width: 1344px;
+            max-width: 84rem;
             margin: 0 auto;
-
-            .menylenker-seksjon.til-toppen {
-                width: 15%;
-                margin: 0;
-            }
-
-            .menylenker-seksjon.venstre,
-            .menylenker-seksjon.midt,
-            .menylenker-seksjon.hoyre {
-                width: 20%;
-            }
-
-            .menylenker-seksjon.arbeidsflate {
-                width: 24%;
-            }
-
-            .arbeidsflatevalg {
-                justify-content: left;
-            }
         }
     }
 }

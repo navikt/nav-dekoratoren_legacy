@@ -4,8 +4,7 @@ const PilOppHvit = (props: SVGProps<SVGSVGElement>) => {
     return (
         <svg
             focusable={false}
-            width="18px"
-            height="18px"
+            width="1.125rem"
             xmlnsXlink="http://www.w3.org/1999/xlink"
             id="dekoratoren-Filled_Version"
             preserveAspectRatio="xMidYMid meet"

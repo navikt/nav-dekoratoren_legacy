@@ -29,9 +29,9 @@ export const LenkeMedSporing = ({
     withChevron,
     withLock,
 }: Props) => {
-    const classnameFull = `${classNameOverride || 'lenke dekorator-lenke'}${
-        withChevron ? ' chevronlenke' : ''
-    }${className ? ` ${className}` : ''}`;
+    const classnameFull = `${classNameOverride || 'lenke dekorator-lenke'}${withChevron ? ' chevronlenke' : ''}${
+        className ? ` ${className}` : ''
+    }`;
 
     return (
         <a
@@ -40,10 +40,7 @@ export const LenkeMedSporing = ({
             id={id}
             tabIndex={tabIndex}
             onAuxClick={(event: React.MouseEvent) =>
-                analyticsEventArgs &&
-                event.button &&
-                event.button === 1 &&
-                analyticsEvent(analyticsEventArgs)
+                analyticsEventArgs && event.button && event.button === 1 && analyticsEvent(analyticsEventArgs)
             }
             onClick={(event: React.MouseEvent) => {
                 if (onClick) {
@@ -58,13 +55,9 @@ export const LenkeMedSporing = ({
                 {(withLock || withChevron) && (
                     <div className={'dekorator-lenke__ikon-container'}>
                         {withLock ? (
-                            <Lock height={'18px'} width={'18px'} />
+                            <Lock height={'1.125rem'} width={'1.125rem'} />
                         ) : (
-                            withChevron && (
-                                <HoyreChevron
-                                    className={'chevronlenke__chevron'}
-                                />
-                            )
+                            withChevron && <HoyreChevron className={'chevronlenke__chevron'} />
                         )}
                     </div>
                 )}

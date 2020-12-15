@@ -1,16 +1,31 @@
 @import (reference) '../../../../../styling-variabler.less';
 
-.arbeidsflate {
-    width: 100%;
-}
-
 .arbeidsflatevalg {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin: 0;
 
     li {
+        flex-grow: 1;
         margin-bottom: 0;
+        max-width: 30rem;
+    }
+
+    @media @screen-desktop-small-width-down {
+        li {
+            &:first-child {
+                margin-right: 2rem;
+            }
+        }
+    }
+
+    @media @screen-desktop-medium-up {
+        flex-direction: column;
+        padding-left: 1rem;
+        li {
+            margin-bottom: 1rem;
+        }
     }
 
     .arbeidsflate-lenkepanel {
@@ -53,24 +68,5 @@
                 color: @navBla;
             }
         }
-    }
-
-    @media @screen-desktop {
-        li {
-            width: 48%;
-        }
-    }
-
-    @media @screen-desktop-medium-up {
-        flex-direction: column;
-
-        li {
-            margin-bottom: 1rem;
-            width: auto;
-        }
-    }
-
-    @media @screen-desktop-large-up {
-        justify-content: left;
     }
 }

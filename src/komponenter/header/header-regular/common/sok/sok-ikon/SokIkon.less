@@ -1,13 +1,13 @@
 @import (reference) '../../../../../../styling-variabler.less';
 
 .sok-ikon {
-    @width: 32px;
-    @height: 24px;
-    @circleRadius: 10px;
-    @stroke-width: 3px;
+    @width: 2rem;
+    @height: 1.5rem;
+    @circleRadius: 0.625rem;
+    @stroke-width: 0.1875rem;
     @color: @navBla;
     @handleAngle: 40deg;
-    @handleLength: 12px;
+    @handleLength: 0.75rem;
     @middle: (@height - @stroke-width) / 2;
     @transition-props: 0.25s all ease-out;
 
@@ -30,11 +30,7 @@
 
         &--open {
             opacity: 0;
-            transform: translate(
-                    @width / 2 - @circleRadius,
-                    @height / 2 - @circleRadius
-                )
-                scale(0);
+            transform: translate(@width / 2 - @circleRadius, @height / 2 - @circleRadius) scale(0);
         }
     }
 
@@ -62,7 +58,7 @@
     }
 
     &__line--open {
-        transform: translate(-4px, @middle) rotate(-45deg) scale(0.8);
+        transform: translate(-0.25rem, @middle) rotate(-45deg) scale(0.8);
     }
 
     &__line-x {
@@ -70,7 +66,7 @@
 
         &--open {
             visibility: visible;
-            transform: translate(-4px, @middle) rotate(225deg) scale(0.8);
+            transform: translate(-0.25rem, @middle) rotate(225deg) scale(0.8);
         }
     }
 }
