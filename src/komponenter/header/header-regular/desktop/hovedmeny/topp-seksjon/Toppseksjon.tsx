@@ -11,8 +11,8 @@ import { getArbeidsflateContext } from 'komponenter/common/arbeidsflate-lenker/a
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import { erNavDekoratoren } from 'utils/Environment';
-import './Toppseksjon.less';
 import { useCookies } from 'react-cookie';
+import './Toppseksjon.less';
 
 interface Props {
     classname: string;

@@ -14,6 +14,7 @@ import { erNavDekoratoren } from 'utils/Environment';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { finnTekst } from 'tekster/finn-tekst';
 import { AnalyticsEventArgs } from 'utils/analytics';
+import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import './ArbeidsflateLenkepanel.less';
 
 interface Props {
@@ -36,6 +37,7 @@ const ArbeidsflateLenkepanel = ({ lenke, language, analyticsEventArgs, enableCom
             id={id}
             onClick={(event) => {
                 setCookie('decorator-context', lenke.key, cookieOptions);
+                dispatch(lukkAlleDropdowns());
                 if (erNavDekoratoren()) {
                     event.preventDefault();
                     dispatch(settArbeidsflate(lenke.key));
