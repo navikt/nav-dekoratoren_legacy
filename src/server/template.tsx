@@ -49,9 +49,7 @@ export const template = (req: Request) => {
 
     // Fetch params and forward to client
     const params = req.query;
-    const paramsAsString = Object.keys(req.query).length
-        ? `?${req.url.split('?')[1]}`
-        : ``;
+    const paramsAsString = Object.keys(req.query).length ? `?${req.url.split('?')[1]}` : ``;
 
     // Backward compatibility
     // for simple header and footer
@@ -106,9 +104,12 @@ export const template = (req: Request) => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+            }  
+            .decorator-utils-container {    
+                background: #f1f1f1;           
             }
-            .decorator-utils-container{
-                background: #f1f1f1;
+            .decorator-dev-container:not(.test) .decorator-utils-container { 
+                display: none !important;
             }
             </style>
         </head>
@@ -118,7 +119,7 @@ export const template = (req: Request) => {
                 ${HtmlMetaTags}
                 <link href="${fileCss}" rel="stylesheet" />
             </div>
-            <div class="decorator-dev-container">
+            <div class="decorator-dev-container${process.env.APP_BASE_URL !== 'https://www.nav.no' ? ' test' : ''}">
                 <!-- Header fetched by apps -->
                 <div id="${headerId}">
                     <div id="decorator-header">${HtmlHeader}</div>
