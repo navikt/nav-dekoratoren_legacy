@@ -107,7 +107,6 @@ const FritekstFelt = (props: Props) => {
                     <Tekst id="hva-lette-du-etter" />
                 </Ingress>
             }
-            placeholder={finnTekst('tilbakemelding-placeholder', language)}
             maxLength={MAX_LENGTH}
             textareaRef={props.textareaRef}
             tellerTekst={tellerTekst}
