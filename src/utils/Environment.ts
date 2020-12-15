@@ -31,4 +31,7 @@ export const genererUrl = (XP_BASE_URL: string, lenke: string): string => {
     return lenke.startsWith('/') ? XP_BASE_URL + lenke : lenke;
 };
 
-export const erDev = verifyWindowObj() && process.env.NODE_ENV === 'development' && window.location.origin.toLowerCase().includes('localhost');
+export const erDev =
+    verifyWindowObj() &&
+    process.env.NODE_ENV === 'development' &&
+    window.location.origin.toLowerCase().includes('localhost');

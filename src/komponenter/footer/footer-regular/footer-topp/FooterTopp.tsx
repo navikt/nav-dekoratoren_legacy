@@ -73,7 +73,10 @@ const FooterTopp = () => {
                           </div>
                       ))
                     : [...Array(3)].map((_, index) => (
-                          <div className={`menylenker-seksjon ${!index ? 'venstre' : index === 2 ? 'hoyre' : 'midt'}`} key={index}>
+                          <div
+                              className={`menylenker-seksjon ${!index ? 'venstre' : index === 2 ? 'hoyre' : 'midt'}`}
+                              key={index}
+                          >
                               <LinksLoader id={`footer-link-loader-${index}`} />
                           </div>
                       ))}

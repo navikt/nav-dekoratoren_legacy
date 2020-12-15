@@ -26,7 +26,12 @@ const Arbeidsflatemeny = () => {
             <ul className={cls.element('topp-liste-rad')} role="tablist">
                 {arbeidsflateLenker(XP_BASE_URL).map((lenke, index) => {
                     return (
-                        <li role="tab" aria-selected={arbeidsflate === lenke.key} className={cls.element('liste-element')} key={lenke.key}>
+                        <li
+                            role="tab"
+                            aria-selected={arbeidsflate === lenke.key}
+                            className={cls.element('liste-element')}
+                            key={lenke.key}
+                        >
                             <LenkeMedSporing
                                 classNameOverride={cls.element('lenke')}
                                 id={getKbId(KbNavGroup.HeaderMenylinje, {

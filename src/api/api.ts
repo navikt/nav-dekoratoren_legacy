@@ -4,6 +4,7 @@ import { VarslerData as varselinnboksData } from '../store/reducers/varselinnbok
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
 import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { FeatureToggles } from 'store/reducers/feature-toggles-duck';
+import { TilbakemeldingRespons } from '../store/reducers/tilbakemelding-duck';
 
 export enum Status {
     OK = 'OK',
@@ -19,9 +20,7 @@ export interface DataElement {
 
 export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => fetchToJson(`${APP_URL}/api/meny`);
 
-export const hentInnloggingsstatusFetch = (
-    API_INNLOGGINGSLINJE_URL: string
-): Promise<innloggingsstatusData> =>
+export const hentInnloggingsstatusFetch = (API_INNLOGGINGSLINJE_URL: string): Promise<innloggingsstatusData> =>
     fetchToJson(`${API_INNLOGGINGSLINJE_URL}/auth`, {
         credentials: 'include',
     });
@@ -40,11 +39,25 @@ export const lagreVarslerLestFetch = (APP_URL: string, nyesteId: number): Promis
     });
 
 export const fetchFeatureToggles = (API_UNLEASH_PROXY_URL: string, featureToggles: FeatureToggles) =>
-    fetchToJson(`${API_UNLEASH_PROXY_URL}/feature-toggles${getFeatureToggleUrl(featureToggles)}`, { credentials: 'include' });
+    fetchToJson(`${API_UNLEASH_PROXY_URL}/feature-toggles${getFeatureToggleUrl(featureToggles)}`, {
+        credentials: 'include',
+    });
 
 export const getFeatureToggleUrl = (featureToggles: FeatureToggles) =>
     Object.keys(featureToggles)
         .map((feature: string, i: number) => `${!i ? `?` : ``}feature=${feature}`)
         .join('&');
 
-export const hentDriftsmeldinger = (APP_URL: string): Promise<DriftsmeldingerData[]> => fetchToJson(`${APP_URL}/api/driftsmeldinger`);
+export const hentDriftsmeldinger = (APP_URL: string): Promise<DriftsmeldingerData[]> =>
+    fetchToJson(`${APP_URL}/api/driftsmeldinger`);
+
+export const lagreTilbakemeldingFetch = (
+    feedback: TilbakemeldingRespons,
+    FEEDBACK_API_URL: string
+): Promise<number> => {
+    return fetchToJson(FEEDBACK_API_URL, {
+        method: 'POST',
+        body: JSON.stringify(feedback),
+        credentials: 'include',
+    });
+};
