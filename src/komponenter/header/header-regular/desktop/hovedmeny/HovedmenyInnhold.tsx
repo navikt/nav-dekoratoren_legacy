@@ -23,7 +23,8 @@ const mqlWidthBreakpoint = matchMedia(`(min-width: ${widthBreakpoint}em)`);
 const numColsSmallScreen = 3;
 const numColsLargeScreen = 4;
 
-const getColsFromScreenWidth = () => (window.innerWidth >= widthBreakpoint ? numColsLargeScreen : numColsSmallScreen);
+const getColsFromScreenWidth = () =>
+    window.innerWidth >= widthBreakpoint * 16 ? numColsLargeScreen : numColsSmallScreen;
 
 type Props = {
     arbeidsflate: MenuValue;
