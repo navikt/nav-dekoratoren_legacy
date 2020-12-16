@@ -90,7 +90,7 @@ export const template = (req: Request) => {
             <title>NAV Dekoratør</title>
             <!-- Decorator development styling -->
             <style>
-            html {font-size: 100%; height: 100%}, body {  height: 100%; min-width: 320px}
+            html {height: 100%}, body {  height: 100%; min-width: 320px}
             .decorator-dev-container {
                 display:flex;
                 flex-direction: column;
