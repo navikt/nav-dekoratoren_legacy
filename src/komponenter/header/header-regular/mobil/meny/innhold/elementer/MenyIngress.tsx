@@ -7,7 +7,7 @@ import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSp
 
 const MenyIngress = ({ className, inputext }: { className: string; inputext: string }) => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
-    const lenke = arbeidsflateLenker(XP_BASE_URL).filter((lenke) => lenke.key === inputext);
+    const lenke = arbeidsflateLenker(XP_BASE_URL).filter((item) => item.key === inputext);
 
     const textToLowercase = inputext ? inputext.toUpperCase().charAt(0).concat(inputext.slice(1).toLowerCase()) : '';
 
