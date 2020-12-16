@@ -25,7 +25,7 @@
     @clapper-thickness: 5px;
     @clapper-length: @bell-height + @lip-height;
 
-    @ulest-diameter: 16px;
+    @ulest-diameter: 18px;
     @ulest-top: @height * 0.2;
     @ulest-left: @width * 0.05;
 
@@ -41,8 +41,7 @@
         border-radius: 0;
         width: @cross-width;
         height: @cross-stroke-width;
-        transform: translate(-2px, @height / 2) rotate(@rotation)
-            scale(@cross-scale);
+        transform: translate(-2px, @height / 2) rotate(@rotation) scale(@cross-scale);
     }
 
     .fade-transform() {
@@ -129,8 +128,7 @@
         position: absolute;
         z-index: 1;
 
-        transform: translate((@width - @clapper-length) / 2, @height / 2)
-            rotate(90deg);
+        transform: translate((@width - @clapper-length) / 2, @height / 2) rotate(90deg);
 
         border-radius: @clapper-thickness / 2;
 
@@ -150,7 +148,7 @@
         border-radius: 50%;
         height: @ulest-diameter;
         width: @ulest-diameter;
-        background-color: @navRodLighten40;
+        background-color: #df3f4e;
 
         display: flex;
         justify-content: center;
@@ -167,6 +165,7 @@
     &__ulest-antall {
         color: white;
         font-weight: bold;
-        font-size: 11px;
+        font-size: 12px;
     }
 }
+//
