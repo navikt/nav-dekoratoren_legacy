@@ -2,7 +2,7 @@ import { Request } from 'express';
 import { Environment } from 'store/reducers/environment-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { AvailableLanguage, Locale } from 'store/reducers/language-duck';
-import { Breadcrumb } from '../komponenter/header/common/brodsmulesti/Brodsmulesti';
+import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
 import moment from 'moment';
 
 interface Cookies {
@@ -40,6 +40,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
         DITT_NAV_URL: process.env.DITT_NAV_URL as string,
         LOGIN_URL: process.env.LOGIN_URL as string,
         LOGOUT_URL: process.env.LOGOUT_URL as string,
+        FEEDBACK_API_URL: process.env.FEEDBACK_API_URL as string,
         SERVER_TIME: moment().valueOf(),
         ...(req.query && {
             PARAMS: {
@@ -136,7 +137,7 @@ export const validateAvailableLanguages = (languages: AvailableLanguage[]) => {
             throw Error(error);
         }
         if (!isNavUrl(language.url)) {
-            const error = 'breadcrumbs.url supports only nav.no urls';
+            const error = `language.url supports only nav.no urls - failed to validate ${language.url}`;
             throw Error(error);
         }
         switch (language.locale) {
@@ -164,14 +165,15 @@ export const validateBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
             throw Error(error);
         }
         if (!isNavUrl(breadcrumb.url)) {
-            const error = 'breadcrumbs.url supports only nav.no urls';
+            const error = `breadcrumbs.url supports only nav.no urls - failed to validate ${breadcrumb.url}`;
             throw Error(error);
         }
     });
 };
 
 // Validator utils
-export const isNavUrl = (url: string) => /^(\/.*|(https:\/\/([a-z0-9]+[.])*nav[.]no)).*/i.test(url);
+export const isNavUrl = (url: string) =>
+    /^(\/|(https?:\/\/localhost)|(https:\/\/([a-z0-9-]+[.])*nav[.]no)).*/i.test(url);
 
 // Deprecated map to support norsk | engelsk | samisk
 const mapToLocale = (language?: string) => {

@@ -6,21 +6,16 @@
 
 .feedback-container {
     display: flex;
-    flex-direction: row;
-    align-content: center;
     justify-content: center;
-    flex-wrap: wrap;
-    max-width: 84rem;
     margin: 0 auto;
     width: 100%;
-    padding: 1rem 1rem;
+    padding: 1rem;
     @media @screen-desktop-large-up {
         padding: 1rem 0;
     }
 
-    .qa-container {
+    .feedback-content {
         display: flex;
-        flex-direction: row;
         justify-content: space-around;
         align-items: center;
         flex-wrap: wrap;
@@ -34,17 +29,5 @@
             margin: 0.25em;
             flex-wrap: nowrap;
         }
-    }
-
-    .lenke {
-        padding: 0.5em;
-        color: @navBla;
-        background-color: white;
-        outline-style: none;
-        border: none;
-    }
-    .feedback-input-button {
-        margin-right: 1em;
-        margin-left: 1em;
     }
 }

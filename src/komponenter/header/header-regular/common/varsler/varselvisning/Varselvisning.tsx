@@ -22,9 +22,7 @@ type Props = {
 
 export const Varselvisning = ({ setKbId }: Props) => {
     const { varselInnboksUrl } = useSelector(stateSelector);
-    const { varsler } = useSelector(
-        stateSelector
-    );
+    const { varsler } = useSelector(stateSelector);
 
     const varslerAntall = varsler.nyesteVarsler?.length;
 
@@ -42,16 +40,10 @@ export const Varselvisning = ({ setKbId }: Props) => {
                     <Tekst id={'varsler-tom-liste'} />
                 </div>
             ) : (
-                <VarselListe
-                    varsler={varsler.nyesteVarsler.slice(0, 5)}
-                    rowIndex={setKbId ? 0 : undefined}
-                />
+                <VarselListe varsler={varsler.nyesteVarsler.slice(0, 5)} rowIndex={setKbId ? 0 : undefined} />
             )}
             {visAlleVarslerLenke && (
-                <AlleVarslerLenke
-                    varselInnboksUrl={varselInnboksUrl}
-                    rowIndex={setKbId ? 1 : undefined}
-                />
+                <AlleVarslerLenke varselInnboksUrl={varselInnboksUrl} rowIndex={setKbId ? 1 : undefined} />
             )}
         </div>
     );

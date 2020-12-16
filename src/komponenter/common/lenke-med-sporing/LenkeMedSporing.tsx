@@ -2,6 +2,8 @@ import React from 'react';
 import { AnalyticsEventArgs, analyticsEvent } from 'utils/analytics';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import Lock from 'ikoner/meny/Lock';
+import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
+import { useDispatch } from 'react-redux';
 import './LenkeMedSporing.less';
 
 type Props = {
@@ -32,6 +34,7 @@ export const LenkeMedSporing = ({
     const classnameFull = `${classNameOverride || 'lenke dekorator-lenke'}${withChevron ? ' chevronlenke' : ''}${
         className ? ` ${className}` : ''
     }`;
+    const dispatch = useDispatch();
 
     return (
         <a
@@ -43,6 +46,7 @@ export const LenkeMedSporing = ({
                 analyticsEventArgs && event.button && event.button === 1 && analyticsEvent(analyticsEventArgs)
             }
             onClick={(event: React.MouseEvent) => {
+                dispatch(lukkAlleDropdowns());
                 if (onClick) {
                     onClick(event);
                 }

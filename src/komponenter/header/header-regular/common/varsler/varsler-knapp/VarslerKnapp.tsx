@@ -18,7 +18,7 @@ const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.varsler,
     varsler: state.varsler.data.varsler,
     appUrl: state.environment.APP_URL,
-    language: state.language.language
+    language: state.language.language,
 });
 
 export const VarslerKnapp = () => {
@@ -37,13 +37,13 @@ export const VarslerKnapp = () => {
     };
 
     const ariaLabel = () => {
-        if (varsler.nyesteVarsler.length > 5 ) {
+        if (varsler.nyesteVarsler.length > 5) {
             return finnTekst('varsler-vis-5-siste', language);
-        } else if (varsler.nyesteVarsler.length > 0 ) {
+        } else if (varsler.nyesteVarsler.length > 0) {
             return finnTekst('varsler-tittel', language) + `. Du har ${varsler.nyesteVarsler.length} varsler.`;
         }
         return finnTekst('varsler-tittel', language) + '. ' + finnTekst('varsler-tom-liste', language);
-    }
+    };
 
     return (
         <MenylinjeKnapp
