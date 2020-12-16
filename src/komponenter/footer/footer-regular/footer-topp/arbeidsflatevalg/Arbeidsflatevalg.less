@@ -5,26 +5,19 @@
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0;
-
-    li {
-        flex-grow: 1;
-        margin-bottom: 0;
-        max-width: 30rem;
-    }
-
-    @media @screen-desktop-small-width-down {
-        li {
-            &:first-child {
-                margin-right: 2rem;
-            }
-        }
-    }
+    width: 100%;
 
     @media @screen-desktop-medium-up {
-        flex-direction: column;
         padding-left: 1rem;
-        li {
-            margin-bottom: 1rem;
+    }
+
+    li {
+        flex: 1 1 17rem;
+        margin: 0 1rem 1rem 0;
+        @media @screen-desktop-small-width-down {
+            &:first-child {
+                margin-bottom: 1rem;
+            }
         }
     }
 

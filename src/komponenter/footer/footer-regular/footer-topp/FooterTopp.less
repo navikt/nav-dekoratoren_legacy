@@ -69,20 +69,20 @@
             }
         }
 
-        .midt,
-        .hoyre {
-            @media @screen-desktop {
-                //padding-left: 1rem;
-            }
-        }
-
         .arbeidsflate {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 100%;
             @media @screen-desktop-medium-up {
-                max-width: 17rem;
+                flex: 1 1 17rem;
             }
 
             @media @screen-desktop {
                 margin-bottom: 1rem;
+            }
+
+            @media @screen-mobile {
+                display: none;
             }
         }
     }
