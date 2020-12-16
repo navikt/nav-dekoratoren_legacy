@@ -106,10 +106,8 @@ export const template = (req: Request) => {
                 align-items: center;
             }  
             .decorator-utils-container {    
-                background: #f1f1f1;           
-            }
-            .decorator-dev-container:not(.test) .decorator-utils-container { 
-                display: none !important;
+                background: #f1f1f1;
+                ${process.env.APP_BASE_URL === 'https://www.nav.no' ? 'display: none !important;' : ''}           
             }
             </style>
         </head>
@@ -119,7 +117,7 @@ export const template = (req: Request) => {
                 ${HtmlMetaTags}
                 <link href="${fileCss}" rel="stylesheet" />
             </div>
-            <div class="decorator-dev-container${process.env.APP_BASE_URL !== 'https://www.nav.no' ? ' test' : ''}">
+            <div class="decorator-dev-container">
                 <!-- Header fetched by apps -->
                 <div id="${headerId}">
                     <div id="decorator-header">${HtmlHeader}</div>

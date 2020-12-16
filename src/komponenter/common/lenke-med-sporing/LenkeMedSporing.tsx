@@ -2,6 +2,8 @@ import React from 'react';
 import { AnalyticsEventArgs, analyticsEvent } from 'utils/analytics';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import Lock from 'ikoner/meny/Lock';
+import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
+import { useDispatch } from 'react-redux';
 import './LenkeMedSporing.less';
 
 type Props = {
@@ -29,9 +31,10 @@ export const LenkeMedSporing = ({
     withChevron,
     withLock,
 }: Props) => {
-    const classnameFull = `${classNameOverride || 'lenke dekorator-lenke'}${
-        withChevron ? ' chevronlenke' : ''
-    }${className ? ` ${className}` : ''}`;
+    const classnameFull = `${classNameOverride || 'lenke dekorator-lenke'}${withChevron ? ' chevronlenke' : ''}${
+        className ? ` ${className}` : ''
+    }`;
+    const dispatch = useDispatch();
 
     return (
         <a
@@ -40,12 +43,10 @@ export const LenkeMedSporing = ({
             id={id}
             tabIndex={tabIndex}
             onAuxClick={(event: React.MouseEvent) =>
-                analyticsEventArgs &&
-                event.button &&
-                event.button === 1 &&
-                analyticsEvent(analyticsEventArgs)
+                analyticsEventArgs && event.button && event.button === 1 && analyticsEvent(analyticsEventArgs)
             }
             onClick={(event: React.MouseEvent) => {
+                dispatch(lukkAlleDropdowns());
                 if (onClick) {
                     onClick(event);
                 }
@@ -60,11 +61,7 @@ export const LenkeMedSporing = ({
                         {withLock ? (
                             <Lock height={'18px'} width={'18px'} />
                         ) : (
-                            withChevron && (
-                                <HoyreChevron
-                                    className={'chevronlenke__chevron'}
-                                />
-                            )
+                            withChevron && <HoyreChevron className={'chevronlenke__chevron'} />
                         )}
                     </div>
                 )}
