@@ -40,7 +40,7 @@ export const reducers = combineReducers<AppState>({
     dropdownToggles: dropdownTogglesReducer,
     driftsmeldinger: driftsmeldingReducer,
     featureToggles: featureToggleReducer,
-    tilbakemeldinger: tilbakemeldingsReducer
+    tilbakemeldinger: tilbakemeldingsReducer,
 });
 
 export default reducers;

@@ -180,7 +180,6 @@ export interface ToggleLukkAlle {
     type: ActionType.TOGGLE_LUKK_ALLE;
 }
 
-
 export interface SettTilbakemeldingOKAction {
     type: ActionType.SETT_TILBAKEMELDING_OK;
 }
@@ -192,7 +191,6 @@ export interface SettTilbakemeldingPENDINGAction {
 export interface SettTilbakemeldingFEILETAction {
     type: ActionType.SETT_TILBAKEMELDING_FEILET;
 }
-
 
 export type Handling =
     | HentInnloggingsstatusOKAction
