@@ -2,11 +2,11 @@ import React from 'react';
 import { MenuValue } from 'utils/meny-storage-utils';
 import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
-import Lenke from 'nav-frontend-lenker';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 
 interface Props {
     arbeidsflate: MenuValue;
@@ -15,9 +15,7 @@ interface Props {
 
 const ForsideLenke = (props: Props) => {
     const cls = BEMHelper('forsideLenke');
-    const { DITT_NAV_URL, MINSIDE_ARBEIDSGIVER_URL } = useSelector(
-        (state: AppState) => state.environment
-    );
+    const { DITT_NAV_URL, MINSIDE_ARBEIDSGIVER_URL } = useSelector((state: AppState) => state.environment);
 
     if (!props.erInnlogget) {
         return null;
@@ -30,9 +28,9 @@ const ForsideLenke = (props: Props) => {
                     <Undertittel className={cls.element('ingress')}>
                         <Tekst id="min-side" />
                     </Undertittel>
-                    <Lenke href={DITT_NAV_URL} className={cls.element('lenke')}>
+                    <LenkeMedSporing href={DITT_NAV_URL} className={cls.element('lenke')}>
                         <Tekst id="til-forsiden" />
-                    </Lenke>
+                    </LenkeMedSporing>
                 </div>
             )}
             {props.arbeidsflate === MenuValue.ARBEIDSGIVER && (
@@ -40,12 +38,9 @@ const ForsideLenke = (props: Props) => {
                     <Undertittel className={cls.element('ingress')}>
                         <Tekst id="min-side-arbeidsgiver" />
                     </Undertittel>
-                    <Lenke
-                        href={MINSIDE_ARBEIDSGIVER_URL + valgtbedrift()}
-                        className={cls.element('lenke')}
-                    >
+                    <LenkeMedSporing href={MINSIDE_ARBEIDSGIVER_URL + valgtbedrift()} className={cls.element('lenke')}>
                         <Tekst id="ga-til-min-side-arbeidsgiver" />
-                    </Lenke>
+                    </LenkeMedSporing>
                 </div>
             )}
         </>
