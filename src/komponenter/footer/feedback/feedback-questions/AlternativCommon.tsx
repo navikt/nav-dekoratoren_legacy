@@ -3,8 +3,9 @@ import Tekst from 'tekster/finn-tekst';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import { FeedbackState } from '../Feedback';
-import { AppState } from '../../../../store/reducers';
 import { useSelector } from 'react-redux';
+import { MenuValue } from 'utils/meny-storage-utils';
+import { AppState } from 'store/reducers';
 import './Alternativ.less';
 
 export const questionStateSelector = (state: AppState) => ({
@@ -28,7 +29,11 @@ export const KontaktOss = (props: { href: string }) => (
 );
 
 export const FeedbackInformasjon = React.memo(() => {
-    const { environment } = useSelector((state: AppState) => state);
+    const { environment, arbeidsflate } = useSelector((state: AppState) => state);
+    const kontaktOssUrl =
+        arbeidsflate.status === MenuValue.ARBEIDSGIVER
+            ? 'https://arbeidsgiver.nav.no/kontakt-oss'
+            : `${environment.XP_BASE_URL}/person/kontakt-oss`;
 
     return (
         <>
@@ -36,7 +41,7 @@ export const FeedbackInformasjon = React.memo(() => {
                 <Tekst id="advarsel-om-personopplysninger" />
             </Normaltekst>
             <Normaltekst>
-                <KontaktOss href={`${environment.XP_BASE_URL}/person/kontakt-oss`} />
+                <KontaktOss href={kontaktOssUrl} />
             </Normaltekst>
         </>
     );
