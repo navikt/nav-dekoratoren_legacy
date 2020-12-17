@@ -116,7 +116,7 @@
         "@babel/polyfill": "^7.11.5",
         "@babel/preset-env": "^7.11.5",
         "@babel/preset-react": "^7.10.4",
-        "@types/amplitude-js": "^5.11.0",
+        "@types/amplitude-js": "^7.0.0",
         "@types/classnames": "^2.2.10",
         "@types/compression": "^1.7.0",
         "@types/enzyme": "^3.10.6",
