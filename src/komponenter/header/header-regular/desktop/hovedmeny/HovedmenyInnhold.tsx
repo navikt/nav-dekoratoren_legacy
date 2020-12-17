@@ -23,6 +23,8 @@ const mqlWidthBreakpoint = matchMedia(`(min-width: ${widthBreakpoint}em)`);
 const numColsSmallScreen = 3;
 const numColsLargeScreen = 4;
 
+/* Todo: skriv om dette da det ikke gir mening med relative units. *16 er brukt for å gjøre det likt som
+ da det var pixler */
 const getColsFromScreenWidth = () =>
     window.innerWidth >= widthBreakpoint * 16 ? numColsLargeScreen : numColsSmallScreen;
 
