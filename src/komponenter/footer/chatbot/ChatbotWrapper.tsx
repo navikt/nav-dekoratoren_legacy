@@ -18,11 +18,8 @@ export const ChatbotWrapper = ({ ...properties }: any) => {
 
     useEffect(() => {
         const chatbotVersion122IsMounted = document.getElementsByClassName('gxKraP').length > 0;
-
-        if (!chatbotVersion122IsMounted && isChatbotEnabled) {
-            setIsMounted(true);
-        }
-    }, []);
+        setIsMounted(!chatbotVersion122IsMounted && isChatbotEnabled);
+    }, [isChatbotEnabled]);
 
     const boostApiUrlBase =
         verifyWindowObj() && stagingUrlHosts.includes(window.location.host)
