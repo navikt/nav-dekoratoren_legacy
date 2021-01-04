@@ -100,7 +100,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | availableLanguages | [{ locale: nb \| nn \| en \| se \| pl, url: string }] | [ ]                  | Setter alternativene til språkvelgeren ved server side rendering [4]           |
 | breadcrumbs        | [{ title: string, url: string }]                      | [ ]                  | Setter brødsmulestien for server side rendering [5]                            |
 | feedback           | boolean                                               | true                 | Skjuler eller viser tilbakemeldingskomponentet                                 |
-| chatbot            | boolean                                               | false                | Skjuler eller viser Chatbot Frida [6]                                          |
+| chatbot            | boolean                                               | true                | Skjuler eller viser Chatbot Frida [6]                                          |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
