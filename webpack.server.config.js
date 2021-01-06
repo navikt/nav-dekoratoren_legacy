@@ -44,7 +44,6 @@ const browserConfig = {
     stats: 'errors-only',
     module: {
         rules: [
-            { parser: { requireEnsure: false } },
             {
                 oneOf: [
                     {
