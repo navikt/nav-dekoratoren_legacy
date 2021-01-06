@@ -19,7 +19,7 @@ const browserConfig = {
         filename: '[name].js',
     },
     devtool:
-        process.env.NODE_ENV === 'production' ? '' : 'cheap-module-source-map',
+        process.env.NODE_ENV === 'production' ? false : 'source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         alias: {
