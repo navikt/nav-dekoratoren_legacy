@@ -47,27 +47,18 @@ const browserConfig = {
             {
                 oneOf: [
                     {
-                        test: [/\.gif$/, /\.jpe?g$/, /\.png$/, /\.ico$/],
+                        test: [/\.gif$/, /\.jpe?g$/, /\.png$/, /\.ico$/, /\.svg$/],
                         loader: 'file-loader',
                         options: {
                             esModule: false,
+                            outputPath: '/media',
                             publicPath: "/media/",
                             name: '[name].[ext]',
-                            emit: false,
                         },
                     },
                     {
                         test: /\.svg$/,
                         use: [
-                            {
-                                loader: 'file-loader',
-                                options: {
-                                    esModule: false,
-                                    publicPath: "/media/",
-                                    name: '[name].[ext]',
-                                    emit: false,
-                                },
-                            },
                             {
                                 loader: 'svgo-loader',
                                 options: {
