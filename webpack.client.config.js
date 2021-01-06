@@ -45,7 +45,8 @@ const browserConfig = {
                         loader: 'file-loader',
                         options: {
                             esModule: false,
-                            name: '/media/[name].[ext]',
+                            publicPath: "/media/",
+                            name: '[name].[ext]',
                         },
                     },
                     {
@@ -55,7 +56,8 @@ const browserConfig = {
                                 loader: 'file-loader',
                                 options: {
                                     esModule: false,
-                                    name: '/media/[name].[ext]',
+                                    publicPath: "/media/",
+                                    name: '[name].[ext]',
                                     emit: false,
                                 },
                             },
@@ -75,51 +77,9 @@ const browserConfig = {
                         include: path.resolve(__dirname, 'src'),
                         loader: 'babel-loader',
                         options: {
-                            customize: require.resolve(
-                                'babel-preset-react-app/webpack-overrides'
-                            ),
-                            presets: [
-                                [
-                                    'react-app',
-                                    { flow: false, typescript: true },
-                                ],
-                            ],
-
-                            plugins: [
-                                [
-                                    require('babel-plugin-named-asset-import'),
-                                    {
-                                        loaderMap: {
-                                            svg: {
-                                                ReactComponent:
-                                                    '@svgr/webpack?-svgo,+ref![path]',
-                                            },
-                                        },
-                                    },
-                                ],
-                            ],
                             cacheDirectory: true,
                             cacheCompression: !!process.env.NODE_ENV,
                             compact: !!process.env.NODE_ENV,
-                        },
-                    },
-                    {
-                        test: /\.(js)$/,
-                        exclude: /@babel(?:\/|\\{1,2})runtime/,
-                        loader: 'babel-loader',
-                        options: {
-                            babelrc: false,
-                            configFile: false,
-                            compact: false,
-                            presets: [
-                                [
-                                    'babel-preset-react-app/dependencies',
-                                    { helpers: true },
-                                ],
-                            ],
-                            cacheDirectory: true,
-                            cacheCompression: !!process.env.NODE_ENV,
-                            sourceMaps: false,
                         },
                     },
                     {
