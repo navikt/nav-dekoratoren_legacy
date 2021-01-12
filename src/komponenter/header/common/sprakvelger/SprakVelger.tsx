@@ -84,7 +84,7 @@ export const SprakVelger = (props: Props) => {
 
     return (
         <div className={cls.element('container')}>
-            <div className={cls.className}>
+            <nav className={cls.className}>
                 <label {...getLabelProps()} className="sr-only">
                     <Normaltekst>{label}</Normaltekst>
                 </label>
@@ -116,7 +116,7 @@ export const SprakVelger = (props: Props) => {
                         </>
                     )}
                 </ul>
-            </div>
+            </nav>
         </div>
     );
 };

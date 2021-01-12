@@ -80,14 +80,12 @@ export const template = (req: Request) => {
     <!DOCTYPE html>
     <html lang="no">
         <head>
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta charset="utf-8" />
-            <meta
-                name="viewport"
-                content="width=device-width,initial-scale=1,shrink-to-fit=no"
-            />
-            <meta name="theme-color" content="#000000" />
             <title>NAV Dekoratør</title>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="description" content="Felles header og footer for NAV-applikasjoner i SBS" />
+            <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+            <meta name="theme-color" content="#000000" />
+            <meta charset="utf-8" />
             <!-- Decorator development styling -->
             <style>
             html {height: 100%}, body {  height: 100%; min-width: 320px}
@@ -132,7 +130,7 @@ export const template = (req: Request) => {
             <!-- Scripts fetched by apps -->
             <div id="scripts">
                 <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
-                <script src=${fileScript}></script>
+                <script async="true" src=${fileScript}></script>
             </div>
             <div id="skiplinks"></div>
             <div id="megamenu-resources"></div>

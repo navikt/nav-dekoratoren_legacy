@@ -30,7 +30,7 @@ const run = () => {
         .then((environment) => {
             const cookies = new Cookies();
             const store = createStore(environment, cookies);
-            ReactDOM.render(
+            ReactDOM.hydrate(
                 <ReduxProvider store={store}>
                     <CookiesProvider>
                         <Header />
@@ -38,7 +38,7 @@ const run = () => {
                 </ReduxProvider>,
                 document.getElementById('decorator-header')
             );
-            ReactDOM.render(
+            ReactDOM.hydrate(
                 <ReduxProvider store={store}>
                     <CookiesProvider>
                         <Footer />
