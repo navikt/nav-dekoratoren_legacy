@@ -194,7 +194,7 @@ app.use(
 app.use(`${appBasePath}/metrics`, (req, res) => {
     req.statusCode = 200;
     res.setHeader('Content-Type', getContentType());
-    res.end(getSummary());
+    getSummary().then((summary) => res.end(summary));
 });
 
 app.get(`${appBasePath}/isAlive`, (req, res) => res.sendStatus(200));
