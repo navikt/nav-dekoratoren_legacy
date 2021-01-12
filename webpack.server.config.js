@@ -1,5 +1,6 @@
 const moment = require('moment');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
@@ -139,6 +140,13 @@ const browserConfig = {
             matchZones: 'Europe/Oslo',
         }),
     ],
+    optimization: {
+        minimize: true,
+        minimizer: [
+            `...`,
+            new CssMinimizerPlugin(),
+        ],
+    },
 };
 
 module.exports = browserConfig;
