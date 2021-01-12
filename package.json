@@ -4,6 +4,8 @@
     "private": true,
     "scripts": {
         "start": "npm-run-all -p -r build-client-and-watch build-server-and-watch start-server-and-watch typecheck-watch",
+        "start-prod-test": "cross-env PROD_TEST=true npm-run-all build start-server",
+        "start-server": "node build/server.js",
         "start-server-and-watch": "nodemon build/server.js",
         "build": "npm-run-all -p -r build-client && npm run build-server",
         "build-client": "cross-env NODE_ENV=production webpack --config webpack.client.config.js",

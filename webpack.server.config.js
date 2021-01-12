@@ -141,7 +141,6 @@ const browserConfig = {
         }),
     ],
     optimization: {
-        minimize: true,
         minimizer: [
             `...`,
             new CssMinimizerPlugin(),
