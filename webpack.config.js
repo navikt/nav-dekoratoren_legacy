@@ -9,6 +9,7 @@ const autoprefixer = require('autoprefixer');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
 const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
@@ -97,34 +98,12 @@ const commonConfig = {
             },
         ],
     },
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: '/css/[name].css',
-        }),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-            'process.env.BROWSER': JSON.stringify(false),
-        }),
-        new SpriteLoaderPlugin({
-            plainSprite: true,
-        }),
-        new MomentLocalesPlugin({
-            localesToKeep: ['nb', 'nn', 'en'],
-        }),
-        new MomentTimezoneDataPlugin({
-            startYear: moment().year() - 1,
-            endYear: moment().year() + 1,
-            matchZones: 'Europe/Oslo',
-        }),
-    ],
     optimization: {
         emitOnErrors: true,
-        minimizer: [new CssMinimizerPlugin(), `...`],
-        /*
+        minimizer: [`...`, new CssMinimizerPlugin()],
         splitChunks: {
             chunks: 'all',
         },
-        */
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -132,11 +111,38 @@ const commonConfig = {
     },
 };
 
+const commonPlugins = [
+    new MiniCssExtractPlugin({
+        filename: '/css/[name].css',
+    }),
+    new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        'process.env.BROWSER': JSON.stringify(false),
+    }),
+    new SpriteLoaderPlugin({
+        plainSprite: true,
+    }),
+    new MomentLocalesPlugin({
+        localesToKeep: ['nb', 'nn', 'en'],
+    }),
+    new MomentTimezoneDataPlugin({
+        startYear: moment().year() - 1,
+        endYear: moment().year() + 1,
+        matchZones: 'Europe/Oslo',
+    }),
+];
+
 const clientConfig = {
     target: 'web',
     entry: {
         client: './src/index.tsx',
     },
+    plugins: [
+        ...commonPlugins,
+        new WebpackManifestPlugin({
+            publicPath: '',
+        }),
+    ],
     ...commonConfig,
 };
 
@@ -145,6 +151,7 @@ const serverConfig = {
     entry: {
         server: './src/server/server.ts',
     },
+    plugins: [...commonPlugins],
     externals: [
         nodeExternals({
             allowlist: [/^nav-frontend-.*$/, /\.(?!(?:jsx?|json)$).{1,5}$/i],

@@ -12,6 +12,8 @@ import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 import { CookiesProvider } from 'react-cookie';
 import hash from 'object-hash';
+import path from 'path';
+import fs from 'fs';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -29,11 +31,6 @@ export const template = (req: Request) => {
     const cookies = universalCookies.cookies;
     const env = clientEnv({ req, cookies });
     const { SERVER_TIME, ...cachedEnv } = env;
-
-    // Resources
-    const fileEnv = `${env.APP_URL}/env`;
-    const fileCss = `${env.APP_URL}/css/client.css`;
-    const fileScript = `${env.APP_URL}/client.js`;
 
     // Retreive from cache
     const cachedEnvHash = hash({ cachedEnv });
@@ -76,6 +73,26 @@ export const template = (req: Request) => {
     );
 
     const HtmlMetaTags = metaTags.renderToString();
+    const manifest: { key: string } = JSON.parse(fs.readFileSync(path.resolve(__dirname, './manifest.json'), 'utf8'));
+    const styles = Object.values(manifest).filter((path) => path.endsWith('css'));
+    const scripts = Object.values(manifest).filter((path) => path.endsWith('js'));
+
+    const Styles = ReactDOMServer.renderToString(
+        <>
+            {styles.map((path) => (
+                <link href={`${env.APP_URL}${path}`} rel="stylesheet" />
+            ))}
+        </>
+    );
+
+    const Scripts = ReactDOMServer.renderToString(
+        <>
+            {scripts.map((path) => (
+                <script async={true} src={`${env.APP_URL}/${path}`} />
+            ))}
+        </>
+    );
+
     const html = `
     <!DOCTYPE html>
     <html lang="no">
@@ -102,10 +119,10 @@ export const template = (req: Request) => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-            }  
-            .decorator-utils-container {    
+            }
+            .decorator-utils-container {
                 background: #f1f1f1;
-                ${process.env.APP_BASE_URL === 'https://www.nav.no' ? 'display: none !important;' : ''}           
+                ${process.env.APP_BASE_URL === 'https://www.nav.no' ? 'display: none !important;' : ''}
             }
             </style>
         </head>
@@ -113,7 +130,7 @@ export const template = (req: Request) => {
             <!-- Styling fetched by apps -->
             <div id="styles">
                 ${HtmlMetaTags}
-                <link href="${fileCss}" rel="stylesheet" rel="preload" as="style"/>
+                ${Styles}
             </div>
             <div class="decorator-dev-container">
                 <!-- Header fetched by apps -->
@@ -129,8 +146,8 @@ export const template = (req: Request) => {
             </div>
             <!-- Scripts fetched by apps -->
             <div id="scripts">
-                <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
-                <script async="true" src=${fileScript}></script>
+                <div id="decorator-env" data-src="${env.APP_URL}/env${paramsAsString}"></div>
+                ${Scripts}
             </div>
             <div id="skiplinks"></div>
             <div id="megamenu-resources"></div>
