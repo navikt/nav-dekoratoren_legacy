@@ -26,7 +26,7 @@ spec:
     accessPolicy:
         outbound:
             external:
-                - host: dev.nav.no
+                - host: www.dev.nav.no
                 - host: innloggingslinje-api.dev.nav.no
                 - host: www-q1.nav.no
     env:
