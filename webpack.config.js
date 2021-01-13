@@ -43,14 +43,10 @@ const commonConfig = {
             },
             {
                 test: /\.svg$/,
-                use: [
-                    {
-                        loader: 'svgo-loader',
-                        options: {
-                            plugins: [{ removeTitle: false }, { prefixIds: true }],
-                        },
-                    },
-                ],
+                loader: 'svgo-loader',
+                options: {
+                    plugins: [{ removeTitle: false }, { prefixIds: true }],
+                },
             },
             {
                 test: /\.(js|jsx|ts|tsx)$/,
@@ -60,6 +56,17 @@ const commonConfig = {
                     cacheDirectory: true,
                     cacheCompression: !!process.env.NODE_ENV,
                     compact: !!process.env.NODE_ENV,
+                },
+            },
+            {
+                test: /\.(js)$/,
+                exclude: /@babel(?:\/|\\{1,2})runtime/,
+                loader: 'babel-loader',
+                options: {
+                    cacheDirectory: true,
+                    cacheCompression: !!process.env.NODE_ENV,
+                    presets: [['babel-preset-react-app/dependencies', { helpers: true }]],
+                    sourceMaps: false,
                 },
             },
             {
@@ -133,7 +140,7 @@ const commonConfig = {
 };
 
 const clientConfig = {
-    target: 'web',
+    target: ['web', 'es5'],
     entry: {
         client: './src/index.tsx',
     },
