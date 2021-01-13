@@ -7,10 +7,16 @@ const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
+const packageJson = require('./package.json');
+
+const navFrontendModuler = Object.keys(packageJson.dependencies).reduce(
+  (acc, key) => (key.startsWith('nav-frontend-') ? acc.concat(path.resolve(__dirname,`node_modules/${key}`)) : acc),
+  []
+);
 
 const browserConfig = {
-    mode: process.env.NODE_ENV || 'development',
-    target: 'web',
+    mode: 'production', //process.env.NODE_ENV || 'development',
+    target: ['web', 'es5'],
     entry: {
         client: './src/index.tsx',
     },
@@ -66,7 +72,7 @@ const browserConfig = {
                     },
                     {
                         test: /\.(js|jsx|ts|tsx)$/,
-                        include: path.resolve(__dirname, 'src'),
+                        include: [path.resolve(__dirname, 'src'), path.resolve(__dirname, "node_modules/@navikt"), ...navFrontendModuler],
                         loader: 'babel-loader',
                         options: {
                             cacheDirectory: true,
