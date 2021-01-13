@@ -34,6 +34,7 @@ export const SokInput = (props: Props) => {
                     value={writtenInput || ''}
                     placeholder={finnTekst('sok-input-placeholder', language)}
                     aria-label={finnTekst('sok-input-placeholder', language)}
+                    type="search"
                 />
                 <SokKnapper writtenInput={writtenInput} onReset={onReset} id={id} />
             </div>

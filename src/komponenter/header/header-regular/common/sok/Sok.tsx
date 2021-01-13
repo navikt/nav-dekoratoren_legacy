@@ -47,15 +47,19 @@ const Sok = (props: Props) => {
 
     useEffect(() => {
         if (result && props.numResultsCallback) {
-            props.numResultsCallback(
-                Math.min(result.hits.length, numberOfResults)
-            );
+            props.numResultsCallback(Math.min(result.hits.length, numberOfResults));
         }
     }, [result]);
 
     const onReset = () => {
         setSearchInput('');
         setLoading(false);
+    };
+
+    const getSearchUrl = () => {
+        const { XP_BASE_URL } = environment;
+        const url = `${XP_BASE_URL}/sok?ord=${searchInput}`;
+        return genererUrl(XP_BASE_URL, url);
     };
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -65,13 +69,12 @@ const Sok = (props: Props) => {
             label: searchInput,
             action: 'søk',
         });
-        const { XP_BASE_URL } = environment;
-        const url = `${XP_BASE_URL}/sok?ord=${searchInput}`;
-        window.location.href = genererUrl(XP_BASE_URL, url);
+        window.location.href = getSearchUrl();
     };
 
     return (
         <form
+            action={getSearchUrl()} // action not used but needed for displaying search-button on iphone keyboard
             role="search"
             id={`search-form${props.id ? `-${props.id}` : ''}`}
             onSubmit={onSubmit}
