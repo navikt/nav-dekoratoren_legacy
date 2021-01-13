@@ -78,12 +78,6 @@ const browserConfig = {
                             cacheDirectory: true,
                             cacheCompression: !!process.env.NODE_ENV,
                             compact: !!process.env.NODE_ENV,
-                            presets: [
-                                [
-                                    'babel-preset-react-app/dependencies',
-                                    { helpers: true },
-                                ],
-                            ]
                         },
                     },
                     {

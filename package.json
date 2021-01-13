@@ -28,10 +28,12 @@
         "url": "https://github.com/navikt/nav-dekoratoren/issues"
     },
     "dependencies": {
+        "@babel/plugin-transform-arrow-functions": "^7.12.1",
         "@navikt/fnrvalidator": "^1.1.3",
         "@navikt/nav-chatbot": "^2.1.16",
         "@promster/express": "^5.0.1",
         "amplitude-js": "^7.4.1",
+        "babel-plugin-named-asset-import": "^0.3.7",
         "bowser": "^2.11.0",
         "classnames": "^2.2.6",
         "compression": "^1.7.4",
