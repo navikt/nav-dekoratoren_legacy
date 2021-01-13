@@ -32,11 +32,7 @@ export const Minsidemeny = ({ kbNavMainState }: Props) => {
     const { environment } = useSelector((state: AppState) => state);
     const { innloggetStatus } = useSelector(stateSelector);
     const { isOpen, language, menyPunkter } = useSelector(stateSelector);
-    useKbNavSub(
-        configForNodeGroup[KbNavGroup.Minsidemeny],
-        kbNavMainState,
-        isOpen
-    );
+    useKbNavSub(configForNodeGroup[KbNavGroup.Minsidemeny], kbNavMainState, isOpen);
 
     const minsideMenyPunkter = getMinsidemenyNode(menyPunkter.data, language);
 
@@ -47,15 +43,8 @@ export const Minsidemeny = ({ kbNavMainState }: Props) => {
 
     return (
         <div className={'media-tablet-desktop'}>
-            <MinsidePersonKnapp
-                classname={minsideMenyClassname}
-                id={minsideKnappId}
-            />
-            <EkspanderbarMeny
-                isOpen={isOpen}
-                classname={minsideMenyClassname}
-                id={minsideMenyClassname}
-            >
+            <MinsidePersonKnapp classname={minsideMenyClassname} id={minsideKnappId} />
+            <EkspanderbarMeny isOpen={isOpen} classname={minsideMenyClassname} id={minsideMenyClassname}>
                 {menyPunkter.status === Status.OK ? (
                     <MinsidemenyInnhold
                         classname={minsideMenyClassname}
