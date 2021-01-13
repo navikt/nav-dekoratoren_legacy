@@ -15,7 +15,7 @@ const navFrontendModuler = Object.keys(packageJson.dependencies).reduce(
 );
 
 const browserConfig = {
-    mode: 'production', //process.env.NODE_ENV || 'development',
+    mode: process.env.NODE_ENV || 'development',
     target: ['web', 'es5'],
     entry: {
         client: './src/index.tsx',
@@ -25,7 +25,7 @@ const browserConfig = {
         filename: '[name].js',
     },
     devtool:
-        process.env.NODE_ENV === 'production' ? '' : 'cheap-module-source-map',
+        process.env.NODE_ENV === 'production' ? false : 'source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         alias: {
@@ -44,28 +44,21 @@ const browserConfig = {
     stats: 'errors-only',
     module: {
         rules: [
-            { parser: { requireEnsure: false } },
             {
                 oneOf: [
                     {
-                        test: [/\.gif$/, /\.jpe?g$/, /\.png$/, /\.ico$/],
+                        test: [/\.gif$/, /\.jpe?g$/, /\.png$/, /\.ico$/, /\.svg$/],
                         loader: 'file-loader',
                         options: {
                             esModule: false,
-                            name: '/media/[name].[ext]',
+                            outputPath: '/media',
+                            publicPath: "/media/",
+                            name: '[name].[ext]',
                         },
                     },
                     {
                         test: /\.svg$/,
                         use: [
-                            {
-                                loader: 'file-loader',
-                                options: {
-                                    esModule: false,
-                                    name: '/media/[name].[ext]',
-                                    emit: false,
-                                },
-                            },
                             {
                                 loader: 'svgo-loader',
                                 options: {
@@ -82,51 +75,10 @@ const browserConfig = {
                         include: [path.resolve(__dirname, 'src'), path.resolve(__dirname, "node_modules/@navikt"), ...navFrontendModuler],
                         loader: 'babel-loader',
                         options: {
-                            customize: require.resolve(
-                                'babel-preset-react-app/webpack-overrides'
-                            ),
-                            presets: [
-                                [
-                                    'react-app',
-                                    { flow: false, typescript: true },
-                                ],
-                            ],
-
-                            plugins: [
-                                [
-                                    require('babel-plugin-named-asset-import'),
-                                    {
-                                        loaderMap: {
-                                            svg: {
-                                                ReactComponent:
-                                                    '@svgr/webpack?-svgo,+ref![path]',
-                                            },
-                                        },
-                                    },
-                                ],
-                            ],
                             cacheDirectory: true,
                             cacheCompression: !!process.env.NODE_ENV,
                             compact: !!process.env.NODE_ENV,
-                        },
-                    },
-                    {
-                        test: /\.(js)$/,
-                        exclude: /@babel(?:\/|\\{1,2})runtime/,
-                        loader: 'babel-loader',
-                        options: {
-                            babelrc: false,
-                            configFile: false,
-                            compact: false,
-                            presets: [
-                                [
-                                    'babel-preset-react-app/dependencies',
-                                    { helpers: true },
-                                ],
-                            ],
-                            cacheDirectory: true,
-                            cacheCompression: !!process.env.NODE_ENV,
-                            sourceMaps: false,
+                            presets: ["@babel/preset-env"]
                         },
                     },
                     {
