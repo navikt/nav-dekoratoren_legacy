@@ -14,7 +14,7 @@ import mockMenu from './mock/menu.json';
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
 // Local environment - import .env
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production' || process.env.PROD_TEST) {
     dotenv.config();
 }
 
@@ -194,7 +194,7 @@ app.use(
 app.use(`${appBasePath}/metrics`, (req, res) => {
     req.statusCode = 200;
     res.setHeader('Content-Type', getContentType());
-    res.end(getSummary());
+    getSummary().then((summary) => res.end(summary));
 });
 
 app.get(`${appBasePath}/isAlive`, (req, res) => res.sendStatus(200));
