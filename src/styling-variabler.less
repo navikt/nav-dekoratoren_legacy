@@ -4,13 +4,26 @@
 @import (reference) '~nav-frontend-typografi-style/src/index';
 @import (reference) '~nav-frontend-knapper-style/src/index';
 
-// screen size breakpoints
-@desktopMaxWidth: 90em;
-@smallDesktopMaxWidth: 64em;
-@desktopMinWidth: 48em;
-@smallMobileMaxWidth: 21.25em;
+@font-size-factor: 1.125;
 
-@smallDesktopMaxHeight: 55em;
+// Screen size breakpoints
+//
+// Relative units does not take CSS font-size into account when used in media queries,
+// but they do when used as CSS attribute values. We use separate variable sets to ensure
+// width and breakpoints scale consistently with browser font-size without being affected
+// by CSS font-size.
+@_MQ_desktopMaxWidth: 90em; // 1440px
+@_MQ_smallDesktopMaxWidth: 64em; // 1024px
+@_MQ_desktopMinWidth: 48em; // 768px
+@_MQ_smallMobileMaxWidth: 21.25em; //340px
+@_MQ_smallDesktopMaxHeight: 55em; //880px;
+
+@desktopMinWidth: calc(@_MQ_desktopMinWidth / @font-size-factor);
+@smallDesktopMaxWidth: calc(@_MQ_smallDesktopMaxWidth / @font-size-factor);
+@desktopMaxWidth: calc(@_MQ_desktopMaxWidth / @font-size-factor);
+@smallMobileMaxWidth: calc(@_MQ_smallMobileMaxWidth / @font-size-factor);
+
+@smallDesktopMaxHeight: calc(@_MQ_smallDesktopMaxHeight / @font-size-factor);
 
 // screen size media queries
 @screen-desktop: ~'(min-width: @{desktopMinWidth})';
