@@ -40,7 +40,7 @@
         "dotenv": "^8.2.0",
         "downshift": "^6.0.14",
         "express": "^4.17.1",
-        "html-react-parser": "^1.1.1",
+        "html-react-parser": "^1.2.1",
         "http-proxy-middleware": "^1.0.6",
         "js-cookie": "^2.2.1",
         "less-plugin-npm-import": "^2.1.0",
