@@ -14,7 +14,7 @@ import mockMenu from './mock/menu.json';
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
 // Local environment - import .env
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production' || process.env.PROD_TEST) {
     dotenv.config();
 }
 

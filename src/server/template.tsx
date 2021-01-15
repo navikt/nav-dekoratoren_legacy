@@ -113,7 +113,7 @@ export const template = (req: Request) => {
             <!-- Styling fetched by apps -->
             <div id="styles">
                 ${HtmlMetaTags}
-                <link href="${fileCss}" rel="stylesheet" />
+                <link href="${fileCss}" rel="stylesheet"/>
             </div>
             <div class="decorator-dev-container">
                 <!-- Header fetched by apps -->
