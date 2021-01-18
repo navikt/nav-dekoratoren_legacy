@@ -10,7 +10,7 @@ interface Props {
 
 const KnappeRekke = ({ avbryt }: Props) => {
     const userClosedFeedback = () => {
-        logAmplitudeEvent('tilbakemelding', { fritekst: 'ingen kommentar' });
+        logAmplitudeEvent('tilbakemelding', { kilde: 'footer', fritekst: 'ingen kommentar' });
         avbryt();
     };
 
