@@ -35,7 +35,7 @@ const AlternativJa = (props: QuestionProps) => {
             dispatchFritekstFeil({ type: 'reset' });
             const feedback = createFeedbackRespons(feedbackMessage, language, 'Yes');
             lagreTilbakemelding(feedback, environment.FEEDBACK_API_URL)(reduxDispatch);
-            logAmplitudeEvent('tilbakemelding', { fritekst: 'besvart' });
+            logAmplitudeEvent('tilbakemelding', { kilde: 'footer', fritekst: 'besvart' });
             props.settBesvart();
         }
     };
