@@ -27,6 +27,7 @@ import { validateBreadcrumbs } from '../../server/utils';
 import { validateContext } from '../../server/utils';
 import { validateLanguage, validateLevel } from '../../server/utils';
 import { setParams } from '../../store/reducers/environment-duck';
+import Modal from 'nav-frontend-modal';
 import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
@@ -54,6 +55,11 @@ export const Header = () => {
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
 
     const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie, unleashCacheCookie]);
+
+    // React-modal fix
+    useEffect(() => {
+        Modal.setAppElement('body');
+    }, []);
 
     // Handle feature toggles
     useEffect(() => {
