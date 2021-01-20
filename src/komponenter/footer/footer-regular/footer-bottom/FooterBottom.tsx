@@ -8,7 +8,6 @@ import Tekst from 'tekster/finn-tekst';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import { MenyNode } from 'store/reducers/menu-duck';
 import FooterLenker from 'komponenter/footer/common/Lenker';
-import { LinkLoader } from 'komponenter/common/content-loaders/LinkLoader';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import { ChatbotWrapper } from 'komponenter/footer/chatbot/ChatbotWrapper';
 import { DelSkjermLenke } from 'komponenter/footer/common/del-skjerm-lenke/DelSkjermLenke';
@@ -49,13 +48,7 @@ const FooterBottom = () => {
                             <Tekst id="footer-arbeids-og-veldferdsetaten" />
                         </Normaltekst>
                         <ul className={cls.element('personvern-lenker')}>
-                            {personvernNode ? (
-                                <FooterLenker node={personvernNode} />
-                            ) : (
-                                <li>
-                                    <LinkLoader id={'personvern-loader'} />
-                                </li>
-                            )}
+                            <FooterLenker node={personvernNode} />
                             <DelSkjermLenke />
                         </ul>
                     </div>
