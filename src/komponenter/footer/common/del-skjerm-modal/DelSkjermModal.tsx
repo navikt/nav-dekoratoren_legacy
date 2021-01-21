@@ -69,15 +69,9 @@ const DelSkjermModal = (props: Props) => {
     };
 
     const setOverlayCss = () => {
-        const elementsArray = document.getElementsByClassName(
-            'ReactModal__Overlay'
-        );
+        const elementsArray = document.getElementsByClassName('ReactModal__Overlay');
         const element = elementsArray[0] as HTMLElement;
-        if (
-            !element ||
-            !element.children[0] ||
-            !element.children[0].classList.contains(classname)
-        ) {
+        if (!element || !element.children[0] || !element.children[0].classList.contains(classname)) {
             return;
         }
         element.style.zIndex = '9999';
@@ -93,38 +87,22 @@ const DelSkjermModal = (props: Props) => {
             onRequestClose={props.onClose}
         >
             <div className={'delskjerm__header'}>
-                <Bilde
-                    className={'delskjerm__veileder'}
-                    asset={veileder}
-                    altText={''}
-                />
+                <Bilde className={'delskjerm__veileder'} asset={veileder} altText={''} />
             </div>
             <div className={'delskjerm__content'}>
                 <Undertittel>
                     <Tekst id={'delskjerm-modal-overskrift'} />
                 </Undertittel>
-                <div className={'delskjerm__beskrivelse'}>
+                <div className={'delskjerm__beskrivelse typo-normal'}>
                     <Normaltekst>
                         <Tekst id={'delskjerm-modal-beskrivelse'} />
                     </Normaltekst>
-                    <Lesmerpanel
-                        apneTekst={
-                            <Normaltekst>
-                                <Tekst
-                                    id={
-                                        'delskjerm-modal-hjelpetekst-overskrift'
-                                    }
-                                />
-                            </Normaltekst>
-                        }
-                    >
+                    <Lesmerpanel apneTekst={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
                         <ul>
                             {[...Array(3)].map((_, i) => (
                                 <li key={i}>
                                     <Normaltekst>
-                                        <Tekst
-                                            id={`delskjerm-modal-hjelpetekst-${i}`}
-                                        />
+                                        <Tekst id={`delskjerm-modal-hjelpetekst-${i}`} />
                                     </Normaltekst>
                                 </li>
                             ))}
