@@ -116,7 +116,7 @@ const FritekstFelt = (props: Props) => {
                         {props.errors.invalidInput && (
                             <>
                                 <>{props.errors.invalidInput}</>
-                                <KontaktOss href={`${environment.XP_BASE_URL}/person/kontakt-oss`} />
+                                <KontaktOss />
                             </>
                         )}
                         {props.errors.maxLength && <span> {props.errors.maxLength}</span>}

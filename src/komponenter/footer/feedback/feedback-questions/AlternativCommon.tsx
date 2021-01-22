@@ -18,17 +18,7 @@ export interface QuestionProps {
     state: FeedbackState;
 }
 
-export const KontaktOss = (props: { href: string }) => (
-    <>
-        <Tekst id="kontakt-oss-start" />
-        <Lenke href={props.href}>
-            <Tekst id="kontakt-oss-lenketekst" />
-        </Lenke>
-        <Tekst id="kontakt-oss-slutt" />
-    </>
-);
-
-export const FeedbackInformasjon = React.memo(() => {
+export const KontaktOss = React.memo(() => {
     const { environment, arbeidsflate } = useSelector((state: AppState) => state);
     const kontaktOssUrl =
         arbeidsflate.status === MenuValue.ARBEIDSGIVER
@@ -37,12 +27,20 @@ export const FeedbackInformasjon = React.memo(() => {
 
     return (
         <>
-            <Normaltekst>
-                <Tekst id="advarsel-om-personopplysninger" />
-            </Normaltekst>
-            <Normaltekst>
-                <KontaktOss href={kontaktOssUrl} />
-            </Normaltekst>
+            <Tekst id="kontakt-oss-start" />
+            <Lenke href={kontaktOssUrl}>
+                <Tekst id="kontakt-oss-lenketekst" />
+            </Lenke>
+            <Tekst id="kontakt-oss-slutt" />
         </>
     );
 });
+
+export const FeedbackInformasjon = () => (
+    <>
+        <Normaltekst>
+            <Tekst id="forklaring-fritekst-nei" />
+            <Tekst id="forklaring-fritekst" />
+        </Normaltekst>
+    </>
+);

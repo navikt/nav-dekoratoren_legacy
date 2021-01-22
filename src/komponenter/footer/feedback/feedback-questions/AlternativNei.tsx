@@ -1,13 +1,16 @@
 import React, { useState, useRef, useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { finnTekst } from 'tekster/finn-tekst';
+import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { createFeedbackRespons } from '../createFeedbackRespons';
 import FritekstFelt, { fritekstFeilReducer, initialFritekstFeil, MAX_LENGTH } from './fritekst/FritekstFelt';
-import { FeedbackInformasjon, QuestionProps, questionStateSelector } from './AlternativCommon';
+import { KontaktOss, QuestionProps, questionStateSelector } from './AlternativCommon';
 import KnappeRekke from './KnappeRekke';
-import './Alternativ.less';
 import { lagreTilbakemelding } from '../../../../store/reducers/tilbakemelding-duck';
 import { logAmplitudeEvent } from '../../../../utils/amplitude';
+import { AppState } from '../../../../store/reducers';
+import { MenuValue } from '../../../../utils/meny-storage-utils';
+import { Normaltekst } from 'nav-frontend-typografi';
+import './Alternativ.less';
 
 const AlternativNei = (props: QuestionProps) => {
     const [feedbackMessage, setFeedbackMessage] = useState('');
@@ -16,6 +19,12 @@ const AlternativNei = (props: QuestionProps) => {
     const reduxDispatch = useDispatch();
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const [fritekstFeil, dispatchFritekstFeil] = useReducer(fritekstFeilReducer, initialFritekstFeil);
+    const { arbeidsflate } = useSelector((state: AppState) => state);
+
+    const kontaktOssUrl =
+        arbeidsflate.status === MenuValue.ARBEIDSGIVER
+            ? 'https://arbeidsgiver.nav.no/kontakt-oss'
+            : `${environment.XP_BASE_URL}/person/kontakt-oss`;
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();
@@ -52,9 +61,18 @@ const AlternativNei = (props: QuestionProps) => {
                 setErrors={dispatchFritekstFeil}
                 textareaRef={(inputRef) => (textareaRef.current = inputRef)}
                 harTrykketSubmit={harTrykketSubmit}
-                description={<FeedbackInformasjon />}
+                description={
+                    <Normaltekst>
+                        <Tekst id="forklaring-fritekst-nei" />
+                        <Tekst id="hensikt-med-tilbakemelding" />
+                        <Tekst id="forklaring-fritekst" />
+                    </Normaltekst>
+                }
             />
             <KnappeRekke avbryt={props.settBesvart} />
+            <Normaltekst className="kontaktOss">
+                <KontaktOss />
+            </Normaltekst>
         </form>
     );
 };
