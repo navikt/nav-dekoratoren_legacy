@@ -7,8 +7,6 @@ import { KontaktOss, QuestionProps, questionStateSelector } from './AlternativCo
 import KnappeRekke from './KnappeRekke';
 import { lagreTilbakemelding } from '../../../../store/reducers/tilbakemelding-duck';
 import { logAmplitudeEvent } from '../../../../utils/amplitude';
-import { AppState } from '../../../../store/reducers';
-import { MenuValue } from '../../../../utils/meny-storage-utils';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './Alternativ.less';
 
@@ -19,12 +17,6 @@ const AlternativNei = (props: QuestionProps) => {
     const reduxDispatch = useDispatch();
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const [fritekstFeil, dispatchFritekstFeil] = useReducer(fritekstFeilReducer, initialFritekstFeil);
-    const { arbeidsflate } = useSelector((state: AppState) => state);
-
-    const kontaktOssUrl =
-        arbeidsflate.status === MenuValue.ARBEIDSGIVER
-            ? 'https://arbeidsgiver.nav.no/kontakt-oss'
-            : `${environment.XP_BASE_URL}/person/kontakt-oss`;
 
     const submitFeedback = (evt: any) => {
         evt.preventDefault();

@@ -1,6 +1,5 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
-import { Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import { FeedbackState } from '../Feedback';
 import { useSelector } from 'react-redux';
@@ -35,12 +34,3 @@ export const KontaktOss = React.memo(() => {
         </>
     );
 });
-
-export const FeedbackInformasjon = () => (
-    <>
-        <Normaltekst>
-            <Tekst id="forklaring-fritekst-nei" />
-            <Tekst id="forklaring-fritekst" />
-        </Normaltekst>
-    </>
-);

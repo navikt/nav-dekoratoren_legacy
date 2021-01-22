@@ -292,11 +292,9 @@ export const ledetekster: { [key: string]: stringOrFunction } = {
     'send-undersokelse-takk': 'Takk for tilbakemeldingen din!',
     'send-undersokelse-takk-en': 'Thanks for your feedback!',
     'send-undersokelse-takk-se': 'Takk for tilbakemeldingen din!',
-
     annet: 'Annet',
     'annet-en': 'Other',
     'annet-se': 'Annet',
-
     'browser-utdatert-msg': 'Du bruker en nettleser som nav.no ikke støtter. ',
     'browser-utdatert-msg-en': 'You are using a web browser which is not supported on nav.no. ',
     'browser-utdatert-msg-se': 'Du bruker en nettleser som nav.no ikke støtter. ',
