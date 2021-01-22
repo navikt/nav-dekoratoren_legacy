@@ -13,12 +13,13 @@ type Props = {
     writtenInput: string;
     onChange: (value: string) => void;
     onReset: () => void;
-    id?: string;
+    id: string;
 };
 
 export const SokInput = (props: Props) => {
     const { onChange, onReset } = props;
     const { language, writtenInput, className, id } = props;
+
     return (
         <>
             <div className={'sok-input__tittel'}>
@@ -31,12 +32,21 @@ export const SokInput = (props: Props) => {
                     id={id}
                     onChange={(e) => onChange(e.target.value)}
                     className={className}
-                    value={writtenInput || ''}
                     placeholder={finnTekst('sok-input-placeholder', language)}
                     aria-label={finnTekst('sok-input-placeholder', language)}
                     type="search"
                 />
-                <SokKnapper writtenInput={writtenInput} onReset={onReset} id={id} />
+                <SokKnapper
+                    writtenInput={writtenInput}
+                    onReset={() => {
+                        onReset();
+                        const inputElement = document.getElementById(id) as HTMLInputElement;
+                        if (inputElement) {
+                            inputElement.value = '';
+                        }
+                    }}
+                    id={id}
+                />
             </div>
         </>
     );

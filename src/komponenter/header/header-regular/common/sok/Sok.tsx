@@ -14,7 +14,7 @@ import { Environment } from 'store/reducers/environment-duck';
 import './Sok.less';
 
 interface Props {
-    id?: string;
+    id: string;
     isOpen: boolean;
     dropdownTransitionMs?: number;
     numResultsCallback?: (numResults: number) => void;
