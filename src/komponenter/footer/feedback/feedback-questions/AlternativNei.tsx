@@ -55,16 +55,12 @@ const AlternativNei = (props: QuestionProps) => {
                 harTrykketSubmit={harTrykketSubmit}
                 description={
                     <Normaltekst>
-                        <Tekst id="forklaring-fritekst-nei" />
-                        <Tekst id="hensikt-med-tilbakemelding" />
                         <Tekst id="forklaring-fritekst" />
+                        <KontaktOss />
                     </Normaltekst>
                 }
             />
             <KnappeRekke avbryt={props.settBesvart} />
-            <Normaltekst className="kontaktOss">
-                <KontaktOss />
-            </Normaltekst>
         </form>
     );
 };

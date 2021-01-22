@@ -6,7 +6,6 @@ import './FritekstFelt.less';
 import Tekst, { finnTekst } from '../../../../../tekster/finn-tekst';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../../../store/reducers';
-import { KontaktOss } from '../AlternativCommon';
 import { Ingress } from 'nav-frontend-typografi';
 
 export const MAX_LENGTH = 1000;
@@ -56,7 +55,6 @@ interface Props extends Partial<TextareaProps> {
 
 const FritekstFelt = (props: Props) => {
     const { language } = useSelector((state: AppState) => state.language);
-    const { environment } = useSelector((state: AppState) => state);
     const debouncedInputVerdier = useDebounce(props.feedbackMessage, 500);
     const { feedbackMessage, setErrors, harTrykketSubmit } = props;
 
@@ -104,7 +102,7 @@ const FritekstFelt = (props: Props) => {
             description={props.description}
             label={
                 <Ingress>
-                    <Tekst id="hva-lette-du-etter" />
+                    <Tekst id="tilbakemelding-overskrift" />
                 </Ingress>
             }
             maxLength={MAX_LENGTH}
@@ -116,7 +114,7 @@ const FritekstFelt = (props: Props) => {
                         {props.errors.invalidInput && (
                             <>
                                 <>{props.errors.invalidInput}</>
-                                <KontaktOss />
+                                <Tekst id="ugyldig-fritekst" />
                             </>
                         )}
                         {props.errors.maxLength && <span> {props.errors.maxLength}</span>}

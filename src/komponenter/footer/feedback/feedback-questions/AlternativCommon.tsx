@@ -25,12 +25,8 @@ export const KontaktOss = React.memo(() => {
             : `${environment.XP_BASE_URL}/person/kontakt-oss`;
 
     return (
-        <>
-            <Tekst id="kontakt-oss-start" />
-            <Lenke href={kontaktOssUrl}>
-                <Tekst id="kontakt-oss-lenketekst" />
-            </Lenke>
-            <Tekst id="kontakt-oss-slutt" />
-        </>
+        <Lenke href={kontaktOssUrl}>
+            <Tekst id="kontakt-oss" />
+        </Lenke>
     );
 });

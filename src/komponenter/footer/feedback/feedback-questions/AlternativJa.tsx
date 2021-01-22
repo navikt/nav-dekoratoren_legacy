@@ -51,16 +51,13 @@ const AlternativJa = (props: QuestionProps) => {
                 description={
                     <Normaltekst>
                         <Tekst id="forklaring-fritekst" />
-                        <Tekst id="hensikt-med-tilbakemelding" />
+                        <KontaktOss />
                     </Normaltekst>
                 }
                 textareaRef={(inputRef) => (textareaRef.current = inputRef)}
                 harTrykketSubmit={harTrykketSubmit}
             />
             <KnappeRekke avbryt={props.settBesvart} />
-            <Normaltekst className="kontaktOss">
-                <KontaktOss />
-            </Normaltekst>
         </form>
     );
 };

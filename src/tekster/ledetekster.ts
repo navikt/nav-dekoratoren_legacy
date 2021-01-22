@@ -226,27 +226,29 @@ export const ledetekster: { [key: string]: stringOrFunction } = {
     'svarknapp-nei': 'Nei',
     'svarknapp-nei-en': 'No',
     'svarknapp-nei-se': 'Nei',
-    'hva-lette-du-etter': 'Vil du hjelpe oss med å forbedre sidene?',
-    'hva-lette-du-etter-en': 'Do you want to help us improve nav.no?',
-    'hva-lette-du-etter-se': 'Vil du hjelpe oss med å forbedre sidene?',
-    'kontakt-oss-start': 'Ta ',
-    'kontakt-oss-lenketekst': 'kontakt med oss',
-    'kontakt-oss-slutt': ' hvis du trenger hjelp.',
-    'kontakt-oss-start-en': 'Please ',
-    'kontakt-oss-lenketekst-en': 'contact us',
-    'kontakt-oss-slutt-en': ' if you need help.',
-    'kontakt-oss-start-se': 'Ta ',
-    'kontakt-oss-lenketekst-se': 'kontakt med oss',
-    'kontakt-oss-slutt-se': ' hvis du trenger hjelp.',
-    'forklaring-fritekst': 'Ikke skriv personlig informasjon, vi svarer ikke på henvendelser her. ',
-    'forklaring-fritekst-en': 'Don’t write personal information. We don’t answer feedback given here. ',
-    'forklaring-fritekst-se': 'Ikke skriv personlig informasjon, vi svarer ikke på henvendelser her. ',
-    'forklaring-fritekst-nei': 'Skriv hva du lette etter som du ikke fant. ',
-    'forklaring-fritekst-nei-en': 'Write what you were looking for that you did not find. ',
-    'forklaring-fritekst-nei-se': 'Skriv hva du lette etter som du ikke fant. ',
-    'hensikt-med-tilbakemelding': 'Vi bruker svaret ditt til å forbedre nav.no. ',
-    'hensikt-med-tilbakemelding-en': 'We use your feedback to improve nav.no. ',
-    'hensikt-med-tilbakemelding-se': 'Vi bruker svaret ditt til å forbedre nav.no. ',
+    'tilbakemelding-overskrift': 'Takk for tilbakemeldingen din!',
+    'tilbakemelding-overskrift-en': 'Thanks for your feedback!',
+    'tilbakemelding-overskrift-se': 'Takk for tilbakemeldingen din!',
+    'forklaring-fritekst':
+        'Kan du fortelle oss hva du lette etter? Svaret ditt hjelper oss å lage bedre nettsider. ' +
+        'Ikke skriv inn navn, telefonnummer eller annen personlig informasjon. ',
+    'forklaring-fritekst-en':
+        'Can you tell us what you were looking for? Your answer helps us improve our websites. ' +
+        'Do not enter name, phone number or other personal information. ',
+    'forklaring-fritekst-se':
+        'Kan du fortelle oss hva du lette etter? Svaret ditt hjelper oss å lage bedre nettsider. ' +
+        'Ikke skriv inn navn, telefonnummer eller annen personlig informasjon. ',
+    'kontakt-oss': 'Kontakt oss på telefon eller chat om du trenger hjelp eller svar.',
+    'kontakt-oss-en': 'Contact us by phone or chat if you need an answer.',
+    'kontakt-oss-se': 'Kontakt oss på telefon eller chat om du trenger hjelp eller svar.',
+    'ugyldig-fritekst':
+        'Vil du ha svar på spørsmål eller trenger hjelp nå? ' +
+        'Da må du kontakte oss på telefon eller chat. Vi svarer ikke på henvendelser her.',
+    'ugyldig-fritekst-en':
+        'Do you need help now? ' + 'Then you must contact us by phone or chat. We don’t answer feedback given here. ',
+    'ugyldig-fritekst-se':
+        'Vil du ha svar på spørsmål eller trenger hjelp nå? ' +
+        'Da må du kontakte oss på telefon eller chat. Vi svarer ikke på henvendelser her.',
     'textarea-undermaks': (input: string) => `Du har ${input} tegn igjen`,
     'textarea-undermaks-en': (input: string) => `You have ${input} characters left`,
     'textarea-undermaks-se': (input: string) => `Du har ${input} tegn igjen`,
