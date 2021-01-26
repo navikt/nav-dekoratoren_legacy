@@ -240,7 +240,7 @@ export const Header = () => {
                             BREADCRUMBS: breadcrumbs,
                         }),
                         ...(feedback !== undefined && {
-                            FEEDBACK: feedback !== false,
+                            FEEDBACK: feedback === true,
                         }),
                         ...(chatbot !== undefined && {
                             CHATBOT: chatbot === true,
