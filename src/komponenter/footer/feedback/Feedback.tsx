@@ -15,12 +15,12 @@ const Feedback = () => {
 
     const handleNei = () => {
         setState('nei');
-        logAmplitudeEvent('tilbakemelding', { svar: 'nei' });
+        logAmplitudeEvent('tilbakemelding', { kilde: 'footer', svar: 'nei' });
     };
 
     const handleJa = () => {
         setState('ja');
-        logAmplitudeEvent('tilbakemelding', { svar: 'ja' });
+        logAmplitudeEvent('tilbakemelding', { kilde: 'footer', svar: 'ja' });
     };
 
     return (

@@ -5,7 +5,7 @@
     padding: 2rem 1rem;
     justify-content: center;
     @media @screen-desktop {
-        padding: 1rem @margins-sides-footer @margins-sides-footer;
+        padding: 1rem @margins-sides-footer;
     }
 
     @media @screen-desktop-small-width-down {
@@ -15,22 +15,31 @@
 
 .footer-bottom-content {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     width: 100%;
     max-width: 1344px;
 
+    @media @screen-desktop {
+        flex-direction: row;
+    }
+
+    @media @screen-mobile {
+        flex-direction: column;
+    }
+
     .top-row {
         position: relative;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: flex-start;
 
         .nav-logo-lenke {
-            width: 68px;
-            padding: 0.25rem;
-            margin-bottom: 0.25rem;
+            padding: 0.325rem 1rem 0.325rem 0;
+            width: 4.5rem;
+            height: 4.5rem;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 
@@ -47,6 +56,7 @@
 
         &__bottom-lenker {
             display: flex;
+            padding: 1.75rem 0;
             justify-content: space-between;
             align-items: flex-end;
             width: 100%;
@@ -54,7 +64,7 @@
 
         &__personvern-lenker {
             display: flex;
-            margin: 0;
+            margin: 0.5rem 0 0 0;
             li {
                 padding-right: 2rem;
             }

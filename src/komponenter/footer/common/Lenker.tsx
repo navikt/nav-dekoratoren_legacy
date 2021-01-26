@@ -6,6 +6,7 @@ import { MenyNode } from 'store/reducers/menu-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { genererUrl } from 'utils/Environment';
+import { LinkLoader } from '../../common/content-loaders/LinkLoader';
 
 interface Props {
     node?: MenyNode;
@@ -15,7 +16,11 @@ export const FooterLenker = ({ node }: Props) => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
     if (!node || !node.children) {
-        return null;
+        return (
+            <li>
+                <LinkLoader id={'personvern-loader'} />
+            </li>
+        );
     }
 
     return (
