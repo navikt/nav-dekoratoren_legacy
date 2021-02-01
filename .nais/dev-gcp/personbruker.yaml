@@ -45,7 +45,7 @@ spec:
         - name: MINSIDE_ARBEIDSGIVER_URL
           value: https://arbeidsgiver-q1.nav.no/min-side-arbeidsgiver/
         - name: DITT_NAV_URL
-          value: https://www-q1.nav.no/person/dittnav/
+          value: https://www.dev.nav.no/person/dittnav/
         - name: LOGIN_URL
           value: https://loginservice.dev.nav.no
         - name: LOGOUT_URL
