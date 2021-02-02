@@ -35,11 +35,11 @@ spec:
         - name: API_XP_SERVICES_URL
           value: https://www-q0.nav.no/_/service
         - name: API_VARSELINNBOKS_URL
-          value: https://www-q0.nav.no/person/varselinnboks
+          value: https://www.dev.nav.no/person/varselinnboks
         - name: API_INNLOGGINGSLINJE_URL
           value: https://innloggingsstatus.dev.nav.no/person/innloggingsstatus
         - name: API_UNLEASH_PROXY_URL
-          value: https://www-q0.nav.no/person/pb-unleash-proxy
+          value: https://www.dev.nav.no/person/pb-unleash-proxy
         - name: MINSIDE_ARBEIDSGIVER_URL
           value: https://arbeidsgiver-q0.nav.no/min-side-arbeidsgiver/
         - name: DITT_NAV_URL

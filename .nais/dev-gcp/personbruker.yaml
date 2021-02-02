@@ -31,7 +31,7 @@ spec:
                 - host: www-q1.nav.no
     env:
         - name: XP_BASE_URL
-          value: https://www-q1.nav.no
+          value: https://www.dev.nav.no
         - name: APP_BASE_URL
           value: https://dekoratoren.dev.nav.no
         - name: API_XP_SERVICES_URL
@@ -41,11 +41,11 @@ spec:
         - name: API_INNLOGGINGSLINJE_URL
           value: https://innloggingsstatus.dev.nav.no/person/innloggingsstatus
         - name: API_UNLEASH_PROXY_URL
-          value: https://www-q1.nav.no/person/pb-unleash-proxy
+          value: https://www.dev.nav.no/person/pb-unleash-proxy
         - name: MINSIDE_ARBEIDSGIVER_URL
-          value: https://arbeidsgiver-q1.nav.no/min-side-arbeidsgiver/
+          value: https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/
         - name: DITT_NAV_URL
-          value: https://www-q1.nav.no/person/dittnav/
+          value: https://www.dev.nav.no/person/dittnav/
         - name: LOGIN_URL
           value: https://loginservice.dev.nav.no
         - name: LOGOUT_URL
