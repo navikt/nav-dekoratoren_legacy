@@ -50,7 +50,7 @@ export const Header = () => {
     const { arbeidsflate } = useSelector(stateSelector);
     const { innloggingsstatus } = useSelector(stateSelector);
     const { authenticated } = innloggingsstatus.data;
-    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL, API_INNLOGGINGSLINJE_URL, NAIS_ENV } = environment;
+    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL, API_INNLOGGINGSLINJE_URL, ENV } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
     const breadcrumbs = PARAMS.BREADCRUMBS || [];
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
@@ -59,10 +59,10 @@ export const Header = () => {
 
     // Override links
     useEffect(() => {
-        if (NAIS_ENV !== 'prod') {
+        if (PARAMS.URL_LOOKUP_TABLE && ENV !== 'prod') {
             const anchors = document.getElementsByTagName('a');
             for (let i = 0; i < anchors.length; i++) {
-                anchors[i].href = getEnvUrl(anchors[i].href, NAIS_ENV);
+                anchors[i].href = getEnvUrl(anchors[i].href, ENV);
             }
         }
     }, []);

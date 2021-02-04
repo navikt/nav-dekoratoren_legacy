@@ -26,7 +26,7 @@ spec:
         - https://appres-q0.nav.no/common-html/v4/navno
         - https://www-q0.nav.no/dekoratoren
     env:
-        - name: NAIS_ENV
+        - name: ENV
           value: q0
         - name: XP_BASE_URL
           value: https://www-q0.nav.no

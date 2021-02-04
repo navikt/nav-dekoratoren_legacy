@@ -101,13 +101,15 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | breadcrumbs        | [{ title: string, url: string }]                      | [ ]                  | Setter brødsmulestien for server side rendering [5]                            |
 | feedback           | boolean                                               | false                | Skjuler eller viser tilbakemeldingskomponentet                                 |
 | chatbot            | boolean                                               | true                 | Skjuler eller viser Chatbot Frida [6]                                          |
+| urlLookupTable     | boolean                                               | true                 | Aktiverer eller deaktiverer url-lookup-table [7]                               |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
 [3] Språk settes automatisk client-side dersom nåværende url inneholder **/nb/**, **/nn/**, **/en/**, **/se/**, uavhengig av dette parameteret. <br>
 [4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
-[6] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret.
+[6] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret. <br>
+[7] Mapper prod-urler til dev-urler basert på en [tabell](https://github.com/navikt/nav-dekoratoren/blob/master/src/url-lookup-table.ts).
 
 :information_source: &nbsp; Samtlige parameter kan settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 :information_source: &nbsp; Bakgrunnsfarge på brødsmulesti og språkvelger kan overstyres:

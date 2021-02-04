@@ -30,7 +30,7 @@ spec:
                 - host: innloggingslinje-api.dev.nav.no
                 - host: www-q1.nav.no
     env:
-        - name: NAIS_ENV
+        - name: ENV
           value: dev
         - name: XP_BASE_URL
           value: https://www.dev.nav.no
