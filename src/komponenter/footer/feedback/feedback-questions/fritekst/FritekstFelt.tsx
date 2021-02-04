@@ -9,7 +9,7 @@ import { AppState } from '../../../../../store/reducers';
 import { KontaktOss } from '../AlternativCommon';
 import { Ingress } from 'nav-frontend-typografi';
 
-export const MAX_LENGTH = 1000;
+export const MAX_LENGTH = 200;
 
 export interface FritekstFeil {
     invalidInput?: string;
