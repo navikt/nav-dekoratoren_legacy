@@ -29,6 +29,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
 
     return {
+        NAIS_ENV: process.env.NAIS_ENV as string,
         XP_BASE_URL: process.env.XP_BASE_URL as string,
         APP_URL: appUrl as string,
         APP_BASE_URL: process.env.APP_BASE_URL as string,

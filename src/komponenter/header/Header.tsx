@@ -28,6 +28,7 @@ import { validateContext } from '../../server/utils';
 import { validateLanguage, validateLevel } from '../../server/utils';
 import { setParams } from '../../store/reducers/environment-duck';
 import Modal from 'nav-frontend-modal';
+import urlLookupTable, { getEnvUrl } from '../../url-lookup-table';
 import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
@@ -49,12 +50,22 @@ export const Header = () => {
     const { arbeidsflate } = useSelector(stateSelector);
     const { innloggingsstatus } = useSelector(stateSelector);
     const { authenticated } = innloggingsstatus.data;
-    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL, API_INNLOGGINGSLINJE_URL } = environment;
+    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL, API_INNLOGGINGSLINJE_URL, NAIS_ENV } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
     const breadcrumbs = PARAMS.BREADCRUMBS || [];
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
 
     const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie, unleashCacheCookie]);
+
+    // Override links
+    useEffect(() => {
+        if (NAIS_ENV !== 'prod') {
+            const anchors = document.getElementsByTagName('a');
+            for (let i = 0; i < anchors.length; i++) {
+                anchors[i].href = getEnvUrl(anchors[i].href, NAIS_ENV);
+            }
+        }
+    }, []);
 
     // React-modal fix
     useEffect(() => {
