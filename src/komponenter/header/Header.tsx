@@ -28,7 +28,7 @@ import { validateContext } from '../../server/utils';
 import { validateLanguage, validateLevel } from '../../server/utils';
 import { setParams } from '../../store/reducers/environment-duck';
 import Modal from 'nav-frontend-modal';
-import urlLookupTable, { getEnvUrl } from '../../url-lookup-table';
+import { getEnvUrl } from '../../url-lookup-table';
 import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
