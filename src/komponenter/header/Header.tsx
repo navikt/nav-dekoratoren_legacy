@@ -58,27 +58,25 @@ export const Header = () => {
 
     const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie, unleashCacheCookie]);
 
-    // Change links from url-lookup-table
+    // Map prod to dev urls with url-lookup-table
+    const setUrlLookupTableUrls = () => {
+        const anchors = Array.prototype.slice.call(document.getElementsByTagName('a'));
+        anchors.forEach((anchor) => {
+            if (anchor.href !== getEnvUrl(anchor.href, ENV)) {
+                anchor.href = getEnvUrl(anchor.href, ENV);
+            }
+        });
+    };
+
     useEffect(() => {
         if (PARAMS.URL_LOOKUP_TABLE && ENV !== 'prod') {
             // Initial change
-            const anchors = Array.prototype.slice.call(document.getElementsByTagName('a'));
-            anchors.forEach((anchor) => (anchor.href = getEnvUrl(anchor.href, ENV)));
+            setUrlLookupTableUrls();
 
             // After dom changes
             const targetNode = document.body;
             const config = { attributes: true, childList: true, subtree: true };
-            const callback = (mutationsList: MutationRecord[]) => {
-                mutationsList.forEach((mutation) => {
-                    const target = mutation.target as HTMLLinkElement;
-                    if (target.tagName === 'A' && target.href !== getEnvUrl(target.href, ENV)) {
-                        target.setAttribute('href', getEnvUrl(target.href, ENV));
-                    } else {
-                        const anchors = Array.prototype.slice.call(target.getElementsByTagName('a'));
-                        anchors.forEach((anchor) => (anchor.href = getEnvUrl(anchor.href, ENV)));
-                    }
-                });
-            };
+            const callback = () => setUrlLookupTableUrls();
 
             const observer = new MutationObserver(callback);
             observer.observe(targetNode, config);
