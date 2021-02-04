@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMenypunkter } from 'store/reducers/menu-duck';
+import { fetchMenypunkter, MenyPunkter } from 'store/reducers/menu-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { HeaderSimple } from 'komponenter/header/header-simple/HeaderSimple';
 import { HeaderRegular } from 'komponenter/header/header-regular/HeaderRegular';
@@ -36,6 +36,7 @@ export const decoratorContextCookie = 'decorator-context';
 export const decoratorLanguageCookie = 'decorator-language';
 
 const stateSelector = (state: AppState) => ({
+    menypunkt: state.menypunkt,
     innloggingsstatus: state.innloggingsstatus,
     arbeidsflate: state.arbeidsflate.status,
     language: state.language.language,
@@ -48,7 +49,7 @@ export const Header = () => {
     const [sentAuthToApp, setSentAuthToApp] = useState(false);
     const { environment } = useSelector(stateSelector);
     const { arbeidsflate } = useSelector(stateSelector);
-    const { innloggingsstatus } = useSelector(stateSelector);
+    const { innloggingsstatus, menypunkt } = useSelector(stateSelector);
     const { authenticated } = innloggingsstatus.data;
     const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL, API_INNLOGGINGSLINJE_URL, ENV } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
@@ -61,10 +62,8 @@ export const Header = () => {
     useEffect(() => {
         if (PARAMS.URL_LOOKUP_TABLE && ENV !== 'prod') {
             // Initial change
-            const anchors = document.getElementsByTagName('a');
-            for (let i = 0; i < anchors.length; i++) {
-                anchors[i].href = getEnvUrl(anchors[i].href, ENV);
-            }
+            const anchors = Array.prototype.slice.call(document.getElementsByTagName('a'));
+            anchors.forEach((anchor) => (anchor.href = getEnvUrl(anchor.href, ENV)));
 
             // After dom changes
             const targetNode = document.body;
@@ -72,11 +71,11 @@ export const Header = () => {
             const callback = (mutationsList: MutationRecord[]) => {
                 mutationsList.forEach((mutation) => {
                     const target = mutation.target as HTMLLinkElement;
-                    if (target.tagName === 'A') {
-                        console.log(target);
-                        if (target.href !== getEnvUrl(target.href, ENV)) {
-                            target.setAttribute('href', getEnvUrl(target.href, ENV));
-                        }
+                    if (target.tagName === 'A' && target.href !== getEnvUrl(target.href, ENV)) {
+                        target.setAttribute('href', getEnvUrl(target.href, ENV));
+                    } else {
+                        const anchors = Array.prototype.slice.call(target.getElementsByTagName('a'));
+                        anchors.forEach((anchor) => (anchor.href = getEnvUrl(anchor.href, ENV)));
                     }
                 });
             };
@@ -87,7 +86,7 @@ export const Header = () => {
                 observer.disconnect();
             };
         }
-    }, []);
+    }, [menypunkt]);
 
     // React-modal fix
     useEffect(() => {
