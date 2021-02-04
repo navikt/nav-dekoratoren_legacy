@@ -40,7 +40,7 @@ export const FeedbackInformasjon = React.memo(() => {
             <Normaltekst>
                 <Tekst id="advarsel-om-personopplysninger" />
             </Normaltekst>
-            <Normaltekst>
+            <Normaltekst className={'feedback-kontakt-oss'}>
                 <KontaktOss href={kontaktOssUrl} />
             </Normaltekst>
         </>
