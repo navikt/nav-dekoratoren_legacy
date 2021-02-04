@@ -57,13 +57,35 @@ export const Header = () => {
 
     const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie, unleashCacheCookie]);
 
-    // Override links
+    // Change links from url-lookup-table
     useEffect(() => {
         if (PARAMS.URL_LOOKUP_TABLE && ENV !== 'prod') {
+            // Initial change
             const anchors = document.getElementsByTagName('a');
             for (let i = 0; i < anchors.length; i++) {
                 anchors[i].href = getEnvUrl(anchors[i].href, ENV);
             }
+
+            // After dom changes
+            const targetNode = document.body;
+            const config = { attributes: true, childList: true, subtree: true };
+            const callback = (mutationsList: MutationRecord[]) => {
+                mutationsList.forEach((mutation) => {
+                    const target = mutation.target as HTMLLinkElement;
+                    if (target.tagName === 'A') {
+                        console.log(target);
+                        if (target.href !== getEnvUrl(target.href, ENV)) {
+                            target.setAttribute('href', getEnvUrl(target.href, ENV));
+                        }
+                    }
+                });
+            };
+
+            const observer = new MutationObserver(callback);
+            observer.observe(targetNode, config);
+            return () => {
+                observer.disconnect();
+            };
         }
     }, []);
 
