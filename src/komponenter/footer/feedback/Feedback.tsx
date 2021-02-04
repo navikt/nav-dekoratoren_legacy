@@ -5,7 +5,7 @@ import { Knapp } from 'nav-frontend-knapper';
 import AlternativJa from './feedback-questions/AlternativJa';
 import AlternativNei from './feedback-questions/AlternativNei';
 import { logAmplitudeEvent } from 'utils/amplitude';
-import Thankyou from './feedback-thank-you/ThankYou';
+import ThankYou from './feedback-thank-you/ThankYou';
 import './Feedback.less';
 
 export type FeedbackState = 'lukket' | 'ja' | 'nei' | 'besvart';
@@ -47,7 +47,7 @@ const Feedback = () => {
                 {state === 'ja' && <AlternativJa state={state} settBesvart={() => setState('besvart')} />}
                 {}
                 {state === 'nei' && <AlternativNei state={state} settBesvart={() => setState('besvart')} />}
-                {state === 'besvart' && <Thankyou />}
+                {state === 'besvart' && <ThankYou />}
             </div>
         </>
     );
