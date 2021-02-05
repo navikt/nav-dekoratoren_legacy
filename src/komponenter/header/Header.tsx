@@ -28,7 +28,7 @@ import { validateContext } from '../../server/utils';
 import { validateLanguage, validateLevel } from '../../server/utils';
 import { setParams } from '../../store/reducers/environment-duck';
 import Modal from 'nav-frontend-modal';
-import { getEnvUrl } from '../../url-lookup-table';
+import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
@@ -62,14 +62,15 @@ export const Header = () => {
     const setUrlLookupTableUrls = () => {
         const anchors = Array.prototype.slice.call(document.getElementsByTagName('a'));
         anchors.forEach((anchor) => {
-            if (anchor.href !== getEnvUrl(anchor.href, ENV)) {
-                anchor.href = getEnvUrl(anchor.href, ENV);
+            const envUrl = getUrlFromLookupTable(anchor.href, ENV as 'dev' | 'q0' | 'q1' | 'q2' | 'q6');
+            if (anchor.href !== envUrl) {
+                anchor.href = envUrl;
             }
         });
     };
 
     useEffect(() => {
-        if (PARAMS.URL_LOOKUP_TABLE && ENV && ENV !== 'localhost' && ENV !== 'prod') {
+        if (ENV && PARAMS.URL_LOOKUP_TABLE && ENV !== 'localhost' && ENV !== 'prod') {
             // Initial change
             setUrlLookupTableUrls();
 
