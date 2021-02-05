@@ -30,8 +30,6 @@ spec:
           value: q1
         - name: XP_BASE_URL
           value: https://www-q1.nav.no
-        - name: XP_BASE_URL
-          value: https://www-q1.nav.no
         - name: APP_BASE_URL
           value: https://www-q1.nav.no
         - name: APP_BASE_PATH
