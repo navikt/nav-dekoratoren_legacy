@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMenypunkter, MenyPunkter } from 'store/reducers/menu-duck';
+import { fetchMenypunkter } from 'store/reducers/menu-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { HeaderSimple } from 'komponenter/header/header-simple/HeaderSimple';
 import { HeaderRegular } from 'komponenter/header/header-regular/HeaderRegular';
