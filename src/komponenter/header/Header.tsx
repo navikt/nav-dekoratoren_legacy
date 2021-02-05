@@ -69,7 +69,7 @@ export const Header = () => {
     };
 
     useEffect(() => {
-        if (PARAMS.URL_LOOKUP_TABLE && ENV !== 'prod') {
+        if (PARAMS.URL_LOOKUP_TABLE && ENV && ENV !== 'localhost' && ENV !== 'prod') {
             // Initial change
             setUrlLookupTableUrls();
 

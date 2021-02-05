@@ -147,6 +147,7 @@ dekoratoren:
     ports:
       - "8100:8088"
     environment:
+      ENV: 'localhost' | 'q0' | 'q1' | 'q2' | "q6" | "prod"
       XP_BASE_URL: 'https://www.nav.no'
       APP_BASE_URL: 'http://localhost:8100'
       APP_BASE_PATH: '/dekoratoren'
