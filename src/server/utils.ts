@@ -29,6 +29,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
 
     return {
+        ENV: process.env.ENV as string,
         XP_BASE_URL: process.env.XP_BASE_URL as string,
         APP_URL: appUrl as string,
         APP_BASE_URL: process.env.APP_BASE_URL as string,
@@ -60,6 +61,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 }),
                 FEEDBACK: req.query.feedback === 'true',
                 CHATBOT: req.query.chatbot !== 'false',
+                URL_LOOKUP_TABLE: req.query.urlLookupTable !== 'false',
             },
         }),
         ...(cookies && {

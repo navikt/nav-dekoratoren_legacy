@@ -28,6 +28,7 @@ import { validateContext } from '../../server/utils';
 import { validateLanguage, validateLevel } from '../../server/utils';
 import { setParams } from '../../store/reducers/environment-duck';
 import Modal from 'nav-frontend-modal';
+import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
@@ -35,6 +36,7 @@ export const decoratorContextCookie = 'decorator-context';
 export const decoratorLanguageCookie = 'decorator-language';
 
 const stateSelector = (state: AppState) => ({
+    menypunkt: state.menypunkt,
     innloggingsstatus: state.innloggingsstatus,
     arbeidsflate: state.arbeidsflate.status,
     language: state.language.language,
@@ -47,14 +49,43 @@ export const Header = () => {
     const [sentAuthToApp, setSentAuthToApp] = useState(false);
     const { environment } = useSelector(stateSelector);
     const { arbeidsflate } = useSelector(stateSelector);
-    const { innloggingsstatus } = useSelector(stateSelector);
+    const { innloggingsstatus, menypunkt } = useSelector(stateSelector);
     const { authenticated } = innloggingsstatus.data;
-    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL, API_INNLOGGINGSLINJE_URL } = environment;
+    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL, API_INNLOGGINGSLINJE_URL, ENV } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
     const breadcrumbs = PARAMS.BREADCRUMBS || [];
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
 
     const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie, unleashCacheCookie]);
+
+    // Map prod to dev urls with url-lookup-table
+    const setUrlLookupTableUrls = () => {
+        const anchors = Array.prototype.slice.call(document.getElementsByTagName('a'));
+        anchors.forEach((anchor) => {
+            const envUrl = getUrlFromLookupTable(anchor.href, ENV as 'dev' | 'q0' | 'q1' | 'q2' | 'q6');
+            if (anchor.href !== envUrl) {
+                anchor.href = envUrl;
+            }
+        });
+    };
+
+    useEffect(() => {
+        if (ENV && PARAMS.URL_LOOKUP_TABLE && ENV !== 'localhost' && ENV !== 'prod') {
+            // Initial change
+            setUrlLookupTableUrls();
+
+            // After dom changes
+            const targetNode = document.body;
+            const config = { attributes: true, childList: true, subtree: true };
+            const callback = () => setUrlLookupTableUrls();
+
+            const observer = new MutationObserver(callback);
+            observer.observe(targetNode, config);
+            return () => {
+                observer.disconnect();
+            };
+        }
+    }, [menypunkt]);
 
     // React-modal fix
     useEffect(() => {

@@ -4,6 +4,7 @@ import { Locale, AvailableLanguage } from './language-duck';
 import { Breadcrumb } from '../../komponenter/header/common/brodsmulesti/Brodsmulesti';
 
 export interface Environment {
+    ENV: string;
     XP_BASE_URL: string;
     APP_URL: string;
     APP_BASE_URL: string;
@@ -36,6 +37,7 @@ export interface Params {
     BREADCRUMBS?: Breadcrumb[];
     FEEDBACK: boolean;
     CHATBOT: boolean;
+    URL_LOOKUP_TABLE: boolean;
 }
 
 export interface Cookies {
@@ -44,6 +46,7 @@ export interface Cookies {
 }
 
 export const initialState: Environment = {
+    ENV: '',
     XP_BASE_URL: '',
     APP_URL: '',
     APP_BASE_URL: '',
@@ -70,6 +73,7 @@ export const initialState: Environment = {
         LANGUAGE: Locale.IKKEBESTEMT,
         FEEDBACK: false,
         CHATBOT: false,
+        URL_LOOKUP_TABLE: false,
     },
 
     // Cookies
