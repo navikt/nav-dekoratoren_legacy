@@ -10,13 +10,10 @@ export interface Arbeidsflate {
 }
 
 export const initialState: Arbeidsflate = {
-    status: MenuValue.IKKEBESTEMT,
+    status: MenuValue.PRIVATPERSON,
 };
 
-export const reducer = (
-    state: Arbeidsflate = initialState,
-    action: Handling
-): Arbeidsflate => {
+export const reducer = (state: Arbeidsflate = initialState, action: Handling): Arbeidsflate => {
     switch (action.type) {
         case ActionType.PRIVATPERSON: {
             return { ...state, status: MenuValue.PRIVATPERSON };
