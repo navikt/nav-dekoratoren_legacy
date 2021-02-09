@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -6,12 +6,12 @@ import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbei
 import { AnalyticsCategory } from 'utils/analytics';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { useCookies } from 'react-cookie';
+import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { erNavDekoratoren } from 'utils/Environment';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { MenuValue } from 'utils/meny-storage-utils';
 import './Arbeidsflatemeny.less';
 
 const Arbeidsflatemeny = () => {
@@ -19,12 +19,7 @@ const Arbeidsflatemeny = () => {
     const dispatch = useDispatch();
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const [, setCookie] = useCookies(['decorator-context']);
-    const reduxArbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
-    const [arbeidsflate, settArbeidsflate] = useState<MenuValue>(MenuValue.IKKEBESTEMT);
-
-    useEffect(() => {
-        settArbeidsflate(reduxArbeidsflate);
-    }, []);
+    const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
 
     return (
         <nav className={cls.className} id={cls.className} aria-label="Velg brukergruppe">
