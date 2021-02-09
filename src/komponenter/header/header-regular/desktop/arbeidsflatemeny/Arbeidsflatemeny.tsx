@@ -32,7 +32,7 @@ const Arbeidsflatemeny = () => {
                             role="tab"
                             aria-selected={arbeidsflate === lenke.key}
                             className={cls.element('liste-element')}
-                            key={lenke.key}
+                            key={`${arbeidsflate}-${lenke.key}`}
                         >
                             <LenkeMedSporing
                                 classNameOverride={cls.element('lenke')}
