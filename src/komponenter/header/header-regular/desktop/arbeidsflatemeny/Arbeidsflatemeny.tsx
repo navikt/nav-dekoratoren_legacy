@@ -21,6 +21,8 @@ const Arbeidsflatemeny = () => {
     const [, setCookie] = useCookies(['decorator-context']);
     const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
 
+    console.log(arbeidsflate);
+
     return (
         <nav className={cls.className} id={cls.className} aria-label="Velg brukergruppe">
             <ul className={cls.element('topp-liste-rad')} role="tablist">
