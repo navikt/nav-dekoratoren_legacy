@@ -26,6 +26,8 @@ spec:
         - https://appres-q1.nav.no/common-html/v4/navno
         - https://www-q1.nav.no/dekoratoren
     env:
+        - name: ENV
+          value: q1
         - name: XP_BASE_URL
           value: https://www-q1.nav.no
         - name: APP_BASE_URL
@@ -39,7 +41,7 @@ spec:
         - name: API_INNLOGGINGSLINJE_URL
           value: https://innloggingsstatus.dev.nav.no/person/innloggingsstatus
         - name: API_UNLEASH_PROXY_URL
-          value: https://www-q1.nav.no/person/pb-unleash-proxy
+          value: https://www.dev.nav.no/person/pb-unleash-proxy
         - name: MINSIDE_ARBEIDSGIVER_URL
           value: https://arbeidsgiver-q1.nav.no/min-side-arbeidsgiver/
         - name: DITT_NAV_URL

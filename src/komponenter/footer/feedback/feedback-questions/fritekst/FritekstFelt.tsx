@@ -2,14 +2,13 @@ import React, { useEffect, Dispatch } from 'react';
 import { Textarea, TextareaProps } from 'nav-frontend-skjema';
 import { checkForViolations, getViolationErrorMessage } from './Sanitizer';
 import { useDebounce } from '../../../../../utils/hooks/useDebounce';
-import './FritekstFelt.less';
 import Tekst, { finnTekst } from '../../../../../tekster/finn-tekst';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../../../store/reducers';
-import { KontaktOss } from '../AlternativCommon';
 import { Ingress } from 'nav-frontend-typografi';
+import './FritekstFelt.less';
 
-export const MAX_LENGTH = 1000;
+export const MAX_LENGTH = 200;
 
 export interface FritekstFeil {
     invalidInput?: string;
@@ -56,7 +55,6 @@ interface Props extends Partial<TextareaProps> {
 
 const FritekstFelt = (props: Props) => {
     const { language } = useSelector((state: AppState) => state.language);
-    const { environment } = useSelector((state: AppState) => state);
     const debouncedInputVerdier = useDebounce(props.feedbackMessage, 500);
     const { feedbackMessage, setErrors, harTrykketSubmit } = props;
 
@@ -113,12 +111,7 @@ const FritekstFelt = (props: Props) => {
             feil={
                 props.errors.invalidInput || props.errors.maxLength ? (
                     <>
-                        {props.errors.invalidInput && (
-                            <>
-                                <>{props.errors.invalidInput}</>
-                                <KontaktOss href={`${environment.XP_BASE_URL}/person/kontakt-oss`} />
-                            </>
-                        )}
+                        {props.errors.invalidInput && <>{props.errors.invalidInput}</>}
                         {props.errors.maxLength && <span> {props.errors.maxLength}</span>}
                     </>
                 ) : null
