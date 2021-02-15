@@ -3,6 +3,7 @@ import TagManager from 'react-gtm-module';
 import { MenuValue } from './meny-storage-utils';
 import { initAmplitude } from 'utils/amplitude';
 import { logAmplitudeEvent } from 'utils/amplitude';
+import { Params } from 'store/reducers/environment-duck';
 
 const trackingId = 'UA-9127381-16';
 
@@ -24,9 +25,9 @@ export type AnalyticsEventArgs = {
     label?: string;
 };
 
-export const initAnalytics = () => {
+export const initAnalytics = (params: Params) => {
     TagManager.initialize(tagManagerArgs);
-    initAmplitude();
+    initAmplitude(params);
     ReactGA.initialize(trackingId, {
         titleCase: false,
         debug: false,

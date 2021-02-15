@@ -25,9 +25,9 @@ if (erDev) {
 }
 
 const run = () => {
-    initAnalytics();
     fetchEnv()
         .then((environment) => {
+            initAnalytics(environment.PARAMS);
             const cookies = new Cookies();
             const store = createStore(environment, cookies);
             ReactDOM.hydrate(

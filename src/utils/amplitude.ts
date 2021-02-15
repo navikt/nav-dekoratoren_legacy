@@ -1,9 +1,10 @@
 import { verifyWindowObj } from 'utils/Environment';
+import { Params } from 'store/reducers/environment-duck';
 
 // Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
 const amplitude = verifyWindowObj() ? require('amplitude-js') : () => null;
 
-export const initAmplitude = () => {
+export const initAmplitude = (params: Params) => {
     if (amplitude) {
         amplitude.getInstance().init('default', '', {
             apiEndpoint: 'amplitude.nav.no/collect-auto',
@@ -14,6 +15,7 @@ export const initAmplitude = () => {
         });
         logAmplitudeEvent('sidevisning', {
             sidetittel: document.title,
+            parametre: params,
         });
     }
 };
