@@ -27,7 +27,6 @@ export type AnalyticsEventArgs = {
 
 export const initAnalytics = (params: Params) => {
     TagManager.initialize(tagManagerArgs);
-    console.log(params);
     initAmplitude(params);
     ReactGA.initialize(trackingId, {
         titleCase: false,
