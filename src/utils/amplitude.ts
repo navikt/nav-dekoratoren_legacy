@@ -1,14 +1,5 @@
 import { verifyWindowObj } from 'utils/Environment';
 import { Params } from 'store/reducers/environment-duck';
-import { initialState } from 'store/reducers/environment-duck';
-
-const defaultParams = initialState.PARAMS;
-
-// const getNonDefaultParams = (params: Params) => {
-//     return Object.keys(params).reduce((acc, key) => {
-//         return params[key as keyof Params] !== defaultParams[key as keyof Params] ? { ...acc } : acc;
-//     }, {});
-// };
 
 // Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
 const amplitude = verifyWindowObj() ? require('amplitude-js') : () => null;
