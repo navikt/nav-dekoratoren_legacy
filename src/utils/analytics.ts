@@ -3,7 +3,6 @@ import { MenuValue } from './meny-storage-utils';
 import { initAmplitude } from 'utils/amplitude';
 import { logAmplitudeEvent } from 'utils/amplitude';
 import { Params } from 'store/reducers/environment-duck';
-import { dataInitState } from 'store/reducers/menu-duck';
 
 const tagManagerArgs = {
     gtmId: 'GTM-PM9RP3',
