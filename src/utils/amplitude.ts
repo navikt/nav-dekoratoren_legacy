@@ -15,7 +15,11 @@ export const initAmplitude = (params: Params) => {
         });
         logAmplitudeEvent('sidevisning', {
             sidetittel: document.title,
-            parametre: params,
+            parametre: {
+                ...params,
+                BREADCRUMBS: !!(params?.BREADCRUMBS && params.BREADCRUMBS.length > 0),
+                AVAILABLE_LANGUAGES: !!(params?.AVAILABLE_LANGUAGES && params.AVAILABLE_LANGUAGES.length > 0),
+            },
         });
     }
 };
