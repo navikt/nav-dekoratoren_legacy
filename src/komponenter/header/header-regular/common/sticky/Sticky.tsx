@@ -65,7 +65,7 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
             const headerHeight = stickyRef.current?.getBoundingClientRect().height;
             const targetPos = (e.target as HTMLElement)?.getBoundingClientRect().top;
 
-            if (!headerHeight || !targetPos) {
+            if (!headerHeight || targetPos === null || targetPos === undefined) {
                 return;
             }
 
