@@ -11,7 +11,6 @@ type Props = {
 
 export const StickyHeader = ({ mobilFixed, children }: Props) => {
     const prevScrollOffset = useRef(0);
-
     const placeholderRef = useRef<HTMLDivElement>(null);
     const stickyRef = useRef<HTMLDivElement>(null);
 
@@ -62,7 +61,7 @@ export const StickyHeader = ({ mobilFixed, children }: Props) => {
             // @ts-ignore (e.path is legacy/non-standard)
             const eventPath = e.composedPath?.() || e.path;
             // The header can't overlap itself, skip this handler for elements focused inside the header
-            if (eventPath.some((path) => (path as HTMLElement)?.id === 'decorator-header')) {
+            if (eventPath.some((path) => (path as HTMLElement)?.className.includes('header-z-wrapper'))) {
                 return;
             }
 
