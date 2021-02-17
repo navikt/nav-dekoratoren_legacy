@@ -32,7 +32,7 @@ jobs:
         run: |
           echo $GITHUB_TOKEN | docker login $IMAGE_REGISTRY -u ${GITHUB_REPOSITORY} --password-stdin
           docker build -t $IMAGE_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION -t $IMAGE_REGISTRY/$IMAGE_NAME:latest .
-          docker push $IMAGE_REGISTRY/$IMAGE_NAME
+          docker push $IMAGE_REGISTRY/$IMAGE_NAME --all-tags
       - name: Generate nais variables
         run: |
           cat > .nais/vars.yaml <<EOF
