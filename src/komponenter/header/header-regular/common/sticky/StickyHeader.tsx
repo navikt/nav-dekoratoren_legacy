@@ -61,7 +61,7 @@ export const StickyHeader = ({ mobilFixed, children }: Props) => {
             // @ts-ignore (e.path is legacy/non-standard)
             const eventPath = e.composedPath?.() || e.path;
             // The header can't overlap itself, skip this handler for elements focused inside the header
-            if (eventPath.some((path) => (path as HTMLElement)?.className.includes('header-z-wrapper'))) {
+            if (eventPath.some((path) => (path as HTMLElement)?.className?.includes('header-z-wrapper'))) {
                 return;
             }
 
