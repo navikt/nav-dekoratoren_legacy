@@ -29,11 +29,7 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
             return;
         }
 
-        const setStickyOffset = stickyScrollHandler(
-            prevScrollOffset,
-            stickyElement,
-            placeholderElement
-        );
+        const setStickyOffset = stickyScrollHandler(prevScrollOffset, stickyElement, placeholderElement);
 
         const deferStickyOnAnchorLink = (e: MouseEvent) => {
             const anchorId = getLinkAnchorId(e.target as HTMLElement);
@@ -44,16 +40,9 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
             const startTime = Date.now();
             const deferredScrollHandler = () => {
                 const anchorElement = document.getElementById(anchorId);
-                if (
-                    !anchorElement ||
-                    anchorElement.getBoundingClientRect().top >= 0 ||
-                    Date.now() - startTime > 1000
-                ) {
+                if (!anchorElement || anchorElement.getBoundingClientRect().top >= 0 || Date.now() - startTime > 1000) {
                     setTimeout(() => {
-                        window.removeEventListener(
-                            'scroll',
-                            deferredScrollHandler
-                        );
+                        window.removeEventListener('scroll', deferredScrollHandler);
                         window.addEventListener('scroll', setStickyOffset);
                     }, 200);
                 }
@@ -67,6 +56,31 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
             window.addEventListener('scroll', deferredScrollHandler);
         };
 
+        // Scroll past the header height if the element that will get focus may get hidden
+        // by the sticky header
+        const onFocusChange = (e: FocusEvent) => {
+            console.log('focus target:', e.target);
+            console.log('focus position:', (e.target as HTMLElement).getBoundingClientRect().top);
+
+            const headerHeight = stickyRef.current?.getBoundingClientRect().height;
+            const targetPos = (e.target as HTMLElement)?.getBoundingClientRect().top;
+
+            if (!headerHeight || !targetPos) {
+                return;
+            }
+
+            const requiredFocucedElementOffset = headerHeight - targetPos + 4;
+
+            if (requiredFocucedElementOffset > 0) {
+                window.scrollTo(0, window.scrollY - requiredFocucedElementOffset);
+            }
+        };
+
+        // Exclude the header from the previous handler
+        const onFocusChangeHeader = (e: FocusEvent) => {
+            e.stopPropagation();
+        };
+
         const setElementSizeAndBaseOffset = () => {
             placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
             setStickyOffset();
@@ -74,10 +88,16 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
 
         setElementSizeAndBaseOffset();
 
+        const headerElement = document.getElementById('decorator-header');
+
+        window.addEventListener('focusin', onFocusChange);
+        headerElement?.addEventListener('focusin', onFocusChangeHeader, true);
         window.addEventListener('scroll', setStickyOffset);
         window.addEventListener('resize', setElementSizeAndBaseOffset);
         window.addEventListener('click', deferStickyOnAnchorLink);
         return () => {
+            window.removeEventListener('focusin', onFocusChange);
+            headerElement?.removeEventListener('focusin', onFocusChangeHeader, true);
             window.removeEventListener('scroll', setStickyOffset);
             window.removeEventListener('resize', setElementSizeAndBaseOffset);
             window.removeEventListener('click', deferStickyOnAnchorLink);
@@ -86,12 +106,7 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
 
     return (
         <div className={'sticky-placeholder'} ref={placeholderRef}>
-            <div
-                className={`sticky-container ${
-                    mobilFixed ? 'sticky-container--mobil-fixed' : ''
-                }`}
-                ref={stickyRef}
-            >
+            <div className={`sticky-container ${mobilFixed ? 'sticky-container--mobil-fixed' : ''}`} ref={stickyRef}>
                 {children}
             </div>
         </div>
