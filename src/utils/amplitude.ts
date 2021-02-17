@@ -18,7 +18,9 @@ export const initAmplitude = (params: Params) => {
             parametre: {
                 ...params,
                 BREADCRUMBS: !!(params?.BREADCRUMBS && params.BREADCRUMBS.length > 0),
-                AVAILABLE_LANGUAGES: !!(params?.AVAILABLE_LANGUAGES && params.AVAILABLE_LANGUAGES.length > 0),
+                ...(params.AVAILABLE_LANGUAGES && {
+                    AVAILABLE_LANGUAGES: params.AVAILABLE_LANGUAGES.map((lang) => lang.locale),
+                }),
             },
         });
     }
