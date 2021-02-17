@@ -3,7 +3,7 @@ import BEMHelper from 'utils/bem';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import Navn from './navn/Navn';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
-import { Sticky } from 'komponenter/header/header-regular/common/sticky/Sticky';
+import { StickyHeader } from 'komponenter/header/header-regular/common/sticky/StickyHeader';
 import { AnalyticsCategory } from 'utils/analytics';
 import Logo from 'ikoner/meny/nav-logo-black.svg';
 import './HeaderSimple.less';
@@ -12,7 +12,7 @@ export const HeaderSimple = () => {
     const cls = BEMHelper('simple-header');
 
     return (
-        <Sticky>
+        <StickyHeader>
             <div className={cls.className}>
                 <div className={cls.element('content')}>
                     <NavLogoLenke
@@ -28,6 +28,6 @@ export const HeaderSimple = () => {
                     </div>
                 </div>
             </div>
-        </Sticky>
+        </StickyHeader>
     );
 };

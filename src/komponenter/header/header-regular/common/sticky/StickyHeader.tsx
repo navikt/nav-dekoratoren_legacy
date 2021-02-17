@@ -9,7 +9,7 @@ type Props = {
     children: JSX.Element;
 };
 
-export const Sticky = ({ mobilFixed, children }: Props) => {
+export const StickyHeader = ({ mobilFixed, children }: Props) => {
     const prevScrollOffset = useRef(0);
 
     const placeholderRef = useRef<HTMLDivElement>(null);
@@ -58,7 +58,14 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
 
         // Scroll past the header height if the element that will get focus may get hidden
         // by the sticky header
-        const onFocusChange = (e: FocusEvent) => {
+        const focusOverlapHandler = (e: FocusEvent) => {
+            // @ts-ignore (e.path is legacy/non-standard)
+            const eventPath = e.composedPath?.() || e.path;
+            // The header can't overlap itself, skip this handler for elements focused inside the header
+            if (eventPath.some((path) => (path as HTMLElement)?.id === 'decorator-header')) {
+                return;
+            }
+
             console.log('focus target:', e.target);
             console.log('focus position:', (e.target as HTMLElement).getBoundingClientRect().top);
 
@@ -76,11 +83,6 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
             }
         };
 
-        // Exclude the header from the previous handler
-        const onFocusChangeHeader = (e: FocusEvent) => {
-            e.stopPropagation();
-        };
-
         const setElementSizeAndBaseOffset = () => {
             placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
             setStickyOffset();
@@ -88,16 +90,12 @@ export const Sticky = ({ mobilFixed, children }: Props) => {
 
         setElementSizeAndBaseOffset();
 
-        const headerElement = document.getElementById('decorator-header');
-
-        window.addEventListener('focusin', onFocusChange);
-        headerElement?.addEventListener('focusin', onFocusChangeHeader, true);
+        window.addEventListener('focusin', focusOverlapHandler);
         window.addEventListener('scroll', setStickyOffset);
         window.addEventListener('resize', setElementSizeAndBaseOffset);
         window.addEventListener('click', deferStickyOnAnchorLink);
         return () => {
-            window.removeEventListener('focusin', onFocusChange);
-            headerElement?.removeEventListener('focusin', onFocusChangeHeader, true);
+            window.removeEventListener('focusin', focusOverlapHandler);
             window.removeEventListener('scroll', setStickyOffset);
             window.removeEventListener('resize', setElementSizeAndBaseOffset);
             window.removeEventListener('click', deferStickyOnAnchorLink);
