@@ -1,11 +1,14 @@
+import React from 'react';
+
+const focusMarginPx = 4;
+
 const getElementOffsetFromPageTop = (element: HTMLElement) => {
     return element?.getBoundingClientRect()?.top + window?.pageYOffset || 0;
 };
 
-export const setTop = (element: HTMLElement, top: number) =>
-    (element.style.top = `${top}px`);
+const setTop = (element: HTMLElement, top: number) => (element.style.top = `${top}px`);
 
-export const getLinkAnchorId = (element: HTMLElement | null): string | null => {
+const getLinkAnchorId = (element: HTMLElement | null): string | null => {
     if (!element) {
         return null;
     }
@@ -15,6 +18,7 @@ export const getLinkAnchorId = (element: HTMLElement | null): string | null => {
     return getLinkAnchorId(element.parentElement);
 };
 
+// Updates the sticky-header position
 export const stickyScrollHandler = (
     prevScrollOffset: React.MutableRefObject<number>,
     stickyElement: HTMLElement,
@@ -32,8 +36,7 @@ export const stickyScrollHandler = (
     const onScrollDown = () => {
         if (stickyElement.style.position !== 'absolute') {
             stickyElement.style.position = 'absolute';
-            const absoluteOffsetFromFixed =
-                scrollOffset + Math.min(elementOffset, 0) - baseOffset;
+            const absoluteOffsetFromFixed = scrollOffset + Math.min(elementOffset, 0) - baseOffset;
             setTop(stickyElement, absoluteOffsetFromFixed);
         }
     };
@@ -59,4 +62,60 @@ export const stickyScrollHandler = (
     }
 
     prevScrollOffset.current = scrollOffset;
+};
+
+// Set the sticky-header to the top of the page, and defer updates to the sticky-position for
+// up to one second. We want to minimize the chance of the header overlapping the anchor-link target
+export const deferStickyOnAnchorLinkHandler = (
+    prevScrollOffset: React.MutableRefObject<number>,
+    stickyElement: HTMLElement,
+    stickyScrollHandler: () => void
+) => (e: MouseEvent) => {
+    const anchorId = getLinkAnchorId(e.target as HTMLElement);
+    if (!anchorId) {
+        return;
+    }
+
+    const startTime = Date.now();
+    const deferredScrollHandler = () => {
+        const anchorElement = document.getElementById(anchorId);
+        if (!anchorElement || anchorElement.getBoundingClientRect().top >= 0 || Date.now() - startTime > 1000) {
+            setTimeout(() => {
+                window.removeEventListener('scroll', deferredScrollHandler);
+                window.addEventListener('scroll', stickyScrollHandler);
+            }, 200);
+        }
+    };
+
+    stickyElement.style.position = 'absolute';
+    prevScrollOffset.current = 0;
+    setTop(stickyElement, 0);
+
+    window.removeEventListener('scroll', stickyScrollHandler);
+    window.addEventListener('scroll', deferredScrollHandler);
+};
+
+// If the element that will get focus may get overlapped by the sticky header, alter
+// the scroll-position to prevent this from happening
+export const focusOverlapHandler = (stickyElement: HTMLElement) => (e: FocusEvent) => {
+    // @ts-ignore (e.path is legacy/non-standard)
+    const eventPath = e.composedPath?.() || e.path;
+
+    // Skip this handler for elements focused inside the header, as the header can't overlap itself
+    if (eventPath.some((path) => (path as HTMLElement)?.className?.includes('header-z-wrapper'))) {
+        return;
+    }
+
+    const headerHeight = stickyElement?.getBoundingClientRect().height;
+    const targetPos = (e.target as HTMLElement)?.getBoundingClientRect().top;
+
+    if (!headerHeight || targetPos === null || targetPos === undefined) {
+        return;
+    }
+
+    const requiredScrollOffset = headerHeight - targetPos + focusMarginPx;
+
+    if (requiredScrollOffset > 0) {
+        window.scrollTo(window.scrollX, window.scrollY - requiredScrollOffset);
+    }
 };
