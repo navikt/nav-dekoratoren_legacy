@@ -9,7 +9,7 @@ type Props = {
     children: JSX.Element;
 };
 
-export const StickyHeader = ({ mobileFixed, children }: Props) => {
+export const Sticky = ({ mobileFixed, children }: Props) => {
     const prevScrollOffset = useRef(0);
     const placeholderRef = useRef<HTMLDivElement>(null);
     const stickyRef = useRef<HTMLDivElement>(null);

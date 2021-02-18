@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
 import { Locale } from 'store/reducers/language-duck';
-import { StickyHeader } from 'komponenter/header/header-regular/common/sticky/StickyHeader';
+import { Sticky } from 'komponenter/header/header-regular/common/sticky/Sticky';
 import Skiplinks from 'komponenter/header/header-regular/common/skiplinks/Skiplinks';
 import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
 import { HeaderMenylinje } from 'komponenter/header/header-regular/HeaderMenylinje';
@@ -26,9 +26,9 @@ export const HeaderRegular = () => {
             <Skiplinks />
             <div className="header-z-wrapper">
                 {isLanguageNorwegian && <Arbeidsflatemeny />}
-                <StickyHeader mobileFixed={mobilMenyIsOpen}>
+                <Sticky mobileFixed={mobilMenyIsOpen}>
                     <HeaderMenylinje />
-                </StickyHeader>
+                </Sticky>
             </div>
             <MenyBakgrunn />
         </Fragment>
