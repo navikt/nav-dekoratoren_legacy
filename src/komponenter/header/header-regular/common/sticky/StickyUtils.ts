@@ -116,6 +116,6 @@ export const focusOverlapHandler = (stickyElement: HTMLElement) => (e: FocusEven
     const requiredScrollOffset = headerHeight - targetPos + focusMarginPx;
 
     if (requiredScrollOffset > 0) {
-        window.scrollTo(0, window.scrollY - requiredScrollOffset);
+        window.scrollTo(window.scrollX, window.scrollY - requiredScrollOffset);
     }
 };
