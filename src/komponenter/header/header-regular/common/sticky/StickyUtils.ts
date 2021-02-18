@@ -102,7 +102,8 @@ export const focusOverlapHandler = (stickyElement: HTMLElement) => (e: FocusEven
     const eventPath = e.composedPath?.() || e.path;
 
     // Skip this handler for elements focused inside the header, as the header can't overlap itself
-    if (eventPath.some((path) => (path as HTMLElement)?.className?.includes('header-z-wrapper'))) {
+    // (and for browsers without composedPath/path support)
+    if (!eventPath || eventPath.some((path) => (path as HTMLElement)?.className?.includes('header-z-wrapper'))) {
         return;
     }
 
