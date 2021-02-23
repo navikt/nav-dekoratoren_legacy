@@ -98,6 +98,15 @@ export const deferStickyOnAnchorLinkHandler = (
 // If the element that will get focus may get overlapped by the sticky header, alter
 // the scroll-position to prevent this from happening
 export const focusOverlapHandler = (stickyElement: HTMLElement) => (e: FocusEvent) => {
+    // @ts-ignore (e.path is legacy/non-standard)
+    const eventPath = e.composedPath?.() || e.path;
+
+    // Skip this handler for elements focused inside the header, as the header can't overlap itself
+    // (Also skip for browsers without composedPath/path support)
+    if (!eventPath?.some || eventPath.some((path) => (path as HTMLElement)?.className?.includes('header-z-wrapper'))) {
+        return;
+    }
+
     const headerHeight = stickyElement?.getBoundingClientRect().height;
     const targetPos = (e.target as HTMLElement)?.getBoundingClientRect().top;
 
