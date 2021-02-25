@@ -21,15 +21,17 @@ export const ChatbotWrapper = ({ ...properties }: any) => {
         setIsMounted(!chatbotVersion122IsMounted && isChatbotEnabled);
     }, [isChatbotEnabled]);
 
-    const boostApiUrlBase =
-        verifyWindowObj() && stagingUrlHosts.includes(window.location.host)
-            ? 'https://staging-navtest.boost.ai/api/chat/v2'
-            : 'https://nav.boost.ai/api/chat/v2';
+    const isStaging = verifyWindowObj() 
+        && stagingUrlHosts.includes(window.location.host);
+    const boostApiUrlBase = isStaging
+        ? 'https://staging-navtest.boost.ai/api/chat/v2'
+        : 'https://nav.boost.ai/api/chat/v2';
+    const actionFilters = isStaging ? ['NAV_TEST'] : undefined;
 
     return isMounted ? (
         <Chatbot
             {...properties}
-            {...{ boostApiUrlBase }}
+            {...{ boostApiUrlBase, actionFilters }}
             analyticsCallback={properties.analyticsCallback ?? logAmplitudeEvent}
         />
     ) : null;
