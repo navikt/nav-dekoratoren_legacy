@@ -56,8 +56,8 @@ export type Props = Params & (
 );
 
 // Bruk
-import { injectDecorator } from '@navikt/nav-dekoratoren-moduler/ssr'
-injectDecorator({ env: "dev", filePath: "index.html", simple: true, chatbot: true })
+import { injectDecoratorServerSide } from '@navikt/nav-dekoratoren-moduler/ssr'
+injectDecoratorServerSide({ env: "dev", filePath: "index.html", simple: true, chatbot: true })
     .then((html) => {
         res.send(html);
     })
