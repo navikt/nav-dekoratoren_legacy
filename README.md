@@ -42,11 +42,11 @@ accessPolicy:
 ## Implementasjon
 
 Dekoratøren kan implementeres på flere ulike måter, både server-side og client-side.
+Ved bruk av Node.js kan [@navikt/nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler#readme) benyttes.
 
 ### Eksempel 1
 
-Hent dekoratøren server-side og send HTML til brukeren som inkluderer dekoratøren.
-Ved bruk av NodeJS kan [@navikt/nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler#readme) benyttes:
+Hent dekoratøren server-side og send HTML til brukeren som inkluderer dekoratøren:
 
 ```
 // Type
@@ -67,7 +67,7 @@ injectDecoratorServerSide({ env: "dev", filePath: "index.html", simple: true, ch
 ```
 
 [Eksempel i Personopplysninger](https://github.com/navikt/personopplysninger/blob/master/server/dekorator.js). <br>
-Ved bruk av andre teknologier kan dekoratøren hentes ved hjelp av HTTP kall. Eksempel i
+Ved bruk av andre teknologier kan dekoratøren hentes ved hjelp av HTTP kall. <br>Eksempel i
 pseudokode:
 
 ```
@@ -88,7 +88,20 @@ fetch("{MILJO_URL}/?{DINE_PARAMETERE}").then(res => {
 
 ### Eksempel 2
 
-Sett inn noen linjer HTML og last inn dekoratøren client-side:
+Alt 1 - Hent dekoratøren client-side vha. [@navikt/nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler#readme): <br>
+
+```
+import { injectDecoratorClientSide } from '@navikt/nav-dekoratoren-moduler'
+injectDecoratorClientSide({
+    env: "localhost",
+    port: 8100,
+    enforceLogin: true,
+    level: "Level4",
+    redirectToApp: true,
+});
+```
+
+Alt 2 - Sett inn noen linjer HTML:
 
 ```
 <html>
