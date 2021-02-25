@@ -45,22 +45,50 @@ Dekoratøren kan implementeres på flere ulike måter, både server-side og clie
 
 ### Eksempel 1
 
-Hent dekoratøren server-side og send html til brukeren som inkluderer dekoratøren:
+Hent dekoratøren server-side og send HTML til brukeren som inkluderer dekoratøren.
+Ved bruk av NodeJS kan [@navikt/nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler#readme) benyttes:
 
 ```
-const url = `{MILJO_URL}/?{DINE_PARAMETERE}`;
-const getDecorator = () =>x
-    request(url, (error, response, body) => {
-        // Inject fragmenter av dekoratøren med id-selectors, enten manuelt eller ved bruk av template engine
-    });
+// Type
+export type Props = Params & (
+    | { env: "prod" | "dev" | "q0" | "q1" | "q2" | "q6"; }
+    | { env: "localhost"; port: number; }
+);
+
+// Bruk
+import { injectDecorator } from '@navikt/nav-dekoratoren-moduler/ssr'
+injectDecorator({ env: "dev", filePath: "index.html", simple: true, chatbot: true })
+    .then((html) => {
+        res.send(html);
+    })
+    .catch((e) => {
+        ...
+    })
 ```
 
 [Eksempel i Personopplysninger](https://github.com/navikt/personopplysninger/blob/master/server/dekorator.js). <br>
-:warning: &nbsp; Cache anbefales.
+Ved bruk av andre teknologier kan dekoratøren hentes ved hjelp av HTTP kall. Eksempel i
+pseudokode:
+
+```
+fetch("{MILJO_URL}/?{DINE_PARAMETERE}").then(res => {
+    const document = createDocFromRes(res);
+
+    const styles = document.getElementById("styles")?.innerHTML;
+    const scripts = document.getElementById("scripts")?.innerHTML;
+    const header = document.getElementById("header-withmenu")?.innerHTML;
+    const footer = document.getElementById("footer-withmenu")?.innerHTML;
+
+    /*
+    Inject fragmenter av dekoratøren i HTML,
+    enten manuelt eller ved bruk av template engine.
+    */
+});
+```
 
 ### Eksempel 2
 
-Sett inn noen linjer html og last inn dekoratøren client-side:
+Sett inn noen linjer HTML og last inn dekoratøren client-side:
 
 ```
 <html>
