@@ -24,7 +24,7 @@ export const ChatbotWrapper = ({ ...properties }: any) => {
     const isStaging = verifyWindowObj() 
         && stagingUrlHosts.includes(window.location.host);
     const boostApiUrlBase = isStaging
-        ? 'https://staging-navtest.boost.ai/api/chat/v2'
+        ? 'https://staging-nav.boost.ai/api/chat/v2'
         : 'https://nav.boost.ai/api/chat/v2';
     const actionFilters = isStaging ? ['NAV_TEST'] : undefined;
 
