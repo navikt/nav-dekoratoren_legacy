@@ -150,7 +150,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 [4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [6] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret. <br>
-[7] Mapper prod-urler til dev-urler basert på [url-lookup-table](https://github.com/navikt/nav-dekoratoren-moduler/blob/master/src/url-lookup-table/table.ts).
+[7] Mapper prod-urler til dev-urler basert på [url-lookup-table](https://github.com/navikt/nav-dekoratoren-moduler/blob/master/src/csr/url-lookup-table/table.ts).
 
 :information_source: &nbsp; Samtlige parameter kan settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 :information_source: &nbsp; Bakgrunnsfarge på brødsmulesti og språkvelger kan overstyres:
