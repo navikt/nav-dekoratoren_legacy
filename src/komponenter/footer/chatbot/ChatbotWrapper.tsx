@@ -6,6 +6,7 @@ import { logAmplitudeEvent } from 'utils/amplitude';
 
 // Prevents SSR crash
 const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
+
 const stagingUrlHosts = [
     'www-q0.nav.no',
     'www-q1.nav.no',
