@@ -42,25 +42,66 @@ accessPolicy:
 ## Implementasjon
 
 Dekoratøren kan implementeres på flere ulike måter, både server-side og client-side.
+Ved bruk av Node.js kan [@navikt/nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler#readme) benyttes.
 
 ### Eksempel 1
 
-Hent dekoratøren server-side og send html til brukeren som inkluderer dekoratøren:
+Hent dekoratøren server-side og send HTML til brukeren som inkluderer dekoratøren:
 
 ```
-const url = `{MILJO_URL}/?{DINE_PARAMETERE}`;
-const getDecorator = () =>x
-    request(url, (error, response, body) => {
-        // Inject fragmenter av dekoratøren med id-selectors, enten manuelt eller ved bruk av template engine
-    });
+// Type
+export type Props = Params & (
+    | { env: "prod" | "dev" | "q0" | "q1" | "q2" | "q6"; }
+    | { env: "localhost"; port: number; }
+);
+
+// Bruk
+import { injectDecoratorServerSide } from '@navikt/nav-dekoratoren-moduler/ssr'
+injectDecoratorServerSide({ env: "dev", filePath: "index.html", simple: true, chatbot: true })
+    .then((html) => {
+        res.send(html);
+    })
+    .catch((e) => {
+        ...
+    })
 ```
 
 [Eksempel i Personopplysninger](https://github.com/navikt/personopplysninger/blob/master/server/dekorator.js). <br>
-:warning: &nbsp; Cache anbefales.
+Ved bruk av andre teknologier kan dekoratøren hentes ved hjelp av HTTP kall. <br>Eksempel i
+pseudokode:
+
+```
+fetch("{MILJO_URL}/?{DINE_PARAMETERE}").then(res => {
+    const document = createDocFromRes(res);
+
+    const styles = document.getElementById("styles")?.innerHTML;
+    const scripts = document.getElementById("scripts")?.innerHTML;
+    const header = document.getElementById("header-withmenu")?.innerHTML;
+    const footer = document.getElementById("footer-withmenu")?.innerHTML;
+
+    /*
+    Inject fragmenter av dekoratøren i HTML,
+    enten manuelt eller ved bruk av template engine.
+    */
+});
+```
 
 ### Eksempel 2
 
-Sett inn noen linjer html og last inn dekoratøren client-side:
+Alt 1 - Hent dekoratøren client-side vha. [@navikt/nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler#readme): <br>
+
+```
+import { injectDecoratorClientSide } from '@navikt/nav-dekoratoren-moduler'
+injectDecoratorClientSide({
+    env: "localhost",
+    port: 8100,
+    enforceLogin: true,
+    level: "Level4",
+    redirectToApp: true,
+});
+```
+
+Alt 2 - Sett inn noen linjer HTML:
 
 ```
 <html>
@@ -109,7 +150,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 [4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [6] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret. <br>
-[7] Mapper prod-urler til dev-urler basert på [url-lookup-table](https://github.com/navikt/nav-dekoratoren-moduler/blob/master/src/url-lookup-table/table.ts).
+[7] Mapper prod-urler til dev-urler basert på [url-lookup-table](https://github.com/navikt/nav-dekoratoren-moduler/blob/master/src/csr/url-lookup-table/table.ts).
 
 :information_source: &nbsp; Samtlige parameter kan settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 :information_source: &nbsp; Bakgrunnsfarge på brødsmulesti og språkvelger kan overstyres:
