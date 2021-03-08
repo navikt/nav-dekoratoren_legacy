@@ -6,12 +6,7 @@ const getElementOffsetFromPageTop = (element: HTMLElement) => {
     return element?.getBoundingClientRect()?.top + window?.pageYOffset || 0;
 };
 
-const setTop = (element: HTMLElement, top: number) => {
-    const rect = element.getBoundingClientRect();
-    const offset = Math.max(top + rect.height, 0);
-    document.documentElement.style.setProperty('--decorator-sticky-offset', `${offset}px`);
-    element.style.top = `${top}px`;
-};
+const setTop = (element: HTMLElement, top: number) => (element.style.top = `${top}px`);
 
 const getLinkAnchorId = (element: HTMLElement | null): string | null => {
     if (!element) {
@@ -67,6 +62,9 @@ export const stickyScrollHandler = (
     }
 
     prevScrollOffset.current = scrollOffset;
+
+    // Set offset variable for use in external applications
+    setDecoratorHeaderOffsetVar();
 };
 
 // Set the sticky-header to the top of the page, and defer updates to the sticky-position for
@@ -125,4 +123,16 @@ export const focusOverlapHandler = (stickyElement: HTMLElement) => (e: FocusEven
         stickyElement.style.position = 'absolute';
         setTop(stickyElement, 0);
     }
+};
+
+// Set offset variable for use in external applications
+const setDecoratorHeaderOffsetVar = () => {
+    const header = document.getElementById('hovedmeny');
+    if (!header) {
+        return;
+    }
+
+    const boundingRect = header.getBoundingClientRect();
+    const offset = Math.max(boundingRect.top + boundingRect.height, 0);
+    document.documentElement.style.setProperty('--decorator-sticky-offset', `${offset}px`);
 };
