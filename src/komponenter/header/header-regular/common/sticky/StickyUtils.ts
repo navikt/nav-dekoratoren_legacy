@@ -6,7 +6,12 @@ const getElementOffsetFromPageTop = (element: HTMLElement) => {
     return element?.getBoundingClientRect()?.top + window?.pageYOffset || 0;
 };
 
-const setTop = (element: HTMLElement, top: number) => (element.style.top = `${top}px`);
+const setTop = (element: HTMLElement, top: number) => {
+    const rect = element.getBoundingClientRect();
+    const offset = Math.max(top + rect.height, 0);
+    document.documentElement.style.setProperty('--decorator-sticky-offset', `${offset}px`);
+    element.style.top = `${top}px`;
+};
 
 const getLinkAnchorId = (element: HTMLElement | null): string | null => {
     if (!element) {
