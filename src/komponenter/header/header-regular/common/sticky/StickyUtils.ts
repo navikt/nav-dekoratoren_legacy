@@ -64,7 +64,7 @@ export const stickyScrollHandler = (
     prevScrollOffset.current = scrollOffset;
 
     // Set offset variable for use in external applications
-    setDecoratorHeaderOffsetVar();
+    setStickyOffsetVar();
 };
 
 // Set the sticky-header to the top of the page, and defer updates to the sticky-position for
@@ -126,7 +126,7 @@ export const focusOverlapHandler = (stickyElement: HTMLElement) => (e: FocusEven
 };
 
 // Set offset variable for use in external applications
-const setDecoratorHeaderOffsetVar = () => {
+const setStickyOffsetVar = () => {
     const header = document.getElementById('hovedmeny');
     if (!header) {
         return;
