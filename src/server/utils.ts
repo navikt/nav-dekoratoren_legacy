@@ -23,7 +23,6 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     // Deprecated map
     const language = mapToLocale(req.query.language as string);
     const chosenLanguage = (language?.toString().toLowerCase() || Locale.IKKEBESTEMT) as Locale;
-
     const chosenContext = (req.query.context?.toString().toLowerCase() || MenuValue.IKKEBESTEMT) as MenuValue;
 
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
@@ -62,6 +61,9 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 FEEDBACK: req.query.feedback === 'true',
                 CHATBOT: req.query.chatbot !== 'false',
                 URL_LOOKUP_TABLE: req.query.urlLookupTable !== 'false',
+                ...(req.query.utilsBackground && {
+                    UTILS_BACKGROUND: req.query.utilsBackground as string,
+                }),
             },
         }),
         ...(cookies && {
@@ -77,6 +79,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
 export const validateClientEnv = (req: Request) => {
     const { level, context } = req.query;
     const { availableLanguages, breadcrumbs } = req.query;
+    const { utilsBackground } = req.query;
     if (context) {
         validateContext(context as string);
     }
@@ -93,6 +96,9 @@ export const validateClientEnv = (req: Request) => {
     if (breadcrumbs) {
         validateBreadcrumbs(JSON.parse(breadcrumbs as string));
     }
+    if (utilsBackground) {
+        validateUtilsBackground(utilsBackground as string);
+    }
 };
 
 export const validateContext = (context: string) => {
@@ -103,6 +109,17 @@ export const validateContext = (context: string) => {
             break;
         default:
             const error = `context supports privatperson | arbeidsgiver | samarbeidspartner`;
+            throw Error(error);
+    }
+};
+
+export const validateUtilsBackground = (background: string) => {
+    switch (background) {
+        case 'gray':
+        case 'white':
+            break;
+        default:
+            const error = `utilsBackground supports gray | white`;
             throw Error(error);
     }
 };
