@@ -38,6 +38,7 @@ export interface Params {
     FEEDBACK: boolean;
     CHATBOT: boolean;
     URL_LOOKUP_TABLE: boolean;
+    UTILS_BACKGROUND?: string;
 }
 
 export interface Cookies {

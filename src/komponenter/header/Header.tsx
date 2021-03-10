@@ -22,7 +22,7 @@ import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
 import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
 import { SprakVelger } from './common/sprakvelger/SprakVelger';
-import { validateAvailableLanguages } from '../../server/utils';
+import { validateAvailableLanguages, validateUtilsBackground } from '../../server/utils';
 import { validateBreadcrumbs } from '../../server/utils';
 import { validateContext } from '../../server/utils';
 import { validateLanguage, validateLevel } from '../../server/utils';
@@ -228,6 +228,7 @@ export const Header = () => {
                     const { availableLanguages, breadcrumbs } = payload;
                     const { enforceLogin, redirectToApp } = payload;
                     const { feedback, chatbot } = payload;
+                    const { utilsBackground } = payload;
                     if (context) {
                         validateContext(context);
                         setContext(context);
@@ -244,6 +245,9 @@ export const Header = () => {
                     }
                     if (breadcrumbs) {
                         validateBreadcrumbs(breadcrumbs);
+                    }
+                    if (utilsBackground) {
+                        validateUtilsBackground(utilsBackground);
                     }
                     const params = {
                         ...(context && {
@@ -276,6 +280,9 @@ export const Header = () => {
                         ...(chatbot !== undefined && {
                             CHATBOT: chatbot === true,
                         }),
+                        ...(utilsBackground && {
+                            UTILS_BACKGROUND: utilsBackground,
+                        }),
                     };
                     dispatch(setParams(params));
                 }
@@ -286,6 +293,17 @@ export const Header = () => {
             window.removeEventListener('message', receiveMessage, false);
         };
     }, []);
+
+    const utilsContainerBackgroundMap: { [key: string]: string } = {
+        white: 'white',
+        gray: '#f1f1f1',
+    };
+
+    const utilsContainerStyles = {
+        ...(PARAMS.UTILS_BACKGROUND && {
+            background: utilsContainerBackgroundMap[PARAMS.UTILS_BACKGROUND],
+        }),
+    };
 
     return (
         <div className={'decorator-wrapper'}>
@@ -298,7 +316,7 @@ export const Header = () => {
             <Driftsmeldinger />
             {(breadcrumbs.length > 0 || availableLanguages.length > 0) && (
                 // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
-                <div className={'decorator-utils-container'}>
+                <div className={'decorator-utils-container'} style={utilsContainerStyles}>
                     <div className={'decorator-utils-content'}>
                         {breadcrumbs.length > 0 && <Brodsmulesti breadcrumbs={breadcrumbs} />}
                         {availableLanguages.length > 0 && <SprakVelger languages={availableLanguages} />}
