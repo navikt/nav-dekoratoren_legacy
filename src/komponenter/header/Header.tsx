@@ -30,6 +30,7 @@ import { setParams } from '../../store/reducers/environment-duck';
 import Modal from 'nav-frontend-modal';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import './Header.less';
+import cls from 'classnames';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
 export const decoratorContextCookie = 'decorator-context';
@@ -294,15 +295,9 @@ export const Header = () => {
         };
     }, []);
 
-    const utilsContainerBackgroundMap: { [key: string]: string } = {
-        white: 'white',
-        gray: '#f1f1f1',
-    };
-
-    const utilsContainerStyles = {
-        ...(PARAMS.UTILS_BACKGROUND && {
-            background: utilsContainerBackgroundMap[PARAMS.UTILS_BACKGROUND],
-        }),
+    const utilsBackgroundClassMap: { [key: string]: string } = {
+        gray: 'decorator-utils-container--gray',
+        white: 'decorator-utils-container--white',
     };
 
     return (
@@ -315,8 +310,13 @@ export const Header = () => {
             </header>
             <Driftsmeldinger />
             {(breadcrumbs.length > 0 || availableLanguages.length > 0) && (
-                // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
-                <div className={'decorator-utils-container'} style={utilsContainerStyles}>
+                <div
+                    // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
+                    className={cls(
+                        'decorator-utils-container',
+                        PARAMS.UTILS_BACKGROUND && utilsBackgroundClassMap[PARAMS.UTILS_BACKGROUND]
+                    )}
+                >
                     <div className={'decorator-utils-content'}>
                         {breadcrumbs.length > 0 && <Brodsmulesti breadcrumbs={breadcrumbs} />}
                         {availableLanguages.length > 0 && <SprakVelger languages={availableLanguages} />}
