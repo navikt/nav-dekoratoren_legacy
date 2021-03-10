@@ -117,9 +117,10 @@ export const validateUtilsBackground = (background: string) => {
     switch (background) {
         case 'gray':
         case 'white':
+        case 'transparent':
             break;
         default:
-            const error = `utilsBackground supports gray | white`;
+            const error = `utilsBackground supports gray | white | transparent`;
             throw Error(error);
     }
 };

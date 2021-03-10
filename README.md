@@ -140,7 +140,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | language           | nb \| nn \| en \| se \| pl                            | nb                   | Setter språket til dekoratøren ved server side rendering [3]                   |
 | availableLanguages | [{ locale: nb \| nn \| en \| se \| pl, url: string }] | [ ]                  | Setter alternativene til språkvelgeren ved server side rendering [4]           |
 | breadcrumbs        | [{ title: string, url: string }]                      | [ ]                  | Setter brødsmulestien for server side rendering [5]                            |
-| utilsBackground    | white \| gray                                         | undefined            | Setter bakgrunnsfargen på containeren til brødsmulesti og språkvelger          |
+| utilsBackground    | white \| gray \| transparent                          | transparent          | Setter bakgrunnsfargen på containeren til brødsmulesti og språkvelger          |
 | feedback           | boolean                                               | false                | Skjuler eller viser tilbakemeldingskomponentet                                 |
 | chatbot            | boolean                                               | true                 | Skjuler eller viser Chatbot Frida [6]                                          |
 | urlLookupTable     | boolean                                               | true                 | Aktiverer eller deaktiverer url-lookup-table [7]                               |
