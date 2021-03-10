@@ -296,8 +296,8 @@ export const Header = () => {
     }, []);
 
     const utilsBackgroundClassMap: { [key: string]: string } = {
-        gray: 'decorator-utils-container--gray',
         white: 'decorator-utils-container--white',
+        gray: 'decorator-utils-container--gray',
     };
 
     return (
