@@ -310,8 +310,8 @@ export const Header = () => {
             </header>
             <Driftsmeldinger />
             {(breadcrumbs.length > 0 || availableLanguages.length > 0) && (
+                // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
                 <div
-                    // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
                     className={cls(
                         'decorator-utils-container',
                         PARAMS.UTILS_BACKGROUND && utilsBackgroundClassMap[PARAMS.UTILS_BACKGROUND]
