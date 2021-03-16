@@ -35,9 +35,9 @@ export const SokInput = (props: Props) => {
             <div className="sok-input-container">
                 <Input
                     id={id}
-                    value={inputValue}
                     onChange={(e) => onChange(e.target.value)}
                     className={className}
+                    value={inputValue}
                     placeholder={finnTekst('sok-input-placeholder', language)}
                     aria-label={finnTekst('sok-input-placeholder', language)}
                     type="search"
