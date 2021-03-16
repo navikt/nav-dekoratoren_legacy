@@ -21,8 +21,8 @@ export const SokInput = (props: Props) => {
     const { onChange, onReset } = props;
     const { language, writtenInput, className, id } = props;
 
-    // Only set the input value in the browser, to prevent SSR errors
-    // under certain circumstances
+    // Only set the input value in the browser, to prevent execution-order
+    // dependent SSR warnings under certain circumstances
     const inputValue = verifyWindowObj() ? writtenInput || '' : undefined;
 
     return (
