@@ -13,18 +13,31 @@ export const initAmplitude = (params: Params) => {
             includeReferrer: true,
             platform: window.location.toString(),
         });
-        logAmplitudeEvent('sidevisning', {
-            sidetittel: document.title,
-            parametre: {
-                ...params,
-                BREADCRUMBS: !!(params?.BREADCRUMBS && params.BREADCRUMBS.length > 0),
-                ...(params.AVAILABLE_LANGUAGES && {
-                    AVAILABLE_LANGUAGES: params.AVAILABLE_LANGUAGES.map((lang) => lang.locale),
-                }),
-            },
-        });
+        logPageView(params);
     }
 };
+
+export function logPageView(params: Params, title: String | null = null) {
+    logAmplitudeEvent('sidevisning', {
+        sidetittel: title ? title : document.title,
+        parametre: {
+            ...params,
+            BREADCRUMBS: !!(params?.BREADCRUMBS && params.BREADCRUMBS.length > 0),
+            ...(params.AVAILABLE_LANGUAGES && {
+                AVAILABLE_LANGUAGES: params.AVAILABLE_LANGUAGES.map((lang) => lang.locale),
+            }),
+        },
+    });
+}
+
+export function initPageViewObserver(params: Params) {
+    const title: HTMLTitleElement | null = document.querySelector('title');
+    if (title instanceof HTMLTitleElement) {
+        new MutationObserver(function (mutations) {
+            logPageView(params);
+        }).observe(title, { subtree: true, characterData: true, childList: true });
+    }
+}
 
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
     return new Promise(function (resolve: any) {
