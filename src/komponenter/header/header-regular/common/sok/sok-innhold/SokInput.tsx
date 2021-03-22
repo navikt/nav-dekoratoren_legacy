@@ -5,6 +5,7 @@ import { Input } from 'nav-frontend-skjema';
 import SokKnapper from './SokKnapper';
 import React from 'react';
 import { Locale } from 'store/reducers/language-duck';
+import { verifyWindowObj } from 'utils/Environment';
 import './SokInput.less';
 
 type Props = {
@@ -19,6 +20,11 @@ type Props = {
 export const SokInput = (props: Props) => {
     const { onChange, onReset } = props;
     const { language, writtenInput, className, id } = props;
+
+    // Only set the input value in the browser, to prevent execution-order
+    // dependent SSR warnings under certain circumstances
+    const inputValue = verifyWindowObj() ? writtenInput || '' : undefined;
+
     return (
         <>
             <div className={'sok-input__tittel'}>
@@ -31,7 +37,7 @@ export const SokInput = (props: Props) => {
                     id={id}
                     onChange={(e) => onChange(e.target.value)}
                     className={className}
-                    value={writtenInput || ''}
+                    value={inputValue}
                     placeholder={finnTekst('sok-input-placeholder', language)}
                     aria-label={finnTekst('sok-input-placeholder', language)}
                     type="search"

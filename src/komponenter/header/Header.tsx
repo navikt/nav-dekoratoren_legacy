@@ -22,7 +22,7 @@ import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
 import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
 import { SprakVelger } from './common/sprakvelger/SprakVelger';
-import { validateAvailableLanguages } from '../../server/utils';
+import { validateAvailableLanguages, validateUtilsBackground } from '../../server/utils';
 import { validateBreadcrumbs } from '../../server/utils';
 import { validateContext } from '../../server/utils';
 import { validateLanguage, validateLevel } from '../../server/utils';
@@ -30,6 +30,7 @@ import { setParams } from '../../store/reducers/environment-duck';
 import Modal from 'nav-frontend-modal';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import './Header.less';
+import cls from 'classnames';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
 export const decoratorContextCookie = 'decorator-context';
@@ -228,6 +229,7 @@ export const Header = () => {
                     const { availableLanguages, breadcrumbs } = payload;
                     const { enforceLogin, redirectToApp } = payload;
                     const { feedback, chatbot } = payload;
+                    const { utilsBackground } = payload;
                     if (context) {
                         validateContext(context);
                         setContext(context);
@@ -244,6 +246,9 @@ export const Header = () => {
                     }
                     if (breadcrumbs) {
                         validateBreadcrumbs(breadcrumbs);
+                    }
+                    if (utilsBackground) {
+                        validateUtilsBackground(utilsBackground);
                     }
                     const params = {
                         ...(context && {
@@ -276,6 +281,9 @@ export const Header = () => {
                         ...(chatbot !== undefined && {
                             CHATBOT: chatbot === true,
                         }),
+                        ...(utilsBackground && {
+                            UTILS_BACKGROUND: utilsBackground,
+                        }),
                     };
                     dispatch(setParams(params));
                 }
@@ -286,6 +294,11 @@ export const Header = () => {
             window.removeEventListener('message', receiveMessage, false);
         };
     }, []);
+
+    const utilsBackgroundClassMap: { [key: string]: string } = {
+        white: 'decorator-utils-container--white',
+        gray: 'decorator-utils-container--gray',
+    };
 
     return (
         <div className={'decorator-wrapper'}>
@@ -298,7 +311,12 @@ export const Header = () => {
             <Driftsmeldinger />
             {(breadcrumbs.length > 0 || availableLanguages.length > 0) && (
                 // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
-                <div className={'decorator-utils-container'}>
+                <div
+                    className={cls(
+                        'decorator-utils-container',
+                        PARAMS.UTILS_BACKGROUND && utilsBackgroundClassMap[PARAMS.UTILS_BACKGROUND]
+                    )}
+                >
                     <div className={'decorator-utils-content'}>
                         {breadcrumbs.length > 0 && <Brodsmulesti breadcrumbs={breadcrumbs} />}
                         {availableLanguages.length > 0 && <SprakVelger languages={availableLanguages} />}

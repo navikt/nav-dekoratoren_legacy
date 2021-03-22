@@ -62,6 +62,9 @@ export const stickyScrollHandler = (
     }
 
     prevScrollOffset.current = scrollOffset;
+
+    // Set offset variable for use in external applications
+    setStickyOffsetVar();
 };
 
 // Set the sticky-header to the top of the page, and defer updates to the sticky-position for
@@ -120,4 +123,16 @@ export const focusOverlapHandler = (stickyElement: HTMLElement) => (e: FocusEven
         stickyElement.style.position = 'absolute';
         setTop(stickyElement, 0);
     }
+};
+
+// Set offset variable for use in external applications
+const setStickyOffsetVar = () => {
+    const header = document.getElementById('hovedmeny');
+    if (!header) {
+        return;
+    }
+
+    const boundingRect = header.getBoundingClientRect();
+    const offset = Math.max(boundingRect.top + boundingRect.height, 0);
+    document.documentElement.style.setProperty('--decorator-sticky-offset', `${offset}px`);
 };
