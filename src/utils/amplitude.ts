@@ -3,6 +3,7 @@ import { Params } from 'store/reducers/environment-duck';
 
 // Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
 const amplitude = verifyWindowObj() ? require('amplitude-js') : () => null;
+let currentPageTitle = 'undefined';
 
 export const initAmplitude = (params: Params) => {
     if (amplitude) {
@@ -13,11 +14,12 @@ export const initAmplitude = (params: Params) => {
             includeReferrer: true,
             platform: window.location.toString(),
         });
+        currentPageTitle = window.location.toString();
         logPageView(params);
     }
 };
 
-export function logPageView(params: Params, title: String | null = null) {
+export function logPageView(params: Params, title: string | null = null) {
     logAmplitudeEvent('sidevisning', {
         sidetittel: title ? title : document.title,
         parametre: {
@@ -34,7 +36,10 @@ export function initPageViewObserver(params: Params) {
     const title: HTMLTitleElement | null = document.querySelector('title');
     if (title instanceof HTMLTitleElement) {
         new MutationObserver(function (mutations) {
-            logPageView(params);
+            if (currentPageTitle !== title.text) {
+                logPageView(params);
+                currentPageTitle = title.text;
+            }
         }).observe(title, { subtree: true, characterData: true, childList: true });
     }
 }
