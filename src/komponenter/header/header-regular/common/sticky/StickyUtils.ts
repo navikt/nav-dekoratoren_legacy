@@ -96,6 +96,9 @@ export const deferStickyOnAnchorLinkHandler = (
 
     window.removeEventListener('scroll', stickyScrollHandler);
     window.addEventListener('scroll', deferredScrollHandler);
+
+    // Set offset variable for use in external applications
+    setStickyOffsetVar();
 };
 
 // If the element that will get focus may get overlapped by the sticky header, alter
@@ -123,6 +126,9 @@ export const focusOverlapHandler = (stickyElement: HTMLElement) => (e: FocusEven
         stickyElement.style.position = 'absolute';
         setTop(stickyElement, 0);
     }
+
+    // Set offset variable for use in external applications
+    setStickyOffsetVar();
 };
 
 // Set offset variable for use in external applications
