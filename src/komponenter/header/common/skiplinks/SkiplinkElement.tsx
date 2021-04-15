@@ -1,14 +1,8 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
-import { SkipLink } from './Skiplinks';
+import { SkipLink } from 'komponenter/header/common/skiplinks/Skiplinks';
 
-export const SkipLinkElement = ({
-    link,
-    className,
-}: {
-    link: SkipLink;
-    className?: string;
-}) => (
+export const SkipLinkElement = ({ link, className }: { link: SkipLink; className?: string }) => (
     <li>
         <a
             href={`#${link.anchorId || ''}`}

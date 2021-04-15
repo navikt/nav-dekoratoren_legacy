@@ -3,14 +3,14 @@ import { mobilmenyKnappId } from 'komponenter/header/header-regular/mobil/Hovedm
 import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/Hovedmeny';
 import { useDispatch } from 'react-redux';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
-import { SkipLinkElement } from './SkiplinkElement';
+import { SkipLinkElement } from 'komponenter/header/common/skiplinks/SkiplinkElement';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/meny/innhold/Hovedmeny';
 import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
-import './Skiplinks.less';
+import 'komponenter/header/common/skiplinks/Skiplinks.less';
 
 export type SkipLink = {
     anchorId?: string;
@@ -26,7 +26,11 @@ const stateSelector = (state: AppState) => ({
 
 const mainContentId = 'maincontent';
 
-const Skiplinks = () => {
+type Props = {
+    simple?: boolean;
+};
+
+const Skiplinks = ({ simple }: Props) => {
     const dispatch = useDispatch();
     const { mainMenuOpen, subMenuOpen, sokOpen } = useSelector(stateSelector);
     const [hasMainContent, setHasMainContent] = useState(false);
@@ -37,10 +41,7 @@ const Skiplinks = () => {
         } else if (!mainMenuOpen) {
             dispatch(toggleHovedmeny());
         }
-        setTimeout(
-            () => document.getElementById(mobilSokInputId)?.focus(),
-            100
-        );
+        setTimeout(() => document.getElementById(mobilSokInputId)?.focus(), 100);
     };
 
     const openDesktopSok = () => {
@@ -65,8 +66,7 @@ const Skiplinks = () => {
     const desktopLinks: SkipLink[] = [
         {
             tekstId: 'skiplinks-ga-til-hovedmeny',
-            onClick: () =>
-                document.getElementById(desktopHovedmenyKnappId)?.focus(),
+            onClick: () => document.getElementById(desktopHovedmenyKnappId)?.focus(),
         },
         {
             tekstId: 'skiplinks-ga-til-sok',
@@ -80,26 +80,18 @@ const Skiplinks = () => {
     }, []);
 
     return (
-        <nav
-            id="site-skiplinks"
-            className="site-skiplinks"
-            aria-label="Hopp til innhold"
-        >
+        <nav id="site-skiplinks" className="site-skiplinks" aria-label="Hopp til innhold">
             <ul>
-                {mobilLinks.map((link, index) => (
-                    <SkipLinkElement
-                        link={link}
-                        className={'skiplink__mobil'}
-                        key={index}
-                    />
-                ))}
-                {desktopLinks.map((link, index) => (
-                    <SkipLinkElement
-                        link={link}
-                        className={'skiplink__desktop'}
-                        key={index}
-                    />
-                ))}
+                {!simple && (
+                    <>
+                        {mobilLinks.map((link, index) => (
+                            <SkipLinkElement link={link} className={'skiplink__mobil'} key={index} />
+                        ))}
+                        {desktopLinks.map((link, index) => (
+                            <SkipLinkElement link={link} className={'skiplink__desktop'} key={index} />
+                        ))}
+                    </>
+                )}
                 {hasMainContent && (
                     <SkipLinkElement
                         link={{
