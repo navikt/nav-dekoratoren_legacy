@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { mobilmenyKnappId } from 'komponenter/header/header-regular/mobil/HovedmenyMobil';
 import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/Hovedmeny';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
-import { SkipLinkElement } from 'komponenter/header/common/skiplinks/SkiplinkElement';
+import { toggleHovedmeny, toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
+import { SkipLinkElement, SkipLinkProps } from 'komponenter/header/common/skiplinks/SkiplinkElement';
 import { AppState } from 'store/reducers';
-import { useSelector } from 'react-redux';
-import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
-import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/meny/innhold/Hovedmeny';
 import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
-import { SkipLinkProps } from 'komponenter/header/common/skiplinks/SkiplinkElement';
 import 'komponenter/header/common/skiplinks/Skiplinks.less';
 
 const stateSelector = (state: AppState) => ({
