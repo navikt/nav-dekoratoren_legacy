@@ -29,8 +29,9 @@ import { validateLanguage, validateLevel } from '../../server/utils';
 import { setParams } from '../../store/reducers/environment-duck';
 import Modal from 'nav-frontend-modal';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
-import './Header.less';
 import cls from 'classnames';
+import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
+import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
 export const decoratorContextCookie = 'decorator-context';
@@ -56,6 +57,7 @@ export const Header = () => {
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
     const breadcrumbs = PARAMS.BREADCRUMBS || [];
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
+    const useSimpleHeader = PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER;
 
     const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie, unleashCacheCookie]);
 
@@ -306,7 +308,8 @@ export const Header = () => {
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
             <header className="siteheader">
-                {PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER ? <HeaderSimple /> : <HeaderRegular />}
+                <Skiplinks simple={useSimpleHeader} />
+                {useSimpleHeader ? <HeaderSimple /> : <HeaderRegular />}
             </header>
             <Driftsmeldinger />
             {(breadcrumbs.length > 0 || availableLanguages.length > 0) && (

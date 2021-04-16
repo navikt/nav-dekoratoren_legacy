@@ -32,7 +32,9 @@ type KeyboardNavState = {
     subGraph?: KbNavGraph;
 };
 
-export const kbMasterNode = createKbNavNode(headerLogoId, { col: 0, row: 0, sub: 0 }, KbNavGroup.HeaderMenylinje);
+export const kbMasterNodeIndex = { col: 0, row: 0, sub: 0 };
+
+export const kbMasterNode = createKbNavNode(headerLogoId, kbMasterNodeIndex, KbNavGroup.HeaderMenylinje);
 
 export const kbNavInitialState: KeyboardNavState = {
     currentNode: kbMasterNode,
