@@ -4,7 +4,6 @@ import { AppState } from 'store/reducers';
 import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
 import { Locale } from 'store/reducers/language-duck';
 import { Sticky } from 'komponenter/header/header-regular/common/sticky/Sticky';
-import Skiplinks from 'komponenter/header/header-regular/common/skiplinks/Skiplinks';
 import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
 import { HeaderMenylinje } from 'komponenter/header/header-regular/HeaderMenylinje';
 
@@ -23,7 +22,6 @@ export const HeaderRegular = () => {
 
     return (
         <Fragment>
-            <Skiplinks />
             <div className="header-z-wrapper">
                 {isLanguageNorwegian && <Arbeidsflatemeny />}
                 <Sticky mobileFixed={mobilMenyIsOpen}>

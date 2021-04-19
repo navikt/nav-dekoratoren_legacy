@@ -1,6 +1,6 @@
 {
     "name": "nav-dekoratoren",
-    "version": "1.30.15-prod",
+    "version": "1.30.29-prod",
     "private": true,
     "scripts": {
         "start": "npm-run-all -p -r build-and-watch start-server-and-watch typecheck-watch",
@@ -27,7 +27,7 @@
     },
     "dependencies": {
         "@navikt/fnrvalidator": "^1.1.3",
-        "@navikt/nav-chatbot": "^2.2.5",
+        "@navikt/nav-chatbot": "^2.3.2",
         "@navikt/nav-dekoratoren-moduler": "^1.0.25",
         "@promster/express": "^5.0.1",
         "amplitude-js": "^7.4.1",
@@ -53,7 +53,7 @@
         "nav-frontend-alertstriper-style": "2.0.30",
         "nav-frontend-chevron": "^1.0.24",
         "nav-frontend-chevron-style": "^1.0.2",
-        "nav-frontend-core": "^5.0.10",
+        "nav-frontend-core": "^5.0.11",
         "nav-frontend-ekspanderbartpanel": "^3.0.45",
         "nav-frontend-ekspanderbartpanel-style": "^1.0.33",
         "nav-frontend-hjelpetekst": "^2.0.47",

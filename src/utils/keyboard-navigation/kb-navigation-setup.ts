@@ -2,7 +2,7 @@ import KbNav, { createKbNavGraph, getKbId, KbIdMap, NodeEdge, KbNavGroup, NodeIn
 import { Locale } from 'store/reducers/language-duck';
 import { MenuValue } from '../meny-storage-utils';
 import { Status } from 'api/api';
-import { kbMasterNode } from 'utils/keyboard-navigation/useKbNavMain';
+import { kbMasterNodeIndex } from 'utils/keyboard-navigation/useKbNavMain';
 import { desktopHovedmenyKnappId } from 'komponenter/header/header-regular/desktop/hovedmeny/Hovedmeny';
 import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
 import { desktopSokKnappId } from 'komponenter/header/header-regular/desktop/sok-dropdown/sok-knapp/SokKnapp';
@@ -26,7 +26,7 @@ export type KbNavConfig = {
 export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
     [KbNavGroup.HeaderMenylinje]: {
         group: KbNavGroup.HeaderMenylinje,
-        rootIndex: kbMasterNode.index,
+        rootIndex: kbMasterNodeIndex || { col: 0, row: 0, sub: 0 },
         maxColsPerRow: [3, 6],
         parentNodeId: headerLogoId,
         parentNodeEdge: NodeEdge.Right,

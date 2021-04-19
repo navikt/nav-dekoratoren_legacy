@@ -2,7 +2,7 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { createStore } from 'store';
 import { Provider as ReduxProvider } from 'react-redux';
-import Skiplinks from './Skiplinks';
+import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
 
 const store = createStore();
 
