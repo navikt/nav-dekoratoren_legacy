@@ -24,6 +24,10 @@ const stateSelector = (state: AppState) => ({
     isChatbotEnabled: state.environment.PARAMS.CHATBOT,
 });
 
+const actionFilterMap = [
+    [['www.nav.no/no/bedrift'], ['arbeidsgiver']]
+];
+
 export const ChatbotWrapper = ({ ...properties }: any) => {
     const { isChatbotEnabled } = useSelector(stateSelector);
     const [isMounted, setIsMounted] = useState(false);
@@ -33,9 +37,30 @@ export const ChatbotWrapper = ({ ...properties }: any) => {
         setIsMounted(!chatbotVersion122IsMounted && isChatbotEnabled);
     }, [isChatbotEnabled]);
 
-    const isStaging = verifyWindowObj() && stagingUrlHosts.includes(window.location.hostname);
+    const hostname = verifyWindowObj() && window.location.hostname;
+    const pathname = verifyWindowObj() && window.location.pathname;
+    const origin = hostname && pathname && `${hostname}${pathname}`;
+
+    const isStaging = hostname && stagingUrlHosts.includes(hostname);
     const boostApiUrlBase = isStaging ? 'https://staging-nav.boost.ai/api/chat/v2' : 'https://nav.boost.ai/api/chat/v2';
-    const actionFilters = isStaging ? ['NAV_TEST'] : undefined;
+
+    let actionFilters;
+
+    if (isStaging) {
+        actionFilters = ['NAV_TEST'];
+    }
+
+    if (origin) {
+        if (!actionFilters) {
+            actionFilters = [];
+        }
+
+        actionFilterMap.forEach(([targets, filters]) => {
+            if (targets.includes(origin)) {
+                actionFilters.push(...filters)
+            }
+        });
+    }
 
     return isMounted ? (
         <Chatbot
