@@ -35,7 +35,6 @@ export default function reducer(
 ): InnloggingsstatusState {
     switch (action.type) {
         case ActionType.HENT_INNLOGGINGSSTATUS_OK: {
-            action.data.name = '01234567891';
             const erFodselsnummer = /^\d+$/.test(action.data.name);
             if (erFodselsnummer) {
                 action.data.name = formaterFodselsnummer(action.data.name);
