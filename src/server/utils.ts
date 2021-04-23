@@ -64,6 +64,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 ...(req.query.utilsBackground && {
                     UTILS_BACKGROUND: req.query.utilsBackground as string,
                 }),
+                SHARE_SCREEN: req.query.shareScreen !== 'false',
             },
         }),
         ...(cookies && {

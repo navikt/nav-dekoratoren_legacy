@@ -38,6 +38,7 @@ export interface Params {
     FEEDBACK: boolean;
     CHATBOT: boolean;
     URL_LOOKUP_TABLE: boolean;
+    SHARE_SCREEN: boolean;
     UTILS_BACKGROUND?: string;
 }
 
@@ -75,6 +76,7 @@ export const initialState: Environment = {
         FEEDBACK: false,
         CHATBOT: false,
         URL_LOOKUP_TABLE: false,
+        SHARE_SCREEN: false,
     },
 
     // Cookies
