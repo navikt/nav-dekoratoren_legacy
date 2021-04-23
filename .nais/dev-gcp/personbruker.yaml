@@ -29,6 +29,9 @@ spec:
                 - host: www.dev.nav.no
                 - host: innloggingslinje-api.dev.nav.no
                 - host: www-q1.nav.no
+        inbound:
+            rules:
+              - application: mine-saker
     env:
         - name: ENV
           value: dev
