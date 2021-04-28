@@ -7,6 +7,7 @@ import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
 import { hentInnloggingsstatusFetch } from 'api/api';
 import { DataElement, Status } from 'api/api';
+import { formaterFodselsnummer } from '../../utils/string-format';
 
 export interface InnloggingsstatusState extends DataElement {
     data: Data;
@@ -34,6 +35,11 @@ export default function reducer(
 ): InnloggingsstatusState {
     switch (action.type) {
         case ActionType.HENT_INNLOGGINGSSTATUS_OK: {
+            const erFodselsnummer = /^\d+$/.test(action.data.name);
+            if (erFodselsnummer) {
+                action.data.name = formaterFodselsnummer(action.data.name);
+            }
+
             return { ...state, status: Status.OK, data: action.data };
         }
         case ActionType.HENT_INNLOGGINGSSTATUS_PENDING:
