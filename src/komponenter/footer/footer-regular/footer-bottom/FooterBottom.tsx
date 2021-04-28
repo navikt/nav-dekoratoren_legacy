@@ -20,6 +20,7 @@ const FooterBottom = () => {
     const { data } = useSelector((state: AppState) => state.menypunkt);
     const [personvernNode, settPersonvernNode] = useState<MenyNode>();
     const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
+    const { PARAMS } = useSelector((state: AppState) => state.environment);
 
     useEffect(() => {
         const noder = getLanguageNode(language, data);
@@ -49,7 +50,7 @@ const FooterBottom = () => {
                         </Normaltekst>
                         <ul className={cls.element('personvern-lenker')}>
                             <FooterLenker node={personvernNode} />
-                            <DelSkjermLenke />
+                            {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
                         </ul>
                     </div>
                 </div>

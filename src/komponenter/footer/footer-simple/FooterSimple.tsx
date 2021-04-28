@@ -15,6 +15,7 @@ const FooterSimple = () => {
     const { language } = useSelector((state: AppState) => state.language);
     const { data } = useSelector((state: AppState) => state.menypunkt);
     const [personvernNode, settPersonvernNode] = useState<MenyNode>();
+    const { PARAMS } = useSelector((state: AppState) => state.environment);
 
     useEffect(() => {
         const noder = getLanguageNode(language, data);
@@ -30,7 +31,7 @@ const FooterSimple = () => {
                 <div className={cls.element('content')}>
                     <ul className={cls.element('personvern-lenker')}>
                         <FooterLenker node={personvernNode} />
-                        <DelSkjermLenke />
+                        {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
                     </ul>
                 </div>
             </div>

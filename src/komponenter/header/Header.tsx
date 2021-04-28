@@ -230,7 +230,7 @@ export const Header = () => {
                     const { simple, context, level, language } = payload;
                     const { availableLanguages, breadcrumbs } = payload;
                     const { enforceLogin, redirectToApp } = payload;
-                    const { feedback, chatbot } = payload;
+                    const { feedback, chatbot, shareScreen } = payload;
                     const { utilsBackground } = payload;
                     if (context) {
                         validateContext(context);
@@ -285,6 +285,9 @@ export const Header = () => {
                         }),
                         ...(utilsBackground && {
                             UTILS_BACKGROUND: utilsBackground,
+                        }),
+                        ...(shareScreen !== undefined && {
+                            SHARE_SCREEN: shareScreen === true,
                         }),
                     };
                     dispatch(setParams(params));
