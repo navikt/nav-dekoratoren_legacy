@@ -144,6 +144,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | feedback           | boolean                                               | false                | Skjuler eller viser tilbakemeldingskomponentet                                 |
 | chatbot            | boolean                                               | true                 | Skjuler eller viser Chatbot Frida [6]                                          |
 | urlLookupTable     | boolean                                               | true                 | Aktiverer eller deaktiverer url-lookup-table [7]                               |
+| shareScreen        | boolean                                               | true                 | Aktiverer eller deaktiverer skjerdelingskomponent                              |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
