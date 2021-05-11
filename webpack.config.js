@@ -12,7 +12,7 @@ const nodeExternals = require('webpack-node-externals');
 
 const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
-    devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',
+    devtool: 'source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         alias: {
