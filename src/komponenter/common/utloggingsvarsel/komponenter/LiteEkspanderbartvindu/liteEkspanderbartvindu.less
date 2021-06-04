@@ -1,0 +1,100 @@
+.liteExpanderbartvindu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        top: 50%;
+        bottom: 0;
+        left: 10px;
+        right: 10px;
+        -moz-border-radius: 100px / 10px;
+        border-radius: 100px / 10px;
+    }
+    &:after {
+        right: 10px;
+        left: auto;
+        transform: skew(8deg) rotate(3deg);
+    }
+
+    &__wrapper {
+        border-radius: 7px;
+        min-width: 21.5rem;
+        flex-direction: column-reverse;
+        pointer-events: auto;
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        padding: 0.25rem 0.5rem 0.5rem 0.75rem;
+        transform: translateY(0);
+        opacity: 1;
+        background-color: white;
+        transition: opacity 0.2s;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    }
+
+    &__expanderbart-nav {
+        margin: 0.5rem 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    &__expanderbart-nav,
+    &__btn-container {
+        margin-right: 0.5rem;
+
+        & > button {
+            height: 2.25rem;
+            box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+            background-color: white;
+            padding: 0.375rem 0.5rem;
+            border-radius: 4px;
+            margin: 0;
+            border: none;
+            width: 9rem;
+
+            & p {
+                color: #0067c5;
+                padding-right: 0.125rem;
+            }
+
+            & svg {
+                fill: #0067c5;
+            }
+
+            &:hover {
+                transition: 0.1s;
+                border: 1px solid #0067c5;
+                cursor: pointer;
+            }
+            &:focus {
+                border: 1px solid #00347d;
+            }
+
+            &:nth-child(2) {
+                margin-right: 1rem;
+            }
+        }
+    }
+    &__btn-content {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+    &__btn-container:nth-child(1) {
+        margin-right: 0.75rem;
+    }
+}

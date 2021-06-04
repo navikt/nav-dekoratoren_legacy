@@ -1,0 +1,210 @@
+@import (reference) '../../../styling-variabler.less';
+@transition: 0.3s;
+
+.utloggingsvarsel {
+    .ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay {
+        padding: 0;
+        height: 0;
+        width: 23.25rem;
+        bottom: 9.5rem;
+        position: fixed;
+        top: unset;
+        transition: @transition;
+        transform-origin: bottom center;
+    }
+
+    &__modal {
+        max-height: 0;
+        width: 0;
+        padding: 0;
+        transition: @transition;
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    &__timer {
+        justify-content: center;
+        & > svg {
+            margin-right: 0.25rem;
+            margin-bottom: 0.125rem;
+        }
+    }
+
+    &__main-wrapper {
+        overflow: auto;
+        width: 10rem;
+        max-height: 0;
+        visibility: hidden;
+        transition: visibility @transition, width @transition, height @transition;
+    }
+
+    &__tekst-innhold {
+        overflow: auto;
+    }
+
+    &__valg,
+    &__tekst-innhold {
+        margin: 0;
+        transform: scale(0.1);
+        transition: @transition;
+
+        & ~ .typo-sidetittel {
+            font-size: 0.2rem;
+            line-height: 0.4rem;
+        }
+        & ~ .typo-innholdstittel {
+            font-size: 0.2rem;
+            line-height: 0.3rem;
+        }
+        & ~ .typo-systemtittel {
+            font-size: 0.2rem;
+            line-height: 0.2rem;
+            margin: 0.5rem 0;
+        }
+        & ~ .typo-undertittel {
+            font-size: 0.1rem;
+            line-height: 0.1rem;
+        }
+        & ~ .typo-element {
+            font-size: 0.1rem;
+            line-height: 0.1rem;
+        }
+        & ~ .typo-normal {
+            font-size: 0.1rem;
+            line-height: 0.1rem;
+        }
+    }
+
+    &__modal--ikon {
+        transform: translateY(3.5rem) scale(0.3);
+        opacity: 0;
+        transition: @transition;
+    }
+
+    @media (max-width: 340px) {
+        .ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay {
+            width: 20.25rem;
+        }
+    }
+
+    @media @screen-desktop {
+        .ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay {
+            width: 22.5rem;
+            bottom: 6rem;
+        }
+    }
+
+    &.open {
+        .ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay {
+            padding: 1rem;
+            height: 100%;
+            width: 100%;
+            bottom: 0;
+            transform-origin: bottom center;
+            transition: 0.2s;
+        }
+
+        .liteExpanderbartvindu {
+            &:before,
+            &:after {
+                box-shadow: none;
+            }
+
+            &__wrapper {
+                opacity: 0;
+                transform: translateY(100px);
+                transition: 0.4s;
+            }
+        }
+
+        .utloggingsvarsel {
+            &__modal {
+                overflow: unset;
+                width: 100%;
+                max-height: 100%;
+                padding: 1rem;
+                min-width: 20rem;
+                transform: translateY(0) scale(1);
+                transition: @transition;
+
+                &:focus {
+                    box-shadow: 0 0 0 3px #254b6d;
+                }
+            }
+
+            &__modal--ikon {
+                transform: translateY(0);
+                opacity: 1;
+                transition: @transition;
+            }
+
+            &__valg {
+                margin: 1.25rem 0;
+            }
+
+            &__valg,
+            &__modal--ikon,
+            &__tekst-innhold {
+                transform: translateY(0) scale(1);
+                transition: @transition;
+
+                & > .typo-sidetittel {
+                    margin: 0.75rem 0;
+                    font-size: 2.5rem;
+                    line-height: 2.75rem;
+                }
+                & > .typo-innholdstittel {
+                    margin: 0.75rem 0;
+                    font-size: 2rem;
+                    line-height: 2.25rem;
+                }
+                & > .typo-systemtittel {
+                    margin: 0.75rem 0;
+                    font-size: 1.5rem;
+                    line-height: 1.75rem;
+                }
+                & > .typo-undertittel {
+                    margin: 0.75rem 0;
+                    font-size: 1.25rem;
+                    line-height: 1.5625rem;
+                }
+                & > .typo-element {
+                    margin: 0.75rem 0;
+                    font-size: 1rem;
+                    line-height: 1.375rem;
+                }
+                & > .typo-normal {
+                    margin: 0.75rem 0;
+                    font-size: 1rem;
+                    line-height: 1.375rem;
+                }
+            }
+
+            &__timer {
+                justify-content: flex-start;
+                align-items: center;
+                & > svg {
+                    margin-right: 0.5rem;
+                    margin-bottom: 0.125rem;
+                }
+            }
+
+            &__main-wrapper {
+                width: 100%;
+                display: block;
+                visibility: visible;
+                max-height: 100%;
+                overflow: hidden;
+                transition: visibility @transition, max-height @transition;
+            }
+
+            @media @screen-desktop {
+                &__modal {
+                    min-width: 35rem;
+                    padding: 1rem 3rem;
+                }
+            }
+        }
+    }
+}
