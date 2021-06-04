@@ -3,7 +3,7 @@ import BEMHelper from '../../../utils/bem';
 import ModalWrapper from 'nav-frontend-modal';
 import './utloggingsvarsel.less';
 import './utloggingsmodal-transition.less';
-import { getSelvbetjeningIdtoken } from './token.utils';
+import { getSelvbetjeningIdtoken, parseJwt } from './token.utils';
 import { checkTimeStampAndSetTimeStamp } from './timestamp.utils';
 import ResizeHandler, { BREAKPOINT, WindowType } from './komponenter/ResizeHandler';
 import { verifyWindowObj } from '../../../utils/Environment';
@@ -27,11 +27,11 @@ const Utloggingsvarsel: FunctionComponent = () => {
         ModalWrapper.setAppElement(setModalElement());
 
         const token = getSelvbetjeningIdtoken();
-        if (token || true) {
+        if (token) {
             try {
-                // const jwt = parseJwt(token);
-                // const timestamp = jwt['exp'];
-                const timestamp = 1622814648;
+                 const jwt = parseJwt(token);
+                 const timestamp = jwt['exp'];
+
                 if (timestamp) {
                     checkTimeStampAndSetTimeStamp(timestamp, setModalOpen, setUnixTimestamp);
                 }
@@ -45,7 +45,6 @@ const Utloggingsvarsel: FunctionComponent = () => {
 
     return (
         <div id="utloggingsvarsel" className={cls.className + ` ${setOpenClsName()}`}>
-            <button onClick={() => setModalOpen((prevState) => !prevState)}>click me!</button>
             <ModalWrapper
                 parentSelector={modalMountPoint}
                 onRequestClose={toggleModal}

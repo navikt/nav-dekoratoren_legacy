@@ -24,7 +24,6 @@ const Nedteller: FunctionComponent<Props> = (props) => {
         <div className="utloggingsvarsel__timer">
             <Clock width="1.125rem" height="1.125rem" />
             <TypografiBase type={props.typoGrafi}>{tekst}</TypografiBase>
-            {/*<TypografiBase type={props.typoGrafi}>Du blir automatisk logget ut om 3 minutter</TypografiBase>*/}
         </div>
     );
 };
