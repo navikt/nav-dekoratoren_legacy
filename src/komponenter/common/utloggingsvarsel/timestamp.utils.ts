@@ -22,13 +22,13 @@ export const checkTimeStampAndSetTimeStamp = (
 };
 
 const timeout = (
-    timeout: number,
+    chillout: number,
     setModalOpen: Dispatch<SetStateAction<boolean>>,
     setUnixTimeStamp: Dispatch<SetStateAction<number>>
 ) => {
     setTimeout(() => {
         setUtloggingVarsel(ANTALL_MIN_NAR_VARSELSTART, setModalOpen, setUnixTimeStamp);
-    }, timeout);
+    }, chillout);
 };
 
 const setUtloggingVarsel = (

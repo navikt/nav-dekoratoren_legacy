@@ -13,7 +13,6 @@ const UtloggingNavigasjon: FunctionComponent<Props> = (props) => {
 
     return (
         <nav className={cls.element('navigasjon')} aria-label="minimere og lukk varsel valg">
-
             <button
                 className={cls.element('lukk')}
                 tabIndex={minimized ? -1 : 0}
