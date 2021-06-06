@@ -40,6 +40,7 @@ export interface Params {
     URL_LOOKUP_TABLE: boolean;
     SHARE_SCREEN: boolean;
     UTILS_BACKGROUND?: string;
+    UTLOGGINGSVARSEL: boolean;
 }
 
 export interface Cookies {
@@ -77,6 +78,7 @@ export const initialState: Environment = {
         CHATBOT: false,
         URL_LOOKUP_TABLE: false,
         SHARE_SCREEN: false,
+        UTLOGGINGSVARSEL: false,
     },
 
     // Cookies

@@ -28,7 +28,7 @@ export interface TilbakemeldingRespons {
 }
 
 export default function reducer(state: DataElement = initalState, action: Handling): DataElement {
-    switch (action.type) {
+             switch (action.type) {
         case ActionType.SETT_TILBAKEMELDING_OK:
             return { ...state, status: Status.OK };
         case ActionType.SETT_TILBAKEMELDING_PENDING:

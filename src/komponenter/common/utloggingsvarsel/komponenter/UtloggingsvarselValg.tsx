@@ -5,13 +5,18 @@ import { useSelector } from 'react-redux';
 import { getLoginUrl } from '../../../../utils/login';
 import { AppState } from '../../../../store/reducers';
 
+interface Props {
+    minimized: boolean;
+}
+
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
-    environment: state.environment,
+    environment: state.environment
 });
 
-const UtloggingsvarselValg: FunctionComponent = () => {
+const UtloggingsvarselValg: FunctionComponent<Props> = (props) => {
     const cls = BEMHelper('utloggingsvarsel');
+    const { minimized } = props;
 
     const { arbeidsflate, environment } = useSelector(stateSelector);
     const { LOGOUT_URL } = environment;
@@ -20,7 +25,8 @@ const UtloggingsvarselValg: FunctionComponent = () => {
     return (
         <div className={cls.element('valg')}>
             <Knapp
-                type="hoved"
+                type='hoved'
+                tabIndex={minimized ? -1 : 0}
                 onClick={() => {
                     window.location.href = LOGIN_URL;
                 }}
@@ -28,7 +34,8 @@ const UtloggingsvarselValg: FunctionComponent = () => {
                 Logg inn på nytt
             </Knapp>
             <Knapp
-                type="hoved"
+                type='hoved'
+                tabIndex={minimized ? -1 : 0}
                 onClick={() => {
                     window.location.href = LOGOUT_URL;
                 }}

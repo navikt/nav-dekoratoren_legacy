@@ -8,8 +8,15 @@ import { checkTimeStampAndSetTimeStamp } from './timestamp.utils';
 import ResizeHandler, { BREAKPOINT, WindowType } from './komponenter/ResizeHandler';
 import { verifyWindowObj } from '../../../utils/Environment';
 import UtloggingsvarselInnhold from './komponenter/UtloggingsvarselInnhold';
+import { AppState } from '../../../store/reducers';
+import { useSelector } from 'react-redux';
+
+const stateSelector = (state: AppState) => ({
+    utloggingsvarsel: state.environment.PARAMS.UTLOGGINGSVARSEL
+});
 
 const Utloggingsvarsel: FunctionComponent = () => {
+    const { utloggingsvarsel } = useSelector(stateSelector);
     const cls = BEMHelper('utloggingsvarsel');
     const windowOnMount = () =>
         verifyWindowObj() && window.innerWidth > BREAKPOINT ? WindowType.DESKTOP : WindowType.MOBILE;
@@ -27,11 +34,10 @@ const Utloggingsvarsel: FunctionComponent = () => {
         ModalWrapper.setAppElement(setModalElement());
 
         const token = getSelvbetjeningIdtoken();
-        if (token) {
+        if (utloggingsvarsel && token) {
             try {
-                 const jwt = parseJwt(token);
-                 const timestamp = jwt['exp'];
-
+                const jwt = parseJwt(token);
+                const timestamp = jwt['exp'];
                 if (timestamp) {
                     checkTimeStampAndSetTimeStamp(timestamp, setModalOpen, setUnixTimestamp);
                 }
@@ -44,14 +50,15 @@ const Utloggingsvarsel: FunctionComponent = () => {
     ResizeHandler({ setWindowType, windowType });
 
     return (
-        <div id="utloggingsvarsel" className={cls.className + ` ${setOpenClsName()}`}>
+        <div id='utloggingsvarsel' className={cls.className + ` ${setOpenClsName()}`}>
             <ModalWrapper
                 parentSelector={modalMountPoint}
                 onRequestClose={toggleModal}
-                contentLabel="varsel for utløpende sesjon av innlogget bruker"
+                contentLabel='varsel for utløpende sesjon av innlogget bruker'
                 isOpen={modalOpen}
                 className={cls.element('modal')}
                 closeButton={false}
+
             >
                 <UtloggingsvarselInnhold
                     setModalOpen={setModalOpen}

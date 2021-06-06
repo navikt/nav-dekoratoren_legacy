@@ -5,17 +5,21 @@ import { Element } from 'nav-frontend-typografi';
 
 interface Props {
     setMinimized: Dispatch<SetStateAction<boolean>>;
+    minimized: boolean;
 }
 const UtloggingNavigasjon: FunctionComponent<Props> = (props) => {
     const cls = BEMHelper('utloggingsvarsel');
-    const { setMinimized } = props;
+    const { setMinimized, minimized } = props;
 
     return (
         <nav className={cls.element('navigasjon')} aria-label="minimere og lukk varsel valg">
+
             <button
                 className={cls.element('lukk')}
+                tabIndex={minimized ? -1 : 0}
                 onClick={() => {
                     document.body.style.overflow = 'initial';
+                    document.body.setAttribute("aria-hidden", "false");
                     setMinimized((prevState) => !prevState);
                 }}
                 aria-label="lukk modalen"

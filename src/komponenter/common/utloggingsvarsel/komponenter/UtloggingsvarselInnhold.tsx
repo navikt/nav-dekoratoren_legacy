@@ -9,6 +9,8 @@ import { WindowType } from './ResizeHandler';
 import BEMHelper from '../../../../utils/bem';
 import { getCurrentTimeStamp, timeStampIkkeUtgatt } from '../timestamp.utils';
 import { useInterval } from '../useInterval';
+import { AppState } from '../../../../store/reducers';
+import { useSelector } from 'react-redux';
 
 interface Props {
     setModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -19,13 +21,20 @@ interface Props {
     windowType: WindowType;
 }
 
+const stateSelector = (state: AppState) => ({
+    environment: state.environment
+});
+
 const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
     const [tid, setTid] = useState<string>('0 minutter');
-    const [vistSistePaminnelse, setVistSistePaminnelse] = useState<boolean>(false);
     const [overskrift, setOverskrift] = useState<string>('Du blir snart logget ut');
-    const { setModalOpen, setMinimized, modalOpen, minimized, timestamp } = props;
     const [interval, setInterval] = useState<boolean>(timeStampIkkeUtgatt(props.timestamp - getCurrentTimeStamp()));
+    const [vistSistePaminnelse, setVistSistePaminnelse] = useState<boolean>(false);
+
+    const { setModalOpen, setMinimized, modalOpen, minimized, timestamp } = props;
+    const { environment } = useSelector(stateSelector)
     const cls = BEMHelper('utloggingsvarsel');
+    const { LOGOUT_URL } = environment;
 
     const openModalOneMinLeft = () => {
         setVistSistePaminnelse(true);
@@ -37,6 +46,7 @@ const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
             const tokenExpire = timestamp - getCurrentTimeStamp();
             if (timeStampIkkeUtgatt(getCurrentTimeStamp() - timestamp + 1)) {
                 setInterval(false);
+                window.location.href = LOGOUT_URL;
             }
 
             if (tokenExpire <= 60) {
@@ -63,12 +73,12 @@ const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
                 tid={tid}
                 visFullTekst={true}
             />
-            <div className={cls.element('main-wrapper')}>
+            <div className={cls.element('main-wrapper')} aria-hidden={minimized}>
                 <Header />
                 <div className={cls.element('container')}>
-                    <UtloggingNavigasjon setMinimized={setMinimized} />
+                    <UtloggingNavigasjon setMinimized={setMinimized} minimized={minimized} />
                     <UtloggingsvarselTekstInnhold overskrift={overskrift} />
-                    <UtloggingsvarselValg />
+                    <UtloggingsvarselValg minimized={minimized} />
                     <Nedteller typoGrafi="normaltekst" tekst={'Du blir automatisk logget ut om '.concat(tid)} />
                 </div>
             </div>

@@ -17,17 +17,39 @@ interface Props {
 
 const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
     const cls = BEMHelper('liteExpanderbartvindu');
-    const { setMinimized, setModalOpen, typoGrafi, tid, visFullTekst } = props;
+    const { setMinimized, setModalOpen, minimized, typoGrafi, tid, visFullTekst } = props;
     const tekst = visFullTekst ? 'Du blir automatisk logget ut om ' : '';
+
+    const setFocus = (id: string) => {
+        const element = document.getElementById(id);
+        if(element) {
+            element.focus();
+        }
+    }
+
+    const keyHandler = (event: any, buttonkey: string) => {
+        if(buttonkey === 'open' && event.shiftKey && event.key === 'Tab') {
+            event.preventDefault();
+            setFocus('desktop-sok-knapp')
+        }else if (buttonkey === 'close' && !event.shiftKey && event.key === 'Tab') {
+            event.preventDefault();
+            setFocus('footer-til-toppen')
+        }
+    }
+
     return (
-        <div className={cls.className}>
+        <nav className={cls.className} aria-hidden={!minimized}>
             <div className={cls.element('wrapper')}>
                 <Nedteller typoGrafi={typoGrafi} tekst={tekst.concat(tid)} />
                 <div className={cls.element('expanderbart-nav')}>
                     <>
                         <div className={cls.element('btn-container')}>
                             <button
+                                id="open-utloggingsvarsel"
+                                tabIndex={minimized ? 0 : -1}
+                                onKeyDownCapture={event => keyHandler(event, 'open')}
                                 onClick={() => {
+                                    document.body.setAttribute("aria-hidden", "true");
                                     document.body.style.overflow = 'hidden';
                                     setMinimized(false);
                                 }}
@@ -41,6 +63,9 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
                     </>
                     <div className={cls.element('btn-container')}>
                         <button
+                            id="close-utloggingsvarsel"
+                            tabIndex={minimized ? 0 : -1}
+                            onKeyDownCapture={event => keyHandler(event, 'close')}
                             onClick={() => {
                                 setMinimized(false);
                                 setModalOpen(false);
@@ -54,7 +79,7 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </nav>
     );
 };
 export default LiteEkspanderbartvindu;

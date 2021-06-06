@@ -60,6 +60,7 @@ const FooterTopp = () => {
                             tekst={<Tekst id="footer-til-toppen" />}
                             ikon={<PilOppHvit style={{ height: '18px', width: '18px' }} />}
                             venstrestiltIkon={true}
+                            id="footer-til-toppen"
                         />
                     </div>
                 </div>
