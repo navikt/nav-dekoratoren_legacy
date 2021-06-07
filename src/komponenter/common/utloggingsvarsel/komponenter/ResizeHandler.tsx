@@ -26,7 +26,7 @@ const ResizeHandler = (props: Props) => {
         };
 
         window.addEventListener('resize', () => resize());
-        window.removeEventListener('resize', () => resize());
+        return () => window.removeEventListener('resize', () => resize());
     }, [windowType, setWindowType]);
 
     return null;
