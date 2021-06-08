@@ -13,9 +13,10 @@ interface Props {
     ikon: JSX.Element;
     tekst: string | JSX.Element;
     venstrestiltIkon?: boolean;
+    id?: string;
 }
 
-const LenkeMedIkon = ({ className, href = '#', onClick, ikon, tekst, venstrestiltIkon = false }: Props) => {
+const LenkeMedIkon = ({ className, href = '#', onClick, ikon, tekst, venstrestiltIkon = false, id = '' }: Props) => {
     const cls = BEMHelper('lenke-med-ikon');
     return (
         <Lenke
@@ -25,6 +26,7 @@ const LenkeMedIkon = ({ className, href = '#', onClick, ikon, tekst, venstrestil
             onClick={onClick}
             href={href}
             role="button"
+            id={id}
         >
             <span>{tekst}</span>
             <span className={cls.element('ikon')}>{ikon}</span>

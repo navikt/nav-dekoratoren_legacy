@@ -13,8 +13,10 @@ import dotenv from 'dotenv';
 import mockMenu from './mock/menu.json';
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 // Local environment - import .env
-if (process.env.NODE_ENV !== 'production' || process.env.PROD_TEST) {
+if (!isProduction || process.env.PROD_TEST) {
     dotenv.config();
 }
 
@@ -111,7 +113,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
                 if (xpRes.ok && xpRes.status === 200) {
                     return xpRes;
                 } else {
-                    throw `Response ${xpRes.status}`;
+                    throw new Error(`Response ${xpRes.status}`);
                 }
             })
             .then((xpRes) => xpRes.json())
@@ -203,7 +205,7 @@ app.use(
     `${appBasePath}/`,
     express.static(buildPath, {
         setHeaders: (res: Response) => {
-            if (process.env.NODE_ENV === 'production') {
+            if (isProduction) {
                 // Override cache on static files
                 res.header('Cache-Control', `max-age=${fiveMinutesInSeconds}`);
                 res.header('Pragma', `max-age=${fiveMinutesInSeconds}`);

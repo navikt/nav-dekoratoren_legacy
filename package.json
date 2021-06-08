@@ -1,6 +1,6 @@
 {
     "name": "nav-dekoratoren",
-    "version": "1.30.44-prod-gcp",
+    "version": "1.30.45-prod-gcp",
     "private": true,
     "scripts": {
         "start": "npm-run-all -p -r build-and-watch start-server-and-watch typecheck-watch",
@@ -30,6 +30,7 @@
         "@navikt/nav-chatbot": "^2.4.0",
         "@navikt/nav-dekoratoren-moduler": "^1.0.25",
         "@promster/express": "^5.0.1",
+        "@types/react-modal": "^3.12.0",
         "amplitude-js": "^7.4.1",
         "bowser": "^2.11.0",
         "classnames": "^2.2.6",

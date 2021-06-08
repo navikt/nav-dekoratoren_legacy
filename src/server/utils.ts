@@ -24,6 +24,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     const language = mapToLocale(req.query.language as string);
     const chosenLanguage = (language?.toString().toLowerCase() || Locale.IKKEBESTEMT) as Locale;
     const chosenContext = (req.query.context?.toString().toLowerCase() || MenuValue.IKKEBESTEMT) as MenuValue;
+    const isProduction = process.env.NODE_ENV === 'production';
 
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
 
@@ -65,6 +66,8 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                     UTILS_BACKGROUND: req.query.utilsBackground as string,
                 }),
                 SHARE_SCREEN: req.query.shareScreen !== 'false',
+                UTLOGGINGSVARSEL:
+                    req.query.utloggingsvarsel === 'true' || (req.query.utloggingsvarsel !== 'false' && !isProduction),
             },
         }),
         ...(cookies && {
