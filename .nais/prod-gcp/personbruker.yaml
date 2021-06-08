@@ -24,6 +24,7 @@ spec:
   ingresses:
     - https://appres.nav.no/common-html/v4/navno
     - https://www.nav.no/dekoratoren
+    - https://www.nav.no/gcp-dekoratoren
   accessPolicy:
     outbound:
       external:
