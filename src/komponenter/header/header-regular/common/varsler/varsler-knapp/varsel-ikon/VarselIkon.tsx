@@ -10,9 +10,10 @@ type Props = {
 
 export const VarselIkon = ({ isOpen, antallUleste = 0 }: Props) => {
     const cls = BEMHelper('varselbjelle-ikon');
+    const clsName = cls.className.concat(isOpen ? ' ' + cls.modifier('open') : '');
 
     return (
-        <div className={`${cls.className}${isOpen ? ` ${cls.className}--open` : ''}`}>
+        <div className={clsName}>
             <div className={cls.element('ring')} />
             <div className={cls.element('bell')} />
             <div className={cls.element('lip')} />
