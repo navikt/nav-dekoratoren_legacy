@@ -22,7 +22,8 @@ spec:
     min: 2
     max: 4
   ingresses:
-    - https://intern.nav.no/dekoratoren
+    - https://appres.nav.no/common-html/v4/navno
+    - https://www.nav.no/dekoratoren
   accessPolicy:
     outbound:
       external:
@@ -34,7 +35,7 @@ spec:
     - name: XP_BASE_URL
       value: https://www.nav.no
     - name: APP_BASE_URL
-      value: https://intern.nav.no
+      value: https://www.nav.no
     - name: APP_BASE_PATH
       value: /dekoratoren
     - name: API_XP_SERVICES_URL
