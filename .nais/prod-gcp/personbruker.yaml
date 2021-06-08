@@ -10,19 +10,19 @@ spec:
   image: {{image}}:{{version}}
   port: 8088
   liveness:
-    path: /gcp-dekoratoren/isAlive
+    path: /dekoratoren/isAlive
     initialDelay: 10
   readiness:
-    path: /gcp-dekoratoren/isReady
+    path: /dekoratoren/isReady
     initialDelay: 10
   prometheus:
     enabled: true
-    path: /gcp-dekoratoren/metrics
+    path: /dekoratoren/metrics
   replicas:
     min: 2
     max: 4
   ingresses:
-    - https://www.nav.no/gcp-dekoratoren
+    - https://intern.nav.no/dekoratoren
   accessPolicy:
     outbound:
       external:
@@ -34,7 +34,7 @@ spec:
     - name: XP_BASE_URL
       value: https://www.nav.no
     - name: APP_BASE_URL
-      value: https://www.nav.no
+      value: https://intern.nav.no
     - name: APP_BASE_PATH
       value: /gcp-dekoratoren
     - name: API_XP_SERVICES_URL
