@@ -37,13 +37,13 @@ jobs:
       - name: Generate nais variables
         run: |
           cat > .nais/vars.yaml <<EOF
-          namespace: default
+          namespace: personbruker
           image: $IMAGE_REGISTRY/$IMAGE_NAME
           version: $IMAGE_VERSION
           EOF
       - uses: nais/deploy/actions/deploy@master
         env:
-          CLUSTER: prod-sbs
+          CLUSTER: prod-gcp
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          RESOURCE: .nais/prod-sbs/default.yaml
+          RESOURCE: .nais/prod-gcp/personbruker.yaml
           VARS: .nais/vars.yaml
