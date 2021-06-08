@@ -1,4 +1,4 @@
-name: Deploy-to-prod
+name: Deploy-to-prod-gcp
 on:
   push:
     tags:
