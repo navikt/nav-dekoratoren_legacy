@@ -17,18 +17,19 @@ export const checkTimeStampAndSetTimeStamp = (
         if (differanse < ANTALL_MIN_NAR_VARSELSTART) {
             return setUtloggingVarsel(jwtTimestamp, setModalOpen, setUnixTimeStamp);
         }
-        return timeout(differanse - ANTALL_MIN_NAR_VARSELSTART, setModalOpen, setUnixTimeStamp);
+        return timeout(jwtTimestamp, differanse - ANTALL_MIN_NAR_VARSELSTART, setModalOpen, setUnixTimeStamp);
     }
 };
 
 const timeout = (
-    chillout: number,
+    timestamp: number,
+    timeoutDiff: number,
     setModalOpen: Dispatch<SetStateAction<boolean>>,
     setUnixTimeStamp: Dispatch<SetStateAction<number>>
 ) => {
     setTimeout(() => {
-        setUtloggingVarsel(ANTALL_MIN_NAR_VARSELSTART, setModalOpen, setUnixTimeStamp);
-    }, chillout);
+        setUtloggingVarsel(timestamp, setModalOpen, setUnixTimeStamp);
+    }, timeoutDiff * 1000);
 };
 
 const setUtloggingVarsel = (

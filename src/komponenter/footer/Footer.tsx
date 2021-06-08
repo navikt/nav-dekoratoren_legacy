@@ -12,11 +12,7 @@ const Footer = () => {
         <div className={'decorator-wrapper'}>
             <Utloggingsvarsel />
             <footer className="sitefooter">
-                {PARAMS.SIMPLE || PARAMS.SIMPLE_FOOTER ? (
-                    <SimpleFooter />
-                ) : (
-                    <FooterRegular />
-                )}
+                {PARAMS.SIMPLE || PARAMS.SIMPLE_FOOTER ? <SimpleFooter /> : <FooterRegular />}
             </footer>
         </div>
     );

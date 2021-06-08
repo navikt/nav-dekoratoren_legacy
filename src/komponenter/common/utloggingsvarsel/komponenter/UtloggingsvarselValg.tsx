@@ -11,7 +11,7 @@ interface Props {
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
-    environment: state.environment
+    environment: state.environment,
 });
 
 const UtloggingsvarselValg: FunctionComponent<Props> = (props) => {
@@ -25,7 +25,7 @@ const UtloggingsvarselValg: FunctionComponent<Props> = (props) => {
     return (
         <div className={cls.element('valg')}>
             <Knapp
-                type='hoved'
+                type="hoved"
                 tabIndex={minimized ? -1 : 0}
                 onClick={() => {
                     window.location.href = LOGIN_URL;
@@ -34,7 +34,7 @@ const UtloggingsvarselValg: FunctionComponent<Props> = (props) => {
                 Logg inn på nytt
             </Knapp>
             <Knapp
-                type='hoved'
+                type="hoved"
                 tabIndex={minimized ? -1 : 0}
                 onClick={() => {
                     window.location.href = LOGOUT_URL;

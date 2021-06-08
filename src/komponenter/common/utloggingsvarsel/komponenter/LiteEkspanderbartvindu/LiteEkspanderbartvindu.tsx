@@ -22,20 +22,20 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
 
     const setFocus = (id: string) => {
         const element = document.getElementById(id);
-        if(element) {
+        if (element) {
             element.focus();
         }
-    }
+    };
 
     const keyHandler = (event: any, buttonkey: string) => {
-        if(buttonkey === 'open' && event.shiftKey && event.key === 'Tab') {
+        if (buttonkey === 'open' && event.shiftKey && event.key === 'Tab') {
             event.preventDefault();
-            setFocus('desktop-sok-knapp')
-        }else if (buttonkey === 'close' && !event.shiftKey && event.key === 'Tab') {
+            setFocus('desktop-sok-knapp');
+        } else if (buttonkey === 'close' && !event.shiftKey && event.key === 'Tab') {
             event.preventDefault();
-            setFocus('footer-til-toppen')
+            setFocus('footer-til-toppen');
         }
-    }
+    };
 
     return (
         <nav className={cls.className} aria-hidden={!minimized}>
@@ -47,9 +47,9 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
                             <button
                                 id="open-utloggingsvarsel"
                                 tabIndex={minimized ? 0 : -1}
-                                onKeyDownCapture={event => keyHandler(event, 'open')}
+                                onKeyDownCapture={(event) => keyHandler(event, 'open')}
                                 onClick={() => {
-                                    document.body.setAttribute("aria-hidden", "true");
+                                    document.body.setAttribute('aria-hidden', 'true');
                                     document.body.style.overflow = 'hidden';
                                     setMinimized(false);
                                 }}
@@ -65,7 +65,7 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
                         <button
                             id="close-utloggingsvarsel"
                             tabIndex={minimized ? 0 : -1}
-                            onKeyDownCapture={event => keyHandler(event, 'close')}
+                            onKeyDownCapture={(event) => keyHandler(event, 'close')}
                             onClick={() => {
                                 setMinimized(false);
                                 setModalOpen(false);

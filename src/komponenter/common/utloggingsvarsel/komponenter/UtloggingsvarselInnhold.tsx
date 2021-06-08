@@ -1,4 +1,4 @@
-import React, { Dispatch, FunctionComponent, SetStateAction, useState } from 'react';
+import React, { Dispatch, FunctionComponent, SetStateAction, useEffect, useState } from 'react';
 import LiteEkspanderbartvindu from './LiteEkspanderbartvindu/LiteEkspanderbartvindu';
 import Header from './Header';
 import UtloggingNavigasjon from './UtloggingNavigasjon';
@@ -22,19 +22,23 @@ interface Props {
 }
 
 const stateSelector = (state: AppState) => ({
-    environment: state.environment
+    environment: state.environment,
 });
 
 const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
-    const [tid, setTid] = useState<string>('0 minutter');
+    const [tid, setTid] = useState<string>('- minutter');
     const [overskrift, setOverskrift] = useState<string>('Du blir snart logget ut');
     const [interval, setInterval] = useState<boolean>(timeStampIkkeUtgatt(props.timestamp - getCurrentTimeStamp()));
     const [vistSistePaminnelse, setVistSistePaminnelse] = useState<boolean>(false);
 
     const { setModalOpen, setMinimized, modalOpen, minimized, timestamp } = props;
-    const { environment } = useSelector(stateSelector)
+    const { environment } = useSelector(stateSelector);
     const cls = BEMHelper('utloggingsvarsel');
     const { LOGOUT_URL } = environment;
+
+    useEffect(() => {
+        setInterval(timeStampIkkeUtgatt(props.timestamp - getCurrentTimeStamp()));
+    }, [props.timestamp]);
 
     const openModalOneMinLeft = () => {
         setVistSistePaminnelse(true);

@@ -54,28 +54,28 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 LEVEL: (req.query.level || 'Level3') as string,
                 LANGUAGE: chosenLanguage,
                 ...(req.query.availableLanguages && {
-                    AVAILABLE_LANGUAGES: JSON.parse(req.query.availableLanguages as string)
+                    AVAILABLE_LANGUAGES: JSON.parse(req.query.availableLanguages as string),
                 }),
                 ...(req.query.breadcrumbs && {
-                    BREADCRUMBS: JSON.parse(req.query.breadcrumbs as string)
+                    BREADCRUMBS: JSON.parse(req.query.breadcrumbs as string),
                 }),
                 FEEDBACK: req.query.feedback === 'true',
                 CHATBOT: req.query.chatbot !== 'false',
                 URL_LOOKUP_TABLE: req.query.urlLookupTable !== 'false',
                 ...(req.query.utilsBackground && {
-                    UTILS_BACKGROUND: req.query.utilsBackground as string
+                    UTILS_BACKGROUND: req.query.utilsBackground as string,
                 }),
                 SHARE_SCREEN: req.query.shareScreen !== 'false',
-                UTLOGGINGSVARSEL: (req.query.utloggingsvarsel === 'true') ||
-                    (req.query.utloggingsvarsel !== 'false' && !isProduction)
-            }
+                UTLOGGINGSVARSEL:
+                    req.query.utloggingsvarsel === 'true' || (req.query.utloggingsvarsel !== 'false' && !isProduction),
+            },
         }),
         ...(cookies && {
             COOKIES: {
                 CONTEXT: cookies['decorator-context'] as MenuValue,
-                LANGUAGE: cookies['decorator-language'] as Locale
-            }
-        })
+                LANGUAGE: cookies['decorator-language'] as Locale,
+            },
+        }),
     };
 };
 
@@ -214,7 +214,7 @@ const mapToLocale = (language?: string) => {
         // deprecated
         norsk: 'nb',
         engelsk: 'en',
-        samisk: 'se'
+        samisk: 'se',
     };
     return map[language] || 'ukjent-verdi';
 };

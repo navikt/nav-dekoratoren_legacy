@@ -18,7 +18,7 @@ const UtloggingNavigasjon: FunctionComponent<Props> = (props) => {
                 tabIndex={minimized ? -1 : 0}
                 onClick={() => {
                     document.body.style.overflow = 'initial';
-                    document.body.setAttribute("aria-hidden", "false");
+                    document.body.setAttribute('aria-hidden', 'false');
                     setMinimized((prevState) => !prevState);
                 }}
                 aria-label="lukk modalen"

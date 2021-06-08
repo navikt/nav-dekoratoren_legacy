@@ -12,7 +12,7 @@ import { AppState } from '../../../store/reducers';
 import { useSelector } from 'react-redux';
 
 const stateSelector = (state: AppState) => ({
-    utloggingsvarsel: state.environment.PARAMS.UTLOGGINGSVARSEL
+    utloggingsvarsel: state.environment.PARAMS.UTLOGGINGSVARSEL,
 });
 
 const Utloggingsvarsel: FunctionComponent = () => {
@@ -50,15 +50,14 @@ const Utloggingsvarsel: FunctionComponent = () => {
     ResizeHandler({ setWindowType, windowType });
 
     return (
-        <div id='utloggingsvarsel' className={cls.className + ` ${setOpenClsName()}`}>
+        <div id="utloggingsvarsel" className={cls.className + ` ${setOpenClsName()}`}>
             <ModalWrapper
                 parentSelector={modalMountPoint}
                 onRequestClose={toggleModal}
-                contentLabel='varsel for utløpende sesjon av innlogget bruker'
+                contentLabel="varsel for utløpende sesjon av innlogget bruker"
                 isOpen={modalOpen}
                 className={cls.element('modal')}
                 closeButton={false}
-
             >
                 <UtloggingsvarselInnhold
                     setModalOpen={setModalOpen}

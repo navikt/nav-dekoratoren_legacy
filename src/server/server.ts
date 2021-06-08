@@ -39,7 +39,6 @@ const backupCache = new NodeCache({
     checkperiod: 0,
 });
 
-
 // Middleware
 app.disable('x-powered-by');
 app.use(compression());
