@@ -10,20 +10,18 @@ spec:
   image: {{image}}:{{version}}
   port: 8088
   liveness:
-    path: /isAlive
+    path: /dekoratoren/isAlive
     initialDelay: 10
   readiness:
-    path: /isReady
+    path: /dekoratoren/isReady
     initialDelay: 10
   prometheus:
     enabled: true
-    path: /metrics
+    path: /dekoratoren/metrics
   replicas:
     min: 2
     max: 4
   ingresses:
-    - https://appres.nav.no/common-html/v4/navno
-    - https://www.nav.no/dekoratoren
     - https://www.nav.no/gcp-dekoratoren
   accessPolicy:
     outbound:
