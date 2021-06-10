@@ -73,6 +73,9 @@ const Skiplinks = ({ simple }: Props) => {
                   {
                       anchorId: mainContentId,
                       tekstId: 'skiplinks-ga-til-hovedinnhold',
+                      onClick: () => {
+                          document.getElementById(mainContentId)?.focus();
+                      },
                   },
               ]
             : []),
