@@ -15,7 +15,6 @@ import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
 import Cookies from 'universal-cookie';
 import './index.less';
-import { initPageViewObserver } from './utils/amplitude';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
@@ -29,7 +28,6 @@ const run = () => {
     fetchEnv()
         .then((environment) => {
             initAnalytics(environment.PARAMS);
-            initPageViewObserver(environment.PARAMS);
             const cookies = new Cookies();
             const store = createStore(environment, cookies);
             ReactDOM.hydrate(

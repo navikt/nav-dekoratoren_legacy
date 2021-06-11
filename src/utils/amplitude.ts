@@ -1,5 +1,8 @@
 import { verifyWindowObj } from 'utils/Environment';
 import { Params } from 'store/reducers/environment-duck';
+import { useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
+import { useState, useEffect } from 'react';
 
 // Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
 const amplitude = verifyWindowObj() ? require('amplitude-js') : () => null;
@@ -19,9 +22,28 @@ export const initAmplitude = (params: Params) => {
     }
 };
 
+export const usePushstatePageviewHook = () => {
+    const { params } = useSelector((state: AppState) => ({ params: state.environment.PARAMS }));
+    const [pushStateTimestamp, setPushStateTimestamp] = useState(0);
+
+    useEffect(() => {
+        const pushState = window.history.pushState;
+        window.history.pushState = (...args: Parameters<typeof pushState>) => {
+            pushState.call(window.history, ...args);
+            setTimeout(() => setPushStateTimestamp(Date.now()), 1000);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (pushStateTimestamp) {
+            logPageView(params);
+        }
+    }, [pushStateTimestamp]);
+};
+
 export function logPageView(params: Params, title: string | null = null) {
     logAmplitudeEvent('sidevisning', {
-        sidetittel: title ? title : document.title,
+        sidetittel: title || document.title,
         parametre: {
             ...params,
             BREADCRUMBS: !!(params?.BREADCRUMBS && params.BREADCRUMBS.length > 0),
@@ -30,18 +52,6 @@ export function logPageView(params: Params, title: string | null = null) {
             }),
         },
     });
-}
-
-export function initPageViewObserver(params: Params) {
-    const title: HTMLTitleElement | null = document.querySelector('title');
-    if (title instanceof HTMLTitleElement) {
-        new MutationObserver(function (mutations) {
-            if (currentPageTitle !== title.text) {
-                logPageView(params);
-                currentPageTitle = title.text;
-            }
-        }).observe(title, { subtree: true, characterData: true, childList: true });
-    }
 }
 
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
