@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 
 // Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
 const amplitude = verifyWindowObj() ? require('amplitude-js') : () => null;
-let currentPageTitle = 'undefined';
 
 export const initAmplitude = (params: Params) => {
     if (amplitude) {
@@ -17,7 +16,6 @@ export const initAmplitude = (params: Params) => {
             includeReferrer: true,
             platform: window.location.toString(),
         });
-        currentPageTitle = window.location.toString();
         logPageView(params);
     }
 };
