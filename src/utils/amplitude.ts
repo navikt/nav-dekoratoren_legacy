@@ -30,7 +30,8 @@ export const usePushstatePageviewHook = () => {
         const pushState = window.history.pushState;
         window.history.pushState = (...args: Parameters<typeof pushState>) => {
             pushState.call(window.history, ...args);
-            setTimeout(() => setPushStateTimestamp(Date.now()), 1000);
+            // delay triggering the pageview to give client-side params time to update
+            setTimeout(() => setPushStateTimestamp(Date.now()), 500);
         };
     }, []);
 
