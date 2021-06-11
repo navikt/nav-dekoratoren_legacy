@@ -42,6 +42,7 @@ export const usePushstatePageviewHook = () => {
 };
 
 export function logPageView(params: Params, title: string | null = null) {
+    console.log('logging pageview!');
     logAmplitudeEvent('sidevisning', {
         sidetittel: title || document.title,
         parametre: {
