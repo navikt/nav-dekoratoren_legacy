@@ -60,7 +60,7 @@ export const Header = () => {
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
     const useSimpleHeader = PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER;
 
-    usePageviewLogger();
+    usePageviewLogger(PARAMS);
 
     const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie, unleashCacheCookie]);
 

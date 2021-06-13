@@ -1,7 +1,5 @@
 import { verifyWindowObj } from 'utils/Environment';
 import { Params } from 'store/reducers/environment-duck';
-import { useSelector } from 'react-redux';
-import { AppState } from 'store/reducers';
 import { useState, useEffect } from 'react';
 
 // Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
@@ -21,24 +19,25 @@ export const initAmplitude = (params: Params) => {
 };
 
 // Ensures page views are logged in applications utilizing client-side routing
-export const usePageviewLogger = () => {
-    const { params } = useSelector((state: AppState) => ({ params: state.environment.PARAMS }));
-    const [pushStateTimestamp, setPushStateTimestamp] = useState(0);
+export const usePageviewLogger = (params: Params) => {
+    const [pushStateUrl, setPushStateUrl] = useState<string | null>();
 
     useEffect(() => {
         const pushState = window.history.pushState;
         window.history.pushState = (...args: Parameters<typeof pushState>) => {
             pushState.call(window.history, ...args);
+            const url = args[2];
+
             // delay triggering the pageview to give client-side params time to update
-            setTimeout(() => setPushStateTimestamp(Date.now()), 1000);
+            setTimeout(() => setPushStateUrl(url));
         };
     }, []);
 
     useEffect(() => {
-        if (pushStateTimestamp) {
+        if (pushStateUrl) {
             logPageView(params);
         }
-    }, [pushStateTimestamp]);
+    }, [pushStateUrl]);
 };
 
 export function logPageView(params: Params, title: string | null = null) {
