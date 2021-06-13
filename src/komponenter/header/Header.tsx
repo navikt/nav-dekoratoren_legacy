@@ -31,7 +31,7 @@ import Modal from 'nav-frontend-modal';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
-import { usePushstatePageviewHook } from 'utils/amplitude';
+import { usePageviewLogger } from 'utils/amplitude';
 import './Header.less';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
@@ -60,7 +60,7 @@ export const Header = () => {
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
     const useSimpleHeader = PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER;
 
-    usePushstatePageviewHook();
+    usePageviewLogger();
 
     const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie, unleashCacheCookie]);
 

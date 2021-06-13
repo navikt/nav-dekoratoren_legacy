@@ -20,7 +20,8 @@ export const initAmplitude = (params: Params) => {
     }
 };
 
-export const usePushstatePageviewHook = () => {
+// Ensures page views are logged in applications utilizing client-side routing
+export const usePageviewLogger = () => {
     const { params } = useSelector((state: AppState) => ({ params: state.environment.PARAMS }));
     const [pushStateTimestamp, setPushStateTimestamp] = useState(0);
 
