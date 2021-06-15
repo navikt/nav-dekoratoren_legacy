@@ -1,4 +1,4 @@
-import React, { Dispatch, FunctionComponent, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import LiteEkspanderbartvindu from './LiteEkspanderbartvindu/LiteEkspanderbartvindu';
 import Header from './Header';
 import UtloggingNavigasjon from './UtloggingNavigasjon';

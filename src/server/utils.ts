@@ -28,7 +28,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
 
     const dev = ['localhost', '-q0', '-q1', '-q2', '-q6', 'dev'];
-    const orginDev = (req?: string) => dev.some((orgin) => req?.includes(orgin));
+    const orginDev = (hosturl?: string) => dev.some((orgin) => hosturl?.includes(orgin));
 
     return {
         ENV: process.env.ENV as string,
