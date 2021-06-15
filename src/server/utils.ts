@@ -3,7 +3,6 @@ import { Environment } from 'store/reducers/environment-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { AvailableLanguage, Locale } from 'store/reducers/language-duck';
 import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
-import moment from 'moment';
 
 interface Cookies {
     [key: string]: MenuValue | Locale | string;
@@ -42,7 +41,6 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
         LOGIN_URL: process.env.LOGIN_URL as string,
         LOGOUT_URL: process.env.LOGOUT_URL as string,
         FEEDBACK_API_URL: process.env.FEEDBACK_API_URL as string,
-        SERVER_TIME: moment().valueOf(),
         ...(req.query && {
             PARAMS: {
                 CONTEXT: chosenContext,

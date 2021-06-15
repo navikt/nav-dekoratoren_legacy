@@ -17,7 +17,6 @@ export interface Environment {
     LOGIN_URL: string;
     LOGOUT_URL: string;
     FEEDBACK_API_URL: string;
-    SERVER_TIME: number;
 
     // Parameters
     PARAMS: Params;
@@ -62,7 +61,6 @@ export const initialState: Environment = {
     LOGIN_URL: '',
     LOGOUT_URL: '',
     FEEDBACK_API_URL: '',
-    SERVER_TIME: 0,
 
     // Parameters
     PARAMS: {

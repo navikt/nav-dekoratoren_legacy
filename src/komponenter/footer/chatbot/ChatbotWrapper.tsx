@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { verifyWindowObj } from 'utils/Environment';
@@ -28,12 +28,6 @@ const actionFilterMap = [[['www.nav.no/no/bedrift'], ['arbeidsgiver']]];
 
 export const ChatbotWrapper = ({ ...properties }: any) => {
     const { isChatbotEnabled } = useSelector(stateSelector);
-    const [isMounted, setIsMounted] = useState(false);
-
-    useEffect(() => {
-        const chatbotVersion122IsMounted = document.getElementsByClassName('gxKraP').length > 0;
-        setIsMounted(!chatbotVersion122IsMounted && isChatbotEnabled);
-    }, [isChatbotEnabled]);
 
     const hostname = verifyWindowObj() && window.location.hostname;
     const pathname = verifyWindowObj() && window.location.pathname;
@@ -60,7 +54,7 @@ export const ChatbotWrapper = ({ ...properties }: any) => {
         });
     }
 
-    return isMounted ? (
+    return isChatbotEnabled ? (
         <Chatbot
             {...properties}
             {...{ boostApiUrlBase, actionFilters }}
