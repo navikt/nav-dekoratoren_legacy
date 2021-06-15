@@ -24,9 +24,11 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     const language = mapToLocale(req.query.language as string);
     const chosenLanguage = (language?.toString().toLowerCase() || Locale.IKKEBESTEMT) as Locale;
     const chosenContext = (req.query.context?.toString().toLowerCase() || MenuValue.IKKEBESTEMT) as MenuValue;
-    const isProduction = process.env.NODE_ENV === 'production';
 
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
+
+    const dev = ['localhost', '-q0', '-q1', '-q2', '-q6', 'dev'];
+    const orginDev = (req?: string) => dev.some((orgin) => req?.includes(orgin));
 
     return {
         ENV: process.env.ENV as string,
@@ -67,7 +69,8 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 }),
                 SHARE_SCREEN: req.query.shareScreen !== 'false',
                 UTLOGGINGSVARSEL:
-                    req.query.utloggingsvarsel === 'true' || (req.query.utloggingsvarsel !== 'false' && !isProduction),
+                    req.query.utloggingsvarsel === 'true' ||
+                    (req.query.utloggingsvarsel !== 'false' && orginDev(req.headers?.referer)),
             },
         }),
         ...(cookies && {

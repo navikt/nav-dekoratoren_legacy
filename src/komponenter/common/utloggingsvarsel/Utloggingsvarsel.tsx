@@ -4,27 +4,34 @@ import ModalWrapper from 'nav-frontend-modal';
 import './utloggingsvarsel.less';
 import './utloggingsmodal-transition.less';
 import { getSelvbetjeningIdtoken, parseJwt } from './token.utils';
-import { checkTimeStampAndSetTimeStamp } from './timestamp.utils';
+import { checkTimeStampAndSetTimeStamp, getCurrentTimeStamp, timeStampIkkeUtgatt } from './timestamp.utils';
 import ResizeHandler, { BREAKPOINT, WindowType } from './komponenter/ResizeHandler';
 import { verifyWindowObj } from '../../../utils/Environment';
 import UtloggingsvarselInnhold from './komponenter/UtloggingsvarselInnhold';
 import { AppState } from '../../../store/reducers';
 import { useSelector } from 'react-redux';
+import { useInterval } from './useInterval';
 
 const stateSelector = (state: AppState) => ({
     utloggingsvarsel: state.environment.PARAMS.UTLOGGINGSVARSEL,
+    environment: state.environment,
 });
 
 const Utloggingsvarsel: FunctionComponent = () => {
-    const { utloggingsvarsel } = useSelector(stateSelector);
+    const { utloggingsvarsel, environment } = useSelector(stateSelector);
+    const { LOGOUT_URL } = environment;
     const cls = BEMHelper('utloggingsvarsel');
     const windowOnMount = () =>
         verifyWindowObj() && window.innerWidth > BREAKPOINT ? WindowType.DESKTOP : WindowType.MOBILE;
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
-    const [unitTimeStamp, setUnixTimestamp] = useState<number>(0);
+    const [unixTimeStamp, setUnixTimestamp] = useState<number>(0);
     const [minimized, setMinimized] = useState<boolean>(false);
     const [windowType, setWindowType] = useState<WindowType>(windowOnMount());
+    const [interval, setInterval] = useState<boolean>(timeStampIkkeUtgatt(unixTimeStamp - getCurrentTimeStamp()));
+    const [tid, setTid] = useState<string>('- minutter');
+    const [vistSistePaminnelse, setVistSistePaminnelse] = useState<boolean>(false);
+    const [overskrift, setOverskrift] = useState<string>('Du blir snart logget ut');
     const setOpenClsName = (): string => (minimized ? '' : 'open');
     const toggleModal = (): void => setModalOpen((prevState) => !prevState);
     const modalMountPoint = (): HTMLElement => document.getElementById('utloggingsvarsel') ?? document.body;
@@ -47,6 +54,33 @@ const Utloggingsvarsel: FunctionComponent = () => {
         }
     }, []);
 
+    useEffect(() => {
+        setInterval(timeStampIkkeUtgatt(unixTimeStamp - getCurrentTimeStamp()));
+    }, [unixTimeStamp]);
+
+    useInterval(
+        () => {
+            const tokenExpire = unixTimeStamp - getCurrentTimeStamp();
+            if (timeStampIkkeUtgatt(getCurrentTimeStamp() - unixTimeStamp + 1)) {
+                setInterval(false);
+                window.location.href = LOGOUT_URL;
+            }
+
+            if (tokenExpire <= 60) {
+                if (!vistSistePaminnelse) {
+                    setVistSistePaminnelse(true);
+                    modalOpen ? setMinimized(false) : setModalOpen(true);
+                }
+                setTid(`${Math.floor(tokenExpire)} sekunder`);
+                setOverskrift('Nå blir du logget ut');
+            } else {
+                const min: number = Math.floor(tokenExpire / 60) + 1;
+                setTid(`${min} minutter`);
+            }
+        },
+        interval ? 1000 : null
+    );
+
     ResizeHandler({ setWindowType, windowType });
 
     return (
@@ -62,10 +96,10 @@ const Utloggingsvarsel: FunctionComponent = () => {
                 <UtloggingsvarselInnhold
                     setModalOpen={setModalOpen}
                     setMinimized={setMinimized}
-                    modalOpen={modalOpen}
                     minimized={minimized}
-                    timestamp={unitTimeStamp}
                     windowType={windowType}
+                    overskrift={overskrift}
+                    tid={tid}
                 />
             </ModalWrapper>
         </div>
