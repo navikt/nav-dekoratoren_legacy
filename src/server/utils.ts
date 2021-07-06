@@ -27,10 +27,6 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     const chosenContext = (req.query.context?.toString().toLowerCase() || MenuValue.IKKEBESTEMT) as MenuValue;
 
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
-
-    const dev = ['localhost', '-q0', '-q1', '-q2', '-q6', 'dev'];
-    const orginDev = (hosturl?: string) => dev.some((orgin) => hosturl?.includes(orgin));
-
     const utloggingsvarsel = getutloggingsvarsel(req, cookies);
 
     return {
