@@ -3,7 +3,6 @@ import BEMHelper from '../../../utils/bem';
 import ModalWrapper from 'nav-frontend-modal';
 import './utloggingsvarsel.less';
 import './utloggingsmodal-transition.less';
-import { getSelvbetjeningIdtoken, parseJwt } from './token.utils';
 import { checkTimeStampAndSetTimeStamp, getCurrentTimeStamp, timeStampIkkeUtgatt } from './timestamp.utils';
 import ResizeHandler, { BREAKPOINT, WindowType } from './komponenter/ResizeHandler';
 import { verifyWindowObj } from '../../../utils/Environment';
@@ -14,11 +13,12 @@ import { useInterval } from './useInterval';
 
 const stateSelector = (state: AppState) => ({
     utloggingsvarsel: state.environment.PARAMS.UTLOGGINGSVARSEL,
+    timestamp: state.environment.PARAMS.TIMESTAMP,
     environment: state.environment,
 });
 
 const Utloggingsvarsel: FunctionComponent = () => {
-    const { utloggingsvarsel, environment } = useSelector(stateSelector);
+    const { utloggingsvarsel, timestamp, environment } = useSelector(stateSelector);
     const { LOGOUT_URL } = environment;
     const cls = BEMHelper('utloggingsvarsel');
     const windowOnMount = () =>
@@ -39,15 +39,9 @@ const Utloggingsvarsel: FunctionComponent = () => {
     useEffect(() => {
         const setModalElement = () => (document.getElementById('sitefooter') ? '#sitefooter' : 'body');
         ModalWrapper.setAppElement(setModalElement());
-
-        const token = getSelvbetjeningIdtoken();
-        if (utloggingsvarsel && token) {
+        if (utloggingsvarsel && timestamp) {
             try {
-                const jwt = parseJwt(token);
-                const timestamp = jwt['exp'];
-                if (timestamp) {
-                    checkTimeStampAndSetTimeStamp(timestamp, setModalOpen, setUnixTimestamp);
-                }
+                checkTimeStampAndSetTimeStamp(timestamp, setModalOpen, setUnixTimestamp);
             } catch (err) {
                 console.log(err);
             }

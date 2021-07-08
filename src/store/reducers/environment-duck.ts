@@ -41,6 +41,7 @@ export interface Params {
     SHARE_SCREEN: boolean;
     UTILS_BACKGROUND?: string;
     UTLOGGINGSVARSEL: boolean;
+    TIMESTAMP: number;
 }
 
 export interface Cookies {
@@ -79,6 +80,7 @@ export const initialState: Environment = {
         URL_LOOKUP_TABLE: false,
         SHARE_SCREEN: false,
         UTLOGGINGSVARSEL: false,
+        TIMESTAMP: 0,
     },
 
     // Cookies

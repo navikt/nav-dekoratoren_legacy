@@ -4,6 +4,7 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { AvailableLanguage, Locale } from 'store/reducers/language-duck';
 import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
 import moment from 'moment';
+import { parseJwt } from '../komponenter/common/utloggingsvarsel/token.utils';
 
 interface Cookies {
     [key: string]: MenuValue | Locale | string;
@@ -26,9 +27,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     const chosenContext = (req.query.context?.toString().toLowerCase() || MenuValue.IKKEBESTEMT) as MenuValue;
 
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
-
-    const dev = ['localhost', '-q0', '-q1', '-q2', '-q6', 'dev'];
-    const orginDev = (hosturl?: string) => dev.some((orgin) => hosturl?.includes(orgin));
+    const utloggingsvarsel = getutloggingsvarsel(req, cookies);
 
     return {
         ENV: process.env.ENV as string,
@@ -68,9 +67,8 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                     UTILS_BACKGROUND: req.query.utilsBackground as string,
                 }),
                 SHARE_SCREEN: req.query.shareScreen !== 'false',
-                UTLOGGINGSVARSEL:
-                    req.query.utloggingsvarsel === 'true' ||
-                    (req.query.utloggingsvarsel !== 'false' && orginDev(req.headers?.referer)),
+                UTLOGGINGSVARSEL: utloggingsvarsel.UTLOGGINGSVARSEL,
+                TIMESTAMP: utloggingsvarsel.TIMESTAMP,
             },
         }),
         ...(cookies && {
@@ -79,6 +77,34 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 LANGUAGE: cookies['decorator-language'] as Locale,
             },
         }),
+    };
+};
+
+const orginDev = (hosturl?: string) => {
+    const dev = ['localhost', '-q0', '-q1', '-q2', '-q6', 'dev'];
+    return dev.some((orgin) => hosturl?.includes(orgin));
+};
+
+const getutloggingsvarsel = (req: Request, cookies: Cookies): { UTLOGGINGSVARSEL: boolean; TIMESTAMP: number } => {
+    if (
+        req.query.utloggingsvarsel === 'true' ||
+        (req.query.utloggingsvarsel !== 'false' && orginDev(req.headers?.referer))
+    ) {
+        const token = cookies['selvbetjening-idtoken'];
+        if (token) {
+            const jwt = parseJwt(token);
+            const timestamp = jwt['exp'];
+            if (timestamp) {
+                return {
+                    UTLOGGINGSVARSEL: true,
+                    TIMESTAMP: timestamp,
+                };
+            }
+        }
+    }
+    return {
+        UTLOGGINGSVARSEL: false,
+        TIMESTAMP: 0,
     };
 };
 
