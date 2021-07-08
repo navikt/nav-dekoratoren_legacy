@@ -1,6 +1,7 @@
 const b64DecodeUnicode = (base64: string): string => {
     return decodeURIComponent(
-        atob(base64)
+        Buffer.from(base64, 'base64')
+            .toString()
             .split('')
             .map(function (char) {
                 return '%' + ('00' + char.charCodeAt(0).toString(16)).slice(-2);

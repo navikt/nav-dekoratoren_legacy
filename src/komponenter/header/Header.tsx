@@ -231,7 +231,7 @@ export const Header = () => {
                     const { availableLanguages, breadcrumbs } = payload;
                     const { enforceLogin, redirectToApp } = payload;
                     const { feedback, chatbot, shareScreen } = payload;
-                    const { utilsBackground } = payload;
+                    const { utilsBackground, utloggingsvarsel } = payload;
                     if (context) {
                         validateContext(context);
                         setContext(context);
@@ -288,6 +288,9 @@ export const Header = () => {
                         }),
                         ...(shareScreen !== undefined && {
                             SHARE_SCREEN: shareScreen === true,
+                        }),
+                        ...(utloggingsvarsel !== undefined && {
+                            UTLOGGINGSVARSEL: utloggingsvarsel === true,
                         }),
                     };
                     dispatch(setParams(params));
