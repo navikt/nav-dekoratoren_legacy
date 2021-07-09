@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
+import { verifyWindowObj } from 'utils/Environment';
 
-const ANTALL_SEC_NAR_VARSELSTART = 3540;
+const ANTALL_SEC_NAR_VARSELSTART = !verifyWindowObj() || window.location.hostname === 'www.nav.no' ? 300 : 3540;
 
 export const timeStampIkkeUtgatt = (differanse: number): boolean => differanse > 0;
 export const getCurrentTimeStamp = () => new Date().getTime() / 1000;
