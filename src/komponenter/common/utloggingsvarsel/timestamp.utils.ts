@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-const ANTALL_SEC_NAR_VARSELSTART = process.env.ENV === 'prod' ? 300 : 3540;
+const ANTALL_SEC_NAR_VARSELSTART = 3540;
 
 export const timeStampIkkeUtgatt = (differanse: number): boolean => differanse > 0;
 export const getCurrentTimeStamp = () => new Date().getTime() / 1000;
