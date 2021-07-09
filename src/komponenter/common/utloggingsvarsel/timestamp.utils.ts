@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
-import { verifyWindowObj } from 'utils/Environment';
 
-const ANTALL_SEC_NAR_VARSELSTART = !verifyWindowObj() || window.location.hostname === 'www.nav.no' ? 300 : 3540;
+const ANTALL_MIN_NAR_VARSELSTART = 300;
 
 export const timeStampIkkeUtgatt = (differanse: number): boolean => differanse > 0;
 export const getCurrentTimeStamp = () => new Date().getTime() / 1000;
@@ -15,10 +14,10 @@ export const checkTimeStampAndSetTimeStamp = (
     const differanse = jwtTimestamp - currentUnixTimestamp;
 
     if (timeStampIkkeUtgatt(differanse)) {
-        if (differanse < ANTALL_SEC_NAR_VARSELSTART) {
+        if (differanse < ANTALL_MIN_NAR_VARSELSTART) {
             return setUtloggingVarsel(jwtTimestamp, setModalOpen, setUnixTimeStamp);
         }
-        return timeout(jwtTimestamp, differanse - ANTALL_SEC_NAR_VARSELSTART, setModalOpen, setUnixTimeStamp);
+        return timeout(jwtTimestamp, differanse - ANTALL_MIN_NAR_VARSELSTART, setModalOpen, setUnixTimeStamp);
     }
 };
 
