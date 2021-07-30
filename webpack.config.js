@@ -1,4 +1,3 @@
-const moment = require('moment');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const path = require('path');
@@ -6,8 +5,6 @@ const webpack = require('webpack');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
-const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 const commonConfig = {
@@ -117,14 +114,6 @@ const commonConfig = {
         }),
         new SpriteLoaderPlugin({
             plainSprite: true,
-        }),
-        new MomentLocalesPlugin({
-            localesToKeep: ['nb', 'nn', 'en'],
-        }),
-        new MomentTimezoneDataPlugin({
-            startYear: moment().year() - 1,
-            endYear: moment().year() + 1,
-            matchZones: 'Europe/Oslo',
         }),
     ],
     optimization: {
