@@ -1,7 +1,7 @@
 import { MenuValue } from 'utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
 import { Locale, AvailableLanguage } from './language-duck';
-import { Breadcrumb } from '../../komponenter/header/common/brodsmulesti/Brodsmulesti';
+import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
 
 export interface Environment {
     ENV: string;
@@ -17,7 +17,6 @@ export interface Environment {
     LOGIN_URL: string;
     LOGOUT_URL: string;
     FEEDBACK_API_URL: string;
-    SERVER_TIME: number;
 
     // Parameters
     PARAMS: Params;
@@ -63,7 +62,6 @@ export const initialState: Environment = {
     LOGIN_URL: '',
     LOGOUT_URL: '',
     FEEDBACK_API_URL: '',
-    SERVER_TIME: 0,
 
     // Parameters
     PARAMS: {
