@@ -30,7 +30,8 @@ export const ChatbotWrapper = ({ ...properties }: any) => {
     const { isChatbotEnabled } = useSelector(stateSelector);
 
     // Do not mount chatbot on initial render. Prevents hydration errors
-    // due to inconsistensies between client and server html
+    // due to inconsistensies between client and server html, as chatbot
+    // is not rendered server-side
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
