@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { verifyWindowObj } from 'utils/Environment';
@@ -29,6 +29,15 @@ const actionFilterMap = [[['www.nav.no/no/bedrift'], ['arbeidsgiver']]];
 export const ChatbotWrapper = ({ ...properties }: any) => {
     const { isChatbotEnabled } = useSelector(stateSelector);
 
+    // Do not mount chatbot on initial render. Prevents hydration errors
+    // due to inconsistensies between client and server html, as chatbot
+    // is not rendered server-side
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(isChatbotEnabled);
+    }, [isChatbotEnabled]);
+
     const hostname = verifyWindowObj() && window.location.hostname;
     const pathname = verifyWindowObj() && window.location.pathname;
     const origin = hostname && pathname && `${hostname}${pathname}`;
@@ -54,7 +63,7 @@ export const ChatbotWrapper = ({ ...properties }: any) => {
         });
     }
 
-    return isChatbotEnabled ? (
+    return isMounted ? (
         <Chatbot
             {...properties}
             {...{ boostApiUrlBase, actionFilters }}
