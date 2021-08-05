@@ -41,6 +41,7 @@ export interface Params {
     UTILS_BACKGROUND?: string;
     UTLOGGINGSVARSEL: boolean;
     TIMESTAMP: number;
+    LOGOUT_URL?: string;
 }
 
 export interface Cookies {
