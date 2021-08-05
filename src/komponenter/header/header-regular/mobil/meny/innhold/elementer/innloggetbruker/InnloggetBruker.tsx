@@ -5,21 +5,22 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { Undertittel, Ingress } from 'nav-frontend-typografi';
 import LoggutIkonMobil from 'ikoner/meny/LoggutIkonMobil';
+import { getLogOutUrl } from 'utils/login';
 import './InnloggetBruker.less';
 
 const cls = BEMHelper('innloggetbruker');
 
 const stateSelector = (state: AppState) => ({
     innlogget: state.innloggingsstatus,
+    environment: state.environment,
 });
 
-const loggut = (LOGOUT_URL: string) => {
-    return (window.location.href = LOGOUT_URL);
+const loggut = (logoutUrl: string) => {
+    return (window.location.href = logoutUrl);
 };
 
 const InnloggetBruker = () => {
-    const { LOGOUT_URL } = useSelector((state: AppState) => state.environment);
-    const { innlogget } = useSelector(stateSelector);
+    const { innlogget, environment } = useSelector(stateSelector);
     return innlogget.data.authenticated ? (
         <div className={cls.className}>
             <div className={cls.element('label')}>
@@ -30,10 +31,7 @@ const InnloggetBruker = () => {
             <div className={cls.element('bruker')}>
                 <Ingress>{innlogget.data.name.toLowerCase()}</Ingress>
             </div>
-            <button
-                className={cls.element('loggut')}
-                onClick={() => loggut(LOGOUT_URL)}
-            >
+            <button className={cls.element('loggut')} onClick={() => loggut(getLogOutUrl(environment))}>
                 <LoggutIkonMobil />
                 <div className={cls.element('loggut', 'text')}>
                     <Ingress>

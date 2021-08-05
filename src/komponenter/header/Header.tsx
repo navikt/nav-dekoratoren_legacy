@@ -32,6 +32,7 @@ import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
 import './Header.less';
+import { validateLogoutUrl } from '../../server/utils';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
 export const decoratorContextCookie = 'decorator-context';
@@ -227,11 +228,26 @@ export const Header = () => {
             const { source, event, payload } = data;
             if (isSafe) {
                 if (source === 'decoratorClient' && event === 'params') {
-                    const { simple, context, level, language } = payload;
-                    const { availableLanguages, breadcrumbs } = payload;
-                    const { enforceLogin, redirectToApp } = payload;
-                    const { feedback, chatbot, shareScreen } = payload;
-                    const { utilsBackground, utloggingsvarsel } = payload;
+                    const {
+                        simple,
+                        context,
+                        level,
+                        language,
+                        availableLanguages,
+                        breadcrumbs,
+                        enforceLogin,
+                        redirectToApp,
+                        feedback,
+                        chatbot,
+                        shareScreen,
+                        utilsBackground,
+                        utloggingsvarsel,
+                        logoutUrl,
+                    } = payload;
+
+                    if (logoutUrl) {
+                        validateLogoutUrl(logoutUrl);
+                    }
                     if (context) {
                         validateContext(context);
                         setContext(context);

@@ -4,8 +4,7 @@ import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import KnappBase from 'nav-frontend-knapper';
-import { getLoginUrl } from 'utils/login';
-import { logOut } from 'utils/login';
+import { getLoginUrl, getLogOutUrl } from 'utils/login';
 import './LoggInnKnapp.less';
 
 export const loginKnappId = 'login-knapp-id';
@@ -27,7 +26,7 @@ export const LoggInnKnapp = () => {
             action: authenticated ? 'logg-ut' : 'logg-inn',
         });
 
-        return authenticated ? logOut(environment) : (window.location.href = getLoginUrl(environment, arbeidsflate));
+        window.location.href = authenticated ? getLogOutUrl(environment) : getLoginUrl(environment, arbeidsflate);
     };
 
     const knappetekst = finnTekst(authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp', language);

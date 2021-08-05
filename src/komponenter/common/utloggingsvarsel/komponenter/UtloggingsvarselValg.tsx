@@ -4,6 +4,7 @@ import BEMHelper from '../../../../utils/bem';
 import { useSelector } from 'react-redux';
 import { getLoginUrl } from '../../../../utils/login';
 import { AppState } from '../../../../store/reducers';
+import { getLogOutUrl } from '../../../../utils/login';
 
 interface Props {
     minimized: boolean;
@@ -19,7 +20,6 @@ const UtloggingsvarselValg: FunctionComponent<Props> = (props) => {
     const { minimized } = props;
 
     const { arbeidsflate, environment } = useSelector(stateSelector);
-    const { LOGOUT_URL } = environment;
     const LOGIN_URL = getLoginUrl(environment, arbeidsflate);
 
     return (
@@ -37,7 +37,7 @@ const UtloggingsvarselValg: FunctionComponent<Props> = (props) => {
                 type="hoved"
                 tabIndex={minimized ? -1 : 0}
                 onClick={() => {
-                    window.location.href = LOGOUT_URL;
+                    window.location.href = getLogOutUrl(environment);
                 }}
             >
                 logg ut

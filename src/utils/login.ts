@@ -15,16 +15,4 @@ export const getLoginUrl = (environment: Environment, arbeidsflate: MenuValue) =
     }&level=${PARAMS.LEVEL}`;
 };
 
-export const logOut = (environment: Environment) => {
-    const { LOGOUT_URL, LOGIN_URL } = environment;
-    const logoutUrlParam = environment.PARAMS.LOGOUT_URL;
-
-    if (logoutUrlParam) {
-        fetch(`${LOGIN_URL}/frontchannel_logout`, { mode: 'no-cors' }).then((res) => {
-            console.log('Logged out!', JSON.stringify(res));
-            window.location.href = logoutUrlParam;
-        });
-    } else {
-        window.location.href = LOGOUT_URL;
-    }
-};
+export const getLogOutUrl = (environment: Environment) => environment.PARAMS.LOGOUT_URL || environment.LOGOUT_URL;
