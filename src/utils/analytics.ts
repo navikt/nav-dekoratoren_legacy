@@ -3,6 +3,7 @@ import { MenuValue } from './meny-storage-utils';
 import { initAmplitude } from 'utils/amplitude';
 import { logAmplitudeEvent } from 'utils/amplitude';
 import { Params } from 'store/reducers/environment-duck';
+import { initTaskAnalytics } from './taskAnalytics';
 
 const tagManagerArgs = {
     gtmId: 'GTM-PM9RP3',
@@ -25,6 +26,7 @@ export type AnalyticsEventArgs = {
 export const initAnalytics = (params: Params) => {
     TagManager.initialize(tagManagerArgs);
     initAmplitude(params);
+    initTaskAnalytics(params);
 };
 
 export const analyticsEvent = (props: AnalyticsEventArgs) => {

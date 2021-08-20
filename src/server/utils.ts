@@ -29,6 +29,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
 
     const dev = ['localhost', '-q0', '-q1', '-q2', '-q6', 'dev'];
     const orginDev = (hosturl?: string) => dev.some((orgin) => hosturl?.includes(orgin));
+    const taSurveys = req.query.taSurveys?.toString().split(',') || [];
 
     return {
         ENV: process.env.ENV as string,
@@ -68,6 +69,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                     UTILS_BACKGROUND: req.query.utilsBackground as string,
                 }),
                 SHARE_SCREEN: req.query.shareScreen !== 'false',
+                TA_SURVEYS: taSurveys,
                 UTLOGGINGSVARSEL:
                     req.query.utloggingsvarsel === 'true' ||
                     (req.query.utloggingsvarsel !== 'false' && orginDev(req.headers?.referer)),
