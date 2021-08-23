@@ -1,6 +1,6 @@
 name: Deploy-to-q2
 on:
-  workflow_dispatch
+  workflow_dispatch:
   release:
     types: [released]
 

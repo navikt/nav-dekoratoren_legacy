@@ -1,6 +1,6 @@
 name: Deploy-to-q0
 on:
-  workflow_dispatch
+  workflow_dispatch:
   release:
     types: [released]
 
