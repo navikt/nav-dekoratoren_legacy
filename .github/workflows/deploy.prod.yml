@@ -1,10 +1,8 @@
 name: Deploy-to-prod
 on:
-  push:
-    tags:
-      - "v*-prod"
-      - "!v*-test"
-      - "!v*-dev"
+  release:
+    types: [released]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

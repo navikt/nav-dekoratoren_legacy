@@ -1,8 +1,9 @@
 name: Deploy-to-q1
 on:
-  push:
-    tags:
-      - "v*-test"
+  workflow_dispatch
+  release:
+    types: [released]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
