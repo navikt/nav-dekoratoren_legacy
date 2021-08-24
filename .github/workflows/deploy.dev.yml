@@ -1,8 +1,7 @@
 name: Deploy-to-dev
 on:
-  push:
-    tags:
-      - "v*-test"
+  workflow_dispatch
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

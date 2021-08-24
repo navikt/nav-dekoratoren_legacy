@@ -1,9 +1,9 @@
 name: Deploy-to-q6
 on:
-  push:
-    tags:
-      - "v*-test"
-      - "v*-dev"
+  workflow_dispatch:
+  release:
+    types: [released]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

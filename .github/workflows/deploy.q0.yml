@@ -1,10 +1,9 @@
 name: Deploy-to-q0
 on:
-  push:
-    tags:
-      - "v*-prod"
-      - "!v*-test"
-      - "!v*-dev"
+  workflow_dispatch:
+  release:
+    types: [released]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
