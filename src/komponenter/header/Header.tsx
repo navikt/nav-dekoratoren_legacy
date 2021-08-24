@@ -30,7 +30,7 @@ import {
     validateContext,
     validateLanguage,
     validateLevel,
-} from 'server/utils';
+} from '../../server/utils';
 import { setParams } from 'store/reducers/environment-duck';
 import Modal from 'nav-frontend-modal';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
