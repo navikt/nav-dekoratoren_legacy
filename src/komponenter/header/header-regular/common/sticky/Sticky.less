@@ -5,6 +5,11 @@
     margin: 0;
     padding: 0;
     background-color: transparent;
+    height: @header-height-mobil;
+
+    @media @screen-desktop {
+        height: @header-height-desktop;
+    }
 }
 
 .sticky-container {
