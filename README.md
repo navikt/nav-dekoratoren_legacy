@@ -143,6 +143,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | urlLookupTable     | boolean                                               | true                  | Aktiverer eller deaktiverer url-lookup-table [7]                               |
 | shareScreen        | boolean                                               | true                  | Aktiverer eller deaktiverer skjerdelingskomponent                              |
 | utloggingsvarsel   | boolean                                               | false(prod)/true(dev) | Aktiverer eller deaktiverer Utloggingsvarsel for login-token (5min left)       |
+| logoutUrl          | string                                                | undefined             | Setter url for logg-ut knappen                                                 |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
@@ -150,7 +151,8 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 [4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [6] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret. <br>
-[7] Mapper prod-urler til dev-urler basert på [url-lookup-table](https://github.com/navikt/nav-dekoratoren-moduler/blob/master/src/csr/url-lookup-table/table.ts).
+[7] Mapper prod-urler til dev-urler basert på [url-lookup-table](https://github.com/navikt/nav-dekoratoren-moduler/blob/master/src/csr/url-lookup-table/table.ts). <br>
+[8] Dersom denne er satt vil dekoratørens utloggingsfunksjonalitet forbigåes, og **alt rundt utlogging må håndteres av appen.**
 
 :information_source: &nbsp; Samtlige parameter kan settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 :information_source: &nbsp; Bakgrunnsfarge på brødsmulesti og språkvelger kan overstyres:
