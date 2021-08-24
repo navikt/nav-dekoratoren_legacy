@@ -143,7 +143,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | urlLookupTable     | boolean                                               | true                  | Aktiverer eller deaktiverer url-lookup-table [7]                               |
 | shareScreen        | boolean                                               | true                  | Aktiverer eller deaktiverer skjerdelingskomponent                              |
 | utloggingsvarsel   | boolean                                               | false(prod)/true(dev) | Aktiverer eller deaktiverer Utloggingsvarsel for login-token (5min left)       |
-| logoutUrl          | string                                                | undefined             | Setter url for logg-ut knappen                                                 |
+| logoutUrl          | string                                                | undefined             | Setter url for logg-ut knappen [8]                                             |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
