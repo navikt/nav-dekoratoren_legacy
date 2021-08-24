@@ -16,7 +16,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const loggut = (logoutUrl: string) => {
-    return (window.location.href = logoutUrl);
+    window.location.href = logoutUrl;
 };
 
 const InnloggetBruker = () => {

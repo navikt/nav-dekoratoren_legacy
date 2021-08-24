@@ -20,19 +20,23 @@ import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/brow
 import { getLoginUrl } from 'utils/login';
 import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
-import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
+import { msgSafetyCheck, postMessageToApp } from 'utils/messages';
 import { SprakVelger } from './common/sprakvelger/SprakVelger';
-import { validateAvailableLanguages, validateUtilsBackground } from '../../server/utils';
-import { validateBreadcrumbs } from '../../server/utils';
-import { validateContext } from '../../server/utils';
-import { validateLanguage, validateLevel } from '../../server/utils';
-import { setParams } from '../../store/reducers/environment-duck';
+import {
+    validateAvailableLanguages,
+    validateUtilsBackground,
+    validateLogoutUrl,
+    validateBreadcrumbs,
+    validateContext,
+    validateLanguage,
+    validateLevel,
+} from 'server/utils';
+import { setParams } from 'store/reducers/environment-duck';
 import Modal from 'nav-frontend-modal';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
 import './Header.less';
-import { validateLogoutUrl } from '../../server/utils';
 
 export const unleashCacheCookie = 'decorator-unleash-cache';
 export const decoratorContextCookie = 'decorator-context';
@@ -233,8 +237,8 @@ export const Header = () => {
                         context,
                         level,
                         language,
-                        availableLanguages,
-                        breadcrumbs,
+                        availableLanguages: languagesFromPayload,
+                        breadcrumbs: breadcrumbsFromPayload,
                         enforceLogin,
                         redirectToApp,
                         feedback,
@@ -259,11 +263,11 @@ export const Header = () => {
                     if (level) {
                         validateLevel(level);
                     }
-                    if (availableLanguages) {
-                        validateAvailableLanguages(availableLanguages);
+                    if (languagesFromPayload) {
+                        validateAvailableLanguages(languagesFromPayload);
                     }
-                    if (breadcrumbs) {
-                        validateBreadcrumbs(breadcrumbs);
+                    if (breadcrumbsFromPayload) {
+                        validateBreadcrumbs(breadcrumbsFromPayload);
                     }
                     if (utilsBackground) {
                         validateUtilsBackground(utilsBackground);
@@ -287,11 +291,11 @@ export const Header = () => {
                         ...(language && {
                             LANGUAGE: language,
                         }),
-                        ...(availableLanguages && {
-                            AVAILABLE_LANGUAGES: availableLanguages,
+                        ...(languagesFromPayload && {
+                            AVAILABLE_LANGUAGES: languagesFromPayload,
                         }),
-                        ...(breadcrumbs && {
-                            BREADCRUMBS: breadcrumbs,
+                        ...(breadcrumbsFromPayload && {
+                            BREADCRUMBS: breadcrumbsFromPayload,
                         }),
                         ...(feedback !== undefined && {
                             FEEDBACK: feedback === true,

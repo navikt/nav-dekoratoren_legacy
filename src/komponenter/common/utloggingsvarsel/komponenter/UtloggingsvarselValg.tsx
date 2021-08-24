@@ -2,9 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { Knapp } from 'nav-frontend-knapper';
 import BEMHelper from '../../../../utils/bem';
 import { useSelector } from 'react-redux';
-import { getLoginUrl } from '../../../../utils/login';
-import { AppState } from '../../../../store/reducers';
-import { getLogOutUrl } from '../../../../utils/login';
+import { getLoginUrl, getLogOutUrl } from 'utils/login';
+import { AppState } from 'store/reducers';
 
 interface Props {
     minimized: boolean;
