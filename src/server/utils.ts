@@ -67,6 +67,9 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 SHARE_SCREEN: req.query.shareScreen !== 'false',
                 UTLOGGINGSVARSEL: utloggingsvarsel.UTLOGGINGSVARSEL,
                 TIMESTAMP: utloggingsvarsel.TIMESTAMP,
+                ...(req.query.logoutUrl && {
+                    LOGOUT_URL: req.query.logoutUrl as string,
+                }),
             },
         }),
         ...(cookies && {
@@ -108,9 +111,7 @@ const getutloggingsvarsel = (req: Request, cookies: Cookies): { UTLOGGINGSVARSEL
 
 // Validation utils
 export const validateClientEnv = (req: Request) => {
-    const { level, context } = req.query;
-    const { availableLanguages, breadcrumbs } = req.query;
-    const { utilsBackground } = req.query;
+    const { level, context, availableLanguages, breadcrumbs, utilsBackground, logoutUrl } = req.query;
     if (context) {
         validateContext(context as string);
     }
@@ -129,6 +130,16 @@ export const validateClientEnv = (req: Request) => {
     }
     if (utilsBackground) {
         validateUtilsBackground(utilsBackground as string);
+    }
+    if (logoutUrl) {
+        validateLogoutUrl(logoutUrl as string);
+    }
+};
+
+export const validateLogoutUrl = (url: string) => {
+    if (!isNavUrl(url)) {
+        const error = `logoutUrl supports only nav.no urls - failed to validate ${url}`;
+        throw Error(error);
     }
 };
 

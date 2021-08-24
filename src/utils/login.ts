@@ -14,3 +14,5 @@ export const getLoginUrl = (environment: Environment, arbeidsflate: MenuValue) =
             : `${LOGIN_URL}/login?redirect=${DITT_NAV_URL}`
     }&level=${PARAMS.LEVEL}`;
 };
+
+export const getLogOutUrl = (environment: Environment) => environment.PARAMS.LOGOUT_URL || environment.LOGOUT_URL;

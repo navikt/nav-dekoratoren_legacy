@@ -10,6 +10,7 @@ import UtloggingsvarselInnhold from './komponenter/UtloggingsvarselInnhold';
 import { AppState } from '../../../store/reducers';
 import { useSelector } from 'react-redux';
 import { useInterval } from './useInterval';
+import { getLogOutUrl } from 'utils/login';
 
 const stateSelector = (state: AppState) => ({
     utloggingsvarsel: state.environment.PARAMS.UTLOGGINGSVARSEL,
@@ -19,7 +20,6 @@ const stateSelector = (state: AppState) => ({
 
 const Utloggingsvarsel: FunctionComponent = () => {
     const { utloggingsvarsel, timestamp, environment } = useSelector(stateSelector);
-    const { LOGOUT_URL } = environment;
     const cls = BEMHelper('utloggingsvarsel');
     const windowOnMount = () =>
         verifyWindowObj() && window.innerWidth > BREAKPOINT ? WindowType.DESKTOP : WindowType.MOBILE;
@@ -57,7 +57,7 @@ const Utloggingsvarsel: FunctionComponent = () => {
             const tokenExpire = unixTimeStamp - getCurrentTimeStamp();
             if (timeStampIkkeUtgatt(getCurrentTimeStamp() - unixTimeStamp + 1)) {
                 setInterval(false);
-                window.location.href = LOGOUT_URL;
+                window.location.href = getLogOutUrl(environment);
             }
 
             if (tokenExpire <= 60) {
