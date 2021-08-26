@@ -12,14 +12,7 @@ export const initTaskAnalytics = async (params: Params) => {
 
     await loadExternalScript('https://in2.taskanalytics.com/tm.js');
 
-    window.TA =
-        window.TA ||
-        function () {
-            // @ts-ignore
-            (TA.q = TA.q || []).push(arguments);
-        };
-
-    if (window.TA) {
+    if (typeof window.TA === 'function') {
         TA_SURVEYS.forEach((survey: string) => {
             window.TA('start', survey);
         });
