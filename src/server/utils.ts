@@ -27,7 +27,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
 
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
     const utloggingsvarsel = getutloggingsvarsel(req, cookies);
-    const taSurveys = req.query.taSurveys?.toString().split(',') || [];
+    const taSurveys = req.query.taSurveys?.toString().replace(' ', '').split(',') || [];
 
     return {
         ENV: process.env.ENV as string,
