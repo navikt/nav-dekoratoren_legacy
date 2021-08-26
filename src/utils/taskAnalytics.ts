@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import 'regenerator-runtime/runtime';
 
 import { Params } from 'store/reducers/environment-duck';
 import { loadExternalScript } from './external-scripts';
