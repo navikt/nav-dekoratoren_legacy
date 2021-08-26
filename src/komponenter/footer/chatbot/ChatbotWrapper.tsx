@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { verifyWindowObj } from 'utils/Environment';
@@ -28,11 +28,14 @@ const actionFilterMap = [[['www.nav.no/no/bedrift'], ['arbeidsgiver']]];
 
 export const ChatbotWrapper = ({ ...properties }: any) => {
     const { isChatbotEnabled } = useSelector(stateSelector);
+
+    // Do not mount chatbot on initial render. Prevents hydration errors
+    // due to inconsistensies between client and server html, as chatbot
+    // is not rendered server-side
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
-        const chatbotVersion122IsMounted = document.getElementsByClassName('gxKraP').length > 0;
-        setIsMounted(!chatbotVersion122IsMounted && isChatbotEnabled);
+        setIsMounted(isChatbotEnabled);
     }, [isChatbotEnabled]);
 
     const hostname = verifyWindowObj() && window.location.hostname;

@@ -3,7 +3,7 @@ import { Environment } from 'store/reducers/environment-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { AvailableLanguage, Locale } from 'store/reducers/language-duck';
 import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
-import moment from 'moment';
+import { parseJwt } from 'komponenter/common/utloggingsvarsel/token.utils';
 
 interface Cookies {
     [key: string]: MenuValue | Locale | string;
@@ -26,9 +26,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     const chosenContext = (req.query.context?.toString().toLowerCase() || MenuValue.IKKEBESTEMT) as MenuValue;
 
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
-
-    const dev = ['localhost', '-q0', '-q1', '-q2', '-q6', 'dev'];
-    const orginDev = (hosturl?: string) => dev.some((orgin) => hosturl?.includes(orgin));
+    const utloggingsvarsel = getutloggingsvarsel(req, cookies);
     const taSurveys = req.query.taSurveys?.toString().split(',') || [];
 
     return {
@@ -45,7 +43,6 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
         LOGIN_URL: process.env.LOGIN_URL as string,
         LOGOUT_URL: process.env.LOGOUT_URL as string,
         FEEDBACK_API_URL: process.env.FEEDBACK_API_URL as string,
-        SERVER_TIME: moment().valueOf(),
         ...(req.query && {
             PARAMS: {
                 CONTEXT: chosenContext,
@@ -69,10 +66,12 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                     UTILS_BACKGROUND: req.query.utilsBackground as string,
                 }),
                 SHARE_SCREEN: req.query.shareScreen !== 'false',
+                UTLOGGINGSVARSEL: utloggingsvarsel.UTLOGGINGSVARSEL,
                 TA_SURVEYS: taSurveys,
-                UTLOGGINGSVARSEL:
-                    req.query.utloggingsvarsel === 'true' ||
-                    (req.query.utloggingsvarsel !== 'false' && orginDev(req.headers?.referer)),
+                TIMESTAMP: utloggingsvarsel.TIMESTAMP,
+                ...(req.query.logoutUrl && {
+                    LOGOUT_URL: req.query.logoutUrl as string,
+                }),
             },
         }),
         ...(cookies && {
@@ -84,11 +83,37 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     };
 };
 
+const orginDev = (hosturl?: string) => {
+    const dev = ['localhost', '-q0', '-q1', '-q2', '-q6', 'dev'];
+    return dev.some((orgin) => hosturl?.includes(orgin));
+};
+
+const getutloggingsvarsel = (req: Request, cookies: Cookies): { UTLOGGINGSVARSEL: boolean; TIMESTAMP: number } => {
+    if (
+        req.query.utloggingsvarsel === 'true' ||
+        (req.query.utloggingsvarsel !== 'false' && orginDev(req.headers?.referer))
+    ) {
+        const token = cookies['selvbetjening-idtoken'];
+        if (token) {
+            const jwt = parseJwt(token);
+            const timestamp = jwt['exp'];
+            if (timestamp) {
+                return {
+                    UTLOGGINGSVARSEL: true,
+                    TIMESTAMP: timestamp,
+                };
+            }
+        }
+    }
+    return {
+        UTLOGGINGSVARSEL: false,
+        TIMESTAMP: 0,
+    };
+};
+
 // Validation utils
 export const validateClientEnv = (req: Request) => {
-    const { level, context } = req.query;
-    const { availableLanguages, breadcrumbs } = req.query;
-    const { utilsBackground } = req.query;
+    const { level, context, availableLanguages, breadcrumbs, utilsBackground, logoutUrl } = req.query;
     if (context) {
         validateContext(context as string);
     }
@@ -107,6 +132,16 @@ export const validateClientEnv = (req: Request) => {
     }
     if (utilsBackground) {
         validateUtilsBackground(utilsBackground as string);
+    }
+    if (logoutUrl) {
+        validateLogoutUrl(logoutUrl as string);
+    }
+};
+
+export const validateLogoutUrl = (url: string) => {
+    if (!isNavUrl(url)) {
+        const error = `logoutUrl supports only nav.no urls - failed to validate ${url}`;
+        throw Error(error);
     }
 };
 

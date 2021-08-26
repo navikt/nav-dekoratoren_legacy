@@ -1,15 +1,7 @@
-export const getSelvbetjeningIdtoken = (): string | undefined => {
-    const cookies = document.cookie.split(' ');
-    const selvbetjeningIdtoken = cookies.find((c) => c.includes('selvbetjening-idtoken'));
-    if (selvbetjeningIdtoken) {
-        return selvbetjeningIdtoken.split('=')[1]?.slice(0, -1);
-    }
-    return undefined;
-};
-
 const b64DecodeUnicode = (base64: string): string => {
     return decodeURIComponent(
-        atob(base64)
+        Buffer.from(base64, 'base64')
+            .toString()
             .split('')
             .map(function (char) {
                 return '%' + ('00' + char.charCodeAt(0).toString(16)).slice(-2);

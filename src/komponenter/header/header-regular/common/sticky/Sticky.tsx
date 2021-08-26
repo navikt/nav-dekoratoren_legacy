@@ -35,21 +35,17 @@ export const Sticky = ({ mobileFixed, children }: Props) => {
             setStickyOffset
         );
         const setFocusScrollOffset = focusOverlapHandler(stickyElement);
-        const setElementSizeAndBaseOffset = () => {
-            placeholderElement.style.height = `${stickyElement.offsetHeight}px`;
-            setStickyOffset();
-        };
 
-        setElementSizeAndBaseOffset();
+        setStickyOffset();
 
         window.addEventListener('focusin', setFocusScrollOffset);
         window.addEventListener('scroll', setStickyOffset);
-        window.addEventListener('resize', setElementSizeAndBaseOffset);
+        window.addEventListener('resize', setStickyOffset);
         window.addEventListener('click', deferStickyOnAnchorLinkClick);
         return () => {
             window.removeEventListener('focusin', setFocusScrollOffset);
             window.removeEventListener('scroll', setStickyOffset);
-            window.removeEventListener('resize', setElementSizeAndBaseOffset);
+            window.removeEventListener('resize', setStickyOffset);
             window.removeEventListener('click', deferStickyOnAnchorLinkClick);
         };
     }, []);
