@@ -15,7 +15,7 @@ import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 import { fetchDriftsmeldinger } from 'store/reducers/driftsmeldinger-duck';
 import { fetchFeatureToggles, Status } from 'api/api';
 import { ActionType } from 'store/actions';
-import { loadVergic } from 'utils/external-scripts';
+import { loadExternalScript } from 'utils/external-scripts';
 import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/browser-support-msg/BrowserSupportMsg';
 import { getLoginUrl } from 'utils/login';
 import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
@@ -103,7 +103,7 @@ export const Header = () => {
     // Handle feature toggles
     useEffect(() => {
         if (currentFeatureToggles['dekoratoren.skjermdeling']) {
-            loadVergic();
+            loadExternalScript('https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js');
         }
     }, [currentFeatureToggles]);
 

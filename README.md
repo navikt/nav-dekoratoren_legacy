@@ -141,6 +141,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | feedback           | boolean                                               | false                 | Skjuler eller viser tilbakemeldingskomponentet                                 |
 | chatbot            | boolean                                               | true                  | Skjuler eller viser Chatbot Frida [6]                                          |
 | urlLookupTable     | boolean                                               | true                  | Aktiverer eller deaktiverer url-lookup-table [7]                               |
+| taSurveys          | string,string,...                                     | ''                    | Oppgir én eller flere trackingkoder (surveys) for Task Analytics               |
 | shareScreen        | boolean                                               | true                  | Aktiverer eller deaktiverer skjerdelingskomponent                              |
 | utloggingsvarsel   | boolean                                               | false(prod)/true(dev) | Aktiverer eller deaktiverer Utloggingsvarsel for login-token (5min left)       |
 | logoutUrl          | string                                                | undefined             | Setter url for logg-ut knappen [8]                                             |

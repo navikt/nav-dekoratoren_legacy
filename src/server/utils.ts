@@ -27,6 +27,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
 
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
     const utloggingsvarsel = getutloggingsvarsel(req, cookies);
+    const taSurveys = req.query.taSurveys?.toString().replace(' ', '').split(',') || [];
 
     return {
         ENV: process.env.ENV as string,
@@ -66,6 +67,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 }),
                 SHARE_SCREEN: req.query.shareScreen !== 'false',
                 UTLOGGINGSVARSEL: utloggingsvarsel.UTLOGGINGSVARSEL,
+                TA_SURVEYS: taSurveys,
                 TIMESTAMP: utloggingsvarsel.TIMESTAMP,
                 ...(req.query.logoutUrl && {
                     LOGOUT_URL: req.query.logoutUrl as string,

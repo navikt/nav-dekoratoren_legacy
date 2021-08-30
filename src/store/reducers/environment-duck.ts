@@ -40,6 +40,7 @@ export interface Params {
     SHARE_SCREEN: boolean;
     UTILS_BACKGROUND?: string;
     UTLOGGINGSVARSEL: boolean;
+    TA_SURVEYS: string[];
     TIMESTAMP: number;
     LOGOUT_URL?: string;
 }
@@ -75,6 +76,7 @@ export const initialState: Environment = {
         LEVEL: '',
         LANGUAGE: Locale.IKKEBESTEMT,
         FEEDBACK: false,
+        TA_SURVEYS: [],
         CHATBOT: false,
         URL_LOOKUP_TABLE: false,
         SHARE_SCREEN: false,
