@@ -333,7 +333,7 @@ export const Header = () => {
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
-            <header className="siteheader">
+            <header className={`siteheader${useSimpleHeader ? ' simple' : ''}`}>
                 <Skiplinks simple={useSimpleHeader} />
                 {useSimpleHeader ? <HeaderSimple /> : <HeaderRegular />}
             </header>
