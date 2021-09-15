@@ -3,19 +3,8 @@
 
 .utloggingsvarsel {
     .ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay {
-        /*padding: 0;
-        height: 0;
-        width: 23.25rem;
-        bottom: 9.5rem;
-        position: fixed;
-        top: unset;
-        visibility: hidden;
-        transition: @transition height, @transition width;
-        transform-origin: bottom center;*/
-        // opacity: 0;
         background-color: rgba(61, 56, 49, 0);
         transition: @transition background-color;
-        //transition-delay: 0.5s;
         padding: 1rem;
         height: 100%;
         width: 100%;
@@ -29,7 +18,7 @@
         min-height: 1px;
         width: 1px;
         padding: 0;
-        transition: @transition, max-height 0.14s;
+        transition: @transition, max-height 0.14s, width 0.22s;
         position: absolute;
         bottom: 8rem;
         left: 12rem;
@@ -61,7 +50,8 @@
     }
     &__tekst-innhold {
         overflow: hidden;
-        max-height: 6.75rem;
+        max-height: 3.56rem;
+        transition: 15ms !important;
     }
     &__timer {
         &--main {
@@ -112,31 +102,10 @@
         transition: @transition;
     }
 
-    @media (max-width: 340px) {
+    &.OPEN {
         .ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay {
-            /*width: 20.25rem;*/
-        }
-    }
-
-    @media @screen-desktop {
-        .ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay {
-            /*    width: 22.5rem;
-            bottom: 6rem;*/
-        }
-    }
-
-    &.open {
-        .ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay {
-            /*           padding: 1rem;
-            height: 100%;
-            width: 100%;
-            bottom: 0;
-            visibility: visible;
-            transform-origin: bottom center;
-            transition: 0.2s;*/
             background-color: rgba(61, 56, 49, 0.7);
-            pointer-events: unset;
-
+            pointer-events: none;
             padding: 1rem;
             height: 100%;
             width: 100%;
@@ -154,20 +123,20 @@
                 transition: 0.4s;
             }
         }
-
         .utloggingsvarsel {
             &__modal {
+                pointer-events: initial;
                 position: absolute;
                 visibility: visible;
                 overflow: unset;
-                width: 100%;
+                width: 23.4375rem;
                 max-height: 100%;
                 padding: 1rem;
                 min-width: 20rem;
                 transform: translateY(0) scale(1);
                 transition: 0.6s;
                 bottom: calc(50% - 9.9rem);
-                left: calc(50% - 17.5rem);
+                left: calc(50% - 11.71875rem);
 
                 &:focus {
                     box-shadow: 0 0 0 3px #254b6d;
@@ -239,7 +208,7 @@
             }
             &__tekst-innhold {
                 overflow: hidden;
-                max-height: 6.75rem;
+                max-height: 9.5rem;
             }
 
             &__timer {
@@ -260,8 +229,13 @@
                 transition: @transition;
             }
 
-            @media @screen-desktop {
+            @media (min-width: @screen-sm) {
+                &__tekst-innhold {
+                    max-height: 6.75rem;
+                }
                 &__modal {
+                    width: 100%;
+                    left: calc(50% - 17.5rem);
                     min-width: 35rem;
                     padding: 1rem 3rem;
                 }

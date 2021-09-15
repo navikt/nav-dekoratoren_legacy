@@ -32,7 +32,7 @@ const Utloggingsvarsel: FunctionComponent = () => {
     const [tid, setTid] = useState<string>('- minutter');
     const [vistSistePaminnelse, setVistSistePaminnelse] = useState<boolean>(false);
     const [overskrift, setOverskrift] = useState<string>('Du blir snart logget ut');
-    const setOpenClsName = (): string => (minimized ? '' : 'open');
+    const setOpenClsName = (): string => (minimized ? '' : 'OPEN');
     const toggleModal = (): void => setModalOpen((prevState) => !prevState);
     const modalMountPoint = (): HTMLElement => document.getElementById('utloggingsvarsel') ?? document.body;
 
