@@ -24,7 +24,7 @@ const Utloggingsvarsel: FunctionComponent = () => {
     const windowOnMount = () =>
         verifyWindowObj() && window.innerWidth > BREAKPOINT ? WindowType.DESKTOP : WindowType.MOBILE;
 
-    const [modalOpen, setModalOpen] = useState<boolean>(true);
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
     const [unixTimeStamp, setUnixTimestamp] = useState<number>(0);
     const [minimized, setMinimized] = useState<boolean>(false);
     const [windowType, setWindowType] = useState<WindowType>(windowOnMount());

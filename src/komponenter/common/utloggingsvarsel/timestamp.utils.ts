@@ -13,10 +13,6 @@ export const checkTimeStampAndSetTimeStamp = (
     const currentUnixTimestamp = getCurrentTimeStamp();
     const differanse = jwtTimestamp - currentUnixTimestamp;
 
-    console.log('currentUnixTimestamp: ', currentUnixTimestamp);
-    console.log('differanse: ', differanse);
-    console.log('timeStampIkkeUtgatt(differanse) : ', timeStampIkkeUtgatt(differanse));
-
     if (timeStampIkkeUtgatt(differanse)) {
         if (differanse < ANTALL_MIN_NAR_VARSELSTART) {
             return setUtloggingVarsel(jwtTimestamp, setModalOpen, setUnixTimeStamp);
