@@ -28,7 +28,7 @@ const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
                 setModalOpen={setModalOpen}
                 minimized={minimized}
                 typoGrafi="normaltekst"
-                tid={'3 minutter'}
+                tid={tid}
                 visFullTekst={true}
             />
             <div className={cls.element('main-wrapper')} aria-hidden={minimized}>
@@ -39,7 +39,7 @@ const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
                     <UtloggingsvarselValg minimized={minimized} />
                     <Nedteller
                         typoGrafi="normaltekst"
-                        tekst={'Du blir automatisk logget ut om '.concat('3 minutter')}
+                        tekst={'Du blir automatisk logget ut om '.concat(tid)}
                         subClass={'main'}
                     />
                 </div>

@@ -1,5 +1,6 @@
 @import (reference) '../../../styling-variabler.less';
 @transition: 0.3s;
+@XSmobil: 374px;
 
 .utloggingsvarsel {
     .ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay {
@@ -20,7 +21,7 @@
         padding: 0;
         transition: @transition, max-height 0.14s, width 0.22s;
         position: absolute;
-        bottom: 8rem;
+        bottom: 9rem;
         left: 12rem;
 
         &:focus {
@@ -95,11 +96,21 @@
             line-height: 0.1rem;
         }
     }
-
     &__modal--ikon {
         transform: translateY(3.5rem) scale(0.3);
         opacity: 0;
         transition: @transition;
+    }
+    @media (max-width: @XSmobil) {
+        &__modal {
+            left: 10rem;
+            bottom: 9rem;
+        }
+    }
+    @media (min-width: @screen-sm) {
+        &__modal {
+            bottom: 8rem;
+        }
     }
 
     &.OPEN {
@@ -135,9 +146,9 @@
                 min-width: 20rem;
                 transform: translateY(0) scale(1);
                 transition: 0.6s;
-                bottom: calc(50% - 9.9rem);
+                bottom: calc(50% - 12.3125rem);
                 left: calc(50% - 11.71875rem);
-
+                // 11.3125
                 &:focus {
                     box-shadow: 0 0 0 3px #254b6d;
                 }
@@ -229,6 +240,13 @@
                 transition: @transition;
             }
 
+            @media (max-width: @XSmobil) {
+                &__modal {
+                    width: 20rem;
+                    left: calc(50% - 10rem);
+                }
+            }
+
             @media (min-width: @screen-sm) {
                 &__tekst-innhold {
                     max-height: 6.75rem;
@@ -236,6 +254,7 @@
                 &__modal {
                     width: 100%;
                     left: calc(50% - 17.5rem);
+                    bottom: calc(50% - 9.4375rem);
                     min-width: 35rem;
                     padding: 1rem 3rem;
                 }
