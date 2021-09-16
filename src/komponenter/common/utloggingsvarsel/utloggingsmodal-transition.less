@@ -29,14 +29,6 @@
         }
     }
 
-    &__timer {
-        justify-content: center;
-        & > svg {
-            margin-right: 0.25rem;
-            margin-bottom: 0.125rem;
-        }
-    }
-
     &__main-wrapper {
         overflow: hidden;
         width: 10rem;
@@ -55,6 +47,11 @@
         transition: 15ms !important;
     }
     &__timer {
+        justify-content: center;
+        & > svg {
+            margin-right: 0.25rem;
+            margin-bottom: 0.125rem;
+        }
         &--main {
             padding: 0;
             margin: 0;
@@ -168,16 +165,6 @@
                 margin: 1.25rem 0;
             }
 
-            &__timer {
-                &--main {
-                    display: flex;
-                    align-items: center;
-                    opacity: 1;
-                    transform: translateY(0) scale(1);
-                    transition: 0.4s;
-                }
-            }
-
             &__navigasjon,
             &__valg,
             &__modal--ikon,
@@ -228,6 +215,13 @@
                 & > svg {
                     margin-right: 0.5rem;
                     margin-bottom: 0.125rem;
+                }
+                &--main {
+                    display: flex;
+                    align-items: center;
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                    transition: 0.4s;
                 }
             }
 
