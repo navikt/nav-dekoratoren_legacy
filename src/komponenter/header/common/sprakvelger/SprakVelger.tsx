@@ -13,7 +13,7 @@ import { useSelector, useStore } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Bilde } from '../../../common/bilde/Bilde';
 import BEMHelper from 'utils/bem';
-import Item from './Item';
+import SprakVelgerItem from './SprakVelgerItem';
 import './SprakVelger.less';
 
 export const farger = {
@@ -21,12 +21,7 @@ export const farger = {
     navBla: '#0067C5',
 };
 
-export type LocaleOption = {
-    value: string;
-    locale: string;
-    handleInApp?: boolean;
-    label: string;
-};
+export type LocaleOption = AvailableLanguage & { label: string };
 
 interface Props {
     languages: AvailableLanguage[];
@@ -42,17 +37,14 @@ export const SprakVelger = (props: Props) => {
     const label = 'Språk/Language';
 
     const onChange = (selected: LocaleOption) => {
-        const { locale, value, handleInApp } = selected as LocaleOption;
-        setCookie(decoratorLanguageCookie, locale, cookieOptions);
-        store.dispatch(languageDuck.actionCreator({ language: locale }));
-        if (handleInApp) {
-            postMessageToApp('languageSelect', {
-                url: value,
-                locale: locale,
-                handleInApp: handleInApp,
-            });
+        const { label, ...language } = selected;
+
+        setCookie(decoratorLanguageCookie, language.locale, cookieOptions);
+        store.dispatch(languageDuck.actionCreator({ language: language.locale }));
+        if (language.handleInApp) {
+            postMessageToApp('languageSelect', language);
         } else {
-            window.location.assign(value);
+            window.location.assign(language.url);
         }
     };
 
@@ -66,7 +58,7 @@ export const SprakVelger = (props: Props) => {
         getItemProps,
     } = useSelect({
         items: options,
-        itemToString: (item) => item?.value || '',
+        itemToString: (item) => item?.url || '',
         onSelectedItemChange: ({ selectedItem }) => onChange(selectedItem as LocaleOption),
         selectedItem: options.find((option) => option.locale === language),
     });
@@ -103,7 +95,7 @@ export const SprakVelger = (props: Props) => {
                     {isOpen && (
                         <>
                             {options.map((item, index) => (
-                                <Item
+                                <SprakVelgerItem
                                     key={index}
                                     cls={cls}
                                     item={item}
@@ -121,22 +113,17 @@ export const SprakVelger = (props: Props) => {
     );
 };
 
-// Utils
-const transformOptions = (languages: AvailableLanguage[]) =>
-    languages.map((languageParam) => {
-        const locale = languageParam.locale;
-        const labels: { [key: string]: string } = {
-            nb: 'Norsk (bokmål)',
-            nn: 'Norsk (nynorsk)',
-            en: 'English',
-            se: 'Sámegiel',
-            pl: 'Polski',
-        };
+const labels: { [key: string]: string } = {
+    nb: 'Norsk (bokmål)',
+    nn: 'Norsk (nynorsk)',
+    en: 'English',
+    se: 'Sámegiel',
+    pl: 'Polski',
+};
 
-        return {
-            label: labels[locale],
-            locale: languageParam.locale,
-            handleInApp: languageParam.handleInApp,
-            value: languageParam.url,
-        };
-    });
+// Utils
+const transformOptions = (languages: AvailableLanguage[]): LocaleOption[] =>
+    languages.map((language) => ({
+        ...language,
+        label: labels[language.locale],
+    }));

@@ -14,7 +14,7 @@ interface Props {
     itemProps: any;
 }
 
-const Item = (props: Props) => {
+const SprakVelgerItem = (props: Props) => {
     const { selectedItem, highlightedIndex, index } = props;
     const { item, itemProps, cls } = props;
 
@@ -45,4 +45,4 @@ const Item = (props: Props) => {
     );
 };
 
-export default Item;
+export default SprakVelgerItem;
