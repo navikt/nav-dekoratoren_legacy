@@ -10,11 +10,17 @@ export enum Locale {
     POLSK = 'pl',
 }
 
-export interface AvailableLanguage {
-    url: string;
-    locale: Locale;
-    handleInApp?: boolean;
-}
+export type AvailableLanguage =
+    | {
+          url?: string;
+          locale: Locale;
+          handleInApp: true;
+      }
+    | {
+          url: string;
+          locale: Locale;
+          handleInApp?: false;
+      };
 
 export interface LanguageState {
     language: Locale;
@@ -24,10 +30,10 @@ const initialLanguageState: LanguageState = {
     language: Locale.BOKMAL,
 };
 
-export const languageDuck = genericDuck<
-    LanguageState,
+export const languageDuck = genericDuck<LanguageState, ActionType.SETT_LANGUAGE>(
+    initialLanguageState,
     ActionType.SETT_LANGUAGE
->(initialLanguageState, ActionType.SETT_LANGUAGE);
+);
 
 export interface Data {
     [key: string]: any;
@@ -42,10 +48,7 @@ interface GenericDuck<I, T> {
     actionCreator: (data: Data) => Action<T>;
 }
 
-function genericDuck<I extends object, T>(
-    initialState: I,
-    actionType: T
-): GenericDuck<I, T> {
+function genericDuck<I extends object, T>(initialState: I, actionType: T): GenericDuck<I, T> {
     const reducer = (state: I = initialState, action: ActionCreator<T>): I => {
         switch (action.type) {
             case actionType:
