@@ -34,17 +34,17 @@ export const SprakVelger = (props: Props) => {
     const { language } = useSelector((state: AppState) => state.language);
     const [, setCookie] = useCookies([decoratorLanguageCookie]);
     const options = transformOptions(availableLanguages).sort((a, b) => (a.label > b.label ? -1 : 1));
-    const label = 'Språk/Language';
+    const selectorLabel = 'Språk/Language';
 
     const onChange = (selected: LocaleOption) => {
-        const { label, ...language } = selected;
+        const { label, ...selectedLanguage } = selected;
 
-        setCookie(decoratorLanguageCookie, language.locale, cookieOptions);
-        store.dispatch(languageDuck.actionCreator({ language: language.locale }));
-        if (language.handleInApp) {
-            postMessageToApp('languageSelect', language);
+        setCookie(decoratorLanguageCookie, selectedLanguage.locale, cookieOptions);
+        store.dispatch(languageDuck.actionCreator({ language: selectedLanguage.locale }));
+        if (selectedLanguage.handleInApp) {
+            postMessageToApp('languageSelect', selectedLanguage);
         } else {
-            window.location.assign(language.url);
+            window.location.assign(selectedLanguage.url);
         }
     };
 
@@ -78,7 +78,7 @@ export const SprakVelger = (props: Props) => {
         <div className={cls.element('container')}>
             <nav className={cls.className}>
                 <label {...getLabelProps()} className="sr-only">
-                    <Normaltekst>{label}</Normaltekst>
+                    <Normaltekst>{selectorLabel}</Normaltekst>
                 </label>
                 <button
                     {...getToggleButtonProps()}
@@ -87,7 +87,7 @@ export const SprakVelger = (props: Props) => {
                 >
                     <span className={cls.element('knapp-tekst')}>
                         <Bilde asset={Globe} className={cls.element('ikon')} />
-                        <Normaltekst>{label}</Normaltekst>
+                        <Normaltekst>{selectorLabel}</Normaltekst>
                     </span>
                     <NedChevron />
                 </button>
