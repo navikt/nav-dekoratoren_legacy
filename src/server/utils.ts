@@ -196,14 +196,17 @@ export const validateLanguage = (language: Locale) => {
 
 export const validateAvailableLanguages = (languages: AvailableLanguage[]) => {
     languages.forEach((language) => {
-        if (!language.url) {
-            const error = 'availableLanguages.url supports string';
-            throw Error(error);
+        if (!language.handleInApp) {
+            if (!language.url) {
+                const error = 'language.url is required when handleInApp is false';
+                throw Error(error);
+            }
+            if (!isNavUrl(language.url)) {
+                const error = `language.url supports only nav.no urls or relative urls - failed to validate ${language.url}`;
+                throw Error(error);
+            }
         }
-        if (!isNavUrl(language.url)) {
-            const error = `language.url supports only nav.no urls - failed to validate ${language.url}`;
-            throw Error(error);
-        }
+
         switch (language.locale) {
             case 'nb':
             case 'nn':
