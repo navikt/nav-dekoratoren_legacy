@@ -22,6 +22,7 @@ export const initAmplitude = (params: Params) => {
 export function logPageView(params: Params, title: string | null = null) {
     logAmplitudeEvent('sidevisning', {
         sidetittel: title ? title : document.title,
+        platform: window.location.toString(),
         parametre: {
             ...params,
             BREADCRUMBS: !!(params?.BREADCRUMBS && params.BREADCRUMBS.length > 0),
