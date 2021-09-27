@@ -7,12 +7,17 @@ import { AppState } from 'store/reducers';
 import { NyesteVarslerData } from 'store/reducers/varselinnboks-duck';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import varselConfig from './config.json'; // Kopiert fra: https://github.com/navikt/varselinnboks/blob/master/src/main/resources/config.json
+import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import 'dayjs/locale/nb';
 
 import alarmIkon from 'ikoner/varsler/alarm.svg';
 import kalenderIkon from 'ikoner/varsler/calendar-3.svg';
 import chatIkon from 'ikoner/varsler/bubble-chat-2.svg';
 import dokumentIkon from 'ikoner/varsler/file-new-1.svg';
 import plasterIkon from 'ikoner/varsler/first-aid-plaster.svg';
+
+dayjs.extend(localizedFormat);
 
 const ikoner: { [str: string]: string } = {
     'alarm-ikon': alarmIkon,
@@ -40,6 +45,7 @@ const defaultConfig = {
     stylingklasse: '',
     lenketekst: 'Lenke',
 };
+
 const getVarselTypeConfig = (varselType: string) => {
     const data: VarselConfig[] = varselConfig;
     const config = data.find((item: VarselConfig) => item.varselType === varselType);
@@ -47,16 +53,12 @@ const getVarselTypeConfig = (varselType: string) => {
 };
 
 const formatDato = (datoString: string) => {
-    const datoObjekt = new Date(parseInt(datoString, 10));
-    if (isNaN(datoObjekt.valueOf())) {
+    const unixtime = Number(datoString);
+    if (!unixtime || isNaN(unixtime)) {
         return '';
     }
 
-    const datoOptions = { day: '2-digit', month: 'long', year: 'numeric' };
-    const datoFormattert = new Intl.DateTimeFormat('nb', datoOptions).format(datoObjekt);
-    const klokkeslettOptions = { hour: 'numeric', minute: 'numeric' };
-    const klokkeslettFormattert = new Intl.DateTimeFormat('nb', klokkeslettOptions).format(datoObjekt);
-    return `${datoFormattert} kl ${klokkeslettFormattert}`;
+    return dayjs(unixtime).locale('nb').format('LLL');
 };
 
 export const VarselListe = ({ varsler, rowIndex }: Props) => {

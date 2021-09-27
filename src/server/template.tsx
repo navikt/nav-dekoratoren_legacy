@@ -28,7 +28,8 @@ export const template = (req: Request) => {
     const universalCookies = (req as any).universalCookies;
     const cookies = universalCookies.cookies;
     const env = clientEnv({ req, cookies });
-    const { SERVER_TIME, ...cachedEnv } = env;
+
+    const cachedEnv = { ...env, PARAMS: { ...env.PARAMS, TIMESTAMP: 0 } };
 
     // Resources
     const fileEnv = `${env.APP_URL}/env`;

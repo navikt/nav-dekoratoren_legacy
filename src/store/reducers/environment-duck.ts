@@ -1,7 +1,7 @@
 import { MenuValue } from 'utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
 import { Locale, AvailableLanguage } from './language-duck';
-import { Breadcrumb } from '../../komponenter/header/common/brodsmulesti/Brodsmulesti';
+import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
 
 export interface Environment {
     ENV: string;
@@ -17,7 +17,6 @@ export interface Environment {
     LOGIN_URL: string;
     LOGOUT_URL: string;
     FEEDBACK_API_URL: string;
-    SERVER_TIME: number;
 
     // Parameters
     PARAMS: Params;
@@ -41,6 +40,9 @@ export interface Params {
     SHARE_SCREEN: boolean;
     UTILS_BACKGROUND?: string;
     UTLOGGINGSVARSEL: boolean;
+    TA_SURVEYS: string[];
+    TIMESTAMP: number;
+    LOGOUT_URL?: string;
 }
 
 export interface Cookies {
@@ -62,7 +64,6 @@ export const initialState: Environment = {
     LOGIN_URL: '',
     LOGOUT_URL: '',
     FEEDBACK_API_URL: '',
-    SERVER_TIME: 0,
 
     // Parameters
     PARAMS: {
@@ -75,10 +76,12 @@ export const initialState: Environment = {
         LEVEL: '',
         LANGUAGE: Locale.IKKEBESTEMT,
         FEEDBACK: false,
+        TA_SURVEYS: [],
         CHATBOT: false,
         URL_LOOKUP_TABLE: false,
         SHARE_SCREEN: false,
         UTLOGGINGSVARSEL: false,
+        TIMESTAMP: 0,
     },
 
     // Cookies

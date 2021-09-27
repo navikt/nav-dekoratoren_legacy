@@ -1,9 +1,6 @@
 # Nav-dekoratoren ![nav.no logo](src/ikoner/meny/NavLogoRod.svg)
 
-![Deploy til prod](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-prod/badge.svg) | ![Deploy til dev](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-dev/badge.svg) <br />
-![Deploy til q0](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-q0/badge.svg)
-![Deploy til q1](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-q1/badge.svg)
-![Deploy til q6](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-q6/badge.svg)
+![Deploy til prod](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-prod/badge.svg) | ![Deploy til dev](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-dev/badge.svg)
 
 Node.js Express applikasjon med frontend-komponenter i React.<br>
 Appen kjører på NAIS i en docker-container.
@@ -130,22 +127,24 @@ Bruk pus-decorator, les [readme](https://github.com/navikt/pus-decorator).
 
 Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
 
-| Parameter          | Type                                                  | Default              | Forklaring                                                                     |
-| ------------------ | ----------------------------------------------------- | -------------------- | ------------------------------------------------------------------------------ |
-| context            | privatperson \ arbeidsgiver \ samarbeidspartner       | privatperson         | Setter menyen til definert kontekst                                            |
-| simple             | boolean                                               | false                | Viser en forenklet header og footer                                            |
-| enforceLogin       | boolean                                               | false                | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]     |
-| redirectToApp      | boolean                                               | false <br>(ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2] |
-| level              | Level3 \| Level4                                      | Level3               | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]             |
-| language           | nb \| nn \| en \| se \| pl                            | nb                   | Setter språket til dekoratøren ved server side rendering [3]                   |
-| availableLanguages | [{ locale: nb \| nn \| en \| se \| pl, url: string }] | [ ]                  | Setter alternativene til språkvelgeren ved server side rendering [4]           |
-| breadcrumbs        | [{ title: string, url: string }]                      | [ ]                  | Setter brødsmulestien for server side rendering [5]                            |
-| utilsBackground    | white \| gray \| transparent                          | transparent          | Setter bakgrunnsfargen på containeren til brødsmulesti og språkvelger          |
-| feedback           | boolean                                               | false                | Skjuler eller viser tilbakemeldingskomponentet                                 |
-| chatbot            | boolean                                               | true                 | Skjuler eller viser Chatbot Frida [6]                                          |
-| urlLookupTable     | boolean                                               | true                 | Aktiverer eller deaktiverer url-lookup-table [7]                               |
-| shareScreen        | boolean                                               | true                 | Aktiverer eller deaktiverer skjerdelingskomponent                              |
-| utloggingsvarsel   | boolean                                               | false(prod)/true(dev)| Aktiverer eller deaktiverer Utloggingsvarsel for login-token (5min left)       |
+| Parameter          | Type                                                  | Default               | Forklaring                                                                     |
+| ------------------ | ----------------------------------------------------- | --------------------- | ------------------------------------------------------------------------------ |
+| context            | privatperson \ arbeidsgiver \ samarbeidspartner       | privatperson          | Setter menyen til definert kontekst                                            |
+| simple             | boolean                                               | false                 | Viser en forenklet header og footer                                            |
+| enforceLogin       | boolean                                               | false                 | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]     |
+| redirectToApp      | boolean                                               | false <br>(ditt-nav)  | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2] |
+| level              | Level3 \| Level4                                      | Level3                | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]             |
+| language           | nb \| nn \| en \| se \| pl                            | nb                    | Setter språket til dekoratøren ved server side rendering [3]                   |
+| availableLanguages | [{ locale: nb \| nn \| en \| se \| pl, url: string }] | [ ]                   | Setter alternativene til språkvelgeren ved server side rendering [4]           |
+| breadcrumbs        | [{ title: string, url: string }]                      | [ ]                   | Setter brødsmulestien for server side rendering [5]                            |
+| utilsBackground    | white \| gray \| transparent                          | transparent           | Setter bakgrunnsfargen på containeren til brødsmulesti og språkvelger          |
+| feedback           | boolean                                               | false                 | Skjuler eller viser tilbakemeldingskomponentet                                 |
+| chatbot            | boolean                                               | true                  | Skjuler eller viser Chatbot Frida [6]                                          |
+| urlLookupTable     | boolean                                               | true                  | Aktiverer eller deaktiverer url-lookup-table [7]                               |
+| taSurveys          | string,string,...                                     | ''                    | Oppgir én eller flere trackingkoder (surveys) for Task Analytics               |
+| shareScreen        | boolean                                               | true                  | Aktiverer eller deaktiverer skjerdelingskomponent                              |
+| utloggingsvarsel   | boolean                                               | false(prod)/true(dev) | Aktiverer eller deaktiverer Utloggingsvarsel for login-token (5min left)       |
+| logoutUrl          | string                                                | undefined             | Setter url for logg-ut knappen [8]                                             |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
@@ -153,7 +152,8 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 [4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [6] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret. <br>
-[7] Mapper prod-urler til dev-urler basert på [url-lookup-table](https://github.com/navikt/nav-dekoratoren-moduler/blob/master/src/csr/url-lookup-table/table.ts).
+[7] Mapper prod-urler til dev-urler basert på [url-lookup-table](https://github.com/navikt/nav-dekoratoren-moduler/blob/master/src/csr/url-lookup-table/table.ts). <br>
+[8] Dersom denne er satt vil dekoratørens utloggingsfunksjonalitet forbigåes, og **alt rundt utlogging må håndteres av appen.**
 
 :information_source: &nbsp; Samtlige parameter kan settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 :information_source: &nbsp; Bakgrunnsfarge på brødsmulesti og språkvelger kan overstyres:
@@ -248,6 +248,16 @@ Starter en Node Express / dev - server på <br> http://localhost:8088/dekoratore
 npm run build-dev (for testing lokalt)
 npm run build (for produksjon)
 ```
+
+## Deploy til dev-miljø
+
+Start deploy workflow via Github web-UI: Actions -> Workflows -> Deploy-to-dev -> Run workflow
+
+## Prodsetting
+
+-   Lag en PR til master, og merge inn etter godkjenning
+-   Lag en release på master med versjon-bump, beskrivende tittel og oppsummering av endringene dine
+-   Publiser release'en for å starte deploy til prod
 
 ## Henvendelser
 

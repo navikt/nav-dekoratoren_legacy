@@ -15,18 +15,23 @@ import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 import { fetchDriftsmeldinger } from 'store/reducers/driftsmeldinger-duck';
 import { fetchFeatureToggles, Status } from 'api/api';
 import { ActionType } from 'store/actions';
-import { loadVergic } from 'utils/external-scripts';
+import { loadExternalScript } from 'utils/external-scripts';
 import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/browser-support-msg/BrowserSupportMsg';
 import { getLoginUrl } from 'utils/login';
 import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
-import { msgSafetyCheck, postMessageToApp } from '../../utils/messages';
+import { msgSafetyCheck, postMessageToApp } from 'utils/messages';
 import { SprakVelger } from './common/sprakvelger/SprakVelger';
-import { validateAvailableLanguages, validateUtilsBackground } from '../../server/utils';
-import { validateBreadcrumbs } from '../../server/utils';
-import { validateContext } from '../../server/utils';
-import { validateLanguage, validateLevel } from '../../server/utils';
-import { setParams } from '../../store/reducers/environment-duck';
+import {
+    validateAvailableLanguages,
+    validateUtilsBackground,
+    validateLogoutUrl,
+    validateBreadcrumbs,
+    validateContext,
+    validateLanguage,
+    validateLevel,
+} from '../../server/utils';
+import { setParams } from 'store/reducers/environment-duck';
 import Modal from 'nav-frontend-modal';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
@@ -98,7 +103,7 @@ export const Header = () => {
     // Handle feature toggles
     useEffect(() => {
         if (currentFeatureToggles['dekoratoren.skjermdeling']) {
-            loadVergic();
+            loadExternalScript('https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js');
         }
     }, [currentFeatureToggles]);
 
@@ -227,11 +232,26 @@ export const Header = () => {
             const { source, event, payload } = data;
             if (isSafe) {
                 if (source === 'decoratorClient' && event === 'params') {
-                    const { simple, context, level, language } = payload;
-                    const { availableLanguages, breadcrumbs } = payload;
-                    const { enforceLogin, redirectToApp } = payload;
-                    const { feedback, chatbot, shareScreen } = payload;
-                    const { utilsBackground } = payload;
+                    const {
+                        simple,
+                        context,
+                        level,
+                        language,
+                        availableLanguages: languagesFromPayload,
+                        breadcrumbs: breadcrumbsFromPayload,
+                        enforceLogin,
+                        redirectToApp,
+                        feedback,
+                        chatbot,
+                        shareScreen,
+                        utilsBackground,
+                        utloggingsvarsel,
+                        logoutUrl,
+                    } = payload;
+
+                    if (logoutUrl) {
+                        validateLogoutUrl(logoutUrl);
+                    }
                     if (context) {
                         validateContext(context);
                         setContext(context);
@@ -243,11 +263,11 @@ export const Header = () => {
                     if (level) {
                         validateLevel(level);
                     }
-                    if (availableLanguages) {
-                        validateAvailableLanguages(availableLanguages);
+                    if (languagesFromPayload) {
+                        validateAvailableLanguages(languagesFromPayload);
                     }
-                    if (breadcrumbs) {
-                        validateBreadcrumbs(breadcrumbs);
+                    if (breadcrumbsFromPayload) {
+                        validateBreadcrumbs(breadcrumbsFromPayload);
                     }
                     if (utilsBackground) {
                         validateUtilsBackground(utilsBackground);
@@ -271,11 +291,11 @@ export const Header = () => {
                         ...(language && {
                             LANGUAGE: language,
                         }),
-                        ...(availableLanguages && {
-                            AVAILABLE_LANGUAGES: availableLanguages,
+                        ...(languagesFromPayload && {
+                            AVAILABLE_LANGUAGES: languagesFromPayload,
                         }),
-                        ...(breadcrumbs && {
-                            BREADCRUMBS: breadcrumbs,
+                        ...(breadcrumbsFromPayload && {
+                            BREADCRUMBS: breadcrumbsFromPayload,
                         }),
                         ...(feedback !== undefined && {
                             FEEDBACK: feedback === true,
@@ -288,6 +308,9 @@ export const Header = () => {
                         }),
                         ...(shareScreen !== undefined && {
                             SHARE_SCREEN: shareScreen === true,
+                        }),
+                        ...(utloggingsvarsel !== undefined && {
+                            UTLOGGINGSVARSEL: utloggingsvarsel === true,
                         }),
                     };
                     dispatch(setParams(params));
@@ -310,7 +333,7 @@ export const Header = () => {
             <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
-            <header className="siteheader">
+            <header className={`siteheader${useSimpleHeader ? ' simple' : ''}`}>
                 <Skiplinks simple={useSimpleHeader} />
                 {useSimpleHeader ? <HeaderSimple /> : <HeaderRegular />}
             </header>

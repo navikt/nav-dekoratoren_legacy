@@ -3,7 +3,6 @@ import BEMHelper from '../../../utils/bem';
 import ModalWrapper from 'nav-frontend-modal';
 import './utloggingsvarsel.less';
 import './utloggingsmodal-transition.less';
-import { getSelvbetjeningIdtoken, parseJwt } from './token.utils';
 import { checkTimeStampAndSetTimeStamp, getCurrentTimeStamp, timeStampIkkeUtgatt } from './timestamp.utils';
 import ResizeHandler, { BREAKPOINT, WindowType } from './komponenter/ResizeHandler';
 import { verifyWindowObj } from '../../../utils/Environment';
@@ -11,15 +10,16 @@ import UtloggingsvarselInnhold from './komponenter/UtloggingsvarselInnhold';
 import { AppState } from '../../../store/reducers';
 import { useSelector } from 'react-redux';
 import { useInterval } from './useInterval';
+import { getLogOutUrl } from 'utils/login';
 
 const stateSelector = (state: AppState) => ({
     utloggingsvarsel: state.environment.PARAMS.UTLOGGINGSVARSEL,
+    timestamp: state.environment.PARAMS.TIMESTAMP,
     environment: state.environment,
 });
 
 const Utloggingsvarsel: FunctionComponent = () => {
-    const { utloggingsvarsel, environment } = useSelector(stateSelector);
-    const { LOGOUT_URL } = environment;
+    const { utloggingsvarsel, timestamp, environment } = useSelector(stateSelector);
     const cls = BEMHelper('utloggingsvarsel');
     const windowOnMount = () =>
         verifyWindowObj() && window.innerWidth > BREAKPOINT ? WindowType.DESKTOP : WindowType.MOBILE;
@@ -32,22 +32,16 @@ const Utloggingsvarsel: FunctionComponent = () => {
     const [tid, setTid] = useState<string>('- minutter');
     const [vistSistePaminnelse, setVistSistePaminnelse] = useState<boolean>(false);
     const [overskrift, setOverskrift] = useState<string>('Du blir snart logget ut');
-    const setOpenClsName = (): string => (minimized ? '' : 'open');
+    const setOpenClsName = (): string => (minimized ? '' : 'OPEN');
     const toggleModal = (): void => setModalOpen((prevState) => !prevState);
     const modalMountPoint = (): HTMLElement => document.getElementById('utloggingsvarsel') ?? document.body;
 
     useEffect(() => {
         const setModalElement = () => (document.getElementById('sitefooter') ? '#sitefooter' : 'body');
         ModalWrapper.setAppElement(setModalElement());
-
-        const token = getSelvbetjeningIdtoken();
-        if (utloggingsvarsel && token) {
+        if (utloggingsvarsel && timestamp) {
             try {
-                const jwt = parseJwt(token);
-                const timestamp = jwt['exp'];
-                if (timestamp) {
-                    checkTimeStampAndSetTimeStamp(timestamp, setModalOpen, setUnixTimestamp);
-                }
+                checkTimeStampAndSetTimeStamp(timestamp, setModalOpen, setUnixTimestamp);
             } catch (err) {
                 console.log(err);
             }
@@ -63,7 +57,7 @@ const Utloggingsvarsel: FunctionComponent = () => {
             const tokenExpire = unixTimeStamp - getCurrentTimeStamp();
             if (timeStampIkkeUtgatt(getCurrentTimeStamp() - unixTimeStamp + 1)) {
                 setInterval(false);
-                window.location.href = LOGOUT_URL;
+                window.location.href = getLogOutUrl(environment);
             }
 
             if (tokenExpire <= 60) {

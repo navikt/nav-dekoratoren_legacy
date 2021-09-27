@@ -4,7 +4,7 @@ import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import KnappBase from 'nav-frontend-knapper';
-import { getLoginUrl } from 'utils/login';
+import { getLoginUrl, getLogOutUrl } from 'utils/login';
 import './LoggInnKnapp.less';
 
 export const loginKnappId = 'login-knapp-id';
@@ -17,29 +17,19 @@ const stateSelector = (state: AppState) => ({
 });
 
 export const LoggInnKnapp = () => {
-    const { authenticated, arbeidsflate, language, environment } = useSelector(
-        stateSelector
-    );
+    const { authenticated, arbeidsflate, language, environment } = useSelector(stateSelector);
 
     const handleButtonClick = () => {
-        const { LOGOUT_URL } = environment;
-        const loginUrl = getLoginUrl(environment, arbeidsflate);
-
         analyticsEvent({
             context: arbeidsflate,
             category: AnalyticsCategory.Header,
             action: authenticated ? 'logg-ut' : 'logg-inn',
         });
 
-        return authenticated
-            ? (window.location.href = LOGOUT_URL)
-            : (window.location.href = loginUrl);
+        window.location.href = authenticated ? getLogOutUrl(environment) : getLoginUrl(environment, arbeidsflate);
     };
 
-    const knappetekst = finnTekst(
-        authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp',
-        language
-    );
+    const knappetekst = finnTekst(authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp', language);
 
     return (
         <div className={'login-knapp-container'}>

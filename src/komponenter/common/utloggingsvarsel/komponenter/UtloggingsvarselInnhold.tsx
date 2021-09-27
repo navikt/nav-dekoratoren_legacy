@@ -37,7 +37,11 @@ const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
                     <UtloggingNavigasjon setMinimized={setMinimized} minimized={minimized} />
                     <UtloggingsvarselTekstInnhold overskrift={overskrift} />
                     <UtloggingsvarselValg minimized={minimized} />
-                    <Nedteller typoGrafi="normaltekst" tekst={'Du blir automatisk logget ut om '.concat(tid)} />
+                    <Nedteller
+                        typoGrafi="normaltekst"
+                        tekst={'Du blir automatisk logget ut om '.concat(tid)}
+                        subClass={'main'}
+                    />
                 </div>
             </div>
         </>
