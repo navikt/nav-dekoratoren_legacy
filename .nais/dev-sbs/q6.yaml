@@ -40,7 +40,7 @@ spec:
         - name: API_INNLOGGINGSLINJE_URL
           value: https://innloggingsstatus.dev.nav.no/person/innloggingsstatus
         - name: API_UNLEASH_PROXY_URL
-          value: https://www.dev.nav.no/person/pb-unleash-proxy
+          value: https://person.dev.nav.no/person/pb-unleash-proxy
         - name: MINSIDE_ARBEIDSGIVER_URL
           value: https://arbeidsgiver-q6.nav.no/min-side-arbeidsgiver/
         - name: DITT_NAV_URL

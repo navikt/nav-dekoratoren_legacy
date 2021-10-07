@@ -38,7 +38,6 @@ import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
 import './Header.less';
 
-export const unleashCacheCookie = 'decorator-unleash-cache';
 export const decoratorContextCookie = 'decorator-context';
 export const decoratorLanguageCookie = 'decorator-language';
 
@@ -64,7 +63,7 @@ export const Header = () => {
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
     const useSimpleHeader = PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER;
 
-    const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie, unleashCacheCookie]);
+    const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie]);
 
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {
@@ -129,29 +128,16 @@ export const Header = () => {
         hentInnloggingsstatus(API_INNLOGGINGSLINJE_URL)(dispatch);
         fetchMenypunkter(APP_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
-            const togglesFromCookie = cookies[unleashCacheCookie];
-            if (togglesFromCookie) {
-                dispatch({
-                    type: ActionType.SETT_FEATURE_TOGGLES,
-                    data: togglesFromCookie,
-                });
-            } else {
-                fetchFeatureToggles(API_UNLEASH_PROXY_URL, currentFeatureToggles)
-                    .then((updatedFeatureToggles) => {
-                        dispatch({
-                            type: ActionType.SETT_FEATURE_TOGGLES,
-                            data: updatedFeatureToggles,
-                        });
-                        setCookie(unleashCacheCookie, updatedFeatureToggles, {
-                            maxAge: 100,
-                            domain: '.nav.no',
-                            path: '/',
-                        });
-                    })
-                    .catch((error) => {
-                        console.error(`Failed to fetch feature-toggles: ${error}`);
+            fetchFeatureToggles(API_UNLEASH_PROXY_URL, currentFeatureToggles)
+                .then((updatedFeatureToggles) => {
+                    dispatch({
+                        type: ActionType.SETT_FEATURE_TOGGLES,
+                        data: updatedFeatureToggles,
                     });
-            }
+                })
+                .catch((error) => {
+                    console.error(`Failed to fetch feature-toggles: ${error}`);
+                });
         }
     }, []);
 
