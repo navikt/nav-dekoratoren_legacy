@@ -5,7 +5,7 @@ import { Environment } from '../store/reducers/environment-duck';
 export const getLoginUrl = (environment: Environment, arbeidsflate: MenuValue) => {
     const { LOGIN_URL, DITT_NAV_URL } = environment;
     const { MINSIDE_ARBEIDSGIVER_URL, PARAMS } = environment;
-    const appUrl = window.location.href;
+    const appUrl = window.location.origin + window.location.pathname + window.location.search;
     return `${
         PARAMS.REDIRECT_TO_APP || erNavDekoratoren()
             ? `${LOGIN_URL}/login?redirect=${appUrl}`
