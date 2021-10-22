@@ -24,7 +24,12 @@ const stateSelector = (state: AppState) => ({
     isChatbotEnabled: state.environment.PARAMS.CHATBOT,
 });
 
-const actionFilterMap = [[['www.nav.no/no/bedrift'], ['arbeidsgiver']]];
+type ActionFilterMap = [((input: string) => boolean)[], string[]];
+
+const actionFilterMap: ActionFilterMap[] = [
+    [[(input) => /www\.nav\.no\/no\/person(\/.*?)?/.test(input)], ['privatperson']],
+    [[(input) => /www\.nav\.no\/no\/bedrift(\/.*)?/.test(input)], ['arbeidsgiver']],
+];
 
 export const ChatbotWrapper = ({ ...properties }: any) => {
     const { isChatbotEnabled } = useSelector(stateSelector);
@@ -56,8 +61,8 @@ export const ChatbotWrapper = ({ ...properties }: any) => {
             actionFilters = [];
         }
 
-        actionFilterMap.forEach(([targets, filters]) => {
-            if (targets.includes(origin)) {
+        actionFilterMap.forEach(([tests, filters]) => {
+            if (tests.find((test) => test(origin))) {
                 actionFilters.push(...filters);
             }
         });
