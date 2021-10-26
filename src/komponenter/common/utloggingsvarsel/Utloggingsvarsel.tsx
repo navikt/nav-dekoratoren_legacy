@@ -27,7 +27,7 @@ const stateSelector = (state: AppState) => ({
 
 const Utloggingsvarsel: FunctionComponent = () => {
     const { utloggingsvarselOnsket, environment, utlogginsvarsel } = useSelector(stateSelector);
-    const [cookie, setCookie] = useCookies();
+    const [, setCookie, removeCookie] = useCookies();
     const dispatch = useDispatch();
     const cls = BEMHelper('utloggingsvarsel');
     const windowOnMount = () =>
@@ -64,6 +64,7 @@ const Utloggingsvarsel: FunctionComponent = () => {
             const tokenExpire = unixTimeStamp - getCurrentTimeStamp();
             if (timeStampIkkeUtgatt(getCurrentTimeStamp() - unixTimeStamp + 1)) {
                 setInterval(false);
+                removeCookie(CookieName.SELVBETJENING_IDTOKEN, cookieOptions)
                 window.location.href = getLogOutUrl(environment);
             }
 
