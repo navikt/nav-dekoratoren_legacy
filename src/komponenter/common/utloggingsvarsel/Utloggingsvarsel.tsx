@@ -8,40 +8,47 @@ import ResizeHandler, { BREAKPOINT, WindowType } from './komponenter/ResizeHandl
 import { verifyWindowObj } from '../../../utils/Environment';
 import UtloggingsvarselInnhold from './komponenter/UtloggingsvarselInnhold';
 import { AppState } from '../../../store/reducers';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useInterval } from './useInterval';
 import { getLogOutUrl } from 'utils/login';
+import {
+    utloggingsvarselOppdatereStatus,
+    UtloggingsvarselState,
+    VarselEkspandert
+} from '../../../store/reducers/utloggingsvarsel-duck';
+import { useCookies } from 'react-cookie';
+import { CookieName, cookieOptions } from '../../../server/cookieSettings';
 
 const stateSelector = (state: AppState) => ({
-    utloggingsvarsel: state.environment.PARAMS.UTLOGGINGSVARSEL,
-    timestamp: state.environment.PARAMS.TIMESTAMP,
-    environment: state.environment,
+    utlogginsvarsel: state.utlogginsvarsel,
+    utloggingsvarselOnsket: state.environment.PARAMS.UTLOGGINGSVARSEL,
+    environment: state.environment
 });
 
 const Utloggingsvarsel: FunctionComponent = () => {
-    const { utloggingsvarsel, timestamp, environment } = useSelector(stateSelector);
+    const { utloggingsvarselOnsket, environment, utlogginsvarsel } = useSelector(stateSelector);
+    const [cookie, setCookie] = useCookies();
+    const dispatch = useDispatch();
     const cls = BEMHelper('utloggingsvarsel');
     const windowOnMount = () =>
         verifyWindowObj() && window.innerWidth > BREAKPOINT ? WindowType.DESKTOP : WindowType.MOBILE;
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
     const [unixTimeStamp, setUnixTimestamp] = useState<number>(0);
-    const [minimized, setMinimized] = useState<boolean>(false);
     const [windowType, setWindowType] = useState<WindowType>(windowOnMount());
     const [interval, setInterval] = useState<boolean>(timeStampIkkeUtgatt(unixTimeStamp - getCurrentTimeStamp()));
     const [tid, setTid] = useState<string>('- minutter');
-    const [vistSistePaminnelse, setVistSistePaminnelse] = useState<boolean>(false);
     const [overskrift, setOverskrift] = useState<string>('Du blir snart logget ut');
-    const setOpenClsName = (): string => (minimized ? '' : 'OPEN');
+    const setOpenClsName = (): string => (utlogginsvarsel.varselState === VarselEkspandert.MINIMERT ? '' : 'OPEN');
     const toggleModal = (): void => setModalOpen((prevState) => !prevState);
     const modalMountPoint = (): HTMLElement => document.getElementById('utloggingsvarsel') ?? document.body;
 
     useEffect(() => {
         const setModalElement = () => (document.getElementById('sitefooter') ? '#sitefooter' : 'body');
         ModalWrapper.setAppElement(setModalElement());
-        if (utloggingsvarsel && timestamp) {
+        if (utloggingsvarselOnsket && utlogginsvarsel.timeStamp) {
             try {
-                checkTimeStampAndSetTimeStamp(timestamp, setModalOpen, setUnixTimestamp);
+                checkTimeStampAndSetTimeStamp(utlogginsvarsel.timeStamp, setModalOpen, setUnixTimestamp, dispatch, utlogginsvarsel, setCookie);
             } catch (err) {
                 console.log(err);
             }
@@ -61,9 +68,19 @@ const Utloggingsvarsel: FunctionComponent = () => {
             }
 
             if (tokenExpire <= 60) {
-                if (!vistSistePaminnelse) {
-                    setVistSistePaminnelse(true);
-                    modalOpen ? setMinimized(false) : setModalOpen(true);
+                if (!utlogginsvarsel.vistSistePaminnelse) {
+                    const utloggingsState: Partial<UtloggingsvarselState> =
+                        {
+                            ...utlogginsvarsel,
+                            varselState: VarselEkspandert.EKSPANDERT,
+                            vistSistePaminnelse: true,
+                            modalLukketAvBruker: false
+                        };
+                    dispatch(utloggingsvarselOppdatereStatus(utloggingsState));
+                    setCookie(CookieName.DECORATOR_LOGOUT_WARNING, utloggingsState, cookieOptions);
+                    if (!modalOpen) {
+                        setModalOpen(true);
+                    }
                 }
                 setTid(`${Math.floor(tokenExpire)} sekunder`);
                 setOverskrift('Nå blir du logget ut');
@@ -78,19 +95,17 @@ const Utloggingsvarsel: FunctionComponent = () => {
     ResizeHandler({ setWindowType, windowType });
 
     return (
-        <div id="utloggingsvarsel" className={cls.className + ` ${setOpenClsName()}`}>
+        <div id='utloggingsvarsel' className={cls.className + ` ${setOpenClsName()}`}>
             <ModalWrapper
                 parentSelector={modalMountPoint}
                 onRequestClose={toggleModal}
-                contentLabel="varsel for utløpende sesjon av innlogget bruker"
+                contentLabel='varsel for utløpende sesjon av innlogget bruker'
                 isOpen={modalOpen}
                 className={cls.element('modal')}
                 closeButton={false}
             >
                 <UtloggingsvarselInnhold
                     setModalOpen={setModalOpen}
-                    setMinimized={setMinimized}
-                    minimized={minimized}
                     windowType={windowType}
                     overskrift={overskrift}
                     tid={tid}

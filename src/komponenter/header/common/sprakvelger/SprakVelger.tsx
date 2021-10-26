@@ -4,7 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { NedChevron } from 'nav-frontend-chevron';
 import { useSelect } from 'downshift';
 import { decoratorLanguageCookie } from '../../Header';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from '../../../../server/cookieSettings';
 import { AvailableLanguage } from 'store/reducers/language-duck';
 import { languageDuck } from 'store/reducers/language-duck';
 import { postMessageToApp } from 'utils/messages';

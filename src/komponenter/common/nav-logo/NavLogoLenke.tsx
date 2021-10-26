@@ -5,7 +5,7 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import { CookieName, cookieOptions } from '../../../server/cookieSettings';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import { AnalyticsEventArgs } from 'utils/analytics';
@@ -20,7 +20,7 @@ type Props = {
 
 export const NavLogoLenke = (props: Props) => {
     const dispatch = useDispatch();
-    const [, setCookie] = useCookies(['decorator-context']);
+    const [, setCookie] = useCookies([CookieName.DECORATOR_CONTEXT]);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const { language } = useSelector((state: AppState) => state.language);
     const context = getArbeidsflateContext(XP_BASE_URL, MenuValue.PRIVATPERSON);
@@ -38,7 +38,7 @@ export const NavLogoLenke = (props: Props) => {
             href={url}
             analyticsEventArgs={props.analyticsEventArgs}
             onClick={(event) => {
-                setCookie('decorator-context', context.key, cookieOptions);
+                setCookie(CookieName.DECORATOR_CONTEXT, context.key, cookieOptions);
                 dispatch(settArbeidsflate(context.key));
                 if (erNavDekoratoren()) {
                     event.preventDefault();

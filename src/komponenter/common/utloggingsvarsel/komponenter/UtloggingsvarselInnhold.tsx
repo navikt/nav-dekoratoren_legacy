@@ -7,38 +7,44 @@ import UtloggingsvarselValg from './UtloggingsvarselValg';
 import Nedteller from './Nedteller';
 import { WindowType } from './ResizeHandler';
 import BEMHelper from '../../../../utils/bem';
+import { AppState } from '../../../../store/reducers';
+import { useSelector } from 'react-redux';
+import { VarselEkspandert } from '../../../../store/reducers/utloggingsvarsel-duck';
 
 interface Props {
     setModalOpen: Dispatch<SetStateAction<boolean>>;
-    setMinimized: Dispatch<SetStateAction<boolean>>;
-    minimized: boolean;
     windowType: WindowType;
     overskrift: string;
     tid: string;
 }
 
+const stateSelector = (state: AppState) => ({
+    utlogginsvarsel: state.utlogginsvarsel
+});
+
 const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
-    const { setModalOpen, setMinimized, minimized, overskrift, tid } = props;
+    const { utlogginsvarsel } = useSelector(stateSelector);
+    const { setModalOpen, overskrift, tid } = props;
     const cls = BEMHelper('utloggingsvarsel');
+    const htmlUUdisable = utlogginsvarsel.varselState === VarselEkspandert.MINIMERT;
 
     return (
         <>
             <LiteEkspanderbartvindu
-                setMinimized={setMinimized}
                 setModalOpen={setModalOpen}
-                minimized={minimized}
-                typoGrafi="normaltekst"
+                typoGrafi='normaltekst'
                 tid={tid}
                 visFullTekst={true}
             />
-            <div className={cls.element('main-wrapper')} aria-hidden={minimized}>
+            <div className={cls.element('main-wrapper')}
+                 aria-hidden={utlogginsvarsel.varselState === VarselEkspandert.MINIMERT}>
                 <Header />
                 <div className={cls.element('container')}>
-                    <UtloggingNavigasjon setMinimized={setMinimized} minimized={minimized} />
+                    <UtloggingNavigasjon />
                     <UtloggingsvarselTekstInnhold overskrift={overskrift} />
-                    <UtloggingsvarselValg minimized={minimized} />
+                    <UtloggingsvarselValg htmlUUDisable={htmlUUdisable} />
                     <Nedteller
-                        typoGrafi="normaltekst"
+                        typoGrafi='normaltekst'
                         tekst={'Du blir automatisk logget ut om '.concat(tid)}
                         subClass={'main'}
                     />
