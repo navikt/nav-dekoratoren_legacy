@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const cache = new NodeCache({
     stdTTL: fiveMinutesInSeconds,
-    checkperiod: oneMinuteInSeconds
+    checkperiod: oneMinuteInSeconds,
 });
 
 export const template = (req: Request) => {
@@ -29,7 +29,10 @@ export const template = (req: Request) => {
     const cookies = universalCookies.cookies;
     const env = clientEnv({ req, cookies });
 
-    const cachedEnv = { ...env };
+    const cachedEnv = {
+        ...env,
+        COOKIES: { ...env.COOKIES, EKSPANDERTVARSEL: { ...env.COOKIES.EKSPANDERTVARSEL, timestamp: 0 } },
+    };
 
     // Resources
     const fileEnv = `${env.APP_URL}/env`;
@@ -41,7 +44,7 @@ export const template = (req: Request) => {
     const cachedHtml = cache.get(cachedEnvHash);
 
     if (cachedHtml) {
-       return cachedHtml;
+        return cachedHtml;
     }
 
     // Create store based on request params
