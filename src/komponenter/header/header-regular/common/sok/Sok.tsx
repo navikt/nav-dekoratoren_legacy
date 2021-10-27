@@ -32,10 +32,6 @@ const setSubmitTrackerCookie = () => {
     Cookies.set('nav-search-use', Date.now().toString(), { expires: 30, domain: '.nav.no' });
 };
 
-const shortInputExceptions: { [key: string]: boolean } = {
-    cv: true,
-};
-
 const Sok = (props: Props) => {
     const { environment, language } = useSelector(stateSelector);
     const [loading, setLoading] = useState<boolean>(false);
@@ -93,7 +89,7 @@ const Sok = (props: Props) => {
                     <SokInput
                         onChange={(value: string) => {
                             setSearchInput(value);
-                            if (value.length > 2 || shortInputExceptions[value?.toLowerCase()]) {
+                            if (value.length > 2) {
                                 setLoading(true);
                                 fetchSearchDebounced({
                                     value,
