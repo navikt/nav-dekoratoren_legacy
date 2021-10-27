@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const cache = new NodeCache({
     stdTTL: fiveMinutesInSeconds,
-    checkperiod: oneMinuteInSeconds,
+    checkperiod: oneMinuteInSeconds
 });
 
 export const template = (req: Request) => {
@@ -29,7 +29,7 @@ export const template = (req: Request) => {
     const cookies = universalCookies.cookies;
     const env = clientEnv({ req, cookies });
 
-    const cachedEnv = { ...env, PARAMS: { ...env.PARAMS, TIMESTAMP: 0 } };
+    const cachedEnv = { ...env };
 
     // Resources
     const fileEnv = `${env.APP_URL}/env`;
@@ -41,7 +41,7 @@ export const template = (req: Request) => {
     const cachedHtml = cache.get(cachedEnvHash);
 
     if (cachedHtml) {
-        return cachedHtml;
+       return cachedHtml;
     }
 
     // Create store based on request params
@@ -79,14 +79,14 @@ export const template = (req: Request) => {
     const HtmlMetaTags = metaTags.renderToString();
     const html = `
     <!DOCTYPE html>
-    <html lang="no">
+    <html lang='no'>
         <head>
             <title>NAV Dekoratør</title>
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta name="description" content="Felles header og footer for NAV-applikasjoner i selvbetjeningssonen" />
-            <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
-            <meta name="theme-color" content="#000000" />
-            <meta charset="utf-8" />
+            <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+            <meta name='description' content='Felles header og footer for NAV-applikasjoner i selvbetjeningssonen' />
+            <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no' />
+            <meta name='theme-color' content='#000000' />
+            <meta charset='utf-8' />
             <!-- Decorator development styling -->
             <style>
             html, body {  height: 100%; }
@@ -112,30 +112,30 @@ export const template = (req: Request) => {
         </head>
         <body>
             <!-- Styling fetched by apps -->
-            <div id="styles">
+            <div id='styles'>
                 ${HtmlMetaTags}
-                <link href="${fileCss}" rel="stylesheet"/>
+                <link href='${fileCss}' rel='stylesheet'/>
             </div>
-            <div class="decorator-dev-container">
+            <div class='decorator-dev-container'>
                 <!-- Header fetched by apps -->
-                <div id="${headerId}">
-                    <div id="decorator-header">${HtmlHeader}</div>
+                <div id='${headerId}'>
+                    <div id='decorator-header'>${HtmlHeader}</div>
                 </div>
-                <div class="decorator-dummy-app">
+                <div class='decorator-dummy-app'>
                 </div>
                 <!-- Footer fetched by apps -->
-                <div id="${footerId}">
-                    <div id="decorator-footer">${HtmlFooter}</div>
+                <div id='${footerId}'>
+                    <div id='decorator-footer'>${HtmlFooter}</div>
                 </div>
             </div>
             <!-- Scripts fetched by apps -->
-            <div id="scripts">
-                <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
-                <script async="true" src=${fileScript}></script>
+            <div id='scripts'>
+                <div id='decorator-env' data-src='${fileEnv}${paramsAsString}'></div>
+                <script async='true' src='${fileScript}'></script>
             </div>
-            <div id="skiplinks"></div>
-            <div id="megamenu-resources"></div>
-            <div id="webstats-ga-notrack"></div>
+            <div id='skiplinks'></div>
+            <div id='megamenu-resources'></div>
+            <div id='webstats-ga-notrack'></div>
         </body>
     </html>`;
 

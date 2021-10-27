@@ -11,6 +11,7 @@ import { template } from './template';
 import compression from 'compression';
 import dotenv from 'dotenv';
 import mockMenu from './mock/menu.json';
+
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -32,11 +33,11 @@ const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
 const mainCache = new NodeCache({
     stdTTL: tenSeconds,
-    checkperiod: oneMinuteInSeconds,
+    checkperiod: oneMinuteInSeconds
 });
 const backupCache = new NodeCache({
     stdTTL: 0,
-    checkperiod: 0,
+    checkperiod: 0
 });
 
 // Middleware
@@ -73,9 +74,9 @@ app.use(
             getLabelValues: (req: Request, res: Response) => ({
                 app: process.env.NAIS_APP_NAME || 'nav-dekoratoren',
                 namespace: process.env.NAIS_NAMESPACE || 'local',
-                cluster: process.env.NAIS_CLUSTER_NAME || 'local',
-            }),
-        },
+                cluster: process.env.NAIS_CLUSTER_NAME || 'local'
+            })
+        }
     })
 );
 
@@ -106,7 +107,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
     } else {
         // Fetch fom XP
         fetch(`${process.env.API_XP_SERVICES_URL}/no.nav.navno/menu`, {
-            method: 'GET',
+            method: 'GET'
         })
             .then((xpRes) => {
                 if (xpRes.ok && xpRes.status === 200) {
@@ -170,7 +171,7 @@ app.use(
     createProxyMiddleware(proxiedVarslerUrl, {
         target: `${process.env.API_VARSELINNBOKS_URL}`,
         pathRewrite: { [`^${proxiedVarslerUrl}`]: '' },
-        changeOrigin: true,
+        changeOrigin: true
     })
 );
 
@@ -179,7 +180,7 @@ app.use(
     createProxyMiddleware(proxiedSokUrl, {
         target: `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`,
         pathRewrite: { [`^${proxiedSokUrl}`]: '' },
-        changeOrigin: true,
+        changeOrigin: true
     })
 );
 
@@ -188,7 +189,7 @@ app.use(
     createProxyMiddleware(proxiedDriftsmeldingerUrl, {
         target: `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`,
         pathRewrite: { [`^${proxiedDriftsmeldingerUrl}`]: '' },
-        changeOrigin: true,
+        changeOrigin: true
     })
 );
 
@@ -209,7 +210,7 @@ app.use(
                 res.header('Cache-Control', `max-age=${fiveMinutesInSeconds}`);
                 res.header('Pragma', `max-age=${fiveMinutesInSeconds}`);
             }
-        },
+        }
     })
 );
 
@@ -222,7 +223,7 @@ app.use((e: Error, req: Request, res: Response, next: NextFunction) => {
     console.error(e.stack);
     res.status(405);
     res.send({
-        error: { status: 405, message: e.message },
+        error: { status: 405, message: e.message }
     });
 });
 

@@ -4,6 +4,13 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { AvailableLanguage, Locale } from 'store/reducers/language-duck';
 import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
 import { parseJwt } from 'komponenter/common/utloggingsvarsel/token.utils';
+import {
+    ParsedJwtToken,
+    UtloggingsVarselProperties,
+    UtloggingsvarselState,
+    initialState as UtloggingsvarselInitState
+} from '../store/reducers/utloggingsvarsel-duck';
+import { CookieName, getCookieContextKey } from './cookieSettings';
 
 interface Cookies {
     [key: string]: MenuValue | Locale | string;
@@ -26,8 +33,9 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     const chosenContext = (req.query.context?.toString().toLowerCase() || MenuValue.IKKEBESTEMT) as MenuValue;
 
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
-    const utloggingsvarsel = getutloggingsvarsel(req, cookies);
+    const utloggingsvarsel: UtloggingsVarselProperties = setAndCheckUtloggingsvarsel(req, cookies);
     const taSurveys = req.query.taSurveys?.toString().replace(' ', '').split(',') || [];
+
 
     return {
         ENV: process.env.ENV as string,
@@ -54,60 +62,91 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 LEVEL: (req.query.level || 'Level3') as string,
                 LANGUAGE: chosenLanguage,
                 ...(req.query.availableLanguages && {
-                    AVAILABLE_LANGUAGES: JSON.parse(req.query.availableLanguages as string),
+                    AVAILABLE_LANGUAGES: JSON.parse(req.query.availableLanguages as string)
                 }),
                 ...(req.query.breadcrumbs && {
-                    BREADCRUMBS: JSON.parse(req.query.breadcrumbs as string),
+                    BREADCRUMBS: JSON.parse(req.query.breadcrumbs as string)
                 }),
                 FEEDBACK: req.query.feedback === 'true',
                 CHATBOT: req.query.chatbot !== 'false',
                 URL_LOOKUP_TABLE: req.query.urlLookupTable !== 'false',
                 ...(req.query.utilsBackground && {
-                    UTILS_BACKGROUND: req.query.utilsBackground as string,
+                    UTILS_BACKGROUND: req.query.utilsBackground as string
                 }),
                 SHARE_SCREEN: req.query.shareScreen !== 'false',
                 UTLOGGINGSVARSEL: utloggingsvarsel.UTLOGGINGSVARSEL,
                 TA_SURVEYS: taSurveys,
-                TIMESTAMP: utloggingsvarsel.TIMESTAMP,
                 ...(req.query.logoutUrl && {
-                    LOGOUT_URL: req.query.logoutUrl as string,
-                }),
-            },
+                    LOGOUT_URL: req.query.logoutUrl as string
+                })
+            }
         }),
         ...(cookies && {
             COOKIES: {
-                CONTEXT: cookies['decorator-context'] as MenuValue,
-                LANGUAGE: cookies['decorator-language'] as Locale,
-            },
-        }),
+                CONTEXT: cookies[CookieName.DECORATOR_CONTEXT] as MenuValue,
+                LANGUAGE: cookies[CookieName.DECORATOR_LANGUAGE] as Locale,
+                EKSPANDERTVARSEL: utloggingsvarsel.state
+            }
+        })
     };
 };
 
-const orginDev = (hosturl?: string) => {
-    const dev = ['localhost', '-q0', '-q1', '-q2', '-q6', 'dev'];
-    return dev.some((orgin) => hosturl?.includes(orgin));
+
+const setAndCheckUtloggingsvarsel = (req: Request, cookies: Cookies): UtloggingsVarselProperties => {
+    const jwtTokenInfo: ParsedJwtToken = getutloggingsvarsel(req, cookies);
+    const utloggingsvarselCookie: UtloggingsvarselState = getLogoutWarningCookie(req, cookies);
+
+    if (jwtTokenInfo.UTLOGGINGSVARSEL && jwtTokenInfo.TIMESTAMP !== utloggingsvarselCookie.timeStamp) {
+        utloggingsvarselCookie.timeStamp = jwtTokenInfo.TIMESTAMP ?? 0;
+        utloggingsvarselCookie.origin = req.headers?.host ?? '';
+        utloggingsvarselCookie.modalLukketAvBruker = false;
+        utloggingsvarselCookie.vistSistePaminnelse = false;
+        utloggingsvarselCookie.miljo = getCookieContextKey(process.env.XP_BASE_URL ?? req.headers?.referer ?? '');
+    }
+    return { UTLOGGINGSVARSEL: jwtTokenInfo.UTLOGGINGSVARSEL, state: utloggingsvarselCookie };
 };
 
-const getutloggingsvarsel = (req: Request, cookies: Cookies): { UTLOGGINGSVARSEL: boolean; TIMESTAMP: number } => {
-    if (
-        req.query.utloggingsvarsel === 'true' ||
-        (req.query.utloggingsvarsel !== 'false' && orginDev(req.headers?.referer))
-    ) {
-        const token = cookies['selvbetjening-idtoken'];
+const getLogoutWarningCookie = (req: Request, cookies: Cookies): UtloggingsvarselState => {
+    const logoutWarning = cookies[CookieName.DECORATOR_LOGOUT_WARNING];
+    if (logoutWarning) {
+        try {
+            return JSON.parse(logoutWarning) as UtloggingsvarselState;
+        } catch (err) {
+            console.log('Failed to parse cookies[\'' + CookieName.DECORATOR_LOGOUT_WARNING + '\']: ', err);
+            return UtloggingsvarselInitState;
+        }
+    }
+    return UtloggingsvarselInitState;
+};
+
+export const orginDevelopment = (hosturl?: string) =>
+    ['localhost', '-q0', '-q1', '-q2', '-q6', 'dev'].some((o) => hosturl?.includes(o));
+
+
+const getutloggingsvarsel = (req: Request, cookies: Cookies): ParsedJwtToken => {
+    const enableUtloggingsvarsel: boolean = req.query.utloggingsvarsel === 'true' ||
+        (req.query.utloggingsvarsel !== 'false' && orginDevelopment(req.headers?.referer));
+
+    if (enableUtloggingsvarsel) {
+        const token = cookies[CookieName.SELVBETJENING_IDTOKEN];
         if (token) {
-            const jwt = parseJwt(token);
-            const timestamp = jwt['exp'];
-            if (timestamp) {
-                return {
-                    UTLOGGINGSVARSEL: true,
-                    TIMESTAMP: timestamp,
-                };
+            try {
+                const jwt = parseJwt(token);
+                const timestamp = jwt['exp'];
+                if (timestamp) {
+                    return {
+                        UTLOGGINGSVARSEL: true,
+                        TIMESTAMP: timestamp
+                    };
+                }
+            } catch (err) {
+                console.warn('parsing selvbetjening-idtoken failed: ', err);
             }
         }
     }
     return {
-        UTLOGGINGSVARSEL: false,
-        TIMESTAMP: 0,
+        UTLOGGINGSVARSEL: enableUtloggingsvarsel,
+        TIMESTAMP: 0
     };
 };
 
@@ -257,7 +296,7 @@ const mapToLocale = (language?: string) => {
         // deprecated
         norsk: 'nb',
         engelsk: 'en',
-        samisk: 'se',
+        samisk: 'se'
     };
     return map[language] || 'ukjent-verdi';
 };

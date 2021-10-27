@@ -4,6 +4,7 @@ import reducers from './reducers';
 import Cookies from 'universal-cookie';
 import { Locale } from './reducers/language-duck';
 import { MenuValue } from '../utils/meny-storage-utils';
+import { CookieName } from '../server/cookieSettings';
 
 export const createStore = (env?: Environment, cookies?: Cookies) => {
     const composeEnhancers = (
@@ -17,25 +18,32 @@ export const createStore = (env?: Environment, cookies?: Cookies) => {
     const paramContext =
         env?.PARAMS.CONTEXT !== MenuValue.IKKEBESTEMT && env?.PARAMS.CONTEXT;
 
-    const cookieLanguage = cookies?.get('decorator-language');
-    const cookieContext = cookies?.get('decorator-context');
+
+    const cookieLanguage = cookies?.get(CookieName.DECORATOR_LANGUAGE);
+    const cookieContext = cookies?.get(CookieName.DECORATOR_CONTEXT);
 
     const initialLanguage = paramLanguage || cookieLanguage;
     const initialContext = paramContext || cookieContext;
 
+
     return composeEnhancers(createReduxStore)(reducers, {
         ...(env && {
-            environment: env,
+            environment: env
         }),
         ...(initialLanguage && {
             language: {
                 language: initialLanguage,
-            },
+            }
         }),
         ...(initialContext && {
             arbeidsflate: {
                 status: initialContext,
-            },
+            }
         }),
+        ...({
+            utloggingsvarsel: {
+                ...env?.COOKIES?.EKSPANDERTVARSEL
+            }
+        })
     });
 };

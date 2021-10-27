@@ -4,9 +4,11 @@ import BEMHelper from '../../../../utils/bem';
 import { useSelector } from 'react-redux';
 import { getLoginUrl, getLogOutUrl } from 'utils/login';
 import { AppState } from 'store/reducers';
+import { CookieName, cookieOptions } from '../../../../server/cookieSettings';
+import { useCookies } from 'react-cookie';
 
 interface Props {
-    minimized: boolean;
+    htmlUUDisable: boolean;
 }
 
 const stateSelector = (state: AppState) => ({
@@ -15,8 +17,9 @@ const stateSelector = (state: AppState) => ({
 });
 
 const UtloggingsvarselValg: FunctionComponent<Props> = (props) => {
+    const [,, removeCookie] = useCookies();
     const cls = BEMHelper('utloggingsvarsel');
-    const { minimized } = props;
+    const { htmlUUDisable } = props;
 
     const { arbeidsflate, environment } = useSelector(stateSelector);
     const LOGIN_URL = getLoginUrl(environment, arbeidsflate);
@@ -25,9 +28,9 @@ const UtloggingsvarselValg: FunctionComponent<Props> = (props) => {
         <div className={cls.element('valg')}>
             <Knapp
                 type="hoved"
-                tabIndex={minimized ? -1 : 0}
+                tabIndex={htmlUUDisable ? -1 : 0}
                 onClick={() => {
-                    document.cookie = 'selvbetjening-idtoken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                    removeCookie(CookieName.SELVBETJENING_IDTOKEN, cookieOptions)
                     window.location.href = LOGIN_URL;
                 }}
             >
@@ -35,7 +38,7 @@ const UtloggingsvarselValg: FunctionComponent<Props> = (props) => {
             </Knapp>
             <Knapp
                 type="hoved"
-                tabIndex={minimized ? -1 : 0}
+                tabIndex={htmlUUDisable ? -1 : 0}
                 onClick={() => {
                     window.location.href = getLogOutUrl(environment);
                 }}

@@ -6,7 +6,7 @@ import { HeaderSimple } from 'komponenter/header/header-simple/HeaderSimple';
 import { HeaderRegular } from 'komponenter/header/header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import { CookieName, cookieOptions } from '../../server/cookieSettings';
 import { useCookies } from 'react-cookie';
 import { languageDuck, Locale } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
@@ -38,8 +38,8 @@ import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
 import './Header.less';
 
-export const decoratorContextCookie = 'decorator-context';
-export const decoratorLanguageCookie = 'decorator-language';
+export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
+export const decoratorLanguageCookie = CookieName.DECORATOR_LANGUAGE;
 
 const stateSelector = (state: AppState) => ({
     menypunkt: state.menypunkt,
