@@ -11,6 +11,7 @@ import Spinner from '../spinner/Spinner';
 import { Sokeresultat } from './utils';
 import SokResultater from './sok-innhold/SokResultater';
 import { Environment } from 'store/reducers/environment-duck';
+import Cookies from 'js-cookie';
 import './Sok.less';
 
 interface Props {
@@ -26,6 +27,14 @@ const stateSelector = (state: AppState) => ({
     environment: state.environment,
     language: state.language.language,
 });
+
+const setSubmitTrackerCookie = () => {
+    Cookies.set('nav-search-use', Date.now().toString(), { expires: 30, domain: '.nav.no' });
+};
+
+const shortInputExceptions: { [key: string]: boolean } = {
+    cv: true,
+};
 
 const Sok = (props: Props) => {
     const { environment, language } = useSelector(stateSelector);
@@ -84,7 +93,7 @@ const Sok = (props: Props) => {
                     <SokInput
                         onChange={(value: string) => {
                             setSearchInput(value);
-                            if (value.length > 2) {
+                            if (value.length > 2 || shortInputExceptions[value?.toLowerCase()]) {
                                 setLoading(true);
                                 fetchSearchDebounced({
                                     value,
@@ -137,6 +146,7 @@ const fetchSearch = (props: FetchResult) => {
     const { setLoading, setError, setResult } = props;
     const { APP_URL } = environment;
     const url = `${APP_URL}/api/sok`;
+    setSubmitTrackerCookie();
 
     fetch(`${url}?ord=${value}`)
         .then((response) => {
