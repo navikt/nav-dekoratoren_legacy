@@ -20,7 +20,7 @@ import { useCookies } from 'react-cookie';
 import { CookieName, cookieOptions } from '../../../server/cookieSettings';
 
 const stateSelector = (state: AppState) => ({
-    utlogginsvarsel: state.utlogginsvarsel,
+    utlogginsvarsel: state.utloggingsvarsel,
     utloggingsvarselOnsket: state.environment.PARAMS.UTLOGGINGSVARSEL,
     environment: state.environment
 });

@@ -13,7 +13,7 @@ import { CookieName, cookieOptions } from '../../../../server/cookieSettings';
 import { AppState } from '../../../../store/reducers';
 
 const stateSelector = (state: AppState) => ({
-    utlogginsvarsel: state.utlogginsvarsel
+    utlogginsvarsel: state.utloggingsvarsel
 });
 
 const UtloggingNavigasjon: FunctionComponent = () => {

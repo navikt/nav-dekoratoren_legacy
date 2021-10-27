@@ -23,7 +23,7 @@ interface Props {
 }
 
 const stateSelector = (state: AppState) => ({
-    utlogginsvarsel: state.utlogginsvarsel,
+    utlogginsvarsel: state.utloggingsvarsel,
 });
 
 const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {

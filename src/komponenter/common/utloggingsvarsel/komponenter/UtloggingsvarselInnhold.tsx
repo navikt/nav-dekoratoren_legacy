@@ -19,7 +19,7 @@ interface Props {
 }
 
 const stateSelector = (state: AppState) => ({
-    utlogginsvarsel: state.utlogginsvarsel
+    utlogginsvarsel: state.utloggingsvarsel
 });
 
 const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {

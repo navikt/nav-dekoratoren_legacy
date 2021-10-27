@@ -28,7 +28,7 @@ export interface AppState {
     driftsmeldinger: DriftsmeldingerState;
     featureToggles: FeatureToggles;
     tilbakemeldinger: DataElement;
-    utlogginsvarsel: UtloggingsvarselState;
+    utloggingsvarsel: UtloggingsvarselState;
 }
 
 export const reducers = combineReducers<AppState>({
@@ -43,7 +43,7 @@ export const reducers = combineReducers<AppState>({
     driftsmeldinger: driftsmeldingReducer,
     featureToggles: featureToggleReducer,
     tilbakemeldinger: tilbakemeldingsReducer,
-    utlogginsvarsel:  utloggingsvarselReducer
+    utloggingsvarsel:  utloggingsvarselReducer
 });
 
 export default reducers;
