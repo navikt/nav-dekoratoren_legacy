@@ -20,13 +20,13 @@ import { useCookies } from 'react-cookie';
 import { CookieName, cookieOptions } from '../../../server/cookieSettings';
 
 const stateSelector = (state: AppState) => ({
-    utlogginsvarsel: state.utloggingsvarsel,
+    utloggingsvarsel: state.utloggingsvarsel,
     utloggingsvarselOnsket: state.environment.PARAMS.UTLOGGINGSVARSEL,
     environment: state.environment
 });
 
 const Utloggingsvarsel: FunctionComponent = () => {
-    const { utloggingsvarselOnsket, environment, utlogginsvarsel } = useSelector(stateSelector);
+    const { utloggingsvarselOnsket, environment, utloggingsvarsel } = useSelector(stateSelector);
     const [, setCookie, removeCookie] = useCookies();
     const dispatch = useDispatch();
     const cls = BEMHelper('utloggingsvarsel');
@@ -39,16 +39,16 @@ const Utloggingsvarsel: FunctionComponent = () => {
     const [interval, setInterval] = useState<boolean>(timeStampIkkeUtgatt(unixTimeStamp - getCurrentTimeStamp()));
     const [tid, setTid] = useState<string>('- minutter');
     const [overskrift, setOverskrift] = useState<string>('Du blir snart logget ut');
-    const setOpenClsName = (): string => (utlogginsvarsel.varselState === VarselEkspandert.MINIMERT ? '' : 'OPEN');
+    const setOpenClsName = (): string => (utloggingsvarsel.varselState === VarselEkspandert.MINIMERT ? '' : 'OPEN');
     const toggleModal = (): void => setModalOpen((prevState) => !prevState);
     const modalMountPoint = (): HTMLElement => document.getElementById('utloggingsvarsel') ?? document.body;
 
     useEffect(() => {
         const setModalElement = () => (document.getElementById('sitefooter') ? '#sitefooter' : 'body');
         ModalWrapper.setAppElement(setModalElement());
-        if (utloggingsvarselOnsket && utlogginsvarsel.timeStamp) {
+        if (utloggingsvarselOnsket && utloggingsvarsel.timeStamp) {
             try {
-                checkTimeStampAndSetTimeStamp(utlogginsvarsel.timeStamp, setModalOpen, setUnixTimestamp, dispatch, utlogginsvarsel, setCookie);
+                checkTimeStampAndSetTimeStamp(utloggingsvarsel.timeStamp, setModalOpen, setUnixTimestamp, dispatch, utloggingsvarsel, setCookie);
             } catch (err) {
                 console.log(err);
             }
@@ -69,10 +69,10 @@ const Utloggingsvarsel: FunctionComponent = () => {
             }
 
             if (tokenExpire <= 60) {
-                if (!utlogginsvarsel.vistSistePaminnelse) {
+                if (!utloggingsvarsel.vistSistePaminnelse) {
                     const utloggingsState: Partial<UtloggingsvarselState> =
                         {
-                            ...utlogginsvarsel,
+                            ...utloggingsvarsel,
                             varselState: VarselEkspandert.EKSPANDERT,
                             vistSistePaminnelse: true,
                             modalLukketAvBruker: false

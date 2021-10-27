@@ -13,11 +13,11 @@ import { CookieName, cookieOptions } from '../../../../server/cookieSettings';
 import { AppState } from '../../../../store/reducers';
 
 const stateSelector = (state: AppState) => ({
-    utlogginsvarsel: state.utloggingsvarsel
+    utloggingsvarsel: state.utloggingsvarsel
 });
 
 const UtloggingNavigasjon: FunctionComponent = () => {
-    const { utlogginsvarsel } = useSelector(stateSelector);
+    const { utloggingsvarsel } = useSelector(stateSelector);
     const cls = BEMHelper('utloggingsvarsel');
     const dispatch = useDispatch();
     const [, setCookie] = useCookies();
@@ -26,14 +26,14 @@ const UtloggingNavigasjon: FunctionComponent = () => {
         <nav className={cls.element('navigasjon')} aria-label='minimere og lukk varsel valg'>
             <button
                 className={cls.element('lukk')}
-                tabIndex={utlogginsvarsel.varselState === VarselEkspandert.MINIMERT ? -1 : 0}
+                tabIndex={utloggingsvarsel.varselState === VarselEkspandert.MINIMERT ? -1 : 0}
                 onClick={() => {
                     document.body.style.overflow = 'initial';
                     document.body.setAttribute('aria-hidden', 'false');
                     dispatch(utloggingsvarselMinimer());
                     setCookie(CookieName.DECORATOR_LOGOUT_WARNING,
                         {
-                            ...utlogginsvarsel,
+                            ...utloggingsvarsel,
                             varselState: VarselEkspandert.MINIMERT
 
                         } as UtloggingsvarselState,

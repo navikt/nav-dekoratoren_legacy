@@ -41,7 +41,7 @@ export const createStore = (env?: Environment, cookies?: Cookies) => {
             }
         }),
         ...({
-            utlogginsvarsel: {
+            utloggingsvarsel: {
                 ...env?.COOKIES?.EKSPANDERTVARSEL
             }
         })

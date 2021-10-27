@@ -19,14 +19,14 @@ interface Props {
 }
 
 const stateSelector = (state: AppState) => ({
-    utlogginsvarsel: state.utloggingsvarsel
+    utloggingsvarsel: state.utloggingsvarsel
 });
 
 const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
-    const { utlogginsvarsel } = useSelector(stateSelector);
+    const { utloggingsvarsel } = useSelector(stateSelector);
     const { setModalOpen, overskrift, tid } = props;
     const cls = BEMHelper('utloggingsvarsel');
-    const htmlUUdisable = utlogginsvarsel.varselState === VarselEkspandert.MINIMERT;
+    const htmlUUdisable = utloggingsvarsel.varselState === VarselEkspandert.MINIMERT;
 
     return (
         <>
@@ -37,7 +37,7 @@ const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
                 visFullTekst={true}
             />
             <div className={cls.element('main-wrapper')}
-                 aria-hidden={utlogginsvarsel.varselState === VarselEkspandert.MINIMERT}>
+                 aria-hidden={utloggingsvarsel.varselState === VarselEkspandert.MINIMERT}>
                 <Header />
                 <div className={cls.element('container')}>
                     <UtloggingNavigasjon />

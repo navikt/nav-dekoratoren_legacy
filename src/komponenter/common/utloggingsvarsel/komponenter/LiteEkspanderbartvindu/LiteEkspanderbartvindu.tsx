@@ -23,17 +23,17 @@ interface Props {
 }
 
 const stateSelector = (state: AppState) => ({
-    utlogginsvarsel: state.utloggingsvarsel,
+    utloggingsvarsel: state.utloggingsvarsel,
 });
 
 const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
-    const { utlogginsvarsel } = useSelector(stateSelector);
+    const { utloggingsvarsel } = useSelector(stateSelector);
     const [, setCookie] = useCookies();
     const dispatch = useDispatch();
     const cls = BEMHelper('liteExpanderbartvindu');
     const { setModalOpen, typoGrafi, tid, visFullTekst } = props;
     const tekst = visFullTekst ? 'Du blir automatisk logget ut om ' : '';
-    const htmlUUEnable: boolean = utlogginsvarsel.varselState === VarselEkspandert.MINIMERT;
+    const htmlUUEnable: boolean = utloggingsvarsel.varselState === VarselEkspandert.MINIMERT;
 
     const setFocus = (id: string) => {
         const element = document.getElementById(id);
@@ -58,7 +58,7 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
             setCookie(
                 CookieName.DECORATOR_LOGOUT_WARNING,
                 {
-                    ...utlogginsvarsel,
+                    ...utloggingsvarsel,
                     ...setCookieValue
                 } as UtloggingsvarselState,
                 cookieOptions);
@@ -97,7 +97,7 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
                             onClick={() => {
                                 setModalOpen(false);
                                 ekspanderUtloggingsvarsel({
-                                    ...utlogginsvarsel,
+                                    ...utloggingsvarsel,
                                     varselState: VarselEkspandert.EKSPANDERT,
                                     modalLukketAvBruker: true
                                 });
