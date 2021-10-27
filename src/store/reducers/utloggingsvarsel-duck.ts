@@ -67,5 +67,5 @@ export default function reducer(state: UtloggingsvarselState = initialState, act
         default:
             return state;
     }
-};
+}
 
