@@ -14,7 +14,7 @@ import environmentReducer, { Environment } from './environment-duck';
 import featureToggleReducer from './feature-toggles-duck';
 import { FeatureToggles } from './feature-toggles-duck';
 import tilbakemeldingsReducer from './tilbakemelding-duck';
-import { reducer as utloggingsvarselReducer, UtloggingsvarselState } from './utloggingsvarsel-duck';
+import utloggingsvarselReducer, { UtloggingsvarselState }  from './utloggingsvarsel-duck';
 
 export interface AppState {
     environment: Environment;
