@@ -30,8 +30,8 @@ export const checkTimeStampAndSetTimeStamp = (
         }
         return timeout(
             jwtTimestamp,
-            differanse - ANTALL_MIN_NAR_VARSELSTART
-            , setModalOpen,
+            differanse - ANTALL_MIN_NAR_VARSELSTART,
+            setModalOpen,
             setUnixTimeStamp,
             dispatch,
             utlogginsvarsel,
@@ -62,7 +62,6 @@ const timeout = (
             setCookie(CookieName.DECORATOR_LOGOUT_WARNING, utloggingsState, cookieOptions);
             setUtloggingVarsel(timestamp, setModalOpen, setUnixTimeStamp);
         } else {
-            console.log('setting new timeout');
             timeout(
                 timestamp,
                 remainingTimeoutDiff,
