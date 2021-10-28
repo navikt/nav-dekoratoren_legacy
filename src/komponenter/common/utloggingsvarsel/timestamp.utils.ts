@@ -48,8 +48,8 @@ const timeout = (
     utloggingsvarsel: UtloggingsvarselState,
     setCookie: (name: string, value: any, options?: CookieSetOptions | undefined) => void
 ) => {
-    const SECONDS_BETWEEN_TIMEOUT = 9;
-    const remainingTimeoutDiff = timeoutDiff - SECONDS_BETWEEN_TIMEOUT;
+    const SECONDS_BETWEEN_SET_TIMEOUT = 9;
+    const remainingTimeoutDiff = timeoutDiff - SECONDS_BETWEEN_SET_TIMEOUT;
     setTimeout(() => {
         if (remainingTimeoutDiff < 0) {
             const utloggingsState: UtloggingsvarselState = {
@@ -72,7 +72,7 @@ const timeout = (
                 setCookie
             );
         }
-    }, SECONDS_BETWEEN_TIMEOUT * 1000);
+    }, SECONDS_BETWEEN_SET_TIMEOUT * 1000);
 };
 
 const setUtloggingVarsel = (
