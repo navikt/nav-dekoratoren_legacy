@@ -48,17 +48,32 @@ const timeout = (
     utloggingsvarsel: UtloggingsvarselState,
     setCookie: (name: string, value: any, options?: CookieSetOptions | undefined) => void
 ) => {
+    const SECONDS_BETWEEN_TIMEOUT = 9;
+    const remainingTimeoutDiff = timeoutDiff - SECONDS_BETWEEN_TIMEOUT;
     setTimeout(() => {
-        const utloggingsState: UtloggingsvarselState = {
-            ...utloggingsvarsel,
-            varselState: VarselEkspandert.EKSPANDERT,
-            vistSistePaminnelse: false,
-            modalLukketAvBruker: false
-        };
-        dispatch(utloggingsvarselOppdatereStatus(utloggingsState));
-        setCookie(CookieName.DECORATOR_LOGOUT_WARNING, utloggingsState, cookieOptions);
-        setUtloggingVarsel(timestamp, setModalOpen, setUnixTimeStamp);
-    }, timeoutDiff * 1000);
+        if (remainingTimeoutDiff < 0) {
+            const utloggingsState: UtloggingsvarselState = {
+                ...utloggingsvarsel,
+                varselState: VarselEkspandert.EKSPANDERT,
+                vistSistePaminnelse: false,
+                modalLukketAvBruker: false,
+            };
+            dispatch(utloggingsvarselOppdatereStatus(utloggingsState));
+            setCookie(CookieName.DECORATOR_LOGOUT_WARNING, utloggingsState, cookieOptions);
+            setUtloggingVarsel(timestamp, setModalOpen, setUnixTimeStamp);
+        } else {
+            console.log('setting new timeout');
+            timeout(
+                timestamp,
+                remainingTimeoutDiff,
+                setModalOpen,
+                setUnixTimeStamp,
+                dispatch,
+                utloggingsvarsel,
+                setCookie
+            );
+        }
+    }, SECONDS_BETWEEN_TIMEOUT * 1000);
 };
 
 const setUtloggingVarsel = (
