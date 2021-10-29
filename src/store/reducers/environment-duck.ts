@@ -31,6 +31,7 @@ export interface Params {
     SIMPLE_FOOTER: boolean;
     ENFORCE_LOGIN: boolean;
     REDIRECT_TO_APP: boolean;
+    REDIRECT_TO_URL?: string;
     LEVEL: string;
     LANGUAGE: Locale;
     AVAILABLE_LANGUAGES?: AvailableLanguage[];
@@ -88,7 +89,7 @@ export const initialState: Environment = {
     COOKIES: {
         LANGUAGE: Locale.IKKEBESTEMT,
         CONTEXT: MenuValue.IKKEBESTEMT,
-        EKSPANDERTVARSEL: { ...UtloggingsvarlInitState }
+        EKSPANDERTVARSEL: { ...UtloggingsvarlInitState },
     },
 };
 

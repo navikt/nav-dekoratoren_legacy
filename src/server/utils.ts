@@ -8,7 +8,7 @@ import {
     ParsedJwtToken,
     UtloggingsVarselProperties,
     UtloggingsvarselState,
-    initialState as UtloggingsvarselInitState
+    initialState as UtloggingsvarselInitState,
 } from '../store/reducers/utloggingsvarsel-duck';
 import { CookieName, getCookieContextKey } from './cookieSettings';
 
@@ -36,7 +36,6 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     const utloggingsvarsel: UtloggingsVarselProperties = setAndCheckUtloggingsvarsel(req, cookies);
     const taSurveys = req.query.taSurveys?.toString().replace(' ', '').split(',') || [];
 
-
     return {
         ENV: process.env.ENV as string,
         XP_BASE_URL: process.env.XP_BASE_URL as string,
@@ -59,38 +58,38 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 SIMPLE_FOOTER: req.query.footer === 'true',
                 ENFORCE_LOGIN: req.query.enforceLogin === 'true',
                 REDIRECT_TO_APP: req.query.redirectToApp === 'true',
+                REDIRECT_TO_URL: req.query.redirectToUrl as string,
                 LEVEL: (req.query.level || 'Level3') as string,
                 LANGUAGE: chosenLanguage,
                 ...(req.query.availableLanguages && {
-                    AVAILABLE_LANGUAGES: JSON.parse(req.query.availableLanguages as string)
+                    AVAILABLE_LANGUAGES: JSON.parse(req.query.availableLanguages as string),
                 }),
                 ...(req.query.breadcrumbs && {
-                    BREADCRUMBS: JSON.parse(req.query.breadcrumbs as string)
+                    BREADCRUMBS: JSON.parse(req.query.breadcrumbs as string),
                 }),
                 FEEDBACK: req.query.feedback === 'true',
                 CHATBOT: req.query.chatbot !== 'false',
                 URL_LOOKUP_TABLE: req.query.urlLookupTable !== 'false',
                 ...(req.query.utilsBackground && {
-                    UTILS_BACKGROUND: req.query.utilsBackground as string
+                    UTILS_BACKGROUND: req.query.utilsBackground as string,
                 }),
                 SHARE_SCREEN: req.query.shareScreen !== 'false',
                 UTLOGGINGSVARSEL: utloggingsvarsel.UTLOGGINGSVARSEL,
                 TA_SURVEYS: taSurveys,
                 ...(req.query.logoutUrl && {
-                    LOGOUT_URL: req.query.logoutUrl as string
-                })
-            }
+                    LOGOUT_URL: req.query.logoutUrl as string,
+                }),
+            },
         }),
         ...(cookies && {
             COOKIES: {
                 CONTEXT: cookies[CookieName.DECORATOR_CONTEXT] as MenuValue,
                 LANGUAGE: cookies[CookieName.DECORATOR_LANGUAGE] as Locale,
-                EKSPANDERTVARSEL: utloggingsvarsel.state
-            }
-        })
+                EKSPANDERTVARSEL: utloggingsvarsel.state,
+            },
+        }),
     };
 };
-
 
 const setAndCheckUtloggingsvarsel = (req: Request, cookies: Cookies): UtloggingsVarselProperties => {
     const jwtTokenInfo: ParsedJwtToken = getutloggingsvarsel(req, cookies);
@@ -112,7 +111,7 @@ const getLogoutWarningCookie = (req: Request, cookies: Cookies): Utloggingsvarse
         try {
             return JSON.parse(logoutWarning) as UtloggingsvarselState;
         } catch (err) {
-            console.log('Failed to parse cookies[\'' + CookieName.DECORATOR_LOGOUT_WARNING + '\']: ', err);
+            console.log("Failed to parse cookies['" + CookieName.DECORATOR_LOGOUT_WARNING + "']: ", err);
             return UtloggingsvarselInitState;
         }
     }
@@ -122,9 +121,9 @@ const getLogoutWarningCookie = (req: Request, cookies: Cookies): Utloggingsvarse
 export const orginDevelopment = (hosturl?: string) =>
     ['localhost', '-q0', '-q1', '-q2', '-q6', 'dev'].some((o) => hosturl?.includes(o));
 
-
 const getutloggingsvarsel = (req: Request, cookies: Cookies): ParsedJwtToken => {
-    const enableUtloggingsvarsel: boolean = req.query.utloggingsvarsel === 'true' ||
+    const enableUtloggingsvarsel: boolean =
+        req.query.utloggingsvarsel === 'true' ||
         (req.query.utloggingsvarsel !== 'false' && orginDevelopment(req.headers?.referer));
 
     if (enableUtloggingsvarsel) {
@@ -136,7 +135,7 @@ const getutloggingsvarsel = (req: Request, cookies: Cookies): ParsedJwtToken => 
                 if (timestamp) {
                     return {
                         UTLOGGINGSVARSEL: true,
-                        TIMESTAMP: timestamp
+                        TIMESTAMP: timestamp,
                     };
                 }
             } catch (err) {
@@ -146,13 +145,13 @@ const getutloggingsvarsel = (req: Request, cookies: Cookies): ParsedJwtToken => 
     }
     return {
         UTLOGGINGSVARSEL: enableUtloggingsvarsel,
-        TIMESTAMP: 0
+        TIMESTAMP: 0,
     };
 };
 
 // Validation utils
 export const validateClientEnv = (req: Request) => {
-    const { level, context, availableLanguages, breadcrumbs, utilsBackground, logoutUrl } = req.query;
+    const { level, context, availableLanguages, breadcrumbs, utilsBackground, logoutUrl, redirectToUrl } = req.query;
     if (context) {
         validateContext(context as string);
     }
@@ -175,11 +174,21 @@ export const validateClientEnv = (req: Request) => {
     if (logoutUrl) {
         validateLogoutUrl(logoutUrl as string);
     }
+    if (redirectToUrl) {
+        validateRedirectUrl(redirectToUrl as string);
+    }
 };
 
 export const validateLogoutUrl = (url: string) => {
     if (!isNavUrl(url)) {
         const error = `logoutUrl supports only nav.no urls - failed to validate ${url}`;
+        throw Error(error);
+    }
+};
+
+export const validateRedirectUrl = (url: string) => {
+    if (!isNavUrl(url)) {
+        const error = `redirectToUrl supports only nav.no urls - failed to validate ${url}`;
         throw Error(error);
     }
 };
@@ -296,7 +305,7 @@ const mapToLocale = (language?: string) => {
         // deprecated
         norsk: 'nb',
         engelsk: 'en',
-        samisk: 'se'
+        samisk: 'se',
     };
     return map[language] || 'ukjent-verdi';
 };
