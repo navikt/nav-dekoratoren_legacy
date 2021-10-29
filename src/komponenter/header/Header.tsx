@@ -30,6 +30,7 @@ import {
     validateContext,
     validateLanguage,
     validateLevel,
+    validateRedirectUrl,
 } from '../../server/utils';
 import { setParams } from 'store/reducers/environment-duck';
 import Modal from 'nav-frontend-modal';
@@ -227,6 +228,7 @@ export const Header = () => {
                         breadcrumbs: breadcrumbsFromPayload,
                         enforceLogin,
                         redirectToApp,
+                        redirectToUrl,
                         feedback,
                         chatbot,
                         shareScreen,
@@ -258,6 +260,9 @@ export const Header = () => {
                     if (utilsBackground) {
                         validateUtilsBackground(utilsBackground);
                     }
+                    if (redirectToUrl) {
+                        validateRedirectUrl(redirectToUrl);
+                    }
                     const params = {
                         ...(context && {
                             CONTEXT: context,
@@ -270,6 +275,9 @@ export const Header = () => {
                         }),
                         ...(redirectToApp !== undefined && {
                             REDIRECT_TO_APP: redirectToApp === true,
+                        }),
+                        ...(redirectToUrl !== undefined && {
+                            REDIRECT_TO_URL: redirectToUrl,
                         }),
                         ...(level && {
                             LEVEL: level,
