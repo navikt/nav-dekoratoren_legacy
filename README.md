@@ -133,6 +133,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | simple             | boolean                                               | false                 | Viser en forenklet header og footer                                            |
 | enforceLogin       | boolean                                               | false                 | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]     |
 | redirectToApp      | boolean                                               | false <br>(ditt-nav)  | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2] |
+| redirectToUrl      | string                                                | undefined             | Sender brukeren til denne url'en etter innlogging via dekoratøren [2]          |
 | level              | Level3 \| Level4                                      | Level3                | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]             |
 | language           | nb \| nn \| en \| se \| pl                            | nb                    | Setter språket til dekoratøren ved server side rendering [3]                   |
 | availableLanguages | [{ locale: nb \| nn \| en \| se \| pl, url: string }] | [ ]                   | Setter alternativene til språkvelgeren ved server side rendering [4]           |
