@@ -43,10 +43,11 @@ export const ChatbotWrapper = () => {
     }, [isChatbotEnabled]);
 
     const isProd = env === 'prod';
+    const boostApiUrlBase = isProd ? boostApiUrlBaseProd : boostApiUrlBaseStaging;
 
     return isMounted ? (
         <Chatbot
-            boostApiUrlBase={isProd ? boostApiUrlBaseProd : boostApiUrlBaseStaging}
+            boostApiUrlBase={boostApiUrlBase}
             actionFilters={getActionFilters(context, isProd)}
             analyticsCallback={logAmplitudeEvent}
         />
