@@ -21,7 +21,7 @@ const actionFilterMap: { [key in MenuValue]?: ActionFilter[] } = {
     [MenuValue.ARBEIDSGIVER]: ['arbeidsgiver'],
 };
 
-const boostApiUrlBaseDev = 'https://staging-nav.boost.ai/api/chat/v2';
+const boostApiUrlBaseStaging = 'https://staging-nav.boost.ai/api/chat/v2';
 const boostApiUrlBaseProd = 'https://nav.boost.ai/api/chat/v2';
 
 export const ChatbotWrapper = () => {
@@ -39,7 +39,7 @@ export const ChatbotWrapper = () => {
     const isProd = env === 'prod';
 
     const actionsFilters: ActionFilter[] = isProd ? actionFilterMap[context] || [] : ['NAV_TEST'];
-    const boostApiUrlBase = isProd ? boostApiUrlBaseProd : boostApiUrlBaseDev;
+    const boostApiUrlBase = isProd ? boostApiUrlBaseProd : boostApiUrlBaseStaging;
 
     return isMounted ? (
         <Chatbot
