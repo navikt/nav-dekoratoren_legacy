@@ -14,15 +14,21 @@ const stateSelector = (state: AppState) => ({
     env: state.environment.ENV,
 });
 
+const boostApiUrlBaseStaging = 'https://staging-nav.boost.ai/api/chat/v2';
+const boostApiUrlBaseProd = 'https://nav.boost.ai/api/chat/v2';
+
 type ActionFilter = 'privatperson' | 'arbeidsgiver' | 'NAV_TEST';
 
-const actionFilterMap: { [key in MenuValue]?: ActionFilter[] } = {
+const contextFilterMap: { [key in MenuValue]?: ActionFilter[] } = {
     [MenuValue.PRIVATPERSON]: ['privatperson'],
     [MenuValue.ARBEIDSGIVER]: ['arbeidsgiver'],
 };
 
-const boostApiUrlBaseStaging = 'https://staging-nav.boost.ai/api/chat/v2';
-const boostApiUrlBaseProd = 'https://nav.boost.ai/api/chat/v2';
+const getActionFilters = (context: MenuValue, isProd: boolean): ActionFilter[] => {
+    const contextFilter = contextFilterMap[context] || [];
+
+    return isProd ? contextFilter : [...contextFilter, 'NAV_TEST'];
+};
 
 export const ChatbotWrapper = () => {
     const { isChatbotEnabled, context, env } = useSelector(stateSelector);
@@ -37,14 +43,12 @@ export const ChatbotWrapper = () => {
     }, [isChatbotEnabled]);
 
     const isProd = env === 'prod';
-
-    const actionsFilters: ActionFilter[] = isProd ? actionFilterMap[context] || [] : ['NAV_TEST'];
     const boostApiUrlBase = isProd ? boostApiUrlBaseProd : boostApiUrlBaseStaging;
 
     return isMounted ? (
         <Chatbot
             boostApiUrlBase={boostApiUrlBase}
-            actionFilters={actionsFilters}
+            actionFilters={getActionFilters(context, isProd)}
             analyticsCallback={logAmplitudeEvent}
         />
     ) : null;
