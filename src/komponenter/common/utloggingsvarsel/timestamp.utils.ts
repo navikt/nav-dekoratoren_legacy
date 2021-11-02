@@ -30,8 +30,8 @@ export const checkTimeStampAndSetTimeStamp = (
         }
         return timeout(
             jwtTimestamp,
-            differanse - ANTALL_MIN_NAR_VARSELSTART
-            , setModalOpen,
+            differanse - ANTALL_MIN_NAR_VARSELSTART,
+            setModalOpen,
             setUnixTimeStamp,
             dispatch,
             utlogginsvarsel,
@@ -48,17 +48,31 @@ const timeout = (
     utloggingsvarsel: UtloggingsvarselState,
     setCookie: (name: string, value: any, options?: CookieSetOptions | undefined) => void
 ) => {
+    const SECONDS_BETWEEN_SET_TIMEOUT = 9;
+    const remainingTimeoutDiff = timeoutDiff - SECONDS_BETWEEN_SET_TIMEOUT;
     setTimeout(() => {
-        const utloggingsState: UtloggingsvarselState = {
-            ...utloggingsvarsel,
-            varselState: VarselEkspandert.EKSPANDERT,
-            vistSistePaminnelse: false,
-            modalLukketAvBruker: false
-        };
-        dispatch(utloggingsvarselOppdatereStatus(utloggingsState));
-        setCookie(CookieName.DECORATOR_LOGOUT_WARNING, utloggingsState, cookieOptions);
-        setUtloggingVarsel(timestamp, setModalOpen, setUnixTimeStamp);
-    }, timeoutDiff * 1000);
+        if (remainingTimeoutDiff < 0) {
+            const utloggingsState: UtloggingsvarselState = {
+                ...utloggingsvarsel,
+                varselState: VarselEkspandert.EKSPANDERT,
+                vistSistePaminnelse: false,
+                modalLukketAvBruker: false,
+            };
+            dispatch(utloggingsvarselOppdatereStatus(utloggingsState));
+            setCookie(CookieName.DECORATOR_LOGOUT_WARNING, utloggingsState, cookieOptions);
+            setUtloggingVarsel(timestamp, setModalOpen, setUnixTimeStamp);
+        } else {
+            timeout(
+                timestamp,
+                remainingTimeoutDiff,
+                setModalOpen,
+                setUnixTimeStamp,
+                dispatch,
+                utloggingsvarsel,
+                setCookie
+            );
+        }
+    }, SECONDS_BETWEEN_SET_TIMEOUT * 1000);
 };
 
 const setUtloggingVarsel = (

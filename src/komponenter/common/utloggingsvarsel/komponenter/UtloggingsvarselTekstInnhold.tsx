@@ -14,8 +14,7 @@ const UtloggingsvarselTekstInnhold: FunctionComponent<Props> = (props) => {
         <div className={cls.element('tekst-innhold')}>
             <Systemtittel className={cls.element('heading')}>{overskrift}</Systemtittel>
             <Normaltekst>
-                Lukk denne boksen og avslutt det du jobber med. <br />
-                Er du ferdig, kan du logge ut med en gang eller logge inn på ny.
+                Avslutt det du jobber med. Trenger du mer tid, må du logge inn på nytt.
             </Normaltekst>
         </div>
     );
