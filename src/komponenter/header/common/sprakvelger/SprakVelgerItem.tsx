@@ -28,17 +28,16 @@ const SprakVelgerItem = (props: Props) => {
                   backgroundColor: 'white',
                   color: 'black',
               };
-
     return (
         <li {...itemProps} style={style} className="menuList">
             {selectedItem?.locale === item.locale ? (
                 <div className={cls.element('option')}>
                     <Bilde asset={Cicle} className={cls.element('sirkel')} />
-                    <Normaltekst>{item.label} </Normaltekst>
+                    <Normaltekst lang={item.locale}>{item.label} </Normaltekst>
                 </div>
             ) : (
                 <Normaltekst className={cls.element('option')}>
-                    <span className="not-selected">{props.item.label}</span>
+                    <span lang={item.locale} className="not-selected">{item.label}</span>
                 </Normaltekst>
             )}
         </li>
