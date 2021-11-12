@@ -14,7 +14,7 @@ import { getLogOutUrl } from 'utils/login';
 import {
     utloggingsvarselOppdatereStatus,
     UtloggingsvarselState,
-    VarselEkspandert,
+    VarselEkspandert
 } from '../../../store/reducers/utloggingsvarsel-duck';
 import { useCookies } from 'react-cookie';
 import { CookieName, cookieOptions } from '../../../server/cookieSettings';
@@ -23,7 +23,7 @@ import classNames from 'classnames';
 const stateSelector = (state: AppState) => ({
     utloggingsvarsel: state.utloggingsvarsel,
     utloggingsvarselOnsket: state.environment.PARAMS.UTLOGGINGSVARSEL,
-    environment: state.environment,
+    environment: state.environment
 });
 
 const Utloggingsvarsel: FunctionComponent = () => {
@@ -108,11 +108,11 @@ const Utloggingsvarsel: FunctionComponent = () => {
     ResizeHandler({ setWindowType, windowType });
 
     return (
-        <div id="utloggingsvarsel" className={classNames(cls.className, clsOpenClass)}>
+        <div id='utloggingsvarsel' className={classNames(cls.className, clsOpenClass)}>
             <ModalWrapper
                 parentSelector={modalMountPoint}
                 onRequestClose={toggleModal}
-                contentLabel="varsel for utløpende sesjon av innlogget bruker"
+                contentLabel='varsel for utløpende sesjon av innlogget bruker'
                 isOpen={modalOpen}
                 className={cls.element('modal')}
                 closeButton={false}
