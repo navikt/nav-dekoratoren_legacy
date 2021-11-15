@@ -18,6 +18,7 @@ import {
 } from '../../../store/reducers/utloggingsvarsel-duck';
 import { useCookies } from 'react-cookie';
 import { CookieName, cookieOptions } from '../../../server/cookieSettings';
+import classNames from 'classnames';
 
 const stateSelector = (state: AppState) => ({
     utloggingsvarsel: state.utloggingsvarsel,
@@ -34,12 +35,13 @@ const Utloggingsvarsel: FunctionComponent = () => {
         verifyWindowObj() && window.innerWidth > BREAKPOINT ? WindowType.DESKTOP : WindowType.MOBILE;
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const [clsOpenClass, setClsOpenClass] = useState<string>('');
     const [unixTimeStamp, setUnixTimestamp] = useState<number>(0);
     const [windowType, setWindowType] = useState<WindowType>(windowOnMount());
     const [interval, setInterval] = useState<boolean>(timeStampIkkeUtgatt(unixTimeStamp - getCurrentTimeStamp()));
     const [tid, setTid] = useState<string>('- minutter');
     const [overskrift, setOverskrift] = useState<string>('Du blir snart logget ut');
-    const setOpenClsName = (): string => (utloggingsvarsel.varselState === VarselEkspandert.MINIMERT ? '' : 'OPEN');
+
     const toggleModal = (): void => setModalOpen((prevState) => !prevState);
     const modalMountPoint = (): HTMLElement => document.getElementById('utloggingsvarsel') ?? document.body;
 
@@ -48,12 +50,23 @@ const Utloggingsvarsel: FunctionComponent = () => {
         ModalWrapper.setAppElement(setModalElement());
         if (utloggingsvarselOnsket && utloggingsvarsel.timeStamp) {
             try {
-                checkTimeStampAndSetTimeStamp(utloggingsvarsel.timeStamp, setModalOpen, setUnixTimestamp, dispatch, utloggingsvarsel, setCookie);
+                checkTimeStampAndSetTimeStamp(
+                    utloggingsvarsel.timeStamp,
+                    setModalOpen,
+                    setUnixTimestamp,
+                    dispatch,
+                    utloggingsvarsel,
+                    setCookie
+                );
             } catch (err) {
                 console.log(err);
             }
         }
     }, []);
+
+    useEffect(() => {
+        setClsOpenClass(utloggingsvarsel.varselState === VarselEkspandert.MINIMERT ? '' : 'OPEN');
+    }, [utloggingsvarsel.varselState]);
 
     useEffect(() => {
         setInterval(timeStampIkkeUtgatt(unixTimeStamp - getCurrentTimeStamp()));
@@ -64,19 +77,18 @@ const Utloggingsvarsel: FunctionComponent = () => {
             const tokenExpire = unixTimeStamp - getCurrentTimeStamp();
             if (timeStampIkkeUtgatt(getCurrentTimeStamp() - unixTimeStamp + 1)) {
                 setInterval(false);
-                removeCookie(CookieName.SELVBETJENING_IDTOKEN, cookieOptions)
+                removeCookie(CookieName.SELVBETJENING_IDTOKEN, cookieOptions);
                 window.location.href = getLogOutUrl(environment);
             }
 
             if (tokenExpire <= 60) {
                 if (!utloggingsvarsel.vistSistePaminnelse) {
-                    const utloggingsState: Partial<UtloggingsvarselState> =
-                        {
-                            ...utloggingsvarsel,
-                            varselState: VarselEkspandert.EKSPANDERT,
-                            vistSistePaminnelse: true,
-                            modalLukketAvBruker: false
-                        };
+                    const utloggingsState: Partial<UtloggingsvarselState> = {
+                        ...utloggingsvarsel,
+                        varselState: VarselEkspandert.EKSPANDERT,
+                        vistSistePaminnelse: true,
+                        modalLukketAvBruker: false,
+                    };
                     dispatch(utloggingsvarselOppdatereStatus(utloggingsState));
                     setCookie(CookieName.DECORATOR_LOGOUT_WARNING, utloggingsState, cookieOptions);
                     if (!modalOpen) {
@@ -96,7 +108,7 @@ const Utloggingsvarsel: FunctionComponent = () => {
     ResizeHandler({ setWindowType, windowType });
 
     return (
-        <div id='utloggingsvarsel' className={cls.className + ` ${setOpenClsName()}`}>
+        <div id='utloggingsvarsel' className={classNames(cls.className, clsOpenClass)}>
             <ModalWrapper
                 parentSelector={modalMountPoint}
                 onRequestClose={toggleModal}
