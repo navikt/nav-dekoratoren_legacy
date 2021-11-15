@@ -25,14 +25,7 @@ const cache = new NodeCache({
 
 export const template = (req: Request) => {
     // Set environment based on request params
-    const universalCookies = (req as any).universalCookies;
-    const cookies = universalCookies.cookies;
-    const env = clientEnv({ req, cookies });
-
-    const cachedEnv = {
-        ...env,
-        COOKIES: { ...env.COOKIES, EKSPANDERTVARSEL: { ...env.COOKIES.EKSPANDERTVARSEL, timestamp: 0 } },
-    };
+    const env = clientEnv({ req, cookies: {} });
 
     // Resources
     const fileEnv = `${env.APP_URL}/env`;
@@ -40,7 +33,7 @@ export const template = (req: Request) => {
     const fileScript = `${env.APP_URL}/client.js`;
 
     // Retreive from cache
-    const cachedEnvHash = hash({ cachedEnv });
+    const cachedEnvHash = hash({ env });
     const cachedHtml = cache.get(cachedEnvHash);
 
     if (cachedHtml) {
@@ -49,7 +42,7 @@ export const template = (req: Request) => {
 
     // Create store based on request params
     const metaTags = MetaTagsServer();
-    const store = createStore(env, universalCookies);
+    const store = createStore(env);
 
     // Fetch params and forward to client
     const params = req.query;
@@ -64,7 +57,7 @@ export const template = (req: Request) => {
     const HtmlHeader = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
             <MetaTagsContext extract={metaTags.extract}>
-                <CookiesProvider cookies={universalCookies}>
+                <CookiesProvider>
                     <Header />
                 </CookiesProvider>
             </MetaTagsContext>
