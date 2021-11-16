@@ -19,6 +19,7 @@ Den nye dekoratøren serveres på følgende ingresser:
 **Dev (dev-gcp)**
 
 -   https://dekoratoren.dev.nav.no/
+-   https://dekoratoren.ekstern.dev.nav.no/
 
 Krever følgende access policy i nais.yaml:
 
