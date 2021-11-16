@@ -81,13 +81,6 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 }),
             },
         }),
-        ...(cookies && {
-            COOKIES: {
-                CONTEXT: cookies[CookieName.DECORATOR_CONTEXT] as MenuValue,
-                LANGUAGE: cookies[CookieName.DECORATOR_LANGUAGE] as Locale,
-                EKSPANDERTVARSEL: utloggingsvarsel.state,
-            },
-        }),
     };
 };
 
