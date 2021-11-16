@@ -23,6 +23,7 @@ spec:
         max: 4
     ingresses:
         - https://dekoratoren.dev.nav.no
+        - https://dekoratoren.ekstern.dev.nav.no
     accessPolicy:
         outbound:
             external:
