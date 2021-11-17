@@ -13,9 +13,8 @@ import { initAnalytics } from 'utils/analytics';
 import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
-import Cookies from 'universal-cookie';
-import './index.less';
 import { initPageViewObserver } from './utils/amplitude';
+import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
@@ -30,16 +29,7 @@ const run = () => {
         .then((environment) => {
             initAnalytics(environment.PARAMS);
             initPageViewObserver(environment.PARAMS);
-            const cookies = new Cookies();
-            const store = createStore(environment, cookies);
-            ReactDOM.hydrate(
-                <ReduxProvider store={store}>
-                    <CookiesProvider>
-                        <Header />
-                    </CookiesProvider>
-                </ReduxProvider>,
-                document.getElementById('decorator-header')
-            );
+            const store = createStore(environment);
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
                     <CookiesProvider>
@@ -47,6 +37,14 @@ const run = () => {
                     </CookiesProvider>
                 </ReduxProvider>,
                 document.getElementById('decorator-footer')
+            );
+            ReactDOM.hydrate(
+                <ReduxProvider store={store}>
+                    <CookiesProvider>
+                        <Header />
+                    </CookiesProvider>
+                </ReduxProvider>,
+                document.getElementById('decorator-header')
             );
         })
         .catch((e) => {
