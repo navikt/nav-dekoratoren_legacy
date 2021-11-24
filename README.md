@@ -145,7 +145,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | urlLookupTable     | boolean                                               | true                  | Aktiverer eller deaktiverer url-lookup-table [7]                               |
 | taSurveys          | string,string,...                                     | ''                    | Oppgir én eller flere trackingkoder (surveys) for Task Analytics               |
 | shareScreen        | boolean                                               | true                  | Aktiverer eller deaktiverer skjerdelingskomponent                              |
-| utloggingsvarsel   | boolean                                               | false(prod)/true(dev) | Aktiverer eller deaktiverer Utloggingsvarsel for login-token (5min left)       |
+| utloggingsvarsel   | boolean                                               | false(prod)/true(dev) | Aktiverer eller deaktiverer Utloggingsvarsel for login-token (5min left) (obs: denne er ikke klar for prod-bruk!)      |
 | logoutUrl          | string                                                | undefined             | Setter url for logg-ut knappen [8]                                             |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
