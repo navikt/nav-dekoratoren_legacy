@@ -64,7 +64,7 @@ export const Header = () => {
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
     const useSimpleHeader = PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER;
 
-    const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie]);
+    const [cookies, setCookie] = useCookies();
 
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {
