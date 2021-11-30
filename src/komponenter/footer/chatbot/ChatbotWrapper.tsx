@@ -50,11 +50,13 @@ export const ChatbotWrapper = () => {
     const isTest = hostname && testUrlHosts.includes(hostname);
     const isProduction = env === 'prod';
 
-    const boostApiUrlBase = isTest
-        ? boostApiUrlBaseTest
-        : isProduction
-            ? boostApiUrlBaseProduction
-            : boostApiUrlBaseStaging;
+    let boostApiUrlBase = boostApiUrlBaseStaging;
+
+    if (isTest) {
+        boostApiUrlBase = boostApiUrlBaseTest;
+    } else if (isProduction) {
+        boostApiUrlBase = boostApiUrlBaseProduction;
+    }
 
     return isMounted ? (
         <Chatbot
