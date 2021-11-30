@@ -12,19 +12,6 @@ const testUrlHosts = [
     'dekoratoren.ekstern.dev.nav.no',
 ];
 
-const stagingUrlHosts = [
-    'www-q0.nav.no',
-    'www-q1.nav.no',
-    'www-q2.nav.no',
-    'www-q3.nav.no',
-    'www-q4.nav.no',
-    'www-q5.nav.no',
-    'www-q6.nav.no',
-    'dekoratoren.dev.nav.no',
-    'dev.nav.no',
-    'localhost',
-];
-
 const stateSelector = (state: AppState) => ({
     isChatbotEnabled: state.environment.PARAMS.CHATBOT,
     context: state.arbeidsflate.status,
@@ -33,7 +20,7 @@ const stateSelector = (state: AppState) => ({
 
 const boostApiUrlBaseTest = 'https://navtest.boost.ai/api/chat/v2';
 const boostApiUrlBaseStaging = 'https://staging-nav.boost.ai/api/chat/v2';
-const boostApiUrlBaseProd = 'https://nav.boost.ai/api/chat/v2';
+const boostApiUrlBaseProduction = 'https://nav.boost.ai/api/chat/v2';
 
 type ActionFilter = 'privatperson' | 'arbeidsgiver' | 'NAV_TEST';
 
@@ -42,9 +29,9 @@ const contextFilterMap: { [key in MenuValue]?: ActionFilter[] } = {
     [MenuValue.ARBEIDSGIVER]: ['arbeidsgiver'],
 };
 
-const getActionFilters = (context: MenuValue, isProd: boolean): ActionFilter[] => {
+const getActionFilters = (context: MenuValue, isProduction: boolean): ActionFilter[] => {
     const contextFilter = contextFilterMap[context] || [];
-    return isProd ? contextFilter : [...contextFilter, 'NAV_TEST'];
+    return isProduction ? contextFilter : [...contextFilter, 'NAV_TEST'];
 };
 
 export const ChatbotWrapper = () => {
@@ -60,39 +47,19 @@ export const ChatbotWrapper = () => {
     }, [isChatbotEnabled]);
 
     const hostname = verifyWindowObj() && window.location.hostname;
-    const pathname = verifyWindowObj() && window.location.pathname;
-    const origin = hostname && pathname && `${hostname}${pathname}`;
-
     const isTest = hostname && testUrlHosts.includes(hostname);
-    const isStaging = hostname && stagingUrlHosts.includes(hostname);
+    const isProduction = env === 'prod';
+
     const boostApiUrlBase = isTest
         ? boostApiUrlBaseTest
-        : isStaging 
-            ? boostApiUrlBaseStaging 
-            : boostApiUrlBaseProd;
-
-    let actionFilters;
-
-    if (isStaging) {
-        actionFilters = ['NAV_TEST'];
-    }
-
-    if (origin) {
-        if (!actionFilters) {
-            actionFilters = [];
-        }
-
-        actionFilterMap.forEach(([tests, filters]) => {
-            if (tests.find((test) => test(origin))) {
-                actionFilters.push(...filters);
-            }
-        });
-    }
+        : isProduction
+            ? boostApiUrlBaseProduction
+            : boostApiUrlBaseStaging;
 
     return isMounted ? (
         <Chatbot
             boostApiUrlBase={boostApiUrlBase}
-            actionFilters={getActionFilters(context, isProd)}
+            actionFilters={getActionFilters(context, isProduction)}
             analyticsCallback={logAmplitudeEvent}
         />
     ) : null;
