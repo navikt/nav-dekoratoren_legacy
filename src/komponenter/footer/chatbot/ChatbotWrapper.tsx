@@ -7,6 +7,10 @@ import { logAmplitudeEvent } from 'utils/amplitude';
 // Prevents SSR crash
 const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
+const testUrlHosts = [
+    'dekoratoren.ekstern.dev.nav.no',
+];
+
 const stagingUrlHosts = [
     'www-q0.nav.no',
     'www-q1.nav.no',
@@ -47,8 +51,13 @@ export const ChatbotWrapper = ({ ...properties }: any) => {
     const pathname = verifyWindowObj() && window.location.pathname;
     const origin = hostname && pathname && `${hostname}${pathname}`;
 
+    const isTest = hostname && testUrlHosts.includes(hostname);
     const isStaging = hostname && stagingUrlHosts.includes(hostname);
-    const boostApiUrlBase = isStaging ? 'https://staging-nav.boost.ai/api/chat/v2' : 'https://nav.boost.ai/api/chat/v2';
+    const boostApiUrlBase = isTest
+        ? 'https://navtest.boost.ai/api/chat/v2'
+        : isStaging 
+            ? 'https://staging-nav.boost.ai/api/chat/v2' 
+            : 'https://nav.boost.ai/api/chat/v2';
 
     let actionFilters;
 
