@@ -29,7 +29,7 @@ const ForsideLenke = (props: Props) => {
                         <Tekst id="min-side" />
                     </Undertittel>
                     <LenkeMedSporing href={DITT_NAV_URL} className={cls.element('lenke')}>
-                        <Tekst id="til-forsiden" />
+                        <Tekst id="til-dittnav-forside" />
                     </LenkeMedSporing>
                 </div>
             )}
