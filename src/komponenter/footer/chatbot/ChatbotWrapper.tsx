@@ -8,14 +8,19 @@ import { MenuValue } from '../../../utils/meny-storage-utils';
 // Prevents SSR crash
 const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
+const testUrlHosts = [
+    'dekoratoren.ekstern.dev.nav.no',
+];
+
 const stateSelector = (state: AppState) => ({
     isChatbotEnabled: state.environment.PARAMS.CHATBOT,
     context: state.arbeidsflate.status,
     env: state.environment.ENV,
 });
 
+const boostApiUrlBaseTest = 'https://navtest.boost.ai/api/chat/v2';
 const boostApiUrlBaseStaging = 'https://staging-nav.boost.ai/api/chat/v2';
-const boostApiUrlBaseProd = 'https://nav.boost.ai/api/chat/v2';
+const boostApiUrlBaseProduction = 'https://nav.boost.ai/api/chat/v2';
 
 type ActionFilter = 'privatperson' | 'arbeidsgiver' | 'NAV_TEST';
 
@@ -24,10 +29,9 @@ const contextFilterMap: { [key in MenuValue]?: ActionFilter[] } = {
     [MenuValue.ARBEIDSGIVER]: ['arbeidsgiver'],
 };
 
-const getActionFilters = (context: MenuValue, isProd: boolean): ActionFilter[] => {
+const getActionFilters = (context: MenuValue, isProduction: boolean): ActionFilter[] => {
     const contextFilter = contextFilterMap[context] || [];
-
-    return isProd ? contextFilter : [...contextFilter, 'NAV_TEST'];
+    return isProduction ? contextFilter : [...contextFilter, 'NAV_TEST'];
 };
 
 export const ChatbotWrapper = () => {
@@ -42,13 +46,22 @@ export const ChatbotWrapper = () => {
         setIsMounted(isChatbotEnabled);
     }, [isChatbotEnabled]);
 
-    const isProd = env === 'prod';
-    const boostApiUrlBase = isProd ? boostApiUrlBaseProd : boostApiUrlBaseStaging;
+    const hostname = verifyWindowObj() && window.location.hostname;
+    const isTest = hostname && testUrlHosts.includes(hostname);
+    const isProduction = env === 'prod';
+
+    let boostApiUrlBase = boostApiUrlBaseStaging;
+
+    if (isTest) {
+        boostApiUrlBase = boostApiUrlBaseTest;
+    } else if (isProduction) {
+        boostApiUrlBase = boostApiUrlBaseProduction;
+    }
 
     return isMounted ? (
         <Chatbot
             boostApiUrlBase={boostApiUrlBase}
-            actionFilters={getActionFilters(context, isProd)}
+            actionFilters={getActionFilters(context, isProduction)}
             analyticsCallback={logAmplitudeEvent}
         />
     ) : null;
