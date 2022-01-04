@@ -26,8 +26,7 @@ export const VarslerKnapp = () => {
     const { isOpen, varsler, appUrl, language } = useSelector(stateSelector);
 
     const toggleVarslerDropdown = () => {
-        if (!isOpen && varsler.nyesteVarsler.length > 0) {
-            // && varsler.totaltAntallUleste > 0
+        if (!isOpen && varsler.totaltAntallUleste > 0 && varsler.nyesteVarsler.length > 0) {
             settVarslerSomLest(appUrl, varsler.nyesteVarsler[0].id, dispatch);
         }
         analyticsEvent({
