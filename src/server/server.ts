@@ -26,6 +26,7 @@ if (!isProduction || process.env.PROD_TEST) {
 const appBasePath = process.env.APP_BASE_PATH || ``;
 const oldBasePath = '/common-html/v4/navno';
 const buildPath = `${process.cwd()}/build`;
+
 const app = express();
 const PORT = 8088;
 
@@ -40,13 +41,6 @@ const backupCache = new NodeCache({
     stdTTL: 0,
     checkperiod: 0,
 });
-
-const setAllowedCorsProxyHeaders = (proxyRes: IncomingMessage, req: Request, res: Response) => {
-    const requestHeaders = req.headers['access-control-request-headers'];
-    if (requestHeaders) {
-        proxyRes.headers['access-control-allow-headers'] = requestHeaders;
-    }
-};
 
 // Middleware
 app.disable('x-powered-by');
@@ -63,7 +57,11 @@ app.use((req, res, next) => {
         res.header('Access-Control-Allow-Origin', req.get('origin'));
         res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
         res.header('Access-Control-Allow-Credentials', 'true');
-        res.header('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization,Adrum');
+
+        const requestHeaders = req.header('Access-Control-Request-Headers');
+        if (requestHeaders) {
+            res.header('Access-Control-Allow-Headers', requestHeaders);
+        }
     }
 
     // Cache control
@@ -169,58 +167,45 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
     }
 });
 
-// Proxied requests
-const proxiedVarslerUrl = `${appBasePath}/api/varsler`;
-const proxiedDriftsmeldingerUrl = `${appBasePath}/api/driftsmeldinger`;
-const proxiedSokUrl = `${appBasePath}/api/sok`;
-
-app.use(
-    proxiedVarslerUrl,
-    createProxyMiddleware(proxiedVarslerUrl, {
-        target: `${process.env.API_VARSELINNBOKS_URL}`,
-        pathRewrite: { [`^${proxiedVarslerUrl}`]: '' },
-        changeOrigin: true,
-        onProxyRes: setAllowedCorsProxyHeaders,
-    })
-);
-
-/*app.use(
-    proxiedSokUrl,
-    createProxyMiddleware(proxiedSokUrl, {
-        target: `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`,
-        pathRewrite: { [`^${proxiedSokUrl}`]: '' },
-        changeOrigin: true,
-        onProxyRes: (proxyRes: IncomingMessage, req: Request, res: Response) => {
-            console.log(`Sok proxy res: ${proxyRes.statusCode} - ${proxyRes.statusMessage}`);
-
-            setAllowedCorsProxyHeaders(proxyRes, req, res);
-        },
-    })
-);*/
-
-app.get(proxiedSokUrl, async (req, res) => {
+const sokUrl = `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`;
+app.get(`${appBasePath}/api/sok`, async (req, res) => {
     const queryString = new URL(req.url, process.env.APP_BASE_URL).search;
-    const url = `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok${queryString}`;
-
-    console.log(`Searching with url ${url}`);
-
-    const response = await fetch(url);
+    const response = await fetch(`${sokUrl}${queryString}`);
 
     if (response.status === 200) {
         const json = await response.json();
-        res.status(200).send(json);
+        return res.status(200).send(json);
     }
 
     return res.status(response.status).send(response.statusText);
 });
 
+const driftsmeldingerUrl = `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`;
+app.get(`${appBasePath}/api/driftsmeldinger`, async (req, res) => {
+    const response = await fetch(driftsmeldingerUrl);
+
+    if (response.status === 200) {
+        const json = await response.json();
+        return res.status(200).send(json);
+    }
+
+    return res.status(response.status).send(response.statusText);
+});
+
+// Proxy to varselinnboks
+const varselInnboksProxyUrl = `${appBasePath}/api/varsler`;
 app.use(
-    proxiedDriftsmeldingerUrl,
-    createProxyMiddleware(proxiedDriftsmeldingerUrl, {
-        target: `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`,
-        pathRewrite: { [`^${proxiedDriftsmeldingerUrl}`]: '' },
+    varselInnboksProxyUrl,
+    createProxyMiddleware(varselInnboksProxyUrl, {
+        target: `${process.env.API_VARSELINNBOKS_URL}`,
+        pathRewrite: { [`^${varselInnboksProxyUrl}`]: '' },
         changeOrigin: true,
-        onProxyRes: setAllowedCorsProxyHeaders,
+        onProxyRes: (proxyRes: IncomingMessage, req: Request, res: Response) => {
+            const requestHeaders = req.headers['access-control-request-headers'];
+            if (requestHeaders) {
+                proxyRes.headers['access-control-allow-headers'] = requestHeaders;
+            }
+        },
     })
 );
 
