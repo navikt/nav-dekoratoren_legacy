@@ -189,7 +189,7 @@ app.use(
     createProxyMiddleware(proxiedSokUrl, {
         target: `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`,
         pathRewrite: { [`^${proxiedSokUrl}`]: '' },
-        changeOrigin: true,
+        // changeOrigin: true,
         onProxyRes: (proxyRes: IncomingMessage, req: Request, res: Response) => {
             console.log(`Sok proxy res: ${proxyRes.statusCode} - ${proxyRes.statusMessage}`);
 
@@ -203,7 +203,7 @@ app.use(
     createProxyMiddleware(proxiedDriftsmeldingerUrl, {
         target: `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`,
         pathRewrite: { [`^${proxiedDriftsmeldingerUrl}`]: '' },
-        changeOrigin: true,
+        // changeOrigin: true,
         onProxyRes: setAllowedCorsProxyHeaders,
     })
 );
