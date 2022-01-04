@@ -41,6 +41,13 @@ const backupCache = new NodeCache({
     checkperiod: 0,
 });
 
+const setAllowedCorsProxyHeaders = (proxyRes: IncomingMessage, req: Request, res: Response) => {
+    const requestHeaders = req.headers['access-control-request-headers'];
+    if (requestHeaders) {
+        proxyRes.headers['access-control-allow-headers'] = req.headers['access-control-request-headers'];
+    }
+};
+
 // Middleware
 app.disable('x-powered-by');
 app.use(compression());
@@ -173,9 +180,7 @@ app.use(
         target: `${process.env.API_VARSELINNBOKS_URL}`,
         pathRewrite: { [`^${proxiedVarslerUrl}`]: '' },
         changeOrigin: true,
-        onProxyRes: (proxyRes: IncomingMessage, req: Request, res: Response) => {
-            proxyRes.headers['access-control-allow-headers'] = req.headers['access-control-request-headers'];
-        },
+        onProxyRes: setAllowedCorsProxyHeaders,
     })
 );
 
@@ -185,6 +190,7 @@ app.use(
         target: `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`,
         pathRewrite: { [`^${proxiedSokUrl}`]: '' },
         changeOrigin: true,
+        onProxyRes: setAllowedCorsProxyHeaders,
     })
 );
 
@@ -194,6 +200,7 @@ app.use(
         target: `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`,
         pathRewrite: { [`^${proxiedDriftsmeldingerUrl}`]: '' },
         changeOrigin: true,
+        onProxyRes: setAllowedCorsProxyHeaders,
     })
 );
 
