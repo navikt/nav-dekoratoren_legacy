@@ -184,7 +184,7 @@ app.use(
     })
 );
 
-app.use(
+/*app.use(
     proxiedSokUrl,
     createProxyMiddleware(proxiedSokUrl, {
         target: `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`,
@@ -196,7 +196,23 @@ app.use(
             setAllowedCorsProxyHeaders(proxyRes, req, res);
         },
     })
-);
+);*/
+
+app.get(proxiedSokUrl, async (req, res) => {
+    const queryString = new URL(req.url, process.env.APP_BASE_URL).search;
+    const url = `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok${queryString}`;
+
+    console.log(`Searching with url ${url}`);
+
+    const response = await fetch(url);
+
+    if (response.status === 200) {
+        const json = await response.json();
+        res.status(200).send(json);
+    }
+
+    return res.status(response.status).send(response.statusText);
+});
 
 app.use(
     proxiedDriftsmeldingerUrl,
