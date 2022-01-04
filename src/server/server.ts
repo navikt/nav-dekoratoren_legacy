@@ -44,7 +44,7 @@ const backupCache = new NodeCache({
 const setAllowedCorsProxyHeaders = (proxyRes: IncomingMessage, req: Request, res: Response) => {
     const requestHeaders = req.headers['access-control-request-headers'];
     if (requestHeaders) {
-        proxyRes.headers['access-control-allow-headers'] = req.headers['access-control-request-headers'];
+        proxyRes.headers['access-control-allow-headers'] = requestHeaders;
     }
 };
 
@@ -190,7 +190,11 @@ app.use(
         target: `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`,
         pathRewrite: { [`^${proxiedSokUrl}`]: '' },
         changeOrigin: true,
-        onProxyRes: setAllowedCorsProxyHeaders,
+        onProxyRes: (proxyRes: IncomingMessage, req: Request, res: Response) => {
+            console.log(`Sok proxy res: ${proxyRes.statusCode} - ${proxyRes.statusMessage}`);
+
+            setAllowedCorsProxyHeaders(proxyRes, req, res);
+        },
     })
 );
 
