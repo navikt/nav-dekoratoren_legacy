@@ -11,6 +11,7 @@ import { template } from './template';
 import compression from 'compression';
 import dotenv from 'dotenv';
 import mockMenu from './mock/menu.json';
+import { IncomingMessage } from 'http';
 
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
@@ -25,6 +26,7 @@ if (!isProduction || process.env.PROD_TEST) {
 const appBasePath = process.env.APP_BASE_PATH || ``;
 const oldBasePath = '/common-html/v4/navno';
 const buildPath = `${process.cwd()}/build`;
+
 const app = express();
 const PORT = 8088;
 
@@ -33,11 +35,11 @@ const mainCacheKey = 'navno-menu';
 const backupCacheKey = 'navno-menu-backup';
 const mainCache = new NodeCache({
     stdTTL: tenSeconds,
-    checkperiod: oneMinuteInSeconds
+    checkperiod: oneMinuteInSeconds,
 });
 const backupCache = new NodeCache({
     stdTTL: 0,
-    checkperiod: 0
+    checkperiod: 0,
 });
 
 // Middleware
@@ -55,7 +57,11 @@ app.use((req, res, next) => {
         res.header('Access-Control-Allow-Origin', req.get('origin'));
         res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
         res.header('Access-Control-Allow-Credentials', 'true');
-        res.header('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
+
+        const requestHeaders = req.header('Access-Control-Request-Headers');
+        if (requestHeaders) {
+            res.header('Access-Control-Allow-Headers', requestHeaders);
+        }
     }
 
     // Cache control
@@ -74,9 +80,9 @@ app.use(
             getLabelValues: (req: Request, res: Response) => ({
                 app: process.env.NAIS_APP_NAME || 'nav-dekoratoren',
                 namespace: process.env.NAIS_NAMESPACE || 'local',
-                cluster: process.env.NAIS_CLUSTER_NAME || 'local'
-            })
-        }
+                cluster: process.env.NAIS_CLUSTER_NAME || 'local',
+            }),
+        },
     })
 );
 
@@ -107,7 +113,7 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
     } else {
         // Fetch fom XP
         fetch(`${process.env.API_XP_SERVICES_URL}/no.nav.navno/menu`, {
-            method: 'GET'
+            method: 'GET',
         })
             .then((xpRes) => {
                 if (xpRes.ok && xpRes.status === 200) {
@@ -161,35 +167,45 @@ app.get(`${appBasePath}/api/meny`, (req, res) => {
     }
 });
 
-// Proxied requests
-const proxiedVarslerUrl = `${appBasePath}/api/varsler`;
-const proxiedDriftsmeldingerUrl = `${appBasePath}/api/driftsmeldinger`;
-const proxiedSokUrl = `${appBasePath}/api/sok`;
+const sokUrl = `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`;
+app.get(`${appBasePath}/api/sok`, async (req, res) => {
+    const queryString = new URL(req.url, process.env.APP_BASE_URL).search;
+    const response = await fetch(`${sokUrl}${queryString}`);
 
+    if (response.status === 200) {
+        const json = await response.json();
+        return res.status(200).send(json);
+    }
+
+    return res.status(response.status).send(response.statusText);
+});
+
+const driftsmeldingerUrl = `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`;
+app.get(`${appBasePath}/api/driftsmeldinger`, async (req, res) => {
+    const response = await fetch(driftsmeldingerUrl);
+
+    if (response.status === 200) {
+        const json = await response.json();
+        return res.status(200).send(json);
+    }
+
+    return res.status(response.status).send(response.statusText);
+});
+
+// Proxy to varselinnboks
+const varselInnboksProxyUrl = `${appBasePath}/api/varsler`;
 app.use(
-    proxiedVarslerUrl,
-    createProxyMiddleware(proxiedVarslerUrl, {
+    varselInnboksProxyUrl,
+    createProxyMiddleware(varselInnboksProxyUrl, {
         target: `${process.env.API_VARSELINNBOKS_URL}`,
-        pathRewrite: { [`^${proxiedVarslerUrl}`]: '' },
-        changeOrigin: true
-    })
-);
-
-app.use(
-    proxiedSokUrl,
-    createProxyMiddleware(proxiedSokUrl, {
-        target: `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`,
-        pathRewrite: { [`^${proxiedSokUrl}`]: '' },
-        changeOrigin: true
-    })
-);
-
-app.use(
-    proxiedDriftsmeldingerUrl,
-    createProxyMiddleware(proxiedDriftsmeldingerUrl, {
-        target: `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`,
-        pathRewrite: { [`^${proxiedDriftsmeldingerUrl}`]: '' },
-        changeOrigin: true
+        pathRewrite: { [`^${varselInnboksProxyUrl}`]: '' },
+        changeOrigin: true,
+        onProxyRes: (proxyRes: IncomingMessage, req: Request, res: Response) => {
+            const requestHeaders = req.headers['access-control-request-headers'];
+            if (requestHeaders) {
+                proxyRes.headers['access-control-allow-headers'] = requestHeaders;
+            }
+        },
     })
 );
 
@@ -210,7 +226,7 @@ app.use(
                 res.header('Cache-Control', `max-age=${fiveMinutesInSeconds}`);
                 res.header('Pragma', `max-age=${fiveMinutesInSeconds}`);
             }
-        }
+        },
     })
 );
 
@@ -223,7 +239,7 @@ app.use((e: Error, req: Request, res: Response, next: NextFunction) => {
     console.error(e.stack);
     res.status(405);
     res.send({
-        error: { status: 405, message: e.message }
+        error: { status: 405, message: e.message },
     });
 });
 
