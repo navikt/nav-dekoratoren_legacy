@@ -13,7 +13,7 @@ const cache = new NodeCache({
 });
 
 const refreshCache = () => {
-    fetch(driftsmeldingerUrl)
+    return fetch(driftsmeldingerUrl)
         .then((response) => {
             if (response.status === 200) {
                 return response.json();
@@ -23,6 +23,7 @@ const refreshCache = () => {
         })
         .then((json) => {
             cache.set(cacheKey, json);
+            console.log('Successfully refreshed driftsmeldinger cache');
         })
         .catch((e) => {
             console.error(`Failed to fetch from driftsmeldinger service - ${e}`);
@@ -33,14 +34,15 @@ const refreshCache = () => {
 
 cache.on('expired', refreshCache);
 
-refreshCache();
-
 export const getDriftsmeldingerHandler: RequestHandler = async (req, res) => {
     const cached = cache.get(cacheKey);
 
-    if (!cached) {
-        return res.status(500).send('Unknown server error - driftsmeldinger not available');
+    if (cached) {
+        res.status(200).send(cached);
+    } else {
+        refreshCache().then(() => {
+            const cachedNew = cache.get(cacheKey);
+            res.status(200).send(cachedNew);
+        });
     }
-
-    return res.status(200).send(cached);
 };
