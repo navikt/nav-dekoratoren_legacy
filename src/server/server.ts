@@ -1,17 +1,15 @@
-import NodeCache from 'node-cache';
-import fetch from 'node-fetch';
 import express, { NextFunction, Request, Response } from 'express';
 import { createMiddleware } from '@promster/express';
 import { getSummary, getContentType } from '@promster/express';
-import { oneMinuteInSeconds, tenSeconds } from './utils';
 import { clientEnv, fiveMinutesInSeconds } from './utils';
 import cookiesMiddleware from 'universal-cookie-express';
-import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
 import compression from 'compression';
 import dotenv from 'dotenv';
-import mockMenu from './mock/menu.json';
-import { IncomingMessage } from 'http';
+import { getMenyHandler } from './api-endpoints/meny';
+import { getSokHandler } from './api-endpoints/sok';
+import { getDriftsmeldingerHandler } from './api-endpoints/driftsmeldinger';
+import { varselInnboksProxyHandler, varselInnboksProxyUrl } from './api-endpoints/varsler';
 
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
@@ -29,18 +27,6 @@ const buildPath = `${process.cwd()}/build`;
 
 const app = express();
 const PORT = 8088;
-
-// Cache setup
-const mainCacheKey = 'navno-menu';
-const backupCacheKey = 'navno-menu-backup';
-const mainCache = new NodeCache({
-    stdTTL: tenSeconds,
-    checkperiod: oneMinuteInSeconds,
-});
-const backupCache = new NodeCache({
-    stdTTL: 0,
-    checkperiod: 0,
-});
 
 // Middleware
 app.disable('x-powered-by');
@@ -89,6 +75,7 @@ app.use(
 // Express config
 const pathsForTemplate = [`${appBasePath}`, `${appBasePath}/:locale(no|en|se)/*`, `${oldBasePath}`];
 
+// HTML template
 app.get(pathsForTemplate, (req, res, next) => {
     try {
         res.send(template(req));
@@ -97,6 +84,7 @@ app.get(pathsForTemplate, (req, res, next) => {
     }
 });
 
+// Client environment
 app.get(`${appBasePath}/env`, (req, res, next) => {
     try {
         const cookies = (req as any).universalCookies.cookies;
@@ -106,109 +94,13 @@ app.get(`${appBasePath}/env`, (req, res, next) => {
     }
 });
 
-app.get(`${appBasePath}/api/meny`, (req, res) => {
-    const mainCacheContent = mainCache.get(mainCacheKey);
-    if (mainCacheContent) {
-        res.send(mainCacheContent);
-    } else {
-        // Fetch fom XP
-        fetch(`${process.env.API_XP_SERVICES_URL}/no.nav.navno/menu`, {
-            method: 'GET',
-        })
-            .then((xpRes) => {
-                if (xpRes.ok && xpRes.status === 200) {
-                    return xpRes;
-                } else {
-                    throw new Error(`Response ${xpRes.status}`);
-                }
-            })
-            .then((xpRes) => xpRes.json())
-            .then((xpData) => {
-                mainCache.set(mainCacheKey, xpData);
-                backupCache.set(backupCacheKey, xpData);
-                res.send(xpData);
-            })
-            .catch((err) => {
-                console.error('Failed to fetch decorator - ', err);
-            })
+// Api endpoints
+app.get(`${appBasePath}/api/meny`, getMenyHandler);
+app.get(`${appBasePath}/api/sok`, getSokHandler);
+app.get(`${appBasePath}/api/driftsmeldinger`, getDriftsmeldingerHandler);
+app.use(varselInnboksProxyUrl, varselInnboksProxyHandler);
 
-            // Use backup cache
-            .then(() => {
-                if (!res.headersSent) {
-                    console.log('Using backup cache');
-                    const backupCacheData = backupCache.get(backupCacheKey);
-                    if (backupCacheData) {
-                        mainCache.set(mainCacheKey, backupCacheData);
-                        res.send(backupCacheData);
-                    } else {
-                        throw new Error('Invalid cache');
-                    }
-                }
-            })
-            .catch((err) => {
-                console.error('Failed to use backup cache - ', err);
-            })
-
-            // Use backup mock
-            .then(() => {
-                if (!res.headersSent) {
-                    console.log('Using backup mock');
-                    if (mockMenu) {
-                        mainCache.set(mainCacheKey, mockMenu);
-                        res.send(mockMenu);
-                    } else {
-                        throw new Error('Mock is undefined');
-                    }
-                }
-            })
-            .catch((err) => {
-                console.error('Failed to use backup mock - ', err);
-            });
-    }
-});
-
-const sokUrl = `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`;
-app.get(`${appBasePath}/api/sok`, async (req, res) => {
-    const queryString = new URL(req.url, process.env.APP_BASE_URL).search;
-    const response = await fetch(`${sokUrl}${queryString}`);
-
-    if (response.status === 200) {
-        const json = await response.json();
-        return res.status(200).send(json);
-    }
-
-    return res.status(response.status).send(response.statusText);
-});
-
-const driftsmeldingerUrl = `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`;
-app.get(`${appBasePath}/api/driftsmeldinger`, async (req, res) => {
-    const response = await fetch(driftsmeldingerUrl);
-
-    if (response.status === 200) {
-        const json = await response.json();
-        return res.status(200).send(json);
-    }
-
-    return res.status(response.status).send(response.statusText);
-});
-
-// Proxy to varselinnboks
-const varselInnboksProxyUrl = `${appBasePath}/api/varsler`;
-app.use(
-    varselInnboksProxyUrl,
-    createProxyMiddleware(varselInnboksProxyUrl, {
-        target: `${process.env.API_VARSELINNBOKS_URL}`,
-        pathRewrite: { [`^${varselInnboksProxyUrl}`]: '' },
-        changeOrigin: true,
-        onProxyRes: (proxyRes: IncomingMessage, req: Request, res: Response) => {
-            const requestHeaders = req.headers['access-control-request-headers'];
-            if (requestHeaders) {
-                proxyRes.headers['access-control-allow-headers'] = requestHeaders;
-            }
-        },
-    })
-);
-
+// Nais endpoints
 app.use(`${appBasePath}/metrics`, (req, res) => {
     req.statusCode = 200;
     res.setHeader('Content-Type', getContentType());
@@ -247,14 +139,6 @@ const server = app.listen(PORT, () => console.log(`App listening on port: ${PORT
 
 const shutdown = () => {
     console.log('Retrived signal terminate , shutting down node service');
-
-    mainCache.flushAll();
-    backupCache.flushAll();
-    console.log('cache data flushed');
-
-    mainCache.close();
-    backupCache.close();
-    console.log('cache data closed');
 
     server.close(() => {
         console.log('Closed out remaining connections');
