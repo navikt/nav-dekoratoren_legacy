@@ -3,7 +3,7 @@ import { RequestHandler } from 'express';
 import NodeCache from 'node-cache';
 import { tenSeconds } from '../utils';
 
-const driftsmeldingerUrl = `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`;
+const driftsmeldingerServiceUrl = `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`;
 
 const cacheKey = 'driftsmeldinger-cache';
 
@@ -13,7 +13,7 @@ const cache = new NodeCache({
 });
 
 const refreshCache = () => {
-    return fetch(driftsmeldingerUrl)
+    return fetch(driftsmeldingerServiceUrl)
         .then((response) => {
             if (response.status === 200) {
                 return response.json();
