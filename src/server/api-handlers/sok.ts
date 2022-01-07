@@ -15,10 +15,10 @@ export const getSokHandler: RequestHandler = (req, res) => {
             }
         })
         .then((json) => {
-            return res.status(200).send(json);
+            res.status(200).send(json);
         })
         .catch((err) => {
             console.error(`Failed to fetch for search query ${queryString} - ${err}`);
-            return res.status(500).send('Failed to fetch from search service');
+            res.status(500).send('Failed to fetch from search service');
         });
 };
