@@ -4,6 +4,8 @@ import { tenSeconds } from '../utils';
 
 type RevalidateCacheFunc = (cache: NodeCache) => Promise<any>;
 
+// Returns a RequestHandler with a cached response. The cache is periodically revalidated
+// with the supplied function
 export const cachedResourceHandler = (revalidateCacheFunc: RevalidateCacheFunc, cacheKey: string): RequestHandler => {
     const cache = new NodeCache({
         stdTTL: tenSeconds,
