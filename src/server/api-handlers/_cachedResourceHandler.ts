@@ -34,6 +34,7 @@ export const cachedResourceHandler = (revalidateCacheFunc: RevalidateCacheFunc, 
         } else {
             const sendResponseOnCacheSet = (key: string, value: any) => {
                 cache.off('set', sendResponseOnCacheSet);
+                console.log(`Sending cache response on set event for ${cacheKey}`);
                 res.status(200).send(value);
             };
 
