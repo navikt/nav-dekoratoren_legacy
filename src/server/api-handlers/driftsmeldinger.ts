@@ -34,7 +34,7 @@ const refreshCache = () => {
 
 cache.on('expired', refreshCache);
 
-export const getDriftsmeldingerHandler: RequestHandler = async (req, res) => {
+export const getDriftsmeldingerHandler: RequestHandler = (req, res) => {
     const cached = cache.get(cacheKey);
 
     if (cached) {

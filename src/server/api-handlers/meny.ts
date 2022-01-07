@@ -7,6 +7,7 @@ import { RequestHandler } from 'express';
 const menuServiceUrl = `${process.env.API_XP_SERVICES_URL}/no.nav.navno/menu`;
 
 const cacheKey = 'navno-menu';
+
 const cache = new NodeCache({
     stdTTL: tenSeconds,
     deleteOnExpire: false,
@@ -41,6 +42,7 @@ cache.on('expired', refreshCache);
 
 export const getMenyHandler: RequestHandler = (req, res) => {
     const cached = cache.get(cacheKey);
+
     if (cached) {
         res.status(200).send(cached);
     } else {
