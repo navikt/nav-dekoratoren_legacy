@@ -13,8 +13,15 @@ const cache = new NodeCache({
     deleteOnExpire: false,
 });
 
+let isFetching = false;
+
 const refreshCache = () => {
-    return fetch(menuServiceUrl)
+    if (isFetching) {
+        return;
+    }
+
+    isFetching = true;
+    fetch(menuServiceUrl)
         .then((response) => {
             if (response.status === 200) {
                 return response.json();
@@ -35,6 +42,9 @@ const refreshCache = () => {
                 console.error('No valid cache present on this instance - using static fallback');
                 cache.set(cacheKey, menuFallback);
             }
+        })
+        .finally(() => {
+            isFetching = false;
         });
 };
 
@@ -46,9 +56,9 @@ export const getMenyHandler: RequestHandler = (req, res) => {
     if (cached) {
         res.status(200).send(cached);
     } else {
-        refreshCache().then(() => {
-            const cachedNew = cache.get(cacheKey);
-            res.status(200).send(cachedNew);
+        refreshCache();
+        cache.on('set', (key, value) => {
+            res.status(200).send(value);
         });
     }
 };

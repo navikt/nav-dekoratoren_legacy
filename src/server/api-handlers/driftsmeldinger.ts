@@ -12,8 +12,15 @@ const cache = new NodeCache({
     deleteOnExpire: false,
 });
 
+let isFetching = false;
+
 const refreshCache = () => {
-    return fetch(driftsmeldingerServiceUrl)
+    if (isFetching) {
+        return;
+    }
+
+    isFetching = true;
+    fetch(driftsmeldingerServiceUrl)
         .then((response) => {
             if (response.status === 200) {
                 return response.json();
@@ -29,6 +36,9 @@ const refreshCache = () => {
             console.error(`Failed to fetch from driftsmeldinger service - ${e}`);
             const prevCache = cache.get(cacheKey) || [];
             cache.set(cacheKey, prevCache);
+        })
+        .finally(() => {
+            isFetching = false;
         });
 };
 
@@ -40,9 +50,9 @@ export const getDriftsmeldingerHandler: RequestHandler = (req, res) => {
     if (cached) {
         res.status(200).send(cached);
     } else {
-        refreshCache().then(() => {
-            const cachedNew = cache.get(cacheKey);
-            res.status(200).send(cachedNew);
+        refreshCache();
+        cache.on('set', (key, value) => {
+            res.status(200).send(value);
         });
     }
 };
