@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import { RequestHandler } from 'express';
 import NodeCache from 'node-cache';
-import { cachedResourceHandler } from './_cachedResourceHandler';
+import { getCachedRequestHandler } from './_cachedResourceHandler';
 
 const driftsmeldingerServiceUrl = `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`;
 
@@ -26,7 +26,7 @@ const revalidateDriftsmeldingerCache = (cache: NodeCache) =>
             cache.set(cacheKey, prevCache);
         });
 
-export const getDriftsmeldingerHandler: RequestHandler = cachedResourceHandler(
+export const getDriftsmeldingerHandler: RequestHandler = getCachedRequestHandler(
     revalidateDriftsmeldingerCache,
     cacheKey
 );
