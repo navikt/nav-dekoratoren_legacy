@@ -6,10 +6,10 @@ import cookiesMiddleware from 'universal-cookie-express';
 import { template } from './template';
 import compression from 'compression';
 import dotenv from 'dotenv';
-import { getMenyHandler } from './api-endpoints/meny';
-import { getSokHandler } from './api-endpoints/sok';
-import { getDriftsmeldingerHandler } from './api-endpoints/driftsmeldinger';
-import { varselInnboksProxyHandler, varselInnboksProxyUrl } from './api-endpoints/varsler';
+import { getMenyHandler } from './api-handlers/meny';
+import { getSokHandler } from './api-handlers/sok';
+import { getDriftsmeldingerHandler } from './api-handlers/driftsmeldinger';
+import { varselInnboksProxyHandler, varselInnboksProxyUrl } from './api-handlers/varsler';
 
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
