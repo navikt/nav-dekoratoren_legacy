@@ -33,10 +33,8 @@ export const cachedResourceHandler = (revalidateCacheFunc: RevalidateCacheFunc, 
             res.status(200).send(cached);
         } else {
             const sendResponseOnCacheSet = (key: string, value: any) => {
-                if (key === cacheKey) {
-                    cache.off('set', sendResponseOnCacheSet);
-                    res.status(200).send(value);
-                }
+                cache.off('set', sendResponseOnCacheSet);
+                res.status(200).send(value);
             };
 
             revalidateCache();
