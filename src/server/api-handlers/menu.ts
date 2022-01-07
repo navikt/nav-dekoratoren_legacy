@@ -1,26 +1,14 @@
 import fetch from 'node-fetch';
 import menuFallback from '../mock/menu.json';
-import NodeCache from 'node-cache';
-import { tenSeconds } from '../utils';
 import { RequestHandler } from 'express';
+import NodeCache from 'node-cache';
+import { cachedResourceHandler } from './_cachedResourceHandler';
 
 const menuServiceUrl = `${process.env.API_XP_SERVICES_URL}/no.nav.navno/menu`;
 
 const cacheKey = 'navno-menu';
 
-const cache = new NodeCache({
-    stdTTL: tenSeconds,
-    deleteOnExpire: false,
-});
-
-let isFetching = false;
-
-const refreshCache = () => {
-    if (isFetching) {
-        return;
-    }
-
-    isFetching = true;
+const revalidateMenuCache = (cache: NodeCache) =>
     fetch(menuServiceUrl)
         .then((response) => {
             if (response.status === 200) {
@@ -42,23 +30,6 @@ const refreshCache = () => {
                 console.error('No valid cache present on this instance - using static fallback');
                 cache.set(cacheKey, menuFallback);
             }
-        })
-        .finally(() => {
-            isFetching = false;
         });
-};
 
-cache.on('expired', refreshCache);
-
-export const getMenyHandler: RequestHandler = (req, res) => {
-    const cached = cache.get(cacheKey);
-
-    if (cached) {
-        res.status(200).send(cached);
-    } else {
-        refreshCache();
-        cache.on('set', (key, value) => {
-            res.status(200).send(value);
-        });
-    }
-};
+export const getMenuHandler: RequestHandler = cachedResourceHandler(revalidateMenuCache, cacheKey);
