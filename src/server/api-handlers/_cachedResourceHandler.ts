@@ -38,8 +38,8 @@ export const cachedResourceHandler = (revalidateCacheFunc: RevalidateCacheFunc, 
                 res.status(200).send(value);
             };
 
-            revalidateCache();
             cache.on('set', sendResponseOnCacheSet);
+            revalidateCache();
         }
     };
 };
