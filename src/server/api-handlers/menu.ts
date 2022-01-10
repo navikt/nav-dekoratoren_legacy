@@ -1,20 +1,15 @@
 import fetch from 'node-fetch';
 import menuFallback from '../mock/menu.json';
-import NodeCache from 'node-cache';
-import { tenSeconds } from '../utils';
 import { RequestHandler } from 'express';
+import NodeCache from 'node-cache';
+import { getCachedRequestHandler } from './_cachedResourceHandler';
 
 const menuServiceUrl = `${process.env.API_XP_SERVICES_URL}/no.nav.navno/menu`;
 
 const cacheKey = 'navno-menu';
 
-const cache = new NodeCache({
-    stdTTL: tenSeconds,
-    deleteOnExpire: false,
-});
-
-const refreshCache = () => {
-    return fetch(menuServiceUrl)
+const revalidateMenuCache = (cache: NodeCache) =>
+    fetch(menuServiceUrl)
         .then((response) => {
             if (response.status === 200) {
                 return response.json();
@@ -36,19 +31,5 @@ const refreshCache = () => {
                 cache.set(cacheKey, menuFallback);
             }
         });
-};
 
-cache.on('expired', refreshCache);
-
-export const getMenyHandler: RequestHandler = (req, res) => {
-    const cached = cache.get(cacheKey);
-
-    if (cached) {
-        res.status(200).send(cached);
-    } else {
-        refreshCache().then(() => {
-            const cachedNew = cache.get(cacheKey);
-            res.status(200).send(cachedNew);
-        });
-    }
-};
+export const getMenuHandler: RequestHandler = getCachedRequestHandler(revalidateMenuCache, cacheKey);

@@ -6,7 +6,7 @@ import cookiesMiddleware from 'universal-cookie-express';
 import { template } from './template';
 import compression from 'compression';
 import dotenv from 'dotenv';
-import { getMenyHandler } from './api-handlers/meny';
+import { getMenuHandler } from './api-handlers/menu';
 import { getSokHandler } from './api-handlers/sok';
 import { getDriftsmeldingerHandler } from './api-handlers/driftsmeldinger';
 import { varselInnboksProxyHandler, varselInnboksProxyUrl } from './api-handlers/varsler';
@@ -95,7 +95,7 @@ app.get(`${appBasePath}/env`, (req, res, next) => {
 });
 
 // Api endpoints
-app.get(`${appBasePath}/api/meny`, getMenyHandler);
+app.get(`${appBasePath}/api/meny`, getMenuHandler);
 app.get(`${appBasePath}/api/sok`, getSokHandler);
 app.get(`${appBasePath}/api/driftsmeldinger`, getDriftsmeldingerHandler);
 app.use(varselInnboksProxyUrl, varselInnboksProxyHandler);
