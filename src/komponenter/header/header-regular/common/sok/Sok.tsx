@@ -38,7 +38,6 @@ const Sok = (props: Props) => {
     const [result, setResult] = useState<Sokeresultat | undefined>();
     const [error, setError] = useState<string | undefined>();
     const { searchInput, setSearchInput } = props;
-
     const numberOfResults = 5;
     const klassenavn = cls('sok-input', {
         engelsk: language === Locale.ENGELSK,
@@ -144,7 +143,7 @@ const fetchSearch = (props: FetchResult) => {
     const url = `${APP_URL}/api/sok`;
     setSubmitTrackerCookie();
 
-    fetch(`${url}?ord=${value}`)
+    fetch(`${url}?ord=${encodeURIComponent(value)}`)
         .then((response) => {
             if (response.ok) {
                 return response;
