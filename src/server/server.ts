@@ -43,7 +43,6 @@ app.use((req, res, next) => {
         res.header('Access-Control-Allow-Origin', req.get('origin'));
         res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
         res.header('Access-Control-Allow-Credentials', 'true');
-        res.header('Cross-Origin-Resource-Policy', 'same-site');
 
         const requestHeaders = req.header('Access-Control-Request-Headers');
         if (requestHeaders) {
@@ -119,6 +118,9 @@ app.use(
                 res.header('Cache-Control', `max-age=${fiveMinutesInSeconds}`);
                 res.header('Pragma', `max-age=${fiveMinutesInSeconds}`);
             }
+
+            // Allow serving resources to sites using cross-origin isolation
+            res.header('Cross-Origin-Resource-Policy', 'same-site');
         },
     })
 );
