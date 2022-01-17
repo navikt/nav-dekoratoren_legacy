@@ -28,18 +28,19 @@ const buildPath = `${process.cwd()}/build`;
 const app = express();
 const PORT = 8088;
 
+const whitelist = ['.nav.no', '.oera.no', '.nais.io', 'https://preview-sykdomifamilien.gtsb.io'];
+const isAllowedDomain = (origin?: string) => origin && whitelist.some((domain) => origin.endsWith(domain));
+
 // Middleware
 app.disable('x-powered-by');
 app.use(compression());
 app.use(cookiesMiddleware());
 app.use((req, res, next) => {
     const origin = req.get('origin');
-    const whitelist = ['.nav.no', '.oera.no', '.nais.io', 'https://preview-sykdomifamilien.gtsb.io'];
-    const isAllowedDomain = whitelist.some((domain) => origin?.endsWith(domain));
     const isLocalhost = origin?.startsWith('http://localhost:');
 
     // Allowed origins // cors
-    if (isAllowedDomain || isLocalhost) {
+    if (isAllowedDomain(origin) || isLocalhost) {
         res.header('Access-Control-Allow-Origin', req.get('origin'));
         res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
         res.header('Access-Control-Allow-Credentials', 'true');
@@ -122,7 +123,7 @@ app.use(
             }
 
             // Allow serving resources to sites using cross-origin isolation
-            res.header('Cross-Origin-Resource-Policy', 'same-site');
+            res.header('Cross-Origin-Resource-Policy', 'cross-origin');
         },
     })
 );
