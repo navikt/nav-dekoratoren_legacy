@@ -4,13 +4,12 @@ import { AppState } from 'store/reducers';
 import { verifyWindowObj } from 'utils/Environment';
 import { logAmplitudeEvent } from 'utils/amplitude';
 import { MenuValue } from '../../../utils/meny-storage-utils';
+import './ChatbotWrapper.less';
 
 // Prevents SSR crash
 const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
-const testUrlHosts = [
-    'dekoratoren.ekstern.dev.nav.no',
-];
+const testUrlHosts = ['dekoratoren.ekstern.dev.nav.no'];
 
 const stateSelector = (state: AppState) => ({
     isChatbotEnabled: state.environment.PARAMS.CHATBOT,
