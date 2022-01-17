@@ -109,6 +109,8 @@ app.use(`${appBasePath}/metrics`, (req, res) => {
 
 app.get(`${appBasePath}/isAlive`, (req, res) => res.sendStatus(200));
 app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));
+
+// Static files
 app.use(
     `${appBasePath}/`,
     express.static(buildPath, {
@@ -118,6 +120,9 @@ app.use(
                 res.header('Cache-Control', `max-age=${fiveMinutesInSeconds}`);
                 res.header('Pragma', `max-age=${fiveMinutesInSeconds}`);
             }
+
+            // Allow serving resources to sites using cross-origin isolation
+            res.header('Cross-Origin-Resource-Policy', 'same-site');
         },
     })
 );
