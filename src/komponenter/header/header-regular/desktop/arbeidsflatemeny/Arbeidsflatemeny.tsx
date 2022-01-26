@@ -6,8 +6,7 @@ import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbei
 import { AnalyticsCategory } from 'utils/analytics';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { useCookies } from 'react-cookie';
-import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import { settArbeidsflate, cookieOptions } from 'store/reducers/arbeidsflate-duck';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { erNavDekoratoren } from 'utils/Environment';
