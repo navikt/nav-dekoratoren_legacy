@@ -23,19 +23,19 @@ spec:
         max: 4
     ingresses:
         - https://dekoratoren.dev.nav.no
+        - https://dekoratoren.ekstern.dev.nav.no
     accessPolicy:
         outbound:
             external:
                 - host: www.dev.nav.no
                 - host: innloggingslinje-api.dev.nav.no
-                - host: www-q1.nav.no
     env:
         - name: ENV
           value: dev
         - name: XP_BASE_URL
           value: https://www.dev.nav.no
         - name: APP_BASE_URL
-          value: https://dekoratoren.dev.nav.no
+          value: https://dekoratoren.ekstern.dev.nav.no
         - name: API_XP_SERVICES_URL
           value: https://www.dev.nav.no/_/service
         - name: API_VARSELINNBOKS_URL
@@ -45,7 +45,7 @@ spec:
         - name: API_UNLEASH_PROXY_URL
           value: https://person.dev.nav.no/person/pb-unleash-proxy
         - name: MINSIDE_ARBEIDSGIVER_URL
-          value: https://arbeidsgiver-q.nav.no/min-side-arbeidsgiver/
+          value: https://min-side-arbeidsgiver.dev.nav.no/min-side-arbeidsgiver/
         - name: DITT_NAV_URL
           value: https://www.dev.nav.no/person/dittnav/
         - name: LOGIN_URL

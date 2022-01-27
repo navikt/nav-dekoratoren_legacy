@@ -10,7 +10,7 @@ export interface Arbeidsflate {
 }
 
 export const initialState: Arbeidsflate = {
-    status: MenuValue.IKKEBESTEMT,
+    status: MenuValue.IKKEBESTEMT
 };
 
 export const reducer = (
@@ -46,20 +46,15 @@ export const settArbeidsflate = (type: MenuValue) => {
 };
 
 export const settPersonflate = (): SettPrivatpersonAction => ({
-    type: ActionType.PRIVATPERSON,
+    type: ActionType.PRIVATPERSON
 });
 
 export const settArbeidsgiverflate = (): SettArbeidsgiverAction => ({
-    type: ActionType.ARBEIDSGIVER,
+    type: ActionType.ARBEIDSGIVER
 });
 
 export const settSamarbeidspartnerflate = (): SettSamarbeidspartnerAction => ({
-    type: ActionType.SAMARBEIDSPARTNER,
+    type: ActionType.SAMARBEIDSPARTNER
 });
-
-export const cookieOptions = {
-    path: '/',
-    domain: process.env.NODE_ENV === 'development' ? 'localhost' : '.nav.no',
-};
 
 export default reducer;

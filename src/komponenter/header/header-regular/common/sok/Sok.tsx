@@ -11,6 +11,7 @@ import Spinner from '../spinner/Spinner';
 import { Sokeresultat } from './utils';
 import SokResultater from './sok-innhold/SokResultater';
 import { Environment } from 'store/reducers/environment-duck';
+import Cookies from 'js-cookie';
 import './Sok.less';
 
 interface Props {
@@ -27,13 +28,16 @@ const stateSelector = (state: AppState) => ({
     language: state.language.language,
 });
 
+const setSubmitTrackerCookie = () => {
+    Cookies.set('nav-search-use', Date.now().toString(), { expires: 30, domain: '.nav.no' });
+};
+
 const Sok = (props: Props) => {
     const { environment, language } = useSelector(stateSelector);
     const [loading, setLoading] = useState<boolean>(false);
     const [result, setResult] = useState<Sokeresultat | undefined>();
     const [error, setError] = useState<string | undefined>();
     const { searchInput, setSearchInput } = props;
-
     const numberOfResults = 5;
     const klassenavn = cls('sok-input', {
         engelsk: language === Locale.ENGELSK,
@@ -137,8 +141,9 @@ const fetchSearch = (props: FetchResult) => {
     const { setLoading, setError, setResult } = props;
     const { APP_URL } = environment;
     const url = `${APP_URL}/api/sok`;
+    setSubmitTrackerCookie();
 
-    fetch(`${url}?ord=${value}`)
+    fetch(`${url}?ord=${encodeURIComponent(value)}`)
         .then((response) => {
             if (response.ok) {
                 return response;

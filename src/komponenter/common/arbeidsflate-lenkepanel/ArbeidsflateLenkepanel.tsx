@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { Locale } from 'store/reducers/language-duck';
 import { useCookies } from 'react-cookie';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import { CookieName, cookieOptions } from '../../../server/cookieSettings';
 import { erNavDekoratoren } from 'utils/Environment';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { finnTekst } from 'tekster/finn-tekst';
@@ -36,7 +36,7 @@ const ArbeidsflateLenkepanel = ({ lenke, language, analyticsEventArgs, enableCom
             className={`${cls.className} ${enableCompactView ? cls.element('compact') : ''}`}
             id={id}
             onClick={(event) => {
-                setCookie('decorator-context', lenke.key, cookieOptions);
+                setCookie(CookieName.DECORATOR_CONTEXT, lenke.key, cookieOptions);
                 dispatch(lukkAlleDropdowns());
                 if (erNavDekoratoren()) {
                     event.preventDefault();
