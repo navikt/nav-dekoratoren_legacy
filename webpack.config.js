@@ -92,6 +92,7 @@ const commonConfig = {
                                             /\b(\w*close\w*)\b/,
                                             /\b(\w*decorator-dummy-app\w*)\b/,
                                             '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
+                                            '#nav-chatbot',
                                         ],
                                     }),
                                     autoprefixer({}),

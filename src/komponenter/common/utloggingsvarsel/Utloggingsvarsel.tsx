@@ -8,45 +8,65 @@ import ResizeHandler, { BREAKPOINT, WindowType } from './komponenter/ResizeHandl
 import { verifyWindowObj } from '../../../utils/Environment';
 import UtloggingsvarselInnhold from './komponenter/UtloggingsvarselInnhold';
 import { AppState } from '../../../store/reducers';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useInterval } from './useInterval';
 import { getLogOutUrl } from 'utils/login';
+import {
+    utloggingsvarselOppdatereStatus,
+    UtloggingsvarselState,
+    VarselEkspandert
+} from '../../../store/reducers/utloggingsvarsel-duck';
+import { useCookies } from 'react-cookie';
+import { CookieName, cookieOptions } from '../../../server/cookieSettings';
+import classNames from 'classnames';
 
 const stateSelector = (state: AppState) => ({
-    utloggingsvarsel: state.environment.PARAMS.UTLOGGINGSVARSEL,
-    timestamp: state.environment.PARAMS.TIMESTAMP,
-    environment: state.environment,
+    utloggingsvarsel: state.utloggingsvarsel,
+    utloggingsvarselOnsket: state.environment.PARAMS.UTLOGGINGSVARSEL,
+    environment: state.environment
 });
 
 const Utloggingsvarsel: FunctionComponent = () => {
-    const { utloggingsvarsel, timestamp, environment } = useSelector(stateSelector);
+    const { utloggingsvarselOnsket, environment, utloggingsvarsel } = useSelector(stateSelector);
+    const [, setCookie, removeCookie] = useCookies();
+    const dispatch = useDispatch();
     const cls = BEMHelper('utloggingsvarsel');
     const windowOnMount = () =>
         verifyWindowObj() && window.innerWidth > BREAKPOINT ? WindowType.DESKTOP : WindowType.MOBILE;
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const [clsOpenClass, setClsOpenClass] = useState<string>('');
     const [unixTimeStamp, setUnixTimestamp] = useState<number>(0);
-    const [minimized, setMinimized] = useState<boolean>(false);
     const [windowType, setWindowType] = useState<WindowType>(windowOnMount());
     const [interval, setInterval] = useState<boolean>(timeStampIkkeUtgatt(unixTimeStamp - getCurrentTimeStamp()));
     const [tid, setTid] = useState<string>('- minutter');
-    const [vistSistePaminnelse, setVistSistePaminnelse] = useState<boolean>(false);
     const [overskrift, setOverskrift] = useState<string>('Du blir snart logget ut');
-    const setOpenClsName = (): string => (minimized ? '' : 'OPEN');
+
     const toggleModal = (): void => setModalOpen((prevState) => !prevState);
     const modalMountPoint = (): HTMLElement => document.getElementById('utloggingsvarsel') ?? document.body;
 
     useEffect(() => {
         const setModalElement = () => (document.getElementById('sitefooter') ? '#sitefooter' : 'body');
         ModalWrapper.setAppElement(setModalElement());
-        if (utloggingsvarsel && timestamp) {
+        if (utloggingsvarselOnsket && utloggingsvarsel.timeStamp) {
             try {
-                checkTimeStampAndSetTimeStamp(timestamp, setModalOpen, setUnixTimestamp);
+                checkTimeStampAndSetTimeStamp(
+                    utloggingsvarsel.timeStamp,
+                    setModalOpen,
+                    setUnixTimestamp,
+                    dispatch,
+                    utloggingsvarsel,
+                    setCookie
+                );
             } catch (err) {
                 console.log(err);
             }
         }
     }, []);
+
+    useEffect(() => {
+        setClsOpenClass(utloggingsvarsel.varselState === VarselEkspandert.MINIMERT ? '' : 'OPEN');
+    }, [utloggingsvarsel.varselState]);
 
     useEffect(() => {
         setInterval(timeStampIkkeUtgatt(unixTimeStamp - getCurrentTimeStamp()));
@@ -57,13 +77,23 @@ const Utloggingsvarsel: FunctionComponent = () => {
             const tokenExpire = unixTimeStamp - getCurrentTimeStamp();
             if (timeStampIkkeUtgatt(getCurrentTimeStamp() - unixTimeStamp + 1)) {
                 setInterval(false);
+                removeCookie(CookieName.SELVBETJENING_IDTOKEN, cookieOptions);
                 window.location.href = getLogOutUrl(environment);
             }
 
             if (tokenExpire <= 60) {
-                if (!vistSistePaminnelse) {
-                    setVistSistePaminnelse(true);
-                    modalOpen ? setMinimized(false) : setModalOpen(true);
+                if (!utloggingsvarsel.vistSistePaminnelse) {
+                    const utloggingsState: Partial<UtloggingsvarselState> = {
+                        ...utloggingsvarsel,
+                        varselState: VarselEkspandert.EKSPANDERT,
+                        vistSistePaminnelse: true,
+                        modalLukketAvBruker: false,
+                    };
+                    dispatch(utloggingsvarselOppdatereStatus(utloggingsState));
+                    setCookie(CookieName.DECORATOR_LOGOUT_WARNING, utloggingsState, cookieOptions);
+                    if (!modalOpen) {
+                        setModalOpen(true);
+                    }
                 }
                 setTid(`${Math.floor(tokenExpire)} sekunder`);
                 setOverskrift('Nå blir du logget ut');
@@ -78,19 +108,17 @@ const Utloggingsvarsel: FunctionComponent = () => {
     ResizeHandler({ setWindowType, windowType });
 
     return (
-        <div id="utloggingsvarsel" className={cls.className + ` ${setOpenClsName()}`}>
+        <div id='utloggingsvarsel' className={classNames(cls.className, clsOpenClass)}>
             <ModalWrapper
                 parentSelector={modalMountPoint}
                 onRequestClose={toggleModal}
-                contentLabel="varsel for utløpende sesjon av innlogget bruker"
+                contentLabel='varsel for utløpende sesjon av innlogget bruker'
                 isOpen={modalOpen}
                 className={cls.element('modal')}
                 closeButton={false}
             >
                 <UtloggingsvarselInnhold
                     setModalOpen={setModalOpen}
-                    setMinimized={setMinimized}
-                    minimized={minimized}
                     windowType={windowType}
                     overskrift={overskrift}
                     tid={tid}

@@ -30,7 +30,7 @@
                                         "hasChildren": true,
                                         "children": [
                                             {
-                                                "displayName": "Permittert",
+                                                "displayName": "Søk om penger - permittert",
                                                 "path": "https://www.nav.no/arbeid/no/permittert/",
                                                 "displayLock": false,
                                                 "id": "e2d2312a-112a-43fe-a58d-6e374bf19e31",
@@ -38,7 +38,7 @@
                                                 "children": []
                                             },
                                             {
-                                                "displayName": "Arbeidsledig",
+                                                "displayName": "Søk om penger - arbeidsledig",
                                                 "path": "https://www.nav.no/arbeid/no/arbeidsledig",
                                                 "displayLock": false,
                                                 "id": "f177664c-c5b0-42f1-ada5-5d7e35855570",
@@ -62,7 +62,8 @@
                                             },
                                             {
                                                 "displayName": "Ungdom",
-                                                "path": "https://tjenester.nav.no/veiledearbeidssoker/ung-lite-erfaring?sprak=nb",
+                                                "path": "https://veiledearbeidssoker.nav.no/ung-lite-erfaring?sprak=nb",
+                                                "displayLock": false,
                                                 "id": "997136c7-9f17-40c4-b37b-ba199c8ff945",
                                                 "hasChildren": false,
                                                 "children": []
@@ -93,7 +94,8 @@
                                             },
                                             {
                                                 "displayName": "Arbeidsavklaringspenger",
-                                                "path": "/no/person/arbeid/arbeidsavklaringspenger",
+                                                "path": "/no/person/oppfolging/aap/arbeidsavklaringspenger-aap",
+                                                "displayLock": false,
                                                 "id": "1116e8a1-d4e8-43ae-875c-28a180b6af99",
                                                 "hasChildren": false,
                                                 "children": []
@@ -122,8 +124,9 @@
                                         ]
                                     },
                                     {
-                                        "displayName": "Foreldre, barn og familie",
+                                        "displayName": "Familie og barn",
                                         "path": "/no/person/familie",
+                                        "displayLock": false,
                                         "id": "0bdef9fe-c184-4fba-a506-1a5a520013a6",
                                         "hasChildren": true,
                                         "children": [
@@ -143,15 +146,16 @@
                                             },
                                             {
                                                 "displayName": "Alene med barn",
-                                                "path": "https://www.nav.no/familie/alene-med-barn",
+                                                "path": "/no/person/familie/livssituasjoner/er-helt-eller-delvis-alene-med-barn",
                                                 "displayLock": false,
                                                 "id": "9e3d4bce-3894-419b-892c-d77352269166",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
                                             {
-                                                "displayName": "Farskap og morskap",
+                                                "displayName": "Foreldreskap",
                                                 "path": "/no/person/familie/farskap-og-morskap",
+                                                "displayLock": false,
                                                 "id": "3f636d0f-3c62-4659-8346-240123ceca63",
                                                 "hasChildren": false,
                                                 "children": []
@@ -164,16 +168,26 @@
                                                 "children": []
                                             },
                                             {
-                                                "displayName": "Sykdom i familien",
-                                                "path": "https://www.nav.no/familie/sykdom-i-familien/nb/",
+                                                "displayName": "Tar vare på noen som er syk eller skadet",
+                                                "path": "/no/person/familie/livssituasjoner/tar-vare-pa-noen-som-er-syk-eller-skadet",
+                                                "displayLock": false,
                                                 "id": "56b34e65-bda1-426e-9de9-3cde30f1d787",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
                                             {
-                                                "displayName": "Ytelser ved dødsfall",
-                                                "path": "/no/person/familie/ytelser-ved-dodsfall",
+                                                "displayName": "Mistet noen i nær familie",
+                                                "path": "/no/person/familie/livssituasjoner/har-mistet-noen-i-naer-familie",
+                                                "displayLock": false,
                                                 "id": "4bbaae56-07c5-4ee1-8c31-8537c3167c2c",
+                                                "hasChildren": false,
+                                                "children": []
+                                            },
+                                            {
+                                                "displayName": "Alene med barn fordi den andre forelderen er død",
+                                                "path": "/no/person/familie/livssituasjoner/er-alene-med-barn-fordi-den-andre-forelderen-er-dod",
+                                                "displayLock": false,
+                                                "id": "59cc2389-7934-499b-9416-7b1076eda228",
                                                 "hasChildren": false,
                                                 "children": []
                                             }
@@ -236,8 +250,9 @@
                                                 "children": []
                                             },
                                             {
-                                                "displayName": "Økonomisk rådgivning og gjeldsrådgivning",
-                                                "path": "/no/person/flere-tema/sosiale-tjenester/okonomisk-radgivning-og-gjeldsradgivning",
+                                                "displayName": "Økonomi- og gjeldsrådgivning",
+                                                "path": "https://www.nav.no/okonomi-og-gjeld",
+                                                "displayLock": false,
                                                 "id": "8dda0beb-59cd-410c-8f31-540658255e36",
                                                 "hasChildren": false,
                                                 "children": []
@@ -251,7 +266,8 @@
                                             },
                                             {
                                                 "displayName": "Kvalifiseringsprogrammet",
-                                                "path": "/no/person/flere-tema/sosiale-tjenester/nynorsk/kvalifiseringsprogrammet-kvp",
+                                                "path": "/no/person/flere-tema/sosiale-tjenester/kvalifiseringsprogrammet",
+                                                "displayLock": false,
                                                 "id": "7eef2eec-84f5-45bb-9835-3a7d240b4e5b",
                                                 "hasChildren": false,
                                                 "children": []
@@ -272,30 +288,10 @@
                                         "hasChildren": true,
                                         "children": [
                                             {
-                                                "displayName": "Hva har du vansker med?",
-                                                "path": "/no/person/hjelpemidler/hva-har-du-vansker-med",
-                                                "id": "10fe9ac9-ca42-4110-9f4d-6997a1cb3148",
-                                                "hasChildren": false,
-                                                "children": []
-                                            },
-                                            {
-                                                "displayName": "Hvor trenger du hjelp?",
-                                                "path": "/no/person/hjelpemidler/hvor-trenger-du-hjelp",
-                                                "id": "e1eab0ea-984d-402a-9445-b5df47f91273",
-                                                "hasChildren": false,
-                                                "children": []
-                                            },
-                                            {
-                                                "displayName": "Tjenester og produkter",
-                                                "path": "/no/person/hjelpemidler/tjenester-og-produkter",
+                                                "displayName": "Hjelpemidler og tilrettelegging",
+                                                "path": "/no/person/hjelpemidler/hjelpemidler-og-tilrettelegging",
+                                                "displayLock": false,
                                                 "id": "ea709780-efd8-4a12-aca6-1ad9c25928e7",
-                                                "hasChildren": false,
-                                                "children": []
-                                            },
-                                            {
-                                                "displayName": "Hvordan søke om hjelpemidler?",
-                                                "path": "/no/person/hjelpemidler/hvordan-soke",
-                                                "id": "4c96ac3a-46bb-4c6d-9f94-88c40ba078e8",
                                                 "hasChildren": false,
                                                 "children": []
                                             }
@@ -457,7 +453,8 @@
                                             },
                                             {
                                                 "displayName": "Støtte ved tilrettelegging på arbeidsplassen",
-                                                "path": "https://tjenester.nav.no/veiviserarbeidsgiver/tilrettelegge",
+                                                "path": "https://arbeidsgiver.nav.no/veiviserarbeidsgiver/tilrettelegging",
+                                                "displayLock": false,
                                                 "id": "514c2cd6-ba8d-4781-a460-10655db232f4",
                                                 "hasChildren": false,
                                                 "children": []
@@ -466,14 +463,6 @@
                                                 "displayName": "Sykefraværsstatistikk",
                                                 "path": "https://arbeidsgiver.nav.no/sykefravarsstatistikk/",
                                                 "id": "017271da-1f66-448e-875d-360675b544ee",
-                                                "hasChildren": false,
-                                                "children": []
-                                            },
-                                            {
-                                                "displayName": "Sykdom i familien",
-                                                "path": "/no/bedrift/tjenester-og-skjemaer/nav-og-altinn-tjenester/omsorgs-pleie-og-opplaeringspenger",
-                                                "displayLock": false,
-                                                "id": "8857a661-e41e-4fcf-9337-2a18236c1b9e",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
@@ -501,14 +490,16 @@
                                             },
                                             {
                                                 "displayName": "Tilby arbeidstrening",
-                                                "path": "https://tjenester.nav.no/veiviserarbeidsgiver/rekruttere-og-inkludere/arbeidstrening",
+                                                "path": "https://arbeidsgiver.nav.no/veiviserarbeidsgiver/tiltak/arbeidstrening",
+                                                "displayLock": false,
                                                 "id": "4d163455-d5b6-42e0-8eca-2cf5c63424ae",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
                                             {
                                                 "displayName": "Støtte ved ansettelser",
-                                                "path": "https://tjenester.nav.no/veiviserarbeidsgiver/rekruttere-og-inkludere/ansette",
+                                                "path": "https://arbeidsgiver.nav.no/veiviserarbeidsgiver/inkludering",
+                                                "displayLock": false,
                                                 "id": "ea03eafc-c107-49b7-af01-2309762af65e",
                                                 "hasChildren": false,
                                                 "children": []
@@ -537,7 +528,7 @@
                                             },
                                             {
                                                 "displayName": "Permittering og omstilling",
-                                                "path": "/no/bedrift/oppfolging/permittering-og-omstilling",
+                                                "path": "https://arbeidsgiver.nav.no/permittering-og-omstilling",
                                                 "id": "4e8d1cce-7bd6-403a-8cbc-8923b58ea2c8",
                                                 "hasChildren": false,
                                                 "children": []
@@ -696,7 +687,7 @@
                                 "children": [
                                     {
                                         "displayName": "Dine saker",
-                                        "path": "https://tjenester.nav.no/esso/saml2/jsp/spSSOInit.jsp?metaAlias=/sp&idpEntityID=idporten.difi.no-v4&NameIDFormat=transient&goto=https://tjenester.nav.no/saksoversikt/&AuthLevel=4",
+                                        "path": "https://person.nav.no/mine-saker",
                                         "displayLock": true,
                                         "id": "15e2dca8-a68c-484a-b7fe-5ec9fe7ed7bb",
                                         "hasChildren": false,
@@ -704,7 +695,7 @@
                                     },
                                     {
                                         "displayName": "Din innboks",
-                                        "path": "https://tjenester.nav.no/esso/saml2/jsp/spSSOInit.jsp?metaAlias=/sp&idpEntityID=idporten.difi.no-v4&NameIDFormat=transient&goto=https://tjenester.nav.no/mininnboks/&AuthLevel=4",
+                                        "path": "https://mininnboks.nav.no/",
                                         "displayLock": true,
                                         "id": "79ae75ad-7473-4414-b411-129151107f4b",
                                         "hasChildren": false,
@@ -847,7 +838,7 @@
                                     },
                                     {
                                         "displayName": "Ditt sykefravær",
-                                        "path": "https://tjenester.nav.no/sykefravaer/",
+                                        "path": "https://www.nav.no/syk/sykefravaer",
                                         "displayLock": true,
                                         "id": "d5c02d97-3041-4c72-9555-993efb7605b0",
                                         "hasChildren": false,
@@ -866,6 +857,22 @@
                                         "path": "https://www.nav.no/person/pdl-fullmakt-ui",
                                         "displayLock": true,
                                         "id": "ff549cdc-c3ac-4056-8838-c3a01cf8b086",
+                                        "hasChildren": false,
+                                        "children": []
+                                    },
+                                    {
+                                        "displayName": "Dine pleiepenger",
+                                        "path": "https://www.nav.no/familie/sykdom-i-familien/soknad/innsyn",
+                                        "displayLock": false,
+                                        "id": "1c79a492-9ba7-42af-b29d-c18a5dee2367",
+                                        "hasChildren": false,
+                                        "children": []
+                                    },
+                                    {
+                                        "displayName": "Dine hjelpemidler",
+                                        "path": "https://www.nav.no/hjelpemidler/dinehjelpemidler/",
+                                        "displayLock": false,
+                                        "id": "172fae26-2e5c-4442-b9f5-fcb276fe9ad5",
                                         "hasChildren": false,
                                         "children": []
                                     }
@@ -903,7 +910,7 @@
                                         "children": [
                                             {
                                                 "displayName": "Kontakt oss",
-                                                "path": "/person/kontakt-oss/",
+                                                "path": "/person/kontakt-oss/nb",
                                                 "displayLock": false,
                                                 "id": "7501288c-d241-4878-b191-3d9389e8d0bb",
                                                 "hasChildren": false,
@@ -940,15 +947,17 @@
                                         "hasChildren": true,
                                         "children": [
                                             {
-                                                "displayName": "English pages",
+                                                "displayName": "English",
                                                 "path": "/en",
+                                                "displayLock": false,
                                                 "id": "412ae496-b759-4eb4-8044-db151cd580e5",
                                                 "hasChildren": false,
                                                 "children": []
                                             },
                                             {
-                                                "displayName": "Sámegiel skovit",
+                                                "displayName": "Sámegiella",
                                                 "path": "/se",
+                                                "displayLock": false,
                                                 "id": "bb2d3206-c784-45cc-8b86-f3933b1fe069",
                                                 "hasChildren": false,
                                                 "children": []
@@ -1143,7 +1152,7 @@
                                         "children": [
                                             {
                                                 "displayName": "Kontakt oss",
-                                                "path": "/person/kontakt-oss/",
+                                                "path": "/person/kontakt-oss/nb",
                                                 "id": "bbeffbfa-f045-4667-be15-41adc649dd8c",
                                                 "hasChildren": false,
                                                 "children": []
@@ -1309,7 +1318,7 @@
                                 "children": [
                                     {
                                         "displayName": "Your cases",
-                                        "path": "/nav.no-ressurser/lenker/selvbetjening/tjenester-pa-nav.no/your-cases",
+                                        "path": "https://person.nav.no/mine-saker",
                                         "displayLock": true,
                                         "id": "51f1f80c-245a-47c4-ad58-681fc4c4a787",
                                         "hasChildren": false,
@@ -1317,7 +1326,7 @@
                                     },
                                     {
                                         "displayName": "Your inbox (in Norwegian)",
-                                        "path": "https://tjenester.nav.no/esso/saml2/jsp/spSSOInit.jsp?metaAlias=/sp&idpEntityID=idporten.difi.no-v4&NameIDFormat=transient&goto=https://tjenester.nav.no/mininnboks/&AuthLevel=4",
+                                        "path": "https://mininnboks.nav.no/",
                                         "displayLock": true,
                                         "id": "f6547a48-7bdd-47ec-9c39-2597bc2c59b1",
                                         "hasChildren": false,
@@ -1463,7 +1472,7 @@
                                     },
                                     {
                                         "displayName": "Your sick leave (in Norwegian)",
-                                        "path": "https://tjenester.nav.no/sykefravaer/",
+                                        "path": "https://www.nav.no/syk/sykefravaer",
                                         "displayLock": true,
                                         "id": "be66e320-2d75-40a7-869e-5c6c6f143ae8",
                                         "hasChildren": false,
@@ -1478,10 +1487,26 @@
                                         "children": []
                                     },
                                     {
-                                        "displayName": "Your parental benefits (in Norwegian)",
+                                        "displayName": "Your powers of attorney (in Norwegian)",
                                         "path": "https://www.nav.no/person/pdl-fullmakt-ui",
                                         "displayLock": true,
                                         "id": "ecffb844-35a1-44f9-a2b7-92ef00dd387a",
+                                        "hasChildren": false,
+                                        "children": []
+                                    },
+                                    {
+                                        "displayName": "Attendance allowance (in Norwegian)",
+                                        "path": "https://www.nav.no/familie/sykdom-i-familien/soknad/innsyn",
+                                        "displayLock": false,
+                                        "id": "ea05aead-0b77-439c-9503-ab0c197a5411",
+                                        "hasChildren": false,
+                                        "children": []
+                                    },
+                                    {
+                                        "displayName": "Your technical aids (in Norwegian)",
+                                        "path": "https://www.nav.no/hjelpemidler/dinehjelpemidler/",
+                                        "displayLock": false,
+                                        "id": "5e09edf4-fb88-455b-bc99-ce290122e648",
                                         "hasChildren": false,
                                         "children": []
                                     }
@@ -1530,13 +1555,6 @@
                                         "children": []
                                     },
                                     {
-                                        "displayName": "The non-custodial or custodial parent lives abroad",
-                                        "path": "/en/home/work-and-stay-in-norway/the-non-custodial-or-custodial-parent-lives-abroad",
-                                        "id": "d289550d-8c68-4846-bec4-ad5400f2ef37",
-                                        "hasChildren": false,
-                                        "children": []
-                                    },
-                                    {
                                         "displayName": "Foreign students in Norway",
                                         "path": "/en/home/work-and-stay-in-norway/foreign-students-in-norway",
                                         "id": "4cf3fd28-bcc3-4048-9df9-ab59ed14e9eb",
@@ -1562,13 +1580,6 @@
                                         "displayName": "Information about NAV's services and benefits",
                                         "path": "/en/home/benefits-and-services/information-about-nav-s-services-and-benefits",
                                         "id": "2bdcfe94-5b37-462f-b063-3d2b1c56cac6",
-                                        "hasChildren": false,
-                                        "children": []
-                                    },
-                                    {
-                                        "displayName": "Unemployment benefits",
-                                        "path": "/en/home/benefits-and-services/unemployment-benefits",
-                                        "id": "50a2ecf5-dd14-4839-a05f-b97a2c98620f",
                                         "hasChildren": false,
                                         "children": []
                                     },
@@ -1696,7 +1707,8 @@
                                     },
                                     {
                                         "displayName": "NAV telephone helplines",
-                                        "path": "/en/home/about-nav/contact-us",
+                                        "path": "/person/kontakt-oss/en",
+                                        "displayLock": false,
                                         "id": "b94f13b1-3010-432d-954f-43a90ea122ce",
                                         "hasChildren": false,
                                         "children": []
@@ -1726,13 +1738,6 @@
                                         "displayName": "Payment dates",
                                         "path": "/en/home/about-nav/payment-dates",
                                         "id": "6ea62452-1277-4ec5-941c-9e77f1fa48ce",
-                                        "hasChildren": false,
-                                        "children": []
-                                    },
-                                    {
-                                        "displayName": "Publications",
-                                        "path": "/en/home/about-nav/publications",
-                                        "id": "93b4dccb-fe84-42a3-8989-660fb2df8584",
                                         "hasChildren": false,
                                         "children": []
                                     },
@@ -1802,15 +1807,17 @@
                                 "hasChildren": true,
                                 "children": [
                                     {
-                                        "displayName": "Norwegian pages",
+                                        "displayName": "Norwegian",
                                         "path": "/no",
+                                        "displayLock": false,
                                         "id": "cde7caa1-b9ff-4798-8132-3d3c6975ccd8",
                                         "hasChildren": false,
                                         "children": []
                                     },
                                     {
-                                        "displayName": "Sámegiel skovit",
+                                        "displayName": "Sámegiella",
                                         "path": "/se",
+                                        "displayLock": false,
                                         "id": "32b2b61f-9378-452e-af5c-7b6c6ff1b24c",
                                         "hasChildren": false,
                                         "children": []
@@ -1942,7 +1949,7 @@
                                 "children": [
                                     {
                                         "displayName": "Kontakt oss",
-                                        "path": "/person/kontakt-oss/",
+                                        "path": "/person/kontakt-oss/nb",
                                         "id": "2f1d43b2-ca3c-42a1-bc24-28a3cb1d351f",
                                         "hasChildren": false,
                                         "children": []
@@ -1978,15 +1985,17 @@
                                 "hasChildren": true,
                                 "children": [
                                     {
-                                        "displayName": "Norske sider",
+                                        "displayName": "Norsk",
                                         "path": "/no",
+                                        "displayLock": false,
                                         "id": "d103dd9d-fcfc-4b27-8f50-6756f484c6b1",
                                         "hasChildren": false,
                                         "children": []
                                     },
                                     {
-                                        "displayName": "English pages",
+                                        "displayName": "English",
                                         "path": "/en",
+                                        "displayLock": false,
                                         "id": "fae1bf66-18de-43fc-9a10-a6997cf1f8a0",
                                         "hasChildren": false,
                                         "children": []

@@ -4,6 +4,7 @@ import { MenyNode as menypunkterData } from './reducers/menu-duck';
 import { DriftsmeldingerData } from './reducers/driftsmeldinger-duck';
 import { Environment, Params } from './reducers/environment-duck';
 import { FeatureToggles } from './reducers/feature-toggles-duck';
+import { UtloggingsvarselState } from './reducers/utloggingsvarsel-duck';
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',
@@ -42,6 +43,9 @@ export enum ActionType {
     SETT_TILBAKEMELDING_OK = 'SETT_TILBAKEMELDING_OK',
     SETT_TILBAKEMELDING_FEILET = 'SETT_TILBAKEMELDING_FEILET',
     SETT_TILBAKEMELDING_PENDING = 'SETT_TILBAKEMELDING_PENDING',
+    SETT_UTLOGGINGSVARSEL_EKSPANDERT = 'SETT_UTLOGGINGSVARSEL_EKSPANDERT',
+    SET_UTLOGGINSVARSEL_MINIMERT = 'SET_UTLOGGINSVARSEL_MINIMERT',
+    SETT_UTLOGGINSVARSEL_OPPDATERESTATUS = 'SETT_UTLOGGINSVARSEL_OPPDATERESTATUS'
 }
 
 export interface HentInnloggingsstatusOKAction {
@@ -192,6 +196,19 @@ export interface SettTilbakemeldingFEILETAction {
     type: ActionType.SETT_TILBAKEMELDING_FEILET;
 }
 
+export interface SettUtloggingsvarselEkspandert {
+    type: ActionType.SETT_UTLOGGINGSVARSEL_EKSPANDERT;
+}
+
+export interface SettUtloggingsvarselMinimert {
+    type: ActionType.SET_UTLOGGINSVARSEL_MINIMERT;
+}
+
+export interface SettUtloggingsvarselOpppdatereStatus {
+    data: Partial<UtloggingsvarselState>
+    type: ActionType.SETT_UTLOGGINSVARSEL_OPPDATERESTATUS;
+}
+
 export type Handling =
     | HentInnloggingsstatusOKAction
     | HentInnloggingsstatusFEILETAction
@@ -227,4 +244,7 @@ export type Handling =
     | ToggleLukkAlle
     | SettTilbakemeldingOKAction
     | SettTilbakemeldingFEILETAction
-    | SettTilbakemeldingPENDINGAction;
+    | SettTilbakemeldingPENDINGAction
+    | SettUtloggingsvarselEkspandert
+    | SettUtloggingsvarselMinimert
+    | SettUtloggingsvarselOpppdatereStatus;

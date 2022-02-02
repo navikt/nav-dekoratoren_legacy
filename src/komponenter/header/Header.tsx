@@ -6,7 +6,7 @@ import { HeaderSimple } from 'komponenter/header/header-simple/HeaderSimple';
 import { HeaderRegular } from 'komponenter/header/header-regular/HeaderRegular';
 import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import { CookieName, cookieOptions } from '../../server/cookieSettings';
 import { useCookies } from 'react-cookie';
 import { languageDuck, Locale } from 'store/reducers/language-duck';
 import { HeadElements } from 'komponenter/common/HeadElements';
@@ -30,6 +30,7 @@ import {
     validateContext,
     validateLanguage,
     validateLevel,
+    validateRedirectUrl,
 } from '../../server/utils';
 import { setParams } from 'store/reducers/environment-duck';
 import Modal from 'nav-frontend-modal';
@@ -38,8 +39,8 @@ import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
 import './Header.less';
 
-export const decoratorContextCookie = 'decorator-context';
-export const decoratorLanguageCookie = 'decorator-language';
+export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
+export const decoratorLanguageCookie = CookieName.DECORATOR_LANGUAGE;
 
 const stateSelector = (state: AppState) => ({
     menypunkt: state.menypunkt,
@@ -63,7 +64,7 @@ export const Header = () => {
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
     const useSimpleHeader = PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER;
 
-    const [cookies, setCookie] = useCookies([decoratorLanguageCookie, decoratorContextCookie]);
+    const [cookies, setCookie] = useCookies();
 
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {
@@ -227,6 +228,7 @@ export const Header = () => {
                         breadcrumbs: breadcrumbsFromPayload,
                         enforceLogin,
                         redirectToApp,
+                        redirectToUrl,
                         feedback,
                         chatbot,
                         shareScreen,
@@ -258,6 +260,9 @@ export const Header = () => {
                     if (utilsBackground) {
                         validateUtilsBackground(utilsBackground);
                     }
+                    if (redirectToUrl) {
+                        validateRedirectUrl(redirectToUrl);
+                    }
                     const params = {
                         ...(context && {
                             CONTEXT: context,
@@ -270,6 +275,9 @@ export const Header = () => {
                         }),
                         ...(redirectToApp !== undefined && {
                             REDIRECT_TO_APP: redirectToApp === true,
+                        }),
+                        ...(redirectToUrl !== undefined && {
+                            REDIRECT_TO_URL: redirectToUrl,
                         }),
                         ...(level && {
                             LEVEL: level,

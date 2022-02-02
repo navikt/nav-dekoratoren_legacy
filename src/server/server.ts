@@ -1,16 +1,16 @@
-import NodeCache from 'node-cache';
-import fetch from 'node-fetch';
 import express, { NextFunction, Request, Response } from 'express';
 import { createMiddleware } from '@promster/express';
 import { getSummary, getContentType } from '@promster/express';
-import { oneMinuteInSeconds, tenSeconds } from './utils';
 import { clientEnv, fiveMinutesInSeconds } from './utils';
 import cookiesMiddleware from 'universal-cookie-express';
-import { createProxyMiddleware } from 'http-proxy-middleware';
 import { template } from './template';
 import compression from 'compression';
 import dotenv from 'dotenv';
-import mockMenu from './mock/menu.json';
+import { getMenuHandler } from './api-handlers/menu';
+import { getSokHandler } from './api-handlers/sok';
+import { getDriftsmeldingerHandler } from './api-handlers/driftsmeldinger';
+import { varselInnboksProxyHandler, varselInnboksProxyUrl } from './api-handlers/varsler';
+
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -24,20 +24,12 @@ if (!isProduction || process.env.PROD_TEST) {
 const appBasePath = process.env.APP_BASE_PATH || ``;
 const oldBasePath = '/common-html/v4/navno';
 const buildPath = `${process.cwd()}/build`;
+
 const app = express();
 const PORT = 8088;
 
-// Cache setup
-const mainCacheKey = 'navno-menu';
-const backupCacheKey = 'navno-menu-backup';
-const mainCache = new NodeCache({
-    stdTTL: tenSeconds,
-    checkperiod: oneMinuteInSeconds,
-});
-const backupCache = new NodeCache({
-    stdTTL: 0,
-    checkperiod: 0,
-});
+const whitelist = ['.nav.no', '.oera.no', '.nais.io', 'https://preview-sykdomifamilien.gtsb.io'];
+const isAllowedDomain = (origin?: string) => origin && whitelist.some((domain) => origin.endsWith(domain));
 
 // Middleware
 app.disable('x-powered-by');
@@ -45,16 +37,18 @@ app.use(compression());
 app.use(cookiesMiddleware());
 app.use((req, res, next) => {
     const origin = req.get('origin');
-    const whitelist = ['.nav.no', '.oera.no', '.nais.io', 'https://preview-sykdomifamilien.gtsb.io'];
-    const isAllowedDomain = whitelist.some((domain) => origin?.endsWith(domain));
     const isLocalhost = origin?.startsWith('http://localhost:');
 
     // Allowed origins // cors
-    if (isAllowedDomain || isLocalhost) {
+    if (isAllowedDomain(origin) || isLocalhost) {
         res.header('Access-Control-Allow-Origin', req.get('origin'));
         res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
         res.header('Access-Control-Allow-Credentials', 'true');
-        res.header('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
+
+        const requestHeaders = req.header('Access-Control-Request-Headers');
+        if (requestHeaders) {
+            res.header('Access-Control-Allow-Headers', requestHeaders);
+        }
     }
 
     // Cache control
@@ -82,6 +76,7 @@ app.use(
 // Express config
 const pathsForTemplate = [`${appBasePath}`, `${appBasePath}/:locale(no|en|se)/*`, `${oldBasePath}`];
 
+// HTML template
 app.get(pathsForTemplate, (req, res, next) => {
     try {
         res.send(template(req));
@@ -90,6 +85,7 @@ app.get(pathsForTemplate, (req, res, next) => {
     }
 });
 
+// Client environment
 app.get(`${appBasePath}/env`, (req, res, next) => {
     try {
         const cookies = (req as any).universalCookies.cookies;
@@ -99,99 +95,13 @@ app.get(`${appBasePath}/env`, (req, res, next) => {
     }
 });
 
-app.get(`${appBasePath}/api/meny`, (req, res) => {
-    const mainCacheContent = mainCache.get(mainCacheKey);
-    if (mainCacheContent) {
-        res.send(mainCacheContent);
-    } else {
-        // Fetch fom XP
-        fetch(`${process.env.API_XP_SERVICES_URL}/no.nav.navno/menu`, {
-            method: 'GET',
-        })
-            .then((xpRes) => {
-                if (xpRes.ok && xpRes.status === 200) {
-                    return xpRes;
-                } else {
-                    throw new Error(`Response ${xpRes.status}`);
-                }
-            })
-            .then((xpRes) => xpRes.json())
-            .then((xpData) => {
-                mainCache.set(mainCacheKey, xpData);
-                backupCache.set(backupCacheKey, xpData);
-                res.send(xpData);
-            })
-            .catch((err) => {
-                console.error('Failed to fetch decorator - ', err);
-            })
+// Api endpoints
+app.get(`${appBasePath}/api/meny`, getMenuHandler);
+app.get(`${appBasePath}/api/sok`, getSokHandler);
+app.get(`${appBasePath}/api/driftsmeldinger`, getDriftsmeldingerHandler);
+app.use(varselInnboksProxyUrl, varselInnboksProxyHandler);
 
-            // Use backup cache
-            .then(() => {
-                if (!res.headersSent) {
-                    console.log('Using backup cache');
-                    const backupCacheData = backupCache.get(backupCacheKey);
-                    if (backupCacheData) {
-                        mainCache.set(mainCacheKey, backupCacheData);
-                        res.send(backupCacheData);
-                    } else {
-                        throw new Error('Invalid cache');
-                    }
-                }
-            })
-            .catch((err) => {
-                console.error('Failed to use backup cache - ', err);
-            })
-
-            // Use backup mock
-            .then(() => {
-                if (!res.headersSent) {
-                    console.log('Using backup mock');
-                    if (mockMenu) {
-                        mainCache.set(mainCacheKey, mockMenu);
-                        res.send(mockMenu);
-                    } else {
-                        throw new Error('Mock is undefined');
-                    }
-                }
-            })
-            .catch((err) => {
-                console.error('Failed to use backup mock - ', err);
-            });
-    }
-});
-
-// Proxied requests
-const proxiedVarslerUrl = `${appBasePath}/api/varsler`;
-const proxiedDriftsmeldingerUrl = `${appBasePath}/api/driftsmeldinger`;
-const proxiedSokUrl = `${appBasePath}/api/sok`;
-
-app.use(
-    proxiedVarslerUrl,
-    createProxyMiddleware(proxiedVarslerUrl, {
-        target: `${process.env.API_VARSELINNBOKS_URL}`,
-        pathRewrite: { [`^${proxiedVarslerUrl}`]: '' },
-        changeOrigin: true,
-    })
-);
-
-app.use(
-    proxiedSokUrl,
-    createProxyMiddleware(proxiedSokUrl, {
-        target: `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`,
-        pathRewrite: { [`^${proxiedSokUrl}`]: '' },
-        changeOrigin: true,
-    })
-);
-
-app.use(
-    proxiedDriftsmeldingerUrl,
-    createProxyMiddleware(proxiedDriftsmeldingerUrl, {
-        target: `${process.env.API_XP_SERVICES_URL}/no.nav.navno/driftsmeldinger`,
-        pathRewrite: { [`^${proxiedDriftsmeldingerUrl}`]: '' },
-        changeOrigin: true,
-    })
-);
-
+// Nais endpoints
 app.use(`${appBasePath}/metrics`, (req, res) => {
     req.statusCode = 200;
     res.setHeader('Content-Type', getContentType());
@@ -200,6 +110,8 @@ app.use(`${appBasePath}/metrics`, (req, res) => {
 
 app.get(`${appBasePath}/isAlive`, (req, res) => res.sendStatus(200));
 app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));
+
+// Static files
 app.use(
     `${appBasePath}/`,
     express.static(buildPath, {
@@ -209,6 +121,9 @@ app.use(
                 res.header('Cache-Control', `max-age=${fiveMinutesInSeconds}`);
                 res.header('Pragma', `max-age=${fiveMinutesInSeconds}`);
             }
+
+            // Allow serving resources to sites using cross-origin isolation
+            res.header('Cross-Origin-Resource-Policy', 'cross-origin');
         },
     })
 );
@@ -230,14 +145,6 @@ const server = app.listen(PORT, () => console.log(`App listening on port: ${PORT
 
 const shutdown = () => {
     console.log('Retrived signal terminate , shutting down node service');
-
-    mainCache.flushAll();
-    backupCache.flushAll();
-    console.log('cache data flushed');
-
-    mainCache.close();
-    backupCache.close();
-    console.log('cache data closed');
 
     server.close(() => {
         console.log('Closed out remaining connections');
