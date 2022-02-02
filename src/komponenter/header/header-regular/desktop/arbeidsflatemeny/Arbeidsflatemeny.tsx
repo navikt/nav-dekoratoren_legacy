@@ -26,7 +26,7 @@ const Arbeidsflatemeny = () => {
                 {arbeidsflateLenker(XP_BASE_URL).map((lenke, index) => {
                     return (
                         <li
-                            aria-page={arbeidsflate === lenke.key ? 'true' : ''}
+                            aria-current={arbeidsflate === lenke.key ? 'page' : 'false'}
                             className={cls.element('liste-element')}
                             key={lenke.key}
                         >
