@@ -23,12 +23,11 @@ const Arbeidsflatemeny = () => {
 
     return (
         <nav className={cls.className} id={cls.className} aria-label="Velg brukergruppe">
-            <ul className={cls.element('topp-liste-rad')} role="tablist">
+            <ul className={cls.element('topp-liste-rad')}>
                 {arbeidsflateLenker(XP_BASE_URL).map((lenke, index) => {
                     return (
                         <li
-                            role="tab"
-                            aria-selected={arbeidsflate === lenke.key}
+                            aria-current={arbeidsflate === lenke.key ? 'page' : 'false'}
                             className={cls.element('liste-element')}
                             key={lenke.key}
                         >
