@@ -7,6 +7,7 @@ import { SkipLinkElement, SkipLinkProps } from 'komponenter/header/common/skipli
 import { AppState } from 'store/reducers';
 import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/meny/innhold/Hovedmeny';
 import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
+import { logAmplitudeEvent } from '../../../../utils/amplitude';
 import 'komponenter/header/common/skiplinks/Skiplinks.less';
 
 const stateSelector = (state: AppState) => ({
@@ -41,6 +42,10 @@ const Skiplinks = ({ simple }: Props) => {
         } else {
             dispatch(toggleSok());
         }
+    };
+
+    const logSkipLink = (key: string) => {
+        logAmplitudeEvent('skiplinks', { kilde: 'header', fritekst: key });
     };
 
     const skipLinks: SkipLinkProps[] = [
@@ -90,7 +95,16 @@ const Skiplinks = ({ simple }: Props) => {
         <nav id="site-skiplinks" className="site-skiplinks" aria-label="Hopp til innhold">
             <ul>
                 {skipLinks.map((link, index) => (
-                    <SkipLinkElement {...link} key={index} />
+                    <SkipLinkElement
+                        tekstId={link.tekstId}
+                        anchorId={link.anchorId}
+                        onClick={() => {
+                            logSkipLink(link.tekstId);
+                            link.onClick && link.onClick();
+                        }}
+                        className={link.className}
+                        key={index}
+                    />
                 ))}
             </ul>
         </nav>
