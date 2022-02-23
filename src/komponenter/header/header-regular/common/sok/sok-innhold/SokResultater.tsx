@@ -7,13 +7,12 @@ import { Sokeresultat, Soketreff } from '../utils';
 import { getKbId } from 'utils/keyboard-navigation/kb-navigation';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import Tekst from 'tekster/finn-tekst';
-import Lenke from 'nav-frontend-lenker';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { useDispatch } from 'react-redux';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import './SokResultater.less';
-import { Alert } from '@navikt/ds-react';
+import { Alert, Link } from '@navikt/ds-react';
 
 type Props = {
     writtenInput: string;
@@ -84,10 +83,10 @@ export const SokResultater = (props: Props) => {
                         {result.total} {finnTekst('sok-resultater', language)}
                     </div>
                     {result.total > itemsFiltered.length && (
-                        <Lenke className={'typo-element'} href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}>{`${finnTekst(
+                        <Link className={'typo-element'} href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}>{`${finnTekst(
                             'se-alle-treff',
                             language
-                        )} ("${writtenInput}")`}</Lenke>
+                        )} ("${writtenInput}")`}</Link>
                     )}
                 </div>
             ) : null}
