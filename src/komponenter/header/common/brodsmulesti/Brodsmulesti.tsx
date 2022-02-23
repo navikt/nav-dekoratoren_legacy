@@ -11,6 +11,7 @@ import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { getArbeidsflateContext } from '../../../common/arbeidsflate-lenker/arbeidsflate-lenker';
 import './Brodsmulesti.less';
+import { Link } from '@navikt/ds-react';
 
 export interface Breadcrumb {
     url: string;
@@ -53,20 +54,20 @@ export const Brodsmulesti = (props: Props) => {
         <nav className={cls.className} aria-label={finnTekst('brodsmulesti', language)} itemProp="breadcrumb">
             <ol>
                 <li className="typo-normal">
-                    <Lenke href={homeUrlMap[language]} className={cls.element('home')}>
+                    <Link href={homeUrlMap[language]} className={cls.element('home')}>
                         <Bilde asset={HomeIcon} className={cls.element('icon')} />
                         <span>nav.no</span>
                         <HoyreChevron />
-                    </Lenke>
+                    </Link>
                 </li>
                 {isLanguageNorwegian && (
                     <li className="typo-normal">
-                        <Lenke href={context.url}>
+                        <Link href={context.url}>
                             <span>
                                 <Tekst id={context.lenkeTekstId} />
                             </span>
                             <HoyreChevron />
-                        </Lenke>
+                        </Link>
                     </li>
                 )}
                 {!showAll && breadcrumbs.length > 2 && (
@@ -88,7 +89,7 @@ export const Brodsmulesti = (props: Props) => {
                     <li key={i} className="typo-normal" aria-current={i + 1 === breadcrumbsSliced.length && `page`}>
                         {i + 1 !== breadcrumbsSliced.length ? (
                             breadcrumb.handleInApp ? (
-                                <Lenke
+                                <Link
                                     href={breadcrumb.url}
                                     className={cls.element('transform')}
                                     onClick={(e) => {
@@ -98,12 +99,12 @@ export const Brodsmulesti = (props: Props) => {
                                 >
                                     <span>{breadcrumb.title}</span>
                                     <HoyreChevron />
-                                </Lenke>
+                                </Link>
                             ) : (
-                                <Lenke href={breadcrumb.url} className={cls.element('transform')}>
+                                <Link href={breadcrumb.url} className={cls.element('transform')}>
                                     <span>{breadcrumb.title}</span>
                                     <HoyreChevron />
-                                </Lenke>
+                                </Link>
                             )
                         ) : (
                             <span className={cls.element('transform')}>{breadcrumb.title}</span>
