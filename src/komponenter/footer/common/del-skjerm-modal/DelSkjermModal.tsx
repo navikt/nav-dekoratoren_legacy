@@ -7,9 +7,9 @@ import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
-import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './DelSkjermModal.less';
+import { Alert } from '@navikt/ds-react';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 
@@ -130,9 +130,9 @@ const DelSkjermModal = (props: Props) => {
                         </div>
                     </>
                 ) : (
-                    <AlertStripeFeil>
+                    <Alert variant="error">
                         <Tekst id={'delskjerm-modal-stengt'} />
-                    </AlertStripeFeil>
+                    </Alert>
                 )}
             </div>
         </Modal>
