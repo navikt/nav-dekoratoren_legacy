@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
-import Lenke from 'nav-frontend-lenker';
+import { Link } from '@navikt/ds-react';
 import BEMHelper from 'utils/bem';
 import { detect } from 'detect-browser';
 import { Undertekst } from 'nav-frontend-typografi';
@@ -29,16 +29,11 @@ const isBrowserSupported = (browser: BrowserInfo) => {
         if (!browser.version) {
             return true;
         }
-        const [majorCurrent, minorCurrent] = browser.version
-            .split('.')
-            .map(Number);
+        const [majorCurrent, minorCurrent] = browser.version.split('.').map(Number);
         if (!majorCurrent) {
             return true;
         }
-        return (
-            majorCurrent >= majorReq &&
-            (minorCurrent ? minorCurrent >= minorReq : true)
-        );
+        return majorCurrent >= majorReq && (minorCurrent ? minorCurrent >= minorReq : true);
     };
 
     switch (browser.name) {
@@ -93,9 +88,9 @@ export const BrowserSupportMsg = () => {
                 <div className={cls.element('tekst')}>
                     <Undertittel>
                         <Tekst id={'browser-utdatert-msg'} />{' '}
-                        <Lenke href={linkUrl}>
+                        <Link href={linkUrl}>
                             <Tekst id={'browser-utdatert-lenke'} />
-                        </Lenke>
+                        </Link>
                     </Undertittel>
                     {browserSpecificMsg && (
                         <Undertekst>
@@ -104,10 +99,7 @@ export const BrowserSupportMsg = () => {
                         </Undertekst>
                     )}
                 </div>
-                <LukkKnapp
-                    onClick={closeWarning}
-                    ariaLabel={'Lukk advarsel for nettleser'}
-                />
+                <LukkKnapp onClick={closeWarning} ariaLabel={'Lukk advarsel for nettleser'} />
             </div>
         </div>
     );
