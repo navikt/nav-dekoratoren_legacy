@@ -6,10 +6,9 @@ import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
-import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './DelSkjermModal.less';
-import { Alert } from '@navikt/ds-react';
+import { Accordion, Alert } from '@navikt/ds-react';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 
@@ -31,6 +30,7 @@ const DelSkjermModal = (props: Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(feilmelding);
+    const [accordionOpen, setAccordionOpen] = useState(false);
 
     // Vergic config
     const w = window as any;
@@ -97,17 +97,24 @@ const DelSkjermModal = (props: Props) => {
                     <Normaltekst>
                         <Tekst id={'delskjerm-modal-beskrivelse'} />
                     </Normaltekst>
-                    <Lesmerpanel apneTekst={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
-                        <ul>
-                            {[...Array(3)].map((_, i) => (
-                                <li key={i}>
-                                    <Normaltekst>
-                                        <Tekst id={`delskjerm-modal-hjelpetekst-${i}`} />
-                                    </Normaltekst>
-                                </li>
-                            ))}
-                        </ul>
-                    </Lesmerpanel>
+                    <Accordion>
+                        <Accordion.Item open={accordionOpen}>
+                            <Accordion.Header onClick={() => setAccordionOpen(!accordionOpen)}>
+                                {finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}{' '}
+                            </Accordion.Header>
+                            <Accordion.Content>
+                                <ul>
+                                    {[...Array(3)].map((_, i) => (
+                                        <li key={i}>
+                                            <Normaltekst>
+                                                <Tekst id={`delskjerm-modal-hjelpetekst-${i}`} />
+                                            </Normaltekst>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Accordion.Content>
+                        </Accordion.Item>
+                    </Accordion>
                 </div>
                 {isOpen ? (
                     <>
