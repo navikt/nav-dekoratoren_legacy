@@ -32,7 +32,7 @@ export const DelSkjermLenke = () => {
                     <LenkeMedIkon
                         onClick={openModal}
                         tekst={<Tekst id="footer-del-skjerm" />}
-                        ikon={<DelSkjerm style={{ height: '24px', width: '24px' }} />}
+                        ikon={<DelSkjerm style={{ height: '24px', width: '24px', stroke: '#0067c5' }} />}
                     />
                 </Normaltekst>
             </li>

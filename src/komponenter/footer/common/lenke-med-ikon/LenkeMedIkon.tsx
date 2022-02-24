@@ -5,6 +5,7 @@ import Lenke from 'nav-frontend-lenker';
 import BEMHelper from 'utils/bem';
 
 import './LenkeMedIkon.less';
+import { Link } from '@navikt/ds-react';
 
 interface Props {
     className?: string;
@@ -19,7 +20,7 @@ interface Props {
 const LenkeMedIkon = ({ className, href = '#', onClick, ikon, tekst, venstrestiltIkon = false, id = '' }: Props) => {
     const cls = BEMHelper('lenke-med-ikon');
     return (
-        <Lenke
+        <Link
             className={classnames(className, cls.className, {
                 [cls.modifier('venstrestiltIkon')]: venstrestiltIkon,
             })}
@@ -30,7 +31,7 @@ const LenkeMedIkon = ({ className, href = '#', onClick, ikon, tekst, venstrestil
         >
             <span>{tekst}</span>
             <span className={cls.element('ikon')}>{ikon}</span>
-        </Lenke>
+        </Link>
     );
 };
 export default LenkeMedIkon;
