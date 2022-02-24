@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import Lenke from 'nav-frontend-lenker';
+import { Link } from '@navikt/ds-react';
 import { Bilde } from '../../../common/bilde/Bilde';
 import HomeIcon from 'ikoner/home.svg';
 import { HoyreChevron } from 'nav-frontend-chevron';
@@ -11,7 +11,6 @@ import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { getArbeidsflateContext } from '../../../common/arbeidsflate-lenker/arbeidsflate-lenker';
 import './Brodsmulesti.less';
-import { Link } from '@navikt/ds-react';
 
 export interface Breadcrumb {
     url: string;

@@ -1,11 +1,10 @@
 import * as React from 'react';
 import classnames from 'classnames';
-import Lenke from 'nav-frontend-lenker';
+import { Link } from '@navikt/ds-react';
 
 import BEMHelper from 'utils/bem';
 
 import './LenkeMedIkon.less';
-import { Link } from '@navikt/ds-react';
 
 interface Props {
     className?: string;
