@@ -2,7 +2,7 @@ import React from 'react';
 import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
 import { Normaltekst } from 'nav-frontend-typografi';
-import Panel from 'nav-frontend-paneler';
+import { Panel } from '@navikt/ds-react';
 import Lock from 'ikoner/meny/Lock';
 import './MinsideLockMsg.less';
 
