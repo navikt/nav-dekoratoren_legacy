@@ -2,14 +2,13 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Modal from 'nav-frontend-modal';
 import { Input } from 'nav-frontend-skjema';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './DelSkjermModal.less';
-import { Alert } from '@navikt/ds-react';
+import { Alert, BodyLong, Heading } from '@navikt/ds-react';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 
@@ -90,20 +89,20 @@ const DelSkjermModal = (props: Props) => {
                 <Bilde className={'delskjerm__veileder'} asset={veileder} altText={''} />
             </div>
             <div className={'delskjerm__content'}>
-                <Undertittel>
+                <Heading size="medium" level="2">
                     <Tekst id={'delskjerm-modal-overskrift'} />
-                </Undertittel>
+                </Heading>
                 <div className={'delskjerm__beskrivelse typo-normal'}>
-                    <Normaltekst>
+                    <BodyLong>
                         <Tekst id={'delskjerm-modal-beskrivelse'} />
-                    </Normaltekst>
+                    </BodyLong>
                     <Lesmerpanel apneTekst={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
                         <ul>
                             {[...Array(3)].map((_, i) => (
                                 <li key={i}>
-                                    <Normaltekst>
+                                    <BodyLong>
                                         <Tekst id={`delskjerm-modal-hjelpetekst-${i}`} />
-                                    </Normaltekst>
+                                    </BodyLong>
                                 </li>
                             ))}
                         </ul>
