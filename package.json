@@ -52,6 +52,7 @@
         "lodash.debounce": "^4.0.8",
         "lodash.throttle": "^4.1.1",
         "nav-frontend-alertstriper": "^4.0.1",
+        "nav-frontend-alertstriper-style": "^3.0.1",
         "nav-frontend-chevron": "^1.0.24",
         "nav-frontend-chevron-style": "^1.0.2",
         "nav-frontend-core": "^5.0.11",
