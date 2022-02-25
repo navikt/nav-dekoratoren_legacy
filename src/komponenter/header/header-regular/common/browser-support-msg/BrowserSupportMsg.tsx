@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Detail, Heading } from '@navikt/ds-react';
+
 import Tekst from 'tekster/finn-tekst';
 import Lenke from 'nav-frontend-lenker';
 import BEMHelper from 'utils/bem';
 import { detect } from 'detect-browser';
-import { Undertekst } from 'nav-frontend-typografi';
 import { BrowserInfo } from 'detect-browser';
 import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
 import { useCookies } from 'react-cookie';
@@ -29,16 +29,11 @@ const isBrowserSupported = (browser: BrowserInfo) => {
         if (!browser.version) {
             return true;
         }
-        const [majorCurrent, minorCurrent] = browser.version
-            .split('.')
-            .map(Number);
+        const [majorCurrent, minorCurrent] = browser.version.split('.').map(Number);
         if (!majorCurrent) {
             return true;
         }
-        return (
-            majorCurrent >= majorReq &&
-            (minorCurrent ? minorCurrent >= minorReq : true)
-        );
+        return majorCurrent >= majorReq && (minorCurrent ? minorCurrent >= minorReq : true);
     };
 
     switch (browser.name) {
@@ -91,23 +86,20 @@ export const BrowserSupportMsg = () => {
                     <Bilde altText={''} asset={ikon} />
                 </div>
                 <div className={cls.element('tekst')}>
-                    <Undertittel>
+                    <Heading level="2" size="small">
                         <Tekst id={'browser-utdatert-msg'} />{' '}
                         <Lenke href={linkUrl}>
                             <Tekst id={'browser-utdatert-lenke'} />
                         </Lenke>
-                    </Undertittel>
+                    </Heading>
                     {browserSpecificMsg && (
-                        <Undertekst>
+                        <Detail>
                             <Tekst id={'browser-utdatert-din-nettleser'} />
                             {browserSpecificMsg}
-                        </Undertekst>
+                        </Detail>
                     )}
                 </div>
-                <LukkKnapp
-                    onClick={closeWarning}
-                    ariaLabel={'Lukk advarsel for nettleser'}
-                />
+                <LukkKnapp onClick={closeWarning} ariaLabel={'Lukk advarsel for nettleser'} />
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BodyShort } from '@navikt/ds-react';
+import { Ingress } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
 import AlternativJa from './feedback-questions/AlternativJa';
@@ -29,11 +29,11 @@ const Feedback = () => {
             <div className="feedback-container">
                 {state === 'lukket' && (
                     <div className="feedback-content" role="group" aria-labelledby="feedback-text">
-                        <BodyShort>
-                            <label id="feedback-text" className="feedback-text">
+                        <Ingress>
+                            <label id="feedback-text">
                                 <Tekst id="fant-du-det-du-lette-etter" />
                             </label>
-                        </BodyShort>
+                        </Ingress>
                         <div className="buttons-container">
                             <Knapp className="knapp" onClick={handleJa}>
                                 <Tekst id="svarknapp-ja" />

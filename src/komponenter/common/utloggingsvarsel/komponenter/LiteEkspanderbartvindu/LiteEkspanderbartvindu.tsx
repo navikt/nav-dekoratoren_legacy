@@ -3,17 +3,17 @@ import Close from '../../../../../ikoner/varsler/Close';
 import BEMHelper from '../../../../../utils/bem';
 import Nedteller, { TypografiTypes } from '../Nedteller';
 import CollapseUp from '../../../../../ikoner/varsler/CollapseUp';
-import { Normaltekst } from 'nav-frontend-typografi';
 import './liteEkspanderbartvindu.less';
 import { useCookies } from 'react-cookie';
 import {
     utloggingsvarselEkspander,
     UtloggingsvarselState,
-    VarselEkspandert
+    VarselEkspandert,
 } from '../../../../../store/reducers/utloggingsvarsel-duck';
 import { CookieName, cookieOptions } from '../../../../../server/cookieSettings';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../store/reducers';
+import { BodyShort } from '@navikt/ds-react';
 
 interface Props {
     setModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -52,18 +52,19 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
         }
     };
 
-    const ekspanderUtloggingsvarsel =
-        (setCookieValue: Partial<UtloggingsvarselState> = { varselState: VarselEkspandert.EKSPANDERT }) => {
-            dispatch(utloggingsvarselEkspander());
-            setCookie(
-                CookieName.DECORATOR_LOGOUT_WARNING,
-                {
-                    ...utloggingsvarsel,
-                    ...setCookieValue
-                } as UtloggingsvarselState,
-                cookieOptions);
-        };
-
+    const ekspanderUtloggingsvarsel = (
+        setCookieValue: Partial<UtloggingsvarselState> = { varselState: VarselEkspandert.EKSPANDERT }
+    ) => {
+        dispatch(utloggingsvarselEkspander());
+        setCookie(
+            CookieName.DECORATOR_LOGOUT_WARNING,
+            {
+                ...utloggingsvarsel,
+                ...setCookieValue,
+            } as UtloggingsvarselState,
+            cookieOptions
+        );
+    };
 
     return (
         <nav className={cls.className} aria-hidden={!htmlUUEnable}>
@@ -73,7 +74,7 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
                     <>
                         <div className={cls.element('btn-container')}>
                             <button
-                                id='open-utloggingsvarsel'
+                                id="open-utloggingsvarsel"
                                 tabIndex={htmlUUEnable ? 0 : -1}
                                 onKeyDownCapture={(event) => keyHandler(event, 'open')}
                                 onClick={() => {
@@ -83,15 +84,15 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
                                 }}
                             >
                                 <span className={cls.element('btn-content')}>
-                                    <Normaltekst>Åpne</Normaltekst>
-                                    <CollapseUp width='1.5rem' height='1.5rem' />
+                                    <BodyShort>Åpne</BodyShort>
+                                    <CollapseUp width="1.5rem" height="1.5rem" />
                                 </span>
                             </button>
                         </div>
                     </>
                     <div className={cls.element('btn-container')}>
                         <button
-                            id='close-utloggingsvarsel'
+                            id="close-utloggingsvarsel"
                             tabIndex={htmlUUEnable ? 0 : -1}
                             onKeyDownCapture={(event) => keyHandler(event, 'close')}
                             onClick={() => {
@@ -99,13 +100,13 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
                                 ekspanderUtloggingsvarsel({
                                     ...utloggingsvarsel,
                                     varselState: VarselEkspandert.EKSPANDERT,
-                                    modalLukketAvBruker: true
+                                    modalLukketAvBruker: true,
                                 });
                             }}
                         >
                             <span className={cls.element('btn-content')}>
-                                <Normaltekst>Lukk</Normaltekst>
-                                <Close width='1.5rem' height='1.5rem' />
+                                <BodyShort>Lukk</BodyShort>
+                                <Close width="1.5rem" height="1.5rem" />
                             </span>
                         </button>
                     </div>
