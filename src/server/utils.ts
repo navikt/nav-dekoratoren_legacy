@@ -54,8 +54,8 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
             PARAMS: {
                 CONTEXT: chosenContext,
                 SIMPLE: req.query.simple === 'true',
-                SIMPLE_HEADER: req.query.header === 'true',
-                SIMPLE_FOOTER: req.query.footer === 'true',
+                SIMPLE_HEADER: req.query.header === 'true' || req.query.simpleHeader === 'true', // 'header'
+                SIMPLE_FOOTER: req.query.footer === 'true' || req.query.simpleFooter === 'true', // and 'footer' parameters are kept for legacy compatibility
                 ENFORCE_LOGIN: req.query.enforceLogin === 'true',
                 REDIRECT_TO_APP: req.query.redirectToApp === 'true',
                 REDIRECT_TO_URL: req.query.redirectToUrl as string,
