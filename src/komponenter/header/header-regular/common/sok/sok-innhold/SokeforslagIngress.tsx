@@ -1,6 +1,6 @@
 import React from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
 import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
+import { Heading } from '@navikt/ds-react';
 
 interface Props {
     className: string;
@@ -16,13 +16,17 @@ const SokeforslagIngress = (props: Props) => {
                         <HoyreChevron />
                     </div>
                     <div className="overskrift">
-                        <Undertittel>{displayName}</Undertittel>
+                        <Heading level="2" size="small">
+                            {displayName}
+                        </Heading>
                     </div>
                 </div>
             </div>
             <div className="media-tablet-desktop sokeforslag-ingress">
                 <div className="overskrift">
-                    <Undertittel>{displayName}</Undertittel>
+                    <Heading level="2" size="small">
+                        {displayName}
+                    </Heading>
                 </div>
             </div>
         </>
