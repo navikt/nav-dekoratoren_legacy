@@ -1,6 +1,5 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useLayoutEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import Modal from 'nav-frontend-modal';
 import { Input } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
@@ -9,7 +8,7 @@ import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './DelSkjermModal.less';
-import { Alert } from '@navikt/ds-react';
+import { Alert, Modal } from '@navikt/ds-react';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 
@@ -78,63 +77,68 @@ const DelSkjermModal = (props: Props) => {
         element.style.backgroundColor = 'rgba(50, 65, 79, 0.8)'; // #32414f
     };
 
+    useLayoutEffect(() => {
+        setOverlayCss();
+    }, [isOpen]);
+
     return (
         <Modal
-            onAfterOpen={setOverlayCss}
-            isOpen={props.isOpen}
+            open={props.isOpen}
             className={`decorator-wrapper ${classname}`}
             contentLabel={'Skjermdeling'}
-            onRequestClose={props.onClose}
+            onClose={props.onClose}
         >
-            <div className={'delskjerm__header'}>
-                <Bilde className={'delskjerm__veileder'} asset={veileder} altText={''} />
-            </div>
-            <div className={'delskjerm__content'}>
-                <Undertittel>
-                    <Tekst id={'delskjerm-modal-overskrift'} />
-                </Undertittel>
-                <div className={'delskjerm__beskrivelse typo-normal'}>
-                    <Normaltekst>
-                        <Tekst id={'delskjerm-modal-beskrivelse'} />
-                    </Normaltekst>
-                    <Lesmerpanel apneTekst={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
-                        <ul>
-                            {[...Array(3)].map((_, i) => (
-                                <li key={i}>
-                                    <Normaltekst>
-                                        <Tekst id={`delskjerm-modal-hjelpetekst-${i}`} />
-                                    </Normaltekst>
-                                </li>
-                            ))}
-                        </ul>
-                    </Lesmerpanel>
+            <Modal.Content>
+                <div className={'delskjerm__header'}>
+                    <Bilde className={'delskjerm__veileder'} asset={veileder} altText={''} />
                 </div>
-                {isOpen ? (
-                    <>
-                        <Input
-                            name={'code'}
-                            label={label}
-                            feil={submitted && error}
-                            value={code}
-                            onChange={onChange}
-                            maxLength={5}
-                            bredde={'M'}
-                        />
-                        <div className={'delskjerm__knapper'}>
-                            <Hovedknapp onClick={onClick}>
-                                <Tekst id={'delskjerm-modal-start'} />
-                            </Hovedknapp>
-                            <Flatknapp onClick={props.onClose}>
-                                <Tekst id={'delskjerm-modal-avbryt'} />
-                            </Flatknapp>
-                        </div>
-                    </>
-                ) : (
-                    <Alert variant="error">
-                        <Tekst id={'delskjerm-modal-stengt'} />
-                    </Alert>
-                )}
-            </div>
+                <div className={'delskjerm__content'}>
+                    <Undertittel>
+                        <Tekst id={'delskjerm-modal-overskrift'} />
+                    </Undertittel>
+                    <div className={'delskjerm__beskrivelse typo-normal'}>
+                        <Normaltekst>
+                            <Tekst id={'delskjerm-modal-beskrivelse'} />
+                        </Normaltekst>
+                        <Lesmerpanel apneTekst={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
+                            <ul>
+                                {[...Array(3)].map((_, i) => (
+                                    <li key={i}>
+                                        <Normaltekst>
+                                            <Tekst id={`delskjerm-modal-hjelpetekst-${i}`} />
+                                        </Normaltekst>
+                                    </li>
+                                ))}
+                            </ul>
+                        </Lesmerpanel>
+                    </div>
+                    {isOpen ? (
+                        <>
+                            <Input
+                                name={'code'}
+                                label={label}
+                                feil={submitted && error}
+                                value={code}
+                                onChange={onChange}
+                                maxLength={5}
+                                bredde={'M'}
+                            />
+                            <div className={'delskjerm__knapper'}>
+                                <Hovedknapp onClick={onClick}>
+                                    <Tekst id={'delskjerm-modal-start'} />
+                                </Hovedknapp>
+                                <Flatknapp onClick={props.onClose}>
+                                    <Tekst id={'delskjerm-modal-avbryt'} />
+                                </Flatknapp>
+                            </div>
+                        </>
+                    ) : (
+                        <Alert variant="error">
+                            <Tekst id={'delskjerm-modal-stengt'} />
+                        </Alert>
+                    )}
+                </div>
+            </Modal.Content>
         </Modal>
     );
 };

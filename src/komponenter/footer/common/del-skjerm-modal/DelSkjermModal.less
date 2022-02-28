@@ -1,5 +1,4 @@
 @import (reference) '../../../../styling-variabler.less';
-@import (reference) '~nav-frontend-modal-style/src/index';
 @import (reference) '~nav-frontend-hjelpetekst-style';
 
 .lesMerPanel {
@@ -25,9 +24,7 @@
 }
 
 .delskjerm {
-    &__modal.modal {
-        all: unset;
-        .modal;
+    &__modal.navds-modal {
         max-width: 35rem;
         overflow: visible;
     }
