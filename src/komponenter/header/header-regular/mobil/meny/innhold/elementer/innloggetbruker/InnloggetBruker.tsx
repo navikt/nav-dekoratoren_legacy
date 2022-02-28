@@ -3,9 +3,10 @@ import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
-import { Undertittel, Ingress } from 'nav-frontend-typografi';
 import LoggutIkonMobil from 'ikoner/meny/LoggutIkonMobil';
+import { Heading, Ingress } from '@navikt/ds-react';
 import { getLogOutUrl } from 'utils/login';
+
 import './InnloggetBruker.less';
 
 const cls = BEMHelper('innloggetbruker');
@@ -21,12 +22,13 @@ const loggut = (logoutUrl: string) => {
 
 const InnloggetBruker = () => {
     const { innlogget, environment } = useSelector(stateSelector);
+
     return innlogget.data.authenticated ? (
         <div className={cls.className}>
             <div className={cls.element('label')}>
-                <Undertittel>
+                <Heading level="2" size="small">
                     <Tekst id="logget-inn-som" />
-                </Undertittel>
+                </Heading>
             </div>
             <div className={cls.element('bruker')}>
                 <Ingress>{innlogget.data.name.toLowerCase()}</Ingress>

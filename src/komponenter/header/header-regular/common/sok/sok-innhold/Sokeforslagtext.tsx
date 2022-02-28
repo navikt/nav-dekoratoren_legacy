@@ -1,5 +1,5 @@
 import React from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyLong } from '@navikt/ds-react';
 
 const Sokeforslagtext = ({ highlight }: { highlight?: string }) => {
     const highlightFiltered = highlight
@@ -9,13 +9,13 @@ const Sokeforslagtext = ({ highlight }: { highlight?: string }) => {
 
     return (
         <div className="sok-resultat-listItem-text">
-            <Normaltekst>
+            <BodyLong>
                 <span
                     dangerouslySetInnerHTML={{
                         __html: highlightFiltered || '',
                     }}
                 />
-            </Normaltekst>
+            </BodyLong>
         </div>
     );
 };

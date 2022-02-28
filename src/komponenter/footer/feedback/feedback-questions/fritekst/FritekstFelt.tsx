@@ -5,8 +5,8 @@ import { useDebounce } from '../../../../../utils/hooks/useDebounce';
 import Tekst, { finnTekst } from '../../../../../tekster/finn-tekst';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../../../store/reducers';
-import { Ingress } from 'nav-frontend-typografi';
 import './FritekstFelt.less';
+import { Ingress } from '@navikt/ds-react';
 
 export const MAX_LENGTH = 200;
 

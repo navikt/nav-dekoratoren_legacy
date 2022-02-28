@@ -1,7 +1,7 @@
 import React from 'react';
+import { BodyShort } from '@navikt/ds-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { AnalyticsCategory } from 'utils/analytics';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
@@ -54,9 +54,9 @@ const Arbeidsflatemeny = () => {
                                 }}
                             >
                                 <div className={cls.element('lenke-inner', arbeidsflate === lenke.key ? 'active' : '')}>
-                                    <Normaltekst>
+                                    <BodyShort>
                                         <Tekst id={lenke.lenkeTekstId} />
-                                    </Normaltekst>
+                                    </BodyShort>
                                 </div>
                             </LenkeMedSporing>
                         </li>

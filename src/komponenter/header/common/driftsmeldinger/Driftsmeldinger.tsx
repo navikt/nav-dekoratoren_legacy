@@ -1,11 +1,11 @@
 import React from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { AnalyticsCategory } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import './Driftsmeldinger.less';
+import { BodyLong } from '@navikt/ds-react';
 
 export const Driftsmeldinger = () => {
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
@@ -28,7 +28,7 @@ export const Driftsmeldinger = () => {
                             }}
                         >
                             <span className="message-icon">{melding.type && <Icon type={melding.type} />}</span>
-                            <Normaltekst className="message-text">{melding.heading}</Normaltekst>
+                            <BodyLong className="message-text">{melding.heading}</BodyLong>
                         </LenkeMedSporing>
                     );
                 })}
