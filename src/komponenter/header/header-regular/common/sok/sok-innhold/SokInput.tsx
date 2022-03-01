@@ -1,12 +1,11 @@
 import Tekst from 'tekster/finn-tekst';
 import { finnTekst } from 'tekster/finn-tekst';
-import { Input } from 'nav-frontend-skjema';
 import SokKnapper from './SokKnapper';
 import React from 'react';
 import { Locale } from 'store/reducers/language-duck';
 import { verifyWindowObj } from 'utils/Environment';
 import './SokInput.less';
-import { Heading } from '@navikt/ds-react';
+import { Heading, TextField } from '@navikt/ds-react';
 
 type Props = {
     className: string;
@@ -33,14 +32,16 @@ export const SokInput = (props: Props) => {
                 </Heading>
             </div>
             <div className="sok-input-container">
-                <Input
+                <TextField
                     id={id}
                     onChange={(e) => onChange(e.target.value)}
                     className={className}
                     value={inputValue}
                     placeholder={finnTekst('sok-input-placeholder', language)}
                     aria-label={finnTekst('sok-input-placeholder', language)}
-                    type="search"
+                    type="text"
+                    label={finnTekst('sok-input-placeholder', language)}
+                    hideLabel
                 />
                 <SokKnapper writtenInput={writtenInput} onReset={onReset} id={id} />
             </div>

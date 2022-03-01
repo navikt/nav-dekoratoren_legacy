@@ -1,8 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Alert, BodyLong, Heading } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
+import { Alert, BodyLong, Heading, TextField } from '@navikt/ds-react';
 import Modal from 'nav-frontend-modal';
-import { Input } from 'nav-frontend-skjema';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
@@ -110,14 +109,13 @@ const DelSkjermModal = (props: Props) => {
                 </div>
                 {isOpen ? (
                     <>
-                        <Input
+                        <TextField
                             name={'code'}
                             label={label}
-                            feil={submitted && error}
+                            error={submitted && error}
                             value={code}
                             onChange={onChange}
                             maxLength={5}
-                            bredde={'M'}
                         />
                         <div className={'delskjerm__knapper'}>
                             <Hovedknapp onClick={onClick}>
