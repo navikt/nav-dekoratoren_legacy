@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { Alert, BodyLong, Heading } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
 import Modal from 'nav-frontend-modal';
 import { Input } from 'nav-frontend-skjema';
@@ -8,7 +9,6 @@ import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './DelSkjermModal.less';
-import { Alert, BodyLong, Heading } from '@navikt/ds-react';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 
