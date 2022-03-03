@@ -61,7 +61,7 @@ export const LenkeMedSporing = ({
                         {withLock ? (
                             <Lock height={'18px'} width={'18px'} />
                         ) : (
-                            withChevron && <Next fr="" className={'chevronlenke__chevron'} />
+                            withChevron && <Next className={'chevronlenke__chevron'} />
                         )}
                     </div>
                 )}
