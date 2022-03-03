@@ -1,20 +1,22 @@
 import React from 'react';
-import Tekst from 'tekster/finn-tekst';
-import { Undertekst, Undertittel } from 'nav-frontend-typografi';
-import { analyticsEvent } from 'utils/analytics';
-import BEMHelper from 'utils/bem';
+import { BodyLong, Heading } from '@navikt/ds-react';
+import { useDispatch } from 'react-redux';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
 import { HoyreChevron } from 'nav-frontend-chevron';
-import { useDispatch } from 'react-redux';
+import { useCookies } from 'react-cookie';
+
+import Tekst from 'tekster/finn-tekst';
+import { analyticsEvent } from 'utils/analytics';
+import BEMHelper from 'utils/bem';
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { Locale } from 'store/reducers/language-duck';
-import { useCookies } from 'react-cookie';
 import { CookieName, cookieOptions } from '../../../server/cookieSettings';
 import { erNavDekoratoren } from 'utils/Environment';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { finnTekst } from 'tekster/finn-tekst';
 import { AnalyticsEventArgs } from 'utils/analytics';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
+
 import './ArbeidsflateLenkepanel.less';
 
 interface Props {
@@ -47,11 +49,13 @@ const ArbeidsflateLenkepanel = ({ lenke, language, analyticsEventArgs, enableCom
             border={true}
         >
             <div className={cls.element('innhold')}>
-                <Undertittel className={'lenkepanel__heading'}>
+                <Heading level="2" size="small" className={'lenkepanel__heading'}>
                     {enableCompactView && <HoyreChevron className={cls.element('compact-chevron')} />}
                     <Tekst id={lenke.lenkeTekstId} />
-                </Undertittel>
-                <Undertekst className={cls.element('stikkord')}>{finnTekst(lenke.stikkordId, language)}</Undertekst>
+                </Heading>
+                <BodyLong className={cls.element('stikkord')} size="small">
+                    {finnTekst(lenke.stikkordId, language)}
+                </BodyLong>
             </div>
         </LenkepanelBase>
     );

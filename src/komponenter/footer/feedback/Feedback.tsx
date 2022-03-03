@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Ingress } from 'nav-frontend-typografi';
+import { Ingress } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
 import AlternativJa from './feedback-questions/AlternativJa';

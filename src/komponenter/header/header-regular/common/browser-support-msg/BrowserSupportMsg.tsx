@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Detail, Heading } from '@navikt/ds-react';
+
 import Tekst from 'tekster/finn-tekst';
 import { Link } from '@navikt/ds-react';
 import BEMHelper from 'utils/bem';
 import { detect } from 'detect-browser';
-import { Undertekst } from 'nav-frontend-typografi';
 import { BrowserInfo } from 'detect-browser';
 import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
 import { useCookies } from 'react-cookie';
@@ -86,17 +86,17 @@ export const BrowserSupportMsg = () => {
                     <Bilde altText={''} asset={ikon} />
                 </div>
                 <div className={cls.element('tekst')}>
-                    <Undertittel>
+                    <Heading level="2" size="small">
                         <Tekst id={'browser-utdatert-msg'} />{' '}
                         <Link href={linkUrl}>
                             <Tekst id={'browser-utdatert-lenke'} />
                         </Link>
-                    </Undertittel>
+                    </Heading>
                     {browserSpecificMsg && (
-                        <Undertekst>
+                        <Detail>
                             <Tekst id={'browser-utdatert-din-nettleser'} />
                             {browserSpecificMsg}
-                        </Undertekst>
+                        </Detail>
                     )}
                 </div>
                 <LukkKnapp onClick={closeWarning} ariaLabel={'Lukk advarsel for nettleser'} />

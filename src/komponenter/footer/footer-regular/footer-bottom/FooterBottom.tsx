@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
 import { AnalyticsCategory } from 'utils/analytics';
 import { AppState } from 'store/reducers';
@@ -13,6 +12,7 @@ import { ChatbotWrapper } from 'komponenter/footer/chatbot/ChatbotWrapper';
 import { DelSkjermLenke } from 'komponenter/footer/common/del-skjerm-lenke/DelSkjermLenke';
 import Logo from 'ikoner/meny/nav-logo-black.svg';
 import './FooterBottom.less';
+import { BodyShort } from '@navikt/ds-react';
 
 const FooterBottom = () => {
     const cls = BEMHelper('footer-bottom-content');
@@ -45,9 +45,9 @@ const FooterBottom = () => {
                 </div>
                 <div className={cls.element('bottom-lenker')}>
                     <div>
-                        <Normaltekst className="bottom-tekst">
+                        <BodyShort className="bottom-tekst">
                             <Tekst id="footer-arbeids-og-veldferdsetaten" />
-                        </Normaltekst>
+                        </BodyShort>
                         <ul className={cls.element('personvern-lenker')}>
                             <FooterLenker node={personvernNode} />
                             {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
