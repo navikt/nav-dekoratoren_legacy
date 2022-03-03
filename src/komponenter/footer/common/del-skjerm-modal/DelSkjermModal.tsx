@@ -85,7 +85,7 @@ const DelSkjermModal = (props: Props) => {
         <Modal
             open={props.isOpen}
             className={`decorator-wrapper ${classname}`}
-            contentLabel={'Skjermdeling'} // setter aria-label på ReactModal, gir advarsel
+            aria-label={'Skjermdeling'}
             onClose={props.onClose}
         >
             <Modal.Content>
