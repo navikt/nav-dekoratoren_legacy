@@ -1,5 +1,5 @@
 import React from 'react';
-import Lenke from 'nav-frontend-lenker';
+import { Link } from '@navikt/ds-react';
 import VenstreChevron from 'nav-frontend-chevron/lib/venstre-chevron';
 import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
@@ -16,7 +16,7 @@ const Lukkundermeny = (props: Props) => {
     const cls = BEMHelper(props.className);
     return (
         <div className={cls.element('lukk-undermeny')}>
-            <Lenke
+            <Link
                 href="https://nav.no"
                 onClick={(event) => {
                     event.preventDefault();
@@ -27,7 +27,7 @@ const Lukkundermeny = (props: Props) => {
                 <Label>
                     <Tekst id="tilbake-til-overskrift" />
                 </Label>
-            </Lenke>
+            </Link>
         </div>
     );
 };
