@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from '@navikt/ds-react';
-import { Undertittel } from 'nav-frontend-typografi/';
 import VenstreChevron from 'nav-frontend-chevron/lib/venstre-chevron';
 import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';

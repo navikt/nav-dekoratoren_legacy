@@ -1,10 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Detail, Heading } from '@navikt/ds-react';
+import { Detail, Heading, Link } from '@navikt/ds-react';
 
 import Tekst from 'tekster/finn-tekst';
-import { Link } from '@navikt/ds-react';
 import BEMHelper from 'utils/bem';
 import { detect } from 'detect-browser';
 import { BrowserInfo } from 'detect-browser';
