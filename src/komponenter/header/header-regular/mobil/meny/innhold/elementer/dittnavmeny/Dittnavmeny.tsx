@@ -2,14 +2,11 @@ import React from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import BEMHelper from 'utils/bem';
 import Listelement from '../Listelement';
-import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
+import { Next } from '@navikt/ds-icons';
 
 interface Props {
     minsideLenker: MenyNode;
-    openMeny: (
-        event: React.MouseEvent<HTMLAnchorElement>,
-        menyElement: MenyNode
-    ) => void;
+    openMeny: (event: React.MouseEvent<HTMLAnchorElement>, menyElement: MenyNode) => void;
     className: string;
 }
 
@@ -18,26 +15,14 @@ const Dittnavmeny = (props: Props) => {
 
     return (
         <ul className={cls.element('meny', 'minsidelist')}>
-            {props.minsideLenker.children.map(
-                (menyElement: MenyNode, index: number) => (
-                    <Listelement
-                        className={cls.className}
-                        classElement="text-element"
-                        key={index}
-                    >
-                        <a
-                            className="lenke"
-                            href="https://nav.no"
-                            onClick={(event) =>
-                                props.openMeny(event, menyElement)
-                            }
-                        >
-                            {menyElement.displayName}
-                            <HoyreChevron />
-                        </a>
-                    </Listelement>
-                )
-            )}
+            {props.minsideLenker.children.map((menyElement: MenyNode, index: number) => (
+                <Listelement className={cls.className} classElement="text-element" key={index}>
+                    <a className="lenke" href="https://nav.no" onClick={(event) => props.openMeny(event, menyElement)}>
+                        {menyElement.displayName}
+                        <Next />
+                    </a>
+                </Listelement>
+            ))}
         </ul>
     );
 };
