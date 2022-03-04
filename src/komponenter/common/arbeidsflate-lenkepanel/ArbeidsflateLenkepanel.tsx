@@ -2,7 +2,7 @@ import React from 'react';
 import { BodyLong, Heading } from '@navikt/ds-react';
 import { useDispatch } from 'react-redux';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
-import { HoyreChevron } from 'nav-frontend-chevron';
+import { Next } from '@navikt/ds-icons';
 import { useCookies } from 'react-cookie';
 
 import Tekst from 'tekster/finn-tekst';
@@ -50,7 +50,7 @@ const ArbeidsflateLenkepanel = ({ lenke, language, analyticsEventArgs, enableCom
         >
             <div className={cls.element('innhold')}>
                 <Heading level="2" size="small" className={'lenkepanel__heading'}>
-                    {enableCompactView && <HoyreChevron className={cls.element('compact-chevron')} />}
+                    {enableCompactView && <Next className={cls.element('compact-chevron')} />}
                     <Tekst id={lenke.lenkeTekstId} />
                 </Heading>
                 <BodyLong className={cls.element('stikkord')} size="small">
