@@ -39,7 +39,7 @@ const getHomeUrl = (origin: string, language: Locale) =>
         [Locale.ENGELSK]: `${origin}/en/home`,
         [Locale.POLSK]: `${origin}/en/home`,
         [Locale.SAMISK]: `${origin}/se/samegiella`,
-    }[language]);
+    }[language] || origin);
 
 export const Brodsmulesti = (props: Props) => {
     const cls = BEMHelper('brodsmulesti');
