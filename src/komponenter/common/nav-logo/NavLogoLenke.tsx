@@ -10,6 +10,7 @@ import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import { AnalyticsEventArgs } from 'utils/analytics';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
+import { getHomeUrl } from '../../../utils/home-url';
 import './NavLogoLenke.less';
 
 type Props = {
@@ -24,14 +25,9 @@ export const NavLogoLenke = (props: Props) => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const { language } = useSelector((state: AppState) => state.language);
     const context = getArbeidsflateContext(XP_BASE_URL, MenuValue.PRIVATPERSON);
-    const urlMap: { [key: string]: string } = {
-        nb: context.url,
-        nn: context.url,
-        en: `${XP_BASE_URL}/en/home`,
-        se: `${XP_BASE_URL}/se/samegiella`,
-    };
 
-    const url = urlMap[language];
+    const url = getHomeUrl(XP_BASE_URL, language);
+
     return (
         <LenkeMedSporing
             classNameOverride={'nav-logo-lenke'}
