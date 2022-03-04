@@ -122,11 +122,11 @@ export const Brodsmulesti = (props: Props) => {
                                     }
                                 }}
                             >
-                                <span>{breadcrumb.title}</span>
+                                <span className={cls.element('text')}>{breadcrumb.title}</span>
                                 <HoyreChevron />
                             </LenkeMedSporing>
                         ) : (
-                            <span className={cls.element('transform')}>{breadcrumb.title}</span>
+                            <span className={cls.element('text')}>{breadcrumb.title}</span>
                         )}
                     </li>
                 ))}
