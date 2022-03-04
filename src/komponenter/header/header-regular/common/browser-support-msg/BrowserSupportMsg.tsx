@@ -1,10 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Detail, Heading } from '@navikt/ds-react';
+import { Detail, Heading, Link } from '@navikt/ds-react';
 
 import Tekst from 'tekster/finn-tekst';
-import Lenke from 'nav-frontend-lenker';
 import BEMHelper from 'utils/bem';
 import { detect } from 'detect-browser';
 import { BrowserInfo } from 'detect-browser';
@@ -88,9 +87,9 @@ export const BrowserSupportMsg = () => {
                 <div className={cls.element('tekst')}>
                     <Heading level="2" size="small">
                         <Tekst id={'browser-utdatert-msg'} />{' '}
-                        <Lenke href={linkUrl}>
+                        <Link href={linkUrl}>
                             <Tekst id={'browser-utdatert-lenke'} />
-                        </Lenke>
+                        </Link>
                     </Heading>
                     {browserSpecificMsg && (
                         <Detail>
