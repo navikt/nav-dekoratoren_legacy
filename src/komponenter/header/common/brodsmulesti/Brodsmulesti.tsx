@@ -115,14 +115,12 @@ export const Brodsmulesti = (props: Props) => {
                                     label: breadcrumb.url,
                                     action: breadcrumb.title,
                                 }}
-                                onClick={
-                                    breadcrumb.handleInApp
-                                        ? (e) => {
-                                              e.preventDefault();
-                                              postMessageToApp('breadcrumbClick', breadcrumb);
-                                          }
-                                        : undefined
-                                }
+                                onClick={(e) => {
+                                    if (breadcrumb.handleInApp) {
+                                        e.preventDefault();
+                                        postMessageToApp('breadcrumbClick', breadcrumb);
+                                    }
+                                }}
                             >
                                 <span>{breadcrumb.title}</span>
                                 <HoyreChevron />
