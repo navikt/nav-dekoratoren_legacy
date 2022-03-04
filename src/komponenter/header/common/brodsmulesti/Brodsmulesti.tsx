@@ -113,7 +113,7 @@ export const Brodsmulesti = (props: Props) => {
                                 analyticsEventArgs={{
                                     ...analyticsEventArgs,
                                     label: breadcrumb.url,
-                                    action: finnTekst(context.lenkeTekstId, language),
+                                    action: breadcrumb.title,
                                 }}
                                 onClick={
                                     breadcrumb.handleInApp
