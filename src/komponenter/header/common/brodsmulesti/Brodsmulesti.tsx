@@ -4,7 +4,7 @@ import { AppState } from 'store/reducers';
 import { Link } from '@navikt/ds-react';
 import { Bilde } from '../../../common/bilde/Bilde';
 import HomeIcon from 'ikoner/home.svg';
-import { HoyreChevron } from 'nav-frontend-chevron';
+import { Next } from '@navikt/ds-icons';
 import { postMessageToApp } from 'utils/messages';
 import { Locale } from 'store/reducers/language-duck';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
@@ -56,7 +56,7 @@ export const Brodsmulesti = (props: Props) => {
                     <Link href={homeUrlMap[language]} className={cls.element('home')}>
                         <Bilde asset={HomeIcon} className={cls.element('icon')} />
                         <span>nav.no</span>
-                        <HoyreChevron />
+                        <Next className="next" />
                     </Link>
                 </li>
                 {isLanguageNorwegian && (
@@ -65,7 +65,7 @@ export const Brodsmulesti = (props: Props) => {
                             <span>
                                 <Tekst id={context.lenkeTekstId} />
                             </span>
-                            <HoyreChevron />
+                            <Next className="next" />
                         </Link>
                     </li>
                 )}
@@ -80,7 +80,7 @@ export const Brodsmulesti = (props: Props) => {
                             }}
                         >
                             <span>...</span>
-                            <HoyreChevron />
+                            <Next className="next" />
                         </button>
                     </li>
                 )}
@@ -97,12 +97,12 @@ export const Brodsmulesti = (props: Props) => {
                                     }}
                                 >
                                     <span>{breadcrumb.title}</span>
-                                    <HoyreChevron />
+                                    <Next className="next" />
                                 </Link>
                             ) : (
                                 <Link href={breadcrumb.url} className={cls.element('transform')}>
                                     <span>{breadcrumb.title}</span>
-                                    <HoyreChevron />
+                                    <Next className="next" />
                                 </Link>
                             )
                         ) : (
