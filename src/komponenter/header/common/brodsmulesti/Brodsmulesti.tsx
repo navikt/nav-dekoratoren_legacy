@@ -31,6 +31,16 @@ const analyticsEventArgs = {
 
 const maxNumInitiallyShown = 3;
 
+const getHomeUrl = (origin: string, language: Locale) =>
+    ({
+        [Locale.BOKMAL]: origin,
+        [Locale.NYNORSK]: origin,
+        [Locale.IKKEBESTEMT]: origin,
+        [Locale.ENGELSK]: `${origin}/en/home`,
+        [Locale.POLSK]: `${origin}/en/home`,
+        [Locale.SAMISK]: `${origin}/se/samegiella`,
+    }[language]);
+
 export const Brodsmulesti = (props: Props) => {
     const cls = BEMHelper('brodsmulesti');
     const { environment } = useSelector((state: AppState) => state);
@@ -40,18 +50,15 @@ export const Brodsmulesti = (props: Props) => {
     const { language } = useSelector((state: AppState) => state.language);
     const context = getArbeidsflateContext(XP_BASE_URL, status);
     const { breadcrumbs } = props;
-    const isLanguageNorwegian = language === Locale.NYNORSK || language === Locale.BOKMAL;
 
-    const homeUrlMap: { [key: string]: string } = {
-        nb: `${XP_BASE_URL}`,
-        nn: `${XP_BASE_URL}`,
-        en: `${XP_BASE_URL}/en/home`,
-        se: `${XP_BASE_URL}/se/samegiella`,
-    };
+    const homeUrl = getHomeUrl(XP_BASE_URL, language);
 
-    const homeUrl = homeUrlMap[language];
+    const isLanguageNorwegian =
+        language === Locale.NYNORSK || language === Locale.BOKMAL || language === Locale.IKKEBESTEMT;
+    const shouldShowContext = isLanguageNorwegian && context.key !== MenuValue.PRIVATPERSON;
+    const numCustomItemsShown = shouldShowContext ? maxNumInitiallyShown - 1 : maxNumInitiallyShown;
 
-    const breadcrumbsSliced = showAll ? breadcrumbs : breadcrumbs.slice(-maxNumInitiallyShown);
+    const breadcrumbsSliced = showAll ? breadcrumbs : breadcrumbs.slice(-numCustomItemsShown);
 
     return (
         <nav className={cls.className} aria-label={finnTekst('brodsmulesti', language)} itemProp="breadcrumb">
@@ -71,7 +78,7 @@ export const Brodsmulesti = (props: Props) => {
                         <HoyreChevron />
                     </LenkeMedSporing>
                 </li>
-                {isLanguageNorwegian && context.key !== MenuValue.PRIVATPERSON && (
+                {shouldShowContext && (
                     <li className="typo-normal">
                         <LenkeMedSporing
                             href={context.url}
@@ -89,7 +96,7 @@ export const Brodsmulesti = (props: Props) => {
                         </LenkeMedSporing>
                     </li>
                 )}
-                {!showAll && breadcrumbs.length > maxNumInitiallyShown && (
+                {!showAll && breadcrumbs.length > numCustomItemsShown && (
                     <li className="typo-normal">
                         <button
                             aria-label={finnTekst('brodsmulesti-se-alle', language)}
