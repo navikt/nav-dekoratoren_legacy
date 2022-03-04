@@ -12,6 +12,7 @@ import BEMHelper from 'utils/bem';
 import { getArbeidsflateContext } from '../../../common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { AnalyticsCategory } from '../../../../utils/analytics';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
+import { getHomeUrl } from '../../../../utils/home-url';
 import './Brodsmulesti.less';
 
 export interface Breadcrumb {
@@ -30,16 +31,6 @@ const analyticsEventArgs = {
 };
 
 const maxNumInitiallyShown = 3;
-
-const getHomeUrl = (origin: string, language: Locale) =>
-    ({
-        [Locale.BOKMAL]: origin,
-        [Locale.NYNORSK]: origin,
-        [Locale.IKKEBESTEMT]: origin,
-        [Locale.ENGELSK]: `${origin}/en/home`,
-        [Locale.POLSK]: `${origin}/en/home`,
-        [Locale.SAMISK]: `${origin}/se/samegiella`,
-    }[language] || origin);
 
 export const Brodsmulesti = (props: Props) => {
     const cls = BEMHelper('brodsmulesti');
