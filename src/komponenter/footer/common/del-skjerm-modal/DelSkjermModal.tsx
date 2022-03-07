@@ -1,8 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { Alert, BodyLong, Button, Heading, TextField } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
-import { Alert, BodyLong, Heading, TextField } from '@navikt/ds-react';
 import Modal from 'nav-frontend-modal';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
@@ -118,12 +117,12 @@ const DelSkjermModal = (props: Props) => {
                             maxLength={5}
                         />
                         <div className={'delskjerm__knapper'}>
-                            <Hovedknapp onClick={onClick}>
+                            <Button onClick={onClick}>
                                 <Tekst id={'delskjerm-modal-start'} />
-                            </Hovedknapp>
-                            <Flatknapp onClick={props.onClose}>
+                            </Button>
+                            <Button variant="tertiary" onClick={props.onClose}>
                                 <Tekst id={'delskjerm-modal-avbryt'} />
-                            </Flatknapp>
+                            </Button>
                         </div>
                     </>
                 ) : (
