@@ -1,6 +1,6 @@
 import React from 'react';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import BEMHelper from 'utils/bem';
+import { Heading } from '@navikt/ds-react';
 
 interface Props {
     className: string;
@@ -11,16 +11,9 @@ const Listelement: React.FunctionComponent<Props> = (props) => {
     const listelementClass = BEMHelper(props.className);
     return (
         <li className={listelementClass.element('meny', 'listItem')}>
-            <Undertittel>
-                <span
-                    className={listelementClass.element(
-                        'meny',
-                        props.classElement
-                    )}
-                >
-                    {props.children}
-                </span>
-            </Undertittel>
+            <Heading level="2" size="small">
+                <span className={listelementClass.element('meny', props.classElement)}>{props.children}</span>
+            </Heading>
         </li>
     );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
 import PilOppHvit from 'ikoner/meny/PilOppHvit';
 import LenkeMedIkon from 'komponenter/footer/common/lenke-med-ikon/LenkeMedIkon';
@@ -67,7 +67,9 @@ const FooterTopp = () => {
                 {columnsNode
                     ? columnsNode.children.map((columnNode, i) => (
                           <div key={i} className={`menylenker-seksjon ${!i ? 'venstre' : i === 2 ? 'hoyre' : 'midt'}`}>
-                              <Undertittel className="menylenker-overskrift">{columnNode.displayName}</Undertittel>
+                              <Heading level="2" size="medium" className="menylenker-overskrift">
+                                  {columnNode.displayName}
+                              </Heading>
                               <ul>
                                   <FooterLenker node={columnNode} />
                               </ul>

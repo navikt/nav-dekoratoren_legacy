@@ -1,8 +1,8 @@
 import React, { ReactNode, useState, TouchEvent } from 'react';
+import { BodyShort } from '@navikt/ds-react';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import Tekst from 'tekster/finn-tekst';
-import { Element } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
 import './SlideToClose.less';
 
@@ -32,10 +32,7 @@ export const SlideToClose = ({ children }: Props) => {
     };
 
     const onTouchMove = (event: TouchEvent<HTMLElement>) => {
-        const newDx = Math.max(
-            Math.min(startX - event.touches[0].clientX, slideMaxDx),
-            0
-        );
+        const newDx = Math.max(Math.min(startX - event.touches[0].clientX, slideMaxDx), 0);
 
         if (isSliding) {
             setDx(newDx);
@@ -82,9 +79,9 @@ export const SlideToClose = ({ children }: Props) => {
                 {children}
             </div>
             <div className={cls.element('message')} style={styleMessage}>
-                <Element>
+                <BodyShort>
                     <Tekst id="lukk" />
-                </Element>
+                </BodyShort>
             </div>
         </>
     );

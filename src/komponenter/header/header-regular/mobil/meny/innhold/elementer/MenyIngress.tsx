@@ -1,5 +1,5 @@
 import React from 'react';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
+import { Heading } from '@navikt/ds-react';
 import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
@@ -17,7 +17,9 @@ const MenyIngress = ({ className, inputext }: { className: string; inputext: str
 
     return (
         <div className={className}>
-            <Undertittel>{textToLowercase}</Undertittel>
+            <Heading level="2" size="small">
+                {textToLowercase}
+            </Heading>
             <LenkeMedSporing href={lenke[0].url ? lenke[0].url : 'https://nav.no'}>Til forsiden</LenkeMedSporing>
         </div>
     );

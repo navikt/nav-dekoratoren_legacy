@@ -1,14 +1,11 @@
 import React, { ChangeEvent, useEffect, useLayoutEffect, useState } from 'react';
+import { Alert, BodyLong, Button, Heading, TextField, Modal } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
-import { Input } from 'nav-frontend-skjema';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './DelSkjermModal.less';
-import { Alert, Modal } from '@navikt/ds-react';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 
@@ -88,57 +85,54 @@ const DelSkjermModal = (props: Props) => {
             aria-label={'Skjermdeling'}
             onClose={props.onClose}
         >
-            <Modal.Content>
-                <div className={'delskjerm__header'}>
-                    <Bilde className={'delskjerm__veileder'} asset={veileder} altText={''} />
+            <div className={'delskjerm__header'}>
+                <Bilde className={'delskjerm__veileder'} asset={veileder} altText={''} />
+            </div>
+            <div className={'delskjerm__content'}>
+                <Heading size="medium" level="2">
+                    <Tekst id={'delskjerm-modal-overskrift'} />
+                </Heading>
+                <div className={'delskjerm__beskrivelse typo-normal'}>
+                    <BodyLong>
+                        <Tekst id={'delskjerm-modal-beskrivelse'} />
+                    </BodyLong>
+                    <Lesmerpanel apneTekst={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
+                        <ul>
+                            {[...Array(3)].map((_, i) => (
+                                <li key={i}>
+                                    <BodyLong>
+                                        <Tekst id={`delskjerm-modal-hjelpetekst-${i}`} />
+                                    </BodyLong>
+                                </li>
+                            ))}
+                        </ul>
+                    </Lesmerpanel>
                 </div>
-                <div className={'delskjerm__content'}>
-                    <Undertittel>
-                        <Tekst id={'delskjerm-modal-overskrift'} />
-                    </Undertittel>
-                    <div className={'delskjerm__beskrivelse typo-normal'}>
-                        <Normaltekst>
-                            <Tekst id={'delskjerm-modal-beskrivelse'} />
-                        </Normaltekst>
-                        <Lesmerpanel apneTekst={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
-                            <ul>
-                                {[...Array(3)].map((_, i) => (
-                                    <li key={i}>
-                                        <Normaltekst>
-                                            <Tekst id={`delskjerm-modal-hjelpetekst-${i}`} />
-                                        </Normaltekst>
-                                    </li>
-                                ))}
-                            </ul>
-                        </Lesmerpanel>
-                    </div>
-                    {isOpen ? (
-                        <>
-                            <Input
-                                name={'code'}
-                                label={label}
-                                feil={submitted && error}
-                                value={code}
-                                onChange={onChange}
-                                maxLength={5}
-                                bredde={'M'}
-                            />
-                            <div className={'delskjerm__knapper'}>
-                                <Hovedknapp onClick={onClick}>
-                                    <Tekst id={'delskjerm-modal-start'} />
-                                </Hovedknapp>
-                                <Flatknapp onClick={props.onClose}>
-                                    <Tekst id={'delskjerm-modal-avbryt'} />
-                                </Flatknapp>
-                            </div>
-                        </>
-                    ) : (
-                        <Alert variant="error">
-                            <Tekst id={'delskjerm-modal-stengt'} />
-                        </Alert>
-                    )}
-                </div>
-            </Modal.Content>
+                {isOpen ? (
+                    <>
+                        <TextField
+                            name={'code'}
+                            label={label}
+                            error={submitted && error}
+                            value={code}
+                            onChange={onChange}
+                            maxLength={5}
+                        />
+                        <div className={'delskjerm__knapper'}>
+                            <Button onClick={onClick}>
+                                <Tekst id={'delskjerm-modal-start'} />
+                            </Button>
+                            <Button variant="tertiary" onClick={props.onClose}>
+                                <Tekst id={'delskjerm-modal-avbryt'} />
+                            </Button>
+                        </div>
+                    </>
+                ) : (
+                    <Alert variant="error">
+                        <Tekst id={'delskjerm-modal-stengt'} />
+                    </Alert>
+                )}
+            </div>
         </Modal>
     );
 };

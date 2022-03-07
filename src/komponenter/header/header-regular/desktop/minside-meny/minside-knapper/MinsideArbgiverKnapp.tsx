@@ -1,6 +1,6 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { BodyShort, Detail } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from 'utils/analytics';
@@ -32,12 +32,12 @@ export const MinsideArbgiverKnapp = () => {
         >
             <Bilde asset={briefcaseIkon} altText="" />
             <div className={cls.element('knapp-tekst')}>
-                <Normaltekst className={cls.element('knapp-tekst-topp')}>
+                <BodyShort className={cls.element('knapp-tekst-topp')}>
                     <Tekst id={'ga-til-min-side-arbeidsgiver'} />
-                </Normaltekst>
-                <Undertekst className={cls.element('knapp-tekst-bunn')}>
+                </BodyShort>
+                <Detail className={cls.element('knapp-tekst-bunn')}>
                     <Tekst id={'rolle-arbeidsgiver'} />
-                </Undertekst>
+                </Detail>
             </div>
         </LenkeMedSporing>
     );
