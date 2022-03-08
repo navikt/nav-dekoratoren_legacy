@@ -33,7 +33,7 @@ jobs:
             - name: Docker build and push
               run: |
                   echo $GITHUB_TOKEN | docker login $IMAGE_REGISTRY -u ${GITHUB_REPOSITORY} --password-stdin
-                  docker build -t $IMAGE_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION .
+                  docker build -t $IMAGE_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION --build-arg OPPORTUNITY_ID=${{ secrets.OPPORTUNITY_ID }} .
                   docker push $IMAGE_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION
             - name: Generate nais variables
               run: |
