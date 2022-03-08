@@ -4,6 +4,8 @@
 @import (reference) '~nav-frontend-knapper-style/src/index';
 @import (reference) '~nav-frontend-typografi-style/src/index';
 
+@import '@navikt/ds-tokens/dist/tokens.less';
+
 // screen size breakpoints
 @desktopMaxWidth: 1440px;
 @smallDesktopMaxWidth: 1024px;
@@ -36,10 +38,10 @@
 
 @menu-height-mobil: calc(100% - @header-height-mobil);
 
-@header-separator-farge: @navGra20;
+@header-separator-farge: @navds-global-color-gray-300;
 @header-separator-height: 2px;
 
-@footer-seperator-farge: @navGra20;
+@footer-seperator-farge: @navds-global-color-gray-300;
 @footer-seperator-height: 2px;
 
 .flex-col-width-mixin(@cols, @margins) {
