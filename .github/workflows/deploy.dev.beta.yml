@@ -25,7 +25,7 @@ jobs:
             - name: Set delt skjerm variables
               run: |
                   echo "OPPORTUNITY_ID=${{ secrets.OPPORTUNITY_ID }}" >> $GITHUB_ENV
-                  echo "CASETYPE_ID=${{ secrets.CASETYPE_ID }}" >> $GITHUB_ENV                
+                  echo "CASETYPE_ID=${{ secrets.CASETYPE_ID }}" >> $GITHUB_ENV
                   echo "SOLUTION_ID=${{ secrets.SOLUTION_ID }}" >> $GITHUB_ENV
             - run: npm ci
             - run: npm test
