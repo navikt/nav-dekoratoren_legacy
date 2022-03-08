@@ -28,6 +28,7 @@
     "dependencies": {
         "@navikt/ds-css": "^0.15.8",
         "@navikt/ds-react": "^0.16.14",
+        "@navikt/ds-tokens": "^0.8.4",
         "@navikt/fnrvalidator": "^1.1.3",
         "@navikt/nav-chatbot": "^2.5.13",
         "@navikt/nav-dekoratoren-moduler": "^1.6.6",
