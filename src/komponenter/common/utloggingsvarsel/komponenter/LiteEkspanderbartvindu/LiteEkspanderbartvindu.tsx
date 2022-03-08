@@ -5,20 +5,35 @@ import Nedteller, { TypografiTypes } from '../Nedteller';
 import CollapseUp from '../../../../../ikoner/varsler/CollapseUp';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './liteEkspanderbartvindu.less';
+import { useCookies } from 'react-cookie';
+import {
+    utloggingsvarselEkspander,
+    UtloggingsvarselState,
+    VarselEkspandert,
+} from '../../../../../store/reducers/utloggingsvarsel-duck';
+import { CookieName, cookieOptions } from '../../../../../server/cookieSettings';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../../../../store/reducers';
 
 interface Props {
     setModalOpen: Dispatch<SetStateAction<boolean>>;
-    setMinimized: Dispatch<SetStateAction<boolean>>;
-    minimized: boolean;
     typoGrafi: TypografiTypes;
     tid: string;
     visFullTekst: boolean;
 }
 
+const stateSelector = (state: AppState) => ({
+    utloggingsvarsel: state.utloggingsvarsel,
+});
+
 const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
+    const { utloggingsvarsel } = useSelector(stateSelector);
+    const [, setCookie] = useCookies();
+    const dispatch = useDispatch();
     const cls = BEMHelper('liteExpanderbartvindu');
-    const { setMinimized, setModalOpen, minimized, typoGrafi, tid, visFullTekst } = props;
+    const { setModalOpen, typoGrafi, tid, visFullTekst } = props;
     const tekst = visFullTekst ? 'Du blir automatisk logget ut om ' : '';
+    const htmlUUEnable: boolean = utloggingsvarsel.varselState === VarselEkspandert.MINIMERT;
 
     const setFocus = (id: string) => {
         const element = document.getElementById(id);
@@ -37,8 +52,22 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
         }
     };
 
+    const ekspanderUtloggingsvarsel = (
+        setCookieValue: Partial<UtloggingsvarselState> = { varselState: VarselEkspandert.EKSPANDERT }
+    ) => {
+        dispatch(utloggingsvarselEkspander());
+        setCookie(
+            CookieName.DECORATOR_LOGOUT_WARNING,
+            {
+                ...utloggingsvarsel,
+                ...setCookieValue,
+            } as UtloggingsvarselState,
+            cookieOptions
+        );
+    };
+
     return (
-        <nav className={cls.className} aria-hidden={!minimized}>
+        <nav className={cls.className} aria-hidden={!htmlUUEnable}>
             <div className={cls.element('wrapper')}>
                 <Nedteller typoGrafi={typoGrafi} tekst={tekst.concat(tid)} />
                 <div className={cls.element('expanderbart-nav')}>
@@ -46,12 +75,12 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
                         <div className={cls.element('btn-container')}>
                             <button
                                 id="open-utloggingsvarsel"
-                                tabIndex={minimized ? 0 : -1}
+                                tabIndex={htmlUUEnable ? 0 : -1}
                                 onKeyDownCapture={(event) => keyHandler(event, 'open')}
                                 onClick={() => {
                                     document.body.setAttribute('aria-hidden', 'true');
                                     document.body.style.overflow = 'hidden';
-                                    setMinimized(false);
+                                    ekspanderUtloggingsvarsel();
                                 }}
                             >
                                 <span className={cls.element('btn-content')}>
@@ -64,11 +93,15 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
                     <div className={cls.element('btn-container')}>
                         <button
                             id="close-utloggingsvarsel"
-                            tabIndex={minimized ? 0 : -1}
+                            tabIndex={htmlUUEnable ? 0 : -1}
                             onKeyDownCapture={(event) => keyHandler(event, 'close')}
                             onClick={() => {
-                                setMinimized(false);
                                 setModalOpen(false);
+                                ekspanderUtloggingsvarsel({
+                                    ...utloggingsvarsel,
+                                    varselState: VarselEkspandert.EKSPANDERT,
+                                    modalLukketAvBruker: true,
+                                });
                             }}
                         >
                             <span className={cls.element('btn-content')}>

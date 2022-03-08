@@ -1,38 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { verifyWindowObj } from 'utils/Environment';
 import { logAmplitudeEvent } from 'utils/amplitude';
+import { MenuValue } from '../../../utils/meny-storage-utils';
+import './ChatbotWrapper.less';
 
 // Prevents SSR crash
 const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
-const stagingUrlHosts = [
-    'www-q0.nav.no',
-    'www-q1.nav.no',
-    'www-q2.nav.no',
-    'www-q3.nav.no',
-    'www-q4.nav.no',
-    'www-q5.nav.no',
-    'www-q6.nav.no',
-    'dekoratoren.dev.nav.no',
-    'dev.nav.no',
-    'localhost',
-];
+const testUrlHosts = ['dekoratoren.ekstern.dev.nav.no'];
 
 const stateSelector = (state: AppState) => ({
     isChatbotEnabled: state.environment.PARAMS.CHATBOT,
+    context: state.arbeidsflate.status,
+    env: state.environment.ENV,
 });
 
-type ActionFilterMap = [((input: string) => boolean)[], string[]];
+const boostApiUrlBaseTest = 'https://navtest.boost.ai/api/chat/v2';
+const boostApiUrlBaseStaging = 'https://staging-nav.boost.ai/api/chat/v2';
+const boostApiUrlBaseProduction = 'https://nav.boost.ai/api/chat/v2';
 
-const actionFilterMap: ActionFilterMap[] = [
-    [[(input) => /www\.nav\.no\/no\/person(\/.*?)?/.test(input)], ['privatperson']],
-    [[(input) => /www\.nav\.no\/no\/bedrift(\/.*)?/.test(input)], ['arbeidsgiver']],
-];
+type ActionFilter = 'privatperson' | 'arbeidsgiver' | 'NAV_TEST';
 
-export const ChatbotWrapper = ({ ...properties }: any) => {
-    const { isChatbotEnabled } = useSelector(stateSelector);
+const contextFilterMap: { [key in MenuValue]?: ActionFilter[] } = {
+    [MenuValue.PRIVATPERSON]: ['privatperson'],
+    [MenuValue.ARBEIDSGIVER]: ['arbeidsgiver'],
+};
+
+const getActionFilters = (context: MenuValue, isProduction: boolean): ActionFilter[] => {
+    const contextFilter = contextFilterMap[context] || [];
+    return isProduction ? contextFilter : [...contextFilter, 'NAV_TEST'];
+};
+
+export const ChatbotWrapper = () => {
+    const { isChatbotEnabled, context, env } = useSelector(stateSelector);
 
     // Do not mount chatbot on initial render. Prevents hydration errors
     // due to inconsistensies between client and server html, as chatbot
@@ -44,35 +46,22 @@ export const ChatbotWrapper = ({ ...properties }: any) => {
     }, [isChatbotEnabled]);
 
     const hostname = verifyWindowObj() && window.location.hostname;
-    const pathname = verifyWindowObj() && window.location.pathname;
-    const origin = hostname && pathname && `${hostname}${pathname}`;
+    const isTest = hostname && testUrlHosts.includes(hostname);
+    const isProduction = env === 'prod';
 
-    const isStaging = hostname && stagingUrlHosts.includes(hostname);
-    const boostApiUrlBase = isStaging ? 'https://staging-nav.boost.ai/api/chat/v2' : 'https://nav.boost.ai/api/chat/v2';
+    let boostApiUrlBase = boostApiUrlBaseStaging;
 
-    let actionFilters;
-
-    if (isStaging) {
-        actionFilters = ['NAV_TEST'];
-    }
-
-    if (origin) {
-        if (!actionFilters) {
-            actionFilters = [];
-        }
-
-        actionFilterMap.forEach(([tests, filters]) => {
-            if (tests.find((test) => test(origin))) {
-                actionFilters.push(...filters);
-            }
-        });
+    if (isTest) {
+        boostApiUrlBase = boostApiUrlBaseTest;
+    } else if (isProduction) {
+        boostApiUrlBase = boostApiUrlBaseProduction;
     }
 
     return isMounted ? (
         <Chatbot
-            {...properties}
-            {...{ boostApiUrlBase, actionFilters }}
-            analyticsCallback={properties.analyticsCallback ?? logAmplitudeEvent}
+            boostApiUrlBase={boostApiUrlBase}
+            actionFilters={getActionFilters(context, isProduction)}
+            analyticsCallback={logAmplitudeEvent}
         />
     ) : null;
 };

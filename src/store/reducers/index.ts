@@ -14,6 +14,7 @@ import environmentReducer, { Environment } from './environment-duck';
 import featureToggleReducer from './feature-toggles-duck';
 import { FeatureToggles } from './feature-toggles-duck';
 import tilbakemeldingsReducer from './tilbakemelding-duck';
+import utloggingsvarselReducer, { UtloggingsvarselState } from './utloggingsvarsel-duck';
 
 export interface AppState {
     environment: Environment;
@@ -27,6 +28,7 @@ export interface AppState {
     driftsmeldinger: DriftsmeldingerState;
     featureToggles: FeatureToggles;
     tilbakemeldinger: DataElement;
+    utloggingsvarsel: UtloggingsvarselState;
 }
 
 export const reducers = combineReducers<AppState>({
@@ -41,6 +43,7 @@ export const reducers = combineReducers<AppState>({
     driftsmeldinger: driftsmeldingReducer,
     featureToggles: featureToggleReducer,
     tilbakemeldinger: tilbakemeldingsReducer,
+    utloggingsvarsel: utloggingsvarselReducer,
 });
 
 export default reducers;

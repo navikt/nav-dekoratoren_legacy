@@ -2,9 +2,11 @@
 
 .brodsmulesti {
     display: flex;
+
     @media @screen-mobile {
         width: 100%;
     }
+
     ol {
         margin: 0;
         padding: 0;
@@ -13,6 +15,7 @@
         align-items: center;
         list-style: none;
     }
+
     li {
         display: flex;
         flex-direction: row;
@@ -28,13 +31,19 @@
         }
     }
 
-    &__home {
+    &__link {
         display: flex;
         justify-content: center;
         align-items: center;
     }
+
+    &__text::first-letter {
+        text-transform: uppercase;
+    }
+
     &__icon {
-        margin-right: 1rem;
+        margin-right: 0.75rem;
+        width: 1.5rem;
     }
 
     &__view-all {

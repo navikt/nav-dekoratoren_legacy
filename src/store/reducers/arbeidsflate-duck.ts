@@ -13,10 +13,7 @@ export const initialState: Arbeidsflate = {
     status: MenuValue.IKKEBESTEMT,
 };
 
-export const reducer = (
-    state: Arbeidsflate = initialState,
-    action: Handling
-): Arbeidsflate => {
+export const reducer = (state: Arbeidsflate = initialState, action: Handling): Arbeidsflate => {
     switch (action.type) {
         case ActionType.PRIVATPERSON: {
             return { ...state, status: MenuValue.PRIVATPERSON };
@@ -56,10 +53,5 @@ export const settArbeidsgiverflate = (): SettArbeidsgiverAction => ({
 export const settSamarbeidspartnerflate = (): SettSamarbeidspartnerAction => ({
     type: ActionType.SAMARBEIDSPARTNER,
 });
-
-export const cookieOptions = {
-    path: '/',
-    domain: process.env.NODE_ENV === 'development' ? 'localhost' : '.nav.no',
-};
 
 export default reducer;

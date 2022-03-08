@@ -4,7 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { NedChevron } from 'nav-frontend-chevron';
 import { useSelect } from 'downshift';
 import { decoratorLanguageCookie } from '../../Header';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import { cookieOptions } from '../../../../server/cookieSettings';
 import { AvailableLanguage } from 'store/reducers/language-duck';
 import { languageDuck } from 'store/reducers/language-duck';
 import { postMessageToApp } from 'utils/messages';
@@ -47,18 +47,9 @@ export const SprakVelger = (props: Props) => {
             window.location.assign(selectedLanguage.url);
         }
     };
-
-    const {
-        isOpen,
-        selectedItem,
-        getToggleButtonProps,
-        getLabelProps,
-        getMenuProps,
-        highlightedIndex,
-        getItemProps,
-    } = useSelect({
+    const { isOpen, selectedItem, getToggleButtonProps, getMenuProps, highlightedIndex, getItemProps } = useSelect({
         items: options,
-        itemToString: (item) => item?.url || '',
+        itemToString: (item) => item?.label || '',
         onSelectedItemChange: ({ selectedItem }) => onChange(selectedItem as LocaleOption),
         selectedItem: options.find((option) => option.locale === language),
     });
@@ -72,41 +63,42 @@ export const SprakVelger = (props: Props) => {
               borderColor: farger.navGra20,
               borderTop: 'none',
           }
-        : { border: 'none' };
+        : {
+              display: 'none',
+              border: 'none',
+          };
+    // Adding aria-controls and removing aria-labelledby prop from downshift (to avoid an extra reading of label on screen readers)
+    let buttonProps = getToggleButtonProps();
+    delete buttonProps['aria-labelledby'];
+    let menuProps = getMenuProps();
+    delete menuProps['aria-labelledby'];
+    menuProps.id = 'sprakvelger_menuID';
+    buttonProps['aria-controls'] = menuProps.id;
 
     return (
         <div className={cls.element('container')}>
             <nav className={cls.className}>
-                <label {...getLabelProps()} className="sr-only">
-                    <Normaltekst>{selectorLabel}</Normaltekst>
-                </label>
-                <button
-                    {...getToggleButtonProps()}
-                    className={`${cls.element('knapp')} skjemaelement__input`}
-                    type="button"
-                >
+                <button {...buttonProps} className={`${cls.element('knapp')} skjemaelement__input`} type="button">
                     <span className={cls.element('knapp-tekst')}>
                         <Bilde asset={Globe} className={cls.element('ikon')} />
                         <Normaltekst>{selectorLabel}</Normaltekst>
                     </span>
                     <NedChevron />
                 </button>
-                <ul {...getMenuProps()} className={cls.element('menu')} style={ulStyle}>
-                    {isOpen && (
-                        <>
-                            {options.map((item, index) => (
-                                <SprakVelgerItem
-                                    key={index}
-                                    cls={cls}
-                                    item={item}
-                                    index={index}
-                                    highlightedIndex={highlightedIndex}
-                                    itemProps={getItemProps({ item, index })}
-                                    selectedItem={selectedItem}
-                                />
-                            ))}
-                        </>
-                    )}
+                <ul {...menuProps} className={cls.element('menu')} style={ulStyle}>
+                    <>
+                        {options.map((item, index) => (
+                            <SprakVelgerItem
+                                key={index}
+                                cls={cls}
+                                item={item}
+                                index={index}
+                                highlightedIndex={highlightedIndex}
+                                itemProps={getItemProps({ item, index })}
+                                selectedItem={selectedItem}
+                            />
+                        ))}
+                    </>
                 </ul>
             </nav>
         </div>

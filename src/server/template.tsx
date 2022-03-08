@@ -25,11 +25,7 @@ const cache = new NodeCache({
 
 export const template = (req: Request) => {
     // Set environment based on request params
-    const universalCookies = (req as any).universalCookies;
-    const cookies = universalCookies.cookies;
-    const env = clientEnv({ req, cookies });
-
-    const cachedEnv = { ...env, PARAMS: { ...env.PARAMS, TIMESTAMP: 0 } };
+    const env = clientEnv({ req, cookies: {} });
 
     // Resources
     const fileEnv = `${env.APP_URL}/env`;
@@ -37,7 +33,7 @@ export const template = (req: Request) => {
     const fileScript = `${env.APP_URL}/client.js`;
 
     // Retreive from cache
-    const cachedEnvHash = hash({ cachedEnv });
+    const cachedEnvHash = hash({ env });
     const cachedHtml = cache.get(cachedEnvHash);
 
     if (cachedHtml) {
@@ -46,7 +42,7 @@ export const template = (req: Request) => {
 
     // Create store based on request params
     const metaTags = MetaTagsServer();
-    const store = createStore(env, universalCookies);
+    const store = createStore(env);
 
     // Fetch params and forward to client
     const params = req.query;
@@ -61,7 +57,7 @@ export const template = (req: Request) => {
     const HtmlHeader = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
             <MetaTagsContext extract={metaTags.extract}>
-                <CookiesProvider cookies={universalCookies}>
+                <CookiesProvider>
                     <Header />
                 </CookiesProvider>
             </MetaTagsContext>
@@ -79,14 +75,14 @@ export const template = (req: Request) => {
     const HtmlMetaTags = metaTags.renderToString();
     const html = `
     <!DOCTYPE html>
-    <html lang="no">
+    <html lang='no'>
         <head>
             <title>NAV Dekoratør</title>
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta name="description" content="Felles header og footer for NAV-applikasjoner i selvbetjeningssonen" />
-            <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
-            <meta name="theme-color" content="#000000" />
-            <meta charset="utf-8" />
+            <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+            <meta name='description' content='Felles header og footer for NAV-applikasjoner i selvbetjeningssonen' />
+            <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no' />
+            <meta name='theme-color' content='#000000' />
+            <meta charset='utf-8' />
             <!-- Decorator development styling -->
             <style>
             html, body {  height: 100%; }
@@ -112,30 +108,30 @@ export const template = (req: Request) => {
         </head>
         <body>
             <!-- Styling fetched by apps -->
-            <div id="styles">
+            <div id='styles'>
                 ${HtmlMetaTags}
-                <link href="${fileCss}" rel="stylesheet"/>
+                <link href='${fileCss}' rel='stylesheet'/>
             </div>
-            <div class="decorator-dev-container">
+            <div class='decorator-dev-container'>
                 <!-- Header fetched by apps -->
-                <div id="${headerId}">
-                    <div id="decorator-header">${HtmlHeader}</div>
+                <div id='${headerId}'>
+                    <div id='decorator-header'>${HtmlHeader}</div>
                 </div>
-                <div class="decorator-dummy-app">
+                <div class='decorator-dummy-app'>
                 </div>
                 <!-- Footer fetched by apps -->
-                <div id="${footerId}">
-                    <div id="decorator-footer">${HtmlFooter}</div>
+                <div id='${footerId}'>
+                    <div id='decorator-footer'>${HtmlFooter}</div>
                 </div>
             </div>
             <!-- Scripts fetched by apps -->
-            <div id="scripts">
-                <div id="decorator-env" data-src="${fileEnv}${paramsAsString}"></div>
-                <script async="true" src=${fileScript}></script>
+            <div id='scripts'>
+                <div id='decorator-env' data-src='${fileEnv}${paramsAsString}'></div>
+                <script async='true' src='${fileScript}'></script>
             </div>
-            <div id="skiplinks"></div>
-            <div id="megamenu-resources"></div>
-            <div id="webstats-ga-notrack"></div>
+            <div id='skiplinks'></div>
+            <div id='megamenu-resources'></div>
+            <div id='webstats-ga-notrack'></div>
         </body>
     </html>`;
 

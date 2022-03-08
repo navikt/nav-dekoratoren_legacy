@@ -1,7 +1,9 @@
 import { MenuValue } from 'utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
-import { Locale, AvailableLanguage } from './language-duck';
+import { AvailableLanguage, Locale } from './language-duck';
 import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
+import { UtloggingsvarselState } from './utloggingsvarsel-duck';
+
 export interface Environment {
     ENV: string;
     XP_BASE_URL: string;
@@ -22,7 +24,6 @@ export interface Environment {
 
     // Parameters
     PARAMS: Params;
-    COOKIES: Cookies;
 }
 
 export interface Params {
@@ -32,6 +33,7 @@ export interface Params {
     SIMPLE_FOOTER: boolean;
     ENFORCE_LOGIN: boolean;
     REDIRECT_TO_APP: boolean;
+    REDIRECT_TO_URL?: string;
     LEVEL: string;
     LANGUAGE: Locale;
     AVAILABLE_LANGUAGES?: AvailableLanguage[];
@@ -43,13 +45,13 @@ export interface Params {
     UTILS_BACKGROUND?: string;
     UTLOGGINGSVARSEL: boolean;
     TA_SURVEYS: string[];
-    TIMESTAMP: number;
     LOGOUT_URL?: string;
 }
 
 export interface Cookies {
     CONTEXT: MenuValue;
     LANGUAGE: Locale;
+    EKSPANDERTVARSEL: UtloggingsvarselState;
 }
 
 export const initialState: Environment = {
@@ -86,13 +88,6 @@ export const initialState: Environment = {
         URL_LOOKUP_TABLE: false,
         SHARE_SCREEN: false,
         UTLOGGINGSVARSEL: false,
-        TIMESTAMP: 0,
-    },
-
-    // Cookies
-    COOKIES: {
-        LANGUAGE: Locale.IKKEBESTEMT,
-        CONTEXT: MenuValue.IKKEBESTEMT,
     },
 };
 

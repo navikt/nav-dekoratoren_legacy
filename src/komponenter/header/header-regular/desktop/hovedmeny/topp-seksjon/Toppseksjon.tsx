@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { getArbeidsflateContext } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
-import { cookieOptions } from 'store/reducers/arbeidsflate-duck';
+import { CookieName, cookieOptions } from '../../../../../../server/cookieSettings';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import './Toppseksjon.less';
@@ -21,7 +21,7 @@ interface Props {
 export const Toppseksjon = ({ classname }: Props) => {
     const cls = BEMHelper(classname);
     const dispatch = useDispatch();
-    const [, setCookie] = useCookies(['decorator-context']);
+    const [, setCookie] = useCookies([CookieName.DECORATOR_CONTEXT]);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
     const context = getArbeidsflateContext(XP_BASE_URL, arbeidsflate);
@@ -37,7 +37,7 @@ export const Toppseksjon = ({ classname }: Props) => {
             <LenkeMedSporing
                 href={context.url}
                 onClick={(event) => {
-                    setCookie('decorator-context', context.key, cookieOptions);
+                    setCookie(CookieName.DECORATOR_CONTEXT, context.key, cookieOptions);
                     dispatch(settArbeidsflate(context.key));
                     if (erNavDekoratoren()) {
                         event.preventDefault();

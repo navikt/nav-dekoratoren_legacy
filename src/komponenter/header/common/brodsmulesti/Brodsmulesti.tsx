@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import Lenke from 'nav-frontend-lenker';
+import { LenkeMedSporing } from '../../../common/lenke-med-sporing/LenkeMedSporing';
 import { Bilde } from '../../../common/bilde/Bilde';
 import HomeIcon from 'ikoner/home.svg';
 import { HoyreChevron } from 'nav-frontend-chevron';
@@ -10,6 +10,9 @@ import { Locale } from 'store/reducers/language-duck';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { getArbeidsflateContext } from '../../../common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { AnalyticsCategory } from '../../../../utils/analytics';
+import { MenuValue } from '../../../../utils/meny-storage-utils';
+import { getHomeUrl } from '../../../../utils/home-url';
 import './Brodsmulesti.less';
 
 export interface Breadcrumb {
@@ -22,6 +25,13 @@ interface Props {
     breadcrumbs: Breadcrumb[];
 }
 
+const analyticsEventArgs = {
+    category: AnalyticsCategory.Header,
+    komponent: 'brødsmule',
+};
+
+const maxNumInitiallyShown = 3;
+
 export const Brodsmulesti = (props: Props) => {
     const cls = BEMHelper('brodsmulesti');
     const { environment } = useSelector((state: AppState) => state);
@@ -31,45 +41,53 @@ export const Brodsmulesti = (props: Props) => {
     const { language } = useSelector((state: AppState) => state.language);
     const context = getArbeidsflateContext(XP_BASE_URL, status);
     const { breadcrumbs } = props;
-    const isLanguageNorwegian = language === Locale.NYNORSK || language === Locale.BOKMAL;
 
-    const breadcrumbsCase = breadcrumbs.map((b) => ({
-        ...b,
-        title: b.title
-            .split(' ')
-            .map((title, i) => (!i ? `${title.charAt(0).toUpperCase() + title.slice(1)}` : `${title}`))
-            .join(' '),
-    }));
-    const breadcrumbsSliced = showAll ? breadcrumbsCase : breadcrumbsCase.slice(breadcrumbsCase.length - 2);
+    const homeUrl = getHomeUrl(XP_BASE_URL, language);
 
-    const homeUrlMap: { [key: string]: string } = {
-        nb: `${XP_BASE_URL}`,
-        nn: `${XP_BASE_URL}`,
-        en: `${XP_BASE_URL}/en/home`,
-        se: `${XP_BASE_URL}/se/samegiella`,
-    };
+    const isLanguageNorwegian =
+        language === Locale.NYNORSK || language === Locale.BOKMAL || language === Locale.IKKEBESTEMT;
+    const shouldShowContext = isLanguageNorwegian && context.key !== MenuValue.PRIVATPERSON;
+    const numCustomItemsShown = shouldShowContext ? maxNumInitiallyShown - 1 : maxNumInitiallyShown;
+
+    const breadcrumbsSliced = showAll ? breadcrumbs : breadcrumbs.slice(-numCustomItemsShown);
 
     return (
         <nav className={cls.className} aria-label={finnTekst('brodsmulesti', language)} itemProp="breadcrumb">
             <ol>
                 <li className="typo-normal">
-                    <Lenke href={homeUrlMap[language]} className={cls.element('home')}>
+                    <LenkeMedSporing
+                        href={homeUrl}
+                        className={cls.element('link')}
+                        analyticsEventArgs={{
+                            ...analyticsEventArgs,
+                            label: homeUrl,
+                            action: 'nav.no',
+                        }}
+                    >
                         <Bilde asset={HomeIcon} className={cls.element('icon')} />
                         <span>nav.no</span>
                         <HoyreChevron />
-                    </Lenke>
+                    </LenkeMedSporing>
                 </li>
-                {isLanguageNorwegian && (
+                {shouldShowContext && (
                     <li className="typo-normal">
-                        <Lenke href={context.url}>
+                        <LenkeMedSporing
+                            href={context.url}
+                            className={cls.element('link')}
+                            analyticsEventArgs={{
+                                ...analyticsEventArgs,
+                                label: context.url,
+                                action: finnTekst(context.lenkeTekstId, language),
+                            }}
+                        >
                             <span>
                                 <Tekst id={context.lenkeTekstId} />
                             </span>
                             <HoyreChevron />
-                        </Lenke>
+                        </LenkeMedSporing>
                     </li>
                 )}
-                {!showAll && breadcrumbs.length > 2 && (
+                {!showAll && breadcrumbs.length > numCustomItemsShown && (
                     <li className="typo-normal">
                         <button
                             aria-label={finnTekst('brodsmulesti-se-alle', language)}
@@ -84,29 +102,29 @@ export const Brodsmulesti = (props: Props) => {
                         </button>
                     </li>
                 )}
-                {breadcrumbsSliced.map((breadcrumb, i) => (
-                    <li key={i} className="typo-normal" aria-current={i + 1 === breadcrumbsSliced.length && `page`}>
-                        {i + 1 !== breadcrumbsSliced.length ? (
-                            breadcrumb.handleInApp ? (
-                                <Lenke
-                                    href={breadcrumb.url}
-                                    className={cls.element('transform')}
-                                    onClick={(e) => {
+                {breadcrumbsSliced.map((breadcrumb, index, array) => (
+                    <li key={index} className="typo-normal" aria-current={index + 1 === array.length && 'page'}>
+                        {index + 1 !== array.length ? (
+                            <LenkeMedSporing
+                                href={breadcrumb.url}
+                                className={cls.element('link')}
+                                analyticsEventArgs={{
+                                    ...analyticsEventArgs,
+                                    label: breadcrumb.url,
+                                    action: breadcrumb.title,
+                                }}
+                                onClick={(e) => {
+                                    if (breadcrumb.handleInApp) {
                                         e.preventDefault();
                                         postMessageToApp('breadcrumbClick', breadcrumb);
-                                    }}
-                                >
-                                    <span>{breadcrumb.title}</span>
-                                    <HoyreChevron />
-                                </Lenke>
-                            ) : (
-                                <Lenke href={breadcrumb.url} className={cls.element('transform')}>
-                                    <span>{breadcrumb.title}</span>
-                                    <HoyreChevron />
-                                </Lenke>
-                            )
+                                    }
+                                }}
+                            >
+                                <span className={cls.element('text')}>{breadcrumb.title}</span>
+                                <HoyreChevron />
+                            </LenkeMedSporing>
                         ) : (
-                            <span className={cls.element('transform')}>{breadcrumb.title}</span>
+                            <span className={cls.element('text')}>{breadcrumb.title}</span>
                         )}
                     </li>
                 ))}

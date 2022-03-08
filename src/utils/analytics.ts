@@ -21,6 +21,7 @@ export type AnalyticsEventArgs = {
     action: string;
     context?: MenuValue;
     label?: string;
+    komponent?: string;
 };
 
 export const initAnalytics = (params: Params) => {
@@ -30,13 +31,14 @@ export const initAnalytics = (params: Params) => {
 };
 
 export const analyticsEvent = (props: AnalyticsEventArgs) => {
-    const { context, category, action, label } = props;
+    const { context, category, action, label, komponent } = props;
     const actionFinal = `${context ? context + '/' : ''}${action}`;
 
     logAmplitudeEvent('navigere', {
         destinasjon: label,
         lenketekst: actionFinal,
         kategori: category,
+        komponent,
     });
 
     TagManager.dataLayer({
