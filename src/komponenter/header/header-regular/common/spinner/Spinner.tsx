@@ -1,8 +1,8 @@
 import React from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Tekst from 'tekster/finn-tekst';
 import './Spinner.less';
+import { BodyShort } from '@navikt/ds-react';
 
 type Props = {
     tekstId?: string;
@@ -12,9 +12,9 @@ type Props = {
 const Spinner = ({ tekstId, className }: Props) => (
     <div className={`spinner-container${className ? ` ${className}` : ''}`}>
         {tekstId && (
-            <Normaltekst>
+            <BodyShort>
                 <Tekst id={tekstId} />
-            </Normaltekst>
+            </BodyShort>
         )}
         <NavFrontendSpinner className={'dekorator-spinner'} />
     </div>

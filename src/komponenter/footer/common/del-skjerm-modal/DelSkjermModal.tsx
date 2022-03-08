@@ -1,14 +1,11 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { Accordion, Alert, BodyLong, Button, Heading, TextField } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
 import Modal from 'nav-frontend-modal';
-import { Input } from 'nav-frontend-skjema';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './DelSkjermModal.less';
-import { Accordion, Alert } from '@navikt/ds-react';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 
@@ -90,13 +87,13 @@ const DelSkjermModal = (props: Props) => {
                 <Bilde className={'delskjerm__veileder'} asset={veileder} altText={''} />
             </div>
             <div className={'delskjerm__content'}>
-                <Undertittel>
+                <Heading size="medium" level="2">
                     <Tekst id={'delskjerm-modal-overskrift'} />
-                </Undertittel>
+                </Heading>
                 <div className={'delskjerm__beskrivelse typo-normal'}>
-                    <Normaltekst>
+                    <BodyLong>
                         <Tekst id={'delskjerm-modal-beskrivelse'} />
-                    </Normaltekst>
+                    </BodyLong>
                     <Accordion>
                         <Accordion.Item open={accordionOpen}>
                             <Accordion.Header onClick={() => setAccordionOpen(!accordionOpen)}>
@@ -106,9 +103,9 @@ const DelSkjermModal = (props: Props) => {
                                 <ul>
                                     {[...Array(3)].map((_, i) => (
                                         <li key={i}>
-                                            <Normaltekst>
+                                            <BodyLong>
                                                 <Tekst id={`delskjerm-modal-hjelpetekst-${i}`} />
-                                            </Normaltekst>
+                                            </BodyLong>
                                         </li>
                                     ))}
                                 </ul>
@@ -118,22 +115,21 @@ const DelSkjermModal = (props: Props) => {
                 </div>
                 {isOpen ? (
                     <>
-                        <Input
+                        <TextField
                             name={'code'}
                             label={label}
-                            feil={submitted && error}
+                            error={submitted && error}
                             value={code}
                             onChange={onChange}
                             maxLength={5}
-                            bredde={'M'}
                         />
                         <div className={'delskjerm__knapper'}>
-                            <Hovedknapp onClick={onClick}>
+                            <Button onClick={onClick}>
                                 <Tekst id={'delskjerm-modal-start'} />
-                            </Hovedknapp>
-                            <Flatknapp onClick={props.onClose}>
+                            </Button>
+                            <Button variant="tertiary" onClick={props.onClose}>
                                 <Tekst id={'delskjerm-modal-avbryt'} />
-                            </Flatknapp>
+                            </Button>
                         </div>
                     </>
                 ) : (

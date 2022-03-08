@@ -51,6 +51,8 @@
         "less-plugin-npm-import": "^2.1.0",
         "lodash.debounce": "^4.0.8",
         "lodash.throttle": "^4.1.1",
+        "nav-frontend-alertstriper": "3.0.39",
+        "nav-frontend-alertstriper-style": "2.0.30",
         "nav-frontend-chevron": "^1.0.24",
         "nav-frontend-chevron-style": "^1.0.2",
         "nav-frontend-core": "^5.0.11",

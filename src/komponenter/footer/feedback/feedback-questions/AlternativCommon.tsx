@@ -1,6 +1,6 @@
 import React from 'react';
+import { BodyLong } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { FeedbackState } from '../Feedback';
 import { AppState } from 'store/reducers';
 import './Alternativ.less';
@@ -16,7 +16,7 @@ export interface QuestionProps {
 }
 
 export const FeedbackInformasjon = () => (
-    <Normaltekst>
+    <BodyLong>
         <Tekst id="advarsel-om-personopplysninger" />
-    </Normaltekst>
+    </BodyLong>
 );

@@ -1,12 +1,12 @@
 import React from 'react';
 import { AppState } from 'store/reducers';
+import { Heading } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
 import { useSelector } from 'react-redux';
-import { Systemtittel } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
 import AlleVarslerLenke from './AlleVarslerLenke';
-import './Varselvisning.less';
 import { VarselListe } from './VarselListe';
+import './Varselvisning.less';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
@@ -32,9 +32,9 @@ export const Varselvisning = ({ setKbId }: Props) => {
 
     return (
         <div className={cls.className}>
-            <Systemtittel className={cls.element('tittel')}>
+            <Heading level="2" size="medium" className={cls.element('tittel')}>
                 <Tekst id={'varsler-tittel'} />
-            </Systemtittel>
+            </Heading>
             {varslerAntall === 0 ? (
                 <div className={cls.element('tom-liste')}>
                     <Tekst id={'varsler-tom-liste'} />
