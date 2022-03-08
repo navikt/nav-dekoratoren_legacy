@@ -24,9 +24,9 @@ jobs:
                       ${{ runner.os }}-node-
             - name: Set delt skjerm variables
               run: |
-                  echo "REACT_APP_CASETYPE_ID=${{ secrets.CASETYPE_ID }}" >> $GITHUB_ENV
-                  echo "REACT_APP_OPPORTUNITY_ID=${{ secrets.OPPORTUNITY_ID }}" >> $GITHUB_ENV
-                  echo "REACT_APP_SOLUTION_ID=${{ secrets.SOLUTION_ID }}" >> $GITHUB_ENV
+                  echo "OPPORTUNITY_ID=${{ secrets.OPPORTUNITY_ID }}" >> $GITHUB_ENV
+                  echo "CASETYPE_ID=${{ secrets.CASETYPE_ID }}" >> $GITHUB_ENV
+                  echo "SOLUTION_ID=${{ secrets.SOLUTION_ID }}" >> $GITHUB_ENV
             - run: npm ci
             - run: npm test
             - run: npm run build
