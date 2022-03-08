@@ -29,7 +29,13 @@ jobs:
                   echo "SOLUTION_ID=${{ secrets.SOLUTION_ID }}" >> $GITHUB_ENV
             - run: npm ci
             - run: npm test
-            - run: npm run build
+            - name: Build
+              run: npm run build
+              env:
+                  OPPORTUNITY_ID: ${{ secrets.OPPORTUNITY_ID }}
+                  CASETYPE_ID: ${{ secrets.CASETYPE_ID }}
+                  SOLUTION_ID: ${{ secrets.SOLUTION_ID }}
+              
             - name: Docker build and push
               run: |
                   echo $GITHUB_TOKEN | docker login $IMAGE_REGISTRY -u ${GITHUB_REPOSITORY} --password-stdin
