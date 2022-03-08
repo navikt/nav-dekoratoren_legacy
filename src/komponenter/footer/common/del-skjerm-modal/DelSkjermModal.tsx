@@ -94,10 +94,10 @@ const DelSkjermModal = (props: Props) => {
                     <BodyLong>
                         <Tekst id={'delskjerm-modal-beskrivelse'} />
                     </BodyLong>
-                    <Accordion>
+                    <Accordion className={'delskjerm__accordion'}>
                         <Accordion.Item open={accordionOpen}>
                             <Accordion.Header onClick={() => setAccordionOpen(!accordionOpen)}>
-                                {finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}{' '}
+                                {finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}
                             </Accordion.Header>
                             <Accordion.Content>
                                 <ul>
