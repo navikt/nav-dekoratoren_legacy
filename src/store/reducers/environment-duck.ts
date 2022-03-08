@@ -2,7 +2,6 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
 import { Locale, AvailableLanguage } from './language-duck';
 import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
-
 export interface Environment {
     ENV: string;
     XP_BASE_URL: string;
@@ -17,6 +16,9 @@ export interface Environment {
     LOGIN_URL: string;
     LOGOUT_URL: string;
     FEEDBACK_API_URL: string;
+    OPPORTUNITY_ID: string;
+    CASETYPE_ID: string;
+    SOLUTION_ID: string;
 
     // Parameters
     PARAMS: Params;
@@ -64,6 +66,9 @@ export const initialState: Environment = {
     LOGIN_URL: '',
     LOGOUT_URL: '',
     FEEDBACK_API_URL: '',
+    OPPORTUNITY_ID: '',
+    CASETYPE_ID: '',
+    SOLUTION_ID: '',
 
     // Parameters
     PARAMS: {
