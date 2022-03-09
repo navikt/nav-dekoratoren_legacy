@@ -41,6 +41,9 @@ jobs:
                   namespace: personbruker
                   image: $IMAGE_REGISTRY/$IMAGE_NAME
                   version: $IMAGE_VERSION
+                  OPPORTUNITY_ID: $OPPORTUNITY_ID
+                  CASETYPE_ID: $CASETYPE_ID
+                  SOLUTION_ID: $SOLUTION_ID
                   EOF
             - uses: nais/deploy/actions/deploy@master
               env:
