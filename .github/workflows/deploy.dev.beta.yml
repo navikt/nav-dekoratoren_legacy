@@ -29,7 +29,7 @@ jobs:
                   echo "SOLUTION_ID=${{ secrets.SOLUTION_ID }}" >> $GITHUB_ENV
             - run: npm ci
             - run: npm test
-            - name: Build with vars
+            - name: Create .var and build
               run: |
                 cat > .env <<EOF
                   OPPORTUNITY_ID: $OPPORTUNITY_ID
