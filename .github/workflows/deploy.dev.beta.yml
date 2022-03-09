@@ -30,11 +30,13 @@ jobs:
             - run: npm ci
             - run: npm test
             - name: Build with vars
-              run: npm run build
-              env:
-                OPPORTUNITY_ID: 4321
-                CASETYPE_ID: ${{ secrets.CASETYPE_ID }}
-                SOLUTION_ID: ${{ secrets.SOLUTION_ID }}
+              run: |
+                cat > .env <<EOF
+                  OPPORTUNITY_ID: $OPPORTUNITY_ID
+                  CASETYPE_ID: ${{ secrets.CASETYPE_ID }}
+                  SOLUTION_ID: 1234
+                EOF
+                npm run build
             - name: Docker build and push
               run: |
                   echo $GITHUB_TOKEN | docker login $IMAGE_REGISTRY -u ${GITHUB_REPOSITORY} --password-stdin
