@@ -54,8 +54,6 @@ spec:
           value: https://loginservice.dev.nav.no/slo
         - name: FEEDBACK_API_URL
           value: https://dekoratoren-api.dev-gcp.nais.io/event
-        - name: OPPORTUNITY_ID
-          value: '1234567'
     resources:
         limits:
             cpu: '3'
