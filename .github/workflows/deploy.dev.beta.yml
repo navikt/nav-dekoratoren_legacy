@@ -29,7 +29,12 @@ jobs:
                   echo "SOLUTION_ID=${{ secrets.SOLUTION_ID }}" >> $GITHUB_ENV
             - run: npm ci
             - run: npm test
-            - run: npm run build
+            - name: Build with vars
+              run: npm run build
+              env:
+                OPPORTUNITY_ID: 4321
+                CASETYPE_ID: ${{ secrets.CASETYPE_ID }}
+                SOLUTION_ID: ${{ secrets.SOLUTION_ID }}
             - name: Docker build and push
               run: |
                   echo $GITHUB_TOKEN | docker login $IMAGE_REGISTRY -u ${GITHUB_REPOSITORY} --password-stdin
@@ -48,4 +53,3 @@ jobs:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
                   RESOURCE: .nais/dev-gcp/personbruker.yaml
                   VARS: .nais/vars.yaml
-                  VAR: CASETYPE_ID=${{ env.CASETYPE_ID }},OPPORTUNITY_ID=5678,SOLUTION_ID=${{ secrets.SOLUTION_ID }}
