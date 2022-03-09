@@ -41,9 +41,6 @@ jobs:
                   namespace: personbruker
                   image: $IMAGE_REGISTRY/$IMAGE_NAME
                   version: $IMAGE_VERSION
-                  OPPORTUNITY_ID: 5678
-                  CASETYPE_ID: ${{ env.CASETYPE_ID }}
-                  SOLUTION_ID: ${{ secrets.SOLUTION_ID }}
                   EOF
             - uses: nais/deploy/actions/deploy@master
               env:
@@ -51,3 +48,4 @@ jobs:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
                   RESOURCE: .nais/dev-gcp/personbruker.yaml
                   VARS: .nais/vars.yaml
+                  VAR: CASETYPE_ID=${{ env.CASETYPE_ID }},OPPORTUNITY_ID=5678,SOLUTION_ID=${{ secrets.SOLUTION_ID }}
