@@ -28,10 +28,6 @@ const DelSkjermModal = (props: Props) => {
     const { CASETYPE_ID } = useSelector((state: AppState) => state.environment);
     const { SOLUTION_ID } = useSelector((state: AppState) => state.environment);
     const { NAV_GROUP_ID } = useSelector((state: AppState) => state.environment);
-    console.log(OPPORTUNITY_ID);
-    console.log(CASETYPE_ID);
-    console.log(SOLUTION_ID);
-    console.log(NAV_GROUP_ID);
 
     // State
     const [code, setCode] = useState('');
