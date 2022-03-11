@@ -22,11 +22,6 @@ jobs:
                   key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
                   restore-keys: |
                       ${{ runner.os }}-node-
-            - name: Set delt skjerm variables
-              run: |
-                  echo "OPPORTUNITY_ID=${{ secrets.OPPORTUNITY_ID }}" >> $GITHUB_ENV
-                  echo "CASETYPE_ID=${{ secrets.CASETYPE_ID }}" >> $GITHUB_ENV
-                  echo "SOLUTION_ID=${{ secrets.SOLUTION_ID }}" >> $GITHUB_ENV
             - run: npm ci
             - run: npm test
             - run: npm run build
@@ -41,6 +36,10 @@ jobs:
                   namespace: personbruker
                   image: $IMAGE_REGISTRY/$IMAGE_NAME
                   version: $IMAGE_VERSION
+                  OPPORTUNITY_ID: ${{ secrets.OPPORTUNITY_ID }}
+                  CASETYPE_ID: ${{ secrets.CASETYPE_ID }}
+                  SOLUTION_ID: ${{ secrets.SOLUTION_ID }}
+                  NAV_GROUP_ID: ${{ secrets.NAV_GROUP_ID }}
                   EOF
             - uses: nais/deploy/actions/deploy@master
               env:
