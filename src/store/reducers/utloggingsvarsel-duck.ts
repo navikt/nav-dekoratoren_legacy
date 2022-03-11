@@ -54,8 +54,9 @@ export const utloggingsvarselOppdatereStatus = (
     type: ActionType.SETT_UTLOGGINSVARSEL_OPPDATERESTATUS,
 });
 
-//NOSONAR
+// NOSONAR
 export default function reducer(state: UtloggingsvarselState = initialState, action: Handling): UtloggingsvarselState {
+    // NOSONAR
     switch (action.type) {
         case ActionType.SET_UTLOGGINSVARSEL_MINIMERT: {
             return { ...state, varselState: VarselEkspandert.MINIMERT };
