@@ -60,6 +60,8 @@ spec:
           value: {{CASETYPE_ID}}
         - name: SOLUTION_ID
           value: {{SOLUTION_ID}}
+        - name: NAV_GROUP_ID
+          value: {{NAV_GROUP_ID}}
         
     resources:
         limits:
