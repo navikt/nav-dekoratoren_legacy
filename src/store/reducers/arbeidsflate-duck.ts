@@ -13,6 +13,7 @@ export const initialState: Arbeidsflate = {
     status: MenuValue.IKKEBESTEMT,
 };
 
+//NOSONAR
 export const reducer = (state: Arbeidsflate = initialState, action: Handling): Arbeidsflate => {
     switch (action.type) {
         case ActionType.PRIVATPERSON: {
