@@ -27,9 +27,11 @@ const DelSkjermModal = (props: Props) => {
     const { OPPORTUNITY_ID } = useSelector((state: AppState) => state.environment);
     const { CASETYPE_ID } = useSelector((state: AppState) => state.environment);
     const { SOLUTION_ID } = useSelector((state: AppState) => state.environment);
+    const { NAV_GROUP_ID } = useSelector((state: AppState) => state.environment);
     console.log(OPPORTUNITY_ID);
     console.log(CASETYPE_ID);
     console.log(SOLUTION_ID);
+    console.log(NAV_GROUP_ID);
 
     // State
     const [code, setCode] = useState('');
@@ -40,7 +42,7 @@ const DelSkjermModal = (props: Props) => {
     // Vergic config
     const w = window as any;
     const vergicExists = typeof w !== 'undefined' && w.vngage;
-    const navGroupId = 'A034081B-6B73-46B7-BE27-23B8E9CE3079';
+    const navGroupId = NAV_GROUP_ID;
 
     useEffect(() => {
         if (vergicExists) {

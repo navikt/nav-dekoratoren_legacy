@@ -21,6 +21,7 @@ export interface Environment {
     OPPORTUNITY_ID: string;
     CASETYPE_ID: string;
     SOLUTION_ID: string;
+    NAV_GROUP_ID: string;
 
     // Parameters
     PARAMS: Params;
@@ -71,6 +72,7 @@ export const initialState: Environment = {
     OPPORTUNITY_ID: '',
     CASETYPE_ID: '',
     SOLUTION_ID: '',
+    NAV_GROUP_ID: '',
 
     // Parameters
     PARAMS: {

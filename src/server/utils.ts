@@ -47,6 +47,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
         OPPORTUNITY_ID: process.env.OPPORTUNITY_ID as string,
         SOLUTION_ID: process.env.SOLUTION_ID as string,
         CASETYPE_ID: process.env.CASETYPE_ID as string,
+        NAV_GROUP_ID: process.env.NAV_GROUP_ID as string,
         MINSIDE_ARBEIDSGIVER_URL: process.env.MINSIDE_ARBEIDSGIVER_URL as string,
         DITT_NAV_URL: process.env.DITT_NAV_URL as string,
         LOGIN_URL: process.env.LOGIN_URL as string,
