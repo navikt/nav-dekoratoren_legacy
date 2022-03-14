@@ -90,7 +90,7 @@ const DelSkjermModal = (props: Props) => {
                 <Heading size="medium" level="2">
                     <Tekst id={'delskjerm-modal-overskrift'} />
                 </Heading>
-                <div className={'delskjerm__beskrivelse typo-normal'}>
+                <div className={'delskjerm__beskrivelse'}>
                     <BodyLong>
                         <Tekst id={'delskjerm-modal-beskrivelse'} />
                     </BodyLong>
