@@ -52,7 +52,7 @@ export const Brodsmulesti = (props: Props) => {
     return (
         <nav className={cls.className} aria-label={finnTekst('brodsmulesti', language)} itemProp="breadcrumb">
             <ol>
-                <li className="typo-normal">
+                <li>
                     <Link href={homeUrlMap[language]} className={cls.element('home')}>
                         <Bilde asset={HomeIcon} className={cls.element('icon')} />
                         <span>nav.no</span>
@@ -60,7 +60,7 @@ export const Brodsmulesti = (props: Props) => {
                     </Link>
                 </li>
                 {isLanguageNorwegian && (
-                    <li className="typo-normal">
+                    <li>
                         <Link href={context.url}>
                             <span>
                                 <Tekst id={context.lenkeTekstId} />
@@ -70,7 +70,7 @@ export const Brodsmulesti = (props: Props) => {
                     </li>
                 )}
                 {!showAll && breadcrumbs.length > 2 && (
-                    <li className="typo-normal">
+                    <li>
                         <button
                             aria-label={finnTekst('brodsmulesti-se-alle', language)}
                             className={`${cls.element('view-all')} lenke`}
@@ -85,7 +85,7 @@ export const Brodsmulesti = (props: Props) => {
                     </li>
                 )}
                 {breadcrumbsSliced.map((breadcrumb, i) => (
-                    <li key={i} className="typo-normal" aria-current={i + 1 === breadcrumbsSliced.length && `page`}>
+                    <li key={i} aria-current={i + 1 === breadcrumbsSliced.length && `page`}>
                         {i + 1 !== breadcrumbsSliced.length ? (
                             breadcrumb.handleInApp ? (
                                 <Link
