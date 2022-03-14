@@ -17,7 +17,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 const UtloggingsvarselValg: FunctionComponent<Props> = (props) => {
-    const [,, removeCookie] = useCookies();
+    const [, , removeCookie] = useCookies();
     const cls = BEMHelper('utloggingsvarsel');
     const { htmlUUDisable } = props;
 
@@ -30,7 +30,7 @@ const UtloggingsvarselValg: FunctionComponent<Props> = (props) => {
                 type="hoved"
                 tabIndex={htmlUUDisable ? -1 : 0}
                 onClick={() => {
-                    removeCookie(CookieName.SELVBETJENING_IDTOKEN, cookieOptions)
+                    removeCookie(CookieName.SELVBETJENING_IDTOKEN, cookieOptions);
                     window.location.href = LOGIN_URL;
                 }}
             >

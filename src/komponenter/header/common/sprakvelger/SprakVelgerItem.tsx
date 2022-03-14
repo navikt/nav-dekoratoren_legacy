@@ -37,7 +37,9 @@ const SprakVelgerItem = (props: Props) => {
                 </div>
             ) : (
                 <Normaltekst className={cls.element('option')}>
-                    <span lang={item.locale} className="not-selected">{item.label}</span>
+                    <span lang={item.locale} className="not-selected">
+                        {item.label}
+                    </span>
                 </Normaltekst>
             )}
         </li>

@@ -45,7 +45,7 @@ export enum ActionType {
     SETT_TILBAKEMELDING_PENDING = 'SETT_TILBAKEMELDING_PENDING',
     SETT_UTLOGGINGSVARSEL_EKSPANDERT = 'SETT_UTLOGGINGSVARSEL_EKSPANDERT',
     SET_UTLOGGINSVARSEL_MINIMERT = 'SET_UTLOGGINSVARSEL_MINIMERT',
-    SETT_UTLOGGINSVARSEL_OPPDATERESTATUS = 'SETT_UTLOGGINSVARSEL_OPPDATERESTATUS'
+    SETT_UTLOGGINSVARSEL_OPPDATERESTATUS = 'SETT_UTLOGGINSVARSEL_OPPDATERESTATUS',
 }
 
 export interface HentInnloggingsstatusOKAction {
@@ -205,7 +205,7 @@ export interface SettUtloggingsvarselMinimert {
 }
 
 export interface SettUtloggingsvarselOpppdatereStatus {
-    data: Partial<UtloggingsvarselState>
+    data: Partial<UtloggingsvarselState>;
     type: ActionType.SETT_UTLOGGINSVARSEL_OPPDATERESTATUS;
 }
 

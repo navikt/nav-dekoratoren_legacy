@@ -34,9 +34,7 @@ export const MinsidemenyInnhold = (props: Props) => {
         <>
             <div className={cls.element('topp-seksjon')}>
                 <div className={cls.element('topp-seksjon-left')}>
-                    <Systemtittel
-                        className={cls.element('topp-seksjon-tittel')}
-                    >
+                    <Systemtittel className={cls.element('topp-seksjon-tittel')}>
                         <Tekst id={'min-side'} />
                     </Systemtittel>
                     <LenkeMedSporing
@@ -59,9 +57,7 @@ export const MinsidemenyInnhold = (props: Props) => {
                     <UndertekstBold>
                         <Tekst id={'logget-inn-som'} />
                     </UndertekstBold>
-                    <Normaltekst className={cls.element('brukernavn')}>
-                        {brukernavn}
-                    </Normaltekst>
+                    <Normaltekst className={cls.element('brukernavn')}>{brukernavn}</Normaltekst>
                 </div>
             </div>
             {authLevel !== '4' && <MinsideLockMsg />}

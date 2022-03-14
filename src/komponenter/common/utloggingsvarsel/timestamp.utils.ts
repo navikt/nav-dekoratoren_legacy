@@ -4,7 +4,7 @@ import { SettUtloggingsvarselOpppdatereStatus } from '../../../store/actions';
 import {
     utloggingsvarselOppdatereStatus,
     UtloggingsvarselState,
-    VarselEkspandert
+    VarselEkspandert,
 } from '../../../store/reducers/utloggingsvarsel-duck';
 import { CookieName, cookieOptions, getCookieContextKey } from '../../../server/cookieSettings';
 
@@ -26,7 +26,12 @@ export const checkTimeStampAndSetTimeStamp = (
 
     if (timeStampIkkeUtgatt(differanse) && utlogginsvarsel.miljo === getCookieContextKey(window.location.origin)) {
         if (differanse < ANTALL_MIN_NAR_VARSELSTART) {
-            return setUtloggingVarsel(jwtTimestamp, setModalOpen, setUnixTimeStamp, !utlogginsvarsel.modalLukketAvBruker);
+            return setUtloggingVarsel(
+                jwtTimestamp,
+                setModalOpen,
+                setUnixTimeStamp,
+                !utlogginsvarsel.modalLukketAvBruker
+            );
         }
         return timeout(
             jwtTimestamp,
@@ -35,7 +40,8 @@ export const checkTimeStampAndSetTimeStamp = (
             setUnixTimeStamp,
             dispatch,
             utlogginsvarsel,
-            cookie);
+            cookie
+        );
     }
 };
 

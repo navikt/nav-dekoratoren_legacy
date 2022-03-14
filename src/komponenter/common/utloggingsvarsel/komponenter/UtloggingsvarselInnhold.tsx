@@ -19,7 +19,7 @@ interface Props {
 }
 
 const stateSelector = (state: AppState) => ({
-    utloggingsvarsel: state.utloggingsvarsel
+    utloggingsvarsel: state.utloggingsvarsel,
 });
 
 const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
@@ -30,21 +30,18 @@ const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
 
     return (
         <>
-            <LiteEkspanderbartvindu
-                setModalOpen={setModalOpen}
-                typoGrafi='normaltekst'
-                tid={tid}
-                visFullTekst={true}
-            />
-            <div className={cls.element('main-wrapper')}
-                 aria-hidden={utloggingsvarsel.varselState === VarselEkspandert.MINIMERT}>
+            <LiteEkspanderbartvindu setModalOpen={setModalOpen} typoGrafi="normaltekst" tid={tid} visFullTekst={true} />
+            <div
+                className={cls.element('main-wrapper')}
+                aria-hidden={utloggingsvarsel.varselState === VarselEkspandert.MINIMERT}
+            >
                 <Header />
                 <div className={cls.element('container')}>
                     <UtloggingNavigasjon />
                     <UtloggingsvarselTekstInnhold overskrift={overskrift} />
                     <UtloggingsvarselValg htmlUUDisable={htmlUUdisable} />
                     <Nedteller
-                        typoGrafi='normaltekst'
+                        typoGrafi="normaltekst"
                         tekst={'Du blir automatisk logget ut om '.concat(tid)}
                         subClass={'main'}
                     />

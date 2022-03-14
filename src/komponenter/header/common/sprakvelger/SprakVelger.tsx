@@ -47,33 +47,26 @@ export const SprakVelger = (props: Props) => {
             window.location.assign(selectedLanguage.url);
         }
     };
-    const {
-        isOpen,
-        selectedItem,
-        getToggleButtonProps,
-        getMenuProps,
-        highlightedIndex,
-        getItemProps,
-    } = useSelect({
+    const { isOpen, selectedItem, getToggleButtonProps, getMenuProps, highlightedIndex, getItemProps } = useSelect({
         items: options,
-        itemToString: (item) => (item?.label || ''),
+        itemToString: (item) => item?.label || '',
         onSelectedItemChange: ({ selectedItem }) => onChange(selectedItem as LocaleOption),
         selectedItem: options.find((option) => option.locale === language),
     });
 
     const ulStyle = isOpen
-        ?   {
-                boxShadow: '0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08)',
-                border: '1px solid',
-                borderRadius: '0 0 4px 4px',
-                outline: 'none',
-                borderColor: farger.navGra20,
-                borderTop: 'none',
-            }
-        :   {
-                display: 'none',
-                border: 'none'
-            };
+        ? {
+              boxShadow: '0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08)',
+              border: '1px solid',
+              borderRadius: '0 0 4px 4px',
+              outline: 'none',
+              borderColor: farger.navGra20,
+              borderTop: 'none',
+          }
+        : {
+              display: 'none',
+              border: 'none',
+          };
     // Adding aria-controls and removing aria-labelledby prop from downshift (to avoid an extra reading of label on screen readers)
     let buttonProps = getToggleButtonProps();
     delete buttonProps['aria-labelledby'];
@@ -85,30 +78,26 @@ export const SprakVelger = (props: Props) => {
     return (
         <div className={cls.element('container')}>
             <nav className={cls.className}>
-                <button
-                    {...buttonProps}
-                    className={`${cls.element('knapp')} skjemaelement__input`}
-                    type="button"
-                >
+                <button {...buttonProps} className={`${cls.element('knapp')} skjemaelement__input`} type="button">
                     <span className={cls.element('knapp-tekst')}>
                         <Bilde asset={Globe} className={cls.element('ikon')} />
                         <Normaltekst>{selectorLabel}</Normaltekst>
                     </span>
                     <NedChevron />
                 </button>
-                <ul {...menuProps} className={cls.element('menu')} style={ulStyle} >
+                <ul {...menuProps} className={cls.element('menu')} style={ulStyle}>
                     <>
-                            {options.map((item, index) => (
-                                <SprakVelgerItem
-                                    key={index}
-                                    cls={cls}
-                                    item={item}
-                                    index={index}
-                                    highlightedIndex={highlightedIndex}
-                                    itemProps={getItemProps({item, index})}
-                                    selectedItem={selectedItem}
-                                />
-                            ))}
+                        {options.map((item, index) => (
+                            <SprakVelgerItem
+                                key={index}
+                                cls={cls}
+                                item={item}
+                                index={index}
+                                highlightedIndex={highlightedIndex}
+                                itemProps={getItemProps({ item, index })}
+                                selectedItem={selectedItem}
+                            />
+                        ))}
                     </>
                 </ul>
             </nav>

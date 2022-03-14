@@ -3,7 +3,7 @@ import {
     Handling,
     SettUtloggingsvarselEkspandert,
     SettUtloggingsvarselMinimert,
-    SettUtloggingsvarselOpppdatereStatus
+    SettUtloggingsvarselOpppdatereStatus,
 } from '../actions';
 
 export enum VarselEkspandert {
@@ -12,8 +12,8 @@ export enum VarselEkspandert {
 }
 
 export interface ParsedJwtToken {
-    UTLOGGINGSVARSEL: boolean,
-    TIMESTAMP: number
+    UTLOGGINGSVARSEL: boolean;
+    TIMESTAMP: number;
 }
 
 export interface UtloggingsVarselProperties {
@@ -27,7 +27,7 @@ export const initialState: UtloggingsvarselState = {
     modalLukketAvBruker: false,
     origin: '',
     timeStamp: 0,
-    miljo: ''
+    miljo: '',
 };
 
 export interface UtloggingsvarselState {
@@ -40,25 +40,28 @@ export interface UtloggingsvarselState {
 }
 
 export const utloggingsvarselEkspander = (): SettUtloggingsvarselEkspandert => ({
-    type: ActionType.SETT_UTLOGGINGSVARSEL_EKSPANDERT
+    type: ActionType.SETT_UTLOGGINGSVARSEL_EKSPANDERT,
 });
 
 export const utloggingsvarselMinimer = (): SettUtloggingsvarselMinimert => ({
-    type: ActionType.SET_UTLOGGINSVARSEL_MINIMERT
+    type: ActionType.SET_UTLOGGINSVARSEL_MINIMERT,
 });
 
-export const utloggingsvarselOppdatereStatus = (data: Partial<UtloggingsvarselState>):
-    SettUtloggingsvarselOpppdatereStatus => ({
+export const utloggingsvarselOppdatereStatus = (
+    data: Partial<UtloggingsvarselState>
+): SettUtloggingsvarselOpppdatereStatus => ({
     data,
-    type: ActionType.SETT_UTLOGGINSVARSEL_OPPDATERESTATUS
+    type: ActionType.SETT_UTLOGGINSVARSEL_OPPDATERESTATUS,
 });
 
-export default function reducer(state: UtloggingsvarselState = initialState, action: Handling): UtloggingsvarselState { //NOSONAR
+// NOSONAR
+export default function reducer(state: UtloggingsvarselState = initialState, action: Handling): UtloggingsvarselState {
+    // NOSONAR
     switch (action.type) {
         case ActionType.SET_UTLOGGINSVARSEL_MINIMERT: {
             return { ...state, varselState: VarselEkspandert.MINIMERT };
         }
-        case  ActionType.SETT_UTLOGGINGSVARSEL_EKSPANDERT: {
+        case ActionType.SETT_UTLOGGINGSVARSEL_EKSPANDERT: {
             return { ...state, varselState: VarselEkspandert.EKSPANDERT };
         }
         case ActionType.SETT_UTLOGGINSVARSEL_OPPDATERESTATUS: {
@@ -68,4 +71,3 @@ export default function reducer(state: UtloggingsvarselState = initialState, act
             return state;
     }
 }
-

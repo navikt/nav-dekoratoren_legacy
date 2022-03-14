@@ -18,6 +18,10 @@ export interface Environment {
     LOGIN_URL: string;
     LOGOUT_URL: string;
     FEEDBACK_API_URL: string;
+    OPPORTUNITY_ID: string;
+    CASETYPE_ID: string;
+    SOLUTION_ID: string;
+    NAV_GROUP_ID: string;
 
     // Parameters
     PARAMS: Params;
@@ -65,6 +69,10 @@ export const initialState: Environment = {
     LOGIN_URL: '',
     LOGOUT_URL: '',
     FEEDBACK_API_URL: '',
+    OPPORTUNITY_ID: '',
+    CASETYPE_ID: '',
+    SOLUTION_ID: '',
+    NAV_GROUP_ID: '',
 
     // Parameters
     PARAMS: {
