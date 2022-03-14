@@ -16,6 +16,7 @@ import kalenderIkon from 'ikoner/varsler/calendar-3.svg';
 import chatIkon from 'ikoner/varsler/bubble-chat-2.svg';
 import dokumentIkon from 'ikoner/varsler/file-new-1.svg';
 import plasterIkon from 'ikoner/varsler/first-aid-plaster.svg';
+import { BodyShort, Detail } from '@navikt/ds-react';
 
 dayjs.extend(localizedFormat);
 
@@ -77,8 +78,8 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                 <Bilde asset={ikon} altText={'varsel-ikon'} className={`varsel-ikon`} />
                             </div>
                             <div className="varsel-innhold">
-                                <p className="typo-normal-liten varsel-dato">{formatDato(varsel.datoOpprettet)}</p>
-                                <p className="typo-infotekst">{varsel.varseltekst}</p>
+                                <Detail className="varsel-dato">{formatDato(varsel.datoOpprettet)}</Detail>
+                                <BodyShort className="infotekst">{varsel.varseltekst}</BodyShort>
                                 <LenkeMedSporing
                                     href={varsel.url || ''}
                                     id={
