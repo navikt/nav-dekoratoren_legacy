@@ -4,7 +4,7 @@ import { Status } from 'api/api';
 import { AppState } from 'store/reducers';
 import { getHovedmenyNode } from 'utils/meny-storage-utils';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
-import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
+import Loader from '@navikt/ds-react';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapp/hovedmeny-knapp/HovedmenyKnapp';
 import HovedmenyInnhold from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyInnhold';
@@ -24,15 +24,9 @@ type Props = {
 };
 
 export const Hovedmeny = ({ kbNavMainState }: Props) => {
-    const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(
-        stateSelector
-    );
+    const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(stateSelector);
 
-    const hovedmenyPunkter = getHovedmenyNode(
-        menyPunkter.data,
-        language,
-        arbeidsflate
-    );
+    const hovedmenyPunkter = getHovedmenyNode(menyPunkter.data, language, arbeidsflate);
 
     // Hide empty menues
     if (menyPunkter.status === Status.OK && !hovedmenyPunkter?.hasChildren) {
@@ -42,11 +36,7 @@ export const Hovedmeny = ({ kbNavMainState }: Props) => {
     return (
         <div className={'media-tablet-desktop'}>
             <HovedmenyKnapp id={desktopHovedmenyKnappId} />
-            <EkspanderbarMeny
-                isOpen={isOpen}
-                classname={classname}
-                id={classname}
-            >
+            <EkspanderbarMeny isOpen={isOpen} classname={classname} id={classname}>
                 {menyPunkter.status === Status.OK ? (
                     <HovedmenyInnhold
                         arbeidsflate={arbeidsflate}
@@ -56,10 +46,7 @@ export const Hovedmeny = ({ kbNavMainState }: Props) => {
                         kbNavMainState={kbNavMainState}
                     />
                 ) : (
-                    <Spinner
-                        tekstId={'meny-loading'}
-                        className={isOpen ? 'spinner-container--active' : ''}
-                    />
+                    <Loader tekstId={'meny-loading'} className={isOpen ? 'spinner-container--active' : ''} />
                 )}
             </EkspanderbarMeny>
         </div>

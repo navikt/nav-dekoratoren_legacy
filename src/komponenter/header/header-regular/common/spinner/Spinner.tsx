@@ -1,5 +1,5 @@
 import React from 'react';
-import NavFrontendSpinner from 'nav-frontend-spinner';
+import Loader from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
 import './Spinner.less';
 import { BodyShort } from '@navikt/ds-react';
@@ -16,7 +16,7 @@ const Spinner = ({ tekstId, className }: Props) => (
                 <Tekst id={tekstId} />
             </BodyShort>
         )}
-        <NavFrontendSpinner className={'dekorator-spinner'} />
+        <Loader className={'dekorator-spinner'} />
     </div>
 );
 

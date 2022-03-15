@@ -3,7 +3,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { Status } from 'api/api';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
-import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
+import Loader from '@navikt/ds-react';
 import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapp/hovedmeny-knapp/HovedmenyKnapp';
 import MobilMeny from './meny/MobilMeny';
 import SlideToClose from 'komponenter/header/header-regular/mobil/meny/innhold/utils/SlideToClose';
@@ -21,29 +21,19 @@ const stateSelector = (state: AppState) => ({
 });
 
 export const HovedmenyMobil = () => {
-    const { meny, underIsOpen, hovedIsOpen, varselIsOpen } = useSelector(
-        stateSelector
-    );
+    const { meny, underIsOpen, hovedIsOpen, varselIsOpen } = useSelector(stateSelector);
 
     return (
         <div className={'media-sm-mobil'}>
             <HovedmenyKnapp id={mobilmenyKnappId} />
-            <EkspanderbarMeny
-                isOpen={hovedIsOpen}
-                classname={classname}
-                id={classname}
-            >
+            <EkspanderbarMeny isOpen={hovedIsOpen} classname={classname} id={classname}>
                 <SlideToClose>
                     {meny.status === Status.OK ? (
                         <MobilMeny classname={classname} />
                     ) : (
-                        <Spinner
+                        <Loader
                             tekstId={'meny-loading'}
-                            className={
-                                hovedIsOpen || underIsOpen || varselIsOpen
-                                    ? 'spinner-container--active'
-                                    : ''
-                            }
+                            className={hovedIsOpen || underIsOpen || varselIsOpen ? 'spinner-container--active' : ''}
                         />
                     )}
                 </SlideToClose>
