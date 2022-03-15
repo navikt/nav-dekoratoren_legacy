@@ -4,7 +4,7 @@ import { Status } from 'api/api';
 import { AppState } from 'store/reducers';
 import { getHovedmenyNode } from 'utils/meny-storage-utils';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
-import Loader from '@navikt/ds-react';
+import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapp/hovedmeny-knapp/HovedmenyKnapp';
 import HovedmenyInnhold from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyInnhold';
@@ -46,7 +46,7 @@ export const Hovedmeny = ({ kbNavMainState }: Props) => {
                         kbNavMainState={kbNavMainState}
                     />
                 ) : (
-                    <Loader tekstId={'meny-loading'} className={isOpen ? 'spinner-container--active' : ''} />
+                    <Spinner tekstId={'meny-loading'} className={isOpen ? 'spinner-container--active' : ''} />
                 )}
             </EkspanderbarMeny>
         </div>

@@ -1,8 +1,7 @@
 import React from 'react';
-import Loader from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
 import './Spinner.less';
-import { BodyShort } from '@navikt/ds-react';
+import { BodyShort, Loader } from '@navikt/ds-react';
 
 type Props = {
     tekstId?: string;

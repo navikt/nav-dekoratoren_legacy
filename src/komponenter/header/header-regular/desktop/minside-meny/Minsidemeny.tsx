@@ -3,7 +3,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { getMinsidemenyNode } from 'utils/meny-storage-utils';
 import { Status } from 'api/api';
-import Loader from '@navikt/ds-react';
+import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
 import MinsidemenyInnhold from './MinsidemenyInnhold';
 import { KbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
@@ -54,7 +54,7 @@ export const Minsidemeny = ({ kbNavMainState }: Props) => {
                         authLevel={innloggetStatus.securityLevel}
                     />
                 ) : (
-                    <Loader tekstId={'meny-loading'} />
+                    <Spinner tekstId={'meny-loading'} />
                 )}
             </EkspanderbarMeny>
         </div>

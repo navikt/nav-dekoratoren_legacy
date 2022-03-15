@@ -3,7 +3,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { Status } from 'api/api';
 import EkspanderbarMeny from 'komponenter/header/header-regular/common/ekspanderbar-meny/EkspanderbarMeny';
-import Loader from '@navikt/ds-react';
+import Spinner from 'komponenter/header/header-regular/common/spinner/Spinner';
 import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapp/hovedmeny-knapp/HovedmenyKnapp';
 import MobilMeny from './meny/MobilMeny';
 import SlideToClose from 'komponenter/header/header-regular/mobil/meny/innhold/utils/SlideToClose';
@@ -31,7 +31,7 @@ export const HovedmenyMobil = () => {
                     {meny.status === Status.OK ? (
                         <MobilMeny classname={classname} />
                     ) : (
-                        <Loader
+                        <Spinner
                             tekstId={'meny-loading'}
                             className={hovedIsOpen || underIsOpen || varselIsOpen ? 'spinner-container--active' : ''}
                         />
