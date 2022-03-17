@@ -26,7 +26,7 @@
         "url": "https://github.com/navikt/nav-dekoratoren/issues"
     },
     "dependencies": {
-        "@navikt/ds-css": "^0.15.8",
+        "@navikt/ds-css": "^0.16.5",
         "@navikt/ds-react": "^0.17.6",
         "@navikt/fnrvalidator": "^1.1.3",
         "@navikt/nav-chatbot": "^2.5.13",
