@@ -14,34 +14,35 @@ export const Driftsmeldinger = () => {
     console.log(`Location: ${location?.href}`);
 
     const { XP_BASE_URL } = environment;
-    const visDriftsmeldinger = driftsmeldinger.status === 'OK' && driftsmeldinger.data.length > 0;
 
-    return visDriftsmeldinger ? (
+    const driftsmeldingerToRender =
+        driftsmeldinger.status === 'OK'
+            ? driftsmeldinger.data.filter(
+                  (melding) =>
+                      !melding.urlscope ||
+                      melding.urlscope.length === 0 ||
+                      melding.urlscope.some((url) => location?.href.startsWith(url))
+              )
+            : [];
+
+    console.log('Driftsmeldinger to render: ', driftsmeldingerToRender);
+
+    return driftsmeldingerToRender.length > 0 ? (
         <article className="driftsmeldinger">
-            <>
-                {driftsmeldinger.data
-                    .filter(
-                        (melding) =>
-                            melding.urlscope.length === 0 ||
-                            melding.urlscope.some((url) => location?.href.startsWith(url))
-                    )
-                    .map((melding) => {
-                        return (
-                            <LenkeMedSporing
-                                key={melding.heading}
-                                href={`${XP_BASE_URL}${melding.url}`}
-                                classNameOverride="message"
-                                analyticsEventArgs={{
-                                    category: AnalyticsCategory.Header,
-                                    action: 'driftsmeldinger',
-                                }}
-                            >
-                                <span className="message-icon">{melding.type && <Icon type={melding.type} />}</span>
-                                <Normaltekst className="message-text">{melding.heading}</Normaltekst>
-                            </LenkeMedSporing>
-                        );
-                    })}
-            </>
+            {driftsmeldingerToRender.map((melding) => (
+                <LenkeMedSporing
+                    key={melding.heading}
+                    href={`${XP_BASE_URL}${melding.url}`}
+                    classNameOverride="message"
+                    analyticsEventArgs={{
+                        category: AnalyticsCategory.Header,
+                        action: 'driftsmeldinger',
+                    }}
+                >
+                    <span className="message-icon">{melding.type && <Icon type={melding.type} />}</span>
+                    <Normaltekst className="message-text">{melding.heading}</Normaltekst>
+                </LenkeMedSporing>
+            ))}
         </article>
     ) : null;
 };
