@@ -15,6 +15,7 @@ export interface DriftsmeldingerData {
     heading: string;
     url: string;
     type: string;
+    urlscope: string[];
 }
 
 const initalState: DriftsmeldingerState = {
@@ -22,10 +23,7 @@ const initalState: DriftsmeldingerState = {
     status: Status.IKKE_STARTET,
 };
 
-export default function reducer(
-    state: DriftsmeldingerState = initalState,
-    action: Handling
-): DriftsmeldingerState {
+export default function reducer(state: DriftsmeldingerState = initalState, action: Handling): DriftsmeldingerState {
     switch (action.type) {
         case ActionType.HENT_DRIFTSMELDING_OK: {
             return { ...state, status: Status.OK, data: action.data };
@@ -43,22 +41,15 @@ export default function reducer(
     }
 }
 
-export function fetchDriftsmeldinger(
-    APP_URL: string
-): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<DriftsmeldingerData[]>(
-        () => hentDriftsmeldinger(APP_URL),
-        {
-            ok: driftsmeldingSuksess,
-            feilet: driftsmeldingFeilet,
-            pending: driftsmeldingPending,
-        }
-    );
+export function fetchDriftsmeldinger(APP_URL: string): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<DriftsmeldingerData[]>(() => hentDriftsmeldinger(APP_URL), {
+        ok: driftsmeldingSuksess,
+        feilet: driftsmeldingFeilet,
+        pending: driftsmeldingPending,
+    });
 }
 
-function driftsmeldingSuksess(
-    data: DriftsmeldingerData[]
-): HentDriftsmeldingSUCCESS {
+function driftsmeldingSuksess(data: DriftsmeldingerData[]): HentDriftsmeldingSUCCESS {
     return {
         type: ActionType.HENT_DRIFTSMELDING_OK,
         data: data,

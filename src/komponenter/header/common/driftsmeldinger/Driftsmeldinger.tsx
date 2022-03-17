@@ -1,14 +1,17 @@
 import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
-import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { AnalyticsCategory } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { useLocation } from '../../../../utils/hooks/usePushState';
 import './Driftsmeldinger.less';
 
 export const Driftsmeldinger = () => {
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
+    const { location } = useLocation();
+
+    console.log(`Location: ${location?.href}`);
 
     const { XP_BASE_URL } = environment;
     const visDriftsmeldinger = driftsmeldinger.status === 'OK' && driftsmeldinger.data.length > 0;
@@ -16,22 +19,28 @@ export const Driftsmeldinger = () => {
     return visDriftsmeldinger ? (
         <article className="driftsmeldinger">
             <>
-                {driftsmeldinger.data.map((melding: DriftsmeldingerData) => {
-                    return (
-                        <LenkeMedSporing
-                            key={melding.heading}
-                            href={`${XP_BASE_URL}${melding.url}`}
-                            classNameOverride="message"
-                            analyticsEventArgs={{
-                                category: AnalyticsCategory.Header,
-                                action: 'driftsmeldinger',
-                            }}
-                        >
-                            <span className="message-icon">{melding.type && <Icon type={melding.type} />}</span>
-                            <Normaltekst className="message-text">{melding.heading}</Normaltekst>
-                        </LenkeMedSporing>
-                    );
-                })}
+                {driftsmeldinger.data
+                    .filter(
+                        (melding) =>
+                            melding.urlscope.length === 0 ||
+                            melding.urlscope.some((url) => location?.href.startsWith(url))
+                    )
+                    .map((melding) => {
+                        return (
+                            <LenkeMedSporing
+                                key={melding.heading}
+                                href={`${XP_BASE_URL}${melding.url}`}
+                                classNameOverride="message"
+                                analyticsEventArgs={{
+                                    category: AnalyticsCategory.Header,
+                                    action: 'driftsmeldinger',
+                                }}
+                            >
+                                <span className="message-icon">{melding.type && <Icon type={melding.type} />}</span>
+                                <Normaltekst className="message-text">{melding.heading}</Normaltekst>
+                            </LenkeMedSporing>
+                        );
+                    })}
             </>
         </article>
     ) : null;
