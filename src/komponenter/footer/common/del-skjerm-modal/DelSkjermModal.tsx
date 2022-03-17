@@ -28,7 +28,6 @@ const DelSkjermModal = (props: Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(feilmelding);
-    const [accordionOpen, setAccordionOpen] = useState(false);
 
     // Vergic config
     const w = window as any;
