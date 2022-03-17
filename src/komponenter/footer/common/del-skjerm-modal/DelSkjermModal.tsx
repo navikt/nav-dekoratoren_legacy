@@ -1,9 +1,10 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Accordion, Alert, BodyLong, Button, Heading, TextField } from '@navikt/ds-react';
+import { Alert, BodyLong, Button, Heading, TextField } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
 import Modal from 'nav-frontend-modal';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
+import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './DelSkjermModal.less';
 
@@ -94,24 +95,17 @@ const DelSkjermModal = (props: Props) => {
                     <BodyLong>
                         <Tekst id={'delskjerm-modal-beskrivelse'} />
                     </BodyLong>
-                    <Accordion className={'delskjerm__accordion'}>
-                        <Accordion.Item open={accordionOpen}>
-                            <Accordion.Header onClick={() => setAccordionOpen(!accordionOpen)}>
-                                {finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}
-                            </Accordion.Header>
-                            <Accordion.Content>
-                                <ul>
-                                    {[...Array(3)].map((_, i) => (
-                                        <li key={i}>
-                                            <BodyLong>
-                                                <Tekst id={`delskjerm-modal-hjelpetekst-${i}`} />
-                                            </BodyLong>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </Accordion.Content>
-                        </Accordion.Item>
-                    </Accordion>
+                    <Lesmerpanel apneTekst={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
+                        <ul>
+                            {[...Array(3)].map((_, i) => (
+                                <li key={i}>
+                                    <BodyLong>
+                                        <Tekst id={`delskjerm-modal-hjelpetekst-${i}`} />
+                                    </BodyLong>
+                                </li>
+                            ))}
+                        </ul>
+                    </Lesmerpanel>
                 </div>
                 {isOpen ? (
                     <>
