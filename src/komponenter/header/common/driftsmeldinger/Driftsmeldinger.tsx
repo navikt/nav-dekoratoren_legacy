@@ -8,15 +8,23 @@ import { useLocation } from '../../../../utils/hooks/usePushState';
 import { DriftsmeldingerState } from '../../../../store/reducers/driftsmeldinger-duck';
 import './Driftsmeldinger.less';
 
+const removeTrailingSlash = (url?: string) => url?.replace(/\/$/, '');
+
 const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState, location?: Location) => {
+    const currentUrl = removeTrailingSlash(location?.href);
+
     return driftsmeldinger.status === 'OK'
-        ? driftsmeldinger.data.filter(
-              (melding) =>
+        ? driftsmeldinger.data.filter((melding) => {
+              return (
                   !melding.urlscope ||
-                  !location ||
+                  !currentUrl ||
                   melding.urlscope.length === 0 ||
-                  melding.urlscope.some((url) => location.href.startsWith(url))
-          )
+                  melding.urlscope.some((_url) => {
+                      const url = removeTrailingSlash(_url);
+                      return url && (url.endsWith('$') ? currentUrl === url : currentUrl.startsWith(url));
+                  })
+              );
+          })
         : [];
 };
 
