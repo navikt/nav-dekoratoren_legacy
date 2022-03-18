@@ -8,10 +8,10 @@ import { useLocation } from '../../../../utils/hooks/usePushState';
 import { DriftsmeldingerState } from '../../../../store/reducers/driftsmeldinger-duck';
 import './Driftsmeldinger.less';
 
-const removeTrailingSlash = (url?: string) => url?.replace(/\/$/, '');
+const removeTrailingChars = (url?: string) => url?.replace(/(\/|\$|(\/\$))$/, '');
 
 const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState, location?: Location) => {
-    const currentUrl = removeTrailingSlash(location?.href);
+    const currentUrl = removeTrailingChars(location?.href);
 
     return driftsmeldinger.status === 'OK'
         ? driftsmeldinger.data.filter((melding) => {
@@ -19,9 +19,9 @@ const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState, locati
                   !melding.urlscope ||
                   !currentUrl ||
                   melding.urlscope.length === 0 ||
-                  melding.urlscope.some((_url) => {
-                      const url = removeTrailingSlash(_url);
-                      return url && (url.endsWith('$') ? currentUrl === url : currentUrl.startsWith(url));
+                  melding.urlscope.some((rawUrl) => {
+                      const url = removeTrailingChars(rawUrl);
+                      return url && (rawUrl.endsWith('$') ? currentUrl === url : currentUrl.startsWith(url));
                   })
               );
           })
