@@ -5,31 +5,32 @@ import { AnalyticsCategory } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { useLocation } from '../../../../utils/hooks/usePushState';
+import { DriftsmeldingerState } from '../../../../store/reducers/driftsmeldinger-duck';
 import './Driftsmeldinger.less';
+
+const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState, location?: Location) => {
+    return driftsmeldinger.status === 'OK'
+        ? driftsmeldinger.data.filter(
+              (melding) =>
+                  !melding.urlscope ||
+                  !location ||
+                  melding.urlscope.length === 0 ||
+                  melding.urlscope.some((url) => location.href.startsWith(url))
+          )
+        : [];
+};
 
 export const Driftsmeldinger = () => {
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
     const { location } = useLocation();
 
-    console.log(`Location: ${location?.href}`);
-
     const { XP_BASE_URL } = environment;
 
-    const driftsmeldingerToRender =
-        driftsmeldinger.status === 'OK'
-            ? driftsmeldinger.data.filter(
-                  (melding) =>
-                      !melding.urlscope ||
-                      melding.urlscope.length === 0 ||
-                      melding.urlscope.some((url) => location?.href.startsWith(url))
-              )
-            : [];
+    const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger, location);
 
-    console.log('Driftsmeldinger to render: ', driftsmeldingerToRender);
-
-    return driftsmeldingerToRender.length > 0 ? (
+    return currentDriftsmeldinger.length > 0 ? (
         <article className="driftsmeldinger">
-            {driftsmeldingerToRender.map((melding) => (
+            {currentDriftsmeldinger.map((melding) => (
                 <LenkeMedSporing
                     key={melding.heading}
                     href={`${XP_BASE_URL}${melding.url}`}

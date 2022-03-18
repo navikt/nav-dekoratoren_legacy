@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const useLocation = () => {
-    const [location, setLocation] = useState<Location | null>(null);
+    const [location, setLocation] = useState<Location>();
 
     useEffect(() => {
         setLocation(window.location);
