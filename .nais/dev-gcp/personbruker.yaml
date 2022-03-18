@@ -24,6 +24,7 @@ spec:
     ingresses:
         - https://dekoratoren.dev.nav.no
         - https://dekoratoren.ekstern.dev.nav.no
+        - https://www-q1.nav.no/dekoratoren
     accessPolicy:
         outbound:
             external:
