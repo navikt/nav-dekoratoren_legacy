@@ -4,10 +4,9 @@ import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSp
 import { AnalyticsCategory } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { useLocation } from '../../../../utils/hooks/useLocation';
 import { DriftsmeldingerState } from '../../../../store/reducers/driftsmeldinger-duck';
-import './Driftsmeldinger.less';
 import { verifyWindowObj } from '../../../../utils/Environment';
+import './Driftsmeldinger.less';
 
 const removeTrailingChars = (url?: string) => url?.replace(/(\/|\$|(\/\$))$/, '');
 
@@ -15,8 +14,6 @@ const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
     if (!verifyWindowObj()) {
         return [];
     }
-
-    console.log(window.location.href);
 
     const currentUrl = removeTrailingChars(window.location.href);
 
@@ -37,9 +34,6 @@ const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
 
 export const Driftsmeldinger = () => {
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
-    // const { location } = useLocation();
-
-    // console.log(location);
 
     const { XP_BASE_URL } = environment;
 
@@ -89,21 +83,13 @@ const InfoSvg = () => (
 );
 
 const StatusSvg = () => (
-    <svg
-        width="1em"
-        height="1em"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        focusable="false"
-        role="img"
-    >
+    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" role="img">
         <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M12 0a1 1 0 01.894.553l11 22A1 1 0 0123 24H1a1 1 0 01-.894-1.447l11-22A1 1 0 0112 0zm-1 15V8h2v7h-2zm2.5 3.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
             fill="currentColor"
-        ></path>
+        />
     </svg>
 );
 
