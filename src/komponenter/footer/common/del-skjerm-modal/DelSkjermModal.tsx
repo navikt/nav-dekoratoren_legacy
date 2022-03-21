@@ -1,7 +1,6 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Alert, BodyLong, Button, Heading, ReadMore, TextField } from '@navikt/ds-react';
+import React, { ChangeEvent, useEffect, useLayoutEffect, useState } from 'react';
+import { Alert, BodyLong, Button, Heading, ReadMore, TextField, Modal } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
-import Modal from 'nav-frontend-modal';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
@@ -74,13 +73,16 @@ const DelSkjermModal = (props: Props) => {
         element.style.backgroundColor = 'rgba(50, 65, 79, 0.8)'; // #32414f
     };
 
+    useLayoutEffect(() => {
+        setOverlayCss();
+    }, [isOpen]);
+
     return (
         <Modal
-            onAfterOpen={setOverlayCss}
-            isOpen={props.isOpen}
+            open={props.isOpen}
             className={`decorator-wrapper ${classname}`}
-            contentLabel={'Skjermdeling'}
-            onRequestClose={props.onClose}
+            aria-label={'Skjermdeling'}
+            onClose={props.onClose}
         >
             <div className={'delskjerm__header'}>
                 <Bilde className={'delskjerm__veileder'} asset={veileder} altText={''} />
