@@ -56,10 +56,10 @@ const Hovedmeny = (props: Props) => {
         dispatch(toggleUndermenyVisning());
     };
 
-    const setMenyliste = (event: React.MouseEvent<HTMLAnchorElement>, meny: MenyNode) => {
+    const setMenyliste = (event: React.MouseEvent<HTMLAnchorElement>, menyNode: MenyNode) => {
         event.preventDefault();
         menutoggle();
-        settLenker(meny);
+        settLenker(menyNode);
     };
 
     const containerClassName = menyClass.element('startmeny', underMenuIsOpen || !hovedMenuIsOpen ? 'hidden' : '');

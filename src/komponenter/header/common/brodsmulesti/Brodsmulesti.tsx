@@ -86,28 +86,34 @@ export const Brodsmulesti = (props: Props) => {
                 )}
                 {breadcrumbsSliced.map((breadcrumb, i) => (
                     <li key={i} className="typo-normal" aria-current={i + 1 === breadcrumbsSliced.length && `page`}>
-                        {i + 1 !== breadcrumbsSliced.length ? (
-                            breadcrumb.handleInApp ? (
-                                <Link
-                                    href={breadcrumb.url}
-                                    className={cls.element('transform')}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        postMessageToApp('breadcrumbClick', breadcrumb);
-                                    }}
-                                >
-                                    <span>{breadcrumb.title}</span>
-                                    <Next className="next" />
-                                </Link>
-                            ) : (
-                                <Link href={breadcrumb.url} className={cls.element('transform')}>
-                                    <span>{breadcrumb.title}</span>
-                                    <Next className="next" />
-                                </Link>
-                            )
-                        ) : (
-                            <span className={cls.element('transform')}>{breadcrumb.title}</span>
-                        )}
+                        {(() => {
+                            if (i + 1 !== breadcrumbsSliced.length) {
+                                if (breadcrumb.handleInApp) {
+                                    return (
+                                        <Link
+                                            href={breadcrumb.url}
+                                            className={cls.element('transform')}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                postMessageToApp('breadcrumbClick', breadcrumb);
+                                            }}
+                                        >
+                                            <span>{breadcrumb.title}</span>
+                                            <Next className="next" />
+                                        </Link>
+                                    );
+                                } else {
+                                    return (
+                                        <Link href={breadcrumb.url} className={cls.element('transform')}>
+                                            <span>{breadcrumb.title}</span>
+                                            <Next className="next" />
+                                        </Link>
+                                    );
+                                }
+                            } else {
+                                return <span className={cls.element('transform')}>{breadcrumb.title}</span>;
+                            }
+                        })()}
                     </li>
                 ))}
             </ol>
