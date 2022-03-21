@@ -37,17 +37,23 @@ export const Hovedmeny = ({ kbNavMainState }: Props) => {
         <div className={'media-tablet-desktop'}>
             <HovedmenyKnapp id={desktopHovedmenyKnappId} />
             <EkspanderbarMeny isOpen={isOpen} classname={classname} id={classname}>
-                {menyPunkter.status === Status.OK ? (
-                    <HovedmenyInnhold
-                        arbeidsflate={arbeidsflate}
-                        isOpen={isOpen}
-                        language={language}
-                        menyPunkter={hovedmenyPunkter}
-                        kbNavMainState={kbNavMainState}
-                    />
-                ) : (
-                    <Spinner tekstId={'meny-loading'} className={isOpen ? 'spinner-container--active' : ''} />
-                )}
+                {(() => {
+                    if (menyPunkter.status === Status.OK) {
+                        return (
+                            <HovedmenyInnhold
+                                arbeidsflate={arbeidsflate}
+                                isOpen={isOpen}
+                                language={language}
+                                menyPunkter={hovedmenyPunkter}
+                                kbNavMainState={kbNavMainState}
+                            />
+                        );
+                    } else {
+                        return (
+                            <Spinner tekstId={'meny-loading'} className={isOpen ? 'spinner-container--active' : ''} />
+                        );
+                    }
+                })()}
             </EkspanderbarMeny>
         </div>
     );

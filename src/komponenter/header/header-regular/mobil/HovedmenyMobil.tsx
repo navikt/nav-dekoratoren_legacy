@@ -28,14 +28,20 @@ export const HovedmenyMobil = () => {
             <HovedmenyKnapp id={mobilmenyKnappId} />
             <EkspanderbarMeny isOpen={hovedIsOpen} classname={classname} id={classname}>
                 <SlideToClose>
-                    {meny.status === Status.OK ? (
-                        <MobilMeny classname={classname} />
-                    ) : (
-                        <Spinner
-                            tekstId={'meny-loading'}
-                            className={hovedIsOpen || underIsOpen || varselIsOpen ? 'spinner-container--active' : ''}
-                        />
-                    )}
+                    {(() => {
+                        if (meny.status === Status.OK) {
+                            return <MobilMeny classname={classname} />;
+                        } else {
+                            return (
+                                <Spinner
+                                    tekstId={'meny-loading'}
+                                    className={
+                                        hovedIsOpen || underIsOpen || varselIsOpen ? 'spinner-container--active' : ''
+                                    }
+                                />
+                            );
+                        }
+                    })()}
                 </SlideToClose>
             </EkspanderbarMeny>
         </div>
