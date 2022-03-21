@@ -4,14 +4,21 @@ import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSp
 import { AnalyticsCategory } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { useLocation } from '../../../../utils/hooks/usePushState';
+import { useLocation } from '../../../../utils/hooks/useLocation';
 import { DriftsmeldingerState } from '../../../../store/reducers/driftsmeldinger-duck';
 import './Driftsmeldinger.less';
+import { verifyWindowObj } from '../../../../utils/Environment';
 
 const removeTrailingChars = (url?: string) => url?.replace(/(\/|\$|(\/\$))$/, '');
 
-const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState, location?: Location) => {
-    const currentUrl = removeTrailingChars(location?.href);
+const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
+    if (!verifyWindowObj()) {
+        return [];
+    }
+
+    console.log(window.location.href);
+
+    const currentUrl = removeTrailingChars(window.location.href);
 
     return driftsmeldinger.status === 'OK'
         ? driftsmeldinger.data.filter((melding) => {
@@ -30,11 +37,13 @@ const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState, locati
 
 export const Driftsmeldinger = () => {
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
-    const { location } = useLocation();
+    // const { location } = useLocation();
+
+    // console.log(location);
 
     const { XP_BASE_URL } = environment;
 
-    const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger, location);
+    const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
 
     return currentDriftsmeldinger.length > 0 ? (
         <article className="driftsmeldinger">
@@ -80,14 +89,21 @@ const InfoSvg = () => (
 );
 
 const StatusSvg = () => (
-    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-            <g transform="translate(-222.000000, -106.000000)" fill="currentColor">
-                <g transform="translate(222.000000, 106.000000)">
-                    <path d="M12,0 C18.627417,0 24,5.372583 24,12 C24,18.627417 18.627417,24 12,24 C5.372583,24 0,18.627417 0,12 C0,5.372583 5.372583,0 12,0 Z M12,2 C6.4771525,2 2,6.4771525 2,12 C2,17.5228475 6.4771525,22 12,22 C17.5228475,22 22,17.5228475 22,12 C22,6.4771525 17.5228475,2 12,2 Z M12,16 C12.8284271,16 13.5,16.6715729 13.5,17.5 C13.5,18.3284271 12.8284271,19 12,19 C11.1715729,19 10.5,18.3284271 10.5,17.5 C10.5,16.6715729 11.1715729,16 12,16 Z M13,5 L13,14 L11,14 L11,5 L13,5 Z" />
-                </g>
-            </g>
-        </g>
+    <svg
+        width="1em"
+        height="1em"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        focusable="false"
+        role="img"
+    >
+        <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M12 0a1 1 0 01.894.553l11 22A1 1 0 0123 24H1a1 1 0 01-.894-1.447l11-22A1 1 0 0112 0zm-1 15V8h2v7h-2zm2.5 3.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+            fill="currentColor"
+        ></path>
     </svg>
 );
 
