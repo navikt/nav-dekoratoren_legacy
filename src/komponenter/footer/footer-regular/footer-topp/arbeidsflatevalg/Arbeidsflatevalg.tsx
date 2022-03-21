@@ -17,10 +17,7 @@ const Arbeidsflatevalg = () => {
     const { arbeidsflate, language } = useSelector(stateSelector);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
-    const getLenker = () =>
-        arbeidsflateLenker(XP_BASE_URL).filter(
-            (lenke) => lenke.key !== arbeidsflate
-        );
+    const getLenker = () => arbeidsflateLenker(XP_BASE_URL).filter((lenke) => lenke.key !== arbeidsflate);
 
     const [lenker, setLenker] = useState<ArbeidsflateLenke[]>(getLenker());
     useEffect(() => {
@@ -34,6 +31,7 @@ const Arbeidsflatevalg = () => {
                     <li key={lenke.key}>
                         <ArbeidsflateLenkepanel
                             lenke={lenke}
+                            inverted
                             language={language}
                             analyticsEventArgs={{
                                 context: arbeidsflate,

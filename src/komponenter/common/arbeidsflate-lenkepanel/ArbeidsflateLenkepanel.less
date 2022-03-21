@@ -1,70 +1,42 @@
 @import (reference) '../../../styling-variabler.less';
 
 .arbeidsflate-lenkepanel {
-    border: 2px @navBla solid;
-    margin-bottom: 0;
-
-    &:hover {
-        border: 2px @navBla solid;
-        background-color: @navBla;
-
-        .lenkepanel__indikator,
-        .lenkepanel__heading,
-        .arbeidsflate-lenkepanel__stikkord {
-            color: @white;
+    &--inverted,
+    &--inverted:hover {
+        .arbeidsflate-lenkepanel__text {
+            color: white;
         }
     }
 
-    &__innhold {
-        display: flex;
-        flex-direction: column;
-        flex-basis: 100%;
-        height: 100%;
-    }
+    &--inverted:focus {
+        .arbeidsflate-lenkepanel__text {
+            color: @navBla;
+        }
 
-    .lenkepanel__indikator,
-    .lenkepanel__heading {
-        color: @navBla;
-    }
-
-    &__compact-chevron {
-        display: none;
-    }
-
-    &__compact {
-        @media @screen-desktop-small-down {
-            padding: 0.5rem 0.75rem;
-            margin-bottom: 0.25rem;
-
-            &-chevron {
-                display: inline-block;
-                align-self: center;
-                margin-right: 8px;
-                margin-left: -4px;
-                left: 0;
-                transition: left 0.25s;
-            }
-
-            .lenkepanel__indikator {
-                display: none;
-            }
-
-            .lenkepanel__heading {
-                &::after {
-                    content: ' ';
-                    margin-right: 0.4rem;
-                }
-            }
-
-            &:hover {
-                .arbeidsflate-lenkepanel__compact-chevron {
-                    left: 6px;
-                }
-            }
+        svg {
+            filter: invert(0);
         }
     }
 
-    @media @screen-mobile {
-        padding: 0.75rem 1rem;
+    &--inverted {
+        svg {
+            filter: invert(1);
+        }
+    }
+
+    &--compact {
+        .navds-heading.arbeidsflate-lenkepanel__text {
+            font-size: 1.2rem;
+        }
+        .navds-body-long.arbeidsflate-lenkepanel__text {
+            font-size: 1.1rem;
+            margin-top: var(--navds-spacing-1);
+            line-height: 1.5rem;
+        }
+    }
+
+    // LinkPanel overrides
+    .navds-link-panel__content {
+        align-self: flex-start;
     }
 }
