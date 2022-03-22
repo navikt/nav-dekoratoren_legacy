@@ -37,6 +37,9 @@ import Modal from 'nav-frontend-modal';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
+import { usePushStateCallback } from '../../utils/hooks/usePushStateCallback';
+import { logPageView } from '../../utils/amplitude';
+
 import './Header.less';
 
 export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
@@ -65,6 +68,8 @@ export const Header = () => {
     const useSimpleHeader = PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER;
 
     const [cookies, setCookie] = useCookies();
+
+    usePushStateCallback('amplitude-pageview', () => logPageView(PARAMS, innloggingsstatus));
 
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {

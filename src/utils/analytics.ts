@@ -26,7 +26,7 @@ export type AnalyticsEventArgs = {
 
 export const initAnalytics = (params: Params) => {
     TagManager.initialize(tagManagerArgs);
-    initAmplitude(params);
+    initAmplitude();
     initTaskAnalytics(params);
 };
 

@@ -1,11 +1,11 @@
 import { verifyWindowObj } from 'utils/Environment';
 import { Params } from 'store/reducers/environment-duck';
+import { InnloggingsstatusState } from '../store/reducers/innloggingsstatus-duck';
 
 // Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
 const amplitude = verifyWindowObj() ? require('amplitude-js') : () => null;
-let currentPageTitle = 'undefined';
 
-export const initAmplitude = (params: Params) => {
+export const initAmplitude = () => {
     if (amplitude) {
         amplitude.getInstance().init('default', '', {
             apiEndpoint: 'amplitude.nav.no/collect-auto',
@@ -14,15 +14,14 @@ export const initAmplitude = (params: Params) => {
             includeReferrer: true,
             platform: window.location.toString(),
         });
-        currentPageTitle = window.location.toString();
-        logPageView(params);
     }
 };
 
-export function logPageView(params: Params, title: string | null = null) {
+export const logPageView = (params: Params, authState: InnloggingsstatusState) => {
     logAmplitudeEvent('sidevisning', {
-        sidetittel: title ? title : document.title,
+        sidetittel: document.title,
         platform: window.location.toString(),
+        innlogging: authState.data.securityLevel,
         parametre: {
             ...params,
             BREADCRUMBS: !!(params?.BREADCRUMBS && params.BREADCRUMBS.length > 0),
@@ -31,21 +30,9 @@ export function logPageView(params: Params, title: string | null = null) {
             }),
         },
     });
-}
+};
 
-export function initPageViewObserver(params: Params) {
-    const title: HTMLTitleElement | null = document.querySelector('title');
-    if (title instanceof HTMLTitleElement) {
-        new MutationObserver(function (mutations) {
-            if (currentPageTitle !== title.text) {
-                logPageView(params);
-                currentPageTitle = title.text;
-            }
-        }).observe(title, { subtree: true, characterData: true, childList: true });
-    }
-}
-
-export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
+export const logAmplitudeEvent = (eventName: string, data?: any): Promise<any> => {
     return new Promise(function (resolve: any) {
         const eventData = data || {};
         eventData.origin = 'dekoratøren';
@@ -55,4 +42,4 @@ export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
             amplitude.getInstance().logEvent(eventName, eventData, resolve);
         }
     });
-}
+};
