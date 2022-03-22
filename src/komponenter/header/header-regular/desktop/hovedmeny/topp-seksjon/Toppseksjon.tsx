@@ -1,7 +1,7 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
-import { Heading } from '@navikt/ds-react';
+import { BodyShort, Heading } from '@navikt/ds-react';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { AnalyticsCategory } from 'utils/analytics';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
@@ -30,9 +30,9 @@ export const Toppseksjon = ({ classname }: Props) => {
         <div className={cls.element('topp-seksjon')}>
             <Heading level="2" size="medium" className={cls.element('topp-seksjon-tittel')}>
                 <Tekst id={`rolle-${arbeidsflate.toLowerCase()}`} />
-                <span className={cls.element('topp-seksjon-tittel-decoration')} aria-hidden={true}>
+                <BodyShort className={cls.element('topp-seksjon-tittel-decoration')} aria-hidden={true}>
                     {'//'}
-                </span>
+                </BodyShort>
             </Heading>
             <LenkeMedSporing
                 href={context.url}

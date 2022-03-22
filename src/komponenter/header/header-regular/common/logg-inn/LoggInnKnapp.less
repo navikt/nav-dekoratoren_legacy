@@ -4,10 +4,9 @@
     box-sizing: border-box;
     text-transform: none;
     letter-spacing: initial;
-    .typo-undertittel;
 
     &:focus {
-        box-shadow: 0 0 0 4px @fokusFarge;
+        box-shadow: 0 0 0 4px @navds-semantic-color-focus;
         border-radius: 4px;
     }
 }
@@ -17,16 +16,14 @@
     all: unset;
 
     @media @screen-desktop {
-        .knapp;
         .login-knapp-mixin();
-        .safari-text-color-fix-mixin(@navBla, @white, @white, @navBla);
+        .safari-text-color-fix-mixin(@navds-global-color-blue-500, @navds-global-color-white, @navds-global-color-white, @navds-global-color-blue-500);
         padding: 0.625rem 1rem;
     }
 
     @media @screen-mobile {
-        .knapp--flat;
         .login-knapp-mixin();
-        .safari-text-color-fix-mixin(@navBla, @navBla, @navBla, @navBla);
+        .safari-text-color-fix-mixin(@navds-global-color-blue-500, @navds-global-color-blue-500, @navds-global-color-blue-500, @navds-global-color-blue-500);
         padding: 0.5rem 1rem;
     }
 
