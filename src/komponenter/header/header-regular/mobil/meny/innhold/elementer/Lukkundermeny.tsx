@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from '@navikt/ds-react';
+import { Link, Label } from '@navikt/ds-react';
 import { Back } from '@navikt/ds-icons';
 import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
 import { useDispatch } from 'react-redux';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
-import { Label } from '@navikt/ds-react';
 
 interface Props {
     className: string;
