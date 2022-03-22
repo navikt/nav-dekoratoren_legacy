@@ -1,5 +1,5 @@
 import React from 'react';
-import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
+import { Next } from '@navikt/ds-icons';
 import { Heading } from '@navikt/ds-react';
 
 interface Props {
@@ -13,7 +13,7 @@ const SokeforslagIngress = (props: Props) => {
             <div className="media-sm-mobil sokeforslag-ingress">
                 <div className={className}>
                     <div className="sok-resultat-chevron">
-                        <HoyreChevron />
+                        <Next />
                     </div>
                     <div className="overskrift">
                         <Heading level="2" size="small">

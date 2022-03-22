@@ -2,7 +2,7 @@ import React from 'react';
 import { BodyShort } from '@navikt/ds-react';
 import Globe from 'ikoner/globe.svg';
 
-import { NedChevron } from 'nav-frontend-chevron';
+import { Expand } from '@navikt/ds-icons';
 import { useSelect } from 'downshift';
 import { decoratorLanguageCookie } from '../../Header';
 import { cookieOptions } from '../../../../server/cookieSettings';
@@ -84,7 +84,7 @@ export const SprakVelger = (props: Props) => {
                         <Bilde asset={Globe} className={cls.element('ikon')} />
                         <BodyShort size="small">{selectorLabel}</BodyShort>
                     </span>
-                    <NedChevron />
+                    <Expand className="chevron--ned" />
                 </button>
                 <ul {...menuProps} className={cls.element('menu')} style={ulStyle}>
                     <>
