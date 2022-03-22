@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@navikt/ds-react';
-import VenstreChevron from 'nav-frontend-chevron/lib/venstre-chevron';
+import { Back } from '@navikt/ds-icons';
 import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
 import { useDispatch } from 'react-redux';
@@ -23,7 +23,7 @@ const Lukkundermeny = (props: Props) => {
                     dispatch(toggleUndermenyVisning());
                 }}
             >
-                <VenstreChevron />
+                <Back />
                 <Label>
                     <Tekst id="tilbake-til-overskrift" />
                 </Label>

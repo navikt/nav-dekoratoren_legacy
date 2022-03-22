@@ -1,6 +1,6 @@
 import React from 'react';
 import { AnalyticsEventArgs, analyticsEvent } from 'utils/analytics';
-import { HoyreChevron } from 'nav-frontend-chevron';
+import { Next } from '@navikt/ds-icons';
 import Lock from 'ikoner/meny/Lock';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
@@ -61,7 +61,7 @@ export const LenkeMedSporing = ({
                         {withLock ? (
                             <Lock height={'18px'} width={'18px'} />
                         ) : (
-                            withChevron && <HoyreChevron className={'chevronlenke__chevron'} />
+                            withChevron && <Next className={'chevronlenke__chevron'} />
                         )}
                     </div>
                 )}
