@@ -54,11 +54,7 @@ export type KbIdMap = {
 
 type NodeSetterCallback = (node: KbNavNode) => void;
 
-export function createKbNavNode(
-    id: string,
-    index: NodeIndex,
-    group: KbNavGroup
-): KbNavNode {
+export function createKbNavNode(id: string, index: NodeIndex, group: KbNavGroup): KbNavNode {
     const node: Partial<KbNavNode> = {
         id: id,
         index: index,
@@ -72,11 +68,7 @@ export function createKbNavNode(
     return node as KbNavNode;
 }
 
-export const getKbId = (
-    group: KbNavGroup,
-    index: NodeIndex,
-    idMap: KbIdMap = {}
-) => {
+export const getKbId = (group: KbNavGroup, index: NodeIndex, idMap: KbIdMap = {}) => {
     const id = `${group}_${index.col}_${index.row}_${index.sub}`;
     return idMap[id] || id;
 };
@@ -111,22 +103,14 @@ const scrollIfNearViewBounds = (element: HTMLElement) => {
 
     const marginBottom = 1 - rect.bottom / viewHeight;
     if (marginBottom < minMargin) {
-        window.scrollTo(
-            0,
-            viewOffset + (minMargin - marginBottom) * viewHeight
-        );
+        window.scrollTo(0, viewOffset + (minMargin - marginBottom) * viewHeight);
         return;
     }
 };
 
-const isInputField = (node: KbNavNode) =>
-    document.getElementById(node.id)?.tagName.toLowerCase() === 'input';
+const isInputField = (node: KbNavNode) => document.getElementById(node.id)?.tagName.toLowerCase() === 'input';
 
-export const selectNode = (
-    node: KbNavNode,
-    callback: NodeSetterCallback = () => null,
-    focus = true
-) => {
+export const selectNode = (node: KbNavNode, callback: NodeSetterCallback = () => null, focus = true) => {
     if (!node) {
         return;
     }
@@ -141,11 +125,8 @@ export const selectNode = (
     }
 };
 
-const arrowkeysHandler = (
-    currentNode: KbNavNode,
-    setCurrentNode: NodeSetterCallback
-) => (event: KeyboardEvent) => {
-    if (!currentNode) {
+const arrowkeysHandler = (currentNode: KbNavNode, setCurrentNode: NodeSetterCallback) => (event: KeyboardEvent) => {
+    if (!currentNode?.id) {
         return;
     }
     const key = ieKeyMap(event.key) || event.key;
@@ -196,13 +177,7 @@ export const createKbNavGraph = (
     idMap: KbIdMap = {}
 ): KbNavGraph => {
     const nodeMap = {};
-    const rootNode = buildGraphAndGetRootNode(
-        group,
-        rootIndex,
-        maxColsPerRow,
-        idMap,
-        nodeMap
-    );
+    const rootNode = buildGraphAndGetRootNode(group, rootIndex, maxColsPerRow, idMap, nodeMap);
     return {
         group: group,
         rootNode: rootNode,

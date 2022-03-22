@@ -10,6 +10,9 @@ import { Locale } from 'store/reducers/language-duck';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { getArbeidsflateContext } from '../../../common/arbeidsflate-lenker/arbeidsflate-lenker';
+import { AnalyticsCategory } from '../../../../utils/analytics';
+import { MenuValue } from '../../../../utils/meny-storage-utils';
+import { getHomeUrl } from '../../../../utils/home-url';
 import './Brodsmulesti.less';
 
 export interface Breadcrumb {
@@ -22,6 +25,13 @@ interface Props {
     breadcrumbs: Breadcrumb[];
 }
 
+const analyticsEventArgs = {
+    category: AnalyticsCategory.Header,
+    komponent: 'brødsmule',
+};
+
+const maxNumInitiallyShown = 3;
+
 export const Brodsmulesti = (props: Props) => {
     const cls = BEMHelper('brodsmulesti');
     const { environment } = useSelector((state: AppState) => state);
@@ -31,29 +41,21 @@ export const Brodsmulesti = (props: Props) => {
     const { language } = useSelector((state: AppState) => state.language);
     const context = getArbeidsflateContext(XP_BASE_URL, status);
     const { breadcrumbs } = props;
-    const isLanguageNorwegian = language === Locale.NYNORSK || language === Locale.BOKMAL;
 
-    const breadcrumbsCase = breadcrumbs.map((b) => ({
-        ...b,
-        title: b.title
-            .split(' ')
-            .map((title, i) => (!i ? `${title.charAt(0).toUpperCase() + title.slice(1)}` : `${title}`))
-            .join(' '),
-    }));
-    const breadcrumbsSliced = showAll ? breadcrumbsCase : breadcrumbsCase.slice(breadcrumbsCase.length - 2);
+    const homeUrl = getHomeUrl(XP_BASE_URL, language);
 
-    const homeUrlMap: { [key: string]: string } = {
-        nb: `${XP_BASE_URL}`,
-        nn: `${XP_BASE_URL}`,
-        en: `${XP_BASE_URL}/en/home`,
-        se: `${XP_BASE_URL}/se/samegiella`,
-    };
+    const isLanguageNorwegian =
+        language === Locale.NYNORSK || language === Locale.BOKMAL || language === Locale.IKKEBESTEMT;
+    const shouldShowContext = isLanguageNorwegian && context.key !== MenuValue.PRIVATPERSON;
+    const numCustomItemsShown = shouldShowContext ? maxNumInitiallyShown - 1 : maxNumInitiallyShown;
+
+    const breadcrumbsSliced = showAll ? breadcrumbs : breadcrumbs.slice(-numCustomItemsShown);
 
     return (
         <nav className={cls.className} aria-label={finnTekst('brodsmulesti', language)} itemProp="breadcrumb">
             <ol>
                 <li>
-                    <Link href={homeUrlMap[language]} className={cls.element('home')}>
+                    <Link href={homeUrl} className={cls.element('home')}>
                         <Bilde asset={HomeIcon} className={cls.element('icon')} />
                         <span>nav.no</span>
                         <Next className="next" />

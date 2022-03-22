@@ -7,7 +7,6 @@ import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './DelSkjermModal.less';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
-
 interface Props {
     isOpen: boolean;
     onClose: () => void;
@@ -20,6 +19,10 @@ const DelSkjermModal = (props: Props) => {
     const language = useSelector((state: AppState) => state.language).language;
     const feilmelding = finnTekst('delskjerm-modal-feilmelding', language);
     const label = finnTekst('delskjerm-modal-label', language);
+    const { OPPORTUNITY_ID } = useSelector((state: AppState) => state.environment);
+    const { CASETYPE_ID } = useSelector((state: AppState) => state.environment);
+    const { SOLUTION_ID } = useSelector((state: AppState) => state.environment);
+    const { NAV_GROUP_ID } = useSelector((state: AppState) => state.environment);
 
     // State
     const [code, setCode] = useState('');
@@ -30,7 +33,7 @@ const DelSkjermModal = (props: Props) => {
     // Vergic config
     const w = window as any;
     const vergicExists = typeof w !== 'undefined' && w.vngage;
-    const navGroupId = 'A034081B-6B73-46B7-BE27-23B8E9CE3079';
+    const navGroupId = NAV_GROUP_ID;
 
     useEffect(() => {
         if (vergicExists) {
@@ -40,11 +43,12 @@ const DelSkjermModal = (props: Props) => {
 
     const onClick = () => {
         setSubmitted(true);
+
         if (vergicExists && !error) {
             w.vngage.join('queue', {
-                opportunityId: '615FF5E7-37B7-4697-A35F-72598B0DC53B',
-                solutionId: '5EB316A1-11E2-460A-B4E3-F82DBD13E21D',
-                caseTypeId: '66D660EF-6F14-44B4-8ADE-A70A127202D0',
+                opportunityId: OPPORTUNITY_ID,
+                solutionId: SOLUTION_ID,
+                caseTypeId: CASETYPE_ID,
                 category: 'Phone2Web',
                 message: 'Phone2Web',
                 groupId: navGroupId,

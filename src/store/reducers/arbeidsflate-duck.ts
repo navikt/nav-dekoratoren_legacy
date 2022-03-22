@@ -10,13 +10,11 @@ export interface Arbeidsflate {
 }
 
 export const initialState: Arbeidsflate = {
-    status: MenuValue.IKKEBESTEMT
+    status: MenuValue.IKKEBESTEMT,
 };
 
-export const reducer = (
-    state: Arbeidsflate = initialState,
-    action: Handling
-): Arbeidsflate => {
+//NOSONAR
+export const reducer = (state: Arbeidsflate = initialState, action: Handling): Arbeidsflate => {
     switch (action.type) {
         case ActionType.PRIVATPERSON: {
             return { ...state, status: MenuValue.PRIVATPERSON };
@@ -46,15 +44,15 @@ export const settArbeidsflate = (type: MenuValue) => {
 };
 
 export const settPersonflate = (): SettPrivatpersonAction => ({
-    type: ActionType.PRIVATPERSON
+    type: ActionType.PRIVATPERSON,
 });
 
 export const settArbeidsgiverflate = (): SettArbeidsgiverAction => ({
-    type: ActionType.ARBEIDSGIVER
+    type: ActionType.ARBEIDSGIVER,
 });
 
 export const settSamarbeidspartnerflate = (): SettSamarbeidspartnerAction => ({
-    type: ActionType.SAMARBEIDSPARTNER
+    type: ActionType.SAMARBEIDSPARTNER,
 });
 
 export default reducer;

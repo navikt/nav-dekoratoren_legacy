@@ -1,7 +1,10 @@
 @import (reference) '../../../../styling-variabler.less';
 
 .driftsmeldinger {
-    background-color: #00548e;
+    @background-color: @navBlaDarken40;
+    @text-color: white;
+
+    background-color: @background-color;
     display: flex;
     flex-wrap: wrap;
     padding: 0.5rem 0;
@@ -15,10 +18,12 @@
     }
 
     .message {
-        color: #fff;
+        color: @text-color;
         padding: 0.5rem;
         display: inline-flex;
         align-items: center;
+        text-decoration: underline;
+        border-radius: @border-radius-base;
 
         @media @screen-desktop {
             margin: 0 1.5rem;
@@ -28,15 +33,21 @@
             margin: 0 0.5rem;
         }
 
+        &:focus,
+        &:hover {
+            text-decoration: none;
+        }
+
         &:focus {
-            color: #0067c5;
-            background-color: #fff;
-            text-decoration: underline;
-            box-shadow: none;
+            box-shadow: 0 0 0 3px @text-color;
+            outline: none;
         }
 
         .message-icon {
+            display: flex;
+            align-items: center;
             margin-right: 0.5rem;
+            color: @text-color;
         }
     }
 }

@@ -1,19 +1,45 @@
 import React from 'react';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
-import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { AnalyticsCategory } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { DriftsmeldingerData, DriftsmeldingerState } from '../../../../store/reducers/driftsmeldinger-duck';
+import { verifyWindowObj } from '../../../../utils/Environment';
 import './Driftsmeldinger.less';
 import { BodyLong } from '@navikt/ds-react';
+
+const removeTrailingChars = (url?: string) => url?.replace(/(\/|\$|(\/\$))$/, '');
+
+const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
+    if (!verifyWindowObj()) {
+        return [];
+    }
+
+    const currentUrl = removeTrailingChars(window.location.href);
+
+    return driftsmeldinger.status === 'OK'
+        ? driftsmeldinger.data.filter((melding) => {
+              return (
+                  !melding.urlscope ||
+                  !currentUrl ||
+                  melding.urlscope.length === 0 ||
+                  melding.urlscope.some((rawUrl) => {
+                      const url = removeTrailingChars(rawUrl);
+                      return url && (rawUrl.endsWith('$') ? currentUrl === url : currentUrl.startsWith(url));
+                  })
+              );
+          })
+        : [];
+};
 
 export const Driftsmeldinger = () => {
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
 
     const { XP_BASE_URL } = environment;
-    const visDriftsmeldinger = driftsmeldinger.status === 'OK' && driftsmeldinger.data.length > 0;
 
-    return visDriftsmeldinger ? (
+    const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
+
+    return currentDriftsmeldinger.length > 0 ? (
         <article className="driftsmeldinger">
             <>
                 {driftsmeldinger.data.map((melding: DriftsmeldingerData) => {
@@ -61,14 +87,13 @@ const InfoSvg = () => (
 );
 
 const StatusSvg = () => (
-    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-            <g transform="translate(-222.000000, -106.000000)" fill="currentColor">
-                <g transform="translate(222.000000, 106.000000)">
-                    <path d="M12,0 C18.627417,0 24,5.372583 24,12 C24,18.627417 18.627417,24 12,24 C5.372583,24 0,18.627417 0,12 C0,5.372583 5.372583,0 12,0 Z M12,2 C6.4771525,2 2,6.4771525 2,12 C2,17.5228475 6.4771525,22 12,22 C17.5228475,22 22,17.5228475 22,12 C22,6.4771525 17.5228475,2 12,2 Z M12,16 C12.8284271,16 13.5,16.6715729 13.5,17.5 C13.5,18.3284271 12.8284271,19 12,19 C11.1715729,19 10.5,18.3284271 10.5,17.5 C10.5,16.6715729 11.1715729,16 12,16 Z M13,5 L13,14 L11,14 L11,5 L13,5 Z" />
-                </g>
-            </g>
-        </g>
+    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" role="img">
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M12 0a1 1 0 01.894.553l11 22A1 1 0 0123 24H1a1 1 0 01-.894-1.447l11-22A1 1 0 0112 0zm-1 15V8h2v7h-2zm2.5 3.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+            fill="currentColor"
+        />
     </svg>
 );
 

@@ -215,6 +215,8 @@ export const Header = () => {
                 if (source === 'decoratorClient' && event === 'params') {
                     const {
                         simple,
+                        simpleHeader,
+                        simpleFooter,
                         context,
                         level,
                         language,
@@ -263,6 +265,12 @@ export const Header = () => {
                         }),
                         ...(simple !== undefined && {
                             SIMPLE: simple === true,
+                        }),
+                        ...(simpleHeader !== undefined && {
+                            SIMPLE_HEADER: simpleHeader === true,
+                        }),
+                        ...(simpleFooter !== undefined && {
+                            SIMPLE_FOOTER: simpleFooter === true,
                         }),
                         ...(enforceLogin !== undefined && {
                             ENFORCE_LOGIN: enforceLogin === true,

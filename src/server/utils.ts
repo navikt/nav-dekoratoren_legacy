@@ -20,7 +20,6 @@ interface Props {
     req: Request;
     cookies: Cookies;
 }
-
 // Client environment
 // Obs! Don't expose secrets
 export const clientEnv = ({ req, cookies }: Props): Environment => {
@@ -45,6 +44,10 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
         API_VARSELINNBOKS_URL: process.env.API_VARSELINNBOKS_URL as string,
         API_INNLOGGINGSLINJE_URL: process.env.API_INNLOGGINGSLINJE_URL as string,
         API_UNLEASH_PROXY_URL: process.env.API_UNLEASH_PROXY_URL as string,
+        OPPORTUNITY_ID: process.env.OPPORTUNITY_ID as string,
+        SOLUTION_ID: process.env.SOLUTION_ID as string,
+        CASETYPE_ID: process.env.CASETYPE_ID as string,
+        NAV_GROUP_ID: process.env.NAV_GROUP_ID as string,
         MINSIDE_ARBEIDSGIVER_URL: process.env.MINSIDE_ARBEIDSGIVER_URL as string,
         DITT_NAV_URL: process.env.DITT_NAV_URL as string,
         LOGIN_URL: process.env.LOGIN_URL as string,
@@ -54,8 +57,8 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
             PARAMS: {
                 CONTEXT: chosenContext,
                 SIMPLE: req.query.simple === 'true',
-                SIMPLE_HEADER: req.query.header === 'true',
-                SIMPLE_FOOTER: req.query.footer === 'true',
+                SIMPLE_HEADER: req.query.header === 'true' || req.query.simpleHeader === 'true', // 'header'
+                SIMPLE_FOOTER: req.query.footer === 'true' || req.query.simpleFooter === 'true', // and 'footer' parameters are kept for legacy compatibility
                 ENFORCE_LOGIN: req.query.enforceLogin === 'true',
                 REDIRECT_TO_APP: req.query.redirectToApp === 'true',
                 REDIRECT_TO_URL: req.query.redirectToUrl as string,
