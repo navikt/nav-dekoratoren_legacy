@@ -1,8 +1,7 @@
 import React from 'react';
-import { BodyShort } from '@navikt/ds-react';
+import { BodyShort, Panel } from '@navikt/ds-react';
 import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
-import Panel from 'nav-frontend-paneler';
 import Lock from 'ikoner/meny/Lock';
 import './MinsideLockMsg.less';
 

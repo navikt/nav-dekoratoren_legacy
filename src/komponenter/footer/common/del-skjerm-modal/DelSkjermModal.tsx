@@ -1,10 +1,8 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Alert, BodyLong, Button, Heading, TextField } from '@navikt/ds-react';
+import React, { ChangeEvent, useEffect, useLayoutEffect, useState } from 'react';
+import { Alert, BodyLong, Button, Heading, ReadMore, TextField, Modal } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
-import Modal from 'nav-frontend-modal';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
-import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './DelSkjermModal.less';
 
@@ -75,13 +73,16 @@ const DelSkjermModal = (props: Props) => {
         element.style.backgroundColor = 'rgba(50, 65, 79, 0.8)'; // #32414f
     };
 
+    useLayoutEffect(() => {
+        setOverlayCss();
+    }, [isOpen]);
+
     return (
         <Modal
-            onAfterOpen={setOverlayCss}
-            isOpen={props.isOpen}
+            open={props.isOpen}
             className={`decorator-wrapper ${classname}`}
-            contentLabel={'Skjermdeling'}
-            onRequestClose={props.onClose}
+            aria-label={'Skjermdeling'}
+            onClose={props.onClose}
         >
             <div className={'delskjerm__header'}>
                 <Bilde className={'delskjerm__veileder'} asset={veileder} altText={''} />
@@ -94,7 +95,10 @@ const DelSkjermModal = (props: Props) => {
                     <BodyLong>
                         <Tekst id={'delskjerm-modal-beskrivelse'} />
                     </BodyLong>
-                    <Lesmerpanel apneTekst={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
+                    <ReadMore
+                        className={'delskjerm__lesmer'}
+                        header={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}
+                    >
                         <ul>
                             {[...Array(3)].map((_, i) => (
                                 <li key={i}>
@@ -104,7 +108,7 @@ const DelSkjermModal = (props: Props) => {
                                 </li>
                             ))}
                         </ul>
-                    </Lesmerpanel>
+                    </ReadMore>
                 </div>
                 {isOpen ? (
                     <>

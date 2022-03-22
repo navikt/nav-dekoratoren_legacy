@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import BEMHelper from '../../../utils/bem';
-import ModalWrapper from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import './utloggingsvarsel.less';
 import './utloggingsmodal-transition.less';
 import { checkTimeStampAndSetTimeStamp, getCurrentTimeStamp, timeStampIkkeUtgatt } from './timestamp.utils';
@@ -14,7 +14,7 @@ import { getLogOutUrl } from 'utils/login';
 import {
     utloggingsvarselOppdatereStatus,
     UtloggingsvarselState,
-    VarselEkspandert
+    VarselEkspandert,
 } from '../../../store/reducers/utloggingsvarsel-duck';
 import { useCookies } from 'react-cookie';
 import { CookieName, cookieOptions } from '../../../server/cookieSettings';
@@ -23,7 +23,7 @@ import classNames from 'classnames';
 const stateSelector = (state: AppState) => ({
     utloggingsvarsel: state.utloggingsvarsel,
     utloggingsvarselOnsket: state.environment.PARAMS.UTLOGGINGSVARSEL,
-    environment: state.environment
+    environment: state.environment,
 });
 
 const Utloggingsvarsel: FunctionComponent = () => {
@@ -47,7 +47,7 @@ const Utloggingsvarsel: FunctionComponent = () => {
 
     useEffect(() => {
         const setModalElement = () => (document.getElementById('sitefooter') ? '#sitefooter' : 'body');
-        ModalWrapper.setAppElement(setModalElement());
+        Modal.setAppElement?.(setModalElement());
         if (utloggingsvarselOnsket && utloggingsvarsel.timeStamp) {
             try {
                 checkTimeStampAndSetTimeStamp(
@@ -108,22 +108,24 @@ const Utloggingsvarsel: FunctionComponent = () => {
     ResizeHandler({ setWindowType, windowType });
 
     return (
-        <div id='utloggingsvarsel' className={classNames(cls.className, clsOpenClass)}>
-            <ModalWrapper
+        <div id="utloggingsvarsel" className={classNames(cls.className, clsOpenClass)}>
+            <Modal
                 parentSelector={modalMountPoint}
-                onRequestClose={toggleModal}
-                contentLabel='varsel for utløpende sesjon av innlogget bruker'
-                isOpen={modalOpen}
+                onClose={toggleModal}
+                aria-label="varsel for utløpende sesjon av innlogget bruker"
+                open={modalOpen}
                 className={cls.element('modal')}
                 closeButton={false}
             >
-                <UtloggingsvarselInnhold
-                    setModalOpen={setModalOpen}
-                    windowType={windowType}
-                    overskrift={overskrift}
-                    tid={tid}
-                />
-            </ModalWrapper>
+                <Modal.Content>
+                    <UtloggingsvarselInnhold
+                        setModalOpen={setModalOpen}
+                        windowType={windowType}
+                        overskrift={overskrift}
+                        tid={tid}
+                    />
+                </Modal.Content>
+            </Modal>
         </div>
     );
 };

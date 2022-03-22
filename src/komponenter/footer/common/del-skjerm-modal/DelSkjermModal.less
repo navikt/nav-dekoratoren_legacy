@@ -1,32 +1,7 @@
 @import (reference) '../../../../styling-variabler.less';
-@import (reference) '~nav-frontend-modal-style/src/index';
-
-.lesMerPanel {
-    padding: 0 !important;
-
-    &__mer ul {
-        margin: 0;
-    }
-
-    &__toggleChevron {
-        margin-left: 0.5rem;
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
-    }
-
-    &__togglelink {
-        flex-direction: row-reverse !important;
-    }
-
-    &__toggle {
-        justify-content: flex-start !important;
-    }
-}
 
 .delskjerm {
-    &__modal.modal {
-        all: unset;
-        .modal;
+    &__modal.navds-modal {
         max-width: 35rem;
         overflow: visible;
     }
@@ -49,6 +24,10 @@
 
     &__beskrivelse {
         margin: 1rem 0 1.5rem 0;
+    }
+
+    &__lesmer {
+        margin-top: 1rem;
     }
 
     &__header {
