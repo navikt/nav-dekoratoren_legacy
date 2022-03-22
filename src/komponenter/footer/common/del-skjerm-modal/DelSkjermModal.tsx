@@ -1,14 +1,10 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useLayoutEffect, useState } from 'react';
+import { Alert, BodyLong, Button, Heading, ReadMore, TextField, Modal } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
-import Modal from 'nav-frontend-modal';
-import { Input } from 'nav-frontend-skjema';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
-import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import './DelSkjermModal.less';
-import { Alert, BodyLong, Heading } from '@navikt/ds-react';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 
@@ -77,13 +73,16 @@ const DelSkjermModal = (props: Props) => {
         element.style.backgroundColor = 'rgba(50, 65, 79, 0.8)'; // #32414f
     };
 
+    useLayoutEffect(() => {
+        setOverlayCss();
+    }, [isOpen]);
+
     return (
         <Modal
-            onAfterOpen={setOverlayCss}
-            isOpen={props.isOpen}
+            open={props.isOpen}
             className={`decorator-wrapper ${classname}`}
-            contentLabel={'Skjermdeling'}
-            onRequestClose={props.onClose}
+            aria-label={'Skjermdeling'}
+            onClose={props.onClose}
         >
             <div className={'delskjerm__header'}>
                 <Bilde className={'delskjerm__veileder'} asset={veileder} altText={''} />
@@ -96,7 +95,10 @@ const DelSkjermModal = (props: Props) => {
                     <BodyLong>
                         <Tekst id={'delskjerm-modal-beskrivelse'} />
                     </BodyLong>
-                    <Lesmerpanel apneTekst={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
+                    <ReadMore
+                        className={'delskjerm__lesmer'}
+                        header={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}
+                    >
                         <ul>
                             {[...Array(3)].map((_, i) => (
                                 <li key={i}>
@@ -106,26 +108,25 @@ const DelSkjermModal = (props: Props) => {
                                 </li>
                             ))}
                         </ul>
-                    </Lesmerpanel>
+                    </ReadMore>
                 </div>
                 {isOpen ? (
                     <>
-                        <Input
+                        <TextField
                             name={'code'}
                             label={label}
-                            feil={submitted && error}
+                            error={submitted && error}
                             value={code}
                             onChange={onChange}
                             maxLength={5}
-                            bredde={'M'}
                         />
                         <div className={'delskjerm__knapper'}>
-                            <Hovedknapp onClick={onClick}>
+                            <Button onClick={onClick}>
                                 <Tekst id={'delskjerm-modal-start'} />
-                            </Hovedknapp>
-                            <Flatknapp onClick={props.onClose}>
+                            </Button>
+                            <Button variant="tertiary" onClick={props.onClose}>
                                 <Tekst id={'delskjerm-modal-avbryt'} />
-                            </Flatknapp>
+                            </Button>
                         </div>
                     </>
                 ) : (

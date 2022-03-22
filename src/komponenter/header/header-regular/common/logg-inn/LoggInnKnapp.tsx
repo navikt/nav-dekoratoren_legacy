@@ -1,10 +1,11 @@
 import React from 'react';
+import { Button } from '@navikt/ds-react';
 import { finnTekst } from 'tekster/finn-tekst';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import KnappBase from 'nav-frontend-knapper';
 import { getLoginUrl, getLogOutUrl } from 'utils/login';
+
 import './LoggInnKnapp.less';
 
 export const loginKnappId = 'login-knapp-id';
@@ -33,13 +34,14 @@ export const LoggInnKnapp = () => {
 
     return (
         <div className={'login-knapp-container'}>
-            <KnappBase
+            <Button
                 className={`login-knapp${authenticated ? ' logout-knapp' : ''}`}
                 onClick={handleButtonClick}
                 id={loginKnappId}
+                variant="secondary"
             >
                 {knappetekst}
-            </KnappBase>
+            </Button>
         </div>
     );
 };
