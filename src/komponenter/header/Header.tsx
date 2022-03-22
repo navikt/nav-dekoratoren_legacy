@@ -83,6 +83,12 @@ export const Header = () => {
     };
 
     useEffect(() => {
+        if (innloggingsstatus.status === 'OK') {
+            logPageView(PARAMS, innloggingsstatus);
+        }
+    }, [innloggingsstatus]);
+
+    useEffect(() => {
         if (ENV && PARAMS.URL_LOOKUP_TABLE && ENV !== 'localhost' && ENV !== 'prod') {
             // Initial change
             setUrlLookupTableUrls();

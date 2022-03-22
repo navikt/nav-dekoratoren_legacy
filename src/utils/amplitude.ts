@@ -18,18 +18,23 @@ export const initAmplitude = () => {
 };
 
 export const logPageView = (params: Params, authState: InnloggingsstatusState) => {
-    logAmplitudeEvent('sidevisning', {
-        sidetittel: document.title,
-        platform: window.location.toString(),
-        innlogging: authState.data.securityLevel,
-        parametre: {
-            ...params,
-            BREADCRUMBS: !!(params?.BREADCRUMBS && params.BREADCRUMBS.length > 0),
-            ...(params.AVAILABLE_LANGUAGES && {
-                AVAILABLE_LANGUAGES: params.AVAILABLE_LANGUAGES.map((lang) => lang.locale),
-            }),
-        },
-    });
+    // Wait a second before logging to improve our chances of getting the actual document title
+    // from client-side rendered applications
+    setTimeout(() => {
+        console.log(`Logger sidevisning for ${document.title} - ${authState.data.securityLevel}`);
+        logAmplitudeEvent('sidevisning', {
+            sidetittel: document.title,
+            platform: window.location.toString(),
+            innlogging: authState.data.securityLevel ?? false,
+            parametre: {
+                ...params,
+                BREADCRUMBS: !!(params?.BREADCRUMBS && params.BREADCRUMBS.length > 0),
+                ...(params.AVAILABLE_LANGUAGES && {
+                    AVAILABLE_LANGUAGES: params.AVAILABLE_LANGUAGES.map((lang) => lang.locale),
+                }),
+            },
+        });
+    }, 1000);
 };
 
 export const logAmplitudeEvent = (eventName: string, data?: any): Promise<any> => {
