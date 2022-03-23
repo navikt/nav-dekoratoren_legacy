@@ -3,7 +3,7 @@ import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSp
 import { AnalyticsCategory } from 'utils/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { DriftsmeldingerData, DriftsmeldingerState } from '../../../../store/reducers/driftsmeldinger-duck';
+import { DriftsmeldingerState } from '../../../../store/reducers/driftsmeldinger-duck';
 import { verifyWindowObj } from '../../../../utils/Environment';
 import './Driftsmeldinger.less';
 import { BodyLong } from '@navikt/ds-react';
@@ -41,24 +41,20 @@ export const Driftsmeldinger = () => {
 
     return currentDriftsmeldinger.length > 0 ? (
         <article className="driftsmeldinger">
-            <>
-                {driftsmeldinger.data.map((melding: DriftsmeldingerData) => {
-                    return (
-                        <LenkeMedSporing
-                            key={melding.heading}
-                            href={`${XP_BASE_URL}${melding.url}`}
-                            classNameOverride="message"
-                            analyticsEventArgs={{
-                                category: AnalyticsCategory.Header,
-                                action: 'driftsmeldinger',
-                            }}
-                        >
-                            <span className="message-icon">{melding.type && <Icon type={melding.type} />}</span>
-                            <BodyLong className="message-text">{melding.heading}</BodyLong>
-                        </LenkeMedSporing>
-                    );
-                })}
-            </>
+            {currentDriftsmeldinger.map((melding) => (
+                <LenkeMedSporing
+                    key={melding.heading}
+                    href={`${XP_BASE_URL}${melding.url}`}
+                    classNameOverride="message"
+                    analyticsEventArgs={{
+                        category: AnalyticsCategory.Header,
+                        action: 'driftsmeldinger',
+                    }}
+                >
+                    <span className="message-icon">{melding.type && <Icon type={melding.type} />}</span>
+                    <BodyLong className="message-text">{melding.heading}</BodyLong>
+                </LenkeMedSporing>
+            ))}
         </article>
     ) : null;
 };
