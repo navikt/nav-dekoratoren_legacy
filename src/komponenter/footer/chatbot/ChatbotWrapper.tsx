@@ -7,7 +7,7 @@ import { MenuValue } from '../../../utils/meny-storage-utils';
 import './ChatbotWrapper.less';
 
 // Prevents SSR crash
-const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
+// const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 
 const testUrlHosts = ['dekoratoren.ekstern.dev.nav.no'];
 
@@ -57,11 +57,14 @@ export const ChatbotWrapper = () => {
         boostApiUrlBase = boostApiUrlBaseProduction;
     }
 
-    return isMounted ? (
+    return null;
+
+    /** return isMounted ? (
         <Chatbot
             boostApiUrlBase={boostApiUrlBase}
             actionFilters={getActionFilters(context, isProduction)}
             analyticsCallback={logAmplitudeEvent}
         />
     ) : null;
+    **/
 };
