@@ -21,7 +21,6 @@ export const logPageView = (params: Params, authState: InnloggingsstatusState) =
     // Wait a second before logging to improve our chances of getting the actual document title
     // from client-side rendered applications
     setTimeout(() => {
-        console.log(`Logger sidevisning for ${document.title} - ${authState.data.securityLevel}`);
         logAmplitudeEvent('sidevisning', {
             sidetittel: document.title,
             platform: window.location.toString(),
