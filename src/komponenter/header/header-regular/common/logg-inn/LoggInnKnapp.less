@@ -11,9 +11,13 @@
     }
 }
 
-.login-knapp.knapp--standard {
+.login-knapp.navds-button--tertiary {
     // Hindrer overstyring av styling på knapper fra appene
     all: unset;
+
+    .navds-button__inner {
+        font-weight: 600;
+    }
 
     @media @screen-desktop {
         .login-knapp-mixin();
