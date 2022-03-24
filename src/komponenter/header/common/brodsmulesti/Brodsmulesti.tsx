@@ -58,7 +58,7 @@ export const Brodsmulesti = (props: Props) => {
                     <Link href={homeUrl} className={cls.element('home')}>
                         <Bilde asset={HomeIcon} className={cls.element('icon')} />
                         <span>nav.no</span>
-                        <Next className="next" />
+                        <Next className={cls.element('next')} />
                     </Link>
                 </li>
                 {isLanguageNorwegian && (
@@ -67,7 +67,7 @@ export const Brodsmulesti = (props: Props) => {
                             <span>
                                 <Tekst id={context.lenkeTekstId} />
                             </span>
-                            <Next className="next" />
+                            <Next className={cls.element('next')} />
                         </Link>
                     </li>
                 )}
@@ -81,8 +81,8 @@ export const Brodsmulesti = (props: Props) => {
                                 setShowAll(true);
                             }}
                         >
-                            <span>...</span>
-                            <Next className="next" />
+                            <span className={cls.element('pathAbbrevation')}>...</span>
+                            <Next className={cls.element('next')} />
                         </button>
                     </li>
                 )}
@@ -101,14 +101,14 @@ export const Brodsmulesti = (props: Props) => {
                                             }}
                                         >
                                             <span>{breadcrumb.title}</span>
-                                            <Next className="next" />
+                                            <Next className={cls.element('next')} />
                                         </Link>
                                     );
                                 } else {
                                     return (
                                         <Link href={breadcrumb.url} className={cls.element('transform')}>
                                             <span>{breadcrumb.title}</span>
-                                            <Next className="next" />
+                                            <Next className={cls.element('next')} />
                                         </Link>
                                     );
                                 }
