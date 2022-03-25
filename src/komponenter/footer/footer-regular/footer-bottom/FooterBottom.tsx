@@ -10,6 +10,7 @@ import FooterLenker from 'komponenter/footer/common/Lenker';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import { ChatbotWrapper } from 'komponenter/footer/chatbot/ChatbotWrapper';
 import { DelSkjermLenke } from 'komponenter/footer/common/del-skjerm-lenke/DelSkjermLenke';
+import { TilgjengelighetserklaeringsLenke } from 'komponenter/footer/common/tilgjengelighetserklaerings-lenke/TilgjengelighetserklaeringsLenke';
 import Logo from 'ikoner/meny/nav-logo-black.svg';
 import './FooterBottom.less';
 import { BodyShort } from '@navikt/ds-react';
@@ -50,6 +51,7 @@ const FooterBottom = () => {
                         </BodyShort>
                         <ul className={cls.element('personvern-lenker')}>
                             <FooterLenker node={personvernNode} />
+                            <TilgjengelighetserklaeringsLenke />
                             {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
                         </ul>
                     </div>
