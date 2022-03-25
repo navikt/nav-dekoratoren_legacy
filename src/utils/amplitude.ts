@@ -17,23 +17,29 @@ export const initAmplitude = () => {
     }
 };
 
-export const logPageView = (params: Params, authState: InnloggingsstatusState) => {
-    // Wait a second before logging to improve our chances of getting the actual document title
-    // from client-side rendered applications
-    setTimeout(() => {
-        logAmplitudeEvent('sidevisning', {
-            sidetittel: document.title,
-            platform: window.location.toString(),
-            innlogging: authState.data.securityLevel ?? false,
-            parametre: {
-                ...params,
-                BREADCRUMBS: !!(params?.BREADCRUMBS && params.BREADCRUMBS.length > 0),
-                ...(params.AVAILABLE_LANGUAGES && {
-                    AVAILABLE_LANGUAGES: params.AVAILABLE_LANGUAGES.map((lang) => lang.locale),
-                }),
-            },
-        });
-    }, 1000);
+const _logPageView = (params: Params, authState: InnloggingsstatusState) => {
+    logAmplitudeEvent('sidevisning', {
+        sidetittel: document.title,
+        platform: window.location.toString(),
+        innlogging: authState.data.securityLevel ?? false,
+        parametre: {
+            ...params,
+            BREADCRUMBS: !!(params?.BREADCRUMBS && params.BREADCRUMBS.length > 0),
+            ...(params.AVAILABLE_LANGUAGES && {
+                AVAILABLE_LANGUAGES: params.AVAILABLE_LANGUAGES.map((lang) => lang.locale),
+            }),
+        },
+    });
+};
+
+export const logPageView = (params: Params, authState: InnloggingsstatusState, withDelay?: boolean) => {
+    if (withDelay) {
+        // Wait a second before logging to improve our chances of getting the actual document title
+        // when navigating in SPAs
+        setTimeout(() => _logPageView(params, authState), 1000);
+    } else {
+        _logPageView(params, authState);
+    }
 };
 
 export const logAmplitudeEvent = (eventName: string, data?: any): Promise<any> => {

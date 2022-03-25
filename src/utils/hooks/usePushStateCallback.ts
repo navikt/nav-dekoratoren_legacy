@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { verifyWindowObj } from '../Environment';
 
 type PushStateArgs = Parameters<typeof window.history.pushState>;
@@ -18,12 +19,13 @@ if (verifyWindowObj()) {
     };
 }
 
-export const usePushStateCallback = (callbackId: string, callback: PushStateCallback) => {
+export const usePushStateCallback = (callback: PushStateCallback) => {
     useEffect(() => {
-        callbacksMap[callbackId] = callback;
+        const id = uuidv4();
+        callbacksMap[id] = callback;
 
         return () => {
-            delete callbacksMap[callbackId];
+            delete callbacksMap[id];
         };
-    }, [callbackId, callback]);
+    }, [callback]);
 };

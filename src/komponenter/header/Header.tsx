@@ -69,7 +69,7 @@ export const Header = () => {
 
     const [cookies, setCookie] = useCookies();
 
-    usePushStateCallback('amplitude-pageview', () => logPageView(PARAMS, innloggingsstatus));
+    usePushStateCallback(() => logPageView(PARAMS, innloggingsstatus, true));
 
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {
@@ -84,7 +84,7 @@ export const Header = () => {
 
     useEffect(() => {
         if (innloggingsstatus.status === 'OK') {
-            logPageView(PARAMS, innloggingsstatus);
+            logPageView(PARAMS, innloggingsstatus, false);
         }
     }, [innloggingsstatus]);
 
