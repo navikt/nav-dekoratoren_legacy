@@ -35,7 +35,7 @@ const _logPageView = (params: Params, authState: InnloggingsstatusState) => {
 export const logPageView = (params: Params, authState: InnloggingsstatusState, withDelay?: boolean) => {
     if (withDelay) {
         // Wait a second before logging to improve our chances of getting the actual document title
-        // when navigating in SPAs
+        // when user is navigating in SPAs
         setTimeout(() => _logPageView(params, authState), 1000);
     } else {
         _logPageView(params, authState);
