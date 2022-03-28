@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { BodyShort, Link } from '@navikt/ds-react';
-import TilgjengelighetserklaeringsModal from '../tilgjengelighetserklaering-modal/TilgjengelighetserklaeringModal';
+import TilgjengelighetserklaeringModal from '../tilgjengelighetserklaering-modal/TilgjengelighetserklaeringModal';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
 
-export const TilgjengelighetserklaeringsLenke = () => {
+export const TilgjengelighetserklaeringLenke = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const openModal = () => {
@@ -31,7 +31,7 @@ export const TilgjengelighetserklaeringsLenke = () => {
                     </Link>
                 </BodyShort>
             </li>
-            <TilgjengelighetserklaeringsModal isOpen={isOpen} onClose={closeModal} />
+            <TilgjengelighetserklaeringModal isOpen={isOpen} onClose={closeModal} />
         </>
     );
 };

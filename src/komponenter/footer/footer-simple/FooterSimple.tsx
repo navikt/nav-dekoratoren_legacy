@@ -6,7 +6,7 @@ import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import BEMHelper from 'utils/bem';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import { ChatbotWrapper } from 'komponenter/footer/chatbot/ChatbotWrapper';
-import { TilgjengelighetserklaeringsLenke } from 'komponenter/footer/common/tilgjengelighetserklaerings-lenke/TilgjengelighetserklaeringsLenke';
+import { TilgjengelighetserklaeringLenke } from 'komponenter/footer/common/tilgjengelighetserklaering-lenke/TilgjengelighetserklaeringLenke';
 import { DelSkjermLenke } from '../common/del-skjerm-lenke/DelSkjermLenke';
 
 import './FooterSimple.less';
@@ -33,7 +33,7 @@ const FooterSimple = () => {
                 <div className={cls.element('content')}>
                     <ul className={cls.element('personvern-lenker')}>
                         <FooterLenker node={personvernNode} />
-                        <TilgjengelighetserklaeringsLenke />
+                        <TilgjengelighetserklaeringLenke />
                         {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
                     </ul>
                 </div>

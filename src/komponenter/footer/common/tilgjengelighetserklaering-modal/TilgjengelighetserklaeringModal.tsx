@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { BodyLong, Heading, Modal } from '@navikt/ds-react';
 import { AppState } from 'store/reducers';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
-import './TilgjengelighetserklaeringsModal.less';
+import './TilgjengelighetserklaeringModal.less';
 
 interface Props {
     isOpen: boolean;
