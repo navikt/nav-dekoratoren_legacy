@@ -1,5 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { BodyLong, Heading, Modal } from '@navikt/ds-react';
+import { AppState } from 'store/reducers';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import './TilgjengelighetserklaeringsModal.less';
 
@@ -10,7 +12,16 @@ interface Props {
 
 //setappelement?
 
+const stateSelector = (state: AppState) => ({
+    environment: state.environment,
+});
+
 const TilgjengelighetserklaeringsModal = (props: Props) => {
+    const { environment } = useSelector(stateSelector);
+    const { PARAMS } = environment;
+
+    console.log(PARAMS);
+
     return (
         <Modal
             open={props.isOpen}
@@ -34,10 +45,19 @@ const TilgjengelighetserklaeringsModal = (props: Props) => {
                     <Heading spacing size="small" level="3">
                         Tilgjengelighetserklæringer:
                     </Heading>
-                    <LenkeMedSporing href="test">
-                        Tilgjengelighetserklæring for den siden du er på nå. (Sykepenger)
-                    </LenkeMedSporing>
-                    <LenkeMedSporing href="test">Generel tilgjengelighetserklæring for hele nav.no</LenkeMedSporing>
+                    {(() => {
+                        if (PARAMS.ACCESSIBILITY_STATEMENT_URL) {
+                            return (
+                                <LenkeMedSporing href={PARAMS.ACCESSIBILITY_STATEMENT_URL}>
+                                    Tilgjengelighetserklæring for den siden du er på nå
+                                    {PARAMS.APP_NAME ? ` (${PARAMS.APP_NAME})` : ''}
+                                </LenkeMedSporing>
+                            );
+                        }
+                    })()}
+                    <LenkeMedSporing href="test">Generell tilgjengelighetserklæring for hele nav.no</LenkeMedSporing>
+                </div>
+                <div>
                     <LenkeMedSporing href="test">Meld inn uu feil</LenkeMedSporing>
                 </div>
             </Modal.Content>

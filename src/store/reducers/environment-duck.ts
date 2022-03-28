@@ -47,6 +47,8 @@ export interface Params {
     UTLOGGINGSVARSEL: boolean;
     TA_SURVEYS: string[];
     LOGOUT_URL?: string;
+    APP_NAME?: string;
+    ACCESSIBILITY_STATEMENT_URL?: string;
 }
 
 export interface Cookies {

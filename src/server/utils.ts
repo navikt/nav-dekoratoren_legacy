@@ -82,6 +82,8 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 ...(req.query.logoutUrl && {
                     LOGOUT_URL: req.query.logoutUrl as string,
                 }),
+                APP_NAME: 'Sykepenger' as string, //TODO endre
+                ACCESSIBILITY_STATEMENT_URL: 'testUrl' as string, //TODO endre
             },
         }),
     };
