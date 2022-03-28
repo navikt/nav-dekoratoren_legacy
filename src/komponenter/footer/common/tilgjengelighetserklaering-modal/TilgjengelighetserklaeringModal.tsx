@@ -25,8 +25,7 @@ const TilgjengelighetserklaeringsModal = (props: Props) => {
     return (
         <Modal
             open={props.isOpen}
-            // open={true}
-            className={'decorator-wrapper tilgjengelighetserklaerings__modal'}
+            className={'decorator-wrapper tilgjengelighetserklaering__modal'}
             aria-label={'Tilgjengelighetserklæring'}
             onClose={props.onClose}
         >
@@ -41,6 +40,7 @@ const TilgjengelighetserklaeringsModal = (props: Props) => {
                     </BodyLong>
                     <LenkeMedSporing href="test">Hvordan jobber NAV med Universell utforming</LenkeMedSporing>
                 </div>
+                <br />
                 <div>
                     <Heading spacing size="small" level="3">
                         Tilgjengelighetserklæringer:
@@ -57,9 +57,8 @@ const TilgjengelighetserklaeringsModal = (props: Props) => {
                     })()}
                     <LenkeMedSporing href="test">Generell tilgjengelighetserklæring for hele nav.no</LenkeMedSporing>
                 </div>
-                <div>
-                    <LenkeMedSporing href="test">Meld inn uu feil</LenkeMedSporing>
-                </div>
+                <br />
+                <LenkeMedSporing href="test">Meld inn uu feil</LenkeMedSporing>
             </Modal.Content>
         </Modal>
     );
