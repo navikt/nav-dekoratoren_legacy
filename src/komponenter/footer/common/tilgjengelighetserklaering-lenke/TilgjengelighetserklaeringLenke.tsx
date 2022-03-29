@@ -26,7 +26,7 @@ export const TilgjengelighetserklaeringLenke = () => {
         <>
             <li>
                 <BodyShort>
-                    <Link onClick={openModal} role="button">
+                    <Link href="#" onClick={openModal} role="button">
                         <span>Tilgjengelighetserklæring</span>
                     </Link>
                 </BodyShort>
