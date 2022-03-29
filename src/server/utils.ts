@@ -82,8 +82,8 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 ...(req.query.logoutUrl && {
                     LOGOUT_URL: req.query.logoutUrl as string,
                 }),
-                APP_NAME: (req.query.appName || 'Sykepenger') as string, //TODO fjern "Sykepenger"
-                ACCESSIBILITY_STATEMENT_URL: (req.query.accessibilityStatementUrl || 'testUrl') as string, //TODO fjern "testUrl"
+                APP_NAME: req.query.appName as string,
+                ACCESSIBILITY_STATEMENT_URL: req.query.accessibilityStatementUrl as string,
             },
         }),
     };
