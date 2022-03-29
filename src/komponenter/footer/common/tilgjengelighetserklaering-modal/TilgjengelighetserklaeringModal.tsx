@@ -4,6 +4,7 @@ import { BodyLong, Heading, Modal } from '@navikt/ds-react';
 import { AppState } from 'store/reducers';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import './TilgjengelighetserklaeringModal.less';
+import { AnalyticsCategory } from 'utils/analytics';
 
 interface Props {
     isOpen: boolean;
@@ -38,7 +39,12 @@ const TilgjengelighetserklaeringsModal = (props: Props) => {
                         Nav.no har mange målgrupper og brukere som skal ha like muligheter til tjenester og informasjon
                         på nettsidene, uavhengig av brukernes funksjonsevne.
                     </BodyLong>
-                    <LenkeMedSporing href="test">Hvordan jobber NAV med Universell utforming</LenkeMedSporing>
+                    <LenkeMedSporing
+                        analyticsEventArgs={{ category: AnalyticsCategory.Footer, action: 'TODO: endre action' }}
+                        href="TODO: legg inn riktig lenke"
+                    >
+                        Hvordan jobber NAV med Universell utforming
+                    </LenkeMedSporing>
                 </div>
                 <br />
                 <div>
@@ -48,17 +54,33 @@ const TilgjengelighetserklaeringsModal = (props: Props) => {
                     {(() => {
                         if (PARAMS.ACCESSIBILITY_STATEMENT_URL) {
                             return (
-                                <LenkeMedSporing href={PARAMS.ACCESSIBILITY_STATEMENT_URL}>
+                                <LenkeMedSporing
+                                    analyticsEventArgs={{
+                                        category: AnalyticsCategory.Footer,
+                                        action: 'TODO: endre action',
+                                    }}
+                                    href={PARAMS.ACCESSIBILITY_STATEMENT_URL}
+                                >
                                     Tilgjengelighetserklæring for den siden du er på nå
                                     {PARAMS.APP_NAME ? ` (${PARAMS.APP_NAME})` : ''}
                                 </LenkeMedSporing>
                             );
                         }
                     })()}
-                    <LenkeMedSporing href="test">Generell tilgjengelighetserklæring for hele nav.no</LenkeMedSporing>
+                    <LenkeMedSporing
+                        analyticsEventArgs={{ category: AnalyticsCategory.Footer, action: 'TODO: endre action' }}
+                        href="TODO: legg inn riktig lenke"
+                    >
+                        Generell tilgjengelighetserklæring for hele nav.no
+                    </LenkeMedSporing>
                 </div>
                 <br />
-                <LenkeMedSporing href="test">Meld inn uu feil</LenkeMedSporing>
+                <LenkeMedSporing
+                    analyticsEventArgs={{ category: AnalyticsCategory.Footer, action: 'TODO: endre action' }}
+                    href="TODO: legg inn riktig lenke"
+                >
+                    Meld inn uu feil
+                </LenkeMedSporing>
             </Modal.Content>
         </Modal>
     );
