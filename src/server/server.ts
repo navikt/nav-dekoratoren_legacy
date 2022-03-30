@@ -22,8 +22,11 @@ if (!isProduction || process.env.PROD_TEST) {
 
 // Config
 const appBasePath = process.env.APP_BASE_PATH || ``;
+const appPaths = [appBasePath, '', '/dekoratoren'].filter((path, index, array) => array.indexOf(path) === index);
 const oldBasePath = '/common-html/v4/navno';
 const buildPath = `${process.cwd()}/build`;
+
+const createPaths = (subPath: string) => appPaths.map((path) => `${path}${subPath}`);
 
 const app = express();
 const PORT = 8088;
@@ -74,7 +77,7 @@ app.use(
 );
 
 // Express config
-const pathsForTemplate = [`${appBasePath}`, `${appBasePath}/:locale(no|en|se)/*`, `${oldBasePath}`];
+const pathsForTemplate = [appPaths, createPaths('/:locale(no|en|se)/*'), oldBasePath].flat();
 
 // HTML template
 app.get(pathsForTemplate, (req, res, next) => {
@@ -86,7 +89,7 @@ app.get(pathsForTemplate, (req, res, next) => {
 });
 
 // Client environment
-app.get(`${appBasePath}/env`, (req, res, next) => {
+app.get(createPaths('/env'), (req, res, next) => {
     try {
         const cookies = (req as any).universalCookies.cookies;
         res.send(clientEnv({ req, cookies }));
@@ -96,9 +99,9 @@ app.get(`${appBasePath}/env`, (req, res, next) => {
 });
 
 // Api endpoints
-app.get(`${appBasePath}/api/meny`, getMenuHandler);
-app.get(`${appBasePath}/api/sok`, getSokHandler);
-app.get(`${appBasePath}/api/driftsmeldinger`, getDriftsmeldingerHandler);
+app.get(createPaths('/api/meny'), getMenuHandler);
+app.get(createPaths('/api/sok'), getSokHandler);
+app.get(createPaths('/api/driftsmeldinger'), getDriftsmeldingerHandler);
 app.use(varselInnboksProxyUrl, varselInnboksProxyHandler);
 
 // Nais endpoints
@@ -113,7 +116,7 @@ app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));
 
 // Static files
 app.use(
-    `${appBasePath}/`,
+    createPaths('/'),
     express.static(buildPath, {
         setHeaders: (res: Response) => {
             if (isProduction) {
