@@ -1,8 +1,8 @@
 import React from 'react';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
 import SokIkon from 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon';
-import { analyticsEvent } from 'utils/analytics';
-import { AnalyticsCategory } from 'utils/analytics';
+import { analyticsEvent } from 'utils/analytics/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { toggleSok } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import { AppState } from 'store/reducers';

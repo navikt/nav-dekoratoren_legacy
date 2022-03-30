@@ -9,7 +9,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { createStore } from 'store';
 import { erDev, verifyWindowObj } from 'utils/Environment';
 import { fetchEnv } from 'utils/Environment';
-import { initAnalytics } from 'utils/analytics';
+import { initAnalytics } from 'utils/analytics/analytics';
 import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AnalyticsEventArgs, analyticsEvent } from 'utils/analytics';
+import { AnalyticsEventArgs, analyticsEvent } from 'utils/analytics/analytics';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import Lock from 'ikoner/meny/Lock';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';

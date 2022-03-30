@@ -3,7 +3,7 @@ import BEMHelper from 'utils/bem';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';

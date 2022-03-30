@@ -2,7 +2,7 @@ import React from 'react';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import Tekst from 'tekster/finn-tekst';
 
 interface Props {

@@ -1,6 +1,6 @@
 import { verifyWindowObj } from 'utils/Environment';
 import { Params } from 'store/reducers/environment-duck';
-import { InnloggingsstatusState } from '../store/reducers/innloggingsstatus-duck';
+import { InnloggingsstatusState } from '../../store/reducers/innloggingsstatus-duck';
 
 // Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
 const amplitude = verifyWindowObj() ? require('amplitude-js') : () => null;
@@ -17,7 +17,7 @@ export const initAmplitude = () => {
     }
 };
 
-const _logPageView = (params: Params, authState: InnloggingsstatusState) => {
+export const logPageView = (params: Params, authState: InnloggingsstatusState) => {
     logAmplitudeEvent('sidevisning', {
         sidetittel: document.title,
         platform: window.location.toString(),
@@ -30,16 +30,6 @@ const _logPageView = (params: Params, authState: InnloggingsstatusState) => {
             }),
         },
     });
-};
-
-export const logPageView = (params: Params, authState: InnloggingsstatusState, withDelay?: boolean) => {
-    if (withDelay) {
-        // Wait a second before logging to improve our chances of getting the actual document title
-        // when user is navigating in SPAs
-        setTimeout(() => _logPageView(params, authState), 1000);
-    } else {
-        _logPageView(params, authState);
-    }
 };
 
 export const logAmplitudeEvent = (eventName: string, data?: any): Promise<any> => {

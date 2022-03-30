@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { useCookies } from 'react-cookie';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';

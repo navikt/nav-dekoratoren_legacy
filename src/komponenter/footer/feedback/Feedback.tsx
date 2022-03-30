@@ -4,7 +4,7 @@ import Tekst from 'tekster/finn-tekst';
 import { Knapp } from 'nav-frontend-knapper';
 import AlternativJa from './feedback-questions/AlternativJa';
 import AlternativNei from './feedback-questions/AlternativNei';
-import { logAmplitudeEvent } from 'utils/amplitude';
+import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import ThankYou from './feedback-thank-you/ThankYou';
 import './Feedback.less';
 

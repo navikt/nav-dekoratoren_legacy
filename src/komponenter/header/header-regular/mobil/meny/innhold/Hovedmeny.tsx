@@ -15,7 +15,7 @@ import ForsideLenke from './elementer/ForsideLenke';
 import Dittnavmeny from './elementer/dittnavmeny/Dittnavmeny';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
 import { dataInitState } from 'store/reducers/menu-duck';
-import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 
 interface Props {

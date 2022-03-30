@@ -1,7 +1,7 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
-import { analyticsEvent } from 'utils/analytics';
+import { analyticsEvent } from 'utils/analytics/analytics';
 import BEMHelper from 'utils/bem';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
 import { HoyreChevron } from 'nav-frontend-chevron';
@@ -13,7 +13,7 @@ import { CookieName, cookieOptions } from '../../../server/cookieSettings';
 import { erNavDekoratoren } from 'utils/Environment';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { finnTekst } from 'tekster/finn-tekst';
-import { AnalyticsEventArgs } from 'utils/analytics';
+import { AnalyticsEventArgs } from 'utils/analytics/analytics';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import './ArbeidsflateLenkepanel.less';
 

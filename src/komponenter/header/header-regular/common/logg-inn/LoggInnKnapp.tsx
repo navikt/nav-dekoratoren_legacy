@@ -1,6 +1,6 @@
 import React from 'react';
 import { finnTekst } from 'tekster/finn-tekst';
-import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import KnappBase from 'nav-frontend-knapper';

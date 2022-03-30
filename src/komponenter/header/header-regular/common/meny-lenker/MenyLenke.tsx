@@ -2,7 +2,7 @@ import React from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { genererUrl } from 'utils/Environment';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { useDispatch } from 'react-redux';

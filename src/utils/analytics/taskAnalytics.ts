@@ -1,7 +1,7 @@
 import 'regenerator-runtime/runtime';
 
 import { Params } from 'store/reducers/environment-duck';
-import { loadExternalScript } from './external-scripts';
+import { loadExternalScript } from '../external-scripts';
 
 export const initTaskAnalytics = async (params: Params) => {
     const { TA_SURVEYS } = params;

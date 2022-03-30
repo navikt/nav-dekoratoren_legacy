@@ -37,8 +37,7 @@ import Modal from 'nav-frontend-modal';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
-import { usePushStateCallback } from '../../utils/hooks/usePushStateCallback';
-import { logPageView } from '../../utils/amplitude';
+import { useLogPageviews } from '../../utils/hooks/useLogPageviews';
 
 import './Header.less';
 
@@ -69,7 +68,7 @@ export const Header = () => {
 
     const [cookies, setCookie] = useCookies();
 
-    usePushStateCallback(() => logPageView(PARAMS, innloggingsstatus, true));
+    useLogPageviews(PARAMS, innloggingsstatus);
 
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {
@@ -81,12 +80,6 @@ export const Header = () => {
             }
         });
     };
-
-    useEffect(() => {
-        if (innloggingsstatus.status === 'OK') {
-            logPageView(PARAMS, innloggingsstatus, false);
-        }
-    }, [innloggingsstatus]);
 
     useEffect(() => {
         if (ENV && PARAMS.URL_LOOKUP_TABLE && ENV !== 'localhost' && ENV !== 'prod') {
