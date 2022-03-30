@@ -26,8 +26,6 @@ export const useLogPageviews = (params: Params, innloggingsstatus: Innloggingsst
             return;
         }
 
-        logPageView(params, innloggingsstatus);
-
         const pushStateActual = window.history.pushState;
 
         window.history.pushState = (...args: PushStateArgs) => {
@@ -38,6 +36,7 @@ export const useLogPageviews = (params: Params, innloggingsstatus: Innloggingsst
                 const newPathname = window.location.pathname;
                 if (newPathname !== lastPathname) {
                     setLastPathname(newPathname);
+                    logPageView(params, innloggingsstatus);
                 }
             }, 250);
         };
