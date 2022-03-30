@@ -1,7 +1,7 @@
 import TagManager from 'react-gtm-module';
-import { MenuValue } from './meny-storage-utils';
-import { initAmplitude } from 'utils/amplitude';
-import { logAmplitudeEvent } from 'utils/amplitude';
+import { MenuValue } from '../meny-storage-utils';
+import { initAmplitude } from 'utils/analytics/amplitude';
+import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import { Params } from 'store/reducers/environment-duck';
 import { initTaskAnalytics } from './taskAnalytics';
 
@@ -26,7 +26,7 @@ export type AnalyticsEventArgs = {
 
 export const initAnalytics = (params: Params) => {
     TagManager.initialize(tagManagerArgs);
-    initAmplitude(params);
+    initAmplitude();
     initTaskAnalytics(params);
 };
 

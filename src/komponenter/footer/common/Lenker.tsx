@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';

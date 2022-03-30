@@ -4,7 +4,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import DesktopSokKnapp from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
 import DesktopMinsidemenyKnapp from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
@@ -39,16 +39,12 @@ const NavLogo = ({ arbeidsflate }: { arbeidsflate: MenuValue }) => (
 
 export const HeaderMenylinje = () => {
     const cls = BEMHelper('header-linje');
-    const { innlogget, innloggingsstatus, arbeidsflate } = useSelector(
-        stateSelector
-    );
+    const { innlogget, innloggingsstatus, arbeidsflate } = useSelector(stateSelector);
     const kbNavMainState = useKbNavMain();
 
-    const innloggetPrivatperson =
-        innlogget && arbeidsflate === MenuValue.PRIVATPERSON;
+    const innloggetPrivatperson = innlogget && arbeidsflate === MenuValue.PRIVATPERSON;
 
-    const innloggetArbeidsgiver =
-        innlogget && arbeidsflate === MenuValue.ARBEIDSGIVER;
+    const innloggetArbeidsgiver = innlogget && arbeidsflate === MenuValue.ARBEIDSGIVER;
 
     return (
         // OBS: Id-en "Hovedmeny" benyttes til å bestemme høyden til menyen av andre team
@@ -58,12 +54,8 @@ export const HeaderMenylinje = () => {
                 <DesktopHovedmenyKnapp kbNavMainState={kbNavMainState} />
                 <DesktopSokKnapp kbNavMainState={kbNavMainState} />
                 <span className={cls.element('spacer')} />
-                {innloggetPrivatperson && (
-                    <VarslerKnapp kbNavMainState={kbNavMainState} />
-                )}
-                {innloggetPrivatperson && (
-                    <DesktopMinsidemenyKnapp kbNavMainState={kbNavMainState} />
-                )}
+                {innloggetPrivatperson && <VarslerKnapp kbNavMainState={kbNavMainState} />}
+                {innloggetPrivatperson && <DesktopMinsidemenyKnapp kbNavMainState={kbNavMainState} />}
                 {innloggetArbeidsgiver && <MinsideArbgiverKnapp />}
                 {innloggingsstatus === Status.OK && <LoggInnKnapp />}
                 <MobilMenyKnapp />

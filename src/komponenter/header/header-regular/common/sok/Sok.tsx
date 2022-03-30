@@ -2,7 +2,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import debounce from 'lodash.debounce';
-import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { genererUrl } from 'utils/Environment';
 import cls from 'classnames';
 import { Locale } from 'store/reducers/language-duck';

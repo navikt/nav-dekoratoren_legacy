@@ -3,7 +3,7 @@ import { Systemtittel } from 'nav-frontend-typografi';
 import React from 'react';
 import BEMHelper from 'utils/bem';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';

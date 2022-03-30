@@ -1,7 +1,7 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import { analyticsEvent } from 'utils/analytics';
-import { AnalyticsCategory } from 'utils/analytics';
+import { analyticsEvent } from 'utils/analytics/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { toggleMinsidemeny } from 'store/reducers/dropdown-toggle-duck';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
 import MinsideIkon from './minside-ikon/MinsideIkon';

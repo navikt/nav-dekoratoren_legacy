@@ -7,7 +7,7 @@ import { FeedbackInformasjon, QuestionProps, questionStateSelector } from './Alt
 import KnappeRekke from './KnappeRekke';
 import './Alternativ.less';
 import { lagreTilbakemelding } from '../../../../store/reducers/tilbakemelding-duck';
-import { logAmplitudeEvent } from '../../../../utils/amplitude';
+import { logAmplitudeEvent } from '../../../../utils/analytics/amplitude';
 
 const AlternativNei = (props: QuestionProps) => {
     const [feedbackMessage, setFeedbackMessage] = useState('');

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'utils/bem';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { AppState } from 'store/reducers';
 import Tekst from 'tekster/finn-tekst';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';

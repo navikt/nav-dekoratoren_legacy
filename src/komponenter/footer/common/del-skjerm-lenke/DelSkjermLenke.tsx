@@ -3,7 +3,7 @@ import Tekst from 'tekster/finn-tekst';
 import DelSkjerm from 'ikoner/del-skjerm/DelSkjerm';
 import React, { useState } from 'react';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
-import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 export const DelSkjermLenke = () => {
