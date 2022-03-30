@@ -31,39 +31,22 @@ const Undermeny = (props: Props) => {
         return null;
     }
 
-    const hasLevel4Elements =
-        auth.securityLevel !== '4' &&
-        lenker.children.filter((lenke) => lenke.displayLock).length;
+    const hasLevel4Elements = auth.securityLevel !== '4' && lenker.children.filter((lenke) => lenke.displayLock).length;
 
-    const arbeidsflate = lenker.displayName
-        .charAt(0)
-        .toUpperCase()
-        .concat(lenker.displayName.slice(1).toLowerCase());
+    const arbeidsflate = lenker.displayName.charAt(0).toUpperCase().concat(lenker.displayName.slice(1).toLowerCase());
 
-    const containerClass = menyClass.element(
-        'undermeny-innhold',
-        underMenuIsOpen ? '' : 'hidden'
-    );
+    const containerClass = menyClass.element('undermeny-innhold', underMenuIsOpen ? '' : 'hidden');
 
     return (
         <div className={containerClass}>
             <Lukkundermeny className={menyClass.className} />
-            <Systemtittel
-                className={menyClass.element('undermeny-arbeidsflate')}
-            >
-                {arbeidsflate}
-            </Systemtittel>
+            <Systemtittel className={menyClass.element('undermeny-arbeidsflate')}>{arbeidsflate}</Systemtittel>
             {!!hasLevel4Elements && <MinsideLockMsg />}
             <ul className={menyClass.element('meny', 'list')}>
                 {lenker.children.map((lenke, index: number) => {
-                    const displayLock =
-                        lenke.displayLock && auth.securityLevel !== '4';
+                    const displayLock = lenke.displayLock && auth.securityLevel !== '4';
                     return (
-                        <Listelement
-                            key={index}
-                            className={menyClass.className}
-                            classElement="text-element-undermeny"
-                        >
+                        <Listelement key={index} className={menyClass.className} classElement="text-element-undermeny">
                             <LenkeMedSporing
                                 href={genererUrl(XP_BASE_URL, lenke.path)}
                                 withChevron={true}
