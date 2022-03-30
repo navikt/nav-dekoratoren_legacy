@@ -11,8 +11,6 @@ interface Props {
     onClose: () => void;
 }
 
-//setappelement?
-
 const stateSelector = (state: AppState) => ({
     environment: state.environment,
 });
@@ -21,7 +19,7 @@ const TilgjengelighetserklaeringsModal = (props: Props) => {
     const { environment } = useSelector(stateSelector);
     const { PARAMS } = environment;
 
-    console.log(PARAMS);
+    console.log(PARAMS); //TODO fjerne
 
     return (
         <Modal
