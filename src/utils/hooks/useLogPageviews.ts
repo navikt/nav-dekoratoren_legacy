@@ -11,6 +11,7 @@ export const useLogPageviews = (params: Params, innloggingsstatus: Innloggingsst
     const [isInitialPageview, setIsInitialPageview] = useState(true);
     const [lastPathname, setLastPathname] = useState('');
 
+    // Handle logging on initial load
     useEffect(() => {
         if (innloggingsstatus.status === 'OK' && isInitialPageview) {
             setIsInitialPageview(false);
@@ -19,10 +20,13 @@ export const useLogPageviews = (params: Params, innloggingsstatus: Innloggingsst
         }
     }, [innloggingsstatus, isInitialPageview]);
 
+    // Handle SPA logging
     useEffect(() => {
         if (isInitialPageview) {
             return;
         }
+
+        logPageView(params, innloggingsstatus);
 
         const pushStateActual = window.history.pushState;
 
@@ -41,14 +45,5 @@ export const useLogPageviews = (params: Params, innloggingsstatus: Innloggingsst
         return () => {
             window.history.pushState = pushStateActual;
         };
-    }, [lastPathname, isInitialPageview]);
-
-    useEffect(() => {
-        if (isInitialPageview) {
-            return;
-        }
-
-        console.log(`Logging pageview: ${lastPathname}`);
-        logPageView(params, innloggingsstatus);
     }, [lastPathname, isInitialPageview]);
 };
