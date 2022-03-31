@@ -50,7 +50,7 @@ const TilgjengelighetserklaeringsModal = (props: Props) => {
                     </Heading>
                     <BodyLong spacing>
                         {(() => {
-                            if (PARAMS.ACCESSIBILITY_STATEMENT_URL) {
+                            if (PARAMS.ACCESSIBILITY_DECLARATION_URL) {
                                 return (
                                     <BodyShort spacing>
                                         <LenkeMedSporing
@@ -58,7 +58,7 @@ const TilgjengelighetserklaeringsModal = (props: Props) => {
                                                 category: AnalyticsCategory.Footer,
                                                 action: 'TODO: endre action',
                                             }}
-                                            href={PARAMS.ACCESSIBILITY_STATEMENT_URL}
+                                            href={PARAMS.ACCESSIBILITY_DECLARATION_URL}
                                         >
                                             Tilgjengelighetserklæring for den siden du er på nå
                                             {PARAMS.APP_DISPLAY_NAME ? ` (${PARAMS.APP_DISPLAY_NAME})` : ''}

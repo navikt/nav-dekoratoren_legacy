@@ -48,7 +48,7 @@ export interface Params {
     TA_SURVEYS: string[];
     LOGOUT_URL?: string;
     APP_DISPLAY_NAME?: string;
-    ACCESSIBILITY_STATEMENT_URL?: string;
+    ACCESSIBILITY_DECLARATION_URL?: string;
 }
 
 export interface Cookies {
