@@ -82,7 +82,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 ...(req.query.logoutUrl && {
                     LOGOUT_URL: req.query.logoutUrl as string,
                 }),
-                APP_NAME: req.query.appName as string,
+                APP_DISPLAY_NAME: req.query.appDisplayName as string,
                 ACCESSIBILITY_STATEMENT_URL: req.query.accessibilityStatementUrl as string,
             },
         }),

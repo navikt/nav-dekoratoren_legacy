@@ -61,7 +61,7 @@ const TilgjengelighetserklaeringsModal = (props: Props) => {
                                             href={PARAMS.ACCESSIBILITY_STATEMENT_URL}
                                         >
                                             Tilgjengelighetserklæring for den siden du er på nå
-                                            {PARAMS.APP_NAME ? ` (${PARAMS.APP_NAME})` : ''}
+                                            {PARAMS.APP_DISPLAY_NAME ? ` (${PARAMS.APP_DISPLAY_NAME})` : ''}
                                         </LenkeMedSporing>
                                     </BodyShort>
                                 );
