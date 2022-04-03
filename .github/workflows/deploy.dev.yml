@@ -16,6 +16,11 @@ jobs:
                   echo "IMAGE_NAME=$(echo ${GITHUB_REPOSITORY##*/})" >> $GITHUB_ENV
                   echo "IMAGE_VERSION=${IMAGE_VERSION_RAW,,}" >> $GITHUB_ENV
                   echo "GITHUB_TOKEN=$(echo ${GITHUB_TOKEN})" >> $GITHUB_ENV
+            - uses: actions/setup-node@v2
+              with:
+                node-version: '14'
+                registry-url: 'https://npm.pkg.github.com'
+                cache: 'npm'
             - uses: actions/cache@v2
               with:
                   path: ~/.npm
