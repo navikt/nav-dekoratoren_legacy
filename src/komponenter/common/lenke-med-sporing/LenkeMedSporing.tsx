@@ -1,6 +1,6 @@
 import React from 'react';
-import { AnalyticsEventArgs, analyticsEvent } from 'utils/analytics';
 import { Next } from '@navikt/ds-icons';
+import { AnalyticsEventArgs, analyticsEvent } from 'utils/analytics/analytics';
 import Lock from 'ikoner/meny/Lock';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';

@@ -7,7 +7,7 @@ import { SkipLinkElement, SkipLinkProps } from 'komponenter/header/common/skipli
 import { AppState } from 'store/reducers';
 import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/meny/innhold/Hovedmeny';
 import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
-import { logAmplitudeEvent } from '../../../../utils/amplitude';
+import { logAmplitudeEvent } from '../../../../utils/analytics/amplitude';
 import 'komponenter/header/common/skiplinks/Skiplinks.less';
 
 const stateSelector = (state: AppState) => ({

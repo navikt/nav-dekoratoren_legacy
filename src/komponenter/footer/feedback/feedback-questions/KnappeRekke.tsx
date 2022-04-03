@@ -1,7 +1,7 @@
 import { Button } from '@navikt/ds-react';
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
-import { logAmplitudeEvent } from 'utils/amplitude';
+import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import './Alternativ.less';
 
 interface Props {

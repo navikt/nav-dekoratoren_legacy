@@ -7,7 +7,7 @@ import KnappeRekke from './KnappeRekke';
 import './Alternativ.less';
 import { lagreTilbakemelding } from '../../../../store/reducers/tilbakemelding-duck';
 import { useDispatch, useSelector } from 'react-redux';
-import { logAmplitudeEvent } from '../../../../utils/amplitude';
+import { logAmplitudeEvent } from '../../../../utils/analytics/amplitude';
 
 const AlternativJa = (props: QuestionProps) => {
     const [feedbackMessage, setFeedbackMessage] = useState('');

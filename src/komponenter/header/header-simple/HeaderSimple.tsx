@@ -4,12 +4,19 @@ import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import Navn from './navn/Navn';
 import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
 import { Sticky } from 'komponenter/header/header-regular/common/sticky/Sticky';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import Logo from 'ikoner/meny/nav-logo-black.svg';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../store/reducers';
 import './HeaderSimple.less';
+import { Status } from '../../../api/api';
+
+const cls = BEMHelper('simple-header');
 
 export const HeaderSimple = () => {
-    const cls = BEMHelper('simple-header');
+    const { innloggingsstatus } = useSelector((state: AppState) => ({
+        innloggingsstatus: state.innloggingsstatus.status,
+    }));
 
     return (
         <Sticky>
@@ -23,8 +30,12 @@ export const HeaderSimple = () => {
                         ikon={Logo}
                     />
                     <div className={cls.element('right')}>
-                        <Navn />
-                        <LoggInnKnapp />
+                        {innloggingsstatus === Status.OK && (
+                            <>
+                                <Navn />
+                                <LoggInnKnapp />
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

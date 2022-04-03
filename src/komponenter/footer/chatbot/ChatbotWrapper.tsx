@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { verifyWindowObj } from 'utils/Environment';
-import { logAmplitudeEvent } from 'utils/amplitude';
+import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import { MenuValue } from '../../../utils/meny-storage-utils';
 import './ChatbotWrapper.less';
 

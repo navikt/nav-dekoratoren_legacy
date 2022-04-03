@@ -8,7 +8,7 @@ import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { CookieName, cookieOptions } from '../../../server/cookieSettings';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
-import { AnalyticsEventArgs } from 'utils/analytics';
+import { AnalyticsEventArgs } from 'utils/analytics/analytics';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import { getHomeUrl } from '../../../utils/home-url';
 import './NavLogoLenke.less';

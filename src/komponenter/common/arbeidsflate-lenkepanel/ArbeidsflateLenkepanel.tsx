@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 
 import Tekst from 'tekster/finn-tekst';
-import { analyticsEvent } from 'utils/analytics';
+import { analyticsEvent } from 'utils/analytics/analytics';
 import BEMHelper from 'utils/bem';
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { Locale } from 'store/reducers/language-duck';
@@ -12,7 +12,7 @@ import { CookieName, cookieOptions } from '../../../server/cookieSettings';
 import { erNavDekoratoren } from 'utils/Environment';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { finnTekst } from 'tekster/finn-tekst';
-import { AnalyticsEventArgs } from 'utils/analytics';
+import { AnalyticsEventArgs } from 'utils/analytics/analytics';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 
 import './ArbeidsflateLenkepanel.less';

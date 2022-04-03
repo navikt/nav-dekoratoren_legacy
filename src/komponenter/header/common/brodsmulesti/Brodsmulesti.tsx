@@ -10,7 +10,7 @@ import { Locale } from 'store/reducers/language-duck';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { getArbeidsflateContext } from '../../../common/arbeidsflate-lenker/arbeidsflate-lenker';
-import { AnalyticsCategory } from '../../../../utils/analytics';
+import { AnalyticsCategory } from '../../../../utils/analytics/analytics';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import { getHomeUrl } from '../../../../utils/home-url';
 import './Brodsmulesti.less';

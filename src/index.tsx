@@ -9,11 +9,10 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { createStore } from 'store';
 import { erDev, verifyWindowObj } from 'utils/Environment';
 import { fetchEnv } from 'utils/Environment';
-import { initAnalytics } from 'utils/analytics';
+import { initAnalytics } from 'utils/analytics/analytics';
 import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
-import { initPageViewObserver } from './utils/amplitude';
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
@@ -28,7 +27,6 @@ const run = () => {
     fetchEnv()
         .then((environment) => {
             initAnalytics(environment.PARAMS);
-            initPageViewObserver(environment.PARAMS);
             const store = createStore(environment);
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>

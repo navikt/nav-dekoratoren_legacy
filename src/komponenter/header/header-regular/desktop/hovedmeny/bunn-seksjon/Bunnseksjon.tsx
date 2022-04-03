@@ -8,7 +8,7 @@ import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeid
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import './Bunnseksjon.less';
 
 interface Props {
@@ -25,11 +25,7 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
     return (
         <div className={cls.element('bunn-seksjon')}>
             {lenker
-                .filter((lenke) =>
-                    language !== Locale.BOKMAL && language !== Locale.NYNORSK
-                        ? !lenke.key
-                        : true
-                )
+                .filter((lenke) => (language !== Locale.BOKMAL && language !== Locale.NYNORSK ? !lenke.key : true))
                 .map((lenke, index) => (
                     <ArbeidsflateLenkepanel
                         lenke={lenke}

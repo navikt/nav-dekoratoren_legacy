@@ -7,7 +7,6 @@ import Tekst from 'tekster/finn-tekst';
 
 export const Navn = () => {
     const { authenticated, name } = useSelector((state: AppState) => state.innloggingsstatus.data);
-
     return authenticated ? (
         <BodyShort>
             <b>

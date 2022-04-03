@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { AppState } from 'store/reducers';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { Locale } from 'store/reducers/language-duck';
 import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
 import './Arbeidsflatevalg.less';

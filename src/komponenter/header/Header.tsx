@@ -36,6 +36,8 @@ import { setParams } from 'store/reducers/environment-duck';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
+import { useLogPageviews } from '../../utils/hooks/useLogPageviews';
+
 import './Header.less';
 
 export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
@@ -64,6 +66,8 @@ export const Header = () => {
     const useSimpleHeader = PARAMS.SIMPLE || PARAMS.SIMPLE_HEADER;
 
     const [cookies, setCookie] = useCookies();
+
+    useLogPageviews(PARAMS, innloggingsstatus);
 
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {
