@@ -38,7 +38,7 @@ export const LoggInnKnapp = () => {
                 className={`login-knapp${authenticated ? ' logout-knapp' : ''}`}
                 onClick={handleButtonClick}
                 id={loginKnappId}
-                variant="tertiary"
+                variant="secondary"
             >
                 {knappetekst}
             </Button>
