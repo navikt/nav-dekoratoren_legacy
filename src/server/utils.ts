@@ -284,7 +284,7 @@ export const validateBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
 
 // Validator utils
 export const isNavUrl = (url: string) =>
-    /^(\/|(https?:\/\/localhost)|(https:\/\/([a-z0-9-]+[.])*nav[.]no($|\/)))/i.test(url);
+    /^(\/|(https?:\/\/localhost)|(https:\/\/([a-z0-9-]+[.])*((nav[.]no)|(nais[.]io))))/i.test(url);
 
 // Deprecated map to support norsk | engelsk | samisk
 const mapToLocale = (language?: string) => {
