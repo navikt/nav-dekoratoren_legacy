@@ -114,8 +114,7 @@ const getLogoutWarningCookie = (req: Request, cookies: Cookies): Utloggingsvarse
     return UtloggingsvarselInitState;
 };
 
-export const orginDevelopment = (hosturl?: string) =>
-    ['localhost', '-q0', '-q1', '-q2', '-q6', 'dev'].some((o) => hosturl?.includes(o));
+export const orginDevelopment = (hosturl?: string) => ['localhost', 'dev'].some((o) => hosturl?.includes(o));
 
 const getutloggingsvarsel = (req: Request, cookies: Cookies): ParsedJwtToken => {
     const enableUtloggingsvarsel: boolean =
