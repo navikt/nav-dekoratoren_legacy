@@ -283,8 +283,13 @@ export const validateBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
 };
 
 // Validator utils
-export const isNavUrl = (url: string) =>
-    /^(\/|((https?:\/\/localhost(:[0-9]+)?)|(https:\/\/([a-z0-9-]+[.])*((nav[.]no)|(nais[.]io))))($|\/))/i.test(url);
+export const isNavUrl = (url: string) => {
+    const isLocalhost = /^((https?:\/\/localhost(:[0-9]+)?))/i.test(url);
+    const isPath = /^(\/)/i.test(url);
+    const isNavOrNais = /^((https:\/\/([a-z0-9-]+[.])*((nav[.]no)|(nais[.]io)))($|\/))/i.test(url);
+
+    return isLocalhost || isPath || isNavOrNais;
+};
 
 // Deprecated map to support norsk | engelsk | samisk
 const mapToLocale = (language?: string) => {
