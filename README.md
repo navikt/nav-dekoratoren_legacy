@@ -30,13 +30,6 @@ accessPolicy:
       - host: dekoratoren.dev.nav.no
 ```
 
-**Dev (dev-sbs)**
-
--   [https://www-{q0,q1,q6}.nav.no/dekoratoren/](https://www-q1.nav.no/dekoratoren/) (deprecated)
--   [https://appres-{q0,q1,q6}.nav.no/common-html/v4/navno](https://appres-q1.nav.no/common-html/v4/navno) (deprecated)
-
-:warning: &nbsp; Det er en del av it-strategien til NAV å flytte bort fra fra egne datasentre. Som følger vil **dev-sbs og prod-sbs skrus av på et tidspunkt** og det anbefales å deployere nye applikasjoner til Google Cloud (gcp).
-
 ## Implementasjon
 
 Dekoratøren kan implementeres på flere ulike måter, både server-side og client-side.
@@ -49,7 +42,7 @@ Hent dekoratøren server-side og send HTML til brukeren som inkluderer dekoratø
 ```
 // Type
 export type Props = Params & (
-    | { env: "prod" | "dev" | "q0" | "q1" | "q2" | "q6"; }
+    | { env: "prod" | "dev" }
     | { env: "localhost"; port: number; }
 );
 
@@ -175,10 +168,10 @@ Eksempel 2 - Håndhev innlogging:<br>
 https://www.nav.no/dekoratoren/?enforceLogin=true&level=Level4&redirectToApp=true
 
 Eksempel 3 - Språkvelger\*:<br>
-[https://www-q1.nav.no/dekoratoren/?availableLanguages=\[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}\] ](https://www-q1.nav.no/dekoratoren/?availableLanguages=[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}])
+[https://www.nav.no/dekoratoren/?availableLanguages=\[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}\] ](https://www.nav.no/dekoratoren/?availableLanguages=[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}])
 
 Eksempel 4 - Brødsmulesti\*:<br>
-[https://www-q1.nav.no/dekoratoren/?breadcrumbs=\[{"url":"https://www.nav.no/person/dittnav","title":"Ditt NAV"},{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt oss"}\] ](https://www-q1.nav.no/dekoratoren/?breadcrumbs=[{"url":"https://www.nav.no/person/dittnav","title":"Ditt%20NAV"},{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt%20oss"}])
+[https://www.nav.no/dekoratoren/?breadcrumbs=\[{"url":"https://www.nav.no/person/dittnav","title":"Ditt NAV"},{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt oss"}\] ](https://www.nav.no/dekoratoren/?breadcrumbs=[{"url":"https://www.nav.no/person/dittnav","title":"Ditt%20NAV"},{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt%20oss"}])
 
 \*språkvelger og brødsmulesti vises ikke direkte på /dekoratoren i prod av sikkerhetsmessige årsaker
 
@@ -193,7 +186,7 @@ dekoratoren:
     ports:
       - "8100:8088"
     environment:
-      ENV: 'localhost' | 'dev' | "prod" ('q0' | 'q1' | 'q2' | "q6" - deprecated)
+      ENV: 'localhost' | 'dev' | "prod"
       XP_BASE_URL: 'https://www.nav.no'
       APP_BASE_URL: 'http://localhost:8100'
       APP_BASE_PATH: '/dekoratoren'
