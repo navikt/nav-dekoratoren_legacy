@@ -73,7 +73,7 @@ export const Header = () => {
     const setUrlLookupTableUrls = () => {
         const anchors = Array.prototype.slice.call(document.getElementsByTagName('a'));
         anchors.forEach((anchor) => {
-            const envUrl = getUrlFromLookupTable(anchor.href, ENV as 'dev' | 'q0' | 'q1' | 'q2' | 'q6');
+            const envUrl = getUrlFromLookupTable(anchor.href, ENV as 'dev');
             if (anchor.href !== envUrl) {
                 anchor.href = envUrl;
             }
