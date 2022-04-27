@@ -1,8 +1,5 @@
-import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 
-// Nødvendig for IE11-støtte i visse apper.
-import 'core-js/stable/regexp';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';

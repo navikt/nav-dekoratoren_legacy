@@ -92,7 +92,7 @@ const Skiplinks = ({ simple }: Props) => {
     }, []);
 
     return skipLinks.length > 0 ? (
-        <nav id="site-skiplinks" className="site-skiplinks" aria-label="Hopp til innhold">
+        <nav id="site-skiplinks" className="site-skiplinks" aria-label="Hopp til innhold" data-testid={'testerinos'}>
             <ul>
                 {skipLinks.map((link, index) => (
                     <SkipLinkElement
