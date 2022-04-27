@@ -20,18 +20,27 @@ if (erDev) {
     console.log('==========================');
 }
 
+const getSalesforceHeaderContainer = () =>
+    document.getElementsByTagName('salesforce-header')[0]?.getElementsByClassName('decorator-header')[0];
+const getSalesforceFooterContainer = () =>
+    document.getElementsByTagName('salesforce-footer')[0]?.getElementsByClassName('decorator-footer')[0];
+
 const run = () => {
     fetchEnv()
         .then((environment) => {
             initAnalytics(environment.PARAMS);
             const store = createStore(environment);
+
+            const headerContainer = document.getElementById('decorator-header') || getSalesforceHeaderContainer();
+            const footerContainer = document.getElementById('decorator-footer') || getSalesforceFooterContainer();
+
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
                     <CookiesProvider>
                         <Footer />
                     </CookiesProvider>
                 </ReduxProvider>,
-                document.getElementById('decorator-footer')
+                footerContainer
             );
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
@@ -39,7 +48,7 @@ const run = () => {
                         <Header />
                     </CookiesProvider>
                 </ReduxProvider>,
-                document.getElementById('decorator-header')
+                headerContainer
             );
         })
         .catch((e) => {
