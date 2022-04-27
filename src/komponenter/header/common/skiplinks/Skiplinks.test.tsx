@@ -26,19 +26,18 @@ const renderSkiplinksWithMaincontent = () =>
     });
 
 describe('<Skiplinks>', () => {
-    test('Skal rendre 2 skiplinks for mobil', () => {
+    test('Skal rendre 2 skiplinks for hovedmeny (desktop og mobil)', () => {
         renderSkiplinks();
-        expect(screen.getAllByTestId('skiplink__mobil')).toHaveLength(2);
+        expect(screen.queryAllByText(finnTekst('skiplinks-ga-til-hovedmeny', Locale.BOKMAL))).toHaveLength(2);
     });
 
-    test('Skal rendre 2 skiplinks for desktop', () => {
+    test('Skal rendre 2 skiplinks for søk (desktop og mobil)', () => {
         renderSkiplinks();
-        expect(screen.getAllByTestId('skiplink__desktop')).toHaveLength(2);
+        expect(screen.queryAllByText(finnTekst('skiplinks-ga-til-sok', Locale.BOKMAL))).toHaveLength(2);
     });
 
     test('Skal rendre skiplink for hovedinnhold når #maincontent element eksisterer', () => {
         renderSkiplinksWithMaincontent();
-
-        screen.findByText(finnTekst('skiplinks-ga-til-hovedinnhold', Locale.BOKMAL));
+        expect(screen.queryByText(finnTekst('skiplinks-ga-til-hovedinnhold', Locale.BOKMAL))).toBeTruthy();
     });
 });

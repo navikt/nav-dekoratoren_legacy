@@ -21,7 +21,6 @@ export const SkipLinkElement = ({ tekstId, anchorId, onClick, className }: SkipL
                     onClick();
                 }
             }}
-            data-testid={className}
         >
             <Tekst id={tekstId} />
         </a>

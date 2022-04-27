@@ -22,12 +22,7 @@ const Arbeidsflatemeny = () => {
     const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
 
     return (
-        <nav
-            className={cls.className}
-            id={cls.className}
-            aria-label="Velg brukergruppe"
-            data-testid={'arbeidsflatemeny'}
-        >
+        <nav className={cls.className} id={cls.className} aria-label="Velg brukergruppe">
             <ul className={cls.element('topp-liste-rad')}>
                 {arbeidsflateLenker(XP_BASE_URL).map((lenke, index) => {
                     return (

@@ -22,7 +22,7 @@ describe('<RegularHeader>', () => {
         });
 
         renderHeaderRegular(store);
-        expect(screen.queryByTestId('arbeidsflatemeny')).toBeTruthy();
+        expect(screen.queryByLabelText('Velg brukergruppe')).toBeTruthy();
     });
 
     test('Skal ikke rendre <Arbeidsflatemeny> komponent hvis språk er engelsk', () => {
@@ -31,7 +31,7 @@ describe('<RegularHeader>', () => {
         });
 
         renderHeaderRegular(store);
-        expect(screen.queryByTestId('arbeidsflatemeny')).toBeNull();
+        expect(screen.queryByLabelText('Velg brukergruppe')).toBeNull();
     });
 
     test('Skal ikke rendre <Arbeidsflatemeny> komponent hvis språk er samisk', () => {
@@ -40,6 +40,6 @@ describe('<RegularHeader>', () => {
         });
 
         renderHeaderRegular(store);
-        expect(screen.queryByTestId('arbeidsflatemeny')).toBeNull();
+        expect(screen.queryByLabelText('Velg brukergruppe')).toBeNull();
     });
 });
