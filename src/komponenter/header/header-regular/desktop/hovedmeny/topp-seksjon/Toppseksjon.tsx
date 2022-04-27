@@ -27,11 +27,11 @@ export const Toppseksjon = ({ classname }: Props) => {
     const context = getArbeidsflateContext(XP_BASE_URL, arbeidsflate);
 
     return (
-        <div className={cls.element('topp-seksjon')}>
+        <div className={cls.element('topp-seksjon')} data-testid={'toppseksjon'}>
             <Systemtittel className={cls.element('topp-seksjon-tittel')}>
                 <Tekst id={`rolle-${arbeidsflate.toLowerCase()}`} />
                 <span className={cls.element('topp-seksjon-tittel-decoration')} aria-hidden={true}>
-                    //
+                    {'//'}
                 </span>
             </Systemtittel>
             <LenkeMedSporing
