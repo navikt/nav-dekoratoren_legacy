@@ -10,6 +10,7 @@ import { initAnalytics } from 'utils/analytics/analytics';
 import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
+import { getSalesforceContainer } from './server/utils';
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
@@ -19,15 +20,6 @@ if (erDev) {
     console.log('======= DEVELOPMENT ======');
     console.log('==========================');
 }
-
-const getSalesforceContainer = (tagName: string, className: string) => {
-    const tag = document.getElementsByTagName(tagName)[0];
-    if (!tag) {
-        return null;
-    }
-
-    return tag.getElementsByClassName(className)[0];
-};
 
 const run = () => {
     fetchEnv()

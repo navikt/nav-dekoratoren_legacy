@@ -283,7 +283,7 @@ export const validateBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
 
 // Validator utils
 export const isNavUrl = (url: string) => {
-    const isLocalhost = /^((https?:\/\/localhost(:\d+)?))/i.test(url);
+    const isLocalhost = /^(https?:\/\/localhost(:\d+)?)/i.test(url);
     const isPath = /^(\/)/i.test(url);
     const isNavOrNais = /^((https:\/\/([a-z0-9-]+[.])*((nav[.]no)|(nais[.]io)))($|\/))/i.test(url);
 
@@ -308,6 +308,17 @@ const mapToLocale = (language?: string) => {
         samisk: 'se',
     };
     return map[language] || 'ukjent-verdi';
+};
+
+export const getSalesforceContainer = (_tagName: string, className: string) => {
+    const tagName = _tagName.startsWith('c-') ? _tagName : `c-${_tagName}`;
+
+    const tag = document.getElementsByTagName(tagName)[0];
+    if (!tag) {
+        return null;
+    }
+
+    return tag.getElementsByClassName(className)[0];
 };
 
 // Time utils
