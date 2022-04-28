@@ -20,10 +20,14 @@ if (erDev) {
     console.log('==========================');
 }
 
-const getSalesforceHeaderContainer = () =>
-    document.getElementsByTagName('salesforce-header')[0]?.getElementsByClassName('decorator-header')[0];
-const getSalesforceFooterContainer = () =>
-    document.getElementsByTagName('salesforce-footer')[0]?.getElementsByClassName('decorator-footer')[0];
+const getSalesforceContainer = (tagName: string, className: string) => {
+    const tag = document.getElementsByTagName(tagName)[0];
+    if (!tag) {
+        return null;
+    }
+
+    return tag.getElementsByClassName(className)[0];
+};
 
 const run = () => {
     fetchEnv()
@@ -31,8 +35,12 @@ const run = () => {
             initAnalytics(environment.PARAMS);
             const store = createStore(environment);
 
-            const headerContainer = document.getElementById('decorator-header') || getSalesforceHeaderContainer();
-            const footerContainer = document.getElementById('decorator-footer') || getSalesforceFooterContainer();
+            const headerContainer =
+                document.getElementById('decorator-header') ||
+                getSalesforceContainer('salesforce-header', 'decorator-header');
+            const footerContainer =
+                document.getElementById('decorator-footer') ||
+                getSalesforceContainer('salesforce-footer', 'decorator-footer');
 
             ReactDOM.hydrate(
                 <ReduxProvider store={store}>
