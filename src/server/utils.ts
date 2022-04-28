@@ -310,6 +310,9 @@ const mapToLocale = (language?: string) => {
     return map[language] || 'ukjent-verdi';
 };
 
+// Salesforce frontend apps have some restrictions on which elements can be
+// accessed/mutatated. This function is used as a fallback to get certain
+// containers
 export const getSalesforceContainer = (_tagName: string, className: string) => {
     // The "c-" prefix on tags is required by salesforce
     const tagName = _tagName.startsWith('c-') ? _tagName : `c-${_tagName}`;
