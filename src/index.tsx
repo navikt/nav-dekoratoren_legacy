@@ -1,7 +1,7 @@
 import 'react-app-polyfill/stable';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 import { Provider as ReduxProvider } from 'react-redux';
 import { createStore } from 'store';
 import { erDev, verifyWindowObj } from 'utils/Environment';
@@ -34,21 +34,29 @@ const run = () => {
                 document.getElementById('decorator-footer') ||
                 getSalesforceContainer('salesforce-footer', 'decorator-footer');
 
-            ReactDOM.hydrate(
+            if (!headerContainer) {
+                throw new Error('Header container not found!');
+            }
+
+            if (!footerContainer) {
+                throw new Error('Footer container not found!');
+            }
+
+            hydrateRoot(
+                footerContainer,
                 <ReduxProvider store={store}>
                     <CookiesProvider>
                         <Footer />
                     </CookiesProvider>
-                </ReduxProvider>,
-                footerContainer
+                </ReduxProvider>
             );
-            ReactDOM.hydrate(
+            hydrateRoot(
+                headerContainer,
                 <ReduxProvider store={store}>
                     <CookiesProvider>
                         <Header />
                     </CookiesProvider>
-                </ReduxProvider>,
-                headerContainer
+                </ReduxProvider>
             );
         })
         .catch((e) => {
