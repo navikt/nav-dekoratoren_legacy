@@ -29,10 +29,10 @@ const run = () => {
 
             const headerContainer =
                 document.getElementById('decorator-header') ||
-                getSalesforceContainer('salesforce-header', 'decorator-header');
+                getSalesforceContainer('c-salesforce-header', 'decorator-header');
             const footerContainer =
                 document.getElementById('decorator-footer') ||
-                getSalesforceContainer('salesforce-footer', 'decorator-footer');
+                getSalesforceContainer('c-salesforce-footer', 'decorator-footer');
 
             if (!headerContainer) {
                 throw new Error('Header container not found!');

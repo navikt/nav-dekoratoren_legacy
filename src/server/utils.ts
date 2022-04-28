@@ -311,6 +311,7 @@ const mapToLocale = (language?: string) => {
 };
 
 export const getSalesforceContainer = (_tagName: string, className: string) => {
+    // The "c-" prefix on tags is required by salesforce
     const tagName = _tagName.startsWith('c-') ? _tagName : `c-${_tagName}`;
 
     const tag = document.getElementsByTagName(tagName)[0];
