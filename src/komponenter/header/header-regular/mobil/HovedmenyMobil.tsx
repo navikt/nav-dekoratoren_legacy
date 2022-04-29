@@ -21,29 +21,19 @@ const stateSelector = (state: AppState) => ({
 });
 
 export const HovedmenyMobil = () => {
-    const { meny, underIsOpen, hovedIsOpen, varselIsOpen } = useSelector(
-        stateSelector
-    );
+    const { meny, underIsOpen, hovedIsOpen, varselIsOpen } = useSelector(stateSelector);
 
     return (
         <div className={'media-sm-mobil'}>
             <HovedmenyKnapp id={mobilmenyKnappId} />
-            <EkspanderbarMeny
-                isOpen={hovedIsOpen}
-                classname={classname}
-                id={classname}
-            >
+            <EkspanderbarMeny isOpen={hovedIsOpen} classname={classname} id={classname}>
                 <SlideToClose>
                     {meny.status === Status.OK ? (
                         <MobilMeny classname={classname} />
                     ) : (
                         <Spinner
                             tekstId={'meny-loading'}
-                            className={
-                                hovedIsOpen || underIsOpen || varselIsOpen
-                                    ? 'spinner-container--active'
-                                    : ''
-                            }
+                            className={hovedIsOpen || underIsOpen || varselIsOpen ? 'spinner-container--active' : ''}
                         />
                     )}
                 </SlideToClose>
