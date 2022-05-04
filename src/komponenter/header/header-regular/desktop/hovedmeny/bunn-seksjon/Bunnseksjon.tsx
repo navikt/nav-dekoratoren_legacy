@@ -23,7 +23,7 @@ export const Bunnseksjon = ({ classname, language, arbeidsflate }: Props) => {
     const lenker = bunnLenker(environment)[arbeidsflate] as ArbeidsflateLenke[];
 
     return (
-        <div className={cls.element('bunn-seksjon')}>
+        <div className={cls.element('bunn-seksjon')} data-testid={'bunnseksjon'}>
             {lenker
                 .filter((lenke) => (language !== Locale.BOKMAL && language !== Locale.NYNORSK ? !lenke.key : true))
                 .map((lenke, index) => (

@@ -31,7 +31,7 @@ export const MinsideArbgiverKnapp = () => {
             }}
         >
             <Bilde asset={briefcaseIkon} altText="" />
-            <div className={cls.element('knapp-tekst')}>
+            <div className={cls.element('knapp-tekst')} data-testid={'minside-arbeidsgiver'}>
                 <Normaltekst className={cls.element('knapp-tekst-topp')}>
                     <Tekst id={'ga-til-min-side-arbeidsgiver'} />
                 </Normaltekst>
