@@ -7,7 +7,7 @@
         "start-server": "node build/server.js",
         "start-server-and-watch": "nodemon build/server.js",
         "start-prod-test": "cross-env PROD_TEST=true npm-run-all build start-server",
-        "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+        "build-prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
         "build-dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
         "build-and-watch": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
         "test": "jest",

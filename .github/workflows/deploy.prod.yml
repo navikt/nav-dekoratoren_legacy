@@ -32,7 +32,7 @@ jobs:
             ${{ runner.os }}-node-
       - run: npm ci
       - run: npm test
-      - run: npm run build
+      - run: npm run build-prod
       - name: Docker build and push
         run: |
           echo $GITHUB_TOKEN | docker login $IMAGE_REGISTRY -u ${GITHUB_REPOSITORY} --password-stdin
