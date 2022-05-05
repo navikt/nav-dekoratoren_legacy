@@ -25,12 +25,12 @@ const renderOrHydrate = (reactElement: JSX.Element, container: Element | null) =
     if (!container) {
         console.error('Missing container for header/footer!');
     } else if (container.hasChildNodes()) {
-        // If the container contains server-side rendered nodes, hydrate
+        // Hydrate the container if it contains server-side rendered elements
         hydrateRoot(container, reactElement);
     } else {
-        // Else render client-side
-        const footerRoot = createRoot(container);
-        footerRoot.render(reactElement);
+        // If not, render client-side
+        const root = createRoot(container);
+        root.render(reactElement);
     }
 };
 
