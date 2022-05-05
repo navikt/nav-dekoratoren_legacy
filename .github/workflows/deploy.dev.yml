@@ -37,7 +37,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - run: npm test
-      - run: npm run build-${{ github.event.inputs.environment }}
+      - run: npm run build-${{ github.event.inputs.build_mode }}
       - name: Docker build and push
         run: |
           echo $GITHUB_TOKEN | docker login $IMAGE_REGISTRY -u ${GITHUB_REPOSITORY} --password-stdin
