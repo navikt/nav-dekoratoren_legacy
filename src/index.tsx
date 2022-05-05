@@ -11,7 +11,6 @@ import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
 import { getSalesforceContainer } from './server/utils';
-import { Store } from 'redux';
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
@@ -21,22 +20,6 @@ if (erDev) {
     console.log('======= DEVELOPMENT ======');
     console.log('==========================');
 }
-
-const HeaderRootElement = ({ store }: { store: Store }) => (
-    <ReduxProvider store={store}>
-        <CookiesProvider>
-            <Header />
-        </CookiesProvider>
-    </ReduxProvider>
-);
-
-const FooterRootElement = ({ store }: { store: Store }) => (
-    <ReduxProvider store={store}>
-        <CookiesProvider>
-            <Footer />
-        </CookiesProvider>
-    </ReduxProvider>
-);
 
 const renderOrHydrate = (reactElement: JSX.Element, container: Element | null) => {
     if (!container) {
@@ -66,8 +49,23 @@ const run = () => {
 
             // We hydrate the footer first to prevent client/server mismatch due to client-side only
             // store mutations that occur in the header
-            renderOrHydrate(<FooterRootElement store={store} />, footerContainer);
-            renderOrHydrate(<HeaderRootElement store={store} />, headerContainer);
+            renderOrHydrate(
+                <ReduxProvider store={store}>
+                    <CookiesProvider>
+                        <Footer />
+                    </CookiesProvider>
+                </ReduxProvider>,
+                footerContainer
+            );
+
+            renderOrHydrate(
+                <ReduxProvider store={store}>
+                    <CookiesProvider>
+                        <Header />
+                    </CookiesProvider>
+                </ReduxProvider>,
+                headerContainer
+            );
         })
         .catch((e) => {
             console.error(e);
