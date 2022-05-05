@@ -6,7 +6,7 @@
         "start": "npm-run-all -p -r build-and-watch start-server-and-watch typecheck-watch",
         "start-server": "node build/server.js",
         "start-server-and-watch": "nodemon build/server.js",
-        "start-prod-test": "cross-env PROD_TEST=true npm-run-all build start-server",
+        "start-prod-test": "cross-env PROD_TEST=true npm-run-all build-prod start-server",
         "build-prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
         "build-dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
         "build-and-watch": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
