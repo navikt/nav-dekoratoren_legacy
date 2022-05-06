@@ -29,7 +29,7 @@ export const SokInput = (props: Props) => {
         <>
             <div className={'sok-input__tittel'}>
                 <Systemtittel>
-                    <Tekst id="sok-knapp" />
+                    <Tekst id="sok-knapp-sokefelt" />
                 </Systemtittel>
             </div>
             <div className="sok-input-container">
@@ -38,8 +38,7 @@ export const SokInput = (props: Props) => {
                     onChange={(e) => onChange(e.target.value)}
                     className={className}
                     value={inputValue}
-                    placeholder={finnTekst('sok-input-placeholder', language)}
-                    aria-label={finnTekst('sok-input-placeholder', language)}
+                    aria-label={finnTekst('sok-knapp-sokefelt', language)}
                     type="search"
                 />
                 <SokKnapper writtenInput={writtenInput} onReset={onReset} id={id} />
