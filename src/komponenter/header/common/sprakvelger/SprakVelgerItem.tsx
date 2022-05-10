@@ -13,7 +13,7 @@ interface Props {
     selectedItem: LocaleOption | null;
     itemProps: any;
 }
-//
+
 const SprakVelgerItem = (props: Props) => {
     const { selectedItem, highlightedIndex, index } = props;
     const { item, itemProps, cls } = props;
