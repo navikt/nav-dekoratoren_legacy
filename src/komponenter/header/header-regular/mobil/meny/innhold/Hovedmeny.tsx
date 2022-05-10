@@ -23,7 +23,7 @@ interface Props {
     className: string;
 }
 
-export const mobilSokInputId = `mobil-sok-input`;
+export const mobilSokInputId = `sok-input-sm`;
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
     language: state.language.language,
