@@ -48,6 +48,7 @@ export const MinsidemenyInnhold = (props: Props) => {
                             category: AnalyticsCategory.Header,
                             action: 'dittnav',
                             label: dittNavUrl,
+                            lenkegruppe: 'innlogget meny',
                         }}
                     >
                         <Tekst id={'til-dittnav-forside'} />
