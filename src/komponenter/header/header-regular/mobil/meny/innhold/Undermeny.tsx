@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
+import { AnalyticsCategory } from '../../../../../../utils/analytics/analytics';
 
 interface Props {
     className: string;
@@ -45,12 +46,19 @@ const Undermeny = (props: Props) => {
             <ul className={menyClass.element('meny', 'list')}>
                 {lenker.children.map((lenke, index: number) => {
                     const displayLock = lenke.displayLock && auth.securityLevel !== '4';
+                    const href = genererUrl(XP_BASE_URL, lenke.path);
                     return (
                         <Listelement key={index} className={menyClass.className} classElement="text-element-undermeny">
                             <LenkeMedSporing
-                                href={genererUrl(XP_BASE_URL, lenke.path)}
+                                href={href}
                                 withChevron={true}
                                 withLock={displayLock}
+                                analyticsEventArgs={{
+                                    category: AnalyticsCategory.Meny,
+                                    action: `${lenker.displayName}/${lenke.displayName}`,
+                                    label: href,
+                                    ...(lenke.isMyPageMenu && { lenkegruppe: 'innlogget meny' }),
+                                }}
                             >
                                 {lenke.displayName}
                             </LenkeMedSporing>
