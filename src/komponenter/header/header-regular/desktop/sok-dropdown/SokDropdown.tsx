@@ -13,7 +13,7 @@ import { SokKnapp } from 'komponenter/header/header-regular/desktop/sok-dropdown
 import './SokDropdown.less';
 
 export const sokDropdownClassname = 'desktop-sok-dropdown';
-export const desktopSokInputId = 'desktop-sok-input';
+export const desktopSokInputId = 'sok-input-large';
 const dropdownTransitionMs = 300;
 
 const stateSelector = (state: AppState) => ({

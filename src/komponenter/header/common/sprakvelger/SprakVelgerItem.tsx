@@ -33,7 +33,7 @@ const SprakVelgerItem = (props: Props) => {
             {selectedItem?.locale === item.locale ? (
                 <div className={cls.element('option')}>
                     <Bilde asset={Cicle} className={cls.element('sirkel')} />
-                    <Normaltekst lang={item.locale}>{item.label} </Normaltekst>
+                    <Normaltekst lang={item.locale}>{item.label}</Normaltekst>
                 </div>
             ) : (
                 <Normaltekst className={cls.element('option')}>
