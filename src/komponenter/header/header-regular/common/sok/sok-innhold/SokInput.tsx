@@ -1,7 +1,6 @@
-import { Systemtittel } from 'nav-frontend-typografi';
 import Tekst from 'tekster/finn-tekst';
 import { finnTekst } from 'tekster/finn-tekst';
-import { Input } from 'nav-frontend-skjema';
+import { Input, Label } from 'nav-frontend-skjema';
 import SokKnapper from './SokKnapper';
 import React from 'react';
 import { Locale } from 'store/reducers/language-duck';
@@ -27,10 +26,10 @@ export const SokInput = (props: Props) => {
 
     return (
         <>
-            <div className={'sok-input__tittel'}>
-                <Systemtittel>
-                    <Tekst id="sok-knapp-sokefelt" />
-                </Systemtittel>
+            <div>
+                <Label className="sok-input-resultat" htmlFor={'sok-input__tittel'}>
+                    <Tekst id={finnTekst('sok-knapp-sokefelt', language)} />
+                </Label>
             </div>
             <div className="sok-input-container">
                 <Input
@@ -38,7 +37,6 @@ export const SokInput = (props: Props) => {
                     onChange={(e) => onChange(e.target.value)}
                     className={className}
                     value={inputValue}
-                    aria-label={finnTekst('sok-knapp-sokefelt', language)}
                     type="search"
                 />
                 <SokKnapper writtenInput={writtenInput} onReset={onReset} id={id} />
