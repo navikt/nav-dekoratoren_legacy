@@ -1,5 +1,15 @@
 name: Deploy-to-dev
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      build_mode:
+        type: choice
+        required: true
+        description: 'Build-time NODE_ENV'
+        default: 'prod'
+        options:
+          - prod
+          - dev
 
 jobs:
     deploy:
@@ -27,12 +37,17 @@ jobs:
                   key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
                   restore-keys: |
                       ${{ runner.os }}-node-
+            - name: Setup node.js
+              uses: actions/setup-node@v2
+              with:
+                node-version: '14'
+                registry-url: 'https://npm.pkg.github.com'
             - name: Install dependencies
               run: npm ci
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
             - run: npm test
-            - run: npm run build
+            - run: npm run build-${{ github.event.inputs.build_mode }}
             - name: Docker build and push
               run: |
                   echo $GITHUB_TOKEN | docker login $IMAGE_REGISTRY -u ${GITHUB_REPOSITORY} --password-stdin

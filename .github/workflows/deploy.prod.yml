@@ -11,6 +11,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+          registry-url: 'https://npm.pkg.github.com'
       - name: Abort if branch is not master
         if: github.event.release.target_commitish != 'master'
         run: echo "Release is not on master, aborting"; exit 1;
@@ -32,7 +33,7 @@ jobs:
             ${{ runner.os }}-node-
       - run: npm ci
       - run: npm test
-      - run: npm run build
+      - run: npm run build-prod
       - name: Docker build and push
         run: |
           echo $GITHUB_TOKEN | docker login $IMAGE_REGISTRY -u ${GITHUB_REPOSITORY} --password-stdin

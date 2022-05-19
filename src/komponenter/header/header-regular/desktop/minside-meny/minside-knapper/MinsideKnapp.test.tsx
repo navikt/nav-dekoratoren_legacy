@@ -1,18 +1,13 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { act, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore, Store } from 'redux';
 import { reducers } from 'store/reducers';
-import { settArbeidsgiverflate } from 'store/reducers/arbeidsflate-duck';
-import { settPersonflate } from 'store/reducers/arbeidsflate-duck';
-import { settSamarbeidspartnerflate } from 'store/reducers/arbeidsflate-duck';
+import { settArbeidsgiverflate, settPersonflate, settSamarbeidspartnerflate } from 'store/reducers/arbeidsflate-duck';
 import { ActionType } from 'store/actions';
 import { Status } from 'api/api';
 import mockMenu from 'server/mock/menu.json';
-import { languageDuck } from 'store/reducers/language-duck';
-import { Locale } from 'store/reducers/language-duck';
-import { MinsidePersonKnapp } from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsidePersonKnapp';
-import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
+import { languageDuck, Locale } from 'store/reducers/language-duck';
 import { innloggetAction } from 'utils/jest/testObjects';
 import { HeaderMenylinje } from 'komponenter/header/header-regular/HeaderMenylinje';
 
@@ -26,35 +21,44 @@ const languageAction = languageDuck.actionCreator({
     language: Locale.BOKMAL,
 });
 
-const mountWithRedux = (store: Store) => {
-    return mount(
+const store = createStore(reducers);
+store.dispatch(languageAction);
+store.dispatch(menuAction);
+store.dispatch(innloggetAction);
+
+const renderHeaderMenylinje = (store: Store) =>
+    render(
         <Provider store={store}>
             <HeaderMenylinje />
         </Provider>
     );
-};
 
-describe('Minside knapper', () => {
-    const store = createStore(reducers);
-    store.dispatch(languageAction);
-    store.dispatch(menuAction);
-    store.dispatch(innloggetAction);
+describe('Minside knapp', () => {
+    test('Skal vise <MinsidePersonKnapp/> knapp når bruker er PRIVATPERSON', () => {
+        act(() => {
+            store.dispatch(settPersonflate());
+        });
 
-    it('Skal vise <MinsidePersonKnapp/> knapp når bruker er PRIVATPERSON', () => {
-        store.dispatch(settPersonflate());
-        const wrapper = mountWithRedux(store);
-        expect(wrapper.find(MinsidePersonKnapp)).toHaveLength(1);
+        renderHeaderMenylinje(store);
+        expect(screen.queryByTestId('minside-person')).toBeTruthy();
     });
 
-    it('Skal vise <MinsideArbgiverKnapp/> knapp når bruker er ARBEIDSGIVER', () => {
-        store.dispatch(settArbeidsgiverflate());
-        const wrapper = mountWithRedux(store);
-        expect(wrapper.find(MinsideArbgiverKnapp)).toHaveLength(1);
+    test('Skal vise lenker for min side arbeidsgiver når bruker er ARBEIDSGIVER', () => {
+        act(() => {
+            store.dispatch(settArbeidsgiverflate());
+        });
+
+        renderHeaderMenylinje(store);
+        expect(screen.queryByTestId('minside-arbeidsgiver')).toBeTruthy();
     });
 
-    it('Skal ikke vise minside knapp når bruker er SAMARBEIDSPARTNER', () => {
-        store.dispatch(settSamarbeidspartnerflate());
-        const wrapper = mountWithRedux(store);
-        expect(wrapper.find('.desktop-minside-meny__knapp')).toHaveLength(0);
+    test('Skal ikke min side lenker når bruker er SAMARBEIDSPARTNER', () => {
+        act(() => {
+            store.dispatch(settSamarbeidspartnerflate());
+        });
+
+        renderHeaderMenylinje(store);
+        expect(screen.queryByTestId('minside-person')).toBeNull();
+        expect(screen.queryByTestId('minside-arbeidsgiver')).toBeNull();
     });
 });

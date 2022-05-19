@@ -1,45 +1,43 @@
-import * as React from 'react';
-import { mount } from 'enzyme';
+import React from 'react';
 import { createStore } from 'store';
 import { Provider as ReduxProvider } from 'react-redux';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
+import { act, render, screen } from '@testing-library/react';
+import { finnTekst } from '../../../../tekster/finn-tekst';
+import { Locale } from '../../../../store/reducers/language-duck';
 
 const store = createStore();
 
-describe('<Skiplinks>', () => {
-    const wrapper = mount(
+const renderSkiplinks = () =>
+    render(
         <ReduxProvider store={store}>
             <Skiplinks />
         </ReduxProvider>
     );
 
-    it('Skal rendre 2 skiplinks for mobil', () => {
-        expect(wrapper.find('.skiplink.skiplink__mobil')).toHaveLength(2);
-    });
-
-    it('Skal rendre 2 skiplinks for desktop', () => {
-        expect(wrapper.find('.skiplink.skiplink__desktop')).toHaveLength(2);
-    });
-
-    it('Skal rendre 4 skiplinks totalt', () => {
-        expect(wrapper.find('.skiplink')).toHaveLength(4);
-    });
-
-    describe('Rendrer med #maincontent element', () => {
-        const container = document.createElement('div');
-        container.setAttribute('id', 'container');
-        document.body.appendChild(container);
-
-        const wrapperWithMaincontent = mount(
+const renderSkiplinksWithMaincontent = () =>
+    act(() => {
+        render(
             <ReduxProvider store={store}>
                 <div id="maincontent" />
                 <Skiplinks />
-            </ReduxProvider>,
-            { attachTo: document.getElementById('container') }
+            </ReduxProvider>
         );
+    });
 
-        it('Skal rendre 5 skiplinks totalt', () => {
-            expect(wrapperWithMaincontent.find('.skiplink')).toHaveLength(5);
-        });
+describe('<Skiplinks>', () => {
+    test('Skal rendre 2 skiplinks for hovedmeny (desktop og mobil)', () => {
+        renderSkiplinks();
+        expect(screen.queryAllByText(finnTekst('skiplinks-ga-til-hovedmeny', Locale.BOKMAL))).toHaveLength(2);
+    });
+
+    test('Skal rendre 2 skiplinks for søk (desktop og mobil)', () => {
+        renderSkiplinks();
+        expect(screen.queryAllByText(finnTekst('skiplinks-ga-til-sok', Locale.BOKMAL))).toHaveLength(2);
+    });
+
+    test('Skal rendre skiplink for hovedinnhold når #maincontent element eksisterer', () => {
+        renderSkiplinksWithMaincontent();
+        expect(screen.queryByText(finnTekst('skiplinks-ga-til-hovedinnhold', Locale.BOKMAL))).toBeTruthy();
     });
 });

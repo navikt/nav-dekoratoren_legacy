@@ -33,6 +33,7 @@ export const MenyLenke = (props: Props) => {
                     category: AnalyticsCategory.Meny,
                     action: `${menyGruppeNavn}/${lenke.displayName}`,
                     label: href,
+                    ...(lenke.isMyPageMenu && { lenkegruppe: 'innlogget meny' }),
                 }}
                 withChevron={true}
                 withLock={displayLock}

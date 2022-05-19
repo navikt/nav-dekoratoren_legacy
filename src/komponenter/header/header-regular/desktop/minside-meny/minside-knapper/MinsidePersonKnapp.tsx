@@ -46,7 +46,7 @@ export const MinsidePersonKnapp = ({ classname, id }: Props) => {
             id={id}
         >
             <MinsideIkon isOpen={isOpen} hasMenu={true} />
-            <span className={cls.element('knapp-tekst')}>
+            <span className={cls.element('knapp-tekst')} data-testid={'minside-person'}>
                 <span
                     className={`${cls.element('knapp-tekst-topp')} ${
                         isOpen ? cls.element('knapp-tekst-topp', 'open') : ''

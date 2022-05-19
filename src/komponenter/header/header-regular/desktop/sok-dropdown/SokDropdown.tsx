@@ -13,7 +13,7 @@ import { SokKnapp } from 'komponenter/header/header-regular/desktop/sok-dropdown
 import './SokDropdown.less';
 
 export const sokDropdownClassname = 'desktop-sok-dropdown';
-export const desktopSokInputId = 'desktop-sok-input';
+export const desktopSokInputId = 'sok-input-large';
 const dropdownTransitionMs = 300;
 
 const stateSelector = (state: AppState) => ({
@@ -28,17 +28,10 @@ export const SokKnappDesktop = ({ kbNavMainState }: Props) => {
     const { isOpen } = useSelector(stateSelector);
     const [searchInput, setSearchInput] = useState<string>('');
     const [numResults, setNumResults] = useState(0);
-    useKbNavSub(
-        configForNodeGroup[KbNavGroup.Sok],
-        kbNavMainState,
-        isOpen,
-        numResults
-    );
+    useKbNavSub(configForNodeGroup[KbNavGroup.Sok], kbNavMainState, isOpen, numResults);
 
     useEffect(() => {
-        const dropdownElement = document.getElementById(
-            sokDropdownClassname
-        ) as HTMLElement;
+        const dropdownElement = document.getElementById(sokDropdownClassname) as HTMLElement;
         if (dropdownElement) {
             if (isOpen) {
                 setTimeout(() => {
@@ -52,13 +45,9 @@ export const SokKnappDesktop = ({ kbNavMainState }: Props) => {
     }, [isOpen]);
 
     return (
-        <div className={'media-tablet-desktop'}>
+        <div className={'media-tablet-desktop'} data-testid={'sok-dropdown'}>
             <SokKnapp />
-            <EkspanderbarMeny
-                classname={sokDropdownClassname}
-                id={sokDropdownClassname}
-                isOpen={isOpen}
-            >
+            <EkspanderbarMeny classname={sokDropdownClassname} id={sokDropdownClassname} isOpen={isOpen}>
                 <Sok
                     isOpen={isOpen}
                     id={desktopSokInputId}
