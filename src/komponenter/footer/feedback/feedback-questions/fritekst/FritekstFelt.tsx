@@ -1,8 +1,9 @@
 import React, { useEffect, Dispatch } from 'react';
-import { Ingress, Textarea, TextareaProps } from '@navikt/ds-react';
+import { Ingress } from '@navikt/ds-react';
+import { Textarea, TextareaProps } from 'nav-frontend-skjema';
 import { checkForViolations, getViolationErrorMessage } from './Sanitizer';
 import { useDebounce } from '../../../../../utils/hooks/useDebounce';
-import Tekst from '../../../../../tekster/finn-tekst';
+import Tekst, { finnTekst } from '../../../../../tekster/finn-tekst';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../../../store/reducers';
 import './FritekstFelt.less';
@@ -75,11 +76,6 @@ const FritekstFelt = (props: Props) => {
         }
     };
 
-    /*
-     * Per 01.03.2022 Textarea does not support custom countdown text, which
-     * the previous nav-frontend-skjema/Textarea did. Will add a PR to suggest
-     * feature re-added. Keeping this function commented out as we expect to be
-     * able to reuse it shortly.
     const tellerTekst = (antallTegn: number, maxLength: number): React.ReactNode => {
         let content = '';
         let className = '';
@@ -98,22 +94,6 @@ const FritekstFelt = (props: Props) => {
             </span>
         );
     };
-    */
-
-    const getErrorMessage = () => {
-        const { invalidInput, maxLength } = props.errors;
-
-        if (!invalidInput && !maxLength) {
-            return null;
-        }
-
-        return (
-            <>
-                {props.errors.invalidInput && <>{props.errors.invalidInput}</>}
-                {props.errors.maxLength && <span> {props.errors.maxLength}</span>}
-            </>
-        );
-    };
 
     return (
         <Textarea
@@ -126,7 +106,16 @@ const FritekstFelt = (props: Props) => {
                 </Ingress>
             }
             maxLength={MAX_LENGTH}
-            error={getErrorMessage()}
+            textareaRef={props.textareaRef}
+            tellerTekst={tellerTekst}
+            feil={
+                props.errors.invalidInput || props.errors.maxLength ? (
+                    <>
+                        {props.errors.invalidInput && <>{props.errors.invalidInput}</>}
+                        {props.errors.maxLength && <span> {props.errors.maxLength}</span>}
+                    </>
+                ) : null
+            }
         />
     );
 };
