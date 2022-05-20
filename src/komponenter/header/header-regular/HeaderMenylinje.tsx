@@ -15,6 +15,9 @@ import MobilMenyKnapp from 'komponenter/header/header-regular/mobil/HovedmenyMob
 import { Status } from 'api/api';
 import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideArbgiverKnapp';
 import Logo from 'ikoner/meny/nav-logo-red.svg';
+import { Locale } from 'store/reducers/language-duck';
+import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
+
 import './HeaderMenylinje.less';
 
 export const headerLogoId = 'header-logo-id';
@@ -23,6 +26,7 @@ const stateSelector = (state: AppState) => ({
     innlogget: state.innloggingsstatus.data.authenticated,
     innloggingsstatus: state.innloggingsstatus.status,
     arbeidsflate: state.arbeidsflate.status,
+    language: state.language.language,
 });
 
 const NavLogo = ({ arbeidsflate }: { arbeidsflate: MenuValue }) => (
@@ -39,18 +43,19 @@ const NavLogo = ({ arbeidsflate }: { arbeidsflate: MenuValue }) => (
 
 export const HeaderMenylinje = () => {
     const cls = BEMHelper('header-linje');
-    const { innlogget, innloggingsstatus, arbeidsflate } = useSelector(stateSelector);
+    const { innlogget, innloggingsstatus, arbeidsflate, language } = useSelector(stateSelector);
     const kbNavMainState = useKbNavMain();
 
     const innloggetPrivatperson = innlogget && arbeidsflate === MenuValue.PRIVATPERSON;
-
     const innloggetArbeidsgiver = innlogget && arbeidsflate === MenuValue.ARBEIDSGIVER;
+    const isLanguageNorwegian = language === Locale.BOKMAL || language === Locale.NYNORSK;
 
     return (
         // OBS: Id-en "Hovedmeny" benyttes til å bestemme høyden til menyen av andre team
         <nav className={cls.className} id="hovedmeny" aria-label={'Hovedmeny'}>
             <div className={cls.element('elementer')}>
                 <NavLogo arbeidsflate={arbeidsflate} />
+                {isLanguageNorwegian && <Arbeidsflatemeny />}
                 <DesktopHovedmenyKnapp kbNavMainState={kbNavMainState} />
                 <DesktopSokKnapp kbNavMainState={kbNavMainState} />
                 <span className={cls.element('spacer')} />

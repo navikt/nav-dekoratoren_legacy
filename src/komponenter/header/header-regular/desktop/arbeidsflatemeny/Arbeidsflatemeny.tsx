@@ -12,6 +12,8 @@ import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { erNavDekoratoren } from 'utils/Environment';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
+// import { Tabs } from '@navikt/ds-react';
+
 import './Arbeidsflatemeny.less';
 
 const Arbeidsflatemeny = () => {
@@ -63,6 +65,14 @@ const Arbeidsflatemeny = () => {
                     );
                 })}
             </ul>
+
+            {/* <Tabs defaultValue="privatperson" size="medium" onChange={console.log} className="w-full ">
+                <Tabs.List>
+                    <Tabs.Tab value="privatperson" label="Privatperson" />
+                    <Tabs.Tab value="arbeidsgiver" label="Arbeidsgiver" />
+                    <Tabs.Tab value="samarbeidspartner" label="Samarbeidspartner" />
+                </Tabs.List>
+            </Tabs> */}
         </nav>
     );
 };
