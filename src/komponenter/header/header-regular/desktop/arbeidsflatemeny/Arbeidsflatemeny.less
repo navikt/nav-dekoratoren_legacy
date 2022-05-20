@@ -27,7 +27,7 @@
         height: calc(100% + @separator-height);
         display: inline-block;
         text-decoration: none;
-        color: black;
+        color: @navds-semantic-color-text-muted;
 
         &:focus,
         &:active {
@@ -52,6 +52,8 @@
         &--active {
             border-bottom: @navds-global-color-blue-500 3px solid;
             p {
+                color: @navds-semantic-color-text;
+
                 font-weight: bold;
             }
             &:hover {
