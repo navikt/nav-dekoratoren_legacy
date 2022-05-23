@@ -87,7 +87,7 @@ export const Brodsmulesti = (props: Props) => {
                     </li>
                 )}
                 {breadcrumbsSliced.map((breadcrumb, i) => (
-                    <li key={i} className="typo-normal" aria-current={i + 1 === breadcrumbsSliced.length && `page`}>
+                    <li key={i} aria-current={i + 1 === breadcrumbsSliced.length && `page`}>
                         {(() => {
                             if (i + 1 !== breadcrumbsSliced.length) {
                                 if (breadcrumb.handleInApp) {
