@@ -1,8 +1,23 @@
 @import (reference) '../../../../styling-variabler.less';
 
+@keyframes onPageLoad {
+    0% {
+        // transform: translateY(-100%);
+        background-color: @navds-global-color-orange-200;
+    }
+    100% {
+        // transform: translateY(0);
+        background-color: @navds-global-color-orange-100;
+    }
+}
+
 .driftsmeldinger {
-    @background-color: @navds-global-color-deepblue-600;
-    @text-color: white;
+    /* This section calls the slideInFromLeft animation we defined above */
+    animation: 5s ease-in-out 3s onPageLoad;
+    animation-fill-mode: forwards;
+
+    @background-color: @navds-global-color-orange-200;
+    @text-color: @navds-semantic-color-text;
 
     background-color: @background-color;
     display: flex;
@@ -22,7 +37,7 @@
         padding: 0.5rem;
         display: inline-flex;
         align-items: center;
-        text-decoration: underline;
+        text-decoration: none;
         border-radius: 6px;
 
         @media @screen-desktop {
