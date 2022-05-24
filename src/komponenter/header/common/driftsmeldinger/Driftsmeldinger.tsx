@@ -40,22 +40,24 @@ export const Driftsmeldinger = () => {
     const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
 
     return currentDriftsmeldinger.length > 0 ? (
-        <article className="driftsmeldinger">
+        <div>
             {currentDriftsmeldinger.map((melding) => (
-                <LenkeMedSporing
-                    key={melding.heading}
-                    href={`${XP_BASE_URL}${melding.url}`}
-                    classNameOverride="message"
-                    analyticsEventArgs={{
-                        category: AnalyticsCategory.Header,
-                        action: 'driftsmeldinger',
-                    }}
-                >
-                    <span className="message-icon">{melding.type && <Icon type={melding.type} />}</span>
-                    <BodyLong className="message-text">{melding.heading}</BodyLong>
-                </LenkeMedSporing>
+                <article className="driftsmeldinger">
+                    <LenkeMedSporing
+                        key={melding.heading}
+                        href={`${XP_BASE_URL}${melding.url}`}
+                        classNameOverride="message"
+                        analyticsEventArgs={{
+                            category: AnalyticsCategory.Header,
+                            action: 'driftsmeldinger',
+                        }}
+                    >
+                        <span className="message-icon">{melding.type && <Icon type={melding.type} />}</span>
+                        <BodyLong className="message-text">{melding.heading}</BodyLong>
+                    </LenkeMedSporing>
+                </article>
             ))}
-        </article>
+        </div>
     ) : null;
 };
 
