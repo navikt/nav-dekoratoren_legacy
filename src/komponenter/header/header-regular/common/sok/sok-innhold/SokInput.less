@@ -1,10 +1,8 @@
 @import (reference) '../../../../../../styling-variabler.less';
-
 .sok-input-resultat {
     .sok-input-container {
         position: relative;
         display: flex;
-
         /* clears search styling from Chrome */
         input[type='search']::-webkit-search-decoration,
         input[type='search']::-webkit-search-cancel-button,
@@ -13,19 +11,20 @@
             -webkit-appearance: none;
         }
     }
-
     .sok-input {
         margin: 0;
-    }
+        width: 100%;
 
+        &-resultat {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+    }
     @media @screen-desktop {
         .sok-input {
-            width: 100%;
-
             &__tittel {
                 margin-bottom: 1rem;
             }
-
             input {
                 padding: 0.75rem;
                 border: 2px solid @navBla;
@@ -34,16 +33,10 @@
                 }
             }
 
-            &-resultat {
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
-            }
-
             .skjemaelement__input {
                 padding-right: 12rem;
             }
         }
-
         .sok .sok-container {
             width: auto;
             justify-content: center;
@@ -57,37 +50,27 @@
             }
         }
     }
-
     @media @screen-mobile {
         .sok-input__tittel {
             margin-bottom: 1rem;
         }
         .sok-input {
-            width: 100%;
-
             input {
                 border-radius: 50px;
                 padding: 1.25rem 1rem;
                 background-color: white;
                 border: 2px solid @navBla;
                 color: @navBla;
-
                 &:focus,
                 &:active {
                     border: 2px solid @navBla;
                 }
-
                 &::-webkit-input-placeholder,
                 &::-moz-placeholder,
                 &:-ms-input-placeholder,
                 &:-moz-placeholder {
                     color: @navBla;
                 }
-            }
-
-            &-resultat {
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
             }
 
             input[type='search'] {
@@ -101,11 +84,9 @@
                 line-height: 1.625rem;
                 font-weight: 300;
             }
-
             input::placeholder {
                 color: @navBla;
             }
-
             .skjemaelement__input {
                 padding-right: 8.5rem;
             }
