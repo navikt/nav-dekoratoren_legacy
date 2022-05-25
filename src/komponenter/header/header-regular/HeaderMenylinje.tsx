@@ -56,13 +56,14 @@ export const HeaderMenylinje = () => {
             <div className={cls.element('elementer')}>
                 <NavLogo arbeidsflate={arbeidsflate} />
                 {isLanguageNorwegian && <Arbeidsflatemeny />}
+                <span className={cls.element('spacer')} />
                 <DesktopHovedmenyKnapp kbNavMainState={kbNavMainState} />
                 <DesktopSokKnapp kbNavMainState={kbNavMainState} />
-                <span className={cls.element('spacer')} />
                 {innloggetPrivatperson && <VarslerKnapp kbNavMainState={kbNavMainState} />}
                 {innloggetPrivatperson && <DesktopMinsidemenyKnapp kbNavMainState={kbNavMainState} />}
                 {innloggetArbeidsgiver && <MinsideArbgiverKnapp />}
-                {innloggingsstatus === Status.OK && <LoggInnKnapp />}
+                {/* {innloggingsstatus === Status.OK && <LoggInnKnapp />} */}
+                <LoggInnKnapp />
                 <MobilMenyKnapp />
             </div>
         </nav>
