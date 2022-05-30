@@ -24,15 +24,9 @@ type Props = {
 };
 
 export const Hovedmeny = ({ kbNavMainState }: Props) => {
-    const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(
-        stateSelector
-    );
+    const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(stateSelector);
 
-    const hovedmenyPunkter = getHovedmenyNode(
-        menyPunkter.data,
-        language,
-        arbeidsflate
-    );
+    const hovedmenyPunkter = getHovedmenyNode(menyPunkter.data, language, arbeidsflate);
 
     // Hide empty menues
     if (menyPunkter.status === Status.OK && !hovedmenyPunkter?.hasChildren) {
@@ -42,25 +36,24 @@ export const Hovedmeny = ({ kbNavMainState }: Props) => {
     return (
         <div className={'media-tablet-desktop'}>
             <HovedmenyKnapp id={desktopHovedmenyKnappId} />
-            <EkspanderbarMeny
-                isOpen={isOpen}
-                classname={classname}
-                id={classname}
-            >
-                {menyPunkter.status === Status.OK ? (
-                    <HovedmenyInnhold
-                        arbeidsflate={arbeidsflate}
-                        isOpen={isOpen}
-                        language={language}
-                        menyPunkter={hovedmenyPunkter}
-                        kbNavMainState={kbNavMainState}
-                    />
-                ) : (
-                    <Spinner
-                        tekstId={'meny-loading'}
-                        className={isOpen ? 'spinner-container--active' : ''}
-                    />
-                )}
+            <EkspanderbarMeny isOpen={isOpen} classname={classname} id={classname}>
+                {(() => {
+                    if (menyPunkter.status === Status.OK) {
+                        return (
+                            <HovedmenyInnhold
+                                arbeidsflate={arbeidsflate}
+                                isOpen={isOpen}
+                                language={language}
+                                menyPunkter={hovedmenyPunkter}
+                                kbNavMainState={kbNavMainState}
+                            />
+                        );
+                    } else {
+                        return (
+                            <Spinner tekstId={'meny-loading'} className={isOpen ? 'spinner-container--active' : ''} />
+                        );
+                    }
+                })()}
             </EkspanderbarMeny>
         </div>
     );

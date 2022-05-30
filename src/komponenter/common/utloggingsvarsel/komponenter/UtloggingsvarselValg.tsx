@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { Knapp } from 'nav-frontend-knapper';
 import BEMHelper from '../../../../utils/bem';
 import { useSelector } from 'react-redux';
 import { getLoginUrl, getLogOutUrl } from 'utils/login';
 import { AppState } from 'store/reducers';
 import { CookieName, cookieOptions } from '../../../../server/cookieSettings';
 import { useCookies } from 'react-cookie';
+import { Button } from '@navikt/ds-react';
 
 interface Props {
     htmlUUDisable: boolean;
@@ -26,8 +26,8 @@ const UtloggingsvarselValg: FunctionComponent<Props> = (props) => {
 
     return (
         <div className={cls.element('valg')}>
-            <Knapp
-                type="hoved"
+            <Button
+                variant="primary"
                 tabIndex={htmlUUDisable ? -1 : 0}
                 onClick={() => {
                     removeCookie(CookieName.SELVBETJENING_IDTOKEN, cookieOptions);
@@ -35,16 +35,16 @@ const UtloggingsvarselValg: FunctionComponent<Props> = (props) => {
                 }}
             >
                 Logg inn på nytt
-            </Knapp>
-            <Knapp
-                type="hoved"
+            </Button>
+            <Button
+                variant="secondary"
                 tabIndex={htmlUUDisable ? -1 : 0}
                 onClick={() => {
                     window.location.href = getLogOutUrl(environment);
                 }}
             >
                 logg ut
-            </Knapp>
+            </Button>
         </div>
     );
 };

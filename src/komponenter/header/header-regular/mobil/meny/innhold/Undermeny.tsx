@@ -1,10 +1,11 @@
 import React from 'react';
+import { Heading } from '@navikt/ds-react';
+
 import { MenyNode } from 'store/reducers/menu-duck';
 import BEMHelper from 'utils/bem';
 import Lukkundermeny from './elementer/Lukkundermeny';
 import Listelement from './elementer/Listelement';
 import { genererUrl } from 'utils/Environment';
-import { Systemtittel } from 'nav-frontend-typografi';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
@@ -41,7 +42,9 @@ const Undermeny = (props: Props) => {
     return (
         <div className={containerClass}>
             <Lukkundermeny className={menyClass.className} />
-            <Systemtittel className={menyClass.element('undermeny-arbeidsflate')}>{arbeidsflate}</Systemtittel>
+            <Heading level="2" size="medium" className={menyClass.element('undermeny-arbeidsflate')}>
+                {arbeidsflate}
+            </Heading>
             {!!hasLevel4Elements && <MinsideLockMsg />}
             <ul className={menyClass.element('meny', 'list')}>
                 {lenker.children.map((lenke, index: number) => {

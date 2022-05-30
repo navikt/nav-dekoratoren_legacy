@@ -11,7 +11,8 @@
         margin-bottom: 0.1875rem;
 
         @media @screen-desktop-small-down {
-            .typo-element-mixin();
+            font-size: 16px;
+            line-height: 22px;
             margin-bottom: 0.125rem;
         }
     }
@@ -24,6 +25,11 @@
         padding: 0;
         .lenke {
             padding: 0.5rem 0;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
 
             @media @screen-desktop-small-down {
                 padding: 0.375rem 0;

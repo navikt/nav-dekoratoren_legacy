@@ -32,7 +32,6 @@ import {
     validateRedirectUrl,
 } from '../../server/utils';
 import { setParams } from 'store/reducers/environment-duck';
-import Modal from 'nav-frontend-modal';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
@@ -97,11 +96,6 @@ export const Header = () => {
             };
         }
     }, [menypunkt]);
-
-    // React-modal fix
-    useEffect(() => {
-        Modal.setAppElement('body');
-    }, []);
 
     // Handle feature toggles
     useEffect(() => {

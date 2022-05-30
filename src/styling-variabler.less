@@ -1,8 +1,4 @@
-@import '~nav-frontend-core/less/core';
-@import (reference) '~nav-frontend-core/less/_variabler';
-@import (reference) '~nav-frontend-lenker-style/src/lenker-style';
-@import (reference) '~nav-frontend-typografi-style/src/index';
-@import (reference) '~nav-frontend-knapper-style/src/index';
+@import '@navikt/ds-tokens/dist/tokens.less';
 
 // screen size breakpoints
 @desktopMaxWidth: 1440px;
@@ -36,10 +32,10 @@
 
 @menu-height-mobil: calc(100% - @header-height-mobil);
 
-@header-separator-farge: @navGra20;
+@header-separator-farge: @navds-global-color-gray-300;
 @header-separator-height: 2px;
 
-@footer-seperator-farge: @navGra20;
+@footer-seperator-farge: @navds-global-color-gray-300;
 @footer-seperator-height: 2px;
 
 .flex-col-width-mixin(@cols, @margins) {
@@ -54,9 +50,9 @@
 .header-knapp-focus-mixin() {
     &:focus {
         background-color: transparent;
-        color: @navBla;
+        color: @navds-global-color-blue-500;
         outline: none;
-        box-shadow: 0 0 0 4px @fokusFarge;
+        box-shadow: 0 0 0 4px @navds-semantic-color-focus;
         border-radius: 4px;
         border-color: transparent;
     }

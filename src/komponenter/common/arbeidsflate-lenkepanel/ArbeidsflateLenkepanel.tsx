@@ -1,40 +1,46 @@
 import React from 'react';
+import { LinkPanel } from '@navikt/ds-react';
+import { useDispatch } from 'react-redux';
+import { useCookies } from 'react-cookie';
+
 import Tekst from 'tekster/finn-tekst';
-import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { analyticsEvent } from 'utils/analytics/analytics';
 import BEMHelper from 'utils/bem';
-import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
-import { HoyreChevron } from 'nav-frontend-chevron';
-import { useDispatch } from 'react-redux';
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { Locale } from 'store/reducers/language-duck';
-import { useCookies } from 'react-cookie';
 import { CookieName, cookieOptions } from '../../../server/cookieSettings';
 import { erNavDekoratoren } from 'utils/Environment';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { finnTekst } from 'tekster/finn-tekst';
 import { AnalyticsEventArgs } from 'utils/analytics/analytics';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
+
 import './ArbeidsflateLenkepanel.less';
+import classNames from 'classnames';
 
 interface Props {
     lenke: ArbeidsflateLenke;
     language: Locale;
     analyticsEventArgs: AnalyticsEventArgs;
+    inverted?: boolean;
     enableCompactView?: boolean;
     id?: string;
 }
 
-const ArbeidsflateLenkepanel = ({ lenke, language, analyticsEventArgs, enableCompactView, id }: Props) => {
+const ArbeidsflateLenkepanel = ({ lenke, language, analyticsEventArgs, enableCompactView, inverted, id }: Props) => {
     const cls = BEMHelper('arbeidsflate-lenkepanel');
     const dispatch = useDispatch();
     const [, setCookie] = useCookies();
 
     return (
-        <LenkepanelBase
+        <LinkPanel
             href={lenke.url}
-            className={`${cls.className} ${enableCompactView ? cls.element('compact') : ''}`}
             id={id}
+            className={classNames(
+                cls.className,
+                inverted ? cls.modifier('inverted') : undefined,
+                enableCompactView ? cls.modifier('compact') : undefined
+            )}
             onClick={(event) => {
                 setCookie(CookieName.DECORATOR_CONTEXT, lenke.key, cookieOptions);
                 dispatch(lukkAlleDropdowns());
@@ -46,14 +52,15 @@ const ArbeidsflateLenkepanel = ({ lenke, language, analyticsEventArgs, enableCom
             }}
             border={true}
         >
-            <div className={cls.element('innhold')}>
-                <Undertittel className={'lenkepanel__heading'}>
-                    {enableCompactView && <HoyreChevron className={cls.element('compact-chevron')} />}
+            <div>
+                <LinkPanel.Title className={cls.element('text')}>
                     <Tekst id={lenke.lenkeTekstId} />
-                </Undertittel>
-                <Undertekst className={cls.element('stikkord')}>{finnTekst(lenke.stikkordId, language)}</Undertekst>
+                </LinkPanel.Title>
+                <LinkPanel.Description className={cls.element('text')}>
+                    {finnTekst(lenke.stikkordId, language)}
+                </LinkPanel.Description>
             </div>
-        </LenkepanelBase>
+        </LinkPanel>
     );
 };
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { useSelector } from 'react-redux';
@@ -7,6 +6,7 @@ import { AppState } from 'store/reducers';
 import { DriftsmeldingerState } from '../../../../store/reducers/driftsmeldinger-duck';
 import { verifyWindowObj } from '../../../../utils/Environment';
 import './Driftsmeldinger.less';
+import { BodyLong } from '@navikt/ds-react';
 
 const removeTrailingChars = (url?: string) => url?.replace(/(\/|\$|(\/\$))$/, '');
 
@@ -52,7 +52,7 @@ export const Driftsmeldinger = () => {
                     }}
                 >
                     <span className="message-icon">{melding.type && <Icon type={melding.type} />}</span>
-                    <Normaltekst className="message-text">{melding.heading}</Normaltekst>
+                    <BodyLong className="message-text">{melding.heading}</BodyLong>
                 </LenkeMedSporing>
             ))}
         </article>

@@ -1,9 +1,9 @@
 import React from 'react';
 import Cicle from 'ikoner/circle.svg';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { farger, LocaleOption } from './SprakVelger';
 import { BEMWrapper } from 'utils/bem';
 import { Bilde } from '../../../common/bilde/Bilde';
+import { BodyShort } from '@navikt/ds-react';
 
 interface Props {
     index: number;
@@ -33,14 +33,16 @@ const SprakVelgerItem = (props: Props) => {
             {selectedItem?.locale === item.locale ? (
                 <div className={cls.element('option')}>
                     <Bilde asset={Cicle} className={cls.element('sirkel')} />
-                    <Normaltekst lang={item.locale}>{item.label}</Normaltekst>
+                    <BodyShort size="small" lang={item.locale}>
+                        {item.label}
+                    </BodyShort>
                 </div>
             ) : (
-                <Normaltekst className={cls.element('option')}>
+                <BodyShort size="small" className={cls.element('option')}>
                     <span lang={item.locale} className="not-selected">
                         {item.label}
                     </span>
-                </Normaltekst>
+                </BodyShort>
             )}
         </li>
     );

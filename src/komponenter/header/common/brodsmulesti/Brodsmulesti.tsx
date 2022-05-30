@@ -4,7 +4,7 @@ import { AppState } from 'store/reducers';
 import { LenkeMedSporing } from '../../../common/lenke-med-sporing/LenkeMedSporing';
 import { Bilde } from '../../../common/bilde/Bilde';
 import HomeIcon from 'ikoner/home.svg';
-import { HoyreChevron } from 'nav-frontend-chevron';
+import { Next } from '@navikt/ds-icons';
 import { postMessageToApp } from 'utils/messages';
 import { Locale } from 'store/reducers/language-duck';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
@@ -54,7 +54,7 @@ export const Brodsmulesti = (props: Props) => {
     return (
         <nav className={cls.className} aria-label={finnTekst('brodsmulesti', language)} itemProp="breadcrumb">
             <ol>
-                <li className="typo-normal">
+                <li>
                     <LenkeMedSporing
                         href={homeUrl}
                         className={cls.element('link')}
@@ -66,11 +66,11 @@ export const Brodsmulesti = (props: Props) => {
                     >
                         <Bilde asset={HomeIcon} className={cls.element('icon')} />
                         <span>nav.no</span>
-                        <HoyreChevron />
+                        <Next className={cls.element('next')} />
                     </LenkeMedSporing>
                 </li>
                 {shouldShowContext && (
-                    <li className="typo-normal">
+                    <li>
                         <LenkeMedSporing
                             href={context.url}
                             className={cls.element('link')}
@@ -83,12 +83,12 @@ export const Brodsmulesti = (props: Props) => {
                             <span>
                                 <Tekst id={context.lenkeTekstId} />
                             </span>
-                            <HoyreChevron />
+                            <Next className={cls.element('next')} />
                         </LenkeMedSporing>
                     </li>
                 )}
                 {!showAll && breadcrumbs.length > numCustomItemsShown && (
-                    <li className="typo-normal">
+                    <li>
                         <button
                             aria-label={finnTekst('brodsmulesti-se-alle', language)}
                             className={`${cls.element('view-all')} lenke`}
@@ -97,13 +97,13 @@ export const Brodsmulesti = (props: Props) => {
                                 setShowAll(true);
                             }}
                         >
-                            <span>...</span>
-                            <HoyreChevron />
+                            <span className={cls.element('pathAbbrevation')}>...</span>
+                            <Next className={cls.element('next')} />
                         </button>
                     </li>
                 )}
                 {breadcrumbsSliced.map((breadcrumb, index, array) => (
-                    <li key={index} className="typo-normal" aria-current={index + 1 === array.length && 'page'}>
+                    <li key={index} aria-current={index + 1 === array.length && 'page'}>
                         {index + 1 !== array.length ? (
                             <LenkeMedSporing
                                 href={breadcrumb.url}
@@ -121,7 +121,7 @@ export const Brodsmulesti = (props: Props) => {
                                 }}
                             >
                                 <span className={cls.element('text')}>{breadcrumb.title}</span>
-                                <HoyreChevron />
+                                <Next className={cls.element('next')} />
                             </LenkeMedSporing>
                         ) : (
                             <span className={cls.element('text')}>{breadcrumb.title}</span>

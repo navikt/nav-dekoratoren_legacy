@@ -1,7 +1,8 @@
 import React from 'react';
+import { BodyShort } from '@navikt/ds-react';
 import Globe from 'ikoner/globe.svg';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { NedChevron } from 'nav-frontend-chevron';
+
+import { Expand } from '@navikt/ds-icons';
 import { useSelect } from 'downshift';
 import { decoratorLanguageCookie } from '../../Header';
 import { cookieOptions } from '../../../../server/cookieSettings';
@@ -81,9 +82,9 @@ export const SprakVelger = (props: Props) => {
                 <button {...buttonProps} className={`${cls.element('knapp')} skjemaelement__input`} type="button">
                     <span className={cls.element('knapp-tekst')}>
                         <Bilde asset={Globe} className={cls.element('ikon')} />
-                        <Normaltekst>{selectorLabel}</Normaltekst>
+                        <BodyShort size="small">{selectorLabel}</BodyShort>
                     </span>
-                    <NedChevron />
+                    <Expand className="chevron--ned" />
                 </button>
                 <ul {...menuProps} className={cls.element('menu')} style={ulStyle}>
                     <>

@@ -1,8 +1,7 @@
 import React from 'react';
+import { BodyShort, Panel } from '@navikt/ds-react';
 import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
-import { Normaltekst } from 'nav-frontend-typografi';
-import Panel from 'nav-frontend-paneler';
 import Lock from 'ikoner/meny/Lock';
 import './MinsideLockMsg.less';
 
@@ -14,9 +13,9 @@ export const MinsideLockMsg = () => {
                 <Lock />
             </div>
             <div className={cls.element('msg')}>
-                <Normaltekst>
+                <BodyShort>
                     <Tekst id={'lock-msg-infotekst'} />
-                </Normaltekst>
+                </BodyShort>
             </div>
         </Panel>
     );

@@ -6,7 +6,7 @@
     width: 100%;
     background-color: white;
     height: 2.75rem;
-    border-bottom: @navGra20 @separator-height solid;
+    border-bottom: @navds-global-color-gray-300 @separator-height solid;
 
     &__topp-liste-rad {
         white-space: nowrap;
@@ -33,7 +33,7 @@
         &:focus,
         &:active {
             background-color: transparent;
-            outline: 3px solid @fokusFarge;
+            outline: 3px solid @navds-semantic-color-focus;
             outline-offset: -3px;
             box-shadow: 0 0 0 0;
         }
@@ -47,16 +47,16 @@
         border-bottom: transparent 3px solid;
 
         &:hover {
-            border-bottom: @navBla 3px solid;
+            border-bottom: @navds-global-color-blue-500 3px solid;
         }
 
         &--active {
-            border-bottom: @navBla 3px solid;
+            border-bottom: @navds-global-color-blue-500 3px solid;
             p {
                 font-weight: bold;
             }
             &:hover {
-                border-bottom: @navBla 3px solid;
+                border-bottom: @navds-global-color-blue-500 3px solid;
             }
         }
     }

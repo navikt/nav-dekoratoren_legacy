@@ -1,9 +1,8 @@
 import React, { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import Close from '../../../../../ikoner/varsler/Close';
 import BEMHelper from '../../../../../utils/bem';
-import Nedteller, { TypografiTypes } from '../Nedteller';
+import Nedteller from '../Nedteller';
 import CollapseUp from '../../../../../ikoner/varsler/CollapseUp';
-import { Normaltekst } from 'nav-frontend-typografi';
 import './liteEkspanderbartvindu.less';
 import { useCookies } from 'react-cookie';
 import {
@@ -14,10 +13,10 @@ import {
 import { CookieName, cookieOptions } from '../../../../../server/cookieSettings';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../store/reducers';
+import { BodyShort } from '@navikt/ds-react';
 
 interface Props {
     setModalOpen: Dispatch<SetStateAction<boolean>>;
-    typoGrafi: TypografiTypes;
     tid: string;
     visFullTekst: boolean;
 }
@@ -31,7 +30,7 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
     const [, setCookie] = useCookies();
     const dispatch = useDispatch();
     const cls = BEMHelper('liteExpanderbartvindu');
-    const { setModalOpen, typoGrafi, tid, visFullTekst } = props;
+    const { setModalOpen, tid, visFullTekst } = props;
     const tekst = visFullTekst ? 'Du blir automatisk logget ut om ' : '';
     const htmlUUEnable: boolean = utloggingsvarsel.varselState === VarselEkspandert.MINIMERT;
 
@@ -69,7 +68,7 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
     return (
         <nav className={cls.className} aria-hidden={!htmlUUEnable}>
             <div className={cls.element('wrapper')}>
-                <Nedteller typoGrafi={typoGrafi} tekst={tekst.concat(tid)} />
+                <Nedteller tekst={tekst.concat(tid)} />
                 <div className={cls.element('expanderbart-nav')}>
                     <>
                         <div className={cls.element('btn-container')}>
@@ -84,7 +83,7 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
                                 }}
                             >
                                 <span className={cls.element('btn-content')}>
-                                    <Normaltekst>Åpne</Normaltekst>
+                                    <BodyShort>Åpne</BodyShort>
                                     <CollapseUp width="1.5rem" height="1.5rem" />
                                 </span>
                             </button>
@@ -105,7 +104,7 @@ const LiteEkspanderbartvindu: FunctionComponent<Props> = (props) => {
                             }}
                         >
                             <span className={cls.element('btn-content')}>
-                                <Normaltekst>Lukk</Normaltekst>
+                                <BodyShort>Lukk</BodyShort>
                                 <Close width="1.5rem" height="1.5rem" />
                             </span>
                         </button>

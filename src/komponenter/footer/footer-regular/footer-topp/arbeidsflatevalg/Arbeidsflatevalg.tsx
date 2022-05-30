@@ -31,6 +31,7 @@ const Arbeidsflatevalg = () => {
                     <li key={lenke.key}>
                         <ArbeidsflateLenkepanel
                             lenke={lenke}
+                            inverted
                             language={language}
                             analyticsEventArgs={{
                                 context: arbeidsflate,

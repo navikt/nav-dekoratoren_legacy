@@ -30,7 +30,7 @@ const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
 
     return (
         <>
-            <LiteEkspanderbartvindu setModalOpen={setModalOpen} typoGrafi="normaltekst" tid={tid} visFullTekst={true} />
+            <LiteEkspanderbartvindu setModalOpen={setModalOpen} tid={tid} visFullTekst={true} />
             <div
                 className={cls.element('main-wrapper')}
                 aria-hidden={utloggingsvarsel.varselState === VarselEkspandert.MINIMERT}
@@ -40,11 +40,7 @@ const UtloggingsvarselInnhold: FunctionComponent<Props> = (props) => {
                     <UtloggingNavigasjon />
                     <UtloggingsvarselTekstInnhold overskrift={overskrift} />
                     <UtloggingsvarselValg htmlUUDisable={htmlUUdisable} />
-                    <Nedteller
-                        typoGrafi="normaltekst"
-                        tekst={'Du blir automatisk logget ut om '.concat(tid)}
-                        subClass={'main'}
-                    />
+                    <Nedteller tekst={'Du blir automatisk logget ut om '.concat(tid)} subClass={'main'} />
                 </div>
             </div>
         </>

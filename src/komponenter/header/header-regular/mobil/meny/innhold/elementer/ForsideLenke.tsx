@@ -1,8 +1,8 @@
 import React from 'react';
 import { MenuValue } from 'utils/meny-storage-utils';
+import { Heading } from '@navikt/ds-react';
 import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
@@ -28,9 +28,9 @@ const ForsideLenke = (props: Props) => {
         <>
             {props.arbeidsflate === MenuValue.PRIVATPERSON && (
                 <div className={cls.className}>
-                    <Undertittel className={cls.element('ingress')}>
+                    <Heading level="2" size="small" className={cls.element('ingress')}>
                         <Tekst id="min-side" />
-                    </Undertittel>
+                    </Heading>
                     <LenkeMedSporing
                         href={DITT_NAV_URL}
                         className={cls.element('lenke')}
@@ -47,9 +47,9 @@ const ForsideLenke = (props: Props) => {
             )}
             {props.arbeidsflate === MenuValue.ARBEIDSGIVER && (
                 <div className={cls.className}>
-                    <Undertittel className={cls.element('ingress')}>
+                    <Heading level="2" size="small" className={cls.element('ingress')}>
                         <Tekst id="min-side-arbeidsgiver" />
-                    </Undertittel>
+                    </Heading>
                     <LenkeMedSporing
                         href={arbeidsgiverHref}
                         className={cls.element('lenke')}
