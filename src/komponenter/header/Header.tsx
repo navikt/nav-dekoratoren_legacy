@@ -9,7 +9,6 @@ import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { CookieName, cookieOptions } from '../../server/cookieSettings';
 import { useCookies } from 'react-cookie';
 import { languageDuck, Locale } from 'store/reducers/language-duck';
-import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 import { fetchDriftsmeldinger } from 'store/reducers/driftsmeldinger-duck';
@@ -330,7 +329,6 @@ export const Header = () => {
 
     return (
         <div className={'decorator-wrapper'}>
-            <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
             <header className={`siteheader${useSimpleHeader ? ' simple' : ''}`}>

@@ -5,6 +5,7 @@ import { Heading } from '@navikt/ds-react';
 interface Props {
     className: string;
     classElement: string;
+    children: React.ReactNode;
 }
 
 const Listelement: React.FunctionComponent<Props> = (props) => {

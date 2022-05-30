@@ -1,10 +1,38 @@
 @import (reference) '../../../styling-variabler.less';
 
 .arbeidsflate-lenkepanel {
+    border: 2px @navds-global-color-blue-500 solid;
+    margin-bottom: 0;
+
+    &:hover {
+        border: 2px @navds-global-color-blue-500 solid;
+        background-color: @navds-global-color-blue-500;
+
+        .navds-link-panel__chevron,
+        .navds-link-panel__title,
+        .navds-link-panel__description {
+            color: @navds-global-color-white;
+        }
+    }
+
+    .navds-link-panel__content {
+        align-self: flex-start;
+    }
+
+    .navds-link-panel__title {
+        color: @navds-global-color-blue-500;
+    }
+
+    .navds-link-panel__chevron {
+        color: @navds-global-color-blue-500;
+    }
+
     &--inverted,
     &--inverted:hover {
-        .arbeidsflate-lenkepanel__text {
-            color: white;
+        .navds-link-panel__chevron,
+        .navds-link-panel__title,
+        .navds-link-panel__description {
+            color: @navds-global-color-white;
         }
     }
 
@@ -12,31 +40,38 @@
         .arbeidsflate-lenkepanel__text {
             color: @navds-global-color-blue-500;
         }
-
-        svg {
-            filter: invert(0);
-        }
-    }
-
-    &--inverted {
-        svg {
-            filter: invert(1);
+        .navds-link-panel__chevron {
+            color: @navds-global-color-blue-500;
         }
     }
 
     &--compact {
-        .navds-heading.arbeidsflate-lenkepanel__text {
+        .navds-link-panel__title {
             font-size: 1.2rem;
         }
-        .navds-body-long.arbeidsflate-lenkepanel__text {
+
+        .navds-link-panel__description {
             font-size: 1.1rem;
             margin-top: var(--navds-spacing-1);
             line-height: 1.5rem;
         }
+
+        @media @screen-desktop-small-down {
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.25rem;
+
+            .navds-link-panel__chevron {
+                display: inline-block;
+                align-self: center;
+                margin-right: 8px;
+                margin-left: -4px;
+                left: 0;
+                transition: left 0.25s;
+            }
+        }
     }
 
-    // LinkPanel overrides
-    .navds-link-panel__content {
-        align-self: flex-start;
+    @media @screen-mobile {
+        padding: 0.75rem 1rem;
     }
 }

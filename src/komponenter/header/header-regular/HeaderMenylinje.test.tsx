@@ -1,72 +1,77 @@
-import * as React from 'react';
-import SokKnappDesktop from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
+import React from 'react';
+import { act, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { reducers } from 'store/reducers';
-import { mount } from 'enzyme';
-import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import { HeaderMenylinje } from 'komponenter/header/header-regular/HeaderMenylinje';
-import { HovedmenyKnapp } from 'komponenter/header/header-regular/common/meny-knapp/hovedmeny-knapp/HovedmenyKnapp';
 import { ActionType } from 'store/actions';
 import { Status } from 'api/api';
-import LoggInnKnapp from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { VarslerKnapp } from 'komponenter/header/header-regular/common/varsler/varsler-knapp/VarslerKnapp';
-import Minsidemeny from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
-import { innloggetAction } from 'utils/jest/testObjects';
-import { uInnloggetAction } from 'utils/jest/testObjects';
+import { innloggetAction, uInnloggetAction } from 'utils/jest/testObjects';
+import { finnTekst } from '../../../tekster/finn-tekst';
+import { Locale } from '../../../store/reducers/language-duck';
 
 const store = createStore(reducers);
 
-const shallowWithProps = () =>
-    mount(
+const renderHeaderMenylinje = () =>
+    render(
         <Provider store={store}>
             <HeaderMenylinje />
         </Provider>
     );
 
 describe('<HeaderMenylinje>', () => {
-    it('Skal rendre <NavLogoLenke> komponent', () => {
-        const wrapper = shallowWithProps();
-        expect(wrapper.find(NavLogoLenke)).toHaveLength(1);
+    test('Skal rendre <NavLogoLenke> komponent', () => {
+        renderHeaderMenylinje();
+        expect(screen.queryByAltText('Til forsiden')).toBeTruthy();
     });
 
-    it('Skal rendre <HovedmenyKnapp> for mobil og desktop', () => {
-        const wrapper = shallowWithProps();
-        expect(wrapper.find(HovedmenyKnapp)).toHaveLength(2);
+    test('Skal rendre <HovedmenyKnapp> for mobil og desktop', () => {
+        renderHeaderMenylinje();
+        expect(screen.queryAllByText(finnTekst('meny-knapp', Locale.BOKMAL))).toHaveLength(2);
     });
 
-    it('Skal rendre <SokKnappDesktop> komponent', () => {
-        const wrapper = shallowWithProps();
-        expect(wrapper.find(SokKnappDesktop)).toHaveLength(1);
+    test('Skal rendre <SokDropdown> komponent', () => {
+        renderHeaderMenylinje();
+        expect(screen.queryByTestId('sok-dropdown')).toBeTruthy();
     });
 
-    it('Skal rendre <LoggInnKnapp/> komponent', () => {
-        store.dispatch({
-            type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
-            status: Status.OK,
-            data: {
-                authenticated: false,
-            },
+    test('Skal rendre <LoggInnKnapp/> komponent med logg inn tekst', () => {
+        renderHeaderMenylinje();
+        act(() => {
+            store.dispatch({
+                type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
+                status: Status.OK,
+                data: {
+                    authenticated: false,
+                },
+            });
         });
-        const wrapper = shallowWithProps();
-        expect(wrapper.find(LoggInnKnapp)).toHaveLength(1);
+
+        expect(screen.queryByText(finnTekst('logg-inn-knapp', Locale.BOKMAL))).toBeTruthy();
     });
 
-    it('Skal rendre <VarslerKnapp /> og <Minsidemeny /> komponent for innlogget personbruker', () => {
-        store.dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
-        store.dispatch(innloggetAction);
-        const wrapper = shallowWithProps();
-        expect(wrapper.find(VarslerKnapp)).toHaveLength(1);
-        expect(wrapper.find(Minsidemeny)).toHaveLength(1);
+    test('Skal rendre <Varsler />, <Minsidemeny /> og <LoggInnKnapp/> (med logg ut tekst) komponent for innlogget personbruker', () => {
+        renderHeaderMenylinje();
+        act(() => {
+            store.dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
+            store.dispatch(innloggetAction);
+        });
+
+        expect(screen.queryByText(finnTekst('logg-ut-knapp', Locale.BOKMAL))).toBeTruthy();
+        expect(screen.queryAllByText(finnTekst('varsler-tittel', Locale.BOKMAL))).toHaveLength(2);
+        expect(screen.queryByTestId('minside-meny')).toBeTruthy();
     });
 
-    it('Skal ikke rendre <VarslerKnapp /> og <Minsidemeny /> komponent for uinnlogget personbruker', () => {
-        store.dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
-        store.dispatch(uInnloggetAction);
-        const wrapper = shallowWithProps();
-        expect(wrapper.find(VarslerKnapp)).toHaveLength(0);
-        expect(wrapper.find(Minsidemeny)).toHaveLength(0);
+    test('Skal ikke rendre <VarslerKnapp /> og <Minsidemeny /> komponent for uinnlogget personbruker', () => {
+        renderHeaderMenylinje();
+        act(() => {
+            store.dispatch(settArbeidsflate(MenuValue.PRIVATPERSON));
+            store.dispatch(uInnloggetAction);
+        });
+
+        expect(screen.queryByText(finnTekst('varsler-tittel', Locale.BOKMAL))).toBeNull();
+        expect(screen.queryByTestId('minside-meny')).toBeNull();
     });
 });

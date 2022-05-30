@@ -27,7 +27,7 @@ export const Toppseksjon = ({ classname }: Props) => {
     const context = getArbeidsflateContext(XP_BASE_URL, arbeidsflate);
 
     return (
-        <div className={cls.element('topp-seksjon')}>
+        <div className={cls.element('topp-seksjon')} data-testid={'toppseksjon'}>
             <Heading level="2" size="medium" className={cls.element('topp-seksjon-tittel')}>
                 <Tekst id={`rolle-${arbeidsflate.toLowerCase()}`} />
                 <BodyShort className={cls.element('topp-seksjon-tittel-decoration')} aria-hidden={true}>

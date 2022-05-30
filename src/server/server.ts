@@ -31,8 +31,18 @@ const createPaths = (subPath: string) => appPaths.map((path) => `${path}${subPat
 const app = express();
 const PORT = 8088;
 
-const whitelist = ['.nav.no', '.oera.no', '.nais.io', 'https://preview-sykdomifamilien.gtsb.io'];
-const isAllowedDomain = (origin?: string) => origin && whitelist.some((domain) => origin.endsWith(domain));
+const corsWhitelist = [
+    '.nav.no',
+    '.oera.no',
+    '.nais.io',
+    'https://preview-sykdomifamilien.gtsb.io',
+    'navdialog.cs102.force.com',
+    'navdialog.cs106.force.com',
+    'navdialog.cs108.force.com',
+    'navdialog.cs162.force.com',
+];
+
+const isAllowedDomain = (origin?: string) => origin && corsWhitelist.some((domain) => origin.endsWith(domain));
 
 // Middleware
 app.disable('x-powered-by');

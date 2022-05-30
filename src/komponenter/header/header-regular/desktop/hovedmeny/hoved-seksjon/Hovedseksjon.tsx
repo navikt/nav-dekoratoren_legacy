@@ -10,19 +10,12 @@ import { MenyLayout } from 'komponenter/header/header-regular/common/meny-seksjo
 import { matchMedia } from 'utils/match-media-polyfill';
 
 const layoutWidthBreakpoint = 1440;
-const mqlWidthBreakpoint = matchMedia(
-    `(min-width: ${layoutWidthBreakpoint}px)`
-);
+const mqlWidthBreakpoint = matchMedia(`(min-width: ${layoutWidthBreakpoint}px)`);
 const layoutHeightBreakpoint = 960;
-const mqlHeightBreakpoint = matchMedia(
-    `(min-height: ${layoutHeightBreakpoint}px)`
-);
+const mqlHeightBreakpoint = matchMedia(`(min-height: ${layoutHeightBreakpoint}px)`);
 
 const getLayoutFromWindowSize = () =>
-    window.innerWidth >= layoutWidthBreakpoint &&
-    window.innerHeight >= layoutHeightBreakpoint
-        ? 'grid'
-        : 'mosaic';
+    window.innerWidth >= layoutWidthBreakpoint && window.innerHeight >= layoutHeightBreakpoint ? 'grid' : 'mosaic';
 
 interface Props {
     menyLenker: MenyNode;
@@ -47,7 +40,7 @@ export const Hovedseksjon = ({ menyLenker, classname, numCols }: Props) => {
     }, []);
 
     return (
-        <div className={cls.element('hoved-seksjon')}>
+        <div className={cls.element('hoved-seksjon')} data-testid={'hovedseksjon'}>
             <MenySeksjoner numCols={numCols} layout={layout}>
                 {menyLenker &&
                     menyLenker.children.map((menygruppe, index) => (

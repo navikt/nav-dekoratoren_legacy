@@ -151,6 +151,7 @@ const serverConfig = {
                 /^nav-frontend-.*$/,
                 /^@navikt\/ds-react.*$/,
                 /^@navikt\/nav-dekoratoren-.*$/,
+                /^@babel\/runtime.*$/,
                 /\.(?!(?:jsx?|json)$).{1,5}$/i,
             ],
         }),

@@ -1,57 +1,62 @@
 name: Deploy-to-dev
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      build_mode:
+        type: choice
+        required: true
+        description: 'Build-time NODE_ENV'
+        default: 'prod'
+        options:
+          - prod
+          - dev
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v1
-            - name: Define build environment
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  IMAGE_VERSION_RAW=$(echo ${GITHUB_WORKFLOW})-$(echo ${GITHUB_SHA})
-                  echo "CI=true" >> $GITHUB_ENV
-                  echo "IMAGE_REGISTRY=docker.pkg.github.com/$(echo ${GITHUB_REPOSITORY})" >> $GITHUB_ENV
-                  echo "IMAGE_NAME=$(echo ${GITHUB_REPOSITORY##*/})" >> $GITHUB_ENV
-                  echo "IMAGE_VERSION=${IMAGE_VERSION_RAW,,}" >> $GITHUB_ENV
-                  echo "GITHUB_TOKEN=$(echo ${GITHUB_TOKEN})" >> $GITHUB_ENV
-            - uses: actions/setup-node@v2
-              with:
-                node-version: '14'
-                registry-url: 'https://npm.pkg.github.com'
-                cache: 'npm'
-            - uses: actions/cache@v2
-              with:
-                  path: ~/.npm
-                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node-
-            - name: Install dependencies
-              run: npm ci
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
-            - run: npm test
-            - run: npm run build
-            - name: Docker build and push
-              run: |
-                  echo $GITHUB_TOKEN | docker login $IMAGE_REGISTRY -u ${GITHUB_REPOSITORY} --password-stdin
-                  docker build -t $IMAGE_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION .
-                  docker push $IMAGE_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION
-            - name: Generate nais variables
-              run: |
-                  cat > .nais/vars.yaml <<EOF
-                  namespace: personbruker
-                  image: $IMAGE_REGISTRY/$IMAGE_NAME
-                  version: $IMAGE_VERSION
-                  OPPORTUNITY_ID: ${{ secrets.OPPORTUNITY_ID }}
-                  CASETYPE_ID: ${{ secrets.CASETYPE_ID }}
-                  SOLUTION_ID: ${{ secrets.SOLUTION_ID }}
-                  NAV_GROUP_ID: ${{ secrets.NAV_GROUP_ID }}
-                  EOF
-            - uses: nais/deploy/actions/deploy@master
-              env:
-                  CLUSTER: dev-gcp
-                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-                  RESOURCE: .nais/dev-gcp/personbruker.yaml
-                  VARS: .nais/vars.yaml
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Define build environment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          IMAGE_VERSION_RAW=$(echo ${GITHUB_WORKFLOW})-$(echo ${GITHUB_SHA})
+          echo "CI=true" >> $GITHUB_ENV
+          echo "IMAGE_REGISTRY=docker.pkg.github.com/$(echo ${GITHUB_REPOSITORY})" >> $GITHUB_ENV
+          echo "IMAGE_NAME=$(echo ${GITHUB_REPOSITORY##*/})" >> $GITHUB_ENV
+          echo "IMAGE_VERSION=${IMAGE_VERSION_RAW,,}" >> $GITHUB_ENV
+          echo "GITHUB_TOKEN=$(echo ${GITHUB_TOKEN})" >> $GITHUB_ENV
+      - name: Setup node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          registry-url: 'https://npm.pkg.github.com'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - run: npm test
+      - run: npm run build-${{ github.event.inputs.build_mode }}
+      - name: Docker build and push
+        run: |
+          echo $GITHUB_TOKEN | docker login $IMAGE_REGISTRY -u ${GITHUB_REPOSITORY} --password-stdin
+          docker build -t $IMAGE_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION .
+          docker push $IMAGE_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION
+      - name: Generate nais variables
+        run: |
+          cat > .nais/vars.yaml <<EOF
+          namespace: personbruker
+          image: $IMAGE_REGISTRY/$IMAGE_NAME
+          version: $IMAGE_VERSION
+          OPPORTUNITY_ID: ${{ secrets.OPPORTUNITY_ID }}
+          CASETYPE_ID: ${{ secrets.CASETYPE_ID }}
+          SOLUTION_ID: ${{ secrets.SOLUTION_ID }}
+          NAV_GROUP_ID: ${{ secrets.NAV_GROUP_ID }}
+          EOF
+      - uses: nais/deploy/actions/deploy@master
+        env:
+          CLUSTER: dev-gcp
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: .nais/dev-gcp/personbruker.yaml
+          VARS: .nais/vars.yaml

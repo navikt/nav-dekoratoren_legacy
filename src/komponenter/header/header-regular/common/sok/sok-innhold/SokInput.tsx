@@ -4,8 +4,8 @@ import SokKnapper from './SokKnapper';
 import React from 'react';
 import { Locale } from 'store/reducers/language-duck';
 import { verifyWindowObj } from 'utils/Environment';
-import './SokInput.less';
 import { Heading, TextField } from '@navikt/ds-react';
+import './SokInput.less';
 
 type Props = {
     className: string;
@@ -28,7 +28,7 @@ export const SokInput = (props: Props) => {
         <>
             <div className={'sok-input__tittel'}>
                 <Heading level="2" size="medium">
-                    <Tekst id="sok-knapp" />
+                    <Tekst id="sok-knapp-sokefelt" />
                 </Heading>
             </div>
             <div className="sok-input-container">
@@ -37,10 +37,9 @@ export const SokInput = (props: Props) => {
                     onChange={(e) => onChange(e.target.value)}
                     className={className}
                     value={inputValue}
-                    placeholder={finnTekst('sok-input-placeholder', language)}
-                    aria-label={finnTekst('sok-input-placeholder', language)}
+                    aria-label={finnTekst('sok-knapp-sokefelt', language)}
                     type="text"
-                    label={finnTekst('sok-input-placeholder', language)}
+                    label={finnTekst('sok-knapp-sokefelt', language)}
                     hideLabel
                 />
                 <SokKnapper writtenInput={writtenInput} onReset={onReset} id={id} />

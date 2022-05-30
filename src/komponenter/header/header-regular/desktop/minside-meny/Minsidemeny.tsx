@@ -42,7 +42,7 @@ export const Minsidemeny = ({ kbNavMainState }: Props) => {
     }
 
     return (
-        <div className={'media-tablet-desktop'}>
+        <div className={'media-tablet-desktop'} data-testid={'minside-meny'}>
             <MinsidePersonKnapp classname={minsideMenyClassname} id={minsideKnappId} />
             <EkspanderbarMeny isOpen={isOpen} classname={minsideMenyClassname} id={minsideMenyClassname}>
                 {menyPunkter.status === Status.OK ? (

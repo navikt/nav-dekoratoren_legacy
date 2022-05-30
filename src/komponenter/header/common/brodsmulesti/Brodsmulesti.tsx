@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { Link } from '@navikt/ds-react';
+import { LenkeMedSporing } from '../../../common/lenke-med-sporing/LenkeMedSporing';
 import { Bilde } from '../../../common/bilde/Bilde';
 import HomeIcon from 'ikoner/home.svg';
 import { Next } from '@navikt/ds-icons';
@@ -55,23 +55,39 @@ export const Brodsmulesti = (props: Props) => {
         <nav className={cls.className} aria-label={finnTekst('brodsmulesti', language)} itemProp="breadcrumb">
             <ol>
                 <li>
-                    <Link href={homeUrl} className={cls.element('home')}>
+                    <LenkeMedSporing
+                        href={homeUrl}
+                        className={cls.element('link')}
+                        analyticsEventArgs={{
+                            ...analyticsEventArgs,
+                            label: homeUrl,
+                            action: 'nav.no',
+                        }}
+                    >
                         <Bilde asset={HomeIcon} className={cls.element('icon')} />
                         <span>nav.no</span>
                         <Next className={cls.element('next')} />
-                    </Link>
+                    </LenkeMedSporing>
                 </li>
-                {isLanguageNorwegian && (
+                {shouldShowContext && (
                     <li>
-                        <Link href={context.url}>
+                        <LenkeMedSporing
+                            href={context.url}
+                            className={cls.element('link')}
+                            analyticsEventArgs={{
+                                ...analyticsEventArgs,
+                                label: context.url,
+                                action: finnTekst(context.lenkeTekstId, language),
+                            }}
+                        >
                             <span>
                                 <Tekst id={context.lenkeTekstId} />
                             </span>
                             <Next className={cls.element('next')} />
-                        </Link>
+                        </LenkeMedSporing>
                     </li>
                 )}
-                {!showAll && breadcrumbs.length > 2 && (
+                {!showAll && breadcrumbs.length > numCustomItemsShown && (
                     <li>
                         <button
                             aria-label={finnTekst('brodsmulesti-se-alle', language)}
@@ -86,36 +102,30 @@ export const Brodsmulesti = (props: Props) => {
                         </button>
                     </li>
                 )}
-                {breadcrumbsSliced.map((breadcrumb, i) => (
-                    <li key={i} className="typo-normal" aria-current={i + 1 === breadcrumbsSliced.length && `page`}>
-                        {(() => {
-                            if (i + 1 !== breadcrumbsSliced.length) {
-                                if (breadcrumb.handleInApp) {
-                                    return (
-                                        <Link
-                                            href={breadcrumb.url}
-                                            className={cls.element('transform')}
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                postMessageToApp('breadcrumbClick', breadcrumb);
-                                            }}
-                                        >
-                                            <span>{breadcrumb.title}</span>
-                                            <Next className={cls.element('next')} />
-                                        </Link>
-                                    );
-                                } else {
-                                    return (
-                                        <Link href={breadcrumb.url} className={cls.element('transform')}>
-                                            <span>{breadcrumb.title}</span>
-                                            <Next className={cls.element('next')} />
-                                        </Link>
-                                    );
-                                }
-                            } else {
-                                return <span className={cls.element('transform')}>{breadcrumb.title}</span>;
-                            }
-                        })()}
+                {breadcrumbsSliced.map((breadcrumb, index, array) => (
+                    <li key={index} aria-current={index + 1 === array.length && 'page'}>
+                        {index + 1 !== array.length ? (
+                            <LenkeMedSporing
+                                href={breadcrumb.url}
+                                className={cls.element('link')}
+                                analyticsEventArgs={{
+                                    ...analyticsEventArgs,
+                                    label: breadcrumb.url,
+                                    action: breadcrumb.title,
+                                }}
+                                onClick={(e) => {
+                                    if (breadcrumb.handleInApp) {
+                                        e.preventDefault();
+                                        postMessageToApp('breadcrumbClick', breadcrumb);
+                                    }
+                                }}
+                            >
+                                <span className={cls.element('text')}>{breadcrumb.title}</span>
+                                <Next className={cls.element('next')} />
+                            </LenkeMedSporing>
+                        ) : (
+                            <span className={cls.element('text')}>{breadcrumb.title}</span>
+                        )}
                     </li>
                 ))}
             </ol>
