@@ -4,16 +4,15 @@ import { finnTekst } from 'tekster/finn-tekst';
 import React from 'react';
 import { Locale } from 'store/reducers/language-duck';
 import { Sokeresultat, Soketreff } from '../utils';
-import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import { getKbId } from 'utils/keyboard-navigation/kb-navigation';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import Tekst from 'tekster/finn-tekst';
-import Lenke from 'nav-frontend-lenker';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { useDispatch } from 'react-redux';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import './SokResultater.less';
+import { Alert, Link } from '@navikt/ds-react';
 
 type Props = {
     writtenInput: string;
@@ -41,9 +40,9 @@ export const SokResultater = (props: Props) => {
         <div className="sokeresultat-container">
             {fetchError && (
                 <div className={'sokeresultat-feil'}>
-                    <AlertStripeFeil>
+                    <Alert variant="error">
                         <Tekst id={'feil-sok-fetch'} />
-                    </AlertStripeFeil>
+                    </Alert>
                 </div>
             )}
             {!fetchError && itemsFiltered.length ? (
@@ -84,10 +83,10 @@ export const SokResultater = (props: Props) => {
                         {result.total} {finnTekst('sok-resultater', language)}
                     </div>
                     {result.total > itemsFiltered.length && (
-                        <Lenke className={'typo-element'} href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}>{`${finnTekst(
+                        <Link className={'typo-element'} href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}>{`${finnTekst(
                             'se-alle-treff',
                             language
-                        )} ("${writtenInput}")`}</Lenke>
+                        )} ("${writtenInput}")`}</Link>
                     )}
                 </div>
             ) : null}

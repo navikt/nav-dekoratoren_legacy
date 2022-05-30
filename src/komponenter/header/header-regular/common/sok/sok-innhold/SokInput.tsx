@@ -4,6 +4,7 @@ import SokKnapper from './SokKnapper';
 import React from 'react';
 import { Locale } from 'store/reducers/language-duck';
 import { verifyWindowObj } from 'utils/Environment';
+import { Heading, TextField } from '@navikt/ds-react';
 import './SokInput.less';
 type Props = {
     className: string;
@@ -26,7 +27,7 @@ export const SokInput = (props: Props) => {
                 <Tekst id={'sok-knapp-sokefelt'} />
             </Label>
             <div className="sok-input-container">
-                <Input
+                <TextField
                     id={id}
                     onChange={(e) => onChange(e.target.value)}
                     className={className}

@@ -10,9 +10,6 @@
         .menylinje-knapp;
         overflow: hidden;
         max-width: 12rem;
-        @media @screen-desktop-small-width-down {
-            max-width: 10rem;
-        }
 
         img {
             width: 32px;
@@ -28,7 +25,7 @@
 
     &__knapp-tekst-topp {
         display: block;
-        .typo-normal;
+        font-weight: 700;
         font-weight: bold;
         transition: all 0.35s ease-in-out;
 
@@ -39,7 +36,8 @@
 
     &__knapp-tekst-bunn {
         display: block;
-        .typo-undertekst;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
         position: relative;
         bottom: 0;
         max-width: 9rem;

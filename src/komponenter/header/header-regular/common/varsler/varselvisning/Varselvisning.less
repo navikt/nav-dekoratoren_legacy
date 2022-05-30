@@ -13,7 +13,8 @@
         overflow-x: hidden;
 
         &__tittel {
-            .typo-innholdstittel;
+            font-size: 2rem;
+            line-height: 2.25rem;
         }
     }
 
@@ -22,7 +23,7 @@
     }
 
     .dekorator-varsel-container {
-        @separator-props: @navMorkGra solid 1px;
+        @separator-props: @navds-global-color-gray-800 solid 1px;
         border-bottom: @separator-props;
         &:first-of-type {
             border-top: @separator-props;
@@ -69,18 +70,16 @@
             }
 
             &.plaster-ikon {
-                background-color: #e0f5fb;
+                background-color: @navds-global-color-lightblue-100;
             }
         }
 
         .varsel-innhold {
             .varsel-dato {
-                .typo-etikett-liten;
                 margin-bottom: 0.25rem;
             }
 
-            .typo-infotekst {
-                .typo-normal;
+            .infotekst {
                 margin-bottom: 0.5rem;
             }
         }

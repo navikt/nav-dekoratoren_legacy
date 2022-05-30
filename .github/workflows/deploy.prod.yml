@@ -8,10 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          registry-url: 'https://npm.pkg.github.com'
       - name: Abort if branch is not master
         if: github.event.release.target_commitish != 'master'
         run: echo "Release is not on master, aborting"; exit 1;
@@ -25,13 +21,16 @@ jobs:
           echo "IMAGE_NAME=$(echo ${GITHUB_REPOSITORY##*/})" >> $GITHUB_ENV
           echo "IMAGE_VERSION=${IMAGE_VERSION_RAW,,}" >> $GITHUB_ENV
           echo "GITHUB_TOKEN=$(echo ${GITHUB_TOKEN})" >> $GITHUB_ENV
-      - uses: actions/cache@v2
+      - name: Setup node.js
+        uses: actions/setup-node@v2
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - run: npm ci
+          node-version: '16'
+          registry-url: 'https://npm.pkg.github.com'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - run: npm test
       - run: npm run build-prod
       - name: Docker build and push

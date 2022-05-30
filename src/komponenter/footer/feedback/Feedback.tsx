@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Ingress } from 'nav-frontend-typografi';
+import { Button, Ingress } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
-import { Knapp } from 'nav-frontend-knapper';
 import AlternativJa from './feedback-questions/AlternativJa';
 import AlternativNei from './feedback-questions/AlternativNei';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
@@ -35,12 +34,12 @@ const Feedback = () => {
                             </label>
                         </Ingress>
                         <div className="buttons-container">
-                            <Knapp className="knapp" onClick={handleJa}>
+                            <Button className="knapp" onClick={handleJa}>
                                 <Tekst id="svarknapp-ja" />
-                            </Knapp>
-                            <Knapp className="knapp" onClick={handleNei}>
+                            </Button>
+                            <Button className="knapp" onClick={handleNei}>
                                 <Tekst id="svarknapp-nei" />
-                            </Knapp>
+                            </Button>
                         </div>
                     </div>
                 )}

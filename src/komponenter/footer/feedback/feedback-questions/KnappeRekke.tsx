@@ -1,5 +1,5 @@
+import { Button } from '@navikt/ds-react';
 import React from 'react';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import Tekst from 'tekster/finn-tekst';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import './Alternativ.less';
@@ -16,12 +16,12 @@ const KnappeRekke = ({ avbryt }: Props) => {
 
     return (
         <div className="knapper">
-            <Hovedknapp htmlType="submit" className="send-inn">
+            <Button variant="primary" className="send-inn" type="submit">
                 <Tekst id="send-inn-tilbakemelding" />
-            </Hovedknapp>
-            <Flatknapp mini onClick={userClosedFeedback} htmlType="button">
+            </Button>
+            <Button variant="tertiary" size="small" onClick={userClosedFeedback} type="button">
                 <Tekst id="avbryt-tilbakemelding" />
-            </Flatknapp>
+            </Button>
         </div>
     );
 };

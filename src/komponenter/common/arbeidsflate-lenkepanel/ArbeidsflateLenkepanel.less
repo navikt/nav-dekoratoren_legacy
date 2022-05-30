@@ -1,65 +1,72 @@
 @import (reference) '../../../styling-variabler.less';
 
 .arbeidsflate-lenkepanel {
-    border: 2px @navBla solid;
+    border: 2px @navds-global-color-blue-500 solid;
     margin-bottom: 0;
 
     &:hover {
-        border: 2px @navBla solid;
-        background-color: @navBla;
+        border: 2px @navds-global-color-blue-500 solid;
+        background-color: @navds-global-color-blue-500;
 
-        .lenkepanel__indikator,
-        .lenkepanel__heading,
-        .arbeidsflate-lenkepanel__stikkord {
-            color: @white;
+        .navds-link-panel__chevron,
+        .navds-link-panel__title,
+        .navds-link-panel__description {
+            color: @navds-global-color-white;
         }
     }
 
-    &__innhold {
-        display: flex;
-        flex-direction: column;
-        flex-basis: 100%;
-        height: 100%;
+    .navds-link-panel__content {
+        align-self: flex-start;
     }
 
-    .lenkepanel__indikator,
-    .lenkepanel__heading {
-        color: @navBla;
+    .navds-link-panel__title {
+        color: @navds-global-color-blue-500;
     }
 
-    &__compact-chevron {
-        display: none;
+    .navds-link-panel__chevron {
+        color: @navds-global-color-blue-500;
     }
 
-    &__compact {
+    &--inverted,
+    &--inverted:hover {
+        .navds-link-panel__chevron,
+        .navds-link-panel__title,
+        .navds-link-panel__description {
+            color: @navds-global-color-white;
+        }
+    }
+
+    &--inverted:focus {
+        .arbeidsflate-lenkepanel__text {
+            color: @navds-global-color-blue-500;
+        }
+        .navds-link-panel__chevron {
+            color: @navds-global-color-blue-500;
+        }
+    }
+
+    &--compact {
+        .navds-link-panel__title {
+            font-size: 1.2rem;
+        }
+
+        .navds-link-panel__description {
+            font-size: 1.1rem;
+            margin-top: var(--navds-spacing-1);
+            line-height: 1.5rem;
+        }
+
         @media @screen-desktop-small-down {
             padding: 0.5rem 0.75rem;
             margin-bottom: 0.25rem;
 
-            &-chevron {
+            .navds-link-panel__chevron {
                 display: inline-block;
                 align-self: center;
                 margin-right: 8px;
                 margin-left: -4px;
                 left: 0;
                 transition: left 0.25s;
-            }
-
-            .lenkepanel__indikator {
-                display: none;
-            }
-
-            .lenkepanel__heading {
-                &::after {
-                    content: ' ';
-                    margin-right: 0.4rem;
-                }
-            }
-
-            &:hover {
-                .arbeidsflate-lenkepanel__compact-chevron {
-                    left: 6px;
-                }
             }
         }
     }

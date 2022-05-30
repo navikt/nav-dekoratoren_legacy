@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import BEMHelper from '../../../../utils/bem';
+import { BodyLong, Heading } from '@navikt/ds-react';
 
 interface Props {
     overskrift: string;
@@ -12,8 +12,10 @@ const UtloggingsvarselTekstInnhold: FunctionComponent<Props> = (props) => {
 
     return (
         <div className={cls.element('tekst-innhold')}>
-            <Systemtittel className={cls.element('heading')}>{overskrift}</Systemtittel>
-            <Normaltekst>Avslutt det du jobber med. Trenger du mer tid, må du logge inn på nytt.</Normaltekst>
+            <Heading level="2" size="medium" className={cls.element('heading')}>
+                {overskrift}
+            </Heading>
+            <BodyLong>Avslutt det du jobber med. Trenger du mer tid, må du logge inn på nytt.</BodyLong>
         </div>
     );
 };

@@ -147,7 +147,13 @@ const serverConfig = {
     },
     externals: [
         nodeExternals({
-            allowlist: [/^nav-frontend-.*$/, /^@navikt\/nav-dekoratoren-.*$/, /\.(?!(?:jsx?|json)$).{1,5}$/i],
+            allowlist: [
+                /^nav-frontend-.*$/,
+                /^@navikt\/ds-react.*$/,
+                /^@navikt\/nav-dekoratoren-.*$/,
+                /^@babel\/runtime.*$/,
+                /\.(?!(?:jsx?|json)$).{1,5}$/i,
+            ],
         }),
     ],
     ...commonConfig,

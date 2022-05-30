@@ -1,7 +1,7 @@
-import Tekst from 'tekster/finn-tekst';
-import { Systemtittel } from 'nav-frontend-typografi';
 import React from 'react';
+import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
+import { BodyShort, Heading } from '@navikt/ds-react';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
@@ -28,12 +28,12 @@ export const Toppseksjon = ({ classname }: Props) => {
 
     return (
         <div className={cls.element('topp-seksjon')} data-testid={'toppseksjon'}>
-            <Systemtittel className={cls.element('topp-seksjon-tittel')}>
+            <Heading level="2" size="medium" className={cls.element('topp-seksjon-tittel')}>
                 <Tekst id={`rolle-${arbeidsflate.toLowerCase()}`} />
-                <span className={cls.element('topp-seksjon-tittel-decoration')} aria-hidden={true}>
+                <BodyShort className={cls.element('topp-seksjon-tittel-decoration')} aria-hidden={true}>
                     {'//'}
-                </span>
-            </Systemtittel>
+                </BodyShort>
+            </Heading>
             <LenkeMedSporing
                 href={context.url}
                 onClick={(event) => {

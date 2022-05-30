@@ -1,6 +1,6 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
-import { EtikettLiten } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 import './VarselIkon.less';
 
 type Props = {
@@ -19,9 +19,9 @@ export const VarselIkon = ({ isOpen, antallUleste = 0 }: Props) => {
             <div className={cls.element('lip')} />
             <div className={cls.element('clapper')} />
             <div className={cls.element('ulest-sirkel', antallUleste === 0 ? 'hide' : '')}>
-                <EtikettLiten className={cls.element('ulest-antall')}>
+                <Label size="small" className={cls.element('ulest-antall')}>
                     {antallUleste < 10 ? antallUleste : '9+'}
-                </EtikettLiten>
+                </Label>
             </div>
         </div>
     );

@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
+import { BodyShort } from '@navikt/ds-react';
+
 import Close from '../../../../ikoner/varsler/Close';
 import BEMHelper from '../../../../utils/bem';
-import { Element } from 'nav-frontend-typografi';
 import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -42,7 +43,7 @@ const UtloggingNavigasjon: FunctionComponent = () => {
                 }}
                 aria-label="lukk modalen"
             >
-                <Element>Lukk</Element>
+                <BodyShort>Lukk</BodyShort>
                 <Close width="1.5rem" height="1.5rem" />
             </button>
         </nav>

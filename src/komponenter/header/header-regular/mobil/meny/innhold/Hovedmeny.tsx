@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import HoyreChevron from 'nav-frontend-chevron/lib/hoyre-chevron';
+import { Next } from '@navikt/ds-icons';
 import BEMHelper from 'utils/bem';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { getHovedmenyNode } from 'utils/meny-storage-utils';
@@ -56,10 +56,10 @@ const Hovedmeny = (props: Props) => {
         dispatch(toggleUndermenyVisning());
     };
 
-    const setMenyliste = (event: React.MouseEvent<HTMLAnchorElement>, meny: MenyNode) => {
+    const setMenyliste = (event: React.MouseEvent<HTMLAnchorElement>, menyNode: MenyNode) => {
         event.preventDefault();
         menutoggle();
-        settLenker(meny);
+        settLenker(menyNode);
     };
 
     const containerClassName = menyClass.element('startmeny', underMenuIsOpen || !hovedMenuIsOpen ? 'hidden' : '');
@@ -96,7 +96,7 @@ const Hovedmeny = (props: Props) => {
                                     onClick={(e) => setMenyliste(e, menyElement)}
                                 >
                                     {menyElement.displayName}
-                                    <HoyreChevron />
+                                    <Next />
                                 </a>
                             </Listelement>
                         ))}

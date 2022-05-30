@@ -1,5 +1,5 @@
 import React from 'react';
-import { Normaltekst, Ingress } from 'nav-frontend-typografi';
+import { Ingress, BodyLong } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { useSelector } from 'react-redux';
@@ -20,9 +20,9 @@ const ThankYou = () => {
                 <Tekst id="send-undersokelse-takk" />
             </Ingress>
             <div className="mellomrom" />
-            <Normaltekst>
+            <BodyLong>
                 <Tekst id="hensikt-med-tilbakemelding" />
-            </Normaltekst>
+            </BodyLong>
             <LenkeMedSporing href={kontaktOssUrl}>
                 <Tekst id="hensikt-med-tilbakemelding-lenke" />
             </LenkeMedSporing>

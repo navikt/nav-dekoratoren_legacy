@@ -1,15 +1,13 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
+import { BodyShort, Detail, Heading } from '@navikt/ds-react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { MenyLenkeSeksjon } from 'komponenter/header/header-regular/common/meny-lenker/MenyLenkeSeksjon';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import Tekst from 'tekster/finn-tekst';
-import { Systemtittel } from 'nav-frontend-typografi';
 import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { UndertekstBold } from 'nav-frontend-typografi';
 
 const nodeGroup = KbNavGroup.Minsidemeny;
 
@@ -34,9 +32,9 @@ export const MinsidemenyInnhold = (props: Props) => {
         <>
             <div className={cls.element('topp-seksjon')}>
                 <div className={cls.element('topp-seksjon-left')}>
-                    <Systemtittel className={cls.element('topp-seksjon-tittel')}>
+                    <Heading level="2" size="medium" className={cls.element('topp-seksjon-tittel')}>
                         <Tekst id={'min-side'} />
-                    </Systemtittel>
+                    </Heading>
                     <LenkeMedSporing
                         href={dittNavUrl}
                         id={KbNav.getKbId(nodeGroup, {
@@ -55,10 +53,10 @@ export const MinsidemenyInnhold = (props: Props) => {
                     </LenkeMedSporing>
                 </div>
                 <div className={cls.element('topp-seksjon-right')}>
-                    <UndertekstBold>
+                    <Detail>
                         <Tekst id={'logget-inn-som'} />
-                    </UndertekstBold>
-                    <Normaltekst className={cls.element('brukernavn')}>{brukernavn}</Normaltekst>
+                    </Detail>
+                    <BodyShort className={cls.element('brukernavn')}>{brukernavn}</BodyShort>
                 </div>
             </div>
             {authLevel !== '4' && <MinsideLockMsg />}
