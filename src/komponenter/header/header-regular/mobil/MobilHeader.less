@@ -10,25 +10,16 @@
 
     .nav-logo-lenke {
         margin-left: @margins-sides-mobil;
-        width: 72px;
-        padding: 4px;
-    }
-
-    .login-knapp-container,
-    .varselbjelle__knapp {
-        margin-right: 0.5rem;
-        margin-left: 0;
-
-        @media @screen-mobile-small-down {
-            margin-right: 0.25rem;
-        }
+        @padding: 4px;
+        padding: @padding;
+        height: 36px + (@padding * 2);
     }
 
     #mobilmeny-knapp-id {
         margin-right: @margins-sides-mobil;
 
         @media @screen-mobile-small-down {
-            margin-right: 0.5rem;
+            margin-right: 0.75rem;
         }
     }
 }

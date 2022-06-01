@@ -57,14 +57,22 @@ export const HeaderMenylinje = () => {
                 <NavLogo arbeidsflate={arbeidsflate} />
                 {isLanguageNorwegian && <Arbeidsflatemeny />}
                 <span className={cls.element('spacer')} />
-                <DesktopHovedmenyKnapp kbNavMainState={kbNavMainState} />
-                <DesktopSokKnapp kbNavMainState={kbNavMainState} />
-                {innloggetPrivatperson && <VarslerKnapp kbNavMainState={kbNavMainState} />}
-                {innloggetPrivatperson && <DesktopMinsidemenyKnapp kbNavMainState={kbNavMainState} />}
-                {innloggetArbeidsgiver && <MinsideArbgiverKnapp />}
-                {/* {innloggingsstatus === Status.OK && <LoggInnKnapp />} */}
-                <LoggInnKnapp />
+                <div className={cls.element('uinnlogget-knapper')}>
+                    <DesktopHovedmenyKnapp kbNavMainState={kbNavMainState} />
+                    <DesktopSokKnapp kbNavMainState={kbNavMainState} />
+                </div>
+                {(innloggetPrivatperson || innloggetArbeidsgiver) && (
+                    <div className={cls.element('minside-knapper')}>
+                        {innloggetPrivatperson && <VarslerKnapp kbNavMainState={kbNavMainState} />}
+                        {innloggetPrivatperson && <DesktopMinsidemenyKnapp kbNavMainState={kbNavMainState} />}
+                        {innloggetArbeidsgiver && <MinsideArbgiverKnapp />}
+                        {innloggingsstatus === Status.OK && <LoggInnKnapp />}
+                    </div>
+                )}
                 <MobilMenyKnapp />
+                {!(innloggetPrivatperson || innloggetArbeidsgiver) && innloggingsstatus === Status.OK && (
+                    <LoggInnKnapp />
+                )}
             </div>
         </nav>
     );

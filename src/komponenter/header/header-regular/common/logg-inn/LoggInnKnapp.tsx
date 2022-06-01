@@ -5,7 +5,7 @@ import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { getLoginUrl, getLogOutUrl } from 'utils/login';
-import { Login } from '@navikt/ds-icons';
+import { Logout, Login } from '@navikt/ds-icons';
 
 import './LoggInnKnapp.less';
 
@@ -36,12 +36,14 @@ export const LoggInnKnapp = () => {
     return (
         <div className={'login-knapp-container'}>
             <Button
-                className={`login-knapp${authenticated ? ' logout-knapp' : ''}`}
+                className={`login-knapp${authenticated ? ' logout-knapp' : ''} ${
+                    authenticated ? '' : ' ikke-innlogget'
+                }`}
                 onClick={handleButtonClick}
                 id={loginKnappId}
                 variant="tertiary"
             >
-                <Login />
+                {authenticated ? <Logout /> : <Login />}
                 {knappetekst}
             </Button>
         </div>
