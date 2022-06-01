@@ -1,33 +1,16 @@
 @import (reference) '../../../../../styling-variabler.less';
 
-.login-knapp-mixin() {
-    box-sizing: border-box;
-    text-transform: none;
-    letter-spacing: initial;
-
-    &:focus {
-        box-shadow: 0 0 0 4px @navds-semantic-color-focus;
-        border-radius: 4px;
-    }
-}
-
-.login-knapp.navds-button--tertiary {
-    // Hindrer overstyring av styling på knapper fra appene
-    all: unset;
-
+.login-knapp.navds-button {
     .navds-button__inner {
         font-weight: 600;
     }
 
     @media @screen-desktop {
-        .login-knapp-mixin();
-        .safari-text-color-fix-mixin(@navds-global-color-blue-500, @navds-global-color-white, @navds-global-color-white, @navds-global-color-blue-500);
+        border: 2px solid @navds-semantic-color-link;
         padding: 0.625rem 1rem;
     }
 
     @media @screen-mobile {
-        .login-knapp-mixin();
-        .safari-text-color-fix-mixin(@navds-global-color-blue-500, @navds-global-color-blue-500, @navds-global-color-blue-500, @navds-global-color-blue-500);
         padding: 0.5rem 1rem;
     }
 
