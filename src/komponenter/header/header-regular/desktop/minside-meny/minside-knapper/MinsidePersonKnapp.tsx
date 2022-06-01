@@ -43,7 +43,7 @@ export const MinsidePersonKnapp = ({ classname, id }: Props) => {
             classname={classname}
             id={id}
         >
-            <People />
+            <People data-testid={'minside-person'} />
         </MenylinjeKnapp>
     );
 };
