@@ -66,6 +66,7 @@ const Arbeidsflatemeny = () => {
                 })}
             </ul>
 
+            {/* TODO: slett: */}
             {/* <Tabs defaultValue="privatperson" size="medium" onChange={console.log} className="w-full ">
                 <Tabs.List>
                     <Tabs.Tab value="privatperson" label="Privatperson" />

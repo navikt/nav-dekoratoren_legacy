@@ -1,12 +1,13 @@
 @import (reference) '../../../../../styling-variabler.less';
 
 .siteheader .arbeidsflate {
-    @separator-height: 1px;
+    @separator-height: 0px;
+    @underline-height: 4px;
 
     width: 100%;
-    background-color: white;
-    height: 100%;
+    height: calc(100% - @header-separator-height);
     margin-left: 1rem;
+    align-self: flex-start;
 
     &__topp-liste-rad {
         white-space: nowrap;
@@ -31,9 +32,8 @@
 
         &:focus,
         &:active {
-            background-color: transparent;
-            outline: 3px solid @navds-semantic-color-focus;
-            outline-offset: -3px;
+            outline: @underline-height solid @navds-semantic-color-focus;
+            outline-offset: -@underline-height;
             box-shadow: 0 0 0 0;
         }
     }
@@ -43,21 +43,21 @@
         display: flex;
         margin: 0 1rem;
         align-items: center;
-        border-bottom: transparent 3px solid;
 
         &:hover {
-            border-bottom: @navds-global-color-blue-500 3px solid;
+            box-shadow: inset 0 -@underline-height 0 0 @navds-global-color-gray-300;
         }
 
         &--active {
-            border-bottom: @navds-global-color-blue-500 3px solid;
+            box-shadow: inset 0 -@underline-height 0 0 @navds-semantic-color-interaction-primary;
+
             p {
                 color: @navds-semantic-color-text;
 
                 font-weight: bold;
             }
             &:hover {
-                border-bottom: @navds-global-color-blue-500 3px solid;
+                box-shadow: inset 0 -@underline-height 0 0 @navds-semantic-color-interaction-primary;
             }
         }
     }
