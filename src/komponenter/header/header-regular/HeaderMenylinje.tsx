@@ -57,22 +57,24 @@ export const HeaderMenylinje = () => {
                 <NavLogo arbeidsflate={arbeidsflate} />
                 {isLanguageNorwegian && <Arbeidsflatemeny />}
                 <span className={cls.element('spacer')} />
-                <div className={cls.element('uinnlogget-knapper')}>
-                    <DesktopHovedmenyKnapp kbNavMainState={kbNavMainState} />
-                    <DesktopSokKnapp kbNavMainState={kbNavMainState} />
-                </div>
-                {(innloggetPrivatperson || innloggetArbeidsgiver) && (
-                    <div className={cls.element('minside-knapper')}>
-                        {innloggetPrivatperson && <VarslerKnapp kbNavMainState={kbNavMainState} />}
-                        {innloggetPrivatperson && <DesktopMinsidemenyKnapp kbNavMainState={kbNavMainState} />}
-                        {innloggetArbeidsgiver && <MinsideArbgiverKnapp />}
-                        {innloggingsstatus === Status.OK && <LoggInnKnapp />}
+                <div className={cls.element('hoyre-knapper')}>
+                    <div className={cls.element('uinnlogget-knapper')}>
+                        <DesktopHovedmenyKnapp kbNavMainState={kbNavMainState} />
+                        <DesktopSokKnapp kbNavMainState={kbNavMainState} />
                     </div>
-                )}
-                <MobilMenyKnapp />
-                {!(innloggetPrivatperson || innloggetArbeidsgiver) && innloggingsstatus === Status.OK && (
-                    <LoggInnKnapp />
-                )}
+                    {(innloggetPrivatperson || innloggetArbeidsgiver) && (
+                        <div className={cls.element('minside-knapper')}>
+                            {innloggetPrivatperson && <VarslerKnapp kbNavMainState={kbNavMainState} />}
+                            {innloggetPrivatperson && <DesktopMinsidemenyKnapp kbNavMainState={kbNavMainState} />}
+                            {innloggetArbeidsgiver && <MinsideArbgiverKnapp />}
+                            {innloggingsstatus === Status.OK && <LoggInnKnapp />}
+                        </div>
+                    )}
+                    <MobilMenyKnapp />
+                    {!(innloggetPrivatperson || innloggetArbeidsgiver) && innloggingsstatus === Status.OK && (
+                        <LoggInnKnapp />
+                    )}
+                </div>
             </div>
         </nav>
     );
