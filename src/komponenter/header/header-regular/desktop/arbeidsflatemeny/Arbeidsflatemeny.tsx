@@ -34,7 +34,7 @@ const Arbeidsflatemeny = () => {
                             key={lenke.key}
                         >
                             <LenkeMedSporing
-                                classNameOverride={cls.element('lenke')}
+                                classNameOverride={cls.element('lenke', arbeidsflate === lenke.key ? 'active' : '')}
                                 id={getKbId(KbNavGroup.HeaderMenylinje, {
                                     col: index,
                                     row: 0,
@@ -55,7 +55,7 @@ const Arbeidsflatemeny = () => {
                                     label: lenke.key,
                                 }}
                             >
-                                <div className={cls.element('lenke-inner', arbeidsflate === lenke.key ? 'active' : '')}>
+                                <div className={cls.element('lenke-inner')}>
                                     <BodyShort>
                                         <Tekst id={lenke.lenkeTekstId} />
                                     </BodyShort>
