@@ -9,8 +9,6 @@ import { useSelector } from 'react-redux';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { People } from '@navikt/ds-icons';
 
-import './MinsideKnapp.less';
-
 const stateSelector = (state: AppState) => ({
     brukernavn: state.innloggingsstatus.data.name,
     isOpen: state.dropdownToggles.minside,
