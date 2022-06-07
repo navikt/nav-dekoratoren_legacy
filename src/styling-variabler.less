@@ -57,19 +57,3 @@
         border-color: transparent;
     }
 }
-
-.safari-text-color-fix-mixin(@mainColor, @activeColor, @hoverColor, @focusColor) {
-    -webkit-text-fill-color: @mainColor;
-    &:hover,
-    &:hover:focus {
-        -webkit-text-fill-color: @hoverColor;
-    }
-    &:active,
-    &:active:hover,
-    &:active:focus {
-        -webkit-text-fill-color: @activeColor;
-    }
-    &:focus {
-        -webkit-text-fill-color: @focusColor;
-    }
-}
