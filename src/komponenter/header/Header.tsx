@@ -374,6 +374,9 @@ const getLanguageFromUrl = (): Locale => {
     if (locationPath.includes('/pl/')) {
         return Locale.POLSK;
     }
+    if (locationPath.includes('/uk/')) {
+        return Locale.UKRAINSK;
+    }
     return Locale.IKKEBESTEMT;
 };
 
