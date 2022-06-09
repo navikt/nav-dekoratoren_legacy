@@ -7,7 +7,10 @@
 
     .lenke {
         color: white;
-        padding: 0.625rem 0;
+        padding: 0.5rem 0;
+        @media @screen-mobile {
+            padding: 0.25rem 0;
+        }
     }
 
     .lenke:focus {
@@ -29,25 +32,23 @@
             margin-bottom: 0.5rem;
         }
 
-        .til-toppen {
-            margin: 1rem 0;
-        }
-
         .til-toppen-innhold {
             display: flex;
             justify-content: start;
             .lenke-med-ikon {
                 width: 100%;
-                padding: 1rem 0;
-                margin-top: -1rem;
-                text-decoration: none;
+                text-decoration: underline;
                 color: white;
+                font-size: 1.25rem;
                 svg {
+                    height: 24px;
+                    width: 24px;
+                    color: white;
                     fill: white;
                     stroke: white;
                 }
-                &:hover {
-                    text-decoration: underline;
+                &__ikon {
+                    margin: 0;
                 }
                 &:focus {
                     svg {

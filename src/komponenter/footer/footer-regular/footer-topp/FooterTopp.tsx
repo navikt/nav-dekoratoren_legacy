@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Heading } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
-import PilOppHvit from 'ikoner/meny/PilOppHvit';
+import { Up } from '@navikt/ds-icons';
 import LenkeMedIkon from 'komponenter/footer/common/lenke-med-ikon/LenkeMedIkon';
 import { AppState } from 'store/reducers';
 import { MenyNode } from 'store/reducers/menu-duck';
@@ -58,7 +58,7 @@ const FooterTopp = () => {
                         <LenkeMedIkon
                             onClick={scrollToTop}
                             tekst={<Tekst id="footer-til-toppen" />}
-                            ikon={<PilOppHvit style={{ height: '18px', width: '18px' }} />}
+                            ikon={<Up />}
                             venstrestiltIkon={true}
                             id="footer-til-toppen"
                         />
@@ -67,7 +67,7 @@ const FooterTopp = () => {
                 {columnsNode
                     ? columnsNode.children.map((columnNode, i) => (
                           <div key={i} className={`menylenker-seksjon ${!i ? 'venstre' : i === 2 ? 'hoyre' : 'midt'}`}>
-                              <Heading level="2" size="medium" className="menylenker-overskrift">
+                              <Heading level="2" size="small" className="menylenker-overskrift">
                                   {columnNode.displayName}
                               </Heading>
                               <ul>
