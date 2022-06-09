@@ -17,6 +17,8 @@ import BEMHelper from 'utils/bem';
 import SprakVelgerItem from './SprakVelgerItem';
 import './SprakVelger.less';
 
+const cls = BEMHelper('sprakvelger');
+
 export const farger = {
     navGra20: '#C6C2BF',
     navBla: '#0067C5',
@@ -30,7 +32,6 @@ interface Props {
 
 export const SprakVelger = (props: Props) => {
     const store = useStore();
-    const cls = BEMHelper('sprakvelger');
     const availableLanguages = props.languages;
     const { language } = useSelector((state: AppState) => state.language);
     const [, setCookie] = useCookies([decoratorLanguageCookie]);
@@ -112,6 +113,7 @@ const labels: { [key: string]: string } = {
     en: 'English',
     se: 'Sámegiel',
     pl: 'Polski',
+    uk: 'Українська',
 };
 
 // Utils
