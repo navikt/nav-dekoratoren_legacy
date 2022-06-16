@@ -10,6 +10,7 @@ import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok
 import { varslerKnappId } from 'komponenter/header/header-regular/common/varsler/varsler-knapp/VarslerKnapp';
 import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
 import { loginKnappId } from 'komponenter/header/header-regular/common/logg-inn/LoggInnKnapp';
+import { arbeidsflatemenyLenkeIds } from '../../komponenter/header/header-regular/desktop/arbeidsflatemeny/Arbeidsflatemeny';
 
 // TODO: Finn ut hvorfor akkurat denne noen ganger blir undefined :|
 const hovedmenyKnappId = desktopHovedmenyKnappId || 'desktop-hovedmeny-knapp-id';
@@ -27,7 +28,7 @@ export const configForNodeGroup: { [key in KbNavGroup]: KbNavConfig } = {
     [KbNavGroup.HeaderMenylinje]: {
         group: KbNavGroup.HeaderMenylinje,
         rootIndex: kbMasterNodeIndex || { col: 0, row: 0, sub: 0 },
-        maxColsPerRow: [3, 6],
+        maxColsPerRow: [9],
         parentNodeId: headerLogoId,
         parentNodeEdge: NodeEdge.Right,
     },
@@ -82,23 +83,29 @@ export const createHeaderMainGraph = (
     language: Locale,
     arbeidsflate: MenuValue,
     menyStatus: Status,
-    erInnlogget: boolean
+    erInnlogget: boolean,
+    arbeidsflatemenyEnabled: boolean
 ) => {
     const hovedmenyEnabled = language !== Locale.SAMISK;
     const isLanguageNorwegian = language === Locale.BOKMAL || language === Locale.NYNORSK;
     const varslerEnabled = arbeidsflate === MenuValue.PRIVATPERSON && erInnlogget;
     const minsideMenyEnabled = isLanguageNorwegian && erInnlogget && arbeidsflate !== MenuValue.SAMARBEIDSPARTNER;
-    const arbeidsflatemenyEnabled = isLanguageNorwegian;
 
     const group = KbNavGroup.HeaderMenylinje;
     const rootIndex = configForNodeGroup[group].rootIndex;
     const idMap: KbIdMap = {};
 
-    rootIndex.row = arbeidsflatemenyEnabled ? 1 : 0;
+    rootIndex.row = 0;
 
     let colIndex = rootIndex.col;
 
     idMap[KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })] = headerLogoId;
+
+    if (arbeidsflatemenyEnabled && isLanguageNorwegian) {
+        arbeidsflatemenyLenkeIds.forEach((value) => {
+            idMap[KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })] = value;
+        });
+    }
 
     if (hovedmenyEnabled) {
         idMap[KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })] = hovedmenyKnappId;
@@ -116,7 +123,5 @@ export const createHeaderMainGraph = (
 
     idMap[KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })] = loginKnappId;
 
-    const maxColsPerRow = arbeidsflatemenyEnabled ? [3, colIndex] : [colIndex];
-
-    return createKbNavGraph(group, rootIndex, maxColsPerRow, idMap);
+    return createKbNavGraph(group, rootIndex, [colIndex], idMap);
 };

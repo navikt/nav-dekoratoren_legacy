@@ -9,6 +9,8 @@ import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
 import { headerLogoId } from 'komponenter/header/header-regular/HeaderMenylinje';
 import KbNav from 'utils/keyboard-navigation/kb-navigation';
+import { matchMedia } from '../match-media-polyfill';
+import { arbeidsflatemenyWidthBreakpoint } from '../../komponenter/header/header-regular/desktop/arbeidsflatemeny/Arbeidsflatemeny';
 
 const stateSelector = (state: AppState) => ({
     language: state.language.language,
@@ -45,6 +47,8 @@ export const kbNavInitialState: KeyboardNavState = {
     },
 };
 
+const mqlArbeidsflatemenyWidthBreakpoint = matchMedia(`(max-width: ${arbeidsflatemenyWidthBreakpoint}px)`);
+
 export const useKbNavMain = (): KbNavMain => {
     const { language, arbeidsflate, menyStatus, innloggingsStatus, dropdownToggles } = useSelector(stateSelector);
     const dispatch = useDispatch();
@@ -60,12 +64,33 @@ export const useKbNavMain = (): KbNavMain => {
     const dropdownIsOpen =
         dropdownToggles.hovedmeny || dropdownToggles.minside || dropdownToggles.sok || dropdownToggles.varsler;
 
+    const [arbeidsflateMenyEnabled, setArbeidsflateMenyEnabled] = useState(true);
+
     useEffect(() => {
-        const graph = createHeaderMainGraph(language, arbeidsflate, menyStatus, innloggingsStatus.authenticated);
+        const setArbeidsflatemenyState = () => {
+            setArbeidsflateMenyEnabled(window.innerWidth > arbeidsflatemenyWidthBreakpoint);
+        };
+
+        setArbeidsflatemenyState();
+
+        mqlArbeidsflatemenyWidthBreakpoint.addEventListener('change', setArbeidsflatemenyState);
+        return () => {
+            mqlArbeidsflatemenyWidthBreakpoint.removeEventListener('change', setArbeidsflatemenyState);
+        };
+    }, []);
+
+    useEffect(() => {
+        const graph = createHeaderMainGraph(
+            language,
+            arbeidsflate,
+            menyStatus,
+            innloggingsStatus.authenticated,
+            arbeidsflateMenyEnabled
+        );
         if (graph) {
             setKbNavState({ ...kbNavState, mainGraph: graph });
         }
-    }, [language, arbeidsflate, menyStatus, innloggingsStatus]);
+    }, [language, arbeidsflate, menyStatus, innloggingsStatus, arbeidsflateMenyEnabled]);
 
     useEffect(() => {
         const nodeMap = {
