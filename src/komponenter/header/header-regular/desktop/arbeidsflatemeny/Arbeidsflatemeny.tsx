@@ -17,12 +17,11 @@ import './Arbeidsflatemeny.less';
 
 export const arbeidsflatemenyWidthBreakpoint = 1200;
 
-export const arbeidsflatemenyLenkeIds = Object.values(MenuValue).reduce((acc, value) => {
-    if (value === MenuValue.IKKEBESTEMT) {
-        return acc;
-    }
-    return [...acc, `arbeidsflate-${value}`];
-}, [] as string[]);
+export const arbeidsflatemenyLenkeIds = [
+    MenuValue.PRIVATPERSON,
+    MenuValue.ARBEIDSGIVER,
+    MenuValue.SAMARBEIDSPARTNER,
+].map((value) => `arbeidsflate-${value}`);
 
 const Arbeidsflatemeny = () => {
     const cls = BEMHelper('arbeidsflate');
