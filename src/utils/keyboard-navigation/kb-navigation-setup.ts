@@ -95,8 +95,6 @@ export const createHeaderMainGraph = (
     const rootIndex = configForNodeGroup[group].rootIndex;
     const idMap: KbIdMap = {};
 
-    rootIndex.row = 0;
-
     let colIndex = rootIndex.col;
 
     idMap[KbNav.getKbId(group, { ...rootIndex, col: colIndex++ })] = headerLogoId;
