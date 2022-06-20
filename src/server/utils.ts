@@ -230,9 +230,10 @@ export const validateLanguage = (language: Locale) => {
         case 'en':
         case 'se':
         case 'pl':
+        case 'uk':
             break;
         default:
-            const error = 'language supports nb | nn | en | se | pl';
+            const error = 'language supports nb | nn | en | se | pl | uk';
             throw Error(error);
     }
 };
@@ -250,17 +251,7 @@ export const validateAvailableLanguages = (languages: AvailableLanguage[]) => {
             }
         }
 
-        switch (language.locale) {
-            case 'nb':
-            case 'nn':
-            case 'en':
-            case 'se':
-            case 'pl':
-                break;
-            default:
-                const error = `availableLanguages.locale supports nb | nn | en | se | pl`;
-                throw Error(error);
-        }
+        validateLanguage(language.locale);
     });
 };
 
@@ -301,6 +292,7 @@ const mapToLocale = (language?: string) => {
         en: 'en',
         se: 'se',
         pl: 'pl',
+        uk: 'uk',
 
         // deprecated
         norsk: 'nb',
