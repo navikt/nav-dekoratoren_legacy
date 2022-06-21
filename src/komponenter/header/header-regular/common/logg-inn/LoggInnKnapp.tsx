@@ -5,6 +5,7 @@ import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { getLoginUrl, getLogOutUrl } from 'utils/login';
+import { Logout, Login } from '@navikt/ds-icons';
 
 import './LoggInnKnapp.less';
 
@@ -40,6 +41,7 @@ export const LoggInnKnapp = () => {
                 id={loginKnappId}
                 variant="tertiary"
             >
+                {authenticated ? <Logout /> : <Login />}
                 {knappetekst}
             </Button>
         </div>

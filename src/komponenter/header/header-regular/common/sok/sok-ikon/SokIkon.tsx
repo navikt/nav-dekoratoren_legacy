@@ -10,11 +10,7 @@ export const SokIkon = ({ isOpen }: Props) => {
     const cls = BEMHelper('sok-ikon');
 
     return (
-        <span
-            className={`${cls.className}${
-                isOpen ? ` ${cls.className}--open` : ''
-            }`}
-        >
+        <span className={`${cls.className}${isOpen ? ` ${cls.className}--open` : ''}`}>
             <span className={cls.element('circle', isOpen ? 'open' : '')} />
             <span className={cls.element('line', isOpen ? 'open' : '')} />
             <span className={cls.element('line-x', isOpen ? 'open' : '')} />

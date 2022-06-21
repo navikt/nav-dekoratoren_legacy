@@ -9,7 +9,6 @@ import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
 import { varslerDropdownClassname } from 'komponenter/header/header-regular/common/varsler/Varsler';
-import './VarslerKnapp.less';
 import { finnTekst } from '../../../../../../tekster/finn-tekst';
 
 export const varslerKnappId = 'varsler-knapp-id';
@@ -55,7 +54,7 @@ export const VarslerKnapp = () => {
             ariaControls={varslerDropdownClassname}
             ariaLabel={ariaLabel()}
         >
-            <VarselIkon isOpen={isOpen} antallUleste={varsler.totaltAntallUleste} />
+            <VarselIkon antallUleste={varsler.totaltAntallUleste} />
         </MenylinjeKnapp>
     );
 };
