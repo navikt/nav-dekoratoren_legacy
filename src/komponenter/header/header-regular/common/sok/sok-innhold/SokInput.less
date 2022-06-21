@@ -3,13 +3,6 @@
     .sok-input-container {
         position: relative;
         display: flex;
-        /* clears search styling from Chrome */
-        input[type='search']::-webkit-search-decoration,
-        input[type='search']::-webkit-search-cancel-button,
-        input[type='search']::-webkit-search-results-button,
-        input[type='search']::-webkit-search-results-decoration {
-            -webkit-appearance: none;
-        }
     }
     .sok-input {
         margin: 0;
@@ -60,33 +53,11 @@
                 padding: 1.25rem 1rem;
                 background-color: white;
                 border: 2px solid @navds-global-color-blue-500;
-                color: white;
 
                 &:focus,
                 &:active {
                     border: 2px solid @navds-global-color-blue-500;
                 }
-                &::-webkit-input-placeholder,
-                &::-moz-placeholder,
-                &:-ms-input-placeholder,
-                &:-moz-placeholder {
-                    color: @navds-global-color-blue-500;
-                }
-            }
-
-            input[type='search'] {
-                box-sizing: border-box;
-            }
-
-            input[placeholder] {
-                color: @navds-global-color-blue-500;
-                margin: 0;
-                font-size: 1.375rem;
-                line-height: 1.625rem;
-                font-weight: 300;
-            }
-            input::placeholder {
-                color: @navds-global-color-blue-500;
             }
             .skjemaelement__input {
                 padding-right: 8.5rem;

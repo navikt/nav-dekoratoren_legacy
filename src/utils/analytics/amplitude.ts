@@ -18,7 +18,7 @@ export const initAmplitude = () => {
 };
 
 export const logPageView = (params: Params, authState: InnloggingsstatusState) => {
-    logAmplitudeEvent('sidevisning', {
+    logAmplitudeEvent('besøk', {
         sidetittel: document.title,
         platform: window.location.toString(),
         innlogging: authState.data.securityLevel ?? false,
