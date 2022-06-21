@@ -230,6 +230,7 @@ export const Header = () => {
                         redirectToUrl,
                         feedback,
                         chatbot,
+                        chatbotVisible,
                         shareScreen,
                         utilsBackground,
                         utloggingsvarsel,
@@ -301,6 +302,9 @@ export const Header = () => {
                         }),
                         ...(chatbot !== undefined && {
                             CHATBOT: chatbot === true,
+                        }),
+                        ...(chatbotVisible !== undefined && {
+                            CHATBOT_VISIBLE: chatbotVisible === true,
                         }),
                         ...(utilsBackground && {
                             UTILS_BACKGROUND: utilsBackground,

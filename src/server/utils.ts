@@ -72,6 +72,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 }),
                 FEEDBACK: req.query.feedback === 'true',
                 CHATBOT: req.query.chatbot !== 'false',
+                CHATBOT_VISIBLE: req.query.chatbotVisible !== 'false',
                 URL_LOOKUP_TABLE: req.query.urlLookupTable !== 'false',
                 ...(req.query.utilsBackground && {
                     UTILS_BACKGROUND: req.query.utilsBackground as string,
