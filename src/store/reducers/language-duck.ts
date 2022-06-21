@@ -8,6 +8,7 @@ export enum Locale {
     ENGELSK = 'en',
     SAMISK = 'se',
     POLSK = 'pl',
+    UKRAINSK = 'uk',
 }
 
 export type AvailableLanguage =
