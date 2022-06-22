@@ -11,7 +11,7 @@ import { minsideMenyClassname } from 'komponenter/header/header-regular/desktop/
 import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
 import { Bag } from '@navikt/ds-icons';
 
-import './MinsideArbgiverKnapp.less';
+import './MinsideKnapper.less';
 
 const cls = BEMHelper(minsideMenyClassname);
 
