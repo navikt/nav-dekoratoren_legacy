@@ -3,6 +3,7 @@ import BEMHelper from 'utils/bem';
 import { analyticsEvent } from 'utils/analytics/analytics';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { toggleMinsidemeny } from 'store/reducers/dropdown-toggle-duck';
+import classNames from 'classnames';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
 import { AppState } from 'store/reducers';
 import { useDispatch } from 'react-redux';
@@ -49,8 +50,8 @@ export const MinsidePersonKnapp = ({ classname, id, brukernavn }: Props) => {
         >
             <People data-testid={'minside-person'} />
             <div className={cls.element('brukernavn')}>{brukernavn}</div>
-            <div className={cls.element('chevron')}>
-                <Expand />
+            <div className={classNames(cls.element('chevron'), `${isOpen ? cls.modifier('chevron-open') : ''}`)}>
+                <Expand aria-hidden />
             </div>
         </MenylinjeKnapp>
     );
