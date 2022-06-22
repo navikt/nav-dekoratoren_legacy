@@ -89,6 +89,7 @@ export const template = (req: Request) => {
             <link rel="icon" type="image/png" sizes="32x32" href=${appUrl}${fileFavicon32x32} />
             <link rel="apple-touch-icon" sizes="180x180" href=${appUrl}${fileAppleTouchIcon} />
             <!-- Decorator development styling -->
+            <!-- Hide decorator-utils-container to prevent content spoofing attacks via the breadcrumbs parameter -->
             <style>
             html, body {  height: 100%; }
             .decorator-dev-container {
@@ -105,9 +106,8 @@ export const template = (req: Request) => {
                 justify-content: center;
                 align-items: center;
             }  
-            .decorator-utils-container {    
-                background: #f1f1f1;
-                ${process.env.APP_BASE_URL === 'https://www.nav.no' ? 'display: none !important;' : ''}           
+            .decorator-utils-container {
+                display: none !important;
             }
             </style>
         </head>

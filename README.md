@@ -3,32 +3,21 @@
 ![Deploy til prod](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-prod/badge.svg) | ![Deploy til dev](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-dev/badge.svg)
 
 Node.js Express applikasjon med frontend-komponenter i React.<br>
-Appen kjører på NAIS i en docker-container.
 
 ## Bruk av dekoratøren
 
-:information_source: &nbsp; Dekoratøren er bakoverkompatibel; med andre ord vil eksisterende applikasjoner som benytter dekoratør:v4 (https://appres.nav.no/common-html/v4/navno) automatisk få ny dekoratør.
+Dekoratøren serveres på følgende ingresser:
 
-Den nye dekoratøren serveres på følgende ingresser:
-
-**Prod (prod-sbs)**
+**Prod (prod-gcp)**
 
 -   https://www.nav.no/dekoratoren/
 -   https://appres.nav.no/common-html/v4/navno (deprecated)
 
 **Dev (dev-gcp)**
 
+-   https://www.dev.nav.no/dekoratoren/
 -   https://dekoratoren.dev.nav.no/
--   https://dekoratoren.ekstern.dev.nav.no/
-
-Krever følgende access policy i nais.yaml:
-
-```
-accessPolicy:
-  outbound:
-    external:
-      - host: dekoratoren.dev.nav.no
-```
+-   https://dekoratoren.ekstern.dev.nav.no/ (tilgjengelig fra åpent internett)
 
 ## Implementasjon
 
@@ -79,6 +68,8 @@ fetch("{MILJO_URL}/?{DINE_PARAMETERE}").then(res => {
 
 ### Eksempel 2
 
+:warning: &nbsp; Bruk av client-side rendering kan gi en redusert brukeropplevelse, med "flicker"/layout shifting når headeren renderes.
+
 Alt 1 - Hent dekoratøren client-side vha. [@navikt/nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler#readme): <br>
 
 ```
@@ -110,12 +101,6 @@ Alt 2 - Sett inn noen linjer HTML:
   </body>
 </html>
 ```
-
-:warning: &nbsp; CSR (Client-Side-Rendering) av dekoratøren **kan påvirke ytelsen**.
-
-### Eksempel 3
-
-Bruk pus-decorator, les [readme](https://github.com/navikt/pus-decorator).
 
 ## Parametere
 
@@ -172,13 +157,13 @@ https://www.nav.no/dekoratoren/?context=arbeidsgiver
 Eksempel 2 - Håndhev innlogging:<br>
 https://www.nav.no/dekoratoren/?enforceLogin=true&level=Level4&redirectToApp=true
 
-Eksempel 3 - Språkvelger\*:<br>
+Eksempel 3 - Språkvelger:<br>
 [https://www.nav.no/dekoratoren/?availableLanguages=\[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}\] ](https://www.nav.no/dekoratoren/?availableLanguages=[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}])
 
-Eksempel 4 - Brødsmulesti\*:<br>
+Eksempel 4 - Brødsmulesti:<br>
 [https://www.nav.no/dekoratoren/?breadcrumbs=\[{"url":"https://www.nav.no/person/dittnav","title":"Ditt NAV"},{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt oss"}\] ](https://www.nav.no/dekoratoren/?breadcrumbs=[{"url":"https://www.nav.no/person/dittnav","title":"Ditt%20NAV"},{"url":"https://www.nav.no/person/kontakt-oss","title":"Kontakt%20oss"}])
 
-\*språkvelger og brødsmulesti vises ikke direkte på /dekoratoren i prod av sikkerhetsmessige årsaker
+(Språkvelger og brødsmulesti vises ikke direkte på /dekoratoren i prod av sikkerhetsmessige årsaker)
 
 ## Oppstart via docker-compose
 
@@ -207,11 +192,11 @@ dekoratoren:
       - mocks
 ```
 
-[Eksempel i Enonic XP](https://github.com/navikt/nav-enonicxp/blob/master/docker-compose.yml). <br>
-:information_source: &nbsp; Foreløpig krever GitHub Packages (docker.pkg.github.com) innlogging:
+[Eksempel i frontend for Enonic XP](https://github.com/navikt/nav-enonicxp-frontend/blob/master/docker-compose.yml). <br>
+:information_source: &nbsp; Krever GitHub Packages (ghcr.io) innlogging:
 
 ```
-docker login docker.pkg.github.com -u GITHUB_USERNAME -p GITHUB_PERSONAL_ACCESS_TOKEN
+docker login ghcr.io -u GITHUB_USERNAME -p GITHUB_PERSONAL_ACCESS_TOKEN
 ```
 
 ## Utvikling - Kom i gang
