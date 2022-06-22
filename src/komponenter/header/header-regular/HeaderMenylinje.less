@@ -35,7 +35,8 @@
         }
     }
 
-    &__uinnlogget-knapper {
+    &__uinnlogget-knapper,
+    &__minside-knapper {
         height: 100%;
         display: flex;
         flex-direction: row;
@@ -45,13 +46,6 @@
     }
 
     &__minside-knapper {
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0 0.5rem;
-
         @media @screen-desktop {
             background-color: @navds-semantic-color-interaction-primary-hover-subtle;
         }
