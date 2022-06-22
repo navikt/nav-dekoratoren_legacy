@@ -21,7 +21,7 @@ export const MinsideArbgiverKnapp = () => {
 
     return (
         <LenkeMedSporing
-            classNameOverride={`${cls.element('knapp')}`}
+            classNameOverride={`${cls.element('arbgiver-knapp')}`}
             id={minsideKnappId}
             href={href}
             analyticsEventArgs={{
