@@ -1,7 +1,7 @@
 @import (reference) '../../../../../../styling-variabler.less';
 
 .desktop-minside-meny {
-    &__knapp {
+    &__arbgiver-knapp {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -19,5 +19,25 @@
             height: 32px;
             width: 32px;
         }
+    }
+}
+
+#desktop-minside-knapp-id {
+    .minside-person__brukernavn {
+        max-width: 140px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-transform: capitalize;
+    }
+
+    .minside-person__chevron {
+        display: flex;
+        align-items: center;
+        margin-left: -0.25rem;
+    }
+
+    .minside-person--chevron-open {
+        transform: rotateZ(180deg);
     }
 }
