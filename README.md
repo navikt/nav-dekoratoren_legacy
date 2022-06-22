@@ -121,37 +121,40 @@ Bruk pus-decorator, les [readme](https://github.com/navikt/pus-decorator).
 
 Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
 
-| Parameter          | Type                                                  | Default               | Forklaring                                                                                                        |
-| ------------------ | ----------------------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| context            | privatperson \ arbeidsgiver \ samarbeidspartner       | privatperson          | Setter menyen til definert kontekst                                                                               |
-| simple             | boolean                                               | false                 | Viser en forenklet header og footer                                                                               |
-| enforceLogin       | boolean                                               | false                 | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]                                        |
-| redirectToApp      | boolean                                               | false <br>(ditt-nav)  | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2]                                    |
-| redirectToUrl      | string                                                | undefined             | Sender brukeren til denne url'en etter innlogging via dekoratøren [2]                                             |
-| level              | Level3 \| Level4                                      | Level3                | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]                                                |
-| language           | nb \| nn \| en \| se \| pl                            | nb                    | Setter språket til dekoratøren ved server side rendering [3]                                                      |
-| availableLanguages | [{ locale: nb \| nn \| en \| se \| pl, url: string }] | [ ]                   | Setter alternativene til språkvelgeren ved server side rendering [4]                                              |
-| breadcrumbs        | [{ title: string, url: string }]                      | [ ]                   | Setter brødsmulestien for server side rendering [5]                                                               |
-| utilsBackground    | white \| gray \| transparent                          | transparent           | Setter bakgrunnsfargen på containeren til brødsmulesti og språkvelger                                             |
-| feedback           | boolean                                               | false                 | Skjuler eller viser tilbakemeldingskomponentet                                                                    |
-| chatbot            | boolean                                               | true                  | Skjuler eller viser Chatbot Frida [6]                                                                             |
-| urlLookupTable     | boolean                                               | true                  | Aktiverer eller deaktiverer url-lookup-table [7]                                                                  |
-| taSurveys          | string,string,...                                     | ''                    | Oppgir én eller flere trackingkoder (surveys) for Task Analytics                                                  |
-| shareScreen        | boolean                                               | true                  | Aktiverer eller deaktiverer skjerdelingskomponent                                                                 |
-| utloggingsvarsel   | boolean                                               | false(prod)/true(dev) | Aktiverer eller deaktiverer Utloggingsvarsel for login-token (5min left) (obs: denne er ikke klar for prod-bruk!) |
-| logoutUrl          | string                                                | undefined             | Setter url for logg-ut knappen [8]                                                                                |
+| Parameter          | Type                                            | Default               | Forklaring                                                                                                        |
+| ------------------ | ----------------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| context            | privatperson \ arbeidsgiver \ samarbeidspartner | privatperson          | Setter menyen til definert kontekst                                                                               |
+| simple             | boolean                                         | false                 | Viser en forenklet header og footer                                                                               |
+| enforceLogin       | boolean                                         | false                 | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]                                        |
+| redirectToApp      | boolean                                         | false <br>(ditt-nav)  | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2]                                    |
+| redirectToUrl      | string                                          | undefined             | Sender brukeren til denne url'en etter innlogging via dekoratøren [2]                                             |
+| level              | Level3 \| Level4                                | Level3                | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]                                                |
+| language           | nb \| nn \                                      | en \                  | se \| pl                                                                                                          | nb                                                                    | Setter språket til dekoratøren ved server side rendering [3]         |
+| availableLanguages | [{ locale: nb \| nn \                           | en \                  | se \| pl, url: string }]                                                                                          | [ ]                                                                   | Setter alternativene til språkvelgeren ved server side rendering [4] |
+| breadcrumbs        | [{ title: string, url: string }]                | [ ]                   | Setter brødsmulestien for server side rendering [5]                                                               |
+| utilsBackground    | white \| gray \                                 | transparent           | transparent                                                                                                       | Setter bakgrunnsfargen på containeren til brødsmulesti og språkvelger |
+| feedback           | boolean                                         | false                 | Skjuler eller viser tilbakemeldingskomponentet                                                                    |
+| chatbot            | boolean                                         | true                  | Aktiverer eller deaktiverer Chatbot Frida [6]                                                                     |
+| chatbotVisible     | boolean                                         | false                 | Skjuler eller viser Chatbot Frida [7]                                                                             |
+| urlLookupTable     | boolean                                         | true                  | Aktiverer eller deaktiverer url-lookup-table [8]                                                                  |
+| taSurveys          | string,string,...                               | ''                    | Oppgir én eller flere trackingkoder (surveys) for Task Analytics                                                  |
+| shareScreen        | boolean                                         | true                  | Aktiverer eller deaktiverer skjerdelingskomponent                                                                 |
+| utloggingsvarsel   | boolean                                         | false(prod)/true(dev) | Aktiverer eller deaktiverer Utloggingsvarsel for login-token (5min left) (obs: denne er ikke klar for prod-bruk!) |
+| logoutUrl          | string                                          | undefined             | Setter url for logg-ut knappen [9]                                                                                |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
 [3] Språk settes automatisk client-side dersom nåværende url inneholder **/nb/**, **/nn/**, **/en/**, **/se/**, uavhengig av dette parameteret. <br>
 [4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
-[6] Dersom en chat-sesjon er aktiv, så vil denne holdes i gang på alle sider på nav.no, uavhengig av dette parameteret. <br>
-[7] Mapper prod-urler til dev-urler basert på [url-lookup-table](https://github.com/navikt/nav-dekoratoren-moduler/blob/master/src/csr/url-lookup-table/table.ts). <br>
-[8] Dersom denne er satt vil dekoratørens utloggingsfunksjonalitet forbigåes, og **alt rundt utlogging må håndteres av appen.**
+[6] Aktiverer/deaktiverer Chatbot Frida. Dersom dette settes til false, vil chatbot aldri vises på siden, selv om bruker har en aktiv chat-sesjon. <br>
+[7] Viser/skjuler Chatbot Frida. Dersom dette settes til true, vil chatbot alltid vises. Ved false vises chatbot kun når bruker har en aktiv chat-sesjon (med mindre 'chatbot' er satt til false) <br>
+[8] Mapper prod-urler til dev-urler basert på [url-lookup-table](https://github.com/navikt/nav-dekoratoren-moduler/blob/master/src/csr/url-lookup-table/table.ts). <br>
+[9] Dersom denne er satt vil dekoratørens utloggingsfunksjonalitet forbigåes, og **alt rundt utlogging må håndteres av appen.**
 
-:information_source: &nbsp; Samtlige parameter kan settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
-:information_source: &nbsp; Bakgrunnsfarge på brødsmulesti og språkvelger kan overstyres:
+Samtlige parameter kan settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
+
+Bakgrunnsfarge på brødsmulesti og språkvelger kan overstyres:
 
 ```
 .decorator-utils-container {
