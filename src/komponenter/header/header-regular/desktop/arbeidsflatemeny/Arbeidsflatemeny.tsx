@@ -68,15 +68,6 @@ const Arbeidsflatemeny = () => {
                     );
                 })}
             </ul>
-
-            {/* TODO: slett: */}
-            {/* <Tabs defaultValue="privatperson" size="medium" onChange={console.log} className="w-full ">
-                <Tabs.List>
-                    <Tabs.Tab value="privatperson" label="Privatperson" />
-                    <Tabs.Tab value="arbeidsgiver" label="Arbeidsgiver" />
-                    <Tabs.Tab value="samarbeidspartner" label="Samarbeidspartner" />
-                </Tabs.List>
-            </Tabs> */}
         </nav>
     );
 };
