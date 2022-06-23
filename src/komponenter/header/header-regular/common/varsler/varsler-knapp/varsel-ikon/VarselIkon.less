@@ -2,153 +2,26 @@
 
 .varselbjelle-ikon {
     @main-color: @navds-global-color-blue-500;
-
     @transition-duration: 0.35s;
     @transition: all @transition-duration ease-in;
-
-    @width: 26px;
-    @height: 30px;
-    @stroke-width: 2px;
-
-    @cross-width: 32px;
-    @cross-stroke-width: 3px;
-    @cross-scale: 0.8;
-
-    @ring-diameter: 11px;
-
-    @bell-width: 22px;
-    @bell-height: 22px;
-
-    @lip-width: @width;
-    @lip-height: 2px;
-
-    @clapper-thickness: 5px;
-    @clapper-length: @bell-height + @lip-height;
-
-    @ulest-diameter: 18px;
-    @ulest-top: @height * 0.2;
-    @ulest-left: @width * 0.05;
-
-    position: relative;
-    width: @width;
-    height: @height;
-    padding: 0;
-    top: 0;
-    border: none;
-    margin-right: 0.25rem;
-
-    .cross-line-transform(@rotation) {
-        border-radius: 0;
-        width: @cross-width;
-        height: @cross-stroke-width;
-        transform: translate(-2px, @height / 2) rotate(@rotation) scale(@cross-scale);
-    }
-
-    .fade-transform() {
-        z-index: 0;
-        opacity: 0;
-        transition-duration: @transition-duration / 2;
-        transform: translateY(@height / 2) scale(0);
-    }
-
-    &--open {
-        .varselbjelle-ikon__ring,
-        .varselbjelle-ikon__bell,
-        .varselbjelle-ikon__ulest-sirkel {
-            .fade-transform();
-        }
-
-        .varselbjelle-ikon__lip {
-            .cross-line-transform(-225deg);
-        }
-
-        .varselbjelle-ikon__clapper {
-            .cross-line-transform(-135deg);
-            transition-property: transform, width;
-        }
-
-        .varselbjelle-ikon__ulest-antall {
-            visibility: hidden;
-        }
-    }
-
-    &__ring {
-        position: absolute;
-        z-index: 3;
-
-        transform: translateX((@width - @ring-diameter) / 2);
-
-        height: @ring-diameter * 0.65;
-        width: @ring-diameter;
-
-        border-top-left-radius: @ring-diameter / 2;
-        border-top-right-radius: @ring-diameter / 2;
-        border: @main-color @stroke-width solid;
-        border-bottom: none;
-        background-color: white;
-
-        transition: @transition;
-    }
-
-    &__bell {
-        position: absolute;
-        z-index: 2;
-
-        transform: translate((@width - @bell-width) / 2, @ring-diameter * 0.35);
-
-        height: @bell-height;
-        width: @bell-width;
-
-        border-top-left-radius: @bell-height / 2;
-        border-top-right-radius: @bell-height / 2;
-        border: @main-color @stroke-width solid;
-        border-bottom: none;
-        background-color: white;
-
-        transition: @transition;
-    }
-
-    &__lip {
-        position: absolute;
-        z-index: 2;
-
-        transform: translateY(@bell-height + @ring-diameter * 0.25);
-
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-
-        width: @lip-width;
-        height: @lip-height;
-        background-color: @main-color;
-
-        transition: @transition;
-    }
-
-    &__clapper {
-        position: absolute;
-        z-index: 1;
-
-        transform: translate((@width - @clapper-length) / 2, @height / 2) rotate(90deg);
-
-        border-radius: @clapper-thickness / 2;
-
-        width: @clapper-length;
-        height: @clapper-thickness;
-        background-color: @main-color;
-
-        transition: @transition;
-    }
+    @ulest-diameter: 12px;
 
     &__ulest-sirkel {
         position: absolute;
         z-index: 4;
 
-        transform: translate(@ulest-left, @ulest-top);
-
         border-radius: 50%;
         height: @ulest-diameter;
         width: @ulest-diameter;
-        background-color: #df3f4e;
+        left: 12px;
+        top: 14px;
+
+        @media @screen-mobile {
+            left: 30px;
+            top: 2px;
+        }
+
+        background-color: @navds-semantic-color-feedback-danger-icon;
 
         display: flex;
         justify-content: center;
@@ -161,11 +34,4 @@
             transition: 0.2s all linear;
         }
     }
-
-    &__ulest-antall {
-        color: white;
-        font-weight: bold;
-        font-size: 12px;
-    }
 }
-//

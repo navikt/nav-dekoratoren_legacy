@@ -1,15 +1,11 @@
 import React, { Fragment, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
-import { Locale } from 'store/reducers/language-duck';
 import { Sticky } from 'komponenter/header/header-regular/common/sticky/Sticky';
 import MenyBakgrunn from 'komponenter/header/header-regular/common/bakgrunn/MenyBakgrunn';
 import { HeaderMenylinje } from 'komponenter/header/header-regular/HeaderMenylinje';
 
 export const HeaderRegular = () => {
-    const language = useSelector((state: AppState) => state.language.language);
-    const isLanguageNorwegian = language === Locale.BOKMAL || language === Locale.NYNORSK;
     const mobilMenyIsOpen = useSelector(
         (state: AppState) => state.dropdownToggles.hovedmeny || state.dropdownToggles.varsler
     );
@@ -23,7 +19,6 @@ export const HeaderRegular = () => {
     return (
         <Fragment>
             <div className="header-z-wrapper">
-                {isLanguageNorwegian && <Arbeidsflatemeny />}
                 <Sticky mobileFixed={mobilMenyIsOpen}>
                     <HeaderMenylinje />
                 </Sticky>
