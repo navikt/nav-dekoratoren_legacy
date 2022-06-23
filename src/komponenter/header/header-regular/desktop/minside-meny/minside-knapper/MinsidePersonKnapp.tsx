@@ -1,13 +1,17 @@
 import React from 'react';
+import BEMHelper from 'utils/bem';
 import { analyticsEvent } from 'utils/analytics/analytics';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { toggleMinsidemeny } from 'store/reducers/dropdown-toggle-duck';
+import classNames from 'classnames';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
 import { AppState } from 'store/reducers';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { MenuValue } from 'utils/meny-storage-utils';
-import { People } from '@navikt/ds-icons';
+import { People, Expand } from '@navikt/ds-icons';
+
+import './MinsideKnapper.less';
 
 const stateSelector = (state: AppState) => ({
     brukernavn: state.innloggingsstatus.data.name,
@@ -17,9 +21,13 @@ const stateSelector = (state: AppState) => ({
 type Props = {
     classname: string;
     id: string;
+    brukernavn: string;
 };
 
-export const MinsidePersonKnapp = ({ classname, id }: Props) => {
+const cls = BEMHelper('minside-person');
+
+export const MinsidePersonKnapp = ({ classname, id, brukernavn }: Props) => {
+    console.log('classname', classname);
     const dispatch = useDispatch();
     const { isOpen } = useSelector(stateSelector);
 
@@ -34,7 +42,6 @@ export const MinsidePersonKnapp = ({ classname, id }: Props) => {
 
     return (
         <MenylinjeKnapp
-            tekstId={'min-side'}
             onClick={toggleMinSideDropdown}
             isOpen={isOpen}
             ariaControls={classname}
@@ -42,6 +49,10 @@ export const MinsidePersonKnapp = ({ classname, id }: Props) => {
             id={id}
         >
             <People data-testid={'minside-person'} />
+            <div className={cls.element('brukernavn')}>{brukernavn}</div>
+            <div className={classNames(cls.element('chevron'), `${isOpen ? cls.modifier('chevron-open') : ''}`)}>
+                <Expand aria-hidden />
+            </div>
         </MenylinjeKnapp>
     );
 };
