@@ -49,7 +49,7 @@ export const HeaderRegular = () => {
         return () => {
             window.removeEventListener('focusin', focusHandler);
         };
-    }, [menyIsOpen]);
+    }, [menyIsOpen, dispatch]);
 
     return (
         <Fragment>
