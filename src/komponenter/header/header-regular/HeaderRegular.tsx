@@ -36,7 +36,7 @@ export const HeaderRegular = () => {
                 return;
             }
 
-            const focusIsInHeader = !!currentFocus.closest('#decorator-header');
+            const focusIsInHeader = !!currentFocus.closest('.siteheader');
             if (!focusIsInHeader) {
                 dispatch(lukkAlleDropdowns());
             }
