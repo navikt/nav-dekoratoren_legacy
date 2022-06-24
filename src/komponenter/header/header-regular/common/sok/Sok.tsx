@@ -15,7 +15,7 @@ import Cookies from 'js-cookie';
 import './Sok.less';
 
 interface Props {
-    id?: string;
+    id: string;
     isOpen: boolean;
     dropdownTransitionMs?: number;
     numResultsCallback?: (numResults: number) => void;
