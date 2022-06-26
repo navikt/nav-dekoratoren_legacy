@@ -37,8 +37,7 @@ export const LoggInnKnapp = () => {
     const isLoading =
         innloggingsstatus === Status.IKKE_STARTET ||
         innloggingsstatus === Status.PENDING ||
-        innloggingsstatus === Status.RELOADING ||
-        true;
+        innloggingsstatus === Status.RELOADING;
 
     const knappetekst = finnTekst(
         isLoading ? 'logg-inn-loader' : authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp',
