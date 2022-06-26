@@ -50,6 +50,8 @@ export const HeaderMenylinje = () => {
     const innloggetArbeidsgiver = innlogget && arbeidsflate === MenuValue.ARBEIDSGIVER;
     const isLanguageNorwegian = language === Locale.BOKMAL || language === Locale.NYNORSK;
 
+    const showMinsideButtons = innloggetPrivatperson || innloggetArbeidsgiver;
+
     return (
         // OBS: Id-en "Hovedmeny" benyttes til å bestemme høyden til menyen av andre team
         <nav className={cls.className} id="hovedmeny" aria-label={'Hovedmeny'}>
@@ -62,7 +64,7 @@ export const HeaderMenylinje = () => {
                         <DesktopHovedmenyKnapp kbNavMainState={kbNavMainState} />
                         <DesktopSokKnapp kbNavMainState={kbNavMainState} />
                     </div>
-                    {(innloggetPrivatperson || innloggetArbeidsgiver) && (
+                    {showMinsideButtons && (
                         <div className={cls.element('minside-knapper')}>
                             {innloggetPrivatperson && <VarslerKnapp kbNavMainState={kbNavMainState} />}
                             {innloggetPrivatperson && <DesktopMinsidemenyKnapp kbNavMainState={kbNavMainState} />}
@@ -71,9 +73,7 @@ export const HeaderMenylinje = () => {
                         </div>
                     )}
                     <MobilMenyKnapp />
-                    {!(innloggetPrivatperson || innloggetArbeidsgiver) && innloggingsstatus === Status.OK && (
-                        <LoggInnKnapp />
-                    )}
+                    {!showMinsideButtons && <LoggInnKnapp />}
                 </div>
             </div>
         </nav>
