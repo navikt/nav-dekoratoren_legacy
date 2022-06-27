@@ -6,7 +6,7 @@ import { AppState } from 'store/reducers';
 import Tekst from 'tekster/finn-tekst';
 import NavLogoLenke from 'komponenter/common/nav-logo/NavLogoLenke';
 import { ChatbotWrapper } from 'komponenter/footer/chatbot/ChatbotWrapper';
-import Logo from 'ikoner/meny/nav-logo-black.svg';
+import Logo from 'ikoner/meny/nav-logo-white.svg';
 import './FooterBottom.less';
 import { BodyShort } from '@navikt/ds-react';
 

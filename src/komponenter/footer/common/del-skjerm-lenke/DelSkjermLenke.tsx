@@ -40,6 +40,7 @@ export const DelSkjermLenke = () => {
                         onClick={openModal}
                         tekst={<Tekst id="footer-del-skjerm" />}
                         ikon={<Monitor className={cls.element('ikon')} />}
+                        className="lenke"
                     />
                 </BodyShort>
             </li>
