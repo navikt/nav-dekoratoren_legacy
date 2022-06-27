@@ -12,6 +12,26 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem;
 
+    &:active {
+        .navds-button__inner {
+            .hamburger-ikon {
+                span {
+                    background-color: @navds-global-color-white;
+                }
+            }
+            .sok-ikon {
+                &__line,
+                &__line-x {
+                    background-color: @navds-global-color-white;
+                }
+                &__circle {
+                    border-color: @navds-global-color-white;
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
     .navds-button__inner {
         position: relative;
         font-weight: 600;
