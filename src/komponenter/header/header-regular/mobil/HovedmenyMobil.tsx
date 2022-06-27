@@ -10,6 +10,7 @@ import SlideToClose from 'komponenter/header/header-regular/mobil/meny/innhold/u
 
 export const mobilmenyKnappId = 'mobilmeny-knapp-id';
 const classname = 'mobilmeny';
+const menuId = 'mobilmeny';
 
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
@@ -25,8 +26,8 @@ export const HovedmenyMobil = () => {
 
     return (
         <div className={'media-sm-mobil'}>
-            <HovedmenyKnapp id={mobilmenyKnappId} />
-            <EkspanderbarMeny isOpen={hovedIsOpen} classname={classname} id={classname}>
+            <HovedmenyKnapp id={mobilmenyKnappId} menuId={menuId} />
+            <EkspanderbarMeny isOpen={hovedIsOpen} classname={classname} id={menuId}>
                 <SlideToClose>
                     {meny.status === Status.OK ? (
                         <MobilMeny classname={classname} />

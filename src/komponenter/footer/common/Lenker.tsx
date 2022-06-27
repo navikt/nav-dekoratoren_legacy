@@ -12,6 +12,15 @@ interface Props {
     node?: MenyNode;
 }
 
+const localeSegments: { [locale: string]: string } = { no: 'no', en: 'en', se: 'se' };
+
+// Workaround to get the lang attribute for links to alternative language versions of the site
+const getLang = (url: string) => {
+    const lastSegment = url.split('/').slice(-1)[0];
+
+    return localeSegments[lastSegment];
+};
+
 export const FooterLenker = ({ node }: Props) => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
@@ -35,6 +44,7 @@ export const FooterLenker = ({ node }: Props) => {
                                 action: `kontakt/${lenkeNode.path}`,
                                 label: lenkeNode.displayName,
                             }}
+                            lang={getLang(lenkeNode.path)}
                         >
                             {lenkeNode.displayName}
                         </LenkeMedSporing>

@@ -9,6 +9,10 @@
     .menylinje-knapp-mixin();
     align-self: center;
 
+    &.login-button-loading:disabled {
+        opacity: 1;
+    }
+
     .login-icon-loading {
         animation-name: loading;
         animation-duration: 1500ms;

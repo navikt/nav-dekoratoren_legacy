@@ -10,14 +10,12 @@ type Props = {
     href: string;
     children: React.ReactNode;
     analyticsEventArgs?: AnalyticsEventArgs;
-    className?: string;
     classNameOverride?: string;
-    id?: string;
     onClick?: (...args: any) => void;
     tabIndex?: number;
     withChevron?: boolean;
     withLock?: boolean;
-};
+} & React.HTMLAttributes<HTMLAnchorElement>;
 
 export const LenkeMedSporing = ({
     href,
@@ -30,6 +28,7 @@ export const LenkeMedSporing = ({
     tabIndex,
     withChevron,
     withLock,
+    lang,
 }: Props) => {
     const classnameFull = `${classNameOverride || 'lenke dekorator-lenke'}${withChevron ? ' chevronlenke' : ''}${
         className ? ` ${className}` : ''
@@ -54,6 +53,7 @@ export const LenkeMedSporing = ({
                     analyticsEvent(analyticsEventArgs);
                 }
             }}
+            lang={lang}
         >
             <>
                 {(withLock || withChevron) && (
