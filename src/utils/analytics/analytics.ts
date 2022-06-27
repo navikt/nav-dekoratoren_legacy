@@ -17,6 +17,7 @@ export enum AnalyticsCategory {
 }
 
 export type AnalyticsEventArgs = {
+    eventName?: string;
     category: AnalyticsCategory;
     action: string;
     context?: MenuValue;
@@ -32,10 +33,10 @@ export const initAnalytics = (params: Params) => {
 };
 
 export const analyticsEvent = (props: AnalyticsEventArgs) => {
-    const { context, category, action, label, komponent, lenkegruppe } = props;
+    const { context, eventName, category, action, label, komponent, lenkegruppe } = props;
     const actionFinal = `${context ? context + '/' : ''}${action}`;
 
-    logAmplitudeEvent('navigere', {
+    logAmplitudeEvent(eventName || 'navigere', {
         destinasjon: label,
         lenketekst: actionFinal,
         kategori: category,
