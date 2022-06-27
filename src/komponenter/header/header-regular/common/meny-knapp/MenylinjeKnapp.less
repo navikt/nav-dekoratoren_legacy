@@ -9,6 +9,26 @@
         box-shadow: inset 0 0 0 2px @navds-semantic-color-interaction-primary;
     }
 
+    &:active {
+        .navds-button__inner {
+            .hamburger-ikon {
+                span {
+                    background-color: @navds-global-color-white;
+                }
+            }
+            .sok-ikon {
+                &__line,
+                &__line-x {
+                    background-color: @navds-global-color-white;
+                }
+                &__circle {
+                    border-color: @navds-global-color-white;
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
     .navds-button__inner {
         position: relative;
         font-weight: 600;
