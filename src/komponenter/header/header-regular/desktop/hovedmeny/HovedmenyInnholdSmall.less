@@ -1,0 +1,36 @@
+@import (reference) '../../../../../styling-variabler.less';
+
+.hovedmeny-innhold-small {
+    .arbeidsflate-lenkepanel {
+        border: 0;
+
+        &:not(:last-child) {
+            margin-bottom: 0.5rem;
+        }
+    }
+}
+
+.hovedseksjon-small {
+    display: flex;
+    justify-content: space-between;
+
+    & > :not(:last-child) {
+        margin-right: 1rem;
+    }
+
+    .lenkeseksjon {
+        flex-basis: 36%;
+    }
+
+    .arbeidsflater-small {
+        flex-basis: 28%;
+
+        .navds-link-panel__chevron {
+            display: none;
+        }
+
+        .compact-chevron {
+            display: inline-block;
+        }
+    }
+}
