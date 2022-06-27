@@ -2,6 +2,7 @@
 
 .arbeidsflate-lenkepanel {
     border: 2px @navds-global-color-blue-500 solid;
+    border-radius: 4px;
     margin-bottom: 0;
 
     &:hover {
@@ -10,9 +11,29 @@
 
         .navds-link-panel__chevron,
         .navds-link-panel__title,
-        .navds-link-panel__description {
+        .navds-link-panel__description,
+        .compact-chevron {
             color: @navds-global-color-white;
         }
+
+        .compact-chevron {
+            transform: translateX(6px);
+            stroke: @navds-global-color-white;
+        }
+    }
+
+    .compact-chevron {
+        display: none;
+        align-self: center;
+        margin-right: 8px;
+        margin-left: -4px;
+        stroke: @navds-global-color-blue-500;
+        transition: transform 0.25s;
+    }
+
+    &__text {
+        display: flex;
+        align-items: center;
     }
 
     .navds-link-panel__content {
@@ -61,12 +82,11 @@
             margin-bottom: 0.25rem;
 
             .navds-link-panel__chevron {
+                display: none;
+            }
+
+            .compact-chevron {
                 display: inline-block;
-                align-self: center;
-                margin-right: 8px;
-                margin-left: -4px;
-                left: 0;
-                transition: left 0.25s;
             }
         }
     }

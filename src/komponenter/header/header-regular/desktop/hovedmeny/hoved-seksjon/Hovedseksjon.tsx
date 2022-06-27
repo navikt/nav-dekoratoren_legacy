@@ -42,16 +42,15 @@ export const Hovedseksjon = ({ menyLenker, classname, numCols }: Props) => {
     return (
         <div className={cls.element('hoved-seksjon')} data-testid={'hovedseksjon'}>
             <MenySeksjoner numCols={numCols} layout={layout}>
-                {menyLenker &&
-                    menyLenker.children.map((menygruppe, index) => (
-                        <MenyLenkeSeksjon
-                            menygruppe={menygruppe}
-                            colIndex={index}
-                            rowIndex={1}
-                            kbNodeGroup={KbNavGroup.Hovedmeny}
-                            key={menygruppe.displayName}
-                        />
-                    ))}
+                {menyLenker.children.map((menygruppe, index) => (
+                    <MenyLenkeSeksjon
+                        menygruppe={menygruppe}
+                        colIndex={index}
+                        rowIndex={1}
+                        kbNodeGroup={KbNavGroup.Hovedmeny}
+                        key={menygruppe.displayName}
+                    />
+                ))}
             </MenySeksjoner>
         </div>
     );
