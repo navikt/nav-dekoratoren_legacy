@@ -47,7 +47,7 @@ export const LoggInnKnapp = () => {
     return (
         <div className={'login-knapp-container'}>
             <Button
-                className={`login-knapp${authenticated ? ' logout-knapp' : ''}`}
+                className={`login-knapp${authenticated ? ' logout-knapp' : isLoading ? ' login-button-loading' : ''}`}
                 onClick={handleButtonClick}
                 id={loginKnappId}
                 variant={'tertiary'}
@@ -61,4 +61,3 @@ export const LoggInnKnapp = () => {
 };
 
 export default LoggInnKnapp;
-//
