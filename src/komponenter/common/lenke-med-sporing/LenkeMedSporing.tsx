@@ -10,9 +10,7 @@ type Props = {
     href: string;
     children: React.ReactNode;
     analyticsEventArgs?: AnalyticsEventArgs;
-    className?: string;
     classNameOverride?: string;
-    id?: string;
     onClick?: (...args: any) => void;
     tabIndex?: number;
     withChevron?: boolean;

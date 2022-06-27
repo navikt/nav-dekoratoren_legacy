@@ -12,19 +12,13 @@ interface Props {
     node?: MenyNode;
 }
 
-const localeSegments: { [locale: string]: true } = { no: true, en: true, se: true };
+const localeSegments: { [locale: string]: string } = { no: 'no', en: 'en', se: 'se' };
 
 // Workaround to get the lang attribute for links to alternative language versions of the site
 const getLang = (url: string) => {
     const lastSegment = url.split('/').slice(-1)[0];
-    console.log(lastSegment);
 
-    if (localeSegments[lastSegment]) {
-        console.log(localeSegments[lastSegment]);
-        return lastSegment;
-    }
-
-    return undefined;
+    return localeSegments[lastSegment];
 };
 
 export const FooterLenker = ({ node }: Props) => {
