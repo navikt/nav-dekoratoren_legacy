@@ -10,7 +10,7 @@ export type SkipLinkProps = {
 export const SkipLinkElement = ({ tekstId, onClick, className }: SkipLinkProps) => (
     <li>
         <a
-            href={'/'}
+            href={'#'}
             className={`skiplink ${className || ''}`}
             onClick={(e) => {
                 e.preventDefault();
