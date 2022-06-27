@@ -22,6 +22,33 @@
         margin: 0;
     }
 
+    .til-toppen-innhold {
+        display: flex;
+        justify-content: start;
+        .lenke-med-ikon {
+            width: 100%;
+            text-decoration: underline;
+            color: white;
+            font-size: 1.25rem;
+            svg {
+                height: 24px;
+                width: 24px;
+                color: white;
+                fill: white;
+                stroke: white;
+            }
+            &__ikon {
+                margin: 0;
+            }
+            &:focus {
+                svg {
+                    fill: @navds-global-color-blue-500;
+                    stroke: @navds-global-color-blue-500;
+                }
+            }
+        }
+    }
+
     .topp-kolonner {
         .menylenker-seksjon {
             margin-bottom: 2rem;
@@ -30,33 +57,6 @@
         .menylenker-overskrift {
             font-weight: bolder;
             margin-bottom: 0.5rem;
-        }
-
-        .til-toppen-innhold {
-            display: flex;
-            justify-content: start;
-            .lenke-med-ikon {
-                width: 100%;
-                text-decoration: underline;
-                color: white;
-                font-size: 1.25rem;
-                svg {
-                    height: 24px;
-                    width: 24px;
-                    color: white;
-                    fill: white;
-                    stroke: white;
-                }
-                &__ikon {
-                    margin: 0;
-                }
-                &:focus {
-                    svg {
-                        fill: @navds-global-color-blue-500;
-                        stroke: @navds-global-color-blue-500;
-                    }
-                }
-            }
         }
     }
 
