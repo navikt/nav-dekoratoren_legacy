@@ -16,6 +16,7 @@ export const DelSkjermLenke = () => {
 
     const openModal = () => {
         analyticsEvent({
+            eventName: 'Modal åpnet',
             category: AnalyticsCategory.Footer,
             action: `kontakt/del-skjerm-open`,
         });
@@ -24,6 +25,7 @@ export const DelSkjermLenke = () => {
 
     const closeModal = () => {
         analyticsEvent({
+            eventName: 'Modal lukket',
             category: AnalyticsCategory.Footer,
             action: `kontakt/del-skjerm-close`,
         });
