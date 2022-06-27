@@ -58,6 +58,7 @@ const Sok = (props: Props) => {
     const onReset = () => {
         setSearchInput('');
         setLoading(false);
+        document.getElementById(props.id)?.focus();
     };
 
     const getSearchUrl = () => {
