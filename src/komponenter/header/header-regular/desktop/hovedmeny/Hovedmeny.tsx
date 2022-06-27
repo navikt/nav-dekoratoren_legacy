@@ -29,7 +29,7 @@ export const Hovedmeny = ({ kbNavMainState }: Props) => {
     const { arbeidsflate, menyPunkter, language, isOpen } = useSelector(stateSelector);
 
     const hovedmenyPunkter = getHovedmenyNode(menyPunkter.data, language, arbeidsflate);
-    //
+
     // Hide empty menues
     if (menyPunkter.status === Status.OK && !hovedmenyPunkter?.hasChildren) {
         return null;
