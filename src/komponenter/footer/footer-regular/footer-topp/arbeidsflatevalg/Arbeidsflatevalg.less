@@ -7,53 +7,22 @@
 .arbeidsflatevalg {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    gap: 1rem;
     margin: 0;
+    font-size: 1.5rem;
+
+    .lenke {
+        text-decoration: none;
+    }
+
+    svg {
+        fill: white;
+        stroke: white;
+    }
 
     li {
         margin-bottom: 0;
-    }
-
-    .arbeidsflate-lenkepanel {
-        border-color: @navds-global-color-white;
-        background-color: @navds-global-color-deepblue-600;
-        border-radius: 8px;
-        height: 100%; // Ensure same height for all panels
-
-        .lenkepanel__heading {
-            margin-bottom: 0.5rem;
-        }
-
-        .lenkepanel__indikator,
-        .lenkepanel__heading,
-        .arbeidsflate-lenkepanel__stikkord {
-            color: @navds-global-color-white;
-        }
-
-        &__innhold {
-            min-height: 74px;
-        }
-
-        &:hover {
-            border-color: @navds-global-color-white;
-            background-color: transparent;
-
-            .lenkepanel__indikator,
-            .lenkepanel__heading,
-            .arbeidsflate-lenkepanel__stikkord {
-                color: @navds-global-color-white;
-            }
-        }
-
-        &:focus {
-            border-color: @navds-global-color-white;
-            background-color: @navds-global-color-white;
-
-            .lenkepanel__indikator,
-            .lenkepanel__heading,
-            .arbeidsflate-lenkepanel__stikkord {
-                color: @navds-global-color-blue-500;
-            }
-        }
     }
 
     @media @screen-desktop {
@@ -63,15 +32,17 @@
     }
 
     @media @screen-desktop-medium-up {
-        flex-direction: column;
-
         li {
-            margin-bottom: 1rem;
             width: auto;
         }
     }
 
     @media @screen-desktop-large-up {
         justify-content: left;
+    }
+
+    @media @screen-mobile {
+        font-size: 1.125rem;
+        gap: 1.5rem;
     }
 }
