@@ -69,6 +69,8 @@ const Sok = (props: Props) => {
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         analyticsEvent({
+            eventName: 'søk',
+            destination: getSearchUrl(),
             category: AnalyticsCategory.Header,
             label: searchInput,
             action: 'søk',
@@ -143,6 +145,13 @@ const fetchSearch = (props: FetchResult) => {
     const url = `${APP_URL}/api/sok`;
     setSubmitTrackerCookie();
 
+    analyticsEvent({
+        eventName: 'søk',
+        destination: url,
+        category: AnalyticsCategory.Header,
+        label: value,
+        action: 'søk-dynamisk',
+    });
     fetch(`${url}?ord=${encodeURIComponent(value)}`)
         .then((response) => {
             if (response.ok) {
