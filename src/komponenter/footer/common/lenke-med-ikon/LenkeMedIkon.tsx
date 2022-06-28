@@ -25,7 +25,6 @@ const LenkeMedIkon = ({ className, href = '#', onClick, ikon, tekst, venstrestil
             })}
             onClick={onClick}
             href={href}
-            role="button"
             id={id}
         >
             <span>{tekst}</span>
