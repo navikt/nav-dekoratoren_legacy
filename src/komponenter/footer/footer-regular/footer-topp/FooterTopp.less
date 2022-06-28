@@ -47,16 +47,22 @@
                     fill: white;
                     stroke: white;
                 }
+
                 &__ikon {
                     display: flex;
                     align-items: center;
                     margin: 0;
                 }
+
                 &:focus {
-                    svg {
-                        fill: white;
-                        stroke: white;
-                        color: white;
+                    color: @navds-global-color-blue-500;
+                    background-color: white;
+                    .lenke-med-ikon__ikon {
+                        svg {
+                            stroke: @navds-global-color-blue-500;
+                            color: @navds-global-color-blue-500;
+                            fill: @navds-global-color-blue-500;
+                        }
                     }
                 }
             }
