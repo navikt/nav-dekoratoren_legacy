@@ -41,6 +41,7 @@ export interface Params {
     BREADCRUMBS?: Breadcrumb[];
     FEEDBACK: boolean;
     CHATBOT: boolean;
+    CHATBOT_VISIBLE: boolean;
     URL_LOOKUP_TABLE: boolean;
     SHARE_SCREEN: boolean;
     UTILS_BACKGROUND?: string;
@@ -87,6 +88,7 @@ export const initialState: Environment = {
         FEEDBACK: false,
         TA_SURVEYS: [],
         CHATBOT: false,
+        CHATBOT_VISIBLE: false,
         URL_LOOKUP_TABLE: false,
         SHARE_SCREEN: false,
         UTLOGGINGSVARSEL: false,
