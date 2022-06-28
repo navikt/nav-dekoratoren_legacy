@@ -66,7 +66,6 @@ const FooterTopp = () => {
                 <div className="menylenker-seksjon til-toppen">
                     <LenkeMedIkon
                         onClick={scrollToTop}
-                        className={'til-toppen-lenke'}
                         tekst={<Tekst id="footer-til-toppen" />}
                         ikon={<Up />}
                         venstrestiltIkon={true}

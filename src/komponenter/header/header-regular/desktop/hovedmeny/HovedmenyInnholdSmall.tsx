@@ -69,7 +69,7 @@ export const HovedmenyInnholdSmall = ({
                                 label: lenke.key,
                             }}
                             enableCompactView={true}
-                            withDescription={arbeidsflate === lenke.key}
+                            withDescription={false}
                             key={lenke.lenkeTekstId}
                         />
                     ))}
