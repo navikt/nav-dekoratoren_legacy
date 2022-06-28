@@ -14,9 +14,12 @@ import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { finnTekst } from 'tekster/finn-tekst';
 import { AnalyticsEventArgs } from 'utils/analytics/analytics';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
+import classNames from 'classnames';
+import { Next } from '@navikt/ds-icons';
 
 import './ArbeidsflateLenkepanel.less';
-import classNames from 'classnames';
+
+const cls = BEMHelper('arbeidsflate-lenkepanel');
 
 interface Props {
     lenke: ArbeidsflateLenke;
@@ -25,10 +28,18 @@ interface Props {
     inverted?: boolean;
     enableCompactView?: boolean;
     id?: string;
+    withDescription?: boolean;
 }
 
-const ArbeidsflateLenkepanel = ({ lenke, language, analyticsEventArgs, enableCompactView, inverted, id }: Props) => {
-    const cls = BEMHelper('arbeidsflate-lenkepanel');
+const ArbeidsflateLenkepanel = ({
+    lenke,
+    language,
+    analyticsEventArgs,
+    enableCompactView,
+    inverted,
+    id,
+    withDescription = true,
+}: Props) => {
     const dispatch = useDispatch();
     const [, setCookie] = useCookies();
 
@@ -54,11 +65,14 @@ const ArbeidsflateLenkepanel = ({ lenke, language, analyticsEventArgs, enableCom
         >
             <div>
                 <LinkPanel.Title className={cls.element('text')}>
+                    <Next className={'compact-chevron'} />
                     <Tekst id={lenke.lenkeTekstId} />
                 </LinkPanel.Title>
-                <LinkPanel.Description className={cls.element('text')}>
-                    {finnTekst(lenke.stikkordId, language)}
-                </LinkPanel.Description>
+                {withDescription && (
+                    <LinkPanel.Description className={cls.element('text')}>
+                        {finnTekst(lenke.stikkordId, language)}
+                    </LinkPanel.Description>
+                )}
             </div>
         </LinkPanel>
     );

@@ -45,7 +45,7 @@ const Sok = (props: Props) => {
 
     useEffect(() => {
         if (!props.isOpen) {
-            onReset();
+            clearInput();
         }
     }, [props.isOpen]);
 
@@ -55,9 +55,13 @@ const Sok = (props: Props) => {
         }
     }, [result]);
 
-    const onReset = () => {
+    const clearInput = () => {
         setSearchInput('');
         setLoading(false);
+    };
+
+    const onReset = () => {
+        clearInput();
         document.getElementById(props.id)?.focus();
     };
 
