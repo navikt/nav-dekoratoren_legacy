@@ -5,7 +5,8 @@ import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeid
 import { AppState } from 'store/reducers';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { Locale } from 'store/reducers/language-duck';
-import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
+import Tekst from 'tekster/finn-tekst';
 import './Arbeidsflatevalg.less';
 
 const stateSelector = (state: AppState) => ({
@@ -25,21 +26,22 @@ const Arbeidsflatevalg = () => {
     }, [arbeidsflate]);
 
     return language === Locale.BOKMAL || language === Locale.NYNORSK ? (
-        <div className="menylenker-seksjon arbeidsflate">
+        <div className="menylenker-seksjon">
             <ul className="arbeidsflatevalg">
                 {lenker.map((lenke: ArbeidsflateLenke) => (
                     <li key={lenke.key}>
-                        <ArbeidsflateLenkepanel
-                            lenke={lenke}
-                            inverted
-                            language={language}
+                        <LenkeMedSporing
+                            href={lenke.url}
                             analyticsEventArgs={{
                                 context: arbeidsflate,
                                 category: AnalyticsCategory.Footer,
                                 action: 'arbeidsflate-valg',
                                 label: lenke.key,
                             }}
-                        />
+                            withChevron
+                        >
+                            <Tekst id={lenke.lenkeTekstId} />
+                        </LenkeMedSporing>
                     </li>
                 ))}
             </ul>
