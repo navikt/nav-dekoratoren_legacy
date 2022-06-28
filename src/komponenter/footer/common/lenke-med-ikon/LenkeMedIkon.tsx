@@ -16,7 +16,7 @@ interface Props {
     id?: string;
 }
 
-const LenkeMedIkon = ({ className, href = '#', onClick, ikon, tekst, venstrestiltIkon = false, id = '' }: Props) => {
+const LenkeMedIkon = ({ className, href = '#', onClick, ikon, tekst, venstrestiltIkon = false, id }: Props) => {
     const cls = BEMHelper('lenke-med-ikon');
     return (
         <Link

@@ -64,15 +64,13 @@ const FooterTopp = () => {
         <div className={cls.className}>
             <div className="topp-kontainer">
                 <div className="menylenker-seksjon til-toppen">
-                    <div className="til-toppen-innhold">
-                        <LenkeMedIkon
-                            onClick={scrollToTop}
-                            tekst={<Tekst id="footer-til-toppen" />}
-                            ikon={<Up />}
-                            venstrestiltIkon={true}
-                            id="footer-til-toppen"
-                        />
-                    </div>
+                    <LenkeMedIkon
+                        onClick={scrollToTop}
+                        tekst={<Tekst id="footer-til-toppen" />}
+                        ikon={<Up />}
+                        venstrestiltIkon={true}
+                        id="footer-til-toppen"
+                    />
                 </div>
                 <div className="topp-kolonner">
                     <div className="venstre">
