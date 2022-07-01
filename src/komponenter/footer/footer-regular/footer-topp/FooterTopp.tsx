@@ -8,7 +8,6 @@ import { AppState } from 'store/reducers';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import BEMHelper from 'utils/bem';
-import Arbeidsflatevalg from './arbeidsflatevalg/Arbeidsflatevalg';
 import { LinksLoader } from '../../../common/content-loaders/LinkLoader';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import { Locale } from 'store/reducers/language-duck';
@@ -110,7 +109,6 @@ const FooterTopp = () => {
                               ))}
                     </div>
                     <div className="høyre">
-                        <Arbeidsflatevalg />
                         <div className={cls.element('bottom-lenker')}>
                             <ul className={cls.element('personvern-lenker')}>
                                 <FooterLenker node={personvernNode} />
