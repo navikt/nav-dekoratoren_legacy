@@ -11,7 +11,9 @@ import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
 import { getSalesforceContainer } from './server/utils';
+
 import './index.less';
+import '@navikt/ds-css/dist/index.css';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
 

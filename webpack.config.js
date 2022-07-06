@@ -67,7 +67,7 @@ const commonConfig = {
                 },
             },
             {
-                test: /\.less$/,
+                test: /\.(less|css)$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     { loader: 'css-loader', options: {} },
@@ -93,6 +93,7 @@ const commonConfig = {
                                             /\b(\w*decorator-dummy-app\w*)\b/,
                                             '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
                                             '#nav-chatbot',
+                                            ':root',
                                         ],
                                     }),
                                     autoprefixer({}),
@@ -120,11 +121,6 @@ const commonConfig = {
     optimization: {
         emitOnErrors: true,
         minimizer: [new CssMinimizerPlugin(), `...`],
-        /*
-        splitChunks: {
-            chunks: 'all',
-        },
-        */
     },
     output: {
         path: path.resolve(__dirname, 'build'),
