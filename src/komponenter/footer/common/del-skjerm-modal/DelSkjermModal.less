@@ -4,11 +4,12 @@
     &__modal.navds-modal {
         max-width: 35rem;
         overflow: visible;
+        padding: 1rem;
     }
 
     &__content {
         @media @screen-desktop {
-            padding: 3rem 4rem 2rem 4rem;
+            padding: 2rem 2rem 1rem 2rem;
         }
         @media @screen-mobile {
             padding-top: 2rem;
@@ -47,12 +48,10 @@
     &__knapper {
         margin-top: 1rem;
         display: flex;
+        gap: 0.5rem;
+
         @media @screen-mobile {
             flex-direction: column;
-        }
-
-        > * {
-            margin: 0.5rem 0.5rem 0 0;
         }
     }
 }
