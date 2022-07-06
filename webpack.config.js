@@ -6,7 +6,7 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 const nodeExternals = require('webpack-node-externals');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const modifySelectors = require('modify-selectors');
 
 const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
@@ -78,6 +78,10 @@ const commonConfig = {
                             postcssOptions: {
                                 ident: 'postcss',
                                 plugins: [
+                                    modifySelectors({
+                                        enabled: true,
+                                        replace: [{ match: ':root', with: '.decorator-wrapper' }],
+                                    }),
                                     prefixer({
                                         prefix: '.decorator-wrapper',
                                         exclude: [
@@ -93,6 +97,7 @@ const commonConfig = {
                                             '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
                                             '#nav-chatbot',
                                             ':root',
+                                            '.decorator-wrapper',
                                         ],
                                     }),
                                     autoprefixer({}),
@@ -116,7 +121,6 @@ const commonConfig = {
         new SpriteLoaderPlugin({
             plainSprite: true,
         }),
-        new BundleAnalyzerPlugin(),
     ],
     optimization: {
         emitOnErrors: true,
