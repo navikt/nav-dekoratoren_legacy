@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { createMiddleware } from '@promster/express';
 import { getSummary, getContentType } from '@promster/express';
+import rewrite from 'express-urlrewrite';
 import { clientEnv, fiveMinutesInSeconds } from './utils';
 import cookiesMiddleware from 'universal-cookie-express';
 import { template } from './template';
@@ -127,6 +128,8 @@ app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));
 // Static files
 app.use(
     createPaths('/'),
+    // Strip cache buster segment from client.css/js files
+    rewrite('*/client:buildId.(css|js)', '$1/client.$3'),
     express.static(buildPath, {
         setHeaders: (res: Response) => {
             if (isProduction) {
