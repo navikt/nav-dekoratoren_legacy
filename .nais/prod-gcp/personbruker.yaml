@@ -64,10 +64,10 @@ spec:
       value: {{SOLUTION_ID}}
     - name: NAV_GROUP_ID
       value: {{NAV_GROUP_ID}}
-
   resources:
     limits:
       cpu: '3'
       memory: 1500Mi
     requests:
-      memory: 1500Mi
+      cpu: 500m
+      memory: 500Mi
