@@ -7,6 +7,7 @@ const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 const nodeExternals = require('webpack-node-externals');
 const modifySelectors = require('modify-selectors');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
@@ -121,6 +122,7 @@ const commonConfig = {
         new SpriteLoaderPlugin({
             plainSprite: true,
         }),
+        new BundleAnalyzerPlugin({ enabled: process.env.ANALYZE_BUNDLE === 'true' }),
     ],
     optimization: {
         emitOnErrors: true,
