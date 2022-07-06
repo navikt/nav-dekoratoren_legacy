@@ -11,12 +11,33 @@
 
     &__topp-liste-rad {
         white-space: nowrap;
-        margin: 0 auto;
+        margin: 0;
     }
 
     ul,
     li {
         height: 100%;
+
+        //Hardkoder bredden for Privat Arbeidsgiver Samarbeidspartner i bold.
+        //Hindrer at teksten flytter seg noen piksler når man bytter fane.
+        &:nth-child(1) {
+            width: 69.96px;
+            > * {
+                width: 69.96px;
+            }
+        }
+        &:nth-child(2) {
+            width: 121.37px;
+            > * {
+                width: 121.37px;
+            }
+        }
+        &:nth-child(3) {
+            width: 174.52px;
+            > * {
+                width: 174.52px;
+            }
+        }
     }
 
     &__liste-element {
@@ -58,6 +79,7 @@
     &__lenke-inner {
         height: 100%;
         display: flex;
+        justify-content: center;
         margin: 0 0.75rem;
         align-items: center;
     }
