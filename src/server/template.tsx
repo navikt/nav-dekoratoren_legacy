@@ -35,6 +35,7 @@ export const template = (req: Request) => {
 
     // Resources
     const fileEnv = `${env.APP_URL}/env`;
+    // Insert buildId-segment as a cache buster
     const fileCss = `${env.APP_URL}/css/client.${buildId}.css`;
     const fileScript = `${env.APP_URL}/client.${buildId}.js`;
 

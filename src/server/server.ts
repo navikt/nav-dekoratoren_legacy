@@ -128,6 +128,7 @@ app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));
 // Static files
 app.use(
     createPaths('/'),
+    // Strip cache buster segment from client.css/js files
     rewrite('*/client:buildId.(css|js)', '$1/client.$3'),
     express.static(buildPath, {
         setHeaders: (res: Response) => {
