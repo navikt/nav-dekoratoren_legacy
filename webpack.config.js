@@ -122,7 +122,7 @@ const commonConfig = {
         new SpriteLoaderPlugin({
             plainSprite: true,
         }),
-        new BundleAnalyzerPlugin({ enabled: process.env.ANALYZE_BUNDLE === 'true' }),
+        ...(process.env.ANALYZE_BUNDLE === 'true' ? [new BundleAnalyzerPlugin()] : []),
     ],
     optimization: {
         emitOnErrors: true,
