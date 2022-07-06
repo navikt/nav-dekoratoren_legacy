@@ -20,7 +20,7 @@ spec:
     path: /dekoratoren/metrics
   replicas:
     min: 2
-    max: 4
+    max: 8
   ingresses:
     - https://appres.nav.no/common-html/v4/navno
     - https://www.nav.no/dekoratoren
