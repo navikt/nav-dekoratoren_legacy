@@ -12,6 +12,7 @@ import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { erNavDekoratoren } from 'utils/Environment';
 import { MenuValue } from '../../../../../utils/meny-storage-utils';
+import { finnTekst } from 'tekster/finn-tekst';
 
 import './Arbeidsflatemeny.less';
 
@@ -29,6 +30,7 @@ const Arbeidsflatemeny = () => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const [, setCookie] = useCookies([CookieName.DECORATOR_CONTEXT]);
     const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
+    const { language } = useSelector((state: AppState) => state.language);
 
     return (
         <nav className={cls.className} id={cls.className} aria-label="Velg brukergruppe">
@@ -58,7 +60,10 @@ const Arbeidsflatemeny = () => {
                                     label: lenke.key,
                                 }}
                             >
-                                <div className={cls.element('lenke-inner')}>
+                                <div
+                                    className={cls.element('lenke-inner')}
+                                    data-text={finnTekst(lenke.lenkeTekstId, language)}
+                                >
                                     <BodyShort>
                                         <Tekst id={lenke.lenkeTekstId} />
                                     </BodyShort>

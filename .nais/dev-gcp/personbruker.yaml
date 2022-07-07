@@ -2,71 +2,73 @@
 apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
-    name: nav-dekoratoren
-    namespace: {{namespace}}
-    labels:
-        team: personbruker
+  name: nav-dekoratoren
+  namespace: {{namespace}}
+  labels:
+    team: personbruker
 spec:
-    image: {{image}}:{{version}}
-    port: 8088
-    liveness:
-        path: /isAlive
-        initialDelay: 10
-    readiness:
-        path: /isReady
-        initialDelay: 10
-    prometheus:
-        enabled: true
-        path: /metrics
-    replicas:
-        min: 2
-        max: 4
-    ingresses:
-        - https://www.dev.nav.no/dekoratoren
-        - https://dekoratoren.dev.nav.no
-        - https://dekoratoren.ekstern.dev.nav.no
-    accessPolicy:
-        outbound:
-            external:
-                - host: www.dev.nav.no
-                - host: innloggingslinje-api.dev.nav.no
-    env:
-        - name: ENV
-          value: dev
-        - name: XP_BASE_URL
-          value: https://www.dev.nav.no
-        - name: APP_BASE_URL
-          value: https://dekoratoren.ekstern.dev.nav.no
-        - name: API_XP_SERVICES_URL
-          value: https://www.dev.nav.no/_/service
-        - name: API_VARSELINNBOKS_URL
-          value: https://www.dev.nav.no/tms-varselbjelle-api
-        - name: API_INNLOGGINGSLINJE_URL
-          value: https://innloggingsstatus.dev.nav.no/person/innloggingsstatus
-        - name: API_UNLEASH_PROXY_URL
-          value: https://person.dev.nav.no/person/pb-unleash-proxy
-        - name: MINSIDE_ARBEIDSGIVER_URL
-          value: https://min-side-arbeidsgiver.dev.nav.no/min-side-arbeidsgiver/
-        - name: DITT_NAV_URL
-          value: https://www.dev.nav.no/person/dittnav/
-        - name: LOGIN_URL
-          value: https://loginservice.dev.nav.no
-        - name: LOGOUT_URL
-          value: https://loginservice.dev.nav.no/slo
-        - name: FEEDBACK_API_URL
-          value: https://dekoratoren-api.dev-gcp.nais.io/event
-        - name: OPPORTUNITY_ID
-          value: {{OPPORTUNITY_ID}}
-        - name: CASETYPE_ID
-          value: {{CASETYPE_ID}}
-        - name: SOLUTION_ID
-          value: {{SOLUTION_ID}}
-        - name: NAV_GROUP_ID
-          value: {{NAV_GROUP_ID}}
-        
-    resources:
-        limits:
-            cpu: '3'
-            memory: 1500Mi
-        requests:
-            memory: 1500Mi
+  image: {{image}}:{{version}}
+  port: 8088
+  liveness:
+    path: /isAlive
+    initialDelay: 10
+  readiness:
+    path: /isReady
+    initialDelay: 10
+  prometheus:
+    enabled: true
+    path: /metrics
+  replicas:
+    min: 2
+    max: 4
+  ingresses:
+    - https://www.dev.nav.no/dekoratoren
+    - https://dekoratoren.dev.nav.no
+    - https://dekoratoren.ekstern.dev.nav.no
+  accessPolicy:
+    outbound:
+      external:
+        - host: www.dev.nav.no
+        - host: innloggingslinje-api.dev.nav.no
+  env:
+    - name: ENV
+      value: dev
+    - name: XP_BASE_URL
+      value: https://www.dev.nav.no
+    - name: APP_BASE_URL
+      value: https://dekoratoren.ekstern.dev.nav.no
+    - name: API_XP_SERVICES_URL
+      value: https://www.dev.nav.no/_/service
+    - name: API_VARSELINNBOKS_URL
+      value: https://www.dev.nav.no/tms-varselbjelle-api
+    - name: API_INNLOGGINGSLINJE_URL
+      value: https://innloggingsstatus.dev.nav.no/person/innloggingsstatus
+    - name: API_UNLEASH_PROXY_URL
+      value: https://person.dev.nav.no/person/pb-unleash-proxy
+    - name: MINSIDE_ARBEIDSGIVER_URL
+      value: https://min-side-arbeidsgiver.dev.nav.no/min-side-arbeidsgiver/
+    - name: DITT_NAV_URL
+      value: https://www.dev.nav.no/person/dittnav/
+    - name: LOGIN_URL
+      value: https://loginservice.dev.nav.no
+    - name: LOGOUT_URL
+      value: https://loginservice.dev.nav.no/slo
+    - name: FEEDBACK_API_URL
+      value: https://dekoratoren-api.dev-gcp.nais.io/event
+    - name: OPPORTUNITY_ID
+      value: {{OPPORTUNITY_ID}}
+    - name: CASETYPE_ID
+      value: {{CASETYPE_ID}}
+    - name: SOLUTION_ID
+      value: {{SOLUTION_ID}}
+    - name: NAV_GROUP_ID
+      value: {{NAV_GROUP_ID}}
+    - name: BUILD_ID
+      value: {{BUILD_ID}}
+  resources:
+    limits:
+      cpu: '3'
+      memory: 1500Mi
+    requests:
+      cpu: 500m
+      memory: 500Mi

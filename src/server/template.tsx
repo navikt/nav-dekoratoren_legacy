@@ -27,6 +27,7 @@ const fileFavicon16x16 = require('ikoner/favicon/favicon-16x16.png');
 const fileFavicon32x32 = require('ikoner/favicon/favicon-32x32.png');
 
 const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
+const buildId = process.env.BUILD_ID;
 
 export const template = (req: Request) => {
     // Set environment based on request params
@@ -34,8 +35,9 @@ export const template = (req: Request) => {
 
     // Resources
     const fileEnv = `${env.APP_URL}/env`;
-    const fileCss = `${env.APP_URL}/css/client.css`;
-    const fileScript = `${env.APP_URL}/client.js`;
+    // Insert buildId-segment as a cache buster
+    const fileCss = `${env.APP_URL}/css/client.${buildId}.css`;
+    const fileScript = `${env.APP_URL}/client.${buildId}.js`;
 
     // Retreive from cache
     const cachedEnvHash = hash({ env });

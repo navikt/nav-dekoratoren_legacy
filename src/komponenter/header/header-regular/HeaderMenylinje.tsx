@@ -58,7 +58,6 @@ export const HeaderMenylinje = () => {
             <div className={cls.element('elementer')}>
                 <NavLogo arbeidsflate={arbeidsflate} />
                 {isLanguageNorwegian && <Arbeidsflatemeny />}
-                <span className={cls.element('spacer')} />
                 <div className={cls.element('hoyre-knapper')}>
                     <div className={cls.element('uinnlogget-knapper')}>
                         <DesktopHovedmenyKnapp kbNavMainState={kbNavMainState} />

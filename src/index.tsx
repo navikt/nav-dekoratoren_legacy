@@ -1,5 +1,8 @@
 import 'react-app-polyfill/stable';
 
+// Import this early, to ensure our own CSS gets higher specificity
+import '@navikt/ds-css/dist/index.css';
+
 import React from 'react';
 import { hydrateRoot, createRoot } from 'react-dom/client';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -11,6 +14,7 @@ import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
 import { getSalesforceContainer } from './server/utils';
+
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
