@@ -27,7 +27,6 @@ type Props = {
 const cls = BEMHelper('minside-person');
 
 export const MinsidePersonKnapp = ({ classname, id, brukernavn }: Props) => {
-    console.log('classname', classname);
     const dispatch = useDispatch();
     const { isOpen } = useSelector(stateSelector);
 
