@@ -15,6 +15,7 @@ import { varselInnboksProxyHandler, varselInnboksProxyUrl } from './api-handlers
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
 const isProduction = process.env.NODE_ENV === 'production';
+const buildId = process.env.BUILD_ID || '';
 
 // Local environment - import .env
 if (!isProduction || process.env.PROD_TEST) {
@@ -125,6 +126,15 @@ app.use(`${appBasePath}/metrics`, (req, res) => {
 app.get(`${appBasePath}/isAlive`, (req, res) => res.sendStatus(200));
 app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));
 
+// Prevent requests for stale client.js/css files from getting cache-headers in the response
+const isStaleClientRequest = (req: Request) => {
+    if (req.url !== '/client.js' && req.url !== '/css/client.css') {
+        return true;
+    }
+
+    return req.originalUrl.includes(buildId);
+};
+
 // Static files
 app.use(
     createPaths('/'),
@@ -132,7 +142,7 @@ app.use(
     rewrite('*/client:buildId.(css|js)*', '$1/client.$3'),
     express.static(buildPath, {
         setHeaders: (res: Response) => {
-            if (isProduction) {
+            if (isProduction && !isStaleClientRequest(res.req)) {
                 // Override cache on static files
                 res.header('Cache-Control', `max-age=${fiveMinutesInSeconds}`);
                 res.header('Pragma', `max-age=${fiveMinutesInSeconds}`);
