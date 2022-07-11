@@ -132,7 +132,7 @@ const isStaleClientRequest = (req: Request) => {
         return false;
     }
 
-    return !req.originalUrl.includes(buildId);
+    return !req.originalUrl?.includes(buildId);
 };
 
 // Static files
