@@ -129,10 +129,10 @@ app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));
 // Prevent requests for stale client.js/css files from getting cache-headers in the response
 const isStaleClientRequest = (req: Request) => {
     if (req.url !== '/client.js' && req.url !== '/css/client.css') {
-        return true;
+        return false;
     }
 
-    return req.originalUrl.includes(buildId);
+    return !req.originalUrl.includes(buildId);
 };
 
 // Static files
