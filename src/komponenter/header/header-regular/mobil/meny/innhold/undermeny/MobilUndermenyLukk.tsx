@@ -6,11 +6,11 @@ import Tekst from 'tekster/finn-tekst';
 import { useDispatch } from 'react-redux';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 
-interface Props {
+type Props = {
     className: string;
-}
+};
 
-const Lukkundermeny = (props: Props) => {
+export const MobilUndermenyLukk = (props: Props) => {
     const dispatch = useDispatch();
     const cls = BEMHelper(props.className);
     return (
@@ -30,5 +30,3 @@ const Lukkundermeny = (props: Props) => {
         </div>
     );
 };
-
-export default Lukkundermeny;

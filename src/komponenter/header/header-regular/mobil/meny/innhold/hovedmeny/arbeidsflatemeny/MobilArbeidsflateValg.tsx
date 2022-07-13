@@ -5,24 +5,30 @@ import BEMHelper from 'utils/bem';
 import { Locale } from 'store/reducers/language-duck';
 import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
 import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
-import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 
-import './MobilarbeidsflateValg.less';
+import './MobilArbeidsflateValg.less';
+import { MenuValue } from '../../../../../../../../utils/meny-storage-utils';
+import { MobilArbeidsflateValgPrivat } from './MobilArbeidsflateValgPrivat';
 
-interface Props {
-    lang: Locale;
-}
+const cls = BEMHelper('mobil-arbeidsflate-valg');
 
 const stateProps = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
     environment: state.environment,
 });
 
-const MobilarbeidsflateValg = ({ lang }: Props) => {
+type Props = {
+    lang: Locale;
+};
+
+export const MobilArbeidsflateValg = ({ lang }: Props) => {
     const { arbeidsflate, environment } = useSelector(stateProps);
-    const cls = BEMHelper('mobil-arbeidsflate-valg');
-    const lenker = bunnLenker(environment)[arbeidsflate] as ArbeidsflateLenke[];
+    const lenker = bunnLenker(environment)[arbeidsflate];
+
+    if (arbeidsflate === MenuValue.PRIVATPERSON) {
+        return <MobilArbeidsflateValgPrivat lenker={lenker} />;
+    }
 
     return (
         <ul className={cls.className}>
@@ -45,5 +51,3 @@ const MobilarbeidsflateValg = ({ lang }: Props) => {
         </ul>
     );
 };
-
-export default MobilarbeidsflateValg;

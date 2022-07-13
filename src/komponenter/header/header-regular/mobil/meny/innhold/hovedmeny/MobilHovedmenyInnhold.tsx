@@ -3,17 +3,17 @@ import BEMHelper from 'utils/bem';
 import { dataInitState, MenyNode } from 'store/reducers/menu-duck';
 import { getHovedmenyNode, getMinsidemenyNode, MenuValue } from 'utils/meny-storage-utils';
 import { Locale } from 'store/reducers/language-duck';
-import { MobilMenyHeader } from './header/MobilMenyHeader';
-import MobilarbeidsflateValg from './elementer/arbeidsflatemeny/MobilarbeidsflateValg';
+import { MobilHovedmenyHeader } from './header/MobilHovedmenyHeader';
+import { MobilArbeidsflateValg } from './arbeidsflatemeny/MobilArbeidsflateValg';
 import { AppState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
-import InnloggetBruker from './elementer/innloggetbruker/InnloggetBruker';
-import ForsideLenke from './elementer/ForsideLenke';
-import Dittnavmeny from './elementer/dittnavmeny/Dittnavmeny';
+import InnloggetBruker from './innloggetbruker/InnloggetBruker';
+import ForsideLenke from './ForsideLenke';
+import Dittnavmeny from './dittnavmeny/Dittnavmeny';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
-import Listelement from './elementer/Listelement';
+import Listelement from '../utils/Listelement';
 import { Next } from '@navikt/ds-icons';
 
 export const mobilSokInputId = `sok-input-small`;
@@ -33,7 +33,7 @@ type Props = {
     className: string;
 };
 
-export const MobilHovedmeny = (props: Props) => {
+export const MobilHovedmenyInnhold = (props: Props) => {
     const dispatch = useDispatch();
     const { className, settLenker } = props;
     const menyClass = BEMHelper(className);
@@ -85,21 +85,19 @@ export const MobilHovedmeny = (props: Props) => {
                             />
                         </div>
                     )}
-                    <MobilMenyHeader />
-                    <ul className={menyClass.element('meny', 'mainlist')}>
-                        {arbeidsflate === MenuValue.PRIVATPERSON && isLanguageNorwegian ? (
-                            <Listelement className={menyClass.className} classElement={'text-element'}>
-                                <a
-                                    className={'lenke'}
-                                    href={'https://nav.no'}
-                                    onClick={(e) => setMenyliste(e, { ...hovedmenyLenker, flatten: true })}
-                                >
-                                    {'Hva kan vi hjelpe deg med?'}
-                                    <Next />
-                                </a>
-                            </Listelement>
-                        ) : (
-                            hovedmenyLenker.children.map((menyElement: MenyNode, index: number) => (
+                    <MobilHovedmenyHeader />
+                    {arbeidsflate === MenuValue.PRIVATPERSON && isLanguageNorwegian ? (
+                        <a
+                            className={'lenke'}
+                            href={'https://nav.no'}
+                            onClick={(e) => setMenyliste(e, { ...hovedmenyLenker, flatten: true })}
+                        >
+                            {'Hva kan vi hjelpe deg med?'}
+                            <Next />
+                        </a>
+                    ) : (
+                        <ul className={menyClass.element('meny', 'mainlist')}>
+                            {hovedmenyLenker.children.map((menyElement: MenyNode, index: number) => (
                                 <Listelement key={index} className={menyClass.className} classElement={'text-element'}>
                                     <a
                                         className={'lenke'}
@@ -110,10 +108,10 @@ export const MobilHovedmeny = (props: Props) => {
                                         <Next />
                                     </a>
                                 </Listelement>
-                            ))
-                        )}
-                    </ul>
-                    {isLanguageNorwegian && <MobilarbeidsflateValg lang={language} />}
+                            ))}
+                        </ul>
+                    )}
+                    {isLanguageNorwegian && <MobilArbeidsflateValg lang={language} />}
                 </>
             )}
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import BEMHelper from 'utils/bem';
-import Listelement from '../Listelement';
+import Listelement from '../../utils/Listelement';
 import { Next } from '@navikt/ds-icons';
 
 interface Props {

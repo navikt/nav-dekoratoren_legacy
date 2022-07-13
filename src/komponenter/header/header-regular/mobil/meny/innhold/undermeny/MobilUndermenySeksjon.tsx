@@ -6,7 +6,7 @@ import { AppState } from '../../../../../../../store/reducers';
 import { MenyNode } from '../../../../../../../store/reducers/menu-duck';
 import { MinsideLockMsg } from '../../../../common/minside-lock-msg/MinsideLockMsg';
 import { genererUrl } from '../../../../../../../utils/Environment';
-import Listelement from '../elementer/Listelement';
+import Listelement from '../utils/Listelement';
 import { LenkeMedSporing } from '../../../../../../common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from '../../../../../../../utils/analytics/analytics';
 
@@ -20,14 +20,14 @@ type Props = {
     lenker: MenyNode;
 };
 
-export const UndermenySeksjon = ({ menyClass, lenker }: Props) => {
+export const MobilUndermenySeksjon = ({ menyClass, lenker }: Props) => {
     const { auth, XP_BASE_URL } = useSelector(stateSelector);
 
     const showSecurityLevelWarning = auth.securityLevel !== '4' && lenker.children.some((lenke) => lenke.displayLock);
 
     return (
         <>
-            <Heading level="2" size="medium" className={menyClass.element('undermeny-arbeidsflate')}>
+            <Heading level={'2'} size={'medium'} className={menyClass.element('undermeny-arbeidsflate')}>
                 {lenker.displayName}
             </Heading>
             {showSecurityLevelWarning && <MinsideLockMsg />}
@@ -36,7 +36,11 @@ export const UndermenySeksjon = ({ menyClass, lenker }: Props) => {
                     const displayLock = lenke.displayLock && auth.securityLevel !== '4';
                     const href = genererUrl(XP_BASE_URL, lenke.path);
                     return (
-                        <Listelement key={index} className={menyClass.className} classElement="text-element-undermeny">
+                        <Listelement
+                            key={index}
+                            className={menyClass.className}
+                            classElement={'text-element-undermeny'}
+                        >
                             <LenkeMedSporing
                                 href={href}
                                 withChevron={true}

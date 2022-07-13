@@ -21,6 +21,10 @@
     }
 
     &__startmeny {
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - @header-height-mobil);
+
         z-index: 1003;
         transition: all @transition-duration ease-in-out;
 

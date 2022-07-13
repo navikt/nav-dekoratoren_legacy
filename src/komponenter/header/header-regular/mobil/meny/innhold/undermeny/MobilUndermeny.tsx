@@ -1,10 +1,10 @@
 import React from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import BEMHelper from 'utils/bem';
-import Lukkundermeny from '../elementer/Lukkundermeny';
+import { MobilUndermenyLukk } from './MobilUndermenyLukk';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { UndermenySeksjon } from './UndermenySeksjon';
+import { MobilUndermenySeksjon } from './MobilUndermenySeksjon';
 
 const stateSelector = (state: AppState) => ({
     underMenuIsOpen: state.dropdownToggles.undermeny,
@@ -28,13 +28,13 @@ export const MobilUndermeny = ({ lenker, className }: Props) => {
 
     return (
         <div className={menyClass.element('undermeny-innhold', underMenuIsOpen ? '' : 'hidden')}>
-            <Lukkundermeny className={menyClass.className} />
+            <MobilUndermenyLukk className={menyClass.className} />
             {flatten ? (
-                children.map((seksjon) => <UndermenySeksjon menyClass={menyClass} lenker={seksjon} />)
+                children.map((seksjon) => <MobilUndermenySeksjon menyClass={menyClass} lenker={seksjon} />)
             ) : (
-                <UndermenySeksjon menyClass={menyClass} lenker={lenker} />
+                <MobilUndermenySeksjon menyClass={menyClass} lenker={lenker} />
             )}
-            <Lukkundermeny className={menyClass.className} />
+            <MobilUndermenyLukk className={menyClass.className} />
         </div>
     );
 };
