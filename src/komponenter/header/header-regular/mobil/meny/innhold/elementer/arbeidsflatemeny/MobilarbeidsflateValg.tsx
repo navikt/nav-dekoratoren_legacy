@@ -7,6 +7,7 @@ import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arb
 import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
+
 import './MobilarbeidsflateValg.less';
 
 interface Props {
@@ -36,6 +37,8 @@ const MobilarbeidsflateValg = ({ lang }: Props) => {
                             action: 'arbeidsflate-valg',
                             label: lenke.key,
                         }}
+                        withDescription={false}
+                        enableCompactView={true}
                     />
                 </li>
             ))}

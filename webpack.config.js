@@ -6,6 +6,7 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 const nodeExternals = require('webpack-node-externals');
+const modifySelectors = require('modify-selectors');
 
 const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
@@ -67,7 +68,7 @@ const commonConfig = {
                 },
             },
             {
-                test: /\.less$/,
+                test: /\.(less|css)$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     { loader: 'css-loader', options: {} },
@@ -77,14 +78,16 @@ const commonConfig = {
                             postcssOptions: {
                                 ident: 'postcss',
                                 plugins: [
+                                    modifySelectors({
+                                        enabled: true,
+                                        replace: [{ match: ':root', with: '.decorator-wrapper' }],
+                                    }),
                                     prefixer({
                                         prefix: '.decorator-wrapper',
                                         exclude: [
                                             /\b(\w*(M|m)odal\w*)\b/,
                                             'body',
                                             'body.no-scroll-mobil',
-                                            /\b(\w*nav-veileder\w*)\b/,
-                                            /\b(\w*nav-veilederpanel\w*)\b/,
                                             /\b(\w*utloggingsvarsel\w*)\b/,
                                             '.siteheader',
                                             '.sitefooter',
@@ -93,6 +96,8 @@ const commonConfig = {
                                             /\b(\w*decorator-dummy-app\w*)\b/,
                                             '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
                                             '#nav-chatbot',
+                                            ':root',
+                                            '.decorator-wrapper',
                                         ],
                                     }),
                                     autoprefixer({}),
@@ -120,11 +125,6 @@ const commonConfig = {
     optimization: {
         emitOnErrors: true,
         minimizer: [new CssMinimizerPlugin(), `...`],
-        /*
-        splitChunks: {
-            chunks: 'all',
-        },
-        */
     },
     output: {
         path: path.resolve(__dirname, 'build'),

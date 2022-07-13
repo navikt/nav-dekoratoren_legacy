@@ -15,7 +15,7 @@ import Cookies from 'js-cookie';
 import './Sok.less';
 
 interface Props {
-    id?: string;
+    id: string;
     isOpen: boolean;
     dropdownTransitionMs?: number;
     numResultsCallback?: (numResults: number) => void;
@@ -45,7 +45,7 @@ const Sok = (props: Props) => {
 
     useEffect(() => {
         if (!props.isOpen) {
-            onReset();
+            clearInput();
         }
     }, [props.isOpen]);
 
@@ -55,9 +55,14 @@ const Sok = (props: Props) => {
         }
     }, [result]);
 
-    const onReset = () => {
+    const clearInput = () => {
         setSearchInput('');
         setLoading(false);
+    };
+
+    const onReset = () => {
+        clearInput();
+        document.getElementById(props.id)?.focus();
     };
 
     const getSearchUrl = () => {

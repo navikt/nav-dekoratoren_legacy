@@ -20,7 +20,7 @@ spec:
     path: /dekoratoren/metrics
   replicas:
     min: 2
-    max: 4
+    max: 8
   ingresses:
     - https://appres.nav.no/common-html/v4/navno
     - https://www.nav.no/dekoratoren
@@ -64,10 +64,12 @@ spec:
       value: {{SOLUTION_ID}}
     - name: NAV_GROUP_ID
       value: {{NAV_GROUP_ID}}
-
+    - name: BUILD_ID
+      value: {{BUILD_ID}}
   resources:
     limits:
       cpu: '3'
       memory: 1500Mi
     requests:
-      memory: 1500Mi
+      cpu: 500m
+      memory: 500Mi

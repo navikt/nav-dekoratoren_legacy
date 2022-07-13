@@ -4,7 +4,12 @@ import { AppState } from 'store/reducers';
 import { verifyWindowObj } from 'utils/Environment';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import { MenuValue } from '../../../utils/meny-storage-utils';
+import { useCookies } from 'react-cookie';
+import BEMHelper from '../../../utils/bem';
+import classNames from 'classnames';
 import './ChatbotWrapper.less';
+
+const bem = BEMHelper('chatbot-frida');
 
 // Prevents SSR crash
 const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
@@ -12,10 +17,13 @@ const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
 const testUrlHosts = ['dekoratoren.ekstern.dev.nav.no'];
 
 const stateSelector = (state: AppState) => ({
-    isChatbotEnabled: state.environment.PARAMS.CHATBOT,
+    chatbotParamEnabled: state.environment.PARAMS.CHATBOT,
+    chatbotParamVisible: state.environment.PARAMS.CHATBOT_VISIBLE,
     context: state.arbeidsflate.status,
     env: state.environment.ENV,
 });
+
+const conversationCookieName = 'nav-chatbot%3Aconversation';
 
 const boostApiUrlBaseTest = 'https://navtest.boost.ai/api/chat/v2';
 const boostApiUrlBaseStaging = 'https://staging-nav.boost.ai/api/chat/v2';
@@ -34,16 +42,23 @@ const getActionFilters = (context: MenuValue, isProduction: boolean): ActionFilt
 };
 
 export const ChatbotWrapper = () => {
-    const { isChatbotEnabled, context, env } = useSelector(stateSelector);
+    const { chatbotParamEnabled, chatbotParamVisible, context, env } = useSelector(stateSelector);
+    const [cookies] = useCookies();
 
     // Do not mount chatbot on initial render. Prevents hydration errors
     // due to inconsistensies between client and server html, as chatbot
     // is not rendered server-side
     const [isMounted, setIsMounted] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        setIsMounted(isChatbotEnabled);
-    }, [isChatbotEnabled]);
+        setIsMounted(chatbotParamEnabled);
+    }, [chatbotParamEnabled]);
+
+    useEffect(() => {
+        const hasConversation = cookies[conversationCookieName];
+        setIsVisible(hasConversation || chatbotParamVisible);
+    }, [chatbotParamVisible]);
 
     const hostname = verifyWindowObj() && window.location.hostname;
     const isTest = hostname && testUrlHosts.includes(hostname);
@@ -58,10 +73,12 @@ export const ChatbotWrapper = () => {
     }
 
     return isMounted ? (
-        <Chatbot
-            boostApiUrlBase={boostApiUrlBase}
-            actionFilters={getActionFilters(context, isProduction)}
-            analyticsCallback={logAmplitudeEvent}
-        />
+        <div className={classNames(bem.className, isVisible && bem.modifier('visible'))}>
+            <Chatbot
+                boostApiUrlBase={boostApiUrlBase}
+                actionFilters={getActionFilters(context, isProduction)}
+                analyticsCallback={logAmplitudeEvent}
+            />
+        </div>
     ) : null;
 };

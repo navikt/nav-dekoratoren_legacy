@@ -1,148 +1,104 @@
 @import (reference) '../../../../styling-variabler.less';
 
 .menylinje-topp {
-    color: white;
-    padding: 1rem 1rem;
-    background-color: @navds-global-color-deepblue-600;
+    background-color: @navds-global-color-deepblue-800;
 
-    .lenke {
+    .topp-kontainer {
         color: white;
-        padding: 0.625rem 0;
-    }
+        padding-top: 1.5rem;
+        padding-bottom: 1.75rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
 
-    .lenke:focus {
-        color: @navds-global-color-blue-500;
-        background-color: white;
-    }
-
-    ul {
-        margin: 0;
-    }
-
-    .topp-kolonner {
-        .menylenker-seksjon {
-            margin-bottom: 2rem;
+        .lenke {
+            color: white;
+            padding: 0.5rem 0;
+            @media @screen-mobile {
+                padding: 0.25rem 0;
+            }
         }
 
-        .menylenker-overskrift {
-            font-weight: bolder;
-            margin-bottom: 0.5rem;
+        .lenke:focus {
+            color: @navds-global-color-blue-500;
+            background-color: white;
+        }
+
+        ul {
+            margin: 0;
         }
 
         .til-toppen {
-            margin: 1rem 0;
-        }
-
-        .til-toppen-innhold {
             display: flex;
             justify-content: start;
+            margin-bottom: 2.25rem;
+
+            @media @screen-mobile {
+                margin-bottom: 1.75rem;
+            }
+
             .lenke-med-ikon {
-                width: 100%;
-                padding: 1rem 0;
-                margin-top: -1rem;
-                text-decoration: none;
+                text-decoration: underline;
                 color: white;
+                font-size: 1.25rem;
+                padding: 1rem 1rem 1rem 0;
+
                 svg {
+                    color: white;
                     fill: white;
                     stroke: white;
                 }
-                &:hover {
-                    text-decoration: underline;
+
+                &__ikon {
+                    display: flex;
+                    align-items: center;
+                    margin: 0;
                 }
+
                 &:focus {
-                    svg {
-                        fill: @navds-global-color-blue-500;
-                        stroke: @navds-global-color-blue-500;
+                    color: @navds-global-color-blue-500;
+                    background-color: white;
+                    .lenke-med-ikon__ikon {
+                        svg {
+                            stroke: @navds-global-color-blue-500;
+                            color: @navds-global-color-blue-500;
+                            fill: @navds-global-color-blue-500;
+                        }
                     }
                 }
             }
         }
-    }
-
-    @media @screen-desktop {
-        padding: 1rem 1rem;
 
         .topp-kolonner {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            column-gap: 2rem;
 
-            .menylenker-seksjon.til-toppen {
-                width: 100%;
-                margin: 1rem 0 2rem 0;
+            .menylenker-seksjon {
+                margin-bottom: 2.25rem;
             }
 
-            .menylenker-seksjon.venstre,
-            .menylenker-seksjon.midt,
-            .menylenker-seksjon.hoyre {
-                width: 31%;
-            }
-
-            .menylenker-seksjon.midt,
-            .menylenker-seksjon.hoyre {
-                padding-left: 1rem;
-            }
-
-            .arbeidsflate {
-                margin-bottom: 1rem;
+            .menylenker-overskrift {
+                font-weight: bolder;
+                margin-bottom: 0.5rem;
             }
         }
-    }
 
-    @media @screen-desktop-medium-up {
-        padding: 1.5rem 2rem;
+        @media @screen-desktop {
+            padding-top: 2.75rem;
+            padding-bottom: 1.75rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
 
-        .topp-kolonner {
-            .menylenker-seksjon.til-toppen {
-                margin: 0 0 2rem 0;
-                width: 100%;
-            }
-
-            .menylenker-seksjon.venstre {
-                width: 24%;
-            }
-
-            .menylenker-seksjon.midt,
-            .menylenker-seksjon.hoyre {
-                width: 23%;
-            }
-
-            .menylenker-seksjon.arbeidsflate {
-                width: 29%;
-            }
-
-            .arbeidsflatevalg {
-                flex-direction: column;
-                padding-left: 1rem;
+            .topp-kolonner {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
             }
         }
-    }
 
-    @media @screen-desktop-large-up {
-        padding: 1.5rem 0;
-
-        .topp-kolonner {
+        @media @screen-desktop-large-up {
+            padding-left: 0;
+            padding-right: 0;
             width: 1344px;
             margin: 0 auto;
-
-            .menylenker-seksjon.til-toppen {
-                width: 15%;
-                margin: 0;
-            }
-
-            .menylenker-seksjon.venstre,
-            .menylenker-seksjon.midt,
-            .menylenker-seksjon.hoyre {
-                width: 20%;
-            }
-
-            .menylenker-seksjon.arbeidsflate {
-                width: 24%;
-            }
-
-            .arbeidsflatevalg {
-                justify-content: left;
-            }
         }
     }
 }

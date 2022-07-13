@@ -76,7 +76,6 @@ const Skiplinks = ({ simple }: Props) => {
         ...(hasMainContent
             ? [
                   {
-                      anchorId: mainContentId,
                       tekstId: 'skiplinks-ga-til-hovedinnhold',
                       onClick: () => {
                           document.getElementById(mainContentId)?.focus();
@@ -97,7 +96,6 @@ const Skiplinks = ({ simple }: Props) => {
                 {skipLinks.map((link, index) => (
                     <SkipLinkElement
                         tekstId={link.tekstId}
-                        anchorId={link.anchorId}
                         onClick={() => {
                             logSkipLink(link.tekstId);
                             link.onClick && link.onClick();

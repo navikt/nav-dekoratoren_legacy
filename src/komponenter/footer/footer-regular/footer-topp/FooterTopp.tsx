@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Heading } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
-import PilOppHvit from 'ikoner/meny/PilOppHvit';
+import { Up } from '@navikt/ds-icons';
 import LenkeMedIkon from 'komponenter/footer/common/lenke-med-ikon/LenkeMedIkon';
 import { AppState } from 'store/reducers';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import BEMHelper from 'utils/bem';
-import Arbeidsflatevalg from './arbeidsflatevalg/Arbeidsflatevalg';
 import { LinksLoader } from '../../../common/content-loaders/LinkLoader';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import { Locale } from 'store/reducers/language-duck';
+import { DelSkjermLenke } from 'komponenter/footer/common/del-skjerm-lenke/DelSkjermLenke';
 import './FooterTopp.less';
 
 const FooterTopp = () => {
@@ -19,8 +19,10 @@ const FooterTopp = () => {
     const { language } = useSelector((state: AppState) => state.language);
     const context = useSelector((state: AppState) => state.arbeidsflate.status);
     const { data } = useSelector((state: AppState) => state.menypunkt);
-
     const [columnsNode, settColumnsNode] = useState<MenyNode>();
+    const [personvernNode, settPersonvernNode] = useState<MenyNode>();
+    const { PARAMS } = useSelector((state: AppState) => state.environment);
+
     useEffect(() => {
         const languageNode = getLanguageNode(language, data);
         const isLanguageNorwegian = language === Locale.BOKMAL || language === Locale.NYNORSK;
@@ -40,6 +42,13 @@ const FooterTopp = () => {
         }
     }, [language, context, data, settColumnsNode]);
 
+    useEffect(() => {
+        const noder = getLanguageNode(language, data);
+        if (noder && !personvernNode) {
+            settPersonvernNode(findNode(noder, 'Personvern'));
+        }
+    }, [data, personvernNode]);
+
     const scrollToTop = (event: React.MouseEvent) => {
         event.preventDefault();
         window.scrollTo({
@@ -52,38 +61,62 @@ const FooterTopp = () => {
 
     return (
         <div className={cls.className}>
-            <div className="topp-kolonner">
+            <div className="topp-kontainer">
                 <div className="menylenker-seksjon til-toppen">
-                    <div className="til-toppen-innhold">
-                        <LenkeMedIkon
-                            onClick={scrollToTop}
-                            tekst={<Tekst id="footer-til-toppen" />}
-                            ikon={<PilOppHvit style={{ height: '18px', width: '18px' }} />}
-                            venstrestiltIkon={true}
-                            id="footer-til-toppen"
-                        />
+                    <LenkeMedIkon
+                        onClick={scrollToTop}
+                        tekst={<Tekst id="footer-til-toppen" />}
+                        ikon={<Up />}
+                        venstrestiltIkon={true}
+                        id="footer-til-toppen"
+                    />
+                </div>
+                <div className="topp-kolonner">
+                    <div className="venstre">
+                        {columnsNode
+                            ? columnsNode.children.slice(0, 2).map((columnNode, i) => (
+                                  <div key={i} className={'menylenker-seksjon'}>
+                                      <Heading level="2" size="small" className="menylenker-overskrift">
+                                          {columnNode.displayName}
+                                      </Heading>
+                                      <ul>
+                                          <FooterLenker node={columnNode} />
+                                      </ul>
+                                  </div>
+                              ))
+                            : [...Array(3)].map((_, index) => (
+                                  <div className={'menylenker-seksjon'} key={index}>
+                                      <LinksLoader id={`footer-link-loader-${index}`} />
+                                  </div>
+                              ))}
+                    </div>
+                    <div className="midt">
+                        {columnsNode
+                            ? columnsNode.children.slice(2, 4).map((columnNode, i) => (
+                                  <div key={i} className={'menylenker-seksjon'}>
+                                      <Heading level="2" size="small" className="menylenker-overskrift">
+                                          {columnNode.displayName}
+                                      </Heading>
+                                      <ul>
+                                          <FooterLenker node={columnNode} />
+                                      </ul>
+                                  </div>
+                              ))
+                            : [...Array(3)].map((_, index) => (
+                                  <div className={'menylenker-seksjon'} key={index}>
+                                      <LinksLoader id={`footer-link-loader-${index}`} />
+                                  </div>
+                              ))}
+                    </div>
+                    <div className="høyre">
+                        <div className={cls.element('bottom-lenker')}>
+                            <ul className={cls.element('personvern-lenker')}>
+                                <FooterLenker node={personvernNode} />
+                                {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                {columnsNode
-                    ? columnsNode.children.map((columnNode, i) => (
-                          <div key={i} className={`menylenker-seksjon ${!i ? 'venstre' : i === 2 ? 'hoyre' : 'midt'}`}>
-                              <Heading level="2" size="medium" className="menylenker-overskrift">
-                                  {columnNode.displayName}
-                              </Heading>
-                              <ul>
-                                  <FooterLenker node={columnNode} />
-                              </ul>
-                          </div>
-                      ))
-                    : [...Array(3)].map((_, index) => (
-                          <div
-                              className={`menylenker-seksjon ${!index ? 'venstre' : index === 2 ? 'hoyre' : 'midt'}`}
-                              key={index}
-                          >
-                              <LinksLoader id={`footer-link-loader-${index}`} />
-                          </div>
-                      ))}
-                <Arbeidsflatevalg />
             </div>
         </div>
     );

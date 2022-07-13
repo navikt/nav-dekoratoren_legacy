@@ -41,11 +41,11 @@ export interface Params {
     BREADCRUMBS?: Breadcrumb[];
     FEEDBACK: boolean;
     CHATBOT: boolean;
+    CHATBOT_VISIBLE: boolean;
     URL_LOOKUP_TABLE: boolean;
     SHARE_SCREEN: boolean;
     UTILS_BACKGROUND?: string;
     UTLOGGINGSVARSEL: boolean;
-    TA_SURVEYS: string[];
     LOGOUT_URL?: string;
 }
 
@@ -85,8 +85,8 @@ export const initialState: Environment = {
         LEVEL: '',
         LANGUAGE: Locale.IKKEBESTEMT,
         FEEDBACK: false,
-        TA_SURVEYS: [],
         CHATBOT: false,
+        CHATBOT_VISIBLE: false,
         URL_LOOKUP_TABLE: false,
         SHARE_SCREEN: false,
         UTLOGGINGSVARSEL: false,

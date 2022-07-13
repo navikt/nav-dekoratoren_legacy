@@ -1,6 +1,8 @@
 import React from 'react';
 import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
+import { Button } from '@navikt/ds-react';
+
 import './MenylinjeKnapp.less';
 
 interface Props {
@@ -18,13 +20,14 @@ const MenylinjeKnapp = (props: Props) => {
     const cls = BEMHelper(props.classname);
 
     return (
-        <button
+        <Button
             onClick={props.onClick}
             className={`menylinje-knapp ${cls.element('knapp')}`}
             id={props.id}
             aria-label={props.ariaLabel}
             aria-controls={props.ariaControls}
             aria-expanded={props.isOpen}
+            variant="tertiary"
         >
             {props.children}
             {props.tekstId && (
@@ -32,7 +35,7 @@ const MenylinjeKnapp = (props: Props) => {
                     <Tekst id={props.tekstId} />
                 </span>
             )}
-        </button>
+        </Button>
     );
 };
 

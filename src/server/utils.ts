@@ -33,7 +33,6 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
 
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
     const utloggingsvarsel: UtloggingsVarselProperties = setAndCheckUtloggingsvarsel(req, cookies);
-    const taSurveys = req.query.taSurveys?.toString().replace(' ', '').split(',') || [];
 
     return {
         ENV: process.env.ENV as string,
@@ -72,13 +71,13 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 }),
                 FEEDBACK: req.query.feedback === 'true',
                 CHATBOT: req.query.chatbot !== 'false',
+                CHATBOT_VISIBLE: req.query.chatbotVisible === 'true',
                 URL_LOOKUP_TABLE: req.query.urlLookupTable !== 'false',
                 ...(req.query.utilsBackground && {
                     UTILS_BACKGROUND: req.query.utilsBackground as string,
                 }),
                 SHARE_SCREEN: req.query.shareScreen !== 'false',
                 UTLOGGINGSVARSEL: utloggingsvarsel.UTLOGGINGSVARSEL,
-                TA_SURVEYS: taSurveys,
                 ...(req.query.logoutUrl && {
                     LOGOUT_URL: req.query.logoutUrl as string,
                 }),

@@ -3,14 +3,15 @@ import BEMHelper from 'utils/bem';
 import { analyticsEvent } from 'utils/analytics/analytics';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { toggleMinsidemeny } from 'store/reducers/dropdown-toggle-duck';
+import classNames from 'classnames';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
-import MinsideIkon from './minside-ikon/MinsideIkon';
-import Tekst from 'tekster/finn-tekst';
 import { AppState } from 'store/reducers';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { MenuValue } from 'utils/meny-storage-utils';
-import './MinsideKnapp.less';
+import { People, Expand } from '@navikt/ds-icons';
+
+import './MinsideKnapper.less';
 
 const stateSelector = (state: AppState) => ({
     brukernavn: state.innloggingsstatus.data.name,
@@ -20,13 +21,14 @@ const stateSelector = (state: AppState) => ({
 type Props = {
     classname: string;
     id: string;
+    brukernavn: string;
 };
 
-export const MinsidePersonKnapp = ({ classname, id }: Props) => {
-    const dispatch = useDispatch();
-    const { isOpen, brukernavn } = useSelector(stateSelector);
+const cls = BEMHelper('minside-person');
 
-    const cls = BEMHelper(classname);
+export const MinsidePersonKnapp = ({ classname, id, brukernavn }: Props) => {
+    const dispatch = useDispatch();
+    const { isOpen } = useSelector(stateSelector);
 
     const toggleMinSideDropdown = () => {
         analyticsEvent({
@@ -45,23 +47,11 @@ export const MinsidePersonKnapp = ({ classname, id }: Props) => {
             classname={classname}
             id={id}
         >
-            <MinsideIkon isOpen={isOpen} hasMenu={true} />
-            <span className={cls.element('knapp-tekst')} data-testid={'minside-person'}>
-                <span
-                    className={`${cls.element('knapp-tekst-topp')} ${
-                        isOpen ? cls.element('knapp-tekst-topp', 'open') : ''
-                    }`}
-                >
-                    <Tekst id={'min-side'} />
-                </span>
-                <span
-                    className={`${cls.element('knapp-tekst-bunn')} ${
-                        isOpen ? cls.element('knapp-tekst-bunn', 'open') : ''
-                    }`}
-                >
-                    {brukernavn?.toLowerCase() || ''}
-                </span>
-            </span>
+            <People data-testid={'minside-person'} />
+            <div className={cls.element('brukernavn')}>{brukernavn}</div>
+            <div className={classNames(cls.element('chevron'), `${isOpen ? cls.modifier('chevron-open') : ''}`)}>
+                <Expand aria-hidden />
+            </div>
         </MenylinjeKnapp>
     );
 };

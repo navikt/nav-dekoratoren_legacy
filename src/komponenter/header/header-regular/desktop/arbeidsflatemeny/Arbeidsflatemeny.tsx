@@ -11,8 +11,18 @@ import { CookieName, cookieOptions } from '../../../../../server/cookieSettings'
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { erNavDekoratoren } from 'utils/Environment';
-import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
+import { MenuValue } from '../../../../../utils/meny-storage-utils';
+import { finnTekst } from 'tekster/finn-tekst';
+
 import './Arbeidsflatemeny.less';
+
+export const arbeidsflatemenyWidthBreakpoint = 1200;
+
+export const arbeidsflatemenyLenkeIds = [
+    MenuValue.PRIVATPERSON,
+    MenuValue.ARBEIDSGIVER,
+    MenuValue.SAMARBEIDSPARTNER,
+].map((value) => `arbeidsflate-${value}`);
 
 const Arbeidsflatemeny = () => {
     const cls = BEMHelper('arbeidsflate');
@@ -20,6 +30,7 @@ const Arbeidsflatemeny = () => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const [, setCookie] = useCookies([CookieName.DECORATOR_CONTEXT]);
     const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
+    const { language } = useSelector((state: AppState) => state.language);
 
     return (
         <nav className={cls.className} id={cls.className} aria-label="Velg brukergruppe">
@@ -32,12 +43,8 @@ const Arbeidsflatemeny = () => {
                             key={lenke.key}
                         >
                             <LenkeMedSporing
-                                classNameOverride={cls.element('lenke')}
-                                id={getKbId(KbNavGroup.HeaderMenylinje, {
-                                    col: index,
-                                    row: 0,
-                                    sub: 0,
-                                })}
+                                classNameOverride={cls.element('lenke', arbeidsflate === lenke.key ? 'active' : '')}
+                                id={arbeidsflatemenyLenkeIds[index]}
                                 href={lenke.url}
                                 onClick={(event) => {
                                     setCookie(CookieName.DECORATOR_CONTEXT, lenke.key, cookieOptions);
@@ -53,7 +60,10 @@ const Arbeidsflatemeny = () => {
                                     label: lenke.key,
                                 }}
                             >
-                                <div className={cls.element('lenke-inner', arbeidsflate === lenke.key ? 'active' : '')}>
+                                <div
+                                    className={cls.element('lenke-inner')}
+                                    data-text={finnTekst(lenke.lenkeTekstId, language)}
+                                >
                                     <BodyShort>
                                         <Tekst id={lenke.lenkeTekstId} />
                                     </BodyShort>
