@@ -61,6 +61,9 @@ export const ledetekster: { [key: string]: stringOrFunction } = {
     'min-side': 'Ditt NAV',
     'min-side-en': 'My page',
     'min-side-se': 'Ditt NAV',
+    'min-side-login': 'Logg inn på Ditt NAV',
+    'min-side-login-en': 'Login to My page',
+    'min-side-login-se': 'Logg inn på Ditt NAV',
     'pa-min-side-finner-du': 'På Min side finner du:',
     'pa-min-side-finner-du-en': 'On My page you will find:',
     'pa-min-side-finner-du-se': 'På Min side finner du:',
@@ -314,4 +317,7 @@ export const ledetekster: { [key: string]: stringOrFunction } = {
     'brodsmulesti-se-alle': 'Se hele brødsmulestien',
     'brodsmulesti-se-alle-en': 'View all breadcrumbs',
     'brodsmulesti-se-alle-se': 'Se hele brødsmulestien',
+    'how-can-we-help': 'Hva kan vi hjelpe deg med?',
+    'how-can-we-help-en': 'What can we help you with?',
+    'how-can-we-help-se': 'Hva kan vi hjelpe deg med?',
 };

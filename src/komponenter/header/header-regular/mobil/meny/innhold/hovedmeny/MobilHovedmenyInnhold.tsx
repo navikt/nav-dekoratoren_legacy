@@ -7,14 +7,14 @@ import { MobilHovedmenyHeader } from './header/MobilHovedmenyHeader';
 import { MobilArbeidsflateValg } from './arbeidsflatemeny/MobilArbeidsflateValg';
 import { AppState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
-import InnloggetBruker from './innloggetbruker/InnloggetBruker';
-import ForsideLenke from './ForsideLenke';
+import { MobilInnloggetBruker } from './innlogget/MobilInnloggetBruker';
 import Dittnavmeny from './dittnavmeny/Dittnavmeny';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import Listelement from '../utils/Listelement';
 import { Next } from '@navikt/ds-icons';
+import { MobilHovedmenyInnholdPrivat } from './MobilHovedmenyInnholdPrivat';
 
 export const mobilSokInputId = `sok-input-small`;
 
@@ -74,8 +74,7 @@ export const MobilHovedmenyInnhold = (props: Props) => {
             />
             {!searchInput && (
                 <>
-                    <InnloggetBruker />
-                    <ForsideLenke arbeidsflate={arbeidsflate} erInnlogget={innloggingsstatus.data.authenticated} />
+                    <MobilInnloggetBruker />
                     {innloggingsstatus.data.authenticated && arbeidsflate === MenuValue.PRIVATPERSON && (
                         <div className={menyClass.element('submeny', 'wrap')}>
                             <Dittnavmeny
@@ -87,31 +86,30 @@ export const MobilHovedmenyInnhold = (props: Props) => {
                     )}
                     <MobilHovedmenyHeader />
                     {arbeidsflate === MenuValue.PRIVATPERSON && isLanguageNorwegian ? (
-                        <a
-                            className={'lenke'}
-                            href={'https://nav.no'}
-                            onClick={(e) => setMenyliste(e, { ...hovedmenyLenker, flatten: true })}
-                        >
-                            {'Hva kan vi hjelpe deg med?'}
-                            <Next />
-                        </a>
+                        <MobilHovedmenyInnholdPrivat hovedmenyLenker={hovedmenyLenker} setMenyliste={setMenyliste} />
                     ) : (
-                        <ul className={menyClass.element('meny', 'mainlist')}>
-                            {hovedmenyLenker.children.map((menyElement: MenyNode, index: number) => (
-                                <Listelement key={index} className={menyClass.className} classElement={'text-element'}>
-                                    <a
-                                        className={'lenke'}
-                                        href={'https://nav.no'}
-                                        onClick={(e) => setMenyliste(e, menyElement)}
+                        <>
+                            <ul className={menyClass.element('meny', 'mainlist')}>
+                                {hovedmenyLenker.children.map((menyElement: MenyNode, index: number) => (
+                                    <Listelement
+                                        key={index}
+                                        className={menyClass.className}
+                                        classElement={'text-element'}
                                     >
-                                        {menyElement.displayName}
-                                        <Next />
-                                    </a>
-                                </Listelement>
-                            ))}
-                        </ul>
+                                        <a
+                                            className={'lenke'}
+                                            href={'https://nav.no'}
+                                            onClick={(e) => setMenyliste(e, menyElement)}
+                                        >
+                                            {menyElement.displayName}
+                                            <Next />
+                                        </a>
+                                    </Listelement>
+                                ))}
+                            </ul>
+                            {isLanguageNorwegian && <MobilArbeidsflateValg lang={language} />}
+                        </>
                     )}
-                    {isLanguageNorwegian && <MobilArbeidsflateValg lang={language} />}
                 </>
             )}
         </div>

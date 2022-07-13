@@ -8,8 +8,6 @@ import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/A
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 
 import './MobilArbeidsflateValg.less';
-import { MenuValue } from '../../../../../../../../utils/meny-storage-utils';
-import { MobilArbeidsflateValgPrivat } from './MobilArbeidsflateValgPrivat';
 
 const cls = BEMHelper('mobil-arbeidsflate-valg');
 
@@ -25,10 +23,6 @@ type Props = {
 export const MobilArbeidsflateValg = ({ lang }: Props) => {
     const { arbeidsflate, environment } = useSelector(stateProps);
     const lenker = bunnLenker(environment)[arbeidsflate];
-
-    if (arbeidsflate === MenuValue.PRIVATPERSON) {
-        return <MobilArbeidsflateValgPrivat lenker={lenker} />;
-    }
 
     return (
         <ul className={cls.className}>
