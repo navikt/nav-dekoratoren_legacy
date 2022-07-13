@@ -17,7 +17,7 @@ import { lukkAlleDropdowns } from '../../../../../../../store/reducers/dropdown-
 import { erNavDekoratoren } from '../../../../../../../utils/Environment';
 import { settArbeidsflate } from '../../../../../../../store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
-import { Heading } from '@navikt/ds-react';
+import { Heading, Link } from '@navikt/ds-react';
 import { MenyNode } from '../../../../../../../store/reducers/menu-duck';
 
 import './MobilHovedmenyInnholdPrivat.less';
@@ -60,14 +60,14 @@ export const MobilHovedmenyInnholdPrivat = ({ setMenyliste, hovedmenyLenker }: P
     return (
         <>
             <Heading level={'2'} size={'small'}>
-                <a
+                <Link
                     className={classNames('mobilPrivatHovedmenyLenke', 'lenke')}
                     href={'#'}
                     onClick={(e) => setMenyliste(e, { ...hovedmenyLenker, flatten: true })}
                 >
                     <Tekst id={'how-can-we-help'} />
                     <Next />
-                </a>
+                </Link>
             </Heading>
 
             <LenkeMedSporing href={dittNavLenke.url} className={'mobilPrivatHovedmenyLenke'}>

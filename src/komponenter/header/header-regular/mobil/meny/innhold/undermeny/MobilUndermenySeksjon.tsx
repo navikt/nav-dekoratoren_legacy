@@ -10,6 +10,8 @@ import Listelement from '../utils/Listelement';
 import { LenkeMedSporing } from '../../../../../../common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from '../../../../../../../utils/analytics/analytics';
 
+import './MobilUndermenySeksjon.less';
+
 const stateSelector = (state: AppState) => ({
     auth: state.innloggingsstatus.data,
     XP_BASE_URL: state.environment.XP_BASE_URL,
@@ -27,7 +29,7 @@ export const MobilUndermenySeksjon = ({ menyClass, lenker }: Props) => {
 
     return (
         <>
-            <Heading level={'2'} size={'medium'} className={menyClass.element('undermeny-arbeidsflate')}>
+            <Heading level={'2'} size={'medium'} className={'mobilUndermenySeksjonHeader'}>
                 {lenker.displayName}
             </Heading>
             {showSecurityLevelWarning && <MinsideLockMsg />}

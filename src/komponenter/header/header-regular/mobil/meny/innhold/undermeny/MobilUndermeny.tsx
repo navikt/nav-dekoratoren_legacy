@@ -28,13 +28,12 @@ export const MobilUndermeny = ({ lenker, className }: Props) => {
 
     return (
         <div className={menyClass.element('undermeny-innhold', underMenuIsOpen ? '' : 'hidden')}>
-            <MobilUndermenyLukk className={menyClass.className} />
+            <MobilUndermenyLukk />
             {flatten ? (
                 children.map((seksjon) => <MobilUndermenySeksjon menyClass={menyClass} lenker={seksjon} />)
             ) : (
                 <MobilUndermenySeksjon menyClass={menyClass} lenker={lenker} />
             )}
-            <MobilUndermenyLukk className={menyClass.className} />
         </div>
     );
 };
