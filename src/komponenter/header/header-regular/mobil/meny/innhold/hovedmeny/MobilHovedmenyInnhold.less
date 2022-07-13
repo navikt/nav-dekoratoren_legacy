@@ -1,0 +1,19 @@
+@import (reference) '../../../../../../../styling-variabler.less';
+
+.mobilHovedmenyInnhold {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    visibility: visible;
+    opacity: 1;
+
+    transition-property: visibility, opacity;
+    transition-timing-function: ease-in;
+    transition-duration: 100ms;
+}
+
+.hiddenBySearch {
+    visibility: hidden;
+    opacity: 0;
+}

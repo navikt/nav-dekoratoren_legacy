@@ -21,6 +21,7 @@ import { Heading } from '@navikt/ds-react';
 import { MenyNode } from '../../../../../../../store/reducers/menu-duck';
 
 import './MobilHovedmenyInnholdPrivat.less';
+import classNames from 'classnames';
 
 const stateSelector = (state: AppState) => ({
     dittNavUrl: state.environment.DITT_NAV_URL,
@@ -59,14 +60,14 @@ export const MobilHovedmenyInnholdPrivat = ({ setMenyliste, hovedmenyLenker }: P
     return (
         <>
             <Heading level={'2'} size={'small'}>
-                <LenkeMedSporing
-                    className={'mobilPrivatHovedmenyLenke'}
+                <a
+                    className={classNames('mobilPrivatHovedmenyLenke', 'lenke')}
                     href={'#'}
                     onClick={(e) => setMenyliste(e, { ...hovedmenyLenker, flatten: true })}
                 >
                     <Tekst id={'how-can-we-help'} />
                     <Next />
-                </LenkeMedSporing>
+                </a>
             </Heading>
 
             <LenkeMedSporing href={dittNavLenke.url} className={'mobilPrivatHovedmenyLenke'}>

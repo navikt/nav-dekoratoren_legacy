@@ -26,7 +26,9 @@ export const MobilHovedmenyHeader = () => {
                     <Tekst id={`rolle-${arbeidsflate}`} />
                 </Heading>
             )}
-            <LenkeMedSporing href={lenke?.url || 'https://nav.no'}>{'Til forsiden'}</LenkeMedSporing>
+            <LenkeMedSporing href={lenke?.url || 'https://nav.no'} className={'mobilMenyHeaderLenke'}>
+                {'Til forsiden'}
+            </LenkeMedSporing>
         </div>
     );
 };

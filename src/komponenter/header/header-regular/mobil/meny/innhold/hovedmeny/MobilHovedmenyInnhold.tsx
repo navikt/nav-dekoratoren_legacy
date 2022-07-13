@@ -15,6 +15,9 @@ import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import Listelement from '../utils/Listelement';
 import { Next } from '@navikt/ds-icons';
 import { MobilHovedmenyInnholdPrivat } from './MobilHovedmenyInnholdPrivat';
+import classNames from 'classnames';
+
+import './MobilHovedmenyInnhold.less';
 
 export const mobilSokInputId = `sok-input-small`;
 
@@ -72,46 +75,40 @@ export const MobilHovedmenyInnhold = (props: Props) => {
                 searchInput={searchInput}
                 setSearchInput={setSearchInput}
             />
-            {!searchInput && (
-                <>
-                    <MobilInnloggetBruker />
-                    {innloggingsstatus.data.authenticated && arbeidsflate === MenuValue.PRIVATPERSON && (
-                        <div className={menyClass.element('submeny', 'wrap')}>
-                            <Dittnavmeny
-                                minsideLenker={minsideLenker}
-                                className={menyClass.className}
-                                openMeny={setMenyliste}
-                            />
-                        </div>
-                    )}
-                    <MobilHovedmenyHeader />
-                    {arbeidsflate === MenuValue.PRIVATPERSON && isLanguageNorwegian ? (
-                        <MobilHovedmenyInnholdPrivat hovedmenyLenker={hovedmenyLenker} setMenyliste={setMenyliste} />
-                    ) : (
-                        <>
-                            <ul className={menyClass.element('meny', 'mainlist')}>
-                                {hovedmenyLenker.children.map((menyElement: MenyNode, index: number) => (
-                                    <Listelement
-                                        key={index}
-                                        className={menyClass.className}
-                                        classElement={'text-element'}
+            <div className={classNames('mobilHovedmenyInnhold', !!searchInput && 'hiddenBySearch')}>
+                <MobilInnloggetBruker />
+                {innloggingsstatus.data.authenticated && arbeidsflate === MenuValue.PRIVATPERSON && (
+                    <div className={menyClass.element('submeny', 'wrap')}>
+                        <Dittnavmeny
+                            minsideLenker={minsideLenker}
+                            className={menyClass.className}
+                            openMeny={setMenyliste}
+                        />
+                    </div>
+                )}
+                <MobilHovedmenyHeader />
+                {arbeidsflate === MenuValue.PRIVATPERSON && isLanguageNorwegian ? (
+                    <MobilHovedmenyInnholdPrivat hovedmenyLenker={hovedmenyLenker} setMenyliste={setMenyliste} />
+                ) : (
+                    <>
+                        <ul className={menyClass.element('meny', 'mainlist')}>
+                            {hovedmenyLenker.children.map((menyElement: MenyNode, index: number) => (
+                                <Listelement key={index} className={menyClass.className} classElement={'text-element'}>
+                                    <a
+                                        className={'lenke'}
+                                        href={'https://nav.no'}
+                                        onClick={(e) => setMenyliste(e, menyElement)}
                                     >
-                                        <a
-                                            className={'lenke'}
-                                            href={'https://nav.no'}
-                                            onClick={(e) => setMenyliste(e, menyElement)}
-                                        >
-                                            {menyElement.displayName}
-                                            <Next />
-                                        </a>
-                                    </Listelement>
-                                ))}
-                            </ul>
-                            {isLanguageNorwegian && <MobilArbeidsflateValg lang={language} />}
-                        </>
-                    )}
-                </>
-            )}
+                                        {menyElement.displayName}
+                                        <Next />
+                                    </a>
+                                </Listelement>
+                            ))}
+                        </ul>
+                        {isLanguageNorwegian && <MobilArbeidsflateValg lang={language} />}
+                    </>
+                )}
+            </div>
         </div>
     );
 };
