@@ -19,9 +19,9 @@ import { settArbeidsflate } from '../../../../../../../store/reducers/arbeidsfla
 import { useCookies } from 'react-cookie';
 import { Heading, Link } from '@navikt/ds-react';
 import { MenyNode } from '../../../../../../../store/reducers/menu-duck';
+import classNames from 'classnames';
 
 import './MobilHovedmenyInnholdPrivat.less';
-import classNames from 'classnames';
 
 const stateSelector = (state: AppState) => ({
     dittNavUrl: state.environment.DITT_NAV_URL,
