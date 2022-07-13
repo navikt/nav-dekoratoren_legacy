@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import BEMHelper from 'utils/bem';
-import Undermeny from './innhold/Undermeny';
-import Hovedmeny from './innhold/Hovedmeny';
+import { MobilUndermeny } from './innhold/undermeny/Undermeny';
+import { MobilHovedmeny } from './innhold/Hovedmeny';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { getHovedmenyNode } from 'utils/meny-storage-utils';
@@ -27,8 +27,8 @@ const MobilMeny = (props: Props) => {
 
     return (
         <>
-            <Hovedmeny className={menyClass.className} settLenker={settLenker} />
-            <Undermeny className={menyClass.className} lenker={lenker} />
+            <MobilHovedmeny className={menyClass.className} settLenker={settLenker} />
+            <MobilUndermeny className={menyClass.className} lenker={lenker} />
         </>
     );
 };

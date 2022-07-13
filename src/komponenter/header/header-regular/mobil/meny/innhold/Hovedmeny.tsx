@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { Next } from '@navikt/ds-icons';
 import BEMHelper from 'utils/bem';
-import { MenyNode } from 'store/reducers/menu-duck';
-import { getHovedmenyNode } from 'utils/meny-storage-utils';
-import { getMinsidemenyNode, MenuValue } from 'utils/meny-storage-utils';
+import { dataInitState, MenyNode } from 'store/reducers/menu-duck';
+import { getHovedmenyNode, getMinsidemenyNode, MenuValue } from 'utils/meny-storage-utils';
 import { Locale } from 'store/reducers/language-duck';
-import MenyIngress from './elementer/MenyIngress';
-import Listelement from './elementer/Listelement';
+import { MobilMenyHeader } from './header/MobilMenyHeader';
 import MobilarbeidsflateValg from './elementer/arbeidsflatemeny/MobilarbeidsflateValg';
 import { AppState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,16 +11,13 @@ import InnloggetBruker from './elementer/innloggetbruker/InnloggetBruker';
 import ForsideLenke from './elementer/ForsideLenke';
 import Dittnavmeny from './elementer/dittnavmeny/Dittnavmeny';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
-import { dataInitState } from 'store/reducers/menu-duck';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
-
-interface Props {
-    settLenker: (meny: MenyNode) => void;
-    className: string;
-}
+import Listelement from './elementer/Listelement';
+import { Next } from '@navikt/ds-icons';
 
 export const mobilSokInputId = `sok-input-small`;
+
 const stateSelector = (state: AppState) => ({
     meny: state.menypunkt,
     language: state.language.language,
@@ -34,7 +28,12 @@ const stateSelector = (state: AppState) => ({
     varselIsOpen: state.dropdownToggles.varsler,
 });
 
-const Hovedmeny = (props: Props) => {
+type Props = {
+    settLenker: (meny: MenyNode) => void;
+    className: string;
+};
+
+export const MobilHovedmeny = (props: Props) => {
     const dispatch = useDispatch();
     const { className, settLenker } = props;
     const menyClass = BEMHelper(className);
@@ -86,20 +85,33 @@ const Hovedmeny = (props: Props) => {
                             />
                         </div>
                     )}
-                    <MenyIngress className={menyClass.element('meny', 'ingress')} inputext={arbeidsflate} />
+                    <MobilMenyHeader />
                     <ul className={menyClass.element('meny', 'mainlist')}>
-                        {hovedmenyLenker.children.map((menyElement: MenyNode, index: number) => (
-                            <Listelement key={index} className={menyClass.className} classElement="text-element">
+                        {arbeidsflate === MenuValue.PRIVATPERSON && isLanguageNorwegian ? (
+                            <Listelement className={menyClass.className} classElement={'text-element'}>
                                 <a
-                                    className="lenke"
-                                    href="https://nav.no"
-                                    onClick={(e) => setMenyliste(e, menyElement)}
+                                    className={'lenke'}
+                                    href={'https://nav.no'}
+                                    onClick={(e) => setMenyliste(e, { ...hovedmenyLenker, flatten: true })}
                                 >
-                                    {menyElement.displayName}
+                                    {'Hva kan vi hjelpe deg med?'}
                                     <Next />
                                 </a>
                             </Listelement>
-                        ))}
+                        ) : (
+                            hovedmenyLenker.children.map((menyElement: MenyNode, index: number) => (
+                                <Listelement key={index} className={menyClass.className} classElement={'text-element'}>
+                                    <a
+                                        className={'lenke'}
+                                        href={'https://nav.no'}
+                                        onClick={(e) => setMenyliste(e, menyElement)}
+                                    >
+                                        {menyElement.displayName}
+                                        <Next />
+                                    </a>
+                                </Listelement>
+                            ))
+                        )}
                     </ul>
                     {isLanguageNorwegian && <MobilarbeidsflateValg lang={language} />}
                 </>
@@ -107,5 +119,3 @@ const Hovedmeny = (props: Props) => {
         </div>
     );
 };
-
-export default Hovedmeny;

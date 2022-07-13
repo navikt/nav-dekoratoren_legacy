@@ -3,10 +3,12 @@ import { BodyShort, Panel } from '@navikt/ds-react';
 import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
 import Lock from 'ikoner/meny/Lock';
+
 import './MinsideLockMsg.less';
 
+const cls = BEMHelper('minside-lock');
+
 export const MinsideLockMsg = () => {
-    const cls = BEMHelper('minside-lock');
     return (
         <Panel className={cls.element('panel')}>
             <div className={cls.element('ikon')}>
@@ -20,5 +22,3 @@ export const MinsideLockMsg = () => {
         </Panel>
     );
 };
-
-export default MinsideLockMsg;
