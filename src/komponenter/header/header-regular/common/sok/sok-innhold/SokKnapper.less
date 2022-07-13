@@ -34,7 +34,7 @@
     }
 
     &__ikon-container {
-        width: 32px;
+        width: 24px;
         height: 24px;
         padding: 0;
         display: block;
@@ -87,13 +87,16 @@
             font-family: 'Source Sans Pro', Arial, sans-serif;
             font-size: 1rem;
         }
+
+        &__ikon-container {
+            margin-right: 8px;
+        }
     }
 
     @media @screen-mobile {
         &__container {
             align-self: center;
-            margin-right: 0.5rem;
-            height: 4rem;
+            height: 3rem;
         }
 
         &__knapp-submit {
@@ -102,6 +105,10 @@
             .sok-knapper__ikon-container {
                 bottom: 4px;
             }
+        }
+
+        &__knapp-avbryt {
+            padding: 0;
         }
 
         &__knapp-tekst {
