@@ -2,6 +2,7 @@ import React from 'react';
 import { LinkPanel } from '@navikt/ds-react';
 import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
+
 import Tekst from 'tekster/finn-tekst';
 import { analyticsEvent } from 'utils/analytics/analytics';
 import BEMHelper from 'utils/bem';
@@ -20,7 +21,7 @@ import './ArbeidsflateLenkepanel.less';
 
 const cls = BEMHelper('arbeidsflate-lenkepanel');
 
-type Props = {
+interface Props {
     lenke: ArbeidsflateLenke;
     language: Locale;
     analyticsEventArgs: AnalyticsEventArgs;
@@ -28,7 +29,7 @@ type Props = {
     enableCompactView?: boolean;
     id?: string;
     withDescription?: boolean;
-};
+}
 
 const ArbeidsflateLenkepanel = ({
     lenke,
