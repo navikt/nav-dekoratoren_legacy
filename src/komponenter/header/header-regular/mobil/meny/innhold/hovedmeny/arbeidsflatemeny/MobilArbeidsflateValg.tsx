@@ -1,15 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import BEMHelper from 'utils/bem';
 import { Locale } from 'store/reducers/language-duck';
 import { bunnLenker } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-arbeidsflate-lenker';
 import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
+import { UnstyledList } from '../../utils/UnstyledList';
 
 import './MobilArbeidsflateValg.less';
-
-const cls = BEMHelper('mobil-arbeidsflate-valg');
 
 const stateProps = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -25,9 +23,9 @@ export const MobilArbeidsflateValg = ({ lang }: Props) => {
     const lenker = bunnLenker(environment)[arbeidsflate];
 
     return (
-        <ul className={cls.className}>
+        <UnstyledList className={'mobilArbeidsflateValg'}>
             {lenker.map((lenke, i) => (
-                <li key={i} className={cls.element('liste-element')}>
+                <li key={i}>
                     <ArbeidsflateLenkepanel
                         lenke={lenke}
                         language={lang}
@@ -42,6 +40,6 @@ export const MobilArbeidsflateValg = ({ lang }: Props) => {
                     />
                 </li>
             ))}
-        </ul>
+        </UnstyledList>
     );
 };

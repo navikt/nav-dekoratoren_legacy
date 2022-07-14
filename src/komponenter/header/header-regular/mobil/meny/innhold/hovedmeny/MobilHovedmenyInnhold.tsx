@@ -12,12 +12,12 @@ import Dittnavmeny from './dittnavmeny/Dittnavmeny';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
-import Listelement from '../utils/Listelement';
-import { Next } from '@navikt/ds-icons';
 import { MobilHovedmenyInnholdPrivat } from './MobilHovedmenyInnholdPrivat';
 import classNames from 'classnames';
 
 import './MobilHovedmenyInnhold.less';
+import { MobilMenyKategoriLenke } from './kategorilenke/MobilMenyKategoriLenke';
+import { UnstyledList } from '../utils/UnstyledList';
 
 export const mobilSokInputId = `sok-input-small`;
 
@@ -50,17 +50,12 @@ export const MobilHovedmenyInnhold = (props: Props) => {
 
     const hovedmenyLenker = getHovedmenyNode(meny.data, language, arbeidsflate) || dataInitState;
 
-    const menutoggle = () => {
+    const setUndermenyLenker = (menyNode: MenyNode) => {
         analyticsEvent({
             category: AnalyticsCategory.Header,
             action: `meny-${underMenuIsOpen ? 'close' : 'open'}`,
         });
         dispatch(toggleUndermenyVisning());
-    };
-
-    const setMenyliste = (event: React.MouseEvent<HTMLAnchorElement>, menyNode: MenyNode) => {
-        event.preventDefault();
-        menutoggle();
         settLenker(menyNode);
     };
 
@@ -78,33 +73,26 @@ export const MobilHovedmenyInnhold = (props: Props) => {
             <div className={classNames('mobilHovedmenyInnhold', !!searchInput && 'hiddenBySearch')}>
                 <MobilInnloggetBruker />
                 {innloggingsstatus.data.authenticated && arbeidsflate === MenuValue.PRIVATPERSON && (
-                    <div className={menyClass.element('submeny', 'wrap')}>
-                        <Dittnavmeny
-                            minsideLenker={minsideLenker}
-                            className={menyClass.className}
-                            openMeny={setMenyliste}
-                        />
-                    </div>
+                    <Dittnavmeny
+                        minsideLenker={minsideLenker}
+                        className={menyClass.className}
+                        openMeny={setUndermenyLenker}
+                    />
                 )}
                 <MobilHovedmenyHeader />
                 {arbeidsflate === MenuValue.PRIVATPERSON && isLanguageNorwegian ? (
-                    <MobilHovedmenyInnholdPrivat hovedmenyLenker={hovedmenyLenker} setMenyliste={setMenyliste} />
+                    <MobilHovedmenyInnholdPrivat hovedmenyLenker={hovedmenyLenker} setUndermeny={setUndermenyLenker} />
                 ) : (
                     <>
-                        <ul className={menyClass.element('meny', 'mainlist')}>
+                        <UnstyledList>
                             {hovedmenyLenker.children.map((menyElement: MenyNode, index: number) => (
-                                <Listelement key={index} className={menyClass.className} classElement={'text-element'}>
-                                    <a
-                                        className={'lenke'}
-                                        href={'https://nav.no'}
-                                        onClick={(e) => setMenyliste(e, menyElement)}
-                                    >
+                                <li key={index}>
+                                    <MobilMenyKategoriLenke callback={() => setUndermenyLenker(menyElement)}>
                                         {menyElement.displayName}
-                                        <Next />
-                                    </a>
-                                </Listelement>
+                                    </MobilMenyKategoriLenke>
+                                </li>
                             ))}
-                        </ul>
+                        </UnstyledList>
                         {isLanguageNorwegian && <MobilArbeidsflateValg lang={language} />}
                     </>
                 )}

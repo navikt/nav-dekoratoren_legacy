@@ -6,7 +6,6 @@ import { AppState } from '../../../../../../../store/reducers';
 import { MenyNode } from '../../../../../../../store/reducers/menu-duck';
 import { MinsideLockMsg } from '../../../../common/minside-lock-msg/MinsideLockMsg';
 import { genererUrl } from '../../../../../../../utils/Environment';
-import Listelement from '../utils/Listelement';
 import { LenkeMedSporing } from '../../../../../../common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from '../../../../../../../utils/analytics/analytics';
 
@@ -38,11 +37,7 @@ export const MobilUndermenySeksjon = ({ menyClass, lenker }: Props) => {
                     const displayLock = lenke.displayLock && auth.securityLevel !== '4';
                     const href = genererUrl(XP_BASE_URL, lenke.path);
                     return (
-                        <Listelement
-                            key={index}
-                            className={menyClass.className}
-                            classElement={'text-element-undermeny'}
-                        >
+                        <li key={index} className={menyClass.className}>
                             <LenkeMedSporing
                                 href={href}
                                 withChevron={true}
@@ -56,7 +51,7 @@ export const MobilUndermenySeksjon = ({ menyClass, lenker }: Props) => {
                             >
                                 {lenke.displayName}
                             </LenkeMedSporing>
-                        </Listelement>
+                        </li>
                     );
                 })}
             </ul>

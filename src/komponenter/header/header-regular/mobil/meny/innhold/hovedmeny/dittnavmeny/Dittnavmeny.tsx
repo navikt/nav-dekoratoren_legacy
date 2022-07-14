@@ -1,27 +1,25 @@
 import React from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import BEMHelper from 'utils/bem';
-import Listelement from '../../utils/Listelement';
-import { Next } from '@navikt/ds-icons';
+import { MobilMenyKategoriLenke } from '../kategorilenke/MobilMenyKategoriLenke';
 
-interface Props {
+type Props = {
     minsideLenker: MenyNode;
-    openMeny: (event: React.MouseEvent<HTMLAnchorElement>, menyElement: MenyNode) => void;
+    openMeny: (menyElement: MenyNode) => void;
     className: string;
-}
+};
 
-const Dittnavmeny = (props: Props) => {
-    const cls = BEMHelper(props.className);
+const Dittnavmeny = ({ openMeny, minsideLenker, className }: Props) => {
+    const cls = BEMHelper(className);
 
     return (
         <ul className={cls.element('meny', 'minsidelist')}>
-            {props.minsideLenker.children.map((menyElement: MenyNode, index: number) => (
-                <Listelement className={cls.className} classElement="text-element" key={index}>
-                    <a className="lenke" href="https://nav.no" onClick={(event) => props.openMeny(event, menyElement)}>
+            {minsideLenker.children.map((menyElement: MenyNode, index: number) => (
+                <li key={index}>
+                    <MobilMenyKategoriLenke callback={() => openMeny(menyElement)}>
                         {menyElement.displayName}
-                        <Next />
-                    </a>
-                </Listelement>
+                    </MobilMenyKategoriLenke>
+                </li>
             ))}
         </ul>
     );

@@ -4,17 +4,18 @@ import { AnalyticsEventArgs, analyticsEvent } from 'utils/analytics/analytics';
 import Lock from 'ikoner/meny/Lock';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
+
 import './LenkeMedSporing.less';
+import classNames from 'classnames';
 
 type Props = {
     href: string;
     children: React.ReactNode;
     analyticsEventArgs?: AnalyticsEventArgs;
     classNameOverride?: string;
-    onClick?: (...args: any) => void;
-    tabIndex?: number;
     withChevron?: boolean;
     withLock?: boolean;
+    closeMenusOnClick?: boolean;
 } & React.HTMLAttributes<HTMLAnchorElement>;
 
 export const LenkeMedSporing = ({
@@ -28,24 +29,28 @@ export const LenkeMedSporing = ({
     tabIndex,
     withChevron,
     withLock,
+    closeMenusOnClick = true,
     lang,
 }: Props) => {
-    const classnameFull = `${classNameOverride || 'lenke dekorator-lenke'}${withChevron ? ' chevronlenke' : ''}${
-        className ? ` ${className}` : ''
-    }`;
     const dispatch = useDispatch();
 
     return (
         <a
             href={href}
-            className={classnameFull}
+            className={classNames(
+                classNameOverride || 'lenke dekorator-lenke',
+                withChevron && 'chevronlenke',
+                className
+            )}
             id={id}
             tabIndex={tabIndex}
-            onAuxClick={(event: React.MouseEvent) =>
+            onAuxClick={(event) =>
                 analyticsEventArgs && event.button && event.button === 1 && analyticsEvent(analyticsEventArgs)
             }
-            onClick={(event: React.MouseEvent) => {
-                dispatch(lukkAlleDropdowns());
+            onClick={(event) => {
+                if (closeMenusOnClick) {
+                    dispatch(lukkAlleDropdowns());
+                }
                 if (onClick) {
                     onClick(event);
                 }

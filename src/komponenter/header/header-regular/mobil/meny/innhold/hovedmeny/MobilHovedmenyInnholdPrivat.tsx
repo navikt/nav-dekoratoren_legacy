@@ -17,9 +17,8 @@ import { lukkAlleDropdowns } from '../../../../../../../store/reducers/dropdown-
 import { erNavDekoratoren } from '../../../../../../../utils/Environment';
 import { settArbeidsflate } from '../../../../../../../store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
-import { Heading, Link } from '@navikt/ds-react';
 import { MenyNode } from '../../../../../../../store/reducers/menu-duck';
-import classNames from 'classnames';
+import { MobilMenyKategoriLenke } from './kategorilenke/MobilMenyKategoriLenke';
 
 import './MobilHovedmenyInnholdPrivat.less';
 
@@ -29,11 +28,11 @@ const stateSelector = (state: AppState) => ({
 });
 
 type Props = {
-    setMenyliste: (event: React.MouseEvent<HTMLAnchorElement>, menyNode: MenyNode) => void;
+    setUndermeny: (menyNode: MenyNode) => void;
     hovedmenyLenker: MenyNode;
 };
 
-export const MobilHovedmenyInnholdPrivat = ({ setMenyliste, hovedmenyLenker }: Props) => {
+export const MobilHovedmenyInnholdPrivat = ({ setUndermeny, hovedmenyLenker }: Props) => {
     const { dittNavUrl, xpBaseUrl } = useSelector(stateSelector);
     const dispatch = useDispatch();
     const [, setCookie] = useCookies();
@@ -59,18 +58,11 @@ export const MobilHovedmenyInnholdPrivat = ({ setMenyliste, hovedmenyLenker }: P
 
     return (
         <>
-            <Heading level={'2'} size={'small'}>
-                <Link
-                    className={classNames('mobilPrivatHovedmenyLenke', 'lenke')}
-                    href={'#'}
-                    onClick={(e) => setMenyliste(e, { ...hovedmenyLenker, flatten: true })}
-                >
-                    <Tekst id={'how-can-we-help'} />
-                    <Next />
-                </Link>
-            </Heading>
+            <MobilMenyKategoriLenke callback={() => setUndermeny({ ...hovedmenyLenker, flatten: true })}>
+                <Tekst id={"'how-can-we-help'"} />
+            </MobilMenyKategoriLenke>
 
-            <LenkeMedSporing href={dittNavLenke.url} className={'mobilPrivatHovedmenyLenke'}>
+            <LenkeMedSporing href={dittNavLenke.url} className={'mobilKategoriLenke'}>
                 <Tekst id={'min-side-login'} />
                 <Next />
             </LenkeMedSporing>
