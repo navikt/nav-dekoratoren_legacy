@@ -4,7 +4,7 @@ import { dataInitState, MenyNode } from 'store/reducers/menu-duck';
 import { getHovedmenyNode, getMinsidemenyNode, MenuValue } from 'utils/meny-storage-utils';
 import { Locale } from 'store/reducers/language-duck';
 import { MobilHovedmenyHeader } from './header/MobilHovedmenyHeader';
-import { MobilArbeidsflateValg } from './arbeidsflatemeny/MobilArbeidsflateValg';
+import { MobilArbeidsflateValg } from './arbeidsflatevalg/MobilArbeidsflateValg';
 import { AppState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { MobilInnloggetBruker } from './innlogget/MobilInnloggetBruker';
