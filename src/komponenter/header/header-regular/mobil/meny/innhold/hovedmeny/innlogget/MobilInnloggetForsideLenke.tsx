@@ -39,7 +39,7 @@ export const MobilInnloggetForsideLenke = () => {
     if (!lenkeProps) {
         return null;
     }
-    //
+
     return (
         <>
             <Heading level="2" size="small">

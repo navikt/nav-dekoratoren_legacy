@@ -4,9 +4,9 @@ import { AnalyticsEventArgs, analyticsEvent } from 'utils/analytics/analytics';
 import Lock from 'ikoner/meny/Lock';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
+import classNames from 'classnames';
 
 import './LenkeMedSporing.less';
-import classNames from 'classnames';
 
 type Props = {
     href: string;

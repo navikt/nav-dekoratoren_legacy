@@ -8,6 +8,7 @@ import Tekst from '../../../../../../../../tekster/finn-tekst';
 import { MenuValue } from '../../../../../../../../utils/meny-storage-utils';
 
 import './MobilHovedmenyHeader.less';
+import { AnalyticsCategory } from '../../../../../../../../utils/analytics/analytics';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -19,6 +20,8 @@ export const MobilHovedmenyHeader = () => {
 
     const lenke = arbeidsflateLenker(XP_BASE_URL).find((item) => item.key === arbeidsflate);
 
+    const href = lenke?.url || 'https://www.nav.no';
+
     return (
         <div className={'mobilMenyHeader'}>
             {arbeidsflate !== MenuValue.PRIVATPERSON && (
@@ -26,8 +29,17 @@ export const MobilHovedmenyHeader = () => {
                     <Tekst id={`rolle-${arbeidsflate}`} />
                 </Heading>
             )}
-            <LenkeMedSporing href={lenke?.url || 'https://nav.no'} className={'mobilMenyHeaderLenke'}>
-                {'Til forsiden'}
+            <LenkeMedSporing
+                href={href}
+                className={'mobilMenyHeaderLenke'}
+                analyticsEventArgs={{
+                    context: arbeidsflate,
+                    category: AnalyticsCategory.Meny,
+                    action: 'Til forsiden',
+                    label: href,
+                }}
+            >
+                <Tekst id={'til-forsiden'} />
             </LenkeMedSporing>
         </div>
     );

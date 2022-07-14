@@ -67,7 +67,7 @@ export const MobilHovedmenyInnholdPrivat = ({ setUndermeny, hovedmenyLenker }: P
 
             <MobilMenypunkt tekst={finnTekst('min-side-login', language)} type={'lenke'} href={dittNavLenke.url} />
 
-            <UnstyledList className={'mobilPrivatArbeidsflateValg'}>
+            <UnstyledList className={'mobilPrivatArbeidsflateListe'}>
                 <LenkeMedSporing
                     href={arbgiverLenke.url}
                     analyticsEventArgs={{ ...analyticsArgs, label: MenuValue.ARBEIDSGIVER }}
