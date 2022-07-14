@@ -26,6 +26,7 @@ const stateSelector = (state: AppState) => ({
     dittNavUrl: state.environment.DITT_NAV_URL,
     xpBaseUrl: state.environment.XP_BASE_URL,
     language: state.language.language,
+    authenticated: state.innloggingsstatus.data.authenticated,
 });
 
 type Props = {
@@ -34,7 +35,7 @@ type Props = {
 };
 
 export const MobilHovedmenyInnholdPrivat = ({ setUndermeny, hovedmenyLenker }: Props) => {
-    const { dittNavUrl, xpBaseUrl, language } = useSelector(stateSelector);
+    const { dittNavUrl, xpBaseUrl, language, authenticated } = useSelector(stateSelector);
     const dispatch = useDispatch();
     const [, setCookie] = useCookies();
 
@@ -65,7 +66,9 @@ export const MobilHovedmenyInnholdPrivat = ({ setUndermeny, hovedmenyLenker }: P
                 callback={() => setUndermeny({ ...hovedmenyLenker, flatten: true })}
             />
 
-            <MobilMenypunkt tekst={finnTekst('min-side-login', language)} type={'lenke'} href={dittNavLenke.url} />
+            {!authenticated && (
+                <MobilMenypunkt tekst={finnTekst('min-side-login', language)} type={'lenke'} href={dittNavLenke.url} />
+            )}
 
             <UnstyledList className={'mobilPrivatArbeidsflateListe'}>
                 <LenkeMedSporing
