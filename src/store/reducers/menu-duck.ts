@@ -18,6 +18,7 @@ export interface MenyNode {
     id?: string;
     hasChildren: boolean;
     isMyPageMenu?: boolean;
+    flatten?: boolean;
     children: MenyNode[];
 }
 

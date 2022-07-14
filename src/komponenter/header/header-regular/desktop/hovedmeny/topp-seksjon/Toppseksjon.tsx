@@ -1,7 +1,7 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
-import { BodyShort, Heading } from '@navikt/ds-react';
+import { Heading } from '@navikt/ds-react';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
@@ -12,6 +12,8 @@ import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { CookieName, cookieOptions } from '../../../../../../server/cookieSettings';
 import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
+import { MenuValue } from '../../../../../../utils/meny-storage-utils';
+
 import './Toppseksjon.less';
 
 interface Props {
@@ -29,10 +31,13 @@ export const Toppseksjon = ({ classname }: Props) => {
     return (
         <div className={cls.element('topp-seksjon')} data-testid={'toppseksjon'}>
             <Heading level="2" size="medium" className={cls.element('topp-seksjon-tittel')}>
-                <Tekst id={`rolle-${arbeidsflate.toLowerCase()}`} />
-                <BodyShort className={cls.element('topp-seksjon-tittel-decoration')} aria-hidden={true}>
-                    {'//'}
-                </BodyShort>
+                <Tekst
+                    id={
+                        arbeidsflate === MenuValue.PRIVATPERSON
+                            ? 'how-can-we-help'
+                            : `rolle-${arbeidsflate.toLowerCase()}`
+                    }
+                />
             </Heading>
             <LenkeMedSporing
                 href={context.url}
@@ -54,6 +59,7 @@ export const Toppseksjon = ({ classname }: Props) => {
                     action: `hovedmeny/forsidelenke`,
                     label: XP_BASE_URL,
                 }}
+                className={cls.element('forside-lenke')}
             >
                 <Tekst id={'til-forsiden'} />
             </LenkeMedSporing>
