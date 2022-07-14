@@ -30,7 +30,7 @@ export const MobilInnloggetForsideLenke = () => {
             : arbeidsflate === MenuValue.ARBEIDSGIVER
             ? {
                   tekstIdHeader: 'min-side-arbeidsgiver',
-                  tekstIdLenke: 'til-dittnav-forside',
+                  tekstIdLenke: 'ga-til-min-side-arbeidsgiver',
                   href: MINSIDE_ARBEIDSGIVER_URL + valgtbedrift(),
                   analyticsAction: 'minside-arbeidsgiver',
               }
