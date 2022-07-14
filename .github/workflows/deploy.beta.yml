@@ -13,7 +13,7 @@ on:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/deploy.shared.dev.yml
+    uses: ./.github/workflows/deploy.shared.dev-and-beta.yml
     with:
-      NAIS_RESOURCE: .nais/dev-gcp/personbruker.yaml
+      NAIS_RESOURCE: .nais/beta-gcp/personbruker.yaml
     secrets: inherit
