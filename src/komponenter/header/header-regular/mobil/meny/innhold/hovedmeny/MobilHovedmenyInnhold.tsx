@@ -8,13 +8,13 @@ import { MobilArbeidsflateValg } from './arbeidsflatemeny/MobilArbeidsflateValg'
 import { AppState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { MobilInnloggetBruker } from './innlogget/MobilInnloggetBruker';
-import Dittnavmeny from './dittnavmeny/Dittnavmeny';
+import { DittNavMeny } from './innlogget/DittNavMeny';
 import Sok from 'komponenter/header/header-regular/common/sok/Sok';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { MobilHovedmenyInnholdPrivat } from './MobilHovedmenyInnholdPrivat';
 import classNames from 'classnames';
-import { MobilMenypunkt } from './kategorilenke/MobilMenypunkt';
+import { MobilMenypunkt } from './menypunkt/MobilMenypunkt';
 import { UnstyledList } from '../utils/UnstyledList';
 
 import './MobilHovedmenyInnhold.less';
@@ -73,11 +73,7 @@ export const MobilHovedmenyInnhold = (props: Props) => {
             <div className={classNames('mobilHovedmenyInnhold', !!searchInput && 'hiddenBySearch')}>
                 <MobilInnloggetBruker />
                 {innloggingsstatus.data.authenticated && arbeidsflate === MenuValue.PRIVATPERSON && (
-                    <Dittnavmeny
-                        minsideLenker={minsideLenker}
-                        className={menyClass.className}
-                        openMeny={setUndermenyLenker}
-                    />
+                    <DittNavMeny minsideLenker={minsideLenker} setUnderMeny={setUndermenyLenker} />
                 )}
                 <MobilHovedmenyHeader />
                 {arbeidsflate === MenuValue.PRIVATPERSON && isLanguageNorwegian ? (

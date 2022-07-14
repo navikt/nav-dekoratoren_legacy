@@ -1,7 +1,6 @@
 import React from 'react';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { Heading } from '@navikt/ds-react';
-import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
@@ -9,7 +8,7 @@ import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-a
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from '../../../../../../../../utils/analytics/analytics';
 
-const cls = BEMHelper('forsideLenke');
+import './MobilInnloggetForsideLenke.less';
 
 const stateSelector = (state: AppState) => ({
     DITT_NAV_URL: state.environment.DITT_NAV_URL,
@@ -40,15 +39,15 @@ export const MobilInnloggetForsideLenke = () => {
     if (!lenkeProps) {
         return null;
     }
-
+    //
     return (
-        <div className={cls.className}>
-            <Heading level="2" size="small" className={cls.element('ingress')}>
+        <>
+            <Heading level="2" size="small">
                 <Tekst id={lenkeProps.tekstIdHeader} />
             </Heading>
             <LenkeMedSporing
                 href={lenkeProps.href}
-                className={cls.element('lenke')}
+                className={'mobilInnloggetForsideLenke'}
                 analyticsEventArgs={{
                     category: AnalyticsCategory.Header,
                     action: lenkeProps.analyticsAction,
@@ -58,6 +57,6 @@ export const MobilInnloggetForsideLenke = () => {
             >
                 <Tekst id={lenkeProps.tekstIdLenke} />
             </LenkeMedSporing>
-        </div>
+        </>
     );
 };

@@ -7,7 +7,7 @@ import { MinsideLockMsg } from '../../../../common/minside-lock-msg/MinsideLockM
 import { genererUrl } from '../../../../../../../utils/Environment';
 import { AnalyticsCategory } from '../../../../../../../utils/analytics/analytics';
 import { UnstyledList } from '../utils/UnstyledList';
-import { MobilMenypunkt } from '../hovedmeny/kategorilenke/MobilMenypunkt';
+import { MobilMenypunkt } from '../hovedmeny/menypunkt/MobilMenypunkt';
 
 import './MobilUndermenySeksjon.less';
 

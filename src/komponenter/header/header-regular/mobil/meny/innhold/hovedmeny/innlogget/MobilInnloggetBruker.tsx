@@ -3,8 +3,8 @@ import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
-import LoggutIkonMobil from 'ikoner/meny/LoggutIkonMobil';
-import { Heading, Ingress } from '@navikt/ds-react';
+import { LoggutIkonMobil } from 'ikoner/meny/LoggutIkonMobil';
+import { Button, Heading, Ingress } from '@navikt/ds-react';
 import { getLogOutUrl } from 'utils/login';
 import { MobilInnloggetForsideLenke } from './MobilInnloggetForsideLenke';
 
@@ -24,7 +24,11 @@ const loggut = (logoutUrl: string) => {
 export const MobilInnloggetBruker = () => {
     const { innlogget, environment } = useSelector(stateSelector);
 
-    return innlogget.data.authenticated ? (
+    if (!innlogget.data.authenticated) {
+        return null;
+    }
+
+    return (
         <>
             <div className={cls.className}>
                 <div className={cls.element('label')}>
@@ -35,16 +39,16 @@ export const MobilInnloggetBruker = () => {
                 <div className={cls.element('bruker')}>
                     <Ingress>{innlogget.data.name.toLowerCase()}</Ingress>
                 </div>
-                <button className={cls.element('loggut')} onClick={() => loggut(getLogOutUrl(environment))}>
+                <Button
+                    onClick={() => loggut(getLogOutUrl(environment))}
+                    variant={'tertiary'}
+                    className={cls.element('loggut')}
+                >
                     <LoggutIkonMobil />
-                    <div className={cls.element('loggut', 'text')}>
-                        <Ingress>
-                            <Tekst id="logg-ut-knapp" />
-                        </Ingress>
-                    </div>
-                </button>
+                    <Tekst id="logg-ut-knapp" />
+                </Button>
             </div>
             <MobilInnloggetForsideLenke />
         </>
-    ) : null;
+    );
 };

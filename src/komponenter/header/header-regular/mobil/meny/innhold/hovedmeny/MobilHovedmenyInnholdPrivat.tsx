@@ -17,7 +17,7 @@ import { erNavDekoratoren } from '../../../../../../../utils/Environment';
 import { settArbeidsflate } from '../../../../../../../store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
 import { MenyNode } from '../../../../../../../store/reducers/menu-duck';
-import { MobilMenypunkt } from './kategorilenke/MobilMenypunkt';
+import { MobilMenypunkt } from './menypunkt/MobilMenypunkt';
 import { UnstyledList } from '../utils/UnstyledList';
 
 import './MobilHovedmenyInnholdPrivat.less';
