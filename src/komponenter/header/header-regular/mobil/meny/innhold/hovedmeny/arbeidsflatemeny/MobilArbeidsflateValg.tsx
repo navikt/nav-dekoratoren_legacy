@@ -24,21 +24,20 @@ export const MobilArbeidsflateValg = ({ lang }: Props) => {
 
     return (
         <UnstyledList className={'mobilArbeidsflateValg'}>
-            {lenker.map((lenke, i) => (
-                <li key={i}>
-                    <ArbeidsflateLenkepanel
-                        lenke={lenke}
-                        language={lang}
-                        analyticsEventArgs={{
-                            context: arbeidsflate,
-                            category: AnalyticsCategory.Meny,
-                            action: 'arbeidsflate-valg',
-                            label: lenke.key,
-                        }}
-                        withDescription={false}
-                        enableCompactView={true}
-                    />
-                </li>
+            {lenker.map((lenke, index) => (
+                <ArbeidsflateLenkepanel
+                    lenke={lenke}
+                    language={lang}
+                    analyticsEventArgs={{
+                        context: arbeidsflate,
+                        category: AnalyticsCategory.Meny,
+                        action: 'arbeidsflate-valg',
+                        label: lenke.key,
+                    }}
+                    withDescription={false}
+                    enableCompactView={true}
+                    key={index}
+                />
             ))}
         </UnstyledList>
     );

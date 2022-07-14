@@ -30,11 +30,9 @@ export const MobilUndermeny = ({ lenker, className }: Props) => {
         <div className={menyClass.element('undermeny-innhold', underMenuIsOpen ? '' : 'hidden')}>
             <MobilUndermenyLukk />
             {flatten ? (
-                children.map((seksjon) => (
-                    <MobilUndermenySeksjon menyClass={menyClass} lenker={seksjon} key={seksjon.id} />
-                ))
+                children.map((seksjon) => <MobilUndermenySeksjon lenker={seksjon} key={seksjon.id} />)
             ) : (
-                <MobilUndermenySeksjon menyClass={menyClass} lenker={lenker} />
+                <MobilUndermenySeksjon lenker={lenker} />
             )}
         </div>
     );

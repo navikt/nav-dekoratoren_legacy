@@ -1,6 +1,5 @@
 import React from 'react';
 import { Heading } from '@navikt/ds-react';
-import { BEMWrapper } from '../../../../../../../utils/bem';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../../../../../store/reducers';
 import { MenyNode } from '../../../../../../../store/reducers/menu-duck';
@@ -8,6 +7,7 @@ import { MinsideLockMsg } from '../../../../common/minside-lock-msg/MinsideLockM
 import { genererUrl } from '../../../../../../../utils/Environment';
 import { LenkeMedSporing } from '../../../../../../common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from '../../../../../../../utils/analytics/analytics';
+import { UnstyledList } from '../utils/UnstyledList';
 
 import './MobilUndermenySeksjon.less';
 
@@ -17,11 +17,10 @@ const stateSelector = (state: AppState) => ({
 });
 
 type Props = {
-    menyClass: BEMWrapper;
     lenker: MenyNode;
 };
 
-export const MobilUndermenySeksjon = ({ menyClass, lenker }: Props) => {
+export const MobilUndermenySeksjon = ({ lenker }: Props) => {
     const { auth, XP_BASE_URL } = useSelector(stateSelector);
 
     const showSecurityLevelWarning = auth.securityLevel !== '4' && lenker.children.some((lenke) => lenke.displayLock);
@@ -32,29 +31,28 @@ export const MobilUndermenySeksjon = ({ menyClass, lenker }: Props) => {
                 {lenker.displayName}
             </Heading>
             {showSecurityLevelWarning && <MinsideLockMsg />}
-            <ul className={menyClass.element('meny', 'list')}>
-                {lenker.children.map((lenke, index: number) => {
+            <UnstyledList>
+                {lenker.children.map((lenke, index) => {
                     const displayLock = lenke.displayLock && auth.securityLevel !== '4';
                     const href = genererUrl(XP_BASE_URL, lenke.path);
                     return (
-                        <li key={index} className={menyClass.className}>
-                            <LenkeMedSporing
-                                href={href}
-                                withChevron={true}
-                                withLock={displayLock}
-                                analyticsEventArgs={{
-                                    category: AnalyticsCategory.Meny,
-                                    action: `${lenker.displayName}/${lenke.displayName}`,
-                                    label: href,
-                                    ...(lenke.isMyPageMenu && { lenkegruppe: 'innlogget meny' }),
-                                }}
-                            >
-                                {lenke.displayName}
-                            </LenkeMedSporing>
-                        </li>
+                        <LenkeMedSporing
+                            href={href}
+                            withChevron={true}
+                            withLock={displayLock}
+                            analyticsEventArgs={{
+                                category: AnalyticsCategory.Meny,
+                                action: `${lenker.displayName}/${lenke.displayName}`,
+                                label: href,
+                                ...(lenke.isMyPageMenu && { lenkegruppe: 'innlogget meny' }),
+                            }}
+                            key={index}
+                        >
+                            {lenke.displayName}
+                        </LenkeMedSporing>
                     );
                 })}
-            </ul>
+            </UnstyledList>
         </>
     );
 };

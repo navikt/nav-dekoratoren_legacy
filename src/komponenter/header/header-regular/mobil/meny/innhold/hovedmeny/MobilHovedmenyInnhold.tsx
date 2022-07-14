@@ -85,12 +85,10 @@ export const MobilHovedmenyInnhold = (props: Props) => {
                 ) : (
                     <>
                         <UnstyledList>
-                            {hovedmenyLenker.children.map((menyElement: MenyNode, index: number) => (
-                                <li key={index}>
-                                    <MobilMenyKategoriLenke callback={() => setUndermenyLenker(menyElement)}>
-                                        {menyElement.displayName}
-                                    </MobilMenyKategoriLenke>
-                                </li>
+                            {hovedmenyLenker.children.map((menyElement, index) => (
+                                <MobilMenyKategoriLenke callback={() => setUndermenyLenker(menyElement)} key={index}>
+                                    {menyElement.displayName}
+                                </MobilMenyKategoriLenke>
                             ))}
                         </UnstyledList>
                         {isLanguageNorwegian && <MobilArbeidsflateValg lang={language} />}
