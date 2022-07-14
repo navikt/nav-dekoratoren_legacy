@@ -33,11 +33,11 @@ spec:
         - name: ENV
           value: dev
         - name: XP_BASE_URL
-          value: https://www.dev.nav.no
+          value: https://www-q6.dev.nav.no
         - name: APP_BASE_URL
           value: https://dekoratoren-beta.dev.nav.no
         - name: API_XP_SERVICES_URL
-          value: https://www.dev.nav.no/_/service
+          value: https://www-q6.dev.nav.no/_/service
         - name: API_VARSELINNBOKS_URL
           value: https://www.dev.nav.no/person/varselinnboks
         - name: API_INNLOGGINGSLINJE_URL
