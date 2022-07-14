@@ -63,6 +63,8 @@ spec:
           value: {{SOLUTION_ID}}
         - name: NAV_GROUP_ID
           value: {{NAV_GROUP_ID}}
+        - name: BUILD_ID
+          value: {{BUILD_ID}}
         
     resources:
         limits:
