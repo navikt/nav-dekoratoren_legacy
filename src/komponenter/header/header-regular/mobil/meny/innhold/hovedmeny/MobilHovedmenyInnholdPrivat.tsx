@@ -3,7 +3,7 @@ import { dittNavLenkeData } from '../../../../../../common/arbeidsflate-lenker/h
 import { LenkeMedSporing } from '../../../../../../common/lenke-med-sporing/LenkeMedSporing';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../../../../../store/reducers';
-import Tekst from '../../../../../../../tekster/finn-tekst';
+import Tekst, { finnTekst } from '../../../../../../../tekster/finn-tekst';
 import {
     ArbeidsflateLenke,
     arbeidsgiverContextLenke,
@@ -25,6 +25,7 @@ import './MobilHovedmenyInnholdPrivat.less';
 const stateSelector = (state: AppState) => ({
     dittNavUrl: state.environment.DITT_NAV_URL,
     xpBaseUrl: state.environment.XP_BASE_URL,
+    language: state.language.language,
 });
 
 type Props = {
@@ -33,7 +34,7 @@ type Props = {
 };
 
 export const MobilHovedmenyInnholdPrivat = ({ setUndermeny, hovedmenyLenker }: Props) => {
-    const { dittNavUrl, xpBaseUrl } = useSelector(stateSelector);
+    const { dittNavUrl, xpBaseUrl, language } = useSelector(stateSelector);
     const dispatch = useDispatch();
     const [, setCookie] = useCookies();
 
@@ -58,13 +59,13 @@ export const MobilHovedmenyInnholdPrivat = ({ setUndermeny, hovedmenyLenker }: P
 
     return (
         <>
-            <MobilMenypunkt type={'kategori'} callback={() => setUndermeny({ ...hovedmenyLenker, flatten: true })}>
-                <Tekst id={'how-can-we-help'} />
-            </MobilMenypunkt>
+            <MobilMenypunkt
+                tekst={finnTekst('how-can-we-help', language)}
+                type={'kategori'}
+                callback={() => setUndermeny({ ...hovedmenyLenker, flatten: true })}
+            />
 
-            <MobilMenypunkt type={'lenke'} href={dittNavLenke.url}>
-                <Tekst id={'min-side-login'} />
-            </MobilMenypunkt>
+            <MobilMenypunkt tekst={finnTekst('min-side-login', language)} type={'lenke'} href={dittNavLenke.url} />
 
             <UnstyledList className={'mobilPrivatArbeidsflateValg'}>
                 <LenkeMedSporing

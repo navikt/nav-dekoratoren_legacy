@@ -37,6 +37,7 @@ export const MobilUndermenySeksjon = ({ lenker }: Props) => {
                     const href = genererUrl(XP_BASE_URL, lenke.path);
                     return (
                         <MobilMenypunkt
+                            tekst={lenke.displayName}
                             type={'lenke'}
                             href={href}
                             withLock={displayLock}
@@ -47,9 +48,7 @@ export const MobilUndermenySeksjon = ({ lenker }: Props) => {
                                 ...(lenke.isMyPageMenu && { lenkegruppe: 'innlogget meny' }),
                             }}
                             key={index}
-                        >
-                            {lenke.displayName}
-                        </MobilMenypunkt>
+                        />
                     );
                 })}
             </UnstyledList>

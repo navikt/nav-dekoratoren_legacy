@@ -14,9 +14,12 @@ export const DittNavMeny = ({ setUnderMeny, minsideLenker }: Props) => {
     return (
         <UnstyledList className={'mobilDittNavMeny'}>
             {minsideLenker.children.map((menyElement: MenyNode, index: number) => (
-                <MobilMenypunkt type={'kategori'} callback={() => setUnderMeny(menyElement)} key={index}>
-                    {menyElement.displayName}
-                </MobilMenypunkt>
+                <MobilMenypunkt
+                    tekst={menyElement.displayName}
+                    type={'kategori'}
+                    callback={() => setUnderMeny(menyElement)}
+                    key={index}
+                />
             ))}
         </UnstyledList>
     );

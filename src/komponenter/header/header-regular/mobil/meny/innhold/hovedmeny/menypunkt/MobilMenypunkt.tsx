@@ -1,15 +1,16 @@
 import React from 'react';
 import { Heading } from '@navikt/ds-react';
 import { LenkeMedSporing } from '../../../../../../../common/lenke-med-sporing/LenkeMedSporing';
-import classNames from 'classnames';
 import { Next } from '@navikt/ds-icons';
-import { AnalyticsEventArgs } from '../../../../../../../../utils/analytics/analytics';
+import { AnalyticsCategory, AnalyticsEventArgs } from '../../../../../../../../utils/analytics/analytics';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../../../../../../store/reducers';
 
 import './MobilMenypunkt.less';
 
 type Props = {
     analyticsEventArgs?: AnalyticsEventArgs;
-    children: React.ReactNode;
+    tekst: string;
 } & (
     | {
           type: 'kategori';
@@ -23,34 +24,46 @@ type Props = {
 );
 
 export const MobilMenypunkt = (props: Props) => {
-    const { type, children, analyticsEventArgs } = props;
+    const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
+    const { type, tekst, analyticsEventArgs } = props;
+
+    const analyticsArgs: AnalyticsEventArgs = {
+        context: arbeidsflate,
+        category: AnalyticsCategory.Meny,
+        action: `mobilmeny/${type}/${tekst}`,
+        label: type === 'lenke' ? props.href : undefined,
+        ...analyticsEventArgs,
+    };
+
+    const commonProps = {
+        className: 'mobilMenyLenke',
+        analyticsEventArgs: analyticsArgs,
+    };
+
+    const Children = () => (
+        <>
+            {tekst}
+            <Next />
+        </>
+    );
 
     return type === 'kategori' ? (
         <Heading level={'2'} size={'small'}>
             <LenkeMedSporing
-                className={classNames('mobilMenyLenke')}
+                {...commonProps}
                 href={'#'}
                 onClick={(e) => {
                     e.preventDefault();
                     props.callback();
                 }}
                 closeMenusOnClick={false}
-                analyticsEventArgs={analyticsEventArgs}
             >
-                {children}
-                <Next />
+                <Children />
             </LenkeMedSporing>
         </Heading>
     ) : (
-        <LenkeMedSporing
-            className={classNames('mobilMenyLenke')}
-            href={props.href}
-            withLock={props.withLock}
-            closeMenusOnClick={true}
-            analyticsEventArgs={analyticsEventArgs}
-        >
-            {children}
-            <Next />
+        <LenkeMedSporing {...commonProps} href={props.href} withLock={props.withLock} closeMenusOnClick={true}>
+            <Children />
         </LenkeMedSporing>
     );
 };
