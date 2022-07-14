@@ -7,9 +7,7 @@ export interface ArbeidsflateLenke {
     key: MenuValue;
 }
 
-export const arbeidsflateLenker = (
-    XP_BASE_URL: string
-): ArbeidsflateLenke[] => [
+export const arbeidsflateLenker = (XP_BASE_URL: string): ArbeidsflateLenke[] => [
     personContextLenke(XP_BASE_URL),
     arbeidsgiverContextLenke(XP_BASE_URL),
     samarbeidspartnerContextLenke(XP_BASE_URL),
@@ -42,10 +40,7 @@ export const samarbeidspartnerContextLenke = (XP_BASE_URL: string) => {
     };
 };
 
-export const getArbeidsflateContext = (
-    XP_BASE_URL: string,
-    arbeidsflate: MenuValue
-) =>
+export const getArbeidsflateContext = (XP_BASE_URL: string, arbeidsflate: MenuValue) =>
     arbeidsflate === MenuValue.ARBEIDSGIVER
         ? arbeidsgiverContextLenke(XP_BASE_URL)
         : arbeidsflate === MenuValue.SAMARBEIDSPARTNER

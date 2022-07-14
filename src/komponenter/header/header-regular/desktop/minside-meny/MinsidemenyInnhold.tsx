@@ -7,7 +7,7 @@ import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import Tekst from 'tekster/finn-tekst';
-import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
+import { MinsideLockMsg } from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
 
 const nodeGroup = KbNavGroup.Minsidemeny;
 

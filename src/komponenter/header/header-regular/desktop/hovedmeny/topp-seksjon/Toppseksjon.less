@@ -1,27 +1,20 @@
-@import (reference) '../../../../../../styling-variabler.less';
+@import (reference) 'src/styling-variabler.less';
 
 .desktop-hovedmeny {
     &__topp-seksjon {
         display: flex;
         flex-direction: column;
 
-        margin: 0 -@margins-sides-desktop 1.5rem -@margins-sides-desktop;
+        margin: 0 -@margins-sides-desktop 1rem -@margins-sides-desktop;
         padding: 0 @margins-sides-desktop;
+    }
 
-        &-tittel-decoration {
-            display: none;
-        }
+    &__topp-seksjon-tittel {
+        margin-top: 1rem;
+    }
 
-        @media @screen-desktop-medium-down {
-            flex-direction: row;
-            align-items: flex-end;
-            margin-bottom: 0.75rem;
-
-            &-tittel-decoration {
-                display: inline;
-                font-weight: bold;
-                margin: 0 0.5rem;
-            }
-        }
+    &__forside-lenke {
+        padding: 0.5rem 0 1rem 0;
+        margin-right: auto;
     }
 }
