@@ -63,6 +63,7 @@ export const HeaderMenylinje = () => {
                         <DesktopHovedmenyKnapp kbNavMainState={kbNavMainState} />
                         <DesktopSokKnapp kbNavMainState={kbNavMainState} />
                     </div>
+                    <MobilMenyKnapp />
                     {visMinsideKnapper && (
                         <div className={cls.element('minside-knapper')}>
                             {innloggetPrivatperson && <VarslerKnapp kbNavMainState={kbNavMainState} />}
@@ -71,7 +72,6 @@ export const HeaderMenylinje = () => {
                             {innloggingsstatus === Status.OK && <LoggInnKnapp />}
                         </div>
                     )}
-                    <MobilMenyKnapp />
                     {!visMinsideKnapper && <LoggInnKnapp />}
                 </div>
             </div>
