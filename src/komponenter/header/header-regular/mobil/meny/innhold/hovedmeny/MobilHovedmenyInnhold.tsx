@@ -14,10 +14,10 @@ import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { MobilHovedmenyInnholdPrivat } from './MobilHovedmenyInnholdPrivat';
 import classNames from 'classnames';
+import { MobilMenypunkt } from './kategorilenke/MobilMenypunkt';
+import { UnstyledList } from '../utils/UnstyledList';
 
 import './MobilHovedmenyInnhold.less';
-import { MobilMenyKategoriLenke } from './kategorilenke/MobilMenyKategoriLenke';
-import { UnstyledList } from '../utils/UnstyledList';
 
 export const mobilSokInputId = `sok-input-small`;
 
@@ -86,9 +86,13 @@ export const MobilHovedmenyInnhold = (props: Props) => {
                     <>
                         <UnstyledList>
                             {hovedmenyLenker.children.map((menyElement, index) => (
-                                <MobilMenyKategoriLenke callback={() => setUndermenyLenker(menyElement)} key={index}>
+                                <MobilMenypunkt
+                                    type={'kategori'}
+                                    callback={() => setUndermenyLenker(menyElement)}
+                                    key={index}
+                                >
                                     {menyElement.displayName}
-                                </MobilMenyKategoriLenke>
+                                </MobilMenypunkt>
                             ))}
                         </UnstyledList>
                         {isLanguageNorwegian && <MobilArbeidsflateValg lang={language} />}

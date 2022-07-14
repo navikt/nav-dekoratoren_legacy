@@ -1,7 +1,7 @@
 import React from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import BEMHelper from 'utils/bem';
-import { MobilMenyKategoriLenke } from '../kategorilenke/MobilMenyKategoriLenke';
+import { MobilMenypunkt } from '../kategorilenke/MobilMenypunkt';
 
 type Props = {
     minsideLenker: MenyNode;
@@ -16,9 +16,9 @@ const Dittnavmeny = ({ openMeny, minsideLenker, className }: Props) => {
         <ul className={cls.element('meny', 'minsidelist')}>
             {minsideLenker.children.map((menyElement: MenyNode, index: number) => (
                 <li key={index}>
-                    <MobilMenyKategoriLenke callback={() => openMeny(menyElement)}>
+                    <MobilMenypunkt type={'kategori'} callback={() => openMeny(menyElement)}>
                         {menyElement.displayName}
-                    </MobilMenyKategoriLenke>
+                    </MobilMenypunkt>
                 </li>
             ))}
         </ul>

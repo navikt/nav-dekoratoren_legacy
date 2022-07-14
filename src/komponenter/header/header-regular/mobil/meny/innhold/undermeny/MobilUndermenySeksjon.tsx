@@ -5,9 +5,9 @@ import { AppState } from '../../../../../../../store/reducers';
 import { MenyNode } from '../../../../../../../store/reducers/menu-duck';
 import { MinsideLockMsg } from '../../../../common/minside-lock-msg/MinsideLockMsg';
 import { genererUrl } from '../../../../../../../utils/Environment';
-import { LenkeMedSporing } from '../../../../../../common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from '../../../../../../../utils/analytics/analytics';
 import { UnstyledList } from '../utils/UnstyledList';
+import { MobilMenypunkt } from '../hovedmeny/kategorilenke/MobilMenypunkt';
 
 import './MobilUndermenySeksjon.less';
 
@@ -31,14 +31,14 @@ export const MobilUndermenySeksjon = ({ lenker }: Props) => {
                 {lenker.displayName}
             </Heading>
             {showSecurityLevelWarning && <MinsideLockMsg />}
-            <UnstyledList>
+            <UnstyledList className={'mobilUndermenyListe'}>
                 {lenker.children.map((lenke, index) => {
                     const displayLock = lenke.displayLock && auth.securityLevel !== '4';
                     const href = genererUrl(XP_BASE_URL, lenke.path);
                     return (
-                        <LenkeMedSporing
+                        <MobilMenypunkt
+                            type={'lenke'}
                             href={href}
-                            withChevron={true}
                             withLock={displayLock}
                             analyticsEventArgs={{
                                 category: AnalyticsCategory.Meny,
@@ -49,7 +49,7 @@ export const MobilUndermenySeksjon = ({ lenker }: Props) => {
                             key={index}
                         >
                             {lenke.displayName}
-                        </LenkeMedSporing>
+                        </MobilMenypunkt>
                     );
                 })}
             </UnstyledList>

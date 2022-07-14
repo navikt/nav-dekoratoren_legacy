@@ -9,7 +9,6 @@ import {
     arbeidsgiverContextLenke,
     samarbeidspartnerContextLenke,
 } from '../../../../../../common/arbeidsflate-lenker/arbeidsflate-lenker';
-import { Next } from '@navikt/ds-icons';
 import { AnalyticsCategory } from '../../../../../../../utils/analytics/analytics';
 import { MenuValue } from '../../../../../../../utils/meny-storage-utils';
 import { CookieName, cookieOptions } from '../../../../../../../server/cookieSettings';
@@ -18,7 +17,8 @@ import { erNavDekoratoren } from '../../../../../../../utils/Environment';
 import { settArbeidsflate } from '../../../../../../../store/reducers/arbeidsflate-duck';
 import { useCookies } from 'react-cookie';
 import { MenyNode } from '../../../../../../../store/reducers/menu-duck';
-import { MobilMenyKategoriLenke } from './kategorilenke/MobilMenyKategoriLenke';
+import { MobilMenypunkt } from './kategorilenke/MobilMenypunkt';
+import { UnstyledList } from '../utils/UnstyledList';
 
 import './MobilHovedmenyInnholdPrivat.less';
 
@@ -58,41 +58,36 @@ export const MobilHovedmenyInnholdPrivat = ({ setUndermeny, hovedmenyLenker }: P
 
     return (
         <>
-            <MobilMenyKategoriLenke callback={() => setUndermeny({ ...hovedmenyLenker, flatten: true })}>
-                <Tekst id={"'how-can-we-help'"} />
-            </MobilMenyKategoriLenke>
+            <MobilMenypunkt type={'kategori'} callback={() => setUndermeny({ ...hovedmenyLenker, flatten: true })}>
+                <Tekst id={'how-can-we-help'} />
+            </MobilMenypunkt>
 
-            <LenkeMedSporing href={dittNavLenke.url} className={'mobilKategoriLenke'}>
+            <MobilMenypunkt type={'lenke'} href={dittNavLenke.url}>
                 <Tekst id={'min-side-login'} />
-                <Next />
-            </LenkeMedSporing>
+            </MobilMenypunkt>
 
-            <ul className={'mobilPrivatArbeidsflateValg'}>
-                <li>
-                    <LenkeMedSporing
-                        href={arbgiverLenke.url}
-                        analyticsEventArgs={{ ...analyticsArgs, label: MenuValue.ARBEIDSGIVER }}
-                        onClick={(event) => {
-                            onContextLink(event, arbgiverLenke);
-                        }}
-                        className={'mobilPrivatArbeidsflateLenke'}
-                    >
-                        <Tekst id={arbgiverLenke.lenkeTekstId} />
-                    </LenkeMedSporing>
-                </li>
-                <li>
-                    <LenkeMedSporing
-                        href={samarbeidspartnerLenke.url}
-                        analyticsEventArgs={{ ...analyticsArgs, label: MenuValue.SAMARBEIDSPARTNER }}
-                        onClick={(event) => {
-                            onContextLink(event, samarbeidspartnerLenke);
-                        }}
-                        className={'mobilPrivatArbeidsflateLenke'}
-                    >
-                        <Tekst id={samarbeidspartnerLenke.lenkeTekstId} />
-                    </LenkeMedSporing>
-                </li>
-            </ul>
+            <UnstyledList className={'mobilPrivatArbeidsflateValg'}>
+                <LenkeMedSporing
+                    href={arbgiverLenke.url}
+                    analyticsEventArgs={{ ...analyticsArgs, label: MenuValue.ARBEIDSGIVER }}
+                    onClick={(event) => {
+                        onContextLink(event, arbgiverLenke);
+                    }}
+                    className={'mobilPrivatArbeidsflateLenke'}
+                >
+                    <Tekst id={arbgiverLenke.lenkeTekstId} />
+                </LenkeMedSporing>
+                <LenkeMedSporing
+                    href={samarbeidspartnerLenke.url}
+                    analyticsEventArgs={{ ...analyticsArgs, label: MenuValue.SAMARBEIDSPARTNER }}
+                    onClick={(event) => {
+                        onContextLink(event, samarbeidspartnerLenke);
+                    }}
+                    className={'mobilPrivatArbeidsflateLenke'}
+                >
+                    <Tekst id={samarbeidspartnerLenke.lenkeTekstId} />
+                </LenkeMedSporing>
+            </UnstyledList>
         </>
     );
 };
