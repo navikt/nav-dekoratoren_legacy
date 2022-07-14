@@ -15,5 +15,5 @@ jobs:
   deploy:
     uses: ./.github/workflows/deploy.shared.dev.yml
     with:
-      username: .nais/dev-gcp/personbruker.yaml
+      NAIS_RESOURCE: .nais/dev-gcp/personbruker.yaml
     secrets: inherit
