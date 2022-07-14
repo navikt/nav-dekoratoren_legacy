@@ -1,4 +1,4 @@
-name: Deploy-reusable
+name: Deploy-shared-dev
 on:
   workflow_call:
     inputs:

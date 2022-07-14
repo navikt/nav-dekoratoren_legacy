@@ -13,7 +13,7 @@ on:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/deploy.dev.shared.yml
+    uses: ./.github/workflows/deploy.shared.dev.yml
     with:
       username: .nais/dev-gcp/personbruker.yaml
     secrets: inherit
