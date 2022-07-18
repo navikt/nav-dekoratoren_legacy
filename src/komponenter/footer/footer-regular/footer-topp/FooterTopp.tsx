@@ -59,16 +59,16 @@ const FooterTopp = () => {
         (document.getElementById('top-element') as HTMLElement)?.focus();
     };
 
-    type Props = {
+    type FooterToppKolonnerProps = {
         firstNode: number;
         numberOfNodes: number;
     };
 
-    const Test = (props: Props) => {
+    const FooterToppKolonner = (props: FooterToppKolonnerProps) => {
         const lastNode = props.firstNode + props.numberOfNodes;
 
         return (
-            <div>
+            <>
                 {columnsNode
                     ? columnsNode.children.slice(props.firstNode, lastNode).map((columnNode, i) => (
                           <div key={i} className={'menylenker-seksjon'}>
@@ -85,7 +85,7 @@ const FooterTopp = () => {
                               <LinksLoader id={`footer-link-loader-${index}`} />
                           </div>
                       ))}
-            </div>
+            </>
         );
     };
 
@@ -103,20 +103,17 @@ const FooterTopp = () => {
                 </div>
                 <div className="topp-kolonner">
                     <div className="venstre">
-                        <Test firstNode={0} numberOfNodes={1} />
+                        <FooterToppKolonner firstNode={0} numberOfNodes={1} />
                     </div>
                     <div className="midt">
-                        <Test firstNode={1} numberOfNodes={2} />
+                        <FooterToppKolonner firstNode={1} numberOfNodes={2} />
                     </div>
                     <div className="høyre">
-                        {/* TODO fjern/rename */}
-                        <div className={cls.element('bottom-lenker')}>
-                            <Test firstNode={3} numberOfNodes={1} />
-                            <ul className={cls.element('personvern-lenker')}>
-                                <FooterLenker node={personvernNode} />
-                                {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
-                            </ul>
-                        </div>
+                        <FooterToppKolonner firstNode={3} numberOfNodes={1} />
+                        <ul className={cls.element('personvern-lenker')}>
+                            <FooterLenker node={personvernNode} />
+                            {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
+                        </ul>
                     </div>
                 </div>
             </div>
