@@ -59,6 +59,36 @@ const FooterTopp = () => {
         (document.getElementById('top-element') as HTMLElement)?.focus();
     };
 
+    type Props = {
+        firstNode: number;
+        numberOfNodes: number;
+    };
+
+    const Test = (props: Props) => {
+        const lastNode = props.firstNode + props.numberOfNodes;
+
+        return (
+            <div>
+                {columnsNode
+                    ? columnsNode.children.slice(props.firstNode, lastNode).map((columnNode, i) => (
+                          <div key={i} className={'menylenker-seksjon'}>
+                              <Heading level="2" size="small" className="menylenker-overskrift">
+                                  {columnNode.displayName}
+                              </Heading>
+                              <ul>
+                                  <FooterLenker node={columnNode} />
+                              </ul>
+                          </div>
+                      ))
+                    : [...Array(props.numberOfNodes)].map((_, index) => (
+                          <div className={'menylenker-seksjon'} key={index}>
+                              <LinksLoader id={`footer-link-loader-${index}`} />
+                          </div>
+                      ))}
+            </div>
+        );
+    };
+
     return (
         <div className={cls.className}>
             <div className="topp-kontainer">
@@ -73,60 +103,15 @@ const FooterTopp = () => {
                 </div>
                 <div className="topp-kolonner">
                     <div className="venstre">
-                        {columnsNode
-                            ? columnsNode.children.slice(0, 1).map((columnNode, i) => (
-                                  <div key={i} className={'menylenker-seksjon'}>
-                                      <Heading level="2" size="small" className="menylenker-overskrift">
-                                          {columnNode.displayName}
-                                      </Heading>
-                                      <ul>
-                                          <FooterLenker node={columnNode} />
-                                      </ul>
-                                  </div>
-                              ))
-                            : [...Array(3)].map((_, index) => (
-                                  <div className={'menylenker-seksjon'} key={index}>
-                                      <LinksLoader id={`footer-link-loader-${index}`} />
-                                  </div>
-                              ))}
+                        <Test firstNode={0} numberOfNodes={1} />
                     </div>
                     <div className="midt">
-                        {columnsNode
-                            ? columnsNode.children.slice(1, 3).map((columnNode, i) => (
-                                  <div key={i} className={'menylenker-seksjon'}>
-                                      <Heading level="2" size="small" className="menylenker-overskrift">
-                                          {columnNode.displayName}
-                                      </Heading>
-                                      <ul>
-                                          <FooterLenker node={columnNode} />
-                                      </ul>
-                                  </div>
-                              ))
-                            : [...Array(3)].map((_, index) => (
-                                  <div className={'menylenker-seksjon'} key={index}>
-                                      <LinksLoader id={`footer-link-loader-${index}`} />
-                                  </div>
-                              ))}
+                        <Test firstNode={1} numberOfNodes={2} />
                     </div>
                     <div className="høyre">
                         {/* TODO fjern/rename */}
                         <div className={cls.element('bottom-lenker')}>
-                            {columnsNode
-                                ? columnsNode.children.slice(3, 4).map((columnNode, i) => (
-                                      <div key={i} className={'menylenker-seksjon'}>
-                                          <Heading level="2" size="small" className="menylenker-overskrift">
-                                              {columnNode.displayName}
-                                          </Heading>
-                                          <ul>
-                                              <FooterLenker node={columnNode} />
-                                          </ul>
-                                      </div>
-                                  ))
-                                : [...Array(3)].map((_, index) => (
-                                      <div className={'menylenker-seksjon'} key={index}>
-                                          <LinksLoader id={`footer-link-loader-${index}`} />
-                                      </div>
-                                  ))}
+                            <Test firstNode={3} numberOfNodes={1} />
                             <ul className={cls.element('personvern-lenker')}>
                                 <FooterLenker node={personvernNode} />
                                 {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
