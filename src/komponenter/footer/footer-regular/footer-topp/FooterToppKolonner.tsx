@@ -13,8 +13,8 @@ type FooterToppKolonnerProps = {
     numberOfNodes: number;
 };
 
-const FooterToppKolonner = (props: FooterToppKolonnerProps) => {
-    const lastNode = props.firstNode + props.numberOfNodes;
+const FooterToppKolonner = ({ firstNode, numberOfNodes }: FooterToppKolonnerProps) => {
+    const lastNode = firstNode + numberOfNodes;
     const { language } = useSelector((state: AppState) => state.language);
     const { data } = useSelector((state: AppState) => state.menypunkt);
     const context = useSelector((state: AppState) => state.arbeidsflate.status);
@@ -42,7 +42,7 @@ const FooterToppKolonner = (props: FooterToppKolonnerProps) => {
     return (
         <>
             {columnsNode
-                ? columnsNode.children.slice(props.firstNode, lastNode).map((columnNode, i) => (
+                ? columnsNode.children.slice(firstNode, lastNode).map((columnNode, i) => (
                       <div key={i} className={'menylenker-seksjon'}>
                           <Heading level="2" size="small" className="menylenker-overskrift">
                               {columnNode.displayName}
@@ -52,9 +52,9 @@ const FooterToppKolonner = (props: FooterToppKolonnerProps) => {
                           </ul>
                       </div>
                   ))
-                : [...Array(props.numberOfNodes)].map((_, index) => (
+                : [...Array(numberOfNodes)].map((_, index) => (
                       <div className={'menylenker-seksjon'} key={index}>
-                          <LinksLoader id={`footer-link-loader-${index}`} />
+                          <LinksLoader id={`footer-link-loader-${firstNode + index}`} />
                       </div>
                   ))}
         </>
