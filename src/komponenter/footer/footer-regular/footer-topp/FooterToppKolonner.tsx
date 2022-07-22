@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Heading } from '@navikt/ds-react';
+import { Heading, useId } from '@navikt/ds-react';
 import { AppState } from 'store/reducers';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
@@ -14,11 +14,13 @@ type FooterToppKolonnerProps = {
 };
 
 const FooterToppKolonner = ({ firstNode, numberOfNodes }: FooterToppKolonnerProps) => {
-    const lastNode = firstNode + numberOfNodes;
     const { language } = useSelector((state: AppState) => state.language);
     const { data } = useSelector((state: AppState) => state.menypunkt);
     const context = useSelector((state: AppState) => state.arbeidsflate.status);
     const [columnsNode, settColumnsNode] = useState<MenyNode>();
+    const loaderId = useId();
+
+    const lastNode = firstNode + numberOfNodes;
 
     useEffect(() => {
         const languageNode = getLanguageNode(language, data);
@@ -54,7 +56,7 @@ const FooterToppKolonner = ({ firstNode, numberOfNodes }: FooterToppKolonnerProp
                   ))
                 : [...Array(numberOfNodes)].map((_, index) => (
                       <div className={'menylenker-seksjon'} key={index}>
-                          <LinksLoader id={`footer-link-loader-${firstNode + index}`} />
+                          <LinksLoader id={`footer-link-loader-${loaderId}-${index}`} />
                       </div>
                   ))}
         </>
