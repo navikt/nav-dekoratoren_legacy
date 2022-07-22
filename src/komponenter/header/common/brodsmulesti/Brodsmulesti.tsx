@@ -52,7 +52,7 @@ export const Brodsmulesti = (props: Props) => {
     const breadcrumbsSliced = showAll ? breadcrumbs : breadcrumbs.slice(-numCustomItemsShown);
 
     return (
-        <nav className={cls.className} aria-label={finnTekst('brodsmulesti', language)} itemProp="breadcrumb">
+        <nav className={cls.className} aria-label={finnTekst('brodsmulesti', language)}>
             <ol>
                 <li>
                     <LenkeMedSporing
