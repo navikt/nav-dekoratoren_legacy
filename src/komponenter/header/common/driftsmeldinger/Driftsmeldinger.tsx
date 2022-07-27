@@ -4,17 +4,14 @@ import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { DriftsmeldingerState } from '../../../../store/reducers/driftsmeldinger-duck';
-import { verifyWindowObj } from '../../../../utils/Environment';
-import './Driftsmeldinger.less';
 import { BodyLong } from '@navikt/ds-react';
+import { useClientSide } from 'utils/hooks/useClientSide';
+
+import './Driftsmeldinger.less';
 
 const removeTrailingChars = (url?: string) => url?.replace(/(\/|\$|(\/\$))$/, '');
 
 const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
-    if (!verifyWindowObj()) {
-        return [];
-    }
-
     const currentUrl = removeTrailingChars(window.location.href);
 
     return driftsmeldinger.status === 'OK'
@@ -36,6 +33,12 @@ export const Driftsmeldinger = () => {
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
 
     const { XP_BASE_URL } = environment;
+
+    const isClientSide = useClientSide();
+
+    if (!isClientSide) {
+        return null;
+    }
 
     const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
 
