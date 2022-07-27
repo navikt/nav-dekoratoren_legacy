@@ -5,7 +5,6 @@ import './utloggingsvarsel.less';
 import './utloggingsmodal-transition.less';
 import { checkTimeStampAndSetTimeStamp, getCurrentTimeStamp, timeStampIkkeUtgatt } from './timestamp.utils';
 import ResizeHandler, { BREAKPOINT, WindowType } from './komponenter/ResizeHandler';
-import { verifyWindowObj } from '../../../utils/Environment';
 import UtloggingsvarselInnhold from './komponenter/UtloggingsvarselInnhold';
 import { AppState } from '../../../store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,13 +30,12 @@ const Utloggingsvarsel: FunctionComponent = () => {
     const [, setCookie, removeCookie] = useCookies();
     const dispatch = useDispatch();
     const cls = BEMHelper('utloggingsvarsel');
-    const windowOnMount = () =>
-        verifyWindowObj() && window.innerWidth > BREAKPOINT ? WindowType.DESKTOP : WindowType.MOBILE;
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
     const [clsOpenClass, setClsOpenClass] = useState<string>('');
     const [unixTimeStamp, setUnixTimestamp] = useState<number>(0);
-    const [windowType, setWindowType] = useState<WindowType>(windowOnMount());
+    // Default to DESKTOP. Will be updated on clientMount.
+    const [windowType, setWindowType] = useState<WindowType>(WindowType.DESKTOP);
     const [interval, setInterval] = useState<boolean>(timeStampIkkeUtgatt(unixTimeStamp - getCurrentTimeStamp()));
     const [tid, setTid] = useState<string>('- minutter');
     const [overskrift, setOverskrift] = useState<string>('Du blir snart logget ut');
@@ -48,6 +46,9 @@ const Utloggingsvarsel: FunctionComponent = () => {
     useEffect(() => {
         const setModalElement = () => (document.getElementById('sitefooter') ? '#sitefooter' : 'body');
         Modal.setAppElement?.(setModalElement());
+
+        setWindowType(window.innerWidth > BREAKPOINT ? WindowType.DESKTOP : WindowType.MOBILE);
+
         if (utloggingsvarselOnsket && utloggingsvarsel.timeStamp) {
             try {
                 checkTimeStampAndSetTimeStamp(

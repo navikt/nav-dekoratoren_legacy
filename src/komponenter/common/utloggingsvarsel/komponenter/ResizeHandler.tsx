@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { verifyWindowObj } from '../../../../utils/Environment';
 
 export const BREAKPOINT = 768;
