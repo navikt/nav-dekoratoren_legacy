@@ -18,7 +18,7 @@ export const SokInput = (props: Props) => {
     // Only set the input value in the browser, to prevent execution-order
     // dependent SSR warnings under certain circumstances
     const isClientSide = useClientSide();
-    const inputValue = isClientSide ? writtenInput || '' : undefined;
+    const inputValue = isClientSide ? writtenInput : '';
 
     return (
         <>
