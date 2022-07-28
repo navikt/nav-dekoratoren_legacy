@@ -68,6 +68,10 @@ const commonConfig = {
                 },
             },
             {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+            {
                 test: /\.(less|css)$/,
                 use: [
                     MiniCssExtractPlugin.loader,
