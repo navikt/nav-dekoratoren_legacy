@@ -110,7 +110,8 @@ export const focusOverlapHandler = (stickyElement: HTMLElement) => (e: FocusEven
     }
 
     const headerHeight = stickyElement?.getBoundingClientRect().height;
-    const targetPos = (e.target as HTMLElement)?.getBoundingClientRect().top;
+    const target = e.target as HTMLElement;
+    const targetPos = target?.getBoundingClientRect && target.getBoundingClientRect().top;
 
     if (!headerHeight || targetPos === null || targetPos === undefined) {
         return;
