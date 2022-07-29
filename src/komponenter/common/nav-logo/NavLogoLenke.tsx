@@ -32,7 +32,7 @@ export const NavLogoLenke = (props: Props) => {
 
     return (
         <LenkeMedSporing
-            classNameOverride={style.navLogoLenke}
+            classNameOverride={`${style.navLogoLenke} navLogoLenke`}
             href={url}
             analyticsEventArgs={props.analyticsEventArgs}
             onClick={(event) => {
