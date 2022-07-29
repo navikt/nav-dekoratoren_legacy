@@ -11,8 +11,6 @@ import { useCookies } from 'react-cookie';
 import { AnalyticsEventArgs } from 'utils/analytics/analytics';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import { getHomeUrl } from '../../../utils/home-url';
-import './NavLogoLenke.less';
-import './NavLogoLenke.scss';
 
 // @ts-ignore
 import style from './NavLogoLenke.module.scss';
@@ -47,7 +45,6 @@ export const NavLogoLenke = (props: Props) => {
             id={props.id}
         >
             <Bilde altText="Til forsiden" asset={props.ikon} />
-            <div className={style.navLogoLenke}></div>
         </LenkeMedSporing>
     );
 };
