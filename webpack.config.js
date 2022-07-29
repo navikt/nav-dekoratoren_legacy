@@ -12,7 +12,7 @@ const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
     devtool: 'source-map',
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
+        extensions: ['.ts', '.tsx', '.js', '.json', '.jsx', '.scss'],
         alias: {
             src: path.resolve(__dirname, './src'),
             api: path.resolve(__dirname, './src/api'),
@@ -69,7 +69,21 @@ const commonConfig = {
             },
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                exclude: /\.module\.scss$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.module\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                        },
+                    },
+                    'sass-loader',
+                ],
             },
             {
                 test: /\.(less|css)$/,
