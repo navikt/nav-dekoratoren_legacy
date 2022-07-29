@@ -9,10 +9,16 @@ export const fetchEnv = (): Promise<Environment> => {
             const url = envDom.getAttribute('data-src');
             if (url) {
                 fetch(url, { credentials: 'include' })
-                    .then((result) => result.json())
+                    .then((result) => {
+                        if (result.status >= 200 && result.status <= 299) {
+                            return result.json();
+                        } else {
+                            throw Error(`Could not load env for dekoratøren: ${result.status} - ${result.statusText}`);
+                        }
+                    })
                     .then((result) => resolve(result))
                     .catch((error) => {
-                        throw error;
+                        throw Error(error);
                     });
             }
         } else {
