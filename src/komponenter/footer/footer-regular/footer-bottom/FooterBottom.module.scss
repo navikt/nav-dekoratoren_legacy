@@ -3,8 +3,6 @@
 .menylinjeBottom {
     background-color: var(--navds-global-color-deepblue-800);
     color: white;
-    display: flex;
-    justify-content: center;
 
     @media #{sv.$screen-desktop} {
         padding: 1rem sv.$margins-sides-footer;
