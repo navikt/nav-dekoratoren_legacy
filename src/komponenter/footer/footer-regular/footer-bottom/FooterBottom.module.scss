@@ -1,4 +1,4 @@
-@use 'src/styling-variabler';
+@use 'src/styling-variabler' as sv;
 
 .menylinjeBottom {
     background-color: var(--navds-global-color-deepblue-800);
@@ -7,12 +7,12 @@
     display: flex;
     justify-content: center;
 
-    @media #{styling-variabler.$screen-desktop} {
-        padding: 1rem styling-variabler.$margins-sides-footer;
+    @media #{sv.$screen-desktop} {
+        padding: 1rem sv.$margins-sides-footer;
     }
 
-    @media #{styling-variabler.$screen-desktop-small-width-down} {
-        padding: 1rem styling-variabler.$margins-sides-footer-small;
+    @media #{sv.$screen-desktop-small-width-down} {
+        padding: 1rem sv.$margins-sides-footer-small;
     }
 }
 
@@ -24,7 +24,7 @@
     max-width: 1344px;
     padding-bottom: 4rem;
 
-    @media #{styling-variabler.$screen-mobile} {
+    @media #{sv.$screen-mobile} {
         padding-bottom: 2.5rem;
     }
 
