@@ -17,7 +17,7 @@ const FooterBottom = () => {
                     <Bilde asset={Logo} ariaHidden={true} />
                 </div>
                 <div className={style.bottomLenker}>
-                    <BodyShort className="bottom-tekst">
+                    <BodyShort>
                         <Tekst id="footer-arbeids-og-veldferdsetaten" />
                     </BodyShort>
                 </div>
