@@ -1,23 +1,22 @@
 import React from 'react';
-import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
 import { ChatbotWrapper } from 'komponenter/footer/chatbot/ChatbotWrapper';
 import Logo from 'ikoner/meny/nav-logo-white.svg';
 import { BodyShort } from '@navikt/ds-react';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 
-import './FooterBottom.less';
+// @ts-ignore
+import style from './FooterBottom.module.scss';
 
 const FooterBottom = () => {
-    const cls = BEMHelper('footer-bottom-content');
     return (
-        <div className="menylinje-bottom">
-            <div className={cls.className}>
-                <div className={'top-row'}>
+        <div className={style.menylinjeBottom}>
+            <div className={style.footerBottomContent}>
+                <div className={style.topRow}>
                     <ChatbotWrapper />
                     <Bilde asset={Logo} ariaHidden={true} />
                 </div>
-                <div className={cls.element('bottom-lenker')}>
+                <div className={style.bottomLenker}>
                     <BodyShort className="bottom-tekst">
                         <Tekst id="footer-arbeids-og-veldferdsetaten" />
                     </BodyShort>

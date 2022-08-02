@@ -1,0 +1,49 @@
+@use 'src/styling-variabler';
+
+.menylinjeBottom {
+    background-color: var(--navds-global-color-deepblue-800);
+    color: white;
+
+    display: flex;
+    justify-content: center;
+
+    @media #{styling-variabler.$screen-desktop} {
+        padding: 1rem styling-variabler.$margins-sides-footer;
+    }
+
+    @media #{styling-variabler.$screen-desktop-small-width-down} {
+        padding: 1rem styling-variabler.$margins-sides-footer-small;
+    }
+}
+
+.footerBottomContent {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1344px;
+    padding-bottom: 4rem;
+
+    @media #{styling-variabler.$screen-mobile} {
+        padding-bottom: 2.5rem;
+    }
+
+    justify-content: space-between;
+}
+
+.topRow {
+    position: relative;
+    display: flex;
+}
+
+.bottomLenker {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 0.5rem;
+    width: 100%;
+
+    div {
+        width: 100%;
+    }
+}
