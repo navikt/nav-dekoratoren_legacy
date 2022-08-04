@@ -6,7 +6,6 @@ import LenkeMedIkon from 'komponenter/footer/common/lenke-med-ikon/LenkeMedIkon'
 import { AppState } from 'store/reducers';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
-import BEMHelper from 'utils/bem';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import { DelSkjermLenke } from 'komponenter/footer/common/del-skjerm-lenke/DelSkjermLenke';
 import FooterToppKolonner from './FooterToppKolonner';
@@ -15,7 +14,6 @@ import FooterToppKolonner from './FooterToppKolonner';
 import style from './FooterTopp.module.scss';
 
 const FooterTopp = () => {
-    const cls = BEMHelper('menylinje-topp');
     const { language } = useSelector((state: AppState) => state.language);
     const { data } = useSelector((state: AppState) => state.menypunkt);
     const [personvernNode, settPersonvernNode] = useState<MenyNode>();
