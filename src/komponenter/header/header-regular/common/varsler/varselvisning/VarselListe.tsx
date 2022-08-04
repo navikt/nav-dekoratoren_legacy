@@ -98,7 +98,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                         label: varsel.url,
                                     }}
                                 >
-                                    {currentConfig.lenketekst}
+                                    Se varsler
                                 </LenkeMedSporing>
                             </div>
                         </div>
