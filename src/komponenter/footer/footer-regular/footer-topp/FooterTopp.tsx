@@ -49,13 +49,13 @@ const FooterTopp = () => {
                     />
                 </div>
                 <div className={style.toppKolonner}>
-                    <div className="venstre">
+                    <div>
                         <FooterToppKolonner firstNode={0} numberOfNodes={1} />
                     </div>
-                    <div className="midt">
+                    <div>
                         <FooterToppKolonner firstNode={1} numberOfNodes={2} />
                     </div>
-                    <div className="høyre">
+                    <div>
                         <FooterToppKolonner firstNode={3} numberOfNodes={1} />
                         <ul>
                             <FooterLenker node={personvernNode} />

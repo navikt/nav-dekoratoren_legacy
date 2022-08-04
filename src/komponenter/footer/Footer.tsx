@@ -9,7 +9,7 @@ import './Footer.less';
 const Footer = () => {
     const { PARAMS } = useSelector((state: AppState) => state.environment);
     return (
-        <div className={'decorator-wrapper'}>
+        <div className="decorator-wrapper">
             <Utloggingsvarsel />
             <footer className="sitefooter">
                 {PARAMS.SIMPLE || PARAMS.SIMPLE_FOOTER ? <SimpleFooter /> : <FooterRegular />}
