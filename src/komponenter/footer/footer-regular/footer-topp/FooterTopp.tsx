@@ -10,7 +10,9 @@ import BEMHelper from 'utils/bem';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import { DelSkjermLenke } from 'komponenter/footer/common/del-skjerm-lenke/DelSkjermLenke';
 import FooterToppKolonner from './FooterToppKolonner';
-import './FooterTopp.less';
+
+// @ts-ignore
+import style from './FooterTopp.module.scss';
 
 const FooterTopp = () => {
     const cls = BEMHelper('menylinje-topp');
@@ -37,9 +39,9 @@ const FooterTopp = () => {
     };
 
     return (
-        <div className={cls.className}>
-            <div className="topp-kontainer">
-                <div className="menylenker-seksjon til-toppen">
+        <div className={style.menylinjeTopp}>
+            <div className={style.toppKontainer}>
+                <div className={style.tilToppen}>
                     <LenkeMedIkon
                         onClick={scrollToTop}
                         tekst={<Tekst id="footer-til-toppen" />}
@@ -48,7 +50,7 @@ const FooterTopp = () => {
                         id="footer-til-toppen"
                     />
                 </div>
-                <div className="topp-kolonner">
+                <div className={style.toppKolonner}>
                     <div className="venstre">
                         <FooterToppKolonner firstNode={0} numberOfNodes={1} />
                     </div>
@@ -57,7 +59,7 @@ const FooterTopp = () => {
                     </div>
                     <div className="høyre">
                         <FooterToppKolonner firstNode={3} numberOfNodes={1} />
-                        <ul className={cls.element('personvern-lenker')}>
+                        <ul>
                             <FooterLenker node={personvernNode} />
                             {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
                         </ul>

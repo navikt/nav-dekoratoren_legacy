@@ -1,0 +1,102 @@
+@use 'src/styling-variabler' as sv;
+
+.menylinjeTopp {
+    background-color: var(--navds-global-color-deepblue-800);
+}
+
+.toppKontainer {
+    color: white;
+    padding-top: 1.5rem;
+    padding-bottom: 1.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    :global(.lenke) {
+        color: white;
+        padding: 0.5rem 0;
+        @media #{sv.$screen-mobile} {
+            padding: 0.25rem 0;
+        }
+
+        &:focus {
+            color: var(--navds-global-color-blue-500);
+            background-color: white;
+        }
+    }
+
+    ul {
+        margin: 0;
+    }
+
+    @media #{sv.$screen-desktop} {
+        padding-top: 2.75rem;
+        padding-bottom: 1.75rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+
+        .toppKolonner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    }
+
+    @media #{sv.$screen-desktop-large-up} {
+        padding-left: 0;
+        padding-right: 0;
+        width: 1344px;
+        margin: 0 auto;
+    }
+}
+
+.tilToppen {
+    display: flex;
+    justify-content: start;
+    margin-bottom: 2.25rem;
+
+    @media #{sv.$screen-mobile} {
+        margin-bottom: 1.75rem;
+    }
+
+    :global(.lenke-med-ikon) {
+        text-decoration: underline;
+        color: white;
+        font-size: 1.25rem;
+        padding: 1rem 1rem 1rem 0;
+
+        svg {
+            color: white;
+            fill: white;
+            stroke: white;
+        }
+
+        :global(.lenke-med-ikon__ikon) {
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+
+        &:focus {
+            color: var(--navds-global-color-blue-500);
+            background-color: white;
+            :global(.lenke-med-ikon__ikon) {
+                svg {
+                    stroke: var(--navds-global-color-blue-500);
+                    color: var(--navds-global-color-blue-500);
+                    fill: var(--navds-global-color-blue-500);
+                }
+            }
+        }
+    }
+}
+
+.toppKolonner {
+    column-gap: 2rem;
+    :global(.menylenker-seksjon) {
+        margin-bottom: 2.25rem;
+    }
+    :global(.menylenker-overskrift) {
+        font-weight: bolder;
+        margin-bottom: 0.5rem;
+    }
+}
