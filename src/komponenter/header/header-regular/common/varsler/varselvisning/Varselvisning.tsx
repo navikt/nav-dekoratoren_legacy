@@ -28,8 +28,6 @@ export const Varselvisning = ({ setKbId }: Props) => {
 
     const cls = BEMHelper('varsler-visning');
 
-    const visAlleVarslerLenke = varslerAntall > 5;
-
     return (
         <div className={cls.className}>
             <Heading level="2" size="medium" className={cls.element('tittel')}>
@@ -42,9 +40,7 @@ export const Varselvisning = ({ setKbId }: Props) => {
             ) : (
                 <VarselListe varsler={varsler.nyesteVarsler.slice(0, 5)} rowIndex={setKbId ? 0 : undefined} />
             )}
-            {visAlleVarslerLenke && (
-                <AlleVarslerLenke varselInnboksUrl={varselInnboksUrl} rowIndex={setKbId ? 1 : undefined} />
-            )}
+            <AlleVarslerLenke varselInnboksUrl={varselInnboksUrl} rowIndex={setKbId ? 1 : undefined} />
         </div>
     );
 };
