@@ -230,9 +230,10 @@ export const validateLanguage = (language: Locale) => {
         case 'se':
         case 'pl':
         case 'uk':
+        case 'ru':
             break;
         default:
-            const error = 'language supports nb | nn | en | se | pl | uk';
+            const error = 'language supports nb | nn | en | se | pl | uk | ru';
             throw Error(error);
     }
 };
