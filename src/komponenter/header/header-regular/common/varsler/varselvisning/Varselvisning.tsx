@@ -39,7 +39,7 @@ export const Varselvisning = ({ setKbId }: Props) => {
             ) : (
                 <VarselListe varsler={varsler.nyesteVarsler.slice(0, 5)} rowIndex={setKbId ? 0 : undefined} />
             )}
-            <AlleVarslerLenke varselInnboksUrl={`${DITT_NAV_URL}/varslinger`} rowIndex={setKbId ? 1 : undefined} />
+            <AlleVarslerLenke varselInnboksUrl={`${DITT_NAV_URL}varslinger`} rowIndex={setKbId ? 1 : undefined} />
         </div>
     );
 };
