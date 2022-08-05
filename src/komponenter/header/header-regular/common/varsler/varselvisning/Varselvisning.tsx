@@ -12,7 +12,6 @@ const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
     varslerUleste: state.varsler.data.varsler.totaltAntallUleste,
     language: state.language.language,
-    varselInnboksUrl: state.environment.API_VARSELINNBOKS_URL,
     varslerIsOpen: state.dropdownToggles.varsler,
 });
 
@@ -21,7 +20,6 @@ type Props = {
 };
 
 export const Varselvisning = ({ setKbId }: Props) => {
-    const { varselInnboksUrl } = useSelector(stateSelector);
     const { varsler } = useSelector(stateSelector);
 
     const varslerAntall = varsler.nyesteVarsler?.length;
@@ -40,7 +38,7 @@ export const Varselvisning = ({ setKbId }: Props) => {
             ) : (
                 <VarselListe varsler={varsler.nyesteVarsler.slice(0, 5)} rowIndex={setKbId ? 0 : undefined} />
             )}
-            <AlleVarslerLenke varselInnboksUrl={varselInnboksUrl} rowIndex={setKbId ? 1 : undefined} />
+            <AlleVarslerLenke varselInnboksUrl={varsler.nyesteVarsler[0].url} rowIndex={setKbId ? 1 : undefined} />
         </div>
     );
 };
