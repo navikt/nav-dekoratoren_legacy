@@ -44,7 +44,7 @@ const defaultConfig = {
     ikontekst: 'alarm-ikon',
     varselType: '',
     stylingklasse: '',
-    lenketekst: 'Lenke',
+    lenketekst: 'Se varsler',
 };
 
 const getVarselTypeConfig = (varselType: string) => {
@@ -98,7 +98,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                         label: varsel.url,
                                     }}
                                 >
-                                    Se varsler
+                                    {currentConfig.lenketekst}
                                 </LenkeMedSporing>
                             </div>
                         </div>
