@@ -5,7 +5,9 @@ import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSp
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { MenuValue } from 'utils/meny-storage-utils';
-import './ThankYou.less';
+
+// @ts-ignore
+import style from './ThankYou.module.scss';
 
 const ThankYou = () => {
     const { environment, arbeidsflate } = useSelector((state: AppState) => state);
@@ -15,11 +17,11 @@ const ThankYou = () => {
             : `${environment.XP_BASE_URL}/person/kontakt-oss`;
 
     return (
-        <div className="thankyou-container">
+        <div className={style.thankyouContainer}>
             <Ingress>
                 <Tekst id="send-undersokelse-takk" />
             </Ingress>
-            <div className="mellomrom" />
+            <div className={style.mellomrom} />
             <BodyLong>
                 <Tekst id="hensikt-med-tilbakemelding" />
             </BodyLong>
