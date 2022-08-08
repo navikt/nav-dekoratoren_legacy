@@ -5,7 +5,6 @@ import { useDebounce } from '../../../../../utils/hooks/useDebounce';
 import Tekst from '../../../../../tekster/finn-tekst';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../../../store/reducers';
-import './FritekstFelt.less';
 
 export const MAX_LENGTH = 200;
 
@@ -98,6 +97,34 @@ const FritekstFelt = (props: Props) => {
             </span>
         );
     };
+
+    * 08.08.2022 Deleted unused FritekstFelt.less:
+        @import (reference) '../../../../../styling-variabler.less';
+
+        .textarea__container {
+            width: auto;
+
+            label {
+                margin-bottom: 1em;
+            }
+
+            textarea {
+                min-height: 8rem;
+            }
+
+            .skjemaelement__feilmelding {
+                span {
+                    display: block;
+                    &:not(:last-of-type) {
+                        margin-bottom: 0.5rem;
+                    }
+                }
+            }
+
+            .skjemaelement__description {
+                margin-bottom: 1rem;
+            }
+        }
     */
 
     const getErrorMessage = () => {
