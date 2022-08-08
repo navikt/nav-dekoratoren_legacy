@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Tekst from 'tekster/finn-tekst';
+import { Link } from '@navikt/ds-react';
 import { Up } from '@navikt/ds-icons';
-import LenkeMedIkon from 'komponenter/footer/common/lenke-med-ikon/LenkeMedIkon';
 import { AppState } from 'store/reducers';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
@@ -40,13 +40,10 @@ const FooterTopp = () => {
         <div className={style.menylinjeTopp}>
             <div className={style.toppKontainer}>
                 <div className={style.tilToppen}>
-                    <LenkeMedIkon
-                        onClick={scrollToTop}
-                        tekst={<Tekst id="footer-til-toppen" />}
-                        ikon={<Up />}
-                        venstrestiltIkon={true}
-                        id="footer-til-toppen"
-                    />
+                    <Link onClick={scrollToTop} className="globalLenkeFooter" href="#" id="footer-til-toppen">
+                        <Up />
+                        <Tekst id="footer-til-toppen" />
+                    </Link>
                 </div>
                 <div className={style.toppKolonner}>
                     <div>

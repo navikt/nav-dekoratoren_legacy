@@ -11,16 +11,28 @@
     padding-left: 1rem;
     padding-right: 1rem;
 
-    :global(.lenke) {
+    :global(.globalLenkeFooter) {
+        display: flex;
         color: white;
         padding: 0.5rem 0;
+
         @media #{sv.$screen-mobile} {
             padding: 0.25rem 0;
+        }
+
+        svg {
+            stroke: white;
+            color: white;
         }
 
         &:focus {
             color: var(--navds-global-color-blue-500);
             background-color: white;
+
+            svg {
+                stroke: var(--navds-global-color-blue-500);
+                color: var(--navds-global-color-blue-500);
+            }
         }
     }
 
@@ -56,37 +68,6 @@
 
     @media #{sv.$screen-mobile} {
         margin-bottom: 1.75rem;
-    }
-
-    :global(.lenke-med-ikon) {
-        text-decoration: underline;
-        color: white;
-        font-size: 1.25rem;
-        padding: 1rem 1rem 1rem 0;
-
-        svg {
-            color: white;
-            fill: white;
-            stroke: white;
-        }
-
-        :global(.lenke-med-ikon__ikon) {
-            display: flex;
-            align-items: center;
-            margin: 0;
-        }
-
-        &:focus {
-            color: var(--navds-global-color-blue-500);
-            background-color: white;
-            :global(.lenke-med-ikon__ikon) {
-                svg {
-                    stroke: var(--navds-global-color-blue-500);
-                    color: var(--navds-global-color-blue-500);
-                    fill: var(--navds-global-color-blue-500);
-                }
-            }
-        }
     }
 }
 

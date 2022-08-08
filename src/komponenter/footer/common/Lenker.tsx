@@ -38,6 +38,7 @@ export const FooterLenker = ({ node }: Props) => {
                 <li key={lenkeNode.id}>
                     <BodyShort>
                         <LenkeMedSporing
+                            className="globalLenkeFooter"
                             href={genererUrl(XP_BASE_URL, lenkeNode.path)}
                             analyticsEventArgs={{
                                 category: AnalyticsCategory.Footer,
