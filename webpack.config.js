@@ -12,7 +12,7 @@ const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
     devtool: 'source-map',
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json', '.jsx', '.scss'],
+        extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         alias: {
             src: path.resolve(__dirname, './src'),
             api: path.resolve(__dirname, './src/api'),
