@@ -11,8 +11,6 @@ import { useCookies } from 'react-cookie';
 import { AnalyticsEventArgs } from 'utils/analytics/analytics';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import { getHomeUrl } from '../../../utils/home-url';
-
-// @ts-ignore
 import style from './NavLogoLenke.module.scss';
 
 type Props = {

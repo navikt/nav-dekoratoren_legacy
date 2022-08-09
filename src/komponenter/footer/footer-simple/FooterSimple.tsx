@@ -6,8 +6,6 @@ import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import { ChatbotWrapper } from 'komponenter/footer/chatbot/ChatbotWrapper';
 import { DelSkjermLenke } from '../common/del-skjerm-lenke/DelSkjermLenke';
-
-// @ts-ignore
 import style from './FooterSimple.module.scss';
 
 const FooterSimple = () => {

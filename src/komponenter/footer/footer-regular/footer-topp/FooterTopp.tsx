@@ -9,8 +9,6 @@ import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import { DelSkjermLenke } from 'komponenter/footer/common/del-skjerm-lenke/DelSkjermLenke';
 import FooterToppKolonner from './FooterToppKolonner';
-
-// @ts-ignore
 import style from './FooterTopp.module.scss';
 
 const FooterTopp = () => {

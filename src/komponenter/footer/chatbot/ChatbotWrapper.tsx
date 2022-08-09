@@ -6,8 +6,6 @@ import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import { MenuValue } from '../../../utils/meny-storage-utils';
 import { useCookies } from 'react-cookie';
 import classNames from 'classnames';
-
-// @ts-ignore
 import style from './ChatbotWrapper.module.scss';
 
 // Prevents SSR crash

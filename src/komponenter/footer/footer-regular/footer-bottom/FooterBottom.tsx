@@ -4,8 +4,6 @@ import { ChatbotWrapper } from 'komponenter/footer/chatbot/ChatbotWrapper';
 import Logo from 'ikoner/meny/nav-logo-white.svg';
 import { BodyShort } from '@navikt/ds-react';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
-
-// @ts-ignore
 import style from './FooterBottom.module.scss';
 
 const FooterBottom = () => {

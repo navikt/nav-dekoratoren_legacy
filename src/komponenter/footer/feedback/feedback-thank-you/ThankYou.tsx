@@ -5,8 +5,6 @@ import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSp
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { MenuValue } from 'utils/meny-storage-utils';
-
-// @ts-ignore
 import style from './ThankYou.module.scss';
 
 const ThankYou = () => {

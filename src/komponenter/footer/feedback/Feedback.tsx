@@ -5,8 +5,6 @@ import AlternativJa from './feedback-questions/AlternativJa';
 import AlternativNei from './feedback-questions/AlternativNei';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import ThankYou from './feedback-thank-you/ThankYou';
-
-// @ts-ignore
 import style from './Feedback.module.scss';
 
 export type FeedbackState = 'lukket' | 'ja' | 'nei' | 'besvart';

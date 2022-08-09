@@ -5,8 +5,6 @@ import { Monitor } from '@navikt/ds-icons';
 import React, { useState } from 'react';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
-
-// @ts-ignore
 import style from './DelSkjermLenke.module.scss';
 
 export const DelSkjermLenke = () => {
