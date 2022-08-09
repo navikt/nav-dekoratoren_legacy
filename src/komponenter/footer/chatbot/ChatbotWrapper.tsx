@@ -5,11 +5,10 @@ import { verifyWindowObj } from 'utils/Environment';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import { MenuValue } from '../../../utils/meny-storage-utils';
 import { useCookies } from 'react-cookie';
-import BEMHelper from '../../../utils/bem';
 import classNames from 'classnames';
-import './ChatbotWrapper.less';
 
-const bem = BEMHelper('chatbot-frida');
+// @ts-ignore
+import style from './ChatbotWrapper.module.scss';
 
 // Prevents SSR crash
 const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
@@ -73,7 +72,7 @@ export const ChatbotWrapper = () => {
     }
 
     return isMounted ? (
-        <div className={classNames(bem.className, isVisible && bem.modifier('visible'))}>
+        <div className={classNames(style.chatbotFrida, isVisible && style.visible)}>
             <Chatbot
                 boostApiUrlBase={boostApiUrlBase}
                 actionFilters={getActionFilters(context, isProduction)}

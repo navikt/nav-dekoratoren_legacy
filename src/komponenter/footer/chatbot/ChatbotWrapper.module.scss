@@ -1,17 +1,17 @@
 #nav-chatbot {
-    --navds-global-color-purple-500: rgba(99, 70, 137, 1);
+    --navds-global-color-purple-500: rgba(200, 70, 137, 1);
 }
 
-.chatbot-frida {
+.chatbotFrida {
     visibility: hidden;
     opacity: 0;
 
     transition-property: visibility, opacity;
     transition-duration: 200ms;
     transition-timing-function: ease-in;
+}
 
-    &--visible {
-        visibility: visible;
-        opacity: 1;
-    }
+.visible {
+    visibility: visible;
+    opacity: 1;
 }
