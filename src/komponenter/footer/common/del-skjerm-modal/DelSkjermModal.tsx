@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
-import './DelSkjermModal.less';
+import style from './DelSkjermModal.module.scss';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 interface Props {
@@ -84,25 +84,22 @@ const DelSkjermModal = (props: Props) => {
     return (
         <Modal
             open={props.isOpen}
-            className={`decorator-wrapper ${classname}`}
+            className={`decorator-wrapper ${style.delskjerm}`}
             aria-label={'Skjermdeling'}
             onClose={props.onClose}
         >
-            <div className={'delskjerm__header'}>
-                <Bilde className={'delskjerm__veileder'} asset={veileder} altText={''} />
+            <div className={style.header}>
+                <Bilde className={style.veileder} asset={veileder} altText={''} />
             </div>
-            <div className={'delskjerm__content'}>
+            <div className={style.content}>
                 <Heading size="medium" level="2">
                     <Tekst id={'delskjerm-modal-overskrift'} />
                 </Heading>
-                <div className={'delskjerm__beskrivelse'}>
+                <div className={style.beskrivelse}>
                     <BodyLong>
                         <Tekst id={'delskjerm-modal-beskrivelse'} />
                     </BodyLong>
-                    <ReadMore
-                        className={'delskjerm__lesmer'}
-                        header={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}
-                    >
+                    <ReadMore header={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
                         <ul>
                             {[...Array(3)].map((_, i) => (
                                 <li key={i}>
@@ -124,7 +121,7 @@ const DelSkjermModal = (props: Props) => {
                             onChange={onChange}
                             maxLength={5}
                         />
-                        <div className={'delskjerm__knapper'}>
+                        <div className={style.knapper}>
                             <Button onClick={onClick}>
                                 <Tekst id={'delskjerm-modal-start'} />
                             </Button>
