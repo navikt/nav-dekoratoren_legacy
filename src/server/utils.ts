@@ -293,6 +293,7 @@ const mapToLocale = (language?: string) => {
         se: 'se',
         pl: 'pl',
         uk: 'uk',
+        ru: 'ru',
 
         // deprecated
         norsk: 'nb',
