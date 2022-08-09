@@ -183,7 +183,7 @@
             "src"
         ],
         "moduleNameMapper": {
-            "\\.(css|jpg|png|svg|less)$": "<rootDir>/src/utils/jest/styleMock.js",
+            "\\.(css|jpg|png|svg|less|module.scss|scss)$": "<rootDir>/src/utils/jest/styleMock.js",
             "nav-(.*)-style": "<rootDir>/src/utils/jest/styleMock.js"
         }
     },
