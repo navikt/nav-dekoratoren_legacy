@@ -44,7 +44,7 @@ const defaultConfig = {
     ikontekst: 'alarm-ikon',
     varselType: '',
     stylingklasse: '',
-    lenketekst: 'Lenke',
+    lenketekst: 'Se varsler',
 };
 
 const getVarselTypeConfig = (varselType: string) => {

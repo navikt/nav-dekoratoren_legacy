@@ -117,6 +117,7 @@ const labels: { [key: string]: string } = {
     se: 'Sámegiel',
     pl: 'Polski',
     uk: 'Українська',
+    ru: 'Русский',
 };
 
 // Utils
