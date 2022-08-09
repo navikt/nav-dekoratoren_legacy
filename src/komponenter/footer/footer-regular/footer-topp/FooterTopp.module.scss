@@ -66,6 +66,15 @@
     justify-content: start;
     margin-bottom: 2.25rem;
 
+    :global(.globalLenkeFooter) {
+        font-size: 1.25rem;
+        padding: 1rem 1rem 1rem 0;
+
+        svg {
+            margin-right: 0.5rem;
+        }
+    }
+
     @media #{sv.$screen-mobile} {
         margin-bottom: 1.75rem;
     }
