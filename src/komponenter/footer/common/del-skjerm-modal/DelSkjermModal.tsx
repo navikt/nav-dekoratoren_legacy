@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useLayoutEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Alert, BodyLong, Button, Heading, ReadMore, TextField, Modal } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
@@ -13,8 +13,6 @@ interface Props {
 }
 
 const DelSkjermModal = (props: Props) => {
-    const classname = 'delskjerm__modal';
-
     // Language
     const language = useSelector((state: AppState) => state.language).language;
     const feilmelding = finnTekst('delskjerm-modal-feilmelding', language);
@@ -67,26 +65,13 @@ const DelSkjermModal = (props: Props) => {
         }
     };
 
-    const setOverlayCss = () => {
-        const elementsArray = document.getElementsByClassName('ReactModal__Overlay');
-        const element = elementsArray[0] as HTMLElement;
-        if (!element || !element.children[0] || !element.children[0].classList.contains(classname)) {
-            return;
-        }
-        element.style.zIndex = '9999';
-        element.style.backgroundColor = 'rgba(50, 65, 79, 0.8)'; // #32414f
-    };
-
-    useLayoutEffect(() => {
-        setOverlayCss();
-    }, [isOpen]);
-
     return (
         <Modal
             open={props.isOpen}
             className={`decorator-wrapper ${style.delskjerm}`}
             aria-label={'Skjermdeling'}
             onClose={props.onClose}
+            style={{ overlay: { backgroundColor: 'rgba(50, 65, 79, 0.8)' } }}
         >
             <div className={style.header}>
                 <Bilde className={style.veileder} asset={veileder} altText={''} />
