@@ -15,6 +15,7 @@ import './FooterTopp.less';
 const FooterTopp = () => {
     const cls = BEMHelper('menylinje-topp');
     const { language } = useSelector((state: AppState) => state.language);
+    const context = useSelector((state: AppState) => state.arbeidsflate.status);
     const { data } = useSelector((state: AppState) => state.menypunkt);
     const [personvernNode, settPersonvernNode] = useState<MenyNode>();
     const { PARAMS } = useSelector((state: AppState) => state.environment);
@@ -36,6 +37,8 @@ const FooterTopp = () => {
         (document.getElementById('top-element') as HTMLElement)?.focus();
     };
 
+    const twoNodesInMiddle = language === 'nb' && context === 'privatperson';
+
     return (
         <div className={cls.className}>
             <div className="topp-kontainer">
@@ -53,10 +56,10 @@ const FooterTopp = () => {
                         <FooterToppKolonner firstNode={0} numberOfNodes={1} />
                     </div>
                     <div className="midt">
-                        <FooterToppKolonner firstNode={1} numberOfNodes={2} />
+                        <FooterToppKolonner firstNode={1} numberOfNodes={twoNodesInMiddle ? 2 : 1} />
                     </div>
                     <div className="høyre">
-                        <FooterToppKolonner firstNode={3} numberOfNodes={1} />
+                        <FooterToppKolonner firstNode={twoNodesInMiddle ? 3 : 2} numberOfNodes={1} />
                         <ul className={cls.element('personvern-lenker')}>
                             <FooterLenker node={personvernNode} />
                             {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
