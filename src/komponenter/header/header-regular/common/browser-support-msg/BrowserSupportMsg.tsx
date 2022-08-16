@@ -1,13 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Detail, Heading, Link } from '@navikt/ds-react';
+import { Button, Detail, Heading, Link } from '@navikt/ds-react';
+import { Close } from '@navikt/ds-icons';
 
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import { detect } from 'detect-browser';
 import { BrowserInfo } from 'detect-browser';
-import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
 import { useCookies } from 'react-cookie';
 import { erDev } from 'utils/Environment';
 import './BrowserSupportMsg.less';
@@ -98,7 +98,9 @@ export const BrowserSupportMsg = () => {
                         </Detail>
                     )}
                 </div>
-                <LukkKnapp onClick={closeWarning} ariaLabel={'Lukk advarsel for nettleser'} />
+                <Button size="small" variant="tertiary" onClick={closeWarning}>
+                    <Close title="Lukk advarsel for nettleser" />
+                </Button>
             </div>
         </div>
     );
