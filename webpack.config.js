@@ -68,6 +68,26 @@ const commonConfig = {
                 },
             },
             {
+                test: /\.scss$/,
+                exclude: /\.module\.scss$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.module\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                localIdentName: '[local]__[hash:base64:5]',
+                            },
+                        },
+                    },
+                    'sass-loader',
+                ],
+            },
+            {
                 test: /\.(less|css)$/,
                 use: [
                     MiniCssExtractPlugin.loader,

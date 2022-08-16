@@ -1,17 +1,13 @@
 import { BodyShort } from '@navikt/ds-react';
-import LenkeMedIkon from '../lenke-med-ikon/LenkeMedIkon';
+import { Link } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
 import { Monitor } from '@navikt/ds-icons';
 import React, { useState } from 'react';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
-import BEMHelper from 'utils/bem';
-
-import './DelSkjermLenke.less';
+import style from './DelSkjermLenke.module.scss';
 
 export const DelSkjermLenke = () => {
-    const cls = BEMHelper('del-skjerm-lenke');
-
     const [isOpen, setIsOpen] = useState(false);
 
     const openModal = () => {
@@ -34,14 +30,12 @@ export const DelSkjermLenke = () => {
 
     return (
         <>
-            <li className={cls.className}>
+            <li className={style.delSkjermLenke}>
                 <BodyShort>
-                    <LenkeMedIkon
-                        onClick={openModal}
-                        tekst={<Tekst id="footer-del-skjerm" />}
-                        ikon={<Monitor className={cls.element('ikon')} />}
-                        className="lenke"
-                    />
+                    <Link onClick={openModal} className="globalLenkeFooter" href="#">
+                        <Tekst id="footer-del-skjerm" />
+                        <Monitor />
+                    </Link>
                 </BodyShort>
             </li>
             {isOpen && <DelSkjermModal isOpen={isOpen} onClose={closeModal} />}

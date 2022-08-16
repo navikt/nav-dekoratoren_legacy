@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Tekst from 'tekster/finn-tekst';
+import { Link } from '@navikt/ds-react';
 import { Up } from '@navikt/ds-icons';
-import LenkeMedIkon from 'komponenter/footer/common/lenke-med-ikon/LenkeMedIkon';
 import { AppState } from 'store/reducers';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
-import BEMHelper from 'utils/bem';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import { DelSkjermLenke } from 'komponenter/footer/common/del-skjerm-lenke/DelSkjermLenke';
 import FooterToppKolonner from './FooterToppKolonner';
-import './FooterTopp.less';
+import style from './FooterTopp.module.scss';
 
 const FooterTopp = () => {
-    const cls = BEMHelper('menylinje-topp');
     const { language } = useSelector((state: AppState) => state.language);
     const context = useSelector((state: AppState) => state.arbeidsflate.status);
     const { data } = useSelector((state: AppState) => state.menypunkt);
@@ -40,27 +38,24 @@ const FooterTopp = () => {
     const twoNodesInMiddle = language === 'nb' && context === 'privatperson';
 
     return (
-        <div className={cls.className}>
-            <div className="topp-kontainer">
-                <div className="menylenker-seksjon til-toppen">
-                    <LenkeMedIkon
-                        onClick={scrollToTop}
-                        tekst={<Tekst id="footer-til-toppen" />}
-                        ikon={<Up />}
-                        venstrestiltIkon={true}
-                        id="footer-til-toppen"
-                    />
+        <div className={style.menylinjeTopp}>
+            <div className={style.toppKontainer}>
+                <div className={style.tilToppen}>
+                    <Link onClick={scrollToTop} className="globalLenkeFooter" href="#" id="footer-til-toppen">
+                        <Up />
+                        <Tekst id="footer-til-toppen" />
+                    </Link>
                 </div>
-                <div className="topp-kolonner">
-                    <div className="venstre">
+                <div className={style.toppKolonner}>
+                    <div>
                         <FooterToppKolonner firstNode={0} numberOfNodes={1} />
                     </div>
-                    <div className="midt">
+                    <div>
                         <FooterToppKolonner firstNode={1} numberOfNodes={twoNodesInMiddle ? 2 : 1} />
                     </div>
-                    <div className="høyre">
+                    <div>
                         <FooterToppKolonner firstNode={twoNodesInMiddle ? 3 : 2} numberOfNodes={1} />
-                        <ul className={cls.element('personvern-lenker')}>
+                        <ul>
                             <FooterLenker node={personvernNode} />
                             {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
                         </ul>

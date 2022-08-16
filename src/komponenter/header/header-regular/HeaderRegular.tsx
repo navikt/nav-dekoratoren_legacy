@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Sticky } from 'komponenter/header/header-regular/common/sticky/Sticky';
@@ -54,13 +54,13 @@ export const HeaderRegular = () => {
     }, [menyIsOpen, dispatch]);
 
     return (
-        <Fragment>
+        <>
             <div className="header-z-wrapper">
                 <Sticky mobileFixed={mobilMenyIsOpen}>
                     <HeaderMenylinje />
                 </Sticky>
             </div>
             <MenyBakgrunn />
-        </Fragment>
+        </>
     );
 };

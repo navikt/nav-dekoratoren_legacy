@@ -1,10 +1,8 @@
-@import (reference) '../../../styling-variabler.less';
-
-.nav-logo-lenke {
+.navLogoLenke {
     display: flex;
 
     &:focus {
-        box-shadow: 0 0 0 4px @navds-semantic-color-focus inset;
+        box-shadow: 0 0 0 4px var(--navds-semantic-color-focus) inset;
         border-radius: 8px;
         outline: none;
         border-color: transparent;
