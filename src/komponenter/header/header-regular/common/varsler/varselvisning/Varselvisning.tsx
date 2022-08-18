@@ -10,7 +10,6 @@ import './Varselvisning.less';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
-    dittNavUrl: state.environment.DITT_NAV_URL,
     varslerUleste: state.varsler.data.varsler.totaltAntallUleste,
     language: state.language.language,
     varslerIsOpen: state.dropdownToggles.varsler,
@@ -21,7 +20,7 @@ type Props = {
 };
 
 export const Varselvisning = ({ setKbId }: Props) => {
-    const { varsler, dittNavUrl } = useSelector(stateSelector);
+    const { varsler } = useSelector(stateSelector);
 
     const varslerAntall = varsler.nyesteVarsler?.length;
 
@@ -39,7 +38,10 @@ export const Varselvisning = ({ setKbId }: Props) => {
             ) : (
                 <VarselListe varsler={varsler.nyesteVarsler.slice(0, 5)} rowIndex={setKbId ? 0 : undefined} />
             )}
-            <AlleVarslerLenke varselInnboksUrl={`${dittNavUrl}varslinger`} rowIndex={setKbId ? 1 : undefined} />
+            <AlleVarslerLenke
+                varselInnboksUrl="https://www.nav.no/minside/varslinger"
+                rowIndex={setKbId ? 1 : undefined}
+            />
         </div>
     );
 };
