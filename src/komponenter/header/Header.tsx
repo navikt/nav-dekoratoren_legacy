@@ -233,7 +233,6 @@ export const Header = () => {
                         chatbotVisible,
                         shareScreen,
                         utilsBackground,
-                        utloggingsvarsel,
                         logoutUrl,
                     } = payload;
 
@@ -311,9 +310,6 @@ export const Header = () => {
                         }),
                         ...(shareScreen !== undefined && {
                             SHARE_SCREEN: shareScreen === true,
-                        }),
-                        ...(utloggingsvarsel !== undefined && {
-                            UTLOGGINGSVARSEL: utloggingsvarsel === true,
                         }),
                     };
                     dispatch(setParams(params));

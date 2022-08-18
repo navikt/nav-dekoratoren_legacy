@@ -108,7 +108,6 @@ const commonConfig = {
                                             /\b(\w*(M|m)odal\w*)\b/,
                                             'body',
                                             'body.no-scroll-mobil',
-                                            /\b(\w*utloggingsvarsel\w*)\b/,
                                             '.siteheader',
                                             '.sitefooter',
                                             /\b(\w*lukk-container\w*)\b/,

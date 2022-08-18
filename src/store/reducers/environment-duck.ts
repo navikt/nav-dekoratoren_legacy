@@ -2,7 +2,6 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
 import { AvailableLanguage, Locale } from './language-duck';
 import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
-import { UtloggingsvarselState } from './utloggingsvarsel-duck';
 
 export interface Environment {
     ENV: string;
@@ -15,6 +14,7 @@ export interface Environment {
     API_UNLEASH_PROXY_URL: string;
     MINSIDE_ARBEIDSGIVER_URL: string;
     DITT_NAV_URL: string;
+    MIN_SIDE_URL: string;
     LOGIN_URL: string;
     LOGOUT_URL: string;
     FEEDBACK_API_URL: string;
@@ -45,14 +45,12 @@ export interface Params {
     URL_LOOKUP_TABLE: boolean;
     SHARE_SCREEN: boolean;
     UTILS_BACKGROUND?: string;
-    UTLOGGINGSVARSEL: boolean;
     LOGOUT_URL?: string;
 }
 
 export interface Cookies {
     CONTEXT: MenuValue;
     LANGUAGE: Locale;
-    EKSPANDERTVARSEL: UtloggingsvarselState;
 }
 
 export const initialState: Environment = {
@@ -66,6 +64,7 @@ export const initialState: Environment = {
     API_UNLEASH_PROXY_URL: '',
     MINSIDE_ARBEIDSGIVER_URL: '',
     DITT_NAV_URL: '',
+    MIN_SIDE_URL: '',
     LOGIN_URL: '',
     LOGOUT_URL: '',
     FEEDBACK_API_URL: '',
@@ -89,7 +88,6 @@ export const initialState: Environment = {
         CHATBOT_VISIBLE: false,
         URL_LOOKUP_TABLE: false,
         SHARE_SCREEN: false,
-        UTLOGGINGSVARSEL: false,
     },
 };
 

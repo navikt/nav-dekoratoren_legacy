@@ -50,6 +50,8 @@ spec:
       value: https://arbeidsgiver.nav.no/min-side-arbeidsgiver/
     - name: DITT_NAV_URL
       value: https://www.nav.no/person/dittnav/
+    - name: MIN_SIDE_URL
+      value: https://www.nav.no/minside/
     - name: LOGIN_URL
       value: https://loginservice.nav.no
     - name: LOGOUT_URL
