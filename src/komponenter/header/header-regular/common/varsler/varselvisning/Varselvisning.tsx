@@ -11,9 +11,6 @@ import './Varselvisning.less';
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
     minSideUrl: state.environment.MIN_SIDE_URL,
-    varslerUleste: state.varsler.data.varsler.totaltAntallUleste,
-    language: state.language.language,
-    varslerIsOpen: state.dropdownToggles.varsler,
 });
 
 type Props = {
