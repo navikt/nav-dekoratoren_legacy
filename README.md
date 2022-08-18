@@ -132,7 +132,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | chatbot            | boolean                                           | true             | Aktiverer eller deaktiverer Chatbot Frida [6]                                  |
 | chatbotVisible     | boolean                                           | false            | Skjuler eller viser Chatbot Frida [7]                                          |
 | urlLookupTable     | boolean                                           | true             | Aktiverer eller deaktiverer url-lookup-table [8]                               |
-| shareScreen        | boolean                                           | true             | Aktiverer eller deaktiverer skjerdelingskomponent                              |
+| shareScreen        | boolean                                           | true             | Aktiverer eller deaktiverer skjermdelingskomponent                             |
 | logoutUrl          | string                                            | undefined        | Setter url for logg-ut knappen [9]                                             |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
