@@ -12,28 +12,14 @@
         :global(.navds-link-panel__chevron),
         :global(.navds-link-panel__title),
         :global(.navds-link-panel__description),
-        .compactChevron {
+        :global(.compact-chevron) {
             color: var(--navds-global-color-white);
         }
 
-        .compactChevron {
+        :global(.compact-chevron) {
             transform: translateX(6px);
             stroke: var(--navds-global-color-white);
         }
-    }
-
-    .compactChevron {
-        display: none;
-        align-self: center;
-        margin-right: 8px;
-        margin-left: -4px;
-        stroke: var(--navds-global-color-blue-500);
-        transition: transform 0.25s;
-    }
-
-    .text {
-        display: flex;
-        align-items: center;
     }
 
     :global(.navds-link-panel__content) {
@@ -48,50 +34,64 @@
         color: var(--navds-global-color-blue-500);
     }
 
-    .inverted,
-    .inverted:hover {
-        :global(.navds-link-panel__chevron),
-        :global(.navds-link-panel__title),
-        :global(.navds-link-panel__description) {
-            color: var(--navds-global-color-white);
-        }
-    }
-
-    .inverted:focus {
-        .text {
-            color: var(--navds-global-color-blue-500);
-        }
-        :global(.navds-link-panel__chevron) {
-            color: var(--navds-global-color-blue-500);
-        }
-    }
-
-    .compact {
-        :global(.navds-link-panel__title) {
-            font-size: 1.2rem;
-        }
-
-        :global(.navds-link-panel__description) {
-            font-size: 1.1rem;
-            margin-top: var(--navds-spacing-1);
-            line-height: 1.5rem;
-        }
-
-        @media #{sv.$screen-desktop-small-down} {
-            padding: 0.5rem 0.75rem;
-            margin-bottom: 0.25rem;
-
-            :global(.navds-link-panel__chevron) {
-                display: none;
-            }
-
-            .compactChevron {
-                display: inline-block;
-            }
-        }
-    }
-
     @media #{sv.$screen-mobile} {
         padding: 0.75rem 1rem;
+    }
+}
+
+.compactChevron {
+    display: none;
+    align-self: center;
+    margin-right: 8px;
+    margin-left: -4px;
+    stroke: var(--navds-global-color-blue-500);
+    transition: transform 0.25s;
+}
+
+.text {
+    display: flex;
+    align-items: center;
+}
+
+.inverted,
+.inverted:hover {
+    :global(.navds-link-panel__chevron),
+    :global(.navds-link-panel__title),
+    :global(.navds-link-panel__description) {
+        color: var(--navds-global-color-white);
+    }
+}
+
+.inverted:focus {
+    .text {
+        color: var(--navds-global-color-blue-500);
+    }
+    :global(.navds-link-panel__chevron) {
+        color: var(--navds-global-color-blue-500);
+    }
+}
+
+.compact {
+    :global(.navds-link-panel__title) {
+        font-size: 1.2rem;
+    }
+
+    :global(.navds-link-panel__description) {
+        font-size: 1.1rem;
+        margin-top: var(--navds-spacing-1);
+        line-height: 1.5rem;
+    }
+
+    @media #{sv.$screen-desktop-small-down} {
+        padding: 0.5rem 0.75rem;
+        margin-bottom: 0.25rem;
+
+        :global(.navds-link-panel__chevron) {
+            display: none;
+        }
+
+        .compactChevron {
+            display: inline-block;
+        }
     }
 }
