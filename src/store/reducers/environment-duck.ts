@@ -2,7 +2,6 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
 import { AvailableLanguage, Locale } from './language-duck';
 import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
-import { UtloggingsvarselState } from './utloggingsvarsel-duck';
 
 export interface Environment {
     ENV: string;
@@ -45,14 +44,12 @@ export interface Params {
     URL_LOOKUP_TABLE: boolean;
     SHARE_SCREEN: boolean;
     UTILS_BACKGROUND?: string;
-    UTLOGGINGSVARSEL: boolean;
     LOGOUT_URL?: string;
 }
 
 export interface Cookies {
     CONTEXT: MenuValue;
     LANGUAGE: Locale;
-    EKSPANDERTVARSEL: UtloggingsvarselState;
 }
 
 export const initialState: Environment = {
@@ -89,7 +86,6 @@ export const initialState: Environment = {
         CHATBOT_VISIBLE: false,
         URL_LOOKUP_TABLE: false,
         SHARE_SCREEN: false,
-        UTLOGGINGSVARSEL: false,
     },
 };
 
