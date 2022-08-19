@@ -13,7 +13,7 @@
         :global(.navds-link-panel__title),
         :global(.navds-link-panel__description),
         :global(.compact-chevron) {
-            color: var(--navds-global-color-white);
+            color: var(--navds-global-color-white) !important;
         }
 
         :global(.compact-chevron) {
@@ -34,18 +34,18 @@
         color: var(--navds-global-color-blue-500);
     }
 
+    :global(.compact-chevron) {
+        display: none;
+        align-self: center;
+        margin-right: 8px;
+        margin-left: -4px;
+        stroke: var(--navds-global-color-blue-500);
+        transition: transform 0.25s;
+    }
+
     @media #{sv.$screen-mobile} {
         padding: 0.75rem 1rem;
     }
-}
-
-.compactChevron {
-    display: none;
-    align-self: center;
-    margin-right: 8px;
-    margin-left: -4px;
-    stroke: var(--navds-global-color-blue-500);
-    transition: transform 0.25s;
 }
 
 .text {
@@ -72,7 +72,7 @@
             display: none;
         }
 
-        .compactChevron {
+        :global(.compact-chevron) {
             display: inline-block;
         }
     }
