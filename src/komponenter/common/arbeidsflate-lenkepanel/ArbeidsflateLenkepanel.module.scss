@@ -53,24 +53,6 @@
     align-items: center;
 }
 
-.inverted,
-.inverted:hover {
-    :global(.navds-link-panel__chevron),
-    :global(.navds-link-panel__title),
-    :global(.navds-link-panel__description) {
-        color: var(--navds-global-color-white);
-    }
-}
-
-.inverted:focus {
-    .text {
-        color: var(--navds-global-color-blue-500);
-    }
-    :global(.navds-link-panel__chevron) {
-        color: var(--navds-global-color-blue-500);
-    }
-}
-
 .compact {
     :global(.navds-link-panel__title) {
         font-size: 1.2rem;

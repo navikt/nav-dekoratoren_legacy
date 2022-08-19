@@ -21,7 +21,6 @@ interface Props {
     lenke: ArbeidsflateLenke;
     language: Locale;
     analyticsEventArgs: AnalyticsEventArgs;
-    inverted?: boolean;
     enableCompactView?: boolean;
     id?: string;
     withDescription?: boolean;
@@ -32,7 +31,6 @@ const ArbeidsflateLenkepanel = ({
     language,
     analyticsEventArgs,
     enableCompactView,
-    inverted,
     id,
     withDescription = true,
 }: Props) => {
@@ -46,7 +44,6 @@ const ArbeidsflateLenkepanel = ({
             className={classNames(
                 style.arbeidsflateLenkepanel,
                 'arbeidsflate-lenkepanel',
-                inverted ? style.inverted : undefined,
                 enableCompactView ? style.compact : undefined
             )}
             onClick={(event) => {
