@@ -13,7 +13,6 @@ export interface Environment {
     API_INNLOGGINGSLINJE_URL: string;
     API_UNLEASH_PROXY_URL: string;
     MINSIDE_ARBEIDSGIVER_URL: string;
-    DITT_NAV_URL: string;
     MIN_SIDE_URL: string;
     LOGIN_URL: string;
     LOGOUT_URL: string;
@@ -63,7 +62,6 @@ export const initialState: Environment = {
     API_INNLOGGINGSLINJE_URL: '',
     API_UNLEASH_PROXY_URL: '',
     MINSIDE_ARBEIDSGIVER_URL: '',
-    DITT_NAV_URL: '',
     MIN_SIDE_URL: '',
     LOGIN_URL: '',
     LOGOUT_URL: '',
