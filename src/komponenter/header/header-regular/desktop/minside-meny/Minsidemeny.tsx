@@ -51,7 +51,7 @@ export const Minsidemeny = ({ kbNavMainState }: Props) => {
                     <MinsidemenyInnhold
                         classname={minsideMenyClassname}
                         menyLenker={minsideMenyPunkter}
-                        dittNavUrl={environment.DITT_NAV_URL}
+                        dittNavUrl={environment.MIN_SIDE_URL}
                         brukernavn={brukernavn}
                         authLevel={innloggetStatus.securityLevel}
                     />
