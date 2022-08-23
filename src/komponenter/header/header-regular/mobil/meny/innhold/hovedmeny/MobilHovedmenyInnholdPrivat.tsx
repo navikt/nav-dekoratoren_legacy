@@ -23,7 +23,7 @@ import { UnstyledList } from '../utils/UnstyledList';
 import './MobilHovedmenyInnholdPrivat.less';
 
 const stateSelector = (state: AppState) => ({
-    dittNavUrl: state.environment.DITT_NAV_URL,
+    dittNavUrl: state.environment.MIN_SIDE_URL,
     xpBaseUrl: state.environment.XP_BASE_URL,
     language: state.language.language,
     authenticated: state.innloggingsstatus.data.authenticated,

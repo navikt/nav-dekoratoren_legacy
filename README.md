@@ -191,7 +191,7 @@ dekoratoren:
       API_INNLOGGINGSLINJE_URL: 'http://mocks:8080/innloggingslinje-api/auth'
       API_VARSELINNBOKS_URL: 'http://mocks:8080/person/varselinnboks'
       MINSIDE_ARBEIDSGIVER_URL: 'https://arbeidsgiver.nav.no/min-side-arbeidsgiver/'
-      DITT_NAV_URL: 'https:/www.nav.no/person/dittnav/'
+      MIN_SIDE_URL: 'https:/www.nav.no/minside'
       LOGIN_URL: 'http://localhost:5000'
       LOGOUT_URL: 'http://localhost:5000/?logout'
     depends_on:
