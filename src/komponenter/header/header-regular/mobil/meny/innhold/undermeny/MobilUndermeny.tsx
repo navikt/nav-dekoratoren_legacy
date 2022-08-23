@@ -24,16 +24,10 @@ export const MobilUndermeny = ({ lenker, className }: Props) => {
 
     const menyClass = BEMHelper(className);
 
-    const { flatten, children } = lenker;
-
     return (
         <div className={menyClass.element('undermeny-innhold', underMenuIsOpen ? '' : 'hidden')}>
             <MobilUndermenyLukk />
-            {flatten ? (
-                children.map((seksjon) => <MobilUndermenySeksjon lenker={seksjon} key={seksjon.id} />)
-            ) : (
-                <MobilUndermenySeksjon lenker={lenker} />
-            )}
+            <MobilUndermenySeksjon lenker={lenker} />
         </div>
     );
 };
