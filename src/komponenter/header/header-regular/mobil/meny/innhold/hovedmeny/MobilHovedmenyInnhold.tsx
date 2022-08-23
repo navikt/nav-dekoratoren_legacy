@@ -75,7 +75,7 @@ export const MobilHovedmenyInnhold = (props: Props) => {
                 {innloggingsstatus.data.authenticated && arbeidsflate === MenuValue.PRIVATPERSON && (
                     <DittNavMeny minsideLenker={minsideLenker} setUnderMeny={setUndermenyLenker} />
                 )}
-                <MobilHovedmenyHeader />
+                {arbeidsflate !== MenuValue.PRIVATPERSON && <MobilHovedmenyHeader />}
                 {arbeidsflate === MenuValue.PRIVATPERSON && isLanguageNorwegian ? (
                     <MobilHovedmenyInnholdPrivat hovedmenyLenker={hovedmenyLenker} setUndermeny={setUndermenyLenker} />
                 ) : (
