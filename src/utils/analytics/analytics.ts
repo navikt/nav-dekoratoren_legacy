@@ -42,7 +42,7 @@ export const analyticsEvent = (props: AnalyticsEventArgs) => {
         søkeord: eventName === 'søk' ? label : undefined,
         lenketekst: actionFinal,
         kategori: category,
-        komponent,
+        komponent: komponent || action,
         lenkegruppe,
     });
 
