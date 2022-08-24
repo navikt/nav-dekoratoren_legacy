@@ -56,9 +56,26 @@
     }
 
     &__lenke-inner {
-        height: 100%;
-        display: flex;
-        margin: 0 0.75rem;
+        display: inline-flex;
+        flex-direction: column;
         align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin: 0 0.75rem;
+
+        &::after {
+            content: attr(data-text);
+            content: attr(data-text) / '';
+            height: 0;
+            visibility: hidden;
+            overflow: hidden;
+            user-select: none;
+            pointer-events: none;
+            font-weight: bold;
+
+            @media speech {
+                display: none;
+            }
+        }
     }
 }

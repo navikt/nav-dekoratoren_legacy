@@ -1,5 +1,4 @@
 @import './styling-variabler.less';
-@import '@navikt/ds-css/dist/index.css';
 
 body {
     overflow-y: scroll;
@@ -43,6 +42,10 @@ body.no-scroll-mobil {
     }
 }
 
+.decorator-utils-container {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+}
+
 .site-skiplinks,
 .siteheader,
 .sitefooter {
@@ -72,6 +75,10 @@ body.no-scroll-mobil {
 
 .media-tablet-desktop {
     display: none !important;
+}
+
+.decorator-wrapper {
+    box-sizing: border-box;
 }
 
 @media @screen-desktop {

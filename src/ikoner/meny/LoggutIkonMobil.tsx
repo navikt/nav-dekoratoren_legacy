@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LoggutIkonMobil = () => {
+export const LoggutIkonMobil = () => {
     return (
         <svg
             width="22px"
@@ -10,13 +10,8 @@ const LoggutIkonMobil = () => {
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
         >
-            <title>logg ut ikon</title>
-            <desc>logg ut knapp mobilvisning</desc>
             <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                <g
-                    transform="translate(-30.000000, -284.000000)"
-                    fill="#0067C5"
-                >
+                <g transform="translate(-30.000000, -284.000000)" fill="currentColor">
                     <g transform="translate(29.000000, 284.000000)">
                         <path
                             d="M21,0 C22.1045695,0 23,0.8954305 23,2 L23,22 C23,23.1045695 22.1045695,24 21,24 L11,24 C9.8954305,24 9,23.1045695 9,22 L9,19 L11,19 L11,22 L21,22 L21,2 L11,2 L11,5 L9,5 L9,2 C9,0.8954305 9.8954305,0 11,0 L21,0 Z M6.6254493,6 L1,12 L6.6254493,18 L8,16.5454545 L4.705,13 L18,13 L18,11 L4.705,11 L8,7.45454545 L6.6254493,6 Z"
@@ -28,5 +23,3 @@ const LoggutIkonMobil = () => {
         </svg>
     );
 };
-
-export default LoggutIkonMobil;

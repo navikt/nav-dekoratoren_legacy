@@ -20,7 +20,7 @@ spec:
     path: /dekoratoren/metrics
   replicas:
     min: 2
-    max: 4
+    max: 8
   ingresses:
     - https://appres.nav.no/common-html/v4/navno
     - https://www.nav.no/dekoratoren
@@ -41,15 +41,15 @@ spec:
     - name: API_XP_SERVICES_URL
       value: https://www.nav.no/_/service
     - name: API_VARSELINNBOKS_URL
-      value: https://www.nav.no/person/varselinnboks
+      value: https://www.nav.no/tms-varselbjelle-api
     - name: API_INNLOGGINGSLINJE_URL
       value: https://www.nav.no/person/innloggingsstatus
     - name: API_UNLEASH_PROXY_URL
       value: https://www.nav.no/person/pb-unleash-proxy
     - name: MINSIDE_ARBEIDSGIVER_URL
       value: https://arbeidsgiver.nav.no/min-side-arbeidsgiver/
-    - name: DITT_NAV_URL
-      value: https://www.nav.no/person/dittnav/
+    - name: MIN_SIDE_URL
+      value: https://www.nav.no/minside/
     - name: LOGIN_URL
       value: https://loginservice.nav.no
     - name: LOGOUT_URL
@@ -64,10 +64,12 @@ spec:
       value: {{SOLUTION_ID}}
     - name: NAV_GROUP_ID
       value: {{NAV_GROUP_ID}}
-
+    - name: BUILD_ID
+      value: {{BUILD_ID}}
   resources:
     limits:
       cpu: '3'
       memory: 1500Mi
     requests:
-      memory: 1500Mi
+      cpu: 500m
+      memory: 500Mi

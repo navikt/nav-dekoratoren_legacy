@@ -24,6 +24,8 @@ export const farger = {
     navBla: '#0067C5',
 };
 
+const selectorLabel = 'Språk/Language';
+
 export type LocaleOption = AvailableLanguage & { label: string };
 
 interface Props {
@@ -36,7 +38,6 @@ export const SprakVelger = (props: Props) => {
     const { language } = useSelector((state: AppState) => state.language);
     const [, setCookie] = useCookies([decoratorLanguageCookie]);
     const options = transformOptions(availableLanguages).sort((a, b) => (a.label > b.label ? -1 : 1));
-    const selectorLabel = 'Språk/Language';
 
     const onChange = (selected: LocaleOption) => {
         const { label, ...selectedLanguage } = selected;
@@ -83,7 +84,9 @@ export const SprakVelger = (props: Props) => {
                 <button {...buttonProps} className={`${cls.element('knapp')} skjemaelement__input`} type="button">
                     <span className={cls.element('knapp-tekst')}>
                         <Bilde asset={Globe} className={cls.element('ikon')} />
-                        <BodyShort size="small">{selectorLabel}</BodyShort>
+                        <BodyShort size="small" as={'span'}>
+                            {selectorLabel}
+                        </BodyShort>
                     </span>
                     <Expand className="chevron--ned" />
                 </button>
@@ -114,6 +117,7 @@ const labels: { [key: string]: string } = {
     se: 'Sámegiel',
     pl: 'Polski',
     uk: 'Українська',
+    ru: 'Русский',
 };
 
 // Utils

@@ -27,6 +27,7 @@ const fileFavicon16x16 = require('ikoner/favicon/favicon-16x16.png');
 const fileFavicon32x32 = require('ikoner/favicon/favicon-32x32.png');
 
 const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
+const buildId = process.env.BUILD_ID;
 
 export const template = (req: Request) => {
     // Set environment based on request params
@@ -34,8 +35,9 @@ export const template = (req: Request) => {
 
     // Resources
     const fileEnv = `${env.APP_URL}/env`;
-    const fileCss = `${env.APP_URL}/css/client.css`;
-    const fileScript = `${env.APP_URL}/client.js`;
+    // Insert buildId-segment as a cache buster
+    const fileCss = `${env.APP_URL}/css/client.${buildId}.css`;
+    const fileScript = `${env.APP_URL}/client.${buildId}.js`;
 
     // Retreive from cache
     const cachedEnvHash = hash({ env });
@@ -89,6 +91,7 @@ export const template = (req: Request) => {
             <link rel="icon" type="image/png" sizes="32x32" href=${appUrl}${fileFavicon32x32} />
             <link rel="apple-touch-icon" sizes="180x180" href=${appUrl}${fileAppleTouchIcon} />
             <!-- Decorator development styling -->
+            <!-- Hide decorator-utils-container to prevent content spoofing attacks via the breadcrumbs parameter -->
             <style>
             html, body {  height: 100%; }
             .decorator-dev-container {
@@ -105,9 +108,8 @@ export const template = (req: Request) => {
                 justify-content: center;
                 align-items: center;
             }  
-            .decorator-utils-container {    
-                background: #f1f1f1;
-                ${process.env.APP_BASE_URL === 'https://www.nav.no' ? 'display: none !important;' : ''}           
+            .decorator-utils-container {
+                display: none !important;
             }
             </style>
         </head>
@@ -131,7 +133,7 @@ export const template = (req: Request) => {
             <!-- Scripts fetched by apps -->
             <div id='scripts'>
                 <div id='decorator-env' data-src='${fileEnv}${paramsAsString}'></div>
-                <script async='true' src='${fileScript}'></script>
+                <script async src='${fileScript}'></script>
             </div>
             <div id='skiplinks'></div>
             <div id='megamenu-resources'></div>

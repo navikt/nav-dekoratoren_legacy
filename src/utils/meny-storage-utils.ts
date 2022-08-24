@@ -42,6 +42,7 @@ export const getLanguageNode = (lang: Locale, nodeMenu: MenyNode[]): MenyNode | 
         pl: nodeMenu.find((n) => n.path === '/en'),
         se: nodeMenu.find((n) => n.path === '/se'),
         uk: nodeMenu.find((n) => n.path === '/en'),
+        ru: nodeMenu.find((n) => n.path === '/en'),
     }[lang]);
 
 export const findNode = (node: MenyNode, displayName: string): MenyNode | undefined => {

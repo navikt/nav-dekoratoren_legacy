@@ -10,10 +10,7 @@ import './Varselvisning.less';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data.varsler,
-    varslerUleste: state.varsler.data.varsler.totaltAntallUleste,
-    language: state.language.language,
-    varselInnboksUrl: state.environment.API_VARSELINNBOKS_URL,
-    varslerIsOpen: state.dropdownToggles.varsler,
+    minSideUrl: state.environment.MIN_SIDE_URL,
 });
 
 type Props = {
@@ -21,14 +18,11 @@ type Props = {
 };
 
 export const Varselvisning = ({ setKbId }: Props) => {
-    const { varselInnboksUrl } = useSelector(stateSelector);
-    const { varsler } = useSelector(stateSelector);
+    const { varsler, minSideUrl } = useSelector(stateSelector);
 
     const varslerAntall = varsler.nyesteVarsler?.length;
 
     const cls = BEMHelper('varsler-visning');
-
-    const visAlleVarslerLenke = varslerAntall > 5;
 
     return (
         <div className={cls.className}>
@@ -42,9 +36,7 @@ export const Varselvisning = ({ setKbId }: Props) => {
             ) : (
                 <VarselListe varsler={varsler.nyesteVarsler.slice(0, 5)} rowIndex={setKbId ? 0 : undefined} />
             )}
-            {visAlleVarslerLenke && (
-                <AlleVarslerLenke varselInnboksUrl={varselInnboksUrl} rowIndex={setKbId ? 1 : undefined} />
-            )}
+            <AlleVarslerLenke varselInnboksUrl={`${minSideUrl}varslinger`} rowIndex={setKbId ? 1 : undefined} />
         </div>
     );
 };

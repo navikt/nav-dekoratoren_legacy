@@ -1,49 +1,49 @@
 import { MenuValue } from 'utils/meny-storage-utils';
-import { arbeidsgiverContextLenke } from './arbeidsflate-lenker';
-import { personContextLenke } from './arbeidsflate-lenker';
-import { samarbeidspartnerContextLenke } from './arbeidsflate-lenker';
+import { arbeidsgiverContextLenke, personContextLenke, samarbeidspartnerContextLenke } from './arbeidsflate-lenker';
 import { Environment } from 'store/reducers/environment-duck';
 
-type LenkeData = {
+export type ArbeidsflateLenkeData = {
     url: string;
     lenkeTekstId: string;
     stikkordId: string;
-    key?: MenuValue;
+    key: MenuValue;
 };
 
 export const valgtbedrift = () => {
-    const orgnummerFraUrl = new URLSearchParams(window.location.search).get(
-        'bedrift'
-    );
+    const orgnummerFraUrl = new URLSearchParams(window.location.search).get('bedrift');
     return orgnummerFraUrl ? `?bedrift=${orgnummerFraUrl}` : '';
 };
 
-const privatpersonLenker = (env: Environment): LenkeData[] => [
-    {
-        url: env.DITT_NAV_URL,
-        lenkeTekstId: 'min-side',
-        stikkordId: 'meny-bunnlenke-minside-stikkord',
-    },
+export const dittNavLenkeData = (url: string): ArbeidsflateLenkeData => ({
+    url,
+    lenkeTekstId: 'min-side',
+    stikkordId: 'meny-bunnlenke-minside-stikkord',
+    key: MenuValue.PRIVATPERSON,
+});
+
+const privatpersonLenker = (env: Environment): ArbeidsflateLenkeData[] => [
+    dittNavLenkeData(env.MIN_SIDE_URL),
     arbeidsgiverContextLenke(env.XP_BASE_URL),
     samarbeidspartnerContextLenke(env.XP_BASE_URL),
 ];
 
-const arbeidsgiverLenker = (env: Environment): LenkeData[] => [
+const arbeidsgiverLenker = (env: Environment): ArbeidsflateLenkeData[] => [
     {
         url: env.MINSIDE_ARBEIDSGIVER_URL + valgtbedrift(),
         lenkeTekstId: 'arbeidsgiver-minside-lenke',
         stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
+        key: MenuValue.ARBEIDSGIVER,
     },
     personContextLenke(env.XP_BASE_URL),
     samarbeidspartnerContextLenke(env.XP_BASE_URL),
 ];
 
-const samarbeidspartnerLenker = (env: Environment): LenkeData[] => [
+const samarbeidspartnerLenker = (env: Environment): ArbeidsflateLenkeData[] => [
     personContextLenke(env.XP_BASE_URL),
     arbeidsgiverContextLenke(env.XP_BASE_URL),
 ];
 
-const IKKEBESTEMTLenker = (): LenkeData[] => [];
+const IKKEBESTEMTLenker = (): ArbeidsflateLenkeData[] => [];
 
 export const bunnLenker = (env: Environment) => ({
     [MenuValue.PRIVATPERSON]: privatpersonLenker(env),

@@ -5,7 +5,7 @@ import { createStore } from 'store';
 import { dataInitState } from 'store/reducers/menu-duck';
 import { Locale } from 'store/reducers/language-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
-import HovedmenyInnhold from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyInnhold';
+import { HovedmenyInnhold } from 'komponenter/header/header-regular/desktop/hovedmeny/HovedmenyInnhold';
 import { kbNavDummy } from 'utils/jest/testObjects';
 
 const store = createStore();
