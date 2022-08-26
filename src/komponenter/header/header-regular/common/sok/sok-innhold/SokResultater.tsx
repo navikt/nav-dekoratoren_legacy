@@ -69,7 +69,7 @@ export const SokResultater = (props: Props) => {
                                         logAmplitudeEvent('resultat-klikk', {
                                             destinasjon: item.href,
                                             sokeord: writtenInput.toLowerCase(),
-                                            treffNr: index + 1,
+                                            treffnr: index + 1,
                                         });
                                     }}
                                 >
