@@ -12,6 +12,7 @@ export const initAmplitude = () => {
             saveEvents: false,
             includeUtm: true,
             includeReferrer: true,
+            platform: window.location.toString(),
         });
     }
 };
@@ -33,6 +34,7 @@ export const logPageView = (params: Params, authState: InnloggingsstatusState) =
 export const logAmplitudeEvent = (eventName: string, data?: any): Promise<any> => {
     return new Promise(function (resolve: any) {
         const eventData = data || {};
+        eventData.platform = window.location.toString();
         eventData.origin = 'dekoratøren';
         eventData.originVersion = 'unknown';
 
