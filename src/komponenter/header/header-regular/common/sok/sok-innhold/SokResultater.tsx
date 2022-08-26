@@ -12,6 +12,7 @@ import { AppState } from 'store/reducers';
 import { useDispatch } from 'react-redux';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { Alert, Link } from '@navikt/ds-react';
+import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 
 import './SokResultater.less';
 
@@ -63,7 +64,14 @@ export const SokResultater = (props: Props) => {
                                     id={id}
                                     className={'sokeresultat-lenke'}
                                     href={item.href}
-                                    onClick={() => dispatch(lukkAlleDropdowns())}
+                                    onClick={() => {
+                                        dispatch(lukkAlleDropdowns());
+                                        logAmplitudeEvent('resultat-klikk', {
+                                            destinasjon: item.href,
+                                            sokeord: writtenInput.toLowerCase(),
+                                            treffnr: index + 1,
+                                        });
+                                    }}
                                 >
                                     <SokeforslagIngress
                                         className="sok-resultat-listItem"
