@@ -12,6 +12,7 @@ export const initAmplitude = () => {
             saveEvents: false,
             includeUtm: true,
             includeReferrer: true,
+            platform: window.location.toString(),
         });
     }
 };
@@ -19,6 +20,7 @@ export const initAmplitude = () => {
 export const logPageView = (params: Params, authState: InnloggingsstatusState) => {
     logAmplitudeEvent('besøk', {
         sidetittel: document.title,
+        platform: window.location.toString(),
         innlogging: authState.data.securityLevel ?? false,
         parametre: {
             ...params,
