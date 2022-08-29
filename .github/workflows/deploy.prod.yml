@@ -8,7 +8,7 @@ jobs:
     if: github.event.release.target_commitish == 'master'
     uses: ./.github/workflows/build-and-deploy.yml
     with:
-      NAIS_RESOURCE: .nais/prod.yaml
+      NAIS_VARS: .nais/vars/prod.yaml
       IMAGE_NAME: release-${{ github.ref_name }}
       CLUSTER: prod-gcp
       BUILD_MODE: prod

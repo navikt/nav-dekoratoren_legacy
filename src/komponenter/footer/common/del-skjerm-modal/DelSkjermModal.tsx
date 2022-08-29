@@ -31,13 +31,14 @@ const DelSkjermModal = (props: Props) => {
     // Vergic config
     const w = window as any;
     const vergicExists = typeof w !== 'undefined' && w.vngage;
-    const navGroupId = NAV_GROUP_ID;
 
     useEffect(() => {
         if (vergicExists) {
-            setIsOpen(w.vngage.get('queuestatus', navGroupId));
+            setIsOpen(w.vngage.get('queuestatus', NAV_GROUP_ID));
         }
     }, []);
+
+    console.log(OPPORTUNITY_ID, SOLUTION_ID, CASETYPE_ID, NAV_GROUP_ID);
 
     const onClick = () => {
         setSubmitted(true);
@@ -49,7 +50,7 @@ const DelSkjermModal = (props: Props) => {
                 caseTypeId: CASETYPE_ID,
                 category: 'Phone2Web',
                 message: 'Phone2Web',
-                groupId: navGroupId,
+                groupId: NAV_GROUP_ID,
                 startCode: code,
             });
             props.onClose();

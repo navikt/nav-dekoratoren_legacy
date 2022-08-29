@@ -5,7 +5,7 @@ on:
       BUILD_MODE:
         required: true
         type: string
-      NAIS_RESOURCE:
+      NAIS_VARS:
         required: true
         type: string
       IMAGE_NAME:
@@ -48,19 +48,10 @@ jobs:
         run: |
           docker build -t ${{ env.image }} .
           docker push ${{ env.image }}
-      - name: Generate nais variables
-        run: |
-          cat > .nais/vars.yaml <<EOF
-          image: ${{ env.image }}
-          OPPORTUNITY_ID: ${{ secrets.OPPORTUNITY_ID }}
-          CASETYPE_ID: ${{ secrets.CASETYPE_ID }}
-          SOLUTION_ID: ${{ secrets.SOLUTION_ID }}
-          NAV_GROUP_ID: ${{ secrets.NAV_GROUP_ID }}
-          BUILD_ID: $GITHUB_SHA
-          EOF
       - uses: nais/deploy/actions/deploy@master
         env:
           CLUSTER: ${{ inputs.CLUSTER }}
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          RESOURCE: ${{ inputs.NAIS_RESOURCE }}
-          VARS: .nais/vars.yaml
+          RESOURCE: .nais/config.yaml
+          VAR: image=${{ inputs.image }},BUILD_ID=$GITHUB_SHA
+          VARS: ${{ inputs.NAIS_VARS }}
