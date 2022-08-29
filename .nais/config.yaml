@@ -10,14 +10,14 @@ spec:
   image: {{image}}
   port: 8088
   liveness:
-    path: /dekoratoren/isAlive
+    path: {{appPath}}/isAlive
     initialDelay: 10
   readiness:
-    path: /dekoratoren/isReady
+    path: {{appPath}}/isReady
     initialDelay: 10
   prometheus:
     enabled: true
-    path: /dekoratoren/metrics
+    path: {{appPath}}/metrics
   replicas:
     min: 2
     max: 8

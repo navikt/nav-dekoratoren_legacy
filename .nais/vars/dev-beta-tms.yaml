@@ -1,4 +1,5 @@
 appName: nav-dekoratoren-beta-tms
+appPath: ''
 ingresses:
   - https://dekoratoren-beta-tms.dev.nav.no
 accessPolicy:

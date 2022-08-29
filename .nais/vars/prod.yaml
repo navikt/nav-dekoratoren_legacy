@@ -1,4 +1,5 @@
 appName: nav-dekoratoren
+appPath: /dekoratoren
 ingresses:
   - https://appres.nav.no/common-html/v4/navno
   - https://www.nav.no/dekoratoren
