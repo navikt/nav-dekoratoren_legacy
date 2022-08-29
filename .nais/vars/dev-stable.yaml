@@ -4,11 +4,9 @@ ingresses:
   - https://www.dev.nav.no/dekoratoren
   - https://dekoratoren.dev.nav.no
   - https://dekoratoren.ekstern.dev.nav.no
-accessPolicy:
-  outbound:
-    external:
-      - host: www.dev.nav.no
-      - host: innloggingslinje-api.dev.nav.no
+outboundHosts:
+  - www.dev.nav.no
+  - innloggingslinje-api.dev.nav.no
 env:
   - name: ENV
     value: dev

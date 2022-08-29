@@ -2,11 +2,9 @@ appName: nav-dekoratoren-beta-navno
 appPath: ''
 ingresses:
   - https://dekoratoren-beta.dev.nav.no
-accessPolicy:
-  outbound:
-    external:
-      - host: www.dev.nav.no
-      - host: innloggingslinje-api.dev.nav.no
+outboundHosts:
+  - www.dev.nav.no
+  - innloggingslinje-api.dev.nav.no
 env:
   - name: ENV
     value: dev

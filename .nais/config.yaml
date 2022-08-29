@@ -26,10 +26,9 @@ spec:
     - {{url}}
   {{/each}}
   accessPolicy:
-  {{#with accessPolicy}}
     outbound:
       external:
-        {{#each accessPolicy.outbound.external.host as |host|}}
+        {{#each outboundHosts as |host|}}
         - host: {{host}}
         {{/each}}
   {{/with}}

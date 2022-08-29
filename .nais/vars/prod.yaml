@@ -3,11 +3,9 @@ appPath: /dekoratoren
 ingresses:
   - https://appres.nav.no/common-html/v4/navno
   - https://www.nav.no/dekoratoren
-accessPolicy:
-  outbound:
-    external:
-      - host: www.nav.no
-      - host: innloggingslinje-api.nav.no
+outboundHosts:
+  - www.nav.no
+  - innloggingslinje-api.nav.no
 env:
   - name: ENV
     value: prod
