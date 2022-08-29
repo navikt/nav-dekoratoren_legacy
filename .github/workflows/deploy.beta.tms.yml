@@ -1,4 +1,4 @@
-name: Deploy to Team Minside beta
+name: Deploy to Team minside beta
 on:
   workflow_dispatch:
     inputs:

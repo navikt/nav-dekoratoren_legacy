@@ -1,4 +1,4 @@
-name: Deploy to Team Nav.no beta
+name: Deploy to Team nav.no beta
 on:
   workflow_dispatch:
     inputs:
