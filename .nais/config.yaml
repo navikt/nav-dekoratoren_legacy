@@ -2,7 +2,7 @@
 apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
-  name: nav-dekoratoren
+  name: {{appName}}
   namespace: personbruker
   labels:
     team: personbruker
