@@ -13,7 +13,10 @@ on:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/deploy.shared.dev-and-beta.yml
+    uses: ./.github/workflows/build-and-deploy.yml
     with:
       NAIS_RESOURCE: .nais/dev-beta-navno.yaml
+      IMAGE_NAME: beta-navno
+      CLUSTER: dev-gcp
+      BUILD_MODE: ${{ inputs.build_mode }}
     secrets: inherit
