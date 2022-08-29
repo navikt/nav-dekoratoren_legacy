@@ -38,8 +38,6 @@ const DelSkjermModal = (props: Props) => {
         }
     }, []);
 
-    console.log(OPPORTUNITY_ID, SOLUTION_ID, CASETYPE_ID, NAV_GROUP_ID);
-
     const onClick = () => {
         setSubmitted(true);
 
