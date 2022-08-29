@@ -1,4 +1,4 @@
-name: Deploy-to-prod
+name: Deploy to prod
 on:
   release:
     types: [released]
@@ -54,5 +54,5 @@ jobs:
         env:
           CLUSTER: prod-gcp
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          RESOURCE: .nais/prod-gcp/personbruker.yaml
+          RESOURCE: .nais/prod/personbruker.yaml
           VARS: .nais/vars.yaml
