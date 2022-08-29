@@ -31,5 +31,3 @@ env:
     value: https://loginservice.dev.nav.no/slo
   - name: FEEDBACK_API_URL
     value: https://dekoratoren-api.dev-gcp.nais.io/event
-  - name: BUILD_ID
-    value: {{BUILD_ID}}

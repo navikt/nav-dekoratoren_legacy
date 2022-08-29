@@ -34,5 +34,3 @@ env:
     value: https://loginservice.nav.no/slo
   - name: FEEDBACK_API_URL
     value: https://dekoratoren-api.nav.no/event
-  - name: BUILD_ID
-    value: {{BUILD_ID}}
