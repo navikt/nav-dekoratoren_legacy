@@ -31,7 +31,6 @@ spec:
         {{#each outboundHosts as |host|}}
         - host: {{host}}
         {{/each}}
-  {{/with}}
   env:
   {{#each env as |var|}}
     - name: {{var.name}}
