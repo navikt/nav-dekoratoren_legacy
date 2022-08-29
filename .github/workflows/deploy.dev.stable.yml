@@ -1,4 +1,4 @@
-name: Deploy to dev
+name: Deploy to stable dev
 on:
   workflow_dispatch:
     inputs:
