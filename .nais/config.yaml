@@ -21,9 +21,23 @@ spec:
   replicas:
     min: 2
     max: 8
-  #ingresses
-  #accessPolicy
-  #env
+  ingresses:
+  {{#each ingresses as |url|}}
+    - {{url}}
+  {{/each}}
+  accessPolicy:
+  {{#with accessPolicy}}
+    outbound:
+      external:
+        {{#each accessPolicy.outbound.external.host as |host|}}
+        - host: {{host}}
+        {{/each}}
+  {{/with}}
+  env:
+  {{#each env as |var|}}
+    - name: {{var.name}}
+      value: {{var.value}}
+  {{/with}}
   envFrom:
     - secret: nav-dekoratoren
   resources:
