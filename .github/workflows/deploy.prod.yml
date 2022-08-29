@@ -41,7 +41,6 @@ jobs:
       - name: Generate nais variables
         run: |
           cat > .nais/vars.yaml <<EOF
-          namespace: personbruker
           image: $IMAGE_REGISTRY/$IMAGE_NAME
           version: $IMAGE_VERSION
           OPPORTUNITY_ID: ${{ secrets.OPPORTUNITY_ID }}
@@ -54,5 +53,5 @@ jobs:
         env:
           CLUSTER: prod-gcp
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          RESOURCE: .nais/prod/personbruker.yaml
+          RESOURCE: .nais/prod.yaml
           VARS: .nais/vars.yaml

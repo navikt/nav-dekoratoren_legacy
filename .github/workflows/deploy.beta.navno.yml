@@ -15,5 +15,5 @@ jobs:
   deploy:
     uses: ./.github/workflows/deploy.shared.dev-and-beta.yml
     with:
-      NAIS_RESOURCE: .nais/beta/personbruker.yaml
+      NAIS_RESOURCE: .nais/dev-beta-navno.yaml
     secrets: inherit

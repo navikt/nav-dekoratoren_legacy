@@ -2,8 +2,8 @@
 apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
-  name: nav-dekoratoren-beta-tms
-  namespace: {{namespace}}
+  name: nav-dekoratoren-beta
+  namespace: personbruker
   labels:
     team: personbruker
 spec:
@@ -22,7 +22,7 @@ spec:
     min: 2
     max: 4
   ingresses:
-    - https://dekoratoren-beta-tms.dev.nav.no
+    - https://dekoratoren-beta.dev.nav.no
   accessPolicy:
     outbound:
       external:
@@ -32,13 +32,13 @@ spec:
     - name: ENV
       value: dev
     - name: XP_BASE_URL
-      value: https://www.dev.nav.no
+      value: https://www-2.dev.nav.no
     - name: APP_BASE_URL
-      value: https://dekoratoren-beta-tms.dev.nav.no
+      value: https://dekoratoren-beta.dev.nav.no
     - name: API_XP_SERVICES_URL
-      value: https://www.dev.nav.no/_/service
+      value: https://www-q6.nav.no/_/service
     - name: API_VARSELINNBOKS_URL
-      value: https://www.dev.nav.no/tms-varselbjelle-api
+      value: https://www.dev.nav.no/person/varselinnboks
     - name: API_INNLOGGINGSLINJE_URL
       value: https://innloggingsstatus.dev.nav.no/person/innloggingsstatus
     - name: API_UNLEASH_PROXY_URL
@@ -63,10 +63,10 @@ spec:
       value: {{NAV_GROUP_ID}}
     - name: BUILD_ID
       value: {{BUILD_ID}}
+
   resources:
     limits:
       cpu: '3'
       memory: 1500Mi
     requests:
-      cpu: 500m
-      memory: 500Mi
+      memory: 1500Mi
