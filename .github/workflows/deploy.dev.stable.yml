@@ -1,0 +1,19 @@
+name: Deploy to stable dev
+on:
+  workflow_dispatch:
+    inputs:
+      build_mode:
+        type: choice
+        required: true
+        description: 'Build-time NODE_ENV'
+        default: 'prod'
+        options:
+          - prod
+          - dev
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/deploy.shared.dev-and-beta.yml
+    with:
+      NAIS_RESOURCE: .nais/dev-stable.yaml
+    secrets: inherit

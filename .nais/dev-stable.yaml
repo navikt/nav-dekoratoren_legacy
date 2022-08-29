@@ -3,59 +3,58 @@ apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
   name: nav-dekoratoren
-  namespace: {{namespace}}
+  namespace: personbruker
   labels:
     team: personbruker
 spec:
   image: {{image}}:{{version}}
   port: 8088
   liveness:
-    path: /dekoratoren/isAlive
+    path: /isAlive
     initialDelay: 10
   readiness:
-    path: /dekoratoren/isReady
+    path: /isReady
     initialDelay: 10
   prometheus:
     enabled: true
-    path: /dekoratoren/metrics
+    path: /metrics
   replicas:
     min: 2
-    max: 8
+    max: 4
   ingresses:
-    - https://appres.nav.no/common-html/v4/navno
-    - https://www.nav.no/dekoratoren
+    - https://www.dev.nav.no/dekoratoren
+    - https://dekoratoren.dev.nav.no
+    - https://dekoratoren.ekstern.dev.nav.no
   accessPolicy:
     outbound:
       external:
-        - host: www.nav.no
-        - host: innloggingslinje-api.nav.no
+        - host: www.dev.nav.no
+        - host: innloggingslinje-api.dev.nav.no
   env:
     - name: ENV
-      value: prod
+      value: dev
     - name: XP_BASE_URL
-      value: https://www.nav.no
+      value: https://www.dev.nav.no
     - name: APP_BASE_URL
-      value: https://www.nav.no
-    - name: APP_BASE_PATH
-      value: /dekoratoren
+      value: https://dekoratoren.ekstern.dev.nav.no
     - name: API_XP_SERVICES_URL
-      value: https://www.nav.no/_/service
+      value: https://www.dev.nav.no/_/service
     - name: API_VARSELINNBOKS_URL
-      value: https://www.nav.no/tms-varselbjelle-api
+      value: https://www.dev.nav.no/tms-varselbjelle-api
     - name: API_INNLOGGINGSLINJE_URL
-      value: https://www.nav.no/person/innloggingsstatus
+      value: https://innloggingsstatus.dev.nav.no/person/innloggingsstatus
     - name: API_UNLEASH_PROXY_URL
-      value: https://www.nav.no/person/pb-unleash-proxy
+      value: https://person.dev.nav.no/person/pb-unleash-proxy
     - name: MINSIDE_ARBEIDSGIVER_URL
-      value: https://arbeidsgiver.nav.no/min-side-arbeidsgiver/
+      value: https://min-side-arbeidsgiver.dev.nav.no/min-side-arbeidsgiver/
     - name: MIN_SIDE_URL
-      value: https://www.nav.no/minside/
+      value: https://www.dev.nav.no/minside/
     - name: LOGIN_URL
-      value: https://loginservice.nav.no
+      value: https://loginservice.dev.nav.no
     - name: LOGOUT_URL
-      value: https://loginservice.nav.no/slo
+      value: https://loginservice.dev.nav.no/slo
     - name: FEEDBACK_API_URL
-      value: https://dekoratoren-api.nav.no/event
+      value: https://dekoratoren-api.dev-gcp.nais.io/event
     - name: OPPORTUNITY_ID
       value: {{OPPORTUNITY_ID}}
     - name: CASETYPE_ID
