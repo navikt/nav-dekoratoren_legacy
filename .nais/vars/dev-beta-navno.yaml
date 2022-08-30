@@ -1,4 +1,4 @@
-appName: nav-dekoratoren-beta-navno
+appName: nav-dekoratoren-beta
 appPath: ''
 ingresses:
   - https://dekoratoren-beta.dev.nav.no
