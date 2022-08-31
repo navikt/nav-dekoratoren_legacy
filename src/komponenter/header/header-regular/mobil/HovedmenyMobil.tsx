@@ -26,7 +26,9 @@ export const HovedmenyMobil = () => {
 
     return (
         <div className={'media-sm-mobil'}>
-            <HovedmenyKnapp id={mobilmenyKnappId} menuId={menuId} />
+            <div className="mobilmenyKnapp">
+                <HovedmenyKnapp id={mobilmenyKnappId} menuId={menuId} />
+            </div>
             <EkspanderbarMeny isOpen={hovedIsOpen} classname={classname} id={menuId}>
                 <SlideToClose>
                     {meny.status === Status.OK ? (
