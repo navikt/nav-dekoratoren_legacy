@@ -1,23 +1,26 @@
 import React from 'react';
-import BEMHelper from 'utils/bem';
-import './HamburgerIkon.less';
+import style from './HamburgerIkon.module.scss';
 
 type Props = {
     isOpen: boolean;
 };
 
-const Linje = ({ className, isOpen }: { className: string; isOpen: boolean }) => (
-    <span className={`${className}${isOpen ? ` ${className}--open` : ''}`} />
-);
+const Linje = ({
+    className,
+    isOpen,
+    isOpenClassName,
+}: {
+    className: string;
+    isOpenClassName: string;
+    isOpen: boolean;
+}) => <span className={`${className} ${isOpen ? isOpenClassName : ''}`} />;
 
 const HamburgerIkon = ({ isOpen }: Props) => {
-    const cls = BEMHelper('hamburger-ikon');
-
     return (
-        <span className={`${cls.className}${isOpen ? ` ${cls.className}--open` : ''}`}>
-            <Linje className={cls.element('topp')} isOpen={isOpen} />
-            <Linje className={cls.element('midt')} isOpen={isOpen} />
-            <Linje className={cls.element('bunn')} isOpen={isOpen} />
+        <span className={`${style.hamburgerIkon}`}>
+            <Linje className={style.topp} isOpenClassName={style.toppOpen} isOpen={isOpen} />
+            <Linje className={style.midt} isOpenClassName={style.midtOpen} isOpen={isOpen} />
+            <Linje className={style.bunn} isOpenClassName={style.bunnOpen} isOpen={isOpen} />
         </span>
     );
 };
