@@ -4,8 +4,18 @@ import { Back } from '@navikt/ds-icons';
 import Tekst from 'tekster/finn-tekst';
 import { useDispatch } from 'react-redux';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
+import { mobilmenyKnappId } from '../../../HovedmenyMobil';
 
 import './MobilUndermenyLukk.less';
+
+const focusMenuButton = () => {
+    const menuButton = document.getElementById(mobilmenyKnappId);
+    if (!menuButton) {
+        return;
+    }
+
+    menuButton.focus();
+};
 
 export const MobilUndermenyLukk = () => {
     const dispatch = useDispatch();
@@ -16,6 +26,7 @@ export const MobilUndermenyLukk = () => {
             onClick={(event) => {
                 event.preventDefault();
                 dispatch(toggleUndermenyVisning());
+                focusMenuButton();
             }}
             className={'mobilUndermenyLukk'}
         >

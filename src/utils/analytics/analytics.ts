@@ -20,6 +20,7 @@ export type AnalyticsEventArgs = {
     category: AnalyticsCategory;
     action: string;
     context?: MenuValue;
+    destination?: string;
     label?: string;
     komponent?: string;
     lenkegruppe?: string;
@@ -31,14 +32,15 @@ export const initAnalytics = (params: Params) => {
 };
 
 export const analyticsEvent = (props: AnalyticsEventArgs) => {
-    const { context, eventName, category, action, label, komponent, lenkegruppe } = props;
+    const { context, eventName, destination, category, action, label, komponent, lenkegruppe } = props;
     const actionFinal = `${context ? context + '/' : ''}${action}`;
 
     logAmplitudeEvent(eventName || 'navigere', {
-        destinasjon: label,
+        destinasjon: destination || label,
+        søkeord: eventName === 'søk' ? label : undefined,
         lenketekst: actionFinal,
         kategori: category,
-        komponent,
+        komponent: komponent || action,
         lenkegruppe,
     });
 
