@@ -1,0 +1,67 @@
+@use 'src/styling-variabler' as sv;
+@use '../meny-knapp/MenylinjeKnappMixin';
+
+.loginKnappContainer {
+    display: flex;
+}
+
+.loginKnapp {
+    @include MenylinjeKnappMixin.menylinjeKnappMixin;
+    align-self: center;
+    opacity: 1 !important; //override opacity i navds
+
+    .loginIconLoading {
+        animation-name: loading;
+        animation-duration: 1500ms;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-direction: normal;
+
+        transform: rotateY(0);
+
+        @keyframes loading {
+            0% {
+                transform: rotateY(0);
+            }
+
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+    }
+
+    .loginText {
+        min-width: 4.125rem;
+    }
+
+    .loginTextLoading:after {
+        content: '';
+        display: inline-block;
+        min-width: 0.9375rem;
+        text-align: left;
+
+        animation-name: ellipses;
+        animation-duration: 1500ms;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-direction: normal;
+
+        @keyframes ellipses {
+            0% {
+                content: '';
+            }
+
+            25% {
+                content: '.';
+            }
+
+            50% {
+                content: '..';
+            }
+
+            75% {
+                content: '...';
+            }
+        }
+    }
+}

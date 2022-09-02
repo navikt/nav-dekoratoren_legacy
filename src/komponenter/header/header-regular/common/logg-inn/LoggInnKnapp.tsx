@@ -8,8 +8,7 @@ import { getLoginUrl, getLogOutUrl } from 'utils/login';
 import { Login, Logout } from '@navikt/ds-icons';
 import { Status } from '../../../../../api/api';
 import classNames from 'classnames';
-
-import './LoggInnKnapp.less';
+import style from './LoggInnKnapp.module.scss';
 
 export const loginKnappId = 'login-knapp-id';
 
@@ -45,16 +44,16 @@ export const LoggInnKnapp = () => {
     );
 
     return (
-        <div className={'login-knapp-container'}>
+        <div className={style.loginKnappContainer}>
             <Button
-                className={`login-knapp${authenticated ? ' logout-knapp' : isLoading ? ' login-button-loading' : ''}`}
+                className={`${style.loginKnapp} ${authenticated ? 'logout-knapp' : ''}`}
                 onClick={handleButtonClick}
                 id={loginKnappId}
                 variant={'tertiary'}
                 disabled={isLoading}
             >
-                {authenticated ? <Logout /> : <Login className={isLoading ? 'login-icon-loading' : undefined} />}
-                <span className={classNames('login-text', isLoading && 'login-text-loading')}>{knappetekst}</span>
+                {authenticated ? <Logout /> : <Login className={isLoading ? style.loginIconLoading : undefined} />}
+                <span className={classNames(style.loginText, isLoading && style.loginTextLoading)}>{knappetekst}</span>
             </Button>
         </div>
     );
