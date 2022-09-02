@@ -1,0 +1,46 @@
+@use 'src/styling-variabler' as sv;
+
+@mixin menylinjeKnappMixin() {
+    &:hover {
+        box-shadow: inset 0 0 0 2px var(--navds-semantic-color-interaction-primary);
+    }
+
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    &:active {
+        //TODO: fiks ikoner som ikke settes til hvitt etter overgang til scss
+        :global(.navds-button__inner) {
+            .hamburger-ikon {
+                span {
+                    background-color: var(--navds-global-color-white);
+                }
+            }
+            .sok-ikon {
+                &__line,
+                &__line-x {
+                    background-color: var(--navds-global-color-white);
+                }
+                &__circle {
+                    border-color: var(--navds-global-color-white);
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    :global(.navds-button__inner) {
+        position: relative;
+        font-weight: 600;
+        white-space: nowrap;
+
+        @media #{sv.$screen-mobile} {
+            flex-direction: column;
+            gap: 0;
+        }
+    }
+}
+
+.menylinjeKnapp {
+    @include menylinjeKnappMixin;
+}
