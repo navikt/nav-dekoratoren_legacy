@@ -1,0 +1,64 @@
+$width: 20px;
+$height: 20px;
+$circleRadius: 8px;
+$stroke-width: 2px;
+$color: var(--navds-global-color-blue-500);
+$handleAngle: 45deg;
+$handleLength: 10px;
+$middle: ($height - $stroke-width) / 2;
+$transition-props: 0.25s all ease-out, background-color 0s, border-color 0s;
+
+.sokIkon {
+    width: $width;
+    height: $height;
+    padding: 0;
+    margin: 2px;
+    position: relative;
+    display: block;
+}
+
+.circle {
+    border-radius: 50%;
+    border: $color $stroke-width solid;
+    height: $circleRadius * 2;
+    width: $circleRadius * 2;
+    position: absolute;
+    transform-origin: center;
+    transition: $transition-props;
+    display: block;
+}
+
+.circleOpen {
+    opacity: 0;
+    transform: translate($width / 2 - $circleRadius, $height / 2 - $circleRadius) scale(0);
+}
+
+.line,
+.lineX {
+    transform-origin: left center;
+    transform: translate(13px, 12px) rotate($handleAngle); //Helt lik Search i ds-icons
+    width: $handleLength;
+    height: $stroke-width;
+    border: 0;
+    background-color: $color;
+    position: absolute;
+    transition: $transition-props;
+    display: block;
+}
+
+.lineOpen {
+    width: 23px;
+    transform-origin: center;
+    transform: translate(-1px, $middle) rotate(-45deg);
+}
+
+.lineX {
+    visibility: hidden;
+}
+
+.lineXOpen {
+    width: 23px;
+    transform-origin: center;
+    visibility: visible;
+    transform: translate(-1px, $middle) rotate(225deg);
+}
