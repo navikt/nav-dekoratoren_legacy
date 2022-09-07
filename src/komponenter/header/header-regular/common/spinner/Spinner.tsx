@@ -1,24 +1,23 @@
 import React, { useId } from 'react';
 import Tekst from 'tekster/finn-tekst';
 import { BodyShort, Loader } from '@navikt/ds-react';
-import './Spinner.less';
+import style from './Spinner.module.scss';
 
 type Props = {
     tekstId?: string;
-    className?: string;
 };
 
-const Spinner = ({ tekstId, className }: Props) => {
+const Spinner = ({ tekstId }: Props) => {
     const id = useId();
 
     return (
-        <div className={`spinner-container${className ? ` ${className}` : ''}`}>
+        <div className={style.spinnerContainer}>
             {tekstId && (
                 <BodyShort>
                     <Tekst id={tekstId} />
                 </BodyShort>
             )}
-            <Loader className={'dekorator-spinner'} id={id} />
+            <Loader className={style.dekoratorSpinner} id={id} />
         </div>
     );
 };
