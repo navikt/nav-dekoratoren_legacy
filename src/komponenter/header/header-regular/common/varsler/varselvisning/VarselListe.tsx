@@ -17,6 +17,7 @@ import chatIkon from 'ikoner/varsler/bubble-chat-2.svg';
 import dokumentIkon from 'ikoner/varsler/file-new-1.svg';
 import plasterIkon from 'ikoner/varsler/first-aid-plaster.svg';
 import { BodyShort, Detail } from '@navikt/ds-react';
+import style from './VarselListe.module.scss';
 
 dayjs.extend(localizedFormat);
 
@@ -72,14 +73,14 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                 const ikon = ikoner[currentConfig.ikontekst] || alarmIkon;
 
                 return (
-                    <li key={varsel.varselId} className="dekorator-varsel-container">
-                        <div className="dekorator-varsel">
-                            <div className={`varsel-ikon-container ${currentConfig.ikontekst}`}>
-                                <Bilde asset={ikon} altText={'varsel-ikon'} className={`varsel-ikon`} />
+                    <li key={varsel.varselId} className={style.varselContainer}>
+                        <div className={style.varsel}>
+                            <div className={`${style.ikonContainer} ${currentConfig.ikontekst}`}>
+                                <Bilde asset={ikon} altText={'varsel-ikon'} className={style.varselIkon} />
                             </div>
-                            <div className="varsel-innhold">
-                                <Detail className="varsel-dato">{formatDato(varsel.datoOpprettet)}</Detail>
-                                <BodyShort className="infotekst">{varsel.varseltekst}</BodyShort>
+                            <div>
+                                <Detail className={style.varselDato}>{formatDato(varsel.datoOpprettet)}</Detail>
+                                <BodyShort className={style.infotekst}>{varsel.varseltekst}</BodyShort>
                                 <LenkeMedSporing
                                     href={varsel.url || ''}
                                     id={
