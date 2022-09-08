@@ -3,8 +3,8 @@ import { AppState } from 'store/reducers';
 import { Heading } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
 import { useSelector } from 'react-redux';
-import AlleVarslerLenke from './AlleVarslerLenke';
-import { VarselListe } from './VarselListe';
+import AlleVarslerLenke from './alle-varsler-lenke/AlleVarslerLenke';
+import { VarselListe } from './varsel-liste/VarselListe';
 import style from './Varselvisning.module.scss';
 
 const stateSelector = (state: AppState) => ({
