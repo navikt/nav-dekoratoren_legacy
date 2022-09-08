@@ -38,7 +38,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                     <li key={varsel.varselId} className={style.varselContainer}>
                         <div className={style.varsel}>
                             <div className={style.ikonContainer}>
-                                <Bell />
+                                <Bell className={style.varselIkon} />
                             </div>
                             <div>
                                 <Detail className={style.varselDato}>{formatDato(varsel.datoOpprettet)}</Detail>
