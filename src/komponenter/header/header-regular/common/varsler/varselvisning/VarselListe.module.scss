@@ -20,31 +20,12 @@
     border-radius: 50%;
     display: block;
     align-self: flex-start;
+    background-color: #ffe4c2;
 
-    .varselIkon {
-        width: $ikonSize;
-        height: $ikonSize;
-    }
-
-    &.alarm-ikon {
-        background-color: #ffe4c2;
-    }
-
-    &.kalender-ikon {
-        background-color: #ecefcc;
-    }
-
-    &.snakkeboble-ikon {
-        background-color: #f1d8d4;
-    }
-
-    &.dokument-ikon {
-        background-color: #e0dae7;
-    }
-
-    &.plaster-ikon {
-        background-color: var(--navds-global-color-lightblue-100);
-    }
+    // .varselIkon {
+    //     width: $ikonSize;
+    //     height: $ikonSize;
+    // }
 }
 
 .varselDato {

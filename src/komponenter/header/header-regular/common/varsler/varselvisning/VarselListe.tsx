@@ -5,53 +5,18 @@ import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { NyesteVarslerData } from 'store/reducers/varselinnboks-duck';
-import { Bilde } from 'komponenter/common/bilde/Bilde';
-import varselConfig from './config.json'; // Kopiert fra: https://github.com/navikt/varselinnboks/blob/master/src/main/resources/config.json
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import 'dayjs/locale/nb';
-
-import alarmIkon from 'ikoner/varsler/alarm.svg';
-import kalenderIkon from 'ikoner/varsler/calendar-3.svg';
-import chatIkon from 'ikoner/varsler/bubble-chat-2.svg';
-import dokumentIkon from 'ikoner/varsler/file-new-1.svg';
-import plasterIkon from 'ikoner/varsler/first-aid-plaster.svg';
+import { Bell } from '@navikt/ds-icons';
 import { BodyShort, Detail } from '@navikt/ds-react';
 import style from './VarselListe.module.scss';
 
 dayjs.extend(localizedFormat);
 
-const ikoner: { [str: string]: string } = {
-    'alarm-ikon': alarmIkon,
-    'kalender-ikon': kalenderIkon,
-    'snakkeboble-ikon': chatIkon,
-    'dokument-ikon': dokumentIkon,
-    'plaster-ikon': plasterIkon,
-};
-
 type Props = {
     varsler: NyesteVarslerData[];
     rowIndex?: number;
-};
-
-interface VarselConfig {
-    ikontekst: string;
-    varselType: string;
-    stylingklasse: string;
-    lenketekst: string;
-}
-
-const defaultConfig = {
-    ikontekst: 'alarm-ikon',
-    varselType: '',
-    stylingklasse: '',
-    lenketekst: 'Se varsler',
-};
-
-const getVarselTypeConfig = (varselType: string) => {
-    const data: VarselConfig[] = varselConfig;
-    const config = data.find((item: VarselConfig) => item.varselType === varselType);
-    return config ? config : defaultConfig;
 };
 
 const formatDato = (datoString: string) => {
@@ -69,14 +34,11 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
     return (
         <ul>
             {varsler.map((varsel: NyesteVarslerData, subIndex) => {
-                const currentConfig = getVarselTypeConfig(varsel.meldingsType);
-                const ikon = ikoner[currentConfig.ikontekst] || alarmIkon;
-
                 return (
                     <li key={varsel.varselId} className={style.varselContainer}>
                         <div className={style.varsel}>
-                            <div className={`${style.ikonContainer} ${currentConfig.ikontekst}`}>
-                                <Bilde asset={ikon} altText={'varsel-ikon'} className={style.varselIkon} />
+                            <div className={style.ikonContainer}>
+                                <Bell />
                             </div>
                             <div>
                                 <Detail className={style.varselDato}>{formatDato(varsel.datoOpprettet)}</Detail>
@@ -99,7 +61,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                         label: varsel.url,
                                     }}
                                 >
-                                    {currentConfig.lenketekst}
+                                    Se varsler
                                 </LenkeMedSporing>
                             </div>
                         </div>
