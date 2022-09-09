@@ -38,6 +38,18 @@ const renderOrHydrate = (reactElement: JSX.Element, container: Element | null) =
     }
 };
 
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }> {
+    static getDerivedStateFromError() {}
+
+    componentDidCatch(error: any, errorInfo: any) {
+        console.error(`Uventet feil fra dekoratøren: ${error}`, errorInfo);
+    }
+
+    render() {
+        return this.props.children;
+    }
+}
+
 const run = () => {
     fetchEnv()
         .then((environment) => {
@@ -54,20 +66,24 @@ const run = () => {
             // We hydrate the footer first to prevent client/server mismatch due to client-side only
             // store mutations that occur in the header
             renderOrHydrate(
-                <ReduxProvider store={store}>
-                    <CookiesProvider>
-                        <Footer />
-                    </CookiesProvider>
-                </ReduxProvider>,
+                <ErrorBoundary>
+                    <ReduxProvider store={store}>
+                        <CookiesProvider>
+                            <Footer />
+                        </CookiesProvider>
+                    </ReduxProvider>
+                </ErrorBoundary>,
                 footerContainer
             );
 
             renderOrHydrate(
-                <ReduxProvider store={store}>
-                    <CookiesProvider>
-                        <Header />
-                    </CookiesProvider>
-                </ReduxProvider>,
+                <ErrorBoundary>
+                    <ReduxProvider store={store}>
+                        <CookiesProvider>
+                            <Header />
+                        </CookiesProvider>
+                    </ReduxProvider>
+                </ErrorBoundary>,
                 headerContainer
             );
         })
