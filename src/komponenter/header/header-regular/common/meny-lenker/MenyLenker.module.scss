@@ -1,0 +1,40 @@
+@use 'src/styling-variabler' as sv;
+
+.lenkeseksjon {
+    margin-bottom: 2rem;
+
+    @media #{sv.$screen-desktop-small-down} {
+        margin-bottom: 1rem;
+    }
+}
+
+.tittel {
+    margin-bottom: 0.1875rem;
+
+    @media #{sv.$screen-desktop-small-down} {
+        font-size: 16px !important; //override navds
+        line-height: 22px !important; //override navds
+        margin-bottom: 0.125rem !important; //override navds
+    }
+}
+
+.lenker {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    :global(.lenke) {
+        padding: 0.5rem 0;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        @media #{sv.$screen-desktop-small-down} {
+            padding: 0.375rem 0;
+        }
+    }
+}
