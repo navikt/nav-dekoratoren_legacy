@@ -30,7 +30,7 @@ export const MobilUndermenySeksjon = ({ lenker }: Props) => {
             <Heading level={'2'} size={'medium'} className={'mobilUndermenySeksjonHeader'}>
                 {lenker.displayName}
             </Heading>
-            {showSecurityLevelWarning && <MinsideLockMsg />}
+            <MinsideLockMsg />
             <UnstyledList className={'mobilUndermenyListe'}>
                 {lenker.children.map((lenke, index) => {
                     const displayLock = lenke.displayLock && auth.securityLevel !== '4';

@@ -59,7 +59,7 @@ export const MinsidemenyInnhold = (props: Props) => {
                     <BodyShort className={cls.element('brukernavn')}>{brukernavn}</BodyShort>
                 </div>
             </div>
-            {authLevel !== '4' && <MinsideLockMsg />}
+            <MinsideLockMsg />
             <div className={cls.element('lenke-seksjoner')}>
                 {menyLenker.children.map((menygruppe, index) => (
                     <MenyLenkeSeksjon
