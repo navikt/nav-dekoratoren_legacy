@@ -7,8 +7,8 @@
     margin-bottom: 2rem;
     margin-top: 0;
     padding: 1rem;
-    background-color: var(--navds-global-color-lightblue-100);
-    border: 2px solid var(--navds-global-color-lightblue-500);
+    background-color: var(--navds-global-color-lightblue-100) !important; //override navds
+    border: 2px solid var(--navds-global-color-lightblue-500) !important; //override navds
 
     @media #{sv.$screen-mobile} {
         margin-bottom: 1rem;
