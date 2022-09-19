@@ -7,9 +7,8 @@ import { AnalyticsCategory } from 'utils/analytics/analytics';
 import Logo from 'ikoner/meny/nav-logo-black.svg';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../store/reducers';
-import style from './HeaderSimple.module.scss';
-
 import { Status } from '../../../api/api';
+import style from './HeaderSimple.module.scss';
 
 export const HeaderSimple = () => {
     const { innloggingsstatus } = useSelector((state: AppState) => ({
