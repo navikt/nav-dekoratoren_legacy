@@ -15,7 +15,12 @@ interface Props {
 export const MenyLenkeSeksjon = ({ menygruppe, colIndex, rowIndex, kbNodeGroup }: Props) => {
     return (
         <section className={`${style.lenkeseksjon} lenkeseksjon`} aria-labelledby={`headerId_${menygruppe.id}`}>
-            <Heading level="2" size="small" id={`headerId_${menygruppe.id}`} className={style.tittel}>
+            <Heading
+                level="2"
+                size="small"
+                id={`headerId_${menygruppe.id}`}
+                className={`${style.tittel} lenkeseksjon__tittel`}
+            >
                 {menygruppe.displayName}
             </Heading>
             <ul className={style.lenker}>
