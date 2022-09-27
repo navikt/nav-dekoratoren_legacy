@@ -9,19 +9,18 @@
     padding-right: 0.5rem !important; //override navds
 
     &:active {
-        //TODO: fiks ikoner som ikke settes til hvitt etter overgang til scss
         :global(.navds-button__inner) {
-            .hamburger-ikon {
+            :global(.hamburger-ikon) {
                 span {
                     background-color: var(--navds-global-color-white);
                 }
             }
-            .sok-ikon {
-                &__line,
-                &__line-x {
+            :global(.sok-ikon) {
+                :global(.sok-ikon__line),
+                :global(.sok-ikon__line-x) {
                     background-color: var(--navds-global-color-white);
                 }
-                &__circle {
+                :global(.sok-ikon__circle) {
                     border-color: var(--navds-global-color-white);
                     background-color: transparent;
                 }
