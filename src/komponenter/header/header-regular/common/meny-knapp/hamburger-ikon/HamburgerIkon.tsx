@@ -17,7 +17,7 @@ const Linje = ({
 
 const HamburgerIkon = ({ isOpen }: Props) => {
     return (
-        <span className={`${style.hamburgerIkon}`}>
+        <span className={`${style.hamburgerIkon} hamburger-ikon`}>
             <Linje className={style.topp} isOpenClassName={style.toppOpen} isOpen={isOpen} />
             <Linje className={style.midt} isOpenClassName={style.midtOpen} isOpen={isOpen} />
             <Linje className={style.bunn} isOpenClassName={style.bunnOpen} isOpen={isOpen} />
