@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { stickyScrollHandler } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
 import { focusOverlapHandler } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
 import { deferStickyOnAnchorLinkHandler } from 'komponenter/header/header-regular/common/sticky/StickyUtils';
-import './Sticky.less';
+import style from './Sticky.module.scss';
 
 type Props = {
     mobileFixed?: boolean;
@@ -51,8 +51,11 @@ export const Sticky = ({ mobileFixed, children }: Props) => {
     }, []);
 
     return (
-        <div className={'sticky-placeholder'} ref={placeholderRef}>
-            <div className={`sticky-container ${mobileFixed ? 'sticky-container--mobil-fixed' : ''}`} ref={stickyRef}>
+        <div className={style.stickyPlaceholder} ref={placeholderRef}>
+            <div
+                className={`${style.stickyContainer} ${mobileFixed ? style.stickyContainerMobilFixed : ''}`}
+                ref={stickyRef}
+            >
                 {children}
             </div>
         </div>
