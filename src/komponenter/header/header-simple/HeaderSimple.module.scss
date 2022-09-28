@@ -1,0 +1,44 @@
+@use 'src/styling-variabler' as sv;
+
+.simpleHeader {
+    background-color: white;
+    width: 100%;
+    border-bottom: sv.$header-separator-height solid sv.$header-separator-farge;
+    display: flex;
+    justify-content: center;
+
+    :global(.navLogoLenke) {
+        height: 44px;
+        padding: 0.25rem;
+    }
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    & > :first-child:nth-last-child(2) {
+        margin: 0 1rem;
+        @media (max-width: sv.$desktopMinWidth) {
+            display: none;
+        }
+    }
+}
+
+.content {
+    width: 100%;
+    max-width: sv.$desktopMaxWidth;
+    height: sv.$header-height-simple-desktop;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media #{sv.$screen-desktop-medium-up} {
+        padding: 0 3rem;
+    }
+    @media #{sv.$screen-desktop-small-width-down} {
+        padding: 0 1rem;
+    }
+    @media #{sv.$screen-mobile} {
+        height: sv.$header-height-simple-mobile;
+    }
+}

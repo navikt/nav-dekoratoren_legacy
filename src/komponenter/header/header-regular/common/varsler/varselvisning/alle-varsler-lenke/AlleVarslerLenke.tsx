@@ -1,9 +1,9 @@
 import React from 'react';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
-
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import Tekst from 'tekster/finn-tekst';
+import style from './AlleVarslerLenke.module.scss';
 
 interface Props {
     varselInnboksUrl: string;
@@ -12,7 +12,7 @@ interface Props {
 
 const AlleVarslerLenke = (props: Props) => {
     return (
-        <div className="dekorator-vis-alle-lenke">
+        <div className={style.visAlleLenke}>
             <LenkeMedSporing
                 href={props.varselInnboksUrl}
                 id={

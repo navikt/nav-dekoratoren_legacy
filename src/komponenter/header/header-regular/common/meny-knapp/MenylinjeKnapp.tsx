@@ -2,8 +2,7 @@ import React from 'react';
 import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
 import { Button } from '@navikt/ds-react';
-
-import './MenylinjeKnapp.less';
+import style from './MenylinjeKnapp.module.scss';
 
 interface Props {
     tekstId?: string;
@@ -22,7 +21,7 @@ const MenylinjeKnapp = (props: Props) => {
     return (
         <Button
             onClick={props.onClick}
-            className={`menylinje-knapp ${cls.element('knapp')}`}
+            className={`${style.menylinjeKnapp} ${cls.element('knapp')}`}
             id={props.id}
             aria-label={props.ariaLabel}
             aria-controls={props.ariaControls}
@@ -31,7 +30,7 @@ const MenylinjeKnapp = (props: Props) => {
         >
             {props.children}
             {props.tekstId && (
-                <span className={`menylinje-knapp__tekst ${cls.element('knapp-tekst')}`}>
+                <span className={cls.element('knapp-tekst')}>
                     <Tekst id={props.tekstId} />
                 </span>
             )}

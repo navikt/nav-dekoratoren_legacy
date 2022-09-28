@@ -5,7 +5,6 @@ import { useCookies } from 'react-cookie';
 
 import Tekst from 'tekster/finn-tekst';
 import { analyticsEvent } from 'utils/analytics/analytics';
-import BEMHelper from 'utils/bem';
 import { ArbeidsflateLenke } from 'komponenter/common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { Locale } from 'store/reducers/language-duck';
 import { CookieName, cookieOptions } from '../../../server/cookieSettings';
@@ -16,16 +15,12 @@ import { AnalyticsEventArgs } from 'utils/analytics/analytics';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import classNames from 'classnames';
 import { Next } from '@navikt/ds-icons';
-
-import './ArbeidsflateLenkepanel.less';
-
-const cls = BEMHelper('arbeidsflate-lenkepanel');
+import style from './ArbeidsflateLenkepanel.module.scss';
 
 interface Props {
     lenke: ArbeidsflateLenke;
     language: Locale;
     analyticsEventArgs: AnalyticsEventArgs;
-    inverted?: boolean;
     enableCompactView?: boolean;
     id?: string;
     withDescription?: boolean;
@@ -36,7 +31,6 @@ const ArbeidsflateLenkepanel = ({
     language,
     analyticsEventArgs,
     enableCompactView,
-    inverted,
     id,
     withDescription = true,
 }: Props) => {
@@ -48,9 +42,9 @@ const ArbeidsflateLenkepanel = ({
             href={lenke.url}
             id={id}
             className={classNames(
-                cls.className,
-                inverted ? cls.modifier('inverted') : undefined,
-                enableCompactView ? cls.modifier('compact') : undefined
+                style.arbeidsflateLenkepanel,
+                'arbeidsflate-lenkepanel',
+                enableCompactView ? style.compact : undefined
             )}
             onClick={(event) => {
                 setCookie(CookieName.DECORATOR_CONTEXT, lenke.key, cookieOptions);
@@ -64,12 +58,12 @@ const ArbeidsflateLenkepanel = ({
             border={true}
         >
             <div>
-                <LinkPanel.Title className={cls.element('text')}>
-                    <Next className={'compact-chevron'} />
+                <LinkPanel.Title className={style.text}>
+                    <Next className="compact-chevron" />
                     <Tekst id={lenke.lenkeTekstId} />
                 </LinkPanel.Title>
                 {withDescription && (
-                    <LinkPanel.Description className={cls.element('text')}>
+                    <LinkPanel.Description className={style.text}>
                         {finnTekst(lenke.stikkordId, language)}
                     </LinkPanel.Description>
                 )}
