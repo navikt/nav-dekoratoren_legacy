@@ -51,8 +51,8 @@ export const LoggInnKnapp = () => {
                 id={loginKnappId}
                 variant={'tertiary'}
                 disabled={isLoading}
+                icon={authenticated ? <Logout /> : <Login className={isLoading ? style.loginIconLoading : undefined} />}
             >
-                {authenticated ? <Logout /> : <Login className={isLoading ? style.loginIconLoading : undefined} />}
                 <span className={classNames(style.loginText, isLoading && style.loginTextLoading)}>{knappetekst}</span>
             </Button>
         </div>
