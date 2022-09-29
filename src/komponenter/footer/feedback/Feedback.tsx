@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Ingress } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
-import AlternativJa from './feedback-questions/AlternativJa';
-import AlternativNei from './feedback-questions/AlternativNei';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import ThankYou from './feedback-thank-you/ThankYou';
 import style from './Feedback.module.scss';
@@ -26,7 +24,7 @@ const Feedback = () => {
         <>
             <div className={style.footerLinje} />
             <div className={style.feedbackContainer}>
-                {state === 'lukket' && (
+                {state === 'lukket' ? (
                     <div className={style.feedbackContent} role="group" aria-labelledby="feedback-text">
                         <Ingress>
                             <label id="feedback-text">
@@ -42,11 +40,9 @@ const Feedback = () => {
                             </Button>
                         </div>
                     </div>
+                ) : (
+                    <ThankYou />
                 )}
-                {state === 'ja' && <AlternativJa state={state} settBesvart={() => setState('besvart')} />}
-                {}
-                {state === 'nei' && <AlternativNei state={state} settBesvart={() => setState('besvart')} />}
-                {state === 'besvart' && <ThankYou />}
             </div>
         </>
     );
