@@ -20,6 +20,7 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
                     type={'button'}
                     id={id ? `${id}-reset` : undefined}
                     className={`${cls.element('knapp')} ${cls.element('knapp-avbryt')}`}
+                    variant="secondary"
                     onClick={onReset}
                     icon={
                         <span className={cls.element('ikon-container')}>
