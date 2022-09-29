@@ -53,5 +53,5 @@ jobs:
           CLUSTER: ${{ inputs.CLUSTER }}
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: .nais/config.yaml
-          VAR: image=${{ env.image }},BUILD_ID=${{ github.sha }}
+          VAR: image=${{ env.image }},BUILD_ID=$${{ github.sha }}
           VARS: ${{ inputs.NAIS_VARS }}

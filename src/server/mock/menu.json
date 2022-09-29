@@ -824,14 +824,14 @@
                                 "children": [
                                     {
                                         "displayName": "Din pensjon",
-                                        "path": "https://www.nav.no/pselv",
+                                        "path": "https://tjenester.nav.no/pselv/publisering/dinpensjon.jsf?context=pensjon",
                                         "id": "bfe43e1e-a074-4300-a480-618ac9b054f6",
                                         "hasChildren": false,
                                         "children": []
                                     },
                                     {
                                         "displayName": "Din uføretrygd",
-                                        "path": "https://www.nav.no/pselv/publisering/uforetrygd.jsf?context=ut",
+                                        "path": "https://tjenester.nav.no/pselv/publisering/uforetrygd.jsf?context=ut",
                                         "id": "02f4c191-dee0-43e9-acff-c05d8b9aec10",
                                         "hasChildren": false,
                                         "children": []
@@ -1456,7 +1456,7 @@
                                 "children": [
                                     {
                                         "displayName": "Your pension (in Norwegian)",
-                                        "path": "https://www.nav.no/pselv",
+                                        "path": "https://tjenester.nav.no/pselv/publisering/dinpensjon.jsf?context=pensjon",
                                         "displayLock": false,
                                         "id": "43bda139-5eb2-48cf-b9c4-44e2ef46ba59",
                                         "hasChildren": false,
@@ -1464,7 +1464,7 @@
                                     },
                                     {
                                         "displayName": "Your disability benefit (in Norwegian)",
-                                        "path": "https://www.nav.no/pselv/publisering/uforetrygd.jsf?context=ut",
+                                        "path": "https://tjenester.nav.no/pselv/publisering/uforetrygd.jsf?context=ut",
                                         "displayLock": false,
                                         "id": "11106d16-6fda-462b-aefe-470ed69bf034",
                                         "hasChildren": false,

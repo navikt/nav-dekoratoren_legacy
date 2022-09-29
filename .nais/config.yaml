@@ -32,8 +32,6 @@ spec:
         - host: {{host}}
         {{/each}}
   env:
-    - name: BUILD_ID
-      value: {{BUILD_ID}}
   {{#each env as |var|}}
     - name: {{var.name}}
       value: {{var.value}}
