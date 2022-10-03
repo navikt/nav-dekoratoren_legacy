@@ -1,0 +1,9 @@
+@use 'src/styling-variabler' as sv;
+
+.varslerDropdown {
+    @media #{sv.$screen-desktop} {
+        left: auto;
+        right: 0;
+        max-width: 525px;
+    }
+}

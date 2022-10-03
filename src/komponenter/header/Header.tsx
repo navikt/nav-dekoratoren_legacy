@@ -37,7 +37,7 @@ import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
 import { useLogPageviews } from '../../utils/hooks/useLogPageviews';
 
-import './Header.less';
+import './Header.scss';
 
 export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
 export const decoratorLanguageCookie = CookieName.DECORATOR_LANGUAGE;

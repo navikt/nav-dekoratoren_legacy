@@ -17,25 +17,22 @@ const stateSelector = (state: AppState) => ({
     language: state.language.language,
     arbeidsflate: state.arbeidsflate.status,
     hovedIsOpen: state.dropdownToggles.hovedmeny,
-    underIsOpen: state.dropdownToggles.undermeny,
-    varselIsOpen: state.dropdownToggles.varsler,
 });
 
 export const HovedmenyMobil = () => {
-    const { meny, underIsOpen, hovedIsOpen, varselIsOpen } = useSelector(stateSelector);
+    const { meny, hovedIsOpen } = useSelector(stateSelector);
 
     return (
         <div className={'media-sm-mobil'}>
-            <HovedmenyKnapp id={mobilmenyKnappId} menuId={menuId} />
+            <div className="mobilmenyKnapp">
+                <HovedmenyKnapp id={mobilmenyKnappId} menuId={menuId} />
+            </div>
             <EkspanderbarMeny isOpen={hovedIsOpen} classname={classname} id={menuId}>
                 <SlideToClose>
                     {meny.status === Status.OK ? (
                         <MobilMeny classname={classname} />
                     ) : (
-                        <Spinner
-                            tekstId={'meny-loading'}
-                            className={hovedIsOpen || underIsOpen || varselIsOpen ? 'spinner-container--active' : ''}
-                        />
+                        <Spinner tekstId={'meny-loading'} />
                     )}
                 </SlideToClose>
             </EkspanderbarMeny>

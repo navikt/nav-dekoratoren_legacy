@@ -1,5 +1,4 @@
 import React from 'react';
-import BEMHelper from 'utils/bem';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { useKbNavMain } from 'utils/keyboard-navigation/useKbNavMain';
@@ -17,8 +16,7 @@ import MinsideArbgiverKnapp from 'komponenter/header/header-regular/desktop/mins
 import Logo from 'ikoner/meny/nav-logo-red.svg';
 import { Locale } from 'store/reducers/language-duck';
 import Arbeidsflatemeny from './desktop/arbeidsflatemeny/Arbeidsflatemeny';
-
-import './HeaderMenylinje.less';
+import style from './HeaderMenylinje.module.scss';
 
 export const headerLogoId = 'header-logo-id';
 
@@ -42,7 +40,6 @@ const NavLogo = ({ arbeidsflate }: { arbeidsflate: MenuValue }) => (
 );
 
 export const HeaderMenylinje = () => {
-    const cls = BEMHelper('header-linje');
     const { innlogget, innloggingsstatus, arbeidsflate, language } = useSelector(stateSelector);
     const kbNavMainState = useKbNavMain();
 
@@ -54,18 +51,18 @@ export const HeaderMenylinje = () => {
 
     return (
         // OBS: Id-en "Hovedmeny" benyttes til å bestemme høyden til menyen av andre team
-        <nav className={cls.className} id="hovedmeny" aria-label={'Hovedmeny'}>
-            <div className={cls.element('elementer')}>
+        <nav className={`${style.headerLinje} header-linje`} id="hovedmeny" aria-label={'Hovedmeny'}>
+            <div className={`${style.elementer} elementer`}>
                 <NavLogo arbeidsflate={arbeidsflate} />
                 {isLanguageNorwegian && <Arbeidsflatemeny />}
-                <div className={cls.element('hoyre-knapper')}>
-                    <div className={cls.element('uinnlogget-knapper')}>
+                <div className={style.hoyreKnapper}>
+                    <div className={style.uinnloggetKnapper}>
                         <DesktopHovedmenyKnapp kbNavMainState={kbNavMainState} />
                         <DesktopSokKnapp kbNavMainState={kbNavMainState} />
                     </div>
                     <MobilMenyKnapp />
                     {visMinsideKnapper && (
-                        <div className={cls.element('minside-knapper')}>
+                        <div className={style.minsideKnapper}>
                             {innloggetPrivatperson && <VarslerKnapp kbNavMainState={kbNavMainState} />}
                             {innloggetPrivatperson && <DesktopMinsidemenyKnapp kbNavMainState={kbNavMainState} />}
                             {innloggetArbeidsgiver && <MinsideArbgiverKnapp />}

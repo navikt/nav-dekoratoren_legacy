@@ -1,0 +1,31 @@
+$menyMargin: 1rem;
+
+.mosaicMeny {
+    display: flex;
+    flex-direction: row;
+}
+
+.mosaicMenyColumn {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+
+    &:not(:last-child) {
+        margin-right: $menyMargin;
+    }
+}
+
+.gridMeny {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    & > * {
+        // IE11 fallback
+        width: calc(100% / 4 - $menyMargin * 0.75);
+        width: calc(100% / var(--numcols) - $menyMargin * (1 - 1 / var(--numcols)));
+    }
+}

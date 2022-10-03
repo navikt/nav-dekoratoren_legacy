@@ -1,19 +1,16 @@
-@import (reference) '../../../../../styling-variabler.less';
-@import (reference) '../meny-knapp/MenylinjeKnapp.less';
+@use 'src/styling-variabler' as sv;
+@use '../meny-knapp/MenylinjeKnappMixin';
 
-.login-knapp-container {
+.loginKnappContainer {
     display: flex;
 }
 
-.login-knapp {
-    .menylinje-knapp-mixin();
+.loginKnapp {
+    @include MenylinjeKnappMixin.menylinjeKnappMixin;
     align-self: center;
+    opacity: 1 !important; //override opacity i navds
 
-    &.login-button-loading:disabled {
-        opacity: 1;
-    }
-
-    .login-icon-loading {
+    .loginIconLoading {
         animation-name: loading;
         animation-duration: 1500ms;
         animation-timing-function: linear;
@@ -33,11 +30,11 @@
         }
     }
 
-    .login-text {
+    .loginText {
         min-width: 4.125rem;
     }
 
-    .login-text-loading:after {
+    .loginTextLoading:after {
         content: '';
         display: inline-block;
         min-width: 0.9375rem;
