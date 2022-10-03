@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import BEMHelper from 'utils/bem';
 import { MobilUndermenyLukk } from './MobilUndermenyLukk';
@@ -17,6 +17,13 @@ type Props = {
 
 export const MobilUndermeny = ({ lenker, className }: Props) => {
     const { underMenuIsOpen } = useSelector(stateSelector);
+
+    useEffect(() => {
+        console.log(`underMenuIsOpen: ${underMenuIsOpen}`);
+        if (underMenuIsOpen) {
+            window.focus();
+        }
+    }, [underMenuIsOpen]);
 
     if (!lenker?.children) {
         return null;
