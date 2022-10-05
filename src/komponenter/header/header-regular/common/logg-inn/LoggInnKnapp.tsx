@@ -1,24 +1,27 @@
 import React from 'react';
 import { Button } from '@navikt/ds-react';
 import { finnTekst } from 'tekster/finn-tekst';
-import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { getLoginUrl, getLogOutUrl } from 'utils/login';
-
-import './LoggInnKnapp.less';
+import { Login, Logout } from '@navikt/ds-icons';
+import { Status } from '../../../../../api/api';
+import classNames from 'classnames';
+import style from './LoggInnKnapp.module.scss';
 
 export const loginKnappId = 'login-knapp-id';
 
 const stateSelector = (state: AppState) => ({
     authenticated: state.innloggingsstatus.data.authenticated,
+    innloggingsstatus: state.innloggingsstatus.status,
     arbeidsflate: state.arbeidsflate.status,
     language: state.language.language,
     environment: state.environment,
 });
 
 export const LoggInnKnapp = () => {
-    const { authenticated, arbeidsflate, language, environment } = useSelector(stateSelector);
+    const { authenticated, arbeidsflate, language, environment, innloggingsstatus } = useSelector(stateSelector);
 
     const handleButtonClick = () => {
         analyticsEvent({
@@ -30,17 +33,27 @@ export const LoggInnKnapp = () => {
         window.location.href = authenticated ? getLogOutUrl(environment) : getLoginUrl(environment, arbeidsflate);
     };
 
-    const knappetekst = finnTekst(authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp', language);
+    const isLoading =
+        innloggingsstatus === Status.IKKE_STARTET ||
+        innloggingsstatus === Status.PENDING ||
+        innloggingsstatus === Status.RELOADING;
+
+    const knappetekst = finnTekst(
+        isLoading ? 'logg-inn-loader' : authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp',
+        language
+    );
 
     return (
-        <div className={'login-knapp-container'}>
+        <div className={style.loginKnappContainer}>
             <Button
-                className={`login-knapp${authenticated ? ' logout-knapp' : ''}`}
+                className={`${style.loginKnapp} ${authenticated ? 'logout-knapp' : ''}`}
                 onClick={handleButtonClick}
                 id={loginKnappId}
-                variant="secondary"
+                variant={'tertiary'}
+                disabled={isLoading}
             >
-                {knappetekst}
+                {authenticated ? <Logout /> : <Login className={isLoading ? style.loginIconLoading : undefined} />}
+                <span className={classNames(style.loginText, isLoading && style.loginTextLoading)}>{knappetekst}</span>
             </Button>
         </div>
     );

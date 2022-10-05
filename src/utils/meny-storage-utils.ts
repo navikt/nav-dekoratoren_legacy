@@ -19,8 +19,7 @@ export const getHovedmenyNode = (
     arbeidsflate: MenuValue
 ): MenyNode | undefined => {
     const languageNode = getLanguageNode(language, menypunkter);
-    const isLanguageNorwegian =
-        language === Locale.BOKMAL || language === Locale.NYNORSK;
+    const isLanguageNorwegian = language === Locale.BOKMAL || language === Locale.NYNORSK;
 
     return languageNode
         ? isLanguageNorwegian
@@ -29,20 +28,12 @@ export const getHovedmenyNode = (
         : undefined;
 };
 
-export const getMinsidemenyNode = (
-    menypunkter: MenyNode[],
-    language: Locale
-): MenyNode | undefined => {
+export const getMinsidemenyNode = (menypunkter: MenyNode[], language: Locale): MenyNode | undefined => {
     const languageNode = getLanguageNode(language, menypunkter);
-    return languageNode
-        ? findNode(languageNode, MenuName.Minsidemeny)
-        : undefined;
+    return languageNode ? findNode(languageNode, MenuName.Minsidemeny) : undefined;
 };
 
-export const getLanguageNode = (
-    lang: Locale,
-    nodeMenu: MenyNode[]
-): MenyNode | undefined =>
+export const getLanguageNode = (lang: Locale, nodeMenu: MenyNode[]): MenyNode | undefined =>
     ({
         IKKEBESTEMT: undefined,
         nb: nodeMenu.find((n) => n.path === '/no'),
@@ -50,12 +41,11 @@ export const getLanguageNode = (
         en: nodeMenu.find((n) => n.path === '/en'),
         pl: nodeMenu.find((n) => n.path === '/en'),
         se: nodeMenu.find((n) => n.path === '/se'),
+        uk: nodeMenu.find((n) => n.path === '/en'),
+        ru: nodeMenu.find((n) => n.path === '/en'),
     }[lang]);
 
-export const findNode = (
-    node: MenyNode,
-    displayName: string
-): MenyNode | undefined => {
+export const findNode = (node: MenyNode, displayName: string): MenyNode | undefined => {
     if (node.displayName.toLowerCase() === displayName.toLowerCase()) {
         return node;
     } else if (node.hasChildren) {

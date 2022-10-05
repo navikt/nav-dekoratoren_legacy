@@ -1,8 +1,8 @@
 import React from 'react';
 import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/MenylinjeKnapp';
 import HamburgerIkon from 'komponenter/header/header-regular/common/meny-knapp/hamburger-ikon/HamburgerIkon';
-import { analyticsEvent } from 'utils/analytics';
-import { AnalyticsCategory } from 'utils/analytics';
+import { analyticsEvent } from 'utils/analytics/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { toggleHovedmeny } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import { AppState } from 'store/reducers';
@@ -14,12 +14,13 @@ const stateSelector = (state: AppState) => ({
 });
 
 type Props = {
-    id?: string;
+    id: string;
+    menuId: string;
 };
 
 const classname = 'hovedmeny';
 
-export const HovedmenyKnapp = ({ id }: Props) => {
+export const HovedmenyKnapp = ({ id, menuId }: Props) => {
     const dispatch = useDispatch();
     const { arbeidsflate, isOpen } = useSelector(stateSelector);
 
@@ -38,7 +39,7 @@ export const HovedmenyKnapp = ({ id }: Props) => {
             isOpen={isOpen}
             classname={classname}
             onClick={toggleMenu}
-            ariaControls={classname}
+            ariaControls={menuId}
             id={id}
         >
             <HamburgerIkon isOpen={isOpen} />

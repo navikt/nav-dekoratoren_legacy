@@ -1,0 +1,47 @@
+@use 'src/styling-variabler' as sv;
+
+.delskjerm {
+    max-width: 35rem;
+    overflow: visible !important;
+    padding: 1rem;
+}
+
+.content {
+    @media #{sv.$screen-desktop} {
+        padding: 2rem 2rem 1rem 2rem;
+    }
+    @media #{sv.$screen-mobile} {
+        padding-top: 2rem;
+    }
+}
+
+.beskrivelse {
+    margin: 1rem 0 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.header {
+    width: 100%;
+    top: -3rem;
+    left: 0;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+}
+
+.veileder {
+    height: 5rem;
+    border-radius: 2.25rem;
+}
+
+.knapper {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+
+    @media #{sv.$screen-mobile} {
+        flex-direction: column;
+    }
+}

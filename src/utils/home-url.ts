@@ -7,5 +7,7 @@ export const getHomeUrl = (origin: string, language: Locale) =>
         [Locale.IKKEBESTEMT]: origin,
         [Locale.ENGELSK]: `${origin}/en/home`,
         [Locale.POLSK]: `${origin}/en/home`,
+        [Locale.UKRAINSK]: `${origin}/en/home`,
+        [Locale.RUSSISK]: `${origin}/en/home`,
         [Locale.SAMISK]: `${origin}/se/samegiella`,
     }[language] || origin);

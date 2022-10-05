@@ -1,31 +1,19 @@
 @import (reference) '../../../../../../styling-variabler.less';
-
 .sok-input-resultat {
     .sok-input-container {
         position: relative;
         display: flex;
-
-        /* clears search styling from Chrome */
-        input[type='search']::-webkit-search-decoration,
-        input[type='search']::-webkit-search-cancel-button,
-        input[type='search']::-webkit-search-results-button,
-        input[type='search']::-webkit-search-results-decoration {
-            -webkit-appearance: none;
-        }
     }
-
     .sok-input {
         margin: 0;
-    }
+        width: 100%;
 
+        input {
+            margin-top: 0;
+        }
+    }
     @media @screen-desktop {
         .sok-input {
-            width: 100%;
-
-            &__tittel {
-                margin-bottom: 1rem;
-            }
-
             input {
                 padding: 0.75rem;
                 border: 2px solid @navds-global-color-blue-500;
@@ -38,7 +26,6 @@
                 padding-right: 12rem;
             }
         }
-
         .sok .sok-container {
             width: auto;
             justify-content: center;
@@ -52,51 +39,21 @@
             }
         }
     }
-
     @media @screen-mobile {
         .sok-input__tittel {
-            display: none;
+            margin-bottom: 1rem;
         }
-
         .sok-input {
-            width: 100%;
-
             input {
-                border-radius: 50px;
-                padding: 1.25rem 1rem;
+                padding: 0.7rem 1rem;
                 background-color: white;
                 border: 2px solid @navds-global-color-blue-500;
-                color: white;
 
                 &:focus,
                 &:active {
                     border: 2px solid @navds-global-color-blue-500;
                 }
-
-                &::-webkit-input-placeholder,
-                &::-moz-placeholder,
-                &:-ms-input-placeholder,
-                &:-moz-placeholder {
-                    color: @navds-global-color-blue-500;
-                }
             }
-
-            input[type='search'] {
-                box-sizing: border-box;
-            }
-
-            input[placeholder] {
-                color: @navds-global-color-blue-500;
-                margin: 0;
-                font-size: 1.375rem;
-                line-height: 1.625rem;
-                font-weight: 300;
-            }
-
-            input::placeholder {
-                color: @navds-global-color-blue-500;
-            }
-
             .skjemaelement__input {
                 padding-right: 8.5rem;
             }

@@ -3,8 +3,6 @@ import ReactDOMServer from 'react-dom/server';
 import { Provider as ReduxProvider } from 'react-redux';
 import Header from 'komponenter/header/Header';
 import Footer from 'komponenter/footer/Footer';
-import MetaTagsServer from 'react-meta-tags/server';
-import { MetaTagsContext } from 'react-meta-tags';
 import { Request } from 'express';
 import { clientEnv, fiveMinutesInSeconds, oneMinuteInSeconds } from './utils';
 import { createStore } from 'store';
@@ -23,14 +21,23 @@ const cache = new NodeCache({
     checkperiod: oneMinuteInSeconds,
 });
 
+const fileFavicon = require('ikoner/favicon/favicon.ico');
+const fileAppleTouchIcon = require('ikoner/favicon/apple-touch-icon.png');
+const fileFavicon16x16 = require('ikoner/favicon/favicon-16x16.png');
+const fileFavicon32x32 = require('ikoner/favicon/favicon-32x32.png');
+
+const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
+const buildId = process.env.BUILD_ID;
+
 export const template = (req: Request) => {
     // Set environment based on request params
     const env = clientEnv({ req, cookies: {} });
 
     // Resources
     const fileEnv = `${env.APP_URL}/env`;
-    const fileCss = `${env.APP_URL}/css/client.css`;
-    const fileScript = `${env.APP_URL}/client.js`;
+    // Insert buildId-segment as a cache buster
+    const fileCss = `${env.APP_URL}/css/client.${buildId}.css`;
+    const fileScript = `${env.APP_URL}/client.${buildId}.js`;
 
     // Retreive from cache
     const cachedEnvHash = hash({ env });
@@ -41,7 +48,6 @@ export const template = (req: Request) => {
     }
 
     // Create store based on request params
-    const metaTags = MetaTagsServer();
     const store = createStore(env);
 
     // Fetch params and forward to client
@@ -56,11 +62,9 @@ export const template = (req: Request) => {
     // Render SSR
     const HtmlHeader = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
-            <MetaTagsContext extract={metaTags.extract}>
-                <CookiesProvider>
-                    <Header />
-                </CookiesProvider>
-            </MetaTagsContext>
+            <CookiesProvider>
+                <Header />
+            </CookiesProvider>
         </ReduxProvider>
     );
 
@@ -72,7 +76,6 @@ export const template = (req: Request) => {
         </ReduxProvider>
     );
 
-    const HtmlMetaTags = metaTags.renderToString();
     const html = `
     <!DOCTYPE html>
     <html lang='no'>
@@ -83,7 +86,12 @@ export const template = (req: Request) => {
             <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no' />
             <meta name='theme-color' content='#000000' />
             <meta charset='utf-8' />
+            <link rel="icon" type="image/x-icon" href=${appUrl}${fileFavicon} />
+            <link rel="icon" type="image/png" sizes="16x16" href=${appUrl}${fileFavicon16x16} />
+            <link rel="icon" type="image/png" sizes="32x32" href=${appUrl}${fileFavicon32x32} />
+            <link rel="apple-touch-icon" sizes="180x180" href=${appUrl}${fileAppleTouchIcon} />
             <!-- Decorator development styling -->
+            <!-- Hide decorator-utils-container to prevent content spoofing attacks via the breadcrumbs parameter -->
             <style>
             html, body {  height: 100%; }
             .decorator-dev-container {
@@ -100,16 +108,14 @@ export const template = (req: Request) => {
                 justify-content: center;
                 align-items: center;
             }  
-            .decorator-utils-container {    
-                background: #f1f1f1;
-                ${process.env.APP_BASE_URL === 'https://www.nav.no' ? 'display: none !important;' : ''}           
+            .decorator-utils-container {
+                display: none !important;
             }
             </style>
         </head>
         <body>
             <!-- Styling fetched by apps -->
             <div id='styles'>
-                ${HtmlMetaTags}
                 <link href='${fileCss}' rel='stylesheet'/>
             </div>
             <div class='decorator-dev-container'>
@@ -127,7 +133,7 @@ export const template = (req: Request) => {
             <!-- Scripts fetched by apps -->
             <div id='scripts'>
                 <div id='decorator-env' data-src='${fileEnv}${paramsAsString}'></div>
-                <script async='true' src='${fileScript}'></script>
+                <script async src='${fileScript}'></script>
             </div>
             <div id='skiplinks'></div>
             <div id='megamenu-resources'></div>

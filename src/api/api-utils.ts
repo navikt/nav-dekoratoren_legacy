@@ -17,24 +17,18 @@ export function fetchThenDispatch<T>(
             const data = await fetchFunction();
             sendResultatTilDispatch<T>(dispatch, ok)(data);
         } catch (e) {
-            handterFeil(dispatch, feilet)(e);
+            handterFeil(dispatch, feilet)(e as FetchError);
         }
     };
 }
 
-function sendResultatTilDispatch<T>(
-    dispatch: Dispatch,
-    okAction: (temaer: T) => Handling
-): (jsonData: T) => void {
+function sendResultatTilDispatch<T>(dispatch: Dispatch, okAction: (temaer: T) => Handling): (jsonData: T) => void {
     return (jsonData: T) => {
         dispatch(okAction(jsonData));
     };
 }
 
-function handterFeil(
-    dispatch: Dispatch,
-    feiletAction: () => Handling
-): (error: FetchError) => void {
+function handterFeil(dispatch: Dispatch, feiletAction: () => Handling): (error: FetchError) => void {
     return (error: FetchError) => {
         if (error.response) {
             error.response.text().then(() => {
@@ -46,10 +40,7 @@ function handterFeil(
     };
 }
 
-export async function fetchToJson<T>(
-    url: string,
-    config?: RequestInit
-): Promise<T> {
+export async function fetchToJson<T>(url: string, config?: RequestInit): Promise<T> {
     const respons = await fetch(url, config);
     const gyldigRespons = sjekkStatuskode(respons);
     return await toJson<T>(gyldigRespons);

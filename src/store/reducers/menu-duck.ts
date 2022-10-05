@@ -17,6 +17,8 @@ export interface MenyNode {
     path: string;
     id?: string;
     hasChildren: boolean;
+    isMyPageMenu?: boolean;
+    flatten?: boolean;
     children: MenyNode[];
 }
 
@@ -41,10 +43,7 @@ const initalState: MenyPunkter = {
     status: Status.IKKE_STARTET,
 };
 
-export default function reducer(
-    state: MenyPunkter = initalState,
-    action: Handling
-): MenyPunkter {
+export default function reducer(state: MenyPunkter = initalState, action: Handling): MenyPunkter {
     switch (action.type) {
         case ActionType.HENT_MENY_OK: {
             return { ...state, status: Status.OK, data: action.data };
@@ -62,9 +61,7 @@ export default function reducer(
     }
 }
 
-export function fetchMenypunkter(
-    APP_URL: string
-): (dispatch: Dispatch) => Promise<void> {
+export function fetchMenypunkter(APP_URL: string): (dispatch: Dispatch) => Promise<void> {
     return fetchThenDispatch<MenyNode[]>(() => hentMenyPunkter(APP_URL), {
         ok: menypunkterSuksess,
         feilet: menypunkterFeilet,

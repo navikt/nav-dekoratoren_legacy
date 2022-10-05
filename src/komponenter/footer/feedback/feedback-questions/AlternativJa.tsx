@@ -4,10 +4,9 @@ import { createFeedbackRespons } from '../createFeedbackRespons';
 import FritekstFelt, { fritekstFeilReducer, initialFritekstFeil, MAX_LENGTH } from './fritekst/FritekstFelt';
 import { FeedbackInformasjon, QuestionProps, questionStateSelector } from './AlternativCommon';
 import KnappeRekke from './KnappeRekke';
-import './Alternativ.less';
 import { lagreTilbakemelding } from '../../../../store/reducers/tilbakemelding-duck';
 import { useDispatch, useSelector } from 'react-redux';
-import { logAmplitudeEvent } from '../../../../utils/amplitude';
+import { logAmplitudeEvent } from '../../../../utils/analytics/amplitude';
 
 const AlternativJa = (props: QuestionProps) => {
     const [feedbackMessage, setFeedbackMessage] = useState('');
@@ -41,7 +40,7 @@ const AlternativJa = (props: QuestionProps) => {
     };
 
     return (
-        <form className="alternativ-wrapper" onSubmit={submitFeedback}>
+        <form onSubmit={submitFeedback}>
             <FritekstFelt
                 feedbackMessage={feedbackMessage}
                 setFeedbackMessage={setFeedbackMessage}

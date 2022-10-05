@@ -5,7 +5,6 @@
 @smallDesktopMaxWidth: 1024px;
 @desktopMinWidth: 768px;
 @smallMobileMaxWidth: 340px;
-
 @smallDesktopMaxHeight: 880px;
 
 // screen size media queries
@@ -24,8 +23,8 @@
 @margins-sides-footer: 2rem;
 @margins-sides-footer-small: 1rem;
 
-@header-height-desktop: 106px;
-@header-height-mobil: 88px;
+@header-height-desktop: 80px;
+@header-height-mobil: 72px;
 
 @header-height-simple-desktop: 78px;
 @header-height-simple-mobile: 66px;
@@ -33,7 +32,7 @@
 @menu-height-mobil: calc(100% - @header-height-mobil);
 
 @header-separator-farge: @navds-global-color-gray-300;
-@header-separator-height: 2px;
+@header-separator-height: 1px;
 
 @footer-seperator-farge: @navds-global-color-gray-300;
 @footer-seperator-height: 2px;
@@ -55,21 +54,5 @@
         box-shadow: 0 0 0 4px @navds-semantic-color-focus;
         border-radius: 4px;
         border-color: transparent;
-    }
-}
-
-.safari-text-color-fix-mixin(@mainColor, @activeColor, @hoverColor, @focusColor) {
-    -webkit-text-fill-color: @mainColor;
-    &:hover,
-    &:hover:focus {
-        -webkit-text-fill-color: @hoverColor;
-    }
-    &:active,
-    &:active:hover,
-    &:active:focus {
-        -webkit-text-fill-color: @activeColor;
-    }
-    &:focus {
-        -webkit-text-fill-color: @focusColor;
     }
 }

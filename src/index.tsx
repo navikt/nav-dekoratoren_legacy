@@ -1,19 +1,20 @@
-import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 
-// Nødvendig for IE11-støtte i visse apper.
-import 'core-js/stable/regexp';
+// Import this early, to ensure our own CSS gets higher specificity
+import '@navikt/ds-css/dist/index.css';
+
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { hydrateRoot, createRoot } from 'react-dom/client';
 import { Provider as ReduxProvider } from 'react-redux';
 import { createStore } from 'store';
 import { erDev, verifyWindowObj } from 'utils/Environment';
 import { fetchEnv } from 'utils/Environment';
-import { initAnalytics } from 'utils/analytics';
+import { initAnalytics } from 'utils/analytics/analytics';
 import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
-import { initPageViewObserver } from './utils/amplitude';
+import { getSalesforceContainer } from './server/utils';
+
 import './index.less';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
@@ -24,27 +25,66 @@ if (erDev) {
     console.log('==========================');
 }
 
+const renderOrHydrate = (reactElement: JSX.Element, container: Element | null) => {
+    if (!container) {
+        console.error('Missing container for header/footer!');
+    } else if (container.hasChildNodes()) {
+        // Hydrate the container if it contains server-side rendered elements
+        hydrateRoot(container, reactElement);
+    } else {
+        // If not, render client-side
+        const root = createRoot(container);
+        root.render(reactElement);
+    }
+};
+
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }> {
+    static getDerivedStateFromError() {}
+
+    componentDidCatch(error: any, errorInfo: any) {
+        console.error(`Uventet feil fra dekoratøren: ${error}`, errorInfo);
+    }
+
+    render() {
+        return this.props.children;
+    }
+}
+
 const run = () => {
     fetchEnv()
         .then((environment) => {
             initAnalytics(environment.PARAMS);
-            initPageViewObserver(environment.PARAMS);
             const store = createStore(environment);
-            ReactDOM.hydrate(
-                <ReduxProvider store={store}>
-                    <CookiesProvider>
-                        <Footer />
-                    </CookiesProvider>
-                </ReduxProvider>,
-                document.getElementById('decorator-footer')
+
+            const headerContainer =
+                document.getElementById('decorator-header') ||
+                getSalesforceContainer('c-salesforce-header', 'decorator-header');
+            const footerContainer =
+                document.getElementById('decorator-footer') ||
+                getSalesforceContainer('c-salesforce-footer', 'decorator-footer');
+
+            // We hydrate the footer first to prevent client/server mismatch due to client-side only
+            // store mutations that occur in the header
+            renderOrHydrate(
+                <ErrorBoundary>
+                    <ReduxProvider store={store}>
+                        <CookiesProvider>
+                            <Footer />
+                        </CookiesProvider>
+                    </ReduxProvider>
+                </ErrorBoundary>,
+                footerContainer
             );
-            ReactDOM.hydrate(
-                <ReduxProvider store={store}>
-                    <CookiesProvider>
-                        <Header />
-                    </CookiesProvider>
-                </ReduxProvider>,
-                document.getElementById('decorator-header')
+
+            renderOrHydrate(
+                <ErrorBoundary>
+                    <ReduxProvider store={store}>
+                        <CookiesProvider>
+                            <Header />
+                        </CookiesProvider>
+                    </ReduxProvider>
+                </ErrorBoundary>,
+                headerContainer
             );
         })
         .catch((e) => {

@@ -1,10 +1,9 @@
 import { MenyNode } from 'store/reducers/menu-duck';
 import { Heading } from '@navikt/ds-react';
 import React from 'react';
-import BEMHelper from 'utils/bem';
 import { MenyLenke } from './MenyLenke';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
-import './MenyLenker.less';
+import style from './MenyLenker.module.scss';
 
 interface Props {
     menygruppe: MenyNode;
@@ -14,15 +13,12 @@ interface Props {
 }
 
 export const MenyLenkeSeksjon = ({ menygruppe, colIndex, rowIndex, kbNodeGroup }: Props) => {
-    const classname = 'lenkeseksjon';
-    const cls = BEMHelper(classname);
-
     return (
-        <section className={classname} aria-labelledby={`headerId_${menygruppe.id}`}>
-            <Heading level="2" size="small" id={`headerId_${menygruppe.id}`} className={cls.element('tittel')}>
+        <section className={`${style.lenkeseksjon} lenkeseksjon`} aria-labelledby={`headerId_${menygruppe.id}`}>
+            <Heading level="2" size="small" id={`headerId_${menygruppe.id}`} className={style.tittel}>
                 {menygruppe.displayName}
             </Heading>
-            <ul className={cls.element('lenker')}>
+            <ul className={style.lenker}>
                 {menygruppe.children.map((lenke: MenyNode, index: number) => {
                     const kbNaviIndex = {
                         col: colIndex,

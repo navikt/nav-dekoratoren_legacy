@@ -1,5 +1,5 @@
 import React from 'react';
-import './MenySeksjoner.less';
+import style from './MenySeksjoner.module.scss';
 
 export type MenyLayout = 'grid' | 'mosaic';
 
@@ -12,21 +12,16 @@ type Props = {
 export const MenySeksjoner = ({ numCols, layout, children }: Props) => {
     if (layout === 'grid') {
         return (
-            <div
-                className={'grid-meny'}
-                style={{ '--numcols': numCols } as React.CSSProperties}
-            >
+            <div className={style.gridMeny} style={{ '--numcols': numCols } as React.CSSProperties}>
                 {children}
             </div>
         );
     } else if (layout === 'mosaic') {
         return (
-            <div className={'mosaic-meny'}>
+            <div className={style.mosaicMeny}>
                 {[...Array(numCols)].map((_, colIndex) => (
-                    <div className={'mosaic-meny__column'} key={colIndex}>
-                        {children.filter(
-                            (_, index) => index % numCols === colIndex
-                        )}
+                    <div className={style.mosaicMenyColumn} key={colIndex}>
+                        {children.filter((_, index) => index % numCols === colIndex)}
                     </div>
                 ))}
             </div>

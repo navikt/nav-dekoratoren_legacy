@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
@@ -11,6 +11,15 @@ import { BodyShort } from '@navikt/ds-react';
 interface Props {
     node?: MenyNode;
 }
+
+const localeSegments: { [locale: string]: string } = { no: 'no', en: 'en', se: 'se' };
+
+// Workaround to get the lang attribute for links to alternative language versions of the site
+const getLang = (url: string) => {
+    const lastSegment = url.split('/').slice(-1)[0];
+
+    return localeSegments[lastSegment];
+};
 
 export const FooterLenker = ({ node }: Props) => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
@@ -24,24 +33,26 @@ export const FooterLenker = ({ node }: Props) => {
     }
 
     return (
-        <Fragment>
+        <>
             {node.children.map((lenkeNode) => (
                 <li key={lenkeNode.id}>
                     <BodyShort>
                         <LenkeMedSporing
+                            className="globalLenkeFooter"
                             href={genererUrl(XP_BASE_URL, lenkeNode.path)}
                             analyticsEventArgs={{
                                 category: AnalyticsCategory.Footer,
                                 action: `kontakt/${lenkeNode.path}`,
                                 label: lenkeNode.displayName,
                             }}
+                            lang={getLang(lenkeNode.path)}
                         >
                             {lenkeNode.displayName}
                         </LenkeMedSporing>
                     </BodyShort>
                 </li>
             ))}
-        </Fragment>
+        </>
     );
 };
 

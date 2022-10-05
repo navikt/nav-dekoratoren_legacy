@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleHovedmeny, toggleSok, toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { SkipLinkElement, SkipLinkProps } from 'komponenter/header/common/skiplinks/SkiplinkElement';
 import { AppState } from 'store/reducers';
-import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/meny/innhold/Hovedmeny';
+import { mobilSokInputId } from 'komponenter/header/header-regular/mobil/meny/innhold/hovedmeny/MobilHovedmenyInnhold';
 import { desktopSokInputId } from 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown';
-import { logAmplitudeEvent } from '../../../../utils/amplitude';
+import { logAmplitudeEvent } from '../../../../utils/analytics/amplitude';
 import 'komponenter/header/common/skiplinks/Skiplinks.less';
 
 const stateSelector = (state: AppState) => ({
@@ -76,7 +76,6 @@ const Skiplinks = ({ simple }: Props) => {
         ...(hasMainContent
             ? [
                   {
-                      anchorId: mainContentId,
                       tekstId: 'skiplinks-ga-til-hovedinnhold',
                       onClick: () => {
                           document.getElementById(mainContentId)?.focus();
@@ -97,7 +96,6 @@ const Skiplinks = ({ simple }: Props) => {
                 {skipLinks.map((link, index) => (
                     <SkipLinkElement
                         tekstId={link.tekstId}
-                        anchorId={link.anchorId}
                         onClick={() => {
                             logSkipLink(link.tekstId);
                             link.onClick && link.onClick();

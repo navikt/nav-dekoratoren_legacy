@@ -1,23 +1,21 @@
 import React from 'react';
-import { AnalyticsEventArgs, analyticsEvent } from 'utils/analytics';
 import { Next } from '@navikt/ds-icons';
+import { AnalyticsEventArgs, analyticsEvent } from 'utils/analytics/analytics';
 import Lock from 'ikoner/meny/Lock';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
-import './LenkeMedSporing.less';
+import classNames from 'classnames';
+import style from './LenkeMedSporing.module.scss';
 
 type Props = {
     href: string;
     children: React.ReactNode;
     analyticsEventArgs?: AnalyticsEventArgs;
-    className?: string;
     classNameOverride?: string;
-    id?: string;
-    onClick?: (...args: any) => void;
-    tabIndex?: number;
     withChevron?: boolean;
     withLock?: boolean;
-};
+    closeMenusOnClick?: boolean;
+} & React.HTMLAttributes<HTMLAnchorElement>;
 
 export const LenkeMedSporing = ({
     href,
@@ -30,23 +28,28 @@ export const LenkeMedSporing = ({
     tabIndex,
     withChevron,
     withLock,
+    closeMenusOnClick = true,
+    lang,
 }: Props) => {
-    const classnameFull = `${classNameOverride || 'lenke dekorator-lenke'}${withChevron ? ' chevronlenke' : ''}${
-        className ? ` ${className}` : ''
-    }`;
     const dispatch = useDispatch();
 
     return (
         <a
             href={href}
-            className={classnameFull}
+            className={classNames(
+                classNameOverride || `lenke ${style.dekoratorLenke}`,
+                withChevron && style.chevronlenke,
+                className
+            )}
             id={id}
             tabIndex={tabIndex}
-            onAuxClick={(event: React.MouseEvent) =>
+            onAuxClick={(event) =>
                 analyticsEventArgs && event.button && event.button === 1 && analyticsEvent(analyticsEventArgs)
             }
-            onClick={(event: React.MouseEvent) => {
-                dispatch(lukkAlleDropdowns());
+            onClick={(event) => {
+                if (closeMenusOnClick) {
+                    dispatch(lukkAlleDropdowns());
+                }
                 if (onClick) {
                     onClick(event);
                 }
@@ -54,14 +57,15 @@ export const LenkeMedSporing = ({
                     analyticsEvent(analyticsEventArgs);
                 }
             }}
+            lang={lang}
         >
             <>
                 {(withLock || withChevron) && (
-                    <div className={'dekorator-lenke__ikon-container'}>
+                    <div className={style.ikonContainer}>
                         {withLock ? (
                             <Lock height={'18px'} width={'18px'} />
                         ) : (
-                            withChevron && <Next className={'chevronlenke__chevron'} />
+                            withChevron && <Next className={style.chevron} />
                         )}
                     </div>
                 )}

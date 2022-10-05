@@ -3,14 +3,6 @@ import { Environment } from 'store/reducers/environment-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { AvailableLanguage, Locale } from 'store/reducers/language-duck';
 import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
-import { parseJwt } from 'komponenter/common/utloggingsvarsel/token.utils';
-import {
-    ParsedJwtToken,
-    UtloggingsVarselProperties,
-    UtloggingsvarselState,
-    initialState as UtloggingsvarselInitState,
-} from '../store/reducers/utloggingsvarsel-duck';
-import { CookieName, getCookieContextKey } from './cookieSettings';
 
 interface Cookies {
     [key: string]: MenuValue | Locale | string;
@@ -22,7 +14,7 @@ interface Props {
 }
 // Client environment
 // Obs! Don't expose secrets
-export const clientEnv = ({ req, cookies }: Props): Environment => {
+export const clientEnv = ({ req }: Props): Environment => {
     // Throw errors if parameters are invalid
     validateClientEnv(req);
 
@@ -32,8 +24,6 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     const chosenContext = (req.query.context?.toString().toLowerCase() || MenuValue.IKKEBESTEMT) as MenuValue;
 
     const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
-    const utloggingsvarsel: UtloggingsVarselProperties = setAndCheckUtloggingsvarsel(req, cookies);
-    const taSurveys = req.query.taSurveys?.toString().replace(' ', '').split(',') || [];
 
     return {
         ENV: process.env.ENV as string,
@@ -49,7 +39,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
         CASETYPE_ID: process.env.CASETYPE_ID as string,
         NAV_GROUP_ID: process.env.NAV_GROUP_ID as string,
         MINSIDE_ARBEIDSGIVER_URL: process.env.MINSIDE_ARBEIDSGIVER_URL as string,
-        DITT_NAV_URL: process.env.DITT_NAV_URL as string,
+        MIN_SIDE_URL: process.env.MIN_SIDE_URL as string,
         LOGIN_URL: process.env.LOGIN_URL as string,
         LOGOUT_URL: process.env.LOGOUT_URL as string,
         FEEDBACK_API_URL: process.env.FEEDBACK_API_URL as string,
@@ -72,13 +62,12 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
                 }),
                 FEEDBACK: req.query.feedback === 'true',
                 CHATBOT: req.query.chatbot !== 'false',
+                CHATBOT_VISIBLE: req.query.chatbotVisible === 'true',
                 URL_LOOKUP_TABLE: req.query.urlLookupTable !== 'false',
                 ...(req.query.utilsBackground && {
                     UTILS_BACKGROUND: req.query.utilsBackground as string,
                 }),
                 SHARE_SCREEN: req.query.shareScreen !== 'false',
-                UTLOGGINGSVARSEL: utloggingsvarsel.UTLOGGINGSVARSEL,
-                TA_SURVEYS: taSurveys,
                 ...(req.query.logoutUrl && {
                     LOGOUT_URL: req.query.logoutUrl as string,
                 }),
@@ -89,63 +78,7 @@ export const clientEnv = ({ req, cookies }: Props): Environment => {
     };
 };
 
-const setAndCheckUtloggingsvarsel = (req: Request, cookies: Cookies): UtloggingsVarselProperties => {
-    const jwtTokenInfo: ParsedJwtToken = getutloggingsvarsel(req, cookies);
-    const utloggingsvarselCookie: UtloggingsvarselState = getLogoutWarningCookie(req, cookies);
-
-    if (jwtTokenInfo.UTLOGGINGSVARSEL && jwtTokenInfo.TIMESTAMP !== utloggingsvarselCookie.timeStamp) {
-        utloggingsvarselCookie.timeStamp = jwtTokenInfo.TIMESTAMP ?? 0;
-        utloggingsvarselCookie.origin = req.headers?.host ?? '';
-        utloggingsvarselCookie.modalLukketAvBruker = false;
-        utloggingsvarselCookie.vistSistePaminnelse = false;
-        utloggingsvarselCookie.miljo = getCookieContextKey(process.env.XP_BASE_URL ?? req.headers?.referer ?? '');
-    }
-    return { UTLOGGINGSVARSEL: jwtTokenInfo.UTLOGGINGSVARSEL, state: utloggingsvarselCookie };
-};
-
-const getLogoutWarningCookie = (req: Request, cookies: Cookies): UtloggingsvarselState => {
-    const logoutWarning = cookies[CookieName.DECORATOR_LOGOUT_WARNING];
-    if (logoutWarning) {
-        try {
-            return JSON.parse(logoutWarning) as UtloggingsvarselState;
-        } catch (err) {
-            console.log("Failed to parse cookies['" + CookieName.DECORATOR_LOGOUT_WARNING + "']: ", err);
-            return UtloggingsvarselInitState;
-        }
-    }
-    return UtloggingsvarselInitState;
-};
-
-export const orginDevelopment = (hosturl?: string) =>
-    ['localhost', '-q0', '-q1', '-q2', '-q6', 'dev'].some((o) => hosturl?.includes(o));
-
-const getutloggingsvarsel = (req: Request, cookies: Cookies): ParsedJwtToken => {
-    const enableUtloggingsvarsel: boolean =
-        req.query.utloggingsvarsel === 'true' ||
-        (req.query.utloggingsvarsel !== 'false' && orginDevelopment(req.headers?.referer));
-
-    if (enableUtloggingsvarsel) {
-        const token = cookies[CookieName.SELVBETJENING_IDTOKEN];
-        if (token) {
-            try {
-                const jwt = parseJwt(token);
-                const timestamp = jwt['exp'];
-                if (timestamp) {
-                    return {
-                        UTLOGGINGSVARSEL: true,
-                        TIMESTAMP: timestamp,
-                    };
-                }
-            } catch (err) {
-                console.warn('parsing selvbetjening-idtoken failed: ', err);
-            }
-        }
-    }
-    return {
-        UTLOGGINGSVARSEL: enableUtloggingsvarsel,
-        TIMESTAMP: 0,
-    };
-};
+export const orginDevelopment = (hosturl?: string) => ['localhost', 'dev'].some((o) => hosturl?.includes(o));
 
 // Validation utils
 export const validateClientEnv = (req: Request) => {
@@ -233,9 +166,11 @@ export const validateLanguage = (language: Locale) => {
         case 'en':
         case 'se':
         case 'pl':
+        case 'uk':
+        case 'ru':
             break;
         default:
-            const error = 'language supports nb | nn | en | se | pl';
+            const error = 'language supports nb | nn | en | se | pl | uk | ru';
             throw Error(error);
     }
 };
@@ -253,17 +188,7 @@ export const validateAvailableLanguages = (languages: AvailableLanguage[]) => {
             }
         }
 
-        switch (language.locale) {
-            case 'nb':
-            case 'nn':
-            case 'en':
-            case 'se':
-            case 'pl':
-                break;
-            default:
-                const error = `availableLanguages.locale supports nb | nn | en | se | pl`;
-                throw Error(error);
-        }
+        validateLanguage(language.locale);
     });
 };
 
@@ -285,8 +210,13 @@ export const validateBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
 };
 
 // Validator utils
-export const isNavUrl = (url: string) =>
-    /^(\/|(https?:\/\/localhost)|(https:\/\/([a-z0-9-]+[.])*nav[.]no($|\/)))/i.test(url);
+export const isNavUrl = (url: string) => {
+    const isLocalhost = /^(https?:\/\/localhost(:\d+)?)/i.test(url);
+    const isPath = /^(\/)/i.test(url);
+    const isNavOrNais = /^((https:\/\/([a-z0-9-]+[.])*((nav[.]no)|(nais[.]io)))($|\/))/i.test(url);
+
+    return isLocalhost || isPath || isNavOrNais;
+};
 
 // Deprecated map to support norsk | engelsk | samisk
 const mapToLocale = (language?: string) => {
@@ -299,6 +229,8 @@ const mapToLocale = (language?: string) => {
         en: 'en',
         se: 'se',
         pl: 'pl',
+        uk: 'uk',
+        ru: 'ru',
 
         // deprecated
         norsk: 'nb',
@@ -306,6 +238,21 @@ const mapToLocale = (language?: string) => {
         samisk: 'se',
     };
     return map[language] || 'ukjent-verdi';
+};
+
+// Salesforce frontend apps have some restrictions on which elements can be
+// accessed/mutatated. This function is used as a fallback to get certain
+// containers
+export const getSalesforceContainer = (_tagName: string, className: string) => {
+    // The "c-" prefix on tags is required by salesforce
+    const tagName = _tagName.startsWith('c-') ? _tagName : `c-${_tagName}`;
+
+    const tag = document.getElementsByTagName(tagName)[0];
+    if (!tag) {
+        return null;
+    }
+
+    return tag.getElementsByClassName(className)[0];
 };
 
 // Time utils

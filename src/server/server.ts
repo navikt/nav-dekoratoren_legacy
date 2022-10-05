@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { createMiddleware } from '@promster/express';
 import { getSummary, getContentType } from '@promster/express';
+import rewrite from 'express-urlrewrite';
 import { clientEnv, fiveMinutesInSeconds } from './utils';
 import cookiesMiddleware from 'universal-cookie-express';
 import { template } from './template';
@@ -14,6 +15,7 @@ import { varselInnboksProxyHandler, varselInnboksProxyUrl } from './api-handlers
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
 const isProduction = process.env.NODE_ENV === 'production';
+const buildId = process.env.BUILD_ID || '';
 
 // Local environment - import .env
 if (!isProduction || process.env.PROD_TEST) {
@@ -22,14 +24,27 @@ if (!isProduction || process.env.PROD_TEST) {
 
 // Config
 const appBasePath = process.env.APP_BASE_PATH || ``;
+const appPaths = [appBasePath, '', '/dekoratoren'].filter((path, index, array) => array.indexOf(path) === index);
 const oldBasePath = '/common-html/v4/navno';
 const buildPath = `${process.cwd()}/build`;
+
+const createPaths = (subPath: string) => appPaths.map((path) => `${path}${subPath}`);
 
 const app = express();
 const PORT = 8088;
 
-const whitelist = ['.nav.no', '.oera.no', '.nais.io', 'https://preview-sykdomifamilien.gtsb.io'];
-const isAllowedDomain = (origin?: string) => origin && whitelist.some((domain) => origin.endsWith(domain));
+const corsWhitelist = [
+    '.nav.no',
+    '.oera.no',
+    '.nais.io',
+    'https://preview-sykdomifamilien.gtsb.io',
+    'navdialog.cs102.force.com',
+    'navdialog.cs106.force.com',
+    'navdialog.cs108.force.com',
+    'navdialog.cs162.force.com',
+];
+
+const isAllowedDomain = (origin?: string) => origin && corsWhitelist.some((domain) => origin.endsWith(domain));
 
 // Middleware
 app.disable('x-powered-by');
@@ -74,7 +89,7 @@ app.use(
 );
 
 // Express config
-const pathsForTemplate = [`${appBasePath}`, `${appBasePath}/:locale(no|en|se)/*`, `${oldBasePath}`];
+const pathsForTemplate = [appPaths, createPaths('/:locale(no|en|se)/*'), oldBasePath].flat();
 
 // HTML template
 app.get(pathsForTemplate, (req, res, next) => {
@@ -86,7 +101,7 @@ app.get(pathsForTemplate, (req, res, next) => {
 });
 
 // Client environment
-app.get(`${appBasePath}/env`, (req, res, next) => {
+app.get(createPaths('/env'), (req, res, next) => {
     try {
         const cookies = (req as any).universalCookies.cookies;
         res.send(clientEnv({ req, cookies }));
@@ -96,9 +111,9 @@ app.get(`${appBasePath}/env`, (req, res, next) => {
 });
 
 // Api endpoints
-app.get(`${appBasePath}/api/meny`, getMenuHandler);
-app.get(`${appBasePath}/api/sok`, getSokHandler);
-app.get(`${appBasePath}/api/driftsmeldinger`, getDriftsmeldingerHandler);
+app.get(createPaths('/api/meny'), getMenuHandler);
+app.get(createPaths('/api/sok'), getSokHandler);
+app.get(createPaths('/api/driftsmeldinger'), getDriftsmeldingerHandler);
 app.use(varselInnboksProxyUrl, varselInnboksProxyHandler);
 
 // Nais endpoints
@@ -111,12 +126,23 @@ app.use(`${appBasePath}/metrics`, (req, res) => {
 app.get(`${appBasePath}/isAlive`, (req, res) => res.sendStatus(200));
 app.get(`${appBasePath}/isReady`, (req, res) => res.sendStatus(200));
 
+// Prevent requests for stale client.js/css files from getting cache-headers in the response
+const isStaleClientRequest = (req: Request) => {
+    if (req.url !== '/client.js' && req.url !== '/css/client.css') {
+        return false;
+    }
+
+    return !req.originalUrl?.includes(buildId);
+};
+
 // Static files
 app.use(
-    `${appBasePath}/`,
+    createPaths('/'),
+    // Strip cache buster segment from client.css/js files
+    rewrite('*/client:buildId.(css|js)*', '$1/client.$3'),
     express.static(buildPath, {
         setHeaders: (res: Response) => {
-            if (isProduction) {
+            if (isProduction && !isStaleClientRequest(res.req)) {
                 // Override cache on static files
                 res.header('Cache-Control', `max-age=${fiveMinutesInSeconds}`);
                 res.header('Pragma', `max-age=${fiveMinutesInSeconds}`);

@@ -41,16 +41,18 @@ export const Minsidemeny = ({ kbNavMainState }: Props) => {
         return null;
     }
 
+    const brukernavn = innloggetStatus.name?.toLowerCase() || '';
+
     return (
-        <div className={'media-tablet-desktop'}>
-            <MinsidePersonKnapp classname={minsideMenyClassname} id={minsideKnappId} />
+        <div className={'media-tablet-desktop'} data-testid={'minside-meny'}>
+            <MinsidePersonKnapp classname={minsideMenyClassname} id={minsideKnappId} brukernavn={brukernavn} />
             <EkspanderbarMeny isOpen={isOpen} classname={minsideMenyClassname} id={minsideMenyClassname}>
                 {menyPunkter.status === Status.OK ? (
                     <MinsidemenyInnhold
                         classname={minsideMenyClassname}
                         menyLenker={minsideMenyPunkter}
-                        dittNavUrl={environment.DITT_NAV_URL}
-                        brukernavn={innloggetStatus.name?.toLowerCase() || ''}
+                        dittNavUrl={environment.MIN_SIDE_URL}
+                        brukernavn={brukernavn}
                         authLevel={innloggetStatus.securityLevel}
                     />
                 ) : (

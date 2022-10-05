@@ -9,7 +9,6 @@ import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { CookieName, cookieOptions } from '../../server/cookieSettings';
 import { useCookies } from 'react-cookie';
 import { languageDuck, Locale } from 'store/reducers/language-duck';
-import { HeadElements } from 'komponenter/common/HeadElements';
 import { hentVarsler } from 'store/reducers/varselinnboks-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 import { fetchDriftsmeldinger } from 'store/reducers/driftsmeldinger-duck';
@@ -36,7 +35,9 @@ import { setParams } from 'store/reducers/environment-duck';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
-import './Header.less';
+import { useLogPageviews } from '../../utils/hooks/useLogPageviews';
+
+import './Header.scss';
 
 export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
 export const decoratorLanguageCookie = CookieName.DECORATOR_LANGUAGE;
@@ -65,11 +66,13 @@ export const Header = () => {
 
     const [cookies, setCookie] = useCookies();
 
+    useLogPageviews(PARAMS, innloggingsstatus);
+
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {
         const anchors = Array.prototype.slice.call(document.getElementsByTagName('a'));
         anchors.forEach((anchor) => {
-            const envUrl = getUrlFromLookupTable(anchor.href, ENV as 'dev' | 'q0' | 'q1' | 'q2' | 'q6');
+            const envUrl = getUrlFromLookupTable(anchor.href, ENV as 'dev');
             if (anchor.href !== envUrl) {
                 anchor.href = envUrl;
             }
@@ -227,9 +230,9 @@ export const Header = () => {
                         redirectToUrl,
                         feedback,
                         chatbot,
+                        chatbotVisible,
                         shareScreen,
                         utilsBackground,
-                        utloggingsvarsel,
                         logoutUrl,
                     } = payload;
 
@@ -299,14 +302,14 @@ export const Header = () => {
                         ...(chatbot !== undefined && {
                             CHATBOT: chatbot === true,
                         }),
+                        ...(chatbotVisible !== undefined && {
+                            CHATBOT_VISIBLE: chatbotVisible === true,
+                        }),
                         ...(utilsBackground && {
                             UTILS_BACKGROUND: utilsBackground,
                         }),
                         ...(shareScreen !== undefined && {
                             SHARE_SCREEN: shareScreen === true,
-                        }),
-                        ...(utloggingsvarsel !== undefined && {
-                            UTLOGGINGSVARSEL: utloggingsvarsel === true,
                         }),
                     };
                     dispatch(setParams(params));
@@ -326,7 +329,6 @@ export const Header = () => {
 
     return (
         <div className={'decorator-wrapper'}>
-            <HeadElements />
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
             <header className={`siteheader${useSimpleHeader ? ' simple' : ''}`}>

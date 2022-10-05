@@ -5,9 +5,9 @@ import { MenyNode } from 'store/reducers/menu-duck';
 import { MenyLenkeSeksjon } from 'komponenter/header/header-regular/common/meny-lenker/MenyLenkeSeksjon';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import Tekst from 'tekster/finn-tekst';
-import MinsideLockMsg from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
+import { MinsideLockMsg } from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
 
 const nodeGroup = KbNavGroup.Minsidemeny;
 
@@ -46,6 +46,7 @@ export const MinsidemenyInnhold = (props: Props) => {
                             category: AnalyticsCategory.Header,
                             action: 'dittnav',
                             label: dittNavUrl,
+                            lenkegruppe: 'innlogget meny',
                         }}
                     >
                         <Tekst id={'til-dittnav-forside'} />

@@ -11,8 +11,10 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { useDispatch } from 'react-redux';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
-import './SokResultater.less';
 import { Alert, Link } from '@navikt/ds-react';
+import { logAmplitudeEvent } from 'utils/analytics/amplitude';
+
+import './SokResultater.less';
 
 type Props = {
     writtenInput: string;
@@ -62,7 +64,14 @@ export const SokResultater = (props: Props) => {
                                     id={id}
                                     className={'sokeresultat-lenke'}
                                     href={item.href}
-                                    onClick={() => dispatch(lukkAlleDropdowns())}
+                                    onClick={() => {
+                                        dispatch(lukkAlleDropdowns());
+                                        logAmplitudeEvent('resultat-klikk', {
+                                            destinasjon: item.href,
+                                            sokeord: writtenInput.toLowerCase(),
+                                            treffnr: index + 1,
+                                        });
+                                    }}
                                 >
                                     <SokeforslagIngress
                                         className="sok-resultat-listItem"
@@ -77,8 +86,8 @@ export const SokResultater = (props: Props) => {
             ) : null}
 
             {!fetchError && itemsFiltered.length ? (
-                <div className={'sokeresultat-alle-treff'}>
-                    <div>
+                <div className={'sokeresultat-treff'}>
+                    <div role={'status'}>
                         {finnTekst('sok-viser', language)} {itemsSpliced.length} {finnTekst('sok-av', language)}{' '}
                         {result.total} {finnTekst('sok-resultater', language)}
                     </div>
@@ -92,7 +101,7 @@ export const SokResultater = (props: Props) => {
             ) : null}
 
             {!fetchError && !itemsFiltered.length && (
-                <div className={'sokeresultat-ingen-treff'}>
+                <div className={'sokeresultat-treff'} role={'status'}>
                     <SokeforslagIngress
                         className="sok-resultat-listItem"
                         displayName={`${finnTekst('sok-ingen-treff', language)} (${writtenInput})`}

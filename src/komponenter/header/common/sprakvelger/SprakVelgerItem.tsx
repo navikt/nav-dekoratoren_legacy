@@ -34,7 +34,7 @@ const SprakVelgerItem = (props: Props) => {
                 <div className={cls.element('option')}>
                     <Bilde asset={Cicle} className={cls.element('sirkel')} />
                     <BodyShort size="small" lang={item.locale}>
-                        {item.label}{' '}
+                        {item.label}
                     </BodyShort>
                 </div>
             ) : (

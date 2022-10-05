@@ -4,12 +4,11 @@ import { VarselIkon } from './varsel-ikon/VarselIkon';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { settVarslerSomLest } from 'store/reducers/varsel-lest-duck';
-import { analyticsEvent } from 'utils/analytics';
-import { AnalyticsCategory } from 'utils/analytics';
+import { analyticsEvent } from 'utils/analytics/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
-import { varslerDropdownClassname } from 'komponenter/header/header-regular/common/varsler/Varsler';
-import './VarslerKnapp.less';
+import { varslerDropdownId } from 'komponenter/header/header-regular/common/varsler/Varsler';
 import { finnTekst } from '../../../../../../tekster/finn-tekst';
 
 export const varslerKnappId = 'varsler-knapp-id';
@@ -52,10 +51,10 @@ export const VarslerKnapp = () => {
             isOpen={isOpen}
             classname={'varselbjelle'}
             id={varslerKnappId}
-            ariaControls={varslerDropdownClassname}
+            ariaControls={varslerDropdownId}
             ariaLabel={ariaLabel()}
         >
-            <VarselIkon isOpen={isOpen} antallUleste={varsler.totaltAntallUleste} />
+            <VarselIkon antallUleste={varsler.totaltAntallUleste} />
         </MenylinjeKnapp>
     );
 };

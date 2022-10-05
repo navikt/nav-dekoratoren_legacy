@@ -1,17 +1,18 @@
 import { BodyShort } from '@navikt/ds-react';
-
-import LenkeMedIkon from '../lenke-med-ikon/LenkeMedIkon';
+import { Link } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
-import DelSkjerm from 'ikoner/del-skjerm/DelSkjerm';
+import { Monitor } from '@navikt/ds-icons';
 import React, { useState } from 'react';
 import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
-import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
+import style from './DelSkjermLenke.module.scss';
 
 export const DelSkjermLenke = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const openModal = () => {
         analyticsEvent({
+            eventName: 'Modal åpnet',
             category: AnalyticsCategory.Footer,
             action: `kontakt/del-skjerm-open`,
         });
@@ -20,6 +21,7 @@ export const DelSkjermLenke = () => {
 
     const closeModal = () => {
         analyticsEvent({
+            eventName: 'Modal lukket',
             category: AnalyticsCategory.Footer,
             action: `kontakt/del-skjerm-close`,
         });
@@ -28,13 +30,12 @@ export const DelSkjermLenke = () => {
 
     return (
         <>
-            <li>
+            <li className={style.delSkjermLenke}>
                 <BodyShort>
-                    <LenkeMedIkon
-                        onClick={openModal}
-                        tekst={<Tekst id="footer-del-skjerm" />}
-                        ikon={<DelSkjerm style={{ height: '24px', width: '24px', stroke: '#0067c5' }} />}
-                    />
+                    <Link onClick={openModal} className="globalLenkeFooter" href="#">
+                        <Tekst id="footer-del-skjerm" />
+                        <Monitor />
+                    </Link>
                 </BodyShort>
             </li>
             {isOpen && <DelSkjermModal isOpen={isOpen} onClose={closeModal} />}

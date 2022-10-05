@@ -1,8 +1,8 @@
 import { Button } from '@navikt/ds-react';
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
-import { logAmplitudeEvent } from 'utils/amplitude';
-import './Alternativ.less';
+import { logAmplitudeEvent } from 'utils/analytics/amplitude';
+import style from './Alternativ.module.scss';
 
 interface Props {
     avbryt: () => void;
@@ -15,8 +15,8 @@ const KnappeRekke = ({ avbryt }: Props) => {
     };
 
     return (
-        <div className="knapper">
-            <Button variant="primary" className="send-inn" type="submit">
+        <div className={style.knapper}>
+            <Button variant="primary" type="submit">
                 <Tekst id="send-inn-tilbakemelding" />
             </Button>
             <Button variant="tertiary" size="small" onClick={userClosedFeedback} type="button">

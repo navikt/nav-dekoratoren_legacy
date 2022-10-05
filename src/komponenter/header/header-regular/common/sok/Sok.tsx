@@ -2,7 +2,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import debounce from 'lodash.debounce';
-import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { genererUrl } from 'utils/Environment';
 import cls from 'classnames';
 import { Locale } from 'store/reducers/language-duck';
@@ -15,7 +15,7 @@ import Cookies from 'js-cookie';
 import './Sok.less';
 
 interface Props {
-    id?: string;
+    id: string;
     isOpen: boolean;
     dropdownTransitionMs?: number;
     numResultsCallback?: (numResults: number) => void;
@@ -45,7 +45,7 @@ const Sok = (props: Props) => {
 
     useEffect(() => {
         if (!props.isOpen) {
-            onReset();
+            clearInput();
         }
     }, [props.isOpen]);
 
@@ -55,9 +55,14 @@ const Sok = (props: Props) => {
         }
     }, [result]);
 
-    const onReset = () => {
+    const clearInput = () => {
         setSearchInput('');
         setLoading(false);
+    };
+
+    const onReset = () => {
+        clearInput();
+        document.getElementById(props.id)?.focus();
     };
 
     const getSearchUrl = () => {
@@ -69,6 +74,8 @@ const Sok = (props: Props) => {
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         analyticsEvent({
+            eventName: 'søk',
+            destination: getSearchUrl(),
             category: AnalyticsCategory.Header,
             label: searchInput,
             action: 'søk',
@@ -143,6 +150,13 @@ const fetchSearch = (props: FetchResult) => {
     const url = `${APP_URL}/api/sok`;
     setSubmitTrackerCookie();
 
+    analyticsEvent({
+        eventName: 'søk',
+        destination: url,
+        category: AnalyticsCategory.Header,
+        label: value,
+        action: 'søk-dynamisk',
+    });
     fetch(`${url}?ord=${encodeURIComponent(value)}`)
         .then((response) => {
             if (response.ok) {

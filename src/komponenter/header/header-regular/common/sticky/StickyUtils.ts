@@ -19,87 +19,83 @@ const getLinkAnchorId = (element: HTMLElement | null): string | null => {
 };
 
 // Updates the sticky-header position
-export const stickyScrollHandler = (
-    prevScrollOffset: React.MutableRefObject<number>,
-    stickyElement: HTMLElement,
-    placeholderElement: HTMLElement
-) => () => {
-    if (!stickyElement.offsetHeight) {
-        return;
-    }
+export const stickyScrollHandler =
+    (prevScrollOffset: React.MutableRefObject<number>, stickyElement: HTMLElement, placeholderElement: HTMLElement) =>
+    () => {
+        if (!stickyElement.offsetHeight) {
+            return;
+        }
 
-    const scrollOffset = window.pageYOffset;
-    const elementOffset = stickyElement.offsetTop;
-    const scrollChange = scrollOffset - prevScrollOffset.current;
-    const baseOffset = getElementOffsetFromPageTop(placeholderElement);
+        const scrollOffset = window.pageYOffset;
+        const elementOffset = stickyElement.offsetTop;
+        const scrollChange = scrollOffset - prevScrollOffset.current;
+        const baseOffset = getElementOffsetFromPageTop(placeholderElement);
 
-    const onScrollDown = () => {
-        if (stickyElement.style.position !== 'absolute') {
+        const onScrollDown = () => {
+            if (stickyElement.style.position !== 'absolute') {
+                stickyElement.style.position = 'absolute';
+                const absoluteOffsetFromFixed = scrollOffset + Math.min(elementOffset, 0) - baseOffset;
+                setTop(stickyElement, absoluteOffsetFromFixed);
+            }
+        };
+
+        const onScrollUp = () => {
+            if (stickyElement.style.position === 'fixed') {
+                setTop(stickyElement, Math.min(elementOffset - scrollChange, 0));
+            } else {
+                stickyElement.style.position = 'fixed';
+                const fixedOffsetFromAbsolute = Math.max(
+                    elementOffset - scrollOffset + baseOffset,
+                    scrollChange - stickyElement.scrollHeight
+                );
+                setTop(stickyElement, Math.min(fixedOffsetFromAbsolute, 0));
+            }
+        };
+
+        if (scrollOffset <= baseOffset) {
             stickyElement.style.position = 'absolute';
-            const absoluteOffsetFromFixed = scrollOffset + Math.min(elementOffset, 0) - baseOffset;
-            setTop(stickyElement, absoluteOffsetFromFixed);
-        }
-    };
-
-    const onScrollUp = () => {
-        if (stickyElement.style.position === 'fixed') {
-            setTop(stickyElement, Math.min(elementOffset - scrollChange, 0));
+            setTop(stickyElement, 0);
         } else {
-            stickyElement.style.position = 'fixed';
-            const fixedOffsetFromAbsolute = Math.max(
-                elementOffset - scrollOffset + baseOffset,
-                scrollChange - stickyElement.scrollHeight
-            );
-            setTop(stickyElement, Math.min(fixedOffsetFromAbsolute, 0));
+            scrollChange >= 0 ? onScrollDown() : onScrollUp();
         }
+
+        prevScrollOffset.current = scrollOffset;
+
+        // Set offset variable for use in external applications
+        setStickyOffsetVar();
     };
-
-    if (scrollOffset <= baseOffset) {
-        stickyElement.style.position = 'absolute';
-        setTop(stickyElement, 0);
-    } else {
-        scrollChange >= 0 ? onScrollDown() : onScrollUp();
-    }
-
-    prevScrollOffset.current = scrollOffset;
-
-    // Set offset variable for use in external applications
-    setStickyOffsetVar();
-};
 
 // Set the sticky-header to the top of the page, and defer updates to the sticky-position for
 // up to one second. We want to minimize the chance of the header overlapping the anchor-link target
-export const deferStickyOnAnchorLinkHandler = (
-    prevScrollOffset: React.MutableRefObject<number>,
-    stickyElement: HTMLElement,
-    stickyScrollHandler: () => void
-) => (e: MouseEvent) => {
-    const anchorId = getLinkAnchorId(e.target as HTMLElement);
-    if (!anchorId) {
-        return;
-    }
-
-    const startTime = Date.now();
-    const deferredScrollHandler = () => {
-        const anchorElement = document.getElementById(anchorId);
-        if (!anchorElement || anchorElement.getBoundingClientRect().top >= 0 || Date.now() - startTime > 1000) {
-            setTimeout(() => {
-                window.removeEventListener('scroll', deferredScrollHandler);
-                window.addEventListener('scroll', stickyScrollHandler);
-            }, 200);
+export const deferStickyOnAnchorLinkHandler =
+    (prevScrollOffset: React.MutableRefObject<number>, stickyElement: HTMLElement, stickyScrollHandler: () => void) =>
+    (e: MouseEvent) => {
+        const anchorId = getLinkAnchorId(e.target as HTMLElement);
+        if (!anchorId) {
+            return;
         }
+
+        const startTime = Date.now();
+        const deferredScrollHandler = () => {
+            const anchorElement = document.getElementById(anchorId);
+            if (!anchorElement || anchorElement.getBoundingClientRect().top >= 0 || Date.now() - startTime > 1000) {
+                setTimeout(() => {
+                    window.removeEventListener('scroll', deferredScrollHandler);
+                    window.addEventListener('scroll', stickyScrollHandler);
+                }, 200);
+            }
+        };
+
+        stickyElement.style.position = 'absolute';
+        prevScrollOffset.current = 0;
+        setTop(stickyElement, 0);
+
+        window.removeEventListener('scroll', stickyScrollHandler);
+        window.addEventListener('scroll', deferredScrollHandler);
+
+        // Set offset variable for use in external applications
+        setStickyOffsetVar();
     };
-
-    stickyElement.style.position = 'absolute';
-    prevScrollOffset.current = 0;
-    setTop(stickyElement, 0);
-
-    window.removeEventListener('scroll', stickyScrollHandler);
-    window.addEventListener('scroll', deferredScrollHandler);
-
-    // Set offset variable for use in external applications
-    setStickyOffsetVar();
-};
 
 // If the element that will get focus may get overlapped by the sticky header, alter
 // the header-position to prevent this from happening
@@ -114,7 +110,8 @@ export const focusOverlapHandler = (stickyElement: HTMLElement) => (e: FocusEven
     }
 
     const headerHeight = stickyElement?.getBoundingClientRect().height;
-    const targetPos = (e.target as HTMLElement)?.getBoundingClientRect().top;
+    const target = e.target as HTMLElement;
+    const targetPos = target?.getBoundingClientRect && target.getBoundingClientRect().top;
 
     if (!headerHeight || targetPos === null || targetPos === undefined) {
         return;

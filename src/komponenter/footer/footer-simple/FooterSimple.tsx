@@ -1,17 +1,13 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { AppState } from 'store/reducers';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
-import BEMHelper from 'utils/bem';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import { ChatbotWrapper } from 'komponenter/footer/chatbot/ChatbotWrapper';
 import { TilgjengelighetserklaeringLenke } from 'komponenter/footer/common/tilgjengelighetserklaering-lenke/TilgjengelighetserklaeringLenke';
 import { DelSkjermLenke } from '../common/del-skjerm-lenke/DelSkjermLenke';
-
-import './FooterSimple.less';
-
-const cls = BEMHelper('simple-footer');
+import style from './FooterSimple.module.scss';
 
 const FooterSimple = () => {
     const { language } = useSelector((state: AppState) => state.language);
@@ -27,18 +23,18 @@ const FooterSimple = () => {
     }, [data, personvernNode]);
 
     return (
-        <Fragment>
-            <div className={cls.element('container')}>
+        <>
+            <div className={style.container}>
                 <ChatbotWrapper />
-                <div className={cls.element('content')}>
-                    <ul className={cls.element('personvern-lenker')}>
+                <div className={style.content}>
+                    <ul className={style.personvernLenker}>
                         <FooterLenker node={personvernNode} />
                         <TilgjengelighetserklaeringLenke />
                         {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
                     </ul>
                 </div>
             </div>
-        </Fragment>
+        </>
     );
 };
 

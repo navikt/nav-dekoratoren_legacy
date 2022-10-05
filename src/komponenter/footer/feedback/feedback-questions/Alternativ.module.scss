@@ -1,0 +1,12 @@
+@use 'src/styling-variabler' as sv;
+
+.knapper {
+    display: flex;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+
+    @media #{sv.$screen-mobile} {
+        justify-content: center;
+    }
+}

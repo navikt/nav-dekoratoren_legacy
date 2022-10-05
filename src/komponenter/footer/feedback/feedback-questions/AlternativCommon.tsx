@@ -3,7 +3,6 @@ import { BodyLong } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
 import { FeedbackState } from '../Feedback';
 import { AppState } from 'store/reducers';
-import './Alternativ.less';
 
 export const questionStateSelector = (state: AppState) => ({
     environment: state.environment,

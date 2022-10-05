@@ -16,19 +16,14 @@ import { Bunnseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny
 
 const classname = 'desktop-hovedmeny';
 
-const nodeGroup = KbNavGroup.Hovedmeny;
-
 const widthBreakpoint = 1024;
 const mqlWidthBreakpoint = matchMedia(`(min-width: ${widthBreakpoint}px)`);
 const numColsSmallScreen = 3;
 const numColsLargeScreen = 4;
 
-const getColsFromScreenWidth = () =>
-    window.innerWidth >= widthBreakpoint
-        ? numColsLargeScreen
-        : numColsSmallScreen;
+const getColsFromScreenWidth = () => (window.innerWidth >= widthBreakpoint ? numColsLargeScreen : numColsSmallScreen);
 
-type Props = {
+export type HovedmenyInnholdProps = {
     arbeidsflate: MenuValue;
     menyPunkter?: MenyNode;
     language: Locale;
@@ -42,8 +37,8 @@ export const HovedmenyInnhold = ({
     menyPunkter,
     language,
     isOpen,
-}: Props) => {
-    const kbConfig = configForNodeGroup[nodeGroup];
+}: HovedmenyInnholdProps) => {
+    const kbConfig = configForNodeGroup[KbNavGroup.Hovedmeny];
     const [kbNavConfig, setKbNavConfig] = useState<KbNavConfig>(kbConfig);
     const [menuNumCols, setMenuNumCols] = useState(getColsFromScreenWidth());
     useKbNavSub(kbNavConfig, kbNavMainState, isOpen);
@@ -72,18 +67,8 @@ export const HovedmenyInnhold = ({
     return (
         <div className={classname}>
             <Toppseksjon classname={classname} />
-            <Hovedseksjon
-                menyLenker={menyPunkter}
-                classname={classname}
-                numCols={menuNumCols}
-            />
-            <Bunnseksjon
-                classname={classname}
-                language={language}
-                arbeidsflate={arbeidsflate}
-            />
+            <Hovedseksjon menyLenker={menyPunkter} classname={classname} numCols={menuNumCols} />
+            <Bunnseksjon classname={classname} language={language} arbeidsflate={arbeidsflate} />
         </div>
     );
 };
-
-export default HovedmenyInnhold;

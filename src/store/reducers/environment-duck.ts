@@ -2,7 +2,6 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
 import { AvailableLanguage, Locale } from './language-duck';
 import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
-import { UtloggingsvarselState } from './utloggingsvarsel-duck';
 
 export interface Environment {
     ENV: string;
@@ -14,7 +13,7 @@ export interface Environment {
     API_INNLOGGINGSLINJE_URL: string;
     API_UNLEASH_PROXY_URL: string;
     MINSIDE_ARBEIDSGIVER_URL: string;
-    DITT_NAV_URL: string;
+    MIN_SIDE_URL: string;
     LOGIN_URL: string;
     LOGOUT_URL: string;
     FEEDBACK_API_URL: string;
@@ -41,11 +40,10 @@ export interface Params {
     BREADCRUMBS?: Breadcrumb[];
     FEEDBACK: boolean;
     CHATBOT: boolean;
+    CHATBOT_VISIBLE: boolean;
     URL_LOOKUP_TABLE: boolean;
     SHARE_SCREEN: boolean;
     UTILS_BACKGROUND?: string;
-    UTLOGGINGSVARSEL: boolean;
-    TA_SURVEYS: string[];
     LOGOUT_URL?: string;
     APP_DISPLAY_NAME?: string;
     ACCESSIBILITY_DECLARATION_URL?: string;
@@ -54,7 +52,6 @@ export interface Params {
 export interface Cookies {
     CONTEXT: MenuValue;
     LANGUAGE: Locale;
-    EKSPANDERTVARSEL: UtloggingsvarselState;
 }
 
 export const initialState: Environment = {
@@ -67,7 +64,7 @@ export const initialState: Environment = {
     API_INNLOGGINGSLINJE_URL: '',
     API_UNLEASH_PROXY_URL: '',
     MINSIDE_ARBEIDSGIVER_URL: '',
-    DITT_NAV_URL: '',
+    MIN_SIDE_URL: '',
     LOGIN_URL: '',
     LOGOUT_URL: '',
     FEEDBACK_API_URL: '',
@@ -87,11 +84,10 @@ export const initialState: Environment = {
         LEVEL: '',
         LANGUAGE: Locale.IKKEBESTEMT,
         FEEDBACK: false,
-        TA_SURVEYS: [],
         CHATBOT: false,
+        CHATBOT_VISIBLE: false,
         URL_LOOKUP_TABLE: false,
         SHARE_SCREEN: false,
-        UTLOGGINGSVARSEL: false,
     },
 };
 

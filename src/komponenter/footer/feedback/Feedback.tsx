@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Ingress } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
-import AlternativJa from './feedback-questions/AlternativJa';
-import AlternativNei from './feedback-questions/AlternativNei';
-import { logAmplitudeEvent } from 'utils/amplitude';
+import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import ThankYou from './feedback-thank-you/ThankYou';
-import './Feedback.less';
+import style from './Feedback.module.scss';
 
 export type FeedbackState = 'lukket' | 'ja' | 'nei' | 'besvart';
 
@@ -24,29 +22,27 @@ const Feedback = () => {
 
     return (
         <>
-            <div className="footer-linje" />
-            <div className="feedback-container">
-                {state === 'lukket' && (
-                    <div className="feedback-content" role="group" aria-labelledby="feedback-text">
+            <div className={style.footerLinje} />
+            <div className={style.feedbackContainer}>
+                {state === 'lukket' ? (
+                    <div className={style.feedbackContent} role="group" aria-labelledby="feedback-text">
                         <Ingress>
                             <label id="feedback-text">
                                 <Tekst id="fant-du-det-du-lette-etter" />
                             </label>
                         </Ingress>
-                        <div className="buttons-container">
-                            <Button className="knapp" onClick={handleJa}>
+                        <div className={style.buttonsContainer}>
+                            <Button variant="secondary" className={style.knapp} onClick={handleJa}>
                                 <Tekst id="svarknapp-ja" />
                             </Button>
-                            <Button className="knapp" onClick={handleNei}>
+                            <Button variant="secondary" className={style.knapp} onClick={handleNei}>
                                 <Tekst id="svarknapp-nei" />
                             </Button>
                         </div>
                     </div>
+                ) : (
+                    <ThankYou />
                 )}
-                {state === 'ja' && <AlternativJa state={state} settBesvart={() => setState('besvart')} />}
-                {}
-                {state === 'nei' && <AlternativNei state={state} settBesvart={() => setState('besvart')} />}
-                {state === 'besvart' && <ThankYou />}
             </div>
         </>
     );
