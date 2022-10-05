@@ -4,7 +4,7 @@ import { BodyLong, BodyShort, Heading, Modal, Panel } from '@navikt/ds-react';
 import { AppState } from 'store/reducers';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import './TilgjengelighetserklaeringModal.less';
-import { AnalyticsCategory } from 'utils/analytics';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 
 interface Props {
     isOpen: boolean;

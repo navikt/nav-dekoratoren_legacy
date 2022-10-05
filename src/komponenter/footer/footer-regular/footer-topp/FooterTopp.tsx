@@ -7,6 +7,7 @@ import { AppState } from 'store/reducers';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import FooterLenker from 'komponenter/footer/common/Lenker';
+import { TilgjengelighetserklaeringLenke } from 'komponenter/footer/common/tilgjengelighetserklaering-lenke/TilgjengelighetserklaeringLenke';
 import { DelSkjermLenke } from 'komponenter/footer/common/del-skjerm-lenke/DelSkjermLenke';
 import FooterToppKolonner from './FooterToppKolonner';
 import style from './FooterTopp.module.scss';
@@ -57,6 +58,7 @@ const FooterTopp = () => {
                         <FooterToppKolonner firstNode={twoNodesInMiddle ? 3 : 2} numberOfNodes={1} />
                         <ul>
                             <FooterLenker node={personvernNode} />
+                            <TilgjengelighetserklaeringLenke />
                             {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
                         </ul>
                     </div>

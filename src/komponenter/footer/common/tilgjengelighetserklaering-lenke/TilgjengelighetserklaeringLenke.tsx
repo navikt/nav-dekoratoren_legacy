@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BodyShort, Link } from '@navikt/ds-react';
 import TilgjengelighetserklaeringModal from '../tilgjengelighetserklaering-modal/TilgjengelighetserklaeringModal';
-import { AnalyticsCategory, analyticsEvent } from 'utils/analytics';
+import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 
 export const TilgjengelighetserklaeringLenke = () => {
     const [isOpen, setIsOpen] = useState(false);
