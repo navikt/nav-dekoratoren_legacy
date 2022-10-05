@@ -107,7 +107,6 @@
         "@testing-library/jest-dom": "^5.16.4",
         "@testing-library/react": "^13.1.1",
         "@types/amplitude-js": "^7.0.0",
-        "@types/classnames": "^2.2.11",
         "@types/compression": "^1.7.0",
         "@types/express": "^4.17.10",
         "@types/jest": "^26.0.19",
