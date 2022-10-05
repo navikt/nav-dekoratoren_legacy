@@ -33,7 +33,7 @@
         "@navikt/ds-tokens": "0.9.8",
         "@navikt/fnrvalidator": "1.1.4",
         "@navikt/nav-chatbot": "2.7.4",
-        "@navikt/nav-dekoratoren-moduler": "1.6.14",
+        "@navikt/nav-dekoratoren-moduler": "1.7.0",
         "@promster/express": "5.0.1",
         "amplitude-js": "7.4.1",
         "bowser": "2.11.0",
