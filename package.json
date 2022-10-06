@@ -31,7 +31,6 @@
         "@navikt/ds-icons": "^0.8.20",
         "@navikt/ds-react": "^0.19.27",
         "@navikt/ds-tokens": "^0.9.8",
-        "@navikt/fnrvalidator": "^1.1.4",
         "@navikt/nav-chatbot": "^2.7.4",
         "@navikt/nav-dekoratoren-moduler": "1.7.0",
         "@promster/express": "^5.0.1",
