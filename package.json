@@ -41,7 +41,7 @@
         "console-stamp": "^0.2.9",
         "core-js": "3.8.2",
         "css-minimizer-webpack-plugin": "^1.2.0",
-        "dayjs": "^1.10.6",
+        "dayjs": "1.11.5",
         "detect-browser": "^5.2.0",
         "dotenv": "^8.2.0",
         "downshift": "^6.0.14",
