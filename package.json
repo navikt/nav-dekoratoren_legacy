@@ -27,7 +27,7 @@
         "url": "https://github.com/navikt/nav-dekoratoren/issues"
     },
     "dependencies": {
-        "@navikt/ds-css": "^0.18.28",
+        "@navikt/ds-css": "^0.18.29",
         "@navikt/ds-icons": "^0.8.20",
         "@navikt/ds-react": "^0.19.27",
         "@navikt/ds-tokens": "^0.9.8",
