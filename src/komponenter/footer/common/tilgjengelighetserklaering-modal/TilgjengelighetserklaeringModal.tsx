@@ -1,7 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { BodyLong, BodyShort, Heading, Modal, Panel } from '@navikt/ds-react';
-import { AppState } from 'store/reducers';
+import { BodyLong, Heading, Modal, Panel } from '@navikt/ds-react';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import './TilgjengelighetserklaeringModal.less';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
@@ -11,16 +9,7 @@ interface Props {
     onClose: () => void;
 }
 
-const stateSelector = (state: AppState) => ({
-    environment: state.environment,
-});
-
 const TilgjengelighetserklaeringsModal = (props: Props) => {
-    const { environment } = useSelector(stateSelector);
-    const { PARAMS } = environment;
-
-    console.log(PARAMS); //TODO fjerne
-
     return (
         <Modal
             open={props.isOpen}
@@ -50,27 +39,9 @@ const TilgjengelighetserklaeringsModal = (props: Props) => {
                         Tilgjengelighetserklæringer:
                     </Heading>
                     <BodyLong spacing>
-                        {(() => {
-                            if (PARAMS.ACCESSIBILITY_DECLARATION_URL) {
-                                return (
-                                    <BodyShort spacing>
-                                        <LenkeMedSporing
-                                            analyticsEventArgs={{
-                                                category: AnalyticsCategory.Footer,
-                                                action: 'TODO: endre action',
-                                            }}
-                                            href={PARAMS.ACCESSIBILITY_DECLARATION_URL}
-                                        >
-                                            Tilgjengelighetserklæring for den siden du er på nå
-                                            {PARAMS.APP_DISPLAY_NAME ? ` (${PARAMS.APP_DISPLAY_NAME})` : ''}
-                                        </LenkeMedSporing>
-                                    </BodyShort>
-                                );
-                            }
-                        })()}
                         <LenkeMedSporing
                             analyticsEventArgs={{ category: AnalyticsCategory.Footer, action: 'TODO: endre action' }}
-                            href="TODO: legg inn riktig lenke"
+                            href="https://uustatus.no/nn"
                         >
                             Generell tilgjengelighetserklæring for hele nav.no
                         </LenkeMedSporing>
