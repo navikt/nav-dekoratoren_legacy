@@ -26,8 +26,8 @@ export const TilgjengelighetserklaeringLenke = () => {
         <>
             <li>
                 <BodyShort>
-                    <Link href="#!" onClick={openModal} role="button">
-                        <span>Tilgjengelighetserklæring</span>
+                    <Link href="#" className="globalLenkeFooter" onClick={openModal} role="button">
+                        <span>Tilgjengelighet</span>
                     </Link>
                 </BodyShort>
             </li>

@@ -25,13 +25,14 @@ const TilgjengelighetserklaeringsModal = (props: Props) => {
         <Modal
             open={props.isOpen}
             className={'decorator-wrapper tilgjengelighetserklaering__modal'}
-            aria-label={'Tilgjengelighetserklæring'}
+            aria-label={'Tilgjengelighet'}
             onClose={props.onClose}
+            style={{ overlay: { backgroundColor: 'rgba(50, 65, 79, 0.8)' } }}
         >
             <Modal.Content>
                 <Panel>
                     <Heading spacing size="medium" level="2">
-                        Universell utforming
+                        Tilgjengelighet
                     </Heading>
                     <BodyLong spacing>
                         Nav.no har mange målgrupper og brukere som skal ha like muligheter til tjenester og informasjon
