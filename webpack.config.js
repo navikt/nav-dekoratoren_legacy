@@ -23,24 +23,26 @@ const prefixExclusions = [
     '.decorator-wrapper',
 ];
 
-const postCssLoader = {
-    loader: 'postcss-loader',
-    options: {
-        postcssOptions: {
-            ident: 'postcss',
-            plugins: [
-                modifySelectors({
-                    enabled: true,
-                    replace: [{ match: ':root', with: '.decorator-wrapper' }],
-                }),
-                prefixer({
-                    prefix: '.decorator-wrapper',
-                    exclude: prefixExclusions,
-                }),
-                autoprefixer({}),
-            ],
+const postCssLoader = (prefix = '.decorator-wrapper') => {
+    return {
+        loader: 'postcss-loader',
+        options: {
+            postcssOptions: {
+                ident: 'postcss',
+                plugins: [
+                    modifySelectors({
+                        enabled: true,
+                        replace: [{ match: ':root', with: '.decorator-wrapper' }],
+                    }),
+                    prefixer({
+                        prefix: prefix,
+                        exclude: prefixExclusions,
+                    }),
+                    autoprefixer({}),
+                ],
+            },
         },
-    },
+    };
 };
 
 const commonConfig = {
@@ -104,12 +106,12 @@ const commonConfig = {
             },
             {
                 test: /\.(less|css)$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', postCssLoader, 'less-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', postCssLoader(), 'less-loader'],
             },
             {
                 test: /\.scss$/,
                 exclude: /\.module\.scss$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', postCssLoader, 'sass-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', postCssLoader(), 'sass-loader'],
             },
             {
                 test: /\.module\.scss$/,
@@ -123,25 +125,7 @@ const commonConfig = {
                             },
                         },
                     },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                ident: 'postcss',
-                                plugins: [
-                                    modifySelectors({
-                                        enabled: true,
-                                        replace: [{ match: ':root', with: '.decorator-wrapper' }],
-                                    }),
-                                    prefixer({
-                                        prefix: ':global(.decorator-wrapper)',
-                                        exclude: prefixExclusions,
-                                    }),
-                                    autoprefixer({}),
-                                ],
-                            },
-                        },
-                    },
+                    postCssLoader(':global(.decorator-wrapper)'),
                     'sass-loader',
                 ],
             },
