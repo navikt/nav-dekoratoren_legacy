@@ -21,7 +21,7 @@ env:
   - name: API_INNLOGGINGSLINJE_URL
     value: https://innloggingsstatus.dev.nav.no/person/innloggingsstatus
   - name: API_UNLEASH_PROXY_URL
-    value: https://person.dev.nav.no/person/pb-unleash-proxy
+    value: https://innloggingsstatus.dev.nav.no/person/innloggingsstatus
   - name: MINSIDE_ARBEIDSGIVER_URL
     value: https://min-side-arbeidsgiver.dev.nav.no/min-side-arbeidsgiver/
   - name: MIN_SIDE_URL
