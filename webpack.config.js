@@ -123,6 +123,25 @@ const commonConfig = {
                             },
                         },
                     },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                ident: 'postcss',
+                                plugins: [
+                                    modifySelectors({
+                                        enabled: true,
+                                        replace: [{ match: ':root', with: '.decorator-wrapper' }],
+                                    }),
+                                    prefixer({
+                                        prefix: ':global(.decorator-wrapper)',
+                                        exclude: prefixExclusions,
+                                    }),
+                                    autoprefixer({}),
+                                ],
+                            },
+                        },
+                    },
                     'sass-loader',
                 ],
             },
