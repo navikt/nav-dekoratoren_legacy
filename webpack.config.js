@@ -8,6 +8,41 @@ const autoprefixer = require('autoprefixer');
 const nodeExternals = require('webpack-node-externals');
 const modifySelectors = require('modify-selectors');
 
+const prefixExclusions = [
+    /\b(\w*(M|m)odal\w*)\b/,
+    'body',
+    'body.no-scroll-mobil',
+    '.siteheader',
+    '.sitefooter',
+    /\b(\w*lukk-container\w*)\b/,
+    /\b(\w*close\w*)\b/,
+    /\b(\w*decorator-dummy-app\w*)\b/,
+    '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
+    '#nav-chatbot',
+    ':root',
+    '.decorator-wrapper',
+];
+
+const postCssLoader = {
+    loader: 'postcss-loader',
+    options: {
+        postcssOptions: {
+            ident: 'postcss',
+            plugins: [
+                modifySelectors({
+                    enabled: true,
+                    replace: [{ match: ':root', with: '.decorator-wrapper' }],
+                }),
+                prefixer({
+                    prefix: '.decorator-wrapper',
+                    exclude: prefixExclusions,
+                }),
+                autoprefixer({}),
+            ],
+        },
+    },
+};
+
 const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
     devtool: 'source-map',
@@ -70,7 +105,7 @@ const commonConfig = {
             {
                 test: /\.scss$/,
                 exclude: /\.module\.scss$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', postCssLoader, 'sass-loader'],
             },
             {
                 test: /\.module\.scss$/,
@@ -89,43 +124,7 @@ const commonConfig = {
             },
             {
                 test: /\.(less|css)$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    { loader: 'css-loader', options: {} },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                ident: 'postcss',
-                                plugins: [
-                                    modifySelectors({
-                                        enabled: true,
-                                        replace: [{ match: ':root', with: '.decorator-wrapper' }],
-                                    }),
-                                    prefixer({
-                                        prefix: '.decorator-wrapper',
-                                        exclude: [
-                                            /\b(\w*(M|m)odal\w*)\b/,
-                                            'body',
-                                            'body.no-scroll-mobil',
-                                            '.siteheader',
-                                            '.sitefooter',
-                                            /\b(\w*lukk-container\w*)\b/,
-                                            /\b(\w*close\w*)\b/,
-                                            /\b(\w*decorator-dummy-app\w*)\b/,
-                                            '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
-                                            '#nav-chatbot',
-                                            ':root',
-                                            '.decorator-wrapper',
-                                        ],
-                                    }),
-                                    autoprefixer({}),
-                                ],
-                            },
-                        },
-                    },
-                    { loader: 'less-loader', options: {} },
-                ],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', postCssLoader, 'less-loader'],
             },
         ],
     },
