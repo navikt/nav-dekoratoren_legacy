@@ -103,6 +103,10 @@ const commonConfig = {
                 },
             },
             {
+                test: /\.(less|css)$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', postCssLoader, 'less-loader'],
+            },
+            {
                 test: /\.scss$/,
                 exclude: /\.module\.scss$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', postCssLoader, 'sass-loader'],
@@ -121,10 +125,6 @@ const commonConfig = {
                     },
                     'sass-loader',
                 ],
-            },
-            {
-                test: /\.(less|css)$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', postCssLoader, 'less-loader'],
             },
         ],
     },
