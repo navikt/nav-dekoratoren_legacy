@@ -105,7 +105,12 @@ const commonConfig = {
                                     }),
                                     prefixer({
                                         prefix: '.decorator-wrapper',
-                                        exclude: ['.decorator-wrapper'],
+                                        exclude: [
+                                            '.decorator-wrapper',
+                                            /^\.navds-modal(:|$)/,
+                                            /^\.navds-modal__overlay(:|$)/,
+                                            /\.ReactModal/,
+                                        ],
                                     }),
                                     autoprefixer({}),
                                 ],
@@ -129,15 +134,11 @@ const commonConfig = {
                                     prefixer({
                                         prefix: '.decorator-wrapper',
                                         exclude: [
-                                            /\b(\w*(M|m)odal\w*)\b/,
                                             'body',
                                             'body.no-scroll-mobil',
                                             '.siteheader',
                                             '.sitefooter',
-                                            /\b(\w*lukk-container\w*)\b/,
-                                            /\b(\w*close\w*)\b/,
                                             /\b(\w*decorator-dummy-app\w*)\b/,
-                                            '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
                                             '#nav-chatbot',
                                             ':root',
                                             '.decorator-wrapper',
