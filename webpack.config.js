@@ -100,14 +100,17 @@ const commonConfig = {
                                 plugins: [
                                     modifySelectors({
                                         enabled: true,
-                                        replace: [{ match: ':root', with: '.decorator-wrapper' }],
+                                        replace: [
+                                            { match: /^:root$/, with: '.decorator-wrapper' },
+                                            { match: /^body$/, with: '.decorator-wrapper' },
+                                        ],
                                     }),
                                     prefixer({
                                         prefix: '.decorator-wrapper',
                                         exclude: [
                                             /\b(\w*(M|m)odal\w*)\b/,
                                             'body',
-                                            'body.no-scroll-mobil',
+                                            '.body-no-scroll-mobil',
                                             '.siteheader',
                                             '.sitefooter',
                                             /\b(\w*lukk-container\w*)\b/,
