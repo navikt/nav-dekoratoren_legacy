@@ -108,7 +108,7 @@ const commonConfig = {
                                         exclude: [
                                             '.decorator-wrapper',
                                             /^\.navds-modal(:|--|$)/,
-                                            /^\.navds-modal__overlay(:|--|$)/,
+                                            /^\.navds-modal__overlay/,
                                             /^\.ReactModal/,
                                         ],
                                     }),
