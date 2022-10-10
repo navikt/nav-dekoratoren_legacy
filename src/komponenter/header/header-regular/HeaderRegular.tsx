@@ -24,8 +24,8 @@ export const HeaderRegular = () => {
     // Ensure the page is not scrollable when the menu is open on mobile
     useEffect(() => {
         mobilMenyIsOpen
-            ? document.body.classList.add('body-no-scroll-mobil')
-            : document.body.classList.remove('body-no-scroll-mobil');
+            ? document.body.classList.add('no-scroll-mobil')
+            : document.body.classList.remove('no-scroll-mobil');
     }, [mobilMenyIsOpen]);
 
     // Ensure the user can not tab-navigate behind an open menu (closes the menu on header focus-loss)

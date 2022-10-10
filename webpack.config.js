@@ -88,7 +88,8 @@ const commonConfig = {
                 ],
             },
             {
-                test: /\.(less|css)$/,
+                test: /\.css$/,
+                include: /@navikt(\\|\/)ds-css/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     { loader: 'css-loader', options: {} },
@@ -100,17 +101,37 @@ const commonConfig = {
                                 plugins: [
                                     modifySelectors({
                                         enabled: true,
-                                        replace: [
-                                            { match: /^:root$/, with: '.decorator-wrapper' },
-                                            { match: /^body$/, with: '.decorator-wrapper' },
-                                        ],
+                                        replace: [{ match: /^(:root|html|body)$/, with: '.decorator-wrapper' }],
                                     }),
+                                    prefixer({
+                                        prefix: '.decorator-wrapper',
+                                        exclude: ['.decorator-wrapper'],
+                                    }),
+                                    autoprefixer({}),
+                                ],
+                            },
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.(less|css)$/,
+                exclude: /@navikt(\\|\/)ds-css/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    { loader: 'css-loader', options: {} },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                ident: 'postcss',
+                                plugins: [
                                     prefixer({
                                         prefix: '.decorator-wrapper',
                                         exclude: [
                                             /\b(\w*(M|m)odal\w*)\b/,
                                             'body',
-                                            '.body-no-scroll-mobil',
+                                            'body.no-scroll-mobil',
                                             '.siteheader',
                                             '.sitefooter',
                                             /\b(\w*lukk-container\w*)\b/,

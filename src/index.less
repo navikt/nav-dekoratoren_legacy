@@ -1,6 +1,11 @@
 @import './styling-variabler.less';
 
-.body-no-scroll-mobil {
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+body.no-scroll-mobil {
     @media @screen-mobile {
         overflow-y: hidden;
         overflow-x: hidden;
