@@ -113,7 +113,7 @@ export const template = (req: Request) => {
             }
             </style>
         </head>
-        <body style='margin:0'>
+        <body>
             <!-- Styling fetched by apps -->
             <div id='styles'>
                 <link href='${fileCss}' rel='stylesheet'/>
