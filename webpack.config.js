@@ -107,9 +107,9 @@ const commonConfig = {
                                         prefix: '.decorator-wrapper',
                                         exclude: [
                                             '.decorator-wrapper',
-                                            /^\.navds-modal(:|$)/,
-                                            /^\.navds-modal__overlay(:|$)/,
-                                            /\.ReactModal/,
+                                            /^\.navds-modal(:|--|$)/,
+                                            /^\.navds-modal__overlay(:|--|$)/,
+                                            /^\.ReactModal/,
                                         ],
                                     }),
                                     autoprefixer({}),
