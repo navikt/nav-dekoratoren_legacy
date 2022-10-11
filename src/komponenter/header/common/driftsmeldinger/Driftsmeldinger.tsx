@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { DriftsmeldingerState } from '../../../../store/reducers/driftsmeldinger-duck';
 import { verifyWindowObj } from '../../../../utils/Environment';
-import './Driftsmeldinger.less';
+import 'komponenter/header/common/driftsmeldinger/Driftsmeldinger.scss';
 import { BodyLong } from '@navikt/ds-react';
 
 const removeTrailingChars = (url?: string) => url?.replace(/(\/|\$|(\/\$))$/, '');
