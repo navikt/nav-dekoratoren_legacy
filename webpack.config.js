@@ -9,41 +9,22 @@ const nodeExternals = require('webpack-node-externals');
 const modifySelectors = require('modify-selectors');
 
 const prefixExclusions = [
-    /\b(\w*(M|m)odal\w*)\b/,
     'body',
     'body.no-scroll-mobil',
     '.siteheader',
     '.sitefooter',
-    /\b(\w*lukk-container\w*)\b/,
-    /\b(\w*close\w*)\b/,
     /\b(\w*decorator-dummy-app\w*)\b/,
-    '.ReactModal__Overlay.ReactModal__Overlay--after-open.modal__overlay',
     '#nav-chatbot',
     ':root',
     '.decorator-wrapper',
 ];
 
-const postCssLoader = (prefix = '.decorator-wrapper') => {
-    return {
-        loader: 'postcss-loader',
-        options: {
-            postcssOptions: {
-                ident: 'postcss',
-                plugins: [
-                    modifySelectors({
-                        enabled: true,
-                        replace: [{ match: ':root', with: '.decorator-wrapper' }],
-                    }),
-                    prefixer({
-                        prefix: prefix,
-                        exclude: prefixExclusions,
-                    }),
-                    autoprefixer({}),
-                ],
-            },
-        },
-    };
-};
+const prefixExclusionsDsCss = [
+    '.decorator-wrapper',
+    /^\.navds-modal(:|--|$)/,
+    /^\.navds-modal__overlay/,
+    /^\.ReactModal/,
+];
 
 const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
@@ -107,7 +88,30 @@ const commonConfig = {
             {
                 test: /\.scss$/,
                 exclude: /\.module\.scss$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', postCssLoader(), 'sass-loader'],
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                ident: 'postcss',
+                                plugins: [
+                                    modifySelectors({
+                                        enabled: true,
+                                        replace: [{ match: ':root', with: '.decorator-wrapper' }],
+                                    }),
+                                    prefixer({
+                                        prefix: '.decorator-wrapper',
+                                        exclude: prefixExclusions,
+                                    }),
+                                    autoprefixer({}),
+                                ],
+                            },
+                        },
+                    },
+                    'sass-loader',
+                ],
             },
             {
                 test: /\.module\.scss$/,
@@ -121,7 +125,25 @@ const commonConfig = {
                             },
                         },
                     },
-                    postCssLoader(':global(.decorator-wrapper)'),
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                ident: 'postcss',
+                                plugins: [
+                                    modifySelectors({
+                                        enabled: true,
+                                        replace: [{ match: ':root', with: '.decorator-wrapper' }],
+                                    }),
+                                    prefixer({
+                                        prefix: ':global(.decorator-wrapper)',
+                                        exclude: prefixExclusions,
+                                    }),
+                                    autoprefixer({}),
+                                ],
+                            },
+                        },
+                    },
                     'sass-loader',
                 ],
             },
@@ -143,12 +165,7 @@ const commonConfig = {
                                     }),
                                     prefixer({
                                         prefix: '.decorator-wrapper',
-                                        exclude: [
-                                            '.decorator-wrapper',
-                                            /^\.navds-modal(:|--|$)/,
-                                            /^\.navds-modal__overlay/,
-                                            /^\.ReactModal/,
-                                        ],
+                                        exclude: prefixExclusionsDsCss,
                                     }),
                                     autoprefixer({}),
                                 ],
@@ -171,16 +188,7 @@ const commonConfig = {
                                 plugins: [
                                     prefixer({
                                         prefix: '.decorator-wrapper',
-                                        exclude: [
-                                            'body',
-                                            'body.no-scroll-mobil',
-                                            '.siteheader',
-                                            '.sitefooter',
-                                            /\b(\w*decorator-dummy-app\w*)\b/,
-                                            '#nav-chatbot',
-                                            ':root',
-                                            '.decorator-wrapper',
-                                        ],
+                                        exclude: prefixExclusions,
                                     }),
                                     autoprefixer({}),
                                 ],
