@@ -105,11 +105,32 @@ const commonConfig = {
                 },
             },
             {
+                test: /\.scss$/,
+                exclude: /\.module\.scss$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', postCssLoader(), 'sass-loader'],
+            },
+            {
+                test: /\.module\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                localIdentName: '[local]__[hash:base64:5]',
+                            },
+                        },
+                    },
+                    postCssLoader(':global(.decorator-wrapper)'),
+                    'sass-loader',
+                ],
+            },
+            {
                 test: /\.css$/,
                 include: /@navikt(\\|\/)ds-css/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    { loader: 'css-loader', options: {} },
+                    'css-loader',
                     {
                         loader: 'postcss-loader',
                         options: {
@@ -141,7 +162,7 @@ const commonConfig = {
                 exclude: /@navikt(\\|\/)ds-css/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    { loader: 'css-loader', options: {} },
+                    'css-loader',
                     {
                         loader: 'postcss-loader',
                         options: {
@@ -166,28 +187,7 @@ const commonConfig = {
                             },
                         },
                     },
-                    { loader: 'less-loader', options: {} },
-                ],
-            },
-            {
-                test: /\.scss$/,
-                exclude: /\.module\.scss$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', postCssLoader(), 'sass-loader'],
-            },
-            {
-                test: /\.module\.scss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: {
-                                localIdentName: '[local]__[hash:base64:5]',
-                            },
-                        },
-                    },
-                    postCssLoader(':global(.decorator-wrapper)'),
-                    'sass-loader',
+                    'less-loader',
                 ],
             },
         ],
