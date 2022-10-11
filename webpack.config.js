@@ -105,8 +105,69 @@ const commonConfig = {
                 },
             },
             {
+                test: /\.css$/,
+                include: /@navikt(\\|\/)ds-css/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    { loader: 'css-loader', options: {} },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                ident: 'postcss',
+                                plugins: [
+                                    modifySelectors({
+                                        enabled: true,
+                                        replace: [{ match: /^(:root|html|body)$/, with: '.decorator-wrapper' }],
+                                    }),
+                                    prefixer({
+                                        prefix: '.decorator-wrapper',
+                                        exclude: [
+                                            '.decorator-wrapper',
+                                            /^\.navds-modal(:|--|$)/,
+                                            /^\.navds-modal__overlay/,
+                                            /^\.ReactModal/,
+                                        ],
+                                    }),
+                                    autoprefixer({}),
+                                ],
+                            },
+                        },
+                    },
+                ],
+            },
+            {
                 test: /\.(less|css)$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', postCssLoader(), 'less-loader'],
+                exclude: /@navikt(\\|\/)ds-css/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    { loader: 'css-loader', options: {} },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                ident: 'postcss',
+                                plugins: [
+                                    prefixer({
+                                        prefix: '.decorator-wrapper',
+                                        exclude: [
+                                            'body',
+                                            'body.no-scroll-mobil',
+                                            '.siteheader',
+                                            '.sitefooter',
+                                            /\b(\w*decorator-dummy-app\w*)\b/,
+                                            '#nav-chatbot',
+                                            ':root',
+                                            '.decorator-wrapper',
+                                        ],
+                                    }),
+                                    autoprefixer({}),
+                                ],
+                            },
+                        },
+                    },
+                    { loader: 'less-loader', options: {} },
+                ],
             },
             {
                 test: /\.scss$/,
