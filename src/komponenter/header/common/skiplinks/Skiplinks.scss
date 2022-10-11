@@ -1,4 +1,4 @@
-@import (reference) '../../../../styling-variabler.less';
+@use 'src/styling-variabler' as sv;
 
 .site-skiplinks {
     ul {
@@ -31,18 +31,18 @@
             outline: none;
             color: white;
             text-decoration: none;
-            background-color: @navds-semantic-color-focus;
-            box-shadow: 0 0 0 2px @navds-semantic-color-focus;
+            background-color: var(--navds-semantic-color-focus);
+            box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
         }
 
         &__mobil {
-            @media @screen-desktop {
+            @media #{sv.$screen-desktop} {
                 display: none;
             }
         }
 
         &__desktop {
-            @media @screen-mobile {
+            @media #{sv.$screen-mobile} {
                 display: none;
             }
         }
