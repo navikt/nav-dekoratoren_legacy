@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { DriftsmeldingerState } from '../../../../store/reducers/driftsmeldinger-duck';
 import { verifyWindowObj } from '../../../../utils/Environment';
-import 'komponenter/header/common/driftsmeldinger/Driftsmeldinger.module.scss';
+import style from 'komponenter/header/common/driftsmeldinger/Driftsmeldinger.module.scss';
 import { BodyLong } from '@navikt/ds-react';
 
 const removeTrailingChars = (url?: string) => url?.replace(/(\/|\$|(\/\$))$/, '');
@@ -40,19 +40,19 @@ export const Driftsmeldinger = () => {
     const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
 
     return currentDriftsmeldinger.length > 0 ? (
-        <article className="driftsmeldinger">
+        <article className={style.driftsmeldinger}>
             {currentDriftsmeldinger.map((melding) => (
                 <LenkeMedSporing
                     key={melding.heading}
                     href={`${XP_BASE_URL}${melding.url}`}
-                    classNameOverride="message"
+                    classNameOverride={style.message}
                     analyticsEventArgs={{
                         category: AnalyticsCategory.Header,
                         action: 'driftsmeldinger',
                     }}
                 >
-                    <span className="message-icon">{melding.type && <Icon type={melding.type} />}</span>
-                    <BodyLong className="message-text">{melding.heading}</BodyLong>
+                    <span className={style.messageIcon}>{melding.type && <Icon type={melding.type} />}</span>
+                    <BodyLong>{melding.heading}</BodyLong>
                 </LenkeMedSporing>
             ))}
         </article>

@@ -5,6 +5,7 @@
     display: flex;
     flex-wrap: wrap;
     padding: 0.5rem 0;
+    color: var(--navds-global-color-white);
 
     @media #{sv.$screen-mobile} {
         justify-content: start;
@@ -13,38 +14,40 @@
     @media #{sv.$screen-desktop} {
         justify-content: center;
     }
-
-    .message {
-        color: var(--navds-global-color-white);
-        padding: 0.5rem;
-        display: inline-flex;
-        align-items: center;
-        text-decoration: underline;
-        border-radius: 6px;
-
-        @media #{sv.$screen-desktop} {
-            margin: 0 1.5rem;
-        }
-
-        @media #{sv.$screen-mobile} {
-            margin: 0 0.5rem;
-        }
-
-        &:focus,
-        &:hover {
-            text-decoration: none;
-        }
-
-        &:focus {
-            box-shadow: 0 0 0 3px var(--navds-global-color-white);
-            outline: none;
-        }
-
-        .message-icon {
-            display: flex;
-            align-items: center;
-            margin-right: 0.5rem;
-            color: var(--navds-global-color-white);
-        }
+    a {
+        color: inherit;
     }
+}
+
+.message {
+    color: var(--navds-global-color-white);
+    padding: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: underline;
+    border-radius: 6px;
+
+    @media #{sv.$screen-desktop} {
+        margin: 0 1.5rem;
+    }
+
+    @media #{sv.$screen-mobile} {
+        margin: 0 0.5rem;
+    }
+
+    &:focus,
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 3px var(--navds-global-color-white);
+        outline: none;
+    }
+}
+.messageIcon {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+    color: var(--navds-global-color-white);
 }
