@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
-import { Next } from '@navikt/ds-icons';
-import './ArkiverbarBeskjed.less';
 import ArkiverKnapp from './ArkiverKnapp';
+import './ArkiverbarBeskjed.less';
+import Tekst from 'tekster/finn-tekst';
 
-const ArkiverbarBeskjed = () => {
+type Props = {
+    tekst: string;
+    dato: string;
+    isMasked: boolean;
+};
+
+const ArkiverbarBeskjed = ({ tekst, dato, isMasked }: Props) => {
     const [isHover, setIsHover] = useState(false);
-    const dato = '22.02.2022';
-    const tekst = 'Test av arkiverbar-beskjed';
 
+    //TODO: Legge inn stepup-tekst i alle språk.
     return (
         <div className={isHover ? 'arkiverbar-beskjed-hover' : 'arkiverbar-beskjed'}>
             <div className="arkiverbar-beskjed__ikon"></div>
             <div className="arkiverbar-beskjed__content-wrapper">
-                <div className="arkiverbar-beskjed__tittel">{tekst}</div>
+                <div className="arkiverbar-beskjed__tittel">
+                    {isMasked ? <Tekst id="beskjed.maskert.tekst" /> : tekst}
+                </div>
                 <div className="arkiverbar-beskjed__dato-og-knapp">
                     <div className="arkiverbar-beskjed__dato">{dato}</div>
                     <ArkiverKnapp setIsHover={setIsHover} />

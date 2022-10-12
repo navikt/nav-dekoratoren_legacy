@@ -14,6 +14,7 @@ const AlleVarslerLenke = (props: Props) => {
     return (
         <div className="dekorator-vis-alle-lenke">
             <LenkeMedSporing
+                classNameOverride="vis-alle-lenke"
                 href={props.varselInnboksUrl}
                 id={
                     props.rowIndex !== undefined

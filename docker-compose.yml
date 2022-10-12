@@ -13,7 +13,6 @@ services:
             PORT: '9000'
             CALLBACK_URL: 'http://localhost:5000/callback'
             ISSUER: 'https://localhost:9000'
-
     oidc-provider-gui:
         container_name: oidc-provider-gui
         networks:
@@ -28,23 +27,83 @@ services:
         environment:
             REDIRECT_URL: 'http://localhost:8088/dekoratoren'
             AUTO_REDIRECT_TO_FRONTEND: 'true'
-
     mocks:
         container_name: mocks
         networks:
             nav.docker-internal:
                 aliases:
                     - mocks.nav.docker-internal
-        image: 'navikt/pb-nav-mocked:latest'
+        image: 'ghcr.io/navikt/pb-nav-mocked/pb-nav-mocked:latest'
         ports:
             - '8095:8080'
         environment:
+            KAFKA_BROKERS: kafka.nav.docker-internal:9092
+            KAFKA_TRUSTSTORE_PATH: notUsedOnLocalhost
+            KAFKA_KEYSTORE_PATH: notUsedOnLocalhost
+            KAFKA_CREDSTORE_PASSWORD: password
+            KAFKA_SCHEMA_REGISTRY: http://schema-registry.nav.docker-internal:8081
+            KAFKA_SCHEMA_REGISTRY_USER: username
+            KAFKA_SCHEMA_REGISTRY_PASSWORD: password
             CORS_ALLOWED_ORIGINS: 'localhost:8088'
+            CORS_ALLOWED_SCHEMES: 'http'
             OIDC_ISSUER: 'https://localhost:9000'
             OIDC_ACCEPTED_AUDIENCE: 'stubOidcClient'
             OIDC_JWKS_URI: 'http://oidc-provider.nav.docker-internal:9000/certs'
         depends_on:
             - oidc-provider
-
+    zookeeper:
+        container_name: zookeeper
+        networks:
+            nav.docker-internal:
+                aliases:
+                - zookeeper.nav.docker-internal
+        image: "confluentinc/cp-zookeeper:6.2.0"
+        environment:
+            ZOOKEEPER_CLIENT_PORT: "2181"
+            ZOOKEEPER_TICK_TIME: "2000"
+    kafka:
+        container_name: kafka
+        networks:
+            nav.docker-internal:
+                aliases:
+                - kafka.nav.docker-internal
+        image: "confluentinc/cp-kafka:6.2.0"
+        ports:
+            - "9092:9092"
+            - "29092:29092"
+        depends_on:
+        - zookeeper
+        environment:
+            ADV_HOST: "kafka.nav.docker-internal"
+            KAFKA_ZOOKEEPER_CONNECT: "zookeeper.nav.docker-internal:2181"
+            KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+            KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: "0"
+            KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: "1"
+            KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: "1"
+            KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka.nav.docker-internal:9092,PLAINTEXT_HOST://localhost:29092"
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
+        healthcheck:
+            test: ["CMD-SHELL", "nc -z localhost 9092"]
+            interval: 20s
+            timeout: 5s
+            retries: 8
+    schema-registry:
+        container_name: schema-registry
+        networks:
+            nav.docker-internal:
+                aliases:
+                - schema-registry.nav.docker-internal
+        image: "confluentinc/cp-schema-registry:5.5.0"
+        ports:
+            - "8081:8081"
+        depends_on:
+            kafka:
+                condition: service_healthy
+            zookeeper:
+                condition: service_started
+        environment:
+            SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "PLAINTEXT://kafka.nav.docker-internal:9092"
+            SCHEMA_REGISTRY_HOST_NAME: "schema-registry.nav.docker-internal"
+            SCHEMA_REGISTRY_LISTENERS: "http://0.0.0.0:8081"
 networks:
     nav.docker-internal:

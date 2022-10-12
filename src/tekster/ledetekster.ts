@@ -320,4 +320,8 @@ export const ledetekster: { [key: string]: stringOrFunction } = {
     'how-can-we-help': 'Hva kan vi hjelpe deg med?',
     'how-can-we-help-en': 'What can we help you with?',
     'how-can-we-help-se': 'Hva kan vi hjelpe deg med?',
+
+    //Varselbjelle
+    'oppgave.maskert.tekst': 'Du har fått en oppgave, logg inn med høyere sikkerhetsnivå for å se oppgaven.',
+    'beskjed.maskert.tekst': 'Du har fått en melding, logg inn med høyere sikkerhetsnivå for å se meldingen.',
 };

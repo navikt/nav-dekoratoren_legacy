@@ -4,7 +4,7 @@ import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { NyesteVarslerData } from 'store/reducers/varselinnboks-duck';
+import { VarslerData, VarslerInnhold } from 'store/reducers/varselinnboks-duck';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import varselConfig from './config.json'; // Kopiert fra: https://github.com/navikt/varselinnboks/blob/master/src/main/resources/config.json
 import dayjs from 'dayjs';
@@ -17,10 +17,12 @@ import kalenderIkon from 'ikoner/varsler/calendar-3.svg';
 import chatIkon from 'ikoner/varsler/bubble-chat-2.svg';
 import dokumentIkon from 'ikoner/varsler/file-new-1.svg';
 import plasterIkon from 'ikoner/varsler/first-aid-plaster.svg';
-import { BodyShort, Detail } from '@navikt/ds-react';
+import { BodyShort, Detail, Heading } from '@navikt/ds-react';
 import Beskjed from '../varsel-typer/beskjed/Beskjed';
 import Oppgave from '../varsel-typer/oppgave/Oppgave';
 import ArkiverbarBeskjed from '../varsel-typer/arkiverbar-beskjed/ArkiverbarBeskjed';
+import isMasked from 'utils/isMasked';
+import { getLoginUrl } from 'utils/login';
 
 dayjs.extend(localizedFormat);
 dayjs.extend(isToday);
@@ -34,7 +36,7 @@ const ikoner: { [str: string]: string } = {
 };
 
 type Props = {
-    varsler: NyesteVarslerData[];
+    varsler: VarslerInnhold;
     rowIndex?: number;
 };
 
@@ -68,32 +70,64 @@ const formatDato = (datoString: string) => {
 
 export const VarselListe = ({ varsler, rowIndex }: Props) => {
     const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
+    const environment = useSelector((state: AppState) => state.environment);
+
+    const hasNoHref = (href: string) => href === undefined || href === null || href === '';
 
     return (
         <>
-            <h3>Oppgaver</h3>
+            <Heading level="3" size="small">
+                Oppgaver
+            </Heading>
             <ul>
-                <li className="dekorator-varsel-container">
-                    <Oppgave test={formatDato('2022-10-07T08:53:24.636Z')} />
-                </li>
-                <li className="dekorator-varsel-container">
-                    <Oppgave test={formatDato('2022-11-05T08:53:24.636Z')} />
-                </li>
-                <li className="dekorator-varsel-container">
-                    <Oppgave test={formatDato('2020-03-13T08:53:24.636Z')} />
-                </li>
+                {varsler &&
+                    varsler?.oppgaver?.map((o) => (
+                        <li key={o.eventId}>
+                            <Oppgave
+                                tekst={o.tekst}
+                                dato={formatDato(o.forstBehandlet)}
+                                href={isMasked(o.tekst) ? getLoginUrl(environment, arbeidsflate, '4') : o.link}
+                                isMasked={isMasked(o.tekst)}
+                            />
+                        </li>
+                    ))}
             </ul>
-            <h3>Beskjeder</h3>
+            <Heading level="3" size="small">
+                Beskjeder
+            </Heading>
             <ul>
-                <li className="dekorator-varsel-container">
-                    <Beskjed />
-                </li>
-                <li className="dekorator-varsel-container">
-                    <ArkiverbarBeskjed />
-                </li>
-                <li className="dekorator-varsel-container">
-                    <Beskjed />
-                </li>
+                {varsler &&
+                    varsler?.beskjed?.map((b) =>
+                        !hasNoHref(b.link) || isMasked(b.tekst) ? (
+                            <li key={b.eventId}>
+                                <Beskjed
+                                    tekst={b.tekst}
+                                    dato={formatDato(b.forstBehandlet)}
+                                    href={isMasked(b.tekst) ? getLoginUrl(environment, arbeidsflate, '4') : b.link}
+                                    isMasked={isMasked(b.tekst)}
+                                />
+                            </li>
+                        ) : (
+                            <li key={b.eventId}>
+                                <ArkiverbarBeskjed
+                                    tekst={b.tekst}
+                                    dato={formatDato(b.forstBehandlet)}
+                                    isMasked={isMasked(b.tekst)}
+                                />
+                            </li>
+                        )
+                    )}
+                {varsler &&
+                    varsler?.innboks?.map((i) => (
+                        <li key={i.eventId}>
+                            <Beskjed
+                                tekst={i.tekst}
+                                dato={formatDato(i.forstBehandlet)}
+                                href={isMasked(i.tekst) ? getLoginUrl(environment, arbeidsflate, '4') : i.link}
+                                isMasked={isMasked(i.tekst)}
+                            />
+                        </li>
+                    ))}
             </ul>
         </>
     );

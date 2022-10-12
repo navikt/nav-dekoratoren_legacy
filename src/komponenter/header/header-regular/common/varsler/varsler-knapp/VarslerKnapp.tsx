@@ -25,9 +25,6 @@ export const VarslerKnapp = () => {
     const { isOpen, varsler, appUrl, language } = useSelector(stateSelector);
 
     const toggleVarslerDropdown = () => {
-        if (!isOpen && varsler.totaltAntallUleste > 0 && varsler.nyesteVarsler.length > 0) {
-            settVarslerSomLest(appUrl, varsler.nyesteVarsler[0].id, dispatch);
-        }
         analyticsEvent({
             category: AnalyticsCategory.Header,
             action: `varsler-${isOpen ? 'close' : 'open'}`,
@@ -36,10 +33,8 @@ export const VarslerKnapp = () => {
     };
 
     const ariaLabel = () => {
-        if (varsler.nyesteVarsler.length > 5) {
-            return finnTekst('varsler-vis-5-siste', language);
-        } else if (varsler.nyesteVarsler.length > 0) {
-            return finnTekst('varsler-tittel', language) + `. Du har ${varsler.nyesteVarsler.length} varsler.`;
+        if (varsler.totaltAntallUleste > 0) {
+            return finnTekst('varsler-tittel', language) + `. Du har ${varsler.totaltAntallUleste} varsler.`;
         }
         return finnTekst('varsler-tittel', language) + '. ' + finnTekst('varsler-tom-liste', language);
     };

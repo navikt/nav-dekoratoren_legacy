@@ -14,27 +14,30 @@ export interface VarselinnboksState extends DataElement {
 }
 
 export interface VarslerData {
-    varsler: {
-        nyesteVarsler: NyesteVarslerData[];
-        totaltAntallUleste: number;
-    };
+    varsler: VarslerInnhold;
 }
 
-export interface NyesteVarslerData {
-    aktoerID: string;
-    url: string;
-    varseltekst: string;
-    varselId: string;
-    id: number;
-    meldingsType: string;
-    datoOpprettet: string;
-    datoLest: string;
+export interface VarslerInnhold {
+    oppgaver: Varsler[];
+    beskjed: Varsler[];
+    innboks: Varsler[];
+    totaltAntallUleste: number;
+}
+
+export interface Varsler {
+    forstBehandlet: string;
+    eventId: string;
+    tekst: string;
+    link: string;
+    sistOppdatert: string;
 }
 
 export const initialState: VarselinnboksState = {
     data: {
         varsler: {
-            nyesteVarsler: [],
+            oppgaver: [],
+            beskjed: [],
+            innboks: [],
             totaltAntallUleste: 0,
         },
     },

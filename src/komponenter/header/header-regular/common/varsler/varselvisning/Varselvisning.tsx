@@ -20,7 +20,7 @@ type Props = {
 export const Varselvisning = ({ setKbId }: Props) => {
     const { varsler, minSideUrl } = useSelector(stateSelector);
 
-    const varslerAntall = varsler.nyesteVarsler?.length;
+    const varslerAntall = varsler?.totaltAntallUleste;
 
     const cls = BEMHelper('varsler-visning');
 
@@ -29,12 +29,12 @@ export const Varselvisning = ({ setKbId }: Props) => {
             <Heading level="2" size="medium" className={cls.element('tittel')}>
                 <Tekst id={'varsler-tittel'} />
             </Heading>
-            {varslerAntall === 0 ? (
+            {varsler && varslerAntall === 0 ? (
                 <div className={cls.element('tom-liste')}>
                     <Tekst id={'varsler-tom-liste'} />
                 </div>
             ) : (
-                <VarselListe varsler={varsler.nyesteVarsler.slice(0, 5)} rowIndex={setKbId ? 0 : undefined} />
+                <VarselListe varsler={varsler} rowIndex={setKbId ? 0 : undefined} />
             )}
             <AlleVarslerLenke varselInnboksUrl={`${minSideUrl}varslinger`} rowIndex={setKbId ? 1 : undefined} />
         </div>
