@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { LenkeMedSporing } from '../../../common/lenke-med-sporing/LenkeMedSporing';
-import { Bilde } from '../../../common/bilde/Bilde';
-import HomeIcon from 'ikoner/home.svg';
-import { Next } from '@navikt/ds-icons';
+import { Next, Home } from '@navikt/ds-icons';
 import { postMessageToApp } from 'utils/messages';
 import { Locale } from 'store/reducers/language-duck';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
@@ -63,7 +61,7 @@ export const Brodsmulesti = (props: Props) => {
                             action: 'nav.no',
                         }}
                     >
-                        <Bilde asset={HomeIcon} className={style.icon} />
+                        <Home className={style.iconHome} />
                         <span>nav.no</span>
                         <Next className={style.iconNext} />
                     </LenkeMedSporing>

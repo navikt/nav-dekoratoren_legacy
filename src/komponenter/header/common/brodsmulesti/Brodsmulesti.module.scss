@@ -1,6 +1,6 @@
 @use 'src/styling-variabler.scss' as sv;
 
-.brodsmulesti {
+.brodsmulesti.brodsmulesti {
     display: flex;
 
     @media #{sv.$screen-mobile} {
@@ -26,6 +26,10 @@
             margin: 0.25rem 0.25rem 0.25rem 0;
         }
     }
+    svg {
+        stroke: var(--navds-global-color-gray-600);
+        fill: var(--navds-global-color-gray-600);
+    }
 }
 
 .link {
@@ -38,26 +42,29 @@
     text-transform: uppercase;
 }
 
-.icon {
-    margin-right: 0.75rem;
-    margin-top: -1px; // Visual imbalance fix
-    width: 1.5rem;
-}
-
 .iconViewAll {
     border: 0;
     display: inline-flex;
+}
+
+/* Må skrives om når gamle DS-pakker oppgraderes */
+:global(.decorator-wrapper .lenke) .iconHome {
+    margin-right: 0.75rem;
+    margin-top: 2px; // Visual imbalance fix
+    stroke-width: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* Må skrives om når gamle DS-pakker oppgraderes */
+:global(.decorator-wrapper .lenke:not(:focus)) .iconHome {
+    color: var(--navds-global-color-gray-600);
 }
 
 .iconNext {
     margin-top: 5px;
     margin-left: 0.5rem !important;
     margin-right: 0.5rem;
-
-    path {
-        stroke: var(--navds-global-color-gray-600);
-        fill: var(--navds-global-color-gray-600);
-    }
 }
 
 .iconEllipsis {
