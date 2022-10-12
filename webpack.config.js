@@ -97,10 +97,6 @@ const commonConfig = {
                             postcssOptions: {
                                 ident: 'postcss',
                                 plugins: [
-                                    modifySelectors({
-                                        enabled: true,
-                                        replace: [{ match: ':root', with: '.decorator-wrapper' }],
-                                    }),
                                     prefixer({
                                         prefix: '.decorator-wrapper',
                                         exclude: prefixExclusions,
@@ -131,10 +127,6 @@ const commonConfig = {
                             postcssOptions: {
                                 ident: 'postcss',
                                 plugins: [
-                                    modifySelectors({
-                                        enabled: true,
-                                        replace: [{ match: ':root', with: '.decorator-wrapper' }],
-                                    }),
                                     prefixer({
                                         prefix: ':global(.decorator-wrapper)',
                                         exclude: prefixExclusions,
