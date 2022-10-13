@@ -21,7 +21,7 @@ import { MobilMenypunkt } from './menypunkt/MobilMenypunkt';
 import { UnstyledList } from '../utils/UnstyledList';
 import { MobilUndermenySeksjon } from '../undermeny/MobilUndermenySeksjon';
 
-import './MobilHovedmenyInnholdPrivat.less';
+import 'komponenter/header/header-regular/mobil/meny/innhold/hovedmeny/MobilHovedmenyInnholdPrivat.scss';
 
 const stateSelector = (state: AppState) => ({
     dittNavUrl: state.environment.MIN_SIDE_URL,
