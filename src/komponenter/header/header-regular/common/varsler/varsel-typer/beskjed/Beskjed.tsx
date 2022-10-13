@@ -19,7 +19,7 @@ const Beskjed = ({ eventId, tekst, dato, href, isMasked }: Props) => {
     const dispatch = useDispatch();
 
     const handleOnClick = () => {
-        //fjernLestVarsel(eventId)(dispatch)
+        dispatch(fjernLestVarsel(eventId))
     };
 
     return (

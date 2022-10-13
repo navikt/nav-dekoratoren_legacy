@@ -73,8 +73,6 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
     const environment = useSelector((state: AppState) => state.environment);
 
     const hasNoHref = (href: string) => href === undefined || href === null || href === '';
-    console.log(varsler.beskjed);
-
     return (
         <>
             <Heading level="3" size="small">

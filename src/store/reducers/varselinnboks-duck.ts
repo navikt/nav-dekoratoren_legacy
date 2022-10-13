@@ -49,7 +49,6 @@ export const initialState: VarselinnboksState = {
 export default function reducer(
     state: VarselinnboksState = initialState,
     action: Handling,
-    eventId?: string
 ): VarselinnboksState {
     switch (action.type) {
         case ActionType.HENT_VARSLER_OK: {
@@ -73,7 +72,7 @@ export default function reducer(
                     ...state.data,
                     varsler: {
                         ...state.data.varsler,
-                        beskjed: state.data.varsler.beskjed.filter((beskjed) => beskjed.eventId !== eventId),
+                        beskjed: state.data.varsler.beskjed.filter((beskjed) => beskjed.eventId !== action.eventId),
                     },
                 },
             };
