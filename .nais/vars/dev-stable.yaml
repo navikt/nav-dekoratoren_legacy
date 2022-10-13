@@ -6,7 +6,6 @@ ingresses:
   - https://dekoratoren.ekstern.dev.nav.no
 outboundHosts:
   - www.dev.nav.no
-  - innloggingslinje-api.dev.nav.no
 env:
   - name: ENV
     value: dev
@@ -16,12 +15,8 @@ env:
     value: https://dekoratoren.ekstern.dev.nav.no
   - name: API_XP_SERVICES_URL
     value: https://www.dev.nav.no/_/service
-  - name: API_VARSELINNBOKS_URL
-    value: https://www.dev.nav.no/tms-varselbjelle-api
-  - name: API_INNLOGGINGSLINJE_URL
-    value: https://innloggingsstatus.dev.nav.no/person/innloggingsstatus
-  - name: API_UNLEASH_PROXY_URL
-    value: https://person.dev.nav.no/person/pb-unleash-proxy
+  - name: API_DEKORATOREN_URL
+    value: https://www.dev.nav.no/person/nav-dekoratoren-api
   - name: MINSIDE_ARBEIDSGIVER_URL
     value: https://min-side-arbeidsgiver.dev.nav.no/min-side-arbeidsgiver/
   - name: MIN_SIDE_URL

@@ -6,7 +6,7 @@ services:
             nav.docker-internal:
                 aliases:
                     - oidc-provider.nav.docker-internal
-        image: 'navikt/stub-oidc-provider:latest'
+        image: 'docker.pkg.github.com/navikt/stub-oidc-provider:latest'
         ports:
             - '9000:9000'
         environment:
@@ -20,7 +20,7 @@ services:
             nav.docker-internal:
                 aliases:
                     - oidc-provider-gui.nav.docker-internal
-        image: 'navikt/pb-oidc-provider-gui:latest'
+        image: 'docker.pkg.github.com/navikt/pb-oidc-provider-gui:latest'
         ports:
             - '5000:5000'
         depends_on:
@@ -35,7 +35,7 @@ services:
             nav.docker-internal:
                 aliases:
                     - mocks.nav.docker-internal
-        image: 'navikt/pb-nav-mocked:latest'
+        image: 'docker.pkg.github.com/navikt/pb-nav-mocked:latest'
         ports:
             - '8095:8080'
         environment:
