@@ -54,8 +54,8 @@ export default function reducer(
     }
 }
 
-export function hentInnloggingsstatus(API_INNLOGGINGSLINJE_URL: string): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Data>(() => hentInnloggingsstatusFetch(API_INNLOGGINGSLINJE_URL), {
+export function hentInnloggingsstatus(API_DEKORATOREN_URL: string): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<Data>(() => hentInnloggingsstatusFetch(API_DEKORATOREN_URL), {
         ok: hentInnloggingsstatusOk,
         feilet: hentnnloggingsstatusFeilet,
         pending: hentnnloggingsstatusPending,
