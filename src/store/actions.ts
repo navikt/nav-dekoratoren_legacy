@@ -42,6 +42,7 @@ export enum ActionType {
     SETT_TILBAKEMELDING_OK = 'SETT_TILBAKEMELDING_OK',
     SETT_TILBAKEMELDING_FEILET = 'SETT_TILBAKEMELDING_FEILET',
     SETT_TILBAKEMELDING_PENDING = 'SETT_TILBAKEMELDING_PENDING',
+    FJERN_LEST_VARSEL = 'FJERN_LEST_VARSEL',
 }
 
 export interface HentInnloggingsstatusOKAction {
@@ -192,6 +193,11 @@ export interface SettTilbakemeldingFEILETAction {
     type: ActionType.SETT_TILBAKEMELDING_FEILET;
 }
 
+export interface FjernLestVarselAction {
+    type: ActionType.FJERN_LEST_VARSEL;
+    eventId: string;
+}
+
 export type Handling =
     | HentInnloggingsstatusOKAction
     | HentInnloggingsstatusFEILETAction
@@ -227,4 +233,5 @@ export type Handling =
     | ToggleLukkAlle
     | SettTilbakemeldingOKAction
     | SettTilbakemeldingFEILETAction
-    | SettTilbakemeldingPENDINGAction;
+    | SettTilbakemeldingPENDINGAction
+    | FjernLestVarselAction;

@@ -162,7 +162,7 @@ export const Header = () => {
     // Fetch notifications
     useEffect(() => {
         if (authenticated) {
-            hentVarsler(APP_URL)(dispatch);
+            hentVarsler('https://www.dev.nav.no/person/innloggingsstatus/varsel/proxy/varsel/aktive')(dispatch);
         }
     }, [authenticated]);
 

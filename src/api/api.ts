@@ -38,6 +38,15 @@ export const lagreVarslerLestFetch = (APP_URL: string, nyesteId: number): Promis
         credentials: 'include',
     });
 
+//TODO: Tilpass postDone etter endepunkt er gjort tilgjengelig i varselbjelle-api
+export const postDone = (APP_URL: string, nyesteId: number): Promise<number> =>
+    fetchToJson(`${APP_URL}/api/varsler/rest/varsel/erlest/${nyesteId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(nyesteId),
+        credentials: 'include',
+    });
+
 export const fetchFeatureToggles = (API_UNLEASH_PROXY_URL: string, featureToggles: FeatureToggles) =>
     fetchToJson(`${API_UNLEASH_PROXY_URL}/feature-toggles${getFeatureToggleUrl(featureToggles)}`, {
         credentials: 'include',

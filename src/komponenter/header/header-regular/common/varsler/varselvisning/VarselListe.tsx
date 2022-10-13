@@ -73,6 +73,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
     const environment = useSelector((state: AppState) => state.environment);
 
     const hasNoHref = (href: string) => href === undefined || href === null || href === '';
+    console.log(varsler.beskjed);
 
     return (
         <>
@@ -101,6 +102,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                         !hasNoHref(b.link) || isMasked(b.tekst) ? (
                             <li key={b.eventId}>
                                 <Beskjed
+                                    eventId={b.eventId}
                                     tekst={b.tekst}
                                     dato={formatDato(b.forstBehandlet)}
                                     href={isMasked(b.tekst) ? getLoginUrl(environment, arbeidsflate, '4') : b.link}
@@ -121,6 +123,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                     varsler?.innboks?.map((i) => (
                         <li key={i.eventId}>
                             <Beskjed
+                                eventId={i.eventId}
                                 tekst={i.tekst}
                                 dato={formatDato(i.forstBehandlet)}
                                 href={isMasked(i.tekst) ? getLoginUrl(environment, arbeidsflate, '4') : i.link}

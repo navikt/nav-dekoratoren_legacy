@@ -1,3 +1,4 @@
+import { FjernLestVarselAction } from './../actions';
 import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
 import { DataElement, hentVarslerFetch, Status } from 'api/api';
@@ -45,7 +46,11 @@ export const initialState: VarselinnboksState = {
 };
 
 //  Reducer
-export default function reducer(state: VarselinnboksState = initialState, action: Handling): VarselinnboksState {
+export default function reducer(
+    state: VarselinnboksState = initialState,
+    action: Handling,
+    eventId?: string
+): VarselinnboksState {
     switch (action.type) {
         case ActionType.HENT_VARSLER_OK: {
             return { ...state, status: Status.OK, data: action.data };
@@ -61,6 +66,17 @@ export default function reducer(state: VarselinnboksState = initialState, action
             return { ...state, status: Status.OK };
         case ActionType.SETT_VARSLER_LEST:
             return { ...state, data: { ...state.data, varsler: { ...state.data.varsler, totaltAntallUleste: 0 } } };
+        case ActionType.FJERN_LEST_VARSEL:
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    varsler: {
+                        ...state.data.varsler,
+                        beskjed: state.data.varsler.beskjed.filter((beskjed) => beskjed.eventId !== eventId),
+                    },
+                },
+            };
         default:
             return state;
     }
@@ -99,4 +115,9 @@ export const settVarslerOK = (): SettVarslerOKAction => ({
 
 export const settVarslerLest = (): SettVarslerLestAction => ({
     type: ActionType.SETT_VARSLER_LEST,
+});
+
+export const fjernLestVarsel = (eventId: string): FjernLestVarselAction => ({
+    type: ActionType.FJERN_LEST_VARSEL,
+    eventId: eventId,
 });

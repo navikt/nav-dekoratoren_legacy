@@ -24,6 +24,8 @@ export const VarslerKnapp = () => {
     const dispatch = useDispatch();
     const { isOpen, varsler, appUrl, language } = useSelector(stateSelector);
 
+    const antallVarsler = varsler.oppgaver.length + varsler.beskjed.length + varsler.innboks.length;
+
     const toggleVarslerDropdown = () => {
         analyticsEvent({
             category: AnalyticsCategory.Header,
@@ -33,8 +35,8 @@ export const VarslerKnapp = () => {
     };
 
     const ariaLabel = () => {
-        if (varsler.totaltAntallUleste > 0) {
-            return finnTekst('varsler-tittel', language) + `. Du har ${varsler.totaltAntallUleste} varsler.`;
+        if (antallVarsler > 0) {
+            return finnTekst('varsler-tittel', language) + `. Du har ${antallVarsler} varsler.`;
         }
         return finnTekst('varsler-tittel', language) + '. ' + finnTekst('varsler-tom-liste', language);
     };
@@ -49,7 +51,7 @@ export const VarslerKnapp = () => {
             ariaControls={varslerDropdownClassname}
             ariaLabel={ariaLabel()}
         >
-            <VarselIkon antallUleste={varsler.totaltAntallUleste} />
+            <VarselIkon antallUleste={antallVarsler} />
         </MenylinjeKnapp>
     );
 };
