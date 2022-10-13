@@ -5,8 +5,8 @@
         box-shadow: inset 0 0 0 2px var(--navds-semantic-color-interaction-primary);
     }
 
-    padding-left: 0.5rem !important; //override navds
-    padding-right: 0.5rem !important; //override navds
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 
     &:active {
         :global(.navds-button__inner) {
