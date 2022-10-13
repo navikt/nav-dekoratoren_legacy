@@ -9,33 +9,29 @@
     padding-right: 0.5rem;
 
     &:active {
-        :global(.navds-button__inner) {
-            :global(.hamburger-ikon) {
-                span {
-                    background-color: var(--navds-global-color-white);
-                }
+        :global(.hamburger-ikon) {
+            span {
+                background-color: var(--navds-global-color-white);
             }
-            :global(.sok-ikon) {
-                :global(.sok-ikon__line),
-                :global(.sok-ikon__line-x) {
-                    background-color: var(--navds-global-color-white);
-                }
-                :global(.sok-ikon__circle) {
-                    border-color: var(--navds-global-color-white);
-                    background-color: transparent;
-                }
+        }
+        :global(.sok-ikon) {
+            :global(.sok-ikon__line),
+            :global(.sok-ikon__line-x) {
+                background-color: var(--navds-global-color-white);
+            }
+            :global(.sok-ikon__circle) {
+                border-color: var(--navds-global-color-white);
+                background-color: transparent;
             }
         }
     }
 
-    :global(.navds-button__inner) {
-        position: relative;
-        font-weight: 600;
-        white-space: nowrap;
+    position: relative;
+    font-weight: 600;
+    white-space: nowrap;
 
-        @media #{sv.$screen-mobile} {
-            flex-direction: column;
-            gap: 0;
-        }
+    @media #{sv.$screen-mobile} {
+        flex-direction: column;
+        gap: 0;
     }
 }
