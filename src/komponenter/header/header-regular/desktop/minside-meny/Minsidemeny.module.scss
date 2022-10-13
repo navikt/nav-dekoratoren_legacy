@@ -1,0 +1,59 @@
+@use 'src/styling-variabler.scss' as sv;
+
+$lenkeseksjoner-cols: 3;
+$lenkeseksjoner-margin: 1.5rem;
+
+:global(.desktop-minside-meny) {
+    left: auto;
+    right: 0;
+    width: #{sv.$smallDesktopMaxWidth};
+
+    @media #{sv.$screen-desktop-small-width-down} {
+        width: 100%;
+    }
+}
+
+.knappTekst {
+    text-align: left;
+}
+
+.knappTekstTopp {
+    font-weight: bold;
+}
+
+.knappTekstBunn {
+    margin-top: -0.25em;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.lenkeSeksjoner {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.lenkeseksjon {
+    flex-grow: 1;
+    @include sv.flex-col-width-mixin($lenkeseksjoner-cols, $lenkeseksjoner-margin);
+}
+
+.toppSeksjon {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin: 0 -#{sv.$margins-sides-desktop} 2rem -#{sv.$margins-sides-desktop};
+    padding: 0 #{sv.$margins-sides-desktop};
+}
+
+.toppSeksjonRight {
+    text-align: right;
+}
+
+.brukernavn {
+    text-transform: capitalize;
+}
+
+.toppSeksjonTittel {
+    margin-bottom: 0.15em;
+}
