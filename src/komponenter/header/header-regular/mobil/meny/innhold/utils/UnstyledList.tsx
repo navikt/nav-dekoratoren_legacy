@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import './UnstyledList.less';
+import 'komponenter/header/header-regular/mobil/meny/innhold/utils/UnstyledList.scss';
 
 type Props = {
     children: React.ReactNode[];
