@@ -3,7 +3,7 @@
 $separator-height: 0px;
 $underline-height: 4px;
 
-.arbeidsflate {
+:global(.arbeidsflate) {
     width: 100%;
     height: calc(100% - #{sv.$header-separator-height});
     margin-left: 2.5rem;
