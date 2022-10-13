@@ -30,8 +30,10 @@
         }
     }
 
-    .loginText {
-        min-width: 4.125rem;
+    :global(.navds-label) {
+        .loginText {
+            min-width: 4.125rem;
+        }
     }
 
     .loginTextLoading:after {
