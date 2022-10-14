@@ -62,9 +62,9 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                         <li key={o.eventId}>
                             <Oppgave
                                 tekst={o.tekst}
-                                dato={formatDato(o.forstBehandlet)}
-                                href={isMasked(o.tekst) ? getLoginUrl(environment, arbeidsflate, '4') : o.link}
-                                isMasked={isMasked(o.tekst)}
+                                dato={formatDato(o.tidspunkt)}
+                                href={o.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : o.link}
+                                isMasked={o.isMasked}
                             />
                         </li>
                     ))}
@@ -74,15 +74,15 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
             </Heading>
             <ul>
                 {varsler &&
-                    varsler?.beskjed?.map((b) =>
+                    varsler?.beskjeder?.map((b) =>
                         !hasNoHref(b.link) || isMasked(b.tekst) ? (
                             <li key={b.eventId}>
                                 <Beskjed
                                     eventId={b.eventId}
                                     tekst={b.tekst}
-                                    dato={formatDato(b.forstBehandlet)}
-                                    href={isMasked(b.tekst) ? getLoginUrl(environment, arbeidsflate, '4') : b.link}
-                                    isMasked={isMasked(b.tekst)}
+                                    dato={formatDato(b.tidspunkt)}
+                                    href={b.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : b.link}
+                                    isMasked={b.isMasked}
                                 />
                             </li>
                         ) : (
@@ -90,21 +90,21 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                 <ArkiverbarBeskjed
                                     eventId={b.eventId}
                                     tekst={b.tekst}
-                                    dato={formatDato(b.forstBehandlet)}
-                                    isMasked={isMasked(b.tekst)}
+                                    dato={formatDato(b.tidspunkt)}
+                                    isMasked={b.isMasked}
                                 />
                             </li>
                         )
                     )}
                 {varsler &&
-                    varsler?.innboks?.map((i) => (
+                    varsler?.innbokser?.map((i) => (
                         <li key={i.eventId}>
                             <Beskjed
                                 eventId={i.eventId}
                                 tekst={i.tekst}
-                                dato={formatDato(i.forstBehandlet)}
-                                href={isMasked(i.tekst) ? getLoginUrl(environment, arbeidsflate, '4') : i.link}
-                                isMasked={isMasked(i.tekst)}
+                                dato={formatDato(i.tidspunkt)}
+                                href={i.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : i.link}
+                                isMasked={i.isMasked}
                             />
                         </li>
                     ))}

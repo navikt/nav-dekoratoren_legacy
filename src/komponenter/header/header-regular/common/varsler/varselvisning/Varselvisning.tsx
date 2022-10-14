@@ -20,7 +20,7 @@ type Props = {
 export const Varselvisning = ({ setKbId }: Props) => {
     const { varsler, minSideUrl } = useSelector(stateSelector);
 
-    const antallVarsler = varsler.oppgaver.length + varsler.beskjed.length + varsler.innboks.length;
+    const antallVarsler = varsler?.oppgaver.length + varsler?.beskjeder.length + varsler?.innbokser.length;
 
     const cls = BEMHelper('varsler-visning');
 

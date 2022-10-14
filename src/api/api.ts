@@ -27,7 +27,7 @@ export const hentInnloggingsstatusFetch = (API_INNLOGGINGSLINJE_URL: string): Pr
 
 export const hentVarslerFetch = (APP_URL: string): Promise<varselinnboksData> => {
     const tidspunkt = new Date().getTime();
-    return fetchToJson(`${APP_URL}/api/varsler/rest/varsel/hentsiste?noCache=${tidspunkt}`, { credentials: 'include' });
+    return fetchToJson(`${APP_URL}/api/varsler/varsel/proxy/varsel/aktive`, { credentials: 'include' });
 };
 
 export const lagreVarslerLestFetch = (APP_URL: string, nyesteId: number): Promise<number> =>

@@ -1,3 +1,4 @@
+import { isMasked } from 'utils/isMasked';
 import { FjernLestVarselAction } from './../actions';
 import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
@@ -20,26 +21,24 @@ export interface VarslerData {
 
 export interface VarslerInnhold {
     oppgaver: Varsler[];
-    beskjed: Varsler[];
-    innboks: Varsler[];
-    totaltAntallUleste: number;
+    beskjeder: Varsler[];
+    innbokser: Varsler[];
 }
 
 export interface Varsler {
-    forstBehandlet: string;
+    tidspunkt: string;
     eventId: string;
     tekst: string;
     link: string;
-    sistOppdatert: string;
+    isMasked: boolean;
 }
 
 export const initialState: VarselinnboksState = {
     data: {
         varsler: {
             oppgaver: [],
-            beskjed: [],
-            innboks: [],
-            totaltAntallUleste: 0,
+            beskjeder: [],
+            innbokser: [],
         },
     },
     status: Status.IKKE_STARTET,
@@ -72,7 +71,7 @@ export default function reducer(
                     ...state.data,
                     varsler: {
                         ...state.data.varsler,
-                        beskjed: state.data.varsler.beskjed.filter((beskjed) => beskjed.eventId !== action.eventId),
+                        beskjeder: state.data.varsler.beskjeder.filter((beskjed) => beskjed.eventId !== action.eventId),
                     },
                 },
             };
