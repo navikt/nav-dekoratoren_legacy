@@ -1,4 +1,3 @@
-import { isMasked } from 'utils/isMasked';
 import { FjernLestVarselAction } from './../actions';
 import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
@@ -63,7 +62,7 @@ export default function reducer(
         case ActionType.SETT_VARSLER_OK:
             return { ...state, status: Status.OK };
         case ActionType.SETT_VARSLER_LEST:
-            return { ...state, data: { ...state.data, varsler: { ...state.data.varsler, totaltAntallUleste: 0 } } };
+            return { ...state, data: { ...state.data, varsler: { ...state.data.varsler} } };
         case ActionType.FJERN_LEST_VARSEL:
             return {
                 ...state,

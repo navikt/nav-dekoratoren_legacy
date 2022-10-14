@@ -19,7 +19,6 @@ import { Heading } from '@navikt/ds-react';
 import Beskjed from '../varsel-typer/beskjed/Beskjed';
 import Oppgave from '../varsel-typer/oppgave/Oppgave';
 import ArkiverbarBeskjed from '../varsel-typer/arkiverbar-beskjed/ArkiverbarBeskjed';
-import isMasked from 'utils/isMasked';
 import { getLoginUrl } from 'utils/login';
 
 dayjs.extend(localizedFormat);
@@ -75,7 +74,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
             <ul>
                 {varsler &&
                     varsler?.beskjeder?.map((b) =>
-                        !hasNoHref(b.link) || isMasked(b.tekst) ? (
+                        !hasNoHref(b.link) || b.isMasked ? (
                             <li key={b.eventId}>
                                 <Beskjed
                                     eventId={b.eventId}
