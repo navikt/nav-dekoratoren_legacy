@@ -12,7 +12,7 @@ import { Sokeresultat } from './utils';
 import SokResultater from './sok-innhold/SokResultater';
 import { Environment } from 'store/reducers/environment-duck';
 import Cookies from 'js-cookie';
-import './Sok.less';
+import 'komponenter/header/header-regular/common/sok/Sok.scss';
 
 interface Props {
     id: string;
