@@ -24,7 +24,7 @@ $underline-height: 4px;
     outline: 0;
 }
 
-.lenke {
+.lenke.lenke {
     height: calc(100% + #{$separator-height});
     display: inline-block;
     text-decoration: none;
