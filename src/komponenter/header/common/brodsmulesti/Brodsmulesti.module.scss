@@ -26,16 +26,29 @@
             margin: 0.25rem 0.25rem 0.25rem 0;
         }
     }
-    svg {
-        stroke: var(--navds-global-color-gray-600);
-        fill: var(--navds-global-color-gray-600);
-    }
 }
 
 .link {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    svg * {
+        stroke: var(--navds-global-color-gray-600);
+        fill: var(--navds-global-color-gray-600);
+    }
+
+    .iconHome {
+        margin-right: 0.75rem;
+        margin-top: 2px; // Visual imbalance fix
+        stroke-width: 0;
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    &:focus .iconHome {
+        color: var(--navds-global-color-gray-600);
+    }
 }
 
 .text::first-letter {
@@ -45,20 +58,6 @@
 .iconViewAll {
     border: 0;
     display: inline-flex;
-}
-
-/* Må skrives om når gamle DS-pakker oppgraderes */
-:global(.decorator-wrapper .lenke) .iconHome {
-    margin-right: 0.75rem;
-    margin-top: 2px; // Visual imbalance fix
-    stroke-width: 0;
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
-/* Må skrives om når gamle DS-pakker oppgraderes */
-:global(.decorator-wrapper .lenke:not(:focus)) .iconHome {
-    color: var(--navds-global-color-gray-600);
 }
 
 .iconNext {
