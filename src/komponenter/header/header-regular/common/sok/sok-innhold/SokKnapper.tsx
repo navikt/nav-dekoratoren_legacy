@@ -30,7 +30,7 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
             <button
                 type="submit"
                 id={id ? `${id}-submit` : undefined}
-                className={`${'sok-knapper__knapp'} ${cls.element('knapp-submit')}`}
+                className={`${'sok-knapper__knapp'} ${'sok-knapper__knapp-submit'}`}
             >
                 <span className={'sok-knapper__ikon-container'}>
                     <SokIkon isOpen={false} />
