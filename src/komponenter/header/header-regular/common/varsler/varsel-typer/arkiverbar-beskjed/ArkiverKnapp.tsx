@@ -1,11 +1,20 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { fjernLestVarsel } from 'store/reducers/varselinnboks-duck';
 import './ArkiverKnapp.less';
 
 type Props = {
+    eventId: string;
     setIsHover: (setIsHover: boolean) => void;
 };
 
-const ArkiverKnapp = ({ setIsHover }: Props) => {
+const ArkiverKnapp = ({ eventId, setIsHover }: Props) => {
+    const dispatch = useDispatch();
+
+    const handleOnClick = () => {
+        dispatch(fjernLestVarsel(eventId));
+    };
+
     const handleMouseEnter = () => {
         setIsHover(true);
     };
@@ -15,7 +24,12 @@ const ArkiverKnapp = ({ setIsHover }: Props) => {
     };
 
     return (
-        <button className="arkiver-btn" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <button
+            className="arkiver-btn"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onClick={handleOnClick}
+        >
             Arkiver
         </button>
     );
