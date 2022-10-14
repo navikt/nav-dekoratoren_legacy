@@ -1,3 +1,4 @@
+
 name: Build and deploy to nais
 on:
   workflow_call:
@@ -55,4 +56,3 @@ jobs:
           RESOURCE: .nais/config.yaml
           VAR: image=${{ env.image }},BUILD_ID=${{ github.sha }}
           VARS: ${{ inputs.NAIS_VARS }}
-          
