@@ -40,18 +40,17 @@ $underline-height: 4px;
     &:hover {
         box-shadow: inset 0 -#{$underline-height} 0 0 var(--navds-global-color-gray-300);
     }
+}
+.lenkeActive.lenkeActive {
+    box-shadow: inset 0 -#{$underline-height} 0 0 var(--navds-global-color-blue-400);
+    color: var(--navds-semantic-color-text);
 
-    .lenkeActive {
+    span {
+        font-weight: bold;
+    }
+
+    &:hover {
         box-shadow: inset 0 -#{$underline-height} 0 0 var(--navds-global-color-blue-400);
-
-        p {
-            color: var(--navds-semantic-color-text);
-
-            font-weight: bold;
-        }
-        &:hover {
-            box-shadow: inset 0 -#{$underline-height} 0 0 var(--navds-global-color-blue-400);
-        }
     }
 }
 

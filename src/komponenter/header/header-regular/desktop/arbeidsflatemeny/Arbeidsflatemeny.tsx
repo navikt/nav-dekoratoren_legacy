@@ -44,7 +44,7 @@ const Arbeidsflatemeny = () => {
                             <LenkeMedSporing
                                 classNameOverride={classNames(
                                     style.lenke,
-                                    arbeidsflate === lenke.key ? style.active : ''
+                                    arbeidsflate === lenke.key ? style.lenkeActive : ''
                                 )}
                                 id={arbeidsflatemenyLenkeIds[index]}
                                 href={lenke.url}
@@ -62,11 +62,11 @@ const Arbeidsflatemeny = () => {
                                     label: lenke.key,
                                 }}
                             >
-                                <div className={style.lenkeInner} data-text={finnTekst(lenke.lenkeTekstId, language)}>
-                                    <BodyShort>
+                                <span className={style.lenkeInner} data-text={finnTekst(lenke.lenkeTekstId, language)}>
+                                    <BodyShort as="span">
                                         <Tekst id={lenke.lenkeTekstId} />
                                     </BodyShort>
-                                </div>
+                                </span>
                             </LenkeMedSporing>
                         </li>
                     );
