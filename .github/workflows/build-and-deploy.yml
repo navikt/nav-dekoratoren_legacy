@@ -1,4 +1,3 @@
-
 name: Build and deploy to nais
 on:
   workflow_call:
