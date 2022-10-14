@@ -110,8 +110,12 @@ export const Brodsmulesti = (props: Props) => {
                                 className={cls.element('link')}
                                 analyticsEventArgs={{
                                     ...analyticsEventArgs,
-                                    label: breadcrumb.url,
-                                    action: breadcrumb.title,
+                                    // TODO: implement selective redaction of url/title
+                                    // Temp fix to prevent potential logging of sensitive info
+                                    label: '[redacted]',
+                                    action: '[redacted]',
+                                    // label: breadcrumb.url,
+                                    // action: breadcrumb.title,
                                 }}
                                 onClick={(e) => {
                                     if (breadcrumb.handleInApp) {
