@@ -67,7 +67,8 @@ const DelSkjermModal = (props: Props) => {
     return (
         <Modal
             open={props.isOpen}
-            className={`decorator-wrapper ${style.delskjerm}`}
+            className={style.delskjerm}
+            overlayClassName="decorator-wrapper"
             aria-label={'Skjermdeling'}
             onClose={props.onClose}
             style={{ overlay: { backgroundColor: 'rgba(50, 65, 79, 0.8)' } }}
