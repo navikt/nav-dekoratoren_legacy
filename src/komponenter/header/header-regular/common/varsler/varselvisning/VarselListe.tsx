@@ -20,6 +20,7 @@ import Beskjed from '../varsel-typer/beskjed/Beskjed';
 import Oppgave from '../varsel-typer/oppgave/Oppgave';
 import ArkiverbarBeskjed from '../varsel-typer/arkiverbar-beskjed/ArkiverbarBeskjed';
 import { getLoginUrl } from 'utils/login';
+import './VarselListe.less';
 
 dayjs.extend(localizedFormat);
 dayjs.extend(isToday);
@@ -51,7 +52,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
 
     const hasNoHref = (href: string) => href === undefined || href === null || href === '';
     return (
-        <>
+        <div className="varselliste-wrapper">
             <Heading level="3" size="small">
                 Oppgaver
             </Heading>
@@ -68,7 +69,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                         </li>
                     ))}
             </ul>
-            <Heading level="3" size="small">
+            <Heading level="3" size="small" className="beskjeder-tittel">
                 Beskjeder
             </Heading>
             <ul>
@@ -108,6 +109,6 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                         </li>
                     ))}
             </ul>
-        </>
+        </div>
     );
 };
