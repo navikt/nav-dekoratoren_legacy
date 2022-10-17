@@ -1,11 +1,7 @@
 import React from 'react';
 import 'komponenter/header/header-regular/common/meny-knapp/hamburger-ikon/HamburgerIkon.scss';
 
-type Props = {
-    isOpen: boolean;
-};
-
-const HamburgerIkon = ({ isOpen }: Props) => {
+const HamburgerIkon = () => {
     return (
         <svg
             className="menuBurger"

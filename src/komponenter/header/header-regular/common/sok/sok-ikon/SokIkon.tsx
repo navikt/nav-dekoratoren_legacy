@@ -1,11 +1,7 @@
 import React from 'react';
 import 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon.scss';
 
-type Props = {
-    isOpen: boolean;
-};
-
-export const SokIkon = ({ isOpen }: Props) => {
+export const SokIkon = () => {
     return (
         <svg
             className="menuSearch"
