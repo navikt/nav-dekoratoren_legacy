@@ -28,8 +28,9 @@ $lenkeseksjoner-margin: 1.5rem;
 }
 
 .lenkeSeksjoner {
-    display: flex;
-    justify-content: flex-start;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1.5rem;
 }
 
 .lenkeseksjon {

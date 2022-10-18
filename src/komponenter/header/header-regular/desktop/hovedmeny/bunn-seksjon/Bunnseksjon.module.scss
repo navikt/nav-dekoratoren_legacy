@@ -1,24 +1,15 @@
 @use 'src/styling-variabler.scss' as sv;
 
-$bunnseksjon-cols: 3;
-
 .bunnSeksjon {
-    display: flex;
-    justify-content: flex-start;
+    display: grid;
+    grid-auto-flow: column;
     margin-top: 0.75rem;
+    gap: 1rem;
 
     @media #{sv.$screen-desktop-small-down} {
+        grid-auto-flow: row;
+        gap: 0.5rem;
         margin: 0;
-    }
-
-    :global(.arbeidsflate-lenkepanel) {
-        @include sv.flex-col-width-mixin($bunnseksjon-cols, 1rem);
-        flex-grow: 1;
-
-        @media #{sv.$screen-desktop-small-down} {
-            @include sv.flex-col-width-mixin($bunnseksjon-cols, 0.5rem);
-            padding: 0.375rem 0.5rem;
-        }
     }
 }
 
