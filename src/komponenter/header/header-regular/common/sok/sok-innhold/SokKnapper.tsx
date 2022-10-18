@@ -18,13 +18,11 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
                 <button
                     type={'button'}
                     id={id ? `${id}-reset` : undefined}
-                    className={`${cls.element('knapp')} ${cls.element(
-                        'knapp-avbryt'
-                    )}`}
+                    className={`${cls.element('knapp')} ${cls.element('knapp-avbryt')}`}
                     onClick={onReset}
                 >
                     <span className={cls.element('ikon-container')}>
-                        <SokIkon isOpen={true} />
+                        <SokIkon />
                     </span>
                     <span className={cls.element('knapp-tekst')}>
                         <Tekst id="sok-reset" />
@@ -34,12 +32,10 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
             <button
                 type="submit"
                 id={id ? `${id}-submit` : undefined}
-                className={`${cls.element('knapp')} ${cls.element(
-                    'knapp-submit'
-                )}`}
+                className={`${cls.element('knapp')} ${cls.element('knapp-submit')}`}
             >
                 <span className={cls.element('ikon-container')}>
-                    <SokIkon isOpen={false} />
+                    <SokIkon />
                 </span>
                 <span className={cls.element('knapp-tekst')}>
                     <Tekst id="sok-knapp" />
