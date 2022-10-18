@@ -10,15 +10,15 @@ $bunnseksjon-cols: 3;
     @media #{sv.$screen-desktop-small-down} {
         margin: 0;
     }
-}
 
-.arbeidsflateLenkepanel {
-    @include sv.flex-col-width-mixin($bunnseksjon-cols, 1rem);
-    flex-grow: 1;
+    :global(.arbeidsflate-lenkepanel) {
+        @include sv.flex-col-width-mixin($bunnseksjon-cols, 1rem);
+        flex-grow: 1;
 
-    @media #{sv.$screen-desktop-small-down} {
-        @include sv.flex-col-width-mixin($bunnseksjon-cols, 0.5rem);
-        padding: 0.375rem 0.5rem;
+        @media #{sv.$screen-desktop-small-down} {
+            @include sv.flex-col-width-mixin($bunnseksjon-cols, 0.5rem);
+            padding: 0.375rem 0.5rem;
+        }
     }
 }
 

@@ -1,3 +1,5 @@
+$bunnseksjon-cols: 3;
+
 .hovedmeny-innhold-small {
     .arbeidsflate-lenkepanel {
         border: 0 !important; //override ArbeidsflateLenkePanel.module.scss
@@ -15,6 +17,10 @@
 
     .lenkeseksjon {
         flex-basis: 35%;
+    }
+
+    .arbeidsflate-lenkepanel {
+        flex-basis: 100%;
     }
 
     .arbeidsflater-small {

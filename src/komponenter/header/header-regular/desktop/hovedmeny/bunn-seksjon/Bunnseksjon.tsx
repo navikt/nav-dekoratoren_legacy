@@ -9,7 +9,7 @@ import { AppState } from 'store/reducers';
 import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/ArbeidsflateLenkepanel';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 
-import style from 'komponenter/header/header-regular/desktop/hovedmeny/bunn-seksjon/Bunnseksjon.module.scss';
+import style from './Bunnseksjon.module.scss';
 
 interface Props {
     classname: string;
