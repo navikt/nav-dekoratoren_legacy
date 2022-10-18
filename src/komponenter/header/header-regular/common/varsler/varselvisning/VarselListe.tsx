@@ -4,7 +4,7 @@ import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { VarslerInnhold } from 'store/reducers/varselinnboks-duck';
+import { VarslerData } from 'store/reducers/varselinnboks-duck';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import isToday from 'dayjs/plugin/isToday';
@@ -33,7 +33,7 @@ const ikoner: { [str: string]: string } = {
 };
 
 type Props = {
-    varsler: VarslerInnhold;
+    varsler: VarslerData;
     rowIndex?: number;
 };
 

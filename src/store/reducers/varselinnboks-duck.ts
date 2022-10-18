@@ -15,10 +15,6 @@ export interface VarselinnboksState extends DataElement {
 }
 
 export interface VarslerData {
-    varsler: VarslerInnhold;
-}
-
-export interface VarslerInnhold {
     oppgaver: Varsler[];
     beskjeder: Varsler[];
     innbokser: Varsler[];
@@ -34,11 +30,9 @@ export interface Varsler {
 
 export const initialState: VarselinnboksState = {
     data: {
-        varsler: {
             oppgaver: [],
             beskjeder: [],
             innbokser: [],
-        },
     },
     status: Status.IKKE_STARTET,
 };
@@ -62,16 +56,13 @@ export default function reducer(
         case ActionType.SETT_VARSLER_OK:
             return { ...state, status: Status.OK };
         case ActionType.SETT_VARSLER_LEST:
-            return { ...state, data: { ...state.data, varsler: { ...state.data.varsler} } };
+            return { ...state, data: { ...state.data} };
         case ActionType.FJERN_LEST_VARSEL:
             return {
                 ...state,
                 data: {
                     ...state.data,
-                    varsler: {
-                        ...state.data.varsler,
-                        beskjeder: state.data.varsler.beskjeder.filter((beskjed) => beskjed.eventId !== action.eventId),
-                    },
+                    beskjeder: state.data.beskjeder.filter((beskjed) => beskjed.eventId !== action.eventId),
                 },
             };
         default:

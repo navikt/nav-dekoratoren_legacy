@@ -15,7 +15,7 @@ export const varslerKnappId = 'varsler-knapp-id';
 
 const stateSelector = (state: AppState) => ({
     isOpen: state.dropdownToggles.varsler,
-    varsler: state.varsler.data.varsler,
+    varsler: state.varsler.data,
     appUrl: state.environment.APP_URL,
     language: state.language.language,
 });

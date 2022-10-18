@@ -9,7 +9,7 @@ import { VarselListe } from './VarselListe';
 import './Varselvisning.less';
 
 const stateSelector = (state: AppState) => ({
-    varsler: state.varsler.data.varsler,
+    varsler: state.varsler.data,
     minSideUrl: state.environment.MIN_SIDE_URL,
 });
 
