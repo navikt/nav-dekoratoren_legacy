@@ -14,7 +14,7 @@ const ArkiverKnapp = ({ eventId, appUrl, setIsHover }: Props) => {
     const dispatch = useDispatch();
 
     const handleOnClick = () => {
-        postDone(appUrl, eventId);
+        postDone(appUrl, { eventId: eventId });
         dispatch(fjernLestVarsel(eventId));
     };
 
