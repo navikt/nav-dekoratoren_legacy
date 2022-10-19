@@ -35,8 +35,7 @@ export const SokKnapp = () => {
             classname={sokDropdownClassname}
             ariaControls={sokDropdownClassname}
             id={desktopSokKnappId}
-        >
-            <SokIkon isOpen={isOpen} />
-        </MenylinjeKnapp>
+            icon={<SokIkon />}
+        />
     );
 };

@@ -1,7 +1,8 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import SokIkon from 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon';
-import 'komponenter/header/header-regular/common/sok/sok-innhold/SokKnapper.scss';
+import { Button } from '@navikt/ds-react';
+import './SokKnapper.scss';
 
 interface Props {
     writtenInput?: string;
@@ -13,32 +14,37 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
     return (
         <div className={'sok-knapper__container'}>
             {writtenInput && (
-                <button
+                <Button
                     type={'button'}
                     id={id ? `${id}-reset` : undefined}
                     className={`${'sok-knapper__knapp'} ${'sok-knapper__knapp-avbryt'}`}
+                    variant="secondary"
                     onClick={onReset}
+                    icon={
+                        <span className={'sok-knapper__ikon-container'}>
+                            <SokIkon />
+                        </span>
+                    }
                 >
-                    <span className={'sok-knapper__ikon-container'}>
-                        <SokIkon isOpen={true} />
-                    </span>
                     <span className={'sok-knapper__knapp-tekst'}>
                         <Tekst id="sok-reset" />
                     </span>
-                </button>
+                </Button>
             )}
-            <button
+            <Button
                 type="submit"
                 id={id ? `${id}-submit` : undefined}
                 className={`${'sok-knapper__knapp'} ${'sok-knapper__knapp-submit'}`}
+                icon={
+                    <span className={'sok-knapper__ikon-container'}>
+                        <SokIkon />
+                    </span>
+                }
             >
-                <span className={'sok-knapper__ikon-container'}>
-                    <SokIkon isOpen={false} />
-                </span>
                 <span className={'sok-knapper__knapp-tekst'}>
                     <Tekst id="sok-knapp" />
                 </span>
-            </button>
+            </Button>
         </div>
     );
 };

@@ -38,6 +38,7 @@
 
 .sok-knapper__knapp-avbryt {
     border: 3px solid transparent;
+    box-shadow: none;
 }
 
 .sok-knapper__ikon-container {
@@ -85,11 +86,6 @@
 
     .sok-knapper__knapp-submit:focus .sok-ikon > * {
         border-color: var(--navds-global-color-blue-500);
-    }
-
-    .sok-knapper__knapp-tekst {
-        margin-left: 0.5em;
-        font-size: 1rem;
     }
 
     .sok-knapper__ikon-container {

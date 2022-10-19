@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { People, Expand } from '@navikt/ds-icons';
 
-import style from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideKnapper.module.scss';
+import style from './MinsideKnapper.module.scss';
 
 const stateSelector = (state: AppState) => ({
     brukernavn: state.innloggingsstatus.data.name,
@@ -22,8 +22,6 @@ type Props = {
     id: string;
     brukernavn: string;
 };
-
-const cls = 'minside-person';
 
 export const MinsidePersonKnapp = ({ classname, id, brukernavn }: Props) => {
     const dispatch = useDispatch();
@@ -45,8 +43,8 @@ export const MinsidePersonKnapp = ({ classname, id, brukernavn }: Props) => {
             ariaControls={classname}
             classname={classname}
             id={id}
+            icon={<People data-testid={'minside-person'} />}
         >
-            <People data-testid={'minside-person'} />
             <div className={style.brukernavn}>{brukernavn}</div>
             <div className={classNames(style.chevron, `${isOpen ? style.chevronOpen : ''}`)}>
                 <Expand aria-hidden />

@@ -20,6 +20,13 @@
     }
 }
 
+:global(.desktop-minside-meny__knapp) {
+    :global(.navds-label) {
+        display: flex;
+        gap: var(--navds-spacing-2);
+    }
+}
+
 .brukernavn {
     max-width: 140px;
     overflow: hidden;
@@ -32,6 +39,11 @@
     display: flex;
     align-items: center;
     margin-left: -0.25rem;
+
+    & > * {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
 }
 
 .chevronOpen {

@@ -1,21 +1,26 @@
 import React from 'react';
-import style from './SokIkon.module.scss';
+import 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon.scss';
 
-type Props = {
-    isOpen: boolean;
-};
-
-export const SokIkon = ({ isOpen }: Props) => {
-    const styleCircleOpen = `${style.circleOpen} sok-ikon__circle--open`;
-    const styleLineOpen = `${style.lineOpen} sok-ikon__line--open`;
-    const styleLineXOpen = `${style.lineXOpen} sok-ikon__line-x--open`;
-
+export const SokIkon = () => {
     return (
-        <span className={`${style.sokIkon} sok-ikon`}>
-            <span className={`${style.circle} sok-ikon__circle ${isOpen ? styleCircleOpen : ''}`} />
-            <span className={`${style.line} sok-ikon__line ${isOpen ? styleLineOpen : ''}`} />
-            <span className={`${style.lineX} sok-ikon__line-x ${isOpen ? styleLineXOpen : ''}`} />
-        </span>
+        <svg
+            className="menuSearch"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+            focusable="false"
+        >
+            <circle className="menuSearch__circle" cx="10" cy="10" r="7" />
+            <path className="menuSearch__line-1" d="m15 15 7 7" />
+            <path className="menuSearch__line-2" d="m15 15 7 7" />
+            <path className="menuSearch__line-3" d="m15 15 7 7" />
+            <path className="menuSearch__line-4" d="m15 15 7 7" />
+        </svg>
     );
 };
 
