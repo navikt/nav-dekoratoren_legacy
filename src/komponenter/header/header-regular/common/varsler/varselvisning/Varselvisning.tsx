@@ -22,19 +22,23 @@ export const Varselvisning = ({ setKbId }: Props) => {
     const { varsler, minSideUrl } = useSelector(stateSelector);
 
     const antallVarsler = varsler?.oppgaver.length + varsler?.beskjeder.length + varsler?.innbokser.length;
-    const isTomListe = varsler && antallVarsler === 0;
+    const isTomListe = true;
 
     const cls = BEMHelper('varsler-visning');
 
     return (
         <div className={isTomListe ? 'varsler-visning-tom' : cls.className}>
-            <Heading level="2" size="medium" className={cls.element('tittel')}>
+            <Heading
+                level="2"
+                size="medium"
+                className={isTomListe ? 'varsler-visning-tom-tittel' : 'varsler-visning-tittel'}
+            >
                 <Tekst id={'varsler-tittel'} />
             </Heading>
             {isTomListe ? (
                 <div className={cls.element('tom-liste')}>
                     <IngenVarslerIkon />
-                    <p className="varsler-tom-tittel">
+                    <p className="varsler-tom-hovedtekst">
                         <Tekst id={'varsler-tom-liste'} />
                     </p>
                     <p className="varsler-tom-ingress">
