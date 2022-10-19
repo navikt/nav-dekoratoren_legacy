@@ -40,7 +40,7 @@ export const lagreVarslerLestFetch = (APP_URL: string, nyesteId: number): Promis
 
 //TODO: Tilpass postDone etter endepunkt er gjort tilgjengelig i varselbjelle-api
 export const postDone = (APP_URL: string, eventId: string): Promise<number> =>
-    fetchToJson(`${APP_URL}/api/varsler/varsel/proxy/varsel/beskjed/done`, {
+    fetchToJson(`${APP_URL}/api/varsler/varsel/proxy/beskjed/done`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(eventId),
