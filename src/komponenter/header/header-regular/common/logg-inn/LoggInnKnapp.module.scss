@@ -31,9 +31,7 @@
     }
 
     :global(.navds-label) {
-        .loginText {
-            min-width: 4.125rem;
-        }
+        min-width: 4.125rem; //settes for å unngå at knappene spretter etter at "Laster.." er ferdig, bør fikses så den ikke settes også på "Logg ut"
     }
 
     .loginTextLoading:after {
