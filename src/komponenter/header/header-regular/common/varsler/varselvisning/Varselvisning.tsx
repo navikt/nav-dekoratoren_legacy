@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 import BEMHelper from 'utils/bem';
 import AlleVarslerLenke from './AlleVarslerLenke';
 import { VarselListe } from './VarselListe';
-import './Varselvisning.less';
 import IngenVarslerIkon from 'ikoner/varsler/IngenVarslerIkon';
+import './Varselvisning.less';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data,
@@ -22,12 +22,12 @@ export const Varselvisning = ({ setKbId }: Props) => {
     const { varsler, minSideUrl } = useSelector(stateSelector);
 
     const antallVarsler = varsler?.oppgaver.length + varsler?.beskjeder.length + varsler?.innbokser.length;
-    const isTomListe = true;
+    const isTomListe = varsler && antallVarsler === 0;
 
     const cls = BEMHelper('varsler-visning');
 
     return (
-        <div className={isTomListe ? 'varsler-visning-tom' : cls.className}>
+        <div className={isTomListe ? 'varsler-visning-tom' : 'varsler-visning'}>
             <Heading
                 level="2"
                 size="medium"

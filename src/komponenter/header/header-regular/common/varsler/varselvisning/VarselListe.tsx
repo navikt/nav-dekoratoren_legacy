@@ -20,6 +20,7 @@ import Beskjed from '../varsel-typer/beskjed/Beskjed';
 import Oppgave from '../varsel-typer/oppgave/Oppgave';
 import ArkiverbarBeskjed from '../varsel-typer/arkiverbar-beskjed/ArkiverbarBeskjed';
 import { getLoginUrl } from 'utils/login';
+import Tekst from 'tekster/finn-tekst';
 
 dayjs.extend(localizedFormat);
 dayjs.extend(isToday);
@@ -51,64 +52,75 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
 
     const hasNoHref = (href: string) => href === undefined || href === null || href === '';
 
+    const hasNoOppgaver = varsler?.oppgaver.length === 0;
+    const hasNoBeskjeder = varsler?.beskjeder.length + varsler?.innbokser.length === 0;
+
     return (
         <div className="varselliste-wrapper">
-            <Heading level="3" size="small">
-                Oppgaver
-            </Heading>
-            <ul>
-                {varsler &&
-                    varsler?.oppgaver?.map((o) => (
-                        <li key={o.eventId}>
-                            <Oppgave
-                                tekst={o.tekst}
-                                dato={formatDato(o.tidspunkt)}
-                                href={o.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : o.link}
-                                isMasked={o.isMasked}
-                            />
-                        </li>
-                    ))}
-            </ul>
-            <Heading level="3" size="small" className="beskjeder-tittel">
-                Beskjeder
-            </Heading>
-            <ul>
-                {varsler &&
-                    varsler?.beskjeder?.map((b) =>
-                        !hasNoHref(b.link) || b.isMasked ? (
-                            <li key={b.eventId}>
-                                <Beskjed
-                                    eventId={b.eventId}
-                                    tekst={b.tekst}
-                                    dato={formatDato(b.tidspunkt)}
-                                    href={b.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : b.link}
-                                    isMasked={b.isMasked}
-                                />
-                            </li>
-                        ) : (
-                            <li key={b.eventId}>
-                                <ArkiverbarBeskjed
-                                    eventId={b.eventId}
-                                    tekst={b.tekst}
-                                    dato={formatDato(b.tidspunkt)}
-                                    isMasked={b.isMasked}
-                                />
-                            </li>
-                        )
-                    )}
-                {varsler &&
-                    varsler?.innbokser?.map((i) => (
-                        <li key={i.eventId}>
-                            <Beskjed
-                                eventId={i.eventId}
-                                tekst={i.tekst}
-                                dato={formatDato(i.tidspunkt)}
-                                href={i.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : i.link}
-                                isMasked={i.isMasked}
-                            />
-                        </li>
-                    ))}
-            </ul>
+            {hasNoOppgaver ? null : (
+                <>
+                    <Heading level="3" size="small">
+                        <Tekst id={'varsler-oppgaver-tittel'} />
+                    </Heading>
+                    <ul>
+                        {varsler &&
+                            varsler?.oppgaver?.map((o) => (
+                                <li key={o.eventId}>
+                                    <Oppgave
+                                        tekst={o.tekst}
+                                        dato={formatDato(o.tidspunkt)}
+                                        href={o.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : o.link}
+                                        isMasked={o.isMasked}
+                                    />
+                                </li>
+                            ))}
+                    </ul>
+                </>
+            )}
+            {hasNoBeskjeder ? null : (
+                <>
+                    <Heading level="3" size="small">
+                        <Tekst id={'varsler-beskjeder-tittel'} />
+                    </Heading>
+                    <ul>
+                        {varsler &&
+                            varsler?.beskjeder?.map((b) =>
+                                !hasNoHref(b.link) || b.isMasked ? (
+                                    <li key={b.eventId}>
+                                        <Beskjed
+                                            eventId={b.eventId}
+                                            tekst={b.tekst}
+                                            dato={formatDato(b.tidspunkt)}
+                                            href={b.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : b.link}
+                                            isMasked={b.isMasked}
+                                        />
+                                    </li>
+                                ) : (
+                                    <li key={b.eventId}>
+                                        <ArkiverbarBeskjed
+                                            eventId={b.eventId}
+                                            tekst={b.tekst}
+                                            dato={formatDato(b.tidspunkt)}
+                                            isMasked={b.isMasked}
+                                        />
+                                    </li>
+                                )
+                            )}
+                        {varsler &&
+                            varsler?.innbokser?.map((i) => (
+                                <li key={i.eventId}>
+                                    <Beskjed
+                                        eventId={i.eventId}
+                                        tekst={i.tekst}
+                                        dato={formatDato(i.tidspunkt)}
+                                        href={i.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : i.link}
+                                        isMasked={i.isMasked}
+                                    />
+                                </li>
+                            ))}
+                    </ul>
+                </>
+            )}
         </div>
     );
 };
