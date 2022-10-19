@@ -36,7 +36,7 @@ export const Varselvisning = ({ setKbId }: Props) => {
                 <Tekst id={'varsler-tittel'} />
             </Heading>
             {isTomListe ? (
-                <div className={cls.element('tom-liste')}>
+                <div className={'varsler-visning-tom-liste'}>
                     <IngenVarslerIkon />
                     <p className="varsler-tom-hovedtekst">
                         <Tekst id={'varsler-tom-liste'} />

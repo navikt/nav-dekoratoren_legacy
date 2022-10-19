@@ -18,7 +18,7 @@
         background-color: #f7f7f7;
         overflow-x: hidden;
 
-        &__tittel {
+        &-tittel {
             font-size: 2rem;
             line-height: 2.25rem;
         }
@@ -29,63 +29,12 @@
         margin: 0 auto;
     }
 
-    &__tom-liste {
+    &-tom-liste {
         margin-top: 1rem;
     }
 
     .dekorator-vis-alle-lenke {
         margin-top: 0.5rem;
-    }
-
-    .dekorator-varsel {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        margin: 1.25rem 0;
-
-        .varsel-ikon-container {
-            @ikonSize: 28px;
-            padding: 0.75rem;
-            margin-right: 1rem;
-            border-radius: 50%;
-            display: block;
-            align-self: flex-start;
-
-            .varsel-ikon {
-                width: @ikonSize;
-                height: @ikonSize;
-            }
-
-            &.alarm-ikon {
-                background-color: #ffe4c2;
-            }
-
-            &.kalender-ikon {
-                background-color: #ecefcc;
-            }
-
-            &.snakkeboble-ikon {
-                background-color: #f1d8d4;
-            }
-
-            &.dokument-ikon {
-                background-color: #e0dae7;
-            }
-
-            &.plaster-ikon {
-                background-color: @navds-global-color-lightblue-100;
-            }
-        }
-
-        .varsel-innhold {
-            .varsel-dato {
-                margin-bottom: 0.25rem;
-            }
-
-            .infotekst {
-                margin-bottom: 0.5rem;
-            }
-        }
     }
 }
 
