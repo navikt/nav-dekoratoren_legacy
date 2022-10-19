@@ -46,8 +46,8 @@ export const MinsidePersonKnapp = ({ classname, id, brukernavn }: Props) => {
             ariaControls={classname}
             classname={classname}
             id={id}
+            icon={<People data-testid={'minside-person'} />}
         >
-            <People data-testid={'minside-person'} />
             <div className={cls.element('brukernavn')}>{brukernavn}</div>
             <div className={classNames(cls.element('chevron'), `${isOpen ? cls.modifier('chevron-open') : ''}`)}>
                 <Expand aria-hidden />
