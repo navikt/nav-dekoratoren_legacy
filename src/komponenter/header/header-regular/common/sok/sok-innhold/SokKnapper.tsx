@@ -24,7 +24,7 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
                     onClick={onReset}
                     icon={
                         <span className={cls.element('ikon-container')}>
-                            <SokIkon isOpen={true} />
+                            <SokIkon />
                         </span>
                     }
                 >
@@ -39,7 +39,7 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
                 className={`${cls.element('knapp')} ${cls.element('knapp-submit')}`}
                 icon={
                     <span className={cls.element('ikon-container')}>
-                        <SokIkon isOpen={false} />
+                        <SokIkon />
                     </span>
                 }
             >
