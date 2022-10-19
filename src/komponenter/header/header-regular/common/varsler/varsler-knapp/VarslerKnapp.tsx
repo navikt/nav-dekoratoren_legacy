@@ -53,8 +53,7 @@ export const VarslerKnapp = () => {
             id={varslerKnappId}
             ariaControls={varslerDropdownId}
             ariaLabel={ariaLabel()}
-        >
-            <VarselIkon antallUleste={varsler.totaltAntallUleste} />
-        </MenylinjeKnapp>
+            icon={<VarselIkon antallUleste={varsler.totaltAntallUleste} />}
+        />
     );
 };

@@ -94,9 +94,12 @@ export const BrowserSupportMsg = () => {
                         </Detail>
                     )}
                 </div>
-                <Button size="small" variant="tertiary" onClick={closeWarning}>
-                    <Close title="Lukk advarsel for nettleser" />
-                </Button>
+                <Button
+                    size="small"
+                    variant="tertiary"
+                    icon={<Close title="Lukk advarsel for nettleser" />}
+                    onClick={closeWarning}
+                />
             </div>
         </div>
     );

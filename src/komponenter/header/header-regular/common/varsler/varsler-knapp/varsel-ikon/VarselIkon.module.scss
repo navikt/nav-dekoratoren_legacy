@@ -12,12 +12,12 @@ $ulest-diameter: 12px;
     border-radius: 50%;
     height: $ulest-diameter;
     width: $ulest-diameter;
-    left: 12px;
-    top: 14px;
+    left: 20px;
+    top: 26px;
 
     @media #{sv.$screen-mobile} {
-        left: 30px;
-        top: 2px;
+        left: 34px;
+        top: 14px;
     }
 
     background-color: var(--navds-semantic-color-feedback-danger-icon);

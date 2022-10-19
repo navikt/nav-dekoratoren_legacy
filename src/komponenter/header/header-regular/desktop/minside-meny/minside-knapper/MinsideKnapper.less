@@ -23,6 +23,11 @@
 }
 
 #desktop-minside-knapp-id {
+    .navds-label {
+        display: flex;
+        gap: var(--navds-spacing-2);
+    }
+
     .minside-person__brukernavn {
         max-width: 140px;
         overflow: hidden;
@@ -35,6 +40,11 @@
         display: flex;
         align-items: center;
         margin-left: -0.25rem;
+
+        & > * {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
     }
 
     .minside-person--chevron-open {

@@ -2,6 +2,7 @@ import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import BEMHelper from 'utils/bem';
 import SokIkon from 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon';
+import { Button } from '@navikt/ds-react';
 import './SokKnapper.less';
 
 interface Props {
@@ -15,32 +16,37 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
     return (
         <div className={cls.element('container')}>
             {writtenInput && (
-                <button
+                <Button
                     type={'button'}
                     id={id ? `${id}-reset` : undefined}
                     className={`${cls.element('knapp')} ${cls.element('knapp-avbryt')}`}
+                    variant="secondary"
                     onClick={onReset}
+                    icon={
+                        <span className={cls.element('ikon-container')}>
+                            <SokIkon />
+                        </span>
+                    }
                 >
-                    <span className={cls.element('ikon-container')}>
-                        <SokIkon />
-                    </span>
                     <span className={cls.element('knapp-tekst')}>
                         <Tekst id="sok-reset" />
                     </span>
-                </button>
+                </Button>
             )}
-            <button
+            <Button
                 type="submit"
                 id={id ? `${id}-submit` : undefined}
                 className={`${cls.element('knapp')} ${cls.element('knapp-submit')}`}
+                icon={
+                    <span className={cls.element('ikon-container')}>
+                        <SokIkon />
+                    </span>
+                }
             >
-                <span className={cls.element('ikon-container')}>
-                    <SokIkon />
-                </span>
                 <span className={cls.element('knapp-tekst')}>
                     <Tekst id="sok-knapp" />
                 </span>
-            </button>
+            </Button>
         </div>
     );
 };

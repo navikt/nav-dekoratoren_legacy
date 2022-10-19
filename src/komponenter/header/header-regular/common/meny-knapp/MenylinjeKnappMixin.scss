@@ -1,41 +1,40 @@
 @use 'src/styling-variabler' as sv;
 
 @mixin menylinjeKnappMixin() {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    position: relative;
+    font-weight: 600;
+    white-space: nowrap;
+
     &:hover {
         box-shadow: inset 0 0 0 2px var(--navds-semantic-color-interaction-primary);
     }
 
-    padding-left: 0.5rem !important; //override navds
-    padding-right: 0.5rem !important; //override navds
-
     &:active {
-        :global(.navds-button__inner) {
-            :global(.hamburger-ikon) {
-                span {
-                    background-color: var(--navds-global-color-white);
-                }
+        :global(.hamburger-ikon) {
+            span {
+                background-color: var(--navds-global-color-white);
             }
-            :global(.sok-ikon) {
-                :global(.sok-ikon__line),
-                :global(.sok-ikon__line-x) {
-                    background-color: var(--navds-global-color-white);
-                }
-                :global(.sok-ikon__circle) {
-                    border-color: var(--navds-global-color-white);
-                    background-color: transparent;
-                }
+        }
+        :global(.sok-ikon) {
+            :global(.sok-ikon__line),
+            :global(.sok-ikon__line-x) {
+                background-color: var(--navds-global-color-white);
+            }
+            :global(.sok-ikon__circle) {
+                border-color: var(--navds-global-color-white);
+                background-color: transparent;
             }
         }
     }
 
-    :global(.navds-button__inner) {
-        position: relative;
-        font-weight: 600;
-        white-space: nowrap;
+    @media #{sv.$screen-mobile} {
+        flex-direction: column;
+        gap: 0;
+    }
 
-        @media #{sv.$screen-mobile} {
-            flex-direction: column;
-            gap: 0;
-        }
+    :global(.navds-button__icon) {
+        --navds-button-icon-adjustment: 0;
     }
 }
