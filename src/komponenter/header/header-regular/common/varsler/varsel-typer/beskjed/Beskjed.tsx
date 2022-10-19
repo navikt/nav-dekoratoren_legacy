@@ -1,25 +1,28 @@
 import React from 'react';
 import { Next } from '@navikt/ds-icons';
-import './Beskjed.less';
 import Tekst from 'tekster/finn-tekst';
 import { fjernLestVarsel } from 'store/reducers/varselinnboks-duck';
 import { useDispatch } from 'react-redux';
+import { postDone } from 'api/api';
+import './Beskjed.less';
 
 type Props = {
     eventId: string;
+    appUrl: string;
     tekst: string;
     dato: string;
     href: string;
     isMasked: boolean;
 };
 
-const Beskjed = ({ eventId, tekst, dato, href, isMasked }: Props) => {
+const Beskjed = ({ eventId, appUrl, tekst, dato, href, isMasked }: Props) => {
     //TODO: Legge inn stepup-tekst i alle språk.
 
     const dispatch = useDispatch();
 
     const handleOnClick = () => {
-        dispatch(fjernLestVarsel(eventId))
+        postDone(appUrl, eventId);
+        dispatch(fjernLestVarsel(eventId));
     };
 
     return (

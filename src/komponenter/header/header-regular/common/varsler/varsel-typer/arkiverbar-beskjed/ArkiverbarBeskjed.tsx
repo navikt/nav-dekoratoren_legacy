@@ -5,12 +5,13 @@ import Tekst from 'tekster/finn-tekst';
 
 type Props = {
     eventId: string;
+    appUrl: string;
     tekst: string;
     dato: string;
     isMasked: boolean;
 };
 
-const ArkiverbarBeskjed = ({ eventId, tekst, dato, isMasked }: Props) => {
+const ArkiverbarBeskjed = ({ eventId, appUrl, tekst, dato, isMasked }: Props) => {
     const [isHover, setIsHover] = useState(false);
 
     //TODO: Legge inn stepup-tekst i alle språk.
@@ -23,7 +24,7 @@ const ArkiverbarBeskjed = ({ eventId, tekst, dato, isMasked }: Props) => {
                 </div>
                 <div className="arkiverbar-beskjed__dato-og-knapp">
                     <div className="arkiverbar-beskjed__dato">{dato}</div>
-                    <ArkiverKnapp eventId={eventId} setIsHover={setIsHover} />
+                    <ArkiverKnapp eventId={eventId} appUrl={appUrl} setIsHover={setIsHover} />
                 </div>
             </div>
         </div>

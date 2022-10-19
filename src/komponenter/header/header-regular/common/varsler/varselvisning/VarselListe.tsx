@@ -49,6 +49,7 @@ const formatDato = (datoString: string) => {
 export const VarselListe = ({ varsler, rowIndex }: Props) => {
     const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
     const environment = useSelector((state: AppState) => state.environment);
+    const { APP_URL } = environment;
 
     const hasNoHref = (href: string) => href === undefined || href === null || href === '';
 
@@ -89,6 +90,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                     <li key={b.eventId}>
                                         <Beskjed
                                             eventId={b.eventId}
+                                            appUrl={APP_URL}
                                             tekst={b.tekst}
                                             dato={formatDato(b.tidspunkt)}
                                             href={b.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : b.link}
@@ -99,6 +101,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                     <li key={b.eventId}>
                                         <ArkiverbarBeskjed
                                             eventId={b.eventId}
+                                            appUrl={APP_URL}
                                             tekst={b.tekst}
                                             dato={formatDato(b.tidspunkt)}
                                             isMasked={b.isMasked}

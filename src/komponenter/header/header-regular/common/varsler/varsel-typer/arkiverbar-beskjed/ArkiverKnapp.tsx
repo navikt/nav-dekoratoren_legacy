@@ -1,3 +1,4 @@
+import { postDone } from 'api/api';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { fjernLestVarsel } from 'store/reducers/varselinnboks-duck';
@@ -5,13 +6,15 @@ import './ArkiverKnapp.less';
 
 type Props = {
     eventId: string;
+    appUrl: string;
     setIsHover: (setIsHover: boolean) => void;
 };
 
-const ArkiverKnapp = ({ eventId, setIsHover }: Props) => {
+const ArkiverKnapp = ({ eventId, appUrl, setIsHover }: Props) => {
     const dispatch = useDispatch();
 
     const handleOnClick = () => {
+        postDone(appUrl, eventId);
         dispatch(fjernLestVarsel(eventId));
     };
 
