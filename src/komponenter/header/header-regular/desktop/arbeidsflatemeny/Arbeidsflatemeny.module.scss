@@ -24,7 +24,7 @@ $underline-height: 4px;
     outline: 0;
 }
 
-.lenke.lenke {
+.lenke {
     height: calc(100% + #{$separator-height});
     display: inline-block;
     text-decoration: none;
@@ -41,7 +41,7 @@ $underline-height: 4px;
         box-shadow: inset 0 -#{$underline-height} 0 0 var(--navds-global-color-gray-300);
     }
 }
-.lenkeActive.lenkeActive {
+.lenkeActive {
     box-shadow: inset 0 -#{$underline-height} 0 0 var(--navds-global-color-blue-400);
     color: var(--navds-semantic-color-text);
 
