@@ -1,8 +1,8 @@
 @use 'src/styling-variabler' as sv;
 
 .arbeidsflateLenkepanel {
-    border: 2px var(--navds-global-color-blue-500) solid !important;
-    border-radius: 4px !important;
+    border: 2px var(--navds-global-color-blue-500) solid;
+    border-radius: 4px;
     margin-bottom: 0;
 
     &:hover {
@@ -13,7 +13,7 @@
         :global(.navds-link-panel__title),
         :global(.navds-link-panel__description),
         :global(.compact-chevron) {
-            color: var(--navds-global-color-white) !important;
+            color: var(--navds-global-color-white);
         }
 
         :global(.compact-chevron) {
@@ -67,7 +67,7 @@
     @media #{sv.$screen-desktop-small-down} {
         padding: 0.5rem 0.75rem;
         margin-bottom: 0.25rem;
-        border: none !important;
+        border: none;
 
         :global(.navds-link-panel__chevron) {
             display: none;

@@ -8,7 +8,7 @@
 .loginKnapp {
     @include MenylinjeKnappMixin.menylinjeKnappMixin;
     align-self: center;
-    opacity: 1 !important; //override opacity i navds
+    opacity: 1;
 
     .loginIconLoading {
         animation-name: loading;
