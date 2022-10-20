@@ -6,10 +6,10 @@
     justify-items: center;
 
     &--white {
-        background: var(--navds-semantic-color-canvas-background-light) !important;
+        background: var(--navds-semantic-color-canvas-background-light);
     }
     &--gray {
-        background: var(--navds-semantic-color-canvas-background) !important;
+        background: var(--navds-semantic-color-canvas-background);
     }
 }
 
