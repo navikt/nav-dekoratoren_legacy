@@ -1,6 +1,6 @@
 @use 'src/styling-variabler.scss' as sv;
 
-.brodsmulesti.brodsmulesti {
+.brodsmulesti {
     display: flex;
 
     @media #{sv.$screen-mobile} {
