@@ -1,6 +1,6 @@
 @use 'src/styling-variabler' as sv;
 
-.arbeidsflateLenkepanel {
+:global(.arbeidsflate-lenkepanel) {
     border: 2px var(--navds-global-color-blue-500) solid;
     border-radius: 4px;
     margin-bottom: 0;
