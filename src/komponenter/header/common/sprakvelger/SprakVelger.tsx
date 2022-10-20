@@ -85,7 +85,7 @@ export const SprakVelger = (props: Props) => {
                             {selectorLabel}
                         </BodyShort>
                     </span>
-                    <Expand className="chevron--ned" />
+                    <Expand className={style.chevronNed} />
                 </button>
                 <ul {...menuProps} className={style.menu} style={ulStyle}>
                     <>

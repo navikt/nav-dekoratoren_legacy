@@ -16,14 +16,14 @@
     flex-direction: row-reverse;
 }
 
-.knapp.knapp {
+.knapp {
     padding: 0.5rem 0.5rem;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
-    .chevron--ned {
+    .chevronNed {
         align-self: center;
         width: 1.25rem;
         height: 1.25rem;
