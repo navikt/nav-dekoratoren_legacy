@@ -2,6 +2,7 @@ import React from 'react';
 import Tekst from 'tekster/finn-tekst';
 import SokIkon from 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon';
 import { Button } from '@navikt/ds-react';
+import { Close } from '@navikt/ds-icons';
 import './SokKnapper.scss';
 
 interface Props {
@@ -20,11 +21,7 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
                     className={`${'sok-knapper__knapp'} ${'sok-knapper__knapp-avbryt'}`}
                     variant="secondary"
                     onClick={onReset}
-                    icon={
-                        <span className={'sok-knapper__ikon-container'}>
-                            <SokIkon />
-                        </span>
-                    }
+                    icon={<Close />}
                 >
                     <span className={'sok-knapper__knapp-tekst'}>
                         <Tekst id="sok-reset" />
