@@ -39,7 +39,8 @@ export const LenkeMedSporing = ({
             className={classNames(
                 classNameOverride || style.dekoratorLenke,
                 withChevron && style.chevronlenke,
-                className
+                className,
+                style.lenkeMedSporing
             )}
             id={id}
             tabIndex={tabIndex}

@@ -40,6 +40,15 @@
     }
 }
 
+.lenkeMedSporing {
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
 .ikonContainer {
     min-width: 1.75rem;
 }
