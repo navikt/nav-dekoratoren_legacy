@@ -41,7 +41,7 @@ export const HovedmenyKnapp = ({ id, menuId }: Props) => {
             onClick={toggleMenu}
             ariaControls={menuId}
             id={id}
-            icon={<HamburgerIkon isOpen={isOpen} />}
+            icon={<HamburgerIkon />}
         />
     );
 };
