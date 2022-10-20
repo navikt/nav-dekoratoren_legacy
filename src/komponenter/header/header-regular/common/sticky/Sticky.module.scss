@@ -30,7 +30,7 @@
 
 .stickyContainerMobilFixed {
     @media #{sv.$screen-mobile} {
-        position: fixed !important;
-        top: 0 !important;
+        position: fixed;
+        top: 0;
     }
 }
