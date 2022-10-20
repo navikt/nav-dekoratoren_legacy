@@ -3,6 +3,7 @@
 .bunnSeksjon {
     display: grid;
     grid-auto-flow: column;
+    grid-auto-columns: 1fr;
     margin-top: 0.75rem;
     gap: 1rem;
 
