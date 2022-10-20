@@ -26,7 +26,6 @@ export const hentInnloggingsstatusFetch = (API_INNLOGGINGSLINJE_URL: string): Pr
     });
 
 export const hentVarslerFetch = (APP_URL: string): Promise<varselinnboksData> => {
-    const tidspunkt = new Date().getTime();
     return fetchToJson(`${APP_URL}/api/varsler/varsel/proxy/varsel/aktive`, { credentials: 'include' });
 };
 
@@ -38,9 +37,8 @@ export const lagreVarslerLestFetch = (APP_URL: string, nyesteId: number): Promis
         credentials: 'include',
     });
 
-//TODO: Tilpass postDone etter endepunkt er gjort tilgjengelig i varselbjelle-api
-export const postDone = (APP_URL: string, eventId: Object): Promise<number> =>
-    fetchToJson(`${APP_URL}/api/varsler/varsel/proxy/varsel/beskjed/done`, {
+export const postDone = (API_VARSELINNBOKS_URL: string, eventId: Object): Promise<number> =>
+    fetchToJson(`${API_VARSELINNBOKS_URL}/varsel/proxy/varsel/beskjed/done`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(eventId),

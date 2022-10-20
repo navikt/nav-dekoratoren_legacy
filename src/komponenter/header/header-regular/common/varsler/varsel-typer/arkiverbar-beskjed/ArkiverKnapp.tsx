@@ -6,15 +6,15 @@ import './ArkiverKnapp.less';
 
 type Props = {
     eventId: string;
-    appUrl: string;
+    apiVarselinnboksUrl: string;
     setIsHover: (setIsHover: boolean) => void;
 };
 
-const ArkiverKnapp = ({ eventId, appUrl, setIsHover }: Props) => {
+const ArkiverKnapp = ({ eventId, apiVarselinnboksUrl, setIsHover }: Props) => {
     const dispatch = useDispatch();
 
     const handleOnClick = () => {
-        postDone(appUrl, { eventId: eventId });
+        postDone(apiVarselinnboksUrl, { eventId: eventId });
         dispatch(fjernLestVarsel(eventId));
     };
 
