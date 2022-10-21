@@ -43,7 +43,7 @@ export const HeaderMenylinje = () => {
     const { innlogget, innloggingsstatus, arbeidsflate, language } = useSelector(stateSelector);
     const kbNavMainState = useKbNavMain();
 
-    const innloggetPrivatperson = true;
+    const innloggetPrivatperson = innlogget && arbeidsflate === MenuValue.PRIVATPERSON;
     const innloggetArbeidsgiver = innlogget && arbeidsflate === MenuValue.ARBEIDSGIVER;
     const isLanguageNorwegian = language === Locale.BOKMAL || language === Locale.NYNORSK;
 
