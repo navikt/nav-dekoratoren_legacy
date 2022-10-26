@@ -3,7 +3,6 @@
 @mixin mobilHeader {
     height: sv.$header-height-mobil;
 
-    :global(.logout-knapp),
     :global(.desktop-minside-meny__knapp) {
         display: none;
     }
