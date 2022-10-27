@@ -50,7 +50,6 @@
         "html-react-parser": "^1.1.1",
         "http-proxy-middleware": "^1.0.6",
         "js-cookie": "^2.2.1",
-        "less-plugin-npm-import": "^2.1.0",
         "lodash.debounce": "^4.0.8",
         "lodash.throttle": "^4.1.1",
         "nav-frontend-chevron-style": "^1.0.4",
