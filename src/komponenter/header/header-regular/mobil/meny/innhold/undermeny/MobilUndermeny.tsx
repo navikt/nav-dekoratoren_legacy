@@ -20,10 +20,8 @@ export const MobilUndermeny = ({ lenker, className }: Props) => {
     const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (underMenuIsOpen) {
-            const backButton = document.getElementsByClassName('mobilUndermenyLukk')[0] as HTMLElement;
-            backButton.focus();
-            backButton.blur();
+        if (underMenuIsOpen && ref.current) {
+            ref.current.focus();
         }
     }, [underMenuIsOpen]);
 
