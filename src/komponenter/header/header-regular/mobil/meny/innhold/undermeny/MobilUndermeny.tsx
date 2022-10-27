@@ -21,7 +21,10 @@ export const MobilUndermeny = ({ lenker, className }: Props) => {
 
     useEffect(() => {
         if (underMenuIsOpen && ref.current) {
-            ref.current.focus();
+            const header = document.getElementsByClassName('mobilUndermenySeksjonHeader')[0] as HTMLElement;
+            if (header?.focus) {
+                header.focus();
+            }
         }
     }, [underMenuIsOpen]);
 

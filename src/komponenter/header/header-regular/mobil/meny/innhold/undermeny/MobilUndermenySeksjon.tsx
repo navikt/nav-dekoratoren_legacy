@@ -28,7 +28,7 @@ export const MobilUndermenySeksjon = ({ lenker, forwardRef }: Props) => {
 
     return (
         <div ref={forwardRef}>
-            <Heading level={'2'} size={'medium'} className={'mobilUndermenySeksjonHeader'}>
+            <Heading level={'2'} size={'medium'} className={'mobilUndermenySeksjonHeader'} tabIndex={-1}>
                 {lenker.displayName}
             </Heading>
             {showSecurityLevelWarning && <MinsideLockMsg />}
