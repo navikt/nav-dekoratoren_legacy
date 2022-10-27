@@ -53,7 +53,11 @@ export const MobilMenypunkt = (props: Props) => {
                 {...commonProps}
                 href={'#'}
                 onClick={(e) => {
-                    // e.preventDefault();
+                    e.preventDefault();
+                    const target = e.target as HTMLElement;
+                    if (target.blur) {
+                        target.blur();
+                    }
                     props.callback();
                 }}
                 closeMenusOnClick={false}
