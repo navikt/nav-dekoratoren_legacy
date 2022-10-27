@@ -1,4 +1,4 @@
-@import './styling-variabler.less';
+@use './styling-variabler.scss' as sv;
 
 body {
     margin: 0;
@@ -7,7 +7,7 @@ body {
 }
 
 body.no-scroll-mobil {
-    @media @screen-mobile {
+    @media #{sv.$screen-mobile} {
         overflow-y: hidden;
         overflow-x: hidden;
     }
@@ -60,7 +60,7 @@ body.no-scroll-mobil {
 }
 
 .sideheader .header-linje ul {
-    @media @screen-desktop {
+    @media #{sv.$screen-desktop} {
         padding: 0;
     }
 }
@@ -77,7 +77,7 @@ body.no-scroll-mobil {
     box-sizing: border-box;
 }
 
-@media @screen-desktop {
+@media #{sv.$screen-desktop} {
     .media-sm-mobil {
         display: none !important;
     }

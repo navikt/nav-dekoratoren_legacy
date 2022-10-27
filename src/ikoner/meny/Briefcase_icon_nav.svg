@@ -1,11 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="22px" viewBox="0 0 24 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>New icons 2px/24px/bag Copy</title>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Artboard" transform="translate(-169.000000, -107.000000)" fill="#0067C5">
-            <g id="New-icons-2px/24px/bag-Copy" transform="translate(169.000000, 107.000000)">
-                <path d="M15,0 C16.1045695,0 17,0.8954305 17,2 L17,4 L22,4 C23.1045695,4 24,4.8954305 24,6 L24,11 C24,12.0139269 23.4819336,12.4647217 23.0009561,13 L23,20 C23,21.1045695 22.1045695,22 21,22 L3,22 C1.8954305,22 1,21.1045695 1,20 L0.999943032,13 C0.462768555,12.4903564 0,12.0144155 0,11 L0,6 C0,4.8954305 0.8954305,4 2,4 L7,4 L7,2 C7,0.8954305 7.8954305,0 9,0 L15,0 Z M11,14 L3,14 L3,20 L21,20 L21,14 L13,14 L13,16 L11,16 L11,14 Z M22,6 L2,6 L2,10 C2,11.0543618 2.81587779,11.9181651 3.85073766,11.9945143 L4,12 L20,12 C21.0543618,12 21.9181651,11.1841222 21.9945143,10.1492623 L22,10 L22,6 Z M15,2 L9,2 L9,4 L15,4 L15,2 Z" id="Shape"></path>
-            </g>
-        </g>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="22" viewBox="0 0 24 22">
+  <path fill="#0067C5" fill-rule="evenodd" d="M15 0a2 2 0 0 1 2 2v2h5a2 2 0 0 1 2 2v5c0 1.01-.52 1.46-1 2v7a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-7c-.54-.51-1-.99-1-2V6c0-1.1.9-2 2-2h5V2c0-1.1.9-2 2-2h6Zm-4 14H3v6h18v-6h-8v2h-2v-2Zm11-8H2v4a2 2 0 0 0 1.85 2H20a2 2 0 0 0 2-1.85V6Zm-7-4H9v2h6V2Z"/>
 </svg>

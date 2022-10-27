@@ -13,7 +13,7 @@ import ArbeidsflateLenkepanel from '../../../../common/arbeidsflate-lenkepanel/A
 import { AnalyticsCategory } from '../../../../../utils/analytics/analytics';
 import classNames from 'classnames';
 
-import './HovedmenyInnholdSmall.less';
+import 'src/komponenter/header/header-regular/desktop/hovedmeny/HovedmenyInnholdSmall.scss';
 
 const classname = 'desktop-hovedmeny';
 

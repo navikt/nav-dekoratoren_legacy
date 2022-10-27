@@ -7,7 +7,7 @@ import ArbeidsflateLenkepanel from 'komponenter/common/arbeidsflate-lenkepanel/A
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { UnstyledList } from '../../utils/UnstyledList';
 
-import './MobilArbeidsflateValg.less';
+import 'komponenter/header/header-regular/mobil/meny/innhold/hovedmeny/arbeidsflatevalg/MobilArbeidsflateValg.scss';
 
 const stateProps = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,

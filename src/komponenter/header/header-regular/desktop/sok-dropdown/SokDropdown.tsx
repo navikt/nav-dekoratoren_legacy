@@ -10,7 +10,7 @@ import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { SokKnapp } from 'komponenter/header/header-regular/desktop/sok-dropdown/sok-knapp/SokKnapp';
-import './SokDropdown.less';
+import 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown.scss';
 
 export const sokDropdownClassname = 'desktop-sok-dropdown';
 export const desktopSokInputId = 'sok-input-large';

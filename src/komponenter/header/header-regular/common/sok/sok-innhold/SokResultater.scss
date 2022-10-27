@@ -1,4 +1,4 @@
-@import (reference) '../../../../../../styling-variabler.less';
+@use 'src/styling-variabler.scss' as sv;
 
 @keyframes animateIn {
     0% {
@@ -29,8 +29,8 @@
             outline: none;
             color: white;
             text-decoration: none;
-            background-color: @navds-global-color-deepblue-500;
-            box-shadow: 0 0 0 2px @navds-global-color-deepblue-500;
+            background-color: var(--navds-global-color-deepblue-500);
+            box-shadow: 0 0 0 2px var(--navds-global-color-deepblue-500);
         }
     }
 
@@ -48,19 +48,19 @@
             animation-delay: calc(var(--index) * 50ms);
             animation-fill-mode: both;
             animation-timing-function: ease-in-out;
-            border-bottom: #b7b1a9 1px solid;
+            border-bottom: 1px solid var(--navds-global-color-gray-400);
             margin: 0 -0.5rem;
             padding: 0 0.5rem;
 
             &:focus,
             &:hover {
-                background-color: lightgray;
+                background-color: var(--navds-global-color-gray-300);
                 font-weight: bold;
             }
         }
 
         li[aria-selected='true'] {
-            background-color: lightgray;
+            background-color: var(--navds-global-color-gray-300);
             font-weight: bold;
         }
 
@@ -79,7 +79,7 @@
         padding: 0;
     }
 
-    @media @screen-mobile {
+    @media #{sv.$screen-mobile} {
         .sokeresultat-liste {
             list-style: none;
             padding: 0;
@@ -101,7 +101,7 @@
             }
 
             li[aria-selected='true'] {
-                background-color: lightgray;
+                background-color: var(--navds-global-color-gray-300);
                 font-weight: bold;
             }
 
