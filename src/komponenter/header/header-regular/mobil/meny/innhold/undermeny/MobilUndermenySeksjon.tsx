@@ -18,15 +18,16 @@ const stateSelector = (state: AppState) => ({
 
 type Props = {
     lenker: MenyNode;
+    ref: any;
 };
 
-export const MobilUndermenySeksjon = ({ lenker }: Props) => {
+export const MobilUndermenySeksjon = ({ lenker, ref }: Props) => {
     const { auth, XP_BASE_URL } = useSelector(stateSelector);
 
     const showSecurityLevelWarning = auth.securityLevel !== '4' && lenker.children.some((lenke) => lenke.displayLock);
 
     return (
-        <>
+        <div ref={ref}>
             <Heading level={'2'} size={'medium'} className={'mobilUndermenySeksjonHeader'}>
                 {lenker.displayName}
             </Heading>
@@ -52,6 +53,6 @@ export const MobilUndermenySeksjon = ({ lenker }: Props) => {
                     );
                 })}
             </UnstyledList>
-        </>
+        </div>
     );
 };

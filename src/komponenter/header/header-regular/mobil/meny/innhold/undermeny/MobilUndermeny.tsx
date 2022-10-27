@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import BEMHelper from 'utils/bem';
 import { MobilUndermenyLukk } from './MobilUndermenyLukk';
@@ -17,11 +17,14 @@ type Props = {
 
 export const MobilUndermeny = ({ lenker, className }: Props) => {
     const { underMenuIsOpen } = useSelector(stateSelector);
+    const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        console.log(`underMenuIsOpen: ${underMenuIsOpen}`);
         if (underMenuIsOpen) {
             window.focus();
+            if (ref.current) {
+                ref.current.focus();
+            }
         }
     }, [underMenuIsOpen]);
 
@@ -34,7 +37,7 @@ export const MobilUndermeny = ({ lenker, className }: Props) => {
     return (
         <div className={menyClass.element('undermeny-innhold', underMenuIsOpen ? '' : 'hidden')}>
             <MobilUndermenyLukk />
-            <MobilUndermenySeksjon lenker={lenker} />
+            <MobilUndermenySeksjon lenker={lenker} ref={ref} />
         </div>
     );
 };
