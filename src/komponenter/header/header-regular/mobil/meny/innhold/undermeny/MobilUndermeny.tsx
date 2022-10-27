@@ -21,10 +21,9 @@ export const MobilUndermeny = ({ lenker, className }: Props) => {
 
     useEffect(() => {
         if (underMenuIsOpen) {
-            window.focus();
-            if (ref.current) {
-                ref.current.focus();
-            }
+            const backButton = document.getElementsByClassName('mobilUndermenyLukk')[0] as HTMLElement;
+            backButton.focus();
+            backButton.blur();
         }
     }, [underMenuIsOpen]);
 
@@ -37,7 +36,7 @@ export const MobilUndermeny = ({ lenker, className }: Props) => {
     return (
         <div className={menyClass.element('undermeny-innhold', underMenuIsOpen ? '' : 'hidden')}>
             <MobilUndermenyLukk />
-            <MobilUndermenySeksjon lenker={lenker} ref={ref} />
+            <MobilUndermenySeksjon lenker={lenker} forwardRef={ref} />
         </div>
     );
 };
