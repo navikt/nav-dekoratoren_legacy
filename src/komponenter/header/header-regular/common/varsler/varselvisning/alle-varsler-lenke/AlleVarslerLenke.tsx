@@ -12,8 +12,9 @@ interface Props {
 
 const AlleVarslerLenke = (props: Props) => {
     return (
-        <div className={style.visAlleLenke}>
+        <div>
             <LenkeMedSporing
+                className={style.visAlleLenke}
                 href={props.varselInnboksUrl}
                 id={
                     props.rowIndex !== undefined
