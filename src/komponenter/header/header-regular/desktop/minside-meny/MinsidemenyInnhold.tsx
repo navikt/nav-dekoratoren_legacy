@@ -1,5 +1,4 @@
 import React from 'react';
-import BEMHelper from 'utils/bem';
 import { BodyShort, Detail, Heading } from '@navikt/ds-react';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { MenyLenkeSeksjon } from 'komponenter/header/header-regular/common/meny-lenker/MenyLenkeSeksjon';
@@ -8,6 +7,8 @@ import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSp
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import Tekst from 'tekster/finn-tekst';
 import { MinsideLockMsg } from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
+
+import style from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny.module.scss';
 
 const nodeGroup = KbNavGroup.Minsidemeny;
 
@@ -26,13 +27,13 @@ export const MinsidemenyInnhold = (props: Props) => {
         return null;
     }
 
-    const cls = BEMHelper(classname);
+    const cls = 'min-side-meny';
 
     return (
         <>
-            <div className={cls.element('topp-seksjon')}>
-                <div className={cls.element('topp-seksjon-left')}>
-                    <Heading level="2" size="medium" className={cls.element('topp-seksjon-tittel')}>
+            <div className={style.toppSeksjon}>
+                <div className={style.toppSeksjonLeft}>
+                    <Heading level="2" size="medium" className={style.toppSeksjonTittel}>
                         <Tekst id={'min-side'} />
                     </Heading>
                     <LenkeMedSporing
@@ -52,15 +53,15 @@ export const MinsidemenyInnhold = (props: Props) => {
                         <Tekst id={'til-dittnav-forside'} />
                     </LenkeMedSporing>
                 </div>
-                <div className={cls.element('topp-seksjon-right')}>
+                <div className={style.toppSeksjonRight}>
                     <Detail>
                         <Tekst id={'logget-inn-som'} />
                     </Detail>
-                    <BodyShort className={cls.element('brukernavn')}>{brukernavn}</BodyShort>
+                    <BodyShort className={style.brukernavn}>{brukernavn}</BodyShort>
                 </div>
             </div>
             {authLevel !== '4' && <MinsideLockMsg />}
-            <div className={cls.element('lenke-seksjoner')}>
+            <div className={style.lenkeSeksjoner}>
                 {menyLenker.children.map((menygruppe, index) => (
                     <MenyLenkeSeksjon
                         menygruppe={menygruppe}

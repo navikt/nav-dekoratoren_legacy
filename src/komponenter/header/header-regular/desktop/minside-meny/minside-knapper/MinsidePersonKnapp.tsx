@@ -1,5 +1,4 @@
 import React from 'react';
-import BEMHelper from 'utils/bem';
 import { analyticsEvent } from 'utils/analytics/analytics';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { toggleMinsidemeny } from 'store/reducers/dropdown-toggle-duck';
@@ -11,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { People, Expand } from '@navikt/ds-icons';
 
-import './MinsideKnapper.less';
+import style from './MinsideKnapper.module.scss';
 
 const stateSelector = (state: AppState) => ({
     brukernavn: state.innloggingsstatus.data.name,
@@ -23,8 +22,6 @@ type Props = {
     id: string;
     brukernavn: string;
 };
-
-const cls = BEMHelper('minside-person');
 
 export const MinsidePersonKnapp = ({ classname, id, brukernavn }: Props) => {
     const dispatch = useDispatch();
@@ -48,8 +45,8 @@ export const MinsidePersonKnapp = ({ classname, id, brukernavn }: Props) => {
             id={id}
             icon={<People data-testid={'minside-person'} />}
         >
-            <div className={cls.element('brukernavn')}>{brukernavn}</div>
-            <div className={classNames(cls.element('chevron'), `${isOpen ? cls.modifier('chevron-open') : ''}`)}>
+            <div className={style.brukernavn}>{brukernavn}</div>
+            <div className={classNames(style.chevron, `${isOpen ? style.chevronOpen : ''}`)}>
                 <Expand aria-hidden />
             </div>
         </MenylinjeKnapp>

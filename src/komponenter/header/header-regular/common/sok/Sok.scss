@@ -1,4 +1,4 @@
-@import (reference) '../../../../../styling-variabler.less';
+@use 'src/styling-variabler.scss' as sv;
 
 .header-linje {
     .sok-container {
@@ -14,7 +14,7 @@
         width: 100%;
     }
 
-    @media @screen-mobile {
+    @media #{sv.$screen-mobile} {
         .sok-container {
             margin-bottom: 1rem;
             margin-top: 0.5rem;

@@ -1,4 +1,4 @@
-@import (reference) '../../../../../styling-variabler.less';
+$bunnseksjon-cols: 3;
 
 .hovedmeny-innhold-small {
     .arbeidsflate-lenkepanel {
@@ -17,6 +17,10 @@
 
     .lenkeseksjon {
         flex-basis: 35%;
+    }
+
+    .arbeidsflate-lenkepanel {
+        flex-basis: 100%;
     }
 
     .arbeidsflater-small {

@@ -13,11 +13,8 @@ import { useCookies } from 'react-cookie';
 import { useSelector, useStore } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Bilde } from '../../../common/bilde/Bilde';
-import BEMHelper from 'utils/bem';
 import SprakVelgerItem from './SprakVelgerItem';
-import './SprakVelger.less';
-
-const cls = BEMHelper('sprakvelger');
+import style from 'komponenter/header/common/sprakvelger/SprakVelger.module.scss';
 
 export const farger = {
     navGra20: '#C6C2BF',
@@ -79,23 +76,22 @@ export const SprakVelger = (props: Props) => {
     buttonProps['aria-controls'] = menuProps.id;
 
     return (
-        <div className={cls.element('container')}>
-            <nav className={cls.className}>
-                <button {...buttonProps} className={`${cls.element('knapp')} skjemaelement__input`} type="button">
-                    <span className={cls.element('knapp-tekst')}>
-                        <Bilde asset={Globe} className={cls.element('ikon')} />
+        <div className={style.container}>
+            <nav className={style.sprakvelger}>
+                <button {...buttonProps} className={`${style.knapp} skjemaelement__input`} type="button">
+                    <span className={style.knappTekst}>
+                        <Bilde asset={Globe} className={style.ikon} />
                         <BodyShort size="small" as={'span'}>
                             {selectorLabel}
                         </BodyShort>
                     </span>
-                    <Expand className="chevron--ned" />
+                    <Expand className={style.chevronNed} />
                 </button>
-                <ul {...menuProps} className={cls.element('menu')} style={ulStyle}>
+                <ul {...menuProps} className={style.menu} style={ulStyle}>
                     <>
                         {options.map((item, index) => (
                             <SprakVelgerItem
                                 key={index}
-                                cls={cls}
                                 item={item}
                                 index={index}
                                 highlightedIndex={highlightedIndex}

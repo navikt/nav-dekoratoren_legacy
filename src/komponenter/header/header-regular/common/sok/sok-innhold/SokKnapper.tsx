@@ -1,9 +1,9 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
-import BEMHelper from 'utils/bem';
 import SokIkon from 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon';
 import { Button } from '@navikt/ds-react';
-import './SokKnapper.less';
+import { Close } from '@navikt/ds-icons';
+import './SokKnapper.scss';
 
 interface Props {
     writtenInput?: string;
@@ -12,23 +12,18 @@ interface Props {
 }
 
 const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
-    const cls = BEMHelper('sok-knapper');
     return (
-        <div className={cls.element('container')}>
+        <div className={'sok-knapper__container'}>
             {writtenInput && (
                 <Button
                     type={'button'}
                     id={id ? `${id}-reset` : undefined}
-                    className={`${cls.element('knapp')} ${cls.element('knapp-avbryt')}`}
+                    className={`${'sok-knapper__knapp'} ${'sok-knapper__knapp-avbryt'}`}
                     variant="secondary"
                     onClick={onReset}
-                    icon={
-                        <span className={cls.element('ikon-container')}>
-                            <SokIkon />
-                        </span>
-                    }
+                    icon={<Close />}
                 >
-                    <span className={cls.element('knapp-tekst')}>
+                    <span className={'sok-knapper__knapp-tekst'}>
                         <Tekst id="sok-reset" />
                     </span>
                 </Button>
@@ -36,14 +31,14 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
             <Button
                 type="submit"
                 id={id ? `${id}-submit` : undefined}
-                className={`${cls.element('knapp')} ${cls.element('knapp-submit')}`}
+                className={`${'sok-knapper__knapp'} ${'sok-knapper__knapp-submit'}`}
                 icon={
-                    <span className={cls.element('ikon-container')}>
+                    <span className={'sok-knapper__ikon-container'}>
                         <SokIkon />
                     </span>
                 }
             >
-                <span className={cls.element('knapp-tekst')}>
+                <span className={'sok-knapper__knapp-tekst'}>
                     <Tekst id="sok-knapp" />
                 </span>
             </Button>

@@ -15,7 +15,7 @@ import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
 import { getSalesforceContainer } from './server/utils';
 
-import './index.less';
+import './index.scss';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
 

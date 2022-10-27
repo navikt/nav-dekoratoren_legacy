@@ -4,7 +4,7 @@ import SokKnapper from './SokKnapper';
 import React from 'react';
 import { verifyWindowObj } from 'utils/Environment';
 import { TextField } from '@navikt/ds-react';
-import './SokInput.less';
+import 'komponenter/header/header-regular/common/sok/sok-innhold/SokInput.scss';
 type Props = {
     className: string;
     writtenInput: string;
