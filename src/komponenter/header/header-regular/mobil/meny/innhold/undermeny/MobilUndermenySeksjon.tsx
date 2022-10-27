@@ -18,7 +18,7 @@ const stateSelector = (state: AppState) => ({
 
 type Props = {
     lenker: MenyNode;
-    forwardRef: any;
+    forwardRef?: any;
 };
 
 export const MobilUndermenySeksjon = ({ lenker, forwardRef }: Props) => {
