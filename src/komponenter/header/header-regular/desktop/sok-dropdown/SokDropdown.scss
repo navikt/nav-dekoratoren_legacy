@@ -1,0 +1,15 @@
+.desktop-sok-dropdown {
+    left: auto;
+    right: 0;
+    width: auto;
+
+    .ekspanderbar__innhold-wrapper {
+        width: 700px;
+        transition-duration: 0.2s;
+
+        &--active {
+            max-height: 12rem;
+            transition-duration: 0.3s;
+        }
+    }
+}

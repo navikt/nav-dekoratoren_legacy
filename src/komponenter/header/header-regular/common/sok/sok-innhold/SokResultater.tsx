@@ -14,7 +14,7 @@ import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { Alert, Link } from '@navikt/ds-react';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 
-import './SokResultater.less';
+import 'komponenter/header/header-regular/common/sok/sok-innhold/SokResultater.scss';
 
 type Props = {
     writtenInput: string;

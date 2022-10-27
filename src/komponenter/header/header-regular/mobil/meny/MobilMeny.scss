@@ -1,8 +1,8 @@
-@import (reference) 'src/styling-variabler.less';
+@use 'src/styling-variabler.scss' as sv;
+
+$transition-duration: 0.4s;
 
 .mobilmeny {
-    @transition-duration: 0.4s;
-
     &__startmeny,
     &__undermeny-innhold {
         position: absolute;
@@ -10,7 +10,7 @@
         left: 0;
         width: 100%;
         background-color: white;
-        padding: 0.75rem @margins-sides-mobil 1rem @margins-sides-mobil;
+        padding: 0.75rem sv.$margins-sides-mobil 1rem sv.$margins-sides-mobil;
         height: 100%;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -25,7 +25,7 @@
         flex-direction: column;
 
         z-index: 1003;
-        transition: all @transition-duration ease-in-out;
+        transition: all $transition-duration ease-in-out;
 
         &--hidden {
             left: -100%;
@@ -41,7 +41,7 @@
         transition-delay: 0s;
 
         &--hidden {
-            transition-delay: @transition-duration;
+            transition-delay: $transition-duration;
         }
     }
 }
