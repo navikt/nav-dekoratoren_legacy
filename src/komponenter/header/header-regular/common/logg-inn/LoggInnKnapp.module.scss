@@ -8,7 +8,7 @@
 .loginKnapp {
     @include MenylinjeKnappMixin.menylinjeKnappMixin;
     align-self: center;
-    opacity: 1 !important; //override opacity i navds
+    opacity: 1;
 
     .loginIconLoading {
         animation-name: loading;
@@ -30,8 +30,8 @@
         }
     }
 
-    .loginText {
-        min-width: 4.125rem;
+    :global(.navds-label) {
+        min-width: 4.125rem; //settes for å unngå at knappene spretter etter at "Laster.." er ferdig, bør fikses så den ikke settes også på "Logg ut"
     }
 
     .loginTextLoading:after {
@@ -51,16 +51,17 @@
                 content: '';
             }
 
+            // Use an empty string as alt text to hide these purely decorative characters from screen readers
             25% {
-                content: '.';
+                content: '.' / '';
             }
 
             50% {
-                content: '..';
+                content: '..' / '';
             }
 
             75% {
-                content: '...';
+                content: '...' / '';
             }
         }
     }

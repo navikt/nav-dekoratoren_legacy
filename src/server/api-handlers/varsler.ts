@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 export const varselInnboksProxyUrl = `${process.env.APP_BASE_PATH || ''}/api/varsler`;
 
 export const varselInnboksProxyHandler = createProxyMiddleware(varselInnboksProxyUrl, {
-    target: `${process.env.API_VARSELINNBOKS_URL}`,
+    target: `${process.env.API_DEKORATOREN_URL}`,
     pathRewrite: { [`^${varselInnboksProxyUrl}`]: '' },
     changeOrigin: true,
     onProxyRes: (proxyRes: IncomingMessage, req: Request, res: Response) => {
