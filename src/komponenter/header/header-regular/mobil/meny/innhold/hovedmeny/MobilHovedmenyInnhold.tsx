@@ -59,10 +59,12 @@ export const MobilHovedmenyInnhold = (props: Props) => {
         settLenker(menyNode);
     };
 
-    const containerClassName = menyClass.element('startmeny', underMenuIsOpen || !hovedMenuIsOpen ? 'hidden' : '');
+    const isMainMenuHidden = underMenuIsOpen || !hovedMenuIsOpen;
+
+    const containerClassName = menyClass.element('startmeny', isMainMenuHidden ? 'hidden' : '');
 
     return (
-        <div className={containerClassName}>
+        <div className={containerClassName} aria-hidden={isMainMenuHidden}>
             <Sok
                 id={mobilSokInputId}
                 isOpen={hovedMenuIsOpen}
