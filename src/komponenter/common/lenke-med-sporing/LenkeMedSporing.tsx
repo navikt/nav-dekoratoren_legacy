@@ -37,9 +37,10 @@ export const LenkeMedSporing = ({
         <a
             href={href}
             className={classNames(
-                classNameOverride || `lenke ${style.dekoratorLenke}`,
+                classNameOverride || style.dekoratorLenke,
                 withChevron && style.chevronlenke,
-                className
+                className,
+                style.lenkeMedSporing
             )}
             id={id}
             tabIndex={tabIndex}

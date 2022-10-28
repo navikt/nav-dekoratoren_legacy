@@ -1,0 +1,85 @@
+@use 'src/styling-variabler.scss' as sv;
+
+.sprakvelger {
+    width: 200px;
+    position: relative;
+    max-width: 100%;
+
+    @media #{sv.$screen-mobile} {
+        margin-top: 0.5rem;
+    }
+}
+
+.container:only-child {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.knapp {
+    padding: 0.5rem 0.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .chevronNed {
+        align-self: center;
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+}
+
+.knappTekst {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.ikon {
+    width: 20px;
+    height: 20px;
+    filter: invert(50%);
+    margin-right: 1em;
+}
+
+.option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    svg {
+        margin-right: 0.1rem;
+    }
+
+    .not-selected {
+        margin-left: 1.25rem;
+    }
+}
+
+.sirkel {
+    margin-right: 0.25rem;
+}
+
+.menu {
+    margin: 1px 0 0;
+    padding: 0;
+    z-index: 100;
+    max-height: 10rem;
+    position: absolute;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
+.menuList {
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    border: 1px solid var(--navds-global-color-gray-200);
+    box-sizing: border-box;
+
+    &:not(:last-child) {
+        border-bottom: 0;
+    }
+}

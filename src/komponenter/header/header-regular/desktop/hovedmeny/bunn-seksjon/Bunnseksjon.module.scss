@@ -1,0 +1,25 @@
+@use 'src/styling-variabler.scss' as sv;
+
+.bunnSeksjon {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    margin-top: 0.75rem;
+    gap: 1rem;
+
+    @media #{sv.$screen-desktop-small-down} {
+        grid-auto-flow: row;
+        gap: 0.5rem;
+        margin: 0;
+    }
+}
+
+@media #{sv.$screen-desktop-small-down} {
+    .innhold {
+        display: inline-block;
+
+        & > * {
+            display: inline;
+        }
+    }
+}

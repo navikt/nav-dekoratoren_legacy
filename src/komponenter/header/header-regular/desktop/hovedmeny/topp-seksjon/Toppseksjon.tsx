@@ -1,6 +1,5 @@
 import React from 'react';
 import Tekst from 'tekster/finn-tekst';
-import BEMHelper from 'utils/bem';
 import { Heading } from '@navikt/ds-react';
 import KbNav, { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
@@ -14,14 +13,13 @@ import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 
-import './Toppseksjon.less';
+import style from 'komponenter/header/header-regular/desktop/hovedmeny/topp-seksjon/Toppseksjon.module.scss';
 
 interface Props {
     classname: string;
 }
 
 export const Toppseksjon = ({ classname }: Props) => {
-    const cls = BEMHelper(classname);
     const dispatch = useDispatch();
     const [, setCookie] = useCookies([CookieName.DECORATOR_CONTEXT]);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
@@ -29,8 +27,8 @@ export const Toppseksjon = ({ classname }: Props) => {
     const context = getArbeidsflateContext(XP_BASE_URL, arbeidsflate);
 
     return (
-        <div className={cls.element('topp-seksjon')} data-testid={'toppseksjon'}>
-            <Heading level="2" size="medium" className={cls.element('topp-seksjon-tittel')}>
+        <div className={style.toppSeksjon} data-testid={'toppseksjon'}>
+            <Heading level="2" size="medium" className={style.toppSeksjonTittel}>
                 <Tekst
                     id={
                         arbeidsflate === MenuValue.PRIVATPERSON
@@ -59,7 +57,7 @@ export const Toppseksjon = ({ classname }: Props) => {
                     action: `hovedmeny/forsidelenke`,
                     label: XP_BASE_URL,
                 }}
-                className={cls.element('forside-lenke')}
+                className={style.forsideLenke}
             >
                 <Tekst id={'til-forsiden'} />
             </LenkeMedSporing>

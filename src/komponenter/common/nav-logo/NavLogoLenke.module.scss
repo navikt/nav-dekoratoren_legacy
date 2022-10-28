@@ -1,5 +1,6 @@
 .navLogoLenke {
     display: flex;
+    flex: none;
 
     &:focus {
         box-shadow: 0 0 0 4px var(--navds-semantic-color-focus) inset;

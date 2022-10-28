@@ -51,16 +51,17 @@
                 content: '';
             }
 
+            // Use an empty string as alt text to hide these purely decorative characters from screen readers
             25% {
-                content: '.';
+                content: '.' / '';
             }
 
             50% {
-                content: '..';
+                content: '..' / '';
             }
 
             75% {
-                content: '...';
+                content: '...' / '';
             }
         }
     }

@@ -44,6 +44,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                 <Detail className={style.varselDato}>{formatDato(varsel.datoOpprettet)}</Detail>
                                 <BodyShort className={style.infotekst}>{varsel.varseltekst}</BodyShort>
                                 <LenkeMedSporing
+                                    className={style.seVarslerLenke}
                                     href={varsel.url || ''}
                                     id={
                                         rowIndex !== undefined && subIndex !== undefined
