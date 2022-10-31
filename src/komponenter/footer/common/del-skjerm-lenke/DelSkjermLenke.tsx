@@ -34,7 +34,7 @@ export const DelSkjermLenke = () => {
                 <BodyShort>
                     <Link onClick={openModal} className="globalLenkeFooter" href="#">
                         <Tekst id="footer-del-skjerm" />
-                        <Monitor />
+                        <Monitor title="monitor-ikon" />
                     </Link>
                 </BodyShort>
             </li>

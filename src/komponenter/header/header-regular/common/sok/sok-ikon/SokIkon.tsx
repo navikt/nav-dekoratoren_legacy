@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useId } from 'react';
 import 'komponenter/header/header-regular/common/sok/sok-ikon/SokIkon.scss';
 
 export const SokIkon = () => {
+    const id = useId();
     return (
         <svg
             className="menuSearch"
@@ -14,7 +15,10 @@ export const SokIkon = () => {
             strokeWidth="2"
             aria-hidden="true"
             focusable="false"
+            aria-labelledby={'menuSearch_' + id}
+            role="img"
         >
+            <title id={'menuSearch_' + id}>Søke-ikon</title>
             <circle className="menuSearch__circle" cx="10" cy="10" r="7" />
             <path className="menuSearch__line-1" d="m15 15 7 7" />
             <path className="menuSearch__line-2" d="m15 15 7 7" />

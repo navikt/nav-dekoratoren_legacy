@@ -61,9 +61,9 @@ export const Brodsmulesti = (props: Props) => {
                             action: 'nav.no',
                         }}
                     >
-                        <Home className={style.iconHome} />
+                        <Home className={style.iconHome} title="Hjem-ikon" />
                         <span>nav.no</span>
-                        <Next className={style.iconNext} />
+                        <Next className={style.iconNext} title="Neste-ikon" />
                     </LenkeMedSporing>
                 </li>
                 {shouldShowContext && (
@@ -80,7 +80,7 @@ export const Brodsmulesti = (props: Props) => {
                             <span>
                                 <Tekst id={context.lenkeTekstId} />
                             </span>
-                            <Next className={style.iconNext} />
+                            <Next className={style.iconNext} title="Neste-ikon" />
                         </LenkeMedSporing>
                     </li>
                 )}
@@ -95,7 +95,7 @@ export const Brodsmulesti = (props: Props) => {
                             }}
                         >
                             <span className={style.iconEllipsis}>...</span>
-                            <Next className={style.iconNext} />
+                            <Next className={style.iconNext} title="Neste-ikon" />
                         </button>
                     </li>
                 )}
@@ -122,7 +122,7 @@ export const Brodsmulesti = (props: Props) => {
                                 }}
                             >
                                 <span className={style.linkText}>{breadcrumb.title}</span>
-                                <Next className={style.iconNext} />
+                                <Next className={style.iconNext} title="Neste-ikon" />
                             </LenkeMedSporing>
                         ) : (
                             <span className={style.linkText}>{breadcrumb.title}</span>
