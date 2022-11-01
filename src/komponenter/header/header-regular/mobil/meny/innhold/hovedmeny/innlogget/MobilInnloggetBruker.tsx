@@ -40,8 +40,8 @@ export const MobilInnloggetBruker = () => {
                     onClick={() => loggut(getLogOutUrl(environment))}
                     variant={'tertiary'}
                     className={'innloggetbruker__loggut'}
+                    icon={<LoggutIkonMobil />}
                 >
-                    <LoggutIkonMobil />
                     <Tekst id="logg-ut-knapp" />
                 </Button>
             </div>
