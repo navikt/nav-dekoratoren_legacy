@@ -59,7 +59,7 @@ const ArbeidsflateLenkepanel = ({
         >
             <div>
                 <LinkPanel.Title className={style.text}>
-                    <Next className="compact-chevron" />
+                    <Next className="compact-chevron" aria-hidden />
                     <Tekst id={lenke.lenkeTekstId} />
                 </LinkPanel.Title>
                 {withDescription && (
