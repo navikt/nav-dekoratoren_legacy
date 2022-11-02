@@ -40,6 +40,7 @@
         "compression": "1.7.4",
         "console-stamp": "0.2.10",
         "core-js": "3.25.5",
+        "csp-header": "5.1.0",
         "css-minimizer-webpack-plugin": "4.2.2",
         "dayjs": "1.11.5",
         "detect-browser": "5.3.0",

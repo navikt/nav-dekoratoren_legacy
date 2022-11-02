@@ -11,6 +11,8 @@ import { getMenuHandler } from './api-handlers/menu';
 import { getSokHandler } from './api-handlers/sok';
 import { getDriftsmeldingerHandler } from './api-handlers/driftsmeldinger';
 import { varselInnboksProxyHandler, varselInnboksProxyUrl } from './api-handlers/varsler';
+import { getCSP } from 'csp-header';
+import { cspDirectives } from '../csp';
 
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
@@ -94,10 +96,15 @@ const pathsForTemplate = [appPaths, createPaths('/:locale(no|en|se)/*'), oldBase
 // HTML template
 app.get(pathsForTemplate, (req, res, next) => {
     try {
+        res.setHeader('Content-Security-Policy-Report-Only', getCSP({ directives: cspDirectives }));
         res.send(template(req));
     } catch (e) {
         next(e);
     }
+});
+
+app.post(createPaths('/api/csp-reports'), (req, res) => {
+    return res.status(200).send();
 });
 
 // Client environment
