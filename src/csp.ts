@@ -5,6 +5,7 @@ const navno = '*.nav.no';
 const vergicScreenSharing = '*.psplugin.com';
 const boostChatbot = '*.boost.ai';
 const vimeoPlayer = 'player.vimeo.com'; // used for inline videos in the chat client
+const qbrick = 'video.qbrick.com'; // used for inline videos in the chat client (?)
 const vimeoCdn = '*.vimeocdn.com'; // used for video preview images
 
 const googleAnalytics = 'www.google-analytics.com';
@@ -42,7 +43,7 @@ const directives: Partial<CSPDirectives> = {
         DATA, // ds-css
     ],
     'img-src': [navno, vergicScreenSharing, googleAnalytics, vimeoCdn],
-    'frame-src': [hotjarCom, hotjarIo, googleTagManager, vimeoPlayer],
+    'frame-src': [hotjarCom, hotjarIo, googleTagManager, vimeoPlayer, qbrick],
     'connect-src': [navno, boostChatbot, vergicScreenSharing, googleAnalytics],
     'report-uri': '/dekoratoren/api/csp-reports',
 };
