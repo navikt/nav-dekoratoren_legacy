@@ -2,8 +2,9 @@ import { CSPDirectives } from 'csp-header/src/types';
 import { UNSAFE_EVAL, UNSAFE_INLINE } from 'csp-header/src/constants/values';
 import { BLOB, DATA, SELF } from 'csp-header';
 
-const vergic = '*.psplugin.com'; // Screen sharing
-const boost = process.env.ENV === 'prod' ? 'nav.boost.ai' : 'staging-nav.boost.ai'; // Chatbot
+const navno = '*.nav.no';
+const vergicScreenSharing = '*.psplugin.com';
+const boostChatbot = process.env.ENV === 'prod' ? 'nav.boost.ai' : 'staging-nav.boost.ai';
 const googleAnalytics = 'www.google-analytics.com';
 const googleTagManager = 'www.googletagmanager.com';
 const hotjarCom = '*.hotjar.com';
@@ -13,7 +14,7 @@ const taskAnalyticsHeroku = 'ta-survey-v2.herokuapp.com';
 
 export const cspDirectives: Partial<CSPDirectives> = {
     'default-src': [
-        SELF,
+        navno,
         // vergic,
         // boost,
         // googleAnalytics,
@@ -23,22 +24,33 @@ export const cspDirectives: Partial<CSPDirectives> = {
         // taskAnalytics,
         // taskAnalyticsHeroku,
     ],
-    // 'script-src': [
-    //     vergic,
-    //     boost,
-    //     googleAnalytics,
-    //     googleTagManager,
-    //     hotjarCom,
-    //     hotjarIo,
-    //     taskAnalytics,
-    //     taskAnalyticsHeroku,
-    //     UNSAFE_INLINE,
-    //     UNSAFE_EVAL,
-    // ],
-    // 'worker-src': [BLOB], // blob: Required by vergic
-    // 'style-src': [vergic, UNSAFE_INLINE], // unsafe-inline required by vergic
-    // 'font-src': [vergic, DATA],
+    'script-src': [
+        navno,
+        // vergic,
+        // boost,
+        // googleAnalytics,
+        // googleTagManager,
+        // hotjarCom,
+        // hotjarIo,
+        // taskAnalytics,
+        // taskAnalyticsHeroku,
+        UNSAFE_INLINE, // GTM
+        UNSAFE_EVAL, // vergic
+    ],
+    'script-src-elem': [googleTagManager, vergicScreenSharing],
+    'worker-src': [
+        BLOB, // vergic
+    ],
+    'style-src': [
+        navno,
+        UNSAFE_INLINE, // vergic, chatbot (styled-components) and some of our own components with style-attributes
+    ],
+    'font-src': [
+        vergicScreenSharing,
+        DATA, // ds-css
+    ],
     // 'img-src': [vergic, googleAnalytics],
     // 'frame-src': [hotjarCom, hotjarIo, googleTagManager],
+    'connect-src': [navno, vergicScreenSharing],
     'report-uri': '/dekoratoren/api/csp-reports',
 };
