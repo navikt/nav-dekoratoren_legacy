@@ -35,16 +35,16 @@ const directives: Partial<CSPDirectives> = {
         BLOB, // vergic
     ],
     'style-src': [
-        navno,
         UNSAFE_INLINE, // vergic, chatbot (styled-components) and some of our own components with style-attributes
     ],
+    'style-src-elem': [navno, vergicScreenSharing],
     'font-src': [
         vergicScreenSharing,
         DATA, // ds-css
     ],
     'img-src': [navno, vergicScreenSharing, googleAnalytics, vimeoCdn],
     'frame-src': [hotjarCom, hotjarIo, googleTagManager, vimeoPlayer, qbrick],
-    'connect-src': [navno, boostChatbot, vergicScreenSharing, googleAnalytics],
+    'connect-src': [navno, boostChatbot, vergicScreenSharing, googleAnalytics, hotjarCom, hotjarIo],
 };
 
 const localDirectives = Object.entries(directives).reduce((acc, [key, value]) => {
