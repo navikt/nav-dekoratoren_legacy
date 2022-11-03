@@ -9,8 +9,8 @@ type Props = {
 export const VarselIkon = ({ antallUleste = 0 }: Props) => {
     return (
         <>
-            <Bell />
-            <div className={`${style.ulestSirkel} ${antallUleste === 0 ? style.hide : ''}`}></div>
+            <Bell aria-hidden />
+            <div className={`${style.ulestSirkel} ${antallUleste === 0 ? style.hide : ''}`} />
         </>
     );
 };
