@@ -1,6 +1,7 @@
-import { CSPDirectives } from 'csp-header/src/types';
-import { UNSAFE_EVAL, UNSAFE_INLINE } from 'csp-header/src/constants/values';
-import { BLOB, DATA, SELF } from 'csp-header';
+import { CSPDirectives, UNSAFE_EVAL, UNSAFE_INLINE } from 'csp-header';
+import { BLOB, DATA } from 'csp-header';
+
+const localhost = process.env.ENV === 'localhost' ? 'localhost:*' : '';
 
 const navno = '*.nav.no';
 const vergicScreenSharing = '*.psplugin.com';
@@ -10,47 +11,40 @@ const googleTagManager = 'www.googletagmanager.com';
 const hotjarCom = '*.hotjar.com';
 const hotjarIo = '*.hotjar.io';
 const taskAnalytics = '*.taskanalytics.com';
-const taskAnalyticsHeroku = 'ta-survey-v2.herokuapp.com';
 
 export const cspDirectives: Partial<CSPDirectives> = {
-    'default-src': [
-        navno,
-        // vergic,
-        // boost,
-        // googleAnalytics,
-        // googleTagManager,
-        // hotjarCom,
-        // hotjarIo,
-        // taskAnalytics,
-        // taskAnalyticsHeroku,
-    ],
+    'default-src': [navno, localhost],
     'script-src': [
         navno,
-        // vergic,
-        // boost,
-        // googleAnalytics,
-        // googleTagManager,
-        // hotjarCom,
-        // hotjarIo,
-        // taskAnalytics,
-        // taskAnalyticsHeroku,
         UNSAFE_INLINE, // GTM
         UNSAFE_EVAL, // vergic
+        localhost,
     ],
-    'script-src-elem': [googleTagManager, vergicScreenSharing],
+    'script-src-elem': [
+        navno,
+        vergicScreenSharing,
+        googleTagManager,
+        googleAnalytics,
+        hotjarCom,
+        hotjarIo,
+        taskAnalytics,
+        UNSAFE_INLINE, // GTM
+        localhost,
+    ],
     'worker-src': [
         BLOB, // vergic
     ],
     'style-src': [
         navno,
         UNSAFE_INLINE, // vergic, chatbot (styled-components) and some of our own components with style-attributes
+        localhost,
     ],
     'font-src': [
         vergicScreenSharing,
         DATA, // ds-css
     ],
-    // 'img-src': [vergic, googleAnalytics],
-    // 'frame-src': [hotjarCom, hotjarIo, googleTagManager],
-    'connect-src': [navno, vergicScreenSharing],
+    'img-src': [navno, vergicScreenSharing, googleAnalytics, localhost],
+    'frame-src': [hotjarCom, hotjarIo, googleTagManager],
+    'connect-src': [navno, boostChatbot, vergicScreenSharing, googleAnalytics, localhost],
     'report-uri': '/dekoratoren/api/csp-reports',
 };
