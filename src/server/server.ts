@@ -31,6 +31,8 @@ const appPaths = [appBasePath, '', '/dekoratoren'].filter((path, index, array) =
 const oldBasePath = '/common-html/v4/navno';
 const buildPath = `${process.cwd()}/build`;
 
+const cspHeader = getCSP({ directives: cspDirectives });
+
 const createPaths = (subPath: string) => appPaths.map((path) => `${path}${subPath}`);
 
 const app = express();
@@ -97,15 +99,11 @@ const pathsForTemplate = [appPaths, createPaths('/:locale(no|en|se)/*'), oldBase
 // HTML template
 app.get(pathsForTemplate, (req, res, next) => {
     try {
-        res.setHeader('Content-Security-Policy-Report-Only', getCSP({ directives: cspDirectives }));
+        res.setHeader('Content-Security-Policy', cspHeader);
         res.send(template(req));
     } catch (e) {
         next(e);
     }
-});
-
-app.post(createPaths('/api/csp-reports'), (req, res) => {
-    return res.status(200).send();
 });
 
 // Client environment

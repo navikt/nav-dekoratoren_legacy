@@ -45,7 +45,6 @@ const directives: Partial<CSPDirectives> = {
     'img-src': [navno, vergicScreenSharing, googleAnalytics, vimeoCdn],
     'frame-src': [hotjarCom, hotjarIo, googleTagManager, vimeoPlayer, qbrick],
     'connect-src': [navno, boostChatbot, vergicScreenSharing, googleAnalytics],
-    'report-uri': '/dekoratoren/api/csp-reports',
 };
 
 const localDirectives = Object.entries(directives).reduce((acc, [key, value]) => {
