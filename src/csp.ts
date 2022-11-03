@@ -5,7 +5,10 @@ const localhost = process.env.ENV === 'localhost' ? 'localhost:*' : '';
 
 const navno = '*.nav.no';
 const vergicScreenSharing = '*.psplugin.com';
-const boostChatbot = process.env.ENV === 'prod' ? 'nav.boost.ai' : 'staging-nav.boost.ai';
+const boostChatbot = '*.boost.ai';
+const vimeoPlayer = 'player.vimeo.com'; // used for inline videos in the chat client
+const vimeoCdn = '*.vimeocdn.com'; // used for video preview images
+
 const googleAnalytics = 'www.google-analytics.com';
 const googleTagManager = 'www.googletagmanager.com';
 const hotjarCom = '*.hotjar.com';
@@ -43,8 +46,8 @@ export const cspDirectives: Partial<CSPDirectives> = {
         vergicScreenSharing,
         DATA, // ds-css
     ],
-    'img-src': [navno, vergicScreenSharing, googleAnalytics, localhost],
-    'frame-src': [hotjarCom, hotjarIo, googleTagManager],
+    'img-src': [navno, vergicScreenSharing, googleAnalytics, vimeoCdn, localhost],
+    'frame-src': [hotjarCom, hotjarIo, googleTagManager, vimeoPlayer],
     'connect-src': [navno, boostChatbot, vergicScreenSharing, googleAnalytics, localhost],
     'report-uri': '/dekoratoren/api/csp-reports',
 };

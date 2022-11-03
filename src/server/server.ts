@@ -13,6 +13,7 @@ import { getDriftsmeldingerHandler } from './api-handlers/driftsmeldinger';
 import { varselInnboksProxyHandler, varselInnboksProxyUrl } from './api-handlers/varsler';
 import { getCSP } from 'csp-header';
 import { cspDirectives } from '../csp';
+import { getCspHandler } from './api-handlers/csp';
 
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
@@ -121,6 +122,7 @@ app.get(createPaths('/env'), (req, res, next) => {
 app.get(createPaths('/api/meny'), getMenuHandler);
 app.get(createPaths('/api/sok'), getSokHandler);
 app.get(createPaths('/api/driftsmeldinger'), getDriftsmeldingerHandler);
+app.get(createPaths('/api/csp'), getCspHandler);
 app.use(varselInnboksProxyUrl, varselInnboksProxyHandler);
 
 // Nais endpoints
