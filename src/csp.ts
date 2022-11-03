@@ -35,9 +35,13 @@ const directives: Partial<CSPDirectives> = {
         BLOB, // vergic
     ],
     'style-src': [
-        UNSAFE_INLINE, // vergic, chatbot (styled-components) and some of our own components with style-attributes
+        UNSAFE_INLINE, // chatbot (styled-components) and some of our own components with style-attributes
     ],
-    'style-src-elem': [navno, vergicScreenSharing],
+    'style-src-elem': [
+        navno,
+        vergicScreenSharing,
+        UNSAFE_INLINE, // vergic
+    ],
     'font-src': [
         vergicScreenSharing,
         DATA, // ds-css
