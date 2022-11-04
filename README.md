@@ -171,6 +171,12 @@ Eksempel 4 - Brødsmulesti:<br>
 
 (Språkvelger og brødsmulesti vises ikke direkte på /dekoratoren i prod av sikkerhetsmessige årsaker)
 
+## Content Security Policy
+
+Påkrevde CSP-direktiver for dekoratøren serveres på [https://www.nav.no/dekoratoren/api/csp](https://www.nav.no/dekoratoren/api/csp). Se også [csp.ts](https://github.com/navikt/nav-dekoratoren/blob/master/src/csp.ts). <br>
+
+[nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler) kan benyttes for å generere en CSP-header som er kompatibel med dekoratøren.
+
 ## Oppstart via docker-compose
 
 Start **navikt/nav-dekoratoren**, **navikt/pb-nav-mocked**, **navikt/stub-oidc-provider** og **navikt/pb-oidc-provider-gui**. Oppsettet vil replikere innlogging og eksterne avhengigheter som varselinnboks.
