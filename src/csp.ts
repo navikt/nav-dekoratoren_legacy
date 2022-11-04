@@ -26,7 +26,6 @@ const directives: Partial<CSPDirectives> = {
         googleTagManager,
         googleAnalytics,
         hotjarCom,
-        hotjarIo,
         taskAnalytics,
         UNSAFE_INLINE, // GTM
     ],
@@ -43,10 +42,11 @@ const directives: Partial<CSPDirectives> = {
     ],
     'font-src': [
         vergicScreenSharing,
+        hotjarCom,
         DATA, // ds-css
     ],
-    'img-src': [navno, vergicScreenSharing, googleAnalytics, vimeoCdn],
-    'frame-src': [hotjarCom, hotjarIo, googleTagManager, vimeoPlayer, qbrick],
+    'img-src': [navno, vergicScreenSharing, googleAnalytics, vimeoCdn, hotjarCom],
+    'frame-src': [hotjarCom, googleTagManager, vimeoPlayer, qbrick],
     'connect-src': [navno, boostChatbot, vergicScreenSharing, googleAnalytics, hotjarCom, hotjarIo, taskAnalytics],
 };
 
