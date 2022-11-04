@@ -1,5 +1,4 @@
-import { CSPDirectives, UNSAFE_EVAL, UNSAFE_INLINE } from 'csp-header';
-import { BLOB, DATA } from 'csp-header';
+import { CSPDirectives, UNSAFE_EVAL, UNSAFE_INLINE, BLOB, DATA } from 'csp-header';
 
 const navno = '*.nav.no';
 const vergicScreenSharing = '*.psplugin.com';
