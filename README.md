@@ -173,9 +173,9 @@ Eksempel 4 - Brødsmulesti:<br>
 
 ## Content Security Policy
 
-Se [csp.ts](https://github.com/navikt/nav-dekoratoren/blob/master/src/csp.ts) for påkrevde CSP-direktiver for dekoratøren.<br>
+Påkrevde CSP-direktiver for dekoratøren serveres på [https://www.nav.no/dekoratoren/api/csp](https://www.nav.no/dekoratoren/api/csp). Se også [csp.ts](https://github.com/navikt/nav-dekoratoren/blob/master/src/csp.ts). <br>
 
-Disse serveres også på [https://www.nav.no/dekoratoren/api/csp](https://www.nav.no/dekoratoren/api/csp).
+[nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler) kan benyttes for å generere en CSP-header som er kompatibel med dekoratøren.
 
 ## Oppstart via docker-compose
 
