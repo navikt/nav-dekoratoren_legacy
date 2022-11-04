@@ -8,8 +8,8 @@ const vimeoPlayer = 'player.vimeo.com'; // used for inline videos in the chat cl
 const qbrick = 'video.qbrick.com'; // used for inline videos in the chat client
 const vimeoCdn = '*.vimeocdn.com'; // used for video preview images
 
-const googleAnalytics = 'www.google-analytics.com';
-const googleTagManager = 'www.googletagmanager.com';
+const googleAnalytics = '*.google-analytics.com';
+const googleTagManager = '*.googletagmanager.com';
 const hotjarCom = '*.hotjar.com';
 const hotjarIo = '*.hotjar.io';
 const taskAnalytics = '*.taskanalytics.com';
