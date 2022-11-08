@@ -13,7 +13,7 @@ const SokeforslagIngress = (props: Props) => {
             <div className="media-sm-mobil sokeforslag-ingress">
                 <div className={className}>
                     <div className="sok-resultat-chevron">
-                        <Next />
+                        <Next aria-hidden />
                     </div>
                     <div className="overskrift">
                         <Heading level="2" size="small">

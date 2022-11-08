@@ -97,7 +97,7 @@ export const BrowserSupportMsg = () => {
                 <Button
                     size="small"
                     variant="tertiary"
-                    icon={<Close title="Lukk advarsel for nettleser" />}
+                    icon={<Close title="Lukk advarsel for nettleser" aria-hidden />}
                     onClick={closeWarning}
                 />
             </div>

@@ -61,9 +61,9 @@ export const Brodsmulesti = (props: Props) => {
                             action: 'nav.no',
                         }}
                     >
-                        <Home className={style.iconHome} title="Hjem-ikon" />
+                        <Home className={style.iconHome} title="Hjem-ikon" aria-hidden />
                         <span>nav.no</span>
-                        <Next className={style.iconNext} title="Neste-ikon" />
+                        <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
                     </LenkeMedSporing>
                 </li>
                 {shouldShowContext && (
