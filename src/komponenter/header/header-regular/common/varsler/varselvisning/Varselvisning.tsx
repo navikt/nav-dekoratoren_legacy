@@ -3,11 +3,10 @@ import { AppState } from 'store/reducers';
 import { Heading } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
 import { useSelector } from 'react-redux';
-import BEMHelper from 'utils/bem';
-import AlleVarslerLenke from './AlleVarslerLenke';
-import { VarselListe } from './VarselListe';
 import IngenVarslerIkon from 'ikoner/varsler/IngenVarslerIkon';
-import './Varselvisning.less';
+import AlleVarslerLenke from './alle-varsler-lenke/AlleVarslerLenke';
+import { VarselListe } from './varsel-liste/VarselListe';
+import './Varselvisning.scss';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data,
@@ -22,9 +21,7 @@ export const Varselvisning = ({ setKbId }: Props) => {
     const { varsler, minSideUrl } = useSelector(stateSelector);
 
     const antallVarsler = varsler?.oppgaver.length + varsler?.beskjeder.length + varsler?.innbokser.length;
-    const isTomListe = varsler && antallVarsler === 0;
-
-    const cls = BEMHelper('varsler-visning');
+    const isTomListe = true //varsler && antallVarsler === 0;
 
     return (
         <div className={isTomListe ? 'varsler-visning-tom' : 'varsler-visning'}>

@@ -1,0 +1,35 @@
+@use 'src/styling-variabler' as sv;
+
+.decorator-utils-container {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+
+    &--white {
+        background: var(--navds-semantic-color-canvas-background-light);
+    }
+    &--gray {
+        background: var(--navds-semantic-color-canvas-background);
+    }
+}
+
+.decorator-utils-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1344px;
+    min-height: 64px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0.75rem 1rem;
+
+    @media #{sv.$screen-mobile} {
+        flex-wrap: wrap;
+    }
+    @media #{sv.$screen-desktop-medium-up} {
+        padding: 0.75rem 3rem;
+    }
+    @media #{sv.$screen-desktop-large-up} {
+        padding: 0.75rem 0;
+    }
+}

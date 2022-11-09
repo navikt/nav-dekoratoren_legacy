@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
-import BEMHelper from 'utils/bem';
-import './EkspanderbarMeny.less';
+import style from './EkspanderbarMeny.module.scss';
 
 type Props = {
     isOpen: boolean;
@@ -11,18 +10,16 @@ type Props = {
 
 const EkspanderbarMeny = (props: Props) => {
     const { isOpen, classname, id, children } = props;
-    const cls = BEMHelper('ekspanderbar');
+
+    const styleActive = `${style.active} ekspanderbar__innhold-wrapper--active`;
 
     return (
-        <div className={`${cls.element('container')} ${classname}`}>
+        <div className={`${style.container} ${classname}`}>
             <div
-                className={cls.element(
-                    'innhold-wrapper',
-                    isOpen ? 'active' : ''
-                )}
+                className={`${style.innholdWrapper} ekspanderbar__innhold-wrapper ${isOpen ? styleActive : ''}`}
                 id={id}
             >
-                <div className={cls.element('innhold')}>{children}</div>
+                <div className={style.innhold}>{children}</div>
             </div>
         </div>
     );

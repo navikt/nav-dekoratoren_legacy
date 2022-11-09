@@ -37,7 +37,7 @@ import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
 import { useLogPageviews } from '../../utils/hooks/useLogPageviews';
 
-import './Header.less';
+import './Header.scss';
 
 export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
 export const decoratorLanguageCookie = CookieName.DECORATOR_LANGUAGE;
@@ -58,7 +58,7 @@ export const Header = () => {
     const { arbeidsflate } = useSelector(stateSelector);
     const { innloggingsstatus, menypunkt } = useSelector(stateSelector);
     const { authenticated } = innloggingsstatus.data;
-    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL, API_INNLOGGINGSLINJE_URL, ENV } = environment;
+    const { PARAMS, APP_URL, API_DEKORATOREN_URL, ENV } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
     const breadcrumbs = PARAMS.BREADCRUMBS || [];
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
@@ -123,10 +123,10 @@ export const Header = () => {
     // Handle external data
     useEffect(() => {
         fetchDriftsmeldinger(APP_URL)(dispatch);
-        hentInnloggingsstatus(API_INNLOGGINGSLINJE_URL)(dispatch);
+        hentInnloggingsstatus(API_DEKORATOREN_URL)(dispatch);
         fetchMenypunkter(APP_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
-            fetchFeatureToggles(API_UNLEASH_PROXY_URL, currentFeatureToggles)
+            fetchFeatureToggles(API_DEKORATOREN_URL, currentFeatureToggles)
                 .then((updatedFeatureToggles) => {
                     dispatch({
                         type: ActionType.SETT_FEATURE_TOGGLES,

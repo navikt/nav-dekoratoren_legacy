@@ -1,6 +1,6 @@
 import React from 'react';
 import { Next } from '@navikt/ds-icons';
-import './Oppgave.less';
+import './Oppgave.scss';
 import { Varsler } from 'store/reducers/varselinnboks-duck';
 import Tekst from 'tekster/finn-tekst';
 import { getLoginUrl } from 'utils/login';

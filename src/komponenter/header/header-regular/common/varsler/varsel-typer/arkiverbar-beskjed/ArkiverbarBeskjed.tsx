@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ArkiverKnapp from './ArkiverKnapp';
-import './ArkiverbarBeskjed.less';
+import './ArkiverbarBeskjed.scss';
 import Tekst from 'tekster/finn-tekst';
 
 type Props = {

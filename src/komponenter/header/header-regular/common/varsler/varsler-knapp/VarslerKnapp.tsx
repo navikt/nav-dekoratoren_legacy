@@ -8,7 +8,7 @@ import { analyticsEvent } from 'utils/analytics/analytics';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';
 import { AppState } from 'store/reducers';
-import { varslerDropdownClassname } from 'komponenter/header/header-regular/common/varsler/Varsler';
+import { varslerDropdownId } from 'komponenter/header/header-regular/common/varsler/Varsler';
 import { finnTekst } from '../../../../../../tekster/finn-tekst';
 
 export const varslerKnappId = 'varsler-knapp-id';
@@ -48,10 +48,9 @@ export const VarslerKnapp = () => {
             isOpen={isOpen}
             classname={'varselbjelle'}
             id={varslerKnappId}
-            ariaControls={varslerDropdownClassname}
+            ariaControls={varslerDropdownId}
             ariaLabel={ariaLabel()}
-        >
-            <VarselIkon antallUleste={antallVarsler} />
-        </MenylinjeKnapp>
+            icon={<VarselIkon antallUleste={antallVarsler} />}
+        />
     );
 };

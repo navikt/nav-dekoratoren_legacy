@@ -1,0 +1,35 @@
+@use 'src/styling-variabler' as sv;
+
+$main-color: var(--navds-global-color-blue-500);
+$transition-duration: 0.35s;
+$transition: all $transition-duration ease-in;
+$ulest-diameter: 12px;
+
+.ulestSirkel {
+    position: absolute;
+    z-index: 4;
+
+    border-radius: 50%;
+    height: $ulest-diameter;
+    width: $ulest-diameter;
+    left: 20px;
+    top: 26px;
+
+    @media #{sv.$screen-mobile} {
+        left: 34px;
+        top: 14px;
+    }
+
+    background-color: var(--navds-semantic-color-feedback-danger-icon);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: $transition;
+}
+
+.hide {
+    visibility: hidden;
+    transition: 0.2s all linear;
+}

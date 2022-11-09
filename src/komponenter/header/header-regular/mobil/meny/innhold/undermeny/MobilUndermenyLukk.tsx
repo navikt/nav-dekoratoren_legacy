@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { toggleUndermenyVisning } from 'store/reducers/dropdown-toggle-duck';
 import { mobilmenyKnappId } from '../../../HovedmenyMobil';
 
-import './MobilUndermenyLukk.less';
+import 'komponenter/header/header-regular/mobil/meny/innhold/undermeny/MobilUndermenyLukk.scss';
 
 const focusMenuButton = () => {
     const menuButton = document.getElementById(mobilmenyKnappId);

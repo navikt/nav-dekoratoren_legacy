@@ -20,8 +20,8 @@ export interface DataElement {
 
 export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => fetchToJson(`${APP_URL}/api/meny`);
 
-export const hentInnloggingsstatusFetch = (API_INNLOGGINGSLINJE_URL: string): Promise<innloggingsstatusData> =>
-    fetchToJson(`${API_INNLOGGINGSLINJE_URL}/auth`, {
+export const hentInnloggingsstatusFetch = (API_DEKORATOREN_URL: string): Promise<innloggingsstatusData> =>
+    fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
         credentials: 'include',
     });
 
@@ -37,16 +37,16 @@ export const lagreVarslerLestFetch = (APP_URL: string, nyesteId: number): Promis
         credentials: 'include',
     });
 
-export const postDone = (API_VARSELINNBOKS_URL: string, eventId: Object): Promise<number> =>
-    fetchToJson(`${API_VARSELINNBOKS_URL}/varsel/proxy/varsel/beskjed/done`, {
+export const postDone = (API_DEKORATOREN_URL: string, eventId: Object): Promise<number> =>
+    fetchToJson(`${API_DEKORATOREN_URL}/varsel/proxy/varsel/beskjed/done`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(eventId),
         credentials: 'include',
     });
 
-export const fetchFeatureToggles = (API_UNLEASH_PROXY_URL: string, featureToggles: FeatureToggles) =>
-    fetchToJson(`${API_UNLEASH_PROXY_URL}/feature-toggles${getFeatureToggleUrl(featureToggles)}`, {
+export const fetchFeatureToggles = (API_DEKORATOREN_URL: string, featureToggles: FeatureToggles) =>
+    fetchToJson(`${API_DEKORATOREN_URL}/feature-toggles${getFeatureToggleUrl(featureToggles)}`, {
         credentials: 'include',
     });
 

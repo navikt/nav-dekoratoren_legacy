@@ -1,24 +1,28 @@
-import React from 'react';
-import BEMHelper from 'utils/bem';
-import './HamburgerIkon.less';
+import React, { useId } from 'react';
+import 'komponenter/header/header-regular/common/meny-knapp/hamburger-ikon/HamburgerIkon.scss';
 
-type Props = {
-    isOpen: boolean;
-};
-
-const Linje = ({ className, isOpen }: { className: string; isOpen: boolean }) => (
-    <span className={`${className}${isOpen ? ` ${className}--open` : ''}`} />
-);
-
-const HamburgerIkon = ({ isOpen }: Props) => {
-    const cls = BEMHelper('hamburger-ikon');
-
+const HamburgerIkon = () => {
+    const id = useId();
     return (
-        <span className={`${cls.className}${isOpen ? ` ${cls.className}--open` : ''}`}>
-            <Linje className={cls.element('topp')} isOpen={isOpen} />
-            <Linje className={cls.element('midt')} isOpen={isOpen} />
-            <Linje className={cls.element('bunn')} isOpen={isOpen} />
-        </span>
+        <svg
+            className="menuBurger"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
+            aria-hidden="true"
+            focusable="false"
+            aria-labelledby={'menuBurger_' + id}
+            role="img"
+        >
+            <title id={'menuBurger_' + id}>Meny-ikon</title>
+            <path className="menuBurger__line-1" d="M2 4h20" />
+            <path className="menuBurger__line-2" d="M2 12h20" />
+            <path className="menuBurger__line-3" d="M2 20h20" />
+        </svg>
     );
 };
 

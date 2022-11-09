@@ -1,7 +1,7 @@
 import React from 'react';
 import { Next } from '@navikt/ds-icons';
 import Tekst from 'tekster/finn-tekst';
-import './InnboksBeskjed.less';
+import './InnboksBeskjed.scss';
 
 type Props = {
     eventId: string;

@@ -4,7 +4,7 @@ import Tekst from 'tekster/finn-tekst';
 import { fjernLestVarsel } from 'store/reducers/varselinnboks-duck';
 import { useDispatch } from 'react-redux';
 import { postDone } from 'api/api';
-import './Beskjed.less';
+import './Beskjed.scss';
 
 type Props = {
     eventId: string;

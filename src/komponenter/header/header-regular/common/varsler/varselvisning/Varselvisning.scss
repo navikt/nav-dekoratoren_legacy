@@ -1,0 +1,72 @@
+@use 'src/styling-variabler' as sv;
+
+.varsler-visning {
+    margin: 0 auto;
+    box-sizing: initial;
+    overflow-y: scroll;
+
+    ul {
+        padding: 0;
+    }
+
+    &-tittel {
+        margin: 1rem 0;
+        width: 100%;
+    }
+
+    @media #{sv.$screen-mobile} {
+        padding: 1rem 1rem;
+        background-color: #f7f7f7;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        &-tittel {
+            font-size: 2rem;
+            line-height: 2.25rem;
+        }
+    }
+
+    @media (max-width: 476px) {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    &-tom-liste {
+        margin-top: 1rem;
+    }
+
+    .dekorator-vis-alle-lenke {
+        margin-top: 0.5rem;
+    }
+}
+
+.vis-alle-lenke {
+    color: #262626;
+}
+
+.varsler-visning-tom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.varsler-visning-tom-tittel {
+    margin: 1rem 0 2rem 0;
+    width: 100%;
+
+    @media (max-width: 768px) {
+        padding-left: 1rem;
+    }
+}
+
+.varsler-tom-hovedtekst {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 32px 0 4px 0;
+}
+
+.varsler-tom-ingress {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 4px 0 32px 0;
+}

@@ -6,7 +6,7 @@ import { AnalyticsCategory, AnalyticsEventArgs } from '../../../../../../../../u
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../../../../../../store/reducers';
 
-import './MobilMenypunkt.less';
+import 'src/komponenter/header/header-regular/mobil/meny/innhold/hovedmeny/menypunkt/MobilMenypunkt.scss';
 
 type Props = {
     analyticsEventArgs?: AnalyticsEventArgs;
@@ -43,7 +43,7 @@ export const MobilMenypunkt = (props: Props) => {
     const Children = () => (
         <>
             {tekst}
-            <Next />
+            <Next aria-hidden />
         </>
     );
 

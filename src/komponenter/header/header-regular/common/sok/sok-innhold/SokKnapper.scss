@@ -1,0 +1,125 @@
+@use 'src/styling-variabler.scss' as sv;
+
+.sok-knapper__container {
+    display: flex;
+    height: 3.1rem;
+    position: absolute;
+    top: 2.05rem;
+    right: 0;
+}
+
+.sok-knapper__knapp {
+    display: flex;
+    height: 100%;
+    background: none;
+    align-items: center;
+    color: var(--navds-global-color-blue-500);
+    padding: 0 1rem;
+    font-weight: 600;
+    border-top: 3px solid var(--navds-global-color-blue-500);
+    border-bottom: 3px solid var(--navds-global-color-blue-500);
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    cursor: pointer;
+}
+
+.sok-knapper__knapp:focus {
+    z-index: 1;
+    outline: 0;
+    background-color: white;
+    box-shadow: 0 0 0 3px var(--navds-semantic-color-focus);
+    color: var(--navds-global-color-blue-500);
+    border: 3px solid transparent;
+}
+
+.sok-knapper__knapp:hover {
+    border-color: var(--navds-global-color-blue-500);
+}
+
+.sok-knapper__knapp-avbryt {
+    border: 3px solid transparent;
+    box-shadow: none;
+}
+
+.sok-knapper__ikon-container {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: block;
+}
+
+@media #{sv.$screen-desktop} {
+    .sok-knapper__knapp-submit {
+        border-radius: 0 3px 3px 0;
+        color: white;
+        background-color: var(--navds-global-color-blue-500);
+    }
+
+    .sok-knapper__knapp-submit .sok-ikon__line {
+        background-color: var(--navds-global-color-white);
+    }
+
+    .sok-knapper__knapp-submit .sok-ikon > * {
+        border-color: var(--navds-global-color-white);
+    }
+
+    .sok-knapper__knapp-submit:active,
+    .sok-knapper__knapp-submit:hover {
+        color: white;
+        border-color: #0074df;
+        background-color: #0074df;
+    }
+
+    .sok-knapper__knapp-submit:active .sok-knapper__sok-circle,
+    .sok-knapper__knapp-submit:hover .sok-knapper__sok-circle {
+        border-color: white;
+    }
+
+    .sok-knapper__knapp-submit:active .sok-knapper__sok-line,
+    .sok-knapper__knapp-submit:hover .sok-knapper__sok-line {
+        background-color: white;
+    }
+
+    .sok-knapper__knapp-submit:focus .sok-ikon__line {
+        background-color: var(--navds-global-color-blue-500);
+    }
+
+    .sok-knapper__knapp-submit:focus .sok-ikon > * {
+        border-color: var(--navds-global-color-blue-500);
+    }
+
+    .sok-knapper__ikon-container {
+        margin-right: 8px;
+    }
+}
+
+@media #{sv.$screen-mobile} {
+    .sok-knapper__container {
+        align-self: center;
+        height: 3rem;
+    }
+
+    .sok-knapper__knapp {
+        border: 3px solid transparent;
+    }
+
+    .sok-knapper__knapp-submit {
+        background-color: transparent;
+    }
+
+    .sok-knapper__knapp-submit .sok-knapper__ikon-container {
+        bottom: 4px;
+    }
+
+    .sok-knapper__knapp-tekst {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        white-space: nowrap;
+    }
+}
