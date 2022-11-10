@@ -37,9 +37,7 @@ export const Sticky = ({ mobileFixed, children }: Props) => {
         const setFocusScrollOffset = focusOverlapHandler(stickyElement);
 
         const activateStickyHeader = () => {
-            console.log('Activating sticky header');
             setStickyOffset();
-
             window.addEventListener('focusin', setFocusScrollOffset);
             window.addEventListener('scroll', setStickyOffset);
             window.addEventListener('resize', setStickyOffset);
@@ -47,7 +45,6 @@ export const Sticky = ({ mobileFixed, children }: Props) => {
         };
 
         if (document.readyState === 'complete') {
-            console.log('Not ready, deferring activation of sticky header');
             activateStickyHeader();
         } else {
             window.addEventListener('load', activateStickyHeader);
