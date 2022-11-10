@@ -21,12 +21,6 @@ const cache = new NodeCache({
     checkperiod: oneMinuteInSeconds,
 });
 
-const fileFavicon = require('ikoner/favicon/favicon.ico');
-const fileAppleTouchIcon = require('ikoner/favicon/apple-touch-icon.png');
-const fileFavicon16x16 = require('ikoner/favicon/favicon-16x16.png');
-const fileFavicon32x32 = require('ikoner/favicon/favicon-32x32.png');
-
-const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
 const buildId = process.env.BUILD_ID;
 
 export const template = (req: Request) => {
@@ -86,10 +80,6 @@ export const template = (req: Request) => {
             <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no' />
             <meta name='theme-color' content='#000000' />
             <meta charset='utf-8' />
-            <link rel="icon" type="image/x-icon" href=${appUrl}${fileFavicon} />
-            <link rel="icon" type="image/png" sizes="16x16" href=${appUrl}${fileFavicon16x16} />
-            <link rel="icon" type="image/png" sizes="32x32" href=${appUrl}${fileFavicon32x32} />
-            <link rel="apple-touch-icon" sizes="180x180" href=${appUrl}${fileAppleTouchIcon} />
             <!-- Decorator development styling -->
             <!-- Hide decorator-utils-container to prevent content spoofing attacks via the breadcrumbs parameter -->
             <style>
