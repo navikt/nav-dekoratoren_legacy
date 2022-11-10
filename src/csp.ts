@@ -13,33 +13,34 @@ const hotjarCom = '*.hotjar.com';
 const hotjarIo = '*.hotjar.io';
 const taskAnalytics = '*.taskanalytics.com';
 
+const styleSrc = [
+    navno,
+    vergicScreenSharing,
+    UNSAFE_INLINE, // chatbot (styled-components) and some of our own components with style-attributes
+];
+
+const scriptSrc = [
+    navno,
+    vergicScreenSharing,
+    googleTagManager,
+    googleAnalytics,
+    hotjarCom,
+    taskAnalytics,
+    UNSAFE_INLINE, // GTM
+];
+
 const directives: Partial<CSPDirectives> = {
     'default-src': [navno],
     'script-src': [
-        navno,
-        UNSAFE_INLINE, // GTM
+        ...scriptSrc,
         UNSAFE_EVAL, // vergic
     ],
-    'script-src-elem': [
-        navno,
-        vergicScreenSharing,
-        googleTagManager,
-        googleAnalytics,
-        hotjarCom,
-        taskAnalytics,
-        UNSAFE_INLINE, // GTM
-    ],
+    'script-src-elem': scriptSrc,
     'worker-src': [
         BLOB, // vergic
     ],
-    'style-src': [
-        UNSAFE_INLINE, // chatbot (styled-components) and some of our own components with style-attributes
-    ],
-    'style-src-elem': [
-        navno,
-        vergicScreenSharing,
-        UNSAFE_INLINE, // vergic
-    ],
+    'style-src': styleSrc,
+    'style-src-elem': styleSrc,
     'font-src': [
         vergicScreenSharing,
         hotjarCom,
