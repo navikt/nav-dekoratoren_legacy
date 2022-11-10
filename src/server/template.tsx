@@ -76,9 +76,7 @@ export const template = (req: Request) => {
         <head>
             <title>NAV Dekoratør</title>
             <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-            <meta name='description' content='Felles header og footer for NAV-applikasjoner i selvbetjeningssonen' />
-            <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no' />
-            <meta name='theme-color' content='#000000' />
+            <meta name='description' content='Felles header og footer for nav.no' />
             <meta charset='utf-8' />
             <meta name='robots' content='noindex, nofollow' />
             <!-- Decorator development styling -->
