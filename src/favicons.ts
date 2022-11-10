@@ -7,14 +7,13 @@ const fileFavicon192x192 = require('ikoner/favicon/favicon-192x192.png');
 type FaviconProps = {
     file: string;
     type: string;
-    size: number;
+    size?: number;
 };
 
 const favIcons: FaviconProps[] = [
     {
         file: fileFaviconIco,
         type: 'image/x-icon',
-        size: 32,
     },
     {
         file: fileFavicon32x32,
@@ -56,7 +55,9 @@ export const injectFaviconLinks = (appUrl: string) => {
         link.setAttribute('rel', 'icon');
         link.setAttribute('type', type);
         link.setAttribute('href', iconUrl);
-        link.setAttribute('sizes', `${size}x${size}`);
+        if (size) {
+            link.setAttribute('sizes', `${size}x${size}`);
+        }
 
         document.head.appendChild(link);
     });
