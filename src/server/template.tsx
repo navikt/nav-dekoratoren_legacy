@@ -80,6 +80,7 @@ export const template = (req: Request) => {
             <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no' />
             <meta name='theme-color' content='#000000' />
             <meta charset='utf-8' />
+            <meta name='robots' content='noindex, nofollow' />
             <!-- Decorator development styling -->
             <!-- Hide decorator-utils-container to prevent content spoofing attacks via the breadcrumbs parameter -->
             <style>
@@ -113,7 +114,10 @@ export const template = (req: Request) => {
                 <div id='${headerId}'>
                     <div id='decorator-header'>${HtmlHeader}</div>
                 </div>
-                <div class='decorator-dummy-app'>
+                <div class='decorator-dummy-app decorator-wrapper'>
+                    <div class='navds-alert navds-alert--info navds-alert--medium'>
+                        <span>Hei! Dette er en intern test-side for header og footer på nav.no. <a href='https://www.nav.no'>Gå til forsiden</a>.</span>
+                    </div>
                 </div>
                 <!-- Footer fetched by apps -->
                 <div id='${footerId}'>
