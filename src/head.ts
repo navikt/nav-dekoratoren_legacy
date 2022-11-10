@@ -3,6 +3,10 @@ const faviconSvg = require('ikoner/favicon/favicon.svg');
 const appleTouchIcon = require('ikoner/favicon/apple-touch-icon.png');
 const webManifest = require('ikoner/favicon/site.webmanifest');
 
+// Files referred from webmanifest
+require('ikoner/favicon/android-chrome-192x192.png');
+require('ikoner/favicon/android-chrome-512x512.png');
+
 type Tag = {
     tag: string;
     attribs: Record<string, string>;
