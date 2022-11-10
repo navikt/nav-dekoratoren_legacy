@@ -48,6 +48,10 @@ jobs:
         run: |
           docker build -t ${{ env.image }} .
           docker push ${{ env.image }}
+      - name: Push image as latest
+        if: ${{ startsWith(inputs.IMAGE_NAME, 'beta-navno') }}
+        run: |
+          docker push ghcr.io/${{ github.repository }}:latest
       - uses: nais/deploy/actions/deploy@master
         env:
           CLUSTER: ${{ inputs.CLUSTER }}
