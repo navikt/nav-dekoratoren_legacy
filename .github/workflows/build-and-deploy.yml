@@ -49,7 +49,7 @@ jobs:
           docker build -t ${{ env.image }} .
           docker push ${{ env.image }}
       - name: Push release-image as latest
-        if: ${{ startsWith(inputs.IMAGE_NAME, 'beta-navno') }}
+        if: ${{ startsWith(inputs.IMAGE_NAME, 'release') }}
         run: |
           docker tag ${{ env.image }} ghcr.io/${{ github.repository }}:latest
           docker push ghcr.io/${{ github.repository }}:latest
