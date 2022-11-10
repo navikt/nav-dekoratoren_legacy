@@ -46,11 +46,8 @@ export const injectFaviconLinks = (appUrl: string) => {
 
     favIcons.forEach(({ file, type, size }) => {
         const iconUrl = `${appUrl}${file}`;
-        console.log(iconUrl);
 
         const linkExists = !!document.querySelector(`link[rel=icon][href="${iconUrl}"]`);
-        console.log(`Exists? ${linkExists}`);
-
         if (linkExists) {
             return;
         }
