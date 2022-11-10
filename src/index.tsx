@@ -14,6 +14,7 @@ import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
 import { getSalesforceContainer } from './server/utils';
+import { injectHeadTags } from './head';
 
 import './index.scss';
 
@@ -54,6 +55,8 @@ const run = () => {
     fetchEnv()
         .then((environment) => {
             initAnalytics(environment.PARAMS);
+            injectHeadTags(environment.APP_URL);
+
             const store = createStore(environment);
 
             const headerContainer =
