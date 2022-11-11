@@ -2,6 +2,7 @@ import React from 'react';
 import { Next } from '@navikt/ds-icons';
 import Tekst from 'tekster/finn-tekst';
 import './InnboksBeskjed.scss';
+import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 
 type Props = {
     eventId: string;
@@ -15,7 +16,11 @@ const InnboksBeskjed = ({ eventId, tekst, dato, href, isMasked }: Props) => {
     //TODO: Legge inn stepup-tekst i alle språk.
 
     return (
-        <a className="beskjed" href={href}>
+        <a
+            className="beskjed"
+            href={href}
+            onClick={() => logAmplitudeEvent('navigere', { komponent: 'Beskjed - Innboks' })}
+        >
             <div className="beskjed__ikon"></div>
             <div className="beskjed__content-wrapper">
                 <div className="beskjed__text-wrapper">

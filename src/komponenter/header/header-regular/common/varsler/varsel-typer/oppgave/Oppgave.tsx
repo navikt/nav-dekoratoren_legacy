@@ -4,6 +4,7 @@ import './Oppgave.scss';
 import { Varsler } from 'store/reducers/varselinnboks-duck';
 import Tekst from 'tekster/finn-tekst';
 import { getLoginUrl } from 'utils/login';
+import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 
 type Props = {
     tekst: string;
@@ -14,8 +15,9 @@ type Props = {
 
 const Oppgave = ({ tekst, dato, href, isMasked }: Props) => {
     //TODO: Legge inn stepup-tekst i alle språk.
+
     return (
-        <a className="oppgave" href={href}>
+        <a className="oppgave" href={href} onClick={() => logAmplitudeEvent('navigere', { komponent: 'Oppgave' })}>
             <div className="oppgave__ikon"></div>
             <div className="oppgave__content-wrapper">
                 <div className="oppgave__text-wrapper">

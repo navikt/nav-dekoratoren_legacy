@@ -5,6 +5,7 @@ import { fjernLestVarsel } from 'store/reducers/varselinnboks-duck';
 import { useDispatch } from 'react-redux';
 import { postDone } from 'api/api';
 import './Beskjed.scss';
+import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 
 type Props = {
     eventId: string;
@@ -23,6 +24,7 @@ const Beskjed = ({ eventId, apiVarselinnboksUrl, tekst, dato, href, isMasked }: 
     const handleOnClick = () => {
         postDone(apiVarselinnboksUrl, { eventId: eventId });
         dispatch(fjernLestVarsel(eventId));
+        logAmplitudeEvent('navigere', { komponent: 'Beskjed' });
     };
 
     return (
