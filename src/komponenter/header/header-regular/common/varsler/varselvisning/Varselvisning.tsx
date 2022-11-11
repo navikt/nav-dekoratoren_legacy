@@ -25,23 +25,21 @@ export const Varselvisning = ({ setKbId }: Props) => {
 
     return (
         <div className={isTomListe ? 'varsler-visning-tom' : 'varsler-visning'}>
-            <Heading
-                level="2"
-                size="medium"
-                className={isTomListe ? 'varsler-visning-tom-tittel' : 'varsler-visning-tittel'}
-            >
-                <Tekst id={'varsler-tittel'} />
-            </Heading>
             {isTomListe ? (
-                <div className={'varsler-visning-tom-liste'}>
-                    <IngenVarslerIkon />
-                    <p className="varsler-tom-hovedtekst">
-                        <Tekst id={'varsler-tom-liste'} />
-                    </p>
-                    <p className="varsler-tom-ingress">
-                        <Tekst id={'varsler-tom-liste-ingress'} />
-                    </p>
-                </div>
+                <>
+                    <Heading level="2" size="medium" className={'varsler-visning-tom-tittel'}>
+                        <Tekst id={'varsler-tittel'} />
+                    </Heading>
+                    <div className={'varsler-visning-tom-liste'}>
+                        <IngenVarslerIkon />
+                        <p className="varsler-tom-hovedtekst">
+                            <Tekst id={'varsler-tom-liste'} />
+                        </p>
+                        <p className="varsler-tom-ingress">
+                            <Tekst id={'varsler-tom-liste-ingress'} />
+                        </p>
+                    </div>
+                </>
             ) : (
                 <VarselListe varsler={varsler} rowIndex={setKbId ? 0 : undefined} />
             )}
