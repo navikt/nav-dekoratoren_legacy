@@ -1,9 +1,8 @@
 @use 'src/styling-variabler' as sv;
 
 .varsler-visning {
-    margin: 0 auto;
+    margin: 24px auto 0 auto;
     box-sizing: initial;
-    overflow-y: scroll;
 
     ul {
         padding: 0;
