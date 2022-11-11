@@ -52,7 +52,7 @@
 
     .innhold {
         padding: 1.5rem sv.$margins-sides-desktop;
-        overflow-x: hidden;
+        overflow: hidden;
         overflow-y: scroll;
         max-height: 80vh;
 
@@ -88,5 +88,6 @@
     .innhold {
         height: 100%;
         padding: 0;
+        max-height: 100%;
     }
 }
