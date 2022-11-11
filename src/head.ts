@@ -60,7 +60,6 @@ export const injectHeadTags = (appUrl: string) => {
 
         const tagExists = !!document.querySelector(selector);
         if (tagExists) {
-            console.log(`Exists: ${selector}`);
             return;
         }
 
