@@ -38,7 +38,7 @@ export const lagreVarslerLestFetch = (APP_URL: string, nyesteId: number): Promis
     });
 
 export const postDone = (API_DEKORATOREN_URL: string, eventId: Object): Promise<number> =>
-    fetchToJson(`${API_DEKORATOREN_URL}/varsel/proxy/varsel/beskjed/done`, {
+    fetchToJson(`${API_DEKORATOREN_URL}/varsel/beskjed/done`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(eventId),
