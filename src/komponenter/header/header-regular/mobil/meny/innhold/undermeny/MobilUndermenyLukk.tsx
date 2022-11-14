@@ -30,7 +30,7 @@ export const MobilUndermenyLukk = () => {
             }}
             className={'mobilUndermenyLukk'}
         >
-            <Back />
+            <Back aria-hidden />
             <Label>
                 <Tekst id="tilbake-til-overskrift" />
             </Label>
