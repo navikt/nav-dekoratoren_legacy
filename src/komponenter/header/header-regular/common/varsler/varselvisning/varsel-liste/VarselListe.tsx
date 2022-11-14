@@ -19,6 +19,7 @@ import Tekst from 'tekster/finn-tekst';
 import InnboksBeskjed from '../../varsel-typer/innboks-beskjed/InnboksBeskjed';
 import { Bell } from '@navikt/ds-icons';
 import { BodyShort, Detail } from '@navikt/ds-react';
+import { sortByEventTidspunkt } from 'utils/sorter';
 
 dayjs.extend(localizedFormat);
 dayjs.extend(isToday);
@@ -46,6 +47,8 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
     const hasNoOppgaver = varsler?.oppgaver.length === 0;
     const hasNoBeskjeder = varsler?.beskjeder.length + varsler?.innbokser.length === 0;
 
+    console.log(varsler?.oppgaver);
+
     return (
         <div className="varselliste-wrapper">
             {hasNoOppgaver ? null : (
@@ -55,7 +58,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                     </Heading>
                     <ul>
                         {varsler &&
-                            varsler?.oppgaver?.map((o) => (
+                            varsler?.oppgaver?.sort(sortByEventTidspunkt).map((o) => (
                                 <li key={o.eventId}>
                                     <Oppgave
                                         tekst={o.tekst}
@@ -75,7 +78,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                     </Heading>
                     <ul>
                         {varsler &&
-                            varsler?.beskjeder?.map((b) =>
+                            varsler?.beskjeder?.sort(sortByEventTidspunkt).map((b) =>
                                 !hasNoHref(b.link) || b.isMasked ? (
                                     <li key={b.eventId}>
                                         <Beskjed
@@ -100,7 +103,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                 )
                             )}
                         {varsler &&
-                            varsler?.innbokser?.map((i) => (
+                            varsler?.innbokser?.sort(sortByEventTidspunkt).map((i) => (
                                 <li key={i.eventId}>
                                     <InnboksBeskjed
                                         eventId={i.eventId}

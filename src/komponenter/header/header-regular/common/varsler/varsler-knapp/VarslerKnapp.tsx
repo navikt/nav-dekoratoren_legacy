@@ -50,6 +50,8 @@ export const VarslerKnapp = () => {
             id={varslerKnappId}
             ariaControls={varslerDropdownId}
             ariaLabel={ariaLabel()}
+            aria-live={'polite'}
+            aria-atomic={'true'}
             icon={<VarselIkon antallUleste={antallVarsler} />}
         />
     );
