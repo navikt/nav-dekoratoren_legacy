@@ -47,7 +47,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
     const hasNoHref = (href: string) => href === undefined || href === null || href === '';
 
     const hasNoOppgaver = varsler?.oppgaver.length === 0;
-    const hasNoBeskjeder = varsler?.beskjeder.length + varsler?.innbokser.length === 0;
+    const hasNoBeskjeder = varsler?.beskjeder.length === 0;
     const screenReaderText = activateScreenReaderText ? <Tekst id={'varsler-arkiver-skjermleser'} /> : null;
 
     return (
@@ -80,7 +80,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                     <ul>
                         {varsler &&
                             varsler?.beskjeder?.sort(sortByEventTidspunkt).map((b) =>
-                                b.type === 'innboks' ? (
+                                b.type === 'INNBOKS' ? (
                                     <li key={b.eventId}>
                                         <InnboksBeskjed
                                             eventId={b.eventId}

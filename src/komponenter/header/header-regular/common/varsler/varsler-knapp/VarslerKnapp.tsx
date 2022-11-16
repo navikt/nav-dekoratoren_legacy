@@ -24,7 +24,7 @@ export const VarslerKnapp = () => {
     const dispatch = useDispatch();
     const { isOpen, varsler, appUrl, language } = useSelector(stateSelector);
 
-    const antallVarsler = varsler?.oppgaver.length + varsler?.beskjeder.length + varsler?.innbokser.length;
+    const antallVarsler = varsler?.oppgaver.length + varsler?.beskjeder.length;
 
     const toggleVarslerDropdown = () => {
         analyticsEvent({

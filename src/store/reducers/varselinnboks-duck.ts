@@ -17,7 +17,6 @@ export interface VarselinnboksState extends DataElement {
 export interface VarslerData {
     oppgaver: Varsler[];
     beskjeder: Varsler[];
-    innbokser: Varsler[];
 }
 
 export interface Varsler {
@@ -33,7 +32,6 @@ export const initialState: VarselinnboksState = {
     data: {
         oppgaver: [],
         beskjeder: [],
-        innbokser: [],
     },
     status: Status.IKKE_STARTET,
 };
