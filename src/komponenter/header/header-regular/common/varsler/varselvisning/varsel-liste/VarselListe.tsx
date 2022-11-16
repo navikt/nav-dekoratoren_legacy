@@ -47,8 +47,6 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
     const hasNoOppgaver = varsler?.oppgaver.length === 0;
     const hasNoBeskjeder = varsler?.beskjeder.length + varsler?.innbokser.length === 0;
 
-    console.log(varsler?.oppgaver);
-
     return (
         <div className="varselliste-wrapper">
             {hasNoOppgaver ? null : (
