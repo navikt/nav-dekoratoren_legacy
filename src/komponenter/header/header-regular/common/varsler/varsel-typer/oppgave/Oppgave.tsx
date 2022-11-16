@@ -1,9 +1,7 @@
 import React from 'react';
 import { Next } from '@navikt/ds-icons';
 import './Oppgave.scss';
-import { Varsler } from 'store/reducers/varselinnboks-duck';
 import Tekst from 'tekster/finn-tekst';
-import { getLoginUrl } from 'utils/login';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 
 type Props = {
