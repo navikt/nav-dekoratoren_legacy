@@ -31,9 +31,9 @@ export const Varsler = ({ kbNavMainState }: Props) => {
             <VarslerKnapp />
             <EkspanderbarMeny
                 classname={style.varslerDropdown}
+                classnameInnhold={style.varslerInnhold}
                 id={varslerDropdownId}
                 isOpen={isOpen}
-                classnameInnhold={style.varslerInnhold}
             >
                 <SlideToClose>
                     <Varselvisning setKbId={true} />
