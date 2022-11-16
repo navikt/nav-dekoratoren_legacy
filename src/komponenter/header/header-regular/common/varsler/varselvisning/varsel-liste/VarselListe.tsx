@@ -42,7 +42,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
 
     const hasNoOppgaver = varsler?.oppgaver.length === 0;
     const hasNoBeskjeder = varsler?.beskjeder.length === 0;
-    const screenReaderText = activateScreenReaderText ? <Tekst id={'varsler-arkiver-skjermleser'} /> : null;
+    const screenReaderText = activateScreenReaderText ? <Tekst id={'varsler-arkiver-skjermleser'} /> : '';
 
     return (
         <div className="varselliste-wrapper">

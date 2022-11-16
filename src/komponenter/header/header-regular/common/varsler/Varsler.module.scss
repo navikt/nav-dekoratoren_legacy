@@ -11,9 +11,10 @@
 .varslerInnhold {
     overflow-y: auto;
     max-height: 80vh;
+    background-color: #f7f7f7;
 
     @media #{sv.$screen-desktop} {
-        overflow-y: scroll;
+        overflow-y: auto;
         max-height: 80vh;
     }
 

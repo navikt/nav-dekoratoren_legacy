@@ -35,7 +35,7 @@ export const VarslerKnapp = () => {
 
     const ariaLabel = () => {
         if (antallVarsler > 0) {
-            return finnTekst('varsler-tittel', language) + `. Du har ${antallVarsler} varsler.`;
+            return finnTekst('varsler-antall', language, antallVarsler.toString());
         }
         return finnTekst('varsler-tittel', language) + '. ' + finnTekst('varsler-tom-liste', language);
     };
