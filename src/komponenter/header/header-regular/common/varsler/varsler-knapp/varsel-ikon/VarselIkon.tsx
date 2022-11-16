@@ -9,7 +9,7 @@ type Props = {
 export const VarselIkon = ({ antallUleste = 0 }: Props) => {
     return (
         <>
-            <Bell aria-hidden className={style.varselBellIkon} />
+            <Bell width={"24px"} height={"24px"} aria-hidden className={style.varselBellIkon} />
             <svg
                 width="17"
                 height="16"
