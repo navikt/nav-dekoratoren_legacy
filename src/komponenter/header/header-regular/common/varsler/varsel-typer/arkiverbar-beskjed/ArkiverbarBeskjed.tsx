@@ -9,9 +9,17 @@ type Props = {
     tekst: string;
     dato: string;
     isMasked: boolean;
+    setActivateScreenReaderText: (setActivateScreenReaderText: boolean) => void;
 };
 
-const ArkiverbarBeskjed = ({ eventId, apiVarselinnboksUrl, tekst, dato, isMasked }: Props) => {
+const ArkiverbarBeskjed = ({
+    eventId,
+    apiVarselinnboksUrl,
+    tekst,
+    dato,
+    isMasked,
+    setActivateScreenReaderText,
+}: Props) => {
     const [isHover, setIsHover] = useState(false);
 
     //TODO: Legge inn stepup-tekst i alle språk.
@@ -24,7 +32,12 @@ const ArkiverbarBeskjed = ({ eventId, apiVarselinnboksUrl, tekst, dato, isMasked
                 </div>
                 <div className="arkiverbar-beskjed__dato-og-knapp">
                     <div className="arkiverbar-beskjed__dato">{dato}</div>
-                    <ArkiverKnapp eventId={eventId} apiVarselinnboksUrl={apiVarselinnboksUrl} setIsHover={setIsHover} />
+                    <ArkiverKnapp
+                        eventId={eventId}
+                        apiVarselinnboksUrl={apiVarselinnboksUrl}
+                        setIsHover={setIsHover}
+                        setActivateScreenReaderText={setActivateScreenReaderText}
+                    />
                 </div>
             </div>
         </div>

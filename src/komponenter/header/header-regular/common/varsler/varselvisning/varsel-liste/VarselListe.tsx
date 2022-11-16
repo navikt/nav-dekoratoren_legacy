@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
@@ -20,6 +20,7 @@ import InnboksBeskjed from '../../varsel-typer/innboks-beskjed/InnboksBeskjed';
 import { Bell } from '@navikt/ds-icons';
 import { BodyShort, Detail } from '@navikt/ds-react';
 import { sortByEventTidspunkt } from 'utils/sorter';
+import style from './VarselListe.module.scss';
 
 dayjs.extend(localizedFormat);
 dayjs.extend(isToday);
@@ -38,6 +39,7 @@ const formatDato = (datoString: string) => {
 };
 
 export const VarselListe = ({ varsler, rowIndex }: Props) => {
+    const [activateScreenReaderText, setActivateScreenReaderText] = useState(false);
     const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
     const environment = useSelector((state: AppState) => state.environment);
     const { API_DEKORATOREN_URL } = environment;
@@ -46,6 +48,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
 
     const hasNoOppgaver = varsler?.oppgaver.length === 0;
     const hasNoBeskjeder = varsler?.beskjeder.length + varsler?.innbokser.length === 0;
+    const screenReaderText = activateScreenReaderText ? <Tekst id={'varsler-arkiver-skjermleser'} /> : null;
 
     return (
         <div className="varselliste-wrapper">
@@ -77,7 +80,17 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                     <ul>
                         {varsler &&
                             varsler?.beskjeder?.sort(sortByEventTidspunkt).map((b) =>
-                                !hasNoHref(b.link) || b.isMasked ? (
+                                b.type === 'innboks' ? (
+                                    <li key={b.eventId}>
+                                        <InnboksBeskjed
+                                            eventId={b.eventId}
+                                            tekst={b.tekst}
+                                            dato={formatDato(b.tidspunkt)}
+                                            href={b.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : b.link}
+                                            isMasked={b.isMasked}
+                                        />
+                                    </li>
+                                ) : !hasNoHref(b.link) || b.isMasked ? (
                                     <li key={b.eventId}>
                                         <Beskjed
                                             eventId={b.eventId}
@@ -96,25 +109,17 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                             tekst={b.tekst}
                                             dato={formatDato(b.tidspunkt)}
                                             isMasked={b.isMasked}
+                                            setActivateScreenReaderText={setActivateScreenReaderText}
                                         />
                                     </li>
                                 )
                             )}
-                        {varsler &&
-                            varsler?.innbokser?.sort(sortByEventTidspunkt).map((i) => (
-                                <li key={i.eventId}>
-                                    <InnboksBeskjed
-                                        eventId={i.eventId}
-                                        tekst={i.tekst}
-                                        dato={formatDato(i.tidspunkt)}
-                                        href={i.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : i.link}
-                                        isMasked={i.isMasked}
-                                    />
-                                </li>
-                            ))}
                     </ul>
                 </>
             )}
+            <span aria-live="polite" className={style.ariaTextContainer}>
+                {screenReaderText}
+            </span>
         </div>
     );
 };

@@ -21,6 +21,7 @@ export interface VarslerData {
 }
 
 export interface Varsler {
+    type: string;
     tidspunkt: string;
     eventId: string;
     tekst: string;
@@ -30,18 +31,15 @@ export interface Varsler {
 
 export const initialState: VarselinnboksState = {
     data: {
-            oppgaver: [],
-            beskjeder: [],
-            innbokser: [],
+        oppgaver: [],
+        beskjeder: [],
+        innbokser: [],
     },
     status: Status.IKKE_STARTET,
 };
 
 //  Reducer
-export default function reducer(
-    state: VarselinnboksState = initialState,
-    action: Handling,
-): VarselinnboksState {
+export default function reducer(state: VarselinnboksState = initialState, action: Handling): VarselinnboksState {
     switch (action.type) {
         case ActionType.HENT_VARSLER_OK: {
             return { ...state, status: Status.OK, data: action.data };
@@ -56,7 +54,7 @@ export default function reducer(
         case ActionType.SETT_VARSLER_OK:
             return { ...state, status: Status.OK };
         case ActionType.SETT_VARSLER_LEST:
-            return { ...state, data: { ...state.data} };
+            return { ...state, data: { ...state.data } };
         case ActionType.FJERN_LEST_VARSEL:
             return {
                 ...state,

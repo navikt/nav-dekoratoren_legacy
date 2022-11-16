@@ -9,13 +9,16 @@ type Props = {
     eventId: string;
     apiVarselinnboksUrl: string;
     setIsHover: (setIsHover: boolean) => void;
+    setActivateScreenReaderText: (setActivateScreenReaderText: boolean) => void;
 };
 
-const ArkiverKnapp = ({ eventId, apiVarselinnboksUrl, setIsHover }: Props) => {
+const ArkiverKnapp = ({ eventId, apiVarselinnboksUrl, setIsHover, setActivateScreenReaderText }: Props) => {
     const dispatch = useDispatch();
 
     const handleOnClick = () => {
         postDone(apiVarselinnboksUrl, { eventId: eventId });
+        setActivateScreenReaderText(false);
+        setActivateScreenReaderText(true);
         dispatch(fjernLestVarsel(eventId));
         logAmplitudeEvent('navigere', { komponent: 'Arkivert beskjed' });
     };
