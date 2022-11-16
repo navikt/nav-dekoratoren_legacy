@@ -1,6 +1,6 @@
 @use 'src/styling-variabler' as sv;
 
-.varsler-dropdown {
+.varslerDropdown {
     @media #{sv.$screen-desktop} {
         left: auto;
         right: 0;
@@ -8,7 +8,7 @@
     }
 }
 
-.varsler-innhold {
+.varslerInnhold {
     overflow-y: auto;
     max-height: 80vh;
 
@@ -20,10 +20,4 @@
     @media #{sv.$screen-mobile} {
         max-height: 100%;
     }
-
-
-}
-
-#varsler-dropdown {
-    background-color: #f7f7f7;
 }
