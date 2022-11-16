@@ -2,6 +2,7 @@ import { CSPDirectives, UNSAFE_EVAL, UNSAFE_INLINE, BLOB, DATA } from 'csp-heade
 
 const navno = '*.nav.no';
 const vergicScreenSharing = '*.psplugin.com';
+const vergicDotCom = 'www.vergic.com'; // seems to only be used for a single unused image
 const boostChatbot = '*.boost.ai';
 const vimeoPlayer = 'player.vimeo.com'; // used for inline videos in the chat client
 const qbrick = 'video.qbrick.com'; // used for inline videos in the chat client
@@ -46,7 +47,7 @@ const directives: Partial<CSPDirectives> = {
         hotjarCom,
         DATA, // ds-css
     ],
-    'img-src': [navno, vergicScreenSharing, googleAnalytics, vimeoCdn, hotjarCom],
+    'img-src': [navno, vergicScreenSharing, googleAnalytics, vimeoCdn, hotjarCom, googleTagManager, vergicDotCom],
     'frame-src': [hotjarCom, googleTagManager, vimeoPlayer, qbrick],
     'connect-src': [navno, boostChatbot, vergicScreenSharing, googleAnalytics, hotjarCom, hotjarIo, taskAnalytics],
 };
