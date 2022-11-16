@@ -8,7 +8,6 @@ import { HentVarslerOKAction } from '../actions';
 import { HentVarslerFEILETAction } from '../actions';
 import { HentVarslerPENDINGAction } from '../actions';
 import { SettVarslerOKAction } from '../actions';
-import { SettVarslerLestAction } from '../actions';
 
 export interface VarselinnboksState extends DataElement {
     data: VarslerData;
@@ -51,8 +50,6 @@ export default function reducer(state: VarselinnboksState = initialState, action
             return { ...state, status: Status.FEILET };
         case ActionType.SETT_VARSLER_OK:
             return { ...state, status: Status.OK };
-        case ActionType.SETT_VARSLER_LEST:
-            return { ...state, data: { ...state.data } };
         case ActionType.FJERN_LEST_VARSEL:
             return {
                 ...state,
@@ -95,10 +92,6 @@ function hentVarslerPending(): HentVarslerPENDINGAction {
 
 export const settVarslerOK = (): SettVarslerOKAction => ({
     type: ActionType.SETT_VARSLER_OK,
-});
-
-export const settVarslerLest = (): SettVarslerLestAction => ({
-    type: ActionType.SETT_VARSLER_LEST,
 });
 
 export const fjernLestVarsel = (eventId: string): FjernLestVarselAction => ({

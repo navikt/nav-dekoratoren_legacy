@@ -3,7 +3,6 @@ import MenylinjeKnapp from 'komponenter/header/header-regular/common/meny-knapp/
 import { VarselIkon } from './varsel-ikon/VarselIkon';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { settVarslerSomLest } from 'store/reducers/varsel-lest-duck';
 import { analyticsEvent } from 'utils/analytics/analytics';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { toggleVarsler } from 'store/reducers/dropdown-toggle-duck';

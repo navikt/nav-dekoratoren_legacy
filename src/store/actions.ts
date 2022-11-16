@@ -19,10 +19,6 @@ export enum ActionType {
     HENT_VARSLER_FEILET = 'HENT_VARSLER_FEILET',
     HENT_VARSLER_PENDING = 'HENT_VARSLER_PENDING',
     SETT_VARSLER_OK = 'SETT_VARSLER_OK',
-    SETT_VARSLER_LEST_OK = 'SETT_VARSLER_LEST_OK',
-    SETT_VARSLER_LEST_FEILET = 'SETT_VARSLER_LEST_FEILET',
-    SETT_VARSLER_LEST_PENDING = 'SETT_VARSLER_LEST_PENDING',
-    SETT_VARSLER_LEST = 'SETT_VARSLER_LEST',
     SETT_LANGUAGE = 'SETT_LANGUAGE',
     SETT_ENVIRONMENT = 'SETT_ENVIRONMENT',
     SETT_PARAMS = 'SETT_PARAMS',
@@ -116,23 +112,6 @@ export interface SettVarslerOKAction {
     type: ActionType.SETT_VARSLER_OK;
 }
 
-export interface SettVarslerLestOKAction {
-    type: ActionType.SETT_VARSLER_LEST_OK;
-    nyesteId: number;
-}
-
-export interface SettVarslerLestPENDINGAction {
-    type: ActionType.SETT_VARSLER_LEST_PENDING;
-}
-
-export interface SettVarslerLestFEILETAction {
-    type: ActionType.SETT_VARSLER_LEST_FEILET;
-}
-
-export interface SettVarslerLestAction {
-    type: ActionType.SETT_VARSLER_LEST;
-}
-
 export interface SettPrivatpersonAction {
     type: ActionType.PRIVATPERSON;
 }
@@ -214,10 +193,6 @@ export type Handling =
     | SettEnviroment
     | SettParams
     | SettVarslerOKAction
-    | SettVarslerLestOKAction
-    | SettVarslerLestFEILETAction
-    | SettVarslerLestPENDINGAction
-    | SettVarslerLestAction
     | SettPrivatpersonAction
     | SettArbeidsgiverAction
     | SettSamarbeidspartnerAction

@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
-import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
-import { AnalyticsCategory } from 'utils/analytics/analytics';
-import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { VarslerData } from 'store/reducers/varselinnboks-duck';
+import { Heading } from '@navikt/ds-react';
+import { getLoginUrl } from 'utils/login';
+import { sortByEventTidspunkt } from 'utils/sorter';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import isToday from 'dayjs/plugin/isToday';
-import 'dayjs/locale/nb';
-
-import { Heading } from '@navikt/ds-react';
 import Beskjed from '../../varsel-typer/beskjed/Beskjed';
 import Oppgave from '../../varsel-typer/oppgave/Oppgave';
 import ArkiverbarBeskjed from '../../varsel-typer/arkiverbar-beskjed/ArkiverbarBeskjed';
-import { getLoginUrl } from 'utils/login';
 import Tekst from 'tekster/finn-tekst';
 import InnboksBeskjed from '../../varsel-typer/innboks-beskjed/InnboksBeskjed';
-import { Bell } from '@navikt/ds-icons';
-import { BodyShort, Detail } from '@navikt/ds-react';
-import { sortByEventTidspunkt } from 'utils/sorter';
 import style from './VarselListe.module.scss';
+import 'dayjs/locale/nb';
 
 dayjs.extend(localizedFormat);
 dayjs.extend(isToday);
