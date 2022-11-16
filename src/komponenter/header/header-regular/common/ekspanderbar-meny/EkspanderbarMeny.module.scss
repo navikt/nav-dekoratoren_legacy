@@ -21,8 +21,6 @@
 .innhold {
     box-sizing: border-box;
     width: 100%;
-    overflow-y: scroll;
-    max-height: 80vh;
 }
 
 @media #{sv.$screen-desktop} {
@@ -53,8 +51,6 @@
     .innhold {
         padding: 1.5rem sv.$margins-sides-desktop;
         overflow: hidden;
-        overflow-y: scroll;
-        max-height: 80vh;
 
         @media #{sv.$screen-desktop-small-width-down} {
             padding-left: sv.$margins-sides-desktop-small;
@@ -88,6 +84,5 @@
     .innhold {
         height: 100%;
         padding: 0;
-        max-height: 100%;
     }
 }
