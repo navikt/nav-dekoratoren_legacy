@@ -36,9 +36,6 @@ export const NavLogoLenke = (props: Props) => {
             onClick={(event) => {
                 setCookie(CookieName.DECORATOR_CONTEXT, context.key, cookieOptions);
                 dispatch(settArbeidsflate(context.key));
-                if (erNavDekoratoren()) {
-                    event.preventDefault();
-                }
             }}
             id={props.id}
         >

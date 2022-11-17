@@ -21,7 +21,7 @@ const SokKnapper = ({ writtenInput, onReset, id }: Props) => {
                     className={`${'sok-knapper__knapp'} ${'sok-knapper__knapp-avbryt'}`}
                     variant="secondary"
                     onClick={onReset}
-                    icon={<Close />}
+                    icon={<Close aria-hidden />}
                 >
                     <span className={'sok-knapper__knapp-tekst'}>
                         <Tekst id="sok-reset" />

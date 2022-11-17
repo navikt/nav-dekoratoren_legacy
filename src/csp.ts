@@ -2,6 +2,7 @@ import { CSPDirectives, UNSAFE_EVAL, UNSAFE_INLINE, BLOB, DATA } from 'csp-heade
 
 const navno = '*.nav.no';
 const vergicScreenSharing = '*.psplugin.com';
+const vergicDotCom = 'www.vergic.com'; // seems to only be used for a single unused image
 const boostChatbot = '*.boost.ai';
 const vimeoPlayer = 'player.vimeo.com'; // used for inline videos in the chat client
 const qbrick = 'video.qbrick.com'; // used for inline videos in the chat client
@@ -13,39 +14,40 @@ const hotjarCom = '*.hotjar.com';
 const hotjarIo = '*.hotjar.io';
 const taskAnalytics = '*.taskanalytics.com';
 
+const styleSrc = [
+    navno,
+    vergicScreenSharing,
+    UNSAFE_INLINE, // chatbot (styled-components) and some of our own components with style-attributes
+];
+
+const scriptSrc = [
+    navno,
+    vergicScreenSharing,
+    googleTagManager,
+    googleAnalytics,
+    hotjarCom,
+    taskAnalytics,
+    UNSAFE_INLINE, // GTM
+];
+
 const directives: Partial<CSPDirectives> = {
     'default-src': [navno],
     'script-src': [
-        navno,
-        UNSAFE_INLINE, // GTM
+        ...scriptSrc,
         UNSAFE_EVAL, // vergic
     ],
-    'script-src-elem': [
-        navno,
-        vergicScreenSharing,
-        googleTagManager,
-        googleAnalytics,
-        hotjarCom,
-        taskAnalytics,
-        UNSAFE_INLINE, // GTM
-    ],
+    'script-src-elem': scriptSrc,
     'worker-src': [
         BLOB, // vergic
     ],
-    'style-src': [
-        UNSAFE_INLINE, // chatbot (styled-components) and some of our own components with style-attributes
-    ],
-    'style-src-elem': [
-        navno,
-        vergicScreenSharing,
-        UNSAFE_INLINE, // vergic
-    ],
+    'style-src': styleSrc,
+    'style-src-elem': styleSrc,
     'font-src': [
         vergicScreenSharing,
         hotjarCom,
         DATA, // ds-css
     ],
-    'img-src': [navno, vergicScreenSharing, googleAnalytics, vimeoCdn, hotjarCom],
+    'img-src': [navno, vergicScreenSharing, googleAnalytics, vimeoCdn, hotjarCom, googleTagManager, vergicDotCom],
     'frame-src': [hotjarCom, googleTagManager, vimeoPlayer, qbrick],
     'connect-src': [navno, boostChatbot, vergicScreenSharing, googleAnalytics, hotjarCom, hotjarIo, taskAnalytics],
 };

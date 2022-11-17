@@ -21,7 +21,7 @@ services:
                     - oidc-provider-gui.nav.docker-internal
         image: 'navikt/pb-oidc-provider-gui:latest'
         ports:
-            - '5000:5000'
+            - '5000:50000'
         depends_on:
             - oidc-provider
         environment:

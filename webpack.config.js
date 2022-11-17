@@ -48,7 +48,7 @@ const commonConfig = {
     module: {
         rules: [
             {
-                test: [/\.gif$/, /\.jpe?g$/, /\.png$/, /\.ico$/, /\.svg$/],
+                test: [/\.gif$/, /\.jpe?g$/, /\.png$/, /\.ico$/, /\.svg$/, /\.webmanifest$/],
                 loader: 'file-loader',
                 options: {
                     esModule: false,
