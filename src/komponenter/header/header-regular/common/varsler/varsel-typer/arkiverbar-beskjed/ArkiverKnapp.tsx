@@ -20,7 +20,7 @@ const ArkiverKnapp = ({ eventId, apiVarselinnboksUrl, setIsHover, setActivateScr
         setActivateScreenReaderText(false);
         setActivateScreenReaderText(true);
         dispatch(fjernLestVarsel(eventId));
-        logAmplitudeEvent('navigere', { komponent: 'Arkivert beskjed' });
+        logAmplitudeEvent('beskjed', { komponent: 'Arkivert beskjed' });
     };
 
     const handleMouseEnter = () => {

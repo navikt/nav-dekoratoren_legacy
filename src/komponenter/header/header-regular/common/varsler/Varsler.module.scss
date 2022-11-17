@@ -13,11 +13,6 @@
     max-height: 80vh;
     background-color: #f7f7f7;
 
-    @media #{sv.$screen-desktop} {
-        overflow-y: auto;
-        max-height: 80vh;
-    }
-
     @media #{sv.$screen-mobile} {
         max-height: 100%;
     }

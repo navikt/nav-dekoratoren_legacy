@@ -28,7 +28,7 @@ $ulest-diameter: 12px;
 
     transition: $transition;
 }
-.varselCloseIkon{
+.lukkVarslerIkon{
     margin: 4px 3.5px 4px 3.5px;
 }
 
@@ -36,7 +36,7 @@ $ulest-diameter: 12px;
     display: none;
 }
 
-[aria-expanded='false'] .varselCloseIkon {
+[aria-expanded='false'] .lukkVarslerIkon {
     display: none;
 }
 
