@@ -43,6 +43,16 @@ const getTagsData = (appUrl: string): Tag[] => [
             href: `${appUrl}${webManifest}`,
         },
     },
+    {
+        tag: 'link',
+        attribs: {
+            rel: 'preload',
+            href: `https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2`,
+            as: 'font',
+            type: 'font/woff2',
+            crossorigin: 'true',
+        },
+    },
 ];
 
 export const injectHeadTags = (appUrl: string) => {
