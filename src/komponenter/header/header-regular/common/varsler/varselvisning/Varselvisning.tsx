@@ -7,7 +7,7 @@ import AlleVarslerLenke from './alle-varsler-lenke/AlleVarslerLenke';
 import { VarselListe } from './varsel-liste/VarselListe';
 import './Varselvisning.scss';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
-import ikon from "src/ikoner/varsler/kattIngenVarsler.svg";
+import ikon from 'src/ikoner/varsler/kattIngenVarsler.svg';
 
 const stateSelector = (state: AppState) => ({
     varsler: state.varsler.data,
@@ -22,7 +22,7 @@ export const Varselvisning = ({ setKbId }: Props) => {
     const { varsler, minSideUrl } = useSelector(stateSelector);
 
     const antallVarsler = varsler?.oppgaver.length + varsler?.beskjeder.length;
-    const isTomListe = varsler && antallVarsler === 0;
+    const isTomListe = !varsler || antallVarsler === 0;
 
     return (
         <div className={isTomListe ? 'varsler-visning-tom' : 'varsler-visning'}>
@@ -32,7 +32,7 @@ export const Varselvisning = ({ setKbId }: Props) => {
                         <Tekst id={'varsler-tittel'} />
                     </Heading>
                     <div className={'varsler-visning-tom-liste'}>
-                        <Bilde altText={''} asset={ikon} ariaHidden={true}/>
+                        <Bilde altText={''} asset={ikon} ariaHidden={true} />
                         <p className="varsler-tom-hovedtekst">
                             <Tekst id={'varsler-tom-liste'} />
                         </p>

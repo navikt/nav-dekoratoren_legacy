@@ -14,9 +14,10 @@ type Props = {
     dato: string;
     href: string;
     isMasked: boolean;
+    id?: string;
 };
 
-const Beskjed = ({ eventId, apiVarselinnboksUrl, tekst, dato, href, isMasked }: Props) => {
+const Beskjed = ({ eventId, apiVarselinnboksUrl, tekst, dato, href, isMasked, id }: Props) => {
     //TODO: Legge inn stepup-tekst i alle språk.
 
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const Beskjed = ({ eventId, apiVarselinnboksUrl, tekst, dato, href, isMasked }: 
     };
 
     return (
-        <a className="beskjed" href={href} onClick={handleOnClick}>
+        <a className="beskjed" href={href} id={id} onClick={handleOnClick}>
             <div className="beskjed__ikon"></div>
             <div className="beskjed__content-wrapper">
                 <div className="beskjed__text-wrapper">

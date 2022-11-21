@@ -9,13 +9,19 @@ type Props = {
     dato: string;
     href: string;
     isMasked: boolean;
+    id?: string;
 };
 
-const Oppgave = ({ tekst, dato, href, isMasked }: Props) => {
+const Oppgave = ({ tekst, dato, href, isMasked, id }: Props) => {
     //TODO: Legge inn stepup-tekst i alle språk.
 
     return (
-        <a className="oppgave" href={href} onClick={() => logAmplitudeEvent('navigere', { komponent: 'Oppgave' })}>
+        <a
+            className="oppgave"
+            href={href}
+            id={id}
+            onClick={() => logAmplitudeEvent('navigere', { komponent: 'Oppgave' })}
+        >
             <div className="oppgave__ikon"></div>
             <div className="oppgave__content-wrapper">
                 <div className="oppgave__text-wrapper">

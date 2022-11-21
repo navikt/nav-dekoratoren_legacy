@@ -10,15 +10,17 @@ type Props = {
     dato: string;
     href: string;
     isMasked: boolean;
+    id?: string;
 };
 
-const InnboksBeskjed = ({ eventId, tekst, dato, href, isMasked }: Props) => {
+const InnboksBeskjed = ({ tekst, dato, href, isMasked, id }: Props) => {
     //TODO: Legge inn stepup-tekst i alle språk.
 
     return (
         <a
             className="beskjed"
             href={href}
+            id={id}
             onClick={() => logAmplitudeEvent('navigere', { komponent: 'Beskjed - Innboks' })}
         >
             <div className="beskjed__ikon"></div>

@@ -10,6 +10,7 @@ type Props = {
     dato: string;
     isMasked: boolean;
     setActivateScreenReaderText: (setActivateScreenReaderText: boolean) => void;
+    id?: string;
 };
 
 const ArkiverbarBeskjed = ({
@@ -19,12 +20,13 @@ const ArkiverbarBeskjed = ({
     dato,
     isMasked,
     setActivateScreenReaderText,
+    id,
 }: Props) => {
     const [isHover, setIsHover] = useState(false);
 
     //TODO: Legge inn stepup-tekst i alle språk.
     return (
-        <div className={isHover ? 'arkiverbar-beskjed-hover' : 'arkiverbar-beskjed'}>
+        <div className={isHover ? 'arkiverbar-beskjed-hover' : 'arkiverbar-beskjed'} id={id}>
             <div className="arkiverbar-beskjed__ikon"></div>
             <div className="arkiverbar-beskjed__content-wrapper">
                 <div className="arkiverbar-beskjed__tittel">

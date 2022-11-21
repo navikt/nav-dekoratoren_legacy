@@ -15,6 +15,7 @@ import Tekst from 'tekster/finn-tekst';
 import InnboksBeskjed from '../../varsel-typer/innboks-beskjed/InnboksBeskjed';
 import style from './VarselListe.module.scss';
 import 'dayjs/locale/nb';
+import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 
 dayjs.extend(localizedFormat);
 dayjs.extend(isToday);
@@ -52,17 +53,25 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                         <Tekst id={'varsler-oppgaver-tittel'} />
                     </Heading>
                     <ul>
-                        {varsler &&
-                            varsler?.oppgaver?.sort(sortByEventTidspunkt).map((o) => (
-                                <li key={o.eventId}>
-                                    <Oppgave
-                                        tekst={o.tekst}
-                                        dato={formatDato(o.tidspunkt)}
-                                        href={o.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : o.link}
-                                        isMasked={o.isMasked}
-                                    />
-                                </li>
-                            ))}
+                        {varsler?.oppgaver?.sort(sortByEventTidspunkt).map((o, subIndex) => (
+                            <li key={o.eventId}>
+                                <Oppgave
+                                    tekst={o.tekst}
+                                    dato={formatDato(o.tidspunkt)}
+                                    href={o.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : o.link}
+                                    isMasked={o.isMasked}
+                                    id={
+                                        rowIndex !== undefined && subIndex !== undefined
+                                            ? getKbId(KbNavGroup.Varsler, {
+                                                  col: 0,
+                                                  row: rowIndex,
+                                                  sub: subIndex,
+                                              })
+                                            : undefined
+                                    }
+                                />
+                            </li>
+                        ))}
                     </ul>
                 </>
             )}
@@ -72,42 +81,68 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                         <Tekst id={'varsler-beskjeder-tittel'} />
                     </Heading>
                     <ul>
-                        {varsler &&
-                            varsler?.beskjeder?.sort(sortByEventTidspunkt).map((b) =>
-                                b.type === 'INNBOKS' ? (
-                                    <li key={b.eventId}>
-                                        <InnboksBeskjed
-                                            eventId={b.eventId}
-                                            tekst={b.tekst}
-                                            dato={formatDato(b.tidspunkt)}
-                                            href={b.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : b.link}
-                                            isMasked={b.isMasked}
-                                        />
-                                    </li>
-                                ) : !hasNoHref(b.link) || b.isMasked ? (
-                                    <li key={b.eventId}>
-                                        <Beskjed
-                                            eventId={b.eventId}
-                                            apiVarselinnboksUrl={API_DEKORATOREN_URL}
-                                            tekst={b.tekst}
-                                            dato={formatDato(b.tidspunkt)}
-                                            href={b.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : b.link}
-                                            isMasked={b.isMasked}
-                                        />
-                                    </li>
-                                ) : (
-                                    <li key={b.eventId}>
-                                        <ArkiverbarBeskjed
-                                            eventId={b.eventId}
-                                            apiVarselinnboksUrl={API_DEKORATOREN_URL}
-                                            tekst={b.tekst}
-                                            dato={formatDato(b.tidspunkt)}
-                                            isMasked={b.isMasked}
-                                            setActivateScreenReaderText={setActivateScreenReaderText}
-                                        />
-                                    </li>
-                                )
-                            )}
+                        {varsler?.beskjeder?.sort(sortByEventTidspunkt).map((b, subIndex) =>
+                            b.type === 'INNBOKS' ? (
+                                <li key={b.eventId}>
+                                    <InnboksBeskjed
+                                        eventId={b.eventId}
+                                        tekst={b.tekst}
+                                        dato={formatDato(b.tidspunkt)}
+                                        href={b.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : b.link}
+                                        isMasked={b.isMasked}
+                                        id={
+                                            rowIndex !== undefined && subIndex !== undefined
+                                                ? getKbId(KbNavGroup.Varsler, {
+                                                      col: 0,
+                                                      row: rowIndex,
+                                                      sub: subIndex,
+                                                  })
+                                                : undefined
+                                        }
+                                    />
+                                </li>
+                            ) : !hasNoHref(b.link) || b.isMasked ? (
+                                <li key={b.eventId}>
+                                    <Beskjed
+                                        eventId={b.eventId}
+                                        apiVarselinnboksUrl={API_DEKORATOREN_URL}
+                                        tekst={b.tekst}
+                                        dato={formatDato(b.tidspunkt)}
+                                        href={b.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : b.link}
+                                        isMasked={b.isMasked}
+                                        id={
+                                            rowIndex !== undefined && subIndex !== undefined
+                                                ? getKbId(KbNavGroup.Varsler, {
+                                                      col: 0,
+                                                      row: rowIndex,
+                                                      sub: subIndex,
+                                                  })
+                                                : undefined
+                                        }
+                                    />
+                                </li>
+                            ) : (
+                                <li key={b.eventId}>
+                                    <ArkiverbarBeskjed
+                                        eventId={b.eventId}
+                                        apiVarselinnboksUrl={API_DEKORATOREN_URL}
+                                        tekst={b.tekst}
+                                        dato={formatDato(b.tidspunkt)}
+                                        isMasked={b.isMasked}
+                                        setActivateScreenReaderText={setActivateScreenReaderText}
+                                        id={
+                                            rowIndex !== undefined && subIndex !== undefined
+                                                ? getKbId(KbNavGroup.Varsler, {
+                                                      col: 0,
+                                                      row: rowIndex,
+                                                      sub: subIndex,
+                                                  })
+                                                : undefined
+                                        }
+                                    />
+                                </li>
+                            )
+                        )}
                     </ul>
                 </>
             )}
