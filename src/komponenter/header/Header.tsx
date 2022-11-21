@@ -162,7 +162,7 @@ export const Header = () => {
     // Fetch notifications
     useEffect(() => {
         if (authenticated) {
-            hentVarsler(APP_URL)(dispatch);
+            hentVarsler(API_DEKORATOREN_URL)(dispatch);
         }
     }, [authenticated]);
 

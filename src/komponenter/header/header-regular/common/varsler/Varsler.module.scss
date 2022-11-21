@@ -4,6 +4,16 @@
     @media #{sv.$screen-desktop} {
         left: auto;
         right: 0;
-        max-width: 525px;
+        max-width: 540px;
+    }
+}
+
+.varslerInnhold {
+    overflow-y: auto;
+    max-height: 80vh;
+    background-color: #f7f7f7;
+
+    @media #{sv.$screen-mobile} {
+        max-height: 100%;
     }
 }

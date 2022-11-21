@@ -9,6 +9,7 @@ import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setu
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { VarslerKnapp } from './varsler-knapp/VarslerKnapp';
 import SlideToClose from 'komponenter/header/header-regular/mobil/meny/innhold/utils/SlideToClose';
+
 import style from './Varsler.module.scss';
 
 export const varslerDropdownId = 'varsler-dropdown';
@@ -28,7 +29,12 @@ export const Varsler = ({ kbNavMainState }: Props) => {
     return (
         <>
             <VarslerKnapp />
-            <EkspanderbarMeny classname={style.varslerDropdown} id={varslerDropdownId} isOpen={isOpen}>
+            <EkspanderbarMeny
+                classname={style.varslerDropdown}
+                classnameInnhold={style.varslerInnhold}
+                id={varslerDropdownId}
+                isOpen={isOpen}
+            >
                 <SlideToClose>
                     <Varselvisning setKbId={true} />
                 </SlideToClose>

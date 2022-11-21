@@ -26,15 +26,14 @@ export const hentInnloggingsstatusFetch = (API_DEKORATOREN_URL: string): Promise
     });
 
 export const hentVarslerFetch = (APP_URL: string): Promise<varselinnboksData> => {
-    const tidspunkt = new Date().getTime();
-    return fetchToJson(`${APP_URL}/api/varsler/rest/varsel/hentsiste?noCache=${tidspunkt}`, { credentials: 'include' });
+    return fetchToJson(`${APP_URL}/varsel/proxy/varsel/aktive`, { credentials: 'include' });
 };
 
-export const lagreVarslerLestFetch = (APP_URL: string, nyesteId: number): Promise<number> =>
-    fetchToJson(`${APP_URL}/api/varsler/rest/varsel/erlest/${nyesteId}`, {
+export const postDone = (API_DEKORATOREN_URL: string, eventId: Object): Promise<number> =>
+    fetchToJson(`${API_DEKORATOREN_URL}/varsel/beskjed/done`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(nyesteId),
+        body: JSON.stringify(eventId),
         credentials: 'include',
     });
 
