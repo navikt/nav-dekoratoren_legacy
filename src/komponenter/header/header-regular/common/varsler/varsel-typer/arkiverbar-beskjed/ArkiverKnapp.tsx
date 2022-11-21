@@ -10,9 +10,10 @@ type Props = {
     apiVarselinnboksUrl: string;
     setIsHover: (setIsHover: boolean) => void;
     setActivateScreenReaderText: (setActivateScreenReaderText: boolean) => void;
+    id?: string;
 };
 
-const ArkiverKnapp = ({ eventId, apiVarselinnboksUrl, setIsHover, setActivateScreenReaderText }: Props) => {
+const ArkiverKnapp = ({ eventId, apiVarselinnboksUrl, setIsHover, setActivateScreenReaderText, id }: Props) => {
     const dispatch = useDispatch();
 
     const handleOnClick = () => {
@@ -37,6 +38,7 @@ const ArkiverKnapp = ({ eventId, apiVarselinnboksUrl, setIsHover, setActivateScr
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={handleOnClick}
+            id={id}
         >
             Arkiver
         </button>

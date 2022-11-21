@@ -95,7 +95,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                                 ? getKbId(KbNavGroup.Varsler, {
                                                       col: 0,
                                                       row: rowIndex,
-                                                      sub: subIndex,
+                                                      sub: subIndex + varsler.oppgaver.length,
                                                   })
                                                 : undefined
                                         }
@@ -115,7 +115,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                                 ? getKbId(KbNavGroup.Varsler, {
                                                       col: 0,
                                                       row: rowIndex,
-                                                      sub: subIndex,
+                                                      sub: subIndex + varsler.oppgaver.length,
                                                   })
                                                 : undefined
                                         }
@@ -135,7 +135,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                                 ? getKbId(KbNavGroup.Varsler, {
                                                       col: 0,
                                                       row: rowIndex,
-                                                      sub: subIndex,
+                                                      sub: subIndex + varsler.oppgaver.length,
                                                   })
                                                 : undefined
                                         }

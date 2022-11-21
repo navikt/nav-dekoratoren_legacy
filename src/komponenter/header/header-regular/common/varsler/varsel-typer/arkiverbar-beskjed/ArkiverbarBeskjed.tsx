@@ -26,7 +26,7 @@ const ArkiverbarBeskjed = ({
 
     //TODO: Legge inn stepup-tekst i alle språk.
     return (
-        <div className={isHover ? 'arkiverbar-beskjed-hover' : 'arkiverbar-beskjed'} id={id}>
+        <div className={isHover ? 'arkiverbar-beskjed-hover' : 'arkiverbar-beskjed'}>
             <div className="arkiverbar-beskjed__ikon"></div>
             <div className="arkiverbar-beskjed__content-wrapper">
                 <div className="arkiverbar-beskjed__tittel">
@@ -39,6 +39,7 @@ const ArkiverbarBeskjed = ({
                         apiVarselinnboksUrl={apiVarselinnboksUrl}
                         setIsHover={setIsHover}
                         setActivateScreenReaderText={setActivateScreenReaderText}
+                        id={id}
                     />
                 </div>
             </div>
