@@ -13,6 +13,7 @@ const googleTagManager = '*.googletagmanager.com';
 const hotjarCom = '*.hotjar.com';
 const hotjarIo = '*.hotjar.io';
 const taskAnalytics = '*.taskanalytics.com';
+const navCdn = 'https://cdn.nav.no';
 
 const styleSrc = [
     navno,
@@ -45,6 +46,7 @@ const directives: Partial<CSPDirectives> = {
     'font-src': [
         vergicScreenSharing,
         hotjarCom,
+        navCdn,
         DATA, // ds-css
     ],
     'img-src': [navno, vergicScreenSharing, googleAnalytics, vimeoCdn, hotjarCom, googleTagManager, vergicDotCom],

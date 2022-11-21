@@ -34,8 +34,8 @@
     align-items: center;
 
     svg * {
-        stroke: var(--navds-global-color-gray-600);
-        fill: var(--navds-global-color-gray-600);
+        stroke: var(--a-gray-600);
+        fill: var(--a-gray-600);
     }
 
     .iconHome {
@@ -47,7 +47,7 @@
     }
 
     &:focus .iconHome {
-        color: var(--navds-global-color-gray-600);
+        color: var(--a-gray-600);
     }
 }
 
