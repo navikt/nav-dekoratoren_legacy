@@ -12,7 +12,7 @@ export const VarselIkon = ({ antallUleste = 0 }: Props) => {
     return (
         <>
             <Bell width={"24px"} height={"24px"} aria-hidden className={style.varselBellIkon} />
-            <Bilde altText={''} asset={lukkVarslerIkon} className={style.lukkVarslerIkon}/>
+            <Bilde altText={''} asset={lukkVarslerIkon} className={style.lukkVarslerIkon} ariaHidden={true}/>
             <div className={`${style.ulestSirkel} ${antallUleste === 0 ? style.hide : ''}`} />
         </>
     );
