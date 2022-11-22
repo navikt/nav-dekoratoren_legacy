@@ -1,8 +1,10 @@
 import { CSPDirectives, UNSAFE_EVAL, UNSAFE_INLINE, BLOB, DATA } from 'csp-header';
 
-const navno = '*.nav.no';
+const navNo = '*.nav.no';
+const cdnNavNo = 'cdn.nav.no';
+
 const vergicScreenSharing = '*.psplugin.com';
-const vergicDotCom = 'www.vergic.com'; // seems to only be used for a single unused image
+const vergicDotCom = 'www.vergic.com'; // seems to only be used for a single placeholder image
 const boostChatbot = '*.boost.ai';
 const vimeoPlayer = 'player.vimeo.com'; // used for inline videos in the chat client
 const qbrick = 'video.qbrick.com'; // used for inline videos in the chat client
@@ -15,13 +17,13 @@ const hotjarIo = '*.hotjar.io';
 const taskAnalytics = '*.taskanalytics.com';
 
 const styleSrc = [
-    navno,
+    navNo,
     vergicScreenSharing,
     UNSAFE_INLINE, // chatbot (styled-components) and some of our own components with style-attributes
 ];
 
 const scriptSrc = [
-    navno,
+    navNo,
     vergicScreenSharing,
     googleTagManager,
     googleAnalytics,
@@ -31,7 +33,7 @@ const scriptSrc = [
 ];
 
 const directives: Partial<CSPDirectives> = {
-    'default-src': [navno],
+    'default-src': [navNo],
     'script-src': [
         ...scriptSrc,
         UNSAFE_EVAL, // vergic
@@ -45,11 +47,12 @@ const directives: Partial<CSPDirectives> = {
     'font-src': [
         vergicScreenSharing,
         hotjarCom,
+        cdnNavNo,
         DATA, // ds-css
     ],
-    'img-src': [navno, vergicScreenSharing, googleAnalytics, vimeoCdn, hotjarCom, googleTagManager, vergicDotCom],
+    'img-src': [navNo, vergicScreenSharing, googleAnalytics, vimeoCdn, hotjarCom, googleTagManager, vergicDotCom],
     'frame-src': [hotjarCom, googleTagManager, vimeoPlayer, qbrick],
-    'connect-src': [navno, boostChatbot, vergicScreenSharing, googleAnalytics, hotjarCom, hotjarIo, taskAnalytics],
+    'connect-src': [navNo, boostChatbot, vergicScreenSharing, googleAnalytics, hotjarCom, hotjarIo, taskAnalytics],
 };
 
 const localDirectives = Object.entries(directives).reduce((acc, [key, value]) => {
