@@ -42,6 +42,9 @@ const directives: Partial<CSPDirectives> = {
     'worker-src': [
         BLOB, // vergic
     ],
+    'child-src': [
+        BLOB, // vergic (for browsers lacking support for worker-src)
+    ],
     'style-src': styleSrc,
     'style-src-elem': styleSrc,
     'font-src': [
