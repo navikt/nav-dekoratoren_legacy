@@ -1,0 +1,13 @@
+{
+    "customSyntax": "postcss-scss",
+    "plugins": ["stylelint-scss", "stylelint-value-no-unknown-custom-properties"],
+    "rules": {
+        "scss/at-rule-no-unknown": true,
+        "csstools/value-no-unknown-custom-properties": [
+            true,
+            {
+                "importFrom": ["./node_modules/@navikt/ds-tokens/dist/tokens.css"]
+            }
+        ]
+    }
+}
