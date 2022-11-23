@@ -26,7 +26,7 @@ export const hentInnloggingsstatusFetch = (API_DEKORATOREN_URL: string): Promise
     });
 
 export const hentVarslerFetch = (API_DEKORATOREN_URL: string): Promise<varselinnboksData> => {
-    return fetchToJson(`${API_DEKORATOREN_URL}/varsel/proxy/varsel`, { credentials: 'include' });
+    return fetchToJson(`${API_DEKORATOREN_URL}/varsel/proxy/varsel/aktive`, { credentials: 'include' });
 };
 
 export const postDone = (API_DEKORATOREN_URL: string, eventId: Object): Promise<number> =>
