@@ -64,7 +64,7 @@ const DelSkjermModal = (props: Props) => {
         }
     };
 
-    const parent = document.getElementById('decorator-footer-wrapper');
+    const parent = document.getElementById('decorator-footer-inner');
 
     return (
         <Modal

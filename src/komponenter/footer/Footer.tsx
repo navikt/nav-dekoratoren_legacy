@@ -7,7 +7,7 @@ import FooterRegular from './footer-regular/FooterRegular';
 const Footer = () => {
     const { PARAMS } = useSelector((state: AppState) => state.environment);
     return (
-        <div id="decorator-footer-wrapper" className="decorator-wrapper">
+        <div id="decorator-footer-inner" className="decorator-wrapper">
             <footer className="sitefooter">
                 {PARAMS.SIMPLE || PARAMS.SIMPLE_FOOTER ? <SimpleFooter /> : <FooterRegular />}
             </footer>
