@@ -18,12 +18,7 @@ const prefixExclusions = [
     '.decorator-wrapper',
 ];
 
-const prefixExclusionsDsCss = [
-    '.decorator-wrapper',
-    /^\.navds-modal(:|--|$)/,
-    /^\.navds-modal__overlay/,
-    /^\.ReactModal/,
-];
+const prefixExclusionsDsCss = ['.decorator-wrapper'];
 
 const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
