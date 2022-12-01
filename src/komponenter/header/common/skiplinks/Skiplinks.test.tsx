@@ -8,13 +8,6 @@ import { Locale } from '../../../../store/reducers/language-duck';
 
 const store = createStore();
 
-const renderSkiplinks = () =>
-    render(
-        <ReduxProvider store={store}>
-            <Skiplinks />
-        </ReduxProvider>
-    );
-
 const renderSkiplinksWithMaincontent = () =>
     act(() => {
         render(
@@ -26,16 +19,6 @@ const renderSkiplinksWithMaincontent = () =>
     });
 
 describe('<Skiplinks>', () => {
-    test('Skal rendre 2 skiplinks for hovedmeny (desktop og mobil)', () => {
-        renderSkiplinks();
-        expect(screen.queryAllByText(finnTekst('skiplinks-ga-til-hovedmeny', Locale.BOKMAL))).toHaveLength(2);
-    });
-
-    test('Skal rendre 2 skiplinks for søk (desktop og mobil)', () => {
-        renderSkiplinks();
-        expect(screen.queryAllByText(finnTekst('skiplinks-ga-til-sok', Locale.BOKMAL))).toHaveLength(2);
-    });
-
     test('Skal rendre skiplink for hovedinnhold når #maincontent element eksisterer', () => {
         renderSkiplinksWithMaincontent();
         expect(screen.queryByText(finnTekst('skiplinks-ga-til-hovedinnhold', Locale.BOKMAL))).toBeTruthy();
