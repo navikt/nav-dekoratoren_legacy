@@ -85,7 +85,7 @@ export const SprakVelger = (props: Props) => {
                             {selectorLabel}
                         </BodyShort>
                     </span>
-                    <Expand className={style.chevronNed} />
+                    <Expand className={style.chevronNed} aria-hidden />
                 </button>
                 <ul {...menuProps} className={style.menu} style={ulStyle}>
                     <>

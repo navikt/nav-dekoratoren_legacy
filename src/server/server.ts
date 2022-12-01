@@ -10,7 +10,9 @@ import dotenv from 'dotenv';
 import { getMenuHandler } from './api-handlers/menu';
 import { getSokHandler } from './api-handlers/sok';
 import { getDriftsmeldingerHandler } from './api-handlers/driftsmeldinger';
-import { varselInnboksProxyHandler, varselInnboksProxyUrl } from './api-handlers/varsler';
+import { getCSP } from 'csp-header';
+import { cspDirectives } from '../csp';
+import { getCspHandler } from './api-handlers/csp';
 
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
@@ -27,6 +29,8 @@ const appBasePath = process.env.APP_BASE_PATH || ``;
 const appPaths = [appBasePath, '', '/dekoratoren'].filter((path, index, array) => array.indexOf(path) === index);
 const oldBasePath = '/common-html/v4/navno';
 const buildPath = `${process.cwd()}/build`;
+
+const cspHeader = getCSP({ directives: cspDirectives });
 
 const createPaths = (subPath: string) => appPaths.map((path) => `${path}${subPath}`);
 
@@ -94,6 +98,7 @@ const pathsForTemplate = [appPaths, createPaths('/:locale(no|en|se)/*'), oldBase
 // HTML template
 app.get(pathsForTemplate, (req, res, next) => {
     try {
+        res.setHeader('Content-Security-Policy', cspHeader);
         res.send(template(req));
     } catch (e) {
         next(e);
@@ -114,7 +119,7 @@ app.get(createPaths('/env'), (req, res, next) => {
 app.get(createPaths('/api/meny'), getMenuHandler);
 app.get(createPaths('/api/sok'), getSokHandler);
 app.get(createPaths('/api/driftsmeldinger'), getDriftsmeldingerHandler);
-app.use(varselInnboksProxyUrl, varselInnboksProxyHandler);
+app.get(createPaths('/api/csp'), getCspHandler);
 
 // Nais endpoints
 app.use(`${appBasePath}/metrics`, (req, res) => {

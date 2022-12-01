@@ -43,7 +43,7 @@ export const MobilMenypunkt = (props: Props) => {
     const Children = () => (
         <>
             {tekst}
-            <Next />
+            <Next aria-hidden />
         </>
     );
 

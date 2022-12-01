@@ -61,9 +61,9 @@ export const Brodsmulesti = (props: Props) => {
                             action: 'nav.no',
                         }}
                     >
-                        <Home className={style.iconHome} />
+                        <Home className={style.iconHome} title="Hjem-ikon" aria-hidden />
                         <span>nav.no</span>
-                        <Next className={style.iconNext} />
+                        <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
                     </LenkeMedSporing>
                 </li>
                 {shouldShowContext && (
@@ -80,7 +80,7 @@ export const Brodsmulesti = (props: Props) => {
                             <span>
                                 <Tekst id={context.lenkeTekstId} />
                             </span>
-                            <Next className={style.iconNext} />
+                            <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
                         </LenkeMedSporing>
                     </li>
                 )}
@@ -95,7 +95,7 @@ export const Brodsmulesti = (props: Props) => {
                             }}
                         >
                             <span className={style.iconEllipsis}>...</span>
-                            <Next className={style.iconNext} />
+                            <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
                         </button>
                     </li>
                 )}
@@ -122,7 +122,7 @@ export const Brodsmulesti = (props: Props) => {
                                 }}
                             >
                                 <span className={style.linkText}>{breadcrumb.title}</span>
-                                <Next className={style.iconNext} />
+                                <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
                             </LenkeMedSporing>
                         ) : (
                             <span className={style.linkText}>{breadcrumb.title}</span>

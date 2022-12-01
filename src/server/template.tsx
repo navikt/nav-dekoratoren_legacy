@@ -21,12 +21,6 @@ const cache = new NodeCache({
     checkperiod: oneMinuteInSeconds,
 });
 
-const fileFavicon = require('ikoner/favicon/favicon.ico');
-const fileAppleTouchIcon = require('ikoner/favicon/apple-touch-icon.png');
-const fileFavicon16x16 = require('ikoner/favicon/favicon-16x16.png');
-const fileFavicon32x32 = require('ikoner/favicon/favicon-32x32.png');
-
-const appUrl = `${process.env.APP_BASE_URL || ``}${process.env.APP_BASE_PATH || ``}` as string;
 const buildId = process.env.BUILD_ID;
 
 export const template = (req: Request) => {
@@ -82,14 +76,9 @@ export const template = (req: Request) => {
         <head>
             <title>NAV Dekoratør</title>
             <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-            <meta name='description' content='Felles header og footer for NAV-applikasjoner i selvbetjeningssonen' />
-            <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no' />
-            <meta name='theme-color' content='#000000' />
+            <meta name='description' content='Felles header og footer for nav.no' />
             <meta charset='utf-8' />
-            <link rel="icon" type="image/x-icon" href=${appUrl}${fileFavicon} />
-            <link rel="icon" type="image/png" sizes="16x16" href=${appUrl}${fileFavicon16x16} />
-            <link rel="icon" type="image/png" sizes="32x32" href=${appUrl}${fileFavicon32x32} />
-            <link rel="apple-touch-icon" sizes="180x180" href=${appUrl}${fileAppleTouchIcon} />
+            <meta name='robots' content='noindex, nofollow' />
             <!-- Decorator development styling -->
             <!-- Hide decorator-utils-container to prevent content spoofing attacks via the breadcrumbs parameter -->
             <style>
@@ -123,7 +112,10 @@ export const template = (req: Request) => {
                 <div id='${headerId}'>
                     <div id='decorator-header'>${HtmlHeader}</div>
                 </div>
-                <div class='decorator-dummy-app'>
+                <div class='decorator-dummy-app decorator-wrapper'>
+                    <div class='navds-alert navds-alert--info navds-alert--medium'>
+                        <span>Hei! Dette er en intern test-side for header og footer på nav.no. <a href='https://www.nav.no'>Gå til forsiden</a>.</span>
+                    </div>
                 </div>
                 <!-- Footer fetched by apps -->
                 <div id='${footerId}'>

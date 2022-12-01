@@ -64,9 +64,9 @@ export const LenkeMedSporing = ({
                 {(withLock || withChevron) && (
                     <div className={style.ikonContainer}>
                         {withLock ? (
-                            <Lock height={'18px'} width={'18px'} />
+                            <Lock height={'18px'} width={'18px'} aria-hidden />
                         ) : (
-                            withChevron && <Next className={style.chevron} />
+                            withChevron && <Next className={style.chevron} aria-hidden />
                         )}
                     </div>
                 )}

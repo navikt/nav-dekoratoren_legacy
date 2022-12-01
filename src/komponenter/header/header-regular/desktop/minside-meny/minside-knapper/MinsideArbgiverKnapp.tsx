@@ -26,7 +26,7 @@ export const MinsideArbgiverKnapp = () => {
                 label: href,
             }}
         >
-            <Bag />
+            <Bag aria-hidden />
             <div className={style.knappTekst} data-testid={'minside-arbeidsgiver'}>
                 <BodyShort className={style.knappTekstTopp}>
                     <Tekst id={'ga-til-min-side-arbeidsgiver'} />

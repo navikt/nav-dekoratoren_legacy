@@ -43,7 +43,7 @@ export const MinsidePersonKnapp = ({ classname, id, brukernavn }: Props) => {
             ariaControls={classname}
             classname={classname}
             id={id}
-            icon={<People data-testid={'minside-person'} />}
+            icon={<People data-testid={'minside-person'} aria-hidden />}
         >
             <div className={style.brukernavn}>{brukernavn}</div>
             <div className={classNames(style.chevron, `${isOpen ? style.chevronOpen : ''}`)}>

@@ -6,40 +6,39 @@ services:
             nav.docker-internal:
                 aliases:
                     - oidc-provider.nav.docker-internal
-        image: 'docker.pkg.github.com/navikt/stub-oidc-provider:latest'
+        image: 'navikt/stub-oidc-provider:latest'
         ports:
             - '9000:9000'
         environment:
             PORT: '9000'
             CALLBACK_URL: 'http://localhost:5000/callback'
             ISSUER: 'https://localhost:9000'
-
     oidc-provider-gui:
         container_name: oidc-provider-gui
         networks:
             nav.docker-internal:
                 aliases:
                     - oidc-provider-gui.nav.docker-internal
-        image: 'docker.pkg.github.com/navikt/pb-oidc-provider-gui:latest'
+        image: 'navikt/pb-oidc-provider-gui:latest'
         ports:
-            - '5000:5000'
+            - '5000:50000'
         depends_on:
             - oidc-provider
         environment:
             REDIRECT_URL: 'http://localhost:8088/dekoratoren'
             AUTO_REDIRECT_TO_FRONTEND: 'true'
-
     mocks:
         container_name: mocks
         networks:
             nav.docker-internal:
                 aliases:
                     - mocks.nav.docker-internal
-        image: 'docker.pkg.github.com/navikt/pb-nav-mocked:latest'
+        image: 'ghcr.io/navikt/pb-nav-mocked/pb-nav-mocked:latest'
         ports:
             - '8095:8080'
         environment:
             CORS_ALLOWED_ORIGINS: 'localhost:8088'
+            CORS_ALLOWED_SCHEMES: 'http'
             OIDC_ISSUER: 'https://localhost:9000'
             OIDC_ACCEPTED_AUDIENCE: 'stubOidcClient'
             OIDC_JWKS_URI: 'http://oidc-provider.nav.docker-internal:9000/certs'

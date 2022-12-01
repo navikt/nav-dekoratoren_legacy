@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useId } from 'react';
 import 'komponenter/header/header-regular/common/meny-knapp/hamburger-ikon/HamburgerIkon.scss';
 
 const HamburgerIkon = () => {
+    const id = useId();
     return (
         <svg
             className="menuBurger"
@@ -11,10 +12,13 @@ const HamburgerIkon = () => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            stroke-width="2"
+            strokeWidth="2"
             aria-hidden="true"
             focusable="false"
+            aria-labelledby={'menuBurger_' + id}
+            role="img"
         >
+            <title id={'menuBurger_' + id}>Meny-ikon</title>
             <path className="menuBurger__line-1" d="M2 4h20" />
             <path className="menuBurger__line-2" d="M2 12h20" />
             <path className="menuBurger__line-3" d="M2 20h20" />
