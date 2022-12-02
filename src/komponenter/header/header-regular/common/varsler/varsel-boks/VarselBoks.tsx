@@ -39,6 +39,7 @@ const Beskjed = ({
 
     const hasNoHref = (href: string) => href === undefined || href === null || href === '';
     const isOppgave = type === 'OPPGAVE';
+    const isArkiverbar = (href: string) => hasNoHref(href) && type !== 'OPPGAVE';
 
     const handleOnClick = () => {
         if (type === 'BESKJED') {
@@ -48,7 +49,7 @@ const Beskjed = ({
         logAmplitudeEvent('navigere', { komponent: type });
     };
 
-    return hasNoHref(href) ? (
+    return isArkiverbar(href) ? (
         <div className={classNames(style.beskjed, style.arkiverbar, isHover && 'hover')}>
             <div className={style.ikon} />
             <div className={style.contentWrapper}>
