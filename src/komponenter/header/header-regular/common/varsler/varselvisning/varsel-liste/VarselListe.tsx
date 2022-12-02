@@ -8,8 +8,7 @@ import { sortByEventTidspunkt } from 'utils/sorter';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import isToday from 'dayjs/plugin/isToday';
-import Beskjed from '../../varsel-typer/beskjed/Beskjed';
-import Oppgave from '../../varsel-typer/oppgave/Oppgave';
+import VarselBoks from '../../varsel-boks/VarselBoks';
 import Tekst from 'tekster/finn-tekst';
 import style from './VarselListe.module.scss';
 import 'dayjs/locale/nb';
@@ -53,7 +52,9 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                     <ul>
                         {varsler?.oppgaver?.sort(sortByEventTidspunkt).map((o, subIndex) => (
                             <li key={o.eventId}>
-                                <Oppgave
+                                <VarselBoks
+                                    eventId={o.eventId}
+                                    apiVarselinnboksUrl={API_DEKORATOREN_URL}
                                     tekst={o.tekst}
                                     dato={formatDato(o.tidspunkt)}
                                     href={o.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : o.link}
@@ -67,6 +68,8 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                               })
                                             : undefined
                                     }
+                                    setActivateScreenReaderText={setActivateScreenReaderText}
+                                    type={o.type}
                                 />
                             </li>
                         ))}
@@ -81,7 +84,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                     <ul>
                         {varsler?.beskjeder?.sort(sortByEventTidspunkt).map((b, subIndex) => (
                             <li key={b.eventId}>
-                                <Beskjed
+                                <VarselBoks
                                     eventId={b.eventId}
                                     apiVarselinnboksUrl={API_DEKORATOREN_URL}
                                     tekst={b.tekst}
