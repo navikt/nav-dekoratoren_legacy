@@ -36,8 +36,6 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
     const environment = useSelector((state: AppState) => state.environment);
     const { API_DEKORATOREN_URL } = environment;
 
-    const hasNoHref = (href: string) => href === undefined || href === null || href === '';
-
     const hasNoOppgaver = varsler?.oppgaver.length === 0;
     const hasNoBeskjeder = varsler?.beskjeder.length === 0;
     const screenReaderText = activateScreenReaderText ? <Tekst id={'varsler-arkiver-skjermleser'} /> : '';
