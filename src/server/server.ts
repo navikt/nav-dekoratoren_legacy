@@ -42,10 +42,7 @@ const corsWhitelist = [
     '.oera.no',
     '.nais.io',
     'https://preview-sykdomifamilien.gtsb.io',
-    'navdialog.cs102.force.com',
-    'navdialog.cs106.force.com',
-    'navdialog.cs108.force.com',
-    'navdialog.cs162.force.com',
+    'https://navdialog--sit2.sandbox.my.site.com',
 ];
 
 const isAllowedDomain = (origin?: string) => origin && corsWhitelist.some((domain) => origin.endsWith(domain));
