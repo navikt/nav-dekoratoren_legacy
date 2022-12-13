@@ -4,15 +4,15 @@ const surveys: Record<string, string> = {
     'https://www.nav.no/tilleggsstonader-enslig': '03343',
     'https://www.nav.no/tilleggsstonader-gjenlevende': '03343',
     'https://www.nav.no/tilleggsstonader/nn': '03343',
+    'https://www.dev.nav.no/tilleggsstonader': '03343',
 };
 
-export const initTaskAnalytics = () => {
-    window.TA =
-        window.TA ||
-        function () {
-            (TA.q = TA.q || []).push(arguments);
-        };
+const taFunc = (...args: any[]) => {
+    TA.q = TA.q || [];
+    (TA.q = TA.q || []).push(args);
+};
 
+export const startTaskAnalyticsSurveys = () => {
     const currentUrl = window.location.origin + window.location.pathname;
 
     Object.keys(surveys).forEach((surveyUrl) => {
@@ -22,4 +22,8 @@ export const initTaskAnalytics = () => {
             window.TA('start', surveyId);
         }
     });
+};
+
+export const initTaskAnalytics = () => {
+    window.TA = window.TA || taFunc;
 };

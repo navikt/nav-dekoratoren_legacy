@@ -3,24 +3,26 @@ import { useEffect, useState } from 'react';
 import { Params } from '../../store/reducers/environment-duck';
 import { InnloggingsstatusState } from '../../store/reducers/innloggingsstatus-duck';
 import { logPageView } from '../analytics/amplitude';
+import { startTaskAnalyticsSurveys } from '../analytics/task-analytics';
 
 type PushStateArgs = Parameters<typeof window.history.pushState>;
 
-// Logs pageviews on the initial page load, and attempts to also log when navigating in SPAs
-export const useLogPageviews = (params: Params, innloggingsstatus: InnloggingsstatusState) => {
+// Run functions on navigating in SPAs
+export const useOnPushStateHandlers = (params: Params, innloggingsstatus: InnloggingsstatusState) => {
     const [isInitialPageview, setIsInitialPageview] = useState(true);
     const [lastPathname, setLastPathname] = useState('');
 
-    // Handle logging on initial load
+    // Run functions on initial load
     useEffect(() => {
         if (innloggingsstatus.status === 'OK' && isInitialPageview) {
             setIsInitialPageview(false);
             logPageView(params, innloggingsstatus);
+            startTaskAnalyticsSurveys();
             setLastPathname(window.location.pathname);
         }
     }, [innloggingsstatus, isInitialPageview]);
 
-    // Handle SPA logging
+    // Run on SPA navigation
     useEffect(() => {
         if (isInitialPageview) {
             return;
@@ -31,12 +33,13 @@ export const useLogPageviews = (params: Params, innloggingsstatus: Innloggingsst
         window.history.pushState = (...args: PushStateArgs) => {
             pushStateActual.call(window.history, ...args);
 
-            // Delay slightly before logging to allow SPAs to update their location state
+            // Delay slightly to allow SPAs to update their location state
             setTimeout(() => {
                 const newPathname = window.location.pathname;
                 if (newPathname !== lastPathname) {
                     setLastPathname(newPathname);
                     logPageView(params, innloggingsstatus);
+                    startTaskAnalyticsSurveys();
                 }
             }, 250);
         };
