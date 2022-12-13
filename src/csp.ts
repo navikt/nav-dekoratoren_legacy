@@ -10,7 +10,6 @@ const vimeoPlayer = 'player.vimeo.com'; // used for inline videos in the chat cl
 const qbrick = 'video.qbrick.com'; // used for inline videos in the chat client
 const vimeoCdn = '*.vimeocdn.com'; // used for video preview images
 
-const googleAnalytics = '*.google-analytics.com';
 const googleTagManager = '*.googletagmanager.com';
 const hotjarCom = '*.hotjar.com';
 const hotjarIo = '*.hotjar.io';
@@ -26,7 +25,6 @@ const scriptSrc = [
     navNo,
     vergicScreenSharing,
     googleTagManager,
-    googleAnalytics,
     hotjarCom,
     taskAnalytics,
     UNSAFE_INLINE, // GTM
@@ -53,9 +51,9 @@ const directives: Partial<CSPDirectives> = {
         cdnNavNo,
         DATA, // ds-css
     ],
-    'img-src': [navNo, vergicScreenSharing, googleAnalytics, vimeoCdn, hotjarCom, googleTagManager, vergicDotCom],
+    'img-src': [navNo, vergicScreenSharing, vimeoCdn, hotjarCom, googleTagManager, vergicDotCom],
     'frame-src': [hotjarCom, googleTagManager, vimeoPlayer, qbrick],
-    'connect-src': [navNo, boostChatbot, vergicScreenSharing, googleAnalytics, hotjarCom, hotjarIo, taskAnalytics],
+    'connect-src': [navNo, boostChatbot, vergicScreenSharing, hotjarCom, hotjarIo, taskAnalytics],
 };
 
 const localDirectives = Object.entries(directives).reduce((acc, [key, value]) => {
