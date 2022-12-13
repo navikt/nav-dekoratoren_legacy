@@ -10,8 +10,6 @@ const vimeoPlayer = 'player.vimeo.com'; // used for inline videos in the chat cl
 const qbrick = 'video.qbrick.com'; // used for inline videos in the chat client
 const vimeoCdn = '*.vimeocdn.com'; // used for video preview images
 
-const googleAnalytics = '*.google-analytics.com';
-const googleTagManager = '*.googletagmanager.com';
 const hotjarCom = '*.hotjar.com';
 const hotjarIo = '*.hotjar.io';
 const taskAnalytics = '*.taskanalytics.com';
@@ -25,11 +23,13 @@ const styleSrc = [
 const scriptSrc = [
     navNo,
     vergicScreenSharing,
-    googleTagManager,
-    googleAnalytics,
     hotjarCom,
     taskAnalytics,
     UNSAFE_INLINE, // GTM
+];
+
+const workerSrc = [
+    BLOB, // vergic
 ];
 
 const directives: Partial<CSPDirectives> = {
@@ -39,12 +39,8 @@ const directives: Partial<CSPDirectives> = {
         UNSAFE_EVAL, // vergic
     ],
     'script-src-elem': scriptSrc,
-    'worker-src': [
-        BLOB, // vergic
-    ],
-    'child-src': [
-        BLOB, // vergic (for browsers lacking support for worker-src)
-    ],
+    'worker-src': workerSrc,
+    'child-src': workerSrc, // for browsers lacking support for worker-src
     'style-src': styleSrc,
     'style-src-elem': styleSrc,
     'font-src': [
@@ -53,9 +49,9 @@ const directives: Partial<CSPDirectives> = {
         cdnNavNo,
         DATA, // ds-css
     ],
-    'img-src': [navNo, vergicScreenSharing, googleAnalytics, vimeoCdn, hotjarCom, googleTagManager, vergicDotCom],
-    'frame-src': [hotjarCom, googleTagManager, vimeoPlayer, qbrick],
-    'connect-src': [navNo, boostChatbot, vergicScreenSharing, googleAnalytics, hotjarCom, hotjarIo, taskAnalytics],
+    'img-src': [navNo, vergicScreenSharing, vimeoCdn, hotjarCom, vergicDotCom],
+    'frame-src': [hotjarCom, vimeoPlayer, qbrick],
+    'connect-src': [navNo, boostChatbot, vergicScreenSharing, hotjarCom, hotjarIo, taskAnalytics],
 };
 
 const localDirectives = Object.entries(directives).reduce((acc, [key, value]) => {

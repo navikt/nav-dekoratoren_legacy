@@ -1,6 +1,8 @@
 declare global {
+    let TA: any;
     interface Window {
         TA: any;
+        dataLayer: any;
     }
     namespace NodeJS {
         interface ProcessEnv {
