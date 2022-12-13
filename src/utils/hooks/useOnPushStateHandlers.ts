@@ -14,7 +14,8 @@ export const useOnPushStateHandlers = (params: Params, innloggingsstatus: Innlog
 
     // Run functions on initial load
     useEffect(() => {
-        if (innloggingsstatus.status === 'OK' && isInitialPageview) {
+        const { status } = innloggingsstatus;
+        if ((status === 'OK' || status === 'FEILET') && isInitialPageview) {
             setIsInitialPageview(false);
             logPageView(params, innloggingsstatus);
             startTaskAnalyticsSurveys();

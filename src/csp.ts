@@ -28,6 +28,10 @@ const scriptSrc = [
     UNSAFE_INLINE, // GTM
 ];
 
+const workerSrc = [
+    BLOB, // vergic
+];
+
 const directives: Partial<CSPDirectives> = {
     'default-src': [navNo],
     'script-src': [
@@ -35,12 +39,8 @@ const directives: Partial<CSPDirectives> = {
         UNSAFE_EVAL, // vergic
     ],
     'script-src-elem': scriptSrc,
-    'worker-src': [
-        BLOB, // vergic
-    ],
-    'child-src': [
-        BLOB, // vergic (for browsers lacking support for worker-src)
-    ],
+    'worker-src': workerSrc,
+    'child-src': workerSrc, // for browsers lacking support for worker-src
     'style-src': styleSrc,
     'style-src-elem': styleSrc,
     'font-src': [
