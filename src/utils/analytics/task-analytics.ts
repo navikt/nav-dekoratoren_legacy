@@ -26,4 +26,5 @@ export const startTaskAnalyticsSurveys = () => {
 
 export const initTaskAnalytics = () => {
     window.TA = window.TA || taFallback;
+    window.dataLayer = window.dataLayer || [];
 };
