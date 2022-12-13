@@ -7,9 +7,9 @@ const surveys: Record<string, string> = {
     'https://www.dev.nav.no/tilleggsstonader': '03343',
 };
 
-const taFunc = (...args: any[]) => {
+const taFallback = (...args: any[]) => {
     TA.q = TA.q || [];
-    (TA.q = TA.q || []).push(args);
+    TA.q.push(args);
 };
 
 export const startTaskAnalyticsSurveys = () => {
@@ -25,5 +25,5 @@ export const startTaskAnalyticsSurveys = () => {
 };
 
 export const initTaskAnalytics = () => {
-    window.TA = window.TA || taFunc;
+    window.TA = window.TA || taFallback;
 };
