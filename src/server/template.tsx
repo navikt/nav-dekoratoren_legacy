@@ -127,6 +127,7 @@ export const template = (req: Request) => {
             <div id='scripts'>
                 <div id='decorator-env' data-src='${fileEnv}${paramsAsString}'></div>
                 <script async src='${fileScript}'></script>
+                <script async src="https://in2.taskanalytics.com/tm.js"></script>
                 <script>${hotjarInlineScript}</script>
             </div>
             <div id='skiplinks'></div>

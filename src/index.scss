@@ -89,9 +89,3 @@ body.no-scroll-mobil {
         display: initial !important;
     }
 }
-
-@media print {
-    #_hj_poll_container, #_hj_feedback_container {
-        display: none !important;
-    }
-}

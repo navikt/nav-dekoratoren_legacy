@@ -1,4 +1,5 @@
 declare global {
+    let TA: any;
     interface Window {
         TA: any;
     }
