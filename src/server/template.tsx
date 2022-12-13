@@ -10,6 +10,7 @@ import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 import { CookiesProvider } from 'react-cookie';
 import hash from 'object-hash';
+import { hotjarInlineScript } from '../utils/analytics/hotjar';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -126,6 +127,7 @@ export const template = (req: Request) => {
             <div id='scripts'>
                 <div id='decorator-env' data-src='${fileEnv}${paramsAsString}'></div>
                 <script async src='${fileScript}'></script>
+                <script>${hotjarInlineScript}</script>
             </div>
             <div id='skiplinks'></div>
             <div id='megamenu-resources'></div>
