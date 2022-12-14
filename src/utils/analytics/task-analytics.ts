@@ -4,6 +4,11 @@ const surveys: Record<string, string> = {
     'https://www.nav.no/tilleggsstonader-enslig': '03343',
     'https://www.nav.no/tilleggsstonader-gjenlevende': '03343',
     'https://www.nav.no/tilleggsstonader/nn': '03343',
+    'https://www.nav.no/soknader/nb/person': '03344',
+    'https://www.nav.no/soknader/nb/bedrift': '03344',
+    'https://www.nav.no/soknader/en/bedrift': '03344',
+    'https://www.nav.no/soknader/en/person': '03344',
+    'https://www.nav.no/soknader': '03344'
 };
 
 const taFallback = (...args: any[]) => {
