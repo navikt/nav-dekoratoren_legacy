@@ -3,7 +3,7 @@ import { logAmplitudeEvent } from '../../../../utils/analytics/amplitude';
 
 import style from './GodJul.module.scss';
 
-const numLights = 30;
+const numLights = 50;
 const numSnowflakes = 10;
 
 export const GodJul = () => {
@@ -39,13 +39,13 @@ export const GodJul = () => {
     return (
         <div className={style.godjul} aria-hidden={true}>
             <ul className={style.lightrope}>
-                {Array.from({ length: numLights }, () => (
-                    <li />
+                {Array.from({ length: numLights }, (_, index) => (
+                    <li key={index} />
                 ))}
             </ul>
             <ul className={style.snowflakes}>
-                {Array.from({ length: numSnowflakes }, () => (
-                    <li />
+                {Array.from({ length: numSnowflakes }, (_, index) => (
+                    <li key={index} />
                 ))}
             </ul>
         </div>
