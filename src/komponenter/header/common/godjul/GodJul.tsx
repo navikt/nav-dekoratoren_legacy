@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { logAmplitudeEvent } from '../../../../utils/analytics/amplitude';
 
 import style from './GodJul.module.scss';
 
@@ -15,17 +16,14 @@ export const GodJul = () => {
             if (keysPressed.join('') === 'godjul') {
                 setIsEnabled(true);
                 document.removeEventListener('keydown', handler);
-                console.log('God jul!');
+                logAmplitudeEvent('godjul');
             }
         };
 
         document.addEventListener('keydown', handler);
 
-        console.log('Added event listener');
-
         return () => {
             window.removeEventListener('keydown', handler);
-            console.log('Removed event listener');
         };
     }, []);
 
