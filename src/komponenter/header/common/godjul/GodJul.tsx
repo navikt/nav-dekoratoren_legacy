@@ -3,6 +3,9 @@ import { logAmplitudeEvent } from '../../../../utils/analytics/amplitude';
 
 import style from './GodJul.module.scss';
 
+const numLights = 50;
+const numSnowflakes = 10;
+
 export const GodJul = () => {
     const [isEnabled, setIsEnabled] = useState(false);
 
@@ -10,8 +13,10 @@ export const GodJul = () => {
         let keysPressed: string[] = [];
 
         const handler = (event: KeyboardEvent) => {
-            const { key } = event;
-            keysPressed.push(key.toLowerCase());
+            if (!event?.key || event.key === ' ') {
+                return;
+            }
+            keysPressed.push(event.key.toLowerCase());
             keysPressed = keysPressed.slice(-6);
             if (keysPressed.join('') === 'godjul') {
                 setIsEnabled(true);
@@ -23,7 +28,7 @@ export const GodJul = () => {
         document.addEventListener('keydown', handler);
 
         return () => {
-            window.removeEventListener('keydown', handler);
+            document.removeEventListener('keydown', handler);
         };
     }, []);
 
@@ -34,60 +39,14 @@ export const GodJul = () => {
     return (
         <div className={style.godjul} aria-hidden={true}>
             <ul className={style.lightrope}>
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
+                {Array.from({ length: numLights }, (_, index) => (
+                    <li key={index} />
+                ))}
             </ul>
             <ul className={style.snowflakes}>
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
+                {Array.from({ length: numSnowflakes }, (_, index) => (
+                    <li key={index} />
+                ))}
             </ul>
         </div>
     );
