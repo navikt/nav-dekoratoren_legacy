@@ -32,7 +32,7 @@ const Arbeidsflatemeny = () => {
     const { language } = useSelector((state: AppState) => state.language);
 
     return (
-        <nav className={'arbeidsflate'} id={'arbeidsflate'} aria-label="Velg brukergruppe">
+        <div className={'arbeidsflate'} id={'arbeidsflate'} aria-label="Velg brukergruppe">
             <ul className={style.toppListeRad}>
                 {arbeidsflateLenker(XP_BASE_URL).map((lenke, index) => {
                     return (
@@ -72,7 +72,7 @@ const Arbeidsflatemeny = () => {
                     );
                 })}
             </ul>
-        </nav>
+        </div>
     );
 };
 

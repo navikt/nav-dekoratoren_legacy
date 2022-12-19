@@ -334,7 +334,7 @@ export const Header = () => {
             <GodJul />
             <BrowserSupportMsg />
             <header className={`siteheader${useSimpleHeader ? ' simple' : ''}`}>
-                <Skiplinks simple={useSimpleHeader} />
+                <Skiplinks />
                 {useSimpleHeader ? <HeaderSimple /> : <HeaderRegular />}
             </header>
             <Driftsmeldinger />
