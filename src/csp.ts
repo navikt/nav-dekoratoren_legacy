@@ -4,6 +4,7 @@ const navNo = '*.nav.no';
 const cdnNavNo = 'cdn.nav.no';
 
 const vergicScreenSharing = '*.psplugin.com';
+const boostScript = 'navtest.boost.ai';
 const vergicDotCom = 'www.vergic.com'; // seems to only be used for a single placeholder image
 const boostChatbot = '*.boost.ai';
 const vimeoPlayer = 'player.vimeo.com'; // used for inline videos in the chat client
@@ -25,6 +26,7 @@ const scriptSrc = [
     vergicScreenSharing,
     hotjarCom,
     taskAnalytics,
+    boostScript,
     UNSAFE_INLINE, // GTM
 ];
 
