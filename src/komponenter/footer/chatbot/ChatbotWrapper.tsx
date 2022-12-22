@@ -37,89 +37,116 @@ type HexColor = `#${string}`;
 
 type ButtonType = 'button' | 'bullet';
 
-type boostConfig = {
+type BoostHeaderFilterOptions = { id: Number; title: string; values: string[] };
+
+type BoostHeaderFilter = {
+    filterValues?: string | string[];
+    options?: BoostHeaderFilterOptions[];
+};
+
+type BoostHeader = {
+    filters?: BoostHeaderFilter;
+    showMinimizeButton?: 'always' | 'never' | 'mobile';
+    title?: string;
+};
+
+type BoostPositionStyling = {
+    spacingBottom?: number | string;
+    spacingRight: number | string;
+    zIndex?: number | string;
+};
+
+type BoostChatBubbleStyles = {
+    userBackgroundColor?: HexColor;
+    userTextColor?: HexColor;
+    typingDotColor?: HexColor;
+    typing8ackgroundColor?: HexColor;
+    vaBackgroundColor?: HexColor;
+    vaTextColor?: HexColor;
+};
+
+type BoostMessageFeedbackStyling = {
+    hide?: boolean;
+    focusColor?: HexColor;
+    selectedColor?: HexColor;
+    outlineColor?: HexColor;
+};
+
+type BoostComposerStyling = {
+    hide?: boolean;
+    composeLengthColor?: HexColor;
+    composeLengthDisabledColor?: HexColor;
+    frameBackgroundColor?: HexColor;
+    sendButtonColor?: HexColor;
+    sendButtonDisabledColor?: HexColor;
+    sendButtonFocusOutlineColor?: HexColor;
+    textareaFocusBorderColor?: HexColor;
+    textareaFocusOutlineColor?: HexColor;
+    textareaBorderColor?: HexColor;
+    textareaBackgroundColor?: HexColor;
+    textareaTextColor: HexColor;
+    textareaPlaceholderTextColor: HexColor;
+    topBorderColor?: HexColor;
+    topBorderFocusColor?: HexColor;
+};
+
+type BoostButtonStyling = {
+    backgroundColor?: HexColor;
+    textColor?: HexColor;
+    variant?: ButtonType;
+    focusBackgroundColor: HexColor;
+    focusOutlineColor?: HexColor;
+    focusTextColor?: HexColor;
+    hoverBackgroundColor?: HexColor;
+    hoverTextColor?: HexColor;
+    multiline?: boolean;
+};
+
+type BoostStyling = {
+    avatarShape?: 'rounded' | 'squared';
+    avatarUrl?: string;
+    fontFamily?: string;
+    panelShape?: 'squared' | 'rounded';
+    panelBackgroundColor?: HexColor;
+    panelScrollbarColor?: HexColor;
+    contrastColor?: HexColor;
+    primaryColor?: HexColor;
+    disableVanStylingChange?: boolean;
+    size?: 'small' | 'medium' | 'large';
+    pace?: 'glacial' | 'slower' | 'slow' | 'normal' | 'fast' | 'faster' | 'supersonic' | number;
+    position?: BoostPositionStyling;
+    chatBubbles?: BoostChatBubbleStyles;
+    messageFeedback?: BoostMessageFeedbackStyling;
+    composer?: BoostComposerStyling;
+    buttons?: BoostButtonStyling;
+};
+
+type BoostSettings = {
+    alwaysFullscreen?: boolean;
+    authStartTriggerActionId?: string | number;
+    contextTopicIntentId?: string | number;
+    conversationId?: string;
+    fileUploadServiceEndpointUrl?: string;
+    enableProactivityForSmallDevices?: boolean;
+    messageFeedbackOnFirstAction?: boolean;
+    openTextLinksInNewTab?: boolean;
+    pageUrl?: string;
+    requestFeedback?: boolean;
+    removeRememberedConversationOnChatPanelClose?: boolean;
+    showLinkClickAsChatBubble?: boolean;
+    skill?: string;
+    startLanguage?: string;
+    startNewConversationOnResumeFailure?: boolean;
+    startTriggerActionId?: string | number;
+    triggerActionOnResume?: boolean;
+    userToken?: string | undefined | (() => string | undefined | null);
+};
+
+type BoostConfig = {
     chatPanel?: {
-        header?: {
-            filters?: { filterValues?: string | string[]; options?: { id: Number; title: string; values: string[] }[] };
-            showMinimizeButton?: 'always' | 'never' | 'mobile';
-            title?: string;
-        };
-        styling?: {
-            avatarShape?: 'rounded' | 'squared';
-            avatarUrl?: string;
-            fontFamily?: string;
-            panelShape?: 'squared' | 'rounded';
-            panelBackgroundColor?: HexColor;
-            panelScrollbarColor?: HexColor;
-            contrastColor?: HexColor;
-            primaryColor?: HexColor;
-            disableVanStylingChange?: boolean;
-            size?: 'small' | 'medium' | 'large';
-            pace?: 'glacial' | 'slower' | 'slow' | 'normal' | 'fast' | 'faster' | 'supersonic' | number;
-            position?: { spacingBottom?: number | string; spacingRight: number | string; zIndex?: number | string };
-            chatBubbles?: {
-                userBackgroundColor?: HexColor;
-                userTextColor?: HexColor;
-                typingDotColor?: HexColor;
-                typing8ackgroundColor?: HexColor;
-                vaBackgroundColor?: HexColor;
-                vaTextColor?: HexColor;
-            };
-            messageFeedback?: {
-                hide?: boolean;
-                focusColor?: HexColor;
-                selectedColor?: HexColor;
-                outlineColor?: HexColor;
-            };
-            composer?: {
-                hide?: boolean;
-                composeLengthColor?: HexColor;
-                composeLengthDisabledColor?: HexColor;
-                frameBackgroundColor?: HexColor;
-                sendButtonColor?: HexColor;
-                sendButtonDisabledColor?: HexColor;
-                sendButtonFocusOutlineColor?: HexColor;
-                textareaFocusBorderColor?: HexColor;
-                textareaFocusOutlineColor?: HexColor;
-                textareaBorderColor?: HexColor;
-                textareaBackgroundColor?: HexColor;
-                textareaTextColor: HexColor;
-                textareaPlaceholderTextColor: HexColor;
-                topBorderColor?: HexColor;
-                topBorderFocusColor?: HexColor;
-            };
-            buttons?: {
-                backgroundColor?: HexColor;
-                textColor?: HexColor;
-                variant?: ButtonType;
-                focusBackgroundColor: HexColor;
-                focusOutlineColor?: HexColor;
-                focusTextColor?: HexColor;
-                hoverBackgroundColor?: HexColor;
-                hoverTextColor?: HexColor;
-                multiline?: boolean;
-            };
-        };
-        settings?: {
-            alwaysFullscreen?: boolean;
-            authStartTriggerActionId?: string | number;
-            contextTopicIntentId?: string | number;
-            conversationId?: string;
-            fileUploadServiceEndpointUrl?: string;
-            enableProactivityForSmallDevices?: boolean;
-            messageFeedbackOnFirstAction?: boolean;
-            openTextLinksInNewTab?: boolean;
-            pageUrl?: string;
-            requestFeedback?: boolean;
-            removeRememberedConversationOnChatPanelClose?: boolean;
-            showLinkClickAsChatBubble?: boolean;
-            skill?: string;
-            startLanguage?: string;
-            startNewConversationOnResumeFailure?: boolean;
-            startTriggerActionId?: string | number;
-            triggerActionOnResume?: boolean;
-            userToken?: string | undefined | (() => string | undefined | null);
-        };
+        header?: BoostHeader;
+        styling?: BoostStyling;
+        settings?: BoostSettings;
     };
 };
 
@@ -158,7 +185,7 @@ const getActionFilters = (context: MenuValue, isProduction: boolean): ActionFilt
     return isProduction ? contextFilter : [...contextFilter, 'NAV_TEST'];
 };
 
-const options: boostConfig = {};
+const options: BoostConfig = {};
 
 export const ChatbotWrapper = () => {
     const { chatbotParamEnabled, chatbotParamVisible, context, env } = useSelector(stateSelector);
