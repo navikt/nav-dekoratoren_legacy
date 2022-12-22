@@ -7,11 +7,8 @@ import { MenuValue } from '../../../utils/meny-storage-utils';
 import { useCookies } from 'react-cookie';
 import classNames from 'classnames';
 import style from './ChatbotWrapper.module.scss';
-import { Button } from '@navikt/ds-react';
-
 import frida from 'ikoner/frida.svg';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
-import { openChatbot } from '@navikt/nav-dekoratoren-moduler';
 
 // Prevents SSR crash
 const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
@@ -185,7 +182,7 @@ const getActionFilters = (context: MenuValue, isProduction: boolean): ActionFilt
     return isProduction ? contextFilter : [...contextFilter, 'NAV_TEST'];
 };
 
-const options: BoostConfig = {};
+const options: BoostConfig = { chatPanel: { settings: { removeRememberedConversationOnChatPanelClose: true } } };
 
 export const ChatbotWrapper = () => {
     const { chatbotParamEnabled, chatbotParamVisible, context, env } = useSelector(stateSelector);
@@ -220,19 +217,15 @@ export const ChatbotWrapper = () => {
     }
 
     const openBoostWindow = () => {
-        // Check if a boost session has been established
-        if (typeof window !== 'undefined' && boost == null) {
-            const w = window as any;
-            if (typeof w.boostInit !== 'undefined') {
-                setBoost(w.boostInit('navtest', options));
-            }
-        }
         if (typeof boost !== 'undefined') boost.chatPanel.show();
     };
 
-    useEffect(() => {
-        openBoostWindow();
-    }, [boost]);
+    if (typeof window !== 'undefined' && boost == null) {
+        const w = window as any;
+        if (typeof w.boostInit !== 'undefined') {
+            setBoost(w.boostInit('navtest', options));
+        }
+    }
 
     return isMounted ? (
         <div>
