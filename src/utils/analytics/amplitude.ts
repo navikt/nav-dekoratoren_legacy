@@ -7,6 +7,13 @@ const amplitude = verifyWindowObj() ? require('amplitude-js') : () => null;
 
 export const initAmplitude = () => {
     if (amplitude) {
+        const userProps = {
+            skjermbredde: window.screen.width,
+            skjermhoyde: window.screen.height,
+            vindusbredde: window.innerWidth,
+            vindushoyde: window.innerHeight,
+        };
+
         amplitude.getInstance().init('default', '', {
             apiEndpoint: 'amplitude.nav.no/collect-auto',
             saveEvents: false,
@@ -14,6 +21,7 @@ export const initAmplitude = () => {
             includeReferrer: true,
             platform: window.location.toString(),
         });
+        amplitude.getInstance().setUserProperties(userProps);
     }
 };
 
