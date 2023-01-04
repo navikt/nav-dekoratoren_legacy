@@ -22,14 +22,14 @@ const TilgjengelighetserklaeringsModal = (props: Props) => {
             open={props.isOpen}
             className={style.modal}
             overlayClassName="decorator-wrapper"
-            aria-label={'Tilgjengelighet'}
+            aria-labelledby="tilgjengelighet-modal-heading"
             onClose={props.onClose}
             style={{ overlay: { backgroundColor: 'rgba(50, 65, 79, 0.8)' } }}
             parentSelector={parent ? () => parent : undefined}
         >
             <Modal.Content>
                 <Panel>
-                    <Heading spacing size="medium" level="2">
+                    <Heading spacing size="medium" level="2" id="tilgjengelighet-modal-heading">
                         Tilgjengelighet
                     </Heading>
                     <BodyLong spacing>
