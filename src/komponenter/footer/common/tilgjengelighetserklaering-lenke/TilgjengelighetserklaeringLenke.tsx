@@ -26,12 +26,12 @@ export const TilgjengelighetserklaeringLenke = () => {
         <>
             <li>
                 <BodyShort>
-                    <Link href="#" className="globalLenkeFooter" onClick={openModal} role="button">
+                    <Link href="#" className="globalLenkeFooter" onClick={openModal}>
                         <span>Tilgjengelighet</span>
                     </Link>
                 </BodyShort>
             </li>
-            <TilgjengelighetserklaeringModal isOpen={isOpen} onClose={closeModal} />
+            {isOpen && <TilgjengelighetserklaeringModal isOpen={isOpen} onClose={closeModal} />}
         </>
     );
 };

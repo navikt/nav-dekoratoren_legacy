@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BodyLong, Heading, Modal, Panel } from '@navikt/ds-react';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
-import './TilgjengelighetserklaeringModal.less';
+import style from './TilgjengelighetserklaeringModal.module.scss';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 
 interface Props {
@@ -10,13 +10,22 @@ interface Props {
 }
 
 const TilgjengelighetserklaeringsModal = (props: Props) => {
+    const [parent, setParent] = useState<HTMLElement>();
+
+    useEffect(() => {
+        const parent = document.getElementById('decorator-footer-inner') as HTMLElement;
+        setParent(parent);
+    }, []);
+
     return (
         <Modal
             open={props.isOpen}
-            className={'decorator-wrapper tilgjengelighetserklaering__modal'}
+            className={style.modal}
+            overlayClassName="decorator-wrapper"
             aria-label={'Tilgjengelighet'}
             onClose={props.onClose}
             style={{ overlay: { backgroundColor: 'rgba(50, 65, 79, 0.8)' } }}
+            parentSelector={parent ? () => parent : undefined}
         >
             <Modal.Content>
                 <Panel>
