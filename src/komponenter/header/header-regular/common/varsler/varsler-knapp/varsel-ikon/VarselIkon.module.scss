@@ -5,19 +5,19 @@ $transition-duration: 0.35s;
 $transition: all $transition-duration ease-in;
 $ulest-diameter: 12px;
 
-.ulestSirkel {
+[aria-expanded='false'] .ulestSirkel {
     position: absolute;
     z-index: 4;
 
     border-radius: 50%;
     height: $ulest-diameter;
     width: $ulest-diameter;
-    left: 12px;
-    top: 14px;
+    left: 20px;
+    top: 26px;
 
     @media #{sv.$screen-mobile} {
-        left: 30px;
-        top: 2px;
+        left: 34px;
+        top: 14px;
     }
 
     background-color: var(--navds-semantic-color-feedback-danger-icon);
@@ -27,6 +27,21 @@ $ulest-diameter: 12px;
     align-items: center;
 
     transition: $transition;
+}
+.lukkVarslerIkon{
+    margin: 4px 3.5px 4px 3.5px;
+}
+
+[aria-expanded='true'] .varselBellIkon{
+    display: none;
+}
+
+[aria-expanded='false'] .lukkVarslerIkon {
+    display: none;
+}
+
+[aria-expanded='true'] .ulestSirkel {
+    display: none;
 }
 
 .hide {

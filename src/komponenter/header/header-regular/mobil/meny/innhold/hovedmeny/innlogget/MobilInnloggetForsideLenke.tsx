@@ -8,7 +8,7 @@ import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-a
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from '../../../../../../../../utils/analytics/analytics';
 
-import './MobilInnloggetForsideLenke.less';
+import 'komponenter/header/header-regular/mobil/meny/innhold/hovedmeny/innlogget/MobilInnloggetForsideLenke.scss';
 
 const stateSelector = (state: AppState) => ({
     MIN_SIDE_URL: state.environment.MIN_SIDE_URL,

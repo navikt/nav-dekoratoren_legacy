@@ -3,8 +3,7 @@ import { BodyShort } from '@navikt/ds-react';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import Tekst from 'tekster/finn-tekst';
-import BEMHelper from 'utils/bem';
-import './SlideToClose.less';
+import style from 'komponenter/header/header-regular/mobil/meny/innhold/utils/SlideToClose.module.scss';
 
 interface Props {
     children: ReactNode;
@@ -23,7 +22,6 @@ export const SlideToClose = ({ children }: Props) => {
     const [dx, setDx] = useState(0);
     const [screenWidth, setScreenWidth] = useState(0);
     const dispatch = useDispatch();
-    const cls = BEMHelper('slideToClose');
 
     const styleContainer = { left: -dx, transition: dx ? 'none' : undefined };
     const styleMessage = {
@@ -74,11 +72,11 @@ export const SlideToClose = ({ children }: Props) => {
                 onTouchMove={disableSliding ? undefined : onTouchMove}
                 onTouchEnd={onTouchEnd}
                 style={styleContainer}
-                className={cls.element('content')}
+                className={style.slideToCloseContent}
             >
                 {children}
             </div>
-            <div className={cls.element('message')} style={styleMessage}>
+            <div className={style.slideToCloseMessage} style={styleMessage}>
                 <BodyShort>
                     <Tekst id="lukk" />
                 </BodyShort>

@@ -36,13 +36,10 @@ export const NavLogoLenke = (props: Props) => {
             onClick={(event) => {
                 setCookie(CookieName.DECORATOR_CONTEXT, context.key, cookieOptions);
                 dispatch(settArbeidsflate(context.key));
-                if (erNavDekoratoren()) {
-                    event.preventDefault();
-                }
             }}
             id={props.id}
         >
-            <Bilde altText="Til forsiden" asset={props.ikon} />
+            <Bilde altText="Til forsiden" asset={props.ikon} cacheBuster={'1'} />
         </LenkeMedSporing>
     );
 };

@@ -1,27 +1,28 @@
-import React from 'react';
-import style from './HamburgerIkon.module.scss';
+import React, { useId } from 'react';
+import 'komponenter/header/header-regular/common/meny-knapp/hamburger-ikon/HamburgerIkon.scss';
 
-type Props = {
-    isOpen: boolean;
-};
-
-const Linje = ({
-    className,
-    isOpen,
-    isOpenClassName,
-}: {
-    className: string;
-    isOpenClassName: string;
-    isOpen: boolean;
-}) => <span className={`${className} ${isOpen ? isOpenClassName : ''}`} />;
-
-const HamburgerIkon = ({ isOpen }: Props) => {
+const HamburgerIkon = () => {
+    const id = useId();
     return (
-        <span className={`${style.hamburgerIkon} hamburger-ikon`}>
-            <Linje className={style.topp} isOpenClassName={style.toppOpen} isOpen={isOpen} />
-            <Linje className={style.midt} isOpenClassName={style.midtOpen} isOpen={isOpen} />
-            <Linje className={style.bunn} isOpenClassName={style.bunnOpen} isOpen={isOpen} />
-        </span>
+        <svg
+            className="menuBurger"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
+            aria-hidden="true"
+            focusable="false"
+            aria-labelledby={'menuBurger_' + id}
+            role="img"
+        >
+            <title id={'menuBurger_' + id}>Meny-ikon</title>
+            <path className="menuBurger__line-1" d="M2 4h20" />
+            <path className="menuBurger__line-2" d="M2 12h20" />
+            <path className="menuBurger__line-3" d="M2 20h20" />
+        </svg>
     );
 };
 

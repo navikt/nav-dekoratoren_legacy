@@ -1,29 +1,24 @@
-import React from 'react';
+import React, { useId } from 'react';
 
-export default ({
-    width,
-    height,
-    color,
-}: {
-    width?: string;
-    height?: string;
-    color?: string;
-}) => (
-    <svg width={width} height={height} viewBox="0 0 16 24" version="1.1">
-        <g
-            stroke="none"
-            strokeWidth="1"
-            fill={color || '#0067C5'}
-            fillRule="evenodd"
+export default ({ width, height, color }: { width?: string; height?: string; color?: string }) => {
+    const id = useId();
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={width}
+            height={height}
+            viewBox="0 0 16 24"
+            role="img"
+            focusable={false}
+            aria-hidden="true"
+            aria-labelledby={'lockIcon' + id}
         >
-            <g
-                transform="translate(-388.000000, -225.000000)"
-                fill={color || '#0067C5'}
-            >
-                <g transform="translate(388.000000, 225.000000)">
-                    <path d="M8,0 C10.7614237,0 13,2.23857625 13,5 L13,8 L14,8 C15.1045695,8 16,8.8954305 16,10 L16,22 C16,23.1045695 15.1045695,24 14,24 L2,24 C0.8954305,24 0,23.1045695 0,22 L0,10 C0,8.8954305 0.8954305,8 2,8 L3,8 L3,5 C3,2.23857625 5.23857625,0 8,0 Z M14,10 L2,10 L2,22 L14,22 L14,10 Z M8,13 C9.1045695,13 10,13.8954305 10,15 C10,15.7398375 9.59828461,16.3858493 9.0010775,16.7318119 L9,20 L7,20 L6.99992752,16.7323937 C6.40216612,16.3865739 6,15.7402524 6,15 C6,13.8954305 6.8954305,13 8,13 Z M8,2 C6.40231912,2 5.09633912,3.24891996 5.00509269,4.82372721 L5,5 L5,8 L11,8 L11,5 C11,3.40231912 9.75108004,2.09633912 8.17627279,2.00509269 L8,2 Z" />
-                </g>
-            </g>
-        </g>
-    </svg>
-);
+            <title id={'lockIcon' + id}></title>
+            <path
+                fill="currentColor"
+                stroke="none"
+                d="M8 0a5 5 0 0 1 5 5v3h1a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10c0-1.1.9-2 2-2h1V5a5 5 0 0 1 5-5Zm6 10H2v12h12V10Zm-6 3a2 2 0 0 1 1 3.7V20H7v-3.3A2 2 0 0 1 8 13ZM8 2a3 3 0 0 0-3 2.8V8h6V5a3 3 0 0 0-2.8-3H8Z"
+            />
+        </svg>
+    );
+};

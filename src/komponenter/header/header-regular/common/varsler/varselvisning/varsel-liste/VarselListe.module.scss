@@ -31,10 +31,22 @@
 }
 
 .varselDato {
-    margin-bottom: 0.25rem !important; //override navds
-    font-weight: 400 !important; //override navds
+    margin-bottom: 0.25rem;
+    font-weight: 400;
 }
 
 .infotekst {
-    margin-bottom: 0.5rem !important; //override navds
+    margin-bottom: 0.5rem;
+}
+
+.seVarslerLenke {
+    padding: 0;
+}
+
+.ariaTextContainer {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden; 
 }

@@ -35,7 +35,7 @@ import { setParams } from 'store/reducers/environment-duck';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
-import { useLogPageviews } from '../../utils/hooks/useLogPageviews';
+import { useOnPushStateHandlers } from '../../utils/hooks/useOnPushStateHandlers';
 
 import './Header.scss';
 
@@ -58,7 +58,7 @@ export const Header = () => {
     const { arbeidsflate } = useSelector(stateSelector);
     const { innloggingsstatus, menypunkt } = useSelector(stateSelector);
     const { authenticated } = innloggingsstatus.data;
-    const { PARAMS, APP_URL, API_UNLEASH_PROXY_URL, API_INNLOGGINGSLINJE_URL, ENV } = environment;
+    const { PARAMS, APP_URL, API_DEKORATOREN_URL, ENV } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
     const breadcrumbs = PARAMS.BREADCRUMBS || [];
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
@@ -66,7 +66,7 @@ export const Header = () => {
 
     const [cookies, setCookie] = useCookies();
 
-    useLogPageviews(PARAMS, innloggingsstatus);
+    useOnPushStateHandlers(PARAMS, innloggingsstatus);
 
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {
@@ -123,10 +123,10 @@ export const Header = () => {
     // Handle external data
     useEffect(() => {
         fetchDriftsmeldinger(APP_URL)(dispatch);
-        hentInnloggingsstatus(API_INNLOGGINGSLINJE_URL)(dispatch);
+        hentInnloggingsstatus(API_DEKORATOREN_URL)(dispatch);
         fetchMenypunkter(APP_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
-            fetchFeatureToggles(API_UNLEASH_PROXY_URL, currentFeatureToggles)
+            fetchFeatureToggles(API_DEKORATOREN_URL, currentFeatureToggles)
                 .then((updatedFeatureToggles) => {
                     dispatch({
                         type: ActionType.SETT_FEATURE_TOGGLES,
@@ -162,7 +162,7 @@ export const Header = () => {
     // Fetch notifications
     useEffect(() => {
         if (authenticated) {
-            hentVarsler(APP_URL)(dispatch);
+            hentVarsler(API_DEKORATOREN_URL)(dispatch);
         }
     }, [authenticated]);
 
@@ -332,7 +332,7 @@ export const Header = () => {
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
             <header className={`siteheader${useSimpleHeader ? ' simple' : ''}`}>
-                <Skiplinks simple={useSimpleHeader} />
+                <Skiplinks />
                 {useSimpleHeader ? <HeaderSimple /> : <HeaderRegular />}
             </header>
             <Driftsmeldinger />

@@ -4,6 +4,7 @@ import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import Tekst from 'tekster/finn-tekst';
 import style from './AlleVarslerLenke.module.scss';
+import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 
 interface Props {
     varselInnboksUrl: string;
@@ -12,8 +13,9 @@ interface Props {
 
 const AlleVarslerLenke = (props: Props) => {
     return (
-        <div className={style.visAlleLenke}>
+        <div>
             <LenkeMedSporing
+                className={style.visAlleLenke}
                 href={props.varselInnboksUrl}
                 id={
                     props.rowIndex !== undefined
@@ -29,6 +31,7 @@ const AlleVarslerLenke = (props: Props) => {
                     action: 'varsler/visalle',
                     label: props.varselInnboksUrl,
                 }}
+                onClick={() => logAmplitudeEvent('navigere', { komponent: 'Tidligere varsler' })}
             >
                 <Tekst id={'varsler-visalle'} />
             </LenkeMedSporing>

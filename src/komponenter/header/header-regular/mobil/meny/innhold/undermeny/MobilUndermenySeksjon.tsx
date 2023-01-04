@@ -9,7 +9,7 @@ import { AnalyticsCategory } from '../../../../../../../utils/analytics/analytic
 import { UnstyledList } from '../utils/UnstyledList';
 import { MobilMenypunkt } from '../hovedmeny/menypunkt/MobilMenypunkt';
 
-import './MobilUndermenySeksjon.less';
+import 'komponenter/header/header-regular/mobil/meny/innhold/undermeny/MobilUndermenySeksjon.scss';
 
 const stateSelector = (state: AppState) => ({
     auth: state.innloggingsstatus.data,

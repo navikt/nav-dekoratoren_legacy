@@ -171,6 +171,12 @@ Eksempel 4 - Brødsmulesti:<br>
 
 (Språkvelger og brødsmulesti vises ikke direkte på /dekoratoren i prod av sikkerhetsmessige årsaker)
 
+## Content Security Policy
+
+Påkrevde CSP-direktiver for dekoratøren serveres på [https://www.nav.no/dekoratoren/api/csp](https://www.nav.no/dekoratoren/api/csp). Se også [csp.ts](https://github.com/navikt/nav-dekoratoren/blob/master/src/csp.ts). <br>
+
+[nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler) kan benyttes for å generere en CSP-header som er kompatibel med dekoratøren.
+
 ## Oppstart via docker-compose
 
 Start **navikt/nav-dekoratoren**, **navikt/pb-nav-mocked**, **navikt/stub-oidc-provider** og **navikt/pb-oidc-provider-gui**. Oppsettet vil replikere innlogging og eksterne avhengigheter som varselinnboks.
@@ -187,9 +193,7 @@ dekoratoren:
       APP_BASE_URL: 'http://localhost:8100'
       APP_BASE_PATH: '/dekoratoren'
       API_XP_SERVICES_URL: 'https://www.nav.no/_/service'
-      API_UNLEASH_PROXY_URL: 'https://www.nav.no/person/pb-unleash-proxy'
-      API_INNLOGGINGSLINJE_URL: 'http://mocks:8080/innloggingslinje-api/auth'
-      API_VARSELINNBOKS_URL: 'http://mocks:8080/person/varselinnboks'
+      API_DEKORATOREN_URL=http://localhost:8095/nav-dekoratoren-api
       MINSIDE_ARBEIDSGIVER_URL: 'https://arbeidsgiver.nav.no/min-side-arbeidsgiver/'
       MIN_SIDE_URL: 'https:/www.nav.no/minside'
       LOGIN_URL: 'http://localhost:5000'

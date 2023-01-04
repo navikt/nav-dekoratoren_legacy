@@ -36,13 +36,22 @@ export const Sticky = ({ mobileFixed, children }: Props) => {
         );
         const setFocusScrollOffset = focusOverlapHandler(stickyElement);
 
-        setStickyOffset();
+        const activateStickyHeader = () => {
+            setStickyOffset();
+            window.addEventListener('focusin', setFocusScrollOffset);
+            window.addEventListener('scroll', setStickyOffset);
+            window.addEventListener('resize', setStickyOffset);
+            window.addEventListener('click', deferStickyOnAnchorLinkClick);
+        };
 
-        window.addEventListener('focusin', setFocusScrollOffset);
-        window.addEventListener('scroll', setStickyOffset);
-        window.addEventListener('resize', setStickyOffset);
-        window.addEventListener('click', deferStickyOnAnchorLinkClick);
+        if (document.readyState === 'complete') {
+            activateStickyHeader();
+        } else {
+            window.addEventListener('load', activateStickyHeader);
+        }
+
         return () => {
+            window.removeEventListener('load', activateStickyHeader);
             window.removeEventListener('focusin', setFocusScrollOffset);
             window.removeEventListener('scroll', setStickyOffset);
             window.removeEventListener('resize', setStickyOffset);

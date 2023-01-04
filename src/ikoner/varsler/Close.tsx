@@ -1,20 +1,30 @@
-import React, { SVGProps } from 'react';
+import React, { SVGProps, useId } from 'react';
 
-const Close = (props: SVGProps<SVGSVGElement>) => (
-    <svg
-        {...props}
-        stroke="currentColor"
-        fill="currentColor"
-        strokeWidth="0"
-        viewBox="0 0 16 16"
-        xmlns="http://www.w3.org/2000/svg"
-    >
-        <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M8 8.707l3.646 3.647.708-.707L8.707 8l3.647-3.646-.707-.708L8 7.293 4.354 3.646l-.707.708L7.293 8l-3.646 3.646.707.708L8 8.707z"
-        />
-    </svg>
-);
+const Close = (props: SVGProps<SVGSVGElement>) => {
+    const id = useId();
+    return (
+        <svg
+            {...props}
+            stroke="currentColor"
+            fill="currentColor"
+            strokeWidth="0"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            focusable={false}
+            aria-labelledby={'close-icon' + id}
+            role="img"
+        >
+            <title id={'close-icon' + id}>Lukk-ikon</title>
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M8 8.707l3.646 3.647.708-.707L8.707 8l3.647-3.646-.707-.708L8 7.293 4.354 3.646l-.707.708L7.293 8l-3.646 3.646.707.708L8 8.707z"
+            />
+        </svg>
+    );
+};
 
 export default Close;

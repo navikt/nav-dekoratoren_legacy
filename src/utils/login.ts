@@ -27,13 +27,13 @@ const getRedirectUrl = (environment: Environment, arbeidsflate: MenuValue) => {
     return MIN_SIDE_URL;
 };
 
-export const getLoginUrl = (environment: Environment, arbeidsflate: MenuValue) => {
+export const getLoginUrl = (environment: Environment, arbeidsflate: MenuValue, level?: '3' | '4') => {
     const { LOGIN_URL, PARAMS } = environment;
     const { LEVEL } = PARAMS;
 
     const redirectUrl = getRedirectUrl(environment, arbeidsflate);
 
-    return `${LOGIN_URL}/login?redirect=${redirectUrl}&level=${LEVEL}`;
+    return `${LOGIN_URL}/login?redirect=${redirectUrl}&level=${level || LEVEL}`;
 };
 
 export const getLogOutUrl = (environment: Environment) => environment.PARAMS.LOGOUT_URL || environment.LOGOUT_URL;

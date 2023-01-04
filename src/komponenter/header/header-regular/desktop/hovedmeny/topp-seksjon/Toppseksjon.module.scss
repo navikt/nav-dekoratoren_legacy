@@ -1,0 +1,17 @@
+@use 'src/styling-variabler.scss' as sv;
+
+.toppSeksjon {
+    display: flex;
+    flex-direction: column;
+    margin: 0 -#{sv.$margins-sides-desktop} 1rem -#{sv.$margins-sides-desktop};
+    padding: 0 #{sv.$margins-sides-desktop};
+}
+
+.toppSeksjontittel {
+    margin-top: 1rem;
+}
+
+.forsideLenke {
+    padding: 0.5rem 0 1rem 0;
+    margin-right: auto;
+}

@@ -12,7 +12,8 @@ interface Props {
     ariaControls: string;
     ariaLabel?: string;
     id?: string;
-    children: React.ReactNode;
+    children?: React.ReactNode;
+    icon?: React.ReactNode;
 }
 
 const MenylinjeKnapp = (props: Props) => {
@@ -27,6 +28,7 @@ const MenylinjeKnapp = (props: Props) => {
             aria-controls={props.ariaControls}
             aria-expanded={props.isOpen}
             variant="tertiary"
+            icon={props.icon}
         >
             {props.children}
             {props.tekstId && (

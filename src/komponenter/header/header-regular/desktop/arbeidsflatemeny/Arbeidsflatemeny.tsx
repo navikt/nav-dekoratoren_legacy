@@ -9,12 +9,12 @@ import { useCookies } from 'react-cookie';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { CookieName, cookieOptions } from '../../../../../server/cookieSettings';
 import Tekst from 'tekster/finn-tekst';
-import BEMHelper from 'utils/bem';
 import { erNavDekoratoren } from 'utils/Environment';
 import { MenuValue } from '../../../../../utils/meny-storage-utils';
 import { finnTekst } from 'tekster/finn-tekst';
+import classNames from 'classnames';
 
-import './Arbeidsflatemeny.less';
+import style from 'komponenter/header/header-regular/desktop/arbeidsflatemeny/Arbeidsflatemeny.module.scss';
 
 export const arbeidsflatemenyWidthBreakpoint = 1200;
 
@@ -25,7 +25,6 @@ export const arbeidsflatemenyLenkeIds = [
 ].map((value) => `arbeidsflate-${value}`);
 
 const Arbeidsflatemeny = () => {
-    const cls = BEMHelper('arbeidsflate');
     const dispatch = useDispatch();
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const [, setCookie] = useCookies([CookieName.DECORATOR_CONTEXT]);
@@ -33,17 +32,20 @@ const Arbeidsflatemeny = () => {
     const { language } = useSelector((state: AppState) => state.language);
 
     return (
-        <nav className={cls.className} id={cls.className} aria-label="Velg brukergruppe">
-            <ul className={cls.element('topp-liste-rad')}>
+        <div className={'arbeidsflate'} id={'arbeidsflate'} aria-label="Velg brukergruppe">
+            <ul className={style.toppListeRad}>
                 {arbeidsflateLenker(XP_BASE_URL).map((lenke, index) => {
                     return (
                         <li
                             aria-current={arbeidsflate === lenke.key ? 'page' : 'false'}
-                            className={cls.element('liste-element')}
+                            className={style.listeElement}
                             key={lenke.key}
                         >
                             <LenkeMedSporing
-                                classNameOverride={cls.element('lenke', arbeidsflate === lenke.key ? 'active' : '')}
+                                classNameOverride={classNames(
+                                    style.lenke,
+                                    arbeidsflate === lenke.key ? style.lenkeActive : ''
+                                )}
                                 id={arbeidsflatemenyLenkeIds[index]}
                                 href={lenke.url}
                                 onClick={(event) => {
@@ -60,20 +62,17 @@ const Arbeidsflatemeny = () => {
                                     label: lenke.key,
                                 }}
                             >
-                                <div
-                                    className={cls.element('lenke-inner')}
-                                    data-text={finnTekst(lenke.lenkeTekstId, language)}
-                                >
-                                    <BodyShort>
+                                <span className={style.lenkeInner} data-text={finnTekst(lenke.lenkeTekstId, language)}>
+                                    <BodyShort as="span">
                                         <Tekst id={lenke.lenkeTekstId} />
                                     </BodyShort>
-                                </div>
+                                </span>
                             </LenkeMedSporing>
                         </li>
                     );
                 })}
             </ul>
-        </nav>
+        </div>
     );
 };
 
