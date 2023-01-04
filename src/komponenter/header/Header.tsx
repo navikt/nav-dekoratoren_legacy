@@ -36,7 +36,6 @@ import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
 import { useOnPushStateHandlers } from '../../utils/hooks/useOnPushStateHandlers';
-import { GodJul } from './common/godjul/GodJul';
 
 import './Header.scss';
 
@@ -331,7 +330,6 @@ export const Header = () => {
     return (
         <div className={'decorator-wrapper'}>
             <span id={'top-element'} tabIndex={-1} />
-            <GodJul />
             <BrowserSupportMsg />
             <header className={`siteheader${useSimpleHeader ? ' simple' : ''}`}>
                 <Skiplinks />
