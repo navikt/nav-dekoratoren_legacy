@@ -138,7 +138,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
 [3] Språk settes automatisk client-side dersom nåværende url inneholder **/nb/**, **/nn/**, **/en/**, **/se/**, uavhengig av dette parameteret. <br>
-[4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme). Dersom du oppgir `handleInApp`, så må du selv håndtere feks route change, lang-attr osv i applikasjonen din. <br>
+[4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme). Dersom du oppgir `handleInApp`, så må du selv håndtere feks route change i applikasjonen din. <br>
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [6] Aktiverer/deaktiverer Chatbot Frida. Dersom dette settes til false, vil chatbot aldri vises på siden, selv om bruker har en aktiv chat-sesjon. <br>
 [7] Viser/skjuler Chatbot Frida. Dersom dette settes til true, vil chatbot alltid vises. Ved false vises chatbot kun når bruker har en aktiv chat-sesjon (med mindre 'chatbot' er satt til false) <br>
