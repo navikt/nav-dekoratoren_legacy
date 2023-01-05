@@ -39,6 +39,8 @@ export const SprakVelger = (props: Props) => {
     const onChange = (selected: LocaleOption) => {
         const { label, ...selectedLanguage } = selected;
 
+        // Oppdater språk i html-taggen selv om siden potensielt kan bli routet om og
+        // lastet på nytt.
         const selectedLocale = selectedLanguage.locale;
         document.documentElement.setAttribute('lang', selectedLocale);
 
