@@ -39,6 +39,9 @@ export const SprakVelger = (props: Props) => {
     const onChange = (selected: LocaleOption) => {
         const { label, ...selectedLanguage } = selected;
 
+        const selectedLocale = selectedLanguage.locale;
+        document.documentElement.setAttribute('lang', selectedLocale);
+
         setCookie(decoratorLanguageCookie, selectedLanguage.locale, cookieOptions);
         store.dispatch(languageDuck.actionCreator({ language: selectedLanguage.locale }));
         if (selectedLanguage.handleInApp) {
