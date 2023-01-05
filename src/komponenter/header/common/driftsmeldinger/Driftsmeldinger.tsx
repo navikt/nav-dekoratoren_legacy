@@ -8,8 +8,6 @@ import style from 'komponenter/header/common/driftsmeldinger/Driftsmeldinger.mod
 import { BodyLong } from '@navikt/ds-react';
 import { useClientSide } from 'utils/hooks/useClientSide';
 
-import './Driftsmeldinger.less';
-
 const removeTrailingChars = (url?: string) => url?.replace(/(\/|\$|(\/\$))$/, '');
 
 const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
