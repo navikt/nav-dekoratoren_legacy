@@ -8,23 +8,23 @@ import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-a
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from '../../../../../../../../utils/analytics/analytics';
 
-import './MobilInnloggetForsideLenke.less';
+import 'komponenter/header/header-regular/mobil/meny/innhold/hovedmeny/innlogget/MobilInnloggetForsideLenke.scss';
 
 const stateSelector = (state: AppState) => ({
-    DITT_NAV_URL: state.environment.DITT_NAV_URL,
+    MIN_SIDE_URL: state.environment.MIN_SIDE_URL,
     MINSIDE_ARBEIDSGIVER_URL: state.environment.MINSIDE_ARBEIDSGIVER_URL,
     arbeidsflate: state.arbeidsflate.status,
 });
 
 export const MobilInnloggetForsideLenke = () => {
-    const { DITT_NAV_URL, MINSIDE_ARBEIDSGIVER_URL, arbeidsflate } = useSelector(stateSelector);
+    const { MIN_SIDE_URL, MINSIDE_ARBEIDSGIVER_URL, arbeidsflate } = useSelector(stateSelector);
 
     const lenkeProps =
         arbeidsflate === MenuValue.PRIVATPERSON
             ? {
                   tekstIdHeader: 'min-side',
                   tekstIdLenke: 'til-dittnav-forside',
-                  href: DITT_NAV_URL,
+                  href: MIN_SIDE_URL,
                   analyticsAction: 'dittnav',
               }
             : arbeidsflate === MenuValue.ARBEIDSGIVER

@@ -1,0 +1,22 @@
+name: Deploy to Team nav.no beta
+on:
+  workflow_dispatch:
+    inputs:
+      build_mode:
+        type: choice
+        required: true
+        description: 'Build-time NODE_ENV'
+        default: 'prod'
+        options:
+          - prod
+          - dev
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/build-and-deploy.yml
+    with:
+      NAIS_VARS: .nais/vars/dev-beta-navno.yaml
+      IMAGE_NAME: beta-navno
+      CLUSTER: dev-gcp
+      BUILD_MODE: ${{ inputs.build_mode }}
+    secrets: inherit

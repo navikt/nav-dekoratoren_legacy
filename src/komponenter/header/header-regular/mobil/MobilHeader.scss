@@ -1,0 +1,21 @@
+@use 'src/styling-variabler' as sv;
+
+@mixin mobilHeader {
+    height: sv.$header-height-mobil;
+
+    :global(.logout-knapp),
+    :global(.desktop-minside-meny__knapp) {
+        display: none;
+    }
+
+    :global(.navLogoLenke) {
+        margin-left: sv.$margins-sides-mobil;
+        $padding: 4px;
+        padding: $padding;
+        height: 36px + ($padding * 2);
+    }
+
+    :global(.mobilmenyKnapp) {
+        margin-right: 0.75rem;
+    }
+}

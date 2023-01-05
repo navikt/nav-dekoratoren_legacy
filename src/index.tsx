@@ -14,8 +14,9 @@ import Footer from './komponenter/footer/Footer';
 import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
 import { getSalesforceContainer } from './server/utils';
+import { injectHeadTags } from './head';
 
-import './index.less';
+import './index.scss';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
@@ -38,10 +39,24 @@ const renderOrHydrate = (reactElement: JSX.Element, container: Element | null) =
     }
 };
 
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }> {
+    static getDerivedStateFromError() {}
+
+    componentDidCatch(error: any, errorInfo: any) {
+        console.error(`Uventet feil fra dekoratøren: ${error}`, errorInfo);
+    }
+
+    render() {
+        return this.props.children;
+    }
+}
+
 const run = () => {
     fetchEnv()
         .then((environment) => {
-            initAnalytics(environment.PARAMS);
+            initAnalytics();
+            injectHeadTags(environment.APP_URL);
+
             const store = createStore(environment);
 
             const headerContainer =
@@ -54,20 +69,24 @@ const run = () => {
             // We hydrate the footer first to prevent client/server mismatch due to client-side only
             // store mutations that occur in the header
             renderOrHydrate(
-                <ReduxProvider store={store}>
-                    <CookiesProvider>
-                        <Footer />
-                    </CookiesProvider>
-                </ReduxProvider>,
+                <ErrorBoundary>
+                    <ReduxProvider store={store}>
+                        <CookiesProvider>
+                            <Footer />
+                        </CookiesProvider>
+                    </ReduxProvider>
+                </ErrorBoundary>,
                 footerContainer
             );
 
             renderOrHydrate(
-                <ReduxProvider store={store}>
-                    <CookiesProvider>
-                        <Header />
-                    </CookiesProvider>
-                </ReduxProvider>,
+                <ErrorBoundary>
+                    <ReduxProvider store={store}>
+                        <CookiesProvider>
+                            <Header />
+                        </CookiesProvider>
+                    </ReduxProvider>
+                </ErrorBoundary>,
                 headerContainer
             );
         })

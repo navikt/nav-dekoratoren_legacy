@@ -1,0 +1,36 @@
+@use 'src/styling-variabler' as sv;
+
+.stickyPlaceholder {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    height: sv.$header-height-mobil;
+
+    @media #{sv.$screen-desktop} {
+        height: sv.$header-height-desktop;
+    }
+}
+
+:global(.simple) {
+    .stickyPlaceholder {
+        height: sv.$header-height-simple-mobile;
+
+        @media #{sv.$screen-desktop} {
+            height: sv.$header-height-simple-desktop;
+        }
+    }
+}
+
+.stickyContainer {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.stickyContainerMobilFixed {
+    @media #{sv.$screen-mobile} {
+        position: fixed;
+        top: 0;
+    }
+}

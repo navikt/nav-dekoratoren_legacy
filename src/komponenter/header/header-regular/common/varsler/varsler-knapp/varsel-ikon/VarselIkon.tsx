@@ -1,20 +1,19 @@
 import React from 'react';
-import BEMHelper from 'utils/bem';
 import { Bell } from '@navikt/ds-icons';
-
-import './VarselIkon.less';
+import style from './VarselIkon.module.scss';
+import lukkVarslerIkon from 'ikoner/varsler/lukkVarslerIkon.svg';
+import { Bilde } from 'komponenter/common/bilde/Bilde';
 
 type Props = {
     antallUleste?: number;
 };
 
 export const VarselIkon = ({ antallUleste = 0 }: Props) => {
-    const cls = BEMHelper('varselbjelle-ikon');
-
     return (
         <>
-            <Bell />
-            <div className={cls.element('ulest-sirkel', antallUleste === 0 ? 'hide' : '')}></div>
+            <Bell width={'24px'} height={'24px'} aria-hidden className={style.varselBellIkon} />
+            <Bilde altText={''} asset={lukkVarslerIkon} className={style.lukkVarslerIkon} ariaHidden={true} />
+            <div className={`${style.ulestSirkel} ${antallUleste === 0 ? style.hide : ''}`} />
         </>
     );
 };

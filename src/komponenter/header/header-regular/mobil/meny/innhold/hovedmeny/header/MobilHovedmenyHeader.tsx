@@ -4,11 +4,10 @@ import { arbeidsflateLenker } from 'komponenter/common/arbeidsflate-lenker/arbei
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
-import Tekst from '../../../../../../../../tekster/finn-tekst';
-import { MenuValue } from '../../../../../../../../utils/meny-storage-utils';
+import Tekst from 'tekster/finn-tekst';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
 
-import './MobilHovedmenyHeader.less';
-import { AnalyticsCategory } from '../../../../../../../../utils/analytics/analytics';
+import 'komponenter/header/header-regular/mobil/meny/innhold/hovedmeny/header/MobilHovedmenyHeader.scss';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -24,11 +23,9 @@ export const MobilHovedmenyHeader = () => {
 
     return (
         <div className={'mobilMenyHeader'}>
-            {arbeidsflate !== MenuValue.PRIVATPERSON && (
-                <Heading level="2" size="small">
-                    <Tekst id={`rolle-${arbeidsflate}`} />
-                </Heading>
-            )}
+            <Heading level="2" size="small">
+                <Tekst id={`rolle-${arbeidsflate}`} />
+            </Heading>
             <LenkeMedSporing
                 href={href}
                 className={'mobilMenyHeaderLenke'}

@@ -1,0 +1,13 @@
+.mobilArbeidsflateValg {
+    margin: 1rem -0.5rem 0 -0.5rem;
+    padding: 0;
+
+    li:not(:last-child) {
+        margin-bottom: 0.5rem;
+    }
+
+    .arbeidsflate-lenkepanel {
+        width: 100%;
+        border: none;
+    }
+}

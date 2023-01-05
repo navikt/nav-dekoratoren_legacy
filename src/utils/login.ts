@@ -3,7 +3,7 @@ import { MenuValue } from './meny-storage-utils';
 import { Environment } from '../store/reducers/environment-duck';
 
 const getRedirectUrl = (environment: Environment, arbeidsflate: MenuValue) => {
-    const { DITT_NAV_URL, MINSIDE_ARBEIDSGIVER_URL, PARAMS } = environment;
+    const { MIN_SIDE_URL, MINSIDE_ARBEIDSGIVER_URL, PARAMS } = environment;
     const { REDIRECT_TO_URL, REDIRECT_TO_APP } = PARAMS;
 
     const appUrl = window.location.origin + window.location.pathname;
@@ -24,16 +24,16 @@ const getRedirectUrl = (environment: Environment, arbeidsflate: MenuValue) => {
         return MINSIDE_ARBEIDSGIVER_URL;
     }
 
-    return DITT_NAV_URL;
+    return MIN_SIDE_URL;
 };
 
-export const getLoginUrl = (environment: Environment, arbeidsflate: MenuValue) => {
+export const getLoginUrl = (environment: Environment, arbeidsflate: MenuValue, level?: '3' | '4') => {
     const { LOGIN_URL, PARAMS } = environment;
     const { LEVEL } = PARAMS;
 
     const redirectUrl = getRedirectUrl(environment, arbeidsflate);
 
-    return `${LOGIN_URL}/login?redirect=${redirectUrl}&level=${LEVEL}`;
+    return `${LOGIN_URL}/login?redirect=${redirectUrl}&level=${level || LEVEL}`;
 };
 
 export const getLogOutUrl = (environment: Environment) => environment.PARAMS.LOGOUT_URL || environment.LOGOUT_URL;

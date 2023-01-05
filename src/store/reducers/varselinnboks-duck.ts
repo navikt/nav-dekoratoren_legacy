@@ -1,3 +1,4 @@
+import { FjernLestVarselAction } from './../actions';
 import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
 import { DataElement, hentVarslerFetch, Status } from 'api/api';
@@ -7,36 +8,29 @@ import { HentVarslerOKAction } from '../actions';
 import { HentVarslerFEILETAction } from '../actions';
 import { HentVarslerPENDINGAction } from '../actions';
 import { SettVarslerOKAction } from '../actions';
-import { SettVarslerLestAction } from '../actions';
 
 export interface VarselinnboksState extends DataElement {
     data: VarslerData;
 }
 
 export interface VarslerData {
-    varsler: {
-        nyesteVarsler: NyesteVarslerData[];
-        totaltAntallUleste: number;
-    };
+    oppgaver: Varsler[];
+    beskjeder: Varsler[];
 }
 
-export interface NyesteVarslerData {
-    aktoerID: string;
-    url: string;
-    varseltekst: string;
-    varselId: string;
-    id: number;
-    meldingsType: string;
-    datoOpprettet: string;
-    datoLest: string;
+export interface Varsler {
+    type: string;
+    tidspunkt: string;
+    eventId: string;
+    tekst: string;
+    link: string;
+    isMasked: boolean;
 }
 
 export const initialState: VarselinnboksState = {
     data: {
-        varsler: {
-            nyesteVarsler: [],
-            totaltAntallUleste: 0,
-        },
+        oppgaver: [],
+        beskjeder: [],
     },
     status: Status.IKKE_STARTET,
 };
@@ -56,8 +50,14 @@ export default function reducer(state: VarselinnboksState = initialState, action
             return { ...state, status: Status.FEILET };
         case ActionType.SETT_VARSLER_OK:
             return { ...state, status: Status.OK };
-        case ActionType.SETT_VARSLER_LEST:
-            return { ...state, data: { ...state.data, varsler: { ...state.data.varsler, totaltAntallUleste: 0 } } };
+        case ActionType.FJERN_LEST_VARSEL:
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    beskjeder: state.data.beskjeder.filter((beskjed) => beskjed.eventId !== action.eventId),
+                },
+            };
         default:
             return state;
     }
@@ -94,6 +94,7 @@ export const settVarslerOK = (): SettVarslerOKAction => ({
     type: ActionType.SETT_VARSLER_OK,
 });
 
-export const settVarslerLest = (): SettVarslerLestAction => ({
-    type: ActionType.SETT_VARSLER_LEST,
+export const fjernLestVarsel = (eventId: string): FjernLestVarselAction => ({
+    type: ActionType.FJERN_LEST_VARSEL,
+    eventId: eventId,
 });

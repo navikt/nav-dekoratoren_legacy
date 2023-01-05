@@ -17,7 +17,7 @@ import classNames from 'classnames';
 import { MobilMenypunkt } from './menypunkt/MobilMenypunkt';
 import { UnstyledList } from '../utils/UnstyledList';
 
-import './MobilHovedmenyInnhold.less';
+import 'komponenter/header/header-regular/mobil/meny/innhold/hovedmeny/MobilHovedmenyInnhold.scss';
 
 export const mobilSokInputId = `sok-input-small`;
 
@@ -75,7 +75,7 @@ export const MobilHovedmenyInnhold = (props: Props) => {
                 {innloggingsstatus.data.authenticated && arbeidsflate === MenuValue.PRIVATPERSON && (
                     <DittNavMeny minsideLenker={minsideLenker} setUnderMeny={setUndermenyLenker} />
                 )}
-                <MobilHovedmenyHeader />
+                {arbeidsflate !== MenuValue.PRIVATPERSON && <MobilHovedmenyHeader />}
                 {arbeidsflate === MenuValue.PRIVATPERSON && isLanguageNorwegian ? (
                     <MobilHovedmenyInnholdPrivat hovedmenyLenker={hovedmenyLenker} setUndermeny={setUndermenyLenker} />
                 ) : (

@@ -5,8 +5,7 @@ import Lock from 'ikoner/meny/Lock';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
-
-import './LenkeMedSporing.less';
+import style from './LenkeMedSporing.module.scss';
 
 type Props = {
     href: string;
@@ -38,9 +37,10 @@ export const LenkeMedSporing = ({
         <a
             href={href}
             className={classNames(
-                classNameOverride || 'lenke dekorator-lenke',
-                withChevron && 'chevronlenke',
-                className
+                classNameOverride || style.dekoratorLenke,
+                withChevron && style.chevronlenke,
+                className,
+                style.lenkeMedSporing
             )}
             id={id}
             tabIndex={tabIndex}
@@ -62,11 +62,11 @@ export const LenkeMedSporing = ({
         >
             <>
                 {(withLock || withChevron) && (
-                    <div className={'dekorator-lenke__ikon-container'}>
+                    <div className={style.ikonContainer}>
                         {withLock ? (
-                            <Lock height={'18px'} width={'18px'} />
+                            <Lock height={'18px'} width={'18px'} aria-hidden />
                         ) : (
-                            withChevron && <Next className={'chevronlenke__chevron'} />
+                            withChevron && <Next className={style.chevron} aria-hidden />
                         )}
                     </div>
                 )}

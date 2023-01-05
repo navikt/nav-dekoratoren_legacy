@@ -6,7 +6,7 @@ import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { getHovedmenyNode } from 'utils/meny-storage-utils';
 import { dataInitState } from 'store/reducers/menu-duck';
-import './MobilMeny.less';
+import './MobilMeny.scss';
 
 type Props = {
     classname: string;

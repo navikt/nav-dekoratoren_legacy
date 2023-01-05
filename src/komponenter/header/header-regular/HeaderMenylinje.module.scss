@@ -1,0 +1,61 @@
+@use 'src/styling-variabler' as sv;
+@import 'desktop/DesktopHeader';
+@import 'mobil/MobilHeader';
+
+.headerLinje {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: inset 0px (-(sv.$header-separator-height)) 0px sv.$header-separator-farge;
+    background-color: white;
+    position: relative;
+
+    @media #{sv.$screen-mobile} {
+        @include mobilHeader;
+    }
+
+    @media #{sv.$screen-desktop} {
+        @include desktopHeader;
+    }
+}
+
+.elementer {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.hoyreKnapper {
+    display: flex;
+    align-self: flex-start;
+    height: calc(100% - sv.$header-separator-height);
+    margin-right: sv.$margins-sides-desktop;
+    @media #{sv.$screen-desktop-small-width-down} {
+        margin-right: sv.$margins-sides-desktop-small;
+    }
+}
+
+.uinnloggetKnapper,
+.minsideKnapper {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+}
+
+.minsideKnapper {
+    @media #{sv.$screen-desktop} {
+        background-color: var(--navds-semantic-color-interaction-primary-hover-subtle);
+    }
+
+    @media #{sv.$screen-mobile} {
+        margin-right: 0;
+        gap: 0;
+    }
+}

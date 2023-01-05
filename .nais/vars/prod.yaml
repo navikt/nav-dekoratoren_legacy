@@ -1,0 +1,30 @@
+appName: nav-dekoratoren
+appPath: /dekoratoren
+ingresses:
+  - https://appres.nav.no/common-html/v4/navno
+  - https://www.nav.no/dekoratoren
+outboundHosts:
+  - www.nav.no
+env:
+  - name: ENV
+    value: prod
+  - name: XP_BASE_URL
+    value: https://www.nav.no
+  - name: APP_BASE_URL
+    value: https://www.nav.no
+  - name: APP_BASE_PATH
+    value: /dekoratoren
+  - name: API_XP_SERVICES_URL
+    value: https://www.nav.no/_/service
+  - name: API_DEKORATOREN_URL
+    value: https://www.nav.no/person/nav-dekoratoren-api
+  - name: MINSIDE_ARBEIDSGIVER_URL
+    value: https://arbeidsgiver.nav.no/min-side-arbeidsgiver/
+  - name: MIN_SIDE_URL
+    value: https://www.nav.no/minside/
+  - name: LOGIN_URL
+    value: https://loginservice.nav.no
+  - name: LOGOUT_URL
+    value: https://loginservice.nav.no/slo
+  - name: FEEDBACK_API_URL
+    value: https://dekoratoren-api.nav.no/event

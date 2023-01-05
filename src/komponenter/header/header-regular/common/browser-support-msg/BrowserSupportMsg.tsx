@@ -1,19 +1,16 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Detail, Heading, Link } from '@navikt/ds-react';
-
+import { Button, Detail, Heading, Link } from '@navikt/ds-react';
+import { Close } from '@navikt/ds-icons';
 import Tekst from 'tekster/finn-tekst';
-import BEMHelper from 'utils/bem';
 import { detect } from 'detect-browser';
 import { BrowserInfo } from 'detect-browser';
-import { LukkKnapp } from 'komponenter/common/lukk-knapp/LukkKnapp';
 import { useCookies } from 'react-cookie';
 import { erDev } from 'utils/Environment';
-import './BrowserSupportMsg.less';
-
 import ikon from 'ikoner/advarsel-sirkel-fyll.svg';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
+import style from './BrowserSupportMsg.module.scss';
 
 const cookieKey = 'decorator-browser-warning-closed';
 const linkUrl =
@@ -70,7 +67,6 @@ export const BrowserSupportMsg = () => {
         return null;
     }
 
-    const cls = BEMHelper('browser-utdatert');
     const browserSpecificMsg = getBrowserSpecificMsg(browser);
 
     const closeWarning = () => {
@@ -79,12 +75,12 @@ export const BrowserSupportMsg = () => {
     };
 
     return (
-        <div className={cls.element('wrapper')}>
-            <div className={cls.element('innhold')}>
-                <div className={cls.element('varsel-ikon')}>
+        <div className={style.wrapper}>
+            <div className={style.innhold}>
+                <div className={style.varselIkon}>
                     <Bilde altText={''} asset={ikon} />
                 </div>
-                <div className={cls.element('tekst')}>
+                <div className={style.tekst}>
                     <Heading level="2" size="small">
                         <Tekst id={'browser-utdatert-msg'} />{' '}
                         <Link href={linkUrl}>
@@ -98,7 +94,12 @@ export const BrowserSupportMsg = () => {
                         </Detail>
                     )}
                 </div>
-                <LukkKnapp onClick={closeWarning} ariaLabel={'Lukk advarsel for nettleser'} />
+                <Button
+                    size="small"
+                    variant="tertiary"
+                    icon={<Close title="Lukk advarsel for nettleser" aria-hidden />}
+                    onClick={closeWarning}
+                />
             </div>
         </div>
     );

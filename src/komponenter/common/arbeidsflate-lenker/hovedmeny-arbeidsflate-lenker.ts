@@ -22,7 +22,7 @@ export const dittNavLenkeData = (url: string): ArbeidsflateLenkeData => ({
 });
 
 const privatpersonLenker = (env: Environment): ArbeidsflateLenkeData[] => [
-    dittNavLenkeData(env.DITT_NAV_URL),
+    dittNavLenkeData(env.MIN_SIDE_URL),
     arbeidsgiverContextLenke(env.XP_BASE_URL),
     samarbeidspartnerContextLenke(env.XP_BASE_URL),
 ];

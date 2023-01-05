@@ -1,0 +1,52 @@
+.varselContainer {
+    $separator-props: var(--navds-global-color-gray-800) solid 1px;
+    border-top: $separator-props;
+    border-bottom: $separator-props;
+}
+
+.varsel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 1.25rem 0;
+}
+
+.ikonContainer {
+    $containerSize: 52px;
+    width: $containerSize;
+    height: $containerSize;
+    padding: 10px;
+    padding-top: 8px;
+    margin-right: 1rem;
+    border-radius: 50%;
+    display: block;
+    align-self: flex-start;
+    background-color: #ffe4c2;
+}
+
+.varselIkon {
+    $ikonSize: 2rem;
+    width: $ikonSize;
+    height: $ikonSize;
+}
+
+.varselDato {
+    margin-bottom: 0.25rem;
+    font-weight: 400;
+}
+
+.infotekst {
+    margin-bottom: 0.5rem;
+}
+
+.seVarslerLenke {
+    padding: 0;
+}
+
+.ariaTextContainer {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden; 
+}

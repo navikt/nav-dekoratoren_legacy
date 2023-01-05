@@ -1,25 +1,23 @@
-import React from 'react';
+import React, { useId } from 'react';
 
 export const LoggutIkonMobil = () => {
+    const id = useId();
     return (
         <svg
-            width="22px"
-            height="24px"
-            viewBox="0 0 22 24"
-            version="1.1"
             xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
+            width="22"
+            height="24"
+            viewBox="0 0 22 24"
+            aria-hidden="true"
+            focusable="false"
+            aria-labelledby={'logg-ut-ikon' + id}
+            role="img"
         >
-            <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                <g transform="translate(-30.000000, -284.000000)" fill="currentColor">
-                    <g transform="translate(29.000000, 284.000000)">
-                        <path
-                            d="M21,0 C22.1045695,0 23,0.8954305 23,2 L23,22 C23,23.1045695 22.1045695,24 21,24 L11,24 C9.8954305,24 9,23.1045695 9,22 L9,19 L11,19 L11,22 L21,22 L21,2 L11,2 L11,5 L9,5 L9,2 C9,0.8954305 9.8954305,0 11,0 L21,0 Z M6.6254493,6 L1,12 L6.6254493,18 L8,16.5454545 L4.705,13 L18,13 L18,11 L4.705,11 L8,7.45454545 L6.6254493,6 Z"
-                            transform="translate(12.000000, 12.000000) scale(-1, 1) translate(-12.000000, -12.000000) "
-                        />
-                    </g>
-                </g>
-            </g>
+            <title id={'logg-ut-ikon' + id}>Logg ut ikon</title>
+            <path
+                fill="currentColor"
+                d="M2 0a2 2 0 0 0-2 2v20c0 1.1.9 2 2 2h10a2 2 0 0 0 2-2v-3h-2v3H2V2h10v3h2V2a2 2 0 0 0-2-2H2Zm14.4 6 5.6 6-5.6 6-1.4-1.5 3.3-3.5H5v-2h13.3L15 7.5 16.4 6Z"
+            />
         </svg>
     );
 };

@@ -1,0 +1,79 @@
+@use 'src/styling-variabler.scss' as sv;
+
+$separator-height: 0px;
+$underline-height: 4px;
+
+:global(.arbeidsflate) {
+    width: 100%;
+    height: calc(100% - #{sv.$header-separator-height});
+    margin-left: 2.5rem;
+    align-self: flex-start;
+
+    ul,
+    li {
+        height: 100%;
+    }
+}
+
+.toppListeRad {
+    white-space: nowrap;
+    margin: 0 auto;
+}
+.listeElement {
+    display: inline-block;
+    outline: 0;
+}
+
+.lenke {
+    height: calc(100% + #{$separator-height});
+    display: inline-block;
+    text-decoration: none;
+    color: var(--navds-semantic-color-text-muted);
+
+    &:focus,
+    &:active {
+        outline: #{$underline-height} solid var(--navds-semantic-color-focus);
+        outline-offset: -#{$underline-height};
+        box-shadow: 0 0 0 0;
+    }
+
+    &:hover {
+        box-shadow: inset 0 -#{$underline-height} 0 0 var(--navds-global-color-gray-300);
+    }
+}
+.lenkeActive {
+    box-shadow: inset 0 -#{$underline-height} 0 0 var(--navds-global-color-blue-400);
+    color: var(--navds-semantic-color-text);
+
+    span {
+        font-weight: bold;
+    }
+
+    &:hover {
+        box-shadow: inset 0 -#{$underline-height} 0 0 var(--navds-global-color-blue-400);
+    }
+}
+
+.lenkeInner {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 0 0.75rem;
+
+    &::after {
+        content: attr(data-text);
+        content: attr(data-text) / '';
+        height: 0;
+        visibility: hidden;
+        overflow: hidden;
+        user-select: none;
+        pointer-events: none;
+        font-weight: bold;
+
+        @media speech {
+            display: none;
+        }
+    }
+}

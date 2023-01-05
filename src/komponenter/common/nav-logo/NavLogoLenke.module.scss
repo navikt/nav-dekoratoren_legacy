@@ -1,0 +1,17 @@
+.navLogoLenke {
+    display: flex;
+    flex: none;
+
+    &:focus {
+        box-shadow: 0 0 0 4px var(--navds-semantic-color-focus) inset;
+        border-radius: 8px;
+        outline: none;
+        border-color: transparent;
+        background-color: transparent;
+    }
+
+    img {
+        align-self: center;
+        height: 20px;
+    }
+}

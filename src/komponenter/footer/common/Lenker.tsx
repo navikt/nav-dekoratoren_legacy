@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { MenyNode } from 'store/reducers/menu-duck';
@@ -33,11 +33,12 @@ export const FooterLenker = ({ node }: Props) => {
     }
 
     return (
-        <Fragment>
+        <>
             {node.children.map((lenkeNode) => (
                 <li key={lenkeNode.id}>
                     <BodyShort>
                         <LenkeMedSporing
+                            className="globalLenkeFooter"
                             href={genererUrl(XP_BASE_URL, lenkeNode.path)}
                             analyticsEventArgs={{
                                 category: AnalyticsCategory.Footer,
@@ -51,7 +52,7 @@ export const FooterLenker = ({ node }: Props) => {
                     </BodyShort>
                 </li>
             ))}
-        </Fragment>
+        </>
     );
 };
 

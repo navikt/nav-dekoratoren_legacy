@@ -1,22 +1,28 @@
-import React, { SVGProps } from 'react';
+import React, { SVGProps, useId } from 'react';
 
-const DelSkjerm = (props: SVGProps<SVGSVGElement>) => (
-    <svg
-        focusable={false}
-        viewBox="0 0 24 24"
-        preserveAspectRatio="xMidYMid meet"
-        xmlns="http://www.w3.org/2000/svg"
-        {...props}
-    >
-        <g fill="none" strokeMiterlimit="10" strokeLinejoin="round">
-            <path strokeLinecap="round" d="M5 23.5h6M8 21.5v1.98" />
-            <path d="M.5 19.5h15" />
+const DelSkjerm = (props: SVGProps<SVGSVGElement>) => {
+    const id = useId();
+    return (
+        <svg
+            focusable={false}
+            aria-hidden="true"
+            aria-labelledby={'del-skjerm-ikon' + id}
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+            {...props}
+        >
+            <title id={'del-skjerm-ikon' + id}>Del skjerm ikon</title>
             <path
-                strokeLinecap="round"
-                d="M8.5 10.5v-2.75c0-2.071 1.678-3.75 3.75-3.75h1.75M10.5 8.5l-2 2-2-2M12.5 11.5h1.5c.828 0 1.5.671 1.5 1.5v7c0 .828-.672 1.5-1.5 1.5h-12c-.83 0-1.5-.672-1.5-1.5v-7c0-.829.67-1.5 1.5-1.5h1.5M13.001 8.119c.265.237.615.381.999.381h8c.828 0 1.5-.672 1.5-1.5v-5c0-.829-.672-1.5-1.5-1.5h-8M14.5 6.5h9M16.5 10.5h3M18 8.5v2M12.5 2.5l1.5 1.5-1.5 1.5"
+                stroke="currentColor"
+                stroke-linecap="round"
+                d="M5 23.5h6m-3-2v2m-7.5-4h15m-7-9V7.7c0-2 1.7-3.7 3.8-3.7H14m-5.5 6.5 2-2m-2 2-2-2M14 4l-1.5-1.5M14 4l-1.5 1.5m0 6H14c.8 0 1.5.7 1.5 1.5v7c0 .8-.7 1.5-1.5 1.5H2c-.8 0-1.5-.7-1.5-1.5v-7c0-.8.7-1.5 1.5-1.5h1.5M13 8.1c.3.3.6.4 1 .4h8c.8 0 1.5-.7 1.5-1.5V2c0-.8-.7-1.5-1.5-1.5h-8m.5 6h9m-7 4h3m-1.5-2v2"
             />
-        </g>
-    </svg>
-);
+        </svg>
+    );
+};
 
 export default DelSkjerm;

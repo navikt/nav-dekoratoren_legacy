@@ -1,0 +1,23 @@
+@use 'src/styling-variabler.scss' as sv;
+
+.slideToCloseContent {
+    height: 100%;
+    position: relative;
+    transition: left 0.25s ease-in-out;
+}
+
+.slideToCloseContentMessage {
+    top: 0;
+    position: absolute;
+    height: 100%;
+    width: 100px;
+    color: white;
+    z-index: 1004;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media #{sv.$screen-desktop} {
+        display: none;
+    }
+}

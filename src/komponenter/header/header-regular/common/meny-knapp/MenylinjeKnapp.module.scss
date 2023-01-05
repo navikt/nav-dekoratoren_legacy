@@ -1,0 +1,5 @@
+@use 'MenylinjeKnappMixin';
+
+.menylinjeKnapp {
+    @include MenylinjeKnappMixin.menylinjeKnappMixin;
+}

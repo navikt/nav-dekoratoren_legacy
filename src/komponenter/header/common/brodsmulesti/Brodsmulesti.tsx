@@ -2,18 +2,16 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { LenkeMedSporing } from '../../../common/lenke-med-sporing/LenkeMedSporing';
-import { Bilde } from '../../../common/bilde/Bilde';
-import HomeIcon from 'ikoner/home.svg';
-import { Next } from '@navikt/ds-icons';
+import { Next, Home } from '@navikt/ds-icons';
 import { postMessageToApp } from 'utils/messages';
 import { Locale } from 'store/reducers/language-duck';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
-import BEMHelper from 'utils/bem';
+
 import { getArbeidsflateContext } from '../../../common/arbeidsflate-lenker/arbeidsflate-lenker';
 import { AnalyticsCategory } from '../../../../utils/analytics/analytics';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import { getHomeUrl } from '../../../../utils/home-url';
-import './Brodsmulesti.less';
+import style from 'komponenter/header/common/brodsmulesti/Brodsmulesti.module.scss';
 
 export interface Breadcrumb {
     url: string;
@@ -33,7 +31,6 @@ const analyticsEventArgs = {
 const maxNumInitiallyShown = 3;
 
 export const Brodsmulesti = (props: Props) => {
-    const cls = BEMHelper('brodsmulesti');
     const { environment } = useSelector((state: AppState) => state);
     const { XP_BASE_URL } = environment;
     const [showAll, setShowAll] = useState(false);
@@ -52,28 +49,28 @@ export const Brodsmulesti = (props: Props) => {
     const breadcrumbsSliced = showAll ? breadcrumbs : breadcrumbs.slice(-numCustomItemsShown);
 
     return (
-        <nav className={cls.className} aria-label={finnTekst('brodsmulesti', language)}>
+        <nav className={style.brodsmulesti} aria-label={finnTekst('brodsmulesti', language)}>
             <ol>
                 <li>
                     <LenkeMedSporing
                         href={homeUrl}
-                        className={cls.element('link')}
+                        className={style.link}
                         analyticsEventArgs={{
                             ...analyticsEventArgs,
                             label: homeUrl,
                             action: 'nav.no',
                         }}
                     >
-                        <Bilde asset={HomeIcon} className={cls.element('icon')} />
+                        <Home className={style.iconHome} title="Hjem-ikon" aria-hidden />
                         <span>nav.no</span>
-                        <Next className={cls.element('next')} />
+                        <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
                     </LenkeMedSporing>
                 </li>
                 {shouldShowContext && (
                     <li>
                         <LenkeMedSporing
                             href={context.url}
-                            className={cls.element('link')}
+                            className={style.link}
                             analyticsEventArgs={{
                                 ...analyticsEventArgs,
                                 label: context.url,
@@ -83,7 +80,7 @@ export const Brodsmulesti = (props: Props) => {
                             <span>
                                 <Tekst id={context.lenkeTekstId} />
                             </span>
-                            <Next className={cls.element('next')} />
+                            <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
                         </LenkeMedSporing>
                     </li>
                 )}
@@ -91,14 +88,14 @@ export const Brodsmulesti = (props: Props) => {
                     <li>
                         <button
                             aria-label={finnTekst('brodsmulesti-se-alle', language)}
-                            className={`${cls.element('view-all')} lenke`}
+                            className={`${style.iconViewAll} lenke`}
                             onClick={(e) => {
                                 e.preventDefault();
                                 setShowAll(true);
                             }}
                         >
-                            <span className={cls.element('pathAbbrevation')}>...</span>
-                            <Next className={cls.element('next')} />
+                            <span className={style.iconEllipsis}>...</span>
+                            <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
                         </button>
                     </li>
                 )}
@@ -107,11 +104,15 @@ export const Brodsmulesti = (props: Props) => {
                         {index + 1 !== array.length ? (
                             <LenkeMedSporing
                                 href={breadcrumb.url}
-                                className={cls.element('link')}
+                                className={style.link}
                                 analyticsEventArgs={{
                                     ...analyticsEventArgs,
-                                    label: breadcrumb.url,
-                                    action: breadcrumb.title,
+                                    // TODO: implement selective redaction of url/title
+                                    // Temp fix to prevent potential logging of sensitive info
+                                    label: '[redacted]',
+                                    action: '[redacted]',
+                                    // label: breadcrumb.url,
+                                    // action: breadcrumb.title,
                                 }}
                                 onClick={(e) => {
                                     if (breadcrumb.handleInApp) {
@@ -120,11 +121,11 @@ export const Brodsmulesti = (props: Props) => {
                                     }
                                 }}
                             >
-                                <span className={cls.element('text')}>{breadcrumb.title}</span>
-                                <Next className={cls.element('next')} />
+                                <span className={style.linkText}>{breadcrumb.title}</span>
+                                <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
                             </LenkeMedSporing>
                         ) : (
-                            <span className={cls.element('text')}>{breadcrumb.title}</span>
+                            <span className={style.linkText}>{breadcrumb.title}</span>
                         )}
                     </li>
                 ))}

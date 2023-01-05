@@ -16,6 +16,7 @@ export function finnTekst(id: string, language: Locale, payload?: string): strin
         case Locale.POLSK:
         case Locale.ENGELSK:
         case Locale.UKRAINSK:
+        case Locale.RUSSISK:
             id += '-en';
             ledetekst = ledetekster[id];
             break;

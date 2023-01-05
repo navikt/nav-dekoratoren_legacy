@@ -11,7 +11,6 @@ import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { MinsidePersonKnapp } from './minside-knapper/MinsidePersonKnapp';
-import './Minsidemeny.less';
 
 const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,
@@ -51,7 +50,7 @@ export const Minsidemeny = ({ kbNavMainState }: Props) => {
                     <MinsidemenyInnhold
                         classname={minsideMenyClassname}
                         menyLenker={minsideMenyPunkter}
-                        dittNavUrl={environment.DITT_NAV_URL}
+                        dittNavUrl={environment.MIN_SIDE_URL}
                         brukernavn={brukernavn}
                         authLevel={innloggetStatus.securityLevel}
                     />

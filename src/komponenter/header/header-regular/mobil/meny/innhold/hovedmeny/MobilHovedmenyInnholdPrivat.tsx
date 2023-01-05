@@ -19,11 +19,12 @@ import { useCookies } from 'react-cookie';
 import { MenyNode } from '../../../../../../../store/reducers/menu-duck';
 import { MobilMenypunkt } from './menypunkt/MobilMenypunkt';
 import { UnstyledList } from '../utils/UnstyledList';
+import { MobilUndermenySeksjon } from '../undermeny/MobilUndermenySeksjon';
 
-import './MobilHovedmenyInnholdPrivat.less';
+import 'komponenter/header/header-regular/mobil/meny/innhold/hovedmeny/MobilHovedmenyInnholdPrivat.scss';
 
 const stateSelector = (state: AppState) => ({
-    dittNavUrl: state.environment.DITT_NAV_URL,
+    dittNavUrl: state.environment.MIN_SIDE_URL,
     xpBaseUrl: state.environment.XP_BASE_URL,
     language: state.language.language,
     authenticated: state.innloggingsstatus.data.authenticated,
@@ -60,11 +61,18 @@ export const MobilHovedmenyInnholdPrivat = ({ setUndermeny, hovedmenyLenker }: P
 
     return (
         <>
-            <MobilMenypunkt
-                tekst={finnTekst('how-can-we-help', language)}
-                type={'kategori'}
-                callback={() => setUndermeny({ ...hovedmenyLenker, flatten: true })}
-            />
+            {hovedmenyLenker.children.map((seksjon) =>
+                seksjon.flatten ? (
+                    <MobilUndermenySeksjon lenker={seksjon} key={seksjon.id} />
+                ) : (
+                    <MobilMenypunkt
+                        tekst={seksjon.displayName}
+                        type={'kategori'}
+                        callback={() => setUndermeny(seksjon)}
+                        key={seksjon.id}
+                    />
+                )
+            )}
 
             {!authenticated && (
                 <MobilMenypunkt tekst={finnTekst('min-side-login', language)} type={'lenke'} href={dittNavLenke.url} />

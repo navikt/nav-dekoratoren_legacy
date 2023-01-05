@@ -1,0 +1,27 @@
+appName: nav-dekoratoren-beta
+appPath: ''
+ingresses:
+  - https://dekoratoren-beta.dev.nav.no
+outboundHosts:
+  - www.dev.nav.no
+env:
+  - name: ENV
+    value: dev
+  - name: XP_BASE_URL
+    value: https://www-2.dev.nav.no
+  - name: APP_BASE_URL
+    value: https://dekoratoren-beta.dev.nav.no
+  - name: API_XP_SERVICES_URL
+    value: https://www-q6.nav.no/_/service
+  - name: API_DEKORATOREN_URL
+    value: https://www.dev.nav.no/person/nav-dekoratoren-api
+  - name: MINSIDE_ARBEIDSGIVER_URL
+    value: https://min-side-arbeidsgiver.dev.nav.no/min-side-arbeidsgiver/
+  - name: MIN_SIDE_URL
+    value: https://www.dev.nav.no/minside/
+  - name: LOGIN_URL
+    value: https://loginservice.dev.nav.no
+  - name: LOGOUT_URL
+    value: https://loginservice.dev.nav.no/slo
+  - name: FEEDBACK_API_URL
+    value: https://dekoratoren-api.dev-gcp.nais.io/event

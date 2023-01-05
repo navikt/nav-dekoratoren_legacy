@@ -1,10 +1,10 @@
-import React, { ChangeEvent, useEffect, useLayoutEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Alert, BodyLong, Button, Heading, ReadMore, TextField, Modal } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
-import './DelSkjermModal.less';
+import style from './DelSkjermModal.module.scss';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 interface Props {
@@ -13,8 +13,6 @@ interface Props {
 }
 
 const DelSkjermModal = (props: Props) => {
-    const classname = 'delskjerm__modal';
-
     // Language
     const language = useSelector((state: AppState) => state.language).language;
     const feilmelding = finnTekst('delskjerm-modal-feilmelding', language);
@@ -33,11 +31,10 @@ const DelSkjermModal = (props: Props) => {
     // Vergic config
     const w = window as any;
     const vergicExists = typeof w !== 'undefined' && w.vngage;
-    const navGroupId = NAV_GROUP_ID;
 
     useEffect(() => {
         if (vergicExists) {
-            setIsOpen(w.vngage.get('queuestatus', navGroupId));
+            setIsOpen(w.vngage.get('queuestatus', NAV_GROUP_ID));
         }
     }, []);
 
@@ -51,7 +48,7 @@ const DelSkjermModal = (props: Props) => {
                 caseTypeId: CASETYPE_ID,
                 category: 'Phone2Web',
                 message: 'Phone2Web',
-                groupId: navGroupId,
+                groupId: NAV_GROUP_ID,
                 startCode: code,
             });
             props.onClose();
@@ -67,42 +64,30 @@ const DelSkjermModal = (props: Props) => {
         }
     };
 
-    const setOverlayCss = () => {
-        const elementsArray = document.getElementsByClassName('ReactModal__Overlay');
-        const element = elementsArray[0] as HTMLElement;
-        if (!element || !element.children[0] || !element.children[0].classList.contains(classname)) {
-            return;
-        }
-        element.style.zIndex = '9999';
-        element.style.backgroundColor = 'rgba(50, 65, 79, 0.8)'; // #32414f
-    };
-
-    useLayoutEffect(() => {
-        setOverlayCss();
-    }, [isOpen]);
+    const parent = document.getElementById('decorator-footer-inner');
 
     return (
         <Modal
             open={props.isOpen}
-            className={`decorator-wrapper ${classname}`}
+            className={style.delskjerm}
+            overlayClassName="decorator-wrapper"
             aria-label={'Skjermdeling'}
             onClose={props.onClose}
+            style={{ overlay: { backgroundColor: 'rgba(50, 65, 79, 0.8)' } }}
+            parentSelector={parent ? () => parent : undefined}
         >
-            <div className={'delskjerm__header'}>
-                <Bilde className={'delskjerm__veileder'} asset={veileder} altText={''} />
+            <div className={style.header}>
+                <Bilde className={style.veileder} asset={veileder} altText={''} />
             </div>
-            <div className={'delskjerm__content'}>
+            <div className={style.content}>
                 <Heading size="medium" level="2">
                     <Tekst id={'delskjerm-modal-overskrift'} />
                 </Heading>
-                <div className={'delskjerm__beskrivelse'}>
+                <div className={style.beskrivelse}>
                     <BodyLong>
                         <Tekst id={'delskjerm-modal-beskrivelse'} />
                     </BodyLong>
-                    <ReadMore
-                        className={'delskjerm__lesmer'}
-                        header={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}
-                    >
+                    <ReadMore header={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
                         <ul>
                             {[...Array(3)].map((_, i) => (
                                 <li key={i}>
@@ -124,7 +109,7 @@ const DelSkjermModal = (props: Props) => {
                             onChange={onChange}
                             maxLength={5}
                         />
-                        <div className={'delskjerm__knapper'}>
+                        <div className={style.knapper}>
                             <Button onClick={onClick}>
                                 <Tekst id={'delskjerm-modal-start'} />
                             </Button>

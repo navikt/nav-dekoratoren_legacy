@@ -11,7 +11,7 @@ import { useCookies } from 'react-cookie';
 import { AnalyticsEventArgs } from 'utils/analytics/analytics';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import { getHomeUrl } from '../../../utils/home-url';
-import './NavLogoLenke.less';
+import style from './NavLogoLenke.module.scss';
 
 type Props = {
     analyticsEventArgs: AnalyticsEventArgs;
@@ -30,19 +30,16 @@ export const NavLogoLenke = (props: Props) => {
 
     return (
         <LenkeMedSporing
-            classNameOverride={'nav-logo-lenke'}
+            classNameOverride={`${style.navLogoLenke} navLogoLenke`}
             href={url}
             analyticsEventArgs={props.analyticsEventArgs}
             onClick={(event) => {
                 setCookie(CookieName.DECORATOR_CONTEXT, context.key, cookieOptions);
                 dispatch(settArbeidsflate(context.key));
-                if (erNavDekoratoren()) {
-                    event.preventDefault();
-                }
             }}
             id={props.id}
         >
-            <Bilde altText="Til forsiden" asset={props.ikon} />
+            <Bilde altText="Til forsiden" asset={props.ikon} cacheBuster={'1'} />
         </LenkeMedSporing>
     );
 };

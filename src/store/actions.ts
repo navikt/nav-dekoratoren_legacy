@@ -4,7 +4,6 @@ import { MenyNode as menypunkterData } from './reducers/menu-duck';
 import { DriftsmeldingerData } from './reducers/driftsmeldinger-duck';
 import { Environment, Params } from './reducers/environment-duck';
 import { FeatureToggles } from './reducers/feature-toggles-duck';
-import { UtloggingsvarselState } from './reducers/utloggingsvarsel-duck';
 
 export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',
@@ -20,10 +19,6 @@ export enum ActionType {
     HENT_VARSLER_FEILET = 'HENT_VARSLER_FEILET',
     HENT_VARSLER_PENDING = 'HENT_VARSLER_PENDING',
     SETT_VARSLER_OK = 'SETT_VARSLER_OK',
-    SETT_VARSLER_LEST_OK = 'SETT_VARSLER_LEST_OK',
-    SETT_VARSLER_LEST_FEILET = 'SETT_VARSLER_LEST_FEILET',
-    SETT_VARSLER_LEST_PENDING = 'SETT_VARSLER_LEST_PENDING',
-    SETT_VARSLER_LEST = 'SETT_VARSLER_LEST',
     SETT_LANGUAGE = 'SETT_LANGUAGE',
     SETT_ENVIRONMENT = 'SETT_ENVIRONMENT',
     SETT_PARAMS = 'SETT_PARAMS',
@@ -43,9 +38,7 @@ export enum ActionType {
     SETT_TILBAKEMELDING_OK = 'SETT_TILBAKEMELDING_OK',
     SETT_TILBAKEMELDING_FEILET = 'SETT_TILBAKEMELDING_FEILET',
     SETT_TILBAKEMELDING_PENDING = 'SETT_TILBAKEMELDING_PENDING',
-    SETT_UTLOGGINGSVARSEL_EKSPANDERT = 'SETT_UTLOGGINGSVARSEL_EKSPANDERT',
-    SET_UTLOGGINSVARSEL_MINIMERT = 'SET_UTLOGGINSVARSEL_MINIMERT',
-    SETT_UTLOGGINSVARSEL_OPPDATERESTATUS = 'SETT_UTLOGGINSVARSEL_OPPDATERESTATUS',
+    FJERN_LEST_VARSEL = 'FJERN_LEST_VARSEL',
 }
 
 export interface HentInnloggingsstatusOKAction {
@@ -119,23 +112,6 @@ export interface SettVarslerOKAction {
     type: ActionType.SETT_VARSLER_OK;
 }
 
-export interface SettVarslerLestOKAction {
-    type: ActionType.SETT_VARSLER_LEST_OK;
-    nyesteId: number;
-}
-
-export interface SettVarslerLestPENDINGAction {
-    type: ActionType.SETT_VARSLER_LEST_PENDING;
-}
-
-export interface SettVarslerLestFEILETAction {
-    type: ActionType.SETT_VARSLER_LEST_FEILET;
-}
-
-export interface SettVarslerLestAction {
-    type: ActionType.SETT_VARSLER_LEST;
-}
-
 export interface SettPrivatpersonAction {
     type: ActionType.PRIVATPERSON;
 }
@@ -196,17 +172,9 @@ export interface SettTilbakemeldingFEILETAction {
     type: ActionType.SETT_TILBAKEMELDING_FEILET;
 }
 
-export interface SettUtloggingsvarselEkspandert {
-    type: ActionType.SETT_UTLOGGINGSVARSEL_EKSPANDERT;
-}
-
-export interface SettUtloggingsvarselMinimert {
-    type: ActionType.SET_UTLOGGINSVARSEL_MINIMERT;
-}
-
-export interface SettUtloggingsvarselOpppdatereStatus {
-    data: Partial<UtloggingsvarselState>;
-    type: ActionType.SETT_UTLOGGINSVARSEL_OPPDATERESTATUS;
+export interface FjernLestVarselAction {
+    type: ActionType.FJERN_LEST_VARSEL;
+    eventId: string;
 }
 
 export type Handling =
@@ -225,10 +193,6 @@ export type Handling =
     | SettEnviroment
     | SettParams
     | SettVarslerOKAction
-    | SettVarslerLestOKAction
-    | SettVarslerLestFEILETAction
-    | SettVarslerLestPENDINGAction
-    | SettVarslerLestAction
     | SettPrivatpersonAction
     | SettArbeidsgiverAction
     | SettSamarbeidspartnerAction
@@ -245,6 +209,4 @@ export type Handling =
     | SettTilbakemeldingOKAction
     | SettTilbakemeldingFEILETAction
     | SettTilbakemeldingPENDINGAction
-    | SettUtloggingsvarselEkspandert
-    | SettUtloggingsvarselMinimert
-    | SettUtloggingsvarselOpppdatereStatus;
+    | FjernLestVarselAction;

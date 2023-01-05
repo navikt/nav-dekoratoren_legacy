@@ -56,7 +56,7 @@ export const Hovedmeny = ({ kbNavMainState }: Props) => {
                         <HovedmenyInnhold {...props} />
                     )
                 ) : (
-                    <Spinner tekstId={'meny-loading'} className={isOpen ? 'spinner-container--active' : ''} />
+                    <Spinner tekstId={'meny-loading'} />
                 )}
             </EkspanderbarMeny>
         </div>
