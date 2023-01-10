@@ -56,6 +56,7 @@ export const Header = () => {
     const [sentAuthToApp, setSentAuthToApp] = useState(false);
     const { environment } = useSelector(stateSelector);
     const { arbeidsflate } = useSelector(stateSelector);
+    const { language } = useSelector(stateSelector);
     const { innloggingsstatus, menypunkt } = useSelector(stateSelector);
     const { authenticated } = innloggingsstatus.data;
     const { PARAMS, APP_URL, API_DEKORATOREN_URL, ENV } = environment;
@@ -328,7 +329,7 @@ export const Header = () => {
     };
 
     return (
-        <div className={'decorator-wrapper'}>
+        <div className={'decorator-wrapper'} lang={language}>
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
             <header className={`siteheader${useSimpleHeader ? ' simple' : ''}`}>
