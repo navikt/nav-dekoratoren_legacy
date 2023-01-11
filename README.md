@@ -177,6 +177,12 @@ Påkrevde CSP-direktiver for dekoratøren serveres på [https://www.nav.no/dekor
 
 [nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler) kan benyttes for å generere en CSP-header som er kompatibel med dekoratøren.
 
+## Amplitude-klient
+
+Logging med dekoratørens Amplitude-klient eksponeres via funksjonen `window.dekoratorenAmplitude`. Se [logEventFromApp](https://github.com/navikt/nav-dekoratoren/blob/master/src/utils/analytics/amplitude.ts) for implementasjon. <br>
+
+[nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler) har en hjelpefunksjon for å benytte denne.
+
 ## Oppstart via docker-compose
 
 Start **navikt/nav-dekoratoren**, **navikt/pb-nav-mocked**, **navikt/stub-oidc-provider** og **navikt/pb-oidc-provider-gui**. Oppsettet vil replikere innlogging og eksterne avhengigheter som varselinnboks.
