@@ -4,7 +4,15 @@ declare global {
     interface Window {
         TA: any;
         dataLayer: any;
-        dekoratorenAmplitude: (eventName: string, appName: string, eventData?: EventData) => Promise<any>;
+        dekoratorenAmplitude: ({
+            appName,
+            eventName,
+            eventData,
+        }?: {
+            appName: string;
+            eventName: string;
+            eventData?: EventData;
+        }) => Promise<any>;
     }
 
     namespace NodeJS {

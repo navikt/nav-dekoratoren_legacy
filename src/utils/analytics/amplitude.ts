@@ -24,8 +24,33 @@ export const initAmplitude = () => {
     window.dekoratorenAmplitude = logEventFromApp;
 };
 
-const logEventFromApp = (eventName: string, appName: string, eventData: EventData = {}) => {
-    return logAmplitudeEvent(eventName, { ...eventData, app: appName });
+const logEventFromApp = (params?: {
+    appName: unknown | string;
+    eventName: unknown | string;
+    eventData?: unknown | EventData;
+}): Promise<any> => {
+    try {
+        if (!params || params.constructor !== Object) {
+            return Promise.reject(
+                'Argument must be an object of type {appName: string, eventName: string, eventData?: Record<string, any>}'
+            );
+        }
+
+        const { appName, eventName, eventData = {} } = params;
+        if (!eventName || typeof eventName !== 'string') {
+            return Promise.reject('Parameter "eventName" must be a string');
+        }
+        if (!appName || typeof appName !== 'string') {
+            return Promise.reject('Parameter "appName" must be a string');
+        }
+        if (!eventData || eventData.constructor !== Object) {
+            return Promise.reject('Parameter "eventData" must be a plain object');
+        }
+
+        return logAmplitudeEvent(eventName, { ...eventData, app: appName });
+    } catch (e) {
+        return Promise.reject(`Unexpected Amplitude error: ${e}`);
+    }
 };
 
 export const logPageView = (params: Params, authState: InnloggingsstatusState) => {
