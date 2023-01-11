@@ -68,11 +68,7 @@ export const logPageView = (params: Params, authState: InnloggingsstatusState) =
 };
 
 export const logAmplitudeEvent = (eventName: string, eventData: EventData = {}) => {
-    return new Promise(function (resolve, reject) {
-        if (!amplitude) {
-            reject('Amplitude is not initialized!');
-        }
-
+    return new Promise(function (resolve) {
         eventData.platform = window.location.toString();
         eventData.origin = 'dekoratøren';
         eventData.originVersion = 'unknown';
