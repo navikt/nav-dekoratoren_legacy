@@ -1,9 +1,12 @@
 declare global {
     let TA: any;
+
     interface Window {
         TA: any;
         dataLayer: any;
+        dekoratorenAmplitude: (eventName: string, appName: string, eventData?: EventData) => Promise<any>;
     }
+
     namespace NodeJS {
         interface ProcessEnv {
             ENV: 'prod' | 'dev' | 'localhost';

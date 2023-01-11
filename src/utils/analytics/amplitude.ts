@@ -1,32 +1,35 @@
-import { verifyWindowObj } from 'utils/Environment';
+import amplitude from 'amplitude-js';
 import { Params } from 'store/reducers/environment-duck';
 import { InnloggingsstatusState } from '../../store/reducers/innloggingsstatus-duck';
 
-// Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
-const amplitude = verifyWindowObj() ? require('amplitude-js') : () => null;
+type EventData = Record<string, any>;
 
 export const initAmplitude = () => {
-    if (amplitude) {
-        const userProps = {
-            skjermbredde: window.screen.width,
-            skjermhoyde: window.screen.height,
-            vindusbredde: window.innerWidth,
-            vindushoyde: window.innerHeight,
-        };
+    const userProps = {
+        skjermbredde: window.screen.width,
+        skjermhoyde: window.screen.height,
+        vindusbredde: window.innerWidth,
+        vindushoyde: window.innerHeight,
+    };
 
-        amplitude.getInstance().init('default', '', {
-            apiEndpoint: 'amplitude.nav.no/collect-auto',
-            saveEvents: false,
-            includeUtm: true,
-            includeReferrer: true,
-            platform: window.location.toString(),
-        });
-        amplitude.getInstance().setUserProperties(userProps);
-    }
+    amplitude.getInstance().init('default', '', {
+        apiEndpoint: 'amplitude.nav.no/collect-auto',
+        saveEvents: false,
+        includeUtm: true,
+        includeReferrer: true,
+        platform: window.location.toString(),
+    });
+    amplitude.getInstance().setUserProperties(userProps);
+
+    window.dekoratorenAmplitude = logEventFromApp;
+};
+
+const logEventFromApp = (eventName: string, appName: string, eventData: EventData = {}) => {
+    return logAmplitudeEvent(eventName, { ...eventData, app: appName });
 };
 
 export const logPageView = (params: Params, authState: InnloggingsstatusState) => {
-    logAmplitudeEvent('besøk', {
+    return logAmplitudeEvent('besøk', {
         sidetittel: document.title,
         innlogging: authState.data.securityLevel ?? false,
         parametre: {
@@ -39,15 +42,16 @@ export const logPageView = (params: Params, authState: InnloggingsstatusState) =
     });
 };
 
-export const logAmplitudeEvent = (eventName: string, data?: any): Promise<any> => {
-    return new Promise(function (resolve: any) {
-        const eventData = data || {};
+export const logAmplitudeEvent = (eventName: string, eventData: EventData = {}) => {
+    return new Promise(function (resolve, reject) {
+        if (!amplitude) {
+            reject('Amplitude is not initialized!');
+        }
+
         eventData.platform = window.location.toString();
         eventData.origin = 'dekoratøren';
         eventData.originVersion = 'unknown';
 
-        if (amplitude) {
-            amplitude.getInstance().logEvent(eventName, eventData, resolve);
-        }
+        amplitude.getInstance().logEvent(eventName, eventData, resolve);
     });
 };
