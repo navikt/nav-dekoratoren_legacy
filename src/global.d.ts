@@ -5,11 +5,11 @@ declare global {
         TA: any;
         dataLayer: any;
         dekoratorenAmplitude: ({
-            appName,
+            origin,
             eventName,
             eventData,
         }?: {
-            appName: string;
+            origin: string;
             eventName: string;
             eventData?: EventData;
         }) => Promise<any>;
