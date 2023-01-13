@@ -9,6 +9,8 @@ import classNames from 'classnames';
 import style from './ChatbotWrapper.module.scss';
 import frida from 'ikoner/frida.svg';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
+import { clearConfigCache } from 'prettier';
+import { cookieOptions } from 'server/cookieSettings';
 
 // Prevents SSR crash
 const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
@@ -24,9 +26,10 @@ const stateSelector = (state: AppState) => ({
 
 const conversationCookieName = 'nav-chatbot%3Aconversation';
 
-const boostApiUrlBaseTest = 'https://navtest.boost.ai/api/chat/v2';
-const boostApiUrlBaseStaging = 'https://staging-nav.boost.ai/api/chat/v2';
-const boostApiUrlBaseProduction = 'https://nav.boost.ai/api/chat/v2';
+// const boostApiUrlBaseTest = 'https://navtest.boost.ai/api/chat/v2';
+// const boostApiUrlBaseProduction = 'https://nav.boost.ai/api/chat/v2';
+const boostApiUrlBaseTest = 'navtest';
+const boostApiUrlBaseProduction = 'nav';
 
 type ActionFilter = 'privatperson' | 'arbeidsgiver' | 'NAV_TEST';
 
@@ -122,7 +125,7 @@ type BoostSettings = {
     alwaysFullscreen?: boolean;
     authStartTriggerActionId?: string | number;
     contextTopicIntentId?: string | number;
-    conversationId?: string;
+    conversationId?: string | null;
     fileUploadServiceEndpointUrl?: string;
     enableProactivityForSmallDevices?: boolean;
     messageFeedbackOnFirstAction?: boolean;
@@ -182,11 +185,9 @@ const getActionFilters = (context: MenuValue, isProduction: boolean): ActionFilt
     return isProduction ? contextFilter : [...contextFilter, 'NAV_TEST'];
 };
 
-const options: BoostConfig = { chatPanel: { settings: { removeRememberedConversationOnChatPanelClose: true } } };
-
 export const ChatbotWrapper = () => {
     const { chatbotParamEnabled, chatbotParamVisible, context, env } = useSelector(stateSelector);
-    const [cookies] = useCookies();
+    const [cookies, setCookie, removeCookie] = useCookies([conversationCookieName]);
 
     // Do not mount chatbot on initial render. Prevents hydration errors
     // due to inconsistensies between client and server html, as chatbot
@@ -208,13 +209,7 @@ export const ChatbotWrapper = () => {
     const isTest = hostname && testUrlHosts.includes(hostname);
     const isProduction = env === 'prod';
 
-    let boostApiUrlBase = boostApiUrlBaseStaging;
-
-    if (isTest) {
-        boostApiUrlBase = boostApiUrlBaseTest;
-    } else if (isProduction) {
-        boostApiUrlBase = boostApiUrlBaseProduction;
-    }
+    let boostApiUrlBase = isProduction ? boostApiUrlBaseProduction : boostApiUrlBaseTest;
 
     const openBoostWindow = () => {
         if (typeof boost !== 'undefined') boost.chatPanel.show();
@@ -223,9 +218,31 @@ export const ChatbotWrapper = () => {
     if (typeof window !== 'undefined' && boost == null) {
         const w = window as any;
         if (typeof w.boostInit !== 'undefined') {
-            setBoost(w.boostInit('navtest', options));
+            const options: BoostConfig = {
+                chatPanel: {
+                    settings: {
+                        removeRememberedConversationOnChatPanelClose: true,
+                        conversationId: cookies[conversationCookieName],
+                    },
+                },
+            };
+            setBoost(w.boostInit(boostApiUrlBase, options));
         }
     }
+
+    useEffect(() => {
+        if (boost) {
+            boost.chatPanel.addEventListener('conversationIdChanged', (event: any) => {
+                if (!event?.detail?.conversationId) {
+                    removeCookie(conversationCookieName);
+                    return;
+                }
+                var expirationDay = new Date();
+                expirationDay.setHours(expirationDay.getHours() + 1);
+                setCookie(conversationCookieName, event.detail.conversationId, { expires: expirationDay });
+            });
+        }
+    }, [boost]);
 
     return isMounted ? (
         <div>
