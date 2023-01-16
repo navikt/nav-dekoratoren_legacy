@@ -3,7 +3,7 @@ import { Locale } from 'store/reducers/language-duck';
 type Section = 'header' | 'footer';
 
 export const mapToClosestTranslatedLanguage = (language: Locale, section: Section): Locale => {
-    // For Samisk, footer is obly available in Bokmål.
+    // For Samisk, footer is only available in Bokmål.
     if (section === 'footer' && language === Locale.SAMISK) {
         return Locale.BOKMAL;
     }
