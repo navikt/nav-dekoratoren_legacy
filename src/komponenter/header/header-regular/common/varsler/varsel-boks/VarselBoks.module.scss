@@ -1,0 +1,105 @@
+.beskjed {
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    width: 444px;
+  
+    @media (max-width: 476px) {
+      width: 100%;
+    }
+  
+    .tittel {
+      font-size: 18px;
+      color: #272727;
+    }
+  
+    .contentWrapper {
+      width: 100%;
+      margin-right: 16px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .dato {
+      font-size: 16px;
+      color: #707070;
+    } 
+  }
+  
+  .arkiverbar {
+    .hover {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
+    }
+  
+    .tittel {
+      font-weight: normal;
+      padding-bottom: 5px;
+    }
+  
+    .contentWrapper {
+      flex-direction: column;
+      padding: 12px 0;
+    }
+  
+    .datoOgKnapp {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+  }
+  
+  .ikkeArkiverbar {
+    text-decoration: none;
+    transition: background-color 0.1s linear;
+  
+    &:hover {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      background-color: #99C4DD;
+  
+      .chevron {
+        transition-duration: 0.2s;
+        transform: translate(3px, 0);
+      }
+    }
+  
+    .tittel {
+      padding: 12px 0 5px 0;
+      font-weight: bolder;
+    }
+  
+    .dato {
+      padding-bottom: 12px;
+    }
+  }
+
+  .oppgave {
+    
+    &:hover {
+      background-color: #ffd799;
+    }
+    
+    .ikon {
+      background-color: #ffd799;
+    }
+  }
+
+  .ikon {
+      margin: 0 1rem 0 0;
+      background-color: #99C4DD;
+      width: 8px;
+      border-radius: 8px 0 0 8px;
+  }
+
+  .chevron {
+    color: #707070;
+    width: 21px;
+    min-width: 21px;
+    height: 21px;
+  }
