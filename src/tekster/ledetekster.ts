@@ -145,7 +145,7 @@ export const ledetekster: { [key: string]: stringOrFunction } = {
     'varsler-visalle-se': 'Tidligere varsler',
     'varsler-tittel': 'Varsler',
     'varsler-tittel-en': 'Notifications',
-    'varsler-tittel-se': 'Varsler',
+    'varsler-tittel-se': 'Skirri',
     'varsler-antall': (input: string) => `Du har ${input} varsler`,
     'varsler-antall-en': (input: string) => `You have ${input} notifications`,
     'varsler-antall-se': (input: string) => `Du har ${input} varsler`,
