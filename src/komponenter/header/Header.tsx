@@ -35,7 +35,7 @@ import { setParams } from 'store/reducers/environment-duck';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
 import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
-import { useLogPageviews } from '../../utils/hooks/useLogPageviews';
+import { useOnPushStateHandlers } from '../../utils/hooks/useOnPushStateHandlers';
 
 import './Header.scss';
 
@@ -66,7 +66,7 @@ export const Header = () => {
 
     const [cookies, setCookie] = useCookies();
 
-    useLogPageviews(PARAMS, innloggingsstatus);
+    useOnPushStateHandlers(PARAMS, innloggingsstatus);
 
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {
@@ -332,7 +332,7 @@ export const Header = () => {
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
             <header className={`siteheader${useSimpleHeader ? ' simple' : ''}`}>
-                <Skiplinks simple={useSimpleHeader} />
+                <Skiplinks />
                 {useSimpleHeader ? <HeaderSimple /> : <HeaderRegular />}
             </header>
             <Driftsmeldinger />
