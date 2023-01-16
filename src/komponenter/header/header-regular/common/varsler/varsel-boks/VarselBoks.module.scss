@@ -27,14 +27,7 @@
     .dato {
       font-size: 16px;
       color: #707070;
-    }
-  
-    .ikon {
-      margin: 0 1rem 0 0;
-      background-color: #99C4DD;
-      width: 8px;
-      border-radius: 8px 0 0 8px;
-    }
+    } 
   }
   
   .arkiverbar {
@@ -92,11 +85,18 @@
       background-color: #ffd799;
     }
     
-    .ikonOppgave {
-      background-color: #ffd799 !important;
+    .ikon {
+      background-color: #ffd799;
     }
   }
-  
+
+  .ikon {
+      margin: 0 1rem 0 0;
+      background-color: #99C4DD;
+      width: 8px;
+      border-radius: 8px 0 0 8px;
+  }
+
   .chevron {
     color: #707070;
     width: 21px;
