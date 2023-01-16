@@ -76,6 +76,7 @@ export const logAmplitudeEvent = (eventName: string, eventData: EventData = {}, 
                 platform: window.location.toString(),
                 origin,
                 originVersion: eventData.originVersion || 'unknown',
+                viaDekoratoren: true,
             },
             resolve
         );
