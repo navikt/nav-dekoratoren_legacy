@@ -9,6 +9,15 @@ metadata:
     reloader.stakater.com/match: "true"
 data:
   ta-config.json: |
-    {
-      "test" : "great success! 3"
-    }
+    [
+      {
+        "id": "03343",
+        "urls": [
+          "https://www.nav.no/tilleggsstonader",
+          "https://www.nav.no/soknader/nb/person/familie/tilleggsstonader",
+          "https://www.nav.no/tilleggsstonader-enslig",
+          "https://www.nav.no/tilleggsstonader-gjenlevende",
+          "https://www.nav.no/tilleggsstonader/nn"
+        ]
+      }
+    ]

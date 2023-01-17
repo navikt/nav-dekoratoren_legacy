@@ -54,8 +54,10 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }> {
 const run = () => {
     fetchEnv()
         .then((environment) => {
-            initAnalytics();
-            injectHeadTags(environment.APP_URL);
+            const { APP_URL } = environment;
+
+            initAnalytics(APP_URL);
+            injectHeadTags(APP_URL);
 
             const store = createStore(environment);
 
