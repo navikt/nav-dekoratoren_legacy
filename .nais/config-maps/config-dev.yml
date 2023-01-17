@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: dekoratoren-config
   namespace: personbruker
+  labels:
+    team: personbruker
   annotations:
     reloader.stakater.com/match: "true"
 data:
