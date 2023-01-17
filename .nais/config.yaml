@@ -40,6 +40,9 @@ spec:
   {{/each}}
   envFrom:
     - secret: nav-dekoratoren
+  filesFrom:
+    - configmap: dekoratoren-config
+      mountPath: /app/config
   resources:
     limits:
       cpu: '3'

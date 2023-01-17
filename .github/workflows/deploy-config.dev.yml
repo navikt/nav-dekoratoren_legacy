@@ -1,0 +1,18 @@
+name: Deploy dev configmap
+on:
+  push:
+    paths:
+      - .nais/config-maps/config-dev.yml
+
+jobs:
+  deploy:
+    name: Deploy dev configmap
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - uses: nais/deploy/actions/deploy@master
+        env:
+          CLUSTER: dev-gcp
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: .nais/config-maps/config-dev.yaml
