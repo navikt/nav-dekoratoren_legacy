@@ -53,6 +53,8 @@ export const template = (req: Request) => {
     const headerId = params.header === 'true' ? `header` : `header-withmenu`;
     const footerId = params.footer === 'true' ? `footer` : `footer-withmenu`;
 
+    const language = params.language || 'nb';
+
     // Render SSR
     const HtmlHeader = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
@@ -72,7 +74,7 @@ export const template = (req: Request) => {
 
     const html = `
     <!DOCTYPE html>
-    <html lang='no'>
+    <html lang=${language}>
         <head>
             <title>NAV Dekoratør</title>
             <meta http-equiv='X-UA-Compatible' content='IE=edge' />
