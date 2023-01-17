@@ -1,6 +1,6 @@
 name: Deploy dev configmap
 on:
-  workflow_dispatch
+  workflow_dispatch:
   push:
     paths:
       - .nais/config-maps/config-dev.yml
