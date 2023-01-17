@@ -8,5 +8,5 @@ metadata:
 data:
   ta-config.json: |
     {
-      "test" : "great success!"
+      "test" : "great success! 2"
     }
