@@ -13,7 +13,6 @@ const readTaConfig = () => {
 
 const taConfig = readTaConfig();
 
-console.log(`cwd: ${process.cwd()}`);
 console.log(`config: ${JSON.stringify(taConfig)}`);
 
 export const getTaskAnalyticsConfigHandler: RequestHandler = (req, res) => {

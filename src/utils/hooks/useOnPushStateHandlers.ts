@@ -47,8 +47,6 @@ export const useOnPushStateHandlers = () => {
                 const newPathname = window.location.pathname;
                 if (newPathname !== lastPathname) {
                     setLastPathname(newPathname);
-                    logPageView(PARAMS, innloggingsstatus);
-                    startTaskAnalyticsSurveys({ currentAudience: arbeidsflate, currentLanguage: language });
                 }
             }, 250);
         };
@@ -56,5 +54,14 @@ export const useOnPushStateHandlers = () => {
         return () => {
             window.history.pushState = pushStateActual;
         };
-    }, [lastPathname, isInitialPageview, innloggingsstatus, arbeidsflate, language, PARAMS]);
+    }, [lastPathname, isInitialPageview]);
+
+    useEffect(() => {
+        if (isInitialPageview) {
+            return;
+        }
+        console.log(`Doing stuff - ${lastPathname}`, arbeidsflate, language);
+        logPageView(PARAMS, innloggingsstatus);
+        startTaskAnalyticsSurveys({ currentAudience: arbeidsflate, currentLanguage: language });
+    }, [lastPathname, isInitialPageview]);
 };
