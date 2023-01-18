@@ -34,8 +34,8 @@ import {
 import { setParams } from 'store/reducers/environment-duck';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
-import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
-import { useOnPushStateHandlers } from '../../utils/hooks/useOnPushStateHandlers';
+import Skiplink from 'komponenter/header/common/skiplinks/Skiplink';
+import { useOnPushStateHandlers } from 'utils/hooks/useOnPushStateHandlers';
 
 import './Header.scss';
 import { mapToClosestTranslatedLanguage } from 'utils/language';
@@ -334,7 +334,7 @@ export const Header = () => {
             <span id={'top-element'} tabIndex={-1} />
             <BrowserSupportMsg />
             <header className={`siteheader${useSimpleHeader ? ' simple' : ''}`}>
-                <Skiplinks />
+                <Skiplink />
                 {useSimpleHeader ? <HeaderSimple /> : <HeaderRegular />}
             </header>
             <Driftsmeldinger />
