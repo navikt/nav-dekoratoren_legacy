@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppState } from 'store/reducers';
-import { Heading } from '@navikt/ds-react';
+import { Heading, BodyLong } from '@navikt/ds-react';
 import Tekst from 'tekster/finn-tekst';
 import { useSelector } from 'react-redux';
 import AlleVarslerLenke from './alle-varsler-lenke/AlleVarslerLenke';
@@ -28,17 +28,14 @@ export const Varselvisning = ({ setKbId }: Props) => {
         <div className={isTomListe ? 'varsler-visning-tom' : 'varsler-visning'}>
             {isTomListe ? (
                 <>
-                    <Heading level="2" size="medium" className={'varsler-visning-tom-tittel'}>
-                        <Tekst id={'varsler-tittel'} />
-                    </Heading>
                     <div className={'varsler-visning-tom-liste'}>
                         <Bilde altText={''} asset={ikon} ariaHidden={true} />
-                        <p className="varsler-tom-hovedtekst">
+                        <Heading size="small" className="varsler-tom-hovedtekst">
                             <Tekst id={'varsler-tom-liste'} />
-                        </p>
-                        <p className="varsler-tom-ingress">
+                        </Heading>
+                        <BodyLong size="small" className="varsler-tom-ingress">
                             <Tekst id={'varsler-tom-liste-ingress'} />
-                        </p>
+                        </BodyLong>
                     </div>
                 </>
             ) : (
