@@ -15,25 +15,21 @@ const stateSelector = (state: AppState) => ({
 
 // Run functions on navigating in SPAs
 export const useOnPushStateHandlers = () => {
-    const [isInitialPageview, setIsInitialPageview] = useState(true);
-    const [lastPathname, setLastPathname] = useState('');
+    const [currentPathname, setCurrentPathname] = useState('');
     const { innloggingsstatus, environment, language, arbeidsflate } = useSelector(stateSelector);
     const { PARAMS } = environment;
 
     // Run functions on initial load
     useEffect(() => {
         const { status } = innloggingsstatus;
-        if ((status === 'OK' || status === 'FEILET') && isInitialPageview) {
-            setIsInitialPageview(false);
-            logPageView(PARAMS, innloggingsstatus);
-            startTaskAnalyticsSurveys({ currentAudience: arbeidsflate, currentLanguage: language });
-            setLastPathname(window.location.pathname);
+        if ((status === 'OK' || status === 'FEILET') && !currentPathname) {
+            setCurrentPathname(window.location.pathname);
         }
-    }, [innloggingsstatus, isInitialPageview, arbeidsflate, language, PARAMS]);
+    }, [innloggingsstatus, arbeidsflate, language, PARAMS]);
 
     // Run on SPA navigation
     useEffect(() => {
-        if (isInitialPageview) {
+        if (!currentPathname) {
             return;
         }
 
@@ -45,8 +41,8 @@ export const useOnPushStateHandlers = () => {
             // Delay slightly to allow SPAs to update their state
             setTimeout(() => {
                 const newPathname = window.location.pathname;
-                if (newPathname !== lastPathname) {
-                    setLastPathname(newPathname);
+                if (newPathname !== currentPathname) {
+                    setCurrentPathname(newPathname);
                 }
             }, 250);
         };
@@ -54,14 +50,14 @@ export const useOnPushStateHandlers = () => {
         return () => {
             window.history.pushState = pushStateActual;
         };
-    }, [lastPathname, isInitialPageview]);
+    }, [currentPathname]);
 
     useEffect(() => {
-        if (isInitialPageview) {
+        if (!currentPathname) {
             return;
         }
-        console.log(`Doing stuff - ${lastPathname}`, arbeidsflate, language);
+
         logPageView(PARAMS, innloggingsstatus);
         startTaskAnalyticsSurveys({ currentAudience: arbeidsflate, currentLanguage: language });
-    }, [lastPathname, isInitialPageview]);
+    }, [currentPathname]);
 };
