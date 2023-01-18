@@ -38,11 +38,11 @@ const Arbeidsflatemeny = () => {
                     return (
                         <li
                             aria-current={arbeidsflate === lenke.key ? 'page' : 'false'}
-                            role="menuitem"
                             className={style.listeElement}
                             key={lenke.key}
                         >
                             <LenkeMedSporing
+                                role="menuitem"
                                 classNameOverride={classNames(
                                     style.lenke,
                                     arbeidsflate === lenke.key ? style.lenkeActive : ''
