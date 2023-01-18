@@ -88,14 +88,14 @@ export const Brodsmulesti = (props: Props) => {
                     <li>
                         <button
                             aria-label={finnTekst('brodsmulesti-se-alle', language)}
-                            className={`${style.iconViewAll} lenke`}
+                            className={`${style.iconViewAll} `}
                             onClick={(e) => {
                                 e.preventDefault();
                                 setShowAll(true);
                             }}
                         >
-                            <span className={style.iconEllipsis}>...</span>
-                            <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
+                            <span className={`${style.iconEllipsis} lenke`}>...</span>
+                            <Next className={`${style.iconShowAll} lenke`} title="Neste-ikon" aria-hidden />
                         </button>
                     </li>
                 )}
