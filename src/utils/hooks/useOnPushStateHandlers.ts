@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { logPageView } from '../analytics/amplitude';
 import { startTaskAnalyticsSurveys } from '../analytics/task-analytics';
@@ -30,7 +29,7 @@ export const useOnPushStateHandlers = () => {
             startTaskAnalyticsSurveys({ currentAudience: arbeidsflate, currentLanguage: language });
             setLastPathname(window.location.pathname);
         }
-    }, [innloggingsstatus, isInitialPageview]);
+    }, [innloggingsstatus, isInitialPageview, arbeidsflate, language, PARAMS]);
 
     // Run on SPA navigation
     useEffect(() => {
@@ -57,5 +56,5 @@ export const useOnPushStateHandlers = () => {
         return () => {
             window.history.pushState = pushStateActual;
         };
-    }, [lastPathname, isInitialPageview]);
+    }, [lastPathname, isInitialPageview, innloggingsstatus, arbeidsflate, language, PARAMS]);
 };
