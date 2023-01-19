@@ -10,8 +10,8 @@ type UrlRule = {
 type SurveyConfig = {
     id: string;
     urls?: UrlRule[];
-    audiences?: MenuValue[];
-    languages?: Locale[];
+    audience?: MenuValue[];
+    language?: Locale[];
 };
 
 let fetchedSurveys: SurveyConfig[] | null = null;
@@ -27,7 +27,7 @@ const isMatchingUrl = (url: string, currentUrl: string, match: UrlRule['match'])
     match === 'startsWith' ? currentUrl.startsWith(url) : currentUrl === url;
 
 const isMatchingSurvey = (survey: SurveyConfig, currentLanguage: Locale, currentAudience: MenuValue): boolean => {
-    const { id, urls, audiences, languages } = survey;
+    const { id, urls, audience, language } = survey;
 
     if (!id) {
         console.log('No survey id specified!');
@@ -61,11 +61,11 @@ const isMatchingSurvey = (survey: SurveyConfig, currentLanguage: Locale, current
         }
     }
 
-    if (audiences && !audiences.some((audience) => audience === currentAudience)) {
+    if (audience && !audience.some((audience) => audience === currentAudience)) {
         return false;
     }
 
-    if (languages && !languages.some((language) => language === currentLanguage)) {
+    if (language && !language.some((language) => language === currentLanguage)) {
         return false;
     }
 
