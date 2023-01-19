@@ -56,7 +56,7 @@ const run = () => {
         .then((environment) => {
             const { APP_URL } = environment;
 
-            initAnalytics(APP_URL);
+            initAnalytics();
             injectHeadTags(APP_URL);
 
             const store = createStore(environment);

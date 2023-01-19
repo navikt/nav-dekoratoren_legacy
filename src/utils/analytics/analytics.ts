@@ -20,9 +20,9 @@ export type AnalyticsEventArgs = {
     lenkegruppe?: string;
 };
 
-export const initAnalytics = (APP_URL: string) => {
+export const initAnalytics = () => {
     initAmplitude();
-    initTaskAnalytics(APP_URL);
+    initTaskAnalytics();
 };
 
 export const analyticsEvent = (props: AnalyticsEventArgs) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { logPageView } from '../analytics/amplitude';
-import { startTaskAnalyticsSurveys } from '../analytics/task-analytics';
+import { startTaskAnalyticsSurvey } from '../analytics/task-analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../store/reducers';
 
@@ -11,21 +11,26 @@ const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
     language: state.language.language,
     environment: state.environment,
+    appUrl: state.environment.APP_URL,
 });
 
 // Run functions on navigating in SPAs
 export const useOnPushStateHandlers = () => {
     const [currentPathname, setCurrentPathname] = useState('');
-    const { innloggingsstatus, environment, language, arbeidsflate } = useSelector(stateSelector);
+    const { innloggingsstatus, environment, language, arbeidsflate, appUrl } = useSelector(stateSelector);
     const { PARAMS } = environment;
 
     // Run functions on initial load
     useEffect(() => {
+        if (currentPathname) {
+            return;
+        }
+
         const { status } = innloggingsstatus;
-        if ((status === 'OK' || status === 'FEILET') && !currentPathname) {
+        if (status === 'OK' || status === 'FEILET') {
             setCurrentPathname(window.location.pathname);
         }
-    }, [innloggingsstatus, arbeidsflate, language, PARAMS]);
+    }, [currentPathname, innloggingsstatus]);
 
     // Run on SPA navigation
     useEffect(() => {
@@ -58,6 +63,6 @@ export const useOnPushStateHandlers = () => {
         }
 
         logPageView(PARAMS, innloggingsstatus);
-        startTaskAnalyticsSurveys({ currentAudience: arbeidsflate, currentLanguage: language });
+        startTaskAnalyticsSurvey(appUrl, arbeidsflate, language);
     }, [currentPathname]);
 };
