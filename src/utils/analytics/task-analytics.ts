@@ -37,7 +37,7 @@ const isMatchingSurvey = (survey: TaSurveyConfig, currentLanguage: Locale, curre
     if (urls) {
         const currentUrl = removeTrailingSlash(`${window.location.origin}${window.location.pathname}`);
 
-        let isMatched = false;
+        let isMatched: boolean | null = null;
         let isExcluded = false;
 
         urls.every((urlRule) => {
@@ -53,12 +53,16 @@ const isMatchingSurvey = (survey: TaSurveyConfig, currentLanguage: Locale, curre
                 } else {
                     isMatched = true;
                 }
+            } else if (!exclude) {
+                // If there was a previous match, keep the true value
+                // This handles the case where the url-array contains only excluded urls
+                isMatched = isMatched || false;
             }
 
             return true;
         });
 
-        if (isExcluded || !isMatched) {
+        if (isExcluded || isMatched === false) {
             console.log(`No matching urls for ${id}`);
             return false;
         }
