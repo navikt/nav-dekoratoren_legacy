@@ -45,6 +45,8 @@ const isMatchingSurvey = (survey: TaSurveyConfig, currentLanguage: Locale, curre
             const urlToMatch = removeTrailingSlash(url);
 
             if (isMatchingUrl(urlToMatch, currentUrl, match)) {
+                // If the url is excluded we can stop. If not, we need to continue checking the url-array, in case
+                // there are exclusions in the rest of the array
                 if (exclude) {
                     isExcluded = true;
                     return false;
