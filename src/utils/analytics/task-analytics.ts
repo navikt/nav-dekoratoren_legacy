@@ -30,7 +30,7 @@ const isMatchingSurvey = (survey: TaSurveyConfig, currentLanguage: Locale, curre
     const { id, urls, audience, language } = survey;
 
     if (!id) {
-        console.log('No survey id specified!');
+        console.log('No TA survey id specified!');
         return false;
     }
 
@@ -63,18 +63,15 @@ const isMatchingSurvey = (survey: TaSurveyConfig, currentLanguage: Locale, curre
         });
 
         if (isExcluded || isMatched === false) {
-            console.log(`No matching urls for ${id}`);
             return false;
         }
     }
 
     if (audience && !audience.some((audience) => audience === currentAudience)) {
-        console.log(`No matching audience for ${id}`);
         return false;
     }
 
     if (language && !language.some((language) => language === currentLanguage)) {
-        console.log(`No matching language for ${id}`);
         return false;
     }
 
@@ -82,8 +79,6 @@ const isMatchingSurvey = (survey: TaSurveyConfig, currentLanguage: Locale, curre
 };
 
 const startMatchingSurvey = (surveys: TaSurveyConfig[], currentAudience: MenuValue, currentLanguage: Locale) => {
-    console.log(surveys, currentAudience, currentLanguage);
-
     const matchingSurveys = surveys.filter((survey) => isMatchingSurvey(survey, currentLanguage, currentAudience));
 
     if (matchingSurveys.length === 0) {
