@@ -1,6 +1,8 @@
 import { RequestHandler } from 'express';
 import fs from 'fs';
 
+// To mock this locally, create the file /config/ta-config.json on the project root
+
 const readTaConfig = () => {
     try {
         const taConfigFile = fs.readFileSync(`${process.cwd()}/config/ta-config.json`);
