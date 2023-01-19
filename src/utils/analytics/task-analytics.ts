@@ -7,14 +7,14 @@ type UrlRule = {
     exclude?: boolean;
 };
 
-type SurveyConfig = {
+export type TaSurveyConfig = {
     id: string;
     urls?: UrlRule[];
     audience?: MenuValue[];
     language?: Locale[];
 };
 
-let fetchedSurveys: SurveyConfig[] | null = null;
+let fetchedSurveys: TaSurveyConfig[] | null = null;
 
 const taFallback = (...args: any[]) => {
     TA.q = TA.q || [];
@@ -26,7 +26,7 @@ const removeTrailingSlash = (str: string) => str.replace(/\/$/, '');
 const isMatchingUrl = (url: string, currentUrl: string, match: UrlRule['match']) =>
     match === 'startsWith' ? currentUrl.startsWith(url) : currentUrl === url;
 
-const isMatchingSurvey = (survey: SurveyConfig, currentLanguage: Locale, currentAudience: MenuValue): boolean => {
+const isMatchingSurvey = (survey: TaSurveyConfig, currentLanguage: Locale, currentAudience: MenuValue): boolean => {
     const { id, urls, audience, language } = survey;
 
     if (!id) {
@@ -72,7 +72,7 @@ const isMatchingSurvey = (survey: SurveyConfig, currentLanguage: Locale, current
     return true;
 };
 
-const startMatchingSurvey = (surveys: SurveyConfig[], currentAudience: MenuValue, currentLanguage: Locale) => {
+const startMatchingSurvey = (surveys: TaSurveyConfig[], currentAudience: MenuValue, currentLanguage: Locale) => {
     console.log(surveys);
 
     const matchingSurveys = surveys.filter((survey) => isMatchingSurvey(survey, currentLanguage, currentAudience));
