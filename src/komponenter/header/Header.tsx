@@ -68,7 +68,7 @@ export const Header = () => {
 
     const [cookies, setCookie] = useCookies();
 
-    useOnPushStateHandlers(PARAMS, innloggingsstatus);
+    useOnPushStateHandlers();
 
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {
