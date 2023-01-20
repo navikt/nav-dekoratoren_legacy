@@ -117,7 +117,7 @@ export const startTaskAnalyticsSurvey = (appUrl: string, currentAudience: MenuVa
     }
 };
 
-export const initTaskAnalytics = async () => {
+export const initTaskAnalytics = () => {
     window.TA = window.TA || taFallback;
     window.dataLayer = window.dataLayer || [];
 };
