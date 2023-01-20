@@ -21,8 +21,8 @@ type Props = {
 export const Varselvisning = ({ setKbId }: Props) => {
     const { varsler, minSideUrl } = useSelector(stateSelector);
 
-    const antallVarsler = varsler?.oppgaver.length + varsler?.beskjeder.length;
-    const isTomListe = !varsler || antallVarsler === 0;
+    const antallVarsler = varsler ? varsler.oppgaver.length + varsler.beskjeder.length : 0;
+    const isTomListe = antallVarsler === 0;
 
     return (
         <div className={isTomListe ? 'varsler-visning-tom' : 'varsler-visning'}>
