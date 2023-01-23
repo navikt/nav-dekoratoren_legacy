@@ -33,8 +33,6 @@ const SprakVelgerItem = (props: Props) => {
 
     const isItemSelected = selectedItem?.locale === item.locale;
 
-    console.log(itemProps);
-
     return (
         <li style={inlineStyle} className={style.menuList}>
             <button {...itemProps} className={style.option}>
