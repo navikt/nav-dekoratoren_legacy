@@ -27,22 +27,22 @@ const SprakVelgerItem = (props: Props) => {
                   backgroundColor: 'white',
                   color: 'black',
               };
+
+    delete itemProps['aria-selected'];
+    delete itemProps.role;
+
+    const isItemSelected = selectedItem?.locale === item.locale;
+
+    console.log(itemProps);
+
     return (
-        <li {...itemProps} style={inlineStyle} className={style.menuList}>
-            {selectedItem?.locale === item.locale ? (
-                <div className={style.option}>
-                    <Bilde asset={Cicle} className={style.sirkel} />
-                    <BodyShort size="small" lang={item.locale}>
-                        {item.label}
-                    </BodyShort>
-                </div>
-            ) : (
-                <BodyShort size="small" className={style.option}>
-                    <span lang={item.locale} className="not-selected">
-                        {item.label}
-                    </span>
+        <li style={inlineStyle} className={style.menuList}>
+            <button {...itemProps} className={style.option}>
+                {isItemSelected && <Bilde asset={Cicle} className={style.sirkel} />}
+                <BodyShort as="span" size="small" lang={item.locale} className={!isItemSelected && style.notSelected}>
+                    {item.label}
                 </BodyShort>
-            )}
+            </button>
         </li>
     );
 };

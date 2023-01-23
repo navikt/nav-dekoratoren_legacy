@@ -98,9 +98,12 @@ export const template = (req: Request) => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-            }  
-            .decorator-utils-container {
+            }
+            ${
+                env.ENV !== 'localhost' &&
+                `.decorator-utils-container {
                 display: none !important;
+            }`
             }
             </style>
         </head>

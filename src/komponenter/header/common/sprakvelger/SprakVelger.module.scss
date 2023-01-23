@@ -47,12 +47,16 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    border: 0;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
 
     svg {
         margin-right: 0.1rem;
     }
 
-    .not-selected {
+    .notSelected {
         margin-left: 1.25rem;
     }
 }
@@ -82,4 +86,8 @@
     &:not(:last-child) {
         border-bottom: 0;
     }
+}
+
+.screenReaderOnly {
+    display: none;
 }

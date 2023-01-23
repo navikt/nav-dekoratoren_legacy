@@ -12,6 +12,7 @@ import { postMessageToApp } from 'utils/messages';
 import { useCookies } from 'react-cookie';
 import { useSelector, useStore } from 'react-redux';
 import { AppState } from 'store/reducers';
+import Tekst from 'tekster/finn-tekst';
 import { Bilde } from '../../../common/bilde/Bilde';
 import SprakVelgerItem from './SprakVelgerItem';
 import style from 'komponenter/header/common/sprakvelger/SprakVelger.module.scss';
@@ -20,8 +21,6 @@ export const farger = {
     navGra20: '#C6C2BF',
     navBla: '#0067C5',
 };
-
-const selectorLabel = 'Språk/Language';
 
 export type LocaleOption = AvailableLanguage & { label: string };
 
@@ -78,16 +77,24 @@ export const SprakVelger = (props: Props) => {
     return (
         <div className={style.container}>
             <nav className={style.sprakvelger}>
-                <button {...buttonProps} className={`${style.knapp} skjemaelement__input`} type="button">
-                    <span className={style.knappTekst}>
+                <div id="languagePickerDescription" lang="nb-NO" className={style.screenReaderOnly}>
+                    <Tekst id={'velg-sprak-fra-listen'} />
+                </div>
+                <button
+                    {...buttonProps}
+                    className={`${style.knapp} skjemaelement__input`}
+                    type="button"
+                    aria-labelledby="languagePickerDescription"
+                >
+                    <div className={style.knappTekst}>
                         <Bilde asset={Globe} className={style.ikon} />
                         <BodyShort size="small" as={'span'}>
-                            {selectorLabel}
+                            <span lang="no">Språk</span>/<span lang="en">Language</span>
                         </BodyShort>
-                    </span>
+                    </div>
                     <Expand className={style.chevronNed} aria-hidden />
                 </button>
-                <ul {...menuProps} className={style.menu} style={ulStyle}>
+                <ul {...menuProps} className={style.menu} style={ulStyle} aria-labelledby="languagePickerDescription">
                     <>
                         {options.map((item, index) => (
                             <SprakVelgerItem
