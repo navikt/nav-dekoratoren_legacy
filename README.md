@@ -183,6 +183,10 @@ Logging med dekoratørens Amplitude-klient eksponeres via funksjonen `window.dek
 
 [nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler) har en hjelpefunksjon for å benytte denne.
 
+## Oppsett av Task Analytics undersøkelser
+
+Se [nav-dekoratoren-config](https://github.com/navikt/nav-dekoratoren-config)
+
 ## Oppstart via docker-compose
 
 Start **navikt/nav-dekoratoren**, **navikt/pb-nav-mocked**, **navikt/stub-oidc-provider** og **navikt/pb-oidc-provider-gui**. Oppsettet vil replikere innlogging og eksterne avhengigheter som varselinnboks.

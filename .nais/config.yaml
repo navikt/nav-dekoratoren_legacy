@@ -11,10 +11,8 @@ spec:
   port: 8088
   liveness:
     path: {{appPath}}/isAlive
-    initialDelay: 10
   readiness:
     path: {{appPath}}/isReady
-    initialDelay: 10
   prometheus:
     enabled: true
     path: {{appPath}}/metrics
@@ -40,6 +38,9 @@ spec:
   {{/each}}
   envFrom:
     - secret: nav-dekoratoren
+  filesFrom:
+    - configmap: dekoratoren-config
+      mountPath: /app/config
   resources:
     limits:
       cpu: '3'
