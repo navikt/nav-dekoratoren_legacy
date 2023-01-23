@@ -41,7 +41,10 @@ export const Varselvisning = ({ setKbId }: Props) => {
             ) : (
                 <VarselListe varsler={varsler} rowIndex={setKbId ? 0 : undefined} />
             )}
-            <AlleVarslerLenke varselInnboksUrl={`${minSideUrl}varslinger`} rowIndex={setKbId ? 1 : undefined} />
+            <AlleVarslerLenke
+                tidligereVarslerUrl={`${minSideUrl}tidligere-varsler`}
+                rowIndex={setKbId ? 1 : undefined}
+            />
         </div>
     );
 };
