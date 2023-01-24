@@ -23,12 +23,16 @@ body.no-scroll-mobil {
     color: initial;
     background-color: white;
     line-height: normal;
+    width: 100%;
+
+    ul {
+        list-style: none;
+    }
 }
 
 .siteheader {
     position: relative;
     z-index: 1000;
-    width: 100%;
 }
 
 .header-z-wrapper {
@@ -40,15 +44,6 @@ body.no-scroll-mobil {
 .arbeidsflate {
     @media (max-width: 1200px) {
         display: none;
-    }
-}
-
-.siteheader,
-.sitefooter {
-    width: 100%;
-
-    ul {
-        list-style: none;
     }
 }
 
