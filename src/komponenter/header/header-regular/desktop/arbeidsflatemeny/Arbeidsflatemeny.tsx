@@ -32,8 +32,8 @@ const Arbeidsflatemeny = () => {
     const { language } = useSelector((state: AppState) => state.language);
 
     return (
-        <div className={'arbeidsflate'} id={'arbeidsflate'} aria-label="Velg brukergruppe">
-            <ul className={style.toppListeRad}>
+        <div className={'arbeidsflate'} id={'arbeidsflate'}>
+            <ul className={style.toppListeRad} aria-label="Velg brukergruppe" role="menubar">
                 {arbeidsflateLenker(XP_BASE_URL).map((lenke, index) => {
                     return (
                         <li
@@ -42,6 +42,7 @@ const Arbeidsflatemeny = () => {
                             key={lenke.key}
                         >
                             <LenkeMedSporing
+                                role="menuitem"
                                 classNameOverride={classNames(
                                     style.lenke,
                                     arbeidsflate === lenke.key ? style.lenkeActive : ''
