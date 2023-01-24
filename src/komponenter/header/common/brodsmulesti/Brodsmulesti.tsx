@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { LenkeMedSporing } from '../../../common/lenke-med-sporing/LenkeMedSporing';
@@ -88,14 +89,17 @@ export const Brodsmulesti = (props: Props) => {
                     <li>
                         <button
                             aria-label={finnTekst('brodsmulesti-se-alle', language)}
-                            className={`${style.iconViewAll} `}
+                            className={style.iconViewAll}
                             onClick={(e) => {
                                 e.preventDefault();
                                 setShowAll(true);
                             }}
                         >
-                            <span className={`${style.iconEllipsis} lenke`}>...</span>
-                            <Next className={`${style.iconShowAll} lenke`} title="Neste-ikon" aria-hidden />
+                            <Link>
+                                {' '}
+                                <span className={style.iconEllipsis}>...</span>
+                                <Next className={style.iconShowAll} title="Neste-ikon" aria-hidden />
+                            </Link>
                         </button>
                     </li>
                 )}
