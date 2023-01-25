@@ -1,5 +1,6 @@
 import { MenuValue } from '../meny-storage-utils';
 import { Locale } from '../../store/reducers/language-duck';
+import { AppState } from '../../store/reducers';
 
 type UrlRule = {
     url: string;
@@ -78,7 +79,17 @@ const isMatchingSurvey = (survey: TaSurveyConfig, currentLanguage: Locale, curre
     return true;
 };
 
-const startMatchingSurvey = (surveys: TaSurveyConfig[], currentAudience: MenuValue, currentLanguage: Locale) => {
+const startMatchingSurvey = (surveys: TaSurveyConfig[], state: AppState) => {
+    const { arbeidsflate, language, environment } = state;
+
+    // Do not show surveys if the simple header is used
+    if (environment.PARAMS.SIMPLE || environment.PARAMS.SIMPLE_HEADER) {
+        return;
+    }
+
+    const { status: currentAudience } = arbeidsflate;
+    const { language: currentLanguage } = language;
+
     const matchingSurveys = surveys.filter((survey) => isMatchingSurvey(survey, currentLanguage, currentAudience));
 
     if (matchingSurveys.length === 0) {
@@ -92,9 +103,9 @@ const startMatchingSurvey = (surveys: TaSurveyConfig[], currentAudience: MenuVal
     window.TA('start', id);
 };
 
-export const startTaskAnalyticsSurvey = (appUrl: string, currentAudience: MenuValue, currentLanguage: Locale) => {
+export const startTaskAnalyticsSurvey = (appUrl: string, state: AppState) => {
     if (fetchedSurveys) {
-        startMatchingSurvey(fetchedSurveys, currentAudience, currentLanguage);
+        startMatchingSurvey(fetchedSurveys, state);
     } else {
         fetch(`${appUrl}/api/ta`)
             .then((res) => {
@@ -109,7 +120,7 @@ export const startTaskAnalyticsSurvey = (appUrl: string, currentAudience: MenuVa
                     throw Error(`Invalid type for surveys response - ${JSON.stringify(surveys)}`);
                 }
                 fetchedSurveys = surveys;
-                startMatchingSurvey(surveys, currentAudience, currentLanguage);
+                startMatchingSurvey(surveys, state);
             })
             .catch((e) => {
                 console.error(`Error fetching Task Analytics surveys - ${e}`);
