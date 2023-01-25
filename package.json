@@ -158,7 +158,7 @@
         "prettier": "2.7.1",
         "sass": "1.55.0",
         "sass-loader": "13.0.2",
-        "svgo-loader": "2.2.2",
+        "svgo-loader": "^4.0.0",
         "ts-loader": "^8.0.14",
         "typescript": "4.9.4",
         "webpack": "5.74.0",
