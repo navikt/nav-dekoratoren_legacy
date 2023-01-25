@@ -25,7 +25,7 @@ export const Varselvisning = ({ setKbId }: Props) => {
     const isTomListe = antallVarsler === 0;
 
     return (
-        <div className={isTomListe ? 'varsler-visning-tom' : 'varsler-visning'}>
+        <div className={isTomListe ? 'varsler-visning-tom' : 'varsler-visning'} data-hj-suppress={true}>
             {isTomListe ? (
                 <>
                     <div className={'varsler-visning-tom-liste'}>
