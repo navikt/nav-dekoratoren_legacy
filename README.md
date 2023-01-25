@@ -114,31 +114,31 @@ Alt 2 - Sett inn noen linjer HTML:
 
 Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
 
-| Parameter          | Type                                              | Default          | Forklaring                                                                     |
-| ------------------ | ------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------ |
-| context            | privatperson / arbeidsgiver / samarbeidspartner   | privatperson     | Setter menyen til definert kontekst                                            |
-| simple             | boolean                                           | false            | Viser en forenklet header og footer                                            |
-| simpleHeader       | boolean                                           | false            | Viser en forenklet header                                                      |
-| simpleFooter       | boolean                                           | false            | Viser en forenklet footer                                                      |
-| enforceLogin       | boolean                                           | false            | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]     |
-| redirectToApp      | boolean                                           | false (ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2] |
-| redirectToUrl      | string                                            | undefined        | Sender brukeren til denne url'en etter innlogging via dekoratøren [2]          |
-| level              | Level3 / Level4                                   | Level3           | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]             |
-| language           | nb / nn / en / se / pl                            | nb               | Setter språket til dekoratøren ved server side rendering [3]                   |
-| availableLanguages | [{ locale: nb / nn / en / se / pl, url: string }] | [ ]              | Setter alternativene til språkvelgeren ved server side rendering [4]           |
-| breadcrumbs        | [{ title: string, url: string }]                  | [ ]              | Setter brødsmulestien for server side rendering [5]                            |
-| utilsBackground    | white / gray / transparent                        | transparent      | Setter bakgrunnsfargen på containeren til brødsmulesti og språkvelger          |
-| feedback           | boolean                                           | false            | Skjuler eller viser tilbakemeldingskomponenten                                 |
-| chatbot            | boolean                                           | true             | Aktiverer eller deaktiverer Chatbot Frida [6]                                  |
-| chatbotVisible     | boolean                                           | false            | Skjuler eller viser Chatbot Frida [7]                                          |
-| urlLookupTable     | boolean                                           | true             | Aktiverer eller deaktiverer url-lookup-table [8]                               |
-| shareScreen        | boolean                                           | true             | Aktiverer eller deaktiverer skjermdelingskomponent                             |
-| logoutUrl          | string                                            | undefined        | Setter url for logg-ut knappen [9]                                             |
+| Parameter          | Type                                                   | Default          | Forklaring                                                                     |
+| ------------------ | ------------------------------------------------------ | ---------------- | ------------------------------------------------------------------------------ |
+| context            | privatperson / arbeidsgiver / samarbeidspartner        | privatperson     | Setter menyen til definert kontekst                                            |
+| simple             | boolean                                                | false            | Viser en forenklet header og footer                                            |
+| simpleHeader       | boolean                                                | false            | Viser en forenklet header                                                      |
+| simpleFooter       | boolean                                                | false            | Viser en forenklet footer                                                      |
+| enforceLogin       | boolean                                                | false            | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]     |
+| redirectToApp      | boolean                                                | false (ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2] |
+| redirectToUrl      | string                                                 | undefined        | Sender brukeren til denne url'en etter innlogging via dekoratøren [2]          |
+| level              | Level3 / Level4                                        | Level3           | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]             |
+| language           | nb / nn / en / se / pl                                 | nb               | Setter språket til dekoratøren ved server side rendering [3]                   |
+| availableLanguages | [{ locale: nb / nn / en / se / pl, url: string }]      | [ ]              | Setter alternativene til språkvelgeren ved server side rendering [4]           |
+| breadcrumbs        | [{ title: string, url: string, handleInApp?: string }] | [ ]              | Setter brødsmulestien for server side rendering [5]                            |
+| utilsBackground    | white / gray / transparent                             | transparent      | Setter bakgrunnsfargen på containeren til brødsmulesti og språkvelger          |
+| feedback           | boolean                                                | false            | Skjuler eller viser tilbakemeldingskomponenten                                 |
+| chatbot            | boolean                                                | true             | Aktiverer eller deaktiverer Chatbot Frida [6]                                  |
+| chatbotVisible     | boolean                                                | false            | Skjuler eller viser Chatbot Frida [7]                                          |
+| urlLookupTable     | boolean                                                | true             | Aktiverer eller deaktiverer url-lookup-table [8]                               |
+| shareScreen        | boolean                                                | true             | Aktiverer eller deaktiverer skjermdelingskomponent                             |
+| logoutUrl          | string                                                 | undefined        | Setter url for logg-ut knappen [9]                                             |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
 [3] Språk settes automatisk client-side dersom nåværende url inneholder **/nb/**, **/nn/**, **/en/**, **/se/**, uavhengig av dette parameteret. <br>
-[4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
+[4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme). Dersom du oppgir `handleInApp`, så må du selv håndtere feks route change i applikasjonen din ved klikk i dekoratørmenyen. <br>
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [6] Aktiverer/deaktiverer Chatbot Frida. Dersom dette settes til false, vil chatbot aldri vises på siden, selv om bruker har en aktiv chat-sesjon. <br>
 [7] Viser/skjuler Chatbot Frida. Dersom dette settes til true, vil chatbot alltid vises. Ved false vises chatbot kun når bruker har en aktiv chat-sesjon (med mindre 'chatbot' er satt til false) <br>
@@ -176,6 +176,16 @@ Eksempel 4 - Brødsmulesti:<br>
 Påkrevde CSP-direktiver for dekoratøren serveres på [https://www.nav.no/dekoratoren/api/csp](https://www.nav.no/dekoratoren/api/csp). Se også [csp.ts](https://github.com/navikt/nav-dekoratoren/blob/master/src/csp.ts). <br>
 
 [nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler) kan benyttes for å generere en CSP-header som er kompatibel med dekoratøren.
+
+## Amplitude-klient
+
+Logging med dekoratørens Amplitude-klient eksponeres via funksjonen `window.dekoratorenAmplitude`. Se [logEventFromApp](https://github.com/navikt/nav-dekoratoren/blob/master/src/utils/analytics/amplitude.ts) for implementasjon. <br>
+
+[nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler) har en hjelpefunksjon for å benytte denne.
+
+## Oppsett av Task Analytics undersøkelser
+
+Se [nav-dekoratoren-config](https://github.com/navikt/nav-dekoratoren-config)
 
 ## Oppstart via docker-compose
 

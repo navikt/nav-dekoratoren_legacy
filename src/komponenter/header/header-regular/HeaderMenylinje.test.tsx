@@ -60,7 +60,7 @@ describe('<HeaderMenylinje>', () => {
         });
 
         expect(screen.queryByText(finnTekst('logg-ut-knapp', Locale.BOKMAL))).toBeTruthy();
-        expect(screen.queryAllByText(finnTekst('varsler-tittel', Locale.BOKMAL))).toHaveLength(2);
+        expect(screen.queryAllByText(finnTekst('varsler-tittel', Locale.BOKMAL))).toHaveLength(1);
         expect(screen.queryByTestId('minside-meny')).toBeTruthy();
     });
 

@@ -2,7 +2,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 const nodeExternals = require('webpack-node-externals');
@@ -19,12 +18,7 @@ const prefixExclusions = [
     '.decorator-wrapper',
 ];
 
-const prefixExclusionsDsCss = [
-    '.decorator-wrapper',
-    /^\.navds-modal(:|--|$)/,
-    /^\.navds-modal__overlay/,
-    /^\.ReactModal/,
-];
+const prefixExclusionsDsCss = ['.decorator-wrapper'];
 
 const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
@@ -199,9 +193,6 @@ const commonConfig = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             'process.env.BROWSER': JSON.stringify(false),
-        }),
-        new SpriteLoaderPlugin({
-            plainSprite: true,
         }),
     ],
     optimization: {

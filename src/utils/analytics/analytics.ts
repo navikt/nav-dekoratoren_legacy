@@ -1,13 +1,7 @@
-import TagManager from 'react-gtm-module';
 import { MenuValue } from '../meny-storage-utils';
 import { initAmplitude } from 'utils/analytics/amplitude';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
-import { Params } from 'store/reducers/environment-duck';
-
-const tagManagerArgs = {
-    gtmId: 'GTM-PM9RP3',
-    dataLayerName: 'dataLayer',
-};
+import { initTaskAnalytics } from './task-analytics';
 
 export enum AnalyticsCategory {
     Header = 'dekorator-header',
@@ -26,9 +20,9 @@ export type AnalyticsEventArgs = {
     lenkegruppe?: string;
 };
 
-export const initAnalytics = (params: Params) => {
-    TagManager.initialize(tagManagerArgs);
+export const initAnalytics = () => {
     initAmplitude();
+    initTaskAnalytics();
 };
 
 export const analyticsEvent = (props: AnalyticsEventArgs) => {
@@ -42,13 +36,5 @@ export const analyticsEvent = (props: AnalyticsEventArgs) => {
         kategori: category,
         komponent: komponent || action,
         lenkegruppe,
-    });
-
-    TagManager.dataLayer({
-        dataLayer: {
-            event: category,
-            action: actionFinal.toLowerCase(),
-            data: label || undefined,
-        },
     });
 };

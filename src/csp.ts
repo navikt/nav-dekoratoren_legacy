@@ -1,57 +1,57 @@
 import { CSPDirectives, UNSAFE_EVAL, UNSAFE_INLINE, BLOB, DATA } from 'csp-header';
 
-const navno = '*.nav.no';
+const navNo = '*.nav.no';
+const cdnNavNo = 'cdn.nav.no';
+
 const vergicScreenSharing = '*.psplugin.com';
-const vergicDotCom = 'www.vergic.com'; // seems to only be used for a single unused image
+const vergicDotCom = 'www.vergic.com'; // seems to only be used for a single placeholder image
 const boostChatbot = '*.boost.ai';
 const vimeoPlayer = 'player.vimeo.com'; // used for inline videos in the chat client
 const qbrick = 'video.qbrick.com'; // used for inline videos in the chat client
 const vimeoCdn = '*.vimeocdn.com'; // used for video preview images
 
-const googleAnalytics = '*.google-analytics.com';
-const googleTagManager = '*.googletagmanager.com';
 const hotjarCom = '*.hotjar.com';
 const hotjarIo = '*.hotjar.io';
 const taskAnalytics = '*.taskanalytics.com';
-const navCdn = 'https://cdn.nav.no';
 
 const styleSrc = [
-    navno,
+    navNo,
     vergicScreenSharing,
     UNSAFE_INLINE, // chatbot (styled-components) and some of our own components with style-attributes
 ];
 
 const scriptSrc = [
-    navno,
+    navNo,
     vergicScreenSharing,
-    googleTagManager,
-    googleAnalytics,
     hotjarCom,
     taskAnalytics,
     UNSAFE_INLINE, // GTM
 ];
 
+const workerSrc = [
+    BLOB, // vergic
+];
+
 const directives: Partial<CSPDirectives> = {
-    'default-src': [navno],
+    'default-src': [navNo],
     'script-src': [
         ...scriptSrc,
         UNSAFE_EVAL, // vergic
     ],
     'script-src-elem': scriptSrc,
-    'worker-src': [
-        BLOB, // vergic
-    ],
+    'worker-src': workerSrc,
+    'child-src': workerSrc, // for browsers lacking support for worker-src
     'style-src': styleSrc,
     'style-src-elem': styleSrc,
     'font-src': [
         vergicScreenSharing,
         hotjarCom,
-        navCdn,
+        cdnNavNo,
         DATA, // ds-css
     ],
-    'img-src': [navno, vergicScreenSharing, googleAnalytics, vimeoCdn, hotjarCom, googleTagManager, vergicDotCom],
-    'frame-src': [hotjarCom, googleTagManager, vimeoPlayer, qbrick],
-    'connect-src': [navno, boostChatbot, vergicScreenSharing, googleAnalytics, hotjarCom, hotjarIo, taskAnalytics],
+    'img-src': [navNo, vergicScreenSharing, vimeoCdn, hotjarCom, vergicDotCom],
+    'frame-src': [hotjarCom, vimeoPlayer, qbrick],
+    'connect-src': [navNo, boostChatbot, vergicScreenSharing, hotjarCom, hotjarIo, taskAnalytics],
 };
 
 const localDirectives = Object.entries(directives).reduce((acc, [key, value]) => {

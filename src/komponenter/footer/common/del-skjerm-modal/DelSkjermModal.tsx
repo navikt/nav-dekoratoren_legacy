@@ -64,6 +64,8 @@ const DelSkjermModal = (props: Props) => {
         }
     };
 
+    const parent = document.getElementById('decorator-footer-inner');
+
     return (
         <Modal
             open={props.isOpen}
@@ -72,6 +74,7 @@ const DelSkjermModal = (props: Props) => {
             aria-label={'Skjermdeling'}
             onClose={props.onClose}
             style={{ overlay: { backgroundColor: 'rgba(50, 65, 79, 0.8)' } }}
+            parentSelector={parent ? () => parent : undefined}
         >
             <div className={style.header}>
                 <Bilde className={style.veileder} asset={veileder} altText={''} />

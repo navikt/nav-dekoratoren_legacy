@@ -1,3 +1,5 @@
+import { hotjarInlineScript } from './utils/analytics/hotjar';
+
 const faviconIco = require('ikoner/favicon/favicon.ico');
 const faviconSvg = require('ikoner/favicon/favicon.svg');
 const appleTouchIcon = require('ikoner/favicon/apple-touch-icon.png');
@@ -10,6 +12,7 @@ require('ikoner/favicon/android-chrome-512x512.png');
 type Tag = {
     tag: string;
     attribs: Record<string, string>;
+    body?: string;
 };
 
 const getTagsData = (appUrl: string): Tag[] => [
@@ -53,6 +56,20 @@ const getTagsData = (appUrl: string): Tag[] => [
             crossorigin: 'true',
         },
     },
+    {
+        tag: 'script',
+        attribs: {
+            async: '',
+            src: 'https://in2.taskanalytics.com/tm.js',
+        },
+    },
+    {
+        tag: 'script',
+        attribs: {
+            id: 'hj-inline',
+        },
+        body: hotjarInlineScript,
+    },
 ];
 
 export const injectHeadTags = (appUrl: string) => {
@@ -61,7 +78,7 @@ export const injectHeadTags = (appUrl: string) => {
         return;
     }
 
-    getTagsData(appUrl).forEach(({ tag, attribs }) => {
+    getTagsData(appUrl).forEach(({ tag, attribs, body }) => {
         const attribsEntries = Object.entries(attribs);
 
         const selector = attribsEntries.reduce((acc, [key, value]) => {
@@ -77,6 +94,10 @@ export const injectHeadTags = (appUrl: string) => {
         attribsEntries.forEach(([key, value]) => {
             element.setAttribute(key, value);
         });
+
+        if (body) {
+            element.textContent = body;
+        }
 
         document.head.appendChild(element);
     });

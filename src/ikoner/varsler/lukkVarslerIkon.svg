@@ -1,0 +1,21 @@
+<svg
+    width="17"
+    height="16"
+    viewBox="0 0 17 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+>
+    <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M14.7929 15.4142L0.792937 1.41421L2.20715 6.18174e-08L16.2071 14L14.7929 15.4142Z"
+        fill="#0067C5"
+    />
+    <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M0.792908 14L14.7929 0L16.2071 1.41421L2.20712 15.4142L0.792908 14Z"
+        fill="#0067C5"
+    />
+</svg>

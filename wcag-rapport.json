@@ -1,0 +1,1345 @@
+{
+    "@context": {
+        "reporter": "http://github.com/w3c/wai-wcag-em-report-tool/",
+        "wcagem": "http://www.w3.org/TR/WCAG-EM/#",
+        "Evaluation": "wcagem:procedure",
+        "defineScope": "wcagem:step1",
+        "scope": "wcagem:step1a",
+        "step1b": { "@id": "wcagem:step1b", "@type": "@id" },
+        "conformanceTarget": "step1b",
+        "accessibilitySupportBaseline": "wcagem:step1c",
+        "additionalEvaluationRequirements": "wcagem:step1d",
+        "exploreTarget": "wcagem:step2",
+        "essentialFunctionality": "wcagem:step2b",
+        "pageTypeVariety": "wcagem:step2c",
+        "technologiesReliedUpon": "wcagem:step2d",
+        "selectSample": "wcagem:step3",
+        "structuredSample": "wcagem:step3a",
+        "randomSample": "wcagem:step3b",
+        "Website": "wcagem:website",
+        "Webpage": "wcagem:webpage",
+        "auditSample": "wcagem:step4",
+        "reportFindings": "wcagem:step5",
+        "documentSteps": "wcagem:step5a",
+        "commissioner": "wcagem:commissioner",
+        "evaluator": "wcagem:evaluator",
+        "evaluationSpecifics": "wcagem:step5b",
+        "WCAG": "http://www.w3.org/TR/WCAG/#",
+        "WCAG20": "http://www.w3.org/TR/WCAG20/#",
+        "WCAG21": "http://www.w3.org/TR/WCAG21/#",
+        "WAI": "http://www.w3.org/WAI/",
+        "A": "WAI:WCAG2A-Conformance",
+        "AA": "WAI:WCAG2AA-Conformance",
+        "AAA": "WAI:WCAG2AAA-Conformance",
+        "wcagVersion": "WAI:standards-guidelines/wcag/#versions",
+        "reportToolVersion": "wcagem:reportToolVersion",
+        "earl": "http://www.w3.org/ns/earl#",
+        "Assertion": "earl:Assertion",
+        "TestMode": "earl:TestMode",
+        "TestCriterion": "earl:TestCriterion",
+        "TestCase": "earl:TestCase",
+        "TestRequirement": "earl:TestRequirement",
+        "TestSubject": "earl:TestSubject",
+        "TestResult": "earl:TestResult",
+        "OutcomeValue": "earl:OutcomeValue",
+        "Pass": "earl:Pass",
+        "Fail": "earl:Fail",
+        "CannotTell": "earl:CannotTell",
+        "NotApplicable": "earl:NotApplicable",
+        "NotTested": "earl:NotTested",
+        "assertedBy": "earl:assertedBy",
+        "mode": "earl:mode",
+        "result": "earl:result",
+        "subject": "earl:subject",
+        "test": "earl:test",
+        "outcome": "earl:outcome",
+        "dcterms": "http://purl.org/dc/terms/",
+        "title": "dcterms:title",
+        "description": "dcterms:description",
+        "summary": "dcterms:summary",
+        "date": "dcterms:date",
+        "hasPart": "dcterms:hasPart",
+        "isPartOf": "dcterms:isPartOf",
+        "id": "@id",
+        "type": "@type",
+        "language": "@language"
+    },
+    "language": "en",
+    "type": "Evaluation",
+    "reportToolVersion": "3.0.3",
+    "defineScope": {
+        "id": "_:defineScope",
+        "scope": { "description": "https://www.nav.no/dekoratoren", "title": "Nav Dekoratøren" },
+        "conformanceTarget": "AA",
+        "accessibilitySupportBaseline": "",
+        "additionalEvaluationRequirements": "",
+        "wcagVersion": "2.1"
+    },
+    "exploreTarget": {
+        "id": "_:exploreTarget",
+        "essentialFunctionality": "",
+        "pageTypeVariety": "",
+        "technologiesReliedUpon": ["HTML", "CSS", "WAI-ARIA", "JavaScript", "SVG"]
+    },
+    "selectSample": {
+        "id": "_:selectSample",
+        "structuredSample": [
+            {
+                "id": "https://www.nav.no/dekoratoren",
+                "type": ["TestSubject", "Webpage"],
+                "date": "2022-10-31T14:37:31.782Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "standard"
+            },
+            {
+                "id": "https://www.nav.no/dekoratoren?simple=true",
+                "type": ["TestSubject", "Webpage"],
+                "date": "2022-11-04T07:10:43.858Z",
+                "description": "https://www.nav.no/dekoratoren?simple=true",
+                "title": "simple"
+            },
+            {
+                "id": "_:subject_4",
+                "type": ["TestSubject", "Webpage"],
+                "date": "2022-11-04T07:11:24.454Z",
+                "description": "",
+                "title": ""
+            }
+        ],
+        "randomSample": []
+    },
+    "auditSample": [
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.478Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T12:30:14.405Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:pointer-cancellation",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.479Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T11:43:32.796Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:link-purpose-in-context",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.479Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T11:54:17.338Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:multiple-ways",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.479Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-14T13:11:11.508Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:labels-or-instructions",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.276Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.479Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T12:04:18.342Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:pointer-gestures",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.480Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T12:32:40.852Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:label-in-name",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.480Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-12-02T09:14:53.354Z",
+                "description": "Når språket er satt til samisk er det fortsatt norsk tekst i footeren, men det er ikke satt en lang=\"no\" for den teksten.",
+                "outcome": { "id": "earl:failed", "type": ["OutcomeValue", "Fail"], "title": "Failed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:language-of-parts",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.276Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.480Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-14T12:46:26.516Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:on-input",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.276Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.480Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-14T12:59:04.835Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:consistent-identification",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.276Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.480Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-14T13:03:58.759Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:error-identification",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.276Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.481Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-14T13:15:33.150Z",
+                "description": "Kan ikke se at det er noen tilfeller der dette ville gitt mening.",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:error-suggestion",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.276Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.481Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-14T13:05:59.440Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:error-prevention-legal-financial-data",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.276Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.481Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-12-02T09:04:49.944Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:status-messages",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.276Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.481Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-01T12:38:09.071Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:captions-prerecorded",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.481Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-01T12:38:15.171Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:audio-description-or-media-alternative-prerecorded",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.481Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-01T12:38:19.256Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:captions-live",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.481Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-01T12:41:54.601Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:audio-description-prerecorded",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.481Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-07T11:57:29.830Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:info-and-relationships",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.481Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-07T11:59:40.042Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:meaningful-sequence",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.481Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-07T12:07:39.284Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:sensory-characteristics",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.482Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-07T12:22:35.809Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:orientation",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.482Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-07T13:30:18.324Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:identify-input-purpose",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.482Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-07T13:36:11.751Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:use-of-color",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.482Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-03T09:44:25.471Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:audio-control",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.482Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-07T13:44:04.995Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:contrast-minimum",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.482Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-07T13:47:45.675Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:resize-text",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.482Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-07T13:49:12.126Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:images-of-text",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.482Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-07T13:59:45.937Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:reflow",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.482Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-12-02T08:51:08.809Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:language-of-page",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.482Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-08T12:25:25.812Z",
+                "description": "Innlogget toppnavigasjon har en lys blå bakgrunnsfarge med kontrast 1.14:1. Men forskjellen i bakgrunnsfarge er ikke kritisk for å forstå betydningen av knappene",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:non-text-contrast",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.482Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-15T08:39:07.087Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:name-role-value",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.276Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.482Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-08T12:47:21.921Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:text-spacing",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.482Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-01T12:37:54.556Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:audio-only-and-video-only-prerecorded",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.483Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T10:40:04.998Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:content-on-hover-or-focus",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.483Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-14T10:58:31.244Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:motion-actuation",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.483Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T10:40:32.826Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:keyboard",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.483Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-14T12:16:59.493Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:on-focus",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.276Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.483Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-03T09:47:30.523Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:no-keyboard-trap",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.483Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-14T12:48:06.472Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:consistent-navigation",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.276Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.484Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T10:41:34.045Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:character-key-shortcuts",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.484Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-16T07:26:49.360Z",
+                "description": "Er usikker på om vi bryter denne ved det faktum at dersom man prøver å gå til en ny side som krever innlogging mer enn 60 minutter etter at man først logget inn, så blir man først redirectet til idporten.",
+                "outcome": { "id": "earl:cantTell", "type": ["OutcomeValue", "CannotTell"], "title": "Cannot tell" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:timing-adjustable",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.484Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T10:59:05.726Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:pause-stop-hide",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.484Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T11:01:01.596Z",
+                "description": "",
+                "outcome": {
+                    "id": "earl:inapplicable",
+                    "type": ["OutcomeValue", "NotApplicable"],
+                    "title": "Not present"
+                }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:three-flashes-or-below-threshold",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.484Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-15T08:35:57.947Z",
+                "description": "Kode validert med https://validator.w3.org/",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:parsing",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.276Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.484Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T12:03:18.462Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:headings-and-labels",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.484Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-12-02T08:50:48.940Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:bypass-blocks",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.484Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-14T13:25:38.077Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:non-text-content",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.484Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T12:03:30.490Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:focus-visible",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.485Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T11:42:13.540Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:page-titled",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        },
+        {
+            "type": "Assertion",
+            "date": "2022-12-02T08:49:20.485Z",
+            "mode": { "type": "TestMode", "@value": "earl:manual" },
+            "result": {
+                "type": "TestResult",
+                "date": "2022-11-09T11:42:39.701Z",
+                "description": "",
+                "outcome": { "id": "earl:passed", "type": ["OutcomeValue", "Pass"], "title": "Passed" }
+            },
+            "subject": {
+                "id": "_:subject_1",
+                "type": ["TestSubject", "Website"],
+                "date": "2022-12-02T08:48:11.274Z",
+                "description": "https://www.nav.no/dekoratoren",
+                "title": "Nav Dekoratøren"
+            },
+            "test": {
+                "id": "WCAG21:focus-order",
+                "type": ["TestCriterion", "TestRequirement"],
+                "date": "2022-12-02T08:48:11.275Z"
+            }
+        }
+    ],
+    "reportFindings": {
+        "date": { "type": "http://www.w3.org/TR/NOTE-datetime", "@value": "2. desember 2022" },
+        "summary": "",
+        "title": "UU-rapport for Dekoratøren av Team nav.no",
+        "commissioner": "Team universell utforming",
+        "evaluator": "Bjørn Harbo Dahle (Team nav.no)",
+        "documentSteps": [
+            { "id": "_:about" },
+            { "id": "_:defineScope" },
+            { "id": "_:exploreTarget" },
+            { "id": "_:selectSample" }
+        ],
+        "evaluationSpecifics": ""
+    }
+}
