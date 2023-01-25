@@ -134,7 +134,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | urlLookupTable     | boolean                                                | true             | Aktiverer eller deaktiverer url-lookup-table [8]                               |
 | shareScreen        | boolean                                                | true             | Aktiverer eller deaktiverer skjermdelingskomponent                             |
 | logoutUrl          | string                                                 | undefined        | Setter url for logg-ut knappen [9]                                             |
-| maskHotjar         | string                                                 | true             | Maskerer hele HTML-dokumentet fra Hotjar [10]                                  |
+| maskHotjar         | boolean                                                | true             | Maskerer hele HTML-dokumentet fra Hotjar [10]                                  |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
