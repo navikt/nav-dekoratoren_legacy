@@ -13,14 +13,19 @@ interface Props {
 }
 
 const SprakVelgerItem = (props: Props) => {
-    const { selectedItem, index } = props;
+    const { selectedItem, index, onSelectedItemChange } = props;
     const { item } = props;
 
     const isItemSelected = selectedItem?.locale === item.locale;
 
     return (
         <li className={style.menuListItem}>
-            <button className={style.option} data-index={index}>
+            <button
+                className={style.option}
+                data-index={index}
+                onClick={onSelectedItemChange}
+                aria-current={isItemSelected}
+            >
                 {isItemSelected && <Bilde asset={Cicle} className={style.sirkel} />}
                 <BodyShort as="span" size="small" lang={item.locale} className={!isItemSelected && style.notSelected}>
                     {item.label}

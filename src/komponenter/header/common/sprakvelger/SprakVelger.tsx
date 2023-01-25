@@ -44,6 +44,7 @@ export const SprakVelger = (props: Props) => {
     }, []);
 
     const onChange = (selected: LocaleOption) => {
+        console.log(selected);
         const { label, ...selectedLanguage } = selected;
         setSelectedItem(selected);
 
@@ -56,8 +57,14 @@ export const SprakVelger = (props: Props) => {
         }
     };
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-        const target = e.target as HTMLElement;
+    const handleKeyUp = (e: KeyboardEvent) => {
+        if (e.key === 'Tab') {
+            const buttons = document.querySelectorAll(`.${style.sprakvelger} button`);
+            const hasButtonFocus = Array.from(buttons).some((button) => button === document.activeElement);
+            if (!hasButtonFocus) {
+                toggleMenu(false);
+            }
+        }
 
         if (e.key === 'Escape') {
             toggleMenu(false);
@@ -75,10 +82,10 @@ export const SprakVelger = (props: Props) => {
         const desireOpen = open !== undefined ? open : !isOpen;
 
         if (desireOpen) {
-            window.addEventListener('keydown', handleKeyDown);
+            window.addEventListener('keyup', handleKeyUp);
             window.addEventListener('click', handleMouseClick);
         } else {
-            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('keyup', handleKeyUp);
             window.removeEventListener('click', handleMouseClick);
         }
 
@@ -87,15 +94,11 @@ export const SprakVelger = (props: Props) => {
 
     return (
         <div className={style.container}>
-            <div id="languageDescription" className={style.screenreaderOnly} lang="no">
-                Velg språk
-            </div>
             <nav className={style.sprakvelger}>
                 <button
                     className={`${style.knapp} skjemaelement__input`}
                     type="button"
                     aria-expanded={isOpen}
-                    aria-labelledby="languageDescription"
                     onClick={() => toggleMenu()}
                 >
                     <div className={style.knappTekst}>
