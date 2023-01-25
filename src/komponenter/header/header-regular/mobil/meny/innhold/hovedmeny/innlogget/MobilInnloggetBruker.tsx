@@ -27,7 +27,7 @@ export const MobilInnloggetBruker = () => {
 
     return (
         <>
-            <div className={'innloggetbruker'} data-hj-suppress={true}>
+            <div className={'innloggetbruker'} data-hj-suppress={''}>
                 <div className={'innloggetbruker__label'}>
                     <Heading level="2" size="small">
                         <Tekst id="logget-inn-som" />

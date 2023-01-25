@@ -138,7 +138,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
-[3] Språk settes automatisk client-side dersom nåværende url inneholder **/nb/**, **/nn/**, **/en/**, **/se/**, uavhengig av dette parameteret. <br>
+[3] Språk settes automatisk client-side dersom nåværende url inneholder **/no/**, **/nb/**, **/nn/**, **/en/**, **/se/**, uavhengig av dette parameteret. <br>
 [4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme).
 Dersom du oppgir `handleInApp`, så må du selv håndtere feks route change i applikasjonen din ved klikk i dekoratørmenyen. <br>
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
