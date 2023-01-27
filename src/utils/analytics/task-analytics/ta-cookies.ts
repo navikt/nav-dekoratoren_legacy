@@ -3,7 +3,8 @@ import Cookies from 'js-cookie';
 /*
  * We keep the state of survey selection for a user in a cookie. When a survey has matched for a user
  * and been part of the selection draw, we should not attempt to show this to the user again for
- * <expireTimeDays> days.
+ * <expireTimeDays> days. We also don't want to show any surveys for 30 days if a survey is selected
+ * in a draw
  * */
 
 type TaskAnalyticsState = Record<string, number>;

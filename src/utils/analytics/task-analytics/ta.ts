@@ -13,10 +13,10 @@ export type TaskAnalyticsUrlRule = {
 
 export type TaskAnalyticsSurveyConfig = {
     id: string;
+    selection?: number;
     urls?: TaskAnalyticsUrlRule[];
     audience?: MenuValue[];
     language?: Locale[];
-    selection: number;
 };
 
 let fetchedSurveys: TaskAnalyticsSurveyConfig[] | null = null;

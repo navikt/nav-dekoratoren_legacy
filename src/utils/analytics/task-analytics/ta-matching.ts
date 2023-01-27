@@ -39,11 +39,7 @@ const isMatchingUrls = (urls: TaskAnalyticsUrlRule[]) => {
     return !(isExcluded || isMatched === false);
 };
 
-const isMatchingSurvey = (
-    survey: TaskAnalyticsSurveyConfig,
-    currentLanguage: Locale,
-    currentAudience: MenuValue
-): boolean => {
+const isMatchingSurvey = (survey: TaskAnalyticsSurveyConfig, currentLanguage: Locale, currentAudience: MenuValue) => {
     const { urls, audience, language } = survey;
 
     if (urls && !isMatchingUrls(urls)) {

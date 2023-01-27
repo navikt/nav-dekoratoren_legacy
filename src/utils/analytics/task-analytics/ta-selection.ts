@@ -17,7 +17,7 @@ export const taskAnalyticsSelectSurvey = (
     let lowerBound = 0;
 
     return surveys.find((survey) => {
-        const upperBound = lowerBound + survey.selection || defaultSelection;
+        const upperBound = lowerBound + (survey.selection || defaultSelection);
         if (selectedValue > lowerBound && selectedValue < upperBound) {
             return true;
         }
