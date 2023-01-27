@@ -11,7 +11,7 @@ require('ikoner/favicon/android-chrome-512x512.png');
 
 export const fontAttribs = {
     rel: 'preload',
-    href: `https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2`,
+    href: 'https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2',
     as: 'font',
     type: 'font/woff2',
     crossorigin: 'true',
