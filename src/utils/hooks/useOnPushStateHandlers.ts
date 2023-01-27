@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { logPageView } from '../analytics/amplitude';
-import { startTaskAnalyticsSurvey } from '../analytics/task-analytics';
+import { startTaskAnalyticsSurvey } from '../analytics/task-analytics/ta';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../store/reducers';
 
