@@ -71,9 +71,9 @@ export const taskAnalyticsGetMatchingSurveys = (
             return false;
         }
 
-        if (taState[id]) {
-            return false;
-        }
+        // if (taState[id]) {
+        //     return false;
+        // }
 
         const isMatching = isMatchingSurvey(survey, currentLanguage, currentAudience);
         if (!isMatching) {
