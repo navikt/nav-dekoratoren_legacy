@@ -1,21 +1,10 @@
-import React, { MouseEventHandler, useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { verifyWindowObj } from 'utils/Environment';
-import { logAmplitudeEvent } from 'utils/analytics/amplitude';
-import { MenuValue } from '../../../utils/meny-storage-utils';
 import { useCookies } from 'react-cookie';
 import classNames from 'classnames';
 import style from './ChatbotWrapper.module.scss';
-import frida from 'ikoner/frida.svg';
-import { Bilde } from 'komponenter/common/bilde/Bilde';
-import { clearConfigCache } from 'prettier';
-import { cookieOptions } from 'server/cookieSettings';
-
-// Prevents SSR crash
-const Chatbot = verifyWindowObj() ? require('@navikt/nav-chatbot') : () => null;
-
-const testUrlHosts = ['dekoratoren.ekstern.dev.nav.no'];
 
 const stateSelector = (state: AppState) => ({
     chatbotParamEnabled: state.environment.PARAMS.CHATBOT,
@@ -30,8 +19,6 @@ const conversationCookieName = 'nav-chatbot%3Aconversation';
 // const boostApiUrlBaseProduction = 'https://nav.boost.ai/api/chat/v2';
 const boostApiUrlBaseTest = 'navtest';
 const boostApiUrlBaseProduction = 'nav';
-
-type ActionFilter = 'privatperson' | 'arbeidsgiver' | 'NAV_TEST';
 
 type HexColor = `#${string}`;
 
@@ -175,16 +162,6 @@ type boostObject = {
     };
 };
 
-const contextFilterMap: { [key in MenuValue]?: ActionFilter[] } = {
-    [MenuValue.PRIVATPERSON]: ['privatperson'],
-    [MenuValue.ARBEIDSGIVER]: ['arbeidsgiver'],
-};
-
-const getActionFilters = (context: MenuValue, isProduction: boolean): ActionFilter[] => {
-    const contextFilter = contextFilterMap[context] || [];
-    return isProduction ? contextFilter : [...contextFilter, 'NAV_TEST'];
-};
-
 export const ChatbotWrapper = () => {
     const { chatbotParamEnabled, chatbotParamVisible, context, env } = useSelector(stateSelector);
     const [cookies, setCookie, removeCookie] = useCookies([conversationCookieName]);
@@ -205,8 +182,6 @@ export const ChatbotWrapper = () => {
         setIsVisible(hasConversation || chatbotParamVisible);
     }, [chatbotParamVisible]);
 
-    const hostname = verifyWindowObj() && window.location.hostname;
-    const isTest = hostname && testUrlHosts.includes(hostname);
     const isProduction = env === 'prod';
 
     let boostApiUrlBase = isProduction ? boostApiUrlBaseProduction : boostApiUrlBaseTest;
@@ -243,6 +218,10 @@ export const ChatbotWrapper = () => {
                 expirationDay.setHours(expirationDay.getHours() + 1);
                 setCookie(conversationCookieName, event.detail.conversationId, { expires: expirationDay });
             });
+            if (bufferLoad) {
+                setBufferLoad(false);
+                boost.chatPanel.show();
+            }
         }
     }, [boost]);
 
@@ -251,9 +230,9 @@ export const ChatbotWrapper = () => {
             <button
                 id="chatbot-frida-knapp"
                 onClick={openBoostWindow}
-                className={classNames(style.testButton, isVisible && style.extraVisible)}
+                className={classNames(style.chatbot, isVisible && style.extraVisible)}
             >
-                <div className={classNames(style.testDiv)}>
+                <div className={classNames(style.chatbotWrapper)}>
                     <svg
                         focusable="false"
                         fill="none"

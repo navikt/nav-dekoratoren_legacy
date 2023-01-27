@@ -15,7 +15,7 @@
 $openButtonAvatarSizeNumber: 70;
 $chatbotCircleColor: var(--navds-global-color-blue-800);
 
-.testButton {
+.chatbot {
     appearance: none;
     background: #fff;
     padding: 8px 15px;
@@ -70,7 +70,7 @@ $chatbotCircleColor: var(--navds-global-color-blue-800);
     }
 }
 
-.testDiv {
+.chatbotWrapper {
     width: ($openButtonAvatarSizeNumber - 10) * 1px;
     height: ($openButtonAvatarSizeNumber - 10) * 1px;
     position: absolute;
@@ -81,7 +81,7 @@ $chatbotCircleColor: var(--navds-global-color-blue-800);
     display: inline-block;
     vertical-align: top;
 
-    .testButton:hover & {
+    .chatbot:hover & {
         transform: translateY(-50%) scale(1.1);
     }
 
@@ -104,13 +104,13 @@ $chatbotCircleColor: var(--navds-global-color-blue-800);
     }
 
     @media (hover: hover) {
-        .testButton:hover &:before {
+        .chatbot:hover &:before {
             box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4), 0 0 0 6px $chatbotCircleColor, 0 0 0 6px #fff,
                 0 0 1px 5px rgba(0, 0, 0, 0.2), 0 4px 10px #000, 10px 10px 10px rgba(0, 0, 0, 0.3);
         }
     }
 
-    .testButton:focus &:before {
+    .chatbot:focus &:before {
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 6px $chatbotCircleColor, 0 4px 10px #000,
             0 0 0 4px #5c4378, 010px 10px 10px rgba(0, 0, 0, 0.3);
     }
