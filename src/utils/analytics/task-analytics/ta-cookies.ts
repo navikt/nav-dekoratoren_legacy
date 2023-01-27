@@ -10,6 +10,8 @@ type TaskAnalyticsState = Record<string, number>;
 
 const cookieName = 'ta-dekoratoren';
 
+const selectedKey = 'selected';
+
 const expireTimeDays = 30;
 const expireTimeMs = expireTimeDays * 24 * 60 * 60 * 1000;
 
@@ -27,6 +29,16 @@ export const taskAnalyticsSetSurveyMatched = (surveyId: string) => {
     setCookie({ ...currentState, [surveyId]: Date.now() });
 };
 
+export const taskAnalyticsSetWasSelected = () => {
+    const currentState = taskAnalyticsGetState();
+    setCookie({ ...currentState, [selectedKey]: Date.now() });
+};
+
+export const taskAnalyticsGetWasSelected = () => {
+    const currentState = taskAnalyticsGetState();
+    return !!currentState[selectedKey];
+};
+
 export const taskAnalyticsCleanState = () => {
     const prevState = taskAnalyticsGetState();
     if (!prevState) {
@@ -35,12 +47,12 @@ export const taskAnalyticsCleanState = () => {
 
     const now = Date.now();
 
-    const currentState = Object.entries(prevState).reduce((acc, [surveyId, surveyMatchDate]) => {
-        if (now - surveyMatchDate > expireTimeMs) {
+    const currentState = Object.entries(prevState).reduce((acc, [key, timestamp]) => {
+        if (now - timestamp > expireTimeMs) {
             return acc;
         }
 
-        return { ...acc, [surveyId]: surveyMatchDate };
+        return { ...acc, [key]: timestamp };
     }, {});
 
     setCookie(currentState);

@@ -2,7 +2,7 @@ import { MenuValue } from '../../meny-storage-utils';
 import { Locale } from '../../../store/reducers/language-duck';
 import { AppState } from '../../../store/reducers';
 import { taskAnalyticsSelectSurvey } from './ta-selection';
-import { taskAnalyticsCleanState } from './ta-cookies';
+import { taskAnalyticsCleanState, taskAnalyticsGetWasSelected, taskAnalyticsSetWasSelected } from './ta-cookies';
 import { taskAnalyticsGetMatchingSurveys } from './ta-matching';
 
 export type TaskAnalyticsUrlRule = {
@@ -49,6 +49,8 @@ const startSurvey = (surveys: TaskAnalyticsSurveyConfig[], state: AppState) => {
 
     const { id } = selectedSurvey;
 
+    taskAnalyticsSetWasSelected();
+
     console.log(`Starting TA survey ${id}`);
     window.TA('start', id);
 };
@@ -74,6 +76,11 @@ const fetchAndStart = (appUrl: string, state: AppState) =>
         });
 
 export const startTaskAnalyticsSurvey = (appUrl: string, state: AppState) => {
+    // If the user was previously selected for a survey (in the last 30 days), don't show any surveys
+    if (taskAnalyticsGetWasSelected()) {
+        return;
+    }
+
     if (fetchedSurveys) {
         startSurvey(fetchedSurveys, state);
     } else {
