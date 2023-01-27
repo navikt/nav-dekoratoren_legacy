@@ -1,7 +1,7 @@
 import { MenuValue } from '../meny-storage-utils';
 import { initAmplitude } from 'utils/analytics/amplitude';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
-import { initTaskAnalytics } from './task-analytics';
+import { initTaskAnalytics } from './task-analytics/ta';
 
 export enum AnalyticsCategory {
     Header = 'dekorator-header',
