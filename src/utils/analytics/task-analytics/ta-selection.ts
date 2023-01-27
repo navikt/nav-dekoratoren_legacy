@@ -6,6 +6,7 @@ import { TaskAnalyticsSurveyConfig } from './ta';
  * */
 
 const selectionMinRange = 100;
+const defaultSelection = 100;
 
 export const taskAnalyticsSelectSurvey = (
     surveys: TaskAnalyticsSurveyConfig[]
@@ -16,7 +17,7 @@ export const taskAnalyticsSelectSurvey = (
     let lowerBound = 0;
 
     return surveys.find((survey) => {
-        const upperBound = lowerBound + survey.selection || 0;
+        const upperBound = lowerBound + survey.selection || defaultSelection;
         if (selectedValue > lowerBound && selectedValue < upperBound) {
             return true;
         }
