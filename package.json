@@ -30,7 +30,6 @@
         "@navikt/ds-css": "2.1.1",
         "@navikt/ds-icons": "2.1.1",
         "@navikt/ds-react": "2.1.1",
-        "@navikt/ds-tokens": "2.1.1",
         "@navikt/nav-chatbot": "2.7.4",
         "@navikt/nav-dekoratoren-moduler": "1.7.0",
         "@promster/express": "5.1.3",
