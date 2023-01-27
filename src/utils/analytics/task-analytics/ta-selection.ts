@@ -11,7 +11,7 @@ const defaultSelection = 100;
 export const taskAnalyticsSelectSurvey = (
     surveys: TaskAnalyticsSurveyConfig[]
 ): TaskAnalyticsSurveyConfig | null | undefined => {
-    const selectionSum = surveys.reduce((sum, survey) => sum + (survey.selection || 0), 0);
+    const selectionSum = surveys.reduce((sum, survey) => sum + (survey.selection || defaultSelection), 0);
     const selectedValue = Math.random() * Math.max(selectionSum, selectionMinRange);
 
     let lowerBound = 0;
