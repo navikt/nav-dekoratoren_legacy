@@ -62,7 +62,7 @@ export const taskAnalyticsGetMatchingSurveys = (
     currentLanguage: Locale,
     currentAudience: MenuValue
 ) => {
-    const { matched = {} } = taskAnalyticsGetState();
+    const { matched: prevMatched = {} } = taskAnalyticsGetState();
 
     const matchingSurveys = surveys.filter((survey) => {
         const { id } = survey;
@@ -71,7 +71,7 @@ export const taskAnalyticsGetMatchingSurveys = (
             return false;
         }
 
-        if (matched[id]) {
+        if (prevMatched[id]) {
             return false;
         }
 
@@ -85,9 +85,5 @@ export const taskAnalyticsGetMatchingSurveys = (
         return true;
     });
 
-    if (matchingSurveys.length === 0) {
-        return null;
-    }
-
-    return matchingSurveys;
+    return matchingSurveys.length === 0 ? null : matchingSurveys;
 };

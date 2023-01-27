@@ -1,13 +1,13 @@
 import Cookies from 'js-cookie';
 
 /*
- * We keep the state of survey selection for a user in a cookie. When a survey has matched for a user
- * and been part of the selection draw, we should not attempt to show this to the user again for
- * <expireTimeDays> days. We also don't want to show any surveys for 30 days if a survey is selected
- * in a draw
+ * We keep the state of survey selection for the user in a cookie. When a survey has matched for a user
+ * and has been part of the selection draw, we should not attempt to draw this for this user again for
+ * <expireTimeDays> days. Also, if a survey is selected in a draw, we only want to show this survey for
+ * the next <expireTimeDays> days
  * */
 
-type TaskAnalyticsState = { selected?: { id: string; ts: number }; matched: Record<string, number> };
+type TaskAnalyticsState = { selected?: { id: string; ts: number }; matched?: Record<string, number> };
 
 const cookieName = 'ta-dekoratoren-v2';
 
@@ -34,17 +34,11 @@ export const taskAnalyticsSetSelected = (surveyId: string) => {
 };
 
 export const taskAnalyticsGetSelectedSurvey = () => {
-    const currentState = taskAnalyticsGetState();
-    return currentState['selected']?.id;
+    return taskAnalyticsGetState().selected?.id;
 };
 
 export const taskAnalyticsRefreshState = () => {
-    const prevState = taskAnalyticsGetState();
-    if (!prevState) {
-        return;
-    }
-
-    const { matched, selected } = prevState;
+    const { matched, selected } = taskAnalyticsGetState();
 
     const now = Date.now();
 
@@ -58,7 +52,7 @@ export const taskAnalyticsRefreshState = () => {
 
               return { ...acc, [key]: timestamp };
           }, {})
-        : {};
+        : undefined;
 
     setCookie({ matched: freshMatched, selected: freshSelected });
 };
