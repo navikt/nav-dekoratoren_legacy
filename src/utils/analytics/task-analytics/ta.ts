@@ -2,7 +2,7 @@ import { MenuValue } from '../../meny-storage-utils';
 import { Locale } from '../../../store/reducers/language-duck';
 import { AppState } from '../../../store/reducers';
 import { taskAnalyticsSelectSurvey } from './ta-selection';
-import { taskAnalyticsCleanState, taskAnalyticsGetWasSelected, taskAnalyticsSetWasSelected } from './ta-cookies';
+import { taskAnalyticsRefreshState, taskAnalyticsGetSelectedSurvey, taskAnalyticsSetSelected } from './ta-cookies';
 import { taskAnalyticsGetMatchingSurveys } from './ta-matching';
 
 export type TaskAnalyticsUrlRule = {
@@ -26,7 +26,12 @@ const taFallback = (...args: any[]) => {
     TA.q.push(args);
 };
 
-const startSurvey = (surveys: TaskAnalyticsSurveyConfig[], state: AppState) => {
+const startSurvey = (surveyId: string) => {
+    console.log(`Starting TA survey ${surveyId}`);
+    window.TA('start', surveyId);
+};
+
+const findAndStartSurvey = (surveys: TaskAnalyticsSurveyConfig[], state: AppState) => {
     const { arbeidsflate, language, environment } = state;
 
     // Do not show surveys if the simple header is used
@@ -42,17 +47,14 @@ const startSurvey = (surveys: TaskAnalyticsSurveyConfig[], state: AppState) => {
         return;
     }
 
-    // const selectedSurvey = taskAnalyticsSelectSurvey(matchingSurveys);
-    // if (!selectedSurvey) {
-    //     return;
-    // }
+    const selectedSurvey = taskAnalyticsSelectSurvey(matchingSurveys);
+    if (!selectedSurvey) {
+        return;
+    }
 
-    const { id } = matchingSurveys[0];
-
-    // taskAnalyticsSetWasSelected();
-
-    console.log(`Starting TA survey ${id}`);
-    window.TA('start', id);
+    const { id } = selectedSurvey;
+    taskAnalyticsSetSelected(id);
+    startSurvey(id);
 };
 
 const fetchAndStart = (appUrl: string, state: AppState) =>
@@ -69,20 +71,24 @@ const fetchAndStart = (appUrl: string, state: AppState) =>
                 throw Error(`Invalid type for surveys response - ${JSON.stringify(surveys)}`);
             }
             fetchedSurveys = surveys;
-            startSurvey(surveys, state);
+            findAndStartSurvey(surveys, state);
         })
         .catch((e) => {
             console.error(`Error fetching Task Analytics surveys - ${e}`);
         });
 
 export const startTaskAnalyticsSurvey = (appUrl: string, state: AppState) => {
-    // If the user was previously selected for a survey (in the last 30 days), don't show any surveys
-    // if (taskAnalyticsGetWasSelected()) {
-    //     return;
-    // }
+    taskAnalyticsRefreshState();
+
+    // If the user was previously selected for a survey (in the last 30 days), start it
+    const selectedSurveyId = taskAnalyticsGetSelectedSurvey();
+    if (selectedSurveyId) {
+        startSurvey(selectedSurveyId);
+        return;
+    }
 
     if (fetchedSurveys) {
-        startSurvey(fetchedSurveys, state);
+        findAndStartSurvey(fetchedSurveys, state);
     } else {
         fetchAndStart(appUrl, state);
     }
@@ -91,5 +97,4 @@ export const startTaskAnalyticsSurvey = (appUrl: string, state: AppState) => {
 export const initTaskAnalytics = () => {
     window.TA = window.TA || taFallback;
     window.dataLayer = window.dataLayer || [];
-    taskAnalyticsCleanState();
 };

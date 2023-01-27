@@ -62,7 +62,7 @@ export const taskAnalyticsGetMatchingSurveys = (
     currentLanguage: Locale,
     currentAudience: MenuValue
 ) => {
-    const taState = taskAnalyticsGetState();
+    const { matched = {} } = taskAnalyticsGetState();
 
     const matchingSurveys = surveys.filter((survey) => {
         const { id } = survey;
@@ -71,9 +71,9 @@ export const taskAnalyticsGetMatchingSurveys = (
             return false;
         }
 
-        // if (taState[id]) {
-        //     return false;
-        // }
+        if (matched[id]) {
+            return false;
+        }
 
         const isMatching = isMatchingSurvey(survey, currentLanguage, currentAudience);
         if (!isMatching) {

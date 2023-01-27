@@ -7,11 +7,9 @@ import Cookies from 'js-cookie';
  * in a draw
  * */
 
-type TaskAnalyticsState = Record<string, number>;
+type TaskAnalyticsState = { selected?: { id: string; ts: number }; matched: Record<string, number> };
 
-const cookieName = 'ta-dekoratoren';
-
-const selectedKey = 'selected';
+const cookieName = 'ta-dekoratoren-v2';
 
 const expireTimeDays = 30;
 const expireTimeMs = expireTimeDays * 24 * 60 * 60 * 1000;
@@ -27,34 +25,40 @@ export const taskAnalyticsGetState = () => (Cookies.getJSON(cookieName) || {}) a
 
 export const taskAnalyticsSetSurveyMatched = (surveyId: string) => {
     const currentState = taskAnalyticsGetState();
-    setCookie({ ...currentState, [surveyId]: Date.now() });
+    setCookie({ ...currentState, matched: { ...currentState.matched, [surveyId]: Date.now() } });
 };
 
-export const taskAnalyticsSetWasSelected = () => {
+export const taskAnalyticsSetSelected = (surveyId: string) => {
     const currentState = taskAnalyticsGetState();
-    setCookie({ ...currentState, [selectedKey]: Date.now() });
+    setCookie({ ...currentState, selected: { id: surveyId, ts: Date.now() } });
 };
 
-export const taskAnalyticsGetWasSelected = () => {
+export const taskAnalyticsGetSelectedSurvey = () => {
     const currentState = taskAnalyticsGetState();
-    return !!currentState[selectedKey];
+    return currentState['selected']?.id;
 };
 
-export const taskAnalyticsCleanState = () => {
+export const taskAnalyticsRefreshState = () => {
     const prevState = taskAnalyticsGetState();
     if (!prevState) {
         return;
     }
 
+    const { matched, selected } = prevState;
+
     const now = Date.now();
 
-    const currentState = Object.entries(prevState).reduce((acc, [key, timestamp]) => {
-        if (now - timestamp > expireTimeMs) {
-            return acc;
-        }
+    const freshSelected = selected?.ts && now - selected.ts > expireTimeMs ? undefined : selected;
 
-        return { ...acc, [key]: timestamp };
-    }, {});
+    const freshMatched = matched
+        ? Object.entries(matched).reduce((acc, [key, timestamp]) => {
+              if (now - timestamp > expireTimeMs) {
+                  return acc;
+              }
 
-    setCookie(currentState);
+              return { ...acc, [key]: timestamp };
+          }, {})
+        : {};
+
+    setCookie({ matched: freshMatched, selected: freshSelected });
 };
