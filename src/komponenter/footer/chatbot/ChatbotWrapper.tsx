@@ -172,10 +172,11 @@ export const ChatbotWrapper = () => {
     const [isMounted, setIsMounted] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [boost, setBoost] = useState<boostObject | undefined>();
+    const [bufferLoad, setBufferLoad] = useState<Boolean>(false);
 
     useEffect(() => {
-        setIsMounted(chatbotParamEnabled && boost != undefined);
-    }, [chatbotParamEnabled, boost]);
+        setIsMounted(chatbotParamEnabled);
+    }, [chatbotParamEnabled]);
 
     useEffect(() => {
         const hasConversation = cookies[conversationCookieName];
@@ -189,6 +190,8 @@ export const ChatbotWrapper = () => {
     const openBoostWindow = () => {
         if (typeof boost !== 'undefined') {
             boost.chatPanel.show();
+        } else {
+            setBufferLoad(true);
         }
     };
 
