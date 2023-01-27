@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { LenkeMedSporing } from '../../../common/lenke-med-sporing/LenkeMedSporing';
@@ -95,11 +94,9 @@ export const Brodsmulesti = (props: Props) => {
                                 setShowAll(true);
                             }}
                         >
-                            <Link>
-                                {' '}
-                                <span className={style.iconEllipsis}>...</span>
-                                <Next className={style.iconShowAll} title="Neste-ikon" aria-hidden />
-                            </Link>
+                            {' '}
+                            <span className={style.iconEllipsis}>...</span>
+                            <Next className={style.iconLongBreadCrumb} title="Neste-ikon" aria-hidden />
                         </button>
                     </li>
                 )}

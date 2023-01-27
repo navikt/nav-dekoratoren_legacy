@@ -60,8 +60,25 @@
     display: inline-flex;
     background-color: transparent;
     cursor: pointer;
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
     svg * {
         margin-top: 0;
+    }
+    &:focus {
+        background-color: var(--navds-semantic-color-focus);
+        box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
+        color: var(--navds-global-color-gray-600);
+        outline: none;
+        text-decoration: none;
+        svg {
+            color: white;
+            stroke: white;
+        }
+        .iconEllipsis {
+            color: white;
+            text-decoration: none;
+        }
     }
 }
 
@@ -71,15 +88,13 @@
     margin-right: 0.5rem;
 }
 
-.iconShowAll {
+.iconLongBreadCrumb {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    svg * {
-        stroke: var(--navds-global-color-gray-600);
-        fill: var(--navds-global-color-gray-600);
-    }
+    margin: 1px 0px 0px 6px;
+    stroke: var(--navds-global-color-gray-600);
+    color: var(--navds-global-color-gray-600);
 
     .iconHome {
         margin-right: 0.75rem;
@@ -92,12 +107,11 @@
     &:focus .iconHome {
         color: var(--navds-global-color-gray-600);
     }
-    margin: 1px 0px 0px 6px;
-    stroke: var(--navds-global-color-gray-600);
-    color: var(--navds-global-color-gray-600);
 }
 
 .iconEllipsis {
     margin-left: -0.25rem;
     margin-right: 0.25rem;
+    text-decoration: underline;
+    color: var(--navds-semantic-color-link);
 }
