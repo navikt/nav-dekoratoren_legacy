@@ -108,6 +108,7 @@ export const template = (req: Request) => {
             <!-- Styling fetched by apps -->
             <div id='styles'>
                 <link href='${fileCss}' rel='stylesheet'/>
+                <link rel="preload" href="https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2" as="font" type="font/woff2" crossorigin="true">
             </div>
             <div class='decorator-dev-container'>
                 <!-- Header fetched by apps -->
