@@ -9,6 +9,14 @@ const webManifest = require('ikoner/favicon/site.webmanifest');
 require('ikoner/favicon/android-chrome-192x192.png');
 require('ikoner/favicon/android-chrome-512x512.png');
 
+export const fontAttribs = {
+    rel: 'preload',
+    href: `https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2`,
+    as: 'font',
+    type: 'font/woff2',
+    crossorigin: 'true',
+};
+
 type Tag = {
     tag: string;
     attribs: Record<string, string>;
@@ -49,11 +57,7 @@ const getTagsData = (appUrl: string): Tag[] => [
     {
         tag: 'link',
         attribs: {
-            rel: 'preload',
-            href: `https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2`,
-            as: 'font',
-            type: 'font/woff2',
-            crossorigin: 'true',
+            ...fontAttribs,
         },
     },
     {

@@ -10,6 +10,7 @@ import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 import { CookiesProvider } from 'react-cookie';
 import hash from 'object-hash';
+import { fontAttribs } from '../head';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -108,7 +109,7 @@ export const template = (req: Request) => {
             <!-- Styling fetched by apps -->
             <div id='styles'>
                 <link href='${fileCss}' rel='stylesheet'/>
-                <link rel="preload" href="https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2" as="font" type="font/woff2" crossorigin="true">
+                <link rel='${fontAttribs.rel}' href='${fontAttribs.href}' as='${fontAttribs.as}' type='${fontAttribs.type}' crossorigin='${fontAttribs.crossorigin}'/>
             </div>
             <div class='decorator-dev-container'>
                 <!-- Header fetched by apps -->
