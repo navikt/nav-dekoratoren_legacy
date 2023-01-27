@@ -73,7 +73,7 @@ const Beskjed = ({
             onClick={handleOnClick}
         >
             <div className={classNames(style.ikon, isOppgave ? style.ikonOppgave : null)} />
-            <div className={style.contentWrapper}>
+            <div className={classNames(style.contentWrapper, style.ikkeArkiverbarContentWrapper)}>
                 <div>
                     <div className={style.tittel}>{isMasked ? <Tekst id="beskjed.maskert.tekst" /> : tekst}</div>
                     <div className={style.dato}>{dato}</div>

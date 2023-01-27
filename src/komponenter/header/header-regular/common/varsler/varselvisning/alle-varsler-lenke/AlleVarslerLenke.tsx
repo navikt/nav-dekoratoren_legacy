@@ -7,7 +7,7 @@ import style from './AlleVarslerLenke.module.scss';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 
 interface Props {
-    varselInnboksUrl: string;
+    tidligereVarslerUrl: string;
     rowIndex?: number;
 }
 
@@ -16,7 +16,7 @@ const AlleVarslerLenke = (props: Props) => {
         <div>
             <LenkeMedSporing
                 className={style.visAlleLenke}
-                href={props.varselInnboksUrl}
+                href={props.tidligereVarslerUrl}
                 id={
                     props.rowIndex !== undefined
                         ? getKbId(KbNavGroup.Varsler, {
@@ -29,7 +29,7 @@ const AlleVarslerLenke = (props: Props) => {
                 analyticsEventArgs={{
                     category: AnalyticsCategory.Header,
                     action: 'varsler/visalle',
-                    label: props.varselInnboksUrl,
+                    label: props.tidligereVarslerUrl,
                 }}
                 onClick={() => logAmplitudeEvent('navigere', { komponent: 'Tidligere varsler' })}
             >

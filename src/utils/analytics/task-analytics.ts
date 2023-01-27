@@ -1,26 +1,131 @@
-const surveys: Record<string, string> = {
-    'https://www.nav.no/tilleggsstonader': '03343',
-    'https://www.nav.no/soknader/nb/person/familie/tilleggsstonader': '03343',
-    'https://www.nav.no/tilleggsstonader-enslig': '03343',
-    'https://www.nav.no/tilleggsstonader-gjenlevende': '03343',
-    'https://www.nav.no/tilleggsstonader/nn': '03343'
+import { MenuValue } from '../meny-storage-utils';
+import { Locale } from '../../store/reducers/language-duck';
+import { AppState } from '../../store/reducers';
+
+type UrlRule = {
+    url: string;
+    match: 'exact' | 'startsWith';
+    exclude?: boolean;
 };
+
+export type TaSurveyConfig = {
+    id: string;
+    urls?: UrlRule[];
+    audience?: MenuValue[];
+    language?: Locale[];
+};
+
+let fetchedSurveys: TaSurveyConfig[] | null = null;
 
 const taFallback = (...args: any[]) => {
     TA.q = TA.q || [];
     TA.q.push(args);
 };
 
-export const startTaskAnalyticsSurveys = () => {
-    const currentUrl = window.location.origin + window.location.pathname;
+const removeTrailingSlash = (str: string) => str.replace(/\/$/, '');
 
-    Object.keys(surveys).forEach((surveyUrl) => {
-        if (currentUrl.startsWith(surveyUrl)) {
-            const surveyId = surveys[surveyUrl];
-            console.log(`Start survey ${surveyId}`);
-            window.TA('start', surveyId);
+const isMatchingUrl = (url: string, currentUrl: string, match: UrlRule['match']) =>
+    match === 'startsWith' ? currentUrl.startsWith(url) : currentUrl === url;
+
+const isMatchingSurvey = (survey: TaSurveyConfig, currentLanguage: Locale, currentAudience: MenuValue): boolean => {
+    const { id, urls, audience, language } = survey;
+
+    if (!id) {
+        console.log('No TA survey id specified!');
+        return false;
+    }
+
+    if (urls) {
+        const currentUrl = removeTrailingSlash(`${window.location.origin}${window.location.pathname}`);
+
+        let isMatched: boolean | null = null;
+        let isExcluded = false;
+
+        urls.every((urlRule) => {
+            const { url, match, exclude } = urlRule;
+            const urlToMatch = removeTrailingSlash(url);
+
+            if (isMatchingUrl(urlToMatch, currentUrl, match)) {
+                // If the url is excluded we can stop. If not, we need to continue checking the url-array, in case
+                // there are exclusions in the rest of the array
+                if (exclude) {
+                    isExcluded = true;
+                    return false;
+                } else {
+                    isMatched = true;
+                }
+            } else if (!exclude) {
+                // If there was a previous match, keep the true value
+                // This handles the case where the url-array contains only excluded urls
+                isMatched = isMatched || false;
+            }
+
+            return true;
+        });
+
+        if (isExcluded || isMatched === false) {
+            return false;
         }
-    });
+    }
+
+    if (audience && !audience.some((audience) => audience === currentAudience)) {
+        return false;
+    }
+
+    if (language && !language.some((language) => language === currentLanguage)) {
+        return false;
+    }
+
+    return true;
+};
+
+const startMatchingSurvey = (surveys: TaSurveyConfig[], state: AppState) => {
+    const { arbeidsflate, language, environment } = state;
+
+    // Do not show surveys if the simple header is used
+    if (environment.PARAMS.SIMPLE || environment.PARAMS.SIMPLE_HEADER) {
+        return;
+    }
+
+    const { status: currentAudience } = arbeidsflate;
+    const { language: currentLanguage } = language;
+
+    const matchingSurveys = surveys.filter((survey) => isMatchingSurvey(survey, currentLanguage, currentAudience));
+
+    if (matchingSurveys.length === 0) {
+        return;
+    }
+
+    // TODO: handle multiple matching surveys
+    const { id } = matchingSurveys[0];
+
+    console.log(`Starting TA survey ${id}`);
+    window.TA('start', id);
+};
+
+export const startTaskAnalyticsSurvey = (appUrl: string, state: AppState) => {
+    if (fetchedSurveys) {
+        startMatchingSurvey(fetchedSurveys, state);
+    } else {
+        fetch(`${appUrl}/api/ta`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw Error(`${res.status} ${res.statusText}`);
+                }
+
+                return res.json();
+            })
+            .then((surveys) => {
+                if (!Array.isArray(surveys)) {
+                    throw Error(`Invalid type for surveys response - ${JSON.stringify(surveys)}`);
+                }
+                fetchedSurveys = surveys;
+                startMatchingSurvey(surveys, state);
+            })
+            .catch((e) => {
+                console.error(`Error fetching Task Analytics surveys - ${e}`);
+            });
+    }
 };
 
 export const initTaskAnalytics = () => {
