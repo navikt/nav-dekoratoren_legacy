@@ -56,9 +56,7 @@ const getTagsData = (appUrl: string): Tag[] => [
     },
     {
         tag: 'link',
-        attribs: {
-            ...fontAttribs,
-        },
+        attribs: fontAttribs,
     },
     {
         tag: 'script',
