@@ -109,7 +109,9 @@ export const template = (req: Request) => {
             <!-- Styling fetched by apps -->
             <div id='styles'>
                 <link href='${fileCss}' rel='stylesheet'/>
-                <link rel='${fontAttribs.rel}' href='${fontAttribs.href}' as='${fontAttribs.as}' type='${fontAttribs.type}' crossorigin='${fontAttribs.crossorigin}'/>
+                <link ${Object.entries(fontAttribs)
+                    .map(([key, value]) => `${key}='${value}'`)
+                    .join(' ')}/>
             </div>
             <div class='decorator-dev-container'>
                 <!-- Header fetched by apps -->
