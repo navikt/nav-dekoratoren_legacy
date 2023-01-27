@@ -134,18 +134,23 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | urlLookupTable     | boolean                                                | true             | Aktiverer eller deaktiverer url-lookup-table [8]                               |
 | shareScreen        | boolean                                                | true             | Aktiverer eller deaktiverer skjermdelingskomponent                             |
 | logoutUrl          | string                                                 | undefined        | Setter url for logg-ut knappen [9]                                             |
+| maskHotjar         | boolean                                                | true             | Maskerer hele HTML-dokumentet fra Hotjar [10]                                  |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
-[3] Språk settes automatisk client-side dersom nåværende url inneholder **/nb/**, **/nn/**, **/en/**, **/se/**, uavhengig av dette parameteret. <br>
-[4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme). Dersom du oppgir `handleInApp`, så må du selv håndtere feks route change i applikasjonen din ved klikk i dekoratørmenyen. <br>
+[3] Språk settes automatisk client-side dersom nåværende url inneholder **/no/**, **/nb/**, **/nn/**, **/en/**, **/se/**, uavhengig av dette parameteret. <br>
+[4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme).
+Dersom du oppgir `handleInApp`, så må du selv håndtere feks route change i applikasjonen din ved klikk i dekoratørmenyen. <br>
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 [6] Aktiverer/deaktiverer Chatbot Frida. Dersom dette settes til false, vil chatbot aldri vises på siden, selv om bruker har en aktiv chat-sesjon. <br>
 [7] Viser/skjuler Chatbot Frida. Dersom dette settes til true, vil chatbot alltid vises. Ved false vises chatbot kun når bruker har en aktiv chat-sesjon (med mindre 'chatbot' er satt til false) <br>
 [8] Mapper prod-urler til dev-urler basert på [url-lookup-table](https://github.com/navikt/nav-dekoratoren-moduler/blob/master/src/csr/url-lookup-table/table.ts). <br>
-[9] Dersom denne er satt vil dekoratørens utloggingsfunksjonalitet forbigåes, og **alt rundt utlogging må håndteres av appen.**
+[9] Dersom denne er satt vil dekoratørens utloggingsfunksjonalitet forbigåes, og **alt rundt utlogging må håndteres av appen.** <br>
+[10] Setter `data-hj-suppress` på HTML-elementet, som hindrer Hotjar fra å fange noe innhold på siden. Default er `true`, dersom denne settes til `false` må appen selv sørge for at elementer med
+personinfo eller annen sensitiv data maskeres på tilsvarende måte. Se [hotjar docs](https://help.hotjar.com/hc/en-us/articles/115012439167-How-to-Suppress-Text-Images-and-User-Input-from-Collected-Data).
+Dekoratørens egne sensitive elementer maskeres uavhengig av dette parameteret. Denne kan **ikke** endres client-side.
 
-Samtlige parametre kan settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
+Dersom ikke noe annet er nevnt, kan samtlige parametre settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 
 Bakgrunnsfarge på brødsmulesti og språkvelger kan overstyres:
 

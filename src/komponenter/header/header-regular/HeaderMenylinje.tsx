@@ -62,7 +62,7 @@ export const HeaderMenylinje = () => {
                     </div>
                     <MobilMenyKnapp />
                     {visMinsideKnapper && (
-                        <div className={style.minsideKnapper}>
+                        <div className={style.minsideKnapper} data-hj-suppress={''}>
                             {innloggetPrivatperson && <VarslerKnapp kbNavMainState={kbNavMainState} />}
                             {innloggetPrivatperson && <DesktopMinsidemenyKnapp kbNavMainState={kbNavMainState} />}
                             {innloggetArbeidsgiver && <MinsideArbgiverKnapp />}
