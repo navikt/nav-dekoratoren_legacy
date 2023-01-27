@@ -85,7 +85,7 @@ $chatbotCircleColor: var(--navds-global-color-blue-800);
         transform: translateY(-50%) scale(1.1);
     }
 
-    img {
+    svg {
         width: 100%;
         height: 100%;
         border-radius: ($openButtonAvatarSizeNumber) * 1px;
