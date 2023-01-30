@@ -54,7 +54,7 @@ const findAndStartSurvey = (surveys: TaskAnalyticsSurveyConfig[], state: AppStat
     const { status: currentAudience } = arbeidsflate;
     const { language: currentLanguage } = language;
 
-    // If the user was previously selected for a survey, start it
+    // If a survey was previously selected for the user, try to start it
     const selectedSurveyId = taskAnalyticsGetSelectedSurveyId();
     if (selectedSurveyId) {
         startSurveyIfMatching(selectedSurveyId, surveys, currentLanguage, currentAudience);
