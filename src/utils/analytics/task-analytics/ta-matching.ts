@@ -1,7 +1,15 @@
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import { Locale } from '../../../store/reducers/language-duck';
 import { MenuValue } from '../../meny-storage-utils';
 import { TaskAnalyticsSurveyConfig, TaskAnalyticsUrlRule } from './ta';
 import { taskAnalyticsGetState, taskAnalyticsSetSurveyMatched } from './ta-cookies';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+const norwayTz = 'Europe/Oslo';
 
 type Audience = Required<TaskAnalyticsSurveyConfig>['audience'][number];
 type Language = Required<TaskAnalyticsSurveyConfig>['language'][number];
@@ -59,9 +67,9 @@ const isMatchingDuration = (duration: Duration) => {
     }
 
     const { start, end } = duration;
-    const now = Date.now();
+    const now = dayjs().tz(norwayTz);
 
-    return (!start || now > Date.parse(start)) && (!end || now < Date.parse(end));
+    return (!start || now.isAfter(dayjs.tz(start, norwayTz))) && (!end || now.isBefore(dayjs.tz(end, norwayTz)));
 };
 
 export const taskAnalyticsIsMatchingSurvey = (
