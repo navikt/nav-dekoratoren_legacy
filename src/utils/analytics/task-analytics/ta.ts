@@ -14,6 +14,10 @@ export type TaskAnalyticsUrlRule = {
 export type TaskAnalyticsSurveyConfig = {
     id: string;
     selection?: number;
+    duration?: {
+        start?: string;
+        end?: string;
+    };
     urls?: TaskAnalyticsUrlRule[];
     audience?: MenuValue[];
     language?: Locale[];

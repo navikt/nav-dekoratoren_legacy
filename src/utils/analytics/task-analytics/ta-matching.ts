@@ -3,12 +3,20 @@ import { MenuValue } from '../../meny-storage-utils';
 import { TaskAnalyticsSurveyConfig, TaskAnalyticsUrlRule } from './ta';
 import { taskAnalyticsGetState, taskAnalyticsSetSurveyMatched } from './ta-cookies';
 
+type Audience = Required<TaskAnalyticsSurveyConfig>['audience'][number];
+type Language = Required<TaskAnalyticsSurveyConfig>['language'][number];
+type Duration = TaskAnalyticsSurveyConfig['duration'];
+
 const removeTrailingSlash = (str: string) => str.replace(/\/$/, '');
 
 const isMatchingUrl = (url: string, currentUrl: string, match: TaskAnalyticsUrlRule['match']) =>
     match === 'startsWith' ? currentUrl.startsWith(url) : currentUrl === url;
 
-const isMatchingUrls = (urls: TaskAnalyticsUrlRule[]) => {
+const isMatchingUrls = (urls?: TaskAnalyticsUrlRule[]) => {
+    if (!urls) {
+        return true;
+    }
+
     const currentUrl = removeTrailingSlash(`${window.location.origin}${window.location.pathname}`);
 
     let isMatched: boolean | null = null;
@@ -39,26 +47,36 @@ const isMatchingUrls = (urls: TaskAnalyticsUrlRule[]) => {
     return !(isExcluded || isMatched === false);
 };
 
+const isMatchingAudience = (currentAudience: Audience, audience?: Audience[]) =>
+    !audience || audience.some((a) => a === currentAudience);
+
+const isMatchingLanguage = (currentLanguage: Language, language?: Language[]) =>
+    !language || language.some((lang) => lang === currentLanguage);
+
+const isMatchingDuration = (duration: Duration) => {
+    if (!duration) {
+        return true;
+    }
+
+    const { start, end } = duration;
+    const now = Date.now();
+
+    return (!start || now > Date.parse(start)) && (!end || now < Date.parse(end));
+};
+
 export const taskAnalyticsIsMatchingSurvey = (
     survey: TaskAnalyticsSurveyConfig,
-    currentLanguage: Locale,
-    currentAudience: MenuValue
+    currentLanguage: Language,
+    currentAudience: Audience
 ) => {
-    const { urls, audience, language } = survey;
+    const { urls, audience, language, duration } = survey;
 
-    if (urls && !isMatchingUrls(urls)) {
-        return false;
-    }
-
-    if (audience && !audience.some((audience) => audience === currentAudience)) {
-        return false;
-    }
-
-    if (language && !language.some((language) => language === currentLanguage)) {
-        return false;
-    }
-
-    return true;
+    return (
+        isMatchingUrls(urls) &&
+        isMatchingAudience(currentAudience, audience) &&
+        isMatchingLanguage(currentLanguage, language) &&
+        isMatchingDuration(duration)
+    );
 };
 
 export const taskAnalyticsGetMatchingSurveys = (
