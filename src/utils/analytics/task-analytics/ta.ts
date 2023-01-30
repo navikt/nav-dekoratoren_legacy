@@ -2,8 +2,8 @@ import { MenuValue } from '../../meny-storage-utils';
 import { Locale } from '../../../store/reducers/language-duck';
 import { AppState } from '../../../store/reducers';
 import { taskAnalyticsSelectSurvey } from './ta-selection';
-import { taskAnalyticsCleanState, taskAnalyticsGetWasSelected, taskAnalyticsSetWasSelected } from './ta-cookies';
-import { taskAnalyticsGetMatchingSurveys } from './ta-matching';
+import { taskAnalyticsRefreshState, taskAnalyticsGetSelectedSurveyId, taskAnalyticsSetSelected } from './ta-cookies';
+import { taskAnalyticsGetMatchingSurveys, taskAnalyticsIsMatchingSurvey } from './ta-matching';
 
 export type TaskAnalyticsUrlRule = {
     url: string;
@@ -14,6 +14,10 @@ export type TaskAnalyticsUrlRule = {
 export type TaskAnalyticsSurveyConfig = {
     id: string;
     selection?: number;
+    duration?: {
+        start?: string;
+        end?: string;
+    };
     urls?: TaskAnalyticsUrlRule[];
     audience?: MenuValue[];
     language?: Locale[];
@@ -26,7 +30,24 @@ const taFallback = (...args: any[]) => {
     TA.q.push(args);
 };
 
-const startSurvey = (surveys: TaskAnalyticsSurveyConfig[], state: AppState) => {
+const startSurvey = (surveyId: string) => {
+    console.log(`Starting TA survey ${surveyId}`);
+    window.TA('start', surveyId);
+};
+
+const startSurveyIfMatching = (
+    surveyId: string,
+    surveys: TaskAnalyticsSurveyConfig[],
+    currentLanguage: Locale,
+    currentAudience: MenuValue
+) => {
+    const survey = surveys.find((s) => s.id === surveyId);
+    if (survey && taskAnalyticsIsMatchingSurvey(survey, currentLanguage, currentAudience)) {
+        startSurvey(surveyId);
+    }
+};
+
+const findAndStartSurvey = (surveys: TaskAnalyticsSurveyConfig[], state: AppState) => {
     const { arbeidsflate, language, environment } = state;
 
     // Do not show surveys if the simple header is used
@@ -37,22 +58,26 @@ const startSurvey = (surveys: TaskAnalyticsSurveyConfig[], state: AppState) => {
     const { status: currentAudience } = arbeidsflate;
     const { language: currentLanguage } = language;
 
+    // If a survey was previously selected for the user, try to start it
+    const selectedSurveyId = taskAnalyticsGetSelectedSurveyId();
+    if (selectedSurveyId) {
+        startSurveyIfMatching(selectedSurveyId, surveys, currentLanguage, currentAudience);
+        return;
+    }
+
     const matchingSurveys = taskAnalyticsGetMatchingSurveys(surveys, currentLanguage, currentAudience);
     if (!matchingSurveys) {
         return;
     }
 
-    // const selectedSurvey = taskAnalyticsSelectSurvey(matchingSurveys);
-    // if (!selectedSurvey) {
-    //     return;
-    // }
+    const selectedSurvey = taskAnalyticsSelectSurvey(matchingSurveys);
+    if (!selectedSurvey) {
+        return;
+    }
 
-    const { id } = matchingSurveys[0];
-
-    // taskAnalyticsSetWasSelected();
-
-    console.log(`Starting TA survey ${id}`);
-    window.TA('start', id);
+    const { id } = selectedSurvey;
+    taskAnalyticsSetSelected(id);
+    startSurvey(id);
 };
 
 const fetchAndStart = (appUrl: string, state: AppState) =>
@@ -69,20 +94,17 @@ const fetchAndStart = (appUrl: string, state: AppState) =>
                 throw Error(`Invalid type for surveys response - ${JSON.stringify(surveys)}`);
             }
             fetchedSurveys = surveys;
-            startSurvey(surveys, state);
+            findAndStartSurvey(surveys, state);
         })
         .catch((e) => {
             console.error(`Error fetching Task Analytics surveys - ${e}`);
         });
 
 export const startTaskAnalyticsSurvey = (appUrl: string, state: AppState) => {
-    // If the user was previously selected for a survey (in the last 30 days), don't show any surveys
-    // if (taskAnalyticsGetWasSelected()) {
-    //     return;
-    // }
+    taskAnalyticsRefreshState();
 
     if (fetchedSurveys) {
-        startSurvey(fetchedSurveys, state);
+        findAndStartSurvey(fetchedSurveys, state);
     } else {
         fetchAndStart(appUrl, state);
     }
@@ -91,5 +113,4 @@ export const startTaskAnalyticsSurvey = (appUrl: string, state: AppState) => {
 export const initTaskAnalytics = () => {
     window.TA = window.TA || taFallback;
     window.dataLayer = window.dataLayer || [];
-    taskAnalyticsCleanState();
 };

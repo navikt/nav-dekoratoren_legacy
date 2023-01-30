@@ -1,14 +1,30 @@
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import { Locale } from '../../../store/reducers/language-duck';
 import { MenuValue } from '../../meny-storage-utils';
 import { TaskAnalyticsSurveyConfig, TaskAnalyticsUrlRule } from './ta';
 import { taskAnalyticsGetState, taskAnalyticsSetSurveyMatched } from './ta-cookies';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+const norwayTz = 'Europe/Oslo';
+
+type Audience = Required<TaskAnalyticsSurveyConfig>['audience'][number];
+type Language = Required<TaskAnalyticsSurveyConfig>['language'][number];
+type Duration = TaskAnalyticsSurveyConfig['duration'];
 
 const removeTrailingSlash = (str: string) => str.replace(/\/$/, '');
 
 const isMatchingUrl = (url: string, currentUrl: string, match: TaskAnalyticsUrlRule['match']) =>
     match === 'startsWith' ? currentUrl.startsWith(url) : currentUrl === url;
 
-const isMatchingUrls = (urls: TaskAnalyticsUrlRule[]) => {
+const isMatchingUrls = (urls?: TaskAnalyticsUrlRule[]) => {
+    if (!urls) {
+        return true;
+    }
+
     const currentUrl = removeTrailingSlash(`${window.location.origin}${window.location.pathname}`);
 
     let isMatched: boolean | null = null;
@@ -39,22 +55,36 @@ const isMatchingUrls = (urls: TaskAnalyticsUrlRule[]) => {
     return !(isExcluded || isMatched === false);
 };
 
-const isMatchingSurvey = (survey: TaskAnalyticsSurveyConfig, currentLanguage: Locale, currentAudience: MenuValue) => {
-    const { urls, audience, language } = survey;
+const isMatchingAudience = (currentAudience: Audience, audience?: Audience[]) =>
+    !audience || audience.some((a) => a === currentAudience);
 
-    if (urls && !isMatchingUrls(urls)) {
-        return false;
+const isMatchingLanguage = (currentLanguage: Language, language?: Language[]) =>
+    !language || language.some((lang) => lang === currentLanguage);
+
+const isMatchingDuration = (duration: Duration) => {
+    if (!duration) {
+        return true;
     }
 
-    if (audience && !audience.some((audience) => audience === currentAudience)) {
-        return false;
-    }
+    const { start, end } = duration;
+    const now = dayjs().tz(norwayTz);
 
-    if (language && !language.some((language) => language === currentLanguage)) {
-        return false;
-    }
+    return (!start || now.isAfter(dayjs.tz(start, norwayTz))) && (!end || now.isBefore(dayjs.tz(end, norwayTz)));
+};
 
-    return true;
+export const taskAnalyticsIsMatchingSurvey = (
+    survey: TaskAnalyticsSurveyConfig,
+    currentLanguage: Language,
+    currentAudience: Audience
+) => {
+    const { urls, audience, language, duration } = survey;
+
+    return (
+        isMatchingUrls(urls) &&
+        isMatchingAudience(currentAudience, audience) &&
+        isMatchingLanguage(currentLanguage, language) &&
+        isMatchingDuration(duration)
+    );
 };
 
 export const taskAnalyticsGetMatchingSurveys = (
@@ -62,7 +92,7 @@ export const taskAnalyticsGetMatchingSurveys = (
     currentLanguage: Locale,
     currentAudience: MenuValue
 ) => {
-    const taState = taskAnalyticsGetState();
+    const { matched: prevMatched = {} } = taskAnalyticsGetState();
 
     const matchingSurveys = surveys.filter((survey) => {
         const { id } = survey;
@@ -71,11 +101,11 @@ export const taskAnalyticsGetMatchingSurveys = (
             return false;
         }
 
-        // if (taState[id]) {
-        //     return false;
-        // }
+        if (prevMatched[id]) {
+            return false;
+        }
 
-        const isMatching = isMatchingSurvey(survey, currentLanguage, currentAudience);
+        const isMatching = taskAnalyticsIsMatchingSurvey(survey, currentLanguage, currentAudience);
         if (!isMatching) {
             return false;
         }
@@ -85,9 +115,5 @@ export const taskAnalyticsGetMatchingSurveys = (
         return true;
     });
 
-    if (matchingSurveys.length === 0) {
-        return null;
-    }
-
-    return matchingSurveys;
+    return matchingSurveys.length === 0 ? null : matchingSurveys;
 };

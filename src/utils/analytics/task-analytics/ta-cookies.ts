@@ -1,17 +1,15 @@
 import Cookies from 'js-cookie';
 
 /*
- * We keep the state of survey selection for a user in a cookie. When a survey has matched for a user
- * and been part of the selection draw, we should not attempt to show this to the user again for
- * <expireTimeDays> days. We also don't want to show any surveys for 30 days if a survey is selected
- * in a draw
+ * We keep the state of survey selection for the user in a cookie. When a survey has matched for a user
+ * and has been part of the selection draw, we should not attempt to draw this for this user again for
+ * <expireTimeDays> days. Also, if a survey is selected in a draw, we only want to show this survey for
+ * the next <expireTimeDays> days
  * */
 
-type TaskAnalyticsState = Record<string, number>;
+type TaskAnalyticsState = { selected?: { id: string; ts: number }; matched?: Record<string, number> };
 
-const cookieName = 'ta-dekoratoren';
-
-const selectedKey = 'selected';
+const cookieName = 'ta-dekoratoren-v2';
 
 const expireTimeDays = 30;
 const expireTimeMs = expireTimeDays * 24 * 60 * 60 * 1000;
@@ -27,34 +25,34 @@ export const taskAnalyticsGetState = () => (Cookies.getJSON(cookieName) || {}) a
 
 export const taskAnalyticsSetSurveyMatched = (surveyId: string) => {
     const currentState = taskAnalyticsGetState();
-    setCookie({ ...currentState, [surveyId]: Date.now() });
+    setCookie({ ...currentState, matched: { ...currentState.matched, [surveyId]: Date.now() } });
 };
 
-export const taskAnalyticsSetWasSelected = () => {
+export const taskAnalyticsSetSelected = (surveyId: string) => {
     const currentState = taskAnalyticsGetState();
-    setCookie({ ...currentState, [selectedKey]: Date.now() });
+    setCookie({ ...currentState, selected: { id: surveyId, ts: Date.now() } });
 };
 
-export const taskAnalyticsGetWasSelected = () => {
-    const currentState = taskAnalyticsGetState();
-    return !!currentState[selectedKey];
+export const taskAnalyticsGetSelectedSurveyId = () => {
+    return taskAnalyticsGetState().selected?.id;
 };
 
-export const taskAnalyticsCleanState = () => {
-    const prevState = taskAnalyticsGetState();
-    if (!prevState) {
-        return;
-    }
+export const taskAnalyticsRefreshState = () => {
+    const { matched, selected } = taskAnalyticsGetState();
 
     const now = Date.now();
 
-    const currentState = Object.entries(prevState).reduce((acc, [key, timestamp]) => {
-        if (now - timestamp > expireTimeMs) {
-            return acc;
-        }
+    const freshSelected = selected?.ts && now - selected.ts > expireTimeMs ? undefined : selected;
 
-        return { ...acc, [key]: timestamp };
-    }, {});
+    const freshMatched = matched
+        ? Object.entries(matched).reduce((acc, [key, timestamp]) => {
+              if (now - timestamp > expireTimeMs) {
+                  return acc;
+              }
 
-    setCookie(currentState);
+              return { ...acc, [key]: timestamp };
+          }, {})
+        : undefined;
+
+    setCookie({ matched: freshMatched, selected: freshSelected });
 };
