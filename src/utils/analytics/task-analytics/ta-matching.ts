@@ -39,7 +39,11 @@ const isMatchingUrls = (urls: TaskAnalyticsUrlRule[]) => {
     return !(isExcluded || isMatched === false);
 };
 
-const isMatchingSurvey = (survey: TaskAnalyticsSurveyConfig, currentLanguage: Locale, currentAudience: MenuValue) => {
+export const taskAnalyticsIsMatchingSurvey = (
+    survey: TaskAnalyticsSurveyConfig,
+    currentLanguage: Locale,
+    currentAudience: MenuValue
+) => {
     const { urls, audience, language } = survey;
 
     if (urls && !isMatchingUrls(urls)) {
@@ -75,7 +79,7 @@ export const taskAnalyticsGetMatchingSurveys = (
             return false;
         }
 
-        const isMatching = isMatchingSurvey(survey, currentLanguage, currentAudience);
+        const isMatching = taskAnalyticsIsMatchingSurvey(survey, currentLanguage, currentAudience);
         if (!isMatching) {
             return false;
         }

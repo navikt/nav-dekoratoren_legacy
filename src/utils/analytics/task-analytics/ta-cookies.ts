@@ -33,7 +33,7 @@ export const taskAnalyticsSetSelected = (surveyId: string) => {
     setCookie({ ...currentState, selected: { id: surveyId, ts: Date.now() } });
 };
 
-export const taskAnalyticsGetSelectedSurvey = () => {
+export const taskAnalyticsGetSelectedSurveyId = () => {
     return taskAnalyticsGetState().selected?.id;
 };
 

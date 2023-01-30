@@ -2,8 +2,8 @@ import { MenuValue } from '../../meny-storage-utils';
 import { Locale } from '../../../store/reducers/language-duck';
 import { AppState } from '../../../store/reducers';
 import { taskAnalyticsSelectSurvey } from './ta-selection';
-import { taskAnalyticsRefreshState, taskAnalyticsGetSelectedSurvey, taskAnalyticsSetSelected } from './ta-cookies';
-import { taskAnalyticsGetMatchingSurveys } from './ta-matching';
+import { taskAnalyticsRefreshState, taskAnalyticsGetSelectedSurveyId, taskAnalyticsSetSelected } from './ta-cookies';
+import { taskAnalyticsGetMatchingSurveys, taskAnalyticsIsMatchingSurvey } from './ta-matching';
 
 export type TaskAnalyticsUrlRule = {
     url: string;
@@ -31,6 +31,18 @@ const startSurvey = (surveyId: string) => {
     window.TA('start', surveyId);
 };
 
+const startSurveyIfMatching = (
+    surveyId: string,
+    surveys: TaskAnalyticsSurveyConfig[],
+    currentLanguage: Locale,
+    currentAudience: MenuValue
+) => {
+    const survey = surveys.find((s) => s.id === surveyId);
+    if (survey && taskAnalyticsIsMatchingSurvey(survey, currentLanguage, currentAudience)) {
+        startSurvey(surveyId);
+    }
+};
+
 const findAndStartSurvey = (surveys: TaskAnalyticsSurveyConfig[], state: AppState) => {
     const { arbeidsflate, language, environment } = state;
 
@@ -41,6 +53,13 @@ const findAndStartSurvey = (surveys: TaskAnalyticsSurveyConfig[], state: AppStat
 
     const { status: currentAudience } = arbeidsflate;
     const { language: currentLanguage } = language;
+
+    // If the user was previously selected for a survey, start it
+    const selectedSurveyId = taskAnalyticsGetSelectedSurveyId();
+    if (selectedSurveyId) {
+        startSurveyIfMatching(selectedSurveyId, surveys, currentLanguage, currentAudience);
+        return;
+    }
 
     const matchingSurveys = taskAnalyticsGetMatchingSurveys(surveys, currentLanguage, currentAudience);
     if (!matchingSurveys) {
@@ -79,13 +98,6 @@ const fetchAndStart = (appUrl: string, state: AppState) =>
 
 export const startTaskAnalyticsSurvey = (appUrl: string, state: AppState) => {
     taskAnalyticsRefreshState();
-
-    // If the user was previously selected for a survey (in the last 30 days), start it
-    const selectedSurveyId = taskAnalyticsGetSelectedSurvey();
-    if (selectedSurveyId) {
-        startSurvey(selectedSurveyId);
-        return;
-    }
 
     if (fetchedSurveys) {
         findAndStartSurvey(fetchedSurveys, state);
