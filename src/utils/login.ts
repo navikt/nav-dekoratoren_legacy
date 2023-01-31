@@ -27,7 +27,7 @@ const getRedirectUrl = (environment: Environment, arbeidsflate: MenuValue) => {
     return MIN_SIDE_URL;
 };
 
-export const getLoginUrl = (environment: Environment, arbeidsflate: MenuValue, level?: '3' | '4') => {
+export const getLoginUrl = (environment: Environment, arbeidsflate: MenuValue, level?: string) => {
     const { LOGIN_URL, PARAMS } = environment;
     const { LEVEL } = PARAMS;
 
