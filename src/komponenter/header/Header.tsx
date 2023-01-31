@@ -138,7 +138,11 @@ export const Header = () => {
                     console.error(`Failed to fetch feature-toggles: ${error}`);
                 });
         }
-        loadExternalScript('https://navtest.boost.ai/chatPanel/chatPanel.js');
+        loadExternalScript(
+            ENV === 'prod'
+                ? 'https://nav.boost.ai/chatPanel/chatPanel.js'
+                : 'https://navtest.boost.ai/chatPanel/chatPanel.js'
+        );
     }, []);
 
     // Change context
