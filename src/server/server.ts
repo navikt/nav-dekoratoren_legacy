@@ -13,6 +13,7 @@ import { getDriftsmeldingerHandler } from './api-handlers/driftsmeldinger';
 import { getCSP } from 'csp-header';
 import { cspDirectives } from '../csp';
 import { getCspHandler } from './api-handlers/csp';
+import { getTaskAnalyticsConfigHandler } from './api-handlers/ta';
 
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
@@ -120,6 +121,7 @@ app.get(createPaths('/api/meny'), getMenuHandler);
 app.get(createPaths('/api/sok'), getSokHandler);
 app.get(createPaths('/api/driftsmeldinger'), getDriftsmeldingerHandler);
 app.get(createPaths('/api/csp'), getCspHandler);
+app.get(createPaths('/api/ta'), getTaskAnalyticsConfigHandler);
 
 // Nais endpoints
 app.use(`${appBasePath}/metrics`, (req, res) => {
