@@ -1,24 +1,60 @@
-import { verifyWindowObj } from 'utils/Environment';
+import amplitude from 'amplitude-js';
 import { Params } from 'store/reducers/environment-duck';
 import { InnloggingsstatusState } from '../../store/reducers/innloggingsstatus-duck';
 
-// Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
-const amplitude = verifyWindowObj() ? require('amplitude-js') : () => null;
+type EventData = Record<string, any>;
 
 export const initAmplitude = () => {
-    if (amplitude) {
-        amplitude.getInstance().init('default', '', {
-            apiEndpoint: 'amplitude.nav.no/collect-auto',
-            saveEvents: false,
-            includeUtm: true,
-            includeReferrer: true,
-            platform: window.location.toString(),
-        });
+    const userProps = {
+        skjermbredde: window.screen.width,
+        skjermhoyde: window.screen.height,
+        vindusbredde: window.innerWidth,
+        vindushoyde: window.innerHeight,
+    };
+
+    amplitude.getInstance().init('default', '', {
+        apiEndpoint: 'amplitude.nav.no/collect-auto',
+        saveEvents: false,
+        includeUtm: true,
+        includeReferrer: true,
+        platform: window.location.toString(),
+    });
+    amplitude.getInstance().setUserProperties(userProps);
+
+    window.dekoratorenAmplitude = logEventFromApp;
+};
+
+const logEventFromApp = (params?: {
+    origin: unknown | string;
+    eventName: unknown | string;
+    eventData?: unknown | EventData;
+}): Promise<any> => {
+    try {
+        if (!params || params.constructor !== Object) {
+            return Promise.reject(
+                'Argument must be an object of type {origin: string, eventName: string, eventData?: Record<string, any>}'
+            );
+        }
+
+        const { origin, eventName, eventData = {} } = params;
+        if (!eventName || typeof eventName !== 'string') {
+            return Promise.reject('Parameter "eventName" must be a string');
+        }
+        if (!origin || typeof origin !== 'string') {
+            return Promise.reject('Parameter "origin" must be a string');
+        }
+        if (!eventData || eventData.constructor !== Object) {
+            return Promise.reject('Parameter "eventData" must be a plain object');
+        }
+
+        return logAmplitudeEvent(eventName, eventData, origin);
+    } catch (e) {
+        return Promise.reject(`Unexpected Amplitude error: ${e}`);
     }
 };
 
 export const logPageView = (params: Params, authState: InnloggingsstatusState) => {
-    logAmplitudeEvent('besøk', {
+    return logAmplitudeEvent('besøk', {
         sidetittel: document.title,
         innlogging: authState.data.securityLevel ?? false,
         parametre: {
@@ -31,15 +67,18 @@ export const logPageView = (params: Params, authState: InnloggingsstatusState) =
     });
 };
 
-export const logAmplitudeEvent = (eventName: string, data?: any): Promise<any> => {
-    return new Promise(function (resolve: any) {
-        const eventData = data || {};
-        eventData.platform = window.location.toString();
-        eventData.origin = 'dekoratøren';
-        eventData.originVersion = 'unknown';
-
-        if (amplitude) {
-            amplitude.getInstance().logEvent(eventName, eventData, resolve);
-        }
+export const logAmplitudeEvent = (eventName: string, eventData: EventData = {}, origin = 'dekoratøren') => {
+    return new Promise((resolve) => {
+        amplitude.getInstance().logEvent(
+            eventName,
+            {
+                ...eventData,
+                platform: window.location.toString(),
+                origin,
+                originVersion: eventData.originVersion || 'unknown',
+                viaDekoratoren: true,
+            },
+            resolve
+        );
     });
 };

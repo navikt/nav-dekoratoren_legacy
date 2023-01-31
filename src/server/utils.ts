@@ -69,6 +69,7 @@ export const clientEnv = ({ req }: Props): Environment => {
                 ...(req.query.logoutUrl && {
                     LOGOUT_URL: req.query.logoutUrl as string,
                 }),
+                MASK_HOTJAR: req.query.maskHotjar !== 'false',
             },
         }),
     };
