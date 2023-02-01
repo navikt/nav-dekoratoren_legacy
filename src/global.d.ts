@@ -13,6 +13,7 @@ declare global {
             eventName: string;
             eventData?: EventData;
         }) => Promise<any>;
+        boostInit: any;
     }
 
     namespace NodeJS {
