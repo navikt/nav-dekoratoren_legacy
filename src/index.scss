@@ -23,12 +23,16 @@ body.no-scroll-mobil {
     color: initial;
     background-color: white;
     line-height: normal;
+    width: 100%;
+
+    ul {
+        list-style: none;
+    }
 }
 
 .siteheader {
     position: relative;
     z-index: 1000;
-    width: 100%;
 }
 
 .header-z-wrapper {
@@ -43,17 +47,6 @@ body.no-scroll-mobil {
     }
 }
 
-.site-skiplinks,
-.siteheader,
-.sitefooter {
-    width: 100%;
-
-    ul {
-        list-style: none;
-    }
-}
-
-.site-skiplinks ul,
 .sitefooter ul,
 .siteheader .arbeidsflate ul {
     padding: 0;

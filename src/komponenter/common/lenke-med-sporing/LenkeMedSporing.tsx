@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import style from './LenkeMedSporing.module.scss';
 
 type Props = {
+    role?: string;
     href: string;
     children: React.ReactNode;
     analyticsEventArgs?: AnalyticsEventArgs;
@@ -18,6 +19,7 @@ type Props = {
 } & React.HTMLAttributes<HTMLAnchorElement>;
 
 export const LenkeMedSporing = ({
+    role,
     href,
     children,
     analyticsEventArgs,
@@ -35,6 +37,7 @@ export const LenkeMedSporing = ({
 
     return (
         <a
+            role={role}
             href={href}
             className={classNames(
                 classNameOverride || style.dekoratorLenke,

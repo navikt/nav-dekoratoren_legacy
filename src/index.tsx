@@ -15,6 +15,7 @@ import Header from './komponenter/header/Header';
 import { CookiesProvider } from 'react-cookie';
 import { getSalesforceContainer } from './server/utils';
 import { injectHeadTags } from './head';
+import { hotjarMaskHtml } from './utils/analytics/hotjar';
 
 import './index.scss';
 
@@ -56,6 +57,10 @@ const run = () => {
         .then((environment) => {
             initAnalytics();
             injectHeadTags(environment.APP_URL);
+
+            if (environment.PARAMS.MASK_HOTJAR) {
+                hotjarMaskHtml();
+            }
 
             const store = createStore(environment);
 

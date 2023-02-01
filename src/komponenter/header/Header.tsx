@@ -34,11 +34,11 @@ import {
 import { setParams } from 'store/reducers/environment-duck';
 import { getUrlFromLookupTable } from '@navikt/nav-dekoratoren-moduler';
 import cls from 'classnames';
-import Skiplinks from 'komponenter/header/common/skiplinks/Skiplinks';
-import { useOnPushStateHandlers } from '../../utils/hooks/useOnPushStateHandlers';
-import { GodJul } from './common/godjul/GodJul';
+import Skiplink from 'komponenter/header/common/skiplinks/Skiplink';
+import { useOnPushStateHandlers } from 'utils/hooks/useOnPushStateHandlers';
 
 import './Header.scss';
+import { mapToClosestTranslatedLanguage } from 'utils/language';
 
 export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
 export const decoratorLanguageCookie = CookieName.DECORATOR_LANGUAGE;
@@ -57,6 +57,7 @@ export const Header = () => {
     const [sentAuthToApp, setSentAuthToApp] = useState(false);
     const { environment } = useSelector(stateSelector);
     const { arbeidsflate } = useSelector(stateSelector);
+    const { language } = useSelector(stateSelector);
     const { innloggingsstatus, menypunkt } = useSelector(stateSelector);
     const { authenticated } = innloggingsstatus.data;
     const { PARAMS, APP_URL, API_DEKORATOREN_URL, ENV } = environment;
@@ -67,7 +68,7 @@ export const Header = () => {
 
     const [cookies, setCookie] = useCookies();
 
-    useOnPushStateHandlers(PARAMS, innloggingsstatus);
+    useOnPushStateHandlers();
 
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {
@@ -329,12 +330,11 @@ export const Header = () => {
     };
 
     return (
-        <div className={'decorator-wrapper'}>
+        <div className={'decorator-wrapper'} lang={mapToClosestTranslatedLanguage(language, 'header')}>
             <span id={'top-element'} tabIndex={-1} />
-            <GodJul />
             <BrowserSupportMsg />
             <header className={`siteheader${useSimpleHeader ? ' simple' : ''}`}>
-                <Skiplinks simple={useSimpleHeader} />
+                <Skiplink />
                 {useSimpleHeader ? <HeaderSimple /> : <HeaderRegular />}
             </header>
             <Driftsmeldinger />

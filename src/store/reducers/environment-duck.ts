@@ -43,6 +43,7 @@ export interface Params {
     SHARE_SCREEN: boolean;
     UTILS_BACKGROUND?: string;
     LOGOUT_URL?: string;
+    MASK_HOTJAR?: boolean;
 }
 
 export interface Cookies {
@@ -82,6 +83,7 @@ export const initialState: Environment = {
         CHATBOT_VISIBLE: false,
         URL_LOOKUP_TABLE: false,
         SHARE_SCREEN: false,
+        MASK_HOTJAR: true,
     },
 };
 
