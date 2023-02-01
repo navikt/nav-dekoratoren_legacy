@@ -1,7 +1,7 @@
 @use 'src/styling-variabler' as sv;
 
 .wrapper {
-    background-color: var(--navds-global-color-orange-100);
+    background-color: var(--a-orange-100);
     border-bottom: sv.$header-separator-farge 2px solid;
 }
 

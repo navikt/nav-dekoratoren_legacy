@@ -1,7 +1,7 @@
 @use 'src/styling-variabler' as sv;
 
 .menylinjeTopp {
-    background-color: var(--navds-global-color-deepblue-800);
+    background-color: var(--a-deepblue-800);
 }
 
 .toppKontainer {
@@ -26,12 +26,12 @@
         }
 
         &:focus {
-            color: var(--navds-global-color-blue-500);
+            color: var(--a-blue-500);
             background-color: white;
 
             svg {
-                stroke: var(--navds-global-color-blue-500);
-                color: var(--navds-global-color-blue-500);
+                stroke: var(--a-blue-500);
+                color: var(--a-blue-500);
             }
         }
     }
