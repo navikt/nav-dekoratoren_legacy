@@ -243,6 +243,7 @@ export const ChatbotWrapper = () => {
         <div>
             <button
                 id="chatbot-frida-knapp"
+                aria-label="Åpne chat"
                 onClick={openBoostWindow}
                 className={classNames(style.chatbot, isVisible && style.extraVisible)}
             >
