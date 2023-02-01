@@ -1,11 +1,11 @@
 @use 'src/styling-variabler' as sv;
 
 .driftsmeldinger {
-    background-color: var(--navds-global-color-deepblue-600);
+    background-color: var(--a-deepblue-600);
     display: flex;
     flex-wrap: wrap;
     padding: 0.5rem 0;
-    color: var(--navds-global-color-white);
+    color: var(--a-white);
 
     @media #{sv.$screen-mobile} {
         justify-content: start;
@@ -20,7 +20,7 @@
 }
 
 .message {
-    color: var(--navds-global-color-white);
+    color: var(--a-white);
     padding: 0.5rem;
     display: inline-flex;
     align-items: center;
@@ -41,7 +41,7 @@
     }
 
     &:focus {
-        box-shadow: 0 0 0 3px var(--navds-global-color-white);
+        box-shadow: 0 0 0 3px var(--a-white);
         outline: none;
     }
 }
@@ -49,5 +49,5 @@
     display: flex;
     align-items: center;
     margin-right: 0.5rem;
-    color: var(--navds-global-color-white);
+    color: var(--a-white);
 }

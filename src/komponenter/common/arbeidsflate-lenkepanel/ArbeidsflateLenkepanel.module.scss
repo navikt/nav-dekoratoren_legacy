@@ -1,24 +1,24 @@
 @use 'src/styling-variabler' as sv;
 
 :global(.arbeidsflate-lenkepanel) {
-    border: 2px var(--navds-global-color-blue-500) solid;
+    border: 2px var(--a-blue-500) solid;
     border-radius: 4px;
     margin-bottom: 0;
 
     &:hover {
-        border: 2px var(--navds-global-color-blue-500 solid);
-        background-color: var(--navds-global-color-blue-500);
+        border: 2px var(--a-blue-500 solid);
+        background-color: var(--a-blue-500);
 
         :global(.navds-link-panel__chevron),
         :global(.navds-link-panel__title),
         :global(.navds-link-panel__description),
         :global(.compact-chevron) {
-            color: var(--navds-global-color-white);
+            color: var(--a-white);
         }
 
         :global(.compact-chevron) {
             transform: translateX(6px);
-            stroke: var(--navds-global-color-white);
+            stroke: var(--a-white);
         }
     }
 
@@ -27,11 +27,11 @@
     }
 
     :global(.navds-link-panel__title) {
-        color: var(--navds-global-color-blue-500);
+        color: var(--a-blue-500);
     }
 
     :global(.navds-link-panel__chevron) {
-        color: var(--navds-global-color-blue-500);
+        color: var(--a-blue-500);
     }
 
     :global(.compact-chevron) {
@@ -39,7 +39,7 @@
         align-self: center;
         margin-right: 8px;
         margin-left: -4px;
-        stroke: var(--navds-global-color-blue-500);
+        stroke: var(--a-blue-500);
         transition: transform 0.25s;
     }
 
@@ -60,7 +60,7 @@
 
     :global(.navds-link-panel__description) {
         font-size: 1.1rem;
-        margin-top: var(--navds-spacing-1);
+        margin-top: var(--a-spacing-1);
         line-height: 1.5rem;
     }
 

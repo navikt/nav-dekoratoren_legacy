@@ -13,11 +13,11 @@
     height: 100%;
     background: none;
     align-items: center;
-    color: var(--navds-global-color-blue-500);
+    color: var(--a-blue-500);
     padding: 0 1rem;
     font-weight: 600;
-    border-top: 3px solid var(--navds-global-color-blue-500);
-    border-bottom: 3px solid var(--navds-global-color-blue-500);
+    border-top: 3px solid var(--a-blue-500);
+    border-bottom: 3px solid var(--a-blue-500);
     border-left: 3px solid transparent;
     border-right: 3px solid transparent;
     cursor: pointer;
@@ -27,13 +27,13 @@
     z-index: 1;
     outline: 0;
     background-color: white;
-    box-shadow: 0 0 0 3px var(--navds-semantic-color-focus);
-    color: var(--navds-global-color-blue-500);
+    box-shadow: 0 0 0 3px var(--a-border-focus);
+    color: var(--a-blue-500);
     border: 3px solid transparent;
 }
 
 .sok-knapper__knapp:hover {
-    border-color: var(--navds-global-color-blue-500);
+    border-color: var(--a-blue-500);
 }
 
 .sok-knapper__knapp-avbryt {
@@ -52,15 +52,15 @@
     .sok-knapper__knapp-submit {
         border-radius: 0 3px 3px 0;
         color: white;
-        background-color: var(--navds-global-color-blue-500);
+        background-color: var(--a-blue-500);
     }
 
     .sok-knapper__knapp-submit .sok-ikon__line {
-        background-color: var(--navds-global-color-white);
+        background-color: var(--a-white);
     }
 
     .sok-knapper__knapp-submit .sok-ikon > * {
-        border-color: var(--navds-global-color-white);
+        border-color: var(--a-white);
     }
 
     .sok-knapper__knapp-submit:active,
@@ -81,11 +81,11 @@
     }
 
     .sok-knapper__knapp-submit:focus .sok-ikon__line {
-        background-color: var(--navds-global-color-blue-500);
+        background-color: var(--a-blue-500);
     }
 
     .sok-knapper__knapp-submit:focus .sok-ikon > * {
-        border-color: var(--navds-global-color-blue-500);
+        border-color: var(--a-blue-500);
     }
 
     .sok-knapper__ikon-container {
