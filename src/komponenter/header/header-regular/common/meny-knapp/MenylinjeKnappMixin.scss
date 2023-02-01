@@ -8,22 +8,22 @@
     white-space: nowrap;
 
     &:hover {
-        box-shadow: inset 0 0 0 2px var(--navds-semantic-color-interaction-primary);
+        box-shadow: inset 0 0 0 2px var(--a-surface-action);
     }
 
     &:active {
         :global(.hamburger-ikon) {
             span {
-                background-color: var(--navds-global-color-white);
+                background-color: var(--a-white);
             }
         }
         :global(.sok-ikon) {
             :global(.sok-ikon__line),
             :global(.sok-ikon__line-x) {
-                background-color: var(--navds-global-color-white);
+                background-color: var(--a-white);
             }
             :global(.sok-ikon__circle) {
-                border-color: var(--navds-global-color-white);
+                border-color: var(--a-white);
                 background-color: transparent;
             }
         }
@@ -35,6 +35,6 @@
     }
 
     :global(.navds-button__icon) {
-        --navds-button-icon-adjustment: 0;
+        --v2-migration__navds-button-icon-adjustment: 0;
     }
 }

@@ -29,8 +29,8 @@
             outline: none;
             color: white;
             text-decoration: none;
-            background-color: var(--navds-global-color-deepblue-500);
-            box-shadow: 0 0 0 2px var(--navds-global-color-deepblue-500);
+            background-color: var(--a-deepblue-500);
+            box-shadow: 0 0 0 2px var(--a-deepblue-500);
         }
     }
 
@@ -48,19 +48,19 @@
             animation-delay: calc(var(--index) * 50ms);
             animation-fill-mode: both;
             animation-timing-function: ease-in-out;
-            border-bottom: 1px solid var(--navds-global-color-gray-400);
+            border-bottom: 1px solid var(--a-gray-400);
             margin: 0 -0.5rem;
             padding: 0 0.5rem;
 
             &:focus,
             &:hover {
-                background-color: var(--navds-global-color-gray-300);
+                background-color: var(--a-gray-300);
                 font-weight: bold;
             }
         }
 
         li[aria-selected='true'] {
-            background-color: var(--navds-global-color-gray-300);
+            background-color: var(--a-gray-300);
             font-weight: bold;
         }
 
@@ -101,7 +101,7 @@
             }
 
             li[aria-selected='true'] {
-                background-color: var(--navds-global-color-gray-300);
+                background-color: var(--a-gray-300);
                 font-weight: bold;
             }
 

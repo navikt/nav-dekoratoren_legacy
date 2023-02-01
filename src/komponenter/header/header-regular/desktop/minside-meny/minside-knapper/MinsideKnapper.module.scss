@@ -11,7 +11,7 @@
     white-space: nowrap;
 
     &:hover {
-        box-shadow: inset 0 0 0 2px var(--navds-semantic-color-interaction-primary);
+        box-shadow: inset 0 0 0 2px var(--a-surface-action);
     }
 
     svg {
@@ -23,7 +23,7 @@
 :global(.desktop-minside-meny__knapp) {
     :global(.navds-label) {
         display: flex;
-        gap: var(--navds-spacing-2);
+        gap: var(--a-spacing-2);
     }
 }
 
