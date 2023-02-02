@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { BodyShort } from '@navikt/ds-react';
 import { Expand } from '@navikt/ds-icons';
 import classNames from 'classnames';
-
 import { decoratorLanguageCookie } from '../../Header';
 import { cookieOptions } from '../../../../server/cookieSettings';
 import { AvailableLanguage } from 'store/reducers/language-duck';
@@ -13,9 +12,7 @@ import { useCookies } from 'react-cookie';
 import { useSelector, useStore } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Bilde } from '../../../common/bilde/Bilde';
-
 import Globe from 'ikoner/globe.svg';
-
 import SprakVelgerItem from './SprakVelgerItem';
 import style from 'komponenter/header/common/sprakvelger/SprakVelger.module.scss';
 
@@ -57,8 +54,9 @@ export const SprakVelger = (props: Props) => {
     const onKeyUp = (e: KeyboardEvent) => {
         if (e.key === 'Tab') {
             const buttons = document.querySelectorAll(`.${style.sprakvelger} button`);
-            const hasButtonFocus = Array.from(buttons).some((button) => button === document.activeElement);
-            if (!hasButtonFocus) {
+            // If focus is not on any of the language option buttons, close the menu
+            const hasOptionFocus = Array.from(buttons).some((button) => button === document.activeElement);
+            if (!hasOptionFocus) {
                 toggleMenu(false);
             }
         }

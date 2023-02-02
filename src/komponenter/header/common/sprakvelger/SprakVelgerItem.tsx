@@ -1,8 +1,8 @@
 import React from 'react';
-import Cicle from 'ikoner/circle.svg';
 import { LocaleOption } from './SprakVelger';
 import { Bilde } from '../../../common/bilde/Bilde';
 import { BodyShort } from '@navikt/ds-react';
+import Cicle from 'ikoner/circle.svg';
 import style from 'komponenter/header/common/sprakvelger/SprakVelger.module.scss';
 
 interface Props {
