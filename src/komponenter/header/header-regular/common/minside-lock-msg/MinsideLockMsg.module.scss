@@ -7,8 +7,8 @@
     margin-bottom: 2rem;
     margin-top: 0;
     padding: 1rem;
-    background-color: var(--navds-global-color-lightblue-100);
-    border: 2px solid var(--navds-global-color-lightblue-500);
+    background-color: var(--a-lightblue-100);
+    border: 2px solid var(--a-lightblue-500);
 
     @media #{sv.$screen-mobile} {
         margin-bottom: 1rem;
@@ -21,13 +21,13 @@
     height: 3rem;
     margin-right: 0.625rem;
     padding: 0.75rem 1rem;
-    background-color: var(--navds-global-color-lightblue-300);
+    background-color: var(--a-lightblue-300);
     border-radius: 1.5rem;
 
     svg {
         width: 1rem;
         g {
-            fill: var(--navds-global-color-gray-800);
+            fill: var(--a-gray-800);
         }
     }
 }

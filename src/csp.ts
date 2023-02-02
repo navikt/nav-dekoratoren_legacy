@@ -6,6 +6,7 @@ const cdnNavNo = 'cdn.nav.no';
 const vergicScreenSharing = '*.psplugin.com';
 const vergicDotCom = 'www.vergic.com'; // seems to only be used for a single placeholder image
 const boostChatbot = '*.boost.ai';
+const boostScript = process.env.ENV === 'prod' ? 'nav.boost.ai' : 'navtest.boost.ai';
 const vimeoPlayer = 'player.vimeo.com'; // used for inline videos in the chat client
 const qbrick = 'video.qbrick.com'; // used for inline videos in the chat client
 const vimeoCdn = '*.vimeocdn.com'; // used for video preview images
@@ -25,7 +26,8 @@ const scriptSrc = [
     vergicScreenSharing,
     hotjarCom,
     taskAnalytics,
-    UNSAFE_INLINE, // GTM
+    boostScript,
+    UNSAFE_INLINE, // vergic, hotjar
 ];
 
 const workerSrc = [

@@ -29,10 +29,10 @@ $header-height-simple-mobile: 66px;
 
 $menu-height-mobil: calc(100% - $header-height-mobil);
 
-$header-separator-farge: var(--navds-global-color-gray-300);
+$header-separator-farge: var(--a-gray-300);
 $header-separator-height: 1px;
 
-$footer-seperator-farge: var(--navds-global-color-gray-300);
+$footer-seperator-farge: var(--a-gray-300);
 $footer-seperator-height: 2px;
 
 @mixin flex-col-width-mixin($cols, $margins) {
@@ -47,9 +47,9 @@ $footer-seperator-height: 2px;
 @mixin header-knapp-focus-mixin() {
     &:focus {
         background-color: transparent;
-        color: var(--navds-global-color-blue-500);
+        color: var(--a-blue-500);
         outline: none;
-        box-shadow: 0 0 0 4px var(--navds-semantic-color-focus);
+        box-shadow: 0 0 0 4px var(--a-border-focus);
         border-radius: 4px;
         border-color: transparent;
     }

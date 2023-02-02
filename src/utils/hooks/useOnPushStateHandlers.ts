@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { logPageView } from '../analytics/amplitude';
-import { startTaskAnalyticsSurvey } from '../analytics/task-analytics';
+import { startTaskAnalyticsSurvey } from '../analytics/task-analytics/ta';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../store/reducers';
 
@@ -11,14 +11,14 @@ const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
     language: state.language.language,
     environment: state.environment,
-    appUrl: state.environment.APP_URL,
+    state,
 });
 
 // Run functions on navigating in SPAs
 export const useOnPushStateHandlers = () => {
     const [currentPathname, setCurrentPathname] = useState('');
-    const { innloggingsstatus, environment, language, arbeidsflate, appUrl } = useSelector(stateSelector);
-    const { PARAMS } = environment;
+    const { innloggingsstatus, environment, state } = useSelector(stateSelector);
+    const { PARAMS, APP_URL } = environment;
 
     // Run functions on initial load
     useEffect(() => {
@@ -63,6 +63,6 @@ export const useOnPushStateHandlers = () => {
         }
 
         logPageView(PARAMS, innloggingsstatus);
-        startTaskAnalyticsSurvey(appUrl, arbeidsflate, language);
+        startTaskAnalyticsSurvey(APP_URL, state);
     }, [currentPathname]);
 };
