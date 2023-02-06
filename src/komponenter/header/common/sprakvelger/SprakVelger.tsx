@@ -105,13 +105,13 @@ export const SprakVelger = (props: Props) => {
                     <Expand className={style.chevronNed} aria-hidden />
                 </button>
                 <ul className={classNames(style.menu, isOpen && style.menuOpenState)}>
-                    {options.map((item, index) => (
+                    {options.map((option, index) => (
                         <SprakVelgerItem
                             key={index}
-                            item={item}
+                            item={option}
                             index={index}
                             selectedItem={selectedItem}
-                            onSelectedItemChange={() => onChange(selectedItem as LocaleOption)}
+                            onSelectedItemChange={() => onChange(option as LocaleOption)}
                         />
                     ))}
                 </ul>
