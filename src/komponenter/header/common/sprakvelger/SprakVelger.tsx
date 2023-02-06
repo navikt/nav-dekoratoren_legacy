@@ -26,21 +26,21 @@ export const SprakVelger = (props: Props) => {
     const store = useStore();
     const availableLanguages = props.languages;
     const { language } = useSelector((state: AppState) => state.language);
-    const [isOpen, setIsOpen] = React.useState(false);
-    const [selectedItem, setSelectedItem] = React.useState<LocaleOption | null>(null);
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [selectedLocale, setSelectedLocale] = React.useState<LocaleOption | null>(null);
     const [, setCookie] = useCookies([decoratorLanguageCookie]);
-    const options = transformOptions(availableLanguages).sort((a, b) => (a.label > b.label ? -1 : 1));
+    const languageOptions = transformOptions(availableLanguages).sort((a, b) => (a.label > b.label ? -1 : 1));
 
     useEffect(() => {
-        if (selectedItem === null) {
-            const selected = options.find((option) => option.locale === language);
-            setSelectedItem(selected || null);
+        if (selectedLocale === null) {
+            const selected = languageOptions.find((option) => option.locale === language);
+            setSelectedLocale(selected || null);
         }
     }, []);
 
     const onChange = (selected: LocaleOption) => {
         const { label, ...selectedLanguage } = selected;
-        setSelectedItem(selected);
+        setSelectedLocale(selected);
         setCookie(decoratorLanguageCookie, selectedLanguage.locale, cookieOptions);
         store.dispatch(languageDuck.actionCreator({ language: selectedLanguage.locale }));
 
@@ -66,7 +66,7 @@ export const SprakVelger = (props: Props) => {
         }
     };
 
-    const onMouseClick = (e: MouseEvent) => {
+    const onClick = (e: MouseEvent) => {
         const isClickOutside = !e.composedPath().some((el) => el === document.querySelector(`.${style.sprakvelger}`));
         if (isClickOutside) {
             toggleMenu(false);
@@ -74,17 +74,17 @@ export const SprakVelger = (props: Props) => {
     };
 
     const toggleMenu = (open?: boolean) => {
-        const intentionToOpen = open !== undefined ? open : !isOpen;
+        const isIntentToOpen = open !== undefined ? open : !isMenuOpen;
 
-        if (intentionToOpen) {
+        if (isIntentToOpen) {
             window.addEventListener('keyup', onKeyUp);
-            window.addEventListener('click', onMouseClick);
+            window.addEventListener('click', onClick);
         } else {
             window.removeEventListener('keyup', onKeyUp);
-            window.removeEventListener('click', onMouseClick);
+            window.removeEventListener('click', onClick);
         }
 
-        setIsOpen(intentionToOpen);
+        setIsMenuOpen(isIntentToOpen);
     };
 
     return (
@@ -93,7 +93,7 @@ export const SprakVelger = (props: Props) => {
                 <button
                     className={`${style.knapp} skjemaelement__input`}
                     type="button"
-                    aria-expanded={isOpen}
+                    aria-expanded={isMenuOpen}
                     onClick={() => toggleMenu()}
                 >
                     <div className={style.knappTekst}>
@@ -104,13 +104,13 @@ export const SprakVelger = (props: Props) => {
                     </div>
                     <Expand className={style.chevronNed} aria-hidden />
                 </button>
-                <ul className={classNames(style.menu, isOpen && style.menuOpenState)}>
-                    {options.map((option, index) => (
+                <ul className={classNames(style.menu, isMenuOpen && style.menuOpenState)}>
+                    {languageOptions.map((option, index) => (
                         <SprakVelgerItem
                             key={index}
                             item={option}
                             index={index}
-                            selectedItem={selectedItem}
+                            selectedItem={selectedLocale}
                             onSelectedItemChange={() => onChange(option as LocaleOption)}
                         />
                     ))}
