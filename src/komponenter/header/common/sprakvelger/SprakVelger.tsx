@@ -49,6 +49,8 @@ export const SprakVelger = (props: Props) => {
         } else {
             window.location.assign(selectedLanguage.url);
         }
+
+        toggleMenu(false);
     };
 
     const onKeyUp = (e: KeyboardEvent) => {
