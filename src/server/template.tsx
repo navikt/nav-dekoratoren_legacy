@@ -56,6 +56,8 @@ export const template = (req: Request) => {
 
     const language = params.language || 'nb';
 
+    const isExternallyAvailable = env.APP_URL.includes('www.nav.no');
+
     // Render SSR
     const HtmlHeader = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
@@ -99,9 +101,12 @@ export const template = (req: Request) => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-            }  
-            .decorator-utils-container {
+            }
+            ${
+                isExternallyAvailable &&
+                `.decorator-utils-container {
                 display: none !important;
+            }`
             }
             </style>
         </head>
