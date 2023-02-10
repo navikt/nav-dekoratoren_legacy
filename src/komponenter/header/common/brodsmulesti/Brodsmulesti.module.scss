@@ -66,9 +66,9 @@
         margin-top: 0;
     }
     &:focus {
-        background-color: var(--navds-semantic-color-focus);
-        box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
-        color: var(--navds-global-color-gray-600);
+        background-color: var(--a-border-focus);
+        box-shadow: 0 0 0 2px var(--a-border-focus);
+        color: var(--a-gray-600);
         outline: none;
         text-decoration: none;
         svg {
@@ -92,9 +92,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1px 0px 0px 6px;
-    stroke: var(--navds-global-color-gray-600);
-    color: var(--navds-global-color-gray-600);
+    margin: 1px 0 0 6px;
+    stroke: var(--a-gray-600);
+    color: var(--a-gray-600);
 
     .iconHome {
         margin-right: 0.75rem;
@@ -105,7 +105,7 @@
     }
 
     &:focus .iconHome {
-        color: var(--navds-global-color-gray-600);
+        color: var(--a-gray-600);
     }
 }
 
@@ -113,5 +113,5 @@
     margin-left: -0.25rem;
     margin-right: 0.25rem;
     text-decoration: underline;
-    color: var(--navds-semantic-color-link);
+    color: var(--a-text-action);
 }
