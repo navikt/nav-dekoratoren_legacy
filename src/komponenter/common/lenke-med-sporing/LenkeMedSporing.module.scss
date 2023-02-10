@@ -20,8 +20,8 @@
         outline: none;
         color: #fff;
         text-decoration: none;
-        background-color: var(--navds-semantic-color-focus);
-        box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
+        background-color: var(--a-border-focus);
+        box-shadow: 0 0 0 2px var(--a-border-focus);
 
         svg,
         path {
@@ -32,8 +32,8 @@
     & svg {
         width: 1em;
         height: 1em;
-        fill: var(--navds-semantic-color-link);
-        stroke: var(--navds-semantic-color-link);
+        fill: var(--a-text-action);
+        stroke: var(--a-text-action);
         vertical-align: middle;
         position: relative;
         top: -0.125em;

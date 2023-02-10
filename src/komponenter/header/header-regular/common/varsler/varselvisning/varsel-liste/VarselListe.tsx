@@ -55,7 +55,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                     apiVarselinnboksUrl={API_DEKORATOREN_URL}
                                     tekst={o.tekst}
                                     dato={formatDato(o.tidspunkt)}
-                                    href={o.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : o.link}
+                                    href={o.isMasked ? getLoginUrl(environment, arbeidsflate, 'Level4') : o.link}
                                     isMasked={o.isMasked}
                                     id={
                                         rowIndex !== undefined && subIndex !== undefined
@@ -87,7 +87,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                     apiVarselinnboksUrl={API_DEKORATOREN_URL}
                                     tekst={b.tekst}
                                     dato={formatDato(b.tidspunkt)}
-                                    href={b.isMasked ? getLoginUrl(environment, arbeidsflate, '4') : b.link}
+                                    href={b.isMasked ? getLoginUrl(environment, arbeidsflate, 'Level4') : b.link}
                                     isMasked={b.isMasked}
                                     id={
                                         rowIndex !== undefined && subIndex !== undefined

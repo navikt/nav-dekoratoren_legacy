@@ -1,9 +1,8 @@
-import React from 'react';
-import { BodyShort } from '@navikt/ds-react';
-import Globe from 'ikoner/globe.svg';
+import React, { useEffect } from 'react';
 
+import { BodyShort } from '@navikt/ds-react';
 import { Expand } from '@navikt/ds-icons';
-import { useSelect } from 'downshift';
+import classNames from 'classnames';
 import { decoratorLanguageCookie } from '../../Header';
 import { cookieOptions } from '../../../../server/cookieSettings';
 import { AvailableLanguage } from 'store/reducers/language-duck';
@@ -13,15 +12,9 @@ import { useCookies } from 'react-cookie';
 import { useSelector, useStore } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Bilde } from '../../../common/bilde/Bilde';
+import Globe from 'ikoner/globe.svg';
 import SprakVelgerItem from './SprakVelgerItem';
 import style from 'komponenter/header/common/sprakvelger/SprakVelger.module.scss';
-
-export const farger = {
-    navGra20: '#C6C2BF',
-    navBla: '#0067C5',
-};
-
-const selectorLabel = 'Språk/Language';
 
 export type LocaleOption = AvailableLanguage & { label: string };
 
@@ -33,73 +26,96 @@ export const SprakVelger = (props: Props) => {
     const store = useStore();
     const availableLanguages = props.languages;
     const { language } = useSelector((state: AppState) => state.language);
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [selectedLocale, setSelectedLocale] = React.useState<LocaleOption | null>(null);
     const [, setCookie] = useCookies([decoratorLanguageCookie]);
-    const options = transformOptions(availableLanguages).sort((a, b) => (a.label > b.label ? -1 : 1));
+    const languageOptions = transformOptions(availableLanguages).sort((a, b) => (a.label > b.label ? -1 : 1));
+
+    useEffect(() => {
+        if (selectedLocale === null) {
+            const selected = languageOptions.find((option) => option.locale === language);
+            setSelectedLocale(selected || null);
+        }
+    }, []);
 
     const onChange = (selected: LocaleOption) => {
         const { label, ...selectedLanguage } = selected;
-
+        setSelectedLocale(selected);
         setCookie(decoratorLanguageCookie, selectedLanguage.locale, cookieOptions);
         store.dispatch(languageDuck.actionCreator({ language: selectedLanguage.locale }));
+
         if (selectedLanguage.handleInApp) {
             postMessageToApp('languageSelect', selectedLanguage);
         } else {
             window.location.assign(selectedLanguage.url);
         }
-    };
-    const { isOpen, selectedItem, getToggleButtonProps, getMenuProps, highlightedIndex, getItemProps } = useSelect({
-        items: options,
-        itemToString: (item) => item?.label || '',
-        onSelectedItemChange: ({ selectedItem }) => onChange(selectedItem as LocaleOption),
-        selectedItem: options.find((option) => option.locale === language),
-    });
 
-    const ulStyle = isOpen
-        ? {
-              boxShadow: '0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08)',
-              border: '1px solid',
-              borderRadius: '0 0 4px 4px',
-              outline: 'none',
-              borderColor: farger.navGra20,
-              borderTop: 'none',
-          }
-        : {
-              display: 'none',
-              border: 'none',
-          };
-    // Adding aria-controls and removing aria-labelledby prop from downshift (to avoid an extra reading of label on screen readers)
-    let buttonProps = getToggleButtonProps();
-    delete buttonProps['aria-labelledby'];
-    let menuProps = getMenuProps();
-    delete menuProps['aria-labelledby'];
-    menuProps.id = 'sprakvelger_menuID';
-    buttonProps['aria-controls'] = menuProps.id;
+        toggleMenu(false);
+    };
+
+    const onKeyUp = (e: KeyboardEvent) => {
+        if (e.key === 'Tab') {
+            const buttons = document.querySelectorAll(`.${style.sprakvelger} button`);
+            // If focus is not on any of the language option buttons, close the menu
+            const hasOptionFocus = Array.from(buttons).some((button) => button === document.activeElement);
+            if (!hasOptionFocus) {
+                toggleMenu(false);
+            }
+        }
+
+        if (e.key === 'Escape') {
+            toggleMenu(false);
+        }
+    };
+
+    const onClick = (e: MouseEvent) => {
+        const isClickOutside = !e.composedPath().some((el) => el === document.querySelector(`.${style.sprakvelger}`));
+        if (isClickOutside) {
+            toggleMenu(false);
+        }
+    };
+
+    const toggleMenu = (open?: boolean) => {
+        const isIntentToOpen = open !== undefined ? open : !isMenuOpen;
+
+        if (isIntentToOpen) {
+            window.addEventListener('keyup', onKeyUp);
+            window.addEventListener('click', onClick);
+        } else {
+            window.removeEventListener('keyup', onKeyUp);
+            window.removeEventListener('click', onClick);
+        }
+
+        setIsMenuOpen(isIntentToOpen);
+    };
 
     return (
         <div className={style.container}>
             <nav className={style.sprakvelger}>
-                <button {...buttonProps} className={`${style.knapp} skjemaelement__input`} type="button">
-                    <span className={style.knappTekst}>
+                <button
+                    className={`${style.knapp} skjemaelement__input`}
+                    type="button"
+                    aria-expanded={isMenuOpen}
+                    onClick={() => toggleMenu()}
+                >
+                    <div className={style.knappTekst}>
                         <Bilde asset={Globe} className={style.ikon} />
                         <BodyShort size="small" as={'span'}>
-                            {selectorLabel}
+                            <span lang="no">Språk</span>/<span lang="en">Language</span>
                         </BodyShort>
-                    </span>
+                    </div>
                     <Expand className={style.chevronNed} aria-hidden />
                 </button>
-                <ul {...menuProps} className={style.menu} style={ulStyle}>
-                    <>
-                        {options.map((item, index) => (
-                            <SprakVelgerItem
-                                key={index}
-                                item={item}
-                                index={index}
-                                highlightedIndex={highlightedIndex}
-                                itemProps={getItemProps({ item, index })}
-                                selectedItem={selectedItem}
-                            />
-                        ))}
-                    </>
+                <ul className={classNames(style.menu, isMenuOpen && style.menuOpenState)}>
+                    {languageOptions.map((option, index) => (
+                        <SprakVelgerItem
+                            key={index}
+                            item={option}
+                            index={index}
+                            selectedItem={selectedLocale}
+                            onSelectedItemChange={() => onChange(option as LocaleOption)}
+                        />
+                    ))}
                 </ul>
             </nav>
         </div>

@@ -10,6 +10,7 @@ import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 import { CookiesProvider } from 'react-cookie';
 import hash from 'object-hash';
+import { fontAttribs } from '../head';
 
 // Local environment - import .env
 if (process.env.NODE_ENV !== 'production') {
@@ -55,6 +56,8 @@ export const template = (req: Request) => {
 
     const language = params.language || 'nb';
 
+    const isExternallyAvailable = env.APP_URL.includes('www.nav.no');
+
     // Render SSR
     const HtmlHeader = ReactDOMServer.renderToString(
         <ReduxProvider store={store}>
@@ -98,9 +101,12 @@ export const template = (req: Request) => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-            }  
-            .decorator-utils-container {
+            }
+            ${
+                isExternallyAvailable &&
+                `.decorator-utils-container {
                 display: none !important;
+            }`
             }
             </style>
         </head>
@@ -108,6 +114,9 @@ export const template = (req: Request) => {
             <!-- Styling fetched by apps -->
             <div id='styles'>
                 <link href='${fileCss}' rel='stylesheet'/>
+                <link ${Object.entries(fontAttribs)
+                    .map(([key, value]) => `${key}='${value}'`)
+                    .join(' ')}/>
             </div>
             <div class='decorator-dev-container'>
                 <!-- Header fetched by apps -->
