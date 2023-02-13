@@ -37,11 +37,12 @@ const Arbeidsflatemeny = () => {
                 {arbeidsflateLenker(XP_BASE_URL).map((lenke, index) => {
                     return (
                         <li
-                            aria-current={arbeidsflate === lenke.key ? 'page' : 'false'}
+                            role="none"
                             className={style.listeElement}
                             key={lenke.key}
                         >
                             <LenkeMedSporing
+                                aria-current={arbeidsflate === lenke.key ? 'page' : 'false'}
                                 role="menuitem"
                                 classNameOverride={classNames(
                                     style.lenke,
