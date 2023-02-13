@@ -41,11 +41,11 @@ const Beskjed = ({
     const isArkiverbar = !href && !isOppgave;
 
     const handleOnClick = () => {
-        if (type === 'BESKJED') {
+        if (type === 'BESKJED' && !isMasked) {
             postDone(apiVarselinnboksUrl, { eventId: eventId });
             dispatch(fjernLestVarsel(eventId));
         }
-        logAmplitudeEvent('navigere', { komponent: type });
+        logAmplitudeEvent('navigere', { komponent: type, destinasjon: href });
     };
 
     return isArkiverbar ? (

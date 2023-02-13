@@ -55,7 +55,19 @@ const commonConfig = {
                 test: /\.svg$/,
                 loader: 'svgo-loader',
                 options: {
-                    plugins: [{ removeTitle: false }, { prefixIds: true }],
+                    svgoConfig: {
+                        plugins: [
+                            {
+                                name: 'preset-default',
+                                params: {
+                                    overrides: {
+                                        removeTitle: false,
+                                        prefixIds: true,
+                                    },
+                                },
+                            },
+                        ],
+                    },
                 },
             },
             {

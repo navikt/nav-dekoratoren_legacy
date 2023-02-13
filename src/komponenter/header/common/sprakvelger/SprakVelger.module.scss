@@ -11,17 +11,17 @@
 }
 
 .container:only-child {
-    width: 100%;
     display: flex;
     flex-direction: row-reverse;
+    width: 100%;
 }
 
 .knapp {
-    padding: 0.5rem 0.5rem;
-    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 0.5rem 0.5rem;
+    width: 100%;
 
     .chevronNed {
         align-self: center;
@@ -37,24 +37,10 @@
 }
 
 .ikon {
-    width: 20px;
-    height: 20px;
     filter: invert(50%);
+    height: 20px;
     margin-right: 1em;
-}
-
-.option {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    svg {
-        margin-right: 0.1rem;
-    }
-
-    .not-selected {
-        margin-left: 1.25rem;
-    }
+    width: 20px;
 }
 
 .sirkel {
@@ -62,18 +48,30 @@
 }
 
 .menu {
-    margin: 1px 0 0;
-    padding: 0;
-    z-index: 100;
-    max-height: 10rem;
-    position: absolute;
-    overflow-y: auto;
-    overflow-x: hidden;
-    width: 100%;
+    border: none;
     box-sizing: border-box;
+    display: none;
+    margin: 1px 0 0;
+    max-height: 10rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
 }
-.menuList {
-    padding: 0.5rem;
+
+.menuOpenState {
+    background-color: white;
+    border-radius: 0 0 4px 4px;
+    border-top: none;
+    border: 1px solid var(--a-gray-200);
+    box-shadow: 0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08);
+    display: block;
+    outline: none;
+}
+
+.menuListItem {
     cursor: pointer;
     display: flex;
     border: 1px solid var(--a-gray-200);
@@ -81,5 +79,32 @@
 
     &:not(:last-child) {
         border-bottom: 0;
+    }
+}
+
+.option {
+    align-items: center;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    outline: none;
+    padding: 0.5rem;
+    width: 100%;
+
+    svg {
+        margin-right: 0.1rem;
+    }
+
+    .notSelected {
+        margin-left: 1.25rem;
+    }
+
+    &:hover,
+    &:focus-visible {
+        background-color: var(--a-blue-600);
+        color: white;
     }
 }
