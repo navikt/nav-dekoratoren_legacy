@@ -70,8 +70,6 @@ export const Header = () => {
 
     useOnPushStateHandlers();
 
-    console.log(currentFeatureToggles);
-
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {
         const anchors = Array.prototype.slice.call(document.getElementsByTagName('a'));
