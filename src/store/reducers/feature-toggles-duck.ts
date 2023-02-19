@@ -12,13 +12,11 @@ export interface FeatureToggles {
 // }
 export const initialState: FeatureToggles = {
     'dekoratoren.skjermdeling': false,
+    'dekoratoren.chatbotscript': false,
 };
 // Defined toggles will be fetched from unleash on runtime
 
-export const reducer = (
-    state: FeatureToggles = initialState,
-    action: Handling
-): FeatureToggles => {
+export const reducer = (state: FeatureToggles = initialState, action: Handling): FeatureToggles => {
     switch (action.type) {
         case ActionType.SETT_FEATURE_TOGGLES: {
             return { ...state, ...action.data };

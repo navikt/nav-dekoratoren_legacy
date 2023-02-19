@@ -12,6 +12,7 @@ import style from './ChatbotWrapper.module.scss';
 const stateSelector = (state: AppState) => ({
     chatbotParamEnabled: state.environment.PARAMS.CHATBOT,
     chatbotParamVisible: state.environment.PARAMS.CHATBOT_VISIBLE,
+    featureToggles: state.featureToggles,
     context: state.arbeidsflate.status,
     env: state.environment.ENV,
 });
@@ -33,6 +34,7 @@ export const ChatbotWrapper = () => {
     const [boost, setBoost] = useState<BoostObject | undefined>();
     const [bufferLoad, setBufferLoad] = useState<Boolean>(false);
     const [scriptLoaded, setScriptLoaded] = useState<Boolean>(false);
+    const currentFeatureToggles = useSelector(stateSelector).featureToggles;
 
     const isProduction = env === 'prod';
     const boostApiUrlBase = isProduction ? boostApiUrlBaseProduction : boostApiUrlBaseTest;
@@ -69,7 +71,9 @@ export const ChatbotWrapper = () => {
     useEffect(() => {
         const hasConversation = cookies[conversationCookieName];
         const isVisible = hasConversation || chatbotParamVisible;
-        if (!isVisible) {
+        const isScriptEnabled = currentFeatureToggles['dekoratoren.chatbotscript'];
+
+        if (!isVisible || !isScriptEnabled) {
             return;
         }
 
