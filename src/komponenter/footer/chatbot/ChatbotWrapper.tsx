@@ -75,6 +75,8 @@ export const ChatbotWrapper = () => {
         const isVisible = hasConversation || chatbotParamVisible;
         console.log(isVisible);
         const isScriptEnabled = currentFeatureToggles['dekoratoren.chatbotscript'];
+        console.log(isScriptEnabled);
+        console.log(!isVisible || !isScriptEnabled);
 
         if (!isVisible || !isScriptEnabled) {
             return;
