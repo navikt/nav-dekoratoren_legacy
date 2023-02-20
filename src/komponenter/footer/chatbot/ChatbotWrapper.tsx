@@ -52,9 +52,6 @@ export const ChatbotWrapper = () => {
             return;
         }
 
-        console.log('Checking cookie on init:');
-        console.log(cookies[conversationCookieName]);
-
         const options: BoostConfig = {
             chatPanel: {
                 settings: {
@@ -102,14 +99,10 @@ export const ChatbotWrapper = () => {
         }
 
         boost.chatPanel.addEventListener('conversationIdChanged', (event: any) => {
-            console.log('Cookie was changed:');
             if (!event?.detail?.conversationId) {
-                console.log('Conversation was reset');
                 removeCookie(conversationCookieName);
                 return;
             }
-            console.log('New conversation Id:');
-            console.log(event.detail.conversationId);
             let expirationDay = new Date();
             expirationDay.setHours(expirationDay.getHours() + 1);
             setCookie(conversationCookieName, event.detail.conversationId, { expires: expirationDay });
