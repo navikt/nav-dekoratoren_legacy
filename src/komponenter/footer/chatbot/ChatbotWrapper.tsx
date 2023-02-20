@@ -96,7 +96,7 @@ export const ChatbotWrapper = () => {
             setScriptLoaded(true);
             initBoost();
         });
-    }, [chatbotParamVisible]);
+    }, [chatbotParamVisible, currentFeatureToggles]);
 
     useEffect(() => {
         if (!boost) {
