@@ -69,8 +69,11 @@ export const ChatbotWrapper = () => {
     }, [chatbotParamEnabled]);
 
     useEffect(() => {
+        console.log('Checking things');
         const hasConversation = cookies[conversationCookieName];
+        console.log(hasConversation);
         const isVisible = hasConversation || chatbotParamVisible;
+        console.log(isVisible);
         const isScriptEnabled = currentFeatureToggles['dekoratoren.chatbotscript'];
 
         if (!isVisible || !isScriptEnabled) {
