@@ -32,8 +32,8 @@ export const ChatbotWrapper = () => {
     const [isMounted, setIsMounted] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [boost, setBoost] = useState<BoostObject | undefined>();
-    const [bufferLoad, setBufferLoad] = useState<Boolean>(false);
-    const [scriptLoaded, setScriptLoaded] = useState<Boolean>(false);
+    const [bufferLoad, setBufferLoad] = useState<boolean>(false);
+    const [scriptLoaded, setScriptLoaded] = useState<boolean>(false);
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
 
     const isProduction = env === 'prod';

@@ -2,7 +2,7 @@ type HexColor = `#${string}`;
 
 type ButtonType = 'button' | 'bullet';
 
-type BoostHeaderFilterOptions = { id: Number; title: string; values: string[] };
+type BoostHeaderFilterOptions = { id: number; title: string; values: string[] };
 
 type BoostHeaderFilter = {
     filterValues?: string | string[];
@@ -104,7 +104,7 @@ type BoostSettings = {
     startNewConversationOnResumeFailure?: boolean;
     startTriggerActionId?: string | number;
     triggerActionOnResume?: boolean;
-    userToken?: string | undefined | (() => string | undefined | null);
+    userToken?: string | (() => string | undefined | null);
 };
 
 export type BoostConfig = {
@@ -117,22 +117,22 @@ export type BoostConfig = {
 
 export type BoostObject = {
     chatPanel: {
-        sendMessage: (message: String) => void;
-        addEventListener: (type: String, listener: Function, options?: { once: Boolean }) => void;
-        removeEventListener: (type: String, listener: Function) => void;
-        setFilterValues: (filterValues: String[]) => void;
-        setContextIntentId: (contextIntentId: Number) => void;
-        loginEvent: (info: { authType: String; authContent: String }) => void;
+        sendMessage: (message: string) => void;
+        addEventListener: (type: string, listener: Function, options?: { once: boolean }) => void;
+        removeEventListener: (type: string, listener: Function) => void;
+        setFilterValues: (filterValues: string[]) => void;
+        setContextIntentId: (contextIntentId: number) => void;
+        loginEvent: (info: { authType: string; authContent: string }) => void;
         logoutEvent: () => void;
-        triggerAction: (actionId: Number) => void;
-        setSkill: (skill: String) => void;
+        triggerAction: (actionId: number) => void;
+        setSkill: (skill: string) => void;
         minimize: () => void;
-        setCustomPayload: (customPayload: String | null) => void;
-        setTitle: (newTitle: String | null) => void;
+        setCustomPayload: (customPayload: string | null) => void;
+        setTitle: (newTitle: string | null) => void;
         setConversationId: (
-            newConversationId: String | null,
+            newConversationId: string | null,
             options?: {
-                continueConversation: Boolean;
+                continueConversation: boolean;
             }
         ) => void;
         show: () => void;
