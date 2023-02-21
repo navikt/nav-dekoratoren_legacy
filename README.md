@@ -192,7 +192,47 @@ Logging med dekoratørens Amplitude-klient eksponeres via funksjonen `window.dek
 
 Se [nav-dekoratoren-config](https://github.com/navikt/nav-dekoratoren-config)
 
-## Oppstart via docker-compose
+## Hopplenke til hovedinnhold
+
+Dekoratøren rendrer en hopplenke dersom et element med id'en `maincontent` finnes på siden. Klikk på hopplenken vil sette focus til dette elementet.
+
+For at denne funksjonaliteten skal fungere konsistent, må `maincontent`-elementet inkluderes i HTML'en fra serveren, og elementet må være fokuserbart (f.eks. ved å sette `tabindex="-1"`)
+
+Eksempel:
+
+```html
+<main id="maincontent" tabindex="-1">Appens hovedinnhold goes here!</main>
+```
+
+## Utvikling - Kom i gang
+
+Hent repoet fra github
+
+```
+git clone https://github.com/navikt/nav-dekoratoren.git
+```
+
+Installer nødvendige avhengigheter
+
+```
+npm install
+```
+
+Start eksterne tjenester som oidc-provider og mocks
+
+```
+docker-compose up -d
+```
+
+Kjør applikasjonen lokalt med hot-reloading
+
+```
+npm start
+```
+
+Starter en Node Express / dev - server på <br> http://localhost:8088/dekoratoren
+
+### Oppstart via docker-compose
 
 Start **navikt/nav-dekoratoren**, **navikt/pb-nav-mocked**, **navikt/stub-oidc-provider** og **navikt/pb-oidc-provider-gui**. Oppsettet vil replikere innlogging og eksterne avhengigheter som varselinnboks.
 
@@ -224,46 +264,18 @@ dekoratoren:
 docker login ghcr.io -u GITHUB_USERNAME -p GITHUB_PERSONAL_ACCESS_TOKEN
 ```
 
-## Utvikling - Kom i gang
-
-Hent repoet fra github
-
-```
-git clone https://github.com/navikt/nav-dekoratoren.git
-```
-
-Installer nødvendige avhengigheter
-
-```
-npm install
-```
-
-Start eksterne tjenester som oidc-provider og mocks
-
-```
-docker-compose up -d
-```
-
-Kjør applikasjonen lokalt med hot-reloading
-
-```
-npm start
-```
-
-Starter en Node Express / dev - server på <br> http://localhost:8088/dekoratoren
-
-## Manuelt bygg
+### Manuelt bygg
 
 ```
 npm run build-dev (for testing lokalt)
 npm run build-prod (for produksjon)
 ```
 
-## Deploy til dev-miljø
+### Deploy til dev-miljø
 
 Start deploy workflow via Github web-UI: Actions -> Workflows -> Deploy-to-dev -> Run workflow
 
-## Prodsetting
+### Prodsetting
 
 -   Lag en PR til master, og merge inn etter godkjenning
 -   Lag en release på master med versjon-bump, beskrivende tittel og oppsummering av endringene dine
