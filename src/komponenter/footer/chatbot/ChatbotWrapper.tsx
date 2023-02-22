@@ -105,7 +105,10 @@ export const ChatbotWrapper = () => {
             }
             let expirationDay = new Date();
             expirationDay.setHours(expirationDay.getHours() + 1);
-            setCookie(conversationCookieName, event.detail.conversationId, { expires: expirationDay });
+            setCookie(conversationCookieName, event.detail.conversationId, {
+                expires: expirationDay,
+                domain: isProduction ? '.nav.no' : '.dev.nav.no',
+            });
         });
 
         if (bufferLoad) {
