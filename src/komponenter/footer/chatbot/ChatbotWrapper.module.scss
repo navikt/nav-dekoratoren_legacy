@@ -11,3 +11,118 @@
     visibility: visible;
     opacity: 1;
 }
+
+$openButtonAvatarSizeNumber: 70;
+$chatbotCircleColor: var(--a-blue-800);
+
+.chatbot {
+    appearance: none;
+    background: #fff;
+    padding: 8px 15px;
+    padding-right: ($openButtonAvatarSizeNumber / 3.5) * 1px;
+    margin-right: ($openButtonAvatarSizeNumber / 3) * 1px;
+    margin-bottom: ($openButtonAvatarSizeNumber / 6) * 1px;
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+    z-index: 998;
+    border: 0;
+    cursor: pointer;
+    border-radius: 30px;
+    transform: scale(0.8) translate3d(0, $openButtonAvatarSizeNumber * 2px, 0);
+    opacity: 0;
+    transition: transform 0.2s, opacity 0.1s;
+    display: none;
+
+    &.extraVisible {
+        transform: scale(1);
+        opacity: 1;
+        transition: transform 0.5s, opacity 0.2s 0.3s;
+        display: block;
+    }
+
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4), 0 0 0 5px $chatbotCircleColor, 0 1px 4px rgba(0, 0, 0, 0.5),
+        0 4px 10px #000, 0 0 0 6px rgba(0, 0, 0, 0.1);
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: $chatbotCircleColor;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 5px #fff, 0 4px 10px #000,
+                0 0 0 6px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    &:focus {
+        background: $chatbotCircleColor;
+        outline: none;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 5px #fff, 0 4px 10px #000, 0 0 0 6px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (min-width: 480px) {
+        margin-right: ($openButtonAvatarSizeNumber / 2) * 1px;
+        margin-bottom: ($openButtonAvatarSizeNumber / 5) * 1px;
+        padding: 8px 15px;
+        bottom: 17px;
+        right: 17px;
+    }
+
+    @media (min-width: 580px) {
+        bottom: 25px;
+        right: 25px;
+    }
+}
+
+.chatbotWrapper {
+    width: ($openButtonAvatarSizeNumber - 10) * 1px;
+    height: ($openButtonAvatarSizeNumber - 10) * 1px;
+    position: absolute;
+    top: 50%;
+    right: -($openButtonAvatarSizeNumber / 3) * 1px;
+    transform: translateY(-50%);
+    transition: transform 0.2s;
+    display: inline-block;
+    vertical-align: top;
+
+    .chatbot:hover & {
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    .chatbot:focus & {
+        transform: translateY(-50%) scale(1.1);
+    }
+    svg {
+        width: 100%;
+        height: 100%;
+        border-radius: ($openButtonAvatarSizeNumber) * 1px;
+    }
+
+    &:before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4), 0 0 0 6px $chatbotCircleColor, 0 0 0 5px #fff,
+            0 0 1px 5px rgba(0, 0, 0, 0.2), 0 4px 10px #000, 10px 10px 10px rgba(0, 0, 0, 0.3);
+        border-radius: ($openButtonAvatarSizeNumber) * 1px;
+    }
+
+    @media (hover: hover) {
+        .chatbot:hover &:before {
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4), 0 0 0 6px $chatbotCircleColor, 0 0 0 6px #fff,
+                0 0 1px 5px rgba(0, 0, 0, 0.2), 0 4px 10px #000, 10px 10px 10px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    .chatbot:focus &:before {
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 6px $chatbotCircleColor, 0 4px 10px white,
+            0 0 0 4px #5c4378, 0 0 0 9px var(--a-blue-50), 0 10px 10px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (min-width: 480px) {
+        width: ($openButtonAvatarSizeNumber) * 1px;
+        height: ($openButtonAvatarSizeNumber) * 1px;
+        right: -($openButtonAvatarSizeNumber / 2) * 1px;
+    }
+}

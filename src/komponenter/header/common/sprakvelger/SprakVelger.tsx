@@ -93,7 +93,7 @@ export const SprakVelger = (props: Props) => {
         <div className={style.container}>
             <nav className={style.sprakvelger}>
                 <button
-                    className={`${style.knapp} skjemaelement__input`}
+                    className={`${style.knapp}`}
                     type="button"
                     aria-expanded={isMenuOpen}
                     onClick={() => toggleMenu()}
