@@ -39,7 +39,7 @@ export const NavLogoLenke = (props: Props) => {
             }}
             id={props.id}
         >
-            <Bilde altText="Til forsiden" asset={props.ikon} cacheBuster={'1'} />
+            <Bilde altText="Til forsiden" asset={props.ikon} cacheBuster={'1'} width={64} height={20} />
         </LenkeMedSporing>
     );
 };

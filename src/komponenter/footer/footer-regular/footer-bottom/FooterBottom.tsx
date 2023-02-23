@@ -12,7 +12,7 @@ const FooterBottom = () => {
             <div className={style.footerBottomContent}>
                 <div className={style.topRow}>
                     <ChatbotWrapper />
-                    <Bilde asset={Logo} ariaHidden={true} />
+                    <Bilde asset={Logo} width={64} height={20} ariaHidden={true} />
                 </div>
                 <div className={style.bottomLenker}>
                     <BodyShort>
