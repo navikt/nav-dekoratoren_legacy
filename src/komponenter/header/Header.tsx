@@ -15,7 +15,6 @@ import { fetchDriftsmeldinger } from 'store/reducers/driftsmeldinger-duck';
 import { fetchFeatureToggles, Status } from 'api/api';
 import { ActionType } from 'store/actions';
 import { loadExternalScript } from 'utils/external-scripts';
-import { BrowserSupportMsg } from 'komponenter/header/header-regular/common/browser-support-msg/BrowserSupportMsg';
 import { getLoginUrl } from 'utils/login';
 import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
@@ -332,7 +331,6 @@ export const Header = () => {
     return (
         <div className={'decorator-wrapper'} lang={mapToClosestTranslatedLanguage(language, 'header')}>
             <span id={'top-element'} tabIndex={-1} />
-            <BrowserSupportMsg />
             <header className={`siteheader${useSimpleHeader ? ' simple' : ''}`}>
                 <Skiplink />
                 {useSimpleHeader ? <HeaderSimple /> : <HeaderRegular />}
