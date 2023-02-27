@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { settArbeidsflate } from 'store/reducers/arbeidsflate-duck';
 import { CookieName, cookieOptions } from '../../../server/cookieSettings';
-import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import { AnalyticsEventArgs } from 'utils/analytics/analytics';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
@@ -33,7 +32,7 @@ export const NavLogoLenke = (props: Props) => {
             classNameOverride={`${style.navLogoLenke} navLogoLenke`}
             href={url}
             analyticsEventArgs={props.analyticsEventArgs}
-            onClick={(event) => {
+            onClick={() => {
                 setCookie(CookieName.DECORATOR_CONTEXT, context.key, cookieOptions);
                 dispatch(settArbeidsflate(context.key));
             }}

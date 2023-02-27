@@ -196,7 +196,6 @@ const commonConfig = {
                             },
                         },
                     },
-                    'less-loader',
                 ],
             },
         ],
@@ -238,7 +237,6 @@ const serverConfig = {
     externals: [
         nodeExternals({
             allowlist: [
-                /^nav-frontend-.*$/,
                 /^@navikt\/ds-react.*$/,
                 /^@navikt\/nav-dekoratoren-.*$/,
                 /^@babel\/runtime.*$/,

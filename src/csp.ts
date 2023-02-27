@@ -18,7 +18,7 @@ const taskAnalytics = '*.taskanalytics.com';
 const styleSrc = [
     navNo,
     vergicScreenSharing,
-    UNSAFE_INLINE, // chatbot (styled-components) and some of our own components with style-attributes
+    UNSAFE_INLINE, // various components with style-attributes
 ];
 
 const scriptSrc = [
