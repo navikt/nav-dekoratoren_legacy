@@ -1,0 +1,39 @@
+@use 'src/styling-variabler' as sv;
+
+.wrapper {
+    background-color: var(--a-orange-100);
+    border-bottom: sv.$header-separator-farge 2px solid;
+}
+
+.innhold {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem sv.$margins-sides-desktop;
+    margin: 0 auto;
+    max-width: sv.$desktopMaxWidth;
+
+    @media #{sv.$screen-desktop-small-width-down} {
+        padding: 0.5rem sv.$margins-sides-desktop-small;
+        justify-content: flex-start;
+    }
+}
+
+.tekst {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.varselIkon {
+    margin-right: 1rem;
+
+    img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px black solid;
+    }
+}

@@ -1,3 +1,5 @@
+import 'react-app-polyfill/stable';
+
 // Import this early, to ensure our own CSS gets higher specificity
 import '@navikt/ds-css/dist/index.css';
 
