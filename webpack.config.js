@@ -6,6 +6,9 @@ const prefixer = require('postcss-prefix-selector');
 const autoprefixer = require('autoprefixer');
 const nodeExternals = require('webpack-node-externals');
 const modifySelectors = require('modify-selectors');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
+const analyzeClientBundle = !!process.env.ANALYZE;
 
 const prefixExclusions = [
     'body',
@@ -206,6 +209,8 @@ const commonConfig = {
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             'process.env.BROWSER': JSON.stringify(false),
         }),
+
+        ...(analyzeClientBundle ? [new BundleAnalyzerPlugin()] : []),
     ],
     optimization: {
         emitOnErrors: true,
@@ -244,4 +249,4 @@ const serverConfig = {
     ...commonConfig,
 };
 
-module.exports = [serverConfig, clientConfig];
+module.exports = analyzeClientBundle ? clientConfig : [serverConfig, clientConfig];
