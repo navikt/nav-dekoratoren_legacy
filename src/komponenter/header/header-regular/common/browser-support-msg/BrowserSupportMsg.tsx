@@ -21,17 +21,6 @@ const isBrowserSupported = (browser: BrowserInfo) => {
         return true;
     }
 
-    const versionCheck = (majorReq: number, minorReq: number = 0) => {
-        if (!browser.version) {
-            return true;
-        }
-        const [majorCurrent, minorCurrent] = browser.version.split('.').map(Number);
-        if (!majorCurrent) {
-            return true;
-        }
-        return majorCurrent >= majorReq && (minorCurrent ? minorCurrent >= minorReq : true);
-    };
-
     switch (browser.name) {
         case 'ie':
             return false;
