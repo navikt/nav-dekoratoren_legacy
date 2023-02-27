@@ -56,7 +56,7 @@ const logEventFromApp = (params?: {
 export const logPageView = (params: Params, authState: InnloggingsstatusState) => {
     return logAmplitudeEvent('besøk', {
         sidetittel: document.title,
-        innlogging: authState.data.securityLevel ?? false,
+        innlogging: authState.status === 'OK' ? authState.data.securityLevel || false : 'ubestemt',
         parametre: {
             ...params,
             BREADCRUMBS: !!(params?.BREADCRUMBS && params.BREADCRUMBS.length > 0),
