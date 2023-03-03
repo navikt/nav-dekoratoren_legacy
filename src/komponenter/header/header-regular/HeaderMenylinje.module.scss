@@ -51,7 +51,7 @@
 
 .minsideKnapper {
     @media #{sv.$screen-desktop} {
-        background-color: var(--a-surface-action-subtle-hover);
+        background-color: var(--a-surface-action-subtle);
     }
 
     @media #{sv.$screen-mobile} {
