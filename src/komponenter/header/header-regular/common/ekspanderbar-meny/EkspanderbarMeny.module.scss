@@ -26,7 +26,7 @@
 @media #{sv.$screen-desktop} {
     .container {
         max-width: sv.$desktopMaxWidth;
-        top: calc(sv.$header-height-desktop - sv.$header-separator-height);
+        top: calc(#{sv.$header-height-desktop - sv.$header-separator-height});
         left: 0;
     }
 

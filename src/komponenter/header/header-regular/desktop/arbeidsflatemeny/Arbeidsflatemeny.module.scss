@@ -63,7 +63,6 @@ $underline-height: 4px;
     margin: 0 0.75rem;
 
     &::after {
-        content: attr(data-text);
         content: attr(data-text) / '';
         height: 0;
         visibility: hidden;

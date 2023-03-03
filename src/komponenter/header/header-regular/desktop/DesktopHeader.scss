@@ -15,11 +15,11 @@
         height: 49px + ($padding * 2);
         padding: $padding;
 
-        margin-left: calc(sv.$margins-sides-desktop - $padding);
+        margin-left: calc(#{sv.$margins-sides-desktop - $padding});
         margin-right: -$padding;
 
         @media #{sv.$screen-desktop-small-width-down} {
-            margin-left: calc(sv.$margins-sides-desktop-small - $padding);
+            margin-left: calc(#{sv.$margins-sides-desktop-small - $padding});
         }
     }
 }

@@ -6,7 +6,7 @@
     margin-bottom: 0;
 
     &:hover {
-        border: 2px var(--a-blue-500 solid);
+        border: 2px var(--a-blue-500) solid;
         background-color: var(--a-blue-500);
 
         :global(.navds-link-panel__chevron),
