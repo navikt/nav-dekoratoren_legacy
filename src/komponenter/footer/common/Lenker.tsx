@@ -6,10 +6,9 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { genererUrl } from 'utils/Environment';
 import { LinkLoader } from '../../common/content-loaders/LinkLoader';
-import { BodyShort } from '@navikt/ds-react';
 
 interface Props {
-    node?: MenyNode;
+    nodes?: MenyNode;
 }
 
 const localeSegments: { [locale: string]: string } = { no: 'no', en: 'en', se: 'se' };
@@ -21,38 +20,63 @@ const getLang = (url: string) => {
     return localeSegments[lastSegment];
 };
 
-export const FooterLenker = ({ node }: Props) => {
+type ListElementProps = {
+    wrap: boolean,
+    key?: React.Key,
+    children: JSX.Element,
+}
+type ListWrapperProps = {
+    wrap: boolean,
+    elements: JSX.Element[],
+}
+
+const ListWrapper = ({wrap, elements}: ListWrapperProps):JSX.Element => {
+    if (wrap) {
+        return <ul>{elements}</ul>
+    }
+    return <>{elements}</>
+};
+
+const ListElement = ({wrap, key, children}: ListElementProps) => {
+    if (wrap) {
+        return <li key={key}>{children}</li>
+    }
+    return children;
+};
+
+export const FooterLenker = ({ nodes }: Props) => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
-    if (!node || !node.children) {
+    if (!nodes || !nodes.children) {
         return (
-            <li>
-                <LinkLoader id={'personvern-loader'} />
-            </li>
+            <ListElement wrap={false} children={<LinkLoader id={'personvern-loader'} />} />
         );
     }
 
+    const wrap = nodes.children.length > 1;
+    const list = nodes.children.map((lenkeNode) => (
+        <ListElement
+            wrap={wrap}
+            key={lenkeNode.id}
+            children={
+                <LenkeMedSporing
+                    className="globalLenkeFooter"
+                    href={genererUrl(XP_BASE_URL, lenkeNode.path)}
+                    analyticsEventArgs={{
+                        category: AnalyticsCategory.Footer,
+                        action: `kontakt/${lenkeNode.path}`,
+                        label: lenkeNode.displayName,
+                    }}
+                    lang={getLang(lenkeNode.path)}
+                >
+                    {lenkeNode.displayName}
+                </LenkeMedSporing>
+            }
+        />
+    ));
+
     return (
-        <>
-            {node.children.map((lenkeNode) => (
-                <li key={lenkeNode.id}>
-                    <BodyShort>
-                        <LenkeMedSporing
-                            className="globalLenkeFooter"
-                            href={genererUrl(XP_BASE_URL, lenkeNode.path)}
-                            analyticsEventArgs={{
-                                category: AnalyticsCategory.Footer,
-                                action: `kontakt/${lenkeNode.path}`,
-                                label: lenkeNode.displayName,
-                            }}
-                            lang={getLang(lenkeNode.path)}
-                        >
-                            {lenkeNode.displayName}
-                        </LenkeMedSporing>
-                    </BodyShort>
-                </li>
-            ))}
-        </>
+        <ListWrapper wrap={wrap} elements={list} />
     );
 };
 
