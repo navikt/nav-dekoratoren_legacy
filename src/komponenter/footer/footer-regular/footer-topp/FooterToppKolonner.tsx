@@ -49,16 +49,15 @@ const FooterToppKolonner = ({ firstNode, numberOfNodes }: FooterToppKolonnerProp
                           <Heading level="2" size="small" className="menylenker-overskrift">
                               {columnNode.displayName}
                           </Heading>
-                          <ul>
-                              <FooterLenker node={columnNode} />
-                          </ul>
+                          <FooterLenker nodes={columnNode} />
                       </div>
-                  ))
+                ))
                 : [...Array(numberOfNodes)].map((_, index) => (
                       <div className={'menylenker-seksjon'} key={index}>
                           <LinksLoader id={`footer-link-loader-${loaderId}-${index}`} />
                       </div>
-                  ))}
+                ))
+            }
         </>
     );
 };
