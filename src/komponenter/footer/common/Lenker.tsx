@@ -8,6 +8,7 @@ import { genererUrl } from 'utils/Environment';
 import { LinkLoader } from '../../common/content-loaders/LinkLoader';
 
 interface Props {
+    className?: string;
     nodes?: MenyNode;
 }
 
@@ -26,13 +27,14 @@ type ListElementProps = {
     children: JSX.Element,
 }
 type ListWrapperProps = {
+    className?: string,
     wrap: boolean,
     elements: JSX.Element[],
 }
 
-const ListWrapper = ({wrap, elements}: ListWrapperProps):JSX.Element => {
+const ListWrapper = ({className, wrap, elements}: ListWrapperProps):JSX.Element => {
     if (wrap) {
-        return <ul>{elements}</ul>
+        return <ul className={className}>{elements}</ul>
     }
     return <>{elements}</>
 };
@@ -44,7 +46,7 @@ const ListElement = ({wrap, key, children}: ListElementProps) => {
     return children;
 };
 
-export const FooterLenker = ({ nodes }: Props) => {
+export const FooterLenker = ({ className, nodes }: Props) => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
 
     if (!nodes || !nodes.children) {
@@ -76,7 +78,7 @@ export const FooterLenker = ({ nodes }: Props) => {
     ));
 
     return (
-        <ListWrapper wrap={wrap} elements={list} />
+        <ListWrapper className={className} wrap={wrap} elements={list} />
     );
 };
 
