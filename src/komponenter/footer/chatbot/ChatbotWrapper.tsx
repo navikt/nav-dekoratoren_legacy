@@ -103,7 +103,7 @@ export const ChatbotWrapper = () => {
                 removeCookie(conversationCookieName);
                 return;
             }
-            let expirationDay = new Date();
+            const expirationDay = new Date();
             expirationDay.setHours(expirationDay.getHours() + 1);
             setCookie(conversationCookieName, event.detail.conversationId, {
                 expires: expirationDay,

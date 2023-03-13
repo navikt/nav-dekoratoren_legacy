@@ -38,6 +38,7 @@ export const SprakVelger = (props: Props) => {
     }, [language, languageOptions, selectedLocale]);
 
     const onChange = (selected: LocaleOption) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { label, ...selectedLanguage } = selected;
         setSelectedLocale(selected);
         setCookie(decoratorLanguageCookie, selectedLanguage.locale, cookieOptions);

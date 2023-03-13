@@ -13,7 +13,6 @@ import style from 'komponenter/header/header-regular/desktop/minside-meny/Minsid
 const nodeGroup = KbNavGroup.Minsidemeny;
 
 type Props = {
-    classname: string;
     menyLenker: MenyNode | undefined;
     dittNavUrl: string;
     brukernavn: string;
@@ -21,13 +20,11 @@ type Props = {
 };
 
 export const MinsidemenyInnhold = (props: Props) => {
-    const { classname, menyLenker, dittNavUrl, brukernavn, authLevel } = props;
+    const { menyLenker, dittNavUrl, brukernavn, authLevel } = props;
 
     if (!menyLenker) {
         return null;
     }
-
-    const cls = 'min-side-meny';
 
     return (
         <>
