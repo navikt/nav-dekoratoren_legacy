@@ -6,6 +6,10 @@ import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { FeatureToggles } from 'store/reducers/feature-toggles-duck';
 import { TilbakemeldingRespons } from '../store/reducers/tilbakemelding-duck';
 
+type DoneEvent = {
+    eventId: string;
+};
+
 export enum Status {
     OK = 'OK',
     FEILET = 'FEILET',
@@ -29,7 +33,7 @@ export const hentVarslerFetch = (API_DEKORATOREN_URL: string): Promise<varselinn
     return fetchToJson(`${API_DEKORATOREN_URL}/varsel/proxy/varsel`, { credentials: 'include' });
 };
 
-export const postDone = (API_DEKORATOREN_URL: string, eventId: Object): Promise<number> =>
+export const postDone = (API_DEKORATOREN_URL: string, eventId: DoneEvent): Promise<number> =>
     fetchToJson(`${API_DEKORATOREN_URL}/varsel/beskjed/done`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

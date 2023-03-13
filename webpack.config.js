@@ -212,7 +212,6 @@ const commonConfig = {
         ...(analyzeClientBundle ? [new BundleAnalyzerPlugin()] : []),
     ],
     optimization: {
-        emitOnErrors: true,
         minimizer: [new CssMinimizerPlugin(), `...`],
     },
     output: {

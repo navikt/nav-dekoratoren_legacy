@@ -109,15 +109,13 @@ export const validateClientEnv = (req: Request) => {
 
 export const validateLogoutUrl = (url: string) => {
     if (!isNavUrl(url)) {
-        const error = `logoutUrl supports only nav.no urls - failed to validate ${url}`;
-        throw Error(error);
+        throw Error(`logoutUrl supports only nav.no urls - failed to validate ${url}`);
     }
 };
 
 export const validateRedirectUrl = (url: string) => {
     if (!isNavUrl(url)) {
-        const error = `redirectToUrl supports only nav.no urls - failed to validate ${url}`;
-        throw Error(error);
+        throw Error(`redirectToUrl supports only nav.no urls - failed to validate ${url}`);
     }
 };
 
@@ -128,8 +126,7 @@ export const validateContext = (context: string) => {
         case 'samarbeidspartner':
             break;
         default:
-            const error = `context supports privatperson | arbeidsgiver | samarbeidspartner`;
-            throw Error(error);
+            throw Error('context supports privatperson | arbeidsgiver | samarbeidspartner');
     }
 };
 
@@ -140,8 +137,7 @@ export const validateUtilsBackground = (background: string) => {
         case 'transparent':
             break;
         default:
-            const error = `utilsBackground supports gray | white | transparent`;
-            throw Error(error);
+            throw Error('utilsBackground supports gray | white | transparent');
     }
 };
 
@@ -151,8 +147,7 @@ export const validateLevel = (level: string) => {
         case 'Level4':
             break;
         default:
-            const error = 'level supports Level3 | Level4';
-            throw Error(error);
+            throw Error('level supports Level3 | Level4');
     }
 };
 
@@ -167,8 +162,7 @@ export const validateLanguage = (language: Locale) => {
         case 'ru':
             break;
         default:
-            const error = 'language supports nb | nn | en | se | pl | uk | ru';
-            throw Error(error);
+            throw Error('language supports nb | nn | en | se | pl | uk | ru');
     }
 };
 
