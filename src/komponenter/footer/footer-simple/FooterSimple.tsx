@@ -19,17 +19,15 @@ const FooterSimple = () => {
         if (noder && !personvernNode) {
             settPersonvernNode(findNode(noder, 'Personvern'));
         }
-    }, [data, personvernNode]);
+    }, [language, data, personvernNode]);
 
     return (
         <>
             <div className={style.container}>
                 <ChatbotWrapper />
                 <div className={style.content}>
-                    <ul className={style.personvernLenker}>
-                        <FooterLenker node={personvernNode} />
-                        {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
-                    </ul>
+                    <FooterLenker className={style.personvernLenker} nodes={personvernNode} />
+                    {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
                 </div>
             </div>
         </>
