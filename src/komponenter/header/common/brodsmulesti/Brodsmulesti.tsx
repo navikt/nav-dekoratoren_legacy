@@ -123,11 +123,11 @@ export const Brodsmulesti = (props: Props) => {
                                     }
                                 }}
                             >
-                                <span className={style.linkText}>{breadcrumb.title}</span>
+                                <span>{breadcrumb.title}</span>
                                 <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
                             </LenkeMedSporing>
                         ) : (
-                            <span className={style.linkText}>{breadcrumb.title}</span>
+                            <span>{breadcrumb.title}</span>
                         )}
                     </li>
                 ))}

@@ -6,9 +6,9 @@ import Tekst from 'tekster/finn-tekst';
 
 import style from './SlideToClose.module.scss';
 
-interface Props {
+type Props = {
     children: ReactNode;
-}
+};
 
 const slideMaxAngle = Math.PI / 6;
 const slideMinDx = 25;
@@ -77,7 +77,7 @@ export const SlideToClose = ({ children }: Props) => {
             >
                 {children}
             </div>
-            <div className={style.slideToCloseMessage} style={styleMessage}>
+            <div className={style.slideToCloseContentMessage} style={styleMessage}>
                 <BodyShort>
                     <Tekst id="lukk" />
                 </BodyShort>
