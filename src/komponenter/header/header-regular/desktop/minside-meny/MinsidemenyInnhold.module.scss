@@ -13,20 +13,6 @@ $lenkeseksjoner-margin: 1.5rem;
     }
 }
 
-.knappTekst {
-    text-align: left;
-}
-
-.knappTekstTopp {
-    font-weight: bold;
-}
-
-.knappTekstBunn {
-    margin-top: -0.25em;
-    overflow-x: hidden;
-    white-space: nowrap;
-}
-
 .lenkeSeksjoner {
     display: grid;
     grid-auto-flow: column;

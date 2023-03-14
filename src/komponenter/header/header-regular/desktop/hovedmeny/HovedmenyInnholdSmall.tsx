@@ -41,7 +41,7 @@ export const HovedmenyInnholdSmall = ({
 
     return (
         <div className={classNames(classname, 'hovedmeny-innhold-small')}>
-            <Toppseksjon classname={classname} />
+            <Toppseksjon />
             <div className={'hovedseksjon-small'}>
                 {menyPunkter.children.map((menygruppe, index) => (
                     <MenyLenkeSeksjon

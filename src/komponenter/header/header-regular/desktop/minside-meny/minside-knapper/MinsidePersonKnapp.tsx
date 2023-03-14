@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { People, Expand } from '@navikt/ds-icons';
 
-import style from './MinsideKnapper.module.scss';
+import style from './MinsidePersonKnapp.module.scss';
 
 const stateSelector = (state: AppState) => ({
     brukernavn: state.innloggingsstatus.data.name,

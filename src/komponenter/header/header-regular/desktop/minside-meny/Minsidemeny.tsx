@@ -20,7 +20,7 @@ const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
 });
 
-export const minsideMenyClassname = 'desktop-minside-meny';
+const minsideMenyClassname = 'desktop-minside-meny';
 export const minsideKnappId = 'desktop-minside-knapp-id';
 
 type Props = {
@@ -48,7 +48,6 @@ export const Minsidemeny = ({ kbNavMainState }: Props) => {
             <EkspanderbarMeny isOpen={isOpen} classname={minsideMenyClassname} id={minsideMenyClassname}>
                 {menyPunkter.status === Status.OK ? (
                     <MinsidemenyInnhold
-                        classname={minsideMenyClassname}
                         menyLenker={minsideMenyPunkter}
                         dittNavUrl={environment.MIN_SIDE_URL}
                         brukernavn={brukernavn}

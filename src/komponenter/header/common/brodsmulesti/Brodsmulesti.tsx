@@ -11,7 +11,8 @@ import { getArbeidsflateContext } from '../../../common/arbeidsflate-lenker/arbe
 import { AnalyticsCategory } from '../../../../utils/analytics/analytics';
 import { MenuValue } from '../../../../utils/meny-storage-utils';
 import { getHomeUrl } from '../../../../utils/home-url';
-import style from 'komponenter/header/common/brodsmulesti/Brodsmulesti.module.scss';
+
+import style from './Brodsmulesti.module.scss';
 
 export interface Breadcrumb {
     url: string;
@@ -122,11 +123,11 @@ export const Brodsmulesti = (props: Props) => {
                                     }
                                 }}
                             >
-                                <span className={style.linkText}>{breadcrumb.title}</span>
+                                <span>{breadcrumb.title}</span>
                                 <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
                             </LenkeMedSporing>
                         ) : (
-                            <span className={style.linkText}>{breadcrumb.title}</span>
+                            <span>{breadcrumb.title}</span>
                         )}
                     </li>
                 ))}

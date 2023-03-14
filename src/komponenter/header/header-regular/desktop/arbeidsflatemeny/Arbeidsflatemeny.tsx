@@ -14,7 +14,7 @@ import { MenuValue } from '../../../../../utils/meny-storage-utils';
 import { finnTekst } from 'tekster/finn-tekst';
 import classNames from 'classnames';
 
-import style from 'komponenter/header/header-regular/desktop/arbeidsflatemeny/Arbeidsflatemeny.module.scss';
+import style from './Arbeidsflatemeny.module.scss';
 
 export const arbeidsflatemenyWidthBreakpoint = 1200;
 
@@ -36,11 +36,7 @@ const Arbeidsflatemeny = () => {
             <ul className={style.toppListeRad} aria-label="Velg brukergruppe" role="menubar">
                 {arbeidsflateLenker(XP_BASE_URL).map((lenke, index) => {
                     return (
-                        <li
-                            role="none"
-                            className={style.listeElement}
-                            key={lenke.key}
-                        >
+                        <li role="none" className={style.listeElement} key={lenke.key}>
                             <LenkeMedSporing
                                 aria-current={arbeidsflate === lenke.key ? 'page' : 'false'}
                                 role="menuitem"
