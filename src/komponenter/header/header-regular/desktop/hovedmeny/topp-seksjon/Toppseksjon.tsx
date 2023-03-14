@@ -13,7 +13,7 @@ import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 
-import style from 'komponenter/header/header-regular/desktop/hovedmeny/topp-seksjon/Toppseksjon.module.scss';
+import style from './Toppseksjon.module.scss';
 
 export const Toppseksjon = () => {
     const dispatch = useDispatch();

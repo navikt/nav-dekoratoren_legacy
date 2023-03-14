@@ -3,7 +3,8 @@ import { BodyShort } from '@navikt/ds-react';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import Tekst from 'tekster/finn-tekst';
-import style from 'komponenter/header/header-regular/mobil/meny/innhold/utils/SlideToClose.module.scss';
+
+import style from './SlideToClose.module.scss';
 
 interface Props {
     children: ReactNode;

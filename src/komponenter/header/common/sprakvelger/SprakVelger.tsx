@@ -13,7 +13,7 @@ import { Bilde } from '../../../common/bilde/Bilde';
 import Globe from 'ikoner/globe.svg';
 import SprakVelgerItem from './SprakVelgerItem';
 
-import style from 'komponenter/header/common/sprakvelger/SprakVelger.module.scss';
+import style from './SprakVelger.module.scss';
 
 export type LocaleOption = AvailableLanguage & { label: string };
 

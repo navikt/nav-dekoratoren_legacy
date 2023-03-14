@@ -8,7 +8,7 @@ import { AnalyticsCategory } from 'utils/analytics/analytics';
 import Tekst from 'tekster/finn-tekst';
 import { MinsideLockMsg } from 'komponenter/header/header-regular/common/minside-lock-msg/MinsideLockMsg';
 
-import style from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny.module.scss';
+import style from './MinsidemenyInnhold.module.scss';
 
 const nodeGroup = KbNavGroup.Minsidemeny;
 
@@ -29,7 +29,7 @@ export const MinsidemenyInnhold = (props: Props) => {
     return (
         <>
             <div className={style.toppSeksjon}>
-                <div className={style.toppSeksjonLeft}>
+                <div>
                     <Heading level="2" size="medium" className={style.toppSeksjonTittel}>
                         <Tekst id={'min-side'} />
                     </Heading>
