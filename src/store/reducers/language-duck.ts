@@ -53,9 +53,10 @@ interface GenericDuck<I, T> {
 function genericDuck<I extends object, T>(initialState: I, actionType: T): GenericDuck<I, T> {
     const reducer = (state: I = initialState, action: ActionCreator<T>): I => {
         switch (action.type) {
-            case actionType:
+            case actionType: {
                 const { ...data } = action;
                 return Object.assign({}, state, data);
+            }
             default:
                 return state;
         }

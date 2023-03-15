@@ -21,7 +21,7 @@ const stateSelector = (state: AppState) => ({
 
 export const VarslerKnapp = () => {
     const dispatch = useDispatch();
-    const { isOpen, varsler, appUrl, language } = useSelector(stateSelector);
+    const { isOpen, varsler, language } = useSelector(stateSelector);
 
     const antallVarsler = varsler?.oppgaver.length + varsler?.beskjeder.length;
 

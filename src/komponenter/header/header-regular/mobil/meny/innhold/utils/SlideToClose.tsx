@@ -3,11 +3,12 @@ import { BodyShort } from '@navikt/ds-react';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { useDispatch } from 'react-redux';
 import Tekst from 'tekster/finn-tekst';
-import style from 'komponenter/header/header-regular/mobil/meny/innhold/utils/SlideToClose.module.scss';
 
-interface Props {
+import style from './SlideToClose.module.scss';
+
+type Props = {
     children: ReactNode;
-}
+};
 
 const slideMaxAngle = Math.PI / 6;
 const slideMinDx = 25;
@@ -76,7 +77,7 @@ export const SlideToClose = ({ children }: Props) => {
             >
                 {children}
             </div>
-            <div className={style.slideToCloseMessage} style={styleMessage}>
+            <div className={style.slideToCloseContentMessage} style={styleMessage}>
                 <BodyShort>
                     <Tekst id="lukk" />
                 </BodyShort>

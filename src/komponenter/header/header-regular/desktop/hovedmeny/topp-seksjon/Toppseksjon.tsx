@@ -13,13 +13,9 @@ import { erNavDekoratoren } from 'utils/Environment';
 import { useCookies } from 'react-cookie';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 
-import style from 'komponenter/header/header-regular/desktop/hovedmeny/topp-seksjon/Toppseksjon.module.scss';
+import style from './Toppseksjon.module.scss';
 
-interface Props {
-    classname: string;
-}
-
-export const Toppseksjon = ({ classname }: Props) => {
+export const Toppseksjon = () => {
     const dispatch = useDispatch();
     const [, setCookie] = useCookies([CookieName.DECORATOR_CONTEXT]);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);

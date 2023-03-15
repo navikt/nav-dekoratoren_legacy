@@ -19,8 +19,7 @@ export const buildGraphAndGetRootNode = (
     const getTopEdgeIndex = (index: NodeIndex) => {
         const { col, row, sub } = index;
 
-        const aboveIsSameCol =
-            sub > 0 && !!getElement({ col: col, row: row, sub: sub - 1 });
+        const aboveIsSameCol = sub > 0 && !!getElement({ col: col, row: row, sub: sub - 1 });
         if (aboveIsSameCol) {
             return {
                 col: col,
@@ -49,16 +48,12 @@ export const buildGraphAndGetRootNode = (
         const maxColsAbove = maxColsPerWrappedRow[newRow];
         const lastColAbove = getLastCol(newRow);
         const lastWrappedPositionAbove = lastColAbove % maxColsAbove;
-        const bestAdjacentPositionAbove = Math.floor(
-            (col * maxColsAbove) / maxColsCurrent + 0.5
-        );
+        const bestAdjacentPositionAbove = Math.floor((col * maxColsAbove) / maxColsCurrent + 0.5);
 
         const newCol =
             bestAdjacentPositionAbove >= lastWrappedPositionAbove
                 ? lastColAbove
-                : lastColAbove -
-                  lastWrappedPositionAbove +
-                  bestAdjacentPositionAbove;
+                : lastColAbove - lastWrappedPositionAbove + bestAdjacentPositionAbove;
         const newSub = getLastSub(newCol, newRow);
         return {
             col: newCol,
@@ -92,7 +87,7 @@ export const buildGraphAndGetRootNode = (
         });
         if (belowIsSameRowWrapped) {
             const newColAdjacent = col + maxColsCurrent;
-            const newCol = !!getElement({
+            const newCol = getElement({
                 col: newColAdjacent,
                 row: row,
                 sub: 0,
@@ -113,13 +108,8 @@ export const buildGraphAndGetRootNode = (
         }
 
         const maxColsBelow = maxColsPerWrappedRow[newRow];
-        const bestAdjacentPositionBelow =
-            Math.floor((col * maxColsBelow) / maxColsCurrent + 0.5) %
-            maxColsBelow;
-        const newCol =
-            bestAdjacentPositionBelow < maxColsBelow
-                ? bestAdjacentPositionBelow
-                : maxColsBelow - 1;
+        const bestAdjacentPositionBelow = Math.floor((col * maxColsBelow) / maxColsCurrent + 0.5) % maxColsBelow;
+        const newCol = bestAdjacentPositionBelow < maxColsBelow ? bestAdjacentPositionBelow : maxColsBelow - 1;
         return {
             col: newCol,
             row: newRow,
@@ -137,9 +127,7 @@ export const buildGraphAndGetRootNode = (
             return index;
         }
 
-        const newSub = !!getElement({ col: newCol, row: row, sub })
-            ? sub
-            : getLastSub(newCol, row);
+        const newSub = getElement({ col: newCol, row: row, sub }) ? sub : getLastSub(newCol, row);
         return {
             col: newCol,
             row: row,
@@ -157,9 +145,7 @@ export const buildGraphAndGetRootNode = (
             return index;
         }
 
-        const newSub = !!getElement({ col: newCol, row: row, sub })
-            ? sub
-            : getLastSub(newCol, row);
+        const newSub = getElement({ col: newCol, row: row, sub }) ? sub : getLastSub(newCol, row);
         return {
             col: newCol,
             row: row,
@@ -167,7 +153,7 @@ export const buildGraphAndGetRootNode = (
         };
     };
 
-    const getLastCol = (row: number, col: number = 0): number => {
+    const getLastCol = (row: number, col = 0): number => {
         const nextCol = col + 1;
         if (getElement({ col: nextCol, row: row, sub: 0 })) {
             return getLastCol(row, nextCol);
@@ -175,7 +161,7 @@ export const buildGraphAndGetRootNode = (
         return col;
     };
 
-    const getLastSub = (col: number, row: number, sub: number = 0): number => {
+    const getLastSub = (col: number, row: number, sub = 0): number => {
         const nextSub = sub + 1;
         if (getElement({ col: col, row: row, sub: nextSub })) {
             return getLastSub(col, row, nextSub);
@@ -183,8 +169,7 @@ export const buildGraphAndGetRootNode = (
         return sub;
     };
 
-    const getElement = (index: NodeIndex) =>
-        document.getElementById(getKbId(group, index, idMap)) as HTMLElement;
+    const getElement = (index: NodeIndex) => document.getElementById(getKbId(group, index, idMap)) as HTMLElement;
 
     const getNodeAtIndex = (index: NodeIndex): KbNavNode => {
         const generatedId = getKbId(group, index, idMap);

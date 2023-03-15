@@ -118,8 +118,8 @@ export type BoostConfig = {
 export type BoostObject = {
     chatPanel: {
         sendMessage: (message: string) => void;
-        addEventListener: (type: string, listener: Function, options?: { once: boolean }) => void;
-        removeEventListener: (type: string, listener: Function) => void;
+        addEventListener: (type: string, listener: EventListener, options?: { once: boolean }) => void;
+        removeEventListener: (type: string, listener: EventListener) => void;
         setFilterValues: (filterValues: string[]) => void;
         setContextIntentId: (contextIntentId: number) => void;
         loginEvent: (info: { authType: string; authContent: string }) => void;

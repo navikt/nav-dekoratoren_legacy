@@ -39,6 +39,7 @@ const renderOrHydrate = (reactElement: JSX.Element, container: Element | null) =
 };
 
 class ErrorBoundary extends React.Component<{ children: React.ReactNode }> {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     static getDerivedStateFromError() {}
 
     componentDidCatch(error: any, errorInfo: any) {

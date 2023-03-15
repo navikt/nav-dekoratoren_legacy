@@ -6,7 +6,6 @@ const noMatchMediaSupportFallback = {
 };
 
 export const matchMedia = (mediaQuery: string) => {
-    // @ts-ignore
     if (!verifyWindowObj() || !window.matchMedia) {
         return noMatchMediaSupportFallback;
     }
@@ -14,16 +13,10 @@ export const matchMedia = (mediaQuery: string) => {
     const mql = window.matchMedia(mediaQuery);
 
     if (!mql.addEventListener) {
-        // @ts-ignore
-        mql.addEventListener = (
-            _: string,
-            callback: (e: MediaQueryListEvent) => void
-        ) => mql.addListener(callback);
-        // @ts-ignore
-        mql.removeEventListener = (
-            _: string,
-            callback: (e: MediaQueryListEvent) => void
-        ) => mql.removeListener(callback);
+        (mql as any).addEventListener = (_: string, callback: (e: MediaQueryListEvent) => void) =>
+            mql.addListener(callback);
+        (mql as any).removeEventListener = (_: string, callback: (e: MediaQueryListEvent) => void) =>
+            mql.removeListener(callback);
         return mql;
     }
 

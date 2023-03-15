@@ -10,9 +10,10 @@ import localizedFormat from 'dayjs/plugin/localizedFormat';
 import isToday from 'dayjs/plugin/isToday';
 import VarselBoks from '../../varsel-boks/VarselBoks';
 import Tekst from 'tekster/finn-tekst';
-import style from './VarselListe.module.scss';
 import 'dayjs/locale/nb';
 import { getKbId, KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
+
+import style from './VarselListe.module.scss';
 
 dayjs.extend(localizedFormat);
 dayjs.extend(isToday);
@@ -41,7 +42,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
     const screenReaderText = activateScreenReaderText ? <Tekst id={'varsler-arkiver-skjermleser'} /> : '';
 
     return (
-        <div className="varselliste-wrapper">
+        <div>
             {hasNoOppgaver ? null : (
                 <>
                     <Heading level="3" size="small">

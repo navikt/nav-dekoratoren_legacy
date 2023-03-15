@@ -66,7 +66,7 @@ export const HovedmenyInnhold = ({
 
     return (
         <div className={classname}>
-            <Toppseksjon classname={classname} />
+            <Toppseksjon />
             <Hovedseksjon menyLenker={menyPunkter} classname={classname} numCols={menuNumCols} />
             <Bunnseksjon classname={classname} language={language} arbeidsflate={arbeidsflate} />
         </div>

@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { fjernLestVarsel } from 'store/reducers/varselinnboks-duck';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
+
 import './ArkiverKnapp.scss';
 
 type Props = {

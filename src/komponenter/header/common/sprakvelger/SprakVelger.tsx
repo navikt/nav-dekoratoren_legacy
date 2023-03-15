@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-
-import { BodyShort } from '@navikt/ds-react';
 import { Expand } from '@navikt/ds-icons';
 import classNames from 'classnames';
 import { decoratorLanguageCookie } from '../../Header';
@@ -14,7 +12,8 @@ import { AppState } from 'store/reducers';
 import { Bilde } from '../../../common/bilde/Bilde';
 import Globe from 'ikoner/globe.svg';
 import SprakVelgerItem from './SprakVelgerItem';
-import style from 'komponenter/header/common/sprakvelger/SprakVelger.module.scss';
+
+import style from './SprakVelger.module.scss';
 
 export type LocaleOption = AvailableLanguage & { label: string };
 
@@ -36,9 +35,10 @@ export const SprakVelger = (props: Props) => {
             const selected = languageOptions.find((option) => option.locale === language);
             setSelectedLocale(selected || null);
         }
-    }, []);
+    }, [language, languageOptions, selectedLocale]);
 
     const onChange = (selected: LocaleOption) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { label, ...selectedLanguage } = selected;
         setSelectedLocale(selected);
         setCookie(decoratorLanguageCookie, selectedLanguage.locale, cookieOptions);
@@ -62,7 +62,6 @@ export const SprakVelger = (props: Props) => {
                 toggleMenu(false);
             }
         }
-
         if (e.key === 'Escape') {
             toggleMenu(false);
         }
@@ -98,12 +97,10 @@ export const SprakVelger = (props: Props) => {
                     aria-expanded={isMenuOpen}
                     onClick={() => toggleMenu()}
                 >
-                    <div className={style.knappTekst}>
+                    <span className={style.knappTekst}>
                         <Bilde asset={Globe} className={style.ikon} />
-                        <BodyShort size="small" as={'span'}>
-                            <span lang="no">Språk</span>/<span lang="en">Language</span>
-                        </BodyShort>
-                    </div>
+                        <span lang="no">Språk</span>/<span lang="en">Language</span>
+                    </span>
                     <Expand className={style.chevronNed} aria-hidden />
                 </button>
                 <ul className={classNames(style.menu, isMenuOpen && style.menuOpenState)}>

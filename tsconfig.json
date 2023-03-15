@@ -13,8 +13,13 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "jsx": "preserve",
-        "forceConsistentCasingInFileNames": false,
-        "noEmit": true
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "plugins": [
+            {
+                "name": "typescript-plugin-css-modules"
+            }
+        ]
     },
     "include": ["src"],
     "exclude": ["node_modules"]

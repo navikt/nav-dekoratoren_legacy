@@ -1,6 +1,8 @@
 import React, { useId } from 'react';
 
-export default ({ width, height, color }: { width?: string; height?: string; color?: string }) => {
+type Props = { width?: string; height?: string };
+
+const Lock = ({ width, height }: Props) => {
     const id = useId();
     return (
         <svg
@@ -13,7 +15,7 @@ export default ({ width, height, color }: { width?: string; height?: string; col
             aria-hidden="true"
             aria-labelledby={'lockIcon' + id}
         >
-            <title id={'lockIcon' + id}></title>
+            <title id={'lockIcon' + id} />
             <path
                 fill="currentColor"
                 stroke="none"
@@ -22,3 +24,5 @@ export default ({ width, height, color }: { width?: string; height?: string; col
         </svg>
     );
 };
+
+export default Lock;

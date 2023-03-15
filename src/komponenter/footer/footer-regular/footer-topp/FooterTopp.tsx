@@ -9,6 +9,7 @@ import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
 import FooterLenker from 'komponenter/footer/common/Lenker';
 import { DelSkjermLenke } from 'komponenter/footer/common/del-skjerm-lenke/DelSkjermLenke';
 import FooterToppKolonner from './FooterToppKolonner';
+
 import style from './FooterTopp.module.scss';
 
 const FooterTopp = () => {
@@ -23,7 +24,7 @@ const FooterTopp = () => {
         if (noder && !personvernNode) {
             settPersonvernNode(findNode(noder, 'Personvern'));
         }
-    }, [data, personvernNode]);
+    }, [language, data, personvernNode]);
 
     const scrollToTop = (event: React.MouseEvent) => {
         event.preventDefault();
@@ -55,10 +56,8 @@ const FooterTopp = () => {
                     </div>
                     <div>
                         <FooterToppKolonner firstNode={twoNodesInMiddle ? 3 : 2} numberOfNodes={1} />
-                        <ul>
-                            <FooterLenker node={personvernNode} />
-                            {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
-                        </ul>
+                        <FooterLenker nodes={personvernNode} />
+                        {PARAMS.SHARE_SCREEN && <DelSkjermLenke />}
                     </div>
                 </div>
             </div>

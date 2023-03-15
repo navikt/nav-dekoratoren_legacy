@@ -25,7 +25,6 @@ $menyMargin: 1rem;
 
     & > * {
         // IE11 fallback
-        width: calc(100% / 4 - $menyMargin * 0.75);
-        width: calc(100% / var(--numcols) - $menyMargin * (1 - 1 / var(--numcols)));
+        width: calc(100% / var(--numcols) - #{$menyMargin} * (1 - 1 / var(--numcols)));
     }
 }

@@ -7,6 +7,7 @@ import { postDone } from 'api/api';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import ArkiverKnapp from './arkiver-knapp/ArkiverKnapp';
 import classNames from 'classnames';
+
 import style from './VarselBoks.module.scss';
 
 type Props = {
@@ -49,7 +50,7 @@ const Beskjed = ({
     };
 
     return isArkiverbar ? (
-        <div className={classNames(style.beskjed, style.arkiverbar, isHover && 'hover')}>
+        <div className={classNames(style.beskjed, style.arkiverbar, isHover && style.hover)}>
             <div className={style.ikon} />
             <div className={style.contentWrapper}>
                 <div className={style.tittel}>{isMasked ? <Tekst id="beskjed.maskert.tekst" /> : tekst}</div>
@@ -72,7 +73,7 @@ const Beskjed = ({
             id={id}
             onClick={handleOnClick}
         >
-            <div className={classNames(style.ikon, isOppgave ? style.ikonOppgave : null)} />
+            <div className={style.ikon} />
             <div className={classNames(style.contentWrapper, style.ikkeArkiverbarContentWrapper)}>
                 <div>
                     <div className={style.tittel}>{isMasked ? <Tekst id="beskjed.maskert.tekst" /> : tekst}</div>

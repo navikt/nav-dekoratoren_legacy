@@ -9,7 +9,7 @@ import { valgtbedrift } from 'komponenter/common/arbeidsflate-lenker/hovedmeny-a
 import { minsideKnappId } from 'komponenter/header/header-regular/desktop/minside-meny/Minsidemeny';
 import { Bag } from '@navikt/ds-icons';
 
-import style from 'komponenter/header/header-regular/desktop/minside-meny/minside-knapper/MinsideKnapper.module.scss';
+import style from './MinsideArbgiverKnapp.module.scss';
 
 export const MinsideArbgiverKnapp = () => {
     const { environment } = useSelector((state: AppState) => state);
@@ -17,7 +17,7 @@ export const MinsideArbgiverKnapp = () => {
 
     return (
         <LenkeMedSporing
-            classNameOverride={style.arbgiverKnapp}
+            classNameOverride={style.knapp}
             id={minsideKnappId}
             href={href}
             analyticsEventArgs={{
