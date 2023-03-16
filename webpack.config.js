@@ -221,7 +221,7 @@ const commonConfig = {
 };
 
 const clientConfig = {
-    target: ['web', 'es5'],
+    target: ['web', 'es6'],
     entry: {
         client: './src/index.tsx',
     },
