@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import classNames from "classnames";
 import { Link } from '@navikt/ds-react';
 import { Monitor } from '@navikt/ds-icons';
@@ -35,7 +35,7 @@ export const DelSkjermLenke = () => {
                 href="#"
             >
                 <Tekst id="footer-del-skjerm" />
-                <Monitor title="monitor-ikon" aria-hidden />
+                <Monitor title="monitor-ikon" titleId={`decorator-${useId()}`} aria-hidden />
             </Link>
             {isOpen && <DelSkjermModal isOpen={isOpen} onClose={closeModal} />}
         </>

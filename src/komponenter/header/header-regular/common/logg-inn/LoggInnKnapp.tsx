@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { Button } from '@navikt/ds-react';
 import { finnTekst } from 'tekster/finn-tekst';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
@@ -58,6 +58,7 @@ export const LoggInnKnapp = () => {
                         <Login
                             className={isLoading ? style.loginIconLoading : undefined}
                             title="Login-ikon"
+                            titleId={`decorator-${useId()}`}
                             aria-hidden
                         />
                     )

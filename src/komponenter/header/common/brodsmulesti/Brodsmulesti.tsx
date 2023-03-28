@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { LenkeMedSporing } from '../../../common/lenke-med-sporing/LenkeMedSporing';
@@ -62,9 +62,19 @@ export const Brodsmulesti = (props: Props) => {
                             action: 'nav.no',
                         }}
                     >
-                        <Home className={style.iconHome} title="Hjem-ikon" aria-hidden />
+                        <Home
+                            className={style.iconHome}
+                            title="Hjem-ikon"
+                            titleId={`decorator-${useId()}`}
+                            aria-hidden
+                        />
                         <span>nav.no</span>
-                        <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
+                        <Next
+                            className={style.iconNext}
+                            title="Neste-ikon"
+                            titleId={`decorator-${useId()}`}
+                            aria-hidden
+                        />
                     </LenkeMedSporing>
                 </li>
                 {shouldShowContext && (
@@ -81,7 +91,12 @@ export const Brodsmulesti = (props: Props) => {
                             <span>
                                 <Tekst id={context.lenkeTekstId} />
                             </span>
-                            <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
+                            <Next
+                                className={style.iconNext}
+                                title="Neste-ikon"
+                                titleId={`decorator-${useId()}`}
+                                aria-hidden
+                            />
                         </LenkeMedSporing>
                     </li>
                 )}
@@ -97,7 +112,12 @@ export const Brodsmulesti = (props: Props) => {
                         >
                             {' '}
                             <span className={style.iconEllipsis}>...</span>
-                            <Next className={style.iconLongBreadCrumb} title="Neste-ikon" aria-hidden />
+                            <Next
+                                className={style.iconLongBreadCrumb}
+                                title="Neste-ikon"
+                                titleId={`decorator-${useId()}`}
+                                aria-hidden
+                            />
                         </button>
                     </li>
                 )}
@@ -124,7 +144,12 @@ export const Brodsmulesti = (props: Props) => {
                                 }}
                             >
                                 <span>{breadcrumb.title}</span>
-                                <Next className={style.iconNext} title="Neste-ikon" aria-hidden />
+                                <Next
+                                    className={style.iconNext}
+                                    title="Neste-ikon"
+                                    titleId={`decorator-${useId()}`}
+                                    aria-hidden
+                                />
                             </LenkeMedSporing>
                         ) : (
                             <span>{breadcrumb.title}</span>
