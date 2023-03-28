@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Tekst from 'tekster/finn-tekst';
 import { Link } from '@navikt/ds-react';
@@ -43,7 +43,7 @@ const FooterTopp = () => {
             <div className={style.toppKontainer}>
                 <div className={style.tilToppen}>
                     <Link onClick={scrollToTop} className="globalLenkeFooter" href="#" id="footer-til-toppen">
-                        <Up title="pil-opp-ikon" titleId={`decorator-${useId()}`} aria-hidden />
+                        <Up title="pil-opp-ikon" titleId="footer-til-toppen-ikon" aria-hidden />
                         <Tekst id="footer-til-toppen" />
                     </Link>
                 </div>
