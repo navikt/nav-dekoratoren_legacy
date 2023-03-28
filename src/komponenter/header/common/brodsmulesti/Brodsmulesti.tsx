@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { LenkeMedSporing } from '../../../common/lenke-med-sporing/LenkeMedSporing';
@@ -65,14 +65,14 @@ export const Brodsmulesti = (props: Props) => {
                         <Home
                             className={style.iconHome}
                             title="Hjem-ikon"
-                            titleId={`decorator-${useId()}`}
+                            titleId={'breadcrumb-home'}
                             aria-hidden
                         />
                         <span>nav.no</span>
                         <Next
                             className={style.iconNext}
                             title="Neste-ikon"
-                            titleId={`decorator-${useId()}`}
+                            titleId={'breadcrumb-next-first'}
                             aria-hidden
                         />
                     </LenkeMedSporing>
@@ -94,7 +94,7 @@ export const Brodsmulesti = (props: Props) => {
                             <Next
                                 className={style.iconNext}
                                 title="Neste-ikon"
-                                titleId={`decorator-${useId()}`}
+                                titleId={'breadcrumb-next-context'}
                                 aria-hidden
                             />
                         </LenkeMedSporing>
@@ -115,7 +115,7 @@ export const Brodsmulesti = (props: Props) => {
                             <Next
                                 className={style.iconLongBreadCrumb}
                                 title="Neste-ikon"
-                                titleId={`decorator-${useId()}`}
+                                titleId={'breadcrumb-next-collapsed'}
                                 aria-hidden
                             />
                         </button>
@@ -147,7 +147,7 @@ export const Brodsmulesti = (props: Props) => {
                                 <Next
                                     className={style.iconNext}
                                     title="Neste-ikon"
-                                    titleId={`decorator-${useId()}`}
+                                    titleId={`breadcrumb-next-${index}`}
                                     aria-hidden
                                 />
                             </LenkeMedSporing>

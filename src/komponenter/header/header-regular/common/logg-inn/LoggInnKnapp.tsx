@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import React from 'react';
 import { Button } from '@navikt/ds-react';
 import { finnTekst } from 'tekster/finn-tekst';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
@@ -53,12 +53,16 @@ export const LoggInnKnapp = () => {
                 disabled={isLoading}
                 icon={
                     authenticated ? (
-                        <Logout aria-hidden />
+                        <Logout
+                            title="Loggut-ikon"
+                            titleId="decorator-logout-icon"
+                            aria-hidden
+                        />
                     ) : (
                         <Login
                             className={isLoading ? style.loginIconLoading : undefined}
-                            title="Login-ikon"
-                            titleId={`decorator-${useId()}`}
+                            title="Logginn-ikon"
+                            titleId="decorator-login-icon"
                             aria-hidden
                         />
                     )
