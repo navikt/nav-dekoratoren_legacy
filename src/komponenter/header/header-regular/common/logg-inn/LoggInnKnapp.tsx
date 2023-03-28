@@ -53,11 +53,16 @@ export const LoggInnKnapp = () => {
                 disabled={isLoading}
                 icon={
                     authenticated ? (
-                        <Logout aria-hidden />
+                        <Logout
+                            title="Loggut-ikon"
+                            titleId="decorator-logout-icon"
+                            aria-hidden
+                        />
                     ) : (
                         <Login
                             className={isLoading ? style.loginIconLoading : undefined}
-                            title="Login-ikon"
+                            title="Logginn-ikon"
+                            titleId="decorator-login-icon"
                             aria-hidden
                         />
                     )

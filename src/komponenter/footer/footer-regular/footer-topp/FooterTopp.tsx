@@ -43,7 +43,7 @@ const FooterTopp = () => {
             <div className={style.toppKontainer}>
                 <div className={style.tilToppen}>
                     <Link onClick={scrollToTop} className="globalLenkeFooter" href="#" id="footer-til-toppen">
-                        <Up title="pil-opp-ikon" aria-hidden />
+                        <Up title="pil-opp-ikon" titleId="footer-til-toppen-ikon" aria-hidden />
                         <Tekst id="footer-til-toppen" />
                     </Link>
                 </div>

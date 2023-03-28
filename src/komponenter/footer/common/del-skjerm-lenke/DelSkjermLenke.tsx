@@ -35,7 +35,7 @@ export const DelSkjermLenke = () => {
                 href="#"
             >
                 <Tekst id="footer-del-skjerm" />
-                <Monitor title="monitor-ikon" aria-hidden />
+                <Monitor title="monitor-ikon" titleId="footer-monitor-icon" aria-hidden />
             </Link>
             {isOpen && <DelSkjermModal isOpen={isOpen} onClose={closeModal} />}
         </>
