@@ -57,6 +57,7 @@ export const ChatbotWrapper = () => {
                 settings: {
                     removeRememberedConversationOnChatPanelClose: true,
                     conversationId: cookies[conversationCookieName],
+                    openTextLinksInNewTab: true,
                 },
             },
         };
