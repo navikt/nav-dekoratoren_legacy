@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    team: personbruker
+  name: nav-dekoratoren-everyones-invited
+  namespace: personbruker
+spec:
+  podSelector:
+    matchExpressions:
+    - { key: app, operator: In, values: [nav-dekoratoren, nav-dekoratoren-beta, nav-dekoratoren-beta-tms] }
+  ingress:
+    - from:
+      - namespaceSelector: {}
+  policyTypes:
+    - Ingress

@@ -4,6 +4,8 @@ ingresses:
   - https://dekoratoren-beta.dev.nav.no
 outboundHosts:
   - www.dev.nav.no
+  - www-2.dev.nav.no
+  - www-q6.nav.no
 env:
   - name: ENV
     value: dev
