@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - .nais/network-policy/network-policy-prod.yml
+      - .nais/network-policy/network-policy-prod.yaml
 
 jobs:
   deploy_network_policy:
@@ -19,4 +19,4 @@ jobs:
         env:
           CLUSTER: prod-gcp
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          RESOURCE: .nais/network-policy/network-policy-prod.yml
+          RESOURCE: .nais/network-policy/network-policy-prod.yaml
