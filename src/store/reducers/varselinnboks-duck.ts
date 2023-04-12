@@ -25,6 +25,7 @@ export interface Varsler {
     tekst: string;
     link: string;
     isMasked: boolean;
+    eksternVarslingKanaler: string[];
 }
 
 export const initialState: VarselinnboksState = {

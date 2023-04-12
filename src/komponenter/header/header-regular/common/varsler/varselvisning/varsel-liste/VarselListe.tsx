@@ -69,6 +69,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                     }
                                     setActivateScreenReaderText={setActivateScreenReaderText}
                                     type={o.type}
+                                    eksternVarslingKanaler={o.eksternVarslingKanaler}
                                 />
                             </li>
                         ))}
@@ -101,6 +102,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                     }
                                     setActivateScreenReaderText={setActivateScreenReaderText}
                                     type={b.type}
+                                    eksternVarslingKanaler={b.eksternVarslingKanaler}
                                 />
                             </li>
                         ))}

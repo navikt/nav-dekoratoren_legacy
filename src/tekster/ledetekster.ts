@@ -323,4 +323,16 @@ export const ledetekster: { [key: string]: stringOrFunction } = {
     //Varselbjelle
     'oppgave.maskert.tekst': 'Du har fått en oppgave, logg inn med høyere sikkerhetsnivå for å se oppgaven.',
     'beskjed.maskert.tekst': 'Du har fått en melding, logg inn med høyere sikkerhetsnivå for å se meldingen.',
+    'varslet-epost-og-sms': 'Varslet på e-post og SMS',
+    'varslet-epost-og-en': 'Notified by e-mail and SMS',
+    'varslet-epost-og-se': 'Varslet på e-post og SMS',
+    'varslet-epost': 'Varslet på e-post',
+    'varslet-epost-en': 'Notified by e-mail',
+    'varslet-epost-se': 'Varslet på e-post',
+    'varslet-sms': 'Varslet på e-post',
+    'varslet-sms-en': 'Notified by e-mail',
+    'varslet-sms-se': 'Varslet på e-post',
+    'arkiver': 'Arkiver',
+    'arkiver-en': 'Archive',
+    'arkiver-se': 'Arkiver',
 };

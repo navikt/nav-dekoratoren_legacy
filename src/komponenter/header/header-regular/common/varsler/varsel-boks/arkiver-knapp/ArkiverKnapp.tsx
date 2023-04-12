@@ -3,8 +3,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { fjernLestVarsel } from 'store/reducers/varselinnboks-duck';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
+import { Button } from '@navikt/ds-react';
+import Tekst from 'tekster/finn-tekst';
 
-import './ArkiverKnapp.scss';
 
 type Props = {
     eventId: string;
@@ -14,7 +15,7 @@ type Props = {
     id?: string;
 };
 
-const ArkiverKnapp = ({ eventId, apiVarselinnboksUrl, setIsHover, setActivateScreenReaderText, id }: Props) => {
+const ArkiverKnapp = ({ eventId, apiVarselinnboksUrl, setActivateScreenReaderText, id }: Props) => {
     const dispatch = useDispatch();
 
     const handleOnClick = () => {
@@ -25,24 +26,15 @@ const ArkiverKnapp = ({ eventId, apiVarselinnboksUrl, setIsHover, setActivateScr
         logAmplitudeEvent('beskjed', { komponent: 'Arkivert beskjed' });
     };
 
-    const handleMouseEnter = () => {
-        setIsHover(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHover(false);
-    };
-
     return (
-        <button
-            className="arkiver-btn"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+        <Button
+            variant='tertiary'
+            size='xsmall'
             onClick={handleOnClick}
             id={id}
         >
-            Arkiver
-        </button>
+            <Tekst id="arkiver" /> 
+        </Button>
     );
 };
 

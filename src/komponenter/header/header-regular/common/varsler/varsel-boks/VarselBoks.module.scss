@@ -17,19 +17,29 @@
 
     .contentWrapper {
         width: 100%;
-        margin-right: 16px;
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .ikkeArkiverbarContentWrapper {
-        align-items: center;
+        flex-direction: column;
+        padding: 1rem;
     }
 
     .dato {
         font-size: 16px;
         color: #707070;
+    }
+
+    .metadataOgKnapp {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .tittelOgDato {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
     }
 }
 
@@ -45,15 +55,16 @@
 
     .contentWrapper {
         flex-direction: column;
-        padding: 12px 0;
+        padding: 1rem;
     }
 
-    .datoOgKnapp {
+    .metadataOgKnapp {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         width: 100%;
+        margin-top: 12px;
     }
 }
 
@@ -73,12 +84,7 @@
     }
 
     .tittel {
-        padding: 12px 0 5px 0;
         font-weight: bolder;
-    }
-
-    .dato {
-        padding-bottom: 12px;
     }
 }
 
@@ -86,17 +92,6 @@
     &:hover {
         background-color: #ffd799;
     }
-
-    .ikon {
-        background-color: #ffd799;
-    }
-}
-
-.ikon {
-    margin: 0 1rem 0 0;
-    background-color: #99c4dd;
-    width: 8px;
-    border-radius: 8px 0 0 8px;
 }
 
 .chevron {
@@ -104,4 +99,13 @@
     width: 21px;
     min-width: 21px;
     height: 21px;
+}
+
+.varselTag {
+    border: none !important;
+}
+
+.ikonOgTag {
+    display: flex;
+    column-gap: 8px;
 }
