@@ -5,6 +5,7 @@ import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
 import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { FeatureToggles } from 'store/reducers/feature-toggles-duck';
 import { TilbakemeldingRespons } from '../store/reducers/tilbakemelding-duck';
+import { getDecoratorData } from 'utils/decorator-data';
 
 type DoneEvent = {
     eventId: string;
@@ -22,7 +23,13 @@ export interface DataElement {
     status: Status;
 }
 
-export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => fetchToJson(`${APP_URL}/api/meny`);
+export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => {
+    const menu = getDecoratorData()?.menu;
+    if (menu) {
+        return Promise.resolve(menu);
+    }
+    return fetchToJson(`${APP_URL}/api/meny`);
+};
 
 export const hentInnloggingsstatusFetch = (API_DEKORATOREN_URL: string): Promise<innloggingsstatusData> =>
     fetchToJson(`${API_DEKORATOREN_URL}/auth`, {

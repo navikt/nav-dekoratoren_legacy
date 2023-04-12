@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -24,9 +25,9 @@ const cache = new NodeCache({
 
 const buildId = process.env.BUILD_ID;
 
-export const template = (req: Request) => {
+export const template = async (req: Request) => {
     // Set environment based on request params
-    const env = clientEnv({ req, cookies: {} });
+    const env = clientEnv(req);
 
     // Resources
     const fileEnv = `${env.APP_URL}/env`;
@@ -137,6 +138,18 @@ export const template = (req: Request) => {
             <div id='scripts'>
                 <div id='decorator-env' data-src='${fileEnv}${paramsAsString}'></div>
                 <script async src='${fileScript}'></script>
+                <script id="__DECORATOR_DATA__" type="application/json">
+                    ${JSON.stringify({
+                        env,
+                        menu: await fetch(`${process.env.API_XP_SERVICES_URL}/no.nav.navno/menu`).then((response) => {
+                            if (response.status === 200) {
+                                return response.json();
+                            } else {
+                                throw new Error(`${response.status} - ${response.statusText}`);
+                            }
+                        }),
+                    })}
+                </script>
             </div>
             <div id='skiplinks'></div>
             <div id='megamenu-resources'></div>

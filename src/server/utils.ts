@@ -4,17 +4,9 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { AvailableLanguage, Locale } from 'store/reducers/language-duck';
 import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
 
-interface Cookies {
-    [key: string]: MenuValue | Locale | string;
-}
-
-interface Props {
-    req: Request;
-    cookies: Cookies;
-}
 // Client environment
 // Obs! Don't expose secrets
-export const clientEnv = ({ req }: Props): Environment => {
+export const clientEnv = (req: Request): Environment => {
     // Throw errors if parameters are invalid
     validateClientEnv(req);
 

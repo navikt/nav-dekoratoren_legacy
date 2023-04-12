@@ -1,7 +1,13 @@
 import { Environment } from 'store/reducers/environment-duck';
 import { getSalesforceContainer } from '../server/utils';
+import { getDecoratorData } from './decorator-data';
 
 export const fetchEnv = (): Promise<Environment> => {
+    const env = getDecoratorData()?.env;
+    if (env) {
+        return Promise.resolve(env);
+    }
+
     return new Promise((resolve) => {
         const envDom =
             document.getElementById('decorator-env') || getSalesforceContainer('c-salesforce-header', 'decorator-env');

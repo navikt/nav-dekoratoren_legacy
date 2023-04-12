@@ -97,10 +97,10 @@ app.use(
 const pathsForTemplate = [appPaths, createPaths('/:locale(no|en|se)/*'), oldBasePath].flat();
 
 // HTML template
-app.get(pathsForTemplate, (req, res, next) => {
+app.get(pathsForTemplate, async (req, res, next) => {
     try {
         res.setHeader('Content-Security-Policy', cspHeader);
-        res.send(template(req));
+        res.send(await template(req));
     } catch (e) {
         next(e);
     }
@@ -109,8 +109,7 @@ app.get(pathsForTemplate, (req, res, next) => {
 // Client environment
 app.get(createPaths('/env'), (req, res, next) => {
     try {
-        const cookies = (req as any).universalCookies.cookies;
-        res.send(clientEnv({ req, cookies }));
+        res.send(clientEnv(req));
     } catch (e) {
         next(e);
     }
