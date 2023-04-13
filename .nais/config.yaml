@@ -29,6 +29,10 @@ spec:
         {{#each outboundHosts as |host|}}
         - host: {{host}}
         {{/each}}
+    inbound:
+      rules:
+        - application: "*"
+          namespace: "*"
   env:
     - name: BUILD_ID
       value: {{BUILD_ID}}
