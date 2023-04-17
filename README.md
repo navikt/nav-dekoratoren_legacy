@@ -1,8 +1,8 @@
-# Nav-dekoratoren ![nav.no logo](src/ikoner/meny/NavLogoRod.svg)
+# nav-dekoratoren ![nav.no logo](src/ikoner/meny/NavLogoRod.svg)
 
 ![Deploy til prod](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-prod/badge.svg) | ![Deploy til dev](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-dev/badge.svg)
 
-Node.js Express applikasjon med frontend-komponenter i React.<br>
+node.js/React applikasjon for header og footer på [nav.no](https://www.nav.no)
 
 ## Bruk av dekoratøren
 
@@ -10,11 +10,13 @@ Dekoratøren serveres på følgende ingresser:
 
 **Prod (prod-gcp)**
 
+-   http://nav-dekoratoren.personbruker (service host)
 -   https://www.nav.no/dekoratoren/
 -   https://appres.nav.no/common-html/v4/navno (deprecated)
 
 **Dev (dev-gcp)**
 
+-   http://nav-dekoratoren.personbruker (service host)
 -   https://www.dev.nav.no/dekoratoren/
 -   https://dekoratoren.dev.nav.no/
 -   https://dekoratoren.ekstern.dev.nav.no/ (tilgjengelig fra åpent internett)
@@ -23,40 +25,40 @@ _Merk:_ Dekoratøren på disse ingressene har som mål å være relativt stabil 
 
 **Beta (dev-gcp)**
 
+Team nav.no:
+
+-   http://nav-dekoratoren-beta.personbruker (service host)
 -   https://dekoratoren-beta.dev.nav.no/
 
-_Merk:_ Dekoratøren på denne ingressen er kun ment brukt for testing av pågående utvikling, og bør ikke konsumeres av andre applikasjoner siden den kan være ustabil eller inneholde feil.
+Team min side:
+
+-   http://nav-dekoratoren-beta-tms.personbruker (service host)
+-   https://dekoratoren-beta-tms.dev.nav.no/
+
+_Merk:_ Dekoratøren på disse ingressen er kun ment brukt for testing av pågående utvikling, og bør ikke konsumeres av andre applikasjoner siden den kan være ustabil eller inneholde feil.
 
 ## Implementasjon
 
-Dekoratøren kan implementeres på flere ulike måter, både server-side og client-side.
+Dekoratøren består av fire elementer med unike id'er som må settes inn i HTML'en til applikasjonen din:
+
+| Beskrivelse                | id                |
+| -------------------------- | ----------------- |
+| Header HTML                | `header-withmenu` |
+| Footer HTML                | `footer-withmenu` |
+| JavaScript og context data | `scripts`         |
+| CSS                        | `styles`          |
+
+### Med NPM-pakke
+
 Ved bruk av Node.js kan [@navikt/nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler#readme) benyttes.
 
-### Eksempel 1
+### Med egen implementasjon
 
-Hent dekoratøren server-side og send HTML til brukeren som inkluderer dekoratøren:
+#### Server-side rendering (anbefalt)
 
-```
-// Type
-export type Props = Params & (
-    | { env: "prod" | "dev" }
-    | { env: "localhost"; port: number; }
-);
+Hent dekoratøren server-side og send HTML til brukeren som inkluderer dekoratøren.
 
-// Bruk
-import { injectDecoratorServerSide } from '@navikt/nav-dekoratoren-moduler/ssr'
-injectDecoratorServerSide({ env: "dev", filePath: "index.html", simple: true, chatbot: true })
-    .then((html) => {
-        res.send(html);
-    })
-    .catch((e) => {
-        ...
-    })
-```
-
-[Eksempel i Personopplysninger](https://github.com/navikt/personopplysninger/blob/master/server/dekorator.js). <br>
-Ved bruk av andre teknologier kan dekoratøren hentes ved hjelp av HTTP kall. <br>Eksempel i
-pseudokode:
+Eksempel:
 
 ```
 fetch("{MILJO_URL}/?{DINE_PARAMETERE}").then(res => {
@@ -74,24 +76,11 @@ fetch("{MILJO_URL}/?{DINE_PARAMETERE}").then(res => {
 });
 ```
 
-### Eksempel 2
+#### Client-side rendering
 
-:warning: &nbsp; Bruk av client-side rendering kan gi en redusert brukeropplevelse, med "flicker"/layout shifting når headeren renderes.
+Obs! CSR vil gi en redusert brukeropplevelse pga layout-shifting/"pop-in" når headeren rendres, og bør unngås om mulig.
 
-Alt 1 - Hent dekoratøren client-side vha. [@navikt/nav-dekoratoren-moduler](https://github.com/navikt/nav-dekoratoren-moduler#readme): <br>
-
-```
-import { injectDecoratorClientSide } from '@navikt/nav-dekoratoren-moduler'
-injectDecoratorClientSide({
-    env: "localhost",
-    port: 8100,
-    enforceLogin: true,
-    level: "Level4",
-    redirectToApp: true,
-});
-```
-
-Alt 2 - Sett inn noen linjer HTML:
+Sett inn noen linjer i HTML-templaten:
 
 ```
 <html>
