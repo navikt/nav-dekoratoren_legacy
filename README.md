@@ -21,7 +21,7 @@ Dekoratøren serveres på følgende ingresser:
 -   https://dekoratoren.dev.nav.no/
 -   https://dekoratoren.ekstern.dev.nav.no/ (tilgjengelig fra åpent internett)
 
-_Merk:_ Dekoratøren på disse ingressene har som mål å være relativt stabil både funksjonelt og visuelt, og skal kunne brukes av team/applikasjoner som også kjører i diverse testmiljøer. Enkelte console-feil og avvik kan allikevel forekomme, så ta kontakt på #dekoratøren_på_navno hvis noe oppleves som rart.
+_Merk:_ Dekoratøren på disse ingressene skal være relativt stabil både funksjonelt og visuelt, og kan brukes av alle team/applikasjoner. Enkelte console-feil og avvik kan allikevel forekomme, så ta kontakt på #dekoratøren_på_navno dersom noe oppleves som rart.
 
 **Beta (dev-gcp)**
 
@@ -35,7 +35,7 @@ Team min side:
 -   http://nav-dekoratoren-beta-tms.personbruker (service host)
 -   https://dekoratoren-beta-tms.dev.nav.no/
 
-_Merk:_ Dekoratøren på disse ingressen er kun ment brukt for testing av pågående utvikling, og bør ikke konsumeres av andre applikasjoner siden den kan være ustabil eller inneholde feil.
+_Merk:_ Dekoratøren på disse ingressene er ment for testing av pågående utvikling i team personbruker, og bør ikke konsumeres av andre applikasjoner ettersom de kan være ustabile i lengre perioder.
 
 ## Implementasjon
 
