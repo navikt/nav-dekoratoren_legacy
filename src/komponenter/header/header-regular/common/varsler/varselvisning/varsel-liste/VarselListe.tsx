@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { VarslerData } from 'store/reducers/varselinnboks-duck';
-import { BodyShort, Heading } from '@navikt/ds-react';
+import { BodyShort } from '@navikt/ds-react';
 import { getLoginUrl } from 'utils/login';
 import { sortByEventTidspunkt } from 'utils/sorter';
 import dayjs from 'dayjs';
