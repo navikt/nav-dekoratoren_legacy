@@ -21,8 +21,6 @@ const prefixExclusions = [
     '.decorator-wrapper',
 ];
 
-const prefixExclusionsDsCss = ['.decorator-wrapper'];
-
 const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
     devtool: 'source-map',
@@ -162,34 +160,11 @@ const commonConfig = {
                                 plugins: [
                                     modifySelectors({
                                         enabled: true,
-                                        replace: [{ match: /^(:root|html|body)$/, with: '.decorator-wrapper' }],
+                                        replace: [{ match: /^(:root|:host|html|body)$/, with: '.decorator-wrapper' }],
                                     }),
                                     prefixer({
                                         prefix: '.decorator-wrapper',
-                                        exclude: prefixExclusionsDsCss,
-                                    }),
-                                    autoprefixer({}),
-                                ],
-                            },
-                        },
-                    },
-                ],
-            },
-            {
-                test: /\.(less|css)$/,
-                exclude: /@navikt(\\|\/)ds-css/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                ident: 'postcss',
-                                plugins: [
-                                    prefixer({
-                                        prefix: '.decorator-wrapper',
-                                        exclude: prefixExclusions,
+                                        exclude: ['.decorator-wrapper'],
                                     }),
                                     autoprefixer({}),
                                 ],
