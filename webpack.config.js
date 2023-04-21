@@ -10,16 +10,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const analyzeClientBundle = !!process.env.ANALYZE;
 
-const prefixExclusions = [
-    'body',
-    'body.no-scroll-mobil',
-    '.siteheader',
-    '.sitefooter',
-    /\b(\w*decorator-dummy-app\w*)\b/,
-    '#nav-chatbot',
-    ':root',
-    '.decorator-wrapper',
-];
+const prefixExclusions = ['body', 'body.no-scroll-mobil', '.siteheader', '.sitefooter', '.decorator-wrapper'];
 
 const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
