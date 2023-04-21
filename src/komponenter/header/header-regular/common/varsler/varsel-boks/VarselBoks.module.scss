@@ -5,6 +5,7 @@
     border-radius: 8px;
     margin-bottom: 4px;
     width: 444px;
+    border: solid 1px var(--a-border-subtle);
 
     @media (max-width: 476px) {
         width: 100%;
@@ -75,7 +76,7 @@
     &:hover {
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
         cursor: pointer;
-        background-color: #99c4dd;
+        background-color: var(--a-surface-hover);
 
         .chevron {
             transition-duration: 0.2s;
@@ -90,7 +91,7 @@
 
 .oppgave {
     &:hover {
-        background-color: #ffd799;
+        background-color: var(--a-surface-hover)
     }
 }
 
