@@ -67,7 +67,7 @@ const Beskjed = ({
     };
 
     return isArkiverbar ? (
-        <div className={classNames(style.beskjed, style.arkiverbar, isHover && style.hover)}>
+        <div className={classNames(style.beskjed, style.arkiverbar)}>
             <div className={style.contentWrapper}>
                 <div className={style.tittel}>{isMasked ? <Tekst id="beskjed.maskert.tekst" /> : tekst}</div>
                 <div className={style.dato}>{dato}</div>
