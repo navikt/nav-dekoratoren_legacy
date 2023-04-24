@@ -15,11 +15,11 @@ import { Bilde } from 'komponenter/common/bilde/Bilde';
 import { Tag } from '@navikt/ds-react';
 
 const getEksternvarslingStatus = (kanaler: string[]) => {
-    if (kanaler.includes("SMS") && kanaler.includes("EPOST")) {
+    if (kanaler?.includes("SMS") && kanaler?.includes("EPOST")) {
         return <Tekst id="varslet-epost-og-sms" />
-    } else if (kanaler.includes("SMS")) {
+    } else if (kanaler?.includes("SMS")) {
         return <Tekst id="varslet-sms" />
-    } else if (kanaler.includes("EPOST")) {
+    } else if (kanaler?.includes("EPOST")) {
         return <Tekst id="varslet-epost" />
     }
 };
