@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { VarslerData } from 'store/reducers/varselinnboks-duck';
-import { Heading } from '@navikt/ds-react';
+import { BodyShort } from '@navikt/ds-react';
 import { getLoginUrl } from 'utils/login';
 import { sortByEventTidspunkt } from 'utils/sorter';
 import dayjs from 'dayjs';
@@ -45,9 +45,9 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
         <div>
             {hasNoOppgaver ? null : (
                 <>
-                    <Heading level="3" size="small">
+                    <BodyShort size="medium">
                         <Tekst id={'varsler-oppgaver-tittel'} />
-                    </Heading>
+                    </BodyShort>
                     <ul>
                         {varsler?.oppgaver?.sort(sortByEventTidspunkt).map((o, subIndex) => (
                             <li key={o.eventId}>
@@ -69,6 +69,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                     }
                                     setActivateScreenReaderText={setActivateScreenReaderText}
                                     type={o.type}
+                                    eksternVarslingKanaler={o.eksternVarslingKanaler}
                                 />
                             </li>
                         ))}
@@ -77,9 +78,9 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
             )}
             {hasNoBeskjeder ? null : (
                 <>
-                    <Heading level="3" size="small">
+                    <BodyShort size="medium">
                         <Tekst id={'varsler-beskjeder-tittel'} />
-                    </Heading>
+                    </BodyShort>
                     <ul>
                         {varsler?.beskjeder?.sort(sortByEventTidspunkt).map((b, subIndex) => (
                             <li key={b.eventId}>
@@ -101,6 +102,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                                     }
                                     setActivateScreenReaderText={setActivateScreenReaderText}
                                     type={b.type}
+                                    eksternVarslingKanaler={b.eksternVarslingKanaler}
                                 />
                             </li>
                         ))}
