@@ -10,7 +10,6 @@ import Tekst from 'tekster/finn-tekst';
 type Props = {
     eventId: string;
     apiVarselinnboksUrl: string;
-    setIsHover: (setIsHover: boolean) => void;
     setActivateScreenReaderText: (setActivateScreenReaderText: boolean) => void;
     id?: string;
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Next } from '@navikt/ds-icons';
 import Tekst from 'tekster/finn-tekst';
 import { fjernLestVarsel } from 'store/reducers/varselinnboks-duck';
@@ -50,7 +50,6 @@ const Beskjed = ({
     eksternVarslingKanaler,
 }: Props) => {
     //TODO: Legge inn stepup-tekst i alle språk.
-    const [isHover, setIsHover] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -83,7 +82,6 @@ const Beskjed = ({
                     <ArkiverKnapp
                         eventId={eventId}
                         apiVarselinnboksUrl={apiVarselinnboksUrl}
-                        setIsHover={setIsHover}
                         setActivateScreenReaderText={setActivateScreenReaderText}
                         id={id}
                     />
