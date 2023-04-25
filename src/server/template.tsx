@@ -123,11 +123,11 @@ export const template = (req: Request) => {
                 <div id='${headerId}'>
                     <div id='decorator-header'>${HtmlHeader}</div>
                 </div>
-                <div class='decorator-dummy-app decorator-wrapper'>
+                <main class='decorator-dummy-app decorator-wrapper' id="maincontent">
                     <div class='navds-alert navds-alert--info navds-alert--medium'>
                         <span>Hei! Dette er en intern test-side for header og footer på nav.no. <a href='https://www.nav.no'>Gå til forsiden</a>.</span>
                     </div>
-                </div>
+                </main>
                 <!-- Footer fetched by apps -->
                 <div id='${footerId}'>
                     <div id='decorator-footer'>${HtmlFooter}</div>
