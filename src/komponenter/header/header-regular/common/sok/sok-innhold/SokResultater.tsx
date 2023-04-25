@@ -67,8 +67,8 @@ export const SokResultater = (props: Props) => {
                                     onClick={() => {
                                         dispatch(lukkAlleDropdowns());
                                         logAmplitudeEvent('resultat-klikk', {
-                                            destinasjon: item.href,
-                                            sokeord: writtenInput.toLowerCase(),
+                                            destinasjon: '[redacted]',
+                                            sokeord: '[redacted]',
                                             treffnr: index + 1,
                                         });
                                     }}

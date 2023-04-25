@@ -16,9 +16,6 @@ spec:
   prometheus:
     enabled: true
     path: {{appPath}}/metrics
-  replicas:
-    min: 2
-    max: 8
   ingresses:
   {{#each ingresses as |url|}}
     - {{url}}
@@ -29,6 +26,10 @@ spec:
         {{#each outboundHosts as |host|}}
         - host: {{host}}
         {{/each}}
+    inbound:
+      rules:
+        - application: "*"
+          namespace: "*"
   env:
     - name: BUILD_ID
       value: {{BUILD_ID}}
@@ -41,10 +42,16 @@ spec:
   filesFrom:
     - configmap: dekoratoren-config
       mountPath: /app/config
+  replicas:
+  {{#with replicas}}
+    min: {{min}}
+    max: {{max}}
+  {{/with}}
   resources:
-    limits:
-      cpu: '3'
-      memory: 1500Mi
+  {{#with resources}}
     requests:
-      cpu: 500m
-      memory: 500Mi
+      cpu: {{requests.cpu}}
+      memory: {{requests.memory}}
+    limits:
+      memory: {{limits.memory}}
+  {{/with}}

@@ -31,7 +31,7 @@ export const analyticsEvent = (props: AnalyticsEventArgs) => {
 
     logAmplitudeEvent(eventName || 'navigere', {
         destinasjon: destination || label,
-        søkeord: eventName === 'søk' ? label : undefined,
+        søkeord: eventName === 'søk' ? '[redacted]' : undefined,
         lenketekst: actionFinal,
         kategori: category,
         komponent: komponent || action,

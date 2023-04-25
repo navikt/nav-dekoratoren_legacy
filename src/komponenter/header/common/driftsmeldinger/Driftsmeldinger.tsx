@@ -41,7 +41,7 @@ export const Driftsmeldinger = () => {
     const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
 
     return currentDriftsmeldinger.length > 0 ? (
-        <article className={style.driftsmeldinger}>
+        <section className={style.driftsmeldinger}>
             {currentDriftsmeldinger.map((melding) => (
                 <LenkeMedSporing
                     key={melding.heading}
@@ -56,7 +56,7 @@ export const Driftsmeldinger = () => {
                     <BodyLong>{melding.heading}</BodyLong>
                 </LenkeMedSporing>
             ))}
-        </article>
+        </section>
     ) : null;
 };
 

@@ -28,3 +28,12 @@ env:
     value: https://loginservice.nav.no/slo
   - name: FEEDBACK_API_URL
     value: https://dekoratoren-api.nav.no/event
+replicas:
+  min: 2
+  max: 8
+resources:
+  limits:
+    memory: 1024Mi
+  requests:
+    cpu: 1000m
+    memory: 256Mi
