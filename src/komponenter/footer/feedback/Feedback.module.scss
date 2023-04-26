@@ -1,7 +1,7 @@
 @use 'src/styling-variabler' as sv;
 
 .footerLinje {
-    border-top: sv.$footer-seperator-farge sv.$footer-seperator-height solid;
+    border-top: var(--a-gray-300) 2px solid;
 }
 
 .feedbackContainer {
