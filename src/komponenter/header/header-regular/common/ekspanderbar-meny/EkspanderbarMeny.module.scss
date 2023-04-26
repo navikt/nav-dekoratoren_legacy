@@ -3,6 +3,12 @@
 .container {
     position: absolute;
     width: 100%;
+
+    @media #{sv.$screen-desktop} {
+        max-width: sv.$desktopMaxWidth;
+        top: calc(#{sv.$header-height-desktop - sv.$header-separator-height});
+        left: 0;
+    }
 }
 
 .innholdWrapper {
@@ -10,27 +16,17 @@
     width: 100%;
     visibility: hidden;
     transition-timing-function: ease-in;
-}
-
-.active {
-    visibility: visible;
-    z-index: 1001;
-    transition-timing-function: ease-in-out;
-}
-
-.innhold {
-    box-sizing: border-box;
-    width: 100%;
-}
-
-@media #{sv.$screen-desktop} {
-    .container {
-        max-width: sv.$desktopMaxWidth;
-        top: calc(#{sv.$header-height-desktop - sv.$header-separator-height});
-        left: 0;
+  
+    @media #{sv.$screen-mobile} {
+        position: fixed;
+        top: sv.$header-height-mobil;
+        left: -100%;
+        height: sv.$menu-height-mobil;
+        transition-property: left, visibility;
+        transition-duration: 0.25s;
+        overflow: auto;
     }
-
-    .innholdWrapper {
+    @media #{sv.$screen-desktop} {
         overflow: hidden;
         max-height: 0;
         opacity: 0;
@@ -40,49 +36,44 @@
         transition-duration: 0.4s;
         transition-property: max-height, visibility, opacity;
     }
+}
 
-    .active {
+.active {
+    visibility: visible;
+    z-index: 1001;
+    transition-timing-function: ease-in-out;
+
+    @media #{sv.$screen-mobile} {
+        left: 0;
+        z-index: 1001;
+        transition-duration: 0.4s;
+    }  
+    @media #{sv.$screen-desktop} {
         max-height: 100rem;
         opacity: 1;
         transition-duration: 0.6s;
         transition-property: max-height, visibility;
     }
-
-    .innhold {
-        padding: 1.5rem sv.$margins-sides-desktop;
-        overflow: hidden;
-
-        @media #{sv.$screen-desktop-small-width-down} {
-            padding-left: sv.$margins-sides-desktop-small;
-            padding-right: sv.$margins-sides-desktop-small;
-        }
-
-        @media #{sv.$screen-desktop-small-down} {
-            padding-top: 0.5rem;
-            padding-bottom: 1rem;
-        }
-    }
 }
 
-@media #{sv.$screen-mobile} {
-    .innholdWrapper {
-        position: fixed;
-        top: sv.$header-height-mobil;
-        left: -100%;
-        height: sv.$menu-height-mobil;
-        transition-property: left, visibility;
-        transition-duration: 0.25s;
-        overflow: auto;
-    }
-
-    .active {
-        left: 0;
-        z-index: 1001;
-        transition-duration: 0.4s;
-    }
-
-    .innhold {
+.innhold {
+    box-sizing: border-box;
+    width: 100%;
+  
+    @media #{sv.$screen-mobile} {
         height: 100%;
         padding: 0;
+    }
+    @media #{sv.$screen-desktop} {
+      padding: 1.5rem sv.$margins-sides-desktop;
+      overflow: hidden;
+  }
+    @media #{sv.$screen-desktop} and #{sv.$screen-desktop-small-width-down} {
+          padding-left: sv.$margins-sides-desktop-small;
+          padding-right: sv.$margins-sides-desktop-small;
+      }
+    @media #{sv.$screen-desktop} and #{sv.$screen-desktop-small-down}, #{sv.$screen-desktop} and #{sv.$screen-desktop-small-width-down} {
+          padding-top: 0.5rem;
+          padding-bottom: 1rem;
     }
 }

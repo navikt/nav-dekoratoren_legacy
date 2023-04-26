@@ -5,6 +5,10 @@
     border-radius: 4px;
     margin-bottom: 0;
 
+    @media #{sv.$screen-desktop-medium-down} {
+        padding: 0.75rem 1rem;
+    }
+
     &:hover {
         border: 2px var(--a-blue-500) solid;
         background-color: var(--a-blue-500);
@@ -43,9 +47,6 @@
         transition: transform 0.25s;
     }
 
-    @media #{sv.$screen-mobile} {
-        padding: 0.75rem 1rem;
-    }
 }
 
 .text {
@@ -64,7 +65,7 @@
         line-height: 1.5rem;
     }
 
-    @media #{sv.$screen-desktop-small-down} {
+    @media #{sv.$screen-desktop-small-down}, #{sv.$screen-desktop-small-width-down} {
         padding: 0.5rem 0.75rem;
         margin-bottom: 0.25rem;
         border: none;

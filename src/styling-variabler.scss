@@ -7,7 +7,7 @@ $smallDesktopMaxHeight: 880px;
 
 // screen size media queries
 $screen-desktop: '(min-width: #{$desktopMinWidth})';
-$screen-desktop-small-down: '(max-height: #{$smallDesktopMaxHeight}), (max-width: #{$smallDesktopMaxWidth})';
+$screen-desktop-small-down: '(max-height: #{$smallDesktopMaxHeight})';
 $screen-desktop-small-width-down: '(max-width: #{$smallDesktopMaxWidth})';
 $screen-desktop-medium-down: '(max-width: #{$desktopMaxWidth})';
 $screen-desktop-medium-up: '(min-width: #{$smallDesktopMaxWidth})';

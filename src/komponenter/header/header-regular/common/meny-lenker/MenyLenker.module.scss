@@ -3,7 +3,7 @@
 .lenkeseksjon {
     margin-bottom: 2rem;
 
-    @media #{sv.$screen-desktop-small-down} {
+    @media #{sv.$screen-desktop-small-down}, #{sv.$screen-desktop-small-width-down} {
         margin-bottom: 1rem;
     }
 }
@@ -11,7 +11,7 @@
 .tittel {
     margin-bottom: 0.1875rem;
 
-    @media #{sv.$screen-desktop-small-down} {
+    @media #{sv.$screen-desktop-small-down}, #{sv.$screen-desktop-small-width-down} {
         font-size: 16px;
         line-height: 22px;
         margin-bottom: 0.125rem;

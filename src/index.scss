@@ -7,7 +7,7 @@ body {
 }
 
 body.no-scroll-mobil {
-    @media #{sv.$screen-mobile} {
+    @media #{sv.$screen-desktop-medium-down} {
         overflow-y: hidden;
         overflow-x: hidden;
     }
@@ -60,25 +60,21 @@ body.no-scroll-mobil {
 
 .media-sm-mobil {
     display: initial !important;
+
+    @media #{sv.$screen-desktop} {
+        display: none !important;
+    }
 }
 
 .media-tablet-desktop {
     display: none !important;
+
+    @media screen and #{sv.$screen-desktop} and (-ms-high-contrast: active), #{sv.$screen-desktop} and (-ms-high-contrast: none) {
+      display: inline !important;
+    }
 }
 
 .decorator-wrapper {
     box-sizing: border-box;
 }
 
-@media #{sv.$screen-desktop} {
-    .media-sm-mobil {
-        display: none !important;
-    }
-
-    .media-tablet-desktop {
-        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-            display: inline !important;
-        }
-        display: initial !important;
-    }
-}
