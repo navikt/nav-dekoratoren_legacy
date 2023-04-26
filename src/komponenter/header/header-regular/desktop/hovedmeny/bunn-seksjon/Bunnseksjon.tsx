@@ -12,7 +12,6 @@ import { AnalyticsCategory } from 'utils/analytics/analytics';
 import style from './Bunnseksjon.module.scss';
 
 interface Props {
-    classname: string;
     arbeidsflate: MenuValue;
     language: Locale;
 }

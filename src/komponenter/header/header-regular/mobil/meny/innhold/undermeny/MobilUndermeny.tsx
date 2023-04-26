@@ -11,18 +11,18 @@ const stateSelector = (state: AppState) => ({
 });
 
 type Props = {
-    className: string;
+    classPrefix: string;
     lenker: MenyNode;
 };
 
-export const MobilUndermeny = ({ lenker, className }: Props) => {
+export const MobilUndermeny = ({ lenker, classPrefix }: Props) => {
     const { underMenuIsOpen } = useSelector(stateSelector);
 
     if (!lenker?.children) {
         return null;
     }
 
-    const menyClass = BEMHelper(className);
+    const menyClass = BEMHelper(classPrefix);
 
     return (
         <div className={menyClass.element('undermeny-innhold', underMenuIsOpen ? '' : 'hidden')}>

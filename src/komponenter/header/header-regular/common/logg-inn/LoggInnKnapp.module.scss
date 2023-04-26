@@ -1,12 +1,10 @@
 @use 'src/styling-variabler' as sv;
-@use '../meny-knapp/MenylinjeKnappMixin';
 
 .loginKnappContainer {
     display: flex;
 }
 
 .loginKnapp {
-    @include MenylinjeKnappMixin.menylinjeKnappMixin;
     align-self: center;
     opacity: 1;
 

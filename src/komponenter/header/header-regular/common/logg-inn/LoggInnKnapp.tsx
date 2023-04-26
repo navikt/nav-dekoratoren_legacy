@@ -1,14 +1,13 @@
 import React from 'react';
-import { Button } from '@navikt/ds-react';
-import { finnTekst } from 'tekster/finn-tekst';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { getLoginUrl, getLogOutUrl } from 'utils/login';
 import { Login, Logout } from '@navikt/ds-icons';
+import Tekst from 'tekster/finn-tekst';
 import { Status } from '../../../../../api/api';
-import classNames from 'classnames';
 import style from './LoggInnKnapp.module.scss';
+import MenylinjeKnapp from '../meny-knapp/MenylinjeKnapp';
 
 export const loginKnappId = 'login-knapp-id';
 
@@ -21,7 +20,7 @@ const stateSelector = (state: AppState) => ({
 });
 
 export const LoggInnKnapp = () => {
-    const { authenticated, arbeidsflate, language, environment, innloggingsstatus } = useSelector(stateSelector);
+    const { authenticated, arbeidsflate, environment, innloggingsstatus } = useSelector(stateSelector);
 
     const handleButtonClick = () => {
         analyticsEvent({
@@ -38,26 +37,17 @@ export const LoggInnKnapp = () => {
         innloggingsstatus === Status.PENDING ||
         innloggingsstatus === Status.RELOADING;
 
-    const knappetekst = finnTekst(
-        isLoading ? 'logg-inn-loader' : authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp',
-        language
-    );
-
     return (
         <div className={style.loginKnappContainer}>
-            <Button
+            <MenylinjeKnapp
+                classPrefix="login"
                 className={`${style.loginKnapp} ${authenticated ? 'logout-knapp' : ''}`}
                 onClick={handleButtonClick}
                 id={loginKnappId}
-                variant={'tertiary'}
                 disabled={isLoading}
                 icon={
                     authenticated ? (
-                        <Logout
-                            title="Loggut-ikon"
-                            titleId="decorator-logout-icon"
-                            aria-hidden
-                        />
+                        <Logout title="Loggut-ikon" titleId="decorator-logout-icon" aria-hidden />
                     ) : (
                         <Login
                             className={isLoading ? style.loginIconLoading : undefined}
@@ -68,8 +58,10 @@ export const LoggInnKnapp = () => {
                     )
                 }
             >
-                <span className={classNames(style.loginText, isLoading && style.loginTextLoading)}>{knappetekst}</span>
-            </Button>
+                <span className={isLoading && style.loginTextLoading}>
+                    <Tekst id={isLoading ? 'logg-inn-loader' : authenticated ? 'logg-ut-knapp' : 'logg-inn-knapp'} />
+                </span>
+            </MenylinjeKnapp>
         </div>
     );
 };

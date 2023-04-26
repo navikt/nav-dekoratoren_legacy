@@ -33,13 +33,13 @@ const stateSelector = (state: AppState) => ({
 
 type Props = {
     settLenker: (meny: MenyNode) => void;
-    className: string;
+    classPrefix: string;
 };
 
 export const MobilHovedmenyInnhold = (props: Props) => {
     const dispatch = useDispatch();
-    const { className, settLenker } = props;
-    const menyClass = BEMHelper(className);
+    const { classPrefix, settLenker } = props;
+    const menyClass = BEMHelper(classPrefix);
     const { language, meny } = useSelector(stateSelector);
     const { arbeidsflate, innloggingsstatus } = useSelector(stateSelector);
     const { underMenuIsOpen, hovedMenuIsOpen } = useSelector(stateSelector);

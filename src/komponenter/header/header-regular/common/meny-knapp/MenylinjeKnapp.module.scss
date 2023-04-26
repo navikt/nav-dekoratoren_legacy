@@ -1,5 +1,40 @@
-@use 'MenylinjeKnappMixin';
+@use 'src/styling-variabler' as sv;
 
 .menylinjeKnapp {
-    @include MenylinjeKnappMixin.menylinjeKnappMixin;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    position: relative;
+    font-weight: 600;
+    white-space: nowrap;
+
+    &:hover {
+        box-shadow: inset 0 0 0 2px var(--a-surface-action);
+    }
+
+    &:active {
+        :global(.hamburger-ikon) {
+            span {
+                background-color: var(--a-white);
+            }
+        }
+        :global(.sok-ikon) {
+            :global(.sok-ikon__line),
+            :global(.sok-ikon__line-x) {
+                background-color: var(--a-white);
+            }
+            :global(.sok-ikon__circle) {
+                border-color: var(--a-white);
+                background-color: transparent;
+            }
+        }
+    }
+
+    @media #{sv.$screen-mobile} {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    :global(.navds-button__icon) {
+        --v2-migration__navds-button-icon-adjustment: 0;
+    }
 }

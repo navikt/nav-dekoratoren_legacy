@@ -19,12 +19,12 @@ const getLayoutFromWindowSize = () =>
 
 interface Props {
     menyLenker: MenyNode;
-    classname: string;
+    classPrefix: string;
     numCols: number;
 }
 
-export const Hovedseksjon = ({ menyLenker, classname, numCols }: Props) => {
-    const cls = BEMHelper(classname);
+export const Hovedseksjon = ({ menyLenker, classPrefix, numCols }: Props) => {
+    const cls = BEMHelper(classPrefix);
     const [layout, setLayout] = useState<MenyLayout>(getLayoutFromWindowSize());
 
     useEffect(() => {

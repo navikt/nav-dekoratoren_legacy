@@ -30,7 +30,7 @@ export const Varsler = ({ kbNavMainState }: Props) => {
         <>
             <VarslerKnapp />
             <EkspanderbarMeny
-                classname={style.varslerDropdown}
+                className={style.varslerDropdown}
                 classnameInnhold={style.varslerInnhold}
                 id={varslerDropdownId}
                 isOpen={isOpen}

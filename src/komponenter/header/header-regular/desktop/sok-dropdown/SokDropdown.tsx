@@ -47,7 +47,7 @@ export const SokKnappDesktop = ({ kbNavMainState }: Props) => {
     return (
         <div className={'media-tablet-desktop'} data-testid={'sok-dropdown'}>
             <SokKnapp />
-            <EkspanderbarMeny classname={sokDropdownClassname} id={sokDropdownClassname} isOpen={isOpen}>
+            <EkspanderbarMeny className={sokDropdownClassname} id={sokDropdownClassname} isOpen={isOpen}>
                 <Sok
                     isOpen={isOpen}
                     id={desktopSokInputId}

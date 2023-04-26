@@ -18,8 +18,6 @@ type Props = {
     menuId: string;
 };
 
-const classname = 'hovedmeny';
-
 export const HovedmenyKnapp = ({ id, menuId }: Props) => {
     const dispatch = useDispatch();
     const { arbeidsflate, isOpen } = useSelector(stateSelector);
@@ -37,7 +35,7 @@ export const HovedmenyKnapp = ({ id, menuId }: Props) => {
         <MenylinjeKnapp
             tekstId={'meny-knapp'}
             isOpen={isOpen}
-            classname={classname}
+            classPrefix={'hovedmeny'}
             onClick={toggleMenu}
             ariaControls={menuId}
             id={id}

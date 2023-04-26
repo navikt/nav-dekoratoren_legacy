@@ -9,7 +9,7 @@ import { dataInitState } from 'store/reducers/menu-duck';
 import './MobilMeny.scss';
 
 type Props = {
-    classname: string;
+    classPrefix: string;
 };
 
 const stateSelector = (state: AppState) => ({
@@ -22,13 +22,12 @@ export const MobilMeny = (props: Props) => {
     const { meny, language, arbeidsflate } = useSelector(stateSelector);
     const initLenker = getHovedmenyNode(meny.data, language, arbeidsflate) || dataInitState;
     const [lenker, settLenker] = useState(initLenker.children[0]);
-    const { classname } = props;
-    const menyClass = BEMHelper(classname);
+    const menyClass = BEMHelper(props.classPrefix);
 
     return (
         <>
-            <MobilHovedmenyInnhold className={menyClass.className} settLenker={settLenker} />
-            <MobilUndermeny className={menyClass.className} lenker={lenker} />
+            <MobilHovedmenyInnhold classPrefix={menyClass.className} settLenker={settLenker} />
+            <MobilUndermeny classPrefix={menyClass.className} lenker={lenker} />
         </>
     );
 };

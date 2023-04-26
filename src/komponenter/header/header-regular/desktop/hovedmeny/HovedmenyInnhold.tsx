@@ -14,7 +14,7 @@ import { Toppseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny
 import { Hovedseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/hoved-seksjon/Hovedseksjon';
 import { Bunnseksjon } from 'komponenter/header/header-regular/desktop/hovedmeny/bunn-seksjon/Bunnseksjon';
 
-const classname = 'desktop-hovedmeny';
+const className = 'desktop-hovedmeny';
 
 const widthBreakpoint = 1024;
 const mqlWidthBreakpoint = matchMedia(`(min-width: ${widthBreakpoint}px)`);
@@ -65,10 +65,10 @@ export const HovedmenyInnhold = ({
     }
 
     return (
-        <div className={classname}>
+        <div className={className}>
             <Toppseksjon />
-            <Hovedseksjon menyLenker={menyPunkter} classname={classname} numCols={menuNumCols} />
-            <Bunnseksjon classname={classname} language={language} arbeidsflate={arbeidsflate} />
+            <Hovedseksjon menyLenker={menyPunkter} classPrefix={className} numCols={menuNumCols} />
+            <Bunnseksjon language={language} arbeidsflate={arbeidsflate} />
         </div>
     );
 };

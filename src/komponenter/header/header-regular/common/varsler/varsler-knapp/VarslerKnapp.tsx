@@ -45,7 +45,7 @@ export const VarslerKnapp = () => {
             tekstId={'varsler-tittel'}
             onClick={toggleVarslerDropdown}
             isOpen={isOpen}
-            classname={'varselbjelle'}
+            classPrefix={'varselbjelle'}
             id={varslerKnappId}
             ariaControls={varslerDropdownId}
             ariaLabel={ariaLabel()}

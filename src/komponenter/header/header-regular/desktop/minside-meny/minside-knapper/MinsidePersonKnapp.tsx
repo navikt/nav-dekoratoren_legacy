@@ -18,12 +18,12 @@ const stateSelector = (state: AppState) => ({
 });
 
 type Props = {
-    classname: string;
+    className: string;
     id: string;
     brukernavn: string;
 };
 
-export const MinsidePersonKnapp = ({ classname, id, brukernavn }: Props) => {
+export const MinsidePersonKnapp = ({ className, id, brukernavn }: Props) => {
     const dispatch = useDispatch();
     const { isOpen } = useSelector(stateSelector);
 
@@ -40,8 +40,8 @@ export const MinsidePersonKnapp = ({ classname, id, brukernavn }: Props) => {
         <MenylinjeKnapp
             onClick={toggleMinSideDropdown}
             isOpen={isOpen}
-            ariaControls={classname}
-            classname={classname}
+            ariaControls={className}
+            classPrefix={className}
             id={id}
             icon={<People data-testid={'minside-person'} aria-hidden />}
         >

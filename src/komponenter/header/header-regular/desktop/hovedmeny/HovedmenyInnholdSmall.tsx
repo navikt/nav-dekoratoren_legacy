@@ -15,8 +15,6 @@ import classNames from 'classnames';
 
 import 'src/komponenter/header/header-regular/desktop/hovedmeny/HovedmenyInnholdSmall.scss';
 
-const classname = 'desktop-hovedmeny';
-
 export const HovedmenyInnholdSmall = ({
     kbNavMainState,
     arbeidsflate,
@@ -40,7 +38,7 @@ export const HovedmenyInnholdSmall = ({
     const arbeidsflateLenkerCol = menyPunkter.children.length;
 
     return (
-        <div className={classNames(classname, 'hovedmeny-innhold-small')}>
+        <div className={classNames('desktop-hovedmeny', 'hovedmeny-innhold-small')}>
             <Toppseksjon />
             <div className={'hovedseksjon-small'}>
                 {menyPunkter.children.map((menygruppe, index) => (

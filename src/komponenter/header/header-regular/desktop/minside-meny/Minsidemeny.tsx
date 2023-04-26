@@ -44,8 +44,8 @@ export const Minsidemeny = ({ kbNavMainState }: Props) => {
 
     return (
         <div className={'media-tablet-desktop'} data-testid={'minside-meny'} data-hj-suppress={''}>
-            <MinsidePersonKnapp classname={minsideMenyClassname} id={minsideKnappId} brukernavn={brukernavn} />
-            <EkspanderbarMeny isOpen={isOpen} classname={minsideMenyClassname} id={minsideMenyClassname}>
+            <MinsidePersonKnapp className={minsideMenyClassname} id={minsideKnappId} brukernavn={brukernavn} />
+            <EkspanderbarMeny isOpen={isOpen} className={minsideMenyClassname} id={minsideMenyClassname}>
                 {menyPunkter.status === Status.OK ? (
                     <MinsidemenyInnhold
                         menyLenker={minsideMenyPunkter}

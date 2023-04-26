@@ -11,7 +11,7 @@ import { HovedmenyInnhold } from 'komponenter/header/header-regular/desktop/hove
 import { KbNavGroup } from '../../../../../utils/keyboard-navigation/kb-navigation';
 import { HovedmenyInnholdSmall } from './HovedmenyInnholdSmall';
 
-const classname = 'desktop-hovedmeny';
+const className = 'desktop-hovedmeny';
 export const desktopHovedmenyKnappId = 'desktop-hovedmeny-knapp-id';
 
 const stateSelector = (state: AppState) => ({
@@ -48,7 +48,7 @@ export const Hovedmeny = ({ kbNavMainState }: Props) => {
     return (
         <div className={'media-tablet-desktop'}>
             <HovedmenyKnapp id={desktopHovedmenyKnappId} menuId={KbNavGroup.Hovedmeny} />
-            <EkspanderbarMeny isOpen={isOpen} classname={classname} id={classname}>
+            <EkspanderbarMeny isOpen={isOpen} className={className} id={className}>
                 {menyPunkter.status === Status.OK ? (
                     isSmallMenu ? (
                         <HovedmenyInnholdSmall {...props} />

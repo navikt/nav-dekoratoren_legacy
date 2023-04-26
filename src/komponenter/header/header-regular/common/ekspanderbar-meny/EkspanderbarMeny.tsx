@@ -4,19 +4,19 @@ import classNames from 'classnames';
 
 type Props = {
     isOpen: boolean;
-    classname: string;
+    className: string;
     classnameInnhold?: string;
     id: string;
     children: ReactNode;
 };
 
 const EkspanderbarMeny = (props: Props) => {
-    const { isOpen, classname, id, children, classnameInnhold } = props;
+    const { isOpen, className, id, children, classnameInnhold } = props;
 
     const styleActive = `${style.active} ekspanderbar__innhold-wrapper--active`;
 
     return (
-        <div className={`${style.container} ${classname}`}>
+        <div className={`${style.container} ${className}`}>
             <div
                 className={`${style.innholdWrapper} ekspanderbar__innhold-wrapper ${isOpen ? styleActive : ''}`}
                 id={id}

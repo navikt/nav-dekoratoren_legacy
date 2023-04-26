@@ -32,7 +32,7 @@ export const SokKnapp = () => {
             tekstId={'sok-knapp'}
             onClick={toggleMenu}
             isOpen={isOpen}
-            classname={sokDropdownClassname}
+            classPrefix={sokDropdownClassname}
             ariaControls={sokDropdownClassname}
             id={desktopSokKnappId}
             icon={<SokIkon />}
