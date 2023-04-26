@@ -69,7 +69,7 @@
         position: fixed;
         top: sv.$header-height-mobil;
         left: -100%;
-        height: sv.$menu-height-mobil;
+        height: calc(100% - #{sv.$header-height-mobil});
         transition-property: left, visibility;
         transition-duration: 0.25s;
         overflow: auto;
