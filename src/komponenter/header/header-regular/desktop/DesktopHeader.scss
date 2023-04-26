@@ -1,9 +1,6 @@
 @use 'src/styling-variabler' as sv;
 
 @mixin desktopHeader {
-    $margin-mellom: 0.75rem;
-    $margin-mellom-sm: 0.5rem;
-
     height: sv.$header-height-desktop;
 
     :global(.elementer) {
