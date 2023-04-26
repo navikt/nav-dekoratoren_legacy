@@ -1,5 +1,23 @@
-// Import this early, to ensure our own CSS gets higher specificity
-import '@navikt/ds-css/dist/index.css';
+// Import designsystem styling early, to ensure our own CSS gets higher specificity
+/* Defaults */
+import '@navikt/ds-css/dist/global/fonts.css';
+import '@navikt/ds-css/dist/global/tokens.css';
+import '@navikt/ds-css/dist/global/reset.css';
+import '@navikt/ds-css/dist/global/baseline.css';
+import '@navikt/ds-css/dist/global/print.css';
+
+/* Components */
+import '@navikt/ds-css/dist/component/typography.css';
+import '@navikt/ds-css/dist/component/form.css';
+import '@navikt/ds-css/dist/component/alert.css';
+import '@navikt/ds-css/dist/component/button.css';
+import '@navikt/ds-css/dist/component/linkpanel.css';
+import '@navikt/ds-css/dist/component/link.css';
+import '@navikt/ds-css/dist/component/loader.css';
+import '@navikt/ds-css/dist/component/modal.css';
+import '@navikt/ds-css/dist/component/panel.css';
+import '@navikt/ds-css/dist/component/readmore.css';
+import '@navikt/ds-css/dist/component/tag.css';
 
 import React from 'react';
 import { hydrateRoot, createRoot } from 'react-dom/client';
