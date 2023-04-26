@@ -21,7 +21,12 @@ $lenkeseksjoner-margin: 1.5rem;
 
 .lenkeseksjon {
     flex-grow: 1;
-    @include sv.flex-col-width-mixin($lenkeseksjoner-cols, $lenkeseksjoner-margin);
+    max-width: calc(percentage(1 / $lenkeseksjoner-cols) - (#{$lenkeseksjoner-margin - $lenkeseksjoner-margin / $lenkeseksjoner-cols}));
+    flex-basis: 100%;
+    margin-right: $lenkeseksjoner-margin;
+    &:nth-child(#{$lenkeseksjoner-cols}n) {
+        margin-right: 0;
+    }
 }
 
 .toppSeksjon {

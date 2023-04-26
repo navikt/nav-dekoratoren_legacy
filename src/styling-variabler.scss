@@ -35,22 +35,4 @@ $header-separator-height: 1px;
 $footer-seperator-farge: var(--a-gray-300);
 $footer-seperator-height: 2px;
 
-@mixin flex-col-width-mixin($cols, $margins) {
-    max-width: calc(percentage(1 / $cols) - (#{$margins - $margins / $cols}));
-    flex-basis: 100%;
-    margin-right: $margins;
-    &:nth-child(#{$cols}n) {
-        margin-right: 0;
-    }
-}
 
-@mixin header-knapp-focus-mixin() {
-    &:focus {
-        background-color: transparent;
-        color: var(--a-blue-500);
-        outline: none;
-        box-shadow: 0 0 0 4px var(--a-border-focus);
-        border-radius: 4px;
-        border-color: transparent;
-    }
-}
