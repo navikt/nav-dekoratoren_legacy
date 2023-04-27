@@ -69,7 +69,11 @@ body.no-scroll-mobil {
 .media-tablet-desktop {
     display: none !important;
 
-    @media screen and #{sv.$screen-desktop} and (-ms-high-contrast: active), #{sv.$screen-desktop} and (-ms-high-contrast: none) {
+    @media #{sv.$screen-desktop} {
+        display: initial !important;
+    }
+
+    @media #{sv.$screen-desktop} and (screen) and (-ms-high-contrast: active), #{sv.$screen-desktop} and (-ms-high-contrast:none) {
       display: inline !important;
     }
 }
@@ -77,4 +81,3 @@ body.no-scroll-mobil {
 .decorator-wrapper {
     box-sizing: border-box;
 }
-

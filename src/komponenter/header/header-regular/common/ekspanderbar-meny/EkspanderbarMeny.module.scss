@@ -16,12 +16,12 @@
     width: 100%;
     visibility: hidden;
     transition-timing-function: ease-in;
-  
+
     @media #{sv.$screen-desktop-medium-down} {
         position: fixed;
         top: sv.$header-height-mobil;
         left: -100%;
-        height: sv.$menu-height-mobil;
+        height: calc(100% - #{sv.$header-height-mobil});
         transition-property: left, visibility;
         transition-duration: 0.25s;
         overflow: auto;
@@ -47,7 +47,7 @@
         left: 0;
         z-index: 1001;
         transition-duration: 0.4s;
-    }  
+    }
     @media #{sv.$screen-desktop} {
         max-height: 100rem;
         opacity: 1;
@@ -59,21 +59,21 @@
 .innhold {
     box-sizing: border-box;
     width: 100%;
-  
+
     @media #{sv.$screen-desktop-medium-down} {
         height: 100%;
         padding: 0;
     }
     @media #{sv.$screen-desktop} {
-      padding: 1.5rem sv.$margins-sides-desktop;
-      overflow: hidden;
-  }
+        padding: 1.5rem sv.$margins-sides-desktop;
+        overflow: hidden;
+    }
     @media #{sv.$screen-desktop} and #{sv.$screen-desktop-small-width-down} {
-          padding-left: sv.$margins-sides-desktop-small;
-          padding-right: sv.$margins-sides-desktop-small;
-      }
+        padding-left: sv.$margins-sides-desktop-small;
+        padding-right: sv.$margins-sides-desktop-small;
+    }
     @media #{sv.$screen-desktop} and #{sv.$screen-desktop-small-down}, #{sv.$screen-desktop} and #{sv.$screen-desktop-small-width-down} {
-          padding-top: 0.5rem;
-          padding-bottom: 1rem;
+        padding-top: 0.5rem;
+        padding-bottom: 1rem;
     }
 }

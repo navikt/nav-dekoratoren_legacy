@@ -1,6 +1,5 @@
 @use 'src/styling-variabler.scss' as sv;
 
-$separator-height: 0px;
 $underline-height: 4px;
 
 :global(.arbeidsflate) {
@@ -25,7 +24,7 @@ $underline-height: 4px;
 }
 
 .lenke {
-    height: calc(100% + #{$separator-height});
+    height: 100%;
     display: inline-block;
     text-decoration: none;
     color: var(--a-gray-700); //TODO: Sett til --a-text-subtle når aksel har oppdatert denne til WCAG AAA-krav
