@@ -27,18 +27,18 @@
 .content {
     width: 100%;
     max-width: sv.$desktopMaxWidth;
-    height: sv.$header-height-simple-desktop;
+    height: sv.$header-height-simple-mobile;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    
+    @media #{sv.$screen-desktop} {
+      height: sv.$header-height-simple-desktop;
+    }
     @media #{sv.$screen-desktop-medium-up} {
-        padding: 0 3rem;
+      padding: 0 3rem;
     }
     @media #{sv.$screen-desktop-small-width-down} {
-        padding: 0 1rem;
-    }
-    @media #{sv.$screen-mobile} {
-        height: sv.$header-height-simple-mobile;
+      padding: 0 1rem;
     }
 }

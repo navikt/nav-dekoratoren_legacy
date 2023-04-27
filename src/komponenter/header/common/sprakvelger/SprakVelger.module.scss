@@ -4,10 +4,6 @@
     width: 200px;
     position: relative;
     max-width: 100%;
-
-    @media #{sv.$screen-mobile} {
-        margin-top: 0.5rem;
-    }
 }
 
 .container:only-child {

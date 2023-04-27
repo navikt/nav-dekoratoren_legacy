@@ -7,7 +7,7 @@
     padding: 0.5rem 0;
     color: var(--a-white);
 
-    @media #{sv.$screen-mobile} {
+    @media #{sv.$screen-desktop-medium-down} {
         justify-content: start;
     }
 
@@ -26,13 +26,10 @@
     align-items: center;
     text-decoration: underline;
     border-radius: 6px;
+    margin: 0 0.5rem;
 
     @media #{sv.$screen-desktop} {
         margin: 0 1.5rem;
-    }
-
-    @media #{sv.$screen-mobile} {
-        margin: 0 0.5rem;
     }
 
     &:focus,

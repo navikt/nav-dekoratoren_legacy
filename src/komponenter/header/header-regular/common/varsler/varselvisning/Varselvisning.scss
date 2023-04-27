@@ -4,6 +4,17 @@
     margin: 8px auto 0 auto;
     box-sizing: initial;
 
+    @media (max-width: 476px) {
+        width: 90%;
+        margin: 0 auto;
+    }
+    @media #{sv.$screen-desktop-medium-down} {
+        padding: 1rem 1rem;
+        background-color: #f7f7f7;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
     ul {
         padding: 0;
     }
@@ -11,23 +22,11 @@
     &-tittel {
         margin: 1rem 0;
         width: 100%;
-    }
 
-    @media #{sv.$screen-mobile} {
-        padding: 1rem 1rem;
-        background-color: #f7f7f7;
-        overflow-x: hidden;
-        overflow-y: auto;
-
-        &-tittel {
+        @media #{sv.$screen-desktop-medium-down} {
             font-size: 2rem;
             line-height: 2.25rem;
         }
-    }
-
-    @media (max-width: 476px) {
-        width: 90%;
-        margin: 0 auto;
     }
 
     &-tom-liste {
@@ -53,7 +52,7 @@
     margin: 1rem 0 2rem 0;
     width: 100%;
 
-    @media (max-width: 768px) {
+    @media #{sv.$screen-desktop-medium-down} {
         padding-left: 1rem;
     }
 }

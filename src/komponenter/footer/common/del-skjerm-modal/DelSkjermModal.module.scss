@@ -7,11 +7,10 @@
 }
 
 .content {
+    padding-top: 2rem;
+
     @media #{sv.$screen-desktop} {
         padding: 2rem 2rem 1rem 2rem;
-    }
-    @media #{sv.$screen-mobile} {
-        padding-top: 2rem;
     }
 }
 
@@ -41,7 +40,7 @@
     display: flex;
     gap: 0.5rem;
 
-    @media #{sv.$screen-mobile} {
+    @media #{sv.$screen-desktop-medium-down} {
         flex-direction: column;
     }
 }

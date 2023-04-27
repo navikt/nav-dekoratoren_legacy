@@ -17,7 +17,7 @@
     visibility: hidden;
     transition-timing-function: ease-in;
   
-    @media #{sv.$screen-mobile} {
+    @media #{sv.$screen-desktop-medium-down} {
         position: fixed;
         top: sv.$header-height-mobil;
         left: -100%;
@@ -43,7 +43,7 @@
     z-index: 1001;
     transition-timing-function: ease-in-out;
 
-    @media #{sv.$screen-mobile} {
+    @media #{sv.$screen-desktop-medium-down} {
         left: 0;
         z-index: 1001;
         transition-duration: 0.4s;
@@ -60,7 +60,7 @@
     box-sizing: border-box;
     width: 100%;
   
-    @media #{sv.$screen-mobile} {
+    @media #{sv.$screen-desktop-medium-down} {
         height: 100%;
         padding: 0;
     }

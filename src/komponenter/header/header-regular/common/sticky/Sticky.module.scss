@@ -29,7 +29,7 @@
 }
 
 .stickyContainerMobilFixed {
-    @media #{sv.$screen-mobile} {
+    @media #{sv.$screen-desktop-medium-down} {
         position: fixed;
         top: 0;
     }

@@ -18,10 +18,10 @@
 .footerBottomContent {
     width: 100%;
     max-width: 1344px;
-    padding-bottom: 4rem;
-
-    @media #{sv.$screen-mobile} {
-        padding-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    
+    @media #{sv.$screen-desktop} {
+      padding-bottom: 4rem;
     }
 }
 

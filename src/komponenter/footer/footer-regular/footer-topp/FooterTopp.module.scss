@@ -11,13 +11,27 @@
     padding-left: 1rem;
     padding-right: 1rem;
 
+    @media #{sv.$screen-desktop} {
+        padding-top: 2.75rem;
+        padding-bottom: 1.75rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+    @media #{sv.$screen-desktop-large-up} {
+        padding-left: 0;
+        padding-right: 0;
+        width: 1344px;
+        margin: 0 auto;
+    }
+
+
     :global(.globalLenkeFooter) {
         display: flex;
         color: white;
-        padding: 0.5rem 0;
-
-        @media #{sv.$screen-mobile} {
-            padding: 0.25rem 0;
+        padding: 0.25rem 0;
+        
+        @media #{sv.$screen-desktop} {
+            padding: 0.5rem 0;
         }
 
         svg {
@@ -40,31 +54,23 @@
         margin: 0;
     }
 
-    @media #{sv.$screen-desktop} {
-        padding-top: 2.75rem;
-        padding-bottom: 1.75rem;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-
-        .toppKolonner {
+    .toppKolonner {
+        @media #{sv.$screen-desktop} {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
         }
-    }
-
-    @media #{sv.$screen-desktop-large-up} {
-        padding-left: 0;
-        padding-right: 0;
-        width: 1344px;
-        margin: 0 auto;
     }
 }
 
 .tilToppen {
     display: flex;
     justify-content: start;
-    margin-bottom: 2.25rem;
+    margin-bottom: 1.75rem;
+    
+    @media #{sv.$screen-desktop} {
+        margin-bottom: 2.25rem;
+    }
 
     :global(.globalLenkeFooter) {
         font-size: 1.25rem;
@@ -74,14 +80,11 @@
             margin-right: 0.5rem;
         }
     }
-
-    @media #{sv.$screen-mobile} {
-        margin-bottom: 1.75rem;
-    }
 }
 
 .toppKolonner {
     column-gap: 2rem;
+
     :global(.menylenker-seksjon) {
         margin-bottom: 2.25rem;
     }

@@ -3,7 +3,7 @@
 .brodsmulesti {
     display: flex;
 
-    @media #{sv.$screen-mobile} {
+    @media #{sv.$screen-desktop-medium-down} {
         width: 100%;
     }
 

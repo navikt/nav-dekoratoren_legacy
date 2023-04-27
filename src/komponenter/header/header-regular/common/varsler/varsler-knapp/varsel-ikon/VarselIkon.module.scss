@@ -8,25 +8,21 @@ $ulest-diameter: 12px;
 [aria-expanded='false'] .ulestSirkel {
     position: absolute;
     z-index: 4;
-
     border-radius: 50%;
     height: $ulest-diameter;
     width: $ulest-diameter;
-    left: 20px;
-    top: 26px;
-
-    @media #{sv.$screen-mobile} {
-        left: 34px;
-        top: 14px;
-    }
-
+    left: 34px;
+    top: 14px;
     background-color: var(--a-icon-danger);
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     transition: $transition;
+
+    @media #{sv.$screen-desktop} {
+        left: 20px;
+        top: 26px;
+    }
 }
 .lukkVarslerIkon{
     margin: 4px 3.5px 4px 3.5px;

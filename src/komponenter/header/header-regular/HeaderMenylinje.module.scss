@@ -10,7 +10,7 @@
     background-color: white;
     position: relative;
 
-    @media #{sv.$screen-mobile} {
+    @media #{sv.$screen-desktop-medium-down} {
         @include mobilHeader;
     }
 
@@ -54,7 +54,7 @@
         background-color: var(--a-surface-action-subtle);
     }
 
-    @media #{sv.$screen-mobile} {
+    @media #{sv.$screen-desktop-medium-down} {
         margin-right: 0;
         gap: 0;
     }
