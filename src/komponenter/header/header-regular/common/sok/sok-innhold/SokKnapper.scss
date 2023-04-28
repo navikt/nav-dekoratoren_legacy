@@ -51,38 +51,12 @@
 @media #{sv.$screen-desktop} {
     .sok-knapper__knapp-submit {
         color: white;
-    }
-
-    .sok-knapper__knapp-submit .sok-ikon__line {
-        background-color: var(--a-white);
-    }
-
-    .sok-knapper__knapp-submit .sok-ikon > * {
-        border-color: var(--a-white);
         border-radius: 0 var(--a-border-radius-medium) var(--a-border-radius-medium) 0;
         background-color: var(--a-surface-action);
     }
 
     .sok-knapper__knapp-submit:active,
     .sok-knapper__knapp-submit:hover {
-    }
-
-    .sok-knapper__knapp-submit:active .sok-knapper__sok-circle,
-    .sok-knapper__knapp-submit:hover .sok-knapper__sok-circle {
-        border-color: white;
-    }
-
-    .sok-knapper__knapp-submit:active .sok-knapper__sok-line,
-    .sok-knapper__knapp-submit:hover .sok-knapper__sok-line {
-        background-color: white;
-    }
-
-    .sok-knapper__knapp-submit:focus .sok-ikon__line {
-        background-color: var(--a-blue-500);
-    }
-
-    .sok-knapper__knapp-submit:focus .sok-ikon > * {
-        border-color: var(--a-blue-500);
         color: var(--a-text-on-action);
         border-color: var(--a-border-action);
         background-color: var(--a-surface-action);
