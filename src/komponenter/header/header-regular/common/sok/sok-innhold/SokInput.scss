@@ -48,8 +48,8 @@
         .sok-input {
             input {
                 padding: 0.7rem 1rem;
-                background-color: white;
                 border: 2px solid var(--a-blue-500);
+                background-color: var(--a-surface-default);
 
                 &:focus,
                 &:active {

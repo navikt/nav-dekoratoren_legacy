@@ -1,8 +1,8 @@
 .beskjed {
     display: flex;
     flex-direction: row;
-    background-color: #ffffff;
-    border-radius: 8px;
+    background-color: var(--a-surface-default);
+    border-radius: var(--a-border-radius-large);
     margin-bottom: 8px;
     width: 444px;
     border: solid 1px var(--a-border-subtle);
@@ -13,7 +13,7 @@
 
     .tittel {
         font-size: 18px;
-        color: #272727;
+        color: var(--a-text-default);
     }
 
     .contentWrapper {
@@ -25,7 +25,7 @@
 
     .dato {
         font-size: 16px;
-        color: #707070;
+        color: var(--a-gray-600);
     }
 
     .metadataOgKnapp {
@@ -92,7 +92,7 @@
 }
 
 .chevron {
-    color: #707070;
+    color: var(--a-icon-subtle);
     width: 21px;
     min-width: 21px;
     height: 21px;

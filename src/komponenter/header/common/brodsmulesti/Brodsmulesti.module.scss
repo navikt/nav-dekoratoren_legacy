@@ -72,11 +72,11 @@
         outline: none;
         text-decoration: none;
         svg {
-            color: white;
-            stroke: white;
+            color: var(--a-icon-on-inverted);
+            stroke: var(--a-icon-on-inverted);
         }
         .iconEllipsis {
-            color: white;
+            color: var(--a-icon-on-inverted);
             text-decoration: none;
         }
     }

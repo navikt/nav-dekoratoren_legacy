@@ -7,7 +7,7 @@
     flex-direction: column;
     align-items: center;
     box-shadow: inset 0 (-(sv.$header-separator-height)) 0 sv.$header-separator-farge;
-    background-color: white;
+    background-color: var(--a-surface-default);
     position: relative;
 
     @media #{sv.$screen-mobile} {

@@ -11,7 +11,7 @@
 .varslerInnhold {
     overflow-y: auto;
     max-height: 80vh;
-    background-color: #f7f7f7;
+    background-color: var(--a-surface-subtle);
 
     @media #{sv.$screen-mobile} {
         max-height: 100%;

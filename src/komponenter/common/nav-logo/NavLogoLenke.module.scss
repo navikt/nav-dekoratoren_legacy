@@ -4,7 +4,7 @@
 
     &:focus {
         box-shadow: 0 0 0 4px var(--a-border-focus) inset;
-        border-radius: 8px;
+        border-radius: var(--a-border-radius-large);
         outline: none;
         border-color: transparent;
         background-color: transparent;

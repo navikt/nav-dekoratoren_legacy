@@ -18,7 +18,7 @@
 
     .sokeresultat-lenke {
         width: 100%;
-        color: black;
+        color: var(--a-text-default);
         cursor: pointer;
         padding: 1rem 1rem 1rem 0;
         font-weight: normal;
@@ -27,7 +27,7 @@
 
         &:focus {
             outline: none;
-            color: white;
+            color: var(--a-text-on-inverted);
             text-decoration: none;
             background-color: var(--a-deepblue-500);
             box-shadow: 0 0 0 2px var(--a-deepblue-500);

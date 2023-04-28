@@ -5,7 +5,7 @@
 }
 
 .toppKontainer {
-    color: white;
+    color: var(--a-text-on-inverted);
     padding-top: 1.5rem;
     padding-bottom: 1.75rem;
     padding-left: 1rem;
@@ -13,7 +13,7 @@
 
     :global(.globalLenkeFooter) {
         display: flex;
-        color: white;
+        color: var(--a-text-on-inverted);
         padding: 0.5rem 0;
 
         @media #{sv.$screen-mobile} {
@@ -21,13 +21,13 @@
         }
 
         svg {
-            stroke: white;
-            color: white;
+            stroke: var(--a-icon-on-inverted);
+            color: var(--a-icon-on-inverted);
         }
 
         &:focus {
             color: var(--a-blue-500);
-            background-color: white;
+            background-color: var(--a-surface-default);
 
             svg {
                 stroke: var(--a-blue-500);

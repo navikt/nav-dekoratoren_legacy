@@ -22,7 +22,7 @@
 
     &:focus {
         outline: none;
-        color: white;
+        color: var(--a-text-on-inverted);
         text-decoration: none;
         background-color: var(--a-border-focus);
         box-shadow: 0 0 0 2px var(--a-border-focus);

@@ -18,15 +18,15 @@
 
     &:focus {
         outline: none;
-        color: #fff;
+        color: var(--a-text-on-inverted);
         text-decoration: none;
         background-color: var(--a-border-focus);
         box-shadow: 0 0 0 2px var(--a-border-focus);
 
         svg,
         path {
-            fill: white;
-            stroke: white;
+            fill: var(--a-icon-on-inverted);
+            stroke: var(--a-icon-on-inverted);
         }
     }
     & svg {

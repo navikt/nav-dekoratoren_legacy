@@ -15,7 +15,7 @@
 
     @media #{sv.$screen-mobile} {
         padding: 1rem 1rem;
-        background-color: #f7f7f7;
+        background-color: var(--a-surface-subtle);
         overflow-x: hidden;
         overflow-y: auto;
 
@@ -40,7 +40,7 @@
 }
 
 .vis-alle-lenke {
-    color: #262626;
+    color: var(--a-text-default);
 }
 
 .varsler-visning-tom {

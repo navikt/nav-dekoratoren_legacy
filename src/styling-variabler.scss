@@ -50,7 +50,7 @@ $footer-seperator-height: 2px;
         color: var(--a-blue-500);
         outline: none;
         box-shadow: 0 0 0 4px var(--a-border-focus);
-        border-radius: 4px;
+        border-radius: var(--a-border-radius-medium);
         border-color: transparent;
     }
 }
