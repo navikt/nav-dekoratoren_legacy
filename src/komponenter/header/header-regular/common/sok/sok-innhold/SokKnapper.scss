@@ -50,8 +50,8 @@
 
 @media #{sv.$screen-desktop} {
     .sok-knapper__knapp-submit {
-        color: white;
         border-radius: 0 var(--a-border-radius-medium) var(--a-border-radius-medium) 0;
+        color: var(--a-text-on-inverted);
         background-color: var(--a-surface-action);
     }
 
