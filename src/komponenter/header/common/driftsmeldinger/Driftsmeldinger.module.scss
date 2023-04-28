@@ -5,7 +5,7 @@
     display: flex;
     flex-wrap: wrap;
     padding: 0.5rem 0;
-    color: var(--a-white);
+    color: var(--a-text-on-inverted);
 
     @media #{sv.$screen-mobile} {
         justify-content: start;
@@ -20,7 +20,7 @@
 }
 
 .message {
-    color: var(--a-white);
+    color: var(--a-text-on-inverted);
     padding: 0.5rem;
     display: inline-flex;
     align-items: center;

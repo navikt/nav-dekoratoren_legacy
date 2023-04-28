@@ -17,7 +17,7 @@
         .sok-input {
             input {
                 padding: 0.75rem;
-                border: 2px solid var(--a-blue-500);
+                border: 2px solid var(--a-border-action);
                 &::-ms-clear {
                     display: none;
                 }
@@ -48,12 +48,12 @@
         .sok-input {
             input {
                 padding: 0.7rem 1rem;
-                border: 2px solid var(--a-blue-500);
                 background-color: var(--a-surface-default);
+                border: 2px solid var(--a-border-action);
 
                 &:focus,
                 &:active {
-                    border: 2px solid var(--a-blue-500);
+                    border: 2px solid var(--a-border-action);
                 }
             }
             .skjemaelement__input {

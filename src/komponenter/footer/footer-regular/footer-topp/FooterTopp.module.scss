@@ -26,12 +26,12 @@
         }
 
         &:focus {
-            color: var(--a-blue-500);
+            color: var(--a-text-action);
             background-color: var(--a-surface-default);
 
             svg {
-                stroke: var(--a-blue-500);
-                color: var(--a-blue-500);
+                stroke: var(--a-icon-action);
+                color: var(--a-icon-action);
             }
         }
     }

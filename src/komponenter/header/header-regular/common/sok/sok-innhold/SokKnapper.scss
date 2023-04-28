@@ -13,11 +13,11 @@
     height: 100%;
     background: none;
     align-items: center;
-    color: var(--a-blue-500);
+    color: var(--a-text-action);
     padding: 0 1rem;
     font-weight: 600;
-    border-top: 3px solid var(--a-blue-500);
-    border-bottom: 3px solid var(--a-blue-500);
+    border-top: 3px solid var(--a-border-action);
+    border-bottom: 3px solid var(--a-border-action);
     border-left: 3px solid transparent;
     border-right: 3px solid transparent;
     cursor: pointer;
@@ -28,12 +28,12 @@
     outline: 0;
     background-color: var(--a-surface-default);
     box-shadow: 0 0 0 3px var(--a-border-focus);
-    color: var(--a-blue-500);
+    color: var(--a-border-action);
     border: 3px solid transparent;
 }
 
 .sok-knapper__knapp:hover {
-    border-color: var(--a-blue-500);
+    border-color: var(--a-border-action);
 }
 
 .sok-knapper__knapp-avbryt {
@@ -51,7 +51,6 @@
 @media #{sv.$screen-desktop} {
     .sok-knapper__knapp-submit {
         color: white;
-        background-color: var(--a-blue-500);
     }
 
     .sok-knapper__knapp-submit .sok-ikon__line {
@@ -61,6 +60,7 @@
     .sok-knapper__knapp-submit .sok-ikon > * {
         border-color: var(--a-white);
         border-radius: 0 var(--a-border-radius-medium) var(--a-border-radius-medium) 0;
+        background-color: var(--a-surface-action);
     }
 
     .sok-knapper__knapp-submit:active,

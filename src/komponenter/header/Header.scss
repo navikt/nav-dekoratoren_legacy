@@ -6,10 +6,10 @@
     justify-items: center;
 
     &--white {
-        background: var(--a-bg-default);
+        background-color: var(--a-bg-default);
     }
     &--gray {
-        background: var(--a-bg-subtle);
+        background-color: var(--a-bg-subtle);
     }
 }
 
