@@ -33,13 +33,13 @@ export const hentVarslerFetch = (API_DEKORATOREN_URL: string): Promise<varselinn
     return fetchToJson(`${API_DEKORATOREN_URL}/varsel/proxy/varsel`, { credentials: 'include' });
 };
 
-export const postDone = (API_DEKORATOREN_URL: string, eventId: DoneEvent): Promise<number> =>
-    fetchToJson(`${API_DEKORATOREN_URL}/varsel/beskjed/done`, {
+export const postDone = (API_DEKORATOREN_URL: string, eventId: DoneEvent) =>
+    fetch(`${API_DEKORATOREN_URL}/varsel/beskjed/done`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(eventId),
         credentials: 'include',
-    });
+    }).catch((e) => console.error(`Error posting done event for varsler [eventId: ${eventId} - error: ${e}]`));
 
 export const fetchFeatureToggles = (API_DEKORATOREN_URL: string, featureToggles: FeatureToggles) =>
     fetchToJson(`${API_DEKORATOREN_URL}/feature-toggles${getFeatureToggleUrl(featureToggles)}`, {
