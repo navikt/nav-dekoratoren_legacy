@@ -38,7 +38,7 @@ export const postDone = (API_DEKORATOREN_URL: string, eventId: DoneEvent) =>
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(eventId),
-        credentials: 'include',
+        credentials: 'same-origin',
         keepalive: true,
     }).catch((e) => console.info(`Error posting done event for varsler [eventId: ${eventId?.eventId} - error: ${e}]`));
 
