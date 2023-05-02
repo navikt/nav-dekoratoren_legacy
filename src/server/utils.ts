@@ -74,7 +74,7 @@ export const clientEnv = ({ req }: Props): Environment => {
     };
 };
 
-export const orginDevelopment = (hosturl?: string) => ['localhost', 'dev'].some((o) => hosturl?.includes(o));
+export const originDevelopment = (hosturl?: string) => ['localhost', 'dev'].some((o) => hosturl?.includes(o));
 
 // Validation utils
 export const validateClientEnv = (req: Request) => {
