@@ -26,8 +26,6 @@ env:
     value: https://loginservice.nav.no
   - name: LOGOUT_URL
     value: https://loginservice.nav.no/slo
-  - name: FEEDBACK_API_URL
-    value: https://dekoratoren-api.nav.no/event
 replicas:
   min: 2
   max: 8

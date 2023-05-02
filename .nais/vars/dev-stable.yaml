@@ -1,8 +1,6 @@
 appName: nav-dekoratoren
 appPath: ''
 ingresses:
-  - https://www.dev.nav.no/dekoratoren
-  - https://dekoratoren.dev.nav.no
   - https://dekoratoren.ekstern.dev.nav.no
 outboundHosts:
   - www.dev.nav.no
@@ -10,23 +8,21 @@ env:
   - name: ENV
     value: dev
   - name: XP_BASE_URL
-    value: https://www.dev.nav.no
+    value: https://www.intern.dev.nav.no
   - name: APP_BASE_URL
     value: https://dekoratoren.ekstern.dev.nav.no
   - name: API_XP_SERVICES_URL
     value: https://www.dev.nav.no/_/service
   - name: API_DEKORATOREN_URL
-    value: https://www.dev.nav.no/person/nav-dekoratoren-api
+    value: https://person.ekstern.dev.nav.no/person/nav-dekoratoren-api
   - name: MINSIDE_ARBEIDSGIVER_URL
     value: https://min-side-arbeidsgiver.dev.nav.no/min-side-arbeidsgiver/
   - name: MIN_SIDE_URL
-    value: https://www.dev.nav.no/minside/
+    value: https://www.intern.dev.nav.no/minside/
   - name: LOGIN_URL
     value: https://loginservice.dev.nav.no
   - name: LOGOUT_URL
     value: https://loginservice.dev.nav.no/slo
-  - name: FEEDBACK_API_URL
-    value: https://dekoratoren-api.dev-gcp.nais.io/event
 replicas:
   min: 1
   max: 2

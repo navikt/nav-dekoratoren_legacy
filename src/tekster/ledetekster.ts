@@ -247,12 +247,6 @@ export const ledetekster: { [key: string]: stringOrFunction } = {
     'hva-lette-du-etter': 'Hva lette du etter? Svaret ditt hjelper oss med å gjøre nettstedet bedre.',
     'hva-lette-du-etter-en': 'What were you looking for? Your answer helps us make the website better.',
     'hva-lette-du-etter-se': 'Hva lette du etter? Svaret ditt hjelper oss med å gjøre nettstedet bedre.',
-    'advarsel-om-personopplysninger':
-        'Vi svarer ikke på tilbakemeldingen. Ikke send personlig informasjon som telefonnummer, fødselsnummer eller e-postadresse.',
-    'advarsel-om-personopplysninger-en':
-        'We don’t answer feedback given here. Don’t write personal information such as phone number, national identity number or e-mail address.',
-    'advarsel-om-personopplysninger-se':
-        'Vi svarer ikke på tilbakemeldingen. Ikke send personlig informasjon som telefonnummer, fødselsnummer eller e-postadresse.',
     'textarea-undermaks': (input: string) => `Du har ${input} tegn igjen`,
     'textarea-undermaks-en': (input: string) => `You have ${input} characters left`,
     'textarea-undermaks-se': (input: string) => `Du har ${input} tegn igjen`,
@@ -289,12 +283,6 @@ export const ledetekster: { [key: string]: stringOrFunction } = {
     'personvern-pronomen-flertall': 'disse',
     'personvern-pronomen-flertall-en': 'these',
     'personvern-pronomen-flertall-se': 'disse',
-    'send-inn-tilbakemelding': 'Send svar',
-    'send-inn-tilbakemelding-en': 'Send',
-    'send-inn-tilbakemelding-se': 'Send svar',
-    'avbryt-tilbakemelding': 'Avbryt',
-    'avbryt-tilbakemelding-en': 'Cancel',
-    'avbryt-tilbakemelding-se': 'Avbryt',
     'send-undersokelse-takk': 'Takk!',
     'send-undersokelse-takk-en': 'Thanks!',
     'send-undersokelse-takk-se': 'Takk!',
@@ -336,7 +324,7 @@ export const ledetekster: { [key: string]: stringOrFunction } = {
     'varslet-sms': 'Varslet på SMS',
     'varslet-sms-en': 'Notified by SMS',
     'varslet-sms-se': 'Varslet på SMS',
-    'arkiver': 'Arkiver',
+    arkiver: 'Arkiver',
     'arkiver-en': 'Archive',
     'arkiver-se': 'Arkiver',
 };
