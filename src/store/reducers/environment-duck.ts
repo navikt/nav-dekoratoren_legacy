@@ -14,7 +14,6 @@ export interface Environment {
     MIN_SIDE_URL: string;
     LOGIN_URL: string;
     LOGOUT_URL: string;
-    FEEDBACK_API_URL: string;
     OPPORTUNITY_ID: string;
     CASETYPE_ID: string;
     SOLUTION_ID: string;
@@ -62,7 +61,6 @@ export const initialState: Environment = {
     MIN_SIDE_URL: '',
     LOGIN_URL: '',
     LOGOUT_URL: '',
-    FEEDBACK_API_URL: '',
     OPPORTUNITY_ID: '',
     CASETYPE_ID: '',
     SOLUTION_ID: '',

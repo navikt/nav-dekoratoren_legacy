@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import { RequestHandler } from 'express';
 
 const sokServiceUrl = `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`;

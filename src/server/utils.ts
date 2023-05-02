@@ -40,7 +40,6 @@ export const clientEnv = ({ req }: Props): Environment => {
         MIN_SIDE_URL: process.env.MIN_SIDE_URL as string,
         LOGIN_URL: process.env.LOGIN_URL as string,
         LOGOUT_URL: process.env.LOGOUT_URL as string,
-        FEEDBACK_API_URL: process.env.FEEDBACK_API_URL as string,
         ...(req.query && {
             PARAMS: {
                 CONTEXT: chosenContext,
@@ -75,7 +74,7 @@ export const clientEnv = ({ req }: Props): Environment => {
     };
 };
 
-export const orginDevelopment = (hosturl?: string) => ['localhost', 'dev'].some((o) => hosturl?.includes(o));
+export const originDevelopment = (hosturl?: string) => ['localhost', 'dev'].some((o) => hosturl?.includes(o));
 
 // Validation utils
 export const validateClientEnv = (req: Request) => {

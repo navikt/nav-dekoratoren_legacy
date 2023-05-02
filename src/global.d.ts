@@ -27,7 +27,6 @@ declare global {
             MIN_SIDE_URL: string;
             LOGIN_URL: string;
             LOGOUT_URL: string;
-            FEEDBACK_API_URL: string;
             BUILD_ID: string;
         }
     }

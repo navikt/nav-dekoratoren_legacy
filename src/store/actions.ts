@@ -35,9 +35,6 @@ export enum ActionType {
     TOGGLE_VARSEL = 'TOGGLE_VARSEL',
     TOGGLE_UNDERMENY = 'TOGGLE_UNDERMENY',
     TOGGLE_HOVEDOGUNDERMENY = 'TOGGLE_HOVEDOGUNDERMENY',
-    SETT_TILBAKEMELDING_OK = 'SETT_TILBAKEMELDING_OK',
-    SETT_TILBAKEMELDING_FEILET = 'SETT_TILBAKEMELDING_FEILET',
-    SETT_TILBAKEMELDING_PENDING = 'SETT_TILBAKEMELDING_PENDING',
     FJERN_LEST_VARSEL = 'FJERN_LEST_VARSEL',
 }
 
@@ -160,18 +157,6 @@ export interface ToggleLukkAlle {
     type: ActionType.TOGGLE_LUKK_ALLE;
 }
 
-export interface SettTilbakemeldingOKAction {
-    type: ActionType.SETT_TILBAKEMELDING_OK;
-}
-
-export interface SettTilbakemeldingPENDINGAction {
-    type: ActionType.SETT_TILBAKEMELDING_PENDING;
-}
-
-export interface SettTilbakemeldingFEILETAction {
-    type: ActionType.SETT_TILBAKEMELDING_FEILET;
-}
-
 export interface FjernLestVarselAction {
     type: ActionType.FJERN_LEST_VARSEL;
     eventId: string;
@@ -206,7 +191,4 @@ export type Handling =
     | ToggleHovedOgUnderMeny
     | ToggleVarsler
     | ToggleLukkAlle
-    | SettTilbakemeldingOKAction
-    | SettTilbakemeldingFEILETAction
-    | SettTilbakemeldingPENDINGAction
     | FjernLestVarselAction;

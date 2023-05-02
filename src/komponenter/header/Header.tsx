@@ -71,26 +71,25 @@ export const Header = () => {
 
     // Map prod to dev urls with url-lookup-table
     const setUrlLookupTableUrls = () => {
-        const anchors = Array.prototype.slice.call(document.getElementsByTagName('a'));
-        anchors.forEach((anchor) => {
-            const envUrl = getUrlFromLookupTable(anchor.href, ENV as 'dev');
-            if (anchor.href !== envUrl) {
+        const appInstanceEnv = APP_URL === 'https://dekoratoren-beta.intern.dev.nav.no' ? 'beta' : 'dev';
+        document.querySelectorAll('a').forEach((anchor) => {
+            const envUrl = getUrlFromLookupTable(anchor.href, appInstanceEnv);
+            if (envUrl && anchor.href !== envUrl) {
                 anchor.href = envUrl;
             }
         });
     };
 
     useEffect(() => {
-        if (ENV && PARAMS.URL_LOOKUP_TABLE && ENV !== 'localhost' && ENV !== 'prod') {
+        if (ENV === 'dev' && PARAMS.URL_LOOKUP_TABLE) {
             // Initial change
             setUrlLookupTableUrls();
 
             // After dom changes
             const targetNode = document.body;
             const config = { attributes: true, childList: true, subtree: true };
-            const callback = () => setUrlLookupTableUrls();
 
-            const observer = new MutationObserver(callback);
+            const observer = new MutationObserver(setUrlLookupTableUrls);
             observer.observe(targetNode, config);
             return () => {
                 observer.disconnect();

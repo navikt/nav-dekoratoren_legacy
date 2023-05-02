@@ -202,7 +202,7 @@ const commonConfig = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: '/css/[name].css',
+            filename: './css/[name].css',
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),

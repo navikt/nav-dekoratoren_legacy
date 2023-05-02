@@ -21,7 +21,14 @@ const setCookie = (state: TaskAnalyticsState) => {
     });
 };
 
-export const taskAnalyticsGetState = () => (Cookies.getJSON(cookieName) || {}) as TaskAnalyticsState;
+export const taskAnalyticsGetState = (): TaskAnalyticsState => {
+    const cookie = Cookies.get(cookieName);
+    if (!cookie) {
+        return {};
+    }
+
+    return JSON.parse(cookie);
+};
 
 export const taskAnalyticsSetSurveyMatched = (surveyId: string) => {
     const currentState = taskAnalyticsGetState();
