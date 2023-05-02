@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import { RequestHandler } from 'express';
 import NodeCache from 'node-cache';
 import { getCachedRequestHandler } from './_cachedResourceHandler';
