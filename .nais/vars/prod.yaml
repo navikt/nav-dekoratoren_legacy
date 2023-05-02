@@ -23,7 +23,7 @@ env:
   - name: MIN_SIDE_URL
     value: https://www.nav.no/minside/
   - name: LOGIN_URL
-    value: https://loginservice.nav.no
+    value: https://loginservice.nav.no/login
   - name: LOGOUT_URL
     value: https://loginservice.nav.no/slo
 replicas:
