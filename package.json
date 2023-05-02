@@ -92,6 +92,7 @@
         "file-loader": "6.2.0",
         "husky": "8.0.3",
         "jest": "29.5.0",
+        "jest-environment-jsdom": "29.5.0",
         "lint-staged": "13.2.2",
         "mini-css-extract-plugin": "2.7.5",
         "modify-selectors": "2.0.0",
@@ -120,7 +121,8 @@
         "moduleNameMapper": {
             "\\.(css|jpg|png|svg|less|module.scss|scss)$": "<rootDir>/src/utils/jest/styleMock.js",
             "nav-(.*)-style": "<rootDir>/src/utils/jest/styleMock.js"
-        }
+        },
+        "testEnvironment": "jsdom"
     },
     "browserslist": {
         "production": [
