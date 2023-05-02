@@ -38,6 +38,7 @@ export const postDone = (API_DEKORATOREN_URL: string, eventId: DoneEvent) =>
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(eventId),
         credentials: 'include',
+        keepalive: true,
     }).catch((e) => console.info(`Error posting done event for varsler [eventId: ${eventId?.eventId} - error: ${e}]`));
 
 export const fetchFeatureToggles = (API_DEKORATOREN_URL: string, featureToggles: FeatureToggles) =>
