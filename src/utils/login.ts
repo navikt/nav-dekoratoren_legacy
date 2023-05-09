@@ -21,7 +21,8 @@ const getRedirectUrl = (environment: Environment, arbeidsflate: MenuValue) => {
     }
 
     if (arbeidsflate === MenuValue.ARBEIDSGIVER) {
-        return MINSIDE_ARBEIDSGIVER_URL;
+        // Temp fix ettersom minside arbeidsgiver har blitt fjernet fra whitelist i loginservice
+        return "https://arbeidsgiver.nav.no/ditt-nav-arbeidsgiver";
     }
 
     return MIN_SIDE_URL;
