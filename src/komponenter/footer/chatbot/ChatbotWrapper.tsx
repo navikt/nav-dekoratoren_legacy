@@ -59,6 +59,11 @@ export const ChatbotWrapper = () => {
                     conversationId: cookies[conversationCookieName],
                     openTextLinksInNewTab: true,
                 },
+                styling: {
+                    buttons: {
+                        multiline: true,
+                    },
+                },
             },
         };
 
