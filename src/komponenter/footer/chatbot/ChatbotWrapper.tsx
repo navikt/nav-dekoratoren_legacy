@@ -58,6 +58,11 @@ export const ChatbotWrapper = () => {
                     removeRememberedConversationOnChatPanelClose: true,
                     conversationId: cookies[conversationCookieName],
                 },
+                styling: {
+                    buttons: {
+                        multiline: true,
+                    },
+                },
             },
         };
 

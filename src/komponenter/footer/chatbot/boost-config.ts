@@ -59,7 +59,7 @@ type BoostButtonStyling = {
     backgroundColor?: HexColor;
     textColor?: HexColor;
     variant?: ButtonType;
-    focusBackgroundColor: HexColor;
+    focusBackgroundColor?: HexColor;
     focusOutlineColor?: HexColor;
     focusTextColor?: HexColor;
     hoverBackgroundColor?: HexColor;
