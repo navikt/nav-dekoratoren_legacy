@@ -39,7 +39,6 @@ const Arbeidsflatemeny = () => {
                         <li className={style.listeElement} key={lenke.key}>
                             <LenkeMedSporing
                                 aria-current={arbeidsflate === lenke.key ? 'page' : 'false'}
-                                role="menuitem"
                                 classNameOverride={classNames(
                                     style.lenke,
                                     arbeidsflate === lenke.key ? style.lenkeActive : ''
