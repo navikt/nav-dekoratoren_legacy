@@ -17,8 +17,6 @@ Dekoratøren serveres på følgende ingresser:
 **Dev (dev-gcp)**
 
 -   http://nav-dekoratoren.personbruker (service host)
--   https://www.dev.nav.no/dekoratoren/
--   https://dekoratoren.dev.nav.no/
 -   https://dekoratoren.ekstern.dev.nav.no/ (tilgjengelig fra åpent internett)
 
 _Merk:_ Dekoratøren på disse ingressene skal være relativt stabil både funksjonelt og visuelt, og kan brukes av alle team/applikasjoner. Enkelte console-feil og avvik kan allikevel forekomme, så ta kontakt på #dekoratøren_på_navno dersom noe oppleves som rart.

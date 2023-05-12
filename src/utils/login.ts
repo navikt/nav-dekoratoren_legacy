@@ -33,7 +33,7 @@ export const getLoginUrl = (environment: Environment, arbeidsflate: MenuValue, l
 
     const redirectUrl = getRedirectUrl(environment, arbeidsflate);
 
-    return `${LOGIN_URL}/login?redirect=${redirectUrl}&level=${level || LEVEL}`;
+    return `${LOGIN_URL}?redirect=${redirectUrl}&level=${level || LEVEL}`;
 };
 
 export const getLogOutUrl = (environment: Environment) => environment.PARAMS.LOGOUT_URL || environment.LOGOUT_URL;

@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import menuFallback from '../mock/menu.json';
 import { RequestHandler } from 'express';
 import NodeCache from 'node-cache';

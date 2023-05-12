@@ -33,13 +33,12 @@ const Arbeidsflatemeny = () => {
 
     return (
         <div className={'arbeidsflate'} id={'arbeidsflate'}>
-            <ul className={style.toppListeRad} aria-label="Velg brukergruppe" role="menubar">
+            <ul className={style.toppListeRad} aria-label="Velg brukergruppe">
                 {arbeidsflateLenker(XP_BASE_URL).map((lenke, index) => {
                     return (
-                        <li role="none" className={style.listeElement} key={lenke.key}>
+                        <li className={style.listeElement} key={lenke.key}>
                             <LenkeMedSporing
                                 aria-current={arbeidsflate === lenke.key ? 'page' : 'false'}
-                                role="menuitem"
                                 classNameOverride={classNames(
                                     style.lenke,
                                     arbeidsflate === lenke.key ? style.lenkeActive : ''

@@ -10,18 +10,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const analyzeClientBundle = !!process.env.ANALYZE;
 
-const prefixExclusions = [
-    'body',
-    'body.no-scroll-mobil',
-    '.siteheader',
-    '.sitefooter',
-    /\b(\w*decorator-dummy-app\w*)\b/,
-    '#nav-chatbot',
-    ':root',
-    '.decorator-wrapper',
-];
-
-const prefixExclusionsDsCss = ['.decorator-wrapper'];
+const prefixExclusions = ['body', 'body.no-scroll-mobil', '.siteheader', '.sitefooter', '.decorator-wrapper'];
 
 const commonConfig = {
     mode: process.env.NODE_ENV || 'development',
@@ -162,34 +151,11 @@ const commonConfig = {
                                 plugins: [
                                     modifySelectors({
                                         enabled: true,
-                                        replace: [{ match: /^(:root|html|body)$/, with: '.decorator-wrapper' }],
+                                        replace: [{ match: /^(:root|:host|html|body)$/, with: '.decorator-wrapper' }],
                                     }),
                                     prefixer({
                                         prefix: '.decorator-wrapper',
-                                        exclude: prefixExclusionsDsCss,
-                                    }),
-                                    autoprefixer({}),
-                                ],
-                            },
-                        },
-                    },
-                ],
-            },
-            {
-                test: /\.(less|css)$/,
-                exclude: /@navikt(\\|\/)ds-css/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                ident: 'postcss',
-                                plugins: [
-                                    prefixer({
-                                        prefix: '.decorator-wrapper',
-                                        exclude: prefixExclusions,
+                                        exclude: ['.decorator-wrapper'],
                                     }),
                                     autoprefixer({}),
                                 ],
@@ -202,7 +168,7 @@ const commonConfig = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: '/css/[name].css',
+            filename: './css/[name].css',
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
