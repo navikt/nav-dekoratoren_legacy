@@ -33,12 +33,12 @@ $underline-height: 4px;
     &:focus,
     &:active {
         outline: #{$underline-height} solid var(--a-border-focus);
-        outline-offset: -#{$underline-height};
-        box-shadow: 0 0 0 0;
     }
 
     &:hover {
         box-shadow: inset 0 -#{$underline-height} 0 0 var(--a-gray-300);
+        text-decoration-thickness: 0.0625em;
+        text-underline-offset: 0.15em;
     }
 }
 .lenkeActive {

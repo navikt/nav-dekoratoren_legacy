@@ -14,5 +14,7 @@
 
     &:hover {
         text-decoration: underline;
+        text-decoration-thickness: 0.0625em;
+        text-underline-offset: 0.15em;
     }
 }

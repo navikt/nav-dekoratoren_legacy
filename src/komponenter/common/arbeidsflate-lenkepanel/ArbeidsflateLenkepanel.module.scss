@@ -15,6 +15,10 @@
         :global(.compact-chevron) {
             color: var(--a-white);
         }
+        :global(.navds-link-panel__title) {
+            text-decoration-thickness: 0.0625em;
+            text-underline-offset: 0.15em;
+        }
 
         :global(.compact-chevron) {
             transform: translateX(6px);

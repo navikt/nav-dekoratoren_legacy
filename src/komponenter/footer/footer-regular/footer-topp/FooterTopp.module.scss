@@ -16,7 +16,7 @@
         color: var(--a-text-on-inverted);
         padding: var(--a-spacing-2) 0;
         text-decoration-color: var(--a-deepblue-200);
-        text-decoration-thickness: 0.05em;
+        text-decoration-thickness: 0.0625em;
         text-underline-offset: 0.15em;
 
         @media #{sv.$screen-mobile} {
