@@ -14,6 +14,8 @@
 
     &:hover {
         text-decoration: underline;
+        text-decoration-thickness: 0.0625em;
+        text-underline-offset: 0.15em;
     }
 
     &:focus {
@@ -42,6 +44,8 @@
 
 .lenkeMedSporing {
     text-decoration: underline;
+    text-decoration-thickness: 0.0625em;
+    text-underline-offset: 0.15em;
     cursor: pointer;
 
     &:hover {
@@ -58,6 +62,9 @@
 
     &:hover {
         text-decoration: underline;
+        text-decoration-thickness: 0.0625em;
+        text-underline-offset: 0.15em;
+
         .chevron {
             left: 0.33em;
         }

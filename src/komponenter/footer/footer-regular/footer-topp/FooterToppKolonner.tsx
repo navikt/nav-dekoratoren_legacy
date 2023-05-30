@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useId } from 'react';
 import { useSelector } from 'react-redux';
-import { Heading } from '@navikt/ds-react';
+import { Detail } from '@navikt/ds-react';
 import { AppState } from 'store/reducers';
 import { MenyNode } from 'store/reducers/menu-duck';
 import { findNode, getLanguageNode } from 'utils/meny-storage-utils';
@@ -46,18 +46,17 @@ const FooterToppKolonner = ({ firstNode, numberOfNodes }: FooterToppKolonnerProp
             {columnsNode
                 ? columnsNode.children.slice(firstNode, lastNode).map((columnNode, i) => (
                       <div key={i} className={'menylenker-seksjon'}>
-                          <Heading level="2" size="small" className="menylenker-overskrift">
+                          <Detail as="h2" size="small" className="menylenker-overskrift" uppercase>
                               {columnNode.displayName}
-                          </Heading>
+                          </Detail>
                           <FooterLenker nodes={columnNode} />
                       </div>
-                ))
+                  ))
                 : [...Array(numberOfNodes)].map((_, index) => (
                       <div className={'menylenker-seksjon'} key={index}>
                           <LinksLoader id={`footer-link-loader-${loaderId}-${index}`} />
                       </div>
-                ))
-            }
+                  ))}
         </>
     );
 };

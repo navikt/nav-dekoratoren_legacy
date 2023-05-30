@@ -5,33 +5,36 @@
 }
 
 .toppKontainer {
-    color: white;
-    padding-top: 1.5rem;
-    padding-bottom: 1.75rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    color: var(--a-text-on-inverted);
+    padding-top: var(--a-spacing-6, 1.5rem);
+    padding-bottom: var(--a-spcaing-7, 1.75rem);
+    padding-left: var(--a-spacing-4, 1rem);
+    padding-right: var(--a-spacing-4, 1rem);
 
     :global(.globalLenkeFooter) {
         display: flex;
-        color: white;
-        padding: 0.5rem 0;
+        color: var(--a-text-on-inverted);
+        padding: var(--a-spacing-2) 0;
+        text-decoration-color: var(--a-deepblue-200);
+        text-decoration-thickness: 0.0625em;
+        text-underline-offset: 0.15em;
 
         @media #{sv.$screen-mobile} {
-            padding: 0.25rem 0;
+            padding: var(--a-spacing-1) 0;
         }
 
         svg {
-            stroke: white;
-            color: white;
+            stroke: var(--a-icon-on-inverted);
+            color: var(--a-icon-on-inverted);
         }
 
         &:focus {
-            color: var(--a-blue-500);
-            background-color: white;
+            color: var(--a-text-action);
+            background-color: var(--a-surface-default);
 
             svg {
-                stroke: var(--a-blue-500);
-                color: var(--a-blue-500);
+                stroke: var(--a-icon-action);
+                color: var(--a-icon-action);
             }
         }
     }
@@ -41,10 +44,10 @@
     }
 
     @media #{sv.$screen-desktop} {
-        padding-top: 2.75rem;
-        padding-bottom: 1.75rem;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        padding-top: var(--a-spacing-11, 2.75rem);
+        padding-bottom: var(--a-spacing-7, 1.75rem);
+        padding-left: var(--a-spacing-6, 1.5rem);
+        padding-right: var(--a-spacing-6, 1.5rem);
 
         .toppKolonner {
             display: flex;
@@ -64,29 +67,30 @@
 .tilToppen {
     display: flex;
     justify-content: start;
-    margin-bottom: 2.25rem;
+    margin-bottom: var(--a-spacing-9, 2.25rem);
 
     :global(.globalLenkeFooter) {
         font-size: 1.25rem;
-        padding: 1rem 1rem 1rem 0;
+        padding: var(--a-spacing-4, 1rem) var(--a-spacing-4, 1rem) var(--a-spacing-4, 1rem) 0;
 
         svg {
-            margin-right: 0.5rem;
+            margin-right: var(--a-spacing-2, 0.5rem);
         }
     }
 
     @media #{sv.$screen-mobile} {
-        margin-bottom: 1.75rem;
+        margin-bottom: var(--a-spacing-7, 1.75rem);
     }
 }
 
 .toppKolonner {
-    column-gap: 2rem;
+    column-gap: var(--a-spacing-8, 2rem);
     :global(.menylenker-seksjon) {
-        margin-bottom: 2.25rem;
+        margin-bottom: var(--a-spacing-9, 2.25rem);
     }
     :global(.menylenker-overskrift) {
-        font-weight: bolder;
+        letter-spacing: 0.15em;
         margin-bottom: 0.5rem;
+        color: var(--a-deepblue-200);
     }
 }
