@@ -183,7 +183,7 @@ Se [nav-dekoratoren-config](https://github.com/navikt/nav-dekoratoren-config)
 
 Grensesnittet (header, meny etc) finnes i tre språkdrakter: norsk bokmål (nb), engelsk (en) og delvis samisk (se).
 
-Du kan angi at språkvelgeren skal støtte flere språk enn dette, som beskrevet i seksjonen ovenfor, men det er kun disse tre språkene som kan vises i selve dekoratør-grensesnittet. For de resterende sprøkene som språkvelgeren støtter, så vil "nærmeste" relevante språk vises istedet, feks:
+Du kan angi at språkvelgeren skal støtte flere språk enn dette, som beskrevet i seksjonen ovenfor, men det er kun disse tre språkene som kan vises i selve dekoratør-grensesnittet. For de resterende språkene som språkvelgeren støtter, så vil "nærmeste" relevante språk vises istedet, feks:
 
 -   nn => nb
 -   pl => en
