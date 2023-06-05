@@ -111,7 +111,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | redirectToApp      | boolean                                                | false (ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2] |
 | redirectToUrl      | string                                                 | undefined        | Sender brukeren til denne url'en etter innlogging via dekoratøren [2]          |
 | level              | Level3 / Level4                                        | Level3           | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]             |
-| language           | nb / nn / en / se / pl                                 | nb               | Setter språket til dekoratøren ved server side rendering [3]                   |
+| language           | nb / nn / en / se / pl / uk / ru                       | nb               | Setter språket til dekoratøren ved server side rendering [3]                   |
 | availableLanguages | [{ locale: nb / nn / en / se / pl, url: string }]      | [ ]              | Setter alternativene til språkvelgeren ved server side rendering [4]           |
 | breadcrumbs        | [{ title: string, url: string, handleInApp?: string }] | [ ]              | Setter brødsmulestien for server side rendering [5]                            |
 | utilsBackground    | white / gray / transparent                             | transparent      | Setter bakgrunnsfargen på containeren til brødsmulesti og språkvelger          |
@@ -125,7 +125,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
-[3] Språk settes automatisk client-side dersom nåværende url inneholder **/no/**, **/nb/**, **/nn/**, **/en/**, **/se/**, uavhengig av dette parameteret. <br>
+[3] Språk settes automatisk client-side dersom nåværende url inneholder **/no/**, **/nb/**, **/nn/**, **/en/**, **/se/**, uavhengig av dette parameteret. Se også seksjon Språkstøtte lenger ned.<br>
 [4] Kan settes client-side med [setAvailableLanguages](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onLanguageSelect](https://github.com/navikt/nav-dekoratoren-moduler#readme).
 Dersom du oppgir `handleInApp`, så må du selv håndtere feks route change i applikasjonen din ved klikk i dekoratørmenyen. <br>
 [5] Kan settes client-side med [setBreadcrumbs](https://github.com/navikt/nav-dekoratoren-moduler#readme) og [onBreadcrumbClick](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
@@ -178,6 +178,16 @@ Logging med dekoratørens Amplitude-klient eksponeres via funksjonen `window.dek
 ## Oppsett av Task Analytics undersøkelser
 
 Se [nav-dekoratoren-config](https://github.com/navikt/nav-dekoratoren-config)
+
+## Språkstøtte
+
+Grensesnittet (header, meny etc) finnes i tre språkdrakter: norsk bokmål (nb), engelsk (en) og delvis samisk (se).
+
+Du kan angi at språkvelgeren skal støtte flere språk enn dette, som beskrevet i seksjonen ovenfor, men det er kun disse tre språkene som kan vises i selve dekoratør-grensesnittet. For de resterende sprøkene som språkvelgeren støtter, så vil "nærmeste" relevante språk vises istedet, feks:
+
+-   nn => nb
+-   pl => en
+-   ru => en
 
 ## Hopplenke til hovedinnhold
 
