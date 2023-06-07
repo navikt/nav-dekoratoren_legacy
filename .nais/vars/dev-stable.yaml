@@ -8,7 +8,7 @@ env:
   - name: ENV
     value: dev
   - name: XP_BASE_URL
-    value: https://www.intern.dev.nav.no
+    value: https://www.ekstern.dev.nav.no
   - name: APP_BASE_URL
     value: https://dekoratoren.ekstern.dev.nav.no
   - name: API_XP_SERVICES_URL
