@@ -1,6 +1,8 @@
 export type stringOrFunction = string | ((input: string) => string);
+ 
+export type LangKey = keyof typeof ledetekster;
 
-export const ledetekster: { [key: string]: stringOrFunction } = {
+export const ledetekster = {
     'footer-arbeids-og-veldferdsetaten': 'Arbeids- og velferdsetaten',
     'footer-arbeids-og-veldferdsetaten-en': 'Arbeids- og velferdsetaten',
     'footer-arbeids-og-veldferdsetaten-se': 'Arbeids- og velferdsetaten',
@@ -327,4 +329,4 @@ export const ledetekster: { [key: string]: stringOrFunction } = {
     arkiver: 'Arkiver',
     'arkiver-en': 'Archive',
     'arkiver-se': 'Arkiver',
-};
+} as const;

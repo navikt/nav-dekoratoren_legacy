@@ -1,10 +1,10 @@
 import React from 'react';
-import { ledetekster, stringOrFunction } from './ledetekster';
+import { LangKey, ledetekster, stringOrFunction } from './ledetekster';
 import { AppState } from 'store/reducers';
 import { useSelector } from 'react-redux';
 import { Locale } from 'store/reducers/language-duck';
 
-export function finnTekst(id: string, language: Locale, payload?: string): string {
+export function finnTekst(id: LangKey, language: Locale, payload?: string): string {
     // Correct language
     let ledetekst: stringOrFunction;
     switch (language) {
@@ -18,11 +18,11 @@ export function finnTekst(id: string, language: Locale, payload?: string): strin
         case Locale.UKRAINSK:
         case Locale.RUSSISK:
             id += '-en';
-            ledetekst = ledetekster[id];
+            ledetekst = ledetekster[id as LangKey];
             break;
         case Locale.SAMISK:
             id += '-se';
-            ledetekst = ledetekster[id];
+            ledetekst = ledetekster[id as LangKey];
             break;
     }
 
@@ -45,7 +45,7 @@ export function finnTekst(id: string, language: Locale, payload?: string): strin
 }
 
 interface Props {
-    id: string;
+    id: LangKey;
 }
 
 const Tekst = ({ id }: Props) => {
