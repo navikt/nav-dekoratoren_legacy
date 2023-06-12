@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import classNames from "classnames";
 import { Link } from '@navikt/ds-react';
 import { Monitor } from '@navikt/ds-icons';

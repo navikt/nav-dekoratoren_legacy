@@ -1,12 +1,10 @@
-import React, { ChangeEvent, useEffect, useLayoutEffect, useState } from 'react';
+import React, { ChangeEvent, useLayoutEffect, useState } from 'react';
 import { Alert, BodyLong, Button, Heading, ReadMore, TextField, Modal } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import style from './DelSkjermModal.module.scss';
-import { loadExternalScript } from 'utils/external-scripts';
-import { vendorScripts } from 'komponenter/header/vendorScripts';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 interface Props {
