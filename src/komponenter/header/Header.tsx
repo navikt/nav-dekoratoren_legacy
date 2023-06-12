@@ -38,6 +38,7 @@ import { useOnPushStateHandlers } from 'utils/hooks/useOnPushStateHandlers';
 
 import './Header.scss';
 import { mapToClosestTranslatedLanguage } from 'utils/language';
+import { useScreenSharing } from 'utils/hooks';
 
 export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
 export const decoratorLanguageCookie = CookieName.DECORATOR_LANGUAGE;
@@ -97,12 +98,10 @@ export const Header = () => {
         }
     }, [menypunkt]);
 
-    // Handle feature toggles
-    useEffect(() => {
-        if (currentFeatureToggles['dekoratoren.skjermdeling']) {
-            loadExternalScript('https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js');
-        }
-    }, [currentFeatureToggles]);
+    useScreenSharing({
+        cookies,
+        enabled: currentFeatureToggles['dekoratoren.skjermdeling']
+    })
 
     // Handle enforced login
     useEffect(() => {

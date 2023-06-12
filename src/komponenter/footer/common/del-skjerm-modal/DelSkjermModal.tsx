@@ -1,15 +1,26 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useLayoutEffect, useState } from 'react';
 import { Alert, BodyLong, Button, Heading, ReadMore, TextField, Modal } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import style from './DelSkjermModal.module.scss';
+import { loadExternalScript } from 'utils/external-scripts';
+import { vendorScripts } from 'komponenter/header/vendorScripts';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 interface Props {
     isOpen: boolean;
     onClose: () => void;
+}
+
+declare global {
+    interface Window {
+        vngage: {
+            get: (key: string, groupId: string) => any;
+            join: (key: string, payload: Record<string, string>) => void;
+        }
+    }
 }
 
 const DelSkjermModal = (props: Props) => {
@@ -29,20 +40,23 @@ const DelSkjermModal = (props: Props) => {
     const [error, setError] = useState(feilmelding);
 
     // Vergic config
-    const w = window as any;
-    const vergicExists = typeof w !== 'undefined' && w.vngage;
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+        const vergicExists = typeof window !== 'undefined' && window.vngage;
+
         if (vergicExists) {
-            setIsOpen(w.vngage.get('queuestatus', NAV_GROUP_ID));
+            const isLoaded = window.vngage.get('queuestatus', NAV_GROUP_ID);
+            setIsOpen(isLoaded);
         }
     }, []);
 
     const onClick = () => {
         setSubmitted(true);
 
+        const vergicExists = typeof window !== 'undefined' && window.vngage;
+
         if (vergicExists && !error) {
-            w.vngage.join('queue', {
+            window.vngage.join('queue', {
                 opportunityId: OPPORTUNITY_ID,
                 solutionId: SOLUTION_ID,
                 caseTypeId: CASETYPE_ID,

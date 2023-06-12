@@ -11,7 +11,7 @@ export interface FeatureToggles {
 //   ...
 // }
 export const initialState: FeatureToggles = {
-    'dekoratoren.skjermdeling': false,
+    'dekoratoren.skjermdeling': true,
     'dekoratoren.chatbotscript': false,
 };
 // Defined toggles will be fetched from unleash on runtime

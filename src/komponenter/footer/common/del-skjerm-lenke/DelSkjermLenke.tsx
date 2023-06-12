@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from "classnames";
 import { Link } from '@navikt/ds-react';
 import { Monitor } from '@navikt/ds-icons';
@@ -7,16 +7,36 @@ import DelSkjermModal from '../del-skjerm-modal/DelSkjermModal';
 import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 
 import style from './DelSkjermLenke.module.scss';
+import { loadExternalScript } from 'utils/external-scripts';
+import { vendorScripts } from 'komponenter/header/vendorScripts';
 
 export const DelSkjermLenke = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const openModal = () => {
+
+    const openCallback = () => {
+        setTimeout(() => {
+            setIsOpen(true);
+        }, 400)
+    }
+
+    const openModal = async (e: any) => {
         analyticsEvent({
             eventName: 'Modal åpnet',
             category: AnalyticsCategory.Footer,
             action: `kontakt/del-skjerm-open`,
         });
-        setIsOpen(true);
+
+        if (window.vngage) {
+            setIsOpen(true);
+            return;
+        }
+
+        loadExternalScript(vendorScripts.skjermdeling)
+            .then(() => {
+                openCallback()
+            })
+
+
     };
     const closeModal = () => {
         analyticsEvent({
