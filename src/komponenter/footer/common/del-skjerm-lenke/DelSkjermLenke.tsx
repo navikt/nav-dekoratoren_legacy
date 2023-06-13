@@ -8,18 +8,24 @@ import { AnalyticsCategory, analyticsEvent } from 'utils/analytics/analytics';
 
 import style from './DelSkjermLenke.module.scss';
 import { loadExternalScript } from 'utils/external-scripts';
-import { vendorScripts } from 'komponenter/header/vendorScripts';
+import { VNGAGE_ID, VngageUserState, vendorScripts } from 'komponenter/header/vendorScripts';
 
 export const DelSkjermLenke = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const openCallback = () => {
-        setTimeout(() => {
-            setIsOpen(true);
-        }, 400)
+        const interval = setInterval(() => {
+            const userState = localStorage.getItem(`vngage_${VNGAGE_ID.toLowerCase()}`);
+            const parsedUserState = userState ? JSON.parse(userState) as VngageUserState : null
+
+            if (window.vngage && parsedUserState && parsedUserState.user.state === 'Ready') {
+                clearInterval(interval)
+                setIsOpen(true)
+            }
+        }, 32)
     }
 
-    const openModal = async (e: any) => {
+    const openModal = () => {
         analyticsEvent({
             eventName: 'Modal åpnet',
             category: AnalyticsCategory.Footer,

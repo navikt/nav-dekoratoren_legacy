@@ -14,7 +14,6 @@ import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 import { fetchDriftsmeldinger } from 'store/reducers/driftsmeldinger-duck';
 import { fetchFeatureToggles, Status } from 'api/api';
 import { ActionType } from 'store/actions';
-import { loadExternalScript } from 'utils/external-scripts';
 import { getLoginUrl } from 'utils/login';
 import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';

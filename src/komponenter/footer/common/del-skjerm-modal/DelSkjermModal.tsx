@@ -14,9 +14,15 @@ interface Props {
 
 declare global {
     interface Window {
-        vngage: {
+        vngage?: {
+            info: {
+                version: string;
+                revision: number;
+                status: string; //ok
+            },
             get: (key: string, groupId: string) => any;
             join: (key: string, payload: Record<string, string>) => void;
+            subscribe: (key: string, callback: (message: string, data: any) => void) => void;
         }
     }
 }
@@ -43,7 +49,7 @@ const DelSkjermModal = (props: Props) => {
         const vergicExists = typeof window !== 'undefined' && window.vngage;
 
         if (vergicExists) {
-            const isLoaded = window.vngage.get('queuestatus', NAV_GROUP_ID);
+            const isLoaded = window.vngage?.get('queuestatus', NAV_GROUP_ID);
             setIsOpen(isLoaded);
         }
     }, []);
@@ -54,7 +60,7 @@ const DelSkjermModal = (props: Props) => {
         const vergicExists = typeof window !== 'undefined' && window.vngage;
 
         if (vergicExists && !error) {
-            window.vngage.join('queue', {
+            window.vngage?.join('queue', {
                 opportunityId: OPPORTUNITY_ID,
                 solutionId: SOLUTION_ID,
                 caseTypeId: CASETYPE_ID,
