@@ -14,6 +14,16 @@ declare global {
             eventData?: EventData;
         }) => Promise<any>;
         boostInit: any;
+        vngage?: {
+            info: {
+                version: string;
+                revision: number;
+                status: string; //ok
+            },
+            get: (key: string, groupId: string) => any;
+            join: (key: string, payload: Record<string, string>) => void;
+            subscribe: (key: string, callback: (message: string, data: any) => void) => void;
+        }
     }
 
     namespace NodeJS {
