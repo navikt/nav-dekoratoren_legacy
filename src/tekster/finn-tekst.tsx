@@ -17,12 +17,10 @@ export function finnTekst(id: LangKey, language: Locale, payload?: string): stri
         case Locale.ENGELSK:
         case Locale.UKRAINSK:
         case Locale.RUSSISK:
-            id += '-en';
-            ledetekst = ledetekster[id as LangKey];
+            ledetekst = ledetekster[`${id}-en`];
             break;
         case Locale.SAMISK:
-            id += '-se';
-            ledetekst = ledetekster[id as LangKey];
+            ledetekst = ledetekster[`${id}-se`];
             break;
     }
 
@@ -46,7 +44,7 @@ export function finnTekst(id: LangKey, language: Locale, payload?: string): stri
 
 type Props = {
     id: LangKey;
-}
+};
 
 const Tekst = ({ id }: Props) => {
     const { language } = useSelector((state: AppState) => state.language);

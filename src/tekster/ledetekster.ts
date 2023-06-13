@@ -1,9 +1,9 @@
 export type stringOrFunction = string | ((input: string) => string);
- 
+
 type AllKeys = keyof typeof ledetekster;
 
 // Remove the language suffixes
-export type LangKey = Exclude<AllKeys, `${string}-en` | `${string}-se`>
+export type LangKey = Exclude<AllKeys, `${string}-en` | `${string}-se`>;
 
 export const ledetekster = {
     'footer-arbeids-og-veldferdsetaten': 'Arbeids- og velferdsetaten',
@@ -321,8 +321,8 @@ export const ledetekster = {
     'beskjed.maskert.tekst-en': 'You have a message, please log in with a higher security level to read the message.',
     'beskjed.maskert.tekst-se': 'Du har fått en melding, logg inn med høyere sikkerhetsnivå for å se meldingen.',
     'varslet-epost-og-sms': 'Varslet på e-post og SMS',
-    'varslet-epost-og-en': 'Notified by e-mail and SMS',
-    'varslet-epost-og-se': 'Varslet på e-post og SMS',
+    'varslet-epost-og-sms-en': 'Notified by e-mail and SMS',
+    'varslet-epost-og-sms-se': 'Varslet på e-post og SMS',
     'varslet-epost': 'Varslet på e-post',
     'varslet-epost-en': 'Notified by e-mail',
     'varslet-epost-se': 'Varslet på e-post',
