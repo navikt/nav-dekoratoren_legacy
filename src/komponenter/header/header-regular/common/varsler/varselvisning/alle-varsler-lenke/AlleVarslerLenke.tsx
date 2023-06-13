@@ -31,7 +31,7 @@ const AlleVarslerLenke = (props: Props) => {
                     action: 'varsler/visalle',
                     label: props.tidligereVarslerUrl,
                 }}
-                onClick={() => logAmplitudeEvent('navigere', { komponent: 'Tidligere varsler' })}
+                onClick={() => logAmplitudeEvent('navigere', { komponent: 'tidligere-varsler-lenke', kategori: "varselbjelle", lenketekst: "Tidligere varsler" })}
             >
                 <Tekst id={'varsler-visalle'} />
             </LenkeMedSporing>
