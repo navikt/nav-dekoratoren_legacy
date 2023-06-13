@@ -44,7 +44,7 @@ export function finnTekst(id: LangKey, language: Locale, payload?: string): stri
     return ledetekst(payload);
 }
 
-interface Props {
+type Props = {
     id: LangKey;
 }
 
