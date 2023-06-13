@@ -1,6 +1,9 @@
 export type stringOrFunction = string | ((input: string) => string);
  
-export type LangKey = keyof typeof ledetekster;
+type AllKeys = keyof typeof ledetekster;
+
+// Remove the language suffixes
+export type LangKey = Exclude<AllKeys, `${string}-en` | `${string}-se`>
 
 export const ledetekster = {
     'footer-arbeids-og-veldferdsetaten': 'Arbeids- og velferdsetaten',
