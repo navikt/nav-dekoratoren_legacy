@@ -14,29 +14,29 @@ export const arbeidsflateLenker = (XP_BASE_URL: string): ArbeidsflateLenke[] => 
     samarbeidspartnerContextLenke(XP_BASE_URL),
 ];
 
-export const personContextLenke = (XP_BASE_URL: string) => {
+export const personContextLenke = (XP_BASE_URL: string): ArbeidsflateLenke => {
     return {
         url: `${XP_BASE_URL}`,
-        lenkeTekstId: 'rolle-privatperson' as const,
-        stikkordId: 'meny-bunnlenke-minside-stikkord' as const,
+        lenkeTekstId: 'rolle-privatperson',
+        stikkordId: 'meny-bunnlenke-minside-stikkord',
         key: MenuValue.PRIVATPERSON,
     };
 };
 
-export const arbeidsgiverContextLenke = (XP_BASE_URL: string) => {
+export const arbeidsgiverContextLenke = (XP_BASE_URL: string): ArbeidsflateLenke => {
     return {
         url: `${XP_BASE_URL}/no/bedrift`,
-        lenkeTekstId: 'rolle-arbeidsgiver' as const,
-        stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord' as const,
+        lenkeTekstId: 'rolle-arbeidsgiver',
+        stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
         key: MenuValue.ARBEIDSGIVER,
     };
 };
 
-export const samarbeidspartnerContextLenke = (XP_BASE_URL: string) => {
+export const samarbeidspartnerContextLenke = (XP_BASE_URL: string): ArbeidsflateLenke => {
     return {
         url: `${XP_BASE_URL}/no/samarbeidspartner`,
-        lenkeTekstId: 'rolle-samarbeidspartner' as const,
-        stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord' as const,
+        lenkeTekstId: 'rolle-samarbeidspartner',
+        stikkordId: 'meny-bunnlenke-samarbeidspartner-stikkord',
         key: MenuValue.SAMARBEIDSPARTNER,
     };
 };
