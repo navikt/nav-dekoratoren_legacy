@@ -10,4 +10,3 @@ export type VngageUserState = {
 	},
 	poi: unknown;
 }
-// {"user":{"state":"Ready"},"poi":{}}

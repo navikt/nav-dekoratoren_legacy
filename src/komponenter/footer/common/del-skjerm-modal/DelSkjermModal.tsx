@@ -12,6 +12,10 @@ interface Props {
     onClose: () => void;
 }
 
+function checkVergic(vngage: typeof window.vngage): vngage is NonNullable<typeof window.vngage> {
+    return typeof window !== 'undefined' && typeof window.vngage !== 'undefined';
+}
+
 const DelSkjermModal = (props: Props) => {
     // Language
     const language = useSelector((state: AppState) => state.language).language;
@@ -31,21 +35,16 @@ const DelSkjermModal = (props: Props) => {
     // Vergic config
 
     useLayoutEffect(() => {
-        const vergicExists = typeof window !== 'undefined' && window.vngage;
-
-        if (vergicExists) {
-            const isLoaded = window.vngage?.get('queuestatus', NAV_GROUP_ID);
+        if (checkVergic(window.vngage)) {
+            const isLoaded = window.vngage.get('queuestatus', NAV_GROUP_ID);
             setIsOpen(isLoaded);
         }
     }, []);
 
     const onClick = () => {
         setSubmitted(true);
-
-        const vergicExists = typeof window !== 'undefined' && window.vngage;
-
-        if (vergicExists && !error) {
-            window.vngage?.join('queue', {
+        if (!error && checkVergic(window.vngage)) {
+            window.vngage.join('queue', {
                 opportunityId: OPPORTUNITY_ID,
                 solutionId: SOLUTION_ID,
                 caseTypeId: CASETYPE_ID,
