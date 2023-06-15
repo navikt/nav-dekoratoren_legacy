@@ -18,7 +18,7 @@ const Spinner = ({ tekstId }: Props) => {
                     <Tekst id={tekstId} />
                 </BodyShort>
             )}
-            <Loader className={style.dekoratorSpinner} id={id} />
+            <Loader size={'3xlarge'} id={id} />
         </div>
     );
 };

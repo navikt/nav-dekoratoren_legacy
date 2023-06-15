@@ -66,8 +66,8 @@ interface IconProps {
 
 const Icon = (props: IconProps) => (
     <>
-        {props.type === 'prodstatus' && <StatusSvg />}
-        {props.type === 'info' && <InfoSvg />}
+        {props.type === 'prodstatus' && <StatusSvg aria-hidden={true}/>}
+        {props.type === 'info' && <InfoSvg aria-hidden={true}/>}
     </>
 );
 
