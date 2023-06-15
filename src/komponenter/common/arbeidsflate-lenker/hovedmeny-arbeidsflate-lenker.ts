@@ -1,11 +1,12 @@
 import { MenuValue } from 'utils/meny-storage-utils';
 import { arbeidsgiverContextLenke, personContextLenke, samarbeidspartnerContextLenke } from './arbeidsflate-lenker';
 import { Environment } from 'store/reducers/environment-duck';
+import { LangKey } from 'tekster/ledetekster';
 
 export type ArbeidsflateLenkeData = {
     url: string;
-    lenkeTekstId: string;
-    stikkordId: string;
+    lenkeTekstId: LangKey;
+    stikkordId: LangKey;
     key: MenuValue;
 };
 

@@ -14,6 +14,7 @@ import { useCookies } from 'react-cookie';
 import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 
 import style from './Toppseksjon.module.scss';
+import { LangKey } from 'tekster/ledetekster';
 
 export const Toppseksjon = () => {
     const dispatch = useDispatch();
@@ -29,7 +30,7 @@ export const Toppseksjon = () => {
                     id={
                         arbeidsflate === MenuValue.PRIVATPERSON
                             ? 'how-can-we-help'
-                            : `rolle-${arbeidsflate.toLowerCase()}`
+                            : `rolle-${arbeidsflate.toLowerCase()}` as LangKey
                     }
                 />
             </Heading>

@@ -3,9 +3,10 @@ import BEMHelper from 'utils/bem';
 import Tekst from 'tekster/finn-tekst';
 import { Button } from '@navikt/ds-react';
 import style from './MenylinjeKnapp.module.scss';
+import { LangKey } from 'tekster/ledetekster';
 
 interface Props {
-    tekstId?: string;
+    tekstId?: LangKey;
     onClick: () => void;
     isOpen: boolean;
     classname: string;
