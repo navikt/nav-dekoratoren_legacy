@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useLayoutEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { Alert, BodyLong, Button, Heading, ReadMore, TextField, Modal, Loader } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';

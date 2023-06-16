@@ -37,7 +37,7 @@ import { useOnPushStateHandlers } from 'utils/hooks/useOnPushStateHandlers';
 
 import './Header.scss';
 import { mapToClosestTranslatedLanguage } from 'utils/language';
-import { useLoadIfActiveSession, useScreenSharing } from 'utils/hooks';
+import { useLoadIfActiveSession } from 'utils/hooks';
 
 export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
 export const decoratorLanguageCookie = CookieName.DECORATOR_LANGUAGE;
