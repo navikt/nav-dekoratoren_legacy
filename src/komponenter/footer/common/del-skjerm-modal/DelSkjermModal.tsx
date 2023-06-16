@@ -7,6 +7,7 @@ import { Bilde } from 'komponenter/common/bilde/Bilde';
 import style from './DelSkjermModal.module.scss';
 import { checkVergic } from '../vergic';
 import { selectFeatureToggles } from 'store/selectors';
+import { LangKey } from 'tekster/ledetekster';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 interface Props {
@@ -94,7 +95,7 @@ const DelSkjermModal = (props: Props) => {
                             {[...Array(3)].map((_, i) => (
                                 <li key={i}>
                                     <BodyLong>
-                                        <Tekst id={`delskjerm-modal-hjelpetekst-${i}`} />
+                                        <Tekst id={`delskjerm-modal-hjelpetekst-${i}` as LangKey} />
                                     </BodyLong>
                                 </li>
                             ))}

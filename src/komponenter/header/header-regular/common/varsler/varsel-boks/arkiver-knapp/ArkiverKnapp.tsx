@@ -22,7 +22,7 @@ const ArkiverKnapp = ({ eventId, apiVarselinnboksUrl, setActivateScreenReaderTex
         setActivateScreenReaderText(false);
         setActivateScreenReaderText(true);
         dispatch(fjernLestVarsel(eventId));
-        logAmplitudeEvent('beskjed', { komponent: 'Arkivert beskjed' });
+        logAmplitudeEvent("arkivert-beskjed", { komponent: "varsler-beskjed-arkiverbar", kategori: "varsler" });
     };
 
     return (

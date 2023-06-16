@@ -1,9 +1,10 @@
+import { LangKey } from 'tekster/ledetekster';
 import { MenuValue } from 'utils/meny-storage-utils';
 
 export interface ArbeidsflateLenke {
     url: string;
-    lenkeTekstId: string;
-    stikkordId: string;
+    lenkeTekstId: LangKey;
+    stikkordId: LangKey;
     key: MenuValue;
 }
 
@@ -13,7 +14,7 @@ export const arbeidsflateLenker = (XP_BASE_URL: string): ArbeidsflateLenke[] => 
     samarbeidspartnerContextLenke(XP_BASE_URL),
 ];
 
-export const personContextLenke = (XP_BASE_URL: string) => {
+export const personContextLenke = (XP_BASE_URL: string): ArbeidsflateLenke => {
     return {
         url: `${XP_BASE_URL}`,
         lenkeTekstId: 'rolle-privatperson',
@@ -22,7 +23,7 @@ export const personContextLenke = (XP_BASE_URL: string) => {
     };
 };
 
-export const arbeidsgiverContextLenke = (XP_BASE_URL: string) => {
+export const arbeidsgiverContextLenke = (XP_BASE_URL: string): ArbeidsflateLenke => {
     return {
         url: `${XP_BASE_URL}/no/bedrift`,
         lenkeTekstId: 'rolle-arbeidsgiver',
@@ -31,7 +32,7 @@ export const arbeidsgiverContextLenke = (XP_BASE_URL: string) => {
     };
 };
 
-export const samarbeidspartnerContextLenke = (XP_BASE_URL: string) => {
+export const samarbeidspartnerContextLenke = (XP_BASE_URL: string): ArbeidsflateLenke => {
     return {
         url: `${XP_BASE_URL}/no/samarbeidspartner`,
         lenkeTekstId: 'rolle-samarbeidspartner',

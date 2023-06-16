@@ -22,15 +22,15 @@ export const MobilInnloggetForsideLenke = () => {
     const lenkeProps =
         arbeidsflate === MenuValue.PRIVATPERSON
             ? {
-                  tekstIdHeader: 'min-side',
-                  tekstIdLenke: 'til-dittnav-forside',
+                  tekstIdHeader: 'min-side' as const,
+                  tekstIdLenke: 'til-dittnav-forside' as const,
                   href: MIN_SIDE_URL,
                   analyticsAction: 'dittnav',
               }
             : arbeidsflate === MenuValue.ARBEIDSGIVER
             ? {
-                  tekstIdHeader: 'min-side-arbeidsgiver',
-                  tekstIdLenke: 'ga-til-min-side-arbeidsgiver',
+                  tekstIdHeader: 'min-side-arbeidsgiver' as const,
+                  tekstIdLenke: 'ga-til-min-side-arbeidsgiver' as const,
                   href: MINSIDE_ARBEIDSGIVER_URL + valgtbedrift(),
                   analyticsAction: 'minside-arbeidsgiver',
               }

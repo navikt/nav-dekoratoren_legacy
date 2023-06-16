@@ -1,5 +1,6 @@
 import { Locale } from '../store/reducers/language-duck';
 import { finnTekst } from './finn-tekst';
+import { LangKey } from './ledetekster';
 
 describe('finnTekst', () => {
     it('Skal finne riktig tekst (Søk/norsk)', () => {
@@ -18,7 +19,7 @@ describe('finnTekst', () => {
     });
 
     it('Skal returnere id hvis tekst ikke finnes)', () => {
-        const tekst = finnTekst('mikke-mus', Locale.BOKMAL);
+        const tekst = finnTekst('mikke-mus' as LangKey, Locale.BOKMAL);
         expect(tekst === 'mikke-mus');
     });
 });

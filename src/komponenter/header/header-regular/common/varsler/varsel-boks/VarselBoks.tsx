@@ -62,7 +62,7 @@ const Beskjed = ({
             postDone(apiVarselinnboksUrl, { eventId: eventId });
             dispatch(fjernLestVarsel(eventId));
         }
-        logAmplitudeEvent('navigere', { komponent: type, destinasjon: href });
+        logAmplitudeEvent('navigere', { komponent: type == "BESKJED" ? "varsel-beskjed" : "varsel-oppgave", kategori: "varselbjelle", destinasjon: href });
     };
 
     return isArkiverbar ? (

@@ -2,9 +2,10 @@ import React, { useId } from 'react';
 import Tekst from 'tekster/finn-tekst';
 import { BodyShort, Loader } from '@navikt/ds-react';
 import style from './Spinner.module.scss';
+import { LangKey } from 'tekster/ledetekster';
 
 type Props = {
-    tekstId?: string;
+    tekstId?: LangKey;
 };
 
 const Spinner = ({ tekstId }: Props) => {
@@ -17,7 +18,7 @@ const Spinner = ({ tekstId }: Props) => {
                     <Tekst id={tekstId} />
                 </BodyShort>
             )}
-            <Loader className={style.dekoratorSpinner} id={id} />
+            <Loader size={'3xlarge'} id={id} />
         </div>
     );
 };

@@ -8,6 +8,7 @@ import Tekst from 'tekster/finn-tekst';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
 
 import 'komponenter/header/header-regular/mobil/meny/innhold/hovedmeny/header/MobilHovedmenyHeader.scss';
+import { LangKey } from 'tekster/ledetekster';
 
 const stateSelector = (state: AppState) => ({
     arbeidsflate: state.arbeidsflate.status,
@@ -24,7 +25,7 @@ export const MobilHovedmenyHeader = () => {
     return (
         <div className={'mobilMenyHeader'}>
             <Heading level="2" size="small">
-                <Tekst id={`rolle-${arbeidsflate}`} />
+                <Tekst id={`rolle-${arbeidsflate}` as LangKey} />
             </Heading>
             <LenkeMedSporing
                 href={href}
