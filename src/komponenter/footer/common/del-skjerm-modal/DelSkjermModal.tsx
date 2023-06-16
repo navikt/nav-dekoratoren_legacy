@@ -5,15 +5,13 @@ import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import style from './DelSkjermModal.module.scss';
+import { checkVergic } from '../vergic';
+import { selectFeatureToggles } from 'store/selectors';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 interface Props {
     isOpen: boolean;
     onClose: () => void;
-}
-
-function checkVergic(vngage: typeof window.vngage): vngage is NonNullable<typeof window.vngage> {
-    return typeof window !== 'undefined' && typeof window.vngage !== 'undefined';
 }
 
 const DelSkjermModal = (props: Props) => {
@@ -25,6 +23,7 @@ const DelSkjermModal = (props: Props) => {
     const { CASETYPE_ID } = useSelector((state: AppState) => state.environment);
     const { SOLUTION_ID } = useSelector((state: AppState) => state.environment);
     const { NAV_GROUP_ID } = useSelector((state: AppState) => state.environment);
+    const featureToggles = useSelector(selectFeatureToggles);
 
     // State
     const [code, setCode] = useState('');
@@ -37,7 +36,8 @@ const DelSkjermModal = (props: Props) => {
     useLayoutEffect(() => {
         if (checkVergic(window.vngage)) {
             const isLoaded = window.vngage.get('queuestatus', NAV_GROUP_ID);
-            setIsOpen(isLoaded);
+            const shouldBeOpen = isLoaded && featureToggles['dekoratoren.skjermdeling'];
+            setIsOpen(shouldBeOpen);
         }
     }, []);
 
