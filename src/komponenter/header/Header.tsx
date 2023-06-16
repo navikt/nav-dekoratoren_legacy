@@ -37,7 +37,7 @@ import { useOnPushStateHandlers } from 'utils/hooks/useOnPushStateHandlers';
 
 import './Header.scss';
 import { mapToClosestTranslatedLanguage } from 'utils/language';
-import { useScreenSharing } from 'utils/hooks';
+import { useLoadIfActiveSession, useScreenSharing } from 'utils/hooks';
 
 export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
 export const decoratorLanguageCookie = CookieName.DECORATOR_LANGUAGE;
@@ -97,10 +97,7 @@ export const Header = () => {
         }
     }, [menypunkt]);
 
-    useScreenSharing({
-        cookies,
-        enabled: currentFeatureToggles['dekoratoren.skjermdeling']
-    })
+    useLoadIfActiveSession();
 
     // Handle enforced login
     useEffect(() => {

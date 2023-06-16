@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useLayoutEffect, useState } from 'react';
-import { Alert, BodyLong, Button, Heading, ReadMore, TextField, Modal } from '@navikt/ds-react';
+import React, { ChangeEvent, useCallback, useLayoutEffect, useState } from 'react';
+import { Alert, BodyLong, Button, Heading, ReadMore, TextField, Modal, Loader } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
@@ -8,6 +8,7 @@ import style from './DelSkjermModal.module.scss';
 import { checkVergic } from '../vergic';
 import { selectFeatureToggles } from 'store/selectors';
 import { LangKey } from 'tekster/ledetekster';
+import { useScreenSharing } from 'utils/hooks';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 interface Props {
@@ -28,19 +29,16 @@ const DelSkjermModal = (props: Props) => {
 
     // State
     const [code, setCode] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(feilmelding);
 
-    // Vergic config
+    const isOpen = featureToggles['dekoratoren.skjermdeling'];
 
-    useLayoutEffect(() => {
-        if (checkVergic(window.vngage)) {
-            const isLoaded = window.vngage.get('queuestatus', NAV_GROUP_ID);
-            const shouldBeOpen = isLoaded && featureToggles['dekoratoren.skjermdeling'];
-            setIsOpen(shouldBeOpen);
-        }
-    }, []);
+    const { isLoading, isSuccess } = useScreenSharing({
+        enabled: featureToggles['dekoratoren.skjermdeling'],
+    });
+
+    console.log(isLoading);
 
     const onClick = () => {
         setSubmitted(true);
@@ -102,7 +100,8 @@ const DelSkjermModal = (props: Props) => {
                         </ul>
                     </ReadMore>
                 </div>
-                {isOpen ? (
+                {isLoading && <Loader size="large" />}
+                {isOpen && isSuccess && (
                     <>
                         <TextField
                             name={'code'}
@@ -121,7 +120,8 @@ const DelSkjermModal = (props: Props) => {
                             </Button>
                         </div>
                     </>
-                ) : (
+                )}
+                {!isOpen && !isLoading && (
                     <Alert variant="error">
                         <Tekst id={'delskjerm-modal-stengt'} />
                     </Alert>
