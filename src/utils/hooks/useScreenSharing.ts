@@ -21,6 +21,10 @@ export function useScreenSharing({ enabled }: UseScreenSharingOptions): UseScree
     const { NAV_GROUP_ID } = useSelector((state: AppState) => state.environment);
 
     useEffect(() => {
+        if (!enabled) {
+            return;
+        }
+
         setIsLoading(true);
 
         let interval: ReturnType<typeof setInterval>;
