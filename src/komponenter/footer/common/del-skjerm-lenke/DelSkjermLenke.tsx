@@ -18,7 +18,6 @@ export const DelSkjermLenke = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { NAV_GROUP_ID } = useSelector((state: AppState) => state.environment);
     const featureToggles = useSelector(selectFeatureToggles);
-    // const currentFeatureToggles = useSelector(stateSelector).featureToggles;
 
     const openCallback = useCallback(() => {
         const interval = setInterval(() => {
