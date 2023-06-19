@@ -35,10 +35,8 @@ const DelSkjermModal = (props: Props) => {
     const isOpen = featureToggles['dekoratoren.skjermdeling'];
 
     const { isLoading, isSuccess } = useScreenSharing({
-        enabled: featureToggles['dekoratoren.skjermdeling'],
+        enabled: isOpen,
     });
-
-    console.log(isLoading);
 
     const onClick = () => {
         setSubmitted(true);
