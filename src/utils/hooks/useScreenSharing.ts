@@ -14,8 +14,8 @@ type UseScreenSharingState = {
 
 export function useScreenSharing({ enabled }: UseScreenSharingOptions): UseScreenSharingState {
     // Check if it is already loaded to avoid layout shift
-    const [isSuccess, setIsSuccess] = useState(window.vngage !== undefined);
-    const [isLoading, setIsLoading] = useState(window.vngage === undefined);
+    const [isSuccess, setIsSuccess] = useState(!!window.vngage);
+    const [isLoading, setIsLoading] = useState(!window.vngage);
 
     useEffect(() => {
         if (!enabled) {
