@@ -7,7 +7,7 @@ import { Handling } from 'store/actions';
 //   ...
 // }
 export const initialState = {
-    'dekoratoren.skjermdeling': false,
+    'dekoratoren.skjermdeling': true,
     'dekoratoren.chatbotscript': false,
 };
 

@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { VNGAGE_ID, VngageUserState, vendorScripts } from 'komponenter/header/vendorScripts';
+import { VNGAGE_ID, vendorScripts } from 'komponenter/header/vendorScripts';
 import { loadExternalScript } from 'utils/external-scripts';
-import { useSelector } from 'react-redux';
-import { AppState } from 'store/reducers';
-import { checkVergic } from 'komponenter/footer/common/vergic';
 
 type UseScreenSharingOptions = {
     enabled: boolean;
@@ -16,39 +13,30 @@ type UseScreenSharingState = {
 };
 
 export function useScreenSharing({ enabled }: UseScreenSharingOptions): UseScreenSharingState {
-    const [isSuccess, setIsSuccess] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const { NAV_GROUP_ID } = useSelector((state: AppState) => state.environment);
+    // Check if it is already loaded to avoid layout shift
+    const [isSuccess, setIsSuccess] = useState(window.vngage !== undefined);
+    const [isLoading, setIsLoading] = useState(window.vngage === undefined);
 
     useEffect(() => {
         if (!enabled) {
             return;
         }
 
-        setIsLoading(true);
+        // already loaded
+        if (isSuccess) {
+            return;
+        }
 
-        let interval: ReturnType<typeof setInterval>;
+        window.vngageReady = () => {
+            setIsLoading(false);
+            setIsSuccess(true);
+        };
 
-        loadExternalScript(vendorScripts.skjermdeling).then(() => {
-            const interval = setInterval(() => {
-                const userState = localStorage.getItem(`vngage_${VNGAGE_ID.toLowerCase()}`);
-                const parsedUserState = userState ? (JSON.parse(userState) as VngageUserState) : null;
+        loadExternalScript(vendorScripts.skjermdeling);
 
-                let isVergicReady = false;
-
-                if (checkVergic(window.vngage)) {
-                    isVergicReady = window.vngage.get('queuestatus', NAV_GROUP_ID);
-                }
-
-                if (isVergicReady && parsedUserState && parsedUserState.user.state === 'Ready') {
-                    clearInterval(interval);
-                    setIsLoading(false);
-                    setIsSuccess(true);
-                }
-            }, 32);
-        });
-
-        return () => clearInterval(interval);
+        return () => {
+            window.vngageReady = undefined;
+        };
     }, [enabled]);
 
     return {
