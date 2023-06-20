@@ -4,6 +4,15 @@ declare global {
     interface Window {
         TA: any;
         dataLayer: any;
+        /**
+         * Allows you the set the initial user properties for Amplitude, before any events are logged.
+         * @example
+         * window.amplitudeInitialUserProps = {
+         *    'innlogget': true,
+         *    'brukerType': 'privatperson',
+         * }
+         */
+        amplitudeInitialUserProps?: object;
         dekoratorenAmplitude: ({
             origin,
             eventName,

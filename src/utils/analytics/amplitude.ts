@@ -5,12 +5,15 @@ import { InnloggingsstatusState } from '../../store/reducers/innloggingsstatus-d
 type EventData = Record<string, any>;
 
 export const initAmplitude = () => {
-    const userProps = {
-        skjermbredde: window.screen.width,
-        skjermhoyde: window.screen.height,
-        vindusbredde: window.innerWidth,
-        vindushoyde: window.innerHeight,
-    };
+    const userProps = Object.assign(
+        {
+            skjermbredde: window.screen.width,
+            skjermhoyde: window.screen.height,
+            vindusbredde: window.innerWidth,
+            vindushoyde: window.innerHeight,
+        },
+        window.amplitudeInitialUserProps
+    );
 
     amplitude.getInstance().init('default', '', {
         apiEndpoint: 'amplitude.nav.no/collect-auto',
