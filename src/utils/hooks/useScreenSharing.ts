@@ -3,10 +3,6 @@ import { useEffect, useState } from 'react';
 import { VNGAGE_ID, VngageUserState, vendorScripts } from 'komponenter/header/vendorScripts';
 import { loadExternalScript } from 'utils/external-scripts';
 
-type VngageStates = {
-    InDialog: 'InDialog';
-};
-
 type UseScreenSharingOptions = {
     enabled: boolean;
 };
