@@ -14,7 +14,6 @@ import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 import { fetchDriftsmeldinger } from 'store/reducers/driftsmeldinger-duck';
 import { fetchFeatureToggles, Status } from 'api/api';
 import { ActionType } from 'store/actions';
-import { loadExternalScript } from 'utils/external-scripts';
 import { getLoginUrl } from 'utils/login';
 import Driftsmeldinger from './common/driftsmeldinger/Driftsmeldinger';
 import Brodsmulesti from './common/brodsmulesti/Brodsmulesti';
@@ -38,6 +37,7 @@ import { useOnPushStateHandlers } from 'utils/hooks/useOnPushStateHandlers';
 
 import './Header.scss';
 import { mapToClosestTranslatedLanguage } from 'utils/language';
+import { useLoadIfActiveSession } from 'utils/hooks';
 
 export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
 export const decoratorLanguageCookie = CookieName.DECORATOR_LANGUAGE;
@@ -97,12 +97,7 @@ export const Header = () => {
         }
     }, [menypunkt]);
 
-    // Handle feature toggles
-    useEffect(() => {
-        if (currentFeatureToggles['dekoratoren.skjermdeling']) {
-            loadExternalScript('https://account.psplugin.com/83BD7664-B38B-4EEE-8D99-200669A32551/ps.js');
-        }
-    }, [currentFeatureToggles]);
+    useLoadIfActiveSession();
 
     // Handle enforced login
     useEffect(() => {
