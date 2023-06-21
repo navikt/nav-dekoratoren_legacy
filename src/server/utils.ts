@@ -69,10 +69,19 @@ export const clientEnv = ({ req }: Props): Environment => {
                     LOGOUT_URL: req.query.logoutUrl as string,
                 }),
                 MASK_HOTJAR: req.query.maskHotjar !== 'false',
+                INITIAL_USER_PROPS: parseUriObject(req.query.initialUserProps as string),
             },
         }),
     };
 };
+
+function parseUriObject(component: string): object | undefined {
+    try {
+        return JSON.parse(decodeURIComponent(component));
+    } catch (e) {
+        return undefined;
+    }
+}
 
 export const originDevelopment = (hosturl?: string) => ['localhost', 'dev'].some((o) => hosturl?.includes(o));
 

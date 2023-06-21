@@ -43,6 +43,7 @@ export interface Params {
     UTILS_BACKGROUND?: string;
     LOGOUT_URL?: string;
     MASK_HOTJAR?: boolean;
+    INITIAL_USER_PROPS?: object;
 }
 
 export interface Cookies {

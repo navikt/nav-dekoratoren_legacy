@@ -20,8 +20,12 @@ export type AnalyticsEventArgs = {
     lenkegruppe?: string;
 };
 
-export const initAnalytics = () => {
-    initAmplitude();
+type InitAnalyticsOptions = {
+    initialUserProps?: object;
+};
+
+export const initAnalytics = (options?: InitAnalyticsOptions) => {
+    initAmplitude(options?.initialUserProps);
     initTaskAnalytics();
 };
 

@@ -4,7 +4,7 @@ import { InnloggingsstatusState } from '../../store/reducers/innloggingsstatus-d
 
 type EventData = Record<string, any>;
 
-export const initAmplitude = () => {
+export const initAmplitude = (initialUserProps?: object) => {
     const userProps = Object.assign(
         {
             skjermbredde: window.screen.width,
@@ -12,7 +12,7 @@ export const initAmplitude = () => {
             vindusbredde: window.innerWidth,
             vindushoyde: window.innerHeight,
         },
-        window.amplitudeInitialUserProps
+        initialUserProps
     );
 
     amplitude.getInstance().init('default', '', {
