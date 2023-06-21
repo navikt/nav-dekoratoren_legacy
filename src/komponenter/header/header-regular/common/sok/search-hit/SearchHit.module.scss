@@ -1,0 +1,41 @@
+.searchHit {
+    display: block;
+    border: none;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+    transition-property: background-color, box-shadow;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-out;
+
+    //TODO
+    // @media #{common.$mq-screen-mobile} {
+    //     box-shadow: var(--a-shadow-large);
+    // }
+
+    &:hover {
+        border: none;
+        background-color: var(--a-surface-hover);
+    }
+
+    :global(.navds-link-panel__title) {
+        color: var(--a-text-action);
+    }
+
+    :global(.navds-link-panel__chevron) {
+        display: none;
+    }
+}
+
+.content {
+    width: 100%;
+}
+
+.highlight {
+    margin-top: 0.5rem;
+}
+
+.bottomRow {
+    margin-top: 0.75rem;
+    color: var(--a-text-subtle);
+}

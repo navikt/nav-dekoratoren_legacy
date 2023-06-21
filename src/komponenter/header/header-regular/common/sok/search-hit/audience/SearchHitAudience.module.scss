@@ -1,0 +1,8 @@
+.tag {
+    white-space: nowrap;
+    margin-bottom: 0.5rem;
+
+    &:not(:last-of-type) {
+        margin-right: 0.5rem;
+    }
+}

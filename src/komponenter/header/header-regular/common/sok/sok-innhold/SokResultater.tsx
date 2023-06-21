@@ -1,5 +1,6 @@
 import SokeforslagIngress from './SokeforslagIngress';
 import Sokeforslagtext from './Sokeforslagtext';
+import { SearchHit } from '../search-hit/SearchHit';
 import { finnTekst } from 'tekster/finn-tekst';
 import React from 'react';
 import { Locale } from 'store/reducers/language-duck';
@@ -58,6 +59,10 @@ export const SokResultater = (props: Props) => {
                             row: 1,
                             sub: index,
                         });
+                        console.log(item);
+
+                        const key = `${item.href}-${item.displayName}`;
+
                         return (
                             <li key={index} style={style}>
                                 <a
@@ -73,11 +78,12 @@ export const SokResultater = (props: Props) => {
                                         });
                                     }}
                                 >
-                                    <SokeforslagIngress
+                                    {/* <SokeforslagIngress
                                         className="sok-resultat-listItem"
                                         displayName={item.displayName}
                                     />
-                                    <Sokeforslagtext highlight={item.highlight} />
+                                    <Sokeforslagtext highlight={item.highlight} /> */}
+                                    <SearchHit hit={item} hitIndex={index} key={key} />
                                 </a>
                             </li>
                         );
