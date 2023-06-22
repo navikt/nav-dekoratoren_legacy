@@ -1,7 +1,6 @@
 import React from 'react';
 import htmlReactParser from 'html-react-parser';
 // import { SearchHitProps } from 'types/search-result';
-// import { logResultClick } from 'utils/amplitude';
 import { BodyLong, LinkPanel } from '@navikt/ds-react';
 import { SearchHitOfficeInformation } from './office-information/SearchHitOfficeInformation';
 import { SearchHitAudience } from './audience/SearchHitAudience';
@@ -59,19 +58,15 @@ export const SearchHit = ({ hit, hitIndex }: Props) => {
             href={href}
             className={style.searchHit}
             onClick={() => {
-                //TODO
-                // logResultClick(hitIndex + 1)
-                console.log(hitIndex + 1);
-
                 dispatch(lukkAlleDropdowns());
                 logAmplitudeEvent('resultat-klikk', {
                     destinasjon: '[redacted]',
                     sokeord: '[redacted]',
-                    treffnr: hitIndex + 1, //Sjekk om hitindex er riktig
+                    treffnr: hitIndex + 1,
                 });
             }}
+            //TODO
             // id={id}
-            // href={item.href}
         >
             <LinkPanel.Title>{displayName}</LinkPanel.Title>
             <div className={style.content}>
