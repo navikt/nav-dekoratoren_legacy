@@ -48,20 +48,6 @@
             animation-delay: calc(var(--index) * 50ms);
             animation-fill-mode: both;
             animation-timing-function: ease-in-out;
-            border-bottom: 1px solid var(--a-gray-400);
-            margin: 0 -0.5rem;
-            padding: 0 0.5rem;
-
-            &:focus,
-            &:hover {
-                background-color: var(--a-gray-300);
-                font-weight: bold;
-            }
-        }
-
-        li[aria-selected='true'] {
-            background-color: var(--a-gray-300);
-            font-weight: bold;
         }
 
         .sok-resultat-listItem-text {
