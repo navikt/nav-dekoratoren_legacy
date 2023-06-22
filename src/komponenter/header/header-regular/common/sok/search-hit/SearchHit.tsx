@@ -71,7 +71,6 @@ export const SearchHit = ({ hit, hitIndex }: Props) => {
                 });
             }}
             // id={id}
-            // className={'sokeresultat-lenke'}
             // href={item.href}
         >
             <LinkPanel.Title>{displayName}</LinkPanel.Title>

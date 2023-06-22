@@ -16,24 +16,6 @@
         margin-top: 1rem;
     }
 
-    .sokeresultat-lenke {
-        width: 100%;
-        color: black;
-        cursor: pointer;
-        padding: 1rem 1rem 1rem 0;
-        font-weight: normal;
-        text-align: left;
-        text-decoration: none;
-
-        &:focus {
-            outline: none;
-            color: white;
-            text-decoration: none;
-            background-color: var(--a-deepblue-500);
-            box-shadow: 0 0 0 2px var(--a-deepblue-500);
-        }
-    }
-
     .sokeresultat-container {
         list-style: none;
         flex-direction: column;
