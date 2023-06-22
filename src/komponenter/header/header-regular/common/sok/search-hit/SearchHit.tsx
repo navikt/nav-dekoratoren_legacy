@@ -8,6 +8,9 @@ import { SearchHitAudience } from './audience/SearchHitAudience';
 import { SearchHitTimestamps } from './timestamps/SearchHitTimestamps';
 import style from './SearchHit.module.scss';
 import { Audience, Language } from '../utils';
+import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
+import { logAmplitudeEvent } from 'utils/analytics/amplitude';
+import { useDispatch } from 'react-redux';
 
 type SearchHitProps = {
     priority: boolean;
@@ -45,6 +48,7 @@ type Props = {
 
 export const SearchHit = ({ hit, hitIndex }: Props) => {
     const { displayName, href, highlight, officeInformation, audience } = hit;
+    const dispatch = useDispatch();
 
     if (!displayName || !href) {
         return null;
@@ -54,11 +58,21 @@ export const SearchHit = ({ hit, hitIndex }: Props) => {
         <LinkPanel
             href={href}
             className={style.searchHit}
-            onClick={() =>
+            onClick={() => {
                 //TODO
                 // logResultClick(hitIndex + 1)
-                console.log(hitIndex + 1)
-            }
+                console.log(hitIndex + 1);
+
+                dispatch(lukkAlleDropdowns());
+                logAmplitudeEvent('resultat-klikk', {
+                    destinasjon: '[redacted]',
+                    sokeord: '[redacted]',
+                    treffnr: hitIndex + 1, //Sjekk om hitindex er riktig
+                });
+            }}
+            // id={id}
+            // className={'sokeresultat-lenke'}
+            // href={item.href}
         >
             <LinkPanel.Title>{displayName}</LinkPanel.Title>
             <div className={style.content}>

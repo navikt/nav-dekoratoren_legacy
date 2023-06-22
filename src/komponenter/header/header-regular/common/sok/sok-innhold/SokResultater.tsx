@@ -1,5 +1,4 @@
 import SokeforslagIngress from './SokeforslagIngress';
-import Sokeforslagtext from './Sokeforslagtext';
 import { SearchHit } from '../search-hit/SearchHit';
 import { finnTekst } from 'tekster/finn-tekst';
 import React from 'react';
@@ -10,10 +9,7 @@ import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import Tekst from 'tekster/finn-tekst';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { useDispatch } from 'react-redux';
-import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { Alert, Link } from '@navikt/ds-react';
-import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 
 import 'komponenter/header/header-regular/common/sok/sok-innhold/SokResultater.scss';
 
@@ -37,7 +33,6 @@ export const SokResultater = (props: Props) => {
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const itemsFiltered = removeDuplicates(result.hits) || result.hits;
     const itemsSpliced = itemsFiltered.slice(0, numberOfResults);
-    const dispatch = useDispatch();
 
     return (
         <div className="sokeresultat-container">
@@ -59,32 +54,12 @@ export const SokResultater = (props: Props) => {
                             row: 1,
                             sub: index,
                         });
-                        console.log(item);
 
-                        const key = `${item.href}-${item.displayName}`;
+                        const key = `${item.href}-${item.displayName}`; //TODO nødvendig? bruke index?
 
                         return (
                             <li key={index} style={style}>
-                                <a
-                                    id={id}
-                                    className={'sokeresultat-lenke'}
-                                    href={item.href}
-                                    onClick={() => {
-                                        dispatch(lukkAlleDropdowns());
-                                        logAmplitudeEvent('resultat-klikk', {
-                                            destinasjon: '[redacted]',
-                                            sokeord: '[redacted]',
-                                            treffnr: index + 1,
-                                        });
-                                    }}
-                                >
-                                    {/* <SokeforslagIngress
-                                        className="sok-resultat-listItem"
-                                        displayName={item.displayName}
-                                    />
-                                    <Sokeforslagtext highlight={item.highlight} /> */}
-                                    <SearchHit hit={item} hitIndex={index} key={key} />
-                                </a>
+                                <SearchHit hit={item} hitIndex={index} key={key} />
                             </li>
                         );
                     })}
