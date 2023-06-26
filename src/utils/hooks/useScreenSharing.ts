@@ -50,7 +50,7 @@ export function useLoadIfActiveSession() {
         const userState = localStorage.getItem(`vngage_${VNGAGE_ID.toLowerCase()}`);
         const parsedUserState = userState ? (JSON.parse(userState) as VngageUserState) : undefined;
 
-        if (parsedUserState && parsedUserState.user.state === 'InDialog') {
+        if (parsedUserState && parsedUserState.user.state !== 'Ready') {
             loadExternalScript(vendorScripts.skjermdeling);
         }
     }, []);
