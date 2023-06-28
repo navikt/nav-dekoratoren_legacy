@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express, { ErrorRequestHandler, Request, Response } from 'express';
 import { createMiddleware } from '@promster/express';
 import { getSummary, getContentType } from '@promster/express';
 import rewrite from 'express-urlrewrite';
@@ -161,18 +161,22 @@ app.use(
     })
 );
 
-// Error handler middleware
-app.use((e: Error, req: Request, res: Response, next: NextFunction) => {
-    const origin = req.get('origin');
-    const host = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
-    const url = origin || host;
-    console.error(`${url}: ${e.message}`);
-    console.error(e.stack);
-    res.status(405);
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+    const status = err.status || 500;
+    const stackMsg = err.stack?.split('\n')[0];
+
+    console.error(`Error ${status} on ${req.url}: ${err.message} / ${stackMsg}`);
+
+    res.status(status);
     res.send({
-        error: { status: 405, message: e.message },
+        status,
+        url: req.url,
+        msg: err.message,
+        stackMsg,
     });
-});
+};
+
+app.use(errorHandler);
 
 const server = app.listen(PORT, () => console.log(`App listening on port: ${PORT}`));
 
