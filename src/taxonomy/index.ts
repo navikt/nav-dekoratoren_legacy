@@ -26,9 +26,14 @@ type Tilbakemelding = {
 
 export type AmplitudeEvent = AccordianÅpnet | AccordianLukket | Tilbakemelding;
 
-function testLogEvent<TName extends AmplitudeEvent['name']>(
+// eslint-disable-next-line @typescript-eslint/ban-types
+type AutocompleteString = string & {};
+type EventName = AmplitudeEvent['name'];
+type AutocompleteEventName = EventName | AutocompleteString;
+
+function testLogEvent<TName extends AutocompleteEventName>(
     eventName: TName,
-    eventData: Extract<AmplitudeEvent, { name: TName }>['properties'],
+    eventData: TName extends EventName ? Extract<AmplitudeEvent, { name: TName }>['properties'] : any,
     origin = 'dekoratoren'
 ) {
     console.log('Logging this event');
@@ -36,4 +41,12 @@ function testLogEvent<TName extends AmplitudeEvent['name']>(
 
 testLogEvent('tilbakemelding', {
     kilde: 'footer',
+    var: 'yes',
+    extraFelt: 'ok',
+});
+
+testLogEvent('customEvent', {
+    kilde: 'footer',
+    var: 'yes',
+    extraFelt: 'ok',
 });
