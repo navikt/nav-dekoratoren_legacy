@@ -165,13 +165,14 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     const status = err.status || 500;
     const stackMsg = err.stack?.split('\n')[0];
 
-    const msg = `Error ${status} on ${req.url}: ${err.message} / ${stackMsg}`;
-
-    console.error(msg);
+    console.error(`Error ${status} on ${req.url}: ${err.message} / ${stackMsg}`);
 
     res.status(status);
     res.send({
-        error: msg,
+        status,
+        url: req.url,
+        msg: err.message,
+        stackMsg,
     });
 };
 
