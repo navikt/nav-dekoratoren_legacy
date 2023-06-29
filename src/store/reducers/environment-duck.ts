@@ -18,6 +18,7 @@ export interface Environment {
     CASETYPE_ID: string;
     SOLUTION_ID: string;
     NAV_GROUP_ID: string;
+    VARSEL_API_URL: string;
 
     // Parameters
     PARAMS: Params;

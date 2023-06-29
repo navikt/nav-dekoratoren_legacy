@@ -64,8 +64,8 @@ export default function reducer(state: VarselinnboksState = initialState, action
     }
 }
 
-export function hentVarsler(APP_URL: string): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<VarslerData>(() => hentVarslerFetch(APP_URL), {
+export function hentVarsler(VARSEL_API_URL: string): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<VarslerData>(() => hentVarslerFetch(VARSEL_API_URL), {
         ok: hentVarslerOk,
         feilet: hentVarslerFeilet,
         pending: hentVarslerPending,

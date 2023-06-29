@@ -28,8 +28,8 @@ export const hentInnloggingsstatusFetch = (API_DEKORATOREN_URL: string): Promise
         credentials: 'include',
     });
 
-export const hentVarslerFetch = (API_DEKORATOREN_URL: string): Promise<varselinnboksData> => {
-    return fetchToJson(`${API_DEKORATOREN_URL}/varsel/proxy/varsel`, { credentials: 'include' });
+export const hentVarslerFetch = (VARSEL_API_URL: string): Promise<varselinnboksData> => {
+    return fetchToJson(`${VARSEL_API_URL}/varselbjelle/varsler`, { credentials: 'include' });
 };
 
 export const postDone = (API_DEKORATOREN_URL: string, eventId: DoneEvent) =>

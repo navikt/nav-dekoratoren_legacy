@@ -35,7 +35,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
     const [activateScreenReaderText, setActivateScreenReaderText] = useState(false);
     const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
     const environment = useSelector((state: AppState) => state.environment);
-    const { API_DEKORATOREN_URL } = environment;
+    const { VARSEL_API_URL } = environment;
 
     const hasNoOppgaver = varsler?.oppgaver.length === 0;
     const hasNoBeskjeder = varsler?.beskjeder.length === 0;
@@ -53,7 +53,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                             <li key={o.eventId}>
                                 <VarselBoks
                                     eventId={o.eventId}
-                                    apiVarselinnboksUrl={API_DEKORATOREN_URL}
+                                    apiVarselinnboksUrl={VARSEL_API_URL}
                                     tekst={o.tekst}
                                     dato={formatDato(o.tidspunkt)}
                                     href={o.isMasked ? getLoginUrl(environment, arbeidsflate, 'Level4') : o.link}
@@ -86,7 +86,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                             <li key={b.eventId}>
                                 <VarselBoks
                                     eventId={b.eventId}
-                                    apiVarselinnboksUrl={API_DEKORATOREN_URL}
+                                    apiVarselinnboksUrl={VARSEL_API_URL}
                                     tekst={b.tekst}
                                     dato={formatDato(b.tidspunkt)}
                                     href={b.isMasked ? getLoginUrl(environment, arbeidsflate, 'Level4') : b.link}
