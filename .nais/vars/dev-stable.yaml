@@ -3,7 +3,7 @@ appPath: ''
 ingresses:
   - https://dekoratoren.ekstern.dev.nav.no
 outboundHosts:
-  - www.dev.nav.no
+  - portal-admin-dev.nav.no
 env:
   - name: ENV
     value: dev
@@ -12,7 +12,7 @@ env:
   - name: APP_BASE_URL
     value: https://dekoratoren.ekstern.dev.nav.no
   - name: API_XP_SERVICES_URL
-    value: https://www.dev.nav.no/_/service
+    value: https://portal-admin-dev.nav.no/_/service
   - name: API_DEKORATOREN_URL
     value: https://www.ekstern.dev.nav.no/person/nav-dekoratoren-api
   - name: MINSIDE_ARBEIDSGIVER_URL
