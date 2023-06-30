@@ -66,6 +66,7 @@ export const initialState: Environment = {
     CASETYPE_ID: '',
     SOLUTION_ID: '',
     NAV_GROUP_ID: '',
+    VARSEL_API_URL:'',
 
     // Parameters
     PARAMS: {
