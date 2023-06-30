@@ -223,6 +223,7 @@ export const Header = () => {
                         enforceLogin,
                         redirectToApp,
                         redirectToUrl,
+                        redirectToUrlLogout,
                         feedback,
                         chatbot,
                         chatbotVisible,
@@ -257,6 +258,9 @@ export const Header = () => {
                     if (redirectToUrl) {
                         validateRedirectUrl(redirectToUrl);
                     }
+                    if (redirectToUrlLogout) {
+                        validateRedirectUrl(redirectToUrlLogout);
+                    }
                     const params = {
                         ...(context && {
                             CONTEXT: context,
@@ -278,6 +282,9 @@ export const Header = () => {
                         }),
                         ...(redirectToUrl !== undefined && {
                             REDIRECT_TO_URL: redirectToUrl,
+                        }),
+                        ...(redirectToUrlLogout !== undefined && {
+                            REDIRECT_TO_URL_LOGOUT: redirectToUrlLogout,
                         }),
                         ...(level && {
                             LEVEL: level,

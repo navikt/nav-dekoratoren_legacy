@@ -49,6 +49,7 @@ export const clientEnv = ({ req }: Props): Environment => {
                 ENFORCE_LOGIN: req.query.enforceLogin === 'true',
                 REDIRECT_TO_APP: req.query.redirectToApp === 'true',
                 REDIRECT_TO_URL: req.query.redirectToUrl as string,
+                REDIRECT_TO_URL_LOGOUT: req.query.redirectToUrlLogout as string,
                 LEVEL: (req.query.level || 'Level3') as string,
                 LANGUAGE: chosenLanguage,
                 ...(req.query.availableLanguages && {
