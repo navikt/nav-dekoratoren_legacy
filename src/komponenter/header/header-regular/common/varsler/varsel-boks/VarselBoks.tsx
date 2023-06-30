@@ -53,16 +53,16 @@ const Beskjed = ({
 
     const dispatch = useDispatch();
 
-    const isOppgave = type === 'OPPGAVE';
+    const isOppgave = type.toLowerCase() === 'oppgave';
     const isArkiverbar = !href && !isOppgave;
     const eksternVarslingStatus = getEksternvarslingStatus(eksternVarslingKanaler);
 
     const handleOnClick = () => {
-        if (type === 'BESKJED' && !isMasked) {
+        if (type.toLowerCase() === 'beskjed' && !isMasked) {
             postDone(apiVarselinnboksUrl, { eventId: eventId });
             dispatch(fjernLestVarsel(eventId));
         }
-        logAmplitudeEvent('navigere', { komponent: type == "BESKJED" ? "varsel-beskjed" : "varsel-oppgave", kategori: "varselbjelle", destinasjon: href });
+        logAmplitudeEvent('navigere', { komponent: type.toLowerCase() == "beskjed" ? "varsel-beskjed" : "varsel-oppgave", kategori: "varselbjelle", destinasjon: href });
     };
 
     return isArkiverbar ? (
