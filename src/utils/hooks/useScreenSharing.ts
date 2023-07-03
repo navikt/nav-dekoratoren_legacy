@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { VNGAGE_ID, vendorScripts } from 'komponenter/header/vendorScripts';
+import { VNGAGE_ID, VngageUserState, vendorScripts } from 'komponenter/header/vendorScripts';
 import { loadExternalScript } from 'utils/external-scripts';
 
 type UseScreenSharingOptions = {
@@ -48,8 +48,9 @@ export function useScreenSharing({ enabled }: UseScreenSharingOptions): UseScree
 export function useLoadIfActiveSession() {
     useEffect(() => {
         const userState = localStorage.getItem(`vngage_${VNGAGE_ID.toLowerCase()}`);
+        const parsedUserState = userState ? (JSON.parse(userState) as VngageUserState) : undefined;
 
-        if (userState) {
+        if (parsedUserState && parsedUserState.user.state !== 'Ready') {
             loadExternalScript(vendorScripts.skjermdeling);
         }
     }, []);
