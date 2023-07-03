@@ -38,6 +38,7 @@ import { useOnPushStateHandlers } from 'utils/hooks/useOnPushStateHandlers';
 
 import './Header.scss';
 import { mapToClosestTranslatedLanguage } from 'utils/language';
+import { LogoutController } from 'komponenter/footer/logoutController/LogoutController';
 
 export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
 export const decoratorLanguageCookie = CookieName.DECORATOR_LANGUAGE;
@@ -335,6 +336,7 @@ export const Header = () => {
                 {useSimpleHeader ? <HeaderSimple /> : <HeaderRegular />}
             </header>
             <Driftsmeldinger />
+            <LogoutController />
             {(breadcrumbs.length > 0 || availableLanguages.length > 0) && (
                 // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
                 <div

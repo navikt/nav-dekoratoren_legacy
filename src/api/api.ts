@@ -1,5 +1,5 @@
 import { fetchToJson } from './api-utils';
-import { Data as innloggingsstatusData } from '../store/reducers/innloggingsstatus-duck';
+import { Data as InnloggingsstatusData } from '../store/reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from '../store/reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
 import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
@@ -23,10 +23,12 @@ export interface DataElement {
 
 export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => fetchToJson(`${APP_URL}/api/meny`);
 
-export const hentInnloggingsstatusFetch = (API_DEKORATOREN_URL: string): Promise<innloggingsstatusData> =>
-    fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
+export const hentInnloggingsstatusFetch = (API_DEKORATOREN_URL: string): Promise<InnloggingsstatusData> => {
+    console.log('hentInnloggingsstatusFetch');
+    return fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
         credentials: 'include',
     });
+};
 
 export const hentVarslerFetch = (API_DEKORATOREN_URL: string): Promise<varselinnboksData> => {
     return fetchToJson(`${API_DEKORATOREN_URL}/varsel/proxy/varsel`, { credentials: 'include' });

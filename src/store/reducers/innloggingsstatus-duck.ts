@@ -17,6 +17,9 @@ export interface Data {
     authenticated: boolean;
     name: string;
     securityLevel: string;
+    sessionExpires: number;
+    isSessionActive: boolean;
+    tokenExpires: number;
 }
 
 const initialState: InnloggingsstatusState = {
@@ -24,6 +27,9 @@ const initialState: InnloggingsstatusState = {
         authenticated: false,
         name: '',
         securityLevel: '',
+        sessionExpires: 0,
+        isSessionActive: false,
+        tokenExpires: 0,
     },
     status: Status.IKKE_STARTET,
 };
