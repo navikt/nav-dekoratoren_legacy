@@ -1,19 +1,25 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { LoginState, useLogoutWarning } from 'utils/hooks/useLogoutWarning';
+import { useLoginStatus } from 'utils/hooks/useLoginStatus';
 import { LogoutWarning } from './LogoutWarning';
 
 export const LogoutController = () => {
-    const { timeTilTokenExpiry, loginState } = useLogoutWarning();
+    const { loginStatus, isTokenExpiring, isSessionExpiring } = useLoginStatus();
     const [showWarning, setShowWarning] = useState(false);
 
-    useEffect(() => {
+    const checkForLogoutAndWait = () => {
+        console.log('checking for logout');
+
         setTimeout(() => {
-            setShowWarning(false);
-        }, 2000);
-    });
+            checkForLogoutAndWait();
+        }, 1000);
+    };
 
-    console.log(loginState);
+    useEffect(() => {
+        checkForLogoutAndWait();
+    }, []);
 
-    return loginState === LoginState.EXPIRED || loginState === LoginState.REFRESH ? <LogoutWarning /> : null;
+    console.log(loginStatus);
+
+    return isTokenExpiring || isSessionExpiring ? <LogoutWarning /> : null;
 };
