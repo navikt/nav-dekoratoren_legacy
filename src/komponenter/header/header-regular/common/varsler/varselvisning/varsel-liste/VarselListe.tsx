@@ -53,7 +53,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                             <li key={o.eventId}>
                                 <VarselBoks
                                     eventId={o.eventId}
-                                    apiVarselinnboksUrl={VARSEL_API_URL}
+                                    VARSEL_API_URL={VARSEL_API_URL}
                                     tekst={o.tekst}
                                     dato={formatDato(o.tidspunkt)}
                                     href={o.isMasked ? getLoginUrl(environment, arbeidsflate, 'Level4') : o.link}
@@ -86,7 +86,7 @@ export const VarselListe = ({ varsler, rowIndex }: Props) => {
                             <li key={b.eventId}>
                                 <VarselBoks
                                     eventId={b.eventId}
-                                    apiVarselinnboksUrl={VARSEL_API_URL}
+                                    VARSEL_API_URL={VARSEL_API_URL}
                                     tekst={b.tekst}
                                     dato={formatDato(b.tidspunkt)}
                                     href={b.isMasked ? getLoginUrl(environment, arbeidsflate, 'Level4') : b.link}
