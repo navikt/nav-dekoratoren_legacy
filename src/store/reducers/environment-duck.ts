@@ -32,6 +32,7 @@ export interface Params {
     ENFORCE_LOGIN: boolean;
     REDIRECT_TO_APP: boolean;
     REDIRECT_TO_URL?: string;
+    REDIRECT_TO_URL_LOGOUT?: string;
     LEVEL: string;
     LANGUAGE: Locale;
     AVAILABLE_LANGUAGES?: AvailableLanguage[];
