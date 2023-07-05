@@ -72,7 +72,7 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }> {
 const run = () => {
     fetchEnv()
         .then((environment) => {
-            initAnalytics(environment.PARAMS.INITIAL_USER_PROPS);
+            initAnalytics(environment.PARAMS.ANALYTICS_USER_CONFIG);
             injectHeadTags(environment.APP_URL);
 
             if (environment.PARAMS.MASK_HOTJAR) {

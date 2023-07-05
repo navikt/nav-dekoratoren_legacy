@@ -1,10 +1,11 @@
 import amplitude from 'amplitude-js';
 import { Params } from 'store/reducers/environment-duck';
 import { InnloggingsstatusState } from '../../store/reducers/innloggingsstatus-duck';
+import { ValidAnalyticsUserConfig } from 'server/utils';
 
 type EventData = Record<string, any>;
 
-export const initAmplitude = (initialUserProps?: object) => {
+export const initAmplitude = (initialUserProps?: ValidAnalyticsUserConfig) => {
     const userProps = Object.assign(
         {
             skjermbredde: window.screen.width,

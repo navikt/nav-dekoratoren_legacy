@@ -2,6 +2,7 @@ import { MenuValue } from 'utils/meny-storage-utils';
 import { ActionType, Handling } from '../actions';
 import { AvailableLanguage, Locale } from './language-duck';
 import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti';
+import { ValidAnalyticsUserConfig } from 'server/utils';
 
 export interface Environment {
     ENV: string;
@@ -43,7 +44,7 @@ export interface Params {
     UTILS_BACKGROUND?: string;
     LOGOUT_URL?: string;
     MASK_HOTJAR?: boolean;
-    INITIAL_USER_PROPS?: object;
+    ANALYTICS_USER_CONFIG?: ValidAnalyticsUserConfig;
 }
 
 export interface Cookies {

@@ -2,6 +2,7 @@ import { MenuValue } from '../meny-storage-utils';
 import { initAmplitude } from 'utils/analytics/amplitude';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import { initTaskAnalytics } from './task-analytics/ta';
+import { ValidAnalyticsUserConfig } from 'server/utils';
 
 export enum AnalyticsCategory {
     Header = 'dekorator-header',
@@ -21,7 +22,7 @@ export type AnalyticsEventArgs = {
 };
 
 type InitAnalyticsOptions = {
-    initialUserProps?: object;
+    initialUserProps?: ValidAnalyticsUserConfig;
 };
 
 export const initAnalytics = (options?: InitAnalyticsOptions) => {

@@ -69,7 +69,9 @@ export const clientEnv = ({ req }: Props): Environment => {
                     LOGOUT_URL: req.query.logoutUrl as string,
                 }),
                 MASK_HOTJAR: req.query.maskHotjar !== 'false',
-                INITIAL_USER_PROPS: parseUriObject(req.query.initialUserProps as string),
+                ANALYTICS_USER_CONFIG: parseUriObject(
+                    req.query.analyticsUserConfig as string
+                ) as ValidAnalyticsUserConfig,
             },
         }),
     };
@@ -87,7 +89,16 @@ export const originDevelopment = (hosturl?: string) => ['localhost', 'dev'].some
 
 // Validation utils
 export const validateClientEnv = (req: Request) => {
-    const { level, context, availableLanguages, breadcrumbs, utilsBackground, logoutUrl, redirectToUrl } = req.query;
+    const {
+        level,
+        context,
+        availableLanguages,
+        breadcrumbs,
+        utilsBackground,
+        logoutUrl,
+        redirectToUrl,
+        analyticsConfig,
+    } = req.query;
     if (context) {
         validateContext(context as string);
     }
@@ -112,6 +123,9 @@ export const validateClientEnv = (req: Request) => {
     }
     if (redirectToUrl) {
         validateRedirectUrl(redirectToUrl as string);
+    }
+    if (analyticsConfig) {
+        validateAnalyticsUserConfig(analyticsConfig as ValidAnalyticsUserConfig);
     }
 };
 
@@ -172,6 +186,20 @@ export const validateLanguage = (language: Locale) => {
         default:
             throw Error('language supports nb | nn | en | se | pl | uk | ru');
     }
+};
+
+export type ValidAnalyticsUserConfig = Record<string, string>;
+
+export const validateAnalyticsUserConfig = (config: ValidAnalyticsUserConfig) => {
+    if (typeof config !== 'object' || config === null) {
+        throw Error('analyticsConfig must be an object');
+    }
+
+    Object.entries(config).forEach(([key, value]) => {
+        if (typeof key !== 'string' || typeof value !== 'string') {
+            throw Error('analyticsConfig keys must be strings');
+        }
+    });
 };
 
 export const validateAvailableLanguages = (languages: AvailableLanguage[]) => {
