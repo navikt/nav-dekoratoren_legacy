@@ -59,7 +59,7 @@ export const Header = () => {
     const { language } = useSelector(stateSelector);
     const { innloggingsstatus, menypunkt } = useSelector(stateSelector);
     const { authenticated } = innloggingsstatus.data;
-    const { PARAMS, APP_URL, API_DEKORATOREN_URL, ENV } = environment;
+    const { PARAMS, APP_URL, API_DEKORATOREN_URL, ENV, VARSEL_API_URL } = environment;
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
     const breadcrumbs = PARAMS.BREADCRUMBS || [];
     const availableLanguages = PARAMS.AVAILABLE_LANGUAGES || [];
@@ -157,7 +157,7 @@ export const Header = () => {
     // Fetch notifications
     useEffect(() => {
         if (authenticated) {
-            hentVarsler(API_DEKORATOREN_URL)(dispatch);
+            hentVarsler(VARSEL_API_URL)(dispatch);
         }
     }, [authenticated]);
 

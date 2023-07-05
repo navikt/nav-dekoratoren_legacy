@@ -23,6 +23,8 @@ env:
     value: https://login.ekstern.dev.nav.no/oauth2/login
   - name: LOGOUT_URL
     value: https://login.ekstern.dev.nav.no/oauth2/logout
+  - name: VARSEL_API_URL
+    value: https://www.intern.dev.nav.no/tms-varsel-api
 replicas:
   min: 1
   max: 1

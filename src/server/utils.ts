@@ -40,6 +40,7 @@ export const clientEnv = ({ req }: Props): Environment => {
         MIN_SIDE_URL: process.env.MIN_SIDE_URL as string,
         LOGIN_URL: process.env.LOGIN_URL as string,
         LOGOUT_URL: process.env.LOGOUT_URL as string,
+        VARSEL_API_URL: process.env.VARSEL_API_URL as string,
         ...(req.query && {
             PARAMS: {
                 CONTEXT: chosenContext,
