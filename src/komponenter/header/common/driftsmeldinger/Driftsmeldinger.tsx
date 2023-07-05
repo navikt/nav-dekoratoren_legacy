@@ -1,10 +1,11 @@
 import React from 'react';
-import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
-import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { DriftsmeldingerState } from '../../../../store/reducers/driftsmeldinger-duck';
-import { verifyWindowObj } from '../../../../utils/Environment';
+import { DriftsmeldingerState } from 'store/reducers/driftsmeldinger-duck';
+import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
+import { AnalyticsCategory } from 'utils/analytics/analytics';
+import { verifyWindowObj } from 'utils/Environment';
+import { finnTekst } from 'tekster/finn-tekst';
 import { BodyLong } from '@navikt/ds-react';
 
 import style from './Driftsmeldinger.module.scss';
@@ -15,7 +16,6 @@ const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
     if (!verifyWindowObj()) {
         return [];
     }
-
     const currentUrl = removeTrailingChars(window.location.href);
 
     return driftsmeldinger.status === 'OK'
@@ -34,14 +34,13 @@ const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
 };
 
 export const Driftsmeldinger = () => {
+    const { language } = useSelector((state: AppState) => state.language);
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
-
     const { XP_BASE_URL } = environment;
-
     const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
 
     return currentDriftsmeldinger.length > 0 ? (
-        <section className={style.driftsmeldinger}>
+        <section className={style.driftsmeldinger} aria-label={finnTekst('driftsmeldinger',language)}>
             {currentDriftsmeldinger.map((melding) => (
                 <LenkeMedSporing
                     key={melding.heading}
@@ -66,13 +65,13 @@ interface IconProps {
 
 const Icon = (props: IconProps) => (
     <>
-        {props.type === 'prodstatus' && <StatusSvg aria-hidden={true}/>}
-        {props.type === 'info' && <InfoSvg aria-hidden={true}/>}
+        {props.type === 'prodstatus' && <StatusSvg/>}
+        {props.type === 'info' && <InfoSvg/>}
     </>
 );
 
 const InfoSvg = () => (
-    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" role="img" aria-hidden={true}>
         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g transform="translate(-164.000000, -106.000000)" fill="currentColor">
                 <g transform="translate(164.000000, 106.000000)">
@@ -84,7 +83,7 @@ const InfoSvg = () => (
 );
 
 const StatusSvg = () => (
-    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" role="img">
+    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" role="img" aria-hidden={true}>
         <path
             fillRule="evenodd"
             clipRule="evenodd"
