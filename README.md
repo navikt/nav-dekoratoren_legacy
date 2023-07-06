@@ -26,12 +26,12 @@ _Merk:_ Dekoratøren på disse ingressene skal være relativt stabil både funks
 Team nav.no:
 
 -   http://nav-dekoratoren-beta.personbruker (service host)
--   https://dekoratoren-beta.dev.nav.no/
+-   https://dekoratoren-beta.intern.dev.nav.no/
 
 Team min side:
 
 -   http://nav-dekoratoren-beta-tms.personbruker (service host)
--   https://dekoratoren-beta-tms.dev.nav.no/
+-   https://dekoratoren-beta-tms.intern.dev.nav.no/
 
 _Merk:_ Dekoratøren på disse ingressene er ment for testing av pågående utvikling i team personbruker, og bør ikke konsumeres av andre applikasjoner ettersom de kan være ustabile i lengre perioder.
 

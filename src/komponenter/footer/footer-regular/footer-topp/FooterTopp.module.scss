@@ -42,6 +42,9 @@
     ul {
         margin: 0;
     }
+    li {
+        line-height: 1.5;
+    }
 
     @media #{sv.$screen-desktop} {
         padding-top: var(--a-spacing-11, 2.75rem);

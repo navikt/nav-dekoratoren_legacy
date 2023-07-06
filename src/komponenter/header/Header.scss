@@ -1,5 +1,11 @@
 @use 'src/styling-variabler' as sv;
 
+header {
+    li {
+        line-height: 1.5;
+    }
+}
+
 .decorator-utils-container {
     display: flex;
     align-items: center;
