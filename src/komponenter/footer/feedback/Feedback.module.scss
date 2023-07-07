@@ -14,10 +14,6 @@
     @media #{sv.$screen-desktop-large-up} {
         padding: 1rem 0;
     }
-
-    label {
-        line-height: 1.5;
-    }
 }
 
 .feedbackContent {
@@ -25,6 +21,10 @@
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+
+    :global(.navds-ingress) {
+        line-height: 1.5;
+    }
 
     .knapp {
         min-width: 109px;
