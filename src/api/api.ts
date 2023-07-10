@@ -4,6 +4,7 @@ import { VarslerData as varselinnboksData } from '../store/reducers/varselinnbok
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
 import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { FeatureToggles } from 'store/reducers/feature-toggles-duck';
+import { Environment } from 'store/reducers/environment-duck';
 
 type DoneEvent = {
     eventId: string;
@@ -23,11 +24,41 @@ export interface DataElement {
 
 export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => fetchToJson(`${APP_URL}/api/meny`);
 
-export const hentInnloggingsstatusFetch = (API_DEKORATOREN_URL: string): Promise<InnloggingsstatusData> => {
+export const hentInnloggingsstatusFetch = (environment: Environment): Promise<InnloggingsstatusData> => {
+    const { API_DEKORATOREN_URL, SESSION_URL } = environment;
     console.log('hentInnloggingsstatusFetch');
-    return fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
+    console.log(API_DEKORATOREN_URL);
+
+    const innloggingsstatusResult: Promise<InnloggingsstatusData> = fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
         credentials: 'include',
     });
+    const sessionStatus: Promise<InnloggingsstatusData> = fetchToJson(`${SESSION_URL}`, {
+        credentials: 'include',
+    });
+
+    const all: Promise<InnloggingsstatusData> = Promise.all<any>([innloggingsstatusResult, sessionStatus])
+        .then((values) => {
+            const [innloggingsstatus, { session, tokens }] = values;
+            return {
+                ...innloggingsstatus,
+                session: {
+                    createdAt: session.created_at,
+                    endsAt: session.ends_at,
+                    timeoutAt: session.timeout_at,
+                    isActive: session.active,
+                },
+                token: {
+                    endsAt: tokens.expire_at,
+                    refreshedAt: tokens.refreshed_at,
+                    isRefreshCooldown: tokens.refresh_cooldown,
+                },
+            };
+        })
+        .catch((e) => {
+            throw new Error(`Error fetching innloggingsstatus [error: ${e}]`);
+        });
+
+    return all;
 };
 
 export const hentVarslerFetch = (API_DEKORATOREN_URL: string): Promise<varselinnboksData> => {

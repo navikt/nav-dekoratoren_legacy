@@ -1,14 +1,33 @@
 import { BodyLong, Heading, Modal } from '@navikt/ds-react';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLoginStatus } from 'utils/hooks/useLoginStatus';
 
 export const LogoutWarning = () => {
+    const { loginStatus, isTokenExpiring, isSessionExpiring } = useLoginStatus();
+
     const onCloseHandler = () => {
         console.log('close');
     };
 
-    const parent = document.getElementById('top-element');
+    const checkForLogoutAndWait = () => {
+        // console.log('checking for logout');
 
-    console.log(parent);
+        setTimeout(() => {
+            checkForLogoutAndWait();
+        }, 1000);
+    };
+
+    console.log(loginStatus);
+
+    useEffect(() => {
+        checkForLogoutAndWait();
+    }, []);
+
+    if (!(isTokenExpiring && isSessionExpiring)) {
+        return null;
+    }
+
+    const parent = document.getElementById('top-element');
 
     return (
         <Modal

@@ -32,6 +32,18 @@ describe('<LoggInnKnapp />', () => {
                     authenticated: true,
                     securityLevel: 'Level4',
                     name: 'Test',
+                    session: {
+                        createdAt: null,
+                        endsAt: null,
+                        timeoutAt: null,
+                        isActive: false,
+                    },
+                    token: {
+                        createdAt: null,
+                        endsAt: null,
+                        refreshedAt: null,
+                        isRefreshCooldown: false,
+                    },
                 })
             )
         );

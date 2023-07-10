@@ -8,6 +8,7 @@ import { fetchThenDispatch } from 'api/api-utils';
 import { hentInnloggingsstatusFetch } from 'api/api';
 import { DataElement, Status } from 'api/api';
 import { formaterFodselsnummer } from '../../utils/string-format';
+import { Environment } from './environment-duck';
 
 export interface InnloggingsstatusState extends DataElement {
     data: Data;
@@ -17,9 +18,18 @@ export interface Data {
     authenticated: boolean;
     name: string;
     securityLevel: string;
-    sessionExpires: number;
-    isSessionActive: boolean;
-    tokenExpires: number;
+    session: {
+        createdAt: string | null;
+        endsAt: string | null;
+        timeoutAt: string | null;
+        isActive: boolean;
+    };
+    token: {
+        createdAt: string | null;
+        endsAt: string | null;
+        refreshedAt: string | null;
+        isRefreshCooldown: boolean;
+    };
 }
 
 const initialState: InnloggingsstatusState = {
@@ -27,9 +37,18 @@ const initialState: InnloggingsstatusState = {
         authenticated: false,
         name: '',
         securityLevel: '',
-        sessionExpires: 0,
-        isSessionActive: false,
-        tokenExpires: 0,
+        session: {
+            createdAt: null,
+            endsAt: null,
+            timeoutAt: null,
+            isActive: false,
+        },
+        token: {
+            createdAt: null,
+            endsAt: null,
+            refreshedAt: null,
+            isRefreshCooldown: false,
+        },
     },
     status: Status.IKKE_STARTET,
 };
@@ -60,8 +79,8 @@ export default function reducer(
     }
 }
 
-export function hentInnloggingsstatus(API_DEKORATOREN_URL: string): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Data>(() => hentInnloggingsstatusFetch(API_DEKORATOREN_URL), {
+export function hentInnloggingsstatus(environment: Environment): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<Data>(() => hentInnloggingsstatusFetch(environment), {
         ok: hentInnloggingsstatusOk,
         feilet: hentnnloggingsstatusFeilet,
         pending: hentnnloggingsstatusPending,

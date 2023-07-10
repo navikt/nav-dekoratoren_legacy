@@ -10,6 +10,7 @@ import dotenv from 'dotenv';
 import { getMenuHandler } from './api-handlers/menu';
 import { getSokHandler } from './api-handlers/sok';
 import { getDriftsmeldingerHandler } from './api-handlers/driftsmeldinger';
+import { getSessionHandler } from './api-handlers/session';
 import { getCSP } from 'csp-header';
 import { cspDirectives } from '../csp';
 import { getCspHandler } from './api-handlers/csp';
@@ -120,6 +121,7 @@ app.get(createPaths('/env'), (req, res, next) => {
 app.get(createPaths('/api/meny'), getMenuHandler);
 app.get(createPaths('/api/sok'), getSokHandler);
 app.get(createPaths('/api/driftsmeldinger'), getDriftsmeldingerHandler);
+app.get(createPaths('/api/session'), getSessionHandler);
 app.get(createPaths('/api/csp'), getCspHandler);
 app.get(createPaths('/api/ta'), getTaskAnalyticsConfigHandler);
 

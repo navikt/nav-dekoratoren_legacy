@@ -18,10 +18,8 @@ export const useLoginStatus = () => {
     const [loginState, setLoginState] = useState(LoginState.UNKNOWN);
     const { innloggetStatus } = useSelector(stateSelector);
 
-    const { tokenExpires, sessionExpires } = innloggetStatus;
-
-    const secondsToTokenExpires = tokenExpires - Math.floor(Date.now() / 1000);
-    const secondsToSessionExpires = sessionExpires - Math.floor(Date.now() / 1000);
+    const secondsToTokenExpires = 0;
+    const secondsToSessionExpires = 0;
     const isTokenExpiring = secondsToTokenExpires > 0 && secondsToTokenExpires < 300;
     const isSessionExpiring = secondsToSessionExpires > 0 && secondsToSessionExpires < 300;
 
