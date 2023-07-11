@@ -13,7 +13,8 @@ export interface Environment {
     MINSIDE_ARBEIDSGIVER_URL: string;
     MIN_SIDE_URL: string;
     LOGIN_URL: string;
-    SESSION_URL: string;
+    SIDECAR_URL: string;
+    SESSION_REFRESH_URL: string;
     LOGOUT_URL: string;
     OPPORTUNITY_ID: string;
     CASETYPE_ID: string;
@@ -61,7 +62,8 @@ export const initialState: Environment = {
     MINSIDE_ARBEIDSGIVER_URL: '',
     MIN_SIDE_URL: '',
     LOGIN_URL: '',
-    SESSION_URL: '',
+    SIDECAR_URL: '',
+    SESSION_REFRESH_URL: '',
     LOGOUT_URL: '',
     OPPORTUNITY_ID: '',
     CASETYPE_ID: '',

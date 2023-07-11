@@ -2,6 +2,7 @@ import { get } from 'http';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { fornyInnlogging } from 'store/reducers/forny-innlogging-duck';
 import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
 import { getLogOutUrl } from 'utils/login';
 
@@ -28,16 +29,8 @@ export const useLoginStatus = () => {
         };
     };
 
-    const { secondsToSessionExpires, secondsToTokenExpires } = getExpirationInSeconds({
-        session: innloggetStatus.session.endsAt,
-        token: innloggetStatus.token.endsAt,
-    });
-
-    const isTokenExpiring = secondsToTokenExpires < 60 * 5;
-    const isSessionExpiring = secondsToSessionExpires < 60 * 5;
-
     const refreshTokenHandler = () => {
-        console.log('refreshTokenHandler');
+        fornyInnlogging(environment)(dispatch);
     };
 
     const logoutHandler = () => {
@@ -54,6 +47,17 @@ export const useLoginStatus = () => {
     useEffect(() => {
         window.addEventListener('visibilitychange', onVisibilityChange);
     }, []);
+
+    const { secondsToSessionExpires, secondsToTokenExpires } = getExpirationInSeconds({
+        session: innloggetStatus.session.endsAt,
+        token: innloggetStatus.token.endsAt,
+    });
+
+    console.log('session.endsAt:', innloggetStatus.session.endsAt);
+    console.log('token.endsAt:', innloggetStatus.token.endsAt);
+
+    const isTokenExpiring = secondsToTokenExpires < 60 * 5;
+    const isSessionExpiring = secondsToSessionExpires < 60 * 5;
 
     return { hasFocus, isTokenExpiring, isSessionExpiring, refreshTokenHandler, logoutHandler };
 };

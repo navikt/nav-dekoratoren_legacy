@@ -1,5 +1,9 @@
 import { fetchToJson } from './api-utils';
-import { Data as InnloggingsstatusData } from '../store/reducers/innloggingsstatus-duck';
+import {
+    InnloggingsstatusData as InnloggingsstatusData,
+    InnloggingsstatusState,
+    SessionData,
+} from '../store/reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from '../store/reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
 import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
@@ -24,19 +28,20 @@ export interface DataElement {
 
 export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => fetchToJson(`${APP_URL}/api/meny`);
 
-export const hentInnloggingsstatusFetch = (environment: Environment): Promise<InnloggingsstatusData> => {
-    const { API_DEKORATOREN_URL, SESSION_URL } = environment;
+export const hentInnloggingsstatusFetch = (environment: Environment): Promise<InnloggingsstatusData & SessionData> => {
+    const { API_DEKORATOREN_URL, SIDECAR_URL } = environment;
     console.log('hentInnloggingsstatusFetch');
     console.log(API_DEKORATOREN_URL);
 
     const innloggingsstatusResult: Promise<InnloggingsstatusData> = fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
         credentials: 'include',
     });
-    const sessionStatus: Promise<InnloggingsstatusData> = fetchToJson(`${SESSION_URL}`, {
+
+    const sessionStatus: Promise<SessionData> = fetchToJson(`${SIDECAR_URL}/session`, {
         credentials: 'include',
     });
 
-    const all: Promise<InnloggingsstatusData> = Promise.all<any>([innloggingsstatusResult, sessionStatus])
+    const all: Promise<InnloggingsstatusData & SessionData> = Promise.all<any>([innloggingsstatusResult, sessionStatus])
         .then((values) => {
             const [innloggingsstatus, { session, tokens }] = values;
             return {
@@ -59,6 +64,27 @@ export const hentInnloggingsstatusFetch = (environment: Environment): Promise<In
         });
 
     return all;
+};
+
+export const fornyInnloggingFetch = (environment: Environment): Promise<SessionData> => {
+    const { SIDECAR_URL } = environment;
+    return fetchToJson(`${SIDECAR_URL}/session/refresh`, {
+        credentials: 'include',
+    }).then((values: any) => {
+        return {
+            session: {
+                createdAt: values.created_at,
+                endsAt: values.ends_at,
+                timeoutAt: values.timeout_at,
+                isActive: values.active,
+            },
+            token: {
+                endsAt: values.expire_at,
+                refreshedAt: values.refreshed_at,
+                isRefreshCooldown: values.refresh_cooldown,
+            },
+        };
+    });
 };
 
 export const hentVarslerFetch = (API_DEKORATOREN_URL: string): Promise<varselinnboksData> => {

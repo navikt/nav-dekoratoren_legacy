@@ -24,8 +24,8 @@ env:
     value: https://www.nav.no/minside/
   - name: LOGIN_URL
     value: https://login.nav.no/oauth2/login
-  - name: SESSION_URL
-    value: https://login.nav.no/oauth2/session
+  - name: SIDECAR_URL
+    value: https://login.nav.no/oauth2
   - name: LOGOUT_URL
     value: https://login.nav.no/oauth2/logout
 replicas:

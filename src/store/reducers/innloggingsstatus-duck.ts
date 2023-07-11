@@ -11,13 +11,16 @@ import { formaterFodselsnummer } from '../../utils/string-format';
 import { Environment } from './environment-duck';
 
 export interface InnloggingsstatusState extends DataElement {
-    data: Data;
+    data: InnloggingsstatusData & SessionData;
 }
 
-export interface Data {
+export interface InnloggingsstatusData {
     authenticated: boolean;
     name: string;
     securityLevel: string;
+}
+
+export interface SessionData {
     session: {
         createdAt: string | null;
         endsAt: string | null;
@@ -25,7 +28,6 @@ export interface Data {
         isActive: boolean;
     };
     token: {
-        createdAt: string | null;
         endsAt: string | null;
         refreshedAt: string | null;
         isRefreshCooldown: boolean;
@@ -44,7 +46,6 @@ const initialState: InnloggingsstatusState = {
             isActive: false,
         },
         token: {
-            createdAt: null,
             endsAt: null,
             refreshedAt: null,
             isRefreshCooldown: false,
@@ -80,14 +81,14 @@ export default function reducer(
 }
 
 export function hentInnloggingsstatus(environment: Environment): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Data>(() => hentInnloggingsstatusFetch(environment), {
+    return fetchThenDispatch<InnloggingsstatusData & SessionData>(() => hentInnloggingsstatusFetch(environment), {
         ok: hentInnloggingsstatusOk,
         feilet: hentnnloggingsstatusFeilet,
         pending: hentnnloggingsstatusPending,
     });
 }
 
-export function hentInnloggingsstatusOk(data: Data): HentInnloggingsstatusOKAction {
+export function hentInnloggingsstatusOk(data: InnloggingsstatusData & SessionData): HentInnloggingsstatusOKAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
         data: data,

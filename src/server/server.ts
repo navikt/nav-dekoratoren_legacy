@@ -15,6 +15,7 @@ import { getCSP } from 'csp-header';
 import { cspDirectives } from '../csp';
 import { getCspHandler } from './api-handlers/csp';
 import { getTaskAnalyticsConfigHandler } from './api-handlers/ta';
+import { getRefreshHandler } from './api-handlers/refresh';
 
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
@@ -122,6 +123,7 @@ app.get(createPaths('/api/meny'), getMenuHandler);
 app.get(createPaths('/api/sok'), getSokHandler);
 app.get(createPaths('/api/driftsmeldinger'), getDriftsmeldingerHandler);
 app.get(createPaths('/api/session'), getSessionHandler);
+app.get(createPaths('/api/session/refresh'), getRefreshHandler);
 app.get(createPaths('/api/csp'), getCspHandler);
 app.get(createPaths('/api/ta'), getTaskAnalyticsConfigHandler);
 

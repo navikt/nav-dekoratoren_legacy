@@ -1,4 +1,4 @@
-import { Data as innloggingsstatusData } from './reducers/innloggingsstatus-duck';
+import { SessionData, InnloggingsstatusData } from './reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from './reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from './reducers/menu-duck';
 import { DriftsmeldingerData } from './reducers/driftsmeldinger-duck';
@@ -9,6 +9,9 @@ export enum ActionType {
     HENT_INNLOGGINGSSTATUS_OK = 'HENT_INNLOGGINGSSTATUS_OK',
     HENT_INNLOGGINGSSTATUS_FEILET = 'HENT_INNLOGGINGSSTATUS_FEILET',
     HENT_INNLOGGINGSSTATUS_PENDING = 'HENT_INNLOGGINGSSTATUS_PENDING',
+    FORNY_INNLOGGING_OK = 'FORNY_INNLOGGING_OK',
+    FORNY_INNLOGGING_FEILET = 'FORNY_INNLOGGING_FEILET',
+    FORNY_INNLOGGING_PENDING = 'FORNY_INNLOGGING_PENDING',
     HENT_MENY_OK = 'HENT_MENY_OK',
     HENT_MENY_FEILET = 'HENT_MENY_FEILET',
     HENT_MENY_PENDING = 'HENT_MENY_PENDING',
@@ -40,7 +43,7 @@ export enum ActionType {
 
 export interface HentInnloggingsstatusOKAction {
     type: ActionType.HENT_INNLOGGINGSSTATUS_OK;
-    data: innloggingsstatusData;
+    data: InnloggingsstatusData & SessionData;
 }
 
 export interface HentInnloggingsstatusPENDINGAction {
@@ -49,6 +52,18 @@ export interface HentInnloggingsstatusPENDINGAction {
 
 export interface HentInnloggingsstatusFEILETAction {
     type: ActionType.HENT_INNLOGGINGSSTATUS_FEILET;
+}
+export interface FornyInnloggingOKAction {
+    type: ActionType.FORNY_INNLOGGING_OK;
+    data: SessionData;
+}
+
+export interface FornyInnloggingPENDINGAction {
+    type: ActionType.FORNY_INNLOGGING_PENDING;
+}
+
+export interface FornyInnloggingFEILETAction {
+    type: ActionType.FORNY_INNLOGGING_FEILET;
 }
 
 export interface HentMenyLenkerSUCCESS {
@@ -166,6 +181,9 @@ export type Handling =
     | HentInnloggingsstatusOKAction
     | HentInnloggingsstatusFEILETAction
     | HentInnloggingsstatusPENDINGAction
+    | FornyInnloggingOKAction
+    | FornyInnloggingFEILETAction
+    | FornyInnloggingPENDINGAction
     | HentMenyLenkerSUCCESS
     | HentMenyLenkerFAILED
     | HentMenyLenkerPENDING
