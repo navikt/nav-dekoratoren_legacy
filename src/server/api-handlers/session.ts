@@ -1,9 +1,11 @@
 import { RequestHandler } from 'express';
 
+const MOCK_SECONDS_TO_EXPIRY = 120;
+
 const createMockSession = () => {
     const now = new Date();
     const sessionExpires = new Date(now.getTime() + 60 * 60 * 1000 * 6);
-    const tokenExpires = new Date(now.getTime() + 60 * 60 * 1000);
+    const tokenExpires = new Date(now.getTime() + MOCK_SECONDS_TO_EXPIRY * 1000);
 
     return {
         session: {
@@ -19,7 +21,6 @@ const createMockSession = () => {
             refreshed_at: now.toISOString(),
             expire_in_seconds: Math.round((tokenExpires.getTime() - now.getTime()) / 1000),
             next_auto_refresh_in_seconds: Math.round((tokenExpires.getTime() - now.getTime()) / 1000),
-            endsAt: tokenExpires.toISOString(),
             refresh_cooldown: false,
             refresh_cooldown_seconds: 0,
         },

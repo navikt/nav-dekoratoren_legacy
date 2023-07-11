@@ -1,29 +1,32 @@
-import { BodyLong, Heading, Modal } from '@navikt/ds-react';
+import { BodyLong, Button, Heading, Modal } from '@navikt/ds-react';
 import React, { useEffect } from 'react';
 import { useLoginStatus } from 'utils/hooks/useLoginStatus';
+import { finnTekst } from 'tekster/finn-tekst';
+
+import styles from './LogoutWarning.module.scss';
+import classNames from 'classnames';
+import { Locale } from 'store/reducers/language-duck';
+import { useSelector } from 'react-redux';
+import { AppState } from 'store/reducers';
 
 export const LogoutWarning = () => {
-    const { loginStatus, isTokenExpiring, isSessionExpiring } = useLoginStatus();
+    const { refreshTokenHandler, logoutHandler, isTokenExpiring, isSessionExpiring } = useLoginStatus();
+    const [isVisible, setIsVisible] = React.useState(false);
+    const { language } = useSelector((state: AppState) => state.language);
+
+    useEffect(() => {
+        setIsVisible(true);
+    }, []);
 
     const onCloseHandler = () => {
         console.log('close');
     };
 
-    const checkForLogoutAndWait = () => {
-        // console.log('checking for logout');
+    if (!isTokenExpiring && !isSessionExpiring) {
+        return null;
+    }
 
-        setTimeout(() => {
-            checkForLogoutAndWait();
-        }, 1000);
-    };
-
-    console.log(loginStatus);
-
-    useEffect(() => {
-        checkForLogoutAndWait();
-    }, []);
-
-    if (!(isTokenExpiring && isSessionExpiring)) {
+    if (typeof document === 'undefined') {
         return null;
     }
 
@@ -34,21 +37,22 @@ export const LogoutWarning = () => {
             open={true}
             onClose={onCloseHandler}
             closeButton={false}
+            shouldCloseOnOverlayClick={false}
+            shouldCloseOnEsc={false}
+            className={classNames(styles.logoutWarning, isVisible && styles.visible)}
             parentSelector={parent ? () => parent : undefined}
         >
             <Modal.Content>
-                <Heading spacing level="1" size="large" id="modal-heading">
-                    Laborum proident id ullamco
+                <Heading spacing level="1" size="small">
+                    {finnTekst('snart-logget-ut-tittel', language)}
                 </Heading>
-                <Heading spacing level="2" size="medium">
-                    Excepteur labore nostrud incididunt exercitation.
-                </Heading>
-                <BodyLong spacing>
-                    Culpa aliquip ut cupidatat laborum minim quis ex in aliqua. Qui incididunt dolor do ad ut.
-                    Incididunt eiusmod nostrud deserunt duis laborum. Proident aute culpa qui nostrud velit adipisicing
-                    minim. Consequat aliqua aute dolor do sit Lorem nisi mollit velit. Aliqua exercitation non minim
-                    minim pariatur sunt laborum ipsum. Exercitation nostrud est laborum magna non non aliqua qui esse.
-                </BodyLong>
+                <BodyLong spacing>{finnTekst('snart-logget-ut-body', language)}</BodyLong>
+                <Button className={styles.confirm} onClick={refreshTokenHandler}>
+                    {finnTekst('svarknapp-ja', language)}
+                </Button>
+                <Button className={styles.logout} onClick={logoutHandler} variant="tertiary">
+                    {finnTekst('logg-ut-knapp', language)}
+                </Button>
             </Modal.Content>
         </Modal>
     );
