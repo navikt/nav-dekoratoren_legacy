@@ -84,6 +84,7 @@ export const template = (req: Request) => {
             <meta name='description' content='Felles header og footer for nav.no' />
             <meta charset='utf-8' />
             <meta name='robots' content='noindex, nofollow' />
+            <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no'>
             <!-- Decorator development styling -->
             <!-- Hide decorator-utils-container to prevent content spoofing attacks via the breadcrumbs parameter -->
             <style>
