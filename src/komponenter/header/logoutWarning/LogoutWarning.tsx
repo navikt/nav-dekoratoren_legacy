@@ -41,17 +41,19 @@ export const LogoutWarning = () => {
             className={classNames(styles.logoutWarning, isVisible && styles.visible)}
             parentSelector={parent ? () => parent : undefined}
         >
-            <Modal.Content>
+            <Modal.Content className={styles.content}>
                 <Heading spacing level="1" size="small">
                     {finnTekst('snart-logget-ut-tittel', language)}
                 </Heading>
                 <BodyLong spacing>{finnTekst('snart-logget-ut-body', language)}</BodyLong>
-                <Button className={styles.confirm} onClick={refreshTokenHandler}>
-                    {finnTekst('svarknapp-ja', language)}
-                </Button>
-                <Button className={styles.logout} onClick={logoutHandler} variant="tertiary">
-                    {finnTekst('logg-ut-knapp', language)}
-                </Button>
+                <div className={styles.buttonWrapper}>
+                    <Button className={styles.confirm} onClick={refreshTokenHandler}>
+                        {finnTekst('svarknapp-ja', language)}
+                    </Button>
+                    <Button className={styles.logout} onClick={logoutHandler} variant="tertiary">
+                        {finnTekst('logg-ut-knapp', language)}
+                    </Button>
+                </div>
             </Modal.Content>
         </Modal>
     );
