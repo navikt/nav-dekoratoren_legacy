@@ -122,6 +122,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | shareScreen        | boolean                                                | true             | Aktiverer eller deaktiverer skjermdelingskomponent                             |
 | logoutUrl          | string                                                 | undefined        | Setter url for logg-ut knappen [9]                                             |
 | maskHotjar         | boolean                                                | true             | Maskerer hele HTML-dokumentet fra Hotjar [10]                                  |
+| logoutWarning      | boolean                                                | false            | Beta-versjon: Viser utloggingsvarsel [11]                                      |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
@@ -136,6 +137,7 @@ Dersom du oppgir `handleInApp`, så må du selv håndtere feks route change i ap
 [10] Setter `data-hj-suppress` på HTML-elementet, som hindrer Hotjar fra å fange noe innhold på siden. Default er `true`, dersom denne settes til `false` må appen selv sørge for at elementer med
 personinfo eller annen sensitiv data maskeres på tilsvarende måte. Se [hotjar docs](https://help.hotjar.com/hc/en-us/articles/115012439167-How-to-Suppress-Text-Images-and-User-Input-from-Collected-Data).
 Dekoratørens egne sensitive elementer maskeres uavhengig av dette parameteret. Denne kan **ikke** endres client-side.
+[11] Felles funksjonalitet for utloggingsvarsel hvor brukeren også har mulighet til å fornye innloggingen med én time av gangen. Les med om utloggingsvarsel i seksjonen lenger ned.
 
 Dersom ikke noe annet er nevnt, kan samtlige parametre settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 
@@ -200,6 +202,14 @@ Eksempel:
 ```html
 <main id="maincontent" tabindex="-1">Appens hovedinnhold goes here!</main>
 ```
+
+## Utloggingsvarsel
+
+Med Wonderwall/Sidecar er en innlogging (token) gyldig i 60 minutter. 5 minutter før utløp vil bruker se varsel i form av en popup-dialog. I dette varselet vil brukeren kunne velge å fortsette å være innlogget (fornying) eller logge ut umiddelbart.
+Hvis brukeren velger å være innlogget vil tokenet bli fornyet med nye 60 minutter. Hvis brukeren ikke foretar seg noe, feks har forlatt maskinen slik at varselet blir stående, vil nettleseren automatisk bli videresendt til utloggingsvinduet når token har utløpt.
+
+Tokenet kan fornyes med intervaller på 60 minutter innenfor et totalt vindu på 6 timer. Dette er grensen for hele session som er satt av Wonderwall/Sidecar.
+Når vinduet på 6 timer nærmer seg slutt vil brukeren få beskjed om å avslutte og logge inn på nytt for å få en ny session med nye 6 timers levetid. Merk at det i hovedsak er arbeidsgivere og liknende som vil være innlogget i så lenge som 6 timer.
 
 ## Utvikling - Kom i gang
 

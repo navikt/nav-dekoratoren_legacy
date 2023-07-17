@@ -1,5 +1,5 @@
 import { get } from 'http';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { fornyInnlogging } from 'store/reducers/forny-innlogging-duck';
@@ -11,13 +11,28 @@ const stateSelector = (state: AppState) => ({
     environment: state.environment,
 });
 
+enum TokenState {
+    LOGGED_IN,
+    EXPIRING,
+    LOGGED_OUT,
+}
+
+let checkTokenTimeout: NodeJS.Timeout | null = null;
+
 export const useLoginStatus = () => {
+    const dispatch = useDispatch();
     const [hasFocus, setHasFocus] = useState(false);
     const { innloggetStatus, environment } = useSelector(stateSelector);
-    const dispatch = useDispatch();
+    const [isTokenExpiring, setIsTokenExpiring] = useState<boolean | null>(null);
+    const [isSessionExpiring, setIsSessionExpiring] = useState<boolean | null>(null);
+
+    // Need to create a ref in order for the setTimeout function to
+    // get access to the updated value of innloggetStatus.
+    const innloggetStatusRef = useRef(innloggetStatus);
+    innloggetStatusRef.current = innloggetStatus;
 
     const getExpirationInSeconds = ({ session, token }: { session: string | null; token: string | null }) => {
-        if (!session || !token) return { secondsToTokenExpires: 0, secondsToSessionExpires: 0 };
+        if (!session || !token) return { secondsToTokenExpires: null, secondsToSessionExpires: null };
 
         const now = new Date();
         const sessionExpires = new Date(session);
@@ -27,6 +42,30 @@ export const useLoginStatus = () => {
             secondsToTokenExpires: Math.round((tokenExpires.getTime() - now.getTime()) / 1000),
             secondsToSessionExpires: Math.round((sessionExpires.getTime() - now.getTime()) / 1000),
         };
+    };
+
+    const checkTokenAndRepeat = () => {
+        checkTokenTimeout && clearTimeout(checkTokenTimeout);
+        checkTokenTimeout = setTimeout(() => {
+            checkTokenAndRepeat();
+        }, 5000);
+
+        const _innloggetStatus = innloggetStatusRef.current;
+        const { secondsToTokenExpires, secondsToSessionExpires } = getExpirationInSeconds({
+            session: _innloggetStatus.session.endsAt,
+            token: _innloggetStatus.token.endsAt,
+        });
+
+        if (secondsToSessionExpires === null || secondsToTokenExpires === null) {
+            return;
+        }
+
+        if (secondsToTokenExpires <= 0 || secondsToSessionExpires <= 0) {
+            window.location.href = getLogOutUrl(environment);
+        }
+
+        setIsTokenExpiring(secondsToTokenExpires < 60 * 5);
+        setIsSessionExpiring(secondsToSessionExpires < 60 * 5);
     };
 
     const refreshTokenHandler = () => {
@@ -39,25 +78,16 @@ export const useLoginStatus = () => {
 
     const onVisibilityChange = () => {
         if (document.visibilityState === 'visible') {
+            checkTokenAndRepeat();
             hentInnloggingsstatus(environment)(dispatch);
         }
         setHasFocus(document.visibilityState === 'visible');
     };
 
     useEffect(() => {
+        checkTokenAndRepeat();
         window.addEventListener('visibilitychange', onVisibilityChange);
     }, []);
-
-    const { secondsToSessionExpires, secondsToTokenExpires } = getExpirationInSeconds({
-        session: innloggetStatus.session.endsAt,
-        token: innloggetStatus.token.endsAt,
-    });
-
-    console.log('session.endsAt:', innloggetStatus.session.endsAt);
-    console.log('token.endsAt:', innloggetStatus.token.endsAt);
-
-    const isTokenExpiring = secondsToTokenExpires < 60 * 5;
-    const isSessionExpiring = secondsToSessionExpires < 60 * 5;
 
     return { hasFocus, isTokenExpiring, isSessionExpiring, refreshTokenHandler, logoutHandler };
 };

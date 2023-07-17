@@ -5,7 +5,6 @@ import { finnTekst } from 'tekster/finn-tekst';
 
 import styles from './LogoutWarning.module.scss';
 import classNames from 'classnames';
-import { Locale } from 'store/reducers/language-duck';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 

@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 
-const MOCK_SECONDS_TO_EXPIRY = 120;
+const MOCK_SECONDS_TO_EXPIRY = 60 * 6;
 
 const createMockSession = () => {
     const now = new Date();

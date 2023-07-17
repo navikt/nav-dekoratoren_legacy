@@ -66,6 +66,8 @@ export default function reducer(
                 action.data.name = formaterFodselsnummer(action.data.name);
             }
 
+            console.log(action.data);
+
             return { ...state, status: Status.OK, data: action.data };
         }
         case ActionType.HENT_INNLOGGINGSSTATUS_PENDING:
