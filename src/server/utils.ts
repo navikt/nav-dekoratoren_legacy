@@ -41,6 +41,7 @@ export const clientEnv = ({ req }: Props): Environment => {
         LOGIN_URL: process.env.LOGIN_URL as string,
         SIDECAR_URL: process.env.SIDECAR_URL as string,
         LOGOUT_URL: process.env.LOGOUT_URL as string,
+        VARSEL_API_URL: process.env.VARSEL_API_URL as string,
         ...(req.query && {
             PARAMS: {
                 CONTEXT: chosenContext,
@@ -50,6 +51,7 @@ export const clientEnv = ({ req }: Props): Environment => {
                 ENFORCE_LOGIN: req.query.enforceLogin === 'true',
                 REDIRECT_TO_APP: req.query.redirectToApp === 'true',
                 REDIRECT_TO_URL: req.query.redirectToUrl as string,
+                REDIRECT_TO_URL_LOGOUT: req.query.redirectToUrlLogout as string,
                 LEVEL: (req.query.level || 'Level3') as string,
                 LANGUAGE: chosenLanguage,
                 ...(req.query.availableLanguages && {

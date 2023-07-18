@@ -19,6 +19,7 @@ export interface Environment {
     CASETYPE_ID: string;
     SOLUTION_ID: string;
     NAV_GROUP_ID: string;
+    VARSEL_API_URL: string;
 
     // Parameters
     PARAMS: Params;
@@ -32,6 +33,7 @@ export interface Params {
     ENFORCE_LOGIN: boolean;
     REDIRECT_TO_APP: boolean;
     REDIRECT_TO_URL?: string;
+    REDIRECT_TO_URL_LOGOUT?: string;
     LEVEL: string;
     LANGUAGE: Locale;
     AVAILABLE_LANGUAGES?: AvailableLanguage[];
@@ -68,6 +70,7 @@ export const initialState: Environment = {
     CASETYPE_ID: '',
     SOLUTION_ID: '',
     NAV_GROUP_ID: '',
+    VARSEL_API_URL:'',
 
     // Parameters
     PARAMS: {

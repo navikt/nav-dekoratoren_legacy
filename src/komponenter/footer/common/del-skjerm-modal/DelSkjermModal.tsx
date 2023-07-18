@@ -1,11 +1,14 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Alert, BodyLong, Button, Heading, ReadMore, TextField, Modal } from '@navikt/ds-react';
+import React, { ChangeEvent, useState } from 'react';
+import { Alert, BodyLong, Button, Heading, ReadMore, TextField, Modal, Loader } from '@navikt/ds-react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import Tekst, { finnTekst } from 'tekster/finn-tekst';
 import { Bilde } from 'komponenter/common/bilde/Bilde';
 import style from './DelSkjermModal.module.scss';
+import { checkVergic } from '../vergic';
+import { selectFeatureToggles } from 'store/selectors';
 import { LangKey } from 'tekster/ledetekster';
+import { useScreenSharing } from 'utils/hooks';
 
 const veileder = require('ikoner/del-skjerm/Veileder.svg');
 interface Props {
@@ -22,28 +25,23 @@ const DelSkjermModal = (props: Props) => {
     const { CASETYPE_ID } = useSelector((state: AppState) => state.environment);
     const { SOLUTION_ID } = useSelector((state: AppState) => state.environment);
     const { NAV_GROUP_ID } = useSelector((state: AppState) => state.environment);
+    const featureToggles = useSelector(selectFeatureToggles);
 
     // State
     const [code, setCode] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(feilmelding);
 
-    // Vergic config
-    const w = window as any;
-    const vergicExists = typeof w !== 'undefined' && w.vngage;
+    const isOpen = featureToggles['dekoratoren.skjermdeling'];
 
-    useEffect(() => {
-        if (vergicExists) {
-            setIsOpen(w.vngage.get('queuestatus', NAV_GROUP_ID));
-        }
-    }, []);
+    const { isLoading, isSuccess } = useScreenSharing({
+        enabled: isOpen,
+    });
 
     const onClick = () => {
         setSubmitted(true);
-
-        if (vergicExists && !error) {
-            w.vngage.join('queue', {
+        if (!error && checkVergic(window.vngage)) {
+            window.vngage.join('queue', {
                 opportunityId: OPPORTUNITY_ID,
                 solutionId: SOLUTION_ID,
                 caseTypeId: CASETYPE_ID,
@@ -100,7 +98,8 @@ const DelSkjermModal = (props: Props) => {
                         </ul>
                     </ReadMore>
                 </div>
-                {isOpen ? (
+                {isLoading && <Loader size="large" />}
+                {isOpen && isSuccess && (
                     <>
                         <TextField
                             name={'code'}
@@ -119,7 +118,8 @@ const DelSkjermModal = (props: Props) => {
                             </Button>
                         </div>
                     </>
-                ) : (
+                )}
+                {!isOpen && !isLoading && (
                     <Alert variant="error">
                         <Tekst id={'delskjerm-modal-stengt'} />
                     </Alert>

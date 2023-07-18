@@ -83,12 +83,12 @@ export const fornyInnloggingFetch = (environment: Environment): Promise<SessionD
     });
 };
 
-export const hentVarslerFetch = (API_DEKORATOREN_URL: string): Promise<varselinnboksData> => {
-    return fetchToJson(`${API_DEKORATOREN_URL}/varsel/proxy/varsel`, { credentials: 'include' });
+export const hentVarslerFetch = (VARSEL_API_URL: string): Promise<varselinnboksData> => {
+    return fetchToJson(`${VARSEL_API_URL}/varselbjelle/varsler`, { credentials: 'include' });
 };
 
-export const postDone = (API_DEKORATOREN_URL: string, eventId: DoneEvent) =>
-    fetch(`${API_DEKORATOREN_URL}/varsel/beskjed/done`, {
+export const postInaktiver = (VARSEL_API_URL: string, eventId: DoneEvent) =>
+    fetch(`${VARSEL_API_URL}/beskjed/inaktiver`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(eventId),
