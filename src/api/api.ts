@@ -69,15 +69,15 @@ export const fornyInnloggingFetch = (environment: Environment): Promise<SessionD
     }).then((values: any) => {
         return {
             session: {
-                createdAt: values.created_at,
-                endsAt: values.ends_at,
-                timeoutAt: values.timeout_at,
-                isActive: values.active,
+                createdAt: values.session.created_at,
+                endsAt: values.session.ends_at,
+                timeoutAt: values.session.timeout_at,
+                isActive: values.session.active,
             },
             token: {
-                endsAt: values.expire_at,
-                refreshedAt: values.refreshed_at,
-                isRefreshCooldown: values.refresh_cooldown,
+                endsAt: values.tokens.expire_at,
+                refreshedAt: values.tokens.refreshed_at,
+                isRefreshCooldown: values.tokens.refresh_cooldown,
             },
         };
     });

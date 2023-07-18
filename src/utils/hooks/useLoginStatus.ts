@@ -16,7 +16,7 @@ enum TokenState {
     LOGGED_OUT,
 }
 
-let checkTokenTimeout: NodeJS.Timeout | null = null;
+let timeoutId: NodeJS.Timeout | null = null;
 
 export const useLoginStatus = () => {
     const dispatch = useDispatch();
@@ -43,11 +43,11 @@ export const useLoginStatus = () => {
         };
     };
 
-    const checkTokenAndRepeat = () => {
-        checkTokenTimeout && clearTimeout(checkTokenTimeout);
-        checkTokenTimeout = setTimeout(() => {
-            checkTokenAndRepeat();
-        }, 5000);
+    const checkLoginAndRepeat = () => {
+        timeoutId && clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            checkLoginAndRepeat();
+        }, 1000);
 
         const _innloggetStatus = innloggetStatusRef.current;
         const { secondsToTokenExpires, secondsToSessionExpires } = getExpirationInSeconds({
@@ -77,14 +77,14 @@ export const useLoginStatus = () => {
 
     const onVisibilityChange = () => {
         if (document.visibilityState === 'visible') {
-            checkTokenAndRepeat();
+            checkLoginAndRepeat();
             hentInnloggingsstatus(environment)(dispatch);
         }
         setHasFocus(document.visibilityState === 'visible');
     };
 
     useEffect(() => {
-        checkTokenAndRepeat();
+        checkLoginAndRepeat();
         window.addEventListener('visibilitychange', onVisibilityChange);
     }, []);
 
