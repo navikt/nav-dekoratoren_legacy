@@ -39,7 +39,6 @@ describe('<LoggInnKnapp />', () => {
                         isActive: false,
                     },
                     token: {
-                        createdAt: null,
                         endsAt: null,
                         refreshedAt: null,
                         isRefreshCooldown: false,
