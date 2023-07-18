@@ -2,8 +2,7 @@ import { get } from 'http';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from 'store/reducers';
-import { fornyInnlogging } from 'store/reducers/forny-innlogging-duck';
-import { hentInnloggingsstatus } from 'store/reducers/innloggingsstatus-duck';
+import { hentInnloggingsstatus, fornyInnlogging } from 'store/reducers/innloggingsstatus-duck';
 import { getLogOutUrl } from 'utils/login';
 
 const stateSelector = (state: AppState) => ({

@@ -1,9 +1,5 @@
 import { fetchToJson } from './api-utils';
-import {
-    InnloggingsstatusData as InnloggingsstatusData,
-    InnloggingsstatusState,
-    SessionData,
-} from '../store/reducers/innloggingsstatus-duck';
+import { InnloggingsstatusData as InnloggingsstatusData, SessionData } from '../store/reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from '../store/reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
 import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';

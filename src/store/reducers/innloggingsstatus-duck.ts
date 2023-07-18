@@ -1,11 +1,16 @@
-import { ActionType } from 'store/actions';
+import {
+    ActionType,
+    FornyInnloggingFEILETAction,
+    FornyInnloggingOKAction,
+    FornyInnloggingPENDINGAction,
+} from 'store/actions';
 import { Handling } from 'store/actions';
 import { HentInnloggingsstatusPENDINGAction } from 'store/actions';
 import { HentInnloggingsstatusOKAction } from 'store/actions';
 import { HentInnloggingsstatusFEILETAction } from 'store/actions';
 import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
-import { hentInnloggingsstatusFetch } from 'api/api';
+import { fornyInnloggingFetch, hentInnloggingsstatusFetch } from 'api/api';
 import { DataElement, Status } from 'api/api';
 import { formaterFodselsnummer } from '../../utils/string-format';
 import { Environment } from './environment-duck';
@@ -66,9 +71,12 @@ export default function reducer(
                 action.data.name = formaterFodselsnummer(action.data.name);
             }
 
-            console.log(action.data);
-
             return { ...state, status: Status.OK, data: action.data };
+        }
+        case ActionType.FORNY_INNLOGGING_OK: {
+            console.log('FORNY_INNLOGGING', action.data);
+
+            return { ...state };
         }
         case ActionType.HENT_INNLOGGINGSSTATUS_PENDING:
             if (state.status === Status.OK) {
@@ -82,14 +90,26 @@ export default function reducer(
     }
 }
 
+// Thunks
+// ------------------------------------------------------------------------------
 export function hentInnloggingsstatus(environment: Environment): (dispatch: Dispatch) => Promise<void> {
     return fetchThenDispatch<InnloggingsstatusData & SessionData>(() => hentInnloggingsstatusFetch(environment), {
         ok: hentInnloggingsstatusOk,
-        feilet: hentnnloggingsstatusFeilet,
+        feilet: hentInnloggingsstatusFeilet,
         pending: hentnnloggingsstatusPending,
     });
 }
 
+export function fornyInnlogging(environment: Environment): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<SessionData>(() => fornyInnloggingFetch(environment), {
+        ok: fornyInnloggingOK,
+        feilet: fornyInnloggingFeilet,
+        pending: fornyInnloggingPending,
+    });
+}
+
+// Action Creators
+// ------------------------------------------------------------------------------
 export function hentInnloggingsstatusOk(data: InnloggingsstatusData & SessionData): HentInnloggingsstatusOKAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
@@ -97,7 +117,7 @@ export function hentInnloggingsstatusOk(data: InnloggingsstatusData & SessionDat
     };
 }
 
-export function hentnnloggingsstatusFeilet(): HentInnloggingsstatusFEILETAction {
+export function hentInnloggingsstatusFeilet(): HentInnloggingsstatusFEILETAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_FEILET,
     };
@@ -106,5 +126,24 @@ export function hentnnloggingsstatusFeilet(): HentInnloggingsstatusFEILETAction 
 export function hentnnloggingsstatusPending(): HentInnloggingsstatusPENDINGAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_PENDING,
+    };
+}
+
+export function fornyInnloggingOK(data: SessionData): FornyInnloggingOKAction {
+    return {
+        type: ActionType.FORNY_INNLOGGING_OK,
+        data: data,
+    };
+}
+
+export function fornyInnloggingFeilet(): FornyInnloggingFEILETAction {
+    return {
+        type: ActionType.FORNY_INNLOGGING_FEILET,
+    };
+}
+
+export function fornyInnloggingPending(): FornyInnloggingPENDINGAction {
+    return {
+        type: ActionType.FORNY_INNLOGGING_PENDING,
     };
 }

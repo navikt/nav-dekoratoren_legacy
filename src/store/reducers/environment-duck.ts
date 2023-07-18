@@ -14,7 +14,6 @@ export interface Environment {
     MIN_SIDE_URL: string;
     LOGIN_URL: string;
     SIDECAR_URL: string;
-    SESSION_REFRESH_URL: string;
     LOGOUT_URL: string;
     OPPORTUNITY_ID: string;
     CASETYPE_ID: string;
@@ -45,6 +44,7 @@ export interface Params {
     UTILS_BACKGROUND?: string;
     LOGOUT_URL?: string;
     MASK_HOTJAR?: boolean;
+    LOGOUT_WARNING: boolean;
 }
 
 export interface Cookies {
@@ -63,7 +63,6 @@ export const initialState: Environment = {
     MIN_SIDE_URL: '',
     LOGIN_URL: '',
     SIDECAR_URL: '',
-    SESSION_REFRESH_URL: '',
     LOGOUT_URL: '',
     OPPORTUNITY_ID: '',
     CASETYPE_ID: '',
@@ -86,6 +85,7 @@ export const initialState: Environment = {
         URL_LOOKUP_TABLE: false,
         SHARE_SCREEN: false,
         MASK_HOTJAR: true,
+        LOGOUT_WARNING: false,
     },
 };
 

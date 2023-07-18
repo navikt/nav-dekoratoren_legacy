@@ -9,7 +9,7 @@
     justify-content: center;
     opacity: 0;
     transition: all 0.3s ease-in-out;
-    transform: translateY(40px);
+    transform: translateY(0);
 
     &:focus {
         box-shadow: var(--a-shadow-large);
@@ -19,7 +19,6 @@
         width: 100%;
         align-self: flex-end;
         border-radius: var(--a-border-radius-xlarge);
-        transform: translateY(2rem);
         padding-bottom: 3rem;
     }
 }
