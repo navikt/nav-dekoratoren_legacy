@@ -7,18 +7,25 @@ import styles from './LogoutWarning.module.scss';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { LangKey } from 'tekster/ledetekster';
 
 export const LogoutWarning = () => {
     const { refreshTokenHandler, logoutHandler, isTokenExpiring, isSessionExpiring } = useLoginStatus();
-    const [isVisible, setIsVisible] = React.useState(false);
+    const [isOpen, setIsOpen] = React.useState(false);
     const { language } = useSelector((state: AppState) => state.language);
 
     useEffect(() => {
-        setIsVisible(true);
+        setIsOpen(true);
     }, []);
 
+    useEffect(() => {
+        if (isTokenExpiring || isSessionExpiring) {
+            setIsOpen(true);
+        }
+    }, [isTokenExpiring, isSessionExpiring]);
+
     const onCloseHandler = () => {
-        console.log('close');
+        setIsOpen(false);
     };
 
     if (!isTokenExpiring && !isSessionExpiring) {
@@ -31,25 +38,34 @@ export const LogoutWarning = () => {
 
     const parent = document.getElementById('top-element');
 
+    const textBodyId: LangKey = isSessionExpiring ? 'snart-session-logget-ut-body' : 'snart-token-logget-ut-body';
+
     return (
         <Modal
-            open={true}
+            open={isOpen}
             onClose={onCloseHandler}
             closeButton={false}
             shouldCloseOnOverlayClick={false}
             shouldCloseOnEsc={false}
-            className={classNames(styles.logoutWarning, isVisible && styles.visible)}
+            className={classNames(styles.logoutWarning, isOpen && styles.visible)}
             parentSelector={parent ? () => parent : undefined}
         >
             <Modal.Content className={styles.content}>
                 <Heading spacing level="1" size="small">
                     {finnTekst('snart-logget-ut-tittel', language)}
                 </Heading>
-                <BodyLong spacing>{finnTekst('snart-logget-ut-body', language)}</BodyLong>
+                <BodyLong spacing>{finnTekst(textBodyId, language)}</BodyLong>
                 <div className={styles.buttonWrapper}>
-                    <Button className={styles.confirm} onClick={refreshTokenHandler}>
-                        {finnTekst('svarknapp-ja', language)}
-                    </Button>
+                    {isSessionExpiring && (
+                        <Button className={styles.confirm} onClick={onCloseHandler}>
+                            {finnTekst('ok', language)}
+                        </Button>
+                    )}
+                    {!isSessionExpiring && isTokenExpiring && (
+                        <Button className={styles.confirm} onClick={refreshTokenHandler}>
+                            {finnTekst('svarknapp-ja', language)}
+                        </Button>
+                    )}
                     <Button className={styles.logout} onClick={logoutHandler} variant="tertiary">
                         {finnTekst('logg-ut-knapp', language)}
                     </Button>

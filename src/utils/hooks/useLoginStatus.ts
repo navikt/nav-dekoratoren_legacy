@@ -65,6 +65,10 @@ export const useLoginStatus = () => {
 
         setIsTokenExpiring(secondsToTokenExpires < 60 * 5);
         setIsSessionExpiring(secondsToSessionExpires < 60 * 5);
+
+        if (secondsToTokenExpires < 0 || secondsToSessionExpires < 0) {
+            window.location.href = getLogOutUrl(environment);
+        }
     };
 
     const refreshTokenHandler = () => {
