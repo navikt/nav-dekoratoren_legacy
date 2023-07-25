@@ -40,21 +40,28 @@ export const Driftsmeldinger = () => {
     const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
 
     return currentDriftsmeldinger.length > 0 ? (
-        <section className={style.driftsmeldinger} aria-label={finnTekst('driftsmeldinger',language)}>
-            {currentDriftsmeldinger.map((melding) => (
-                <LenkeMedSporing
-                    key={melding.heading}
-                    href={`${XP_BASE_URL}${melding.url}`}
-                    classNameOverride={style.message}
-                    analyticsEventArgs={{
-                        category: AnalyticsCategory.Header,
-                        action: 'driftsmeldinger',
-                    }}
-                >
-                    <span className={style.messageIcon}>{melding.type && <Icon type={melding.type} />}</span>
-                    <BodyLong>{melding.heading}</BodyLong>
-                </LenkeMedSporing>
-            ))}
+        <section className={style.driftsmeldinger}>
+            {currentDriftsmeldinger.map((melding) => {
+                const role = melding.type === 'info' ? 'status' : 'alert';
+                return (
+                    <LenkeMedSporing
+                        key={melding.heading}
+                        href={`${XP_BASE_URL}${melding.url}`}
+                        classNameOverride={style.message}
+                        analyticsEventArgs={{
+                            category: AnalyticsCategory.Header,
+                            action: 'driftsmeldinger',
+                        }}
+                        role={role}
+                    >
+                        <span className={style.messageIcon}>{melding.type && <Icon type={melding.type} />}</span>
+                        <BodyLong>
+                            <span className={style.srOnly}>{finnTekst('driftsmeldinger', language)}</span>
+                            {melding.heading}
+                        </BodyLong>
+                    </LenkeMedSporing>
+                );
+            })}
         </section>
     ) : null;
 };
@@ -65,8 +72,8 @@ interface IconProps {
 
 const Icon = (props: IconProps) => (
     <>
-        {props.type === 'prodstatus' && <StatusSvg/>}
-        {props.type === 'info' && <InfoSvg/>}
+        {props.type === 'prodstatus' && <StatusSvg />}
+        {props.type === 'info' && <InfoSvg />}
     </>
 );
 
