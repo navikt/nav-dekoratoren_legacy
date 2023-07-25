@@ -20,7 +20,6 @@ const revalidateDriftsmeldingerCache = (cache: NodeCache) =>
             console.log('Successfully refreshed driftsmeldinger cache');
         })
         .catch((e) => {
-            console.log(driftsmeldingerServiceUrl);
             console.error(`Failed to fetch from driftsmeldinger service - ${e}`);
             const prevCache = cache.get(cacheKey) || [];
             cache.set(cacheKey, prevCache);
