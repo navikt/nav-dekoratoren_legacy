@@ -1,37 +1,14 @@
 import React from 'react';
 import htmlReactParser from 'html-react-parser';
-// import { SearchHitProps } from 'types/search-result';
 import { BodyLong, LinkPanel } from '@navikt/ds-react';
 import { SearchHitOfficeInformation } from './office-information/SearchHitOfficeInformation';
 import { SearchHitAudience } from './audience/SearchHitAudience';
 import { SearchHitTimestamps } from './timestamps/SearchHitTimestamps';
 import style from './SearchHit.module.scss';
-import { Audience, Language } from '../utils';
+import { Soketreff } from '../utils';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import { useDispatch } from 'react-redux';
-
-type SearchHitProps = {
-    priority: boolean;
-    displayName: string;
-    href: string;
-    displayPath: string;
-    highlight: string;
-    publish?: {
-        from?: string;
-        first?: string;
-    };
-    createdTime: string;
-    modifiedTime?: string;
-    officeInformation?: {
-        phone?: string;
-        audienceReception?: string;
-    };
-    audience?: Audience | Audience[];
-    language: Language;
-    hidePublishDate: boolean;
-    hideModifiedDate: boolean;
-};
 
 const parseHighlight = (highlight: string) => {
     return htmlReactParser(
@@ -42,7 +19,7 @@ const parseHighlight = (highlight: string) => {
 
 type Props = {
     id: string;
-    hit: SearchHitProps;
+    hit: Soketreff;
     hitIndex: number;
 };
 
