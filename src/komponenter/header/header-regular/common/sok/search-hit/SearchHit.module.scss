@@ -9,11 +9,6 @@
     transition-timing-function: ease-out;
     width: 100%;
 
-    //TODO
-    // @media #{common.$mq-screen-mobile} {
-    //     box-shadow: var(--a-shadow-large);
-    // }
-
     &:hover {
         border: none;
         background-color: var(--a-surface-hover);
