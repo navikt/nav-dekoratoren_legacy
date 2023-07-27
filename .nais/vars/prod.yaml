@@ -26,6 +26,8 @@ env:
     value: https://login.nav.no/oauth2/login
   - name: LOGOUT_URL
     value: https://login.nav.no/oauth2/logout
+  - name: VARSEL_API_URL
+    value: https://www.nav.no/tms-varsel-api
 replicas:
   min: 2
   max: 8

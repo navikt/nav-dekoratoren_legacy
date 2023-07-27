@@ -3,7 +3,7 @@ import { Next } from '@navikt/ds-icons';
 import Tekst from 'tekster/finn-tekst';
 import { fjernLestVarsel } from 'store/reducers/varselinnboks-duck';
 import { useDispatch } from 'react-redux';
-import { postDone } from 'api/api';
+import { postInaktiver } from 'api/api';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import ArkiverKnapp from './arkiver-knapp/ArkiverKnapp';
 import beskjedIkon from '../../../../../../ikoner/varsler/beskjedIkon.svg';
@@ -26,7 +26,7 @@ const getEksternvarslingStatus = (kanaler: string[]) => {
 
 type Props = {
     eventId: string;
-    apiVarselinnboksUrl: string;
+    VARSEL_API_URL: string;
     tekst: string;
     dato: string;
     href: string;
@@ -39,7 +39,7 @@ type Props = {
 
 const Beskjed = ({
     eventId,
-    apiVarselinnboksUrl,
+    VARSEL_API_URL,
     tekst,
     dato,
     href,
@@ -53,16 +53,16 @@ const Beskjed = ({
 
     const dispatch = useDispatch();
 
-    const isOppgave = type === 'OPPGAVE';
+    const isOppgave = type.toLowerCase() === 'oppgave';
     const isArkiverbar = !href && !isOppgave;
     const eksternVarslingStatus = getEksternvarslingStatus(eksternVarslingKanaler);
 
     const handleOnClick = () => {
-        if (type === 'BESKJED' && !isMasked) {
-            postDone(apiVarselinnboksUrl, { eventId: eventId });
+        if (type.toLowerCase() === 'beskjed' && !isMasked) {
+            postInaktiver(VARSEL_API_URL, { eventId: eventId });
             dispatch(fjernLestVarsel(eventId));
         }
-        logAmplitudeEvent('navigere', { komponent: type == "BESKJED" ? "varsel-beskjed" : "varsel-oppgave", kategori: "varselbjelle", destinasjon: href });
+        logAmplitudeEvent('navigere', { komponent: type.toLowerCase() == "beskjed" ? "varsel-beskjed" : "varsel-oppgave", kategori: "varselbjelle", destinasjon: href });
     };
 
     return isArkiverbar ? (
@@ -81,7 +81,7 @@ const Beskjed = ({
                     </div>
                     <ArkiverKnapp
                         eventId={eventId}
-                        apiVarselinnboksUrl={apiVarselinnboksUrl}
+                        VARSEL_API_URL={VARSEL_API_URL}
                         setActivateScreenReaderText={setActivateScreenReaderText}
                         id={id}
                     />

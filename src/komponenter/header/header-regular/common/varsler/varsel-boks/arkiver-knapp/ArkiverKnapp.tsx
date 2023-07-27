@@ -1,4 +1,4 @@
-import { postDone } from 'api/api';
+import { postInaktiver } from 'api/api';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { fjernLestVarsel } from 'store/reducers/varselinnboks-duck';
@@ -9,16 +9,16 @@ import Tekst from 'tekster/finn-tekst';
 
 type Props = {
     eventId: string;
-    apiVarselinnboksUrl: string;
+    VARSEL_API_URL: string;
     setActivateScreenReaderText: (setActivateScreenReaderText: boolean) => void;
     id?: string;
 };
 
-const ArkiverKnapp = ({ eventId, apiVarselinnboksUrl, setActivateScreenReaderText, id }: Props) => {
+const ArkiverKnapp = ({ eventId, VARSEL_API_URL, setActivateScreenReaderText, id }: Props) => {
     const dispatch = useDispatch();
 
     const handleOnClick = () => {
-        postDone(apiVarselinnboksUrl, { eventId: eventId });
+        postInaktiver(VARSEL_API_URL, { eventId: eventId });
         setActivateScreenReaderText(false);
         setActivateScreenReaderText(true);
         dispatch(fjernLestVarsel(eventId));

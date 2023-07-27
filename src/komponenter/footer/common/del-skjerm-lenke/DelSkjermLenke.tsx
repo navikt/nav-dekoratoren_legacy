@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import classNames from "classnames";
+import classNames from 'classnames';
 import { Link } from '@navikt/ds-react';
 import { Monitor } from '@navikt/ds-icons';
 import Tekst from 'tekster/finn-tekst';
@@ -10,12 +10,14 @@ import style from './DelSkjermLenke.module.scss';
 
 export const DelSkjermLenke = () => {
     const [isOpen, setIsOpen] = useState(false);
+
     const openModal = () => {
         analyticsEvent({
             eventName: 'Modal åpnet',
             category: AnalyticsCategory.Footer,
             action: `kontakt/del-skjerm-open`,
         });
+
         setIsOpen(true);
     };
     const closeModal = () => {
@@ -29,11 +31,7 @@ export const DelSkjermLenke = () => {
 
     return (
         <>
-            <Link
-                onClick={openModal}
-                className={classNames(style.delSkjermLenke, "globalLenkeFooter")}
-                href="#"
-            >
+            <Link onClick={openModal} className={classNames(style.delSkjermLenke, 'globalLenkeFooter')} href="#">
                 <Tekst id="footer-del-skjerm" />
                 <Monitor title="monitor-ikon" titleId="footer-monitor-icon" aria-hidden />
             </Link>

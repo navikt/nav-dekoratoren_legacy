@@ -16,10 +16,10 @@ const FooterSimple = () => {
 
     useEffect(() => {
         const noder = getLanguageNode(language, data);
-        if (noder && !personvernNode) {
+        if (noder) {
             settPersonvernNode(findNode(noder, 'Personvern'));
         }
-    }, [language, data, personvernNode]);
+    }, [language, data]);
 
     return (
         <>
