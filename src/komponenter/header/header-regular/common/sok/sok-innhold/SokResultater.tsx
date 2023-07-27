@@ -59,7 +59,7 @@ export const SokResultater = (props: Props) => {
 
                         return (
                             <li key={index} style={style}>
-                                <SearchHit hit={item} hitIndex={index} key={key} />
+                                <SearchHit id={id} hit={item} hitIndex={index} key={key} />
                             </li>
                         );
                     })}

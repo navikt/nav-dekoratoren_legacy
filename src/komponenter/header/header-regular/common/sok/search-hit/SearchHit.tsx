@@ -41,11 +41,12 @@ const parseHighlight = (highlight: string) => {
 };
 
 type Props = {
+    id: string;
     hit: SearchHitProps;
     hitIndex: number;
 };
 
-export const SearchHit = ({ hit, hitIndex }: Props) => {
+export const SearchHit = ({ id, hit, hitIndex }: Props) => {
     const { displayName, href, highlight, officeInformation, audience } = hit;
     const dispatch = useDispatch();
 
@@ -55,6 +56,7 @@ export const SearchHit = ({ hit, hitIndex }: Props) => {
 
     return (
         <LinkPanel
+            id={id}
             href={href}
             className={style.searchHit}
             onClick={() => {
@@ -65,8 +67,6 @@ export const SearchHit = ({ hit, hitIndex }: Props) => {
                     treffnr: hitIndex + 1,
                 });
             }}
-            //TODO
-            // id={id}
         >
             <LinkPanel.Title>{displayName}</LinkPanel.Title>
             <div className={style.content}>
