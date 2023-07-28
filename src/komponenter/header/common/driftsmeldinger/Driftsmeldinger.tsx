@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { DriftsmeldingerState } from 'store/reducers/driftsmeldinger-duck';
@@ -7,6 +7,7 @@ import { AnalyticsCategory } from 'utils/analytics/analytics';
 import { verifyWindowObj } from 'utils/Environment';
 import { finnTekst } from 'tekster/finn-tekst';
 import { BodyLong } from '@navikt/ds-react';
+import Cookies from 'js-cookie';
 
 import style from './Driftsmeldinger.module.scss';
 
@@ -35,9 +36,21 @@ const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
 
 export const Driftsmeldinger = () => {
     const { language } = useSelector((state: AppState) => state.language);
+    const [shouldDisplaySrDriftsmelding, setShouldDisplaySrDriftsmelding] = useState<boolean>(false);
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
     const { XP_BASE_URL } = environment;
     const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
+
+    useEffect(() => {
+        const lastShownDriftsmelding = Cookies.get('nav-driftsmelding-last-display-time')?.toString();
+        const secondsSindeLastDisplay = Date.now() - Number.parseInt(lastShownDriftsmelding ?? '0', 10);
+        const timeHasPassed = secondsSindeLastDisplay > 1000 * 60 * 30; // 30 min
+
+        if (timeHasPassed) {
+            setShouldDisplaySrDriftsmelding(true); // 30 min
+            Cookies.set('nav-driftsmelding-last-display-time', Date.now().toString(), { expires: 30 });
+        }
+    }, []);
 
     return currentDriftsmeldinger.length > 0 ? (
         <section className={style.driftsmeldinger}>
@@ -52,7 +65,7 @@ export const Driftsmeldinger = () => {
                             category: AnalyticsCategory.Header,
                             action: 'driftsmeldinger',
                         }}
-                        role={role}
+                        role={shouldDisplaySrDriftsmelding ? role : 'false'}
                     >
                         <span className={style.messageIcon}>{melding.type && <Icon type={melding.type} />}</span>
                         <BodyLong>
