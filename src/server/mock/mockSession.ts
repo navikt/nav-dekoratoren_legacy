@@ -1,7 +1,8 @@
 import { RequestHandler } from 'express';
+import { mock } from 'node:test';
 
 const TOKEN_MOCK_SECONDS = 60 * 5.03;
-const SESSION_MOCK_SECONDS = TOKEN_MOCK_SECONDS;
+const SESSION_MOCK_SECONDS = 60 * 60;
 
 type MockAuth = {
     session: {
@@ -33,8 +34,8 @@ const createMockSession = () => {
     mockAuth = {
         session: {
             created_at: now.toISOString(),
-            ends_at: sessionExpires.toString(),
-            timeout_at: sessionExpires.toString(),
+            ends_at: sessionExpires.toISOString(),
+            timeout_at: sessionExpires.toISOString(),
             ends_in_seconds: Math.round((sessionExpires.getTime() - now.getTime()) / 1000),
             active: true,
             timeout_in_seconds: Math.round((sessionExpires.getTime() - now.getTime()) / 1000),
@@ -54,6 +55,21 @@ const isTokenExpired = (auth: any) => {
     const now = new Date();
     const tokenExpires = new Date(auth.tokens.expire_at);
     return tokenExpires.getTime() < now.getTime();
+};
+
+const refreshToken = () => {
+    if (!mockAuth) {
+        createMockSession();
+        throw new Error('Mock session not created');
+    }
+    if (!mockAuth) {
+        throw new Error('Mock session not created');
+    }
+    const now = new Date();
+    const newExpiresAt = new Date(new Date().getTime() + TOKEN_MOCK_SECONDS * 1000);
+    mockAuth.tokens.expire_at = newExpiresAt.toISOString();
+    mockAuth.tokens.refreshed_at = new Date().toISOString();
+    mockAuth.tokens.expire_in_seconds = Math.round((newExpiresAt.getTime() - now.getTime()) / 1000);
 };
 
 const getMockSession = () => {
@@ -80,6 +96,7 @@ const getMockSession = () => {
         },
         tokens: {
             ...mockAuth.tokens,
+
             expire_in_seconds: Math.round(
                 (new Date(mockAuth.tokens.expire_at).getTime() - new Date().getTime()) / 1000
             ),
@@ -88,6 +105,16 @@ const getMockSession = () => {
             ),
         },
     };
+};
+
+export const getRefreshHandler: RequestHandler = (req, res) => {
+    if (process.env.ENV === 'localhost') {
+        refreshToken();
+        res.status(200).send(getMockSession());
+        return;
+    }
+
+    res.status(200).send({});
 };
 
 export const getSessionHandler: RequestHandler = (req, res) => {

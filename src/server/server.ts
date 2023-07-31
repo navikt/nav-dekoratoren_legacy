@@ -10,12 +10,11 @@ import dotenv from 'dotenv';
 import { getMenuHandler } from './api-handlers/menu';
 import { getSokHandler } from './api-handlers/sok';
 import { getDriftsmeldingerHandler } from './api-handlers/driftsmeldinger';
-import { getSessionHandler } from './api-handlers/session';
+import { getSessionHandler, getRefreshHandler } from './mock/mockSession';
 import { getCSP } from 'csp-header';
 import { cspDirectives } from '../csp';
 import { getCspHandler } from './api-handlers/csp';
 import { getTaskAnalyticsConfigHandler } from './api-handlers/ta';
-import { getRefreshHandler } from './api-handlers/refresh';
 
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
