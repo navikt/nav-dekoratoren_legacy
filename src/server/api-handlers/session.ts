@@ -3,12 +3,34 @@ import { RequestHandler } from 'express';
 const TOKEN_MOCK_SECONDS = 60 * 5.03;
 const SESSION_MOCK_SECONDS = TOKEN_MOCK_SECONDS;
 
+type MockAuth = {
+    session: {
+        created_at: string;
+        ends_at: string;
+        timeout_at: string;
+        ends_in_seconds: number;
+        active: boolean;
+        timeout_in_seconds: number;
+    };
+    tokens: {
+        expire_at: string;
+        refreshed_at: string;
+        expire_in_seconds: number;
+        next_auto_refresh_in_seconds: number;
+        refresh_cooldown: boolean;
+        refresh_cooldown_seconds: number;
+    };
+};
+
+let mockAuth: MockAuth | null = null;
+
 const createMockSession = () => {
     const now = new Date();
+
     const sessionExpires = new Date(now.getTime() + SESSION_MOCK_SECONDS * 1000);
     const tokenExpires = new Date(now.getTime() + TOKEN_MOCK_SECONDS * 1000);
 
-    return {
+    mockAuth = {
         session: {
             created_at: now.toISOString(),
             ends_at: sessionExpires.toString(),
@@ -28,9 +50,49 @@ const createMockSession = () => {
     };
 };
 
+const isTokenExpired = (auth: any) => {
+    const now = new Date();
+    const tokenExpires = new Date(auth.tokens.expire_at);
+    return tokenExpires.getTime() < now.getTime();
+};
+
+const getMockSession = () => {
+    if (!mockAuth) {
+        createMockSession();
+    }
+
+    if (isTokenExpired(mockAuth)) {
+        createMockSession();
+    }
+
+    if (!mockAuth) {
+        throw new Error('Mock session not created');
+    }
+
+    return {
+        ...mockAuth,
+        session: {
+            ...mockAuth.session,
+            ends_in_seconds: Math.round((new Date(mockAuth.session.ends_at).getTime() - new Date().getTime()) / 1000),
+            timeout_in_seconds: Math.round(
+                (new Date(mockAuth.session.timeout_at).getTime() - new Date().getTime()) / 1000
+            ),
+        },
+        tokens: {
+            ...mockAuth.tokens,
+            expire_in_seconds: Math.round(
+                (new Date(mockAuth.tokens.expire_at).getTime() - new Date().getTime()) / 1000
+            ),
+            next_auto_refresh_in_seconds: Math.round(
+                (new Date(mockAuth.tokens.expire_at).getTime() - new Date().getTime()) / 1000
+            ),
+        },
+    };
+};
+
 export const getSessionHandler: RequestHandler = (req, res) => {
     if (process.env.ENV === 'localhost') {
-        res.status(200).send(createMockSession());
+        res.status(200).send(getMockSession());
         return;
     }
 

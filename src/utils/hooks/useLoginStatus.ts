@@ -10,12 +10,6 @@ const stateSelector = (state: AppState) => ({
     environment: state.environment,
 });
 
-enum TokenState {
-    LOGGED_IN,
-    EXPIRING,
-    LOGGED_OUT,
-}
-
 let timeoutId: NodeJS.Timeout | null = null;
 
 export const useLoginStatus = () => {
