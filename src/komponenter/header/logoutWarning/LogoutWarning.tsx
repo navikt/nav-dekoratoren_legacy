@@ -15,10 +15,6 @@ export const LogoutWarning = () => {
     const { language } = useSelector((state: AppState) => state.language);
 
     useEffect(() => {
-        setIsOpen(true);
-    }, []);
-
-    useEffect(() => {
         if (isTokenExpiring || isSessionExpiring) {
             setIsOpen(true);
         }

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { hentInnloggingsstatus, fornyInnlogging } from 'store/reducers/innloggingsstatus-duck';
 import { getLogOutUrl } from 'utils/login';
+import { useAuthDebug } from './useAuthDebug';
 
 const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,
@@ -17,6 +18,7 @@ export const useLoginStatus = () => {
     const { innloggetStatus, environment } = useSelector(stateSelector);
     const [isTokenExpiring, setIsTokenExpiring] = useState<boolean | null>(null);
     const [isSessionExpiring, setIsSessionExpiring] = useState<boolean | null>(null);
+    useAuthDebug();
 
     // Need to create a ref in order for the setTimeout function to
     // get access to the updated value of innloggetStatus.

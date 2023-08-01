@@ -1,5 +1,4 @@
 import { RequestHandler } from 'express';
-import { mock } from 'node:test';
 
 const TOKEN_MOCK_SECONDS = 60 * 5.03;
 const SESSION_MOCK_SECONDS = 60 * 60;
