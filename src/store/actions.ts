@@ -12,6 +12,7 @@ export enum ActionType {
     FORNY_INNLOGGING_OK = 'FORNY_INNLOGGING_OK',
     FORNY_INNLOGGING_FEILET = 'FORNY_INNLOGGING_FEILET',
     FORNY_INNLOGGING_PENDING = 'FORNY_INNLOGGING_PENDING',
+    DEBUG_INNLOGGING_OK = 'DEBUG_INNLOGGING_OK',
     HENT_MENY_OK = 'HENT_MENY_OK',
     HENT_MENY_FEILET = 'HENT_MENY_FEILET',
     HENT_MENY_PENDING = 'HENT_MENY_PENDING',
@@ -64,6 +65,11 @@ export interface FornyInnloggingPENDINGAction {
 
 export interface FornyInnloggingFEILETAction {
     type: ActionType.FORNY_INNLOGGING_FEILET;
+}
+
+export interface DebugInnloggingOKAction {
+    type: ActionType.DEBUG_INNLOGGING_OK;
+    data: any;
 }
 
 export interface HentMenyLenkerSUCCESS {
@@ -184,6 +190,7 @@ export type Handling =
     | FornyInnloggingOKAction
     | FornyInnloggingFEILETAction
     | FornyInnloggingPENDINGAction
+    | DebugInnloggingOKAction
     | HentMenyLenkerSUCCESS
     | HentMenyLenkerFAILED
     | HentMenyLenkerPENDING

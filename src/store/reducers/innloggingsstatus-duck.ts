@@ -1,5 +1,6 @@
 import {
     ActionType,
+    DebugInnloggingOKAction,
     FornyInnloggingFEILETAction,
     FornyInnloggingOKAction,
     FornyInnloggingPENDINGAction,
@@ -78,6 +79,21 @@ export default function reducer(
 
             return { ...state, data: { ...state.data, session: action.data.session, token: action.data.token } };
         }
+        case ActionType.DEBUG_INNLOGGING_OK: {
+            const { fakeTokenEndsAt, fakeSessionEndsAt } = action.data;
+
+            const sessionEnding = fakeSessionEndsAt ? { endsAt: fakeSessionEndsAt } : null;
+            const tokenEnding = fakeTokenEndsAt ? { endsAt: fakeTokenEndsAt } : null;
+
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    session: { ...state.data.session, ...sessionEnding },
+                    token: { ...state.data.token, ...tokenEnding },
+                },
+            };
+        }
         case ActionType.HENT_INNLOGGINGSSTATUS_PENDING:
             if (state.status === Status.OK) {
                 return { ...state, status: Status.RELOADING };
@@ -145,5 +161,12 @@ export function fornyInnloggingFeilet(): FornyInnloggingFEILETAction {
 export function fornyInnloggingPending(): FornyInnloggingPENDINGAction {
     return {
         type: ActionType.FORNY_INNLOGGING_PENDING,
+    };
+}
+
+export function debugInnloggingOK(data: any): DebugInnloggingOKAction {
+    return {
+        type: ActionType.DEBUG_INNLOGGING_OK,
+        data: data,
     };
 }

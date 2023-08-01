@@ -1,40 +1,55 @@
 import { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
+import { debugInnloggingOK } from 'store/reducers/innloggingsstatus-duck';
 
 const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,
-    environment: state.environment,
 });
 
 export const useAuthDebug = () => {
-    console.log('UseAuthDebug');
-    const { innloggetStatus, environment } = useSelector(stateSelector);
+    const dispatch = useDispatch();
+    const { innloggetStatus } = useSelector(stateSelector);
 
     const innloggetStatusRef = useRef(innloggetStatus);
     innloggetStatusRef.current = innloggetStatus;
 
     useEffect(() => {
-        console.log('Debugging Auth');
         window.authDebug = authDebug;
     }, []);
 
     const authDebug = () => {
-        console.log('Debugging Auth');
-        console.log('-----------------------------------');
-        console.log(innloggetStatusRef.current);
+        console.group('Debugging Auth - Information');
+        console.info('------------------------------');
+        console.info('Current auth data:', innloggetStatusRef.current);
+        console.groupEnd();
 
         return {
-            fakeTokenExpiration,
+            debugTokenExpiration,
+            debugSessionExpiration,
         };
     };
 
-    const fakeTokenExpiration = (inSeconds: number) => {
+    const debugTokenExpiration = (inSeconds: number) => {
         if (!inSeconds) {
             console.log('You need to provide a number of seconds to fake token expiration');
         }
-        console.log('Faking token expiration', inSeconds);
+
+        const fakeTokenEndsAt = new Date(Date.now() + inSeconds * 1000).toISOString();
+        dispatch(debugInnloggingOK({ fakeTokenEndsAt }));
+
+        return `Auth debug: Setting the fake token to end at ${fakeTokenEndsAt}`;
     };
 
+    const debugSessionExpiration = (inSeconds: number) => {
+        if (!inSeconds) {
+            console.log('You need to provide a number of seconds to fake token expiration');
+        }
+
+        const fakeSessionEndsAt = new Date(Date.now() + inSeconds * 1000).toISOString();
+        dispatch(debugInnloggingOK({ fakeSessionEndsAt }));
+        return `Auth debug: Setting the fake session to end at ${fakeSessionEndsAt}`;
+    };
     return true;
 };

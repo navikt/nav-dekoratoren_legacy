@@ -26,8 +26,6 @@ export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => 
 
 export const hentInnloggingsstatusFetch = (environment: Environment): Promise<InnloggingsstatusData & SessionData> => {
     const { API_DEKORATOREN_URL, SIDECAR_URL } = environment;
-    console.log('hentInnloggingsstatusFetch');
-    console.log(API_DEKORATOREN_URL);
 
     const innloggingsstatusResult: Promise<InnloggingsstatusData> = fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
         credentials: 'include',

@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 
-const TOKEN_MOCK_SECONDS = 60 * 5.03;
-const SESSION_MOCK_SECONDS = 60 * 60;
+const TOKEN_MOCK_SECONDS = 60 * 60;
+const SESSION_MOCK_SECONDS = 60 * 60 * 6;
 
 type MockAuth = {
     session: {
