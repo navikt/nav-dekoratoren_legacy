@@ -4,7 +4,7 @@ declare global {
     interface Window {
         TA: any;
         dataLayer: any;
-        authDebug: any;
+        loginDebug: any;
         dekoratorenAmplitude: ({
             origin,
             eventName,
