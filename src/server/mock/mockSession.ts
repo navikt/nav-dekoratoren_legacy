@@ -1,9 +1,9 @@
-import { RequestHandler } from 'express';
+import { Request, Response } from 'express';
 
 const TOKEN_MOCK_SECONDS = 60 * 60;
 const SESSION_MOCK_SECONDS = 60 * 60 * 6;
 
-type MockAuth = {
+export type APISessionData = {
     session: {
         created_at: string;
         ends_at: string;
@@ -22,7 +22,7 @@ type MockAuth = {
     };
 };
 
-let mockAuth: MockAuth | null = null;
+let mockAuth: APISessionData | null = null;
 
 const createMockSession = () => {
     const now = new Date();
@@ -106,21 +106,11 @@ const getMockSession = () => {
     };
 };
 
-export const getRefreshHandler: RequestHandler = (req, res) => {
-    if (process.env.ENV === 'localhost') {
-        refreshToken();
-        res.status(200).send(getMockSession());
-        return;
-    }
-
-    res.status(200).send({});
+export const refreshMockSessionHandler = (req: Request, res: Response) => {
+    refreshToken();
+    res.json(getMockSession());
 };
 
-export const getSessionHandler: RequestHandler = (req, res) => {
-    if (process.env.ENV === 'localhost') {
-        res.status(200).send(getMockSession());
-        return;
-    }
-
-    res.status(200).send({});
+export const mockSessionHandler = (req: Request, res: Response) => {
+    res.json(getMockSession());
 };

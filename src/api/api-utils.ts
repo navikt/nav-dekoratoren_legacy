@@ -1,5 +1,7 @@
 import { Handling } from 'store/actions';
 import { Dispatch } from 'store/dispatch-type';
+import { InnloggingsstatusData, SessionData } from 'store/reducers/innloggingsstatus-duck';
+import { FulfilledValues, RawResolvedSessionData } from 'types/auth';
 
 interface StatusActions<T> {
     ok: (temaer: T) => Handling;
@@ -65,3 +67,34 @@ function sjekkStatuskode(response: Response): Response {
 function toJson<T>(response: Response): Promise<T> {
     return response.json();
 }
+
+export const adaptFulfilledSessionDataFromAPI = (sessionData: RawResolvedSessionData): SessionData => {
+    const { session, tokens } = sessionData;
+    return {
+        session: {
+            createdAt: session?.created_at || null,
+            endsAt: session?.ends_at || null,
+            timeoutAt: session?.timeout_at || null,
+            isActive: session?.active || false,
+        },
+        token: {
+            endsAt: tokens?.expire_at || null,
+            refreshedAt: tokens?.refreshed_at || null,
+            isRefreshCooldown: tokens?.refresh_cooldown || false,
+        },
+    };
+};
+
+export const adaptFulfilledAuthDataFromAPI = (
+    fulfilledValues: FulfilledValues
+): InnloggingsstatusData & SessionData => {
+    const { authenticated = false, name = '', securityLevel = '' } = fulfilledValues;
+    const { session, tokens } = fulfilledValues;
+
+    return {
+        authenticated,
+        name,
+        securityLevel,
+        ...adaptFulfilledSessionDataFromAPI({ session, tokens }),
+    };
+};

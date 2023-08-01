@@ -24,8 +24,6 @@ env:
     value: https://www.nav.no/minside/
   - name: LOGIN_URL
     value: https://login.nav.no/oauth2/login
-  - name: SIDECAR_URL
-    value: https://login.nav.no/oauth2
   - name: LOGOUT_URL
     value: https://login.nav.no/oauth2/logout
   - name: VARSEL_API_URL

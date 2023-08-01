@@ -13,7 +13,6 @@ export interface Environment {
     MINSIDE_ARBEIDSGIVER_URL: string;
     MIN_SIDE_URL: string;
     LOGIN_URL: string;
-    SIDECAR_URL: string;
     LOGOUT_URL: string;
     OPPORTUNITY_ID: string;
     CASETYPE_ID: string;
@@ -47,6 +46,7 @@ export interface Params {
     LOGOUT_URL?: string;
     MASK_HOTJAR?: boolean;
     LOGOUT_WARNING: boolean;
+    SIDECAR_BASE?: string;
 }
 
 export interface Cookies {
@@ -64,13 +64,12 @@ export const initialState: Environment = {
     MINSIDE_ARBEIDSGIVER_URL: '',
     MIN_SIDE_URL: '',
     LOGIN_URL: '',
-    SIDECAR_URL: '',
     LOGOUT_URL: '',
     OPPORTUNITY_ID: '',
     CASETYPE_ID: '',
     SOLUTION_ID: '',
     NAV_GROUP_ID: '',
-    VARSEL_API_URL:'',
+    VARSEL_API_URL: '',
 
     // Parameters
     PARAMS: {
@@ -89,6 +88,7 @@ export const initialState: Environment = {
         SHARE_SCREEN: false,
         MASK_HOTJAR: true,
         LOGOUT_WARNING: false,
+        SIDECAR_BASE: '',
     },
 };
 

@@ -75,8 +75,6 @@ export default function reducer(
             return { ...state, status: Status.OK, data: action.data };
         }
         case ActionType.FORNY_INNLOGGING_OK: {
-            console.log('FORNY_INNLOGGING', action.data);
-
             return { ...state, data: { ...state.data, session: action.data.session, token: action.data.token } };
         }
         case ActionType.DEBUG_INNLOGGING_OK: {

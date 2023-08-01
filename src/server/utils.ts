@@ -39,7 +39,6 @@ export const clientEnv = ({ req }: Props): Environment => {
         MINSIDE_ARBEIDSGIVER_URL: process.env.MINSIDE_ARBEIDSGIVER_URL as string,
         MIN_SIDE_URL: process.env.MIN_SIDE_URL as string,
         LOGIN_URL: process.env.LOGIN_URL as string,
-        SIDECAR_URL: process.env.SIDECAR_URL as string,
         LOGOUT_URL: process.env.LOGOUT_URL as string,
         VARSEL_API_URL: process.env.VARSEL_API_URL as string,
         ...(req.query && {
@@ -73,6 +72,7 @@ export const clientEnv = ({ req }: Props): Environment => {
                 }),
                 MASK_HOTJAR: req.query.maskHotjar !== 'false',
                 LOGOUT_WARNING: req.query.logoutWarning === 'true',
+                SIDECAR_BASE: (req.query.sidecarBase || '') as string,
             },
         }),
     };
