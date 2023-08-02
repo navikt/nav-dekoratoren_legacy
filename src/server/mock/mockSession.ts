@@ -1,5 +1,3 @@
-import { RequestHandler } from 'express';
-
 const TOKEN_MOCK_SECONDS = 60 * 60;
 const SESSION_MOCK_SECONDS = 60 * 60 * 6;
 
@@ -106,21 +104,11 @@ const getMockSession = () => {
     };
 };
 
-export const getRefreshHandler: RequestHandler = (req, res) => {
-    if (process.env.ENV === 'localhost') {
-        refreshToken();
-        res.status(200).send(getMockSession());
-        return;
-    }
-
-    res.status(200).send({});
+export const refreshSession = () => {
+    refreshToken();
+    return getMockSession();
 };
 
-export const getSessionHandler: RequestHandler = (req, res) => {
-    if (process.env.ENV === 'localhost') {
-        res.status(200).send(getMockSession());
-        return;
-    }
-
-    res.status(200).send({});
+export const getSession = () => {
+    return getMockSession();
 };
