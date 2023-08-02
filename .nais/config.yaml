@@ -16,12 +16,6 @@ spec:
   prometheus:
     enabled: true
     path: {{appPath}}/metrics
-  azure:
-    application:
-      enabled: true
-    sidecar:
-      enabled: true
-      autoLogin: false
   idporten:
     enabled: true
     sidecar:
