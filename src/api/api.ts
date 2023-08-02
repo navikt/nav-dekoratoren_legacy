@@ -1,4 +1,4 @@
-import { fetchToJson } from './api-utils';
+import { fetchToJson, getAuthUrl } from './api-utils';
 import { InnloggingsstatusData as InnloggingsstatusData, SessionData } from '../store/reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from '../store/reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
@@ -27,13 +27,16 @@ export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => 
 export const hentInnloggingsstatusFetch = (environment: Environment): Promise<InnloggingsstatusData & SessionData> => {
     const { API_DEKORATOREN_URL, APP_BASE_URL } = environment;
 
-    const appUrl = APP_BASE_URL.includes('localhost') ? `${APP_BASE_URL}/api` : APP_BASE_URL;
+    const sessionUrl = getAuthUrl('/oauth2/session');
+    console.log(sessionUrl);
+
+    //const appUrl = APP_BASE_URL.includes('localhost') ? `${APP_BASE_URL}/api` : APP_BASE_URL;
 
     const innloggingsstatusResult: Promise<InnloggingsstatusData> = fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
         credentials: 'include',
     });
 
-    const sessionStatus: Promise<SessionData> = fetchToJson(`${appUrl}/oauth2/session`, {
+    const sessionStatus: Promise<SessionData> = fetchToJson(sessionUrl, {
         credentials: 'include',
     });
 

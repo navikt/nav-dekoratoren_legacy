@@ -65,3 +65,10 @@ function sjekkStatuskode(response: Response): Response {
 function toJson<T>(response: Response): Promise<T> {
     return response.json();
 }
+
+export function getAuthUrl(path: string): string {
+    const { hostname, port, protocol } = window.location;
+    const basePath = hostname === 'localhost' ? `/api` : '';
+
+    return `${protocol}//${hostname}:${port}${basePath}${path}`;
+}

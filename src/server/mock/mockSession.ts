@@ -1,3 +1,5 @@
+import { Request, Response } from 'express';
+
 const TOKEN_MOCK_SECONDS = 60 * 60;
 const SESSION_MOCK_SECONDS = 60 * 60 * 6;
 
@@ -104,11 +106,11 @@ const getMockSession = () => {
     };
 };
 
-export const refreshSession = () => {
+export const refreshMockSessionHandler = (req: Request, res: Response) => {
     refreshToken();
-    return getMockSession();
+    res.json(getMockSession());
 };
 
-export const getSession = () => {
-    return getMockSession();
+export const mockSessionHandler = (req: Request, res: Response) => {
+    res.json(getMockSession());
 };
