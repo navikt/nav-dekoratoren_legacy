@@ -25,13 +25,15 @@ export interface DataElement {
 export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => fetchToJson(`${APP_URL}/api/meny`);
 
 export const hentInnloggingsstatusFetch = (environment: Environment): Promise<InnloggingsstatusData & SessionData> => {
-    const { API_DEKORATOREN_URL, SIDECAR_URL } = environment;
+    const { API_DEKORATOREN_URL, APP_BASE_URL } = environment;
+
+    const appUrl = APP_BASE_URL.includes('localhost') ? `${APP_BASE_URL}/api` : APP_BASE_URL;
 
     const innloggingsstatusResult: Promise<InnloggingsstatusData> = fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
         credentials: 'include',
     });
 
-    const sessionStatus: Promise<SessionData> = fetchToJson(`${SIDECAR_URL}/session`, {
+    const sessionStatus: Promise<SessionData> = fetchToJson(`${appUrl}/oauth2/session`, {
         credentials: 'include',
     });
 
@@ -61,8 +63,9 @@ export const hentInnloggingsstatusFetch = (environment: Environment): Promise<In
 };
 
 export const fornyInnloggingFetch = (environment: Environment): Promise<SessionData> => {
-    const { SIDECAR_URL } = environment;
-    return fetchToJson(`${SIDECAR_URL}/session/refresh`, {
+    const { APP_BASE_URL } = environment;
+    const appUrl = APP_BASE_URL.includes('localhost') ? `${APP_BASE_URL}/api` : APP_BASE_URL;
+    return fetchToJson(`${appUrl}/oauth2/session/refresh`, {
         credentials: 'include',
     }).then((values: any) => {
         return {
