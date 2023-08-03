@@ -206,11 +206,22 @@ Eksempel:
 
 ## Utloggingsvarsel
 
-Med Wonderwall/Sidecar er en innlogging (token) gyldig i 60 minutter. 5 minutter før utløp vil bruker se varsel i form av en popup-dialog. I dette varselet vil brukeren kunne velge å fortsette å være innlogget (fornying) eller logge ut umiddelbart.
-Hvis brukeren velger å være innlogget vil tokenet bli fornyet med nye 60 minutter. Hvis brukeren ikke foretar seg noe, feks har forlatt maskinen slik at varselet blir stående, vil nettleseren automatisk bli videresendt til utloggingsvinduet når token har utløpt. Brukeren vil ikke kunne krysse vekk eller lukke varselet, men må ta aktiv stilling til ett av de to alternativene "fornye" eller "logg ut".
+Med Wonderwall som sidecar kan dekoratøren håndtere varsling av utlogging for deg. Du må huske å slå på sidecar i applikasjonen din, se mer informasjon i [NAIS-dokumentasjonen](https://docs.nais.io/appendix/wonderwall/).
 
-Tokenet kan fornyes med intervaller på 60 minutter innenfor et totalt vindu på 6 timer. Dette er grensen for hele session som er satt av Wonderwall/Sidecar.
-Når vinduet på 6 timer nærmer seg slutt vil brukeren få beskjed om å avslutte og logge inn på nytt for å få en ny session med nye 6 timers levetid. Merk at det i hovedsak er arbeidsgivere og liknende som vil være innlogget i så lenge som 6 timer.
+### Slik fungerer utloggingsvarsel
+
+-   Et token er gyldig i 60 minutter. Hele session er gyldig i 6 timer. Token kan fornyes, men session krever at bruker logger helt ut og inn igjen etter 6 timer.
+-   5 minutter før utløp vil bruker se varsel i form av en popup-dialog.
+-   I denne popup-dialogen vil brukeren måtte ta et aktivt valg om å forlenge innloggingen, eller klikke "Logg ut" for å logge ut umiddelbart.
+-   Dersom brukeren velger å forlenge, blir tokenet fornyet i nye 60 minutter.
+-   10 minutter før session utløper vil bruker få beskjed om å avslutte og eventuelt logge inn på nytt.
+-   I begge varslene (for token og session) vil bruker måtte ta et aktivt valg. Det er ikke mulig å krysse vekk eller trykke "Esc" for å lukke varselet.
+-   Dersom bruker forlater maskinen eller ikke tar et aktivt valg vil hen bli sendt til utloggingssiden når token eller session har utløpt.
+
+### Verdt å merke seg
+
+-   Varselet for sessions når 6 timer nærmer seg vil først og fremst treffe arbeidsgivere og andre parter som aktivt jobber inne i NAV-tjenester over lengre tid.
+-   Vi har forsøkt å utforme varselet med mål om minst mulig kognitivt stress og har derfor valgt å droppe nedtelling i grensesnittet. Vi er åpne for tilbakemeldinger etterhvert som flere team begynner å ta ibruk utloggingsvarselet.
 
 ## Utvikling - Kom i gang
 

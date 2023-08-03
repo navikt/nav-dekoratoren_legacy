@@ -25,10 +25,8 @@ export interface DataElement {
 export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => fetchToJson(`${APP_URL}/api/meny`);
 
 export const hentInnloggingsstatusFetch = (environment: Environment): Promise<InnloggingsstatusData & SessionData> => {
-    const { API_DEKORATOREN_URL, APP_BASE_URL } = environment;
-
+    const { API_DEKORATOREN_URL } = environment;
     const sessionUrl = getAuthUrl('/oauth2/session');
-    console.log(sessionUrl);
 
     //const appUrl = APP_BASE_URL.includes('localhost') ? `${APP_BASE_URL}/api` : APP_BASE_URL;
 

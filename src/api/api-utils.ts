@@ -68,7 +68,9 @@ function toJson<T>(response: Response): Promise<T> {
 
 export function getAuthUrl(path: string): string {
     const { hostname, port, protocol } = window.location;
-    const basePath = hostname === 'localhost' ? `/api` : '';
+    if (hostname === 'localhost') {
+        return `http://localhost:8088/api${path}`;
+    }
 
-    return `${protocol}//${hostname}:${port}${basePath}${path}`;
+    return `${protocol}//${hostname}:${port}${path}`;
 }
