@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 const TOKEN_MOCK_SECONDS = 60 * 60;
 const SESSION_MOCK_SECONDS = 60 * 60 * 6;
 
-type MockAuth = {
+export type APISessionData = {
     session: {
         created_at: string;
         ends_at: string;
@@ -22,7 +22,7 @@ type MockAuth = {
     };
 };
 
-let mockAuth: MockAuth | null = null;
+let mockAuth: APISessionData | null = null;
 
 const createMockSession = () => {
     const now = new Date();

@@ -1,10 +1,11 @@
-import { fetchToJson, getAuthUrl } from './api-utils';
+import { adaptFulfilledAuthDataFromAPI, adaptFulfilledSessionDataFromAPI, fetchToJson, getAuthUrl } from './api-utils';
 import { InnloggingsstatusData as InnloggingsstatusData, SessionData } from '../store/reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from '../store/reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
 import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { FeatureToggles } from 'store/reducers/feature-toggles-duck';
 import { Environment } from 'store/reducers/environment-duck';
+import { FulfilledValues } from 'types/auth';
 
 type DoneEvent = {
     eventId: string;
@@ -22,13 +23,16 @@ export interface DataElement {
     status: Status;
 }
 
+type Result = {
+    status: 'fulfilled' | 'rejected';
+    value?: any;
+};
+
 export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => fetchToJson(`${APP_URL}/api/meny`);
 
 export const hentInnloggingsstatusFetch = (environment: Environment): Promise<InnloggingsstatusData & SessionData> => {
     const { API_DEKORATOREN_URL } = environment;
     const sessionUrl = getAuthUrl('/oauth2/session');
-
-    //const appUrl = APP_BASE_URL.includes('localhost') ? `${APP_BASE_URL}/api` : APP_BASE_URL;
 
     const innloggingsstatusResult: Promise<InnloggingsstatusData> = fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
         credentials: 'include',
@@ -38,23 +42,18 @@ export const hentInnloggingsstatusFetch = (environment: Environment): Promise<In
         credentials: 'include',
     });
 
-    const all: Promise<InnloggingsstatusData & SessionData> = Promise.all<any>([innloggingsstatusResult, sessionStatus])
-        .then((values) => {
-            const [innloggingsstatus, { session, tokens }] = values;
-            return {
-                ...innloggingsstatus,
-                session: {
-                    createdAt: session.created_at,
-                    endsAt: session.ends_at,
-                    timeoutAt: session.timeout_at,
-                    isActive: session.active,
-                },
-                token: {
-                    endsAt: tokens.expire_at,
-                    refreshedAt: tokens.refreshed_at,
-                    isRefreshCooldown: tokens.refresh_cooldown,
-                },
-            };
+    const all: Promise<InnloggingsstatusData & SessionData> = Promise.allSettled<any[]>([
+        innloggingsstatusResult,
+        sessionStatus,
+    ])
+        .then((results) => {
+            const fulfilled = results.filter((result) => result.status === 'fulfilled');
+            const fulfilledValues: FulfilledValues = fulfilled.reduce((acc, result: Result) => {
+                result.value = result.value || {};
+                return { ...acc, ...result.value };
+            }, {});
+
+            return adaptFulfilledAuthDataFromAPI(fulfilledValues);
         })
         .catch((e) => {
             throw new Error(`Error fetching innloggingsstatus [error: ${e}]`);
@@ -68,20 +67,8 @@ export const fornyInnloggingFetch = (environment: Environment): Promise<SessionD
     const appUrl = APP_BASE_URL.includes('localhost') ? `${APP_BASE_URL}/api` : APP_BASE_URL;
     return fetchToJson(`${appUrl}/oauth2/session/refresh`, {
         credentials: 'include',
-    }).then((values: any) => {
-        return {
-            session: {
-                createdAt: values.session.created_at,
-                endsAt: values.session.ends_at,
-                timeoutAt: values.session.timeout_at,
-                isActive: values.session.active,
-            },
-            token: {
-                endsAt: values.tokens.expire_at,
-                refreshedAt: values.tokens.refreshed_at,
-                isRefreshCooldown: values.tokens.refresh_cooldown,
-            },
-        };
+    }).then((result: any) => {
+        return adaptFulfilledSessionDataFromAPI(result);
     });
 };
 
