@@ -15,6 +15,7 @@ import { cspDirectives } from '../csp';
 import { getCspHandler } from './api-handlers/csp';
 import { getTaskAnalyticsConfigHandler } from './api-handlers/ta';
 import { mockSessionHandler, refreshMockSessionHandler } from './mock/mockSession';
+import { mockAuthHandler } from './mock/mockAuth';
 
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
@@ -121,6 +122,7 @@ app.get(createPaths('/env'), (req, res, next) => {
 app.get(createPaths('/api/meny'), getMenuHandler);
 app.get(createPaths('/api/sok'), getSokHandler);
 app.get(createPaths('/api/driftsmeldinger'), getDriftsmeldingerHandler);
+app.get(createPaths('/api/auth'), mockAuthHandler);
 app.get(createPaths('/api/oauth2/session'), mockSessionHandler);
 app.get(createPaths('/api/oauth2/session/refresh'), refreshMockSessionHandler);
 app.get(createPaths('/api/csp'), getCspHandler);
