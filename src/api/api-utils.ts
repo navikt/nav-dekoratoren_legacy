@@ -68,15 +68,6 @@ function toJson<T>(response: Response): Promise<T> {
     return response.json();
 }
 
-export function getAuthUrl(path: string): string {
-    const { hostname, port, protocol } = window.location;
-    if (hostname === 'localhost') {
-        return `http://localhost:8088/api${path}`;
-    }
-
-    return `${protocol}//${hostname}:${port}${path}`;
-}
-
 export const adaptFulfilledSessionDataFromAPI = (sessionData: RawResolvedSessionData): SessionData => {
     const { session, tokens } = sessionData;
     return {

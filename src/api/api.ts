@@ -1,4 +1,4 @@
-import { adaptFulfilledAuthDataFromAPI, adaptFulfilledSessionDataFromAPI, fetchToJson, getAuthUrl } from './api-utils';
+import { adaptFulfilledAuthDataFromAPI, adaptFulfilledSessionDataFromAPI, fetchToJson } from './api-utils';
 import { InnloggingsstatusData as InnloggingsstatusData, SessionData } from '../store/reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from '../store/reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
@@ -31,16 +31,20 @@ type Result = {
 export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => fetchToJson(`${APP_URL}/api/meny`);
 
 export const hentInnloggingsstatusFetch = (environment: Environment): Promise<InnloggingsstatusData & SessionData> => {
-    const { API_DEKORATOREN_URL } = environment;
-    const sessionUrl = getAuthUrl('/oauth2/session');
+    const { API_DEKORATOREN_URL, PARAMS } = environment;
+    const { SIDECAR_BASE } = PARAMS;
+
+    const sessionUrl = SIDECAR_BASE && `${SIDECAR_BASE}/oauth2/session`;
 
     const innloggingsstatusResult: Promise<InnloggingsstatusData> = fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
         credentials: 'include',
     });
 
-    const sessionStatus: Promise<SessionData> = fetchToJson(sessionUrl, {
-        credentials: 'include',
-    });
+    const sessionStatus: Promise<SessionData> | null = sessionUrl
+        ? fetchToJson(sessionUrl, {
+              credentials: 'include',
+          })
+        : null;
 
     const all: Promise<InnloggingsstatusData & SessionData> = Promise.allSettled<any[]>([
         innloggingsstatusResult,

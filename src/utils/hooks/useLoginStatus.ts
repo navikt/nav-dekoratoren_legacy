@@ -58,7 +58,8 @@ export const useLoginStatus = () => {
             window.location.href = getLogOutUrl(environment);
         }
 
-        setIsTokenExpiring(secondsToTokenExpires < 60 * 5);
+        //
+        setIsTokenExpiring(_innloggetStatus.authenticated && secondsToTokenExpires < 60 * 5);
         setIsSessionExpiring(secondsToSessionExpires < 60 * 5);
 
         if (secondsToTokenExpires < 0 || secondsToSessionExpires < 0) {
