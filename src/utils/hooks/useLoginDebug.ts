@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { debugInnloggingOK } from 'store/reducers/innloggingsstatus-duck';
 
