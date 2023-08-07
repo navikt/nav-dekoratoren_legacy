@@ -67,9 +67,15 @@ export const hentInnloggingsstatusFetch = (environment: Environment): Promise<In
 };
 
 export const fornyInnloggingFetch = (environment: Environment): Promise<SessionData> => {
-    const { APP_BASE_URL } = environment;
-    const appUrl = APP_BASE_URL.includes('localhost') ? `${APP_BASE_URL}/api` : APP_BASE_URL;
-    return fetchToJson(`${appUrl}/oauth2/session/refresh`, {
+    const { PARAMS } = environment;
+    const { SIDECAR_BASE } = PARAMS;
+
+    if (!SIDECAR_BASE) {
+        throw new Error('No sidecarBase is set as decorator param');
+    }
+    const refreshUrl = `${SIDECAR_BASE}/oauth2/session/refresh`;
+
+    return fetchToJson(refreshUrl, {
         credentials: 'include',
     }).then((result: any) => {
         return adaptFulfilledSessionDataFromAPI(result);
