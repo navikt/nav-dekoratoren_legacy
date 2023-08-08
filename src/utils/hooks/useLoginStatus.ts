@@ -14,7 +14,6 @@ let timeoutId: NodeJS.Timeout | null = null;
 
 export const useLoginStatus = () => {
     const dispatch = useDispatch();
-    const [hasFocus, setHasFocus] = useState(false);
     const { innloggetStatus, environment } = useSelector(stateSelector);
     const [isTokenExpiring, setIsTokenExpiring] = useState<boolean | null>(null);
     const [isSessionExpiring, setIsSessionExpiring] = useState<boolean | null>(null);
@@ -58,7 +57,6 @@ export const useLoginStatus = () => {
             window.location.href = getLogOutUrl(environment);
         }
 
-        //
         setIsTokenExpiring(_innloggetStatus.authenticated && secondsToTokenExpires < 60 * 5);
         setIsSessionExpiring(secondsToSessionExpires < 60 * 5);
 
@@ -80,7 +78,6 @@ export const useLoginStatus = () => {
             checkLoginAndRepeat();
             hentInnloggingsstatus(environment)(dispatch);
         }
-        setHasFocus(document.visibilityState === 'visible');
     };
 
     useEffect(() => {
@@ -88,5 +85,5 @@ export const useLoginStatus = () => {
         window.addEventListener('visibilitychange', onVisibilityChange);
     }, []);
 
-    return { hasFocus, isTokenExpiring, isSessionExpiring, refreshTokenHandler, logoutHandler };
+    return { isTokenExpiring, isSessionExpiring, refreshTokenHandler, logoutHandler };
 };

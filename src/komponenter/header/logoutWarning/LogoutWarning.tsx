@@ -2,12 +2,13 @@ import { BodyLong, Button, Heading, Modal } from '@navikt/ds-react';
 import React, { useEffect } from 'react';
 import { useLoginStatus } from 'utils/hooks/useLoginStatus';
 import { finnTekst } from 'tekster/finn-tekst';
-
-import styles from './LogoutWarning.module.scss';
 import classNames from 'classnames';
+
 import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { LangKey } from 'tekster/ledetekster';
+
+import styles from './LogoutWarning.module.scss';
 
 export const LogoutWarning = () => {
     const { refreshTokenHandler, logoutHandler, isTokenExpiring, isSessionExpiring } = useLoginStatus();
@@ -24,11 +25,11 @@ export const LogoutWarning = () => {
         setIsOpen(false);
     };
 
-    if (!isTokenExpiring && !isSessionExpiring) {
+    if (typeof document === 'undefined') {
         return null;
     }
 
-    if (typeof document === 'undefined') {
+    if (!isTokenExpiring && !isSessionExpiring) {
         return null;
     }
 
