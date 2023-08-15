@@ -23,7 +23,6 @@ const getLang = (url: string) => {
 
 type ListElementProps = {
     wrap: boolean;
-    key?: React.Key;
     children: JSX.Element;
 };
 type ListWrapperProps = {
@@ -39,9 +38,9 @@ const ListWrapper = ({ className, wrap, elements }: ListWrapperProps): JSX.Eleme
     return <>{elements}</>;
 };
 
-const ListElement = ({ wrap, key, children }: ListElementProps) => {
+const ListElement = ({ wrap, children }: ListElementProps) => {
     if (wrap) {
-        return <li key={key}>{children}</li>;
+        return <li>{children}</li>;
     }
     return children;
 };
