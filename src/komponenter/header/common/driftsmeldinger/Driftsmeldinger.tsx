@@ -47,8 +47,7 @@ export const Driftsmeldinger = () => {
     useEffect(() => {
         const lastShownDriftsmelding = Cookies.get('nav-driftsmelding-last-display-time')?.toString();
         const secondsSindeLastDisplay = Date.now() - Number.parseInt(lastShownDriftsmelding ?? '0', 10);
-        const timeHasPassed = secondsSindeLastDisplay > 1000 * 60 * 1; // 1 min. To increase before prod!
-
+        const timeHasPassed = secondsSindeLastDisplay > 1000 * 60 * 30; // 30;
         if (timeHasPassed && currentDriftsmeldinger.length > 0) {
             setShouldDisplayForScreenreader(true);
             Cookies.set('nav-driftsmelding-last-display-time', Date.now().toString(), { expires: 30 });
