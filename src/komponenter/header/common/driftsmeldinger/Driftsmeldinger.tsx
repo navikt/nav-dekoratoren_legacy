@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
 import { AppState } from 'store/reducers';
 import { DriftsmeldingerState } from 'store/reducers/driftsmeldinger-duck';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
@@ -35,26 +36,47 @@ const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
 
 export const Driftsmeldinger = () => {
     const { language } = useSelector((state: AppState) => state.language);
+    const [shouldDisplayForScreenreader, setShouldDisplayForScreenreader] = useState<boolean>(false);
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
     const { XP_BASE_URL } = environment;
     const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
 
+    // Make sure not to read out Driftsmelding to screen readers on every page reload. Therefore
+    // check when screen readers was presented with Driftsmelding last and display again if
+    // more than X minutes.
+    useEffect(() => {
+        const lastShownDriftsmelding = Cookies.get('nav-driftsmelding-last-display-time')?.toString();
+        const secondsSindeLastDisplay = Date.now() - Number.parseInt(lastShownDriftsmelding ?? '0', 10);
+        const hasTimeLimitPassed = secondsSindeLastDisplay > 1000 * 60 * 30; // 30;
+        if (hasTimeLimitPassed && currentDriftsmeldinger.length > 0) {
+            setShouldDisplayForScreenreader(true);
+            Cookies.set('nav-driftsmelding-last-display-time', Date.now().toString(), { expires: 30 });
+        }
+    }, [currentDriftsmeldinger.length]);
+
     return currentDriftsmeldinger.length > 0 ? (
-        <section className={style.driftsmeldinger} aria-label={finnTekst('driftsmeldinger',language)}>
-            {currentDriftsmeldinger.map((melding) => (
-                <LenkeMedSporing
-                    key={melding.heading}
-                    href={`${XP_BASE_URL}${melding.url}`}
-                    classNameOverride={style.message}
-                    analyticsEventArgs={{
-                        category: AnalyticsCategory.Header,
-                        action: 'driftsmeldinger',
-                    }}
-                >
-                    <span className={style.messageIcon}>{melding.type && <Icon type={melding.type} />}</span>
-                    <BodyLong>{melding.heading}</BodyLong>
-                </LenkeMedSporing>
-            ))}
+        <section className={style.driftsmeldinger}>
+            {currentDriftsmeldinger.map((melding) => {
+                const srRoleProp = shouldDisplayForScreenreader && { role: melding.type === 'info' ? 'status' : 'alert' };
+                return (
+                    <LenkeMedSporing
+                        key={melding.heading}
+                        href={`${XP_BASE_URL}${melding.url}`}
+                        classNameOverride={style.message}
+                        analyticsEventArgs={{
+                            category: AnalyticsCategory.Header,
+                            action: 'driftsmeldinger',
+                        }}
+                        {...srRoleProp}
+                    >
+                        <span className={style.messageIcon}>{melding.type && <Icon type={melding.type} />}</span>
+                        <BodyLong>
+                            <span className={style.srOnly}>{finnTekst('driftsmeldinger', language)}</span>
+                            {melding.heading}
+                        </BodyLong>
+                    </LenkeMedSporing>
+                );
+            })}
         </section>
     ) : null;
 };
@@ -65,8 +87,8 @@ interface IconProps {
 
 const Icon = (props: IconProps) => (
     <>
-        {props.type === 'prodstatus' && <StatusSvg/>}
-        {props.type === 'info' && <InfoSvg/>}
+        {props.type === 'prodstatus' && <StatusSvg />}
+        {props.type === 'info' && <InfoSvg />}
     </>
 );
 
