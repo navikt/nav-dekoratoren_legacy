@@ -11,7 +11,7 @@ import { LangKey } from 'tekster/ledetekster';
 import styles from './LogoutWarning.module.scss';
 
 export const LogoutWarning = () => {
-    const { refreshTokenHandler, logoutHandler, isTokenExpiring, isSessionExpiring } = useLoginStatus();
+    const { refreshTokenHandler, logoutHandler, isTokenExpiring, isSessionExpiring, secondsToSessionExpires } = useLoginStatus();
     const [isOpen, setIsOpen] = React.useState(false);
     const { language } = useSelector((state: AppState) => state.language);
 
@@ -35,7 +35,10 @@ export const LogoutWarning = () => {
 
     const parent = document.getElementById('top-element');
 
+    const titleId: LangKey = isSessionExpiring ? 'snart-session-logget-ut-tittel' : 'snart-token-logget-ut-tittel';
     const textBodyId: LangKey = isSessionExpiring ? 'snart-session-logget-ut-body' : 'snart-token-logget-ut-body';
+
+    const minutesToSessionEnd = Math.floor(secondsToSessionExpires / 60);
 
     return (
         <Modal
@@ -49,7 +52,7 @@ export const LogoutWarning = () => {
         >
             <Modal.Content className={styles.content}>
                 <Heading spacing level="1" size="small">
-                    {finnTekst('snart-logget-ut-tittel', language)}
+                    {finnTekst(titleId, language, minutesToSessionEnd.toString())}
                 </Heading>
                 <BodyLong spacing>{finnTekst(textBodyId, language)}</BodyLong>
                 <div className={styles.buttonWrapper}>

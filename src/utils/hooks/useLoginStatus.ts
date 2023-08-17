@@ -17,6 +17,7 @@ export const useLoginStatus = () => {
     const { innloggetStatus, environment } = useSelector(stateSelector);
     const [isTokenExpiring, setIsTokenExpiring] = useState<boolean | null>(null);
     const [isSessionExpiring, setIsSessionExpiring] = useState<boolean | null>(null);
+    const [secondsToSessionExpires, setSecondsToSessionExpires] = useState<number>(0);
     useLoginDebug();
 
     // Need to create a ref in order for the setTimeout function to
@@ -58,7 +59,8 @@ export const useLoginStatus = () => {
         }
 
         setIsTokenExpiring(_innloggetStatus.authenticated && secondsToTokenExpires < 60 * 5);
-        setIsSessionExpiring(secondsToSessionExpires < 60 * 5);
+        setIsSessionExpiring(secondsToSessionExpires < 60 * 10);
+        setSecondsToSessionExpires(secondsToSessionExpires);
 
         if (secondsToTokenExpires < 0 || secondsToSessionExpires < 0) {
             window.location.href = getLogOutUrl(environment);
@@ -85,5 +87,5 @@ export const useLoginStatus = () => {
         window.addEventListener('visibilitychange', onVisibilityChange);
     }, []);
 
-    return { isTokenExpiring, isSessionExpiring, refreshTokenHandler, logoutHandler };
+    return { isTokenExpiring, isSessionExpiring, refreshTokenHandler, logoutHandler, secondsToSessionExpires};
 };
