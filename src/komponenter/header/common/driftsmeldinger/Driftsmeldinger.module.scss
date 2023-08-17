@@ -51,3 +51,11 @@
     margin-right: 0.5rem;
     color: var(--a-white);
 }
+
+.srOnly {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    display: block;
+}

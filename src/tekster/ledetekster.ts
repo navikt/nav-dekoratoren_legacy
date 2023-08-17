@@ -334,8 +334,7 @@ export const ledetekster = {
     'arkiver-se': 'Arkiver',
 
     //Driftsmeldinger
-    'driftsmeldinger': 'Viktig informasjon',
-    'driftsmeldinger-en': 'Important information',
-    'driftsmeldinger-se': 'Viktig informasjon',
-
+    driftsmeldinger: 'Viktig informasjon: ',
+    'driftsmeldinger-en': 'Important information: ',
+    'driftsmeldinger-se': 'Viktig informasjon: ',
 } as const;
