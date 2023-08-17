@@ -47,8 +47,8 @@ export const Driftsmeldinger = () => {
     useEffect(() => {
         const lastShownDriftsmelding = Cookies.get('nav-driftsmelding-last-display-time')?.toString();
         const secondsSindeLastDisplay = Date.now() - Number.parseInt(lastShownDriftsmelding ?? '0', 10);
-        const timeHasPassed = secondsSindeLastDisplay > 1000 * 60 * 30; // 30;
-        if (timeHasPassed && currentDriftsmeldinger.length > 0) {
+        const hasTimeLimitPassed = secondsSindeLastDisplay > 1000 * 60 * 30; // 30;
+        if (hasTimeLimitPassed && currentDriftsmeldinger.length > 0) {
             setShouldDisplayForScreenreader(true);
             Cookies.set('nav-driftsmelding-last-display-time', Date.now().toString(), { expires: 30 });
         }
@@ -57,7 +57,7 @@ export const Driftsmeldinger = () => {
     return currentDriftsmeldinger.length > 0 ? (
         <section className={style.driftsmeldinger}>
             {currentDriftsmeldinger.map((melding) => {
-                const roleProp = shouldDisplayForScreenreader && { role: melding.type === 'info' ? 'status' : 'alert' };
+                const srRoleProp = shouldDisplayForScreenreader && { role: melding.type === 'info' ? 'status' : 'alert' };
                 return (
                     <LenkeMedSporing
                         key={melding.heading}
@@ -67,7 +67,7 @@ export const Driftsmeldinger = () => {
                             category: AnalyticsCategory.Header,
                             action: 'driftsmeldinger',
                         }}
-                        {...roleProp}
+                        {...srRoleProp}
                     >
                         <span className={style.messageIcon}>{melding.type && <Icon type={melding.type} />}</span>
                         <BodyLong>
