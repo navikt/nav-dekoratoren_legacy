@@ -37,6 +37,7 @@ import { useOnPushStateHandlers } from 'utils/hooks/useOnPushStateHandlers';
 
 import './Header.scss';
 import { mapToClosestTranslatedLanguage } from 'utils/language';
+import { LogoutWarning } from 'komponenter/header/logoutWarning/LogoutWarning';
 import { useLoadIfActiveSession } from 'utils/hooks';
 
 export const decoratorContextCookie = CookieName.DECORATOR_CONTEXT;
@@ -118,7 +119,7 @@ export const Header = () => {
     // Handle external data
     useEffect(() => {
         fetchDriftsmeldinger(APP_URL)(dispatch);
-        hentInnloggingsstatus(API_DEKORATOREN_URL)(dispatch);
+        hentInnloggingsstatus(environment)(dispatch);
         fetchMenypunkter(APP_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
             fetchFeatureToggles(API_DEKORATOREN_URL, currentFeatureToggles)
@@ -337,6 +338,7 @@ export const Header = () => {
                 {useSimpleHeader ? <HeaderSimple /> : <HeaderRegular />}
             </header>
             <Driftsmeldinger />
+            {PARAMS.LOGOUT_WARNING && <LogoutWarning />}
             {(breadcrumbs.length > 0 || availableLanguages.length > 0) && (
                 // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
                 <div

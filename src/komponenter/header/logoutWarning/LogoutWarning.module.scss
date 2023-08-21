@@ -1,0 +1,60 @@
+@use 'src/styling-variabler' as sv;
+
+.logoutWarning {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    align-items: center;
+    box-shadow: var(--a-shadow-large);
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    transform: translateY(0);
+
+    &:focus {
+        box-shadow: var(--a-shadow-large);
+    }
+
+    @media #{sv.$screen-mobile} {
+        width: 100%;
+        align-self: flex-end;
+        border-radius: var(--a-border-radius-xlarge);
+        padding-bottom: 3rem;
+    }
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+
+    @media #{sv.$screen-mobile} {
+        transform: translateY(2rem);
+    }
+}
+
+.content {
+    width: 100%;
+}
+
+.buttonWrapper {
+    display: flex;
+    flex-direction: row;
+
+    @media #{sv.$screen-mobile} {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+}
+
+.confirm {
+    margin-right: 1rem;
+
+    @media #{sv.$screen-mobile} {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}
+
+.logout {
+    background-color: var(--a-surface-action-subtle-hover);
+}

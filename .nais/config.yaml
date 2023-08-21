@@ -16,6 +16,11 @@ spec:
   prometheus:
     enabled: true
     path: {{appPath}}/metrics
+  idporten:
+    enabled: true
+    sidecar:
+      enabled: true
+      autoLogin: false
   ingresses:
   {{#each ingresses as |url|}}
     - {{url}}

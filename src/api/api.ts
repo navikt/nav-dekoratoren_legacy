@@ -1,9 +1,11 @@
-import { fetchToJson } from './api-utils';
-import { Data as innloggingsstatusData } from '../store/reducers/innloggingsstatus-duck';
+import { adaptFulfilledAuthDataFromAPI, adaptFulfilledSessionDataFromAPI, fetchToJson } from './api-utils';
+import { InnloggingsstatusData as InnloggingsstatusData, SessionData } from '../store/reducers/innloggingsstatus-duck';
 import { VarslerData as varselinnboksData } from '../store/reducers/varselinnboks-duck';
 import { MenyNode as menypunkterData } from '../store/reducers/menu-duck';
 import { DriftsmeldingerData } from 'store/reducers/driftsmeldinger-duck';
 import { FeatureToggles } from 'store/reducers/feature-toggles-duck';
+import { Environment } from 'store/reducers/environment-duck';
+import { FulfilledValues } from 'types/auth';
 
 type DoneEvent = {
     eventId: string;
@@ -21,12 +23,64 @@ export interface DataElement {
     status: Status;
 }
 
+type Result = {
+    status: 'fulfilled' | 'rejected';
+    value?: any;
+};
+
 export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => fetchToJson(`${APP_URL}/api/meny`);
 
-export const hentInnloggingsstatusFetch = (API_DEKORATOREN_URL: string): Promise<innloggingsstatusData> =>
-    fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
+export const hentInnloggingsstatusFetch = (environment: Environment): Promise<InnloggingsstatusData & SessionData> => {
+    const { API_DEKORATOREN_URL, PARAMS } = environment;
+    const { APP_BASE } = PARAMS;
+
+    const sessionUrl = APP_BASE && `${APP_BASE}/oauth2/session`;
+
+    const innloggingsstatusResult: Promise<InnloggingsstatusData> = fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
         credentials: 'include',
     });
+
+    const sessionStatus: Promise<SessionData> | null = sessionUrl
+        ? fetchToJson(sessionUrl, {
+              credentials: 'include',
+          })
+        : null;
+
+    const all: Promise<InnloggingsstatusData & SessionData> = Promise.allSettled<any[]>([
+        innloggingsstatusResult,
+        sessionStatus,
+    ])
+        .then((results) => {
+            const fulfilled = results.filter((result) => result.status === 'fulfilled');
+            const fulfilledValues: FulfilledValues = fulfilled.reduce((acc, result: Result) => {
+                result.value = result.value || {};
+                return { ...acc, ...result.value };
+            }, {});
+
+            return adaptFulfilledAuthDataFromAPI(fulfilledValues);
+        })
+        .catch((e) => {
+            throw new Error(`Error fetching innloggingsstatus [error: ${e}]`);
+        });
+
+    return all;
+};
+
+export const fornyInnloggingFetch = (environment: Environment): Promise<SessionData> => {
+    const { PARAMS } = environment;
+    const { APP_BASE } = PARAMS;
+
+    if (!APP_BASE) {
+        throw new Error('No appBase is set as decorator param');
+    }
+    const refreshUrl = `${APP_BASE}/oauth2/session/refresh`;
+
+    return fetchToJson(refreshUrl, {
+        credentials: 'include',
+    }).then((result: any) => {
+        return adaptFulfilledSessionDataFromAPI(result);
+    });
+};
 
 export const hentVarslerFetch = (VARSEL_API_URL: string): Promise<varselinnboksData> => {
     return fetchToJson(`${VARSEL_API_URL}/varselbjelle/varsler`, { credentials: 'include' });
