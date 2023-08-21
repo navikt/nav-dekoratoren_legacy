@@ -32,9 +32,9 @@ export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => 
 
 export const hentInnloggingsstatusFetch = (environment: Environment): Promise<InnloggingsstatusData & SessionData> => {
     const { API_DEKORATOREN_URL, PARAMS } = environment;
-    const { SIDECAR_BASE } = PARAMS;
+    const { APP_BASE } = PARAMS;
 
-    const sessionUrl = SIDECAR_BASE && `${SIDECAR_BASE}/oauth2/session`;
+    const sessionUrl = APP_BASE && `${APP_BASE}/oauth2/session`;
 
     const innloggingsstatusResult: Promise<InnloggingsstatusData> = fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
         credentials: 'include',
@@ -68,12 +68,12 @@ export const hentInnloggingsstatusFetch = (environment: Environment): Promise<In
 
 export const fornyInnloggingFetch = (environment: Environment): Promise<SessionData> => {
     const { PARAMS } = environment;
-    const { SIDECAR_BASE } = PARAMS;
+    const { APP_BASE } = PARAMS;
 
-    if (!SIDECAR_BASE) {
-        throw new Error('No sidecarBase is set as decorator param');
+    if (!APP_BASE) {
+        throw new Error('No appBase is set as decorator param');
     }
-    const refreshUrl = `${SIDECAR_BASE}/oauth2/session/refresh`;
+    const refreshUrl = `${APP_BASE}/oauth2/session/refresh`;
 
     return fetchToJson(refreshUrl, {
         credentials: 'include',

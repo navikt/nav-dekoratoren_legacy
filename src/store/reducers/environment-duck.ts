@@ -46,7 +46,7 @@ export interface Params {
     LOGOUT_URL?: string;
     MASK_HOTJAR?: boolean;
     LOGOUT_WARNING: boolean;
-    SIDECAR_BASE?: string;
+    APP_BASE?: string;
 }
 
 export interface Cookies {
@@ -88,7 +88,7 @@ export const initialState: Environment = {
         SHARE_SCREEN: false,
         MASK_HOTJAR: true,
         LOGOUT_WARNING: false,
-        SIDECAR_BASE: '',
+        APP_BASE: '',
     },
 };
 

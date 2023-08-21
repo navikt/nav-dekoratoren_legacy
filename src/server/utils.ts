@@ -72,7 +72,7 @@ export const clientEnv = ({ req }: Props): Environment => {
                 }),
                 MASK_HOTJAR: req.query.maskHotjar !== 'false',
                 LOGOUT_WARNING: req.query.logoutWarning === 'true',
-                SIDECAR_BASE: (req.query.sidecarBase || '') as string,
+                APP_BASE: (req.query.appBase || '') as string,
             },
         }),
     };

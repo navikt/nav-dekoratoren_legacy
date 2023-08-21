@@ -124,7 +124,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | logoutUrl           | string                                                 | undefined        | Setter url for logg-ut knappen [9]                                                         |
 | maskHotjar          | boolean                                                | true             | Maskerer hele HTML-dokumentet fra Hotjar [10]                                              |
 | logoutWarning       | boolean                                                | false            | Beta-versjon: Viser utloggingsvarsel [11]                                                  |
-| sidecarBase         | string                                                 | undefined        | Beta-versjon: Angir ingress for applikasjonen hvor også Sidecar vil være tilgjengelig [12] |
+| appBase         | string                                                 | undefined        | Beta-versjon: Angir ingress for applikasjonen hvor også Sidecar vil være tilgjengelig [12] |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
@@ -212,7 +212,7 @@ Med Wonderwall som sidecar kan dekoratøren håndtere varsling av utlogging for 
 
 ### Oppsett
 
-Du slår på utloggingsvarsel ved sette parameteret logoutWarning. Dekoratøren må kjenne til ingressen for applikasjonen hvor også Sidecar vil legge på sine routes. Derfor må du også oppgi sidecarBase.
+Du slår på utloggingsvarsel ved sette parameteret logoutWarning. Dekoratøren må kjenne til ingressen for applikasjonen hvor også Sidecar vil legge på sine routes. Derfor må du også oppgi appBase.
 I din egen applikasjon må du også slå på idporten og sidecar i nais-config. [Mer informasjon i NAIS-dokumentasjon](https://docs.nais.io/appendix/wonderwall/?h=wonderwal#1-initiate-login).
 
 Når dette er gjort vil dekoratøren kunne sjekke session og gjøre en refresh via blant annet `https://www.nav.no/[din-applikasjons-ingress]/oauth2/session`.
