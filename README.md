@@ -124,7 +124,6 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | logoutUrl           | string                                                 | undefined        | Setter url for logg-ut knappen [9]                                                         |
 | maskHotjar          | boolean                                                | true             | Maskerer hele HTML-dokumentet fra Hotjar [10]                                              |
 | logoutWarning       | boolean                                                | false            | Beta-versjon: Viser utloggingsvarsel [11]                                                  |
-| appBase         | string                                                 | undefined        | Beta-versjon: Angir ingress for applikasjonen hvor også Sidecar vil være tilgjengelig [12] |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
@@ -206,30 +205,28 @@ Eksempel:
 <main id="maincontent" tabindex="-1">Appens hovedinnhold goes here!</main>
 ```
 
-## Utloggingsvarsel
+## Utloggingsvarsel (OBS! Beta)
 
-Med Wonderwall som sidecar kan dekoratøren håndtere varsling av utlogging for deg. Du må huske å slå på sidecar i applikasjonen din, se mer informasjon i [NAIS-dokumentasjonen](https://docs.nais.io/appendix/wonderwall/).
+Dekoratøren kan håndtere utloggingsvarsel og fornying av token for deg. Dette gjør den direkte mot sentral login-instans. Se seksjon "Slik fungerer utloggingsvarsel" for mer informsjon om når varselet slår inn og hvordan det fungerer.
 
 ### Oppsett
 
-Du slår på utloggingsvarsel ved sette parameteret logoutWarning. Dekoratøren må kjenne til ingressen for applikasjonen hvor også Sidecar vil legge på sine routes. Derfor må du også oppgi appBase.
-I din egen applikasjon må du også slå på idporten og sidecar i nais-config. [Mer informasjon i NAIS-dokumentasjon](https://docs.nais.io/appendix/wonderwall/?h=wonderwal#1-initiate-login).
-
-Når dette er gjort vil dekoratøren kunne sjekke session og gjøre en refresh via blant annet `https://www.nav.no/[din-applikasjons-ingress]/oauth2/session`.
+Du slår på utloggingsvarsel ved sette parameteret ```logoutWarning```. Dekoratøren kaller direkte mot sentral login-instans, enten login.nav.no eller login.ekstern.dev.nav.no. Det er derfor ikke behov for å sette opp Sidecar i din egen applikasjon hvis du ikke trenger den til noe annet. [Mer informasjon om Wonderwall i NAIS-dokumentasjon](https://docs.nais.io/appendix/wonderwall/?h=wonderwal#1-initiate-login).
 
 ### Slik fungerer utloggingsvarsel
 
--   Et token er gyldig i 60 minutter. Hele session er gyldig i 6 timer. Token kan fornyes, men session krever at bruker logger helt ut og inn igjen etter 6 timer.
--   5 minutter før utløp vil bruker se varsel i form av en popup-dialog.
--   I denne popup-dialogen vil brukeren måtte ta et aktivt valg om å forlenge innloggingen, eller klikke "Logg ut" for å logge ut umiddelbart.
--   Dersom brukeren velger å forlenge, blir tokenet fornyet i nye 60 minutter.
+-   Et token er gyldig i 60 minutter. Hele session er gyldig i 6 timer. Token kan fornyes, men når session utløper etter 6 timer, må bruker uansett logge ut og inn igjen.
+-   5 minutter før utløp av token vil bruker se varsel i form av en popup-dialog.
+-   I denne popup-dialogen vil brukeren måtte ta et aktivt valg om å enten fortsette å være innlogget, eller klikke "Logg ut" for å logge ut umiddelbart.
+-   Dersom brukeren velger å fortsette å være innlogget, blir tokenet fornyet i nye 60 minutter, forutsatt at session fortsatt er innenfor 6 timer.
 -   10 minutter før session utløper vil bruker få beskjed om å avslutte og eventuelt logge inn på nytt.
+-   Bruker vil få beskjed om hvor mange minutter som er igjen før hen blir logget ut.
 -   I begge varslene (for token og session) vil bruker måtte ta et aktivt valg. Det er ikke mulig å krysse vekk eller trykke "Esc" for å lukke varselet.
 -   Dersom bruker forlater maskinen eller ikke tar et aktivt valg vil hen bli sendt til utloggingssiden når token eller session har utløpt.
 
 ### Verdt å merke seg
 
--   Varselet for sessions når 6 timer nærmer seg vil først og fremst treffe arbeidsgivere og andre parter som aktivt jobber inne i NAV-tjenester over lengre tid.
+-   Det er først og fremst arbeidsgiver og andre parter som benytter nav.no over lang tid som vil se varselet for utløpt session etter 6 timer.
 -   Vi har forsøkt å utforme varselet med mål om minst mulig kognitivt stress og har derfor valgt å droppe nedtelling i grensesnittet. Vi er åpne for tilbakemeldinger etterhvert som flere team begynner å ta ibruk utloggingsvarselet.
 
 ## Utvikling - Kom i gang

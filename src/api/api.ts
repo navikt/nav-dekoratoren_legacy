@@ -28,21 +28,21 @@ type Result = {
     value?: any;
 };
 
-
 export const hentMenyPunkter = (APP_URL: string): Promise<menypunkterData[]> => fetchToJson(`${APP_URL}/api/meny`);
 
 export const hentInnloggingsstatusFetch = (environment: Environment): Promise<InnloggingsstatusData & SessionData> => {
     const { API_DEKORATOREN_URL, ENV } = environment;
 
-    const sessionUrl = ENV === 'prod' ? `https://login.nav.no/oauth2/session` : `https://login.ekstern.dev.nav.no/oauth2/session`;
+    const sessionUrl =
+        ENV === 'prod' ? `https://login.nav.no/oauth2/session` : `https://login.ekstern.dev.nav.no/oauth2/session`;
 
     const innloggingsstatusResult: Promise<InnloggingsstatusData> = fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
         credentials: 'include',
     });
 
     const sessionStatus: Promise<SessionData> | null = fetchToJson(sessionUrl, {
-              credentials: 'include',
-          });
+        credentials: 'include',
+    });
 
     const all: Promise<InnloggingsstatusData & SessionData> = Promise.allSettled<any[]>([
         innloggingsstatusResult,
@@ -67,7 +67,10 @@ export const hentInnloggingsstatusFetch = (environment: Environment): Promise<In
 export const fornyInnloggingFetch = (environment: Environment): Promise<SessionData> => {
     const { ENV } = environment;
 
-    const refreshUrl = ENV === 'prod' ? `https://login.nav.no/oauth2/session/refresh` : `https://login.ekstern.dev.nav.no/oauth2/session/refresh`;
+    const refreshUrl =
+        ENV === 'prod'
+            ? `https://login.nav.no/oauth2/session/refresh`
+            : `https://login.ekstern.dev.nav.no/oauth2/session/refresh`;
 
     return fetchToJson(refreshUrl, {
         credentials: 'include',
