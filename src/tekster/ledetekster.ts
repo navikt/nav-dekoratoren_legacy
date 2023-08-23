@@ -48,9 +48,14 @@ export const ledetekster = {
     'snart-token-logget-ut-body': 'Vil du fortsatt være innlogget?',
     'snart-token-logget-ut-body-en': 'Would you like to stay logged in?',
     'snart-token-logget-ut-body-se': 'Vil du fortsatt være innlogget?',
-    'snart-session-logget-ut-tittel': (input: string) => `Du blir logget ut automatisk om ${input} ${Number.parseInt(input, 10) === 1 ? 'minutt' : 'minutter'}`,
-    'snart-session-logget-ut-tittel-en': (input: string) => `You will be logged out automatically in ${input} ${Number.parseInt(input, 10) === 1 ? 'minute' : 'minutes'}`,
-    'snart-session-logget-ut-tittel-se': (input: string) => `Du blir logget ut automatisk om ${input} ${Number.parseInt(input, 10) === 1 ? 'minutt' : 'minutter'}`,
+    'snart-session-logget-ut-tittel': (input: string) =>
+        `Du blir logget ut automatisk om ca ${input} ${Number.parseInt(input, 10) === 1 ? 'minutt' : 'minutter'}`,
+    'snart-session-logget-ut-tittel-en': (input: string) =>
+        `You will be logged out automatically in about ${input} ${
+            Number.parseInt(input, 10) === 1 ? 'minute' : 'minutes'
+        }`,
+    'snart-session-logget-ut-tittel-se': (input: string) =>
+        `Du blir logget ut automatisk om ca ${input} ${Number.parseInt(input, 10) === 1 ? 'minutt' : 'minutter'}`,
     'snart-session-logget-ut-body': 'Avslutt det du jobber med og logg inn igjen.',
     'snart-session-logget-ut-body-en': 'Please wrap up what you are doing and log in again.',
     'snart-session-logget-ut-body-se': 'Avslutt det du jobber med og logg inn igjen.',

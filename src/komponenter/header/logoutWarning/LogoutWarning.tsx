@@ -11,7 +11,8 @@ import { LangKey } from 'tekster/ledetekster';
 import styles from './LogoutWarning.module.scss';
 
 export const LogoutWarning = () => {
-    const { refreshTokenHandler, logoutHandler, isTokenExpiring, isSessionExpiring, secondsToSessionExpires } = useLoginStatus();
+    const { refreshTokenHandler, logoutHandler, isTokenExpiring, isSessionExpiring, secondsToSessionExpires } =
+        useLoginStatus();
     const [isOpen, setIsOpen] = React.useState(false);
     const { language } = useSelector((state: AppState) => state.language);
 
@@ -38,7 +39,7 @@ export const LogoutWarning = () => {
     const titleId: LangKey = isSessionExpiring ? 'snart-session-logget-ut-tittel' : 'snart-token-logget-ut-tittel';
     const textBodyId: LangKey = isSessionExpiring ? 'snart-session-logget-ut-body' : 'snart-token-logget-ut-body';
 
-    const minutesToSessionEnd = Math.floor(secondsToSessionExpires / 60);
+    const minutesToSessionEnd = Math.ceil(secondsToSessionExpires / 60);
 
     return (
         <Modal
