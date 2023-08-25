@@ -20,7 +20,7 @@ const Footer = () => {
                 <footer className="sitefooter">
                     {PARAMS.SIMPLE || PARAMS.SIMPLE_FOOTER ? <SimpleFooter /> : <FooterRegular />}
                 </footer>
-                {(PARAMS.LOGOUT_WARNING || ENV === 'prod') && <LogoutWarning />}
+                {(PARAMS.LOGOUT_WARNING || ENV === 'dev') && <LogoutWarning />}
                 <div id="logout-warning" />
             </div>
         </>
