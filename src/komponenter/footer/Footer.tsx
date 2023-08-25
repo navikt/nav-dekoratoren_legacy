@@ -7,7 +7,7 @@ import { mapToClosestTranslatedLanguage } from 'utils/language';
 import { LogoutWarning } from 'komponenter/header/logoutWarning/LogoutWarning';
 
 const Footer = () => {
-    const { PARAMS } = useSelector((state: AppState) => state.environment);
+    const { PARAMS, ENV } = useSelector((state: AppState) => state.environment);
     const { language } = useSelector((state: AppState) => state.language);
 
     return (
@@ -20,7 +20,7 @@ const Footer = () => {
                 <footer className="sitefooter">
                     {PARAMS.SIMPLE || PARAMS.SIMPLE_FOOTER ? <SimpleFooter /> : <FooterRegular />}
                 </footer>
-                {PARAMS.LOGOUT_WARNING && <LogoutWarning />}
+                {(PARAMS.LOGOUT_WARNING || ENV === 'prod') && <LogoutWarning />}
                 <div id="logout-warning" />
             </div>
         </>
