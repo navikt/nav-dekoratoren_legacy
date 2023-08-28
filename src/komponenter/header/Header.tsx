@@ -338,7 +338,7 @@ export const Header = () => {
                 {useSimpleHeader ? <HeaderSimple /> : <HeaderRegular />}
             </header>
             <Driftsmeldinger />
-            <LogoutWarning />
+            {(PARAMS.LOGOUT_WARNING || ENV === 'dev') && <LogoutWarning />}
             {(breadcrumbs.length > 0 || availableLanguages.length > 0) && (
                 // Klassen "decorator-utils-container" brukes av appene til å sette bakgrunn
                 <div
