@@ -39,7 +39,7 @@ export const LogoutWarning = () => {
     const titleId: LangKey = isSessionExpiring ? 'snart-session-logget-ut-tittel' : 'snart-token-logget-ut-tittel';
     const textBodyId: LangKey = isSessionExpiring ? 'snart-session-logget-ut-body' : 'snart-token-logget-ut-body';
 
-    const minutesToSessionEnd = Math.floor(secondsToSessionExpires / 60);
+    const minutesToSessionEnd = Math.ceil(secondsToSessionExpires / 60);
 
     return (
         <Modal

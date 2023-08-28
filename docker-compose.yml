@@ -1,38 +1,29 @@
 version: '3.7'
 services:
     oidc-provider:
-        container_name: oidc-provider
-        networks:
-            nav.docker-internal:
-                aliases:
-                    - oidc-provider.nav.docker-internal
-        image: 'navikt/stub-oidc-provider:latest'
+        container_name: oidc-provider-dekoratoren
+        image: 'ghcr.io/navikt/stub-oidc-provider/stub-oidc-provider:latest'
         ports:
             - '9000:9000'
         environment:
             PORT: '9000'
-            CALLBACK_URL: 'http://localhost:5000/callback'
+            CALLBACK_URL: 'http://localhost:50000/callback'
             ISSUER: 'https://localhost:9000'
+
     oidc-provider-gui:
-        container_name: oidc-provider-gui
-        networks:
-            nav.docker-internal:
-                aliases:
-                    - oidc-provider-gui.nav.docker-internal
-        image: 'navikt/pb-oidc-provider-gui:latest'
+        container_name: oidc-provider-gui-dekoratoren
+        image: 'ghcr.io/navikt/pb-oidc-provider-gui/pb-oidc-provider-gui:latest'
         ports:
-            - '5000:5000'
-        depends_on:
-            - oidc-provider
+            - '50000:50000'
         environment:
             REDIRECT_URL: 'http://localhost:8088/dekoratoren'
             AUTO_REDIRECT_TO_FRONTEND: 'true'
+            OIDC_PROVIDER_GUI_URL: 'http://localhost:50000/callback'
+        depends_on:
+            - oidc-provider
+
     mocks:
-        container_name: mocks
-        networks:
-            nav.docker-internal:
-                aliases:
-                    - mocks.nav.docker-internal
+        container_name: mocks-dekoratoren
         image: 'ghcr.io/navikt/pb-nav-mocked/pb-nav-mocked:latest'
         ports:
             - '8095:8080'
@@ -41,9 +32,6 @@ services:
             CORS_ALLOWED_SCHEMES: 'http'
             OIDC_ISSUER: 'https://localhost:9000'
             OIDC_ACCEPTED_AUDIENCE: 'stubOidcClient'
-            OIDC_JWKS_URI: 'http://oidc-provider.nav.docker-internal:9000/certs'
+            OIDC_JWKS_URI: 'http://oidc-provider:9000/certs'
         depends_on:
             - oidc-provider
-
-networks:
-    nav.docker-internal:
