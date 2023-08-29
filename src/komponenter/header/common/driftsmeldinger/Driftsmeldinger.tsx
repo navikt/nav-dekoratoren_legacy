@@ -55,7 +55,7 @@ export const Driftsmeldinger = () => {
     }, [currentDriftsmeldinger.length]);
 
     return currentDriftsmeldinger.length > 0 ? (
-        <section className={style.driftsmeldinger}>
+        <section aria-label={finnTekst('driftsmeldinger', language)} className={style.driftsmeldinger}>
             {currentDriftsmeldinger.map((melding) => {
                 const srRoleProp = shouldDisplayForScreenreader && { role: melding.type === 'info' ? 'status' : 'alert' };
                 return (
@@ -71,7 +71,6 @@ export const Driftsmeldinger = () => {
                     >
                         <span className={style.messageIcon}>{melding.type && <Icon type={melding.type} />}</span>
                         <BodyLong>
-                            <span className={style.srOnly}>{finnTekst('driftsmeldinger', language)}</span>
                             {melding.heading}
                         </BodyLong>
                     </LenkeMedSporing>
