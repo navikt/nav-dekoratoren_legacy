@@ -1,7 +1,7 @@
 @use 'src/styling-variabler' as sv;
 
 .container {
-    min-height: 5.5rem;
+    min-height: 4rem;
     display: flex;
     flex-direction: row;
     border-top: 2px solid #0067c5;
@@ -23,6 +23,7 @@
 
     @media #{sv.$screen-mobile} {
         padding-bottom: 2.5rem;
+        flex-direction: column;
     }
 
     @media #{sv.$screen-desktop} {
@@ -33,9 +34,9 @@
 }
 
 .personvernLenker {
-    width: 100%;
     @media #{sv.$screen-mobile} {
-        margin: 0.5rem 0;
+        width: 100%;
+        margin: 0 0 0.5rem;
         li {
             padding: 0.375rem 0;
         }
@@ -44,7 +45,7 @@
         margin: 0;
         display: flex;
         flex-wrap: wrap;
-        max-width: calc(100% - 12rem);
+        max-width: fit-content;
 
         li {
             display: inline-flex;
