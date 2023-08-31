@@ -46,18 +46,24 @@ export const Driftsmeldinger = () => {
     // more than X minutes.
     useEffect(() => {
         const lastShownDriftsmelding = Cookies.get('nav-driftsmelding-last-display-time')?.toString();
-        const secondsSindeLastDisplay = Date.now() - Number.parseInt(lastShownDriftsmelding ?? '0', 10);
-        const hasTimeLimitPassed = secondsSindeLastDisplay > 1000 * 60 * 30; // 30;
+        const msSinceLastDisplay = Date.now() - Number.parseInt(lastShownDriftsmelding ?? '0', 10);
+        console.log(msSinceLastDisplay);
+        const hasTimeLimitPassed = msSinceLastDisplay > 1000 * 60 * 30; // 30;
         if (hasTimeLimitPassed && currentDriftsmeldinger.length > 0) {
             setShouldDisplayForScreenreader(true);
-            Cookies.set('nav-driftsmelding-last-display-time', Date.now().toString(), { expires: 30 });
+            Cookies.set('nav-driftsmelding-last-display-time', Date.now().toString(), { expires: 1 });
         }
     }, [currentDriftsmeldinger.length]);
 
     return currentDriftsmeldinger.length > 0 ? (
-        <section aria-label={finnTekst('driftsmeldinger', language)} className={style.driftsmeldinger}>
+        <section
+            aria-label={shouldDisplayForScreenreader ? finnTekst('driftsmeldinger', language) : undefined}
+            className={style.driftsmeldinger}
+        >
             {currentDriftsmeldinger.map((melding) => {
-                const srRoleProp = shouldDisplayForScreenreader && { role: melding.type === 'info' ? 'status' : 'alert' };
+                const srRoleProp = shouldDisplayForScreenreader &&
+                    // role=status OR alert will trigger screen readers through aria-live when sent to LenkeMedSporing
+                    { role: melding.type === 'info' ? 'status' : 'alert' };
                 return (
                     <LenkeMedSporing
                         key={melding.heading}
