@@ -34,9 +34,13 @@ const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
         : [];
 };
 
+type DriftsmeldingProps = {
+    heading: string;
+    timestamp: string;
+}
 export const Driftsmeldinger = () => {
     const { language } = useSelector((state: AppState) => state.language);
-    const [shouldDisplayForScreenreader, setShouldDisplayForScreenreader] = useState<boolean>(false);
+    const [shouldDisplayForScreenreader, setShouldDisplayForScreenreader] = useState<string[]>([]);
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
     const { XP_BASE_URL } = environment;
     const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
@@ -45,15 +49,31 @@ export const Driftsmeldinger = () => {
     // check when screen readers was presented with Driftsmelding last and display again if
     // more than X minutes.
     useEffect(() => {
-        const lastShownDriftsmelding = Cookies.get('nav-driftsmelding-last-display-time')?.toString();
-        const msSinceLastDisplay = Date.now() - Number.parseInt(lastShownDriftsmelding ?? '0', 10);
-        console.log(msSinceLastDisplay);
-        const hasTimeLimitPassed = msSinceLastDisplay > 1000 * 60 * 30; // 30;
-        if (hasTimeLimitPassed && currentDriftsmeldinger.length > 0) {
-            setShouldDisplayForScreenreader(true);
-            Cookies.set('nav-driftsmelding-last-display-time', Date.now().toString(), { expires: 1 });
+        if ( currentDriftsmeldinger.length > 0 ) {
+            const driftsmeldingerCookie = Cookies.get('nav-driftsmeldinger');
+            if ( driftsmeldingerCookie ) {
+                const driftsmeldinger:DriftsmeldingProps[] = JSON.parse(driftsmeldingerCookie);
+                const driftsmeldingerShown:string[] = [];
+                driftsmeldinger.map((melding) => {
+                   if( currentDriftsmeldinger.find((element) => element.url === melding.url) ) {
+                       const msSinceLastDisplay = Date.now() - Number.parseInt(melding.timestamp ?? '0', 10);
+                       console.log(msSinceLastDisplay);
+                       const hasTimeLimitPassed = msSinceLastDisplay > 1000 * 60 * 30; // 30;
+                       if ( hasTimeLimitPassed ) {
+                           // Sett boolean for om driftsmeldinge med aktuell url (i ev. array) skal ut i skjermleser
+                           driftsmeldingerShown.push(melding.heading);
+                       }
+                   }
+                });
+                setShouldDisplayForScreenreader(driftsmeldingerShown);
+            }
+            Cookies.set('nav-driftsmeldinger',
+                    //object som ev. er et array
+                    JSON.stringify({}),
+                    { expires: 1 }
+            );
         }
-    }, [currentDriftsmeldinger.length]);
+     }, [currentDriftsmeldinger.length]);
 
     return currentDriftsmeldinger.length > 0 ? (
         <section
@@ -61,7 +81,7 @@ export const Driftsmeldinger = () => {
             className={style.driftsmeldinger}
         >
             {currentDriftsmeldinger.map((melding) => {
-                const srRoleProp = shouldDisplayForScreenreader &&
+                const srRoleProp = shouldDisplayForScreenreader[melding.url] &&
                     // role=status OR alert will trigger screen readers through aria-live when sent to LenkeMedSporing
                     { role: melding.type === 'info' ? 'status' : 'alert' };
                 return (
