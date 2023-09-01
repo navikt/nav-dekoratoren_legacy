@@ -13,6 +13,8 @@ on:
 
 jobs:
   deploy:
+    permissions:
+      packages: write
     uses: ./.github/workflows/build-and-deploy.yml
     with:
       NAIS_VARS: .nais/vars/dev-beta-navno.yaml
