@@ -204,7 +204,7 @@ Eksempel:
 <main id="maincontent" tabindex="-1">Appens hovedinnhold goes here!</main>
 ```
 
-## Utloggingsvarsel (OBS! Beta)
+## Utloggingsvarsel
 
 Dekoratøren kan håndtere utloggingsvarsel og fornying av token for deg. Dette gjør den direkte mot sentral login-instans. Se seksjon "Slik fungerer utloggingsvarsel" for mer informsjon om når varselet slår inn og hvordan det fungerer.
 
