@@ -101,29 +101,29 @@ Sett inn noen linjer i HTML-templaten:
 
 Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https://en.wikipedia.org/wiki/Query_string). <br>
 
-| Parameter           | Type                                                   | Default          | Forklaring                                                                                 |
-| ------------------- | ------------------------------------------------------ | ---------------- | ------------------------------------------------------------------------------------------ |
-| context             | privatperson / arbeidsgiver / samarbeidspartner        | privatperson     | Setter menyen til definert kontekst                                                        |
-| simple              | boolean                                                | false            | Viser en forenklet header og footer                                                        |
-| simpleHeader        | boolean                                                | false            | Viser en forenklet header                                                                  |
-| simpleFooter        | boolean                                                | false            | Viser en forenklet footer                                                                  |
-| enforceLogin        | boolean                                                | false            | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]                 |
-| redirectToApp       | boolean                                                | false (ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2]             |
-| redirectToUrl       | string                                                 | undefined        | Sender brukeren til denne url'en etter innlogging via dekoratøren [2]                      |
-| redirectToUrlLogout | string                                                 | undefined        | Sender brukeren til denne url'en etter utlogging via dekoratøren                           |
-| level               | Level3 / Level4                                        | Level3           | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]                         |
-| language            | nb / nn / en / se / pl / uk / ru                       | nb               | Setter språket til dekoratøren ved server side rendering [3]                               |
-| availableLanguages  | [{ locale: nb / nn / en / se / pl, url: string }]      | [ ]              | Setter alternativene til språkvelgeren ved server side rendering [4]                       |
-| breadcrumbs         | [{ title: string, url: string, handleInApp?: string }] | [ ]              | Setter brødsmulestien for server side rendering [5]                                        |
-| utilsBackground     | white / gray / transparent                             | transparent      | Setter bakgrunnsfargen på containeren til brødsmulesti og språkvelger                      |
-| feedback            | boolean                                                | false            | Skjuler eller viser tilbakemeldingskomponenten                                             |
-| chatbot             | boolean                                                | true             | Aktiverer eller deaktiverer Chatbot Frida [6]                                              |
-| chatbotVisible      | boolean                                                | false            | Skjuler eller viser Chatbot Frida [7]                                                      |
-| urlLookupTable      | boolean                                                | true             | Aktiverer eller deaktiverer url-lookup-table [8]                                           |
-| shareScreen         | boolean                                                | true             | Aktiverer eller deaktiverer skjermdelingskomponent                                         |
-| logoutUrl           | string                                                 | undefined        | Setter url for logg-ut knappen [9]                                                         |
-| maskHotjar          | boolean                                                | true             | Maskerer hele HTML-dokumentet fra Hotjar [10]                                              |
-| logoutWarning       | boolean                                                | false            | Beta-versjon: Viser utloggingsvarsel [11]                                                  |
+| Parameter           | Type                                                   | Default          | Forklaring                                                                     |
+| ------------------- | ------------------------------------------------------ | ---------------- | ------------------------------------------------------------------------------ |
+| context             | privatperson / arbeidsgiver / samarbeidspartner        | privatperson     | Setter menyen til definert kontekst                                            |
+| simple              | boolean                                                | false            | Viser en forenklet header og footer                                            |
+| simpleHeader        | boolean                                                | false            | Viser en forenklet header                                                      |
+| simpleFooter        | boolean                                                | false            | Viser en forenklet footer                                                      |
+| enforceLogin        | boolean                                                | false            | Sørger for at brukeren er innlogget på definert sikkerhetsnivå (level) [1]     |
+| redirectToApp       | boolean                                                | false (ditt-nav) | Sender brukeren tilbake til nåværende url etter innlogging via dekoratøren [2] |
+| redirectToUrl       | string                                                 | undefined        | Sender brukeren til denne url'en etter innlogging via dekoratøren [2]          |
+| redirectToUrlLogout | string                                                 | undefined        | Sender brukeren til denne url'en etter utlogging via dekoratøren               |
+| level               | Level3 / Level4                                        | Level3           | Gir brukeren innloggingsvalg basert på definert sikkerhetsnivå [2]             |
+| language            | nb / nn / en / se / pl / uk / ru                       | nb               | Setter språket til dekoratøren ved server side rendering [3]                   |
+| availableLanguages  | [{ locale: nb / nn / en / se / pl, url: string }]      | [ ]              | Setter alternativene til språkvelgeren ved server side rendering [4]           |
+| breadcrumbs         | [{ title: string, url: string, handleInApp?: string }] | [ ]              | Setter brødsmulestien for server side rendering [5]                            |
+| utilsBackground     | white / gray / transparent                             | transparent      | Setter bakgrunnsfargen på containeren til brødsmulesti og språkvelger          |
+| feedback            | boolean                                                | false            | Skjuler eller viser tilbakemeldingskomponenten                                 |
+| chatbot             | boolean                                                | true             | Aktiverer eller deaktiverer Chatbot Frida [6]                                  |
+| chatbotVisible      | boolean                                                | false            | Skjuler eller viser Chatbot Frida [7]                                          |
+| urlLookupTable      | boolean                                                | true             | Aktiverer eller deaktiverer url-lookup-table [8]                               |
+| shareScreen         | boolean                                                | true             | Aktiverer eller deaktiverer skjermdelingskomponent                             |
+| logoutUrl           | string                                                 | undefined        | Setter url for logg-ut knappen [9]                                             |
+| maskHotjar          | boolean                                                | true             | Maskerer hele HTML-dokumentet fra Hotjar [10]                                  |
+| logoutWarning       | boolean                                                | false            | Viser utloggingsvarsel [11]                                                    |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
@@ -138,8 +138,7 @@ Dersom du oppgir `handleInApp`, så må du selv håndtere feks route change i ap
 [10] Setter `data-hj-suppress` på HTML-elementet, som hindrer Hotjar fra å fange noe innhold på siden. Default er `true`, dersom denne settes til `false` må appen selv sørge for at elementer med
 personinfo eller annen sensitiv data maskeres på tilsvarende måte. Se [hotjar docs](https://help.hotjar.com/hc/en-us/articles/115012439167-How-to-Suppress-Text-Images-and-User-Input-from-Collected-Data).
 Dekoratørens egne sensitive elementer maskeres uavhengig av dette parameteret. Denne kan **ikke** endres client-side.
-[11] Beta: Felles funksjonalitet for utloggingsvarsel hvor brukeren også har mulighet til å fornye innloggingen med én time av gangen. Les med om utloggingsvarsel i seksjonen lenger ned.
-[12] Beta: Dekoratøren med utloggingsvarsel forventer å kunne kalle /oauth2/session etc direkte fra den enkelte applikasjons ingress. Les mer i seksjon for utloggingsvarsel lenger ned.
+[11] Felles funksjonalitet for utloggingsvarsel hvor brukeren også har mulighet til å fornye innloggingen med én time av gangen. Les med om utloggingsvarsel i seksjonen lenger ned.
 
 Dersom ikke noe annet er nevnt, kan samtlige parametre settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 
@@ -205,13 +204,13 @@ Eksempel:
 <main id="maincontent" tabindex="-1">Appens hovedinnhold goes here!</main>
 ```
 
-## Utloggingsvarsel (OBS! Beta)
+## Utloggingsvarsel
 
 Dekoratøren kan håndtere utloggingsvarsel og fornying av token for deg. Dette gjør den direkte mot sentral login-instans. Se seksjon "Slik fungerer utloggingsvarsel" for mer informsjon om når varselet slår inn og hvordan det fungerer.
 
 ### Oppsett
 
-Du slår på utloggingsvarsel ved sette parameteret ```logoutWarning```. Dekoratøren kaller direkte mot sentral login-instans, enten login.nav.no eller login.ekstern.dev.nav.no. Det er derfor ikke behov for å sette opp Sidecar i din egen applikasjon hvis du ikke trenger den til noe annet. [Mer informasjon om Wonderwall i NAIS-dokumentasjon](https://docs.nais.io/appendix/wonderwall/?h=wonderwal#1-initiate-login).
+Du slår på utloggingsvarsel ved sette parameteret `logoutWarning`. Dekoratøren kaller direkte mot sentral login-instans, enten login.nav.no eller login.ekstern.dev.nav.no. Det er derfor ikke behov for å sette opp Sidecar i din egen applikasjon hvis du ikke trenger den til noe annet. [Mer informasjon om Wonderwall i NAIS-dokumentasjon](https://docs.nais.io/appendix/wonderwall/?h=wonderwal#1-initiate-login).
 
 ### Slik fungerer utloggingsvarsel
 

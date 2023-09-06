@@ -5,6 +5,8 @@ on:
 
 jobs:
   deploy:
+    permissions:
+      packages: write
     if: github.event.release.target_commitish == 'master'
     uses: ./.github/workflows/build-and-deploy.yml
     with:
