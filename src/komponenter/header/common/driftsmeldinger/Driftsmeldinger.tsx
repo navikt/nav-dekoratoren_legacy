@@ -56,7 +56,7 @@ export const Driftsmeldinger = () => {
                 driftsmeldingerCookie ? JSON.parse(driftsmeldingerCookie) : [];
             const driftsmeldingerToShow:DriftsmeldingProps[] = [];
 
-            currentDriftsmeldinger.map((melding) => {
+            currentDriftsmeldinger.forEach((melding) => {
                 const driftsmelding = driftsmeldingerFromCookie.find((element) => element.heading === melding.heading);
                 let displayForSR = true;
                 if ( driftsmelding ) {
