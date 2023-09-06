@@ -36,54 +36,55 @@ const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
 
 type DriftsmeldingProps = {
     heading: string;
-    timestamp: string;
+    displayForSR: boolean;
+    timestamp: number;
 }
 export const Driftsmeldinger = () => {
     const { language } = useSelector((state: AppState) => state.language);
-    const [shouldDisplayForScreenreader, setShouldDisplayForScreenreader] = useState<string[]>([]);
+    const [shouldDisplayForSR, setShouldDisplayForSR] = useState<DriftsmeldingProps[]>([]);
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
     const { XP_BASE_URL } = environment;
     const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
 
-    // Make sure not to read out Driftsmelding to screen readers on every page reload. Therefore
-    // check when screen readers was presented with Driftsmelding last and display again if
-    // more than X minutes.
+    // Make sure not to read out Driftsmeldinger to screen readers on every page reload.
+    // Check when screen readers (SR) was presented with Driftsmelding last and display again if
+    // more than 30 minutes.
     useEffect(() => {
         if ( currentDriftsmeldinger.length > 0 ) {
             const driftsmeldingerCookie = Cookies.get('nav-driftsmeldinger');
-            if ( driftsmeldingerCookie ) {
-                const driftsmeldinger:DriftsmeldingProps[] = JSON.parse(driftsmeldingerCookie);
-                const driftsmeldingerShown:string[] = [];
-                driftsmeldinger.map((melding) => {
-                   if( currentDriftsmeldinger.find((element) => element.url === melding.url) ) {
-                       const msSinceLastDisplay = Date.now() - Number.parseInt(melding.timestamp ?? '0', 10);
-                       console.log(msSinceLastDisplay);
-                       const hasTimeLimitPassed = msSinceLastDisplay > 1000 * 60 * 30; // 30;
-                       if ( hasTimeLimitPassed ) {
-                           // Sett boolean for om driftsmeldinge med aktuell url (i ev. array) skal ut i skjermleser
-                           driftsmeldingerShown.push(melding.heading);
-                       }
-                   }
+            const driftsmeldingerFromCookie:DriftsmeldingProps[] =
+                driftsmeldingerCookie ? JSON.parse(driftsmeldingerCookie) : [];
+            const driftsmeldingerToShow:DriftsmeldingProps[] = [];
+
+            currentDriftsmeldinger.map((melding) => {
+                const driftsmelding = driftsmeldingerFromCookie.find((element) => element.heading === melding.heading);
+                let displayForSR = true;
+                if ( driftsmelding ) {
+                    // This message has been shown before - check time limit
+                    const msSinceLastDisplay = Date.now() - driftsmelding.timestamp;
+                    displayForSR = msSinceLastDisplay > 1000 * 60 * 30; // 30 min;
+                }
+                driftsmeldingerToShow.push({
+                    heading: melding.heading,
+                    displayForSR,
+                    timestamp: displayForSR || !driftsmelding ? Date.now() : driftsmelding.timestamp,
                 });
-                setShouldDisplayForScreenreader(driftsmeldingerShown);
-            }
-            Cookies.set('nav-driftsmeldinger',
-                    //object som ev. er et array
-                    JSON.stringify({}),
-                    { expires: 1 }
-            );
+            });
+            setShouldDisplayForSR(driftsmeldingerToShow);
+            Cookies.set('nav-driftsmeldinger', JSON.stringify(driftsmeldingerToShow),{ expires: 1 }); // 1 day
         }
      }, [currentDriftsmeldinger.length]);
 
     return currentDriftsmeldinger.length > 0 ? (
         <section
-            aria-label={shouldDisplayForScreenreader ? finnTekst('driftsmeldinger', language) : undefined}
+            aria-label={finnTekst('driftsmeldinger', language)}
             className={style.driftsmeldinger}
         >
             {currentDriftsmeldinger.map((melding) => {
-                const srRoleProp = shouldDisplayForScreenreader[melding.url] &&
-                    // role=status OR alert will trigger screen readers through aria-live when sent to LenkeMedSporing
-                    { role: melding.type === 'info' ? 'status' : 'alert' };
+                const srRoleProp = shouldDisplayForSR.find((element) =>
+                    element.heading === melding.heading && element.displayForSR) &&
+                        // role=status/alert will trigger screen readers through aria-live when sent to LenkeMedSporing
+                        { role: melding.type === 'info' ? 'status' : 'alert' };
                 return (
                     <LenkeMedSporing
                         key={melding.heading}
