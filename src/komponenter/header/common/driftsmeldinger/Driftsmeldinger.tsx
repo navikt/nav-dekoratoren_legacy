@@ -34,30 +34,57 @@ const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
         : [];
 };
 
+type DriftsmeldingProps = {
+    heading: string;
+    displayForSR: boolean;
+    timestamp: number;
+}
 export const Driftsmeldinger = () => {
     const { language } = useSelector((state: AppState) => state.language);
-    const [shouldDisplayForScreenreader, setShouldDisplayForScreenreader] = useState<boolean>(false);
+    const [shouldDisplayForSR, setShouldDisplayForSR] = useState<DriftsmeldingProps[]>([]);
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
     const { XP_BASE_URL } = environment;
     const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
 
-    // Make sure not to read out Driftsmelding to screen readers on every page reload. Therefore
-    // check when screen readers was presented with Driftsmelding last and display again if
-    // more than X minutes.
+    // Make sure not to read out Driftsmeldinger to screen readers on every page reload.
+    // Check when screen readers (SR) was presented with Driftsmelding last and display again if
+    // more than 30 minutes.
     useEffect(() => {
-        const lastShownDriftsmelding = Cookies.get('nav-driftsmelding-last-display-time')?.toString();
-        const secondsSindeLastDisplay = Date.now() - Number.parseInt(lastShownDriftsmelding ?? '0', 10);
-        const hasTimeLimitPassed = secondsSindeLastDisplay > 1000 * 60 * 30; // 30;
-        if (hasTimeLimitPassed && currentDriftsmeldinger.length > 0) {
-            setShouldDisplayForScreenreader(true);
-            Cookies.set('nav-driftsmelding-last-display-time', Date.now().toString(), { expires: 30 });
+        if ( currentDriftsmeldinger.length > 0 ) {
+            const driftsmeldingerCookie = Cookies.get('nav-driftsmeldinger');
+            const driftsmeldingerFromCookie:DriftsmeldingProps[] =
+                driftsmeldingerCookie ? JSON.parse(driftsmeldingerCookie) : [];
+            const driftsmeldingerToShow:DriftsmeldingProps[] = [];
+
+            currentDriftsmeldinger.forEach((melding) => {
+                const driftsmelding = driftsmeldingerFromCookie.find((element) => element.heading === melding.heading);
+                let displayForSR = true;
+                if ( driftsmelding ) {
+                    // This message has been shown before - check time limit
+                    const msSinceLastDisplay = Date.now() - driftsmelding.timestamp;
+                    displayForSR = msSinceLastDisplay > 1000 * 60 * 30; // 30 min;
+                }
+                driftsmeldingerToShow.push({
+                    heading: melding.heading,
+                    displayForSR,
+                    timestamp: displayForSR || !driftsmelding ? Date.now() : driftsmelding.timestamp,
+                });
+            });
+            setShouldDisplayForSR(driftsmeldingerToShow);
+            Cookies.set('nav-driftsmeldinger', JSON.stringify(driftsmeldingerToShow),{ expires: 1 }); // 1 day
         }
-    }, [currentDriftsmeldinger.length]);
+     }, [currentDriftsmeldinger.length]);
 
     return currentDriftsmeldinger.length > 0 ? (
-        <section className={style.driftsmeldinger}>
+        <section
+            aria-label={finnTekst('driftsmeldinger', language)}
+            className={style.driftsmeldinger}
+        >
             {currentDriftsmeldinger.map((melding) => {
-                const srRoleProp = shouldDisplayForScreenreader && { role: melding.type === 'info' ? 'status' : 'alert' };
+                const srRoleProp = shouldDisplayForSR.find((element) =>
+                    element.heading === melding.heading && element.displayForSR) &&
+                        // role=status/alert will trigger screen readers through aria-live when sent to LenkeMedSporing
+                        { role: melding.type === 'info' ? 'status' : 'alert' };
                 return (
                     <LenkeMedSporing
                         key={melding.heading}
@@ -71,7 +98,6 @@ export const Driftsmeldinger = () => {
                     >
                         <span className={style.messageIcon}>{melding.type && <Icon type={melding.type} />}</span>
                         <BodyLong>
-                            <span className={style.srOnly}>{finnTekst('driftsmeldinger', language)}</span>
                             {melding.heading}
                         </BodyLong>
                     </LenkeMedSporing>
