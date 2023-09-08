@@ -34,6 +34,7 @@ import { injectHeadTags } from './head';
 import { hotjarMaskHtml } from './utils/analytics/hotjar';
 
 import './index.scss';
+import './additional-fonts.scss';
 
 const loadedStates = ['complete', 'loaded', 'interactive'];
 
