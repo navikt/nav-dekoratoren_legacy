@@ -97,7 +97,9 @@ export const Header = () => {
         }
     }, [menypunkt]);
 
-    useLoadIfActiveSession();
+    useLoadIfActiveSession({
+        userState: cookies['psCurrentState']
+    });
 
     // Handle enforced login
     useEffect(() => {

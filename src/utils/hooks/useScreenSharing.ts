@@ -45,13 +45,12 @@ export function useScreenSharing({ enabled }: UseScreenSharingOptions): UseScree
     };
 }
 
-export function useLoadIfActiveSession() {
+export function useLoadIfActiveSession({ userState }: { userState: string | undefined }) {
     useEffect(() => {
-        const userState = localStorage.getItem(`vngage_${VNGAGE_ID.toLowerCase()}`);
-        const parsedUserState = userState ? (JSON.parse(userState) as VngageUserState) : undefined;
-
-        if (parsedUserState && parsedUserState.user.state !== 'Ready') {
-            loadExternalScript(vendorScripts.skjermdeling);
+        if (userState) {
+            if (userState && userState !== 'Ready') {
+                loadExternalScript(vendorScripts.skjermdeling);
+            }
         }
-    }, []);
+    }, [userState]);
 }
