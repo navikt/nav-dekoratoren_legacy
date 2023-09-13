@@ -47,10 +47,8 @@ export function useScreenSharing({ enabled }: UseScreenSharingOptions): UseScree
 
 export function useLoadIfActiveSession({ userState }: { userState: string | undefined }) {
     useEffect(() => {
-        if (userState) {
-            if (userState && userState !== 'Ready') {
-                loadExternalScript(vendorScripts.skjermdeling);
-            }
+        if (userState && userState !== 'Ready') {
+            loadExternalScript(vendorScripts.skjermdeling);
         }
     }, [userState]);
 }
