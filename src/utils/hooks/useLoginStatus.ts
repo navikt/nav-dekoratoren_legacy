@@ -87,5 +87,5 @@ export const useLoginStatus = () => {
         window.addEventListener('visibilitychange', onVisibilityChange);
     }, []);
 
-    return { isTokenExpiring, isSessionExpiring, refreshTokenHandler, logoutHandler, secondsToSessionExpires};
+    return { isTokenExpiring, isSessionExpiring, refreshTokenHandler, logoutHandler, secondsToSessionExpires };
 };
