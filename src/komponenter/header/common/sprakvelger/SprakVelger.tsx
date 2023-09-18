@@ -11,6 +11,7 @@ import { useSelector, useStore } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { Bilde } from '../../../common/bilde/Bilde';
 import Globe from 'ikoner/globe.svg';
+import { finnTekst } from 'tekster/finn-tekst';
 import SprakVelgerItem from './SprakVelgerItem';
 
 import style from './SprakVelger.module.scss';
@@ -90,7 +91,7 @@ export const SprakVelger = (props: Props) => {
 
     return (
         <div className={style.container}>
-            <nav className={style.sprakvelger}>
+            <nav className={style.sprakvelger} aria-label={finnTekst('sprakvelger.label', language)}>
                 <button
                     className={`${style.knapp}`}
                     type="button"

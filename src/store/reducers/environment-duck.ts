@@ -45,6 +45,8 @@ export interface Params {
     UTILS_BACKGROUND?: string;
     LOGOUT_URL?: string;
     MASK_HOTJAR?: boolean;
+    LOGOUT_WARNING: boolean;
+    APP_BASE?: string;
 }
 
 export interface Cookies {
@@ -67,7 +69,7 @@ export const initialState: Environment = {
     CASETYPE_ID: '',
     SOLUTION_ID: '',
     NAV_GROUP_ID: '',
-    VARSEL_API_URL:'',
+    VARSEL_API_URL: '',
 
     // Parameters
     PARAMS: {
@@ -85,6 +87,8 @@ export const initialState: Environment = {
         URL_LOOKUP_TABLE: false,
         SHARE_SCREEN: false,
         MASK_HOTJAR: true,
+        LOGOUT_WARNING: false,
+        APP_BASE: '',
     },
 };
 

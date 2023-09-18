@@ -97,7 +97,9 @@ export const Header = () => {
         }
     }, [menypunkt]);
 
-    useLoadIfActiveSession();
+    useLoadIfActiveSession({
+        userState: cookies['psCurrentState']
+    });
 
     // Handle enforced login
     useEffect(() => {
@@ -118,7 +120,7 @@ export const Header = () => {
     // Handle external data
     useEffect(() => {
         fetchDriftsmeldinger(APP_URL)(dispatch);
-        hentInnloggingsstatus(API_DEKORATOREN_URL)(dispatch);
+        hentInnloggingsstatus(environment)(dispatch);
         fetchMenypunkter(APP_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
             fetchFeatureToggles(API_DEKORATOREN_URL, currentFeatureToggles)

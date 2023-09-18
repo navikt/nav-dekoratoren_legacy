@@ -63,68 +63,60 @@ const DelSkjermModal = (props: Props) => {
         }
     };
 
-    const parent = document.getElementById('decorator-footer-inner');
-
     return (
-        <Modal
-            open={props.isOpen}
-            className={style.delskjerm}
-            overlayClassName="decorator-wrapper"
-            aria-label={'Skjermdeling'}
-            onClose={props.onClose}
-            style={{ overlay: { backgroundColor: 'rgba(50, 65, 79, 0.8)' } }}
-            parentSelector={parent ? () => parent : undefined}
-        >
-            <div className={style.header}>
-                <Bilde className={style.veileder} asset={veileder} altText={''} />
-            </div>
-            <div className={style.content}>
-                <Heading size="medium" level="2">
-                    <Tekst id={'delskjerm-modal-overskrift'} />
-                </Heading>
-                <div className={style.beskrivelse}>
-                    <BodyLong>
-                        <Tekst id={'delskjerm-modal-beskrivelse'} />
-                    </BodyLong>
-                    <ReadMore header={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
-                        <ul>
-                            {[...Array(3)].map((_, i) => (
-                                <li key={i}>
-                                    <BodyLong>
-                                        <Tekst id={`delskjerm-modal-hjelpetekst-${i}` as LangKey} />
-                                    </BodyLong>
-                                </li>
-                            ))}
-                        </ul>
-                    </ReadMore>
+        <Modal open={props.isOpen} className={style.delskjerm} aria-label={'Skjermdeling'} onClose={props.onClose}>
+            <Modal.Body>
+                <div className={style.header}>
+                    <Bilde className={style.veileder} asset={veileder} altText={''} />
                 </div>
-                {isLoading && <Loader size="large" />}
-                {isOpen && isSuccess && (
-                    <>
-                        <TextField
-                            name={'code'}
-                            label={label}
-                            error={submitted && error}
-                            value={code}
-                            onChange={onChange}
-                            maxLength={5}
-                        />
-                        <div className={style.knapper}>
-                            <Button onClick={onClick}>
-                                <Tekst id={'delskjerm-modal-start'} />
-                            </Button>
-                            <Button variant="tertiary" onClick={props.onClose}>
-                                <Tekst id={'delskjerm-modal-avbryt'} />
-                            </Button>
-                        </div>
-                    </>
-                )}
-                {!isOpen && !isLoading && (
-                    <Alert variant="error">
-                        <Tekst id={'delskjerm-modal-stengt'} />
-                    </Alert>
-                )}
-            </div>
+                <div className={style.content}>
+                    <Heading size="medium" level="2">
+                        <Tekst id={'delskjerm-modal-overskrift'} />
+                    </Heading>
+                    <div className={style.beskrivelse}>
+                        <BodyLong>
+                            <Tekst id={'delskjerm-modal-beskrivelse'} />
+                        </BodyLong>
+                        <ReadMore header={finnTekst('delskjerm-modal-hjelpetekst-overskrift', language)}>
+                            <ul>
+                                {[...Array(3)].map((_, i) => (
+                                    <li key={i}>
+                                        <BodyLong>
+                                            <Tekst id={`delskjerm-modal-hjelpetekst-${i}` as LangKey} />
+                                        </BodyLong>
+                                    </li>
+                                ))}
+                            </ul>
+                        </ReadMore>
+                    </div>
+                    {isLoading && <Loader size="large" />}
+                    {isOpen && isSuccess && (
+                        <>
+                            <TextField
+                                name={'code'}
+                                label={label}
+                                error={submitted && error}
+                                value={code}
+                                onChange={onChange}
+                                maxLength={5}
+                            />
+                            <div className={style.knapper}>
+                                <Button onClick={onClick}>
+                                    <Tekst id={'delskjerm-modal-start'} />
+                                </Button>
+                                <Button variant="tertiary" onClick={props.onClose}>
+                                    <Tekst id={'delskjerm-modal-avbryt'} />
+                                </Button>
+                            </div>
+                        </>
+                    )}
+                    {!isOpen && !isLoading && (
+                        <Alert variant="error">
+                            <Tekst id={'delskjerm-modal-stengt'} />
+                        </Alert>
+                    )}
+                </div>
+            </Modal.Body>
         </Modal>
     );
 };

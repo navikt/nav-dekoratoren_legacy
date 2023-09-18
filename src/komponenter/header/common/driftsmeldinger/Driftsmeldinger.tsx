@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
 import { AppState } from 'store/reducers';
 import { DriftsmeldingerState } from 'store/reducers/driftsmeldinger-duck';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
@@ -33,28 +34,75 @@ const getCurrentDriftsmeldinger = (driftsmeldinger: DriftsmeldingerState) => {
         : [];
 };
 
+type DriftsmeldingProps = {
+    heading: string;
+    displayForSR: boolean;
+    timestamp: number;
+}
 export const Driftsmeldinger = () => {
     const { language } = useSelector((state: AppState) => state.language);
+    const [shouldDisplayForSR, setShouldDisplayForSR] = useState<DriftsmeldingProps[]>([]);
     const { driftsmeldinger, environment } = useSelector((state: AppState) => state);
     const { XP_BASE_URL } = environment;
     const currentDriftsmeldinger = getCurrentDriftsmeldinger(driftsmeldinger);
 
+    // Make sure not to read out Driftsmeldinger to screen readers on every page reload.
+    // Check when screen readers (SR) was presented with Driftsmelding last and display again if
+    // more than 30 minutes.
+    useEffect(() => {
+        if ( currentDriftsmeldinger.length > 0 ) {
+            const driftsmeldingerCookie = Cookies.get('nav-driftsmeldinger');
+            const driftsmeldingerFromCookie:DriftsmeldingProps[] =
+                driftsmeldingerCookie ? JSON.parse(driftsmeldingerCookie) : [];
+            const driftsmeldingerToShow:DriftsmeldingProps[] = [];
+
+            currentDriftsmeldinger.forEach((melding) => {
+                const driftsmelding = driftsmeldingerFromCookie.find((element) => element.heading === melding.heading);
+                let displayForSR = true;
+                if ( driftsmelding ) {
+                    // This message has been shown before - check time limit
+                    const msSinceLastDisplay = Date.now() - driftsmelding.timestamp;
+                    displayForSR = msSinceLastDisplay > 1000 * 60 * 30; // 30 min;
+                }
+                driftsmeldingerToShow.push({
+                    heading: melding.heading,
+                    displayForSR,
+                    timestamp: displayForSR || !driftsmelding ? Date.now() : driftsmelding.timestamp,
+                });
+            });
+            setShouldDisplayForSR(driftsmeldingerToShow);
+            Cookies.set('nav-driftsmeldinger', JSON.stringify(driftsmeldingerToShow),{ expires: 1 }); // 1 day
+        }
+     }, [currentDriftsmeldinger.length]);
+
     return currentDriftsmeldinger.length > 0 ? (
-        <section className={style.driftsmeldinger} aria-label={finnTekst('driftsmeldinger',language)}>
-            {currentDriftsmeldinger.map((melding) => (
-                <LenkeMedSporing
-                    key={melding.heading}
-                    href={`${XP_BASE_URL}${melding.url}`}
-                    classNameOverride={style.message}
-                    analyticsEventArgs={{
-                        category: AnalyticsCategory.Header,
-                        action: 'driftsmeldinger',
-                    }}
-                >
-                    <span className={style.messageIcon}>{melding.type && <Icon type={melding.type} />}</span>
-                    <BodyLong>{melding.heading}</BodyLong>
-                </LenkeMedSporing>
-            ))}
+        <section
+            aria-label={finnTekst('driftsmeldinger', language)}
+            className={style.driftsmeldinger}
+        >
+            {currentDriftsmeldinger.map((melding) => {
+                const srRoleProp = shouldDisplayForSR.find((element) =>
+                    element.heading === melding.heading && element.displayForSR) &&
+                        // role=status/alert will trigger screen readers through aria-live when sent to LenkeMedSporing
+                        { role: melding.type === 'info' ? 'status' : 'alert' };
+                return (
+                    <LenkeMedSporing
+                        key={melding.heading}
+                        href={`${XP_BASE_URL}${melding.url}`}
+                        classNameOverride={style.message}
+                        analyticsEventArgs={{
+                            category: AnalyticsCategory.Header,
+                            action: 'driftsmeldinger',
+                        }}
+                        {...srRoleProp}
+                    >
+                        <span className={style.messageIcon}>{melding.type && <Icon type={melding.type} />}</span>
+                        <BodyLong>
+                            {melding.heading}
+                        </BodyLong>
+                    </LenkeMedSporing>
+                );
+            })}
         </section>
     ) : null;
 };
@@ -65,8 +113,8 @@ interface IconProps {
 
 const Icon = (props: IconProps) => (
     <>
-        {props.type === 'prodstatus' && <StatusSvg/>}
-        {props.type === 'info' && <InfoSvg/>}
+        {props.type === 'prodstatus' && <StatusSvg />}
+        {props.type === 'info' && <InfoSvg />}
     </>
 );
 

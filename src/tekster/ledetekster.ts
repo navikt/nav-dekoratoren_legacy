@@ -42,6 +42,26 @@ export const ledetekster = {
     'logg-ut-knapp': 'Logg ut',
     'logg-ut-knapp-en': 'Log out',
     'logg-ut-knapp-se': 'Olggosčáliheapmi',
+    'snart-token-logget-ut-tittel': 'Du blir snart logget ut automatisk',
+    'snart-token-logget-ut-tittel-en': 'You will soon be logged out automatically',
+    'snart-token-logget-ut-tittel-se': 'Du blir snart logget ut automatisk',
+    'snart-token-logget-ut-body': 'Vil du fortsatt være innlogget?',
+    'snart-token-logget-ut-body-en': 'Would you like to stay logged in?',
+    'snart-token-logget-ut-body-se': 'Vil du fortsatt være innlogget?',
+    'snart-session-logget-ut-tittel': (input: string) =>
+        `Du blir logget ut automatisk om ca ${input} ${Number.parseInt(input, 10) === 1 ? 'minutt' : 'minutter'}`,
+    'snart-session-logget-ut-tittel-en': (input: string) =>
+        `You will be logged out automatically in about ${input} ${
+            Number.parseInt(input, 10) === 1 ? 'minute' : 'minutes'
+        }`,
+    'snart-session-logget-ut-tittel-se': (input: string) =>
+        `Du blir logget ut automatisk om ca ${input} ${Number.parseInt(input, 10) === 1 ? 'minutt' : 'minutter'}`,
+    'snart-session-logget-ut-body': 'Avslutt det du jobber med og logg inn igjen.',
+    'snart-session-logget-ut-body-en': 'Please wrap up what you are doing and log in again.',
+    'snart-session-logget-ut-body-se': 'Avslutt det du jobber med og logg inn igjen.',
+    ok: 'OK',
+    'ok-en': 'OK',
+    'ok-se': 'OK',
     'logg-inn-loader': 'Laster',
     'logg-inn-loader-en': 'Loading',
     'logg-inn-loader-se': 'Laster',
@@ -312,7 +332,10 @@ export const ledetekster = {
     'how-can-we-help': 'Hva kan vi hjelpe deg med?',
     'how-can-we-help-en': 'What can we help you with?',
     'how-can-we-help-se': 'Hva kan vi hjelpe deg med?',
-
+    //Språkvelger
+    'sprakvelger.label': 'Velg språk',
+    'sprakvelger.label-en': 'Choose language',
+    'sprakvelger.label-se': 'Velg språk',
     //Varselbjelle
     'oppgave.maskert.tekst': 'Du har fått en oppgave, logg inn med høyere sikkerhetsnivå for å se oppgaven.',
     'oppgave.maskert.tekst-en': 'You have a task, please log in with a higher security level to see the task.',
@@ -334,8 +357,7 @@ export const ledetekster = {
     'arkiver-se': 'Arkiver',
 
     //Driftsmeldinger
-    'driftsmeldinger': 'Viktig informasjon',
-    'driftsmeldinger-en': 'Important information',
-    'driftsmeldinger-se': 'Viktig informasjon',
-
+    driftsmeldinger: 'Viktig informasjon: ',
+    'driftsmeldinger-en': 'Important information: ',
+    'driftsmeldinger-se': 'Viktig informasjon: ',
 } as const;

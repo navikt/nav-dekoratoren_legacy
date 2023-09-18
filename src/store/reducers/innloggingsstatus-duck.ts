@@ -1,22 +1,43 @@
-import { ActionType } from 'store/actions';
+import {
+    ActionType,
+    DebugInnloggingOKAction,
+    FornyInnloggingFEILETAction,
+    FornyInnloggingOKAction,
+    FornyInnloggingPENDINGAction,
+} from 'store/actions';
 import { Handling } from 'store/actions';
 import { HentInnloggingsstatusPENDINGAction } from 'store/actions';
 import { HentInnloggingsstatusOKAction } from 'store/actions';
 import { HentInnloggingsstatusFEILETAction } from 'store/actions';
 import { Dispatch } from 'store/dispatch-type';
 import { fetchThenDispatch } from 'api/api-utils';
-import { hentInnloggingsstatusFetch } from 'api/api';
+import { fornyInnloggingFetch, hentInnloggingsstatusFetch } from 'api/api';
 import { DataElement, Status } from 'api/api';
 import { formaterFodselsnummer } from '../../utils/string-format';
+import { Environment } from './environment-duck';
 
 export interface InnloggingsstatusState extends DataElement {
-    data: Data;
+    data: InnloggingsstatusData & SessionData;
 }
 
-export interface Data {
+export interface InnloggingsstatusData {
     authenticated: boolean;
     name: string;
     securityLevel: string;
+}
+
+export interface SessionData {
+    session: {
+        createdAt: string | null;
+        endsAt: string | null;
+        timeoutAt: string | null;
+        isActive: boolean;
+    };
+    token: {
+        endsAt: string | null;
+        refreshedAt: string | null;
+        isRefreshCooldown: boolean;
+    };
 }
 
 const initialState: InnloggingsstatusState = {
@@ -24,6 +45,17 @@ const initialState: InnloggingsstatusState = {
         authenticated: false,
         name: '',
         securityLevel: '',
+        session: {
+            createdAt: null,
+            endsAt: null,
+            timeoutAt: null,
+            isActive: false,
+        },
+        token: {
+            endsAt: null,
+            refreshedAt: null,
+            isRefreshCooldown: false,
+        },
     },
     status: Status.IKKE_STARTET,
 };
@@ -42,6 +74,24 @@ export default function reducer(
 
             return { ...state, status: Status.OK, data: action.data };
         }
+        case ActionType.FORNY_INNLOGGING_OK: {
+            return { ...state, data: { ...state.data, session: action.data.session, token: action.data.token } };
+        }
+        case ActionType.DEBUG_INNLOGGING_OK: {
+            const { fakeTokenEndsAt, fakeSessionEndsAt } = action.data;
+
+            const sessionEnding = fakeSessionEndsAt ? { endsAt: fakeSessionEndsAt } : null;
+            const tokenEnding = fakeTokenEndsAt ? { endsAt: fakeTokenEndsAt } : null;
+
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    session: { ...state.data.session, ...sessionEnding },
+                    token: { ...state.data.token, ...tokenEnding },
+                },
+            };
+        }
         case ActionType.HENT_INNLOGGINGSSTATUS_PENDING:
             if (state.status === Status.OK) {
                 return { ...state, status: Status.RELOADING };
@@ -54,22 +104,34 @@ export default function reducer(
     }
 }
 
-export function hentInnloggingsstatus(API_DEKORATOREN_URL: string): (dispatch: Dispatch) => Promise<void> {
-    return fetchThenDispatch<Data>(() => hentInnloggingsstatusFetch(API_DEKORATOREN_URL), {
+// Thunks
+// ------------------------------------------------------------------------------
+export function hentInnloggingsstatus(environment: Environment): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<InnloggingsstatusData & SessionData>(() => hentInnloggingsstatusFetch(environment), {
         ok: hentInnloggingsstatusOk,
-        feilet: hentnnloggingsstatusFeilet,
+        feilet: hentInnloggingsstatusFeilet,
         pending: hentnnloggingsstatusPending,
     });
 }
 
-export function hentInnloggingsstatusOk(data: Data): HentInnloggingsstatusOKAction {
+export function fornyInnlogging(environment: Environment): (dispatch: Dispatch) => Promise<void> {
+    return fetchThenDispatch<SessionData>(() => fornyInnloggingFetch(environment), {
+        ok: fornyInnloggingOK,
+        feilet: fornyInnloggingFeilet,
+        pending: fornyInnloggingPending,
+    });
+}
+
+// Action Creators
+// ------------------------------------------------------------------------------
+export function hentInnloggingsstatusOk(data: InnloggingsstatusData & SessionData): HentInnloggingsstatusOKAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_OK,
         data: data,
     };
 }
 
-export function hentnnloggingsstatusFeilet(): HentInnloggingsstatusFEILETAction {
+export function hentInnloggingsstatusFeilet(): HentInnloggingsstatusFEILETAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_FEILET,
     };
@@ -78,5 +140,31 @@ export function hentnnloggingsstatusFeilet(): HentInnloggingsstatusFEILETAction 
 export function hentnnloggingsstatusPending(): HentInnloggingsstatusPENDINGAction {
     return {
         type: ActionType.HENT_INNLOGGINGSSTATUS_PENDING,
+    };
+}
+
+export function fornyInnloggingOK(data: SessionData): FornyInnloggingOKAction {
+    return {
+        type: ActionType.FORNY_INNLOGGING_OK,
+        data: data,
+    };
+}
+
+export function fornyInnloggingFeilet(): FornyInnloggingFEILETAction {
+    return {
+        type: ActionType.FORNY_INNLOGGING_FEILET,
+    };
+}
+
+export function fornyInnloggingPending(): FornyInnloggingPENDINGAction {
+    return {
+        type: ActionType.FORNY_INNLOGGING_PENDING,
+    };
+}
+
+export function debugInnloggingOK(data: any): DebugInnloggingOKAction {
+    return {
+        type: ActionType.DEBUG_INNLOGGING_OK,
+        data: data,
     };
 }

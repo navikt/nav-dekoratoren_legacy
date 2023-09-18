@@ -123,6 +123,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | shareScreen         | boolean                                                | true             | Aktiverer eller deaktiverer skjermdelingskomponent                             |
 | logoutUrl           | string                                                 | undefined        | Setter url for logg-ut knappen [9]                                             |
 | maskHotjar          | boolean                                                | true             | Maskerer hele HTML-dokumentet fra Hotjar [10]                                  |
+| logoutWarning       | boolean                                                | false            | Viser utloggingsvarsel [11]                                                    |
 
 [1] Kombineres med **level**, **redirectToApp** og [EnforceLoginLoader](https://github.com/navikt/nav-dekoratoren-moduler#readme) ved behov. <br>
 [2] Gjelder både ved automatisk innlogging og ved klikk på innloggingsknappen. <br>
@@ -137,6 +138,7 @@ Dersom du oppgir `handleInApp`, så må du selv håndtere feks route change i ap
 [10] Setter `data-hj-suppress` på HTML-elementet, som hindrer Hotjar fra å fange noe innhold på siden. Default er `true`, dersom denne settes til `false` må appen selv sørge for at elementer med
 personinfo eller annen sensitiv data maskeres på tilsvarende måte. Se [hotjar docs](https://help.hotjar.com/hc/en-us/articles/115012439167-How-to-Suppress-Text-Images-and-User-Input-from-Collected-Data).
 Dekoratørens egne sensitive elementer maskeres uavhengig av dette parameteret. Denne kan **ikke** endres client-side.
+[11] Felles funksjonalitet for utloggingsvarsel hvor brukeren også har mulighet til å fornye innloggingen med én time av gangen. Les med om utloggingsvarsel i seksjonen lenger ned.
 
 Dersom ikke noe annet er nevnt, kan samtlige parametre settes [client-side](https://github.com/navikt/nav-dekoratoren-moduler#readme) <br>
 
@@ -201,6 +203,30 @@ Eksempel:
 ```html
 <main id="maincontent" tabindex="-1">Appens hovedinnhold goes here!</main>
 ```
+
+## Utloggingsvarsel
+
+Dekoratøren kan håndtere utloggingsvarsel og fornying av token for deg. Dette gjør den direkte mot sentral login-instans. Se seksjon "Slik fungerer utloggingsvarsel" for mer informsjon om når varselet slår inn og hvordan det fungerer.
+
+### Oppsett
+
+Du slår på utloggingsvarsel ved sette parameteret `logoutWarning`. Dekoratøren kaller direkte mot sentral login-instans, enten login.nav.no eller login.ekstern.dev.nav.no. Det er derfor ikke behov for å sette opp Sidecar i din egen applikasjon hvis du ikke trenger den til noe annet. [Mer informasjon om Wonderwall i NAIS-dokumentasjon](https://docs.nais.io/appendix/wonderwall/?h=wonderwal#1-initiate-login).
+
+### Slik fungerer utloggingsvarsel
+
+-   Et token er gyldig i 60 minutter. Hele session er gyldig i 6 timer. Token kan fornyes, men når session utløper etter 6 timer, må bruker uansett logge ut og inn igjen.
+-   5 minutter før utløp av token vil bruker se varsel i form av en popup-dialog.
+-   I denne popup-dialogen vil brukeren måtte ta et aktivt valg om å enten fortsette å være innlogget, eller klikke "Logg ut" for å logge ut umiddelbart.
+-   Dersom brukeren velger å fortsette å være innlogget, blir tokenet fornyet i nye 60 minutter, forutsatt at session fortsatt er innenfor 6 timer.
+-   10 minutter før session utløper vil bruker få beskjed om å avslutte og eventuelt logge inn på nytt.
+-   Bruker vil få beskjed om hvor mange minutter som er igjen før hen blir logget ut.
+-   I begge varslene (for token og session) vil bruker måtte ta et aktivt valg. Det er ikke mulig å krysse vekk eller trykke "Esc" for å lukke varselet.
+-   Dersom bruker forlater maskinen eller ikke tar et aktivt valg vil hen bli sendt til utloggingssiden når token eller session har utløpt.
+
+### Verdt å merke seg
+
+-   Det er først og fremst arbeidsgiver og andre parter som benytter nav.no over lang tid som vil se varselet for utløpt session etter 6 timer.
+-   Vi har forsøkt å utforme varselet med mål om minst mulig kognitivt stress og har derfor valgt å droppe nedtelling i grensesnittet. Vi er åpne for tilbakemeldinger etterhvert som flere team begynner å ta ibruk utloggingsvarselet.
 
 ## Utvikling - Kom i gang
 

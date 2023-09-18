@@ -32,7 +32,8 @@ export function finnTekst(id: LangKey, language: Locale, payload?: string): stri
     if (typeof ledetekst === 'string') {
         return ledetekst;
     }
-    if (!payload) {
+
+    if (!payload) { 
         console.warn(
             `Kunne ikke finne input variabel til tekst med id: ${id}! 
             Returnerer tekst med tom variabel.`
@@ -40,6 +41,7 @@ export function finnTekst(id: LangKey, language: Locale, payload?: string): stri
         return ledetekst('');
     }
     return ledetekst(payload);
+    
 }
 
 type Props = {
