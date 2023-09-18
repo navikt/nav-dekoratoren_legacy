@@ -17,7 +17,6 @@ export const initAmplitude = () => {
         saveEvents: false,
         includeUtm: true,
         includeReferrer: true,
-        platform: window.location.toString(),
     });
     amplitude.getInstance().setUserProperties(userProps);
 
