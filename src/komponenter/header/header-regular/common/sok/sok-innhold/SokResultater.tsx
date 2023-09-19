@@ -55,7 +55,7 @@ export const SokResultater = (props: Props) => {
                             sub: index,
                         });
 
-                        const key = `${item.href}-${item.displayName}`; //TODO nødvendig? bruke index?
+                        const key = `${item.href}-${item.displayName}`;
 
                         return (
                             <li key={index} style={style}>
