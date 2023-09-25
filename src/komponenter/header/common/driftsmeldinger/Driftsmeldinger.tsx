@@ -94,10 +94,11 @@ export const Driftsmeldinger = () => {
                             category: AnalyticsCategory.Header,
                             action: 'driftsmeldinger',
                         }}
-                        {...srRoleProp}
                     >
                         <span className={style.messageIcon}>{melding.type && <Icon type={melding.type} />}</span>
-                        <BodyLong>
+                        <BodyLong
+                            {...srRoleProp}
+                        >
                             {melding.heading}
                         </BodyLong>
                     </LenkeMedSporing>
