@@ -17,6 +17,7 @@ export const useLoginStatus = () => {
     const { innloggetStatus, environment } = useSelector(stateSelector);
     const [isTokenExpiring, setIsTokenExpiring] = useState<boolean | null>(null);
     const [isSessionExpiring, setIsSessionExpiring] = useState<boolean | null>(null);
+    const [hasAuthError, setHasAuthError] = useState<boolean>(false);
     const [secondsToSessionExpires, setSecondsToSessionExpires] = useState<number>(0);
     useLoginDebug();
 
@@ -24,6 +25,12 @@ export const useLoginStatus = () => {
     // get access to the updated value of innloggetStatus.
     const innloggetStatusRef = useRef(innloggetStatus);
     innloggetStatusRef.current = innloggetStatus;
+
+    useEffect(() => {
+        window.addEventListener('INVALID-SESSION', () => {
+            setHasAuthError(true);
+        });
+    }, []);
 
     const getExpirationInSeconds = ({ session, token }: { session: string | null; token: string | null }) => {
         if (!session || !token) return { secondsToTokenExpires: null, secondsToSessionExpires: null };
@@ -87,5 +94,12 @@ export const useLoginStatus = () => {
         window.addEventListener('visibilitychange', onVisibilityChange);
     }, []);
 
-    return { isTokenExpiring, isSessionExpiring, refreshTokenHandler, logoutHandler, secondsToSessionExpires };
+    return {
+        isTokenExpiring,
+        isSessionExpiring,
+        refreshTokenHandler,
+        logoutHandler,
+        secondsToSessionExpires,
+        hasAuthError,
+    };
 };
