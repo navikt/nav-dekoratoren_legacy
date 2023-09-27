@@ -87,7 +87,7 @@ export const useLoginStatus = () => {
         window.location.href = getLoginUrl(environment, arbeidsflate);
     };
 
-    const onVisibilityChange = () => {
+    const onWindowVisibility = () => {
         if (document.visibilityState === 'visible') {
             checkLoginAndRepeat();
             hentInnloggingsstatus(environment)(dispatch);
@@ -96,7 +96,13 @@ export const useLoginStatus = () => {
 
     useEffect(() => {
         checkLoginAndRepeat();
-        window.addEventListener('visibilitychange', onVisibilityChange);
+        window.addEventListener('visibilitychange', onWindowVisibility);
+        window.addEventListener('focus', onWindowVisibility);
+
+        return () => {
+            window.removeEventListener('visibilitychange', onWindowVisibility);
+            window.removeEventListener('focus', onWindowVisibility);
+        };
     }, []);
 
     return {
