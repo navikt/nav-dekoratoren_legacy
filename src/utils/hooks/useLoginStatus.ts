@@ -2,19 +2,20 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { hentInnloggingsstatus, fornyInnlogging } from 'store/reducers/innloggingsstatus-duck';
-import { getLogOutUrl } from 'utils/login';
+import { getLogOutUrl, getLoginUrl } from 'utils/login';
 import { useLoginDebug } from './useLoginDebug';
 
 const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,
     environment: state.environment,
+    arbeidsflate: state.arbeidsflate.status,
 });
 
 let timeoutId: NodeJS.Timeout | null = null;
 
 export const useLoginStatus = () => {
     const dispatch = useDispatch();
-    const { innloggetStatus, environment } = useSelector(stateSelector);
+    const { innloggetStatus, environment, arbeidsflate } = useSelector(stateSelector);
     const [isTokenExpiring, setIsTokenExpiring] = useState<boolean | null>(null);
     const [isSessionExpiring, setIsSessionExpiring] = useState<boolean | null>(null);
     const [hasAuthError, setHasAuthError] = useState<boolean>(false);
@@ -27,7 +28,7 @@ export const useLoginStatus = () => {
     innloggetStatusRef.current = innloggetStatus;
 
     useEffect(() => {
-        window.addEventListener('INVALID-SESSION', () => {
+        window.addEventListener('INVALID_SESSION', () => {
             setHasAuthError(true);
         });
     }, []);
@@ -82,6 +83,10 @@ export const useLoginStatus = () => {
         window.location.href = getLogOutUrl(environment);
     };
 
+    const loginHandler = () => {
+        window.location.href = getLoginUrl(environment, arbeidsflate);
+    };
+
     const onVisibilityChange = () => {
         if (document.visibilityState === 'visible') {
             checkLoginAndRepeat();
@@ -99,6 +104,7 @@ export const useLoginStatus = () => {
         isSessionExpiring,
         refreshTokenHandler,
         logoutHandler,
+        loginHandler,
         secondsToSessionExpires,
         hasAuthError,
     };

@@ -74,9 +74,14 @@ export const fornyInnloggingFetch = (environment: Environment): Promise<SessionD
 
     return fetchToJson(refreshUrl, {
         credentials: 'include',
-    }).then((result: any) => {
-        return adaptFulfilledSessionDataFromAPI(result);
-    });
+    })
+        .then((result: any) => {
+            return adaptFulfilledSessionDataFromAPI(result);
+        })
+        .catch((e) => {
+            window.dispatchEvent(new Event('INVALID_SESSION'));
+            throw new Error(`Error refreshing session [error: ${e}]`);
+        });
 };
 
 export const hentVarslerFetch = (VARSEL_API_URL: string): Promise<varselinnboksData> => {
