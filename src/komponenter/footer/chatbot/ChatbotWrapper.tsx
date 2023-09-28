@@ -8,6 +8,8 @@ import { FridaIcon } from './FridaIcon';
 import { BoostConfig, BoostObject } from './boost-config';
 
 import style from './ChatbotWrapper.module.scss';
+import { MenuValue } from 'utils/meny-storage-utils';
+import { Locale } from 'store/reducers/language-duck';
 
 const stateSelector = (state: AppState) => ({
     chatbotParamEnabled: state.environment.PARAMS.CHATBOT,
@@ -15,6 +17,8 @@ const stateSelector = (state: AppState) => ({
     featureToggles: state.featureToggles,
     context: state.arbeidsflate.status,
     env: state.environment.ENV,
+    language: state.language.language,
+    arbeidsflate: state.arbeidsflate.status,
 });
 
 const conversationCookieName = 'nav-chatbot%3Aconversation';
@@ -23,7 +27,7 @@ const boostApiUrlBaseTest = 'navtest';
 const boostApiUrlBaseProduction = 'nav';
 
 export const ChatbotWrapper = () => {
-    const { chatbotParamEnabled, chatbotParamVisible, env } = useSelector(stateSelector);
+    const { chatbotParamEnabled, chatbotParamVisible, env, language, arbeidsflate } = useSelector(stateSelector);
     const [cookies, setCookie, removeCookie] = useCookies([conversationCookieName]);
 
     // Do not mount chatbot on initial render. Prevents hydration errors
@@ -52,6 +56,13 @@ export const ChatbotWrapper = () => {
             return;
         }
 
+        const preferredFilter =
+            arbeidsflate === MenuValue.ARBEIDSGIVER
+                ? 'arbeidsgiver'
+                : language === Locale.NYNORSK
+                ? 'nynorsk'
+                : 'bokmal';
+
         const options: BoostConfig = {
             chatPanel: {
                 settings: {
@@ -62,6 +73,11 @@ export const ChatbotWrapper = () => {
                 styling: {
                     buttons: {
                         multiline: true,
+                    },
+                },
+                header: {
+                    filters: {
+                        filterValues: preferredFilter,
                     },
                 },
             },
@@ -115,6 +131,9 @@ export const ChatbotWrapper = () => {
                 expires: expirationDay,
                 domain: isProduction ? '.nav.no' : '.dev.nav.no',
             });
+        });
+        boost.chatPanel.addEventListener('setFilterValue', function (ev: any) {
+            boost.chatPanel.setFilterValues(ev.detail.filterValue);
         });
 
         if (bufferLoad) {
