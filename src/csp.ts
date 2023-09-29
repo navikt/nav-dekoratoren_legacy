@@ -14,7 +14,7 @@ const vimeoCdn = '*.vimeocdn.com'; // used for video preview images
 const hotjarCom = '*.hotjar.com';
 const hotjarIo = '*.hotjar.io';
 const taskAnalytics = '*.taskanalytics.com';
-const googleStorage = 'https://storage.googleapis.com';
+const googleStorage = 'storage.googleapis.com';
 
 const styleSrc = [
     navNo,
