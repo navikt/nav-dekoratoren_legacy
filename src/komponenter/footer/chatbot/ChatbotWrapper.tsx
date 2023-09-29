@@ -56,12 +56,12 @@ export const ChatbotWrapper = () => {
             return;
         }
 
-        const preferredFilter =
-            arbeidsflate === MenuValue.ARBEIDSGIVER
-                ? 'arbeidsgiver'
-                : language === Locale.NYNORSK
-                ? 'nynorsk'
-                : 'bokmal';
+        let preferredFilter;
+        if (arbeidsflate === MenuValue.ARBEIDSGIVER) {
+            preferredFilter = 'arbeidsgiver';
+        } else {
+            preferredFilter = language === Locale.NYNORSK ? 'nynorsk' : 'bokmal';
+        }
 
         const options: BoostConfig = {
             chatPanel: {
