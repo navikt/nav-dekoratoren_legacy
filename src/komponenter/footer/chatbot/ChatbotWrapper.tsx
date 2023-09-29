@@ -56,12 +56,12 @@ export const ChatbotWrapper = () => {
             return;
         }
 
-        let preferredFilter;
-        if (arbeidsflate === MenuValue.ARBEIDSGIVER) {
-            preferredFilter = 'arbeidsgiver';
-        } else {
-            preferredFilter = language === Locale.NYNORSK ? 'nynorsk' : 'bokmal';
-        }
+        // let preferredFilter;
+        // if (arbeidsflate === MenuValue.ARBEIDSGIVER) {
+        //     preferredFilter = 'arbeidsgiver';
+        // } else {
+        //     preferredFilter = language === Locale.NYNORSK ? 'nynorsk' : 'bokmal';
+        // }
 
         const options: BoostConfig = {
             chatPanel: {
@@ -73,11 +73,6 @@ export const ChatbotWrapper = () => {
                 styling: {
                     buttons: {
                         multiline: true,
-                    },
-                },
-                header: {
-                    filters: {
-                        filterValues: preferredFilter,
                     },
                 },
             },
