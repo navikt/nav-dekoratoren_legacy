@@ -116,6 +116,9 @@ export const ChatbotWrapper = () => {
                 domain: isProduction ? '.nav.no' : '.dev.nav.no',
             });
         });
+        boost.chatPanel.addEventListener('setFilterValue', function (ev: any) {
+            boost.chatPanel.setFilterValues(ev.detail.filterValue);
+        });
 
         if (bufferLoad) {
             setBufferLoad(false);

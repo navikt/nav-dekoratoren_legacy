@@ -14,6 +14,7 @@ const vimeoCdn = '*.vimeocdn.com'; // used for video preview images
 const hotjarCom = '*.hotjar.com';
 const hotjarIo = '*.hotjar.io';
 const taskAnalytics = '*.taskanalytics.com';
+const googleStorage = 'storage.googleapis.com';
 
 const styleSrc = [
     navNo,
@@ -51,7 +52,7 @@ const directives: Partial<CSPDirectives> = {
         cdnNavNo,
         DATA, // ds-css
     ],
-    'img-src': [navNo, vergicScreenSharing, vimeoCdn, hotjarCom, vergicDotCom],
+    'img-src': [navNo, vergicScreenSharing, vimeoCdn, hotjarCom, vergicDotCom, googleStorage],
     'frame-src': [hotjarCom, vimeoPlayer, qbrick],
     'connect-src': [navNo, boostChatbot, vergicScreenSharing, hotjarCom, hotjarIo, taskAnalytics],
 };
