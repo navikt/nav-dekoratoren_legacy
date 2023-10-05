@@ -2,21 +2,23 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { hentInnloggingsstatus, fornyInnlogging } from 'store/reducers/innloggingsstatus-duck';
-import { getLogOutUrl } from 'utils/login';
+import { getLogOutUrl, getLoginUrl } from 'utils/login';
 import { useLoginDebug } from './useLoginDebug';
 
 const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,
     environment: state.environment,
+    arbeidsflate: state.arbeidsflate.status,
 });
 
 let timeoutId: NodeJS.Timeout | null = null;
 
 export const useLoginStatus = () => {
     const dispatch = useDispatch();
-    const { innloggetStatus, environment } = useSelector(stateSelector);
+    const { innloggetStatus, environment, arbeidsflate } = useSelector(stateSelector);
     const [isTokenExpiring, setIsTokenExpiring] = useState<boolean | null>(null);
     const [isSessionExpiring, setIsSessionExpiring] = useState<boolean | null>(null);
+    const [hasAuthError, setHasAuthError] = useState<boolean>(false);
     const [secondsToSessionExpires, setSecondsToSessionExpires] = useState<number>(0);
     useLoginDebug();
 
@@ -24,6 +26,12 @@ export const useLoginStatus = () => {
     // get access to the updated value of innloggetStatus.
     const innloggetStatusRef = useRef(innloggetStatus);
     innloggetStatusRef.current = innloggetStatus;
+
+    useEffect(() => {
+        window.addEventListener('INVALID_SESSION', () => {
+            setHasAuthError(true);
+        });
+    }, []);
 
     const getExpirationInSeconds = ({ session, token }: { session: string | null; token: string | null }) => {
         if (!session || !token) return { secondsToTokenExpires: null, secondsToSessionExpires: null };
@@ -75,7 +83,11 @@ export const useLoginStatus = () => {
         window.location.href = getLogOutUrl(environment);
     };
 
-    const onVisibilityChange = () => {
+    const loginHandler = () => {
+        window.location.href = getLoginUrl(environment, arbeidsflate);
+    };
+
+    const onWindowVisibility = () => {
         if (document.visibilityState === 'visible') {
             checkLoginAndRepeat();
             hentInnloggingsstatus(environment)(dispatch);
@@ -84,8 +96,22 @@ export const useLoginStatus = () => {
 
     useEffect(() => {
         checkLoginAndRepeat();
-        window.addEventListener('visibilitychange', onVisibilityChange);
+        window.addEventListener('visibilitychange', onWindowVisibility);
+        window.addEventListener('focus', onWindowVisibility);
+
+        return () => {
+            window.removeEventListener('visibilitychange', onWindowVisibility);
+            window.removeEventListener('focus', onWindowVisibility);
+        };
     }, []);
 
-    return { isTokenExpiring, isSessionExpiring, refreshTokenHandler, logoutHandler, secondsToSessionExpires };
+    return {
+        isTokenExpiring,
+        isSessionExpiring,
+        refreshTokenHandler,
+        logoutHandler,
+        loginHandler,
+        secondsToSessionExpires,
+        hasAuthError,
+    };
 };
