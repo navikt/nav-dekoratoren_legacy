@@ -10,7 +10,7 @@ spec:
       apiVersion: unleash.nais.io/v1
       kind: RemoteUnleash
       name: navno
-    secretName: {{appName}}-unleash-api-token
+    secretName: nav-dekoratoren-unleash-api-token
 
     # Specify which environment the API token should be created for.
     # Can be one of: development, or production.
