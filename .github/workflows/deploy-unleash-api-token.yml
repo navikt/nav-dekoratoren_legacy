@@ -1,0 +1,35 @@
+name: Deploy unleash-apitoken
+on:
+  push:
+    paths:
+      - ".nais/unleash/unleash-api-token.dev.yaml"
+      - ".nais/unleash/unleash-api-token.prod.yaml"
+
+jobs:
+  deploy-dev:
+    name: Deploy unleash-apitoken to dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Deploy application
+        uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-gcp
+          RESOURCE: .nais/unleash/unleash-api-token.dev.yaml
+
+  deploy-prod:
+    name: Deploy unleash-apitoken to prod
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Deploy application
+        uses: nais/deploy/actions/deploy@v1
+        if: github.ref == 'refs/heads/main'
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-gcp
+          RESOURCE: .nais/unleash/unleash-api-token.prod.yaml
