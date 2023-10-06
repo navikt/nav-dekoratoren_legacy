@@ -2,9 +2,9 @@ apiVersion: unleash.nais.io/v1
 kind: ApiToken
 metadata:
   name: nav-dekoratoren
-  namespace: navno
+  namespace: personbruker
   labels:
-    team: navno
+    team: personbruker
 spec:
     unleashInstance:
       apiVersion: unleash.nais.io/v1
@@ -14,4 +14,4 @@ spec:
 
     # Specify which environment the API token should be created for.
     # Can be one of: development, or production.
-    environment: development
+    environment: production

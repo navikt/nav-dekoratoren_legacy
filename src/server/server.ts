@@ -16,7 +16,7 @@ import { getCspHandler } from './api-handlers/csp';
 import { getTaskAnalyticsConfigHandler } from './api-handlers/ta';
 import { mockSessionHandler, refreshMockSessionHandler } from './mock/mockSession';
 import { mockAuthHandler } from './mock/mockAuth';
-// import { getFeaturesHandler } from './api-handlers/features';
+import { getFeaturesHandler } from './api-handlers/features';
 
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
@@ -122,7 +122,7 @@ app.get(createPaths('/env'), (req, res, next) => {
 // Api endpoints
 app.get(createPaths('/api/meny'), getMenuHandler);
 app.get(createPaths('/api/sok'), getSokHandler);
-// app.get(createPaths('/api/features'), getFeaturesHandler);
+app.get(createPaths('/api/features'), getFeaturesHandler);
 app.get(createPaths('/api/driftsmeldinger'), getDriftsmeldingerHandler);
 app.get(createPaths('/api/auth'), mockAuthHandler);
 app.get(createPaths('/api/oauth2/session'), mockSessionHandler);
