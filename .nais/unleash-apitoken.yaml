@@ -1,0 +1,17 @@
+apiVersion: unleash.nais.io/v1
+kind: ApiToken
+metadata:
+  name: {{appName}}
+  namespace: navno
+  labels:
+    team: navno
+spec:
+    unleashInstance:
+      apiVersion: unleash.nais.io/v1
+      kind: RemoteUnleash
+      name: navno
+    secretName: {{appName}}-unleash-api-token
+
+    # Specify which environment the API token should be created for.
+    # Can be one of: development, or production.
+    environment: {{unleashEnvironment}}

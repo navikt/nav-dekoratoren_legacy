@@ -2,3 +2,4 @@ webpack.client.config.js
 webpack.server.config.js
 package.json
 *.yml
+*.yaml

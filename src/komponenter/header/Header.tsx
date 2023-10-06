@@ -98,7 +98,7 @@ export const Header = () => {
     }, [menypunkt]);
 
     useLoadIfActiveSession({
-        userState: cookies['psCurrentState']
+        userState: cookies['psCurrentState'],
     });
 
     // Handle enforced login
@@ -123,7 +123,7 @@ export const Header = () => {
         hentInnloggingsstatus(environment)(dispatch);
         fetchMenypunkter(APP_URL)(dispatch);
         if (Object.keys(currentFeatureToggles).length) {
-            fetchFeatureToggles(API_DEKORATOREN_URL, currentFeatureToggles)
+            fetchFeatureToggles(APP_URL, currentFeatureToggles)
                 .then((updatedFeatureToggles) => {
                     dispatch({
                         type: ActionType.SETT_FEATURE_TOGGLES,

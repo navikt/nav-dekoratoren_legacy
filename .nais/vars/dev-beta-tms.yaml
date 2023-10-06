@@ -1,9 +1,11 @@
 appName: nav-dekoratoren-beta-tms
 appPath: ''
+unleashEnvironment: development
 ingresses:
   - https://dekoratoren-beta-tms.intern.dev.nav.no
 outboundHosts:
   - portal-admin-dev.oera.no
+  - navno-unleash-api.nav.cloud.nais.io
 env:
   - name: ENV
     value: dev

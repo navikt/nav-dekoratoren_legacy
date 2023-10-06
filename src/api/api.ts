@@ -97,8 +97,8 @@ export const postInaktiver = (VARSEL_API_URL: string, eventId: DoneEvent) =>
         keepalive: true,
     }).catch((e) => console.info(`Error posting done event for varsler [eventId: ${eventId?.eventId} - error: ${e}]`));
 
-export const fetchFeatureToggles = (API_DEKORATOREN_URL: string, featureToggles: FeatureToggles) =>
-    fetchToJson(`${API_DEKORATOREN_URL}/feature-toggles${getFeatureToggleUrl(featureToggles)}`, {
+export const fetchFeatureToggles = (APP_URL: string, featureToggles: FeatureToggles) =>
+    fetchToJson(`${APP_URL}/api/features${getFeatureToggleUrl(featureToggles)}`, {
         credentials: 'include',
     });
 
