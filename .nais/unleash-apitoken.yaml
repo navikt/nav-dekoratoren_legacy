@@ -1,7 +1,7 @@
 apiVersion: unleash.nais.io/v1
 kind: ApiToken
 metadata:
-  name: {{appName}}
+  name: nav-decoratoren
   namespace: navno
   labels:
     team: navno
