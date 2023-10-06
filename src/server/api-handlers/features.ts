@@ -20,14 +20,19 @@ export const getFeaturesHandler: RequestHandler = async (req, res) => {
         return;
     }
 
-    const unleash = await startUnleash({
-        url: UNLEASH_SERVER_API_URL,
-        appName: 'nav-dekoratoren',
-        customHeaders: { Authorization: UNLEASH_SERVER_API_TOKEN },
-    });
+    try {
+        const unleash = await startUnleash({
+            url: UNLEASH_SERVER_API_URL,
+            appName: 'nav-dekoratoren',
+            customHeaders: { Authorization: UNLEASH_SERVER_API_TOKEN },
+        });
 
-    return {
-        skjermdeling: unleash.isEnabled('dekoratoren.skjermdeling'),
-        chatbotscript: unleash.isEnabled('dekoratoren.chatbotscript'),
-    };
+        return {
+            skjermdeling: unleash.isEnabled('dekoratoren.skjermdeling'),
+            chatbotscript: unleash.isEnabled('dekoratoren.chatbotscript'),
+        };
+    } catch (e) {
+        console.error(`Failed to fetch feature toggles from unleash - ${e}`);
+        res.status(500).send(`Failed to fetch feature toggles from unleash - ${e}`);
+    }
 };
