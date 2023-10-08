@@ -29,24 +29,27 @@ const initializeUnleash = async () => {
 initializeUnleash();
 
 export const getFeaturesHandler: RequestHandler = async (req, res) => {
+    // If for some reason the unleash instance is not initialized,
+    // make a new attempt.
     if (!unleashInstance) {
         await initializeUnleash();
     }
 
     const { query } = req;
     if (!query?.feature) {
+        res.status(400).json({ error: 'Missing feature query parameters' });
         return;
     }
-    const requestedFeatures: string[] = forceArray(query.feature);
+    const requestedFeatures: string[] = forceArray(query.feature).filter((feature) => typeof feature === 'string');
 
     // Cant easily fetch feature toggles when running locally
     // so just mock this.
     if (process.env.NODE_ENV === 'development') {
-        const features = {
-            'dekoratoren.skjermdeling': true,
-            'dekoratoren.chatbotscript': true,
-        };
-        res.json(features);
+        const mockFeatures = requestedFeatures.reduce((acc: Features, feature: string) => {
+            acc[feature] = true;
+            return acc;
+        }, {});
+        res.json(mockFeatures);
         return;
     }
 
