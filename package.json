@@ -54,7 +54,7 @@
         "react-redux": "8.0.5",
         "redux": "4.2.1",
         "universal-cookie-express": "4.0.3",
-        "unleash-client": "^4.1.1"
+        "unleash-client": "4.1.1"
     },
     "devDependencies": {
         "@babel/cli": "7.21.5",
