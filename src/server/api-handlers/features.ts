@@ -1,9 +1,8 @@
 import { RequestHandler } from 'express';
+import { forceArray } from '../utils';
 import { initialize, Unleash } from 'unleash-client';
 
 let unleashInstance: Unleash;
-const featurePrefix = 'dekoratoren';
-const expectedFeatures = ['skjermdeling', 'chatbotscript'];
 
 type Features = { [key: string]: boolean };
 
@@ -34,21 +33,25 @@ export const getFeaturesHandler: RequestHandler = async (req, res) => {
         await initializeUnleash();
     }
 
+    const { query } = req;
+    if (!query?.feature) {
+        return;
+    }
+    const requestedFeatures: string[] = forceArray(query.feature);
+
     // Cant easily fetch feature toggles when running locally
     // so just mock this.
     if (process.env.NODE_ENV === 'development') {
         const features = {
-            skjermdeling: true,
-            chatbotscript: true,
+            'dekoratoren.skjermdeling': true,
+            'dekoratoren.chatbotscript': true,
         };
         res.json(features);
         return;
     }
 
-    console.log(unleashInstance.isEnabled('dekoratoren.skjermdeling'));
-
-    const features = expectedFeatures.reduce((acc: Features, feature: string) => {
-        acc[feature] = unleashInstance.isEnabled(`${featurePrefix}.${feature}`);
+    const features = requestedFeatures.reduce((acc: Features, feature: string) => {
+        acc[feature] = unleashInstance.isEnabled(feature);
         return acc;
     }, {});
 
