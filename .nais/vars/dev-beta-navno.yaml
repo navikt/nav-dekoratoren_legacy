@@ -1,6 +1,5 @@
 appName: nav-dekoratoren-beta
 appPath: ''
-unleashEnvironment: development
 ingresses:
   - https://dekoratoren-beta.intern.dev.nav.no
 outboundHosts:
