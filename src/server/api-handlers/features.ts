@@ -29,6 +29,7 @@ const initializeUnleash = async () => {
         });
     } catch (e) {
         console.error('Error initializing unleash', e);
+        return false;
     }
 
     return true;
