@@ -42,12 +42,6 @@ const resolveRequestedFeatures = (requestedFeatures: string[]) => {
 };
 
 export const getFeaturesHandler: RequestHandler = async (req, res) => {
-    // If for some reason the unleash instance is not initialized,
-    // make a new attempt.
-    if (!unleashInstance) {
-        await initializeUnleash();
-    }
-
     const { query } = req;
     if (!query?.feature) {
         res.status(400).json({ error: 'Missing feature query parameters' });
@@ -55,7 +49,6 @@ export const getFeaturesHandler: RequestHandler = async (req, res) => {
     }
 
     const requestedFeatures: string[] = forceArray(query.feature).filter((feature) => typeof feature === 'string');
-    console.log(resolveRequestedFeatures(requestedFeatures));
     res.json(resolveRequestedFeatures(requestedFeatures));
 };
 
