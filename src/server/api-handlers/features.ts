@@ -36,7 +36,7 @@ const initializeUnleash = async () => {
 
 const resolveRequestedFeatures = (requestedFeatures: string[]) => {
     return requestedFeatures.reduce((acc: Features, feature: string) => {
-        acc[feature] = unleashInstance.isSynchronized() ? unleashInstance.isEnabled(feature) : defaultToggles[feature];
+        acc[feature] = unleashInstance?.isSynchronized() ? unleashInstance.isEnabled(feature) : defaultToggles[feature];
         return acc;
     }, {});
 };
