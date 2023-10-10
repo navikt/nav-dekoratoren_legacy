@@ -6,6 +6,14 @@ let unleashInstance: Unleash;
 
 type Features = { [key: string]: boolean };
 
+// If Unleash instance goes down, we don't want screen sharing and chatbot to be
+// feature disabled. So we default to true if the instance can not initialize.
+// NOTE: Other filters may have other strategies, by setting to false.
+const defaultToggles: Features = {
+    'dekoratoren.screensharing': true,
+    'dekoratoren.chatbot': true,
+};
+
 const initializeUnleash = async () => {
     const { UNLEASH_SERVER_API_TOKEN, UNLEASH_SERVER_API_URL } = process.env;
     if (!UNLEASH_SERVER_API_TOKEN || !UNLEASH_SERVER_API_URL) {
@@ -26,7 +34,12 @@ const initializeUnleash = async () => {
     return true;
 };
 
-initializeUnleash();
+const resolveRequestedFeatures = (requestedFeatures: string[]) => {
+    return requestedFeatures.reduce((acc: Features, feature: string) => {
+        acc[feature] = unleashInstance ? unleashInstance.isEnabled(feature) : defaultToggles[feature];
+        return acc;
+    }, {});
+};
 
 export const getFeaturesHandler: RequestHandler = async (req, res) => {
     // If for some reason the unleash instance is not initialized,
@@ -40,23 +53,9 @@ export const getFeaturesHandler: RequestHandler = async (req, res) => {
         res.status(400).json({ error: 'Missing feature query parameters' });
         return;
     }
+
     const requestedFeatures: string[] = forceArray(query.feature).filter((feature) => typeof feature === 'string');
-
-    // Cant easily fetch feature toggles when running locally
-    // so just mock this.
-    if (process.env.NODE_ENV === 'development') {
-        const mockFeatures = requestedFeatures.reduce((acc: Features, feature: string) => {
-            acc[feature] = true;
-            return acc;
-        }, {});
-        res.json(mockFeatures);
-        return;
-    }
-
-    const features = requestedFeatures.reduce((acc: Features, feature: string) => {
-        acc[feature] = unleashInstance.isEnabled(feature);
-        return acc;
-    }, {});
-
-    res.json(features);
+    res.json(resolveRequestedFeatures(requestedFeatures));
 };
+
+initializeUnleash();
