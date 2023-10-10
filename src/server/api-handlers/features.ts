@@ -10,8 +10,8 @@ type Features = { [key: string]: boolean };
 // feature disabled. So we default to true if the instance can not initialize.
 // NOTE: Other filters may have other strategies, by setting to false.
 const defaultToggles: Features = {
-    'dekoratoren.screensharing': true,
-    'dekoratoren.chatbot': true,
+    'dekoratoren.skjermdeling': true,
+    'dekoratoren.chatbotscript': true,
 };
 
 const initializeUnleash = async () => {
