@@ -23,7 +23,7 @@ const initializeUnleash = async () => {
 
     try {
         unleashInstance = initialize({
-            url: `${UNLEASH_SERVER_API_URL}/api/`,
+            url: `${UNLEASH_SERVER_API_URL}/ap/`,
             appName: 'nav-dekoratoren',
             customHeaders: { Authorization: UNLEASH_SERVER_API_TOKEN },
         });
