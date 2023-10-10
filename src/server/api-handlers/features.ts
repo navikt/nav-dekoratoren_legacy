@@ -36,7 +36,7 @@ const initializeUnleash = async () => {
 
 const resolveRequestedFeatures = (requestedFeatures: string[]) => {
     return requestedFeatures.reduce((acc: Features, feature: string) => {
-        acc[feature] = unleashInstance ? unleashInstance.isEnabled(feature) : defaultToggles[feature];
+        acc[feature] = unleashInstance.isSynchronized() ? unleashInstance.isEnabled(feature) : defaultToggles[feature];
         return acc;
     }, {});
 };
@@ -55,6 +55,7 @@ export const getFeaturesHandler: RequestHandler = async (req, res) => {
     }
 
     const requestedFeatures: string[] = forceArray(query.feature).filter((feature) => typeof feature === 'string');
+    console.log(resolveRequestedFeatures(requestedFeatures));
     res.json(resolveRequestedFeatures(requestedFeatures));
 };
 
