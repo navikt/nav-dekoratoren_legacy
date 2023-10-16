@@ -11,7 +11,4 @@ spec:
       kind: RemoteUnleash
       name: navno
     secretName: nav-dekoratoren-unleash-api-token
-
-    # Specify which environment the API token should be created for.
-    # Can be one of: development, or production.
     environment: production
