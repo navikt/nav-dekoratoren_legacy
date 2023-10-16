@@ -22,7 +22,7 @@ jobs:
   deploy-prod:
     name: Deploy unleash-apitoken to prod
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
