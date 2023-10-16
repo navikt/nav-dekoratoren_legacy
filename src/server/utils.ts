@@ -252,3 +252,5 @@ export const getSalesforceContainer = (_tagName: string, className: string) => {
 export const fiveMinutesInSeconds = 5 * 60;
 export const oneMinuteInSeconds = 60;
 export const tenSeconds = 10;
+
+export const forceArray = (value: any) => (Array.isArray(value) ? value : [value]);

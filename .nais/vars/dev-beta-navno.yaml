@@ -4,6 +4,7 @@ ingresses:
   - https://dekoratoren-beta.intern.dev.nav.no
 outboundHosts:
   - portal-admin-q6.oera.no
+  - navno-unleash-api.nav.cloud.nais.io
 env:
   - name: ENV
     value: dev

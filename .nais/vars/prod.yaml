@@ -5,6 +5,7 @@ ingresses:
   - https://www.nav.no/dekoratoren
 outboundHosts:
   - www.nav.no
+  - navno-unleash-api.nav.cloud.nais.io
 env:
   - name: ENV
     value: prod
