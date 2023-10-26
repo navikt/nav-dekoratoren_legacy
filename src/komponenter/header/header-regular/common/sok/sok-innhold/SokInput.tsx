@@ -29,6 +29,7 @@ export const SokInput = (props: Props) => {
                     value={inputValue}
                     type="text"
                     label={finnTekst('sok-knapp-sokefelt', language)}
+                    autoComplete="off"
                 />
                 <SokKnapper writtenInput={writtenInput} onReset={onReset} id={id} />
             </div>

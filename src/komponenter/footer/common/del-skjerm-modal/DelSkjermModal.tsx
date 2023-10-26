@@ -99,6 +99,7 @@ const DelSkjermModal = (props: Props) => {
                                 value={code}
                                 onChange={onChange}
                                 maxLength={5}
+                                autoComplete="off"
                             />
                             <div className={style.knapper}>
                                 <Button onClick={onClick}>
