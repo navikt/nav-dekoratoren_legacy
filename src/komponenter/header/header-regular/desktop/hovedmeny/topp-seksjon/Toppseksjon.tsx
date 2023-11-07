@@ -21,8 +21,8 @@ export const Toppseksjon = () => {
     const [, setCookie] = useCookies([CookieName.DECORATOR_CONTEXT]);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const arbeidsflate = useSelector((state: AppState) => state.arbeidsflate.status);
-    const context = getArbeidsflateContext(XP_BASE_URL, arbeidsflate);
-
+    const { language } = useSelector((state: AppState) => state.language);
+    const context = getArbeidsflateContext(XP_BASE_URL, arbeidsflate, language);
     return (
         <div className={style.toppSeksjon} data-testid={'toppseksjon'}>
             <Heading level="2" size="medium" className={style.toppSeksjonTittel}>
@@ -30,7 +30,7 @@ export const Toppseksjon = () => {
                     id={
                         arbeidsflate === MenuValue.PRIVATPERSON
                             ? 'how-can-we-help'
-                            : `rolle-${arbeidsflate.toLowerCase()}` as LangKey
+                            : (`rolle-${arbeidsflate.toLowerCase()}` as LangKey)
                     }
                 />
             </Heading>
