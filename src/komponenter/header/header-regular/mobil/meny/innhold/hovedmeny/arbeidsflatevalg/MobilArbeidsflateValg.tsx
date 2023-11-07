@@ -20,7 +20,7 @@ type Props = {
 
 export const MobilArbeidsflateValg = ({ lang }: Props) => {
     const { arbeidsflate, environment } = useSelector(stateProps);
-    const lenker = bunnLenker(environment)[arbeidsflate];
+    const lenker = bunnLenker(environment, lang)[arbeidsflate];
 
     return (
         <UnstyledList className={'mobilArbeidsflateValg'}>

@@ -23,7 +23,7 @@ export const NavLogoLenke = (props: Props) => {
     const [, setCookie] = useCookies([CookieName.DECORATOR_CONTEXT]);
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const { language } = useSelector((state: AppState) => state.language);
-    const context = getArbeidsflateContext(XP_BASE_URL, MenuValue.PRIVATPERSON);
+    const context = getArbeidsflateContext(XP_BASE_URL, MenuValue.PRIVATPERSON, language);
 
     const url = getHomeUrl(XP_BASE_URL, language);
 

@@ -1,4 +1,4 @@
-import { Locale, languageDuck } from 'store/reducers/language-duck';
+import { Locale } from 'store/reducers/language-duck';
 import { LangKey } from 'tekster/ledetekster';
 import { MenuValue } from 'utils/meny-storage-utils';
 

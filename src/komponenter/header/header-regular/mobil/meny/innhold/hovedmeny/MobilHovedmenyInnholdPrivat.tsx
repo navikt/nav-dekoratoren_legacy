@@ -41,8 +41,8 @@ export const MobilHovedmenyInnholdPrivat = ({ setUndermeny, hovedmenyLenker }: P
     const [, setCookie] = useCookies();
 
     const dittNavLenke = dittNavLenkeData(dittNavUrl);
-    const arbgiverLenke = arbeidsgiverContextLenke(xpBaseUrl);
-    const samarbeidspartnerLenke = samarbeidspartnerContextLenke(xpBaseUrl);
+    const arbgiverLenke = arbeidsgiverContextLenke(xpBaseUrl, language);
+    const samarbeidspartnerLenke = samarbeidspartnerContextLenke(xpBaseUrl, language);
 
     const analyticsArgs = {
         context: MenuValue.PRIVATPERSON,

@@ -37,7 +37,7 @@ export const Brodsmulesti = (props: Props) => {
     const [showAll, setShowAll] = useState(false);
     const { status } = useSelector((state: AppState) => state.arbeidsflate);
     const { language } = useSelector((state: AppState) => state.language);
-    const context = getArbeidsflateContext(XP_BASE_URL, status);
+    const context = getArbeidsflateContext(XP_BASE_URL, status, language);
     const { breadcrumbs } = props;
 
     const homeUrl = getHomeUrl(XP_BASE_URL, language);
@@ -62,12 +62,7 @@ export const Brodsmulesti = (props: Props) => {
                             action: 'nav.no',
                         }}
                     >
-                        <Home
-                            className={style.iconHome}
-                            title="Hjem-ikon"
-                            titleId={'breadcrumb-home'}
-                            aria-hidden
-                        />
+                        <Home className={style.iconHome} title="Hjem-ikon" titleId={'breadcrumb-home'} aria-hidden />
                         <span>nav.no</span>
                         <Next
                             className={style.iconNext}

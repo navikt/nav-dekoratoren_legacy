@@ -19,7 +19,7 @@ interface Props {
 
 export const Bunnseksjon = ({ language, arbeidsflate }: Props) => {
     const { environment } = useSelector((state: AppState) => state);
-    const lenker = bunnLenker(environment)[arbeidsflate] as ArbeidsflateLenke[];
+    const lenker = bunnLenker(environment, language)[arbeidsflate] as ArbeidsflateLenke[];
 
     return (
         <div className={style.bunnSeksjon} data-testid={'bunnseksjon'}>
