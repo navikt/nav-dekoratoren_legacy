@@ -6,7 +6,6 @@ import { AppState } from 'store/reducers';
 import { LenkeMedSporing } from 'komponenter/common/lenke-med-sporing/LenkeMedSporing';
 import Tekst from 'tekster/finn-tekst';
 import { AnalyticsCategory } from 'utils/analytics/analytics';
-
 import 'komponenter/header/header-regular/mobil/meny/innhold/hovedmeny/header/MobilHovedmenyHeader.scss';
 import { LangKey } from 'tekster/ledetekster';
 
@@ -17,8 +16,9 @@ const stateSelector = (state: AppState) => ({
 
 export const MobilHovedmenyHeader = () => {
     const { XP_BASE_URL, arbeidsflate } = useSelector(stateSelector);
+    const { language } = useSelector((state: AppState) => state.language);
 
-    const lenke = arbeidsflateLenker(XP_BASE_URL).find((item) => item.key === arbeidsflate);
+    const lenke = arbeidsflateLenker(XP_BASE_URL, language).find((item) => item.key === arbeidsflate);
 
     const href = lenke?.url || 'https://www.nav.no';
 

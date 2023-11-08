@@ -34,7 +34,7 @@ const Arbeidsflatemeny = () => {
     return (
         <div className={'arbeidsflate'} id={'arbeidsflate'}>
             <ul className={style.toppListeRad} aria-label="Velg brukergruppe">
-                {arbeidsflateLenker(XP_BASE_URL).map((lenke, index) => {
+                {arbeidsflateLenker(XP_BASE_URL, language).map((lenke, index) => {
                     return (
                         <li className={style.listeElement} key={lenke.key}>
                             <LenkeMedSporing

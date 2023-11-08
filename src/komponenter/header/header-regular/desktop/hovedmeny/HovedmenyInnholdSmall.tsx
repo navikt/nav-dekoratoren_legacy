@@ -33,7 +33,7 @@ export const HovedmenyInnholdSmall = ({
         return null;
     }
 
-    const arbeidsflateLenker = bunnLenker(environment)[arbeidsflate].filter((lenke) =>
+    const arbeidsflateLenker = bunnLenker(environment, language)[arbeidsflate].filter((lenke) =>
         language !== Locale.BOKMAL && language !== Locale.NYNORSK ? !lenke.key : true
     );
 

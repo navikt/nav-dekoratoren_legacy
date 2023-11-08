@@ -1,3 +1,4 @@
+import { Locale } from 'store/reducers/language-duck';
 import { MenuValue } from 'utils/meny-storage-utils';
 import { arbeidsgiverContextLenke, personContextLenke, samarbeidspartnerContextLenke } from './arbeidsflate-lenker';
 import { Environment } from 'store/reducers/environment-duck';
@@ -22,33 +23,33 @@ export const dittNavLenkeData = (url: string): ArbeidsflateLenkeData => ({
     key: MenuValue.PRIVATPERSON,
 });
 
-const privatpersonLenker = (env: Environment): ArbeidsflateLenkeData[] => [
+const privatpersonLenker = (env: Environment, language: Locale): ArbeidsflateLenkeData[] => [
     dittNavLenkeData(env.MIN_SIDE_URL),
-    arbeidsgiverContextLenke(env.XP_BASE_URL),
-    samarbeidspartnerContextLenke(env.XP_BASE_URL),
+    arbeidsgiverContextLenke(env.XP_BASE_URL, language),
+    samarbeidspartnerContextLenke(env.XP_BASE_URL, language),
 ];
 
-const arbeidsgiverLenker = (env: Environment): ArbeidsflateLenkeData[] => [
+const arbeidsgiverLenker = (env: Environment, language: Locale): ArbeidsflateLenkeData[] => [
     {
         url: env.MINSIDE_ARBEIDSGIVER_URL + valgtbedrift(),
         lenkeTekstId: 'arbeidsgiver-minside-lenke',
         stikkordId: 'meny-bunnlenke-arbeidsgiver-stikkord',
         key: MenuValue.ARBEIDSGIVER,
     },
-    personContextLenke(env.XP_BASE_URL),
-    samarbeidspartnerContextLenke(env.XP_BASE_URL),
+    personContextLenke(env.XP_BASE_URL, language),
+    samarbeidspartnerContextLenke(env.XP_BASE_URL, language),
 ];
 
-const samarbeidspartnerLenker = (env: Environment): ArbeidsflateLenkeData[] => [
-    personContextLenke(env.XP_BASE_URL),
-    arbeidsgiverContextLenke(env.XP_BASE_URL),
+const samarbeidspartnerLenker = (env: Environment, language: Locale): ArbeidsflateLenkeData[] => [
+    personContextLenke(env.XP_BASE_URL, language),
+    arbeidsgiverContextLenke(env.XP_BASE_URL, language),
 ];
 
 const IKKEBESTEMTLenker = (): ArbeidsflateLenkeData[] => [];
 
-export const bunnLenker = (env: Environment) => ({
-    [MenuValue.PRIVATPERSON]: privatpersonLenker(env),
-    [MenuValue.ARBEIDSGIVER]: arbeidsgiverLenker(env),
-    [MenuValue.SAMARBEIDSPARTNER]: samarbeidspartnerLenker(env),
+export const bunnLenker = (env: Environment, language: Locale) => ({
+    [MenuValue.PRIVATPERSON]: privatpersonLenker(env, language),
+    [MenuValue.ARBEIDSGIVER]: arbeidsgiverLenker(env, language),
+    [MenuValue.SAMARBEIDSPARTNER]: samarbeidspartnerLenker(env, language),
     [MenuValue.IKKEBESTEMT]: IKKEBESTEMTLenker(),
 });
