@@ -1,6 +1,20 @@
 import { erNavDekoratoren } from './Environment';
 import { MenuValue } from './meny-storage-utils';
 import { Environment } from '../store/reducers/environment-duck';
+import { Locale } from 'store/reducers/language-duck';
+
+type IdPortenLocale = 'nb' | 'nn' | 'en' | 'se';
+
+const idPortenLocaleMap: Record<Locale, IdPortenLocale> = {
+    [Locale.BOKMAL]: 'nb',
+    [Locale.NYNORSK]: 'nn',
+    [Locale.SAMISK]: 'se',
+    [Locale.ENGELSK]: 'en',
+    [Locale.POLSK]: 'en',
+    [Locale.RUSSISK]: 'en',
+    [Locale.UKRAINSK]: 'en',
+    [Locale.IKKEBESTEMT]: 'nb',
+};
 
 const getRedirectUrlLogin = (environment: Environment, arbeidsflate: MenuValue) => {
     const { MIN_SIDE_URL, MINSIDE_ARBEIDSGIVER_URL, PARAMS } = environment;
@@ -29,11 +43,12 @@ const getRedirectUrlLogin = (environment: Environment, arbeidsflate: MenuValue) 
 
 export const getLoginUrl = (environment: Environment, arbeidsflate: MenuValue, level?: string) => {
     const { LOGIN_URL, PARAMS } = environment;
-    const { LEVEL } = PARAMS;
+    const { LEVEL, LANGUAGE } = PARAMS;
 
     const redirectUrl = getRedirectUrlLogin(environment, arbeidsflate);
+    const idPortenLocale = idPortenLocaleMap[LANGUAGE];
 
-    return `${LOGIN_URL}?redirect=${redirectUrl}&level=${level || LEVEL}`;
+    return `${LOGIN_URL}?redirect=${redirectUrl}&level=${level || LEVEL}&locale=${idPortenLocale}`;
 };
 
 export const getLogOutUrl = (environment: Environment) => {
