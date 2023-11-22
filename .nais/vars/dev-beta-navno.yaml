@@ -17,7 +17,7 @@ env:
   - name: API_DEKORATOREN_URL
     value: https://www.ekstern.dev.nav.no/person/nav-dekoratoren-api
   - name: MINSIDE_ARBEIDSGIVER_URL
-    value: https://min-side-arbeidsgiver.intern.dev.nav.no/min-side-arbeidsgiver/
+    value: https://arbeidsgiver.intern.dev.nav.no/min-side-arbeidsgiver/
   - name: MIN_SIDE_URL
     value: https://www.intern.dev.nav.no/minside/
   - name: LOGIN_URL
