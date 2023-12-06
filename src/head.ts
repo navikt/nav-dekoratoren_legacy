@@ -14,7 +14,7 @@ export const fontAttribs = {
     href: 'https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2',
     as: 'font',
     type: 'font/woff2',
-    crossorigin: 'true',
+    crossorigin: 'anonymous',
 };
 
 type Tag = {
