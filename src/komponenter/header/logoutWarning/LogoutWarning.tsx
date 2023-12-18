@@ -1,5 +1,5 @@
 import { BodyLong, Button, Modal } from '@navikt/ds-react';
-import React, { SyntheticEvent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useLoginStatus } from 'utils/hooks/useLoginStatus';
 import { finnTekst } from 'tekster/finn-tekst';
 import classNames from 'classnames';
@@ -43,8 +43,7 @@ export const LogoutWarning = () => {
         }
     }, [isTokenExpiring, isSessionExpiring]);
 
-    const onCloseHandler = (e: SyntheticEvent<HTMLElement, Event>) => {
-        e.preventDefault();
+    const onCloseHandler = () => {
         setIsOpen(false);
     };
 
