@@ -7,6 +7,8 @@ const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,
 });
 
+const wait = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export const useLoginDebug = () => {
     const dispatch = useDispatch();
     const { innloggetStatus } = useSelector(stateSelector);
@@ -37,27 +39,42 @@ export const useLoginDebug = () => {
         };
     };
 
-    const expireToken = (inSeconds: number) => {
+    const expireToken = async (inSeconds: number) => {
         if (!inSeconds) {
             console.error('Please provide number of seconds for when to expire the token.');
             return null;
         }
 
+        console.log(
+            'Triggering logout warning in 3 seconds...  Remember to set focus to main window, ie. by clicking on it!'
+        );
+        await wait(3000);
+
         const fakeTokenEndsAt = new Date(Date.now() + inSeconds * 1000).toISOString();
         dispatch(debugInnloggingOK({ fakeTokenEndsAt }));
 
-        return `Token now set to mock end at ${fakeTokenEndsAt}. Tab switch will reset back to actual token expiry.`;
+        console.log(
+            `Token now set to mock end at ${fakeTokenEndsAt}. Tab switch will reset back to actual token expiry.`
+        );
     };
 
-    const expireSession = (inSeconds: number) => {
+    const expireSession = async (inSeconds: number) => {
         if (!inSeconds) {
             console.log('Please provide number of seconds for when to expire the session.');
             return null;
         }
 
+        console.log(
+            'Triggering logout warning in 3 seconds... Remember to set focus to main window, ie. by clicking on it!'
+        );
+        await wait(3000);
+
         const fakeSessionEndsAt = new Date(Date.now() + inSeconds * 1000).toISOString();
         dispatch(debugInnloggingOK({ fakeSessionEndsAt }));
-        return `Session now set to mock end at ${fakeSessionEndsAt}. Tab switch will reset back to actual session expiry.`;
+
+        console.log(
+            `Session now set to mock end at ${fakeSessionEndsAt}. Tab switch will reset back to actual session expiry.`
+        );
     };
     return true;
 };

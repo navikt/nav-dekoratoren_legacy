@@ -1,5 +1,5 @@
 import { BodyLong, Button, Modal } from '@navikt/ds-react';
-import React, { useEffect } from 'react';
+import React, { SyntheticEvent, useEffect } from 'react';
 import { useLoginStatus } from 'utils/hooks/useLoginStatus';
 import { finnTekst } from 'tekster/finn-tekst';
 import classNames from 'classnames';
@@ -22,6 +22,20 @@ export const LogoutWarning = () => {
     } = useLoginStatus();
     const [isOpen, setIsOpen] = React.useState(false);
     const { language } = useSelector((state: AppState) => state.language);
+    const dialogRef = React.useRef<HTMLDialogElement>(null);
+
+    useEffect(() => {
+        const dialog = dialogRef.current;
+        if (!dialog) {
+            return;
+        }
+
+        window.addEventListener('keydown', onKeydownHandler);
+
+        return () => {
+            window.removeEventListener('keydown', onKeydownHandler);
+        };
+    }, [dialogRef.current]);
 
     useEffect(() => {
         if (isTokenExpiring || isSessionExpiring) {
@@ -29,8 +43,15 @@ export const LogoutWarning = () => {
         }
     }, [isTokenExpiring, isSessionExpiring]);
 
-    const onCloseHandler = () => {
+    const onCloseHandler = (e: SyntheticEvent<HTMLElement, Event>) => {
+        e.preventDefault();
         setIsOpen(false);
+    };
+
+    const onKeydownHandler = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+            e.preventDefault();
+        }
     };
 
     if (typeof document === 'undefined') {
@@ -70,8 +91,8 @@ export const LogoutWarning = () => {
                 heading: finnTekst(titleId, language, minutesToSessionEnd.toString()),
                 closeButton: false,
             }}
-            onCancel={(e) => e.preventDefault()}
             className={classNames(styles.logoutWarning, isOpen && styles.visible)}
+            ref={dialogRef}
         >
             <Modal.Body className={styles.content}>
                 <BodyLong spacing>{finnTekst(textBodyId, language)}</BodyLong>
