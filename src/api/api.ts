@@ -34,7 +34,7 @@ export const hentInnloggingsstatusFetch = (environment: Environment): Promise<In
     const { API_DEKORATOREN_URL, ENV } = environment;
 
     const sessionUrl =
-        ENV === 'prod' ? `https://login.nav.no/oauth2/session` : `https://login.ekstern.dev.nav.no/oauth2/session`;
+        ENV === 'prod' ? `https://login.nav.no/oauth2/session` : `http://localhost:8088/api/oauth2/session`;
 
     const innloggingsstatusResult: Promise<InnloggingsstatusData> = fetchToJson(`${API_DEKORATOREN_URL}/auth`, {
         credentials: 'include',
