@@ -31,11 +31,7 @@ export const LogoutWarning = () => {
         }
 
         window.addEventListener('keydown', onKeydownHandler);
-
-        return () => {
-            window.removeEventListener('keydown', onKeydownHandler);
-        };
-    }, []);
+    }, [dialogRef.current]);
 
     useEffect(() => {
         if (isTokenExpiring || isSessionExpiring) {
