@@ -22,6 +22,16 @@ export const LogoutWarning = () => {
     } = useLoginStatus();
     const [isOpen, setIsOpen] = React.useState(false);
     const { language } = useSelector((state: AppState) => state.language);
+    const dialogRef = React.useRef<HTMLDialogElement>(null);
+
+    useEffect(() => {
+        const dialog = dialogRef.current;
+        if (!dialog) {
+            return;
+        }
+
+        window.addEventListener('keydown', onKeydownHandler);
+    }, [dialogRef.current]);
 
     useEffect(() => {
         if (isTokenExpiring || isSessionExpiring) {
@@ -31,6 +41,12 @@ export const LogoutWarning = () => {
 
     const onCloseHandler = () => {
         setIsOpen(false);
+    };
+
+    const onKeydownHandler = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+            e.preventDefault();
+        }
     };
 
     if (typeof document === 'undefined') {
@@ -70,8 +86,8 @@ export const LogoutWarning = () => {
                 heading: finnTekst(titleId, language, minutesToSessionEnd.toString()),
                 closeButton: false,
             }}
-            onCancel={(e) => e.preventDefault()}
             className={classNames(styles.logoutWarning, isOpen && styles.visible)}
+            ref={dialogRef}
         >
             <Modal.Body className={styles.content}>
                 <BodyLong spacing>{finnTekst(textBodyId, language)}</BodyLong>
