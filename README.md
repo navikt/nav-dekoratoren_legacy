@@ -119,7 +119,7 @@ Dekoratøren kan tilpasses med følgende [URL-parametere / query-string](https:/
 | feedback            | boolean                                                | false            | Skjuler eller viser tilbakemeldingskomponenten                                 |
 | chatbot             | boolean                                                | true             | Aktiverer eller deaktiverer Chatbot Frida [6]                                  |
 | chatbotVisible      | boolean                                                | false            | Skjuler eller viser Chatbot Frida [7]                                          |
-| urlLookupTable      | boolean                                                | true             | Aktiverer eller deaktiverer url-lookup-table [8]                               |
+| urlLookupTable      | boolean                                                | false            | Aktiverer eller deaktiverer url-lookup-table [8]                               |
 | shareScreen         | boolean                                                | true             | Aktiverer eller deaktiverer skjermdelingskomponent                             |
 | logoutUrl           | string                                                 | undefined        | Setter url for logg-ut knappen [9]                                             |
 | maskHotjar          | boolean                                                | true             | Maskerer hele HTML-dokumentet fra Hotjar [10]                                  |
