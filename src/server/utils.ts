@@ -62,7 +62,7 @@ export const clientEnv = ({ req }: Props): Environment => {
                 FEEDBACK: req.query.feedback === 'true',
                 CHATBOT: req.query.chatbot !== 'false',
                 CHATBOT_VISIBLE: req.query.chatbotVisible === 'true',
-                URL_LOOKUP_TABLE: req.query.urlLookupTable !== 'false',
+                URL_LOOKUP_TABLE: req.query.urlLookupTable === 'true',
                 ...(req.query.utilsBackground && {
                     UTILS_BACKGROUND: req.query.utilsBackground as string,
                 }),
