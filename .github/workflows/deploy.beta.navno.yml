@@ -15,6 +15,7 @@ jobs:
   deploy:
     permissions:
       packages: write
+      id-token: write
     uses: ./.github/workflows/build-and-deploy.yml
     with:
       NAIS_VARS: .nais/vars/dev-beta-navno.yaml
