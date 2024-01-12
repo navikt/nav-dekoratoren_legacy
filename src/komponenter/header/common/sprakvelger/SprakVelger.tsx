@@ -124,10 +124,10 @@ const labels: { [key: string]: string } = {
     nb: 'Norsk (bokmål)',
     nn: 'Norsk (nynorsk)',
     en: 'English',
-    se: 'Sámegiel',
-    pl: 'Polski',
-    uk: 'Українська',
-    ru: 'Русский',
+    se: 'Sámegiel (samisk)',
+    pl: 'Polski (polsk)',
+    uk: 'Українська (ukrainsk)',
+    ru: 'Русский (russisk)',
 };
 
 // Utils
