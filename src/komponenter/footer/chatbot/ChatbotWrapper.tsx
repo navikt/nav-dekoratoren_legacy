@@ -134,7 +134,7 @@ export const ChatbotWrapper = () => {
         });
         boost.chatPanel.addEventListener('setFilterValue', function (ev: any) {
             boost.chatPanel.setFilterValues(ev.detail.filterValue);
-            boost.chatPanel.triggerAction(ev.detail.nextId);
+            if (ev.detail.nextId) boost.chatPanel.triggerAction(ev.detail.nextId);
         });
 
         if (bufferLoad) {
