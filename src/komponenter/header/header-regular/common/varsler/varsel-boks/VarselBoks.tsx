@@ -62,7 +62,7 @@ const Beskjed = ({
             postInaktiver(VARSEL_API_URL, { eventId: eventId });
             dispatch(fjernLestVarsel(eventId));
         }
-        logAmplitudeEvent('navigere', { komponent: type.toLowerCase() == "beskjed" ? "varsel-beskjed" : "varsel-oppgave", kategori: "varselbjelle", destinasjon: href });
+        logAmplitudeEvent('navigere', { komponent: isOppgave ? "varsel-oppgave": "varsel-beskjed", kategori: "varselbjelle", destinasjon: href });
     };
 
     return isArkiverbar ? (
