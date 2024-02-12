@@ -13,6 +13,8 @@ import SokResultater from './sok-innhold/SokResultater';
 import { Environment } from 'store/reducers/environment-duck';
 import Cookies from 'js-cookie';
 import 'komponenter/header/header-regular/common/sok/Sok.scss';
+import { useCookies } from 'react-cookie';
+import { decoratorContextCookie, decoratorLanguageCookie } from '../../../Header';
 
 interface Props {
     id: string;
@@ -37,11 +39,15 @@ const Sok = (props: Props) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [result, setResult] = useState<Sokeresultat | undefined>();
     const [error, setError] = useState<string | undefined>();
+    const [cookies] = useCookies();
     const { searchInput, setSearchInput } = props;
     const numberOfResults = 5;
     const klassenavn = cls('sok-input', {
         engelsk: language === Locale.ENGELSK,
     });
+
+    const audience = cookies[decoratorContextCookie];
+    const preferredLanguage = cookies[decoratorLanguageCookie];
 
     useEffect(() => {
         if (!props.isOpen) {
@@ -67,7 +73,7 @@ const Sok = (props: Props) => {
 
     const getSearchUrl = () => {
         const { XP_BASE_URL } = environment;
-        const url = `${XP_BASE_URL}/sok?ord=${searchInput}`;
+        const url = `${XP_BASE_URL}/nytt-sok?ord=${searchInput}`;
         return genererUrl(XP_BASE_URL, url);
     };
 
@@ -99,6 +105,8 @@ const Sok = (props: Props) => {
                                 setLoading(true);
                                 fetchSearchDebounced({
                                     value,
+                                    audience,
+                                    preferredLanguage,
                                     environment,
                                     setLoading,
                                     setError,
@@ -137,6 +145,8 @@ const Sok = (props: Props) => {
 /* Abstraction for debounce */
 interface FetchResult {
     value: string;
+    audience: string;
+    preferredLanguage: string;
     environment: Environment;
     setLoading: (value: boolean) => void;
     setError: (value?: string) => void;
@@ -144,7 +154,7 @@ interface FetchResult {
 }
 
 const fetchSearch = (props: FetchResult) => {
-    const { environment, value } = props;
+    const { environment, value, audience, preferredLanguage } = props;
     const { setLoading, setError, setResult } = props;
     const { APP_URL } = environment;
     const url = `${APP_URL}/api/sok`;
@@ -157,7 +167,7 @@ const fetchSearch = (props: FetchResult) => {
         label: value,
         action: 'søk-dynamisk',
     });
-    fetch(`${url}?ord=${encodeURIComponent(value)}`)
+    fetch(`${url}?ord=${encodeURIComponent(value)}&audience=${audience}&preferredLanguage=${preferredLanguage}`)
         .then((response) => {
             if (response.ok) {
                 return response;

@@ -28,6 +28,7 @@ export const clientEnv = ({ req }: Props): Environment => {
     return {
         ENV: process.env.ENV as string,
         XP_BASE_URL: process.env.XP_BASE_URL as string,
+        SEARCH_URL: process.env.SEARCH_URL as string,
         APP_URL: appUrl as string,
         APP_BASE_URL: process.env.APP_BASE_URL as string,
         APP_BASE_PATH: process.env.APP_BASE_PATH as string,

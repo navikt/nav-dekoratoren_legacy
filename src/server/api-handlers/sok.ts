@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 
-const sokServiceUrl = `${process.env.API_XP_SERVICES_URL}/navno.nav.no.search/search2/sok`;
+const sokServiceUrl = `${process.env.SEARCH_URL}/content/decorator-search`;
 
 export const getSokHandler: RequestHandler = (req, res) => {
     const queryString = new URL(req.url, process.env.APP_BASE_URL).search;

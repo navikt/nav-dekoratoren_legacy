@@ -10,6 +10,8 @@ env:
     value: dev
   - name: XP_BASE_URL
     value: https://www.ekstern.dev.nav.no
+  - name: SEARCH_URL
+    value: https://navno-search-api.intern.dev.nav.no
   - name: APP_BASE_URL
     value: https://dekoratoren.ekstern.dev.nav.no
   - name: API_XP_SERVICES_URL
