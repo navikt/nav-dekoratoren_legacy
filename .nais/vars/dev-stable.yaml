@@ -5,6 +5,7 @@ ingresses:
 outboundHosts:
   - portal-admin-dev.oera.no
   - navno-unleash-api.nav.cloud.nais.io
+  - navno-search-api.intern.dev.nav.no
 env:
   - name: ENV
     value: dev
