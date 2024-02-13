@@ -14,6 +14,7 @@ export const getSokHandler: RequestHandler = (req, res) => {
             if (response.status === 200) {
                 return response.json();
             } else {
+                console.log(`${response.status} - ${response.statusText}`);
                 throw new Error(`${response.status} - ${response.statusText}`);
             }
         })
@@ -21,7 +22,7 @@ export const getSokHandler: RequestHandler = (req, res) => {
             res.status(200).send(json);
         })
         .catch((err) => {
-            console.error(`Failed to fetch for search query ${queryString} - ${err}`);
+            console.error(`Failed to fetch for search query ${queryString} - ${err.message}`);
             res.status(500).send('Failed to fetch from search service');
         });
 };
