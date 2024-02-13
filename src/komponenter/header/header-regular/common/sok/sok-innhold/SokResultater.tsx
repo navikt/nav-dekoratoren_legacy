@@ -92,10 +92,10 @@ export const SokResultater = (props: Props) => {
                         {result.total} {finnTekst('sok-resultater', language)}
                     </div>
                     {result.total > itemsFiltered.length && (
-                        <Link className={'typo-element'} href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}>{`${finnTekst(
-                            'se-alle-treff',
-                            language
-                        )} ("${writtenInput}")`}</Link>
+                        <Link
+                            className={'typo-element'}
+                            href={`${XP_BASE_URL}/nytt-sok?ord=${writtenInput}`}
+                        >{`${finnTekst('se-alle-treff', language)} ("${writtenInput}")`}</Link>
                     )}
                 </div>
             ) : null}
