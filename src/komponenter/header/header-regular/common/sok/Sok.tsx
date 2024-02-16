@@ -118,6 +118,7 @@ const Sok = (props: Props) => {
                         }}
                         className={klassenavn}
                         language={language}
+                        audience={audience}
                         writtenInput={searchInput}
                         onReset={onReset}
                         id={props.id}

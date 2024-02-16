@@ -119,7 +119,7 @@ export const ledetekster = {
     'sok-reset': 'Tøm',
     'sok-reset-en': 'Reset',
     'sok-reset-se': 'Tøm',
-    'sok-knapp-sokefelt': 'Søk på nav.no',
+    'sok-knapp-sokefelt': (input: string) => `Søk i innhold for ${input}`,
     'sok-knapp-sokefelt-en': 'Search nav.no',
     'sok-knapp-sokefelt-se': 'Oza nav.no',
     'sok-input-label': 'Søk',
