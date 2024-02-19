@@ -15,6 +15,7 @@ import { MenuValue } from '../../../../../../utils/meny-storage-utils';
 
 import style from './Toppseksjon.module.scss';
 import { LangKey } from 'tekster/ledetekster';
+import { Locale } from '../../../../../../store/reducers/language-duck';
 
 export const Toppseksjon = () => {
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ export const Toppseksjon = () => {
             <Heading level="2" size="medium" className={style.toppSeksjonTittel}>
                 <Tekst
                     id={
-                        arbeidsflate === MenuValue.PRIVATPERSON
+                        arbeidsflate === MenuValue.PRIVATPERSON || language === Locale.ENGELSK
                             ? 'how-can-we-help'
                             : (`rolle-${arbeidsflate.toLowerCase()}` as LangKey)
                     }
