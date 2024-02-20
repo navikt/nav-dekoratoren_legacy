@@ -1,4 +1,5 @@
 import { buildGraphAndGetRootNode } from './kb-graph-builder';
+import { logAmplitudeEvent } from '../analytics/amplitude';
 
 export enum KbNavGroup {
     HeaderMenylinje = 'desktop-header-menylinje',
@@ -118,6 +119,7 @@ export const selectNode = (node: KbNavNode, callback: NodeSetterCallback = () =>
     if (!element) {
         return;
     }
+    logAmplitudeEvent('piltast-navigasjon', { linkId: node.id, linkGroup: node.group });
     callback(node);
     if (focus) {
         element.focus();
@@ -155,20 +157,22 @@ const arrowkeysHandler = (currentNode: KbNavNode, setCurrentNode: NodeSetterCall
     event.preventDefault();
 };
 
-const focusHandler = (
-    currentNode: KbNavNode,
-    nodeMap: KbNavNodeMap,
-    setCurrentNode: NodeSetterCallback,
-    kbNavHandler: (e: KeyboardEvent) => void
-) => (event: FocusEvent) => {
-    const id = (event.target as HTMLElement).id;
-    const focusedNode = nodeMap[id];
-    if (focusedNode) {
-        selectNode(focusedNode, setCurrentNode, false);
-    } else {
-        document.removeEventListener('keydown', kbNavHandler);
-    }
-};
+const focusHandler =
+    (
+        currentNode: KbNavNode,
+        nodeMap: KbNavNodeMap,
+        setCurrentNode: NodeSetterCallback,
+        kbNavHandler: (e: KeyboardEvent) => void
+    ) =>
+    (event: FocusEvent) => {
+        const id = (event.target as HTMLElement).id;
+        const focusedNode = nodeMap[id];
+        if (focusedNode) {
+            selectNode(focusedNode, setCurrentNode, false);
+        } else {
+            document.removeEventListener('keydown', kbNavHandler);
+        }
+    };
 
 export const createKbNavGraph = (
     group: KbNavGroup,
