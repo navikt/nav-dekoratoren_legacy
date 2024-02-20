@@ -10,6 +10,8 @@ import { useKbNavSub } from 'utils/keyboard-navigation/useKbNavSub';
 import { configForNodeGroup } from 'utils/keyboard-navigation/kb-navigation-setup';
 import { KbNavGroup } from 'utils/keyboard-navigation/kb-navigation';
 import { SokKnapp } from 'komponenter/header/header-regular/desktop/sok-dropdown/sok-knapp/SokKnapp';
+import { Soketreff } from '../../common/sok/utils';
+
 import 'komponenter/header/header-regular/desktop/sok-dropdown/SokDropdown.scss';
 
 export const sokDropdownClassname = 'desktop-sok-dropdown';
@@ -27,8 +29,9 @@ type Props = {
 export const SokKnappDesktop = ({ kbNavMainState }: Props) => {
     const { isOpen } = useSelector(stateSelector);
     const [searchInput, setSearchInput] = useState<string>('');
-    const [numResults, setNumResults] = useState(0);
-    useKbNavSub(configForNodeGroup[KbNavGroup.Sok], kbNavMainState, isOpen, numResults);
+    const [searchHits, setSearchHits] = useState<Soketreff[]>([]);
+
+    useKbNavSub(configForNodeGroup[KbNavGroup.Sok], kbNavMainState, isOpen, searchHits);
 
     useEffect(() => {
         const dropdownElement = document.getElementById(sokDropdownClassname) as HTMLElement;
@@ -52,7 +55,7 @@ export const SokKnappDesktop = ({ kbNavMainState }: Props) => {
                     isOpen={isOpen}
                     id={desktopSokInputId}
                     dropdownTransitionMs={dropdownTransitionMs}
-                    numResultsCallback={setNumResults}
+                    searchHitsCallback={setSearchHits}
                     searchInput={searchInput}
                     setSearchInput={setSearchInput}
                 />
