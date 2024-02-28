@@ -168,7 +168,16 @@ const fetchSearch = (props: FetchResult) => {
         label: value,
         action: 'søk-dynamisk',
     });
-    fetch(`${url}?ord=${encodeURIComponent(value)}&audience=${audience}&preferredLanguage=${preferredLanguage}`)
+
+    const validAudiences: { [key: string]: string } = {
+        privatperson: '0',
+        arbeidsgiver: '1',
+        samarbeidspartner: '2',
+    };
+
+    const facet = validAudiences[audience] || '0';
+
+    fetch(`${url}?ord=${encodeURIComponent(value)}&f=${facet}&preferredLanguage=${preferredLanguage}`)
         .then((response) => {
             if (response.ok) {
                 return response;
