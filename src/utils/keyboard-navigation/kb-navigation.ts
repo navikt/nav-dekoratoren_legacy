@@ -119,13 +119,15 @@ export const selectNode = (node: KbNavNode, callback: NodeSetterCallback = () =>
     if (!element) {
         return;
     }
-    logAmplitudeEvent('piltast-navigasjon', { linkId: node.id, linkGroup: node.group });
     callback(node);
     if (focus) {
         element.focus();
         scrollIfNearViewBounds(element);
     }
 };
+
+const logArrowKeyUsage = (node: KbNavNode) =>
+    logAmplitudeEvent('piltast-navigasjon-2', { linkId: node.id, linkGroup: node.group });
 
 const arrowkeysHandler = (currentNode: KbNavNode, setCurrentNode: NodeSetterCallback) => (event: KeyboardEvent) => {
     if (!currentNode?.id) {
@@ -138,18 +140,22 @@ const arrowkeysHandler = (currentNode: KbNavNode, setCurrentNode: NodeSetterCall
                 return;
             }
             selectNode(currentNode[NodeEdge.Left], setCurrentNode);
+            logArrowKeyUsage(currentNode);
             break;
         case 'ArrowUp':
             selectNode(currentNode[NodeEdge.Top], setCurrentNode);
+            logArrowKeyUsage(currentNode);
             break;
         case 'ArrowRight':
             if (isInputField(currentNode)) {
                 return;
             }
             selectNode(currentNode[NodeEdge.Right], setCurrentNode);
+            logArrowKeyUsage(currentNode);
             break;
         case 'ArrowDown':
             selectNode(currentNode[NodeEdge.Bottom], setCurrentNode);
+            logArrowKeyUsage(currentNode);
             break;
         default:
             return;
