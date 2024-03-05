@@ -342,7 +342,7 @@ export const ledetekster = {
     'brodsmulesti-se-alle-en': 'View complete path',
     'brodsmulesti-se-alle-se': 'Se hele stien',
     'how-can-we-help': 'Hva kan vi hjelpe deg med?',
-    'how-can-we-help-en': 'What can we help you with?',
+    'how-can-we-help-en': 'How can we help you?',
     'how-can-we-help-se': 'Hva kan vi hjelpe deg med?',
     //Språkvelger
     'sprakvelger.label': 'Velg språk',
