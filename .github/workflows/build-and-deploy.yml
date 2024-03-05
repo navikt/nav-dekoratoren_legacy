@@ -20,6 +20,7 @@ jobs:
     name: Build and deploy
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       packages: write
     env:
       image: ghcr.io/${{ github.repository }}:${{ inputs.IMAGE_NAME }}-${{ github.sha }}
@@ -55,10 +56,9 @@ jobs:
         run: |
           docker tag ${{ env.image }} ghcr.io/${{ github.repository }}:latest
           docker push ghcr.io/${{ github.repository }}:latest
-      - uses: nais/deploy/actions/deploy@master
+      - uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: ${{ inputs.CLUSTER }}
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: .nais/config.yaml
           VAR: image=${{ env.image }},BUILD_ID=${{ github.sha }}
           VARS: ${{ inputs.NAIS_VARS }}
