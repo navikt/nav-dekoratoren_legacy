@@ -56,7 +56,7 @@ jobs:
         run: |
           docker tag ${{ env.image }} ghcr.io/${{ github.repository }}:latest
           docker push ghcr.io/${{ github.repository }}:latest
-      - uses: nais/deploy/actions/deploy@master
+      - uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: ${{ inputs.CLUSTER }}
           RESOURCE: .nais/config.yaml
