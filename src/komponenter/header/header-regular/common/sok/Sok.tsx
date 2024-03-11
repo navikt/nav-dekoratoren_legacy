@@ -8,7 +8,7 @@ import cls from 'classnames';
 import { Locale } from 'store/reducers/language-duck';
 import { SokInput } from './sok-innhold/SokInput';
 import Spinner from '../spinner/Spinner';
-import { Sokeresultat } from './utils';
+import { Sokeresultat, Soketreff } from './utils';
 import SokResultater from './sok-innhold/SokResultater';
 import { Environment } from 'store/reducers/environment-duck';
 import Cookies from 'js-cookie';
@@ -20,10 +20,12 @@ interface Props {
     id: string;
     isOpen: boolean;
     dropdownTransitionMs?: number;
-    numResultsCallback?: (numResults: number) => void;
+    searchHitsCallback?: (result: Soketreff[]) => void;
     searchInput: string;
     setSearchInput: (searchInput: string) => void;
 }
+
+const MAX_HITS_TO_DISPLAY = 5;
 
 const stateSelector = (state: AppState) => ({
     environment: state.environment,
@@ -40,8 +42,7 @@ const Sok = (props: Props) => {
     const [result, setResult] = useState<Sokeresultat | undefined>();
     const [error, setError] = useState<string | undefined>();
     const [cookies] = useCookies();
-    const { searchInput, setSearchInput } = props;
-    const numberOfResults = 5;
+    const { searchInput, setSearchInput, searchHitsCallback } = props;
     const klassenavn = cls('sok-input', {
         engelsk: language === Locale.ENGELSK,
     });
@@ -56,8 +57,14 @@ const Sok = (props: Props) => {
     }, [props.isOpen]);
 
     useEffect(() => {
-        if (result && props.numResultsCallback) {
-            props.numResultsCallback(Math.min(result.hits.length, numberOfResults));
+        if (!searchHitsCallback) {
+            return;
+        }
+
+        if (result?.hits) {
+            searchHitsCallback(result.hits.slice(0, MAX_HITS_TO_DISPLAY));
+        } else {
+            searchHitsCallback([]);
         }
     }, [result]);
 
@@ -73,7 +80,7 @@ const Sok = (props: Props) => {
 
     const getSearchUrl = () => {
         const { XP_BASE_URL } = environment;
-        const url = `${XP_BASE_URL}/nytt-sok?ord=${searchInput}`;
+        const url = `${XP_BASE_URL}/sok?ord=${searchInput}`;
         return genererUrl(XP_BASE_URL, url);
     };
 
@@ -131,7 +138,7 @@ const Sok = (props: Props) => {
                             <SokResultater
                                 writtenInput={searchInput}
                                 result={result}
-                                numberOfResults={numberOfResults}
+                                numberOfResults={MAX_HITS_TO_DISPLAY}
                                 language={language}
                                 fetchError={error}
                             />

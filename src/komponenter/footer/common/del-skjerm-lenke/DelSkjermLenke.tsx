@@ -11,7 +11,9 @@ import style from './DelSkjermLenke.module.scss';
 export const DelSkjermLenke = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const openModal = () => {
+    const openModal = (event: React.MouseEvent) => {
+        event.preventDefault();
+
         analyticsEvent({
             eventName: 'Modal åpnet',
             category: AnalyticsCategory.Footer,

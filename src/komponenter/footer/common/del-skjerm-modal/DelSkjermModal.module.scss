@@ -4,6 +4,10 @@
     max-width: 35rem;
     overflow: visible;
     padding: 1rem;
+
+    :global(.navds-modal__body) {
+        overflow: visible;
+    }
 }
 
 .content {

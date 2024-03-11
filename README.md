@@ -1,8 +1,10 @@
 # nav-dekoratoren ![nav.no logo](src/ikoner/meny/NavLogoRod.svg)
 
-![Deploy til prod](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-prod/badge.svg) | ![Deploy til dev](https://github.com/navikt/nav-dekoratoren/workflows/Deploy-to-dev/badge.svg)
-
 node.js/React applikasjon for header og footer på [nav.no](https://www.nav.no)
+
+## Obs!
+
+Alle dev-instanser av dekoratøren serveres nå av [decorator-next](https://github.com/navikt/decorator-next)
 
 ## Bruk av dekoratøren
 
@@ -13,27 +15,6 @@ Dekoratøren serveres på følgende ingresser:
 -   http://nav-dekoratoren.personbruker (service host)
 -   https://www.nav.no/dekoratoren/
 -   https://appres.nav.no/common-html/v4/navno (deprecated)
-
-**Dev (dev-gcp)**
-
--   http://nav-dekoratoren.personbruker (service host)
--   https://dekoratoren.ekstern.dev.nav.no/ (tilgjengelig fra åpent internett)
-
-_Merk:_ Dekoratøren på disse ingressene skal være relativt stabil både funksjonelt og visuelt, og kan brukes av alle team/applikasjoner. Enkelte console-feil og avvik kan allikevel forekomme, så ta kontakt på #dekoratøren_på_navno dersom noe oppleves som rart.
-
-**Beta (dev-gcp)**
-
-Team nav.no:
-
--   http://nav-dekoratoren-beta.personbruker (service host)
--   https://dekoratoren-beta.intern.dev.nav.no/
-
-Team min side:
-
--   http://nav-dekoratoren-beta-tms.personbruker (service host)
--   https://dekoratoren-beta-tms.intern.dev.nav.no/
-
-_Merk:_ Dekoratøren på disse ingressene er ment for testing av pågående utvikling i team personbruker, og bør ikke konsumeres av andre applikasjoner ettersom de kan være ustabile i lengre perioder.
 
 ## Implementasjon
 
