@@ -13,8 +13,6 @@ import SokResultater from './sok-innhold/SokResultater';
 import { Environment } from 'store/reducers/environment-duck';
 import Cookies from 'js-cookie';
 import 'komponenter/header/header-regular/common/sok/Sok.scss';
-import { useCookies } from 'react-cookie';
-import { decoratorContextCookie, decoratorLanguageCookie } from '../../../Header';
 
 interface Props {
     id: string;
@@ -30,6 +28,7 @@ const MAX_HITS_TO_DISPLAY = 5;
 const stateSelector = (state: AppState) => ({
     environment: state.environment,
     language: state.language.language,
+    audience: state.arbeidsflate.status,
 });
 
 const setSubmitTrackerCookie = () => {
@@ -37,18 +36,14 @@ const setSubmitTrackerCookie = () => {
 };
 
 const Sok = (props: Props) => {
-    const { environment, language } = useSelector(stateSelector);
+    const { environment, language, audience } = useSelector(stateSelector);
     const [loading, setLoading] = useState<boolean>(false);
     const [result, setResult] = useState<Sokeresultat | undefined>();
     const [error, setError] = useState<string | undefined>();
-    const [cookies] = useCookies();
     const { searchInput, setSearchInput, searchHitsCallback } = props;
     const klassenavn = cls('sok-input', {
         engelsk: language === Locale.ENGELSK,
     });
-
-    const audience = cookies[decoratorContextCookie];
-    const preferredLanguage = cookies[decoratorLanguageCookie];
 
     useEffect(() => {
         if (!props.isOpen) {
@@ -113,7 +108,7 @@ const Sok = (props: Props) => {
                                 fetchSearchDebounced({
                                     value,
                                     audience,
-                                    preferredLanguage,
+                                    language,
                                     environment,
                                     setLoading,
                                     setError,
@@ -154,7 +149,7 @@ const Sok = (props: Props) => {
 interface FetchResult {
     value: string;
     audience: string;
-    preferredLanguage: string;
+    language: Locale;
     environment: Environment;
     setLoading: (value: boolean) => void;
     setError: (value?: string) => void;
@@ -162,7 +157,7 @@ interface FetchResult {
 }
 
 const fetchSearch = (props: FetchResult) => {
-    const { environment, value, audience, preferredLanguage } = props;
+    const { environment, value, audience, language } = props;
     const { setLoading, setError, setResult } = props;
     const { APP_URL } = environment;
     const url = `${APP_URL}/api/sok`;
@@ -184,7 +179,7 @@ const fetchSearch = (props: FetchResult) => {
 
     const facet = validAudiences[audience] || '0';
 
-    fetch(`${url}?ord=${encodeURIComponent(value)}&f=${facet}&preferredLanguage=${preferredLanguage}`)
+    fetch(`${url}?ord=${encodeURIComponent(value)}&f=${facet}&preferredLanguage=${language}`)
         .then((response) => {
             if (response.ok) {
                 return response;
