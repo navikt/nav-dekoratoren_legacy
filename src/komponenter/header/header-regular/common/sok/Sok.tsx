@@ -172,9 +172,9 @@ const fetchSearch = (props: FetchResult) => {
     });
 
     const validAudiences: { [key: string]: string } = {
-        privatperson: '0',
-        arbeidsgiver: '1',
-        samarbeidspartner: '2',
+        privatperson: 'privatperson',
+        arbeidsgiver: 'arbeidsgiver',
+        samarbeidspartner: 'samarbeidspartner',
     };
 
     const facet = validAudiences[audience] || '0';
