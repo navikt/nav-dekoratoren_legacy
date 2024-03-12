@@ -25,6 +25,8 @@ interface Props {
 
 const MAX_HITS_TO_DISPLAY = 5;
 
+const validAudiences: ReadonlySet<string> = new Set(['privatperson', 'arbeidsgiver', 'samarbeidspartner']);
+
 const stateSelector = (state: AppState) => ({
     environment: state.environment,
     language: state.language.language,
@@ -171,13 +173,7 @@ const fetchSearch = (props: FetchResult) => {
         action: 'søk-dynamisk',
     });
 
-    const validAudiences: { [key: string]: string } = {
-        privatperson: 'privatperson',
-        arbeidsgiver: 'arbeidsgiver',
-        samarbeidspartner: 'samarbeidspartner',
-    };
-
-    const facet = validAudiences[audience] || 'privatperson';
+    const facet = validAudiences.has(audience) ? audience : 'privatperson';
 
     fetch(`${url}?ord=${encodeURIComponent(value)}&f=${facet}&preferredLanguage=${language}`)
         .then((response) => {
