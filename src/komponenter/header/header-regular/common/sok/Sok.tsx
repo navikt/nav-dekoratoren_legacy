@@ -177,7 +177,7 @@ const fetchSearch = (props: FetchResult) => {
         samarbeidspartner: 'samarbeidspartner',
     };
 
-    const facet = validAudiences[audience] || '0';
+    const facet = validAudiences[audience] || 'privatperson';
 
     fetch(`${url}?ord=${encodeURIComponent(value)}&f=${facet}&preferredLanguage=${language}`)
         .then((response) => {
