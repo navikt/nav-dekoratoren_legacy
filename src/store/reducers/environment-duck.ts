@@ -6,6 +6,7 @@ import { Breadcrumb } from 'komponenter/header/common/brodsmulesti/Brodsmulesti'
 export interface Environment {
     ENV: string;
     XP_BASE_URL: string;
+    SEARCH_URL: string;
     APP_URL: string;
     APP_BASE_URL: string;
     APP_BASE_PATH: string;
@@ -57,6 +58,7 @@ export interface Cookies {
 export const initialState: Environment = {
     ENV: '',
     XP_BASE_URL: '',
+    SEARCH_URL: '',
     APP_URL: '',
     APP_BASE_URL: '',
     APP_BASE_PATH: '',

@@ -9,12 +9,13 @@ type Props = {
     className: string;
     writtenInput: string;
     language: Locale;
+    audience: string;
     onChange: (value: string) => void;
     onReset: () => void;
     id: string;
 };
 export const SokInput = (props: Props) => {
-    const { className, writtenInput, language, onChange, onReset, id } = props;
+    const { className, writtenInput, language, audience, onChange, onReset, id } = props;
     // Only set the input value in the browser, to prevent execution-order
     // dependent SSR warnings under certain circumstances
     const inputValue = verifyWindowObj() ? writtenInput || '' : undefined;
@@ -28,7 +29,7 @@ export const SokInput = (props: Props) => {
                     className={className}
                     value={inputValue}
                     type="text"
-                    label={finnTekst('sok-knapp-sokefelt', language)}
+                    label={finnTekst('sok-knapp-sokefelt', language, audience)}
                     autoComplete="off"
                 />
                 <SokKnapper writtenInput={writtenInput} onReset={onReset} id={id} />

@@ -25,9 +25,12 @@ interface Props {
 
 const MAX_HITS_TO_DISPLAY = 5;
 
+const validAudiences: ReadonlySet<string> = new Set(['privatperson', 'arbeidsgiver', 'samarbeidspartner']);
+
 const stateSelector = (state: AppState) => ({
     environment: state.environment,
     language: state.language.language,
+    audience: state.arbeidsflate.status,
 });
 
 const setSubmitTrackerCookie = () => {
@@ -35,7 +38,7 @@ const setSubmitTrackerCookie = () => {
 };
 
 const Sok = (props: Props) => {
-    const { environment, language } = useSelector(stateSelector);
+    const { environment, language, audience } = useSelector(stateSelector);
     const [loading, setLoading] = useState<boolean>(false);
     const [result, setResult] = useState<Sokeresultat | undefined>();
     const [error, setError] = useState<string | undefined>();
@@ -106,6 +109,8 @@ const Sok = (props: Props) => {
                                 setLoading(true);
                                 fetchSearchDebounced({
                                     value,
+                                    audience,
+                                    language,
                                     environment,
                                     setLoading,
                                     setError,
@@ -117,6 +122,7 @@ const Sok = (props: Props) => {
                         }}
                         className={klassenavn}
                         language={language}
+                        audience={audience}
                         writtenInput={searchInput}
                         onReset={onReset}
                         id={props.id}
@@ -144,6 +150,8 @@ const Sok = (props: Props) => {
 /* Abstraction for debounce */
 interface FetchResult {
     value: string;
+    audience: string;
+    language: Locale;
     environment: Environment;
     setLoading: (value: boolean) => void;
     setError: (value?: string) => void;
@@ -151,7 +159,7 @@ interface FetchResult {
 }
 
 const fetchSearch = (props: FetchResult) => {
-    const { environment, value } = props;
+    const { environment, value, audience, language } = props;
     const { setLoading, setError, setResult } = props;
     const { APP_URL } = environment;
     const url = `${APP_URL}/api/sok`;
@@ -164,7 +172,10 @@ const fetchSearch = (props: FetchResult) => {
         label: value,
         action: 'søk-dynamisk',
     });
-    fetch(`${url}?ord=${encodeURIComponent(value)}`)
+
+    const facet = validAudiences.has(audience) ? audience : 'privatperson';
+
+    fetch(`${url}?ord=${encodeURIComponent(value)}&f=${facet}&preferredLanguage=${language}`)
         .then((response) => {
             if (response.ok) {
                 return response;
