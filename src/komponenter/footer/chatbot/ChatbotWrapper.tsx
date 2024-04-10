@@ -40,13 +40,13 @@ export const ChatbotWrapper = () => {
     const [scriptLoaded, setScriptLoaded] = useState<boolean>(false);
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
 
-    const isDevelopment: boolean = process.env.NODE_ENV === 'development';
+    const isLocal: boolean = env === 'localhost';
     const isProduction = env === 'prod';
     const boostApiUrlBase = isProduction ? boostApiUrlBaseProduction : boostApiUrlBaseTest;
 
     const cookieSettings = {
         path: '/',
-        domain: isDevelopment ? 'localhost' : '.nav.no',
+        domain: isLocal ? 'localhost' : '.nav.no',
     };
 
     const openBoostWindow = () => {
