@@ -40,8 +40,14 @@ export const ChatbotWrapper = () => {
     const [scriptLoaded, setScriptLoaded] = useState<boolean>(false);
     const currentFeatureToggles = useSelector(stateSelector).featureToggles;
 
+    const isLocal: boolean = env === 'localhost';
     const isProduction = env === 'prod';
     const boostApiUrlBase = isProduction ? boostApiUrlBaseProduction : boostApiUrlBaseTest;
+
+    const cookieSettings = {
+        path: '/',
+        domain: isLocal ? 'localhost' : '.nav.no',
+    };
 
     const openBoostWindow = () => {
         if (typeof boost !== 'undefined') {
@@ -122,14 +128,14 @@ export const ChatbotWrapper = () => {
 
         boost.chatPanel.addEventListener('conversationIdChanged', (event: any) => {
             if (!event?.detail?.conversationId) {
-                removeCookie(conversationCookieName);
+                removeCookie(conversationCookieName, cookieSettings);
                 return;
             }
             const expirationDay = new Date();
             expirationDay.setHours(expirationDay.getHours() + 1);
             setCookie(conversationCookieName, event.detail.conversationId, {
                 expires: expirationDay,
-                domain: isProduction ? '.nav.no' : '.dev.nav.no',
+                ...cookieSettings,
             });
         });
         boost.chatPanel.addEventListener('setFilterValue', function (ev: any) {
@@ -137,7 +143,7 @@ export const ChatbotWrapper = () => {
             if (ev.detail.nextId) boost.chatPanel.triggerAction(ev.detail.nextId);
         });
         boost.chatPanel.addEventListener('chatPanelClosed', () => {
-            removeCookie(conversationCookieName);
+            removeCookie(conversationCookieName, cookieSettings);
         });
 
         if (bufferLoad) {
