@@ -4,6 +4,11 @@ import { InnloggingsstatusState } from '../../store/reducers/innloggingsstatus-d
 
 type EventData = Record<string, any>;
 
+const buildPlatformField = () => {
+    const { origin, pathname, hash } = window.location;
+    return `${origin}${pathname}${hash}`;
+};
+
 export const initAmplitude = () => {
     const userProps = {
         skjermbredde: window.screen.width,
@@ -17,7 +22,7 @@ export const initAmplitude = () => {
         saveEvents: false,
         includeUtm: true,
         includeReferrer: true,
-        platform: window.location.toString(),
+        platform: buildPlatformField(),
     });
     amplitude.getInstance().setUserProperties(userProps);
 
@@ -73,7 +78,7 @@ export const logAmplitudeEvent = (eventName: string, eventData: EventData = {}, 
             eventName,
             {
                 ...eventData,
-                platform: window.location.toString(),
+                platform: buildPlatformField(),
                 origin,
                 originVersion: eventData.originVersion || 'unknown',
                 viaDekoratoren: true,
