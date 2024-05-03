@@ -1,9 +1,8 @@
 import { finnTekst } from 'tekster/finn-tekst';
 import { Locale } from 'store/reducers/language-duck';
-import SokKnapper from './SokKnapper';
 import React from 'react';
 import { verifyWindowObj } from 'utils/Environment';
-import { TextField } from '@navikt/ds-react';
+import { Search } from '@navikt/ds-react';
 import 'komponenter/header/header-regular/common/sok/sok-innhold/SokInput.scss';
 type Props = {
     className: string;
@@ -15,7 +14,7 @@ type Props = {
     id: string;
 };
 export const SokInput = (props: Props) => {
-    const { className, writtenInput, language, audience, onChange, onReset, id } = props;
+    const { className, writtenInput, language, audience, onChange, id } = props;
     // Only set the input value in the browser, to prevent execution-order
     // dependent SSR warnings under certain circumstances
     const inputValue = verifyWindowObj() ? writtenInput || '' : undefined;
@@ -23,16 +22,15 @@ export const SokInput = (props: Props) => {
     return (
         <>
             <div className="sok-input-container">
-                <TextField
+                <Search
                     id={id}
-                    onChange={(e) => onChange(e.target.value)}
+                    onChange={(value) => onChange(value)}
                     className={className}
                     value={inputValue}
                     type="text"
                     label={finnTekst('sok-knapp-sokefelt', language, audience)}
                     autoComplete="off"
                 />
-                <SokKnapper writtenInput={writtenInput} onReset={onReset} id={id} />
             </div>
         </>
     );
