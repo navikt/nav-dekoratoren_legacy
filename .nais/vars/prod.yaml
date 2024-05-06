@@ -6,7 +6,7 @@ ingresses:
 outboundHosts:
   - www.nav.no
   - navno-unleash-api.nav.cloud.nais.io
-  - navno-search-api.intern.nav.no
+  - navno-search-api.nav.no
 env:
   - name: ENV
     value: prod
