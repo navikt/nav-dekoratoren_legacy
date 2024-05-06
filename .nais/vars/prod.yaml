@@ -13,7 +13,7 @@ env:
   - name: XP_BASE_URL
     value: https://www.nav.no
   - name: SEARCH_URL
-    value: https://navno-search-api.intern.nav.no
+    value: https://navno-search-api.nav.no
   - name: APP_BASE_URL
     value: https://www.nav.no
   - name: APP_BASE_PATH
