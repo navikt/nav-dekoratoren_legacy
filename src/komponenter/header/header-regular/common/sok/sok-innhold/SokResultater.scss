@@ -1,45 +1,92 @@
 @use 'src/styling-variabler.scss' as sv;
 
 @keyframes animateIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.6) translateY(-8px);
-    }
+0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(-8px);
+}
 
-    100% {
-        opacity: 1;
+100% {
+    opacity: 1;
+}
+}
+.sokeresultat-feil {
+    margin-top: 1rem;
+}
+
+.sokeresultat-lenke {
+    width: 100%;
+    color: black;
+    cursor: pointer;
+    padding: 1rem 1rem 1rem 0;
+    font-weight: normal;
+    text-align: left;
+    text-decoration: none;
+
+    &:focus {
+        outline: none;
+        color: white;
+        text-decoration: none;
+        background-color: var(--a-deepblue-500);
+        box-shadow: 0 0 0 2px var(--a-deepblue-500);
     }
 }
 
-.sok-input-resultat {
-    .sokeresultat-feil {
-        margin-top: 1rem;
-    }
+.sokeresultat-container {
+    list-style: none;
+    flex-direction: column;
+    display: flex;
+    margin: 0;
+    padding: 1rem 0 0 0;
 
-    .sokeresultat-lenke {
-        width: 100%;
-        color: black;
-        cursor: pointer;
-        padding: 1rem 1rem 1rem 0;
-        font-weight: normal;
-        text-align: left;
-        text-decoration: none;
+    li {
+        display: flex;
+        animation-name: animateIn;
+        animation-duration: 150ms;
+        animation-delay: calc(var(--index) * 50ms);
+        animation-fill-mode: both;
+        animation-timing-function: ease-in-out;
+        border-bottom: 1px solid var(--a-gray-400);
+        margin: 0 -0.5rem;
+        padding: 0 0.5rem;
 
-        &:focus {
-            outline: none;
-            color: white;
-            text-decoration: none;
-            background-color: var(--a-deepblue-500);
-            box-shadow: 0 0 0 2px var(--a-deepblue-500);
+        &:focus,
+        &:hover {
+            background-color: var(--a-gray-300);
+            font-weight: bold;
         }
     }
 
-    .sokeresultat-container {
+    li[aria-selected='true'] {
+        background-color: var(--a-gray-300);
+        font-weight: bold;
+    }
+
+    .sok-resultat-listItem-text {
+        padding-left: 0;
+    }
+}
+
+.sokeresultat-treff {
+    padding: 1rem 0;
+    word-break: break-word;
+}
+
+.sokeresultat-liste {
+    margin: 0.25rem 0 0 0;
+    padding: 0;
+}
+
+@media #{sv.$screen-mobile} {
+    .sokeresultat-liste {
         list-style: none;
+        padding: 0;
+        z-index: 1020;
         flex-direction: column;
         display: flex;
-        margin: 0;
-        padding: 1rem 0 0 0;
+        width: 100%;
+        overflow: hidden;
+        margin: 0.25rem 0 0 0;
 
         li {
             display: flex;
@@ -48,15 +95,7 @@
             animation-delay: calc(var(--index) * 50ms);
             animation-fill-mode: both;
             animation-timing-function: ease-in-out;
-            border-bottom: 1px solid var(--a-gray-400);
-            margin: 0 -0.5rem;
-            padding: 0 0.5rem;
-
-            &:focus,
-            &:hover {
-                background-color: var(--a-gray-300);
-                font-weight: bold;
-            }
+            border: none;
         }
 
         li[aria-selected='true'] {
@@ -64,68 +103,27 @@
             font-weight: bold;
         }
 
-        .sok-resultat-listItem-text {
-            padding-left: 0;
-        }
-    }
-
-    .sokeresultat-treff {
-        padding: 1rem 0;
-        word-break: break-word;
-    }
-
-    .sokeresultat-liste {
-        margin: 0.25rem 0 0 0;
-        padding: 0;
-    }
-
-    @media #{sv.$screen-mobile} {
-        .sokeresultat-liste {
-            list-style: none;
+        .sokeresultat-liste ul {
             padding: 0;
-            z-index: 1020;
-            flex-direction: column;
-            display: flex;
-            width: 100%;
-            overflow: hidden;
-            margin: 0.25rem 0 0 0;
-
-            li {
-                display: flex;
-                animation-name: animateIn;
-                animation-duration: 150ms;
-                animation-delay: calc(var(--index) * 50ms);
-                animation-fill-mode: both;
-                animation-timing-function: ease-in-out;
-                border: none;
-            }
-
-            li[aria-selected='true'] {
-                background-color: var(--a-gray-300);
-                font-weight: bold;
-            }
-
-            .sokeresultat-liste ul {
-                padding: 0;
-            }
-
-            .sok-resultat-listItem {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-            }
-
-            .sok-resultat-chevron {
-                padding: 0 1rem 0 0;
-            }
-
-            .sok-resultat-listItem-text {
-                padding-left: 2.25rem;
-            }
         }
 
         .sok-resultat-listItem {
             display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .sok-resultat-chevron {
+            padding: 0 1rem 0 0;
+        }
+
+        .sok-resultat-listItem-text {
+            padding-left: 2.25rem;
         }
     }
+
+    .sok-resultat-listItem {
+        display: flex;
+    }
 }
+

@@ -14,24 +14,26 @@ type Props = {
     id: string;
 };
 export const SokInput = (props: Props) => {
-    const { className, writtenInput, language, audience, onChange, id } = props;
+    const { className, writtenInput, language, audience, onChange, onReset, id } = props;
     // Only set the input value in the browser, to prevent execution-order
     // dependent SSR warnings under certain circumstances
     const inputValue = verifyWindowObj() ? writtenInput || '' : undefined;
 
     return (
         <>
-            <div className="sok-input-container">
+            <form role="search">
                 <Search
                     id={id}
+                    variant="primary"
                     onChange={(value) => onChange(value)}
+                    onReset={onReset}
                     className={className}
                     value={inputValue}
                     type="text"
                     label={finnTekst('sok-knapp-sokefelt', language, audience)}
                     autoComplete="off"
                 />
-            </div>
+            </form>
         </>
     );
 };
