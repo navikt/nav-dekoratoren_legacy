@@ -3,7 +3,8 @@ import { Locale } from 'store/reducers/language-duck';
 import React from 'react';
 import { verifyWindowObj } from 'utils/Environment';
 import { Search } from '@navikt/ds-react';
-import 'komponenter/header/header-regular/common/sok/sok-innhold/SokInput.scss';
+import './SokInput.scss';
+
 type Props = {
     className: string;
     writtenInput: string;
@@ -20,21 +21,18 @@ export const SokInput = (props: Props) => {
     const inputValue = verifyWindowObj() ? writtenInput || '' : undefined;
 
     return (
-        <>
-            <form role="search">
-                <Search
-                    id={id}
-                    variant="primary"
-                    onChange={(value) => onChange(value)}
-                    onReset={onReset}
-                    className={className}
-                    value={inputValue}
-                    type="text"
-                    label={finnTekst('sok-knapp-sokefelt', language, audience)}
-                    autoComplete="off"
-                />
-            </form>
-        </>
+        <Search
+            id={id}
+            variant="primary"
+            onChange={(value) => onChange(value)}
+            onClear={onReset}
+            className={className}
+            value={inputValue}
+            maxLength={100}
+            type="text"
+            label={finnTekst('sok-knapp-sokefelt', language, audience)}
+            autoComplete="off"
+        />
     );
 };
 export default SokInput;
