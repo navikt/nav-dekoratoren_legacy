@@ -6,14 +6,14 @@ ingresses:
 outboundHosts:
   - www.nav.no
   - navno-unleash-api.nav.cloud.nais.io
-  - navno-search-api.intern.nav.no
+  - navno-search-api.nav.no
 env:
   - name: ENV
     value: prod
   - name: XP_BASE_URL
     value: https://www.nav.no
   - name: SEARCH_URL
-    value: https://navno-search-api.intern.nav.no
+    value: https://navno-search-api.nav.no
   - name: APP_BASE_URL
     value: https://www.nav.no
   - name: APP_BASE_PATH
