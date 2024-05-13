@@ -101,47 +101,45 @@ const Sok = (props: Props) => {
             onSubmit={onSubmit}
         >
             <div className="sok-container">
-                <div className="sok-input-resultat">
-                    <SokInput
-                        onChange={(value: string) => {
-                            setSearchInput(value);
-                            if (value.length > 2) {
-                                setLoading(true);
-                                fetchSearchDebounced({
-                                    value,
-                                    audience,
-                                    language,
-                                    environment,
-                                    setLoading,
-                                    setError,
-                                    setResult,
-                                });
-                            } else {
-                                setLoading(false);
-                            }
-                        }}
-                        className={klassenavn}
-                        language={language}
-                        audience={audience}
-                        writtenInput={searchInput}
-                        onReset={onReset}
-                        id={props.id}
-                    />
-                    {loading ? (
-                        <Spinner tekstId={'spinner-sok'} />
-                    ) : (
-                        result &&
-                        searchInput.length > 2 && (
-                            <SokResultater
-                                writtenInput={searchInput}
-                                result={result}
-                                numberOfResults={MAX_HITS_TO_DISPLAY}
-                                language={language}
-                                fetchError={error}
-                            />
-                        )
-                    )}
-                </div>
+                <SokInput
+                    onChange={(value: string) => {
+                        setSearchInput(value);
+                        if (value.length > 2) {
+                            setLoading(true);
+                            fetchSearchDebounced({
+                                value,
+                                audience,
+                                language,
+                                environment,
+                                setLoading,
+                                setError,
+                                setResult,
+                            });
+                        } else {
+                            setLoading(false);
+                        }
+                    }}
+                    className={klassenavn}
+                    language={language}
+                    audience={audience}
+                    writtenInput={searchInput}
+                    onReset={onReset}
+                    id={props.id}
+                />
+                {loading ? (
+                    <Spinner tekstId={'spinner-sok'} />
+                ) : (
+                    result &&
+                    searchInput.length > 2 && (
+                        <SokResultater
+                            writtenInput={searchInput}
+                            result={result}
+                            numberOfResults={MAX_HITS_TO_DISPLAY}
+                            language={language}
+                            fetchError={error}
+                        />
+                    )
+                )}
             </div>
         </form>
     );

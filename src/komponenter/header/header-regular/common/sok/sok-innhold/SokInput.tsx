@@ -1,10 +1,10 @@
 import { finnTekst } from 'tekster/finn-tekst';
 import { Locale } from 'store/reducers/language-duck';
-import SokKnapper from './SokKnapper';
 import React from 'react';
 import { verifyWindowObj } from 'utils/Environment';
-import { TextField } from '@navikt/ds-react';
-import 'komponenter/header/header-regular/common/sok/sok-innhold/SokInput.scss';
+import { Search } from '@navikt/ds-react';
+import './SokInput.scss';
+
 type Props = {
     className: string;
     writtenInput: string;
@@ -21,20 +21,19 @@ export const SokInput = (props: Props) => {
     const inputValue = verifyWindowObj() ? writtenInput || '' : undefined;
 
     return (
-        <>
-            <div className="sok-input-container">
-                <TextField
-                    id={id}
-                    onChange={(e) => onChange(e.target.value)}
-                    className={className}
-                    value={inputValue}
-                    type="text"
-                    label={finnTekst('sok-knapp-sokefelt', language, audience)}
-                    autoComplete="off"
-                />
-                <SokKnapper writtenInput={writtenInput} onReset={onReset} id={id} />
-            </div>
-        </>
+        <Search
+            id={id}
+            variant="primary"
+            onChange={(value) => onChange(value)}
+            onClear={onReset}
+            className={className}
+            value={inputValue}
+            maxLength={100}
+            type="text"
+            hideLabel={false}
+            label={finnTekst('sok-knapp-sokefelt', language, audience)}
+            autoComplete="off"
+        />
     );
 };
 export default SokInput;
