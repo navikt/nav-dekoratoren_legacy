@@ -30,6 +30,7 @@ export const SokInput = (props: Props) => {
             value={inputValue}
             maxLength={100}
             type="text"
+            hideLabel={false}
             label={finnTekst('sok-knapp-sokefelt', language, audience)}
             autoComplete="off"
         />
