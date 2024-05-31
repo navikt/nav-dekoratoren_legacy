@@ -132,6 +132,7 @@ const Sok = (props: Props) => {
                     result &&
                     searchInput.length > 2 && (
                         <SokResultater
+                            audience={audience}
                             writtenInput={searchInput}
                             result={result}
                             numberOfResults={MAX_HITS_TO_DISPLAY}

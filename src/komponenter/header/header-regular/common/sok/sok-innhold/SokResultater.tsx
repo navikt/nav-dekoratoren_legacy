@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
 import { Alert, Link } from '@navikt/ds-react';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
+import { ArrowRightIcon } from '@navikt/aksel-icons';
 
 import 'komponenter/header/header-regular/common/sok/sok-innhold/SokResultater.scss';
 
@@ -22,6 +23,7 @@ type Props = {
     numberOfResults: number;
     language: Locale;
     fetchError?: string | boolean;
+    audience: string;
 };
 
 const removeDuplicates = (items: Soketreff[]) =>
@@ -31,11 +33,10 @@ const removeDuplicates = (items: Soketreff[]) =>
     );
 
 export const SokResultater = (props: Props) => {
-    const { language, fetchError } = props;
-    const { writtenInput, result, numberOfResults } = props;
+    const { language, fetchError, audience, writtenInput, result, numberOfResults } = props;
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const itemsFiltered = removeDuplicates(result.hits) || result.hits;
-    const itemsSpliced = itemsFiltered.slice(0, numberOfResults);
+    // const itemsSpliced = itemsFiltered.slice(0, numberOfResults);
     const dispatch = useDispatch();
 
     return (
@@ -45,6 +46,26 @@ export const SokResultater = (props: Props) => {
                     <Alert variant="error">
                         <Tekst id={'feil-sok-fetch'} />
                     </Alert>
+                </div>
+            )}
+            {!fetchError && (
+                <div className={'sokeresultat-treff'} role={'status'}>
+                    <SokeforslagIngress
+                        className="sok-resultat-listItem"
+                        displayName={
+                            <div role={'status'}>
+                                {result.total} {finnTekst('sok-resultater', language)}
+                                {' for '} &laquo;{`${writtenInput}`}&raquo; {' for '}
+                                {finnTekst('sok-audience', language, audience)}
+                            </div>
+                        }
+                    />
+                    {
+                        <Link className={'typo-element'} href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}>{`${finnTekst(
+                            'sok-alle-treff',
+                            language
+                        )} `}</Link>
+                    }
                 </div>
             )}
             {!fetchError && itemsFiltered.length ? (
@@ -84,29 +105,15 @@ export const SokResultater = (props: Props) => {
                     })}
                 </ul>
             ) : null}
-
-            {!fetchError && itemsFiltered.length ? (
-                <div className={'sokeresultat-treff'}>
-                    <div role={'status'}>
-                        {finnTekst('sok-viser', language)} {itemsSpliced.length} {finnTekst('sok-av', language)}{' '}
-                        {result.total} {finnTekst('sok-resultater', language)}
-                    </div>
-                    {result.total > itemsFiltered.length && (
-                        <Link className={'typo-element'} href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}>{`${finnTekst(
-                            'se-alle-treff',
-                            language
-                        )} ("${writtenInput}")`}</Link>
-                    )}
-                </div>
-            ) : null}
-
-            {!fetchError && !itemsFiltered.length && (
-                <div className={'sokeresultat-treff'} role={'status'}>
-                    <SokeforslagIngress
-                        className="sok-resultat-listItem"
-                        displayName={`${finnTekst('sok-ingen-treff', language)} (${writtenInput})`}
-                    />
-                </div>
+            {result.total > itemsFiltered.length && (
+                <Link className={'typo-element'} href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}>
+                    {
+                        <div>
+                            {finnTekst('sok-flere-treff', language)}
+                            {<ArrowRightIcon title="a11y-title" fontSize="1rem" />}
+                        </div>
+                    }
+                </Link>
             )}
         </div>
     );
