@@ -130,6 +130,7 @@ export const ledetekster = {
     'sok-input-label-se': 'Ohcat',
     'sok-flere-treff': 'Flere treff',
     'sok-flere-treff-en': 'More hits',
+    'sok-flere-treff-se': 'Flere treff',
     'sok-av': 'av',
     'sok-av-en': 'of',
     'sok-av-se': 'av',
