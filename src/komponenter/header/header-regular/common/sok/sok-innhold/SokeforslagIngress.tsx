@@ -4,7 +4,7 @@ import { Heading } from '@navikt/ds-react';
 
 interface Props {
     className: string;
-    displayName?: string | React.ReactNode;
+    displayName?: string;
 }
 const SokeforslagIngress = (props: Props) => {
     const { className, displayName } = props;
