@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'store/reducers';
 import { useDispatch } from 'react-redux';
 import { lukkAlleDropdowns } from 'store/reducers/dropdown-toggle-duck';
-import { Alert, Link } from '@navikt/ds-react';
+import { Alert, Heading, Link } from '@navikt/ds-react';
 import { logAmplitudeEvent } from 'utils/analytics/amplitude';
 import { ArrowRightIcon } from '@navikt/aksel-icons';
 
@@ -48,24 +48,16 @@ export const SokResultater = (props: Props) => {
                 </div>
             )}
             {!fetchError && (
-                <div className={'sokeresultat-treff'} role={'status'}>
-                    <SokeforslagIngress
-                        className="sok-resultat-listItem"
-                        displayName={
-                            <div role={'status'}>
-                                {result.total} {finnTekst('sok-resultater', language)}
-                                {' for '} &laquo;{`${writtenInput}`}&raquo; {' for '}
-                                {finnTekst('sok-audience', language, audience)}
-                            </div>
-                        }
-                    />
-                    {
-                        <Link className={'typo-element'} href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}>{`${finnTekst(
-                            'sok-alle-treff',
-                            language
-                        )} `}</Link>
-                    }
-                </div>
+                <>
+                    <Heading level="2" size="small" role="status">
+                        {result.total} {finnTekst('sok-resultater', language)}
+                        {' for '} &laquo;{`${writtenInput}`}&raquo; {' for '}
+                        {finnTekst('sok-audience', language, audience)}
+                    </Heading>
+                    <Link className={'typo-element'} href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}>
+                        {`${finnTekst('sok-alle-treff', language)} `}
+                    </Link>
+                </>
             )}
             {!fetchError && itemsFiltered.length ? (
                 <ul className="sokeresultat-liste">
