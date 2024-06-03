@@ -106,12 +106,8 @@ export const SokResultater = (props: Props) => {
             ) : null}
             {result.total > itemsFiltered.length && (
                 <Link className={'typo-element'} href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}>
-                    {
-                        <div>
-                            {finnTekst('sok-flere-treff', language)}
-                            {<ArrowRightIcon className="sokeresultat-treff-pil" fontSize="1rem" />}
-                        </div>
-                    }
+                    {finnTekst('sok-flere-treff', language)}
+                    {<ArrowRightIcon className="sokeresultat-treff-pil" />}
                 </Link>
             )}
         </div>
