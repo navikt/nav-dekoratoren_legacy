@@ -109,7 +109,7 @@ export const SokResultater = (props: Props) => {
                     {
                         <div>
                             {finnTekst('sok-flere-treff', language)}
-                            {<ArrowRightIcon title="a11y-title" fontSize="1rem" />}
+                            {<ArrowRightIcon className="sokeresultat-treff-pil" fontSize="1rem" />}
                         </div>
                     }
                 </Link>
