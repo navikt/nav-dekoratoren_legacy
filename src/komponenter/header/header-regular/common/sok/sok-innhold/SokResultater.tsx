@@ -51,8 +51,8 @@ export const SokResultater = (props: Props) => {
                 <>
                     <Heading level="2" size="small" role="status">
                         {result.total} {finnTekst('sok-resultater', language)}
-                        {' for '} &laquo;{`${writtenInput}`}&raquo; {' for '}
-                        {finnTekst('sok-audience', language, audience)}
+                        {' for '} &laquo;{`${writtenInput}`}&raquo;
+                        {language !== 'en' && ` for ${finnTekst('sok-audience', language, audience)}`}
                     </Heading>
                     <Link className={'typo-element'} href={`${XP_BASE_URL}/sok?ord=${writtenInput}`}>
                         {`${finnTekst('sok-alle-treff', language)} `}
