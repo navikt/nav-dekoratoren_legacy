@@ -36,7 +36,6 @@ export const SokResultater = (props: Props) => {
     const { language, fetchError, audience, writtenInput, result, numberOfResults } = props;
     const { XP_BASE_URL } = useSelector((state: AppState) => state.environment);
     const itemsFiltered = removeDuplicates(result.hits) || result.hits;
-    // const itemsSpliced = itemsFiltered.slice(0, numberOfResults);
     const dispatch = useDispatch();
 
     return (
