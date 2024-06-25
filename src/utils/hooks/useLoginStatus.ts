@@ -13,6 +13,8 @@ const stateSelector = (state: AppState) => ({
 
 let timeoutId: NodeJS.Timeout | null = null;
 
+let didLogExpiry = false;
+
 export const useLoginStatus = () => {
     const dispatch = useDispatch();
     const { innloggetStatus, environment, arbeidsflate } = useSelector(stateSelector);
@@ -34,7 +36,9 @@ export const useLoginStatus = () => {
     }, []);
 
     const getExpirationInSeconds = ({ session, token }: { session: string | null; token: string | null }) => {
-        if (!session || !token) return { secondsToTokenExpires: null, secondsToSessionExpires: null };
+        if (!session || !token) {
+            return { secondsToTokenExpires: null, secondsToSessionExpires: null };
+        }
 
         const now = new Date();
         const sessionExpires = new Date(session);
@@ -66,13 +70,21 @@ export const useLoginStatus = () => {
             window.location.href = getLogOutUrl(environment);
         }
 
-        setIsTokenExpiring(_innloggetStatus.authenticated && secondsToTokenExpires < 60 * 5);
-        setIsSessionExpiring(secondsToSessionExpires < 60 * 10);
-        setSecondsToSessionExpires(secondsToSessionExpires);
+        const _isTokenExpiring = _innloggetStatus.authenticated && secondsToTokenExpires < 60 * 5;
+        const _isSessionExpiring = secondsToSessionExpires < 60 * 10;
 
-        if (secondsToTokenExpires < 0 || secondsToSessionExpires < 0) {
-            window.location.href = getLogOutUrl(environment);
+        if ((_isTokenExpiring || _isSessionExpiring) && !didLogExpiry) {
+            console.error(
+                `Session is timing out - Now: ${new Date().toISOString()} - Session: ${secondsToSessionExpires} / ${
+                    _innloggetStatus.session.endsAt
+                } - Token: ${secondsToTokenExpires} / ${_innloggetStatus.token.endsAt}`
+            );
+            didLogExpiry = true;
         }
+
+        setIsTokenExpiring(_isTokenExpiring);
+        setIsSessionExpiring(_isSessionExpiring);
+        setSecondsToSessionExpires(secondsToSessionExpires);
     };
 
     const refreshTokenHandler = () => {
