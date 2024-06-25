@@ -4,6 +4,7 @@ import { AppState } from 'store/reducers';
 import { hentInnloggingsstatus, fornyInnlogging } from 'store/reducers/innloggingsstatus-duck';
 import { getLogOutUrl, getLoginUrl } from 'utils/login';
 import { useLoginDebug } from './useLoginDebug';
+import { logAmplitudeEvent } from '../analytics/amplitude';
 
 const stateSelector = (state: AppState) => ({
     innloggetStatus: state.innloggingsstatus.data,
@@ -13,7 +14,8 @@ const stateSelector = (state: AppState) => ({
 
 let timeoutId: NodeJS.Timeout | null = null;
 
-let didLogExpiry = false;
+const logPeriodMs = 60000;
+let lastExpireLog = 0;
 
 export const useLoginStatus = () => {
     const dispatch = useDispatch();
@@ -72,14 +74,19 @@ export const useLoginStatus = () => {
 
         const _isTokenExpiring = _innloggetStatus.authenticated && secondsToTokenExpires < 60 * 5;
         const _isSessionExpiring = secondsToSessionExpires < 60 * 10;
+        const now = new Date();
 
-        if ((_isTokenExpiring || _isSessionExpiring) && !didLogExpiry) {
-            console.error(
-                `Session is timing out - Now: ${new Date().toISOString()} - Session: ${secondsToSessionExpires} / ${
-                    _innloggetStatus.session.endsAt
-                } - Token: ${secondsToTokenExpires} / ${_innloggetStatus.token.endsAt}`
-            );
-            didLogExpiry = true;
+        if ((_isTokenExpiring || _isSessionExpiring) && now.getTime() > lastExpireLog + logPeriodMs) {
+            logAmplitudeEvent('session-timeout', {
+                now: now.toISOString(),
+                session: _innloggetStatus.session,
+                token: _innloggetStatus.token,
+                secondsToSessionExpires,
+                secondsToTokenExpires,
+                securityLevel: _innloggetStatus.securityLevel,
+            });
+
+            lastExpireLog = now.getTime();
         }
 
         setIsTokenExpiring(_isTokenExpiring);
