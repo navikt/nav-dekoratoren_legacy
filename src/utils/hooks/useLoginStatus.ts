@@ -74,11 +74,14 @@ export const useLoginStatus = () => {
 
         const _isTokenExpiring = _innloggetStatus.authenticated && secondsToTokenExpires < 60 * 5;
         const _isSessionExpiring = secondsToSessionExpires < 60 * 10;
-        const now = new Date();
 
-        if ((_isTokenExpiring || _isSessionExpiring) && now.getTime() > lastExpireLog + logPeriodMs) {
+        const now = new Date();
+        const nowTs = now.getTime();
+
+        if ((_isTokenExpiring || _isSessionExpiring) && nowTs > lastExpireLog + logPeriodMs) {
             logAmplitudeEvent('session-timeout', {
                 now: now.toISOString(),
+                nowTs,
                 session: _innloggetStatus.session,
                 token: _innloggetStatus.token,
                 secondsToSessionExpires,
@@ -86,7 +89,7 @@ export const useLoginStatus = () => {
                 securityLevel: _innloggetStatus.securityLevel,
             });
 
-            lastExpireLog = now.getTime();
+            lastExpireLog = nowTs;
         }
 
         setIsTokenExpiring(_isTokenExpiring);
