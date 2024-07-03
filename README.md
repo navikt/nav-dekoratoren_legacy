@@ -1,10 +1,8 @@
 # nav-dekoratoren ![nav.no logo](src/ikoner/meny/NavLogoRod.svg)
 
-node.js/React applikasjon for header og footer på [nav.no](https://www.nav.no)
+Appen er avviklet og erstattet av [decorator-next](https://github.com/navikt/decorator-next)
 
-## Obs!
-
-Alle dev-instanser av dekoratøren serveres nå av [decorator-next](https://github.com/navikt/decorator-next)
+Denne appen serverte header og footer for nav.no i perioden 13. mai 2020 -> 2. juli 2024.
 
 ## Bruk av dekoratøren
 
