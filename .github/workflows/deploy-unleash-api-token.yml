@@ -1,8 +1,5 @@
 name: Deploy unleash-apitoken
 on:
-  push:
-    paths:
-      - ".nais/unleash/unleash-api-token.prod.yaml"
 
 jobs:
   deploy-prod:

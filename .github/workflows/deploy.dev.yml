@@ -1,15 +1,5 @@
 name: Deploy to stable dev
 on:
-  workflow_dispatch:
-    inputs:
-      build_mode:
-        type: choice
-        required: true
-        description: 'Build-time NODE_ENV'
-        default: 'prod'
-        options:
-          - prod
-          - dev
 
 jobs:
   deploy:
